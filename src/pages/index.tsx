@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
+import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import Image from 'next/image'
-import { Galaxy } from '../Galaxy/homepage/components/Galaxy/Galaxy'
 import styles from '../styles/Home.module.css'
 
 const testData = [
@@ -27,6 +27,10 @@ const testData = [
     },
 ]
 
+export const DynamicGalaxyNoSsr = dynamic(() => import('../Galaxy/homepage/components/Galaxy/Galaxy'), {
+    ssr: false,
+})
+
 const Home: NextPage = () => {
     return (
         <div className={styles.container}>
@@ -35,7 +39,7 @@ const Home: NextPage = () => {
             </Head>
 
             <main className={styles.main}>
-                <Galaxy data={testData} dimensions={{ height: 1000, width: 1000 }} />
+                <DynamicGalaxyNoSsr data={testData} dimensions={{ height: 1000, width: 1000 }} />
             </main>
         </div>
     )

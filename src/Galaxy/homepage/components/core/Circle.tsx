@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 
 interface Props extends React.SVGProps<SVGCircleElement> {}
 

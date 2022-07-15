@@ -91,7 +91,7 @@ function ticked(
     simulation.force('collide', d3.forceCollide().strength(0.1).radius(100).iterations(1)) // Force that avoids circle overlapping
 }
 
-export const Galaxy: React.FC<Props> = ({ data = [], dimensions }) => {
+const Galaxy: React.FC<Props> = ({ data = [], dimensions }) => {
     const { width, height, margin } = dimensions
     const svgWidth = width + (margin?.left ?? 0) + (margin?.right ?? 0)
     const svgHeight = height + (margin?.top ?? 0) + (margin?.bottom ?? 0)
@@ -117,3 +117,5 @@ export const Galaxy: React.FC<Props> = ({ data = [], dimensions }) => {
         </svg>
     )
 }
+
+export default Galaxy
