@@ -1,7 +1,6 @@
 import React from 'react'
-import { CollectionItem, useGalaxyController } from '../../../../business/d3/useGalaxyController'
-import RelatedObject from '../../../../Object/RelatedObject'
-import { Circle } from '../core/Circle'
+import { CollectionItem, useGalaxyController } from '../business/d3/useGalaxyController'
+import { Circle } from '../Galaxy/homepage/components/core/Circle'
 
 interface Props {
     data: CollectionItem[]
@@ -17,7 +16,7 @@ interface Props {
     }
 }
 
-const Object: React.FC<Props> = ({ data = [], dimensions }) => {
+const RelatedObject: React.FC<Props> = ({ data = [], dimensions }) => {
     const { width, height, margin } = dimensions
     const svgWidth = width + (margin?.left ?? 0) + (margin?.right ?? 0)
     const svgHeight = height + (margin?.top ?? 0) + (margin?.bottom ?? 0)
@@ -27,7 +26,7 @@ const Object: React.FC<Props> = ({ data = [], dimensions }) => {
         <svg width={svgWidth} height={svgHeight} style={{ background: 'red' }} ref={svgRef}>
             {data.map(item => (
                 <Circle key={item.name}>
-                    <div
+                    {/* <div
                         style={{
                             height: '100%',
                             width: '100%',
@@ -36,12 +35,12 @@ const Object: React.FC<Props> = ({ data = [], dimensions }) => {
                             alignItems: 'center',
                         }}
                     >
-                        asdasds
-                    </div>
+                        <p>testing this thing</p>
+                    </div> */}
                 </Circle>
             ))}
         </svg>
     )
 }
 
-export default Object
+export default RelatedObject
