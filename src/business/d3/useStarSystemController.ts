@@ -14,7 +14,7 @@ export interface CollectionItem {
 
 interface D3CollectionItem extends SimulationNodeDatum, CollectionItem {}
 
-export function useGalaxyController(dimensions: Dimensions, data: CollectionItem[], selector: string) {
+export function useStarSystemController(dimensions: Dimensions, data: CollectionItem[], selector: string) {
     const svgRef = useRef(null)
     const gRef = useRef(null)
     const initialized = useRef(false)
@@ -24,14 +24,11 @@ export function useGalaxyController(dimensions: Dimensions, data: CollectionItem
         const totalObjects = data.reduce((total, item) => total + item.children.length, 0)
         const singleSpace = totalSpace / totalObjects
 
-        return data.map(item => {
-            console.log(item.children.length)
-            return {
-                name: item.name,
-                takeSpace: item.children.length * singleSpace,
-            }
-        })
-    }, [])
+        return data.map(item => ({
+            name: item.name,
+            takeSpace: item.children.length * singleSpace,
+        }))
+    }, [data])
 
     useLayoutEffect(() => {
         if (!svgRef.current) {
@@ -64,7 +61,7 @@ export function useGalaxyController(dimensions: Dimensions, data: CollectionItem
             initialized.current = false
             simulation.stop()
         }
-    }, [svgRef.current])
+    }, [svgRef.current, dataDimensions])
 
     return {
         svgRef,
@@ -75,7 +72,11 @@ export function useGalaxyController(dimensions: Dimensions, data: CollectionItem
 
 function getFromCalulatedData(dataDimensions: any[], d: D3CollectionItem) {
     const val = dataDimensions?.find(item => item.name === d.name)
+    return val.takeSpace
+}
 
+function getDiameterFromDataDimensions(dataDimensions: any[], d: D3CollectionItem) {
+    const val = dataDimensions?.find(item => item.name === d.name)
     return val.takeSpace / 2
 }
 
@@ -87,22 +88,19 @@ function ticked(
 ) {
     node.attr('cx', (d: D3CollectionItem) => d.x ?? 0)
         .attr('cy', (d: D3CollectionItem) => d.y ?? 0)
-        .attr('height', (d: D3CollectionItem) => getFromCalulatedData(dataDimensions, d))
-        .attr('width', (d: D3CollectionItem) => getFromCalulatedData(dataDimensions, d))
-        .attr('r', (d: D3CollectionItem) => getFromCalulatedData(dataDimensions, d))
+        .attr('r', (d: D3CollectionItem) => getDiameterFromDataDimensions(dataDimensions, d))
 
     nodeForeign
-        .attr('x', (d: D3CollectionItem) => (d.x ?? 0) + -getFromCalulatedData(dataDimensions, d))
-        .attr('y', (d: D3CollectionItem) => (d.y ?? 0) + -getFromCalulatedData(dataDimensions, d))
-        .attr('width', (d: D3CollectionItem) => getFromCalulatedData(dataDimensions, d) * 2)
-        .attr('height', (d: D3CollectionItem) => getFromCalulatedData(dataDimensions, d) * 2)
+        .attr('x', (d: D3CollectionItem) => (d.x ?? 0) - getDiameterFromDataDimensions(dataDimensions, d))
+        .attr('y', (d: D3CollectionItem) => (d.y ?? 0) - getDiameterFromDataDimensions(dataDimensions, d))
+        .attr('width', (d: D3CollectionItem) => getFromCalulatedData(dataDimensions, d))
+        .attr('height', (d: D3CollectionItem) => getFromCalulatedData(dataDimensions, d))
 
     simulation.force(
         'collide',
         d3
             .forceCollide()
             .strength(0.1)
-            .radius((d: any) => getFromCalulatedData(dataDimensions, d))
-            .iterations(1)
+            .radius((d: any) => getDiameterFromDataDimensions(dataDimensions, d))
     )
 }

@@ -1,10 +1,12 @@
-import { useId } from '@chakra-ui/react'
+import { background, useId } from '@chakra-ui/react'
 import React from 'react'
 import { CollectionItem, useGalaxyController } from '../business/d3/useGalaxyController'
-import { Circle } from '../Galaxy/homepage/components/core/Circle'
+import { Circle } from '../Galaxy/Circle'
 
 interface Props {
     data: CollectionItem[]
+    fill: string
+    name: string
     dimensions: {
         height: number
         width: number
@@ -17,28 +19,21 @@ interface Props {
     }
 }
 
-const RelatedObject: React.FC<Props> = ({ data = [], dimensions }) => {
-    const { width, height, margin } = dimensions
-    const svgWidth = width + (margin?.left ?? 0) + (margin?.right ?? 0)
-    const svgHeight = height + (margin?.top ?? 0) + (margin?.bottom ?? 0)
-    const id = useId().replaceAll(':', 'test')
+const RelatedObject: React.FC<Props> = ({ data = [], dimensions, fill, name }) => {
+    const id = useId().replaceAll(':', '')
     const { svgRef, dataDimensions } = useGalaxyController(dimensions, data, id)
-
     return (
         <>
-            <svg
-                width={svgWidth}
-                height={svgHeight}
-                style={{ height: dimensions.height, width: dimensions.width }}
-                ref={svgRef}
-            >
+            <svg style={{ width: dimensions.width, height: dimensions.height }} ref={svgRef}>
+                <defs>
+                    <radialGradient id={`gradient-${name}`}>
+                        <stop offset="40%" stopColor={fill} />
+                        <stop offset="160%" stopColor="transparent" />
+                    </radialGradient>
+                </defs>
                 {data.map(item => {
-                    const takeSpace = dataDimensions.find(item => item.name === item.name)?.takeSpace ?? 0
-                    return (
-                        <Circle key={item.name} className={id} r={takeSpace / 2}>
-                            testing
-                        </Circle>
-                    )
+                    const takeSpace = dataDimensions.find(item => item.name === name)?.takeSpace ?? 0
+                    return <Circle key={item.name} className={id} name={name}></Circle>
                 })}
             </svg>
         </>
