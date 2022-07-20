@@ -29,7 +29,8 @@ const ObjectUniverse: React.FC<Props> = ({ data = [], dimensions }) => {
 
     return (
         <>
-            <svg width={svgWidth} height={svgHeight} ref={svgRef}>
+            <svg width={svgWidth} height={svgHeight} ref={svgRef} style={{ background: 'teal' }}>
+                <rect fill={'red'} className={`wall-${id}`}></rect>
                 {data.map(item => {
                     const dimension = dataDimensions.find(item => item.name === item.name)
                     return (
