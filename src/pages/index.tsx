@@ -5,10 +5,24 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import randomstring from 'randomstring'
 
-function createChild() {
+function createChild(): any {
     return {
         name: randomstring.generate(),
-        children: [],
+        children: [
+            {
+                name: randomstring.generate(),
+                children: [
+                    {
+                        name: randomstring.generate(),
+                        children: [],
+                    },
+                ],
+            },
+            {
+                name: randomstring.generate(),
+                children: [],
+            },
+        ],
     }
 }
 
