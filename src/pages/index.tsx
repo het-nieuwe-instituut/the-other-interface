@@ -3,31 +3,86 @@ import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import randomstring from 'randomstring'
+
+function createChild(): any {
+    return {
+        name: randomstring.generate(),
+        children: [
+            {
+                name: randomstring.generate(),
+                children: [
+                    {
+                        name: randomstring.generate(),
+                        children: [],
+                    },
+                ],
+            },
+            {
+                name: randomstring.generate(),
+                children: [],
+            },
+        ],
+    }
+}
 
 const testData = [
     {
         name: 'publications',
-        children: ['test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test'],
+        children: [
+            createChild(),
+            createChild(),
+            createChild(),
+            createChild(),
+            createChild(),
+            createChild(),
+            createChild(),
+        ],
     },
     {
         name: 'projects',
-        children: ['test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test'],
+        children: [
+            createChild(),
+            createChild(),
+            createChild(),
+            createChild(),
+            createChild(),
+            createChild(),
+            createChild(),
+            createChild(),
+            createChild(),
+            createChild(),
+        ],
     },
     {
         name: 'archives',
-        children: ['test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test'],
+        children: [
+            createChild(),
+            createChild(),
+            createChild(),
+            createChild(),
+            createChild(),
+            createChild(),
+            createChild(),
+            createChild(),
+            createChild(),
+            createChild(),
+        ],
     },
     {
         name: 'objects',
-        children: ['test', 'test', 'test', 'test', 'test', 'test', 'test'],
+        children: [createChild(), createChild(), createChild(), createChild(), createChild(), createChild()],
     },
     {
         name: 'people',
-        children: ['test', 'test', 'test', 'test'],
+        children: [createChild(), createChild(), createChild()],
     },
 ]
 
 export const DynamicGalaxyNoSsr = dynamic(() => import('../Galaxy/homepage/components/Galaxy/Galaxy'), {
+    ssr: false,
+})
+export const DynamicObjectNoSsr = dynamic(() => import('../Object/ObjectUniverse'), {
     ssr: false,
 })
 
@@ -39,7 +94,8 @@ const Home: NextPage = () => {
             </Head>
 
             <main className={styles.main}>
-                <DynamicGalaxyNoSsr data={testData} dimensions={{ height: 1000, width: 1000 }} />
+                {/* <DynamicGalaxyNoSsr data={testData} dimensions={{ height: 1000, width: 1000 }} /> */}
+                <DynamicObjectNoSsr data={testData} dimensions={{ height: 1000, width: 1000 }} />
             </main>
         </div>
     )
