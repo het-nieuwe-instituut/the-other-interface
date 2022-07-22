@@ -3,11 +3,13 @@ import * as d3 from 'd3'
 import { SimulationNodeDatum } from 'd3'
 import { background, Button, useId } from '@chakra-ui/react'
 import { Circle } from '../Galaxy/Circle'
-import RelatedObject from './RelatedObject'
+
 import { CollectionItem, useGalaxyController } from '../business/d3/useGalaxyController'
 import { useGalaxyAvoidController } from '../business/d3/useGalaxyAvoidController'
-import times from 'lodash/times'
+import RelatedObject from '../Object/RelatedObject'
+import { useStarSystemController } from '../business/d3/useStarSystemController'
 import randomstring from 'randomstring'
+import times from 'lodash/times'
 
 interface Props {
     data?: CollectionItem[]
@@ -44,37 +46,40 @@ const testData = [
     createChild('people'),
 ]
 
-const ObjectUniverse: React.FC<Props> = ({ data = testData, dimensions }) => {
+const colors = ['#41463D', '#9D8DF1', '#B8CDF8', '#95F2D9', '#1CFEBA']
+
+const StarSystem: React.FC<Props> = ({ data = testData, dimensions }) => {
     const { width, height, margin } = dimensions
     const svgWidth = width + (margin?.left ?? 0) + (margin?.right ?? 0)
     const svgHeight = height + (margin?.top ?? 0) + (margin?.bottom ?? 0)
     const id = useId().replaceAll(':', '')
-    const { svgRef, dataDimensions } = useGalaxyAvoidController(dimensions, data, id)
+    const { svgRef, dataDimensions } = useStarSystemController(dimensions, data, id)
 
     return (
         <>
-            <svg width={svgWidth} height={svgHeight} ref={svgRef} style={{ background: 'teal' }}>
+            <svg width={svgWidth} height={svgHeight} ref={svgRef} style={{ background: 'lightGrey' }}>
                 <defs>
-                    {data.map(item => {
+                    {data.map((item, index) => {
                         return (
-                            <radialGradient id={`gradient-${item.name}`}>
-                                <stop offset="40%" stopColor="red" />
+                            <radialGradient key={item.name} id={`gradient-${item.name}`}>
+                                <stop offset="40%" stopColor={colors[index]} />
                                 <stop offset="160%" stopColor="transparent" />
                             </radialGradient>
                         )
                     })}
                 </defs>
-                <rect fill={'red'} className={`wall-${id}`}></rect>
-                {data.map(item => {
-                    const dimension = dataDimensions.find(item => item.name === item.name)
+                {data.map((item, index) => {
+                    const dimension = dataDimensions.find(dataDimension => dataDimension.name === item.name)
                     return (
                         <Circle key={item.name} className={id} name={item.name}>
-                            <RelatedObject
-                                fill={'blue'}
-                                name={item.name}
-                                data={item.children}
-                                dimensions={{ width: dimension?.takeSpace ?? 0, height: dimension?.takeSpace ?? 0 }}
-                            />
+                            <div style={{ height: '100%', width: '100%' }}>
+                                <RelatedObject
+                                    name={item.name}
+                                    fill={colors[index]}
+                                    data={item.children}
+                                    dimensions={{ width: dimension?.takeSpace ?? 0, height: dimension?.takeSpace ?? 0 }}
+                                />
+                            </div>
                         </Circle>
                     )
                 })}
@@ -83,4 +88,4 @@ const ObjectUniverse: React.FC<Props> = ({ data = testData, dimensions }) => {
     )
 }
 
-export default ObjectUniverse
+export default StarSystem

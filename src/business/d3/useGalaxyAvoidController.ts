@@ -1,6 +1,7 @@
 import * as d3 from 'd3'
-import { SimulationNodeDatum } from 'd3'
-import { useEffect, useLayoutEffect, useMemo, useReducer, useRef } from 'react'
+import { forceCollide, SimulationNodeDatum } from 'd3'
+import { inRange } from 'lodash'
+import { useLayoutEffect, useMemo, useRef } from 'react'
 
 interface Dimensions {
     height?: number | null
@@ -13,88 +14,91 @@ export interface CollectionItem {
 }
 
 interface D3CollectionItem extends SimulationNodeDatum, CollectionItem {}
-
-export function useGalaxyController(dimensions: Dimensions, data: CollectionItem[], selector: string) {
+const reservedX = 200
+export function useGalaxyAvoidController(dimensions: Dimensions, data: CollectionItem[], selector: string) {
     const svgRef = useRef(null)
-    const [, forceRerender] = useReducer(x => x + 1, 0)
+    const gRef = useRef(null)
     const initialized = useRef(false)
-    const simulation = useRef<d3.Simulation<d3.SimulationNodeDatum, undefined> | null>(null)
-    const nodesListener = useRef<d3.Simulation<d3.SimulationNodeDatum, undefined> | null>(null)
 
     const dataDimensions = useMemo(() => {
         const totalSpace = dimensions.height ?? 0 * (dimensions.width ?? 0)
         const totalObjects = data.reduce((total, item) => total + item.children.length, 0)
         const singleSpace = totalSpace / totalObjects
 
-        return data.map(item => {
-            return {
-                name: item.name,
-                takeSpace: item.children.length * singleSpace,
-            }
-        })
-    }, [dimensions, data])
+        return data.map(item => ({
+            name: item.name,
+            takeSpace: item.children.length * singleSpace,
+        }))
+    }, [])
 
-    useEffect(() => {
-        nodesListener.current = null
-        initialized.current = true
-        const width = dimensions.width ?? 0
-        const height = dimensions.height ?? 0
-
-        simulation.current = d3.forceSimulation()
-
-        simulation.current.force(
-            'center',
-            d3
-                .forceCenter()
-                .x(width / 2)
-                .y(height / 2)
-        )
-        const d3Svg = d3.select(svgRef.current)
-        const node = d3Svg.selectAll(`.${selector}`).data(data)
-        const nodeForeign = d3Svg.selectAll(`.foreign-${selector}`).data(data)
-
-        nodesListener.current = simulation.current?.nodes(data as D3CollectionItem[]).on('tick', () => {
-            ticked(dataDimensions, simulation.current!, node, nodeForeign)
-        })
-    }, [svgRef.current, data, dimensions, dataDimensions])
-
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (!svgRef.current) {
             return
         }
         if (initialized.current) {
             return
         }
-
         initialized.current = true
-        simulation.current = d3.forceSimulation()
+        const width = dimensions.width ?? 0
+        const height = dimensions.height ?? 0
+
+        const simulation = d3.forceSimulation().force(
+            'center',
+            d3
+                .forceCenter()
+                .x(width / 2)
+                .y(height / 2)
+        )
+
+        const d3Svg = d3.select(svgRef.current)
+        const node = d3Svg.selectAll(`.${selector}`).data(data)
+        const nodeForeign = d3Svg.selectAll(`.foreign-${selector}`).data(data)
+        const wall = d3Svg.selectAll(`.wall-${selector}`).data(data)
+
+        simulation.nodes(data as D3CollectionItem[]).on('tick', () => {
+            ticked(dataDimensions, simulation, node, nodeForeign, wall, width, height)
+        })
 
         return () => {
-            nodesListener.current = null
             initialized.current = false
-            simulation.current?.stop()
-            simulation.current = null
+            simulation.stop()
         }
-    }, [svgRef.current, data, dimensions, dataDimensions])
+    }, [svgRef.current])
 
     return {
         svgRef,
+        gRef,
         dataDimensions,
     }
 }
 
 function getFromCalulatedData(dataDimensions: any[], d: D3CollectionItem) {
     const val = dataDimensions?.find(item => item.name === d.name)
-
-    return val?.takeSpace / 2
+    return val.takeSpace / 2
 }
 
 function ticked(
     dataDimensions: any[],
     simulation: d3.Simulation<d3.SimulationNodeDatum, undefined>,
     node: d3.Selection<d3.BaseType, CollectionItem, d3.BaseType, unknown>,
-    nodeForeign: d3.Selection<d3.BaseType, CollectionItem, d3.BaseType, unknown>
+    nodeForeign: d3.Selection<d3.BaseType, CollectionItem, d3.BaseType, unknown>,
+    wall: d3.Selection<d3.BaseType, CollectionItem, d3.BaseType, unknown>,
+    width: number,
+    height: number
 ) {
+    simulation.force(
+        'center',
+        d3
+            .forceCenter()
+            .x(width / 2)
+            .y(height / 2)
+            .strength(0)
+    )
+
+    wall.attr('height', height)
+        .attr('width', reservedX)
+        .attr('x', width / 2 - reservedX / 2)
+
     node.attr('cx', (d: D3CollectionItem) => d.x ?? 0)
         .attr('cy', (d: D3CollectionItem) => d.y ?? 0)
         .attr('height', (d: D3CollectionItem) => getFromCalulatedData(dataDimensions, d))
@@ -115,4 +119,24 @@ function ticked(
             .radius((d: any) => getFromCalulatedData(dataDimensions, d))
             .iterations(1)
     )
+
+    const availableSpace = width - reservedX
+    const firstX = availableSpace / 2 / 2
+
+    const secondX = width - firstX
+    var xCenter = [firstX, secondX]
+
+    simulation
+        .force(
+            'x',
+            d3.forceX().x((d: any) => {
+                return dataDimensions.length / 2 > (d?.index ?? 0) ? xCenter[0] : xCenter[1]
+            })
+        )
+        .force(
+            'collision',
+            d3.forceCollide().radius((d: any) => {
+                return getFromCalulatedData(dataDimensions, d)
+            })
+        )
 }
