@@ -90,9 +90,12 @@ export const DynamicStarSystemNoSsr = dynamic(() => import('../StarSystem/StarSy
 export const DynamicObjectNoSsr = dynamic(() => import('../Object/ObjectUniverse'), {
     ssr: false,
 })
+export const DynamicGalaxyUpdatestNoSsr = dynamic(() => import('../Galaxy/GalaxyUpdates'), {
+    ssr: false,
+})
 
 const Home: NextPage = () => {
-    const [stage, setStage] = useState('starSystem')
+    const [stage, setStage] = useState('galaxyUpdates')
 
     return (
         <div className={styles.container}>
@@ -103,6 +106,7 @@ const Home: NextPage = () => {
             <Button onClick={() => setStage('galaxy')}>galaxy</Button>
             <Button onClick={() => setStage('starSystem')}>Star system</Button>
             <Button onClick={() => setStage('objects')}>objects</Button>
+            <Button onClick={() => setStage('galaxyUpdates')}>Galaxy updates</Button>
 
             <main className={styles.main}>
                 {stage === 'galaxy' && (
@@ -110,6 +114,7 @@ const Home: NextPage = () => {
                 )}
                 {stage === 'starSystem' && <DynamicStarSystemNoSsr dimensions={{ height: 1000, width: 1000 }} />}
                 {stage === 'objects' && <DynamicObjectNoSsr dimensions={{ height: 1000, width: 1000 }} />}
+                {stage === 'galaxyUpdates' && <DynamicGalaxyUpdatestNoSsr />}
                 {/*  */}
             </main>
         </div>

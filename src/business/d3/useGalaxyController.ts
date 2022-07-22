@@ -1,6 +1,6 @@
 import * as d3 from 'd3'
 import { SimulationNodeDatum } from 'd3'
-import { useLayoutEffect, useMemo, useRef } from 'react'
+import { useEffect, useLayoutEffect, useMemo, useReducer, useRef } from 'react'
 
 interface Dimensions {
     height?: number | null
@@ -16,8 +16,10 @@ interface D3CollectionItem extends SimulationNodeDatum, CollectionItem {}
 
 export function useGalaxyController(dimensions: Dimensions, data: CollectionItem[], selector: string) {
     const svgRef = useRef(null)
-    const gRef = useRef(null)
+    const [, forceRerender] = useReducer(x => x + 1, 0)
     const initialized = useRef(false)
+    const simulation = useRef<d3.Simulation<d3.SimulationNodeDatum, undefined> | null>(null)
+    const nodesListener = useRef<d3.Simulation<d3.SimulationNodeDatum, undefined> | null>(null)
 
     const dataDimensions = useMemo(() => {
         const totalSpace = dimensions.height ?? 0 * (dimensions.width ?? 0)
@@ -25,50 +27,58 @@ export function useGalaxyController(dimensions: Dimensions, data: CollectionItem
         const singleSpace = totalSpace / totalObjects
 
         return data.map(item => {
-            console.log(item.children.length)
             return {
                 name: item.name,
                 takeSpace: item.children.length * singleSpace,
             }
         })
-    }, [])
+    }, [dimensions, data])
 
-    useLayoutEffect(() => {
-        if (!svgRef.current) {
-            return
-        }
-        if (initialized.current) {
-            return
-        }
+    useEffect(() => {
+        nodesListener.current = null
         initialized.current = true
         const width = dimensions.width ?? 0
         const height = dimensions.height ?? 0
 
-        const simulation = d3.forceSimulation().force(
+        simulation.current = d3.forceSimulation()
+
+        simulation.current.force(
             'center',
             d3
                 .forceCenter()
                 .x(width / 2)
                 .y(height / 2)
         )
-
         const d3Svg = d3.select(svgRef.current)
         const node = d3Svg.selectAll(`.${selector}`).data(data)
         const nodeForeign = d3Svg.selectAll(`.foreign-${selector}`).data(data)
 
-        simulation.nodes(data as D3CollectionItem[]).on('tick', () => {
-            ticked(dataDimensions, simulation, node, nodeForeign)
+        nodesListener.current = simulation.current?.nodes(data as D3CollectionItem[]).on('tick', () => {
+            ticked(dataDimensions, simulation.current!, node, nodeForeign)
         })
+    }, [svgRef.current, data, dimensions, dataDimensions])
+
+    useEffect(() => {
+        if (!svgRef.current) {
+            return
+        }
+        if (initialized.current) {
+            return
+        }
+
+        initialized.current = true
+        simulation.current = d3.forceSimulation()
 
         return () => {
+            nodesListener.current = null
             initialized.current = false
-            simulation.stop()
+            simulation.current?.stop()
+            simulation.current = null
         }
-    }, [svgRef.current])
+    }, [svgRef.current, data, dimensions, dataDimensions])
 
     return {
         svgRef,
-        gRef,
         dataDimensions,
     }
 }
@@ -76,7 +86,7 @@ export function useGalaxyController(dimensions: Dimensions, data: CollectionItem
 function getFromCalulatedData(dataDimensions: any[], d: D3CollectionItem) {
     const val = dataDimensions?.find(item => item.name === d.name)
 
-    return val.takeSpace / 2
+    return val?.takeSpace / 2
 }
 
 function ticked(
