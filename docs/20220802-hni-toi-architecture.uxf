@@ -1,0 +1,1062 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.0.0">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>472</x>
+      <y>128</y>
+      <w>816</w>
+      <h>864</h>
+    </coordinates>
+    <panel_attributes>Digital Ocean
+lt=.
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>896</x>
+      <y>744</y>
+      <w>200</w>
+      <h>136</h>
+    </coordinates>
+    <panel_attributes>SSR Public Website
+(NextJS)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLActor</id>
+    <coordinates>
+      <x>552</x>
+      <y>1048</y>
+      <w>96</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>HNI employee</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLActor</id>
+    <coordinates>
+      <x>792</x>
+      <y>1056</y>
+      <w>72</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>HNI visitor</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>920</x>
+      <y>824</y>
+      <w>80</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Blogs
+(React)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1000</x>
+      <y>824</y>
+      <w>88</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>MUX Videos
+(React)
+lt=.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>824</x>
+      <y>960</y>
+      <w>192</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;120.0;220.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>272</x>
+      <y>128</y>
+      <w>192</w>
+      <h>504</h>
+    </coordinates>
+    <panel_attributes>HNI IT landscape
+lt=.
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>904</x>
+      <y>288</y>
+      <w>96</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>Articles MGMT
+Events MGMT
+Tags MGMT
+Projects MGMT
+...</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>296</x>
+      <y>288</y>
+      <w>152</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>Identity Provider
+(SAML2.0 compliant)
+(AFDS / Microsoft 365)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>864</x>
+      <y>152</y>
+      <w>288</w>
+      <h>824</h>
+    </coordinates>
+    <panel_attributes>HNI Website VPS
+(Digital Ocean VPS)
+lt=.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1328</x>
+      <y>216</y>
+      <w>128</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+&lt;&lt;Docker Hub&gt;&gt;
+(Container Registry)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1296</x>
+      <y>128</y>
+      <w>200</w>
+      <h>400</h>
+    </coordinates>
+    <panel_attributes>lt=.
+Lifely IT Landscape</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1312</x>
+      <y>144</y>
+      <w>168</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;statuscake&gt;&gt;
+
+Uptime monitoring
+Error logging
+lt=.
+fg=Gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1328</x>
+      <y>312</y>
+      <w>128</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Gitlab&gt;&gt;
+Continuous 
+Integration /
+Deployment /
+Backup</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1384</x>
+      <y>384</y>
+      <w>80</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+fontsize=11
+Trigger build</panel_attributes>
+    <additional_attributes>10.0;10.0;20.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1328</x>
+      <y>424</y>
+      <w>128</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Github&gt;&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1448</x>
+      <y>432</y>
+      <w>168</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+fontsize=11
+
+   Commit</panel_attributes>
+    <additional_attributes>10.0;20.0;190.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLActor</id>
+    <coordinates>
+      <x>1576</x>
+      <y>408</y>
+      <w>64</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>Developer</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1144</x>
+      <y>704</y>
+      <w>200</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;20.0;230.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1144</x>
+      <y>752</y>
+      <w>200</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;20.0;230.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1328</x>
+      <y>704</y>
+      <w>104</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Production&gt;&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1328</x>
+      <y>728</y>
+      <w>104</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Acceptance&gt;&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1328</x>
+      <y>752</y>
+      <w>104</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Staging&gt;&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1328</x>
+      <y>776</y>
+      <w>104</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Development&gt;&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1424</x>
+      <y>440</y>
+      <w>200</w>
+      <h>360</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+fontsize=11</panel_attributes>
+    <additional_attributes>10.0;430.0;230.0;430.0;230.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1424</x>
+      <y>360</y>
+      <w>64</w>
+      <h>368</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;440.0;60.0;440.0;60.0;10.0;40.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1424</x>
+      <y>680</y>
+      <w>64</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;100.0;60.0;100.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1440</x>
+      <y>240</y>
+      <w>112</w>
+      <h>136</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+fontsize=11
+
+
+Build and publish 
+Docker images</panel_attributes>
+    <additional_attributes>10.0;10.0;30.0;10.0;30.0;150.0;20.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1264</x>
+      <y>352</y>
+      <w>88</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+fontsize=11
+Recurring Backups
+gitlab cron
+fg=Gray</panel_attributes>
+    <additional_attributes>20.0;30.0;60.0;20.0;80.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>904</x>
+      <y>416</y>
+      <w>192</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>GraphQL API</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>904</x>
+      <y>360</y>
+      <w>192</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Strapi Business Logic
+(Node.js)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>896</x>
+      <y>256</y>
+      <w>208</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>Strapi CMS
+(Node.js)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1160</x>
+      <y>328</y>
+      <w>120</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+DigitalOcean 
+Managed Database 
+(PostgreSQL)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1088</x>
+      <y>368</y>
+      <w>88</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>888</x>
+      <y>912</y>
+      <w>208</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+Webserver
+(Nginx)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1000</x>
+      <y>872</y>
+      <w>24</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1000</x>
+      <y>288</y>
+      <w>96</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>Web User MGMT</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>920</x>
+      <y>784</y>
+      <w>168</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Chakra UI
+(React components)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>584</x>
+      <y>256</y>
+      <w>208</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>Strapi CMS
+(Node.js)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>600</x>
+      <y>288</y>
+      <w>80</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>Stories MGMT
+Clouds MGMT
+...</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>600</x>
+      <y>336</y>
+      <w>160</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Strapi Business Logic
+(NodeJS)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>600</x>
+      <y>416</y>
+      <w>160</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>GraphQL API</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>544</x>
+      <y>624</y>
+      <w>88</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;
+
+SPA API calls
+</panel_attributes>
+    <additional_attributes>20.0;280.0;10.0;280.0;10.0;10.0;50.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>584</x>
+      <y>736</y>
+      <w>208</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>server side rendered frontend
+(NextJS)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>584</x>
+      <y>792</y>
+      <w>208</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>Chakra UI
+(React components)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>704</x>
+      <y>824</y>
+      <w>88</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Component 
+Library
+(Storybook)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>584</x>
+      <y>824</y>
+      <w>56</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Stories
+(React)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>584</x>
+      <y>768</y>
+      <w>208</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>state management (react redux)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>640</x>
+      <y>824</y>
+      <w>64</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Clouds/
+Browse
+(D3)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>680</x>
+      <y>288</y>
+      <w>80</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>TOI User 
+MGMT</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>304</x>
+      <y>520</y>
+      <w>152</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>TriplyDB)
+(sparql SaaS)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>584</x>
+      <y>616</y>
+      <w>208</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>GraphQL</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>296</x>
+      <y>384</y>
+      <w>152</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>Linked Database
+SparQL</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>328</x>
+      <y>552</y>
+      <w>96</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>REST</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>416</x>
+      <y>552</y>
+      <w>296</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;330.0;10.0;350.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>752</x>
+      <y>416</y>
+      <w>104</w>
+      <h>192</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;</panel_attributes>
+    <additional_attributes>50.0;220.0;110.0;220.0;110.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>672</x>
+      <y>568</y>
+      <w>120</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>Sparql+Strapi 
+data management</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>584</x>
+      <y>568</y>
+      <w>88</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>User 
+Authorisation
+fg=Gray
+lt=.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1296</x>
+      <y>536</y>
+      <w>200</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>lt=.
+Amazon Services</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1336</x>
+      <y>576</y>
+      <w>112</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Amazon S3&gt;&gt;
+
+blob storage</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1088</x>
+      <y>368</y>
+      <w>264</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;310.0;280.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>784</x>
+      <y>624</y>
+      <w>136</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+SSR API calls</panel_attributes>
+    <additional_attributes>10.0;10.0;70.0;10.0;70.0;170.0;10.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1088</x>
+      <y>416</y>
+      <w>128</w>
+      <h>360</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+SSR API calls</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0;60.0;430.0;10.0;430.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1144</x>
+      <y>728</y>
+      <w>200</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;20.0;230.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>528</x>
+      <y>152</y>
+      <w>296</w>
+      <h>824</h>
+    </coordinates>
+    <panel_attributes>HNI TOI VPS
+(Digital Ocean VPS)
+lt=.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>408</x>
+      <y>448</y>
+      <w>24</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>560</x>
+      <y>208</y>
+      <w>248</w>
+      <h>272</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+HNI TheOtherInterface CMS
+(docker container)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>880</x>
+      <y>208</y>
+      <w>248</w>
+      <h>272</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+HNI Website CMS
+(docker container) </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>888</x>
+      <y>688</y>
+      <w>216</w>
+      <h>192</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+HNI Web SSR frontend
+(Typescript/NextJS)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>560</x>
+      <y>496</y>
+      <w>248</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+HNI TOI API / Gateway
+(docker container)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>560</x>
+      <y>688</y>
+      <w>248</w>
+      <h>192</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+HNI TOI SSR frontend
+(Typescript/NextJS)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>584</x>
+      <y>536</y>
+      <w>208</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>API/Gateway
+(NestJS)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>584</x>
+      <y>912</y>
+      <w>208</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+Webserver
+(Nginx)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>680</x>
+      <y>960</y>
+      <w>160</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;</panel_attributes>
+    <additional_attributes>180.0;120.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>680</x>
+      <y>872</y>
+      <w>24</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>616</x>
+      <y>368</y>
+      <w>112</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>Remote 
+Dropdowns 
+from API's / sparql</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>600</x>
+      <y>448</y>
+      <w>160</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>Strapi Frontend</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>904</x>
+      <y>448</y>
+      <w>192</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>Strapi Frontend</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>440</x>
+      <y>312</y>
+      <w>160</w>
+      <h>296</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;</panel_attributes>
+    <additional_attributes>180.0;350.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>488</x>
+      <y>456</y>
+      <w>128</w>
+      <h>608</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>140.0;10.0;10.0;10.0;10.0;730.0;140.0;740.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>488</x>
+      <y>448</y>
+      <w>432</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>520.0;10.0;460.0;40.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1304</x>
+      <y>360</y>
+      <w>48</w>
+      <h>256</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+fontsize=11
+fg=Gray</panel_attributes>
+    <additional_attributes>40.0;300.0;10.0;250.0;10.0;10.0;30.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1336</x>
+      <y>456</y>
+      <w>112</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lifelynl/hni-website</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1336</x>
+      <y>480</y>
+      <w>112</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lifelynl/hni-toi</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1160</x>
+      <y>232</y>
+      <w>120</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+DigitalOcean 
+Managed Database 
+(PostgreSQL)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>752</x>
+      <y>184</y>
+      <w>424</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;250.0;150.0;10.0;480.0;10.0;510.0;120.0</additional_attributes>
+  </element>
+</diagram>
