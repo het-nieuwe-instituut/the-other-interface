@@ -1,34 +1,59 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# hni-toi
 
-## Getting Started
+# Getting started
 
-First, run the development server:
+## Using iTermocil
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+If you use iTerm2, then you can use [iTermocil](https://github.com/TomAnthony/itermocil) to run all the startup commands at once:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Make sure the right nodejs version is the default, so new iTerm windows will use the right one: `nvm alias default 16.15.1`
+- Run iTermocil in the project root directory: `npm i && npm run start`
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+> Note: Our standard iTermocil layout is configured in `itermocil.yml`. You can create an `itermocil.custom.yml` file to override our default layout.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Strapi backend
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- TODO
 
-## Learn More
+## Nestjs Gateway
 
-To learn more about Next.js, take a look at the following resources:
+- TODO
 
--   [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
--   [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Nextjs frontend
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Install nodejs v16.15.1 (run `nvm use` to automatically use this version if you have nvm installed).
+- Run `npm ci` in `./nextjs` to install all packages.
+- Make sure that Strapi is running.
+- Run `npm run dev` to start the nextjs application.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Strapi backend
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Initial project setup
+
+Initital setup was done using this command:
+
+- `npx create-strapi-app strapi` https://strapi.io/documentation/developer-docs/latest/setup-deployment-guides/installation/cli.html#creating-a-strapi-project
+
+## Configuration
+
+- TODO
+
+
+## Insomnia (API client)
+
+We use [Insomnia](https://insomnia.rest/) as API client, to test our graphql API. An export of our Insomnia workspace/collection is available in the `Insomnia.json` file in this git repo. Use the import feature in Insomnia to import the collection.
+
+## Some more strapi resources
+
+- Release from dev to prod https://forum.strapi.io/t/how-to-release-from-dev-to-stage-prd/2790
+- Import/export content plugin https://www.npmjs.com/package/strapi-plugin-import-export-content
+- Production Docker container: https://github.com/strapi/strapi-docker#how-to-use-strapibase
+- Uploads storage plugins: https://www.npmjs.com/search?q=strapi-provider-upload-&ranking=popularity
+- S3 storage permissions: https://bleepcoder.com/strapi/439462189/strapi-provider-upload-aws-s3-upload-send-region-null
+
+# Infrastructure
+
+- TODO
+
