@@ -1,0 +1,8 @@
+windows:
+    - name: HNI-TOI
+      root: ~
+      pre: cwd=$(pwd)
+      layout: main-vertical-flipped
+      panes:
+          - cd gateway-app && nvm use && npm run copyenv && npm run start:debug
+          - cd gateway-app && nvm use && npm run test:watch
