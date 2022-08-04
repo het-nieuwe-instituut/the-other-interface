@@ -1,0 +1,113 @@
+<diagram program="umletino" version="15.0.0"><zoom_level>8</zoom_level><element><id>UMLClass</id><coordinates><x>400</x><y>208</y><w>816</w><h>864</h></coordinates><panel_attributes>Digital Ocean
+lt=.
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>824</x><y>824</y><w>200</w><h>136</h></coordinates><panel_attributes>SSR Public Website
+(NextJS)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLActor</id><coordinates><x>488</x><y>1128</y><w>80</w><h>88</h></coordinates><panel_attributes>HNI employee</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLActor</id><coordinates><x>728</x><y>1136</y><w>56</w><h>88</h></coordinates><panel_attributes>HNI visitor</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>848</x><y>904</y><w>80</w><h>56</h></coordinates><panel_attributes>Blogs
+(React)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>928</x><y>904</y><w>88</w><h>56</h></coordinates><panel_attributes>MUX Videos
+(React)
+lt=.</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>752</x><y>1040</y><w>136</w><h>112</h></coordinates><panel_attributes>lt=-&gt;&gt;</panel_attributes><additional_attributes>10;120;150;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>200</x><y>208</y><w>192</w><h>504</h></coordinates><panel_attributes>HNI IT landscape
+lt=.
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>832</x><y>368</y><w>96</w><h>72</h></coordinates><panel_attributes>Articles MGMT
+Events MGMT
+Tags MGMT
+Projects MGMT
+...</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>224</x><y>368</y><w>152</w><h>72</h></coordinates><panel_attributes>Identity Provider
+(SAML2.0 compliant)
+(ADFS / Microsoft 365)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>792</x><y>232</y><w>288</w><h>824</h></coordinates><panel_attributes>HNI Website VPS
+(Digital Ocean VPS)
+lt=.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>1256</x><y>296</y><w>128</w><h>80</h></coordinates><panel_attributes>symbol=component
+&lt;&lt;Docker Hub&gt;&gt;
+(Container Registry)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1224</x><y>208</y><w>200</w><h>472</h></coordinates><panel_attributes>lt=.
+Lifely IT Landscape</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1240</x><y>224</y><w>168</w><h>64</h></coordinates><panel_attributes>&lt;&lt;statuscake&gt;&gt;
+
+Uptime monitoring
+Error logging
+lt=.
+fg=Gray</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1256</x><y>392</y><w>128</w><h>56</h></coordinates><panel_attributes>&lt;&lt;CircleCI&gt;&gt;
+Continuous 
+Integration</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1312</x><y>440</y><w>80</w><h>48</h></coordinates><panel_attributes>lt=&lt;&lt;-
+fontsize=11
+Trigger build</panel_attributes><additional_attributes>10;10;20;40</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1256</x><y>472</y><w>128</w><h>96</h></coordinates><panel_attributes>&lt;&lt;Github&gt;&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1376</x><y>488</y><w>168</w><h>56</h></coordinates><panel_attributes>lt=&lt;&lt;-
+fontsize=11
+
+   Commit</panel_attributes><additional_attributes>10;10;190;50</additional_attributes></element><element><id>UMLActor</id><coordinates><x>1504</x><y>488</y><w>64</w><h>88</h></coordinates><panel_attributes>Developer</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1072</x><y>896</y><w>208</w><h>88</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;240;90</additional_attributes></element><element><id>Relation</id><coordinates><x>1072</x><y>944</y><w>208</w><h>88</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;240;90</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1264</x><y>960</y><w>104</w><h>24</h></coordinates><panel_attributes>&lt;&lt;Production&gt;&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1264</x><y>984</y><w>104</w><h>24</h></coordinates><panel_attributes>&lt;&lt;Acceptance&gt;&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1264</x><y>1008</y><w>104</w><h>24</h></coordinates><panel_attributes>&lt;&lt;Staging&gt;&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1264</x><y>1032</y><w>104</w><h>24</h></coordinates><panel_attributes>&lt;&lt;Development&gt;&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1360</x><y>520</y><w>192</w><h>536</h></coordinates><panel_attributes>lt=&lt;&lt;-
+fontsize=11</panel_attributes><additional_attributes>10;650;220;650;220;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1360</x><y>616</y><w>56</w><h>368</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;440;50;440;50;10;30;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1360</x><y>800</y><w>56</w><h>232</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;270;50;270;50;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1368</x><y>320</y><w>112</w><h>120</h></coordinates><panel_attributes>lt=&lt;&lt;-
+fontsize=11
+
+
+Build and publish 
+Docker images</panel_attributes><additional_attributes>10;10;30;10;30;130;20;130</additional_attributes></element><element><id>Relation</id><coordinates><x>1192</x><y>432</y><w>88</w><h>40</h></coordinates><panel_attributes>lt=&lt;&lt;.
+fontsize=11
+Recurring Backups
+gitlab cron
+fg=Gray</panel_attributes><additional_attributes>20;30;60;20;80;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>928</x><y>496</y><w>96</w><h>40</h></coordinates><panel_attributes>GraphQL API</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>832</x><y>440</y><w>192</w><h>56</h></coordinates><panel_attributes>Strapi Business Logic
+(Node.js)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>824</x><y>336</y><w>208</w><h>216</h></coordinates><panel_attributes>Strapi CMS
+(Node.js)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>1088</x><y>408</y><w>120</w><h>88</h></coordinates><panel_attributes>symbol=component
+DigitalOcean 
+Managed Database 
+(PostgreSQL)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1016</x><y>448</y><w>88</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;-&gt;&gt;</panel_attributes><additional_attributes>10;10;90;10</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>816</x><y>992</y><w>112</w><h>56</h></coordinates><panel_attributes>symbol=component
+Webserver
+(Nginx)
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>872</x><y>952</y><w>80</w><h>56</h></coordinates><panel_attributes>lt=-&gt;&gt;</panel_attributes><additional_attributes>10;50;80;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>928</x><y>368</y><w>96</w><h>72</h></coordinates><panel_attributes>Web User MGMT</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>848</x><y>864</y><w>168</w><h>40</h></coordinates><panel_attributes>Chakra UI
+(React components)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>512</x><y>336</y><w>208</w><h>216</h></coordinates><panel_attributes>Strapi CMS
+(Node.js)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>528</x><y>368</y><w>80</w><h>48</h></coordinates><panel_attributes>Stories MGMT
+Clouds MGMT
+...</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>528</x><y>416</y><w>160</w><h>80</h></coordinates><panel_attributes>Strapi Business Logic
+(NodeJS)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>608</x><y>496</y><w>80</w><h>40</h></coordinates><panel_attributes>GraphQL API</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>472</x><y>704</y><w>80</w><h>240</h></coordinates><panel_attributes>lt=-&gt;&gt;
+
+SPA API calls
+</panel_attributes><additional_attributes>20;280;10;280;10;10;50;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>512</x><y>816</y><w>208</w><h>144</h></coordinates><panel_attributes>server side rendered frontend
+(NextJS)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>512</x><y>872</y><w>208</w><h>32</h></coordinates><panel_attributes>Chakra UI
+(React components)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>632</x><y>904</y><w>88</w><h>56</h></coordinates><panel_attributes>Component 
+Library
+(Storybook)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>512</x><y>904</y><w>56</w><h>56</h></coordinates><panel_attributes>Stories
+(React)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>512</x><y>848</y><w>208</w><h>24</h></coordinates><panel_attributes>state management (react redux)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>568</x><y>904</y><w>64</w><h>56</h></coordinates><panel_attributes>Clouds/
+Browse
+(D3)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>608</x><y>368</y><w>80</w><h>48</h></coordinates><panel_attributes>TOI User 
+MGMT</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>232</x><y>600</y><w>152</w><h>88</h></coordinates><panel_attributes>TriplyDB)
+(sparql SaaS)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>512</x><y>696</y><w>208</w><h>32</h></coordinates><panel_attributes>GraphQL</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>224</x><y>464</y><w>152</w><h>72</h></coordinates><panel_attributes>Linked Database
+SparQL</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>256</x><y>632</y><w>96</w><h>48</h></coordinates><panel_attributes>REST</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>344</x><y>632</y><w>296</w><h>32</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;330;10;350;20</additional_attributes></element><element><id>Relation</id><coordinates><x>680</x><y>496</y><w>104</w><h>192</h></coordinates><panel_attributes>lt=-&gt;&gt;</panel_attributes><additional_attributes>50;220;110;220;110;40;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>600</x><y>648</y><w>120</w><h>48</h></coordinates><panel_attributes>Sparql+Strapi 
+data management</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>512</x><y>648</y><w>88</w><h>48</h></coordinates><panel_attributes>User 
+Authorisation
+fg=Gray
+lt=.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1224</x><y>688</y><w>200</w><h>120</h></coordinates><panel_attributes>lt=.
+Amazon Services</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1264</x><y>728</y><w>112</w><h>48</h></coordinates><panel_attributes>&lt;&lt;Amazon S3&gt;&gt;
+
+blob storage</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1016</x><y>448</y><w>264</w><h>312</h></coordinates><panel_attributes>lt=&lt;&lt;-&gt;&gt;</panel_attributes><additional_attributes>10;10;310;370</additional_attributes></element><element><id>Relation</id><coordinates><x>712</x><y>704</y><w>128</w><h>152</h></coordinates><panel_attributes>lt=&lt;&lt;-
+SSR API calls</panel_attributes><additional_attributes>10;10;70;10;70;170;10;170</additional_attributes></element><element><id>Relation</id><coordinates><x>1016</x><y>496</y><w>120</w><h>360</h></coordinates><panel_attributes>lt=&lt;&lt;-
+SSR API calls</panel_attributes><additional_attributes>10;10;60;10;60;430;10;430</additional_attributes></element><element><id>Relation</id><coordinates><x>1072</x><y>920</y><w>208</w><h>88</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;240;90</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>456</x><y>232</y><w>296</w><h>824</h></coordinates><panel_attributes>HNI TOI VPS
+(Digital Ocean VPS)
+lt=.</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>336</x><y>528</y><w>24</w><h>88</h></coordinates><panel_attributes>lt=&lt;&lt;-&gt;&gt;</panel_attributes><additional_attributes>10;90;10;10</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>488</x><y>288</y><w>248</w><h>272</h></coordinates><panel_attributes>symbol=component
+HNI TheOtherInterface CMS
+(docker container)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>808</x><y>288</y><w>248</w><h>272</h></coordinates><panel_attributes>symbol=component
+HNI Website CMS
+(docker container) </panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>816</x><y>768</y><w>216</w><h>192</h></coordinates><panel_attributes>symbol=component
+HNI Web SSR frontend
+(Typescript/NextJS)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>488</x><y>576</y><w>248</w><h>168</h></coordinates><panel_attributes>symbol=component
+HNI TOI API / Gateway
+(docker container)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>488</x><y>768</y><w>248</w><h>192</h></coordinates><panel_attributes>symbol=component
+HNI TOI SSR frontend
+(Typescript/NextJS)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>512</x><y>616</y><w>208</w><h>112</h></coordinates><panel_attributes>API/Gateway
+(NestJS)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>624</x><y>992</y><w>96</w><h>56</h></coordinates><panel_attributes>symbol=component
+Webserver
+(Nginx)
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>664</x><y>1040</y><w>104</w><h>112</h></coordinates><panel_attributes>lt=-&gt;&gt;</panel_attributes><additional_attributes>110;120;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>608</x><y>952</y><w>80</w><h>56</h></coordinates><panel_attributes>lt=-&gt;&gt;</panel_attributes><additional_attributes>80;50;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>544</x><y>448</y><w>112</w><h>48</h></coordinates><panel_attributes>Remote 
+Dropdowns 
+from API's / sparql</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>528</x><y>496</y><w>80</w><h>40</h></coordinates><panel_attributes>Strapi Frontend</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>832</x><y>496</y><w>96</w><h>40</h></coordinates><panel_attributes>Strapi Frontend</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>368</x><y>392</y><w>160</w><h>296</h></coordinates><panel_attributes>lt=-&gt;&gt;</panel_attributes><additional_attributes>180;350;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>416</x><y>520</y><w>128</w><h>624</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>140;10;10;30;10;750;140;760</additional_attributes></element><element><id>Relation</id><coordinates><x>416</x><y>512</y><w>432</w><h>64</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>520;10;460;60;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>1232</x><y>416</y><w>48</w><h>352</h></coordinates><panel_attributes>lt=&lt;&lt;.
+fontsize=11
+fg=Gray</panel_attributes><additional_attributes>40;420;10;330;10;10;30;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1264</x><y>512</y><w>112</w><h>24</h></coordinates><panel_attributes>lifelynl/hni-website</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1264</x><y>536</y><w>112</w><h>24</h></coordinates><panel_attributes>lifelynl/hni-toi</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>1088</x><y>312</y><w>120</w><h>88</h></coordinates><panel_attributes>symbol=component
+DigitalOcean 
+Managed Database 
+(PostgreSQL)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>680</x><y>264</y><w>424</w><h>216</h></coordinates><panel_attributes>lt=&lt;&lt;-&gt;&gt;</panel_attributes><additional_attributes>10;250;150;10;480;10;510;120</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1224</x><y>816</y><w>200</w><h>120</h></coordinates><panel_attributes>lt=.
+Elastic Cloud</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1264</x><y>856</y><w>112</w><h>48</h></coordinates><panel_attributes>&lt;&lt;Elasticsearch&gt;&gt;
+
+search engine index</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1016</x><y>848</y><w>264</w><h>48</h></coordinates><panel_attributes>lt=&lt;&lt;-&gt;&gt;</panel_attributes><additional_attributes>10;10;310;40</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>952</x><y>992</y><w>112</w><h>56</h></coordinates><panel_attributes>symbol=component
+LetsEncrypt
+companion
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>920</x><y>1016</y><w>48</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;-&gt;&gt;</panel_attributes><additional_attributes>10;10;40;10</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>488</x><y>992</y><w>112</w><h>56</h></coordinates><panel_attributes>symbol=component
+LetsEncrypt
+companion
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>592</x><y>1016</y><w>48</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;-&gt;&gt;</panel_attributes><additional_attributes>10;10;40;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1256</x><y>592</y><w>128</w><h>56</h></coordinates><panel_attributes>&lt;&lt;Jenkins&gt;&gt;
+Deployment</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1360</x><y>776</y><w>56</w><h>232</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;270;50;270;50;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1376</x><y>528</y><w>168</w><h>96</h></coordinates><panel_attributes>lt=&lt;&lt;-
+fontsize=11
+
+   Trigger deploy</panel_attributes><additional_attributes>10;100;190;10</additional_attributes></element></diagram>
