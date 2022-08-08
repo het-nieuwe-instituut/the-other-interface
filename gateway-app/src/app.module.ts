@@ -5,6 +5,7 @@ import { GraphQLModule } from '@nestjs/graphql'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { AppResolver } from './app.resolver'
+import { HttpModule } from '@nestjs/axios'
 
 @Module({
     imports: [
@@ -15,6 +16,7 @@ import { AppResolver } from './app.resolver'
             debug: true,
             playground: false,
         }),
+        HttpModule,
     ],
     controllers: [AppController],
     providers: [AppService, AppResolver],
