@@ -22,7 +22,6 @@ const rules = {
             component: true,
         },
     ],
-    'eslint-comments/no-unused-disable': 'error',
     'lodash/import-scope': ['error', 'method'],
     'lodash/prefer-lodash-method': 0,
     'lodash/prefer-noop': 0,

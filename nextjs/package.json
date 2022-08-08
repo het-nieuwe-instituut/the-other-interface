@@ -8,7 +8,8 @@
         "start": "next start",
         "lint": "next lint",
         "storybook": "start-storybook -p 6006",
-        "build-storybook": "build-storybook"
+        "build-storybook": "build-storybook",
+        "prepare": "cd ../ && husky install ./nextjs/.husky"
     },
     "dependencies": {
         "@chakra-ui/react": "^2.2.3",
@@ -18,7 +19,6 @@
         "@types/d3": "^7.4.0",
         "@types/lodash": "^4.14.182",
         "@types/randomstring": "^1.1.8",
-        "@typescript-eslint/eslint-plugin": "^5.30.5",
         "d3": "^7.6.1",
         "eslint-plugin-lodash": "^7.4.0",
         "framer-motion": "^6.4.3",
@@ -32,12 +32,12 @@
     "devDependencies": {
         "@babel/core": "^7.18.6",
         "@storybook/addon-actions": "^6.5.9",
-        "@storybook/addon-essentials": "^6.5.9",
+        "@storybook/addon-essentials": "^6.4.22",
         "@storybook/addon-interactions": "^6.5.9",
         "@storybook/addon-links": "^6.5.9",
         "@storybook/builder-webpack5": "^6.5.9",
         "@storybook/manager-webpack5": "^6.5.9",
-        "@storybook/react": "^6.5.9",
+        "@storybook/react": "^6.1.21",
         "@storybook/testing-library": "^0.0.13",
         "@types/node": "18.0.3",
         "@types/react": "18.0.15",
@@ -45,8 +45,17 @@
         "babel-loader": "^8.2.5",
         "eslint": "8.19.0",
         "eslint-config-next": "12.2.2",
+        "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-prettier": "^4.2.1",
+        "@typescript-eslint/eslint-plugin": "^5.30.5",
+        "@typescript-eslint/parser": "^5.30.5",
         "prettier": "2.7.1",
         "typescript": "4.7.4"
+    },
+    "lint-staged": {
+        "*.{ts,tsx}": [
+            "eslint --fix",
+            "prettier --write"
+        ]
     }
 }

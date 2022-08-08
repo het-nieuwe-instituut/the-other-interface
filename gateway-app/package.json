@@ -18,7 +18,8 @@
         "test:cov": "jest --coverage",
         "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
         "test:e2e": "jest --config ./test/jest-e2e.json",
-        "copyenv": "./.bin/init-env"
+        "copyenv": "./.bin/init-env",
+        "prepare": "cd ../ && husky install ./gateway-app/.husky"
     },
     "dependencies": {
         "@nestjs/common": "^9.0.0",
@@ -51,6 +52,12 @@
         "ts-node": "^10.8.2",
         "tsconfig-paths": "^4.0.0",
         "typescript": "^4.7.4"
+    },
+    "lint-staged": {
+        "*.{ts,tsx}": [
+            "npm run format",
+            "npm run lint"
+        ]
     },
     "jest": {
         "moduleFileExtensions": [

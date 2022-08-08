@@ -5,6 +5,15 @@
         "node": "16.15.*"
     },
     "scripts": {
-        "start": "(ls Itermocil.custom.yml > /dev/null && itermocil --here --layout ./Itermocil.custom.yml) || itermocil --here"
-    }
+        "start": "(ls Itermocil.custom.yml > /dev/null && itermocil --here --layout ./Itermocil.custom.yml) || itermocil --here",
+        "prepare": "husky install"
+    },
+    "devDependencies": {
+        "husky": "^8.0.0",
+        "lint-staged": "^13.0.3"
+    },
+"lint-staged": {
+    "*.{ts,tsx}": "prettier --write",
+    "*.{ts,tsx}": "eslint --fix"
+  }
 }
