@@ -6,3 +6,6 @@ windows:
       panes:
           - cd gateway-app && nvm use && npm run copyenv && npm run start:debug
           - cd gateway-app && nvm use && npm run test:watch
+          - cd strapi && nvm use && npm run start-services
+          - cd strapi && nvm use && npm run develop
+          - nvm use && clear
