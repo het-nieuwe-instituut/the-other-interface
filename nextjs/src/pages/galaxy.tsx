@@ -1,7 +1,7 @@
 import type { InferGetStaticPropsType } from 'next'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
-import { dehydrate, QueryClient, useQuery } from 'react-query'
+import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query'
 import styles from '../styles/Home.module.css'
 
 export const DynamicGalaxyNoSsr = dynamic(() => import('../GalaxyWithQuery/Galaxy'), {
@@ -33,7 +33,6 @@ function Page(props: InferGetStaticPropsType<typeof getStaticProps>) {
         return <p>something went wrong</p>
     }
 
-    console.log(data)
       
     return (
         <div className={styles.container}>
@@ -41,7 +40,9 @@ function Page(props: InferGetStaticPropsType<typeof getStaticProps>) {
                 <title>Create Next App</title>
             </Head>
 
+
             <main className={styles.main}>
+                <h2>This demo uses real data</h2>
                 <DynamicGalaxyNoSsr data={data} dimensions={{ height: 1000, width: 1000 }} />
             </main>
         </div>

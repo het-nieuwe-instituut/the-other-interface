@@ -16,32 +16,38 @@ const Object: React.FC<Props> = ({ data = [], dimensions }) => {
     const { width, height } = dimensions
     const svgWidth = width 
     const svgHeight = height
-    const objectsPerTypeWithIds = useMemo(() => data.map((item, index) => ({...item, name: item.class. })), [data])
+    const objectsPerTypeWithIds = useMemo(() => data.map((item, index) => ({...item, name: item.class.substring(item.class.lastIndexOf('/') + 1) })), [data])
     const id = useId().replaceAll(':', '')
-    const { svgRef } = useGalaxyController(dimensions, objectsPerTypeWithIds, id)
+    const { svgRef, zoomout } = useGalaxyController(dimensions, objectsPerTypeWithIds, id)
 
     return (
-        <svg width={svgWidth} height={svgHeight} ref={svgRef} style={{ background: 'lightGrey' }}>
+        <div style={{overflow: 'hidden'}}>
+        <svg width={svgWidth} height={svgHeight} ref={svgRef} viewBox="0 0 1000 1000" style={{ background: 'lightGrey' }}>
            <defs>
-                {objectsPerTypeWithIds.map(item => {
+                {objectsPerTypeWithIds.map((item, index, array) => {
                     return (
-                        <radialGradient key={item.name} id={`gradient-${item.name}`}>
+                        <radialGradient  key={`${index}-${array.length}`} id={`gradient-${item.name}`}>
                             <stop offset="40%" stopColor="red" />
                             <stop offset="160%" stopColor="transparent" />
                         </radialGradient>
                     )
                 })}
             </defs>
-            {objectsPerTypeWithIds.map(item => {
+            {objectsPerTypeWithIds.map((item, index, array) => {
                 return (
-                    <Circle key={item.name} className={id} name={item.name}>
+                    <Circle key={`${index}-${array.length}`}  className={id} name={item.name}>
                         <Flex flex={1} alignItems={'center'} justifyContent={'center'} height={'100%'}>
-                            <Button onClick={() => undefined}>Go to {item.name}</Button>
+                            <Button className={`gotoitem`}>{item.name}</Button>
                         </Flex>
                     </Circle>
                 )
             })}
-        </svg>
+
+            <foreignObject>
+            </foreignObject>
+            </svg>
+            <Button onClick={zoomout}>zoom out</Button>
+        </div>
     )
 }
 

@@ -14,7 +14,7 @@ interface ObjectPerTypeWithName extends ObjectPerType {
 interface D3CollectionItem extends SimulationNodeDatum, ObjectPerTypeWithName {}
 
 export function useGalaxyController(dimensions: Dimensions, data: ObjectPerTypeWithName[], selector: string) {
-    const svgRef = useRef(null)
+    const svgRef = useRef<SVGSVGElement | null>(null)
     const [, forceRerender] = useReducer(x => x + 1, 0)
     const initialized = useRef(false)
     const simulation = useRef<d3.Simulation<d3.SimulationNodeDatum, undefined> | null>(null)
@@ -25,7 +25,6 @@ export function useGalaxyController(dimensions: Dimensions, data: ObjectPerTypeW
         const totalObjects = data.reduce((total, item) => total + parseInt(item.numberOfInstances), 0)
         const singleSpace = totalSpace / totalObjects
 
-console.log(totalSpace, totalObjects,singleSpace)
         return data.map(item => {
             return {
                 name: item.name,
@@ -53,6 +52,20 @@ console.log(totalSpace, totalObjects,singleSpace)
         const node = d3Svg.selectAll(`.${selector}`).data(data)
         const nodeForeign = d3Svg.selectAll(`.foreign-${selector}`).data(data)
 
+        d3Svg.selectAll(`.foreign-${selector}`).on('click', (e, g: any) => { 
+            const x = g.x - width / 2
+            const y = g.y - height / 2
+            const k = 20
+
+        
+            d3Svg.transition()
+                .duration(750)
+                .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
+
+            
+                d3Svg.selectAll('.gotoitem').style('display', 'none')
+         })
+
         nodesListener.current = simulation.current?.nodes(data as D3CollectionItem[]).on('tick', () => {
             ticked(dataDimensions, simulation.current!, node, nodeForeign)
         })
@@ -77,7 +90,22 @@ console.log(totalSpace, totalObjects,singleSpace)
         }
     }, [svgRef.current, data, dimensions, dataDimensions])
 
+    function zoomout() {
+        console.log('test');
+        
+        const d3Svg = d3.select(svgRef.current)
+
+            
+            d3Svg.transition()
+                .duration(750)
+                .attr("transform", "translate(" + 0 + "," + 0 + ")scale(" + 1 + ")translate(" + 0 + "," + 0 + ")")
+           
+                d3Svg.selectAll('.gotoitem').style('display', 'block')
+         
+    }
+
     return {
+        zoomout,
         svgRef,
         dataDimensions,
     }

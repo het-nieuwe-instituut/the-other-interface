@@ -7,7 +7,7 @@ import randomstring from 'randomstring'
 import { useState } from 'react'
 import { Button } from '@chakra-ui/react'
 import Boundaries from '../Boundaries/Boundaries'
-import { dehydrate, QueryClient, useQuery } from 'react-query'
+import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query'
 import { times } from 'lodash'
 
 export const DynamicBoundariesNoSsr = dynamic(() => import('../Boundaries/Boundaries'), {
@@ -56,7 +56,9 @@ export default () => {
                 <title>Create Next App</title>
             </Head>
 
+
             <main className={styles.main}>
+                <h2>This demo uses real data</h2>
                 <DynamicBoundariesNoSsr data={data} />
             </main>
         </div>

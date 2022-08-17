@@ -7,14 +7,14 @@ import { times } from 'lodash'
 import { InstancesPerClass } from '../pages/boundaries'
 
 const points = [
-    [50, 50],
-    [200, 50],
-    [300, 100],
-    [350, 250],
-    [250, 350],
+    [100, 100],
+    [400, 100],
+    [600, 200],
+    [700, 500],
+    [500, 700],
+    [200, 600],
     [100, 300],
-    [50, 150],
-    [50, 50],
+    [100, 100],
 ]
 
 /* https://en.wikipedia.org/wiki/Shoelace_formula */
@@ -219,7 +219,7 @@ const Boundaries: React.FC<Props> = ({ data = [], dimensions = defaultDimensions
                             cy={`${item.point[1]}`}
                             className={`${item.parent}-dot`}
                             fill={'red'}
-                            r={2}
+                            r={4}
                             data-parent={item.parent}
                             data-title={item.title}
                         >

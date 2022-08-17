@@ -82,20 +82,7 @@ const testData = [
     },
 ]
 
-export const DynamicGalaxyNoSsr = dynamic(() => import('../Galaxy/Galaxy'), {
-    ssr: false,
-})
-export const DynamicStarSystemNoSsr = dynamic(() => import('../StarSystem/StarSystem'), {
-    ssr: false,
-})
 export const DynamicObjectNoSsr = dynamic(() => import('../Object/ObjectUniverse'), {
-    ssr: false,
-})
-export const DynamicGalaxyUpdatestNoSsr = dynamic(() => import('../Galaxy/GalaxyUpdates'), {
-    ssr: false,
-})
-
-export const DynamicBoundariesNoSsr = dynamic(() => import('../Boundaries/Boundaries'), {
     ssr: false,
 })
 
@@ -108,6 +95,9 @@ const Home: NextPage = () => {
                 <title>Create Next App</title>
             </Head>
 
+            <main className={styles.main}>
+                <DynamicObjectNoSsr dimensions={{ height: 1000, width: 1000 }} />
+            </main>
         </div>
     )
 }
