@@ -1,9 +1,10 @@
 import * as d3 from 'd3'
 import React, { useEffect, useId, useMemo, useRef } from 'react'
 import { CollectionItem } from '../business/d3/useGalaxyController'
-
+import { Tooltip } from '@chakra-ui/react'
 import earcut from 'earcut'
 import { times } from 'lodash'
+import { InstancesPerClass } from '../pages/boundaries'
 
 const points = [
     [50, 50],
@@ -67,7 +68,11 @@ function selectRandomTriangle(triangles: [[number, number], [number, number], [n
     return triangles[index]
 }
 
-function useBoundariesController(stories: { id: number; parent: string }[]) {
+interface InstancesPerClassWithPoint extends InstancesPerClass {
+    point: number[]
+}
+
+function useBoundariesController(stories: InstancesPerClass[]) {
     const svgRef = useRef(null)
     const initialized = useRef(false)
 
@@ -110,7 +115,7 @@ function useBoundariesController(stories: { id: number; parent: string }[]) {
         }
         initialized.current = true
 
-        drawPathByParent(svgRef.current, parents[0], dataPoints)
+        drawPathByParent(svgRef.current, dataPoints)
 
         return () => {
             initialized.current = false
@@ -124,46 +129,59 @@ function useBoundariesController(stories: { id: number; parent: string }[]) {
     }
 }
 
+
+
 function drawPathByParent(
     svgRef: null,
-    selector: string,
-    dataPoints: { id: number; parent: string; point: number[] }[]
+    dataPoints: InstancesPerClassWithPoint[]
 ) {
-    console.log(dataPoints)
     const d3Svg = d3.select(svgRef)
-    const filteredDataPoints = dataPoints.filter(dataPoint => dataPoint.parent === selector)
-    const sortedDataPoints = filteredDataPoints.sort((a, b) => {
-        const totalA = a.point[0] + a.point[1]
-        const totalB = b.point[0] + b.point[1]
-        return totalA - totalB
-    })
-    console.log(sortedDataPoints)
-
-    console.log('test', filteredDataPoints)
 
     // Add the line
     d3Svg
-        .append('path')
-        .datum(sortedDataPoints)
-        .attr('fill', 'none')
-        .attr('stroke', '#69b3a2')
-        .attr('stroke-width', 4)
-        .attr(
-            'd',
-            d3
-                .line()
-                .x((d: any) => {
-                    console.log(d)
-                    return d.point[0]
+        .selectAll("circle")
+            .on("mouseover", (d) => {
+                const filteredDataPoints = dataPoints.filter(dataPoint => dataPoint.parent === d.target.attributes['data-parent'].value)
+                const sortedDataPoints = filteredDataPoints.sort((a, b) => {
+                    const totalA = a.point[0] + a.point[1]
+                    const totalB = b.point[0] + b.point[1]
+                    return totalA - totalB
                 })
-                .y((d: any) => {
-                    return d.point[1]
-                }) as any
-        )
+              
+                d3Svg.append('path')
+                    .datum(sortedDataPoints)
+                    .attr('fill', 'none')
+                    .attr('stroke', '#69b3a2')
+                    .attr('stroke-width', 4)
+                    .attr(
+                        'd',
+                        d3
+                            .line()
+                            .x((d: any) => {
+                                return d.point[0]
+                            })
+                            .y((d: any) => {
+                                return d.point[1]
+                            }) as any
+                    )
+
+                    console.log(d)
+                d3Svg.append('text')
+                    .attr('x', parseInt(d.offsetX) - 0)
+                    .attr('y', parseInt(d.offsetY) - 10)
+                    .attr('class', 'text')
+                    .text(() => d.target.attributes['data-title'].value);
+            })
+            .on('mouseout', () => {
+                d3Svg.selectAll('path').remove()
+                d3Svg.selectAll('text').remove()
+            })
+        
 }
 
+
 interface Props {
-    data?: CollectionItem[]
+    data: InstancesPerClass[]
     dimensions?: {
         height: number
         width: number
@@ -175,20 +193,10 @@ const defaultDimensions = {
     height: 1000,
 }
 
-const parents = ['test1', 'test2', 'test3', 'test4', 'test5', 'test6', 'test7']
-
-const stories = times(100, i => ({
-    id: i,
-    parent: parents[Math.floor(Math.random() * 7) + 1] ?? parents[0],
-}))
-
 const Boundaries: React.FC<Props> = ({ data = [], dimensions = defaultDimensions }) => {
     const svgWidth = dimensions.width
     const svgHeight = dimensions.height
-    const id = useId().replaceAll(':', '')
-    const { svgRef, triangles, dataPoints } = useBoundariesController(stories)
-
-    console.log(triangles)
+    const { svgRef, triangles, dataPoints } = useBoundariesController(data)
 
     return (
         <svg width={svgWidth} height={svgHeight} ref={svgRef} style={{ background: 'lightGrey' }}>
@@ -198,19 +206,25 @@ const Boundaries: React.FC<Props> = ({ data = [], dimensions = defaultDimensions
                 `}
             </style>
             <g>
-                {triangles.map(triangle => (
-                    <polygon points={triangle.join()} fill={'rgb(133, 127, 242)'}></polygon>
+                {triangles.map((triangle, index, array) => (
+                    <polygon key={`${index}-${array.length}`} points={triangle.join()} fill={'rgb(133, 127, 242)'}></polygon>
                 ))}
             </g>
-            {dataPoints.map(item => {
+       
+            {dataPoints.map((item, index, array) => {
                 return (
-                    <circle
-                        cx={`${item.point[0]}px`}
-                        cy={`${item.point[1]}px`}
-                        className={`${item.parent}-dot`}
-                        fill={'red'}
-                        r={2}
-                    ></circle>
+                  <g key={`${index}-${array.length}`}>
+                        <circle
+                            cx={`${item.point[0]}`}
+                            cy={`${item.point[1]}`}
+                            className={`${item.parent}-dot`}
+                            fill={'red'}
+                            r={2}
+                            data-parent={item.parent}
+                            data-title={item.title}
+                        >
+                        </circle>
+                    </g>
                 )
             })}
         </svg>
