@@ -6,6 +6,7 @@ import styles from '../styles/Home.module.css'
 import randomstring from 'randomstring'
 import { useState } from 'react'
 import { Button } from '@chakra-ui/react'
+import Boundaries from '../Boundaries/Boundaries'
 
 function createChild(): any {
     return {
@@ -94,6 +95,10 @@ export const DynamicGalaxyUpdatestNoSsr = dynamic(() => import('../Galaxy/Galaxy
     ssr: false,
 })
 
+export const DynamicBoundariesNoSsr = dynamic(() => import('../Boundaries/Boundaries'), {
+    ssr: false,
+})
+
 const Home: NextPage = () => {
     const [stage, setStage] = useState('galaxyUpdates')
 
@@ -107,6 +112,7 @@ const Home: NextPage = () => {
             <Button onClick={() => setStage('starSystem')}>Star system</Button>
             <Button onClick={() => setStage('objects')}>objects</Button>
             <Button onClick={() => setStage('galaxyUpdates')}>Galaxy updates</Button>
+            <Button onClick={() => setStage('boundaries')}>Boundaries</Button>
 
             <main className={styles.main}>
                 {stage === 'galaxy' && (
@@ -115,6 +121,7 @@ const Home: NextPage = () => {
                 {stage === 'starSystem' && <DynamicStarSystemNoSsr dimensions={{ height: 1000, width: 1000 }} />}
                 {stage === 'objects' && <DynamicObjectNoSsr dimensions={{ height: 1000, width: 1000 }} />}
                 {stage === 'galaxyUpdates' && <DynamicGalaxyUpdatestNoSsr />}
+                {stage === 'boundaries' && <DynamicBoundariesNoSsr />}
                 {/*  */}
             </main>
         </div>
