@@ -53,12 +53,12 @@ const ObjectUniverse: React.FC<Props> = ({ data = testData, dimensions }) => {
 
     return (
         <>
-            <svg width={svgWidth} height={svgHeight} ref={svgRef} style={{ background: 'teal' }}>
+            <svg width={svgWidth} height={svgHeight} ref={svgRef} style={{ background: 'lightGrey' }}>
                 <defs>
                     {data.map(item => {
                         return (
                             <radialGradient id={`gradient-${item.name}`}>
-                                <stop offset="40%" stopColor="red" />
+                                <stop offset="40%" stopColor="yellow" />
                                 <stop offset="160%" stopColor="transparent" />
                             </radialGradient>
                         )
@@ -69,12 +69,12 @@ const ObjectUniverse: React.FC<Props> = ({ data = testData, dimensions }) => {
                     const dimension = dataDimensions.find(item => item.name === item.name)
                     return (
                         <Circle key={item.name} className={id} name={item.name}>
-                            <RelatedObject
+                            {/* <RelatedObject
                                 fill={'blue'}
                                 name={item.name}
                                 data={item.children}
                                 dimensions={{ width: dimension?.takeSpace ?? 0, height: dimension?.takeSpace ?? 0 }}
-                            />
+                            /> */}
                         </Circle>
                     )
                 })}

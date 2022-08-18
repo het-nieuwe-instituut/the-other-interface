@@ -1,6 +1,7 @@
 import { background, useId } from '@chakra-ui/react'
 import React from 'react'
 import { CollectionItem, useGalaxyController } from '../business/d3/useGalaxyController'
+import { useStarSystemController } from '../business/d3/useStarSystemController'
 import { Circle } from '../Galaxy/Circle'
 
 interface Props {
@@ -21,7 +22,7 @@ interface Props {
 
 const RelatedObject: React.FC<Props> = ({ data = [], dimensions, fill, name }) => {
     const id = useId().replaceAll(':', '')
-    const { svgRef, dataDimensions } = useGalaxyController(dimensions, data, id)
+    const { svgRef, dataDimensions } = useStarSystemController(dimensions, data, id)
     return (
         <>
             <svg style={{ width: dimensions.width, height: dimensions.height }} ref={svgRef}>

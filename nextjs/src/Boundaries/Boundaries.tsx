@@ -207,10 +207,9 @@ const Boundaries: React.FC<Props> = ({ data = [], dimensions = defaultDimensions
             </style>
             <g>
                 {triangles.map((triangle, index, array) => (
-                    <polygon key={`${index}-${array.length}`} points={triangle.join()} fill={'rgb(133, 127, 242)'}></polygon>
+                    <polygon key={`${index}-${array.length}`} points={triangle.join()} fill={'lightGrey'}></polygon>
                 ))}
             </g>
-       
             {dataPoints.map((item, index, array) => {
                 return (
                   <g key={`${index}-${array.length}`}>
@@ -218,7 +217,7 @@ const Boundaries: React.FC<Props> = ({ data = [], dimensions = defaultDimensions
                             cx={`${item.point[0]}`}
                             cy={`${item.point[1]}`}
                             className={`${item.parent}-dot`}
-                            fill={'red'}
+                            fill={'yellow'}
                             r={4}
                             data-parent={item.parent}
                             data-title={item.title}

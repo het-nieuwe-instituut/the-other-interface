@@ -22,12 +22,12 @@ const Object: React.FC<Props> = ({ data = [], dimensions }) => {
 
     return (
         <div style={{overflow: 'hidden'}}>
-        <svg width={svgWidth} height={svgHeight} ref={svgRef} viewBox="0 0 1000 1000" style={{ background: 'lightGrey' }}>
+        <svg width={svgWidth} height={svgHeight} ref={svgRef} viewBox="0 0 1000 1000" style={{ background: 'grey' }}>
            <defs>
                 {objectsPerTypeWithIds.map((item, index, array) => {
                     return (
                         <radialGradient  key={`${index}-${array.length}`} id={`gradient-${item.name}`}>
-                            <stop offset="40%" stopColor="red" />
+                            <stop offset="40%" stopColor="white" />
                             <stop offset="160%" stopColor="transparent" />
                         </radialGradient>
                     )
@@ -37,7 +37,7 @@ const Object: React.FC<Props> = ({ data = [], dimensions }) => {
                 return (
                     <Circle key={`${index}-${array.length}`}  className={id} name={item.name}>
                         <Flex flex={1} alignItems={'center'} justifyContent={'center'} height={'100%'}>
-                            <Button className={`gotoitem`}>{item.name}</Button>
+                            <Button className={`gotoitem`}>{item.name} <br/> {item.numberOfInstances}</Button>
                         </Flex>
                     </Circle>
                 )

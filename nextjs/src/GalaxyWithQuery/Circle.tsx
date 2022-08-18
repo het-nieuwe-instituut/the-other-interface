@@ -7,7 +7,7 @@ export const Circle: React.FC<Props> = props => {
 
     return (
         <>
-            <circle ref={ref} fillOpacity={0.3} fill={`red`} {...props}></circle>
+            <circle ref={ref} fillOpacity={0.3} fill={`url('#gradient-${props.name}')`} {...props}></circle>
             <foreignObject xmlns="http://www.w3.org/1999/xhtml" className={`foreign-${props.className}`}>
                 {props.children}
             </foreignObject>
