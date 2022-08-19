@@ -1,12 +1,8 @@
 import type { NextPage } from 'next'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
 import randomstring from 'randomstring'
-import { useState } from 'react'
-import { Button } from '@chakra-ui/react'
-import Boundaries from '../Boundaries/Boundaries'
+import styles from '../styles/Home.module.css'
 
 function createChild(): any {
     return {
@@ -82,25 +78,11 @@ const testData = [
     },
 ]
 
-export const DynamicGalaxyNoSsr = dynamic(() => import('../Galaxy/Galaxy'), {
-    ssr: false,
-})
-export const DynamicStarSystemNoSsr = dynamic(() => import('../StarSystem/StarSystem'), {
-    ssr: false,
-})
-export const DynamicObjectNoSsr = dynamic(() => import('../Object/ObjectUniverse'), {
-    ssr: false,
-})
 export const DynamicGalaxyUpdatestNoSsr = dynamic(() => import('../Galaxy/GalaxyUpdates'), {
     ssr: false,
 })
 
-export const DynamicBoundariesNoSsr = dynamic(() => import('../Boundaries/Boundaries'), {
-    ssr: false,
-})
-
 const Home: NextPage = () => {
-    const [stage, setStage] = useState('galaxyUpdates')
 
     return (
         <div className={styles.container}>
@@ -108,6 +90,7 @@ const Home: NextPage = () => {
                 <title>Create Next App</title>
             </Head>
 
+            <DynamicGalaxyUpdatestNoSsr />
         </div>
     )
 }
