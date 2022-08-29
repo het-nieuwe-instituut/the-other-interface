@@ -19,7 +19,7 @@
         "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
         "test:e2e": "jest --config ./test/jest-e2e.json",
         "copyenv": "./.bin/init-env",
-        "prepare": "cd ../ && husky install ./gateway-app/.husky"
+        "prepare": "cd ../ && npx husky install ./gateway-app/.husky"
     },
     "dependencies": {
         "@nestjs/apollo": "^10.0.19",
