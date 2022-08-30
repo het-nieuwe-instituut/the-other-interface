@@ -1,14 +1,12 @@
-import { FilterTypes } from "../filtersTypes"
-import usePresenter from "./usePresenter"
+import { FilterTypes } from '../filtersTypes'
+import usePresenter from './usePresenter'
 
 const FiltersPanel = () => {
-    const { filters, setFilter} = usePresenter()
+    const { setFilter } = usePresenter()
 
     return (
         <div>
-            <button onClick={() => setFilter(FilterTypes.MAKER)}>
-                Set Filter
-            </button>
+            <button onClick={() => setFilter(FilterTypes.MAKER)}>Set Filter</button>
         </div>
     )
 }

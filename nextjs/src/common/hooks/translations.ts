@@ -2,7 +2,6 @@
 
 import useTranslation from 'next-translate/useTranslation'
 import { TranslationQuery } from 'next-translate'
-import { Paths } from '../utils/translations'
 import { TranslationKeys } from 'locales/locales'
 
 export const useTypeSafeTranslation = <T extends keyof TranslationKeys>(ns: T) => {

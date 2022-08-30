@@ -1,9 +1,7 @@
-import FiltersPanel from "src/features/filters/FilterPanel/FilterPanel"
+import FiltersPanel from 'src/features/filters/FilterPanel/FilterPanel'
 
 const FiltersPage = () => {
-    return (
-        <FiltersPanel />
-    )
+    return <FiltersPanel />
 }
 
 export default FiltersPage

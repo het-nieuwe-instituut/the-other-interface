@@ -1,6 +1,6 @@
 export enum FilterTypes {
     TimePeriod = 'TIME_PERIOD',
-    MAKER = 'Maker'
+    MAKER = 'Maker',
 }
 
 export type FiltersState = {
