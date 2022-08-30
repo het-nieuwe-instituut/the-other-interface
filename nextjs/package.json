@@ -15,9 +15,12 @@
     "dependencies": {
         "eslint-plugin-prettier": "^4.2.1",
         "lint-staged": "^13.0.3",
+        "@reduxjs/toolkit": "^1.8.5",
         "next": "12.2.5",
+        "next-translate": "^1.5.0",
         "react": "18.2.0",
-        "react-dom": "18.2.0"
+        "react-dom": "18.2.0",
+        "react-redux": "^8.0.2"
     },
     "devDependencies": {
         "@types/node": "18.7.13",
