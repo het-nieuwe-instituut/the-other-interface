@@ -1,5 +1,6 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
+import { ChakraProvider } from '@chakra-ui/react'
 import { Provider } from 'react-redux'
 
 import store from '../features/shared/configs/store'
@@ -7,7 +8,9 @@ import store from '../features/shared/configs/store'
 function MyApp({ Component, pageProps }: AppProps) {
     return (
         <Provider store={store}>
-            <Component {...pageProps} />
+            <ChakraProvider>
+                <Component {...pageProps} />
+            </ChakraProvider>
         </Provider>
     )
 }
