@@ -13,11 +13,19 @@
         "prettier": "prettier"
     },
     "dependencies": {
+        "@reduxjs/toolkit": "^1.8.5",
+        "@types/d3": "^7.4.0",
+        "@types/earcut": "^2.1.1",
+        "@types/lodash": "^4.14.184",
+        "@types/randomstring": "^1.1.8",
+        "d3": "^7.6.1",
+        "earcut": "^2.2.4",
         "eslint-plugin-prettier": "^4.2.1",
         "lint-staged": "^13.0.3",
-        "@reduxjs/toolkit": "^1.8.5",
+        "lodash": "^4.17.21",
         "next": "12.2.5",
         "next-translate": "^1.5.0",
+        "randomstring": "^1.2.2",
         "react": "18.2.0",
         "react-dom": "18.2.0",
         "react-redux": "^8.0.2"
