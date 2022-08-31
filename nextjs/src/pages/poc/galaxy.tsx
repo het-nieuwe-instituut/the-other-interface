@@ -31,7 +31,7 @@ function useQuery<T, Q extends () => ReturnType<Q>>(keys: T, query: Q) {
                 setIsloading(true)
                 const result = await query()
                 setIsloading(false)
-                setData(result)
+                setData(result as Awaited<ReturnType<Q>> | undefined)
             } catch {
                 setIsError(true)
             }

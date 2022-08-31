@@ -2,7 +2,7 @@
 import * as d3 from 'd3'
 import React, { useEffect, useMemo, useRef } from 'react'
 import earcut from 'earcut'
-import { InstancesPerClass } from 'src/stories/poc-pages/boundaries'
+import { InstancesPerClass } from 'src/pages/poc/boundaries'
 
 const points = [
     [100, 100],

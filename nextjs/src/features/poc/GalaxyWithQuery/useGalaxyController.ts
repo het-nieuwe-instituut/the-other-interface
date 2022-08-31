@@ -2,7 +2,7 @@
 import * as d3 from 'd3'
 import { SimulationNodeDatum } from 'd3'
 import { useEffect, useMemo, useReducer, useRef } from 'react'
-import { ObjectPerType } from 'src/stories/poc-pages/galaxy'
+import { ObjectPerType } from 'src/pages/poc/galaxy'
 
 interface Dimensions {
     height?: number | null

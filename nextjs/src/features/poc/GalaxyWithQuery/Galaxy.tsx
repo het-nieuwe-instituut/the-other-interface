@@ -1,7 +1,7 @@
 import React, { useId, useMemo } from 'react'
 import { useGalaxyController } from './useGalaxyController'
 import { Circle } from './Circle'
-import { ObjectPerType } from 'src/stories/poc-pages/galaxy'
+import { ObjectPerType } from 'src/pages/poc/galaxy'
 
 interface Props {
     data: ObjectPerType[]

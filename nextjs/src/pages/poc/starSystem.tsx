@@ -3,13 +3,11 @@ import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 
-export const DynamicStarSystemNoSsr = dynamic(() => import('../StarSystem/StarSystem'), {
+export const DynamicStarSystemNoSsr = dynamic(() => import('../../features/poc/StarSystem/StarSystem'), {
     ssr: false,
 })
 
-
 const Home: NextPage = () => {
-
     return (
         <div className={styles.container}>
             <Head>
