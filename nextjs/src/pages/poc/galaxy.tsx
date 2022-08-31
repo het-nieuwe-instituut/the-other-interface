@@ -2,6 +2,7 @@
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
+import { PocMenu } from 'src/features/poc/PocMenu'
 
 export const DynamicGalaxyNoSsr = dynamic(() => import('../../features/poc/GalaxyWithQuery/Galaxy'), {
     ssr: false,
@@ -64,6 +65,8 @@ function Page() {
             <Head>
                 <title>Create Next App</title>
             </Head>
+
+            <PocMenu />
 
             <main>
                 {data[0].numberOfInstances}

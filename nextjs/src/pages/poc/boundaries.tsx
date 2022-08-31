@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import times from 'lodash/times'
 import { useEffect, useState } from 'react'
+import { PocMenu } from 'src/features/poc/PocMenu'
 
 export const DynamicBoundariesNoSsr = dynamic(() => import('../../features/poc/Boundaries/Boundaries'), {
     ssr: false,
@@ -76,6 +77,7 @@ const Boundaries = () => {
             </Head>
 
             <main>
+                <PocMenu />
                 <h2>This demo uses real data</h2>
                 <DynamicBoundariesNoSsr data={data} />
             </main>
