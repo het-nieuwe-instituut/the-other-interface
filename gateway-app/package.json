@@ -19,9 +19,14 @@
         "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
         "test:e2e": "jest --config ./test/jest-e2e.json",
         "copyenv": "./.bin/init-env",
-        "prepare": "cd ../ && npx husky install ./gateway-app/.husky"
+        "prepare": "cd ../ && npx husky install ./gateway-app/.husky",
+        "graphql-codegen": "graphql-codegen --config codegen.yml"
     },
     "dependencies": {
+        "@apollo/federation": "^0.36.1",
+        "@apollo/gateway": "^2.1.0",
+        "@apollo/subgraph": "^2.1.0",
+        "@golevelup/nestjs-graphql-request": "^0.1.13",
         "@nestjs/apollo": "^10.0.19",
         "@nestjs/axios": "^0.1.0",
         "@nestjs/common": "^9.0.0",
@@ -35,6 +40,11 @@
         "rxjs": "^7.5.5"
     },
     "devDependencies": {
+        "@graphql-codegen/add": "^3.2.1",
+        "@graphql-codegen/cli": "2.11.8",
+        "@graphql-codegen/typescript": "2.7.3",
+        "@graphql-codegen/typescript-graphql-request": "^4.5.3",
+        "@graphql-codegen/typescript-operations": "^2.5.3",
         "@nestjs/cli": "^9.0.0",
         "@nestjs/schematics": "^9.0.0",
         "@nestjs/testing": "^9.0.0",
