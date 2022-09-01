@@ -1,9 +1,8 @@
 import { GraphQLClientInject, GraphQLRequestModule } from '@golevelup/nestjs-graphql-request'
-import { Global, Module } from '@nestjs/common'
+import { Module } from '@nestjs/common'
 import { getSdk } from '../../generated/strapi-sdk'
 import { GraphQLClient } from 'graphql-request'
 
-@Global()
 @Module({
     imports: [
         GraphQLRequestModule.forRoot(GraphQLRequestModule, {

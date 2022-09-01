@@ -4,6 +4,7 @@ import { Field, ID, ObjectType, Parent, Query, ResolveField, Resolver } from '@n
 import { lastValueFrom } from 'rxjs'
 import { Sdk } from '../../generated/strapi-sdk'
 
+// TODO: added for POC, delete (or update for actual requirements) before production
 @ObjectType()
 class StoryAttributesType {
     @Field()
@@ -22,6 +23,7 @@ class StoryAttributesType {
     public publishedAt?: string
 }
 
+// TODO: added for POC, delete (or update for actual requirements) before production
 @ObjectType()
 class StoryType {
     @Field(() => ID, { nullable: true })
@@ -41,6 +43,7 @@ export class StoryResolver {
         private readonly httpService: HttpService
     ) {}
 
+    // TODO: added for POC, delete (or update for actual requirements) before production
     @Query(() => [StoryType])
     public async stories() {
         const res = await this.strapiGqlSdk.stories()
@@ -48,12 +51,22 @@ export class StoryResolver {
         return res.stories?.data
     }
 
+    // TODO: added for POC, delete (or update for actual requirements) before production
     @ResolveField()
     public async counts(@Parent() story: StoryType) {
+        // TECHNICAL-DEBT: the http call & data parsing/casting should move to a triply service method inside a triply module
+
+        interface ObjectPerType {
+            class: string
+            numberOfInstances: string
+        }
+
         const endpoint =
             'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/objects-per-type/run'
 
-        const res = await lastValueFrom(this.httpService.get(endpoint))
+        // TECHNICAL-DEBT: implement error handling
+        // TECHNICAL-DEBT: (dynamically) verify received type
+        const res = await lastValueFrom(this.httpService.get<ObjectPerType[]>(endpoint))
 
         return parseInt(res.data[0].numberOfInstances, 10)
     }
