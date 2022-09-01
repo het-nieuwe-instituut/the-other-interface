@@ -3,4 +3,5 @@ export interface Config {
     APP_NAME: string
     APP_PORT: string
     STRAPI_GRAPHQL_URL: string
+    TRIPLY_API_KEY: string
 }
