@@ -1,4 +1,4 @@
-import { Box, Container, Heading, Link } from '@chakra-ui/react'
+import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Container, Heading, Link } from '@chakra-ui/react'
 import type { NextPage } from 'next'
 
 const Page: NextPage = () => {
@@ -44,6 +44,25 @@ const Page: NextPage = () => {
                 <Heading as={'h2'} size="lg" data-circle-color="red">
                     Breadcrumbs
                 </Heading>
+                <Breadcrumb separator="-">
+                    <BreadcrumbItem>
+                        <BreadcrumbLink href="#" as={Link}>
+                            Home
+                        </BreadcrumbLink>
+                    </BreadcrumbItem>
+
+                    <BreadcrumbItem>
+                        <BreadcrumbLink href="#" as={Link}>
+                            About
+                        </BreadcrumbLink>
+                    </BreadcrumbItem>
+
+                    <BreadcrumbItem isCurrentPage>
+                        <BreadcrumbLink href="#" as={Link}>
+                            Contact
+                        </BreadcrumbLink>
+                    </BreadcrumbItem>
+                </Breadcrumb>
             </Box>
             <></>
         </Container>
