@@ -2,7 +2,6 @@ import { ComponentStyleConfig } from '@chakra-ui/react'
 
 export const Link: ComponentStyleConfig = {
     baseStyle: props => {
-        console.log(props)
         return {
             underline: 'none',
             textDecoration: 'none',
@@ -63,6 +62,8 @@ export const Link: ComponentStyleConfig = {
                 color: '#FFFFFF',
                 textShadow: '0px 0px 4px #000000, 0px 0px 4px #000000',
                 border: 0,
+                underline: 'none',
+                textDecoration: 'none',
             },
 
             _focus: {
