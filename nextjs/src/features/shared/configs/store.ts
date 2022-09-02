@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { filtersSlice } from 'src/features/filters/filtersSlice'
+import { filtersSlice } from '@/features/filters/filtersSlice'
 
 // config the store
 const store = configureStore({

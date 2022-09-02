@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import { ThemeProvider } from '@emotion/react'
 
 import store from '../features/shared/configs/store'
-import { theme } from 'src/features/shared/styles/theme/theme'
+import { theme } from '@/features/shared/styles/theme/theme'
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (
