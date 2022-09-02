@@ -27,6 +27,8 @@ export const Link: ComponentStyleConfig = {
 
             _focus: {
                 background: '#CCCED0',
+                underline: 'none',
+                textDecoration: 'none',
             },
 
             _before: {
