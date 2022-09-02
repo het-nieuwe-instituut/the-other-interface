@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { filtersSlice } from 'src/features/filters/filtersSlice'
+import { filtersSlice } from '@/features/filters/filtersSlice'
 
 export type Store = ReturnType<typeof createStore>
 export type State = ReturnType<Store['getState']>
