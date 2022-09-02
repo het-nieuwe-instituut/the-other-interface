@@ -3,9 +3,16 @@ import { Link } from '../Link/Link'
 
 export const Breadcrumb: ComponentStyleConfig = {
     parts: ['link'],
-    baseStyle: () => ({
-        link: {
-            ...Link?.variants?.['decorative'],
-        },
-    }),
+    baseStyle: () => {
+        return {
+            link: {
+                ...Link?.variants?.['decorative'],
+                ...{
+                    _focus: {
+                        borderBottom: 'none',
+                    },
+                },
+            },
+        }
+    },
 }
