@@ -1,73 +1,46 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Gateway App
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A gateway app built on [Nest](https://github.com/nestjs/nest) that handles various technical requirements.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+<br />
 
-## Description
+## Stiching Strapi's schema with data from TriplyDB
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Basically the approach is no different than a usual nestjs graphql app with a db. Instead of resolving through the db, the data is requested from Strapi and/or TriplyDB. The nestjs object types & resolvers still need to manually declared with the types for the Strapi data being enforced via codegen. For TriplyDB however, the response types will need to be cast.
 
-## Installation
+The current approach revolves around:
 
-```bash
-$ npm install
-```
+-   creating an `ObjectType` with fields from Strapi and/or TriplyDB
+-   generating a typed Strapi SDK
+-   querying/resolving Strapi `ObjectType`/fields through the generated SDK
+-   querying/resolving TriplyDB `ObjectType`/fields through its api
+    -   type casting & parsing the received data (requires error handling & dynamic type verification)
 
-## Running the app
+### Some sample development flows:
 
-```bash
-# development
-$ npm run start
+-   To add a new `ObjectType` based on Triply data:
 
-# watch mode
-$ npm run start:dev
+    1. create the triply service method calling api for the new data (make sure to cache the call)
+    2. add response type to cast
+    3. add the `ObjectType` inside the appropriate module
+    4. update the module's resolver(s) accordingly
+    5. if the `ObjectType` has a related Strapi data, add & resolve the field
 
-# production mode
-$ npm run start:prod
-```
+-   To add a new `ObjectType` based on Strapi data:
 
-## Test
+    1. create a new graphql file in the appropriate module or update the existing graphql file for the new types/fields/fragments/queries/mutations
+    2. run the `graphql-codegen` script
+    3. add the `ObjectType` inside the appropriate module
+    4. update the module's resolver(s) accordingly
+    5. if the `ObjectType` has a related Triply data, add & resolve the field
 
-```bash
-# unit tests
-$ npm run test
+-   To update Triply `ObjectTypes`:
 
-# e2e tests
-$ npm run test:e2e
+    1. locate & update the triply service method where the call to api is being made
+    2. if needed, update the cast response type
+    3. make sure update the nestjs types/resolvers accordingly
 
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
--   Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
--   Website - [https://nestjs.com](https://nestjs.com/)
--   Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+-   To update Strapi `ObjectTypes`:
+    1. locate & update the `.graphql` where the types/fields/fragments/queries/mutations
+    2. run the `graphql-codegen` script
+    3. make sure update the nestjs types/resolvers accordingly
