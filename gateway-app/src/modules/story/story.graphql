@@ -14,5 +14,6 @@ fragment StoryFragment on StoryEntity {
         createdAt
         updatedAt
         publishedAt
+        triply_people
     }
 }

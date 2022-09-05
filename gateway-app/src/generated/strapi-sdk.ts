@@ -478,6 +478,7 @@ export type Story = {
     publishedAt?: Maybe<Scalars['DateTime']>
     slug?: Maybe<Scalars['String']>
     title: Scalars['String']
+    triply_people?: Maybe<Scalars['String']>
     updatedAt?: Maybe<Scalars['DateTime']>
 }
 
@@ -507,6 +508,7 @@ export type StoryFiltersInput = {
     publishedAt?: InputMaybe<DateTimeFilterInput>
     slug?: InputMaybe<StringFilterInput>
     title?: InputMaybe<StringFilterInput>
+    triply_people?: InputMaybe<StringFilterInput>
     updatedAt?: InputMaybe<DateTimeFilterInput>
 }
 
@@ -514,6 +516,7 @@ export type StoryInput = {
     publishedAt?: InputMaybe<Scalars['DateTime']>
     slug?: InputMaybe<Scalars['String']>
     title?: InputMaybe<Scalars['String']>
+    triply_people?: InputMaybe<Scalars['String']>
 }
 
 export type StringFilterInput = {
@@ -925,6 +928,7 @@ export type StoriesQuery = {
                 createdAt?: any | null
                 updatedAt?: any | null
                 publishedAt?: any | null
+                triply_people?: string | null
             } | null
         }>
     } | null
@@ -940,6 +944,7 @@ export type StoryFragmentFragment = {
         createdAt?: any | null
         updatedAt?: any | null
         publishedAt?: any | null
+        triply_people?: string | null
     } | null
 }
 
@@ -952,6 +957,7 @@ export const StoryFragmentFragmentDoc = gql`
             createdAt
             updatedAt
             publishedAt
+            triply_people
         }
     }
 `
