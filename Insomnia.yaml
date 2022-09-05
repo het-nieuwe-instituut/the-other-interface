@@ -1,0 +1,137 @@
+_type: export
+__export_format: 4
+__export_date: 2022-09-01T15:24:21.627Z
+__export_source: insomnia.desktop.app:v2022.5.1
+resources:
+  - _id: req_482c2c64bdc144089a915c84ba3cc323
+    parentId: wrk_495bc411648844949d6c2b88c3ac4cb2
+    modified: 1662019169636
+    created: 1659610191449
+    url: "{{ _.baseUrl }}/graphql"
+    name: hello
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n\thello\n}"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1659610191449
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: wrk_495bc411648844949d6c2b88c3ac4cb2
+    parentId: null
+    modified: 1659610148380
+    created: 1659610148380
+    name: HNI-TOI
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_bb8d9c352e5d4b579d857e8a70e52b13
+    parentId: wrk_495bc411648844949d6c2b88c3ac4cb2
+    modified: 1662019166053
+    created: 1661783093300
+    url: "{{ _.baseUrl }}/graphql"
+    name: objects per type
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n\tobjectsPerType
+        {\n\t\tclass\n\t\tnumberOfInstances\n\t}\n}"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1659139855268
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_0585e8def454461484c03be3551936e0
+    parentId: wrk_495bc411648844949d6c2b88c3ac4cb2
+    modified: 1662045632812
+    created: 1661966595011
+    url: "{{ _.baseUrl }}/graphql"
+    name: stories-POC
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"# was added as part of the api POC\nquery {\n\tstories
+        {\n\t\tid\n\t\tattributes
+        {\n\t\t\ttitle\n\t\t\tslug\n\t\t\tcreatedAt\n\t\t\tupdatedAt\n\t\t\tpublishedAt\n\t\t}\n\t\t#
+        these fields are resolved through triply.\n\t\t# the performance impacts
+        can be seen by commenting them out\n\t\tcounts\n\t\tpeople
+        {\n\t\t\tname\n\t\t\tbirthDate\n\t\t\tdeathDate\n\t\t\tnationalityLabel\n\t\t}\n\t}\n}"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658904687177.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_9ecfbf306599ac18ae1cef7e35789fdc41a137e8
+    parentId: wrk_495bc411648844949d6c2b88c3ac4cb2
+    modified: 1659610151994
+    created: 1659610148385
+    name: Base Environment
+    data: {}
+    dataPropertyOrder: {}
+    color: null
+    isPrivate: false
+    metaSortKey: 1659610148385
+    _type: environment
+  - _id: jar_9ecfbf306599ac18ae1cef7e35789fdc41a137e8
+    parentId: wrk_495bc411648844949d6c2b88c3ac4cb2
+    modified: 1659610148386
+    created: 1659610148386
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar
+  - _id: spc_5b905b2502c64ac5979cdf3bceb8d288
+    parentId: wrk_495bc411648844949d6c2b88c3ac4cb2
+    modified: 1659610148381
+    created: 1659610148381
+    fileName: HNI-TOI
+    contents: ""
+    contentType: yaml
+    _type: api_spec
+  - _id: env_2ed5840b2ebb44c5a24b8ffa9ee7e5af
+    parentId: env_9ecfbf306599ac18ae1cef7e35789fdc41a137e8
+    modified: 1659610185714
+    created: 1659610154120
+    name: development
+    data:
+      baseUrl: http://localhost:5000
+    dataPropertyOrder:
+      "&":
+        - baseUrl
+    color: null
+    isPrivate: false
+    metaSortKey: 1659610154120
+    _type: environment

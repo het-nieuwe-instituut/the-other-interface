@@ -1,0 +1,19 @@
+query stories {
+    stories {
+        data {
+            ...StoryFragment
+        }
+    }
+}
+
+fragment StoryFragment on StoryEntity {
+    id
+    attributes {
+        title
+        slug
+        createdAt
+        updatedAt
+        publishedAt
+        triply_people
+    }
+}

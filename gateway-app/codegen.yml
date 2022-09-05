@@ -1,0 +1,17 @@
+overwrite: true
+generates:
+    src/generated/strapi-sdk.ts:
+        schema: 'http://localhost:1337/graphql'
+        documents: ./src/**/*.graphql
+        plugins:
+            - add:
+                  content:
+                      - /* eslint-disable */
+                      - // ******* GENERATED FILE - DO NOT EDIT ********
+            - 'typescript'
+            - 'typescript-operations'
+            - 'typescript-graphql-request'
+
+hooks:
+    afterAllFileWrite:
+        - npx prettier --write
