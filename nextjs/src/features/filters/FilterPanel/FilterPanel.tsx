@@ -6,7 +6,7 @@ const FiltersPanel = () => {
 
     return (
         <div>
-            <button onClick={() => setFilter(FilterTypes.MAKER)}>Set Filter</button>
+            <button onClick={() => setFilter(FilterTypes.MAKER)}>Set filter</button>
         </div>
     )
 }
