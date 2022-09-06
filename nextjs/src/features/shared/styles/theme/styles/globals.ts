@@ -3,8 +3,7 @@ import { mode } from '@chakra-ui/theme-tools'
 
 export const global = (props: GlobalStyleProps) => ({
     body: {
-        color: mode('black', 'white')(props),
-        bg: mode('white', 'black')(props),
+        background: 'none'
     },
     p: {
         paddingBottom: '1rem',
