@@ -1,4 +1,5 @@
 import { ComponentStyleConfig } from '@chakra-ui/react'
+import colors from "../../foundations/colors"
 
 export const Link: ComponentStyleConfig = {
     baseStyle: props => {
@@ -6,7 +7,7 @@ export const Link: ComponentStyleConfig = {
             underline: 'none',
             textDecoration: 'none',
             paddingBottom: '2px',
-            borderBottom: '1.25px solid #CCCED0',
+            borderBottom: `1.25px solid ${colors.other}`,
             position: 'relative',
             ...(props.variant === 'decorative' &&
                 props['data-circle-color'] && {
@@ -14,19 +15,19 @@ export const Link: ComponentStyleConfig = {
                 }),
 
             _hover: {
-                borderBottom: '1.25px solid #000000',
+                borderBottom: `1.25px solid ${colors.black}`,
                 underline: 'none',
                 textDecoration: 'none',
             },
 
             _active: {
-                borderBottom: '1.25px solid #000000',
+                borderBottom: `1.25px solid ${colors.black}`,
                 underline: 'none',
                 textDecoration: 'none',
             },
 
             _focus: {
-                background: '#CCCED0',
+                background: `${colors.other}`,
                 underline: 'none',
                 textDecoration: 'none',
             },
@@ -55,14 +56,14 @@ export const Link: ComponentStyleConfig = {
         },
         decorative: {
             fontWeight: 400,
-            color: '#000000',
-            textShadow: '0px 0px 4px #CCCED0, 0px 0px 4px #CCCED0',
+            color: `${colors.text.default.color}`,
+            textShadow: `0px 0px 4px ${colors.text.default.shadow}, 0px 0px 4px ${colors.text.default.shadow}`,
             border: 0,
             transition: 'none',
 
             _hover: {
-                color: '#FFFFFF',
-                textShadow: '0px 0px 4px #000000, 0px 0px 4px #000000',
+                color: `${colors.text.hover.color}`,
+                textShadow: `0px 0px 4px ${colors.text.hover.shadow} 0px 0px 4px ${colors.text.hover.shadow}`,
                 border: 0,
                 underline: 'none',
                 textDecoration: 'none',

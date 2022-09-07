@@ -1,18 +1,30 @@
 import { ComponentStyleConfig } from '@chakra-ui/theme'
 import { mode } from '@chakra-ui/theme-tools'
 
+import colors from "../../foundations/colors"
+
 export const Button: ComponentStyleConfig = {
-    // 1. We can update the base styles
     baseStyle: props => ({
-        border: '1.25px solid #000000',
+        border: `1.25px solid ${colors.black}`,
         bordeRadius: '9px',
-        color: '#000000',
-        backgroundColor: '#FFFFFF',
+        color: `${colors.text.default.color}`,
+        backgroundColor: `${colors.white} !important`,
         textAlign: 'cener',
         _hover: {
-            backgroundColor: '#000000',
-            color: '#FFFFFF',
-            border: '1.25px solid #000000'
+            color: `${colors.text.hover.color}`,
+            backgroundColor: `${colors.black} !important`
+        },
+        _active: {
+            color: `${colors.text.hover.color}`,
+            backgroundColor: `${colors.black} !important`
+        },
+        _visited: {
+            color: `${colors.text.default.color}`,
+            backgroundColor: `${colors.white} !important`
+        },
+        _focus: {
+            color: `${colors.text.default.color}`,
+            backgroundColor: `${colors.other} !important`
         }
     }),
 }
