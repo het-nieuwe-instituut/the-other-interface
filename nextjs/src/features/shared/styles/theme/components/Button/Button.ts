@@ -1,10 +1,9 @@
 import { ComponentStyleConfig } from '@chakra-ui/theme'
-import { mode } from '@chakra-ui/theme-tools'
 
 import colors from "../../foundations/colors"
 
 export const Button: ComponentStyleConfig = {
-    baseStyle: props => ({
+    baseStyle: () => ({
         border: `1.25px solid ${colors.black}`,
         bordeRadius: '9px',
         color: `${colors.text.default.color}`,
