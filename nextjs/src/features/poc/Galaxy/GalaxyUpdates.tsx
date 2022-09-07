@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import { Box, Button, Input, Slider, SliderFilledTrack, SliderThumb, SliderTrack, useId } from '@chakra-ui/react'
 import times from 'lodash/times'
 import randomstring from 'randomstring'

@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable react-hooks/exhaustive-deps */
 import * as d3 from 'd3'
-import { forceCollide, SimulationNodeDatum } from 'd3'
-import { inRange } from 'lodash'
+import { SimulationNodeDatum } from 'd3'
 import { useLayoutEffect, useMemo, useRef } from 'react'
 
 interface Dimensions {
@@ -124,7 +125,7 @@ function ticked(
     const firstX = availableSpace / 2 / 2
 
     const secondX = width - firstX
-    var xCenter = [firstX, secondX]
+    const xCenter = [firstX, secondX]
 
     simulation
         .force(

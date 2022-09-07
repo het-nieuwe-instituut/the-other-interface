@@ -1,15 +1,13 @@
-import React, { useLayoutEffect, useRef } from 'react'
-import * as d3 from 'd3'
-import { SimulationNodeDatum } from 'd3'
-import { background, Button, useId } from '@chakra-ui/react'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useId } from '@chakra-ui/react'
+import React from 'react'
 import { Circle } from '../Galaxy/Circle'
 
-import { CollectionItem, useGalaxyController } from '../business/d3/useGalaxyController'
-import { useGalaxyAvoidController } from '../business/d3/useGalaxyAvoidController'
-import RelatedObject from '../Object/RelatedObject'
-import { useStarSystemController } from '../business/d3/useStarSystemController'
-import randomstring from 'randomstring'
 import times from 'lodash/times'
+import randomstring from 'randomstring'
+import { CollectionItem } from '../business/d3/useGalaxyController'
+import { useStarSystemController } from '../business/d3/useStarSystemController'
+import RelatedObject from '../Object/RelatedObject'
 
 interface Props {
     data?: CollectionItem[]

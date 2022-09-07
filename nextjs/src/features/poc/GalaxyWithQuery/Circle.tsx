@@ -1,4 +1,5 @@
-import React, { Suspense } from 'react'
+/* eslint-disable @typescript-eslint/no-empty-interface */
+import React from 'react'
 
 interface Props extends React.SVGProps<SVGCircleElement> {}
 

@@ -1,0 +1,22 @@
+overwrite: true
+schema: 'http://localhost:5000/graphql'
+documents: 'src/features/graphql/**/*.graphql'
+generates:
+    src/generated/graphql.ts:
+        plugins:
+            - 'typescript-msw'
+            - 'typescript'
+            - 'typescript-operations'
+            - 'typescript-react-apollo'
+
+    ./graphql.schema.json:
+        plugins:
+            - 'introspection'
+    src/mocks/generated-mocks.ts:
+        plugins:
+            - typescript-mock-data:
+                  typesFile: '../generated/graphql.ts'
+                  enumValues: upper-case#upperCase
+                  typenames: keep
+                  scalars:
+                      Date: date # gets translated to casual.date()
