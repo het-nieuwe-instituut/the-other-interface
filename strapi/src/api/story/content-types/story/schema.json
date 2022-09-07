@@ -19,6 +19,9 @@
     },
     "slug": {
       "type": "string"
+    },
+    "triply_people": {
+      "type": "string"
     }
   }
 }
