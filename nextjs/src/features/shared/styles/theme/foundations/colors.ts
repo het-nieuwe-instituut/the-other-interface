@@ -1,19 +1,17 @@
-import { Colors } from '@chakra-ui/react'
-
-const colors: Colors = {
-    interface: {
-        graphBg: '#CCCED0',
-        mainBg: 'rgba(255, 255, 255, 0.85)',
-        other: '#CCCED0',
-        text: {
-            default: {
-                color: '#000000',
-                shadow: '#CCCED0'
-            },
-            hover: {
-                color: '#ffffff',
-                shadow: '#CCCED0'
-            }
+const colors = {
+    graph: '#CCCED0',
+    mainBg: 'rgba(255, 255, 255, 0.85)',
+    other: '#CCCED0',
+    black: '#000000',
+    white: '#ffffff',
+    text: {
+        default: {
+            color: '#000000',
+            shadow: '#CCCED0'
+        },
+        hover: {
+            color: '#ffffff',
+            shadow: '#CCCED0'
         }
     },
     levels: {
