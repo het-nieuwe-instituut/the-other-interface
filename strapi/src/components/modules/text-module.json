@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_modules_text_modules",
+  "info": {
+    "displayName": "Text module",
+    "icon": "align-left"
+  },
+  "options": {},
+  "attributes": {
+    "Text": {
+      "type": "text",
+      "required": true
+    }
+  }
+}
