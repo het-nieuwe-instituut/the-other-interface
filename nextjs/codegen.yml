@@ -15,7 +15,3 @@ generates:
         plugins:
             - typescript-mock-data:
                   typesFile: '../generated/graphql.ts'
-                  enumValues: upper-case#upperCase
-                  typenames: keep
-                  scalars:
-                      Date: date # gets translated to casual.date()

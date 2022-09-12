@@ -1,4 +1,4 @@
-import { BooleanFilterInput, ComponentModulesTextModule, DateTimeFilterInput, Error, FileInfoInput, FloatFilterInput, Homepage, HomepageEntity, HomepageEntityResponse, HomepageInput, HomepageRelationResponseCollection, I18NLocale, I18NLocaleEntity, I18NLocaleEntityResponse, I18NLocaleEntityResponseCollection, I18NLocaleFiltersInput, IDFilterInput, IntFilterInput, JSONFilterInput, Mutation, Pagination, PaginationArg, Query, ResponseCollectionMeta, Story, StoryEntity, StoryEntityResponse, StoryEntityResponseCollection, StoryFiltersInput, StoryInput, StringFilterInput, UploadFile, UploadFileEntity, UploadFileEntityResponse, UploadFileEntityResponseCollection, UploadFileFiltersInput, UploadFileInput, UploadFileRelationResponseCollection, UploadFolder, UploadFolderEntity, UploadFolderEntityResponse, UploadFolderEntityResponseCollection, UploadFolderFiltersInput, UploadFolderInput, UploadFolderRelationResponseCollection, UsersPermissionsCreateRolePayload, UsersPermissionsDeleteRolePayload, UsersPermissionsLoginInput, UsersPermissionsLoginPayload, UsersPermissionsMe, UsersPermissionsMeRole, UsersPermissionsPasswordPayload, UsersPermissionsPermission, UsersPermissionsPermissionEntity, UsersPermissionsPermissionFiltersInput, UsersPermissionsPermissionRelationResponseCollection, UsersPermissionsRegisterInput, UsersPermissionsRole, UsersPermissionsRoleEntity, UsersPermissionsRoleEntityResponse, UsersPermissionsRoleEntityResponseCollection, UsersPermissionsRoleFiltersInput, UsersPermissionsRoleInput, UsersPermissionsUpdateRolePayload, UsersPermissionsUser, UsersPermissionsUserEntity, UsersPermissionsUserEntityResponse, UsersPermissionsUserEntityResponseCollection, UsersPermissionsUserFiltersInput, UsersPermissionsUserInput, UsersPermissionsUserRelationResponseCollection, PublicationState } from '../generated/graphql';
+import { BooleanFilterInput, ComponentModulesTextModule, DateTimeFilterInput, Error, FileInfoInput, FloatFilterInput, Homepage, HomepageEntity, HomepageEntityResponse, HomepageInput, HomepageRelationResponseCollection, I18NLocale, I18NLocaleEntity, I18NLocaleEntityResponse, I18NLocaleEntityResponseCollection, I18NLocaleFiltersInput, IdFilterInput, IntFilterInput, JsonFilterInput, Mutation, Pagination, PaginationArg, Query, ResponseCollectionMeta, Story, StoryEntity, StoryEntityResponse, StoryEntityResponseCollection, StoryFiltersInput, StoryInput, StringFilterInput, UploadFile, UploadFileEntity, UploadFileEntityResponse, UploadFileEntityResponseCollection, UploadFileFiltersInput, UploadFileInput, UploadFileRelationResponseCollection, UploadFolder, UploadFolderEntity, UploadFolderEntityResponse, UploadFolderEntityResponseCollection, UploadFolderFiltersInput, UploadFolderInput, UploadFolderRelationResponseCollection, UsersPermissionsCreateRolePayload, UsersPermissionsDeleteRolePayload, UsersPermissionsLoginInput, UsersPermissionsLoginPayload, UsersPermissionsMe, UsersPermissionsMeRole, UsersPermissionsPasswordPayload, UsersPermissionsPermission, UsersPermissionsPermissionEntity, UsersPermissionsPermissionFiltersInput, UsersPermissionsPermissionRelationResponseCollection, UsersPermissionsRegisterInput, UsersPermissionsRole, UsersPermissionsRoleEntity, UsersPermissionsRoleEntityResponse, UsersPermissionsRoleEntityResponseCollection, UsersPermissionsRoleFiltersInput, UsersPermissionsRoleInput, UsersPermissionsUpdateRolePayload, UsersPermissionsUser, UsersPermissionsUserEntity, UsersPermissionsUserEntityResponse, UsersPermissionsUserEntityResponseCollection, UsersPermissionsUserFiltersInput, UsersPermissionsUserInput, UsersPermissionsUserRelationResponseCollection, PublicationState } from '../generated/graphql';
 
 export const aBooleanFilterInput = (overrides?: Partial<BooleanFilterInput>): BooleanFilterInput => {
     return {
@@ -171,7 +171,7 @@ export const anI18NLocaleFiltersInput = (overrides?: Partial<I18NLocaleFiltersIn
         and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [anI18NLocaleFiltersInput()],
         code: overrides && overrides.hasOwnProperty('code') ? overrides.code! : aStringFilterInput(),
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : aDateTimeFilterInput(),
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : anIDFilterInput(),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : anIdFilterInput(),
         name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : aStringFilterInput(),
         not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : anI18NLocaleFiltersInput(),
         or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [anI18NLocaleFiltersInput()],
@@ -179,7 +179,7 @@ export const anI18NLocaleFiltersInput = (overrides?: Partial<I18NLocaleFiltersIn
     };
 };
 
-export const anIDFilterInput = (overrides?: Partial<IDFilterInput>): IDFilterInput => {
+export const anIdFilterInput = (overrides?: Partial<IdFilterInput>): IdFilterInput => {
     return {
         and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : ['0270d200-7662-47e2-ba4c-726a870e5a11'],
         between: overrides && overrides.hasOwnProperty('between') ? overrides.between! : ['ce783653-8fae-4dda-8c81-e9b8f2b34ecc'],
@@ -194,7 +194,7 @@ export const anIDFilterInput = (overrides?: Partial<IDFilterInput>): IDFilterInp
         lt: overrides && overrides.hasOwnProperty('lt') ? overrides.lt! : '4b805797-4796-46bc-858e-1a9138865ac0',
         lte: overrides && overrides.hasOwnProperty('lte') ? overrides.lte! : '468d224b-9b5d-41ab-ae2f-d04704636985',
         ne: overrides && overrides.hasOwnProperty('ne') ? overrides.ne! : '1198f531-1ae3-4811-95d3-bfb887b6103b',
-        not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : anIDFilterInput(),
+        not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : anIdFilterInput(),
         notContains: overrides && overrides.hasOwnProperty('notContains') ? overrides.notContains! : '95e48f5a-459d-4027-a8ba-d2865db771ef',
         notContainsi: overrides && overrides.hasOwnProperty('notContainsi') ? overrides.notContainsi! : '7e51ca6a-b077-4c4e-b0b5-46d68932e39f',
         notIn: overrides && overrides.hasOwnProperty('notIn') ? overrides.notIn! : ['2b88c577-47fd-4581-b919-bd87830aeb40'],
@@ -231,7 +231,7 @@ export const anIntFilterInput = (overrides?: Partial<IntFilterInput>): IntFilter
     };
 };
 
-export const aJSONFilterInput = (overrides?: Partial<JSONFilterInput>): JSONFilterInput => {
+export const aJsonFilterInput = (overrides?: Partial<JsonFilterInput>): JsonFilterInput => {
     return {
         and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : ['suscipit'],
         between: overrides && overrides.hasOwnProperty('between') ? overrides.between! : ['necessitatibus'],
@@ -246,7 +246,7 @@ export const aJSONFilterInput = (overrides?: Partial<JSONFilterInput>): JSONFilt
         lt: overrides && overrides.hasOwnProperty('lt') ? overrides.lt! : 'ab',
         lte: overrides && overrides.hasOwnProperty('lte') ? overrides.lte! : 'ut',
         ne: overrides && overrides.hasOwnProperty('ne') ? overrides.ne! : 'quas',
-        not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : aJSONFilterInput(),
+        not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : aJsonFilterInput(),
         notContains: overrides && overrides.hasOwnProperty('notContains') ? overrides.notContains! : 'autem',
         notContainsi: overrides && overrides.hasOwnProperty('notContainsi') ? overrides.notContainsi! : 'optio',
         notIn: overrides && overrides.hasOwnProperty('notIn') ? overrides.notIn! : ['itaque'],
@@ -368,7 +368,7 @@ export const aStoryFiltersInput = (overrides?: Partial<StoryFiltersInput>): Stor
     return {
         and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [aStoryFiltersInput()],
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : aDateTimeFilterInput(),
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : anIDFilterInput(),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : anIdFilterInput(),
         not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : aStoryFiltersInput(),
         or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [aStoryFiltersInput()],
         publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : aDateTimeFilterInput(),
@@ -465,17 +465,17 @@ export const anUploadFileFiltersInput = (overrides?: Partial<UploadFileFiltersIn
         ext: overrides && overrides.hasOwnProperty('ext') ? overrides.ext! : aStringFilterInput(),
         folder: overrides && overrides.hasOwnProperty('folder') ? overrides.folder! : anUploadFolderFiltersInput(),
         folderPath: overrides && overrides.hasOwnProperty('folderPath') ? overrides.folderPath! : aStringFilterInput(),
-        formats: overrides && overrides.hasOwnProperty('formats') ? overrides.formats! : aJSONFilterInput(),
+        formats: overrides && overrides.hasOwnProperty('formats') ? overrides.formats! : aJsonFilterInput(),
         hash: overrides && overrides.hasOwnProperty('hash') ? overrides.hash! : aStringFilterInput(),
         height: overrides && overrides.hasOwnProperty('height') ? overrides.height! : anIntFilterInput(),
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : anIDFilterInput(),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : anIdFilterInput(),
         mime: overrides && overrides.hasOwnProperty('mime') ? overrides.mime! : aStringFilterInput(),
         name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : aStringFilterInput(),
         not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : anUploadFileFiltersInput(),
         or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [anUploadFileFiltersInput()],
         previewUrl: overrides && overrides.hasOwnProperty('previewUrl') ? overrides.previewUrl! : aStringFilterInput(),
         provider: overrides && overrides.hasOwnProperty('provider') ? overrides.provider! : aStringFilterInput(),
-        provider_metadata: overrides && overrides.hasOwnProperty('provider_metadata') ? overrides.provider_metadata! : aJSONFilterInput(),
+        provider_metadata: overrides && overrides.hasOwnProperty('provider_metadata') ? overrides.provider_metadata! : aJsonFilterInput(),
         size: overrides && overrides.hasOwnProperty('size') ? overrides.size! : aFloatFilterInput(),
         updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : aDateTimeFilterInput(),
         url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : aStringFilterInput(),
@@ -549,7 +549,7 @@ export const anUploadFolderFiltersInput = (overrides?: Partial<UploadFolderFilte
         children: overrides && overrides.hasOwnProperty('children') ? overrides.children! : anUploadFolderFiltersInput(),
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : aDateTimeFilterInput(),
         files: overrides && overrides.hasOwnProperty('files') ? overrides.files! : anUploadFileFiltersInput(),
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : anIDFilterInput(),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : anIdFilterInput(),
         name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : aStringFilterInput(),
         not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : anUploadFolderFiltersInput(),
         or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [anUploadFolderFiltersInput()],
@@ -651,7 +651,7 @@ export const aUsersPermissionsPermissionFiltersInput = (overrides?: Partial<User
         action: overrides && overrides.hasOwnProperty('action') ? overrides.action! : aStringFilterInput(),
         and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [aUsersPermissionsPermissionFiltersInput()],
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : aDateTimeFilterInput(),
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : anIDFilterInput(),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : anIdFilterInput(),
         not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : aUsersPermissionsPermissionFiltersInput(),
         or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [aUsersPermissionsPermissionFiltersInput()],
         role: overrides && overrides.hasOwnProperty('role') ? overrides.role! : aUsersPermissionsRoleFiltersInput(),
@@ -710,7 +710,7 @@ export const aUsersPermissionsRoleFiltersInput = (overrides?: Partial<UsersPermi
         and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [aUsersPermissionsRoleFiltersInput()],
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : aDateTimeFilterInput(),
         description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : aStringFilterInput(),
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : anIDFilterInput(),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : anIdFilterInput(),
         name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : aStringFilterInput(),
         not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : aUsersPermissionsRoleFiltersInput(),
         or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [aUsersPermissionsRoleFiltersInput()],
@@ -778,7 +778,7 @@ export const aUsersPermissionsUserFiltersInput = (overrides?: Partial<UsersPermi
         confirmed: overrides && overrides.hasOwnProperty('confirmed') ? overrides.confirmed! : aBooleanFilterInput(),
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : aDateTimeFilterInput(),
         email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : aStringFilterInput(),
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : anIDFilterInput(),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : anIdFilterInput(),
         not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : aUsersPermissionsUserFiltersInput(),
         or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [aUsersPermissionsUserFiltersInput()],
         password: overrides && overrides.hasOwnProperty('password') ? overrides.password! : aStringFilterInput(),
