@@ -1,6 +1,5 @@
-import { renderHookWithProviders } from '@/features/shared/utils/test-utils'
+import { renderHookWithProviders } from 'src/features/shared/utils/test-utils'
 import { act } from 'react-dom/test-utils'
-
 import { FilterTypes } from '../filtersTypes'
 import usePresenter from './usePresenter'
 

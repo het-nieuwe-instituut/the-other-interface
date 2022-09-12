@@ -1,6 +1,5 @@
-import { renderWithProviders } from '@/features/shared/utils/test-utils'
+import { renderWithProviders } from 'src/features/shared/utils/test-utils'
 import { fireEvent } from '@testing-library/react'
-
 import { FilterTypes } from '../filtersTypes'
 import FilterPanel from './FilterPanel'
 
