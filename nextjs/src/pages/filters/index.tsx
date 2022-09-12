@@ -1,4 +1,4 @@
-import FiltersPanel from 'src/features/filters/FilterPanel/FilterPanel'
+import FiltersPanel from '@/features/filters/FilterPanel/FilterPanel'
 
 const FiltersPage = () => {
     return <FiltersPanel />

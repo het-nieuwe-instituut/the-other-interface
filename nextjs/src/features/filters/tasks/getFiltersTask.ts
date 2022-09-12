@@ -1,6 +1,6 @@
 // example
 
-import store from 'src/features/shared/configs/store'
+import store from '@/features/shared/configs/store'
 import { filtersActions } from '../filtersSlice'
 import { FilterTypes } from '../filtersTypes'
 
