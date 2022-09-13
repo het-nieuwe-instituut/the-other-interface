@@ -1,21 +1,26 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
-import { ChakraProvider } from '@chakra-ui/react'
-import { Provider } from 'react-redux'
-import { ThemeProvider } from '@emotion/react'
-
-import store from '../features/shared/configs/store'
+import { useApollo } from '@/features/graphql/config/apollo'
 import { theme } from '@/features/shared/styles/theme/theme'
+import { ApolloProvider } from '@apollo/client'
+import { ChakraProvider } from '@chakra-ui/react'
+import { ThemeProvider } from '@emotion/react'
+import type { AppProps } from 'next/app'
+import { Provider } from 'react-redux'
+import store from '../features/shared/configs/store'
+import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }: AppProps) {
+    const apolloClient = useApollo(pageProps)
+
     return (
-        <Provider store={store}>
-            <ThemeProvider theme={theme}>
-                <ChakraProvider theme={theme}>
-                    <Component {...pageProps} />
-                </ChakraProvider>
-            </ThemeProvider>
-        </Provider>
+        <ApolloProvider client={apolloClient}>
+            <Provider store={store}>
+                <ThemeProvider theme={theme}>
+                    <ChakraProvider theme={theme}>
+                        <Component {...pageProps} />
+                    </ChakraProvider>
+                </ThemeProvider>
+            </Provider>
+        </ApolloProvider>
     )
 }
 

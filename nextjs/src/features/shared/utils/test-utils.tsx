@@ -2,8 +2,8 @@ import { render, renderHook, RenderOptions } from '@testing-library/react'
 import React, { PropsWithChildren } from 'react'
 import { Provider } from 'react-redux'
 import defaultStore from 'src/features/shared/configs/store'
-import { client } from 'src/features/graphql/config/apollo'
 import { ApolloProvider } from '@apollo/client'
+import { mockedClient } from '@/features/graphql/config/mockedApollo'
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
     store?: typeof defaultStore
@@ -15,7 +15,7 @@ export function renderWithProviders(
 ) {
     function Wrapper({ children }: PropsWithChildren): JSX.Element {
         return (
-            <ApolloProvider client={client}>
+            <ApolloProvider client={mockedClient}>
                 <Provider store={store}>{children}</Provider>
             </ApolloProvider>
         )
