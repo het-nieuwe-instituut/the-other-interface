@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_shared_images",
+  "info": {
+    "displayName": "Image module",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "caption": {
+      "type": "text"
+    },
+    "alt_text": {
+      "type": "string"
+    }
+  }
+}

@@ -1,5 +1,6 @@
-import { HomepageQuery } from 'src/generated/graphql'
 import { Pullquote } from '../components/Pullquote/Pullquote'
+import { ComponentModulesImage, HomepageQuery } from 'src/generated/graphql'
+import MediaImage from '../components/Image/Image'
 import { Text } from '../components/Text/Text'
 
 interface Props {
@@ -26,6 +27,12 @@ export function DynamicComponentRenderer(props: Props) {
                     if (component?.__typename === 'ComponentModulesPullquote') {
                         return <Pullquote key={keyExtractor(component.id, index, array)} component={component} />
                     }
+                }
+
+                if (typeName) {
+                    if (component?.__typename === 'ComponentModulesImage') {
+                        return <MediaImage key={component.id} component={component as ComponentModulesImage} />
+                    }                
                 }
 
                 return null

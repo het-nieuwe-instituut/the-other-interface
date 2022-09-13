@@ -99,6 +99,14 @@ export type BooleanFilterInput = {
   startsWith?: InputMaybe<Scalars['Boolean']>;
 };
 
+export type ComponentModulesImage = {
+  __typename?: 'ComponentModulesImage';
+  alt_text?: Maybe<Scalars['String']>;
+  caption?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  image: UploadFileEntityResponse;
+};
+
 export type ComponentModulesPullquote = {
   __typename?: 'ComponentModulesPullquote';
   id: Scalars['ID'];
@@ -171,7 +179,7 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars['Float']>;
 };
 
-export type GenericMorph = ComponentModulesPullquote | ComponentModulesTextModule | Homepage | I18NLocale | Landingpage | Story | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type GenericMorph = ComponentModulesImage | ComponentModulesPullquote | ComponentModulesTextModule | Homepage | I18NLocale | Landingpage | Story | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
 
 export type Homepage = {
   __typename?: 'Homepage';
@@ -189,7 +197,7 @@ export type HomepageLocalizationsArgs = {
   publicationState?: InputMaybe<PublicationState>;
 };
 
-export type HomepageComponentsDynamicZone = ComponentModulesPullquote | ComponentModulesTextModule | Error;
+export type HomepageComponentsDynamicZone = ComponentModulesImage | ComponentModulesPullquote | ComponentModulesTextModule | Error;
 
 export type HomepageEntity = {
   __typename?: 'HomepageEntity';
@@ -1234,6 +1242,8 @@ export type UsersPermissionsUserRelationResponseCollection = {
   data: Array<UsersPermissionsUserEntity>;
 };
 
+export type ImageModuleFragmentFragment = { __typename?: 'ComponentModulesImage', id: string, caption?: string | null, alt_text?: string | null, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } };
+
 export type PullquoteModuleFragmentFragment = { __typename?: 'ComponentModulesPullquote', id: string, text?: string | null };
 
 export type TextModuleFragmentFragment = { __typename?: 'ComponentModulesTextModule', id: string, Text: string };
@@ -1243,7 +1253,7 @@ export type HomepageQueryVariables = Exact<{
 }>;
 
 
-export type HomepageQuery = { __typename?: 'Query', homepage?: { __typename?: 'HomepageEntityResponse', data?: { __typename?: 'HomepageEntity', id?: string | null, attributes?: { __typename?: 'Homepage', Title?: string | null, components?: Array<{ __typename?: 'ComponentModulesPullquote', id: string, text?: string | null } | { __typename?: 'ComponentModulesTextModule', id: string, Text: string } | { __typename?: 'Error' } | null> | null } | null } | null } | null };
+export type HomepageQuery = { __typename?: 'Query', homepage?: { __typename?: 'HomepageEntityResponse', data?: { __typename?: 'HomepageEntity', id?: string | null, attributes?: { __typename?: 'Homepage', Title?: string | null, components?: Array<{ __typename?: 'ComponentModulesImage', id: string, caption?: string | null, alt_text?: string | null, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } } | { __typename?: 'ComponentModulesPullquote', id: string, text?: string | null } | { __typename?: 'ComponentModulesTextModule', id: string, Text: string } | { __typename?: 'Error' } | null> | null } | null } | null } | null };
 
 export type LandingpageBySlugQueryVariables = Exact<{
   locale?: InputMaybe<Scalars['I18NLocaleCode']>;
@@ -1261,6 +1271,20 @@ export type StoryBySlugQueryVariables = Exact<{
 
 export type StoryBySlugQuery = { __typename?: 'Query', stories?: { __typename?: 'StoryEntityResponseCollection', data: Array<{ __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', components?: Array<{ __typename?: 'ComponentModulesPullquote', id: string, text?: string | null } | { __typename?: 'ComponentModulesTextModule', id: string, Text: string } | { __typename?: 'Error' } | null> | null } | null }> } | null };
 
+export const ImageModuleFragmentFragmentDoc = gql`
+    fragment imageModuleFragment on ComponentModulesImage {
+  id
+  image {
+    data {
+      attributes {
+        url
+      }
+    }
+  }
+  caption
+  alt_text
+}
+    `;
 export const PullquoteModuleFragmentFragmentDoc = gql`
     fragment pullquoteModuleFragment on ComponentModulesPullquote {
   id
@@ -1287,13 +1311,17 @@ export const HomepageDocument = gql`
           ... on ComponentModulesPullquote {
             ...pullquoteModuleFragment
           }
+          ... on ComponentModulesImage {
+            ...imageModuleFragment
+          }
         }
       }
     }
   }
 }
     ${TextModuleFragmentFragmentDoc}
-${PullquoteModuleFragmentFragmentDoc}`;
+${PullquoteModuleFragmentFragmentDoc}
+${ImageModuleFragmentFragmentDoc}`;
 
 /**
  * __useHomepageQuery__

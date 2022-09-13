@@ -1,0 +1,12 @@
+fragment imageModuleFragment on ComponentModulesImage {
+    id
+    image {
+        data {
+            attributes {
+                url
+            }
+        }
+    }
+    caption
+    alt_text
+}

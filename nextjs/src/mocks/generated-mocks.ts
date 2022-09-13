@@ -1,4 +1,4 @@
-import { BooleanFilterInput, ComponentModulesPullquote, ComponentModulesTextModule, DateTimeFilterInput, Error, FileInfoInput, FloatFilterInput, Homepage, HomepageEntity, HomepageEntityResponse, HomepageInput, HomepageRelationResponseCollection, I18NLocale, I18NLocaleEntity, I18NLocaleEntityResponse, I18NLocaleEntityResponseCollection, I18NLocaleFiltersInput, IdFilterInput, IntFilterInput, JsonFilterInput, Landingpage, LandingpageEntity, LandingpageEntityResponse, LandingpageEntityResponseCollection, LandingpageFiltersInput, LandingpageInput, LandingpageRelationResponseCollection, Mutation, Pagination, PaginationArg, Query, ResponseCollectionMeta, Story, StoryEntity, StoryEntityResponse, StoryEntityResponseCollection, StoryFiltersInput, StoryInput, StoryRelationResponseCollection, StringFilterInput, UploadFile, UploadFileEntity, UploadFileEntityResponse, UploadFileEntityResponseCollection, UploadFileFiltersInput, UploadFileInput, UploadFileRelationResponseCollection, UploadFolder, UploadFolderEntity, UploadFolderEntityResponse, UploadFolderEntityResponseCollection, UploadFolderFiltersInput, UploadFolderInput, UploadFolderRelationResponseCollection, UsersPermissionsCreateRolePayload, UsersPermissionsDeleteRolePayload, UsersPermissionsLoginInput, UsersPermissionsLoginPayload, UsersPermissionsMe, UsersPermissionsMeRole, UsersPermissionsPasswordPayload, UsersPermissionsPermission, UsersPermissionsPermissionEntity, UsersPermissionsPermissionFiltersInput, UsersPermissionsPermissionRelationResponseCollection, UsersPermissionsRegisterInput, UsersPermissionsRole, UsersPermissionsRoleEntity, UsersPermissionsRoleEntityResponse, UsersPermissionsRoleEntityResponseCollection, UsersPermissionsRoleFiltersInput, UsersPermissionsRoleInput, UsersPermissionsUpdateRolePayload, UsersPermissionsUser, UsersPermissionsUserEntity, UsersPermissionsUserEntityResponse, UsersPermissionsUserEntityResponseCollection, UsersPermissionsUserFiltersInput, UsersPermissionsUserInput, UsersPermissionsUserRelationResponseCollection, PublicationState } from '../generated/graphql';
+import { BooleanFilterInput, ComponentModulesImage, ComponentModulesPullquote, ComponentModulesTextModule, DateTimeFilterInput, Error, FileInfoInput, FloatFilterInput, Homepage, HomepageEntity, HomepageEntityResponse, HomepageInput, HomepageRelationResponseCollection, I18NLocale, I18NLocaleEntity, I18NLocaleEntityResponse, I18NLocaleEntityResponseCollection, I18NLocaleFiltersInput, IdFilterInput, IntFilterInput, JsonFilterInput, Landingpage, LandingpageEntity, LandingpageEntityResponse, LandingpageEntityResponseCollection, LandingpageFiltersInput, LandingpageInput, LandingpageRelationResponseCollection, Mutation, Pagination, PaginationArg, Query, ResponseCollectionMeta, Story, StoryEntity, StoryEntityResponse, StoryEntityResponseCollection, StoryFiltersInput, StoryInput, StoryRelationResponseCollection, StringFilterInput, UploadFile, UploadFileEntity, UploadFileEntityResponse, UploadFileEntityResponseCollection, UploadFileFiltersInput, UploadFileInput, UploadFileRelationResponseCollection, UploadFolder, UploadFolderEntity, UploadFolderEntityResponse, UploadFolderEntityResponseCollection, UploadFolderFiltersInput, UploadFolderInput, UploadFolderRelationResponseCollection, UsersPermissionsCreateRolePayload, UsersPermissionsDeleteRolePayload, UsersPermissionsLoginInput, UsersPermissionsLoginPayload, UsersPermissionsMe, UsersPermissionsMeRole, UsersPermissionsPasswordPayload, UsersPermissionsPermission, UsersPermissionsPermissionEntity, UsersPermissionsPermissionFiltersInput, UsersPermissionsPermissionRelationResponseCollection, UsersPermissionsRegisterInput, UsersPermissionsRole, UsersPermissionsRoleEntity, UsersPermissionsRoleEntityResponse, UsersPermissionsRoleEntityResponseCollection, UsersPermissionsRoleFiltersInput, UsersPermissionsRoleInput, UsersPermissionsUpdateRolePayload, UsersPermissionsUser, UsersPermissionsUserEntity, UsersPermissionsUserEntityResponse, UsersPermissionsUserEntityResponseCollection, UsersPermissionsUserFiltersInput, UsersPermissionsUserInput, UsersPermissionsUserRelationResponseCollection, PublicationState } from '../generated/graphql';
 
 export const aBooleanFilterInput = (overrides?: Partial<BooleanFilterInput>): BooleanFilterInput => {
     return {
@@ -23,6 +23,15 @@ export const aBooleanFilterInput = (overrides?: Partial<BooleanFilterInput>): Bo
         null: overrides && overrides.hasOwnProperty('null') ? overrides.null! : false,
         or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [false],
         startsWith: overrides && overrides.hasOwnProperty('startsWith') ? overrides.startsWith! : true,
+    };
+};
+
+export const aComponentModulesImage = (overrides?: Partial<ComponentModulesImage>): ComponentModulesImage => {
+    return {
+        alt_text: overrides && overrides.hasOwnProperty('alt_text') ? overrides.alt_text! : 'sint',
+        caption: overrides && overrides.hasOwnProperty('caption') ? overrides.caption! : 'possimus',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '8439cee4-53c6-4340-b9ee-9b88e7cafe67',
+        image: overrides && overrides.hasOwnProperty('image') ? overrides.image! : anUploadFileEntityResponse(),
     };
 };
 
@@ -110,7 +119,7 @@ export const aFloatFilterInput = (overrides?: Partial<FloatFilterInput>): FloatF
 export const aHomepage = (overrides?: Partial<Homepage>): Homepage => {
     return {
         Title: overrides && overrides.hasOwnProperty('Title') ? overrides.Title! : 'illum',
-        components: overrides && overrides.hasOwnProperty('components') ? overrides.components! : [aComponentModulesPullquote()],
+        components: overrides && overrides.hasOwnProperty('components') ? overrides.components! : [aComponentModulesImage()],
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : 'doloremque',
         locale: overrides && overrides.hasOwnProperty('locale') ? overrides.locale! : 'aut',
         localizations: overrides && overrides.hasOwnProperty('localizations') ? overrides.localizations! : aHomepageRelationResponseCollection(),
@@ -520,7 +529,7 @@ export const anUploadFile = (overrides?: Partial<UploadFile>): UploadFile => {
         previewUrl: overrides && overrides.hasOwnProperty('previewUrl') ? overrides.previewUrl! : 'distinctio',
         provider: overrides && overrides.hasOwnProperty('provider') ? overrides.provider! : 'dolorem',
         provider_metadata: overrides && overrides.hasOwnProperty('provider_metadata') ? overrides.provider_metadata! : 'qui',
-        related: overrides && overrides.hasOwnProperty('related') ? overrides.related! : [aComponentModulesPullquote()],
+        related: overrides && overrides.hasOwnProperty('related') ? overrides.related! : [aComponentModulesImage()],
         size: overrides && overrides.hasOwnProperty('size') ? overrides.size! : 6.1,
         updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : 'ut',
         url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'vel',
