@@ -14,32 +14,26 @@ const Page = () => {
 export default Page
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
-    try {
-        const queryParams = context.query as unknown as MenupageQueryParams
-        const slug = queryParams.slug
+    const queryParams = context.query as unknown as MenupageQueryParams
+    const slug = queryParams.slug
 
-        const result = await getServerPageMenuBySlug(
-            {
-                variables: {
-                    locale: context.locale,
-                    slug: slug,
-                },
+    const result = await getServerPageMenuBySlug(
+        {
+            variables: {
+                locale: context.locale,
+                slug: slug,
             },
-            { headers: context?.req?.headers }
-        )
+        },
+        { headers: context?.req?.headers }
+    )
 
-        return addApolloState(result.props.apolloState, {
-            props: {
-                slug,
-            },
-        })
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (err: any) {
-        return {
-            redirect: {
-                destination: `/500?message=${err.message}`,
-                permanent: false,
-            },
-        }
+    if (result.props.error || !result.props.data.menupages?.data.length) {
+        return { notFound: true }
     }
+
+    return addApolloState(result.props.apolloState, {
+        props: {
+            slug,
+        },
+    })
 }
