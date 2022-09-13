@@ -1,5 +1,6 @@
+import { HttpModule } from '@nestjs/axios'
 import { Module } from '@nestjs/common'
 import { TripliService } from './tripli.service'
 
-@Module({ providers: [TripliService], exports: [TripliService] })
+@Module({ imports: [HttpModule], providers: [TripliService], exports: [TripliService] })
 export class TripliModule {}
