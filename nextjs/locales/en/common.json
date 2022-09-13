@@ -1,3 +1,4 @@
 {
+    "somethingWentWrong": "Something went wrong",
     "commonTest": "This is a common translation test, also testing counters: {{count}}"
 }

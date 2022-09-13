@@ -29,7 +29,7 @@ export const mockHomepageQuery = (resolver: ResponseResolver<GraphQLRequest<Home
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
  * mockLandingpageBySlugQuery((req, res, ctx) => {
- *   const { slug } = req.variables;
+ *   const { locale, slug } = req.variables;
  *   return res(
  *     ctx.data({ landingpages })
  *   )
@@ -1190,6 +1190,7 @@ export type HomepageQueryVariables = Exact<{ [key: string]: never; }>;
 export type HomepageQuery = { __typename?: 'Query', homepage?: { __typename?: 'HomepageEntityResponse', data?: { __typename?: 'HomepageEntity', id?: string | null, attributes?: { __typename?: 'Homepage', Title?: string | null, components?: Array<{ __typename?: 'ComponentModulesPullquote', id: string, text?: string | null } | { __typename?: 'ComponentModulesTextModule', id: string, Text: string } | { __typename?: 'Error' } | null> | null } | null } | null } | null };
 
 export type LandingpageBySlugQueryVariables = Exact<{
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
   slug: Scalars['String'];
 }>;
 
@@ -1257,8 +1258,8 @@ export type HomepageQueryHookResult = ReturnType<typeof useHomepageQuery>;
 export type HomepageLazyQueryHookResult = ReturnType<typeof useHomepageLazyQuery>;
 export type HomepageQueryResult = Apollo.QueryResult<HomepageQuery, HomepageQueryVariables>;
 export const LandingpageBySlugDocument = gql`
-    query landingpageBySlug($slug: String!) {
-  landingpages(filters: {slug: {eq: $slug}}) {
+    query landingpageBySlug($locale: I18NLocaleCode, $slug: String!) {
+  landingpages(locale: $locale, filters: {slug: {eq: $slug}}) {
     data {
       id
       attributes {
@@ -1285,6 +1286,7 @@ export const LandingpageBySlugDocument = gql`
  * @example
  * const { data, loading, error } = useLandingpageBySlugQuery({
  *   variables: {
+ *      locale: // value for 'locale'
  *      slug: // value for 'slug'
  *   },
  * });

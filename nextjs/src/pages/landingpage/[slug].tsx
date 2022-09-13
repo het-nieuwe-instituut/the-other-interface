@@ -1,21 +1,27 @@
 import { addApolloState } from '@/features/graphql/config/apollo'
 import { LandingpageContainer } from '@/features/pages/containers/LandingpageContainer/LandingpageContainer'
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
+import { GetServerSidePropsContext } from 'next'
 import { getServerPageLandingBySlug } from 'src/generated/graphql-ssr'
 
-const Page = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-    return <LandingpageContainer slug={props.slug} />
+export interface LandingPageQueryParams {
+    slug: string
+}
+
+const Page = () => {
+    return <LandingpageContainer />
 }
 
 export default Page
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
     try {
-        const slug: string = context.query?.slug as string
+        const queryParams = context.query as unknown as LandingPageQueryParams
+        const slug = queryParams.slug
 
         const result = await getServerPageLandingBySlug(
             {
                 variables: {
+                    locale: context.locale,
                     slug: slug,
                 },
             },
