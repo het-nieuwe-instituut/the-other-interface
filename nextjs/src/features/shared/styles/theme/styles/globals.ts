@@ -1,5 +1,5 @@
 export const global = () => ({
     body: {
-        background: 'none'
+        background: '#F5F5F5'
     },
 })

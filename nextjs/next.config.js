@@ -17,6 +17,9 @@ const nextConfig = {
         locales: ['nl', 'en'],
         defaultLocale: 'nl',
     },
+    images: {
+      domains: ['picsum.photos'],
+    },
 }
 
 module.exports = nextTranslate(nextConfig)
