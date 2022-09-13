@@ -1,0 +1,4 @@
+fragment pullquoteModuleFragment on ComponentModulesPullquote {
+    id
+    text
+}

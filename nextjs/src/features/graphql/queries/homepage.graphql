@@ -1,13 +1,18 @@
 #import '../fragments/components/TextModule.fragment.graphql'
+#import '../fragments/components/PullquoteModule.fragment.graphql'
 
 query homepage {
     homepage {
         data {
             id
             attributes {
+                Title
                 components {
                     ... on ComponentModulesTextModule {
                         ...textModuleFragment
+                    }
+                    ... on ComponentModulesPullquote {
+                        ...pullquoteModuleFragment
                     }
                 }
             }

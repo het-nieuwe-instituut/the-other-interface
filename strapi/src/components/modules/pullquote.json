@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_modules_pullquotes",
+  "info": {
+    "displayName": "pullquote",
+    "icon": "align-left"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "text"
+    }
+  }
+}
