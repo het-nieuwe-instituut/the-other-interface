@@ -8,6 +8,7 @@ import { AppResolver } from './app.resolver'
 import { HttpModule } from '@nestjs/axios'
 import { StoryModule } from './modules/story/story.module'
 import { StrapiModule } from './modules/strapi/strapi.module'
+import { TripliModule } from './modules/tripli/tripli.module'
 
 @Module({
     imports: [
@@ -21,6 +22,7 @@ import { StrapiModule } from './modules/strapi/strapi.module'
             playground: false,
         }),
         HttpModule,
+        TripliModule,
     ],
     controllers: [AppController],
     providers: [AppService, AppResolver],
