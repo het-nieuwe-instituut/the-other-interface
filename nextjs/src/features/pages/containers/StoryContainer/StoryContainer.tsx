@@ -1,15 +1,15 @@
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { useRouter } from 'next/router'
-import { useLandingpageBySlugQuery } from 'src/generated/graphql'
-import { StoryQueryParams } from 'src/pages/story/[slug]'
+import { useStoryBySlugQuery } from 'src/generated/graphql'
+import { LandingPageQueryParams } from 'src/pages/landingpage/[slug]'
 
-export const LandingpageContainer: React.FC = () => {
+export const StoryContainer: React.FC = () => {
     const router = useRouter()
     const { t } = useTypeSafeTranslation('common')
-    const queryParams = router.query as unknown as StoryQueryParams
+    const queryParams = router.query as unknown as LandingPageQueryParams
 
-    const { data, loading, error } = useLandingpageBySlugQuery({
+    const { data, loading, error } = useStoryBySlugQuery({
         variables: {
             locale: router.locale,
             slug: queryParams?.slug,
@@ -24,13 +24,13 @@ export const LandingpageContainer: React.FC = () => {
         return <p>{error.message}</p>
     }
 
-    if (!data?.landingpages?.data.length) {
+    if (!data?.stories?.data.length) {
         return <p>{t('somethingWentWrong')}</p>
     }
 
     return (
         <div>
-            <DynamicComponentRenderer components={data?.landingpages?.data[0]?.attributes?.components} />
+            <DynamicComponentRenderer components={data?.stories?.data[0]?.attributes?.components} />
         </div>
     )
 }
