@@ -1,5 +1,5 @@
 import { setupServer } from 'msw/node'
-import { mockHomepageQuery, mockLandingpageQuery } from 'src/generated/graphql'
+import { mockHomepageQuery, mockLandingpageBySlugQuery } from 'src/generated/graphql'
 import { aComponentModulesTextModule, aHomepage, aHomepageEntityResponse, aLandingpage } from './generated-mocks'
 
 export const mockServer = setupServer(
@@ -21,9 +21,9 @@ export const mockServer = setupServer(
             ctx.data({ __typename: 'Query', homepage: mocks })
         )
     }),
-    mockLandingpageQuery((req, res, ctx) => {
+    mockLandingpageBySlugQuery((req, res, ctx) => {
         const mocks = {
-            data: {
+            data: [{
                 id: '1',
                 attributes: {
                     ...aLandingpage({
@@ -33,10 +33,10 @@ export const mockServer = setupServer(
                         }
                     }),
                 }
-            }
+            }]
         }
     return res(
-        ctx.data({ __typename: 'Query', landingpage: mocks })
+        ctx.data({ __typename: 'Query', landingpages: mocks })
     )
 })
 )

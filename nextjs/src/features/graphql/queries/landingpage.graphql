@@ -1,7 +1,7 @@
 #import '../fragments/components/TextModule.fragment.graphql'
 
-query landingpage {
-    landingpage {
+query landingpageBySlug($slug: String!) {
+    landingpages(filters: { slug: { eq: $slug } }) {
         data {
             id
             attributes {

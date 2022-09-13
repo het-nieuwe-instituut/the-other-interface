@@ -1,8 +1,15 @@
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
-import { useLandingpageQuery } from 'src/generated/graphql'
+import { useLandingpageBySlugQuery } from 'src/generated/graphql'
 
-export const LandingpageContainer = () => {
-    const { data, loading, error } = useLandingpageQuery()
+interface Props {
+    slug: string
+}
+export const LandingpageContainer: React.FC<Props> = props => {
+    const { data, loading, error } = useLandingpageBySlugQuery({
+        variables: {
+            slug: props.slug,
+        },
+    })
 
     if (loading) {
         return <p>loading</p>
@@ -14,7 +21,7 @@ export const LandingpageContainer = () => {
 
     return (
         <div>
-            <DynamicComponentRenderer components={data?.landingpage?.data?.attributes?.components} />
+            <DynamicComponentRenderer components={data?.landingpages?.data[0].attributes?.components} />
         </div>
     )
 }

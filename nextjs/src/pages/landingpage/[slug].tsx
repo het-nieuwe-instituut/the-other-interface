@@ -1,33 +1,31 @@
-import { addApolloState, initializeApollo } from '@/features/graphql/config/apollo'
-import { HomepageContainer } from '@/features/pages/containers/HomepageContainer/HomepageContainer'
-import { GetServerSidePropsContext } from 'next'
-import { LandingpageBySlugDocument } from 'src/generated/graphql'
+import { addApolloState } from '@/features/graphql/config/apollo'
+import { LandingpageContainer } from '@/features/pages/containers/LandingpageContainer/LandingpageContainer'
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
+import { getServerPageLandingBySlug } from 'src/generated/graphql-ssr'
 
-const Page = () => {
-    return <HomepageContainer />
+const Page = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+    return <LandingpageContainer slug={props.slug} />
 }
 
 export default Page
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
-    const client = initializeApollo({ headers: context?.req?.headers })
-
     try {
-        const result = await client.query({
-            query: LandingpageBySlugDocument,
-        })
+        const slug: string = context.query?.slug as string
 
-        if (result.errors) {
-            return {
-                redirect: {
-                    destination: `/${result.networkStatus}?message=${result.errors[0].message}`,
-                    permanent: false,
+        const result = await getServerPageLandingBySlug(
+            {
+                variables: {
+                    slug: slug,
                 },
-            }
-        }
+            },
+            { headers: context?.req?.headers }
+        )
 
-        return addApolloState(client, {
-            props: {},
+        return addApolloState(result.props.apolloState, {
+            props: {
+                slug,
+            },
         })
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {

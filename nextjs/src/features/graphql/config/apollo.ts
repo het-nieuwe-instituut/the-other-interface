@@ -54,13 +54,18 @@ export const initializeApollo = ({ initialState }: IInitializeApollo = { headers
     return _apolloClient
 }
 
-export const addApolloState = (client: ApolloClient<NormalizedCacheObject>, pageProps: AppProps['pageProps']) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
+export const addApolloState = <T, A extends { props: Record<string, unknown> }>(state: T, pageProps: A) => {
     if (pageProps?.props) {
-        pageProps.props[APOLLO_STATE_PROP_NAME] = client.cache.extract()
+        pageProps.props[APOLLO_STATE_PROP_NAME] = state
     }
 
     return pageProps
 }
+
+// alias
+export const getApolloClient = initializeApollo
 
 export function useApollo(pageProps: AppProps['pageProps']) {
     const state = pageProps[APOLLO_STATE_PROP_NAME]

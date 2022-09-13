@@ -1,6 +1,6 @@
 import { mockedClient } from '@/features/graphql/config/mockedApollo'
 import { renderWithProviders } from '@/features/shared/utils/test-utils'
-import { mockLandingpageQuery } from 'src/generated/graphql'
+import { mockLandingpageBySlugQuery } from 'src/generated/graphql'
 import { mockServer } from 'src/mocks/handlers'
 import { LandingpageContainer } from './LandingpageContainer'
 
@@ -9,7 +9,7 @@ describe('LandingpageContainer', () => {
         mockedClient.clearStore()
     })
     it('should load and display hello', async () => {
-        const { findByText, getByText } = renderWithProviders(<LandingpageContainer />)
+        const { findByText, getByText } = renderWithProviders(<LandingpageContainer slug="objects" />)
 
         getByText('loading')
         await findByText('incidunt')
@@ -17,7 +17,7 @@ describe('LandingpageContainer', () => {
 
     it('should display error', async () => {
         mockServer.use(
-            mockLandingpageQuery((req, res, ctx) => {
+            mockLandingpageBySlugQuery((req, res, ctx) => {
                 return res(
                     ctx.errors([
                         {
@@ -28,7 +28,7 @@ describe('LandingpageContainer', () => {
                 )
             })
         )
-        const { findByText, getByText } = renderWithProviders(<LandingpageContainer />)
+        const { findByText, getByText } = renderWithProviders(<LandingpageContainer slug="objects" />)
 
         getByText('loading')
         await findByText('Not authenticated')

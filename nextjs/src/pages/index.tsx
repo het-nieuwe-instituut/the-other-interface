@@ -26,7 +26,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
             }
         }
 
-        return addApolloState(client, {
+        return addApolloState(client.cache.extract(), {
             props: {},
         })
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
