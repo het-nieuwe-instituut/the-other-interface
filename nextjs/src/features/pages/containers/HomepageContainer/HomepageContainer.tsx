@@ -1,8 +1,10 @@
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
+import { useRouter } from 'next/router'
 import { useHomepageQuery } from 'src/generated/graphql'
 
 export const HomepageContainer = () => {
-    const { data, loading, error } = useHomepageQuery()
+    const { locale } = useRouter()
+    const { data, loading, error } = useHomepageQuery({ variables: { locale } })
 
     if (loading) {
         return <p>loading</p>

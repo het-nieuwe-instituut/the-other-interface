@@ -1,8 +1,8 @@
 #import '../fragments/components/TextModule.fragment.graphql'
 #import '../fragments/components/PullquoteModule.fragment.graphql'
 
-query homepage {
-    homepage {
+query homepage($locale: I18NLocaleCode) {
+    homepage(locale: $locale) {
         data {
             id
             attributes {

@@ -15,6 +15,9 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     try {
         const result = await client.query({
             query: HomepageDocument,
+            variables: {
+                locale: context.locale,
+            },
         })
 
         if (result.errors) {

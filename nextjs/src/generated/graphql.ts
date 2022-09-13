@@ -13,6 +13,7 @@ const defaultOptions = {} as const;
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
  * mockHomepageQuery((req, res, ctx) => {
+ *   const { locale } = req.variables;
  *   return res(
  *     ctx.data({ homepage })
  *   )
@@ -1184,7 +1185,9 @@ export type PullquoteModuleFragmentFragment = { __typename?: 'ComponentModulesPu
 
 export type TextModuleFragmentFragment = { __typename?: 'ComponentModulesTextModule', id: string, Text: string };
 
-export type HomepageQueryVariables = Exact<{ [key: string]: never; }>;
+export type HomepageQueryVariables = Exact<{
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
+}>;
 
 
 export type HomepageQuery = { __typename?: 'Query', homepage?: { __typename?: 'HomepageEntityResponse', data?: { __typename?: 'HomepageEntity', id?: string | null, attributes?: { __typename?: 'Homepage', Title?: string | null, components?: Array<{ __typename?: 'ComponentModulesPullquote', id: string, text?: string | null } | { __typename?: 'ComponentModulesTextModule', id: string, Text: string } | { __typename?: 'Error' } | null> | null } | null } | null } | null };
@@ -1210,8 +1213,8 @@ export const TextModuleFragmentFragmentDoc = gql`
 }
     `;
 export const HomepageDocument = gql`
-    query homepage {
-  homepage {
+    query homepage($locale: I18NLocaleCode) {
+  homepage(locale: $locale) {
     data {
       id
       attributes {
@@ -1243,6 +1246,7 @@ ${PullquoteModuleFragmentFragmentDoc}`;
  * @example
  * const { data, loading, error } = useHomepageQuery({
  *   variables: {
+ *      locale: // value for 'locale'
  *   },
  * });
  */
