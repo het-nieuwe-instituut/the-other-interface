@@ -46,6 +46,23 @@ export const mockLandingpageBySlugQuery = (resolver: ResponseResolver<GraphQLReq
  * @param resolver a function that accepts a captured request and may return a mocked response.
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
+ * mockMenupageBySlugQuery((req, res, ctx) => {
+ *   const { locale, slug } = req.variables;
+ *   return res(
+ *     ctx.data({ menupages })
+ *   )
+ * })
+ */
+export const mockMenupageBySlugQuery = (resolver: ResponseResolver<GraphQLRequest<MenupageBySlugQueryVariables>, GraphQLContext<MenupageBySlugQuery>, any>) =>
+  graphql.query<MenupageBySlugQuery, MenupageBySlugQueryVariables>(
+    'menupageBySlug',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
  * mockStoryBySlugQuery((req, res, ctx) => {
  *   const { locale, slug } = req.variables;
  *   return res(
@@ -71,6 +88,7 @@ export type Scalars = {
   I18NLocaleCode: any;
   JSON: any;
   LandingpageComponentsDynamicZoneInput: any;
+  MenupageComponentsDynamicZoneInput: any;
   StoryComponentsDynamicZoneInput: any;
   Upload: any;
 };
@@ -171,7 +189,7 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars['Float']>;
 };
 
-export type GenericMorph = ComponentModulesPullquote | ComponentModulesTextModule | Homepage | I18NLocale | Landingpage | Story | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type GenericMorph = ComponentModulesPullquote | ComponentModulesTextModule | Homepage | I18NLocale | Landingpage | Menupage | Story | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
 
 export type Homepage = {
   __typename?: 'Homepage';
@@ -386,11 +404,78 @@ export type LandingpageRelationResponseCollection = {
   data: Array<LandingpageEntity>;
 };
 
+export type Menupage = {
+  __typename?: 'Menupage';
+  Title?: Maybe<Scalars['String']>;
+  components?: Maybe<Array<Maybe<MenupageComponentsDynamicZone>>>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  locale?: Maybe<Scalars['String']>;
+  localizations?: Maybe<MenupageRelationResponseCollection>;
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  slug?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+
+export type MenupageLocalizationsArgs = {
+  filters?: InputMaybe<MenupageFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type MenupageComponentsDynamicZone = ComponentModulesPullquote | ComponentModulesTextModule | Error;
+
+export type MenupageEntity = {
+  __typename?: 'MenupageEntity';
+  attributes?: Maybe<Menupage>;
+  id?: Maybe<Scalars['ID']>;
+};
+
+export type MenupageEntityResponse = {
+  __typename?: 'MenupageEntityResponse';
+  data?: Maybe<MenupageEntity>;
+};
+
+export type MenupageEntityResponseCollection = {
+  __typename?: 'MenupageEntityResponseCollection';
+  data: Array<MenupageEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type MenupageFiltersInput = {
+  Title?: InputMaybe<StringFilterInput>;
+  and?: InputMaybe<Array<InputMaybe<MenupageFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  locale?: InputMaybe<StringFilterInput>;
+  localizations?: InputMaybe<MenupageFiltersInput>;
+  not?: InputMaybe<MenupageFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<MenupageFiltersInput>>>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  slug?: InputMaybe<StringFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type MenupageInput = {
+  Title?: InputMaybe<Scalars['String']>;
+  components?: InputMaybe<Array<Scalars['MenupageComponentsDynamicZoneInput']>>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  slug?: InputMaybe<Scalars['String']>;
+};
+
+export type MenupageRelationResponseCollection = {
+  __typename?: 'MenupageRelationResponseCollection';
+  data: Array<MenupageEntity>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createHomepageLocalization?: Maybe<HomepageEntityResponse>;
   createLandingpage?: Maybe<LandingpageEntityResponse>;
   createLandingpageLocalization?: Maybe<LandingpageEntityResponse>;
+  createMenupage?: Maybe<MenupageEntityResponse>;
+  createMenupageLocalization?: Maybe<MenupageEntityResponse>;
   createStory?: Maybe<StoryEntityResponse>;
   createStoryLocalization?: Maybe<StoryEntityResponse>;
   createUploadFile?: Maybe<UploadFileEntityResponse>;
@@ -401,6 +486,7 @@ export type Mutation = {
   createUsersPermissionsUser: UsersPermissionsUserEntityResponse;
   deleteHomepage?: Maybe<HomepageEntityResponse>;
   deleteLandingpage?: Maybe<LandingpageEntityResponse>;
+  deleteMenupage?: Maybe<MenupageEntityResponse>;
   deleteStory?: Maybe<StoryEntityResponse>;
   deleteUploadFile?: Maybe<UploadFileEntityResponse>;
   deleteUploadFolder?: Maybe<UploadFolderEntityResponse>;
@@ -422,6 +508,7 @@ export type Mutation = {
   updateFileInfo: UploadFileEntityResponse;
   updateHomepage?: Maybe<HomepageEntityResponse>;
   updateLandingpage?: Maybe<LandingpageEntityResponse>;
+  updateMenupage?: Maybe<MenupageEntityResponse>;
   updateStory?: Maybe<StoryEntityResponse>;
   updateUploadFile?: Maybe<UploadFileEntityResponse>;
   updateUploadFolder?: Maybe<UploadFolderEntityResponse>;
@@ -448,6 +535,19 @@ export type MutationCreateLandingpageArgs = {
 
 export type MutationCreateLandingpageLocalizationArgs = {
   data?: InputMaybe<LandingpageInput>;
+  id?: InputMaybe<Scalars['ID']>;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
+};
+
+
+export type MutationCreateMenupageArgs = {
+  data: MenupageInput;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
+};
+
+
+export type MutationCreateMenupageLocalizationArgs = {
+  data?: InputMaybe<MenupageInput>;
   id?: InputMaybe<Scalars['ID']>;
   locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
@@ -492,6 +592,12 @@ export type MutationDeleteHomepageArgs = {
 
 
 export type MutationDeleteLandingpageArgs = {
+  id: Scalars['ID'];
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
+};
+
+
+export type MutationDeleteMenupageArgs = {
   id: Scalars['ID'];
   locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
@@ -582,6 +688,13 @@ export type MutationUpdateLandingpageArgs = {
 };
 
 
+export type MutationUpdateMenupageArgs = {
+  data: MenupageInput;
+  id: Scalars['ID'];
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
+};
+
+
 export type MutationUpdateStoryArgs = {
   data: StoryInput;
   id: Scalars['ID'];
@@ -650,6 +763,8 @@ export type Query = {
   landingpage?: Maybe<LandingpageEntityResponse>;
   landingpages?: Maybe<LandingpageEntityResponseCollection>;
   me?: Maybe<UsersPermissionsMe>;
+  menupage?: Maybe<MenupageEntityResponse>;
+  menupages?: Maybe<MenupageEntityResponseCollection>;
   stories?: Maybe<StoryEntityResponseCollection>;
   story?: Maybe<StoryEntityResponse>;
   uploadFile?: Maybe<UploadFileEntityResponse>;
@@ -695,6 +810,21 @@ export type QueryLandingpageArgs = {
 
 export type QueryLandingpagesArgs = {
   filters?: InputMaybe<LandingpageFiltersInput>;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryMenupageArgs = {
+  id?: InputMaybe<Scalars['ID']>;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
+};
+
+
+export type QueryMenupagesArgs = {
+  filters?: InputMaybe<MenupageFiltersInput>;
   locale?: InputMaybe<Scalars['I18NLocaleCode']>;
   pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<PublicationState>;
@@ -1253,6 +1383,14 @@ export type LandingpageBySlugQueryVariables = Exact<{
 
 export type LandingpageBySlugQuery = { __typename?: 'Query', landingpages?: { __typename?: 'LandingpageEntityResponseCollection', data: Array<{ __typename?: 'LandingpageEntity', id?: string | null, attributes?: { __typename?: 'Landingpage', components?: Array<{ __typename?: 'ComponentModulesTextModule', id: string, Text: string } | { __typename?: 'Error' } | null> | null } | null }> } | null };
 
+export type MenupageBySlugQueryVariables = Exact<{
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
+  slug: Scalars['String'];
+}>;
+
+
+export type MenupageBySlugQuery = { __typename?: 'Query', menupages?: { __typename?: 'MenupageEntityResponseCollection', data: Array<{ __typename?: 'MenupageEntity', id?: string | null, attributes?: { __typename?: 'Menupage', components?: Array<{ __typename?: 'ComponentModulesPullquote', id: string, text?: string | null } | { __typename?: 'ComponentModulesTextModule', id: string, Text: string } | { __typename?: 'Error' } | null> | null } | null }> } | null };
+
 export type StoryBySlugQueryVariables = Exact<{
   locale?: InputMaybe<Scalars['I18NLocaleCode']>;
   slug: Scalars['String'];
@@ -1367,6 +1505,55 @@ export function useLandingpageBySlugLazyQuery(baseOptions?: Apollo.LazyQueryHook
 export type LandingpageBySlugQueryHookResult = ReturnType<typeof useLandingpageBySlugQuery>;
 export type LandingpageBySlugLazyQueryHookResult = ReturnType<typeof useLandingpageBySlugLazyQuery>;
 export type LandingpageBySlugQueryResult = Apollo.QueryResult<LandingpageBySlugQuery, LandingpageBySlugQueryVariables>;
+export const MenupageBySlugDocument = gql`
+    query menupageBySlug($locale: I18NLocaleCode, $slug: String!) {
+  menupages(locale: $locale, filters: {slug: {eq: $slug}}) {
+    data {
+      id
+      attributes {
+        components {
+          ... on ComponentModulesTextModule {
+            ...textModuleFragment
+          }
+          ... on ComponentModulesPullquote {
+            ...pullquoteModuleFragment
+          }
+        }
+      }
+    }
+  }
+}
+    ${TextModuleFragmentFragmentDoc}
+${PullquoteModuleFragmentFragmentDoc}`;
+
+/**
+ * __useMenupageBySlugQuery__
+ *
+ * To run a query within a React component, call `useMenupageBySlugQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMenupageBySlugQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMenupageBySlugQuery({
+ *   variables: {
+ *      locale: // value for 'locale'
+ *      slug: // value for 'slug'
+ *   },
+ * });
+ */
+export function useMenupageBySlugQuery(baseOptions: Apollo.QueryHookOptions<MenupageBySlugQuery, MenupageBySlugQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MenupageBySlugQuery, MenupageBySlugQueryVariables>(MenupageBySlugDocument, options);
+      }
+export function useMenupageBySlugLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MenupageBySlugQuery, MenupageBySlugQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MenupageBySlugQuery, MenupageBySlugQueryVariables>(MenupageBySlugDocument, options);
+        }
+export type MenupageBySlugQueryHookResult = ReturnType<typeof useMenupageBySlugQuery>;
+export type MenupageBySlugLazyQueryHookResult = ReturnType<typeof useMenupageBySlugLazyQuery>;
+export type MenupageBySlugQueryResult = Apollo.QueryResult<MenupageBySlugQuery, MenupageBySlugQueryVariables>;
 export const StoryBySlugDocument = gql`
     query storyBySlug($locale: I18NLocaleCode, $slug: String!) {
   stories(locale: $locale, filters: {slug: {eq: $slug}}) {
