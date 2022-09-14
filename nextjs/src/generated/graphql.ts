@@ -1308,11 +1308,11 @@ export const HomepageDocument = gql`
           ... on ComponentModulesTextModule {
             ...textModuleFragment
           }
-          ... on ComponentModulesPullquote {
-            ...pullquoteModuleFragment
-          }
           ... on ComponentModulesImage {
             ...imageModuleFragment
+          }
+          ... on ComponentModulesPullquote {
+            ...pullquoteModuleFragment
           }
         }
       }
@@ -1320,8 +1320,8 @@ export const HomepageDocument = gql`
   }
 }
     ${TextModuleFragmentFragmentDoc}
-${PullquoteModuleFragmentFragmentDoc}
-${ImageModuleFragmentFragmentDoc}`;
+${ImageModuleFragmentFragmentDoc}
+${PullquoteModuleFragmentFragmentDoc}`;
 
 /**
  * __useHomepageQuery__

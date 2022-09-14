@@ -12,11 +12,11 @@ query homepage($locale: I18NLocaleCode) {
                     ... on ComponentModulesTextModule {
                         ...textModuleFragment
                     }
-                    ... on ComponentModulesPullquote {
-                        ...pullquoteModuleFragment
-                    }
                     ... on ComponentModulesImage {
                         ...imageModuleFragment
+                    }
+                    ... on ComponentModulesPullquote {
+                        ...pullquoteModuleFragment
                     }
                 }
             }

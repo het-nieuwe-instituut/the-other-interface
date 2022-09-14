@@ -20,6 +20,10 @@ const nextConfig = {
     images: {
       domains: ['picsum.photos'],
     },
+    i18n: {
+        locales: ['nl', 'en'],
+        defaultLocale: 'nl',
+    },
 }
 
 module.exports = nextTranslate(nextConfig)

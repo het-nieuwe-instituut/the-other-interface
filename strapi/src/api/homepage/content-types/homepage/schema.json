@@ -25,8 +25,8 @@
       "type": "dynamiczone",
       "components": [
         "modules.text-module",
-        "modules.pullquote",
-        "modules.image"
+        "modules.image",
+        "modules.pullquote"
       ]
     },
     "Title": {

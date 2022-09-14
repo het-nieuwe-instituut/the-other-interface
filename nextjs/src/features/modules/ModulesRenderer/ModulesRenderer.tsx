@@ -1,6 +1,6 @@
-import { Pullquote } from '../components/Pullquote/Pullquote'
 import { ComponentModulesImage, HomepageQuery } from 'src/generated/graphql'
 import MediaImage from '../components/Image/Image'
+import { Pullquote } from '../components/Pullquote/Pullquote'
 import { Text } from '../components/Text/Text'
 
 interface Props {
@@ -12,6 +12,7 @@ type HomePageComponents = NonNullable<
 >['components']
 
 export function DynamicComponentRenderer(props: Props) {
+    console.log(props)
     return (
         <>
             {props.components?.map((component, index, array) => {
