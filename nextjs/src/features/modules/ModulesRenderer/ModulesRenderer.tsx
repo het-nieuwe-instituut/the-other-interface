@@ -1,4 +1,5 @@
 import { HomepageQuery } from 'src/generated/graphql'
+import { Pullquote } from '../components/Pullquote/Pullquote'
 import { Text } from '../components/Text/Text'
 
 interface Props {
@@ -12,12 +13,18 @@ type HomePageComponents = NonNullable<
 export function DynamicComponentRenderer(props: Props) {
     return (
         <>
-            {props.components?.map(component => {
+            {props.components?.map((component, index, array) => {
                 const typeName = component?.__typename
 
                 if (typeName) {
                     if (component?.__typename === 'ComponentModulesTextModule') {
-                        return <Text key={component.id} component={component} />
+                        return <Text key={keyExtractor(component.id, index, array)} component={component} />
+                    }
+                }
+
+                if (typeName) {
+                    if (component?.__typename === 'ComponentModulesPullquote') {
+                        return <Pullquote key={keyExtractor(component.id, index, array)} component={component} />
                     }
                 }
 
@@ -25,4 +32,9 @@ export function DynamicComponentRenderer(props: Props) {
             }) ?? null}
         </>
     )
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function keyExtractor(id: string, index: number, array: any[]) {
+    return `${id}-${index}-${array.length}`
 }

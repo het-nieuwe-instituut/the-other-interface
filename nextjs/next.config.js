@@ -5,14 +5,18 @@ const nextTranslate = require('next-translate')
 const nextConfig = {
     webpack(config) {
         config.module.rules.push({
-          test: /\.svg$/,
-          use: ["@svgr/webpack"]
-        });
-    
-        return config;
-    },  
+            test: /\.svg$/,
+            use: ['@svgr/webpack'],
+        })
+
+        return config
+    },
     reactStrictMode: true,
     swcMinify: true,
+    i18n: {
+        locales: ['nl', 'en'],
+        defaultLocale: 'nl',
+    },
 }
 
 module.exports = nextTranslate(nextConfig)

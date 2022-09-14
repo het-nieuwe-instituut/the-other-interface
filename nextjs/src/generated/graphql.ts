@@ -13,6 +13,7 @@ const defaultOptions = {} as const;
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
  * mockHomepageQuery((req, res, ctx) => {
+ *   const { locale } = req.variables;
  *   return res(
  *     ctx.data({ homepage })
  *   )
@@ -21,6 +22,23 @@ const defaultOptions = {} as const;
 export const mockHomepageQuery = (resolver: ResponseResolver<GraphQLRequest<HomepageQueryVariables>, GraphQLContext<HomepageQuery>, any>) =>
   graphql.query<HomepageQuery, HomepageQueryVariables>(
     'homepage',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockLandingpageBySlugQuery((req, res, ctx) => {
+ *   const { locale, slug } = req.variables;
+ *   return res(
+ *     ctx.data({ landingpages })
+ *   )
+ * })
+ */
+export const mockLandingpageBySlugQuery = (resolver: ResponseResolver<GraphQLRequest<LandingpageBySlugQueryVariables>, GraphQLContext<LandingpageBySlugQuery>, any>) =>
+  graphql.query<LandingpageBySlugQuery, LandingpageBySlugQueryVariables>(
+    'landingpageBySlug',
     resolver
   )
 
@@ -35,6 +53,7 @@ export type Scalars = {
   HomepageComponentsDynamicZoneInput: any;
   I18NLocaleCode: any;
   JSON: any;
+  LandingpageComponentsDynamicZoneInput: any;
   Upload: any;
 };
 
@@ -60,6 +79,12 @@ export type BooleanFilterInput = {
   null?: InputMaybe<Scalars['Boolean']>;
   or?: InputMaybe<Array<InputMaybe<Scalars['Boolean']>>>;
   startsWith?: InputMaybe<Scalars['Boolean']>;
+};
+
+export type ComponentModulesPullquote = {
+  __typename?: 'ComponentModulesPullquote';
+  id: Scalars['ID'];
+  text?: Maybe<Scalars['String']>;
 };
 
 export type ComponentModulesTextModule = {
@@ -128,10 +153,11 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars['Float']>;
 };
 
-export type GenericMorph = ComponentModulesTextModule | Homepage | I18NLocale | Story | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type GenericMorph = ComponentModulesPullquote | ComponentModulesTextModule | Homepage | I18NLocale | Landingpage | Story | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
 
 export type Homepage = {
   __typename?: 'Homepage';
+  Title?: Maybe<Scalars['String']>;
   components?: Maybe<Array<Maybe<HomepageComponentsDynamicZone>>>;
   createdAt?: Maybe<Scalars['DateTime']>;
   locale?: Maybe<Scalars['String']>;
@@ -145,7 +171,7 @@ export type HomepageLocalizationsArgs = {
   publicationState?: InputMaybe<PublicationState>;
 };
 
-export type HomepageComponentsDynamicZone = ComponentModulesTextModule | Error;
+export type HomepageComponentsDynamicZone = ComponentModulesPullquote | ComponentModulesTextModule | Error;
 
 export type HomepageEntity = {
   __typename?: 'HomepageEntity';
@@ -159,6 +185,7 @@ export type HomepageEntityResponse = {
 };
 
 export type HomepageInput = {
+  Title?: InputMaybe<Scalars['String']>;
   components?: InputMaybe<Array<Scalars['HomepageComponentsDynamicZoneInput']>>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
 };
@@ -276,9 +303,76 @@ export type JsonFilterInput = {
   startsWith?: InputMaybe<Scalars['JSON']>;
 };
 
+export type Landingpage = {
+  __typename?: 'Landingpage';
+  Title?: Maybe<Scalars['String']>;
+  components?: Maybe<Array<Maybe<LandingpageComponentsDynamicZone>>>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  locale?: Maybe<Scalars['String']>;
+  localizations?: Maybe<LandingpageRelationResponseCollection>;
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  slug?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+
+export type LandingpageLocalizationsArgs = {
+  filters?: InputMaybe<LandingpageFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type LandingpageComponentsDynamicZone = ComponentModulesTextModule | Error;
+
+export type LandingpageEntity = {
+  __typename?: 'LandingpageEntity';
+  attributes?: Maybe<Landingpage>;
+  id?: Maybe<Scalars['ID']>;
+};
+
+export type LandingpageEntityResponse = {
+  __typename?: 'LandingpageEntityResponse';
+  data?: Maybe<LandingpageEntity>;
+};
+
+export type LandingpageEntityResponseCollection = {
+  __typename?: 'LandingpageEntityResponseCollection';
+  data: Array<LandingpageEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type LandingpageFiltersInput = {
+  Title?: InputMaybe<StringFilterInput>;
+  and?: InputMaybe<Array<InputMaybe<LandingpageFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  locale?: InputMaybe<StringFilterInput>;
+  localizations?: InputMaybe<LandingpageFiltersInput>;
+  not?: InputMaybe<LandingpageFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<LandingpageFiltersInput>>>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  slug?: InputMaybe<StringFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type LandingpageInput = {
+  Title?: InputMaybe<Scalars['String']>;
+  components?: InputMaybe<Array<Scalars['LandingpageComponentsDynamicZoneInput']>>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  slug?: InputMaybe<Scalars['String']>;
+};
+
+export type LandingpageRelationResponseCollection = {
+  __typename?: 'LandingpageRelationResponseCollection';
+  data: Array<LandingpageEntity>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createHomepageLocalization?: Maybe<HomepageEntityResponse>;
+  createLandingpage?: Maybe<LandingpageEntityResponse>;
+  createLandingpageLocalization?: Maybe<LandingpageEntityResponse>;
   createStory?: Maybe<StoryEntityResponse>;
   createUploadFile?: Maybe<UploadFileEntityResponse>;
   createUploadFolder?: Maybe<UploadFolderEntityResponse>;
@@ -287,6 +381,7 @@ export type Mutation = {
   /** Create a new user */
   createUsersPermissionsUser: UsersPermissionsUserEntityResponse;
   deleteHomepage?: Maybe<HomepageEntityResponse>;
+  deleteLandingpage?: Maybe<LandingpageEntityResponse>;
   deleteStory?: Maybe<StoryEntityResponse>;
   deleteUploadFile?: Maybe<UploadFileEntityResponse>;
   deleteUploadFolder?: Maybe<UploadFolderEntityResponse>;
@@ -307,6 +402,7 @@ export type Mutation = {
   resetPassword?: Maybe<UsersPermissionsLoginPayload>;
   updateFileInfo: UploadFileEntityResponse;
   updateHomepage?: Maybe<HomepageEntityResponse>;
+  updateLandingpage?: Maybe<LandingpageEntityResponse>;
   updateStory?: Maybe<StoryEntityResponse>;
   updateUploadFile?: Maybe<UploadFileEntityResponse>;
   updateUploadFolder?: Maybe<UploadFolderEntityResponse>;
@@ -320,6 +416,19 @@ export type Mutation = {
 
 export type MutationCreateHomepageLocalizationArgs = {
   data?: InputMaybe<HomepageInput>;
+  id?: InputMaybe<Scalars['ID']>;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
+};
+
+
+export type MutationCreateLandingpageArgs = {
+  data: LandingpageInput;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
+};
+
+
+export type MutationCreateLandingpageLocalizationArgs = {
+  data?: InputMaybe<LandingpageInput>;
   id?: InputMaybe<Scalars['ID']>;
   locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
@@ -351,6 +460,12 @@ export type MutationCreateUsersPermissionsUserArgs = {
 
 
 export type MutationDeleteHomepageArgs = {
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
+};
+
+
+export type MutationDeleteLandingpageArgs = {
+  id: Scalars['ID'];
   locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
 
@@ -432,6 +547,13 @@ export type MutationUpdateHomepageArgs = {
 };
 
 
+export type MutationUpdateLandingpageArgs = {
+  data: LandingpageInput;
+  id: Scalars['ID'];
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
+};
+
+
 export type MutationUpdateStoryArgs = {
   data: StoryInput;
   id: Scalars['ID'];
@@ -496,6 +618,8 @@ export type Query = {
   homepage?: Maybe<HomepageEntityResponse>;
   i18NLocale?: Maybe<I18NLocaleEntityResponse>;
   i18NLocales?: Maybe<I18NLocaleEntityResponseCollection>;
+  landingpage?: Maybe<LandingpageEntityResponse>;
+  landingpages?: Maybe<LandingpageEntityResponseCollection>;
   me?: Maybe<UsersPermissionsMe>;
   stories?: Maybe<StoryEntityResponseCollection>;
   story?: Maybe<StoryEntityResponse>;
@@ -529,6 +653,21 @@ export type QueryI18NLocaleArgs = {
 export type QueryI18NLocalesArgs = {
   filters?: InputMaybe<I18NLocaleFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryLandingpageArgs = {
+  id?: InputMaybe<Scalars['ID']>;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
+};
+
+
+export type QueryLandingpagesArgs = {
+  filters?: InputMaybe<LandingpageFiltersInput>;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
@@ -1042,13 +1181,31 @@ export type UsersPermissionsUserRelationResponseCollection = {
   data: Array<UsersPermissionsUserEntity>;
 };
 
+export type PullquoteModuleFragmentFragment = { __typename?: 'ComponentModulesPullquote', id: string, text?: string | null };
+
 export type TextModuleFragmentFragment = { __typename?: 'ComponentModulesTextModule', id: string, Text: string };
 
-export type HomepageQueryVariables = Exact<{ [key: string]: never; }>;
+export type HomepageQueryVariables = Exact<{
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
+}>;
 
 
-export type HomepageQuery = { __typename?: 'Query', homepage?: { __typename?: 'HomepageEntityResponse', data?: { __typename?: 'HomepageEntity', id?: string | null, attributes?: { __typename?: 'Homepage', components?: Array<{ __typename?: 'ComponentModulesTextModule', id: string, Text: string } | { __typename?: 'Error' } | null> | null } | null } | null } | null };
+export type HomepageQuery = { __typename?: 'Query', homepage?: { __typename?: 'HomepageEntityResponse', data?: { __typename?: 'HomepageEntity', id?: string | null, attributes?: { __typename?: 'Homepage', Title?: string | null, components?: Array<{ __typename?: 'ComponentModulesPullquote', id: string, text?: string | null } | { __typename?: 'ComponentModulesTextModule', id: string, Text: string } | { __typename?: 'Error' } | null> | null } | null } | null } | null };
 
+export type LandingpageBySlugQueryVariables = Exact<{
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
+  slug: Scalars['String'];
+}>;
+
+
+export type LandingpageBySlugQuery = { __typename?: 'Query', landingpages?: { __typename?: 'LandingpageEntityResponseCollection', data: Array<{ __typename?: 'LandingpageEntity', id?: string | null, attributes?: { __typename?: 'Landingpage', components?: Array<{ __typename?: 'ComponentModulesTextModule', id: string, Text: string } | { __typename?: 'Error' } | null> | null } | null }> } | null };
+
+export const PullquoteModuleFragmentFragmentDoc = gql`
+    fragment pullquoteModuleFragment on ComponentModulesPullquote {
+  id
+  text
+}
+    `;
 export const TextModuleFragmentFragmentDoc = gql`
     fragment textModuleFragment on ComponentModulesTextModule {
   id
@@ -1056,8 +1213,57 @@ export const TextModuleFragmentFragmentDoc = gql`
 }
     `;
 export const HomepageDocument = gql`
-    query homepage {
-  homepage {
+    query homepage($locale: I18NLocaleCode) {
+  homepage(locale: $locale) {
+    data {
+      id
+      attributes {
+        Title
+        components {
+          ... on ComponentModulesTextModule {
+            ...textModuleFragment
+          }
+          ... on ComponentModulesPullquote {
+            ...pullquoteModuleFragment
+          }
+        }
+      }
+    }
+  }
+}
+    ${TextModuleFragmentFragmentDoc}
+${PullquoteModuleFragmentFragmentDoc}`;
+
+/**
+ * __useHomepageQuery__
+ *
+ * To run a query within a React component, call `useHomepageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useHomepageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useHomepageQuery({
+ *   variables: {
+ *      locale: // value for 'locale'
+ *   },
+ * });
+ */
+export function useHomepageQuery(baseOptions?: Apollo.QueryHookOptions<HomepageQuery, HomepageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<HomepageQuery, HomepageQueryVariables>(HomepageDocument, options);
+      }
+export function useHomepageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<HomepageQuery, HomepageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<HomepageQuery, HomepageQueryVariables>(HomepageDocument, options);
+        }
+export type HomepageQueryHookResult = ReturnType<typeof useHomepageQuery>;
+export type HomepageLazyQueryHookResult = ReturnType<typeof useHomepageLazyQuery>;
+export type HomepageQueryResult = Apollo.QueryResult<HomepageQuery, HomepageQueryVariables>;
+export const LandingpageBySlugDocument = gql`
+    query landingpageBySlug($locale: I18NLocaleCode, $slug: String!) {
+  landingpages(locale: $locale, filters: {slug: {eq: $slug}}) {
     data {
       id
       attributes {
@@ -1073,28 +1279,30 @@ export const HomepageDocument = gql`
     ${TextModuleFragmentFragmentDoc}`;
 
 /**
- * __useHomepageQuery__
+ * __useLandingpageBySlugQuery__
  *
- * To run a query within a React component, call `useHomepageQuery` and pass it any options that fit your needs.
- * When your component renders, `useHomepageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useLandingpageBySlugQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLandingpageBySlugQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useHomepageQuery({
+ * const { data, loading, error } = useLandingpageBySlugQuery({
  *   variables: {
+ *      locale: // value for 'locale'
+ *      slug: // value for 'slug'
  *   },
  * });
  */
-export function useHomepageQuery(baseOptions?: Apollo.QueryHookOptions<HomepageQuery, HomepageQueryVariables>) {
+export function useLandingpageBySlugQuery(baseOptions: Apollo.QueryHookOptions<LandingpageBySlugQuery, LandingpageBySlugQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<HomepageQuery, HomepageQueryVariables>(HomepageDocument, options);
+        return Apollo.useQuery<LandingpageBySlugQuery, LandingpageBySlugQueryVariables>(LandingpageBySlugDocument, options);
       }
-export function useHomepageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<HomepageQuery, HomepageQueryVariables>) {
+export function useLandingpageBySlugLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<LandingpageBySlugQuery, LandingpageBySlugQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<HomepageQuery, HomepageQueryVariables>(HomepageDocument, options);
+          return Apollo.useLazyQuery<LandingpageBySlugQuery, LandingpageBySlugQueryVariables>(LandingpageBySlugDocument, options);
         }
-export type HomepageQueryHookResult = ReturnType<typeof useHomepageQuery>;
-export type HomepageLazyQueryHookResult = ReturnType<typeof useHomepageLazyQuery>;
-export type HomepageQueryResult = Apollo.QueryResult<HomepageQuery, HomepageQueryVariables>;
+export type LandingpageBySlugQueryHookResult = ReturnType<typeof useLandingpageBySlugQuery>;
+export type LandingpageBySlugLazyQueryHookResult = ReturnType<typeof useLandingpageBySlugLazyQuery>;
+export type LandingpageBySlugQueryResult = Apollo.QueryResult<LandingpageBySlugQuery, LandingpageBySlugQueryVariables>;
