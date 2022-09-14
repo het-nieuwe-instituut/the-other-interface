@@ -9,6 +9,25 @@
   "attributes": {
     "Richtext": {
       "type": "richtext"
+    },
+    "spacingBottom": {
+      "type": "enumeration",
+      "enum": [
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ],
+      "default": "md"
+    },
+    "spacingTop": {
+      "type": "enumeration",
+      "enum": [
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ]
     }
   }
 }
