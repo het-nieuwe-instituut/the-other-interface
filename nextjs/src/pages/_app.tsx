@@ -1,4 +1,5 @@
 import { useApollo } from '@/features/graphql/config/apollo'
+import Fonts from '@/features/shared/components/Fonts/Fonts'
 import { theme } from '@/features/shared/styles/theme/theme'
 import { ApolloProvider } from '@apollo/client'
 import { ChakraProvider } from '@chakra-ui/react'
@@ -16,6 +17,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <Provider store={store}>
                 <ThemeProvider theme={theme}>
                     <ChakraProvider theme={theme}>
+                        <Fonts />
                         <Component {...pageProps} />
                     </ChakraProvider>
                 </ThemeProvider>
