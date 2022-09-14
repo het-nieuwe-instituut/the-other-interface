@@ -13,6 +13,7 @@ import { TripliModule } from './modules/tripli/tripli.module'
 @Module({
     imports: [
         StoryModule,
+        TripliModule,
         StrapiModule,
         ConfigModule.forRoot({ isGlobal: true }),
         GraphQLModule.forRoot<ApolloDriverConfig>({
@@ -22,7 +23,6 @@ import { TripliModule } from './modules/tripli/tripli.module'
             playground: false,
         }),
         HttpModule,
-        TripliModule,
     ],
     controllers: [AppController],
     providers: [AppService, AppResolver],

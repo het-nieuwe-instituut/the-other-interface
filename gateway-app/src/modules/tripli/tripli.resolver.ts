@@ -1,13 +1,17 @@
-import { Args, Query, Resolver } from '@nestjs/graphql'
+import { Query, Resolver } from '@nestjs/graphql'
+import { StoryService } from '../story/story.service'
 import { TripliService } from './tripli.service'
-import { GetCountsArgs, TripliType } from './tripli.type'
+import { TripliType } from './tripli.type'
 
 @Resolver()
 export class TripliResolver {
-    public constructor(private readonly tripliService: TripliService) {}
+    public constructor(private readonly tripliService: TripliService, private readonly storyService: StoryService) {}
 
     @Query(() => [TripliType])
-    public async counts(@Args() { zoomLevel }: GetCountsArgs) {
-        return this.tripliService.getCounts(zoomLevel)
+    public async counts() {
+        const strapiData = await this.storyService.getPeopleDataForZoomLevel1()
+        const tripliData = await this.tripliService.getCounts()
+
+        return [...tripliData, strapiData]
     }
 }

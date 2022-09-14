@@ -2,6 +2,53 @@ import { HttpService } from '@nestjs/axios'
 import { Injectable } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { lastValueFrom } from 'rxjs'
+import { EntityMappingType, EntityNames } from './tripli.type'
+
+export const EntityIdentifierMapping: EntityMappingType[] = [
+    {
+        id: EntityNames.Archives,
+        metadata: {
+            endPointZoom2:
+                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-2-archives/run',
+            identifiableURI: 'https://collectiedata.hetnieuweinstituut.nl/graph/archives',
+        },
+        type: 'tripli',
+    },
+    {
+        id: EntityNames.Objects,
+        metadata: {
+            endPointZoom2:
+                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-2-objects/run',
+            identifiableURI: 'https://collectiedata.hetnieuweinstituut.nl/graph/objects',
+        },
+        type: 'tripli',
+    },
+    {
+        id: EntityNames.People,
+        metadata: {
+            endPointZoom2:
+                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-2-people/run',
+            identifiableURI: 'https://collectiedata.hetnieuweinstituut.nl/graph/people',
+        },
+        type: 'tripli',
+    },
+    {
+        id: EntityNames.Publications,
+        metadata: {
+            endPointZoom2:
+                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-2-books/run',
+            identifiableURI: 'https://collectiedata.hetnieuweinstituut.nl/graph/books',
+        },
+        type: 'tripli',
+    },
+    {
+        id: EntityNames.Stories,
+        metadata: {
+            url: 'aa',
+        },
+        type: 'strapi',
+    },
+]
 
 interface ObjectPerTypeData {
     count: string
@@ -22,19 +69,11 @@ export class TripliService {
         return res.data
     }
 
-    public async getCounts(zoomLevel = 1) {
+    public async getCounts() {
         const apiKey = this.configService.getOrThrow('TRIPLY_API_KEY')
 
-        let endpoint
-        switch (zoomLevel) {
-            case 1:
-                endpoint =
-                    'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-1-record-counts/run'
-                break
-
-            default:
-                throw new Error(`Zoom level ${zoomLevel} not implemented yet`)
-        }
+        const endpoint =
+            'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-1-record-counts/run'
 
         // TECHNICAL-DEBT: implement error handling
         // TECHNICAL-DEBT: (dynamically) verify received type
@@ -44,8 +83,9 @@ export class TripliService {
         )
         return res.data.map(r => {
             return {
-                class: r.dataset,
-                numberOfInstances: parseInt(r.count, 10),
+                name: r.dataset,
+                count: parseInt(r.count, 10),
+                id: EntityIdentifierMapping.find(e => e.metadata?.identifiableURI === r.graph)?.id,
             }
         })
     }

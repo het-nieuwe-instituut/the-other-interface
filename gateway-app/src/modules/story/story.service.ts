@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common'
-import { TripliService } from '../tripli/tripli.service'
-import { PeopleType } from './story.type'
+import { Inject, Injectable } from '@nestjs/common'
+import { Sdk } from 'src/generated/strapi-sdk'
+import { EntityNames } from '../tripli/tripli.type'
 
 export interface PeopleData {
     name: string | null
@@ -10,20 +10,14 @@ export interface PeopleData {
 }
 @Injectable()
 export class StoryService {
-    public constructor(private readonly tripliService: TripliService) {}
-    public async getPeopleData(peopleLink: string) {
-        const endpoint = `https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-acceptance/zoom-5-people/run?record=${peopleLink}`
+    public constructor(@Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk) {}
 
-        const res = await this.tripliService.getData<PeopleData[]>(endpoint)
-
-        const parsedResponse: PeopleType = {}
-        res.forEach(d => {
-            if (d.name) parsedResponse.name = d.name
-            if (d.birthDate) parsedResponse.birthDate = d.birthDate
-            if (d.deathDate) parsedResponse.deathDate = d.deathDate
-            if (d.nationalityLabel) parsedResponse.nationalityLabel = d.nationalityLabel
-        })
-
-        return parsedResponse
+    public async getPeopleDataForZoomLevel1() {
+        const allStories = await this.strapiGqlSdk.stories()
+        return {
+            name: 'Stories',
+            count: allStories.stories?.data.length || 0,
+            id: EntityNames.Stories,
+        }
     }
 }
