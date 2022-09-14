@@ -17,10 +17,10 @@
     },
     "dependencies": {
         "@apollo/client": "^3.6.9",
-        "@reduxjs/toolkit": "^1.8.5",
         "@chakra-ui/react": "^2.2.9",
         "@emotion/react": "^11.10.0",
         "@emotion/styled": "^11.10.0",
+        "@reduxjs/toolkit": "^1.8.5",
         "@svgr/webpack": "^6.3.1",
         "@types/d3": "^7.4.0",
         "@types/earcut": "^2.1.1",
@@ -39,7 +39,8 @@
         "randomstring": "^1.2.2",
         "react": "18.2.0",
         "react-dom": "18.2.0",
-        "react-redux": "^8.0.2"
+        "react-redux": "^8.0.2",
+        "react-responsive-carousel": "^3.2.23"
     },
     "devDependencies": {
         "@graphql-codegen/cli": "2.12.0",
