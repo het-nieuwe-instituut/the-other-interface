@@ -1,4 +1,4 @@
-import { Button, useTheme } from '@chakra-ui/react'
+import { useTheme } from '@chakra-ui/react'
 import { FilterTypes } from '../filtersTypes'
 import { FilterPanelButton } from './FilterPanelStyled'
 import usePresenter from './usePresenter'
@@ -10,11 +10,11 @@ const FiltersPanel = () => {
 
     return (
         <div>
-            <Button />
             <FilterPanelButton sx={{ background: theme.colors.levels.z0.linkedOpenData}} onClick={() => setFilter(FilterTypes.MAKER)}>
                 Set Filter
             </FilterPanelButton>
             <OpenMenu />
+             
         </div>
     )
 }
