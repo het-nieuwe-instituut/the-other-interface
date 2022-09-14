@@ -1,5 +1,6 @@
 #import '../fragments/components/TextModule.fragment.graphql'
 #import '../fragments/components/PullquoteModule.fragment.graphql'
+#import '../fragments/components/ImageModule.fragment.graphql'
 
 query homepage($locale: I18NLocaleCode) {
     homepage(locale: $locale) {
@@ -10,6 +11,9 @@ query homepage($locale: I18NLocaleCode) {
                 components {
                     ... on ComponentModulesTextModule {
                         ...textModuleFragment
+                    }
+                    ... on ComponentModulesImage {
+                        ...imageModuleFragment
                     }
                     ... on ComponentModulesPullquote {
                         ...pullquoteModuleFragment

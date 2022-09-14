@@ -1,4 +1,5 @@
-import { HomepageQuery } from 'src/generated/graphql'
+import { ComponentModulesImage, HomepageQuery } from 'src/generated/graphql'
+import MediaImage from '../components/Image/Image'
 import { Pullquote } from '../components/Pullquote/Pullquote'
 import { Text } from '../components/Text/Text'
 
@@ -11,6 +12,7 @@ type HomePageComponents = NonNullable<
 >['components']
 
 export function DynamicComponentRenderer(props: Props) {
+    console.log(props)
     return (
         <>
             {props.components?.map((component, index, array) => {
@@ -26,6 +28,12 @@ export function DynamicComponentRenderer(props: Props) {
                     if (component?.__typename === 'ComponentModulesPullquote') {
                         return <Pullquote key={keyExtractor(component.id, index, array)} component={component} />
                     }
+                }
+
+                if (typeName) {
+                    if (component?.__typename === 'ComponentModulesImage') {
+                        return <MediaImage key={component.id} component={component as ComponentModulesImage} />
+                    }                
                 }
 
                 return null
