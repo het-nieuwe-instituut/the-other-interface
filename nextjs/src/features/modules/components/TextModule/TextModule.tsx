@@ -2,6 +2,7 @@ import ReactMarkdown from 'react-markdown'
 import { ComponentModulesTextModule } from 'src/generated/graphql'
 import ChakraUIRenderer from 'chakra-ui-markdown-renderer'
 import { Box } from '@chakra-ui/react'
+import remarkGfm from 'remark-gfm'
 
 interface Props {
     component: ComponentModulesTextModule
@@ -13,6 +14,7 @@ export const TextModule: React.FC<Props> = props => {
     if (!content) {
         return null
     }
+
     return (
         <Box
             pl={6}
@@ -21,7 +23,9 @@ export const TextModule: React.FC<Props> = props => {
             mb={props.component.spacingBottom ?? undefined}
             mt={props.component.spacingTop ?? undefined}
         >
-            <ReactMarkdown components={ChakraUIRenderer()}>{content}</ReactMarkdown>
+            <ReactMarkdown components={ChakraUIRenderer()} remarkPlugins={[remarkGfm]}>
+                {content}
+            </ReactMarkdown>
         </Box>
     )
 }
