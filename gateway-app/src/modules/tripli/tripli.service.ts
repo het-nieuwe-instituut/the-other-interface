@@ -4,8 +4,9 @@ import { ConfigService } from '@nestjs/config'
 import { lastValueFrom } from 'rxjs'
 
 interface ObjectPerTypeData {
-    class: string
-    numberOfInstances: string
+    count: string
+    dataset: string
+    graph: string
 }
 
 @Injectable()
@@ -21,17 +22,30 @@ export class TripliService {
         return res.data
     }
 
-    public async getCounts() {
-        const endpoint =
-            'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/objects-per-type/run'
+    public async getCounts(zoomLevel = 1) {
+        const apiKey = this.configService.getOrThrow('TRIPLY_API_KEY')
+
+        let endpoint
+        switch (zoomLevel) {
+            case 1:
+                endpoint =
+                    'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-1-record-counts/run'
+                break
+
+            default:
+                throw new Error(`Zoom level ${zoomLevel} not implemented yet`)
+        }
 
         // TECHNICAL-DEBT: implement error handling
         // TECHNICAL-DEBT: (dynamically) verify received type
-        const res = await lastValueFrom(this.httpService.get<ObjectPerTypeData[]>(endpoint))
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const res = await lastValueFrom(
+            this.httpService.get<ObjectPerTypeData[]>(endpoint, { headers: { Authorization: `Bearer ${apiKey}` } })
+        )
         return res.data.map(r => {
             return {
-                class: r.class,
-                numberOfInstances: parseInt(r.numberOfInstances, 10),
+                class: r.dataset,
+                numberOfInstances: parseInt(r.count, 10),
             }
         })
     }

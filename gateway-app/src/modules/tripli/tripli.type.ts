@@ -1,4 +1,5 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql'
+import { ArgsType, Field, Int, ObjectType } from '@nestjs/graphql'
+import { IsOptional } from 'class-validator'
 
 @ObjectType()
 export class TripliType {
@@ -7,4 +8,11 @@ export class TripliType {
 
     @Field(() => Int)
     public numberOfInstances: number
+}
+
+@ArgsType()
+export class GetCountsArgs {
+    @Field(() => Int, { nullable: true })
+    @IsOptional()
+    public zoomLevel?: number
 }
