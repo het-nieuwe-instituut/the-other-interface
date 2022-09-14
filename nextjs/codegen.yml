@@ -11,6 +11,10 @@ generates:
     ./graphql.schema.json:
         plugins:
             - 'introspection'
+    src/mocks/generated-mocks.ts:
+        plugins:
+            - typescript-mock-data:
+                  typesFile: '../generated/graphql.ts'
     src/generated/graphql-ssr.tsx:
         config:
             documentMode: external

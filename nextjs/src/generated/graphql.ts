@@ -42,6 +42,23 @@ export const mockLandingpageBySlugQuery = (resolver: ResponseResolver<GraphQLReq
     resolver
   )
 
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockStoryBySlugQuery((req, res, ctx) => {
+ *   const { locale, slug } = req.variables;
+ *   return res(
+ *     ctx.data({ stories })
+ *   )
+ * })
+ */
+export const mockStoryBySlugQuery = (resolver: ResponseResolver<GraphQLRequest<StoryBySlugQueryVariables>, GraphQLContext<StoryBySlugQuery>, any>) =>
+  graphql.query<StoryBySlugQuery, StoryBySlugQueryVariables>(
+    'storyBySlug',
+    resolver
+  )
+
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -54,6 +71,7 @@ export type Scalars = {
   I18NLocaleCode: any;
   JSON: any;
   LandingpageComponentsDynamicZoneInput: any;
+  StoryComponentsDynamicZoneInput: any;
   Upload: any;
 };
 
@@ -374,6 +392,7 @@ export type Mutation = {
   createLandingpage?: Maybe<LandingpageEntityResponse>;
   createLandingpageLocalization?: Maybe<LandingpageEntityResponse>;
   createStory?: Maybe<StoryEntityResponse>;
+  createStoryLocalization?: Maybe<StoryEntityResponse>;
   createUploadFile?: Maybe<UploadFileEntityResponse>;
   createUploadFolder?: Maybe<UploadFolderEntityResponse>;
   /** Create a new role */
@@ -436,6 +455,14 @@ export type MutationCreateLandingpageLocalizationArgs = {
 
 export type MutationCreateStoryArgs = {
   data: StoryInput;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
+};
+
+
+export type MutationCreateStoryLocalizationArgs = {
+  data?: InputMaybe<StoryInput>;
+  id?: InputMaybe<Scalars['ID']>;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
 
 
@@ -472,6 +499,7 @@ export type MutationDeleteLandingpageArgs = {
 
 export type MutationDeleteStoryArgs = {
   id: Scalars['ID'];
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
 
 
@@ -557,6 +585,7 @@ export type MutationUpdateLandingpageArgs = {
 export type MutationUpdateStoryArgs = {
   data: StoryInput;
   id: Scalars['ID'];
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
 
 
@@ -635,6 +664,7 @@ export type Query = {
 
 
 export type QueryStoryPostBySlugArgs = {
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
   slug?: InputMaybe<Scalars['String']>;
 };
 
@@ -674,6 +704,7 @@ export type QueryLandingpagesArgs = {
 
 export type QueryStoriesArgs = {
   filters?: InputMaybe<StoryFiltersInput>;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
   pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
@@ -682,6 +713,7 @@ export type QueryStoriesArgs = {
 
 export type QueryStoryArgs = {
   id?: InputMaybe<Scalars['ID']>;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
 
 
@@ -739,13 +771,26 @@ export type ResponseCollectionMeta = {
 
 export type Story = {
   __typename?: 'Story';
+  components?: Maybe<Array<Maybe<StoryComponentsDynamicZone>>>;
   createdAt?: Maybe<Scalars['DateTime']>;
+  locale?: Maybe<Scalars['String']>;
+  localizations?: Maybe<StoryRelationResponseCollection>;
   publishedAt?: Maybe<Scalars['DateTime']>;
   slug?: Maybe<Scalars['String']>;
   title: Scalars['String'];
   triply_people?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
 };
+
+
+export type StoryLocalizationsArgs = {
+  filters?: InputMaybe<StoryFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type StoryComponentsDynamicZone = ComponentModulesPullquote | ComponentModulesTextModule | Error;
 
 export type StoryEntity = {
   __typename?: 'StoryEntity';
@@ -768,6 +813,8 @@ export type StoryFiltersInput = {
   and?: InputMaybe<Array<InputMaybe<StoryFiltersInput>>>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
   id?: InputMaybe<IdFilterInput>;
+  locale?: InputMaybe<StringFilterInput>;
+  localizations?: InputMaybe<StoryFiltersInput>;
   not?: InputMaybe<StoryFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<StoryFiltersInput>>>;
   publishedAt?: InputMaybe<DateTimeFilterInput>;
@@ -778,10 +825,16 @@ export type StoryFiltersInput = {
 };
 
 export type StoryInput = {
+  components?: InputMaybe<Array<Scalars['StoryComponentsDynamicZoneInput']>>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
   slug?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
   triply_people?: InputMaybe<Scalars['String']>;
+};
+
+export type StoryRelationResponseCollection = {
+  __typename?: 'StoryRelationResponseCollection';
+  data: Array<StoryEntity>;
 };
 
 export type StringFilterInput = {
@@ -1200,6 +1253,14 @@ export type LandingpageBySlugQueryVariables = Exact<{
 
 export type LandingpageBySlugQuery = { __typename?: 'Query', landingpages?: { __typename?: 'LandingpageEntityResponseCollection', data: Array<{ __typename?: 'LandingpageEntity', id?: string | null, attributes?: { __typename?: 'Landingpage', components?: Array<{ __typename?: 'ComponentModulesTextModule', id: string, Text: string } | { __typename?: 'Error' } | null> | null } | null }> } | null };
 
+export type StoryBySlugQueryVariables = Exact<{
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
+  slug: Scalars['String'];
+}>;
+
+
+export type StoryBySlugQuery = { __typename?: 'Query', stories?: { __typename?: 'StoryEntityResponseCollection', data: Array<{ __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', components?: Array<{ __typename?: 'ComponentModulesPullquote', id: string, text?: string | null } | { __typename?: 'ComponentModulesTextModule', id: string, Text: string } | { __typename?: 'Error' } | null> | null } | null }> } | null };
+
 export const PullquoteModuleFragmentFragmentDoc = gql`
     fragment pullquoteModuleFragment on ComponentModulesPullquote {
   id
@@ -1306,3 +1367,52 @@ export function useLandingpageBySlugLazyQuery(baseOptions?: Apollo.LazyQueryHook
 export type LandingpageBySlugQueryHookResult = ReturnType<typeof useLandingpageBySlugQuery>;
 export type LandingpageBySlugLazyQueryHookResult = ReturnType<typeof useLandingpageBySlugLazyQuery>;
 export type LandingpageBySlugQueryResult = Apollo.QueryResult<LandingpageBySlugQuery, LandingpageBySlugQueryVariables>;
+export const StoryBySlugDocument = gql`
+    query storyBySlug($locale: I18NLocaleCode, $slug: String!) {
+  stories(locale: $locale, filters: {slug: {eq: $slug}}) {
+    data {
+      id
+      attributes {
+        components {
+          ... on ComponentModulesTextModule {
+            ...textModuleFragment
+          }
+          ... on ComponentModulesPullquote {
+            ...pullquoteModuleFragment
+          }
+        }
+      }
+    }
+  }
+}
+    ${TextModuleFragmentFragmentDoc}
+${PullquoteModuleFragmentFragmentDoc}`;
+
+/**
+ * __useStoryBySlugQuery__
+ *
+ * To run a query within a React component, call `useStoryBySlugQuery` and pass it any options that fit your needs.
+ * When your component renders, `useStoryBySlugQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useStoryBySlugQuery({
+ *   variables: {
+ *      locale: // value for 'locale'
+ *      slug: // value for 'slug'
+ *   },
+ * });
+ */
+export function useStoryBySlugQuery(baseOptions: Apollo.QueryHookOptions<StoryBySlugQuery, StoryBySlugQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<StoryBySlugQuery, StoryBySlugQueryVariables>(StoryBySlugDocument, options);
+      }
+export function useStoryBySlugLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<StoryBySlugQuery, StoryBySlugQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<StoryBySlugQuery, StoryBySlugQueryVariables>(StoryBySlugDocument, options);
+        }
+export type StoryBySlugQueryHookResult = ReturnType<typeof useStoryBySlugQuery>;
+export type StoryBySlugLazyQueryHookResult = ReturnType<typeof useStoryBySlugLazyQuery>;
+export type StoryBySlugQueryResult = Apollo.QueryResult<StoryBySlugQuery, StoryBySlugQueryVariables>;

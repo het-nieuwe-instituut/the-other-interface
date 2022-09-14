@@ -1,0 +1,20 @@
+#import '../fragments/components/TextModule.fragment.graphql'
+#import '../fragments/components/PullquoteModule.fragment.graphql'
+
+query storyBySlug($locale: I18NLocaleCode, $slug: String!) {
+    stories(locale: $locale, filters: { slug: { eq: $slug } }) {
+        data {
+            id
+            attributes {
+                components {
+                    ... on ComponentModulesTextModule {
+                        ...textModuleFragment
+                    }
+                    ... on ComponentModulesPullquote {
+                        ...pullquoteModuleFragment
+                    }
+                }
+            }
+        }
+    }
+}
