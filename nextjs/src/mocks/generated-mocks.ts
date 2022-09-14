@@ -1,4 +1,4 @@
-import { BooleanFilterInput, ComponentModulesImage, ComponentModulesPullquote, ComponentModulesTextModule, DateTimeFilterInput, Error, FileInfoInput, FloatFilterInput, Homepage, HomepageEntity, HomepageEntityResponse, HomepageInput, HomepageRelationResponseCollection, I18NLocale, I18NLocaleEntity, I18NLocaleEntityResponse, I18NLocaleEntityResponseCollection, I18NLocaleFiltersInput, IdFilterInput, IntFilterInput, JsonFilterInput, Landingpage, LandingpageEntity, LandingpageEntityResponse, LandingpageEntityResponseCollection, LandingpageFiltersInput, LandingpageInput, LandingpageRelationResponseCollection, Mutation, Pagination, PaginationArg, Query, ResponseCollectionMeta, Story, StoryEntity, StoryEntityResponse, StoryEntityResponseCollection, StoryFiltersInput, StoryInput, StoryRelationResponseCollection, StringFilterInput, UploadFile, UploadFileEntity, UploadFileEntityResponse, UploadFileEntityResponseCollection, UploadFileFiltersInput, UploadFileInput, UploadFileRelationResponseCollection, UploadFolder, UploadFolderEntity, UploadFolderEntityResponse, UploadFolderEntityResponseCollection, UploadFolderFiltersInput, UploadFolderInput, UploadFolderRelationResponseCollection, UsersPermissionsCreateRolePayload, UsersPermissionsDeleteRolePayload, UsersPermissionsLoginInput, UsersPermissionsLoginPayload, UsersPermissionsMe, UsersPermissionsMeRole, UsersPermissionsPasswordPayload, UsersPermissionsPermission, UsersPermissionsPermissionEntity, UsersPermissionsPermissionFiltersInput, UsersPermissionsPermissionRelationResponseCollection, UsersPermissionsRegisterInput, UsersPermissionsRole, UsersPermissionsRoleEntity, UsersPermissionsRoleEntityResponse, UsersPermissionsRoleEntityResponseCollection, UsersPermissionsRoleFiltersInput, UsersPermissionsRoleInput, UsersPermissionsUpdateRolePayload, UsersPermissionsUser, UsersPermissionsUserEntity, UsersPermissionsUserEntityResponse, UsersPermissionsUserEntityResponseCollection, UsersPermissionsUserFiltersInput, UsersPermissionsUserInput, UsersPermissionsUserRelationResponseCollection, PublicationState } from '../generated/graphql';
+import { BooleanFilterInput, ComponentModulesImage, ComponentModulesPullquote, ComponentModulesTextModule, DateTimeFilterInput, Error, FileInfoInput, FloatFilterInput, Homepage, HomepageEntity, HomepageEntityResponse, HomepageInput, HomepageRelationResponseCollection, I18NLocale, I18NLocaleEntity, I18NLocaleEntityResponse, I18NLocaleEntityResponseCollection, I18NLocaleFiltersInput, IdFilterInput, IntFilterInput, JsonFilterInput, Landingpage, LandingpageEntity, LandingpageEntityResponse, LandingpageEntityResponseCollection, LandingpageFiltersInput, LandingpageInput, LandingpageRelationResponseCollection, Menupage, MenupageEntity, MenupageEntityResponse, MenupageEntityResponseCollection, MenupageFiltersInput, MenupageInput, MenupageRelationResponseCollection, Mutation, Pagination, PaginationArg, Query, ResponseCollectionMeta, Story, StoryEntity, StoryEntityResponse, StoryEntityResponseCollection, StoryFiltersInput, StoryInput, StoryRelationResponseCollection, StringFilterInput, UploadFile, UploadFileEntity, UploadFileEntityResponse, UploadFileEntityResponseCollection, UploadFileFiltersInput, UploadFileInput, UploadFileRelationResponseCollection, UploadFolder, UploadFolderEntity, UploadFolderEntityResponse, UploadFolderEntityResponseCollection, UploadFolderFiltersInput, UploadFolderInput, UploadFolderRelationResponseCollection, UsersPermissionsCreateRolePayload, UsersPermissionsDeleteRolePayload, UsersPermissionsLoginInput, UsersPermissionsLoginPayload, UsersPermissionsMe, UsersPermissionsMeRole, UsersPermissionsPasswordPayload, UsersPermissionsPermission, UsersPermissionsPermissionEntity, UsersPermissionsPermissionFiltersInput, UsersPermissionsPermissionRelationResponseCollection, UsersPermissionsRegisterInput, UsersPermissionsRole, UsersPermissionsRoleEntity, UsersPermissionsRoleEntityResponse, UsersPermissionsRoleEntityResponseCollection, UsersPermissionsRoleFiltersInput, UsersPermissionsRoleInput, UsersPermissionsUpdateRolePayload, UsersPermissionsUser, UsersPermissionsUserEntity, UsersPermissionsUserEntityResponse, UsersPermissionsUserEntityResponseCollection, UsersPermissionsUserFiltersInput, UsersPermissionsUserInput, UsersPermissionsUserRelationResponseCollection, PublicationState } from '../generated/graphql';
 
 export const aBooleanFilterInput = (overrides?: Partial<BooleanFilterInput>): BooleanFilterInput => {
     return {
@@ -339,11 +339,77 @@ export const aLandingpageRelationResponseCollection = (overrides?: Partial<Landi
     };
 };
 
+export const aMenupage = (overrides?: Partial<Menupage>): Menupage => {
+    return {
+        Title: overrides && overrides.hasOwnProperty('Title') ? overrides.Title! : 'aperiam',
+        components: overrides && overrides.hasOwnProperty('components') ? overrides.components! : [aComponentModulesPullquote()],
+        createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : 'doloremque',
+        locale: overrides && overrides.hasOwnProperty('locale') ? overrides.locale! : 'id',
+        localizations: overrides && overrides.hasOwnProperty('localizations') ? overrides.localizations! : aMenupageRelationResponseCollection(),
+        publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : 'ipsam',
+        slug: overrides && overrides.hasOwnProperty('slug') ? overrides.slug! : 'sit',
+        updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : 'omnis',
+    };
+};
+
+export const aMenupageEntity = (overrides?: Partial<MenupageEntity>): MenupageEntity => {
+    return {
+        attributes: overrides && overrides.hasOwnProperty('attributes') ? overrides.attributes! : aMenupage(),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'd088facc-8511-4616-899f-36a1a4068495',
+    };
+};
+
+export const aMenupageEntityResponse = (overrides?: Partial<MenupageEntityResponse>): MenupageEntityResponse => {
+    return {
+        data: overrides && overrides.hasOwnProperty('data') ? overrides.data! : aMenupageEntity(),
+    };
+};
+
+export const aMenupageEntityResponseCollection = (overrides?: Partial<MenupageEntityResponseCollection>): MenupageEntityResponseCollection => {
+    return {
+        data: overrides && overrides.hasOwnProperty('data') ? overrides.data! : [aMenupageEntity()],
+        meta: overrides && overrides.hasOwnProperty('meta') ? overrides.meta! : aResponseCollectionMeta(),
+    };
+};
+
+export const aMenupageFiltersInput = (overrides?: Partial<MenupageFiltersInput>): MenupageFiltersInput => {
+    return {
+        Title: overrides && overrides.hasOwnProperty('Title') ? overrides.Title! : aStringFilterInput(),
+        and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [aMenupageFiltersInput()],
+        createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : aDateTimeFilterInput(),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : anIdFilterInput(),
+        locale: overrides && overrides.hasOwnProperty('locale') ? overrides.locale! : aStringFilterInput(),
+        localizations: overrides && overrides.hasOwnProperty('localizations') ? overrides.localizations! : aMenupageFiltersInput(),
+        not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : aMenupageFiltersInput(),
+        or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [aMenupageFiltersInput()],
+        publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : aDateTimeFilterInput(),
+        slug: overrides && overrides.hasOwnProperty('slug') ? overrides.slug! : aStringFilterInput(),
+        updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : aDateTimeFilterInput(),
+    };
+};
+
+export const aMenupageInput = (overrides?: Partial<MenupageInput>): MenupageInput => {
+    return {
+        Title: overrides && overrides.hasOwnProperty('Title') ? overrides.Title! : 'in',
+        components: overrides && overrides.hasOwnProperty('components') ? overrides.components! : ['eius'],
+        publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : 'quo',
+        slug: overrides && overrides.hasOwnProperty('slug') ? overrides.slug! : 'rem',
+    };
+};
+
+export const aMenupageRelationResponseCollection = (overrides?: Partial<MenupageRelationResponseCollection>): MenupageRelationResponseCollection => {
+    return {
+        data: overrides && overrides.hasOwnProperty('data') ? overrides.data! : [aMenupageEntity()],
+    };
+};
+
 export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     return {
         createHomepageLocalization: overrides && overrides.hasOwnProperty('createHomepageLocalization') ? overrides.createHomepageLocalization! : aHomepageEntityResponse(),
         createLandingpage: overrides && overrides.hasOwnProperty('createLandingpage') ? overrides.createLandingpage! : aLandingpageEntityResponse(),
         createLandingpageLocalization: overrides && overrides.hasOwnProperty('createLandingpageLocalization') ? overrides.createLandingpageLocalization! : aLandingpageEntityResponse(),
+        createMenupage: overrides && overrides.hasOwnProperty('createMenupage') ? overrides.createMenupage! : aMenupageEntityResponse(),
+        createMenupageLocalization: overrides && overrides.hasOwnProperty('createMenupageLocalization') ? overrides.createMenupageLocalization! : aMenupageEntityResponse(),
         createStory: overrides && overrides.hasOwnProperty('createStory') ? overrides.createStory! : aStoryEntityResponse(),
         createStoryLocalization: overrides && overrides.hasOwnProperty('createStoryLocalization') ? overrides.createStoryLocalization! : aStoryEntityResponse(),
         createUploadFile: overrides && overrides.hasOwnProperty('createUploadFile') ? overrides.createUploadFile! : anUploadFileEntityResponse(),
@@ -352,6 +418,7 @@ export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
         createUsersPermissionsUser: overrides && overrides.hasOwnProperty('createUsersPermissionsUser') ? overrides.createUsersPermissionsUser! : aUsersPermissionsUserEntityResponse(),
         deleteHomepage: overrides && overrides.hasOwnProperty('deleteHomepage') ? overrides.deleteHomepage! : aHomepageEntityResponse(),
         deleteLandingpage: overrides && overrides.hasOwnProperty('deleteLandingpage') ? overrides.deleteLandingpage! : aLandingpageEntityResponse(),
+        deleteMenupage: overrides && overrides.hasOwnProperty('deleteMenupage') ? overrides.deleteMenupage! : aMenupageEntityResponse(),
         deleteStory: overrides && overrides.hasOwnProperty('deleteStory') ? overrides.deleteStory! : aStoryEntityResponse(),
         deleteUploadFile: overrides && overrides.hasOwnProperty('deleteUploadFile') ? overrides.deleteUploadFile! : anUploadFileEntityResponse(),
         deleteUploadFolder: overrides && overrides.hasOwnProperty('deleteUploadFolder') ? overrides.deleteUploadFolder! : anUploadFolderEntityResponse(),
@@ -367,6 +434,7 @@ export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
         updateFileInfo: overrides && overrides.hasOwnProperty('updateFileInfo') ? overrides.updateFileInfo! : anUploadFileEntityResponse(),
         updateHomepage: overrides && overrides.hasOwnProperty('updateHomepage') ? overrides.updateHomepage! : aHomepageEntityResponse(),
         updateLandingpage: overrides && overrides.hasOwnProperty('updateLandingpage') ? overrides.updateLandingpage! : aLandingpageEntityResponse(),
+        updateMenupage: overrides && overrides.hasOwnProperty('updateMenupage') ? overrides.updateMenupage! : aMenupageEntityResponse(),
         updateStory: overrides && overrides.hasOwnProperty('updateStory') ? overrides.updateStory! : aStoryEntityResponse(),
         updateUploadFile: overrides && overrides.hasOwnProperty('updateUploadFile') ? overrides.updateUploadFile! : anUploadFileEntityResponse(),
         updateUploadFolder: overrides && overrides.hasOwnProperty('updateUploadFolder') ? overrides.updateUploadFolder! : anUploadFolderEntityResponse(),
@@ -403,6 +471,8 @@ export const aQuery = (overrides?: Partial<Query>): Query => {
         landingpage: overrides && overrides.hasOwnProperty('landingpage') ? overrides.landingpage! : aLandingpageEntityResponse(),
         landingpages: overrides && overrides.hasOwnProperty('landingpages') ? overrides.landingpages! : aLandingpageEntityResponseCollection(),
         me: overrides && overrides.hasOwnProperty('me') ? overrides.me! : aUsersPermissionsMe(),
+        menupage: overrides && overrides.hasOwnProperty('menupage') ? overrides.menupage! : aMenupageEntityResponse(),
+        menupages: overrides && overrides.hasOwnProperty('menupages') ? overrides.menupages! : aMenupageEntityResponseCollection(),
         stories: overrides && overrides.hasOwnProperty('stories') ? overrides.stories! : aStoryEntityResponseCollection(),
         story: overrides && overrides.hasOwnProperty('story') ? overrides.story! : aStoryEntityResponse(),
         uploadFile: overrides && overrides.hasOwnProperty('uploadFile') ? overrides.uploadFile! : anUploadFileEntityResponse(),

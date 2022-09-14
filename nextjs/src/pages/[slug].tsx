@@ -1,23 +1,23 @@
 import { addApolloState } from '@/features/graphql/config/apollo'
-import { StoryContainer } from '@/features/pages/containers/StoryContainer/StoryContainer'
+import { MenupageContainer } from '@/features/pages/containers/MenupageContainer/MenupageContainer'
 import { GetServerSidePropsContext } from 'next'
-import { getServerPageStoryBySlug } from 'src/generated/graphql-ssr'
+import { getServerPageMenuBySlug } from 'src/generated/graphql-ssr'
 
-export interface StoryQueryParams {
+export interface MenupageQueryParams {
     slug: string
 }
 
 const Page = () => {
-    return <StoryContainer />
+    return <MenupageContainer />
 }
 
 export default Page
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
-    const queryParams = context.query as unknown as StoryQueryParams
+    const queryParams = context.query as unknown as MenupageQueryParams
     const slug = queryParams.slug
 
-    const result = await getServerPageStoryBySlug(
+    const result = await getServerPageMenuBySlug(
         {
             variables: {
                 locale: context.locale,
@@ -27,7 +27,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
         { headers: context?.req?.headers }
     )
 
-    if (result.props.error || !result.props.data.stories?.data?.length) {
+    if (result.props.error || !result.props.data.menupages?.data.length) {
         return { notFound: true }
     }
 
