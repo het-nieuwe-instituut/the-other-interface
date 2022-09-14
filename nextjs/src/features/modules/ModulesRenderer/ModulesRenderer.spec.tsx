@@ -8,6 +8,6 @@ describe('ModulesRenderer', () => {
     it('should render all testComponents', async () => {
         const { getByText } = renderWithProviders(<DynamicComponentRenderer components={testComponents} />)
 
-        await getByText(testComponents[0].Text)
+        await getByText(testComponents[0].Richtext ?? '')
     })
 })

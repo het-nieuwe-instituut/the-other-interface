@@ -44,7 +44,7 @@ export const aComponentModulesPullquote = (overrides?: Partial<ComponentModulesP
 
 export const aComponentModulesTextModule = (overrides?: Partial<ComponentModulesTextModule>): ComponentModulesTextModule => {
     return {
-        Text: overrides && overrides.hasOwnProperty('Text') ? overrides.Text! : 'incidunt',
+        Richtext: overrides && overrides.hasOwnProperty('Richtext') ? overrides.Richtext! : 'quod',
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '67c6aef3-e334-4d10-978d-30c1a76d59a3',
     };
 };

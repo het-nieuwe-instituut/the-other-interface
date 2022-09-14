@@ -1,7 +1,7 @@
 import { ComponentModulesImage, HomepageQuery } from 'src/generated/graphql'
 import MediaImage from '../components/Image/Image'
 import { Pullquote } from '../components/Pullquote/Pullquote'
-import { Text } from '../components/Text/Text'
+import { TextModule } from '../components/TextModule/TextModule'
 
 interface Props {
     components: HomePageComponents
@@ -20,7 +20,7 @@ export function DynamicComponentRenderer(props: Props) {
 
                 if (typeName) {
                     if (component?.__typename === 'ComponentModulesTextModule') {
-                        return <Text key={keyExtractor(component.id, index, array)} component={component} />
+                        return <TextModule key={keyExtractor(component.id, index, array)} component={component} />
                     }
                 }
 
@@ -33,7 +33,7 @@ export function DynamicComponentRenderer(props: Props) {
                 if (typeName) {
                     if (component?.__typename === 'ComponentModulesImage') {
                         return <MediaImage key={component.id} component={component as ComponentModulesImage} />
-                    }                
+                    }
                 }
 
                 return null

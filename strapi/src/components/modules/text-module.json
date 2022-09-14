@@ -2,13 +2,13 @@
   "collectionName": "components_modules_text_modules",
   "info": {
     "displayName": "Text module",
-    "icon": "align-left"
+    "icon": "align-left",
+    "description": ""
   },
   "options": {},
   "attributes": {
-    "Text": {
-      "type": "text",
-      "required": true
+    "Richtext": {
+      "type": "richtext"
     }
   }
 }
