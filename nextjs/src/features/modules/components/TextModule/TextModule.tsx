@@ -1,8 +1,8 @@
-import ReactMarkdown from 'react-markdown'
-import { ComponentModulesTextModule } from 'src/generated/graphql'
-import ChakraUIRenderer from 'chakra-ui-markdown-renderer'
 import { Box } from '@chakra-ui/react'
+import ChakraUIRenderer from 'chakra-ui-markdown-renderer'
+import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
+import { ComponentModulesTextModule } from 'src/generated/graphql'
 
 interface Props {
     component: ComponentModulesTextModule
