@@ -2,7 +2,6 @@ import React from 'react'
 import { Box, Img, Text, useBreakpointValue, useTheme } from '@chakra-ui/react'
 import { ComponentModulesImageCarousel } from 'src/generated/graphql'
 import { Carousel } from 'react-responsive-carousel'
-import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { imageBasePath } from '../../modulesConstants'
 import { ArrowNextContainer, ArrowPrevContainer } from './ImageCorouselStyled'
 import ArrowLeftIcon from '@/icons/arrows/arrow-left-long.svg'
@@ -38,8 +37,6 @@ export const ImageCarousel = (props: Props) => {
             </ArrowNextContainer>
         )
     }
-
-    console.log(centerSlidePercentage)
 
     return (
         <Box>
