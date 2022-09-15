@@ -2,13 +2,14 @@
   "collectionName": "components_modules_title_modules",
   "info": {
     "displayName": "Title module",
-    "icon": "ad"
+    "icon": "ad",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "Title": {
       "type": "string",
-      "unique": true
+      "unique": false
     }
   }
 }
