@@ -7,8 +7,10 @@ interface Props {
 
 export const Title: React.FC<Props> = props => {
     return (
-        <Box width="100%" padding={4}>
-            <ChakraText fontSize="4xl">{props.component.Title}</ChakraText>
+        <Box width="100%" padding={6}>
+            <ChakraText fontSize="6xl" fontWeight={'bold'}>
+                {props.component.Title}
+            </ChakraText>
         </Box>
     )
 }
