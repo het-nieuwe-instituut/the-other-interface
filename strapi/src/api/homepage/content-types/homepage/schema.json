@@ -26,7 +26,8 @@
       "components": [
         "modules.text-module",
         "modules.image",
-        "modules.pullquote"
+        "modules.pullquote",
+        "modules.title-module"
       ]
     },
     "Title": {
