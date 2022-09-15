@@ -1,18 +1,22 @@
-import Breadcrumb from '@/icons/arrows/breadcrumb.svg'
+import { Box } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 
-export const ArrowPrev = styled(Breadcrumb)`
-    right: 46px;
+export const ArrowPrevContainer = styled(Box)`
+    right: 55px;
     bottom: 71px; 
     position: absolute; 
     outline: none; 
     border: none; 
     z-index: 2;
-    transform: rotate(0.5turn);
     cursor: pointer;
+    width:44px;
+    background: linear-gradient(270deg, #FBFBFB 84.57%, rgba(251, 251, 251, 0) 100%);
+    display:flex;
+    justify-content: center;
+    align-items: center;
 `
 
-export const ArrowNext = styled(Breadcrumb)`
+export const ArrowNextContainer = styled(Box)`
     right: 24px;
     bottom: 71px; 
     position: absolute; 
@@ -20,4 +24,9 @@ export const ArrowNext = styled(Breadcrumb)`
     border: none; 
     z-index: 2;
     cursor: pointer;
+    width:44px;
+    background: linear-gradient(270deg, #FBFBFB 84.57%, rgba(251, 251, 251, 0) 100%);
+    display:flex;
+    justify-content: center;
+    align-items: center;
 `

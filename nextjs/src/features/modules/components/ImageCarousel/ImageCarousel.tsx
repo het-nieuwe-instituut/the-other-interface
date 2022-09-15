@@ -4,7 +4,9 @@ import { ComponentModulesImageCarousel } from 'src/generated/graphql'
 import { Carousel } from 'react-responsive-carousel'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { imageBasePath } from '../../modulesConstants'
-import { ArrowNext, ArrowPrev } from './ImageCorouselStyled'
+import { ArrowNextContainer, ArrowPrevContainer } from './ImageCorouselStyled'
+import ArrowLeftIcon from '@/icons/arrows/arrow-left-long.svg'
+import ArrowRightIcon from '@/icons/arrows/arrow-right-long.svg'
 
 interface Props {
     component: ComponentModulesImageCarousel
@@ -22,13 +24,18 @@ export const ImageCarousel = (props: Props) => {
 
     const renderArrowPrev = (onClickPrev: () => void) => {
         return (
-            <ArrowPrev onClick={onClickPrev} />
+            <ArrowPrevContainer>
+                <ArrowLeftIcon onClick={onClickPrev} />
+            </ArrowPrevContainer>
+            
         )
     }
 
     const renderArrowNext = (onClickNext: () => void) => {
         return (
-            <ArrowNext onClick={onClickNext}/>
+            <ArrowNextContainer>
+                <ArrowRightIcon onClick={onClickNext}/>
+            </ArrowNextContainer>
         )
     }
 
