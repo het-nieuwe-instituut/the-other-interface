@@ -1,4 +1,6 @@
 #import '../fragments/components/TextModule.fragment.graphql'
+#import '../fragments/components/ImageModule.fragment.graphql'
+#import '../fragments/components/ImageCarousel.fragment.graphql'
 
 query landingpageBySlug($locale: I18NLocaleCode, $slug: String!) {
     landingpages(locale: $locale, filters: { slug: { eq: $slug } }) {
@@ -8,6 +10,12 @@ query landingpageBySlug($locale: I18NLocaleCode, $slug: String!) {
                 components {
                     ... on ComponentModulesTextModule {
                         ...textModuleFragment
+                    }
+                    ... on ComponentModulesImage {
+                        ...imageModuleFragment
+                    }
+                    ... on ComponentModulesImageCarousel {
+                        ...imageCarouselModuleFragment
                     }
                 }
             }
