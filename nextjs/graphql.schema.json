@@ -2948,6 +2948,16 @@
         "possibleTypes": [
           {
             "kind": "OBJECT",
+            "name": "ComponentModulesImage",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "ComponentModulesImageCarousel",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
             "name": "ComponentModulesTextModule",
             "ofType": null
           },
@@ -3503,6 +3513,16 @@
         "interfaces": null,
         "enumValues": null,
         "possibleTypes": [
+          {
+            "kind": "OBJECT",
+            "name": "ComponentModulesImage",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "ComponentModulesImageCarousel",
+            "ofType": null
+          },
           {
             "kind": "OBJECT",
             "name": "ComponentModulesPullquote",
@@ -6625,6 +6645,16 @@
         "interfaces": null,
         "enumValues": null,
         "possibleTypes": [
+          {
+            "kind": "OBJECT",
+            "name": "ComponentModulesImage",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "ComponentModulesImageCarousel",
+            "ofType": null
+          },
           {
             "kind": "OBJECT",
             "name": "ComponentModulesPullquote",

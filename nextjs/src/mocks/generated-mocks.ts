@@ -286,7 +286,7 @@ export const aJsonFilterInput = (overrides?: Partial<JsonFilterInput>): JsonFilt
 export const aLandingpage = (overrides?: Partial<Landingpage>): Landingpage => {
     return {
         Title: overrides && overrides.hasOwnProperty('Title') ? overrides.Title! : 'culpa',
-        components: overrides && overrides.hasOwnProperty('components') ? overrides.components! : [aComponentModulesTextModule()],
+        components: overrides && overrides.hasOwnProperty('components') ? overrides.components! : [aComponentModulesImage()],
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : 'quos',
         locale: overrides && overrides.hasOwnProperty('locale') ? overrides.locale! : 'consequuntur',
         localizations: overrides && overrides.hasOwnProperty('localizations') ? overrides.localizations! : aLandingpageRelationResponseCollection(),
@@ -350,7 +350,7 @@ export const aLandingpageRelationResponseCollection = (overrides?: Partial<Landi
 export const aMenupage = (overrides?: Partial<Menupage>): Menupage => {
     return {
         Title: overrides && overrides.hasOwnProperty('Title') ? overrides.Title! : 'aperiam',
-        components: overrides && overrides.hasOwnProperty('components') ? overrides.components! : [aComponentModulesPullquote()],
+        components: overrides && overrides.hasOwnProperty('components') ? overrides.components! : [aComponentModulesImage()],
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : 'doloremque',
         locale: overrides && overrides.hasOwnProperty('locale') ? overrides.locale! : 'id',
         localizations: overrides && overrides.hasOwnProperty('localizations') ? overrides.localizations! : aMenupageRelationResponseCollection(),
@@ -502,7 +502,7 @@ export const aResponseCollectionMeta = (overrides?: Partial<ResponseCollectionMe
 
 export const aStory = (overrides?: Partial<Story>): Story => {
     return {
-        components: overrides && overrides.hasOwnProperty('components') ? overrides.components! : [aComponentModulesPullquote()],
+        components: overrides && overrides.hasOwnProperty('components') ? overrides.components! : [aComponentModulesImage()],
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : 'impedit',
         locale: overrides && overrides.hasOwnProperty('locale') ? overrides.locale! : 'laudantium',
         localizations: overrides && overrides.hasOwnProperty('localizations') ? overrides.localizations! : aStoryRelationResponseCollection(),
