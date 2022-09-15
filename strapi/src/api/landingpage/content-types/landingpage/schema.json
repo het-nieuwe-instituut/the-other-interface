@@ -27,7 +27,8 @@
     "components": {
       "type": "dynamiczone",
       "components": [
-        "modules.text-module"
+        "modules.text-module",
+        "modules.title-module"
       ],
       "pluginOptions": {
         "i18n": {
