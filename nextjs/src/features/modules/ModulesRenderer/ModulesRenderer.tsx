@@ -1,5 +1,6 @@
-import { ComponentModulesImage, HomepageQuery } from 'src/generated/graphql'
+import { ComponentModulesImage, ComponentModulesImageCarousel, HomepageQuery } from 'src/generated/graphql'
 import MediaImage from '../components/Image/Image'
+import { ImageCarousel } from '../components/ImageCarousel/ImageCarousel'
 import { Pullquote } from '../components/Pullquote/Pullquote'
 import { TextModule } from '../components/TextModule/TextModule'
 
@@ -33,6 +34,12 @@ export function DynamicComponentRenderer(props: Props) {
                 if (typeName) {
                     if (component?.__typename === 'ComponentModulesImage') {
                         return <MediaImage key={component.id} component={component as ComponentModulesImage} />
+                    }
+                }
+
+                if (typeName) {
+                    if (component?.__typename === 'ComponentModulesImageCarousel') {
+                        return <ImageCarousel key={component.id} component={component as ComponentModulesImageCarousel} />
                     }
                 }
 
