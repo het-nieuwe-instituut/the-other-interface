@@ -1,0 +1,12 @@
+fragment imageCarouselModuleFragment on ComponentModulesImageCarousel {
+    id
+    images {
+        data {
+            attributes {
+                url,
+                caption
+            }
+        }
+    }
+    description
+}

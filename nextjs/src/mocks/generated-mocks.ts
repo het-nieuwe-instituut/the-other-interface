@@ -1,4 +1,4 @@
-import { BooleanFilterInput, ComponentModulesImage, ComponentModulesPullquote, ComponentModulesTextModule, ComponentModulesTitleModule, DateTimeFilterInput, Error, FileInfoInput, FloatFilterInput, Homepage, HomepageEntity, HomepageEntityResponse, HomepageInput, HomepageRelationResponseCollection, I18NLocale, I18NLocaleEntity, I18NLocaleEntityResponse, I18NLocaleEntityResponseCollection, I18NLocaleFiltersInput, IdFilterInput, IntFilterInput, JsonFilterInput, Landingpage, LandingpageEntity, LandingpageEntityResponse, LandingpageEntityResponseCollection, LandingpageFiltersInput, LandingpageInput, LandingpageRelationResponseCollection, Menupage, MenupageEntity, MenupageEntityResponse, MenupageEntityResponseCollection, MenupageFiltersInput, MenupageInput, MenupageRelationResponseCollection, Mutation, Pagination, PaginationArg, Query, ResponseCollectionMeta, Story, StoryEntity, StoryEntityResponse, StoryEntityResponseCollection, StoryFiltersInput, StoryInput, StoryRelationResponseCollection, StringFilterInput, UploadFile, UploadFileEntity, UploadFileEntityResponse, UploadFileEntityResponseCollection, UploadFileFiltersInput, UploadFileInput, UploadFileRelationResponseCollection, UploadFolder, UploadFolderEntity, UploadFolderEntityResponse, UploadFolderEntityResponseCollection, UploadFolderFiltersInput, UploadFolderInput, UploadFolderRelationResponseCollection, UsersPermissionsCreateRolePayload, UsersPermissionsDeleteRolePayload, UsersPermissionsLoginInput, UsersPermissionsLoginPayload, UsersPermissionsMe, UsersPermissionsMeRole, UsersPermissionsPasswordPayload, UsersPermissionsPermission, UsersPermissionsPermissionEntity, UsersPermissionsPermissionFiltersInput, UsersPermissionsPermissionRelationResponseCollection, UsersPermissionsRegisterInput, UsersPermissionsRole, UsersPermissionsRoleEntity, UsersPermissionsRoleEntityResponse, UsersPermissionsRoleEntityResponseCollection, UsersPermissionsRoleFiltersInput, UsersPermissionsRoleInput, UsersPermissionsUpdateRolePayload, UsersPermissionsUser, UsersPermissionsUserEntity, UsersPermissionsUserEntityResponse, UsersPermissionsUserEntityResponseCollection, UsersPermissionsUserFiltersInput, UsersPermissionsUserInput, UsersPermissionsUserRelationResponseCollection, PublicationState } from '../generated/graphql';
+import { BooleanFilterInput, ComponentModulesImage, ComponentModulesImageCarousel, ComponentModulesPullquote, ComponentModulesTextModule, ComponentModulesTitleModule, DateTimeFilterInput, Error, FileInfoInput, FloatFilterInput, Homepage, HomepageEntity, HomepageEntityResponse, HomepageInput, HomepageRelationResponseCollection, I18NLocale, I18NLocaleEntity, I18NLocaleEntityResponse, I18NLocaleEntityResponseCollection, I18NLocaleFiltersInput, IdFilterInput, IntFilterInput, JsonFilterInput, Landingpage, LandingpageEntity, LandingpageEntityResponse, LandingpageEntityResponseCollection, LandingpageFiltersInput, LandingpageInput, LandingpageRelationResponseCollection, Menupage, MenupageEntity, MenupageEntityResponse, MenupageEntityResponseCollection, MenupageFiltersInput, MenupageInput, MenupageRelationResponseCollection, Mutation, Pagination, PaginationArg, Query, ResponseCollectionMeta, Story, StoryEntity, StoryEntityResponse, StoryEntityResponseCollection, StoryFiltersInput, StoryInput, StoryRelationResponseCollection, StringFilterInput, UploadFile, UploadFileEntity, UploadFileEntityResponse, UploadFileEntityResponseCollection, UploadFileFiltersInput, UploadFileInput, UploadFileRelationResponseCollection, UploadFolder, UploadFolderEntity, UploadFolderEntityResponse, UploadFolderEntityResponseCollection, UploadFolderFiltersInput, UploadFolderInput, UploadFolderRelationResponseCollection, UsersPermissionsCreateRolePayload, UsersPermissionsDeleteRolePayload, UsersPermissionsLoginInput, UsersPermissionsLoginPayload, UsersPermissionsMe, UsersPermissionsMeRole, UsersPermissionsPasswordPayload, UsersPermissionsPermission, UsersPermissionsPermissionEntity, UsersPermissionsPermissionFiltersInput, UsersPermissionsPermissionRelationResponseCollection, UsersPermissionsRegisterInput, UsersPermissionsRole, UsersPermissionsRoleEntity, UsersPermissionsRoleEntityResponse, UsersPermissionsRoleEntityResponseCollection, UsersPermissionsRoleFiltersInput, UsersPermissionsRoleInput, UsersPermissionsUpdateRolePayload, UsersPermissionsUser, UsersPermissionsUserEntity, UsersPermissionsUserEntityResponse, UsersPermissionsUserEntityResponseCollection, UsersPermissionsUserFiltersInput, UsersPermissionsUserInput, UsersPermissionsUserRelationResponseCollection, EnumComponentmodulestextmoduleSpacingbottom, EnumComponentmodulestextmoduleSpacingtop, PublicationState } from '../generated/graphql';
 
 export const aBooleanFilterInput = (overrides?: Partial<BooleanFilterInput>): BooleanFilterInput => {
     return {
@@ -35,6 +35,14 @@ export const aComponentModulesImage = (overrides?: Partial<ComponentModulesImage
     };
 };
 
+export const aComponentModulesImageCarousel = (overrides?: Partial<ComponentModulesImageCarousel>): ComponentModulesImageCarousel => {
+    return {
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'nostrum',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'caa291cc-f344-4c8e-b7ad-3f6d9c22152d',
+        images: overrides && overrides.hasOwnProperty('images') ? overrides.images! : anUploadFileRelationResponseCollection(),
+    };
+};
+
 export const aComponentModulesPullquote = (overrides?: Partial<ComponentModulesPullquote>): ComponentModulesPullquote => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '473a3cf9-ea98-4cd3-80c7-7052f59eceb2',
@@ -44,8 +52,10 @@ export const aComponentModulesPullquote = (overrides?: Partial<ComponentModulesP
 
 export const aComponentModulesTextModule = (overrides?: Partial<ComponentModulesTextModule>): ComponentModulesTextModule => {
     return {
-        Text: overrides && overrides.hasOwnProperty('Text') ? overrides.Text! : 'incidunt',
+        Richtext: overrides && overrides.hasOwnProperty('Richtext') ? overrides.Richtext! : 'quod',
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '67c6aef3-e334-4d10-978d-30c1a76d59a3',
+        spacingBottom: overrides && overrides.hasOwnProperty('spacingBottom') ? overrides.spacingBottom! : EnumComponentmodulestextmoduleSpacingbottom.Lg,
+        spacingTop: overrides && overrides.hasOwnProperty('spacingTop') ? overrides.spacingTop! : EnumComponentmodulestextmoduleSpacingtop.Lg,
     };
 };
 
@@ -285,7 +295,7 @@ export const aJsonFilterInput = (overrides?: Partial<JsonFilterInput>): JsonFilt
 export const aLandingpage = (overrides?: Partial<Landingpage>): Landingpage => {
     return {
         Title: overrides && overrides.hasOwnProperty('Title') ? overrides.Title! : 'culpa',
-        components: overrides && overrides.hasOwnProperty('components') ? overrides.components! : [aComponentModulesTextModule()],
+        components: overrides && overrides.hasOwnProperty('components') ? overrides.components! : [aComponentModulesImage()],
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : 'quos',
         locale: overrides && overrides.hasOwnProperty('locale') ? overrides.locale! : 'consequuntur',
         localizations: overrides && overrides.hasOwnProperty('localizations') ? overrides.localizations! : aLandingpageRelationResponseCollection(),
@@ -349,7 +359,7 @@ export const aLandingpageRelationResponseCollection = (overrides?: Partial<Landi
 export const aMenupage = (overrides?: Partial<Menupage>): Menupage => {
     return {
         Title: overrides && overrides.hasOwnProperty('Title') ? overrides.Title! : 'aperiam',
-        components: overrides && overrides.hasOwnProperty('components') ? overrides.components! : [aComponentModulesPullquote()],
+        components: overrides && overrides.hasOwnProperty('components') ? overrides.components! : [aComponentModulesImage()],
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : 'doloremque',
         locale: overrides && overrides.hasOwnProperty('locale') ? overrides.locale! : 'id',
         localizations: overrides && overrides.hasOwnProperty('localizations') ? overrides.localizations! : aMenupageRelationResponseCollection(),
@@ -501,7 +511,7 @@ export const aResponseCollectionMeta = (overrides?: Partial<ResponseCollectionMe
 
 export const aStory = (overrides?: Partial<Story>): Story => {
     return {
-        components: overrides && overrides.hasOwnProperty('components') ? overrides.components! : [aComponentModulesPullquote()],
+        components: overrides && overrides.hasOwnProperty('components') ? overrides.components! : [aComponentModulesImage()],
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : 'impedit',
         locale: overrides && overrides.hasOwnProperty('locale') ? overrides.locale! : 'laudantium',
         localizations: overrides && overrides.hasOwnProperty('localizations') ? overrides.localizations! : aStoryRelationResponseCollection(),
