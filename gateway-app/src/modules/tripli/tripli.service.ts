@@ -56,6 +56,10 @@ interface ObjectPerTypeData {
     graph: string
 }
 
+interface ObjectFilterData {
+    filter: string
+}
+
 @Injectable()
 export class TripliService {
     public constructor(private configService: ConfigService, private readonly httpService: HttpService) {}
@@ -88,5 +92,33 @@ export class TripliService {
                 id: EntityIdentifierMapping.find(e => e.metadata?.identifiableURI === r.graph)?.id,
             }
         })
+    }
+
+    public async getFilters(entity: EntityNames) {
+        const mapping = EntityIdentifierMapping.find(e => e.id === entity)
+        if (!mapping) {
+            throw new Error(`Entity '${entity}' not found`)
+        }
+
+        if (mapping.type === 'tripli') {
+            if (!mapping.metadata.endPointZoom2) {
+                throw new Error('Zoom endpoint not found')
+            }
+            const apiKey = this.configService.getOrThrow('TRIPLY_API_KEY')
+
+            const res = await lastValueFrom(
+                this.httpService.get<ObjectFilterData[]>(mapping.metadata.endPointZoom2, {
+                    headers: { Authorization: `Bearer ${apiKey}` },
+                })
+            )
+
+            if (res) {
+                return res.data.map(f => {
+                    return { filter: f.filter } // needed for build, also room for expansion
+                })
+            }
+        }
+
+        return []
     }
 }

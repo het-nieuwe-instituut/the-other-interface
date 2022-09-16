@@ -23,7 +23,7 @@ export interface EntityMappingMetaData {
 }
 
 @ObjectType()
-export class TripliType {
+export class TripliCountsType {
     @Field(() => String)
     public name: string
 
@@ -39,4 +39,10 @@ export class GetCountsArgs {
     @Field(() => Int, { nullable: true })
     @IsOptional()
     public zoomLevel?: number
+}
+
+@ObjectType()
+export class TripliFiltersType {
+    @Field(() => String, { nullable: false })
+    public filter: string
 }
