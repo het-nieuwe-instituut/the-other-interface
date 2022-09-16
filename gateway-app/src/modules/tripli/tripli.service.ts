@@ -2,7 +2,7 @@ import { HttpService } from '@nestjs/axios'
 import { Injectable } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { lastValueFrom } from 'rxjs'
-import { EntityIdentifierMapping, EntityNames } from './tripli.type'
+import { EntityIdentifierMapping, EntityNames, PaginationArgs } from './tripli.type'
 
 interface ObjectPerTypeData {
     count: string
@@ -12,6 +12,13 @@ interface ObjectPerTypeData {
 
 interface ObjectFilterData {
     filter: string
+}
+
+interface ObjectFilterOptionsData {
+    relatedName: string
+    relatedNameLabel: string
+    count: string
+    total: string
 }
 
 @Injectable()
@@ -68,7 +75,45 @@ export class TripliService {
 
             if (res) {
                 return res.data.map(f => {
-                    return { filter: f.filter } // needed for build, also room for expansion
+                    const filterMapping = mapping.filters?.find(m => m.name === f.filter)
+                    if (!filterMapping) return
+                    return { filter: filterMapping.name, id: filterMapping.id }
+                })
+            }
+        }
+
+        return []
+    }
+
+    public async getFilterOptions(entity: EntityNames, filter: string, paginationArgs: PaginationArgs) {
+        const mapping = EntityIdentifierMapping.find(e => e.id === entity)
+        if (!mapping) {
+            throw new Error(`Entity '${entity}' not found`)
+        }
+
+        if (mapping.type === 'tripli') {
+            const filterMapping = mapping.filters?.find(f => f.id === filter)
+            if (!filterMapping) {
+                throw new Error(`Filter ${filter} not found`)
+            }
+
+            const apiKey = this.configService.getOrThrow('TRIPLY_API_KEY')
+
+            const res = await lastValueFrom(
+                this.httpService.get<ObjectFilterOptionsData[]>(filterMapping.endpoint, {
+                    headers: { Authorization: `Bearer ${apiKey}` },
+                })
+            )
+
+            if (res.data) {
+                const data = res.data.slice(paginationArgs.skip, paginationArgs.skip + paginationArgs.take)
+                return data.map(d => {
+                    return {
+                        relatedName: d.relatedName,
+                        relatedNameLabel: d.relatedNameLabel,
+                        count: d.count ? parseInt(d.count, 10) : null,
+                        total: d.total ? parseInt(d.total, 10) : null,
+                    }
                 })
             }
         }
