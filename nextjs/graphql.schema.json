@@ -563,6 +563,45 @@
         "possibleTypes": null
       },
       {
+        "kind": "OBJECT",
+        "name": "ComponentModulesTitleModule",
+        "description": null,
+        "fields": [
+          {
+            "name": "Title",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "SCALAR",
         "name": "DateTime",
         "description": "A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.",
@@ -1335,6 +1374,11 @@
           },
           {
             "kind": "OBJECT",
+            "name": "ComponentModulesTitleModule",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
             "name": "Homepage",
             "ofType": null
           },
@@ -1524,6 +1568,11 @@
           {
             "kind": "OBJECT",
             "name": "ComponentModulesTextModule",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "ComponentModulesTitleModule",
             "ofType": null
           },
           {
@@ -3049,6 +3098,11 @@
           {
             "kind": "OBJECT",
             "name": "ComponentModulesTextModule",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "ComponentModulesTitleModule",
             "ofType": null
           },
           {
@@ -6753,6 +6807,11 @@
           {
             "kind": "OBJECT",
             "name": "ComponentModulesTextModule",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "ComponentModulesTitleModule",
             "ofType": null
           },
           {
