@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tables",
+  "info": {
+    "singularName": "table",
+    "pluralName": "tables",
+    "displayName": "Table",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Tablehead": {
+      "displayName": "TableHead",
+      "type": "component",
+      "repeatable": false,
+      "component": "core.table-head"
+    },
+    "TableBody": {
+      "type": "component",
+      "repeatable": true,
+      "component": "core.table-body"
+    },
+    "name": {
+      "type": "string"
+    }
+  }
+}

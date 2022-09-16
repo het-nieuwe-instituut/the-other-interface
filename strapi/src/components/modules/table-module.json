@@ -1,16 +1,18 @@
 {
-  "collectionName": "components_modules_text_modules",
+  "collectionName": "components_modules_table_modules",
   "info": {
-    "displayName": "Text module",
-    "icon": "align-left",
+    "displayName": "Table Module",
+    "icon": "table",
     "description": ""
   },
   "options": {},
   "attributes": {
-    "Richtext": {
-      "type": "richtext"
+    "table": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::table.table"
     },
-    "textModuleSpacingBottom": {
+    "tableModuleSpacingTop": {
       "type": "enumeration",
       "enum": [
         "sm",
@@ -20,14 +22,15 @@
       ],
       "default": "md"
     },
-    "textModuleSpacingTop": {
+    "tableModuleSpacingBottom": {
       "type": "enumeration",
       "enum": [
         "sm",
         "md",
         "lg",
         "xl"
-      ]
+      ],
+      "default": "md"
     }
   }
 }

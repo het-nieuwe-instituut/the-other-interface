@@ -1,6 +1,6 @@
 fragment textModuleFragment on ComponentModulesTextModule {
     id
     Richtext
-    spacingBottom
-    spacingTop
+    textModuleSpacingBottom
+    textModuleSpacingTop
 }

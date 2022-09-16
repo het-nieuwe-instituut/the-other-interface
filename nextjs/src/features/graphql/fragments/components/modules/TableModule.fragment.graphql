@@ -1,0 +1,27 @@
+fragment tableModuleFragment on ComponentModulesTableModule {
+    id
+    table {
+        data {
+            id
+            attributes {
+                name
+                Tablehead {
+                    id
+                    TableHeadItem {
+                        id
+                        label
+                    }
+                }
+                TableBody {
+                    id
+                    TableBodyItem {
+                        id
+                        value
+                    }
+                }
+            }
+        }
+    }
+    tableModuleSpacingTop
+    tableModuleSpacingBottom
+}

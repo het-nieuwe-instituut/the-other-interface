@@ -20,8 +20,8 @@ export const TextModule: React.FC<Props> = props => {
             pl={6}
             pr={6}
             maxWidth={'820px'}
-            mb={props.component.spacingBottom ?? undefined}
-            mt={props.component.spacingTop ?? undefined}
+            mb={props.component.textModuleSpacingBottom ?? undefined}
+            mt={props.component.textModuleSpacingTop ?? undefined}
         >
             <ReactMarkdown components={ChakraUIRenderer()} remarkPlugins={[remarkGfm]}>
                 {content}
