@@ -5,6 +5,7 @@ module.exports = {
         '\\.(scss|sass|css)$': 'identity-obj-proxy',
         '^@/features/(.*)$': '<rootDir>/src/features/$1',
         '^@/icons/(.*)$': '<rootDir>/src/features/shared/assets/$1',
+        'react-markdown': '<rootDir>/node_modules/react-markdown/react-markdown.min.js',
     },
     moduleDirectories: ['node_modules', '<rootDir>'],
     testEnvironment: 'jsdom',
