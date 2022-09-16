@@ -1,4 +1,4 @@
-import { ComponentModulesImage, ComponentModulesTitleModule, HomepageQuery } from 'src/generated/graphql'
+import { ComponentModulesImage, HomepageQuery } from 'src/generated/graphql'
 import MediaImage from '../components/Image/Image'
 import { Pullquote } from '../components/Pullquote/Pullquote'
 import { Text } from '../components/Text/Text'
@@ -39,7 +39,7 @@ export function DynamicComponentRenderer(props: Props) {
 
                 if (typeName) {
                     if (component?.__typename === 'ComponentModulesTitleModule') {
-                        return <Title key={component.id} component={component as ComponentModulesTitleModule} />
+                        return <Title key={component.id} component={component} />
                     }
                 }
 

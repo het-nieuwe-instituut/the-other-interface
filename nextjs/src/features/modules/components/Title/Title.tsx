@@ -1,5 +1,5 @@
 import { ComponentModulesTitleModule } from 'src/generated/graphql'
-import { Box, Text as ChakraText } from '@chakra-ui/react'
+import { Box, Heading } from '@chakra-ui/react'
 
 interface Props {
     component: ComponentModulesTitleModule
@@ -8,9 +8,9 @@ interface Props {
 export const Title: React.FC<Props> = props => {
     return (
         <Box width="100%" padding={6}>
-            <ChakraText fontSize="6xl" fontWeight={'bold'}>
+            <Heading as="h1" fontSize={'62px'}>
                 {props.component.Title}
-            </ChakraText>
+            </Heading>
         </Box>
     )
 }
