@@ -698,6 +698,7 @@ export const aTable = (overrides?: Partial<Table>): Table => {
         TableBody: overrides && overrides.hasOwnProperty('TableBody') ? overrides.TableBody! : [aComponentCoreTableBody()],
         Tablehead: overrides && overrides.hasOwnProperty('Tablehead') ? overrides.Tablehead! : aComponentCoreTableHead(),
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : 'vel',
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'aperiam',
         name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'sequi',
         publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : 'nemo',
         updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : 'amet',
@@ -730,6 +731,7 @@ export const aTableFiltersInput = (overrides?: Partial<TableFiltersInput>): Tabl
         Tablehead: overrides && overrides.hasOwnProperty('Tablehead') ? overrides.Tablehead! : aComponentCoreTableHeadFiltersInput(),
         and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [aTableFiltersInput()],
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : aDateTimeFilterInput(),
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : aStringFilterInput(),
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : anIdFilterInput(),
         name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : aStringFilterInput(),
         not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : aTableFiltersInput(),
@@ -743,6 +745,7 @@ export const aTableInput = (overrides?: Partial<TableInput>): TableInput => {
     return {
         TableBody: overrides && overrides.hasOwnProperty('TableBody') ? overrides.TableBody! : [aComponentCoreTableBodyInput()],
         Tablehead: overrides && overrides.hasOwnProperty('Tablehead') ? overrides.Tablehead! : aComponentCoreTableHeadInput(),
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'reiciendis',
         name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'optio',
         publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : 'est',
     };

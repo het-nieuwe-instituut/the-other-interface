@@ -1162,6 +1162,7 @@ export type Table = {
   TableBody?: Maybe<Array<Maybe<ComponentCoreTableBody>>>;
   Tablehead?: Maybe<ComponentCoreTableHead>;
   createdAt?: Maybe<Scalars['DateTime']>;
+  description?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   publishedAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
@@ -1196,6 +1197,7 @@ export type TableFiltersInput = {
   Tablehead?: InputMaybe<ComponentCoreTableHeadFiltersInput>;
   and?: InputMaybe<Array<InputMaybe<TableFiltersInput>>>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
+  description?: InputMaybe<StringFilterInput>;
   id?: InputMaybe<IdFilterInput>;
   name?: InputMaybe<StringFilterInput>;
   not?: InputMaybe<TableFiltersInput>;
@@ -1207,6 +1209,7 @@ export type TableFiltersInput = {
 export type TableInput = {
   TableBody?: InputMaybe<Array<InputMaybe<ComponentCoreTableBodyInput>>>;
   Tablehead?: InputMaybe<ComponentCoreTableHeadInput>;
+  description?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
 };
@@ -1588,7 +1591,7 @@ export type ImageModuleFragmentFragment = { __typename?: 'ComponentModulesImage'
 
 export type PullquoteModuleFragmentFragment = { __typename?: 'ComponentModulesPullquote', id: string, text?: string | null };
 
-export type TableModuleFragmentFragment = { __typename?: 'ComponentModulesTableModule', id: string, tableModuleSpacingTop?: Enum_Componentmodulestablemodule_Tablemodulespacingtop | null, tableModuleSpacingBottom?: Enum_Componentmodulestablemodule_Tablemodulespacingbottom | null, table?: { __typename?: 'TableEntityResponse', data?: { __typename?: 'TableEntity', id?: string | null, attributes?: { __typename?: 'Table', name?: string | null, Tablehead?: { __typename?: 'ComponentCoreTableHead', id: string, TableHeadItem?: Array<{ __typename?: 'ComponentCoreTableHeadItem', id: string, label?: string | null } | null> | null } | null, TableBody?: Array<{ __typename?: 'ComponentCoreTableBody', id: string, TableBodyItem?: Array<{ __typename?: 'ComponentCoreTableBodyItem', id: string, value?: string | null } | null> | null } | null> | null } | null } | null } | null };
+export type TableModuleFragmentFragment = { __typename?: 'ComponentModulesTableModule', id: string, tableModuleSpacingTop?: Enum_Componentmodulestablemodule_Tablemodulespacingtop | null, tableModuleSpacingBottom?: Enum_Componentmodulestablemodule_Tablemodulespacingbottom | null, table?: { __typename?: 'TableEntityResponse', data?: { __typename?: 'TableEntity', id?: string | null, attributes?: { __typename?: 'Table', name?: string | null, description?: string | null, Tablehead?: { __typename?: 'ComponentCoreTableHead', id: string, TableHeadItem?: Array<{ __typename?: 'ComponentCoreTableHeadItem', id: string, label?: string | null } | null> | null } | null, TableBody?: Array<{ __typename?: 'ComponentCoreTableBody', id: string, TableBodyItem?: Array<{ __typename?: 'ComponentCoreTableBodyItem', id: string, value?: string | null } | null> | null } | null> | null } | null } | null } | null };
 
 export type TextModuleFragmentFragment = { __typename?: 'ComponentModulesTextModule', id: string, Richtext?: string | null, textModuleSpacingBottom?: Enum_Componentmodulestextmodule_Textmodulespacingbottom | null, textModuleSpacingTop?: Enum_Componentmodulestextmodule_Textmodulespacingtop | null };
 
@@ -1597,7 +1600,7 @@ export type HomepageQueryVariables = Exact<{
 }>;
 
 
-export type HomepageQuery = { __typename?: 'Query', homepage?: { __typename?: 'HomepageEntityResponse', data?: { __typename?: 'HomepageEntity', id?: string | null, attributes?: { __typename?: 'Homepage', Title?: string | null, components?: Array<{ __typename?: 'ComponentModulesImage', id: string, caption?: string | null, alt_text?: string | null, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } } | { __typename?: 'ComponentModulesPullquote', id: string, text?: string | null } | { __typename?: 'ComponentModulesTableModule', id: string, tableModuleSpacingTop?: Enum_Componentmodulestablemodule_Tablemodulespacingtop | null, tableModuleSpacingBottom?: Enum_Componentmodulestablemodule_Tablemodulespacingbottom | null, table?: { __typename?: 'TableEntityResponse', data?: { __typename?: 'TableEntity', id?: string | null, attributes?: { __typename?: 'Table', name?: string | null, Tablehead?: { __typename?: 'ComponentCoreTableHead', id: string, TableHeadItem?: Array<{ __typename?: 'ComponentCoreTableHeadItem', id: string, label?: string | null } | null> | null } | null, TableBody?: Array<{ __typename?: 'ComponentCoreTableBody', id: string, TableBodyItem?: Array<{ __typename?: 'ComponentCoreTableBodyItem', id: string, value?: string | null } | null> | null } | null> | null } | null } | null } | null } | { __typename?: 'ComponentModulesTextModule', id: string, Richtext?: string | null, textModuleSpacingBottom?: Enum_Componentmodulestextmodule_Textmodulespacingbottom | null, textModuleSpacingTop?: Enum_Componentmodulestextmodule_Textmodulespacingtop | null } | { __typename?: 'Error' } | null> | null } | null } | null } | null };
+export type HomepageQuery = { __typename?: 'Query', homepage?: { __typename?: 'HomepageEntityResponse', data?: { __typename?: 'HomepageEntity', id?: string | null, attributes?: { __typename?: 'Homepage', Title?: string | null, components?: Array<{ __typename?: 'ComponentModulesImage', id: string, caption?: string | null, alt_text?: string | null, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } } | { __typename?: 'ComponentModulesPullquote', id: string, text?: string | null } | { __typename?: 'ComponentModulesTableModule', id: string, tableModuleSpacingTop?: Enum_Componentmodulestablemodule_Tablemodulespacingtop | null, tableModuleSpacingBottom?: Enum_Componentmodulestablemodule_Tablemodulespacingbottom | null, table?: { __typename?: 'TableEntityResponse', data?: { __typename?: 'TableEntity', id?: string | null, attributes?: { __typename?: 'Table', name?: string | null, description?: string | null, Tablehead?: { __typename?: 'ComponentCoreTableHead', id: string, TableHeadItem?: Array<{ __typename?: 'ComponentCoreTableHeadItem', id: string, label?: string | null } | null> | null } | null, TableBody?: Array<{ __typename?: 'ComponentCoreTableBody', id: string, TableBodyItem?: Array<{ __typename?: 'ComponentCoreTableBodyItem', id: string, value?: string | null } | null> | null } | null> | null } | null } | null } | null } | { __typename?: 'ComponentModulesTextModule', id: string, Richtext?: string | null, textModuleSpacingBottom?: Enum_Componentmodulestextmodule_Textmodulespacingbottom | null, textModuleSpacingTop?: Enum_Componentmodulestextmodule_Textmodulespacingtop | null } | { __typename?: 'Error' } | null> | null } | null } | null } | null };
 
 export type LandingpageBySlugQueryVariables = Exact<{
   locale?: InputMaybe<Scalars['I18NLocaleCode']>;
@@ -1651,6 +1654,7 @@ export const TableModuleFragmentFragmentDoc = gql`
       id
       attributes {
         name
+        description
         Tablehead {
           id
           TableHeadItem {

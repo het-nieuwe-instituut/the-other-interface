@@ -5,6 +5,7 @@ fragment tableModuleFragment on ComponentModulesTableModule {
             id
             attributes {
                 name
+                description
                 Tablehead {
                     id
                     TableHeadItem {

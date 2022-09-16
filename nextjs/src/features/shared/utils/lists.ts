@@ -6,3 +6,7 @@ export function keyExtractor<Item extends { id: string }, Index extends number, 
 ) {
     return `${item?.id}-${index}-${array?.length}`
 }
+
+export function chunk<A extends Array<A[0]>>(arr: A, size: number) {
+    return Array.from({ length: Math.ceil(arr.length / size) }, (v, i) => arr.slice(i * size, i * size + size))
+}

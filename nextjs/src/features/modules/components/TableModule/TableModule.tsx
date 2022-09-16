@@ -1,4 +1,4 @@
-import { keyExtractor } from '@/features/shared/utils/lists'
+import { chunk, keyExtractor } from '@/features/shared/utils/lists'
 import { Box, Table, TableContainer, Tbody, Td, Th, Thead, Tr, useBreakpoint, Text, Heading } from '@chakra-ui/react'
 import { ComponentModulesTableModule } from 'src/generated/graphql'
 
@@ -26,6 +26,9 @@ export const TableModule: React.FC<Props> = props => {
                 <Heading textStyle={'h3'} pb={'md'}>
                     {props.component.table?.data?.attributes?.name}
                 </Heading>
+                {props.component.table?.data?.attributes?.description && (
+                    <Text pb={'md'}>{props.component.table?.data?.attributes?.description}</Text>
+                )}
                 <TableModuleMobile component={props.component} />
             </Box>
         )
@@ -42,13 +45,12 @@ export const TableModule: React.FC<Props> = props => {
             <Heading as={'h3'} textStyle={'h3'} pb={'md'}>
                 {props.component.table?.data?.attributes?.name}
             </Heading>
+            {props.component.table?.data?.attributes?.description && (
+                <Text pb={'md'}>{props.component.table?.data?.attributes?.description}</Text>
+            )}
             <TableModuleDesktop component={props.component} />
         </Box>
     )
-}
-
-function chunk<A extends Array<A[0]>>(arr: A, size: number) {
-    return Array.from({ length: Math.ceil(arr.length / size) }, (v, i) => arr.slice(i * size, i * size + size))
 }
 
 export const TableModuleMobile: React.FC<Props> = props => {
