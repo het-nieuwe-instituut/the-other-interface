@@ -2,53 +2,7 @@ import { HttpService } from '@nestjs/axios'
 import { Injectable } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { lastValueFrom } from 'rxjs'
-import { EntityMappingType, EntityNames } from './tripli.type'
-
-export const EntityIdentifierMapping: EntityMappingType[] = [
-    {
-        id: EntityNames.Archives,
-        metadata: {
-            endPointZoom2:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-2-archives/run',
-            identifiableURI: 'https://collectiedata.hetnieuweinstituut.nl/graph/archives',
-        },
-        type: 'tripli',
-    },
-    {
-        id: EntityNames.Objects,
-        metadata: {
-            endPointZoom2:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-2-objects/run',
-            identifiableURI: 'https://collectiedata.hetnieuweinstituut.nl/graph/objects',
-        },
-        type: 'tripli',
-    },
-    {
-        id: EntityNames.People,
-        metadata: {
-            endPointZoom2:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-2-people/run',
-            identifiableURI: 'https://collectiedata.hetnieuweinstituut.nl/graph/people',
-        },
-        type: 'tripli',
-    },
-    {
-        id: EntityNames.Publications,
-        metadata: {
-            endPointZoom2:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-2-books/run',
-            identifiableURI: 'https://collectiedata.hetnieuweinstituut.nl/graph/books',
-        },
-        type: 'tripli',
-    },
-    {
-        id: EntityNames.Stories,
-        metadata: {
-            url: 'aa',
-        },
-        type: 'strapi',
-    },
-]
+import { EntityIdentifierMapping, EntityNames } from './tripli.type'
 
 interface ObjectPerTypeData {
     count: string

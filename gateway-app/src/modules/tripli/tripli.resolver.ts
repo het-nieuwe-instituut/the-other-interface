@@ -1,7 +1,7 @@
 import { Args, Query, Resolver } from '@nestjs/graphql'
 import { StoryService } from '../story/story.service'
 import { TripliService } from './tripli.service'
-import { EntityNames, TripliCountsType, TripliFiltersType } from './tripli.type'
+import { EntityNames, GetFiltersArgs, TripliCountsType, TripliFiltersType } from './tripli.type'
 
 @Resolver()
 export class TripliResolver {
@@ -16,8 +16,8 @@ export class TripliResolver {
     }
 
     @Query(() => [TripliFiltersType])
-    public async filters(@Args('entityName') entityName: EntityNames) {
-        const result = await this.tripliService.getFilters(entityName)
+    public async filters(@Args() args: GetFiltersArgs) {
+        const result = await this.tripliService.getFilters(args.entityName)
 
         return result
     }
