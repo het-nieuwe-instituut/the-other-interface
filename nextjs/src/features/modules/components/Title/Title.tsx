@@ -8,7 +8,7 @@ interface Props {
 export const Title: React.FC<Props> = props => {
     return (
         <Box width="100%" padding={6}>
-            <Heading as="h1" fontSize={'62px'}>
+            <Heading textStyle={'h1'} fontSize={'62px'}>
                 {props.component.Title}
             </Heading>
         </Box>
