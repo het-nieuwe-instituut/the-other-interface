@@ -12,22 +12,12 @@
     },
     "textModuleSpacingBottom": {
       "type": "enumeration",
-      "enum": [
-        "sm",
-        "md",
-        "lg",
-        "xl"
-      ],
+      "enum": ["sm", "md", "lg", "xl"],
       "default": "md"
     },
     "textModuleSpacingTop": {
       "type": "enumeration",
-      "enum": [
-        "sm",
-        "md",
-        "lg",
-        "xl"
-      ]
+      "enum": ["sm", "md", "lg", "xl"]
     }
   }
 }
