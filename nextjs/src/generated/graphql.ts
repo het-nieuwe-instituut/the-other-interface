@@ -131,6 +131,12 @@ export type ComponentModulesPullquote = {
   text?: Maybe<Scalars['String']>;
 };
 
+export type ComponentModulesSubtitle = {
+  __typename?: 'ComponentModulesSubtitle';
+  id: Scalars['ID'];
+  text?: Maybe<Scalars['String']>;
+};
+
 export type ComponentModulesTextModule = {
   __typename?: 'ComponentModulesTextModule';
   Text: Scalars['String'];
@@ -197,7 +203,7 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars['Float']>;
 };
 
-export type GenericMorph = ComponentModulesImage | ComponentModulesPullquote | ComponentModulesTextModule | Homepage | I18NLocale | Landingpage | Menupage | Story | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type GenericMorph = ComponentModulesImage | ComponentModulesPullquote | ComponentModulesSubtitle | ComponentModulesTextModule | Homepage | I18NLocale | Landingpage | Menupage | Story | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
 
 export type Homepage = {
   __typename?: 'Homepage';
@@ -215,7 +221,7 @@ export type HomepageLocalizationsArgs = {
   publicationState?: InputMaybe<PublicationState>;
 };
 
-export type HomepageComponentsDynamicZone = ComponentModulesImage | ComponentModulesPullquote | ComponentModulesTextModule | Error;
+export type HomepageComponentsDynamicZone = ComponentModulesImage | ComponentModulesPullquote | ComponentModulesSubtitle | ComponentModulesTextModule | Error;
 
 export type HomepageEntity = {
   __typename?: 'HomepageEntity';
@@ -367,7 +373,7 @@ export type LandingpageLocalizationsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-export type LandingpageComponentsDynamicZone = ComponentModulesTextModule | Error;
+export type LandingpageComponentsDynamicZone = ComponentModulesSubtitle | ComponentModulesTextModule | Error;
 
 export type LandingpageEntity = {
   __typename?: 'LandingpageEntity';
@@ -432,7 +438,7 @@ export type MenupageLocalizationsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-export type MenupageComponentsDynamicZone = ComponentModulesPullquote | ComponentModulesTextModule | Error;
+export type MenupageComponentsDynamicZone = ComponentModulesPullquote | ComponentModulesSubtitle | ComponentModulesTextModule | Error;
 
 export type MenupageEntity = {
   __typename?: 'MenupageEntity';
@@ -928,7 +934,7 @@ export type StoryLocalizationsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-export type StoryComponentsDynamicZone = ComponentModulesPullquote | ComponentModulesTextModule | Error;
+export type StoryComponentsDynamicZone = ComponentModulesPullquote | ComponentModulesSubtitle | ComponentModulesTextModule | Error;
 
 export type StoryEntity = {
   __typename?: 'StoryEntity';
@@ -1376,6 +1382,8 @@ export type ImageModuleFragmentFragment = { __typename?: 'ComponentModulesImage'
 
 export type PullquoteModuleFragmentFragment = { __typename?: 'ComponentModulesPullquote', id: string, text?: string | null };
 
+export type SubtitleModuleFragmentFragment = { __typename?: 'ComponentModulesSubtitle', id: string, text?: string | null };
+
 export type TextModuleFragmentFragment = { __typename?: 'ComponentModulesTextModule', id: string, Text: string };
 
 export type HomepageQueryVariables = Exact<{
@@ -1383,7 +1391,7 @@ export type HomepageQueryVariables = Exact<{
 }>;
 
 
-export type HomepageQuery = { __typename?: 'Query', homepage?: { __typename?: 'HomepageEntityResponse', data?: { __typename?: 'HomepageEntity', id?: string | null, attributes?: { __typename?: 'Homepage', Title?: string | null, components?: Array<{ __typename?: 'ComponentModulesImage', id: string, caption?: string | null, alt_text?: string | null, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } } | { __typename?: 'ComponentModulesPullquote', id: string, text?: string | null } | { __typename?: 'ComponentModulesTextModule', id: string, Text: string } | { __typename?: 'Error' } | null> | null } | null } | null } | null };
+export type HomepageQuery = { __typename?: 'Query', homepage?: { __typename?: 'HomepageEntityResponse', data?: { __typename?: 'HomepageEntity', id?: string | null, attributes?: { __typename?: 'Homepage', Title?: string | null, components?: Array<{ __typename?: 'ComponentModulesImage', id: string, caption?: string | null, alt_text?: string | null, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } } | { __typename?: 'ComponentModulesPullquote', id: string, text?: string | null } | { __typename?: 'ComponentModulesSubtitle', id: string, text?: string | null } | { __typename?: 'ComponentModulesTextModule', id: string, Text: string } | { __typename?: 'Error' } | null> | null } | null } | null } | null };
 
 export type LandingpageBySlugQueryVariables = Exact<{
   locale?: InputMaybe<Scalars['I18NLocaleCode']>;
@@ -1391,7 +1399,7 @@ export type LandingpageBySlugQueryVariables = Exact<{
 }>;
 
 
-export type LandingpageBySlugQuery = { __typename?: 'Query', landingpages?: { __typename?: 'LandingpageEntityResponseCollection', data: Array<{ __typename?: 'LandingpageEntity', id?: string | null, attributes?: { __typename?: 'Landingpage', components?: Array<{ __typename?: 'ComponentModulesTextModule', id: string, Text: string } | { __typename?: 'Error' } | null> | null } | null }> } | null };
+export type LandingpageBySlugQuery = { __typename?: 'Query', landingpages?: { __typename?: 'LandingpageEntityResponseCollection', data: Array<{ __typename?: 'LandingpageEntity', id?: string | null, attributes?: { __typename?: 'Landingpage', components?: Array<{ __typename?: 'ComponentModulesSubtitle' } | { __typename?: 'ComponentModulesTextModule', id: string, Text: string } | { __typename?: 'Error' } | null> | null } | null }> } | null };
 
 export type MenupageBySlugQueryVariables = Exact<{
   locale?: InputMaybe<Scalars['I18NLocaleCode']>;
@@ -1399,7 +1407,7 @@ export type MenupageBySlugQueryVariables = Exact<{
 }>;
 
 
-export type MenupageBySlugQuery = { __typename?: 'Query', menupages?: { __typename?: 'MenupageEntityResponseCollection', data: Array<{ __typename?: 'MenupageEntity', id?: string | null, attributes?: { __typename?: 'Menupage', components?: Array<{ __typename?: 'ComponentModulesPullquote', id: string, text?: string | null } | { __typename?: 'ComponentModulesTextModule', id: string, Text: string } | { __typename?: 'Error' } | null> | null } | null }> } | null };
+export type MenupageBySlugQuery = { __typename?: 'Query', menupages?: { __typename?: 'MenupageEntityResponseCollection', data: Array<{ __typename?: 'MenupageEntity', id?: string | null, attributes?: { __typename?: 'Menupage', components?: Array<{ __typename?: 'ComponentModulesPullquote', id: string, text?: string | null } | { __typename?: 'ComponentModulesSubtitle' } | { __typename?: 'ComponentModulesTextModule', id: string, Text: string } | { __typename?: 'Error' } | null> | null } | null }> } | null };
 
 export type StoryBySlugQueryVariables = Exact<{
   locale?: InputMaybe<Scalars['I18NLocaleCode']>;
@@ -1407,7 +1415,7 @@ export type StoryBySlugQueryVariables = Exact<{
 }>;
 
 
-export type StoryBySlugQuery = { __typename?: 'Query', stories?: { __typename?: 'StoryEntityResponseCollection', data: Array<{ __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', components?: Array<{ __typename?: 'ComponentModulesPullquote', id: string, text?: string | null } | { __typename?: 'ComponentModulesTextModule', id: string, Text: string } | { __typename?: 'Error' } | null> | null } | null }> } | null };
+export type StoryBySlugQuery = { __typename?: 'Query', stories?: { __typename?: 'StoryEntityResponseCollection', data: Array<{ __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', components?: Array<{ __typename?: 'ComponentModulesPullquote', id: string, text?: string | null } | { __typename?: 'ComponentModulesSubtitle' } | { __typename?: 'ComponentModulesTextModule', id: string, Text: string } | { __typename?: 'Error' } | null> | null } | null }> } | null };
 
 export const ImageModuleFragmentFragmentDoc = gql`
     fragment imageModuleFragment on ComponentModulesImage {
@@ -1425,6 +1433,12 @@ export const ImageModuleFragmentFragmentDoc = gql`
     `;
 export const PullquoteModuleFragmentFragmentDoc = gql`
     fragment pullquoteModuleFragment on ComponentModulesPullquote {
+  id
+  text
+}
+    `;
+export const SubtitleModuleFragmentFragmentDoc = gql`
+    fragment subtitleModuleFragment on ComponentModulesSubtitle {
   id
   text
 }
@@ -1452,6 +1466,9 @@ export const HomepageDocument = gql`
           ... on ComponentModulesPullquote {
             ...pullquoteModuleFragment
           }
+          ... on ComponentModulesSubtitle {
+            ...subtitleModuleFragment
+          }
         }
       }
     }
@@ -1459,7 +1476,8 @@ export const HomepageDocument = gql`
 }
     ${TextModuleFragmentFragmentDoc}
 ${ImageModuleFragmentFragmentDoc}
-${PullquoteModuleFragmentFragmentDoc}`;
+${PullquoteModuleFragmentFragmentDoc}
+${SubtitleModuleFragmentFragmentDoc}`;
 
 /**
  * __useHomepageQuery__

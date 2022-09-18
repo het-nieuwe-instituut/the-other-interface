@@ -1,6 +1,7 @@
 import { ComponentModulesImage, HomepageQuery } from 'src/generated/graphql'
 import MediaImage from '../components/Image/Image'
 import { Pullquote } from '../components/Pullquote/Pullquote'
+import { SubtitleModule } from '../components/SubtitleModule/SubtitleModule'
 import { Text } from '../components/Text/Text'
 
 interface Props {
@@ -33,7 +34,12 @@ export function DynamicComponentRenderer(props: Props) {
                 if (typeName) {
                     if (component?.__typename === 'ComponentModulesImage') {
                         return <MediaImage key={component.id} component={component as ComponentModulesImage} />
-                    }                
+                    }
+                }
+                if (typeName) {
+                    if (component?.__typename === 'ComponentModulesSubtitle') {
+                        return <SubtitleModule key={component.id} component={component} />
+                    }
                 }
 
                 return null
