@@ -81,6 +81,12 @@
         }
       },
       "component": "core.timeframe"
+    },
+    "locations": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::location.location",
+      "mappedBy": "stories"
     }
   }
 }
