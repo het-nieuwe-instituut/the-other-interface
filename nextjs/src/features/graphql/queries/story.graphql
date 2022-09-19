@@ -12,11 +12,17 @@ query storyBySlug($locale: I18NLocaleCode, $slug: String!) {
                     ... on ComponentModulesTextModule {
                         ...textModuleFragment
                     }
+                    ... on ComponentModulesImage {
+                        ...imageModuleFragment
+                    }
                     ... on ComponentModulesPullquote {
                         ...pullquoteModuleFragment
                     }
-                    ... on ComponentModulesImage {
-                        ...imageModuleFragment
+                    ... on ComponentModulesTableModule {
+                        ...tableModuleFragment
+                    }
+                    ... on ComponentModulesTitleModule {
+                        ...titleModuleFragment
                     }
                     ... on ComponentModulesImageCarousel {
                         ...imageCarouselModuleFragment

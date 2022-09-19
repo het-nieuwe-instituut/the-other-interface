@@ -30,7 +30,9 @@
         "modules.text-module",
         "modules.title-module",
         "modules.image-carousel",
-        "modules.image"
+        "modules.image",
+        "modules.pullquote",
+        "modules.table-module"
       ],
       "pluginOptions": {
         "i18n": {
