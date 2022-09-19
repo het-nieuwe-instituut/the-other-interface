@@ -19,7 +19,6 @@ export const TableModule: React.FC<Props> = props => {
             <Box
                 pl={6}
                 pr={6}
-                maxWidth={'820px'}
                 mb={props.component.tableModuleSpacingBottom ?? undefined}
                 mt={props.component.tableModuleSpacingTop ?? undefined}
             >
@@ -38,7 +37,6 @@ export const TableModule: React.FC<Props> = props => {
         <Box
             pl={6}
             pr={6}
-            maxWidth={'820px'}
             mb={props.component.tableModuleSpacingBottom ?? undefined}
             mt={props.component.tableModuleSpacingTop ?? undefined}
         >
@@ -56,7 +54,6 @@ export const TableModule: React.FC<Props> = props => {
 export const TableModuleMobile: React.FC<Props> = props => {
     const body = props.component.table?.data?.attributes?.TableBody
 
-    console
     return (
         <TableContainer>
             <Table variant="simple">
