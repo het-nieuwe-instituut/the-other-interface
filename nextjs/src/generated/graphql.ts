@@ -88,6 +88,7 @@ export type Scalars = {
   I18NLocaleCode: any;
   JSON: any;
   LandingpageComponentsDynamicZoneInput: any;
+  Long: any;
   MenupageComponentsDynamicZoneInput: any;
   StoryComponentsDynamicZoneInput: any;
   Upload: any;
@@ -257,6 +258,27 @@ export type ComponentCoreTableHeadItemInput = {
   label?: InputMaybe<Scalars['String']>;
 };
 
+export type ComponentCoreTimeframe = {
+  __typename?: 'ComponentCoreTimeframe';
+  id: Scalars['ID'];
+  yearEnd?: Maybe<Scalars['Long']>;
+  yearStart?: Maybe<Scalars['Long']>;
+};
+
+export type ComponentCoreTimeframeFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<ComponentCoreTimeframeFiltersInput>>>;
+  not?: InputMaybe<ComponentCoreTimeframeFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ComponentCoreTimeframeFiltersInput>>>;
+  yearEnd?: InputMaybe<LongFilterInput>;
+  yearStart?: InputMaybe<LongFilterInput>;
+};
+
+export type ComponentCoreTimeframeInput = {
+  id?: InputMaybe<Scalars['ID']>;
+  yearEnd?: InputMaybe<Scalars['Long']>;
+  yearStart?: InputMaybe<Scalars['Long']>;
+};
+
 export type ComponentModulesImage = {
   __typename?: 'ComponentModulesImage';
   alt_text?: Maybe<Scalars['String']>;
@@ -395,7 +417,7 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars['Float']>;
 };
 
-export type GenericMorph = Author | ComponentCorePageHeader | ComponentCoreTableBody | ComponentCoreTableBodyItem | ComponentCoreTableHead | ComponentCoreTableHeadItem | ComponentModulesImage | ComponentModulesImageCarousel | ComponentModulesPullquote | ComponentModulesTableModule | ComponentModulesTextModule | ComponentModulesTitleModule | Homepage | I18NLocale | Landingpage | Menupage | Story | Table | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type GenericMorph = Author | ComponentCorePageHeader | ComponentCoreTableBody | ComponentCoreTableBodyItem | ComponentCoreTableHead | ComponentCoreTableHeadItem | ComponentCoreTimeframe | ComponentModulesImage | ComponentModulesImageCarousel | ComponentModulesPullquote | ComponentModulesTableModule | ComponentModulesTextModule | ComponentModulesTitleModule | Homepage | I18NLocale | Landingpage | Menupage | Story | Table | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
 
 export type Homepage = {
   __typename?: 'Homepage';
@@ -608,6 +630,30 @@ export type LandingpageInput = {
 export type LandingpageRelationResponseCollection = {
   __typename?: 'LandingpageRelationResponseCollection';
   data: Array<LandingpageEntity>;
+};
+
+export type LongFilterInput = {
+  and?: InputMaybe<Array<InputMaybe<Scalars['Long']>>>;
+  between?: InputMaybe<Array<InputMaybe<Scalars['Long']>>>;
+  contains?: InputMaybe<Scalars['Long']>;
+  containsi?: InputMaybe<Scalars['Long']>;
+  endsWith?: InputMaybe<Scalars['Long']>;
+  eq?: InputMaybe<Scalars['Long']>;
+  eqi?: InputMaybe<Scalars['Long']>;
+  gt?: InputMaybe<Scalars['Long']>;
+  gte?: InputMaybe<Scalars['Long']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['Long']>>>;
+  lt?: InputMaybe<Scalars['Long']>;
+  lte?: InputMaybe<Scalars['Long']>;
+  ne?: InputMaybe<Scalars['Long']>;
+  not?: InputMaybe<LongFilterInput>;
+  notContains?: InputMaybe<Scalars['Long']>;
+  notContainsi?: InputMaybe<Scalars['Long']>;
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['Long']>>>;
+  notNull?: InputMaybe<Scalars['Boolean']>;
+  null?: InputMaybe<Scalars['Boolean']>;
+  or?: InputMaybe<Array<InputMaybe<Scalars['Long']>>>;
+  startsWith?: InputMaybe<Scalars['Long']>;
 };
 
 export type Menupage = {
@@ -1183,6 +1229,7 @@ export type Story = {
   preface?: Maybe<Scalars['String']>;
   publishedAt?: Maybe<Scalars['DateTime']>;
   slug?: Maybe<Scalars['String']>;
+  timeframe?: Maybe<ComponentCoreTimeframe>;
   title: Scalars['String'];
   triply_people?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
@@ -1227,6 +1274,7 @@ export type StoryFiltersInput = {
   preface?: InputMaybe<StringFilterInput>;
   publishedAt?: InputMaybe<DateTimeFilterInput>;
   slug?: InputMaybe<StringFilterInput>;
+  timeframe?: InputMaybe<ComponentCoreTimeframeFiltersInput>;
   title?: InputMaybe<StringFilterInput>;
   triply_people?: InputMaybe<StringFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
@@ -1238,6 +1286,7 @@ export type StoryInput = {
   preface?: InputMaybe<Scalars['String']>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
   slug?: InputMaybe<Scalars['String']>;
+  timeframe?: InputMaybe<ComponentCoreTimeframeInput>;
   title?: InputMaybe<Scalars['String']>;
   triply_people?: InputMaybe<Scalars['String']>;
 };
@@ -1742,7 +1791,7 @@ export type StoryBySlugQueryVariables = Exact<{
 }>;
 
 
-export type StoryBySlugQuery = { __typename?: 'Query', stories?: { __typename?: 'StoryEntityResponseCollection', data: Array<{ __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, preface?: string | null, publishedAt?: any | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', id?: string | null, attributes?: { __typename?: 'Author', firstName?: string | null, insertion?: string | null, lastName?: string | null } | null } | null } | null, components?: Array<{ __typename?: 'ComponentModulesImage', id: string, caption?: string | null, alt_text?: string | null, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } } | { __typename?: 'ComponentModulesImageCarousel', id: string, description?: string | null, images?: { __typename?: 'UploadFileRelationResponseCollection', data: Array<{ __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null } | null }> } | null } | { __typename?: 'ComponentModulesPullquote', id: string, text?: string | null } | { __typename?: 'ComponentModulesTableModule', id: string, tableModuleSpacingTop?: EnumComponentmodulestablemoduleTablemodulespacingtop | null, tableModuleSpacingBottom?: EnumComponentmodulestablemoduleTablemodulespacingbottom | null, table?: { __typename?: 'TableEntityResponse', data?: { __typename?: 'TableEntity', id?: string | null, attributes?: { __typename?: 'Table', name?: string | null, description?: string | null, Tablehead?: { __typename?: 'ComponentCoreTableHead', id: string, TableHeadItem?: Array<{ __typename?: 'ComponentCoreTableHeadItem', id: string, label?: string | null } | null> | null } | null, TableBody?: Array<{ __typename?: 'ComponentCoreTableBody', id: string, TableBodyItem?: Array<{ __typename?: 'ComponentCoreTableBodyItem', id: string, value?: string | null } | null> | null } | null> | null } | null } | null } | null } | { __typename?: 'ComponentModulesTextModule', id: string, Richtext?: string | null, textModuleSpacingBottom?: EnumComponentmodulestextmoduleTextmodulespacingbottom | null, textModuleSpacingTop?: EnumComponentmodulestextmoduleTextmodulespacingtop | null } | { __typename?: 'ComponentModulesTitleModule', id: string, Title?: string | null } | { __typename?: 'Error' } | null> | null } | null }> } | null };
+export type StoryBySlugQuery = { __typename?: 'Query', stories?: { __typename?: 'StoryEntityResponseCollection', data: Array<{ __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, preface?: string | null, publishedAt?: any | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', id?: string | null, attributes?: { __typename?: 'Author', firstName?: string | null, insertion?: string | null, lastName?: string | null } | null } | null } | null, timeframe?: { __typename?: 'ComponentCoreTimeframe', id: string, yearStart?: any | null, yearEnd?: any | null } | null, components?: Array<{ __typename?: 'ComponentModulesImage', id: string, caption?: string | null, alt_text?: string | null, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } } | { __typename?: 'ComponentModulesImageCarousel', id: string, description?: string | null, images?: { __typename?: 'UploadFileRelationResponseCollection', data: Array<{ __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null } | null }> } | null } | { __typename?: 'ComponentModulesPullquote', id: string, text?: string | null } | { __typename?: 'ComponentModulesTableModule', id: string, tableModuleSpacingTop?: EnumComponentmodulestablemoduleTablemodulespacingtop | null, tableModuleSpacingBottom?: EnumComponentmodulestablemoduleTablemodulespacingbottom | null, table?: { __typename?: 'TableEntityResponse', data?: { __typename?: 'TableEntity', id?: string | null, attributes?: { __typename?: 'Table', name?: string | null, description?: string | null, Tablehead?: { __typename?: 'ComponentCoreTableHead', id: string, TableHeadItem?: Array<{ __typename?: 'ComponentCoreTableHeadItem', id: string, label?: string | null } | null> | null } | null, TableBody?: Array<{ __typename?: 'ComponentCoreTableBody', id: string, TableBodyItem?: Array<{ __typename?: 'ComponentCoreTableBodyItem', id: string, value?: string | null } | null> | null } | null> | null } | null } | null } | null } | { __typename?: 'ComponentModulesTextModule', id: string, Richtext?: string | null, textModuleSpacingBottom?: EnumComponentmodulestextmoduleTextmodulespacingbottom | null, textModuleSpacingTop?: EnumComponentmodulestextmoduleTextmodulespacingtop | null } | { __typename?: 'ComponentModulesTitleModule', id: string, Title?: string | null } | { __typename?: 'Error' } | null> | null } | null }> } | null };
 
 export const ImageCarouselModuleFragmentFragmentDoc = gql`
     fragment imageCarouselModuleFragment on ComponentModulesImageCarousel {
@@ -2035,6 +2084,11 @@ export const StoryBySlugDocument = gql`
               lastName
             }
           }
+        }
+        timeframe {
+          id
+          yearStart
+          yearEnd
         }
         components {
           ... on ComponentModulesTextModule {

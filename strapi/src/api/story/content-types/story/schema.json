@@ -70,6 +70,17 @@
         }
       },
       "type": "richtext"
+    },
+    "timeframe": {
+      "displayName": "timeframe",
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "core.timeframe"
     }
   }
 }
