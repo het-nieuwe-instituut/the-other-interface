@@ -15,15 +15,15 @@ interface ObjectFilterData {
 }
 
 interface ObjectFilterOptionsData {
-    relatedName: string
-    relatedNameLabel: string
-    count: string
-    total: string
+    [x: string]: string
 }
 
 @Injectable()
 export class TripliService {
     public constructor(private configService: ConfigService, private readonly httpService: HttpService) {}
+
+    private defaultPage = '1'
+    private defaultPageSize = '16'
 
     public async getData<DataType>(endpoint: string) {
         const apiKey = this.configService.getOrThrow('TRIPLY_API_KEY')
@@ -74,11 +74,13 @@ export class TripliService {
             )
 
             if (res) {
-                return res.data.map(f => {
+                const resN = res.data.map(f => {
                     const filterMapping = mapping.filters?.find(m => m.name === f.filter)
                     if (!filterMapping) return
                     return { filter: filterMapping.name, id: filterMapping.id }
                 })
+
+                return resN
             }
         }
 
@@ -99,20 +101,29 @@ export class TripliService {
 
             const apiKey = this.configService.getOrThrow('TRIPLY_API_KEY')
 
+            const pagedEndpoint = new URL(filterMapping.endpoint)
+            pagedEndpoint.searchParams.append(
+                'page',
+                paginationArgs.page ? paginationArgs.page.toString() : this.defaultPage
+            )
+            pagedEndpoint.searchParams.append(
+                'pageSize',
+                paginationArgs.pageSize ? paginationArgs.pageSize.toString() : this.defaultPageSize
+            )
+
             const res = await lastValueFrom(
-                this.httpService.get<ObjectFilterOptionsData[]>(filterMapping.endpoint, {
+                this.httpService.get<ObjectFilterOptionsData[]>(pagedEndpoint.toString(), {
                     headers: { Authorization: `Bearer ${apiKey}` },
                 })
             )
 
             if (res.data) {
-                const data = res.data.slice(paginationArgs.skip, paginationArgs.skip + paginationArgs.take)
-                return data.map(d => {
+                return res.data.map(d => {
                     return {
-                        relatedName: d.relatedName,
-                        relatedNameLabel: d.relatedNameLabel,
-                        count: d.count ? parseInt(d.count, 10) : null,
-                        total: d.total ? parseInt(d.total, 10) : null,
+                        uri: d[filterMapping.columns.uri] || null,
+                        name: d[filterMapping.columns.name] || null,
+                        count: d[filterMapping.columns.count] ? parseInt(d[filterMapping.columns.count], 10) : null,
+                        total: d[filterMapping.columns.total] ? parseInt(d[filterMapping.columns.total], 10) : null,
                     }
                 })
             }
