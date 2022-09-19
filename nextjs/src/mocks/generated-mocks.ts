@@ -1,4 +1,59 @@
-import { BooleanFilterInput, ComponentCoreTableBody, ComponentCoreTableBodyFiltersInput, ComponentCoreTableBodyInput, ComponentCoreTableBodyItem, ComponentCoreTableBodyItemFiltersInput, ComponentCoreTableBodyItemInput, ComponentCoreTableHead, ComponentCoreTableHeadFiltersInput, ComponentCoreTableHeadInput, ComponentCoreTableHeadItem, ComponentCoreTableHeadItemFiltersInput, ComponentCoreTableHeadItemInput, ComponentModulesImage, ComponentModulesImageCarousel, ComponentModulesPullquote, ComponentModulesTableModule, ComponentModulesTextModule, ComponentModulesTitleModule, DateTimeFilterInput, Error, FileInfoInput, FloatFilterInput, Homepage, HomepageEntity, HomepageEntityResponse, HomepageInput, HomepageRelationResponseCollection, I18NLocale, I18NLocaleEntity, I18NLocaleEntityResponse, I18NLocaleEntityResponseCollection, I18NLocaleFiltersInput, IdFilterInput, IntFilterInput, JsonFilterInput, Landingpage, LandingpageEntity, LandingpageEntityResponse, LandingpageEntityResponseCollection, LandingpageFiltersInput, LandingpageInput, LandingpageRelationResponseCollection, Menupage, MenupageEntity, MenupageEntityResponse, MenupageEntityResponseCollection, MenupageFiltersInput, MenupageInput, MenupageRelationResponseCollection, Mutation, Pagination, PaginationArg, Query, ResponseCollectionMeta, Story, StoryEntity, StoryEntityResponse, StoryEntityResponseCollection, StoryFiltersInput, StoryInput, StoryRelationResponseCollection, StringFilterInput, Table, TableEntity, TableEntityResponse, TableEntityResponseCollection, TableFiltersInput, TableInput, UploadFile, UploadFileEntity, UploadFileEntityResponse, UploadFileEntityResponseCollection, UploadFileFiltersInput, UploadFileInput, UploadFileRelationResponseCollection, UploadFolder, UploadFolderEntity, UploadFolderEntityResponse, UploadFolderEntityResponseCollection, UploadFolderFiltersInput, UploadFolderInput, UploadFolderRelationResponseCollection, UsersPermissionsCreateRolePayload, UsersPermissionsDeleteRolePayload, UsersPermissionsLoginInput, UsersPermissionsLoginPayload, UsersPermissionsMe, UsersPermissionsMeRole, UsersPermissionsPasswordPayload, UsersPermissionsPermission, UsersPermissionsPermissionEntity, UsersPermissionsPermissionFiltersInput, UsersPermissionsPermissionRelationResponseCollection, UsersPermissionsRegisterInput, UsersPermissionsRole, UsersPermissionsRoleEntity, UsersPermissionsRoleEntityResponse, UsersPermissionsRoleEntityResponseCollection, UsersPermissionsRoleFiltersInput, UsersPermissionsRoleInput, UsersPermissionsUpdateRolePayload, UsersPermissionsUser, UsersPermissionsUserEntity, UsersPermissionsUserEntityResponse, UsersPermissionsUserEntityResponseCollection, UsersPermissionsUserFiltersInput, UsersPermissionsUserInput, UsersPermissionsUserRelationResponseCollection, EnumComponentmodulestablemoduleTablemodulespacingbottom, EnumComponentmodulestablemoduleTablemodulespacingtop, EnumComponentmodulestextmoduleTextmodulespacingbottom, EnumComponentmodulestextmoduleTextmodulespacingtop, PublicationState } from '../generated/graphql';
+import { Author, AuthorEntity, AuthorEntityResponse, AuthorEntityResponseCollection, AuthorFiltersInput, AuthorInput, BooleanFilterInput, ComponentCorePageHeader, ComponentCoreTableBody, ComponentCoreTableBodyFiltersInput, ComponentCoreTableBodyInput, ComponentCoreTableBodyItem, ComponentCoreTableBodyItemFiltersInput, ComponentCoreTableBodyItemInput, ComponentCoreTableHead, ComponentCoreTableHeadFiltersInput, ComponentCoreTableHeadInput, ComponentCoreTableHeadItem, ComponentCoreTableHeadItemFiltersInput, ComponentCoreTableHeadItemInput, ComponentModulesImage, ComponentModulesImageCarousel, ComponentModulesPullquote, ComponentModulesTableModule, ComponentModulesTextModule, ComponentModulesTitleModule, DateTimeFilterInput, Error, FileInfoInput, FloatFilterInput, Homepage, HomepageEntity, HomepageEntityResponse, HomepageInput, HomepageRelationResponseCollection, I18NLocale, I18NLocaleEntity, I18NLocaleEntityResponse, I18NLocaleEntityResponseCollection, I18NLocaleFiltersInput, IdFilterInput, IntFilterInput, JsonFilterInput, Landingpage, LandingpageEntity, LandingpageEntityResponse, LandingpageEntityResponseCollection, LandingpageFiltersInput, LandingpageInput, LandingpageRelationResponseCollection, Menupage, MenupageEntity, MenupageEntityResponse, MenupageEntityResponseCollection, MenupageFiltersInput, MenupageInput, MenupageRelationResponseCollection, Mutation, Pagination, PaginationArg, Query, ResponseCollectionMeta, Story, StoryEntity, StoryEntityResponse, StoryEntityResponseCollection, StoryFiltersInput, StoryInput, StoryRelationResponseCollection, StringFilterInput, Table, TableEntity, TableEntityResponse, TableEntityResponseCollection, TableFiltersInput, TableInput, UploadFile, UploadFileEntity, UploadFileEntityResponse, UploadFileEntityResponseCollection, UploadFileFiltersInput, UploadFileInput, UploadFileRelationResponseCollection, UploadFolder, UploadFolderEntity, UploadFolderEntityResponse, UploadFolderEntityResponseCollection, UploadFolderFiltersInput, UploadFolderInput, UploadFolderRelationResponseCollection, UsersPermissionsCreateRolePayload, UsersPermissionsDeleteRolePayload, UsersPermissionsLoginInput, UsersPermissionsLoginPayload, UsersPermissionsMe, UsersPermissionsMeRole, UsersPermissionsPasswordPayload, UsersPermissionsPermission, UsersPermissionsPermissionEntity, UsersPermissionsPermissionFiltersInput, UsersPermissionsPermissionRelationResponseCollection, UsersPermissionsRegisterInput, UsersPermissionsRole, UsersPermissionsRoleEntity, UsersPermissionsRoleEntityResponse, UsersPermissionsRoleEntityResponseCollection, UsersPermissionsRoleFiltersInput, UsersPermissionsRoleInput, UsersPermissionsUpdateRolePayload, UsersPermissionsUser, UsersPermissionsUserEntity, UsersPermissionsUserEntityResponse, UsersPermissionsUserEntityResponseCollection, UsersPermissionsUserFiltersInput, UsersPermissionsUserInput, UsersPermissionsUserRelationResponseCollection, EnumComponentmodulestablemoduleTablemodulespacingbottom, EnumComponentmodulestablemoduleTablemodulespacingtop, EnumComponentmodulestextmoduleTextmodulespacingbottom, EnumComponentmodulestextmoduleTextmodulespacingtop, PublicationState } from '../generated/graphql';
+
+export const anAuthor = (overrides?: Partial<Author>): Author => {
+    return {
+        createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : 'distinctio',
+        firstName: overrides && overrides.hasOwnProperty('firstName') ? overrides.firstName! : 'omnis',
+        insertion: overrides && overrides.hasOwnProperty('insertion') ? overrides.insertion! : 'illo',
+        lastName: overrides && overrides.hasOwnProperty('lastName') ? overrides.lastName! : 'ipsum',
+        publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : 'rerum',
+        updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : 'hic',
+    };
+};
+
+export const anAuthorEntity = (overrides?: Partial<AuthorEntity>): AuthorEntity => {
+    return {
+        attributes: overrides && overrides.hasOwnProperty('attributes') ? overrides.attributes! : anAuthor(),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0a2062cc-e102-46e6-88f9-ba9d3ea2e38f',
+    };
+};
+
+export const anAuthorEntityResponse = (overrides?: Partial<AuthorEntityResponse>): AuthorEntityResponse => {
+    return {
+        data: overrides && overrides.hasOwnProperty('data') ? overrides.data! : anAuthorEntity(),
+    };
+};
+
+export const anAuthorEntityResponseCollection = (overrides?: Partial<AuthorEntityResponseCollection>): AuthorEntityResponseCollection => {
+    return {
+        data: overrides && overrides.hasOwnProperty('data') ? overrides.data! : [anAuthorEntity()],
+        meta: overrides && overrides.hasOwnProperty('meta') ? overrides.meta! : aResponseCollectionMeta(),
+    };
+};
+
+export const anAuthorFiltersInput = (overrides?: Partial<AuthorFiltersInput>): AuthorFiltersInput => {
+    return {
+        and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [anAuthorFiltersInput()],
+        createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : aDateTimeFilterInput(),
+        firstName: overrides && overrides.hasOwnProperty('firstName') ? overrides.firstName! : aStringFilterInput(),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : anIdFilterInput(),
+        insertion: overrides && overrides.hasOwnProperty('insertion') ? overrides.insertion! : aStringFilterInput(),
+        lastName: overrides && overrides.hasOwnProperty('lastName') ? overrides.lastName! : aStringFilterInput(),
+        not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : anAuthorFiltersInput(),
+        or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [anAuthorFiltersInput()],
+        publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : aDateTimeFilterInput(),
+        updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : aDateTimeFilterInput(),
+    };
+};
+
+export const anAuthorInput = (overrides?: Partial<AuthorInput>): AuthorInput => {
+    return {
+        firstName: overrides && overrides.hasOwnProperty('firstName') ? overrides.firstName! : 'aut',
+        insertion: overrides && overrides.hasOwnProperty('insertion') ? overrides.insertion! : 'cum',
+        lastName: overrides && overrides.hasOwnProperty('lastName') ? overrides.lastName! : 'odio',
+        publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : 'sit',
+    };
+};
 
 export const aBooleanFilterInput = (overrides?: Partial<BooleanFilterInput>): BooleanFilterInput => {
     return {
@@ -23,6 +78,14 @@ export const aBooleanFilterInput = (overrides?: Partial<BooleanFilterInput>): Bo
         null: overrides && overrides.hasOwnProperty('null') ? overrides.null! : false,
         or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [false],
         startsWith: overrides && overrides.hasOwnProperty('startsWith') ? overrides.startsWith! : true,
+    };
+};
+
+export const aComponentCorePageHeader = (overrides?: Partial<ComponentCorePageHeader>): ComponentCorePageHeader => {
+    return {
+        Title: overrides && overrides.hasOwnProperty('Title') ? overrides.Title! : 'dolore',
+        content: overrides && overrides.hasOwnProperty('content') ? overrides.content! : 'illum',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '56b4f843-e03d-4027-af18-11fa3418caa8',
     };
 };
 
@@ -523,6 +586,7 @@ export const aMenupageRelationResponseCollection = (overrides?: Partial<Menupage
 
 export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     return {
+        createAuthor: overrides && overrides.hasOwnProperty('createAuthor') ? overrides.createAuthor! : anAuthorEntityResponse(),
         createHomepageLocalization: overrides && overrides.hasOwnProperty('createHomepageLocalization') ? overrides.createHomepageLocalization! : aHomepageEntityResponse(),
         createLandingpage: overrides && overrides.hasOwnProperty('createLandingpage') ? overrides.createLandingpage! : aLandingpageEntityResponse(),
         createLandingpageLocalization: overrides && overrides.hasOwnProperty('createLandingpageLocalization') ? overrides.createLandingpageLocalization! : aLandingpageEntityResponse(),
@@ -535,6 +599,7 @@ export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
         createUploadFolder: overrides && overrides.hasOwnProperty('createUploadFolder') ? overrides.createUploadFolder! : anUploadFolderEntityResponse(),
         createUsersPermissionsRole: overrides && overrides.hasOwnProperty('createUsersPermissionsRole') ? overrides.createUsersPermissionsRole! : aUsersPermissionsCreateRolePayload(),
         createUsersPermissionsUser: overrides && overrides.hasOwnProperty('createUsersPermissionsUser') ? overrides.createUsersPermissionsUser! : aUsersPermissionsUserEntityResponse(),
+        deleteAuthor: overrides && overrides.hasOwnProperty('deleteAuthor') ? overrides.deleteAuthor! : anAuthorEntityResponse(),
         deleteHomepage: overrides && overrides.hasOwnProperty('deleteHomepage') ? overrides.deleteHomepage! : aHomepageEntityResponse(),
         deleteLandingpage: overrides && overrides.hasOwnProperty('deleteLandingpage') ? overrides.deleteLandingpage! : aLandingpageEntityResponse(),
         deleteMenupage: overrides && overrides.hasOwnProperty('deleteMenupage') ? overrides.deleteMenupage! : aMenupageEntityResponse(),
@@ -551,6 +616,7 @@ export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
         register: overrides && overrides.hasOwnProperty('register') ? overrides.register! : aUsersPermissionsLoginPayload(),
         removeFile: overrides && overrides.hasOwnProperty('removeFile') ? overrides.removeFile! : anUploadFileEntityResponse(),
         resetPassword: overrides && overrides.hasOwnProperty('resetPassword') ? overrides.resetPassword! : aUsersPermissionsLoginPayload(),
+        updateAuthor: overrides && overrides.hasOwnProperty('updateAuthor') ? overrides.updateAuthor! : anAuthorEntityResponse(),
         updateFileInfo: overrides && overrides.hasOwnProperty('updateFileInfo') ? overrides.updateFileInfo! : anUploadFileEntityResponse(),
         updateHomepage: overrides && overrides.hasOwnProperty('updateHomepage') ? overrides.updateHomepage! : aHomepageEntityResponse(),
         updateLandingpage: overrides && overrides.hasOwnProperty('updateLandingpage') ? overrides.updateLandingpage! : aLandingpageEntityResponse(),
@@ -586,6 +652,8 @@ export const aPaginationArg = (overrides?: Partial<PaginationArg>): PaginationAr
 export const aQuery = (overrides?: Partial<Query>): Query => {
     return {
         StoryPostBySlug: overrides && overrides.hasOwnProperty('StoryPostBySlug') ? overrides.StoryPostBySlug! : aStoryEntityResponse(),
+        author: overrides && overrides.hasOwnProperty('author') ? overrides.author! : anAuthorEntityResponse(),
+        authors: overrides && overrides.hasOwnProperty('authors') ? overrides.authors! : anAuthorEntityResponseCollection(),
         homepage: overrides && overrides.hasOwnProperty('homepage') ? overrides.homepage! : aHomepageEntityResponse(),
         i18NLocale: overrides && overrides.hasOwnProperty('i18NLocale') ? overrides.i18NLocale! : anI18NLocaleEntityResponse(),
         i18NLocales: overrides && overrides.hasOwnProperty('i18NLocales') ? overrides.i18NLocales! : anI18NLocaleEntityResponseCollection(),
@@ -617,10 +685,12 @@ export const aResponseCollectionMeta = (overrides?: Partial<ResponseCollectionMe
 
 export const aStory = (overrides?: Partial<Story>): Story => {
     return {
+        author: overrides && overrides.hasOwnProperty('author') ? overrides.author! : anAuthorEntityResponse(),
         components: overrides && overrides.hasOwnProperty('components') ? overrides.components! : [aComponentModulesImage()],
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : 'impedit',
         locale: overrides && overrides.hasOwnProperty('locale') ? overrides.locale! : 'laudantium',
         localizations: overrides && overrides.hasOwnProperty('localizations') ? overrides.localizations! : aStoryRelationResponseCollection(),
+        preface: overrides && overrides.hasOwnProperty('preface') ? overrides.preface! : 'aspernatur',
         publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : 'et',
         slug: overrides && overrides.hasOwnProperty('slug') ? overrides.slug! : 'minima',
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'deleniti',
@@ -652,12 +722,14 @@ export const aStoryEntityResponseCollection = (overrides?: Partial<StoryEntityRe
 export const aStoryFiltersInput = (overrides?: Partial<StoryFiltersInput>): StoryFiltersInput => {
     return {
         and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [aStoryFiltersInput()],
+        author: overrides && overrides.hasOwnProperty('author') ? overrides.author! : anAuthorFiltersInput(),
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : aDateTimeFilterInput(),
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : anIdFilterInput(),
         locale: overrides && overrides.hasOwnProperty('locale') ? overrides.locale! : aStringFilterInput(),
         localizations: overrides && overrides.hasOwnProperty('localizations') ? overrides.localizations! : aStoryFiltersInput(),
         not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : aStoryFiltersInput(),
         or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [aStoryFiltersInput()],
+        preface: overrides && overrides.hasOwnProperty('preface') ? overrides.preface! : aStringFilterInput(),
         publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : aDateTimeFilterInput(),
         slug: overrides && overrides.hasOwnProperty('slug') ? overrides.slug! : aStringFilterInput(),
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : aStringFilterInput(),
@@ -668,7 +740,9 @@ export const aStoryFiltersInput = (overrides?: Partial<StoryFiltersInput>): Stor
 
 export const aStoryInput = (overrides?: Partial<StoryInput>): StoryInput => {
     return {
+        author: overrides && overrides.hasOwnProperty('author') ? overrides.author! : 'da466e6a-9e48-4074-8653-af51bc678fec',
         components: overrides && overrides.hasOwnProperty('components') ? overrides.components! : ['nesciunt'],
+        preface: overrides && overrides.hasOwnProperty('preface') ? overrides.preface! : 'id',
         publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : 'nemo',
         slug: overrides && overrides.hasOwnProperty('slug') ? overrides.slug! : 'earum',
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'voluptates',
@@ -780,7 +854,7 @@ export const anUploadFile = (overrides?: Partial<UploadFile>): UploadFile => {
         previewUrl: overrides && overrides.hasOwnProperty('previewUrl') ? overrides.previewUrl! : 'distinctio',
         provider: overrides && overrides.hasOwnProperty('provider') ? overrides.provider! : 'dolorem',
         provider_metadata: overrides && overrides.hasOwnProperty('provider_metadata') ? overrides.provider_metadata! : 'qui',
-        related: overrides && overrides.hasOwnProperty('related') ? overrides.related! : [aComponentCoreTableBody()],
+        related: overrides && overrides.hasOwnProperty('related') ? overrides.related! : [anAuthor()],
         size: overrides && overrides.hasOwnProperty('size') ? overrides.size! : 6.1,
         updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : 'ut',
         url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'vel',
