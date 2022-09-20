@@ -13,12 +13,13 @@ registerEnumType(EntityNames, { name: 'EntityNames' })
 export const EntityIdentifierMapping: EntityMappingType[] = [
     {
         id: EntityNames.Archives,
-        metadata: {
-            endPointZoom2:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-2-archives/run',
-            identifiableURI: 'https://collectiedata.hetnieuweinstituut.nl/graph/archives',
+        zoomLevel2: {
+            endpoint: 'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-2-archives/run',
         },
-        filters: [
+        zoomLevel1: {
+            URI: 'https://collectiedata.hetnieuweinstituut.nl/graph/archives',
+        },
+        zoomLevel3: [
             {
                 id: 'date',
                 name: 'Datering',
@@ -60,12 +61,13 @@ export const EntityIdentifierMapping: EntityMappingType[] = [
     },
     {
         id: EntityNames.Objects,
-        metadata: {
-            endPointZoom2:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-2-objects/run',
-            identifiableURI: 'https://collectiedata.hetnieuweinstituut.nl/graph/objects',
+        zoomLevel1: {
+            URI: 'https://collectiedata.hetnieuweinstituut.nl/graph/objects',
         },
-        filters: [
+        zoomLevel2: {
+            endpoint: 'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-2-objects/run',
+        },
+        zoomLevel3: [
             {
                 id: 'subject',
                 name: 'Onderwerp',
@@ -155,12 +157,13 @@ export const EntityIdentifierMapping: EntityMappingType[] = [
     },
     {
         id: EntityNames.People,
-        metadata: {
-            endPointZoom2:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-2-people/run',
-            identifiableURI: 'https://collectiedata.hetnieuweinstituut.nl/graph/people',
+        zoomLevel1: {
+            URI: 'https://collectiedata.hetnieuweinstituut.nl/graph/people',
         },
-        filters: [
+        zoomLevel2: {
+            endpoint: 'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-2-people/run',
+        },
+        zoomLevel3: [
             {
                 id: 'deathDate',
                 name: 'Overlijdensdatum',
@@ -238,12 +241,13 @@ export const EntityIdentifierMapping: EntityMappingType[] = [
     },
     {
         id: EntityNames.Publications,
-        metadata: {
-            endPointZoom2:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-2-books/run',
-            identifiableURI: 'https://collectiedata.hetnieuweinstituut.nl/graph/books',
+        zoomLevel1: {
+            URI: 'https://collectiedata.hetnieuweinstituut.nl/graph/books',
         },
-        filters: [
+        zoomLevel2: {
+            endpoint: 'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-2-books/run',
+        },
+        zoomLevel3: [
             {
                 id: 'relatedPerson',
                 name: 'Gerelateerde persoon/instelling',
@@ -309,21 +313,23 @@ export const EntityIdentifierMapping: EntityMappingType[] = [
     },
     {
         id: EntityNames.Stories,
-        metadata: {
-            url: 'aa',
-        },
         type: 'strapi',
     },
 ]
 
 export interface EntityMappingType {
     id: EntityNames
-    metadata: EntityMappingMetaData
+    zoomLevel1?: {
+        URI: string
+    }
+    zoomLevel2?: {
+        endpoint: string
+    }
+    zoomLevel3?: EntityMappingZoomLevel3Type[]
     type: 'strapi' | 'tripli'
-    filters?: EntityMappingFiltersType[]
 }
 
-export interface EntityMappingFiltersType {
+export interface EntityMappingZoomLevel3Type {
     name: string
     id: string
     endpoint: string
@@ -333,12 +339,6 @@ export interface EntityMappingFiltersType {
         count: string
         total: string
     }
-}
-
-export interface EntityMappingMetaData {
-    endPointZoom2?: string
-    identifiableURI?: string
-    url?: string
 }
 
 @ObjectType()

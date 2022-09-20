@@ -50,7 +50,7 @@ export class TripliService {
             return {
                 name: r.dataset,
                 count: parseInt(r.count, 10),
-                id: EntityIdentifierMapping.find(e => e.metadata?.identifiableURI === r.graph)?.id,
+                id: EntityIdentifierMapping.find(e => e.zoomLevel1?.URI === r.graph)?.id,
             }
         })
     }
@@ -62,20 +62,20 @@ export class TripliService {
         }
 
         if (mapping.type === 'tripli') {
-            if (!mapping.metadata.endPointZoom2) {
+            if (!mapping.zoomLevel2?.endpoint) {
                 throw new Error('Zoom endpoint not found')
             }
             const apiKey = this.configService.getOrThrow('TRIPLY_API_KEY')
 
             const res = await lastValueFrom(
-                this.httpService.get<ObjectFilterData[]>(mapping.metadata.endPointZoom2, {
+                this.httpService.get<ObjectFilterData[]>(mapping.zoomLevel2.endpoint, {
                     headers: { Authorization: `Bearer ${apiKey}` },
                 })
             )
 
             if (res) {
                 const resN = res.data.map(f => {
-                    const filterMapping = mapping.filters?.find(m => m.name === f.filter)
+                    const filterMapping = mapping.zoomLevel3?.find(m => m.name === f.filter)
                     if (!filterMapping) return
                     return { filter: filterMapping.name, id: filterMapping.id }
                 })
@@ -94,7 +94,7 @@ export class TripliService {
         }
 
         if (mapping.type === 'tripli') {
-            const filterMapping = mapping.filters?.find(f => f.id === filter)
+            const filterMapping = mapping.zoomLevel3?.find(f => f.id === filter)
             if (!filterMapping) {
                 throw new Error(`Filter ${filter} not found`)
             }
