@@ -83,6 +83,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  Date: any;
   DateTime: any;
   HomepageComponentsDynamicZoneInput: any;
   I18NLocaleCode: any;
@@ -170,6 +171,27 @@ export type ComponentCorePageHeader = {
   Title?: Maybe<Scalars['String']>;
   content?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
+};
+
+export type ComponentCorePublicationDate = {
+  __typename?: 'ComponentCorePublicationDate';
+  date?: Maybe<Scalars['Date']>;
+  displayType?: Maybe<EnumComponentcorepublicationdateDisplaytype>;
+  id: Scalars['ID'];
+};
+
+export type ComponentCorePublicationDateFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<ComponentCorePublicationDateFiltersInput>>>;
+  date?: InputMaybe<DateFilterInput>;
+  displayType?: InputMaybe<StringFilterInput>;
+  not?: InputMaybe<ComponentCorePublicationDateFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ComponentCorePublicationDateFiltersInput>>>;
+};
+
+export type ComponentCorePublicationDateInput = {
+  date?: InputMaybe<Scalars['Date']>;
+  displayType?: InputMaybe<EnumComponentcorepublicationdateDisplaytype>;
+  id?: InputMaybe<Scalars['ID']>;
 };
 
 export type ComponentCoreTableBody = {
@@ -329,6 +351,30 @@ export type ComponentModulesTitleModule = {
   id: Scalars['ID'];
 };
 
+export type DateFilterInput = {
+  and?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>;
+  between?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>;
+  contains?: InputMaybe<Scalars['Date']>;
+  containsi?: InputMaybe<Scalars['Date']>;
+  endsWith?: InputMaybe<Scalars['Date']>;
+  eq?: InputMaybe<Scalars['Date']>;
+  eqi?: InputMaybe<Scalars['Date']>;
+  gt?: InputMaybe<Scalars['Date']>;
+  gte?: InputMaybe<Scalars['Date']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>;
+  lt?: InputMaybe<Scalars['Date']>;
+  lte?: InputMaybe<Scalars['Date']>;
+  ne?: InputMaybe<Scalars['Date']>;
+  not?: InputMaybe<DateFilterInput>;
+  notContains?: InputMaybe<Scalars['Date']>;
+  notContainsi?: InputMaybe<Scalars['Date']>;
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>;
+  notNull?: InputMaybe<Scalars['Boolean']>;
+  null?: InputMaybe<Scalars['Boolean']>;
+  or?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>;
+  startsWith?: InputMaybe<Scalars['Date']>;
+};
+
 export type DateTimeFilterInput = {
   and?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
   between?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
@@ -352,6 +398,11 @@ export type DateTimeFilterInput = {
   or?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
   startsWith?: InputMaybe<Scalars['DateTime']>;
 };
+
+export enum EnumComponentcorepublicationdateDisplaytype {
+  Date = 'date',
+  Year = 'year'
+}
 
 export enum EnumComponentmodulestablemoduleTablemodulespacingbottom {
   Lg = 'lg',
@@ -417,7 +468,7 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars['Float']>;
 };
 
-export type GenericMorph = Author | ComponentCorePageHeader | ComponentCoreTableBody | ComponentCoreTableBodyItem | ComponentCoreTableHead | ComponentCoreTableHeadItem | ComponentCoreTimeframe | ComponentModulesImage | ComponentModulesImageCarousel | ComponentModulesPullquote | ComponentModulesTableModule | ComponentModulesTextModule | ComponentModulesTitleModule | Homepage | I18NLocale | Landingpage | Location | Menupage | Story | Table | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type GenericMorph = Author | ComponentCorePageHeader | ComponentCorePublicationDate | ComponentCoreTableBody | ComponentCoreTableBodyItem | ComponentCoreTableHead | ComponentCoreTableHeadItem | ComponentCoreTimeframe | ComponentModulesImage | ComponentModulesImageCarousel | ComponentModulesPullquote | ComponentModulesTableModule | ComponentModulesTextModule | ComponentModulesTitleModule | Homepage | I18NLocale | Landingpage | Location | Menupage | Story | Table | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
 
 export type Homepage = {
   __typename?: 'Homepage';
@@ -1344,6 +1395,7 @@ export type Story = {
   localizations?: Maybe<StoryRelationResponseCollection>;
   locations?: Maybe<LocationRelationResponseCollection>;
   preface?: Maybe<Scalars['String']>;
+  publicationDate?: Maybe<ComponentCorePublicationDate>;
   publishedAt?: Maybe<Scalars['DateTime']>;
   slug?: Maybe<Scalars['String']>;
   timeframe?: Maybe<ComponentCoreTimeframe>;
@@ -1398,6 +1450,7 @@ export type StoryFiltersInput = {
   not?: InputMaybe<StoryFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<StoryFiltersInput>>>;
   preface?: InputMaybe<StringFilterInput>;
+  publicationDate?: InputMaybe<ComponentCorePublicationDateFiltersInput>;
   publishedAt?: InputMaybe<DateTimeFilterInput>;
   slug?: InputMaybe<StringFilterInput>;
   timeframe?: InputMaybe<ComponentCoreTimeframeFiltersInput>;
@@ -1411,6 +1464,7 @@ export type StoryInput = {
   components?: InputMaybe<Array<Scalars['StoryComponentsDynamicZoneInput']>>;
   locations?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   preface?: InputMaybe<Scalars['String']>;
+  publicationDate?: InputMaybe<ComponentCorePublicationDateInput>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
   slug?: InputMaybe<Scalars['String']>;
   timeframe?: InputMaybe<ComponentCoreTimeframeInput>;
@@ -1918,7 +1972,7 @@ export type StoryBySlugQueryVariables = Exact<{
 }>;
 
 
-export type StoryBySlugQuery = { __typename?: 'Query', stories?: { __typename?: 'StoryEntityResponseCollection', data: Array<{ __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, preface?: string | null, publishedAt?: any | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', id?: string | null, attributes?: { __typename?: 'Author', firstName?: string | null, insertion?: string | null, lastName?: string | null } | null } | null } | null, timeframe?: { __typename?: 'ComponentCoreTimeframe', id: string, yearStart?: any | null, yearEnd?: any | null } | null, locations?: { __typename?: 'LocationRelationResponseCollection', data: Array<{ __typename?: 'LocationEntity', id?: string | null, attributes?: { __typename?: 'Location', city?: string | null } | null }> } | null, components?: Array<{ __typename?: 'ComponentModulesImage', id: string, caption?: string | null, alt_text?: string | null, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } } | { __typename?: 'ComponentModulesImageCarousel', id: string, description?: string | null, images?: { __typename?: 'UploadFileRelationResponseCollection', data: Array<{ __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null } | null }> } | null } | { __typename?: 'ComponentModulesPullquote', id: string, text?: string | null } | { __typename?: 'ComponentModulesTableModule', id: string, tableModuleSpacingTop?: EnumComponentmodulestablemoduleTablemodulespacingtop | null, tableModuleSpacingBottom?: EnumComponentmodulestablemoduleTablemodulespacingbottom | null, table?: { __typename?: 'TableEntityResponse', data?: { __typename?: 'TableEntity', id?: string | null, attributes?: { __typename?: 'Table', name?: string | null, description?: string | null, Tablehead?: { __typename?: 'ComponentCoreTableHead', id: string, TableHeadItem?: Array<{ __typename?: 'ComponentCoreTableHeadItem', id: string, label?: string | null } | null> | null } | null, TableBody?: Array<{ __typename?: 'ComponentCoreTableBody', id: string, TableBodyItem?: Array<{ __typename?: 'ComponentCoreTableBodyItem', id: string, value?: string | null } | null> | null } | null> | null } | null } | null } | null } | { __typename?: 'ComponentModulesTextModule', id: string, Richtext?: string | null, textModuleSpacingBottom?: EnumComponentmodulestextmoduleTextmodulespacingbottom | null, textModuleSpacingTop?: EnumComponentmodulestextmoduleTextmodulespacingtop | null } | { __typename?: 'ComponentModulesTitleModule', id: string, Title?: string | null } | { __typename?: 'Error' } | null> | null } | null }> } | null };
+export type StoryBySlugQuery = { __typename?: 'Query', stories?: { __typename?: 'StoryEntityResponseCollection', data: Array<{ __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, preface?: string | null, publishedAt?: any | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', id?: string | null, attributes?: { __typename?: 'Author', firstName?: string | null, insertion?: string | null, lastName?: string | null } | null } | null } | null, timeframe?: { __typename?: 'ComponentCoreTimeframe', id: string, yearStart?: any | null, yearEnd?: any | null } | null, locations?: { __typename?: 'LocationRelationResponseCollection', data: Array<{ __typename?: 'LocationEntity', id?: string | null, attributes?: { __typename?: 'Location', city?: string | null } | null }> } | null, publicationDate?: { __typename?: 'ComponentCorePublicationDate', date?: any | null, displayType?: EnumComponentcorepublicationdateDisplaytype | null } | null, components?: Array<{ __typename?: 'ComponentModulesImage', id: string, caption?: string | null, alt_text?: string | null, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } } | { __typename?: 'ComponentModulesImageCarousel', id: string, description?: string | null, images?: { __typename?: 'UploadFileRelationResponseCollection', data: Array<{ __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null } | null }> } | null } | { __typename?: 'ComponentModulesPullquote', id: string, text?: string | null } | { __typename?: 'ComponentModulesTableModule', id: string, tableModuleSpacingTop?: EnumComponentmodulestablemoduleTablemodulespacingtop | null, tableModuleSpacingBottom?: EnumComponentmodulestablemoduleTablemodulespacingbottom | null, table?: { __typename?: 'TableEntityResponse', data?: { __typename?: 'TableEntity', id?: string | null, attributes?: { __typename?: 'Table', name?: string | null, description?: string | null, Tablehead?: { __typename?: 'ComponentCoreTableHead', id: string, TableHeadItem?: Array<{ __typename?: 'ComponentCoreTableHeadItem', id: string, label?: string | null } | null> | null } | null, TableBody?: Array<{ __typename?: 'ComponentCoreTableBody', id: string, TableBodyItem?: Array<{ __typename?: 'ComponentCoreTableBodyItem', id: string, value?: string | null } | null> | null } | null> | null } | null } | null } | null } | { __typename?: 'ComponentModulesTextModule', id: string, Richtext?: string | null, textModuleSpacingBottom?: EnumComponentmodulestextmoduleTextmodulespacingbottom | null, textModuleSpacingTop?: EnumComponentmodulestextmoduleTextmodulespacingtop | null } | { __typename?: 'ComponentModulesTitleModule', id: string, Title?: string | null } | { __typename?: 'Error' } | null> | null } | null }> } | null };
 
 export const ImageCarouselModuleFragmentFragmentDoc = gql`
     fragment imageCarouselModuleFragment on ComponentModulesImageCarousel {
@@ -2224,6 +2278,10 @@ export const StoryBySlugDocument = gql`
               city
             }
           }
+        }
+        publicationDate {
+          date
+          displayType
         }
         components {
           ... on ComponentModulesTextModule {

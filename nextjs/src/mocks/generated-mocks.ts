@@ -1,4 +1,4 @@
-import { Author, AuthorEntity, AuthorEntityResponse, AuthorEntityResponseCollection, AuthorFiltersInput, AuthorInput, BooleanFilterInput, ComponentCorePageHeader, ComponentCoreTableBody, ComponentCoreTableBodyFiltersInput, ComponentCoreTableBodyInput, ComponentCoreTableBodyItem, ComponentCoreTableBodyItemFiltersInput, ComponentCoreTableBodyItemInput, ComponentCoreTableHead, ComponentCoreTableHeadFiltersInput, ComponentCoreTableHeadInput, ComponentCoreTableHeadItem, ComponentCoreTableHeadItemFiltersInput, ComponentCoreTableHeadItemInput, ComponentCoreTimeframe, ComponentCoreTimeframeFiltersInput, ComponentCoreTimeframeInput, ComponentModulesImage, ComponentModulesImageCarousel, ComponentModulesPullquote, ComponentModulesTableModule, ComponentModulesTextModule, ComponentModulesTitleModule, DateTimeFilterInput, Error, FileInfoInput, FloatFilterInput, Homepage, HomepageEntity, HomepageEntityResponse, HomepageInput, HomepageRelationResponseCollection, I18NLocale, I18NLocaleEntity, I18NLocaleEntityResponse, I18NLocaleEntityResponseCollection, I18NLocaleFiltersInput, IdFilterInput, IntFilterInput, JsonFilterInput, Landingpage, LandingpageEntity, LandingpageEntityResponse, LandingpageEntityResponseCollection, LandingpageFiltersInput, LandingpageInput, LandingpageRelationResponseCollection, Location, LocationEntity, LocationEntityResponse, LocationEntityResponseCollection, LocationFiltersInput, LocationInput, LocationRelationResponseCollection, LongFilterInput, Menupage, MenupageEntity, MenupageEntityResponse, MenupageEntityResponseCollection, MenupageFiltersInput, MenupageInput, MenupageRelationResponseCollection, Mutation, Pagination, PaginationArg, Query, ResponseCollectionMeta, Story, StoryEntity, StoryEntityResponse, StoryEntityResponseCollection, StoryFiltersInput, StoryInput, StoryRelationResponseCollection, StringFilterInput, Table, TableEntity, TableEntityResponse, TableEntityResponseCollection, TableFiltersInput, TableInput, UploadFile, UploadFileEntity, UploadFileEntityResponse, UploadFileEntityResponseCollection, UploadFileFiltersInput, UploadFileInput, UploadFileRelationResponseCollection, UploadFolder, UploadFolderEntity, UploadFolderEntityResponse, UploadFolderEntityResponseCollection, UploadFolderFiltersInput, UploadFolderInput, UploadFolderRelationResponseCollection, UsersPermissionsCreateRolePayload, UsersPermissionsDeleteRolePayload, UsersPermissionsLoginInput, UsersPermissionsLoginPayload, UsersPermissionsMe, UsersPermissionsMeRole, UsersPermissionsPasswordPayload, UsersPermissionsPermission, UsersPermissionsPermissionEntity, UsersPermissionsPermissionFiltersInput, UsersPermissionsPermissionRelationResponseCollection, UsersPermissionsRegisterInput, UsersPermissionsRole, UsersPermissionsRoleEntity, UsersPermissionsRoleEntityResponse, UsersPermissionsRoleEntityResponseCollection, UsersPermissionsRoleFiltersInput, UsersPermissionsRoleInput, UsersPermissionsUpdateRolePayload, UsersPermissionsUser, UsersPermissionsUserEntity, UsersPermissionsUserEntityResponse, UsersPermissionsUserEntityResponseCollection, UsersPermissionsUserFiltersInput, UsersPermissionsUserInput, UsersPermissionsUserRelationResponseCollection, EnumComponentmodulestablemoduleTablemodulespacingbottom, EnumComponentmodulestablemoduleTablemodulespacingtop, EnumComponentmodulestextmoduleTextmodulespacingbottom, EnumComponentmodulestextmoduleTextmodulespacingtop, PublicationState } from '../generated/graphql';
+import { Author, AuthorEntity, AuthorEntityResponse, AuthorEntityResponseCollection, AuthorFiltersInput, AuthorInput, BooleanFilterInput, ComponentCorePageHeader, ComponentCorePublicationDate, ComponentCorePublicationDateFiltersInput, ComponentCorePublicationDateInput, ComponentCoreTableBody, ComponentCoreTableBodyFiltersInput, ComponentCoreTableBodyInput, ComponentCoreTableBodyItem, ComponentCoreTableBodyItemFiltersInput, ComponentCoreTableBodyItemInput, ComponentCoreTableHead, ComponentCoreTableHeadFiltersInput, ComponentCoreTableHeadInput, ComponentCoreTableHeadItem, ComponentCoreTableHeadItemFiltersInput, ComponentCoreTableHeadItemInput, ComponentCoreTimeframe, ComponentCoreTimeframeFiltersInput, ComponentCoreTimeframeInput, ComponentModulesImage, ComponentModulesImageCarousel, ComponentModulesPullquote, ComponentModulesTableModule, ComponentModulesTextModule, ComponentModulesTitleModule, DateFilterInput, DateTimeFilterInput, Error, FileInfoInput, FloatFilterInput, Homepage, HomepageEntity, HomepageEntityResponse, HomepageInput, HomepageRelationResponseCollection, I18NLocale, I18NLocaleEntity, I18NLocaleEntityResponse, I18NLocaleEntityResponseCollection, I18NLocaleFiltersInput, IdFilterInput, IntFilterInput, JsonFilterInput, Landingpage, LandingpageEntity, LandingpageEntityResponse, LandingpageEntityResponseCollection, LandingpageFiltersInput, LandingpageInput, LandingpageRelationResponseCollection, Location, LocationEntity, LocationEntityResponse, LocationEntityResponseCollection, LocationFiltersInput, LocationInput, LocationRelationResponseCollection, LongFilterInput, Menupage, MenupageEntity, MenupageEntityResponse, MenupageEntityResponseCollection, MenupageFiltersInput, MenupageInput, MenupageRelationResponseCollection, Mutation, Pagination, PaginationArg, Query, ResponseCollectionMeta, Story, StoryEntity, StoryEntityResponse, StoryEntityResponseCollection, StoryFiltersInput, StoryInput, StoryRelationResponseCollection, StringFilterInput, Table, TableEntity, TableEntityResponse, TableEntityResponseCollection, TableFiltersInput, TableInput, UploadFile, UploadFileEntity, UploadFileEntityResponse, UploadFileEntityResponseCollection, UploadFileFiltersInput, UploadFileInput, UploadFileRelationResponseCollection, UploadFolder, UploadFolderEntity, UploadFolderEntityResponse, UploadFolderEntityResponseCollection, UploadFolderFiltersInput, UploadFolderInput, UploadFolderRelationResponseCollection, UsersPermissionsCreateRolePayload, UsersPermissionsDeleteRolePayload, UsersPermissionsLoginInput, UsersPermissionsLoginPayload, UsersPermissionsMe, UsersPermissionsMeRole, UsersPermissionsPasswordPayload, UsersPermissionsPermission, UsersPermissionsPermissionEntity, UsersPermissionsPermissionFiltersInput, UsersPermissionsPermissionRelationResponseCollection, UsersPermissionsRegisterInput, UsersPermissionsRole, UsersPermissionsRoleEntity, UsersPermissionsRoleEntityResponse, UsersPermissionsRoleEntityResponseCollection, UsersPermissionsRoleFiltersInput, UsersPermissionsRoleInput, UsersPermissionsUpdateRolePayload, UsersPermissionsUser, UsersPermissionsUserEntity, UsersPermissionsUserEntityResponse, UsersPermissionsUserEntityResponseCollection, UsersPermissionsUserFiltersInput, UsersPermissionsUserInput, UsersPermissionsUserRelationResponseCollection, EnumComponentcorepublicationdateDisplaytype, EnumComponentmodulestablemoduleTablemodulespacingbottom, EnumComponentmodulestablemoduleTablemodulespacingtop, EnumComponentmodulestextmoduleTextmodulespacingbottom, EnumComponentmodulestextmoduleTextmodulespacingtop, PublicationState } from '../generated/graphql';
 
 export const anAuthor = (overrides?: Partial<Author>): Author => {
     return {
@@ -86,6 +86,32 @@ export const aComponentCorePageHeader = (overrides?: Partial<ComponentCorePageHe
         Title: overrides && overrides.hasOwnProperty('Title') ? overrides.Title! : 'dolore',
         content: overrides && overrides.hasOwnProperty('content') ? overrides.content! : 'illum',
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '56b4f843-e03d-4027-af18-11fa3418caa8',
+    };
+};
+
+export const aComponentCorePublicationDate = (overrides?: Partial<ComponentCorePublicationDate>): ComponentCorePublicationDate => {
+    return {
+        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : '1970-01-16T02:31:32.480Z',
+        displayType: overrides && overrides.hasOwnProperty('displayType') ? overrides.displayType! : EnumComponentcorepublicationdateDisplaytype.Date,
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '315f9d7f-1a61-4489-8590-0fb737d3a0af',
+    };
+};
+
+export const aComponentCorePublicationDateFiltersInput = (overrides?: Partial<ComponentCorePublicationDateFiltersInput>): ComponentCorePublicationDateFiltersInput => {
+    return {
+        and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [aComponentCorePublicationDateFiltersInput()],
+        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : aDateFilterInput(),
+        displayType: overrides && overrides.hasOwnProperty('displayType') ? overrides.displayType! : aStringFilterInput(),
+        not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : aComponentCorePublicationDateFiltersInput(),
+        or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [aComponentCorePublicationDateFiltersInput()],
+    };
+};
+
+export const aComponentCorePublicationDateInput = (overrides?: Partial<ComponentCorePublicationDateInput>): ComponentCorePublicationDateInput => {
+    return {
+        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : '1970-01-12T02:09:01.168Z',
+        displayType: overrides && overrides.hasOwnProperty('displayType') ? overrides.displayType! : EnumComponentcorepublicationdateDisplaytype.Date,
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '2621920b-860c-4ca6-97fd-1c8dc9a9231f',
     };
 };
 
@@ -253,6 +279,32 @@ export const aComponentModulesTitleModule = (overrides?: Partial<ComponentModule
     return {
         Title: overrides && overrides.hasOwnProperty('Title') ? overrides.Title! : 'quibusdam',
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'aeabb66f-3a23-42b4-8215-f8fb4e849040',
+    };
+};
+
+export const aDateFilterInput = (overrides?: Partial<DateFilterInput>): DateFilterInput => {
+    return {
+        and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : ['1970-01-11T04:58:59.069Z'],
+        between: overrides && overrides.hasOwnProperty('between') ? overrides.between! : ['1970-01-03T10:30:12.707Z'],
+        contains: overrides && overrides.hasOwnProperty('contains') ? overrides.contains! : '1970-01-13T04:23:34.998Z',
+        containsi: overrides && overrides.hasOwnProperty('containsi') ? overrides.containsi! : '1970-01-06T13:24:29.508Z',
+        endsWith: overrides && overrides.hasOwnProperty('endsWith') ? overrides.endsWith! : '1970-01-06T15:47:11.254Z',
+        eq: overrides && overrides.hasOwnProperty('eq') ? overrides.eq! : '1970-01-05T20:54:04.270Z',
+        eqi: overrides && overrides.hasOwnProperty('eqi') ? overrides.eqi! : '1970-01-14T13:00:14.712Z',
+        gt: overrides && overrides.hasOwnProperty('gt') ? overrides.gt! : '1970-01-14T17:54:49.544Z',
+        gte: overrides && overrides.hasOwnProperty('gte') ? overrides.gte! : '1970-01-06T04:16:38.278Z',
+        in: overrides && overrides.hasOwnProperty('in') ? overrides.in! : ['1970-01-09T13:20:15.886Z'],
+        lt: overrides && overrides.hasOwnProperty('lt') ? overrides.lt! : '1970-01-07T10:17:59.549Z',
+        lte: overrides && overrides.hasOwnProperty('lte') ? overrides.lte! : '1970-01-05T15:12:59.762Z',
+        ne: overrides && overrides.hasOwnProperty('ne') ? overrides.ne! : '1970-01-05T08:19:28.298Z',
+        not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : aDateFilterInput(),
+        notContains: overrides && overrides.hasOwnProperty('notContains') ? overrides.notContains! : '1970-01-05T22:04:37.725Z',
+        notContainsi: overrides && overrides.hasOwnProperty('notContainsi') ? overrides.notContainsi! : '1970-01-04T20:58:04.572Z',
+        notIn: overrides && overrides.hasOwnProperty('notIn') ? overrides.notIn! : ['1970-01-03T08:46:19.872Z'],
+        notNull: overrides && overrides.hasOwnProperty('notNull') ? overrides.notNull! : true,
+        null: overrides && overrides.hasOwnProperty('null') ? overrides.null! : false,
+        or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : ['1970-01-05T00:29:49.006Z'],
+        startsWith: overrides && overrides.hasOwnProperty('startsWith') ? overrides.startsWith! : '1970-01-11T11:23:51.132Z',
     };
 };
 
@@ -812,6 +864,7 @@ export const aStory = (overrides?: Partial<Story>): Story => {
         localizations: overrides && overrides.hasOwnProperty('localizations') ? overrides.localizations! : aStoryRelationResponseCollection(),
         locations: overrides && overrides.hasOwnProperty('locations') ? overrides.locations! : aLocationRelationResponseCollection(),
         preface: overrides && overrides.hasOwnProperty('preface') ? overrides.preface! : 'aspernatur',
+        publicationDate: overrides && overrides.hasOwnProperty('publicationDate') ? overrides.publicationDate! : aComponentCorePublicationDate(),
         publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : 'et',
         slug: overrides && overrides.hasOwnProperty('slug') ? overrides.slug! : 'minima',
         timeframe: overrides && overrides.hasOwnProperty('timeframe') ? overrides.timeframe! : aComponentCoreTimeframe(),
@@ -853,6 +906,7 @@ export const aStoryFiltersInput = (overrides?: Partial<StoryFiltersInput>): Stor
         not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : aStoryFiltersInput(),
         or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [aStoryFiltersInput()],
         preface: overrides && overrides.hasOwnProperty('preface') ? overrides.preface! : aStringFilterInput(),
+        publicationDate: overrides && overrides.hasOwnProperty('publicationDate') ? overrides.publicationDate! : aComponentCorePublicationDateFiltersInput(),
         publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : aDateTimeFilterInput(),
         slug: overrides && overrides.hasOwnProperty('slug') ? overrides.slug! : aStringFilterInput(),
         timeframe: overrides && overrides.hasOwnProperty('timeframe') ? overrides.timeframe! : aComponentCoreTimeframeFiltersInput(),
@@ -868,6 +922,7 @@ export const aStoryInput = (overrides?: Partial<StoryInput>): StoryInput => {
         components: overrides && overrides.hasOwnProperty('components') ? overrides.components! : ['nesciunt'],
         locations: overrides && overrides.hasOwnProperty('locations') ? overrides.locations! : ['6160e737-90eb-492d-b5fe-34a5ddb88a50'],
         preface: overrides && overrides.hasOwnProperty('preface') ? overrides.preface! : 'id',
+        publicationDate: overrides && overrides.hasOwnProperty('publicationDate') ? overrides.publicationDate! : aComponentCorePublicationDateInput(),
         publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : 'nemo',
         slug: overrides && overrides.hasOwnProperty('slug') ? overrides.slug! : 'earum',
         timeframe: overrides && overrides.hasOwnProperty('timeframe') ? overrides.timeframe! : aComponentCoreTimeframeInput(),

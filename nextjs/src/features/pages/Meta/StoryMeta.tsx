@@ -1,9 +1,14 @@
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { formatDate } from '@/features/shared/utils/dates'
-import { Box, Link, Text } from '@chakra-ui/react'
-import { Author, ComponentCoreTimeframe, StoryBySlugQuery } from 'src/generated/graphql'
-import NextLink from 'next/link'
 import { keyExtractor } from '@/features/shared/utils/lists'
+import { Box, Link, Text } from '@chakra-ui/react'
+import NextLink from 'next/link'
+import {
+    Author,
+    ComponentCoreTimeframe,
+    EnumComponentcorepublicationdateDisplaytype,
+    StoryBySlugQuery,
+} from 'src/generated/graphql'
 
 type Story = NonNullable<NonNullable<NonNullable<StoryBySlugQuery['stories']>['data']>[0]>
 interface Props {
@@ -18,7 +23,17 @@ export const StoryMeta: React.FC<Props> = ({ story }) => {
         <Box>
             <Box mb={6}>
                 <Text textStyle={'micro'}>
-                    {commonT.t('published', { date: formatDate(story.attributes?.publishedAt, 'YYYY') })}
+                    {commonT.t('published', {
+                        date: story.attributes?.publicationDate
+                            ? formatPublicationDate(
+                                  story.attributes?.publicationDate.displayType,
+                                  story.attributes?.publicationDate.date
+                              )
+                            : formatPublicationDate(
+                                  EnumComponentcorepublicationdateDisplaytype.Year,
+                                  story.attributes?.publishedAt
+                              ),
+                    })}
                 </Text>
                 {story.attributes?.author?.data?.attributes && (
                     <Text textStyle={'micro'}>{formatAuthor(story.attributes?.author?.data?.attributes)}</Text>
@@ -63,6 +78,18 @@ export const StoryMeta: React.FC<Props> = ({ story }) => {
             )}
         </Box>
     )
+}
+
+function formatPublicationDate(type?: EnumComponentcorepublicationdateDisplaytype | null, date?: string | null) {
+    if (date && type === EnumComponentcorepublicationdateDisplaytype.Year) {
+        return formatDate(date, 'YYYY')
+    }
+
+    if (date && type === EnumComponentcorepublicationdateDisplaytype.Date) {
+        return formatDate(date, 'DD/MM/YYYY')
+    }
+
+    return undefined
 }
 
 function formatTimeframe(timeframe: ComponentCoreTimeframe) {
