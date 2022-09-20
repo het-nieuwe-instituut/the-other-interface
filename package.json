@@ -12,6 +12,6 @@
     "husky": "^8.0.1"
   },
   "dependencies": {
-    "class-validator": "^0.13.2"
+    "strapi": "file:strapi"
   }
 }

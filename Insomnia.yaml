@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2022-09-19T12:58:30.321Z
+__export_date: 2022-09-20T07:01:10.005Z
 __export_source: insomnia.desktop.app:v2022.5.1
 resources:
   - _id: req_bb8d9c352e5d4b579d857e8a70e52b13
@@ -288,7 +288,7 @@ resources:
     _type: request
   - _id: req_0b0e22edd8f04ddeb84f12bd0c67503c
     parentId: fld_2e4d378ece7940d293196c73bcedee62
-    modified: 1663592283681
+    modified: 1663595843178
     created: 1663591957105
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: typeOfPublication"
@@ -316,7 +316,7 @@ resources:
     _type: request
   - _id: req_e57d9b641dba45c782a85d6d05828c46
     parentId: fld_6a13fd5f66564f3a8dfade5a7fd87214
-    modified: 1663591903229
+    modified: 1663656571849
     created: 1663591475796
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: deathDate"
