@@ -44,6 +44,6 @@ export class StoryType {
     @Field(() => StoryAttributesType, { nullable: true })
     public attributes?: StoryAttributesType
 
-    @Field({ nullable: true })
-    public people?: PeopleType
+    @Field(() => [PeopleType], { nullable: 'itemsAndList' })
+    public people?: PeopleType[]
 }
