@@ -1,8 +1,11 @@
-import { ComponentModulesImage, HomepageQuery } from 'src/generated/graphql'
+import { ComponentModulesImage, ComponentModulesImageCarousel, HomepageQuery } from 'src/generated/graphql'
 import MediaImage from '../components/Image/Image'
+import { ImageCarousel } from '../components/ImageCarousel/ImageCarousel'
 import { Pullquote } from '../components/Pullquote/Pullquote'
 import { SubtitleModule } from '../components/SubtitleModule/SubtitleModule'
-import { Text } from '../components/Text/Text'
+import { TableModule } from '../components/TableModule/TableModule'
+import { Title } from '../components/Title/Title'
+import { TextModule } from '../components/TextModule/TextModule'
 
 interface Props {
     components: HomePageComponents
@@ -13,7 +16,6 @@ type HomePageComponents = NonNullable<
 >['components']
 
 export function DynamicComponentRenderer(props: Props) {
-    console.log(props)
     return (
         <>
             {props.components?.map((component, index, array) => {
@@ -21,7 +23,7 @@ export function DynamicComponentRenderer(props: Props) {
 
                 if (typeName) {
                     if (component?.__typename === 'ComponentModulesTextModule') {
-                        return <Text key={keyExtractor(component.id, index, array)} component={component} />
+                        return <TextModule key={keyExtractor(component.id, index, array)} component={component} />
                     }
                 }
 
@@ -42,6 +44,33 @@ export function DynamicComponentRenderer(props: Props) {
                     }
                 }
 
+                if (typeName) {
+                    if (component?.__typename === 'ComponentModulesTableModule') {
+                        return <TableModule key={component.id} component={component} />
+                    }
+                }
+
+                if (typeName) {
+                    if (component?.__typename === 'ComponentModulesTitleModule') {
+                        return <Title key={component.id} component={component} />
+                    }
+                }
+
+                if (typeName) {
+                    if (component?.__typename === 'ComponentModulesImageCarousel') {
+                        return (
+                            <ImageCarousel key={component.id} component={component as ComponentModulesImageCarousel} />
+                        )
+                    }
+                }
+
+                if (typeName) {
+                    if (component?.__typename === 'ComponentModulesImageCarousel') {
+                        return (
+                            <ImageCarousel key={component.id} component={component as ComponentModulesImageCarousel} />
+                        )
+                    }
+                }
                 return null
             }) ?? null}
         </>

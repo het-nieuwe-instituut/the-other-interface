@@ -26,7 +26,11 @@
       "components": [
         "modules.pullquote",
         "modules.text-module",
-        "modules.subtitle"
+        "modules.subtitle",
+        "modules.image-carousel",
+        "modules.image",
+        "modules.table-module",
+        "modules.title-module"
       ]
     },
     "Title": {

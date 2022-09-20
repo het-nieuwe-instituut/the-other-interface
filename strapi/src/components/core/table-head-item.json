@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_core_table_head_items",
+  "info": {
+    "displayName": "TableHeadItem",
+    "icon": "table"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    }
+  }
+}

@@ -1,6 +1,9 @@
 #import '../fragments/components/TextModule.fragment.graphql'
 #import '../fragments/components/PullquoteModule.fragment.graphql'
 #import '../fragments/components/ImageModule.fragment.graphql'
+#import '../fragments/components/TableModuleFragment.fragment.graphql'
+#import '../fragments/components/TitleModule.fragment.graphql'
+#import '../fragments/components/ImageCarousel.fragment.graphql'
 #import '../fragments/components/SubtitleModule.fragment.graphql'
 
 query homepage($locale: I18NLocaleCode) {
@@ -18,6 +21,15 @@ query homepage($locale: I18NLocaleCode) {
                     }
                     ... on ComponentModulesPullquote {
                         ...pullquoteModuleFragment
+                    }
+                    ... on ComponentModulesTableModule {
+                        ...tableModuleFragment
+                    }
+                    ... on ComponentModulesTitleModule {
+                        ...titleModuleFragment
+                    }
+                    ... on ComponentModulesImageCarousel {
+                        ...imageCarouselModuleFragment
                     }
                     ... on ComponentModulesSubtitle {
                         ...subtitleModuleFragment

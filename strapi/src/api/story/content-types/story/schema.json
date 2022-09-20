@@ -47,7 +47,11 @@
       "components": [
         "modules.pullquote",
         "modules.text-module",
-        "modules.subtitle"
+        "modules.subtitle",
+        "modules.title-module",
+        "modules.image-carousel",
+        "modules.image",
+        "modules.table-module"
       ],
       "pluginOptions": {
         "i18n": {

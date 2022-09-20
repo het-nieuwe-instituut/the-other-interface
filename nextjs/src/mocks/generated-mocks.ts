@@ -1,4 +1,4 @@
-import { BooleanFilterInput, ComponentModulesImage, ComponentModulesPullquote, ComponentModulesSubtitle, ComponentModulesTextModule, DateTimeFilterInput, Error, FileInfoInput, FloatFilterInput, Homepage, HomepageEntity, HomepageEntityResponse, HomepageInput, HomepageRelationResponseCollection, I18NLocale, I18NLocaleEntity, I18NLocaleEntityResponse, I18NLocaleEntityResponseCollection, I18NLocaleFiltersInput, IdFilterInput, IntFilterInput, JsonFilterInput, Landingpage, LandingpageEntity, LandingpageEntityResponse, LandingpageEntityResponseCollection, LandingpageFiltersInput, LandingpageInput, LandingpageRelationResponseCollection, Menupage, MenupageEntity, MenupageEntityResponse, MenupageEntityResponseCollection, MenupageFiltersInput, MenupageInput, MenupageRelationResponseCollection, Mutation, Pagination, PaginationArg, Query, ResponseCollectionMeta, Story, StoryEntity, StoryEntityResponse, StoryEntityResponseCollection, StoryFiltersInput, StoryInput, StoryRelationResponseCollection, StringFilterInput, UploadFile, UploadFileEntity, UploadFileEntityResponse, UploadFileEntityResponseCollection, UploadFileFiltersInput, UploadFileInput, UploadFileRelationResponseCollection, UploadFolder, UploadFolderEntity, UploadFolderEntityResponse, UploadFolderEntityResponseCollection, UploadFolderFiltersInput, UploadFolderInput, UploadFolderRelationResponseCollection, UsersPermissionsCreateRolePayload, UsersPermissionsDeleteRolePayload, UsersPermissionsLoginInput, UsersPermissionsLoginPayload, UsersPermissionsMe, UsersPermissionsMeRole, UsersPermissionsPasswordPayload, UsersPermissionsPermission, UsersPermissionsPermissionEntity, UsersPermissionsPermissionFiltersInput, UsersPermissionsPermissionRelationResponseCollection, UsersPermissionsRegisterInput, UsersPermissionsRole, UsersPermissionsRoleEntity, UsersPermissionsRoleEntityResponse, UsersPermissionsRoleEntityResponseCollection, UsersPermissionsRoleFiltersInput, UsersPermissionsRoleInput, UsersPermissionsUpdateRolePayload, UsersPermissionsUser, UsersPermissionsUserEntity, UsersPermissionsUserEntityResponse, UsersPermissionsUserEntityResponseCollection, UsersPermissionsUserFiltersInput, UsersPermissionsUserInput, UsersPermissionsUserRelationResponseCollection, PublicationState } from '../generated/graphql';
+import { BooleanFilterInput, ComponentCoreTableBody, ComponentCoreTableBodyFiltersInput, ComponentCoreTableBodyInput, ComponentCoreTableBodyItem, ComponentCoreTableBodyItemFiltersInput, ComponentCoreTableBodyItemInput, ComponentCoreTableHead, ComponentCoreTableHeadFiltersInput, ComponentCoreTableHeadInput, ComponentCoreTableHeadItem, ComponentCoreTableHeadItemFiltersInput, ComponentCoreTableHeadItemInput, ComponentModulesImage, ComponentModulesImageCarousel, ComponentModulesPullquote, ComponentModulesSubtitle, ComponentModulesTableModule, ComponentModulesTextModule, ComponentModulesTitleModule, DateTimeFilterInput, Error, FileInfoInput, FloatFilterInput, Homepage, HomepageEntity, HomepageEntityResponse, HomepageInput, HomepageRelationResponseCollection, I18NLocale, I18NLocaleEntity, I18NLocaleEntityResponse, I18NLocaleEntityResponseCollection, I18NLocaleFiltersInput, IdFilterInput, IntFilterInput, JsonFilterInput, Landingpage, LandingpageEntity, LandingpageEntityResponse, LandingpageEntityResponseCollection, LandingpageFiltersInput, LandingpageInput, LandingpageRelationResponseCollection, Menupage, MenupageEntity, MenupageEntityResponse, MenupageEntityResponseCollection, MenupageFiltersInput, MenupageInput, MenupageRelationResponseCollection, Mutation, Pagination, PaginationArg, Query, ResponseCollectionMeta, Story, StoryEntity, StoryEntityResponse, StoryEntityResponseCollection, StoryFiltersInput, StoryInput, StoryRelationResponseCollection, StringFilterInput, Table, TableEntity, TableEntityResponse, TableEntityResponseCollection, TableFiltersInput, TableInput, UploadFile, UploadFileEntity, UploadFileEntityResponse, UploadFileEntityResponseCollection, UploadFileFiltersInput, UploadFileInput, UploadFileRelationResponseCollection, UploadFolder, UploadFolderEntity, UploadFolderEntityResponse, UploadFolderEntityResponseCollection, UploadFolderFiltersInput, UploadFolderInput, UploadFolderRelationResponseCollection, UsersPermissionsCreateRolePayload, UsersPermissionsDeleteRolePayload, UsersPermissionsLoginInput, UsersPermissionsLoginPayload, UsersPermissionsMe, UsersPermissionsMeRole, UsersPermissionsPasswordPayload, UsersPermissionsPermission, UsersPermissionsPermissionEntity, UsersPermissionsPermissionFiltersInput, UsersPermissionsPermissionRelationResponseCollection, UsersPermissionsRegisterInput, UsersPermissionsRole, UsersPermissionsRoleEntity, UsersPermissionsRoleEntityResponse, UsersPermissionsRoleEntityResponseCollection, UsersPermissionsRoleFiltersInput, UsersPermissionsRoleInput, UsersPermissionsUpdateRolePayload, UsersPermissionsUser, UsersPermissionsUserEntity, UsersPermissionsUserEntityResponse, UsersPermissionsUserEntityResponseCollection, UsersPermissionsUserFiltersInput, UsersPermissionsUserInput, UsersPermissionsUserRelationResponseCollection, EnumComponentmodulestablemoduleTablemodulespacingbottom, EnumComponentmodulestablemoduleTablemodulespacingtop, EnumComponentmodulestextmoduleTextmodulespacingbottom, EnumComponentmodulestextmoduleTextmodulespacingtop, PublicationState } from '../generated/graphql';
 
 export const aBooleanFilterInput = (overrides?: Partial<BooleanFilterInput>): BooleanFilterInput => {
     return {
@@ -26,12 +26,112 @@ export const aBooleanFilterInput = (overrides?: Partial<BooleanFilterInput>): Bo
     };
 };
 
+export const aComponentCoreTableBody = (overrides?: Partial<ComponentCoreTableBody>): ComponentCoreTableBody => {
+    return {
+        TableBodyItem: overrides && overrides.hasOwnProperty('TableBodyItem') ? overrides.TableBodyItem! : [aComponentCoreTableBodyItem()],
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'bc6a110f-792c-4f21-bfd3-4f753f778921',
+    };
+};
+
+export const aComponentCoreTableBodyFiltersInput = (overrides?: Partial<ComponentCoreTableBodyFiltersInput>): ComponentCoreTableBodyFiltersInput => {
+    return {
+        TableBodyItem: overrides && overrides.hasOwnProperty('TableBodyItem') ? overrides.TableBodyItem! : aComponentCoreTableBodyItemFiltersInput(),
+        and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [aComponentCoreTableBodyFiltersInput()],
+        not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : aComponentCoreTableBodyFiltersInput(),
+        or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [aComponentCoreTableBodyFiltersInput()],
+    };
+};
+
+export const aComponentCoreTableBodyInput = (overrides?: Partial<ComponentCoreTableBodyInput>): ComponentCoreTableBodyInput => {
+    return {
+        TableBodyItem: overrides && overrides.hasOwnProperty('TableBodyItem') ? overrides.TableBodyItem! : [aComponentCoreTableBodyItemInput()],
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '52febbb7-8443-40dd-a942-48e171bbe992',
+    };
+};
+
+export const aComponentCoreTableBodyItem = (overrides?: Partial<ComponentCoreTableBodyItem>): ComponentCoreTableBodyItem => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '32dfba1a-9144-4d51-82b0-dfe908d3b05d',
+        value: overrides && overrides.hasOwnProperty('value') ? overrides.value! : 'cum',
+    };
+};
+
+export const aComponentCoreTableBodyItemFiltersInput = (overrides?: Partial<ComponentCoreTableBodyItemFiltersInput>): ComponentCoreTableBodyItemFiltersInput => {
+    return {
+        and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [aComponentCoreTableBodyItemFiltersInput()],
+        not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : aComponentCoreTableBodyItemFiltersInput(),
+        or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [aComponentCoreTableBodyItemFiltersInput()],
+        value: overrides && overrides.hasOwnProperty('value') ? overrides.value! : aStringFilterInput(),
+    };
+};
+
+export const aComponentCoreTableBodyItemInput = (overrides?: Partial<ComponentCoreTableBodyItemInput>): ComponentCoreTableBodyItemInput => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '70c4e7a1-60b8-4f71-89d5-67d141704c01',
+        value: overrides && overrides.hasOwnProperty('value') ? overrides.value! : 'voluptates',
+    };
+};
+
+export const aComponentCoreTableHead = (overrides?: Partial<ComponentCoreTableHead>): ComponentCoreTableHead => {
+    return {
+        TableHeadItem: overrides && overrides.hasOwnProperty('TableHeadItem') ? overrides.TableHeadItem! : [aComponentCoreTableHeadItem()],
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'be6b9d26-845a-4fb0-97b6-136da16cdb9e',
+    };
+};
+
+export const aComponentCoreTableHeadFiltersInput = (overrides?: Partial<ComponentCoreTableHeadFiltersInput>): ComponentCoreTableHeadFiltersInput => {
+    return {
+        TableHeadItem: overrides && overrides.hasOwnProperty('TableHeadItem') ? overrides.TableHeadItem! : aComponentCoreTableHeadItemFiltersInput(),
+        and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [aComponentCoreTableHeadFiltersInput()],
+        not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : aComponentCoreTableHeadFiltersInput(),
+        or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [aComponentCoreTableHeadFiltersInput()],
+    };
+};
+
+export const aComponentCoreTableHeadInput = (overrides?: Partial<ComponentCoreTableHeadInput>): ComponentCoreTableHeadInput => {
+    return {
+        TableHeadItem: overrides && overrides.hasOwnProperty('TableHeadItem') ? overrides.TableHeadItem! : [aComponentCoreTableHeadItemInput()],
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '472a32d5-5e46-4315-a1ca-5ae91a544a8e',
+    };
+};
+
+export const aComponentCoreTableHeadItem = (overrides?: Partial<ComponentCoreTableHeadItem>): ComponentCoreTableHeadItem => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'd30d0267-fc95-405c-9478-85f94f089b2d',
+        label: overrides && overrides.hasOwnProperty('label') ? overrides.label! : 'voluptatem',
+    };
+};
+
+export const aComponentCoreTableHeadItemFiltersInput = (overrides?: Partial<ComponentCoreTableHeadItemFiltersInput>): ComponentCoreTableHeadItemFiltersInput => {
+    return {
+        and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [aComponentCoreTableHeadItemFiltersInput()],
+        label: overrides && overrides.hasOwnProperty('label') ? overrides.label! : aStringFilterInput(),
+        not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : aComponentCoreTableHeadItemFiltersInput(),
+        or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [aComponentCoreTableHeadItemFiltersInput()],
+    };
+};
+
+export const aComponentCoreTableHeadItemInput = (overrides?: Partial<ComponentCoreTableHeadItemInput>): ComponentCoreTableHeadItemInput => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0098b46b-a0ac-44b9-b2bb-6e8ab0955db0',
+        label: overrides && overrides.hasOwnProperty('label') ? overrides.label! : 'quas',
+    };
+};
+
 export const aComponentModulesImage = (overrides?: Partial<ComponentModulesImage>): ComponentModulesImage => {
     return {
         alt_text: overrides && overrides.hasOwnProperty('alt_text') ? overrides.alt_text! : 'sint',
         caption: overrides && overrides.hasOwnProperty('caption') ? overrides.caption! : 'possimus',
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '8439cee4-53c6-4340-b9ee-9b88e7cafe67',
         image: overrides && overrides.hasOwnProperty('image') ? overrides.image! : anUploadFileEntityResponse(),
+    };
+};
+
+export const aComponentModulesImageCarousel = (overrides?: Partial<ComponentModulesImageCarousel>): ComponentModulesImageCarousel => {
+    return {
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'nostrum',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'caa291cc-f344-4c8e-b7ad-3f6d9c22152d',
+        images: overrides && overrides.hasOwnProperty('images') ? overrides.images! : anUploadFileRelationResponseCollection(),
     };
 };
 
@@ -49,10 +149,28 @@ export const aComponentModulesSubtitle = (overrides?: Partial<ComponentModulesSu
     };
 };
 
+export const aComponentModulesTableModule = (overrides?: Partial<ComponentModulesTableModule>): ComponentModulesTableModule => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'c786a0d0-1be7-4ff6-9cd7-235d871cc40b',
+        table: overrides && overrides.hasOwnProperty('table') ? overrides.table! : aTableEntityResponse(),
+        tableModuleSpacingBottom: overrides && overrides.hasOwnProperty('tableModuleSpacingBottom') ? overrides.tableModuleSpacingBottom! : EnumComponentmodulestablemoduleTablemodulespacingbottom.Lg,
+        tableModuleSpacingTop: overrides && overrides.hasOwnProperty('tableModuleSpacingTop') ? overrides.tableModuleSpacingTop! : EnumComponentmodulestablemoduleTablemodulespacingtop.Lg,
+    };
+};
+
 export const aComponentModulesTextModule = (overrides?: Partial<ComponentModulesTextModule>): ComponentModulesTextModule => {
     return {
-        Text: overrides && overrides.hasOwnProperty('Text') ? overrides.Text! : 'incidunt',
+        Richtext: overrides && overrides.hasOwnProperty('Richtext') ? overrides.Richtext! : 'quod',
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '67c6aef3-e334-4d10-978d-30c1a76d59a3',
+        textModuleSpacingBottom: overrides && overrides.hasOwnProperty('textModuleSpacingBottom') ? overrides.textModuleSpacingBottom! : EnumComponentmodulestextmoduleTextmodulespacingbottom.Lg,
+        textModuleSpacingTop: overrides && overrides.hasOwnProperty('textModuleSpacingTop') ? overrides.textModuleSpacingTop! : EnumComponentmodulestextmoduleTextmodulespacingtop.Lg,
+    };
+};
+
+export const aComponentModulesTitleModule = (overrides?: Partial<ComponentModulesTitleModule>): ComponentModulesTitleModule => {
+    return {
+        Title: overrides && overrides.hasOwnProperty('Title') ? overrides.Title! : 'quibusdam',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'aeabb66f-3a23-42b4-8215-f8fb4e849040',
     };
 };
 
@@ -285,7 +403,7 @@ export const aJsonFilterInput = (overrides?: Partial<JsonFilterInput>): JsonFilt
 export const aLandingpage = (overrides?: Partial<Landingpage>): Landingpage => {
     return {
         Title: overrides && overrides.hasOwnProperty('Title') ? overrides.Title! : 'culpa',
-        components: overrides && overrides.hasOwnProperty('components') ? overrides.components! : [aComponentModulesSubtitle()],
+        components: overrides && overrides.hasOwnProperty('components') ? overrides.components! : [aComponentModulesImage()],
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : 'quos',
         locale: overrides && overrides.hasOwnProperty('locale') ? overrides.locale! : 'consequuntur',
         localizations: overrides && overrides.hasOwnProperty('localizations') ? overrides.localizations! : aLandingpageRelationResponseCollection(),
@@ -349,7 +467,7 @@ export const aLandingpageRelationResponseCollection = (overrides?: Partial<Landi
 export const aMenupage = (overrides?: Partial<Menupage>): Menupage => {
     return {
         Title: overrides && overrides.hasOwnProperty('Title') ? overrides.Title! : 'aperiam',
-        components: overrides && overrides.hasOwnProperty('components') ? overrides.components! : [aComponentModulesPullquote()],
+        components: overrides && overrides.hasOwnProperty('components') ? overrides.components! : [aComponentModulesImage()],
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : 'doloremque',
         locale: overrides && overrides.hasOwnProperty('locale') ? overrides.locale! : 'id',
         localizations: overrides && overrides.hasOwnProperty('localizations') ? overrides.localizations! : aMenupageRelationResponseCollection(),
@@ -419,6 +537,7 @@ export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
         createMenupageLocalization: overrides && overrides.hasOwnProperty('createMenupageLocalization') ? overrides.createMenupageLocalization! : aMenupageEntityResponse(),
         createStory: overrides && overrides.hasOwnProperty('createStory') ? overrides.createStory! : aStoryEntityResponse(),
         createStoryLocalization: overrides && overrides.hasOwnProperty('createStoryLocalization') ? overrides.createStoryLocalization! : aStoryEntityResponse(),
+        createTable: overrides && overrides.hasOwnProperty('createTable') ? overrides.createTable! : aTableEntityResponse(),
         createUploadFile: overrides && overrides.hasOwnProperty('createUploadFile') ? overrides.createUploadFile! : anUploadFileEntityResponse(),
         createUploadFolder: overrides && overrides.hasOwnProperty('createUploadFolder') ? overrides.createUploadFolder! : anUploadFolderEntityResponse(),
         createUsersPermissionsRole: overrides && overrides.hasOwnProperty('createUsersPermissionsRole') ? overrides.createUsersPermissionsRole! : aUsersPermissionsCreateRolePayload(),
@@ -427,6 +546,7 @@ export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
         deleteLandingpage: overrides && overrides.hasOwnProperty('deleteLandingpage') ? overrides.deleteLandingpage! : aLandingpageEntityResponse(),
         deleteMenupage: overrides && overrides.hasOwnProperty('deleteMenupage') ? overrides.deleteMenupage! : aMenupageEntityResponse(),
         deleteStory: overrides && overrides.hasOwnProperty('deleteStory') ? overrides.deleteStory! : aStoryEntityResponse(),
+        deleteTable: overrides && overrides.hasOwnProperty('deleteTable') ? overrides.deleteTable! : aTableEntityResponse(),
         deleteUploadFile: overrides && overrides.hasOwnProperty('deleteUploadFile') ? overrides.deleteUploadFile! : anUploadFileEntityResponse(),
         deleteUploadFolder: overrides && overrides.hasOwnProperty('deleteUploadFolder') ? overrides.deleteUploadFolder! : anUploadFolderEntityResponse(),
         deleteUsersPermissionsRole: overrides && overrides.hasOwnProperty('deleteUsersPermissionsRole') ? overrides.deleteUsersPermissionsRole! : aUsersPermissionsDeleteRolePayload(),
@@ -443,6 +563,7 @@ export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
         updateLandingpage: overrides && overrides.hasOwnProperty('updateLandingpage') ? overrides.updateLandingpage! : aLandingpageEntityResponse(),
         updateMenupage: overrides && overrides.hasOwnProperty('updateMenupage') ? overrides.updateMenupage! : aMenupageEntityResponse(),
         updateStory: overrides && overrides.hasOwnProperty('updateStory') ? overrides.updateStory! : aStoryEntityResponse(),
+        updateTable: overrides && overrides.hasOwnProperty('updateTable') ? overrides.updateTable! : aTableEntityResponse(),
         updateUploadFile: overrides && overrides.hasOwnProperty('updateUploadFile') ? overrides.updateUploadFile! : anUploadFileEntityResponse(),
         updateUploadFolder: overrides && overrides.hasOwnProperty('updateUploadFolder') ? overrides.updateUploadFolder! : anUploadFolderEntityResponse(),
         updateUsersPermissionsRole: overrides && overrides.hasOwnProperty('updateUsersPermissionsRole') ? overrides.updateUsersPermissionsRole! : aUsersPermissionsUpdateRolePayload(),
@@ -482,6 +603,8 @@ export const aQuery = (overrides?: Partial<Query>): Query => {
         menupages: overrides && overrides.hasOwnProperty('menupages') ? overrides.menupages! : aMenupageEntityResponseCollection(),
         stories: overrides && overrides.hasOwnProperty('stories') ? overrides.stories! : aStoryEntityResponseCollection(),
         story: overrides && overrides.hasOwnProperty('story') ? overrides.story! : aStoryEntityResponse(),
+        table: overrides && overrides.hasOwnProperty('table') ? overrides.table! : aTableEntityResponse(),
+        tables: overrides && overrides.hasOwnProperty('tables') ? overrides.tables! : aTableEntityResponseCollection(),
         uploadFile: overrides && overrides.hasOwnProperty('uploadFile') ? overrides.uploadFile! : anUploadFileEntityResponse(),
         uploadFiles: overrides && overrides.hasOwnProperty('uploadFiles') ? overrides.uploadFiles! : anUploadFileEntityResponseCollection(),
         uploadFolder: overrides && overrides.hasOwnProperty('uploadFolder') ? overrides.uploadFolder! : anUploadFolderEntityResponse(),
@@ -501,7 +624,7 @@ export const aResponseCollectionMeta = (overrides?: Partial<ResponseCollectionMe
 
 export const aStory = (overrides?: Partial<Story>): Story => {
     return {
-        components: overrides && overrides.hasOwnProperty('components') ? overrides.components! : [aComponentModulesPullquote()],
+        components: overrides && overrides.hasOwnProperty('components') ? overrides.components! : [aComponentModulesImage()],
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : 'impedit',
         locale: overrides && overrides.hasOwnProperty('locale') ? overrides.locale! : 'laudantium',
         localizations: overrides && overrides.hasOwnProperty('localizations') ? overrides.localizations! : aStoryRelationResponseCollection(),
@@ -592,6 +715,64 @@ export const aStringFilterInput = (overrides?: Partial<StringFilterInput>): Stri
     };
 };
 
+export const aTable = (overrides?: Partial<Table>): Table => {
+    return {
+        TableBody: overrides && overrides.hasOwnProperty('TableBody') ? overrides.TableBody! : [aComponentCoreTableBody()],
+        Tablehead: overrides && overrides.hasOwnProperty('Tablehead') ? overrides.Tablehead! : aComponentCoreTableHead(),
+        createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : 'vel',
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'aperiam',
+        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'sequi',
+        publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : 'nemo',
+        updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : 'amet',
+    };
+};
+
+export const aTableEntity = (overrides?: Partial<TableEntity>): TableEntity => {
+    return {
+        attributes: overrides && overrides.hasOwnProperty('attributes') ? overrides.attributes! : aTable(),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'bc044baf-2bc1-4347-b2f7-28bdb3548bf8',
+    };
+};
+
+export const aTableEntityResponse = (overrides?: Partial<TableEntityResponse>): TableEntityResponse => {
+    return {
+        data: overrides && overrides.hasOwnProperty('data') ? overrides.data! : aTableEntity(),
+    };
+};
+
+export const aTableEntityResponseCollection = (overrides?: Partial<TableEntityResponseCollection>): TableEntityResponseCollection => {
+    return {
+        data: overrides && overrides.hasOwnProperty('data') ? overrides.data! : [aTableEntity()],
+        meta: overrides && overrides.hasOwnProperty('meta') ? overrides.meta! : aResponseCollectionMeta(),
+    };
+};
+
+export const aTableFiltersInput = (overrides?: Partial<TableFiltersInput>): TableFiltersInput => {
+    return {
+        TableBody: overrides && overrides.hasOwnProperty('TableBody') ? overrides.TableBody! : aComponentCoreTableBodyFiltersInput(),
+        Tablehead: overrides && overrides.hasOwnProperty('Tablehead') ? overrides.Tablehead! : aComponentCoreTableHeadFiltersInput(),
+        and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [aTableFiltersInput()],
+        createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : aDateTimeFilterInput(),
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : aStringFilterInput(),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : anIdFilterInput(),
+        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : aStringFilterInput(),
+        not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : aTableFiltersInput(),
+        or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [aTableFiltersInput()],
+        publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : aDateTimeFilterInput(),
+        updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : aDateTimeFilterInput(),
+    };
+};
+
+export const aTableInput = (overrides?: Partial<TableInput>): TableInput => {
+    return {
+        TableBody: overrides && overrides.hasOwnProperty('TableBody') ? overrides.TableBody! : [aComponentCoreTableBodyInput()],
+        Tablehead: overrides && overrides.hasOwnProperty('Tablehead') ? overrides.Tablehead! : aComponentCoreTableHeadInput(),
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'reiciendis',
+        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'optio',
+        publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : 'est',
+    };
+};
+
 export const anUploadFile = (overrides?: Partial<UploadFile>): UploadFile => {
     return {
         alternativeText: overrides && overrides.hasOwnProperty('alternativeText') ? overrides.alternativeText! : 'enim',
@@ -606,7 +787,7 @@ export const anUploadFile = (overrides?: Partial<UploadFile>): UploadFile => {
         previewUrl: overrides && overrides.hasOwnProperty('previewUrl') ? overrides.previewUrl! : 'distinctio',
         provider: overrides && overrides.hasOwnProperty('provider') ? overrides.provider! : 'dolorem',
         provider_metadata: overrides && overrides.hasOwnProperty('provider_metadata') ? overrides.provider_metadata! : 'qui',
-        related: overrides && overrides.hasOwnProperty('related') ? overrides.related! : [aComponentModulesImage()],
+        related: overrides && overrides.hasOwnProperty('related') ? overrides.related! : [aComponentCoreTableBody()],
         size: overrides && overrides.hasOwnProperty('size') ? overrides.size! : 6.1,
         updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : 'ut',
         url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'vel',

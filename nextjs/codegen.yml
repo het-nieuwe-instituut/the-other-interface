@@ -8,6 +8,10 @@ generates:
             - 'typescript'
             - 'typescript-operations'
             - 'typescript-react-apollo'
+        config:
+            namingConvention:
+                typeNames: change-case-all#pascalCase
+                enumValues: change-case-all#capitalCase
     ./graphql.schema.json:
         plugins:
             - 'introspection'
@@ -15,6 +19,11 @@ generates:
         plugins:
             - typescript-mock-data:
                   typesFile: '../generated/graphql.ts'
+        config:
+            namingConvention:
+                typeNames: change-case-all#pascalCase
+                enumValues: change-case-all#capitalCase
+
     src/generated/graphql-ssr.tsx:
         config:
             documentMode: external
@@ -24,6 +33,9 @@ generates:
             contextTypeRequired: false
             apolloClientInstanceImport: ../features/graphql/config/apollo
             reactImport: "import React from 'react'"
+            namingConvention:
+                typeNames: change-case-all#pascalCase
+                enumValues: change-case-all#capitalCase
         preset: import-types
         presetConfig:
             typesPath: ./graphql
