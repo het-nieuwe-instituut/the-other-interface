@@ -1,0 +1,4 @@
+fragment titleModuleFragment on ComponentModulesTitleModule {
+    id
+    Title
+}
