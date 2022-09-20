@@ -6,6 +6,16 @@ query stories {
     }
 }
 
+query storiesTotal {
+    stories {
+        meta {
+            pagination {
+                total
+            }
+        }
+    }
+}
+
 fragment StoryFragment on StoryEntity {
     id
     attributes {
