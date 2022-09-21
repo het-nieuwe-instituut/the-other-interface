@@ -1,4 +1,9 @@
-import { ComponentModulesImage, ComponentModulesImageCarousel, HomepageQuery } from 'src/generated/graphql'
+import {
+    ComponentModulesButtonsModule,
+    ComponentModulesImage,
+    ComponentModulesImageCarousel,
+    HomepageQuery,
+} from 'src/generated/graphql'
 import MediaImage from '../components/Image/Image'
 import { ImageCarousel } from '../components/ImageCarousel/ImageCarousel'
 import { Pullquote } from '../components/Pullquote/Pullquote'
@@ -80,7 +85,12 @@ export function DynamicComponentRenderer(props: Props) {
 
                 if (typeName) {
                     if (component?.__typename === 'ComponentModulesButtonsModule') {
-                        return <ButtonsModule key={keyExtractor(component.id, index, array)} component={component} />
+                        return (
+                            <ButtonsModule
+                                key={keyExtractor(component.id, index, array)}
+                                component={component as ComponentModulesButtonsModule}
+                            />
+                        )
                     }
                 }
                 return null

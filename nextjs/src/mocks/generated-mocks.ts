@@ -83,6 +83,8 @@ export const aBooleanFilterInput = (overrides?: Partial<BooleanFilterInput>): Bo
 
 export const aComponentCoreButton = (overrides?: Partial<ComponentCoreButton>): ComponentCoreButton => {
     return {
+        attachment: overrides && overrides.hasOwnProperty('attachment') ? overrides.attachment! : anUploadFileEntityResponse(),
+        hasAttachment: overrides && overrides.hasOwnProperty('hasAttachment') ? overrides.hasAttachment! : false,
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '5742f597-253d-4ebb-af50-de4e5ae6b06e',
         text: overrides && overrides.hasOwnProperty('text') ? overrides.text! : 'natus',
         url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'autem',
@@ -92,6 +94,7 @@ export const aComponentCoreButton = (overrides?: Partial<ComponentCoreButton>): 
 export const aComponentCoreButtonFiltersInput = (overrides?: Partial<ComponentCoreButtonFiltersInput>): ComponentCoreButtonFiltersInput => {
     return {
         and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [aComponentCoreButtonFiltersInput()],
+        hasAttachment: overrides && overrides.hasOwnProperty('hasAttachment') ? overrides.hasAttachment! : aBooleanFilterInput(),
         not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : aComponentCoreButtonFiltersInput(),
         or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [aComponentCoreButtonFiltersInput()],
         text: overrides && overrides.hasOwnProperty('text') ? overrides.text! : aStringFilterInput(),

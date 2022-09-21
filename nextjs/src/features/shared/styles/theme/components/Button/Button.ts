@@ -1,13 +1,11 @@
-import { ComponentStyleConfig } from '@chakra-ui/theme'
-
 import colors from '../../foundations/colors'
 import textStyles from '../../foundations/typography'
 
-export const Button: ComponentStyleConfig = {
+// any because chakrui typescript failed here
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const Button: any = {
+    parts: ['icon'],
     baseStyle: () => ({
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
         border: `1.25px solid ${colors.black}`,
         bordeRadius: '9px',
 
@@ -38,6 +36,8 @@ export const Button: ComponentStyleConfig = {
             color: `${colors.text.default.color}`,
             backgroundColor: `${colors.other}`,
         },
+
+        icon: {},
     }),
     defaultProps: {
         variant: 'unstyled',
