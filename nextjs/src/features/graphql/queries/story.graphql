@@ -26,6 +26,14 @@ query storyBySlug($locale: I18NLocaleCode, $slug: String!) {
                     yearStart
                     yearEnd
                 }
+                locations {
+                    data {
+                        id
+                        attributes {
+                            city
+                        }
+                    }
+                }
                 components {
                     ... on ComponentModulesTextModule {
                         ...textModuleFragment

@@ -3,6 +3,7 @@ import { formatDate } from '@/features/shared/utils/dates'
 import { Box, Link, Text } from '@chakra-ui/react'
 import { Author, ComponentCoreTimeframe, StoryBySlugQuery } from 'src/generated/graphql'
 import NextLink from 'next/link'
+import { keyExtractor } from '@/features/shared/utils/lists'
 
 type Story = NonNullable<NonNullable<NonNullable<StoryBySlugQuery['stories']>['data']>[0]>
 interface Props {
@@ -34,6 +35,30 @@ export const StoryMeta: React.FC<Props> = ({ story }) => {
                             <Link>{formatTimeframe(story.attributes?.timeframe)}</Link>
                         </NextLink>
                     </Text>
+                </Box>
+            )}
+
+            {story.attributes?.locations?.data.length && (
+                <Box mb={6}>
+                    <Text textStyle={'h4'} mb={1}>
+                        {storiesT.t('locations')}
+                    </Text>
+
+                    <Box display={'flex'} flexDirection={'row'}>
+                        {story.attributes?.locations?.data.map((item, index, array) => {
+                            const hasItemAfter = array.length - 1 !== index
+                            return (
+                                <Text textStyle={'micro'} key={keyExtractor(item, index, array)} mr={1}>
+                                    <NextLink href={`/locations/${item.attributes?.city}}`} passHref>
+                                        <Link>
+                                            {item.attributes?.city}
+                                            {hasItemAfter && ','}
+                                        </Link>
+                                    </NextLink>
+                                </Text>
+                            )
+                        })}
+                    </Box>
                 </Box>
             )}
         </Box>
