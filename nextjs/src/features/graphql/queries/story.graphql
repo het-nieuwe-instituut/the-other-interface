@@ -8,6 +8,19 @@ query storyBySlug($locale: I18NLocaleCode, $slug: String!) {
         data {
             id
             attributes {
+                title
+                preface
+                publishedAt
+                author {
+                    data {
+                        id
+                        attributes {
+                            firstName
+                            insertion
+                            lastName
+                        }
+                    }
+                }
                 components {
                     ... on ComponentModulesTextModule {
                         ...textModuleFragment

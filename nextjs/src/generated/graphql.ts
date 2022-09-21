@@ -93,6 +93,53 @@ export type Scalars = {
   Upload: any;
 };
 
+export type Author = {
+  __typename?: 'Author';
+  createdAt?: Maybe<Scalars['DateTime']>;
+  firstName?: Maybe<Scalars['String']>;
+  insertion?: Maybe<Scalars['String']>;
+  lastName?: Maybe<Scalars['String']>;
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+export type AuthorEntity = {
+  __typename?: 'AuthorEntity';
+  attributes?: Maybe<Author>;
+  id?: Maybe<Scalars['ID']>;
+};
+
+export type AuthorEntityResponse = {
+  __typename?: 'AuthorEntityResponse';
+  data?: Maybe<AuthorEntity>;
+};
+
+export type AuthorEntityResponseCollection = {
+  __typename?: 'AuthorEntityResponseCollection';
+  data: Array<AuthorEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type AuthorFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<AuthorFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  firstName?: InputMaybe<StringFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  insertion?: InputMaybe<StringFilterInput>;
+  lastName?: InputMaybe<StringFilterInput>;
+  not?: InputMaybe<AuthorFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<AuthorFiltersInput>>>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type AuthorInput = {
+  firstName?: InputMaybe<Scalars['String']>;
+  insertion?: InputMaybe<Scalars['String']>;
+  lastName?: InputMaybe<Scalars['String']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
 export type BooleanFilterInput = {
   and?: InputMaybe<Array<InputMaybe<Scalars['Boolean']>>>;
   between?: InputMaybe<Array<InputMaybe<Scalars['Boolean']>>>;
@@ -115,6 +162,13 @@ export type BooleanFilterInput = {
   null?: InputMaybe<Scalars['Boolean']>;
   or?: InputMaybe<Array<InputMaybe<Scalars['Boolean']>>>;
   startsWith?: InputMaybe<Scalars['Boolean']>;
+};
+
+export type ComponentCorePageHeader = {
+  __typename?: 'ComponentCorePageHeader';
+  Title?: Maybe<Scalars['String']>;
+  content?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
 };
 
 export type ComponentCoreTableBody = {
@@ -341,7 +395,7 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars['Float']>;
 };
 
-export type GenericMorph = ComponentCoreTableBody | ComponentCoreTableBodyItem | ComponentCoreTableHead | ComponentCoreTableHeadItem | ComponentModulesImage | ComponentModulesImageCarousel | ComponentModulesPullquote | ComponentModulesTableModule | ComponentModulesTextModule | ComponentModulesTitleModule | Homepage | I18NLocale | Landingpage | Menupage | Story | Table | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type GenericMorph = Author | ComponentCorePageHeader | ComponentCoreTableBody | ComponentCoreTableBodyItem | ComponentCoreTableHead | ComponentCoreTableHeadItem | ComponentModulesImage | ComponentModulesImageCarousel | ComponentModulesPullquote | ComponentModulesTableModule | ComponentModulesTextModule | ComponentModulesTitleModule | Homepage | I18NLocale | Landingpage | Menupage | Story | Table | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
 
 export type Homepage = {
   __typename?: 'Homepage';
@@ -623,6 +677,7 @@ export type MenupageRelationResponseCollection = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createAuthor?: Maybe<AuthorEntityResponse>;
   createHomepageLocalization?: Maybe<HomepageEntityResponse>;
   createLandingpage?: Maybe<LandingpageEntityResponse>;
   createLandingpageLocalization?: Maybe<LandingpageEntityResponse>;
@@ -637,6 +692,7 @@ export type Mutation = {
   createUsersPermissionsRole?: Maybe<UsersPermissionsCreateRolePayload>;
   /** Create a new user */
   createUsersPermissionsUser: UsersPermissionsUserEntityResponse;
+  deleteAuthor?: Maybe<AuthorEntityResponse>;
   deleteHomepage?: Maybe<HomepageEntityResponse>;
   deleteLandingpage?: Maybe<LandingpageEntityResponse>;
   deleteMenupage?: Maybe<MenupageEntityResponse>;
@@ -659,6 +715,7 @@ export type Mutation = {
   removeFile?: Maybe<UploadFileEntityResponse>;
   /** Reset user password. Confirm with a code (resetToken from forgotPassword) */
   resetPassword?: Maybe<UsersPermissionsLoginPayload>;
+  updateAuthor?: Maybe<AuthorEntityResponse>;
   updateFileInfo: UploadFileEntityResponse;
   updateHomepage?: Maybe<HomepageEntityResponse>;
   updateLandingpage?: Maybe<LandingpageEntityResponse>;
@@ -672,6 +729,11 @@ export type Mutation = {
   /** Update an existing user */
   updateUsersPermissionsUser: UsersPermissionsUserEntityResponse;
   upload: UploadFileEntityResponse;
+};
+
+
+export type MutationCreateAuthorArgs = {
+  data: AuthorInput;
 };
 
 
@@ -743,6 +805,11 @@ export type MutationCreateUsersPermissionsRoleArgs = {
 
 export type MutationCreateUsersPermissionsUserArgs = {
   data: UsersPermissionsUserInput;
+};
+
+
+export type MutationDeleteAuthorArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -831,6 +898,12 @@ export type MutationResetPasswordArgs = {
   code: Scalars['String'];
   password: Scalars['String'];
   passwordConfirmation: Scalars['String'];
+};
+
+
+export type MutationUpdateAuthorArgs = {
+  data: AuthorInput;
+  id: Scalars['ID'];
 };
 
 
@@ -928,6 +1001,8 @@ export enum PublicationState {
 export type Query = {
   __typename?: 'Query';
   StoryPostBySlug?: Maybe<StoryEntityResponse>;
+  author?: Maybe<AuthorEntityResponse>;
+  authors?: Maybe<AuthorEntityResponseCollection>;
   homepage?: Maybe<HomepageEntityResponse>;
   i18NLocale?: Maybe<I18NLocaleEntityResponse>;
   i18NLocales?: Maybe<I18NLocaleEntityResponseCollection>;
@@ -954,6 +1029,19 @@ export type Query = {
 export type QueryStoryPostBySlugArgs = {
   locale?: InputMaybe<Scalars['I18NLocaleCode']>;
   slug?: InputMaybe<Scalars['String']>;
+};
+
+
+export type QueryAuthorArgs = {
+  id?: InputMaybe<Scalars['ID']>;
+};
+
+
+export type QueryAuthorsArgs = {
+  filters?: InputMaybe<AuthorFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 
@@ -1087,10 +1175,12 @@ export type ResponseCollectionMeta = {
 
 export type Story = {
   __typename?: 'Story';
+  author?: Maybe<AuthorEntityResponse>;
   components?: Maybe<Array<Maybe<StoryComponentsDynamicZone>>>;
   createdAt?: Maybe<Scalars['DateTime']>;
   locale?: Maybe<Scalars['String']>;
   localizations?: Maybe<StoryRelationResponseCollection>;
+  preface?: Maybe<Scalars['String']>;
   publishedAt?: Maybe<Scalars['DateTime']>;
   slug?: Maybe<Scalars['String']>;
   title: Scalars['String'];
@@ -1127,12 +1217,14 @@ export type StoryEntityResponseCollection = {
 
 export type StoryFiltersInput = {
   and?: InputMaybe<Array<InputMaybe<StoryFiltersInput>>>;
+  author?: InputMaybe<AuthorFiltersInput>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
   id?: InputMaybe<IdFilterInput>;
   locale?: InputMaybe<StringFilterInput>;
   localizations?: InputMaybe<StoryFiltersInput>;
   not?: InputMaybe<StoryFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<StoryFiltersInput>>>;
+  preface?: InputMaybe<StringFilterInput>;
   publishedAt?: InputMaybe<DateTimeFilterInput>;
   slug?: InputMaybe<StringFilterInput>;
   title?: InputMaybe<StringFilterInput>;
@@ -1141,7 +1233,9 @@ export type StoryFiltersInput = {
 };
 
 export type StoryInput = {
+  author?: InputMaybe<Scalars['ID']>;
   components?: InputMaybe<Array<Scalars['StoryComponentsDynamicZoneInput']>>;
+  preface?: InputMaybe<Scalars['String']>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
   slug?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
@@ -1648,7 +1742,7 @@ export type StoryBySlugQueryVariables = Exact<{
 }>;
 
 
-export type StoryBySlugQuery = { __typename?: 'Query', stories?: { __typename?: 'StoryEntityResponseCollection', data: Array<{ __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', components?: Array<{ __typename?: 'ComponentModulesImage', id: string, caption?: string | null, alt_text?: string | null, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } } | { __typename?: 'ComponentModulesImageCarousel', id: string, description?: string | null, images?: { __typename?: 'UploadFileRelationResponseCollection', data: Array<{ __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null } | null }> } | null } | { __typename?: 'ComponentModulesPullquote', id: string, text?: string | null } | { __typename?: 'ComponentModulesTableModule', id: string, tableModuleSpacingTop?: EnumComponentmodulestablemoduleTablemodulespacingtop | null, tableModuleSpacingBottom?: EnumComponentmodulestablemoduleTablemodulespacingbottom | null, table?: { __typename?: 'TableEntityResponse', data?: { __typename?: 'TableEntity', id?: string | null, attributes?: { __typename?: 'Table', name?: string | null, description?: string | null, Tablehead?: { __typename?: 'ComponentCoreTableHead', id: string, TableHeadItem?: Array<{ __typename?: 'ComponentCoreTableHeadItem', id: string, label?: string | null } | null> | null } | null, TableBody?: Array<{ __typename?: 'ComponentCoreTableBody', id: string, TableBodyItem?: Array<{ __typename?: 'ComponentCoreTableBodyItem', id: string, value?: string | null } | null> | null } | null> | null } | null } | null } | null } | { __typename?: 'ComponentModulesTextModule', id: string, Richtext?: string | null, textModuleSpacingBottom?: EnumComponentmodulestextmoduleTextmodulespacingbottom | null, textModuleSpacingTop?: EnumComponentmodulestextmoduleTextmodulespacingtop | null } | { __typename?: 'ComponentModulesTitleModule', id: string, Title?: string | null } | { __typename?: 'Error' } | null> | null } | null }> } | null };
+export type StoryBySlugQuery = { __typename?: 'Query', stories?: { __typename?: 'StoryEntityResponseCollection', data: Array<{ __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, preface?: string | null, publishedAt?: any | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', id?: string | null, attributes?: { __typename?: 'Author', firstName?: string | null, insertion?: string | null, lastName?: string | null } | null } | null } | null, components?: Array<{ __typename?: 'ComponentModulesImage', id: string, caption?: string | null, alt_text?: string | null, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } } | { __typename?: 'ComponentModulesImageCarousel', id: string, description?: string | null, images?: { __typename?: 'UploadFileRelationResponseCollection', data: Array<{ __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null } | null }> } | null } | { __typename?: 'ComponentModulesPullquote', id: string, text?: string | null } | { __typename?: 'ComponentModulesTableModule', id: string, tableModuleSpacingTop?: EnumComponentmodulestablemoduleTablemodulespacingtop | null, tableModuleSpacingBottom?: EnumComponentmodulestablemoduleTablemodulespacingbottom | null, table?: { __typename?: 'TableEntityResponse', data?: { __typename?: 'TableEntity', id?: string | null, attributes?: { __typename?: 'Table', name?: string | null, description?: string | null, Tablehead?: { __typename?: 'ComponentCoreTableHead', id: string, TableHeadItem?: Array<{ __typename?: 'ComponentCoreTableHeadItem', id: string, label?: string | null } | null> | null } | null, TableBody?: Array<{ __typename?: 'ComponentCoreTableBody', id: string, TableBodyItem?: Array<{ __typename?: 'ComponentCoreTableBodyItem', id: string, value?: string | null } | null> | null } | null> | null } | null } | null } | null } | { __typename?: 'ComponentModulesTextModule', id: string, Richtext?: string | null, textModuleSpacingBottom?: EnumComponentmodulestextmoduleTextmodulespacingbottom | null, textModuleSpacingTop?: EnumComponentmodulestextmoduleTextmodulespacingtop | null } | { __typename?: 'ComponentModulesTitleModule', id: string, Title?: string | null } | { __typename?: 'Error' } | null> | null } | null }> } | null };
 
 export const ImageCarouselModuleFragmentFragmentDoc = gql`
     fragment imageCarouselModuleFragment on ComponentModulesImageCarousel {
@@ -1929,6 +2023,19 @@ export const StoryBySlugDocument = gql`
     data {
       id
       attributes {
+        title
+        preface
+        publishedAt
+        author {
+          data {
+            id
+            attributes {
+              firstName
+              insertion
+              lastName
+            }
+          }
+        }
         components {
           ... on ComponentModulesTextModule {
             ...textModuleFragment
