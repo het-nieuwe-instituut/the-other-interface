@@ -34,6 +34,10 @@ query storyBySlug($locale: I18NLocaleCode, $slug: String!) {
                         }
                     }
                 }
+                publicationDate {
+                    date
+                    displayType
+                }
                 components {
                     ... on ComponentModulesTextModule {
                         ...textModuleFragment
