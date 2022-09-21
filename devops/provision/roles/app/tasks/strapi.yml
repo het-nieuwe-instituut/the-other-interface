@@ -7,7 +7,7 @@
     restart_policy: always
     keep_volumes: no
     recreate: true
-    env: "{{ app.env|combine({'NODE_ENV': 'production', 'VIRTUAL_HOST': app.web.api_url, 'LETSENCRYPT_HOST': app.web.api_url, 'LETSENCRYPT_EMAIL': 'ops@lifely.nl'}) }}"
+    env: "{{ app.env|combine({'NODE_ENV': 'production', 'VIRTUAL_HOST': app.web.api_url, 'VIRTUAL_PATH': '/', 'VIRTUAL_DEST': '/', 'LETSENCRYPT_HOST': app.web.api_url}) }}"
     networks:
       - name: "app-network"
         aliases:
