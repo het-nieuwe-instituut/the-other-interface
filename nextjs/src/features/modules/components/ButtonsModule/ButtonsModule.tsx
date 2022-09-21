@@ -1,7 +1,7 @@
 import { keyExtractor } from '@/features/shared/utils/lists'
 import { Box, Button, Flex } from '@chakra-ui/react'
 import NextLink from 'next/link'
-import { ComponentModulesButtonsModule } from 'src/generated/graphql'
+import { ComponentCoreButton, ComponentModulesButtonsModule } from 'src/generated/graphql'
 import ExternalLink from '@/icons/arrows/external-link.svg'
 import { isExternalURL } from '@/features/shared/utils/links'
 
@@ -21,19 +21,18 @@ export const ButtonsModule: React.FC<Props> = props => {
     function renderButtons() {
         return props.component.buttons?.map((button, index, array) => (
             <NextLink key={keyExtractor(button, index, array)} href={button?.url ?? ''} passHref>
-                <Button
-                    as={'a'}
-                    rightIcon={
-                        button?.url ? (
-                            isExternalURL(button?.url) ? (
-                                <ExternalLink color={'currentColor'} />
-                            ) : undefined
-                        ) : undefined
-                    }
-                >
+                <Button as={'a'} rightIcon={renderExternalLink(button)}>
                     {button?.text}
                 </Button>
             </NextLink>
         ))
+    }
+
+    function renderExternalLink(button?: ComponentCoreButton | null) {
+        if (!button?.url || !isExternalURL(button.url)) {
+            return undefined
+        }
+
+        return <ExternalLink color={'currentColor'} />
     }
 }
