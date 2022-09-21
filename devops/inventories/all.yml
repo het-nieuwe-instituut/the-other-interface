@@ -12,10 +12,11 @@ ansible_python_interpreter=/usr/bin/python3
 # HNI - Acceptance #
 ####################
 [acceptance]
-x.x.x.x name=hni-toi-acceptance-ams3-01
+134.209.201.154 name=hni-toi-acceptance-ams3-01
 
 [acceptance:vars]
 server_environment_name=acceptance
+ansible_python_interpreter=/usr/bin/python3
 
 ####################
 # HNI - Production #
@@ -31,5 +32,5 @@ server_environment_name=production
 ##########
 [app:children]
 staging
-# acceptance
+acceptance
 # production
