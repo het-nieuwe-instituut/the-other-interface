@@ -1,7 +1,10 @@
 #import '../fragments/components/TextModule.fragment.graphql'
 #import '../fragments/components/PullquoteModule.fragment.graphql'
 #import '../fragments/components/ImageModule.fragment.graphql'
+#import '../fragments/components/TableModuleFragment.fragment.graphql'
+#import '../fragments/components/TitleModule.fragment.graphql'
 #import '../fragments/components/ImageCarousel.fragment.graphql'
+#import '../fragments/components/ButtonsModule.fragment.graphql'
 
 query storyBySlug($locale: I18NLocaleCode, $slug: String!) {
     stories(locale: $locale, filters: { slug: { eq: $slug } }) {
@@ -56,6 +59,9 @@ query storyBySlug($locale: I18NLocaleCode, $slug: String!) {
                     }
                     ... on ComponentModulesImageCarousel {
                         ...imageCarouselModuleFragment
+                    }
+                    ... on ComponentModulesButtonsModule {
+                        ...buttonsModuleFragment
                     }
                 }
             }

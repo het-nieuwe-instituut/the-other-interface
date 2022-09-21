@@ -1,7 +1,10 @@
 #import '../fragments/components/TextModule.fragment.graphql'
 #import '../fragments/components/PullquoteModule.fragment.graphql'
 #import '../fragments/components/ImageModule.fragment.graphql'
+#import '../fragments/components/TableModuleFragment.fragment.graphql'
+#import '../fragments/components/TitleModule.fragment.graphql'
 #import '../fragments/components/ImageCarousel.fragment.graphql'
+#import '../fragments/components/ButtonsModule.fragment.graphql'
 
 query menupageBySlug($locale: I18NLocaleCode, $slug: String!) {
     menupages(locale: $locale, filters: { slug: { eq: $slug } }) {
@@ -26,6 +29,9 @@ query menupageBySlug($locale: I18NLocaleCode, $slug: String!) {
                     }
                     ... on ComponentModulesImageCarousel {
                         ...imageCarouselModuleFragment
+                    }
+                    ... on ComponentModulesButtonsModule {
+                        ...buttonsModuleFragment
                     }
                 }
             }

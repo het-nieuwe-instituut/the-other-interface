@@ -1,29 +1,41 @@
 import { ComponentStyleConfig } from '@chakra-ui/theme'
 
-import colors from "../../foundations/colors"
+import colors from '../../foundations/colors'
 
 export const Button: ComponentStyleConfig = {
     baseStyle: () => ({
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
         border: `1.25px solid ${colors.black}`,
         bordeRadius: '9px',
         color: `${colors.text.default.color}`,
-        backgroundColor: `${colors.white} !important`,
-        textAlign: 'cener',
+        backgroundColor: `${colors.white}`,
+
+        h: 'unset !important',
+        height: 'unset !important',
+        padding: 0,
+        pt: '10px',
+        pl: '15px',
+        pb: '10px',
+        pr: '15px',
+        _visited: {
+            backgroundColor: `${colors.white}t`,
+        },
         _hover: {
             color: `${colors.text.hover.color}`,
-            backgroundColor: `${colors.black} !important`
+            backgroundColor: `${colors.black}`,
         },
         _active: {
             color: `${colors.text.hover.color}`,
-            backgroundColor: `${colors.black} !important`
-        },
-        _visited: {
-            color: `${colors.text.default.color}`,
-            backgroundColor: `${colors.white} !important`
+            backgroundColor: `${colors.black}`,
         },
         _focus: {
             color: `${colors.text.default.color}`,
-            backgroundColor: `${colors.other} !important`
-        }
+            backgroundColor: `${colors.other}`,
+        },
     }),
+    defaultProps: {
+        variant: 'unstyled',
+    },
 }

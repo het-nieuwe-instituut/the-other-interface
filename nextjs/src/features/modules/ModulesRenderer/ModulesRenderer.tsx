@@ -5,6 +5,7 @@ import { Pullquote } from '../components/Pullquote/Pullquote'
 import { TableModule } from '../components/TableModule/TableModule'
 import { Title } from '../components/Title/Title'
 import { TextModule } from '../components/TextModule/TextModule'
+import { ButtonsModule } from '../components/ButtonsModule/ButtonsModule'
 
 interface Props {
     components: HomePageComponents
@@ -34,26 +35,34 @@ export function DynamicComponentRenderer(props: Props) {
 
                 if (typeName) {
                     if (component?.__typename === 'ComponentModulesImage') {
-                        return <MediaImage key={component.id} component={component as ComponentModulesImage} />
+                        return (
+                            <MediaImage
+                                key={keyExtractor(component.id, index, array)}
+                                component={component as ComponentModulesImage}
+                            />
+                        )
                     }
                 }
 
                 if (typeName) {
                     if (component?.__typename === 'ComponentModulesTableModule') {
-                        return <TableModule key={component.id} component={component} />
+                        return <TableModule key={keyExtractor(component.id, index, array)} component={component} />
                     }
                 }
 
                 if (typeName) {
                     if (component?.__typename === 'ComponentModulesTitleModule') {
-                        return <Title key={component.id} component={component} />
+                        return <Title key={keyExtractor(component.id, index, array)} component={component} />
                     }
                 }
 
                 if (typeName) {
                     if (component?.__typename === 'ComponentModulesImageCarousel') {
                         return (
-                            <ImageCarousel key={component.id} component={component as ComponentModulesImageCarousel} />
+                            <ImageCarousel
+                                key={keyExtractor(component.id, index, array)}
+                                component={component as ComponentModulesImageCarousel}
+                            />
                         )
                     }
                 }
@@ -61,8 +70,17 @@ export function DynamicComponentRenderer(props: Props) {
                 if (typeName) {
                     if (component?.__typename === 'ComponentModulesImageCarousel') {
                         return (
-                            <ImageCarousel key={component.id} component={component as ComponentModulesImageCarousel} />
+                            <ImageCarousel
+                                key={keyExtractor(component.id, index, array)}
+                                component={component as ComponentModulesImageCarousel}
+                            />
                         )
+                    }
+                }
+
+                if (typeName) {
+                    if (component?.__typename === 'ComponentModulesButtonsModule') {
+                        return <ButtonsModule key={keyExtractor(component.id, index, array)} component={component} />
                     }
                 }
                 return null
