@@ -1,6 +1,7 @@
 import { ComponentStyleConfig } from '@chakra-ui/theme'
 
 import colors from '../../foundations/colors'
+import textStyles from '../../foundations/typography'
 
 export const Button: ComponentStyleConfig = {
     baseStyle: () => ({
@@ -9,7 +10,7 @@ export const Button: ComponentStyleConfig = {
         justifyContent: 'center',
         border: `1.25px solid ${colors.black}`,
         bordeRadius: '9px',
-        color: `${colors.text.default.color}`,
+
         backgroundColor: `${colors.white}`,
 
         h: 'unset !important',
@@ -19,6 +20,9 @@ export const Button: ComponentStyleConfig = {
         pl: '15px',
         pb: '10px',
         pr: '15px',
+
+        ...textStyles.micro,
+
         _visited: {
             backgroundColor: `${colors.white}t`,
         },
