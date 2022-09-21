@@ -8,8 +8,8 @@ interface Props {
 export const SubtitleModule: React.FC<Props> = props => {
     console.log(props)
     return (
-        <Box width="100%" padding={4}>
-            <ChakraText fontSize="6xl">{props.component.text}</ChakraText>
+        <Box width="100%" paddingLeft={6} paddingRight={6} paddingBottom={4}>
+            <ChakraText textStyle={'h3'}>{props.component.text}</ChakraText>
         </Box>
     )
 }
