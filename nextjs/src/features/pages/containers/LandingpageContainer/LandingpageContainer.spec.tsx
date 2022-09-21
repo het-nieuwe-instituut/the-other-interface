@@ -1,6 +1,7 @@
 import { mockedClient } from '@/features/graphql/config/mockedApollo'
 import { renderWithProviders } from '@/features/shared/utils/test-utils'
 import { mockLandingpageBySlugQuery } from 'src/generated/graphql'
+import { aComponentModulesTextModule } from 'src/mocks/generated-mocks'
 import { mockServer } from 'src/mocks/handlers'
 import { LandingpageContainer } from './LandingpageContainer'
 jest.mock('next/router', () => ({
@@ -26,7 +27,7 @@ describe('LandingpageContainer', () => {
         const { findByText, getByText } = renderWithProviders(<LandingpageContainer />)
 
         getByText('loading')
-        await findByText('incidunt')
+        await findByText(aComponentModulesTextModule().Richtext ?? '')
     })
 
     it('should display error', async () => {
