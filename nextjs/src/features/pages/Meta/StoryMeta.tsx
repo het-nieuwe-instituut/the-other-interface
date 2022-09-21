@@ -40,10 +40,10 @@ export const StoryMeta: React.FC<Props> = ({ story }) => {
                 )}
             </Box>
 
-            {story.attributes?.timeframe && (
+            {!!story.attributes?.timeframe && (
                 <Box mb={6}>
                     <Text textStyle={'h4'} mb={1}>
-                        {storiesT.t('time')}
+                        {storiesT.t('time').toUpperCase()}
                     </Text>
                     <Text textStyle={'micro'}>
                         <NextLink href={'/timeframes'} passHref>
@@ -53,10 +53,10 @@ export const StoryMeta: React.FC<Props> = ({ story }) => {
                 </Box>
             )}
 
-            {story.attributes?.locations?.data.length && (
+            {!!story.attributes?.locations?.data.length && (
                 <Box mb={6}>
                     <Text textStyle={'h4'} mb={1}>
-                        {storiesT.t('locations')}
+                        {storiesT.t('locations').toUpperCase()}
                     </Text>
 
                     <Box display={'flex'} flexDirection={'row'}>
