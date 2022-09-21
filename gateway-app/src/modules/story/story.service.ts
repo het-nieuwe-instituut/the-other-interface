@@ -13,10 +13,10 @@ export class StoryService {
     public constructor(@Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk) {}
 
     public async getPeopleDataForZoomLevel1() {
-        const allStories = await this.strapiGqlSdk.stories()
+        const storiesTotal = await this.strapiGqlSdk.storiesTotal()
         return {
             name: 'Stories',
-            count: allStories.stories?.data.length || 0,
+            count: storiesTotal.stories?.meta.pagination.total || 0,
             id: EntityNames.Stories,
         }
     }
