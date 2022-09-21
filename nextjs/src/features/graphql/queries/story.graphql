@@ -21,6 +21,11 @@ query storyBySlug($locale: I18NLocaleCode, $slug: String!) {
                         }
                     }
                 }
+                timeframe {
+                    id
+                    yearStart
+                    yearEnd
+                }
                 components {
                     ... on ComponentModulesTextModule {
                         ...textModuleFragment
