@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common'
 import { Sdk } from 'src/generated/strapi-sdk'
-import { EntityNames } from '../tripli/tripli.type'
+import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 
 export interface PeopleData {
     name: string | null
