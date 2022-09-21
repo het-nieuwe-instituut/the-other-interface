@@ -1,0 +1,15 @@
+---
+- name: strapi | docker | start
+  docker_container:
+    name: "strapi"
+    image: ghcr.io/lifelynl/hni-toi-strapi:{{ tag }}
+    state: started
+    restart_policy: always
+    keep_volumes: no
+    recreate: true
+    env: "{{ app.env|combine({'NODE_ENV': 'production', 'VIRTUAL_HOST': app.web.api_url, 'LETSENCRYPT_HOST': app.web.api_url, 'LETSENCRYPT_EMAIL': 'ops@lifely.nl'}) }}"
+    networks:
+      - name: "app-network"
+        aliases:
+          - strapi
+  tags: [strapi, deploy]
