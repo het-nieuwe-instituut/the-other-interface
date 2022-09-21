@@ -1894,6 +1894,18 @@
         "description": null,
         "fields": [
           {
+            "name": "buttonStyle",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "ENUM_COMPONENTMODULESBUTTONSMODULE_BUTTONSTYLE",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "buttons",
             "description": null,
             "args": [
@@ -2937,6 +2949,29 @@
           },
           {
             "name": "year",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "ENUM_COMPONENTMODULESBUTTONSMODULE_BUTTONSTYLE",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "default",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "large",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
