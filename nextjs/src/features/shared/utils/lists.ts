@@ -1,4 +1,4 @@
-export function keyExtractor<Item extends { id: string }, Index extends number, Array>(
+export function keyExtractor<Item extends { id?: string | null }, Index extends number, Array>(
     item?: Item | null,
     index?: Index,
     array?: Array[]

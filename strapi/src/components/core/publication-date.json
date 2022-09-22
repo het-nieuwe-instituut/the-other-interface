@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_core_publication_dates",
+  "info": {
+    "displayName": "Publication Date",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "date": {
+      "type": "date"
+    },
+    "displayType": {
+      "type": "enumeration",
+      "enum": [
+        "year",
+        "date"
+      ],
+      "default": "year"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_triply_people",
+  "info": {
+    "displayName": "People",
+    "icon": "ad",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "uri_id": {
+      "type": "string",
+      "unique": false,
+      "required": true
+    }
+  }
+}
