@@ -1,4 +1,5 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql'
+import { PeopleType } from '../people/people.type'
 
 // TODO: added for POC, delete (or update for actual requirements) before production
 @ObjectType()
@@ -17,22 +18,6 @@ export class StoryAttributesType {
 
     @Field({ nullable: true })
     public publishedAt?: string
-}
-
-// TODO: added for POC, delete (or update for actual requirements) before production
-@ObjectType()
-export class PeopleType {
-    @Field({ nullable: true })
-    public name?: string
-
-    @Field({ nullable: true })
-    public birthDate?: string
-
-    @Field({ nullable: true })
-    public deathDate?: string
-
-    @Field({ nullable: true })
-    public nationalityLabel?: string
 }
 
 // TODO: added for POC, delete (or update for actual requirements) before production

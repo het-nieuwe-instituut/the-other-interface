@@ -2,6 +2,7 @@ import { ComponentModulesImage, ComponentModulesImageCarousel, HomepageQuery } f
 import MediaImage from '../components/Image/Image'
 import { ImageCarousel } from '../components/ImageCarousel/ImageCarousel'
 import { Pullquote } from '../components/Pullquote/Pullquote'
+import { SubtitleModule } from '../components/SubtitleModule/SubtitleModule'
 import { TableModule } from '../components/TableModule/TableModule'
 import { Title } from '../components/Title/Title'
 import { TextModule } from '../components/TextModule/TextModule'
@@ -35,6 +36,11 @@ export function DynamicComponentRenderer(props: Props) {
                 if (typeName) {
                     if (component?.__typename === 'ComponentModulesImage') {
                         return <MediaImage key={component.id} component={component as ComponentModulesImage} />
+                    }
+                }
+                if (typeName) {
+                    if (component?.__typename === 'ComponentModulesSubtitle') {
+                        return <SubtitleModule key={component.id} component={component} />
                     }
                 }
 

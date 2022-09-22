@@ -1,6 +1,7 @@
 import { mockedClient } from '@/features/graphql/config/mockedApollo'
 import { renderWithProviders } from '@/features/shared/utils/test-utils'
 import { mockStoryBySlugQuery } from 'src/generated/graphql'
+import { aComponentModulesTextModule } from 'src/mocks/generated-mocks'
 import { mockServer } from 'src/mocks/handlers'
 import { StoryContainer } from './StoryContainer'
 jest.mock('next/router', () => ({
@@ -26,7 +27,7 @@ describe('StoryContainer', () => {
         const { findByText, getByText } = renderWithProviders(<StoryContainer />)
 
         getByText('loading')
-        await findByText('incidunt')
+        await findByText(aComponentModulesTextModule().Richtext ?? '')
     })
 
     it('should display error', async () => {

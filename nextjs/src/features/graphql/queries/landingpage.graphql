@@ -26,6 +26,9 @@ query landingpageBySlug($locale: I18NLocaleCode, $slug: String!) {
                     ... on ComponentModulesImageCarousel {
                         ...imageCarouselModuleFragment
                     }
+                    ... on ComponentModulesSubtitle {
+                        ...subtitleModuleFragment
+                    }
                 }
             }
         }
