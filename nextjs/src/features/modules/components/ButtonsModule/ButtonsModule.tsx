@@ -19,13 +19,22 @@ export const ButtonsModule: React.FC<Props> = props => {
     )
 
     function renderButtons() {
-        return props.component.buttons?.map((button, index, array) => (
-            <NextLink key={keyExtractor(button, index, array)} href={button?.url ?? ''} passHref>
-                <Button as={'a'} rightIcon={renderExternalLink(button)}>
-                    {button?.text}
-                </Button>
-            </NextLink>
-        ))
+        return props.component.buttons?.map((button, index, array) => {
+            if (!button) {
+                return null
+            }
+            return (
+                <NextLink key={keyExtractor(button, index, array)} href={button?.url ?? ''} passHref>
+                    <Button
+                        as={'a'}
+                        rightIcon={renderExternalLink(button)}
+                        target={!!(button.url && isExternalURL(button.url)) ? '_blank' : undefined}
+                    >
+                        {button?.text}
+                    </Button>
+                </NextLink>
+            )
+        })
     }
 
     function renderExternalLink(button?: ComponentCoreButton | null) {
