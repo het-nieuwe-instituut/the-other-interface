@@ -34,14 +34,6 @@
         }
       }
     },
-    "triply_people": {
-      "type": "string",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
     "components": {
       "type": "dynamiczone",
       "components": [
@@ -58,6 +50,16 @@
           "localized": true
         }
       }
+    },
+    "triply_people": {
+      "type": "component",
+      "repeatable": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "component": "triply.people"
     },
     "author": {
       "type": "relation",

@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { TripliService } from '../tripli/tripli.service'
+import { PeopleType } from './people.type'
 
 export enum PeopleZoomLevel3Ids {
     deathDate = 'deathDate',
@@ -18,9 +19,18 @@ interface ObjectFilterOptionsData {
     [x: string]: string
 }
 
+export interface PeopleData {
+    name: string | null
+    birthDate: string | null
+    deathDate: string | null
+    nationalityLabel: string | null
+}
+
 @Injectable()
 export class PeopleService {
     protected entityType = 'tripli'
+    private readonly detailEndpoint =
+        'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-acceptance/zoom-5-people/run?record=https://collectiedata.hetnieuweinstituut.nl/id/people/'
     private readonly zoomLevel2Endpoint =
         'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-2-people/run'
 
@@ -141,5 +151,19 @@ export class PeopleService {
         }
 
         throw new Error(`[People] Invalid filter input "${input}"`)
+    }
+
+    public async getPeopleDetails(peopleId: string) {
+        const res = await this.tripliService.getTripliData<PeopleData>(`${this.detailEndpoint}${peopleId}`)
+
+        const parsedResponse: PeopleType = {}
+        res.data.forEach(d => {
+            if (d.name) parsedResponse.name = d.name
+            if (d.birthDate) parsedResponse.birthDate = d.birthDate
+            if (d.deathDate) parsedResponse.deathDate = d.deathDate
+            if (d.nationalityLabel) parsedResponse.nationalityLabel = d.nationalityLabel
+        })
+
+        return parsedResponse
     }
 }
