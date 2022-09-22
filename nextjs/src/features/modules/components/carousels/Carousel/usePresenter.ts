@@ -3,11 +3,11 @@ import { splitArrayByChunks } from "@/features/shared/utils/arrays"
 import { useBreakpointValue } from "@chakra-ui/react"
 import Router  from "next/router"
 import { useState } from "react"
-import { Enum_Componentmodulescarousel_Type, ComponentCoreCarouselItem, Maybe } from "src/generated/graphql"
+import { EnumComponentmodulescarouselType, ComponentCoreCarouselItem, Maybe } from "src/generated/graphql"
 
-export const usePresenter = (type: Maybe<Enum_Componentmodulescarousel_Type> | undefined, items: Maybe<Maybe<ComponentCoreCarouselItem>[]> | undefined, buttonUrl: Maybe<string> | undefined) => {
+export const usePresenter = (type: Maybe<EnumComponentmodulescarouselType> | undefined, items: Maybe<Maybe<ComponentCoreCarouselItem>[]> | undefined, buttonUrl: Maybe<string> | undefined) => {
     const [currentSlide, updateCurrentSlide] = useState(0)
-    const { ITEMS_PER_PAGE } = useCalculateItemsPerSlide(type ?? Enum_Componentmodulescarousel_Type.CollectionHighlights)
+    const { ITEMS_PER_PAGE } = useCalculateItemsPerSlide(type ?? EnumComponentmodulescarouselType.Highlights)
     const pagesCount = items && items.length > 0 ? Math.ceil(items.length / ITEMS_PER_PAGE) : 0
     const chunks = splitArrayByChunks<Maybe<ComponentCoreCarouselItem>>(items, ITEMS_PER_PAGE)
 

@@ -24,10 +24,10 @@
     "type": {
       "type": "enumeration",
       "enum": [
-        "NotbleMakers",
-        "CollectionHighlights",
-        "CollectionHighlightsWithMakers",
-        "FeaturedThemes"
+        "Makers",
+        "Highlights",
+        "Combined",
+        "Themes"
       ]
     },
     "description": {

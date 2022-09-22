@@ -1,6 +1,6 @@
 import React, { createRef } from 'react'
 import { Box, Button, useTheme, Text } from '@chakra-ui/react'
-import { ComponentModulesCarousel, Enum_Componentmodulescarousel_Type } from 'src/generated/graphql'
+import { ComponentModulesCarousel, EnumComponentmodulescarouselType } from 'src/generated/graphql'
 import { Carousel } from 'react-responsive-carousel'
 import CarouselPagination from '../components/CarouselPagination/CarouselPagination'
 import CarouselHeader from '../components/CarouselHeader/CarouselHeader'
@@ -41,7 +41,7 @@ export const CarouselModule = (props: Props) => {
 
             <Carousel showArrows={false} showThumbs={false} showStatus={false} showIndicators={false} selectedItem={currentSlide}>
                 {chunks?.map((chunk, index) => {
-                    return <CarouselSlide key={index} items={chunk} type={type ?? Enum_Componentmodulescarousel_Type.NotbleMakers} carouselRef={carouselRef} />
+                    return <CarouselSlide key={index} items={chunk} type={type ?? EnumComponentmodulescarouselType.Makers} carouselRef={carouselRef} />
                 })}
             </Carousel>
 

@@ -1,4 +1,59 @@
-import { BooleanFilterInput, ComponentCoreCarouselItem, ComponentCoreCarouselItemFiltersInput, ComponentModulesCarousel, ComponentModulesImage, ComponentModulesImageCarousel, ComponentModulesPullquote, ComponentModulesTextModule, DateTimeFilterInput, Error, FileInfoInput, FloatFilterInput, Homepage, HomepageEntity, HomepageEntityResponse, HomepageInput, HomepageRelationResponseCollection, I18NLocale, I18NLocaleEntity, I18NLocaleEntityResponse, I18NLocaleEntityResponseCollection, I18NLocaleFiltersInput, IdFilterInput, IntFilterInput, JsonFilterInput, Landingpage, LandingpageEntity, LandingpageEntityResponse, LandingpageEntityResponseCollection, LandingpageFiltersInput, LandingpageInput, LandingpageRelationResponseCollection, Menupage, MenupageEntity, MenupageEntityResponse, MenupageEntityResponseCollection, MenupageFiltersInput, MenupageInput, MenupageRelationResponseCollection, Mutation, Pagination, PaginationArg, Query, ResponseCollectionMeta, Story, StoryEntity, StoryEntityResponse, StoryEntityResponseCollection, StoryFiltersInput, StoryInput, StoryRelationResponseCollection, StringFilterInput, UploadFile, UploadFileEntity, UploadFileEntityResponse, UploadFileEntityResponseCollection, UploadFileFiltersInput, UploadFileInput, UploadFileRelationResponseCollection, UploadFolder, UploadFolderEntity, UploadFolderEntityResponse, UploadFolderEntityResponseCollection, UploadFolderFiltersInput, UploadFolderInput, UploadFolderRelationResponseCollection, UsersPermissionsCreateRolePayload, UsersPermissionsDeleteRolePayload, UsersPermissionsLoginInput, UsersPermissionsLoginPayload, UsersPermissionsMe, UsersPermissionsMeRole, UsersPermissionsPasswordPayload, UsersPermissionsPermission, UsersPermissionsPermissionEntity, UsersPermissionsPermissionFiltersInput, UsersPermissionsPermissionRelationResponseCollection, UsersPermissionsRegisterInput, UsersPermissionsRole, UsersPermissionsRoleEntity, UsersPermissionsRoleEntityResponse, UsersPermissionsRoleEntityResponseCollection, UsersPermissionsRoleFiltersInput, UsersPermissionsRoleInput, UsersPermissionsUpdateRolePayload, UsersPermissionsUser, UsersPermissionsUserEntity, UsersPermissionsUserEntityResponse, UsersPermissionsUserEntityResponseCollection, UsersPermissionsUserFiltersInput, UsersPermissionsUserInput, UsersPermissionsUserRelationResponseCollection, EnumComponentcorecarouselitemType, EnumComponentmodulescarouselType, PublicationState } from '../generated/graphql';
+import { Author, AuthorEntity, AuthorEntityResponse, AuthorEntityResponseCollection, AuthorFiltersInput, AuthorInput, BooleanFilterInput, ComponentCoreCarouselItem, ComponentCoreCarouselItemFiltersInput, ComponentCorePageHeader, ComponentCorePublicationDate, ComponentCorePublicationDateFiltersInput, ComponentCorePublicationDateInput, ComponentCoreTableBody, ComponentCoreTableBodyFiltersInput, ComponentCoreTableBodyInput, ComponentCoreTableBodyItem, ComponentCoreTableBodyItemFiltersInput, ComponentCoreTableBodyItemInput, ComponentCoreTableHead, ComponentCoreTableHeadFiltersInput, ComponentCoreTableHeadInput, ComponentCoreTableHeadItem, ComponentCoreTableHeadItemFiltersInput, ComponentCoreTableHeadItemInput, ComponentCoreTimeframe, ComponentCoreTimeframeFiltersInput, ComponentCoreTimeframeInput, ComponentModulesCarousel, ComponentModulesImage, ComponentModulesImageCarousel, ComponentModulesPullquote, ComponentModulesSubtitle, ComponentModulesTableModule, ComponentModulesTextModule, ComponentModulesTitleModule, ComponentTriplyPeople, ComponentTriplyPeopleFiltersInput, ComponentTriplyPeopleInput, DateFilterInput, DateTimeFilterInput, Error, FileInfoInput, FloatFilterInput, Homepage, HomepageEntity, HomepageEntityResponse, HomepageInput, HomepageRelationResponseCollection, I18NLocale, I18NLocaleEntity, I18NLocaleEntityResponse, I18NLocaleEntityResponseCollection, I18NLocaleFiltersInput, IdFilterInput, IntFilterInput, JsonFilterInput, Landingpage, LandingpageEntity, LandingpageEntityResponse, LandingpageEntityResponseCollection, LandingpageFiltersInput, LandingpageInput, LandingpageRelationResponseCollection, Location, LocationEntity, LocationEntityResponse, LocationEntityResponseCollection, LocationFiltersInput, LocationInput, LocationRelationResponseCollection, LongFilterInput, Menupage, MenupageEntity, MenupageEntityResponse, MenupageEntityResponseCollection, MenupageFiltersInput, MenupageInput, MenupageRelationResponseCollection, Mutation, Pagination, PaginationArg, Query, ResponseCollectionMeta, Story, StoryEntity, StoryEntityResponse, StoryEntityResponseCollection, StoryFiltersInput, StoryInput, StoryRelationResponseCollection, StringFilterInput, Table, TableEntity, TableEntityResponse, TableEntityResponseCollection, TableFiltersInput, TableInput, UploadFile, UploadFileEntity, UploadFileEntityResponse, UploadFileEntityResponseCollection, UploadFileFiltersInput, UploadFileInput, UploadFileRelationResponseCollection, UploadFolder, UploadFolderEntity, UploadFolderEntityResponse, UploadFolderEntityResponseCollection, UploadFolderFiltersInput, UploadFolderInput, UploadFolderRelationResponseCollection, UsersPermissionsCreateRolePayload, UsersPermissionsDeleteRolePayload, UsersPermissionsLoginInput, UsersPermissionsLoginPayload, UsersPermissionsMe, UsersPermissionsMeRole, UsersPermissionsPasswordPayload, UsersPermissionsPermission, UsersPermissionsPermissionEntity, UsersPermissionsPermissionFiltersInput, UsersPermissionsPermissionRelationResponseCollection, UsersPermissionsRegisterInput, UsersPermissionsRole, UsersPermissionsRoleEntity, UsersPermissionsRoleEntityResponse, UsersPermissionsRoleEntityResponseCollection, UsersPermissionsRoleFiltersInput, UsersPermissionsRoleInput, UsersPermissionsUpdateRolePayload, UsersPermissionsUser, UsersPermissionsUserEntity, UsersPermissionsUserEntityResponse, UsersPermissionsUserEntityResponseCollection, UsersPermissionsUserFiltersInput, UsersPermissionsUserInput, UsersPermissionsUserRelationResponseCollection, EnumComponentcorecarouselitemType, EnumComponentcorepublicationdateDisplaytype, EnumComponentmodulescarouselType, EnumComponentmodulestablemoduleTablemodulespacingbottom, EnumComponentmodulestablemoduleTablemodulespacingtop, EnumComponentmodulestextmoduleTextmodulespacingbottom, EnumComponentmodulestextmoduleTextmodulespacingtop, PublicationState } from '../generated/graphql';
+
+export const anAuthor = (overrides?: Partial<Author>): Author => {
+    return {
+        createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : 'distinctio',
+        firstName: overrides && overrides.hasOwnProperty('firstName') ? overrides.firstName! : 'omnis',
+        insertion: overrides && overrides.hasOwnProperty('insertion') ? overrides.insertion! : 'illo',
+        lastName: overrides && overrides.hasOwnProperty('lastName') ? overrides.lastName! : 'ipsum',
+        publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : 'rerum',
+        updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : 'hic',
+    };
+};
+
+export const anAuthorEntity = (overrides?: Partial<AuthorEntity>): AuthorEntity => {
+    return {
+        attributes: overrides && overrides.hasOwnProperty('attributes') ? overrides.attributes! : anAuthor(),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0a2062cc-e102-46e6-88f9-ba9d3ea2e38f',
+    };
+};
+
+export const anAuthorEntityResponse = (overrides?: Partial<AuthorEntityResponse>): AuthorEntityResponse => {
+    return {
+        data: overrides && overrides.hasOwnProperty('data') ? overrides.data! : anAuthorEntity(),
+    };
+};
+
+export const anAuthorEntityResponseCollection = (overrides?: Partial<AuthorEntityResponseCollection>): AuthorEntityResponseCollection => {
+    return {
+        data: overrides && overrides.hasOwnProperty('data') ? overrides.data! : [anAuthorEntity()],
+        meta: overrides && overrides.hasOwnProperty('meta') ? overrides.meta! : aResponseCollectionMeta(),
+    };
+};
+
+export const anAuthorFiltersInput = (overrides?: Partial<AuthorFiltersInput>): AuthorFiltersInput => {
+    return {
+        and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [anAuthorFiltersInput()],
+        createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : aDateTimeFilterInput(),
+        firstName: overrides && overrides.hasOwnProperty('firstName') ? overrides.firstName! : aStringFilterInput(),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : anIdFilterInput(),
+        insertion: overrides && overrides.hasOwnProperty('insertion') ? overrides.insertion! : aStringFilterInput(),
+        lastName: overrides && overrides.hasOwnProperty('lastName') ? overrides.lastName! : aStringFilterInput(),
+        not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : anAuthorFiltersInput(),
+        or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [anAuthorFiltersInput()],
+        publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : aDateTimeFilterInput(),
+        updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : aDateTimeFilterInput(),
+    };
+};
+
+export const anAuthorInput = (overrides?: Partial<AuthorInput>): AuthorInput => {
+    return {
+        firstName: overrides && overrides.hasOwnProperty('firstName') ? overrides.firstName! : 'aut',
+        insertion: overrides && overrides.hasOwnProperty('insertion') ? overrides.insertion! : 'cum',
+        lastName: overrides && overrides.hasOwnProperty('lastName') ? overrides.lastName! : 'odio',
+        publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : 'sit',
+    };
+};
 
 export const aBooleanFilterInput = (overrides?: Partial<BooleanFilterInput>): BooleanFilterInput => {
     return {
@@ -47,6 +102,158 @@ export const aComponentCoreCarouselItemFiltersInput = (overrides?: Partial<Compo
     };
 };
 
+export const aComponentCorePageHeader = (overrides?: Partial<ComponentCorePageHeader>): ComponentCorePageHeader => {
+    return {
+        Title: overrides && overrides.hasOwnProperty('Title') ? overrides.Title! : 'dolore',
+        content: overrides && overrides.hasOwnProperty('content') ? overrides.content! : 'illum',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '56b4f843-e03d-4027-af18-11fa3418caa8',
+    };
+};
+
+export const aComponentCorePublicationDate = (overrides?: Partial<ComponentCorePublicationDate>): ComponentCorePublicationDate => {
+    return {
+        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : '1970-01-16T02:31:32.480Z',
+        displayType: overrides && overrides.hasOwnProperty('displayType') ? overrides.displayType! : EnumComponentcorepublicationdateDisplaytype.Date,
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '315f9d7f-1a61-4489-8590-0fb737d3a0af',
+    };
+};
+
+export const aComponentCorePublicationDateFiltersInput = (overrides?: Partial<ComponentCorePublicationDateFiltersInput>): ComponentCorePublicationDateFiltersInput => {
+    return {
+        and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [aComponentCorePublicationDateFiltersInput()],
+        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : aDateFilterInput(),
+        displayType: overrides && overrides.hasOwnProperty('displayType') ? overrides.displayType! : aStringFilterInput(),
+        not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : aComponentCorePublicationDateFiltersInput(),
+        or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [aComponentCorePublicationDateFiltersInput()],
+    };
+};
+
+export const aComponentCorePublicationDateInput = (overrides?: Partial<ComponentCorePublicationDateInput>): ComponentCorePublicationDateInput => {
+    return {
+        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : '1970-01-12T02:09:01.168Z',
+        displayType: overrides && overrides.hasOwnProperty('displayType') ? overrides.displayType! : EnumComponentcorepublicationdateDisplaytype.Date,
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '2621920b-860c-4ca6-97fd-1c8dc9a9231f',
+    };
+};
+
+export const aComponentCoreTableBody = (overrides?: Partial<ComponentCoreTableBody>): ComponentCoreTableBody => {
+    return {
+        TableBodyItem: overrides && overrides.hasOwnProperty('TableBodyItem') ? overrides.TableBodyItem! : [aComponentCoreTableBodyItem()],
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'bc6a110f-792c-4f21-bfd3-4f753f778921',
+    };
+};
+
+export const aComponentCoreTableBodyFiltersInput = (overrides?: Partial<ComponentCoreTableBodyFiltersInput>): ComponentCoreTableBodyFiltersInput => {
+    return {
+        TableBodyItem: overrides && overrides.hasOwnProperty('TableBodyItem') ? overrides.TableBodyItem! : aComponentCoreTableBodyItemFiltersInput(),
+        and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [aComponentCoreTableBodyFiltersInput()],
+        not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : aComponentCoreTableBodyFiltersInput(),
+        or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [aComponentCoreTableBodyFiltersInput()],
+    };
+};
+
+export const aComponentCoreTableBodyInput = (overrides?: Partial<ComponentCoreTableBodyInput>): ComponentCoreTableBodyInput => {
+    return {
+        TableBodyItem: overrides && overrides.hasOwnProperty('TableBodyItem') ? overrides.TableBodyItem! : [aComponentCoreTableBodyItemInput()],
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '52febbb7-8443-40dd-a942-48e171bbe992',
+    };
+};
+
+export const aComponentCoreTableBodyItem = (overrides?: Partial<ComponentCoreTableBodyItem>): ComponentCoreTableBodyItem => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '32dfba1a-9144-4d51-82b0-dfe908d3b05d',
+        value: overrides && overrides.hasOwnProperty('value') ? overrides.value! : 'cum',
+    };
+};
+
+export const aComponentCoreTableBodyItemFiltersInput = (overrides?: Partial<ComponentCoreTableBodyItemFiltersInput>): ComponentCoreTableBodyItemFiltersInput => {
+    return {
+        and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [aComponentCoreTableBodyItemFiltersInput()],
+        not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : aComponentCoreTableBodyItemFiltersInput(),
+        or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [aComponentCoreTableBodyItemFiltersInput()],
+        value: overrides && overrides.hasOwnProperty('value') ? overrides.value! : aStringFilterInput(),
+    };
+};
+
+export const aComponentCoreTableBodyItemInput = (overrides?: Partial<ComponentCoreTableBodyItemInput>): ComponentCoreTableBodyItemInput => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '70c4e7a1-60b8-4f71-89d5-67d141704c01',
+        value: overrides && overrides.hasOwnProperty('value') ? overrides.value! : 'voluptates',
+    };
+};
+
+export const aComponentCoreTableHead = (overrides?: Partial<ComponentCoreTableHead>): ComponentCoreTableHead => {
+    return {
+        TableHeadItem: overrides && overrides.hasOwnProperty('TableHeadItem') ? overrides.TableHeadItem! : [aComponentCoreTableHeadItem()],
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'be6b9d26-845a-4fb0-97b6-136da16cdb9e',
+    };
+};
+
+export const aComponentCoreTableHeadFiltersInput = (overrides?: Partial<ComponentCoreTableHeadFiltersInput>): ComponentCoreTableHeadFiltersInput => {
+    return {
+        TableHeadItem: overrides && overrides.hasOwnProperty('TableHeadItem') ? overrides.TableHeadItem! : aComponentCoreTableHeadItemFiltersInput(),
+        and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [aComponentCoreTableHeadFiltersInput()],
+        not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : aComponentCoreTableHeadFiltersInput(),
+        or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [aComponentCoreTableHeadFiltersInput()],
+    };
+};
+
+export const aComponentCoreTableHeadInput = (overrides?: Partial<ComponentCoreTableHeadInput>): ComponentCoreTableHeadInput => {
+    return {
+        TableHeadItem: overrides && overrides.hasOwnProperty('TableHeadItem') ? overrides.TableHeadItem! : [aComponentCoreTableHeadItemInput()],
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '472a32d5-5e46-4315-a1ca-5ae91a544a8e',
+    };
+};
+
+export const aComponentCoreTableHeadItem = (overrides?: Partial<ComponentCoreTableHeadItem>): ComponentCoreTableHeadItem => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'd30d0267-fc95-405c-9478-85f94f089b2d',
+        label: overrides && overrides.hasOwnProperty('label') ? overrides.label! : 'voluptatem',
+    };
+};
+
+export const aComponentCoreTableHeadItemFiltersInput = (overrides?: Partial<ComponentCoreTableHeadItemFiltersInput>): ComponentCoreTableHeadItemFiltersInput => {
+    return {
+        and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [aComponentCoreTableHeadItemFiltersInput()],
+        label: overrides && overrides.hasOwnProperty('label') ? overrides.label! : aStringFilterInput(),
+        not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : aComponentCoreTableHeadItemFiltersInput(),
+        or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [aComponentCoreTableHeadItemFiltersInput()],
+    };
+};
+
+export const aComponentCoreTableHeadItemInput = (overrides?: Partial<ComponentCoreTableHeadItemInput>): ComponentCoreTableHeadItemInput => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '0098b46b-a0ac-44b9-b2bb-6e8ab0955db0',
+        label: overrides && overrides.hasOwnProperty('label') ? overrides.label! : 'quas',
+    };
+};
+
+export const aComponentCoreTimeframe = (overrides?: Partial<ComponentCoreTimeframe>): ComponentCoreTimeframe => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'dcfa1846-89bf-4421-ad22-7e270213f2a9',
+        yearEnd: overrides && overrides.hasOwnProperty('yearEnd') ? overrides.yearEnd! : 'architecto',
+        yearStart: overrides && overrides.hasOwnProperty('yearStart') ? overrides.yearStart! : 'autem',
+    };
+};
+
+export const aComponentCoreTimeframeFiltersInput = (overrides?: Partial<ComponentCoreTimeframeFiltersInput>): ComponentCoreTimeframeFiltersInput => {
+    return {
+        and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [aComponentCoreTimeframeFiltersInput()],
+        not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : aComponentCoreTimeframeFiltersInput(),
+        or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [aComponentCoreTimeframeFiltersInput()],
+        yearEnd: overrides && overrides.hasOwnProperty('yearEnd') ? overrides.yearEnd! : aLongFilterInput(),
+        yearStart: overrides && overrides.hasOwnProperty('yearStart') ? overrides.yearStart! : aLongFilterInput(),
+    };
+};
+
+export const aComponentCoreTimeframeInput = (overrides?: Partial<ComponentCoreTimeframeInput>): ComponentCoreTimeframeInput => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '6c954938-7d7e-4811-ad9f-b1a37bde7b40',
+        yearEnd: overrides && overrides.hasOwnProperty('yearEnd') ? overrides.yearEnd! : 'perferendis',
+        yearStart: overrides && overrides.hasOwnProperty('yearStart') ? overrides.yearStart! : 'consequatur',
+    };
+};
+
 export const aComponentModulesCarousel = (overrides?: Partial<ComponentModulesCarousel>): ComponentModulesCarousel => {
     return {
         buttonText: overrides && overrides.hasOwnProperty('buttonText') ? overrides.buttonText! : 'fugiat',
@@ -55,7 +262,7 @@ export const aComponentModulesCarousel = (overrides?: Partial<ComponentModulesCa
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '02a9c5e5-9a6b-482e-9ea3-e1114441bf57',
         items: overrides && overrides.hasOwnProperty('items') ? overrides.items! : [aComponentCoreCarouselItem()],
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'beatae',
-        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : EnumComponentmodulescarouselType.CollectionHighlights,
+        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : EnumComponentmodulescarouselType.Combined,
     };
 };
 
@@ -83,10 +290,84 @@ export const aComponentModulesPullquote = (overrides?: Partial<ComponentModulesP
     };
 };
 
+export const aComponentModulesSubtitle = (overrides?: Partial<ComponentModulesSubtitle>): ComponentModulesSubtitle => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '549df5f1-4269-41cf-a4c5-ce2a8917985b',
+        text: overrides && overrides.hasOwnProperty('text') ? overrides.text! : 'voluptatem',
+    };
+};
+
+export const aComponentModulesTableModule = (overrides?: Partial<ComponentModulesTableModule>): ComponentModulesTableModule => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'c786a0d0-1be7-4ff6-9cd7-235d871cc40b',
+        table: overrides && overrides.hasOwnProperty('table') ? overrides.table! : aTableEntityResponse(),
+        tableModuleSpacingBottom: overrides && overrides.hasOwnProperty('tableModuleSpacingBottom') ? overrides.tableModuleSpacingBottom! : EnumComponentmodulestablemoduleTablemodulespacingbottom.Lg,
+        tableModuleSpacingTop: overrides && overrides.hasOwnProperty('tableModuleSpacingTop') ? overrides.tableModuleSpacingTop! : EnumComponentmodulestablemoduleTablemodulespacingtop.Lg,
+    };
+};
+
 export const aComponentModulesTextModule = (overrides?: Partial<ComponentModulesTextModule>): ComponentModulesTextModule => {
     return {
-        Text: overrides && overrides.hasOwnProperty('Text') ? overrides.Text! : 'incidunt',
+        Richtext: overrides && overrides.hasOwnProperty('Richtext') ? overrides.Richtext! : 'quod',
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '67c6aef3-e334-4d10-978d-30c1a76d59a3',
+        textModuleSpacingBottom: overrides && overrides.hasOwnProperty('textModuleSpacingBottom') ? overrides.textModuleSpacingBottom! : EnumComponentmodulestextmoduleTextmodulespacingbottom.Lg,
+        textModuleSpacingTop: overrides && overrides.hasOwnProperty('textModuleSpacingTop') ? overrides.textModuleSpacingTop! : EnumComponentmodulestextmoduleTextmodulespacingtop.Lg,
+    };
+};
+
+export const aComponentModulesTitleModule = (overrides?: Partial<ComponentModulesTitleModule>): ComponentModulesTitleModule => {
+    return {
+        Title: overrides && overrides.hasOwnProperty('Title') ? overrides.Title! : 'quibusdam',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'aeabb66f-3a23-42b4-8215-f8fb4e849040',
+    };
+};
+
+export const aComponentTriplyPeople = (overrides?: Partial<ComponentTriplyPeople>): ComponentTriplyPeople => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '492edfb7-baff-4c21-b52e-abf8598a62b1',
+        uri_id: overrides && overrides.hasOwnProperty('uri_id') ? overrides.uri_id! : 'sit',
+    };
+};
+
+export const aComponentTriplyPeopleFiltersInput = (overrides?: Partial<ComponentTriplyPeopleFiltersInput>): ComponentTriplyPeopleFiltersInput => {
+    return {
+        and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [aComponentTriplyPeopleFiltersInput()],
+        not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : aComponentTriplyPeopleFiltersInput(),
+        or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [aComponentTriplyPeopleFiltersInput()],
+        uri_id: overrides && overrides.hasOwnProperty('uri_id') ? overrides.uri_id! : aStringFilterInput(),
+    };
+};
+
+export const aComponentTriplyPeopleInput = (overrides?: Partial<ComponentTriplyPeopleInput>): ComponentTriplyPeopleInput => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '2d1b513c-b0f9-4aaf-b371-99fac5055b35',
+        uri_id: overrides && overrides.hasOwnProperty('uri_id') ? overrides.uri_id! : 'qui',
+    };
+};
+
+export const aDateFilterInput = (overrides?: Partial<DateFilterInput>): DateFilterInput => {
+    return {
+        and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : ['1970-01-11T04:58:59.069Z'],
+        between: overrides && overrides.hasOwnProperty('between') ? overrides.between! : ['1970-01-03T10:30:12.707Z'],
+        contains: overrides && overrides.hasOwnProperty('contains') ? overrides.contains! : '1970-01-13T04:23:34.998Z',
+        containsi: overrides && overrides.hasOwnProperty('containsi') ? overrides.containsi! : '1970-01-06T13:24:29.508Z',
+        endsWith: overrides && overrides.hasOwnProperty('endsWith') ? overrides.endsWith! : '1970-01-06T15:47:11.254Z',
+        eq: overrides && overrides.hasOwnProperty('eq') ? overrides.eq! : '1970-01-05T20:54:04.270Z',
+        eqi: overrides && overrides.hasOwnProperty('eqi') ? overrides.eqi! : '1970-01-14T13:00:14.712Z',
+        gt: overrides && overrides.hasOwnProperty('gt') ? overrides.gt! : '1970-01-14T17:54:49.544Z',
+        gte: overrides && overrides.hasOwnProperty('gte') ? overrides.gte! : '1970-01-06T04:16:38.278Z',
+        in: overrides && overrides.hasOwnProperty('in') ? overrides.in! : ['1970-01-09T13:20:15.886Z'],
+        lt: overrides && overrides.hasOwnProperty('lt') ? overrides.lt! : '1970-01-07T10:17:59.549Z',
+        lte: overrides && overrides.hasOwnProperty('lte') ? overrides.lte! : '1970-01-05T15:12:59.762Z',
+        ne: overrides && overrides.hasOwnProperty('ne') ? overrides.ne! : '1970-01-05T08:19:28.298Z',
+        not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : aDateFilterInput(),
+        notContains: overrides && overrides.hasOwnProperty('notContains') ? overrides.notContains! : '1970-01-05T22:04:37.725Z',
+        notContainsi: overrides && overrides.hasOwnProperty('notContainsi') ? overrides.notContainsi! : '1970-01-04T20:58:04.572Z',
+        notIn: overrides && overrides.hasOwnProperty('notIn') ? overrides.notIn! : ['1970-01-03T08:46:19.872Z'],
+        notNull: overrides && overrides.hasOwnProperty('notNull') ? overrides.notNull! : true,
+        null: overrides && overrides.hasOwnProperty('null') ? overrides.null! : false,
+        or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : ['1970-01-05T00:29:49.006Z'],
+        startsWith: overrides && overrides.hasOwnProperty('startsWith') ? overrides.startsWith! : '1970-01-11T11:23:51.132Z',
     };
 };
 
@@ -380,6 +661,94 @@ export const aLandingpageRelationResponseCollection = (overrides?: Partial<Landi
     };
 };
 
+export const aLocation = (overrides?: Partial<Location>): Location => {
+    return {
+        city: overrides && overrides.hasOwnProperty('city') ? overrides.city! : 'sit',
+        createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : 'qui',
+        locale: overrides && overrides.hasOwnProperty('locale') ? overrides.locale! : 'tempore',
+        localizations: overrides && overrides.hasOwnProperty('localizations') ? overrides.localizations! : aLocationRelationResponseCollection(),
+        publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : 'dicta',
+        stories: overrides && overrides.hasOwnProperty('stories') ? overrides.stories! : aStoryRelationResponseCollection(),
+        updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : 'culpa',
+    };
+};
+
+export const aLocationEntity = (overrides?: Partial<LocationEntity>): LocationEntity => {
+    return {
+        attributes: overrides && overrides.hasOwnProperty('attributes') ? overrides.attributes! : aLocation(),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'f0359d58-6fc7-45be-924c-60ba9cc6719f',
+    };
+};
+
+export const aLocationEntityResponse = (overrides?: Partial<LocationEntityResponse>): LocationEntityResponse => {
+    return {
+        data: overrides && overrides.hasOwnProperty('data') ? overrides.data! : aLocationEntity(),
+    };
+};
+
+export const aLocationEntityResponseCollection = (overrides?: Partial<LocationEntityResponseCollection>): LocationEntityResponseCollection => {
+    return {
+        data: overrides && overrides.hasOwnProperty('data') ? overrides.data! : [aLocationEntity()],
+        meta: overrides && overrides.hasOwnProperty('meta') ? overrides.meta! : aResponseCollectionMeta(),
+    };
+};
+
+export const aLocationFiltersInput = (overrides?: Partial<LocationFiltersInput>): LocationFiltersInput => {
+    return {
+        and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [aLocationFiltersInput()],
+        city: overrides && overrides.hasOwnProperty('city') ? overrides.city! : aStringFilterInput(),
+        createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : aDateTimeFilterInput(),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : anIdFilterInput(),
+        locale: overrides && overrides.hasOwnProperty('locale') ? overrides.locale! : aStringFilterInput(),
+        localizations: overrides && overrides.hasOwnProperty('localizations') ? overrides.localizations! : aLocationFiltersInput(),
+        not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : aLocationFiltersInput(),
+        or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [aLocationFiltersInput()],
+        publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : aDateTimeFilterInput(),
+        stories: overrides && overrides.hasOwnProperty('stories') ? overrides.stories! : aStoryFiltersInput(),
+        updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : aDateTimeFilterInput(),
+    };
+};
+
+export const aLocationInput = (overrides?: Partial<LocationInput>): LocationInput => {
+    return {
+        city: overrides && overrides.hasOwnProperty('city') ? overrides.city! : 'nihil',
+        publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : 'aut',
+        stories: overrides && overrides.hasOwnProperty('stories') ? overrides.stories! : ['60ed9ce4-80ed-456c-a0e7-d1188a82a1f1'],
+    };
+};
+
+export const aLocationRelationResponseCollection = (overrides?: Partial<LocationRelationResponseCollection>): LocationRelationResponseCollection => {
+    return {
+        data: overrides && overrides.hasOwnProperty('data') ? overrides.data! : [aLocationEntity()],
+    };
+};
+
+export const aLongFilterInput = (overrides?: Partial<LongFilterInput>): LongFilterInput => {
+    return {
+        and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : ['sapiente'],
+        between: overrides && overrides.hasOwnProperty('between') ? overrides.between! : ['quis'],
+        contains: overrides && overrides.hasOwnProperty('contains') ? overrides.contains! : 'quam',
+        containsi: overrides && overrides.hasOwnProperty('containsi') ? overrides.containsi! : 'vel',
+        endsWith: overrides && overrides.hasOwnProperty('endsWith') ? overrides.endsWith! : 'iste',
+        eq: overrides && overrides.hasOwnProperty('eq') ? overrides.eq! : 'sit',
+        eqi: overrides && overrides.hasOwnProperty('eqi') ? overrides.eqi! : 'deserunt',
+        gt: overrides && overrides.hasOwnProperty('gt') ? overrides.gt! : 'vel',
+        gte: overrides && overrides.hasOwnProperty('gte') ? overrides.gte! : 'ea',
+        in: overrides && overrides.hasOwnProperty('in') ? overrides.in! : ['ullam'],
+        lt: overrides && overrides.hasOwnProperty('lt') ? overrides.lt! : 'consequatur',
+        lte: overrides && overrides.hasOwnProperty('lte') ? overrides.lte! : 'non',
+        ne: overrides && overrides.hasOwnProperty('ne') ? overrides.ne! : 'ipsa',
+        not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : aLongFilterInput(),
+        notContains: overrides && overrides.hasOwnProperty('notContains') ? overrides.notContains! : 'incidunt',
+        notContainsi: overrides && overrides.hasOwnProperty('notContainsi') ? overrides.notContainsi! : 'rerum',
+        notIn: overrides && overrides.hasOwnProperty('notIn') ? overrides.notIn! : ['dignissimos'],
+        notNull: overrides && overrides.hasOwnProperty('notNull') ? overrides.notNull! : false,
+        null: overrides && overrides.hasOwnProperty('null') ? overrides.null! : true,
+        or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : ['dolorem'],
+        startsWith: overrides && overrides.hasOwnProperty('startsWith') ? overrides.startsWith! : 'molestiae',
+    };
+};
+
 export const aMenupage = (overrides?: Partial<Menupage>): Menupage => {
     return {
         Title: overrides && overrides.hasOwnProperty('Title') ? overrides.Title! : 'aperiam',
@@ -446,21 +815,28 @@ export const aMenupageRelationResponseCollection = (overrides?: Partial<Menupage
 
 export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     return {
+        createAuthor: overrides && overrides.hasOwnProperty('createAuthor') ? overrides.createAuthor! : anAuthorEntityResponse(),
         createHomepageLocalization: overrides && overrides.hasOwnProperty('createHomepageLocalization') ? overrides.createHomepageLocalization! : aHomepageEntityResponse(),
         createLandingpage: overrides && overrides.hasOwnProperty('createLandingpage') ? overrides.createLandingpage! : aLandingpageEntityResponse(),
         createLandingpageLocalization: overrides && overrides.hasOwnProperty('createLandingpageLocalization') ? overrides.createLandingpageLocalization! : aLandingpageEntityResponse(),
+        createLocation: overrides && overrides.hasOwnProperty('createLocation') ? overrides.createLocation! : aLocationEntityResponse(),
+        createLocationLocalization: overrides && overrides.hasOwnProperty('createLocationLocalization') ? overrides.createLocationLocalization! : aLocationEntityResponse(),
         createMenupage: overrides && overrides.hasOwnProperty('createMenupage') ? overrides.createMenupage! : aMenupageEntityResponse(),
         createMenupageLocalization: overrides && overrides.hasOwnProperty('createMenupageLocalization') ? overrides.createMenupageLocalization! : aMenupageEntityResponse(),
         createStory: overrides && overrides.hasOwnProperty('createStory') ? overrides.createStory! : aStoryEntityResponse(),
         createStoryLocalization: overrides && overrides.hasOwnProperty('createStoryLocalization') ? overrides.createStoryLocalization! : aStoryEntityResponse(),
+        createTable: overrides && overrides.hasOwnProperty('createTable') ? overrides.createTable! : aTableEntityResponse(),
         createUploadFile: overrides && overrides.hasOwnProperty('createUploadFile') ? overrides.createUploadFile! : anUploadFileEntityResponse(),
         createUploadFolder: overrides && overrides.hasOwnProperty('createUploadFolder') ? overrides.createUploadFolder! : anUploadFolderEntityResponse(),
         createUsersPermissionsRole: overrides && overrides.hasOwnProperty('createUsersPermissionsRole') ? overrides.createUsersPermissionsRole! : aUsersPermissionsCreateRolePayload(),
         createUsersPermissionsUser: overrides && overrides.hasOwnProperty('createUsersPermissionsUser') ? overrides.createUsersPermissionsUser! : aUsersPermissionsUserEntityResponse(),
+        deleteAuthor: overrides && overrides.hasOwnProperty('deleteAuthor') ? overrides.deleteAuthor! : anAuthorEntityResponse(),
         deleteHomepage: overrides && overrides.hasOwnProperty('deleteHomepage') ? overrides.deleteHomepage! : aHomepageEntityResponse(),
         deleteLandingpage: overrides && overrides.hasOwnProperty('deleteLandingpage') ? overrides.deleteLandingpage! : aLandingpageEntityResponse(),
+        deleteLocation: overrides && overrides.hasOwnProperty('deleteLocation') ? overrides.deleteLocation! : aLocationEntityResponse(),
         deleteMenupage: overrides && overrides.hasOwnProperty('deleteMenupage') ? overrides.deleteMenupage! : aMenupageEntityResponse(),
         deleteStory: overrides && overrides.hasOwnProperty('deleteStory') ? overrides.deleteStory! : aStoryEntityResponse(),
+        deleteTable: overrides && overrides.hasOwnProperty('deleteTable') ? overrides.deleteTable! : aTableEntityResponse(),
         deleteUploadFile: overrides && overrides.hasOwnProperty('deleteUploadFile') ? overrides.deleteUploadFile! : anUploadFileEntityResponse(),
         deleteUploadFolder: overrides && overrides.hasOwnProperty('deleteUploadFolder') ? overrides.deleteUploadFolder! : anUploadFolderEntityResponse(),
         deleteUsersPermissionsRole: overrides && overrides.hasOwnProperty('deleteUsersPermissionsRole') ? overrides.deleteUsersPermissionsRole! : aUsersPermissionsDeleteRolePayload(),
@@ -472,11 +848,14 @@ export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
         register: overrides && overrides.hasOwnProperty('register') ? overrides.register! : aUsersPermissionsLoginPayload(),
         removeFile: overrides && overrides.hasOwnProperty('removeFile') ? overrides.removeFile! : anUploadFileEntityResponse(),
         resetPassword: overrides && overrides.hasOwnProperty('resetPassword') ? overrides.resetPassword! : aUsersPermissionsLoginPayload(),
+        updateAuthor: overrides && overrides.hasOwnProperty('updateAuthor') ? overrides.updateAuthor! : anAuthorEntityResponse(),
         updateFileInfo: overrides && overrides.hasOwnProperty('updateFileInfo') ? overrides.updateFileInfo! : anUploadFileEntityResponse(),
         updateHomepage: overrides && overrides.hasOwnProperty('updateHomepage') ? overrides.updateHomepage! : aHomepageEntityResponse(),
         updateLandingpage: overrides && overrides.hasOwnProperty('updateLandingpage') ? overrides.updateLandingpage! : aLandingpageEntityResponse(),
+        updateLocation: overrides && overrides.hasOwnProperty('updateLocation') ? overrides.updateLocation! : aLocationEntityResponse(),
         updateMenupage: overrides && overrides.hasOwnProperty('updateMenupage') ? overrides.updateMenupage! : aMenupageEntityResponse(),
         updateStory: overrides && overrides.hasOwnProperty('updateStory') ? overrides.updateStory! : aStoryEntityResponse(),
+        updateTable: overrides && overrides.hasOwnProperty('updateTable') ? overrides.updateTable! : aTableEntityResponse(),
         updateUploadFile: overrides && overrides.hasOwnProperty('updateUploadFile') ? overrides.updateUploadFile! : anUploadFileEntityResponse(),
         updateUploadFolder: overrides && overrides.hasOwnProperty('updateUploadFolder') ? overrides.updateUploadFolder! : anUploadFolderEntityResponse(),
         updateUsersPermissionsRole: overrides && overrides.hasOwnProperty('updateUsersPermissionsRole') ? overrides.updateUsersPermissionsRole! : aUsersPermissionsUpdateRolePayload(),
@@ -506,16 +885,22 @@ export const aPaginationArg = (overrides?: Partial<PaginationArg>): PaginationAr
 export const aQuery = (overrides?: Partial<Query>): Query => {
     return {
         StoryPostBySlug: overrides && overrides.hasOwnProperty('StoryPostBySlug') ? overrides.StoryPostBySlug! : aStoryEntityResponse(),
+        author: overrides && overrides.hasOwnProperty('author') ? overrides.author! : anAuthorEntityResponse(),
+        authors: overrides && overrides.hasOwnProperty('authors') ? overrides.authors! : anAuthorEntityResponseCollection(),
         homepage: overrides && overrides.hasOwnProperty('homepage') ? overrides.homepage! : aHomepageEntityResponse(),
         i18NLocale: overrides && overrides.hasOwnProperty('i18NLocale') ? overrides.i18NLocale! : anI18NLocaleEntityResponse(),
         i18NLocales: overrides && overrides.hasOwnProperty('i18NLocales') ? overrides.i18NLocales! : anI18NLocaleEntityResponseCollection(),
         landingpage: overrides && overrides.hasOwnProperty('landingpage') ? overrides.landingpage! : aLandingpageEntityResponse(),
         landingpages: overrides && overrides.hasOwnProperty('landingpages') ? overrides.landingpages! : aLandingpageEntityResponseCollection(),
+        location: overrides && overrides.hasOwnProperty('location') ? overrides.location! : aLocationEntityResponse(),
+        locations: overrides && overrides.hasOwnProperty('locations') ? overrides.locations! : aLocationEntityResponseCollection(),
         me: overrides && overrides.hasOwnProperty('me') ? overrides.me! : aUsersPermissionsMe(),
         menupage: overrides && overrides.hasOwnProperty('menupage') ? overrides.menupage! : aMenupageEntityResponse(),
         menupages: overrides && overrides.hasOwnProperty('menupages') ? overrides.menupages! : aMenupageEntityResponseCollection(),
         stories: overrides && overrides.hasOwnProperty('stories') ? overrides.stories! : aStoryEntityResponseCollection(),
         story: overrides && overrides.hasOwnProperty('story') ? overrides.story! : aStoryEntityResponse(),
+        table: overrides && overrides.hasOwnProperty('table') ? overrides.table! : aTableEntityResponse(),
+        tables: overrides && overrides.hasOwnProperty('tables') ? overrides.tables! : aTableEntityResponseCollection(),
         uploadFile: overrides && overrides.hasOwnProperty('uploadFile') ? overrides.uploadFile! : anUploadFileEntityResponse(),
         uploadFiles: overrides && overrides.hasOwnProperty('uploadFiles') ? overrides.uploadFiles! : anUploadFileEntityResponseCollection(),
         uploadFolder: overrides && overrides.hasOwnProperty('uploadFolder') ? overrides.uploadFolder! : anUploadFolderEntityResponse(),
@@ -535,14 +920,19 @@ export const aResponseCollectionMeta = (overrides?: Partial<ResponseCollectionMe
 
 export const aStory = (overrides?: Partial<Story>): Story => {
     return {
+        author: overrides && overrides.hasOwnProperty('author') ? overrides.author! : anAuthorEntityResponse(),
         components: overrides && overrides.hasOwnProperty('components') ? overrides.components! : [aComponentModulesImage()],
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : 'impedit',
         locale: overrides && overrides.hasOwnProperty('locale') ? overrides.locale! : 'laudantium',
         localizations: overrides && overrides.hasOwnProperty('localizations') ? overrides.localizations! : aStoryRelationResponseCollection(),
+        locations: overrides && overrides.hasOwnProperty('locations') ? overrides.locations! : aLocationRelationResponseCollection(),
+        preface: overrides && overrides.hasOwnProperty('preface') ? overrides.preface! : 'aspernatur',
+        publicationDate: overrides && overrides.hasOwnProperty('publicationDate') ? overrides.publicationDate! : aComponentCorePublicationDate(),
         publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : 'et',
         slug: overrides && overrides.hasOwnProperty('slug') ? overrides.slug! : 'minima',
+        timeframe: overrides && overrides.hasOwnProperty('timeframe') ? overrides.timeframe! : aComponentCoreTimeframe(),
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'deleniti',
-        triply_people: overrides && overrides.hasOwnProperty('triply_people') ? overrides.triply_people! : 'error',
+        triply_people: overrides && overrides.hasOwnProperty('triply_people') ? overrides.triply_people! : [aComponentTriplyPeople()],
         updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : 'cumque',
     };
 };
@@ -570,27 +960,37 @@ export const aStoryEntityResponseCollection = (overrides?: Partial<StoryEntityRe
 export const aStoryFiltersInput = (overrides?: Partial<StoryFiltersInput>): StoryFiltersInput => {
     return {
         and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [aStoryFiltersInput()],
+        author: overrides && overrides.hasOwnProperty('author') ? overrides.author! : anAuthorFiltersInput(),
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : aDateTimeFilterInput(),
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : anIdFilterInput(),
         locale: overrides && overrides.hasOwnProperty('locale') ? overrides.locale! : aStringFilterInput(),
         localizations: overrides && overrides.hasOwnProperty('localizations') ? overrides.localizations! : aStoryFiltersInput(),
+        locations: overrides && overrides.hasOwnProperty('locations') ? overrides.locations! : aLocationFiltersInput(),
         not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : aStoryFiltersInput(),
         or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [aStoryFiltersInput()],
+        preface: overrides && overrides.hasOwnProperty('preface') ? overrides.preface! : aStringFilterInput(),
+        publicationDate: overrides && overrides.hasOwnProperty('publicationDate') ? overrides.publicationDate! : aComponentCorePublicationDateFiltersInput(),
         publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : aDateTimeFilterInput(),
         slug: overrides && overrides.hasOwnProperty('slug') ? overrides.slug! : aStringFilterInput(),
+        timeframe: overrides && overrides.hasOwnProperty('timeframe') ? overrides.timeframe! : aComponentCoreTimeframeFiltersInput(),
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : aStringFilterInput(),
-        triply_people: overrides && overrides.hasOwnProperty('triply_people') ? overrides.triply_people! : aStringFilterInput(),
+        triply_people: overrides && overrides.hasOwnProperty('triply_people') ? overrides.triply_people! : aComponentTriplyPeopleFiltersInput(),
         updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : aDateTimeFilterInput(),
     };
 };
 
 export const aStoryInput = (overrides?: Partial<StoryInput>): StoryInput => {
     return {
+        author: overrides && overrides.hasOwnProperty('author') ? overrides.author! : 'da466e6a-9e48-4074-8653-af51bc678fec',
         components: overrides && overrides.hasOwnProperty('components') ? overrides.components! : ['nesciunt'],
+        locations: overrides && overrides.hasOwnProperty('locations') ? overrides.locations! : ['6160e737-90eb-492d-b5fe-34a5ddb88a50'],
+        preface: overrides && overrides.hasOwnProperty('preface') ? overrides.preface! : 'id',
+        publicationDate: overrides && overrides.hasOwnProperty('publicationDate') ? overrides.publicationDate! : aComponentCorePublicationDateInput(),
         publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : 'nemo',
         slug: overrides && overrides.hasOwnProperty('slug') ? overrides.slug! : 'earum',
+        timeframe: overrides && overrides.hasOwnProperty('timeframe') ? overrides.timeframe! : aComponentCoreTimeframeInput(),
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'voluptates',
-        triply_people: overrides && overrides.hasOwnProperty('triply_people') ? overrides.triply_people! : 'modi',
+        triply_people: overrides && overrides.hasOwnProperty('triply_people') ? overrides.triply_people! : [aComponentTriplyPeopleInput()],
     };
 };
 
@@ -626,6 +1026,64 @@ export const aStringFilterInput = (overrides?: Partial<StringFilterInput>): Stri
     };
 };
 
+export const aTable = (overrides?: Partial<Table>): Table => {
+    return {
+        TableBody: overrides && overrides.hasOwnProperty('TableBody') ? overrides.TableBody! : [aComponentCoreTableBody()],
+        Tablehead: overrides && overrides.hasOwnProperty('Tablehead') ? overrides.Tablehead! : aComponentCoreTableHead(),
+        createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : 'vel',
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'aperiam',
+        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'sequi',
+        publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : 'nemo',
+        updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : 'amet',
+    };
+};
+
+export const aTableEntity = (overrides?: Partial<TableEntity>): TableEntity => {
+    return {
+        attributes: overrides && overrides.hasOwnProperty('attributes') ? overrides.attributes! : aTable(),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'bc044baf-2bc1-4347-b2f7-28bdb3548bf8',
+    };
+};
+
+export const aTableEntityResponse = (overrides?: Partial<TableEntityResponse>): TableEntityResponse => {
+    return {
+        data: overrides && overrides.hasOwnProperty('data') ? overrides.data! : aTableEntity(),
+    };
+};
+
+export const aTableEntityResponseCollection = (overrides?: Partial<TableEntityResponseCollection>): TableEntityResponseCollection => {
+    return {
+        data: overrides && overrides.hasOwnProperty('data') ? overrides.data! : [aTableEntity()],
+        meta: overrides && overrides.hasOwnProperty('meta') ? overrides.meta! : aResponseCollectionMeta(),
+    };
+};
+
+export const aTableFiltersInput = (overrides?: Partial<TableFiltersInput>): TableFiltersInput => {
+    return {
+        TableBody: overrides && overrides.hasOwnProperty('TableBody') ? overrides.TableBody! : aComponentCoreTableBodyFiltersInput(),
+        Tablehead: overrides && overrides.hasOwnProperty('Tablehead') ? overrides.Tablehead! : aComponentCoreTableHeadFiltersInput(),
+        and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [aTableFiltersInput()],
+        createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : aDateTimeFilterInput(),
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : aStringFilterInput(),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : anIdFilterInput(),
+        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : aStringFilterInput(),
+        not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : aTableFiltersInput(),
+        or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [aTableFiltersInput()],
+        publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : aDateTimeFilterInput(),
+        updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : aDateTimeFilterInput(),
+    };
+};
+
+export const aTableInput = (overrides?: Partial<TableInput>): TableInput => {
+    return {
+        TableBody: overrides && overrides.hasOwnProperty('TableBody') ? overrides.TableBody! : [aComponentCoreTableBodyInput()],
+        Tablehead: overrides && overrides.hasOwnProperty('Tablehead') ? overrides.Tablehead! : aComponentCoreTableHeadInput(),
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'reiciendis',
+        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'optio',
+        publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : 'est',
+    };
+};
+
 export const anUploadFile = (overrides?: Partial<UploadFile>): UploadFile => {
     return {
         alternativeText: overrides && overrides.hasOwnProperty('alternativeText') ? overrides.alternativeText! : 'enim',
@@ -640,7 +1098,7 @@ export const anUploadFile = (overrides?: Partial<UploadFile>): UploadFile => {
         previewUrl: overrides && overrides.hasOwnProperty('previewUrl') ? overrides.previewUrl! : 'distinctio',
         provider: overrides && overrides.hasOwnProperty('provider') ? overrides.provider! : 'dolorem',
         provider_metadata: overrides && overrides.hasOwnProperty('provider_metadata') ? overrides.provider_metadata! : 'qui',
-        related: overrides && overrides.hasOwnProperty('related') ? overrides.related! : [aComponentCoreCarouselItem()],
+        related: overrides && overrides.hasOwnProperty('related') ? overrides.related! : [anAuthor()],
         size: overrides && overrides.hasOwnProperty('size') ? overrides.size! : 6.1,
         updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : 'ut',
         url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'vel',

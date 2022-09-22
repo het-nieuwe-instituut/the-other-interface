@@ -8,18 +8,57 @@ query storyBySlug($locale: I18NLocaleCode, $slug: String!) {
         data {
             id
             attributes {
+                title
+                preface
+                publishedAt
+                author {
+                    data {
+                        id
+                        attributes {
+                            firstName
+                            insertion
+                            lastName
+                        }
+                    }
+                }
+                timeframe {
+                    id
+                    yearStart
+                    yearEnd
+                }
+                locations {
+                    data {
+                        id
+                        attributes {
+                            city
+                        }
+                    }
+                }
+                publicationDate {
+                    date
+                    displayType
+                }
                 components {
                     ... on ComponentModulesTextModule {
                         ...textModuleFragment
                     }
-                    ... on ComponentModulesPullquote {
-                        ...pullquoteModuleFragment
-                    }
                     ... on ComponentModulesImage {
                         ...imageModuleFragment
                     }
+                    ... on ComponentModulesPullquote {
+                        ...pullquoteModuleFragment
+                    }
+                    ... on ComponentModulesTableModule {
+                        ...tableModuleFragment
+                    }
+                    ... on ComponentModulesTitleModule {
+                        ...titleModuleFragment
+                    }
                     ... on ComponentModulesImageCarousel {
                         ...imageCarouselModuleFragment
+                    }
+                    ... on ComponentModulesSubtitle {
+                        ...subtitleModuleFragment
                     }
                 }
             }

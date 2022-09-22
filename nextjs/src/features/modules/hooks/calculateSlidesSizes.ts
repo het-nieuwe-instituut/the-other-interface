@@ -1,22 +1,22 @@
 import { useBreakpointValue } from "@chakra-ui/react"
 import { useState, useEffect } from "react"
-import { Enum_Componentmodulescarousel_Type } from "src/generated/graphql"
+import { EnumComponentmodulescarouselType } from "src/generated/graphql"
 
-export const typeToItemsPerPageDesctop: Record<Enum_Componentmodulescarousel_Type, number> = {
-    [Enum_Componentmodulescarousel_Type.NotbleMakers]: 4,
-    [Enum_Componentmodulescarousel_Type.CollectionHighlights]: 2,
-    [Enum_Componentmodulescarousel_Type.CollectionHighlightsWithMakers]: 4,
-    [Enum_Componentmodulescarousel_Type.FeaturedThemes]: 3
+export const typeToItemsPerPageDesctop: Record<EnumComponentmodulescarouselType, number> = {
+    [EnumComponentmodulescarouselType.Makers]: 4,
+    [EnumComponentmodulescarouselType.Highlights]: 2,
+    [EnumComponentmodulescarouselType.Combined]: 4,
+    [EnumComponentmodulescarouselType.Themes]: 3
 }
 
-export const typeToItemsPerPageMobile: Record<Enum_Componentmodulescarousel_Type, number> = {
-    [Enum_Componentmodulescarousel_Type.NotbleMakers]: 2,
-    [Enum_Componentmodulescarousel_Type.CollectionHighlights]: 1,
-    [Enum_Componentmodulescarousel_Type.CollectionHighlightsWithMakers]: 2,
-    [Enum_Componentmodulescarousel_Type.FeaturedThemes]: 2
+export const typeToItemsPerPageMobile: Record<EnumComponentmodulescarouselType, number> = {
+    [EnumComponentmodulescarouselType.Makers]: 2,
+    [EnumComponentmodulescarouselType.Highlights]: 1,
+    [EnumComponentmodulescarouselType.Combined]: 2,
+    [EnumComponentmodulescarouselType.Themes]: 2
 }
 
-const useCalculateItemsPerSlide = (type: Enum_Componentmodulescarousel_Type) => {
+const useCalculateItemsPerSlide = (type: EnumComponentmodulescarouselType) => {
     const [ITEMS_PER_PAGE, setItemsPerPage] = useState<number>(1)
 
     const config = useBreakpointValue(
@@ -24,7 +24,7 @@ const useCalculateItemsPerSlide = (type: Enum_Componentmodulescarousel_Type) => 
       ) ?? typeToItemsPerPageDesctop
 
     useEffect(() => {
-        const itemsPerPage = config[type ?? Enum_Componentmodulescarousel_Type.CollectionHighlights]
+        const itemsPerPage = config[type ?? EnumComponentmodulescarouselType.Highlights]
         setItemsPerPage(itemsPerPage)
     }, [type, config])
 

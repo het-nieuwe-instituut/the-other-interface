@@ -10,5 +10,8 @@
   },
   "devDependencies": {
     "husky": "^8.0.1"
+  },
+  "dependencies": {
+    "strapi": "file:strapi"
   }
 }
