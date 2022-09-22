@@ -2,9 +2,9 @@
 import { isExternalURL } from '@/features/shared/utils/links'
 import { keyExtractor } from '@/features/shared/utils/lists'
 import { capitalizeFirstLetter } from '@/features/shared/utils/text'
-import ExternalLink from '@/icons/arrows/external-link.svg'
-import { Box, Button, Flex, Grid } from '@chakra-ui/react'
 import Download from '@/icons/arrows/download.svg'
+import ExternalLink from '@/icons/arrows/external-link.svg'
+import { Box, Button, Flex, Grid, Text } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import {
     ComponentCoreButton,
@@ -57,13 +57,14 @@ export const ButtonsModule: React.FC<Props> = props => {
                 <NextLink key={keyExtractor(button, index, array)} href={getURl(button)} passHref>
                     <Button
                         variant={config.variant}
-                        textStyle={config.textStyle}
                         as={'a'}
                         rightIcon={renderExternalLink(button)}
                         target={!!(button.url && isExternalURL(button.url)) ? '_blank' : undefined}
                         gridColumn={{ base: '1fr', md: index === array.length - 1 ? '1 / 3' : undefined }}
                     >
-                        {button?.text && capitalizeFirstLetter(button.text)}
+                        <Text textStyle={config.textStyle} color={'currentcolor'}>
+                            {button?.text && capitalizeFirstLetter(button.text)}
+                        </Text>
                     </Button>
                 </NextLink>
             )
