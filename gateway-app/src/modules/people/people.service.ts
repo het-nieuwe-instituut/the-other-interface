@@ -133,4 +133,13 @@ export class PeopleService {
             }
         })
     }
+
+    public validateFilterInput(input: string): PeopleZoomLevel3Ids {
+        if (Object.keys(PeopleZoomLevel3Ids).includes(input)) {
+            // we can do this since we do key=value
+            return PeopleZoomLevel3Ids[input as PeopleZoomLevel3Ids]
+        }
+
+        throw new Error(`[People] Invalid filter input "${input}"`)
+    }
 }

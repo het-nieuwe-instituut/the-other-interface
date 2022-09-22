@@ -94,4 +94,13 @@ export class ArchivesService {
             }
         })
     }
+
+    public validateFilterInput(input: string): ArchivesZoomLevel3Ids {
+        if (Object.keys(ArchivesZoomLevel3Ids).includes(input)) {
+            // we can do this since we do key=value
+            return ArchivesZoomLevel3Ids[input as ArchivesZoomLevel3Ids]
+        }
+
+        throw new Error(`[Archives] Invalid filter input "${input}"`)
+    }
 }

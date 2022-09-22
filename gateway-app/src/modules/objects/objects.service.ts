@@ -146,4 +146,13 @@ export class ObjectsService {
             }
         })
     }
+
+    public validateFilterInput(input: string): ObjectsZoomLevel3Ids {
+        if (Object.keys(ObjectsZoomLevel3Ids).includes(input)) {
+            // we can do this since we do key=value
+            return ObjectsZoomLevel3Ids[input as ObjectsZoomLevel3Ids]
+        }
+
+        throw new Error(`[Objects] Invalid filter input "${input}"`)
+    }
 }

@@ -120,4 +120,13 @@ export class PublicationsService {
             }
         })
     }
+
+    public validateFilterInput(input: string): PublicationsZoomLevel3Ids {
+        if (Object.keys(PublicationsZoomLevel3Ids).includes(input)) {
+            // we can do this since we do key=value
+            return PublicationsZoomLevel3Ids[input as PublicationsZoomLevel3Ids]
+        }
+
+        throw new Error(`[Publications] Invalid filter input "${input}"`)
+    }
 }

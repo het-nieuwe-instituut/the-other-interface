@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common'
-import { ArchivesService, ArchivesZoomLevel3Ids } from '../archives/archives.service'
-import { ObjectsService, ObjectsZoomLevel3Ids } from '../objects/objects.service'
-import { PeopleService, PeopleZoomLevel3Ids } from '../people/people.service'
-import { PublicationsService, PublicationsZoomLevel3Ids } from '../publications/publications.service'
+import { ArchivesService } from '../archives/archives.service'
+import { ObjectsService } from '../objects/objects.service'
+import { PeopleService } from '../people/people.service'
+import { PublicationsService } from '../publications/publications.service'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
-import { PaginationArgs } from './zoomLevel3.type'
+import { PaginationArgs, ZoomLevel3IdType } from './zoomLevel3.type'
 
 @Injectable()
 export class ZoomLevel3Service {
@@ -15,35 +15,23 @@ export class ZoomLevel3Service {
         private readonly publicationsService: PublicationsService
     ) {}
 
-    public async getData(entity: EntityNames, filter: string, paginationArgs: PaginationArgs) {
+    public async getData(entity: EntityNames, filterInput: ZoomLevel3IdType, paginationArgs: PaginationArgs) {
         switch (entity) {
             case EntityNames.Archives: {
-                return this.archivesService.getZoomLevel3Data(
-                    filter as ArchivesZoomLevel3Ids,
-                    paginationArgs.page,
-                    paginationArgs.pageSize
-                )
+                const filter = this.archivesService.validateFilterInput(filterInput)
+                return this.archivesService.getZoomLevel3Data(filter, paginationArgs.page, paginationArgs.pageSize)
             }
             case EntityNames.Objects: {
-                return this.objectsService.getZoomLevel3Data(
-                    filter as ObjectsZoomLevel3Ids,
-                    paginationArgs.page,
-                    paginationArgs.pageSize
-                )
+                const filter = this.objectsService.validateFilterInput(filterInput)
+                return this.objectsService.getZoomLevel3Data(filter, paginationArgs.page, paginationArgs.pageSize)
             }
             case EntityNames.People: {
-                return this.peopleService.getZoomLevel3Data(
-                    filter as PeopleZoomLevel3Ids,
-                    paginationArgs.page,
-                    paginationArgs.pageSize
-                )
+                const filter = this.peopleService.validateFilterInput(filterInput)
+                return this.peopleService.getZoomLevel3Data(filter, paginationArgs.page, paginationArgs.pageSize)
             }
             case EntityNames.Publications: {
-                return this.publicationsService.getZoomLevel3Data(
-                    filter as PublicationsZoomLevel3Ids,
-                    paginationArgs.page,
-                    paginationArgs.pageSize
-                )
+                const filter = this.publicationsService.validateFilterInput(filterInput)
+                return this.publicationsService.getZoomLevel3Data(filter, paginationArgs.page, paginationArgs.pageSize)
             }
             case EntityNames.Stories:
             default: {
