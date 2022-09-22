@@ -30,7 +30,8 @@
         "modules.subtitle",
         "modules.table-module",
         "modules.title-module",
-        "modules.image-carousel"
+        "modules.image-carousel",
+        "modules.buttons-module"
       ]
     },
     "Title": {
