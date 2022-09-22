@@ -47,7 +47,6 @@ export const ButtonsModule: React.FC<Props> = props => {
 
     function renderButtons() {
         return props.component.buttons?.map((button, index, array) => {
-            console.log(props.component.buttonStyle === EnumComponentmodulesbuttonsmoduleButtonstyle.Large)
             const config =
                 buttonConfig[props.component.buttonStyle ?? EnumComponentmodulesbuttonsmoduleButtonstyle.Default]
 
