@@ -12,7 +12,8 @@ export const usePresenter = (type: EnumComponentmodulescarouselType, ref: React.
     const justifySlide = useBreakpointValue({
         sm: isOnlyOneItem && 'center',
         md: isOnlyOneItem && 'center',
-        lg: isOnlyOneItem && ' center',
+        lg: isOnlyOneItem && 'center',
+        base: isOnlyOneItem && 'center',
         xl: isOnlyOneItem && 'space-between'
     }) || 'space-between'
 

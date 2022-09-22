@@ -34,7 +34,7 @@ export const usePresenter = (type: Maybe<EnumComponentmodulescarouselType> | und
     ) && showPagination
 
     const showPaginationMobile = useBreakpointValue(
-        { sm: true, md: true, lg: false, xl: false }
+        { sm: true, md: true, lg: false, xl: false, base: true }
     ) && showPagination
 
     return {

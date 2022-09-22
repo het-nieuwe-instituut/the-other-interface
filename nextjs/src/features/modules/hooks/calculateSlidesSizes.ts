@@ -20,7 +20,7 @@ const useCalculateItemsPerSlide = (type: EnumComponentmodulescarouselType) => {
     const [ITEMS_PER_PAGE, setItemsPerPage] = useState<number>(1)
 
     const config = useBreakpointValue(
-        { sm: typeToItemsPerPageMobile, md: typeToItemsPerPageMobile, lg: typeToItemsPerPageDesctop, xl: typeToItemsPerPageDesctop }
+        { sm: typeToItemsPerPageMobile, base: typeToItemsPerPageMobile,  md: typeToItemsPerPageMobile, lg: typeToItemsPerPageDesctop, xl: typeToItemsPerPageDesctop }
       ) ?? typeToItemsPerPageDesctop
 
     useEffect(() => {
