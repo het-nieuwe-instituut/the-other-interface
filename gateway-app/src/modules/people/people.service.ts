@@ -30,7 +30,7 @@ export interface PeopleData {
 export class PeopleService {
     protected entityType = 'tripli'
     private readonly detailEndpoint =
-        'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-acceptance/zoom-5-people/run?record='
+        'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-acceptance/zoom-5-people/run?record=https://collectiedata.hetnieuweinstituut.nl/id/people/'
     private readonly zoomLevel2Endpoint =
         'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-2-people/run'
 
