@@ -22,6 +22,13 @@ const textStyles = {
         lineHeight: '118%',
         fontFamily: 'Univers bold',
     },
+    h4: {
+        color: `${colors.black}`,
+        fontSize: ['16px'],
+        fontWeight: '900',
+        lineHeight: '125%',
+        fontFamily: 'Univers bold',
+    },
     body: {
         color: `${colors.black}`,
         fontSize: ['20px', '24px', '20px', '20px'],
