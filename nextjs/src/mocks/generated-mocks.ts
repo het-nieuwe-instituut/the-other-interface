@@ -1,4 +1,4 @@
-import { BooleanFilterInput, ComponentModulesImage, ComponentModulesImageCarousel, ComponentModulesPullquote, ComponentModulesTextModule, DateTimeFilterInput, Error, FileInfoInput, FloatFilterInput, Homepage, HomepageEntity, HomepageEntityResponse, HomepageInput, HomepageRelationResponseCollection, I18NLocale, I18NLocaleEntity, I18NLocaleEntityResponse, I18NLocaleEntityResponseCollection, I18NLocaleFiltersInput, IdFilterInput, IntFilterInput, JsonFilterInput, Landingpage, LandingpageEntity, LandingpageEntityResponse, LandingpageEntityResponseCollection, LandingpageFiltersInput, LandingpageInput, LandingpageRelationResponseCollection, Menupage, MenupageEntity, MenupageEntityResponse, MenupageEntityResponseCollection, MenupageFiltersInput, MenupageInput, MenupageRelationResponseCollection, Mutation, Pagination, PaginationArg, Query, ResponseCollectionMeta, Story, StoryEntity, StoryEntityResponse, StoryEntityResponseCollection, StoryFiltersInput, StoryInput, StoryRelationResponseCollection, StringFilterInput, UploadFile, UploadFileEntity, UploadFileEntityResponse, UploadFileEntityResponseCollection, UploadFileFiltersInput, UploadFileInput, UploadFileRelationResponseCollection, UploadFolder, UploadFolderEntity, UploadFolderEntityResponse, UploadFolderEntityResponseCollection, UploadFolderFiltersInput, UploadFolderInput, UploadFolderRelationResponseCollection, UsersPermissionsCreateRolePayload, UsersPermissionsDeleteRolePayload, UsersPermissionsLoginInput, UsersPermissionsLoginPayload, UsersPermissionsMe, UsersPermissionsMeRole, UsersPermissionsPasswordPayload, UsersPermissionsPermission, UsersPermissionsPermissionEntity, UsersPermissionsPermissionFiltersInput, UsersPermissionsPermissionRelationResponseCollection, UsersPermissionsRegisterInput, UsersPermissionsRole, UsersPermissionsRoleEntity, UsersPermissionsRoleEntityResponse, UsersPermissionsRoleEntityResponseCollection, UsersPermissionsRoleFiltersInput, UsersPermissionsRoleInput, UsersPermissionsUpdateRolePayload, UsersPermissionsUser, UsersPermissionsUserEntity, UsersPermissionsUserEntityResponse, UsersPermissionsUserEntityResponseCollection, UsersPermissionsUserFiltersInput, UsersPermissionsUserInput, UsersPermissionsUserRelationResponseCollection, PublicationState } from '../generated/graphql';
+import { BooleanFilterInput, ComponentCoreCarouselItem, ComponentCoreCarouselItemFiltersInput, ComponentModulesCarousel, ComponentModulesImage, ComponentModulesImageCarousel, ComponentModulesPullquote, ComponentModulesTextModule, DateTimeFilterInput, Error, FileInfoInput, FloatFilterInput, Homepage, HomepageEntity, HomepageEntityResponse, HomepageInput, HomepageRelationResponseCollection, I18NLocale, I18NLocaleEntity, I18NLocaleEntityResponse, I18NLocaleEntityResponseCollection, I18NLocaleFiltersInput, IdFilterInput, IntFilterInput, JsonFilterInput, Landingpage, LandingpageEntity, LandingpageEntityResponse, LandingpageEntityResponseCollection, LandingpageFiltersInput, LandingpageInput, LandingpageRelationResponseCollection, Menupage, MenupageEntity, MenupageEntityResponse, MenupageEntityResponseCollection, MenupageFiltersInput, MenupageInput, MenupageRelationResponseCollection, Mutation, Pagination, PaginationArg, Query, ResponseCollectionMeta, Story, StoryEntity, StoryEntityResponse, StoryEntityResponseCollection, StoryFiltersInput, StoryInput, StoryRelationResponseCollection, StringFilterInput, UploadFile, UploadFileEntity, UploadFileEntityResponse, UploadFileEntityResponseCollection, UploadFileFiltersInput, UploadFileInput, UploadFileRelationResponseCollection, UploadFolder, UploadFolderEntity, UploadFolderEntityResponse, UploadFolderEntityResponseCollection, UploadFolderFiltersInput, UploadFolderInput, UploadFolderRelationResponseCollection, UsersPermissionsCreateRolePayload, UsersPermissionsDeleteRolePayload, UsersPermissionsLoginInput, UsersPermissionsLoginPayload, UsersPermissionsMe, UsersPermissionsMeRole, UsersPermissionsPasswordPayload, UsersPermissionsPermission, UsersPermissionsPermissionEntity, UsersPermissionsPermissionFiltersInput, UsersPermissionsPermissionRelationResponseCollection, UsersPermissionsRegisterInput, UsersPermissionsRole, UsersPermissionsRoleEntity, UsersPermissionsRoleEntityResponse, UsersPermissionsRoleEntityResponseCollection, UsersPermissionsRoleFiltersInput, UsersPermissionsRoleInput, UsersPermissionsUpdateRolePayload, UsersPermissionsUser, UsersPermissionsUserEntity, UsersPermissionsUserEntityResponse, UsersPermissionsUserEntityResponseCollection, UsersPermissionsUserFiltersInput, UsersPermissionsUserInput, UsersPermissionsUserRelationResponseCollection, EnumComponentcorecarouselitemType, EnumComponentmodulescarouselType, PublicationState } from '../generated/graphql';
 
 export const aBooleanFilterInput = (overrides?: Partial<BooleanFilterInput>): BooleanFilterInput => {
     return {
@@ -23,6 +23,39 @@ export const aBooleanFilterInput = (overrides?: Partial<BooleanFilterInput>): Bo
         null: overrides && overrides.hasOwnProperty('null') ? overrides.null! : false,
         or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [false],
         startsWith: overrides && overrides.hasOwnProperty('startsWith') ? overrides.startsWith! : true,
+    };
+};
+
+export const aComponentCoreCarouselItem = (overrides?: Partial<ComponentCoreCarouselItem>): ComponentCoreCarouselItem => {
+    return {
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'corporis',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'e6259d63-611f-4e6c-84e7-28ad8094f5b8',
+        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'adipisci',
+        picture: overrides && overrides.hasOwnProperty('picture') ? overrides.picture! : anUploadFileEntityResponse(),
+        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : EnumComponentcorecarouselitemType.Highlight,
+    };
+};
+
+export const aComponentCoreCarouselItemFiltersInput = (overrides?: Partial<ComponentCoreCarouselItemFiltersInput>): ComponentCoreCarouselItemFiltersInput => {
+    return {
+        and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [aComponentCoreCarouselItemFiltersInput()],
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : aStringFilterInput(),
+        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : aStringFilterInput(),
+        not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : aComponentCoreCarouselItemFiltersInput(),
+        or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [aComponentCoreCarouselItemFiltersInput()],
+        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : aStringFilterInput(),
+    };
+};
+
+export const aComponentModulesCarousel = (overrides?: Partial<ComponentModulesCarousel>): ComponentModulesCarousel => {
+    return {
+        buttonText: overrides && overrides.hasOwnProperty('buttonText') ? overrides.buttonText! : 'fugiat',
+        buttonUrl: overrides && overrides.hasOwnProperty('buttonUrl') ? overrides.buttonUrl! : 'amet',
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'animi',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '02a9c5e5-9a6b-482e-9ea3-e1114441bf57',
+        items: overrides && overrides.hasOwnProperty('items') ? overrides.items! : [aComponentCoreCarouselItem()],
+        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'beatae',
+        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : EnumComponentmodulescarouselType.CollectionHighlights,
     };
 };
 
@@ -127,7 +160,7 @@ export const aFloatFilterInput = (overrides?: Partial<FloatFilterInput>): FloatF
 export const aHomepage = (overrides?: Partial<Homepage>): Homepage => {
     return {
         Title: overrides && overrides.hasOwnProperty('Title') ? overrides.Title! : 'illum',
-        components: overrides && overrides.hasOwnProperty('components') ? overrides.components! : [aComponentModulesImage()],
+        components: overrides && overrides.hasOwnProperty('components') ? overrides.components! : [aComponentModulesCarousel()],
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : 'doloremque',
         locale: overrides && overrides.hasOwnProperty('locale') ? overrides.locale! : 'aut',
         localizations: overrides && overrides.hasOwnProperty('localizations') ? overrides.localizations! : aHomepageRelationResponseCollection(),
@@ -607,7 +640,7 @@ export const anUploadFile = (overrides?: Partial<UploadFile>): UploadFile => {
         previewUrl: overrides && overrides.hasOwnProperty('previewUrl') ? overrides.previewUrl! : 'distinctio',
         provider: overrides && overrides.hasOwnProperty('provider') ? overrides.provider! : 'dolorem',
         provider_metadata: overrides && overrides.hasOwnProperty('provider_metadata') ? overrides.provider_metadata! : 'qui',
-        related: overrides && overrides.hasOwnProperty('related') ? overrides.related! : [aComponentModulesImage()],
+        related: overrides && overrides.hasOwnProperty('related') ? overrides.related! : [aComponentCoreCarouselItem()],
         size: overrides && overrides.hasOwnProperty('size') ? overrides.size! : 6.1,
         updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : 'ut',
         url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'vel',
