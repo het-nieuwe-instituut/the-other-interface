@@ -40,7 +40,7 @@ export class ZoomLevel1Service {
     public constructor(private readonly tripliService: TripliService, private readonly storyService: StoryService) {}
 
     public async getData() {
-        const strapiData = await this.storyService.getPeopleDataForZoomLevel1()
+        const strapiData = await this.storyService.getStoryDataForZoomLevel1()
 
         const endpoint =
             'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-1-record-counts/run'

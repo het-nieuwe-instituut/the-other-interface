@@ -116,11 +116,13 @@ export class ObjectsService {
 
     public async getZoomLevel2Data() {
         const result = await this.tripliService.getTripliData<ObjectFilterData>(this.zoomLevel2Endpoint)
-        return result.data.map(r => {
-            const filterMapping = this.ZoomLevel3Mapping.find(m => m.name === r.filter)
-            if (!filterMapping) return
-            return { filter: filterMapping.name, id: filterMapping.id }
-        })
+        return result.data
+            .map(r => {
+                const filterMapping = this.ZoomLevel3Mapping.find(m => m.name === r.filter)
+                if (!filterMapping) return
+                return { filter: filterMapping.name, id: filterMapping.id }
+            })
+            .filter(f => !!f?.id)
     }
 
     public async getZoomLevel3Data(id: ObjectsZoomLevel3Ids, page = 1, pageSize = 16) {

@@ -14,16 +14,16 @@ export class ZoomLevel3Args {
 @ObjectType()
 export class ZoomLevel3Type {
     @Field(() => String, { nullable: true })
-    public uri: string
+    public uri: string | null
 
     @Field(() => String, { nullable: true })
-    public name: string
+    public name: string | null
 
     @Field(() => Int, { nullable: true })
-    public count: number
+    public count: number | null
 
     @Field(() => Int, { nullable: true })
-    public total: number
+    public total: number | null
 }
 
 @ArgsType()

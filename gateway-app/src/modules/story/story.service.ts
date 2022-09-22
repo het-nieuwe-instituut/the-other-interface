@@ -12,10 +12,10 @@ export interface PeopleData {
 export class StoryService {
     public constructor(@Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk) {}
 
-    public async getPeopleDataForZoomLevel1() {
+    public async getStoryDataForZoomLevel1() {
         const storiesTotal = await this.strapiGqlSdk.storiesTotal()
         return {
-            name: 'Stories',
+            name: EntityNames.Stories,
             count: storiesTotal.stories?.meta.pagination.total || 0,
             id: EntityNames.Stories,
         }
