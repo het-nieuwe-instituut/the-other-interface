@@ -22,7 +22,7 @@ export const StoryMeta: React.FC<Props> = ({ story }) => {
     return (
         <Box>
             <Box mb={6}>
-                <Text textStyle={'micro'}>
+                <Text textStyle={'micro'} margin={'sm'}>
                     {commonT.t('published', {
                         date: story.attributes?.publicationDate
                             ? formatPublicationDate(
