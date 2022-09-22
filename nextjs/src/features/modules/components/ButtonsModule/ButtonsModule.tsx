@@ -61,7 +61,9 @@ export const ButtonsModule: React.FC<Props> = props => {
                         target={!!(button.url && isExternalURL(button.url)) ? '_blank' : undefined}
                         gridColumn={{ base: '1fr', md: index === array.length - 1 ? '1 / 3' : undefined }}
                     >
-                        <Text textStyle={config.textStyle}>{button?.text && capitalizeFirstLetter(button.text)}</Text>
+                        <Text textStyle={config.textStyle} color={'currentcolor'}>
+                            {button?.text && capitalizeFirstLetter(button.text)}
+                        </Text>
                     </Button>
                 </NextLink>
             )
