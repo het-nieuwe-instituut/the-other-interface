@@ -1,10 +1,19 @@
 import { Injectable } from '@nestjs/common'
 import { TripliService } from '../tripli/tripli.service'
+import { ZoomLevel4Type } from '../zoomLevel4/zoomLevel4.type'
+import { ArchivesZoomLevel4FiltersArgs } from './archives.type'
 
 export enum ArchivesZoomLevel3Ids {
     date = 'date',
     descriptionLevel = 'descriptionLevel',
     relatedNames = 'relatedNames',
+}
+
+export enum ArchivesZoomLevel4Filters {
+    StartDate = 'StartDate',
+    EndDate = 'EndDate',
+    DescriptionLevel = 'DescriptionLevel',
+    RelatedName = 'RelatedName',
 }
 
 interface ObjectFilterData {
@@ -13,6 +22,13 @@ interface ObjectFilterData {
 
 interface ObjectFilterOptionsData {
     [x: string]: string
+}
+
+interface ArchivesZoomLevel4Data {
+    record: string
+    title: string
+    firstImage: string
+    imageLabel: string
 }
 
 @Injectable()
@@ -26,9 +42,9 @@ export class ArchivesService {
             id: ArchivesZoomLevel3Ids.date,
             name: 'Datering',
             columns: {
-                name: 'relatedNameLabel',
-                uri: 'relatedName',
-                count: 'count',
+                name: 'century',
+                uri: 'century',
+                count: 'numberOfRecords',
                 total: 'total',
             },
             endpoint:
@@ -59,6 +75,9 @@ export class ArchivesService {
             },
         },
     ]
+
+    private readonly ZoomLevel4Endpoint =
+        'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-4-archives/run'
 
     public constructor(private tripliService: TripliService) {}
 
@@ -92,6 +111,31 @@ export class ArchivesService {
                 count: d[mapping.columns.count] ? parseInt(d[mapping.columns.count], 10) : null,
                 total: d[mapping.columns.total] ? parseInt(d[mapping.columns.total], 10) : null,
             }
+        })
+    }
+
+    public async getZoomLevel4Data(filters: ArchivesZoomLevel4FiltersArgs, page = 1, pageSize = 48) {
+        if (Object.keys(filters).length === 0) {
+            return []
+        }
+
+        const endpoint = new URL(this.ZoomLevel4Endpoint)
+        for (const [filterName, filterValue] of Object.entries(filters)) {
+            endpoint.searchParams.append(filterName, filterValue)
+        }
+
+        const result = await this.tripliService.getTripliData<ArchivesZoomLevel4Data>(endpoint.toString(), {
+            page,
+            pageSize,
+        })
+
+        return result.data.map(res => {
+            return {
+                record: res.record,
+                title: res.title,
+                firstImage: res.firstImage,
+                imageLabel: res.imageLabel,
+            } as ZoomLevel4Type
         })
     }
 
