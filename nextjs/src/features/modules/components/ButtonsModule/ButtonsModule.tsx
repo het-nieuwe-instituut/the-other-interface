@@ -22,7 +22,7 @@ export const ButtonsModule: React.FC<Props> = props => {
     function renderButtons() {
         return props.component.buttons?.map((button, index, array) => (
             <NextLink key={keyExtractor(button, index, array)} href={getURl(button)} passHref>
-                <Button as={'a'} rightIcon={renderExternalLink(button)} target="_blank">
+                <Button as={'a'} rightIcon={renderExternalLink(button)}>
                     {button?.text}
                 </Button>
             </NextLink>
@@ -31,9 +31,8 @@ export const ButtonsModule: React.FC<Props> = props => {
 }
 
 function getURl(button?: ComponentCoreButton | null) {
-    console.log(button?.attachment?.data?.attributes?.url)
-    if (button?.hasAttachment && process.env.NEXT_PUBLIC_REACT_APP_IMAGE_BASE_URL) {
-        return process.env.NEXT_PUBLIC_REACT_APP_IMAGE_BASE_URL + button.attachment?.data?.attributes?.url ?? '#'
+    if (button?.hasAttachment) {
+        return `/api/attachmentProxy?filename=${button.attachment?.data?.attributes?.url}` ?? '#'
     }
 
     return button?.url ?? '#'
