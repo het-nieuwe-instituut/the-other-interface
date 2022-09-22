@@ -63,6 +63,9 @@ query storyBySlug($locale: I18NLocaleCode, $slug: String!) {
                     ... on ComponentModulesButtonsModule {
                         ...buttonsModuleFragment
                     }
+                    ... on ComponentModulesSubtitle {
+                        ...subtitleModuleFragment
+                    }
                 }
             }
         }

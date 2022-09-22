@@ -5,6 +5,7 @@
 #import '../fragments/components/TitleModule.fragment.graphql'
 #import '../fragments/components/ImageCarousel.fragment.graphql'
 #import '../fragments/components/ButtonsModule.fragment.graphql'
+#import '../fragments/components/SubtitleModule.fragment.graphql'
 
 query homepage($locale: I18NLocaleCode) {
     homepage(locale: $locale) {
@@ -33,6 +34,9 @@ query homepage($locale: I18NLocaleCode) {
                     }
                     ... on ComponentModulesButtonsModule {
                         ...buttonsModuleFragment
+                    }
+                    ... on ComponentModulesSubtitle {
+                        ...subtitleModuleFragment
                     }
                 }
             }
