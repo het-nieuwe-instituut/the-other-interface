@@ -289,19 +289,19 @@ export type ComponentModulesTitleModule = {
 export type ComponentTriplyPeople = {
     __typename?: 'ComponentTriplyPeople'
     id: Scalars['ID']
-    uri: Scalars['String']
+    uri_id: Scalars['String']
 }
 
 export type ComponentTriplyPeopleFiltersInput = {
     and?: InputMaybe<Array<InputMaybe<ComponentTriplyPeopleFiltersInput>>>
     not?: InputMaybe<ComponentTriplyPeopleFiltersInput>
     or?: InputMaybe<Array<InputMaybe<ComponentTriplyPeopleFiltersInput>>>
-    uri?: InputMaybe<StringFilterInput>
+    uri_id?: InputMaybe<StringFilterInput>
 }
 
 export type ComponentTriplyPeopleInput = {
     id?: InputMaybe<Scalars['ID']>
-    uri?: InputMaybe<Scalars['String']>
+    uri_id?: InputMaybe<Scalars['String']>
 }
 
 export type DateFilterInput = {
@@ -1884,7 +1884,7 @@ export type StoriesQuery = {
                 createdAt?: any | null
                 updatedAt?: any | null
                 publishedAt?: any | null
-                triply_people?: Array<{ __typename?: 'ComponentTriplyPeople'; uri: string } | null> | null
+                triply_people?: Array<{ __typename?: 'ComponentTriplyPeople'; uri_id: string } | null> | null
             } | null
         }>
     } | null
@@ -1910,7 +1910,7 @@ export type StoryFragmentFragment = {
         createdAt?: any | null
         updatedAt?: any | null
         publishedAt?: any | null
-        triply_people?: Array<{ __typename?: 'ComponentTriplyPeople'; uri: string } | null> | null
+        triply_people?: Array<{ __typename?: 'ComponentTriplyPeople'; uri_id: string } | null> | null
     } | null
 }
 
@@ -1924,7 +1924,7 @@ export const StoryFragmentFragmentDoc = gql`
             updatedAt
             publishedAt
             triply_people {
-                uri
+                uri_id
             }
         }
     }

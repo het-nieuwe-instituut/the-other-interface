@@ -24,12 +24,12 @@ export class StoryResolver {
     // TODO: added for POC, delete (or update for actual requirements) before production
     @ResolveField()
     public async people(@Parent() story: StoryFragmentFragment) {
-        const people = story.attributes?.triply_people?.filter(p => !!p?.uri)
+        const people = story.attributes?.triply_people?.filter(p => !!p?.uri_id)
         if (!people?.length) {
             return []
         }
 
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        return Promise.all(people.map(p => this.peopleService.getPeopleDetails(p!.uri)))
+        return Promise.all(people.map(p => this.peopleService.getPeopleDetails(p!.uri_id)))
     }
 }

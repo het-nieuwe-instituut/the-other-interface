@@ -25,7 +25,7 @@ fragment StoryFragment on StoryEntity {
         updatedAt
         publishedAt
         triply_people {
-            uri
+            uri_id
         }
     }
 }

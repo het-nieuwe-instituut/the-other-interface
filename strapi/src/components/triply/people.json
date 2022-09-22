@@ -7,7 +7,7 @@
   },
   "options": {},
   "attributes": {
-    "uri": {
+    "uri_id": {
       "type": "string",
       "unique": false,
       "required": true
