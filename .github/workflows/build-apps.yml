@@ -6,6 +6,7 @@ on:
       - main
       - develop
       - ops/*
+      - OPS/*
     # Trigger on any tag
     tags:
 
