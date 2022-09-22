@@ -1958,6 +1958,45 @@
       },
       {
         "kind": "OBJECT",
+        "name": "ComponentModulesSubtitle",
+        "description": null,
+        "fields": [
+          {
+            "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "text",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
         "name": "ComponentModulesTableModule",
         "description": null,
         "fields": [
@@ -3315,6 +3354,11 @@
           },
           {
             "kind": "OBJECT",
+            "name": "ComponentModulesSubtitle",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
             "name": "ComponentModulesTableModule",
             "ofType": null
           },
@@ -3524,6 +3568,11 @@
           {
             "kind": "OBJECT",
             "name": "ComponentModulesPullquote",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "ComponentModulesSubtitle",
             "ofType": null
           },
           {
@@ -5068,6 +5117,11 @@
           },
           {
             "kind": "OBJECT",
+            "name": "ComponentModulesSubtitle",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
             "name": "ComponentModulesTableModule",
             "ofType": null
           },
@@ -6486,6 +6540,11 @@
           {
             "kind": "OBJECT",
             "name": "ComponentModulesPullquote",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "ComponentModulesSubtitle",
             "ofType": null
           },
           {
@@ -10429,6 +10488,11 @@
           {
             "kind": "OBJECT",
             "name": "ComponentModulesPullquote",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "ComponentModulesSubtitle",
             "ofType": null
           },
           {
