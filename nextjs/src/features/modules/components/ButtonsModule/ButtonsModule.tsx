@@ -45,20 +45,28 @@ export const ButtonsModule: React.FC<Props> = props => {
     )
 
     function renderButtons() {
-        const config = buttonConfig[props.component.buttonStyle ?? EnumComponentmodulesbuttonsmoduleButtonstyle.Default]
-        return props.component.buttons?.map((button, index, array) => (
-            <NextLink key={keyExtractor(button, index, array)} href={button?.url ?? ''} passHref>
-                <Button
-                    variant={config.variant}
-                    textStyle={config.textStyle}
-                    as={'a'}
-                    rightIcon={renderExternalLink(button)}
-                    gridColumn={{ base: '1fr', md: index === array.length - 1 ? '1 / 3' : undefined }}
-                >
-                    {button?.text && capitalizeFirstLetter(button.text)}
-                </Button>
-            </NextLink>
-        ))
+        return props.component.buttons?.map((button, index, array) => {
+            const config =
+                buttonConfig[props.component.buttonStyle ?? EnumComponentmodulesbuttonsmoduleButtonstyle.Default]
+
+            if (!button) {
+                return null
+            }
+            return (
+                <NextLink key={keyExtractor(button, index, array)} href={button?.url ?? ''} passHref>
+                    <Button
+                        variant={config.variant}
+                        textStyle={config.textStyle}
+                        as={'a'}
+                        rightIcon={renderExternalLink(button)}
+                        target={!!(button.url && isExternalURL(button.url)) ? '_blank' : undefined}
+                        gridColumn={{ base: '1fr', md: index === array.length - 1 ? '1 / 3' : undefined }}
+                    >
+                        {button?.text && capitalizeFirstLetter(button.text)}
+                    </Button>
+                </NextLink>
+            )
+        })
     }
 
     function renderExternalLink(button?: ComponentCoreButton | null) {

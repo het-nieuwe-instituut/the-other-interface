@@ -1,6 +1,7 @@
 import { mockedClient } from '@/features/graphql/config/mockedApollo'
 import { renderWithProviders } from '@/features/shared/utils/test-utils'
 import { mockHomepageQuery } from 'src/generated/graphql'
+import { aComponentModulesTextModule } from 'src/mocks/generated-mocks'
 import { mockServer } from 'src/mocks/handlers'
 import { HomepageContainer } from './HomepageContainer'
 
@@ -12,7 +13,7 @@ describe('hello', () => {
         const { findByText, getByText } = renderWithProviders(<HomepageContainer />)
 
         getByText('loading')
-        await findByText('incidunt')
+        await findByText(aComponentModulesTextModule().Richtext ?? '')
     })
 
     it('should display error', async () => {
