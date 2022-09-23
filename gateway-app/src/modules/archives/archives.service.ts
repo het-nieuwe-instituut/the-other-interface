@@ -34,8 +34,7 @@ interface ArchivesZoomLevel4Data {
 @Injectable()
 export class ArchivesService {
     protected entityType = 'tripli'
-    private readonly zoomLevel2Endpoint =
-        'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-2-archives/run'
+    private readonly zoomLevel2Endpoint = 'zoom-2-archives/run'
 
     private readonly ZoomLevel3Mapping = [
         {
@@ -47,14 +46,12 @@ export class ArchivesService {
                 count: 'numberOfRecords',
                 total: 'total',
             },
-            endpoint:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-3-archives-date-filter/run',
+            endpoint: 'zoom-3-archives-date-filter/run',
         },
         {
             id: ArchivesZoomLevel3Ids.descriptionLevel,
             name: 'Beschrijvingsniveau',
-            endpoint:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-3-archives-description-level-filter/run',
+            endpoint: 'zoom-3-archives-description-level-filter/run',
             columns: {
                 name: 'descriptionLevel',
                 uri: 'descriptionLevel',
@@ -65,8 +62,7 @@ export class ArchivesService {
         {
             id: ArchivesZoomLevel3Ids.relatedNames,
             name: 'Gerelateerde namen',
-            endpoint:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-3-archives-related-names-filter/run',
+            endpoint: 'zoom-3-archives-related-names-filter/run',
             columns: {
                 name: 'relatedNameLabel',
                 uri: 'relatedName',
@@ -76,8 +72,7 @@ export class ArchivesService {
         },
     ]
 
-    private readonly ZoomLevel4Endpoint =
-        'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-4-archives/run'
+    private readonly ZoomLevel4Endpoint = 'zoom-4-archives/run'
 
     public constructor(private tripliService: TripliService) {}
 
@@ -120,14 +115,19 @@ export class ArchivesService {
         }
 
         const endpoint = new URL(this.ZoomLevel4Endpoint)
+        const searchParams = []
         for (const [filterName, filterValue] of Object.entries(filters)) {
-            endpoint.searchParams.append(filterName, filterValue)
+            searchParams.push({ key: filterName, value: filterValue })
         }
 
-        const result = await this.tripliService.getTripliData<ArchivesZoomLevel4Data>(endpoint.toString(), {
-            page,
-            pageSize,
-        })
+        const result = await this.tripliService.getTripliData<ArchivesZoomLevel4Data>(
+            endpoint.toString(),
+            {
+                page,
+                pageSize,
+            },
+            searchParams
+        )
 
         return result.data.map(res => {
             return {

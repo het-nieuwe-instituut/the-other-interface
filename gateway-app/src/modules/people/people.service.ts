@@ -31,15 +31,13 @@ export class PeopleService {
     protected entityType = 'tripli'
     private readonly detailEndpoint =
         'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-acceptance/zoom-5-people/run?record=https://collectiedata.hetnieuweinstituut.nl/id/people/'
-    private readonly zoomLevel2Endpoint =
-        'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-2-people/run'
+    private readonly zoomLevel2Endpoint = 'zoom-2-people/run'
 
     private readonly ZoomLevel3Mapping = [
         {
             id: PeopleZoomLevel3Ids.deathDate,
             name: 'Overlijdensdatum',
-            endpoint:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-3-people-death-date-filter/run',
+            endpoint: 'zoom-3-people-death-date-filter/run',
             columns: {
                 name: 'century',
                 uri: 'century',
@@ -50,8 +48,7 @@ export class PeopleService {
         {
             id: PeopleZoomLevel3Ids.nameType,
             name: 'Naam soort',
-            endpoint:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-3-people-name-type-filter/run',
+            endpoint: 'zoom-3-people-name-type-filter/run',
             columns: {
                 name: 'nameType',
                 uri: 'nameType',
@@ -62,8 +59,7 @@ export class PeopleService {
         {
             id: PeopleZoomLevel3Ids.birthDate,
             name: 'Geboortedatum',
-            endpoint:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-3-people-birth-date-filter/run',
+            endpoint: 'zoom-3-people-birth-date-filter/run',
             columns: {
                 name: 'century',
                 uri: 'century',
@@ -74,8 +70,7 @@ export class PeopleService {
         {
             id: PeopleZoomLevel3Ids.period,
             name: 'Periode',
-            endpoint:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-3-people-period-filter/run',
+            endpoint: 'zoom-3-people-period-filter/run',
             columns: {
                 name: 'century',
                 uri: 'century',
@@ -86,8 +81,7 @@ export class PeopleService {
         {
             id: PeopleZoomLevel3Ids.place,
             name: 'Plaats',
-            endpoint:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-3-people-place-filter/run',
+            endpoint: 'zoom-3-people-place-filter/run',
             columns: {
                 name: 'placeLabel',
                 uri: 'place',
@@ -98,8 +92,7 @@ export class PeopleService {
         {
             id: PeopleZoomLevel3Ids.profession,
             name: 'Beroep/Werkveld',
-            endpoint:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-3-people-profession-filter/run',
+            endpoint: 'zoom-3-people-profession-filter/run',
             columns: {
                 name: 'professionLabel',
                 uri: 'profession',

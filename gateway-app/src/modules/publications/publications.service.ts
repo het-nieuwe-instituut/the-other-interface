@@ -20,15 +20,13 @@ interface ObjectFilterOptionsData {
 @Injectable()
 export class PublicationsService {
     protected entityType = 'tripli'
-    private readonly zoomLevel2Endpoint =
-        'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-2-books/run'
+    private readonly zoomLevel2Endpoint = 'zoom-2-books/run'
 
     private readonly ZoomLevel3Mapping = [
         {
             id: PublicationsZoomLevel3Ids.relatedPerson,
             name: 'Gerelateerde persoon/instelling',
-            endpoint:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-3-books-related-person-filter/run',
+            endpoint: 'zoom-3-books-related-person-filter/run',
             columns: {
                 name: 'realtedPerInstLabel',
                 uri: 'relatedPerInstLink',
@@ -39,8 +37,7 @@ export class PublicationsService {
         {
             id: PublicationsZoomLevel3Ids.subject,
             name: 'Onderwerp',
-            endpoint:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-3-books-subject-filter/run',
+            endpoint: 'zoom-3-books-subject-filter/run',
             columns: {
                 name: 'subjectLabel',
                 uri: 'subject',
@@ -51,8 +48,7 @@ export class PublicationsService {
         {
             id: PublicationsZoomLevel3Ids.geographicalKeyword,
             name: 'Geografisch trefwoord',
-            endpoint:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-3-books-geographical-keyword-filter/run',
+            endpoint: 'zoom-3-books-geographical-keyword-filter/run',
             columns: {
                 name: 'geograficalKeywordLabel',
                 uri: 'geograficalKeyword',
@@ -63,8 +59,7 @@ export class PublicationsService {
         {
             id: PublicationsZoomLevel3Ids.author,
             name: 'Auteur(s)',
-            endpoint:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-3-books-author-filter/run',
+            endpoint: 'zoom-3-books-author-filter/run',
             columns: {
                 name: 'authorLabel',
                 uri: 'author',
@@ -75,8 +70,7 @@ export class PublicationsService {
         {
             id: PublicationsZoomLevel3Ids.typeOfPublication,
             name: 'Soort publicatie',
-            endpoint:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-3-books-type-of-publication-filter/2/run',
+            endpoint: 'zoom-3-books-type-of-publication-filter/2/run',
             columns: {
                 name: 'typeOfPublicationLabel',
                 uri: 'typeOfPublication',

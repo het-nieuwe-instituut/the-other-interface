@@ -22,15 +22,13 @@ interface ObjectFilterOptionsData {
 @Injectable()
 export class ObjectsService {
     protected entityType = 'tripli'
-    private readonly zoomLevel2Endpoint =
-        'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-2-objects/run'
+    private readonly zoomLevel2Endpoint = 'zoom-2-objects/run'
 
     private readonly ZoomLevel3Mapping = [
         {
             id: ObjectsZoomLevel3Ids.subject,
             name: 'Onderwerp',
-            endpoint:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-3-objects-subject-filter/run',
+            endpoint: 'zoom-3-objects-subject-filter/run',
             columns: {
                 name: 'subjectLabel',
                 uri: 'subject',
@@ -41,8 +39,7 @@ export class ObjectsService {
         {
             id: ObjectsZoomLevel3Ids.personInstitution,
             name: 'Persoon/instelling',
-            endpoint:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-3-objects-person-institution-filter/run',
+            endpoint: 'zoom-3-objects-person-institution-filter/run',
             columns: {
                 name: 'perInstLabel',
                 uri: 'perInst',
@@ -53,8 +50,7 @@ export class ObjectsService {
         {
             id: ObjectsZoomLevel3Ids.technique,
             name: 'Technieken',
-            endpoint:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-3-objects-technique-filter/run',
+            endpoint: 'zoom-3-objects-technique-filter/run',
             columns: {
                 name: 'techniqueLabel',
                 uri: 'technique',
@@ -65,8 +61,7 @@ export class ObjectsService {
         {
             id: ObjectsZoomLevel3Ids.objectName,
             name: 'Objectnaam',
-            endpoint:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-3-objects-objectname-filter/run',
+            endpoint: 'zoom-3-objects-objectname-filter/run',
             columns: {
                 name: 'objectnameLabel',
                 uri: 'objectname',
@@ -77,8 +72,7 @@ export class ObjectsService {
         {
             id: ObjectsZoomLevel3Ids.creator,
             name: 'Vervaardiger',
-            endpoint:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-3-objects-creator-filter/run',
+            endpoint: 'zoom-3-objects-creator-filter/run',
             columns: {
                 name: 'creatorLabel',
                 uri: 'creator',
@@ -89,8 +83,7 @@ export class ObjectsService {
         {
             id: ObjectsZoomLevel3Ids.date,
             name: 'Datering',
-            endpoint:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-3-objects-date-filter/run',
+            endpoint: 'zoom-3-objects-date-filter/run',
             columns: {
                 name: 'century',
                 uri: 'century',
@@ -101,8 +94,7 @@ export class ObjectsService {
         {
             id: ObjectsZoomLevel3Ids.material,
             name: 'Materialen',
-            endpoint:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-3-objects-material-filter/run',
+            endpoint: 'zoom-3-objects-material-filter/run',
             columns: {
                 name: 'materialLabel',
                 uri: 'material',
