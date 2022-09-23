@@ -30,8 +30,6 @@ interface PublicationsFilterOptionsData {
 interface PublicationsZoomLevel4Data {
     record: string
     title: string
-    firstImage: string
-    imageLabel: string
 }
 
 @Injectable()
@@ -157,8 +155,8 @@ export class PublicationsService {
             return {
                 record: res.record,
                 title: res.title,
-                firstImage: res.firstImage,
-                imageLabel: res.imageLabel,
+                firstImage: null,
+                imageLabel: null,
             } as ZoomLevel4Type
         })
     }

@@ -1,5 +1,6 @@
-import { Field } from '@nestjs/graphql'
+import { Field, InputType } from '@nestjs/graphql'
 
+@InputType()
 export class PublicationsZoomLevel4FiltersArgs {
     @Field(() => String, { nullable: true })
     public Author: string | null

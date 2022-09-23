@@ -38,9 +38,7 @@ export interface PeopleData {
 
 interface PeopleZoomLevel4Data {
     record: string
-    title: string
-    firstImage: string
-    imageLabel: string
+    name: string
 }
 
 @Injectable()
@@ -178,9 +176,9 @@ export class PeopleService {
         return result.data.map(res => {
             return {
                 record: res.record,
-                title: res.title,
-                firstImage: res.firstImage,
-                imageLabel: res.imageLabel,
+                title: res.name,
+                firstImage: null,
+                imageLabel: null,
             } as ZoomLevel4Type
         })
     }

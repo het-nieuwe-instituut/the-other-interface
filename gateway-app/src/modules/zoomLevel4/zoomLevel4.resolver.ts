@@ -9,6 +9,15 @@ export class ZoomLevel4Resolver {
 
     @Query(() => [ZoomLevel4Type])
     public async zoomLevel4(@Args() args: ZoomLevel4Args, @Args() paginationArgs: PaginationArgs) {
-        return this.zoomLevel4Service.getData(args.entityName, { archivesFilters: args.archiveFilters }, paginationArgs)
+        return this.zoomLevel4Service.getData(
+            args.entityName,
+            {
+                archivesFilters: args.archivesFilters,
+                objectsFilters: args.objectsFilters,
+                peopleFilters: args.peopleFilters,
+                publicationsFilters: args.publicationsFilters,
+            },
+            paginationArgs
+        )
     }
 }
