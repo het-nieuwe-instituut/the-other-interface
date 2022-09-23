@@ -1,5 +1,5 @@
 import React, { createRef } from 'react'
-import { Box, Button, useTheme, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, Text } from '@chakra-ui/react'
 import { ComponentModulesCarousel, EnumComponentmodulescarouselType } from 'src/generated/graphql'
 import { Carousel } from 'react-responsive-carousel'
 import CarouselPagination from '../components/CarouselPagination/CarouselPagination'
@@ -16,11 +16,11 @@ interface Props {
 export const CarouselModule = (props: Props) => {
     const carouselRef = createRef<HTMLDivElement>();
     const { title, items, type, buttonText, buttonUrl, description } = props.component
-    const theme = useTheme()
     const {showPaginationDesctop, handlePaginationNext, handlePaginationPrev, pagesCount, chunks, currentSlide, showPaginationMobile, handlePressButton } = usePresenter(type, items, buttonUrl)
 
     return (
-        <Box as='div' css={{backgroundColor: theme.colors.white, maxWidth: '1223px'}} p='24px' position={'relative'} ref={carouselRef}>
+        // should be changed after grid story
+        <Box as='div' maxW={'90rem'} backgroundColor={'white'} p='6' position={'relative'} ref={carouselRef}>
             <CarouselHeader title={title ?? ''}>
                 {
                     showPaginationDesctop ? (
@@ -31,7 +31,7 @@ export const CarouselModule = (props: Props) => {
 
             {
                 description && (
-                    <Box mb={'33px'} width={'63%'}>
+                    <Box mb={'8'} width={'63%'}>
                         <Text textStyle='body'>
                             {description}
                         </Text>
@@ -47,17 +47,17 @@ export const CarouselModule = (props: Props) => {
 
             {
                 showPaginationMobile && (
-                    <Box mb={'45px'}>
+                    <Box mb={'12'}>
                         <CarouselPagination handlePaginationNext={handlePaginationNext} handlePaginationPrev={handlePaginationPrev} pagesCount={pagesCount} currentSlide={currentSlide + 1} />
                     </Box>
                 )
             }
 
-            <Box css={{display: 'flex'}} onClick={handlePressButton}>
+            <Flex onClick={handlePressButton}>
                 <Button>
                     {buttonText}
                 </Button>
-            </Box>  
+            </Flex>  
         </Box>
     )
 }

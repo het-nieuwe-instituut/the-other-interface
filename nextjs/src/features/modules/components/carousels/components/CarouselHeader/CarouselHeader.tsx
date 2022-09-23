@@ -1,5 +1,4 @@
-
-import { Box, Text } from "@chakra-ui/react"
+import { Flex, Text } from "@chakra-ui/react"
 
 type Props = {
     title: string
@@ -10,12 +9,12 @@ type Props = {
 const CarouselHeader = (props : Props) => {
     const {children, title} = props
     return (
-        <Box css={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}} mb={'16px'}>
+        <Flex alignItems='center' justifyContent='space-between' mb={'1'}>
             <Text textStyle={'h1'}>{title}</Text>
             {
                 children
             }
-        </Box>
+        </Flex>
     )
 }
 

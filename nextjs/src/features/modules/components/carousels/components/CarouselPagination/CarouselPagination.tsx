@@ -1,4 +1,4 @@
-import { Box, Text } from "@chakra-ui/react"
+import { Flex, Text } from "@chakra-ui/react"
 import { PaginatedArrowNext, PaginatedArrowPrev } from "./CarouselPaginationStyled"
 
 type Props = {
@@ -11,13 +11,13 @@ type Props = {
 const CarouselPagination = (props : Props) => {
     const { handlePaginationPrev, handlePaginationNext, pagesCount, currentSlide} = props
     return (
-        <Box css={{display: 'flex', alignItems: 'center'}} justifyContent={{sm: 'space-between', md: 'space-between', base: 'space-between', lg: 'initial', xl: 'initial'}}>
+        <Flex  alignItems='center' justifyContent={{sm: 'space-between', md: 'space-between', base: 'space-between', lg: 'initial', xl: 'initial'}}>
             <PaginatedArrowPrev onClick={handlePaginationPrev}/>
-            <Box width={'80px'} css={{display: 'flex', justifyContent: 'center'}}>
+            <Flex width={'80px'} justifyContent='center'>
                 <Text textStyle={'small'}>{currentSlide} / {pagesCount}</Text>
-            </Box>
+            </Flex>
             <PaginatedArrowNext onClick={handlePaginationNext}/>
-        </Box>
+        </Flex>
     )
 }
 

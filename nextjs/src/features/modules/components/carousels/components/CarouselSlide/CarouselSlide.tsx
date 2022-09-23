@@ -1,5 +1,5 @@
 import React from 'react'
-import {  Box } from '@chakra-ui/react'
+import {  Flex } from '@chakra-ui/react'
 import { ComponentCoreCarouselItem, EnumComponentmodulescarouselType, EnumComponentcorecarouselitemType, Maybe } from 'src/generated/graphql';
 import { imageBasePath } from '@/features/modules/modulesConstants';
 import { CarouselMaker } from '../CarouselMaker/CarouselMaker';
@@ -18,7 +18,7 @@ export const CarouselSlide = (props: Props) => {
     const { items, key, type, carouselRef } = props;
     const { itemWidth, justifySlide } = usePresenter(type, carouselRef);
         return (
-            <Box key={`${key}`} css={{display: 'flex'}} mb={'45px'} justifyContent={justifySlide}>
+            <Flex key={`${key}`} mb={'3'} justifyContent={justifySlide}>
                 {items?.map((component, index) => {
                     const image = component?.picture?.data?.attributes
                     const imagePath = imageBasePath + image?.url
@@ -84,6 +84,6 @@ export const CarouselSlide = (props: Props) => {
                     }
                 })
                 }
-            </Box>
+            </Flex>
         )                                
  }

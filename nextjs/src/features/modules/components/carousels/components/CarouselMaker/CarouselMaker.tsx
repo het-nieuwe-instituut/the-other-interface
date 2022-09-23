@@ -1,5 +1,5 @@
 import React from 'react'
-import {  Box, Img, Text } from '@chakra-ui/react'
+import {  Flex, Img, Text } from '@chakra-ui/react'
 interface Props {
     src: string;
     key: number
@@ -11,18 +11,18 @@ interface Props {
 export const CarouselMaker = (props: Props) => {
     const { src, key, name, description, boxSize } = props;
         return (
-            <Box css={{display: 'flex', flexDirection: 'column'}} mr='20px'>
+            <Flex flexDirection='column' mr='5'>
                 <Img   
                     key={key}
                     src={src}
                     borderRadius='full'
                     objectFit='cover'
-                    mb={'30px'}
+                    mb={'2'}
                     css={{width: `${boxSize}px!important`, height: `${boxSize}px`}}
                     boxSize={`${boxSize}px`}
                 />
-                <Text textStyle={'h3'} mb={'5px'}>{name}</Text>
+                <Text textStyle={'h3'} mb={'1.5'}>{name}</Text>
                 <Text textStyle={'micro'}>{description}</Text>   
-            </Box>
+            </Flex>
         )                                
  }
