@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_modules_buttons_modules",
+  "info": {
+    "displayName": "Buttons Module",
+    "icon": "compress"
+  },
+  "options": {},
+  "attributes": {
+    "buttons": {
+      "type": "component",
+      "repeatable": true,
+      "component": "core.button"
+    }
+  }
+}
