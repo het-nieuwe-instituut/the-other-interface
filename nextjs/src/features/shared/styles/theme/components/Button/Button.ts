@@ -39,6 +39,13 @@ export const Button: ComponentStyleConfig = {
             backgroundColor: `${colors.other}`,
         },
     }),
+    variants: {
+        large: {
+            fontSize: '1.188rem',
+            width: '100%',
+            height: ['6.25rem', '7.5rem'],
+        },
+    },
     defaultProps: {
         variant: 'unstyled',
     },
