@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { TripliService } from '../tripli/tripli.service'
-import { PeopleType } from './people.type'
+import { ZoomLevel4Type } from '../zoomLevel4/zoomLevel4.type'
+import { PeopleType, PeopleZoomLevel4FiltersArgs } from './people.type'
 
 export enum PeopleZoomLevel3Ids {
     deathDate = 'deathDate',
@@ -11,11 +12,20 @@ export enum PeopleZoomLevel3Ids {
     profession = 'profession',
 }
 
-interface ObjectFilterData {
+export enum PeopleZoomLevel4Filters {
+    NameType = 'NameType',
+    Profession = 'Profession',
+    Place = 'Place',
+    Period = 'Period',
+    BirthDate = 'BirthDate',
+    DeathDate = 'DeathDate',
+}
+
+interface PeopleFilterData {
     filter: string
 }
 
-interface ObjectFilterOptionsData {
+interface PeopleFilterOptionsData {
     [x: string]: string
 }
 
@@ -24,6 +34,13 @@ export interface PeopleData {
     birthDate: string | null
     deathDate: string | null
     nationalityLabel: string | null
+}
+
+interface PeopleZoomLevel4Data {
+    record: string
+    title: string
+    firstImage: string
+    imageLabel: string
 }
 
 @Injectable()
@@ -102,10 +119,12 @@ export class PeopleService {
         },
     ]
 
+    private readonly ZoomLevel4Endpoint = 'zoom-4-people/run'
+
     public constructor(private tripliService: TripliService) {}
 
     public async getZoomLevel2Data() {
-        const result = await this.tripliService.getTripliData<ObjectFilterData>(this.zoomLevel2Endpoint)
+        const result = await this.tripliService.getTripliData<PeopleFilterData>(this.zoomLevel2Endpoint)
         return result.data
             .map(r => {
                 const filterMapping = this.ZoomLevel3Mapping.find(m => m.name === r.filter)
@@ -122,7 +141,7 @@ export class PeopleService {
             throw new Error(`[People] Mapping ${id} not found`)
         }
 
-        const result = await this.tripliService.getTripliData<ObjectFilterOptionsData>(mapping?.endpoint, {
+        const result = await this.tripliService.getTripliData<PeopleFilterOptionsData>(mapping?.endpoint, {
             page,
             pageSize,
         })
@@ -134,6 +153,35 @@ export class PeopleService {
                 count: d[mapping.columns.count] ? parseInt(d[mapping.columns.count], 10) : null,
                 total: d[mapping.columns.total] ? parseInt(d[mapping.columns.total], 10) : null,
             }
+        })
+    }
+
+    public async getZoomLevel4Data(filters: PeopleZoomLevel4FiltersArgs, page = 1, pageSize = 48) {
+        if (Object.keys(filters).length === 0) {
+            return []
+        }
+
+        const searchParams = []
+        for (const [filterName, filterValue] of Object.entries(filters)) {
+            searchParams.push({ key: filterName, value: filterValue })
+        }
+
+        const result = await this.tripliService.getTripliData<PeopleZoomLevel4Data>(
+            this.ZoomLevel4Endpoint,
+            {
+                page,
+                pageSize,
+            },
+            searchParams
+        )
+
+        return result.data.map(res => {
+            return {
+                record: res.record,
+                title: res.title,
+                firstImage: res.firstImage,
+                imageLabel: res.imageLabel,
+            } as ZoomLevel4Type
         })
     }
 

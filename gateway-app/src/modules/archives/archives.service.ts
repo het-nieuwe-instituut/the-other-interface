@@ -114,14 +114,13 @@ export class ArchivesService {
             return []
         }
 
-        const endpoint = new URL(this.ZoomLevel4Endpoint)
         const searchParams = []
         for (const [filterName, filterValue] of Object.entries(filters)) {
             searchParams.push({ key: filterName, value: filterValue })
         }
 
         const result = await this.tripliService.getTripliData<ArchivesZoomLevel4Data>(
-            endpoint.toString(),
+            this.ZoomLevel4Endpoint,
             {
                 page,
                 pageSize,

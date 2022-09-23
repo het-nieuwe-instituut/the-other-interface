@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { TripliService } from '../tripli/tripli.service'
+import { ZoomLevel4Type } from '../zoomLevel4/zoomLevel4.type'
+import { ObjectsZoomLevel4FiltersArgs } from './objects.type'
 
 export enum ObjectsZoomLevel3Ids {
     subject = 'subject',
@@ -11,12 +13,30 @@ export enum ObjectsZoomLevel3Ids {
     material = 'material',
 }
 
+export enum ObjectsZoomLevel4Filters {
+    Objectname = 'Objectname',
+    Maker = 'Maker',
+    Material = 'Objectname',
+    Technique = 'Technique',
+    Subject = 'Subject',
+    PerInst = 'PerInst',
+    StartDate = 'StartDate',
+    EndDate = 'EndDate',
+}
+
 interface ObjectFilterData {
     filter: string
 }
 
 interface ObjectFilterOptionsData {
     [x: string]: string
+}
+
+interface ObjectsZoomLevel4Data {
+    record: string
+    title: string
+    firstImage: string
+    imageLabel: string
 }
 
 @Injectable()
@@ -104,6 +124,8 @@ export class ObjectsService {
         },
     ]
 
+    private readonly ZoomLevel4Endpoint = 'zoom-4-objects/run'
+
     public constructor(private tripliService: TripliService) {}
 
     public async getZoomLevel2Data() {
@@ -136,6 +158,35 @@ export class ObjectsService {
                 count: d[mapping.columns.count] ? parseInt(d[mapping.columns.count], 10) : null,
                 total: d[mapping.columns.total] ? parseInt(d[mapping.columns.total], 10) : null,
             }
+        })
+    }
+
+    public async getZoomLevel4Data(filters: ObjectsZoomLevel4FiltersArgs, page = 1, pageSize = 48) {
+        if (Object.keys(filters).length === 0) {
+            return []
+        }
+
+        const searchParams = []
+        for (const [filterName, filterValue] of Object.entries(filters)) {
+            searchParams.push({ key: filterName, value: filterValue })
+        }
+
+        const result = await this.tripliService.getTripliData<ObjectsZoomLevel4Data>(
+            this.ZoomLevel4Endpoint,
+            {
+                page,
+                pageSize,
+            },
+            searchParams
+        )
+
+        return result.data.map(res => {
+            return {
+                record: res.record,
+                title: res.title,
+                firstImage: res.firstImage,
+                imageLabel: res.imageLabel,
+            } as ZoomLevel4Type
         })
     }
 

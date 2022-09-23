@@ -7,7 +7,7 @@ export class PaginationArgs {
     @Min(1)
     public page: number
 
-    @Field(() => Int, { nullable: false })
+    @Field(() => Int, { nullable: true })
     @Min(1)
-    public pageSize: number
+    public pageSize?: number
 }
