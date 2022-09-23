@@ -13,7 +13,7 @@ interface Props {
 }   
 
 
-export const CarouselModule = (props: Props) => {
+export const CarouselModule: React.FC<Props> = props => {
     const carouselRef = createRef<HTMLDivElement>();
     const { title, items, type, buttonText, buttonUrl, description } = props.component
     const {showPaginationDesctop, handlePaginationNext, handlePaginationPrev, pagesCount, chunks, currentSlide, showPaginationMobile, handlePressButton } = usePresenter(type, items, buttonUrl)

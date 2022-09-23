@@ -32,17 +32,17 @@ export function DynamicComponentRenderer(props: Props) {
                     }
 
                     if (component?.__typename === 'ComponentModulesImage') {
-                        return <MediaImage key={component.id} component={component as ComponentModulesImage} />
+                        return <MediaImage key={keyExtractor(component.id, index, array)} component={component as ComponentModulesImage} />
                     }  
 
                     if (component?.__typename === 'ComponentModulesImageCarousel') {
                         return (
-                            <ImageCarousel key={component.id} component={component as ComponentModulesImageCarousel} />
+                            <ImageCarousel key={keyExtractor(component.id, index, array)} component={component as ComponentModulesImageCarousel} />
                         )
                     }
 
                     if(component?.__typename === 'ComponentModulesCarousel') {
-                        return <CarouselModule key={155} component={component as ComponentModulesCarousel} />
+                        return <CarouselModule key={keyExtractor(component.id, index, array)} component={component as ComponentModulesCarousel} />
                     }
 
                     if (typeName) {
