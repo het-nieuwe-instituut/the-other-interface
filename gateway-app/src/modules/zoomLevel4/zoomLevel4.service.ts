@@ -11,10 +11,10 @@ import { PaginationArgs } from '../util/paginationArgs.type'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 
 interface ZoomLevel4FilterInput {
-    archivesFilters?: ArchivesZoomLevel4FiltersArgs
-    objectsFilters?: ObjectsZoomLevel4FiltersArgs
-    peopleFilters?: PeopleZoomLevel4FiltersArgs
-    publicationsFilters?: PublicationsZoomLevel4FiltersArgs
+    archivesFilters: ArchivesZoomLevel4FiltersArgs | null
+    objectsFilters: ObjectsZoomLevel4FiltersArgs | null
+    peopleFilters: PeopleZoomLevel4FiltersArgs | null
+    publicationsFilters: PublicationsZoomLevel4FiltersArgs | null
 }
 
 @Injectable()

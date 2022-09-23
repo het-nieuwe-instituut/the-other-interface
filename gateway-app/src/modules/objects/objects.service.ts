@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common'
 import { TripliService } from '../tripli/tripli.service'
-import { ZoomLevel4Type } from '../zoomLevel4/zoomLevel4.type'
 import { ObjectsZoomLevel4FiltersArgs } from './objects.type'
 
 export enum ObjectsZoomLevel3Ids {
@@ -34,9 +33,9 @@ interface ObjectFilterOptionsData {
 
 interface ObjectsZoomLevel4Data {
     record: string
-    title: string
-    firstImage: string
-    imageLabel: string
+    title: string | null
+    firstImage: string | null
+    imageLabel: string | null
 }
 
 @Injectable()
@@ -186,7 +185,7 @@ export class ObjectsService {
                 title: res.title,
                 firstImage: res.firstImage,
                 imageLabel: res.imageLabel,
-            } as ZoomLevel4Type
+            }
         })
     }
 

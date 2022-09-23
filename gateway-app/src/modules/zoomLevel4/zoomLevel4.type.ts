@@ -11,16 +11,16 @@ export class ZoomLevel4Args {
     public entityName: EntityNames
 
     @Field(() => ArchivesZoomLevel4FiltersArgs, { nullable: true })
-    public archivesFilters: ArchivesZoomLevel4FiltersArgs
+    public archivesFilters: ArchivesZoomLevel4FiltersArgs | null
 
     @Field(() => ObjectsZoomLevel4FiltersArgs, { nullable: true })
-    public objectsFilters: ObjectsZoomLevel4FiltersArgs
+    public objectsFilters: ObjectsZoomLevel4FiltersArgs | null
 
     @Field(() => PeopleZoomLevel4FiltersArgs, { nullable: true })
-    public peopleFilters: PeopleZoomLevel4FiltersArgs
+    public peopleFilters: PeopleZoomLevel4FiltersArgs | null
 
     @Field(() => PublicationsZoomLevel4FiltersArgs, { nullable: true })
-    public publicationsFilters: PublicationsZoomLevel4FiltersArgs
+    public publicationsFilters: PublicationsZoomLevel4FiltersArgs | null
 }
 
 @ObjectType()
