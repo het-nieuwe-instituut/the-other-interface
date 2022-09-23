@@ -53,8 +53,8 @@ export const CarouselModule: React.FC<Props> = props => {
                 )
             }
 
-            <Flex onClick={handlePressButton}>
-                <Button>
+            <Flex>
+                <Button onClick={handlePressButton}>
                     {buttonText}
                 </Button>
             </Flex>  
