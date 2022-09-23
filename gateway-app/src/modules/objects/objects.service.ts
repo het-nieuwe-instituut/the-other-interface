@@ -94,8 +94,8 @@ export class ObjectsService {
             name: 'Vervaardiger',
             endpoint: 'zoom-3-objects-creator-filter/run',
             columns: {
-                name: 'creatorLabel',
-                uri: 'creator',
+                name: 'makerLabel',
+                uri: 'maker',
                 count: 'count',
                 total: 'total',
             },
