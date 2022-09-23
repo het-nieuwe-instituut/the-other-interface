@@ -1,0 +1,37 @@
+{
+  "collectionName": "components_modules_carousels",
+  "info": {
+    "displayName": "Carousel",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "items": {
+      "displayName": "CarouselItem",
+      "type": "component",
+      "repeatable": true,
+      "component": "core.carousel-item"
+    },
+    "title": {
+      "type": "string"
+    },
+    "buttonText": {
+      "type": "string"
+    },
+    "buttonUrl": {
+      "type": "text"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "Makers",
+        "Highlights",
+        "Combined",
+        "Themes"
+      ]
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}
