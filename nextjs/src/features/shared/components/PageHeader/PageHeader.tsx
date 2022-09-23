@@ -19,7 +19,7 @@ export const PageHeader: React.FC<Props> = ({ title, preface }) => {
                     <BreadcrumbLink href="#" as={Link}></BreadcrumbLink>
                 </BreadcrumbItem>
             </Breadcrumb>
-            <Heading as={'h1'} textStyle={'h1'}>
+            <Heading as={'h1'} textStyle={'h1'} pb={'md'}>
                 {title}
             </Heading>
             {preface && <Markdown>{preface}</Markdown>}

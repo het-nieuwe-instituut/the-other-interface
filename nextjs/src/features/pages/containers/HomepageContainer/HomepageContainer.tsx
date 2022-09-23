@@ -16,7 +16,7 @@ export const HomepageContainer = () => {
 
     return (
         <div>
-            <DynamicComponentRenderer components={data?.homepage?.data?.attributes?.components} />{' '}
+            <DynamicComponentRenderer components={data?.homepage?.data?.attributes?.components} />
         </div>
     )
 }
