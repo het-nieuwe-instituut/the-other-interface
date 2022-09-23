@@ -7,6 +7,7 @@ import { SubtitleModule } from '../components/SubtitleModule/SubtitleModule'
 import { TableModule } from '../components/TableModule/TableModule'
 import { Title } from '../components/Title/Title'
 import { TextModule } from '../components/TextModule/TextModule'
+import { ButtonsModule } from '../components/ButtonsModule/ButtonsModule'
 
 interface Props {
     components: HomePageComponents
@@ -40,27 +41,25 @@ export function DynamicComponentRenderer(props: Props) {
                             <ImageCarousel key={keyExtractor(component.id, index, array)} component={component as ComponentModulesImageCarousel} />
                         )
                     }
+                
+                    if (component?.__typename === 'ComponentModulesSubtitle') {
+                        return <SubtitleModule key={component.id} component={component} />
+                    }
+
+                    if (component?.__typename === 'ComponentModulesTableModule') {
+                        return <TableModule key={keyExtractor(component.id, index, array)} component={component} />
+                    }
+
+                    if (component?.__typename === 'ComponentModulesTitleModule') {
+                        return <Title key={keyExtractor(component.id, index, array)} component={component} />
+                    }
+
+                    if (component?.__typename === 'ComponentModulesButtonsModule') {
+                        return <ButtonsModule key={keyExtractor(component.id, index, array)} component={component} />
+                    }
 
                     if(component?.__typename === 'ComponentModulesCarousel') {
                         return <CarouselModule key={keyExtractor(component.id, index, array)} component={component as ComponentModulesCarousel} />
-                    }
-
-                    if (typeName) {
-                        if (component?.__typename === 'ComponentModulesSubtitle') {
-                            return <SubtitleModule key={component.id} component={component} />
-                        }
-                    }
-    
-                    if (typeName) {
-                        if (component?.__typename === 'ComponentModulesTableModule') {
-                            return <TableModule key={component.id} component={component} />
-                        }
-                    }
-    
-                    if (typeName) {
-                        if (component?.__typename === 'ComponentModulesTitleModule') {
-                            return <Title key={component.id} component={component} />
-                        }
                     }
                 }
                 return null
