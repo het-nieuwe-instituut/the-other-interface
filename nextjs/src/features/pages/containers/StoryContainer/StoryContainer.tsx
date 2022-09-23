@@ -47,7 +47,7 @@ export const StoryContainer: React.FC = () => {
                 gap={'3.625rem'}
             >
                 <GridItem area={'header'}>
-                    <PageHeader title={story.attributes?.title} preface={story.attributes?.preface ?? undefined} />
+                    <PageHeader title={story.attributes?.title} preface={story.attributes?.description ?? undefined} />
                 </GridItem>
                 <GridItem area={'meta'}>
                     <StoryMeta story={story} />
