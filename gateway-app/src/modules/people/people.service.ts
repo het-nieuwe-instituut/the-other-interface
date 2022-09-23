@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { TripliService } from '../tripli/tripli.service'
-import { PeopleType } from './people.type'
+import { PeopleType, PeopleZoomLevel4FiltersArgs } from './people.type'
 
 export enum PeopleZoomLevel3Ids {
     deathDate = 'deathDate',
@@ -11,11 +11,20 @@ export enum PeopleZoomLevel3Ids {
     profession = 'profession',
 }
 
-interface ObjectFilterData {
+export enum PeopleZoomLevel4Filters {
+    NameType = 'NameType',
+    Profession = 'Profession',
+    Place = 'Place',
+    Period = 'Period',
+    BirthDate = 'BirthDate',
+    DeathDate = 'DeathDate',
+}
+
+interface PeopleFilterData {
     filter: string
 }
 
-interface ObjectFilterOptionsData {
+interface PeopleFilterOptionsData {
     [x: string]: string
 }
 
@@ -26,20 +35,23 @@ export interface PeopleData {
     nationalityLabel: string | null
 }
 
+interface PeopleZoomLevel4Data {
+    record: string
+    name: string
+}
+
 @Injectable()
 export class PeopleService {
     protected entityType = 'tripli'
     private readonly detailEndpoint =
         'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-acceptance/zoom-5-people/run?record=https://collectiedata.hetnieuweinstituut.nl/id/people/'
-    private readonly zoomLevel2Endpoint =
-        'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-2-people/run'
+    private readonly zoomLevel2Endpoint = 'zoom-2-people/run'
 
     private readonly ZoomLevel3Mapping = [
         {
             id: PeopleZoomLevel3Ids.deathDate,
             name: 'Overlijdensdatum',
-            endpoint:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-3-people-death-date-filter/run',
+            endpoint: 'zoom-3-people-death-date-filter/run',
             columns: {
                 name: 'century',
                 uri: 'century',
@@ -50,8 +62,7 @@ export class PeopleService {
         {
             id: PeopleZoomLevel3Ids.nameType,
             name: 'Naam soort',
-            endpoint:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-3-people-name-type-filter/run',
+            endpoint: 'zoom-3-people-name-type-filter/run',
             columns: {
                 name: 'nameType',
                 uri: 'nameType',
@@ -62,8 +73,7 @@ export class PeopleService {
         {
             id: PeopleZoomLevel3Ids.birthDate,
             name: 'Geboortedatum',
-            endpoint:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-3-people-birth-date-filter/run',
+            endpoint: 'zoom-3-people-birth-date-filter/run',
             columns: {
                 name: 'century',
                 uri: 'century',
@@ -74,8 +84,7 @@ export class PeopleService {
         {
             id: PeopleZoomLevel3Ids.period,
             name: 'Periode',
-            endpoint:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-3-people-period-filter/run',
+            endpoint: 'zoom-3-people-period-filter/run',
             columns: {
                 name: 'century',
                 uri: 'century',
@@ -86,8 +95,7 @@ export class PeopleService {
         {
             id: PeopleZoomLevel3Ids.place,
             name: 'Plaats',
-            endpoint:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-3-people-place-filter/run',
+            endpoint: 'zoom-3-people-place-filter/run',
             columns: {
                 name: 'placeLabel',
                 uri: 'place',
@@ -98,8 +106,7 @@ export class PeopleService {
         {
             id: PeopleZoomLevel3Ids.profession,
             name: 'Beroep/Werkveld',
-            endpoint:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-3-people-profession-filter/run',
+            endpoint: 'zoom-3-people-profession-filter/run',
             columns: {
                 name: 'professionLabel',
                 uri: 'profession',
@@ -109,10 +116,12 @@ export class PeopleService {
         },
     ]
 
+    private readonly ZoomLevel4Endpoint = 'zoom-4-people/run'
+
     public constructor(private tripliService: TripliService) {}
 
     public async getZoomLevel2Data() {
-        const result = await this.tripliService.getTripliData<ObjectFilterData>(this.zoomLevel2Endpoint)
+        const result = await this.tripliService.getTripliData<PeopleFilterData>(this.zoomLevel2Endpoint)
         return result.data
             .map(r => {
                 const filterMapping = this.ZoomLevel3Mapping.find(m => m.name === r.filter)
@@ -129,7 +138,7 @@ export class PeopleService {
             throw new Error(`[People] Mapping ${id} not found`)
         }
 
-        const result = await this.tripliService.getTripliData<ObjectFilterOptionsData>(mapping?.endpoint, {
+        const result = await this.tripliService.getTripliData<PeopleFilterOptionsData>(mapping?.endpoint, {
             page,
             pageSize,
         })
@@ -140,6 +149,35 @@ export class PeopleService {
                 name: d[mapping.columns.name] || null,
                 count: d[mapping.columns.count] ? parseInt(d[mapping.columns.count], 10) : null,
                 total: d[mapping.columns.total] ? parseInt(d[mapping.columns.total], 10) : null,
+            }
+        })
+    }
+
+    public async getZoomLevel4Data(filters: PeopleZoomLevel4FiltersArgs, page = 1, pageSize = 48) {
+        if (Object.keys(filters).length === 0) {
+            return []
+        }
+
+        const searchParams = []
+        for (const [filterName, filterValue] of Object.entries(filters)) {
+            searchParams.push({ key: filterName, value: filterValue })
+        }
+
+        const result = await this.tripliService.getTripliData<PeopleZoomLevel4Data>(
+            this.ZoomLevel4Endpoint,
+            {
+                page,
+                pageSize,
+            },
+            searchParams
+        )
+
+        return result.data.map(res => {
+            return {
+                record: res.record,
+                title: res.name,
+                firstImage: null,
+                imageLabel: null,
             }
         })
     }
