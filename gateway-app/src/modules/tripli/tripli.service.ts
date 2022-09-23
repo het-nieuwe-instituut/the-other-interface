@@ -18,7 +18,7 @@ export class TripliService {
         const apiKey = this.configService.getOrThrow('TRIPLY_API_KEY')
         const endpointBaseURL: string = this.configService.getOrThrow('TRIPLI_API_BASEURL')
 
-        const endpoint = new URL(`${endpointBaseURL}${endpointBaseURL.endsWith('/') ? '' : '/'}${endpointSuffix}`)
+        const endpoint = new URL(`${endpointBaseURL}${endpointSuffix.startsWith('/') ? '' : '/'}${endpointSuffix}`)
 
         if (paginationArgs) {
             endpoint.searchParams.append(
