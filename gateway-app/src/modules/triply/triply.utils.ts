@@ -1,6 +1,6 @@
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 
-export class TripliUtils {
+export class TriplyUtils {
     public static getEntityNameFromGraph(graph: string): EntityNames {
         const s = graph.split('/')
         if (!s.length) {

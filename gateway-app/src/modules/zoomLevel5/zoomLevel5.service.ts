@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
-import { TripliService } from '../tripli/tripli.service'
-import { TripliUtils } from '../tripli/triply.utils'
+import { TriplyService } from '../triply/triply.service'
+import { TriplyUtils } from '../triply/triply.utils'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 
 interface ZoomLevel5RelationData {
@@ -14,11 +14,9 @@ interface ZoomLevel5RelationData {
 
 @Injectable()
 export class ZoomLevel5Service {
-    // TODO: remove base url
-    private relationsEndpoint =
-        'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-acceptance/zoom-5-relations/run?record='
+    private relationsEndpoint = '/zoom-5-relations/run?record='
 
-    public constructor(private readonly tripliService: TripliService) {}
+    public constructor(private readonly triplyService: TriplyService) {}
 
     public async getRelations(id: string, type: EntityNames) {
         switch (type) {
@@ -41,11 +39,11 @@ export class ZoomLevel5Service {
     }
 
     private async getRelationsFromTriply(id: string, type: EntityNames) {
-        const uri = TripliUtils.getUriForTypeAndId(type, id)
-        const res = await this.tripliService.getTripliData<ZoomLevel5RelationData>(`${this.relationsEndpoint}${uri}`)
+        const uri = TriplyUtils.getUriForTypeAndId(type, id)
+        const res = await this.triplyService.queryTriplyData<ZoomLevel5RelationData>(`${this.relationsEndpoint}${uri}`)
 
         return res.data.map(d => {
-            const type = TripliUtils.getEntityNameFromGraph(d.graph)
+            const type = TriplyUtils.getEntityNameFromGraph(d.graph)
 
             const randomRelations = []
             if (d.sample_1_label && d.sample_1) {
@@ -71,7 +69,7 @@ export class ZoomLevel5Service {
 
     private formatRelationData(label: string, uri: string, type: EntityNames) {
         return {
-            id: TripliUtils.getIdFromUri(uri),
+            id: TriplyUtils.getIdFromUri(uri),
             type,
             label,
         }

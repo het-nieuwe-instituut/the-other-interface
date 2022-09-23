@@ -5,7 +5,7 @@ import { GraphQLModule } from '@nestjs/graphql'
 import { HttpModule } from '@nestjs/axios'
 import { StoryModule } from './modules/story/story.module'
 import { StrapiModule } from './modules/strapi/strapi.module'
-import { TripliModule } from './modules/tripli/tripli.module'
+import { TriplyModule } from './modules/triply/triply.module'
 import { ArchivesModule } from './modules/archives/archives.module'
 import { ObjectsModule } from './modules/objects/objects.module'
 import { PeopleModule } from './modules/people/people.module'
@@ -19,7 +19,7 @@ import { ZoomLevel4Module } from './modules/zoomLevel4/zoomLevel4.module'
 @Module({
     imports: [
         StoryModule,
-        TripliModule,
+        TriplyModule,
         StrapiModule,
         ConfigModule.forRoot({ isGlobal: true }),
         GraphQLModule.forRoot<ApolloDriverConfig>({
