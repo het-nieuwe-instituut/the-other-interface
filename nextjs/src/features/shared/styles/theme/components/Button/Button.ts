@@ -4,7 +4,6 @@ import textStyles from '../../foundations/typography'
 // any because chakrui typescript failed here
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const Button: any = {
-    parts: ['icon'],
     baseStyle: () => ({
         border: `1.25px solid ${colors.black}`,
         bordeRadius: '9px',
@@ -36,8 +35,6 @@ export const Button: any = {
             color: `${colors.text.default.color}`,
             backgroundColor: `${colors.other}`,
         },
-
-        icon: {},
     }),
     variants: {
         large: {

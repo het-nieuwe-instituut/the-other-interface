@@ -60,7 +60,7 @@ export const ButtonsModule: React.FC<Props> = props => {
                         as={'a'}
                         rightIcon={renderExternalLink(button)}
                         target={!!(button.url && isExternalURL(button.url)) ? '_blank' : undefined}
-                        gridColumn={{ base: '1fr', md: index === array.length - 1 ? '1 / 3' : undefined }}
+                        gridColumn={{ base: '1fr', md: getGridColumns(index, array) }}
                     >
                         <Text textStyle={config.textStyle} color={'currentcolor'}>
                             {button?.text && capitalizeFirstLetter(button.text)}
@@ -70,6 +70,14 @@ export const ButtonsModule: React.FC<Props> = props => {
             )
         })
     }
+}
+
+function getGridColumns<I extends number, T extends Array<T[0]>>(index: I, array: T) {
+    if (array.length % 2) {
+        return index === array.length - 1 ? '1 / 3' : undefined
+    }
+
+    return '1fr'
 }
 
 function getURl(button?: ComponentCoreButton | null) {
