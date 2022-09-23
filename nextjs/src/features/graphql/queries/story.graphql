@@ -12,7 +12,8 @@ query storyBySlug($locale: I18NLocaleCode, $slug: String!) {
             id
             attributes {
                 title
-                preface
+                description
+                shortDescription
                 publishedAt
                 author {
                     data {
