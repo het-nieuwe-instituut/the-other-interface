@@ -14,6 +14,7 @@ import { ZoomLevel1Module } from './modules/zoomLevel1/zoomLevel1.module'
 import { ZoomLevel2Module } from './modules/zoomLevel2/zoomLevel2.module'
 import { ZoomLevel3Module } from './modules/zoomLevel3/zoomLevel3.module'
 import { ZoomLevel5Module } from './modules/zoomLevel5/zoomLevel5.module'
+import { ZoomLevel4Module } from './modules/zoomLevel4/zoomLevel4.module'
 
 @Module({
     imports: [
@@ -36,6 +37,7 @@ import { ZoomLevel5Module } from './modules/zoomLevel5/zoomLevel5.module'
         ZoomLevel2Module,
         ZoomLevel3Module,
         ZoomLevel5Module,
+        ZoomLevel4Module,
     ],
 })
 export class AppModule {}
