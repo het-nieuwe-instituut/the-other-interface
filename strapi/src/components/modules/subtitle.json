@@ -1,13 +1,19 @@
 {
   "collectionName": "components_modules_subtitles",
   "info": {
-    "displayName": "Subtitle",
-    "icon": "grip-lines"
+    "displayName": "Subtitle module",
+    "icon": "grip-lines",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "text": {
       "type": "text"
+    },
+    "subtitleModuleLayout": {
+      "type": "component",
+      "repeatable": false,
+      "component": "core.module-layouts"
     }
   }
 }

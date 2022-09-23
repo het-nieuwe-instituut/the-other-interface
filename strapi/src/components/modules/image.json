@@ -19,6 +19,11 @@
     },
     "alt_text": {
       "type": "string"
+    },
+    "imageModuleLayout": {
+      "type": "component",
+      "repeatable": false,
+      "component": "core.module-layouts"
     }
   }
 }

@@ -1,7 +1,7 @@
 {
   "collectionName": "components_modules_image_carousels",
   "info": {
-    "displayName": "ImageCarousel",
+    "displayName": "Image carousel module",
     "description": ""
   },
   "options": {},
@@ -16,6 +16,11 @@
     },
     "description": {
       "type": "text"
+    },
+    "imageCarouselModuleLayout": {
+      "type": "component",
+      "repeatable": false,
+      "component": "core.module-layouts"
     }
   }
 }

@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_core_module_layouts",
+  "info": {
+    "displayName": "moduleLayouts",
+    "icon": "chart-area",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "spacingTop": {
+      "type": "enumeration",
+      "enum": [
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ],
+      "default": "md"
+    },
+    "spacingBottom": {
+      "type": "enumeration",
+      "enum": [
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ],
+      "default": "md"
+    }
+  }
+}

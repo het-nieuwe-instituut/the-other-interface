@@ -1,7 +1,7 @@
 {
   "collectionName": "components_modules_carousels",
   "info": {
-    "displayName": "Carousel",
+    "displayName": "Carousel module",
     "description": ""
   },
   "options": {},
@@ -32,6 +32,11 @@
     },
     "description": {
       "type": "text"
+    },
+    "carouselModuleLayout": {
+      "type": "component",
+      "repeatable": false,
+      "component": "core.module-layouts"
     }
   }
 }

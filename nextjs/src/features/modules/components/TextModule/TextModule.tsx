@@ -18,8 +18,8 @@ export const TextModule: React.FC<Props> = props => {
             pl={6}
             pr={6}
             maxWidth={'820px'}
-            mb={props.component.textModuleSpacingBottom ?? undefined}
-            mt={props.component.textModuleSpacingTop ?? undefined}
+            pb={props.component.textModuleLayout?.spacingBottom ?? undefined}
+            pt={props.component.textModuleLayout?.spacingTop ?? undefined}
         >
             <Markdown>{content}</Markdown>
         </Box>
