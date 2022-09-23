@@ -14,7 +14,9 @@ interface ZoomLevel5RelationData {
 
 @Injectable()
 export class ZoomLevel5Service {
-    private relationsEndpoint = '/zoom-5-relations/run?record='
+    // TODO: remove base url
+    private relationsEndpoint =
+        'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-acceptance/zoom-5-relations/run?record='
 
     public constructor(private readonly tripliService: TripliService) {}
 
@@ -25,7 +27,7 @@ export class ZoomLevel5Service {
             case EntityNames.People:
             case EntityNames.Publications:
                 return [
-                    ...(await this.getRelationsFromTriply(id)),
+                    ...(await this.getRelationsFromTriply(id, type)),
                     // TODO: uncomment after Strapi relations are added
                     // ...(await this.getStoryRelationsForLinkedItem(id, type)),
                 ]
@@ -38,8 +40,9 @@ export class ZoomLevel5Service {
         }
     }
 
-    private async getRelationsFromTriply(id: string) {
-        const res = await this.tripliService.getTripliData<ZoomLevel5RelationData>(`${this.relationsEndpoint}${id}`)
+    private async getRelationsFromTriply(id: string, type: EntityNames) {
+        const uri = TripliUtils.getUriForTypeAndId(type, id)
+        const res = await this.tripliService.getTripliData<ZoomLevel5RelationData>(`${this.relationsEndpoint}${uri}`)
 
         return res.data.map(d => {
             const type = TripliUtils.getEntityNameFromGraph(d.graph)

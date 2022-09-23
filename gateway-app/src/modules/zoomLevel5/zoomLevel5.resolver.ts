@@ -6,10 +6,15 @@ import { RelatedRecordType, ZoomLevel5Args, ZoomLevel5Type } from './zoomLevel5.
 export class ZoomLevel5Resolver {
     public constructor(private readonly zoomLevel5Service: ZoomLevel5Service) {}
 
-    @Query(() => ZoomLevel5Type)
-    public async getLevel5Data(@Args() args: ZoomLevel5Args) {
+    @Query(() => [ZoomLevel5Type], { nullable: true })
+    public relations(@Args() args: ZoomLevel5Args) {
         return this.zoomLevel5Service.getRelations(args.id, args.type)
     }
+}
+
+@Resolver(RelatedRecordType)
+export class RelatedRecordTypeResolver {
+    public constructor(private readonly zoomLevel5Service: ZoomLevel5Service) {}
 
     @ResolveField(() => RelatedRecordType)
     public randomRelations(@Parent() parent: RelatedRecordType) {

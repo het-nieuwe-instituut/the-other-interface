@@ -10,7 +10,7 @@ export class ZoomLevel5Type {
     @Field()
     public total: number
 
-    @Field(() => [RelatedRecordType], { nullable: 'itemsAndList' })
+    @Field(() => [RelatedRecordType], { nullable: true })
     public randomRelations: RelatedRecordType[]
 }
 
@@ -25,7 +25,7 @@ export class RelatedRecordType {
     @Field()
     public label: string
 
-    @Field(() => [ZoomLevel5Type], { nullable: 'itemsAndList' })
+    @Field(() => [ZoomLevel5Type], { nullable: true })
     public randomRelations: ZoomLevel5Type[]
 }
 
