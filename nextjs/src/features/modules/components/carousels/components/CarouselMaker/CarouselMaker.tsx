@@ -18,7 +18,8 @@ export const CarouselMaker = (props: Props) => {
                     borderRadius='full'
                     objectFit='cover'
                     mb={'2'}
-                    css={{width: `${boxSize}px!important`, height: `${boxSize}px`}}
+                    width={`${boxSize}px!important`} 
+                    height={`${boxSize}px`}
                     boxSize={`${boxSize}px`}
                 />
                 <Text textStyle={'h3'} mb={'1.5'}>{name}</Text>
