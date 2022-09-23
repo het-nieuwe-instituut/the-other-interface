@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_modules_buttons_modules",
+  "info": {
+    "displayName": "Buttons Module",
+    "icon": "compress",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "buttons": {
+      "type": "component",
+      "repeatable": true,
+      "component": "core.button"
+    },
+    "buttonStyle": {
+      "type": "enumeration",
+      "enum": [
+        "default",
+        "large"
+      ]
+    }
+  }
+}

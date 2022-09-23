@@ -1,0 +1,9 @@
+fragment buttonsModuleFragment on ComponentModulesButtonsModule {
+    id
+    buttons {
+        id
+        text
+        url
+    }
+    buttonStyle
+}

@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_core_carousel_items",
+  "info": {
+    "displayName": "CarouselItem",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "picture": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "Maker",
+        "Highlight"
+      ]
+    }
+  }
+}

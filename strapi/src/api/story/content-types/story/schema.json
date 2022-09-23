@@ -43,7 +43,8 @@
         "modules.title-module",
         "modules.image-carousel",
         "modules.image",
-        "modules.table-module"
+        "modules.table-module",
+        "modules.buttons-module"
       ],
       "pluginOptions": {
         "i18n": {
@@ -66,7 +67,7 @@
       "relation": "oneToOne",
       "target": "api::author.author"
     },
-    "preface": {
+    "description": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -101,6 +102,15 @@
         }
       },
       "component": "core.publication-date"
+    },
+    "shortDescription": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "text",
+      "maxLength": 250
     }
   }
 }
