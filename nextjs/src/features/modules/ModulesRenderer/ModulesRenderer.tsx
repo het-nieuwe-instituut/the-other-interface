@@ -8,6 +8,7 @@ import { TableModule } from '../components/TableModule/TableModule'
 import { Title } from '../components/Title/Title'
 import { TextModule } from '../components/TextModule/TextModule'
 import { ButtonsModule } from '../components/ButtonsModule/ButtonsModule'
+import { Box, useTheme } from '@chakra-ui/react'
 
 interface Props {
     components: HomePageComponents
@@ -18,8 +19,9 @@ type HomePageComponents = NonNullable<
 >['components']
 
 export function DynamicComponentRenderer(props: Props) {
+    const theme = useTheme()
     return (
-        <>
+        <Box maxW={theme.breakpoints.xl} marginX={'auto'}>
             {props.components?.map((component, index, array) => {
                 const typeName = component?.__typename
 
@@ -64,7 +66,7 @@ export function DynamicComponentRenderer(props: Props) {
                 }
                 return null
             }) ?? null}
-        </>
+        </Box>
     )
 }
 

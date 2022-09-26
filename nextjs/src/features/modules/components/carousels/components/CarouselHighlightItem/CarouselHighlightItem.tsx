@@ -19,8 +19,8 @@ export const CarouselHighlightItem = (props: Props) => {
                     mb={'5'}
                     w={width ? `${width}px!important` :'100%'}
                 />
-                <Text textStyle={'h3'} mb={'5px'}>{name}</Text>
-                <Text textStyle={'micro'}>{description}</Text>   
+                <Text textStyle={'h3'} textAlign={'left'} mb={'5px'}>{name}</Text>
+                <Text textStyle={'micro'} textAlign={'left'}>{description}</Text>   
             </Flex>
         )                                
  }

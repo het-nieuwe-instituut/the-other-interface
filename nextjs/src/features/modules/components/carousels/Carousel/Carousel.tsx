@@ -19,8 +19,7 @@ export const CarouselModule: React.FC<Props> = props => {
     const {showPaginationDesctop, handlePaginationNext, handlePaginationPrev, pagesCount, chunks, currentSlide, showPaginationMobile, handlePressButton } = usePresenter(type, items, buttonUrl)
 
     return (
-        // should be changed after grid story
-        <Box as='div' maxW={'90rem'} backgroundColor={'white'} p='6' position={'relative'} ref={carouselRef}>
+        <Box as='div' backgroundColor={'white'} p='6' position={'relative'} ref={carouselRef}>
             <CarouselHeader title={title ?? ''}>
                 {
                     showPaginationDesctop ? (
@@ -53,11 +52,17 @@ export const CarouselModule: React.FC<Props> = props => {
                 )
             }
 
-            <Flex>
-                <Button onClick={handlePressButton}>
-                    {buttonText}
-                </Button>
-            </Flex>  
+            {
+                buttonText && (
+                    <Flex>
+                        <Button onClick={handlePressButton}>
+                            {buttonText}
+                        </Button>
+                    </Flex> 
+                )
+            }
+
+             
         </Box>
     )
 }
