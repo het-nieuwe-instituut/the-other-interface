@@ -1,4 +1,10 @@
-import { ComponentModulesImage, ComponentModulesImageCarousel, HomepageQuery, ComponentModulesCarousel } from 'src/generated/graphql'
+import {
+    ComponentModulesImage,
+    ComponentModulesImageCarousel,
+    HomepageQuery,
+    ComponentModulesCarousel,
+    ComponentModulesButtonsModule,
+} from 'src/generated/graphql'
 import MediaImage from '../components/Image/Image'
 import { ImageCarousel } from '../components/carousels/ImageCarousel/ImageCarousel'
 import { CarouselModule } from '../components/carousels/Carousel/Carousel'
@@ -35,15 +41,23 @@ export function DynamicComponentRenderer(props: Props) {
                     }
 
                     if (component?.__typename === 'ComponentModulesImage') {
-                        return <MediaImage key={keyExtractor(component.id, index, array)} component={component as ComponentModulesImage} />
-                    }  
+                        return (
+                            <MediaImage
+                                key={keyExtractor(component.id, index, array)}
+                                component={component as ComponentModulesImage}
+                            />
+                        )
+                    }
 
                     if (component?.__typename === 'ComponentModulesImageCarousel') {
                         return (
-                            <ImageCarousel key={keyExtractor(component.id, index, array)} component={component as ComponentModulesImageCarousel} />
+                            <ImageCarousel
+                                key={keyExtractor(component.id, index, array)}
+                                component={component as ComponentModulesImageCarousel}
+                            />
                         )
                     }
-                
+
                     if (component?.__typename === 'ComponentModulesSubtitle') {
                         return <SubtitleModule key={component.id} component={component} />
                     }
@@ -57,11 +71,21 @@ export function DynamicComponentRenderer(props: Props) {
                     }
 
                     if (component?.__typename === 'ComponentModulesButtonsModule') {
-                        return <ButtonsModule key={keyExtractor(component.id, index, array)} component={component} />
+                        return (
+                            <ButtonsModule
+                                key={keyExtractor(component.id, index, array)}
+                                component={component as ComponentModulesButtonsModule}
+                            />
+                        )
                     }
 
-                    if(component?.__typename === 'ComponentModulesCarousel') {
-                        return <CarouselModule key={keyExtractor(component.id, index, array)} component={component as ComponentModulesCarousel} />
+                    if (component?.__typename === 'ComponentModulesCarousel') {
+                        return (
+                            <CarouselModule
+                                key={keyExtractor(component.id, index, array)}
+                                component={component as ComponentModulesCarousel}
+                            />
+                        )
                     }
                 }
                 return null

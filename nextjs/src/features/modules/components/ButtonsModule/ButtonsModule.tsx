@@ -1,18 +1,45 @@
-import { keyExtractor } from '@/features/shared/utils/lists'
-import { Box, Button, Flex } from '@chakra-ui/react'
-import NextLink from 'next/link'
-import { ComponentCoreButton, ComponentModulesButtonsModule } from 'src/generated/graphql'
-import ExternalLink from '@/icons/arrows/external-link.svg'
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { isExternalURL } from '@/features/shared/utils/links'
+import { keyExtractor } from '@/features/shared/utils/lists'
+import { capitalizeFirstLetter } from '@/features/shared/utils/text'
+import Download from '@/icons/arrows/download.svg'
+import ExternalLink from '@/icons/arrows/external-link.svg'
+import { Box, Button, Flex, Grid, Text } from '@chakra-ui/react'
+import NextLink from 'next/link'
+import {
+    ComponentCoreButton,
+    ComponentModulesButtonsModule,
+    EnumComponentmodulesbuttonsmoduleButtonstyle,
+} from 'src/generated/graphql'
 
 interface Props {
     component: ComponentModulesButtonsModule
 }
 
+const buttonConfig = {
+    [EnumComponentmodulesbuttonsmoduleButtonstyle.Large]: {
+        variant: 'large',
+        textStyle: 'h3',
+    },
+    [EnumComponentmodulesbuttonsmoduleButtonstyle.Default]: {
+        variant: undefined,
+        textStyle: undefined,
+    },
+}
+
 export const ButtonsModule: React.FC<Props> = props => {
+    if (props.component.buttonStyle === EnumComponentmodulesbuttonsmoduleButtonstyle.Large) {
+        return (
+            <Box width="100%" padding={{ base: 5, md: 6 }}>
+                <Grid templateColumns={{ base: '1fr', md: 'auto auto' }} gap={5}>
+                    {renderButtons()}
+                </Grid>
+            </Box>
+        )
+    }
     return (
         <Box width="100%" padding={{ base: 5, md: 6 }}>
-            <Flex gap="2" flexWrap={'wrap'}>
+            <Flex flexWrap={'wrap'} gap={2}>
                 {renderButtons()}
             </Flex>
         </Box>
@@ -20,28 +47,61 @@ export const ButtonsModule: React.FC<Props> = props => {
 
     function renderButtons() {
         return props.component.buttons?.map((button, index, array) => {
+            const config =
+                buttonConfig[props.component.buttonStyle ?? EnumComponentmodulesbuttonsmoduleButtonstyle.Default]
+
             if (!button) {
                 return null
             }
             return (
-                <NextLink key={keyExtractor(button, index, array)} href={button?.url ?? ''} passHref>
+                <NextLink key={keyExtractor(button, index, array)} href={getURl(button)} passHref>
                     <Button
+                        variant={config.variant}
                         as={'a'}
                         rightIcon={renderExternalLink(button)}
                         target={!!(button.url && isExternalURL(button.url)) ? '_blank' : undefined}
+                        gridColumn={{ base: '1fr', md: getGridColumns(index, array) }}
+                        bg={'white'}
                     >
-                        {button?.text}
+                        <Text
+                            as={'span'}
+                            textStyle={config.textStyle}
+                            color={'currentcolor'}
+                            verticalAlign={'text-bottom'}
+                        >
+                            {button?.text && capitalizeFirstLetter(button.text)}
+                        </Text>
                     </Button>
                 </NextLink>
             )
         })
     }
+}
 
-    function renderExternalLink(button?: ComponentCoreButton | null) {
-        if (!button?.url || !isExternalURL(button.url)) {
-            return undefined
-        }
-
-        return <ExternalLink color={'currentColor'} />
+function getGridColumns<I extends number, T extends Array<T[0]>>(index: I, array: T) {
+    if (array.length % 2) {
+        return index === array.length - 1 ? '1 / 3' : undefined
     }
+
+    return '1fr'
+}
+
+function getURl(button?: ComponentCoreButton | null) {
+    if (button?.hasAttachment) {
+        return `/api/attachmentProxy?filename=${button.attachment?.data?.attributes?.url}` ?? '#'
+    }
+
+    return button?.url ?? '#'
+}
+
+function renderExternalLink(button?: ComponentCoreButton | null) {
+    if (button && button.hasAttachment) {
+        return <Download color={'currentColor'} />
+    }
+
+    if (!button?.url || !isExternalURL(button.url)) {
+        return undefined
+    }
+
+    return <ExternalLink color={'currentColor'} />
 }
