@@ -2,11 +2,13 @@ import { isExternalURL } from './links'
 
 describe('links', () => {
     it('isExternalUrl should works correctly', () => {
+        const host = 'localhost.com'
         const tests = [
-            isExternalURL('https://lifely.com'),
-            isExternalURL('http://lifely.com'),
-            isExternalURL('https://lifely.nl/'),
-            isExternalURL('/kitchensink'),
+            isExternalURL('https://lifely.com', host),
+            isExternalURL('http://lifely.com', host),
+            isExternalURL('https://lifely.nl/', host),
+            isExternalURL('/kitchensink', host),
+            isExternalURL(host + '/kitchensink', host),
         ]
 
         expect(tests[0]).toBe(true)
