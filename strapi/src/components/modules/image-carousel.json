@@ -20,7 +20,8 @@
     "imageCarouselModuleLayout": {
       "type": "component",
       "repeatable": false,
-      "component": "core.module-layouts"
+      "component": "core.module-layouts",
+      "required": true
     }
   }
 }
