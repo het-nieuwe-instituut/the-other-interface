@@ -42,8 +42,7 @@ export class ZoomLevel1Service {
     public async getData() {
         const strapiData = await this.storyService.getStoryDataForZoomLevel1()
 
-        const endpoint =
-            'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-1-record-counts/run'
+        const endpoint = 'zoom-1-record-counts/run'
 
         const result = await this.tripliService.getTripliData<ObjectPerTypeData>(endpoint)
         const tripliData = result.data.map(r => {

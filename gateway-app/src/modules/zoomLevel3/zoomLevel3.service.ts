@@ -3,8 +3,9 @@ import { ArchivesService } from '../archives/archives.service'
 import { ObjectsService } from '../objects/objects.service'
 import { PeopleService } from '../people/people.service'
 import { PublicationsService } from '../publications/publications.service'
+import { PaginationArgs } from '../util/paginationArgs.type'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
-import { PaginationArgs, ZoomLevel3IdType } from './zoomLevel3.type'
+import { ZoomLevel3IdType } from './zoomLevel3.type'
 
 @Injectable()
 export class ZoomLevel3Service {
