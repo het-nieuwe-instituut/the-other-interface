@@ -17,8 +17,7 @@ export const TableModule: React.FC<Props> = props => {
     if (breakpoint === 'sm' || breakpoint === 'base') {
         return (
             <Box
-                pl={6}
-                pr={6}
+                px={6}
                 mb={props.component.tableModuleLayout?.spacingBottom ?? undefined}
                 mt={props.component.tableModuleLayout?.spacingTop ?? undefined}
             >
@@ -35,8 +34,7 @@ export const TableModule: React.FC<Props> = props => {
 
     return (
         <Box
-            pl={6}
-            pr={6}
+            px={6}
             mb={props.component.tableModuleLayout?.spacingBottom ?? undefined}
             mt={props.component.tableModuleLayout?.spacingTop ?? undefined}
         >

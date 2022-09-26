@@ -9,8 +9,7 @@ export const SubtitleModule: React.FC<Props> = props => {
     return (
         <Box
             width="100%"
-            paddingLeft={6}
-            paddingRight={6}
+            px={6}
             paddingBottom={props.component.subtitleModuleLayout?.spacingBottom ?? undefined}
             paddingTop={props.component.subtitleModuleLayout?.spacingTop ?? undefined}
         >
