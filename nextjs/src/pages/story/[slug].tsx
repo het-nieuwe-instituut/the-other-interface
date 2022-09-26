@@ -1,7 +1,8 @@
-import { addApolloState } from '@/features/graphql/config/apollo'
+import { addApolloState, getApolloClient } from '@/features/graphql/config/apollo'
 import { StoryContainer } from '@/features/pages/containers/StoryContainer/StoryContainer'
+import { preparePageConfiguration } from '@/features/shared/utils/pageConfiguration'
 import { GetServerSidePropsContext } from 'next'
-import { getServerPageStoryBySlug } from 'src/generated/graphql-ssr'
+import { StoryBySlugDocument, StoryBySlugQuery } from 'src/generated/graphql'
 
 export interface StoryQueryParams {
     slug: string
@@ -16,22 +17,25 @@ export default Page
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
     const queryParams = context.query as unknown as StoryQueryParams
     const slug = queryParams.slug
+    const apolloClient = getApolloClient({ headers: context?.req?.headers })
 
-    const result = await getServerPageStoryBySlug(
-        {
-            variables: {
-                locale: context.locale,
-                slug: slug,
-            },
+    const result = await apolloClient.query<StoryBySlugQuery>({
+        variables: {
+            locale: context.locale,
+            slug: slug,
         },
-        { headers: context?.req?.headers }
-    )
+        query: StoryBySlugDocument,
+    })
 
-    if (result.props.error || !result.props.data.stories?.data?.length) {
+    if (result.error || !result.data.stories?.data?.length) {
         return { notFound: true }
     }
 
-    return addApolloState(result.props.apolloState, {
+    preparePageConfiguration(apolloClient, { host: context.req.headers.host ?? '' })
+
+    const apolloState = apolloClient.cache.extract()
+
+    return addApolloState(apolloState, {
         props: {
             slug,
         },
