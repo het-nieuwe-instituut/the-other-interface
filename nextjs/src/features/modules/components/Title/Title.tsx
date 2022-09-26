@@ -7,7 +7,11 @@ interface Props {
 
 export const Title: React.FC<Props> = props => {
     return (
-        <Box width="100%" padding={6}>
+        <Box
+            width="100%"
+            pt={props.component.titleModuleLayout?.spacingTop ?? undefined}
+            pb={props.component.titleModuleLayout?.spacingBottom ?? undefined}
+        >
             <Heading textStyle={'h1'} fontSize={'62px'}>
                 {props.component.Title}
             </Heading>

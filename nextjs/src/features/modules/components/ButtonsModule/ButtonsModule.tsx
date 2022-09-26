@@ -30,7 +30,12 @@ const buttonConfig = {
 export const ButtonsModule: React.FC<Props> = props => {
     if (props.component.buttonStyle === EnumComponentmodulesbuttonsmoduleButtonstyle.Large) {
         return (
-            <Box width="100%" padding={{ base: 5, md: 6 }}>
+            <Box
+                width="100%"
+                px={6}
+                paddingBottom={props.component.buttonsModuleLayout?.spacingBottom ?? undefined}
+                paddingTop={props.component.buttonsModuleLayout?.spacingTop ?? undefined}
+            >
                 <Grid templateColumns={{ base: '1fr', md: 'auto auto' }} gap={5}>
                     {renderButtons()}
                 </Grid>
@@ -38,7 +43,12 @@ export const ButtonsModule: React.FC<Props> = props => {
         )
     }
     return (
-        <Box width="100%" padding={{ base: 5, md: 6 }}>
+        <Box
+            width="100%"
+            px={6}
+            paddingBottom={props.component.buttonsModuleLayout?.spacingBottom ?? undefined}
+            paddingTop={props.component.buttonsModuleLayout?.spacingTop ?? undefined}
+        >
             <Flex flexWrap={'wrap'} gap={2}>
                 {renderButtons()}
             </Flex>

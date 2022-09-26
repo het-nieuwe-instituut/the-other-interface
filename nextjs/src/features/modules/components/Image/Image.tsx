@@ -15,7 +15,12 @@ const MediaImage = (props: MediaImageProps) => {
     const theme = useTheme()
 
     return (
-        <Box css={{ backgroundColor: theme.colors.white }} pt="21px" px="24px" pb="50px">
+        <Box
+            css={{ backgroundColor: theme.colors.white }}
+            px={6}
+            paddingBottom={props.component.imageModuleLayout?.spacingBottom ?? undefined}
+            paddingTop={props.component.imageModuleLayout?.spacingTop ?? undefined}
+        >
             <Box onClick={onClick} cursor={'pointer'} pb="10px">
                 <Img
                     alt={alt_text || ''}
