@@ -1,6 +1,7 @@
 import { Args, Query, Resolver } from '@nestjs/graphql'
+import { PaginationArgs } from '../util/paginationArgs.type'
 import { ZoomLevel3Service } from './zoomLevel3.service'
-import { PaginationArgs, ZoomLevel3Args, ZoomLevel3Type } from './zoomLevel3.type'
+import { ZoomLevel3Args, ZoomLevel3Type } from './zoomLevel3.type'
 
 @Resolver(() => ZoomLevel3Type)
 export class ZoomLevel3Resolver {
