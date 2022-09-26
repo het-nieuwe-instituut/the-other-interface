@@ -21,13 +21,12 @@ const MediaImage = (props: MediaImageProps) => {
                     alt={alt_text || ''}
                     src={imagePath}
                     w="full"
-                    h={['220px', '220px', '220px', '621px']}
-                    objectFit="cover"
+                    objectFit="scale-down"
                 />
             </Box>
             {caption && (
                 <Box width={'100'} mb="16px">
-                    <Text variant="small">{caption}</Text>
+                    <Text variant="micro">{caption}</Text>
                 </Box>
             )}
         </Box>

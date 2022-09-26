@@ -191,6 +191,7 @@ export type ComponentCoreCarouselItem = {
   name?: Maybe<Scalars['String']>;
   picture?: Maybe<UploadFileEntityResponse>;
   type?: Maybe<EnumComponentcorecarouselitemType>;
+  uri_id?: Maybe<Scalars['String']>;
 };
 
 export type ComponentCoreCarouselItemFiltersInput = {
@@ -200,6 +201,7 @@ export type ComponentCoreCarouselItemFiltersInput = {
   not?: InputMaybe<ComponentCoreCarouselItemFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<ComponentCoreCarouselItemFiltersInput>>>;
   type?: InputMaybe<StringFilterInput>;
+  uri_id?: InputMaybe<StringFilterInput>;
 };
 
 export type ComponentCorePageHeader = {

@@ -9,7 +9,7 @@ type Props = {
 const CarouselHeader = (props : Props) => {
     const {children, title} = props
     return (
-        <Flex alignItems='center' justifyContent='space-between' mb={'1'}>
+        <Flex alignItems='center' justifyContent='space-between' mb={'4'}>
             <Text textStyle={'h1'}>{title}</Text>
             {
                 children

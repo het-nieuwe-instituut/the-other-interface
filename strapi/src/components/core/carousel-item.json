@@ -26,6 +26,9 @@
         "Maker",
         "Highlight"
       ]
+    },
+    "uri_id": {
+      "type": "string"
     }
   }
 }
