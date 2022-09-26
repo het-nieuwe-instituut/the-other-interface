@@ -2,6 +2,7 @@
 import { isExternalURL } from '@/features/shared/utils/links'
 import { keyExtractor } from '@/features/shared/utils/lists'
 import { capitalizeFirstLetter } from '@/features/shared/utils/text'
+import Download from '@/icons/arrows/download.svg'
 import ExternalLink from '@/icons/arrows/external-link.svg'
 import { Box, Button, Flex, Grid, Text } from '@chakra-ui/react'
 import NextLink from 'next/link'
@@ -53,15 +54,21 @@ export const ButtonsModule: React.FC<Props> = props => {
                 return null
             }
             return (
-                <NextLink key={keyExtractor(button, index, array)} href={button?.url ?? ''} passHref>
+                <NextLink key={keyExtractor(button, index, array)} href={getURl(button)} passHref>
                     <Button
                         variant={config.variant}
                         as={'a'}
                         rightIcon={renderExternalLink(button)}
                         target={!!(button.url && isExternalURL(button.url)) ? '_blank' : undefined}
-                        gridColumn={{ base: '1fr', md: index === array.length - 1 ? '1 / 3' : undefined }}
+                        gridColumn={{ base: '1fr', md: getGridColumns(index, array) }}
+                        bg={'white'}
                     >
-                        <Text textStyle={config.textStyle} color={'currentcolor'}>
+                        <Text
+                            as={'span'}
+                            textStyle={config.textStyle}
+                            color={'currentcolor'}
+                            verticalAlign={'text-bottom'}
+                        >
                             {button?.text && capitalizeFirstLetter(button.text)}
                         </Text>
                     </Button>
@@ -69,12 +76,32 @@ export const ButtonsModule: React.FC<Props> = props => {
             )
         })
     }
+}
 
-    function renderExternalLink(button?: ComponentCoreButton | null) {
-        if (!button?.url || !isExternalURL(button.url)) {
-            return undefined
-        }
-
-        return <ExternalLink color={'currentColor'} />
+function getGridColumns<I extends number, T extends Array<T[0]>>(index: I, array: T) {
+    if (array.length % 2) {
+        return index === array.length - 1 ? '1 / 3' : undefined
     }
+
+    return '1fr'
+}
+
+function getURl(button?: ComponentCoreButton | null) {
+    if (button?.hasAttachment) {
+        return `/api/attachmentProxy?filename=${button.attachment?.data?.attributes?.url}` ?? '#'
+    }
+
+    return button?.url ?? '#'
+}
+
+function renderExternalLink(button?: ComponentCoreButton | null) {
+    if (button && button.hasAttachment) {
+        return <Download color={'currentColor'} />
+    }
+
+    if (!button?.url || !isExternalURL(button.url)) {
+        return undefined
+    }
+
+    return <ExternalLink color={'currentColor'} />
 }
