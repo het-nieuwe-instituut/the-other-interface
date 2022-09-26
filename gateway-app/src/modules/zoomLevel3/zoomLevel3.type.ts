@@ -1,5 +1,4 @@
 import { ArgsType, Field, ObjectType, Int } from '@nestjs/graphql'
-import { Min } from 'class-validator'
 import { ArchivesZoomLevel3Ids } from '../archives/archives.service'
 import { ObjectsZoomLevel3Ids } from '../objects/objects.service'
 import { PeopleZoomLevel3Ids } from '../people/people.service'
@@ -33,15 +32,4 @@ export class ZoomLevel3Type {
 
     @Field(() => Int, { nullable: true })
     public total: number | null
-}
-
-@ArgsType()
-export class PaginationArgs {
-    @Field(() => Int, { nullable: false })
-    @Min(1)
-    public page: number
-
-    @Field(() => Int, { nullable: false })
-    @Min(1)
-    public pageSize: number
 }

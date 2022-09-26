@@ -71,8 +71,14 @@ export const ButtonsModule: React.FC<Props> = props => {
                         rightIcon={renderExternalLink(button)}
                         target={!!(button.url && isExternalURL(button.url)) ? '_blank' : undefined}
                         gridColumn={{ base: '1fr', md: getGridColumns(index, array) }}
+                        bg={'white'}
                     >
-                        <Text textStyle={config.textStyle} color={'currentcolor'}>
+                        <Text
+                            as={'span'}
+                            textStyle={config.textStyle}
+                            color={'currentcolor'}
+                            verticalAlign={'text-bottom'}
+                        >
                             {button?.text && capitalizeFirstLetter(button.text)}
                         </Text>
                     </Button>
