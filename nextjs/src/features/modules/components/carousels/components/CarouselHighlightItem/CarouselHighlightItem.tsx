@@ -11,7 +11,7 @@ interface Props {
 export const CarouselHighlightItem = (props: Props) => {
     const { src, key, name, description, width } = props;
         return (
-            <Flex  flexDirection='column' marginRight='1'>
+            <Flex  flexDirection='column' marginRight='1' maxW={ width ? `${width}px` : 'auto'}>
                 <Img   
                     key={key}
                     src={src}
