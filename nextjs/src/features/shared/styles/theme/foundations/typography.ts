@@ -5,7 +5,7 @@ const textStyles = {
         color: `${colors.black}`,
         fontSize: ['48px', '52px', '62px', '62px'],
         fontWeight: '900',
-        lineHeight: ['108%, 118%'],
+        lineHeight: '118%',
         fontFamily: 'Univers bold',
     },
     h2: {
@@ -20,6 +20,13 @@ const textStyles = {
         fontSize: ['18px', '24px', '20px', '20px'],
         fontWeight: '900',
         lineHeight: '118%',
+        fontFamily: 'Univers bold',
+    },
+    h4: {
+        color: `${colors.black}`,
+        fontSize: ['16px'],
+        fontWeight: '900',
+        lineHeight: '125%',
         fontFamily: 'Univers bold',
     },
     body: {

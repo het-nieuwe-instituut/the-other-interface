@@ -27,9 +27,12 @@
         "modules.text-module",
         "modules.image",
         "modules.pullquote",
+        "modules.carousel",
+        "modules.subtitle",
         "modules.table-module",
         "modules.title-module",
-        "modules.image-carousel"
+        "modules.image-carousel",
+        "modules.buttons-module"
       ]
     },
     "Title": {

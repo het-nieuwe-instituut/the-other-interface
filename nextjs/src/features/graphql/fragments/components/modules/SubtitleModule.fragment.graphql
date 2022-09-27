@@ -1,0 +1,4 @@
+fragment subtitleModuleFragment on ComponentModulesSubtitle {
+    id
+    text
+}

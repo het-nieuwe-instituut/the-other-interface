@@ -1,0 +1,18 @@
+fragment buttonsModuleFragment on ComponentModulesButtonsModule {
+    id
+    buttons {
+        id
+        text
+        url
+        attachment {
+            data {
+                id
+                attributes {
+                    url
+                }
+            }
+        }
+        hasAttachment
+    }
+    buttonStyle
+}

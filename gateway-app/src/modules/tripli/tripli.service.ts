@@ -3,36 +3,45 @@ import { Injectable } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { lastValueFrom } from 'rxjs'
 
-interface ObjectPerTypeData {
-    class: string
-    numberOfInstances: string
-}
-
 @Injectable()
 export class TripliService {
     public constructor(private configService: ConfigService, private readonly httpService: HttpService) {}
 
-    public async getData<DataType>(endpoint: string) {
+    private defaultPage = '1'
+    private defaultPageSize = '16'
+
+    public async getTripliData<ReturnDataType>(
+        endpointSuffix: string,
+        paginationArgs?: { page: number; pageSize: number },
+        searchParams?: { key: string; value: string }[]
+    ) {
         const apiKey = this.configService.getOrThrow('TRIPLY_API_KEY')
-        const res = await lastValueFrom(
-            this.httpService.get<DataType>(endpoint, { headers: { Authorization: `Bearer ${apiKey}` } })
-        )
+        const endpointBaseURL: string = this.configService.getOrThrow('TRIPLI_API_BASEURL')
 
-        return res.data
-    }
+        const endpoint = new URL(`${endpointBaseURL}${endpointSuffix.startsWith('/') ? '' : '/'}${endpointSuffix}`)
 
-    public async getCounts() {
-        const endpoint =
-            'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/objects-per-type/run'
+        if (paginationArgs) {
+            endpoint.searchParams.append(
+                'page',
+                paginationArgs.page ? paginationArgs.page.toString() : this.defaultPage
+            )
+            endpoint.searchParams.append(
+                'pageSize',
+                paginationArgs.pageSize ? paginationArgs.pageSize.toString() : this.defaultPageSize
+            )
+        }
 
-        // TECHNICAL-DEBT: implement error handling
-        // TECHNICAL-DEBT: (dynamically) verify received type
-        const res = await lastValueFrom(this.httpService.get<ObjectPerTypeData[]>(endpoint))
-        return res.data.map(r => {
-            return {
-                class: r.class,
-                numberOfInstances: parseInt(r.numberOfInstances, 10),
+        if (searchParams && searchParams.length) {
+            for (const { key, value } of searchParams) {
+                endpoint.searchParams.append(key, value)
             }
-        })
+        }
+
+        const res = await lastValueFrom(
+            this.httpService.get<ReturnDataType[]>(endpoint.toString(), {
+                headers: { Authorization: `Bearer ${apiKey}` },
+            })
+        )
+        return res
     }
 }

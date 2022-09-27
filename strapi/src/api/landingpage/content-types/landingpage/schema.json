@@ -28,11 +28,13 @@
       "type": "dynamiczone",
       "components": [
         "modules.text-module",
+        "modules.subtitle",
         "modules.title-module",
         "modules.image-carousel",
         "modules.image",
         "modules.pullquote",
-        "modules.table-module"
+        "modules.table-module",
+        "modules.buttons-module"
       ],
       "pluginOptions": {
         "i18n": {

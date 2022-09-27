@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_core_timeframes",
+  "info": {
+    "displayName": "timeframe",
+    "icon": "calendar-alt",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "yearStart": {
+      "type": "biginteger"
+    },
+    "yearEnd": {
+      "type": "biginteger"
+    }
+  }
+}

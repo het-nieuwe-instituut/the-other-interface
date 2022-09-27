@@ -4,6 +4,9 @@
 #import '../fragments/components/TableModuleFragment.fragment.graphql'
 #import '../fragments/components/TitleModule.fragment.graphql'
 #import '../fragments/components/ImageCarousel.fragment.graphql'
+#import '../fragments/components/CarouselModule.fragment.graphql'
+#import '../fragments/components/ButtonsModule.fragment.graphql'
+#import '../fragments/components/SubtitleModule.fragment.graphql'
 
 query homepage($locale: I18NLocaleCode) {
     homepage(locale: $locale) {
@@ -29,6 +32,15 @@ query homepage($locale: I18NLocaleCode) {
                     }
                     ... on ComponentModulesImageCarousel {
                         ...imageCarouselModuleFragment
+                    }
+                    ... on ComponentModulesCarousel {
+                        ...carouselModuleFragment
+                    }
+                    ... on ComponentModulesButtonsModule {
+                        ...buttonsModuleFragment
+                    }
+                    ... on ComponentModulesSubtitle {
+                        ...subtitleModuleFragment
                     }
                 }
             }

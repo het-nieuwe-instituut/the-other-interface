@@ -1,4 +1,5 @@
 {
     "somethingWentWrong": "Er ging iets fout",
-    "commonTest": "Dit is een common translation test, we testen hier ook counters: {{count}}"
+    "commonTest": "Dit is een common translation test, we testen hier ook counters: {{count}}",
+    "published": "Gepubliceerd {{date}}"
 }

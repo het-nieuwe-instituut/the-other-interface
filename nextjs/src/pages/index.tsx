@@ -1,7 +1,8 @@
-import { addApolloState, initializeApollo } from '@/features/graphql/config/apollo'
+import { addApolloState, getApolloClient } from '@/features/graphql/config/apollo'
 import { HomepageContainer } from '@/features/pages/containers/HomepageContainer/HomepageContainer'
+import { preparePageConfiguration } from '@/features/shared/utils/pageConfiguration'
 import { GetServerSidePropsContext } from 'next'
-import { getServerPageHome } from 'src/generated/graphql-ssr'
+import { HomepageDocument, HomepageQuery } from 'src/generated/graphql'
 
 const Home = () => {
     return <HomepageContainer />
@@ -10,19 +11,26 @@ const Home = () => {
 export default Home
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
-    const client = initializeApollo({ headers: context?.req?.headers })
+    const apolloClient = getApolloClient({ headers: context?.req?.headers })
 
-    const result = await getServerPageHome({
+    const result = await apolloClient.query<HomepageQuery>({
         variables: {
             locale: context.locale,
         },
+        query: HomepageDocument,
     })
 
-    if (result.props.error || !result.props.data.homepage?.data?.attributes) {
+    if (result.error || !result.data.homepage?.data?.attributes) {
         return { notFound: true }
     }
 
-    return addApolloState(client.cache.extract(), {
-        props: {},
+    preparePageConfiguration(apolloClient, { host: context.req.headers.host ?? '' })
+
+    const apolloState = apolloClient.cache.extract()
+
+    return addApolloState(apolloState, {
+        props: {
+            host: context.req.headers.host || null,
+        },
     })
 }

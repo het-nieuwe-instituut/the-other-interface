@@ -1,10 +1,20 @@
-import { ComponentModulesImage, ComponentModulesImageCarousel, HomepageQuery } from 'src/generated/graphql'
+import {
+    ComponentModulesImage,
+    ComponentModulesImageCarousel,
+    HomepageQuery,
+    ComponentModulesCarousel,
+    ComponentModulesButtonsModule,
+} from 'src/generated/graphql'
 import MediaImage from '../components/Image/Image'
-import { ImageCarousel } from '../components/ImageCarousel/ImageCarousel'
+import { ImageCarousel } from '../components/carousels/ImageCarousel/ImageCarousel'
+import { CarouselModule } from '../components/carousels/Carousel/Carousel'
 import { Pullquote } from '../components/Pullquote/Pullquote'
+import { SubtitleModule } from '../components/SubtitleModule/SubtitleModule'
 import { TableModule } from '../components/TableModule/TableModule'
 import { Title } from '../components/Title/Title'
 import { TextModule } from '../components/TextModule/TextModule'
+import { ButtonsModule } from '../components/ButtonsModule/ButtonsModule'
+import { Box, useTheme } from '@chakra-ui/react'
 
 interface Props {
     components: HomePageComponents
@@ -15,8 +25,9 @@ type HomePageComponents = NonNullable<
 >['components']
 
 export function DynamicComponentRenderer(props: Props) {
+    const theme = useTheme()
     return (
-        <>
+        <Box maxW={theme.breakpoints.xl} marginX={'auto'}>
             {props.components?.map((component, index, array) => {
                 const typeName = component?.__typename
 
@@ -24,50 +35,62 @@ export function DynamicComponentRenderer(props: Props) {
                     if (component?.__typename === 'ComponentModulesTextModule') {
                         return <TextModule key={keyExtractor(component.id, index, array)} component={component} />
                     }
-                }
 
-                if (typeName) {
                     if (component?.__typename === 'ComponentModulesPullquote') {
                         return <Pullquote key={keyExtractor(component.id, index, array)} component={component} />
                     }
-                }
 
-                if (typeName) {
                     if (component?.__typename === 'ComponentModulesImage') {
-                        return <MediaImage key={component.id} component={component as ComponentModulesImage} />
-                    }
-                }
-
-                if (typeName) {
-                    if (component?.__typename === 'ComponentModulesTableModule') {
-                        return <TableModule key={component.id} component={component} />
-                    }
-                }
-
-                if (typeName) {
-                    if (component?.__typename === 'ComponentModulesTitleModule') {
-                        return <Title key={component.id} component={component} />
-                    }
-                }
-
-                if (typeName) {
-                    if (component?.__typename === 'ComponentModulesImageCarousel') {
                         return (
-                            <ImageCarousel key={component.id} component={component as ComponentModulesImageCarousel} />
+                            <MediaImage
+                                key={keyExtractor(component.id, index, array)}
+                                component={component as ComponentModulesImage}
+                            />
                         )
                     }
-                }
 
-                if (typeName) {
                     if (component?.__typename === 'ComponentModulesImageCarousel') {
                         return (
-                            <ImageCarousel key={component.id} component={component as ComponentModulesImageCarousel} />
+                            <ImageCarousel
+                                key={keyExtractor(component.id, index, array)}
+                                component={component as ComponentModulesImageCarousel}
+                            />
+                        )
+                    }
+
+                    if (component?.__typename === 'ComponentModulesSubtitle') {
+                        return <SubtitleModule key={component.id} component={component} />
+                    }
+
+                    if (component?.__typename === 'ComponentModulesTableModule') {
+                        return <TableModule key={keyExtractor(component.id, index, array)} component={component} />
+                    }
+
+                    if (component?.__typename === 'ComponentModulesTitleModule') {
+                        return <Title key={keyExtractor(component.id, index, array)} component={component} />
+                    }
+
+                    if (component?.__typename === 'ComponentModulesButtonsModule') {
+                        return (
+                            <ButtonsModule
+                                key={keyExtractor(component.id, index, array)}
+                                component={component as ComponentModulesButtonsModule}
+                            />
+                        )
+                    }
+
+                    if (component?.__typename === 'ComponentModulesCarousel') {
+                        return (
+                            <CarouselModule
+                                key={keyExtractor(component.id, index, array)}
+                                component={component as ComponentModulesCarousel}
+                            />
                         )
                     }
                 }
                 return null
             }) ?? null}
-        </>
+        </Box>
     )
 }
 
