@@ -23,7 +23,7 @@ export const CarouselSlide = (props: Props) => {
                     const image = component?.picture?.data?.attributes
                     const imagePath = imageBasePath + image?.url
 
-                    if (type === EnumComponentmodulescarouselType.Makers) {
+                    if (type === EnumComponentmodulescarouselType?.Makers) {
                         return (
                             <CarouselMaker
                                 src={imagePath}
@@ -35,7 +35,7 @@ export const CarouselSlide = (props: Props) => {
                         )
                     }
 
-                    if (type === EnumComponentmodulescarouselType.Highlights) {
+                    if (type === EnumComponentmodulescarouselType?.Highlights) {
                         return (
                             <CarouselHighlightItem
                                 src={imagePath}

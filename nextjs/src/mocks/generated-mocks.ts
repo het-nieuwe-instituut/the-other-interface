@@ -91,6 +91,8 @@ export const aBooleanFilterInput = (overrides?: Partial<BooleanFilterInput>, _re
 export const aComponentCoreButton = (overrides?: Partial<ComponentCoreButton>, _relationshipsToOmit: Array<string> = []): ComponentCoreButton => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentCoreButton']);
     return {
+        attachment: overrides && overrides.hasOwnProperty('attachment') ? overrides.attachment! : relationshipsToOmit.includes('UploadFileEntityResponse') ? {} as UploadFileEntityResponse : anUploadFileEntityResponse({}, relationshipsToOmit),
+        hasAttachment: overrides && overrides.hasOwnProperty('hasAttachment') ? overrides.hasAttachment! : false,
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '5742f597-253d-4ebb-af50-de4e5ae6b06e',
         text: overrides && overrides.hasOwnProperty('text') ? overrides.text! : 'natus',
         url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'autem',
@@ -101,6 +103,7 @@ export const aComponentCoreButtonFiltersInput = (overrides?: Partial<ComponentCo
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentCoreButtonFiltersInput']);
     return {
         and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [relationshipsToOmit.includes('ComponentCoreButtonFiltersInput') ? {} as ComponentCoreButtonFiltersInput : aComponentCoreButtonFiltersInput({}, relationshipsToOmit)],
+        hasAttachment: overrides && overrides.hasOwnProperty('hasAttachment') ? overrides.hasAttachment! : relationshipsToOmit.includes('BooleanFilterInput') ? {} as BooleanFilterInput : aBooleanFilterInput({}, relationshipsToOmit),
         not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : relationshipsToOmit.includes('ComponentCoreButtonFiltersInput') ? {} as ComponentCoreButtonFiltersInput : aComponentCoreButtonFiltersInput({}, relationshipsToOmit),
         or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [relationshipsToOmit.includes('ComponentCoreButtonFiltersInput') ? {} as ComponentCoreButtonFiltersInput : aComponentCoreButtonFiltersInput({}, relationshipsToOmit)],
         text: overrides && overrides.hasOwnProperty('text') ? overrides.text! : relationshipsToOmit.includes('StringFilterInput') ? {} as StringFilterInput : aStringFilterInput({}, relationshipsToOmit),
@@ -116,6 +119,7 @@ export const aComponentCoreCarouselItem = (overrides?: Partial<ComponentCoreCaro
         name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'adipisci',
         picture: overrides && overrides.hasOwnProperty('picture') ? overrides.picture! : relationshipsToOmit.includes('UploadFileEntityResponse') ? {} as UploadFileEntityResponse : anUploadFileEntityResponse({}, relationshipsToOmit),
         type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : EnumComponentcorecarouselitemType.Highlight,
+        uri_id: overrides && overrides.hasOwnProperty('uri_id') ? overrides.uri_id! : 'quibusdam',
     };
 };
 
@@ -128,6 +132,7 @@ export const aComponentCoreCarouselItemFiltersInput = (overrides?: Partial<Compo
         not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : relationshipsToOmit.includes('ComponentCoreCarouselItemFiltersInput') ? {} as ComponentCoreCarouselItemFiltersInput : aComponentCoreCarouselItemFiltersInput({}, relationshipsToOmit),
         or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [relationshipsToOmit.includes('ComponentCoreCarouselItemFiltersInput') ? {} as ComponentCoreCarouselItemFiltersInput : aComponentCoreCarouselItemFiltersInput({}, relationshipsToOmit)],
         type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : relationshipsToOmit.includes('StringFilterInput') ? {} as StringFilterInput : aStringFilterInput({}, relationshipsToOmit),
+        uri_id: overrides && overrides.hasOwnProperty('uri_id') ? overrides.uri_id! : relationshipsToOmit.includes('StringFilterInput') ? {} as StringFilterInput : aStringFilterInput({}, relationshipsToOmit),
     };
 };
 
