@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2022-09-23T08:12:18.042Z
+__export_date: 2022-09-23T10:41:16.430Z
 __export_source: insomnia.desktop.app:v2022.5.1
 resources:
   - _id: req_bb8d9c352e5d4b579d857e8a70e52b13
@@ -213,7 +213,8 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text: '{"query":"query {\n\t\tzoomLevel3(entityName: Publications, filterId:
+      text:
+        '{"query":"query {\n\t\tzoomLevel3(entityName: Publications, filterId:
         \"subject\", page: 1, pageSize:
         16)  {\n    uri\n\t\tname\n\t\tcount\n\t\ttotal\n\t}\n}"}'
     parameters: []
@@ -241,7 +242,8 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text: '{"query":"query {\n\t\tzoomLevel3(entityName: Publications, filterId:
+      text:
+        '{"query":"query {\n\t\tzoomLevel3(entityName: Publications, filterId:
         \"geographicalKeyword\", page: 1, pageSize:
         16)  {\n    uri\n\t\tname\n\t\tcount\n\t\ttotal\n\t}\n}"}'
     parameters: []
@@ -269,7 +271,8 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text: '{"query":"query {\n\t\tzoomLevel3(entityName: Publications, filterId:
+      text:
+        '{"query":"query {\n\t\tzoomLevel3(entityName: Publications, filterId:
         \"author\", page: 1, pageSize:
         16)  {\n    uri\n\t\tname\n\t\tcount\n\t\ttotal\n\t}\n}"}'
     parameters: []
@@ -297,7 +300,8 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text: '{"query":"query {\n\t\tzoomLevel3(entityName: Publications, filterId:
+      text:
+        '{"query":"query {\n\t\tzoomLevel3(entityName: Publications, filterId:
         \"typeOfPublication\", page: 1, pageSize:
         16)  {\n    uri\n\t\tname\n\t\tcount\n\t\ttotal\n\t}\n}"}'
     parameters: []
@@ -950,6 +954,45 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
+  - _id: req_b1eb21c365b946eba8c7d4682a8167c8
+    parentId: fld_17de84e682c04137bb01bf07e4e9a9a2
+    modified: 1663929653387
+    created: 1663928044191
+    url: "{{ _.baseUrl }}/graphql"
+    name: relations
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n\trelations (type: People, id: \"12971\")
+        {\n\t\ttype\n\t\ttotal\n\t\trandomRelations
+        {\n\t\t\tid\n\t\t\tlabel\n\t\t\ttype\n\t\t\trandomRelations
+        {\n\t\t\t\ttype\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n}"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658845895129.875
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_17de84e682c04137bb01bf07e4e9a9a2
+    parentId: wrk_495bc411648844949d6c2b88c3ac4cb2
+    modified: 1663928025620
+    created: 1663927999495
+    name: Zoom level 5
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1658904687127.5
+    _type: request_group
   - _id: env_9ecfbf306599ac18ae1cef7e35789fdc41a137e8
     parentId: wrk_495bc411648844949d6c2b88c3ac4cb2
     modified: 1659610151994

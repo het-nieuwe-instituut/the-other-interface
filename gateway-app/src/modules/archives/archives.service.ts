@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { TripliService } from '../tripli/tripli.service'
+import { TriplyService } from '../triply/triply.service'
 import { ArchivesZoomLevel4FiltersArgs } from './archives.type'
 
 export enum ArchivesZoomLevel3Ids {
@@ -32,7 +32,7 @@ interface ArchivesZoomLevel4Data {
 
 @Injectable()
 export class ArchivesService {
-    protected entityType = 'tripli'
+    protected entityType = 'triply'
     private readonly zoomLevel2Endpoint = 'zoom-2-archives/run'
 
     private readonly ZoomLevel3Mapping = [
@@ -73,10 +73,10 @@ export class ArchivesService {
 
     private readonly ZoomLevel4Endpoint = 'zoom-4-archives/run'
 
-    public constructor(private tripliService: TripliService) {}
+    public constructor(private triplyService: TriplyService) {}
 
     public async getZoomLevel2Data() {
-        const result = await this.tripliService.getTripliData<ObjectFilterData>(this.zoomLevel2Endpoint)
+        const result = await this.triplyService.queryTriplyData<ObjectFilterData>(this.zoomLevel2Endpoint)
         return result.data
             .map(r => {
                 const filterMapping = this.ZoomLevel3Mapping.find(m => m.name === r.filter)
@@ -93,7 +93,7 @@ export class ArchivesService {
             throw new Error(`[Archives] Mapping ${id} not found`)
         }
 
-        const result = await this.tripliService.getTripliData<ObjectFilterOptionsData>(mapping?.endpoint, {
+        const result = await this.triplyService.queryTriplyData<ObjectFilterOptionsData>(mapping?.endpoint, {
             page,
             pageSize,
         })
@@ -118,7 +118,7 @@ export class ArchivesService {
             searchParams.push({ key: filterName, value: filterValue })
         }
 
-        const result = await this.tripliService.getTripliData<ArchivesZoomLevel4Data>(
+        const result = await this.triplyService.queryTriplyData<ArchivesZoomLevel4Data>(
             this.ZoomLevel4Endpoint,
             {
                 page,

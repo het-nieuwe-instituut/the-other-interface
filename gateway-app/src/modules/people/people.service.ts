@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { TripliService } from '../tripli/tripli.service'
+import { TriplyService } from '../triply/triply.service'
 import { PeopleType, PeopleZoomLevel4FiltersArgs } from './people.type'
 
 export enum PeopleZoomLevel3Ids {
@@ -42,9 +42,8 @@ interface PeopleZoomLevel4Data {
 
 @Injectable()
 export class PeopleService {
-    protected entityType = 'tripli'
-    private readonly detailEndpoint =
-        'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-acceptance/zoom-5-people/run?record=https://collectiedata.hetnieuweinstituut.nl/id/people/'
+    protected entityType = 'triply'
+    private readonly detailEndpoint = '/zoom-5-people/run?record=https://collectiedata.hetnieuweinstituut.nl/id/people/'
     private readonly zoomLevel2Endpoint = 'zoom-2-people/run'
 
     private readonly ZoomLevel3Mapping = [
@@ -118,10 +117,10 @@ export class PeopleService {
 
     private readonly ZoomLevel4Endpoint = 'zoom-4-people/run'
 
-    public constructor(private tripliService: TripliService) {}
+    public constructor(private triplyService: TriplyService) {}
 
     public async getZoomLevel2Data() {
-        const result = await this.tripliService.getTripliData<PeopleFilterData>(this.zoomLevel2Endpoint)
+        const result = await this.triplyService.queryTriplyData<PeopleFilterData>(this.zoomLevel2Endpoint)
         return result.data
             .map(r => {
                 const filterMapping = this.ZoomLevel3Mapping.find(m => m.name === r.filter)
@@ -138,7 +137,7 @@ export class PeopleService {
             throw new Error(`[People] Mapping ${id} not found`)
         }
 
-        const result = await this.tripliService.getTripliData<PeopleFilterOptionsData>(mapping?.endpoint, {
+        const result = await this.triplyService.queryTriplyData<PeopleFilterOptionsData>(mapping?.endpoint, {
             page,
             pageSize,
         })
@@ -163,7 +162,7 @@ export class PeopleService {
             searchParams.push({ key: filterName, value: filterValue })
         }
 
-        const result = await this.tripliService.getTripliData<PeopleZoomLevel4Data>(
+        const result = await this.triplyService.queryTriplyData<PeopleZoomLevel4Data>(
             this.ZoomLevel4Endpoint,
             {
                 page,
@@ -192,7 +191,7 @@ export class PeopleService {
     }
 
     public async getPeopleDetails(peopleId: string) {
-        const res = await this.tripliService.getTripliData<PeopleData>(`${this.detailEndpoint}${peopleId}`)
+        const res = await this.triplyService.queryTriplyData<PeopleData>(`${this.detailEndpoint}${peopleId}`)
 
         const parsedResponse: PeopleType = {}
         res.data.forEach(d => {

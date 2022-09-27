@@ -1,0 +1,15 @@
+---
+- hosts: app
+  gather_facts: no
+  become: yes
+  become_user: root
+  become_method: sudo
+  vars_prompt:
+    - name: tag
+      prompt: Which image tag do you want to deploy?
+      private: no
+  # pre_tasks:
+  #   - name: setup | install python 2.x
+  #     raw: sudo apt-get update && apt-get install -y python-simplejson
+  roles:
+    - app

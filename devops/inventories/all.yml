@@ -1,0 +1,36 @@
+#################
+# HNI - Staging #
+#################
+[staging]
+146.190.19.190 name=hni-toi-staging-ams3-01
+
+[staging:vars]
+server_environment_name=staging
+ansible_python_interpreter=/usr/bin/python3
+
+####################
+# HNI - Acceptance #
+####################
+[acceptance]
+134.209.201.154 name=hni-toi-acceptance-ams3-01
+
+[acceptance:vars]
+server_environment_name=acceptance
+ansible_python_interpreter=/usr/bin/python3
+
+####################
+# HNI - Production #
+####################
+[production]
+x.x.x.x name=hni-toi-production-ams3-01
+
+[production:vars]
+server_environment_name=production
+
+##########
+# Groups #
+##########
+[app:children]
+staging
+acceptance
+# production
