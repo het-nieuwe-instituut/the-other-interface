@@ -36,8 +36,8 @@ import { ZoomLevel4Module } from './modules/zoomLevel4/zoomLevel4.module'
         ZoomLevel1Module,
         ZoomLevel2Module,
         ZoomLevel3Module,
-        ZoomLevel5Module,
         ZoomLevel4Module,
+        ZoomLevel5Module,
     ],
 })
 export class AppModule {}
