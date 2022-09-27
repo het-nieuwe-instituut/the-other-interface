@@ -1,0 +1,158 @@
+{
+	"info": {
+		"_postman_id": "2c188900-fb83-4b9d-8af5-8c41b5855768",
+		"name": "HNI-toi Triply",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8018205"
+	},
+	"item": [
+		{
+			"name": "Zoom 5",
+			"item": [
+				{
+					"name": "archive",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/zoom-5-archives/run?record",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"zoom-5-archives",
+								"run"
+							],
+							"query": [
+								{
+									"key": "record",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "object",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/zoom-5-objects/run?record",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"zoom-5-objects",
+								"run"
+							],
+							"query": [
+								{
+									"key": "record",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "people",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/zoom-5-people/run?record",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"zoom-5-people",
+								"run"
+							],
+							"query": [
+								{
+									"key": "record",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "relations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/zoom-5-relations/run?record=09&externalSources=true",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"zoom-5-relations",
+								"run"
+							],
+							"query": [
+								{
+									"key": "record",
+									"value": "09"
+								},
+								{
+									"key": "externalSources",
+									"value": "true",
+									"description": "true/false"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{bearer}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "bearer",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "baseURL",
+			"value": "https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-acceptance",
+			"type": "string"
+		}
+	]
+}
