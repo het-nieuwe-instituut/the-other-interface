@@ -12,27 +12,20 @@ export const DynamicGalaxyNoSsr = dynamic(() => import('../../../GalaxyInterface
 const result: ObjectPerType[] = [
     {
         class: 'test1',
-        numberOfInstances: '100',
+        numberOfInstances: '240',
     },
     {
         class: 'test2',
-        numberOfInstances: '100',
+        numberOfInstances: '152',
     },
     {
         class: 'test3',
-        numberOfInstances: '100',
+        numberOfInstances: '96',
     },
+
     {
         class: 'test4',
-        numberOfInstances: '100',
-    },
-    {
-        class: 'test5',
-        numberOfInstances: '100',
-    },
-    {
-        class: 'test6',
-        numberOfInstances: '100',
+        numberOfInstances: '96',
     },
 ]
 

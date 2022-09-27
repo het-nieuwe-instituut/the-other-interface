@@ -24,7 +24,12 @@ const Object: React.FC<Props> = ({ data = [], dimensions }) => {
 
     return (
         <div style={{ overflow: 'hidden' }}>
-            <svg width={svgWidth} height={svgHeight} ref={svgRef} viewBox="0 0 100% 100%">
+            <svg
+                width={svgWidth}
+                height={svgHeight}
+                ref={svgRef}
+                viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
+            >
                 <defs>
                     {objectsPerTypeWithIds.map((item, index, array) => {
                         return (

@@ -1,6 +1,6 @@
 import * as d3 from 'd3'
 import { SimulationNodeDatum } from 'd3'
-import { useEffect, useMemo, useReducer, useRef } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import { ObjectPerType } from 'src/pages/poc/galaxy'
 
 interface Dimensions {
@@ -10,12 +10,6 @@ interface Dimensions {
 
 interface ObjectPerTypeWithName extends ObjectPerType {
     name: string
-}
-
-export interface Order {
-    id: string
-    order: number
-    fixedDiameter?: number
 }
 
 interface D3CollectionItem extends SimulationNodeDatum, ObjectPerTypeWithName {}
@@ -31,7 +25,6 @@ function useD3Simulation(
     dataDimensions: DataDimensions[]
 ) {
     const svgRef = useRef<SVGSVGElement | null>(null)
-    const [,] = useReducer(x => x + 1, 0)
     const initialized = useRef(false)
     const simulation = useRef<d3.Simulation<d3.SimulationNodeDatum, undefined> | null>(null)
     const nodesListener = useRef<d3.Simulation<d3.SimulationNodeDatum, undefined> | null>(null)
@@ -43,18 +36,20 @@ function useD3Simulation(
         }
 
         if (!simulation.current) {
-            simulation.current = d3.forceSimulation()
+            simulation.current = d3
+                .forceSimulation()
+                .force('charge', d3.forceManyBody().strength(0.1))
+                .force('center', d3.forceCenter((dimensions.width ?? 0) / 2, (dimensions.height ?? 0) / 2))
         }
 
         dimensionsRef.current = dimensions
 
         const d3Svg = d3.select(svgRef.current)
-        const node = d3Svg.selectAll(`.${selector}`).data(data)
         const nodeForeign = d3Svg.selectAll(`.foreign-${selector}`).data(data)
 
         if (!nodesListener.current) {
             nodesListener.current = simulation.current?.nodes(data as D3CollectionItem[]).on('tick', () => {
-                ticked(dataDimensions, simulation.current, node, nodeForeign, dimensionsRef.current)
+                ticked(dataDimensions, simulation.current, nodeForeign, dimensionsRef.current)
             })
         }
 
@@ -68,17 +63,17 @@ function useD3Simulation(
 
     return {
         svgRef,
+        simulation,
     }
 }
 
-function useD3FitDataToDimensions(
-    dimensions: Dimensions,
-    data: ObjectPerTypeWithName[],
-
-    orders?: Order[]
-) {
+function useD3FitDataToDimensions(dimensions: Dimensions, data: ObjectPerTypeWithName[]) {
     const dataDimensions: DataDimensions[] = useMemo(() => {
-        const totalSpace = (dimensions.height ?? 0) * (dimensions.width ?? 0)
+        const height = dimensions.height ?? 0
+        const width = dimensions.width ?? 0
+        const squareSide: number = height > width ? width : height
+
+        const totalSpace = squareSide * squareSide
         const gridItemSpace = 12
         const totalSpaceGrid = totalSpace / (gridItemSpace * gridItemSpace)
 
@@ -86,13 +81,12 @@ function useD3FitDataToDimensions(
         const totalOccupiedGridItems = totalSpaceGrid / totalObjects
 
         return data.map(item => {
-            const connectedOrder = orders?.find(order => order.id === item.name)
             return {
                 name: item.name,
-                takeSpace: connectedOrder?.fixedDiameter ?? totalOccupiedGridItems * parseInt(item.numberOfInstances),
+                takeSpace: totalOccupiedGridItems * parseInt(item.numberOfInstances),
             }
         })
-    }, [dimensions, data, orders])
+    }, [dimensions, data])
 
     return dataDimensions
 }
@@ -104,24 +98,17 @@ function getFromCalulatedData(dataDimensions: DataDimensions[], d: Partial<D3Col
         return 0
     }
 
-    return val?.takeSpace / 8
+    return val?.takeSpace / 6
 }
 
 function ticked(
     dataDimensions: DataDimensions[],
     simulation: d3.Simulation<d3.SimulationNodeDatum, undefined> | null,
-    node: d3.Selection<d3.BaseType, ObjectPerTypeWithName, d3.BaseType, unknown>,
     nodeForeign: d3.Selection<d3.BaseType, ObjectPerTypeWithName, d3.BaseType, unknown>,
     dimensions: Dimensions
 ) {
     const width = dimensions.width ?? 0
     const height = dimensions.height ?? 0
-
-    node.attr('cx', (d: D3CollectionItem) => d.x ?? 0)
-        .attr('cy', (d: D3CollectionItem) => d.y ?? 0)
-        .attr('height', (d: D3CollectionItem) => getFromCalulatedData(dataDimensions, d))
-        .attr('width', (d: D3CollectionItem) => getFromCalulatedData(dataDimensions, d))
-        .attr('r', (d: D3CollectionItem) => getFromCalulatedData(dataDimensions, d))
 
     nodeForeign
         .attr('x', (d: D3CollectionItem) => (d.x ?? 0) + -getFromCalulatedData(dataDimensions, d))
@@ -135,7 +122,7 @@ function ticked(
                 'collide',
                 d3
                     .forceCollide()
-                    .strength(0.5)
+                    .strength(0.1)
                     .radius(d => getFromCalulatedData(dataDimensions, d))
             )
             .force('centerX', d3.forceX(width / 2))
@@ -143,13 +130,8 @@ function ticked(
     }
 }
 
-export function usePresenter(
-    dimensions: Dimensions,
-    data: ObjectPerTypeWithName[],
-    selector: string,
-    orders?: Order[]
-) {
-    const dataDimensions = useD3FitDataToDimensions(dimensions, data, orders)
+export function usePresenter(dimensions: Dimensions, data: ObjectPerTypeWithName[], selector: string) {
+    const dataDimensions = useD3FitDataToDimensions(dimensions, data)
     const { svgRef } = useD3Simulation(dimensions, data, selector, dataDimensions)
 
     return {
