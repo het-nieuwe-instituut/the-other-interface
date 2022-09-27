@@ -1,10 +1,18 @@
 import { Injectable } from '@nestjs/common'
 import { TripliService } from '../tripli/tripli.service'
+import { ArchivesZoomLevel4FiltersArgs } from './archives.type'
 
 export enum ArchivesZoomLevel3Ids {
     date = 'date',
     descriptionLevel = 'descriptionLevel',
     relatedNames = 'relatedNames',
+}
+
+export enum ArchivesZoomLevel4Filters {
+    StartDate = 'StartDate',
+    EndDate = 'EndDate',
+    DescriptionLevel = 'DescriptionLevel',
+    RelatedName = 'RelatedName',
 }
 
 interface ObjectFilterData {
@@ -15,30 +23,34 @@ interface ObjectFilterOptionsData {
     [x: string]: string
 }
 
+interface ArchivesZoomLevel4Data {
+    record: string
+    title: string | null
+    firstImage: string | null
+    imageLabel: string | null
+}
+
 @Injectable()
 export class ArchivesService {
     protected entityType = 'tripli'
-    private readonly zoomLevel2Endpoint =
-        'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-2-archives/run'
+    private readonly zoomLevel2Endpoint = 'zoom-2-archives/run'
 
     private readonly ZoomLevel3Mapping = [
         {
             id: ArchivesZoomLevel3Ids.date,
             name: 'Datering',
             columns: {
-                name: 'relatedNameLabel',
-                uri: 'relatedName',
-                count: 'count',
+                name: 'century',
+                uri: 'century',
+                count: 'numberOfRecords',
                 total: 'total',
             },
-            endpoint:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-3-archives-date-filter/run',
+            endpoint: 'zoom-3-archives-date-filter/run',
         },
         {
             id: ArchivesZoomLevel3Ids.descriptionLevel,
             name: 'Beschrijvingsniveau',
-            endpoint:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-3-archives-description-level-filter/run',
+            endpoint: 'zoom-3-archives-description-level-filter/run',
             columns: {
                 name: 'descriptionLevel',
                 uri: 'descriptionLevel',
@@ -49,8 +61,7 @@ export class ArchivesService {
         {
             id: ArchivesZoomLevel3Ids.relatedNames,
             name: 'Gerelateerde namen',
-            endpoint:
-                'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface/zoom-3-archives-related-names-filter/run',
+            endpoint: 'zoom-3-archives-related-names-filter/run',
             columns: {
                 name: 'relatedNameLabel',
                 uri: 'relatedName',
@@ -59,6 +70,8 @@ export class ArchivesService {
             },
         },
     ]
+
+    private readonly ZoomLevel4Endpoint = 'zoom-4-archives/run'
 
     public constructor(private tripliService: TripliService) {}
 
@@ -91,6 +104,35 @@ export class ArchivesService {
                 name: d[mapping.columns.name] || null,
                 count: d[mapping.columns.count] ? parseInt(d[mapping.columns.count], 10) : null,
                 total: d[mapping.columns.total] ? parseInt(d[mapping.columns.total], 10) : null,
+            }
+        })
+    }
+
+    public async getZoomLevel4Data(filters: ArchivesZoomLevel4FiltersArgs, page = 1, pageSize = 48) {
+        if (Object.keys(filters).length === 0) {
+            return []
+        }
+
+        const searchParams = []
+        for (const [filterName, filterValue] of Object.entries(filters)) {
+            searchParams.push({ key: filterName, value: filterValue })
+        }
+
+        const result = await this.tripliService.getTripliData<ArchivesZoomLevel4Data>(
+            this.ZoomLevel4Endpoint,
+            {
+                page,
+                pageSize,
+            },
+            searchParams
+        )
+
+        return result.data.map(res => {
+            return {
+                record: res.record,
+                title: res.title,
+                firstImage: res.firstImage,
+                imageLabel: res.imageLabel,
             }
         })
     }

@@ -1,7 +1,8 @@
-import { addApolloState } from '@/features/graphql/config/apollo'
+import { addApolloState, getApolloClient } from '@/features/graphql/config/apollo'
 import { LandingpageContainer } from '@/features/pages/containers/LandingpageContainer/LandingpageContainer'
+import { preparePageConfiguration } from '@/features/shared/utils/pageConfiguration'
 import { GetServerSidePropsContext } from 'next'
-import { getServerPageLandingBySlug } from 'src/generated/graphql-ssr'
+import { LandingpageBySlugDocument, LandingpageBySlugQuery } from 'src/generated/graphql'
 
 export interface LandingPageQueryParams {
     slug: string
@@ -17,21 +18,25 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     const queryParams = context.query as unknown as LandingPageQueryParams
     const slug = queryParams.slug
 
-    const result = await getServerPageLandingBySlug(
-        {
-            variables: {
-                locale: context.locale,
-                slug: slug,
-            },
-        },
-        { headers: context?.req?.headers }
-    )
+    const apolloClient = getApolloClient({ headers: context?.req?.headers })
 
-    if (result.props.error || !result.props.data.landingpages?.data?.length) {
+    const result = await apolloClient.query<LandingpageBySlugQuery>({
+        variables: {
+            locale: context.locale,
+            slug: slug,
+        },
+        query: LandingpageBySlugDocument,
+    })
+
+    if (result.error || !result.data.landingpages?.data?.length) {
         return { notFound: true }
     }
 
-    return addApolloState(result.props.apolloState, {
+    preparePageConfiguration(apolloClient, { host: context.req.headers.host ?? '' })
+
+    const apolloState = apolloClient.cache.extract()
+
+    return addApolloState(apolloState, {
         props: {
             slug,
         },
