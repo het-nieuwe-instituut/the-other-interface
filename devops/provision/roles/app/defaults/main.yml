@@ -1,0 +1,13 @@
+---
+app:
+  swap:
+    enabled: no
+
+  web:
+    auth: no
+
+  env: {
+      GA: ''
+  }
+
+  aws: {}

@@ -1,0 +1,50 @@
+---
+- name: nginx-proxy | ensure /data/nginx-proxy exists
+  file: path=/data/nginx-proxy state=directory
+  tags: [nginx-proxy, deploy]
+
+- name: nginx-proxy | add custom nginx config
+  template: src=nginx-proxy.conf.tpl dest=/data/nginx-proxy/nginx-proxy.conf
+  tags: [nginx-proxy, deploy]
+
+- name: nginx-proxy | docker | start
+  docker_container:
+    name: nginx-proxy
+    image: nginxproxy/nginx-proxy:1.0
+    state: started
+    pull: yes
+    restart_policy: always
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - certs:/etc/nginx/certs
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - /data/nginx-proxy/nginx-proxy.conf:/etc/nginx/conf.d/nginx-proxy.conf:ro
+    labels:
+      com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy: com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
+    env:
+      DEBUG: "false"
+    networks:
+      - name: "app-network"
+  tags: [nginx-proxy, deploy]
+
+- name: docker | start/update nginx ssl manager
+  docker_container:
+    name: nginx-proxy-letsencrypt
+    image: nginxproxy/acme-companion:2.2
+    state: started
+    pull: yes
+    restart_policy: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - acme:/etc/acme.sh
+    volumes_from:
+      - nginx-proxy
+    env:
+      DEBUG: "0"
+    networks:
+      - name: "app-network"
+  tags: [nginx-proxy, deploy]
