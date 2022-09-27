@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { TripliService } from '../tripli/tripli.service'
+import { TriplyService } from '../triply/triply.service'
 import { ObjectsZoomLevel4FiltersArgs } from './objects.type'
 
 export enum ObjectsZoomLevel3Ids {
@@ -40,7 +40,7 @@ interface ObjectsZoomLevel4Data {
 
 @Injectable()
 export class ObjectsService {
-    protected entityType = 'tripli'
+    protected entityType = 'triply'
     private readonly zoomLevel2Endpoint = 'zoom-2-objects/run'
 
     private readonly ZoomLevel3Mapping = [
@@ -125,10 +125,10 @@ export class ObjectsService {
 
     private readonly ZoomLevel4Endpoint = 'zoom-4-objects/run'
 
-    public constructor(private tripliService: TripliService) {}
+    public constructor(private triplyService: TriplyService) {}
 
     public async getZoomLevel2Data() {
-        const result = await this.tripliService.getTripliData<ObjectFilterData>(this.zoomLevel2Endpoint)
+        const result = await this.triplyService.queryTriplyData<ObjectFilterData>(this.zoomLevel2Endpoint)
         return result.data
             .map(r => {
                 const filterMapping = this.ZoomLevel3Mapping.find(m => m.name === r.filter)
@@ -145,7 +145,7 @@ export class ObjectsService {
             throw new Error(`[Objects] Mapping ${id} not found`)
         }
 
-        const result = await this.tripliService.getTripliData<ObjectFilterOptionsData>(mapping?.endpoint, {
+        const result = await this.triplyService.queryTriplyData<ObjectFilterOptionsData>(mapping?.endpoint, {
             page,
             pageSize,
         })
@@ -170,7 +170,7 @@ export class ObjectsService {
             searchParams.push({ key: filterName, value: filterValue })
         }
 
-        const result = await this.tripliService.getTripliData<ObjectsZoomLevel4Data>(
+        const result = await this.triplyService.queryTriplyData<ObjectsZoomLevel4Data>(
             this.ZoomLevel4Endpoint,
             {
                 page,

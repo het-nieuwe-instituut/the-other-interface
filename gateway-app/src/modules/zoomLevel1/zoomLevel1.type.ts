@@ -6,6 +6,8 @@ export enum EntityNames {
     People = 'People',
     Publications = 'Publications',
     Stories = 'Stories',
+    External = 'External',
+    Media = 'Media',
 }
 registerEnumType(EntityNames, { name: 'EntityNames' })
 

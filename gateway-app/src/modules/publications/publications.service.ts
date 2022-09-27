@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { TripliService } from '../tripli/tripli.service'
+import { TriplyService } from '../triply/triply.service'
 import { PublicationsZoomLevel4FiltersArgs } from './publications.type'
 
 export enum PublicationsZoomLevel3Ids {
@@ -33,7 +33,7 @@ interface PublicationsZoomLevel4Data {
 
 @Injectable()
 export class PublicationsService {
-    protected entityType = 'tripli'
+    protected entityType = 'triply'
     private readonly zoomLevel2Endpoint = 'zoom-2-books/run'
 
     private readonly ZoomLevel3Mapping = [
@@ -96,10 +96,10 @@ export class PublicationsService {
 
     private readonly ZoomLevel4Endpoint = 'zoom-4-books/run'
 
-    public constructor(private tripliService: TripliService) {}
+    public constructor(private triplyService: TriplyService) {}
 
     public async getZoomLevel2Data() {
-        const result = await this.tripliService.getTripliData<PublicationsFilterData>(this.zoomLevel2Endpoint)
+        const result = await this.triplyService.queryTriplyData<PublicationsFilterData>(this.zoomLevel2Endpoint)
         return result.data
             .map(r => {
                 const filterMapping = this.ZoomLevel3Mapping.find(m => m.name === r.filter)
@@ -116,7 +116,7 @@ export class PublicationsService {
             throw new Error(`[Publications] Mapping ${id} not found`)
         }
 
-        const result = await this.tripliService.getTripliData<PublicationsFilterOptionsData>(mapping?.endpoint, {
+        const result = await this.triplyService.queryTriplyData<PublicationsFilterOptionsData>(mapping?.endpoint, {
             page,
             pageSize,
         })
@@ -141,7 +141,7 @@ export class PublicationsService {
             searchParams.push({ key: filterName, value: filterValue })
         }
 
-        const result = await this.tripliService.getTripliData<PublicationsZoomLevel4Data>(
+        const result = await this.triplyService.queryTriplyData<PublicationsZoomLevel4Data>(
             this.ZoomLevel4Endpoint,
             {
                 page,
