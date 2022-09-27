@@ -6,7 +6,6 @@ interface Props {
 }
 
 export const SubtitleModule: React.FC<Props> = props => {
-    console.log(props)
     return (
         <Box width="100%" paddingLeft={6} paddingRight={6} paddingBottom={4}>
             <ChakraText textStyle={'h3'}>{props.component.text}</ChakraText>
