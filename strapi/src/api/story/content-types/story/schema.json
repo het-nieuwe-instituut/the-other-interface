@@ -103,6 +103,16 @@
       },
       "component": "core.publication-date"
     },
+    "storyLinks": {
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "modules.buttons-module"
+    },
     "shortDescription": {
       "pluginOptions": {
         "i18n": {

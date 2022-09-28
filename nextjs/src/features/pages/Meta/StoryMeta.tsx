@@ -1,3 +1,4 @@
+import { ButtonsModule } from '@/features/modules/components/ButtonsModule/ButtonsModule'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { formatDate } from '@/features/shared/utils/dates'
 import { keyExtractor } from '@/features/shared/utils/lists'
@@ -17,6 +18,8 @@ interface Props {
 }
 
 export const StoryMeta: React.FC<Props> = ({ story }) => {
+    console.log(story)
+
     const commonT = useTypeSafeTranslation('common')
     const storiesT = useTypeSafeTranslation('stories')
 
@@ -81,6 +84,12 @@ export const StoryMeta: React.FC<Props> = ({ story }) => {
                             )
                         })}
                     </Box>
+                </Box>
+            )}
+            {story.attributes?.storyLinks && (
+                <Box paddingLeft={0}>
+                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                    <ButtonsModule component={story.attributes.storyLinks as any}></ButtonsModule>
                 </Box>
             )}
         </Box>

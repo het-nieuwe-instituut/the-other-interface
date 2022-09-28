@@ -23,7 +23,7 @@ const createApolloClient = () => {
     return new ApolloClient({
         ssrMode: typeof window === 'undefined',
         // uri: 'http://localhost:1337/graphql',
-        uri: 'http://strapi:1337/graphql',
+        uri: 'http://localhost:1337/graphql',
         cache: new InMemoryCache(),
         typeDefs,
     })
