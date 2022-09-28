@@ -6,6 +6,33 @@ query stories {
     }
 }
 
+# "$type" must be ENUM_TRIPLYRECORD_TYPE
+query storiesLinkedToTriplyRecord($recordId: String!, $type: String!) {
+    stories(filters: { triplyRecords: { recordId: { eq: $recordId }, type: { eq: $type } } }) {
+        data {
+            id
+            attributes {
+                title
+            }
+        }
+    }
+}
+
+query storyTriplyRelations($id: ID!) {
+    story(id: $id) {
+        data {
+            id
+            attributes {
+                triplyRecords {
+                    data {
+                        ...BaseTriplyRecordFragment
+                    }
+                }
+            }
+        }
+    }
+}
+
 query storiesTotal {
     stories {
         meta {

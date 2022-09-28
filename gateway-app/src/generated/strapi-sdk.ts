@@ -2077,6 +2077,53 @@ export type StoriesQuery = {
     } | null
 }
 
+export type StoriesLinkedToTriplyRecordQueryVariables = Exact<{
+    recordId: Scalars['String']
+    type: Scalars['String']
+}>
+
+export type StoriesLinkedToTriplyRecordQuery = {
+    __typename?: 'Query'
+    stories?: {
+        __typename?: 'StoryEntityResponseCollection'
+        data: Array<{
+            __typename?: 'StoryEntity'
+            id?: string | null
+            attributes?: { __typename?: 'Story'; title: string } | null
+        }>
+    } | null
+}
+
+export type StoryTriplyRelationsQueryVariables = Exact<{
+    id: Scalars['ID']
+}>
+
+export type StoryTriplyRelationsQuery = {
+    __typename?: 'Query'
+    story?: {
+        __typename?: 'StoryEntityResponse'
+        data?: {
+            __typename?: 'StoryEntity'
+            id?: string | null
+            attributes?: {
+                __typename?: 'Story'
+                triplyRecords?: {
+                    __typename?: 'TriplyRecordRelationResponseCollection'
+                    data: Array<{
+                        __typename?: 'TriplyRecordEntity'
+                        id?: string | null
+                        attributes?: {
+                            __typename?: 'TriplyRecord'
+                            recordId: string
+                            type: Enum_Triplyrecord_Type
+                        } | null
+                    }>
+                } | null
+            } | null
+        } | null
+    } | null
+}
+
 export type StoriesTotalQueryVariables = Exact<{ [key: string]: never }>
 
 export type StoriesTotalQuery = {
@@ -2151,6 +2198,35 @@ export const StoriesDocument = gql`
     }
     ${StoryFragmentFragmentDoc}
 `
+export const StoriesLinkedToTriplyRecordDocument = gql`
+    query storiesLinkedToTriplyRecord($recordId: String!, $type: String!) {
+        stories(filters: { triplyRecords: { recordId: { eq: $recordId }, type: { eq: $type } } }) {
+            data {
+                id
+                attributes {
+                    title
+                }
+            }
+        }
+    }
+`
+export const StoryTriplyRelationsDocument = gql`
+    query storyTriplyRelations($id: ID!) {
+        story(id: $id) {
+            data {
+                id
+                attributes {
+                    triplyRecords {
+                        data {
+                            ...BaseTriplyRecordFragment
+                        }
+                    }
+                }
+            }
+        }
+    }
+    ${BaseTriplyRecordFragmentFragmentDoc}
+`
 export const StoriesTotalDocument = gql`
     query storiesTotal {
         stories {
@@ -2181,6 +2257,34 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
                         ...wrappedRequestHeaders,
                     }),
                 'stories',
+                'query'
+            )
+        },
+        storiesLinkedToTriplyRecord(
+            variables: StoriesLinkedToTriplyRecordQueryVariables,
+            requestHeaders?: Dom.RequestInit['headers']
+        ): Promise<StoriesLinkedToTriplyRecordQuery> {
+            return withWrapper(
+                wrappedRequestHeaders =>
+                    client.request<StoriesLinkedToTriplyRecordQuery>(StoriesLinkedToTriplyRecordDocument, variables, {
+                        ...requestHeaders,
+                        ...wrappedRequestHeaders,
+                    }),
+                'storiesLinkedToTriplyRecord',
+                'query'
+            )
+        },
+        storyTriplyRelations(
+            variables: StoryTriplyRelationsQueryVariables,
+            requestHeaders?: Dom.RequestInit['headers']
+        ): Promise<StoryTriplyRelationsQuery> {
+            return withWrapper(
+                wrappedRequestHeaders =>
+                    client.request<StoryTriplyRelationsQuery>(StoryTriplyRelationsDocument, variables, {
+                        ...requestHeaders,
+                        ...wrappedRequestHeaders,
+                    }),
+                'storyTriplyRelations',
                 'query'
             )
         },
