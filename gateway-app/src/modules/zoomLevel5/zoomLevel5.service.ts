@@ -1,4 +1,7 @@
 import { Injectable } from '@nestjs/common'
+import { ObjectsService } from '../objects/objects.service'
+import { PeopleService } from '../people/people.service'
+import { PublicationsService, PublicationsZoomLevel5Types } from '../publications/publications.service'
 import { TriplyService } from '../triply/triply.service'
 import { TriplyUtils } from '../triply/triply.utils'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
@@ -16,7 +19,12 @@ interface ZoomLevel5RelationData {
 export class ZoomLevel5Service {
     private relationsEndpoint = '/zoom-5-relations/run?record='
 
-    public constructor(private readonly triplyService: TriplyService) {}
+    public constructor(
+        private readonly objectsService: ObjectsService,
+        private readonly peopleService: PeopleService,
+        private readonly publicationsService: PublicationsService,
+        private readonly triplyService: TriplyService
+    ) {}
 
     public async getRelations(id: string, type: EntityNames) {
         switch (type) {
@@ -33,6 +41,28 @@ export class ZoomLevel5Service {
             // TODO
             case EntityNames.External:
             // TODO
+            default:
+                throw new Error('type not implemented')
+        }
+    }
+
+    public getDetail(id: string, type: EntityNames, publicationType?: PublicationsZoomLevel5Types) {
+        switch (type) {
+            case EntityNames.Objects: {
+                return this.objectsService.getZoomLevel5Data(id)
+            }
+            case EntityNames.People: {
+                return this.peopleService.getZoomLevel5Data(id)
+            }
+            case EntityNames.Publications: {
+                if (!publicationType) {
+                    throw new Error(`publicationType is required`)
+                }
+                return this.publicationsService.getZoomLevel5Data(publicationType, id)
+            }
+            case EntityNames.Archives:
+            case EntityNames.Stories:
+            case EntityNames.External:
             default:
                 throw new Error('type not implemented')
         }

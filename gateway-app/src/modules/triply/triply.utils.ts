@@ -56,4 +56,19 @@ export class TriplyUtils {
                 throw new Error(`type ${type} not implemented`)
         }
     }
+
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    public static combineObjectArray(results: Object[]) {
+        const output: { [x: string]: string } = {}
+        let nullFlag = true
+        for (const result of results) {
+            for (const filledPair of Object.entries(result).filter(e => !!e[1])) {
+                nullFlag = false
+                const [key, value] = filledPair
+                output[key] = value
+            }
+        }
+
+        return nullFlag ? null : output
+    }
 }
