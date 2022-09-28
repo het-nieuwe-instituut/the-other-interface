@@ -1,7 +1,7 @@
 _type: export
 __export_format: 4
-__export_date: 2022-09-28T11:33:31.834Z
-__export_source: insomnia.desktop.app:v2022.5.1
+__export_date: 2022-09-28T12:12:59.721Z
+__export_source: insomnia.desktop.app:v2022.6.0
 resources:
   - _id: req_bb8d9c352e5d4b579d857e8a70e52b13
     parentId: wrk_495bc411648844949d6c2b88c3ac4cb2
@@ -289,7 +289,7 @@ resources:
     _type: request
   - _id: req_0b0e22edd8f04ddeb84f12bd0c67503c
     parentId: fld_2e4d378ece7940d293196c73bcedee62
-    modified: 1664363586306
+    modified: 1664366900827
     created: 1663591957105
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: typeOfPublication"
@@ -892,7 +892,7 @@ resources:
     _type: request
   - _id: req_dabebfa87be3406190a139ce9693fe36
     parentId: fld_203efa38a76d40d7b331f8402a9d20a1
-    modified: 1664363595694
+    modified: 1664366910953
     created: 1663919983383
     url: "{{ _.baseUrl }}/graphql"
     name: publications
@@ -902,7 +902,7 @@ resources:
       mimeType: application/graphql
       text: '{"query":"query {\n\tzoomLevel4(\n\t\tentityName:
         Publications\n\t\tpublicationsFilters: {\n\t\t\tTypeOfPublication:
-        \"boek\"\n\t\t}\n\t\tpage: 1\n\t)
+        \"audio-visueel materiaal\"\n\t\t}\n\t\tpage: 1\n\t)
         {\n\t\trecord\n\t\ttitle\n\t\tfirstImage\n\t\timageLabel\n\t}\n}\n"}'
     parameters: []
     headers:
@@ -1023,6 +1023,87 @@ resources:
     environmentPropertyOrder: null
     metaSortKey: -1658904687127.5
     _type: request_group
+  - _id: req_9657f31c0a304c5697dc43a56d85a5d9
+    parentId: fld_b8d0688c6cd64bce9e0043cb6e8edb7c
+    modified: 1664366198653
+    created: 1664365535999
+    url: "{{ _.baseUrl }}/graphql"
+    name: serial
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n\tzoomLevel5PublicationsSerial(id: \"300319131\")
+        {\n\t\ttypeOfPublication\n\t\ttypeOfPublicationLabel\n\t\ttitle\n\t\tpublisher\n\t\tpublisherLabel\n\t\tyearOfPublication\n\t\tplaceOfPublication\n\t\tplaceOfPublicationLabel\n\t\tsubject\n\t\tsubjectLabel\n\t\tlanguage\n\t\tlanguageLabel\n\t\tcontinuedFrom\n\t\tcontinuedAs\n\t\tremarks\n\t\tavailability\n\t\tshelfmark\n\t\tholding\n\t\tpermanentLink\n\t}\n}\n"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658585948844.1328
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_879a4d9cf40c4fb083387efd3b717e88
+    parentId: fld_b8d0688c6cd64bce9e0043cb6e8edb7c
+    modified: 1664366571980
+    created: 1664365544712
+    url: "{{ _.baseUrl }}/graphql"
+    name: article
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n\tzoomLevel5PublicationsArticle(id: \"300171648\")
+        {\n\t\ttypeOfPublication\n\t\ttypeOfPublicationLabel\n\t\ttitle\n\t\tauthor\n\t\tauthorLabel\n\t\tauthorRole\n\t\tauthorRoleLabel\n\t\tsourceTitle\n\t\tsourceTitleLabel\n\t\tvolume\n\t\tissue\n\t\tyearOfPublication\n\t\tpage\n\t\tpublisher\n\t\tpublisherLabel\n\t\tabstract\n\t\tlanguage\n\t\tlanguageLabel\n\t\tgeographicalKeyword\n\t\tgeographicalKeywordLabel\n\t\tsubject\n\t\tsubjectLabel\n\t\trelatedPerInst\n\t\trelatedPerInstLabel\n\t\tobjectNumber\n\t\tavailability\n\t\tshelfmark\n\t\tpermanentLink\n\t}\n}\n"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658577283967.9414
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_01e319097e834909a6fc829958c246e2
+    parentId: fld_b8d0688c6cd64bce9e0043cb6e8edb7c
+    modified: 1664367163398
+    created: 1664365551090
+    url: "{{ _.baseUrl }}/graphql"
+    name: audiovisual
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n\tzoomLevel5PublicationsAudiovisual(id: \"300197096\")
+        {\n\t\ttypeOfPublication\n\t\ttypeOfPublicationLabel\n\t\ttitle\n\t\tauthor\n\t\tauthorLabel\n\t\tauthorRole\n\t\tauthorRoleLabel\n\t\tpublisher\n\t\tpublisherLabel\n\t\tyearOfPublication\n\t\tplaceOfPublication\n\t\tplaceOfPublicationLabel\n\t\tabstract\n\t\tannotation\n\t\tscope\n\t\tlanguage\n\t\tlanguageLabel\n\t\tmedium\n\t\tgeographicalKeyword\n\t\tgeographicalKeywordLabel\n\t\tsubject\n\t\tsubjectLabel\n\t\trelatedPerInst\n\t\trelatedPerInstLabel\n\t\tpermanentLink\n\t\tobjectNumber\n\t\tavailability\n\t\tshelfmark\n\t}\n}\n"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658572951529.8457
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
   - _id: req_b1eb21c365b946eba8c7d4682a8167c8
     parentId: fld_17de84e682c04137bb01bf07e4e9a9a2
     modified: 1664284786650
@@ -1054,7 +1135,7 @@ resources:
     _type: request
   - _id: req_53c31274e53c47aaa4d38477ec26a421
     parentId: fld_17de84e682c04137bb01bf07e4e9a9a2
-    modified: 1664356168228
+    modified: 1664366195508
     created: 1664284790474
     url: "{{ _.baseUrl }}/graphql"
     name: object
