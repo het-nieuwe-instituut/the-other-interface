@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2022-09-28T09:09:55.108Z
+__export_date: 2022-09-28T09:41:21.560Z
 __export_source: insomnia.desktop.app:v2022.5.1
 resources:
   - _id: req_bb8d9c352e5d4b579d857e8a70e52b13
@@ -863,7 +863,7 @@ resources:
     _type: request
   - _id: req_c3e7433731fb423398598d65a987165e
     parentId: fld_203efa38a76d40d7b331f8402a9d20a1
-    modified: 1663942639583
+    modified: 1664358051404
     created: 1663919978949
     url: "{{ _.baseUrl }}/graphql"
     name: people
@@ -873,7 +873,7 @@ resources:
       mimeType: application/graphql
       text: '{"query":"query {\n\tzoomLevel4(\n\t\tentityName:
         People\n\t\tpeopleFilters: {\n\n\t\t\tPlace:
-        \"kjdfsbnkjdsnbf\"\n\t\t}\n\t\tpage: 1\n\t)
+        \"Amsterdam\"\n\t\t}\n\t\tpage: 1\n\t)
         {\n\t\trecord\n\t\ttitle\n\t\tfirstImage\n\t\timageLabel\n\t}\n}\n"}'
     parameters: []
     headers:
@@ -1035,6 +1035,33 @@ resources:
         id: pair_4888895150804e04b42b02ba0fd8527d
     authentication: {}
     metaSortKey: -1658707257110.8125
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_8652b3d6ccf24e5dbc5554479c0d438a
+    parentId: fld_17de84e682c04137bb01bf07e4e9a9a2
+    modified: 1664358060542
+    created: 1664357561664
+    url: "{{ _.baseUrl }}/graphql"
+    name: person
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n\tzoomLevel5Person(id: \"10991\")
+        {\n\t\tname\n\t\tnameType\n\t\tnameVariation\n\t\tbirthDate\n\t\tbirthPlace\n\t\tbirthPlaceLabel\n\t\tdeathDate\n\t\tdeathPlace\n\t\tdeathPlaceLabel\n\t\tplace\n\t\tplaceLabel\n\t\tstartDate\n\t\tendDate\n\t\tnationality\n\t\tnationalityLabel\n\t\tinstitution\n\t\tinstitutionLabel\n\t\tprofession\n\t\tprofessionLabel\n\t\tgender\n\t\tassociation\n\t\tassociationLabel\n\t\trelatedItem\n\t\trelatedItemLabel\n\t\tdescription\n\t\tpermanentLink\n\t}\n}\n"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658637938101.2812
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
