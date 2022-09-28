@@ -244,7 +244,7 @@ export class ObjectsService {
             ]
         )
 
-        return this.parseObjectData(result.data)
+        return TriplyUtils.combineObjectArray(result.data)
     }
 
     public validateFilterInput(input: string): ObjectsZoomLevel3Ids {
@@ -254,19 +254,5 @@ export class ObjectsService {
         }
 
         throw new Error(`[Objects] Invalid filter input "${input}"`)
-    }
-
-    private parseObjectData(results: ObjectsDetailZoomLevel5Data[]) {
-        const output: { [x: string]: string } = {}
-        let nullFlag = true
-        for (const result of results) {
-            for (const filledPair of Object.entries(result).filter(e => !!e[1])) {
-                nullFlag = false
-                const [key, value] = filledPair
-                output[key] = value
-            }
-        }
-
-        return nullFlag ? null : output
     }
 }
