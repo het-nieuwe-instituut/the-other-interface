@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { TriplyService } from '../triply/triply.service'
+import { TriplyUtils } from '../triply/triply.utils'
+import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { PublicationsZoomLevel4FiltersArgs } from './publications.type'
 
 export enum PublicationsZoomLevel3Ids {
@@ -29,6 +31,51 @@ interface PublicationsFilterOptionsData {
 interface PublicationsZoomLevel4Data {
     record: string
     title: string
+}
+
+interface PublicationsBooksDetailZoomLevel5Data {
+    typeOfPublication?: string
+    typeOfPublicationLabel?: string
+    title?: string
+    author?: string
+    authorLabel?: string
+    authorRole?: string
+    authorRoleLabel?: string
+    publisher?: string
+    publisherLabel?: string
+    yearOfPublication?: string
+    placeOfPublication?: string
+    placeOfPublicationLabel?: string
+    isbn?: string
+    description?: string
+    annotation?: string
+    codeOfArchive?: string
+    codeOfArchiveLabel?: string
+    edition?: string
+    illustration?: string
+    numberOfPages?: string
+    language?: string
+    languageLabel?: string
+    seriesLabel?: string
+    number?: string
+    geographicalKeyword?: string
+    geographicalKeywordLabel?: string
+    subject?: string
+    subjectLabel?: string
+    relatedPerInst?: string
+    relatedPerInstLabel?: string
+    objectNumber?: string
+    availability?: string
+    shelfmark?: string
+    permanentLink?: string
+}
+type PublicationsZoomLevel5DataTypes = PublicationsBooksDetailZoomLevel5Data
+
+export enum PublicationsZoomLevel5Types {
+    serial = 'serial',
+    book = 'book',
+    article = 'article',
+    audiovisual = 'audiovisual',
 }
 
 @Injectable()
@@ -96,6 +143,13 @@ export class PublicationsService {
 
     private readonly ZoomLevel4Endpoint = 'zoom-4-books/run'
 
+    private readonly ZoomLevel5Endpoint = {
+        [PublicationsZoomLevel5Types.article]: 'zoom-5-books-article/run',
+        [PublicationsZoomLevel5Types.audiovisual]: 'zoom-5-books-audiovisual/run',
+        [PublicationsZoomLevel5Types.book]: 'zoom-5-books-book/run',
+        [PublicationsZoomLevel5Types.serial]: 'zoom-5-books-serial/run',
+    }
+
     public constructor(private triplyService: TriplyService) {}
 
     public async getZoomLevel2Data() {
@@ -158,6 +212,36 @@ export class PublicationsService {
                 imageLabel: null,
             }
         })
+    }
+
+    public async getZoomLevel5Data(publicationType: PublicationsZoomLevel5Types, objectId: string) {
+        const uri = TriplyUtils.getUriForTypeAndId(EntityNames.Publications, objectId)
+        const result = await this.triplyService.queryTriplyData<PublicationsZoomLevel5DataTypes>(
+            this.ZoomLevel5Endpoint[publicationType],
+            undefined,
+            [
+                {
+                    key: 'record',
+                    value: uri,
+                },
+            ]
+        )
+
+        return this.parseObjectData(result.data)
+    }
+
+    private parseObjectData(results: PublicationsZoomLevel5DataTypes[]) {
+        const output: { [x: string]: string } = {}
+        let nullFlag = true
+        for (const result of results) {
+            for (const filledPair of Object.entries(result).filter(e => !!e[1])) {
+                nullFlag = false
+                const [key, value] = filledPair
+                output[key] = value
+            }
+        }
+
+        return nullFlag ? null : output
     }
 
     public validateFilterInput(input: string): PublicationsZoomLevel3Ids {
