@@ -4,6 +4,8 @@ import { Provider } from 'react-redux'
 import defaultStore from 'src/features/shared/configs/store'
 import { ApolloProvider } from '@apollo/client'
 import { mockedClient } from '@/features/graphql/config/mockedApollo'
+import { ThemeProvider } from '@chakra-ui/react'
+import { theme } from '../styles/theme/theme'
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
     store?: typeof defaultStore
@@ -15,9 +17,11 @@ export function renderWithProviders(
 ) {
     function Wrapper({ children }: PropsWithChildren): JSX.Element {
         return (
-            <ApolloProvider client={mockedClient}>
-                <Provider store={store}>{children}</Provider>
-            </ApolloProvider>
+            <ThemeProvider theme={theme}>
+                <ApolloProvider client={mockedClient}>
+                    <Provider store={store}>{children}</Provider>
+                </ApolloProvider>
+            </ThemeProvider>
         )
     }
 
