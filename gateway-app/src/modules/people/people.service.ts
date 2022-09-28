@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { TriplyService } from '../triply/triply.service'
+import { TriplyUtils } from '../triply/triply.utils'
+import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { PeopleType, PeopleZoomLevel4FiltersArgs } from './people.type'
 
 export enum PeopleZoomLevel3Ids {
@@ -38,6 +40,35 @@ export interface PeopleData {
 interface PeopleZoomLevel4Data {
     record: string
     name: string
+}
+
+interface PeopleDetailZoomLevel5Data {
+    name?: string
+    nameType?: string
+    nameVariation?: string
+    birthDate?: string
+    birthPlace?: string
+    birthPlaceLabel?: string
+    deathDate?: string
+    deathPlace?: string
+    deathPlaceLabel?: string
+    place?: string
+    placeLabel?: string
+    startDate?: string
+    endDate?: string
+    nationality?: string
+    nationalityLabel?: string
+    institution?: string
+    institutionLabel?: string
+    profession?: string
+    professionLabel?: string
+    gender?: string
+    association?: string
+    associationLabel?: string
+    relatedItem?: string
+    relatedItemLabel?: string
+    description?: string
+    permanentLink?: string
 }
 
 @Injectable()
@@ -117,6 +148,8 @@ export class PeopleService {
 
     private readonly ZoomLevel4Endpoint = 'zoom-4-people/run'
 
+    private readonly ZoomLevel5Endpoint = 'zoom-5-people/run'
+
     public constructor(private triplyService: TriplyService) {}
 
     public async getZoomLevel2Data() {
@@ -179,6 +212,36 @@ export class PeopleService {
                 imageLabel: null,
             }
         })
+    }
+
+    public async getZoomLevel5Data(objectId: string) {
+        const uri = TriplyUtils.getUriForTypeAndId(EntityNames.People, objectId)
+        const result = await this.triplyService.queryTriplyData<PeopleDetailZoomLevel5Data>(
+            this.ZoomLevel5Endpoint,
+            undefined,
+            [
+                {
+                    key: 'record',
+                    value: uri,
+                },
+            ]
+        )
+
+        return this.parsePersonData(result.data)
+    }
+
+    private parsePersonData(results: PeopleDetailZoomLevel5Data[]) {
+        const output: { [x: string]: string } = {}
+        let nullFlag = true
+        for (const result of results) {
+            for (const filledPair of Object.entries(result).filter(e => !!e[1])) {
+                nullFlag = false
+                const [key, value] = filledPair
+                output[key] = value
+            }
+        }
+
+        return nullFlag ? null : output
     }
 
     public validateFilterInput(input: string): PeopleZoomLevel3Ids {
