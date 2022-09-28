@@ -227,21 +227,7 @@ export class PeopleService {
             ]
         )
 
-        return this.parsePersonData(result.data)
-    }
-
-    private parsePersonData(results: PeopleDetailZoomLevel5Data[]) {
-        const output: { [x: string]: string } = {}
-        let nullFlag = true
-        for (const result of results) {
-            for (const filledPair of Object.entries(result).filter(e => !!e[1])) {
-                nullFlag = false
-                const [key, value] = filledPair
-                output[key] = value
-            }
-        }
-
-        return nullFlag ? null : output
+        return TriplyUtils.combineObjectArray(result.data)
     }
 
     public validateFilterInput(input: string): PeopleZoomLevel3Ids {
