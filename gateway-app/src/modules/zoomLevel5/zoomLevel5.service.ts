@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { ObjectsService } from '../objects/objects.service'
+import { PeopleService } from '../people/people.service'
+import { PublicationsService, PublicationsZoomLevel5Types } from '../publications/publications.service'
 import { TriplyService } from '../triply/triply.service'
 import { TriplyUtils } from '../triply/triply.utils'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
@@ -19,6 +21,8 @@ export class ZoomLevel5Service {
 
     public constructor(
         private readonly objectsService: ObjectsService,
+        private readonly peopleService: PeopleService,
+        private readonly publicationsService: PublicationsService,
         private readonly triplyService: TriplyService
     ) {}
 
@@ -42,14 +46,21 @@ export class ZoomLevel5Service {
         }
     }
 
-    public getDetail(id: string, type: EntityNames) {
+    public getDetail(id: string, type: EntityNames, publicationType?: PublicationsZoomLevel5Types) {
         switch (type) {
             case EntityNames.Objects: {
                 return this.objectsService.getZoomLevel5Data(id)
             }
+            case EntityNames.People: {
+                return this.peopleService.getZoomLevel5Data(id)
+            }
+            case EntityNames.Publications: {
+                if (!publicationType) {
+                    throw new Error(`publicationType is required`)
+                }
+                return this.publicationsService.getZoomLevel5Data(publicationType, id)
+            }
             case EntityNames.Archives:
-            case EntityNames.People:
-            case EntityNames.Publications:
             case EntityNames.Stories:
             case EntityNames.External:
             default:
