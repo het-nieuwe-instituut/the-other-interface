@@ -69,7 +69,96 @@ interface PublicationsBooksDetailZoomLevel5Data {
     shelfmark?: string
     permanentLink?: string
 }
-type PublicationsZoomLevel5DataTypes = PublicationsBooksDetailZoomLevel5Data
+
+interface PublicationsSerialDetailZoomLevel5Data {
+    typeOfPublication?: string
+    typeOfPublicationLabel?: string
+    title?: string
+    publisher?: string
+    publisherLabel?: string
+    yearOfPublication?: string
+    placeOfPublication?: string
+    placeOfPublicationLabel?: string
+    subject?: string
+    subjectLabel?: string
+    language?: string
+    languageLabel?: string
+    continuedFrom?: string
+    continuedAs?: string
+    remarks?: string
+    availability?: string
+    shelfmark?: string
+    holding?: string
+    permanentLink?: string
+}
+
+interface PublicationArticleDetailZoomLevel5Data {
+    typeOfPublication?: string
+    typeOfPublicationLabel?: string
+    title?: string
+    author?: string
+    authorLabel?: string
+    authorRole?: string
+    authorRoleLabel?: string
+    sourceTitle?: string
+    sourceTitleLabel?: string
+    volume?: string
+    issue?: string
+    yearOfPublication?: string
+    page?: string
+    publisher?: string
+    publisherLabel?: string
+    abstract?: string
+    language?: string
+    languageLabel?: string
+    geographicalKeyword?: string
+    geographicalKeywordLabel?: string
+    subject?: string
+    subjectLabel?: string
+    relatedPerInst?: string
+    relatedPerInstLabel?: string
+    objectNumber?: string
+    availability?: string
+    shelfmark?: string
+    permanentLink?: string
+}
+
+interface PublicationsAudioVisualDetailZoomLevel5Data {
+    typeOfPublication?: string
+    typeOfPublicationLabel?: string
+    title?: string
+    author?: string
+    authorLabel?: string
+    authorRole?: string
+    authorRoleLabel?: string
+    publisher?: string
+    publisherLabel?: string
+    yearOfPublication?: string
+    placeOfPublication?: string
+    placeOfPublicationLabel?: string
+    abstract?: string
+    annotation?: string
+    scope?: string
+    language?: string
+    languageLabel?: string
+    medium?: string
+    geographicalKeyword?: string
+    geographicalKeywordLabel?: string
+    subject?: string
+    subjectLabel?: string
+    relatedPerInst?: string
+    relatedPerInstLabel?: string
+    permanentLink?: string
+    objectNumber?: string
+    availability?: string
+    shelfmark?: string
+}
+
+type PublicationsZoomLevel5DataTypes =
+    | PublicationsBooksDetailZoomLevel5Data
+    | PublicationsSerialDetailZoomLevel5Data
+    | PublicationArticleDetailZoomLevel5Data
+    | PublicationsAudioVisualDetailZoomLevel5Data
 
 export enum PublicationsZoomLevel5Types {
     serial = 'serial',
