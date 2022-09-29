@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common'
+import { ArchivesService, ArchivesZoomLevel5Types } from '../archives/archives.service'
 import { ObjectsService } from '../objects/objects.service'
 import { PeopleService } from '../people/people.service'
 import { PublicationsService, PublicationsZoomLevel5Types } from '../publications/publications.service'
@@ -23,6 +24,7 @@ export class ZoomLevel5Service {
         private readonly objectsService: ObjectsService,
         private readonly peopleService: PeopleService,
         private readonly publicationsService: PublicationsService,
+        private readonly archivesService: ArchivesService,
         private readonly triplyService: TriplyService
     ) {}
 
@@ -46,7 +48,11 @@ export class ZoomLevel5Service {
         }
     }
 
-    public getDetail(id: string, type: EntityNames, publicationType?: PublicationsZoomLevel5Types) {
+    public getDetail(
+        id: string,
+        type: EntityNames,
+        metadata?: { publicationType?: PublicationsZoomLevel5Types; archivesType?: ArchivesZoomLevel5Types }
+    ) {
         switch (type) {
             case EntityNames.Objects: {
                 return this.objectsService.getZoomLevel5Data(id)
@@ -55,12 +61,17 @@ export class ZoomLevel5Service {
                 return this.peopleService.getZoomLevel5Data(id)
             }
             case EntityNames.Publications: {
-                if (!publicationType) {
+                if (!metadata?.publicationType) {
                     throw new Error(`publicationType is required`)
                 }
-                return this.publicationsService.getZoomLevel5Data(publicationType, id)
+                return this.publicationsService.getZoomLevel5Data(metadata.publicationType, id)
             }
-            case EntityNames.Archives:
+            case EntityNames.Archives: {
+                if (!metadata?.archivesType) {
+                    throw new Error(`publicationType is required`)
+                }
+                return this.archivesService.getZoomLevel5Data(metadata.archivesType, id)
+            }
             case EntityNames.Stories:
             case EntityNames.External:
             default:
