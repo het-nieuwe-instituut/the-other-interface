@@ -249,3 +249,69 @@ export class PaginationArg {
     @Field({ nullable: true })
     public start?: number
 }
+
+@ArgsType()
+export class DateFilterInput {
+    @Field({ nullable: true })
+    public and?: Date[]
+
+    @Field({ nullable: true })
+    public between?: Date[]
+
+    @Field({ nullable: true })
+    public contains?: Date
+
+    @Field({ nullable: true })
+    public containsi?: Date
+
+    @Field({ nullable: true })
+    public endsWith?: Date
+
+    @Field({ nullable: true })
+    public eq?: Date
+
+    @Field({ nullable: true })
+    public eqi?: Date
+
+    @Field({ nullable: true })
+    public gt?: Date
+
+    @Field({ nullable: true })
+    public gte?: Date
+
+    @Field({ nullable: true })
+    public in?: Date[]
+
+    @Field({ nullable: true })
+    public lt?: Date
+
+    @Field({ nullable: true })
+    public lte?: Date
+
+    @Field({ nullable: true })
+    public ne?: Date
+
+    @Field(() => DateFilterInput, { nullable: true })
+    public not?: DateFilterInput
+
+    @Field({ nullable: true })
+    public notContains?: Date
+
+    @Field({ nullable: true })
+    public notContainsi?: Date
+
+    @Field({ nullable: true })
+    public notIn?: Date[]
+
+    @Field({ nullable: true })
+    public notNull?: boolean
+
+    @Field({ nullable: true })
+    public null?: boolean
+
+    @Field({ nullable: true })
+    public or?: Date[]
+
+    @Field({ nullable: true })
+    public startsWith?: Date
+}
