@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { TriplyService } from '../triply/triply.service'
+import { TriplyUtils } from '../triply/triply.utils'
+import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { ArchivesZoomLevel4FiltersArgs } from './archives.type'
 
 export enum ArchivesZoomLevel3Ids {
@@ -29,6 +31,57 @@ interface ArchivesZoomLevel4Data {
     firstImage: string | null
     imageLabel: string | null
 }
+
+export enum ArchivesZoomLevel5Types {
+    fonds = 'fonds',
+    other = 'other',
+}
+
+export interface ArchivesFondsDetailZoomLevel5Data {
+    objectNumber?: string
+    title?: string
+    startDate?: string
+    endDate?: string
+    dateLabel?: string
+    dimensionFree?: string
+    mediaReference?: string
+    mediaReferenceLabel?: string
+    existenceOfOriginals?: string
+    scopeContent?: string
+    relatedMaterial?: string
+    rights?: string
+    rightsLabel?: string
+    permanentLink?: string
+}
+
+export interface ArchivesOtherDetailZoomLevel5Data {
+    descriptionLevel?: string
+    objectNumber?: string
+    recordTitle?: string
+    startDate?: string
+    endDate?: string
+    productionDate?: string
+    extent?: string
+    repository?: string
+    repositoryLabel?: string
+    creator?: string
+    creatorLabel?: string
+    creatorHistory?: string
+    custodialHistory?: string
+    systemOfArrangement?: string
+    contentScope?: string
+    conditionsGoverningAccess?: string
+    relatedMaterial?: string
+    appendices?: string
+    source?: string
+    partReference?: string
+    partTitle?: string
+    right?: string
+    rightLabel?: string
+    permanentLink?: string
+}
+
+type ArchivesZoomLeve5DataType = ArchivesOtherDetailZoomLevel5Data | ArchivesFondsDetailZoomLevel5Data
 
 @Injectable()
 export class ArchivesService {
@@ -72,6 +125,11 @@ export class ArchivesService {
     ]
 
     private readonly ZoomLevel4Endpoint = 'zoom-4-archives/run'
+
+    private readonly ZoomLevel5Endpoint = {
+        [ArchivesZoomLevel5Types.fonds]: 'zoom-5-archives/run',
+        [ArchivesZoomLevel5Types.other]: 'zoom-5-archives-fonds/run',
+    }
 
     public constructor(private triplyService: TriplyService) {}
 
@@ -135,6 +193,23 @@ export class ArchivesService {
                 imageLabel: res.imageLabel,
             }
         })
+    }
+
+    public async getZoomLevel5Data(type: ArchivesZoomLevel5Types, objectId: string) {
+        const uri = TriplyUtils.getUriForTypeAndId(EntityNames.Archives, objectId)
+
+        const result = await this.triplyService.queryTriplyData<ArchivesZoomLeve5DataType>(
+            this.ZoomLevel5Endpoint[type],
+            undefined,
+            [
+                {
+                    key: 'record',
+                    value: uri,
+                },
+            ]
+        )
+
+        return TriplyUtils.combineObjectArray(result.data)
     }
 
     public validateFilterInput(input: string): ArchivesZoomLevel3Ids {

@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2022-09-28T12:12:59.721Z
+__export_date: 2022-09-28T13:47:26.044Z
 __export_source: insomnia.desktop.app:v2022.6.0
 resources:
   - _id: req_bb8d9c352e5d4b579d857e8a70e52b13
@@ -739,7 +739,7 @@ resources:
     _type: request_group
   - _id: req_0746bb9aad874c6fb1b5aaf8d8182b9f
     parentId: fld_9f0600f89a4744d39279da7ca4c3ebf5
-    modified: 1664267875134
+    modified: 1664370478658
     created: 1663572238171
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: descriptionLevel"
@@ -767,7 +767,7 @@ resources:
     _type: request
   - _id: req_333a969dc0dc447f90d76bfcee8a1c80
     parentId: fld_9f0600f89a4744d39279da7ca4c3ebf5
-    modified: 1663942302341
+    modified: 1664370477681
     created: 1663572247866
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: relatedNames"
@@ -976,9 +976,83 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
+  - _id: req_51341427ac83471e85eb26d9ccbe524f
+    parentId: fld_dc8e1d13132e4e3da71f9f90b1a55a54
+    modified: 1664372820466
+    created: 1664371991673
+    url: "{{ _.baseUrl }}/graphql"
+    name: Fonds
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n\tzoomLevel5ArchivesFonds(id: \"110000212\")
+        {\n\t\tobjectNumber\n\t\ttitle\n\t\tstartDate\n\t\tendDate\n\t\tdateLabel\n\t\tdimensionFree\n\t\tmediaReference\n\t\tmediaReferenceLabel\n\t\texistenceOfOriginals\n\t\tscopeContent\n\t\trelatedMaterial\n\t\trights\n\t\trightsLabel\n\t\tpermanentLink\n\t}\n}\n"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658594613720.3242
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_dc8e1d13132e4e3da71f9f90b1a55a54
+    parentId: fld_17de84e682c04137bb01bf07e4e9a9a2
+    modified: 1664371978874
+    created: 1664371978874
+    name: Archives
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1664371978874
+    _type: request_group
+  - _id: fld_17de84e682c04137bb01bf07e4e9a9a2
+    parentId: wrk_495bc411648844949d6c2b88c3ac4cb2
+    modified: 1663928025620
+    created: 1663927999495
+    name: Zoom level 5
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1658904687127.5
+    _type: request_group
+  - _id: req_1a1a5f2262154aedb6464b8484301908
+    parentId: fld_dc8e1d13132e4e3da71f9f90b1a55a54
+    modified: 1664372787115
+    created: 1664372356024
+    url: "{{ _.baseUrl }}/graphql"
+    name: other
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n\tzoomLevel5ArchivesOther(id: \"110746983\")
+        {\n\t\tdescriptionLevel\n\t\tobjectNumber\n\t\trecordTitle\n\t\tstartDate\n\t\tendDate\n\t\tproductionDate\n\t\textent\n\t\trepository\n\t\trepositoryLabel\n\t\tcreator\n\t\tcreatorLabel\n\t\tcreatorHistory\n\t\tcustodialHistory\n\t\tsystemOfArrangement\n\t\tcontentScope\n\t\tconditionsGoverningAccess\n\t\trelatedMaterial\n\t\tappendices\n\t\tsource\n\t\tpartReference\n\t\tpartTitle\n\t\tright\n\t\trightLabel\n\t\tpermanentLink\n\t}\n}\n"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658590281282.2285
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
   - _id: req_5f32722834f44d93813d392ed503c382
     parentId: fld_b8d0688c6cd64bce9e0043cb6e8edb7c
-    modified: 1664364435768
+    modified: 1664371982964
     created: 1664359416181
     url: "{{ _.baseUrl }}/graphql"
     name: books
@@ -1012,16 +1086,6 @@ resources:
     environment: {}
     environmentPropertyOrder: null
     metaSortKey: -1664359410099
-    _type: request_group
-  - _id: fld_17de84e682c04137bb01bf07e4e9a9a2
-    parentId: wrk_495bc411648844949d6c2b88c3ac4cb2
-    modified: 1663928025620
-    created: 1663927999495
-    name: Zoom level 5
-    description: ""
-    environment: {}
-    environmentPropertyOrder: null
-    metaSortKey: -1658904687127.5
     _type: request_group
   - _id: req_9657f31c0a304c5697dc43a56d85a5d9
     parentId: fld_b8d0688c6cd64bce9e0043cb6e8edb7c
