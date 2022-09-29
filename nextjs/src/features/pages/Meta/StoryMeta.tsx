@@ -1,4 +1,4 @@
-import { ButtonsModule } from '@/features/modules/components/ButtonsModule/ButtonsModule'
+import { ButtonsGrid } from '@/features/shared/components/ButtonsGrid/ButtonsGrid'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { formatDate } from '@/features/shared/utils/dates'
 import { keyExtractor } from '@/features/shared/utils/lists'
@@ -9,6 +9,7 @@ import {
     Author,
     ComponentCoreTimeframe,
     EnumComponentcorepublicationdateDisplaytype,
+    EnumComponentmodulesbuttonsmoduleButtonstyle,
     StoryBySlugQuery,
 } from 'src/generated/graphql'
 
@@ -87,9 +88,13 @@ export const StoryMeta: React.FC<Props> = ({ story }) => {
                 </Box>
             )}
             {story.attributes?.storyLinks && (
-                <Box paddingLeft={0}>
-                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                    <ButtonsModule component={story.attributes.storyLinks as any}></ButtonsModule>
+                <Box>
+                    <ButtonsGrid
+                        flexDirection="column"
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        buttons={story.attributes.storyLinks.buttons ?? ([] as any)}
+                        buttonStyle={EnumComponentmodulesbuttonsmoduleButtonstyle.Default}
+                    ></ButtonsGrid>
                 </Box>
             )}
         </Box>
