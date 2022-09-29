@@ -1,0 +1,5 @@
+fragment componentCoreModuleLayouts on ComponentCoreModuleLayouts {
+    id
+    spacingTop
+    spacingBottom
+}

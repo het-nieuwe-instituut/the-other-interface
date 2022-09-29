@@ -1,4 +1,4 @@
-import { Author, AuthorEntity, AuthorEntityResponse, AuthorEntityResponseCollection, AuthorFiltersInput, AuthorInput, BooleanFilterInput, ComponentCoreButton, ComponentCoreButtonFiltersInput, ComponentCoreCarouselItem, ComponentCoreCarouselItemFiltersInput, ComponentCorePageHeader, ComponentCorePublicationDate, ComponentCorePublicationDateFiltersInput, ComponentCorePublicationDateInput, ComponentCoreTableBody, ComponentCoreTableBodyFiltersInput, ComponentCoreTableBodyInput, ComponentCoreTableBodyItem, ComponentCoreTableBodyItemFiltersInput, ComponentCoreTableBodyItemInput, ComponentCoreTableHead, ComponentCoreTableHeadFiltersInput, ComponentCoreTableHeadInput, ComponentCoreTableHeadItem, ComponentCoreTableHeadItemFiltersInput, ComponentCoreTableHeadItemInput, ComponentCoreTimeframe, ComponentCoreTimeframeFiltersInput, ComponentCoreTimeframeInput, ComponentModulesButtonsModule, ComponentModulesCarousel, ComponentModulesImage, ComponentModulesImageCarousel, ComponentModulesPullquote, ComponentModulesSubtitle, ComponentModulesTableModule, ComponentModulesTextModule, ComponentModulesTitleModule, ComponentTriplyPeople, ComponentTriplyPeopleFiltersInput, ComponentTriplyPeopleInput, DateFilterInput, DateTimeFilterInput, Error, FileInfoInput, FloatFilterInput, Homepage, HomepageEntity, HomepageEntityResponse, HomepageInput, HomepageRelationResponseCollection, I18NLocale, I18NLocaleEntity, I18NLocaleEntityResponse, I18NLocaleEntityResponseCollection, I18NLocaleFiltersInput, IdFilterInput, IntFilterInput, JsonFilterInput, Landingpage, LandingpageEntity, LandingpageEntityResponse, LandingpageEntityResponseCollection, LandingpageFiltersInput, LandingpageInput, LandingpageRelationResponseCollection, Location, LocationEntity, LocationEntityResponse, LocationEntityResponseCollection, LocationFiltersInput, LocationInput, LocationRelationResponseCollection, LongFilterInput, Menupage, MenupageEntity, MenupageEntityResponse, MenupageEntityResponseCollection, MenupageFiltersInput, MenupageInput, MenupageRelationResponseCollection, Mutation, Pagination, PaginationArg, Query, ResponseCollectionMeta, Story, StoryEntity, StoryEntityResponse, StoryEntityResponseCollection, StoryFiltersInput, StoryInput, StoryRelationResponseCollection, StringFilterInput, Table, TableEntity, TableEntityResponse, TableEntityResponseCollection, TableFiltersInput, TableInput, UploadFile, UploadFileEntity, UploadFileEntityResponse, UploadFileEntityResponseCollection, UploadFileFiltersInput, UploadFileInput, UploadFileRelationResponseCollection, UploadFolder, UploadFolderEntity, UploadFolderEntityResponse, UploadFolderEntityResponseCollection, UploadFolderFiltersInput, UploadFolderInput, UploadFolderRelationResponseCollection, UsersPermissionsCreateRolePayload, UsersPermissionsDeleteRolePayload, UsersPermissionsLoginInput, UsersPermissionsLoginPayload, UsersPermissionsMe, UsersPermissionsMeRole, UsersPermissionsPasswordPayload, UsersPermissionsPermission, UsersPermissionsPermissionEntity, UsersPermissionsPermissionFiltersInput, UsersPermissionsPermissionRelationResponseCollection, UsersPermissionsRegisterInput, UsersPermissionsRole, UsersPermissionsRoleEntity, UsersPermissionsRoleEntityResponse, UsersPermissionsRoleEntityResponseCollection, UsersPermissionsRoleFiltersInput, UsersPermissionsRoleInput, UsersPermissionsUpdateRolePayload, UsersPermissionsUser, UsersPermissionsUserEntity, UsersPermissionsUserEntityResponse, UsersPermissionsUserEntityResponseCollection, UsersPermissionsUserFiltersInput, UsersPermissionsUserInput, UsersPermissionsUserRelationResponseCollection, EnumComponentcorecarouselitemType, EnumComponentcorepublicationdateDisplaytype, EnumComponentmodulesbuttonsmoduleButtonstyle, EnumComponentmodulescarouselType, EnumComponentmodulestablemoduleTablemodulespacingbottom, EnumComponentmodulestablemoduleTablemodulespacingtop, EnumComponentmodulestextmoduleTextmodulespacingbottom, EnumComponentmodulestextmoduleTextmodulespacingtop, PublicationState } from '../generated/graphql';
+import { Author, AuthorEntity, AuthorEntityResponse, AuthorEntityResponseCollection, AuthorFiltersInput, AuthorInput, BooleanFilterInput, ComponentCoreButton, ComponentCoreButtonFiltersInput, ComponentCoreCarouselItem, ComponentCoreCarouselItemFiltersInput, ComponentCoreModuleLayouts, ComponentCorePageHeader, ComponentCorePublicationDate, ComponentCorePublicationDateFiltersInput, ComponentCorePublicationDateInput, ComponentCoreTableBody, ComponentCoreTableBodyFiltersInput, ComponentCoreTableBodyInput, ComponentCoreTableBodyItem, ComponentCoreTableBodyItemFiltersInput, ComponentCoreTableBodyItemInput, ComponentCoreTableHead, ComponentCoreTableHeadFiltersInput, ComponentCoreTableHeadInput, ComponentCoreTableHeadItem, ComponentCoreTableHeadItemFiltersInput, ComponentCoreTableHeadItemInput, ComponentCoreTimeframe, ComponentCoreTimeframeFiltersInput, ComponentCoreTimeframeInput, ComponentModulesButtonsModule, ComponentModulesCarousel, ComponentModulesImage, ComponentModulesImageCarousel, ComponentModulesPullquote, ComponentModulesSubtitle, ComponentModulesTableModule, ComponentModulesTextModule, ComponentModulesTitleModule, ComponentTriplyPeople, ComponentTriplyPeopleFiltersInput, ComponentTriplyPeopleInput, DateFilterInput, DateTimeFilterInput, Error, FileInfoInput, FloatFilterInput, Homepage, HomepageEntity, HomepageEntityResponse, HomepageInput, HomepageRelationResponseCollection, I18NLocale, I18NLocaleEntity, I18NLocaleEntityResponse, I18NLocaleEntityResponseCollection, I18NLocaleFiltersInput, IdFilterInput, IntFilterInput, JsonFilterInput, Landingpage, LandingpageEntity, LandingpageEntityResponse, LandingpageEntityResponseCollection, LandingpageFiltersInput, LandingpageInput, LandingpageRelationResponseCollection, Location, LocationEntity, LocationEntityResponse, LocationEntityResponseCollection, LocationFiltersInput, LocationInput, LocationRelationResponseCollection, LongFilterInput, Menupage, MenupageEntity, MenupageEntityResponse, MenupageEntityResponseCollection, MenupageFiltersInput, MenupageInput, MenupageRelationResponseCollection, Mutation, Pagination, PaginationArg, Query, ResponseCollectionMeta, Story, StoryEntity, StoryEntityResponse, StoryEntityResponseCollection, StoryFiltersInput, StoryInput, StoryRelationResponseCollection, StringFilterInput, Table, TableEntity, TableEntityResponse, TableEntityResponseCollection, TableFiltersInput, TableInput, UploadFile, UploadFileEntity, UploadFileEntityResponse, UploadFileEntityResponseCollection, UploadFileFiltersInput, UploadFileInput, UploadFileRelationResponseCollection, UploadFolder, UploadFolderEntity, UploadFolderEntityResponse, UploadFolderEntityResponseCollection, UploadFolderFiltersInput, UploadFolderInput, UploadFolderRelationResponseCollection, UsersPermissionsCreateRolePayload, UsersPermissionsDeleteRolePayload, UsersPermissionsLoginInput, UsersPermissionsLoginPayload, UsersPermissionsMe, UsersPermissionsMeRole, UsersPermissionsPasswordPayload, UsersPermissionsPermission, UsersPermissionsPermissionEntity, UsersPermissionsPermissionFiltersInput, UsersPermissionsPermissionRelationResponseCollection, UsersPermissionsRegisterInput, UsersPermissionsRole, UsersPermissionsRoleEntity, UsersPermissionsRoleEntityResponse, UsersPermissionsRoleEntityResponseCollection, UsersPermissionsRoleFiltersInput, UsersPermissionsRoleInput, UsersPermissionsUpdateRolePayload, UsersPermissionsUser, UsersPermissionsUserEntity, UsersPermissionsUserEntityResponse, UsersPermissionsUserEntityResponseCollection, UsersPermissionsUserFiltersInput, UsersPermissionsUserInput, UsersPermissionsUserRelationResponseCollection, EnumComponentcorecarouselitemType, EnumComponentcoremodulelayoutsSpacingbottom, EnumComponentcoremodulelayoutsSpacingtop, EnumComponentcorepublicationdateDisplaytype, EnumComponentmodulesbuttonsmoduleButtonstyle, EnumComponentmodulescarouselType, PublicationState } from '../generated/graphql';
 
 export const anAuthor = (overrides?: Partial<Author>, _relationshipsToOmit: Array<string> = []): Author => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'Author']);
@@ -133,6 +133,15 @@ export const aComponentCoreCarouselItemFiltersInput = (overrides?: Partial<Compo
         or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [relationshipsToOmit.includes('ComponentCoreCarouselItemFiltersInput') ? {} as ComponentCoreCarouselItemFiltersInput : aComponentCoreCarouselItemFiltersInput({}, relationshipsToOmit)],
         type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : relationshipsToOmit.includes('StringFilterInput') ? {} as StringFilterInput : aStringFilterInput({}, relationshipsToOmit),
         uri_id: overrides && overrides.hasOwnProperty('uri_id') ? overrides.uri_id! : relationshipsToOmit.includes('StringFilterInput') ? {} as StringFilterInput : aStringFilterInput({}, relationshipsToOmit),
+    };
+};
+
+export const aComponentCoreModuleLayouts = (overrides?: Partial<ComponentCoreModuleLayouts>, _relationshipsToOmit: Array<string> = []): ComponentCoreModuleLayouts => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentCoreModuleLayouts']);
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '57280df8-4370-466c-bd69-ed6c9ebdbf6a',
+        spacingBottom: overrides && overrides.hasOwnProperty('spacingBottom') ? overrides.spacingBottom! : EnumComponentcoremodulelayoutsSpacingbottom.Lg,
+        spacingTop: overrides && overrides.hasOwnProperty('spacingTop') ? overrides.spacingTop! : EnumComponentcoremodulelayoutsSpacingtop.Lg,
     };
 };
 
@@ -312,6 +321,7 @@ export const aComponentModulesButtonsModule = (overrides?: Partial<ComponentModu
     return {
         buttonStyle: overrides && overrides.hasOwnProperty('buttonStyle') ? overrides.buttonStyle! : EnumComponentmodulesbuttonsmoduleButtonstyle.Default,
         buttons: overrides && overrides.hasOwnProperty('buttons') ? overrides.buttons! : [relationshipsToOmit.includes('ComponentCoreButton') ? {} as ComponentCoreButton : aComponentCoreButton({}, relationshipsToOmit)],
+        buttonsModuleLayout: overrides && overrides.hasOwnProperty('buttonsModuleLayout') ? overrides.buttonsModuleLayout! : relationshipsToOmit.includes('ComponentCoreModuleLayouts') ? {} as ComponentCoreModuleLayouts : aComponentCoreModuleLayouts({}, relationshipsToOmit),
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '668ba96a-681d-472e-a861-bb5a737fd889',
     };
 };
@@ -321,6 +331,7 @@ export const aComponentModulesCarousel = (overrides?: Partial<ComponentModulesCa
     return {
         buttonText: overrides && overrides.hasOwnProperty('buttonText') ? overrides.buttonText! : 'fugiat',
         buttonUrl: overrides && overrides.hasOwnProperty('buttonUrl') ? overrides.buttonUrl! : 'amet',
+        carouselModuleLayout: overrides && overrides.hasOwnProperty('carouselModuleLayout') ? overrides.carouselModuleLayout! : relationshipsToOmit.includes('ComponentCoreModuleLayouts') ? {} as ComponentCoreModuleLayouts : aComponentCoreModuleLayouts({}, relationshipsToOmit),
         description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'animi',
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '02a9c5e5-9a6b-482e-9ea3-e1114441bf57',
         items: overrides && overrides.hasOwnProperty('items') ? overrides.items! : [relationshipsToOmit.includes('ComponentCoreCarouselItem') ? {} as ComponentCoreCarouselItem : aComponentCoreCarouselItem({}, relationshipsToOmit)],
@@ -336,6 +347,7 @@ export const aComponentModulesImage = (overrides?: Partial<ComponentModulesImage
         caption: overrides && overrides.hasOwnProperty('caption') ? overrides.caption! : 'possimus',
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '8439cee4-53c6-4340-b9ee-9b88e7cafe67',
         image: overrides && overrides.hasOwnProperty('image') ? overrides.image! : relationshipsToOmit.includes('UploadFileEntityResponse') ? {} as UploadFileEntityResponse : anUploadFileEntityResponse({}, relationshipsToOmit),
+        imageModuleLayout: overrides && overrides.hasOwnProperty('imageModuleLayout') ? overrides.imageModuleLayout! : relationshipsToOmit.includes('ComponentCoreModuleLayouts') ? {} as ComponentCoreModuleLayouts : aComponentCoreModuleLayouts({}, relationshipsToOmit),
     };
 };
 
@@ -344,6 +356,7 @@ export const aComponentModulesImageCarousel = (overrides?: Partial<ComponentModu
     return {
         description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'nostrum',
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'caa291cc-f344-4c8e-b7ad-3f6d9c22152d',
+        imageCarouselModuleLayout: overrides && overrides.hasOwnProperty('imageCarouselModuleLayout') ? overrides.imageCarouselModuleLayout! : relationshipsToOmit.includes('ComponentCoreModuleLayouts') ? {} as ComponentCoreModuleLayouts : aComponentCoreModuleLayouts({}, relationshipsToOmit),
         images: overrides && overrides.hasOwnProperty('images') ? overrides.images! : relationshipsToOmit.includes('UploadFileRelationResponseCollection') ? {} as UploadFileRelationResponseCollection : anUploadFileRelationResponseCollection({}, relationshipsToOmit),
     };
 };
@@ -352,6 +365,7 @@ export const aComponentModulesPullquote = (overrides?: Partial<ComponentModulesP
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentModulesPullquote']);
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '473a3cf9-ea98-4cd3-80c7-7052f59eceb2',
+        pullquoteModuleLayout: overrides && overrides.hasOwnProperty('pullquoteModuleLayout') ? overrides.pullquoteModuleLayout! : relationshipsToOmit.includes('ComponentCoreModuleLayouts') ? {} as ComponentCoreModuleLayouts : aComponentCoreModuleLayouts({}, relationshipsToOmit),
         text: overrides && overrides.hasOwnProperty('text') ? overrides.text! : 'ut',
     };
 };
@@ -360,6 +374,7 @@ export const aComponentModulesSubtitle = (overrides?: Partial<ComponentModulesSu
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentModulesSubtitle']);
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '549df5f1-4269-41cf-a4c5-ce2a8917985b',
+        subtitleModuleLayout: overrides && overrides.hasOwnProperty('subtitleModuleLayout') ? overrides.subtitleModuleLayout! : relationshipsToOmit.includes('ComponentCoreModuleLayouts') ? {} as ComponentCoreModuleLayouts : aComponentCoreModuleLayouts({}, relationshipsToOmit),
         text: overrides && overrides.hasOwnProperty('text') ? overrides.text! : 'voluptatem',
     };
 };
@@ -369,8 +384,7 @@ export const aComponentModulesTableModule = (overrides?: Partial<ComponentModule
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'c786a0d0-1be7-4ff6-9cd7-235d871cc40b',
         table: overrides && overrides.hasOwnProperty('table') ? overrides.table! : relationshipsToOmit.includes('TableEntityResponse') ? {} as TableEntityResponse : aTableEntityResponse({}, relationshipsToOmit),
-        tableModuleSpacingBottom: overrides && overrides.hasOwnProperty('tableModuleSpacingBottom') ? overrides.tableModuleSpacingBottom! : EnumComponentmodulestablemoduleTablemodulespacingbottom.Lg,
-        tableModuleSpacingTop: overrides && overrides.hasOwnProperty('tableModuleSpacingTop') ? overrides.tableModuleSpacingTop! : EnumComponentmodulestablemoduleTablemodulespacingtop.Lg,
+        tableModuleLayout: overrides && overrides.hasOwnProperty('tableModuleLayout') ? overrides.tableModuleLayout! : relationshipsToOmit.includes('ComponentCoreModuleLayouts') ? {} as ComponentCoreModuleLayouts : aComponentCoreModuleLayouts({}, relationshipsToOmit),
     };
 };
 
@@ -379,8 +393,7 @@ export const aComponentModulesTextModule = (overrides?: Partial<ComponentModules
     return {
         Richtext: overrides && overrides.hasOwnProperty('Richtext') ? overrides.Richtext! : 'quod',
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '67c6aef3-e334-4d10-978d-30c1a76d59a3',
-        textModuleSpacingBottom: overrides && overrides.hasOwnProperty('textModuleSpacingBottom') ? overrides.textModuleSpacingBottom! : EnumComponentmodulestextmoduleTextmodulespacingbottom.Lg,
-        textModuleSpacingTop: overrides && overrides.hasOwnProperty('textModuleSpacingTop') ? overrides.textModuleSpacingTop! : EnumComponentmodulestextmoduleTextmodulespacingtop.Lg,
+        textModuleLayout: overrides && overrides.hasOwnProperty('textModuleLayout') ? overrides.textModuleLayout! : relationshipsToOmit.includes('ComponentCoreModuleLayouts') ? {} as ComponentCoreModuleLayouts : aComponentCoreModuleLayouts({}, relationshipsToOmit),
     };
 };
 
@@ -389,6 +402,7 @@ export const aComponentModulesTitleModule = (overrides?: Partial<ComponentModule
     return {
         Title: overrides && overrides.hasOwnProperty('Title') ? overrides.Title! : 'quibusdam',
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'aeabb66f-3a23-42b4-8215-f8fb4e849040',
+        titleModuleLayout: overrides && overrides.hasOwnProperty('titleModuleLayout') ? overrides.titleModuleLayout! : relationshipsToOmit.includes('ComponentCoreModuleLayouts') ? {} as ComponentCoreModuleLayouts : aComponentCoreModuleLayouts({}, relationshipsToOmit),
     };
 };
 

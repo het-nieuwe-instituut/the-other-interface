@@ -1,4 +1,4 @@
-import { useTheme, Img, Box, Text } from '@chakra-ui/react'
+import { Box, Img, Text } from '@chakra-ui/react'
 import { ComponentModulesImage, UploadFile } from 'src/generated/graphql'
 import { imageBasePath } from '../../modulesConstants'
 
@@ -12,10 +12,14 @@ const MediaImage = (props: MediaImageProps) => {
     const { url } = image?.data?.attributes as UploadFile
     const imagePath = imageBasePath + url
     const { onClick } = props
-    const theme = useTheme()
 
     return (
-        <Box css={{ backgroundColor: theme.colors.white }} pt="21px" px="24px" pb="50px">
+        <Box
+            backgroundColor={'white'}
+            px={6}
+            paddingBottom={props.component.imageModuleLayout?.spacingBottom ?? undefined}
+            paddingTop={props.component.imageModuleLayout?.spacingTop ?? undefined}
+        >
             <Box onClick={onClick} cursor={'pointer'} pb="10px">
                 <Img
                     alt={alt_text || ''}

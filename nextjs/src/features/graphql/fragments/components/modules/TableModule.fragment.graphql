@@ -1,3 +1,5 @@
+#import '../core/moduleLayout.fragment.graphql'
+
 fragment tableModuleFragment on ComponentModulesTableModule {
     id
     table {
@@ -23,6 +25,9 @@ fragment tableModuleFragment on ComponentModulesTableModule {
             }
         }
     }
-    tableModuleSpacingTop
-    tableModuleSpacingBottom
+    tableModuleLayout {
+        ... on ComponentCoreModuleLayouts {
+            ...componentCoreModuleLayouts
+        }
+    }
 }
