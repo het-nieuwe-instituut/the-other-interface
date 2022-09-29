@@ -27,10 +27,8 @@ export const CarouselModule: React.FC<Props> = props => {
     } = usePresenter(type, items, buttonUrl)
 
     return (
-        // should be changed after grid story
         <Box
             as="div"
-            maxW={'90rem'}
             backgroundColor={'white'}
             px={6}
             paddingBottom={props.component.carouselModuleLayout?.spacingBottom ?? undefined}
@@ -85,9 +83,11 @@ export const CarouselModule: React.FC<Props> = props => {
                 </Box>
             )}
 
-            <Flex>
-                <Button onClick={handlePressButton}>{buttonText}</Button>
-            </Flex>
+            {buttonText && (
+                <Flex>
+                    <Button onClick={handlePressButton}>{buttonText}</Button>
+                </Flex>
+            )}
         </Box>
     )
 }

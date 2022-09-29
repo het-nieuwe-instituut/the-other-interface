@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { usePageConfiguration } from '@/features/shared/hooks/pageConfiguration'
 import { isExternalURL } from '@/features/shared/utils/links'
 import { keyExtractor } from '@/features/shared/utils/lists'
 import { capitalizeFirstLetter } from '@/features/shared/utils/text'
@@ -28,6 +29,8 @@ const buttonConfig = {
 }
 
 export const ButtonsModule: React.FC<Props> = props => {
+    const pageConfiguration = usePageConfiguration()
+
     if (props.component.buttonStyle === EnumComponentmodulesbuttonsmoduleButtonstyle.Large) {
         return (
             <Box
@@ -69,7 +72,11 @@ export const ButtonsModule: React.FC<Props> = props => {
                         variant={config.variant}
                         as={'a'}
                         rightIcon={renderExternalLink(button)}
-                        target={!!(button.url && isExternalURL(button.url)) ? '_blank' : undefined}
+                        target={
+                            !!button.url && isExternalURL(button.url, pageConfiguration.data?.host ?? '')
+                                ? '_blank'
+                                : undefined
+                        }
                         gridColumn={{ base: '1fr', md: getGridColumns(index, array) }}
                         bg={'white'}
                     >
@@ -85,6 +92,18 @@ export const ButtonsModule: React.FC<Props> = props => {
                 </NextLink>
             )
         })
+    }
+
+    function renderExternalLink(button?: ComponentCoreButton | null) {
+        if (button && button.hasAttachment) {
+            return <Download />
+        }
+
+        if (!button?.url || !isExternalURL(button.url, pageConfiguration.data?.host ?? '')) {
+            return undefined
+        }
+
+        return <ExternalLink />
     }
 }
 
@@ -102,16 +121,4 @@ function getURl(button?: ComponentCoreButton | null) {
     }
 
     return button?.url ?? '#'
-}
-
-function renderExternalLink(button?: ComponentCoreButton | null) {
-    if (button && button.hasAttachment) {
-        return <Download color={'currentColor'} />
-    }
-
-    if (!button?.url || !isExternalURL(button.url)) {
-        return undefined
-    }
-
-    return <ExternalLink color={'currentColor'} />
 }

@@ -1,0 +1,17 @@
+{
+  "name": "lifely-devops",
+  "version": "0.0.1",
+  "private": true,
+  "engines": {
+    "node": "8.x.x"
+  },
+  "dependencies": {
+    "colors": "1.1.2",
+    "commander": "2.9.0",
+    "figlet": "1.2.0",
+    "lodash": "4.17.5"
+  },
+  "devDependencies": {
+    "ts-node": "4.1.0"
+  }
+}

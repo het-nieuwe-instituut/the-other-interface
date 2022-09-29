@@ -18,12 +18,13 @@ const nextConfig = {
         defaultLocale: 'nl',
     },
     images: {
-      domains: ['picsum.photos'],
+        domains: ['picsum.photos'],
     },
     i18n: {
         locales: ['nl', 'en'],
         defaultLocale: 'nl',
     },
+    output: 'standalone',
 }
 
 module.exports = nextTranslate(nextConfig)
