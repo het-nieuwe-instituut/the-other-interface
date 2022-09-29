@@ -1,10 +1,11 @@
+import { ObjectPerType } from '@/features/GalaxyInterface/hooks/usePresenter'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 import { useWindowSize } from '@/features/shared/hooks/window'
 import { Box } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useHomepageQuery } from 'src/generated/graphql'
-import { ObjectPerType } from 'src/pages/poc/galaxy'
+
 export const DynamicGalaxyNoSsr = dynamic(() => import('../../../GalaxyInterface/components/Galaxy'), {
     ssr: false,
 })
@@ -12,20 +13,28 @@ export const DynamicGalaxyNoSsr = dynamic(() => import('../../../GalaxyInterface
 const result: ObjectPerType[] = [
     {
         class: 'test1',
-        numberOfInstances: '240',
+        numberOfInstances: '814',
+        xFromCenter: -300,
+        yFromCenter: 0,
     },
     {
         class: 'test2',
-        numberOfInstances: '152',
+        numberOfInstances: '308',
+        xFromCenter: 200,
+        yFromCenter: -200,
     },
     {
         class: 'test3',
-        numberOfInstances: '96',
+        numberOfInstances: '192',
+        xFromCenter: 100,
+        yFromCenter: 200,
     },
 
     {
         class: 'test4',
-        numberOfInstances: '96',
+        numberOfInstances: '192',
+        xFromCenter: 300,
+        yFromCenter: 100,
     },
 ]
 

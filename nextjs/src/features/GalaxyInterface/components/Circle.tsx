@@ -7,7 +7,15 @@ interface Props extends React.SVGProps<SVGForeignObjectElement> {}
 export const Circle: React.FC<Props> = props => {
     return (
         <>
-            <foreignObject xmlns="http://www.w3.org/1999/xhtml" className={`foreign-${props.className}`}>
+            <foreignObject
+                xmlns="http://www.w3.org/1999/xhtml"
+                className={`foreign-${props.className}`}
+                id={props.id}
+                width={props.width}
+                height={props.height}
+                x={props.x}
+                y={props.y}
+            >
                 <Flex
                     width={'100%'}
                     height="100%"
