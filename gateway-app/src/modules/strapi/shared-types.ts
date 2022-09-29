@@ -315,3 +315,69 @@ export class DateFilterInput {
     @Field({ nullable: true })
     public startsWith?: Date
 }
+
+@ArgsType()
+export class LongFilterInput {
+    @Field({ nullable: true })
+    public and?: number[]
+
+    @Field({ nullable: true })
+    public between?: number[]
+
+    @Field({ nullable: true })
+    public contains?: number
+
+    @Field({ nullable: true })
+    public containsi?: number
+
+    @Field({ nullable: true })
+    public endsWith?: number
+
+    @Field({ nullable: true })
+    public eq?: number
+
+    @Field({ nullable: true })
+    public eqi?: number
+
+    @Field({ nullable: true })
+    public gt?: number
+
+    @Field({ nullable: true })
+    public gte?: number
+
+    @Field({ nullable: true })
+    public in?: number[]
+
+    @Field({ nullable: true })
+    public lt?: number
+
+    @Field({ nullable: true })
+    public lte?: number
+
+    @Field({ nullable: true })
+    public ne?: number
+
+    @Field(() => LongFilterInput, { nullable: true })
+    public not?: LongFilterInput
+
+    @Field({ nullable: true })
+    public notContains?: number
+
+    @Field({ nullable: true })
+    public notContainsi?: number
+
+    @Field({ nullable: true })
+    public notIn?: number[]
+
+    @Field({ nullable: true })
+    public notNull?: boolean
+
+    @Field({ nullable: true })
+    public null?: boolean
+
+    @Field({ nullable: true })
+    public or?: number[]
+
+    @Field({ nullable: true })
+    public startsWith?: number
+}
