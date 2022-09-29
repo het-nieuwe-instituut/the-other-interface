@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { StoryService } from '../story/story.service'
-import { TripliService } from '../tripli/tripli.service'
+import { TriplyService } from '../triply/triply.service'
 import { EntityNames } from './zoomLevel1.type'
 
 interface ObjectPerTypeData {
@@ -37,15 +37,15 @@ export class ZoomLevel1Service {
             },
         },
     ]
-    public constructor(private readonly tripliService: TripliService, private readonly storyService: StoryService) {}
+    public constructor(private readonly triplyService: TriplyService, private readonly storyService: StoryService) {}
 
     public async getData() {
         const strapiData = await this.storyService.getStoryDataForZoomLevel1()
 
         const endpoint = 'zoom-1-record-counts/run'
 
-        const result = await this.tripliService.getTripliData<ObjectPerTypeData>(endpoint)
-        const tripliData = result.data.map(r => {
+        const result = await this.triplyService.queryTriplyData<ObjectPerTypeData>(endpoint)
+        const triplyData = result.data.map(r => {
             return {
                 name: r.dataset,
                 count: parseInt(r.count, 10),
@@ -53,6 +53,6 @@ export class ZoomLevel1Service {
             }
         })
 
-        return [...tripliData, strapiData]
+        return [...triplyData, strapiData]
     }
 }

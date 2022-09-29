@@ -1,0 +1,29 @@
+---
+- name: docker | apt update
+  apt: update_cache=yes
+  tags: docker
+
+- name: docker | install
+  shell: wget -qO- https://get.docker.com/ | sh
+  args:
+    creates: /usr/bin/docker
+  tags: docker
+
+- name: docker | install python setuptools
+  apt: package=python3-setuptools state=latest
+  tags: docker
+
+- name: docker | install pip
+  apt: package='python3-pip' state=latest
+  tags: docker
+
+- name: docker | install docker-py
+  pip: name=docker-py state=latest
+  tags: [docker, docker-py]
+
+- name: docker | login to docker hub
+  docker_login:
+    registry_url: ghcr.io
+    username: "{{ docker.registry.username }}"
+    password: "{{ docker.registry.password }}"
+  tags: [docker, docker-auth]
