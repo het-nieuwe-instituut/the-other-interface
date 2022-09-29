@@ -7,7 +7,12 @@ interface Props {
 
 export const Pullquote: React.FC<Props> = props => {
     return (
-        <Box width="100%" padding={4}>
+        <Box
+            width="100%"
+            px={6}
+            paddingBottom={props.component.pullquoteModuleLayout?.spacingBottom ?? undefined}
+            paddingTop={props.component.pullquoteModuleLayout?.spacingTop ?? undefined}
+        >
             <ChakraText fontSize="6xl">{props.component.text}</ChakraText>
         </Box>
     )

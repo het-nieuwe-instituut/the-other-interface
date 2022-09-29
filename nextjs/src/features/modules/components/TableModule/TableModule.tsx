@@ -17,10 +17,9 @@ export const TableModule: React.FC<Props> = props => {
     if (breakpoint === 'sm' || breakpoint === 'base') {
         return (
             <Box
-                pl={6}
-                pr={6}
-                mb={props.component.tableModuleSpacingBottom ?? undefined}
-                mt={props.component.tableModuleSpacingTop ?? undefined}
+                px={6}
+                mb={props.component.tableModuleLayout?.spacingBottom ?? undefined}
+                mt={props.component.tableModuleLayout?.spacingTop ?? undefined}
             >
                 <Heading textStyle={'h3'} pb={'md'}>
                     {props.component.table?.data?.attributes?.name}
@@ -35,10 +34,9 @@ export const TableModule: React.FC<Props> = props => {
 
     return (
         <Box
-            pl={6}
-            pr={6}
-            mb={props.component.tableModuleSpacingBottom ?? undefined}
-            mt={props.component.tableModuleSpacingTop ?? undefined}
+            px={6}
+            mb={props.component.tableModuleLayout?.spacingBottom ?? undefined}
+            mt={props.component.tableModuleLayout?.spacingTop ?? undefined}
         >
             <Heading as={'h3'} textStyle={'h3'} pb={'md'}>
                 {props.component.table?.data?.attributes?.name}

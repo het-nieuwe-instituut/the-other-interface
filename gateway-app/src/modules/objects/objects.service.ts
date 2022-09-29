@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { TriplyService } from '../triply/triply.service'
+import { TriplyUtils } from '../triply/triply.utils'
+import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { ObjectsZoomLevel4FiltersArgs } from './objects.type'
 
 export enum ObjectsZoomLevel3Ids {
@@ -36,6 +38,44 @@ interface ObjectsZoomLevel4Data {
     title: string | null
     firstImage: string | null
     imageLabel: string | null
+}
+
+interface ObjectsDetailZoomLevel5Data {
+    image?: string
+    imageLabel?: string
+    title?: string
+    titleType?: string
+    objectNumber?: string
+    objectName?: string
+    objectNameLabel?: string
+    archiveCollectionCode?: string
+    maker?: string
+    makerLabel?: string
+    makerRole?: string
+    makerRoleLabel?: string
+    startDate?: string
+    endDate?: string
+    numberOfParts?: string
+    scale?: string
+    technique?: string
+    techniqueLabel?: string
+    material?: string
+    materialLabel?: string
+    dimensionPart?: string
+    dimensionType?: string
+    dimensionValue?: string
+    dimensionUnit?: string
+    description?: string
+    associationPerson?: string
+    associationPersonLabel?: string
+    associationPersonType?: string
+    relatedObjectTitle?: string
+    creditLine?: string
+    rights?: string
+    rightsLabel?: string
+    creationPlace?: string
+    creationPlaceLabel?: string
+    permanentLink?: string
 }
 
 @Injectable()
@@ -125,6 +165,8 @@ export class ObjectsService {
 
     private readonly ZoomLevel4Endpoint = 'zoom-4-objects/run'
 
+    private readonly ZoomLevel5Endpoint = 'zoom-5-objects/run'
+
     public constructor(private triplyService: TriplyService) {}
 
     public async getZoomLevel2Data() {
@@ -187,6 +229,22 @@ export class ObjectsService {
                 imageLabel: res.imageLabel,
             }
         })
+    }
+
+    public async getZoomLevel5Data(objectId: string) {
+        const uri = TriplyUtils.getUriForTypeAndId(EntityNames.Objects, objectId)
+        const result = await this.triplyService.queryTriplyData<ObjectsDetailZoomLevel5Data>(
+            this.ZoomLevel5Endpoint,
+            undefined,
+            [
+                {
+                    key: 'record',
+                    value: uri,
+                },
+            ]
+        )
+
+        return TriplyUtils.combineObjectArray(result.data)
     }
 
     public validateFilterInput(input: string): ObjectsZoomLevel3Ids {
