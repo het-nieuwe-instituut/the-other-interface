@@ -9,6 +9,7 @@ import { Provider } from 'react-redux'
 import store from '../features/shared/configs/store'
 import '../styles/globals.css'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
+import 'keen-slider/keen-slider.min.css'
 
 function MyApp({ Component, pageProps }: AppProps) {
     const apolloClient = useApollo(pageProps)

@@ -5,8 +5,11 @@ fragment imageCarouselModuleFragment on ComponentModulesImageCarousel {
     images {
         data {
             attributes {
-                url
-                caption
+                url,
+                caption,
+                width,
+                height,
+                size
             }
         }
     }
