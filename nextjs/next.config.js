@@ -18,7 +18,7 @@ const nextConfig = {
         defaultLocale: 'nl',
     },
     images: {
-        domains: ['picsum.photos'],
+      domains: ['picsum.photos', 'localhost'],
     },
     i18n: {
         locales: ['nl', 'en'],
