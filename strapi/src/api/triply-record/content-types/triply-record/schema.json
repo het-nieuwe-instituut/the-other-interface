@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "triply_records",
+  "info": {
+    "singularName": "triply-record",
+    "pluralName": "triply-records",
+    "displayName": "TriplyRecord"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "recordId": {
+      "type": "string",
+      "required": true
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "archive",
+        "object",
+        "people",
+        "publication",
+        "media"
+      ],
+      "required": true
+    },
+    "stories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::story.story",
+      "inversedBy": "triplyRecords"
+    }
+  }
+}

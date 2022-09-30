@@ -52,16 +52,6 @@
         }
       }
     },
-    "triply_people": {
-      "type": "component",
-      "repeatable": true,
-      "pluginOptions": {
-        "i18n": {
-          "localized": false
-        }
-      },
-      "component": "triply.people"
-    },
     "author": {
       "type": "relation",
       "relation": "oneToOne",
@@ -111,6 +101,12 @@
       },
       "type": "text",
       "maxLength": 250
+    },
+    "triplyRecords": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::triply-record.triply-record",
+      "inversedBy": "stories"
     }
   }
 }

@@ -24,8 +24,10 @@ fragment StoryFragment on StoryEntity {
         createdAt
         updatedAt
         publishedAt
-        triply_people {
-            uri_id
+        triplyRecords {
+            data {
+                ...BaseTriplyRecordFragment
+            }
         }
     }
 }
