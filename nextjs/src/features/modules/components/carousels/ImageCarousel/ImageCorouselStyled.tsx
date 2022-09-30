@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 
 export const ArrowPrevContainer = styled(Box)`
     right: 55px;
-    bottom: 71px; 
+    bottom: 19px; 
     position: absolute; 
     outline: none; 
     border: none; 
@@ -18,7 +18,7 @@ export const ArrowPrevContainer = styled(Box)`
 
 export const ArrowNextContainer = styled(Box)`
     right: 24px;
-    bottom: 71px; 
+    bottom: 19px; 
     position: absolute; 
     outline: none; 
     border: none; 
