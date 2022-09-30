@@ -2,10 +2,10 @@ import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Box, Flex, Text } from '@chakra-ui/react'
 import { times } from 'lodash'
 import React, { useEffect, useId, useMemo, useState } from 'react'
-import { ObjectPerType, usePresenter, ZoomLevel } from '../hooks/usePresenter'
-import { StoriesSystem } from '../zoom0/StoriesSystem/StoriesSystem'
-import { Circle } from './Circle'
-import { storiesStubs } from './stubs'
+import { ObjectPerType, usePresenter, ZoomLevel } from './usePresenter'
+import { StoriesSystem } from '../../zoom0/StoriesSystem/StoriesSystem'
+import { Circle } from '../Circle'
+import { storiesStubs } from '../stubs'
 
 interface Dimensions {
     height: number

@@ -1,4 +1,4 @@
-import { ObjectPerType } from '@/features/GalaxyInterface/hooks/usePresenter'
+import { ObjectPerType } from '@/features/GalaxyInterface/components/Galaxy/usePresenter'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 import { useWindowSize } from '@/features/shared/hooks/window'
 import { Box } from '@chakra-ui/react'
@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useHomepageQuery } from 'src/generated/graphql'
 
-export const DynamicGalaxyNoSsr = dynamic(() => import('../../../GalaxyInterface/components/Galaxy'), {
+export const DynamicGalaxyNoSsr = dynamic(() => import('../../../GalaxyInterface/components/Galaxy/Galaxy'), {
     ssr: false,
 })
 
