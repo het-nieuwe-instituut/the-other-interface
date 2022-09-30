@@ -13,10 +13,12 @@ interface Props {
     locale?: string
 }
 
+const IMAGE_HEIGHT = 600
+
 export const ImageCarousel = (props: Props) => {
     const { images } = props.component
     const items = images?.data
-    const { carouselRef, handlePaginationPrev, handlePaginationNext, sliderRef, calculateImagePropotions, size  } = usePresenter(items)
+    const { carouselRef, handlePaginationPrev, handlePaginationNext, sliderRef, calculateImagePropotions, size } = usePresenter(items)
 
     return (
         <Box as='div' backgroundColor={'white'} ref={carouselRef} position='relative' pl={'24px'}>
@@ -30,24 +32,24 @@ export const ImageCarousel = (props: Props) => {
                 </ArrowNextContainer>
                 <div  ref={sliderRef} className="keen-slider">
                     {items?.map((item: UploadFileEntity, index) => {
-                        const originalHeight = item?.attributes?.height || 1
-                        const originalWidth = item?.attributes?.width || 1
+                        const originalHeight = item?.attributes?.height ?? 1
+                        const originalWidth = item?.attributes?.width ?? 1
                         const imagePath = imageBasePath + item?.attributes?.url
                         const caption = item?.attributes?.caption
-                        const proportions = calculateImagePropotions(originalWidth, originalHeight, 600, size)
+                        const proportions = calculateImagePropotions(originalWidth, originalHeight, IMAGE_HEIGHT, size)
                         return (
                             <Flex
                                 key={`${item.id}-${index}`}
                                 flexDirection='column'
-                                pt="36px"
+                                pt="9"
                                 width={proportions.width}
-                                height={proportions.height || 600}
+                                height={proportions.height || IMAGE_HEIGHT}
                                 className="keen-slider__slide"
                             > 
                                 <Image
                                     src={imagePath}
                                     height={proportions.height}
-                                    width={proportions.width || 600}
+                                    width={proportions.width || IMAGE_HEIGHT}
                                     layout="fixed"
                                     alt='carousel image'
                                     loading='eager'

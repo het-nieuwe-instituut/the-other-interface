@@ -2,8 +2,6 @@ import { useKeenSlider } from 'keen-slider/react'
 import React, { createRef, useEffect, useState } from 'react'
 import { UploadFileEntity } from 'src/generated/graphql'
 
-type Slides = Array<{ size: number; spacing: number; origin?: number }>
-
 const usePresenter = (items: UploadFileEntity[] | undefined) => {
     const carouselRef = createRef<HTMLDivElement>()
     const [currentSlide, setCurrentSlide] = React.useState(0)
@@ -47,8 +45,8 @@ const usePresenter = (items: UploadFileEntity[] | undefined) => {
         }
         const imageHeight = 600
         const margin = 20
-        const slides: Slides = []
-        items?.map(current => {
+
+        const slides = items?.map(current => {
             const originaImagelHeight = current?.attributes?.height || 1
             const originalImageWidth = current?.attributes?.width || 1
             const calculateWidth = calculateImagePropotions(
@@ -57,7 +55,7 @@ const usePresenter = (items: UploadFileEntity[] | undefined) => {
                 imageHeight,
                 maxSlideWidth
             ).width
-            slides.push({ size: (calculateWidth + margin) / maxSlideWidth, spacing: 0 })
+            return { size: (calculateWidth + margin) / maxSlideWidth, spacing: 0 }
         })
 
         return slides
