@@ -1,6 +1,6 @@
 import * as d3 from 'd3'
 import { BaseType, SimulationNodeDatum } from 'd3'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { MutableRefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 interface Dimensions {
     height?: number | null
@@ -23,11 +23,6 @@ export interface ObjectPerType {
     yFromCenter: number
 }
 
-export enum ZoomLevel {
-    Zoom0 = 'zoom0',
-    Zoom1 = 'Zoom1',
-}
-
 function useD3Simulation(
     dimensions: Dimensions,
     data: ObjectPerTypeWithName[],
@@ -40,16 +35,6 @@ function useD3Simulation(
     const nodesListener = useRef<d3.Simulation<D3CollectionItem, undefined> | undefined | null>(null)
     const dimensionsRef = useRef<Dimensions>(dimensions)
     const resized = useRef<boolean>(false)
-    const [zoomLevel, setZoomLevel] = useState<ZoomLevel>(ZoomLevel.Zoom0)
-
-    useEffect(() => {
-        if (zoomLevel === ZoomLevel.Zoom0) {
-            zoomout()
-        }
-        if (zoomLevel === ZoomLevel.Zoom1) {
-            zoomin()
-        }
-    }, [zoomLevel])
 
     useEffect(() => {
         if (dimensionsRef.current.height !== dimensions.height || dimensionsRef.current.width !== dimensions.width) {
@@ -86,29 +71,54 @@ function useD3Simulation(
         }
     }, [data, dataDimensions, dimensions, selector])
 
-    function zoomin() {
+    return {
+        svgRef,
+        simulation,
+    }
+}
+
+export enum ZoomLevel {
+    Zoom0 = 'zoom0',
+    Zoom1 = 'Zoom1',
+    Zoom1Stories = 'ZoomStories',
+}
+
+function useZoomEvents(svgRef: MutableRefObject<SVGSVGElement | null>) {
+    const [zoomLevel, setZoomLevel] = useState<ZoomLevel>(ZoomLevel.Zoom0)
+
+    const zoomin = useCallback(() => {
         const d3Svg = d3.select(svgRef.current)
 
         d3Svg
             .transition()
             .duration(1500)
             .attr('transform', 'translate(' + 0 + ',' + 0 + ')scale(' + 1 + ')translate(' + 0 + ',' + 0 + ')')
-    }
+    }, [svgRef])
 
-    function zoomout() {
+    const zoomout = useCallback(() => {
         const d3Svg = d3.select(svgRef.current)
 
         d3Svg
             .transition()
             .duration(0)
             .attr('transform', 'translate(' + 0 + ',' + 0 + ')scale(' + 0.3 + ')translate(' + 0 + ',' + 0 + ')')
-    }
+    }, [svgRef])
+
+    useEffect(() => {
+        if (zoomLevel === ZoomLevel.Zoom0) {
+            zoomout()
+        }
+        if (zoomLevel === ZoomLevel.Zoom1) {
+            zoomin()
+        }
+        if (zoomLevel === ZoomLevel.Zoom1Stories) {
+            zoomin()
+        }
+    }, [zoomLevel, zoomin, zoomout])
 
     return {
-        zoomLevel,
         setZoomLevel,
-        svgRef,
-        simulation,
+        zoomLevel,
     }
 }
 
@@ -178,8 +188,6 @@ function adjustPostion(
                 const multiplier = squareSide / base / 100
                 const x = multiplier * (d.xFromCenter ?? 0)
 
-                console.log()
-
                 return halfWidth + x - getFromCalulatedData(dataDimensions, d)
             })
             .attr('y', d => {
@@ -194,12 +202,12 @@ function adjustPostion(
 
 export function usePresenter(dimensions: Dimensions, data: ObjectPerTypeWithName[], selector: string) {
     const dataDimensions = useD3FitDataToDimensions(dimensions, data)
-    const { svgRef, setZoomLevel, zoomLevel } = useD3Simulation(dimensions, data, selector, dataDimensions)
+    const { svgRef } = useD3Simulation(dimensions, data, selector, dataDimensions)
+    const zoomEvents = useZoomEvents(svgRef)
 
     return {
         svgRef,
         dataDimensions,
-        setZoomLevel,
-        zoomLevel,
+        ...zoomEvents,
     }
 }

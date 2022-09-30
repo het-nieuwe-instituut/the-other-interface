@@ -20,21 +20,21 @@ const result: ObjectPerType[] = [
     {
         class: 'test2',
         numberOfInstances: '308',
-        xFromCenter: 200,
-        yFromCenter: -200,
+        xFromCenter: 250,
+        yFromCenter: -150,
     },
     {
         class: 'test3',
         numberOfInstances: '192',
-        xFromCenter: 100,
-        yFromCenter: 200,
+        xFromCenter: 175,
+        yFromCenter: 175,
     },
 
     {
         class: 'test4',
         numberOfInstances: '192',
-        xFromCenter: 300,
-        yFromCenter: 100,
+        xFromCenter: 350,
+        yFromCenter: 120,
     },
 ]
 
