@@ -22,7 +22,7 @@ export class TriplyUtils {
             case 'seeAlso':
                 return EntityNames.External
             default:
-                throw new Error(`type ${type} not implemented`)
+                throw new Error(`type for graph ${type} not implemented`)
         }
     }
 
@@ -53,7 +53,7 @@ export class TriplyUtils {
                 throw new Error('not a triply type')
             case EntityNames.External:
             default:
-                throw new Error(`type ${type} not implemented`)
+                throw new Error(`uri for type ${type} not implemented`)
         }
     }
 
