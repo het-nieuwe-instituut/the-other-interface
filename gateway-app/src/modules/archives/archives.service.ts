@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common'
-import { TripliService } from '../tripli/tripli.service'
+import { TriplyService } from '../triply/triply.service'
+import { TriplyUtils, ZoomLevel3ReturnData } from '../triply/triply.utils'
+import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { ArchivesZoomLevel4FiltersArgs } from './archives.type'
 
 export enum ArchivesZoomLevel3Ids {
@@ -19,10 +21,6 @@ interface ObjectFilterData {
     filter: string
 }
 
-interface ObjectFilterOptionsData {
-    [x: string]: string
-}
-
 interface ArchivesZoomLevel4Data {
     record: string
     title: string | null
@@ -30,53 +28,91 @@ interface ArchivesZoomLevel4Data {
     imageLabel: string | null
 }
 
+export enum ArchivesZoomLevel5Types {
+    fonds = 'fonds',
+    other = 'other',
+}
+
+export interface ArchivesFondsDetailZoomLevel5Data {
+    objectNumber?: string
+    title?: string
+    startDate?: string
+    endDate?: string
+    dateLabel?: string
+    dimensionFree?: string
+    mediaReference?: string
+    mediaReferenceLabel?: string
+    existenceOfOriginals?: string
+    scopeContent?: string
+    relatedMaterial?: string
+    rights?: string
+    rightsLabel?: string
+    permanentLink?: string
+}
+
+export interface ArchivesOtherDetailZoomLevel5Data {
+    descriptionLevel?: string
+    objectNumber?: string
+    recordTitle?: string
+    startDate?: string
+    endDate?: string
+    productionDate?: string
+    extent?: string
+    repository?: string
+    repositoryLabel?: string
+    creator?: string
+    creatorLabel?: string
+    creatorHistory?: string
+    custodialHistory?: string
+    systemOfArrangement?: string
+    contentScope?: string
+    conditionsGoverningAccess?: string
+    relatedMaterial?: string
+    appendices?: string
+    source?: string
+    partReference?: string
+    partTitle?: string
+    right?: string
+    rightLabel?: string
+    permanentLink?: string
+}
+
+type ArchivesZoomLeve5DataType = ArchivesOtherDetailZoomLevel5Data | ArchivesFondsDetailZoomLevel5Data
+
 @Injectable()
 export class ArchivesService {
-    protected entityType = 'tripli'
+    protected entityType = 'triply'
     private readonly zoomLevel2Endpoint = 'zoom-2-archives/run'
 
     private readonly ZoomLevel3Mapping = [
         {
             id: ArchivesZoomLevel3Ids.date,
             name: 'Datering',
-            columns: {
-                name: 'century',
-                uri: 'century',
-                count: 'numberOfRecords',
-                total: 'total',
-            },
             endpoint: 'zoom-3-archives-date-filter/run',
         },
         {
             id: ArchivesZoomLevel3Ids.descriptionLevel,
             name: 'Beschrijvingsniveau',
             endpoint: 'zoom-3-archives-description-level-filter/run',
-            columns: {
-                name: 'descriptionLevel',
-                uri: 'descriptionLevel',
-                count: 'count',
-                total: 'total',
-            },
         },
         {
             id: ArchivesZoomLevel3Ids.relatedNames,
             name: 'Gerelateerde namen',
             endpoint: 'zoom-3-archives-related-names-filter/run',
-            columns: {
-                name: 'relatedNameLabel',
-                uri: 'relatedName',
-                count: 'count',
-                total: 'total',
-            },
         },
     ]
 
     private readonly ZoomLevel4Endpoint = 'zoom-4-archives/run'
 
-    public constructor(private tripliService: TripliService) {}
+    private readonly ZoomLevel5Endpoint = {
+        [ArchivesZoomLevel5Types.fonds]: 'zoom-5-archives/run',
+        [ArchivesZoomLevel5Types.other]: 'zoom-5-archives-fonds/run',
+    }
+
+    public constructor(private triplyService: TriplyService) {}
 
     public async getZoomLevel2Data() {
-        const result = await this.tripliService.getTripliData<ObjectFilterData>(this.zoomLevel2Endpoint)
+        const result = await this.triplyService.queryTriplyData<ObjectFilterData>(this.zoomLevel2Endpoint)
         return result.data
             .map(r => {
                 const filterMapping = this.ZoomLevel3Mapping.find(m => m.name === r.filter)
@@ -93,19 +129,12 @@ export class ArchivesService {
             throw new Error(`[Archives] Mapping ${id} not found`)
         }
 
-        const result = await this.tripliService.getTripliData<ObjectFilterOptionsData>(mapping?.endpoint, {
+        const result = await this.triplyService.queryTriplyData<ZoomLevel3ReturnData>(mapping?.endpoint, {
             page,
             pageSize,
         })
 
-        return result.data.map(d => {
-            return {
-                uri: d[mapping.columns.uri] || null,
-                name: d[mapping.columns.name] || null,
-                count: d[mapping.columns.count] ? parseInt(d[mapping.columns.count], 10) : null,
-                total: d[mapping.columns.total] ? parseInt(d[mapping.columns.total], 10) : null,
-            }
-        })
+        return TriplyUtils.parseLevel3OutputData(result.data, EntityNames.Archives)
     }
 
     public async getZoomLevel4Data(filters: ArchivesZoomLevel4FiltersArgs, page = 1, pageSize = 48) {
@@ -118,7 +147,7 @@ export class ArchivesService {
             searchParams.push({ key: filterName, value: filterValue })
         }
 
-        const result = await this.tripliService.getTripliData<ArchivesZoomLevel4Data>(
+        const result = await this.triplyService.queryTriplyData<ArchivesZoomLevel4Data>(
             this.ZoomLevel4Endpoint,
             {
                 page,
@@ -135,6 +164,23 @@ export class ArchivesService {
                 imageLabel: res.imageLabel,
             }
         })
+    }
+
+    public async getZoomLevel5Data(type: ArchivesZoomLevel5Types, objectId: string) {
+        const uri = TriplyUtils.getUriForTypeAndId(EntityNames.Archives, objectId)
+
+        const result = await this.triplyService.queryTriplyData<ArchivesZoomLeve5DataType>(
+            this.ZoomLevel5Endpoint[type],
+            undefined,
+            [
+                {
+                    key: 'record',
+                    value: uri,
+                },
+            ]
+        )
+
+        return TriplyUtils.combineObjectArray(result.data)
     }
 
     public validateFilterInput(input: string): ArchivesZoomLevel3Ids {

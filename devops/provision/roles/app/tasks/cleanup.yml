@@ -1,0 +1,31 @@
+---
+- name: cleanup | docker | cleanup containers
+  shell: docker rm -vf $(docker ps -a | grep 'Exited' | awk '{print $1}') 2>/dev/null || echo 'No stopped containers to remove.'
+  tags: [cleanup, deploy]
+
+- name: cleanup | docker | cleanup images
+  shell: docker rmi $(docker images | grep '<none>' | awk '{print $3}') 2>/dev/null || echo 'No untagged images to delete.'
+  tags: [cleanup, deploy]
+
+- name: cleanup | docker | remove old hni-toi-strapi images
+  shell: docker images | grep ghcr.io/lifelynl/hni-toi-strapi | tail -n +5 | awk '{ print $3 }' | xargs docker rmi
+  tags: [cleanup, deploy]
+  ignore_errors: yes
+
+- name: cleanup | docker | remove old hni-toi-nextjs images
+  shell: docker images | grep ghcr.io/lifelynl/hni-toi-nextjs | tail -n +5 | awk '{ print $3 }' | xargs docker rmi
+  tags: [cleanup, deploy]
+  ignore_errors: yes
+
+- name: cleanup | docker | remove old hni-toi-gateway-app images
+  shell: docker images | grep ghcr.io/lifelynl/hni-toi-gateway-app | tail -n +5 | awk '{ print $3 }' | xargs docker rmi
+  tags: [cleanup, deploy]
+  ignore_errors: yes
+
+- name: cleanup | docker | system prune
+  shell: docker system prune --force
+  tags: [cleanup, deploy]
+
+- name: cleanup | docker | volume prune
+  shell: docker volume prune --force
+  tags: [cleanup, deploy]

@@ -1,4 +1,4 @@
-import { ApolloClient, InMemoryCache, NormalizedCacheObject } from '@apollo/client'
+import { ApolloClient, gql, InMemoryCache, NormalizedCacheObject } from '@apollo/client'
 import merge from 'deepmerge'
 import { IncomingHttpHeaders } from 'http'
 import isEqual from 'lodash/isEqual'
@@ -9,11 +9,22 @@ const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined
 
+const typeDefs = gql`
+    extend type Query {
+        pageConfiguration: PageConfiguration!
+    }
+
+    extend type PageConfiguration {
+        host: String!
+    }
+`
+
 const createApolloClient = () => {
     return new ApolloClient({
         ssrMode: typeof window === 'undefined',
-        uri: 'http://localhost:1337/graphql',
+        uri: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
         cache: new InMemoryCache(),
+        typeDefs,
     })
 }
 

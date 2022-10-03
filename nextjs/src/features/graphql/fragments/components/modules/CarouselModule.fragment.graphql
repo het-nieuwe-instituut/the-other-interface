@@ -1,22 +1,29 @@
-fragment carouselModuleFragment on ComponentModulesCarousel{
+#import '../core/moduleLayout.fragment.graphql'
+
+fragment carouselModuleFragment on ComponentModulesCarousel {
     id
     items {
-        id,
-        name,
+        id
+        name
         description
         picture {
             data {
                 attributes {
-                url,
-                caption,
+                    url
+                    caption
                 }
             }
-        },
+        }
         type
     }
-    title,
-    type,
-    buttonText,
-    buttonUrl,
+    title
+    type
+    buttonText
+    buttonUrl
     description
+    carouselModuleLayout {
+        ... on ComponentCoreModuleLayouts {
+            ...componentCoreModuleLayouts
+        }
+    }
 }

@@ -1,11 +1,11 @@
 _type: export
 __export_format: 4
-__export_date: 2022-09-23T08:12:18.042Z
-__export_source: insomnia.desktop.app:v2022.5.1
+__export_date: 2022-09-28T13:47:26.044Z
+__export_source: insomnia.desktop.app:v2022.6.0
 resources:
   - _id: req_bb8d9c352e5d4b579d857e8a70e52b13
     parentId: wrk_495bc411648844949d6c2b88c3ac4cb2
-    modified: 1663916322885
+    modified: 1664351130930
     created: 1661783093300
     url: "{{ _.baseUrl }}/graphql"
     name: counts (Zoom 1)
@@ -39,7 +39,7 @@ resources:
     _type: workspace
   - _id: req_b98fefb40c3c4968929e051630dd47a8
     parentId: fld_d2924e91b75846ae89c5f0c7c0e7d048
-    modified: 1663747317453
+    modified: 1664348730889
     created: 1663316541852
     url: "{{ _.baseUrl }}/graphql"
     name: "filters: Archives"
@@ -76,7 +76,7 @@ resources:
     _type: request_group
   - _id: req_1c5934583e0440af9935d01ac6953a4d
     parentId: fld_d2924e91b75846ae89c5f0c7c0e7d048
-    modified: 1663747322129
+    modified: 1664348728060
     created: 1663337849375
     url: "{{ _.baseUrl }}/graphql"
     name: "filters: Objects"
@@ -103,7 +103,7 @@ resources:
     _type: request
   - _id: req_a67d6c8e091141cfa983a0892141a500
     parentId: fld_d2924e91b75846ae89c5f0c7c0e7d048
-    modified: 1663835286559
+    modified: 1664348724774
     created: 1663337854568
     url: "{{ _.baseUrl }}/graphql"
     name: "filters: People"
@@ -130,7 +130,7 @@ resources:
     _type: request
   - _id: req_49ab16e3538c43c1ba996b837c8e87a8
     parentId: fld_d2924e91b75846ae89c5f0c7c0e7d048
-    modified: 1663747330526
+    modified: 1664348662719
     created: 1663337860400
     url: "{{ _.baseUrl }}/graphql"
     name: "filters: Publications"
@@ -157,7 +157,7 @@ resources:
     _type: request
   - _id: req_203429aa2ab54987ac7b452ffaee4e7c
     parentId: fld_2e4d378ece7940d293196c73bcedee62
-    modified: 1663917959348
+    modified: 1664269613910
     created: 1663591911654
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: relatedPerson"
@@ -205,7 +205,7 @@ resources:
     _type: request_group
   - _id: req_1613bfdb17dc4726825781b5ae47b4da
     parentId: fld_2e4d378ece7940d293196c73bcedee62
-    modified: 1663917957538
+    modified: 1664269610083
     created: 1663591927613
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: subject"
@@ -233,7 +233,7 @@ resources:
     _type: request
   - _id: req_e690b2ea8f904d0ca6b69be3ae4d4dc1
     parentId: fld_2e4d378ece7940d293196c73bcedee62
-    modified: 1663917958300
+    modified: 1664269809536
     created: 1663591935166
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: geographicalKeyword"
@@ -261,7 +261,7 @@ resources:
     _type: request
   - _id: req_cd1ebeafdb20489591b01a417a54290b
     parentId: fld_2e4d378ece7940d293196c73bcedee62
-    modified: 1663917960615
+    modified: 1664269805892
     created: 1663591947535
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: author"
@@ -289,7 +289,7 @@ resources:
     _type: request
   - _id: req_0b0e22edd8f04ddeb84f12bd0c67503c
     parentId: fld_2e4d378ece7940d293196c73bcedee62
-    modified: 1663920707926
+    modified: 1664366900827
     created: 1663591957105
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: typeOfPublication"
@@ -299,7 +299,7 @@ resources:
       mimeType: application/graphql
       text: '{"query":"query {\n\t\tzoomLevel3(entityName: Publications, filterId:
         \"typeOfPublication\", page: 1, pageSize:
-        16)  {\n    uri\n\t\tname\n\t\tcount\n\t\ttotal\n\t}\n}"}'
+        32)  {\n    uri\n\t\tname\n\t\tcount\n\t\ttotal\n\t}\n}"}'
     parameters: []
     headers:
       - name: Content-Type
@@ -317,7 +317,7 @@ resources:
     _type: request
   - _id: req_e57d9b641dba45c782a85d6d05828c46
     parentId: fld_6a13fd5f66564f3a8dfade5a7fd87214
-    modified: 1663836355729
+    modified: 1663747406183
     created: 1663591475796
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: deathDate"
@@ -355,7 +355,7 @@ resources:
     _type: request_group
   - _id: req_84c16c9bcc91472689e573a16e50c740
     parentId: fld_6a13fd5f66564f3a8dfade5a7fd87214
-    modified: 1663836378017
+    modified: 1664269441918
     created: 1663591593549
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: nameType"
@@ -383,7 +383,7 @@ resources:
     _type: request
   - _id: req_fbe9115251634e1ab5680ab7346be8a3
     parentId: fld_6a13fd5f66564f3a8dfade5a7fd87214
-    modified: 1663836380771
+    modified: 1664269439315
     created: 1663591601822
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: birthDate"
@@ -411,7 +411,7 @@ resources:
     _type: request
   - _id: req_75a538064b274221b057f7a1b3e847dd
     parentId: fld_6a13fd5f66564f3a8dfade5a7fd87214
-    modified: 1663836421051
+    modified: 1664269436389
     created: 1663591614991
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: period"
@@ -439,7 +439,7 @@ resources:
     _type: request
   - _id: req_6928d96e9b7245049319b5bf23f5945f
     parentId: fld_6a13fd5f66564f3a8dfade5a7fd87214
-    modified: 1663920565876
+    modified: 1664269434272
     created: 1663591623464
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: place"
@@ -467,7 +467,7 @@ resources:
     _type: request
   - _id: req_5b4036a213414d07ad82f241cad0145e
     parentId: fld_6a13fd5f66564f3a8dfade5a7fd87214
-    modified: 1663836445069
+    modified: 1664269406624
     created: 1663591634383
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: profession"
@@ -495,7 +495,7 @@ resources:
     _type: request
   - _id: req_ef214cf7749a4703a5ac87419fca8837
     parentId: fld_9e94a5146e5745cc8dd300459a48aa6a
-    modified: 1663836447985
+    modified: 1664356006925
     created: 1663591017525
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: subject"
@@ -533,7 +533,7 @@ resources:
     _type: request_group
   - _id: req_49e6732c86624c62856c168b33a972cf
     parentId: fld_9e94a5146e5745cc8dd300459a48aa6a
-    modified: 1663836450382
+    modified: 1664356144958
     created: 1663591118362
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: personInstitution"
@@ -561,7 +561,7 @@ resources:
     _type: request
   - _id: req_9318935e2c4b4312bdd6fba7370fe5fc
     parentId: fld_9e94a5146e5745cc8dd300459a48aa6a
-    modified: 1663836452574
+    modified: 1664356024699
     created: 1663591155334
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: technique"
@@ -589,7 +589,7 @@ resources:
     _type: request
   - _id: req_c6d31a0ffbeb4c6bbbbbc1bb3aef2b2c
     parentId: fld_9e94a5146e5745cc8dd300459a48aa6a
-    modified: 1663920452360
+    modified: 1664356022808
     created: 1663591163929
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: objectName"
@@ -617,7 +617,7 @@ resources:
     _type: request
   - _id: req_0a024f8a6da84f5f8183e141d030a3d1
     parentId: fld_9e94a5146e5745cc8dd300459a48aa6a
-    modified: 1663859874994
+    modified: 1664349298988
     created: 1663591171892
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: creator"
@@ -626,7 +626,7 @@ resources:
     body:
       mimeType: application/graphql
       text: '{"query":"query {\n\t\tzoomLevel3(entityName: Objects, filterId:
-        \"creator\", page: 1, pageSize:
+        \"objectName\", page: 1, pageSize:
         16)  {\n    uri\n\t\tname\n\t\tcount\n\t\ttotal\n\t}\n}"}'
     parameters: []
     headers:
@@ -645,7 +645,7 @@ resources:
     _type: request
   - _id: req_dd538e1ee34440d49afd764490cf1fe0
     parentId: fld_9e94a5146e5745cc8dd300459a48aa6a
-    modified: 1663836458606
+    modified: 1664349370359
     created: 1663591178529
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: date"
@@ -673,7 +673,7 @@ resources:
     _type: request
   - _id: req_9c9b58f0b24d4a3fb8cfe59499e9c3ef
     parentId: fld_9e94a5146e5745cc8dd300459a48aa6a
-    modified: 1663920453698
+    modified: 1664349261284
     created: 1663591187728
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: material"
@@ -701,7 +701,7 @@ resources:
     _type: request
   - _id: req_0e35d49a3d134b639ff960d713d36374
     parentId: fld_9f0600f89a4744d39279da7ca4c3ebf5
-    modified: 1663915756600
+    modified: 1664348987506
     created: 1663339936433
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: date"
@@ -739,7 +739,7 @@ resources:
     _type: request_group
   - _id: req_0746bb9aad874c6fb1b5aaf8d8182b9f
     parentId: fld_9f0600f89a4744d39279da7ca4c3ebf5
-    modified: 1663846543999
+    modified: 1664370478658
     created: 1663572238171
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: descriptionLevel"
@@ -767,7 +767,7 @@ resources:
     _type: request
   - _id: req_333a969dc0dc447f90d76bfcee8a1c80
     parentId: fld_9f0600f89a4744d39279da7ca4c3ebf5
-    modified: 1663846299093
+    modified: 1664370477681
     created: 1663572247866
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: relatedNames"
@@ -795,7 +795,7 @@ resources:
     _type: request
   - _id: req_929340760c4d46e0a95df717261d1d78
     parentId: fld_203efa38a76d40d7b331f8402a9d20a1
-    modified: 1663919929717
+    modified: 1664349000213
     created: 1663846123431
     url: "{{ _.baseUrl }}/graphql"
     name: archives
@@ -804,8 +804,8 @@ resources:
     body:
       mimeType: application/graphql
       text: '{"query":"query {\n\tzoomLevel4(\n\t\tentityName:
-        Archives\n\t\tarchiveFilters: {\n\n\t\t\tEndDate:
-        \"2000\"\n\t\t}\n\t\tpage: 1\n\t)
+        Archives\n\t\tarchivesFilters: {\n\t\t\t\tStartDate:
+        \"1300\"\n\t\t\t\tEndDate: \"1420\"\n\t\t}\n\t\tpage: 1\n\t)
         {\n\t\trecord\n\t\ttitle\n\t\tfirstImage\n\t\timageLabel\n\t}\n}\n"}'
     parameters: []
     headers:
@@ -834,7 +834,7 @@ resources:
     _type: request_group
   - _id: req_2ed7ec1718974b89b50a24d01c2f7fbb
     parentId: fld_203efa38a76d40d7b331f8402a9d20a1
-    modified: 1663920461510
+    modified: 1664363560869
     created: 1663919975465
     url: "{{ _.baseUrl }}/graphql"
     name: objects
@@ -843,8 +843,8 @@ resources:
     body:
       mimeType: application/graphql
       text: '{"query":"query {\n\tzoomLevel4(\n\t\tentityName:
-        Objects\n\t\tobjectsFilters: {\n\t\t\tMaterial:
-        \"inkt\"\n\t\t}\n\t\tpage: 1\n\t)
+        Objects\n\t\tobjectsFilters: {\n\t\t\tMaker: \"Oyen, Johannes Theodorus
+        van\"\n\t\t}\n\t\tpage: 1\n\t)
         {\n\t\trecord\n\t\ttitle\n\t\tfirstImage\n\t\timageLabel\n\t}\n}\n"}'
     parameters: []
     headers:
@@ -863,7 +863,7 @@ resources:
     _type: request
   - _id: req_c3e7433731fb423398598d65a987165e
     parentId: fld_203efa38a76d40d7b331f8402a9d20a1
-    modified: 1663920596553
+    modified: 1664363560071
     created: 1663919978949
     url: "{{ _.baseUrl }}/graphql"
     name: people
@@ -892,7 +892,7 @@ resources:
     _type: request
   - _id: req_dabebfa87be3406190a139ce9693fe36
     parentId: fld_203efa38a76d40d7b331f8402a9d20a1
-    modified: 1663920717965
+    modified: 1664366910953
     created: 1663919983383
     url: "{{ _.baseUrl }}/graphql"
     name: publications
@@ -902,7 +902,7 @@ resources:
       mimeType: application/graphql
       text: '{"query":"query {\n\tzoomLevel4(\n\t\tentityName:
         Publications\n\t\tpublicationsFilters: {\n\t\t\tTypeOfPublication:
-        \"brochure\"\n\t\t}\n\t\tpage: 1\n\t)
+        \"audio-visueel materiaal\"\n\t\t}\n\t\tpage: 1\n\t)
         {\n\t\trecord\n\t\ttitle\n\t\tfirstImage\n\t\timageLabel\n\t}\n}\n"}'
     parameters: []
     headers:
@@ -919,9 +919,35 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
+  - _id: req_482c2c64bdc144089a915c84ba3cc323
+    parentId: wrk_495bc411648844949d6c2b88c3ac4cb2
+    modified: 1664363562445
+    created: 1659610191449
+    url: "{{ _.baseUrl }}/graphql"
+    name: hello
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n\thello\n}"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1659610191449
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
   - _id: req_0585e8def454461484c03be3551936e0
     parentId: wrk_495bc411648844949d6c2b88c3ac4cb2
-    modified: 1663836048953
+    modified: 1664353707251
     created: 1661966595011
     url: "{{ _.baseUrl }}/graphql"
     name: stories-POC
@@ -942,6 +968,281 @@ resources:
         id: pair_4888895150804e04b42b02ba0fd8527d
     authentication: {}
     metaSortKey: -1658904687177.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_51341427ac83471e85eb26d9ccbe524f
+    parentId: fld_dc8e1d13132e4e3da71f9f90b1a55a54
+    modified: 1664372820466
+    created: 1664371991673
+    url: "{{ _.baseUrl }}/graphql"
+    name: Fonds
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n\tzoomLevel5ArchivesFonds(id: \"110000212\")
+        {\n\t\tobjectNumber\n\t\ttitle\n\t\tstartDate\n\t\tendDate\n\t\tdateLabel\n\t\tdimensionFree\n\t\tmediaReference\n\t\tmediaReferenceLabel\n\t\texistenceOfOriginals\n\t\tscopeContent\n\t\trelatedMaterial\n\t\trights\n\t\trightsLabel\n\t\tpermanentLink\n\t}\n}\n"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658594613720.3242
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_dc8e1d13132e4e3da71f9f90b1a55a54
+    parentId: fld_17de84e682c04137bb01bf07e4e9a9a2
+    modified: 1664371978874
+    created: 1664371978874
+    name: Archives
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1664371978874
+    _type: request_group
+  - _id: fld_17de84e682c04137bb01bf07e4e9a9a2
+    parentId: wrk_495bc411648844949d6c2b88c3ac4cb2
+    modified: 1663928025620
+    created: 1663927999495
+    name: Zoom level 5
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1658904687127.5
+    _type: request_group
+  - _id: req_1a1a5f2262154aedb6464b8484301908
+    parentId: fld_dc8e1d13132e4e3da71f9f90b1a55a54
+    modified: 1664372787115
+    created: 1664372356024
+    url: "{{ _.baseUrl }}/graphql"
+    name: other
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n\tzoomLevel5ArchivesOther(id: \"110746983\")
+        {\n\t\tdescriptionLevel\n\t\tobjectNumber\n\t\trecordTitle\n\t\tstartDate\n\t\tendDate\n\t\tproductionDate\n\t\textent\n\t\trepository\n\t\trepositoryLabel\n\t\tcreator\n\t\tcreatorLabel\n\t\tcreatorHistory\n\t\tcustodialHistory\n\t\tsystemOfArrangement\n\t\tcontentScope\n\t\tconditionsGoverningAccess\n\t\trelatedMaterial\n\t\tappendices\n\t\tsource\n\t\tpartReference\n\t\tpartTitle\n\t\tright\n\t\trightLabel\n\t\tpermanentLink\n\t}\n}\n"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658590281282.2285
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_5f32722834f44d93813d392ed503c382
+    parentId: fld_b8d0688c6cd64bce9e0043cb6e8edb7c
+    modified: 1664371982964
+    created: 1664359416181
+    url: "{{ _.baseUrl }}/graphql"
+    name: books
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n\tzoomLevel5PublicationsBook(id: \"300165680\")
+        {\n\t\ttypeOfPublication\n\t\ttypeOfPublicationLabel\n\t\ttitle\n\t\tauthor\n\t\tauthorLabel\n\t\tauthorRole\n\t\tauthorRoleLabel\n\t\tpublisher\n\t\tpublisherLabel\n\t\tyearOfPublication\n\t\tplaceOfPublication\n\t\tplaceOfPublicationLabel\n\t\tisbn\n\t\tdescription\n\t\tannotation\n\t\tcodeOfArchive\n\t\tcodeOfArchiveLabel\n\t\tedition\n\t\tillustration\n\t\tnumberOfPages\n\t\tlanguage\n\t\tlanguageLabel\n\t\tseriesLabel\n\t\tnumber\n\t\tgeographicalKeyword\n\t\tgeographicalKeywordLabel\n\t\tsubject\n\t\tsubjectLabel\n\t\trelatedPerInst\n\t\trelatedPerInstLabel\n\t\tobjectNumber\n\t\tavailability\n\t\tshelfmark\n\t\tpermanentLink\n\t}\n}\n"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658603278596.5156
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_b8d0688c6cd64bce9e0043cb6e8edb7c
+    parentId: fld_17de84e682c04137bb01bf07e4e9a9a2
+    modified: 1664359410099
+    created: 1664359410099
+    name: Publications
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1664359410099
+    _type: request_group
+  - _id: req_9657f31c0a304c5697dc43a56d85a5d9
+    parentId: fld_b8d0688c6cd64bce9e0043cb6e8edb7c
+    modified: 1664366198653
+    created: 1664365535999
+    url: "{{ _.baseUrl }}/graphql"
+    name: serial
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n\tzoomLevel5PublicationsSerial(id: \"300319131\")
+        {\n\t\ttypeOfPublication\n\t\ttypeOfPublicationLabel\n\t\ttitle\n\t\tpublisher\n\t\tpublisherLabel\n\t\tyearOfPublication\n\t\tplaceOfPublication\n\t\tplaceOfPublicationLabel\n\t\tsubject\n\t\tsubjectLabel\n\t\tlanguage\n\t\tlanguageLabel\n\t\tcontinuedFrom\n\t\tcontinuedAs\n\t\tremarks\n\t\tavailability\n\t\tshelfmark\n\t\tholding\n\t\tpermanentLink\n\t}\n}\n"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658585948844.1328
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_879a4d9cf40c4fb083387efd3b717e88
+    parentId: fld_b8d0688c6cd64bce9e0043cb6e8edb7c
+    modified: 1664366571980
+    created: 1664365544712
+    url: "{{ _.baseUrl }}/graphql"
+    name: article
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n\tzoomLevel5PublicationsArticle(id: \"300171648\")
+        {\n\t\ttypeOfPublication\n\t\ttypeOfPublicationLabel\n\t\ttitle\n\t\tauthor\n\t\tauthorLabel\n\t\tauthorRole\n\t\tauthorRoleLabel\n\t\tsourceTitle\n\t\tsourceTitleLabel\n\t\tvolume\n\t\tissue\n\t\tyearOfPublication\n\t\tpage\n\t\tpublisher\n\t\tpublisherLabel\n\t\tabstract\n\t\tlanguage\n\t\tlanguageLabel\n\t\tgeographicalKeyword\n\t\tgeographicalKeywordLabel\n\t\tsubject\n\t\tsubjectLabel\n\t\trelatedPerInst\n\t\trelatedPerInstLabel\n\t\tobjectNumber\n\t\tavailability\n\t\tshelfmark\n\t\tpermanentLink\n\t}\n}\n"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658577283967.9414
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_01e319097e834909a6fc829958c246e2
+    parentId: fld_b8d0688c6cd64bce9e0043cb6e8edb7c
+    modified: 1664367163398
+    created: 1664365551090
+    url: "{{ _.baseUrl }}/graphql"
+    name: audiovisual
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n\tzoomLevel5PublicationsAudiovisual(id: \"300197096\")
+        {\n\t\ttypeOfPublication\n\t\ttypeOfPublicationLabel\n\t\ttitle\n\t\tauthor\n\t\tauthorLabel\n\t\tauthorRole\n\t\tauthorRoleLabel\n\t\tpublisher\n\t\tpublisherLabel\n\t\tyearOfPublication\n\t\tplaceOfPublication\n\t\tplaceOfPublicationLabel\n\t\tabstract\n\t\tannotation\n\t\tscope\n\t\tlanguage\n\t\tlanguageLabel\n\t\tmedium\n\t\tgeographicalKeyword\n\t\tgeographicalKeywordLabel\n\t\tsubject\n\t\tsubjectLabel\n\t\trelatedPerInst\n\t\trelatedPerInstLabel\n\t\tpermanentLink\n\t\tobjectNumber\n\t\tavailability\n\t\tshelfmark\n\t}\n}\n"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658572951529.8457
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_b1eb21c365b946eba8c7d4682a8167c8
+    parentId: fld_17de84e682c04137bb01bf07e4e9a9a2
+    modified: 1664284786650
+    created: 1663928044191
+    url: "{{ _.baseUrl }}/graphql"
+    name: relations
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n\trelations (type: People, id: \"12971\")
+        {\n\t\ttype\n\t\ttotal\n\t\trandomRelations
+        {\n\t\t\tid\n\t\t\tlabel\n\t\t\ttype\n\t\t\trandomRelations
+        {\n\t\t\t\ttype\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n}"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658845895129.875
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_53c31274e53c47aaa4d38477ec26a421
+    parentId: fld_17de84e682c04137bb01bf07e4e9a9a2
+    modified: 1664366195508
+    created: 1664284790474
+    url: "{{ _.baseUrl }}/graphql"
+    name: object
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n\tzoomLevel5Object(id: \"9220\")
+        {\n\t\timage\n\t\timageLabel\n\t\ttitle\n\t\ttitleType\n\t\tobjectNumber\n\t\tobjectName\n\t\tobjectNameLabel\n\t\tarchiveCollectionCode\n\t\tmaker\n\t\tmakerLabel\n\t\tmakerRole\n\t\tmakerRoleLabel\n\t\tstartDate\n\t\tendDate\n\t\tnumberOfParts\n\t\tscale\n\t\ttechnique\n\t\ttechniqueLabel\n\t\tmaterial\n\t\tmaterialLabel\n\t\tdimensionPart\n\t\tdimensionType\n\t\tdimensionValue\n\t\tdimensionUnit\n\t\tdescription\n\t\tassociationPerson\n\t\tassociationPersonLabel\n\t\tassociationPersonType\n\t\trelatedObjectTitle\n\t\tcreditLine\n\t\trights\n\t\trightsLabel\n\t\tcreationPlace\n\t\tcreationPlaceLabel\n\t\tpermanentLink\n\t}\n}\n"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658707257110.8125
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_8652b3d6ccf24e5dbc5554479c0d438a
+    parentId: fld_17de84e682c04137bb01bf07e4e9a9a2
+    modified: 1664358060542
+    created: 1664357561664
+    url: "{{ _.baseUrl }}/graphql"
+    name: person
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n\tzoomLevel5Person(id: \"10991\")
+        {\n\t\tname\n\t\tnameType\n\t\tnameVariation\n\t\tbirthDate\n\t\tbirthPlace\n\t\tbirthPlaceLabel\n\t\tdeathDate\n\t\tdeathPlace\n\t\tdeathPlaceLabel\n\t\tplace\n\t\tplaceLabel\n\t\tstartDate\n\t\tendDate\n\t\tnationality\n\t\tnationalityLabel\n\t\tinstitution\n\t\tinstitutionLabel\n\t\tprofession\n\t\tprofessionLabel\n\t\tgender\n\t\tassociation\n\t\tassociationLabel\n\t\trelatedItem\n\t\trelatedItemLabel\n\t\tdescription\n\t\tpermanentLink\n\t}\n}\n"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658637938101.2812
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true

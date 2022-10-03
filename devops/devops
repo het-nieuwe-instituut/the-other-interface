@@ -1,0 +1,204 @@
+#!/usr/bin/env node
+
+var fs = require("fs");
+var figlet = require("figlet");
+var colors = require("colors");
+var program = require("commander");
+var spawn = require("child_process").spawn;
+
+console.log(
+  colors.green(figlet.textSync("HNI-TOI - Ops", { font: "Cybermedium" }))
+);
+
+var run = function (executable, arguments, group) {
+  if (executable === "ansible-playbook") {
+    if (program.tags) arguments.push("-t", program.tags);
+    if (program.startAtTask)
+      arguments.push("--start-at-task", program.startAtTask);
+  }
+
+  if (["ansible", "ansible-playbook"].indexOf(executable) > -1) {
+    var key = "ssh/private/" + group;
+
+    if (!process.env.CI) {
+      key =
+        "/Volumes/Keybase/team/lifelynl.ops/projects/hni-toi/ssh/private/hni-toi-" +
+        group;
+    }
+
+    arguments.push("--private-key", key);
+  }
+
+  if (
+    ["ansible", "ansible-playbook", "ansible-console", "ansible-vault"].indexOf(
+      executable
+    ) > -1
+  ) {
+    if (!program.vaultPassword) {
+      try {
+        fs.accessSync("./vault_password.txt", fs.F_OK);
+        arguments.push("--vault-password-file=./vault_password.txt");
+        console.log("Password used from vault_password.txt".yellow);
+      } catch (err) {
+        console.log(
+          "Password was not passed and a password file vault_password.txt was not found"
+            .red
+        );
+        console.log(
+          "You can use the --vault-password option to provide the vault password or enter it manually now"
+            .yellow
+        );
+        arguments.push("--ask-vault-pass");
+      }
+    } else {
+      console.log(
+        "Password used from passed option, writing to file vault_password.txt"
+          .green
+      );
+      fs.writeFileSync("./vault_password.txt", program.vaultPassword);
+      arguments.push("--vault-password-file=./vault_password.txt");
+    }
+  }
+
+  if (
+    ["ansible", "ansible-playbook", "ansible-console"].indexOf(executable) > -1
+  ) {
+    arguments.push("-i", "inventories/all.yml");
+    arguments.push("--user=root");
+  }
+
+  if (program.verbose) {
+    arguments.push("-vvvv");
+  }
+
+  if (program.extraVars) {
+    arguments.push("-e", program.extraVars);
+  }
+
+  console.log(
+    "\nRunning the following command:\n".yellow +
+      colors.blue(executable + " " + arguments.join(" ")) +
+      "\n"
+  );
+
+  var ansible = spawn(executable, arguments, { stdio: "inherit" });
+
+  ansible.on("close", function (status) {
+    process.exit(status);
+  });
+};
+
+program
+  .option("-v, --verbose", "verbose mode")
+  .option("--vault-password [vault-password]", "vault password")
+  .option(
+    "-e, --extra-vars [extra-vars]",
+    "set additional variables as key=value"
+  )
+  .option(
+    "-t, --tags [tags]",
+    "only run plays and tasks tagged with these values"
+  )
+  .option("-s, --start-at-task [task]", "start on a given task");
+
+program.command("provision <group>").action(function (group) {
+  var arguments = [];
+
+  arguments.push("provision/playbook.yml");
+  arguments.push("--limit=" + group.toLowerCase());
+
+  run("ansible-playbook", arguments, group.toLowerCase());
+});
+
+program.command("run <group> <command>").action(function (group, command) {
+  var arguments = [];
+
+  arguments.push(group.toLowerCase());
+  arguments.push("-a", command.toLowerCase());
+
+  run("ansible", arguments, group.toLowerCase());
+});
+
+program.command("console <group>").action(function (group) {
+  var arguments = [];
+
+  arguments.push(group.toLowerCase());
+
+  run("ansible-console", arguments);
+});
+
+program.command("command <command> <group>").action(function (command, group) {
+  var arguments = [];
+
+  arguments.push("commands/" + command.toLowerCase() + ".yml");
+  arguments.push("--limit=" + group.toLowerCase());
+
+  run("ansible-playbook", arguments, group.toLowerCase());
+});
+
+program.command("edit <file>").action(function (file) {
+  var arguments = [];
+
+  arguments.push("edit");
+  arguments.push(file);
+
+  run("ansible-vault", arguments);
+});
+
+program.command("view <file>").action(function (file) {
+  var arguments = [];
+
+  arguments.push("view");
+  arguments.push(file);
+
+  run("ansible-vault", arguments);
+});
+
+program.command("encrypt <files...>").action(function (files) {
+  files.forEach(function (file) {
+    var arguments = [];
+
+    arguments.push("encrypt");
+    arguments.push(file);
+
+    run("ansible-vault", arguments);
+  });
+});
+
+program.command("decrypt <files...>").action(function (files) {
+  files.forEach(function (file) {
+    var arguments = [];
+
+    arguments.push("decrypt");
+    arguments.push(file);
+
+    run("ansible-vault", arguments);
+  });
+});
+
+program.command("list <type>").action(function (type) {
+  var arguments = [];
+
+  arguments.push("provision/playbook.yml");
+
+  switch (type) {
+    case "group":
+      arguments.push("--list-hosts");
+      break;
+    case "groups":
+      arguments.push("--list-hosts");
+      break;
+    case "tag":
+      arguments.push("--list-tags");
+      break;
+    case "tags":
+      arguments.push("--list-tags");
+      break;
+  }
+
+  run("ansible-playbook", arguments);
+});
+
+program.parse(process.argv);
+
+if (process.argv.length < 3) program.help();
