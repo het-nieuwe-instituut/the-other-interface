@@ -1,6 +1,6 @@
 import { Inject } from '@nestjs/common'
 import { Resolver } from '@nestjs/graphql'
-import { Sdk } from 'src/generated/strapi-sdk'
+import { Sdk } from '../../generated/strapi-sdk'
 
 @Resolver()
 export class TableResolver {

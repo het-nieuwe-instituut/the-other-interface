@@ -1,4 +1,4 @@
-import { ArgsType, Field, ID, ObjectType } from '@nestjs/graphql'
+import { Field, ID, InputType, ObjectType } from '@nestjs/graphql'
 import {
     ComponentCoreModuleLayouts,
     PaginationArg,
@@ -21,7 +21,7 @@ export class ComponentModulesImageCarousel {
     public images?: UploadFileRelationResponseCollection
 }
 
-@ArgsType()
+@InputType()
 export class ComponentModulesImageCarouselImagesArgs {
     @Field(() => UploadFileFiltersInput, { nullable: true })
     public filters?: UploadFileFiltersInput

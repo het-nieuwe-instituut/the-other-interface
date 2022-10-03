@@ -1,4 +1,4 @@
-import { ArgsType, Field, ID, ObjectType } from '@nestjs/graphql'
+import { Field, ID, InputType, ObjectType } from '@nestjs/graphql'
 import { BooleanFilterInput, StringFilterInput, UploadFileEntityResponse } from '../../shared-types'
 
 @ObjectType()
@@ -19,7 +19,7 @@ export class ComponentCoreButton {
     public url?: string
 }
 
-@ArgsType()
+@InputType()
 export class ComponentCoreButtonFiltersInput {
     @Field(() => [ComponentCoreButtonFiltersInput], { nullable: true })
     public and?: ComponentCoreButtonFiltersInput[]

@@ -1,4 +1,4 @@
-import { ArgsType, Field } from '@nestjs/graphql'
+import { Field, InputType } from '@nestjs/graphql'
 import {
     DateTimeFilterInput,
     IdFilterInput,
@@ -7,7 +7,7 @@ import {
     UploadFileFiltersInput,
 } from '../strapi/shared-types'
 
-@ArgsType()
+@InputType()
 export class UploadFolderFiltersInput {
     @Field(() => [UploadFolderFiltersInput], { nullable: true })
     public and?: UploadFolderFiltersInput[]
