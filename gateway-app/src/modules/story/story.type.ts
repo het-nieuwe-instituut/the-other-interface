@@ -28,23 +28,23 @@ export class StoryRelationResponseCollection {
     @Field(() => [StoryEntity], { nullable: false })
     public data: StoryEntity[]
 }
-
+type possibleComponentTypes =
+    | ComponentModulesButtonsModule
+    | ComponentModulesImage
+    | ComponentModulesImageCarousel
+    | ComponentModulesPullquote
+    | ComponentModulesSubtitle
+    | ComponentModulesTableModule
+    | ComponentModulesTextModule
+    | ComponentModulesTitleModule
+    | Error
 @ObjectType()
 export class Story {
     @Field(() => AuthorEntityResponse, { nullable: true })
     public author?: AuthorEntityResponse
 
-    @Field(() => StoryComponentsDynamicZone, { nullable: true })
-    public components?:
-        | ComponentModulesButtonsModule
-        | ComponentModulesImage
-        | ComponentModulesImageCarousel
-        | ComponentModulesPullquote
-        | ComponentModulesSubtitle
-        | ComponentModulesTableModule
-        | ComponentModulesTextModule
-        | ComponentModulesTitleModule
-        | Error
+    @Field(() => [StoryComponentsDynamicZone], { nullable: true })
+    public components?: possibleComponentTypes[]
 
     @Field({ nullable: true })
     public createdAt?: Date
@@ -103,6 +103,30 @@ export const StoryComponentsDynamicZone = createUnionType({
             ComponentModulesTitleModule,
             Error,
         ] as const,
+    resolveType(value) {
+        switch (value.__typename) {
+            case 'ComponentModulesButtonsModule':
+                return ComponentModulesButtonsModule
+            case 'ComponentModulesImage':
+                return ComponentModulesImage
+            case 'ComponentModulesImageCarousel':
+                return ComponentModulesImageCarousel
+            case 'ComponentModulesPullquote':
+                return ComponentModulesPullquote
+            case 'ComponentModulesSubtitle':
+                return ComponentModulesSubtitle
+            case 'ComponentModulesTableModule':
+                return ComponentModulesTableModule
+            case 'ComponentModulesTextModule':
+                return ComponentModulesTextModule
+            case 'ComponentModulesTitleModule':
+                return ComponentModulesTitleModule
+            case 'Error':
+                return Error
+            default:
+                return null
+        }
+    },
 })
 
 @ObjectType()
