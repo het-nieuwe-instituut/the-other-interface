@@ -152,8 +152,8 @@ const Galaxy: React.FC<Props> = ({ data = [], dimensions }) => {
                         {!isLoading && stories?.length && zoomLevel === ZoomLevel.Zoom1 && (
             
                                 <foreignObject
-                                    x={dimensions.width / 2 + 20}
-                                    y={dimensions.height / 2 - 60}
+                                    x={GALAXY_BASE / 2 + 75}
+                                    y={GALAXY_BASE / 2 - 60}
                                     width={200}
                                     height={100}
                                 >
