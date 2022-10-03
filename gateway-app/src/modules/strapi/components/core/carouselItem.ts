@@ -8,9 +8,6 @@ export class ComponentCoreCarouselItem {
     public id: string
 
     @Field({ nullable: true })
-    public typename?: 'ComponentCoreCarouselItem'
-
-    @Field({ nullable: true })
     public description?: string
 
     @Field({ nullable: true })

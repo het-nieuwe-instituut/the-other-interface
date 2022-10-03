@@ -18,18 +18,12 @@ import { TriplyRecordRelationResponseCollection } from '../triplyRecord/triplyRe
 
 @ObjectType()
 export class StoryRelationResponseCollection {
-    @Field({ nullable: true })
-    public typename?: 'StoryRelationResponseCollection'
-
     @Field(() => [StoryEntity], { nullable: false })
     public data: StoryEntity[]
 }
 
 @ObjectType()
 export class Story {
-    @Field({ nullable: true })
-    public typename?: 'Story'
-
     @Field(() => AuthorEntityResponse, { nullable: true })
     public author?: AuthorEntityResponse
 
@@ -103,9 +97,6 @@ export const StoryComponentsDynamicZone = createUnionType({
 
 @ObjectType()
 export class StoryEntity {
-    @Field({ nullable: true })
-    public typename?: 'StoryEntity'
-
     @Field({ nullable: true })
     public attributes?: Story
 

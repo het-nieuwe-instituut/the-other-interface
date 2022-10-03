@@ -27,9 +27,6 @@ export class ComponentModulesButtonsModule {
     @Field(() => ComponentCoreModuleLayouts)
     public buttonsModuleLayout: ComponentCoreModuleLayouts
 
-    @Field({ nullable: true })
-    public typename?: 'ComponentModulesButtonsModule'
-
     @Field(() => Enum_Componentmodulesbuttonsmodule_Buttonstyle, { nullable: true })
     public buttonStyle?: Enum_Componentmodulesbuttonsmodule_Buttonstyle
 

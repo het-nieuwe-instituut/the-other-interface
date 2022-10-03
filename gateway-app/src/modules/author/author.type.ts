@@ -3,9 +3,6 @@ import { Field, ID, ObjectType } from '@nestjs/graphql'
 @ObjectType()
 export class Author {
     @Field({ nullable: true })
-    public typename?: 'Author'
-
-    @Field({ nullable: true })
     public createdAt?: Date
 
     @Field({ nullable: false })
@@ -26,9 +23,6 @@ export class Author {
 
 @ObjectType()
 export class AuthorEntity {
-    @Field({ nullable: true })
-    public typename?: 'AuthorEntity'
-
     @Field(() => Author, { nullable: true })
     public attributes?: Author
 
@@ -38,9 +32,6 @@ export class AuthorEntity {
 
 @ObjectType()
 export class AuthorEntityResponse {
-    @Field({ nullable: true })
-    public typename?: 'AuthorEntityResponse'
-
     @Field(() => AuthorEntity, { nullable: true })
     public data?: AuthorEntity
 }

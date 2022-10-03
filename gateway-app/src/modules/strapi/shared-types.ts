@@ -4,7 +4,7 @@ import {
     Enum_Componentcoremodulelayouts_Spacingtop,
     PublicationState,
 } from '../../generated/strapi-sdk'
-import { UploadFolderFiltersInput } from '../triplyRecord/triplyRecord.type'
+import { UploadFolderFiltersInput } from './shared-types-dependency'
 
 @ObjectType()
 export class UploadFile {
@@ -25,9 +25,6 @@ export class UploadFile {
 
     @Field()
     public url: string
-
-    @Field({ nullable: true })
-    public typename?: 'UploadFile'
 
     @Field({ nullable: true })
     public alternativeText?: string
@@ -329,9 +326,6 @@ export class JsonFilterInput {
 
 @ObjectType()
 export class UploadFileEntity {
-    @Field({ nullable: true })
-    public typename?: 'UploadFileEntity'
-
     @Field(() => UploadFile, { nullable: true })
     public attributes?: UploadFile
 
@@ -340,9 +334,6 @@ export class UploadFileEntity {
 }
 @ObjectType()
 export class UploadFileEntityResponse {
-    @Field({ nullable: true })
-    public typename?: 'UploadFileEntityResponse'
-
     @Field({ nullable: true })
     public data?: UploadFileEntity
 }
@@ -488,9 +479,6 @@ registerEnumType(Enum_Componentcoremodulelayouts_Spacingtop, { name: 'Enum_Compo
 export class ComponentCoreModuleLayouts {
     @Field(() => ID)
     public id: string
-
-    @Field({ nullable: true })
-    public typename?: 'ComponentCoreModuleLayouts'
 
     @Field(() => Enum_Componentcoremodulelayouts_Spacingbottom, { nullable: true })
     public spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom
@@ -648,9 +636,6 @@ export class LongFilterInput {
 
 @ObjectType()
 export class UploadFileRelationResponseCollection {
-    @Field({ nullable: true })
-    public typename?: 'UploadFileRelationResponseCollection'
-
     @Field(() => [UploadFileEntity], { nullable: true })
     public data: UploadFileEntity[]
 }
@@ -794,9 +779,6 @@ registerEnumType(PublicationState, { name: 'PublicationState' })
 
 @ObjectType()
 export class Error {
-    @Field({ nullable: true })
-    public typename?: 'Error'
-
     @Field()
     public code: string
 

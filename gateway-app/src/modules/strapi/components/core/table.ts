@@ -3,9 +3,6 @@ import { PaginationArg, StringFilterInput } from '../../shared-types'
 
 @ObjectType()
 export class ComponentCoreTableBody {
-    @Field({ nullable: true })
-    public typename?: 'ComponentCoreTableBody'
-
     @Field(() => [ComponentCoreTableBodyItem], { nullable: true })
     public TableBodyItem?: ComponentCoreTableBodyItem[]
 
@@ -24,9 +21,6 @@ export class ComponentCoreTableBodyInput {
 
 @ObjectType()
 export class ComponentCoreTableBodyItem {
-    @Field({ nullable: true })
-    public typename?: 'ComponentCoreTableBodyItem'
-
     @Field(() => ID)
     public id: string
 
@@ -45,9 +39,6 @@ export class ComponentCoreTableBodyItemInput {
 
 @ObjectType()
 export class ComponentCoreTableHead {
-    @Field({ nullable: true })
-    public typename?: 'ComponentCoreTableHead'
-
     @Field(() => [ComponentCoreTableHeadItem], { nullable: true })
     public TableHeadItem?: ComponentCoreTableHeadItem[]
 
@@ -66,9 +57,6 @@ export class ComponentCoreTableHeadInput {
 
 @ObjectType()
 export class ComponentCoreTableHeadItem {
-    @Field({ nullable: true })
-    public typename?: 'ComponentCoreTableHeadItem'
-
     @Field(() => ID, { nullable: true })
     public id: string
 

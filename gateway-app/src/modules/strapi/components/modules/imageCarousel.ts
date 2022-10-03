@@ -15,9 +15,6 @@ export class ComponentModulesImageCarousel {
     public imageCarouselModuleLayout: ComponentCoreModuleLayouts
 
     @Field({ nullable: true })
-    public typename?: 'ComponentModulesImageCarousel'
-
-    @Field({ nullable: true })
     public description?: string
 
     @Field(() => UploadFileRelationResponseCollection, { nullable: true })

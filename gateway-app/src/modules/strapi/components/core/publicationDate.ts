@@ -12,9 +12,6 @@ export class ComponentCorePublicationDate {
     public id: string
 
     @Field({ nullable: true })
-    public typename?: 'ComponentCorePublicationDate'
-
-    @Field({ nullable: true })
     public date?: Date
 
     @Field({ nullable: true })

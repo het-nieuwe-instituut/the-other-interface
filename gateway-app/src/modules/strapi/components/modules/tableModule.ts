@@ -4,9 +4,6 @@ import { ComponentCoreTableBody, ComponentCoreTableHead } from '../core/table'
 
 @ObjectType()
 export class Table {
-    @Field({ nullable: true })
-    public typename?: 'Table'
-
     @Field(() => [ComponentCoreTableBody], { nullable: true })
     public TableBody?: ComponentCoreTableBody[]
 
@@ -31,9 +28,6 @@ export class Table {
 
 @ObjectType()
 export class TableEntity {
-    @Field({ nullable: true })
-    public typename?: 'TableEntity'
-
     @Field(() => Table, { nullable: true })
     public attributes?: Table
 
@@ -43,17 +37,11 @@ export class TableEntity {
 @ObjectType()
 export class TableEntityResponse {
     @Field({ nullable: true })
-    public typename?: 'TableEntityResponse'
-
-    @Field({ nullable: true })
     public data?: TableEntity
 }
 
 @ObjectType()
 export class ComponentModulesTableModule {
-    @Field({ nullable: true })
-    public typename?: 'ComponentModulesTableModule'
-
     @Field(() => ID)
     public id: string
 
