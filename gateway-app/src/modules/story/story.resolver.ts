@@ -2,9 +2,9 @@ import { Inject } from '@nestjs/common'
 import { Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
 import { Enum_Triplyrecord_Type, Sdk, StoryFragmentFragment } from '../../generated/strapi-sdk'
 import { PeopleService } from '../people/people.service'
-import { StoryType } from './story.type'
+import { Story } from './story.type'
 
-@Resolver(StoryType)
+@Resolver(Story)
 export class StoryResolver {
     public constructor(
         @Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk,
@@ -12,7 +12,7 @@ export class StoryResolver {
     ) {}
 
     // TODO: added for POC, delete (or update for actual requirements) before production
-    @Query(() => [StoryType])
+    @Query(() => [Story])
     public async stories() {
         const res = await this.strapiGqlSdk.stories()
 
