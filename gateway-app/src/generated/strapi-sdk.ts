@@ -2223,9 +2223,54 @@ export type StoriesQuery = {
                 __typename?: 'Story'
                 title: string
                 slug?: string | null
+                description?: string | null
+                shortDescription?: string | null
                 createdAt?: any | null
                 updatedAt?: any | null
                 publishedAt?: any | null
+                locale?: string | null
+                components?: Array<
+                    | { __typename: 'ComponentModulesButtonsModule' }
+                    | { __typename: 'ComponentModulesImage' }
+                    | { __typename: 'ComponentModulesImageCarousel' }
+                    | {
+                          __typename: 'ComponentModulesPullquote'
+                          id: string
+                          text?: string | null
+                          pullquoteModuleLayout: {
+                              __typename?: 'ComponentCoreModuleLayouts'
+                              id: string
+                              spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
+                              spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
+                          }
+                      }
+                    | { __typename: 'ComponentModulesSubtitle' }
+                    | { __typename: 'ComponentModulesTableModule' }
+                    | { __typename: 'ComponentModulesTextModule' }
+                    | { __typename: 'ComponentModulesTitleModule' }
+                    | { __typename: 'Error' }
+                    | null
+                > | null
+                author?: {
+                    __typename?: 'AuthorEntityResponse'
+                    data?: { __typename?: 'AuthorEntity'; id?: string | null } | null
+                } | null
+                timeframe?: {
+                    __typename?: 'ComponentCoreTimeframe'
+                    id: string
+                    yearStart?: any | null
+                    yearEnd?: any | null
+                } | null
+                locations?: {
+                    __typename?: 'LocationRelationResponseCollection'
+                    data: Array<{ __typename?: 'LocationEntity'; id?: string | null }>
+                } | null
+                publicationDate?: {
+                    __typename?: 'ComponentCorePublicationDate'
+                    id: string
+                    date?: any | null
+                    displayType?: Enum_Componentcorepublicationdate_Displaytype | null
+                } | null
                 triplyRecords?: {
                     __typename?: 'TriplyRecordRelationResponseCollection'
                     data: Array<{
@@ -2237,6 +2282,10 @@ export type StoriesQuery = {
                             type: Enum_Triplyrecord_Type
                         } | null
                     }>
+                } | null
+                localizations?: {
+                    __typename?: 'StoryRelationResponseCollection'
+                    data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
                 } | null
             } | null
         }>
@@ -2259,9 +2308,54 @@ export type StoryQuery = {
                 __typename?: 'Story'
                 title: string
                 slug?: string | null
+                description?: string | null
+                shortDescription?: string | null
                 createdAt?: any | null
                 updatedAt?: any | null
                 publishedAt?: any | null
+                locale?: string | null
+                components?: Array<
+                    | { __typename: 'ComponentModulesButtonsModule' }
+                    | { __typename: 'ComponentModulesImage' }
+                    | { __typename: 'ComponentModulesImageCarousel' }
+                    | {
+                          __typename: 'ComponentModulesPullquote'
+                          id: string
+                          text?: string | null
+                          pullquoteModuleLayout: {
+                              __typename?: 'ComponentCoreModuleLayouts'
+                              id: string
+                              spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
+                              spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
+                          }
+                      }
+                    | { __typename: 'ComponentModulesSubtitle' }
+                    | { __typename: 'ComponentModulesTableModule' }
+                    | { __typename: 'ComponentModulesTextModule' }
+                    | { __typename: 'ComponentModulesTitleModule' }
+                    | { __typename: 'Error' }
+                    | null
+                > | null
+                author?: {
+                    __typename?: 'AuthorEntityResponse'
+                    data?: { __typename?: 'AuthorEntity'; id?: string | null } | null
+                } | null
+                timeframe?: {
+                    __typename?: 'ComponentCoreTimeframe'
+                    id: string
+                    yearStart?: any | null
+                    yearEnd?: any | null
+                } | null
+                locations?: {
+                    __typename?: 'LocationRelationResponseCollection'
+                    data: Array<{ __typename?: 'LocationEntity'; id?: string | null }>
+                } | null
+                publicationDate?: {
+                    __typename?: 'ComponentCorePublicationDate'
+                    id: string
+                    date?: any | null
+                    displayType?: Enum_Componentcorepublicationdate_Displaytype | null
+                } | null
                 triplyRecords?: {
                     __typename?: 'TriplyRecordRelationResponseCollection'
                     data: Array<{
@@ -2273,6 +2367,10 @@ export type StoryQuery = {
                             type: Enum_Triplyrecord_Type
                         } | null
                     }>
+                } | null
+                localizations?: {
+                    __typename?: 'StoryRelationResponseCollection'
+                    data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
                 } | null
             } | null
         } | null
@@ -2343,9 +2441,54 @@ export type StoryFragmentFragment = {
         __typename?: 'Story'
         title: string
         slug?: string | null
+        description?: string | null
+        shortDescription?: string | null
         createdAt?: any | null
         updatedAt?: any | null
         publishedAt?: any | null
+        locale?: string | null
+        components?: Array<
+            | { __typename: 'ComponentModulesButtonsModule' }
+            | { __typename: 'ComponentModulesImage' }
+            | { __typename: 'ComponentModulesImageCarousel' }
+            | {
+                  __typename: 'ComponentModulesPullquote'
+                  id: string
+                  text?: string | null
+                  pullquoteModuleLayout: {
+                      __typename?: 'ComponentCoreModuleLayouts'
+                      id: string
+                      spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
+                      spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
+                  }
+              }
+            | { __typename: 'ComponentModulesSubtitle' }
+            | { __typename: 'ComponentModulesTableModule' }
+            | { __typename: 'ComponentModulesTextModule' }
+            | { __typename: 'ComponentModulesTitleModule' }
+            | { __typename: 'Error' }
+            | null
+        > | null
+        author?: {
+            __typename?: 'AuthorEntityResponse'
+            data?: { __typename?: 'AuthorEntity'; id?: string | null } | null
+        } | null
+        timeframe?: {
+            __typename?: 'ComponentCoreTimeframe'
+            id: string
+            yearStart?: any | null
+            yearEnd?: any | null
+        } | null
+        locations?: {
+            __typename?: 'LocationRelationResponseCollection'
+            data: Array<{ __typename?: 'LocationEntity'; id?: string | null }>
+        } | null
+        publicationDate?: {
+            __typename?: 'ComponentCorePublicationDate'
+            id: string
+            date?: any | null
+            displayType?: Enum_Componentcorepublicationdate_Displaytype | null
+        } | null
         triplyRecords?: {
             __typename?: 'TriplyRecordRelationResponseCollection'
             data: Array<{
@@ -2353,6 +2496,10 @@ export type StoryFragmentFragment = {
                 id?: string | null
                 attributes?: { __typename?: 'TriplyRecord'; recordId: string; type: Enum_Triplyrecord_Type } | null
             }>
+        } | null
+        localizations?: {
+            __typename?: 'StoryRelationResponseCollection'
+            data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
         } | null
     } | null
 }
@@ -2413,14 +2560,54 @@ export const StoryFragmentFragmentDoc = gql`
         attributes {
             title
             slug
-            createdAt
-            updatedAt
-            publishedAt
+            components {
+                __typename
+                ... on ComponentModulesPullquote {
+                    id
+                    text
+                    pullquoteModuleLayout {
+                        id
+                        spacingTop
+                        spacingBottom
+                    }
+                }
+            }
+            author {
+                data {
+                    id
+                }
+            }
+            description
+            timeframe {
+                id
+                yearStart
+                yearEnd
+            }
+            locations {
+                data {
+                    id
+                }
+            }
+            publicationDate {
+                id
+                date
+                displayType
+            }
+            shortDescription
             triplyRecords {
                 data {
                     ...BaseTriplyRecordFragment
                 }
             }
+            createdAt
+            updatedAt
+            publishedAt
+            localizations {
+                data {
+                    id
+                }
+            }
+            locale
         }
     }
     ${BaseTriplyRecordFragmentFragmentDoc}

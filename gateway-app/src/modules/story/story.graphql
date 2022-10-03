@@ -62,13 +62,130 @@ fragment StoryFragment on StoryEntity {
     attributes {
         title
         slug
-        createdAt
-        updatedAt
-        publishedAt
+        components {
+            __typename
+            ... on ComponentModulesPullquote {
+                id
+                text
+                pullquoteModuleLayout {
+                    ...ComponentCoreModuleLayouts
+                }
+            }
+            ... on ComponentModulesTextModule {
+                id
+                Richtext
+                textModuleLayout {
+                    ...ComponentCoreModuleLayouts
+                }
+            }
+            ... on ComponentModulesSubtitle {
+                id
+                text
+                subtitleModuleLayout {
+                    ...ComponentCoreModuleLayouts
+                }
+            }
+            ... on ComponentModulesTitleModule {
+                id
+                Title
+                titleModuleLayout {
+                    ...ComponentCoreModuleLayouts
+                }
+            }
+            ... on ComponentModulesImageCarousel {
+                id
+                images {
+                    data {
+                        id
+                    }
+                }
+                description
+                imageCarouselModuleLayout {
+                    ...ComponentCoreModuleLayouts
+                }
+            }
+            ... on ComponentModulesImage {
+                id
+                image {
+                    data {
+                        id
+                    }
+                }
+                caption
+                alt_text
+                imageModuleLayout {
+                    ...ComponentCoreModuleLayouts
+                }
+            }
+            ... on ComponentModulesTableModule {
+                id
+                table {
+                    data {
+                        id
+                    }
+                }
+                tableModuleLayout {
+                    ...ComponentCoreModuleLayouts
+                }
+            }
+            ... on ComponentModulesButtonsModule {
+                id
+                buttons {
+                    id
+                    text
+                    url
+                    attachment {
+                        data {
+                            id
+                        }
+                    }
+                    hasAttachment
+                }
+                buttonStyle
+                buttonsModuleLayout {
+                    ...ComponentCoreModuleLayouts
+                }
+            }
+            ... on Error {
+                code
+                message
+            }
+        }
+        author {
+            data {
+                id
+            }
+        }
+        description
+        timeframe {
+            id
+            yearStart
+            yearEnd
+        }
+        locations {
+            data {
+                id
+            }
+        }
+        publicationDate {
+            id
+            date
+            displayType
+        }
+        shortDescription
         triplyRecords {
             data {
                 ...BaseTriplyRecordFragment
             }
         }
+        createdAt
+        updatedAt
+        publishedAt
+        localizations {
+            data {
+                id
+            }
+        }
+        locale
     }
 }
