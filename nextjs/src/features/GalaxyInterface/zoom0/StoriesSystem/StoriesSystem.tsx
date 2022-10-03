@@ -3,8 +3,14 @@
 import * as d3 from 'd3'
 import React, { useEffect, useMemo, useRef } from 'react'
 import earcut from 'earcut'
-import { InstancesPerClass } from 'src/pages/poc/boundaries'
 import { Box } from '@chakra-ui/react'
+
+export interface InstancesPerClass {
+    instance: string
+    title: string
+    parent: string
+    id: string
+}
 
 const points = [
     [63.99712359905243, 16.49931514263153],
@@ -163,11 +169,14 @@ function drawPathByParent(svgRef: null, dataPoints: InstancesPerClassWithPoint[]
 
     // Add the line
     d3Svg
-        .selectAll('foreignObject')
+        .selectAll('.StoriesSystem-dot')
         .on('mouseover', d => {
-            const filteredDataPoints = dataPoints.filter(
-                dataPoint => dataPoint.parent === d.target.attributes['data-parent'].value
+            console.log(d.target.offsetParent.attributes['data-id'])
+            const hoverDataPoint = dataPoints.find(
+                dataPoint => dataPoint.id === d.target.offsetParent.attributes['data-id'].value
             )
+
+            const filteredDataPoints = dataPoints.filter(dataPoint => dataPoint.parent === hoverDataPoint?.parent)
             const sortedDataPoints = filteredDataPoints.sort((a, b) => {
                 const totalA = a.point[0] + a.point[1]
                 const totalB = b.point[0] + b.point[1]
@@ -178,27 +187,25 @@ function drawPathByParent(svgRef: null, dataPoints: InstancesPerClassWithPoint[]
                 .append('path')
                 .datum(sortedDataPoints)
                 .attr('fill', 'none')
-                .attr('stroke', '#69b3a2')
-                .attr('stroke-width', 4)
+                .attr('stroke', '#666666')
+                .attr('filter', 'blur(2px)')
+                .attr('stroke-width', 1)
                 .attr(
                     'd',
                     d3
                         .line()
-                        .x((d: any) => {
-                            return d.point[0]
-                        })
-                        .y((d: any) => {
-                            return d.point[1]
-                        }) as any
+                        .x((d: any) => d.point[0])
+                        .y((d: any) => d.point[1]) as any
                 )
 
-            console.log(d)
-            d3Svg
-                .append('text')
-                .attr('x', parseInt(d.offsetX) - 0)
-                .attr('y', parseInt(d.offsetY) - 10)
-                .attr('class', 'text')
-                .text(() => d.target.attributes['data-title'].value)
+            if (hoverDataPoint) {
+                d3Svg
+                    .append('text')
+                    .attr('x', () => hoverDataPoint.point[0])
+                    .attr('y', () => hoverDataPoint.point[1] - 20)
+                    .attr('class', 'text')
+                    .text(() => hoverDataPoint.title)
+            }
         })
         .on('mouseout', () => {
             d3Svg.selectAll('path').remove()
@@ -238,15 +245,14 @@ export const StoriesSystem: React.FC<Props> = ({ data = [], dimensions = default
             </g>
             {dataPoints.map((item, index, array) => {
                 return (
-                    <g key={`${index}-${array.length}`}>
+                    <g key={`${index}-${array.length}`} className="StoriesSystem-dot">
                         <foreignObject
                             x={`${item.point[0]}`}
                             y={`${item.point[1]}`}
-                            className={`${item.parent}-dot`}
                             height={'7.47px'}
                             width={'7.47px'}
-                            data-parent={item.parent}
-                            data-title={item.title}
+                            className={`${item.parent}-dot`}
+                            data-id={item.id}
                         >
                             <Box
                                 height="100%"

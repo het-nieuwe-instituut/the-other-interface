@@ -2,7 +2,11 @@
 import { Flex } from '@chakra-ui/react'
 import React from 'react'
 
-interface Props extends React.SVGProps<SVGForeignObjectElement> {}
+interface Props
+    extends Pick<
+        React.SVGProps<SVGForeignObjectElement>,
+        'id' | 'className' | 'height' | 'width' | 'x' | 'y' | 'pointerEvents' | 'children'
+    > {}
 
 export const Circle: React.FC<Props> = props => {
     return (
@@ -15,6 +19,7 @@ export const Circle: React.FC<Props> = props => {
                 height={props.height}
                 x={props.x}
                 y={props.y}
+                pointerEvents={props.pointerEvents}
             >
                 <Flex
                     width={'100%'}
