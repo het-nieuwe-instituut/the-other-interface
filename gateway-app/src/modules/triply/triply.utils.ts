@@ -77,7 +77,7 @@ export class TriplyUtils {
         return nullFlag ? null : output
     }
 
-    public static parseLevel3OutputData(input: ZoomLevel3ReturnData[], entity: EntityNames) {
+    public static parseLevel3OutputData(input: ZoomLevel3ReturnData[]) {
         const totalRow = input.find(r => r.label === '@total')
         const total = totalRow ? totalRow.count : null
 
