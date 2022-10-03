@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { TriplyService } from '../triply/triply.service'
-import { TriplyUtils } from '../triply/triply.utils'
+import { TriplyUtils, ZoomLevel3ReturnData } from '../triply/triply.utils'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { PublicationsZoomLevel4FiltersArgs } from './publications.type'
 
@@ -22,10 +22,6 @@ export enum PublicationsZoomLevel4Filters {
 
 interface PublicationsFilterData {
     filter: string
-}
-
-interface PublicationsFilterOptionsData {
-    [x: string]: string
 }
 
 interface PublicationsZoomLevel4Data {
@@ -229,36 +225,12 @@ export class PublicationsService {
             throw new Error(`[Publications] Mapping ${id} not found`)
         }
 
-        const result = await this.triplyService.queryTriplyData<PublicationsFilterOptionsData>(mapping?.endpoint, {
+        const result = await this.triplyService.queryTriplyData<ZoomLevel3ReturnData>(mapping?.endpoint, {
             page,
             pageSize,
         })
 
-        const totalRow = result.data.find(r => r['label'] === '@total')
-        const total = totalRow ? totalRow.count : null
-
-        const output = []
-
-        for (const d of result.data) {
-            if (d['label'] === '@total') {
-                continue
-            }
-
-            let uri = null
-            if (d['iri']) {
-                const id = d['iri'].split(':')[1]
-                uri = TriplyUtils.getUriForTypeAndId(EntityNames.Publications, id)
-            }
-
-            output.push({
-                uri,
-                name: d['label'] || null,
-                count: d['count'] ? parseInt(d['count'], 10) : null,
-                total,
-            })
-        }
-
-        return output
+        return TriplyUtils.parseLevel3OutputData(result.data, EntityNames.Publications)
     }
 
     public async getZoomLevel4Data(filters: PublicationsZoomLevel4FiltersArgs, page = 1, pageSize = 48) {
