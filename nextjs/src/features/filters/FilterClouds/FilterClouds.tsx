@@ -1,63 +1,59 @@
-import { CollectionItem, useGalaxyController } from '@/features/poc/business/d3/useGalaxyController'
-import { Circle } from '@/features/poc/Galaxy/Circle'
-import { createChild } from '@/features/poc/Galaxy/GalaxyUpdates'
-import { Box, useDimensions } from '@chakra-ui/react'
-import { createRef, useEffect, useId, useState } from 'react'
+
+import { Circle } from '@/features/GalaxyInterface/components/Circle'
+import { useId, useMemo } from 'react'
+import { ObjectPerType } from 'src/pages/poc/galaxy'
+import { usePresenter } from './usePresenter'
 
 type Props = {
-    items: {name: string}[]
+    data: ObjectPerType[]
+    dimensions: {
+        height: number
+        width: number
+    }
 }
 
-const FilterClouds = (props: Props) => {
+const FilterClouds: React.FunctionComponent<Props> = ({ dimensions, data }) => {
+
+    const { width, height } = dimensions
+    const svgWidth = width
+    const svgHeight = height
+    const objectsPerTypeWithIds = useMemo(
+        () => data.map(item => ({ ...item, name: item.class.substring(item.class.lastIndexOf('/') + 1) })),
+        [data]
+    )
     const id = useId().replaceAll(':', '')
-    const wrapperRef = createRef<HTMLDivElement>()
-    const dimensions = useDimensions(wrapperRef, true)
-    const width = dimensions?.contentBox?.width;
-    const height = 800
-    const { items } = props
-    const [data, setData] = useState<CollectionItem[]>()
-    
+    const { svgRef } = usePresenter(dimensions, objectsPerTypeWithIds, id)
 
-    useEffect(() => {
-        const collectionItems = items.map(item => {
-            return createChild(item.name)
-        })
-        setData(collectionItems)
-    }, [items])
-
-    const { svgRef } = useGalaxyController({ height, width }, data, id)
     return (
-        <Box ref={wrapperRef}>
-            <svg width={width} height={height} ref={svgRef} style={{ background: 'lightGrey' }}>
+        <div style={{ overflow: 'hidden' }}>
+            <svg
+                width={svgWidth}
+                height={svgHeight}
+                ref={svgRef}
+                viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
+            >
                 <defs>
-                    {data?.map(item => {
+                    {objectsPerTypeWithIds.map((item, index, array) => {
                         return (
-                            <radialGradient key={`gradient-${item.name}`} id={`gradient-${item.name}`}>
-                                <stop offset="40%" stopColor="yellow" />
-                                <stop offset="160%" stopColor="transparent" />
+                            <radialGradient key={`${index}-${array.length}`} id={`gradient-${item.name}`}>
+                                <stop stopColor="#F7FF96" />
+                                <stop offset="0.927083" stopColor="#F9FFB5" stopOpacity="0.12" />
+                                <stop offset="1" stopColor="white" stopOpacity="0" />
                             </radialGradient>
                         )
                     })}
                 </defs>
-                {data?.map(item => {
+                {objectsPerTypeWithIds.map((item, index, array) => {
                     return (
-                        <Circle key={item.name} className={id} name={item.name}>
-                            <div
-                                style={{
-                                    display: 'flex',
-                                    height: '100%',
-                                    flex: 1,
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                }}
-                            >
-                                {item.name}
+                        <Circle key={`${index}-${array.length}`} className={id}>
+                            <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                <button onClick={() => undefined}>Go to {item.name}</button>
                             </div>
                         </Circle>
                     )
                 })}
             </svg>
-        </Box>
+        </div>
     )
 }
 

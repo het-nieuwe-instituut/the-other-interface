@@ -1,11 +1,10 @@
-import FilterClouds from '@/features/filters/FilterClouds/FilterClouds'
 import { addApolloState, getApolloClient } from '@/features/graphql/config/apollo'
 import { GetServerSidePropsContext } from 'next/types'
 
 
 
 const Page = () => {
-    return <FilterClouds items={[{name: 'Archives by related names'}, {name: 'Archives by description level'}, {name: 'Archieves by date'}]} />
+    return null
 }
 
 export default Page
