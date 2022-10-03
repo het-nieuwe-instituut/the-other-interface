@@ -2,6 +2,15 @@ import { Field, ID, ObjectType } from '@nestjs/graphql'
 import { StoryRelationResponseCollection } from '../story/story.type'
 
 @ObjectType()
+export class LocationRelationResponseCollection {
+    @Field({ nullable: true })
+    public __typename?: 'LocationRelationResponseCollection'
+
+    @Field(() => [LocationEntity], { nullable: false })
+    public data: LocationEntity[]
+}
+
+@ObjectType()
 export class Location {
     @Field({ nullable: true })
     public __typename?: 'Location'
@@ -15,26 +24,17 @@ export class Location {
     @Field({ nullable: true })
     public locale?: string
 
-    @Field({ nullable: true })
+    @Field(() => LocationRelationResponseCollection, { nullable: true })
     public localizations?: LocationRelationResponseCollection
 
     @Field({ nullable: true })
     public publishedAt?: Date
 
-    @Field({ nullable: true })
+    @Field(() => StoryRelationResponseCollection, { nullable: true })
     public stories?: StoryRelationResponseCollection
 
     @Field({ nullable: true })
     public updatedAt?: Date
-}
-
-@ObjectType()
-export class LocationRelationResponseCollection {
-    @Field({ nullable: true })
-    public __typename?: 'LocationRelationResponseCollection'
-
-    @Field(() => [LocationEntity], { nullable: false })
-    public data: LocationEntity[]
 }
 
 @ObjectType()
