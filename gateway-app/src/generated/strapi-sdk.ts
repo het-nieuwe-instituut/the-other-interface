@@ -136,6 +136,13 @@ export type ComponentCoreCarouselItemFiltersInput = {
     uri_id?: InputMaybe<StringFilterInput>
 }
 
+export type ComponentCoreModuleLayouts = {
+    __typename?: 'ComponentCoreModuleLayouts'
+    id: Scalars['ID']
+    spacingBottom?: Maybe<Enum_Componentcoremodulelayouts_Spacingbottom>
+    spacingTop?: Maybe<Enum_Componentcoremodulelayouts_Spacingtop>
+}
+
 export type ComponentCorePageHeader = {
     __typename?: 'ComponentCorePageHeader'
     Title?: Maybe<Scalars['String']>
@@ -273,6 +280,7 @@ export type ComponentModulesButtonsModule = {
     __typename?: 'ComponentModulesButtonsModule'
     buttonStyle?: Maybe<Enum_Componentmodulesbuttonsmodule_Buttonstyle>
     buttons?: Maybe<Array<Maybe<ComponentCoreButton>>>
+    buttonsModuleLayout: ComponentCoreModuleLayouts
     id: Scalars['ID']
 }
 
@@ -286,6 +294,7 @@ export type ComponentModulesCarousel = {
     __typename?: 'ComponentModulesCarousel'
     buttonText?: Maybe<Scalars['String']>
     buttonUrl?: Maybe<Scalars['String']>
+    carouselModuleLayout: ComponentCoreModuleLayouts
     description?: Maybe<Scalars['String']>
     id: Scalars['ID']
     items?: Maybe<Array<Maybe<ComponentCoreCarouselItem>>>
@@ -305,12 +314,14 @@ export type ComponentModulesImage = {
     caption?: Maybe<Scalars['String']>
     id: Scalars['ID']
     image: UploadFileEntityResponse
+    imageModuleLayout: ComponentCoreModuleLayouts
 }
 
 export type ComponentModulesImageCarousel = {
     __typename?: 'ComponentModulesImageCarousel'
     description?: Maybe<Scalars['String']>
     id: Scalars['ID']
+    imageCarouselModuleLayout: ComponentCoreModuleLayouts
     images?: Maybe<UploadFileRelationResponseCollection>
 }
 
@@ -323,12 +334,14 @@ export type ComponentModulesImageCarouselImagesArgs = {
 export type ComponentModulesPullquote = {
     __typename?: 'ComponentModulesPullquote'
     id: Scalars['ID']
+    pullquoteModuleLayout: ComponentCoreModuleLayouts
     text?: Maybe<Scalars['String']>
 }
 
 export type ComponentModulesSubtitle = {
     __typename?: 'ComponentModulesSubtitle'
     id: Scalars['ID']
+    subtitleModuleLayout: ComponentCoreModuleLayouts
     text?: Maybe<Scalars['String']>
 }
 
@@ -336,22 +349,21 @@ export type ComponentModulesTableModule = {
     __typename?: 'ComponentModulesTableModule'
     id: Scalars['ID']
     table?: Maybe<TableEntityResponse>
-    tableModuleSpacingBottom?: Maybe<Enum_Componentmodulestablemodule_Tablemodulespacingbottom>
-    tableModuleSpacingTop?: Maybe<Enum_Componentmodulestablemodule_Tablemodulespacingtop>
+    tableModuleLayout: ComponentCoreModuleLayouts
 }
 
 export type ComponentModulesTextModule = {
     __typename?: 'ComponentModulesTextModule'
     Richtext?: Maybe<Scalars['String']>
     id: Scalars['ID']
-    textModuleSpacingBottom?: Maybe<Enum_Componentmodulestextmodule_Textmodulespacingbottom>
-    textModuleSpacingTop?: Maybe<Enum_Componentmodulestextmodule_Textmodulespacingtop>
+    textModuleLayout: ComponentCoreModuleLayouts
 }
 
 export type ComponentModulesTitleModule = {
     __typename?: 'ComponentModulesTitleModule'
     Title?: Maybe<Scalars['String']>
     id: Scalars['ID']
+    titleModuleLayout: ComponentCoreModuleLayouts
 }
 
 export type DateFilterInput = {
@@ -407,6 +419,20 @@ export enum Enum_Componentcorecarouselitem_Type {
     Maker = 'Maker',
 }
 
+export enum Enum_Componentcoremodulelayouts_Spacingbottom {
+    Lg = 'lg',
+    Md = 'md',
+    Sm = 'sm',
+    Xl = 'xl',
+}
+
+export enum Enum_Componentcoremodulelayouts_Spacingtop {
+    Lg = 'lg',
+    Md = 'md',
+    Sm = 'sm',
+    Xl = 'xl',
+}
+
 export enum Enum_Componentcorepublicationdate_Displaytype {
     Date = 'date',
     Year = 'year',
@@ -422,34 +448,6 @@ export enum Enum_Componentmodulescarousel_Type {
     Highlights = 'Highlights',
     Makers = 'Makers',
     Themes = 'Themes',
-}
-
-export enum Enum_Componentmodulestablemodule_Tablemodulespacingbottom {
-    Lg = 'lg',
-    Md = 'md',
-    Sm = 'sm',
-    Xl = 'xl',
-}
-
-export enum Enum_Componentmodulestablemodule_Tablemodulespacingtop {
-    Lg = 'lg',
-    Md = 'md',
-    Sm = 'sm',
-    Xl = 'xl',
-}
-
-export enum Enum_Componentmodulestextmodule_Textmodulespacingbottom {
-    Lg = 'lg',
-    Md = 'md',
-    Sm = 'sm',
-    Xl = 'xl',
-}
-
-export enum Enum_Componentmodulestextmodule_Textmodulespacingtop {
-    Lg = 'lg',
-    Md = 'md',
-    Sm = 'sm',
-    Xl = 'xl',
 }
 
 export enum Enum_Triplyrecord_Type {
@@ -500,6 +498,7 @@ export type GenericMorph =
     | Author
     | ComponentCoreButton
     | ComponentCoreCarouselItem
+    | ComponentCoreModuleLayouts
     | ComponentCorePageHeader
     | ComponentCorePublicationDate
     | ComponentCoreTableBody
