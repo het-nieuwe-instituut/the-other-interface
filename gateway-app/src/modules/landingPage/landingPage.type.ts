@@ -62,7 +62,7 @@ export class LandingpageEntityResponse {
 @ObjectType()
 export class LandingpageEntityResponseCollection {
     @Field(() => [LandingpageEntity])
-    public data: LandingpageEntity
+    public data: LandingpageEntity[]
 
     @Field(() => ResponseCollectionMeta, { nullable: true })
     public meta: ResponseCollectionMeta
