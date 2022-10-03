@@ -2,6 +2,7 @@ import { ArgsType, Field, Float, ID, Int, ObjectType, registerEnumType } from '@
 import {
     Enum_Componentcoremodulelayouts_Spacingbottom,
     Enum_Componentcoremodulelayouts_Spacingtop,
+    PublicationState,
 } from 'src/generated/strapi-sdk'
 
 @ObjectType()
@@ -827,4 +828,18 @@ export class IdFilterInput {
 
     @Field(() => ID, { nullable: true })
     public startsWith?: string
+}
+
+registerEnumType(PublicationState, { name: 'PublicationState' })
+
+@ObjectType()
+export class Error {
+    @Field({ nullable: true })
+    public __typename?: 'Error'
+
+    @Field()
+    public code: string
+
+    @Field({ nullable: true })
+    public message?: string
 }
