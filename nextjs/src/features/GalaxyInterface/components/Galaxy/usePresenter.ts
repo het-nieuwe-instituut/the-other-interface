@@ -1,7 +1,7 @@
 import * as d3 from 'd3'
 import { BaseType, SimulationNodeDatum } from 'd3'
 import { MutableRefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { getStoriesSystemDimensions } from './Galaxy'
+import { GALAXY_BASE, getStoriesSystemDimensions } from './Galaxy'
 
 export interface Dimensions {
     height?: number | null
@@ -30,7 +30,7 @@ function useD3Simulation(
     data: ObjectPerTypeWithName[],
     selector: string,
     dataDimensions: DataDimensions[],
-    squareSideSize: number
+    galaxyBase: number
 ) {
     const initialized = useRef(false)
     const simulation = useRef<d3.Simulation<D3CollectionItem, undefined> | null>(null)
@@ -49,7 +49,7 @@ function useD3Simulation(
             simulation.current = d3
                 .forceSimulation<D3CollectionItem>()
                 .force('charge', d3.forceManyBody().strength(0.1))
-                .force('center', d3.forceCenter((squareSideSize ?? 0) / 2, (squareSideSize ?? 0) / 2))
+                .force('center', d3.forceCenter((galaxyBase ?? 0) / 2, (galaxyBase ?? 0) / 2))
         }
 
         return () => {
@@ -58,7 +58,7 @@ function useD3Simulation(
             simulation.current?.stop()
             simulation.current = null
         }
-    }, [squareSideSize])
+    }, [galaxyBase])
 
     useEffect(() => {
         const d3Svg = d3.select(svgRef.current)
@@ -67,10 +67,10 @@ function useD3Simulation(
         if (!nodesListener.current) {
             nodesListener.current = simulation.current?.nodes(data as D3CollectionItem[]).on('tick', () => {
                 ticked(dataDimensions, nodeForeign)
-                adjustPostion(resized.current, simulation.current, dataDimensions, squareSideSize)
+                adjustPostion(resized.current, simulation.current, dataDimensions, galaxyBase)
             })
         }
-    }, [data, dataDimensions, selector, squareSideSize, svgRef])
+    }, [data, dataDimensions, selector, galaxyBase, svgRef])
 
     return {
         simulation,
@@ -81,6 +81,7 @@ export enum ZoomLevel {
     Zoom0 = 'zoom0',
     Zoom1 = 'Zoom1',
     Zoom1Stories = 'ZoomStories',
+    zoomedTo = 'ZoomedTo',
 }
 
 function useZoomEvents(svgRef: MutableRefObject<SVGSVGElement | null>, dimensions: Dimensions) {
@@ -124,6 +125,16 @@ function useZoomEvents(svgRef: MutableRefObject<SVGSVGElement | null>, dimension
             .attr('transform', 'translate(' + 0 + ',' + 0 + ')scale(' + 0.3 + ')translate(' + 0 + ',' + 0 + ')')
     }, [svgRef])
 
+    const zoomTo = useCallback(
+        (x: number, y: number) => {
+            const d3Svg = d3.select(svgRef.current)
+            setZoomLevel(ZoomLevel.zoomedTo)
+
+            d3Svg.transition().duration(1500).attr(`transform`, `translate(0, 0)scale(${20})translate(${x}, ${y})`)
+        },
+        [svgRef]
+    )
+
     useEffect(() => {
         if (zoomLevel === ZoomLevel.Zoom0) {
             zoomout()
@@ -138,14 +149,15 @@ function useZoomEvents(svgRef: MutableRefObject<SVGSVGElement | null>, dimension
 
     return {
         setZoomLevel,
+        zoomTo,
         zoomLevel,
         storiesSystemRef,
     }
 }
 
-function useD3FitDataToDimensions(squareSideSize: number, data: ObjectPerTypeWithName[]) {
+function useD3FitDataToDimensions(galaxyBase: number, data: ObjectPerTypeWithName[]) {
     const dataDimensions: DataDimensions[] = useMemo(() => {
-        const totalSpace = squareSideSize * squareSideSize
+        const totalSpace = galaxyBase * galaxyBase
         const gridItemSpace = 12
         const totalSpaceGrid = totalSpace / (gridItemSpace * gridItemSpace)
 
@@ -158,7 +170,7 @@ function useD3FitDataToDimensions(squareSideSize: number, data: ObjectPerTypeWit
                 takeSpace: totalOccupiedGridItems * parseInt(item.numberOfInstances),
             }
         })
-    }, [squareSideSize, data])
+    }, [galaxyBase, data])
 
     return dataDimensions
 }
@@ -188,10 +200,10 @@ function adjustPostion(
     initialized: boolean,
     simulation: d3.Simulation<D3CollectionItem, undefined> | null,
     dataDimensions: DataDimensions[],
-    squareSideSize: number
+    galaxyBase: number
 ) {
-    const halfWidth = (squareSideSize ?? 0) / 2
-    const halfHeight = (squareSideSize ?? 0) / 2
+    const halfWidth = (galaxyBase ?? 0) / 2
+    const halfHeight = (galaxyBase ?? 0) / 2
 
     simulation?.nodes().forEach(d => {
         d3.select<BaseType, D3CollectionItem>(`#${d.name}`)
@@ -212,9 +224,9 @@ function adjustPostion(
 
 export function usePresenter(dimensions: Dimensions, data: ObjectPerTypeWithName[], selector: string) {
     const svgRef = useRef<SVGSVGElement | null>(null)
-    const squareSideSize = dimensions.height ?? 0
-    const dataDimensions = useD3FitDataToDimensions(squareSideSize, data)
-    useD3Simulation(svgRef, dimensions, data, selector, dataDimensions, squareSideSize)
+    const galaxyBase = GALAXY_BASE
+    const dataDimensions = useD3FitDataToDimensions(galaxyBase, data)
+    useD3Simulation(svgRef, dimensions, data, selector, dataDimensions, galaxyBase)
     const zoomEvents = useZoomEvents(svgRef, dimensions)
 
     return {

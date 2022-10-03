@@ -65,6 +65,7 @@ function useQuery<T, Q extends () => ReturnType<Q>>(keys: T, query: Q) {
     }
 }
 
+export const GALAXY_BASE = 800
 const Galaxy: React.FC<Props> = ({ data = [], dimensions }) => {
     const { isLoading, data: stories } = useQuery(['instances-per-class'], () => fetchInstancesPerClass())
     const objectsPerTypeWithIds = useMemo(
@@ -74,7 +75,7 @@ const Galaxy: React.FC<Props> = ({ data = [], dimensions }) => {
     const { t } = useTypeSafeTranslation('homepage')
 
     const id = useId().replaceAll(':', '')
-    const { svgRef, setZoomLevel, zoomLevel, storiesSystemRef } = usePresenter(dimensions, objectsPerTypeWithIds, id)
+    const { svgRef, setZoomLevel, zoomTo, zoomLevel, storiesSystemRef } = usePresenter(dimensions, objectsPerTypeWithIds, id)
 
     return (
         <Box
@@ -103,11 +104,11 @@ const Galaxy: React.FC<Props> = ({ data = [], dimensions }) => {
             <Flex width={'100%'} height={dimensions.height} justifyContent="center" alignItems={'center'}>
                 <svg
                     overflow="visible"
-                    style={{ maxWidth: 800 }}
+                    style={{ maxWidth: GALAXY_BASE }}
                     height={dimensions.height}
                     width={dimensions.width}
                     ref={svgRef}
-                    viewBox={`0 0 800 800`}
+                    viewBox={`0 0 ${GALAXY_BASE} ${GALAXY_BASE}`}
                 >
                     <>
                         <style>
@@ -115,6 +116,8 @@ const Galaxy: React.FC<Props> = ({ data = [], dimensions }) => {
                                 .text { font: italic 13px sans-serif }
                             `}
                         </style>
+
+            
 
                         {!isLoading && stories?.length && (
                             <StoriesSystemPosition dimensions={dimensions} ref={storiesSystemRef}>
@@ -133,9 +136,12 @@ const Galaxy: React.FC<Props> = ({ data = [], dimensions }) => {
                                         id={item.name}
                                         pointerEvents={zoomLevel === ZoomLevel.Zoom1Stories ? 'none' : undefined}
                                     >
-                                        {zoomLevel === ZoomLevel.Zoom1 && (
+                                        {zoomLevel === ZoomLevel.Zoom1 && (             
                                             <Flex flex="1" alignItems="center" justifyContent="center">
-                                                <button onClick={() => undefined}>Go to {item.name}</button>
+                                                <button onClick={() => zoomTo(-item.xFromCenter, item.yFromCenter)}>
+                                                    <Text width="12.5rem">{item.name}</Text>
+                                                    <Text width="12.5rem">{item.numberOfInstances}</Text>
+                                                </button>
                                             </Flex>
                                         )}
                                     </Circle>
@@ -144,24 +150,19 @@ const Galaxy: React.FC<Props> = ({ data = [], dimensions }) => {
                         </g>
 
                         {!isLoading && stories?.length && zoomLevel === ZoomLevel.Zoom1 && (
-                            <StoriesSystemPosition dimensions={dimensions}>
-                                <Box
-                                    marginLeft={-50}
-                                    marginTop={-7}
-                                    display="flex"
-                                    position="absolute"
-                                    alignItems="center"
-                                    height={'100%'}
-                                    width={'100%'}
-                                    justifyContent="center"
-                                    zIndex={1000}
+            
+                                <foreignObject
+                                    x={dimensions.width / 2 + 20}
+                                    y={dimensions.height / 2 - 60}
+                                    width={200}
+                                    height={100}
                                 >
                                     <button onClick={() => setZoomLevel(ZoomLevel.Zoom1Stories)}>
                                         <Text width="12.5rem">{stories.length}</Text>
                                         <Text width="12.5rem">{t('stories')}</Text>
                                     </button>
-                                </Box>
-                            </StoriesSystemPosition>
+                                </foreignObject>
+         
                         )}
                     </>
                 </svg>
