@@ -1,0 +1,50 @@
+query location($id: ID, $locale: I18NLocaleCode) {
+    location {
+        data {
+            ...LocationFragment
+        }
+    }
+}
+
+query locations(
+    $filters: LocationFiltersInput
+    $pagination: PaginationArg
+    $sort: [String]
+    $publicationState: PublicationState
+    $locale: I18NLocaleCode
+) {
+    locations {
+        data {
+            ...LocationFragment
+        }
+        meta {
+            pagination {
+                total
+                page
+                pageSize
+                pageCount
+            }
+        }
+    }
+}
+
+fragment LocationFragment on LocationEntity {
+    id
+    attributes {
+        city
+        stories {
+            data {
+                id
+            }
+        }
+        createdAt
+        updatedAt
+        publishedAt
+        localizations {
+            data {
+                id
+            }
+        }
+        locale
+    }
+}

@@ -2112,6 +2112,98 @@ export type AuthorFragmentFragment = {
     } | null
 }
 
+export type LocationQueryVariables = Exact<{
+    id?: InputMaybe<Scalars['ID']>
+    locale?: InputMaybe<Scalars['I18NLocaleCode']>
+}>
+
+export type LocationQuery = {
+    __typename?: 'Query'
+    location?: {
+        __typename?: 'LocationEntityResponse'
+        data?: {
+            __typename?: 'LocationEntity'
+            id?: string | null
+            attributes?: {
+                __typename?: 'Location'
+                city?: string | null
+                createdAt?: any | null
+                updatedAt?: any | null
+                publishedAt?: any | null
+                locale?: string | null
+                stories?: {
+                    __typename?: 'StoryRelationResponseCollection'
+                    data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
+                } | null
+                localizations?: {
+                    __typename?: 'LocationRelationResponseCollection'
+                    data: Array<{ __typename?: 'LocationEntity'; id?: string | null }>
+                } | null
+            } | null
+        } | null
+    } | null
+}
+
+export type LocationsQueryVariables = Exact<{
+    filters?: InputMaybe<LocationFiltersInput>
+    pagination?: InputMaybe<PaginationArg>
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>
+    publicationState?: InputMaybe<PublicationState>
+    locale?: InputMaybe<Scalars['I18NLocaleCode']>
+}>
+
+export type LocationsQuery = {
+    __typename?: 'Query'
+    locations?: {
+        __typename?: 'LocationEntityResponseCollection'
+        data: Array<{
+            __typename?: 'LocationEntity'
+            id?: string | null
+            attributes?: {
+                __typename?: 'Location'
+                city?: string | null
+                createdAt?: any | null
+                updatedAt?: any | null
+                publishedAt?: any | null
+                locale?: string | null
+                stories?: {
+                    __typename?: 'StoryRelationResponseCollection'
+                    data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
+                } | null
+                localizations?: {
+                    __typename?: 'LocationRelationResponseCollection'
+                    data: Array<{ __typename?: 'LocationEntity'; id?: string | null }>
+                } | null
+            } | null
+        }>
+        meta: {
+            __typename?: 'ResponseCollectionMeta'
+            pagination: { __typename?: 'Pagination'; total: number; page: number; pageSize: number; pageCount: number }
+        }
+    } | null
+}
+
+export type LocationFragmentFragment = {
+    __typename?: 'LocationEntity'
+    id?: string | null
+    attributes?: {
+        __typename?: 'Location'
+        city?: string | null
+        createdAt?: any | null
+        updatedAt?: any | null
+        publishedAt?: any | null
+        locale?: string | null
+        stories?: {
+            __typename?: 'StoryRelationResponseCollection'
+            data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
+        } | null
+        localizations?: {
+            __typename?: 'LocationRelationResponseCollection'
+            data: Array<{ __typename?: 'LocationEntity'; id?: string | null }>
+        } | null
+    } | null
+}
+
 export type StoriesQueryVariables = Exact<{ [key: string]: never }>
 
 export type StoriesQuery = {
@@ -2242,6 +2334,28 @@ export const AuthorFragmentFragmentDoc = gql`
         }
     }
 `
+export const LocationFragmentFragmentDoc = gql`
+    fragment LocationFragment on LocationEntity {
+        id
+        attributes {
+            city
+            stories {
+                data {
+                    id
+                }
+            }
+            createdAt
+            updatedAt
+            publishedAt
+            localizations {
+                data {
+                    id
+                }
+            }
+            locale
+        }
+    }
+`
 export const BaseTriplyRecordFragmentFragmentDoc = gql`
     fragment BaseTriplyRecordFragment on TriplyRecordEntity {
         id
@@ -2301,6 +2415,40 @@ export const AuthorsDocument = gql`
         }
     }
     ${AuthorFragmentFragmentDoc}
+`
+export const LocationDocument = gql`
+    query location($id: ID, $locale: I18NLocaleCode) {
+        location {
+            data {
+                ...LocationFragment
+            }
+        }
+    }
+    ${LocationFragmentFragmentDoc}
+`
+export const LocationsDocument = gql`
+    query locations(
+        $filters: LocationFiltersInput
+        $pagination: PaginationArg
+        $sort: [String]
+        $publicationState: PublicationState
+        $locale: I18NLocaleCode
+    ) {
+        locations {
+            data {
+                ...LocationFragment
+            }
+            meta {
+                pagination {
+                    total
+                    page
+                    pageSize
+                    pageCount
+                }
+            }
+        }
+    }
+    ${LocationFragmentFragmentDoc}
 `
 export const StoriesDocument = gql`
     query stories {
@@ -2382,6 +2530,34 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
                         ...wrappedRequestHeaders,
                     }),
                 'authors',
+                'query'
+            )
+        },
+        location(
+            variables?: LocationQueryVariables,
+            requestHeaders?: Dom.RequestInit['headers']
+        ): Promise<LocationQuery> {
+            return withWrapper(
+                wrappedRequestHeaders =>
+                    client.request<LocationQuery>(LocationDocument, variables, {
+                        ...requestHeaders,
+                        ...wrappedRequestHeaders,
+                    }),
+                'location',
+                'query'
+            )
+        },
+        locations(
+            variables?: LocationsQueryVariables,
+            requestHeaders?: Dom.RequestInit['headers']
+        ): Promise<LocationsQuery> {
+            return withWrapper(
+                wrappedRequestHeaders =>
+                    client.request<LocationsQuery>(LocationsDocument, variables, {
+                        ...requestHeaders,
+                        ...wrappedRequestHeaders,
+                    }),
+                'locations',
                 'query'
             )
         },

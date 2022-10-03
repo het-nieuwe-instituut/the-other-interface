@@ -6,6 +6,7 @@ import {
 } from '../../generated/strapi-sdk'
 import { UploadFolderFiltersInput } from './shared-types-dependency'
 
+export type I18NLocaleCode = string
 @ObjectType()
 export class UploadFile {
     @Field()
