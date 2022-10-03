@@ -1,0 +1,40 @@
+query author($id: ID) {
+    author {
+        data {
+            ...AuthorFragment
+        }
+    }
+}
+
+query authors(
+    $filters: AuthorFiltersInput
+    $pagination: PaginationArg
+    $sort: [String]
+    $publicationState: PublicationState
+) {
+    authors {
+        data {
+            ...AuthorFragment
+        }
+        meta {
+            pagination {
+                total
+                page
+                pageSize
+                pageCount
+            }
+        }
+    }
+}
+
+fragment AuthorFragment on AuthorEntity {
+    id
+    attributes {
+        firstName
+        insertion
+        lastName
+        createdAt
+        updatedAt
+        publishedAt
+    }
+}

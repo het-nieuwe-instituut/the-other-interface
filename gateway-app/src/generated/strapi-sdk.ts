@@ -2043,6 +2043,75 @@ export type UsersPermissionsUserRelationResponseCollection = {
     data: Array<UsersPermissionsUserEntity>
 }
 
+export type AuthorQueryVariables = Exact<{
+    id?: InputMaybe<Scalars['ID']>
+}>
+
+export type AuthorQuery = {
+    __typename?: 'Query'
+    author?: {
+        __typename?: 'AuthorEntityResponse'
+        data?: {
+            __typename?: 'AuthorEntity'
+            id?: string | null
+            attributes?: {
+                __typename?: 'Author'
+                firstName: string
+                insertion?: string | null
+                lastName: string
+                createdAt?: any | null
+                updatedAt?: any | null
+                publishedAt?: any | null
+            } | null
+        } | null
+    } | null
+}
+
+export type AuthorsQueryVariables = Exact<{
+    filters?: InputMaybe<AuthorFiltersInput>
+    pagination?: InputMaybe<PaginationArg>
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>
+    publicationState?: InputMaybe<PublicationState>
+}>
+
+export type AuthorsQuery = {
+    __typename?: 'Query'
+    authors?: {
+        __typename?: 'AuthorEntityResponseCollection'
+        data: Array<{
+            __typename?: 'AuthorEntity'
+            id?: string | null
+            attributes?: {
+                __typename?: 'Author'
+                firstName: string
+                insertion?: string | null
+                lastName: string
+                createdAt?: any | null
+                updatedAt?: any | null
+                publishedAt?: any | null
+            } | null
+        }>
+        meta: {
+            __typename?: 'ResponseCollectionMeta'
+            pagination: { __typename?: 'Pagination'; total: number; page: number; pageSize: number; pageCount: number }
+        }
+    } | null
+}
+
+export type AuthorFragmentFragment = {
+    __typename?: 'AuthorEntity'
+    id?: string | null
+    attributes?: {
+        __typename?: 'Author'
+        firstName: string
+        insertion?: string | null
+        lastName: string
+        createdAt?: any | null
+        updatedAt?: any | null
+        publishedAt?: any | null
+    } | null
+}
+
 export type StoriesQueryVariables = Exact<{ [key: string]: never }>
 
 export type StoriesQuery = {
@@ -2160,6 +2229,19 @@ export type BaseTriplyRecordFragmentFragment = {
     attributes?: { __typename?: 'TriplyRecord'; recordId: string; type: Enum_Triplyrecord_Type } | null
 }
 
+export const AuthorFragmentFragmentDoc = gql`
+    fragment AuthorFragment on AuthorEntity {
+        id
+        attributes {
+            firstName
+            insertion
+            lastName
+            createdAt
+            updatedAt
+            publishedAt
+        }
+    }
+`
 export const BaseTriplyRecordFragmentFragmentDoc = gql`
     fragment BaseTriplyRecordFragment on TriplyRecordEntity {
         id
@@ -2186,6 +2268,39 @@ export const StoryFragmentFragmentDoc = gql`
         }
     }
     ${BaseTriplyRecordFragmentFragmentDoc}
+`
+export const AuthorDocument = gql`
+    query author($id: ID) {
+        author {
+            data {
+                ...AuthorFragment
+            }
+        }
+    }
+    ${AuthorFragmentFragmentDoc}
+`
+export const AuthorsDocument = gql`
+    query authors(
+        $filters: AuthorFiltersInput
+        $pagination: PaginationArg
+        $sort: [String]
+        $publicationState: PublicationState
+    ) {
+        authors {
+            data {
+                ...AuthorFragment
+            }
+            meta {
+                pagination {
+                    total
+                    page
+                    pageSize
+                    pageCount
+                }
+            }
+        }
+    }
+    ${AuthorFragmentFragmentDoc}
 `
 export const StoriesDocument = gql`
     query stories {
@@ -2248,6 +2363,28 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
     return {
+        author(variables?: AuthorQueryVariables, requestHeaders?: Dom.RequestInit['headers']): Promise<AuthorQuery> {
+            return withWrapper(
+                wrappedRequestHeaders =>
+                    client.request<AuthorQuery>(AuthorDocument, variables, {
+                        ...requestHeaders,
+                        ...wrappedRequestHeaders,
+                    }),
+                'author',
+                'query'
+            )
+        },
+        authors(variables?: AuthorsQueryVariables, requestHeaders?: Dom.RequestInit['headers']): Promise<AuthorsQuery> {
+            return withWrapper(
+                wrappedRequestHeaders =>
+                    client.request<AuthorsQuery>(AuthorsDocument, variables, {
+                        ...requestHeaders,
+                        ...wrappedRequestHeaders,
+                    }),
+                'authors',
+                'query'
+            )
+        },
         stories(variables?: StoriesQueryVariables, requestHeaders?: Dom.RequestInit['headers']): Promise<StoriesQuery> {
             return withWrapper(
                 wrappedRequestHeaders =>
