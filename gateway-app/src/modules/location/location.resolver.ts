@@ -2,7 +2,7 @@ import { Inject } from '@nestjs/common'
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
 import { PublicationState, Sdk } from '../../generated/strapi-sdk'
 import { I18NLocaleCode, PaginationArg } from '../strapi/shared-types'
-import { LocationEntityResponse, LocationFiltersInput } from './location.type'
+import { LocationEntityResponse, LocationFiltersInput, LocationRelationResponseCollection } from './location.type'
 import { Location } from './location-dependency.type'
 
 @Resolver()
@@ -10,26 +10,26 @@ export class LocationResolver {
     public constructor(@Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk) {}
 
     @Query(() => LocationEntityResponse)
-    public async location(@Args('id') id: string, @Args('locale') locale: I18NLocaleCode) {
+    public async location(@Args('id') id: string, @Args('locale', { nullable: true }) locale: I18NLocaleCode) {
         const res = await this.strapiGqlSdk.location({ id, locale })
 
         return res.location
     }
 
-    @Query(() => LocationEntityResponse)
+    @Query(() => LocationRelationResponseCollection)
     public async locations(
-        @Args('filters') filters: LocationFiltersInput,
-        @Args() pagination: PaginationArg,
-        @Args('sort', { type: () => [String] }) sort: string[],
-        @Args('publicationState') publicationState: PublicationState,
-        @Args('locale') locale: I18NLocaleCode
+        @Args('filters', { nullable: true }) filters: LocationFiltersInput,
+        @Args({ nullable: true }) pagination: PaginationArg,
+        @Args('sort', { nullable: true, type: () => [String] }) sort: string[],
+        @Args('publicationState', { nullable: true }) publicationState: PublicationState,
+        @Args('locale', { nullable: true }) locale: I18NLocaleCode
     ) {
         const res = await this.strapiGqlSdk.locations({
-            filters: filters || {},
+            filters: filters || undefined,
             pagination: pagination || {},
             sort: sort || [],
-            publicationState: publicationState || PublicationState.Live,
-            locale: locale || null,
+            publicationState: publicationState || undefined,
+            locale: locale || undefined,
         })
 
         return res.locations
@@ -43,13 +43,14 @@ export class LocationFieldResolver {
     @ResolveField()
     public async stories(@Parent() location: Location) {
         if (location.stories?.data && location.stories?.data.length) {
-            return this.strapiGqlSdk.stories({
+            const res = await this.strapiGqlSdk.stories({
                 filters: {
                     or: location.stories.data.map(ent => {
                         return { id: { eq: ent.id } }
                     }),
                 },
             })
+            return res.stories
         }
         return []
     }

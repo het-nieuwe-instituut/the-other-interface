@@ -1,5 +1,5 @@
 import { Field, ID, InputType, ObjectType } from '@nestjs/graphql'
-import { DateTimeFilterInput, IdFilterInput, StringFilterInput } from '../strapi/shared-types'
+import { DateTimeFilterInput, IdFilterInput, ResponseCollectionMeta, StringFilterInput } from '../strapi/shared-types'
 import { Location } from './location-dependency.type'
 
 @InputType()
@@ -47,10 +47,13 @@ export class LocationEntity {
 export class LocationRelationResponseCollection {
     @Field(() => [LocationEntity], { nullable: false })
     public data: LocationEntity[]
+
+    @Field(() => ResponseCollectionMeta, { nullable: true })
+    public meta: ResponseCollectionMeta
 }
 
 @ObjectType()
 export class LocationEntityResponse {
-    @Field(() => LocationEntity)
+    @Field(() => LocationEntity, { nullable: true })
     public data: LocationEntity
 }

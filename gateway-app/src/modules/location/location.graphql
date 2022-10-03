@@ -1,5 +1,5 @@
 query location($id: ID, $locale: I18NLocaleCode) {
-    location {
+    location(id: $id, locale: $locale) {
         data {
             ...LocationFragment
         }
@@ -13,17 +13,18 @@ query locations(
     $publicationState: PublicationState
     $locale: I18NLocaleCode
 ) {
-    locations {
+    locations(
+        filters: $filters
+        pagination: $pagination
+        sort: $sort
+        publicationState: $publicationState
+        locale: $locale
+    ) {
         data {
             ...LocationFragment
         }
         meta {
-            pagination {
-                total
-                page
-                pageSize
-                pageCount
-            }
+            ...ResponseCollectionMetaFragment
         }
     }
 }

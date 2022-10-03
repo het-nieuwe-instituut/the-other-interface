@@ -3840,7 +3840,7 @@ export const ErrorFragmentFragmentDoc = gql`
 `
 export const AuthorDocument = gql`
     query author($id: ID) {
-        author {
+        author(id: $id) {
             data {
                 ...AuthorFragment
             }
@@ -3855,7 +3855,7 @@ export const AuthorsDocument = gql`
         $sort: [String]
         $publicationState: PublicationState
     ) {
-        authors {
+        authors(filters: $filters, pagination: $pagination, sort: $sort, publicationState: $publicationState) {
             data {
                 ...AuthorFragment
             }
@@ -3873,7 +3873,7 @@ export const AuthorsDocument = gql`
 `
 export const LocationDocument = gql`
     query location($id: ID, $locale: I18NLocaleCode) {
-        location {
+        location(id: $id, locale: $locale) {
             data {
                 ...LocationFragment
             }
@@ -3889,7 +3889,13 @@ export const LocationsDocument = gql`
         $publicationState: PublicationState
         $locale: I18NLocaleCode
     ) {
-        locations {
+        locations(
+            filters: $filters
+            pagination: $pagination
+            sort: $sort
+            publicationState: $publicationState
+            locale: $locale
+        ) {
             data {
                 ...LocationFragment
             }
@@ -3913,7 +3919,13 @@ export const StoriesDocument = gql`
         $publicationState: PublicationState
         $locale: I18NLocaleCode
     ) {
-        stories {
+        stories(
+            filters: $filters
+            pagination: $pagination
+            sort: $sort
+            publicationState: $publicationState
+            locale: $locale
+        ) {
             data {
                 ...StoryFragment
             }
@@ -3923,7 +3935,7 @@ export const StoriesDocument = gql`
 `
 export const StoryDocument = gql`
     query story($id: ID, $locale: I18NLocaleCode) {
-        story {
+        story(id: $id, locale: $locale) {
             data {
                 ...StoryFragment
             }

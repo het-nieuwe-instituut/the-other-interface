@@ -5,15 +5,24 @@ query stories(
     $publicationState: PublicationState
     $locale: I18NLocaleCode
 ) {
-    stories {
+    stories(
+        filters: $filters
+        pagination: $pagination
+        sort: $sort
+        publicationState: $publicationState
+        locale: $locale
+    ) {
         data {
             ...StoryFragment
+        }
+        meta {
+            ...ResponseCollectionMetaFragment
         }
     }
 }
 
 query story($id: ID, $locale: I18NLocaleCode) {
-    story {
+    story(id: $id, locale: $locale) {
         data {
             ...StoryFragment
         }

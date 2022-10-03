@@ -1,5 +1,5 @@
 query author($id: ID) {
-    author {
+    author(id: $id) {
         data {
             ...AuthorFragment
         }
@@ -12,17 +12,12 @@ query authors(
     $sort: [String]
     $publicationState: PublicationState
 ) {
-    authors {
+    authors(filters: $filters, pagination: $pagination, sort: $sort, publicationState: $publicationState) {
         data {
             ...AuthorFragment
         }
         meta {
-            pagination {
-                total
-                page
-                pageSize
-                pageCount
-            }
+            ...ResponseCollectionMetaFragment
         }
     }
 }
