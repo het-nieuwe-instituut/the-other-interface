@@ -2660,6 +2660,11 @@ export type PaginationFragmentFragment = {
     total: number
 }
 
+export type ResponseCollectionMetaFragmentFragment = {
+    __typename?: 'ResponseCollectionMeta'
+    pagination: { __typename?: 'Pagination'; page: number; pageCount: number; pageSize: number; total: number }
+}
+
 export type UploadFileRelationResponseCollectionFragmentFragment = {
     __typename?: 'UploadFileRelationResponseCollection'
     data: Array<{
@@ -2720,6 +2725,8 @@ export type ComponentCoreModuleLayoutsFragmentFragment = {
     spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
     spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
 }
+
+export type ErrorFragmentFragment = { __typename?: 'Error'; code: string; message?: string | null }
 
 export type BaseTriplyRecordFragmentFragment = {
     __typename?: 'TriplyRecordEntity'
@@ -3033,6 +3040,20 @@ export const PaginationFragmentFragmentDoc = gql`
         pageCount
         pageSize
         total
+    }
+`
+export const ResponseCollectionMetaFragmentFragmentDoc = gql`
+    fragment ResponseCollectionMetaFragment on ResponseCollectionMeta {
+        pagination {
+            ...PaginationFragment
+        }
+    }
+    ${PaginationFragmentFragmentDoc}
+`
+export const ErrorFragmentFragmentDoc = gql`
+    fragment ErrorFragment on Error {
+        code
+        message
     }
 `
 export const StoriesDocument = gql`

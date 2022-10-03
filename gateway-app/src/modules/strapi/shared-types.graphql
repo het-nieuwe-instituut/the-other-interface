@@ -24,6 +24,12 @@ fragment PaginationFragment on Pagination {
     total
 }
 
+fragment ResponseCollectionMetaFragment on ResponseCollectionMeta {
+    pagination {
+        ...PaginationFragment
+    }
+}
+
 fragment UploadFileRelationResponseCollectionFragment on UploadFileRelationResponseCollection {
     data {
         id
@@ -46,4 +52,9 @@ fragment ComponentCoreModuleLayoutsFragment on ComponentCoreModuleLayouts {
     id
     spacingBottom
     spacingTop
+}
+
+fragment ErrorFragment on Error {
+    code
+    message
 }
