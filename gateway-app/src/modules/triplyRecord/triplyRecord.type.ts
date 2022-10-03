@@ -1,6 +1,7 @@
 import { Field, ID, ObjectType, registerEnumType } from '@nestjs/graphql'
 import { Enum_Triplyrecord_Type } from '../../generated/strapi-sdk'
 import { StoryRelationResponseCollection } from '../story/story.type'
+import { ResponseCollectionMeta } from '../strapi/shared-types'
 
 registerEnumType(Enum_Triplyrecord_Type, { name: 'Enum_Triplyrecord_Type' })
 
@@ -29,6 +30,9 @@ export class TriplyRecord {
 export class TriplyRecordRelationResponseCollection {
     @Field(() => [TriplyRecordEntity], { nullable: false })
     public data: TriplyRecordEntity[]
+
+    @Field(() => ResponseCollectionMeta, { nullable: true })
+    public meta: ResponseCollectionMeta
 }
 
 @ObjectType()
@@ -38,4 +42,10 @@ export class TriplyRecordEntity {
 
     @Field(() => ID, { nullable: true })
     public id?: string
+}
+
+@ObjectType()
+export class TriplyRecordEntityResponse {
+    @Field(() => TriplyRecordEntity, { nullable: false })
+    public data: TriplyRecordEntity
 }
