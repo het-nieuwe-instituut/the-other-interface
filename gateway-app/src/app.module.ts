@@ -19,11 +19,14 @@ import { HomepageModule } from './modules/homepage/homepage.module'
 import { TriplyRecordModule } from './modules/triplyRecord/triplyRecord.module'
 import { AuthorModule } from './modules/author/author.module'
 import { LocationModule } from './modules/location/location.module'
+import { LandingPageModule } from './modules/landingPage/landingPage.module'
+import { MenuPageModule } from './modules/menuPage/menuPage.module'
+import { TableModule } from './modules/table/table.module'
+import { UserModule } from './modules/user/user.module'
 
 @Module({
     imports: [
         StoryModule,
-        HomepageModule,
         TriplyModule,
         StrapiModule,
         ConfigModule.forRoot({ isGlobal: true }),
@@ -46,6 +49,11 @@ import { LocationModule } from './modules/location/location.module'
         TriplyRecordModule,
         AuthorModule,
         LocationModule,
+        HomepageModule,
+        LandingPageModule,
+        MenuPageModule,
+        TableModule,
+        UserModule,
     ],
 })
 export class AppModule {}

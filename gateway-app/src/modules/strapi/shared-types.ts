@@ -788,9 +788,6 @@ export class Error {
 
 @ObjectType()
 export class Pagination {
-    @Field({ nullable: true })
-    public __typename?: 'Pagination'
-
     @Field(() => Int)
     public page: number
 
@@ -806,9 +803,6 @@ export class Pagination {
 
 @ObjectType()
 export class ResponseCollectionMeta {
-    @Field({ nullable: true })
-    public __typename?: 'ResponseCollectionMeta'
-
     @Field(() => Pagination)
     public pagination: Pagination
 }

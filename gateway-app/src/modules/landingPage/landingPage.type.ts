@@ -20,9 +20,6 @@ import {
 @ObjectType()
 export class Landingpage {
     @Field({ nullable: true })
-    public __typename?: 'Landingpage'
-
-    @Field({ nullable: true })
     public Title?: string
 
     @Field(() => [LandingpageComponentsDynamicZone], { nullable: true })
@@ -49,9 +46,6 @@ export class Landingpage {
 
 @ObjectType()
 export class LandingpageEntity {
-    @Field({ nullable: true })
-    public __typename?: 'LandingpageEntity'
-
     @Field(() => Landingpage, { nullable: true })
     public attributes?: Landingpage
 
@@ -61,18 +55,12 @@ export class LandingpageEntity {
 
 @ObjectType()
 export class LandingpageEntityResponse {
-    @Field({ nullable: true })
-    public __typename?: 'LandingpageEntityResponse'
-
     @Field(() => LandingpageEntity, { nullable: true })
     public data?: LandingpageEntity
 }
 
 @ObjectType()
 export class LandingpageEntityResponseCollection {
-    @Field({ nullable: true })
-    public __typename?: 'LandingpageEntityResponseCollection'
-
     @Field({ nullable: true })
     public data: Array<LandingpageEntity>
 
@@ -82,9 +70,6 @@ export class LandingpageEntityResponseCollection {
 
 @ObjectType()
 export class LandingpageRelationResponseCollection {
-    @Field({ nullable: true })
-    public __typename?: 'LandingpageRelationResponseCollection'
-
     @Field({ nullable: true })
     public data: Array<LandingpageEntity>
 }

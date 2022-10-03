@@ -37,9 +37,6 @@ export class Homepage {
 
 @ObjectType()
 export class HomepageEntity {
-    @Field({ nullable: true })
-    public __typename?: 'HomepageEntity'
-
     @Field(() => Homepage, { nullable: true })
     public attributes?: Homepage
 
@@ -49,18 +46,12 @@ export class HomepageEntity {
 
 @ObjectType()
 export class HomepageEntityResponse {
-    @Field({ nullable: true })
-    public __typename?: 'HomepageEntityResponse'
-
     @Field(() => HomepageEntity, { nullable: true })
     public data?: HomepageEntity
 }
 
 @ObjectType()
 export class HomepageRelationResponseCollection {
-    @Field({ nullable: true })
-    public __typename?: 'HomepageRelationResponseCollection'
-
     @Field(() => [HomepageEntity], { nullable: true })
     public data: HomepageEntity[]
 }
