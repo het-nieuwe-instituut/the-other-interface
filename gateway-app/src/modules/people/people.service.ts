@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { TriplyService } from '../triply/triply.service'
-import { TriplyUtils } from '../triply/triply.utils'
+import { TriplyUtils, ZoomLevel3ReturnData } from '../triply/triply.utils'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { PeopleType, PeopleZoomLevel4FiltersArgs } from './people.type'
 
@@ -24,10 +24,6 @@ export enum PeopleZoomLevel4Filters {
 
 interface PeopleFilterData {
     filter: string
-}
-
-interface PeopleFilterOptionsData {
-    [x: string]: string
 }
 
 export interface PeopleData {
@@ -82,67 +78,31 @@ export class PeopleService {
             id: PeopleZoomLevel3Ids.deathDate,
             name: 'Overlijdensdatum',
             endpoint: 'zoom-3-people-death-date-filter/run',
-            columns: {
-                name: 'century',
-                uri: 'century',
-                count: 'count',
-                total: 'total',
-            },
         },
         {
             id: PeopleZoomLevel3Ids.nameType,
             name: 'Naam soort',
             endpoint: 'zoom-3-people-name-type-filter/run',
-            columns: {
-                name: 'nameType',
-                uri: 'nameType',
-                count: 'count',
-                total: 'total',
-            },
         },
         {
             id: PeopleZoomLevel3Ids.birthDate,
             name: 'Geboortedatum',
             endpoint: 'zoom-3-people-birth-date-filter/run',
-            columns: {
-                name: 'century',
-                uri: 'century',
-                count: 'count',
-                total: 'total',
-            },
         },
         {
             id: PeopleZoomLevel3Ids.period,
             name: 'Periode',
             endpoint: 'zoom-3-people-period-filter/run',
-            columns: {
-                name: 'century',
-                uri: 'century',
-                count: 'count',
-                total: 'total',
-            },
         },
         {
             id: PeopleZoomLevel3Ids.place,
             name: 'Plaats',
             endpoint: 'zoom-3-people-place-filter/run',
-            columns: {
-                name: 'placeLabel',
-                uri: 'place',
-                count: 'count',
-                total: 'total',
-            },
         },
         {
             id: PeopleZoomLevel3Ids.profession,
             name: 'Beroep/Werkveld',
             endpoint: 'zoom-3-people-profession-filter/run',
-            columns: {
-                name: 'professionLabel',
-                uri: 'profession',
-                count: 'count',
-                total: 'total',
-            },
         },
     ]
 
@@ -170,19 +130,12 @@ export class PeopleService {
             throw new Error(`[People] Mapping ${id} not found`)
         }
 
-        const result = await this.triplyService.queryTriplyData<PeopleFilterOptionsData>(mapping?.endpoint, {
+        const result = await this.triplyService.queryTriplyData<ZoomLevel3ReturnData>(mapping?.endpoint, {
             page,
             pageSize,
         })
 
-        return result.data.map(d => {
-            return {
-                uri: d[mapping.columns.uri] || null,
-                name: d[mapping.columns.name] || null,
-                count: d[mapping.columns.count] ? parseInt(d[mapping.columns.count], 10) : null,
-                total: d[mapping.columns.total] ? parseInt(d[mapping.columns.total], 10) : null,
-            }
-        })
+        return TriplyUtils.parseLevel3OutputData(result.data, EntityNames.People)
     }
 
     public async getZoomLevel4Data(filters: PeopleZoomLevel4FiltersArgs, page = 1, pageSize = 48) {

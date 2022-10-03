@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { TriplyService } from '../triply/triply.service'
-import { TriplyUtils } from '../triply/triply.utils'
+import { TriplyUtils, ZoomLevel3ReturnData } from '../triply/triply.utils'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { ArchivesZoomLevel4FiltersArgs } from './archives.type'
 
@@ -19,10 +19,6 @@ export enum ArchivesZoomLevel4Filters {
 
 interface ObjectFilterData {
     filter: string
-}
-
-interface ObjectFilterOptionsData {
-    [x: string]: string
 }
 
 interface ArchivesZoomLevel4Data {
@@ -92,35 +88,17 @@ export class ArchivesService {
         {
             id: ArchivesZoomLevel3Ids.date,
             name: 'Datering',
-            columns: {
-                name: 'century',
-                uri: 'century',
-                count: 'numberOfRecords',
-                total: 'total',
-            },
             endpoint: 'zoom-3-archives-date-filter/run',
         },
         {
             id: ArchivesZoomLevel3Ids.descriptionLevel,
             name: 'Beschrijvingsniveau',
             endpoint: 'zoom-3-archives-description-level-filter/run',
-            columns: {
-                name: 'descriptionLevel',
-                uri: 'descriptionLevel',
-                count: 'count',
-                total: 'total',
-            },
         },
         {
             id: ArchivesZoomLevel3Ids.relatedNames,
             name: 'Gerelateerde namen',
             endpoint: 'zoom-3-archives-related-names-filter/run',
-            columns: {
-                name: 'relatedNameLabel',
-                uri: 'relatedName',
-                count: 'count',
-                total: 'total',
-            },
         },
     ]
 
@@ -151,19 +129,12 @@ export class ArchivesService {
             throw new Error(`[Archives] Mapping ${id} not found`)
         }
 
-        const result = await this.triplyService.queryTriplyData<ObjectFilterOptionsData>(mapping?.endpoint, {
+        const result = await this.triplyService.queryTriplyData<ZoomLevel3ReturnData>(mapping?.endpoint, {
             page,
             pageSize,
         })
 
-        return result.data.map(d => {
-            return {
-                uri: d[mapping.columns.uri] || null,
-                name: d[mapping.columns.name] || null,
-                count: d[mapping.columns.count] ? parseInt(d[mapping.columns.count], 10) : null,
-                total: d[mapping.columns.total] ? parseInt(d[mapping.columns.total], 10) : null,
-            }
-        })
+        return TriplyUtils.parseLevel3OutputData(result.data, EntityNames.Archives)
     }
 
     public async getZoomLevel4Data(filters: ArchivesZoomLevel4FiltersArgs, page = 1, pageSize = 48) {
