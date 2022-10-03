@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { TriplyService } from '../triply/triply.service'
-import { TriplyUtils } from '../triply/triply.utils'
+import { TriplyUtils, ZoomLevel3ReturnData } from '../triply/triply.utils'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { PublicationsZoomLevel4FiltersArgs } from './publications.type'
 
@@ -22,10 +22,6 @@ export enum PublicationsZoomLevel4Filters {
 
 interface PublicationsFilterData {
     filter: string
-}
-
-interface PublicationsFilterOptionsData {
-    [x: string]: string
 }
 
 interface PublicationsZoomLevel4Data {
@@ -177,56 +173,26 @@ export class PublicationsService {
             id: PublicationsZoomLevel3Ids.relatedPerson,
             name: 'Gerelateerde persoon/instelling',
             endpoint: 'zoom-3-books-related-person-filter/run',
-            columns: {
-                name: 'realtedPerInstLabel',
-                uri: 'relatedPerInstLink',
-                count: 'count',
-                total: 'total',
-            },
         },
         {
             id: PublicationsZoomLevel3Ids.subject,
             name: 'Onderwerp',
             endpoint: 'zoom-3-books-subject-filter/run',
-            columns: {
-                name: 'subjectLabel',
-                uri: 'subject',
-                count: 'count',
-                total: 'total',
-            },
         },
         {
             id: PublicationsZoomLevel3Ids.geographicalKeyword,
             name: 'Geografisch trefwoord',
             endpoint: 'zoom-3-books-geographical-keyword-filter/run',
-            columns: {
-                name: 'geograficalKeywordLabel',
-                uri: 'geograficalKeyword',
-                count: 'count',
-                total: 'total',
-            },
         },
         {
             id: PublicationsZoomLevel3Ids.author,
             name: 'Auteur(s)',
             endpoint: 'zoom-3-books-author-filter/run',
-            columns: {
-                name: 'authorLabel',
-                uri: 'author',
-                count: 'count',
-                total: 'total',
-            },
         },
         {
             id: PublicationsZoomLevel3Ids.typeOfPublication,
             name: 'Soort publicatie',
-            endpoint: 'zoom-3-books-type-of-publication-filter/2/run',
-            columns: {
-                name: 'typeOfPublicationLabel',
-                uri: 'typeOfPublication',
-                count: 'count',
-                total: 'total',
-            },
+            endpoint: 'zoom-3-books-type-of-publication-filter/run',
         },
     ]
 
@@ -259,19 +225,12 @@ export class PublicationsService {
             throw new Error(`[Publications] Mapping ${id} not found`)
         }
 
-        const result = await this.triplyService.queryTriplyData<PublicationsFilterOptionsData>(mapping?.endpoint, {
+        const result = await this.triplyService.queryTriplyData<ZoomLevel3ReturnData>(mapping?.endpoint, {
             page,
             pageSize,
         })
 
-        return result.data.map(d => {
-            return {
-                uri: d[mapping.columns.uri] || null,
-                name: d[mapping.columns.name] || null,
-                count: d[mapping.columns.count] ? parseInt(d[mapping.columns.count], 10) : null,
-                total: d[mapping.columns.total] ? parseInt(d[mapping.columns.total], 10) : null,
-            }
-        })
+        return TriplyUtils.parseLevel3OutputData(result.data, EntityNames.Publications)
     }
 
     public async getZoomLevel4Data(filters: PublicationsZoomLevel4FiltersArgs, page = 1, pageSize = 48) {

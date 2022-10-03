@@ -1,4 +1,9 @@
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
+export interface ZoomLevel3ReturnData {
+    count: string
+    label: string
+    iri: string
+}
 
 export class TriplyUtils {
     public static getEntityNameFromGraph(graph: string): EntityNames {
@@ -70,5 +75,27 @@ export class TriplyUtils {
         }
 
         return nullFlag ? null : output
+    }
+
+    public static parseLevel3OutputData(input: ZoomLevel3ReturnData[], entity: EntityNames) {
+        const totalRow = input.find(r => r.label === '@total')
+        const total = totalRow ? totalRow.count : null
+
+        const output = []
+
+        for (const d of input) {
+            if (d.label === '@total') {
+                continue
+            }
+
+            output.push({
+                uri: d.iri,
+                name: d.label || null,
+                count: d.count ? parseInt(d.count, 10) : null,
+                total,
+            })
+        }
+
+        return output
     }
 }
