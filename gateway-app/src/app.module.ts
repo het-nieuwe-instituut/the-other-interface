@@ -15,6 +15,9 @@ import { ZoomLevel2Module } from './modules/zoomLevel2/zoomLevel2.module'
 import { ZoomLevel3Module } from './modules/zoomLevel3/zoomLevel3.module'
 import { ZoomLevel5Module } from './modules/zoomLevel5/zoomLevel5.module'
 import { ZoomLevel4Module } from './modules/zoomLevel4/zoomLevel4.module'
+import { TriplyRecordModule } from './modules/triplyRecord/triplyRecord.module'
+import { AuthorModule } from './modules/author/author.module'
+import { LocationModule } from './modules/location/location.module'
 
 @Module({
     imports: [
@@ -38,6 +41,9 @@ import { ZoomLevel4Module } from './modules/zoomLevel4/zoomLevel4.module'
         ZoomLevel3Module,
         ZoomLevel4Module,
         ZoomLevel5Module,
+        TriplyRecordModule,
+        AuthorModule,
+        LocationModule,
     ],
 })
 export class AppModule {}

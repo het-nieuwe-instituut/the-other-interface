@@ -15,9 +15,6 @@ export class ComponentModulesImageCarousel {
     public imageCarouselModuleLayout: ComponentCoreModuleLayouts
 
     @Field({ nullable: true })
-    public __typename?: 'ComponentModulesImageCarousel'
-
-    @Field({ nullable: true })
     public description?: string
 
     @Field(() => UploadFileRelationResponseCollection, { nullable: true })
@@ -32,6 +29,6 @@ export class ComponentModulesImageCarouselImagesArgs {
     @Field(() => PaginationArg, { nullable: true })
     public pagination?: PaginationArg
 
-    @Field({ nullable: true })
+    @Field(() => [String], { nullable: true })
     public sort?: string[]
 }

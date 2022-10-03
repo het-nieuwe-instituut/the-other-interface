@@ -146,7 +146,7 @@ export class ObjectsService {
             pageSize,
         })
 
-        return TriplyUtils.parseLevel3OutputData(result.data, EntityNames.Objects)
+        return TriplyUtils.parseLevel3OutputData(result.data)
     }
 
     public async getZoomLevel4Data(filters: ObjectsZoomLevel4FiltersArgs, page = 1, pageSize = 48) {
