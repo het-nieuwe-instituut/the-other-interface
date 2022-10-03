@@ -788,21 +788,21 @@ export class Error {
 
 @ObjectType()
 export class Pagination {
-    @Field(() => Int)
+    @Field(() => Int, { nullable: false })
     public page: number
 
-    @Field(() => Int)
+    @Field(() => Int, { nullable: false })
     public pageCount: number
 
-    @Field(() => Int)
+    @Field(() => Int, { nullable: false })
     public pageSize: number
 
-    @Field(() => Int)
+    @Field(() => Int, { nullable: false })
     public total: number
 }
 
 @ObjectType()
 export class ResponseCollectionMeta {
-    @Field(() => Pagination)
+    @Field(() => Pagination, { nullable: false })
     public pagination: Pagination
 }
