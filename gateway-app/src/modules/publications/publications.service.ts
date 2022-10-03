@@ -177,56 +177,26 @@ export class PublicationsService {
             id: PublicationsZoomLevel3Ids.relatedPerson,
             name: 'Gerelateerde persoon/instelling',
             endpoint: 'zoom-3-books-related-person-filter/run',
-            columns: {
-                name: 'realtedPerInstLabel',
-                uri: 'relatedPerInstLink',
-                count: 'count',
-                total: 'total',
-            },
         },
         {
             id: PublicationsZoomLevel3Ids.subject,
             name: 'Onderwerp',
             endpoint: 'zoom-3-books-subject-filter/run',
-            columns: {
-                name: 'subjectLabel',
-                uri: 'subject',
-                count: 'count',
-                total: 'total',
-            },
         },
         {
             id: PublicationsZoomLevel3Ids.geographicalKeyword,
             name: 'Geografisch trefwoord',
             endpoint: 'zoom-3-books-geographical-keyword-filter/run',
-            columns: {
-                name: 'geograficalKeywordLabel',
-                uri: 'geograficalKeyword',
-                count: 'count',
-                total: 'total',
-            },
         },
         {
             id: PublicationsZoomLevel3Ids.author,
             name: 'Auteur(s)',
             endpoint: 'zoom-3-books-author-filter/run',
-            columns: {
-                name: 'authorLabel',
-                uri: 'author',
-                count: 'count',
-                total: 'total',
-            },
         },
         {
             id: PublicationsZoomLevel3Ids.typeOfPublication,
             name: 'Soort publicatie',
-            endpoint: 'zoom-3-books-type-of-publication-filter/2/run',
-            columns: {
-                name: 'typeOfPublicationLabel',
-                uri: 'typeOfPublication',
-                count: 'count',
-                total: 'total',
-            },
+            endpoint: 'zoom-3-books-type-of-publication-filter/run',
         },
     ]
 
@@ -264,14 +234,31 @@ export class PublicationsService {
             pageSize,
         })
 
-        return result.data.map(d => {
-            return {
-                uri: d[mapping.columns.uri] || null,
-                name: d[mapping.columns.name] || null,
-                count: d[mapping.columns.count] ? parseInt(d[mapping.columns.count], 10) : null,
-                total: d[mapping.columns.total] ? parseInt(d[mapping.columns.total], 10) : null,
+        const totalRow = result.data.find(r => r['label'] === '@total')
+        const total = totalRow ? totalRow.count : null
+
+        const output = []
+
+        for (const d of result.data) {
+            if (d['label'] === '@total') {
+                continue
             }
-        })
+
+            let uri = null
+            if (d['iri']) {
+                const id = d['iri'].split(':')[1]
+                uri = TriplyUtils.getUriForTypeAndId(EntityNames.Publications, id)
+            }
+
+            output.push({
+                uri,
+                name: d['label'] || null,
+                count: d['count'] ? parseInt(d['count'], 10) : null,
+                total,
+            })
+        }
+
+        return output
     }
 
     public async getZoomLevel4Data(filters: PublicationsZoomLevel4FiltersArgs, page = 1, pageSize = 48) {
