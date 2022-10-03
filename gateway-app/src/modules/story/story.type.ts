@@ -2,6 +2,7 @@ import { ObjectType, Field, createUnionType, ID } from '@nestjs/graphql'
 
 import { AuthorEntityResponse } from '../author/author.type'
 import { LocationRelationResponseCollection } from '../location/location.type'
+import { PeopleType } from '../people/people.type'
 import { ComponentCorePublicationDate } from '../strapi/components/core/publicationDate'
 import { ComponentCoreTimeframe } from '../strapi/components/core/timeframe'
 
@@ -13,7 +14,7 @@ import { ComponentModulesSubtitle } from '../strapi/components/modules/subtitle'
 import { ComponentModulesTableModule } from '../strapi/components/modules/tableModule'
 import { ComponentModulesTextModule } from '../strapi/components/modules/textModule'
 import { ComponentModulesTitleModule } from '../strapi/components/modules/titleModule'
-import { Error } from '../strapi/shared-types'
+import { Error, ResponseCollectionMeta } from '../strapi/shared-types'
 import { TriplyRecordRelationResponseCollection } from '../triplyRecord/triplyRecord.type'
 
 @ObjectType()
@@ -77,6 +78,9 @@ export class Story {
 
     @Field({ nullable: true })
     public updatedAt?: Date
+
+    @Field(() => [PeopleType], { nullable: 'itemsAndList' })
+    public people?: PeopleType[]
 }
 
 export const StoryComponentsDynamicZone = createUnionType({
@@ -102,4 +106,19 @@ export class StoryEntity {
 
     @Field(() => ID, { nullable: true })
     public id?: string
+}
+
+@ObjectType()
+export class StoryEntityResponse {
+    @Field({ nullable: true })
+    public data?: StoryEntity
+}
+
+@ObjectType()
+export class StoryEntityResponseCollection {
+    @Field(() => [StoryEntity], { nullable: true })
+    public data: StoryEntity[]
+
+    @Field(() => ResponseCollectionMeta, { nullable: true })
+    public meta: ResponseCollectionMeta
 }

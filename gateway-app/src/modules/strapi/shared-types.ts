@@ -785,3 +785,24 @@ export class Error {
     @Field({ nullable: true })
     public message?: string
 }
+
+@ObjectType()
+export class Pagination {
+    @Field(() => Int, { nullable: false })
+    public page: number
+
+    @Field(() => Int, { nullable: false })
+    public pageCount: number
+
+    @Field(() => Int, { nullable: false })
+    public pageSize: number
+
+    @Field(() => Int, { nullable: false })
+    public total: number
+}
+
+@ObjectType()
+export class ResponseCollectionMeta {
+    @Field(() => Pagination, { nullable: false })
+    public pagination: Pagination
+}
