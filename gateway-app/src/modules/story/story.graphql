@@ -68,28 +68,28 @@ fragment StoryFragment on StoryEntity {
                 id
                 text
                 pullquoteModuleLayout {
-                    ...ComponentCoreModuleLayouts
+                    ...ComponentCoreModuleLayoutsFragment
                 }
             }
             ... on ComponentModulesTextModule {
                 id
                 Richtext
                 textModuleLayout {
-                    ...ComponentCoreModuleLayouts
+                    ...ComponentCoreModuleLayoutsFragment
                 }
             }
             ... on ComponentModulesSubtitle {
                 id
                 text
                 subtitleModuleLayout {
-                    ...ComponentCoreModuleLayouts
+                    ...ComponentCoreModuleLayoutsFragment
                 }
             }
             ... on ComponentModulesTitleModule {
                 id
                 Title
                 titleModuleLayout {
-                    ...ComponentCoreModuleLayouts
+                    ...ComponentCoreModuleLayoutsFragment
                 }
             }
             ... on ComponentModulesImageCarousel {
@@ -101,7 +101,7 @@ fragment StoryFragment on StoryEntity {
                 }
                 description
                 imageCarouselModuleLayout {
-                    ...ComponentCoreModuleLayouts
+                    ...ComponentCoreModuleLayoutsFragment
                 }
             }
             ... on ComponentModulesImage {
@@ -114,7 +114,7 @@ fragment StoryFragment on StoryEntity {
                 caption
                 alt_text
                 imageModuleLayout {
-                    ...ComponentCoreModuleLayouts
+                    ...ComponentCoreModuleLayoutsFragment
                 }
             }
             ... on ComponentModulesTableModule {
@@ -125,7 +125,7 @@ fragment StoryFragment on StoryEntity {
                     }
                 }
                 tableModuleLayout {
-                    ...ComponentCoreModuleLayouts
+                    ...ComponentCoreModuleLayoutsFragment
                 }
             }
             ... on ComponentModulesButtonsModule {
@@ -143,7 +143,7 @@ fragment StoryFragment on StoryEntity {
                 }
                 buttonStyle
                 buttonsModuleLayout {
-                    ...ComponentCoreModuleLayouts
+                    ...ComponentCoreModuleLayoutsFragment
                 }
             }
             ... on Error {

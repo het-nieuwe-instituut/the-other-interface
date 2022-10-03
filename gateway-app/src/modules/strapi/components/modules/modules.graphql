@@ -1,0 +1,117 @@
+fragment ComponentModulesButtonsModuleFragment on ComponentModulesButtonsModule {
+    id
+    buttonsModuleLayout {
+        ...ComponentCoreModuleLayoutsFragment
+    }
+    buttonStyle
+    buttons {
+        ...ComponentCoreButtonFragment
+    }
+}
+
+fragment ComponentModulesCarouselFragment on ComponentModulesCarousel {
+    id
+    carouselModuleLayout {
+        ...ComponentCoreModuleLayoutsFragment
+    }
+    buttonText
+    buttonUrl
+    description
+    items {
+        ...ComponentCoreCarouselItemFragment
+    }
+    title
+    type
+}
+
+fragment ComponentModulesImageCarouselFragment on ComponentModulesImageCarousel {
+    id
+    imageCarouselModuleLayout {
+        ...ComponentCoreModuleLayoutsFragment
+    }
+    description
+    images {
+        ...UploadFileRelationResponseCollectionFragment
+    }
+}
+
+fragment ComponentModulesImageFragment on ComponentModulesImage {
+    alt_text
+    caption
+    id
+    image {
+        ...UploadFileEntityResponseFragment
+    }
+    imageModuleLayout {
+        ...ComponentCoreModuleLayoutsFragment
+    }
+}
+
+fragment ComponentModulesPullquoteFragment on ComponentModulesPullquote {
+    id
+    pullquoteModuleLayout {
+        ...ComponentCoreModuleLayoutsFragment
+    }
+    text
+}
+
+fragment ComponentModulesSubtitleFragment on ComponentModulesSubtitle {
+    id
+    subtitleModuleLayout {
+        ...ComponentCoreModuleLayoutsFragment
+    }
+    text
+}
+
+fragment TableFragment on Table {
+    TableBody {
+        ...ComponentCoreTableBodyFragment
+    }
+    Tablehead {
+        ...ComponentCoreTableHeadFragment
+    }
+    createdAt
+    description
+    name
+    publishedAt
+    updatedAt
+}
+
+fragment TableEntityFragment on TableEntity {
+    id
+    attributes {
+        ...TableFragment
+    }
+}
+
+fragment TableEntityResponseFragment on TableEntityResponse {
+    data {
+        ...TableEntityFragment
+    }
+}
+
+fragment ComponentModulesTableModuleFragment on ComponentModulesTableModule {
+    id
+    tableModuleLayout {
+        ...ComponentCoreModuleLayoutsFragment
+    }
+    table {
+        ...TableEntityResponseFragment
+    }
+}
+
+fragment ComponentModulesTextModuleFragment on ComponentModulesTextModule {
+    Richtext
+    id
+    textModuleLayout {
+        ...ComponentCoreModuleLayoutsFragment
+    }
+}
+
+fragment ComponentModulesTitleModuleFragment on ComponentModulesTitleModule {
+    Title
+    id
+    titleModuleLayout {
+        ...ComponentCoreModuleLayoutsFragment
+    }
+}
