@@ -14,9 +14,6 @@ export class ComponentModulesCarousel {
     public carouselModuleLayout: ComponentCoreModuleLayouts
 
     @Field({ nullable: true })
-    public __typename?: 'ComponentModulesCarousel'
-
-    @Field({ nullable: true })
     public buttonText?: string
 
     @Field({ nullable: true })

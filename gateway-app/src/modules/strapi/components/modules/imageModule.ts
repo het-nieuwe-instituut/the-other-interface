@@ -4,9 +4,6 @@ import { ComponentCoreModuleLayouts, UploadFileEntityResponse } from '../../shar
 @ObjectType()
 export class ComponentModulesImage {
     @Field({ nullable: true })
-    public __typename?: 'ComponentModulesImage'
-
-    @Field({ nullable: true })
     public alt_text?: string
 
     @Field({ nullable: true })

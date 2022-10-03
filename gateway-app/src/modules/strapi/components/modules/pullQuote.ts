@@ -3,9 +3,6 @@ import { ComponentCoreModuleLayouts } from '../../shared-types'
 
 @ObjectType()
 export class ComponentModulesPullquote {
-    @Field({ nullable: true })
-    public __typename?: 'ComponentModulesPullquote'
-
     @Field(() => ID)
     public id: string
 
