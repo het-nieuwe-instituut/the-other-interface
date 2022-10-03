@@ -61,10 +61,10 @@ export class MenupageEntityResponse {
 
 @ObjectType()
 export class MenupageEntityResponseCollection {
-    @Field(() => [MenupageEntity], { nullable: true })
+    @Field(() => [MenupageEntity])
     public data: MenupageEntity[]
 
-    @Field(() => ResponseCollectionMeta, { nullable: true })
+    @Field(() => ResponseCollectionMeta)
     public meta: ResponseCollectionMeta
 }
 
@@ -76,49 +76,49 @@ export class MenupageRelationResponseCollection {
 
 @ArgsType()
 export class MenupageFiltersInput {
-    @Field(() => [StringFilterInput], { nullable: true })
+    @Field(() => StringFilterInput, { nullable: true })
     public Title?: StringFilterInput
 
     @Field(() => [MenupageFiltersInput], { nullable: true })
     public and?: MenupageFiltersInput[]
 
-    @Field(() => [DateTimeFilterInput], { nullable: true })
+    @Field(() => DateTimeFilterInput, { nullable: true })
     public createdAt?: DateTimeFilterInput
 
-    @Field(() => [IdFilterInput], { nullable: true })
+    @Field(() => IdFilterInput, { nullable: true })
     public id?: IdFilterInput
 
-    @Field(() => [StringFilterInput], { nullable: true })
+    @Field(() => StringFilterInput, { nullable: true })
     public locale?: StringFilterInput
 
-    @Field(() => [MenupageFiltersInput], { nullable: true })
+    @Field(() => MenupageFiltersInput, { nullable: true })
     public localizations?: MenupageFiltersInput
 
-    @Field(() => [MenupageFiltersInput], { nullable: true })
+    @Field(() => MenupageFiltersInput, { nullable: true })
     public not?: MenupageFiltersInput
 
     @Field(() => [MenupageFiltersInput], { nullable: true })
     public or?: MenupageFiltersInput[]
 
-    @Field(() => [DateTimeFilterInput], { nullable: true })
+    @Field(() => DateTimeFilterInput, { nullable: true })
     public publishedAt?: DateTimeFilterInput
 
-    @Field(() => [StringFilterInput], { nullable: true })
+    @Field(() => StringFilterInput, { nullable: true })
     public slug?: StringFilterInput
 
-    @Field(() => [DateTimeFilterInput], { nullable: true })
+    @Field(() => DateTimeFilterInput, { nullable: true })
     public updatedAt?: DateTimeFilterInput
 }
 
 @ArgsType()
 export class MenupageLocalizationsArgs {
-    @Field(() => [MenupageFiltersInput], { nullable: true })
+    @Field(() => MenupageFiltersInput, { nullable: true })
     public filters?: MenupageFiltersInput
 
-    @Field(() => [PaginationArg], { nullable: true })
+    @Field(() => PaginationArg, { nullable: true })
     public pagination?: PaginationArg
 
-    @Field(() => [PublicationState], { nullable: true })
+    @Field(() => PublicationState, { nullable: true })
     public publicationState?: PublicationState
 
     @Field(() => [String], { nullable: true })
@@ -130,22 +130,22 @@ export class QueryMenupageArgs {
     @Field(() => ID, { nullable: true })
     public id?: string
 
-    @Field(() => [String], { nullable: true })
+    @Field(() => String, { nullable: true })
     public locale?: string
 }
 
 @ArgsType()
 export class QueryMenupagesArgs {
-    @Field(() => [MenupageFiltersInput], { nullable: true })
+    @Field(() => MenupageFiltersInput, { nullable: true })
     public filters?: MenupageFiltersInput
 
-    @Field(() => [String], { nullable: true })
+    @Field(() => String, { nullable: true })
     public locale?: string
 
-    @Field(() => [PaginationArg], { nullable: true })
+    @Field(() => PaginationArg, { nullable: true })
     public pagination?: PaginationArg
 
-    @Field(() => [PublicationState], { nullable: true })
+    @Field(() => PublicationState, { nullable: true })
     public publicationState?: PublicationState
 
     @Field(() => [String], { nullable: true })

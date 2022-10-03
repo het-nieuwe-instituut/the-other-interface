@@ -61,8 +61,8 @@ export class LandingpageEntityResponse {
 
 @ObjectType()
 export class LandingpageEntityResponseCollection {
-    @Field({ nullable: true })
-    public data: Array<LandingpageEntity>
+    @Field(() => [LandingpageEntity])
+    public data: LandingpageEntity
 
     @Field(() => ResponseCollectionMeta, { nullable: true })
     public meta: ResponseCollectionMeta
@@ -70,8 +70,8 @@ export class LandingpageEntityResponseCollection {
 
 @ObjectType()
 export class LandingpageRelationResponseCollection {
-    @Field({ nullable: true })
-    public data: Array<LandingpageEntity>
+    @Field(() => [LandingpageEntity])
+    public data: LandingpageEntity[]
 }
 
 @ArgsType()
@@ -85,7 +85,7 @@ export class LandingpageLocalizationsArgs {
     @Field(() => PublicationState, { nullable: true })
     public publicationState?: PublicationState
 
-    @Field({ nullable: true })
+    @Field(() => [String], { nullable: true })
     public sort?: string[]
 }
 
@@ -148,7 +148,7 @@ export class QueryLandingpagesArgs {
     @Field(() => PublicationState, { nullable: true })
     public publicationState?: PublicationState
 
-    @Field({ nullable: true })
+    @Field(() => [String], { nullable: true })
     public sort?: string[]
 }
 

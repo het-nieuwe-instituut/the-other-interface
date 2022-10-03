@@ -15,7 +15,7 @@ export class TableEntityResponseCollection {
     @Field(() => [TableEntity])
     public data: TableEntity[]
 
-    @Field()
+    @Field(() => ResponseCollectionMeta)
     public meta: ResponseCollectionMeta
 }
 

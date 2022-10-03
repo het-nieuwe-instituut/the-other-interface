@@ -52,7 +52,7 @@ export class HomepageEntityResponse {
 
 @ObjectType()
 export class HomepageRelationResponseCollection {
-    @Field(() => [HomepageEntity], { nullable: true })
+    @Field(() => [HomepageEntity])
     public data: HomepageEntity[]
 }
 

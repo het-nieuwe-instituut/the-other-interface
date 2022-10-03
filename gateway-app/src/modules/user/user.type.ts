@@ -23,7 +23,7 @@ export class QueryUsersPermissionsRolesArgs {
     public pagination?: PaginationArg
 
     @Field(() => [String], { nullable: true })
-    public sort?: string
+    public sort?: string[]
 }
 
 @ArgsType()
@@ -41,7 +41,7 @@ export class QueryUsersPermissionsUsersArgs {
     public pagination?: PaginationArg
 
     @Field(() => [String], { nullable: true })
-    public sort?: string
+    public sort?: string[]
 }
 
 @ArgsType()
@@ -50,7 +50,7 @@ export class UsersPermissionsPermissionFiltersInput {
     public action?: StringFilterInput
 
     @Field(() => [UsersPermissionsPermissionFiltersInput], { nullable: true })
-    public and?: UsersPermissionsPermissionFiltersInput
+    public and?: UsersPermissionsPermissionFiltersInput[]
 
     @Field(() => DateTimeFilterInput, { nullable: true })
     public createdAt?: DateTimeFilterInput
@@ -62,7 +62,7 @@ export class UsersPermissionsPermissionFiltersInput {
     public not?: UsersPermissionsPermissionFiltersInput
 
     @Field(() => [UsersPermissionsPermissionFiltersInput], { nullable: true })
-    public or?: UsersPermissionsPermissionFiltersInput
+    public or?: UsersPermissionsPermissionFiltersInput[]
 
     @Field(() => UsersPermissionsRoleFiltersInput, { nullable: true })
     public role?: UsersPermissionsRoleFiltersInput
@@ -80,7 +80,7 @@ export class UsersPermissionsRolePermissionsArgs {
     public pagination?: PaginationArg
 
     @Field(() => [String], { nullable: true })
-    public sort?: string
+    public sort?: string[]
 }
 
 @ArgsType()
@@ -92,13 +92,13 @@ export class UsersPermissionsRoleUsersArgs {
     public pagination?: PaginationArg
 
     @Field(() => [String], { nullable: true })
-    public sort?: string
+    public sort?: string[]
 }
 
 @ArgsType()
 export class UsersPermissionsRoleFiltersInput {
     @Field(() => [UsersPermissionsRoleFiltersInput], { nullable: true })
-    public and?: UsersPermissionsRoleFiltersInput
+    public and?: UsersPermissionsRoleFiltersInput[]
 
     @Field(() => DateTimeFilterInput, { nullable: true })
     public createdAt?: DateTimeFilterInput
@@ -116,7 +116,7 @@ export class UsersPermissionsRoleFiltersInput {
     public not?: UsersPermissionsRoleFiltersInput
 
     @Field(() => [UsersPermissionsRoleFiltersInput], { nullable: true })
-    public or?: UsersPermissionsRoleFiltersInput
+    public or?: UsersPermissionsRoleFiltersInput[]
 
     @Field(() => UsersPermissionsPermissionFiltersInput, { nullable: true })
     public permissions?: UsersPermissionsPermissionFiltersInput
@@ -134,7 +134,7 @@ export class UsersPermissionsRoleFiltersInput {
 @ArgsType()
 export class UsersPermissionsUserFiltersInput {
     @Field(() => [UsersPermissionsUserFiltersInput], { nullable: true })
-    public and?: UsersPermissionsUserFiltersInput
+    public and?: UsersPermissionsUserFiltersInput[]
 
     @Field(() => BooleanFilterInput, { nullable: true })
     public blocked?: BooleanFilterInput
@@ -158,7 +158,7 @@ export class UsersPermissionsUserFiltersInput {
     public not?: UsersPermissionsUserFiltersInput
 
     @Field(() => [UsersPermissionsUserFiltersInput], { nullable: true })
-    public or?: UsersPermissionsUserFiltersInput
+    public or?: UsersPermissionsUserFiltersInput[]
 
     @Field(() => StringFilterInput, { nullable: true })
     public password?: StringFilterInput
