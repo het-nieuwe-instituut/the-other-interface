@@ -1,4 +1,4 @@
-import { ArgsType, Field, Float, ID, Int, ObjectType, registerEnumType } from '@nestjs/graphql'
+import { ArgsType, Field, Float, ID, InputType, Int, ObjectType, registerEnumType } from '@nestjs/graphql'
 import {
     Enum_Componentcoremodulelayouts_Spacingbottom,
     Enum_Componentcoremodulelayouts_Spacingtop,
@@ -60,7 +60,7 @@ export class UploadFile {
 
     // related?: Maybe<Array<Maybe<GenericMorph>>>
 }
-@ArgsType()
+@InputType()
 export class IntFilterInput {
     @Field(() => [Int], { nullable: true })
     public and?: number[]
@@ -126,7 +126,7 @@ export class IntFilterInput {
     public startsWith?: number
 }
 
-@ArgsType()
+@InputType()
 export class FloatFilterInput {
     @Field(() => [Float], { nullable: true })
     public and?: number[]
@@ -192,7 +192,7 @@ export class FloatFilterInput {
     public startsWith?: number
 }
 
-@ArgsType()
+@InputType()
 export class IdFilterInput {
     @Field(() => [ID], { nullable: true })
     public and?: string[]
@@ -258,7 +258,7 @@ export class IdFilterInput {
     public startsWith?: string
 }
 
-@ArgsType()
+@InputType()
 export class JsonFilterInput {
     @Field(() => [JSON], { nullable: true })
     public and?: JSON[]
@@ -338,7 +338,7 @@ export class UploadFileEntityResponse {
     public data?: UploadFileEntity
 }
 
-@ArgsType()
+@InputType()
 export class StringFilterInput {
     @Field(() => [String], { nullable: true })
     public and?: string[]
@@ -404,7 +404,7 @@ export class StringFilterInput {
     public startsWith?: string
 }
 
-@ArgsType()
+@InputType()
 export class BooleanFilterInput {
     @Field(() => [Boolean], { nullable: true })
     public and?: boolean[]
@@ -640,7 +640,7 @@ export class UploadFileRelationResponseCollection {
     public data: UploadFileEntity[]
 }
 
-@ArgsType()
+@InputType()
 export class DateTimeFilterInput {
     @Field(() => [Date], { nullable: true })
     public and?: Date[]

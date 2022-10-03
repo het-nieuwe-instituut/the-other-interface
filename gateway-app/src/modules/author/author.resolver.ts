@@ -17,9 +17,9 @@ export class AuthorResolver {
     @Query(() => AuthorEntityResponseCollection)
     public async authors(
         @Args('filters') filters: AuthorFiltersInput,
-        @Args('pagination') pagination: PaginationArg,
-        @Args() sort: [string],
-        @Args() publicationState: PublicationState
+        @Args() pagination: PaginationArg,
+        @Args('sort', { type: () => [String] }) sort: string[],
+        @Args('publicationState') publicationState: PublicationState
     ) {
         const res = await this.strapiGqlSdk.authors({
             filters: filters || {},

@@ -1,4 +1,4 @@
-import { ArgsType, Field, ID, ObjectType } from '@nestjs/graphql'
+import { Field, ID, InputType, ObjectType } from '@nestjs/graphql'
 import { DateTimeFilterInput, IdFilterInput, ResponseCollectionMeta, StringFilterInput } from '../strapi/shared-types'
 
 @ObjectType()
@@ -46,7 +46,7 @@ export class AuthorEntityResponseCollection {
     public meta: ResponseCollectionMeta
 }
 
-@ArgsType()
+@InputType()
 export class AuthorFiltersInput {
     @Field(() => [AuthorFiltersInput], { nullable: true })
     public and?: AuthorFiltersInput[]
