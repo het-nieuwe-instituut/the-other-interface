@@ -4,7 +4,7 @@ import { LongFilterInput } from '../../shared-types'
 @ObjectType()
 export class ComponentCoreTimeframe {
     @Field({ nullable: true })
-    public __typename?: 'ComponentCoreTimeframe'
+    public typename?: 'ComponentCoreTimeframe'
 
     @Field(() => ID)
     public id: string

@@ -4,7 +4,7 @@ import { ComponentCoreModuleLayouts } from '../../shared-types'
 @ObjectType()
 export class ComponentModulesTextModule {
     @Field({ nullable: true })
-    public __typename?: 'ComponentModulesTextModule'
+    public typename?: 'ComponentModulesTextModule'
 
     @Field({ nullable: true })
     public Richtext?: string

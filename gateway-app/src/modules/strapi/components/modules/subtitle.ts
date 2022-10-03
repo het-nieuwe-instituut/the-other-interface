@@ -4,7 +4,7 @@ import { ComponentCoreModuleLayouts } from '../../shared-types'
 @ObjectType()
 export class ComponentModulesSubtitle {
     @Field({ nullable: true })
-    public __typename?: 'ComponentModulesSubtitle'
+    public typename?: 'ComponentModulesSubtitle'
 
     @Field(() => ID)
     public id: string

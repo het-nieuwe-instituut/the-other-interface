@@ -6,7 +6,7 @@ export class ComponentCorePageHeader {
     public id: string
 
     @Field({ nullable: true })
-    public __typename?: 'ComponentCorePageHeader'
+    public typename?: 'ComponentCorePageHeader'
 
     @Field({ nullable: true })
     public Title?: string

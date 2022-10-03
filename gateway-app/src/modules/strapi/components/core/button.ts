@@ -7,7 +7,7 @@ export class ComponentCoreButton {
     public id: string
 
     @Field({ nullable: true })
-    public __typename?: 'ComponentCoreButton'
+    public typename?: 'ComponentCoreButton'
 
     @Field(() => UploadFileEntityResponse, { nullable: true })
     public attachment?: UploadFileEntityResponse

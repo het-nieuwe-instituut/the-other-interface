@@ -17,9 +17,18 @@ import { Error } from '../strapi/shared-types'
 import { TriplyRecordRelationResponseCollection } from '../triplyRecord/triplyRecord.type'
 
 @ObjectType()
+export class StoryRelationResponseCollection {
+    @Field({ nullable: true })
+    public typename?: 'StoryRelationResponseCollection'
+
+    @Field(() => [StoryEntity], { nullable: false })
+    public data: StoryEntity[]
+}
+
+@ObjectType()
 export class Story {
     @Field({ nullable: true })
-    public __typename?: 'Story'
+    public typename?: 'Story'
 
     @Field(() => AuthorEntityResponse, { nullable: true })
     public author?: AuthorEntityResponse
@@ -45,13 +54,13 @@ export class Story {
     @Field({ nullable: true })
     public locale?: string
 
-    @Field({ nullable: true })
+    @Field(() => StoryRelationResponseCollection, { nullable: true })
     public localizations?: StoryRelationResponseCollection
 
-    @Field({ nullable: true })
+    @Field(() => LocationRelationResponseCollection, { nullable: true })
     public locations?: LocationRelationResponseCollection
 
-    @Field({ nullable: true })
+    @Field(() => ComponentCorePublicationDate, { nullable: true })
     public publicationDate?: ComponentCorePublicationDate
 
     @Field({ nullable: true })
@@ -69,7 +78,7 @@ export class Story {
     @Field({ nullable: false })
     public title: string
 
-    @Field({ nullable: true })
+    @Field(() => TriplyRecordRelationResponseCollection, { nullable: true })
     public triplyRecords?: TriplyRecordRelationResponseCollection
 
     @Field({ nullable: true })
@@ -93,18 +102,9 @@ export const StoryComponentsDynamicZone = createUnionType({
 })
 
 @ObjectType()
-export class StoryRelationResponseCollection {
-    @Field({ nullable: true })
-    public __typename?: 'StoryRelationResponseCollection'
-
-    @Field({ nullable: false })
-    public data: StoryEntity[]
-}
-
-@ObjectType()
 export class StoryEntity {
     @Field({ nullable: true })
-    public __typename?: 'StoryEntity'
+    public typename?: 'StoryEntity'
 
     @Field({ nullable: true })
     public attributes?: Story

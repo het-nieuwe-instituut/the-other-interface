@@ -4,7 +4,7 @@ import { StoryRelationResponseCollection } from '../story/story.type'
 @ObjectType()
 export class LocationRelationResponseCollection {
     @Field({ nullable: true })
-    public __typename?: 'LocationRelationResponseCollection'
+    public typename?: 'LocationRelationResponseCollection'
 
     @Field(() => [LocationEntity], { nullable: false })
     public data: LocationEntity[]
@@ -13,7 +13,7 @@ export class LocationRelationResponseCollection {
 @ObjectType()
 export class Location {
     @Field({ nullable: true })
-    public __typename?: 'Location'
+    public typename?: 'Location'
 
     @Field({ nullable: true })
     public city?: string
@@ -40,7 +40,7 @@ export class Location {
 @ObjectType()
 export class LocationEntity {
     @Field({ nullable: true })
-    public __typename?: 'LocationEntity'
+    public typename?: 'LocationEntity'
 
     @Field(() => Location, { nullable: true })
     public attributes?: Location

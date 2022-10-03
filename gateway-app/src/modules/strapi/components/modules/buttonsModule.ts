@@ -1,11 +1,23 @@
 import { ArgsType, Field, ID, ObjectType, registerEnumType } from '@nestjs/graphql'
-import { Enum_Componentmodulesbuttonsmodule_Buttonstyle } from 'src/generated/strapi-sdk'
+import { Enum_Componentmodulesbuttonsmodule_Buttonstyle } from '../../../../generated/strapi-sdk'
 import { ComponentCoreModuleLayouts, PaginationArg } from '../../shared-types'
 import { ComponentCoreButton, ComponentCoreButtonFiltersInput } from '../core/button'
 
 registerEnumType(Enum_Componentmodulesbuttonsmodule_Buttonstyle, {
     name: 'Enum_Componentmodulesbuttonsmodule_Buttonstyle',
 })
+
+@ArgsType()
+export class ComponentModulesButtonsModuleButtonsArgs {
+    @Field(() => ComponentCoreButtonFiltersInput, { nullable: true })
+    public filters?: ComponentCoreButtonFiltersInput
+
+    @Field(() => PaginationArg, { nullable: true })
+    public pagination?: PaginationArg
+
+    @Field(() => [String], { nullable: true })
+    public sort?: string[]
+}
 
 @ObjectType()
 export class ComponentModulesButtonsModule {
@@ -16,23 +28,11 @@ export class ComponentModulesButtonsModule {
     public buttonsModuleLayout: ComponentCoreModuleLayouts
 
     @Field({ nullable: true })
-    public __typename?: 'ComponentModulesButtonsModule'
+    public typename?: 'ComponentModulesButtonsModule'
 
     @Field(() => Enum_Componentmodulesbuttonsmodule_Buttonstyle, { nullable: true })
     public buttonStyle?: Enum_Componentmodulesbuttonsmodule_Buttonstyle
 
     @Field(() => [ComponentCoreButton], { nullable: true })
     public buttons?: ComponentCoreButton[]
-}
-
-@ArgsType()
-export class ComponentModulesButtonsModuleButtonsArgs {
-    @Field(() => ComponentCoreButtonFiltersInput, { nullable: true })
-    public filters?: ComponentCoreButtonFiltersInput
-
-    @Field(() => PaginationArg, { nullable: true })
-    public pagination?: PaginationArg
-
-    @Field({ nullable: true })
-    public sort?: string[]
 }
