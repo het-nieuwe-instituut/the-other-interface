@@ -1,0 +1,49 @@
+fragment UploadFileFragment on UploadFile {
+    hash
+    mime
+    name
+    provider
+    size
+    url
+    alternativeText
+    caption
+    createdAt
+    ext
+    formats
+    height
+    previewUrl
+    provider_metadata
+    updatedAt
+    width
+}
+
+fragment PaginationFragment on Pagination {
+    page
+    pageCount
+    pageSize
+    total
+}
+
+fragment UploadFileRelationResponseCollectionFragment on UploadFileRelationResponseCollection {
+    data {
+        id
+        attributes {
+            ...UploadFileFragment
+        }
+    }
+}
+
+fragment UploadFileEntityResponseFragment on UploadFileEntityResponse {
+    data {
+        id
+        attributes {
+            ...UploadFileFragment
+        }
+    }
+}
+
+fragment ComponentCoreModuleLayoutsFragment on ComponentCoreModuleLayouts {
+    id
+    spacingBottom
+    spacingTop
+}
