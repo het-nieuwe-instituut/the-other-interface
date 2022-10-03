@@ -1,11 +1,12 @@
 import { Inject } from '@nestjs/common'
-import { Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
-import { Enum_Triplyrecord_Type, Sdk } from '../../generated/strapi-sdk'
+import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
+import { Enum_Triplyrecord_Type, PublicationState, Sdk } from '../../generated/strapi-sdk'
 import { PeopleService } from '../people/people.service'
-import { Story, StoryEntityResponseCollection } from './story.type'
+import { I18NLocaleCode, PaginationArg } from '../strapi/shared-types'
+import { Story, StoryEntityResponse, StoryEntityResponseCollection, StoryFiltersInput } from './story.type'
 
 @Resolver(Story)
-export class StoryResolver {
+export class StoryFieldResolver {
     public constructor(
         @Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk,
         private readonly peopleService: PeopleService
@@ -23,13 +24,32 @@ export class StoryResolver {
     }
 }
 
-@Resolver(StoryEntityResponseCollection)
-export class StoryEntityResponseCollectionResolver {
+@Resolver()
+export class StoryResolver {
     public constructor(@Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk) {}
-    @Query(() => [Story])
-    public async stories() {
-        const res = await this.strapiGqlSdk.stories()
+    @Query(() => StoryEntityResponseCollection)
+    public async stories(
+        @Args('filters') filters: StoryFiltersInput,
+        @Args() pagination: PaginationArg,
+        @Args('sort', { type: () => [String] }) sort: string[],
+        @Args('publicationState') publicationState: PublicationState,
+        @Args('locale') locale: I18NLocaleCode
+    ) {
+        const res = await this.strapiGqlSdk.stories({
+            filters: filters || {},
+            pagination: pagination || {},
+            sort: sort || [],
+            publicationState: publicationState || PublicationState.Live,
+            locale: locale || null,
+        })
 
         return res.stories
+    }
+
+    @Query(() => StoryEntityResponse)
+    public async story(@Args('id') id: string, @Args('locale') locale: I18NLocaleCode) {
+        const res = await this.strapiGqlSdk.story({ id, locale })
+
+        return res.story
     }
 }

@@ -43,7 +43,13 @@ export class LocationFieldResolver {
     @ResolveField()
     public async stories(@Parent() location: Location) {
         if (location.stories?.data && location.stories?.data.length) {
-            return this.strapiGqlSdk.stories({}) // todo
+            return this.strapiGqlSdk.stories({
+                filters: {
+                    or: location.stories.data.map(ent => {
+                        return { id: { eq: ent.id } }
+                    }),
+                },
+            })
         }
         return []
     }

@@ -1,5 +1,4 @@
 import { Field, ID, InputType, ObjectType } from '@nestjs/graphql'
-import { AuthorFiltersInput } from '../author/author.type'
 import { DateTimeFilterInput, IdFilterInput, StringFilterInput } from '../strapi/shared-types'
 import { Location } from './location-dependency.type'
 
@@ -23,11 +22,11 @@ export class LocationFiltersInput {
     @Field(() => StringFilterInput, { nullable: true })
     public lastName?: StringFilterInput
 
-    @Field(() => AuthorFiltersInput, { nullable: true })
-    public not?: AuthorFiltersInput
+    @Field(() => LocationFiltersInput, { nullable: true })
+    public not?: LocationFiltersInput
 
-    @Field(() => [AuthorFiltersInput], { nullable: true })
-    public or?: AuthorFiltersInput[]
+    @Field(() => [LocationFiltersInput], { nullable: true })
+    public or?: LocationFiltersInput[]
 
     @Field(() => DateTimeFilterInput, { nullable: true })
     public publishedAt?: DateTimeFilterInput

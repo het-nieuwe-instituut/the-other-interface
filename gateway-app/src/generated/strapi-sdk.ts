@@ -2204,7 +2204,13 @@ export type LocationFragmentFragment = {
     } | null
 }
 
-export type StoriesQueryVariables = Exact<{ [key: string]: never }>
+export type StoriesQueryVariables = Exact<{
+    filters?: InputMaybe<StoryFiltersInput>
+    pagination?: InputMaybe<PaginationArg>
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>
+    publicationState?: InputMaybe<PublicationState>
+    locale?: InputMaybe<Scalars['I18NLocaleCode']>
+}>
 
 export type StoriesQuery = {
     __typename?: 'Query'
@@ -2234,6 +2240,42 @@ export type StoriesQuery = {
                 } | null
             } | null
         }>
+    } | null
+}
+
+export type StoryQueryVariables = Exact<{
+    id?: InputMaybe<Scalars['ID']>
+    locale?: InputMaybe<Scalars['I18NLocaleCode']>
+}>
+
+export type StoryQuery = {
+    __typename?: 'Query'
+    story?: {
+        __typename?: 'StoryEntityResponse'
+        data?: {
+            __typename?: 'StoryEntity'
+            id?: string | null
+            attributes?: {
+                __typename?: 'Story'
+                title: string
+                slug?: string | null
+                createdAt?: any | null
+                updatedAt?: any | null
+                publishedAt?: any | null
+                triplyRecords?: {
+                    __typename?: 'TriplyRecordRelationResponseCollection'
+                    data: Array<{
+                        __typename?: 'TriplyRecordEntity'
+                        id?: string | null
+                        attributes?: {
+                            __typename?: 'TriplyRecord'
+                            recordId: string
+                            type: Enum_Triplyrecord_Type
+                        } | null
+                    }>
+                } | null
+            } | null
+        } | null
     } | null
 }
 
@@ -2451,8 +2493,24 @@ export const LocationsDocument = gql`
     ${LocationFragmentFragmentDoc}
 `
 export const StoriesDocument = gql`
-    query stories {
+    query stories(
+        $filters: StoryFiltersInput
+        $pagination: PaginationArg
+        $sort: [String]
+        $publicationState: PublicationState
+        $locale: I18NLocaleCode
+    ) {
         stories {
+            data {
+                ...StoryFragment
+            }
+        }
+    }
+    ${StoryFragmentFragmentDoc}
+`
+export const StoryDocument = gql`
+    query story($id: ID, $locale: I18NLocaleCode) {
+        story {
             data {
                 ...StoryFragment
             }
@@ -2569,6 +2627,17 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
                         ...wrappedRequestHeaders,
                     }),
                 'stories',
+                'query'
+            )
+        },
+        story(variables?: StoryQueryVariables, requestHeaders?: Dom.RequestInit['headers']): Promise<StoryQuery> {
+            return withWrapper(
+                wrappedRequestHeaders =>
+                    client.request<StoryQuery>(StoryDocument, variables, {
+                        ...requestHeaders,
+                        ...wrappedRequestHeaders,
+                    }),
+                'story',
                 'query'
             )
         },

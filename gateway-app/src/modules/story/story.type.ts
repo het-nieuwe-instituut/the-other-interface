@@ -1,4 +1,4 @@
-import { ObjectType, Field, createUnionType, ID } from '@nestjs/graphql'
+import { ObjectType, Field, createUnionType, ID, InputType } from '@nestjs/graphql'
 
 import { AuthorEntityResponse } from '../author/author.type'
 import { LocationRelationResponseCollection } from '../location/location.type'
@@ -14,7 +14,13 @@ import { ComponentModulesSubtitle } from '../strapi/components/modules/subtitle'
 import { ComponentModulesTableModule } from '../strapi/components/modules/tableModule'
 import { ComponentModulesTextModule } from '../strapi/components/modules/textModule'
 import { ComponentModulesTitleModule } from '../strapi/components/modules/titleModule'
-import { Error, ResponseCollectionMeta } from '../strapi/shared-types'
+import {
+    DateTimeFilterInput,
+    Error,
+    IdFilterInput,
+    ResponseCollectionMeta,
+    StringFilterInput,
+} from '../strapi/shared-types'
 import { TriplyRecordRelationResponseCollection } from '../triplyRecord/triplyRecord.type'
 
 @ObjectType()
@@ -121,4 +127,37 @@ export class StoryEntityResponseCollection {
 
     @Field(() => ResponseCollectionMeta, { nullable: true })
     public meta: ResponseCollectionMeta
+}
+
+@InputType()
+export class StoryFiltersInput {
+    @Field(() => [StoryFiltersInput], { nullable: true })
+    public and?: StoryFiltersInput[]
+
+    @Field(() => DateTimeFilterInput, { nullable: true })
+    public createdAt?: DateTimeFilterInput
+
+    @Field(() => StringFilterInput, { nullable: true })
+    public firstName?: StringFilterInput
+
+    @Field(() => IdFilterInput, { nullable: true })
+    public id?: IdFilterInput
+
+    @Field(() => StringFilterInput, { nullable: true })
+    public insertion?: StringFilterInput
+
+    @Field(() => StringFilterInput, { nullable: true })
+    public lastName?: StringFilterInput
+
+    @Field(() => StoryFiltersInput, { nullable: true })
+    public not?: StoryFiltersInput
+
+    @Field(() => [StoryFiltersInput], { nullable: true })
+    public or?: StoryFiltersInput[]
+
+    @Field(() => DateTimeFilterInput, { nullable: true })
+    public publishedAt?: DateTimeFilterInput
+
+    @Field(() => DateTimeFilterInput, { nullable: true })
+    public updatedAt?: DateTimeFilterInput
 }
