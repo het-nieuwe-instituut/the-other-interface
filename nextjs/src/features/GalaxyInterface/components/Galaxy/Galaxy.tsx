@@ -68,6 +68,8 @@ function useQuery<T, Q extends () => ReturnType<Q>>(keys: T, query: Q) {
 export const GALAXY_BASE = 800
 const Galaxy: React.FC<Props> = ({ data = [], dimensions }) => {
     const { isLoading, data: stories } = useQuery(['instances-per-class'], () => fetchInstancesPerClass())
+
+    // TODO: remove when connected to the gateway
     const objectsPerTypeWithIds = useMemo(
         () => data.map(item => ({ ...item, name: item.class.substring(item.class.lastIndexOf('/') + 1) })),
         [data]
