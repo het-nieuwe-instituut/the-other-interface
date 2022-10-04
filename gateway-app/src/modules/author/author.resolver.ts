@@ -16,10 +16,10 @@ export class AuthorResolver {
 
     @Query(() => AuthorEntityResponseCollection)
     public async authors(
-        @Args('filters', { nullable: true }) filters: AuthorFiltersInput,
-        @Args('pagination', { nullable: true }) pagination: PaginationArg,
-        @Args('sort', { nullable: true, type: () => [String] }) sort: string[],
-        @Args('publicationState', { nullable: true }) publicationState: PublicationState
+        @Args('filters', { nullable: true }) filters?: AuthorFiltersInput,
+        @Args('pagination', { nullable: true }) pagination?: PaginationArg,
+        @Args('sort', { nullable: true, type: () => [String] }) sort?: string[],
+        @Args('publicationState', { nullable: true }) publicationState?: PublicationState
     ) {
         const res = await this.strapiGqlSdk.authors({
             filters: filters || undefined,
