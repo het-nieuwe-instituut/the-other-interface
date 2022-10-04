@@ -4,6 +4,7 @@ fragment ComponentModulesButtonsModuleFragment on ComponentModulesButtonsModule 
         ...ComponentCoreModuleLayoutsFragment
     }
     buttonStyle
+    __typename
     buttons {
         ...ComponentCoreButtonFragment
     }
@@ -17,6 +18,7 @@ fragment ComponentModulesCarouselFragment on ComponentModulesCarousel {
     buttonText
     buttonUrl
     description
+    __typename
     items {
         ...ComponentCoreCarouselItemFragment
     }
@@ -30,6 +32,7 @@ fragment ComponentModulesImageCarouselFragment on ComponentModulesImageCarousel 
         ...ComponentCoreModuleLayoutsFragment
     }
     description
+    __typename
     images {
         ...UploadFileRelationResponseCollectionFragment
     }
@@ -39,6 +42,7 @@ fragment ComponentModulesImageFragment on ComponentModulesImage {
     alt_text
     caption
     id
+    __typename
     image {
         ...UploadFileEntityResponseFragment
     }
@@ -49,6 +53,7 @@ fragment ComponentModulesImageFragment on ComponentModulesImage {
 
 fragment ComponentModulesPullquoteFragment on ComponentModulesPullquote {
     id
+    __typename
     pullquoteModuleLayout {
         ...ComponentCoreModuleLayoutsFragment
     }
@@ -57,6 +62,7 @@ fragment ComponentModulesPullquoteFragment on ComponentModulesPullquote {
 
 fragment ComponentModulesSubtitleFragment on ComponentModulesSubtitle {
     id
+    __typename
     subtitleModuleLayout {
         ...ComponentCoreModuleLayoutsFragment
     }
@@ -92,6 +98,7 @@ fragment TableEntityResponseFragment on TableEntityResponse {
 
 fragment ComponentModulesTableModuleFragment on ComponentModulesTableModule {
     id
+    __typename
     tableModuleLayout {
         ...ComponentCoreModuleLayoutsFragment
     }
@@ -103,6 +110,7 @@ fragment ComponentModulesTableModuleFragment on ComponentModulesTableModule {
 fragment ComponentModulesTextModuleFragment on ComponentModulesTextModule {
     Richtext
     id
+    __typename
     textModuleLayout {
         ...ComponentCoreModuleLayoutsFragment
     }
@@ -111,6 +119,7 @@ fragment ComponentModulesTextModuleFragment on ComponentModulesTextModule {
 fragment ComponentModulesTitleModuleFragment on ComponentModulesTitleModule {
     Title
     id
+    __typename
     titleModuleLayout {
         ...ComponentCoreModuleLayoutsFragment
     }

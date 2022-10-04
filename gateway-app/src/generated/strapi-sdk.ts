@@ -2052,7 +2052,7 @@ export type HomepageFragmentFragment = {
     updatedAt?: any | null
     components?: Array<
         | {
-              __typename?: 'ComponentModulesButtonsModule'
+              __typename: 'ComponentModulesButtonsModule'
               id: string
               buttonStyle?: Enum_Componentmodulesbuttonsmodule_Buttonstyle | null
               buttonsModuleLayout: {
@@ -2096,7 +2096,7 @@ export type HomepageFragmentFragment = {
               } | null> | null
           }
         | {
-              __typename?: 'ComponentModulesCarousel'
+              __typename: 'ComponentModulesCarousel'
               id: string
               buttonText?: string | null
               buttonUrl?: string | null
@@ -2145,7 +2145,7 @@ export type HomepageFragmentFragment = {
               } | null> | null
           }
         | {
-              __typename?: 'ComponentModulesImage'
+              __typename: 'ComponentModulesImage'
               alt_text?: string | null
               caption?: string | null
               id: string
@@ -2183,7 +2183,7 @@ export type HomepageFragmentFragment = {
               }
           }
         | {
-              __typename?: 'ComponentModulesImageCarousel'
+              __typename: 'ComponentModulesImageCarousel'
               id: string
               description?: string | null
               imageCarouselModuleLayout: {
@@ -2220,7 +2220,7 @@ export type HomepageFragmentFragment = {
               } | null
           }
         | {
-              __typename?: 'ComponentModulesPullquote'
+              __typename: 'ComponentModulesPullquote'
               id: string
               text?: string | null
               pullquoteModuleLayout: {
@@ -2231,7 +2231,7 @@ export type HomepageFragmentFragment = {
               }
           }
         | {
-              __typename?: 'ComponentModulesSubtitle'
+              __typename: 'ComponentModulesSubtitle'
               id: string
               text?: string | null
               subtitleModuleLayout: {
@@ -2242,7 +2242,7 @@ export type HomepageFragmentFragment = {
               }
           }
         | {
-              __typename?: 'ComponentModulesTableModule'
+              __typename: 'ComponentModulesTableModule'
               id: string
               tableModuleLayout: {
                   __typename?: 'ComponentCoreModuleLayouts'
@@ -2285,7 +2285,7 @@ export type HomepageFragmentFragment = {
               } | null
           }
         | {
-              __typename?: 'ComponentModulesTextModule'
+              __typename: 'ComponentModulesTextModule'
               Richtext?: string | null
               id: string
               textModuleLayout: {
@@ -2296,7 +2296,7 @@ export type HomepageFragmentFragment = {
               }
           }
         | {
-              __typename?: 'ComponentModulesTitleModule'
+              __typename: 'ComponentModulesTitleModule'
               Title?: string | null
               id: string
               titleModuleLayout: {
@@ -2344,7 +2344,7 @@ export type HomepageQuery = {
                             updatedAt?: any | null
                             components?: Array<
                                 | {
-                                      __typename?: 'ComponentModulesButtonsModule'
+                                      __typename: 'ComponentModulesButtonsModule'
                                       id: string
                                       buttonStyle?: Enum_Componentmodulesbuttonsmodule_Buttonstyle | null
                                       buttonsModuleLayout: {
@@ -2388,7 +2388,7 @@ export type HomepageQuery = {
                                       } | null> | null
                                   }
                                 | {
-                                      __typename?: 'ComponentModulesCarousel'
+                                      __typename: 'ComponentModulesCarousel'
                                       id: string
                                       buttonText?: string | null
                                       buttonUrl?: string | null
@@ -2437,7 +2437,7 @@ export type HomepageQuery = {
                                       } | null> | null
                                   }
                                 | {
-                                      __typename?: 'ComponentModulesImage'
+                                      __typename: 'ComponentModulesImage'
                                       alt_text?: string | null
                                       caption?: string | null
                                       id: string
@@ -2475,7 +2475,7 @@ export type HomepageQuery = {
                                       }
                                   }
                                 | {
-                                      __typename?: 'ComponentModulesImageCarousel'
+                                      __typename: 'ComponentModulesImageCarousel'
                                       id: string
                                       description?: string | null
                                       imageCarouselModuleLayout: {
@@ -2512,7 +2512,7 @@ export type HomepageQuery = {
                                       } | null
                                   }
                                 | {
-                                      __typename?: 'ComponentModulesPullquote'
+                                      __typename: 'ComponentModulesPullquote'
                                       id: string
                                       text?: string | null
                                       pullquoteModuleLayout: {
@@ -2523,7 +2523,7 @@ export type HomepageQuery = {
                                       }
                                   }
                                 | {
-                                      __typename?: 'ComponentModulesSubtitle'
+                                      __typename: 'ComponentModulesSubtitle'
                                       id: string
                                       text?: string | null
                                       subtitleModuleLayout: {
@@ -2534,7 +2534,7 @@ export type HomepageQuery = {
                                       }
                                   }
                                 | {
-                                      __typename?: 'ComponentModulesTableModule'
+                                      __typename: 'ComponentModulesTableModule'
                                       id: string
                                       tableModuleLayout: {
                                           __typename?: 'ComponentCoreModuleLayouts'
@@ -2577,7 +2577,7 @@ export type HomepageQuery = {
                                       } | null
                                   }
                                 | {
-                                      __typename?: 'ComponentModulesTextModule'
+                                      __typename: 'ComponentModulesTextModule'
                                       Richtext?: string | null
                                       id: string
                                       textModuleLayout: {
@@ -2588,7 +2588,7 @@ export type HomepageQuery = {
                                       }
                                   }
                                 | {
-                                      __typename?: 'ComponentModulesTitleModule'
+                                      __typename: 'ComponentModulesTitleModule'
                                       Title?: string | null
                                       id: string
                                       titleModuleLayout: {
@@ -2606,7 +2606,7 @@ export type HomepageQuery = {
                 } | null
                 components?: Array<
                     | {
-                          __typename?: 'ComponentModulesButtonsModule'
+                          __typename: 'ComponentModulesButtonsModule'
                           id: string
                           buttonStyle?: Enum_Componentmodulesbuttonsmodule_Buttonstyle | null
                           buttonsModuleLayout: {
@@ -2650,7 +2650,7 @@ export type HomepageQuery = {
                           } | null> | null
                       }
                     | {
-                          __typename?: 'ComponentModulesCarousel'
+                          __typename: 'ComponentModulesCarousel'
                           id: string
                           buttonText?: string | null
                           buttonUrl?: string | null
@@ -2699,7 +2699,7 @@ export type HomepageQuery = {
                           } | null> | null
                       }
                     | {
-                          __typename?: 'ComponentModulesImage'
+                          __typename: 'ComponentModulesImage'
                           alt_text?: string | null
                           caption?: string | null
                           id: string
@@ -2737,7 +2737,7 @@ export type HomepageQuery = {
                           }
                       }
                     | {
-                          __typename?: 'ComponentModulesImageCarousel'
+                          __typename: 'ComponentModulesImageCarousel'
                           id: string
                           description?: string | null
                           imageCarouselModuleLayout: {
@@ -2774,7 +2774,7 @@ export type HomepageQuery = {
                           } | null
                       }
                     | {
-                          __typename?: 'ComponentModulesPullquote'
+                          __typename: 'ComponentModulesPullquote'
                           id: string
                           text?: string | null
                           pullquoteModuleLayout: {
@@ -2785,7 +2785,7 @@ export type HomepageQuery = {
                           }
                       }
                     | {
-                          __typename?: 'ComponentModulesSubtitle'
+                          __typename: 'ComponentModulesSubtitle'
                           id: string
                           text?: string | null
                           subtitleModuleLayout: {
@@ -2796,7 +2796,7 @@ export type HomepageQuery = {
                           }
                       }
                     | {
-                          __typename?: 'ComponentModulesTableModule'
+                          __typename: 'ComponentModulesTableModule'
                           id: string
                           tableModuleLayout: {
                               __typename?: 'ComponentCoreModuleLayouts'
@@ -2839,7 +2839,7 @@ export type HomepageQuery = {
                           } | null
                       }
                     | {
-                          __typename?: 'ComponentModulesTextModule'
+                          __typename: 'ComponentModulesTextModule'
                           Richtext?: string | null
                           id: string
                           textModuleLayout: {
@@ -2850,7 +2850,7 @@ export type HomepageQuery = {
                           }
                       }
                     | {
-                          __typename?: 'ComponentModulesTitleModule'
+                          __typename: 'ComponentModulesTitleModule'
                           Title?: string | null
                           id: string
                           titleModuleLayout: {
@@ -3102,7 +3102,7 @@ export type ComponentCoreTimeframeFragmentFragment = {
 }
 
 export type ComponentModulesButtonsModuleFragmentFragment = {
-    __typename?: 'ComponentModulesButtonsModule'
+    __typename: 'ComponentModulesButtonsModule'
     id: string
     buttonStyle?: Enum_Componentmodulesbuttonsmodule_Buttonstyle | null
     buttonsModuleLayout: {
@@ -3147,7 +3147,7 @@ export type ComponentModulesButtonsModuleFragmentFragment = {
 }
 
 export type ComponentModulesCarouselFragmentFragment = {
-    __typename?: 'ComponentModulesCarousel'
+    __typename: 'ComponentModulesCarousel'
     id: string
     buttonText?: string | null
     buttonUrl?: string | null
@@ -3197,7 +3197,7 @@ export type ComponentModulesCarouselFragmentFragment = {
 }
 
 export type ComponentModulesImageCarouselFragmentFragment = {
-    __typename?: 'ComponentModulesImageCarousel'
+    __typename: 'ComponentModulesImageCarousel'
     id: string
     description?: string | null
     imageCarouselModuleLayout: {
@@ -3235,7 +3235,7 @@ export type ComponentModulesImageCarouselFragmentFragment = {
 }
 
 export type ComponentModulesImageFragmentFragment = {
-    __typename?: 'ComponentModulesImage'
+    __typename: 'ComponentModulesImage'
     alt_text?: string | null
     caption?: string | null
     id: string
@@ -3274,7 +3274,7 @@ export type ComponentModulesImageFragmentFragment = {
 }
 
 export type ComponentModulesPullquoteFragmentFragment = {
-    __typename?: 'ComponentModulesPullquote'
+    __typename: 'ComponentModulesPullquote'
     id: string
     text?: string | null
     pullquoteModuleLayout: {
@@ -3286,7 +3286,7 @@ export type ComponentModulesPullquoteFragmentFragment = {
 }
 
 export type ComponentModulesSubtitleFragmentFragment = {
-    __typename?: 'ComponentModulesSubtitle'
+    __typename: 'ComponentModulesSubtitle'
     id: string
     text?: string | null
     subtitleModuleLayout: {
@@ -3390,7 +3390,7 @@ export type TableEntityResponseFragmentFragment = {
 }
 
 export type ComponentModulesTableModuleFragmentFragment = {
-    __typename?: 'ComponentModulesTableModule'
+    __typename: 'ComponentModulesTableModule'
     id: string
     tableModuleLayout: {
         __typename?: 'ComponentCoreModuleLayouts'
@@ -3434,7 +3434,7 @@ export type ComponentModulesTableModuleFragmentFragment = {
 }
 
 export type ComponentModulesTextModuleFragmentFragment = {
-    __typename?: 'ComponentModulesTextModule'
+    __typename: 'ComponentModulesTextModule'
     Richtext?: string | null
     id: string
     textModuleLayout: {
@@ -3446,7 +3446,7 @@ export type ComponentModulesTextModuleFragmentFragment = {
 }
 
 export type ComponentModulesTitleModuleFragmentFragment = {
-    __typename?: 'ComponentModulesTitleModule'
+    __typename: 'ComponentModulesTitleModule'
     Title?: string | null
     id: string
     titleModuleLayout: {
@@ -3570,6 +3570,7 @@ export const ComponentModulesTextModuleFragmentFragmentDoc = gql`
     fragment ComponentModulesTextModuleFragment on ComponentModulesTextModule {
         Richtext
         id
+        __typename
         textModuleLayout {
             ...ComponentCoreModuleLayoutsFragment
         }
@@ -3612,6 +3613,7 @@ export const ComponentModulesImageFragmentFragmentDoc = gql`
         alt_text
         caption
         id
+        __typename
         image {
             ...UploadFileEntityResponseFragment
         }
@@ -3625,6 +3627,7 @@ export const ComponentModulesImageFragmentFragmentDoc = gql`
 export const ComponentModulesPullquoteFragmentFragmentDoc = gql`
     fragment ComponentModulesPullquoteFragment on ComponentModulesPullquote {
         id
+        __typename
         pullquoteModuleLayout {
             ...ComponentCoreModuleLayoutsFragment
         }
@@ -3654,6 +3657,7 @@ export const ComponentModulesCarouselFragmentFragmentDoc = gql`
         buttonText
         buttonUrl
         description
+        __typename
         items {
             ...ComponentCoreCarouselItemFragment
         }
@@ -3666,6 +3670,7 @@ export const ComponentModulesCarouselFragmentFragmentDoc = gql`
 export const ComponentModulesSubtitleFragmentFragmentDoc = gql`
     fragment ComponentModulesSubtitleFragment on ComponentModulesSubtitle {
         id
+        __typename
         subtitleModuleLayout {
             ...ComponentCoreModuleLayoutsFragment
         }
@@ -3740,6 +3745,7 @@ export const TableEntityResponseFragmentFragmentDoc = gql`
 export const ComponentModulesTableModuleFragmentFragmentDoc = gql`
     fragment ComponentModulesTableModuleFragment on ComponentModulesTableModule {
         id
+        __typename
         tableModuleLayout {
             ...ComponentCoreModuleLayoutsFragment
         }
@@ -3754,6 +3760,7 @@ export const ComponentModulesTitleModuleFragmentFragmentDoc = gql`
     fragment ComponentModulesTitleModuleFragment on ComponentModulesTitleModule {
         Title
         id
+        __typename
         titleModuleLayout {
             ...ComponentCoreModuleLayoutsFragment
         }
@@ -3778,6 +3785,7 @@ export const ComponentModulesImageCarouselFragmentFragmentDoc = gql`
             ...ComponentCoreModuleLayoutsFragment
         }
         description
+        __typename
         images {
             ...UploadFileRelationResponseCollectionFragment
         }
@@ -3804,6 +3812,7 @@ export const ComponentModulesButtonsModuleFragmentFragmentDoc = gql`
             ...ComponentCoreModuleLayoutsFragment
         }
         buttonStyle
+        __typename
         buttons {
             ...ComponentCoreButtonFragment
         }

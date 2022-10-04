@@ -86,4 +86,7 @@ export const HomepageComponentsDynamicZone = createUnionType({
             ComponentModulesTitleModule,
             Error,
         ] as const,
+    resolveType(value) {
+        return value.__typename
+    },
 })
