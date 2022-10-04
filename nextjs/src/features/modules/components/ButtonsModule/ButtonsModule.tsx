@@ -34,6 +34,7 @@ export const ButtonsModule: React.FC<Props> = props => {
     if (props.component.buttonStyle === EnumComponentmodulesbuttonsmoduleButtonstyle.Large) {
         return (
             <Box
+                backgroundColor={'white'}
                 width="100%"
                 px={6}
                 paddingBottom={props.component.buttonsModuleLayout?.spacingBottom ?? undefined}
@@ -47,6 +48,7 @@ export const ButtonsModule: React.FC<Props> = props => {
     }
     return (
         <Box
+            backgroundColor={'white'}
             width="100%"
             px={6}
             paddingBottom={props.component.buttonsModuleLayout?.spacingBottom ?? undefined}
