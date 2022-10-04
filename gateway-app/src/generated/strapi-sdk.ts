@@ -8636,19 +8636,6 @@ export type UsersPermissionsRoleFragmentFragment = {
     type?: string | null
     createdAt?: any | null
     updatedAt?: any | null
-    permissions?: {
-        __typename?: 'UsersPermissionsPermissionRelationResponseCollection'
-        data: Array<{
-            __typename?: 'UsersPermissionsPermissionEntity'
-            id?: string | null
-            attributes?: {
-                __typename?: 'UsersPermissionsPermission'
-                action: string
-                createdAt?: any | null
-                updatedAt?: any | null
-            } | null
-        }>
-    } | null
 }
 
 export type UsersPermissionsUserFragmentFragment = {
@@ -8672,19 +8659,6 @@ export type UsersPermissionsUserFragmentFragment = {
                 type?: string | null
                 createdAt?: any | null
                 updatedAt?: any | null
-                permissions?: {
-                    __typename?: 'UsersPermissionsPermissionRelationResponseCollection'
-                    data: Array<{
-                        __typename?: 'UsersPermissionsPermissionEntity'
-                        id?: string | null
-                        attributes?: {
-                            __typename?: 'UsersPermissionsPermission'
-                            action: string
-                            createdAt?: any | null
-                            updatedAt?: any | null
-                        } | null
-                    }>
-                } | null
             } | null
         } | null
     } | null
@@ -8714,19 +8688,6 @@ export type UsersPermissionsUserEntityFragmentFragment = {
                     type?: string | null
                     createdAt?: any | null
                     updatedAt?: any | null
-                    permissions?: {
-                        __typename?: 'UsersPermissionsPermissionRelationResponseCollection'
-                        data: Array<{
-                            __typename?: 'UsersPermissionsPermissionEntity'
-                            id?: string | null
-                            attributes?: {
-                                __typename?: 'UsersPermissionsPermission'
-                                action: string
-                                createdAt?: any | null
-                                updatedAt?: any | null
-                            } | null
-                        }>
-                    } | null
                 } | null
             } | null
         } | null
@@ -8759,19 +8720,6 @@ export type UsersPermissionsUserEntityResponseFragmentFragment = {
                         type?: string | null
                         createdAt?: any | null
                         updatedAt?: any | null
-                        permissions?: {
-                            __typename?: 'UsersPermissionsPermissionRelationResponseCollection'
-                            data: Array<{
-                                __typename?: 'UsersPermissionsPermissionEntity'
-                                id?: string | null
-                                attributes?: {
-                                    __typename?: 'UsersPermissionsPermission'
-                                    action: string
-                                    createdAt?: any | null
-                                    updatedAt?: any | null
-                                } | null
-                            }>
-                        } | null
                     } | null
                 } | null
             } | null
@@ -8811,19 +8759,6 @@ export type UsersPermissionsUserQuery = {
                             type?: string | null
                             createdAt?: any | null
                             updatedAt?: any | null
-                            permissions?: {
-                                __typename?: 'UsersPermissionsPermissionRelationResponseCollection'
-                                data: Array<{
-                                    __typename?: 'UsersPermissionsPermissionEntity'
-                                    id?: string | null
-                                    attributes?: {
-                                        __typename?: 'UsersPermissionsPermission'
-                                        action: string
-                                        createdAt?: any | null
-                                        updatedAt?: any | null
-                                    } | null
-                                }>
-                            } | null
                         } | null
                     } | null
                 } | null
@@ -8866,19 +8801,6 @@ export type UsersPermissionsUsersQuery = {
                             type?: string | null
                             createdAt?: any | null
                             updatedAt?: any | null
-                            permissions?: {
-                                __typename?: 'UsersPermissionsPermissionRelationResponseCollection'
-                                data: Array<{
-                                    __typename?: 'UsersPermissionsPermissionEntity'
-                                    id?: string | null
-                                    attributes?: {
-                                        __typename?: 'UsersPermissionsPermission'
-                                        action: string
-                                        createdAt?: any | null
-                                        updatedAt?: any | null
-                                    } | null
-                                }>
-                            } | null
                         } | null
                     } | null
                 } | null
@@ -9538,16 +9460,7 @@ export const UsersPermissionsRoleFragmentFragmentDoc = gql`
         type
         createdAt
         updatedAt
-        permissions {
-            data {
-                id
-                attributes {
-                    ...UsersPermissionsPermissionFragment
-                }
-            }
-        }
     }
-    ${UsersPermissionsPermissionFragmentFragmentDoc}
 `
 export const UsersPermissionsUserFragmentFragmentDoc = gql`
     fragment UsersPermissionsUserFragment on UsersPermissionsUser {

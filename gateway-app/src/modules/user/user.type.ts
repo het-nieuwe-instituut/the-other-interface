@@ -162,7 +162,7 @@ export class UsersPermissionsUser {
     public confirmed?: boolean
 
     @Field({ nullable: true })
-    public createdAt?: Date
+    public createdAt?: string
 
     @Field()
     public email: string
@@ -174,7 +174,7 @@ export class UsersPermissionsUser {
     public role?: UsersPermissionsRoleEntityResponse
 
     @Field({ nullable: true })
-    public updatedAt?: Date
+    public updatedAt?: string
 
     @Field()
     public username: string

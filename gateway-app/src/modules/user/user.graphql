@@ -9,16 +9,17 @@ fragment UsersPermissionsRoleFragment on UsersPermissionsRole {
     description
     type
     createdAt
+    # UsersPermissionsRole has a users field, but exposing it doesn't seem secure, so left it out
     updatedAt
-    permissions {
-        data {
-            id
-            attributes {
-                ...UsersPermissionsPermissionFragment
-            }
-        }
-    }
-    # this has a users field, but exposing it doesn't seem secure
+    # this causes an authorization error that doesnt appear to be fixed by enabling roles in CMS
+    # permissions {
+    #     data {
+    #         id
+    #         attributes {
+    #             ...UsersPermissionsPermissionFragment
+    #         }
+    #     }
+    # }
 }
 
 fragment UsersPermissionsUserFragment on UsersPermissionsUser {

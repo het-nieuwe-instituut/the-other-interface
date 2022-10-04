@@ -27,7 +27,7 @@ export class Menupage {
     public components?: typeof MenupageComponentsDynamicZone[]
 
     @Field({ nullable: true })
-    public createdAt?: Date
+    public createdAt?: string
 
     @Field({ nullable: true })
     public locale?: string
@@ -36,13 +36,13 @@ export class Menupage {
     public localizations?: MenupageRelationResponseCollection
 
     @Field({ nullable: true })
-    public publishedAt?: Date
+    public publishedAt?: string
 
     @Field({ nullable: true })
     public slug?: string
 
     @Field({ nullable: true })
-    public updatedAt?: Date
+    public updatedAt?: string
 }
 
 @ObjectType()
