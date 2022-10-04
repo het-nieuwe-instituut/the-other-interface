@@ -40,6 +40,7 @@ export const StoryContainer: React.FC = () => {
         <Box px={{ xl: 6, base: 0 }} py={{ xl: 6, base: 0 }}>
             <Box backgroundColor={colors.white} px={6} maxW={theme.breakpoints.xl} marginX={'auto'}>
                 <Grid
+                    pt={6}
                     templateAreas={{
                         lg: `"header meta"`,
                         base: `"meta"

@@ -1,4 +1,4 @@
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, Link, Text } from '@chakra-ui/react'
+import { Box, Text } from '@chakra-ui/react'
 import { Markdown } from '../Markdown/Markdown'
 
 interface Props {
@@ -6,10 +6,12 @@ interface Props {
     preface?: string
 }
 
+// Breadcrumbs need to be moved to the very top of the page
+// Removed for now
 export const PageHeader: React.FC<Props> = ({ title, preface }) => {
     return (
-        <>
-            <Breadcrumb separator="/">
+        <Box>
+            {/* <Breadcrumb separator="/">
                 <BreadcrumbItem>
                     <BreadcrumbLink href="#" as={Link}>
                         Home
@@ -18,11 +20,11 @@ export const PageHeader: React.FC<Props> = ({ title, preface }) => {
                 <BreadcrumbItem>
                     <BreadcrumbLink href="#" as={Link}></BreadcrumbLink>
                 </BreadcrumbItem>
-            </Breadcrumb>
+            </Breadcrumb> */}
             <Text as={'h1'} textStyle={'h1'} pb={'md'}>
                 {title}
             </Text>
             {preface && <Markdown>{preface}</Markdown>}
-        </>
+        </Box>
     )
 }
