@@ -8,14 +8,8 @@ import { ComponentModulesSubtitle } from '../strapi/components/modules/subtitle'
 import { ComponentModulesTableModule } from '../strapi/components/modules/tableModule'
 import { ComponentModulesTextModule } from '../strapi/components/modules/textModule'
 import { ComponentModulesTitleModule } from '../strapi/components/modules/titleModule'
-import {
-    DateTimeFilterInput,
-    Error,
-    IdFilterInput,
-    PaginationArg,
-    ResponseCollectionMeta,
-    StringFilterInput,
-} from '../strapi/shared-types'
+import { Error, PaginationArg, ResponseCollectionMeta } from '../strapi/shared-types'
+import { LandingpageFiltersInput, LandingpageRelationResponseCollection } from './landingPage.type.circular'
 
 @ObjectType()
 export class Landingpage {
@@ -68,12 +62,6 @@ export class LandingpageEntityResponseCollection {
     public meta: ResponseCollectionMeta
 }
 
-@ObjectType()
-export class LandingpageRelationResponseCollection {
-    @Field(() => [LandingpageEntity])
-    public data: LandingpageEntity[]
-}
-
 @InputType()
 export class LandingpageLocalizationsArgs {
     @Field(() => LandingpageFiltersInput, { nullable: true })
@@ -87,42 +75,6 @@ export class LandingpageLocalizationsArgs {
 
     @Field(() => [String], { nullable: true })
     public sort?: string[]
-}
-
-@InputType()
-export class LandingpageFiltersInput {
-    @Field(() => StringFilterInput, { nullable: true })
-    public Title?: StringFilterInput
-
-    @Field(() => [LandingpageFiltersInput], { nullable: true })
-    public and?: LandingpageFiltersInput[]
-
-    @Field(() => DateTimeFilterInput, { nullable: true })
-    public createdAt?: DateTimeFilterInput
-
-    @Field(() => IdFilterInput, { nullable: true })
-    public id?: IdFilterInput
-
-    @Field(() => StringFilterInput, { nullable: true })
-    public locale?: StringFilterInput
-
-    @Field(() => LandingpageFiltersInput, { nullable: true })
-    public localizations?: LandingpageFiltersInput
-
-    @Field(() => LandingpageFiltersInput, { nullable: true })
-    public not?: LandingpageFiltersInput
-
-    @Field(() => [LandingpageFiltersInput], { nullable: true })
-    public or?: LandingpageFiltersInput[]
-
-    @Field(() => DateTimeFilterInput, { nullable: true })
-    public publishedAt?: DateTimeFilterInput
-
-    @Field(() => StringFilterInput, { nullable: true })
-    public slug?: StringFilterInput
-
-    @Field(() => DateTimeFilterInput, { nullable: true })
-    public updatedAt?: DateTimeFilterInput
 }
 
 @InputType()
