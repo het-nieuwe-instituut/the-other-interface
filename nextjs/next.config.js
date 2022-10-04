@@ -18,7 +18,7 @@ const nextConfig = {
         defaultLocale: 'nl',
     },
     images: {
-        domains: ['hni-toi-staging-api.lifely.nl', 'localhost'],
+        domains: [process.env.NEXT_DOMAIN_NAME],
     },
     i18n: {
         locales: ['nl', 'en'],
