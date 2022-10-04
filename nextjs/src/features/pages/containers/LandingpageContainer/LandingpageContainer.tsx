@@ -8,6 +8,7 @@ import { StoryQueryParams } from 'src/pages/story/[slug]'
 
 import dynamic from 'next/dynamic'
 import { useWindowSize } from '@/features/shared/hooks/window'
+import { Box } from '@chakra-ui/react'
 
 const DynamicFilterCloudsNoSsr = dynamic(() => import('../../../filters/FilterClouds/FilterClouds'), {
     ssr: false,
@@ -59,7 +60,12 @@ export const LandingpageContainer: React.FC = () => {
 
     return (
         <div>
-            <DynamicFilterCloudsNoSsr data={test} dimensions={{ height: 800, width: window.width ?? 0}} />
+            <Box backgroundColor="graph" height="800px">
+                {window.height && window.width && (
+                   <DynamicFilterCloudsNoSsr data={test} dimensions={{ height: 800, width: window.width ?? 0}} />
+                )}
+            </Box>
+            
             <DynamicComponentRenderer components={data?.landingpages?.data[0]?.attributes?.components} />
         </div>
     )

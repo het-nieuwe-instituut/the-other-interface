@@ -91,7 +91,7 @@ function useD3FitDataToDimensions(dimensions: Dimensions, data: ObjectPerTypeWit
     return dataDimensions
 }
 
-function getFromCalulatedData(dataDimensions: DataDimensions[], d: Partial<D3CollectionItem>) {
+function getTakeSpaceFromDataDimensions(dataDimensions: DataDimensions[], d: Partial<D3CollectionItem>) {
     const val = dataDimensions?.find(item => item.name === d.name)
 
     if (!val) {
@@ -111,10 +111,10 @@ function ticked(
     const height = dimensions.height ?? 0
 
     nodeForeign
-        .attr('x', (d: D3CollectionItem) => (d.x ?? 0) + -getFromCalulatedData(dataDimensions, d))
-        .attr('y', (d: D3CollectionItem) => (d.y ?? 0) + -getFromCalulatedData(dataDimensions, d))
-        .attr('width', (d: D3CollectionItem) => getFromCalulatedData(dataDimensions, d) * 2)
-        .attr('height', (d: D3CollectionItem) => getFromCalulatedData(dataDimensions, d) * 2)
+        .attr('x', (d: D3CollectionItem) => (d.x ?? 0) + -getTakeSpaceFromDataDimensions(dataDimensions, d))
+        .attr('y', (d: D3CollectionItem) => (d.y ?? 0) + -getTakeSpaceFromDataDimensions(dataDimensions, d))
+        .attr('width', (d: D3CollectionItem) => getTakeSpaceFromDataDimensions(dataDimensions, d) * 2)
+        .attr('height', (d: D3CollectionItem) => getTakeSpaceFromDataDimensions(dataDimensions, d) * 2)
 
     if (simulation) {
         simulation
@@ -123,7 +123,7 @@ function ticked(
                 d3
                     .forceCollide()
                     .strength(0.1)
-                    .radius(d => getFromCalulatedData(dataDimensions, d))
+                    .radius(d => getTakeSpaceFromDataDimensions(dataDimensions, d))
             )
             .force('centerX', d3.forceX(width / 2))
             .force('centerY', d3.forceY(height / 2))

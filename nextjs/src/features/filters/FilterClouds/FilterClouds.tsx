@@ -1,5 +1,6 @@
 
 import { Circle } from '@/features/GalaxyInterface/components/Circle'
+import { Box } from '@chakra-ui/react'
 import { useId, useMemo } from 'react'
 import { ObjectPerType } from 'src/pages/poc/galaxy'
 import { usePresenter } from './usePresenter'
@@ -13,7 +14,6 @@ type Props = {
 }
 
 const FilterClouds: React.FunctionComponent<Props> = ({ dimensions, data }) => {
-
     const { width, height } = dimensions
     const svgWidth = width
     const svgHeight = height
@@ -25,7 +25,7 @@ const FilterClouds: React.FunctionComponent<Props> = ({ dimensions, data }) => {
     const { svgRef } = usePresenter(dimensions, objectsPerTypeWithIds, id)
 
     return (
-        <div style={{ overflow: 'hidden' }}>
+        <Box overflow={'visible'}>
             <svg
                 width={svgWidth}
                 height={svgHeight}
@@ -53,7 +53,7 @@ const FilterClouds: React.FunctionComponent<Props> = ({ dimensions, data }) => {
                     )
                 })}
             </svg>
-        </div>
+        </Box>
     )
 }
 
