@@ -16,9 +16,9 @@ export const TextModule: React.FC<Props> = props => {
     return (
         <Box
             px={6}
-            maxWidth={'820px'}
-            mb={props.component.textModuleLayout?.spacingBottom ?? undefined}
-            mt={props.component.textModuleLayout?.spacingTop ?? undefined}
+            backgroundColor={'white'}
+            pb={props.component.textModuleLayout?.spacingBottom ?? undefined}
+            pt={props.component.textModuleLayout?.spacingTop ?? undefined}
         >
             <Markdown>{content}</Markdown>
         </Box>

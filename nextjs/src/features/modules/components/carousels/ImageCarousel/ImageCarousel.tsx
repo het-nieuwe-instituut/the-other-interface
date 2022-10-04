@@ -18,10 +18,11 @@ const IMAGE_HEIGHT = 600
 export const ImageCarousel = (props: Props) => {
     const { images } = props.component
     const items = images?.data
-    const { carouselRef, handlePaginationPrev, handlePaginationNext, sliderRef, calculateImagePropotions, size } = usePresenter(items)
+    const { carouselRef, handlePaginationPrev, handlePaginationNext, sliderRef, calculateImagePropotions, size } =
+        usePresenter(items)
 
     return (
-        <Box as='div' backgroundColor={'white'} ref={carouselRef} position='relative' pl={'24px'}>
+        <Box as="div" backgroundColor={'white'} ref={carouselRef} position="relative" pl={'6'}>
             <>
                 <ArrowPrevContainer>
                     <ArrowLeftIcon onClick={handlePaginationPrev} />
@@ -30,7 +31,7 @@ export const ImageCarousel = (props: Props) => {
                 <ArrowNextContainer>
                     <ArrowRightIcon onClick={handlePaginationNext} />
                 </ArrowNextContainer>
-                <div  ref={sliderRef} className="keen-slider">
+                <div ref={sliderRef} className="keen-slider">
                     {items?.map((item: UploadFileEntity, index) => {
                         const originalHeight = item?.attributes?.height ?? 1
                         const originalWidth = item?.attributes?.width ?? 1
@@ -40,26 +41,28 @@ export const ImageCarousel = (props: Props) => {
                         return (
                             <Flex
                                 key={`${item.id}-${index}`}
-                                flexDirection='column'
+                                flexDirection="column"
                                 pt="9"
                                 width={proportions.width}
                                 height={proportions.height || IMAGE_HEIGHT}
                                 className="keen-slider__slide"
-                            > 
+                            >
                                 <Image
                                     src={imagePath}
                                     height={proportions.height}
                                     width={proportions.width || IMAGE_HEIGHT}
                                     layout="fixed"
-                                    alt='carousel image'
-                                    loading='eager'
+                                    alt="carousel image"
+                                    loading="eager"
                                 />
-                                { caption && (
+                                {caption && (
                                     <Box width={'100'} mb="16px" mt={'10px'}>
-                                        <Text textStyle="micro" textAlign={'left'}>{caption}</Text>
+                                        <Text textStyle="micro" textAlign={'left'}>
+                                            {caption}
+                                        </Text>
                                     </Box>
                                 )}
-                            </Flex> 
+                            </Flex>
                         )
                     })}
                 </div>
