@@ -1,12 +1,10 @@
-/* eslint-disable @typescript-eslint/no-empty-interface */
 import { Flex } from '@chakra-ui/react'
 import React from 'react'
 
-interface Props
-    extends Pick<
+type Props = Pick<
         React.SVGProps<SVGForeignObjectElement>,
         'id' | 'className' | 'height' | 'width' | 'x' | 'y' | 'pointerEvents' | 'children'
-    > {}
+    >
 
 export const Circle: React.FC<Props> = props => {
     return (
