@@ -1,4 +1,5 @@
 import { Field, Float, ID, InputType, Int, ObjectType, registerEnumType } from '@nestjs/graphql'
+
 import {
     Enum_Componentcoremodulelayouts_Spacingbottom,
     Enum_Componentcoremodulelayouts_Spacingtop,
@@ -6,6 +7,7 @@ import {
 } from '../../generated/strapi-sdk'
 import { UploadFolderFiltersInput } from './shared-types-dependency'
 
+export type I18NLocaleCode = string
 @ObjectType()
 export class UploadFile {
     @Field()

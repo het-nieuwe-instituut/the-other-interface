@@ -1,12 +1,21 @@
-import { ObjectType, Field, createUnionType, ID } from '@nestjs/graphql'
+import { ObjectType, Field, createUnionType, ID, InputType } from '@nestjs/graphql'
+import { ArchivesFondsZoomLevel5DetailType, ArchivesOtherZoomLevel5DetailType } from '../archives/archives.type'
 
 import { AuthorEntityResponse } from '../author/author.type'
 import { LocationRelationResponseCollection } from '../location/location.type'
-import { PeopleType } from '../people/people.type'
+import { ObjectsZoomLevel5DetailType } from '../objects/objects.type'
+import { PoepleZoomLevel5DetailType } from '../people/people.type'
+import {
+    PublicationsArticleZoomLevel5DetailType,
+    PublicationsAudioVisualZoomLevel5DetailType,
+    PublicationsBookZoomLevel5DetailType,
+    PublicationsSerialZoomLevel5DetailType,
+} from '../publications/publications.type'
 import { ComponentCorePublicationDate } from '../strapi/components/core/publicationDate'
 import { ComponentCoreTimeframe } from '../strapi/components/core/timeframe'
 
 import { ComponentModulesButtonsModule } from '../strapi/components/modules/buttonsModule'
+import { ComponentModulesCarousel } from '../strapi/components/modules/carousel'
 import { ComponentModulesImageCarousel } from '../strapi/components/modules/imageCarousel'
 import { ComponentModulesImage } from '../strapi/components/modules/imageModule'
 import { ComponentModulesPullquote } from '../strapi/components/modules/pullQuote'
@@ -14,7 +23,13 @@ import { ComponentModulesSubtitle } from '../strapi/components/modules/subtitle'
 import { ComponentModulesTableModule } from '../strapi/components/modules/tableModule'
 import { ComponentModulesTextModule } from '../strapi/components/modules/textModule'
 import { ComponentModulesTitleModule } from '../strapi/components/modules/titleModule'
-import { Error, ResponseCollectionMeta } from '../strapi/shared-types'
+import {
+    DateTimeFilterInput,
+    Error,
+    IdFilterInput,
+    ResponseCollectionMeta,
+    StringFilterInput,
+} from '../strapi/shared-types'
 import { TriplyRecordRelationResponseCollection } from '../triplyRecord/triplyRecord.type'
 
 @ObjectType()
@@ -28,17 +43,8 @@ export class Story {
     @Field(() => AuthorEntityResponse, { nullable: true })
     public author?: AuthorEntityResponse
 
-    @Field(() => StoryComponentsDynamicZone, { nullable: true })
-    public components?:
-        | ComponentModulesButtonsModule
-        | ComponentModulesImage
-        | ComponentModulesImageCarousel
-        | ComponentModulesPullquote
-        | ComponentModulesSubtitle
-        | ComponentModulesTableModule
-        | ComponentModulesTextModule
-        | ComponentModulesTitleModule
-        | Error
+    @Field(() => [StoryComponentsDynamicZone], { nullable: true })
+    public components?: typeof StoryComponentsDynamicZone[]
 
     @Field({ nullable: true })
     public createdAt?: Date
@@ -79,9 +85,56 @@ export class Story {
     @Field({ nullable: true })
     public updatedAt?: Date
 
-    @Field(() => [PeopleType], { nullable: 'itemsAndList' })
-    public people?: PeopleType[]
+    @Field(() => [PoepleZoomLevel5DetailType], { nullable: 'itemsAndList' })
+    public people?: PoepleZoomLevel5DetailType[]
+
+    @Field(() => [StoryArchivesUnionType], { nullable: 'itemsAndList' })
+    public archives?: typeof StoryArchivesUnionType[]
+
+    @Field(() => [ObjectsZoomLevel5DetailType], { nullable: 'itemsAndList' })
+    public objects?: ObjectsZoomLevel5DetailType[]
+
+    @Field(() => [StoryPublicationsUnionType], { nullable: 'itemsAndList' })
+    public publications?: typeof StoryPublicationsUnionType[]
 }
+
+export const StoryArchivesUnionType = createUnionType({
+    name: 'StoryArchivesUnionType',
+    types: () => [ArchivesFondsZoomLevel5DetailType, ArchivesOtherZoomLevel5DetailType] as const,
+    resolveType(value) {
+        // TODO: ask lois how to recognize the difference properly
+        if (value.hasOwnProperty('descriptionLevel')) {
+            return ArchivesOtherZoomLevel5DetailType
+        } else {
+            return ArchivesFondsZoomLevel5DetailType
+        }
+    },
+})
+
+export const StoryPublicationsUnionType = createUnionType({
+    name: 'StoryPublicationsUnionType',
+    types: () =>
+        [
+            PublicationsAudioVisualZoomLevel5DetailType,
+            PublicationsArticleZoomLevel5DetailType,
+            PublicationsSerialZoomLevel5DetailType,
+            PublicationsBookZoomLevel5DetailType,
+        ] as const,
+    resolveType(value) {
+        switch (value.typeOfPublicationLabel) {
+            case 'audio-visueel materiaal':
+                return PublicationsAudioVisualZoomLevel5DetailType
+            case 'tijdschriftartikel':
+                return PublicationsArticleZoomLevel5DetailType
+            case 'tijdschrift':
+                return PublicationsSerialZoomLevel5DetailType
+            case 'boek':
+                return PublicationsBookZoomLevel5DetailType
+            default:
+                return null
+        }
+    },
+})
 
 export const StoryComponentsDynamicZone = createUnionType({
     name: 'StoryComponentsDynamicZone',
@@ -95,8 +148,12 @@ export const StoryComponentsDynamicZone = createUnionType({
             ComponentModulesTableModule,
             ComponentModulesTextModule,
             ComponentModulesTitleModule,
+            ComponentModulesCarousel,
             Error,
         ] as const,
+    resolveType(value) {
+        return value.__typename
+    },
 })
 
 @ObjectType()
@@ -121,4 +178,37 @@ export class StoryEntityResponseCollection {
 
     @Field(() => ResponseCollectionMeta, { nullable: true })
     public meta: ResponseCollectionMeta
+}
+
+@InputType()
+export class StoryFiltersInput {
+    @Field(() => [StoryFiltersInput], { nullable: true })
+    public and?: StoryFiltersInput[]
+
+    @Field(() => DateTimeFilterInput, { nullable: true })
+    public createdAt?: DateTimeFilterInput
+
+    @Field(() => StringFilterInput, { nullable: true })
+    public firstName?: StringFilterInput
+
+    @Field(() => IdFilterInput, { nullable: true })
+    public id?: IdFilterInput
+
+    @Field(() => StringFilterInput, { nullable: true })
+    public insertion?: StringFilterInput
+
+    @Field(() => StringFilterInput, { nullable: true })
+    public lastName?: StringFilterInput
+
+    @Field(() => StoryFiltersInput, { nullable: true })
+    public not?: StoryFiltersInput
+
+    @Field(() => [StoryFiltersInput], { nullable: true })
+    public or?: StoryFiltersInput[]
+
+    @Field(() => DateTimeFilterInput, { nullable: true })
+    public publishedAt?: DateTimeFilterInput
+
+    @Field(() => DateTimeFilterInput, { nullable: true })
+    public updatedAt?: DateTimeFilterInput
 }

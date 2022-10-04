@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { TriplyService } from '../triply/triply.service'
 import { TriplyUtils, ZoomLevel3ReturnData } from '../triply/triply.utils'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
-import { PeopleType, PeopleZoomLevel4FiltersArgs } from './people.type'
+import { PeopleZoomLevel4FiltersArgs } from './people.type'
 
 export enum PeopleZoomLevel3Ids {
     deathDate = 'deathDate',
@@ -190,19 +190,5 @@ export class PeopleService {
         }
 
         throw new Error(`[People] Invalid filter input "${input}"`)
-    }
-
-    public async getPeopleDetails(peopleId: string) {
-        const res = await this.triplyService.queryTriplyData<PeopleData>(`${this.detailEndpoint}${peopleId}`)
-
-        const parsedResponse: PeopleType = {}
-        res.data.forEach(d => {
-            if (d.name) parsedResponse.name = d.name
-            if (d.birthDate) parsedResponse.birthDate = d.birthDate
-            if (d.deathDate) parsedResponse.deathDate = d.deathDate
-            if (d.nationalityLabel) parsedResponse.nationalityLabel = d.nationalityLabel
-        })
-
-        return parsedResponse
     }
 }

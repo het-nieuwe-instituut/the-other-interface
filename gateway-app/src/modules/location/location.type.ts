@@ -1,34 +1,38 @@
-import { Field, ID, ObjectType } from '@nestjs/graphql'
-import { StoryRelationResponseCollection } from '../story/story.type'
+import { Field, ID, InputType, ObjectType } from '@nestjs/graphql'
+import { DateTimeFilterInput, IdFilterInput, ResponseCollectionMeta, StringFilterInput } from '../strapi/shared-types'
+import { Location } from './location-dependency.type'
 
-@ObjectType()
-export class LocationRelationResponseCollection {
-    @Field(() => [LocationEntity], { nullable: false })
-    public data: LocationEntity[]
-}
+@InputType()
+export class LocationFiltersInput {
+    @Field(() => [LocationFiltersInput], { nullable: true })
+    public and?: LocationFiltersInput[]
 
-@ObjectType()
-export class Location {
-    @Field({ nullable: true })
-    public city?: string
+    @Field(() => DateTimeFilterInput, { nullable: true })
+    public createdAt?: DateTimeFilterInput
 
-    @Field({ nullable: true })
-    public createdAt?: Date
+    @Field(() => StringFilterInput, { nullable: true })
+    public firstName?: StringFilterInput
 
-    @Field({ nullable: true })
-    public locale?: string
+    @Field(() => IdFilterInput, { nullable: true })
+    public id?: IdFilterInput
 
-    @Field(() => LocationRelationResponseCollection, { nullable: true })
-    public localizations?: LocationRelationResponseCollection
+    @Field(() => StringFilterInput, { nullable: true })
+    public insertion?: StringFilterInput
 
-    @Field({ nullable: true })
-    public publishedAt?: Date
+    @Field(() => StringFilterInput, { nullable: true })
+    public lastName?: StringFilterInput
 
-    @Field(() => StoryRelationResponseCollection, { nullable: true })
-    public stories?: StoryRelationResponseCollection
+    @Field(() => LocationFiltersInput, { nullable: true })
+    public not?: LocationFiltersInput
 
-    @Field({ nullable: true })
-    public updatedAt?: Date
+    @Field(() => [LocationFiltersInput], { nullable: true })
+    public or?: LocationFiltersInput[]
+
+    @Field(() => DateTimeFilterInput, { nullable: true })
+    public publishedAt?: DateTimeFilterInput
+
+    @Field(() => DateTimeFilterInput, { nullable: true })
+    public updatedAt?: DateTimeFilterInput
 }
 
 @ObjectType()
@@ -38,4 +42,18 @@ export class LocationEntity {
 
     @Field(() => ID, { nullable: true })
     public id?: string
+}
+@ObjectType()
+export class LocationRelationResponseCollection {
+    @Field(() => [LocationEntity], { nullable: false })
+    public data: LocationEntity[]
+
+    @Field(() => ResponseCollectionMeta, { nullable: true })
+    public meta: ResponseCollectionMeta
+}
+
+@ObjectType()
+export class LocationEntityResponse {
+    @Field(() => LocationEntity, { nullable: true })
+    public data: LocationEntity
 }

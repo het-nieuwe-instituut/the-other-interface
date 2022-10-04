@@ -1,4 +1,5 @@
-import { Field, ID, ObjectType } from '@nestjs/graphql'
+import { Field, ID, InputType, ObjectType } from '@nestjs/graphql'
+import { DateTimeFilterInput, IdFilterInput, ResponseCollectionMeta, StringFilterInput } from '../strapi/shared-types'
 
 @ObjectType()
 export class Author {
@@ -34,4 +35,46 @@ export class AuthorEntity {
 export class AuthorEntityResponse {
     @Field(() => AuthorEntity, { nullable: true })
     public data?: AuthorEntity
+}
+
+@ObjectType()
+export class AuthorEntityResponseCollection {
+    @Field(() => [AuthorEntity])
+    public data: AuthorEntity[]
+
+    @Field(() => ResponseCollectionMeta)
+    public meta: ResponseCollectionMeta
+}
+
+@InputType()
+export class AuthorFiltersInput {
+    @Field(() => [AuthorFiltersInput], { nullable: true })
+    public and?: AuthorFiltersInput[]
+
+    @Field(() => DateTimeFilterInput, { nullable: true })
+    public createdAt?: DateTimeFilterInput
+
+    @Field(() => StringFilterInput, { nullable: true })
+    public firstName?: StringFilterInput
+
+    @Field(() => IdFilterInput, { nullable: true })
+    public id?: IdFilterInput
+
+    @Field(() => StringFilterInput, { nullable: true })
+    public insertion?: StringFilterInput
+
+    @Field(() => StringFilterInput, { nullable: true })
+    public lastName?: StringFilterInput
+
+    @Field(() => AuthorFiltersInput, { nullable: true })
+    public not?: AuthorFiltersInput
+
+    @Field(() => [AuthorFiltersInput], { nullable: true })
+    public or?: AuthorFiltersInput[]
+
+    @Field(() => DateTimeFilterInput, { nullable: true })
+    public publishedAt?: DateTimeFilterInput
+
+    @Field(() => DateTimeFilterInput, { nullable: true })
+    public updatedAt?: DateTimeFilterInput
 }
