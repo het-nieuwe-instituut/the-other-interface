@@ -7,7 +7,7 @@ import {
     Container,
     Grid,
     GridItem,
-    Heading,
+    Text,
     Link,
     Table,
     TableCaption,
@@ -24,11 +24,13 @@ import type { NextPage } from 'next'
 const Page: NextPage = () => {
     return (
         <Container>
-            <Heading as={'h1'}>kitchensink</Heading>
+            <Text as={'h1'} textStyle={'h2'}>
+                kitchensink
+            </Text>
             <Box>
-                <Heading as={'h2'} size="lg">
+                <Text as={'h2'} textStyle={'h2'} size="lg">
                     links
-                </Heading>
+                </Text>
                 <br></br>
                 In 1920 verzocht galeriehouder Léonce Rosenberg de kunstenaars van De Stijl om gezamenlijk een ‘centrum
                 van cultuur’ te ontwerpen. Vanwege onderlinge onenigheid werkte Theo van Doesburg het idee alleen met
@@ -38,9 +40,9 @@ const Page: NextPage = () => {
                 oktober 1923. Daar was ook een ander gezamenlijk project van Van Doesburg en Van Eesteren te zien De
                 Universiteitshal.
                 <br></br>
-                <Heading as={'h3'} size="md">
+                <Text as={'h3'} textStyle={'h3'} size="md">
                     variants
-                </Heading>
+                </Text>
                 <Link variant={'external'} href="https://www.google.com">
                     External link
                 </Link>
@@ -61,9 +63,9 @@ const Page: NextPage = () => {
             </Box>
 
             <Box>
-                <Heading as={'h2'} size="lg" data-circle-color="red">
+                <Text textStyle={'h2'} as={'h2'} size="lg" data-circle-color="red">
                     Breadcrumbs
-                </Heading>
+                </Text>
                 <Breadcrumb separator="-">
                     <BreadcrumbItem>
                         <BreadcrumbLink href="#" as={Link}>
@@ -86,9 +88,9 @@ const Page: NextPage = () => {
             </Box>
 
             <Box>
-                <Heading as={'h2'} size="lg" data-circle-color="red">
+                <Text textStyle={'h2'} as={'h2'} size="lg" data-circle-color="red">
                     Spacings
-                </Heading>
+                </Text>
                 <Box width={'100%'} height={100} bgColor="red" mb={getResponsiveSpacing('sm')}></Box>
                 <Box width={'100%'} height={100} bgColor="blue" mb={getResponsiveSpacing('md')}></Box>
                 <Box width={'100%'} height={100} bgColor="orange" mb={getResponsiveSpacing('lg')}></Box>
@@ -96,9 +98,9 @@ const Page: NextPage = () => {
                 <Box width={'100%'} height={100} bgColor="green"></Box>
             </Box>
             <Box>
-                <Heading as={'h2'} size="lg" data-circle-color="red">
+                <Text textStyle={'h2'} as={'h2'} size="lg" data-circle-color="red">
                     Grid
-                </Heading>
+                </Text>
                 <Grid
                     // gridTemplateRows={'50px 1fr 30px'}
                     gridTemplateColumns={{ sm: 'repeat(4, 1fr)', md: 'repeat(12, 1fr)' }}
@@ -130,9 +132,9 @@ const Page: NextPage = () => {
                 </Grid>
             </Box>
             <Box>
-                <Heading as={'h2'} size="lg" data-circle-color="red">
+                <Text as={'h2'} textStyle={'h2'} size="lg" data-circle-color="red">
                     Tables
-                </Heading>
+                </Text>
                 <TableContainer>
                     <Table variant="simple">
                         <TableCaption>Imperial to metric conversion factors</TableCaption>
