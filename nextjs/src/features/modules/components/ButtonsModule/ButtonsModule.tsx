@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { usePageConfiguration } from '@/features/shared/hooks/pageConfiguration'
+import colors from '@/features/shared/styles/theme/foundations/colors'
 import { isExternalURL } from '@/features/shared/utils/links'
 import { keyExtractor } from '@/features/shared/utils/lists'
 import { capitalizeFirstLetter } from '@/features/shared/utils/text'
@@ -34,6 +35,7 @@ export const ButtonsModule: React.FC<Props> = props => {
     if (props.component.buttonStyle === EnumComponentmodulesbuttonsmoduleButtonstyle.Large) {
         return (
             <Box
+                backgroundColor={colors.white}
                 width="100%"
                 px={6}
                 paddingBottom={props.component.buttonsModuleLayout?.spacingBottom ?? undefined}
@@ -47,6 +49,7 @@ export const ButtonsModule: React.FC<Props> = props => {
     }
     return (
         <Box
+            backgroundColor={colors.white}
             width="100%"
             px={6}
             paddingBottom={props.component.buttonsModuleLayout?.spacingBottom ?? undefined}
