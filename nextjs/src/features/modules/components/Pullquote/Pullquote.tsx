@@ -10,6 +10,7 @@ export const Pullquote: React.FC<Props> = props => {
         <Box
             width="100%"
             px={6}
+            backgroundColor={'white'}
             paddingBottom={props.component.pullquoteModuleLayout?.spacingBottom ?? undefined}
             paddingTop={props.component.pullquoteModuleLayout?.spacingTop ?? undefined}
         >
