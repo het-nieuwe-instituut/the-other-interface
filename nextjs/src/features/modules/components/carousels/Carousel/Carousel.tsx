@@ -6,6 +6,7 @@ import CarouselPagination from '../components/CarouselPagination/CarouselPaginat
 import CarouselHeader from '../components/CarouselHeader/CarouselHeader'
 import { CarouselSlide } from '../components/CarouselSlide/CarouselSlide'
 import { usePresenter } from './usePresenter'
+import colors from '@/features/shared/styles/theme/foundations/colors'
 
 interface Props {
     component: ComponentModulesCarousel
@@ -29,7 +30,7 @@ export const CarouselModule: React.FC<Props> = props => {
     return (
         <Box
             as="div"
-            backgroundColor={'white'}
+            backgroundColor={colors.white}
             px={6}
             paddingBottom={props.component.carouselModuleLayout?.spacingBottom ?? undefined}
             paddingTop={props.component.carouselModuleLayout?.spacingTop ?? undefined}

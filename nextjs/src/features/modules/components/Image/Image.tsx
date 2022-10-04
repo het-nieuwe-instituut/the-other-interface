@@ -1,3 +1,4 @@
+import colors from '@/features/shared/styles/theme/foundations/colors'
 import { Box, Img, Text } from '@chakra-ui/react'
 import { ComponentModulesImage, UploadFile } from 'src/generated/graphql'
 import { imageBasePath } from '../../modulesConstants'
@@ -15,18 +16,13 @@ const MediaImage = (props: MediaImageProps) => {
 
     return (
         <Box
-            backgroundColor={'white'}
+            backgroundColor={colors.white}
             px={6}
             paddingBottom={props.component.imageModuleLayout?.spacingBottom ?? undefined}
             paddingTop={props.component.imageModuleLayout?.spacingTop ?? undefined}
         >
             <Box onClick={onClick} cursor={'pointer'} pb="10px">
-                <Img
-                    alt={alt_text || ''}
-                    src={imagePath}
-                    w="full"
-                    objectFit="scale-down"
-                />
+                <Img alt={alt_text || ''} src={imagePath} w="full" objectFit="scale-down" />
             </Box>
             {caption && (
                 <Box width={'100'} mb="16px">

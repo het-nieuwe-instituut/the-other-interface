@@ -1,4 +1,5 @@
 import { Markdown } from '@/features/shared/components/Markdown/Markdown'
+import colors from '@/features/shared/styles/theme/foundations/colors'
 import { Box } from '@chakra-ui/react'
 import { ComponentModulesTextModule } from 'src/generated/graphql'
 
@@ -16,9 +17,9 @@ export const TextModule: React.FC<Props> = props => {
     return (
         <Box
             px={6}
-            maxWidth={'820px'}
-            mb={props.component.textModuleLayout?.spacingBottom ?? undefined}
-            mt={props.component.textModuleLayout?.spacingTop ?? undefined}
+            backgroundColor={colors.white}
+            pb={props.component.textModuleLayout?.spacingBottom ?? undefined}
+            pt={props.component.textModuleLayout?.spacingTop ?? undefined}
         >
             <Markdown>{content}</Markdown>
         </Box>
