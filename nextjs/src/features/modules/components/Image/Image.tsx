@@ -22,7 +22,7 @@ const MediaImage = (props: MediaImageProps) => {
             paddingTop={props.component.imageModuleLayout?.spacingTop ?? undefined}
         >
             <Box onClick={onClick} cursor={'pointer'} pb="10px">
-                <Img alt={alt_text || ''} src={imagePath} w="full" objectFit="scale-down" />
+                <Img alt={alt_text || ''} src={imagePath} w="full" backgroundColor={'red'} />
             </Box>
             {caption && (
                 <Box width={'100'} mb="16px">
