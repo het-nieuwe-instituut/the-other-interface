@@ -1,8 +1,16 @@
 import { ObjectType, Field, createUnionType, ID, InputType } from '@nestjs/graphql'
+import { ArchivesFondsZoomLevel5DetailType, ArchivesOtherZoomLevel5DetailType } from '../archives/archives.type'
 
 import { AuthorEntityResponse } from '../author/author.type'
 import { LocationRelationResponseCollection } from '../location/location.type'
-import { PeopleType } from '../people/people.type'
+import { ObjectsZoomLevel5DetailType } from '../objects/objects.type'
+import { PoepleZoomLevel5DetailType } from '../people/people.type'
+import {
+    PublicationsArticleZoomLevel5DetailType,
+    PublicationsAudioVisualZoomLevel5DetailType,
+    PublicationsBookZoomLevel5DetailType,
+    PublicationsSerialZoomLevel5DetailType,
+} from '../publications/publications.type'
 import { ComponentCorePublicationDate } from '../strapi/components/core/publicationDate'
 import { ComponentCoreTimeframe } from '../strapi/components/core/timeframe'
 
@@ -85,9 +93,62 @@ export class Story {
     @Field({ nullable: true })
     public updatedAt?: Date
 
-    @Field(() => [PeopleType], { nullable: 'itemsAndList' })
-    public people?: PeopleType[]
+    @Field(() => [PoepleZoomLevel5DetailType], { nullable: 'itemsAndList' })
+    public people?: PoepleZoomLevel5DetailType[]
+
+    @Field(() => [StoryArchivesUnionType], { nullable: 'itemsAndList' })
+    public archives?: StoryArchivesUnionTypeType[]
+
+    @Field(() => [ObjectsZoomLevel5DetailType], { nullable: 'itemsAndList' })
+    public objects?: ObjectsZoomLevel5DetailType[]
+
+    @Field(() => [StoryPublicationsUnionType], { nullable: 'itemsAndList' })
+    public publications?: StoryPublicationsUnionTypeType[]
 }
+
+export type StoryArchivesUnionTypeType = ArchivesFondsZoomLevel5DetailType | ArchivesOtherZoomLevel5DetailType
+export const StoryArchivesUnionType = createUnionType({
+    name: 'StoryArchivesUnionType',
+    types: () => [ArchivesFondsZoomLevel5DetailType, ArchivesOtherZoomLevel5DetailType] as const,
+    resolveType(value) {
+        // TODO: ask lois how to recognize the difference properly
+        if (value.hasOwnProperty('descriptionLevel')) {
+            return ArchivesOtherZoomLevel5DetailType
+        } else {
+            return ArchivesFondsZoomLevel5DetailType
+        }
+    },
+})
+
+export type StoryPublicationsUnionTypeType =
+    | PublicationsAudioVisualZoomLevel5DetailType
+    | PublicationsArticleZoomLevel5DetailType
+    | PublicationsSerialZoomLevel5DetailType
+    | PublicationsBookZoomLevel5DetailType
+export const StoryPublicationsUnionType = createUnionType({
+    name: 'StoryPublicationsUnionType',
+    types: () =>
+        [
+            PublicationsAudioVisualZoomLevel5DetailType,
+            PublicationsArticleZoomLevel5DetailType,
+            PublicationsSerialZoomLevel5DetailType,
+            PublicationsBookZoomLevel5DetailType,
+        ] as const,
+    resolveType(value) {
+        switch (value.typeOfPublicationLabel) {
+            case 'audio-visueel materiaal':
+                return PublicationsAudioVisualZoomLevel5DetailType
+            case 'tijdschriftartikel':
+                return PublicationsArticleZoomLevel5DetailType
+            case 'tijdschrift':
+                return PublicationsSerialZoomLevel5DetailType
+            case 'boek':
+                return PublicationsBookZoomLevel5DetailType
+            default:
+                return null
+        }
+    },
+})
 
 export const StoryComponentsDynamicZone = createUnionType({
     name: 'StoryComponentsDynamicZone',
