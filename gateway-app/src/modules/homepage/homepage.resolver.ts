@@ -8,7 +8,10 @@ export class HomepageResolver {
     public constructor(@Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk) {}
 
     @Query(() => HomepageEntityResponse)
-    public homepage(@Args('publicationState') publicationState: PublicationState, @Args('locale') locale: string) {
-        return this.strapiGqlSdk.homepage({ publicationState, locale })
+    public async homepage(
+        @Args('publicationState', { nullable: true }) publicationState?: PublicationState,
+        @Args('locale', { nullable: true }) locale?: string
+    ) {
+        return (await this.strapiGqlSdk.homepage({ publicationState, locale })).homepage
     }
 }
