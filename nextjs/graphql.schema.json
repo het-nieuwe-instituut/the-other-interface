@@ -1128,6 +1128,183 @@
       },
       {
         "kind": "OBJECT",
+        "name": "ComponentCoreModuleLayouts",
+        "description": null,
+        "fields": [
+          {
+            "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "spacingBottom",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "ENUM_COMPONENTCOREMODULELAYOUTS_SPACINGBOTTOM",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "spacingTop",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "ENUM_COMPONENTCOREMODULELAYOUTS_SPACINGTOP",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ComponentCoreModuleLayoutsFiltersInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "and",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "ComponentCoreModuleLayoutsFiltersInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "not",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ComponentCoreModuleLayoutsFiltersInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "or",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "ComponentCoreModuleLayoutsFiltersInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "spacingBottom",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFilterInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "spacingTop",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFilterInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ComponentCoreModuleLayoutsInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "spacingBottom",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "ENUM_COMPONENTCOREMODULELAYOUTS_SPACINGBOTTOM",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "spacingTop",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "ENUM_COMPONENTCOREMODULELAYOUTS_SPACINGTOP",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
         "name": "ComponentCorePageHeader",
         "description": null,
         "fields": [
@@ -2268,6 +2445,22 @@
             "deprecationReason": null
           },
           {
+            "name": "buttonsModuleLayout",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "ComponentCoreModuleLayouts",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "id",
             "description": null,
             "args": [],
@@ -2329,6 +2522,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "ComponentCoreButtonFiltersInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "buttonsModuleLayout",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ComponentCoreModuleLayoutsFiltersInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -2403,6 +2608,18 @@
             "deprecationReason": null
           },
           {
+            "name": "buttonsModuleLayout",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ComponentCoreModuleLayoutsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "id",
             "description": null,
             "type": {
@@ -2444,6 +2661,22 @@
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "carouselModuleLayout",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "ComponentCoreModuleLayouts",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -2623,6 +2856,22 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "imageModuleLayout",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "ComponentCoreModuleLayouts",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -2657,6 +2906,22 @@
               "ofType": {
                 "kind": "SCALAR",
                 "name": "ID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "imageCarouselModuleLayout",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "ComponentCoreModuleLayouts",
                 "ofType": null
               }
             },
@@ -2744,6 +3009,22 @@
             "deprecationReason": null
           },
           {
+            "name": "pullquoteModuleLayout",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "ComponentCoreModuleLayouts",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "text",
             "description": null,
             "args": [],
@@ -2776,6 +3057,22 @@
               "ofType": {
                 "kind": "SCALAR",
                 "name": "ID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "subtitleModuleLayout",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "ComponentCoreModuleLayouts",
                 "ofType": null
               }
             },
@@ -2834,25 +3131,17 @@
             "deprecationReason": null
           },
           {
-            "name": "tableModuleSpacingBottom",
+            "name": "tableModuleLayout",
             "description": null,
             "args": [],
             "type": {
-              "kind": "ENUM",
-              "name": "ENUM_COMPONENTMODULESTABLEMODULE_TABLEMODULESPACINGBOTTOM",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "tableModuleSpacingTop",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "ENUM",
-              "name": "ENUM_COMPONENTMODULESTABLEMODULE_TABLEMODULESPACINGTOP",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "ComponentCoreModuleLayouts",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -2897,25 +3186,17 @@
             "deprecationReason": null
           },
           {
-            "name": "textModuleSpacingBottom",
+            "name": "textModuleLayout",
             "description": null,
             "args": [],
             "type": {
-              "kind": "ENUM",
-              "name": "ENUM_COMPONENTMODULESTEXTMODULE_TEXTMODULESPACINGBOTTOM",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "textModuleSpacingTop",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "ENUM",
-              "name": "ENUM_COMPONENTMODULESTEXTMODULE_TEXTMODULESPACINGTOP",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "ComponentCoreModuleLayouts",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -2958,44 +3239,17 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "ComponentTriplyPeople",
-        "description": null,
-        "fields": [
-          {
-            "name": "id",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "ID",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
           },
           {
-            "name": "uri_id",
+            "name": "titleModuleLayout",
             "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
+                "kind": "OBJECT",
+                "name": "ComponentCoreModuleLayouts",
                 "ofType": null
               }
             },
@@ -3005,108 +3259,6 @@
         ],
         "inputFields": null,
         "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "ComponentTriplyPeopleFiltersInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "and",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "ComponentTriplyPeopleFiltersInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "not",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "ComponentTriplyPeopleFiltersInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "or",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "ComponentTriplyPeopleFiltersInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "uri_id",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFilterInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "ComponentTriplyPeopleInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "ID",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "uri_id",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
@@ -3721,6 +3873,76 @@
       },
       {
         "kind": "ENUM",
+        "name": "ENUM_COMPONENTCOREMODULELAYOUTS_SPACINGBOTTOM",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "lg",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "md",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "sm",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "xl",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "ENUM_COMPONENTCOREMODULELAYOUTS_SPACINGTOP",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "lg",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "md",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "sm",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "xl",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
         "name": "ENUM_COMPONENTCOREPUBLICATIONDATE_DISPLAYTYPE",
         "description": null,
         "fields": null,
@@ -3802,137 +4024,38 @@
       },
       {
         "kind": "ENUM",
-        "name": "ENUM_COMPONENTMODULESTABLEMODULE_TABLEMODULESPACINGBOTTOM",
+        "name": "ENUM_TRIPLYRECORD_TYPE",
         "description": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
         "enumValues": [
           {
-            "name": "lg",
+            "name": "archive",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "md",
+            "name": "media",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "sm",
+            "name": "object",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "xl",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "possibleTypes": null
-      },
-      {
-        "kind": "ENUM",
-        "name": "ENUM_COMPONENTMODULESTABLEMODULE_TABLEMODULESPACINGTOP",
-        "description": null,
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": [
-          {
-            "name": "lg",
+            "name": "people",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "md",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "sm",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "xl",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "possibleTypes": null
-      },
-      {
-        "kind": "ENUM",
-        "name": "ENUM_COMPONENTMODULESTEXTMODULE_TEXTMODULESPACINGBOTTOM",
-        "description": null,
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": [
-          {
-            "name": "lg",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "md",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "sm",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "xl",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "possibleTypes": null
-      },
-      {
-        "kind": "ENUM",
-        "name": "ENUM_COMPONENTMODULESTEXTMODULE_TEXTMODULESPACINGTOP",
-        "description": null,
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": [
-          {
-            "name": "lg",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "md",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "sm",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "xl",
+            "name": "publication",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -4345,6 +4468,11 @@
           },
           {
             "kind": "OBJECT",
+            "name": "ComponentCoreModuleLayouts",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
             "name": "ComponentCorePageHeader",
             "ofType": null
           },
@@ -4425,11 +4553,6 @@
           },
           {
             "kind": "OBJECT",
-            "name": "ComponentTriplyPeople",
-            "ofType": null
-          },
-          {
-            "kind": "OBJECT",
             "name": "Homepage",
             "ofType": null
           },
@@ -4461,6 +4584,11 @@
           {
             "kind": "OBJECT",
             "name": "Table",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "TriplyRecord",
             "ofType": null
           },
           {
@@ -8490,6 +8618,35 @@
             "deprecationReason": null
           },
           {
+            "name": "createTriplyRecord",
+            "description": null,
+            "args": [
+              {
+                "name": "data",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "TriplyRecordInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "TriplyRecordEntityResponse",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "createUploadFile",
             "description": null,
             "args": [
@@ -8851,6 +9008,35 @@
             "type": {
               "kind": "OBJECT",
               "name": "TableEntityResponse",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "deleteTriplyRecord",
+            "description": null,
+            "args": [
+              {
+                "name": "id",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "TriplyRecordEntityResponse",
               "ofType": null
             },
             "isDeprecated": false,
@@ -9666,6 +9852,51 @@
             "type": {
               "kind": "OBJECT",
               "name": "TableEntityResponse",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updateTriplyRecord",
+            "description": null,
+            "args": [
+              {
+                "name": "data",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "TriplyRecordInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "id",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "TriplyRecordEntityResponse",
               "ofType": null
             },
             "isDeprecated": false,
@@ -10905,6 +11136,96 @@
             "deprecationReason": null
           },
           {
+            "name": "triplyRecord",
+            "description": null,
+            "args": [
+              {
+                "name": "id",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "TriplyRecordEntityResponse",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "triplyRecords",
+            "description": null,
+            "args": [
+              {
+                "name": "filters",
+                "description": null,
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "TriplyRecordFiltersInput",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "pagination",
+                "description": null,
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "PaginationArg",
+                  "ofType": null
+                },
+                "defaultValue": "{}",
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "publicationState",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "PublicationState",
+                  "ofType": null
+                },
+                "defaultValue": "LIVE",
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "sort",
+                "description": null,
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": "[]",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "TriplyRecordEntityResponseCollection",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "uploadFile",
             "description": null,
             "args": [
@@ -11537,7 +11858,7 @@
             "deprecationReason": null
           },
           {
-            "name": "triply_people",
+            "name": "triplyRecords",
             "description": null,
             "args": [
               {
@@ -11545,7 +11866,7 @@
                 "description": null,
                 "type": {
                   "kind": "INPUT_OBJECT",
-                  "name": "ComponentTriplyPeopleFiltersInput",
+                  "name": "TriplyRecordFiltersInput",
                   "ofType": null
                 },
                 "defaultValue": null,
@@ -11561,6 +11882,18 @@
                   "ofType": null
                 },
                 "defaultValue": "{}",
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "publicationState",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "PublicationState",
+                  "ofType": null
+                },
+                "defaultValue": "LIVE",
                 "isDeprecated": false,
                 "deprecationReason": null
               },
@@ -11582,13 +11915,9 @@
               }
             ],
             "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "ComponentTriplyPeople",
-                "ofType": null
-              }
+              "kind": "OBJECT",
+              "name": "TriplyRecordRelationResponseCollection",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -12005,11 +12334,11 @@
             "deprecationReason": null
           },
           {
-            "name": "triply_people",
+            "name": "triplyRecords",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "ComponentTriplyPeopleFiltersInput",
+              "name": "TriplyRecordFiltersInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -12184,14 +12513,14 @@
             "deprecationReason": null
           },
           {
-            "name": "triply_people",
+            "name": "triplyRecords",
             "description": null,
             "type": {
               "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "ComponentTriplyPeopleInput",
+                "kind": "SCALAR",
+                "name": "ID",
                 "ofType": null
               }
             },
@@ -13004,6 +13333,496 @@
           }
         ],
         "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "TriplyRecord",
+        "description": null,
+        "fields": [
+          {
+            "name": "createdAt",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "publishedAt",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "recordId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "stories",
+            "description": null,
+            "args": [
+              {
+                "name": "filters",
+                "description": null,
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "StoryFiltersInput",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "pagination",
+                "description": null,
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "PaginationArg",
+                  "ofType": null
+                },
+                "defaultValue": "{}",
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "publicationState",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "PublicationState",
+                  "ofType": null
+                },
+                "defaultValue": "LIVE",
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "sort",
+                "description": null,
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": "[]",
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "StoryRelationResponseCollection",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "ENUM_TRIPLYRECORD_TYPE",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updatedAt",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "TriplyRecordEntity",
+        "description": null,
+        "fields": [
+          {
+            "name": "attributes",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "TriplyRecord",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "TriplyRecordEntityResponse",
+        "description": null,
+        "fields": [
+          {
+            "name": "data",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "TriplyRecordEntity",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "TriplyRecordEntityResponseCollection",
+        "description": null,
+        "fields": [
+          {
+            "name": "data",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "TriplyRecordEntity",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "meta",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "ResponseCollectionMeta",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "TriplyRecordFiltersInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "and",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "TriplyRecordFiltersInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "createdAt",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "DateTimeFilterInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "IDFilterInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "not",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "TriplyRecordFiltersInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "or",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "TriplyRecordFiltersInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "publishedAt",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "DateTimeFilterInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "recordId",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFilterInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "stories",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StoryFiltersInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFilterInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updatedAt",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "DateTimeFilterInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "TriplyRecordInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "publishedAt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "recordId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "stories",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "ENUM_TRIPLYRECORD_TYPE",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "TriplyRecordRelationResponseCollection",
+        "description": null,
+        "fields": [
+          {
+            "name": "data",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "TriplyRecordEntity",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
         "enumValues": null,
         "possibleTypes": null
       },

@@ -1,4 +1,7 @@
-import { Injectable } from '@nestjs/common'
+import { Inject, Injectable } from '@nestjs/common'
+import { Sdk } from 'src/generated/strapi-sdk'
+import { StrapiUtils } from '../strapi/strapi.utils'
+import { ArchivesService, ArchivesZoomLevel5Types } from '../archives/archives.service'
 import { ObjectsService } from '../objects/objects.service'
 import { PeopleService } from '../people/people.service'
 import { PublicationsService, PublicationsZoomLevel5Types } from '../publications/publications.service'
@@ -20,9 +23,11 @@ export class ZoomLevel5Service {
     private relationsEndpoint = '/zoom-5-relations/run?record='
 
     public constructor(
+        @Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk,
         private readonly objectsService: ObjectsService,
         private readonly peopleService: PeopleService,
         private readonly publicationsService: PublicationsService,
+        private readonly archivesService: ArchivesService,
         private readonly triplyService: TriplyService
     ) {}
 
@@ -34,11 +39,10 @@ export class ZoomLevel5Service {
             case EntityNames.Publications:
                 return [
                     ...(await this.getRelationsFromTriply(id, type)),
-                    // TODO: uncomment after Strapi relations are added
-                    // ...(await this.getStoryRelationsForLinkedItem(id, type)),
+                    await this.getStoryRelationsForLinkedItem(id, type),
                 ]
             case EntityNames.Stories:
-            // TODO
+                return this.getStoryRelations(id)
             case EntityNames.External:
             // TODO
             default:
@@ -46,7 +50,11 @@ export class ZoomLevel5Service {
         }
     }
 
-    public getDetail(id: string, type: EntityNames, publicationType?: PublicationsZoomLevel5Types) {
+    public getDetail(
+        id: string,
+        type: EntityNames,
+        metadata?: { publicationType?: PublicationsZoomLevel5Types; archivesType?: ArchivesZoomLevel5Types }
+    ) {
         switch (type) {
             case EntityNames.Objects: {
                 return this.objectsService.getZoomLevel5Data(id)
@@ -55,12 +63,17 @@ export class ZoomLevel5Service {
                 return this.peopleService.getZoomLevel5Data(id)
             }
             case EntityNames.Publications: {
-                if (!publicationType) {
+                if (!metadata?.publicationType) {
                     throw new Error(`publicationType is required`)
                 }
-                return this.publicationsService.getZoomLevel5Data(publicationType, id)
+                return this.publicationsService.getZoomLevel5Data(metadata.publicationType, id)
             }
-            case EntityNames.Archives:
+            case EntityNames.Archives: {
+                if (!metadata?.archivesType) {
+                    throw new Error(`publicationType is required`)
+                }
+                return this.archivesService.getZoomLevel5Data(metadata.archivesType, id)
+            }
             case EntityNames.Stories:
             case EntityNames.External:
             default:
@@ -77,11 +90,11 @@ export class ZoomLevel5Service {
 
             const randomRelations = []
             if (d.sample_1_label && d.sample_1) {
-                randomRelations.push(this.formatRelationData(d.sample_1_label, d.sample_1, type))
+                randomRelations.push(this.formatTriplyRelationData(d.sample_1_label, d.sample_1, type))
             }
 
             if (d.sample_2_label && d.sample_2) {
-                randomRelations.push(this.formatRelationData(d.sample_2_label, d.sample_2, type))
+                randomRelations.push(this.formatTriplyRelationData(d.sample_2_label, d.sample_2, type))
             }
 
             return {
@@ -92,12 +105,44 @@ export class ZoomLevel5Service {
         })
     }
 
-    private async getStoryRelationsForLinkedItem(id: string, type: EntityNames) {
-        // TODO: implement after story relations are added in Strapi
-        throw new Error('not yet implemented')
+    private async getStoryRelations(id: string) {
+        const relations = await this.strapiGqlSdk.storyTriplyRelations({ id })
+        const triplyRecords = (relations.story?.data?.attributes?.triplyRecords?.data || []).filter(
+            r => !!r.attributes?.recordId
+        )
+
+        const records = await Promise.all(
+            triplyRecords.map(r => {
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                const type = StrapiUtils.getEntityNameForRecordType(r.attributes!.type)
+
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                return this.getRelationsFromTriply(r.attributes!.recordId, type)
+            })
+        )
+
+        return records.flatMap(r => r)
     }
 
-    private formatRelationData(label: string, uri: string, type: EntityNames) {
+    private async getStoryRelationsForLinkedItem(id: string, entityName: EntityNames) {
+        const res = await this.strapiGqlSdk.storiesLinkedToTriplyRecord({
+            recordId: id,
+            type: StrapiUtils.getRecordTypeForEntityName(entityName),
+        })
+        const randomStories = (res.stories?.data || []).map(s => ({
+            id: s.id,
+            type: EntityNames.Stories,
+            label: s.attributes?.title,
+        }))
+
+        return {
+            type: EntityNames.Stories,
+            total: res.stories?.data.length || 0,
+            randomRelations: randomStories,
+        }
+    }
+
+    private formatTriplyRelationData(label: string, uri: string, type: EntityNames) {
         return {
             id: TriplyUtils.getIdFromUri(uri),
             type,

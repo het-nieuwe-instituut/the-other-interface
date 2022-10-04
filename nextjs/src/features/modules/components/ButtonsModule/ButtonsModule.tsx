@@ -10,7 +10,9 @@ interface Props {
 export const ButtonsModule: React.FC<Props> = props => {
     console.log(props)
     return (
-        <Box width="100%" padding={{ base: 5, md: 6 }}>
+        <Box width="100%" padding={{ base: 5, md: 6 }}
+        paddingBottom={props.component.buttonsModuleLayout?.spacingBottom ?? undefined}
+        paddingTop={props.component.buttonsModuleLayout?.spacingTop ?? undefined}>
             <ButtonsGrid
                 buttonStyle={props.component.buttonStyle ?? undefined}
                 buttons={props.component.buttons ?? []}

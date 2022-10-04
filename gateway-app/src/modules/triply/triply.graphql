@@ -1,0 +1,7 @@
+fragment BaseTriplyRecordFragment on TriplyRecordEntity {
+    id
+    attributes {
+        recordId
+        type
+    }
+}

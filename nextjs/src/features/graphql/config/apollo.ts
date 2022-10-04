@@ -22,8 +22,7 @@ const typeDefs = gql`
 const createApolloClient = () => {
     return new ApolloClient({
         ssrMode: typeof window === 'undefined',
-        // uri: 'http://localhost:1337/graphql',
-        uri: 'http://localhost:1337/graphql',
+        uri: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
         cache: new InMemoryCache(),
         typeDefs,
     })

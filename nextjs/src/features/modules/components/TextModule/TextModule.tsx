@@ -15,11 +15,10 @@ export const TextModule: React.FC<Props> = props => {
 
     return (
         <Box
-            pl={6}
-            pr={6}
+            px={6}
             maxWidth={'820px'}
-            mb={props.component.textModuleSpacingBottom ?? undefined}
-            mt={props.component.textModuleSpacingTop ?? undefined}
+            mb={props.component.textModuleLayout?.spacingBottom ?? undefined}
+            mt={props.component.textModuleLayout?.spacingTop ?? undefined}
         >
             <Markdown>{content}</Markdown>
         </Box>
