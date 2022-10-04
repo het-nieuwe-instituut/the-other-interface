@@ -27,9 +27,6 @@ const buttonConfig = {
 }
 
 export const ButtonsGrid: React.FC<Props> = props => {
-    console.log(props)
-    const pageConfiguration = usePageConfiguration()
-
     if (props.buttonStyle === EnumComponentmodulesbuttonsmoduleButtonstyle.Large) {
         return (
             <Grid templateColumns={{ base: '1fr', md: 'auto auto' }} gap={5}>
@@ -50,33 +47,53 @@ export const ButtonsGrid: React.FC<Props> = props => {
             if (!button) {
                 return null
             }
+
+            if(props.buttonStyle === EnumComponentmodulesbuttonsmoduleButtonstyle.Large) {
+                return <GridButton key={keyExtractor(button, index, array)} button={button} index={index} array={array} config={config} />
+            }
             return (
-                <NextLink key={keyExtractor(button, index, array)} href={getURl(button)} passHref>
-                    <Button
-                        variant={config.variant}
-                        as={'a'}
-                        rightIcon={renderExternalLink(button)}
-                        target={
-                            !!button.url && isExternalURL(button.url, pageConfiguration.data?.host ?? '')
-                                ? '_blank'
-                                : undefined
-                        }
-                        gridColumn={{ base: '1fr', md: getGridColumns(index, array) }}
-                        bg={'white'}
-                    >
-                        <Text
-                            as={'span'}
-                            textStyle={config.textStyle}
-                            color={'currentcolor'}
-                            verticalAlign={'text-bottom'}
-                        >
-                            {button?.text && capitalizeFirstLetter(button.text)}
-                        </Text>
-                    </Button>
-                </NextLink>
+                <Flex key={keyExtractor(button, index, array)}  > 
+                    <GridButton button={button} index={index} array={array} config={config} />
+                </Flex>
             )
         })
     }
+}
+
+interface GridButtonProps {
+    button: ComponentCoreButton
+    index: number
+    array: Maybe<ComponentCoreButton>[]
+    config: typeof buttonConfig['default'] | typeof buttonConfig['large'];
+}
+const GridButton: React.FC<GridButtonProps> = ({button, index, array, config}) => {
+    const pageConfiguration = usePageConfiguration()
+
+    return (
+        <NextLink style={{width: '100%'}} href={getURl(button)} passHref>
+            <Button
+                variant={config.variant}
+                as={'a'}
+                rightIcon={renderExternalLink(button)}
+                target={
+                    !!button.url && isExternalURL(button.url, pageConfiguration.data?.host ?? '')
+                        ? '_blank'
+                        : undefined
+                }
+                gridColumn={{ base: '1fr', md: getGridColumns(index, array) }}
+                bg={'white'}
+            >
+                <Text
+                    as={'span'}
+                    textStyle={config.textStyle}
+                    color={'currentcolor'}
+                    verticalAlign={'text-bottom'}
+                >
+                    {button?.text && capitalizeFirstLetter(button.text)}
+                </Text>
+            </Button>
+        </NextLink>
+    )
 
     function renderExternalLink(button?: ComponentCoreButton | null) {
         if (button && button.hasAttachment) {
@@ -90,6 +107,8 @@ export const ButtonsGrid: React.FC<Props> = props => {
         return <ExternalLink />
     }
 }
+
+
 
 function getGridColumns<I extends number, T extends Array<T[0]>>(index: I, array: T) {
     if (array.length % 2) {

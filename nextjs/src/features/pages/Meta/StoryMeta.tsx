@@ -3,7 +3,7 @@ import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { formatDate } from '@/features/shared/utils/dates'
 import { keyExtractor } from '@/features/shared/utils/lists'
 import { capitalizeFirstLetter } from '@/features/shared/utils/text'
-import { Box, Link, Text } from '@chakra-ui/react'
+import { Box, Flex, Link, Text } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import {
     Author,
@@ -88,14 +88,12 @@ export const StoryMeta: React.FC<Props> = ({ story }) => {
                 </Box>
             )}
             {story.attributes?.storyLinks && (
-                <Box>
-                    <ButtonsGrid
-                        flexDirection="column"
-                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                        buttons={story.attributes.storyLinks.buttons ?? ([] as any)}
-                        buttonStyle={EnumComponentmodulesbuttonsmoduleButtonstyle.Default}
-                    ></ButtonsGrid>
-                </Box>
+                <ButtonsGrid
+                    flexDirection="column"
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    buttons={story.attributes.storyLinks.buttons ?? ([] as any)}
+                    buttonStyle={EnumComponentmodulesbuttonsmoduleButtonstyle.Default}
+                ></ButtonsGrid>
             )}
         </Box>
     )
