@@ -1,4 +1,3 @@
-import colors from '@/features/shared/styles/theme/foundations/colors'
 import { chunk, keyExtractor } from '@/features/shared/utils/lists'
 import { Box, Table, TableContainer, Tbody, Td, Th, Thead, Tr, useBreakpoint, Text, Heading } from '@chakra-ui/react'
 import { ComponentModulesTableModule } from 'src/generated/graphql'
@@ -18,7 +17,7 @@ export const TableModule: React.FC<Props> = props => {
     if (breakpoint === 'sm' || breakpoint === 'base') {
         return (
             <Box
-                backgroundColor={colors.white}
+                backgroundColor={'white'}
                 px={6}
                 pb={props.component.tableModuleLayout?.spacingBottom ?? undefined}
                 pt={props.component.tableModuleLayout?.spacingTop ?? undefined}
@@ -36,7 +35,7 @@ export const TableModule: React.FC<Props> = props => {
 
     return (
         <Box
-            backgroundColor={colors.white}
+            backgroundColor={'white'}
             px={6}
             pb={props.component.tableModuleLayout?.spacingBottom ?? undefined}
             pt={props.component.tableModuleLayout?.spacingTop ?? undefined}

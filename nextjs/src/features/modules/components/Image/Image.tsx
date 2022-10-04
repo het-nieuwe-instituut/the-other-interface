@@ -1,4 +1,3 @@
-import colors from '@/features/shared/styles/theme/foundations/colors'
 import { Box, Img, Text } from '@chakra-ui/react'
 import { ComponentModulesImage, UploadFile } from 'src/generated/graphql'
 import { imageBasePath } from '../../modulesConstants'
@@ -16,7 +15,7 @@ const MediaImage = (props: MediaImageProps) => {
 
     return (
         <Box
-            backgroundColor={colors.white}
+            backgroundColor={'white'}
             px={6}
             paddingBottom={props.component.imageModuleLayout?.spacingBottom ?? undefined}
             paddingTop={props.component.imageModuleLayout?.spacingTop ?? undefined}

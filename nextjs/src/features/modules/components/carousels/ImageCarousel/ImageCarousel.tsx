@@ -7,7 +7,6 @@ import ArrowLeftIcon from '@/icons/arrows/arrow-left-long.svg'
 import ArrowRightIcon from '@/icons/arrows/arrow-right-long.svg'
 import Image from 'next/image'
 import usePresenter from './usePresenter'
-import colors from '@/features/shared/styles/theme/foundations/colors'
 
 interface Props {
     component: ComponentModulesImageCarousel
@@ -23,7 +22,7 @@ export const ImageCarousel = (props: Props) => {
         usePresenter(items)
 
     return (
-        <Box as="div" backgroundColor={colors.white} ref={carouselRef} position="relative" pl={'24px'}>
+        <Box as="div" backgroundColor={'white'} ref={carouselRef} position="relative" pl={'6'}>
             <>
                 <ArrowPrevContainer>
                     <ArrowLeftIcon onClick={handlePaginationPrev} />
