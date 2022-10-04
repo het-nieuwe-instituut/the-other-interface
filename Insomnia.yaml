@@ -1,8 +1,329 @@
 _type: export
 __export_format: 4
-__export_date: 2022-09-28T13:47:26.044Z
+__export_date: 2022-10-04T11:52:37.860Z
 __export_source: insomnia.desktop.app:v2022.6.0
 resources:
+  - _id: req_93c0ce2563cf4aa9b03c65c3edf21db3
+    parentId: fld_13c5fd867c8545c3a5309539679ba83f
+    modified: 1664883999975
+    created: 1664870671868
+    url: "{{ _.baseUrl }}/graphql"
+    name: homepage
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n\thomepage(publicationState: \"LIVE\", locale: \"nl\")
+        {\n\t\tdata {\n\t\t\tid\n\t\t\tattributes
+        {\n\t\t\t\tTitle\n\t\t\t\tcomponents {\n\t\t\t\t\t... on
+        ComponentModulesButtonsModule
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t... on
+        ComponentModulesImage
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t... on
+        ComponentModulesImageCarousel
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t... on
+        ComponentModulesPullquote
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\ttext\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t...
+        on ComponentModulesSubtitle
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t... on
+        ComponentModulesTableModule
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t... on
+        ComponentModulesTextModule
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t... on
+        ComponentModulesTitleModule
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t... on
+        ComponentModulesCarousel
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\tcarouselModuleLayout
+        {\n\t\t\t\t\t\t\tid\n\t\t\t\t\t\t}\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t...
+        on Error
+        {\n\t\t\t\t\t\tcode\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\t\n\t}\n}\n"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658904687227.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_13c5fd867c8545c3a5309539679ba83f
+    parentId: wrk_495bc411648844949d6c2b88c3ac4cb2
+    modified: 1664821859506
+    created: 1664821859506
+    name: Strapi
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1664821859506
+    _type: request_group
+  - _id: wrk_495bc411648844949d6c2b88c3ac4cb2
+    parentId: null
+    modified: 1659610148380
+    created: 1659610148380
+    name: HNI-TOI
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_0585e8def454461484c03be3551936e0
+    parentId: fld_13c5fd867c8545c3a5309539679ba83f
+    modified: 1664867672511
+    created: 1661966595011
+    url: "{{ _.baseUrl }}/graphql"
+    name: stories
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n\tstories {\n\t\tdata {\n\t\t\tid\n\t\t\tattributes
+        {\n\t\t\t\tauthor {\n\t\t\t\t\tdata
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\tattributes
+        {\n\t\t\t\t\t\t\tfirstName\n\t\t\t\t\t\t\tinsertion\n\t\t\t\t\t\t\tlastName\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t\tlocations
+        {\n\t\t\t\t\tdata {\n\t\t\t\t\t\tattributes
+        {\n\t\t\t\t\t\t\tcity\n\t\t\t\t\t\t}\n\t\t\t\t\t\tid\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\tmeta
+        {\n\t\t\tpagination {\n\t\t\t\tpage\n\t\t\t}\n\t\t}\n\t}\n}\n"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658904687177.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_da9626bccfd244309c17b2ff8b46d993
+    parentId: fld_13c5fd867c8545c3a5309539679ba83f
+    modified: 1664870716932
+    created: 1664823597730
+    url: "{{ _.baseUrl }}/graphql"
+    name: story
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n\tstory(id: \"2\") {\n\t\tdata
+        {\n\t\t\tid\n\t\t\tattributes {\n\t\t\t\tcomponents {\n\t\t\t\t\t... on
+        ComponentModulesButtonsModule
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t... on
+        ComponentModulesImage
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t... on
+        ComponentModulesImageCarousel
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t... on
+        ComponentModulesPullquote
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\ttext\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t...
+        on ComponentModulesSubtitle
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t... on
+        ComponentModulesTableModule
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t... on
+        ComponentModulesTextModule
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t... on
+        ComponentModulesTitleModule
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t... on
+        Error
+        {\n\t\t\t\t\t\tcode\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t\tpeople
+        {\n\t\t\t\t\tname\n\t\t\t\t}\n\t\t\t\tobjects
+        {\n\t\t\t\t\ttitle\n\t\t\t\t}\n\t\t\t\tauthor {\n\t\t\t\t\tdata
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\tattributes
+        {\n\t\t\t\t\t\t\tfirstName\n\t\t\t\t\t\t\tinsertion\n\t\t\t\t\t\t\tlastName\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t\tlocations
+        {\n\t\t\t\t\tdata {\n\t\t\t\t\t\tattributes
+        {\n\t\t\t\t\t\t\tcity\n\t\t\t\t\t\t}\n\t\t\t\t\t\tid\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}\n"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658904687171.25
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_fdbb0d7a08fd4d38ae06ff0cccd3475c
+    parentId: fld_13c5fd867c8545c3a5309539679ba83f
+    modified: 1664823072232
+    created: 1664821880850
+    url: "{{ _.baseUrl }}/graphql"
+    name: location
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n\tlocation (id: \"1\") {\n\t\tdata
+        {\n\t\t\tid\n\t\t\tattributes
+        {\n\t\t\t\tcity\n\t\t\t}\n\t\t\t\n\t\t}\n\t}\n}"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658904687165
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_145a97a020e449b7a60fa8a37d2efcd6
+    parentId: fld_13c5fd867c8545c3a5309539679ba83f
+    modified: 1664823266686
+    created: 1664822051166
+    url: "{{ _.baseUrl }}/graphql"
+    name: locations
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n\tlocations {\n\t\tdata {\n\t\t\tid\n\t\t\tattributes
+        {\n\t\t\t\tcity\n\t\t\t}\n\t\t}\n\t\tmeta {\n\t\t\tpagination
+        {\n\t\t\t\tpage\n\t\t\t}\n\t\t}\n\t}\n}\n"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658904687158.75
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_71546822cecd46d6ad606827065e290d
+    parentId: fld_13c5fd867c8545c3a5309539679ba83f
+    modified: 1664822282596
+    created: 1664822262339
+    url: "{{ _.baseUrl }}/graphql"
+    name: author
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n\tauthor(id: \"1\") {\n\t\tdata
+        {\n\t\t\tid\n\t\t\tattributes
+        {\n\t\t\t\tfirstName\n\t\t\t\tinsertion\n\t\t\t\tlastName\n\t\t\t}\n\t\t\t\n\t\t}\n\t}\n}"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658904687155.625
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_d700c938d6bf4f8b8beb670c44e865fb
+    parentId: fld_13c5fd867c8545c3a5309539679ba83f
+    modified: 1664866385703
+    created: 1664822304429
+    url: "{{ _.baseUrl }}/graphql"
+    name: authors
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n\tauthors {\n\t\tdata {\n\t\t\tid\n\t\t\tattributes
+        {\n\t\t\t\tfirstName\n\t\t\t\tinsertion\n\t\t\t\tlastName\n\t\t\t}\n\t\t\t\n\t\t}\n\t}\n}"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658904687154.0625
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_04c49ae0589243c5b10e985e5090ea79
+    parentId: fld_13c5fd867c8545c3a5309539679ba83f
+    modified: 1664870666173
+    created: 1664866390405
+    url: "{{ _.baseUrl }}/graphql"
+    name: triplyRecord
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n\ttriplyRecord(id: \"4\") {\n\t\tdata
+        {\n\t\t\tid\n\t\t\tattributes
+        {\n\t\t\t\trecordId\n\t\t\t\ttype\n\t\t\t\tstories {\n\t\t\t\t\tdata
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\tattributes
+        {\n\t\t\t\t\t\t\ttitle\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}\n"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658904687153.2812
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_581b7dcbfc834c78936a4e6956d3c2ec
+    parentId: fld_13c5fd867c8545c3a5309539679ba83f
+    modified: 1664870697124
+    created: 1664866397838
+    url: "{{ _.baseUrl }}/graphql"
+    name: triplyRecords
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n\ttriplyRecords(filters: {type: {eq: \"archive\"}})
+        {\n\t\tdata {\n\t\t\tid\n\t\t\tattributes
+        {\n\t\t\t\trecordId\n\t\t\t\ttype\n\t\t\t\tstories {\n\t\t\t\t\tdata
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\tattributes
+        {\n\t\t\t\t\t\t\ttitle\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}\n"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658904687152.8906
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
   - _id: req_bb8d9c352e5d4b579d857e8a70e52b13
     parentId: wrk_495bc411648844949d6c2b88c3ac4cb2
     modified: 1664351130930
@@ -29,14 +350,6 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: wrk_495bc411648844949d6c2b88c3ac4cb2
-    parentId: null
-    modified: 1659610148380
-    created: 1659610148380
-    name: HNI-TOI
-    description: ""
-    scope: collection
-    _type: workspace
   - _id: req_b98fefb40c3c4968929e051630dd47a8
     parentId: fld_d2924e91b75846ae89c5f0c7c0e7d048
     modified: 1664348730889
@@ -157,7 +470,7 @@ resources:
     _type: request
   - _id: req_203429aa2ab54987ac7b452ffaee4e7c
     parentId: fld_2e4d378ece7940d293196c73bcedee62
-    modified: 1664269613910
+    modified: 1664782252384
     created: 1663591911654
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: relatedPerson"
@@ -205,7 +518,7 @@ resources:
     _type: request_group
   - _id: req_1613bfdb17dc4726825781b5ae47b4da
     parentId: fld_2e4d378ece7940d293196c73bcedee62
-    modified: 1664269610083
+    modified: 1664782245919
     created: 1663591927613
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: subject"
@@ -233,7 +546,7 @@ resources:
     _type: request
   - _id: req_e690b2ea8f904d0ca6b69be3ae4d4dc1
     parentId: fld_2e4d378ece7940d293196c73bcedee62
-    modified: 1664269809536
+    modified: 1664782245233
     created: 1663591935166
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: geographicalKeyword"
@@ -261,7 +574,7 @@ resources:
     _type: request
   - _id: req_cd1ebeafdb20489591b01a417a54290b
     parentId: fld_2e4d378ece7940d293196c73bcedee62
-    modified: 1664269805892
+    modified: 1664781285335
     created: 1663591947535
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: author"
@@ -289,7 +602,7 @@ resources:
     _type: request
   - _id: req_0b0e22edd8f04ddeb84f12bd0c67503c
     parentId: fld_2e4d378ece7940d293196c73bcedee62
-    modified: 1664366900827
+    modified: 1664781287359
     created: 1663591957105
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: typeOfPublication"
@@ -317,7 +630,7 @@ resources:
     _type: request
   - _id: req_e57d9b641dba45c782a85d6d05828c46
     parentId: fld_6a13fd5f66564f3a8dfade5a7fd87214
-    modified: 1663747406183
+    modified: 1664781872077
     created: 1663591475796
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: deathDate"
@@ -355,7 +668,7 @@ resources:
     _type: request_group
   - _id: req_84c16c9bcc91472689e573a16e50c740
     parentId: fld_6a13fd5f66564f3a8dfade5a7fd87214
-    modified: 1664269441918
+    modified: 1664781915644
     created: 1663591593549
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: nameType"
@@ -383,7 +696,7 @@ resources:
     _type: request
   - _id: req_fbe9115251634e1ab5680ab7346be8a3
     parentId: fld_6a13fd5f66564f3a8dfade5a7fd87214
-    modified: 1664269439315
+    modified: 1664781917803
     created: 1663591601822
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: birthDate"
@@ -411,7 +724,7 @@ resources:
     _type: request
   - _id: req_75a538064b274221b057f7a1b3e847dd
     parentId: fld_6a13fd5f66564f3a8dfade5a7fd87214
-    modified: 1664269436389
+    modified: 1664782241876
     created: 1663591614991
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: period"
@@ -439,7 +752,7 @@ resources:
     _type: request
   - _id: req_6928d96e9b7245049319b5bf23f5945f
     parentId: fld_6a13fd5f66564f3a8dfade5a7fd87214
-    modified: 1664269434272
+    modified: 1664782243660
     created: 1663591623464
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: place"
@@ -467,7 +780,7 @@ resources:
     _type: request
   - _id: req_5b4036a213414d07ad82f241cad0145e
     parentId: fld_6a13fd5f66564f3a8dfade5a7fd87214
-    modified: 1664269406624
+    modified: 1664781922771
     created: 1663591634383
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: profession"
@@ -495,7 +808,7 @@ resources:
     _type: request
   - _id: req_ef214cf7749a4703a5ac87419fca8837
     parentId: fld_9e94a5146e5745cc8dd300459a48aa6a
-    modified: 1664356006925
+    modified: 1664782279659
     created: 1663591017525
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: subject"
@@ -533,7 +846,7 @@ resources:
     _type: request_group
   - _id: req_49e6732c86624c62856c168b33a972cf
     parentId: fld_9e94a5146e5745cc8dd300459a48aa6a
-    modified: 1664356144958
+    modified: 1664782281724
     created: 1663591118362
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: personInstitution"
@@ -561,7 +874,7 @@ resources:
     _type: request
   - _id: req_9318935e2c4b4312bdd6fba7370fe5fc
     parentId: fld_9e94a5146e5745cc8dd300459a48aa6a
-    modified: 1664356024699
+    modified: 1664782283205
     created: 1663591155334
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: technique"
@@ -589,7 +902,7 @@ resources:
     _type: request
   - _id: req_c6d31a0ffbeb4c6bbbbbc1bb3aef2b2c
     parentId: fld_9e94a5146e5745cc8dd300459a48aa6a
-    modified: 1664356022808
+    modified: 1664782284656
     created: 1663591163929
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: objectName"
@@ -617,7 +930,7 @@ resources:
     _type: request
   - _id: req_0a024f8a6da84f5f8183e141d030a3d1
     parentId: fld_9e94a5146e5745cc8dd300459a48aa6a
-    modified: 1664349298988
+    modified: 1664782286359
     created: 1663591171892
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: creator"
@@ -645,7 +958,7 @@ resources:
     _type: request
   - _id: req_dd538e1ee34440d49afd764490cf1fe0
     parentId: fld_9e94a5146e5745cc8dd300459a48aa6a
-    modified: 1664349370359
+    modified: 1664782287931
     created: 1663591178529
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: date"
@@ -673,7 +986,7 @@ resources:
     _type: request
   - _id: req_9c9b58f0b24d4a3fb8cfe59499e9c3ef
     parentId: fld_9e94a5146e5745cc8dd300459a48aa6a
-    modified: 1664349261284
+    modified: 1664782290823
     created: 1663591187728
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: material"
@@ -701,7 +1014,7 @@ resources:
     _type: request
   - _id: req_0e35d49a3d134b639ff960d713d36374
     parentId: fld_9f0600f89a4744d39279da7ca4c3ebf5
-    modified: 1664348987506
+    modified: 1664782986556
     created: 1663339936433
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: date"
@@ -739,7 +1052,7 @@ resources:
     _type: request_group
   - _id: req_0746bb9aad874c6fb1b5aaf8d8182b9f
     parentId: fld_9f0600f89a4744d39279da7ca4c3ebf5
-    modified: 1664370478658
+    modified: 1664782300571
     created: 1663572238171
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: descriptionLevel"
@@ -767,7 +1080,7 @@ resources:
     _type: request
   - _id: req_333a969dc0dc447f90d76bfcee8a1c80
     parentId: fld_9f0600f89a4744d39279da7ca4c3ebf5
-    modified: 1664370477681
+    modified: 1664782302581
     created: 1663572247866
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: relatedNames"
@@ -795,7 +1108,7 @@ resources:
     _type: request
   - _id: req_929340760c4d46e0a95df717261d1d78
     parentId: fld_203efa38a76d40d7b331f8402a9d20a1
-    modified: 1664349000213
+    modified: 1664804024810
     created: 1663846123431
     url: "{{ _.baseUrl }}/graphql"
     name: archives
@@ -804,8 +1117,8 @@ resources:
     body:
       mimeType: application/graphql
       text: '{"query":"query {\n\tzoomLevel4(\n\t\tentityName:
-        Archives\n\t\tarchivesFilters: {\n\t\t\t\tStartDate:
-        \"1300\"\n\t\t\t\tEndDate: \"1420\"\n\t\t}\n\t\tpage: 1\n\t)
+        Archives\n\t\tarchivesFilters: {\n\t\t\t\tEndDate:
+        \"1300\"\n\t\t}\n\t\tpage: 1\n\t)
         {\n\t\trecord\n\t\ttitle\n\t\tfirstImage\n\t\timageLabel\n\t}\n}\n"}'
     parameters: []
     headers:
@@ -834,7 +1147,7 @@ resources:
     _type: request_group
   - _id: req_2ed7ec1718974b89b50a24d01c2f7fbb
     parentId: fld_203efa38a76d40d7b331f8402a9d20a1
-    modified: 1664363560869
+    modified: 1664779913466
     created: 1663919975465
     url: "{{ _.baseUrl }}/graphql"
     name: objects
@@ -919,66 +1232,9 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: req_482c2c64bdc144089a915c84ba3cc323
-    parentId: wrk_495bc411648844949d6c2b88c3ac4cb2
-    modified: 1664363562445
-    created: 1659610191449
-    url: "{{ _.baseUrl }}/graphql"
-    name: hello
-    description: ""
-    method: POST
-    body:
-      mimeType: application/graphql
-      text: '{"query":"query {\n\thello\n}"}'
-    parameters: []
-    headers:
-      - name: Content-Type
-        value: application/json
-        id: pair_4888895150804e04b42b02ba0fd8527d
-    authentication: {}
-    metaSortKey: -1659610191449
-    isPrivate: false
-    settingStoreCookies: true
-    settingSendCookies: true
-    settingDisableRenderRequestBody: false
-    settingEncodeUrl: true
-    settingRebuildPath: true
-    settingFollowRedirects: global
-    _type: request
-  - _id: req_0585e8def454461484c03be3551936e0
-    parentId: wrk_495bc411648844949d6c2b88c3ac4cb2
-    modified: 1664353707251
-    created: 1661966595011
-    url: "{{ _.baseUrl }}/graphql"
-    name: stories-POC
-    description: ""
-    method: POST
-    body:
-      mimeType: application/graphql
-      text: '{"query":"# was added as part of the api POC\nquery {\n\tstories
-        {\n\t\tid\n\t\tattributes
-        {\n\t\t\ttitle\n\t\t\tslug\n\t\t\tcreatedAt\n\t\t\tupdatedAt\n\t\t\tpublishedAt\n\t\t}\n\t\t#
-        these fields are resolved through triply.\n\t\t# the performance impacts
-        can be seen by commenting them out\n\n\t\tpeople
-        {\n\t\t\tname\n\t\t\tbirthDate\n\t\t\tdeathDate\n\t\t\tnationalityLabel\n\t\t}\n\t}\n}"}'
-    parameters: []
-    headers:
-      - name: Content-Type
-        value: application/json
-        id: pair_4888895150804e04b42b02ba0fd8527d
-    authentication: {}
-    metaSortKey: -1658904687177.5
-    isPrivate: false
-    settingStoreCookies: true
-    settingSendCookies: true
-    settingDisableRenderRequestBody: false
-    settingEncodeUrl: true
-    settingRebuildPath: true
-    settingFollowRedirects: global
-    _type: request
   - _id: req_51341427ac83471e85eb26d9ccbe524f
     parentId: fld_dc8e1d13132e4e3da71f9f90b1a55a54
-    modified: 1664372820466
+    modified: 1664867921071
     created: 1664371991673
     url: "{{ _.baseUrl }}/graphql"
     name: Fonds
@@ -1015,17 +1271,17 @@ resources:
     _type: request_group
   - _id: fld_17de84e682c04137bb01bf07e4e9a9a2
     parentId: wrk_495bc411648844949d6c2b88c3ac4cb2
-    modified: 1663928025620
+    modified: 1664531422292
     created: 1663927999495
     name: Zoom level 5
     description: ""
     environment: {}
     environmentPropertyOrder: null
-    metaSortKey: -1658904687127.5
+    metaSortKey: -1659899721568
     _type: request_group
   - _id: req_1a1a5f2262154aedb6464b8484301908
     parentId: fld_dc8e1d13132e4e3da71f9f90b1a55a54
-    modified: 1664372787115
+    modified: 1664867919085
     created: 1664372356024
     url: "{{ _.baseUrl }}/graphql"
     name: other
@@ -1052,7 +1308,7 @@ resources:
     _type: request
   - _id: req_5f32722834f44d93813d392ed503c382
     parentId: fld_b8d0688c6cd64bce9e0043cb6e8edb7c
-    modified: 1664371982964
+    modified: 1664869038273
     created: 1664359416181
     url: "{{ _.baseUrl }}/graphql"
     name: books
@@ -1089,7 +1345,7 @@ resources:
     _type: request_group
   - _id: req_9657f31c0a304c5697dc43a56d85a5d9
     parentId: fld_b8d0688c6cd64bce9e0043cb6e8edb7c
-    modified: 1664366198653
+    modified: 1664868543787
     created: 1664365535999
     url: "{{ _.baseUrl }}/graphql"
     name: serial
@@ -1116,7 +1372,7 @@ resources:
     _type: request
   - _id: req_879a4d9cf40c4fb083387efd3b717e88
     parentId: fld_b8d0688c6cd64bce9e0043cb6e8edb7c
-    modified: 1664366571980
+    modified: 1664868528173
     created: 1664365544712
     url: "{{ _.baseUrl }}/graphql"
     name: article
@@ -1143,7 +1399,7 @@ resources:
     _type: request
   - _id: req_01e319097e834909a6fc829958c246e2
     parentId: fld_b8d0688c6cd64bce9e0043cb6e8edb7c
-    modified: 1664367163398
+    modified: 1664868477479
     created: 1664365551090
     url: "{{ _.baseUrl }}/graphql"
     name: audiovisual
@@ -1170,7 +1426,7 @@ resources:
     _type: request
   - _id: req_b1eb21c365b946eba8c7d4682a8167c8
     parentId: fld_17de84e682c04137bb01bf07e4e9a9a2
-    modified: 1664284786650
+    modified: 1664782976876
     created: 1663928044191
     url: "{{ _.baseUrl }}/graphql"
     name: relations
@@ -1180,8 +1436,8 @@ resources:
       mimeType: application/graphql
       text: '{"query":"query {\n\trelations (type: People, id: \"12971\")
         {\n\t\ttype\n\t\ttotal\n\t\trandomRelations
-        {\n\t\t\tid\n\t\t\tlabel\n\t\t\ttype\n\t\t\trandomRelations
-        {\n\t\t\t\ttype\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n}"}'
+        {\n\t\t\tid\n\t\t\t\n\t\t\tlabel\n\t\t\ttype\n\t\t\trandomRelations
+        {\n\t\t\t\ttype\n\t\t\t\t\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n}"}'
     parameters: []
     headers:
       - name: Content-Type
@@ -1199,7 +1455,7 @@ resources:
     _type: request
   - _id: req_53c31274e53c47aaa4d38477ec26a421
     parentId: fld_17de84e682c04137bb01bf07e4e9a9a2
-    modified: 1664366195508
+    modified: 1664868085810
     created: 1664284790474
     url: "{{ _.baseUrl }}/graphql"
     name: object
@@ -1226,7 +1482,7 @@ resources:
     _type: request
   - _id: req_8652b3d6ccf24e5dbc5554479c0d438a
     parentId: fld_17de84e682c04137bb01bf07e4e9a9a2
-    modified: 1664358060542
+    modified: 1664866506846
     created: 1664357561664
     url: "{{ _.baseUrl }}/graphql"
     name: person
@@ -1243,6 +1499,84 @@ resources:
         id: pair_4888895150804e04b42b02ba0fd8527d
     authentication: {}
     metaSortKey: -1658637938101.2812
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_329560b95c584ab79a8de996d1ca5f35
+    parentId: fld_17de84e682c04137bb01bf07e4e9a9a2
+    modified: 1664866507110
+    created: 1664540106186
+    url: "{{ _.baseUrl }}/graphql"
+    name: stories
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n\tzoomLevel5St(id: \"10991\") {\n\n\t}\n}\n"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658620608348.8984
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_482c2c64bdc144089a915c84ba3cc323
+    parentId: wrk_495bc411648844949d6c2b88c3ac4cb2
+    modified: 1664363562445
+    created: 1659610191449
+    url: "{{ _.baseUrl }}/graphql"
+    name: hello
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n\thello\n}"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1659610191449
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_e006b8026b7e4143bea3d53609210afe
+    parentId: wrk_495bc411648844949d6c2b88c3ac4cb2
+    modified: 1664531443034
+    created: 1664531434437
+    url: "{{ _.baseUrl }}/graphql"
+    name: people
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"# was added as part of the api POC\nquery {\n\tpeople\n}"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658904687152.5
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true

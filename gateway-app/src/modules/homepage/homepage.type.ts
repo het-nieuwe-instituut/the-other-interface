@@ -1,5 +1,5 @@
-import { ArgsType, createUnionType, Field, ID, ObjectType } from '@nestjs/graphql'
-import { PublicationState } from 'src/generated/strapi-sdk'
+import { createUnionType, Field, ID, InputType, ObjectType } from '@nestjs/graphql'
+import { PublicationState } from '../../generated/strapi-sdk'
 import { ComponentModulesButtonsModule } from '../strapi/components/modules/buttonsModule'
 import { ComponentModulesCarousel } from '../strapi/components/modules/carousel'
 import { ComponentModulesImageCarousel } from '../strapi/components/modules/imageCarousel'
@@ -10,6 +10,12 @@ import { ComponentModulesTableModule } from '../strapi/components/modules/tableM
 import { ComponentModulesTextModule } from '../strapi/components/modules/textModule'
 import { ComponentModulesTitleModule } from '../strapi/components/modules/titleModule'
 import { Error } from '../strapi/shared-types'
+
+@ObjectType()
+export class HomepageRelationResponseCollection {
+    @Field(() => [HomepageEntity])
+    public data: HomepageEntity[]
+}
 
 @ObjectType()
 export class Homepage {
@@ -50,19 +56,13 @@ export class HomepageEntityResponse {
     public data?: HomepageEntity
 }
 
-@ObjectType()
-export class HomepageRelationResponseCollection {
-    @Field(() => [HomepageEntity])
-    public data: HomepageEntity[]
-}
-
-@ArgsType()
+@InputType()
 export class HomepageLocalizationsArgs {
     @Field(() => PublicationState, { nullable: true })
     public publicationState?: PublicationState
 }
 
-@ArgsType()
+@InputType()
 export class QueryHomepageArgs {
     @Field({ nullable: true })
     public locale?: string
@@ -86,4 +86,7 @@ export const HomepageComponentsDynamicZone = createUnionType({
             ComponentModulesTitleModule,
             Error,
         ] as const,
+    resolveType(value) {
+        return value.__typename
+    },
 })

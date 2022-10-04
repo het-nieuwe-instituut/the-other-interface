@@ -1,5 +1,5 @@
-import { ArgsType, createUnionType, Field, ID, ObjectType } from '@nestjs/graphql'
-import { PublicationState } from 'src/generated/strapi-sdk'
+import { createUnionType, Field, ID, InputType, ObjectType } from '@nestjs/graphql'
+import { PublicationState } from '../../generated/strapi-sdk'
 import { ComponentModulesButtonsModule } from '../strapi/components/modules/buttonsModule'
 import { ComponentModulesImageCarousel } from '../strapi/components/modules/imageCarousel'
 import { ComponentModulesImage } from '../strapi/components/modules/imageModule'
@@ -74,7 +74,7 @@ export class MenupageRelationResponseCollection {
     public data: MenupageEntity[]
 }
 
-@ArgsType()
+@InputType()
 export class MenupageFiltersInput {
     @Field(() => StringFilterInput, { nullable: true })
     public Title?: StringFilterInput
@@ -110,7 +110,7 @@ export class MenupageFiltersInput {
     public updatedAt?: DateTimeFilterInput
 }
 
-@ArgsType()
+@InputType()
 export class MenupageLocalizationsArgs {
     @Field(() => MenupageFiltersInput, { nullable: true })
     public filters?: MenupageFiltersInput
@@ -125,7 +125,7 @@ export class MenupageLocalizationsArgs {
     public sort?: string[]
 }
 
-@ArgsType()
+@InputType()
 export class QueryMenupageArgs {
     @Field(() => ID, { nullable: true })
     public id?: string
@@ -134,7 +134,7 @@ export class QueryMenupageArgs {
     public locale?: string
 }
 
-@ArgsType()
+@InputType()
 export class QueryMenupagesArgs {
     @Field(() => MenupageFiltersInput, { nullable: true })
     public filters?: MenupageFiltersInput

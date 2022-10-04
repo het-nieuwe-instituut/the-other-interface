@@ -1,4 +1,4 @@
-import { ArgsType, Field, ID, ObjectType, registerEnumType } from '@nestjs/graphql'
+import { Field, ID, InputType, ObjectType, registerEnumType } from '@nestjs/graphql'
 import { Enum_Componentmodulesbuttonsmodule_Buttonstyle } from '../../../../generated/strapi-sdk'
 import { ComponentCoreModuleLayouts, PaginationArg } from '../../shared-types'
 import { ComponentCoreButton, ComponentCoreButtonFiltersInput } from '../core/button'
@@ -7,7 +7,7 @@ registerEnumType(Enum_Componentmodulesbuttonsmodule_Buttonstyle, {
     name: 'Enum_Componentmodulesbuttonsmodule_Buttonstyle',
 })
 
-@ArgsType()
+@InputType()
 export class ComponentModulesButtonsModuleButtonsArgs {
     @Field(() => ComponentCoreButtonFiltersInput, { nullable: true })
     public filters?: ComponentCoreButtonFiltersInput

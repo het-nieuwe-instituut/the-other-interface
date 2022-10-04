@@ -1,4 +1,4 @@
-import { ArgsType, Field, ID, ObjectType } from '@nestjs/graphql'
+import { Field, ID, InputType, ObjectType } from '@nestjs/graphql'
 import { PaginationArg, StringFilterInput } from '../../shared-types'
 
 @ObjectType()
@@ -10,7 +10,7 @@ export class ComponentCoreTableBody {
     public id: string
 }
 
-@ArgsType()
+@InputType()
 export class ComponentCoreTableBodyInput {
     @Field(() => [ComponentCoreTableBodyItemInput], { nullable: true })
     public TableBodyItem?: ComponentCoreTableBodyItemInput[]
@@ -28,7 +28,7 @@ export class ComponentCoreTableBodyItem {
     public value?: string
 }
 
-@ArgsType()
+@InputType()
 export class ComponentCoreTableBodyItemInput {
     @Field(() => ID, { nullable: true })
     public id?: string
@@ -46,7 +46,7 @@ export class ComponentCoreTableHead {
     public id: string
 }
 
-@ArgsType()
+@InputType()
 export class ComponentCoreTableHeadInput {
     @Field(() => [ComponentCoreTableHeadItemInput], { nullable: true })
     public TableHeadItem?: ComponentCoreTableHeadItemInput[]
@@ -64,7 +64,7 @@ export class ComponentCoreTableHeadItem {
     public label?: string
 }
 
-@ArgsType()
+@InputType()
 export class ComponentCoreTableHeadItemFiltersInput {
     @Field(() => [ComponentCoreTableHeadItemFiltersInput], { nullable: true })
     public and?: ComponentCoreTableHeadItemFiltersInput[]
@@ -79,7 +79,7 @@ export class ComponentCoreTableHeadItemFiltersInput {
     public or?: ComponentCoreTableHeadItemFiltersInput[]
 }
 
-@ArgsType()
+@InputType()
 export class ComponentCoreTableHeadItemInput {
     @Field(() => ID, { nullable: true })
     public id?: string
@@ -88,7 +88,7 @@ export class ComponentCoreTableHeadItemInput {
     public label?: string
 }
 
-@ArgsType()
+@InputType()
 export class ComponentCoreTableBodyItemFiltersInput {
     @Field(() => [ComponentCoreTableBodyItemFiltersInput], { nullable: true })
     public and?: ComponentCoreTableBodyItemFiltersInput[]
@@ -103,7 +103,7 @@ export class ComponentCoreTableBodyItemFiltersInput {
     public value?: StringFilterInput
 }
 
-@ArgsType()
+@InputType()
 export class ComponentCoreTableBodyFiltersInput {
     @Field(() => ComponentCoreTableBodyItemFiltersInput, { nullable: true })
     public TableBodyItem?: ComponentCoreTableBodyItemFiltersInput
@@ -118,7 +118,7 @@ export class ComponentCoreTableBodyFiltersInput {
     public or?: ComponentCoreTableBodyFiltersInput[]
 }
 
-@ArgsType()
+@InputType()
 export class ComponentCoreTableHeadFiltersInput {
     @Field(() => ComponentCoreTableHeadItemFiltersInput, { nullable: true })
     public TableHeadItem?: ComponentCoreTableHeadItemFiltersInput
@@ -133,7 +133,7 @@ export class ComponentCoreTableHeadFiltersInput {
     public or?: ComponentCoreTableHeadFiltersInput[]
 }
 
-@ArgsType()
+@InputType()
 export class ComponentCoreTableBodyTableBodyItemArgs {
     @Field(() => ComponentCoreTableBodyItemFiltersInput, { nullable: true })
     public filters?: ComponentCoreTableBodyItemFiltersInput
@@ -145,7 +145,7 @@ export class ComponentCoreTableBodyTableBodyItemArgs {
     public sort?: string[]
 }
 
-@ArgsType()
+@InputType()
 export class TableTableBodyArgs {
     @Field(() => ComponentCoreTableBodyFiltersInput, { nullable: true })
     public filters?: ComponentCoreTableBodyFiltersInput
@@ -157,7 +157,7 @@ export class TableTableBodyArgs {
     public sort?: string[]
 }
 
-@ArgsType()
+@InputType()
 export class ComponentCoreTableHeadTableHeadItemArgs {
     @Field(() => ComponentCoreTableHeadItemFiltersInput, { nullable: true })
     public filters?: ComponentCoreTableHeadItemFiltersInput

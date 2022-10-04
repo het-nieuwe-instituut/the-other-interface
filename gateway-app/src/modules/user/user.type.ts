@@ -1,4 +1,4 @@
-import { ArgsType, Field, ID, ObjectType } from '@nestjs/graphql'
+import { Field, ID, InputType, ObjectType } from '@nestjs/graphql'
 import {
     BooleanFilterInput,
     DateTimeFilterInput,
@@ -8,13 +8,13 @@ import {
     StringFilterInput,
 } from '../strapi/shared-types'
 
-@ArgsType()
+@InputType()
 export class QueryUsersPermissionsRoleArgs {
     @Field(() => ID, { nullable: true })
     public id?: string
 }
 
-@ArgsType()
+@InputType()
 export class QueryUsersPermissionsRolesArgs {
     @Field(() => UsersPermissionsRoleFiltersInput, { nullable: true })
     public filters?: UsersPermissionsRoleFiltersInput
@@ -26,13 +26,13 @@ export class QueryUsersPermissionsRolesArgs {
     public sort?: string[]
 }
 
-@ArgsType()
+@InputType()
 export class QueryUsersPermissionsUserArgs {
     @Field(() => ID, { nullable: true })
     public id?: string
 }
 
-@ArgsType()
+@InputType()
 export class QueryUsersPermissionsUsersArgs {
     @Field(() => UsersPermissionsUserFiltersInput, { nullable: true })
     public filters?: UsersPermissionsUserFiltersInput
@@ -44,7 +44,7 @@ export class QueryUsersPermissionsUsersArgs {
     public sort?: string[]
 }
 
-@ArgsType()
+@InputType()
 export class UsersPermissionsPermissionFiltersInput {
     @Field(() => StringFilterInput, { nullable: true })
     public action?: StringFilterInput
@@ -71,7 +71,7 @@ export class UsersPermissionsPermissionFiltersInput {
     public updatedAt?: DateTimeFilterInput
 }
 
-@ArgsType()
+@InputType()
 export class UsersPermissionsRolePermissionsArgs {
     @Field(() => UsersPermissionsPermissionFiltersInput, { nullable: true })
     public filters?: UsersPermissionsPermissionFiltersInput
@@ -83,7 +83,7 @@ export class UsersPermissionsRolePermissionsArgs {
     public sort?: string[]
 }
 
-@ArgsType()
+@InputType()
 export class UsersPermissionsRoleUsersArgs {
     @Field(() => UsersPermissionsUserFiltersInput, { nullable: true })
     public filters?: UsersPermissionsUserFiltersInput
@@ -95,7 +95,7 @@ export class UsersPermissionsRoleUsersArgs {
     public sort?: string[]
 }
 
-@ArgsType()
+@InputType()
 export class UsersPermissionsRoleFiltersInput {
     @Field(() => [UsersPermissionsRoleFiltersInput], { nullable: true })
     public and?: UsersPermissionsRoleFiltersInput[]
@@ -131,7 +131,7 @@ export class UsersPermissionsRoleFiltersInput {
     public users?: UsersPermissionsUserFiltersInput
 }
 
-@ArgsType()
+@InputType()
 export class UsersPermissionsUserFiltersInput {
     @Field(() => [UsersPermissionsUserFiltersInput], { nullable: true })
     public and?: UsersPermissionsUserFiltersInput[]

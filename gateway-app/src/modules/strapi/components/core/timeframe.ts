@@ -1,4 +1,4 @@
-import { ArgsType, Field, ID, ObjectType } from '@nestjs/graphql'
+import { Field, ID, InputType, ObjectType } from '@nestjs/graphql'
 import { LongFilterInput } from '../../shared-types'
 
 @ObjectType()
@@ -13,7 +13,7 @@ export class ComponentCoreTimeframe {
     public yearStart?: number
 }
 
-@ArgsType()
+@InputType()
 export class ComponentCoreTimeframeFiltersInput {
     @Field(() => [ComponentCoreTimeframeFiltersInput], { nullable: true })
     public and?: ComponentCoreTimeframeFiltersInput[]
@@ -31,7 +31,7 @@ export class ComponentCoreTimeframeFiltersInput {
     public yearStart?: LongFilterInput
 }
 
-@ArgsType()
+@InputType()
 export class ComponentCoreTimeframeInput {
     @Field(() => ID, { nullable: true })
     public id?: string
