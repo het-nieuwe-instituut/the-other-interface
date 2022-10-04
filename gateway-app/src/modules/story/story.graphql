@@ -74,90 +74,34 @@ fragment StoryFragment on StoryEntity {
         components {
             __typename
             ... on ComponentModulesPullquote {
-                id
-                text
-                pullquoteModuleLayout {
-                    ...ComponentCoreModuleLayoutsFragment
-                }
+                ...ComponentModulesPullquoteFragment
             }
             ... on ComponentModulesTextModule {
-                id
-                Richtext
-                textModuleLayout {
-                    ...ComponentCoreModuleLayoutsFragment
-                }
+                ...ComponentModulesTextModuleFragment
             }
             ... on ComponentModulesSubtitle {
-                id
-                text
-                subtitleModuleLayout {
-                    ...ComponentCoreModuleLayoutsFragment
-                }
+                ...ComponentModulesSubtitleFragment
             }
             ... on ComponentModulesTitleModule {
-                id
-                Title
-                titleModuleLayout {
-                    ...ComponentCoreModuleLayoutsFragment
-                }
+                ...ComponentModulesTitleModuleFragment
             }
             ... on ComponentModulesImageCarousel {
-                id
-                images {
-                    data {
-                        id
-                    }
-                }
-                description
-                imageCarouselModuleLayout {
-                    ...ComponentCoreModuleLayoutsFragment
-                }
+                ...ComponentModulesImageCarouselFragment
             }
             ... on ComponentModulesImage {
-                id
-                image {
-                    data {
-                        id
-                    }
-                }
-                caption
-                alt_text
-                imageModuleLayout {
-                    ...ComponentCoreModuleLayoutsFragment
-                }
+                ...ComponentModulesImageFragment
             }
             ... on ComponentModulesTableModule {
-                id
-                table {
-                    data {
-                        id
-                    }
-                }
-                tableModuleLayout {
-                    ...ComponentCoreModuleLayoutsFragment
-                }
+                ...ComponentModulesTableModuleFragment
             }
             ... on ComponentModulesButtonsModule {
-                id
-                buttons {
-                    id
-                    text
-                    url
-                    attachment {
-                        data {
-                            id
-                        }
-                    }
-                    hasAttachment
-                }
-                buttonStyle
-                buttonsModuleLayout {
-                    ...ComponentCoreModuleLayoutsFragment
-                }
+                ...ComponentModulesButtonsModuleFragment
+            }
+            ... on ComponentModulesCarousel {
+                ...ComponentModulesCarouselFragment
             }
             ... on Error {
-                code
-                message
+                ...ErrorFragment
             }
         }
         author {

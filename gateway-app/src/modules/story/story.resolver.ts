@@ -28,7 +28,7 @@ export class StoryFieldResolver {
                 .map(r => this.peopleService.getZoomLevel5Data(r.attributes!.recordId))
         )
     }
-
+    // TODO: figure out how to resolve type of archive (Fonds vs other)
     // @ResolveField()
     // public async archives(@Parent() story: Story) {
     //     return (
@@ -49,6 +49,7 @@ export class StoryFieldResolver {
         )
     }
 
+    // TODO: figure out how to resolve the type of publication
     // @ResolveField()
     // public async publications(@Parent() story: Story) {
     //     return (
@@ -89,11 +90,11 @@ export class StoryResolver {
     public constructor(@Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk) {}
     @Query(() => StoryEntityResponseCollection)
     public async stories(
-        @Args('filters', { nullable: true }) filters: StoryFiltersInput,
-        @Args('pagination', { nullable: true }) pagination: PaginationArg,
-        @Args('sort', { nullable: true, type: () => [String] }) sort: string[],
-        @Args('publicationState', { nullable: true }) publicationState: PublicationState,
-        @Args('locale', { nullable: true }) locale: I18NLocaleCode
+        @Args('filters', { nullable: true }) filters?: StoryFiltersInput,
+        @Args('pagination', { nullable: true }) pagination?: PaginationArg,
+        @Args('sort', { nullable: true, type: () => [String] }) sort?: string[],
+        @Args('publicationState', { nullable: true }) publicationState?: PublicationState,
+        @Args('locale', { nullable: true }) locale?: I18NLocaleCode
     ) {
         const res = await this.strapiGqlSdk.stories({
             filters: filters || undefined,
@@ -107,7 +108,7 @@ export class StoryResolver {
     }
 
     @Query(() => StoryEntityResponse)
-    public async story(@Args('id') id: string, @Args('locale', { nullable: true }) locale: I18NLocaleCode) {
+    public async story(@Args('id') id: string, @Args('locale', { nullable: true }) locale?: I18NLocaleCode) {
         const res = await this.strapiGqlSdk.story({ id, locale })
 
         return res.story

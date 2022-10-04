@@ -15,6 +15,7 @@ import { ComponentCorePublicationDate } from '../strapi/components/core/publicat
 import { ComponentCoreTimeframe } from '../strapi/components/core/timeframe'
 
 import { ComponentModulesButtonsModule } from '../strapi/components/modules/buttonsModule'
+import { ComponentModulesCarousel } from '../strapi/components/modules/carousel'
 import { ComponentModulesImageCarousel } from '../strapi/components/modules/imageCarousel'
 import { ComponentModulesImage } from '../strapi/components/modules/imageModule'
 import { ComponentModulesPullquote } from '../strapi/components/modules/pullQuote'
@@ -36,23 +37,14 @@ export class StoryRelationResponseCollection {
     @Field(() => [StoryEntity], { nullable: false })
     public data: StoryEntity[]
 }
-type possibleComponentTypes =
-    | ComponentModulesButtonsModule
-    | ComponentModulesImage
-    | ComponentModulesImageCarousel
-    | ComponentModulesPullquote
-    | ComponentModulesSubtitle
-    | ComponentModulesTableModule
-    | ComponentModulesTextModule
-    | ComponentModulesTitleModule
-    | Error
+
 @ObjectType()
 export class Story {
     @Field(() => AuthorEntityResponse, { nullable: true })
     public author?: AuthorEntityResponse
 
     @Field(() => [StoryComponentsDynamicZone], { nullable: true })
-    public components?: possibleComponentTypes[]
+    public components?: typeof StoryComponentsDynamicZone[]
 
     @Field({ nullable: true })
     public createdAt?: Date
@@ -97,16 +89,15 @@ export class Story {
     public people?: PoepleZoomLevel5DetailType[]
 
     @Field(() => [StoryArchivesUnionType], { nullable: 'itemsAndList' })
-    public archives?: StoryArchivesUnionTypeType[]
+    public archives?: typeof StoryArchivesUnionType[]
 
     @Field(() => [ObjectsZoomLevel5DetailType], { nullable: 'itemsAndList' })
     public objects?: ObjectsZoomLevel5DetailType[]
 
     @Field(() => [StoryPublicationsUnionType], { nullable: 'itemsAndList' })
-    public publications?: StoryPublicationsUnionTypeType[]
+    public publications?: typeof StoryPublicationsUnionType[]
 }
 
-export type StoryArchivesUnionTypeType = ArchivesFondsZoomLevel5DetailType | ArchivesOtherZoomLevel5DetailType
 export const StoryArchivesUnionType = createUnionType({
     name: 'StoryArchivesUnionType',
     types: () => [ArchivesFondsZoomLevel5DetailType, ArchivesOtherZoomLevel5DetailType] as const,
@@ -120,11 +111,6 @@ export const StoryArchivesUnionType = createUnionType({
     },
 })
 
-export type StoryPublicationsUnionTypeType =
-    | PublicationsAudioVisualZoomLevel5DetailType
-    | PublicationsArticleZoomLevel5DetailType
-    | PublicationsSerialZoomLevel5DetailType
-    | PublicationsBookZoomLevel5DetailType
 export const StoryPublicationsUnionType = createUnionType({
     name: 'StoryPublicationsUnionType',
     types: () =>
@@ -162,31 +148,11 @@ export const StoryComponentsDynamicZone = createUnionType({
             ComponentModulesTableModule,
             ComponentModulesTextModule,
             ComponentModulesTitleModule,
+            ComponentModulesCarousel,
             Error,
         ] as const,
     resolveType(value) {
-        switch (value.__typename) {
-            case 'ComponentModulesButtonsModule':
-                return ComponentModulesButtonsModule
-            case 'ComponentModulesImage':
-                return ComponentModulesImage
-            case 'ComponentModulesImageCarousel':
-                return ComponentModulesImageCarousel
-            case 'ComponentModulesPullquote':
-                return ComponentModulesPullquote
-            case 'ComponentModulesSubtitle':
-                return ComponentModulesSubtitle
-            case 'ComponentModulesTableModule':
-                return ComponentModulesTableModule
-            case 'ComponentModulesTextModule':
-                return ComponentModulesTextModule
-            case 'ComponentModulesTitleModule':
-                return ComponentModulesTitleModule
-            case 'Error':
-                return Error
-            default:
-                return null
-        }
+        return value.__typename
     },
 })
 
