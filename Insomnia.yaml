@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2022-10-03T19:33:22.809Z
+__export_date: 2022-10-04T07:13:25.440Z
 __export_source: insomnia.desktop.app:v2022.6.0
 resources:
   - _id: req_0585e8def454461484c03be3551936e0
@@ -188,7 +188,7 @@ resources:
     _type: request
   - _id: req_d700c938d6bf4f8b8beb670c44e865fb
     parentId: fld_13c5fd867c8545c3a5309539679ba83f
-    modified: 1664822341371
+    modified: 1664866385703
     created: 1664822304429
     url: "{{ _.baseUrl }}/graphql"
     name: authors
@@ -205,6 +205,66 @@ resources:
         id: pair_4888895150804e04b42b02ba0fd8527d
     authentication: {}
     metaSortKey: -1658904687154.0625
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_04c49ae0589243c5b10e985e5090ea79
+    parentId: fld_13c5fd867c8545c3a5309539679ba83f
+    modified: 1664866957189
+    created: 1664866390405
+    url: "{{ _.baseUrl }}/graphql"
+    name: triplyRecord
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n\ttriplyRecord(id: \"4\") {\n\t\tdata
+        {\n\t\t\tid\n\t\t\tattributes
+        {\n\t\t\t\trecordId\n\t\t\t\ttype\n\t\t\t\tstories {\n\t\t\t\t\tdata
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\tattributes
+        {\n\t\t\t\t\t\t\ttitle\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}\n"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658904687153.2812
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_581b7dcbfc834c78936a4e6956d3c2ec
+    parentId: fld_13c5fd867c8545c3a5309539679ba83f
+    modified: 1664867517943
+    created: 1664866397838
+    url: "{{ _.baseUrl }}/graphql"
+    name: triplyRecords
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n\ttriplyRecords(filters: {type: {eq: \"archive\"}})
+        {\n\t\tdata {\n\t\t\tid\n\t\t\tattributes
+        {\n\t\t\t\trecordId\n\t\t\t\ttype\n\t\t\t\tstories {\n\t\t\t\t\tdata
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\tattributes
+        {\n\t\t\t\t\t\t\ttitle\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}\n"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658904687152.8906
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -1123,7 +1183,7 @@ resources:
     _type: request
   - _id: req_51341427ac83471e85eb26d9ccbe524f
     parentId: fld_dc8e1d13132e4e3da71f9f90b1a55a54
-    modified: 1664530119997
+    modified: 1664866545055
     created: 1664371991673
     url: "{{ _.baseUrl }}/graphql"
     name: Fonds
@@ -1170,7 +1230,7 @@ resources:
     _type: request_group
   - _id: req_1a1a5f2262154aedb6464b8484301908
     parentId: fld_dc8e1d13132e4e3da71f9f90b1a55a54
-    modified: 1664372787115
+    modified: 1664866530780
     created: 1664372356024
     url: "{{ _.baseUrl }}/graphql"
     name: other
@@ -1197,7 +1257,7 @@ resources:
     _type: request
   - _id: req_5f32722834f44d93813d392ed503c382
     parentId: fld_b8d0688c6cd64bce9e0043cb6e8edb7c
-    modified: 1664371982964
+    modified: 1664866528305
     created: 1664359416181
     url: "{{ _.baseUrl }}/graphql"
     name: books
@@ -1344,7 +1404,7 @@ resources:
     _type: request
   - _id: req_53c31274e53c47aaa4d38477ec26a421
     parentId: fld_17de84e682c04137bb01bf07e4e9a9a2
-    modified: 1664782977490
+    modified: 1664866494054
     created: 1664284790474
     url: "{{ _.baseUrl }}/graphql"
     name: object
@@ -1371,7 +1431,7 @@ resources:
     _type: request
   - _id: req_8652b3d6ccf24e5dbc5554479c0d438a
     parentId: fld_17de84e682c04137bb01bf07e4e9a9a2
-    modified: 1664531398789
+    modified: 1664866506846
     created: 1664357561664
     url: "{{ _.baseUrl }}/graphql"
     name: person
@@ -1398,7 +1458,7 @@ resources:
     _type: request
   - _id: req_329560b95c584ab79a8de996d1ca5f35
     parentId: fld_17de84e682c04137bb01bf07e4e9a9a2
-    modified: 1664540152249
+    modified: 1664866507110
     created: 1664540106186
     url: "{{ _.baseUrl }}/graphql"
     name: stories

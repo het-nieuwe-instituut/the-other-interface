@@ -54,7 +54,7 @@ export class StoryResolver {
     @Query(() => StoryEntityResponseCollection)
     public async stories(
         @Args('filters', { nullable: true }) filters: StoryFiltersInput,
-        @Args({ nullable: true }) pagination: PaginationArg,
+        @Args('pagination', { nullable: true }) pagination: PaginationArg,
         @Args('sort', { nullable: true, type: () => [String] }) sort: string[],
         @Args('publicationState', { nullable: true }) publicationState: PublicationState,
         @Args('locale', { nullable: true }) locale: I18NLocaleCode

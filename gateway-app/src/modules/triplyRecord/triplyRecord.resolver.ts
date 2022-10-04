@@ -1,7 +1,13 @@
 import { Inject } from '@nestjs/common'
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
-import { Sdk } from 'src/generated/strapi-sdk'
-import { TriplyRecord, TriplyRecordEntityResponse, TriplyRecordRelationResponseCollection } from './triplyRecord.type'
+import { PublicationState, Sdk } from '../../generated/strapi-sdk'
+import { PaginationArg } from '../strapi/shared-types'
+import {
+    TriplyRecord,
+    TriplyRecordEntityResponse,
+    TriplyRecordFiltersInput,
+    TriplyRecordRelationResponseCollection,
+} from './triplyRecord.type'
 
 @Resolver()
 export class TriplyRecordResolver {
@@ -12,8 +18,20 @@ export class TriplyRecordResolver {
         return res.triplyRecord
     }
     @Query(() => TriplyRecordRelationResponseCollection)
-    public async triplyRecords() {
-        //
+    public async triplyRecords(
+        @Args('filters', { nullable: true }) filters: TriplyRecordFiltersInput,
+        @Args('pagination', { nullable: true }) pagination: PaginationArg,
+        @Args('sort', { nullable: true, type: () => [String] }) sort: string[],
+        @Args('publicationState', { nullable: true }) publicationState: PublicationState
+    ) {
+        const res = await this.strapiGqlSdk.triplyRecords({
+            filters: filters || undefined,
+            pagination: pagination || undefined,
+            sort: sort || [],
+            publicationState: publicationState || undefined,
+        })
+
+        return res.triplyRecords
     }
 }
 

@@ -488,7 +488,7 @@ export class ComponentCoreModuleLayouts {
     public spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop
 }
 
-@ArgsType()
+@InputType()
 export class PaginationArg {
     @Field({ nullable: true })
     public limit?: number

@@ -17,7 +17,7 @@ export class AuthorResolver {
     @Query(() => AuthorEntityResponseCollection)
     public async authors(
         @Args('filters', { nullable: true }) filters: AuthorFiltersInput,
-        @Args({ nullable: true }) pagination: PaginationArg,
+        @Args('pagination', { nullable: true }) pagination: PaginationArg,
         @Args('sort', { nullable: true, type: () => [String] }) sort: string[],
         @Args('publicationState', { nullable: true }) publicationState: PublicationState
     ) {
