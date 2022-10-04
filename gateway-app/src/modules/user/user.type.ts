@@ -1,29 +1,21 @@
 import { Field, ID, InputType, ObjectType } from '@nestjs/graphql'
 import {
-    BooleanFilterInput,
     DateTimeFilterInput,
     IdFilterInput,
     PaginationArg,
     ResponseCollectionMeta,
     StringFilterInput,
 } from '../strapi/shared-types'
+import {
+    UsersPermissionsPermissionFiltersInput,
+    UsersPermissionsRole,
+    UsersPermissionsUserFiltersInput,
+} from './user.type.circular'
 
 @InputType()
 export class QueryUsersPermissionsRoleArgs {
     @Field(() => ID, { nullable: true })
     public id?: string
-}
-
-@InputType()
-export class QueryUsersPermissionsRolesArgs {
-    @Field(() => UsersPermissionsRoleFiltersInput, { nullable: true })
-    public filters?: UsersPermissionsRoleFiltersInput
-
-    @Field(() => PaginationArg, { nullable: true })
-    public pagination?: PaginationArg
-
-    @Field(() => [String], { nullable: true })
-    public sort?: string[]
 }
 
 @InputType()
@@ -34,57 +26,6 @@ export class QueryUsersPermissionsUserArgs {
 
 @InputType()
 export class QueryUsersPermissionsUsersArgs {
-    @Field(() => UsersPermissionsUserFiltersInput, { nullable: true })
-    public filters?: UsersPermissionsUserFiltersInput
-
-    @Field(() => PaginationArg, { nullable: true })
-    public pagination?: PaginationArg
-
-    @Field(() => [String], { nullable: true })
-    public sort?: string[]
-}
-
-@InputType()
-export class UsersPermissionsPermissionFiltersInput {
-    @Field(() => StringFilterInput, { nullable: true })
-    public action?: StringFilterInput
-
-    @Field(() => [UsersPermissionsPermissionFiltersInput], { nullable: true })
-    public and?: UsersPermissionsPermissionFiltersInput[]
-
-    @Field(() => DateTimeFilterInput, { nullable: true })
-    public createdAt?: DateTimeFilterInput
-
-    @Field(() => IdFilterInput, { nullable: true })
-    public id?: IdFilterInput
-
-    @Field(() => UsersPermissionsPermissionFiltersInput, { nullable: true })
-    public not?: UsersPermissionsPermissionFiltersInput
-
-    @Field(() => [UsersPermissionsPermissionFiltersInput], { nullable: true })
-    public or?: UsersPermissionsPermissionFiltersInput[]
-
-    @Field(() => UsersPermissionsRoleFiltersInput, { nullable: true })
-    public role?: UsersPermissionsRoleFiltersInput
-
-    @Field(() => DateTimeFilterInput, { nullable: true })
-    public updatedAt?: DateTimeFilterInput
-}
-
-@InputType()
-export class UsersPermissionsRolePermissionsArgs {
-    @Field(() => UsersPermissionsPermissionFiltersInput, { nullable: true })
-    public filters?: UsersPermissionsPermissionFiltersInput
-
-    @Field(() => PaginationArg, { nullable: true })
-    public pagination?: PaginationArg
-
-    @Field(() => [String], { nullable: true })
-    public sort?: string[]
-}
-
-@InputType()
-export class UsersPermissionsRoleUsersArgs {
     @Field(() => UsersPermissionsUserFiltersInput, { nullable: true })
     public filters?: UsersPermissionsUserFiltersInput
 
@@ -132,81 +73,45 @@ export class UsersPermissionsRoleFiltersInput {
 }
 
 @InputType()
-export class UsersPermissionsUserFiltersInput {
-    @Field(() => [UsersPermissionsUserFiltersInput], { nullable: true })
-    public and?: UsersPermissionsUserFiltersInput[]
-
-    @Field(() => BooleanFilterInput, { nullable: true })
-    public blocked?: BooleanFilterInput
-
-    @Field(() => StringFilterInput, { nullable: true })
-    public confirmationToken?: StringFilterInput
-
-    @Field(() => BooleanFilterInput, { nullable: true })
-    public confirmed?: BooleanFilterInput
-
-    @Field(() => DateTimeFilterInput, { nullable: true })
-    public createdAt?: DateTimeFilterInput
-
-    @Field(() => StringFilterInput, { nullable: true })
-    public email?: StringFilterInput
-
-    @Field(() => IdFilterInput, { nullable: true })
-    public id?: IdFilterInput
-
-    @Field(() => UsersPermissionsUserFiltersInput, { nullable: true })
-    public not?: UsersPermissionsUserFiltersInput
-
-    @Field(() => [UsersPermissionsUserFiltersInput], { nullable: true })
-    public or?: UsersPermissionsUserFiltersInput[]
-
-    @Field(() => StringFilterInput, { nullable: true })
-    public password?: StringFilterInput
-
-    @Field(() => StringFilterInput, { nullable: true })
-    public provider?: StringFilterInput
-
-    @Field(() => StringFilterInput, { nullable: true })
-    public resetPasswordToken?: StringFilterInput
-
+export class QueryUsersPermissionsRolesArgs {
     @Field(() => UsersPermissionsRoleFiltersInput, { nullable: true })
-    public role?: UsersPermissionsRoleFiltersInput
+    public filters?: UsersPermissionsRoleFiltersInput
 
-    @Field(() => DateTimeFilterInput, { nullable: true })
-    public updatedAt?: DateTimeFilterInput
+    @Field(() => PaginationArg, { nullable: true })
+    public pagination?: PaginationArg
 
-    @Field(() => StringFilterInput, { nullable: true })
-    public username?: StringFilterInput
+    @Field(() => [String], { nullable: true })
+    public sort?: string[]
+}
+
+@InputType()
+export class UsersPermissionsRolePermissionsArgs {
+    @Field(() => UsersPermissionsPermissionFiltersInput, { nullable: true })
+    public filters?: UsersPermissionsPermissionFiltersInput
+
+    @Field(() => PaginationArg, { nullable: true })
+    public pagination?: PaginationArg
+
+    @Field(() => [String], { nullable: true })
+    public sort?: string[]
+}
+
+@InputType()
+export class UsersPermissionsRoleUsersArgs {
+    @Field(() => UsersPermissionsUserFiltersInput, { nullable: true })
+    public filters?: UsersPermissionsUserFiltersInput
+
+    @Field(() => PaginationArg, { nullable: true })
+    public pagination?: PaginationArg
+
+    @Field(() => [String], { nullable: true })
+    public sort?: string[]
 }
 
 @ObjectType()
 export class UsersPermissionsPermissionRelationResponseCollection {
     @Field(() => [UsersPermissionsPermissionEntity])
     public data: UsersPermissionsPermissionEntity[]
-}
-
-@ObjectType()
-export class UsersPermissionsRole {
-    @Field({ nullable: true })
-    public createdAt?: Date
-
-    @Field({ nullable: true })
-    public description?: string
-
-    @Field()
-    public name: string
-
-    @Field(() => UsersPermissionsPermissionRelationResponseCollection, { nullable: true })
-    public permissions?: UsersPermissionsPermissionRelationResponseCollection
-
-    @Field({ nullable: true })
-    public type?: string
-
-    @Field({ nullable: true })
-    public updatedAt?: Date
-
-    @Field(() => UsersPermissionsUserRelationResponseCollection, { nullable: true })
-    public users?: UsersPermissionsUserRelationResponseCollection
 }
 
 @ObjectType()
@@ -249,30 +154,6 @@ export class UsersPermissionsMeRole {
 }
 
 @ObjectType()
-export class UsersPermissionsPermission {
-    @Field()
-    public action: string
-
-    @Field({ nullable: true })
-    public createdAt?: Date
-
-    @Field(() => UsersPermissionsRoleEntityResponse, { nullable: true })
-    public role?: UsersPermissionsRoleEntityResponse
-
-    @Field({ nullable: true })
-    public updatedAt?: Date
-}
-
-@ObjectType()
-export class UsersPermissionsPermissionEntity {
-    @Field(() => UsersPermissionsPermission, { nullable: true })
-    public attributes?: UsersPermissionsPermission
-
-    @Field(() => ID, { nullable: true })
-    public id?: string
-}
-
-@ObjectType()
 export class UsersPermissionsUser {
     @Field({ nullable: true })
     public blocked?: boolean
@@ -297,6 +178,30 @@ export class UsersPermissionsUser {
 
     @Field()
     public username: string
+}
+
+@ObjectType()
+export class UsersPermissionsPermission {
+    @Field()
+    public action: string
+
+    @Field({ nullable: true })
+    public createdAt?: Date
+
+    @Field(() => UsersPermissionsRoleEntityResponse, { nullable: true })
+    public role?: UsersPermissionsRoleEntityResponse
+
+    @Field({ nullable: true })
+    public updatedAt?: Date
+}
+
+@ObjectType()
+export class UsersPermissionsPermissionEntity {
+    @Field(() => UsersPermissionsPermission, { nullable: true })
+    public attributes?: UsersPermissionsPermission
+
+    @Field(() => ID, { nullable: true })
+    public id?: string
 }
 
 @ObjectType()

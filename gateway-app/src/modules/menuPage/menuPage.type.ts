@@ -16,6 +16,7 @@ import {
     ResponseCollectionMeta,
     StringFilterInput,
 } from '../strapi/shared-types'
+import { MenupageRelationResponseCollection } from './menuPage.types.circular'
 
 @ObjectType()
 export class Menupage {
@@ -66,12 +67,6 @@ export class MenupageEntityResponseCollection {
 
     @Field(() => ResponseCollectionMeta)
     public meta: ResponseCollectionMeta
-}
-
-@ObjectType()
-export class MenupageRelationResponseCollection {
-    @Field(() => [MenupageEntity], { nullable: true })
-    public data: MenupageEntity[]
 }
 
 @InputType()

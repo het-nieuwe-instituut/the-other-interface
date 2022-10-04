@@ -1,0 +1,74 @@
+fragment UsersPermissionsPermissionFragment on UsersPermissionsPermission {
+    action
+    createdAt
+    updatedAt
+}
+
+fragment UsersPermissionsRoleFragment on UsersPermissionsRole {
+    name
+    description
+    type
+    createdAt
+    updatedAt
+    permissions {
+        data {
+            id
+            attributes {
+                ...UsersPermissionsPermissionFragment
+            }
+        }
+    }
+    # this has a users field, but exposing it doesn't seem secure
+}
+
+fragment UsersPermissionsUserFragment on UsersPermissionsUser {
+    username
+    email
+    provider
+    confirmed
+    blocked
+    role {
+        data {
+            id
+            attributes {
+                ...UsersPermissionsRoleFragment
+            }
+        }
+    }
+    createdAt
+    updatedAt
+}
+
+fragment UsersPermissionsUserEntityFragment on UsersPermissionsUserEntity {
+    id
+    attributes {
+        ...UsersPermissionsUserFragment
+    }
+}
+
+fragment UsersPermissionsUserEntityResponseFragment on UsersPermissionsUserEntityResponse {
+    data {
+        ...UsersPermissionsUserEntityFragment
+    }
+}
+
+query usersPermissionsUser($id: ID) {
+    usersPermissionsUser(id: $id) {
+        ...UsersPermissionsUserEntityResponseFragment
+    }
+}
+
+query usersPermissionsUsers(
+    $filters: UsersPermissionsUserFiltersInput
+    $pagination: PaginationArg = {}
+    $sort: [String] = []
+) {
+    usersPermissionsUsers(filters: $filters, pagination: $pagination, sort: $sort) {
+        data {
+            ...UsersPermissionsUserEntityFragment
+        }
+        meta {
+            ...ResponseCollectionMetaFragment
+        }
+    }
+}
