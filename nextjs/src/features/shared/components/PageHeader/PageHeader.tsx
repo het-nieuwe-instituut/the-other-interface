@@ -1,4 +1,4 @@
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, Heading, Link } from '@chakra-ui/react'
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, Link, Text } from '@chakra-ui/react'
 import { Markdown } from '../Markdown/Markdown'
 
 interface Props {
@@ -19,9 +19,9 @@ export const PageHeader: React.FC<Props> = ({ title, preface }) => {
                     <BreadcrumbLink href="#" as={Link}></BreadcrumbLink>
                 </BreadcrumbItem>
             </Breadcrumb>
-            <Heading as={'h1'} textStyle={'h1'} pb={'md'}>
+            <Text as={'h1'} textStyle={'h1'} pb={'md'}>
                 {title}
-            </Heading>
+            </Text>
             {preface && <Markdown>{preface}</Markdown>}
         </>
     )
