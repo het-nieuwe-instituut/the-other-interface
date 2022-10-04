@@ -19,10 +19,10 @@ export class TriplyRecordResolver {
     }
     @Query(() => TriplyRecordRelationResponseCollection)
     public async triplyRecords(
-        @Args('filters', { nullable: true }) filters: TriplyRecordFiltersInput,
-        @Args('pagination', { nullable: true }) pagination: PaginationArg,
-        @Args('sort', { nullable: true, type: () => [String] }) sort: string[],
-        @Args('publicationState', { nullable: true }) publicationState: PublicationState
+        @Args('filters', { nullable: true }) filters?: TriplyRecordFiltersInput,
+        @Args('pagination', { nullable: true }) pagination?: PaginationArg,
+        @Args('sort', { nullable: true, type: () => [String] }) sort?: string[],
+        @Args('publicationState', { nullable: true }) publicationState?: PublicationState
     ) {
         const res = await this.strapiGqlSdk.triplyRecords({
             filters: filters || undefined,
