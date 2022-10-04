@@ -1,8 +1,17 @@
 import { Inject } from '@nestjs/common'
-import { Resolver } from '@nestjs/graphql'
-import { Sdk } from 'src/generated/strapi-sdk'
+import { Args, Query, Resolver } from '@nestjs/graphql'
+import { PublicationState, Sdk } from '../../generated/strapi-sdk'
+import { HomepageEntityResponse } from './homepage.type'
 
 @Resolver()
 export class HomepageResolver {
     public constructor(@Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk) {}
+
+    @Query(() => HomepageEntityResponse)
+    public async homepage(
+        @Args('publicationState', { nullable: true }) publicationState?: PublicationState,
+        @Args('locale', { nullable: true }) locale?: string
+    ) {
+        return (await this.strapiGqlSdk.homepage({ publicationState, locale })).homepage
+    }
 }

@@ -1,4 +1,4 @@
-import { ArgsType, Field, ID, ObjectType, registerEnumType } from '@nestjs/graphql'
+import { Field, ID, InputType, ObjectType, registerEnumType } from '@nestjs/graphql'
 import { Enum_Componentcorepublicationdate_Displaytype } from '../../../../generated/strapi-sdk'
 import { DateFilterInput, StringFilterInput } from '../../shared-types'
 
@@ -18,7 +18,7 @@ export class ComponentCorePublicationDate {
     public displayType?: Enum_Componentcorepublicationdate_Displaytype
 }
 
-@ArgsType()
+@InputType()
 export class ComponentCorePublicationDateFiltersInput {
     @Field(() => [ComponentCorePublicationDateFiltersInput], { nullable: true })
     public and?: ComponentCorePublicationDateFiltersInput[]
@@ -36,7 +36,7 @@ export class ComponentCorePublicationDateFiltersInput {
     public or?: ComponentCorePublicationDateFiltersInput[]
 }
 
-@ArgsType()
+@InputType()
 export class ComponentCorePublicationDateInput {
     @Field({ nullable: true })
     public date?: Date

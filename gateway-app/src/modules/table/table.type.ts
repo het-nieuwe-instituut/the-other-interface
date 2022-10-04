@@ -1,5 +1,5 @@
-import { ArgsType, Field, ID, ObjectType } from '@nestjs/graphql'
-import { PublicationState } from 'src/generated/strapi-sdk'
+import { Field, ID, InputType, ObjectType } from '@nestjs/graphql'
+import { PublicationState } from '../../generated/strapi-sdk'
 import { ComponentCoreTableBodyFiltersInput, ComponentCoreTableHeadFiltersInput } from '../strapi/components/core/table'
 import { TableEntity } from '../strapi/components/modules/tableModule'
 import {
@@ -19,7 +19,7 @@ export class TableEntityResponseCollection {
     public meta: ResponseCollectionMeta
 }
 
-@ArgsType()
+@InputType()
 export class TableFiltersInput {
     @Field(() => ComponentCoreTableBodyFiltersInput, { nullable: true })
     public TableBody?: ComponentCoreTableBodyFiltersInput
@@ -55,13 +55,13 @@ export class TableFiltersInput {
     public updatedAt?: DateTimeFilterInput
 }
 
-@ArgsType()
+@InputType()
 export class QueryTableArgs {
     @Field(() => ID, { nullable: true })
     public id?: string
 }
 
-@ArgsType()
+@InputType()
 export class QueryTablesArgs {
     @Field(() => TableFiltersInput, { nullable: true })
     public filters?: TableFiltersInput

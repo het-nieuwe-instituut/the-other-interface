@@ -1,5 +1,5 @@
 import { Field, ID, ObjectType, registerEnumType } from '@nestjs/graphql'
-import { Enum_Componentmodulescarousel_Type } from 'src/generated/strapi-sdk'
+import { Enum_Componentmodulescarousel_Type } from '../../../../generated/strapi-sdk'
 import { ComponentCoreModuleLayouts } from '../../shared-types'
 import { ComponentCoreCarouselItem } from '../core/carouselItem'
 

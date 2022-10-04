@@ -1,4 +1,5 @@
-import { ArgsType, Field, Float, ID, InputType, Int, ObjectType, registerEnumType } from '@nestjs/graphql'
+import { Field, Float, ID, InputType, Int, ObjectType, registerEnumType } from '@nestjs/graphql'
+
 import {
     Enum_Componentcoremodulelayouts_Spacingbottom,
     Enum_Componentcoremodulelayouts_Spacingtop,
@@ -503,7 +504,7 @@ export class PaginationArg {
     public start?: number
 }
 
-@ArgsType()
+@InputType()
 export class DateFilterInput {
     @Field(() => [Date], { nullable: true })
     public and?: Date[]
@@ -569,7 +570,7 @@ export class DateFilterInput {
     public startsWith?: Date
 }
 
-@ArgsType()
+@InputType()
 export class LongFilterInput {
     @Field(() => [Int], { nullable: true })
     public and?: number[]
@@ -707,7 +708,7 @@ export class DateTimeFilterInput {
     public startsWith?: Date
 }
 
-@ArgsType()
+@InputType()
 export class UploadFileFiltersInput {
     @Field(() => StringFilterInput, { nullable: true })
     public alternativeText?: StringFilterInput

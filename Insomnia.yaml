@@ -1,11 +1,78 @@
 _type: export
 __export_format: 4
-__export_date: 2022-10-04T07:13:25.440Z
+__export_date: 2022-10-04T11:52:37.860Z
 __export_source: insomnia.desktop.app:v2022.6.0
 resources:
+  - _id: req_93c0ce2563cf4aa9b03c65c3edf21db3
+    parentId: fld_13c5fd867c8545c3a5309539679ba83f
+    modified: 1664883999975
+    created: 1664870671868
+    url: "{{ _.baseUrl }}/graphql"
+    name: homepage
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n\thomepage(publicationState: \"LIVE\", locale: \"nl\")
+        {\n\t\tdata {\n\t\t\tid\n\t\t\tattributes
+        {\n\t\t\t\tTitle\n\t\t\t\tcomponents {\n\t\t\t\t\t... on
+        ComponentModulesButtonsModule
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t... on
+        ComponentModulesImage
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t... on
+        ComponentModulesImageCarousel
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t... on
+        ComponentModulesPullquote
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\ttext\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t...
+        on ComponentModulesSubtitle
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t... on
+        ComponentModulesTableModule
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t... on
+        ComponentModulesTextModule
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t... on
+        ComponentModulesTitleModule
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t... on
+        ComponentModulesCarousel
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\tcarouselModuleLayout
+        {\n\t\t\t\t\t\t\tid\n\t\t\t\t\t\t}\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t...
+        on Error
+        {\n\t\t\t\t\t\tcode\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\t\n\t}\n}\n"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658904687227.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_13c5fd867c8545c3a5309539679ba83f
+    parentId: wrk_495bc411648844949d6c2b88c3ac4cb2
+    modified: 1664821859506
+    created: 1664821859506
+    name: Strapi
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1664821859506
+    _type: request_group
+  - _id: wrk_495bc411648844949d6c2b88c3ac4cb2
+    parentId: null
+    modified: 1659610148380
+    created: 1659610148380
+    name: HNI-TOI
+    description: ""
+    scope: collection
+    _type: workspace
   - _id: req_0585e8def454461484c03be3551936e0
     parentId: fld_13c5fd867c8545c3a5309539679ba83f
-    modified: 1664823583886
+    modified: 1664867672511
     created: 1661966595011
     url: "{{ _.baseUrl }}/graphql"
     name: stories
@@ -35,27 +102,9 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: fld_13c5fd867c8545c3a5309539679ba83f
-    parentId: wrk_495bc411648844949d6c2b88c3ac4cb2
-    modified: 1664821859506
-    created: 1664821859506
-    name: Strapi
-    description: ""
-    environment: {}
-    environmentPropertyOrder: null
-    metaSortKey: -1664821859506
-    _type: request_group
-  - _id: wrk_495bc411648844949d6c2b88c3ac4cb2
-    parentId: null
-    modified: 1659610148380
-    created: 1659610148380
-    name: HNI-TOI
-    description: ""
-    scope: collection
-    _type: workspace
   - _id: req_da9626bccfd244309c17b2ff8b46d993
     parentId: fld_13c5fd867c8545c3a5309539679ba83f
-    modified: 1664825483417
+    modified: 1664870716932
     created: 1664823597730
     url: "{{ _.baseUrl }}/graphql"
     name: story
@@ -82,8 +131,10 @@ resources:
         ComponentModulesTitleModule
         {\n\t\t\t\t\t\tid\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t... on
         Error
-        {\n\t\t\t\t\t\tcode\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t\tauthor
-        {\n\t\t\t\t\tdata {\n\t\t\t\t\t\tid\n\t\t\t\t\t\tattributes
+        {\n\t\t\t\t\t\tcode\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t\tpeople
+        {\n\t\t\t\t\tname\n\t\t\t\t}\n\t\t\t\tobjects
+        {\n\t\t\t\t\ttitle\n\t\t\t\t}\n\t\t\t\tauthor {\n\t\t\t\t\tdata
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\tattributes
         {\n\t\t\t\t\t\t\tfirstName\n\t\t\t\t\t\t\tinsertion\n\t\t\t\t\t\t\tlastName\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t\tlocations
         {\n\t\t\t\t\tdata {\n\t\t\t\t\t\tattributes
         {\n\t\t\t\t\t\t\tcity\n\t\t\t\t\t\t}\n\t\t\t\t\t\tid\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}\n"}'
@@ -215,7 +266,7 @@ resources:
     _type: request
   - _id: req_04c49ae0589243c5b10e985e5090ea79
     parentId: fld_13c5fd867c8545c3a5309539679ba83f
-    modified: 1664866957189
+    modified: 1664870666173
     created: 1664866390405
     url: "{{ _.baseUrl }}/graphql"
     name: triplyRecord
@@ -245,7 +296,7 @@ resources:
     _type: request
   - _id: req_581b7dcbfc834c78936a4e6956d3c2ec
     parentId: fld_13c5fd867c8545c3a5309539679ba83f
-    modified: 1664867517943
+    modified: 1664870697124
     created: 1664866397838
     url: "{{ _.baseUrl }}/graphql"
     name: triplyRecords
@@ -1183,7 +1234,7 @@ resources:
     _type: request
   - _id: req_51341427ac83471e85eb26d9ccbe524f
     parentId: fld_dc8e1d13132e4e3da71f9f90b1a55a54
-    modified: 1664866545055
+    modified: 1664867921071
     created: 1664371991673
     url: "{{ _.baseUrl }}/graphql"
     name: Fonds
@@ -1230,7 +1281,7 @@ resources:
     _type: request_group
   - _id: req_1a1a5f2262154aedb6464b8484301908
     parentId: fld_dc8e1d13132e4e3da71f9f90b1a55a54
-    modified: 1664866530780
+    modified: 1664867919085
     created: 1664372356024
     url: "{{ _.baseUrl }}/graphql"
     name: other
@@ -1257,7 +1308,7 @@ resources:
     _type: request
   - _id: req_5f32722834f44d93813d392ed503c382
     parentId: fld_b8d0688c6cd64bce9e0043cb6e8edb7c
-    modified: 1664866528305
+    modified: 1664869038273
     created: 1664359416181
     url: "{{ _.baseUrl }}/graphql"
     name: books
@@ -1294,7 +1345,7 @@ resources:
     _type: request_group
   - _id: req_9657f31c0a304c5697dc43a56d85a5d9
     parentId: fld_b8d0688c6cd64bce9e0043cb6e8edb7c
-    modified: 1664366198653
+    modified: 1664868543787
     created: 1664365535999
     url: "{{ _.baseUrl }}/graphql"
     name: serial
@@ -1321,7 +1372,7 @@ resources:
     _type: request
   - _id: req_879a4d9cf40c4fb083387efd3b717e88
     parentId: fld_b8d0688c6cd64bce9e0043cb6e8edb7c
-    modified: 1664366571980
+    modified: 1664868528173
     created: 1664365544712
     url: "{{ _.baseUrl }}/graphql"
     name: article
@@ -1348,7 +1399,7 @@ resources:
     _type: request
   - _id: req_01e319097e834909a6fc829958c246e2
     parentId: fld_b8d0688c6cd64bce9e0043cb6e8edb7c
-    modified: 1664367163398
+    modified: 1664868477479
     created: 1664365551090
     url: "{{ _.baseUrl }}/graphql"
     name: audiovisual
@@ -1404,7 +1455,7 @@ resources:
     _type: request
   - _id: req_53c31274e53c47aaa4d38477ec26a421
     parentId: fld_17de84e682c04137bb01bf07e4e9a9a2
-    modified: 1664866494054
+    modified: 1664868085810
     created: 1664284790474
     url: "{{ _.baseUrl }}/graphql"
     name: object

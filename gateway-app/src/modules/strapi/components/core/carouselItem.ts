@@ -1,5 +1,5 @@
-import { ArgsType, Field, ID, ObjectType, registerEnumType } from '@nestjs/graphql'
-import { Enum_Componentcorecarouselitem_Type } from 'src/generated/strapi-sdk'
+import { Field, ID, InputType, ObjectType, registerEnumType } from '@nestjs/graphql'
+import { Enum_Componentcorecarouselitem_Type } from '../../../../generated/strapi-sdk'
 import { PaginationArg, StringFilterInput, UploadFileEntityResponse } from '../../shared-types'
 
 @ObjectType()
@@ -23,7 +23,7 @@ export class ComponentCoreCarouselItem {
     public uri_id?: string
 }
 
-@ArgsType()
+@InputType()
 export class ComponentCoreCarouselItemFiltersInput {
     @Field(() => [ComponentCoreCarouselItemFiltersInput], { nullable: true })
     public and?: ComponentCoreCarouselItemFiltersInput[]
@@ -47,7 +47,7 @@ export class ComponentCoreCarouselItemFiltersInput {
     public uri_id?: StringFilterInput
 }
 
-@ArgsType()
+@InputType()
 export class ComponentModulesCarouselItemsArgs {
     @Field(() => ComponentCoreCarouselItemFiltersInput, { nullable: true })
     public filters?: ComponentCoreCarouselItemFiltersInput
@@ -55,7 +55,7 @@ export class ComponentModulesCarouselItemsArgs {
     @Field(() => PaginationArg, { nullable: true })
     public pagination?: PaginationArg
 
-    @Field({ nullable: true })
+    @Field(() => [String], { nullable: true })
     public sort?: string[]
 }
 
