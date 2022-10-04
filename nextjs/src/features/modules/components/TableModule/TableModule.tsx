@@ -1,3 +1,4 @@
+import colors from '@/features/shared/styles/theme/foundations/colors'
 import { chunk, keyExtractor } from '@/features/shared/utils/lists'
 import { Box, Table, TableContainer, Tbody, Td, Th, Thead, Tr, useBreakpoint, Text, Heading } from '@chakra-ui/react'
 import { ComponentModulesTableModule } from 'src/generated/graphql'
@@ -17,9 +18,10 @@ export const TableModule: React.FC<Props> = props => {
     if (breakpoint === 'sm' || breakpoint === 'base') {
         return (
             <Box
+                backgroundColor={colors.white}
                 px={6}
-                mb={props.component.tableModuleLayout?.spacingBottom ?? undefined}
-                mt={props.component.tableModuleLayout?.spacingTop ?? undefined}
+                pb={props.component.tableModuleLayout?.spacingBottom ?? undefined}
+                pt={props.component.tableModuleLayout?.spacingTop ?? undefined}
             >
                 <Heading textStyle={'h3'} pb={'md'}>
                     {props.component.table?.data?.attributes?.name}
@@ -34,9 +36,10 @@ export const TableModule: React.FC<Props> = props => {
 
     return (
         <Box
+            backgroundColor={colors.white}
             px={6}
-            mb={props.component.tableModuleLayout?.spacingBottom ?? undefined}
-            mt={props.component.tableModuleLayout?.spacingTop ?? undefined}
+            pb={props.component.tableModuleLayout?.spacingBottom ?? undefined}
+            pt={props.component.tableModuleLayout?.spacingTop ?? undefined}
         >
             <Heading as={'h3'} textStyle={'h3'} pb={'md'}>
                 {props.component.table?.data?.attributes?.name}
