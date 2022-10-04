@@ -67,7 +67,7 @@ function useD3Simulation(
     }
 }
 
-function useD3FitDataToDimensions(dimensions: Dimensions, data: ObjectPerTypeWithName[]) {
+function useCalculateDataDimensions(dimensions: Dimensions, data: ObjectPerTypeWithName[]) {
     const dataDimensions: DataDimensions[] = useMemo(() => {
         const height = dimensions.height ?? 0
         const width = dimensions.width ?? 0
@@ -131,7 +131,7 @@ function ticked(
 }
 
 export function usePresenter(dimensions: Dimensions, data: ObjectPerTypeWithName[], selector: string) {
-    const dataDimensions = useD3FitDataToDimensions(dimensions, data)
+    const dataDimensions = useCalculateDataDimensions(dimensions, data)
     const { svgRef } = useD3Simulation(dimensions, data, selector, dataDimensions)
 
     return {
