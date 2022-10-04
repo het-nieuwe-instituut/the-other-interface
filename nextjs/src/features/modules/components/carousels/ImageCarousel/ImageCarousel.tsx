@@ -56,8 +56,8 @@ export const ImageCarousel = (props: Props) => {
                                     loading="eager"
                                 />
                                 {caption && (
-                                    <Box width={'100'} mb="16px" mt={'10px'}>
-                                        <Text textStyle="micro" textAlign={'left'}>
+                                    <Box width={'100'} mb="4" mt={'10px'}>
+                                        <Text textStyle="nano" textAlign={'left'}>
                                             {caption}
                                         </Text>
                                     </Box>

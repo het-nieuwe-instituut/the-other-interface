@@ -25,7 +25,7 @@ const MediaImage = (props: MediaImageProps) => {
             </Box>
             {caption && (
                 <Box width={'100'} pb="1">
-                    <Text variant="micro">{caption}</Text>
+                    <Text textStyle={'nano'}>{caption}</Text>
                 </Box>
             )}
         </Box>
