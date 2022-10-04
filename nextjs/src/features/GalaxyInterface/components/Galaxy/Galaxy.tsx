@@ -2,12 +2,14 @@ import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Box, Flex, Text } from '@chakra-ui/react'
 import { times, uniqueId } from 'lodash'
 import React, { forwardRef, useEffect, useId, useMemo, useState } from 'react'
-import { Dimensions } from '../../types/galaxy'
+import { Dimensions, ZoomLevel } from '../../types/galaxy'
 import { StoriesSystem } from '../../zoom0/StoriesSystem/StoriesSystem'
 import { Circle } from '../Circle'
 import { GalaxyShadowBackground } from '../GalaxyShadowBackground'
 import { storiesStubs } from '../stubs'
-import { ObjectPerType, usePresenter, ZoomLevel } from './usePresenter'
+import { ObjectPerType } from './hooks/useD3Simulation'
+import { usePresenter } from './usePresenter'
+
 
 interface Props {
     data: ObjectPerType[]

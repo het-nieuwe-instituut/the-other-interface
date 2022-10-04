@@ -1,4 +1,5 @@
-import { ObjectPerType } from '@/features/GalaxyInterface/components/Galaxy/usePresenter'
+
+import { ObjectPerType } from '@/features/GalaxyInterface/components/Galaxy/hooks/useD3Simulation'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 import { Box } from '@chakra-ui/react'
 import { useSize } from "@chakra-ui/react-use-size"
