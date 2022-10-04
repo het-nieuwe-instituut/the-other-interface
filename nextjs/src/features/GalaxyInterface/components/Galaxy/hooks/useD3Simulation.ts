@@ -20,25 +20,8 @@ export interface ObjectPerType {
     yFromCenter: number
 }
 
-export function useD3Simulation(
-    svgRef: MutableRefObject<SVGSVGElement | null>,
-    dimensions: Dimensions,
-    data: ObjectPerTypeWithName[],
-    selector: string,
-    dataDimensions: DataDimensions[],
-    galaxyBase: number
-) {
-    const initialized = useRef(false)
+function useInitializeD3Simulation(galaxyBase: number) {
     const simulation = useRef<d3.Simulation<D3CollectionItem, undefined> | null>(null)
-    const nodesListener = useRef<d3.Simulation<D3CollectionItem, undefined> | undefined | null>(null)
-    const dimensionsRef = useRef<Dimensions>(dimensions)
-    const resized = useRef<boolean>(false)
-
-    useEffect(() => {
-        if (dimensionsRef.current.height !== dimensions.height || dimensionsRef.current.width !== dimensions.width) {
-            resized.current = true
-        }
-    }, [dimensions.height, dimensions.width])
 
     useEffect(() => {
         if (!simulation.current) {
@@ -49,12 +32,25 @@ export function useD3Simulation(
         }
 
         return () => {
-            nodesListener.current = null
-            initialized.current = false
             simulation.current?.stop()
             simulation.current = null
         }
     }, [galaxyBase])
+
+    return {
+        simulation,
+    }
+}
+
+function useListenToSimulationTicks(
+    simulation: MutableRefObject<d3.Simulation<D3CollectionItem, undefined> | null>,
+    svgRef: MutableRefObject<SVGSVGElement | null>,
+    data: ObjectPerTypeWithName[],
+    selector: string,
+    dataDimensions: DataDimensions[],
+    galaxyBase: number
+) {
+    const nodesListener = useRef<d3.Simulation<D3CollectionItem, undefined> | undefined | null>(null)
 
     useEffect(() => {
         const d3Svg = d3.select(svgRef.current)
@@ -63,10 +59,25 @@ export function useD3Simulation(
         if (!nodesListener.current) {
             nodesListener.current = simulation.current?.nodes(data as D3CollectionItem[]).on('tick', () => {
                 ticked(dataDimensions, nodeForeign)
-                adjustPostion(resized.current, simulation.current, dataDimensions, galaxyBase)
+                adjustPostion(simulation.current, dataDimensions, galaxyBase)
             })
         }
-    }, [data, dataDimensions, selector, galaxyBase, svgRef])
+        return () => {
+            nodesListener.current = null
+        }
+    }, [data, dataDimensions, selector, galaxyBase, svgRef, simulation])
+}
+
+export function useD3Simulation(
+    svgRef: MutableRefObject<SVGSVGElement | null>,
+    dimensions: Dimensions,
+    data: ObjectPerTypeWithName[],
+    selector: string,
+    dataDimensions: DataDimensions[],
+    galaxyBase: number
+) {
+    const { simulation } = useInitializeD3Simulation(galaxyBase)
+    useListenToSimulationTicks(simulation, svgRef, data, selector, dataDimensions, galaxyBase)
 
     return {
         simulation,
@@ -95,7 +106,6 @@ function ticked(
 }
 
 function adjustPostion(
-    initialized: boolean,
     simulation: d3.Simulation<D3CollectionItem, undefined> | null,
     dataDimensions: DataDimensions[],
     galaxyBase: number
@@ -106,7 +116,7 @@ function adjustPostion(
     simulation?.nodes().forEach(d => {
         d3.select<BaseType, D3CollectionItem>(`#${d.name}`)
             .transition()
-            .duration(initialized ? 0 : 100)
+            .duration(100)
             .attr('x', d => {
                 const x = d.xFromCenter ?? 0
 
