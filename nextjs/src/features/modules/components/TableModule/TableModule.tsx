@@ -22,7 +22,7 @@ export const TableModule: React.FC<Props> = props => {
                 pb={props.component.tableModuleLayout?.spacingBottom ?? undefined}
                 pt={props.component.tableModuleLayout?.spacingTop ?? undefined}
             >
-                <Text textStyle={'h3'} as="h3" pb={'md'}>
+                <Text textStyle={'h2'} as="h2" pb={'md'}>
                     {props.component.table?.data?.attributes?.name}
                 </Text>
                 {props.component.table?.data?.attributes?.description && (
@@ -40,7 +40,7 @@ export const TableModule: React.FC<Props> = props => {
             pb={props.component.tableModuleLayout?.spacingBottom ?? undefined}
             pt={props.component.tableModuleLayout?.spacingTop ?? undefined}
         >
-            <Text as={'h3'} textStyle={'h3'} pb={'md'}>
+            <Text as={'h2'} textStyle={'h2'} pb={'md'}>
                 {props.component.table?.data?.attributes?.name}
             </Text>
             {props.component.table?.data?.attributes?.description && (
