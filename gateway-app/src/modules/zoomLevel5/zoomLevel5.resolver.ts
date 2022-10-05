@@ -12,13 +12,13 @@ import {
 } from '../publications/publications.type'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { ZoomLevel5Service } from './zoomLevel5.service'
-import { ZoomLevel5Args, ZoomLevel5Type } from './zoomLevel5.type'
+import { ZoomLevel5Args, ZoomLevel5RelationsType } from './zoomLevel5.type'
 
-@Resolver(ZoomLevel5Type)
+@Resolver(ZoomLevel5RelationsType)
 export class ZoomLevel5Resolver {
     public constructor(private readonly zoomLevel5Service: ZoomLevel5Service) {}
 
-    @Query(() => [ZoomLevel5Type], { nullable: true })
+    @Query(() => [ZoomLevel5RelationsType], { nullable: true })
     public relations(@Args() args: ZoomLevel5Args) {
         return this.zoomLevel5Service.getRelations(args.id, args.type)
     }
