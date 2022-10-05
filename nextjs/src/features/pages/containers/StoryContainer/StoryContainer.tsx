@@ -37,9 +37,10 @@ export const StoryContainer: React.FC = () => {
     const story = data?.stories?.data[0]
 
     return (
-        <Box paddingLeft={6} paddingRight={6} paddingTop={6} paddingBottom={6}>
+        <Box px={{ xl: 6, base: 0 }} py={{ xl: 6, base: 0 }}>
             <Box backgroundColor={colors.white} px={6} maxW={theme.breakpoints.xl} marginX={'auto'}>
                 <Grid
+                    pt={6}
                     templateAreas={{
                         lg: `"header meta"`,
                         base: `"meta"
@@ -47,7 +48,7 @@ export const StoryContainer: React.FC = () => {
                     }}
                     templateColumns={{ lg: '1fr 22.438rem', base: `100% 100%` }}
                     templateRows={{ lg: '1fr', base: `auto minmax(0, 1fr)` }}
-                    gap={'3.625rem'}
+                    gap={'3.75rem'}
                 >
                     <GridItem area={'header'}>
                         <PageHeader

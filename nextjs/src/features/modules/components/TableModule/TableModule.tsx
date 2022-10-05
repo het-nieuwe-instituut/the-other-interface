@@ -1,5 +1,5 @@
 import { chunk, keyExtractor } from '@/features/shared/utils/lists'
-import { Box, Table, TableContainer, Tbody, Td, Th, Thead, Tr, useBreakpoint, Text, Heading } from '@chakra-ui/react'
+import { Box, Table, TableContainer, Tbody, Td, Th, Thead, Tr, useBreakpoint, Text } from '@chakra-ui/react'
 import { ComponentModulesTableModule } from 'src/generated/graphql'
 
 interface Props {
@@ -22,9 +22,9 @@ export const TableModule: React.FC<Props> = props => {
                 pb={props.component.tableModuleLayout?.spacingBottom ?? undefined}
                 pt={props.component.tableModuleLayout?.spacingTop ?? undefined}
             >
-                <Heading textStyle={'h3'} pb={'md'}>
+                <Text textStyle={'h2'} as="h2" pb={'md'}>
                     {props.component.table?.data?.attributes?.name}
-                </Heading>
+                </Text>
                 {props.component.table?.data?.attributes?.description && (
                     <Text pb={'md'}>{props.component.table?.data?.attributes?.description}</Text>
                 )}
@@ -40,9 +40,9 @@ export const TableModule: React.FC<Props> = props => {
             pb={props.component.tableModuleLayout?.spacingBottom ?? undefined}
             pt={props.component.tableModuleLayout?.spacingTop ?? undefined}
         >
-            <Heading as={'h3'} textStyle={'h3'} pb={'md'}>
+            <Text as={'h2'} textStyle={'h2'} pb={'md'}>
                 {props.component.table?.data?.attributes?.name}
-            </Heading>
+            </Text>
             {props.component.table?.data?.attributes?.description && (
                 <Text pb={'md'}>{props.component.table?.data?.attributes?.description}</Text>
             )}
