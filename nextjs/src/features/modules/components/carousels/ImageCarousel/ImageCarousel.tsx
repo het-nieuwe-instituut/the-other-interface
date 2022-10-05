@@ -9,6 +9,7 @@ import usePresenter from './usePresenter'
 // import getConfig from 'next/config'
 // import { imageBasePath } from '../../../modulesConstants'
 import { usePageConfiguration } from '@/features/shared/hooks/pageConfiguration'
+import getConfig from 'next/config'
 
 
 interface Props {
@@ -22,9 +23,11 @@ export const ImageCarousel = (props: Props) => {
     const { images } = props.component
     const items = images?.data
     const { carouselRef, handlePaginationPrev, handlePaginationNext, sliderRef, calculateImagePropotions, size } = usePresenter(items)
-    // const { publicRuntimeConfig } = getConfig()
+     const { publicRuntimeConfig, serverRuntimeConfig } = getConfig()
     const pageConfiguration = usePageConfiguration()
     console.log(pageConfiguration)
+    console.log(publicRuntimeConfig)
+    console.log(serverRuntimeConfig)
 
     return (
         <Box as="div" backgroundColor={'white'} ref={carouselRef} position="relative" pl={'6'}>

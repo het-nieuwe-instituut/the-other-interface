@@ -25,6 +25,9 @@ const nextConfig = {
         defaultLocale: 'nl',
     },
     output: 'standalone',
+    serverRuntimeConfig: {
+        NEXT_PUBLIC_REACT_APP_IMAGE_BASE_URL: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
+    },
     publicRuntimeConfig: {
         NEXT_PUBLIC_REACT_APP_IMAGE_BASE_URL: process.env.NEXT_PUBLIC_REACT_APP_IMAGE_BASE_URL,
     },

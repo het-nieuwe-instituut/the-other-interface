@@ -2,7 +2,7 @@ import { ApolloClient, gql, InMemoryCache, NormalizedCacheObject } from '@apollo
 import merge from 'deepmerge'
 import { IncomingHttpHeaders } from 'http'
 import isEqual from 'lodash/isEqual'
-// import type { AppProps } from 'next/app'
+import type { AppProps } from 'next/app'
 import { useMemo } from 'react'
 
 const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'
@@ -78,8 +78,7 @@ export const addApolloState = <T, A extends { props: Record<string, unknown> }>(
 // alias
 export const getApolloClient = initializeApollo
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function useApollo(pageProps: any) {
+export function useApollo(pageProps: AppProps['pageProps']) {
     const state = pageProps[APOLLO_STATE_PROP_NAME]
     const store = useMemo(() => initializeApollo({ initialState: state }), [state])
     return store
