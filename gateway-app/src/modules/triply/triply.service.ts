@@ -46,9 +46,21 @@ export class TriplyService {
         return this.fetch<ReturnDataType>(endpoint)
     }
 
+    public async getCountData(rawUrl: string, searchParams?: Record<string, string>[]) {
+        const endpoint = new URL(rawUrl)
+
+        if (searchParams && searchParams.length) {
+            for (const { key, value } of searchParams) {
+                endpoint.searchParams.append(key, value)
+            }
+        }
+
+        return this.fetch<{ count: number }>(endpoint)
+    }
+
     private fetch<ReturnDataType>(endpoint: URL) {
         const headers = { Authorization: `Bearer ${this.apiKey}` }
-
-        return lastValueFrom(this.httpService.get<ReturnDataType[]>(endpoint.toString(), { headers }))
+        const res = this.httpService.get<ReturnDataType[]>(endpoint.toString(), { headers })
+        return lastValueFrom(res)
     }
 }

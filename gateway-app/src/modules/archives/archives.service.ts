@@ -103,6 +103,8 @@ export class ArchivesService {
     ]
 
     private readonly ZoomLevel4Endpoint = 'zoom-4-archives/run'
+    private readonly ZoomLevel4CountEndpoint =
+        'https://api.collectiedata.hetnieuweinstituut.nl/queries/Joran/zoom4-archives-count/run?'
 
     private readonly ZoomLevel5Endpoint = {
         [ArchivesZoomLevel5Types.fonds]: 'zoom-5-archives/run',
@@ -156,14 +158,23 @@ export class ArchivesService {
             searchParams
         )
 
-        return result.data.map(res => {
-            return {
-                record: res.record,
-                title: res.title,
-                firstImage: res.firstImage,
-                imageLabel: res.imageLabel,
-            }
-        })
+        const countResult = await this.triplyService.getCountData(this.ZoomLevel4CountEndpoint, searchParams)
+        const total = countResult.data.pop()?.count || 0
+
+        return {
+            total,
+            appliedFilters: JSON.stringify(filters),
+            page,
+            hasMore: page * pageSize < total,
+            nodes: result.data.map(res => {
+                return {
+                    record: res.record,
+                    title: res.title,
+                    firstImage: res.firstImage,
+                    imageLabel: res.imageLabel,
+                }
+            }),
+        }
     }
 
     public async getZoomLevel5Data(type: ArchivesZoomLevel5Types, objectId: string) {

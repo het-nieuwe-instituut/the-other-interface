@@ -107,6 +107,8 @@ export class PeopleService {
     ]
 
     private readonly ZoomLevel4Endpoint = 'zoom-4-people/run'
+    private readonly ZoomLevel4CountEndpoint =
+        'https://api.collectiedata.hetnieuweinstituut.nl/queries/Joran/zoom4-people-count/run'
 
     private readonly ZoomLevel5Endpoint = 'zoom-5-people/run'
 
@@ -157,14 +159,23 @@ export class PeopleService {
             searchParams
         )
 
-        return result.data.map(res => {
-            return {
-                record: res.record,
-                title: res.name,
-                firstImage: null,
-                imageLabel: null,
-            }
-        })
+        const countResult = await this.triplyService.getCountData(this.ZoomLevel4CountEndpoint, searchParams)
+        const total = countResult.data.pop()?.count || 0
+
+        return {
+            total,
+            appliedFilters: JSON.stringify(filters),
+            page,
+            hasMore: page * pageSize < total,
+            nodes: result.data.map(res => {
+                return {
+                    record: res.record,
+                    title: res.name,
+                    firstImage: null,
+                    imageLabel: null,
+                }
+            }),
+        }
     }
 
     public async getZoomLevel5Data(objectId: string) {

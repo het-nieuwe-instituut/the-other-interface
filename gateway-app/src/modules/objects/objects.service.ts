@@ -121,6 +121,9 @@ export class ObjectsService {
 
     private readonly ZoomLevel5Endpoint = 'zoom-5-objects/run'
 
+    private readonly ZoomLevel4CountEndpoint =
+        'https://api.collectiedata.hetnieuweinstituut.nl/queries/Joran/zoom4-objects-count/run?'
+
     public constructor(private triplyService: TriplyService) {}
 
     public async getZoomLevel2Data() {
@@ -168,14 +171,23 @@ export class ObjectsService {
             searchParams
         )
 
-        return result.data.map(res => {
-            return {
-                record: res.record,
-                title: res.title,
-                firstImage: res.firstImage,
-                imageLabel: res.imageLabel,
-            }
-        })
+        const countResult = await this.triplyService.getCountData(this.ZoomLevel4CountEndpoint, searchParams)
+        const total = countResult.data.pop()?.count || 0
+
+        return {
+            total,
+            appliedFilters: JSON.stringify(filters),
+            page,
+            hasMore: page * pageSize < total,
+            nodes: result.data.map(res => {
+                return {
+                    record: res.record,
+                    title: res.title,
+                    firstImage: res.firstImage,
+                    imageLabel: res.imageLabel,
+                }
+            }),
+        }
     }
 
     public async getZoomLevel5Data(objectId: string) {
