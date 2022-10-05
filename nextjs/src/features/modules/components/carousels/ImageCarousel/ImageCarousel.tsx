@@ -6,10 +6,7 @@ import ArrowLeftIcon from '@/icons/arrows/arrow-left-long.svg'
 import ArrowRightIcon from '@/icons/arrows/arrow-right-long.svg'
 import Image from 'next/image'
 import usePresenter from './usePresenter'
-// import getConfig from 'next/config'
-// import { imageBasePath } from '../../../modulesConstants'
 import { usePageConfiguration } from '@/features/shared/hooks/pageConfiguration'
-import getConfig from 'next/config'
 
 
 interface Props {
@@ -23,11 +20,7 @@ export const ImageCarousel = (props: Props) => {
     const { images } = props.component
     const items = images?.data
     const { carouselRef, handlePaginationPrev, handlePaginationNext, sliderRef, calculateImagePropotions, size } = usePresenter(items)
-     const { publicRuntimeConfig, serverRuntimeConfig } = getConfig()
     const pageConfiguration = usePageConfiguration()
-    console.log(pageConfiguration)
-    console.log(publicRuntimeConfig)
-    console.log(serverRuntimeConfig)
 
     return (
         <Box as="div" backgroundColor={'white'} ref={carouselRef} position="relative" pl={'6'}>
@@ -43,7 +36,6 @@ export const ImageCarousel = (props: Props) => {
                     {items?.map((item: UploadFileEntity, index) => {
                         const originalHeight = item?.attributes?.height ?? 1
                         const originalWidth = item?.attributes?.width ?? 1
-                        // const imageBasePath = publicRuntimeConfig.NEXT_PUBLIC_REACT_APP_IMAGE_BASE_URL ?? ''
                         const imageBasePath = pageConfiguration.data?.imagePath ?? '';
                         const imagePath =  imageBasePath + item?.attributes?.url
                         const caption = item?.attributes?.caption
