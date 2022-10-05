@@ -19,6 +19,7 @@ export const TextModule: React.FC<Props> = props => {
             backgroundColor={'white'}
             pb={props.component.textModuleLayout?.spacingBottom ?? undefined}
             pt={props.component.textModuleLayout?.spacingTop ?? undefined}
+            overflow={'auto'} // needed due to strange behaviour of generated markdown content
         >
             <Markdown>{content}</Markdown>
         </Box>

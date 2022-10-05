@@ -7,7 +7,7 @@ const foundations = {
     colors,
     space: spacing,
     breakpoints,
-    textStyles
+    textStyles,
 } as const
 
 export default foundations
