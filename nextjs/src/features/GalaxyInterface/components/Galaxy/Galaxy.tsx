@@ -10,7 +10,6 @@ import { storiesStubs } from '../stubs'
 import { ObjectPerType } from './hooks/useD3Simulation'
 import { usePresenter } from './usePresenter'
 
-
 interface Props {
     data: ObjectPerType[]
     dimensions: Dimensions
@@ -78,7 +77,11 @@ const Galaxy: React.FC<Props> = ({ data = [], dimensions }) => {
     const { t } = useTypeSafeTranslation('homepage')
 
     const id = useId().replaceAll(':', '')
-    const { svgRef, setZoomLevel, zoomTo, zoomLevel, storiesSystemRef } = usePresenter(dimensions, objectsPerTypeWithIds, id)
+    const { svgRef, setZoomLevel, zoomTo, zoomLevel, storiesSystemRef } = usePresenter(
+        dimensions,
+        objectsPerTypeWithIds,
+        id
+    )
     const height = dimensions.height ?? 0
     const width = dimensions.width ?? 0
 
@@ -127,18 +130,31 @@ const Galaxy: React.FC<Props> = ({ data = [], dimensions }) => {
                             {objectsPerTypeWithIds.map((item, index, array) => {
                                 return (
                                     <Circle
+                                        defaultBackground="levels.z0.galaxyCloud"
+                                        hoverBackground={`levels.z1.${item.class}.hover1`}
                                         key={`${index}-${array.length}`}
                                         className={id}
                                         id={item.name}
                                         pointerEvents={zoomLevel === ZoomLevel.Zoom1Stories ? 'none' : undefined}
                                     >
-                                        {zoomLevel === ZoomLevel.Zoom1 && (             
-                                            <Flex flex="1" alignItems="center" justifyContent="center">
-                                                <button onClick={() => zoomTo(-item.xFromCenter, item.yFromCenter)}>
+                                        {zoomLevel === ZoomLevel.Zoom1 && (
+                                            <button
+                                                onClick={() => zoomTo(-item.xFromCenter, item.yFromCenter)}
+                                                style={{
+                                                    width: '100%',
+                                                    height: '100%',
+                                                    borderRadius: '100%',
+                                                    zIndex: 100,
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                }}
+                                            >
+                                                <Box>
                                                     <Text width="12.5rem">{item.name}</Text>
                                                     <Text width="12.5rem">{item.numberOfInstances}</Text>
-                                                </button>
-                                            </Flex>
+                                                </Box>
+                                            </button>
                                         )}
                                     </Circle>
                                 )
@@ -146,19 +162,12 @@ const Galaxy: React.FC<Props> = ({ data = [], dimensions }) => {
                         </g>
 
                         {!isLoading && stories?.length && zoomLevel === ZoomLevel.Zoom1 && (
-            
-                                <foreignObject
-                                    x={GALAXY_BASE / 2 + 75}
-                                    y={GALAXY_BASE / 2 - 60}
-                                    width={200}
-                                    height={100}
-                                >
-                                    <button onClick={() => setZoomLevel(ZoomLevel.Zoom1Stories)}>
-                                        <Text width="12.5rem">{stories.length}</Text>
-                                        <Text width="12.5rem">{t('stories')}</Text>
-                                    </button>
-                                </foreignObject>
-         
+                            <foreignObject x={GALAXY_BASE / 2 + 75} y={GALAXY_BASE / 2 - 60} width={200} height={100}>
+                                <button onClick={() => setZoomLevel(ZoomLevel.Zoom1Stories)}>
+                                    <Text width="12.5rem">{stories.length}</Text>
+                                    <Text width="12.5rem">{t('stories')}</Text>
+                                </button>
+                            </foreignObject>
                         )}
                     </>
                 </svg>
