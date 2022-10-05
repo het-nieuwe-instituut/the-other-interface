@@ -186,13 +186,13 @@ export class UsersPermissionsPermission {
     public action: string
 
     @Field({ nullable: true })
-    public createdAt?: Date
+    public createdAt?: string
 
     @Field(() => UsersPermissionsRoleEntityResponse, { nullable: true })
     public role?: UsersPermissionsRoleEntityResponse
 
     @Field({ nullable: true })
-    public updatedAt?: Date
+    public updatedAt?: string
 }
 
 @ObjectType()

@@ -8,7 +8,7 @@ export class Location {
     public city?: string
 
     @Field({ nullable: true })
-    public createdAt?: Date
+    public createdAt?: string
 
     @Field({ nullable: true })
     public locale?: string
@@ -17,11 +17,11 @@ export class Location {
     public localizations?: LocationRelationResponseCollection
 
     @Field({ nullable: true })
-    public publishedAt?: Date
+    public publishedAt?: string
 
     @Field(() => StoryRelationResponseCollection, { nullable: true })
     public stories?: StoryRelationResponseCollection
 
     @Field({ nullable: true })
-    public updatedAt?: Date
+    public updatedAt?: string
 }

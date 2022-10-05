@@ -47,7 +47,7 @@ export class Story {
     public components?: typeof StoryComponentsDynamicZone[]
 
     @Field({ nullable: true })
-    public createdAt?: Date
+    public createdAt: string
 
     @Field({ nullable: true })
     public description?: string
@@ -65,7 +65,7 @@ export class Story {
     public publicationDate?: ComponentCorePublicationDate
 
     @Field({ nullable: true })
-    public publishedAt?: Date
+    public publishedAt: string
 
     @Field({ nullable: true })
     public shortDescription?: string
@@ -83,7 +83,7 @@ export class Story {
     public triplyRecords?: TriplyRecordRelationResponseCollection
 
     @Field({ nullable: true })
-    public updatedAt?: Date
+    public updatedAt: string
 
     @Field(() => [PoepleZoomLevel5DetailType], { nullable: 'itemsAndList' })
     public people?: PoepleZoomLevel5DetailType[]
