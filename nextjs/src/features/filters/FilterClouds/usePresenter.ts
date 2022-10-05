@@ -1,26 +1,43 @@
 import * as d3 from 'd3'
 import { SimulationNodeDatum } from 'd3'
 import { useEffect, useMemo, useRef } from 'react'
-import { ObjectPerType } from 'src/pages/poc/galaxy'
+
+export interface FilterType {
+    filter: PossibleFilters
+    numberOfInstances: number
+}
+
+enum PossibleFilters {
+    ByName = 'byName',
+    ByDate = 'byDate',
+    ByDesLevel = 'byDesLevel',
+    ByPerson = 'byPerson',
+    ByProject = 'byProject',
+    BySubject = 'bySubject',
+    ByMaker = 'byMaker',
+    ByType = 'byType',
+    ByPlace = 'byPlace',
+    ByBirthDate = 'byBirthDate',
+    ByProfession = 'byProfession',
+    ByDeathDate = 'byDeathDate',
+    ByAuthor = 'byAuthor',
+    ByLocation = 'byLocation',
+}
 
 interface Dimensions {
     height?: number | null
     width?: number | null
 }
 
-interface ObjectPerTypeWithName extends ObjectPerType {
-    name: string
-}
-
-interface D3CollectionItem extends SimulationNodeDatum, ObjectPerTypeWithName {}
+interface D3CollectionItem extends SimulationNodeDatum, FilterType {}
 interface DataDimensions {
-    name: string
+    name: PossibleFilters
     takeSpace: number
 }
 
 function useD3Simulation(
     dimensions: Dimensions,
-    data: ObjectPerTypeWithName[],
+    data: FilterType[],
     selector: string,
     dataDimensions: DataDimensions[]
 ) {
@@ -67,7 +84,7 @@ function useD3Simulation(
     }
 }
 
-function useCalculateDataDimensions(dimensions: Dimensions, data: ObjectPerTypeWithName[]) {
+function useCalculateDataDimensions(dimensions: Dimensions, data: FilterType[]) {
     const dataDimensions: DataDimensions[] = useMemo(() => {
         const height = dimensions.height ?? 0
         const width = dimensions.width ?? 0
@@ -77,13 +94,13 @@ function useCalculateDataDimensions(dimensions: Dimensions, data: ObjectPerTypeW
         const gridItemSpace = 12
         const totalSpaceGrid = totalSpace / (gridItemSpace * gridItemSpace)
 
-        const totalObjects = data.reduce((total, item) => total + parseInt(item.numberOfInstances), 0)
+        const totalObjects = data.reduce((total, item) => total + item.numberOfInstances, 0)
         const totalOccupiedGridItems = totalSpaceGrid / totalObjects
 
         return data.map(item => {
             return {
-                name: item.name,
-                takeSpace: totalOccupiedGridItems * parseInt(item.numberOfInstances),
+                name: item.filter,
+                takeSpace: totalOccupiedGridItems * item.numberOfInstances,
             }
         })
     }, [dimensions, data])
@@ -92,7 +109,7 @@ function useCalculateDataDimensions(dimensions: Dimensions, data: ObjectPerTypeW
 }
 
 function getTakeSpaceFromDataDimensions(dataDimensions: DataDimensions[], d: Partial<D3CollectionItem>) {
-    const val = dataDimensions?.find(item => item.name === d.name)
+    const val = dataDimensions?.find(item => item.name === d.filter)
 
     if (!val) {
         return 0
@@ -104,7 +121,7 @@ function getTakeSpaceFromDataDimensions(dataDimensions: DataDimensions[], d: Par
 function ticked(
     dataDimensions: DataDimensions[],
     simulation: d3.Simulation<d3.SimulationNodeDatum, undefined> | null,
-    nodeForeign: d3.Selection<d3.BaseType, ObjectPerTypeWithName, d3.BaseType, unknown>,
+    nodeForeign: d3.Selection<d3.BaseType, FilterType, d3.BaseType, unknown>,
     dimensions: Dimensions
 ) {
     const width = dimensions.width ?? 0
@@ -123,14 +140,14 @@ function ticked(
                 d3
                     .forceCollide()
                     .strength(0.1)
-                    .radius(d => getTakeSpaceFromDataDimensions(dataDimensions, d))
+                    .radius(d => getTakeSpaceFromDataDimensions(dataDimensions, d) * 0.75)
             )
             .force('centerX', d3.forceX(width / 2))
             .force('centerY', d3.forceY(height / 2))
     }
 }
 
-export function usePresenter(dimensions: Dimensions, data: ObjectPerTypeWithName[], selector: string) {
+export function usePresenter(dimensions: Dimensions, data: FilterType[], selector: string) {
     const dataDimensions = useCalculateDataDimensions(dimensions, data)
     const { svgRef } = useD3Simulation(dimensions, data, selector, dataDimensions)
 

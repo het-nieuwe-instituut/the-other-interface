@@ -66,6 +66,15 @@ const textStyles = {
         letterSpacing: '0.02em',
         fontFamily: 'Univers',
     },
+    cloudText: {
+        fontFamily: "'Univers'",
+        fontStyle: 'normal',
+        fontWeight: '400',
+        fontSize: '16px',
+        lineHeight: '135%',
+        color: 'black',
+        textShadow: '0px 0px 4px #CCCED0, 0px 0px 4px #CCCED0',
+    },
 }
 
 export default textStyles
