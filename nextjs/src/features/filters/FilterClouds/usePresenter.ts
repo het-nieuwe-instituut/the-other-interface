@@ -7,7 +7,7 @@ export interface FilterType {
     numberOfInstances: number
 }
 
-enum PossibleFilters {
+export enum PossibleFilters {
     ByName = 'byName',
     ByDate = 'byDate',
     ByDesLevel = 'byDesLevel',
@@ -63,6 +63,11 @@ function useD3Simulation(
 
         const d3Svg = d3.select(svgRef.current)
         const nodeForeign = d3Svg.selectAll(`.foreign-${selector}`).data(data)
+
+        nodeForeign
+            .attr('x', (d: D3CollectionItem) => (d.x ?? 0) + -getTakeSpaceFromDataDimensions(dataDimensions, d))
+            .attr('y', (d: D3CollectionItem) => (d.y ?? 0) + -getTakeSpaceFromDataDimensions(dataDimensions, d))
+            .attr('opacity', 0)
 
         if (!nodesListener.current) {
             nodesListener.current = simulation.current?.nodes(data as D3CollectionItem[]).on('tick', () => {
@@ -126,12 +131,17 @@ function ticked(
 ) {
     const width = dimensions.width ?? 0
     const height = dimensions.height ?? 0
-
     nodeForeign
         .attr('x', (d: D3CollectionItem) => (d.x ?? 0) + -getTakeSpaceFromDataDimensions(dataDimensions, d))
         .attr('y', (d: D3CollectionItem) => (d.y ?? 0) + -getTakeSpaceFromDataDimensions(dataDimensions, d))
+        .attr('opacity', 0)
+
+    nodeForeign
+        .transition()
+        .duration(100)
         .attr('width', (d: D3CollectionItem) => getTakeSpaceFromDataDimensions(dataDimensions, d) * 2)
         .attr('height', (d: D3CollectionItem) => getTakeSpaceFromDataDimensions(dataDimensions, d) * 2)
+        .attr('opacity', 1)
 
     if (simulation) {
         simulation
