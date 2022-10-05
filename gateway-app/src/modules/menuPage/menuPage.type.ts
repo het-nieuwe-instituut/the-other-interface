@@ -16,6 +16,7 @@ import {
     ResponseCollectionMeta,
     StringFilterInput,
 } from '../strapi/shared-types'
+import { MenupageRelationResponseCollection } from './menuPage.types.circular'
 
 @ObjectType()
 export class Menupage {
@@ -26,7 +27,7 @@ export class Menupage {
     public components?: typeof MenupageComponentsDynamicZone[]
 
     @Field({ nullable: true })
-    public createdAt?: Date
+    public createdAt?: string
 
     @Field({ nullable: true })
     public locale?: string
@@ -35,13 +36,13 @@ export class Menupage {
     public localizations?: MenupageRelationResponseCollection
 
     @Field({ nullable: true })
-    public publishedAt?: Date
+    public publishedAt?: string
 
     @Field({ nullable: true })
     public slug?: string
 
     @Field({ nullable: true })
-    public updatedAt?: Date
+    public updatedAt?: string
 }
 
 @ObjectType()
@@ -66,12 +67,6 @@ export class MenupageEntityResponseCollection {
 
     @Field(() => ResponseCollectionMeta)
     public meta: ResponseCollectionMeta
-}
-
-@ObjectType()
-export class MenupageRelationResponseCollection {
-    @Field(() => [MenupageEntity], { nullable: true })
-    public data: MenupageEntity[]
 }
 
 @InputType()

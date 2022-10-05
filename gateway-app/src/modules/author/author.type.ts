@@ -4,7 +4,7 @@ import { DateTimeFilterInput, IdFilterInput, ResponseCollectionMeta, StringFilte
 @ObjectType()
 export class Author {
     @Field({ nullable: true })
-    public createdAt?: Date
+    public createdAt?: string
 
     @Field({ nullable: false })
     public firstName: string
@@ -16,10 +16,10 @@ export class Author {
     public lastName: string
 
     @Field({ nullable: true })
-    public publishedAt?: Date
+    public publishedAt?: string
 
     @Field({ nullable: true })
-    public updatedAt?: Date
+    public updatedAt?: string
 }
 
 @ObjectType()

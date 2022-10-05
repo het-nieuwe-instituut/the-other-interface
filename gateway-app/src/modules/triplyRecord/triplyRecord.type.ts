@@ -8,10 +8,10 @@ registerEnumType(Enum_Triplyrecord_Type, { name: 'Enum_Triplyrecord_Type' })
 @ObjectType()
 export class TriplyRecord {
     @Field({ nullable: true })
-    public createdAt?: Date
+    public createdAt?: string
 
     @Field({ nullable: true })
-    public publishedAt?: Date
+    public publishedAt?: string
 
     @Field({ nullable: false })
     public recordId: string
@@ -23,7 +23,7 @@ export class TriplyRecord {
     public type: Enum_Triplyrecord_Type
 
     @Field({ nullable: true })
-    public updatedAt?: Date
+    public updatedAt?: string
 }
 
 @ObjectType()

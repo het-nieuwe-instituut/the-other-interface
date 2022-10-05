@@ -97,9 +97,6 @@ fragment StoryFragment on StoryEntity {
             ... on ComponentModulesButtonsModule {
                 ...ComponentModulesButtonsModuleFragment
             }
-            ... on ComponentModulesCarousel {
-                ...ComponentModulesCarouselFragment
-            }
             ... on Error {
                 ...ErrorFragment
             }

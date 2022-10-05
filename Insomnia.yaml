@@ -1,13 +1,13 @@
 _type: export
 __export_format: 4
-__export_date: 2022-10-04T11:52:37.860Z
+__export_date: 2022-10-04T15:02:44.367Z
 __export_source: insomnia.desktop.app:v2022.6.0
 resources:
   - _id: req_93c0ce2563cf4aa9b03c65c3edf21db3
     parentId: fld_13c5fd867c8545c3a5309539679ba83f
-    modified: 1664883999975
+    modified: 1664895228489
     created: 1664870671868
-    url: "{{ _.baseUrl }}/graphql"
+    url: ""
     name: homepage
     description: ""
     method: POST
@@ -70,9 +70,283 @@ resources:
     description: ""
     scope: collection
     _type: workspace
+  - _id: req_a26dfaf061ab48ce97c600ec52c6152b
+    parentId: fld_13c5fd867c8545c3a5309539679ba83f
+    modified: 1664894328454
+    created: 1664893862635
+    url: ""
+    name: menupage
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query menuPage($id: String, $locale: String) {\n\tmenupage(id:
+        $id, locale: $locale) {\n\t\tdata {\n\t\t\tid\n\t\t\tattributes
+        {\n\t\t\t\tTitle\n\t\t\t\tslug\n\t\t\t\tcreatedAt\n\t\t\t\tupdatedAt\n\t\t\t\tpublishedAt\n\t\t\t\tlocale\n\t\t\t\tlocalizations
+        {\n\t\t\t\t\tdata {\n\t\t\t\t\t\tid\n\t\t\t\t\t\tattributes
+        {\n\t\t\t\t\t\t\tTitle\n\t\t\t\t\t\t\tslug\n\t\t\t\t\t\t\tcreatedAt\n\t\t\t\t\t\t\tupdatedAt\n\t\t\t\t\t\t\tpublishedAt\n\t\t\t\t\t\t\tlocale\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}\n","variables":{"id":"1"},"operationName":"menuPage"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658904687202.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_2962aefad60f4bf1bd12f4ab384d250e
+    parentId: fld_13c5fd867c8545c3a5309539679ba83f
+    modified: 1664895251686
+    created: 1664894329560
+    url: "{{ _.baseUrl }}/graphql"
+    name: menupages
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query menuPages(\n\t$filters:
+        MenupageFiltersInput\n\t$pagination: PaginationArg = {}\n\t$sort:
+        [String!] = []\n\t$publicationState: String\n\t$locale: String\n)
+        {\n\tmenupages(\n\t\tfilters: $filters\n\t\tpagination:
+        $pagination\n\t\tsort: $sort\n\t\tpublicationState:
+        $publicationState\n\t\tlocale: $locale\n\t) {\n\t\tdata
+        {\n\t\t\tid\n\t\t\tattributes
+        {\n\t\t\t\tTitle\n\t\t\t\tslug\n\t\t\t\tcreatedAt\n\t\t\t\tupdatedAt\n\t\t\t\tpublishedAt\n\t\t\t\tlocale\n\t\t\t\tlocalizations
+        {\n\t\t\t\t\tdata {\n\t\t\t\t\t\tid\n\t\t\t\t\t\tattributes
+        {\n\t\t\t\t\t\t\tTitle\n\t\t\t\t\t\t\tslug\n\t\t\t\t\t\t\tcreatedAt\n\t\t\t\t\t\t\tupdatedAt\n\t\t\t\t\t\t\tpublishedAt\n\t\t\t\t\t\t\tlocale\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\tmeta
+        {\n\t\t\tpagination
+        {\n\t\t\t\tpage\n\t\t\t\tpageSize\n\t\t\t\tpageCount\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n}\n","variables":{},"operationName":"menuPages"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658904687196.25
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_dd5bc4112fe44dc1b33dd2e86f58e12c
+    parentId: fld_13c5fd867c8545c3a5309539679ba83f
+    modified: 1664895253121
+    created: 1664894325278
+    url: ""
+    name: landingpage
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query landingPage($id: String, $locale: String)
+        {\n\tlandingpage(id: $id, locale: $locale) {\n\t\tdata
+        {\n\t\t\tid\n\t\t\tattributes
+        {\n\t\t\t\tTitle\n\t\t\t\tslug\n\t\t\t\tcreatedAt\n\t\t\t\tupdatedAt\n\t\t\t\tpublishedAt\n\t\t\t\tlocale\n\t\t\t\tlocalizations
+        {\n\t\t\t\t\tdata {\n\t\t\t\t\t\tid\n\t\t\t\t\t\tattributes
+        {\n\t\t\t\t\t\t\tTitle\n\t\t\t\t\t\t\tslug\n\t\t\t\t\t\t\tcreatedAt\n\t\t\t\t\t\t\tupdatedAt\n\t\t\t\t\t\t\tpublishedAt\n\t\t\t\t\t\t\tlocale\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}\n","variables":{"id":"1"},"operationName":"landingPage"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658904687190
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_f061755506f24f19b027b87583a41cda
+    parentId: fld_13c5fd867c8545c3a5309539679ba83f
+    modified: 1664895272605
+    created: 1664894617038
+    url: "{{ _.baseUrl }}/graphql"
+    name: landingpages
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query landingPages(\n\t$filters:
+        LandingpageFiltersInput\n\t$pagination: PaginationArg = {}\n\t$sort:
+        [String!] = []\n\t$publicationState: String\n\t$locale: String\n)
+        {\n\tlandingpages(\n\t\tfilters: $filters\n\t\tpagination:
+        $pagination\n\t\tsort: $sort\n\t\tpublicationState:
+        $publicationState\n\t\tlocale: $locale\n\t) {\n\t\tdata
+        {\n\t\t\tid\n\t\t\tattributes
+        {\n\t\t\t\tTitle\n\t\t\t\tslug\n\t\t\t\tcreatedAt\n\t\t\t\tupdatedAt\n\t\t\t\tpublishedAt\n\t\t\t\tlocale\n\t\t\t\tlocalizations
+        {\n\t\t\t\t\tdata {\n\t\t\t\t\t\tid\n\t\t\t\t\t\tattributes
+        {\n\t\t\t\t\t\t\tTitle\n\t\t\t\t\t\t\tslug\n\t\t\t\t\t\t\tcreatedAt\n\t\t\t\t\t\t\tupdatedAt\n\t\t\t\t\t\t\tpublishedAt\n\t\t\t\t\t\t\tlocale\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\tmeta
+        {\n\t\t\tpagination
+        {\n\t\t\t\tpage\n\t\t\t\tpageSize\n\t\t\t\tpageCount\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n}\n","variables":{},"operationName":"landingPages"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658904687188.4375
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_efa7b790dcf54fabbe9d6b8fcfb84995
+    parentId: fld_13c5fd867c8545c3a5309539679ba83f
+    modified: 1664895279305
+    created: 1664894780588
+    url: "{{ _.baseUrl }}/graphql"
+    name: table
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query table($id: String) {\n\ttable(id: $id) {\n\t\tdata
+        {\n\t\t\tid\n\t\t\tattributes {\n\t\t\t\tTableBody
+        {\n\t\t\t\t\tid\n\t\t\t\t\tTableBodyItem
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\tvalue\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t\tTablehead
+        {\n\t\t\t\t\tid\n\t\t\t\t\tTableHeadItem
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\tlabel\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t\tcreatedAt\n\t\t\t\tdescription\n\t\t\t\tname\n\t\t\t\tpublishedAt\n\t\t\t\tupdatedAt\n\t\t\t}\n\t\t}\n\t}\n}\n","variables":{"id":"1"},"operationName":"table"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658904687186.875
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_e5223ec40e0c454aa2da8285ee8cbd35
+    parentId: fld_13c5fd867c8545c3a5309539679ba83f
+    modified: 1664895281794
+    created: 1664894933225
+    url: "{{ _.baseUrl }}/graphql"
+    name: tables
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query tables(\n\t$filters: TableFiltersInput\n\t$pagination:
+        PaginationArg = {}\n\t$sort: [String!] = []\n\t$publicationState:
+        String\n) {\n\ttables(\n\t\tfilters: $filters\n\t\tpagination:
+        $pagination\n\t\tsort: $sort\n\t\tpublicationState:
+        $publicationState\n\t) {\n\t\tdata {\n\t\t\tid\n\t\t\tattributes
+        {\n\t\t\t\tTableBody {\n\t\t\t\t\tid\n\t\t\t\t\tTableBodyItem
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\tvalue\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t\tTablehead
+        {\n\t\t\t\t\tid\n\t\t\t\t\tTableHeadItem
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\tlabel\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t\tcreatedAt\n\t\t\t\tdescription\n\t\t\t\tname\n\t\t\t\tpublishedAt\n\t\t\t\tupdatedAt\n\t\t\t}\n\t\t}\n\t\tmeta
+        {\n\t\t\tpagination
+        {\n\t\t\t\tpage\n\t\t\t\tpageSize\n\t\t\t\tpageCount\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n}\n","variables":{},"operationName":"tables"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658904687185.3125
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_f4bfeb8abb164ec08c5dc1638943abf1
+    parentId: fld_13c5fd867c8545c3a5309539679ba83f
+    modified: 1664895415685
+    created: 1664895312863
+    url: "{{ _.baseUrl }}/graphql"
+    name: userPermissionsUsers
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query usersPermissionsUsers(\n\t$filters:
+        UsersPermissionsUserFiltersInput\n\t$pagination: PaginationArg =
+        {}\n\t$sort: [String!] = []\n) {\n\tusersPermissionsUsers(\n\t\tfilters:
+        $filters\n\t\tpagination: $pagination\n\t\tsort: $sort\n\t) {\n\t\tdata
+        {\n\t\t\tid\n\t\t\tattributes
+        {\n\t\t\t\tusername\n\t\t\t\temail\n\t\t\t\tprovider\n\t\t\t\tconfirmed\n\t\t\t\tblocked\n\t\t\t\trole
+        {\n\t\t\t\t\tdata {\n\t\t\t\t\t\tid\n\t\t\t\t\t\tattributes
+        {\n\t\t\t\t\t\t\tname\n\t\t\t\t\t\t\tdescription\n\t\t\t\t\t\t\ttype\n\t\t\t\t\t\t\tcreatedAt\n\t\t\t\t\t\t\tupdatedAt\n\t\t\t\t\t\t\tpermissions
+        {\n\t\t\t\t\t\t\t\tdata
+        {\n\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\tattributes
+        {\n\t\t\t\t\t\t\t\t\t\taction\n\t\t\t\t\t\t\t\t\t\tcreatedAt\n\t\t\t\t\t\t\t\t\t\tupdatedAt\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t\tcreatedAt\n\t\t\t\tupdatedAt\n\t\t\t}\n\t\t}\n\t\tmeta
+        {\n\t\t\tpagination
+        {\n\t\t\t\tpage\n\t\t\t\tpageSize\n\t\t\t\tpageCount\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n}\n","variables":{},"operationName":"usersPermissionsUsers"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658904687184.5312
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_e10b72f232dc483bafa70333f5166be2
+    parentId: fld_13c5fd867c8545c3a5309539679ba83f
+    modified: 1664895527089
+    created: 1664895478638
+    url: "{{ _.baseUrl }}/graphql"
+    name: userPermissionsUser
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query usersPermissionsUser($id: String)
+        {\n\tusersPermissionsUser(id: $id) {\n\t\tdata
+        {\n\t\t\tid\n\t\t\tattributes
+        {\n\t\t\t\tusername\n\t\t\t\temail\n\t\t\t\tprovider\n\t\t\t\tconfirmed\n\t\t\t\tblocked\n\t\t\t\trole
+        {\n\t\t\t\t\tdata {\n\t\t\t\t\t\tid\n\t\t\t\t\t\tattributes
+        {\n\t\t\t\t\t\t\tname\n\t\t\t\t\t\t\tdescription\n\t\t\t\t\t\t\ttype\n\t\t\t\t\t\t\tcreatedAt\n\t\t\t\t\t\t\tupdatedAt\n\t\t\t\t\t\t\tpermissions
+        {\n\t\t\t\t\t\t\t\tdata
+        {\n\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\tattributes
+        {\n\t\t\t\t\t\t\t\t\t\taction\n\t\t\t\t\t\t\t\t\t\tcreatedAt\n\t\t\t\t\t\t\t\t\t\tupdatedAt\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t\tcreatedAt\n\t\t\t\tupdatedAt\n\t\t\t}\n\t\t}\n\t}\n}\n","variables":{"id":"1"},"operationName":"usersPermissionsUser"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658904687184.1406
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
   - _id: req_0585e8def454461484c03be3551936e0
     parentId: fld_13c5fd867c8545c3a5309539679ba83f
-    modified: 1664867672511
+    modified: 1664895106155
     created: 1661966595011
     url: "{{ _.baseUrl }}/graphql"
     name: stories
@@ -104,7 +378,7 @@ resources:
     _type: request
   - _id: req_da9626bccfd244309c17b2ff8b46d993
     parentId: fld_13c5fd867c8545c3a5309539679ba83f
-    modified: 1664870716932
+    modified: 1664895108863
     created: 1664823597730
     url: "{{ _.baseUrl }}/graphql"
     name: story
@@ -155,7 +429,7 @@ resources:
     _type: request
   - _id: req_fdbb0d7a08fd4d38ae06ff0cccd3475c
     parentId: fld_13c5fd867c8545c3a5309539679ba83f
-    modified: 1664823072232
+    modified: 1664893966890
     created: 1664821880850
     url: "{{ _.baseUrl }}/graphql"
     name: location
@@ -183,7 +457,7 @@ resources:
     _type: request
   - _id: req_145a97a020e449b7a60fa8a37d2efcd6
     parentId: fld_13c5fd867c8545c3a5309539679ba83f
-    modified: 1664823266686
+    modified: 1664893967543
     created: 1664822051166
     url: "{{ _.baseUrl }}/graphql"
     name: locations
@@ -239,7 +513,7 @@ resources:
     _type: request
   - _id: req_d700c938d6bf4f8b8beb670c44e865fb
     parentId: fld_13c5fd867c8545c3a5309539679ba83f
-    modified: 1664866385703
+    modified: 1664895111839
     created: 1664822304429
     url: "{{ _.baseUrl }}/graphql"
     name: authors

@@ -1,0 +1,83 @@
+fragment MenupageFragment on Menupage {
+    Title
+    slug
+    createdAt
+    updatedAt
+    publishedAt
+    locale
+    components {
+        ... on ComponentModulesTextModule {
+            ...ComponentModulesTextModuleFragment
+        }
+        ... on ComponentModulesSubtitle {
+            ...ComponentModulesSubtitleFragment
+        }
+        ... on ComponentModulesTitleModule {
+            ...ComponentModulesTitleModuleFragment
+        }
+        ... on ComponentModulesImageCarousel {
+            ...ComponentModulesImageCarouselFragment
+        }
+        ... on ComponentModulesImage {
+            ...ComponentModulesImageFragment
+        }
+        ... on ComponentModulesPullquote {
+            ...ComponentModulesPullquoteFragment
+        }
+        ... on ComponentModulesTableModule {
+            ...ComponentModulesTableModuleFragment
+        }
+        ... on ComponentModulesButtonsModule {
+            ...ComponentModulesButtonsModuleFragment
+        }
+        ... on Error {
+            ...ErrorFragment
+        }
+    }
+}
+
+fragment MenupageEntityFragment on MenupageEntity {
+    id
+    attributes {
+        ...MenupageFragment
+        localizations {
+            data {
+                id
+                attributes {
+                    ...MenupageFragment
+                }
+            }
+        }
+    }
+}
+
+query menuPage($id: ID, $locale: I18NLocaleCode) {
+    menupage(id: $id, locale: $locale) {
+        data {
+            ...MenupageEntityFragment
+        }
+    }
+}
+
+query menuPages(
+    $filters: MenupageFiltersInput
+    $pagination: PaginationArg = {}
+    $sort: [String] = []
+    $publicationState: PublicationState = LIVE
+    $locale: I18NLocaleCode
+) {
+    menupages(
+        filters: $filters
+        pagination: $pagination
+        sort: $sort
+        publicationState: $publicationState
+        locale: $locale
+    ) {
+        data {
+            ...MenupageEntityFragment
+        }
+        meta {
+            ...ResponseCollectionMetaFragment
+        }
+    }
+}

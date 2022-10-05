@@ -1,0 +1,83 @@
+fragment LandingpageFragment on Landingpage {
+    Title
+    slug
+    createdAt
+    updatedAt
+    publishedAt
+    locale
+    components {
+        ... on ComponentModulesTextModule {
+            ...ComponentModulesTextModuleFragment
+        }
+        ... on ComponentModulesSubtitle {
+            ...ComponentModulesSubtitleFragment
+        }
+        ... on ComponentModulesTitleModule {
+            ...ComponentModulesTitleModuleFragment
+        }
+        ... on ComponentModulesImageCarousel {
+            ...ComponentModulesImageCarouselFragment
+        }
+        ... on ComponentModulesImage {
+            ...ComponentModulesImageFragment
+        }
+        ... on ComponentModulesPullquote {
+            ...ComponentModulesPullquoteFragment
+        }
+        ... on ComponentModulesTableModule {
+            ...ComponentModulesTableModuleFragment
+        }
+        ... on ComponentModulesButtonsModule {
+            ...ComponentModulesButtonsModuleFragment
+        }
+        ... on Error {
+            ...ErrorFragment
+        }
+    }
+}
+
+fragment LandingpageEntityFragment on LandingpageEntity {
+    id
+    attributes {
+        ...LandingpageFragment
+        localizations {
+            data {
+                id
+                attributes {
+                    ...LandingpageFragment
+                }
+            }
+        }
+    }
+}
+
+query landingPage($id: ID, $locale: I18NLocaleCode) {
+    landingpage(id: $id, locale: $locale) {
+        data {
+            ...LandingpageEntityFragment
+        }
+    }
+}
+
+query landingPages(
+    $filters: LandingpageFiltersInput
+    $pagination: PaginationArg = {}
+    $sort: [String] = []
+    $publicationState: PublicationState = LIVE
+    $locale: I18NLocaleCode
+) {
+    landingpages(
+        filters: $filters
+        pagination: $pagination
+        sort: $sort
+        publicationState: $publicationState
+        locale: $locale
+    ) {
+        data {
+            ...LandingpageEntityFragment
+        }
+        meta {
+            ...ResponseCollectionMetaFragment
+        }
+    }
+}

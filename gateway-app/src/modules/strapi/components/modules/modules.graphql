@@ -69,33 +69,6 @@ fragment ComponentModulesSubtitleFragment on ComponentModulesSubtitle {
     text
 }
 
-fragment TableFragment on Table {
-    TableBody {
-        ...ComponentCoreTableBodyFragment
-    }
-    Tablehead {
-        ...ComponentCoreTableHeadFragment
-    }
-    createdAt
-    description
-    name
-    publishedAt
-    updatedAt
-}
-
-fragment TableEntityFragment on TableEntity {
-    id
-    attributes {
-        ...TableFragment
-    }
-}
-
-fragment TableEntityResponseFragment on TableEntityResponse {
-    data {
-        ...TableEntityFragment
-    }
-}
-
 fragment ComponentModulesTableModuleFragment on ComponentModulesTableModule {
     id
     __typename
