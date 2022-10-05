@@ -54,15 +54,15 @@ const colors = {
             },
         },
         z2: {
-            archiveFilters: {
+            archivesFilters: {
                 byName: 'radial-gradient(50% 50% at 50% 50%, #A5D4FF 0%, rgba(165, 212, 255, 0) 100%)',
                 byDate: 'radial-gradient(50% 50% at 50% 50%, #5772FF 0%, rgba(87, 114, 255, 0) 100%)',
                 byDesLevel: 'radial-gradient(50% 50% at 50% 50%, #5FD8FF 0%, rgba(95, 216, 255, 0) 100%)',
             },
-            objectFilters: {
+            objectsFilters: {
                 byPerson: 'radial-gradient(50% 50% at 50% 50%, #79A779 0%, rgba(121, 167, 121, 0) 100%)',
                 byProject: 'radial-gradient(50% 50% at 50% 50%, #00C170 0%, rgba(0, 193, 112, 0) 100%)',
-                bySubject: 'adial-gradient(50% 50% at 50% 50%, #7DCD8A 0%, rgba(125, 205, 138, 0) 100%)',
+                bySubject: 'radial-gradient(50% 50% at 50% 50%, #7DCD8A 0%, rgba(125, 205, 138, 0) 100%)',
                 byMaker: 'radial-gradient(50% 50% at 50% 50%, #D2FFB7 0%, rgba(210, 255, 183, 0) 100%)',
                 byType: 'radial-gradient(50% 50% at 50% 50%, #6B8552 0%, rgba(110, 133, 82, 0) 100%)',
                 byDate: 'radial-gradient(50% 50% at 50% 50%, #CFFF8B 0%, rgba(211, 255, 139, 0) 100%)',

@@ -50,11 +50,12 @@ export function useD3ZoomEvents(svgRef: MutableRefObject<SVGSVGElement | null>, 
         async (x: number, y: number, navigateTo: string) => {
             const d3Svg = d3.select(svgRef.current)
             setZoomLevel(ZoomLevel.zoomedTo)
-
+            await d3Svg.attr(`opacity`, `1`)
             await d3Svg
                 .transition()
                 .duration(1500)
                 .attr(`transform`, `translate(0, 0)scale(${20})translate(${x}, ${y})`)
+                .attr(`opacity`, `0`)
                 .end()
             router.push(navigateTo)
         },

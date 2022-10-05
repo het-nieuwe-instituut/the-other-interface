@@ -72,7 +72,7 @@ const FilterClouds: React.FunctionComponent<Props> = ({ dimensions, data, type }
                                         {t('people')}
                                     </Text>
                                     <Text width="12.5rem" textStyle={'cloudText'}>
-                                        {t('byProfession')}
+                                        {t(item.name)}
                                     </Text>
                                 </Box>
                             </Box>
