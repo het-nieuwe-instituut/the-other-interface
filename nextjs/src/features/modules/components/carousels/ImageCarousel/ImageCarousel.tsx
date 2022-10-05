@@ -57,7 +57,7 @@ export const ImageCarousel = (props: Props) => {
                                 />
                                 {caption && (
                                     <Box width={'100'} mb="4" mt={'10px'}>
-                                        <Text textStyle="nano" textAlign={'left'}>
+                                        <Text textStyle="micro" textAlign={'left'}>
                                             {caption}
                                         </Text>
                                     </Box>

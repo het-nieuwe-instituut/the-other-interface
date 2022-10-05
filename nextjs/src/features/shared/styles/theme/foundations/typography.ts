@@ -31,7 +31,7 @@ const textStyles = {
     },
     h5: {
         color: `${colors.black}`,
-        fontSize: ['12px'],
+        fontSize: ['12px', '14px', '12px', '12px'],
         fontWeight: '900',
         lineHeight: '125%',
         fontFamily: 'Univers bold',
@@ -52,19 +52,18 @@ const textStyles = {
     },
     micro: {
         color: `${colors.black}`,
-        fontSize: ['12px', '14px', '16px', '16px'],
+        fontSize: ['12px', '14px', '12px', '12px'],
         fontWeight: '400',
         lineHeight: '135%',
         letterSpacing: '0.02em',
         fontFamily: 'Univers',
     },
-    nano: {
+    pullquote: {
         color: `${colors.black}`,
-        fontSize: ['10px', '10px', '12px', '12px'],
-        fontWeight: '400',
-        lineHeight: '135%',
-        letterSpacing: '0.02em',
-        fontFamily: 'Univers',
+        fontSize: ['22px', '28px'],
+        fontWeight: '900',
+        lineHeight: '125%',
+        fontFamily: 'Univers bold',
     },
 }
 
