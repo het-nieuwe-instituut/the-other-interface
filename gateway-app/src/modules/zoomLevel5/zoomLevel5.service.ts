@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common'
-import { Sdk } from 'src/generated/strapi-sdk'
+import { Enum_Triplyrecord_Type, Sdk } from 'src/generated/strapi-sdk'
 import { StrapiUtils } from '../strapi/strapi.utils'
 import { ArchivesService, ArchivesZoomLevel5Types } from '../archives/archives.service'
 import { ObjectsService } from '../objects/objects.service'
@@ -8,6 +8,7 @@ import { PublicationsService, PublicationsZoomLevel5Types } from '../publication
 import { TriplyService } from '../triply/triply.service'
 import { TriplyUtils } from '../triply/triply.utils'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
+import { getRandom2ItemsFromArray } from '../util/helpers'
 
 interface ZoomLevel5RelationData {
     graph: string // sample graph i.e. https://collectiedata.hetnieuweinstituut.nl/graph/people
@@ -111,17 +112,32 @@ export class ZoomLevel5Service {
             r => !!r.attributes?.recordId
         )
 
-        const records = await Promise.all(
-            triplyRecords.map(r => {
-                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                const type = StrapiUtils.getEntityNameForRecordType(r.attributes!.type)
+        const groupedRecords: Record<Enum_Triplyrecord_Type | string, string[]> = {}
+        for (const record of triplyRecords) {
+            if (!record.id || !record.attributes) {
+                continue
+            }
 
-                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                return this.getRelationsFromTriply(r.attributes!.recordId, type)
-            })
-        )
+            if (!groupedRecords[record.attributes.type]) {
+                groupedRecords[record.attributes.type] = []
+            }
 
-        return records.flatMap(r => r)
+            groupedRecords[record.attributes.type].push(record.id)
+        }
+
+        const promises = Object.entries(groupedRecords).map(async ([key, recordIds]) => {
+            const type = StrapiUtils.getEntityNameForRecordType(key as Enum_Triplyrecord_Type)
+            const randomRecordIds = getRandom2ItemsFromArray(recordIds)
+            const randomRelations = await Promise.all(randomRecordIds.map(id => this.getRelationsFromTriply(id, type)))
+
+            return {
+                type,
+                total: recordIds.length,
+                randomRelations: randomRelations,
+            }
+        })
+
+        return Promise.all(promises)
     }
 
     private async getStoryRelationsForLinkedItem(id: string, entityName: EntityNames) {
@@ -129,11 +145,14 @@ export class ZoomLevel5Service {
             recordId: id,
             type: StrapiUtils.getRecordTypeForEntityName(entityName),
         })
-        const randomStories = (res.stories?.data || []).map(s => ({
-            id: s.id,
-            type: EntityNames.Stories,
-            label: s.attributes?.title,
-        }))
+
+        const randomStories = getRandom2ItemsFromArray(res.stories?.data || [])
+            .filter(s => !!s.id && !!s.attributes)
+            .map(s => ({
+                id: s.id,
+                type: EntityNames.Stories,
+                label: s.attributes?.title,
+            }))
 
         return {
             type: EntityNames.Stories,
