@@ -42,7 +42,8 @@ export const ImageCarousel = (props: Props) => {
                             <Flex
                                 key={`${item.id}-${index}`}
                                 flexDirection="column"
-                                pt="9"
+                                pb={props.component.imageCarouselModuleLayout?.spacingBottom ?? undefined}
+                                pt={props.component.imageCarouselModuleLayout?.spacingTop ?? undefined}
                                 width={proportions.width}
                                 height={proportions.height || IMAGE_HEIGHT}
                                 className="keen-slider__slide"
@@ -56,7 +57,7 @@ export const ImageCarousel = (props: Props) => {
                                     loading="eager"
                                 />
                                 {caption && (
-                                    <Box width={'100'} mb="4" mt={'10px'}>
+                                    <Box width={'100'} mb="1" mt={'2.5'}>
                                         <Text textStyle="micro" textAlign={'left'}>
                                             {caption}
                                         </Text>
