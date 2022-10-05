@@ -1,7 +1,6 @@
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import colors from '@/features/shared/styles/theme/foundations/colors'
 import { Box, Grid, GridItem, useTheme } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useStoryBySlugQuery } from 'src/generated/graphql'
@@ -38,7 +37,7 @@ export const StoryContainer: React.FC = () => {
 
     return (
         <Box px={{ xl: 6, base: 0 }} py={{ xl: 6, base: 0 }}>
-            <Box backgroundColor={colors.white} px={6} maxW={theme.breakpoints.xl} marginX={'auto'}>
+            <Box backgroundColor={'white'} px={6} maxW={theme.breakpoints.xl} marginX={'auto'}>
                 <Grid
                     pt={6}
                     templateAreas={{
@@ -48,7 +47,7 @@ export const StoryContainer: React.FC = () => {
                     }}
                     templateColumns={{ lg: '1fr 22.438rem', base: `100% 100%` }}
                     templateRows={{ lg: '1fr', base: `auto minmax(0, 1fr)` }}
-                    gap={'3.625rem'}
+                    gap={'3.75rem'}
                 >
                     <GridItem area={'header'}>
                         <PageHeader

@@ -1,4 +1,4 @@
-import { Author, AuthorEntity, AuthorEntityResponse, AuthorEntityResponseCollection, AuthorFiltersInput, AuthorInput, BooleanFilterInput, ComponentCoreButton, ComponentCoreButtonFiltersInput, ComponentCoreCarouselItem, ComponentCoreCarouselItemFiltersInput, ComponentCoreModuleLayouts, ComponentCorePageHeader, ComponentCorePublicationDate, ComponentCorePublicationDateFiltersInput, ComponentCorePublicationDateInput, ComponentCoreTableBody, ComponentCoreTableBodyFiltersInput, ComponentCoreTableBodyInput, ComponentCoreTableBodyItem, ComponentCoreTableBodyItemFiltersInput, ComponentCoreTableBodyItemInput, ComponentCoreTableHead, ComponentCoreTableHeadFiltersInput, ComponentCoreTableHeadInput, ComponentCoreTableHeadItem, ComponentCoreTableHeadItemFiltersInput, ComponentCoreTableHeadItemInput, ComponentCoreTimeframe, ComponentCoreTimeframeFiltersInput, ComponentCoreTimeframeInput, ComponentModulesButtonsModule, ComponentModulesCarousel, ComponentModulesImage, ComponentModulesImageCarousel, ComponentModulesPullquote, ComponentModulesSubtitle, ComponentModulesTableModule, ComponentModulesTextModule, ComponentModulesTitleModule, ComponentTriplyPeople, ComponentTriplyPeopleFiltersInput, ComponentTriplyPeopleInput, DateFilterInput, DateTimeFilterInput, Error, FileInfoInput, FloatFilterInput, Homepage, HomepageEntity, HomepageEntityResponse, HomepageInput, HomepageRelationResponseCollection, I18NLocale, I18NLocaleEntity, I18NLocaleEntityResponse, I18NLocaleEntityResponseCollection, I18NLocaleFiltersInput, IdFilterInput, IntFilterInput, JsonFilterInput, Landingpage, LandingpageEntity, LandingpageEntityResponse, LandingpageEntityResponseCollection, LandingpageFiltersInput, LandingpageInput, LandingpageRelationResponseCollection, Location, LocationEntity, LocationEntityResponse, LocationEntityResponseCollection, LocationFiltersInput, LocationInput, LocationRelationResponseCollection, LongFilterInput, Menupage, MenupageEntity, MenupageEntityResponse, MenupageEntityResponseCollection, MenupageFiltersInput, MenupageInput, MenupageRelationResponseCollection, Mutation, Pagination, PaginationArg, Query, ResponseCollectionMeta, Story, StoryEntity, StoryEntityResponse, StoryEntityResponseCollection, StoryFiltersInput, StoryInput, StoryRelationResponseCollection, StringFilterInput, Table, TableEntity, TableEntityResponse, TableEntityResponseCollection, TableFiltersInput, TableInput, UploadFile, UploadFileEntity, UploadFileEntityResponse, UploadFileEntityResponseCollection, UploadFileFiltersInput, UploadFileInput, UploadFileRelationResponseCollection, UploadFolder, UploadFolderEntity, UploadFolderEntityResponse, UploadFolderEntityResponseCollection, UploadFolderFiltersInput, UploadFolderInput, UploadFolderRelationResponseCollection, UsersPermissionsCreateRolePayload, UsersPermissionsDeleteRolePayload, UsersPermissionsLoginInput, UsersPermissionsLoginPayload, UsersPermissionsMe, UsersPermissionsMeRole, UsersPermissionsPasswordPayload, UsersPermissionsPermission, UsersPermissionsPermissionEntity, UsersPermissionsPermissionFiltersInput, UsersPermissionsPermissionRelationResponseCollection, UsersPermissionsRegisterInput, UsersPermissionsRole, UsersPermissionsRoleEntity, UsersPermissionsRoleEntityResponse, UsersPermissionsRoleEntityResponseCollection, UsersPermissionsRoleFiltersInput, UsersPermissionsRoleInput, UsersPermissionsUpdateRolePayload, UsersPermissionsUser, UsersPermissionsUserEntity, UsersPermissionsUserEntityResponse, UsersPermissionsUserEntityResponseCollection, UsersPermissionsUserFiltersInput, UsersPermissionsUserInput, UsersPermissionsUserRelationResponseCollection, EnumComponentcorecarouselitemType, EnumComponentcoremodulelayoutsSpacingbottom, EnumComponentcoremodulelayoutsSpacingtop, EnumComponentcorepublicationdateDisplaytype, EnumComponentmodulesbuttonsmoduleButtonstyle, EnumComponentmodulescarouselType, PublicationState } from '../generated/graphql';
+import { Author, AuthorEntity, AuthorEntityResponse, AuthorEntityResponseCollection, AuthorFiltersInput, AuthorInput, BooleanFilterInput, ComponentCoreButton, ComponentCoreButtonFiltersInput, ComponentCoreCarouselItem, ComponentCoreCarouselItemFiltersInput, ComponentCoreModuleLayouts, ComponentCorePageHeader, ComponentCorePublicationDate, ComponentCorePublicationDateFiltersInput, ComponentCorePublicationDateInput, ComponentCoreTableBody, ComponentCoreTableBodyFiltersInput, ComponentCoreTableBodyInput, ComponentCoreTableBodyItem, ComponentCoreTableBodyItemFiltersInput, ComponentCoreTableBodyItemInput, ComponentCoreTableHead, ComponentCoreTableHeadFiltersInput, ComponentCoreTableHeadInput, ComponentCoreTableHeadItem, ComponentCoreTableHeadItemFiltersInput, ComponentCoreTableHeadItemInput, ComponentCoreTimeframe, ComponentCoreTimeframeFiltersInput, ComponentCoreTimeframeInput, ComponentModulesButtonsModule, ComponentModulesCarousel, ComponentModulesImage, ComponentModulesImageCarousel, ComponentModulesPullquote, ComponentModulesSubtitle, ComponentModulesTableModule, ComponentModulesTextModule, ComponentModulesTitleModule, DateFilterInput, DateTimeFilterInput, Error, FileInfoInput, FloatFilterInput, Homepage, HomepageEntity, HomepageEntityResponse, HomepageInput, HomepageRelationResponseCollection, I18NLocale, I18NLocaleEntity, I18NLocaleEntityResponse, I18NLocaleEntityResponseCollection, I18NLocaleFiltersInput, IdFilterInput, IntFilterInput, JsonFilterInput, Landingpage, LandingpageEntity, LandingpageEntityResponse, LandingpageEntityResponseCollection, LandingpageFiltersInput, LandingpageInput, LandingpageRelationResponseCollection, Location, LocationEntity, LocationEntityResponse, LocationEntityResponseCollection, LocationFiltersInput, LocationInput, LocationRelationResponseCollection, LongFilterInput, Menupage, MenupageEntity, MenupageEntityResponse, MenupageEntityResponseCollection, MenupageFiltersInput, MenupageInput, MenupageRelationResponseCollection, Mutation, Pagination, PaginationArg, Query, ResponseCollectionMeta, Story, StoryEntity, StoryEntityResponse, StoryEntityResponseCollection, StoryFiltersInput, StoryInput, StoryRelationResponseCollection, StringFilterInput, Table, TableEntity, TableEntityResponse, TableEntityResponseCollection, TableFiltersInput, TableInput, TriplyRecord, TriplyRecordEntity, TriplyRecordEntityResponse, TriplyRecordEntityResponseCollection, TriplyRecordFiltersInput, TriplyRecordInput, TriplyRecordRelationResponseCollection, UploadFile, UploadFileEntity, UploadFileEntityResponse, UploadFileEntityResponseCollection, UploadFileFiltersInput, UploadFileInput, UploadFileRelationResponseCollection, UploadFolder, UploadFolderEntity, UploadFolderEntityResponse, UploadFolderEntityResponseCollection, UploadFolderFiltersInput, UploadFolderInput, UploadFolderRelationResponseCollection, UsersPermissionsCreateRolePayload, UsersPermissionsDeleteRolePayload, UsersPermissionsLoginInput, UsersPermissionsLoginPayload, UsersPermissionsMe, UsersPermissionsMeRole, UsersPermissionsPasswordPayload, UsersPermissionsPermission, UsersPermissionsPermissionEntity, UsersPermissionsPermissionFiltersInput, UsersPermissionsPermissionRelationResponseCollection, UsersPermissionsRegisterInput, UsersPermissionsRole, UsersPermissionsRoleEntity, UsersPermissionsRoleEntityResponse, UsersPermissionsRoleEntityResponseCollection, UsersPermissionsRoleFiltersInput, UsersPermissionsRoleInput, UsersPermissionsUpdateRolePayload, UsersPermissionsUser, UsersPermissionsUserEntity, UsersPermissionsUserEntityResponse, UsersPermissionsUserEntityResponseCollection, UsersPermissionsUserFiltersInput, UsersPermissionsUserInput, UsersPermissionsUserRelationResponseCollection, EnumComponentcorecarouselitemType, EnumComponentcoremodulelayoutsSpacingbottom, EnumComponentcoremodulelayoutsSpacingtop, EnumComponentcorepublicationdateDisplaytype, EnumComponentmodulesbuttonsmoduleButtonstyle, EnumComponentmodulescarouselType, EnumTriplyrecordType, PublicationState } from '../generated/graphql';
 
 export const anAuthor = (overrides?: Partial<Author>, _relationshipsToOmit: Array<string> = []): Author => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'Author']);
@@ -406,32 +406,6 @@ export const aComponentModulesTitleModule = (overrides?: Partial<ComponentModule
     };
 };
 
-export const aComponentTriplyPeople = (overrides?: Partial<ComponentTriplyPeople>, _relationshipsToOmit: Array<string> = []): ComponentTriplyPeople => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentTriplyPeople']);
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '492edfb7-baff-4c21-b52e-abf8598a62b1',
-        uri_id: overrides && overrides.hasOwnProperty('uri_id') ? overrides.uri_id! : 'sit',
-    };
-};
-
-export const aComponentTriplyPeopleFiltersInput = (overrides?: Partial<ComponentTriplyPeopleFiltersInput>, _relationshipsToOmit: Array<string> = []): ComponentTriplyPeopleFiltersInput => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentTriplyPeopleFiltersInput']);
-    return {
-        and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [relationshipsToOmit.includes('ComponentTriplyPeopleFiltersInput') ? {} as ComponentTriplyPeopleFiltersInput : aComponentTriplyPeopleFiltersInput({}, relationshipsToOmit)],
-        not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : relationshipsToOmit.includes('ComponentTriplyPeopleFiltersInput') ? {} as ComponentTriplyPeopleFiltersInput : aComponentTriplyPeopleFiltersInput({}, relationshipsToOmit),
-        or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [relationshipsToOmit.includes('ComponentTriplyPeopleFiltersInput') ? {} as ComponentTriplyPeopleFiltersInput : aComponentTriplyPeopleFiltersInput({}, relationshipsToOmit)],
-        uri_id: overrides && overrides.hasOwnProperty('uri_id') ? overrides.uri_id! : relationshipsToOmit.includes('StringFilterInput') ? {} as StringFilterInput : aStringFilterInput({}, relationshipsToOmit),
-    };
-};
-
-export const aComponentTriplyPeopleInput = (overrides?: Partial<ComponentTriplyPeopleInput>, _relationshipsToOmit: Array<string> = []): ComponentTriplyPeopleInput => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentTriplyPeopleInput']);
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '2d1b513c-b0f9-4aaf-b371-99fac5055b35',
-        uri_id: overrides && overrides.hasOwnProperty('uri_id') ? overrides.uri_id! : 'qui',
-    };
-};
-
 export const aDateFilterInput = (overrides?: Partial<DateFilterInput>, _relationshipsToOmit: Array<string> = []): DateFilterInput => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'DateFilterInput']);
     return {
@@ -705,6 +679,7 @@ export const aJsonFilterInput = (overrides?: Partial<JsonFilterInput>, _relation
 export const aLandingpage = (overrides?: Partial<Landingpage>, _relationshipsToOmit: Array<string> = []): Landingpage => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'Landingpage']);
     return {
+        Description: overrides && overrides.hasOwnProperty('Description') ? overrides.Description! : 'modi',
         Title: overrides && overrides.hasOwnProperty('Title') ? overrides.Title! : 'culpa',
         components: overrides && overrides.hasOwnProperty('components') ? overrides.components! : [relationshipsToOmit.includes('ComponentModulesButtonsModule') ? {} as ComponentModulesButtonsModule : aComponentModulesButtonsModule({}, relationshipsToOmit)],
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : 'quos',
@@ -742,6 +717,7 @@ export const aLandingpageEntityResponseCollection = (overrides?: Partial<Landing
 export const aLandingpageFiltersInput = (overrides?: Partial<LandingpageFiltersInput>, _relationshipsToOmit: Array<string> = []): LandingpageFiltersInput => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'LandingpageFiltersInput']);
     return {
+        Description: overrides && overrides.hasOwnProperty('Description') ? overrides.Description! : relationshipsToOmit.includes('StringFilterInput') ? {} as StringFilterInput : aStringFilterInput({}, relationshipsToOmit),
         Title: overrides && overrides.hasOwnProperty('Title') ? overrides.Title! : relationshipsToOmit.includes('StringFilterInput') ? {} as StringFilterInput : aStringFilterInput({}, relationshipsToOmit),
         and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [relationshipsToOmit.includes('LandingpageFiltersInput') ? {} as LandingpageFiltersInput : aLandingpageFiltersInput({}, relationshipsToOmit)],
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : relationshipsToOmit.includes('DateTimeFilterInput') ? {} as DateTimeFilterInput : aDateTimeFilterInput({}, relationshipsToOmit),
@@ -759,6 +735,7 @@ export const aLandingpageFiltersInput = (overrides?: Partial<LandingpageFiltersI
 export const aLandingpageInput = (overrides?: Partial<LandingpageInput>, _relationshipsToOmit: Array<string> = []): LandingpageInput => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'LandingpageInput']);
     return {
+        Description: overrides && overrides.hasOwnProperty('Description') ? overrides.Description! : 'voluptatem',
         Title: overrides && overrides.hasOwnProperty('Title') ? overrides.Title! : 'excepturi',
         components: overrides && overrides.hasOwnProperty('components') ? overrides.components! : ['minima'],
         publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : 'nihil',
@@ -954,6 +931,7 @@ export const aMutation = (overrides?: Partial<Mutation>, _relationshipsToOmit: A
         createStory: overrides && overrides.hasOwnProperty('createStory') ? overrides.createStory! : relationshipsToOmit.includes('StoryEntityResponse') ? {} as StoryEntityResponse : aStoryEntityResponse({}, relationshipsToOmit),
         createStoryLocalization: overrides && overrides.hasOwnProperty('createStoryLocalization') ? overrides.createStoryLocalization! : relationshipsToOmit.includes('StoryEntityResponse') ? {} as StoryEntityResponse : aStoryEntityResponse({}, relationshipsToOmit),
         createTable: overrides && overrides.hasOwnProperty('createTable') ? overrides.createTable! : relationshipsToOmit.includes('TableEntityResponse') ? {} as TableEntityResponse : aTableEntityResponse({}, relationshipsToOmit),
+        createTriplyRecord: overrides && overrides.hasOwnProperty('createTriplyRecord') ? overrides.createTriplyRecord! : relationshipsToOmit.includes('TriplyRecordEntityResponse') ? {} as TriplyRecordEntityResponse : aTriplyRecordEntityResponse({}, relationshipsToOmit),
         createUploadFile: overrides && overrides.hasOwnProperty('createUploadFile') ? overrides.createUploadFile! : relationshipsToOmit.includes('UploadFileEntityResponse') ? {} as UploadFileEntityResponse : anUploadFileEntityResponse({}, relationshipsToOmit),
         createUploadFolder: overrides && overrides.hasOwnProperty('createUploadFolder') ? overrides.createUploadFolder! : relationshipsToOmit.includes('UploadFolderEntityResponse') ? {} as UploadFolderEntityResponse : anUploadFolderEntityResponse({}, relationshipsToOmit),
         createUsersPermissionsRole: overrides && overrides.hasOwnProperty('createUsersPermissionsRole') ? overrides.createUsersPermissionsRole! : relationshipsToOmit.includes('UsersPermissionsCreateRolePayload') ? {} as UsersPermissionsCreateRolePayload : aUsersPermissionsCreateRolePayload({}, relationshipsToOmit),
@@ -965,6 +943,7 @@ export const aMutation = (overrides?: Partial<Mutation>, _relationshipsToOmit: A
         deleteMenupage: overrides && overrides.hasOwnProperty('deleteMenupage') ? overrides.deleteMenupage! : relationshipsToOmit.includes('MenupageEntityResponse') ? {} as MenupageEntityResponse : aMenupageEntityResponse({}, relationshipsToOmit),
         deleteStory: overrides && overrides.hasOwnProperty('deleteStory') ? overrides.deleteStory! : relationshipsToOmit.includes('StoryEntityResponse') ? {} as StoryEntityResponse : aStoryEntityResponse({}, relationshipsToOmit),
         deleteTable: overrides && overrides.hasOwnProperty('deleteTable') ? overrides.deleteTable! : relationshipsToOmit.includes('TableEntityResponse') ? {} as TableEntityResponse : aTableEntityResponse({}, relationshipsToOmit),
+        deleteTriplyRecord: overrides && overrides.hasOwnProperty('deleteTriplyRecord') ? overrides.deleteTriplyRecord! : relationshipsToOmit.includes('TriplyRecordEntityResponse') ? {} as TriplyRecordEntityResponse : aTriplyRecordEntityResponse({}, relationshipsToOmit),
         deleteUploadFile: overrides && overrides.hasOwnProperty('deleteUploadFile') ? overrides.deleteUploadFile! : relationshipsToOmit.includes('UploadFileEntityResponse') ? {} as UploadFileEntityResponse : anUploadFileEntityResponse({}, relationshipsToOmit),
         deleteUploadFolder: overrides && overrides.hasOwnProperty('deleteUploadFolder') ? overrides.deleteUploadFolder! : relationshipsToOmit.includes('UploadFolderEntityResponse') ? {} as UploadFolderEntityResponse : anUploadFolderEntityResponse({}, relationshipsToOmit),
         deleteUsersPermissionsRole: overrides && overrides.hasOwnProperty('deleteUsersPermissionsRole') ? overrides.deleteUsersPermissionsRole! : relationshipsToOmit.includes('UsersPermissionsDeleteRolePayload') ? {} as UsersPermissionsDeleteRolePayload : aUsersPermissionsDeleteRolePayload({}, relationshipsToOmit),
@@ -984,6 +963,7 @@ export const aMutation = (overrides?: Partial<Mutation>, _relationshipsToOmit: A
         updateMenupage: overrides && overrides.hasOwnProperty('updateMenupage') ? overrides.updateMenupage! : relationshipsToOmit.includes('MenupageEntityResponse') ? {} as MenupageEntityResponse : aMenupageEntityResponse({}, relationshipsToOmit),
         updateStory: overrides && overrides.hasOwnProperty('updateStory') ? overrides.updateStory! : relationshipsToOmit.includes('StoryEntityResponse') ? {} as StoryEntityResponse : aStoryEntityResponse({}, relationshipsToOmit),
         updateTable: overrides && overrides.hasOwnProperty('updateTable') ? overrides.updateTable! : relationshipsToOmit.includes('TableEntityResponse') ? {} as TableEntityResponse : aTableEntityResponse({}, relationshipsToOmit),
+        updateTriplyRecord: overrides && overrides.hasOwnProperty('updateTriplyRecord') ? overrides.updateTriplyRecord! : relationshipsToOmit.includes('TriplyRecordEntityResponse') ? {} as TriplyRecordEntityResponse : aTriplyRecordEntityResponse({}, relationshipsToOmit),
         updateUploadFile: overrides && overrides.hasOwnProperty('updateUploadFile') ? overrides.updateUploadFile! : relationshipsToOmit.includes('UploadFileEntityResponse') ? {} as UploadFileEntityResponse : anUploadFileEntityResponse({}, relationshipsToOmit),
         updateUploadFolder: overrides && overrides.hasOwnProperty('updateUploadFolder') ? overrides.updateUploadFolder! : relationshipsToOmit.includes('UploadFolderEntityResponse') ? {} as UploadFolderEntityResponse : anUploadFolderEntityResponse({}, relationshipsToOmit),
         updateUsersPermissionsRole: overrides && overrides.hasOwnProperty('updateUsersPermissionsRole') ? overrides.updateUsersPermissionsRole! : relationshipsToOmit.includes('UsersPermissionsUpdateRolePayload') ? {} as UsersPermissionsUpdateRolePayload : aUsersPermissionsUpdateRolePayload({}, relationshipsToOmit),
@@ -1032,6 +1012,8 @@ export const aQuery = (overrides?: Partial<Query>, _relationshipsToOmit: Array<s
         story: overrides && overrides.hasOwnProperty('story') ? overrides.story! : relationshipsToOmit.includes('StoryEntityResponse') ? {} as StoryEntityResponse : aStoryEntityResponse({}, relationshipsToOmit),
         table: overrides && overrides.hasOwnProperty('table') ? overrides.table! : relationshipsToOmit.includes('TableEntityResponse') ? {} as TableEntityResponse : aTableEntityResponse({}, relationshipsToOmit),
         tables: overrides && overrides.hasOwnProperty('tables') ? overrides.tables! : relationshipsToOmit.includes('TableEntityResponseCollection') ? {} as TableEntityResponseCollection : aTableEntityResponseCollection({}, relationshipsToOmit),
+        triplyRecord: overrides && overrides.hasOwnProperty('triplyRecord') ? overrides.triplyRecord! : relationshipsToOmit.includes('TriplyRecordEntityResponse') ? {} as TriplyRecordEntityResponse : aTriplyRecordEntityResponse({}, relationshipsToOmit),
+        triplyRecords: overrides && overrides.hasOwnProperty('triplyRecords') ? overrides.triplyRecords! : relationshipsToOmit.includes('TriplyRecordEntityResponseCollection') ? {} as TriplyRecordEntityResponseCollection : aTriplyRecordEntityResponseCollection({}, relationshipsToOmit),
         uploadFile: overrides && overrides.hasOwnProperty('uploadFile') ? overrides.uploadFile! : relationshipsToOmit.includes('UploadFileEntityResponse') ? {} as UploadFileEntityResponse : anUploadFileEntityResponse({}, relationshipsToOmit),
         uploadFiles: overrides && overrides.hasOwnProperty('uploadFiles') ? overrides.uploadFiles! : relationshipsToOmit.includes('UploadFileEntityResponseCollection') ? {} as UploadFileEntityResponseCollection : anUploadFileEntityResponseCollection({}, relationshipsToOmit),
         uploadFolder: overrides && overrides.hasOwnProperty('uploadFolder') ? overrides.uploadFolder! : relationshipsToOmit.includes('UploadFolderEntityResponse') ? {} as UploadFolderEntityResponse : anUploadFolderEntityResponse({}, relationshipsToOmit),
@@ -1066,7 +1048,7 @@ export const aStory = (overrides?: Partial<Story>, _relationshipsToOmit: Array<s
         slug: overrides && overrides.hasOwnProperty('slug') ? overrides.slug! : 'minima',
         timeframe: overrides && overrides.hasOwnProperty('timeframe') ? overrides.timeframe! : relationshipsToOmit.includes('ComponentCoreTimeframe') ? {} as ComponentCoreTimeframe : aComponentCoreTimeframe({}, relationshipsToOmit),
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'deleniti',
-        triply_people: overrides && overrides.hasOwnProperty('triply_people') ? overrides.triply_people! : [relationshipsToOmit.includes('ComponentTriplyPeople') ? {} as ComponentTriplyPeople : aComponentTriplyPeople({}, relationshipsToOmit)],
+        triplyRecords: overrides && overrides.hasOwnProperty('triplyRecords') ? overrides.triplyRecords! : relationshipsToOmit.includes('TriplyRecordRelationResponseCollection') ? {} as TriplyRecordRelationResponseCollection : aTriplyRecordRelationResponseCollection({}, relationshipsToOmit),
         updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : 'cumque',
     };
 };
@@ -1113,7 +1095,7 @@ export const aStoryFiltersInput = (overrides?: Partial<StoryFiltersInput>, _rela
         slug: overrides && overrides.hasOwnProperty('slug') ? overrides.slug! : relationshipsToOmit.includes('StringFilterInput') ? {} as StringFilterInput : aStringFilterInput({}, relationshipsToOmit),
         timeframe: overrides && overrides.hasOwnProperty('timeframe') ? overrides.timeframe! : relationshipsToOmit.includes('ComponentCoreTimeframeFiltersInput') ? {} as ComponentCoreTimeframeFiltersInput : aComponentCoreTimeframeFiltersInput({}, relationshipsToOmit),
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : relationshipsToOmit.includes('StringFilterInput') ? {} as StringFilterInput : aStringFilterInput({}, relationshipsToOmit),
-        triply_people: overrides && overrides.hasOwnProperty('triply_people') ? overrides.triply_people! : relationshipsToOmit.includes('ComponentTriplyPeopleFiltersInput') ? {} as ComponentTriplyPeopleFiltersInput : aComponentTriplyPeopleFiltersInput({}, relationshipsToOmit),
+        triplyRecords: overrides && overrides.hasOwnProperty('triplyRecords') ? overrides.triplyRecords! : relationshipsToOmit.includes('TriplyRecordFiltersInput') ? {} as TriplyRecordFiltersInput : aTriplyRecordFiltersInput({}, relationshipsToOmit),
         updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : relationshipsToOmit.includes('DateTimeFilterInput') ? {} as DateTimeFilterInput : aDateTimeFilterInput({}, relationshipsToOmit),
     };
 };
@@ -1131,7 +1113,7 @@ export const aStoryInput = (overrides?: Partial<StoryInput>, _relationshipsToOmi
         slug: overrides && overrides.hasOwnProperty('slug') ? overrides.slug! : 'earum',
         timeframe: overrides && overrides.hasOwnProperty('timeframe') ? overrides.timeframe! : relationshipsToOmit.includes('ComponentCoreTimeframeInput') ? {} as ComponentCoreTimeframeInput : aComponentCoreTimeframeInput({}, relationshipsToOmit),
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'voluptates',
-        triply_people: overrides && overrides.hasOwnProperty('triply_people') ? overrides.triply_people! : [relationshipsToOmit.includes('ComponentTriplyPeopleInput') ? {} as ComponentTriplyPeopleInput : aComponentTriplyPeopleInput({}, relationshipsToOmit)],
+        triplyRecords: overrides && overrides.hasOwnProperty('triplyRecords') ? overrides.triplyRecords! : ['efd7d7b3-81ac-4d9f-bfe2-1324cfd539c2'],
     };
 };
 
@@ -1230,6 +1212,74 @@ export const aTableInput = (overrides?: Partial<TableInput>, _relationshipsToOmi
         description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'reiciendis',
         name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'optio',
         publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : 'est',
+    };
+};
+
+export const aTriplyRecord = (overrides?: Partial<TriplyRecord>, _relationshipsToOmit: Array<string> = []): TriplyRecord => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'TriplyRecord']);
+    return {
+        createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : 'dolores',
+        publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : 'tenetur',
+        recordId: overrides && overrides.hasOwnProperty('recordId') ? overrides.recordId! : 'in',
+        stories: overrides && overrides.hasOwnProperty('stories') ? overrides.stories! : relationshipsToOmit.includes('StoryRelationResponseCollection') ? {} as StoryRelationResponseCollection : aStoryRelationResponseCollection({}, relationshipsToOmit),
+        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : EnumTriplyrecordType.Archive,
+        updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : 'facere',
+    };
+};
+
+export const aTriplyRecordEntity = (overrides?: Partial<TriplyRecordEntity>, _relationshipsToOmit: Array<string> = []): TriplyRecordEntity => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'TriplyRecordEntity']);
+    return {
+        attributes: overrides && overrides.hasOwnProperty('attributes') ? overrides.attributes! : relationshipsToOmit.includes('TriplyRecord') ? {} as TriplyRecord : aTriplyRecord({}, relationshipsToOmit),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'b672988b-b69e-4dba-968a-5068608f1500',
+    };
+};
+
+export const aTriplyRecordEntityResponse = (overrides?: Partial<TriplyRecordEntityResponse>, _relationshipsToOmit: Array<string> = []): TriplyRecordEntityResponse => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'TriplyRecordEntityResponse']);
+    return {
+        data: overrides && overrides.hasOwnProperty('data') ? overrides.data! : relationshipsToOmit.includes('TriplyRecordEntity') ? {} as TriplyRecordEntity : aTriplyRecordEntity({}, relationshipsToOmit),
+    };
+};
+
+export const aTriplyRecordEntityResponseCollection = (overrides?: Partial<TriplyRecordEntityResponseCollection>, _relationshipsToOmit: Array<string> = []): TriplyRecordEntityResponseCollection => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'TriplyRecordEntityResponseCollection']);
+    return {
+        data: overrides && overrides.hasOwnProperty('data') ? overrides.data! : [relationshipsToOmit.includes('TriplyRecordEntity') ? {} as TriplyRecordEntity : aTriplyRecordEntity({}, relationshipsToOmit)],
+        meta: overrides && overrides.hasOwnProperty('meta') ? overrides.meta! : relationshipsToOmit.includes('ResponseCollectionMeta') ? {} as ResponseCollectionMeta : aResponseCollectionMeta({}, relationshipsToOmit),
+    };
+};
+
+export const aTriplyRecordFiltersInput = (overrides?: Partial<TriplyRecordFiltersInput>, _relationshipsToOmit: Array<string> = []): TriplyRecordFiltersInput => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'TriplyRecordFiltersInput']);
+    return {
+        and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [relationshipsToOmit.includes('TriplyRecordFiltersInput') ? {} as TriplyRecordFiltersInput : aTriplyRecordFiltersInput({}, relationshipsToOmit)],
+        createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : relationshipsToOmit.includes('DateTimeFilterInput') ? {} as DateTimeFilterInput : aDateTimeFilterInput({}, relationshipsToOmit),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : relationshipsToOmit.includes('IdFilterInput') ? {} as IdFilterInput : anIdFilterInput({}, relationshipsToOmit),
+        not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : relationshipsToOmit.includes('TriplyRecordFiltersInput') ? {} as TriplyRecordFiltersInput : aTriplyRecordFiltersInput({}, relationshipsToOmit),
+        or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [relationshipsToOmit.includes('TriplyRecordFiltersInput') ? {} as TriplyRecordFiltersInput : aTriplyRecordFiltersInput({}, relationshipsToOmit)],
+        publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : relationshipsToOmit.includes('DateTimeFilterInput') ? {} as DateTimeFilterInput : aDateTimeFilterInput({}, relationshipsToOmit),
+        recordId: overrides && overrides.hasOwnProperty('recordId') ? overrides.recordId! : relationshipsToOmit.includes('StringFilterInput') ? {} as StringFilterInput : aStringFilterInput({}, relationshipsToOmit),
+        stories: overrides && overrides.hasOwnProperty('stories') ? overrides.stories! : relationshipsToOmit.includes('StoryFiltersInput') ? {} as StoryFiltersInput : aStoryFiltersInput({}, relationshipsToOmit),
+        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : relationshipsToOmit.includes('StringFilterInput') ? {} as StringFilterInput : aStringFilterInput({}, relationshipsToOmit),
+        updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : relationshipsToOmit.includes('DateTimeFilterInput') ? {} as DateTimeFilterInput : aDateTimeFilterInput({}, relationshipsToOmit),
+    };
+};
+
+export const aTriplyRecordInput = (overrides?: Partial<TriplyRecordInput>, _relationshipsToOmit: Array<string> = []): TriplyRecordInput => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'TriplyRecordInput']);
+    return {
+        publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : 'nesciunt',
+        recordId: overrides && overrides.hasOwnProperty('recordId') ? overrides.recordId! : 'velit',
+        stories: overrides && overrides.hasOwnProperty('stories') ? overrides.stories! : ['1f1ba46d-256b-464d-be3b-c100c7c16264'],
+        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : EnumTriplyrecordType.Archive,
+    };
+};
+
+export const aTriplyRecordRelationResponseCollection = (overrides?: Partial<TriplyRecordRelationResponseCollection>, _relationshipsToOmit: Array<string> = []): TriplyRecordRelationResponseCollection => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'TriplyRecordRelationResponseCollection']);
+    return {
+        data: overrides && overrides.hasOwnProperty('data') ? overrides.data! : [relationshipsToOmit.includes('TriplyRecordEntity') ? {} as TriplyRecordEntity : aTriplyRecordEntity({}, relationshipsToOmit)],
     };
 };
 
