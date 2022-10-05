@@ -1,9 +1,10 @@
-import { ObjectPerType } from '@/features/GalaxyInterface/components/Galaxy/usePresenter'
+import { ObjectPerType } from '@/features/GalaxyInterface/components/Galaxy/hooks/useD3Simulation'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
-import { useWindowSize } from '@/features/shared/hooks/window'
 import { Box } from '@chakra-ui/react'
+import { useSize } from '@chakra-ui/react-use-size'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
+import { useRef } from 'react'
 import { useHomepageQuery } from 'src/generated/graphql'
 
 export const DynamicGalaxyNoSsr = dynamic(() => import('../../../GalaxyInterface/components/Galaxy/Galaxy'), {
@@ -12,26 +13,26 @@ export const DynamicGalaxyNoSsr = dynamic(() => import('../../../GalaxyInterface
 
 const result: ObjectPerType[] = [
     {
-        class: 'test1',
+        class: 'archives',
         numberOfInstances: '814',
         xFromCenter: -300,
         yFromCenter: 0,
     },
     {
-        class: 'test2',
+        class: 'publications',
         numberOfInstances: '308',
         xFromCenter: 250,
         yFromCenter: -150,
     },
     {
-        class: 'test3',
+        class: 'objects',
         numberOfInstances: '192',
         xFromCenter: 175,
         yFromCenter: 175,
     },
 
     {
-        class: 'test4',
+        class: 'people',
         numberOfInstances: '192',
         xFromCenter: 350,
         yFromCenter: 120,
@@ -41,7 +42,8 @@ const result: ObjectPerType[] = [
 export const HomepageContainer = () => {
     const { locale } = useRouter()
     const { data, loading, error } = useHomepageQuery({ variables: { locale } })
-    const window = useWindowSize()
+    const graphRef = useRef<HTMLDivElement | null>(null)
+    const sizes = useSize(graphRef)
 
     if (loading) {
         return <p>loading</p>
@@ -53,9 +55,9 @@ export const HomepageContainer = () => {
 
     return (
         <div>
-            <Box backgroundColor="graph" height="800px">
-                {window.height && window.width && (
-                    <DynamicGalaxyNoSsr data={result} dimensions={{ height: 800, width: window.width }} />
+            <Box backgroundColor="graph" height="800px" ref={graphRef}>
+                {sizes?.height && sizes?.width && (
+                    <DynamicGalaxyNoSsr data={result} dimensions={{ height: 800, width: sizes?.width }} />
                 )}
             </Box>
             <DynamicComponentRenderer components={data?.homepage?.data?.attributes?.components} />

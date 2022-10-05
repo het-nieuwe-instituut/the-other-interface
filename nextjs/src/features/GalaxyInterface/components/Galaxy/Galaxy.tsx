@@ -2,17 +2,17 @@ import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Box, Flex, Text } from '@chakra-ui/react'
 import { times, uniqueId } from 'lodash'
 import React, { forwardRef, useEffect, useId, useMemo, useState } from 'react'
+import { Dimensions, ZoomLevel } from '../../types/galaxy'
 import { StoriesSystem } from '../../zoom0/StoriesSystem/StoriesSystem'
 import { Circle } from '../Circle'
+import { GalaxyShadowBackground } from '../GalaxyShadowBackground'
 import { storiesStubs } from '../stubs'
-import { Dimensions, ObjectPerType, usePresenter, ZoomLevel } from './usePresenter'
+import { ObjectPerType } from './hooks/useD3Simulation'
+import { usePresenter } from './usePresenter'
 
 interface Props {
     data: ObjectPerType[]
-    dimensions: {
-        height: number
-        width: number
-    }
+    dimensions: Dimensions
 }
 
 export interface InstancesPerClass {
@@ -68,6 +68,8 @@ function useQuery<T, Q extends () => ReturnType<Q>>(keys: T, query: Q) {
 export const GALAXY_BASE = 800
 const Galaxy: React.FC<Props> = ({ data = [], dimensions }) => {
     const { isLoading, data: stories } = useQuery(['instances-per-class'], () => fetchInstancesPerClass())
+
+    // TODO: remove when connected to the gateway
     const objectsPerTypeWithIds = useMemo(
         () => data.map(item => ({ ...item, name: item.class.substring(item.class.lastIndexOf('/') + 1) })),
         [data]
@@ -75,11 +77,17 @@ const Galaxy: React.FC<Props> = ({ data = [], dimensions }) => {
     const { t } = useTypeSafeTranslation('homepage')
 
     const id = useId().replaceAll(':', '')
-    const { svgRef, setZoomLevel, zoomTo, zoomLevel, storiesSystemRef } = usePresenter(dimensions, objectsPerTypeWithIds, id)
+    const { svgRef, setZoomLevel, zoomTo, zoomLevel, storiesSystemRef } = usePresenter(
+        dimensions,
+        objectsPerTypeWithIds,
+        id
+    )
+    const height = dimensions.height ?? 0
+    const width = dimensions.width ?? 0
 
     return (
         <Box
-            height={dimensions.height}
+            height={height}
             boxSizing="border-box"
             position={'relative'}
             overflow="hidden"
@@ -101,48 +109,52 @@ const Galaxy: React.FC<Props> = ({ data = [], dimensions }) => {
                 </Flex>
             )}
 
-            <Flex width={'100%'} height={dimensions.height} justifyContent="center" alignItems={'center'}>
+            <Flex width={'100%'} height={height} justifyContent="center" alignItems={'center'}>
                 <svg
                     overflow="visible"
-                    style={{ maxWidth: GALAXY_BASE }}
-                    height={dimensions.height}
-                    width={dimensions.width}
+                    height={height}
+                    width={width}
                     ref={svgRef}
                     viewBox={`0 0 ${GALAXY_BASE} ${GALAXY_BASE}`}
                 >
                     <>
-                        <style>
-                            {`
-                                .text { font: italic 13px sans-serif }
-                            `}
-                        </style>
-
-            
-
                         {!isLoading && stories?.length && (
                             <StoriesSystemPosition dimensions={dimensions} ref={storiesSystemRef}>
                                 <StoriesSystem data={stories ?? []} />
                             </StoriesSystemPosition>
                         )}
 
-                        <ShadowCircles dimensions={dimensions} />
+                        <GalaxyShadowBackground dimensions={dimensions} />
 
                         <g className="circles">
                             {objectsPerTypeWithIds.map((item, index, array) => {
                                 return (
                                     <Circle
+                                        defaultBackground="levels.z0.galaxyCloud"
+                                        hoverBackground={`levels.z1.${item.class}.hover1`}
                                         key={`${index}-${array.length}`}
                                         className={id}
                                         id={item.name}
                                         pointerEvents={zoomLevel === ZoomLevel.Zoom1Stories ? 'none' : undefined}
                                     >
-                                        {zoomLevel === ZoomLevel.Zoom1 && (             
-                                            <Flex flex="1" alignItems="center" justifyContent="center">
-                                                <button onClick={() => zoomTo(-item.xFromCenter, item.yFromCenter)}>
+                                        {zoomLevel === ZoomLevel.Zoom1 && (
+                                            <button
+                                                onClick={() => zoomTo(-item.xFromCenter, item.yFromCenter)}
+                                                style={{
+                                                    width: '100%',
+                                                    height: '100%',
+                                                    borderRadius: '100%',
+                                                    zIndex: 100,
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                }}
+                                            >
+                                                <Box>
                                                     <Text width="12.5rem">{item.name}</Text>
                                                     <Text width="12.5rem">{item.numberOfInstances}</Text>
-                                                </button>
-                                            </Flex>
+                                                </Box>
+                                            </button>
                                         )}
                                     </Circle>
                                 )
@@ -150,19 +162,12 @@ const Galaxy: React.FC<Props> = ({ data = [], dimensions }) => {
                         </g>
 
                         {!isLoading && stories?.length && zoomLevel === ZoomLevel.Zoom1 && (
-            
-                                <foreignObject
-                                    x={GALAXY_BASE / 2 + 75}
-                                    y={GALAXY_BASE / 2 - 60}
-                                    width={200}
-                                    height={100}
-                                >
-                                    <button onClick={() => setZoomLevel(ZoomLevel.Zoom1Stories)}>
-                                        <Text width="12.5rem">{stories.length}</Text>
-                                        <Text width="12.5rem">{t('stories')}</Text>
-                                    </button>
-                                </foreignObject>
-         
+                            <foreignObject x={GALAXY_BASE / 2 + 75} y={GALAXY_BASE / 2 - 60} width={200} height={100}>
+                                <button onClick={() => setZoomLevel(ZoomLevel.Zoom1Stories)}>
+                                    <Text width="12.5rem">{stories.length}</Text>
+                                    <Text width="12.5rem">{t('stories')}</Text>
+                                </button>
+                            </foreignObject>
                         )}
                     </>
                 </svg>
@@ -206,76 +211,4 @@ export function getStoriesSystemDimensions(dimensions: Dimensions) {
         x: height / 2 - STORIES_SYSTEM_MAX_WIDTH / 12,
         y: height / 2 - STORIES_SYSTEM_MAX_WIDTH / 2,
     }
-}
-
-const SHADOW_CIRCLE_SIZE_MULTIPLIER = 3.3
-const SHADOW_CIRCLE_SIZE = 1169.17
-const ShadowCircles: React.FC<{ dimensions: Dimensions }> = ({ dimensions }) => {
-    const height = dimensions.height ?? 0
-
-    return (
-        <>
-            <ShadowCircle
-                x={-(SHADOW_CIRCLE_SIZE * SHADOW_CIRCLE_SIZE_MULTIPLIER)}
-                y={-(SHADOW_CIRCLE_SIZE * SHADOW_CIRCLE_SIZE_MULTIPLIER) + height / 2}
-                width={SHADOW_CIRCLE_SIZE * SHADOW_CIRCLE_SIZE_MULTIPLIER}
-                height={SHADOW_CIRCLE_SIZE * SHADOW_CIRCLE_SIZE_MULTIPLIER}
-            />
-            <ShadowCircle
-                x={-(SHADOW_CIRCLE_SIZE * SHADOW_CIRCLE_SIZE_MULTIPLIER)}
-                y={height / 2}
-                width={SHADOW_CIRCLE_SIZE * SHADOW_CIRCLE_SIZE_MULTIPLIER}
-                height={SHADOW_CIRCLE_SIZE * SHADOW_CIRCLE_SIZE_MULTIPLIER}
-            />
-            <ShadowCircle
-                x={0}
-                y={-(SHADOW_CIRCLE_SIZE * SHADOW_CIRCLE_SIZE_MULTIPLIER) + height / 2}
-                width={SHADOW_CIRCLE_SIZE * SHADOW_CIRCLE_SIZE_MULTIPLIER}
-                height={SHADOW_CIRCLE_SIZE * SHADOW_CIRCLE_SIZE_MULTIPLIER}
-            />
-            <ShadowCircle
-                x={0}
-                y={height / 2}
-                width={SHADOW_CIRCLE_SIZE * SHADOW_CIRCLE_SIZE_MULTIPLIER}
-                height={SHADOW_CIRCLE_SIZE * SHADOW_CIRCLE_SIZE_MULTIPLIER}
-            />
-            <ShadowCircle
-                x={SHADOW_CIRCLE_SIZE * 2}
-                y={-((SHADOW_CIRCLE_SIZE * (SHADOW_CIRCLE_SIZE_MULTIPLIER * 2)) / 2 - height / 2)}
-                width={SHADOW_CIRCLE_SIZE * (SHADOW_CIRCLE_SIZE_MULTIPLIER * 2)}
-                height={SHADOW_CIRCLE_SIZE * (SHADOW_CIRCLE_SIZE_MULTIPLIER * 2)}
-            />
-            <ShadowCircle
-                x={-(SHADOW_CIRCLE_SIZE * 8)}
-                y={-((SHADOW_CIRCLE_SIZE * (SHADOW_CIRCLE_SIZE_MULTIPLIER * 2)) / 2 - height / 2)}
-                width={SHADOW_CIRCLE_SIZE * (SHADOW_CIRCLE_SIZE_MULTIPLIER * 2)}
-                height={SHADOW_CIRCLE_SIZE * (SHADOW_CIRCLE_SIZE_MULTIPLIER * 2)}
-            />
-        </>
-    )
-}
-
-interface ShadowCircleProps {
-    x: number
-    y: number
-    height: number
-    width: number
-}
-const ShadowCircle: React.FC<ShadowCircleProps> = props => {
-    return (
-        <foreignObject
-            xmlns="http://www.w3.org/1999/xhtml"
-            x={props.x}
-            y={props.y}
-            width={props.width}
-            height={props.height}
-            pointerEvents="none"
-        >
-            <Flex
-                width={'100%'}
-                height="100%"
-                background="radial-gradient(50% 50% at 50% 50%, rgba(124, 124, 124, 0.8) 0%, rgba(80, 80, 80, 0.5125) 35.94%, rgba(62, 62, 62, 0) 100%)"
-            ></Flex>
-        </foreignObject>
-    )
 }

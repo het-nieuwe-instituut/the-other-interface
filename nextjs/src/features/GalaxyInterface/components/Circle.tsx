@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-interface */
 import { Flex } from '@chakra-ui/react'
 import React from 'react'
 
@@ -6,7 +5,10 @@ interface Props
     extends Pick<
         React.SVGProps<SVGForeignObjectElement>,
         'id' | 'className' | 'height' | 'width' | 'x' | 'y' | 'pointerEvents' | 'children'
-    > {}
+    > {
+    defaultBackground: string
+    hoverBackground: string
+}
 
 export const Circle: React.FC<Props> = props => {
     return (
@@ -24,7 +26,42 @@ export const Circle: React.FC<Props> = props => {
                 <Flex
                     width={'100%'}
                     height="100%"
-                    background="radial-gradient(50% 50% at 50% 50%, #F7FF96 0%, rgba(249, 255, 181, 0.12) 92.71%, rgba(255, 255, 255, 0) 100%)"
+                    transition={'all 1s ease'}
+                    position={'absolute'}
+                    _hover={{
+                        _before: {
+                            opacity: 0,
+                        },
+                        _after: {
+                            opacity: 1,
+                        },
+                    }}
+                    _before={{
+                        transition: 'all 1s ease',
+                        content: `''`,
+                        background: props.defaultBackground,
+
+                        display: 'block',
+                        height: '100%',
+                        position: 'absolute',
+                        top: '0',
+                        opacity: 1,
+                        width: '100%',
+                    }}
+                    _after={{
+                        transition: 'all 1s ease',
+                        content: `''`,
+                        background: props.hoverBackground,
+
+                        display: 'block',
+                        height: '100%',
+                        position: 'absolute',
+                        top: '0',
+                        opacity: 0,
+                        width: '100%',
+                    }}
+                    justifyContent="center"
+                    alignItems="center"
                 >
                     {props.children}
                 </Flex>

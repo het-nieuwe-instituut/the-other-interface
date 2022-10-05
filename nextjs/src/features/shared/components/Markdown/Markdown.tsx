@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
 import DOMpurify from 'isomorphic-dompurify'
+import style from './markdown-styles.module.css'
 
 interface Props {
     children: string
@@ -10,7 +11,12 @@ interface Props {
 
 export const Markdown: React.FC<Props> = props => {
     return (
-        <ReactMarkdown components={ChakraUIRenderer()} remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
+        <ReactMarkdown
+            className={style.reactMarkDown}
+            components={ChakraUIRenderer()}
+            remarkPlugins={[remarkGfm]}
+            rehypePlugins={[rehypeRaw]}
+        >
             {DOMpurify.sanitize(props.children)}
         </ReactMarkdown>
     )
