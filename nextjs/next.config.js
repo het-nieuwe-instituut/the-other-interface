@@ -25,6 +25,9 @@ const nextConfig = {
         defaultLocale: 'nl',
     },
     output: 'standalone',
+    publicRuntimeConfig: {
+        imagePath: process.env.NEXT_PUBLIC_REACT_APP_IMAGE_BASE_URL,
+    },
 }
 
 module.exports = nextTranslate(nextConfig)
