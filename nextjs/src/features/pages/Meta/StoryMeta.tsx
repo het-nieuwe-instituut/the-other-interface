@@ -23,7 +23,7 @@ export const StoryMeta: React.FC<Props> = ({ story }) => {
     return (
         <Box>
             <Box marginBottom={'md'}>
-                <Text textStyle={'micro'} marginBottom={1}>
+                <Text textStyle={'nano'} marginBottom={1}>
                     {commonT.t('published', {
                         date: story.attributes?.publicationDate
                             ? formatPublicationDate(
@@ -37,22 +37,22 @@ export const StoryMeta: React.FC<Props> = ({ story }) => {
                     })}
                 </Text>
                 {story.attributes?.author?.data?.attributes && (
-                    <Text textStyle={'micro'}>{formatAuthor(story.attributes?.author?.data?.attributes)}</Text>
+                    <Text textStyle={'nano'}>{formatAuthor(story.attributes?.author?.data?.attributes)}</Text>
                 )}
             </Box>
 
             {story.attributes?.shortDescription && (
-                <Text textStyle={'micro'} marginBottom={'md'}>
+                <Text textStyle={'nano'} marginBottom={'md'}>
                     {story.attributes?.shortDescription}
                 </Text>
             )}
 
             {!!story.attributes?.timeframe && (
                 <Box marginBottom={'md'}>
-                    <Text textStyle={'h4'} mb={1}>
+                    <Text textStyle={'h5'} mb={1}>
                         {capitalizeFirstLetter(storiesT.t('time'))}
                     </Text>
-                    <Text textStyle={'micro'}>
+                    <Text textStyle={'nano'}>
                         <NextLink href={'/timeframes'} passHref>
                             <Link>{formatTimeframe(story.attributes?.timeframe)}</Link>
                         </NextLink>
@@ -70,7 +70,7 @@ export const StoryMeta: React.FC<Props> = ({ story }) => {
                         {story.attributes?.locations?.data.map((item, index, array) => {
                             const hasItemAfter = array.length - 1 !== index
                             return (
-                                <Text textStyle={'micro'} key={keyExtractor(item, index, array)} mr={1}>
+                                <Text textStyle={'nano'} key={keyExtractor(item, index, array)} mr={1}>
                                     <NextLink href={`/locations/${item.attributes?.city}}`} passHref>
                                         <Link>
                                             {item.attributes?.city}

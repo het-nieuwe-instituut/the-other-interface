@@ -29,6 +29,13 @@ const textStyles = {
         lineHeight: '125%',
         fontFamily: 'Univers bold',
     },
+    h5: {
+        color: `${colors.black}`,
+        fontSize: ['12px'],
+        fontWeight: '900',
+        lineHeight: '125%',
+        fontFamily: 'Univers bold',
+    },
     body: {
         color: `${colors.black}`,
         fontSize: ['20px', '24px', '20px', '20px'],
@@ -46,6 +53,14 @@ const textStyles = {
     micro: {
         color: `${colors.black}`,
         fontSize: ['12px', '14px', '16px', '16px'],
+        fontWeight: '400',
+        lineHeight: '135%',
+        letterSpacing: '0.02em',
+        fontFamily: 'Univers',
+    },
+    nano: {
+        color: `${colors.black}`,
+        fontSize: ['10px', '10px', '12px', '12px'],
         fontWeight: '400',
         lineHeight: '135%',
         letterSpacing: '0.02em',
