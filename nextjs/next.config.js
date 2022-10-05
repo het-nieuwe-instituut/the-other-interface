@@ -26,7 +26,7 @@ const nextConfig = {
     },
     output: 'standalone',
     publicRuntimeConfig: {
-        imagePath: process.env.NEXT_PUBLIC_REACT_APP_IMAGE_BASE_URL,
+        imagePath: 'https://hni-toi-staging-api.lifely.nl',
     },
 }
 
