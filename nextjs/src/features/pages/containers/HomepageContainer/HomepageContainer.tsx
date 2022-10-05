@@ -1,6 +1,6 @@
 import { ObjectPerType } from '@/features/GalaxyInterface/components/Galaxy/hooks/useD3Simulation'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
-import { Box } from '@chakra-ui/react'
+import { Box, useTheme } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
@@ -44,6 +44,7 @@ export const HomepageContainer = () => {
     const { data, loading, error } = useHomepageQuery({ variables: { locale } })
     const graphRef = useRef<HTMLDivElement | null>(null)
     const sizes = useSize(graphRef)
+    const theme = useTheme()
 
     if (loading) {
         return <p>loading</p>
@@ -60,7 +61,11 @@ export const HomepageContainer = () => {
                     <DynamicGalaxyNoSsr data={result} dimensions={{ height: 800, width: sizes?.width }} />
                 )}
             </Box>
-            <DynamicComponentRenderer components={data?.homepage?.data?.attributes?.components} />
+            <Box px={{ xl: 6, base: 0 }} py={{ xl: 6, base: 0 }}>
+                <Box backgroundColor={'white'} maxW={theme.breakpoints.xl} marginX={'auto'}>
+                    <DynamicComponentRenderer components={data?.homepage?.data?.attributes?.components} />
+                </Box>
+            </Box>
         </div>
     )
 }
