@@ -18,7 +18,7 @@ const nextConfig = {
         defaultLocale: 'nl',
     },
     images: {
-      domains: ['picsum.photos', 'localhost'],
+        domains: ['hni-toi-staging-api.lifely.nl', 'localhost'],
     },
     i18n: {
         locales: ['nl', 'en'],
