@@ -48,7 +48,7 @@ export const StoryContainer: React.FC = () => {
                     }}
                     templateColumns={{ lg: '1fr 22.438rem', base: `100% 100%` }}
                     templateRows={{ lg: '1fr', base: `auto minmax(0, 1fr)` }}
-                    gap={'3.625rem'}
+                    gap={'3.75rem'}
                 >
                     <GridItem area={'header'}>
                         <PageHeader

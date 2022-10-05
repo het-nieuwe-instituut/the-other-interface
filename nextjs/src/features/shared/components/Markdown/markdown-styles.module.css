@@ -1,11 +1,11 @@
-@media only screen and (min-width: 1440px) {
+/* TODO: Set based on breakpoints - need to be confirmed with design team*/
+@media only screen and (min-width: 1024px) {
     .reactMarkDown p {
         font-size: 20px;
     }
 }
 
-/* TODO: Medium is 24px not 20px - not sure if this is right */
-@media only screen and (max-width: 1440px) {
+@media only screen and (max-width: 1024px) {
     .reactMarkDown p {
         font-size: 24px;
     }
