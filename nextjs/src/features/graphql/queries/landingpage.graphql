@@ -12,6 +12,7 @@ query landingpageBySlug($locale: I18NLocaleCode, $slug: String!) {
             id
             attributes {
                 Title
+                Description
                 components {
                     ... on ComponentModulesTextModule {
                         ...textModuleFragment

@@ -35,10 +35,10 @@ export const LandingpageContainer: React.FC = () => {
 
     return (
         <Box px={{ xl: 6, base: 0 }} py={{ xl: 6, base: 0 }}>
-            <Box backgroundColor={'white'} px={6} maxW={theme.breakpoints.xl} marginX={'auto'}>
+            <Box backgroundColor={'white'} px={6} maxW={theme.breakpoints.xl} marginX={'auto'} pb={1}>
                 <PageHeader
                     title={landingpage.attributes?.Title || undefined}
-                    // preface={landingpage.attributes?.Description ?? undefined}
+                    preface={landingpage.attributes?.Description || undefined}
                 />
             </Box>
             <DynamicComponentRenderer components={data?.landingpages?.data[0]?.attributes?.components} />
