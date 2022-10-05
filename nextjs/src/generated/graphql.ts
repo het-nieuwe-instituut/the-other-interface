@@ -439,24 +439,6 @@ export type ComponentModulesTitleModule = {
   titleModuleLayout: ComponentCoreModuleLayouts;
 };
 
-export type ComponentTriplyPeople = {
-  __typename?: 'ComponentTriplyPeople';
-  id: Scalars['ID'];
-  uri_id: Scalars['String'];
-};
-
-export type ComponentTriplyPeopleFiltersInput = {
-  and?: InputMaybe<Array<InputMaybe<ComponentTriplyPeopleFiltersInput>>>;
-  not?: InputMaybe<ComponentTriplyPeopleFiltersInput>;
-  or?: InputMaybe<Array<InputMaybe<ComponentTriplyPeopleFiltersInput>>>;
-  uri_id?: InputMaybe<StringFilterInput>;
-};
-
-export type ComponentTriplyPeopleInput = {
-  id?: InputMaybe<Scalars['ID']>;
-  uri_id?: InputMaybe<Scalars['String']>;
-};
-
 export type DateFilterInput = {
   and?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>;
   between?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>;
@@ -541,6 +523,14 @@ export enum EnumComponentmodulescarouselType {
   Themes = 'Themes'
 }
 
+export enum EnumTriplyrecordType {
+  Archive = 'archive',
+  Media = 'media',
+  Object = 'object',
+  People = 'people',
+  Publication = 'publication'
+}
+
 export type Error = {
   __typename?: 'Error';
   code: Scalars['String'];
@@ -577,7 +567,7 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars['Float']>;
 };
 
-export type GenericMorph = Author | ComponentCoreButton | ComponentCoreCarouselItem | ComponentCoreModuleLayouts | ComponentCorePageHeader | ComponentCorePublicationDate | ComponentCoreTableBody | ComponentCoreTableBodyItem | ComponentCoreTableHead | ComponentCoreTableHeadItem | ComponentCoreTimeframe | ComponentModulesButtonsModule | ComponentModulesCarousel | ComponentModulesImage | ComponentModulesImageCarousel | ComponentModulesPullquote | ComponentModulesSubtitle | ComponentModulesTableModule | ComponentModulesTextModule | ComponentModulesTitleModule | ComponentTriplyPeople | Homepage | I18NLocale | Landingpage | Location | Menupage | Story | Table | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type GenericMorph = Author | ComponentCoreButton | ComponentCoreCarouselItem | ComponentCoreModuleLayouts | ComponentCorePageHeader | ComponentCorePublicationDate | ComponentCoreTableBody | ComponentCoreTableBodyItem | ComponentCoreTableHead | ComponentCoreTableHeadItem | ComponentCoreTimeframe | ComponentModulesButtonsModule | ComponentModulesCarousel | ComponentModulesImage | ComponentModulesImageCarousel | ComponentModulesPullquote | ComponentModulesSubtitle | ComponentModulesTableModule | ComponentModulesTextModule | ComponentModulesTitleModule | Homepage | I18NLocale | Landingpage | Location | Menupage | Story | Table | TriplyRecord | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
 
 export type Homepage = {
   __typename?: 'Homepage';
@@ -963,6 +953,7 @@ export type Mutation = {
   createStory?: Maybe<StoryEntityResponse>;
   createStoryLocalization?: Maybe<StoryEntityResponse>;
   createTable?: Maybe<TableEntityResponse>;
+  createTriplyRecord?: Maybe<TriplyRecordEntityResponse>;
   createUploadFile?: Maybe<UploadFileEntityResponse>;
   createUploadFolder?: Maybe<UploadFolderEntityResponse>;
   /** Create a new role */
@@ -976,6 +967,7 @@ export type Mutation = {
   deleteMenupage?: Maybe<MenupageEntityResponse>;
   deleteStory?: Maybe<StoryEntityResponse>;
   deleteTable?: Maybe<TableEntityResponse>;
+  deleteTriplyRecord?: Maybe<TriplyRecordEntityResponse>;
   deleteUploadFile?: Maybe<UploadFileEntityResponse>;
   deleteUploadFolder?: Maybe<UploadFolderEntityResponse>;
   /** Delete an existing role */
@@ -1001,6 +993,7 @@ export type Mutation = {
   updateMenupage?: Maybe<MenupageEntityResponse>;
   updateStory?: Maybe<StoryEntityResponse>;
   updateTable?: Maybe<TableEntityResponse>;
+  updateTriplyRecord?: Maybe<TriplyRecordEntityResponse>;
   updateUploadFile?: Maybe<UploadFileEntityResponse>;
   updateUploadFolder?: Maybe<UploadFolderEntityResponse>;
   /** Update an existing role */
@@ -1080,6 +1073,11 @@ export type MutationCreateTableArgs = {
 };
 
 
+export type MutationCreateTriplyRecordArgs = {
+  data: TriplyRecordInput;
+};
+
+
 export type MutationCreateUploadFileArgs = {
   data: UploadFileInput;
 };
@@ -1135,6 +1133,11 @@ export type MutationDeleteStoryArgs = {
 
 
 export type MutationDeleteTableArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type MutationDeleteTriplyRecordArgs = {
   id: Scalars['ID'];
 };
 
@@ -1251,6 +1254,12 @@ export type MutationUpdateTableArgs = {
 };
 
 
+export type MutationUpdateTriplyRecordArgs = {
+  data: TriplyRecordInput;
+  id: Scalars['ID'];
+};
+
+
 export type MutationUpdateUploadFileArgs = {
   data: UploadFileInput;
   id: Scalars['ID'];
@@ -1322,6 +1331,8 @@ export type Query = {
   story?: Maybe<StoryEntityResponse>;
   table?: Maybe<TableEntityResponse>;
   tables?: Maybe<TableEntityResponseCollection>;
+  triplyRecord?: Maybe<TriplyRecordEntityResponse>;
+  triplyRecords?: Maybe<TriplyRecordEntityResponseCollection>;
   uploadFile?: Maybe<UploadFileEntityResponse>;
   uploadFiles?: Maybe<UploadFileEntityResponseCollection>;
   uploadFolder?: Maybe<UploadFolderEntityResponse>;
@@ -1443,6 +1454,19 @@ export type QueryTablesArgs = {
 };
 
 
+export type QueryTriplyRecordArgs = {
+  id?: InputMaybe<Scalars['ID']>;
+};
+
+
+export type QueryTriplyRecordsArgs = {
+  filters?: InputMaybe<TriplyRecordFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
 export type QueryUploadFileArgs = {
   id?: InputMaybe<Scalars['ID']>;
 };
@@ -1510,7 +1534,7 @@ export type Story = {
   slug?: Maybe<Scalars['String']>;
   timeframe?: Maybe<ComponentCoreTimeframe>;
   title: Scalars['String'];
-  triply_people?: Maybe<Array<Maybe<ComponentTriplyPeople>>>;
+  triplyRecords?: Maybe<TriplyRecordRelationResponseCollection>;
   updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
@@ -1531,9 +1555,10 @@ export type StoryLocationsArgs = {
 };
 
 
-export type StoryTriplyPeopleArgs = {
-  filters?: InputMaybe<ComponentTriplyPeopleFiltersInput>;
+export type StoryTriplyRecordsArgs = {
+  filters?: InputMaybe<TriplyRecordFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
@@ -1573,7 +1598,7 @@ export type StoryFiltersInput = {
   slug?: InputMaybe<StringFilterInput>;
   timeframe?: InputMaybe<ComponentCoreTimeframeFiltersInput>;
   title?: InputMaybe<StringFilterInput>;
-  triply_people?: InputMaybe<ComponentTriplyPeopleFiltersInput>;
+  triplyRecords?: InputMaybe<TriplyRecordFiltersInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
 };
 
@@ -1588,7 +1613,7 @@ export type StoryInput = {
   slug?: InputMaybe<Scalars['String']>;
   timeframe?: InputMaybe<ComponentCoreTimeframeInput>;
   title?: InputMaybe<Scalars['String']>;
-  triply_people?: InputMaybe<Array<InputMaybe<ComponentTriplyPeopleInput>>>;
+  triplyRecords?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
 };
 
 export type StoryRelationResponseCollection = {
@@ -1675,6 +1700,66 @@ export type TableInput = {
   description?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type TriplyRecord = {
+  __typename?: 'TriplyRecord';
+  createdAt?: Maybe<Scalars['DateTime']>;
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  recordId: Scalars['String'];
+  stories?: Maybe<StoryRelationResponseCollection>;
+  type: EnumTriplyrecordType;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+
+export type TriplyRecordStoriesArgs = {
+  filters?: InputMaybe<StoryFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type TriplyRecordEntity = {
+  __typename?: 'TriplyRecordEntity';
+  attributes?: Maybe<TriplyRecord>;
+  id?: Maybe<Scalars['ID']>;
+};
+
+export type TriplyRecordEntityResponse = {
+  __typename?: 'TriplyRecordEntityResponse';
+  data?: Maybe<TriplyRecordEntity>;
+};
+
+export type TriplyRecordEntityResponseCollection = {
+  __typename?: 'TriplyRecordEntityResponseCollection';
+  data: Array<TriplyRecordEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type TriplyRecordFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<TriplyRecordFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  not?: InputMaybe<TriplyRecordFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<TriplyRecordFiltersInput>>>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  recordId?: InputMaybe<StringFilterInput>;
+  stories?: InputMaybe<StoryFiltersInput>;
+  type?: InputMaybe<StringFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type TriplyRecordInput = {
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  recordId?: InputMaybe<Scalars['String']>;
+  stories?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  type?: InputMaybe<EnumTriplyrecordType>;
+};
+
+export type TriplyRecordRelationResponseCollection = {
+  __typename?: 'TriplyRecordRelationResponseCollection';
+  data: Array<TriplyRecordEntity>;
 };
 
 export type UploadFile = {
