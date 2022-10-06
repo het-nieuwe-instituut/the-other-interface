@@ -18,13 +18,19 @@ const nextConfig = {
         defaultLocale: 'nl',
     },
     images: {
-      domains: ['picsum.photos', 'localhost'],
+        domains: ['hni-toi-staging-api.lifely.nl', 'localhost'],
     },
     i18n: {
         locales: ['nl', 'en'],
         defaultLocale: 'nl',
     },
     output: 'standalone',
+    serverRuntimeConfig: {
+        NEXT_PUBLIC_REACT_APP_IMAGE_BASE_URL: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
+    },
+    publicRuntimeConfig: {
+        NEXT_PUBLIC_REACT_APP_IMAGE_BASE_URL: process.env.NEXT_PUBLIC_REACT_APP_IMAGE_BASE_URL,
+    },
 }
 
 module.exports = nextTranslate(nextConfig)

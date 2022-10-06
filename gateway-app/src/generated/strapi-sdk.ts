@@ -688,6 +688,7 @@ export type JsonFilterInput = {
 
 export type Landingpage = {
     __typename?: 'Landingpage'
+    Description?: Maybe<Scalars['String']>
     Title?: Maybe<Scalars['String']>
     components?: Maybe<Array<Maybe<LandingpageComponentsDynamicZone>>>
     createdAt?: Maybe<Scalars['DateTime']>
@@ -734,6 +735,7 @@ export type LandingpageEntityResponseCollection = {
 }
 
 export type LandingpageFiltersInput = {
+    Description?: InputMaybe<StringFilterInput>
     Title?: InputMaybe<StringFilterInput>
     and?: InputMaybe<Array<InputMaybe<LandingpageFiltersInput>>>
     createdAt?: InputMaybe<DateTimeFilterInput>
@@ -748,6 +750,7 @@ export type LandingpageFiltersInput = {
 }
 
 export type LandingpageInput = {
+    Description?: InputMaybe<Scalars['String']>
     Title?: InputMaybe<Scalars['String']>
     components?: InputMaybe<Array<Scalars['LandingpageComponentsDynamicZoneInput']>>
     publishedAt?: InputMaybe<Scalars['DateTime']>
@@ -2940,6 +2943,7 @@ export type HomepageQuery = {
 export type LandingpageFragmentFragment = {
     __typename?: 'Landingpage'
     Title?: string | null
+    Description?: string | null
     slug?: string | null
     createdAt?: any | null
     updatedAt?: any | null
@@ -3163,6 +3167,7 @@ export type LandingpageEntityFragmentFragment = {
     attributes?: {
         __typename?: 'Landingpage'
         Title?: string | null
+        Description?: string | null
         slug?: string | null
         createdAt?: any | null
         updatedAt?: any | null
@@ -3176,6 +3181,7 @@ export type LandingpageEntityFragmentFragment = {
                 attributes?: {
                     __typename?: 'Landingpage'
                     Title?: string | null
+                    Description?: string | null
                     slug?: string | null
                     createdAt?: any | null
                     updatedAt?: any | null
@@ -3622,6 +3628,7 @@ export type LandingPageQuery = {
             attributes?: {
                 __typename?: 'Landingpage'
                 Title?: string | null
+                Description?: string | null
                 slug?: string | null
                 createdAt?: any | null
                 updatedAt?: any | null
@@ -3635,6 +3642,7 @@ export type LandingPageQuery = {
                         attributes?: {
                             __typename?: 'Landingpage'
                             Title?: string | null
+                            Description?: string | null
                             slug?: string | null
                             createdAt?: any | null
                             updatedAt?: any | null
@@ -4086,6 +4094,7 @@ export type LandingPagesQuery = {
             attributes?: {
                 __typename?: 'Landingpage'
                 Title?: string | null
+                Description?: string | null
                 slug?: string | null
                 createdAt?: any | null
                 updatedAt?: any | null
@@ -4099,6 +4108,7 @@ export type LandingPagesQuery = {
                         attributes?: {
                             __typename?: 'Landingpage'
                             Title?: string | null
+                            Description?: string | null
                             slug?: string | null
                             createdAt?: any | null
                             updatedAt?: any | null
@@ -9148,6 +9158,7 @@ export const HomepageFragmentFragmentDoc = gql`
 export const LandingpageFragmentFragmentDoc = gql`
     fragment LandingpageFragment on Landingpage {
         Title
+        Description
         slug
         createdAt
         updatedAt
