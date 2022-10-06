@@ -14,7 +14,7 @@ export class ComponentCorePublicationDate {
     @Field({ nullable: true })
     public date?: Date
 
-    @Field({ nullable: true })
+    @Field(() => Enum_Componentcorepublicationdate_Displaytype, { nullable: true })
     public displayType?: Enum_Componentcorepublicationdate_Displaytype
 }
 
