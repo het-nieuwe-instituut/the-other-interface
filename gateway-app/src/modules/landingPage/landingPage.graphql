@@ -1,5 +1,6 @@
 fragment LandingpageFragment on Landingpage {
     Title
+    Description
     slug
     createdAt
     updatedAt
