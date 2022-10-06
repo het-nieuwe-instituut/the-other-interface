@@ -3,7 +3,7 @@ import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { formatDate } from '@/features/shared/utils/dates'
 import { keyExtractor } from '@/features/shared/utils/lists'
 import { capitalizeFirstLetter } from '@/features/shared/utils/text'
-import { Box, Flex, Link, Text } from '@chakra-ui/react'
+import { Box, Link, Text } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import {
     Author,
