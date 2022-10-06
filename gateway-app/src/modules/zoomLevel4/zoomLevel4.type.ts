@@ -40,7 +40,7 @@ export class ZoomLevel4Type {
 
 @ObjectType()
 export class ZoomLevel4ParentType {
-    @Field(() => [ZoomLevel4Type], { nullable: 'items' })
+    @Field(() => [ZoomLevel4Type], { nullable: true })
     public nodes: ZoomLevel4Type[]
 
     @Field(() => Int, { nullable: false })

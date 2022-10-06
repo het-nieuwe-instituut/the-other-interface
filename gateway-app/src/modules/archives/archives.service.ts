@@ -103,6 +103,8 @@ export class ArchivesService {
     ]
 
     private readonly ZoomLevel4Endpoint = 'zoom-4-archives/run'
+
+    // TODO: change to convention when Triply adds this to normal space
     private readonly ZoomLevel4CountEndpoint =
         'https://api.collectiedata.hetnieuweinstituut.nl/queries/Joran/zoom4-archives-count/run?'
 

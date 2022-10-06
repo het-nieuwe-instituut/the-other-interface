@@ -46,6 +46,7 @@ export class TriplyService {
         return this.fetch<ReturnDataType>(endpoint)
     }
 
+    // TODO: change to convention when Triply adds the endpoint to normal space
     public async getCountData(rawUrl: string, searchParams?: Record<string, string>[]) {
         const endpoint = new URL(rawUrl)
 
