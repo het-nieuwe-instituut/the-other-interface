@@ -26,7 +26,7 @@ export class Homepage {
     public components?: typeof HomepageComponentsDynamicZone[]
 
     @Field({ nullable: true })
-    public createdAt?: string
+    public createdAt?: Date
 
     @Field({ nullable: true })
     public locale?: string
@@ -35,10 +35,10 @@ export class Homepage {
     public localizations?: HomepageRelationResponseCollection
 
     @Field({ nullable: true })
-    public publishedAt?: string
+    public publishedAt?: Date
 
     @Field({ nullable: true })
-    public updatedAt?: string
+    public updatedAt?: Date
 }
 
 @ObjectType()

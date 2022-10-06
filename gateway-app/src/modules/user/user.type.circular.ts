@@ -84,7 +84,7 @@ export class UsersPermissionsPermissionFiltersInput {
 @ObjectType()
 export class UsersPermissionsRole {
     @Field({ nullable: true })
-    public createdAt?: string
+    public createdAt?: Date
 
     @Field({ nullable: true })
     public description?: string
@@ -99,7 +99,7 @@ export class UsersPermissionsRole {
     public type?: string
 
     @Field({ nullable: true })
-    public updatedAt?: string
+    public updatedAt?: Date
 
     @Field(() => UsersPermissionsUserRelationResponseCollection, { nullable: true })
     public users?: UsersPermissionsUserRelationResponseCollection
