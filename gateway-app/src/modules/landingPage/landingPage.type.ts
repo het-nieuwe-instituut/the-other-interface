@@ -16,6 +16,9 @@ export class Landingpage {
     @Field({ nullable: true })
     public Title?: string
 
+    @Field({ nullable: true })
+    public Description?: string
+
     @Field(() => [LandingpageComponentsDynamicZone], { nullable: true })
     public components?: typeof LandingpageComponentsDynamicZone[]
 
