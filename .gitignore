@@ -1,5 +1,3 @@
 node_modules/
 itermocil.custom.yml
-nextjs/src/mocks/generated-mocks.ts
-nextjs/src/generated/graphql.ts
 .history/
