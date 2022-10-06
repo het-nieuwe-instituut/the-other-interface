@@ -7,6 +7,9 @@ export class LandingpageFiltersInput {
     @Field(() => StringFilterInput, { nullable: true })
     public Title?: StringFilterInput
 
+    @Field(() => StringFilterInput, { nullable: true })
+    public Description?: StringFilterInput
+
     @Field(() => [LandingpageFiltersInput], { nullable: true })
     public and?: LandingpageFiltersInput[]
 
