@@ -6127,6 +6127,18 @@
         "description": null,
         "fields": [
           {
+            "name": "Description",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "Title",
             "description": null,
             "args": [],
@@ -6467,6 +6479,18 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "Description",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFilterInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "Title",
             "description": null,
             "type": {
@@ -6617,6 +6641,18 @@
         "description": null,
         "fields": null,
         "inputFields": [
+          {
+            "name": "Description",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "Title",
             "description": null,

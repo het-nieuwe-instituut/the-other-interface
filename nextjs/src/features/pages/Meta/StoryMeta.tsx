@@ -53,7 +53,7 @@ export const StoryMeta: React.FC<Props> = ({ story }) => {
 
             {!!story.attributes?.timeframe && (
                 <Box marginBottom={'md'}>
-                    <Text textStyle={'h4'} mb={1}>
+                    <Text textStyle={'h5'} mb={1}>
                         {capitalizeFirstLetter(storiesT.t('time'))}
                     </Text>
                     <Text textStyle={'micro'}>
