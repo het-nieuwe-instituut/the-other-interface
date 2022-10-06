@@ -49,7 +49,6 @@ const FilterClouds: React.FunctionComponent<Props> = ({ dimensions, data, type }
                     })}
                 </defs>
                 {objectsPerTypeWithIds.map((item, index, array) => {
-                    console.log(`levels.z2.${type}Filters.${item.filter}`)
                     return (
                         <Circle
                             key={`${index}-${array.length}`}
