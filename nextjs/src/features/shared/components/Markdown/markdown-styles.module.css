@@ -1,0 +1,18 @@
+/* TODO: Set based on breakpoints - need to be confirmed with design team*/
+@media only screen and (min-width: 1024px) {
+    .reactMarkDown p {
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .reactMarkDown p {
+        font-size: 24px;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .reactMarkDown p {
+        font-size: 20px;
+    }
+}

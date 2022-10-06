@@ -24,7 +24,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
         return { notFound: true }
     }
 
-    preparePageConfiguration(apolloClient, { host: context.req.headers.host ?? '' })
+    preparePageConfiguration(apolloClient, { host: context.req.headers.host ?? '', imagePath: process.env.NEXT_PUBLIC_REACT_APP_IMAGE_BASE_URL ?? '' })
 
     const apolloState = apolloClient.cache.extract()
 
