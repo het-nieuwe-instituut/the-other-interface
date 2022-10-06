@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2022-10-04T15:02:44.367Z
+__export_date: 2022-10-06T11:33:09.230Z
 __export_source: insomnia.desktop.app:v2022.6.0
 resources:
   - _id: req_93c0ce2563cf4aa9b03c65c3edf21db3
@@ -1700,7 +1700,7 @@ resources:
     _type: request
   - _id: req_b1eb21c365b946eba8c7d4682a8167c8
     parentId: fld_17de84e682c04137bb01bf07e4e9a9a2
-    modified: 1664782976876
+    modified: 1665055974965
     created: 1663928044191
     url: "{{ _.baseUrl }}/graphql"
     name: relations
@@ -1710,8 +1710,8 @@ resources:
       mimeType: application/graphql
       text: '{"query":"query {\n\trelations (type: People, id: \"12971\")
         {\n\t\ttype\n\t\ttotal\n\t\trandomRelations
-        {\n\t\t\tid\n\t\t\t\n\t\t\tlabel\n\t\t\ttype\n\t\t\trandomRelations
-        {\n\t\t\t\ttype\n\t\t\t\t\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n}"}'
+        {\n\t\t\tid\t\t\t\n\t\t\tlabel\n\t\t\ttype\n\t\t\trelations
+        {\n\t\t\t\ttype\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n}"}'
     parameters: []
     headers:
       - name: Content-Type
