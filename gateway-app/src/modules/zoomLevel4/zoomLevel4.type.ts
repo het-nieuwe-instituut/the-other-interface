@@ -1,4 +1,4 @@
-import { ArgsType, Field, ObjectType } from '@nestjs/graphql'
+import { ArgsType, Field, Int, ObjectType } from '@nestjs/graphql'
 import { ArchivesZoomLevel4FiltersArgs } from '../archives/archives.type'
 import { ObjectsZoomLevel4FiltersArgs } from '../objects/objects.type'
 import { PeopleZoomLevel4FiltersArgs } from '../people/people.type'
@@ -36,4 +36,22 @@ export class ZoomLevel4Type {
 
     @Field(() => String, { nullable: true })
     public imageLabel: string | null
+}
+
+@ObjectType()
+export class ZoomLevel4ParentType {
+    @Field(() => [ZoomLevel4Type], { nullable: true })
+    public nodes: ZoomLevel4Type[]
+
+    @Field(() => Int, { nullable: false })
+    public total: number
+
+    @Field(() => String, { nullable: true })
+    public appliedFilters?: string
+
+    @Field(() => Int, { nullable: false })
+    public page: number
+
+    @Field(() => Boolean, { nullable: false })
+    public hasMore: boolean
 }
