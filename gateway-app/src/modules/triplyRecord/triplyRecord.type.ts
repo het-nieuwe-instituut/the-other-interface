@@ -17,13 +17,13 @@ export class TriplyRecord {
     @Field({ nullable: true })
     public publishedAt?: string
 
-    @Field({ nullable: true })
+    @Field({ nullable: false })
     public recordId: string
 
     @Field(() => StoryRelationResponseCollection, { nullable: true })
     public stories?: StoryRelationResponseCollection
 
-    @Field({ nullable: true })
+    @Field({ nullable: false })
     public type: Enum_Triplyrecord_Type
 
     @Field({ nullable: true })
