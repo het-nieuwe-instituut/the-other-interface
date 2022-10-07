@@ -1,7 +1,7 @@
 import { Dimensions } from '@/features/GalaxyInterface/types/galaxy'
 import { randomNumberBetweenPoints } from '@/features/shared/utils/numbers'
 import { useEffect, useRef, useState } from 'react'
-import { FilterType, PossibleFilters } from '../usePresenter'
+import { FilterType, PossibleFilters } from '../types'
 
 export interface DataDimensions {
     name: PossibleFilters

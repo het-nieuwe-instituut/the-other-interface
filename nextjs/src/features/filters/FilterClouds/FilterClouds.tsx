@@ -3,7 +3,8 @@ import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Box, Text } from '@chakra-ui/react'
 import { useId, useMemo } from 'react'
 import { ZoomLevel } from './hooks/useD3ZoomEvents'
-import { FilterType, usePresenter } from './usePresenter'
+import { FilterType } from './types'
+import { usePresenter } from './usePresenter'
 
 type Props = {
     data: FilterType[]
@@ -38,17 +39,6 @@ const FilterClouds: React.FunctionComponent<Props> = ({ dimensions, data, type }
                 ref={svgRef}
                 viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
             >
-                <defs>
-                    {objectsPerTypeWithIds.map((item, index, array) => {
-                        return (
-                            <radialGradient key={`${index}-${array.length}`} id={`gradient-${item.name}`}>
-                                <stop stopColor="#F7FF96" />
-                                <stop offset="0.927083" stopColor="#F9FFB5" stopOpacity="0.12" />
-                                <stop offset="1" stopColor="white" stopOpacity="0" />
-                            </radialGradient>
-                        )
-                    })}
-                </defs>
                 {objectsPerTypeWithIds.map((item, index, array) => {
                     return (
                         <Circle

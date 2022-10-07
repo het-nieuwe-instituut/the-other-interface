@@ -7,9 +7,7 @@ export function useInitializeD3Simulation<D3CollectionItem extends SimulationNod
     const simulation = useRef<d3.Simulation<D3CollectionItem, undefined> | null>(null)
 
     useEffect(() => {
-        // if (!simulation.current) {
         simulation.current = d3.forceSimulation<D3CollectionItem>()
-        // }
 
         return () => {
             simulation.current?.stop()

@@ -6,12 +6,11 @@ import { useSize } from '@chakra-ui/react-use-size'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import { useLandingpageBySlugQuery } from 'src/generated/graphql'
-
-import { FilterType, PossibleFilters } from '@/features/filters/FilterClouds/usePresenter'
 import dynamic from 'next/dynamic'
 import { LandingPageQueryParams } from 'src/pages/landingpage/[slug]'
+import { FilterType, PossibleFilters } from '@/features/filters/FilterClouds/types'
 
-const DynamicFilterCloudsNoSsr = dynamic(() => import('../../../filters/FilterClouds/FilterClouds'), {
+const DynamicFilterCloudsNoSsr = dynamic(() => import('../../../filters/PaginatedFilterClouds/PaginatedFilterClouds'), {
     ssr: false,
 })
 

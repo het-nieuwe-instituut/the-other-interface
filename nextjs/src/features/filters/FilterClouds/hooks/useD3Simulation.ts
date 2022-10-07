@@ -3,7 +3,8 @@ import { useInitializeD3Simulation } from '@/features/shared/hooks/useInitialize
 import * as d3 from 'd3'
 import { SimulationNodeDatum } from 'd3'
 import { MutableRefObject, useEffect, useRef } from 'react'
-import { FilterType } from '../usePresenter'
+import { FilterType } from '../types'
+
 import { DataDimensions } from './useFitDataToDimensions'
 
 export interface D3CollectionItem extends SimulationNodeDatum, FilterType {}
