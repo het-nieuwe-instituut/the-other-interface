@@ -1,9 +1,13 @@
 import {
     ComponentModulesImage,
     ComponentModulesImageCarousel,
-    HomepageQuery,
     ComponentModulesCarousel,
     ComponentModulesButtonsModule,
+    HomepageComponentsDynamicZone,
+    Maybe,
+    LandingpageComponentsDynamicZone,
+    MenupageComponentsDynamicZone,
+    StoryComponentsDynamicZone,
 } from 'src/generated/graphql'
 import MediaImage from '../components/Image/Image'
 import { ImageCarousel } from '../components/carousels/ImageCarousel/ImageCarousel'
@@ -17,12 +21,14 @@ import { ButtonsModule } from '../components/ButtonsModule/ButtonsModule'
 import { Box, useTheme } from '@chakra-ui/react'
 
 interface Props {
-    components: HomePageComponents
+    components: DynamicComponents
 }
 
-type HomePageComponents = NonNullable<
-    NonNullable<NonNullable<HomepageQuery['homepage']>['data']>['attributes']
->['components']
+type DynamicComponents = 
+    Maybe<Array<HomepageComponentsDynamicZone>> 
+    | Maybe<Array<StoryComponentsDynamicZone>> 
+    | Maybe<Array<LandingpageComponentsDynamicZone>> 
+    |  Maybe<Array<MenupageComponentsDynamicZone>>
 
 export function DynamicComponentRenderer(props: Props) {
     const theme = useTheme()

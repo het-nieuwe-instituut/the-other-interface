@@ -12,10 +12,10 @@ registerEnumType(Enum_Triplyrecord_Type, { name: 'Enum_Triplyrecord_Type' })
 @ObjectType()
 export class TriplyRecord {
     @Field({ nullable: true })
-    public createdAt?: string
+    public createdAt?: Date
 
     @Field({ nullable: true })
-    public publishedAt?: string
+    public publishedAt?: Date
 
     @Field({ nullable: false })
     public recordId: string
@@ -27,7 +27,7 @@ export class TriplyRecord {
     public type: Enum_Triplyrecord_Type
 
     @Field({ nullable: true })
-    public updatedAt?: string
+    public updatedAt?: Date
 
     @Field(() => ArchivesOtherZoomLevel5DetailType, { nullable: true })
     public archive?: ArchivesOtherZoomLevel5DetailType

@@ -1,8 +1,8 @@
 import { ObjectType, Field, createUnionType, ID, InputType } from '@nestjs/graphql'
 import { ArchivesFondsZoomLevel5DetailType, ArchivesOtherZoomLevel5DetailType } from '../archives/archives.type'
 
-import { AuthorEntityResponse } from '../author/author.type'
-import { LocationRelationResponseCollection } from '../location/location.type'
+import { AuthorEntityResponse, AuthorFiltersInput } from '../author/author.type'
+import { LocationFiltersInput, LocationRelationResponseCollection } from '../location/location.type'
 import { ObjectsZoomLevel5DetailType } from '../objects/objects.type'
 import { PoepleZoomLevel5DetailType } from '../people/people.type'
 import {
@@ -11,8 +11,11 @@ import {
     PublicationsBookZoomLevel5DetailType,
     PublicationsSerialZoomLevel5DetailType,
 } from '../publications/publications.type'
-import { ComponentCorePublicationDate } from '../strapi/components/core/publicationDate'
-import { ComponentCoreTimeframe } from '../strapi/components/core/timeframe'
+import {
+    ComponentCorePublicationDate,
+    ComponentCorePublicationDateFiltersInput,
+} from '../strapi/components/core/publicationDate'
+import { ComponentCoreTimeframe, ComponentCoreTimeframeFiltersInput } from '../strapi/components/core/timeframe'
 
 import { ComponentModulesButtonsModule } from '../strapi/components/modules/buttonsModule'
 import { ComponentModulesCarousel } from '../strapi/components/modules/carousel'
@@ -30,7 +33,7 @@ import {
     ResponseCollectionMeta,
     StringFilterInput,
 } from '../strapi/shared-types'
-import { TriplyRecordRelationResponseCollection } from '../triplyRecord/triplyRecord.type'
+import { TriplyRecordFiltersInput, TriplyRecordRelationResponseCollection } from '../triplyRecord/triplyRecord.type'
 
 @ObjectType()
 export class StoryRelationResponseCollection {
@@ -47,7 +50,7 @@ export class Story {
     public components?: typeof StoryComponentsDynamicZone[]
 
     @Field({ nullable: true })
-    public createdAt: string
+    public createdAt: Date
 
     @Field({ nullable: true })
     public description?: string
@@ -65,7 +68,7 @@ export class Story {
     public publicationDate?: ComponentCorePublicationDate
 
     @Field({ nullable: true })
-    public publishedAt: string
+    public publishedAt: Date
 
     @Field({ nullable: true })
     public shortDescription?: string
@@ -83,7 +86,7 @@ export class Story {
     public triplyRecords?: TriplyRecordRelationResponseCollection
 
     @Field({ nullable: true })
-    public updatedAt: string
+    public updatedAt: Date
 
     @Field(() => [PoepleZoomLevel5DetailType], { nullable: 'itemsAndList' })
     public people?: PoepleZoomLevel5DetailType[]
@@ -211,4 +214,37 @@ export class StoryFiltersInput {
 
     @Field(() => DateTimeFilterInput, { nullable: true })
     public updatedAt?: DateTimeFilterInput
+
+    @Field(() => AuthorFiltersInput, { nullable: true })
+    public author?: AuthorFiltersInput
+
+    @Field(() => StringFilterInput, { nullable: true })
+    public description?: StringFilterInput
+
+    @Field(() => StringFilterInput, { nullable: true })
+    public locale?: StringFilterInput
+
+    @Field(() => StoryFiltersInput, { nullable: true })
+    public localizations?: StoryFiltersInput
+
+    @Field(() => LocationFiltersInput, { nullable: true })
+    public locations?: LocationFiltersInput
+
+    @Field(() => ComponentCorePublicationDateFiltersInput, { nullable: true })
+    public publicationDate?: ComponentCorePublicationDateFiltersInput
+
+    @Field(() => StringFilterInput, { nullable: true })
+    public shortDescription?: StringFilterInput
+
+    @Field(() => StringFilterInput, { nullable: true })
+    public slug?: StringFilterInput
+
+    @Field(() => ComponentCoreTimeframeFiltersInput, { nullable: true })
+    public timeframe?: ComponentCoreTimeframeFiltersInput
+
+    @Field(() => StringFilterInput, { nullable: true })
+    public title?: StringFilterInput
+
+    @Field(() => TriplyRecordFiltersInput, { nullable: true })
+    public triplyRecords?: TriplyRecordFiltersInput
 }
