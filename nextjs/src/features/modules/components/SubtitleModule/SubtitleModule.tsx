@@ -14,7 +14,9 @@ export const SubtitleModule: React.FC<Props> = props => {
             paddingBottom={props.component.subtitleModuleLayout?.spacingBottom ?? undefined}
             paddingTop={props.component.subtitleModuleLayout?.spacingTop ?? undefined}
         >
-            <ChakraText textStyle={'h3'}>{props.component.text}</ChakraText>
+            <ChakraText textStyle={'h3'} maxWidth={'55rem'}>
+                {props.component.text}
+            </ChakraText>
         </Box>
     )
 }
