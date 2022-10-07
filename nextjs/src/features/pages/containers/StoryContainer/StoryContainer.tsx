@@ -3,7 +3,7 @@ import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Box, Grid, GridItem, useTheme } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { useStoryBySlugQuery } from 'src/generated/graphql'
+import { StoryComponentsDynamicZone, useStoryBySlugQuery } from 'src/generated/graphql'
 import { LandingPageQueryParams } from 'src/pages/landingpage/[slug]'
 import { StoryMeta } from '../../Meta/StoryMeta'
 
@@ -28,7 +28,7 @@ export const StoryContainer: React.FC = () => {
         return <p>{error.message}</p>
     }
 
-    if (!data?.stories?.data.length) {
+    if (!data?.stories?.data?.length) {
         return <p>{t('somethingWentWrong')}</p>
     }
 
@@ -60,7 +60,7 @@ export const StoryContainer: React.FC = () => {
                     </GridItem>
                 </Grid>
             </Box>
-            <DynamicComponentRenderer components={data?.stories?.data[0]?.attributes?.components} />
+            <DynamicComponentRenderer components={data?.stories?.data[0]?.attributes?.components as StoryComponentsDynamicZone[]} />
         </Box>
     )
 }

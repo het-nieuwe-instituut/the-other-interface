@@ -1,7 +1,7 @@
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { useRouter } from 'next/router'
-import { useMenupageBySlugQuery } from 'src/generated/graphql'
+import { MenupageComponentsDynamicZone, useMenupageBySlugQuery } from 'src/generated/graphql'
 import { MenupageQueryParams } from 'src/pages/[slug]'
 
 export const MenupageContainer: React.FC = () => {
@@ -30,7 +30,7 @@ export const MenupageContainer: React.FC = () => {
 
     return (
         <div>
-            <DynamicComponentRenderer components={data?.menupages?.data[0]?.attributes?.components} />
+            <DynamicComponentRenderer components={data?.menupages?.data[0]?.attributes?.components as MenupageComponentsDynamicZone[]} />
         </div>
     )
 }
