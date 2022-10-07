@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2022-10-06T11:33:09.230Z
+__export_date: 2022-10-07T13:20:21.921Z
 __export_source: insomnia.desktop.app:v2022.6.0
 resources:
   - _id: req_93c0ce2563cf4aa9b03c65c3edf21db3
@@ -1700,9 +1700,9 @@ resources:
     _type: request
   - _id: req_b1eb21c365b946eba8c7d4682a8167c8
     parentId: fld_17de84e682c04137bb01bf07e4e9a9a2
-    modified: 1665055974965
+    modified: 1665148360608
     created: 1663928044191
-    url: "{{ _.baseUrl }}/graphql"
+    url: ""
     name: relations
     description: ""
     method: POST
@@ -1719,6 +1719,42 @@ resources:
         id: pair_4888895150804e04b42b02ba0fd8527d
     authentication: {}
     metaSortKey: -1658845895129.875
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_db36d2060f6f4f02bc4c7604834c88aa
+    parentId: fld_17de84e682c04137bb01bf07e4e9a9a2
+    modified: 1665148808718
+    created: 1665148373334
+    url: "{{ _.baseUrl }}/graphql"
+    name: allRelations
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n\tallRelations(type: People, id: \"10\",
+        relatedObjectsType: People) {\n\t\t\t... on ZoomLevel5RelatedPeopleType
+        {\n\t\t\t\tid\n\t\t\t\ttype\n\t\t\t\tname\n\t\t\t\tprofession # triply
+        doesnt return this field yet\n\t\t\t\tbirthDate # triply doesnt return
+        this field yet\n\t\t\t}\n      ... on ZoomLevel5RelatedArchiveType
+        {\n\t\t\t\t# waiting on triply to implement
+        these\n\t\t\t\tid\n\t\t\t\ttype\n\t\t\t}\n\t\t      ... on
+        ZoomLevel5RelatedObjectType {\n\t\t\t\t# waiting on triply to implement
+        these\n\t\t\t\tid\n\t\t\t\ttype\n\t\t\t}\n\t\t      ... on
+        ZoomLevel5RelatedPublicationType {\n\t\t\t\t# waiting on triply to
+        implement these\n\t\t\t\tid\n\t\t\t\ttype\n\t\t\t}\n\t}\n}"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658776576120.3438
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
