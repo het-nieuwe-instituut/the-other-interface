@@ -198,6 +198,9 @@ export class PublicationsService {
 
     private readonly ZoomLevel4Endpoint = 'zoom-4-books/run'
 
+    private readonly ZoomLevel4CountEndpoint =
+        'https://api.collectiedata.hetnieuweinstituut.nl/queries/Joran/zoom4-books-count/run'
+
     private readonly ZoomLevel5Endpoint = {
         [PublicationsZoomLevel5Types.article]: 'zoom-5-books-article/run',
         [PublicationsZoomLevel5Types.audiovisual]: 'zoom-5-books-audiovisual/run',
@@ -230,7 +233,7 @@ export class PublicationsService {
             pageSize,
         })
 
-        return TriplyUtils.parseLevel3OutputData(result.data, EntityNames.Publications)
+        return TriplyUtils.parseLevel3OutputData(result.data)
     }
 
     public async getZoomLevel4Data(filters: PublicationsZoomLevel4FiltersArgs, page = 1, pageSize = 48) {
@@ -251,15 +254,23 @@ export class PublicationsService {
             },
             searchParams
         )
+        const countResult = await this.triplyService.getCountData(this.ZoomLevel4CountEndpoint, searchParams)
+        const total = countResult.data.pop()?.count || 0
 
-        return result.data.map(res => {
-            return {
-                record: res.record,
-                title: res.title,
-                firstImage: null,
-                imageLabel: null,
-            }
-        })
+        return {
+            total,
+            appliedFilters: JSON.stringify(filters),
+            page,
+            hasMore: page * pageSize < total,
+            nodes: result.data.map(res => {
+                return {
+                    record: res.record,
+                    title: res.title,
+                    firstImage: null,
+                    imageLabel: null,
+                }
+            }),
+        }
     }
 
     public async getZoomLevel5Data(publicationType: PublicationsZoomLevel5Types, objectId: string) {

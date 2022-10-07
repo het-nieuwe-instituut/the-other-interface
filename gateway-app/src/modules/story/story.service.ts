@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common'
-import { Sdk } from 'src/generated/strapi-sdk'
+import { Sdk } from '../../generated/strapi-sdk'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 
 @Injectable()

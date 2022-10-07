@@ -3,7 +3,7 @@ import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Box, useTheme } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { useLandingpageBySlugQuery } from 'src/generated/graphql'
+import { LandingpageComponentsDynamicZone, useLandingpageBySlugQuery } from 'src/generated/graphql'
 import { StoryQueryParams } from 'src/pages/story/[slug]'
 
 export const LandingpageContainer: React.FC = () => {
@@ -41,7 +41,7 @@ export const LandingpageContainer: React.FC = () => {
                     preface={landingpage.attributes?.Description || undefined}
                 />
             </Box>
-            <DynamicComponentRenderer components={data?.landingpages?.data[0]?.attributes?.components} />
+            <DynamicComponentRenderer components={data?.landingpages?.data[0]?.attributes?.components as LandingpageComponentsDynamicZone[]} />
         </Box>
     )
 }
