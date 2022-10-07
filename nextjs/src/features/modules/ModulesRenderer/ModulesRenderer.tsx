@@ -21,10 +21,15 @@ import { ButtonsModule } from '../components/ButtonsModule/ButtonsModule'
 import { Box, useTheme } from '@chakra-ui/react'
 
 interface Props {
-    components: HomePageComponents
+    components: DynamicComponents
 }
 
-type HomePageComponents = Maybe<Array<HomepageComponentsDynamicZone>> | Maybe<Array<StoryComponentsDynamicZone>> | Maybe<Array<LandingpageComponentsDynamicZone>> |  Maybe<Array<MenupageComponentsDynamicZone>>
+type DynamicComponents = 
+    Maybe<Array<HomepageComponentsDynamicZone>> 
+    | Maybe<Array<StoryComponentsDynamicZone>> 
+    | Maybe<Array<LandingpageComponentsDynamicZone>> 
+    |  Maybe<Array<MenupageComponentsDynamicZone>>
+
 export function DynamicComponentRenderer(props: Props) {
     const theme = useTheme()
     return (
