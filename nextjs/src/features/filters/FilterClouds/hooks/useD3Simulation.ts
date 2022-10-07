@@ -6,7 +6,7 @@ import { MutableRefObject, useEffect, useRef } from 'react'
 import { FilterType } from '../usePresenter'
 import { DataDimensions } from './useFitDataToDimensions'
 
-interface D3CollectionItem extends SimulationNodeDatum, FilterType {}
+export interface D3CollectionItem extends SimulationNodeDatum, FilterType {}
 
 export function useD3Simulation(
     dimensions: Dimensions,
@@ -101,7 +101,7 @@ function ticked(
 
     nodeForeign
         .transition()
-        .duration(110)
+        .duration(90)
         .attr('width', (d: D3CollectionItem) => getTakeSpaceFromDataDimensions(dataDimensions, d) * 2)
         .attr('height', (d: D3CollectionItem) => getTakeSpaceFromDataDimensions(dataDimensions, d) * 2)
         .attr('opacity', 1)

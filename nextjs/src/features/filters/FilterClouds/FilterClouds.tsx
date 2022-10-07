@@ -2,6 +2,7 @@ import { Circle } from '@/features/GalaxyInterface/components/Circle'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Box, Text } from '@chakra-ui/react'
 import { useId, useMemo } from 'react'
+import { ZoomLevel } from './hooks/useD3ZoomEvents'
 import { FilterType, usePresenter } from './usePresenter'
 
 type Props = {
@@ -26,11 +27,11 @@ const FilterClouds: React.FunctionComponent<Props> = ({ dimensions, data, type }
     const svgHeight = height
     const objectsPerTypeWithIds = useMemo(() => data.map(item => ({ ...item, name: item.filter })), [data])
     const id = useId().replaceAll(':', '')
-    const { svgRef } = usePresenter(dimensions, objectsPerTypeWithIds, id)
+    const { svgRef, zoomLevel } = usePresenter(dimensions, objectsPerTypeWithIds, id)
     const { t } = useTypeSafeTranslation('landingpage')
 
     return (
-        <Box overflow={'visible'} height={svgHeight} width={svgWidth}>
+        <Box overflow="hidden" height={svgHeight} width={svgWidth}>
             <svg
                 width={svgWidth}
                 height={svgHeight}
@@ -66,14 +67,16 @@ const FilterClouds: React.FunctionComponent<Props> = ({ dimensions, data, type }
                                 alignItems="center"
                                 justifyContent="center"
                             >
-                                <Box>
-                                    <Text width="12.5rem" textStyle={'cloudText'}>
-                                        {t('people')}
-                                    </Text>
-                                    <Text width="12.5rem" textStyle={'cloudText'}>
-                                        {t(item.name)}
-                                    </Text>
-                                </Box>
+                                {zoomLevel === ZoomLevel.ZoomedToClouds && (
+                                    <Box>
+                                        <Text width="12.5rem" textStyle={'cloudText'}>
+                                            {t('people')}
+                                        </Text>
+                                        <Text width="12.5rem" textStyle={'cloudText'}>
+                                            {t(item.name)}
+                                        </Text>
+                                    </Box>
+                                )}
                             </Box>
                         </Circle>
                     )
