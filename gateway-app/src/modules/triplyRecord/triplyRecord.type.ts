@@ -2,6 +2,10 @@ import { Field, ID, InputType, ObjectType, registerEnumType } from '@nestjs/grap
 import { Enum_Triplyrecord_Type } from '../../generated/strapi-sdk'
 import { StoryFiltersInput, StoryRelationResponseCollection } from '../story/story.type'
 import { DateTimeFilterInput, IdFilterInput, ResponseCollectionMeta, StringFilterInput } from '../strapi/shared-types'
+import { ArchivesOtherZoomLevel5DetailType } from '../archives/archives.type'
+import { ObjectsZoomLevel5DetailType } from '../objects/objects.type'
+import { PublicationsBookZoomLevel5DetailType } from '../publications/publications.type'
+import { PoepleZoomLevel5DetailType } from '../people/people.type'
 
 registerEnumType(Enum_Triplyrecord_Type, { name: 'Enum_Triplyrecord_Type' })
 
@@ -13,17 +17,29 @@ export class TriplyRecord {
     @Field({ nullable: true })
     public publishedAt?: Date
 
-    @Field({ nullable: false })
+    @Field({ nullable: true })
     public recordId: string
 
     @Field(() => StoryRelationResponseCollection, { nullable: true })
     public stories?: StoryRelationResponseCollection
 
-    @Field({ nullable: false })
+    @Field({ nullable: true })
     public type: Enum_Triplyrecord_Type
 
     @Field({ nullable: true })
-    public updatedAt?: Date
+    public updatedAt?: string
+
+    @Field(() => ArchivesOtherZoomLevel5DetailType, { nullable: true })
+    public archive?: ArchivesOtherZoomLevel5DetailType
+
+    @Field(() => ObjectsZoomLevel5DetailType, { nullable: true })
+    public object?: ObjectsZoomLevel5DetailType
+
+    @Field(() => PublicationsBookZoomLevel5DetailType, { nullable: true })
+    public publication?: PublicationsBookZoomLevel5DetailType
+
+    @Field(() => PoepleZoomLevel5DetailType, { nullable: true })
+    public people?: PoepleZoomLevel5DetailType
 }
 
 @ObjectType()
