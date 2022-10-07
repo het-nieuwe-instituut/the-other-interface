@@ -12,7 +12,12 @@ import {
 } from '../publications/publications.type'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { ZoomLevel5Service } from './zoomLevel5.service'
-import { ZoomLevel5Args, ZoomLevel5RelationsType } from './zoomLevel5.type'
+import {
+    ZoomLevel5Args,
+    ZoomLevel5RelatedObjectsArgs,
+    ZoomLevel5RelatedRecordType,
+    ZoomLevel5RelationsType,
+} from './zoomLevel5.type'
 
 @Resolver(ZoomLevel5RelationsType)
 export class ZoomLevel5Resolver {
@@ -21,6 +26,11 @@ export class ZoomLevel5Resolver {
     @Query(() => [ZoomLevel5RelationsType], { nullable: true })
     public relations(@Args() args: ZoomLevel5Args) {
         return this.zoomLevel5Service.getRelations(args.id, args.type)
+    }
+
+    @Query(() => [ZoomLevel5RelatedRecordType], { nullable: true })
+    public allRelations(@Args() args: ZoomLevel5RelatedObjectsArgs) {
+        return this.zoomLevel5Service.getAllRelations(args)
     }
 
     @Query(() => ObjectsZoomLevel5DetailType, { nullable: true })
