@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { TriplyService } from '../triply/triply.service'
 import { TriplyUtils, ZoomLevel3ReturnData } from '../triply/triply.utils'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
-import { PeopleType, PeopleZoomLevel4FiltersArgs } from './people.type'
+import { PeopleZoomLevel4FiltersArgs } from './people.type'
 
 export enum PeopleZoomLevel3Ids {
     deathDate = 'deathDate',
@@ -107,6 +107,8 @@ export class PeopleService {
     ]
 
     private readonly ZoomLevel4Endpoint = 'zoom-4-people/run'
+    private readonly ZoomLevel4CountEndpoint =
+        'https://api.collectiedata.hetnieuweinstituut.nl/queries/Joran/zoom4-people-count/run'
 
     private readonly ZoomLevel5Endpoint = 'zoom-5-people/run'
 
@@ -135,7 +137,7 @@ export class PeopleService {
             pageSize,
         })
 
-        return TriplyUtils.parseLevel3OutputData(result.data, EntityNames.People)
+        return TriplyUtils.parseLevel3OutputData(result.data)
     }
 
     public async getZoomLevel4Data(filters: PeopleZoomLevel4FiltersArgs, page = 1, pageSize = 48) {
@@ -157,14 +159,23 @@ export class PeopleService {
             searchParams
         )
 
-        return result.data.map(res => {
-            return {
-                record: res.record,
-                title: res.name,
-                firstImage: null,
-                imageLabel: null,
-            }
-        })
+        const countResult = await this.triplyService.getCountData(this.ZoomLevel4CountEndpoint, searchParams)
+        const total = countResult.data.pop()?.count || 0
+
+        return {
+            total,
+            appliedFilters: JSON.stringify(filters),
+            page,
+            hasMore: page * pageSize < total,
+            nodes: result.data.map(res => {
+                return {
+                    record: res.record,
+                    title: res.name,
+                    firstImage: null,
+                    imageLabel: null,
+                }
+            }),
+        }
     }
 
     public async getZoomLevel5Data(objectId: string) {
@@ -190,19 +201,5 @@ export class PeopleService {
         }
 
         throw new Error(`[People] Invalid filter input "${input}"`)
-    }
-
-    public async getPeopleDetails(peopleId: string) {
-        const res = await this.triplyService.queryTriplyData<PeopleData>(`${this.detailEndpoint}${peopleId}`)
-
-        const parsedResponse: PeopleType = {}
-        res.data.forEach(d => {
-            if (d.name) parsedResponse.name = d.name
-            if (d.birthDate) parsedResponse.birthDate = d.birthDate
-            if (d.deathDate) parsedResponse.deathDate = d.deathDate
-            if (d.nationalityLabel) parsedResponse.nationalityLabel = d.nationalityLabel
-        })
-
-        return parsedResponse
     }
 }
