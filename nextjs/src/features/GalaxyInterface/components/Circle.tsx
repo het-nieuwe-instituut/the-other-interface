@@ -7,8 +7,8 @@ interface Props
         React.SVGProps<SVGForeignObjectElement>,
         'id' | 'className' | 'height' | 'width' | 'x' | 'y' | 'pointerEvents' | 'children'
     > {
-    defaultBackground: string
-    hoverBackground: string
+    defaultBackground?: string
+    hoverBackground?: string
 }
 
 export const Circle: React.FC<Props> = props => {
