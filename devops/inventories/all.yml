@@ -22,10 +22,11 @@ ansible_python_interpreter=/usr/bin/python3
 # HNI - Production #
 ####################
 [production]
-x.x.x.x name=hni-toi-production-ams3-01
+178.62.207.134 name=hni-toi-production-ams3-01
 
 [production:vars]
 server_environment_name=production
+ansible_python_interpreter=/usr/bin/python3
 
 ##########
 # Groups #
@@ -33,4 +34,4 @@ server_environment_name=production
 [app:children]
 staging
 acceptance
-# production
+production
