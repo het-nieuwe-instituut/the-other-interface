@@ -1,16 +1,16 @@
+import { FilterType, PossibleFilters } from '@/features/filters/FilterClouds/types'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Box, useTheme } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
-import { useLandingpageBySlugQuery } from 'src/generated/graphql'
-import dynamic from 'next/dynamic'
+import { LandingpageComponentsDynamicZone, useLandingpageBySlugQuery } from 'src/generated/graphql'
 import { LandingPageQueryParams } from 'src/pages/landingpage/[slug]'
-import { FilterType, PossibleFilters } from '@/features/filters/FilterClouds/types'
 
-const DynamicFilterCloudsNoSsr = dynamic(() => import('../../../filters/PaginatedFilterClouds/PaginatedFilterClouds'), {
+const DynamicFilterCloudsNoSsr = dynamic(() => import('../../../filters/FilterClouds/FilterClouds'), {
     ssr: false,
 })
 
@@ -94,7 +94,11 @@ export const LandingpageContainer: React.FC = () => {
                         preface={landingpage.attributes?.Description || undefined}
                     />
                 </Box>
-                <DynamicComponentRenderer components={data?.landingpages?.data[0]?.attributes?.components} />
+                <DynamicComponentRenderer
+                    components={
+                        data?.landingpages?.data[0]?.attributes?.components as LandingpageComponentsDynamicZone[]
+                    }
+                />
             </Box>
         </>
     )

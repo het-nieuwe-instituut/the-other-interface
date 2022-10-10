@@ -1,8 +1,8 @@
 import { useKeenSlider } from 'keen-slider/react'
 import React, { createRef, useEffect, useState } from 'react'
-import { UploadFileEntity } from 'src/generated/graphql'
+import { Maybe, UploadFileEntity } from 'src/generated/graphql'
 
-const usePresenter = (items: UploadFileEntity[] | undefined) => {
+const usePresenter = (items: Maybe<UploadFileEntity[]> | undefined) => {
     const carouselRef = createRef<HTMLDivElement>()
     const [currentSlide, setCurrentSlide] = React.useState(0)
     const [loaded, setLoaded] = useState(false)
