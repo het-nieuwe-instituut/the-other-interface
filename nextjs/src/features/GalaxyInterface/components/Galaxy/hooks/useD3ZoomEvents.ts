@@ -1,10 +1,12 @@
 import { Dimensions, ZoomLevel } from '@/features/GalaxyInterface/types/galaxy'
 import * as d3 from 'd3'
+import { useRouter } from 'next/router'
 import { MutableRefObject, useRef, useState, useCallback, useEffect } from 'react'
 import { getStoriesSystemDimensions } from '../Galaxy'
 
 export function useD3ZoomEvents(svgRef: MutableRefObject<SVGSVGElement | null>, dimensions: Dimensions) {
     const storiesSystemRef = useRef<SVGForeignObjectElement | null>(null)
+    const router = useRouter()
     const [zoomLevel, setZoomLevel] = useState<ZoomLevel>(ZoomLevel.Zoom0)
 
     const zoom1stories = useCallback(() => {
@@ -45,13 +47,19 @@ export function useD3ZoomEvents(svgRef: MutableRefObject<SVGSVGElement | null>, 
     }, [svgRef])
 
     const zoomTo = useCallback(
-        (x: number, y: number) => {
+        async (x: number, y: number, navigateTo: string) => {
             const d3Svg = d3.select(svgRef.current)
             setZoomLevel(ZoomLevel.zoomedTo)
-
-            d3Svg.transition().duration(1500).attr(`transform`, `translate(0, 0)scale(${20})translate(${x}, ${y})`)
+            await d3Svg.attr(`opacity`, `1`)
+            await d3Svg
+                .transition()
+                .duration(1500)
+                .attr(`transform`, `translate(0, 0)scale(${20})translate(${x}, ${y})`)
+                .attr(`opacity`, `0`)
+                .end()
+            router.push(navigateTo)
         },
-        [svgRef]
+        [router, svgRef]
     )
 
     useEffect(() => {

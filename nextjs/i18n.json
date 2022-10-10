@@ -4,6 +4,7 @@
     "pages": {
         "*": ["common"],
         "story/*": ["stories"],
+        "/landingpage/[slug]": ["landingpage"],
         "/": ["homepage"]
     }
 }
