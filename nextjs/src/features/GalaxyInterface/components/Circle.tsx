@@ -1,5 +1,6 @@
-import { Flex } from '@chakra-ui/react'
+import { Box, Flex } from '@chakra-ui/react'
 import React from 'react'
+import * as CSS from 'csstype'
 
 interface Props
     extends Pick<
@@ -13,7 +14,8 @@ interface Props
 export const Circle: React.FC<Props> = props => {
     return (
         <>
-            <foreignObject
+            <Box
+                as={'foreignObject'}
                 xmlns="http://www.w3.org/1999/xhtml"
                 className={`foreign-${props.className}`}
                 id={props.id}
@@ -21,7 +23,8 @@ export const Circle: React.FC<Props> = props => {
                 height={props.height}
                 x={props.x}
                 y={props.y}
-                pointerEvents={props.pointerEvents}
+                pointerEvents={props.pointerEvents as CSS.Property.PointerEvents}
+                style={{ overflow: 'visible' }}
             >
                 <Flex
                     width={'100%'}
@@ -65,7 +68,7 @@ export const Circle: React.FC<Props> = props => {
                 >
                     {props.children}
                 </Flex>
-            </foreignObject>
+            </Box>
         </>
     )
 }
