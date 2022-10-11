@@ -3,9 +3,9 @@ import { useInitializeD3Simulation } from '@/features/shared/hooks/useInitialize
 import * as d3 from 'd3'
 import { SimulationNodeDatum } from 'd3'
 import { MutableRefObject, useEffect, useRef } from 'react'
+import { DataDimension } from '../../hooks/useFitToDataToDimensions'
 import { PaginatedFilterType } from '../types'
 
-import { DataDimensions } from './useFitDataToDimensions'
 const collisionData = [{ id: 'collision' }]
 const collision = 120
 type CollisionData = typeof collisionData[0]
@@ -17,7 +17,7 @@ export function useD3Simulation(
     dimensions: Dimensions,
     data: Partial<D3CollectionItem>[],
     selector: string,
-    dataDimensions: DataDimensions[]
+    dataDimensions: DataDimension[]
 ) {
     const { simulation } = useInitializeD3Simulation<D3CollectionItem>([dimensions])
     const svgRef = useRef<SVGSVGElement | null>(null)
@@ -35,9 +35,10 @@ function useListenToSimulationTicks(
     svgRef: MutableRefObject<SVGSVGElement | null>,
     data: Partial<D3CollectionItem>[],
     selector: string,
-    dataDimensions: DataDimensions[]
+    dataDimensions: DataDimension[]
 ) {
     const nodesListener = useRef<d3.Simulation<D3CollectionItem, undefined> | undefined | null>(null)
+    console.log(dataDimensions)
 
     // set default styles
     useEffect(() => {
@@ -68,7 +69,7 @@ function useListenToSimulationTicks(
             nodesListener.current = simulation.current
                 ?.nodes([...collisionData, ...data] as D3CollectionItem[])
                 .on('tick', () => {
-                    ticked(dataDimensions, simulation, nodeForeign, collisionObject, dimensions)
+                    ticked(dataDimensions, nodeForeign, collisionObject, dimensions)
                 })
         }
 
@@ -78,11 +79,11 @@ function useListenToSimulationTicks(
     }, [data, dataDimensions, selector, svgRef, simulation, dimensions])
 }
 
-function getDataDimension(dataDimensions: DataDimensions[], d: Partial<D3CollectionItem>) {
-    return dataDimensions?.find(item => item.name === d.filter)
+function getDataDimension(dataDimensions: DataDimension[], d: Partial<D3CollectionItem>) {
+    return dataDimensions?.find(item => item.name === d.name)
 }
 
-function getTakeSpaceFromDataDimensions(dataDimensions: DataDimensions[], d: Partial<D3CollectionItem>) {
+function getTakeSpaceFromDataDimensions(dataDimensions: DataDimension[], d: Partial<D3CollectionItem>) {
     const val = getDataDimension(dataDimensions, d)
 
     if (!val) {
@@ -93,8 +94,7 @@ function getTakeSpaceFromDataDimensions(dataDimensions: DataDimensions[], d: Par
 }
 
 function ticked(
-    dataDimensions: DataDimensions[],
-    simulation: MutableRefObject<d3.Simulation<D3CollectionItem, undefined> | null>,
+    dataDimensions: DataDimension[],
     nodeForeign: d3.Selection<d3.BaseType, Partial<D3CollectionItem>, SVGSVGElement | null, unknown>,
     collisionObject: d3.Selection<d3.BaseType, Partial<D3CollisionData>, SVGSVGElement | null, unknown>,
     dimensions: Dimensions
@@ -138,7 +138,7 @@ function ticked(
         .attr('opacity', 1)
 }
 
-function getDiameter(dataDimensions: DataDimensions[], d: Partial<D3CollectionItem>) {
+function getDiameter(dataDimensions: DataDimension[], d: Partial<D3CollectionItem>) {
     if (d?.id === 'collision') {
         return collision
     }

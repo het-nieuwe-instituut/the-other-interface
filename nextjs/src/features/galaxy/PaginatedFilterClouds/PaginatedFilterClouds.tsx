@@ -28,7 +28,7 @@ const PaginatedFilterClouds: React.FunctionComponent<Props> = ({ dimensions, dat
                 const randomSValue = randomNumberBetweenPoints(10, 100)
                 const randomLValue = randomNumberBetweenPoints(10, 90)
                 const background = `radial-gradient(50% 50% at 50% 50%, hsla(120, ${randomSValue}%,${randomLValue}%,1) 0%, hsla(120, ${randomSValue}%,${randomLValue}%,0) 100%);`
-                return { ...item, name: item.filter, background }
+                return { ...item, name: item.name, background }
             }),
         [data]
     )
@@ -91,7 +91,7 @@ const PaginatedFilterClouds: React.FunctionComponent<Props> = ({ dimensions, dat
                                             {t('people')}
                                         </Text>
                                         <Text width="12.5rem" textStyle={'cloudText'}>
-                                            {t('genericBy', { name: item.filter })}
+                                            {t('genericBy', { name: item.name })}
                                         </Text>
                                     </Box>
                                 )}

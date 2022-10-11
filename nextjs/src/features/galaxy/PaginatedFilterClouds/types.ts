@@ -1,5 +1,5 @@
 export interface PaginatedFilterType {
-    filter: string
+    name: string
     numberOfInstances: number
 }
 
