@@ -4,7 +4,7 @@ import { Enum_Triplyrecord_Type, PublicationState, Sdk } from '../../generated/s
 import { ArchivesService } from '../archives/archives.service'
 import { ObjectsService } from '../objects/objects.service'
 import { PeopleService } from '../people/people.service'
-import { PublicationsService, PublicationsZoomLevel5Types } from '../publications/publications.service'
+import { PublicationsService } from '../publications/publications.service'
 import { PaginationArg } from '../strapi/shared-types'
 import {
     TriplyRecord,
@@ -84,12 +84,14 @@ export class TriplyRecordFieldResolver {
     }
 
     @ResolveField()
-    public publication(@Parent() triplyRecord: TriplyRecord) {
+    public async publication(@Parent() triplyRecord: TriplyRecord) {
         if (triplyRecord.type !== Enum_Triplyrecord_Type.Publication) {
             return
         }
 
-        return this.publicationService.getZoomLevel5Data(PublicationsZoomLevel5Types.book, triplyRecord.recordId)
+        const type = await this.publicationService.determinePublicationType(triplyRecord.recordId)
+
+        return this.publicationService.getZoomLevel5Data(type, triplyRecord.recordId)
     }
 
     @ResolveField()

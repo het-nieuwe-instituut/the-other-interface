@@ -4,7 +4,7 @@ import { StoryFiltersInput, StoryRelationResponseCollection } from '../story/sto
 import { DateTimeFilterInput, IdFilterInput, ResponseCollectionMeta, StringFilterInput } from '../strapi/shared-types'
 import { ArchiveZoomLevel5UnionType } from '../archives/archives.type'
 import { ObjectsZoomLevel5DetailType } from '../objects/objects.type'
-import { PublicationsBookZoomLevel5DetailType } from '../publications/publications.type'
+import { PublicationZoomLevel5UnionType } from '../publications/publications.type'
 import { PoepleZoomLevel5DetailType } from '../people/people.type'
 
 registerEnumType(Enum_Triplyrecord_Type, { name: 'Enum_Triplyrecord_Type' })
@@ -35,8 +35,8 @@ export class TriplyRecord {
     @Field(() => ObjectsZoomLevel5DetailType, { nullable: true })
     public object?: ObjectsZoomLevel5DetailType
 
-    @Field(() => PublicationsBookZoomLevel5DetailType, { nullable: true })
-    public publication?: PublicationsBookZoomLevel5DetailType
+    @Field(() => PublicationZoomLevel5UnionType, { nullable: true })
+    public publication?: typeof PublicationZoomLevel5UnionType
 
     @Field(() => PoepleZoomLevel5DetailType, { nullable: true })
     public people?: PoepleZoomLevel5DetailType
