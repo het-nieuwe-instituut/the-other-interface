@@ -21,7 +21,7 @@ export class TriplyService {
     public async queryTriplyData<ReturnDataType>(
         endpointSuffix: string,
         paginationArgs?: PaginationArgs,
-        searchParams?: Record<string, string>[]
+        searchParams?: Record<string, string>
     ) {
         endpointSuffix = endpointSuffix.startsWith('/') ? endpointSuffix : `/${endpointSuffix}`
         const endpoint = new URL(`${this.endpointBaseURL}${this.baseQueryPath}${endpointSuffix}`)
@@ -38,7 +38,7 @@ export class TriplyService {
         }
 
         if (searchParams && searchParams.length) {
-            for (const { key, value } of searchParams) {
+            for (const [key, value] of Object.entries(searchParams)) {
                 endpoint.searchParams.append(key, value)
             }
         }
@@ -47,11 +47,11 @@ export class TriplyService {
     }
 
     // TODO: change to convention when Triply adds the endpoint to normal space
-    public async getCountData(rawUrl: string, searchParams?: Record<string, string>[]) {
+    public async getCountData(rawUrl: string, searchParams?: Record<string, string>) {
         const endpoint = new URL(rawUrl)
 
         if (searchParams && searchParams.length) {
-            for (const { key, value } of searchParams) {
+            for (const [key, value] of Object.entries(searchParams)) {
                 endpoint.searchParams.append(key, value)
             }
         }
