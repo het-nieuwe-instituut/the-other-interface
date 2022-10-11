@@ -1,7 +1,7 @@
 import { Inject } from '@nestjs/common'
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
 import { Enum_Triplyrecord_Type, PublicationState, Sdk } from '../../generated/strapi-sdk'
-import { ArchivesService, ArchivesZoomLevel5Types } from '../archives/archives.service'
+import { ArchivesService } from '../archives/archives.service'
 import { ObjectsService } from '../objects/objects.service'
 import { PeopleService } from '../people/people.service'
 import { PublicationsService, PublicationsZoomLevel5Types } from '../publications/publications.service'
@@ -64,12 +64,14 @@ export class TriplyRecordFieldResolver {
     }
 
     @ResolveField()
-    public archive(@Parent() triplyRecord: TriplyRecord) {
+    public async archive(@Parent() triplyRecord: TriplyRecord) {
         if (triplyRecord.type !== Enum_Triplyrecord_Type.Archive) {
             return
         }
 
-        return this.archivesService.getZoomLevel5Data(ArchivesZoomLevel5Types.other, triplyRecord.recordId)
+        const type = await this.archivesService.determineArchiveType(triplyRecord.recordId)
+
+        return this.archivesService.getZoomLevel5Data(type, triplyRecord.recordId)
     }
 
     @ResolveField()

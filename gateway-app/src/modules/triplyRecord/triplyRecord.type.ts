@@ -2,7 +2,7 @@ import { Field, ID, InputType, ObjectType, registerEnumType } from '@nestjs/grap
 import { Enum_Triplyrecord_Type } from '../../generated/strapi-sdk'
 import { StoryFiltersInput, StoryRelationResponseCollection } from '../story/story.type'
 import { DateTimeFilterInput, IdFilterInput, ResponseCollectionMeta, StringFilterInput } from '../strapi/shared-types'
-import { ArchivesOtherZoomLevel5DetailType } from '../archives/archives.type'
+import { ArchiveZoomLevel5UnionType } from '../archives/archives.type'
 import { ObjectsZoomLevel5DetailType } from '../objects/objects.type'
 import { PublicationsBookZoomLevel5DetailType } from '../publications/publications.type'
 import { PoepleZoomLevel5DetailType } from '../people/people.type'
@@ -29,8 +29,8 @@ export class TriplyRecord {
     @Field({ nullable: true })
     public updatedAt?: Date
 
-    @Field(() => ArchivesOtherZoomLevel5DetailType, { nullable: true })
-    public archive?: ArchivesOtherZoomLevel5DetailType
+    @Field(() => ArchiveZoomLevel5UnionType, { nullable: true })
+    public archive?: typeof ArchiveZoomLevel5UnionType
 
     @Field(() => ObjectsZoomLevel5DetailType, { nullable: true })
     public object?: ObjectsZoomLevel5DetailType

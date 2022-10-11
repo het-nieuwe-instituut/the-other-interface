@@ -105,6 +105,10 @@ export class ArchivesService {
     private readonly ZoomLevel4Endpoint = 'zoom-4-archives/run'
 
     // TODO: change to convention when Triply adds this to normal space
+    private readonly archivesDescriptionLevelEndpoint =
+        'https://api.collectiedata.hetnieuweinstituut.nl/queries/Joran/zoom5-archives-type-only/run?'
+
+    // TODO: change to convention when Triply adds this to normal space
     private readonly ZoomLevel4CountEndpoint =
         'https://api.collectiedata.hetnieuweinstituut.nl/queries/Joran/zoom4-archives-count/run?'
 
@@ -114,6 +118,25 @@ export class ArchivesService {
     }
 
     public constructor(private triplyService: TriplyService) {}
+
+    public async determineArchiveType(id: string) {
+        interface ArchivesDescriptionLevelData {
+            record: string
+            descriptionLevel: string
+        }
+
+        const uri = TriplyUtils.getUriForTypeAndId(EntityNames.Archives, id)
+        const res = await this.triplyService.queryTriplyData<ArchivesDescriptionLevelData>(
+            this.archivesDescriptionLevelEndpoint,
+            undefined,
+            { record: uri }
+        )
+
+        if (res.data[0].descriptionLevel === 'archief') {
+            return ArchivesZoomLevel5Types.fonds
+        }
+        return ArchivesZoomLevel5Types.other
+    }
 
     public async getZoomLevel2Data() {
         const result = await this.triplyService.queryTriplyData<ObjectFilterData>(this.zoomLevel2Endpoint)
@@ -192,7 +215,7 @@ export class ArchivesService {
             { record: uri }
         )
 
-        return TriplyUtils.combineObjectArray(result.data)
+        return { ...TriplyUtils.combineObjectArray(result.data), type, id: objectId }
     }
 
     public validateFilterInput(input: string): ArchivesZoomLevel3Ids {
