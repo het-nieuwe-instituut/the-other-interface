@@ -1,4 +1,4 @@
-import { SupportedLandingPages } from '@/features/filters/FilterClouds/FilterClouds'
+import { SupportedLandingPages } from '@/features/galaxy/FilterClouds/FilterClouds'
 import { LandingpageFilterContainer } from '@/features/pages/containers/LandingpageFilterContainer/LandingpageFilterContainer'
 import { GetServerSidePropsContext } from 'next'
 import { getServerSideProps as mainGetServerSideProps } from '../[slug]'
