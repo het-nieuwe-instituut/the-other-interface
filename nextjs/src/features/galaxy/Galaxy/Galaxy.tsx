@@ -2,17 +2,19 @@ import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Box, Flex, Text } from '@chakra-ui/react'
 import { times, uniqueId } from 'lodash'
 import React, { forwardRef, useEffect, useId, useMemo, useState } from 'react'
-import { Dimensions, ZoomLevel } from '../../types/galaxy'
-import { StoriesSystem } from '../../zoom0/StoriesSystem/StoriesSystem'
-import { Circle } from '../Circle'
-import { GalaxyShadowBackground } from '../GalaxyShadowBackground'
-import { storiesStubs } from '../stubs'
-import { ObjectPerType } from './hooks/useD3Simulation'
+import { Dimensions, ZoomLevel } from '../types/galaxy'
+import { StoriesSystem } from '../components/StoriesSystem/StoriesSystem'
+import { Circle } from '../components/Circle'
+import { GalaxyShadowBackground } from '../components/GalaxyShadowBackground'
+import { storiesStubs } from '../components/stubs'
+import { ObjectPerTypeWithName } from '../hooks/useD3Simulation'
 import { usePresenter } from './usePresenter'
+import { ZoomLevel1Query } from 'src/generated/graphql'
+import { galaxyTypesToPositions } from '../galaxyConstants'
 
 interface Props {
-    data: ObjectPerType[]
     dimensions: Dimensions
+    data: ZoomLevel1Query
 }
 
 export interface InstancesPerClass {
@@ -65,13 +67,15 @@ function useQuery<T, Q extends () => ReturnType<Q>>(keys: T, query: Q) {
     }
 }
 
-export const GALAXY_BASE = 800
-const Galaxy: React.FC<Props> = ({ data = [], dimensions }) => {
-    const { isLoading, data: stories } = useQuery(['instances-per-class'], () => fetchInstancesPerClass())
 
+
+
+export const GALAXY_BASE = 800
+const Galaxy: React.FC<Props> = ({dimensions, data}) => {
+    const { isLoading, data: stories } = useQuery(['instances-per-class'], () => fetchInstancesPerClass())
     // TODO: remove when connected to the gateway
     const objectsPerTypeWithIds = useMemo(
-        () => data.map(item => ({ ...item, name: item.class.substring(item.class.lastIndexOf('/') + 1) })),
+        () => data?.zoomLevel1?.map(item => ({ ...item, ...galaxyTypesToPositions[item?.id], numberOfInstances: item.count, class: item.id })) as ObjectPerTypeWithName[],
         [data]
     )
     const { t } = useTypeSafeTranslation('homepage')
@@ -127,7 +131,7 @@ const Galaxy: React.FC<Props> = ({ data = [], dimensions }) => {
                         <GalaxyShadowBackground dimensions={dimensions} />
 
                         <g className="circles">
-                            {objectsPerTypeWithIds.map((item, index, array) => {
+                            {objectsPerTypeWithIds?.map((item, index, array) => {
                                 return (
                                     <Circle
                                         defaultBackground="levels.z0.galaxyCloud"

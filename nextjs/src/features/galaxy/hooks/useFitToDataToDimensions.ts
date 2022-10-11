@@ -1,4 +1,4 @@
-import { Dimensions } from '@/features/GalaxyInterface/types/galaxy'
+import { Dimensions } from '@/features/galaxy/types/galaxy'
 import { randomNumberBetweenPoints } from '@/features/shared/utils/numbers'
 import { useEffect, useRef, useState } from 'react'
 

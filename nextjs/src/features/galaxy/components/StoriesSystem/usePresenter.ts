@@ -3,6 +3,7 @@
 import * as d3 from 'd3'
 import earcut from 'earcut'
 import { useEffect, useMemo, useRef } from 'react'
+import { useZoomLevel1Query } from 'src/generated/graphql'
 import { calcRandomTrianglePoint, selectRandomTriangle } from '../../utils/polygons'
 
 export interface InstancesPerClass {
@@ -67,10 +68,13 @@ interface DataPoint {
 export function usePresenter(stories: InstancesPerClass[]) {
     const { triangles, dataPoints } = useTriangles(stories)
     const { svgRef } = useDrawPathByDataPoints(dataPoints)
+    const { data, loading } = useZoomLevel1Query()
     return {
         svgRef,
         triangles,
         dataPoints,
+        items: data?.zoomLevel1 ?? [],
+        loading
     }
 }
 

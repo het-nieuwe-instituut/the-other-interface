@@ -12,13 +12,13 @@ export function useFitDataToDimensions(base: number, data: ObjectPerTypeWithName
         const gridItemSpace = 12
         const totalSpaceGrid = totalSpace / (gridItemSpace * gridItemSpace)
 
-        const totalObjects = data.reduce((total, item) => total + parseInt(item.numberOfInstances), 0)
+        const totalObjects = data?.reduce((total, item) => total + item.numberOfInstances, 0)
         const totalOccupiedGridItems = totalSpaceGrid / totalObjects
 
-        return data.map(item => {
+        return data?.map(item => {
             return {
                 name: item.name,
-                takeSpace: totalOccupiedGridItems * parseInt(item.numberOfInstances),
+                takeSpace: totalOccupiedGridItems * item.numberOfInstances,
             }
         })
     }, [base, data])

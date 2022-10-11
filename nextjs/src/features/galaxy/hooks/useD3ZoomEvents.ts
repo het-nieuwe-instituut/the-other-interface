@@ -1,8 +1,8 @@
-import { Dimensions, ZoomLevel } from '@/features/GalaxyInterface/types/galaxy'
+import { Dimensions, ZoomLevel } from '@/features/galaxy/types/galaxy'
 import * as d3 from 'd3'
 import { useRouter } from 'next/router'
 import { MutableRefObject, useRef, useState, useCallback, useEffect } from 'react'
-import { getStoriesSystemDimensions } from '../Galaxy'
+import { getStoriesSystemDimensions } from '../Galaxy/Galaxy'
 
 export function useD3ZoomEvents(svgRef: MutableRefObject<SVGSVGElement | null>, dimensions: Dimensions) {
     const storiesSystemRef = useRef<SVGForeignObjectElement | null>(null)

@@ -1,4 +1,4 @@
-import { Dimensions } from '@/features/GalaxyInterface/types/galaxy'
+import { Dimensions } from '@/features/galaxy/types/galaxy'
 import { useInitializeD3Simulation } from '@/features/shared/hooks/useInitializeD3Simulation'
 import * as d3 from 'd3'
 import { BaseType, SimulationNodeDatum } from 'd3'
@@ -16,7 +16,7 @@ interface DataDimensions {
 }
 export interface ObjectPerType {
     class: string
-    numberOfInstances: string
+    numberOfInstances: number
     xFromCenter: number
     yFromCenter: number
 }
@@ -48,8 +48,9 @@ function useListenToSimulationTicks(
     const nodesListener = useRef<d3.Simulation<D3CollectionItem, undefined> | undefined | null>(null)
 
     useEffect(() => {
+        if (!data) return
         const d3Svg = d3.select(svgRef.current)
-        const nodeForeign = d3Svg.selectAll(`.foreign-${selector}`).data(data)
+        const nodeForeign = d3Svg.selectAll(`.foreign-${selector}`)?.data(data)
 
         simulation.current
             ?.force('charge', d3.forceManyBody().strength(0.1))

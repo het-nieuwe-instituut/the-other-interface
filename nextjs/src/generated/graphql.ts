@@ -93,6 +93,39 @@ export const mockZoom3Query = (resolver: ResponseResolver<GraphQLRequest<Zoom3Qu
     resolver
   )
 
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockZoomLevel1Query((req, res, ctx) => {
+ *   return res(
+ *     ctx.data({ zoomLevel1 })
+ *   )
+ * })
+ */
+export const mockZoomLevel1Query = (resolver: ResponseResolver<GraphQLRequest<ZoomLevel1QueryVariables>, GraphQLContext<ZoomLevel1Query>, any>) =>
+  graphql.query<ZoomLevel1Query, ZoomLevel1QueryVariables>(
+    'zoomLevel1',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockZoomLevel2Query((req, res, ctx) => {
+ *   const { entityName } = req.variables;
+ *   return res(
+ *     ctx.data({ zoomLevel2 })
+ *   )
+ * })
+ */
+export const mockZoomLevel2Query = (resolver: ResponseResolver<GraphQLRequest<ZoomLevel2QueryVariables>, GraphQLContext<ZoomLevel2Query>, any>) =>
+  graphql.query<ZoomLevel2Query, ZoomLevel2QueryVariables>(
+    'zoomLevel2',
+    resolver
+  )
+
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -103,12 +136,15 @@ export type Scalars = {
   Date: any;
 };
 
+export type ArchiveZoomLevel5UnionType = ArchivesFondsZoomLevel5DetailType | ArchivesOtherZoomLevel5DetailType;
+
 export type ArchivesFondsZoomLevel5DetailType = {
   __typename?: 'ArchivesFondsZoomLevel5DetailType';
   dateLabel?: Maybe<Scalars['String']>;
   dimensionFree?: Maybe<Scalars['String']>;
   endDate?: Maybe<Scalars['String']>;
   existenceOfOriginals?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
   mediaReference?: Maybe<Scalars['String']>;
   mediaReferenceLabel?: Maybe<Scalars['String']>;
   objectNumber?: Maybe<Scalars['String']>;
@@ -119,6 +155,7 @@ export type ArchivesFondsZoomLevel5DetailType = {
   scopeContent?: Maybe<Scalars['String']>;
   startDate?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
+  type: ArchivesZoomLevel5Types;
 };
 
 export type ArchivesOtherZoomLevel5DetailType = {
@@ -133,6 +170,7 @@ export type ArchivesOtherZoomLevel5DetailType = {
   descriptionLevel?: Maybe<Scalars['String']>;
   endDate?: Maybe<Scalars['String']>;
   extent?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
   objectNumber?: Maybe<Scalars['String']>;
   partReference?: Maybe<Scalars['String']>;
   partTitle?: Maybe<Scalars['String']>;
@@ -147,6 +185,7 @@ export type ArchivesOtherZoomLevel5DetailType = {
   source?: Maybe<Scalars['String']>;
   startDate?: Maybe<Scalars['String']>;
   systemOfArrangement?: Maybe<Scalars['String']>;
+  type: ArchivesZoomLevel5Types;
 };
 
 export type ArchivesZoomLevel4FiltersArgs = {
@@ -155,6 +194,11 @@ export type ArchivesZoomLevel4FiltersArgs = {
   RelatedName?: InputMaybe<Scalars['String']>;
   StartDate?: InputMaybe<Scalars['String']>;
 };
+
+export enum ArchivesZoomLevel5Types {
+  Fonds = 'fonds',
+  Other = 'other'
+}
 
 export type Author = {
   __typename?: 'Author';
@@ -235,8 +279,8 @@ export type ComponentCoreCarouselItem = {
   id: Scalars['ID'];
   name?: Maybe<Scalars['String']>;
   picture?: Maybe<UploadFileEntityResponse>;
+  triply_record?: Maybe<TriplyRecordEntityResponse>;
   type?: Maybe<EnumComponentcorecarouselitemType>;
-  uri_id?: Maybe<Scalars['String']>;
 };
 
 export type ComponentCoreModuleLayouts = {
@@ -824,6 +868,8 @@ export type PoepleZoomLevel5DetailType = {
   startDate?: Maybe<Scalars['String']>;
 };
 
+export type PublicationZoomLevel5UnionType = PublicationsArticleZoomLevel5DetailType | PublicationsAudioVisualZoomLevel5DetailType | PublicationsBookZoomLevel5DetailType | PublicationsSerialZoomLevel5DetailType;
+
 export type PublicationsArticleZoomLevel5DetailType = {
   __typename?: 'PublicationsArticleZoomLevel5DetailType';
   abstract?: Maybe<Scalars['String']>;
@@ -834,6 +880,7 @@ export type PublicationsArticleZoomLevel5DetailType = {
   availability?: Maybe<Scalars['String']>;
   geographicalKeyword?: Maybe<Scalars['String']>;
   geographicalKeywordLabel?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
   issue?: Maybe<Scalars['String']>;
   language?: Maybe<Scalars['String']>;
   languageLabel?: Maybe<Scalars['String']>;
@@ -850,6 +897,7 @@ export type PublicationsArticleZoomLevel5DetailType = {
   subject?: Maybe<Scalars['String']>;
   subjectLabel?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
+  type: PublicationsZoomLevel5Types;
   typeOfPublication?: Maybe<Scalars['String']>;
   typeOfPublicationLabel?: Maybe<Scalars['String']>;
   volume?: Maybe<Scalars['String']>;
@@ -867,6 +915,7 @@ export type PublicationsAudioVisualZoomLevel5DetailType = {
   availability?: Maybe<Scalars['String']>;
   geographicalKeyword?: Maybe<Scalars['String']>;
   geographicalKeywordLabel?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
   language?: Maybe<Scalars['String']>;
   languageLabel?: Maybe<Scalars['String']>;
   medium?: Maybe<Scalars['String']>;
@@ -883,6 +932,7 @@ export type PublicationsAudioVisualZoomLevel5DetailType = {
   subject?: Maybe<Scalars['String']>;
   subjectLabel?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
+  type: PublicationsZoomLevel5Types;
   typeOfPublication?: Maybe<Scalars['String']>;
   typeOfPublicationLabel?: Maybe<Scalars['String']>;
   yearOfPublication?: Maybe<Scalars['String']>;
@@ -902,6 +952,7 @@ export type PublicationsBookZoomLevel5DetailType = {
   edition?: Maybe<Scalars['String']>;
   geographicalKeyword?: Maybe<Scalars['String']>;
   geographicalKeywordLabel?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
   illustration?: Maybe<Scalars['String']>;
   isbn?: Maybe<Scalars['String']>;
   language?: Maybe<Scalars['String']>;
@@ -921,6 +972,7 @@ export type PublicationsBookZoomLevel5DetailType = {
   subject?: Maybe<Scalars['String']>;
   subjectLabel?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
+  type: PublicationsZoomLevel5Types;
   typeOfPublication?: Maybe<Scalars['String']>;
   typeOfPublicationLabel?: Maybe<Scalars['String']>;
   yearOfPublication?: Maybe<Scalars['String']>;
@@ -932,6 +984,7 @@ export type PublicationsSerialZoomLevel5DetailType = {
   continuedAs?: Maybe<Scalars['String']>;
   continuedFrom?: Maybe<Scalars['String']>;
   holding?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
   language?: Maybe<Scalars['String']>;
   languageLabel?: Maybe<Scalars['String']>;
   permanentLink?: Maybe<Scalars['String']>;
@@ -944,6 +997,7 @@ export type PublicationsSerialZoomLevel5DetailType = {
   subject?: Maybe<Scalars['String']>;
   subjectLabel?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
+  type: PublicationsZoomLevel5Types;
   typeOfPublication?: Maybe<Scalars['String']>;
   typeOfPublicationLabel?: Maybe<Scalars['String']>;
   yearOfPublication?: Maybe<Scalars['String']>;
@@ -957,8 +1011,16 @@ export type PublicationsZoomLevel4FiltersArgs = {
   TypeOfPublication?: InputMaybe<Scalars['String']>;
 };
 
+export enum PublicationsZoomLevel5Types {
+  Article = 'article',
+  Audiovisual = 'audiovisual',
+  Book = 'book',
+  Serial = 'serial'
+}
+
 export type Query = {
   __typename?: 'Query';
+  allRelations?: Maybe<Array<ZoomLevel5RelatedRecordType>>;
   author: AuthorEntityResponse;
   authors: AuthorEntityResponseCollection;
   homepage: HomepageEntityResponse;
@@ -989,6 +1051,13 @@ export type Query = {
   zoomLevel5PublicationsAudiovisual?: Maybe<PublicationsAudioVisualZoomLevel5DetailType>;
   zoomLevel5PublicationsBook?: Maybe<PublicationsBookZoomLevel5DetailType>;
   zoomLevel5PublicationsSerial?: Maybe<PublicationsSerialZoomLevel5DetailType>;
+};
+
+
+export type QueryAllRelationsArgs = {
+  id: Scalars['String'];
+  relatedObjectsType: EntityNames;
+  type: EntityNames;
 };
 
 
@@ -1193,7 +1262,6 @@ export type ResponseCollectionMeta = {
 
 export type Story = {
   __typename?: 'Story';
-  archives?: Maybe<Array<Maybe<StoryArchivesUnionType>>>;
   author?: Maybe<AuthorEntityResponse>;
   components?: Maybe<Array<StoryComponentsDynamicZone>>;
   createdAt?: Maybe<Scalars['Date']>;
@@ -1201,10 +1269,7 @@ export type Story = {
   locale?: Maybe<Scalars['String']>;
   localizations?: Maybe<StoryRelationResponseCollection>;
   locations?: Maybe<LocationRelationResponseCollection>;
-  objects?: Maybe<Array<Maybe<ObjectsZoomLevel5DetailType>>>;
-  people?: Maybe<Array<Maybe<PoepleZoomLevel5DetailType>>>;
   publicationDate?: Maybe<ComponentCorePublicationDate>;
-  publications?: Maybe<Array<Maybe<StoryPublicationsUnionType>>>;
   publishedAt?: Maybe<Scalars['Date']>;
   shortDescription?: Maybe<Scalars['String']>;
   slug?: Maybe<Scalars['String']>;
@@ -1213,8 +1278,6 @@ export type Story = {
   triplyRecords?: Maybe<TriplyRecordRelationResponseCollection>;
   updatedAt?: Maybe<Scalars['Date']>;
 };
-
-export type StoryArchivesUnionType = ArchivesFondsZoomLevel5DetailType | ArchivesOtherZoomLevel5DetailType;
 
 export type StoryComponentsDynamicZone = ComponentModulesButtonsModule | ComponentModulesCarousel | ComponentModulesImage | ComponentModulesImageCarousel | ComponentModulesPullquote | ComponentModulesSubtitle | ComponentModulesTableModule | ComponentModulesTextModule | ComponentModulesTitleModule | Error;
 
@@ -1258,8 +1321,6 @@ export type StoryFiltersInput = {
   triplyRecords?: InputMaybe<TriplyRecordFiltersInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
 };
-
-export type StoryPublicationsUnionType = PublicationsArticleZoomLevel5DetailType | PublicationsAudioVisualZoomLevel5DetailType | PublicationsBookZoomLevel5DetailType | PublicationsSerialZoomLevel5DetailType;
 
 export type StoryRelationResponseCollection = {
   __typename?: 'StoryRelationResponseCollection';
@@ -1334,12 +1395,16 @@ export type TableFiltersInput = {
 
 export type TriplyRecord = {
   __typename?: 'TriplyRecord';
+  archive?: Maybe<ArchiveZoomLevel5UnionType>;
   createdAt?: Maybe<Scalars['Date']>;
+  object?: Maybe<ObjectsZoomLevel5DetailType>;
+  people?: Maybe<PoepleZoomLevel5DetailType>;
+  publication?: Maybe<PublicationZoomLevel5UnionType>;
   publishedAt?: Maybe<Scalars['Date']>;
   recordId: Scalars['String'];
   stories?: Maybe<StoryRelationResponseCollection>;
   type: Scalars['String'];
-  updatedAt?: Maybe<Scalars['Date']>;
+  updatedAt?: Maybe<Scalars['String']>;
 };
 
 export type TriplyRecordEntity = {
@@ -1564,6 +1629,35 @@ export type ZoomLevel4Type = {
   title?: Maybe<Scalars['String']>;
 };
 
+export type ZoomLevel5RelatedArchiveType = {
+  __typename?: 'ZoomLevel5RelatedArchiveType';
+  id: Scalars['String'];
+  type: EntityNames;
+};
+
+export type ZoomLevel5RelatedObjectType = {
+  __typename?: 'ZoomLevel5RelatedObjectType';
+  id: Scalars['String'];
+  type: EntityNames;
+};
+
+export type ZoomLevel5RelatedPeopleType = {
+  __typename?: 'ZoomLevel5RelatedPeopleType';
+  birthDate?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  profession?: Maybe<Scalars['String']>;
+  type: EntityNames;
+};
+
+export type ZoomLevel5RelatedPublicationType = {
+  __typename?: 'ZoomLevel5RelatedPublicationType';
+  id: Scalars['String'];
+  type: EntityNames;
+};
+
+export type ZoomLevel5RelatedRecordType = ZoomLevel5RelatedArchiveType | ZoomLevel5RelatedObjectType | ZoomLevel5RelatedPeopleType | ZoomLevel5RelatedPublicationType;
+
 export type ZoomLevel5RelationsType = {
   __typename?: 'ZoomLevel5RelationsType';
   randomRelations?: Maybe<Array<RelatedRecordType>>;
@@ -1630,6 +1724,18 @@ export type Zoom3QueryVariables = Exact<{
 
 
 export type Zoom3Query = { __typename?: 'Query', zoomLevel3: Array<{ __typename?: 'ZoomLevel3Type', uri?: string | null, name?: string | null, count?: number | null, total?: number | null }> };
+
+export type ZoomLevel1QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ZoomLevel1Query = { __typename?: 'Query', zoomLevel1: Array<{ __typename?: 'ZoomLevel1Type', name: string, count: number, id: EntityNames }> };
+
+export type ZoomLevel2QueryVariables = Exact<{
+  entityName: EntityNames;
+}>;
+
+
+export type ZoomLevel2Query = { __typename?: 'Query', zoomLevel2: Array<{ __typename?: 'ZoomLevel2Type', filter: string, id: string }> };
 
 export const ComponentCoreModuleLayoutsFragmentDoc = gql`
     fragment componentCoreModuleLayouts on ComponentCoreModuleLayouts {
@@ -2184,3 +2290,75 @@ export function useZoom3LazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Zoom
 export type Zoom3QueryHookResult = ReturnType<typeof useZoom3Query>;
 export type Zoom3LazyQueryHookResult = ReturnType<typeof useZoom3LazyQuery>;
 export type Zoom3QueryResult = Apollo.QueryResult<Zoom3Query, Zoom3QueryVariables>;
+export const ZoomLevel1Document = gql`
+    query zoomLevel1 {
+  zoomLevel1 {
+    name
+    count
+    id
+  }
+}
+    `;
+
+/**
+ * __useZoomLevel1Query__
+ *
+ * To run a query within a React component, call `useZoomLevel1Query` and pass it any options that fit your needs.
+ * When your component renders, `useZoomLevel1Query` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useZoomLevel1Query({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useZoomLevel1Query(baseOptions?: Apollo.QueryHookOptions<ZoomLevel1Query, ZoomLevel1QueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ZoomLevel1Query, ZoomLevel1QueryVariables>(ZoomLevel1Document, options);
+      }
+export function useZoomLevel1LazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ZoomLevel1Query, ZoomLevel1QueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ZoomLevel1Query, ZoomLevel1QueryVariables>(ZoomLevel1Document, options);
+        }
+export type ZoomLevel1QueryHookResult = ReturnType<typeof useZoomLevel1Query>;
+export type ZoomLevel1LazyQueryHookResult = ReturnType<typeof useZoomLevel1LazyQuery>;
+export type ZoomLevel1QueryResult = Apollo.QueryResult<ZoomLevel1Query, ZoomLevel1QueryVariables>;
+export const ZoomLevel2Document = gql`
+    query zoomLevel2($entityName: EntityNames!) {
+  zoomLevel2(entityName: $entityName) {
+    filter
+    id
+  }
+}
+    `;
+
+/**
+ * __useZoomLevel2Query__
+ *
+ * To run a query within a React component, call `useZoomLevel2Query` and pass it any options that fit your needs.
+ * When your component renders, `useZoomLevel2Query` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useZoomLevel2Query({
+ *   variables: {
+ *      entityName: // value for 'entityName'
+ *   },
+ * });
+ */
+export function useZoomLevel2Query(baseOptions: Apollo.QueryHookOptions<ZoomLevel2Query, ZoomLevel2QueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ZoomLevel2Query, ZoomLevel2QueryVariables>(ZoomLevel2Document, options);
+      }
+export function useZoomLevel2LazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ZoomLevel2Query, ZoomLevel2QueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ZoomLevel2Query, ZoomLevel2QueryVariables>(ZoomLevel2Document, options);
+        }
+export type ZoomLevel2QueryHookResult = ReturnType<typeof useZoomLevel2Query>;
+export type ZoomLevel2LazyQueryHookResult = ReturnType<typeof useZoomLevel2LazyQuery>;
+export type ZoomLevel2QueryResult = Apollo.QueryResult<ZoomLevel2Query, ZoomLevel2QueryVariables>;

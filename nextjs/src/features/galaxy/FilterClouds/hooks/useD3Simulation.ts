@@ -1,4 +1,4 @@
-import { Dimensions } from '@/features/GalaxyInterface/types/galaxy'
+import { Dimensions } from '@/features/galaxy/types/galaxy'
 import { useInitializeD3Simulation } from '@/features/shared/hooks/useInitializeD3Simulation'
 import * as d3 from 'd3'
 import { SimulationNodeDatum } from 'd3'

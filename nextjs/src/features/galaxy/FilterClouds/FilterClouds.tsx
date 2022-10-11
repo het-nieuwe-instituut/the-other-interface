@@ -1,4 +1,4 @@
-import { Circle } from '@/features/GalaxyInterface/components/Circle'
+import { Circle } from '@/features/galaxy/components/Circle'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Box, Text } from '@chakra-ui/react'
 import { useId, useMemo } from 'react'
