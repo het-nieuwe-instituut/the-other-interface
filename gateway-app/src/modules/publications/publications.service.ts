@@ -251,7 +251,11 @@ export class PublicationsService {
             },
             searchParams
         )
-        const countResult = await this.triplyService.getCountData(this.ZoomLevel4CountEndpoint, searchParams)
+        const countResult = await this.triplyService.queryTriplyData<{ count?: number }>(
+            this.ZoomLevel4CountEndpoint,
+            undefined,
+            searchParams
+        )
         const total = countResult.data.pop()?.count || 0
 
         return {
