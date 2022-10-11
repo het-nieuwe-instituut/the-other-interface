@@ -1,4 +1,4 @@
-import { FilterType, PossibleFilters } from '@/features/filters/FilterClouds/types'
+import { FilterType, PossibleFilters } from '@/features/galaxy/FilterClouds/types'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
@@ -10,7 +10,7 @@ import { useRef } from 'react'
 import { LandingpageComponentsDynamicZone, useLandingpageBySlugQuery } from 'src/generated/graphql'
 import { LandingPageQueryParams } from 'src/pages/landingpage/[slug]'
 
-const DynamicFilterCloudsNoSsr = dynamic(() => import('../../../filters/FilterClouds/FilterClouds'), {
+const DynamicFilterCloudsNoSsr = dynamic(() => import('../../../galaxy/FilterClouds/FilterClouds'), {
     ssr: false,
 })
 
