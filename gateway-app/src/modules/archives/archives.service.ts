@@ -146,9 +146,9 @@ export class ArchivesService {
             return []
         }
 
-        const searchParams = []
+        const searchParams: Record<string, string> = {}
         for (const [filterName, filterValue] of Object.entries(filters)) {
-            searchParams.push({ key: filterName, value: filterValue })
+            searchParams[`${filterName}`] = filterValue
         }
 
         const result = await this.triplyService.queryTriplyData<ArchivesZoomLevel4Data>(
@@ -185,12 +185,7 @@ export class ArchivesService {
         const result = await this.triplyService.queryTriplyData<ArchivesZoomLeve5DataType>(
             this.ZoomLevel5Endpoint[type],
             undefined,
-            [
-                {
-                    key: 'record',
-                    value: uri,
-                },
-            ]
+            { record: uri }
         )
 
         return TriplyUtils.combineObjectArray(result.data)

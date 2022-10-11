@@ -157,10 +157,7 @@ export class ObjectsService {
             return []
         }
 
-        const searchParams = []
-        for (const [filterName, filterValue] of Object.entries(filters)) {
-            searchParams.push({ key: filterName, value: filterValue })
-        }
+        const searchParams = TriplyUtils.getQueryParamsFromObject(filters)
 
         const result = await this.triplyService.queryTriplyData<ObjectsZoomLevel4Data>(
             this.ZoomLevel4Endpoint,
@@ -195,12 +192,7 @@ export class ObjectsService {
         const result = await this.triplyService.queryTriplyData<ObjectsDetailZoomLevel5Data>(
             this.ZoomLevel5Endpoint,
             undefined,
-            [
-                {
-                    key: 'record',
-                    value: uri,
-                },
-            ]
+            { record: uri }
         )
 
         return TriplyUtils.combineObjectArray(result.data)
