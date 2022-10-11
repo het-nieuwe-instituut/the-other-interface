@@ -2,7 +2,6 @@ import { Circle } from '@/features/GalaxyInterface/components/Circle'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Box, Text } from '@chakra-ui/react'
 import { useId, useMemo } from 'react'
-import { ZoomLevel } from './hooks/useD3ZoomEvents'
 import { FilterType } from './types'
 import { usePresenter } from './usePresenter'
 
@@ -28,7 +27,7 @@ const FilterClouds: React.FunctionComponent<Props> = ({ dimensions, data, type }
     const svgHeight = height
     const objectsPerTypeWithIds = useMemo(() => data.map(item => ({ ...item, name: item.filter })), [data])
     const id = useId().replaceAll(':', '')
-    const { svgRef, zoomLevel } = usePresenter(dimensions, objectsPerTypeWithIds, id)
+    const { svgRef, zoomed } = usePresenter(dimensions, objectsPerTypeWithIds, id)
     const { t } = useTypeSafeTranslation('landingpage')
 
     return (
@@ -57,7 +56,7 @@ const FilterClouds: React.FunctionComponent<Props> = ({ dimensions, data, type }
                                 alignItems="center"
                                 justifyContent="center"
                             >
-                                {zoomLevel === ZoomLevel.ZoomedToClouds && (
+                                {!zoomed && (
                                     <Box>
                                         <Text width="12.5rem" textStyle={'cloudText'}>
                                             {t('people')}
