@@ -19,12 +19,11 @@ export class TriplyService {
     private defaultPageSize = '16'
 
     public async queryTriplyData<ReturnDataType>(
-        endpointSuffix: string,
+        endpointArg: string,
         paginationArgs?: PaginationArgs,
         searchParams?: Record<string, string>
     ) {
-        endpointSuffix = endpointSuffix.startsWith('/') ? endpointSuffix : `/${endpointSuffix}`
-        const endpoint = new URL(`${this.endpointBaseURL}${this.baseQueryPath}${endpointSuffix}`)
+        const endpoint = this.getEndpointForArg(endpointArg)
 
         if (paginationArgs) {
             endpoint.searchParams.append(
@@ -46,22 +45,19 @@ export class TriplyService {
         return this.fetch<ReturnDataType>(endpoint)
     }
 
-    // TODO: change to convention when Triply adds the endpoint to normal space
-    public async getCountData(rawUrl: string, searchParams?: Record<string, string>) {
-        const endpoint = new URL(rawUrl)
-
-        if (searchParams && searchParams.length) {
-            for (const [key, value] of Object.entries(searchParams)) {
-                endpoint.searchParams.append(key, value)
-            }
-        }
-
-        return this.fetch<{ count: number }>(endpoint)
-    }
-
     private fetch<ReturnDataType>(endpoint: URL) {
         const headers = { Authorization: `Bearer ${this.apiKey}` }
         const res = this.httpService.get<ReturnDataType[]>(endpoint.toString(), { headers })
         return lastValueFrom(res)
+    }
+
+    private getEndpointForArg(endpointArg: string) {
+        if (endpointArg.startsWith('https://')) {
+            return new URL(endpointArg)
+        }
+
+        const endpointSuffix = endpointArg.startsWith('/') ? endpointArg : `/${endpointArg}`
+
+        return new URL(`${this.endpointBaseURL}${this.baseQueryPath}${endpointSuffix}`)
     }
 }
