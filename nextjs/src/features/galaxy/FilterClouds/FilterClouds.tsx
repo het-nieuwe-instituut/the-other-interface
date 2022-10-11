@@ -25,7 +25,7 @@ const FilterClouds: React.FunctionComponent<Props> = ({ dimensions, data, type }
     const { width, height } = dimensions
     const svgWidth = width
     const svgHeight = height
-    const objectsPerTypeWithIds = useMemo(() => data.map(item => ({ ...item, name: item.filter })), [data])
+    const objectsPerTypeWithIds = useMemo(() => data.map(item => ({ ...item, name: item.name })), [data])
     const id = useId().replaceAll(':', '')
     const { svgRef, zoomed } = usePresenter(dimensions, objectsPerTypeWithIds, id)
     const { t } = useTypeSafeTranslation('landingpage')
@@ -43,8 +43,8 @@ const FilterClouds: React.FunctionComponent<Props> = ({ dimensions, data, type }
                         <Circle
                             key={`${index}-${array.length}`}
                             className={id}
-                            defaultBackground={`levels.z2.${type}Filters.${item.filter}`}
-                            hoverBackground={`levels.z2.${type}Filters.${item.filter}`}
+                            defaultBackground={`levels.z2.${type}Filters.${item.name}`}
+                            hoverBackground={`levels.z2.${type}Filters.${item.name}`}
                         >
                             <Box
                                 as="button"

@@ -1,5 +1,5 @@
 export interface FilterType {
-    filter: PossibleFilters
+    name: PossibleFilters
     numberOfInstances: number
 }
 

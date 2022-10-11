@@ -3,9 +3,8 @@ import { useInitializeD3Simulation } from '@/features/shared/hooks/useInitialize
 import * as d3 from 'd3'
 import { SimulationNodeDatum } from 'd3'
 import { MutableRefObject, useEffect, useRef } from 'react'
+import { DataDimension } from '../../hooks/useFitToDataToDimensions'
 import { FilterType } from '../types'
-
-import { DataDimensions } from './useFitDataToDimensions'
 
 export interface D3CollectionItem extends SimulationNodeDatum, FilterType {}
 
@@ -13,7 +12,7 @@ export function useD3Simulation(
     dimensions: Dimensions,
     data: FilterType[],
     selector: string,
-    dataDimensions: DataDimensions[]
+    dataDimensions: DataDimension[]
 ) {
     const { simulation } = useInitializeD3Simulation<D3CollectionItem>([dimensions])
     const svgRef = useRef<SVGSVGElement | null>(null)
@@ -31,7 +30,7 @@ function useListenToSimulationTicks(
     svgRef: MutableRefObject<SVGSVGElement | null>,
     data: FilterType[],
     selector: string,
-    dataDimensions: DataDimensions[]
+    dataDimensions: DataDimension[]
 ) {
     const nodesListener = useRef<d3.Simulation<D3CollectionItem, undefined> | undefined | null>(null)
 
@@ -62,11 +61,11 @@ function useListenToSimulationTicks(
     }, [data, dataDimensions, selector, svgRef, simulation, dimensions])
 }
 
-function getDataDimension(dataDimensions: DataDimensions[], d: Partial<D3CollectionItem>) {
-    return dataDimensions?.find(item => item.name === d.filter)
+function getDataDimension(dataDimensions: DataDimension[], d: Partial<D3CollectionItem>) {
+    return dataDimensions?.find(item => item.name === d.name)
 }
 
-function getTakeSpaceFromDataDimensions(dataDimensions: DataDimensions[], d: Partial<D3CollectionItem>) {
+function getTakeSpaceFromDataDimensions(dataDimensions: DataDimension[], d: Partial<D3CollectionItem>) {
     const val = getDataDimension(dataDimensions, d)
 
     if (!val) {
@@ -77,7 +76,7 @@ function getTakeSpaceFromDataDimensions(dataDimensions: DataDimensions[], d: Par
 }
 
 function ticked(
-    dataDimensions: DataDimensions[],
+    dataDimensions: DataDimension[],
     simulation: MutableRefObject<d3.Simulation<D3CollectionItem, undefined> | null>,
     nodeForeign: d3.Selection<d3.BaseType, D3CollectionItem, d3.BaseType, unknown>,
     dimensions: Dimensions
@@ -121,7 +120,7 @@ function ticked(
     }
 }
 
-function getDiameter(dataDimensions: DataDimensions[], d: d3.SimulationNodeDatum) {
+function getDiameter(dataDimensions: DataDimension[], d: d3.SimulationNodeDatum) {
     const dataDimension = getDataDimension(dataDimensions, d)
     return getTakeSpaceFromDataDimensions(dataDimensions, d) * (dataDimension?.randomMultiplier ?? 0)
 }

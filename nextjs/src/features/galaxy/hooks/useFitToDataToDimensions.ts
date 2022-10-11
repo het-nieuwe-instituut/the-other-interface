@@ -1,17 +1,22 @@
 import { Dimensions } from '@/features/GalaxyInterface/types/galaxy'
 import { randomNumberBetweenPoints } from '@/features/shared/utils/numbers'
 import { useEffect, useRef, useState } from 'react'
-import { FilterType, PossibleFilters } from '../types'
 
-export interface DataDimensions {
-    name: PossibleFilters
+export interface BaseData {
+    name: string
+    numberOfInstances: number
+}
+
+export interface DataDimension {
+    name: string
     takeSpace: number
     randomMultiplier: number
 }
 
-export function useFitDataToDimensions(dimensions: Dimensions, data: FilterType[]) {
-    const [dataDimensions, setDataDimensions] = useState<DataDimensions[]>([])
-    const prevDataDimensions = useRef<DataDimensions[]>([])
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function useFitDataToDimensions<_, TData extends BaseData>(dimensions: Dimensions, data: TData[]) {
+    const [dataDimensions, setDataDimensions] = useState<DataDimension[]>([])
+    const prevDataDimensions = useRef<DataDimension[]>([])
 
     useEffect(() => {
         const height = dimensions.height ?? 0
@@ -25,11 +30,12 @@ export function useFitDataToDimensions(dimensions: Dimensions, data: FilterType[
         const totalObjects = data.reduce((total, item) => total + item.numberOfInstances, 0)
         const totalOccupiedGridItems = totalSpaceGrid / totalObjects
         const newData = data.map(item => {
-            const dataDimension = prevDataDimensions.current.find(dataDimension => dataDimension.name === item.filter)
+            const dataDimension = prevDataDimensions.current.find(dataDimension => dataDimension.name === item.name)
+            const takeSpace = totalOccupiedGridItems * item.numberOfInstances
             return {
-                name: item.filter,
-                takeSpace: totalOccupiedGridItems * item.numberOfInstances,
-                randomMultiplier: dataDimension?.randomMultiplier ?? randomNumberBetweenPoints(0.99, 1.01),
+                name: item.name,
+                takeSpace: takeSpace < 300 ? 300 : takeSpace,
+                randomMultiplier: dataDimension?.randomMultiplier ?? randomNumberBetweenPoints(0.8, 0.99),
             }
         })
         prevDataDimensions.current = newData
