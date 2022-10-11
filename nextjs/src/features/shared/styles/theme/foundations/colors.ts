@@ -54,22 +54,22 @@ const colors = {
             },
         },
         z2: {
-            archiveFilters: {
+            archivesFilters: {
                 byName: 'radial-gradient(50% 50% at 50% 50%, #A5D4FF 0%, rgba(165, 212, 255, 0) 100%)',
                 byDate: 'radial-gradient(50% 50% at 50% 50%, #5772FF 0%, rgba(87, 114, 255, 0) 100%)',
                 byDesLevel: 'radial-gradient(50% 50% at 50% 50%, #5FD8FF 0%, rgba(95, 216, 255, 0) 100%)',
             },
-            objectFilters: {
+            objectsFilters: {
                 byPerson: 'radial-gradient(50% 50% at 50% 50%, #79A779 0%, rgba(121, 167, 121, 0) 100%)',
                 byProject: 'radial-gradient(50% 50% at 50% 50%, #00C170 0%, rgba(0, 193, 112, 0) 100%)',
-                bySubject: 'adial-gradient(50% 50% at 50% 50%, #7DCD8A 0%, rgba(125, 205, 138, 0) 100%)',
+                bySubject: 'radial-gradient(50% 50% at 50% 50%, #7DCD8A 0%, rgba(125, 205, 138, 0) 100%)',
                 byMaker: 'radial-gradient(50% 50% at 50% 50%, #D2FFB7 0%, rgba(210, 255, 183, 0) 100%)',
                 byType: 'radial-gradient(50% 50% at 50% 50%, #6B8552 0%, rgba(110, 133, 82, 0) 100%)',
                 byDate: 'radial-gradient(50% 50% at 50% 50%, #CFFF8B 0%, rgba(211, 255, 139, 0) 100%)',
                 //TODO ask if it's not mistake in color names
                 by: 'radial-gradient(50% 50% at 50% 50%, #008A2E 0%, rgba(0, 138, 39, 0) 100%)',
             },
-            personFilters: {
+            peopleFilters: {
                 byType: 'radial-gradient(50% 50% at 50% 50%, #F25562 0%, rgba(242, 85, 111, 0) 100%, rgba(242, 85, 98, 0) 100%)',
                 byDate: 'radial-gradient(50% 50% at 50% 50%, #F0B3D2 0%, rgba(240, 179, 210, 0) 100%)',
                 byPlace: ' radial-gradient(50% 50% at 50% 50%, #FF95ED 0%, rgba(255, 149, 238, 0) 100%)',
@@ -78,7 +78,7 @@ const colors = {
                     'radial-gradient(50% 50% at 50% 50%, #FFA5C3 0%, rgba(255, 165, 165, 0) 100%, rgba(255, 165, 195, 0) 100%)',
                 byDeathDate: 'radial-gradient(50% 50% at 50% 50%, #FF4EC4 0%, rgba(255, 78, 196, 0) 100%)',
             },
-            publicationsFilter: {
+            publicationsFilters: {
                 byAuthor: 'radial-gradient(50% 50% at 50% 50%, #FF9159 0%, rgba(255, 144, 89, 0) 100%)',
                 bySubject: 'radial-gradient(50% 50% at 50% 50%, #8A1F09 0%, rgba(138, 31, 9, 0) 100%)',
                 byDate: 'radial-gradient(50% 50% at 50% 50%, #FFDB95 0%, rgba(255, 219, 149, 0) 100%)',

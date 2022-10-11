@@ -138,23 +138,32 @@ const Galaxy: React.FC<Props> = ({ data = [], dimensions }) => {
                                         pointerEvents={zoomLevel === ZoomLevel.Zoom1Stories ? 'none' : undefined}
                                     >
                                         {zoomLevel === ZoomLevel.Zoom1 && (
-                                            <button
-                                                onClick={() => zoomTo(-item.xFromCenter, item.yFromCenter)}
-                                                style={{
-                                                    width: '100%',
-                                                    height: '100%',
-                                                    borderRadius: '100%',
-                                                    zIndex: 100,
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    justifyContent: 'center',
-                                                }}
+                                            <Box
+                                                onClick={() =>
+                                                    zoomTo(
+                                                        -item.xFromCenter,
+                                                        item.yFromCenter,
+                                                        `/landingpage/${item.class}`
+                                                    )
+                                                }
+                                                as="button"
+                                                width="100%"
+                                                height="100%"
+                                                borderRadius="100%"
+                                                zIndex="100"
+                                                display="flex"
+                                                alignItems="center"
+                                                justifyContent="center"
                                             >
                                                 <Box>
-                                                    <Text width="12.5rem">{item.name}</Text>
-                                                    <Text width="12.5rem">{item.numberOfInstances}</Text>
+                                                    <Text width="12.5rem" textStyle={'cloudText'}>
+                                                        {item.name}
+                                                    </Text>
+                                                    <Text width="12.5rem" textStyle={'cloudText'}>
+                                                        {item.numberOfInstances}
+                                                    </Text>
                                                 </Box>
-                                            </button>
+                                            </Box>
                                         )}
                                     </Circle>
                                 )

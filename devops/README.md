@@ -3,7 +3,7 @@
 ## Local Environment
 
 - Install node
-- Install ansible v2.2.1.0 (`brew install ansible`) or (`brew upgrade ansible`)
+- Install ansible v2.5 (`brew install ansible`) or (`brew upgrade ansible`)
 
 ## Usage
 
@@ -26,4 +26,4 @@
 `aws s3 cp --sse-c --sse-c-key={{ app.aws.sse_key }} s3://bucket-name/some-backup-file.tar.gz .`
 
 ## Versions
-- Ansible: 2.2.1.0
+- Ansible: 2.5
