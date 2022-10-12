@@ -105,6 +105,10 @@ export class ArchivesService {
     private readonly ZoomLevel4Endpoint = 'zoom-4-archives/run'
 
     // TODO: change to convention when Triply adds this to normal space
+    private readonly archivesDescriptionLevelEndpoint =
+        'https://api.collectiedata.hetnieuweinstituut.nl/queries/Joran/zoom5-archives-type-only/run?'
+
+    // TODO: change to convention when Triply adds this to normal space
     private readonly ZoomLevel4CountEndpoint =
         'https://api.collectiedata.hetnieuweinstituut.nl/queries/Joran/zoom4-archives-count/run?'
 
@@ -114,6 +118,25 @@ export class ArchivesService {
     }
 
     public constructor(private triplyService: TriplyService) {}
+
+    public async determineArchiveType(id: string) {
+        interface ArchivesDescriptionLevelData {
+            record: string
+            descriptionLevel: string
+        }
+
+        const uri = TriplyUtils.getUriForTypeAndId(EntityNames.Archives, id)
+        const res = await this.triplyService.queryTriplyData<ArchivesDescriptionLevelData>(
+            this.archivesDescriptionLevelEndpoint,
+            undefined,
+            { record: uri }
+        )
+
+        if (res.data[0].descriptionLevel === 'archief') {
+            return ArchivesZoomLevel5Types.fonds
+        }
+        return ArchivesZoomLevel5Types.other
+    }
 
     public async getZoomLevel2Data() {
         const result = await this.triplyService.queryTriplyData<ObjectFilterData>(this.zoomLevel2Endpoint)
@@ -146,9 +169,9 @@ export class ArchivesService {
             return []
         }
 
-        const searchParams = []
+        const searchParams: Record<string, string> = {}
         for (const [filterName, filterValue] of Object.entries(filters)) {
-            searchParams.push({ key: filterName, value: filterValue })
+            searchParams[`${filterName}`] = filterValue
         }
 
         const result = await this.triplyService.queryTriplyData<ArchivesZoomLevel4Data>(
@@ -160,7 +183,11 @@ export class ArchivesService {
             searchParams
         )
 
-        const countResult = await this.triplyService.getCountData(this.ZoomLevel4CountEndpoint, searchParams)
+        const countResult = await this.triplyService.queryTriplyData<{ count?: number }>(
+            this.ZoomLevel4CountEndpoint,
+            undefined,
+            searchParams
+        )
         const total = countResult.data.pop()?.count || 0
 
         return {
@@ -185,15 +212,10 @@ export class ArchivesService {
         const result = await this.triplyService.queryTriplyData<ArchivesZoomLeve5DataType>(
             this.ZoomLevel5Endpoint[type],
             undefined,
-            [
-                {
-                    key: 'record',
-                    value: uri,
-                },
-            ]
+            { record: uri }
         )
 
-        return TriplyUtils.combineObjectArray(result.data)
+        return { ...TriplyUtils.combineObjectArray(result.data), type, id: objectId }
     }
 
     public validateFilterInput(input: string): ArchivesZoomLevel3Ids {
