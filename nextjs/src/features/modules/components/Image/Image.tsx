@@ -20,14 +20,16 @@ const MediaImage = (props: MediaImageProps) => {
             paddingBottom={props.component.imageModuleLayout?.spacingBottom ?? undefined}
             paddingTop={props.component.imageModuleLayout?.spacingTop ?? undefined}
         >
-            <Box onClick={onClick} cursor={'pointer'} pb="2.5">
-                <Img alt={alt_text || ''} src={imagePath} w="full" />
-            </Box>
-            {caption && (
-                <Box width={'100'} pb="1">
-                    <Text textStyle={'micro'}>{caption}</Text>
+            <Box maxW={'80rem'}>
+                <Box onClick={onClick} cursor={'pointer'} pb="2.5">
+                    <Img alt={alt_text || ''} src={imagePath} w="full" />
                 </Box>
-            )}
+                {caption && (
+                    <Box width={'100'} pb="1">
+                        <Text textStyle={'micro'}>{caption}</Text>
+                    </Box>
+                )}
+            </Box>
         </Box>
     )
 }

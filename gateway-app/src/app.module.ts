@@ -23,9 +23,11 @@ import { LandingPageModule } from './modules/landingPage/landingPage.module'
 import { MenuPageModule } from './modules/menuPage/menuPage.module'
 import { TableModule } from './modules/table/table.module'
 import { UserModule } from './modules/user/user.module'
+import { UtilModule } from './modules/util/util.module'
 
 @Module({
     imports: [
+        UtilModule,
         StoryModule,
         TriplyModule,
         StrapiModule,
@@ -35,6 +37,10 @@ import { UserModule } from './modules/user/user.module'
             autoSchemaFile: true,
             debug: true,
             playground: false,
+            buildSchemaOptions: {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                dateScalarMode: 'Date' as any,
+            },
         }),
         HttpModule,
         ArchivesModule,

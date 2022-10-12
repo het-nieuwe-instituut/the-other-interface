@@ -20,7 +20,7 @@ export const CarouselMaker = (props: Props) => {
                     mb={'2'}
                     width={`${boxSize}px!important`} 
                     height={`${boxSize}px`}
-                    boxSize={`${boxSize}px`}
+                    boxSize={`${boxSize}px!important`}
                 />
                 <Text textStyle={'h3'} mb={'1.5'}>{name}</Text>
                 <Text textStyle={'micro'}>{description}</Text>   

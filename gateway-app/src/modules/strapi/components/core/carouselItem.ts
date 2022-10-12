@@ -1,4 +1,5 @@
 import { Field, ID, InputType, ObjectType, registerEnumType } from '@nestjs/graphql'
+import { TriplyRecordEntityResponse, TriplyRecordFiltersInput } from '../../../triplyRecord/triplyRecord.type'
 import { Enum_Componentcorecarouselitem_Type } from '../../../../generated/strapi-sdk'
 import { PaginationArg, StringFilterInput, UploadFileEntityResponse } from '../../shared-types'
 
@@ -19,8 +20,8 @@ export class ComponentCoreCarouselItem {
     @Field(() => Enum_Componentcorecarouselitem_Type, { nullable: true })
     public type?: Enum_Componentcorecarouselitem_Type
 
-    @Field({ nullable: true })
-    public uri_id?: string
+    @Field(() => TriplyRecordEntityResponse, { nullable: true })
+    public triply_record?: TriplyRecordEntityResponse
 }
 
 @InputType()
@@ -43,8 +44,8 @@ export class ComponentCoreCarouselItemFiltersInput {
     @Field(() => StringFilterInput, { nullable: true })
     public type?: StringFilterInput
 
-    @Field(() => StringFilterInput, { nullable: true })
-    public uri_id?: StringFilterInput
+    @Field(() => TriplyRecordFiltersInput, { nullable: true })
+    public triply_record?: TriplyRecordFiltersInput
 }
 
 @InputType()

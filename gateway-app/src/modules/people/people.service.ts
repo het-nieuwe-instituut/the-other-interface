@@ -145,10 +145,7 @@ export class PeopleService {
             return []
         }
 
-        const searchParams = []
-        for (const [filterName, filterValue] of Object.entries(filters)) {
-            searchParams.push({ key: filterName, value: filterValue })
-        }
+        const searchParams = TriplyUtils.getQueryParamsFromObject(filters)
 
         const result = await this.triplyService.queryTriplyData<PeopleZoomLevel4Data>(
             this.ZoomLevel4Endpoint,
@@ -159,7 +156,11 @@ export class PeopleService {
             searchParams
         )
 
-        const countResult = await this.triplyService.getCountData(this.ZoomLevel4CountEndpoint, searchParams)
+        const countResult = await this.triplyService.queryTriplyData<{ count?: number }>(
+            this.ZoomLevel4CountEndpoint,
+            undefined,
+            searchParams
+        )
         const total = countResult.data.pop()?.count || 0
 
         return {
@@ -183,12 +184,7 @@ export class PeopleService {
         const result = await this.triplyService.queryTriplyData<PeopleDetailZoomLevel5Data>(
             this.ZoomLevel5Endpoint,
             undefined,
-            [
-                {
-                    key: 'record',
-                    value: uri,
-                },
-            ]
+            { record: uri }
         )
 
         return TriplyUtils.combineObjectArray(result.data)

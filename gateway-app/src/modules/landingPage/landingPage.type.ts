@@ -23,7 +23,7 @@ export class Landingpage {
     public components?: typeof LandingpageComponentsDynamicZone[]
 
     @Field({ nullable: true })
-    public createdAt?: string
+    public createdAt?: Date
 
     @Field({ nullable: true })
     public locale?: string
@@ -32,13 +32,13 @@ export class Landingpage {
     public localizations?: LandingpageRelationResponseCollection
 
     @Field({ nullable: true })
-    public publishedAt?: string
+    public publishedAt?: Date
 
     @Field({ nullable: true })
     public slug?: string
 
     @Field({ nullable: true })
-    public updatedAt?: string
+    public updatedAt?: Date
 }
 
 @ObjectType()
