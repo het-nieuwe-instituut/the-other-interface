@@ -1,0 +1,8 @@
+query Zoom3 {
+    zoomLevel3(entityName: Publications, filterId: "author", page: 1, pageSize: 16) {
+        uri
+        name
+        count
+        total
+    }
+}

@@ -8945,7 +8945,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "ZoomLevel5Type",
+                  "name": "ZoomLevel5RelationsType",
                   "ofType": null
                 }
               }
@@ -9632,17 +9632,9 @@
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "OBJECT",
-                    "name": "ZoomLevel4Type",
-                    "ofType": null
-                  }
-                }
+                "kind": "OBJECT",
+                "name": "ZoomLevel4ParentType",
+                "ofType": null
               }
             },
             "isDeprecated": false,
@@ -9924,7 +9916,7 @@
             "deprecationReason": null
           },
           {
-            "name": "randomRelations",
+            "name": "relations",
             "description": null,
             "args": [],
             "type": {
@@ -9935,7 +9927,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "ZoomLevel5Type",
+                  "name": "ZoomLevel5RelationsType",
                   "ofType": null
                 }
               }
@@ -13331,6 +13323,97 @@
       },
       {
         "kind": "OBJECT",
+        "name": "ZoomLevel4ParentType",
+        "description": null,
+        "fields": [
+          {
+            "name": "appliedFilters",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "hasMore",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "nodes",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "ZoomLevel4Type",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "page",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "total",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
         "name": "ZoomLevel4Type",
         "description": null,
         "fields": [
@@ -13394,7 +13477,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "ZoomLevel5Type",
+        "name": "ZoomLevel5RelationsType",
         "description": null,
         "fields": [
           {

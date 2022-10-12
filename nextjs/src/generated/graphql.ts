@@ -76,6 +76,22 @@ export const mockStoryBySlugQuery = (resolver: ResponseResolver<GraphQLRequest<S
     resolver
   )
 
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockZoom3Query((req, res, ctx) => {
+ *   return res(
+ *     ctx.data({ zoomLevel3 })
+ *   )
+ * })
+ */
+export const mockZoom3Query = (resolver: ResponseResolver<GraphQLRequest<Zoom3QueryVariables>, GraphQLContext<Zoom3Query>, any>) =>
+  graphql.query<Zoom3Query, Zoom3QueryVariables>(
+    'Zoom3',
+    resolver
+  )
+
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -951,7 +967,7 @@ export type Query = {
   locations: LocationRelationResponseCollection;
   menupage: MenupageEntityResponse;
   menupages: MenupageEntityResponseCollection;
-  relations?: Maybe<Array<ZoomLevel5Type>>;
+  relations?: Maybe<Array<ZoomLevel5RelationsType>>;
   stories: StoryEntityResponseCollection;
   story: StoryEntityResponse;
   table: TableEntityResponse;
@@ -963,7 +979,7 @@ export type Query = {
   zoomLevel1: Array<ZoomLevel1Type>;
   zoomLevel2: Array<ZoomLevel2Type>;
   zoomLevel3: Array<ZoomLevel3Type>;
-  zoomLevel4: Array<ZoomLevel4Type>;
+  zoomLevel4: ZoomLevel4ParentType;
   zoomLevel5ArchivesFonds?: Maybe<ArchivesFondsZoomLevel5DetailType>;
   zoomLevel5ArchivesOther?: Maybe<ArchivesOtherZoomLevel5DetailType>;
   zoomLevel5Object?: Maybe<ObjectsZoomLevel5DetailType>;
@@ -1165,7 +1181,7 @@ export type RelatedRecordType = {
   __typename?: 'RelatedRecordType';
   id: Scalars['String'];
   label: Scalars['String'];
-  randomRelations?: Maybe<Array<ZoomLevel5Type>>;
+  relations?: Maybe<Array<ZoomLevel5RelationsType>>;
   type: EntityNames;
 };
 
@@ -1530,6 +1546,15 @@ export type ZoomLevel3Type = {
   uri?: Maybe<Scalars['String']>;
 };
 
+export type ZoomLevel4ParentType = {
+  __typename?: 'ZoomLevel4ParentType';
+  appliedFilters?: Maybe<Scalars['String']>;
+  hasMore: Scalars['Boolean'];
+  nodes?: Maybe<Array<ZoomLevel4Type>>;
+  page: Scalars['Int'];
+  total: Scalars['Int'];
+};
+
 export type ZoomLevel4Type = {
   __typename?: 'ZoomLevel4Type';
   firstImage?: Maybe<Scalars['String']>;
@@ -1538,8 +1563,8 @@ export type ZoomLevel4Type = {
   title?: Maybe<Scalars['String']>;
 };
 
-export type ZoomLevel5Type = {
-  __typename?: 'ZoomLevel5Type';
+export type ZoomLevel5RelationsType = {
+  __typename?: 'ZoomLevel5RelationsType';
   randomRelations?: Maybe<Array<RelatedRecordType>>;
   total: Scalars['Float'];
   type: EntityNames;
@@ -1595,6 +1620,11 @@ export type StoryBySlugQueryVariables = Exact<{
 
 
 export type StoryBySlugQuery = { __typename?: 'Query', stories: { __typename?: 'StoryEntityResponseCollection', data?: Array<{ __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, description?: string | null, shortDescription?: string | null, publishedAt?: any | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', id?: string | null, attributes?: { __typename?: 'Author', firstName: string, insertion?: string | null, lastName: string } | null } | null } | null, timeframe?: { __typename?: 'ComponentCoreTimeframe', id: string, yearStart?: number | null, yearEnd?: number | null } | null, locations?: { __typename?: 'LocationRelationResponseCollection', data: Array<{ __typename?: 'LocationEntity', id?: string | null, attributes?: { __typename?: 'Location', city?: string | null } | null }> } | null, publicationDate?: { __typename?: 'ComponentCorePublicationDate', date?: any | null, displayType?: EnumComponentcorepublicationdateDisplaytype | null } | null, components?: Array<{ __typename?: 'ComponentModulesButtonsModule', id: string, buttonStyle?: EnumComponentmodulesbuttonsmoduleButtonstyle | null, buttons?: Array<{ __typename?: 'ComponentCoreButton', id: string, text?: string | null, url?: string | null, hasAttachment?: boolean | null, attachment?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null }> | null, buttonsModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesCarousel' } | { __typename?: 'ComponentModulesImage', id: string, caption?: string | null, alt_text?: string | null, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null }, imageModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesImageCarousel', id: string, description?: string | null, images?: { __typename?: 'UploadFileRelationResponseCollection', data?: Array<{ __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, width?: number | null, height?: number | null, size: number } | null }> | null } | null, imageCarouselModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesPullquote', id: string, text?: string | null, pullquoteModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesSubtitle', id: string, text?: string | null, subtitleModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesTableModule', id: string, table?: { __typename?: 'TableEntityResponse', data?: { __typename?: 'TableEntity', id?: string | null, attributes?: { __typename?: 'Table', name?: string | null, description?: string | null, Tablehead?: { __typename?: 'ComponentCoreTableHead', id: string, TableHeadItem?: Array<{ __typename?: 'ComponentCoreTableHeadItem', id?: string | null, label?: string | null }> | null } | null, TableBody?: Array<{ __typename?: 'ComponentCoreTableBody', id: string, TableBodyItem?: Array<{ __typename?: 'ComponentCoreTableBodyItem', id: string, value?: string | null }> | null }> | null } | null } | null } | null, tableModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesTextModule', id: string, Richtext?: string | null, textModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesTitleModule', id: string, Title?: string | null, titleModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'Error' }> | null } | null }> | null } };
+
+export type Zoom3QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Zoom3Query = { __typename?: 'Query', zoomLevel3: Array<{ __typename?: 'ZoomLevel3Type', uri?: string | null, name?: string | null, count?: number | null, total?: number | null }> };
 
 export const ComponentCoreModuleLayoutsFragmentDoc = gql`
     fragment componentCoreModuleLayouts on ComponentCoreModuleLayouts {
@@ -2104,3 +2134,40 @@ export function useStoryBySlugLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type StoryBySlugQueryHookResult = ReturnType<typeof useStoryBySlugQuery>;
 export type StoryBySlugLazyQueryHookResult = ReturnType<typeof useStoryBySlugLazyQuery>;
 export type StoryBySlugQueryResult = Apollo.QueryResult<StoryBySlugQuery, StoryBySlugQueryVariables>;
+export const Zoom3Document = gql`
+    query Zoom3 {
+  zoomLevel3(entityName: Publications, filterId: "author", page: 1, pageSize: 16) {
+    uri
+    name
+    count
+    total
+  }
+}
+    `;
+
+/**
+ * __useZoom3Query__
+ *
+ * To run a query within a React component, call `useZoom3Query` and pass it any options that fit your needs.
+ * When your component renders, `useZoom3Query` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useZoom3Query({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useZoom3Query(baseOptions?: Apollo.QueryHookOptions<Zoom3Query, Zoom3QueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<Zoom3Query, Zoom3QueryVariables>(Zoom3Document, options);
+      }
+export function useZoom3LazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Zoom3Query, Zoom3QueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<Zoom3Query, Zoom3QueryVariables>(Zoom3Document, options);
+        }
+export type Zoom3QueryHookResult = ReturnType<typeof useZoom3Query>;
+export type Zoom3LazyQueryHookResult = ReturnType<typeof useZoom3LazyQuery>;
+export type Zoom3QueryResult = Apollo.QueryResult<Zoom3Query, Zoom3QueryVariables>;
