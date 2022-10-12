@@ -9,6 +9,7 @@ import { TriplyService } from '../triply/triply.service'
 import { TriplyUtils } from '../triply/triply.utils'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { getRandom2ItemsFromArray } from '../util/helpers'
+import { ZoomLevel5RelatedObjectsArgs } from './zoomLevel5.type'
 
 interface ZoomLevel5RelationData {
     graph: string // sample graph i.e. https://collectiedata.hetnieuweinstituut.nl/graph/people
@@ -29,6 +30,13 @@ interface ZoomLevel5RelationData {
     sample_extern_2_label: string | null
 }
 
+interface ZoomLevel5RelatedObjectData {
+    dataset: string
+    graph: string // i.e. https://collectiedata.hetnieuweinstituut.nl/graph/people
+    label: string
+    externObj: string // i.e. https://collectiedata.hetnieuweinstituut.nl/id/people/25376
+}
+
 // key is relation graph
 type GroupedRelationData = Record<string, RelationData>
 
@@ -47,6 +55,7 @@ interface SampleData {
 @Injectable()
 export class ZoomLevel5Service {
     private relationsEndpoint = '/zoom-5-relations/run?record='
+    private relatedObjectsEndpoint = '/zoom-5-relatedObjects/run?record='
 
     public constructor(
         @Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk,
@@ -74,6 +83,21 @@ export class ZoomLevel5Service {
             default:
                 throw new Error('type not implemented')
         }
+    }
+
+    public async getAllRelations({ id, type, relatedObjectsType }: ZoomLevel5RelatedObjectsArgs) {
+        const uri = TriplyUtils.getUriForTypeAndId(type, id)
+        const res = await this.triplyService.queryTriplyData<ZoomLevel5RelatedObjectData>(
+            `${this.relatedObjectsEndpoint}${uri}`
+        )
+
+        return res.data
+            .filter(d => TriplyUtils.getEntityNameFromGraph(d.graph) === relatedObjectsType)
+            .map(d => ({
+                id: TriplyUtils.getIdFromUri(d.externObj),
+                type: relatedObjectsType,
+                ...this.getRecordSpecificFieldsFromRelatedObject(relatedObjectsType, d),
+            }))
     }
 
     public getDetail(
@@ -205,6 +229,29 @@ export class ZoomLevel5Service {
             type: EntityNames.Stories,
             total: res.stories?.data.length || 0,
             randomRelations: randomStories,
+        }
+    }
+
+    private getRecordSpecificFieldsFromRelatedObject(type: EntityNames, d: ZoomLevel5RelatedObjectData) {
+        switch (type) {
+            case EntityNames.People:
+                return {
+                    name: d.label,
+                    // these are not yet returned from triply endpoint
+                    // birthDate: d.birthDate,
+                    // profession: d.profession,
+                }
+            case EntityNames.Archives:
+            // TODO: waiting on triply to implement
+            case EntityNames.Objects:
+            // TODO: waiting on triply to implement
+            case EntityNames.Publications:
+            // TODO: waiting on triply to implement
+            case EntityNames.Stories:
+            case EntityNames.External:
+            case EntityNames.Media:
+            default:
+                throw new Error('not yet implemented')
         }
     }
 
