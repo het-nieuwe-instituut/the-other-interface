@@ -116,6 +116,14 @@ export type ComponentCoreButtonFiltersInput = {
     url?: InputMaybe<StringFilterInput>
 }
 
+export type ComponentCoreButtonInput = {
+    attachment?: InputMaybe<Scalars['ID']>
+    hasAttachment?: InputMaybe<Scalars['Boolean']>
+    id?: InputMaybe<Scalars['ID']>
+    text?: InputMaybe<Scalars['String']>
+    url?: InputMaybe<Scalars['String']>
+}
+
 export type ComponentCoreCarouselItem = {
     __typename?: 'ComponentCoreCarouselItem'
     description?: Maybe<Scalars['String']>
@@ -141,6 +149,20 @@ export type ComponentCoreModuleLayouts = {
     id: Scalars['ID']
     spacingBottom?: Maybe<Enum_Componentcoremodulelayouts_Spacingbottom>
     spacingTop?: Maybe<Enum_Componentcoremodulelayouts_Spacingtop>
+}
+
+export type ComponentCoreModuleLayoutsFiltersInput = {
+    and?: InputMaybe<Array<InputMaybe<ComponentCoreModuleLayoutsFiltersInput>>>
+    not?: InputMaybe<ComponentCoreModuleLayoutsFiltersInput>
+    or?: InputMaybe<Array<InputMaybe<ComponentCoreModuleLayoutsFiltersInput>>>
+    spacingBottom?: InputMaybe<StringFilterInput>
+    spacingTop?: InputMaybe<StringFilterInput>
+}
+
+export type ComponentCoreModuleLayoutsInput = {
+    id?: InputMaybe<Scalars['ID']>
+    spacingBottom?: InputMaybe<Enum_Componentcoremodulelayouts_Spacingbottom>
+    spacingTop?: InputMaybe<Enum_Componentcoremodulelayouts_Spacingtop>
 }
 
 export type ComponentCorePageHeader = {
@@ -288,6 +310,22 @@ export type ComponentModulesButtonsModuleButtonsArgs = {
     filters?: InputMaybe<ComponentCoreButtonFiltersInput>
     pagination?: InputMaybe<PaginationArg>
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
+}
+
+export type ComponentModulesButtonsModuleFiltersInput = {
+    and?: InputMaybe<Array<InputMaybe<ComponentModulesButtonsModuleFiltersInput>>>
+    buttonStyle?: InputMaybe<StringFilterInput>
+    buttons?: InputMaybe<ComponentCoreButtonFiltersInput>
+    buttonsModuleLayout?: InputMaybe<ComponentCoreModuleLayoutsFiltersInput>
+    not?: InputMaybe<ComponentModulesButtonsModuleFiltersInput>
+    or?: InputMaybe<Array<InputMaybe<ComponentModulesButtonsModuleFiltersInput>>>
+}
+
+export type ComponentModulesButtonsModuleInput = {
+    buttonStyle?: InputMaybe<Enum_Componentmodulesbuttonsmodule_Buttonstyle>
+    buttons?: InputMaybe<Array<InputMaybe<ComponentCoreButtonInput>>>
+    buttonsModuleLayout?: InputMaybe<ComponentCoreModuleLayoutsInput>
+    id?: InputMaybe<Scalars['ID']>
 }
 
 export type ComponentModulesCarousel = {
@@ -1443,6 +1481,7 @@ export type Story = {
     publishedAt?: Maybe<Scalars['DateTime']>
     shortDescription?: Maybe<Scalars['String']>
     slug?: Maybe<Scalars['String']>
+    storyLinks?: Maybe<ComponentModulesButtonsModule>
     timeframe?: Maybe<ComponentCoreTimeframe>
     title: Scalars['String']
     triplyRecords?: Maybe<TriplyRecordRelationResponseCollection>
@@ -1513,6 +1552,7 @@ export type StoryFiltersInput = {
     publishedAt?: InputMaybe<DateTimeFilterInput>
     shortDescription?: InputMaybe<StringFilterInput>
     slug?: InputMaybe<StringFilterInput>
+    storyLinks?: InputMaybe<ComponentModulesButtonsModuleFiltersInput>
     timeframe?: InputMaybe<ComponentCoreTimeframeFiltersInput>
     title?: InputMaybe<StringFilterInput>
     triplyRecords?: InputMaybe<TriplyRecordFiltersInput>
@@ -1528,6 +1568,7 @@ export type StoryInput = {
     publishedAt?: InputMaybe<Scalars['DateTime']>
     shortDescription?: InputMaybe<Scalars['String']>
     slug?: InputMaybe<Scalars['String']>
+    storyLinks?: InputMaybe<ComponentModulesButtonsModuleInput>
     timeframe?: InputMaybe<ComponentCoreTimeframeInput>
     title?: InputMaybe<Scalars['String']>
     triplyRecords?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
@@ -6508,6 +6549,50 @@ export type StoriesQuery = {
                     __typename?: 'StoryRelationResponseCollection'
                     data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
                 } | null
+                storyLinks?: {
+                    __typename: 'ComponentModulesButtonsModule'
+                    id: string
+                    buttonStyle?: Enum_Componentmodulesbuttonsmodule_Buttonstyle | null
+                    buttonsModuleLayout: {
+                        __typename?: 'ComponentCoreModuleLayouts'
+                        id: string
+                        spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
+                        spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
+                    }
+                    buttons?: Array<{
+                        __typename?: 'ComponentCoreButton'
+                        id: string
+                        hasAttachment?: boolean | null
+                        text?: string | null
+                        url?: string | null
+                        attachment?: {
+                            __typename?: 'UploadFileEntityResponse'
+                            data?: {
+                                __typename?: 'UploadFileEntity'
+                                id?: string | null
+                                attributes?: {
+                                    __typename?: 'UploadFile'
+                                    hash: string
+                                    mime: string
+                                    name: string
+                                    provider: string
+                                    size: number
+                                    url: string
+                                    alternativeText?: string | null
+                                    caption?: string | null
+                                    createdAt?: any | null
+                                    ext?: string | null
+                                    formats?: any | null
+                                    height?: number | null
+                                    previewUrl?: string | null
+                                    provider_metadata?: any | null
+                                    updatedAt?: any | null
+                                    width?: number | null
+                                } | null
+                            } | null
+                        } | null
+                    } | null> | null
+                } | null
             } | null
         }>
         meta: {
@@ -6784,6 +6869,50 @@ export type StoryQuery = {
                 localizations?: {
                     __typename?: 'StoryRelationResponseCollection'
                     data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
+                } | null
+                storyLinks?: {
+                    __typename: 'ComponentModulesButtonsModule'
+                    id: string
+                    buttonStyle?: Enum_Componentmodulesbuttonsmodule_Buttonstyle | null
+                    buttonsModuleLayout: {
+                        __typename?: 'ComponentCoreModuleLayouts'
+                        id: string
+                        spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
+                        spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
+                    }
+                    buttons?: Array<{
+                        __typename?: 'ComponentCoreButton'
+                        id: string
+                        hasAttachment?: boolean | null
+                        text?: string | null
+                        url?: string | null
+                        attachment?: {
+                            __typename?: 'UploadFileEntityResponse'
+                            data?: {
+                                __typename?: 'UploadFileEntity'
+                                id?: string | null
+                                attributes?: {
+                                    __typename?: 'UploadFile'
+                                    hash: string
+                                    mime: string
+                                    name: string
+                                    provider: string
+                                    size: number
+                                    url: string
+                                    alternativeText?: string | null
+                                    caption?: string | null
+                                    createdAt?: any | null
+                                    ext?: string | null
+                                    formats?: any | null
+                                    height?: number | null
+                                    previewUrl?: string | null
+                                    provider_metadata?: any | null
+                                    updatedAt?: any | null
+                                    width?: number | null
+                                } | null
+                            } | null
+                        } | null
+                    } | null> | null
                 } | null
             } | null
         } | null
@@ -7101,6 +7230,50 @@ export type StoryFragmentFragment = {
         localizations?: {
             __typename?: 'StoryRelationResponseCollection'
             data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
+        } | null
+        storyLinks?: {
+            __typename: 'ComponentModulesButtonsModule'
+            id: string
+            buttonStyle?: Enum_Componentmodulesbuttonsmodule_Buttonstyle | null
+            buttonsModuleLayout: {
+                __typename?: 'ComponentCoreModuleLayouts'
+                id: string
+                spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
+                spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
+            }
+            buttons?: Array<{
+                __typename?: 'ComponentCoreButton'
+                id: string
+                hasAttachment?: boolean | null
+                text?: string | null
+                url?: string | null
+                attachment?: {
+                    __typename?: 'UploadFileEntityResponse'
+                    data?: {
+                        __typename?: 'UploadFileEntity'
+                        id?: string | null
+                        attributes?: {
+                            __typename?: 'UploadFile'
+                            hash: string
+                            mime: string
+                            name: string
+                            provider: string
+                            size: number
+                            url: string
+                            alternativeText?: string | null
+                            caption?: string | null
+                            createdAt?: any | null
+                            ext?: string | null
+                            formats?: any | null
+                            height?: number | null
+                            previewUrl?: string | null
+                            provider_metadata?: any | null
+                            updatedAt?: any | null
+                            width?: number | null
+                        } | null
+                    } | null
+                } | null
+            } | null> | null
         } | null
     } | null
 }
@@ -8053,6 +8226,50 @@ export type TriplyRecordQuery = {
                                 __typename?: 'StoryRelationResponseCollection'
                                 data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
                             } | null
+                            storyLinks?: {
+                                __typename: 'ComponentModulesButtonsModule'
+                                id: string
+                                buttonStyle?: Enum_Componentmodulesbuttonsmodule_Buttonstyle | null
+                                buttonsModuleLayout: {
+                                    __typename?: 'ComponentCoreModuleLayouts'
+                                    id: string
+                                    spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
+                                    spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
+                                }
+                                buttons?: Array<{
+                                    __typename?: 'ComponentCoreButton'
+                                    id: string
+                                    hasAttachment?: boolean | null
+                                    text?: string | null
+                                    url?: string | null
+                                    attachment?: {
+                                        __typename?: 'UploadFileEntityResponse'
+                                        data?: {
+                                            __typename?: 'UploadFileEntity'
+                                            id?: string | null
+                                            attributes?: {
+                                                __typename?: 'UploadFile'
+                                                hash: string
+                                                mime: string
+                                                name: string
+                                                provider: string
+                                                size: number
+                                                url: string
+                                                alternativeText?: string | null
+                                                caption?: string | null
+                                                createdAt?: any | null
+                                                ext?: string | null
+                                                formats?: any | null
+                                                height?: number | null
+                                                previewUrl?: string | null
+                                                provider_metadata?: any | null
+                                                updatedAt?: any | null
+                                                width?: number | null
+                                            } | null
+                                        } | null
+                                    } | null
+                                } | null> | null
+                            } | null
                         } | null
                     }>
                 } | null
@@ -8343,6 +8560,50 @@ export type TriplyRecordsQuery = {
                                 __typename?: 'StoryRelationResponseCollection'
                                 data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
                             } | null
+                            storyLinks?: {
+                                __typename: 'ComponentModulesButtonsModule'
+                                id: string
+                                buttonStyle?: Enum_Componentmodulesbuttonsmodule_Buttonstyle | null
+                                buttonsModuleLayout: {
+                                    __typename?: 'ComponentCoreModuleLayouts'
+                                    id: string
+                                    spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
+                                    spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
+                                }
+                                buttons?: Array<{
+                                    __typename?: 'ComponentCoreButton'
+                                    id: string
+                                    hasAttachment?: boolean | null
+                                    text?: string | null
+                                    url?: string | null
+                                    attachment?: {
+                                        __typename?: 'UploadFileEntityResponse'
+                                        data?: {
+                                            __typename?: 'UploadFileEntity'
+                                            id?: string | null
+                                            attributes?: {
+                                                __typename?: 'UploadFile'
+                                                hash: string
+                                                mime: string
+                                                name: string
+                                                provider: string
+                                                size: number
+                                                url: string
+                                                alternativeText?: string | null
+                                                caption?: string | null
+                                                createdAt?: any | null
+                                                ext?: string | null
+                                                formats?: any | null
+                                                height?: number | null
+                                                previewUrl?: string | null
+                                                provider_metadata?: any | null
+                                                updatedAt?: any | null
+                                                width?: number | null
+                                            } | null
+                                        } | null
+                                    } | null
+                                } | null> | null
+                            } | null
                         } | null
                     }>
                 } | null
@@ -8625,6 +8886,50 @@ export type TriplyRecordFragmentFragment = {
                     localizations?: {
                         __typename?: 'StoryRelationResponseCollection'
                         data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
+                    } | null
+                    storyLinks?: {
+                        __typename: 'ComponentModulesButtonsModule'
+                        id: string
+                        buttonStyle?: Enum_Componentmodulesbuttonsmodule_Buttonstyle | null
+                        buttonsModuleLayout: {
+                            __typename?: 'ComponentCoreModuleLayouts'
+                            id: string
+                            spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
+                            spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
+                        }
+                        buttons?: Array<{
+                            __typename?: 'ComponentCoreButton'
+                            id: string
+                            hasAttachment?: boolean | null
+                            text?: string | null
+                            url?: string | null
+                            attachment?: {
+                                __typename?: 'UploadFileEntityResponse'
+                                data?: {
+                                    __typename?: 'UploadFileEntity'
+                                    id?: string | null
+                                    attributes?: {
+                                        __typename?: 'UploadFile'
+                                        hash: string
+                                        mime: string
+                                        name: string
+                                        provider: string
+                                        size: number
+                                        url: string
+                                        alternativeText?: string | null
+                                        caption?: string | null
+                                        createdAt?: any | null
+                                        ext?: string | null
+                                        formats?: any | null
+                                        height?: number | null
+                                        previewUrl?: string | null
+                                        provider_metadata?: any | null
+                                        updatedAt?: any | null
+                                        width?: number | null
+                                    } | null
+                                } | null
+                            } | null
+                        } | null> | null
                     } | null
                 } | null
             }>
@@ -9426,6 +9731,9 @@ export const StoryFragmentFragmentDoc = gql`
                 }
             }
             locale
+            storyLinks {
+                ...ComponentModulesButtonsModuleFragment
+            }
         }
     }
     ${ComponentModulesPullquoteFragmentFragmentDoc}
