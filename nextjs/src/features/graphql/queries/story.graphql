@@ -6,7 +6,7 @@
 #import '../fragments/components/ImageCarousel.fragment.graphql'
 #import '../fragments/components/ButtonsModule.fragment.graphql'
 
-query storyBySlug($locale: I18NLocaleCode, $slug: String!) {
+query storyBySlug($locale: String, $slug: String!) {
     stories(locale: $locale, filters: { slug: { eq: $slug } }) {
         data {
             id

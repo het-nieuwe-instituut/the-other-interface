@@ -3,7 +3,7 @@ import { IsString } from 'class-validator'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 
 @ObjectType()
-export class ZoomLevel5Type {
+export class ZoomLevel5RelationsType {
     @Field(() => EntityNames)
     public type: EntityNames
 
@@ -25,8 +25,8 @@ export class RelatedRecordType {
     @Field()
     public label: string
 
-    @Field(() => [ZoomLevel5Type], { nullable: true })
-    public randomRelations: ZoomLevel5Type[]
+    @Field(() => [ZoomLevel5RelationsType], { nullable: true })
+    public relations: ZoomLevel5RelationsType[]
 }
 
 @ArgsType()

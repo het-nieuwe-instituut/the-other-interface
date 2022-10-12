@@ -1,4 +1,5 @@
 import { Dimensions } from '@/features/GalaxyInterface/types/galaxy'
+import { useInitializeD3Simulation } from '@/features/shared/hooks/useInitializeD3Simulation'
 import * as d3 from 'd3'
 import { BaseType, SimulationNodeDatum } from 'd3'
 import { MutableRefObject, useEffect, useRef } from 'react'
@@ -20,22 +21,16 @@ export interface ObjectPerType {
     yFromCenter: number
 }
 
-function useInitializeD3Simulation(galaxyBase: number) {
-    const simulation = useRef<d3.Simulation<D3CollectionItem, undefined> | null>(null)
-
-    useEffect(() => {
-        if (!simulation.current) {
-            simulation.current = d3
-                .forceSimulation<D3CollectionItem>()
-                .force('charge', d3.forceManyBody().strength(0.1))
-                .force('center', d3.forceCenter((galaxyBase ?? 0) / 2, (galaxyBase ?? 0) / 2))
-        }
-
-        return () => {
-            simulation.current?.stop()
-            simulation.current = null
-        }
-    }, [galaxyBase])
+export function useD3Simulation(
+    svgRef: MutableRefObject<SVGSVGElement | null>,
+    dimensions: Dimensions,
+    data: ObjectPerTypeWithName[],
+    selector: string,
+    dataDimensions: DataDimensions[],
+    galaxyBase: number
+) {
+    const { simulation } = useInitializeD3Simulation<D3CollectionItem>()
+    useListenToSimulationTicks(simulation, svgRef, data, selector, dataDimensions, galaxyBase)
 
     return {
         simulation,
@@ -56,6 +51,10 @@ function useListenToSimulationTicks(
         const d3Svg = d3.select(svgRef.current)
         const nodeForeign = d3Svg.selectAll(`.foreign-${selector}`).data(data)
 
+        simulation.current
+            ?.force('charge', d3.forceManyBody().strength(0.1))
+            .force('center', d3.forceCenter((galaxyBase ?? 0) / 2, (galaxyBase ?? 0) / 2))
+
         if (!nodesListener.current) {
             nodesListener.current = simulation.current?.nodes(data as D3CollectionItem[]).on('tick', () => {
                 ticked(dataDimensions, nodeForeign)
@@ -66,22 +65,6 @@ function useListenToSimulationTicks(
             nodesListener.current = null
         }
     }, [data, dataDimensions, selector, galaxyBase, svgRef, simulation])
-}
-
-export function useD3Simulation(
-    svgRef: MutableRefObject<SVGSVGElement | null>,
-    dimensions: Dimensions,
-    data: ObjectPerTypeWithName[],
-    selector: string,
-    dataDimensions: DataDimensions[],
-    galaxyBase: number
-) {
-    const { simulation } = useInitializeD3Simulation(galaxyBase)
-    useListenToSimulationTicks(simulation, svgRef, data, selector, dataDimensions, galaxyBase)
-
-    return {
-        simulation,
-    }
 }
 
 function getTakeSpaceFromDataDimensions(dataDimensions: DataDimensions[], d: Partial<D3CollectionItem>) {

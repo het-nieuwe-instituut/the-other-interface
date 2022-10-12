@@ -5,7 +5,7 @@ import { useSize } from '@chakra-ui/react-use-size'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
-import { useHomepageQuery } from 'src/generated/graphql'
+import { HomepageComponentsDynamicZone, useHomepageQuery } from 'src/generated/graphql'
 
 export const DynamicGalaxyNoSsr = dynamic(() => import('../../../GalaxyInterface/components/Galaxy/Galaxy'), {
     ssr: false,
@@ -63,7 +63,7 @@ export const HomepageContainer = () => {
             </Box>
             <Box px={{ xl: 6, base: 0 }} py={{ xl: 6, base: 0 }}>
                 <Box backgroundColor={'white'} maxW={theme.breakpoints.xl} marginX={'auto'}>
-                    <DynamicComponentRenderer components={data?.homepage?.data?.attributes?.components} />
+                    <DynamicComponentRenderer components={data?.homepage?.data?.attributes?.components as HomepageComponentsDynamicZone[]} />
                 </Box>
             </Box>
         </div>

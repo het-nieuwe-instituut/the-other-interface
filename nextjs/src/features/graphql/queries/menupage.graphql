@@ -6,7 +6,7 @@
 #import '../fragments/components/ImageCarousel.fragment.graphql'
 #import '../fragments/components/ButtonsModule.fragment.graphql'
 
-query menupageBySlug($locale: I18NLocaleCode, $slug: String!) {
+query menupageBySlug($locale: String, $slug: String!) {
     menupages(locale: $locale, filters: { slug: { eq: $slug } }) {
         data {
             id

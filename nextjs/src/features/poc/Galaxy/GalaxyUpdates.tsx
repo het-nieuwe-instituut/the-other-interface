@@ -6,7 +6,7 @@ import React, { useState } from 'react'
 import { useGalaxyController } from '../business/d3/useGalaxyController'
 import { Circle } from './Circle'
 
-function createChild(name?: string) {
+export function createChild(name?: string) {
     return {
         name: name ? name : randomstring.generate(),
         children: times(Math.floor(Math.random() * (10 - 5 + 1) + 5), () => ({

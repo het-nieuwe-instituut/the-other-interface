@@ -23,7 +23,6 @@ export const StoryMeta: React.FC<Props> = ({ story }) => {
 
     const commonT = useTypeSafeTranslation('common')
     const storiesT = useTypeSafeTranslation('stories')
-
     return (
         <Box>
             <Box marginBottom={'md'}>
