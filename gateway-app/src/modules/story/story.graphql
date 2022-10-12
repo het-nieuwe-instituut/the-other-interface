@@ -137,5 +137,8 @@ fragment StoryFragment on StoryEntity {
             }
         }
         locale
+        storyLinks {
+            ...ComponentModulesButtonsModuleFragment
+        }
     }
 }

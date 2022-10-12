@@ -808,3 +808,21 @@ export class ResponseCollectionMeta {
     @Field(() => Pagination, { nullable: false })
     public pagination: Pagination
 }
+
+@InputType()
+export class ComponentCoreModuleLayoutsFiltersInput {
+    @Field(() => [ComponentCoreModuleLayoutsFiltersInput], { nullable: true })
+    public and?: ComponentCoreModuleLayoutsFiltersInput[]
+
+    @Field(() => ComponentCoreModuleLayoutsFiltersInput, { nullable: true })
+    public not?: ComponentCoreModuleLayoutsFiltersInput
+
+    @Field(() => [ComponentCoreModuleLayoutsFiltersInput], { nullable: true })
+    public or?: ComponentCoreModuleLayoutsFiltersInput[]
+
+    @Field(() => StringFilterInput, { nullable: true })
+    public spacingBottom?: StringFilterInput
+
+    @Field(() => StringFilterInput, { nullable: true })
+    public spacingTop?: StringFilterInput
+}
