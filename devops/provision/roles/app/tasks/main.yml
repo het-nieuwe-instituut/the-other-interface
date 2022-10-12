@@ -8,4 +8,4 @@
 - import_tasks: nextjs.yml
 - import_tasks: gateway-app.yml
 - import_tasks: cleanup.yml
-# # - import_tasks: backups.yml
+- import_tasks: backups.yml
