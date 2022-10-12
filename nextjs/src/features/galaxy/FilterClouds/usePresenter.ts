@@ -8,7 +8,12 @@ import { Dimensions, FilterType } from './types'
 
 export function usePresenter(dimensions: Dimensions, data: FilterType[], selector: string) {
     const router = useRouter()
-    const dataDimensions = useFitDataToDimensions(dimensions, data)
+    const dataDimensions = useFitDataToDimensions(
+        dimensions,
+        data,
+        d => d.name,
+        d => d.numberOfInstances
+    )
     const { svgRef } = useD3Simulation(dimensions, data, selector, dataDimensions)
     const navigateTo = useCallback(
         async (d: d3.SimulationNodeDatum & FilterType) => {

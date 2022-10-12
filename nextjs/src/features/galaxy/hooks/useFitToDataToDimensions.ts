@@ -2,19 +2,19 @@ import { Dimensions } from '@/features/GalaxyInterface/types/galaxy'
 import { randomNumberBetweenPoints } from '@/features/shared/utils/numbers'
 import { useEffect, useRef, useState } from 'react'
 
-export interface BaseData {
-    name: string
-    numberOfInstances: number
-}
-
 export interface DataDimension {
-    name: string
+    id: string
     takeSpace: number
     randomMultiplier: number
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export function useFitDataToDimensions<_, TData extends BaseData>(dimensions: Dimensions, data: TData[]) {
+export function useFitDataToDimensions<
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _,
+    TData extends Array<TData[0]>,
+    GetName extends (d: TData[0]) => string,
+    GetCount extends (d: TData[0]) => number
+>(dimensions: Dimensions, data: TData, getName: GetName, getCount: GetCount) {
     const [dataDimensions, setDataDimensions] = useState<DataDimension[]>([])
     const prevDataDimensions = useRef<DataDimension[]>([])
 
@@ -27,19 +27,26 @@ export function useFitDataToDimensions<_, TData extends BaseData>(dimensions: Di
         const gridItemSpace = 12
         const totalSpaceGrid = totalSpace / (gridItemSpace * gridItemSpace)
 
-        const totalObjects = data.reduce((total, item) => total + item.numberOfInstances, 0)
+        const totalObjects = data.reduce((total, item) => {
+            const count = getCount(item)
+            return total + count
+        }, 0)
         const totalOccupiedGridItems = totalSpaceGrid / totalObjects
         const newData = data.map(item => {
-            const dataDimension = prevDataDimensions.current.find(dataDimension => dataDimension.name === item.name)
-            const takeSpace = totalOccupiedGridItems * item.numberOfInstances
+            const id = getName(item)
+            const count = getCount(item)
+            const dataDimension = prevDataDimensions.current.find(dataDimension => dataDimension.id === id)
+            const takeSpace = totalOccupiedGridItems * count
+            console.log(takeSpace)
             return {
-                name: item.name,
+                id: id,
                 takeSpace: takeSpace < 300 ? 300 : takeSpace,
                 randomMultiplier: dataDimension?.randomMultiplier ?? randomNumberBetweenPoints(0.8, 0.99),
             }
         })
         prevDataDimensions.current = newData
         setDataDimensions(newData)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dimensions, data])
 
     return dataDimensions

@@ -1,7 +1,11 @@
 import { useRouter } from 'next/router'
 import { useCallback } from 'react'
+import { Zoom3Query } from 'src/generated/graphql'
 import { useFitDataToDimensions } from '../hooks/useFitToDataToDimensions'
+
+import { useRandomBackgroundData } from '../hooks/useRandomColorData'
 import { useZoomToD3Element } from '../hooks/useZoomToD3Element'
+import { useD3Pagination } from './hooks/useD3Pagination'
 import { useD3Simulation } from './hooks/useD3Simulation'
 
 import { PaginatedFilterType } from './types'
@@ -11,11 +15,17 @@ interface Dimensions {
     width?: number | null
 }
 
-export function usePresenter(dimensions: Dimensions, data: PaginatedFilterType[], selector: string) {
+export function usePresenter(dimensions: Dimensions, data: Zoom3Query['zoomLevel3'], selector: string) {
     const router = useRouter()
-    const dataDimensions = useFitDataToDimensions(dimensions, data)
+    const dataDimensions = useFitDataToDimensions(
+        dimensions,
+        data,
+        d => d.uri ?? '',
+        d => d.count ?? 0
+    )
+    const backgrounds = useRandomBackgroundData(data, d => d.uri ?? '')
 
-    const { svgRef } = useD3Simulation(dimensions, data, selector, dataDimensions)
+    const { svgRef, simulation } = useD3Simulation(dimensions, data, selector, dataDimensions)
     const navigateTo = useCallback(
         (d: d3.SimulationNodeDatum & PaginatedFilterType) => {
             router.push(`${router.query.slug}/${d.name}`)
@@ -23,10 +33,13 @@ export function usePresenter(dimensions: Dimensions, data: PaginatedFilterType[]
         [router]
     )
     const zoomEvents = useZoomToD3Element<PaginatedFilterType>(svgRef, dimensions, `.foreign-${selector}`, navigateTo)
+    const pagination = useD3Pagination(simulation, selector)
 
     return {
         svgRef,
         dataDimensions,
         ...zoomEvents,
+        ...pagination,
+        backgrounds,
     }
 }

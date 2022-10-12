@@ -80,7 +80,7 @@ function useListenToSimulationTicks(
 }
 
 function getDataDimension(dataDimensions: DataDimension[], d: Partial<D3CollectionItem>) {
-    return dataDimensions?.find(item => item.name === d.name)
+    return dataDimensions?.find(item => item.id === d.uri)
 }
 
 function getTakeSpaceFromDataDimensions(dataDimensions: DataDimension[], d: Partial<D3CollectionItem>) {
