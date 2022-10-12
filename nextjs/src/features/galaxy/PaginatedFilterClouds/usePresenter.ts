@@ -33,7 +33,7 @@ export function usePresenter(dimensions: Dimensions, data: Zoom3Query['zoomLevel
         [router]
     )
     const zoomEvents = useZoomToD3Element<PaginatedFilterType>(svgRef, dimensions, `.foreign-${selector}`, navigateTo)
-    const pagination = useD3Pagination(simulation, selector)
+    const pagination = useD3Pagination(simulation, selector, svgRef)
 
     return {
         svgRef,

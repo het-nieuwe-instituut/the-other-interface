@@ -16,7 +16,17 @@ const DynamicPaginatedFilterCloudsNoSsr = dynamic(() => import('./PaginatedFilte
 })
 
 const PaginatedFilterCloudsContainer: React.FunctionComponent<Props> = props => {
-    const { data: zoom3, loading, error } = useZoom3Query()
+    const {
+        data: zoom3,
+        loading,
+        error,
+    } = useZoom3Query({
+        variables: {
+            filterId: 'author',
+            page: 1,
+            pageSize: 16,
+        },
+    })
 
     if (loading) {
         return <Text>Loading</Text>
