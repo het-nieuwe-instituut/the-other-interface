@@ -208,7 +208,45 @@ export class PublicationsService {
         [PublicationsZoomLevel5Types.serial]: 'zoom-5-books-serial/run',
     }
 
+    // TODO: change to convention when Triply adds this to normal space
+    private readonly publicationDescriptionLevelEndpoint =
+        'https://api.collectiedata.hetnieuweinstituut.nl/queries/Joran/zoom5-books-type-only/run?'
+
     public constructor(private triplyService: TriplyService) {}
+
+    public async determinePublicationType(id: string) {
+        interface TypeOfPublicationData {
+            record: string
+            typeOfPublication: string
+        }
+
+        const uri = TriplyUtils.getUriForTypeAndId(EntityNames.Publications, id)
+        const res = await this.triplyService.queryTriplyData<TypeOfPublicationData>(
+            this.publicationDescriptionLevelEndpoint,
+            undefined,
+            { record: uri }
+        )
+
+        if (!res?.data?.length) {
+            return PublicationsZoomLevel5Types.book
+        }
+
+        switch (res.data[0].typeOfPublication) {
+            case 'tijdschrift': {
+                return PublicationsZoomLevel5Types.serial
+            }
+            case 'tijdschriftartikel': {
+                return PublicationsZoomLevel5Types.article
+            }
+            case 'audio-visueel materiaal': {
+                return PublicationsZoomLevel5Types.audiovisual
+            }
+            case 'boek':
+            default: {
+                return PublicationsZoomLevel5Types.book
+            }
+        }
+    }
 
     public async getZoomLevel2Data() {
         const result = await this.triplyService.queryTriplyData<PublicationsFilterData>(this.zoomLevel2Endpoint)
@@ -241,10 +279,7 @@ export class PublicationsService {
             return []
         }
 
-        const searchParams = []
-        for (const [filterName, filterValue] of Object.entries(filters)) {
-            searchParams.push({ key: filterName, value: filterValue })
-        }
+        const searchParams = TriplyUtils.getQueryParamsFromObject(filters)
 
         const result = await this.triplyService.queryTriplyData<PublicationsZoomLevel4Data>(
             this.ZoomLevel4Endpoint,
@@ -254,7 +289,11 @@ export class PublicationsService {
             },
             searchParams
         )
-        const countResult = await this.triplyService.getCountData(this.ZoomLevel4CountEndpoint, searchParams)
+        const countResult = await this.triplyService.queryTriplyData<{ count?: number }>(
+            this.ZoomLevel4CountEndpoint,
+            undefined,
+            searchParams
+        )
         const total = countResult.data.pop()?.count || 0
 
         return {
@@ -278,15 +317,10 @@ export class PublicationsService {
         const result = await this.triplyService.queryTriplyData<PublicationsZoomLevel5DataTypes>(
             this.ZoomLevel5Endpoint[publicationType],
             undefined,
-            [
-                {
-                    key: 'record',
-                    value: uri,
-                },
-            ]
+            { record: uri }
         )
 
-        return TriplyUtils.combineObjectArray(result.data)
+        return { ...TriplyUtils.combineObjectArray(result.data), id: objectId, type: publicationType }
     }
 
     public validateFilterInput(input: string): PublicationsZoomLevel3Ids {

@@ -122,8 +122,8 @@ export type ComponentCoreCarouselItem = {
     id: Scalars['ID']
     name?: Maybe<Scalars['String']>
     picture?: Maybe<UploadFileEntityResponse>
+    triply_record?: Maybe<TriplyRecordEntityResponse>
     type?: Maybe<Enum_Componentcorecarouselitem_Type>
-    uri_id?: Maybe<Scalars['String']>
 }
 
 export type ComponentCoreCarouselItemFiltersInput = {
@@ -132,8 +132,8 @@ export type ComponentCoreCarouselItemFiltersInput = {
     name?: InputMaybe<StringFilterInput>
     not?: InputMaybe<ComponentCoreCarouselItemFiltersInput>
     or?: InputMaybe<Array<InputMaybe<ComponentCoreCarouselItemFiltersInput>>>
+    triply_record?: InputMaybe<TriplyRecordFiltersInput>
     type?: InputMaybe<StringFilterInput>
-    uri_id?: InputMaybe<StringFilterInput>
 }
 
 export type ComponentCoreModuleLayouts = {
@@ -2187,7 +2187,6 @@ export type HomepageFragmentFragment = {
                   description?: string | null
                   name?: string | null
                   type?: Enum_Componentcorecarouselitem_Type | null
-                  uri_id?: string | null
                   picture?: {
                       __typename?: 'UploadFileEntityResponse'
                       data?: {
@@ -2211,6 +2210,18 @@ export type HomepageFragmentFragment = {
                               provider_metadata?: any | null
                               updatedAt?: any | null
                               width?: number | null
+                          } | null
+                      } | null
+                  } | null
+                  triply_record?: {
+                      __typename?: 'TriplyRecordEntityResponse'
+                      data?: {
+                          __typename?: 'TriplyRecordEntity'
+                          id?: string | null
+                          attributes?: {
+                              __typename?: 'TriplyRecord'
+                              recordId: string
+                              type: Enum_Triplyrecord_Type
                           } | null
                       } | null
                   } | null
@@ -2479,7 +2490,6 @@ export type HomepageQuery = {
                                           description?: string | null
                                           name?: string | null
                                           type?: Enum_Componentcorecarouselitem_Type | null
-                                          uri_id?: string | null
                                           picture?: {
                                               __typename?: 'UploadFileEntityResponse'
                                               data?: {
@@ -2503,6 +2513,18 @@ export type HomepageQuery = {
                                                       provider_metadata?: any | null
                                                       updatedAt?: any | null
                                                       width?: number | null
+                                                  } | null
+                                              } | null
+                                          } | null
+                                          triply_record?: {
+                                              __typename?: 'TriplyRecordEntityResponse'
+                                              data?: {
+                                                  __typename?: 'TriplyRecordEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'TriplyRecord'
+                                                      recordId: string
+                                                      type: Enum_Triplyrecord_Type
                                                   } | null
                                               } | null
                                           } | null
@@ -2741,7 +2763,6 @@ export type HomepageQuery = {
                               description?: string | null
                               name?: string | null
                               type?: Enum_Componentcorecarouselitem_Type | null
-                              uri_id?: string | null
                               picture?: {
                                   __typename?: 'UploadFileEntityResponse'
                                   data?: {
@@ -2765,6 +2786,18 @@ export type HomepageQuery = {
                                           provider_metadata?: any | null
                                           updatedAt?: any | null
                                           width?: number | null
+                                      } | null
+                                  } | null
+                              } | null
+                              triply_record?: {
+                                  __typename?: 'TriplyRecordEntityResponse'
+                                  data?: {
+                                      __typename?: 'TriplyRecordEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'TriplyRecord'
+                                          recordId: string
+                                          type: Enum_Triplyrecord_Type
                                       } | null
                                   } | null
                               } | null
@@ -7145,7 +7178,6 @@ export type ComponentCoreCarouselItemFragmentFragment = {
     description?: string | null
     name?: string | null
     type?: Enum_Componentcorecarouselitem_Type | null
-    uri_id?: string | null
     picture?: {
         __typename?: 'UploadFileEntityResponse'
         data?: {
@@ -7170,6 +7202,14 @@ export type ComponentCoreCarouselItemFragmentFragment = {
                 updatedAt?: any | null
                 width?: number | null
             } | null
+        } | null
+    } | null
+    triply_record?: {
+        __typename?: 'TriplyRecordEntityResponse'
+        data?: {
+            __typename?: 'TriplyRecordEntity'
+            id?: string | null
+            attributes?: { __typename?: 'TriplyRecord'; recordId: string; type: Enum_Triplyrecord_Type } | null
         } | null
     } | null
 }
@@ -7292,7 +7332,6 @@ export type ComponentModulesCarouselFragmentFragment = {
         description?: string | null
         name?: string | null
         type?: Enum_Componentcorecarouselitem_Type | null
-        uri_id?: string | null
         picture?: {
             __typename?: 'UploadFileEntityResponse'
             data?: {
@@ -7317,6 +7356,14 @@ export type ComponentModulesCarouselFragmentFragment = {
                     updatedAt?: any | null
                     width?: number | null
                 } | null
+            } | null
+        } | null
+        triply_record?: {
+            __typename?: 'TriplyRecordEntityResponse'
+            data?: {
+                __typename?: 'TriplyRecordEntity'
+                id?: string | null
+                attributes?: { __typename?: 'TriplyRecord'; recordId: string; type: Enum_Triplyrecord_Type } | null
             } | null
         } | null
     } | null> | null
@@ -8912,6 +8959,15 @@ export const ComponentModulesPullquoteFragmentFragmentDoc = gql`
     }
     ${ComponentCoreModuleLayoutsFragmentFragmentDoc}
 `
+export const BaseTriplyRecordFragmentFragmentDoc = gql`
+    fragment BaseTriplyRecordFragment on TriplyRecordEntity {
+        id
+        attributes {
+            recordId
+            type
+        }
+    }
+`
 export const ComponentCoreCarouselItemFragmentFragmentDoc = gql`
     fragment ComponentCoreCarouselItemFragment on ComponentCoreCarouselItem {
         id
@@ -8921,9 +8977,14 @@ export const ComponentCoreCarouselItemFragmentFragmentDoc = gql`
             ...UploadFileEntityResponseFragment
         }
         type
-        uri_id
+        triply_record {
+            data {
+                ...BaseTriplyRecordFragment
+            }
+        }
     }
     ${UploadFileEntityResponseFragmentFragmentDoc}
+    ${BaseTriplyRecordFragmentFragmentDoc}
 `
 export const ComponentModulesCarouselFragmentFragmentDoc = gql`
     fragment ComponentModulesCarouselFragment on ComponentModulesCarousel {
@@ -9344,15 +9405,6 @@ export const ResponseCollectionMetaFragmentFragmentDoc = gql`
         }
     }
     ${PaginationFragmentFragmentDoc}
-`
-export const BaseTriplyRecordFragmentFragmentDoc = gql`
-    fragment BaseTriplyRecordFragment on TriplyRecordEntity {
-        id
-        attributes {
-            recordId
-            type
-        }
-    }
 `
 export const StoryFragmentFragmentDoc = gql`
     fragment StoryFragment on StoryEntity {

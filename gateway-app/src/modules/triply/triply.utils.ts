@@ -123,4 +123,15 @@ export class TriplyUtils {
 
         return output
     }
+
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    public static getQueryParamsFromObject(obj: Object): Record<string, string> {
+        const queryParams: Record<string, string> = {}
+
+        for (const [filterName, filterValue] of Object.entries(obj)) {
+            queryParams[`${filterName}`] = filterValue
+        }
+
+        return queryParams
+    }
 }
