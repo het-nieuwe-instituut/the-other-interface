@@ -91,7 +91,7 @@ export const StoryMeta: React.FC<Props> = ({ story }) => {
                 <ButtonsGrid
                     flexDirection="column"
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    buttons={story.attributes.storyLinks.buttons ?? ([] as any)}
+                    buttons={story.attributes.storyLinks.buttons ?? []}
                     buttonStyle={EnumComponentmodulesbuttonsmoduleButtonstyle.Default}
                 ></ButtonsGrid>
             )}
