@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Dimensions } from '@/features/GalaxyInterface/types/galaxy'
 import * as d3 from 'd3'
 import { MouseEvent, MutableRefObject, useCallback, useEffect, useRef, useState } from 'react'
+import { Dimensions } from '../types/galaxy'
 
 export function useZoomToD3Element<DType>(
     svgRef: MutableRefObject<SVGSVGElement | null>,

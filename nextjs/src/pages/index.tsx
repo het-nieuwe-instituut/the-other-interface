@@ -1,8 +1,8 @@
 import { addApolloState, getApolloClient } from '@/features/graphql/config/apollo'
 import { HomepageContainer } from '@/features/pages/containers/HomepageContainer/HomepageContainer'
-import homePageTask from '@/features/pages/tasks/homePageTask'
 import { preparePageConfiguration } from '@/features/shared/utils/pageConfiguration'
 import { GetServerSidePropsContext } from 'next'
+import { HomepageDocument, HomepageQuery } from 'src/generated/graphql'
 
 const Home = () => {
     return <HomepageContainer />
@@ -11,13 +11,18 @@ const Home = () => {
 export default Home
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
-   const result = await homePageTask(context)
+    const apolloClient = getApolloClient({ headers: context?.req?.headers })
+
+    const result = await apolloClient.query<HomepageQuery>({
+        variables: {
+            locale: context.locale,
+        },
+        query: HomepageDocument,
+    })
 
     if (result.error || !result.data.homepage?.data?.attributes) {
         return { notFound: true }
     }
-
-    const apolloClient = getApolloClient({ headers: context?.req?.headers })
 
     preparePageConfiguration(apolloClient, { host: context.req.headers.host ?? '', imagePath: process.env.NEXT_PUBLIC_REACT_APP_IMAGE_BASE_URL ?? '' })
 

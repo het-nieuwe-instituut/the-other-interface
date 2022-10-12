@@ -7,7 +7,7 @@ import { useZoomLevel1Query } from 'src/generated/graphql'
 import { calcRandomTrianglePoint, selectRandomTriangle } from '../../utils/polygons'
 
 export interface InstancesPerClass {
-    instance: string
+    slug: string
     title: string
     parent: string
     id: string
@@ -59,7 +59,7 @@ interface InstancesPerClassWithPoint extends InstancesPerClass {
 
 interface DataPoint {
     point: number[]
-    instance: string
+    slug: string
     title: string
     parent: string
     id: string

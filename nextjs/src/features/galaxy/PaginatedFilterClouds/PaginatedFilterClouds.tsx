@@ -1,4 +1,3 @@
-import { Circle } from '@/features/GalaxyInterface/components/Circle'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import PaginationLeft from '@/icons/arrows/pagination-left.svg'
 import PaginationRight from '@/icons/arrows/pagination-right.svg'
@@ -7,6 +6,8 @@ import { useId } from 'react'
 import { Zoom3Query } from 'src/generated/graphql'
 import { SupportedLandingPages } from '../FilterClouds/FilterClouds'
 import { usePresenter } from './usePresenter'
+import { PaginatedFilterType } from './types'
+import { Circle } from '../components/Circle'
 
 type Props = {
     zoom3: Zoom3Query['zoomLevel3']

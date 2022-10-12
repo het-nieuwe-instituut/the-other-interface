@@ -1,10 +1,9 @@
-import { Dimensions } from '@/features/GalaxyInterface/types/galaxy'
 import { useInitializeD3Simulation } from '@/features/shared/hooks/useInitializeD3Simulation'
 import * as d3 from 'd3'
 import { SimulationNodeDatum } from 'd3'
 import { MutableRefObject, useEffect, useRef } from 'react'
 import { DataDimension } from '../../hooks/useFitToDataToDimensions'
-import { PaginatedFilterType } from '../types'
+import { Dimensions, PaginatedFilterType } from '../types'
 
 const collisionData = [{ id: 'collision' }]
 const collision = 120

@@ -1,20 +1,15 @@
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Box, Flex, Text } from '@chakra-ui/react'
-import { times, uniqueId } from 'lodash'
-import React, { forwardRef, useEffect, useId, useMemo, useState } from 'react'
+import React, { forwardRef, useId} from 'react'
 import { Dimensions, ZoomLevel } from '../types/galaxy'
 import { StoriesSystem } from '../components/StoriesSystem/StoriesSystem'
 import { Circle } from '../components/Circle'
 import { GalaxyShadowBackground } from '../components/GalaxyShadowBackground'
-import { storiesStubs } from '../components/stubs'
-import { ObjectPerTypeWithName } from '../hooks/useD3Simulation'
+
 import { usePresenter } from './usePresenter'
-import { ZoomLevel1Query } from 'src/generated/graphql'
-import { galaxyTypesToPositions } from '../galaxyConstants'
 
 interface Props {
     dimensions: Dimensions
-    data: ZoomLevel1Query
 }
 
 export interface InstancesPerClass {
@@ -23,67 +18,12 @@ export interface InstancesPerClass {
     parent: string
 }
 
-// TODO: should implement real data, remove useQuery and fetchInstancesPerClass
-async function fetchInstancesPerClass() {
-    const stub = () => new Promise<typeof storiesStubs>(resolve => resolve(storiesStubs))
-    const instancesPerClass = await stub()
-    const parents = times(instancesPerClass.length / 10, i => `test${i}`)
-
-    return instancesPerClass
-        .map(item => ({
-            ...item,
-            parent: parents[Math.floor((Math.random() * instancesPerClass.length) / 10) + 1] ?? parents[0],
-            id: uniqueId(),
-        }))
-        .slice(0, 1000)
-}
-
-function useQuery<T, Q extends () => ReturnType<Q>>(keys: T, query: Q) {
-    const [isLoading, setIsloading] = useState(false)
-    const [isError, setIsError] = useState(false)
-    const [data, setData] = useState<Awaited<ReturnType<Q>> | undefined>(undefined)
-
-    useEffect(() => {
-        async function handle() {
-            try {
-                setIsError(false)
-                setIsloading(true)
-                const result = await query()
-                setIsloading(false)
-                setData(result as Awaited<ReturnType<Q>> | undefined)
-            } catch {
-                setIsError(true)
-            }
-        }
-
-        handle()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
-    return {
-        isLoading,
-        isError,
-        data,
-    }
-}
-
-
-
-
 export const GALAXY_BASE = 800
-const Galaxy: React.FC<Props> = ({dimensions, data}) => {
-    const { isLoading, data: stories } = useQuery(['instances-per-class'], () => fetchInstancesPerClass())
-    // TODO: remove when connected to the gateway
-    const objectsPerTypeWithIds = useMemo(
-        () => data?.zoomLevel1?.map(item => ({ ...item, ...galaxyTypesToPositions[item?.id], numberOfInstances: item.count, class: item.id })) as ObjectPerTypeWithName[],
-        [data]
-    )
+const Galaxy: React.FC<Props> = ({dimensions}) => {
     const { t } = useTypeSafeTranslation('homepage')
-
     const id = useId().replaceAll(':', '')
-    const { svgRef, setZoomLevel, zoomTo, zoomLevel, storiesSystemRef } = usePresenter(
+    const { svgRef, setZoomLevel, zoomTo, zoomLevel, storiesSystemRef, isLoading, stories, objectsPerTypeWithIds } = usePresenter(
         dimensions,
-        objectsPerTypeWithIds,
         id
     )
     const height = dimensions.height ?? 0
