@@ -2,7 +2,8 @@ import { Circle } from '@/features/galaxy/components/Circle'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Box, Text } from '@chakra-ui/react'
 import { useId } from 'react'
-import { EntityNames } from 'src/generated/graphql'
+import { ZoomLevel2Query } from 'src/generated/graphql'
+import { SupportedLandingPages } from './FilterCloudsContainer'
 import { usePresenter } from './usePresenter'
 
 type Props = {
@@ -10,15 +11,16 @@ type Props = {
         height: number
         width: number
     }
-    type: EntityNames
+    zoomLevel2: ZoomLevel2Query['zoomLevel2']
+    type: SupportedLandingPages
 }
 
-const FilterClouds: React.FunctionComponent<Props> = ({ dimensions, type }) => {
+const FilterClouds: React.FunctionComponent<Props> = ({ dimensions, type, zoomLevel2 }) => {
     const { width, height } = dimensions
     const svgWidth = width
     const svgHeight = height
     const id = useId().replaceAll(':', '')
-    const { svgRef, zoomed, objectsPerTypeWithIds } = usePresenter(dimensions, id)
+    const { svgRef, zoomed, objectsPerTypeWithIds } = usePresenter(dimensions, id, zoomLevel2)
     const { t } = useTypeSafeTranslation('landingpage')
 
     return (
@@ -34,8 +36,8 @@ const FilterClouds: React.FunctionComponent<Props> = ({ dimensions, type }) => {
                         <Circle
                             key={`${index}-${array.length}`}
                             className={id}
-                            defaultBackground={`levels.z2.${type}Filters.${item.name}`}
-                            hoverBackground={`levels.z2.${type}Filters.${item.name}`}
+                            defaultBackground={`levels.z2.${type}Filters.${item.id}`}
+                            hoverBackground={`levels.z2.${type}Filters.${item.id}`}
                         >
                             <Box
                                 as="button"

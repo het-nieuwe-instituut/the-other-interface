@@ -1,6 +1,7 @@
 export interface FilterType {
     name: string
     numberOfInstances: number
+    id: string
 }
 
 export enum PossibleFilters {

@@ -1,37 +1,27 @@
 import { randomNumberBetweenPoints } from '@/features/shared/utils/numbers'
 import { useRouter } from 'next/router'
 import { useCallback, useMemo } from 'react'
-import { EntityNames, useZoomLevel2Query } from 'src/generated/graphql'
-import { LandingPageQueryParams } from 'src/pages/landingpage/[slug]'
+import { ZoomLevel2Query } from 'src/generated/graphql'
 import { useFitDataToDimensions } from '../hooks/useFitToDataToDimensions'
 import { useZoomToD3Element } from '../hooks/useZoomToD3Element'
 import { useD3Simulation } from './hooks/useD3Simulation'
-
 import { Dimensions, FilterType } from './types'
 
-const TypeToEntityName: Record<string, EntityNames> = {
-    publications: EntityNames.Publications,
-    people: EntityNames.People,
-    objects: EntityNames.Objects,
-    archives: EntityNames.Archives
-}
-
-export function usePresenter(dimensions: Dimensions, selector: string) {
+export function usePresenter(dimensions: Dimensions, selector: string, zoom2: ZoomLevel2Query['zoomLevel2']) {
     const router = useRouter()
-    const queryParams = router.query as unknown as LandingPageQueryParams
-    const type = queryParams.slug
-    
-    const { data: filters, loading: isFiltersLoading, error: filtersError } = useZoomLevel2Query({
-        variables: {
-           entityName: TypeToEntityName[type]
-        },
-    });
-
-    const objectsPerTypeWithIds = useMemo(() => filters?.zoomLevel2?.map(item => ({ ...item, name: item?.filter, numberOfInstances: randomNumberBetweenPoints(60, 250) })), [filters?.zoomLevel2]) ?? []
+    const objectsPerTypeWithIds = useMemo(
+        () =>
+            zoom2.map(item => ({
+                ...item,
+                name: item?.filter,
+                numberOfInstances: randomNumberBetweenPoints(60, 250),
+            })),
+        [zoom2]
+    )
 
     // TODO solve rerender problems
     // console.log(objectsPerTypeWithIds)
-    
+
     const dataDimensions = useFitDataToDimensions(
         dimensions,
         objectsPerTypeWithIds,
@@ -41,7 +31,7 @@ export function usePresenter(dimensions: Dimensions, selector: string) {
     const { svgRef } = useD3Simulation(dimensions, objectsPerTypeWithIds, selector, dataDimensions)
     const navigateTo = useCallback(
         async (d: d3.SimulationNodeDatum & FilterType) => {
-            router.push(`${router.query.slug}/${d.name}`)
+            router.push(`${router.query.slug}/${d.id}`)
         },
         [router]
     )
@@ -52,7 +42,5 @@ export function usePresenter(dimensions: Dimensions, selector: string) {
         dataDimensions,
         ...zoomEvents,
         objectsPerTypeWithIds,
-        isFiltersLoading,
-        filtersError
     }
 }

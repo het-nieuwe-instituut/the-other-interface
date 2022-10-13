@@ -55,35 +55,36 @@ const colors = {
         },
         z2: {
             archivesFilters: {
-                byName: 'radial-gradient(50% 50% at 50% 50%, #A5D4FF 0%, rgba(165, 212, 255, 0) 100%)',
-                byDate: 'radial-gradient(50% 50% at 50% 50%, #5772FF 0%, rgba(87, 114, 255, 0) 100%)',
-                byDesLevel: 'radial-gradient(50% 50% at 50% 50%, #5FD8FF 0%, rgba(95, 216, 255, 0) 100%)',
+                relatedNames: 'radial-gradient(50% 50% at 50% 50%, #A5D4FF 0%, rgba(165, 212, 255, 0) 100%)',
+                date: 'radial-gradient(50% 50% at 50% 50%, #5772FF 0%, rgba(87, 114, 255, 0) 100%)',
+                descriptionLevel: 'radial-gradient(50% 50% at 50% 50%, #5FD8FF 0%, rgba(95, 216, 255, 0) 100%)',
             },
             objectsFilters: {
-                byPerson: 'radial-gradient(50% 50% at 50% 50%, #79A779 0%, rgba(121, 167, 121, 0) 100%)',
-                byProject: 'radial-gradient(50% 50% at 50% 50%, #00C170 0%, rgba(0, 193, 112, 0) 100%)',
-                bySubject: 'radial-gradient(50% 50% at 50% 50%, #7DCD8A 0%, rgba(125, 205, 138, 0) 100%)',
-                byMaker: 'radial-gradient(50% 50% at 50% 50%, #D2FFB7 0%, rgba(210, 255, 183, 0) 100%)',
-                byType: 'radial-gradient(50% 50% at 50% 50%, #6B8552 0%, rgba(110, 133, 82, 0) 100%)',
-                byDate: 'radial-gradient(50% 50% at 50% 50%, #CFFF8B 0%, rgba(211, 255, 139, 0) 100%)',
-                //TODO ask if it's not mistake in color names
-                by: 'radial-gradient(50% 50% at 50% 50%, #008A2E 0%, rgba(0, 138, 39, 0) 100%)',
+                personInstitution: 'radial-gradient(50% 50% at 50% 50%, #79A779 0%, rgba(121, 167, 121, 0) 100%)',
+                objectName: 'radial-gradient(50% 50% at 50% 50%, #00C170 0%, rgba(0, 193, 112, 0) 100%)',
+                subject: 'radial-gradient(50% 50% at 50% 50%, #7DCD8A 0%, rgba(125, 205, 138, 0) 100%)',
+                creator: 'radial-gradient(50% 50% at 50% 50%, #D2FFB7 0%, rgba(210, 255, 183, 0) 100%)',
+                technique: 'radial-gradient(50% 50% at 50% 50%, #6B8552 0%, rgba(110, 133, 82, 0) 100%)',
+                date: 'radial-gradient(50% 50% at 50% 50%, #CFFF8B 0%, rgba(211, 255, 139, 0) 100%)',
+
+                material: 'radial-gradient(50% 50% at 50% 50%, #008A2E 0%, rgba(0, 138, 39, 0) 100%)',
             },
             peopleFilters: {
-                byType: 'radial-gradient(50% 50% at 50% 50%, #F25562 0%, rgba(242, 85, 111, 0) 100%, rgba(242, 85, 98, 0) 100%)',
-                byDate: 'radial-gradient(50% 50% at 50% 50%, #F0B3D2 0%, rgba(240, 179, 210, 0) 100%)',
-                byPlace: ' radial-gradient(50% 50% at 50% 50%, #FF95ED 0%, rgba(255, 149, 238, 0) 100%)',
-                byBirthDate: 'radial-gradient(50% 50% at 50% 50%, #E26565 0%, rgba(226, 101, 101, 0) 100%)',
-                byProfession:
+                nameType:
+                    'radial-gradient(50% 50% at 50% 50%, #F25562 0%, rgba(242, 85, 111, 0) 100%, rgba(242, 85, 98, 0) 100%)',
+                period: 'radial-gradient(50% 50% at 50% 50%, #F0B3D2 0%, rgba(240, 179, 210, 0) 100%)',
+                place: ' radial-gradient(50% 50% at 50% 50%, #FF95ED 0%, rgba(255, 149, 238, 0) 100%)',
+                birthDate: 'radial-gradient(50% 50% at 50% 50%, #E26565 0%, rgba(226, 101, 101, 0) 100%)',
+                profession:
                     'radial-gradient(50% 50% at 50% 50%, #FFA5C3 0%, rgba(255, 165, 165, 0) 100%, rgba(255, 165, 195, 0) 100%)',
-                byDeathDate: 'radial-gradient(50% 50% at 50% 50%, #FF4EC4 0%, rgba(255, 78, 196, 0) 100%)',
+                deathDate: 'radial-gradient(50% 50% at 50% 50%, #FF4EC4 0%, rgba(255, 78, 196, 0) 100%)',
             },
             publicationsFilters: {
-                byAuthor: 'radial-gradient(50% 50% at 50% 50%, #FF9159 0%, rgba(255, 144, 89, 0) 100%)',
-                bySubject: 'radial-gradient(50% 50% at 50% 50%, #8A1F09 0%, rgba(138, 31, 9, 0) 100%)',
-                byDate: 'radial-gradient(50% 50% at 50% 50%, #FFDB95 0%, rgba(255, 219, 149, 0) 100%)',
-                byPerson: 'radial-gradient(50% 50% at 50% 50%, #A28466 0%, rgba(162, 132, 102, 0) 100%)',
-                byLocation: 'radial-gradient(50% 50% at 50% 50%, #FF4000 0%, rgba(255, 64, 0, 0) 100%)',
+                author: 'radial-gradient(50% 50% at 50% 50%, #FF9159 0%, rgba(255, 144, 89, 0) 100%)',
+                subject: 'radial-gradient(50% 50% at 50% 50%, #8A1F09 0%, rgba(138, 31, 9, 0) 100%)',
+                typeOfPublication: 'radial-gradient(50% 50% at 50% 50%, #FFDB95 0%, rgba(255, 219, 149, 0) 100%)',
+                relatedPerson: 'radial-gradient(50% 50% at 50% 50%, #A28466 0%, rgba(162, 132, 102, 0) 100%)',
+                geographicalKeyword: 'radial-gradient(50% 50% at 50% 50%, #FF4000 0%, rgba(255, 64, 0, 0) 100%)',
             },
         },
     },
