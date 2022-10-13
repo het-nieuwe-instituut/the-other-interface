@@ -1,0 +1,50 @@
+---
+- name: backups | start postgres backup container production
+  docker_container:
+    name: postgres-backup
+    image: lifely/postgres-backup-container:cfed7a3dcce1944363af6738a143ba72dc2ab33f
+    pull: true
+    state: started
+    restart_policy: always
+    env:
+      AWS_S3_BACKUP_NAME: postgres
+      AWS_S3_PREFIX: "{{ server_environment_name }}"
+      AWS_S3_BUCKET: "{{ app.backups.aws.bucket }}"
+      AWS_REGION: "{{ app.backups.aws.region }}"
+      AWS_ACCESS_KEY_ID: "{{ app.backups.aws.access_key_id }}"
+      AWS_SECRET_ACCESS_KEY: "{{ app.backups.aws.access_key_secret }}"
+      AWS_SSE_KEY: "{{ app.backups.aws.sse_key }}"
+      POSTGRES_HOST: "{{ app.db.host }}"
+      POSTGRES_PORT: "{{ app.db.port }}"
+      POSTGRES_USER: "{{ app.db.username }}"
+      POSTGRES_PASSWORD: "{{ app.db.password }}"
+      POSTGRES_DB: "{{ app.db.name }}"
+      POSTGRES_EXTRA_OPTS: --clean
+      SCHEDULE: "45 2 * * *"
+  when: "'backups' in app and server_environment_name == 'production'"
+  tags: [backups, postgres-backup]
+
+- name: backups | start postgres backup container staging/acc
+  docker_container:
+    name: postgres-backup
+    image: lifely/postgres-backup-container:cfed7a3dcce1944363af6738a143ba72dc2ab33f
+    pull: true
+    state: started
+    restart_policy: always
+    env:
+      AWS_S3_BACKUP_NAME: postgres
+      AWS_S3_PREFIX: "{{ server_environment_name }}"
+      AWS_S3_BUCKET: "{{ app.backups.aws.bucket }}"
+      AWS_REGION: "{{ app.backups.aws.region }}"
+      AWS_ACCESS_KEY_ID: "{{ app.backups.aws.access_key_id }}"
+      AWS_SECRET_ACCESS_KEY: "{{ app.backups.aws.access_key_secret }}"
+      AWS_SSE_KEY: "{{ app.backups.aws.sse_key }}"
+      POSTGRES_HOST: "{{ app.db.host }}"
+      POSTGRES_PORT: "{{ app.db.port }}"
+      POSTGRES_USER: "{{ app.db.username }}"
+      POSTGRES_PASSWORD: "{{ app.db.password }}"
+      POSTGRES_DB: "{{ app.db.name }}"
+      POSTGRES_EXTRA_OPTS: --clean
+      SCHEDULE: "45 2 * * 1"
+  when: "'backups' in app and server_environment_name in ['staging','acceptance']"
+  tags: [backups, postgres-backup]
