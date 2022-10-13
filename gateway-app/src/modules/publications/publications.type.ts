@@ -1,4 +1,5 @@
-import { Field, InputType, ObjectType } from '@nestjs/graphql'
+import { createUnionType, Field, InputType, ObjectType, registerEnumType } from '@nestjs/graphql'
+import { PublicationsZoomLevel5Types } from './publications.service'
 
 @InputType()
 export class PublicationsZoomLevel4FiltersArgs {
@@ -18,8 +19,19 @@ export class PublicationsZoomLevel4FiltersArgs {
     public RelatedPerInst: string | null
 }
 
+registerEnumType(PublicationsZoomLevel5Types, { name: 'PublicationsZoomLevel5Types' })
+
 @ObjectType()
-export class PublicationsAudioVisualZoomLevel5DetailType {
+class BasePublicationZoomLevel5Type {
+    @Field()
+    public id: string
+
+    @Field(() => PublicationsZoomLevel5Types)
+    public type: PublicationsZoomLevel5Types
+}
+
+@ObjectType()
+export class PublicationsAudioVisualZoomLevel5DetailType extends BasePublicationZoomLevel5Type {
     @Field(() => String, { nullable: true })
     public typeOfPublication?: string
 
@@ -106,7 +118,7 @@ export class PublicationsAudioVisualZoomLevel5DetailType {
 }
 
 @ObjectType()
-export class PublicationsArticleZoomLevel5DetailType {
+export class PublicationsArticleZoomLevel5DetailType extends BasePublicationZoomLevel5Type {
     @Field(() => String, { nullable: true })
     public typeOfPublication?: string
 
@@ -193,7 +205,7 @@ export class PublicationsArticleZoomLevel5DetailType {
 }
 
 @ObjectType()
-export class PublicationsSerialZoomLevel5DetailType {
+export class PublicationsSerialZoomLevel5DetailType extends BasePublicationZoomLevel5Type {
     @Field(() => String, { nullable: true })
     public typeOfPublication?: string
 
@@ -253,7 +265,7 @@ export class PublicationsSerialZoomLevel5DetailType {
 }
 
 @ObjectType()
-export class PublicationsBookZoomLevel5DetailType {
+export class PublicationsBookZoomLevel5DetailType extends BasePublicationZoomLevel5Type {
     @Field(() => String, { nullable: true })
     public typeOfPublication?: string
 
@@ -356,3 +368,28 @@ export class PublicationsBookZoomLevel5DetailType {
     @Field(() => String, { nullable: true })
     public permanentLink?: string
 }
+
+export const PublicationZoomLevel5UnionType = createUnionType({
+    name: 'PublicationZoomLevel5UnionType',
+    types: () =>
+        [
+            PublicationsAudioVisualZoomLevel5DetailType,
+            PublicationsArticleZoomLevel5DetailType,
+            PublicationsSerialZoomLevel5DetailType,
+            PublicationsBookZoomLevel5DetailType,
+        ] as const,
+    resolveType: (publication: BasePublicationZoomLevel5Type) => {
+        switch (publication.type) {
+            case PublicationsZoomLevel5Types.audiovisual:
+                return PublicationsAudioVisualZoomLevel5DetailType
+            case PublicationsZoomLevel5Types.article:
+                return PublicationsArticleZoomLevel5DetailType
+            case PublicationsZoomLevel5Types.serial:
+                return PublicationsSerialZoomLevel5DetailType
+            case PublicationsZoomLevel5Types.book:
+                return PublicationsBookZoomLevel5DetailType
+            default:
+                throw new Error(`publication type ${publication.type} cannot be resolved`)
+        }
+    },
+})
