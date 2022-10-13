@@ -22,7 +22,7 @@ const MediaImage = (props: MediaImageProps) => {
         >
             <Box maxW={'80rem'}>
                 <Box onClick={onClick} cursor={'pointer'} pb="2.5">
-                    <Img alt={alt_text || ''} src={imagePath} w="full" />
+                    <Img alt={alt_text || ''} src={imagePath} w="full" maxH={'42.5rem'} />
                 </Box>
                 {caption && (
                     <Box width={'100'} pb="1">

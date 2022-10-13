@@ -61,9 +61,11 @@ export const HomepageContainer = () => {
                     <DynamicGalaxyNoSsr data={result} dimensions={{ height: 800, width: sizes?.width }} />
                 )}
             </Box>
-            <Box px={{ xl: 6, base: 0 }} py={{ xl: 6, base: 0 }}>
-                <Box backgroundColor={'white'} maxW={theme.breakpoints.xl} marginX={'auto'}>
-                    <DynamicComponentRenderer components={data?.homepage?.data?.attributes?.components as HomepageComponentsDynamicZone[]} />
+            <Box px={{ xl: 6, base: 0 }}>
+                <Box backgroundColor={'white'} maxW={theme.breakpoints.xl} marginX={'auto'} paddingTop={6}>
+                    <DynamicComponentRenderer
+                        components={data?.homepage?.data?.attributes?.components as HomepageComponentsDynamicZone[]}
+                    />
                 </Box>
             </Box>
         </div>
