@@ -36,7 +36,7 @@ export const StoryContainer: React.FC = () => {
     const story = data?.stories?.data[0]
 
     return (
-        <Box px={{ xl: 6, base: 0 }} py={{ xl: 6, base: 0 }}>
+        <Box px={{ xl: 6, base: 0 }}>
             <Box backgroundColor={'white'} px={6} maxW={theme.breakpoints.xl} marginX={'auto'}>
                 <Grid
                     pt={6}
@@ -60,7 +60,9 @@ export const StoryContainer: React.FC = () => {
                     </GridItem>
                 </Grid>
             </Box>
-            <DynamicComponentRenderer components={data?.stories?.data[0]?.attributes?.components as StoryComponentsDynamicZone[]} />
+            <DynamicComponentRenderer
+                components={data?.stories?.data[0]?.attributes?.components as StoryComponentsDynamicZone[]}
+            />
         </Box>
     )
 }

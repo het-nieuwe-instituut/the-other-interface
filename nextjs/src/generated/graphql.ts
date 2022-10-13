@@ -86,12 +86,15 @@ export type Scalars = {
   Date: any;
 };
 
+export type ArchiveZoomLevel5UnionType = ArchivesFondsZoomLevel5DetailType | ArchivesOtherZoomLevel5DetailType;
+
 export type ArchivesFondsZoomLevel5DetailType = {
   __typename?: 'ArchivesFondsZoomLevel5DetailType';
   dateLabel?: Maybe<Scalars['String']>;
   dimensionFree?: Maybe<Scalars['String']>;
   endDate?: Maybe<Scalars['String']>;
   existenceOfOriginals?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
   mediaReference?: Maybe<Scalars['String']>;
   mediaReferenceLabel?: Maybe<Scalars['String']>;
   objectNumber?: Maybe<Scalars['String']>;
@@ -102,6 +105,7 @@ export type ArchivesFondsZoomLevel5DetailType = {
   scopeContent?: Maybe<Scalars['String']>;
   startDate?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
+  type: ArchivesZoomLevel5Types;
 };
 
 export type ArchivesOtherZoomLevel5DetailType = {
@@ -116,6 +120,7 @@ export type ArchivesOtherZoomLevel5DetailType = {
   descriptionLevel?: Maybe<Scalars['String']>;
   endDate?: Maybe<Scalars['String']>;
   extent?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
   objectNumber?: Maybe<Scalars['String']>;
   partReference?: Maybe<Scalars['String']>;
   partTitle?: Maybe<Scalars['String']>;
@@ -130,6 +135,7 @@ export type ArchivesOtherZoomLevel5DetailType = {
   source?: Maybe<Scalars['String']>;
   startDate?: Maybe<Scalars['String']>;
   systemOfArrangement?: Maybe<Scalars['String']>;
+  type: ArchivesZoomLevel5Types;
 };
 
 export type ArchivesZoomLevel4FiltersArgs = {
@@ -138,6 +144,11 @@ export type ArchivesZoomLevel4FiltersArgs = {
   RelatedName?: InputMaybe<Scalars['String']>;
   StartDate?: InputMaybe<Scalars['String']>;
 };
+
+export enum ArchivesZoomLevel5Types {
+  Fonds = 'fonds',
+  Other = 'other'
+}
 
 export type Author = {
   __typename?: 'Author';
@@ -218,8 +229,8 @@ export type ComponentCoreCarouselItem = {
   id: Scalars['ID'];
   name?: Maybe<Scalars['String']>;
   picture?: Maybe<UploadFileEntityResponse>;
+  triply_record?: Maybe<TriplyRecordEntityResponse>;
   type?: Maybe<EnumComponentcorecarouselitemType>;
-  uri_id?: Maybe<Scalars['String']>;
 };
 
 export type ComponentCoreModuleLayouts = {
@@ -807,6 +818,8 @@ export type PoepleZoomLevel5DetailType = {
   startDate?: Maybe<Scalars['String']>;
 };
 
+export type PublicationZoomLevel5UnionType = PublicationsArticleZoomLevel5DetailType | PublicationsAudioVisualZoomLevel5DetailType | PublicationsBookZoomLevel5DetailType | PublicationsSerialZoomLevel5DetailType;
+
 export type PublicationsArticleZoomLevel5DetailType = {
   __typename?: 'PublicationsArticleZoomLevel5DetailType';
   abstract?: Maybe<Scalars['String']>;
@@ -817,6 +830,7 @@ export type PublicationsArticleZoomLevel5DetailType = {
   availability?: Maybe<Scalars['String']>;
   geographicalKeyword?: Maybe<Scalars['String']>;
   geographicalKeywordLabel?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
   issue?: Maybe<Scalars['String']>;
   language?: Maybe<Scalars['String']>;
   languageLabel?: Maybe<Scalars['String']>;
@@ -833,6 +847,7 @@ export type PublicationsArticleZoomLevel5DetailType = {
   subject?: Maybe<Scalars['String']>;
   subjectLabel?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
+  type: PublicationsZoomLevel5Types;
   typeOfPublication?: Maybe<Scalars['String']>;
   typeOfPublicationLabel?: Maybe<Scalars['String']>;
   volume?: Maybe<Scalars['String']>;
@@ -850,6 +865,7 @@ export type PublicationsAudioVisualZoomLevel5DetailType = {
   availability?: Maybe<Scalars['String']>;
   geographicalKeyword?: Maybe<Scalars['String']>;
   geographicalKeywordLabel?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
   language?: Maybe<Scalars['String']>;
   languageLabel?: Maybe<Scalars['String']>;
   medium?: Maybe<Scalars['String']>;
@@ -866,6 +882,7 @@ export type PublicationsAudioVisualZoomLevel5DetailType = {
   subject?: Maybe<Scalars['String']>;
   subjectLabel?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
+  type: PublicationsZoomLevel5Types;
   typeOfPublication?: Maybe<Scalars['String']>;
   typeOfPublicationLabel?: Maybe<Scalars['String']>;
   yearOfPublication?: Maybe<Scalars['String']>;
@@ -885,6 +902,7 @@ export type PublicationsBookZoomLevel5DetailType = {
   edition?: Maybe<Scalars['String']>;
   geographicalKeyword?: Maybe<Scalars['String']>;
   geographicalKeywordLabel?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
   illustration?: Maybe<Scalars['String']>;
   isbn?: Maybe<Scalars['String']>;
   language?: Maybe<Scalars['String']>;
@@ -904,6 +922,7 @@ export type PublicationsBookZoomLevel5DetailType = {
   subject?: Maybe<Scalars['String']>;
   subjectLabel?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
+  type: PublicationsZoomLevel5Types;
   typeOfPublication?: Maybe<Scalars['String']>;
   typeOfPublicationLabel?: Maybe<Scalars['String']>;
   yearOfPublication?: Maybe<Scalars['String']>;
@@ -915,6 +934,7 @@ export type PublicationsSerialZoomLevel5DetailType = {
   continuedAs?: Maybe<Scalars['String']>;
   continuedFrom?: Maybe<Scalars['String']>;
   holding?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
   language?: Maybe<Scalars['String']>;
   languageLabel?: Maybe<Scalars['String']>;
   permanentLink?: Maybe<Scalars['String']>;
@@ -927,6 +947,7 @@ export type PublicationsSerialZoomLevel5DetailType = {
   subject?: Maybe<Scalars['String']>;
   subjectLabel?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
+  type: PublicationsZoomLevel5Types;
   typeOfPublication?: Maybe<Scalars['String']>;
   typeOfPublicationLabel?: Maybe<Scalars['String']>;
   yearOfPublication?: Maybe<Scalars['String']>;
@@ -940,8 +961,16 @@ export type PublicationsZoomLevel4FiltersArgs = {
   TypeOfPublication?: InputMaybe<Scalars['String']>;
 };
 
+export enum PublicationsZoomLevel5Types {
+  Article = 'article',
+  Audiovisual = 'audiovisual',
+  Book = 'book',
+  Serial = 'serial'
+}
+
 export type Query = {
   __typename?: 'Query';
+  allRelations?: Maybe<Array<ZoomLevel5RelatedRecordType>>;
   author: AuthorEntityResponse;
   authors: AuthorEntityResponseCollection;
   homepage: HomepageEntityResponse;
@@ -951,7 +980,7 @@ export type Query = {
   locations: LocationRelationResponseCollection;
   menupage: MenupageEntityResponse;
   menupages: MenupageEntityResponseCollection;
-  relations?: Maybe<Array<ZoomLevel5Type>>;
+  relations?: Maybe<Array<ZoomLevel5RelationsType>>;
   stories: StoryEntityResponseCollection;
   story: StoryEntityResponse;
   table: TableEntityResponse;
@@ -963,7 +992,7 @@ export type Query = {
   zoomLevel1: Array<ZoomLevel1Type>;
   zoomLevel2: Array<ZoomLevel2Type>;
   zoomLevel3: Array<ZoomLevel3Type>;
-  zoomLevel4: Array<ZoomLevel4Type>;
+  zoomLevel4: ZoomLevel4ParentType;
   zoomLevel5ArchivesFonds?: Maybe<ArchivesFondsZoomLevel5DetailType>;
   zoomLevel5ArchivesOther?: Maybe<ArchivesOtherZoomLevel5DetailType>;
   zoomLevel5Object?: Maybe<ObjectsZoomLevel5DetailType>;
@@ -972,6 +1001,13 @@ export type Query = {
   zoomLevel5PublicationsAudiovisual?: Maybe<PublicationsAudioVisualZoomLevel5DetailType>;
   zoomLevel5PublicationsBook?: Maybe<PublicationsBookZoomLevel5DetailType>;
   zoomLevel5PublicationsSerial?: Maybe<PublicationsSerialZoomLevel5DetailType>;
+};
+
+
+export type QueryAllRelationsArgs = {
+  id: Scalars['String'];
+  relatedObjectsType: EntityNames;
+  type: EntityNames;
 };
 
 
@@ -1165,7 +1201,7 @@ export type RelatedRecordType = {
   __typename?: 'RelatedRecordType';
   id: Scalars['String'];
   label: Scalars['String'];
-  randomRelations?: Maybe<Array<ZoomLevel5Type>>;
+  relations?: Maybe<Array<ZoomLevel5RelationsType>>;
   type: EntityNames;
 };
 
@@ -1176,7 +1212,6 @@ export type ResponseCollectionMeta = {
 
 export type Story = {
   __typename?: 'Story';
-  archives?: Maybe<Array<Maybe<StoryArchivesUnionType>>>;
   author?: Maybe<AuthorEntityResponse>;
   components?: Maybe<Array<StoryComponentsDynamicZone>>;
   createdAt?: Maybe<Scalars['Date']>;
@@ -1184,10 +1219,7 @@ export type Story = {
   locale?: Maybe<Scalars['String']>;
   localizations?: Maybe<StoryRelationResponseCollection>;
   locations?: Maybe<LocationRelationResponseCollection>;
-  objects?: Maybe<Array<Maybe<ObjectsZoomLevel5DetailType>>>;
-  people?: Maybe<Array<Maybe<PoepleZoomLevel5DetailType>>>;
   publicationDate?: Maybe<ComponentCorePublicationDate>;
-  publications?: Maybe<Array<Maybe<StoryPublicationsUnionType>>>;
   publishedAt?: Maybe<Scalars['Date']>;
   shortDescription?: Maybe<Scalars['String']>;
   slug?: Maybe<Scalars['String']>;
@@ -1196,8 +1228,6 @@ export type Story = {
   triplyRecords?: Maybe<TriplyRecordRelationResponseCollection>;
   updatedAt?: Maybe<Scalars['Date']>;
 };
-
-export type StoryArchivesUnionType = ArchivesFondsZoomLevel5DetailType | ArchivesOtherZoomLevel5DetailType;
 
 export type StoryComponentsDynamicZone = ComponentModulesButtonsModule | ComponentModulesCarousel | ComponentModulesImage | ComponentModulesImageCarousel | ComponentModulesPullquote | ComponentModulesSubtitle | ComponentModulesTableModule | ComponentModulesTextModule | ComponentModulesTitleModule | Error;
 
@@ -1241,8 +1271,6 @@ export type StoryFiltersInput = {
   triplyRecords?: InputMaybe<TriplyRecordFiltersInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
 };
-
-export type StoryPublicationsUnionType = PublicationsArticleZoomLevel5DetailType | PublicationsAudioVisualZoomLevel5DetailType | PublicationsBookZoomLevel5DetailType | PublicationsSerialZoomLevel5DetailType;
 
 export type StoryRelationResponseCollection = {
   __typename?: 'StoryRelationResponseCollection';
@@ -1317,7 +1345,11 @@ export type TableFiltersInput = {
 
 export type TriplyRecord = {
   __typename?: 'TriplyRecord';
+  archive?: Maybe<ArchiveZoomLevel5UnionType>;
   createdAt?: Maybe<Scalars['Date']>;
+  object?: Maybe<ObjectsZoomLevel5DetailType>;
+  people?: Maybe<PoepleZoomLevel5DetailType>;
+  publication?: Maybe<PublicationZoomLevel5UnionType>;
   publishedAt?: Maybe<Scalars['Date']>;
   recordId: Scalars['String'];
   stories?: Maybe<StoryRelationResponseCollection>;
@@ -1530,6 +1562,15 @@ export type ZoomLevel3Type = {
   uri?: Maybe<Scalars['String']>;
 };
 
+export type ZoomLevel4ParentType = {
+  __typename?: 'ZoomLevel4ParentType';
+  appliedFilters?: Maybe<Scalars['String']>;
+  hasMore: Scalars['Boolean'];
+  nodes?: Maybe<Array<ZoomLevel4Type>>;
+  page: Scalars['Int'];
+  total: Scalars['Int'];
+};
+
 export type ZoomLevel4Type = {
   __typename?: 'ZoomLevel4Type';
   firstImage?: Maybe<Scalars['String']>;
@@ -1538,8 +1579,37 @@ export type ZoomLevel4Type = {
   title?: Maybe<Scalars['String']>;
 };
 
-export type ZoomLevel5Type = {
-  __typename?: 'ZoomLevel5Type';
+export type ZoomLevel5RelatedArchiveType = {
+  __typename?: 'ZoomLevel5RelatedArchiveType';
+  id: Scalars['String'];
+  type: EntityNames;
+};
+
+export type ZoomLevel5RelatedObjectType = {
+  __typename?: 'ZoomLevel5RelatedObjectType';
+  id: Scalars['String'];
+  type: EntityNames;
+};
+
+export type ZoomLevel5RelatedPeopleType = {
+  __typename?: 'ZoomLevel5RelatedPeopleType';
+  birthDate?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  profession?: Maybe<Scalars['String']>;
+  type: EntityNames;
+};
+
+export type ZoomLevel5RelatedPublicationType = {
+  __typename?: 'ZoomLevel5RelatedPublicationType';
+  id: Scalars['String'];
+  type: EntityNames;
+};
+
+export type ZoomLevel5RelatedRecordType = ZoomLevel5RelatedArchiveType | ZoomLevel5RelatedObjectType | ZoomLevel5RelatedPeopleType | ZoomLevel5RelatedPublicationType;
+
+export type ZoomLevel5RelationsType = {
+  __typename?: 'ZoomLevel5RelationsType';
   randomRelations?: Maybe<Array<RelatedRecordType>>;
   total: Scalars['Float'];
   type: EntityNames;

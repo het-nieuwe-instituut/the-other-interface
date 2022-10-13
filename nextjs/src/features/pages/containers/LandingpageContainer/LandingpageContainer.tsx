@@ -87,8 +87,15 @@ export const LandingpageContainer: React.FC = () => {
                     />
                 )}
             </Box>
-            <Box px={{ xl: 6, base: 0 }} py={{ xl: 6, base: 0 }}>
-                <Box backgroundColor={'white'} px={6} maxW={theme.breakpoints.xl} marginX={'auto'} pb={1}>
+            <Box px={{ xl: 6, base: 0 }}>
+                <Box
+                    backgroundColor={'white'}
+                    px={6}
+                    maxW={theme.breakpoints.xl}
+                    marginX={'auto'}
+                    pb={1}
+                    paddingTop={6}
+                >
                     <PageHeader
                         title={landingpage.attributes?.Title || undefined}
                         preface={landingpage.attributes?.Description || undefined}
