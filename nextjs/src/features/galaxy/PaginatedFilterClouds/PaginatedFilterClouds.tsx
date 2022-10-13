@@ -1,7 +1,7 @@
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import PaginationLeft from '@/icons/arrows/pagination-left.svg'
 import PaginationRight from '@/icons/arrows/pagination-right.svg'
-import { Box, Flex, IconButton, Text } from '@chakra-ui/react'
+import { Box, Flex, Text } from '@chakra-ui/react'
 import { useId } from 'react'
 import { Zoom3Query } from 'src/generated/graphql'
 import { Circle } from '../components/Circle'
@@ -39,43 +39,6 @@ const PaginatedFilterClouds: React.FunctionComponent<Props> = ({ dimensions, zoo
                 viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
                 style={{ overflow: 'visible' }}
             >
-                <Circle className={'collision'}>
-                    <Flex
-                        width="100%"
-                        height="100%"
-                        borderRadius="100%"
-                        zIndex="100"
-                        display="flex"
-                        alignItems="center"
-                        justifyContent="center"
-                    >
-                        <Flex flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
-                            <Text textStyle={'cloudText'} mb={1}>
-                                {total} {t('people')}
-                            </Text>
-                            <Flex alignItems={'center'} gap={1}>
-                                <IconButton
-                                    aria-label="left"
-                                    variant={'unstyled'}
-                                    padding={0}
-                                    border="none"
-                                    onClick={paginateBack}
-                                >
-                                    <PaginationLeft />
-                                </IconButton>
-                                <Text textStyle={'cloudText'}>{`${currentPage}/${totalPages}`}</Text>
-                                <IconButton
-                                    aria-label="right variant={'unstyled'}"
-                                    padding={0}
-                                    border="none"
-                                    onClick={paginateNext}
-                                >
-                                    <PaginationRight />
-                                </IconButton>
-                            </Flex>
-                        </Flex>
-                    </Flex>
-                </Circle>
                 {zoom3.map((item, index, array) => {
                     const backgroundItem = backgrounds.find(background => background.id === item.uri)
                     return (
@@ -109,6 +72,32 @@ const PaginatedFilterClouds: React.FunctionComponent<Props> = ({ dimensions, zoo
                         </Circle>
                     )
                 })}
+                <Circle className={'collision'}>
+                    <Flex
+                        width="100%"
+                        height="100%"
+                        borderRadius="100%"
+                        zIndex="100"
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                    >
+                        <Flex flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
+                            <Text textStyle={'cloudText'} mb={4}>
+                                {total} {t('people')}
+                            </Text>
+                            <Flex alignItems={'center'} gap={1}>
+                                <Box as={'button'} pr="2" aria-label="left" onClick={paginateBack}>
+                                    <PaginationLeft />
+                                </Box>
+                                <Text textStyle={'cloudText'}>{`${currentPage}/${totalPages}`}</Text>
+                                <Box as="button" pl="2" aria-label="right" onClick={paginateNext}>
+                                    <PaginationRight />
+                                </Box>
+                            </Flex>
+                        </Flex>
+                    </Flex>
+                </Circle>
             </svg>
         </Box>
     )

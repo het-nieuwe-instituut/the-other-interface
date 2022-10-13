@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import { useCallback } from 'react'
-import { Zoom3Query } from 'src/generated/graphql'
+import { Zoom3Document, Zoom3Query } from 'src/generated/graphql'
 import { useFitDataToDimensions } from '../hooks/useFitToDataToDimensions'
 
 import { useRandomBackgroundData } from '../hooks/useRandomColorData'
@@ -9,6 +9,7 @@ import { useD3Pagination } from '../hooks/useD3Pagination'
 import { useD3Simulation } from './hooks/useD3Simulation'
 
 import { PaginatedFilterType } from './types'
+import { useApolloClient } from '@apollo/client'
 
 interface Dimensions {
     height?: number | null
@@ -17,6 +18,7 @@ interface Dimensions {
 
 export function usePresenter(dimensions: Dimensions, data: Zoom3Query['zoomLevel3'], selector: string) {
     const router = useRouter()
+    const client = useApolloClient()
     const dataDimensions = useFitDataToDimensions(
         dimensions,
         data,
@@ -39,7 +41,21 @@ export function usePresenter(dimensions: Dimensions, data: Zoom3Query['zoomLevel
         svgRef,
         pageSize: 16,
         pathname: `/landingpage/${router.query.slug}/${router.query.filter}`,
+        total: getTotal(),
     })
+
+    function getTotal() {
+        const res = client.readQuery({
+            query: Zoom3Document,
+            variables: {
+                filterId: (router.query.filter as string) ?? '',
+                page: parseInt((router.query.page as string) ?? '0'),
+                pageSize: 16,
+            },
+        })
+
+        return res.zoomLevel3[0].total
+    }
 
     return {
         svgRef,

@@ -1,9 +1,7 @@
-import { useApolloClient } from '@apollo/client'
 import * as d3 from 'd3'
 import { Simulation } from 'd3'
 import { useRouter } from 'next/router'
 import { MutableRefObject, useCallback } from 'react'
-import { Zoom3Document } from 'src/generated/graphql'
 
 import { D3CollectionItem } from '../PaginatedFilterClouds/hooks/useD3Simulation'
 
@@ -13,18 +11,18 @@ interface Props {
     svgRef: MutableRefObject<SVGSVGElement | null>
     pathname: string
     pageSize: number
+    total: number
 }
 
-export function useD3Pagination({ simulation, selector, svgRef, pathname, pageSize }: Props) {
+export function useD3Pagination({ simulation, selector, svgRef, pathname, pageSize, total }: Props) {
     const router = useRouter()
-    const client = useApolloClient()
 
     async function paginateNext() {
         await animateOut()
 
         const page = router.query.page ? parseInt(router.query.page as string) : 0
         const newPage = page + 1
-        const total = getTotal()
+
         const totalSizeExceeded = newPage > (total ?? 0)
         if (totalSizeExceeded) {
             return
@@ -53,19 +51,6 @@ export function useD3Pagination({ simulation, selector, svgRef, pathname, pageSi
         })
     }
 
-    function getTotal() {
-        const res = client.readQuery({
-            query: Zoom3Document,
-            variables: {
-                filterId: (router.query.filter as string) ?? '',
-                page: parseInt((router.query.page as string) ?? '0'),
-                pageSize: pageSize,
-            },
-        })
-
-        return res.zoomLevel3[0].total
-    }
-
     const animateOut = useCallback(async () => {
         simulation.current?.stop()
         const d3Svg = d3.select(svgRef.current)
@@ -77,8 +62,8 @@ export function useD3Pagination({ simulation, selector, svgRef, pathname, pageSi
     return {
         paginateNext,
         paginateBack,
-        totalPages: Math.ceil((getTotal() + 1) / pageSize),
-        total: getTotal() + 1,
+        totalPages: Math.ceil((total + 1) / pageSize),
+        total: total + 1,
         currentPage: router.query.page ?? 0 + 1,
     }
 }
