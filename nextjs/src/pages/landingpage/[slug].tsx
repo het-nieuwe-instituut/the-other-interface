@@ -1,12 +1,11 @@
-import { SupportedLandingPages } from '@/features/galaxy/FilterClouds/FilterClouds'
 import { addApolloState, getApolloClient } from '@/features/graphql/config/apollo'
 import { LandingpageContainer } from '@/features/pages/containers/LandingpageContainer/LandingpageContainer'
 import { preparePageConfiguration } from '@/features/shared/utils/pageConfiguration'
 import { GetServerSidePropsContext } from 'next'
-import { LandingpageBySlugDocument, LandingpageBySlugQuery } from 'src/generated/graphql'
+import { EntityNames, LandingpageBySlugDocument, LandingpageBySlugQuery } from 'src/generated/graphql'
 
 export interface LandingPageQueryParams {
-    slug: SupportedLandingPages
+    slug: EntityNames
 }
 
 const Page = () => {

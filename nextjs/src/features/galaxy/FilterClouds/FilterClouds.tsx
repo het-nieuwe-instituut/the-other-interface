@@ -1,33 +1,24 @@
 import { Circle } from '@/features/galaxy/components/Circle'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Box, Text } from '@chakra-ui/react'
-import { useId, useMemo } from 'react'
-import { FilterType } from './types'
+import { useId } from 'react'
+import { EntityNames } from 'src/generated/graphql'
 import { usePresenter } from './usePresenter'
 
 type Props = {
-    data: FilterType[]
     dimensions: {
         height: number
         width: number
     }
-    type: SupportedLandingPages
+    type: EntityNames
 }
 
-export enum SupportedLandingPages {
-    Publications = 'publications',
-    People = 'people',
-    Archives = 'archives',
-    Objects = 'objects',
-}
-
-const FilterClouds: React.FunctionComponent<Props> = ({ dimensions, data, type }) => {
+const FilterClouds: React.FunctionComponent<Props> = ({ dimensions, type }) => {
     const { width, height } = dimensions
     const svgWidth = width
     const svgHeight = height
-    const objectsPerTypeWithIds = useMemo(() => data.map(item => ({ ...item, name: item.name })), [data])
     const id = useId().replaceAll(':', '')
-    const { svgRef, zoomed } = usePresenter(dimensions, objectsPerTypeWithIds, id)
+    const { svgRef, zoomed, objectsPerTypeWithIds } = usePresenter(dimensions, id)
     const { t } = useTypeSafeTranslation('landingpage')
 
     return (
@@ -38,7 +29,7 @@ const FilterClouds: React.FunctionComponent<Props> = ({ dimensions, data, type }
                 ref={svgRef}
                 viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
             >
-                {objectsPerTypeWithIds.map((item, index, array) => {
+                {objectsPerTypeWithIds?.map((item, index, array) => {
                     return (
                         <Circle
                             key={`${index}-${array.length}`}
@@ -62,7 +53,7 @@ const FilterClouds: React.FunctionComponent<Props> = ({ dimensions, data, type }
                                             {t('people')}
                                         </Text>
                                         <Text width="12.5rem" textStyle={'cloudText'}>
-                                            {t(item.name)}
+                                            {item.name}
                                         </Text>
                                     </Box>
                                 )}

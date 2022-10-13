@@ -1,14 +1,13 @@
 import { Text } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
-import { useZoom3Query } from 'src/generated/graphql'
-import { SupportedLandingPages } from '../FilterClouds/FilterClouds'
+import { EntityNames, useZoom3Query } from 'src/generated/graphql'
 
 type Props = {
     dimensions: {
         height: number
         width: number
     }
-    type: SupportedLandingPages
+    type: EntityNames
 }
 
 const DynamicPaginatedFilterCloudsNoSsr = dynamic(() => import('./PaginatedFilterClouds'), {

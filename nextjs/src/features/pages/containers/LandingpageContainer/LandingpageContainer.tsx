@@ -1,4 +1,3 @@
-import { FilterType, PossibleFilters } from '@/features/galaxy/FilterClouds/types'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
@@ -7,48 +6,17 @@ import { useSize } from '@chakra-ui/react-use-size'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
-import { LandingpageComponentsDynamicZone, useLandingpageBySlugQuery } from 'src/generated/graphql'
+import { EntityNames, LandingpageComponentsDynamicZone, useLandingpageBySlugQuery } from 'src/generated/graphql'
 import { LandingPageQueryParams } from 'src/pages/landingpage/[slug]'
 
 const DynamicFilterCloudsNoSsr = dynamic(() => import('../../../galaxy/FilterClouds/FilterClouds'), {
     ssr: false,
 })
 
-const config: { [key: string]: FilterType[] } = {
-    archives: [
-        { name: PossibleFilters.ByName, numberOfInstances: 240 },
-        { name: PossibleFilters.ByDate, numberOfInstances: 240 },
-        { name: PossibleFilters.ByDesLevel, numberOfInstances: 240 },
-    ],
-    objects: [
-        { name: PossibleFilters.ByPerson, numberOfInstances: 240 },
-        { name: PossibleFilters.ByProject, numberOfInstances: 240 },
-        { name: PossibleFilters.BySubject, numberOfInstances: 240 },
-        { name: PossibleFilters.ByMaker, numberOfInstances: 240 },
-        { name: PossibleFilters.ByType, numberOfInstances: 240 },
-        { name: PossibleFilters.ByDate, numberOfInstances: 240 },
-    ],
-    people: [
-        { name: PossibleFilters.ByType, numberOfInstances: 240 },
-        { name: PossibleFilters.ByDate, numberOfInstances: 240 },
-        { name: PossibleFilters.ByPlace, numberOfInstances: 240 },
-        { name: PossibleFilters.ByBirthDate, numberOfInstances: 240 },
-        { name: PossibleFilters.ByProfession, numberOfInstances: 240 },
-        { name: PossibleFilters.ByDeathDate, numberOfInstances: 240 },
-    ],
-    publications: [
-        { name: PossibleFilters.ByAuthor, numberOfInstances: 240 },
-        { name: PossibleFilters.BySubject, numberOfInstances: 150 },
-        { name: PossibleFilters.ByDate, numberOfInstances: 80 },
-        { name: PossibleFilters.ByPerson, numberOfInstances: 200 },
-        { name: PossibleFilters.ByLocation, numberOfInstances: 60 },
-    ],
-}
-
 export const LandingpageContainer: React.FC = () => {
     const { locale, query } = useRouter()
     const queryParams = query as unknown as LandingPageQueryParams
-    const type = queryParams.slug
+    const type = queryParams.slug as unknown as EntityNames
     const { t } = useTypeSafeTranslation('common')
     const theme = useTheme()
 
@@ -60,7 +28,6 @@ export const LandingpageContainer: React.FC = () => {
     })
     const graphRef = useRef<HTMLDivElement | null>(null)
     const sizes = useSize(graphRef)
-    const currentConfig = config[type]
 
     if (loading) {
         return <p>loading</p>
@@ -82,7 +49,6 @@ export const LandingpageContainer: React.FC = () => {
                 {sizes?.height && sizes?.width && (
                     <DynamicFilterCloudsNoSsr
                         type={type}
-                        data={currentConfig}
                         dimensions={{ height: 800, width: sizes?.width }}
                     />
                 )}

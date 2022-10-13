@@ -3,10 +3,8 @@ import PaginationLeft from '@/icons/arrows/pagination-left.svg'
 import PaginationRight from '@/icons/arrows/pagination-right.svg'
 import { Box, Flex, IconButton, Text } from '@chakra-ui/react'
 import { useId } from 'react'
-import { Zoom3Query } from 'src/generated/graphql'
-import { SupportedLandingPages } from '../FilterClouds/FilterClouds'
+import { EntityNames, Zoom3Query } from 'src/generated/graphql'
 import { usePresenter } from './usePresenter'
-import { PaginatedFilterType } from './types'
 import { Circle } from '../components/Circle'
 
 type Props = {
@@ -15,7 +13,7 @@ type Props = {
         height: number
         width: number
     }
-    type: SupportedLandingPages
+    type: EntityNames
 }
 
 const PaginatedFilterClouds: React.FunctionComponent<Props> = ({ dimensions, zoom3 }) => {

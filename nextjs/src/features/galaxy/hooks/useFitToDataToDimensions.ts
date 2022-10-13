@@ -19,6 +19,7 @@ export function useFitDataToDimensions<
     const prevDataDimensions = useRef<DataDimension[]>([])
 
     useEffect(() => {
+        if (!data) return
         const height = dimensions.height ?? 0
         const width = dimensions.width ?? 0
         const squareSide: number = height > width ? width : height
