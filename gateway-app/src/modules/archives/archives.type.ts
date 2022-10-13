@@ -1,4 +1,5 @@
-import { Field, InputType, ObjectType } from '@nestjs/graphql'
+import { createUnionType, Field, InputType, ObjectType, registerEnumType } from '@nestjs/graphql'
+import { ArchivesZoomLevel5Types } from './archives.service'
 
 @InputType()
 export class ArchivesZoomLevel4FiltersArgs {
@@ -15,8 +16,19 @@ export class ArchivesZoomLevel4FiltersArgs {
     public RelatedName: string | null
 }
 
+registerEnumType(ArchivesZoomLevel5Types, { name: 'ArchivesZoomLevel5Types' })
+
 @ObjectType()
-export class ArchivesOtherZoomLevel5DetailType {
+class BaseArchiveZoomLevel5Type {
+    @Field()
+    public id: string
+
+    @Field(() => ArchivesZoomLevel5Types)
+    public type: ArchivesZoomLevel5Types
+}
+
+@ObjectType()
+export class ArchivesOtherZoomLevel5DetailType extends BaseArchiveZoomLevel5Type {
     @Field(() => String, { nullable: true })
     public descriptionLevel?: string
 
@@ -91,7 +103,7 @@ export class ArchivesOtherZoomLevel5DetailType {
 }
 
 @ObjectType()
-export class ArchivesFondsZoomLevel5DetailType {
+export class ArchivesFondsZoomLevel5DetailType extends BaseArchiveZoomLevel5Type {
     @Field(() => String, { nullable: true })
     public objectNumber?: string
 
@@ -134,3 +146,15 @@ export class ArchivesFondsZoomLevel5DetailType {
     @Field(() => String, { nullable: true })
     public permanentLink?: string
 }
+
+export const ArchiveZoomLevel5UnionType = createUnionType({
+    name: 'ArchiveZoomLevel5UnionType',
+    types: () => [ArchivesOtherZoomLevel5DetailType, ArchivesFondsZoomLevel5DetailType] as const,
+    resolveType: (archive: BaseArchiveZoomLevel5Type) => {
+        if (archive.type === ArchivesZoomLevel5Types.other) {
+            return ArchivesOtherZoomLevel5DetailType
+        }
+
+        return ArchivesFondsZoomLevel5DetailType
+    },
+})

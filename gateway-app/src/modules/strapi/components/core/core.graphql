@@ -16,7 +16,11 @@ fragment ComponentCoreCarouselItemFragment on ComponentCoreCarouselItem {
         ...UploadFileEntityResponseFragment
     }
     type
-    uri_id
+    triply_record {
+        data {
+            ...BaseTriplyRecordFragment
+        }
+    }
 }
 
 fragment ComponentCorePageHeaderFragment on ComponentCorePageHeader {
