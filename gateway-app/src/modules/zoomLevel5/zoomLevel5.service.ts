@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common'
-import { Sdk } from 'src/generated/strapi-sdk'
+import { Enum_Triplyrecord_Type, Sdk } from 'src/generated/strapi-sdk'
 import { StrapiUtils } from '../strapi/strapi.utils'
 import { ArchivesService, ArchivesZoomLevel5Types } from '../archives/archives.service'
 import { ObjectsService } from '../objects/objects.service'
@@ -8,19 +8,54 @@ import { PublicationsService, PublicationsZoomLevel5Types } from '../publication
 import { TriplyService } from '../triply/triply.service'
 import { TriplyUtils } from '../triply/triply.utils'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
+import { getRandom2ItemsFromArray } from '../util/helpers'
+import { ZoomLevel5RelatedObjectsArgs } from './zoomLevel5.type'
 
 interface ZoomLevel5RelationData {
     graph: string // sample graph i.e. https://collectiedata.hetnieuweinstituut.nl/graph/people
     count: string // number
-    sample_1: string | null // uri
-    sample_2: string | null // uri
+
+    sample: string // i.e. https://collectiedata.hetnieuweinstituut.nl/id/books/300323890
+    sample_label: string
+    graph_2: string // sample has a relation of type i.e. https://collectiedata.hetnieuweinstituut.nl/graph/people
+    count_2: string // sample's total relation count with graph_2
+
+    sample_1: string | null // uri of a sample of the above sample (of type graph_2)
+    sample_2: string | null // uri of a sample of the above sample (of type graph_2)
     sample_1_label: string | null
     sample_2_label: string | null
+    sample_extern_1: string | null // external uri of a sample of the above sample (of type graph_2)
+    sample_extern_2: string | null // external uri of a sample of the above sample (of type graph_2)
+    sample_extern_1_label: string | null
+    sample_extern_2_label: string | null
+}
+
+interface ZoomLevel5RelatedObjectData {
+    dataset: string
+    graph: string // i.e. https://collectiedata.hetnieuweinstituut.nl/graph/people
+    label: string
+    externObj: string // i.e. https://collectiedata.hetnieuweinstituut.nl/id/people/25376
+}
+
+// key is relation graph
+type GroupedRelationData = Record<string, RelationData>
+
+interface RelationData {
+    count: string
+    // key is sample uri
+    groupedSampleData: Record<string, SampleData>
+}
+
+interface SampleData {
+    label: string
+    // key is relation graph
+    groupedRelationData: GroupedRelationData
 }
 
 @Injectable()
 export class ZoomLevel5Service {
     private relationsEndpoint = '/zoom-5-relations/run?record='
+    private relatedObjectsEndpoint = '/zoom-5-relatedObjects/run?record='
 
     public constructor(
         @Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk,
@@ -48,6 +83,21 @@ export class ZoomLevel5Service {
             default:
                 throw new Error('type not implemented')
         }
+    }
+
+    public async getAllRelations({ id, type, relatedObjectsType }: ZoomLevel5RelatedObjectsArgs) {
+        const uri = TriplyUtils.getUriForTypeAndId(type, id)
+        const res = await this.triplyService.queryTriplyData<ZoomLevel5RelatedObjectData>(
+            `${this.relatedObjectsEndpoint}${uri}`
+        )
+
+        return res.data
+            .filter(d => TriplyUtils.getEntityNameFromGraph(d.graph) === relatedObjectsType)
+            .map(d => ({
+                id: TriplyUtils.getIdFromUri(d.externObj),
+                type: relatedObjectsType,
+                ...this.getRecordSpecificFieldsFromRelatedObject(relatedObjectsType, d),
+            }))
     }
 
     public getDetail(
@@ -85,21 +135,43 @@ export class ZoomLevel5Service {
         const uri = TriplyUtils.getUriForTypeAndId(type, id)
         const res = await this.triplyService.queryTriplyData<ZoomLevel5RelationData>(`${this.relationsEndpoint}${uri}`)
 
-        return res.data.map(d => {
-            const type = TriplyUtils.getEntityNameFromGraph(d.graph)
-
-            const randomRelations = []
-            if (d.sample_1_label && d.sample_1) {
-                randomRelations.push(this.formatTriplyRelationData(d.sample_1_label, d.sample_1, type))
+        const groupedData: GroupedRelationData = {}
+        for (const relationData of res.data) {
+            if (!groupedData[relationData.graph]) {
+                groupedData[relationData.graph] = {
+                    count: relationData.count,
+                    groupedSampleData: {},
+                }
             }
 
-            if (d.sample_2_label && d.sample_2) {
-                randomRelations.push(this.formatTriplyRelationData(d.sample_2_label, d.sample_2, type))
+            const group = groupedData[relationData.graph]
+
+            if (!group.groupedSampleData[relationData.sample]) {
+                group.groupedSampleData[relationData.sample] = {
+                    label: relationData.sample_label,
+                    groupedRelationData: {},
+                }
             }
+
+            const groupSample = group.groupedSampleData[relationData.sample]
+
+            if (!groupSample.groupedRelationData[relationData.graph_2]) {
+                groupSample.groupedRelationData[relationData.graph_2] = {
+                    count: relationData.count_2,
+                    groupedSampleData: {},
+                }
+            }
+        }
+
+        return Object.entries(groupedData).map(([k, v]) => {
+            const type = TriplyUtils.getEntityNameFromGraph(k)
+            const randomRelations = Object.entries(v.groupedSampleData).map(([k, v]) =>
+                this.formatTriplySampleData(k, v)
+            )
 
             return {
                 type,
-                total: parseInt(d.count, 10),
+                total: parseInt(v.count, 10),
                 randomRelations,
             }
         })
@@ -111,17 +183,32 @@ export class ZoomLevel5Service {
             r => !!r.attributes?.recordId
         )
 
-        const records = await Promise.all(
-            triplyRecords.map(r => {
-                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                const type = StrapiUtils.getEntityNameForRecordType(r.attributes!.type)
+        const groupedRecords: Record<Enum_Triplyrecord_Type | string, string[]> = {}
+        for (const record of triplyRecords) {
+            if (!record.id || !record.attributes) {
+                continue
+            }
 
-                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                return this.getRelationsFromTriply(r.attributes!.recordId, type)
-            })
-        )
+            if (!groupedRecords[record.attributes.type]) {
+                groupedRecords[record.attributes.type] = []
+            }
 
-        return records.flatMap(r => r)
+            groupedRecords[record.attributes.type].push(record.id)
+        }
+
+        const promises = Object.entries(groupedRecords).map(async ([key, recordIds]) => {
+            const type = StrapiUtils.getEntityNameForRecordType(key as Enum_Triplyrecord_Type)
+            const randomRecordIds = getRandom2ItemsFromArray(recordIds)
+            const randomRelations = await Promise.all(randomRecordIds.map(id => this.getRelationsFromTriply(id, type)))
+
+            return {
+                type,
+                total: recordIds.length,
+                randomRelations: randomRelations,
+            }
+        })
+
+        return Promise.all(promises)
     }
 
     private async getStoryRelationsForLinkedItem(id: string, entityName: EntityNames) {
@@ -129,11 +216,14 @@ export class ZoomLevel5Service {
             recordId: id,
             type: StrapiUtils.getRecordTypeForEntityName(entityName),
         })
-        const randomStories = (res.stories?.data || []).map(s => ({
-            id: s.id,
-            type: EntityNames.Stories,
-            label: s.attributes?.title,
-        }))
+
+        const randomStories = getRandom2ItemsFromArray(res.stories?.data || [])
+            .filter(s => !!s.id && !!s.attributes)
+            .map(s => ({
+                id: s.id,
+                type: EntityNames.Stories,
+                label: s.attributes?.title,
+            }))
 
         return {
             type: EntityNames.Stories,
@@ -142,11 +232,41 @@ export class ZoomLevel5Service {
         }
     }
 
-    private formatTriplyRelationData(label: string, uri: string, type: EntityNames) {
+    private getRecordSpecificFieldsFromRelatedObject(type: EntityNames, d: ZoomLevel5RelatedObjectData) {
+        switch (type) {
+            case EntityNames.People:
+                return {
+                    name: d.label,
+                    // these are not yet returned from triply endpoint
+                    // birthDate: d.birthDate,
+                    // profession: d.profession,
+                }
+            case EntityNames.Archives:
+            // TODO: waiting on triply to implement
+            case EntityNames.Objects:
+            // TODO: waiting on triply to implement
+            case EntityNames.Publications:
+            // TODO: waiting on triply to implement
+            case EntityNames.Stories:
+            case EntityNames.External:
+            case EntityNames.Media:
+            default:
+                throw new Error('not yet implemented')
+        }
+    }
+
+    // expects key to be record uri
+    private formatTriplySampleData(key: string, sampleData: SampleData) {
+        const relations = Object.entries(sampleData.groupedRelationData).map(([k, v]) => ({
+            type: TriplyUtils.getEntityNameFromGraph(k),
+            total: v.count,
+        }))
+
         return {
-            id: TriplyUtils.getIdFromUri(uri),
-            type,
-            label,
+            id: TriplyUtils.getIdFromUri(key),
+            type: TriplyUtils.getEntityNameFromUri(key),
+            label: sampleData.label,
+            relations,
         }
     }
 }

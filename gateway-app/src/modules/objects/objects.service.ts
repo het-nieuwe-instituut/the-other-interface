@@ -121,6 +121,9 @@ export class ObjectsService {
 
     private readonly ZoomLevel5Endpoint = 'zoom-5-objects/run'
 
+    private readonly ZoomLevel4CountEndpoint =
+        'https://api.collectiedata.hetnieuweinstituut.nl/queries/Joran/zoom4-objects-count/run?'
+
     public constructor(private triplyService: TriplyService) {}
 
     public async getZoomLevel2Data() {
@@ -146,7 +149,7 @@ export class ObjectsService {
             pageSize,
         })
 
-        return TriplyUtils.parseLevel3OutputData(result.data, EntityNames.Objects)
+        return TriplyUtils.parseLevel3OutputData(result.data)
     }
 
     public async getZoomLevel4Data(filters: ObjectsZoomLevel4FiltersArgs, page = 1, pageSize = 48) {
@@ -154,10 +157,7 @@ export class ObjectsService {
             return []
         }
 
-        const searchParams = []
-        for (const [filterName, filterValue] of Object.entries(filters)) {
-            searchParams.push({ key: filterName, value: filterValue })
-        }
+        const searchParams = TriplyUtils.getQueryParamsFromObject(filters)
 
         const result = await this.triplyService.queryTriplyData<ObjectsZoomLevel4Data>(
             this.ZoomLevel4Endpoint,
@@ -168,14 +168,27 @@ export class ObjectsService {
             searchParams
         )
 
-        return result.data.map(res => {
-            return {
-                record: res.record,
-                title: res.title,
-                firstImage: res.firstImage,
-                imageLabel: res.imageLabel,
-            }
-        })
+        const countResult = await this.triplyService.queryTriplyData<{ count?: number }>(
+            this.ZoomLevel4CountEndpoint,
+            undefined,
+            searchParams
+        )
+        const total = countResult.data.pop()?.count || 0
+
+        return {
+            total,
+            appliedFilters: JSON.stringify(filters),
+            page,
+            hasMore: page * pageSize < total,
+            nodes: result.data.map(res => {
+                return {
+                    record: res.record,
+                    title: res.title,
+                    firstImage: res.firstImage,
+                    imageLabel: res.imageLabel,
+                }
+            }),
+        }
     }
 
     public async getZoomLevel5Data(objectId: string) {
@@ -183,12 +196,7 @@ export class ObjectsService {
         const result = await this.triplyService.queryTriplyData<ObjectsDetailZoomLevel5Data>(
             this.ZoomLevel5Endpoint,
             undefined,
-            [
-                {
-                    key: 'record',
-                    value: uri,
-                },
-            ]
+            { record: uri }
         )
 
         return TriplyUtils.combineObjectArray(result.data)

@@ -8,7 +8,6 @@ import Image from 'next/image'
 import usePresenter from './usePresenter'
 import { usePageConfiguration } from '@/features/shared/hooks/pageConfiguration'
 
-
 interface Props {
     component: ComponentModulesImageCarousel
     locale?: string
@@ -19,7 +18,8 @@ const IMAGE_HEIGHT = 600
 export const ImageCarousel = (props: Props) => {
     const { images } = props.component
     const items = images?.data
-    const { carouselRef, handlePaginationPrev, handlePaginationNext, sliderRef, calculateImagePropotions, size } = usePresenter(items)
+    const { carouselRef, handlePaginationPrev, handlePaginationNext, sliderRef, calculateImagePropotions, size } =
+        usePresenter(items)
     const pageConfiguration = usePageConfiguration()
 
     return (
@@ -36,8 +36,8 @@ export const ImageCarousel = (props: Props) => {
                     {items?.map((item: UploadFileEntity, index) => {
                         const originalHeight = item?.attributes?.height ?? 1
                         const originalWidth = item?.attributes?.width ?? 1
-                        const imageBasePath = pageConfiguration.data?.imagePath ?? '';
-                        const imagePath =  imageBasePath + item?.attributes?.url
+                        const imageBasePath = pageConfiguration.data?.imagePath ?? ''
+                        const imagePath = imageBasePath + item?.attributes?.url
                         const caption = item?.attributes?.caption
                         const proportions = calculateImagePropotions(originalWidth, originalHeight, IMAGE_HEIGHT, size)
                         return (
@@ -47,7 +47,6 @@ export const ImageCarousel = (props: Props) => {
                                 pb={props.component.imageCarouselModuleLayout?.spacingBottom ?? undefined}
                                 pt={props.component.imageCarouselModuleLayout?.spacingTop ?? undefined}
                                 width={proportions.width}
-                                height={proportions.height || IMAGE_HEIGHT}
                                 className="keen-slider__slide"
                             >
                                 <Image
@@ -60,7 +59,7 @@ export const ImageCarousel = (props: Props) => {
                                 />
                                 {caption && (
                                     <Box width={'100'} mb="1" mt={'2.5'}>
-                                        <Text textStyle="micro" textAlign={'left'}>
+                                        <Text textStyle="micro" textAlign={'left'} pr={'2'}>
                                             {caption}
                                         </Text>
                                     </Box>

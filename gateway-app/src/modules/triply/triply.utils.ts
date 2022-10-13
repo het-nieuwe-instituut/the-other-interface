@@ -31,6 +31,31 @@ export class TriplyUtils {
         }
     }
 
+    public static getEntityNameFromUri(graph: string): EntityNames {
+        const s = graph.split('/')
+        if (!s.length || s.length < 2) {
+            throw new Error('invalid graph url')
+        }
+
+        const type = s[s.length - 2]
+        switch (type) {
+            case 'people':
+                return EntityNames.People
+            case 'archives':
+                return EntityNames.Archives
+            case 'books':
+                return EntityNames.Publications
+            case 'objects':
+                return EntityNames.Objects
+            case 'media':
+                return EntityNames.Media
+            case 'seeAlso':
+                return EntityNames.External
+            default:
+                throw new Error(`type for graph ${type} not implemented`)
+        }
+    }
+
     public static getIdFromUri(uri: string) {
         const s = uri.split('/')
         if (!s.length) {
@@ -77,7 +102,7 @@ export class TriplyUtils {
         return nullFlag ? null : output
     }
 
-    public static parseLevel3OutputData(input: ZoomLevel3ReturnData[], entity: EntityNames) {
+    public static parseLevel3OutputData(input: ZoomLevel3ReturnData[]) {
         const totalRow = input.find(r => r.label === '@total')
         const total = totalRow ? totalRow.count : null
 
@@ -97,5 +122,16 @@ export class TriplyUtils {
         }
 
         return output
+    }
+
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    public static getQueryParamsFromObject(obj: Object): Record<string, string> {
+        const queryParams: Record<string, string> = {}
+
+        for (const [filterName, filterValue] of Object.entries(obj)) {
+            queryParams[`${filterName}`] = filterValue
+        }
+
+        return queryParams
     }
 }

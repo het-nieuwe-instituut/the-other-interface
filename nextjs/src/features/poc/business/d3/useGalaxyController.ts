@@ -20,7 +20,7 @@ interface D3CollectionItem extends SimulationNodeDatum, CollectionItem {}
 
 export function useGalaxyController(
     dimensions: Dimensions,
-    data: CollectionItem[],
+    data: CollectionItem[] | undefined,
     selector: string,
     orders?: Order[]
 ) {
@@ -31,6 +31,7 @@ export function useGalaxyController(
     const dimensionsRef = useRef<Dimensions>(dimensions)
 
     const dataDimensions = useMemo(() => {
+        if (!data || !dimensions.width) return
         const totalSpace = (dimensions.height ?? 0) * (dimensions.width ?? 0)
         const gridItemSpace = 12
         const totalSpaceGrid = totalSpace / (gridItemSpace * gridItemSpace)
@@ -48,6 +49,7 @@ export function useGalaxyController(
     }, [dimensions, data, orders])
 
     useEffect(() => {
+        if (!data) return
         if (!svgRef.current) {
             return
         }
@@ -64,7 +66,7 @@ export function useGalaxyController(
 
         if (!nodesListener.current) {
             nodesListener.current = simulation.current?.nodes(data as D3CollectionItem[]).on('tick', () => {
-                ticked(dataDimensions, simulation.current!, node, nodeForeign, dimensionsRef.current)
+                ticked(dataDimensions || [], simulation.current!, node, nodeForeign, dimensionsRef.current)
             })
         }
 

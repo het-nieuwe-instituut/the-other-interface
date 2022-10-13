@@ -1,4 +1,4 @@
-import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
+import { Args, Query, Resolver } from '@nestjs/graphql'
 import { ArchivesZoomLevel5Types } from '../archives/archives.service'
 import { ArchivesFondsZoomLevel5DetailType, ArchivesOtherZoomLevel5DetailType } from '../archives/archives.type'
 import { ObjectsZoomLevel5DetailType } from '../objects/objects.type'
@@ -12,15 +12,25 @@ import {
 } from '../publications/publications.type'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { ZoomLevel5Service } from './zoomLevel5.service'
-import { RelatedRecordType, ZoomLevel5Args, ZoomLevel5Type } from './zoomLevel5.type'
+import {
+    ZoomLevel5Args,
+    ZoomLevel5RelatedObjectsArgs,
+    ZoomLevel5RelatedRecordType,
+    ZoomLevel5RelationsType,
+} from './zoomLevel5.type'
 
-@Resolver(ZoomLevel5Type)
+@Resolver(ZoomLevel5RelationsType)
 export class ZoomLevel5Resolver {
     public constructor(private readonly zoomLevel5Service: ZoomLevel5Service) {}
 
-    @Query(() => [ZoomLevel5Type], { nullable: true })
+    @Query(() => [ZoomLevel5RelationsType], { nullable: true })
     public relations(@Args() args: ZoomLevel5Args) {
         return this.zoomLevel5Service.getRelations(args.id, args.type)
+    }
+
+    @Query(() => [ZoomLevel5RelatedRecordType], { nullable: true })
+    public allRelations(@Args() args: ZoomLevel5RelatedObjectsArgs) {
+        return this.zoomLevel5Service.getAllRelations(args)
     }
 
     @Query(() => ObjectsZoomLevel5DetailType, { nullable: true })
@@ -73,15 +83,5 @@ export class ZoomLevel5Resolver {
         return this.zoomLevel5Service.getDetail(objectId, EntityNames.Archives, {
             archivesType: ArchivesZoomLevel5Types.other,
         })
-    }
-}
-
-@Resolver(RelatedRecordType)
-export class RelatedRecordTypeResolver {
-    public constructor(private readonly zoomLevel5Service: ZoomLevel5Service) {}
-
-    @ResolveField(() => RelatedRecordType)
-    public randomRelations(@Parent() parent: RelatedRecordType) {
-        return this.zoomLevel5Service.getRelations(parent.id, parent.type)
     }
 }

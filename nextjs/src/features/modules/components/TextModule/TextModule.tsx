@@ -21,7 +21,9 @@ export const TextModule: React.FC<Props> = props => {
             pt={props.component.textModuleLayout?.spacingTop ?? undefined}
             overflow={'auto'} // needed due to strange behaviour of generated markdown content
         >
-            <Markdown>{content}</Markdown>
+            <Box maxWidth={'55rem'}>
+                <Markdown>{content}</Markdown>
+            </Box>
         </Box>
     )
 }

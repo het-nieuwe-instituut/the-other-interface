@@ -19,12 +19,11 @@ export class TriplyService {
     private defaultPageSize = '16'
 
     public async queryTriplyData<ReturnDataType>(
-        endpointSuffix: string,
+        endpointArg: string,
         paginationArgs?: PaginationArgs,
-        searchParams?: Record<string, string>[]
+        searchParams?: Record<string, string>
     ) {
-        endpointSuffix = endpointSuffix.startsWith('/') ? endpointSuffix : `/${endpointSuffix}`
-        const endpoint = new URL(`${this.endpointBaseURL}${this.baseQueryPath}${endpointSuffix}`)
+        const endpoint = this.getEndpointForArg(endpointArg)
 
         if (paginationArgs) {
             endpoint.searchParams.append(
@@ -38,7 +37,7 @@ export class TriplyService {
         }
 
         if (searchParams && searchParams.length) {
-            for (const { key, value } of searchParams) {
+            for (const [key, value] of Object.entries(searchParams)) {
                 endpoint.searchParams.append(key, value)
             }
         }
@@ -48,7 +47,17 @@ export class TriplyService {
 
     private fetch<ReturnDataType>(endpoint: URL) {
         const headers = { Authorization: `Bearer ${this.apiKey}` }
+        const res = this.httpService.get<ReturnDataType[]>(endpoint.toString(), { headers })
+        return lastValueFrom(res)
+    }
 
-        return lastValueFrom(this.httpService.get<ReturnDataType[]>(endpoint.toString(), { headers }))
+    private getEndpointForArg(endpointArg: string) {
+        if (endpointArg.startsWith('https://')) {
+            return new URL(endpointArg)
+        }
+
+        const endpointSuffix = endpointArg.startsWith('/') ? endpointArg : `/${endpointArg}`
+
+        return new URL(`${this.endpointBaseURL}${this.baseQueryPath}${endpointSuffix}`)
     }
 }

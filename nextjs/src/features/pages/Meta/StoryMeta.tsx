@@ -1,3 +1,4 @@
+import { ButtonsGrid } from '@/features/shared/components/ButtonsGrid/ButtonsGrid'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { formatDate } from '@/features/shared/utils/dates'
 import { keyExtractor } from '@/features/shared/utils/lists'
@@ -8,6 +9,7 @@ import {
     Author,
     ComponentCoreTimeframe,
     EnumComponentcorepublicationdateDisplaytype,
+    EnumComponentmodulesbuttonsmoduleButtonstyle,
     StoryBySlugQuery,
 } from 'src/generated/graphql'
 
@@ -19,7 +21,6 @@ interface Props {
 export const StoryMeta: React.FC<Props> = ({ story }) => {
     const commonT = useTypeSafeTranslation('common')
     const storiesT = useTypeSafeTranslation('stories')
-
     return (
         <Box>
             <Box marginBottom={'md'}>
@@ -82,6 +83,13 @@ export const StoryMeta: React.FC<Props> = ({ story }) => {
                         })}
                     </Box>
                 </Box>
+            )}
+            {story.attributes?.storyLinks && (
+                <ButtonsGrid
+                    flexDirection="column"
+                    buttons={story.attributes.storyLinks.buttons ?? []}
+                    buttonStyle={EnumComponentmodulesbuttonsmoduleButtonstyle.Default}
+                ></ButtonsGrid>
             )}
         </Box>
     )

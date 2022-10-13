@@ -104,12 +104,39 @@ export class ArchivesService {
 
     private readonly ZoomLevel4Endpoint = 'zoom-4-archives/run'
 
+    // TODO: change to convention when Triply adds this to normal space
+    private readonly archivesDescriptionLevelEndpoint =
+        'https://api.collectiedata.hetnieuweinstituut.nl/queries/Joran/zoom5-archives-type-only/run?'
+
+    // TODO: change to convention when Triply adds this to normal space
+    private readonly ZoomLevel4CountEndpoint =
+        'https://api.collectiedata.hetnieuweinstituut.nl/queries/Joran/zoom4-archives-count/run?'
+
     private readonly ZoomLevel5Endpoint = {
         [ArchivesZoomLevel5Types.fonds]: 'zoom-5-archives/run',
         [ArchivesZoomLevel5Types.other]: 'zoom-5-archives-fonds/run',
     }
 
     public constructor(private triplyService: TriplyService) {}
+
+    public async determineArchiveType(id: string) {
+        interface ArchivesDescriptionLevelData {
+            record: string
+            descriptionLevel: string
+        }
+
+        const uri = TriplyUtils.getUriForTypeAndId(EntityNames.Archives, id)
+        const res = await this.triplyService.queryTriplyData<ArchivesDescriptionLevelData>(
+            this.archivesDescriptionLevelEndpoint,
+            undefined,
+            { record: uri }
+        )
+
+        if (res.data[0].descriptionLevel === 'archief') {
+            return ArchivesZoomLevel5Types.fonds
+        }
+        return ArchivesZoomLevel5Types.other
+    }
 
     public async getZoomLevel2Data() {
         const result = await this.triplyService.queryTriplyData<ObjectFilterData>(this.zoomLevel2Endpoint)
@@ -134,7 +161,7 @@ export class ArchivesService {
             pageSize,
         })
 
-        return TriplyUtils.parseLevel3OutputData(result.data, EntityNames.Archives)
+        return TriplyUtils.parseLevel3OutputData(result.data)
     }
 
     public async getZoomLevel4Data(filters: ArchivesZoomLevel4FiltersArgs, page = 1, pageSize = 48) {
@@ -142,9 +169,9 @@ export class ArchivesService {
             return []
         }
 
-        const searchParams = []
+        const searchParams: Record<string, string> = {}
         for (const [filterName, filterValue] of Object.entries(filters)) {
-            searchParams.push({ key: filterName, value: filterValue })
+            searchParams[`${filterName}`] = filterValue
         }
 
         const result = await this.triplyService.queryTriplyData<ArchivesZoomLevel4Data>(
@@ -156,14 +183,27 @@ export class ArchivesService {
             searchParams
         )
 
-        return result.data.map(res => {
-            return {
-                record: res.record,
-                title: res.title,
-                firstImage: res.firstImage,
-                imageLabel: res.imageLabel,
-            }
-        })
+        const countResult = await this.triplyService.queryTriplyData<{ count?: number }>(
+            this.ZoomLevel4CountEndpoint,
+            undefined,
+            searchParams
+        )
+        const total = countResult.data.pop()?.count || 0
+
+        return {
+            total,
+            appliedFilters: JSON.stringify(filters),
+            page,
+            hasMore: page * pageSize < total,
+            nodes: result.data.map(res => {
+                return {
+                    record: res.record,
+                    title: res.title,
+                    firstImage: res.firstImage,
+                    imageLabel: res.imageLabel,
+                }
+            }),
+        }
     }
 
     public async getZoomLevel5Data(type: ArchivesZoomLevel5Types, objectId: string) {
@@ -172,15 +212,10 @@ export class ArchivesService {
         const result = await this.triplyService.queryTriplyData<ArchivesZoomLeve5DataType>(
             this.ZoomLevel5Endpoint[type],
             undefined,
-            [
-                {
-                    key: 'record',
-                    value: uri,
-                },
-            ]
+            { record: uri }
         )
 
-        return TriplyUtils.combineObjectArray(result.data)
+        return { ...TriplyUtils.combineObjectArray(result.data), type, id: objectId }
     }
 
     public validateFilterInput(input: string): ArchivesZoomLevel3Ids {
