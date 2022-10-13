@@ -38,7 +38,7 @@ export function useFitDataToDimensions<
             const count = getCount(item)
             const dataDimension = prevDataDimensions.current.find(dataDimension => dataDimension.id === id)
             const takeSpace = totalOccupiedGridItems * count
-            console.log(takeSpace)
+
             return {
                 id: id,
                 takeSpace: takeSpace < 300 ? 300 : takeSpace,

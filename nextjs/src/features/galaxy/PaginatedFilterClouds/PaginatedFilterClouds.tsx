@@ -3,9 +3,10 @@ import PaginationLeft from '@/icons/arrows/pagination-left.svg'
 import PaginationRight from '@/icons/arrows/pagination-right.svg'
 import { Box, Flex, IconButton, Text } from '@chakra-ui/react'
 import { useId } from 'react'
-import { EntityNames, Zoom3Query } from 'src/generated/graphql'
-import { usePresenter } from './usePresenter'
+import { Zoom3Query } from 'src/generated/graphql'
 import { Circle } from '../components/Circle'
+import { SupportedLandingPages } from './PaginatedFilterCloudsContainer'
+import { usePresenter } from './usePresenter'
 
 type Props = {
     zoom3: Zoom3Query['zoomLevel3']
@@ -13,7 +14,7 @@ type Props = {
         height: number
         width: number
     }
-    type: EntityNames
+    type: SupportedLandingPages
 }
 
 const PaginatedFilterClouds: React.FunctionComponent<Props> = ({ dimensions, zoom3 }) => {
@@ -22,7 +23,11 @@ const PaginatedFilterClouds: React.FunctionComponent<Props> = ({ dimensions, zoo
     const svgHeight = height
 
     const id = useId().replaceAll(':', '')
-    const { svgRef, zoomed, backgrounds, paginateBack, paginateNext } = usePresenter(dimensions, zoom3, id)
+    const { svgRef, zoomed, backgrounds, paginateBack, paginateNext, total, totalPages, currentPage } = usePresenter(
+        dimensions,
+        zoom3,
+        id
+    )
     const { t } = useTypeSafeTranslation('landingpage')
 
     return (
@@ -46,7 +51,7 @@ const PaginatedFilterClouds: React.FunctionComponent<Props> = ({ dimensions, zoo
                     >
                         <Flex flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
                             <Text textStyle={'cloudText'} mb={1}>
-                                2000 {t('people')}
+                                {total} {t('people')}
                             </Text>
                             <Flex alignItems={'center'} gap={1}>
                                 <IconButton
@@ -58,7 +63,7 @@ const PaginatedFilterClouds: React.FunctionComponent<Props> = ({ dimensions, zoo
                                 >
                                     <PaginationLeft />
                                 </IconButton>
-                                <Text textStyle={'cloudText'}>{'10/10'}</Text>
+                                <Text textStyle={'cloudText'}>{`${currentPage}/${totalPages}`}</Text>
                                 <IconButton
                                     aria-label="right variant={'unstyled'}"
                                     padding={0}

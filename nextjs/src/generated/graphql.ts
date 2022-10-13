@@ -113,6 +113,74 @@ export const mockZoom3Query = (resolver: ResponseResolver<GraphQLRequest<Zoom3Qu
  * @param resolver a function that accepts a captured request and may return a mocked response.
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
+ * mockZoom3ArchivesQuery((req, res, ctx) => {
+ *   const { filterId, page, pageSize } = req.variables;
+ *   return res(
+ *     ctx.data({ zoomLevel3 })
+ *   )
+ * })
+ */
+export const mockZoom3ArchivesQuery = (resolver: ResponseResolver<GraphQLRequest<Zoom3ArchivesQueryVariables>, GraphQLContext<Zoom3ArchivesQuery>, any>) =>
+  graphql.query<Zoom3ArchivesQuery, Zoom3ArchivesQueryVariables>(
+    'Zoom3Archives',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockZoom3ObjectsQuery((req, res, ctx) => {
+ *   const { filterId, page, pageSize } = req.variables;
+ *   return res(
+ *     ctx.data({ zoomLevel3 })
+ *   )
+ * })
+ */
+export const mockZoom3ObjectsQuery = (resolver: ResponseResolver<GraphQLRequest<Zoom3ObjectsQueryVariables>, GraphQLContext<Zoom3ObjectsQuery>, any>) =>
+  graphql.query<Zoom3ObjectsQuery, Zoom3ObjectsQueryVariables>(
+    'Zoom3Objects',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockZoom3DPeopleQuery((req, res, ctx) => {
+ *   const { filterId, page, pageSize } = req.variables;
+ *   return res(
+ *     ctx.data({ zoomLevel3 })
+ *   )
+ * })
+ */
+export const mockZoom3DPeopleQuery = (resolver: ResponseResolver<GraphQLRequest<Zoom3DPeopleQueryVariables>, GraphQLContext<Zoom3DPeopleQuery>, any>) =>
+  graphql.query<Zoom3DPeopleQuery, Zoom3DPeopleQueryVariables>(
+    'Zoom3DPeople',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockZoom3DPublicationsQuery((req, res, ctx) => {
+ *   const { filterId, page, pageSize } = req.variables;
+ *   return res(
+ *     ctx.data({ zoomLevel3 })
+ *   )
+ * })
+ */
+export const mockZoom3DPublicationsQuery = (resolver: ResponseResolver<GraphQLRequest<Zoom3DPublicationsQueryVariables>, GraphQLContext<Zoom3DPublicationsQuery>, any>) =>
+  graphql.query<Zoom3DPublicationsQuery, Zoom3DPublicationsQueryVariables>(
+    'Zoom3DPublications',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
  * mockZoomLevel1Query((req, res, ctx) => {
  *   return res(
  *     ctx.data({ zoomLevel1 })
@@ -1746,6 +1814,42 @@ export type Zoom3QueryVariables = Exact<{
 
 export type Zoom3Query = { __typename?: 'Query', zoomLevel3: Array<{ __typename?: 'ZoomLevel3Type', uri?: string | null, name?: string | null, count?: number | null, total?: number | null }> };
 
+export type Zoom3ArchivesQueryVariables = Exact<{
+  filterId: Scalars['String'];
+  page: Scalars['Int'];
+  pageSize: Scalars['Int'];
+}>;
+
+
+export type Zoom3ArchivesQuery = { __typename?: 'Query', zoomLevel3: Array<{ __typename?: 'ZoomLevel3Type', uri?: string | null, name?: string | null, count?: number | null, total?: number | null }> };
+
+export type Zoom3ObjectsQueryVariables = Exact<{
+  filterId: Scalars['String'];
+  page: Scalars['Int'];
+  pageSize: Scalars['Int'];
+}>;
+
+
+export type Zoom3ObjectsQuery = { __typename?: 'Query', zoomLevel3: Array<{ __typename?: 'ZoomLevel3Type', uri?: string | null, name?: string | null, count?: number | null, total?: number | null }> };
+
+export type Zoom3DPeopleQueryVariables = Exact<{
+  filterId: Scalars['String'];
+  page: Scalars['Int'];
+  pageSize: Scalars['Int'];
+}>;
+
+
+export type Zoom3DPeopleQuery = { __typename?: 'Query', zoomLevel3: Array<{ __typename?: 'ZoomLevel3Type', uri?: string | null, name?: string | null, count?: number | null, total?: number | null }> };
+
+export type Zoom3DPublicationsQueryVariables = Exact<{
+  filterId: Scalars['String'];
+  page: Scalars['Int'];
+  pageSize: Scalars['Int'];
+}>;
+
+
+export type Zoom3DPublicationsQuery = { __typename?: 'Query', zoomLevel3: Array<{ __typename?: 'ZoomLevel3Type', uri?: string | null, name?: string | null, count?: number | null, total?: number | null }> };
+
 export type ZoomLevel1QueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -2356,6 +2460,186 @@ export function useZoom3LazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Zoom
 export type Zoom3QueryHookResult = ReturnType<typeof useZoom3Query>;
 export type Zoom3LazyQueryHookResult = ReturnType<typeof useZoom3LazyQuery>;
 export type Zoom3QueryResult = Apollo.QueryResult<Zoom3Query, Zoom3QueryVariables>;
+export const Zoom3ArchivesDocument = gql`
+    query Zoom3Archives($filterId: String!, $page: Int!, $pageSize: Int!) {
+  zoomLevel3(
+    entityName: Archives
+    filterId: $filterId
+    page: $page
+    pageSize: $pageSize
+  ) {
+    uri
+    name
+    count
+    total
+  }
+}
+    `;
+
+/**
+ * __useZoom3ArchivesQuery__
+ *
+ * To run a query within a React component, call `useZoom3ArchivesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useZoom3ArchivesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useZoom3ArchivesQuery({
+ *   variables: {
+ *      filterId: // value for 'filterId'
+ *      page: // value for 'page'
+ *      pageSize: // value for 'pageSize'
+ *   },
+ * });
+ */
+export function useZoom3ArchivesQuery(baseOptions: Apollo.QueryHookOptions<Zoom3ArchivesQuery, Zoom3ArchivesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<Zoom3ArchivesQuery, Zoom3ArchivesQueryVariables>(Zoom3ArchivesDocument, options);
+      }
+export function useZoom3ArchivesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Zoom3ArchivesQuery, Zoom3ArchivesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<Zoom3ArchivesQuery, Zoom3ArchivesQueryVariables>(Zoom3ArchivesDocument, options);
+        }
+export type Zoom3ArchivesQueryHookResult = ReturnType<typeof useZoom3ArchivesQuery>;
+export type Zoom3ArchivesLazyQueryHookResult = ReturnType<typeof useZoom3ArchivesLazyQuery>;
+export type Zoom3ArchivesQueryResult = Apollo.QueryResult<Zoom3ArchivesQuery, Zoom3ArchivesQueryVariables>;
+export const Zoom3ObjectsDocument = gql`
+    query Zoom3Objects($filterId: String!, $page: Int!, $pageSize: Int!) {
+  zoomLevel3(
+    entityName: Objects
+    filterId: $filterId
+    page: $page
+    pageSize: $pageSize
+  ) {
+    uri
+    name
+    count
+    total
+  }
+}
+    `;
+
+/**
+ * __useZoom3ObjectsQuery__
+ *
+ * To run a query within a React component, call `useZoom3ObjectsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useZoom3ObjectsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useZoom3ObjectsQuery({
+ *   variables: {
+ *      filterId: // value for 'filterId'
+ *      page: // value for 'page'
+ *      pageSize: // value for 'pageSize'
+ *   },
+ * });
+ */
+export function useZoom3ObjectsQuery(baseOptions: Apollo.QueryHookOptions<Zoom3ObjectsQuery, Zoom3ObjectsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<Zoom3ObjectsQuery, Zoom3ObjectsQueryVariables>(Zoom3ObjectsDocument, options);
+      }
+export function useZoom3ObjectsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Zoom3ObjectsQuery, Zoom3ObjectsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<Zoom3ObjectsQuery, Zoom3ObjectsQueryVariables>(Zoom3ObjectsDocument, options);
+        }
+export type Zoom3ObjectsQueryHookResult = ReturnType<typeof useZoom3ObjectsQuery>;
+export type Zoom3ObjectsLazyQueryHookResult = ReturnType<typeof useZoom3ObjectsLazyQuery>;
+export type Zoom3ObjectsQueryResult = Apollo.QueryResult<Zoom3ObjectsQuery, Zoom3ObjectsQueryVariables>;
+export const Zoom3DPeopleDocument = gql`
+    query Zoom3DPeople($filterId: String!, $page: Int!, $pageSize: Int!) {
+  zoomLevel3(
+    entityName: People
+    filterId: $filterId
+    page: $page
+    pageSize: $pageSize
+  ) {
+    uri
+    name
+    count
+    total
+  }
+}
+    `;
+
+/**
+ * __useZoom3DPeopleQuery__
+ *
+ * To run a query within a React component, call `useZoom3DPeopleQuery` and pass it any options that fit your needs.
+ * When your component renders, `useZoom3DPeopleQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useZoom3DPeopleQuery({
+ *   variables: {
+ *      filterId: // value for 'filterId'
+ *      page: // value for 'page'
+ *      pageSize: // value for 'pageSize'
+ *   },
+ * });
+ */
+export function useZoom3DPeopleQuery(baseOptions: Apollo.QueryHookOptions<Zoom3DPeopleQuery, Zoom3DPeopleQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<Zoom3DPeopleQuery, Zoom3DPeopleQueryVariables>(Zoom3DPeopleDocument, options);
+      }
+export function useZoom3DPeopleLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Zoom3DPeopleQuery, Zoom3DPeopleQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<Zoom3DPeopleQuery, Zoom3DPeopleQueryVariables>(Zoom3DPeopleDocument, options);
+        }
+export type Zoom3DPeopleQueryHookResult = ReturnType<typeof useZoom3DPeopleQuery>;
+export type Zoom3DPeopleLazyQueryHookResult = ReturnType<typeof useZoom3DPeopleLazyQuery>;
+export type Zoom3DPeopleQueryResult = Apollo.QueryResult<Zoom3DPeopleQuery, Zoom3DPeopleQueryVariables>;
+export const Zoom3DPublicationsDocument = gql`
+    query Zoom3DPublications($filterId: String!, $page: Int!, $pageSize: Int!) {
+  zoomLevel3(
+    entityName: Publications
+    filterId: $filterId
+    page: $page
+    pageSize: $pageSize
+  ) {
+    uri
+    name
+    count
+    total
+  }
+}
+    `;
+
+/**
+ * __useZoom3DPublicationsQuery__
+ *
+ * To run a query within a React component, call `useZoom3DPublicationsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useZoom3DPublicationsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useZoom3DPublicationsQuery({
+ *   variables: {
+ *      filterId: // value for 'filterId'
+ *      page: // value for 'page'
+ *      pageSize: // value for 'pageSize'
+ *   },
+ * });
+ */
+export function useZoom3DPublicationsQuery(baseOptions: Apollo.QueryHookOptions<Zoom3DPublicationsQuery, Zoom3DPublicationsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<Zoom3DPublicationsQuery, Zoom3DPublicationsQueryVariables>(Zoom3DPublicationsDocument, options);
+      }
+export function useZoom3DPublicationsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Zoom3DPublicationsQuery, Zoom3DPublicationsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<Zoom3DPublicationsQuery, Zoom3DPublicationsQueryVariables>(Zoom3DPublicationsDocument, options);
+        }
+export type Zoom3DPublicationsQueryHookResult = ReturnType<typeof useZoom3DPublicationsQuery>;
+export type Zoom3DPublicationsLazyQueryHookResult = ReturnType<typeof useZoom3DPublicationsLazyQuery>;
+export type Zoom3DPublicationsQueryResult = Apollo.QueryResult<Zoom3DPublicationsQuery, Zoom3DPublicationsQueryVariables>;
 export const ZoomLevel1Document = gql`
     query zoomLevel1 {
   zoomLevel1 {

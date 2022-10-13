@@ -37,7 +37,6 @@ function useListenToSimulationTicks(
     dataDimensions: DataDimension[]
 ) {
     const nodesListener = useRef<d3.Simulation<D3CollectionItem, undefined> | undefined | null>(null)
-    console.log(dataDimensions)
 
     // set default styles
     useEffect(() => {

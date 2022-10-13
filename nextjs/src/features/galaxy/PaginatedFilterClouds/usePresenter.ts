@@ -5,7 +5,7 @@ import { useFitDataToDimensions } from '../hooks/useFitToDataToDimensions'
 
 import { useRandomBackgroundData } from '../hooks/useRandomColorData'
 import { useZoomToD3Element } from '../hooks/useZoomToD3Element'
-import { useD3Pagination } from './hooks/useD3Pagination'
+import { useD3Pagination } from '../hooks/useD3Pagination'
 import { useD3Simulation } from './hooks/useD3Simulation'
 
 import { PaginatedFilterType } from './types'
@@ -33,7 +33,13 @@ export function usePresenter(dimensions: Dimensions, data: Zoom3Query['zoomLevel
         [router]
     )
     const zoomEvents = useZoomToD3Element<PaginatedFilterType>(svgRef, dimensions, `.foreign-${selector}`, navigateTo)
-    const pagination = useD3Pagination(simulation, selector, svgRef)
+    const pagination = useD3Pagination({
+        simulation,
+        selector,
+        svgRef,
+        pageSize: 16,
+        pathname: `/landingpage/${router.query.slug}/${router.query.filter}`,
+    })
 
     return {
         svgRef,
