@@ -86,12 +86,15 @@ export type Scalars = {
   Date: any;
 };
 
+export type ArchiveZoomLevel5UnionType = ArchivesFondsZoomLevel5DetailType | ArchivesOtherZoomLevel5DetailType;
+
 export type ArchivesFondsZoomLevel5DetailType = {
   __typename?: 'ArchivesFondsZoomLevel5DetailType';
   dateLabel?: Maybe<Scalars['String']>;
   dimensionFree?: Maybe<Scalars['String']>;
   endDate?: Maybe<Scalars['String']>;
   existenceOfOriginals?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
   mediaReference?: Maybe<Scalars['String']>;
   mediaReferenceLabel?: Maybe<Scalars['String']>;
   objectNumber?: Maybe<Scalars['String']>;
@@ -102,6 +105,7 @@ export type ArchivesFondsZoomLevel5DetailType = {
   scopeContent?: Maybe<Scalars['String']>;
   startDate?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
+  type: ArchivesZoomLevel5Types;
 };
 
 export type ArchivesOtherZoomLevel5DetailType = {
@@ -116,6 +120,7 @@ export type ArchivesOtherZoomLevel5DetailType = {
   descriptionLevel?: Maybe<Scalars['String']>;
   endDate?: Maybe<Scalars['String']>;
   extent?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
   objectNumber?: Maybe<Scalars['String']>;
   partReference?: Maybe<Scalars['String']>;
   partTitle?: Maybe<Scalars['String']>;
@@ -130,6 +135,7 @@ export type ArchivesOtherZoomLevel5DetailType = {
   source?: Maybe<Scalars['String']>;
   startDate?: Maybe<Scalars['String']>;
   systemOfArrangement?: Maybe<Scalars['String']>;
+  type: ArchivesZoomLevel5Types;
 };
 
 export type ArchivesZoomLevel4FiltersArgs = {
@@ -138,6 +144,11 @@ export type ArchivesZoomLevel4FiltersArgs = {
   RelatedName?: InputMaybe<Scalars['String']>;
   StartDate?: InputMaybe<Scalars['String']>;
 };
+
+export enum ArchivesZoomLevel5Types {
+  Fonds = 'fonds',
+  Other = 'other'
+}
 
 export type Author = {
   __typename?: 'Author';
@@ -212,14 +223,23 @@ export type ComponentCoreButton = {
   url?: Maybe<Scalars['String']>;
 };
 
+export type ComponentCoreButtonFiltersInput = {
+  and?: InputMaybe<Array<ComponentCoreButtonFiltersInput>>;
+  hasAttachment?: InputMaybe<BooleanFilterInput>;
+  not?: InputMaybe<ComponentCoreButtonFiltersInput>;
+  or?: InputMaybe<Array<ComponentCoreButtonFiltersInput>>;
+  text?: InputMaybe<StringFilterInput>;
+  url?: InputMaybe<StringFilterInput>;
+};
+
 export type ComponentCoreCarouselItem = {
   __typename?: 'ComponentCoreCarouselItem';
   description?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   name?: Maybe<Scalars['String']>;
   picture?: Maybe<UploadFileEntityResponse>;
+  triply_record?: Maybe<TriplyRecordEntityResponse>;
   type?: Maybe<EnumComponentcorecarouselitemType>;
-  uri_id?: Maybe<Scalars['String']>;
 };
 
 export type ComponentCoreModuleLayouts = {
@@ -227,6 +247,14 @@ export type ComponentCoreModuleLayouts = {
   id: Scalars['ID'];
   spacingBottom?: Maybe<EnumComponentcoremodulelayoutsSpacingbottom>;
   spacingTop?: Maybe<EnumComponentcoremodulelayoutsSpacingtop>;
+};
+
+export type ComponentCoreModuleLayoutsFiltersInput = {
+  and?: InputMaybe<Array<ComponentCoreModuleLayoutsFiltersInput>>;
+  not?: InputMaybe<ComponentCoreModuleLayoutsFiltersInput>;
+  or?: InputMaybe<Array<ComponentCoreModuleLayoutsFiltersInput>>;
+  spacingBottom?: InputMaybe<StringFilterInput>;
+  spacingTop?: InputMaybe<StringFilterInput>;
 };
 
 export type ComponentCorePublicationDate = {
@@ -317,6 +345,15 @@ export type ComponentModulesButtonsModule = {
   buttons?: Maybe<Array<ComponentCoreButton>>;
   buttonsModuleLayout: ComponentCoreModuleLayouts;
   id: Scalars['ID'];
+};
+
+export type ComponentModulesButtonsModuleFiltersInput = {
+  and?: InputMaybe<Array<ComponentModulesButtonsModuleFiltersInput>>;
+  buttonStyle?: InputMaybe<StringFilterInput>;
+  buttons?: InputMaybe<ComponentCoreButtonFiltersInput>;
+  buttonsModuleLayout?: InputMaybe<ComponentCoreModuleLayoutsFiltersInput>;
+  not?: InputMaybe<ComponentModulesButtonsModuleFiltersInput>;
+  or?: InputMaybe<Array<ComponentModulesButtonsModuleFiltersInput>>;
 };
 
 export type ComponentModulesCarousel = {
@@ -807,6 +844,8 @@ export type PoepleZoomLevel5DetailType = {
   startDate?: Maybe<Scalars['String']>;
 };
 
+export type PublicationZoomLevel5UnionType = PublicationsArticleZoomLevel5DetailType | PublicationsAudioVisualZoomLevel5DetailType | PublicationsBookZoomLevel5DetailType | PublicationsSerialZoomLevel5DetailType;
+
 export type PublicationsArticleZoomLevel5DetailType = {
   __typename?: 'PublicationsArticleZoomLevel5DetailType';
   abstract?: Maybe<Scalars['String']>;
@@ -817,6 +856,7 @@ export type PublicationsArticleZoomLevel5DetailType = {
   availability?: Maybe<Scalars['String']>;
   geographicalKeyword?: Maybe<Scalars['String']>;
   geographicalKeywordLabel?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
   issue?: Maybe<Scalars['String']>;
   language?: Maybe<Scalars['String']>;
   languageLabel?: Maybe<Scalars['String']>;
@@ -833,6 +873,7 @@ export type PublicationsArticleZoomLevel5DetailType = {
   subject?: Maybe<Scalars['String']>;
   subjectLabel?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
+  type: PublicationsZoomLevel5Types;
   typeOfPublication?: Maybe<Scalars['String']>;
   typeOfPublicationLabel?: Maybe<Scalars['String']>;
   volume?: Maybe<Scalars['String']>;
@@ -850,6 +891,7 @@ export type PublicationsAudioVisualZoomLevel5DetailType = {
   availability?: Maybe<Scalars['String']>;
   geographicalKeyword?: Maybe<Scalars['String']>;
   geographicalKeywordLabel?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
   language?: Maybe<Scalars['String']>;
   languageLabel?: Maybe<Scalars['String']>;
   medium?: Maybe<Scalars['String']>;
@@ -866,6 +908,7 @@ export type PublicationsAudioVisualZoomLevel5DetailType = {
   subject?: Maybe<Scalars['String']>;
   subjectLabel?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
+  type: PublicationsZoomLevel5Types;
   typeOfPublication?: Maybe<Scalars['String']>;
   typeOfPublicationLabel?: Maybe<Scalars['String']>;
   yearOfPublication?: Maybe<Scalars['String']>;
@@ -885,6 +928,7 @@ export type PublicationsBookZoomLevel5DetailType = {
   edition?: Maybe<Scalars['String']>;
   geographicalKeyword?: Maybe<Scalars['String']>;
   geographicalKeywordLabel?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
   illustration?: Maybe<Scalars['String']>;
   isbn?: Maybe<Scalars['String']>;
   language?: Maybe<Scalars['String']>;
@@ -904,6 +948,7 @@ export type PublicationsBookZoomLevel5DetailType = {
   subject?: Maybe<Scalars['String']>;
   subjectLabel?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
+  type: PublicationsZoomLevel5Types;
   typeOfPublication?: Maybe<Scalars['String']>;
   typeOfPublicationLabel?: Maybe<Scalars['String']>;
   yearOfPublication?: Maybe<Scalars['String']>;
@@ -915,6 +960,7 @@ export type PublicationsSerialZoomLevel5DetailType = {
   continuedAs?: Maybe<Scalars['String']>;
   continuedFrom?: Maybe<Scalars['String']>;
   holding?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
   language?: Maybe<Scalars['String']>;
   languageLabel?: Maybe<Scalars['String']>;
   permanentLink?: Maybe<Scalars['String']>;
@@ -927,6 +973,7 @@ export type PublicationsSerialZoomLevel5DetailType = {
   subject?: Maybe<Scalars['String']>;
   subjectLabel?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
+  type: PublicationsZoomLevel5Types;
   typeOfPublication?: Maybe<Scalars['String']>;
   typeOfPublicationLabel?: Maybe<Scalars['String']>;
   yearOfPublication?: Maybe<Scalars['String']>;
@@ -940,8 +987,16 @@ export type PublicationsZoomLevel4FiltersArgs = {
   TypeOfPublication?: InputMaybe<Scalars['String']>;
 };
 
+export enum PublicationsZoomLevel5Types {
+  Article = 'article',
+  Audiovisual = 'audiovisual',
+  Book = 'book',
+  Serial = 'serial'
+}
+
 export type Query = {
   __typename?: 'Query';
+  allRelations?: Maybe<Array<ZoomLevel5RelatedRecordType>>;
   author: AuthorEntityResponse;
   authors: AuthorEntityResponseCollection;
   homepage: HomepageEntityResponse;
@@ -972,6 +1027,13 @@ export type Query = {
   zoomLevel5PublicationsAudiovisual?: Maybe<PublicationsAudioVisualZoomLevel5DetailType>;
   zoomLevel5PublicationsBook?: Maybe<PublicationsBookZoomLevel5DetailType>;
   zoomLevel5PublicationsSerial?: Maybe<PublicationsSerialZoomLevel5DetailType>;
+};
+
+
+export type QueryAllRelationsArgs = {
+  id: Scalars['String'];
+  relatedObjectsType: EntityNames;
+  type: EntityNames;
 };
 
 
@@ -1176,7 +1238,6 @@ export type ResponseCollectionMeta = {
 
 export type Story = {
   __typename?: 'Story';
-  archives?: Maybe<Array<Maybe<StoryArchivesUnionType>>>;
   author?: Maybe<AuthorEntityResponse>;
   components?: Maybe<Array<StoryComponentsDynamicZone>>;
   createdAt?: Maybe<Scalars['Date']>;
@@ -1184,20 +1245,16 @@ export type Story = {
   locale?: Maybe<Scalars['String']>;
   localizations?: Maybe<StoryRelationResponseCollection>;
   locations?: Maybe<LocationRelationResponseCollection>;
-  objects?: Maybe<Array<Maybe<ObjectsZoomLevel5DetailType>>>;
-  people?: Maybe<Array<Maybe<PoepleZoomLevel5DetailType>>>;
   publicationDate?: Maybe<ComponentCorePublicationDate>;
-  publications?: Maybe<Array<Maybe<StoryPublicationsUnionType>>>;
   publishedAt?: Maybe<Scalars['Date']>;
   shortDescription?: Maybe<Scalars['String']>;
   slug?: Maybe<Scalars['String']>;
+  storyLinks?: Maybe<ComponentModulesButtonsModule>;
   timeframe?: Maybe<ComponentCoreTimeframe>;
   title: Scalars['String'];
   triplyRecords?: Maybe<TriplyRecordRelationResponseCollection>;
   updatedAt?: Maybe<Scalars['Date']>;
 };
-
-export type StoryArchivesUnionType = ArchivesFondsZoomLevel5DetailType | ArchivesOtherZoomLevel5DetailType;
 
 export type StoryComponentsDynamicZone = ComponentModulesButtonsModule | ComponentModulesCarousel | ComponentModulesImage | ComponentModulesImageCarousel | ComponentModulesPullquote | ComponentModulesSubtitle | ComponentModulesTableModule | ComponentModulesTextModule | ComponentModulesTitleModule | Error;
 
@@ -1236,13 +1293,12 @@ export type StoryFiltersInput = {
   publishedAt?: InputMaybe<DateTimeFilterInput>;
   shortDescription?: InputMaybe<StringFilterInput>;
   slug?: InputMaybe<StringFilterInput>;
+  storyLinks?: InputMaybe<ComponentModulesButtonsModuleFiltersInput>;
   timeframe?: InputMaybe<ComponentCoreTimeframeFiltersInput>;
   title?: InputMaybe<StringFilterInput>;
   triplyRecords?: InputMaybe<TriplyRecordFiltersInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
 };
-
-export type StoryPublicationsUnionType = PublicationsArticleZoomLevel5DetailType | PublicationsAudioVisualZoomLevel5DetailType | PublicationsBookZoomLevel5DetailType | PublicationsSerialZoomLevel5DetailType;
 
 export type StoryRelationResponseCollection = {
   __typename?: 'StoryRelationResponseCollection';
@@ -1317,7 +1373,11 @@ export type TableFiltersInput = {
 
 export type TriplyRecord = {
   __typename?: 'TriplyRecord';
+  archive?: Maybe<ArchiveZoomLevel5UnionType>;
   createdAt?: Maybe<Scalars['Date']>;
+  object?: Maybe<ObjectsZoomLevel5DetailType>;
+  people?: Maybe<PoepleZoomLevel5DetailType>;
+  publication?: Maybe<PublicationZoomLevel5UnionType>;
   publishedAt?: Maybe<Scalars['Date']>;
   recordId: Scalars['String'];
   stories?: Maybe<StoryRelationResponseCollection>;
@@ -1547,6 +1607,35 @@ export type ZoomLevel4Type = {
   title?: Maybe<Scalars['String']>;
 };
 
+export type ZoomLevel5RelatedArchiveType = {
+  __typename?: 'ZoomLevel5RelatedArchiveType';
+  id: Scalars['String'];
+  type: EntityNames;
+};
+
+export type ZoomLevel5RelatedObjectType = {
+  __typename?: 'ZoomLevel5RelatedObjectType';
+  id: Scalars['String'];
+  type: EntityNames;
+};
+
+export type ZoomLevel5RelatedPeopleType = {
+  __typename?: 'ZoomLevel5RelatedPeopleType';
+  birthDate?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  profession?: Maybe<Scalars['String']>;
+  type: EntityNames;
+};
+
+export type ZoomLevel5RelatedPublicationType = {
+  __typename?: 'ZoomLevel5RelatedPublicationType';
+  id: Scalars['String'];
+  type: EntityNames;
+};
+
+export type ZoomLevel5RelatedRecordType = ZoomLevel5RelatedArchiveType | ZoomLevel5RelatedObjectType | ZoomLevel5RelatedPeopleType | ZoomLevel5RelatedPublicationType;
+
 export type ZoomLevel5RelationsType = {
   __typename?: 'ZoomLevel5RelationsType';
   randomRelations?: Maybe<Array<RelatedRecordType>>;
@@ -1603,7 +1692,7 @@ export type StoryBySlugQueryVariables = Exact<{
 }>;
 
 
-export type StoryBySlugQuery = { __typename?: 'Query', stories: { __typename?: 'StoryEntityResponseCollection', data?: Array<{ __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, description?: string | null, shortDescription?: string | null, publishedAt?: any | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', id?: string | null, attributes?: { __typename?: 'Author', firstName: string, insertion?: string | null, lastName: string } | null } | null } | null, timeframe?: { __typename?: 'ComponentCoreTimeframe', id: string, yearStart?: number | null, yearEnd?: number | null } | null, locations?: { __typename?: 'LocationRelationResponseCollection', data: Array<{ __typename?: 'LocationEntity', id?: string | null, attributes?: { __typename?: 'Location', city?: string | null } | null }> } | null, publicationDate?: { __typename?: 'ComponentCorePublicationDate', date?: any | null, displayType?: EnumComponentcorepublicationdateDisplaytype | null } | null, components?: Array<{ __typename?: 'ComponentModulesButtonsModule', id: string, buttonStyle?: EnumComponentmodulesbuttonsmoduleButtonstyle | null, buttons?: Array<{ __typename?: 'ComponentCoreButton', id: string, text?: string | null, url?: string | null, hasAttachment?: boolean | null, attachment?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null }> | null, buttonsModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesCarousel' } | { __typename?: 'ComponentModulesImage', id: string, caption?: string | null, alt_text?: string | null, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null }, imageModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesImageCarousel', id: string, description?: string | null, images?: { __typename?: 'UploadFileRelationResponseCollection', data?: Array<{ __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, width?: number | null, height?: number | null, size: number } | null }> | null } | null, imageCarouselModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesPullquote', id: string, text?: string | null, pullquoteModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesSubtitle', id: string, text?: string | null, subtitleModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesTableModule', id: string, table?: { __typename?: 'TableEntityResponse', data?: { __typename?: 'TableEntity', id?: string | null, attributes?: { __typename?: 'Table', name?: string | null, description?: string | null, Tablehead?: { __typename?: 'ComponentCoreTableHead', id: string, TableHeadItem?: Array<{ __typename?: 'ComponentCoreTableHeadItem', id?: string | null, label?: string | null }> | null } | null, TableBody?: Array<{ __typename?: 'ComponentCoreTableBody', id: string, TableBodyItem?: Array<{ __typename?: 'ComponentCoreTableBodyItem', id: string, value?: string | null }> | null }> | null } | null } | null } | null, tableModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesTextModule', id: string, Richtext?: string | null, textModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesTitleModule', id: string, Title?: string | null, titleModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'Error' }> | null } | null }> | null } };
+export type StoryBySlugQuery = { __typename?: 'Query', stories: { __typename?: 'StoryEntityResponseCollection', data?: Array<{ __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, description?: string | null, shortDescription?: string | null, publishedAt?: any | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', id?: string | null, attributes?: { __typename?: 'Author', firstName: string, insertion?: string | null, lastName: string } | null } | null } | null, timeframe?: { __typename?: 'ComponentCoreTimeframe', id: string, yearStart?: number | null, yearEnd?: number | null } | null, locations?: { __typename?: 'LocationRelationResponseCollection', data: Array<{ __typename?: 'LocationEntity', id?: string | null, attributes?: { __typename?: 'Location', city?: string | null } | null }> } | null, publicationDate?: { __typename?: 'ComponentCorePublicationDate', date?: any | null, displayType?: EnumComponentcorepublicationdateDisplaytype | null } | null, components?: Array<{ __typename?: 'ComponentModulesButtonsModule', id: string, buttonStyle?: EnumComponentmodulesbuttonsmoduleButtonstyle | null, buttons?: Array<{ __typename?: 'ComponentCoreButton', id: string, text?: string | null, url?: string | null, hasAttachment?: boolean | null, attachment?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null }> | null, buttonsModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesCarousel' } | { __typename?: 'ComponentModulesImage', id: string, caption?: string | null, alt_text?: string | null, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null }, imageModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesImageCarousel', id: string, description?: string | null, images?: { __typename?: 'UploadFileRelationResponseCollection', data?: Array<{ __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, width?: number | null, height?: number | null, size: number } | null }> | null } | null, imageCarouselModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesPullquote', id: string, text?: string | null, pullquoteModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesSubtitle', id: string, text?: string | null, subtitleModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesTableModule', id: string, table?: { __typename?: 'TableEntityResponse', data?: { __typename?: 'TableEntity', id?: string | null, attributes?: { __typename?: 'Table', name?: string | null, description?: string | null, Tablehead?: { __typename?: 'ComponentCoreTableHead', id: string, TableHeadItem?: Array<{ __typename?: 'ComponentCoreTableHeadItem', id?: string | null, label?: string | null }> | null } | null, TableBody?: Array<{ __typename?: 'ComponentCoreTableBody', id: string, TableBodyItem?: Array<{ __typename?: 'ComponentCoreTableBodyItem', id: string, value?: string | null }> | null }> | null } | null } | null } | null, tableModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesTextModule', id: string, Richtext?: string | null, textModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesTitleModule', id: string, Title?: string | null, titleModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'Error' }> | null, storyLinks?: { __typename?: 'ComponentModulesButtonsModule', id: string, buttonStyle?: EnumComponentmodulesbuttonsmoduleButtonstyle | null, buttons?: Array<{ __typename?: 'ComponentCoreButton', id: string, text?: string | null, url?: string | null, hasAttachment?: boolean | null, attachment?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null }> | null, buttonsModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | null } | null }> | null } };
 
 export const ComponentCoreModuleLayoutsFragmentDoc = gql`
     fragment componentCoreModuleLayouts on ComponentCoreModuleLayouts {
@@ -2070,6 +2159,11 @@ export const StoryBySlugDocument = gql`
           }
           ... on ComponentModulesSubtitle {
             ...subtitleModuleFragment
+          }
+        }
+        storyLinks {
+          ... on ComponentModulesButtonsModule {
+            ...buttonsModuleFragment
           }
         }
       }

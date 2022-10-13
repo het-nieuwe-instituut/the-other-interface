@@ -82,7 +82,7 @@ interface GridButtonProps {
     button: ButtonType
     index: number
     array: Maybe<ButtonType>[]
-    config: typeof buttonConfig['default'] | typeof buttonConfig['large']
+    config: typeof buttonConfig['Default'] | typeof buttonConfig['Large']
 }
 const GridButton: React.FC<GridButtonProps> = ({ button, index, array, config }) => {
     const pageConfiguration = usePageConfiguration()
