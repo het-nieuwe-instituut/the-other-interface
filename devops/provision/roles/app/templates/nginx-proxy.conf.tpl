@@ -1,2 +1,2 @@
+client_max_body_size 20m;
 server_tokens off;
-client_body_buffer_size 200k;
