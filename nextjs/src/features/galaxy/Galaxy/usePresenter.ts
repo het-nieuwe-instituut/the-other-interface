@@ -5,14 +5,47 @@ import { ObjectPerTypeWithName, useD3Simulation } from '../hooks/useD3Simulation
 import { useD3ZoomEvents } from '../hooks/useD3ZoomEvents'
 import { useFitDataToDimensions } from '../hooks/useFitDataToDimensions'
 import { times, uniqueId } from 'lodash'
-import { useZoomLevel1Query, useStoriesQuery } from 'src/generated/graphql'
+import { useZoomLevel1Query, useStoriesQuery, EntityNames, ZoomLevel1Type } from 'src/generated/graphql'
 import { galaxyTypesToPositions } from '../galaxyConstants'
 
 export function usePresenter(dimensions: Dimensions, selector: string) {
-    const { data: zoomLevel1Data } = useZoomLevel1Query()
+    const { data: zoomLevel1Data } = useZoomLevel1Query({ fetchPolicy: 'no-cache',
+    nextFetchPolicy: 'no-cache'})
     const { data: storiesData, loading: isLoading } = useStoriesQuery()
     const objectsPerTypeWithIds = useMemo(
-        () => zoomLevel1Data?.zoomLevel1?.map(item => ({ ...item, ...galaxyTypesToPositions[item?.id], numberOfInstances: item.count, class: item.id?.toLowerCase() })) as ObjectPerTypeWithName[],
+        () => {
+            let archiveItem: ZoomLevel1Type
+            const items = zoomLevel1Data?.zoomLevel1.filter(item => {
+                if (item.name === 'Archiefbestanddelen') {
+                    archiveItem = item
+                    return false
+                }
+                if (item.id === EntityNames.Stories) {
+                    return false
+                }
+
+                return true
+            }) ?? []
+            const newItems: ObjectPerTypeWithName[] = []
+            items.forEach(item => {
+                const newItem: ObjectPerTypeWithName = {
+                    ...item,
+                    ...galaxyTypesToPositions[item?.id],
+                    numberOfInstances: item.count,
+                    class: item.id?.toLowerCase()
+                }
+
+                if (item.name === 'Archieven') {
+                    newItem.itemsName = archiveItem?.name
+                    newItem.numberOfInstances = archiveItem?.count
+                    newItem.itemsCount = archiveItem.count
+                }
+
+                newItems.push(newItem)
+            })
+            
+            return newItems
+        },
         [zoomLevel1Data]
     )
 

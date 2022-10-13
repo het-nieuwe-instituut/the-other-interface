@@ -4,9 +4,10 @@ import * as d3 from 'd3'
 import { BaseType, SimulationNodeDatum } from 'd3'
 import { MutableRefObject, useEffect, useRef } from 'react'
 
-//TODO: with gateway connected these types might not be valid anynmore
 export interface ObjectPerTypeWithName extends ObjectPerType {
     name: string
+    itemsName?: string
+    itemsCount?: number
 }
 
 interface D3CollectionItem extends SimulationNodeDatum, ObjectPerTypeWithName {}
