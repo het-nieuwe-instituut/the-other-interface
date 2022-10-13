@@ -22,6 +22,15 @@ export class StoryFieldResolver {
             return res.locations
         }
     }
+
+    @ResolveField()
+    public async author(@Parent() story: Story) {
+        if (story.author?.data?.id) {
+            const res = await this.strapiGqlSdk.author({ id: story.author?.data.id })
+            return res.author
+        }
+        return null
+    }
 }
 
 @Resolver()
