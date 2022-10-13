@@ -68,6 +68,11 @@ query storyBySlug($locale: String, $slug: String!) {
                         ...subtitleModuleFragment
                     }
                 }
+                storyLinks {
+                    ... on ComponentModulesButtonsModule {
+                        ...buttonsModuleFragment
+                    }
+                }
             }
         }
     }
