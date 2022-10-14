@@ -32,7 +32,8 @@ export function usePresenter(dimensions: Dimensions, selector: string) {
                 id: item.id,
                 yFromCenter: config.yFromCenter,
                 xFromCenter: config.xFromCenter,
-                numberOfInstances: config.fixedNumberOfInstances ?? item.count,
+                fixedNumberOfInstances: config.fixedNumberOfInstances ?? item.count,
+                numberOfInstances: item.count,
                 class: item.id?.toLowerCase(),
             }
 

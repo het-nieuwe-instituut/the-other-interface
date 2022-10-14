@@ -20,6 +20,7 @@ interface DataDimensions {
 export interface ObjectPerType {
     class: string
     numberOfInstances: number
+    fixedNumberOfInstances: number
     xFromCenter: number
     yFromCenter: number
 }
