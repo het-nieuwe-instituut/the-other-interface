@@ -4,6 +4,7 @@ import { ObjectPerTypeWithName } from './useD3Simulation'
 export interface DataDimensions {
     name: string
     takeSpace: number
+    id: string
 }
 
 export function useFitDataToDimensions(base: number, data: ObjectPerTypeWithName[]) {
@@ -17,6 +18,7 @@ export function useFitDataToDimensions(base: number, data: ObjectPerTypeWithName
 
         return data?.map(item => {
             return {
+                id: item.id,
                 name: item.name,
                 takeSpace: totalOccupiedGridItems * item.numberOfInstances,
             }

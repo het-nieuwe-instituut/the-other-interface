@@ -1,6 +1,6 @@
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Box, Flex, Text } from '@chakra-ui/react'
-import React, { forwardRef, useId} from 'react'
+import React, { forwardRef, useId } from 'react'
 import { Dimensions, ZoomLevel } from '../types/galaxy'
 import { StoriesSystem } from '../components/StoriesSystem/StoriesSystem'
 import { Circle } from '../components/Circle'
@@ -19,13 +19,11 @@ export interface InstancesPerClass {
 }
 
 export const GALAXY_BASE = 800
-const Galaxy: React.FC<Props> = ({dimensions}) => {
+const Galaxy: React.FC<Props> = ({ dimensions }) => {
     const { t } = useTypeSafeTranslation('homepage')
     const id = useId().replaceAll(':', '')
-    const { svgRef, setZoomLevel, zoomTo, zoomLevel, storiesSystemRef, isLoading, stories, objectsPerTypeWithIds } = usePresenter(
-        dimensions,
-        id
-    )
+    const { svgRef, setZoomLevel, zoomTo, zoomLevel, storiesSystemRef, isLoading, stories, objectsPerTypeWithIds } =
+        usePresenter(dimensions, id)
     const height = dimensions.height ?? 0
     const width = dimensions.width ?? 0
 
@@ -78,7 +76,7 @@ const Galaxy: React.FC<Props> = ({dimensions}) => {
                                         hoverBackground={`levels.z1.${item.class}.hover1`}
                                         key={`${index}-${array.length}`}
                                         className={id}
-                                        id={item.name}
+                                        id={item.id}
                                         pointerEvents={zoomLevel === ZoomLevel.Zoom1Stories ? 'none' : undefined}
                                     >
                                         {zoomLevel === ZoomLevel.Zoom1 && (

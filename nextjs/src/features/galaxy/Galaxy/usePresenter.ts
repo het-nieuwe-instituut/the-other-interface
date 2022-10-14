@@ -1,23 +1,20 @@
+import { times, uniqueId } from 'lodash'
 import { useMemo, useRef } from 'react'
+import { EntityNames, useStoriesQuery, useZoomLevel1Query } from 'src/generated/graphql'
+import { galaxyTypesToPositions } from '../galaxyConstants'
+import { useD3ZoomEvents } from '../hooks/useD3ZoomEvents'
+import { useFitDataToDimensions } from './hooks/useFitDataToDimensions'
 import { Dimensions } from '../types/galaxy'
 import { GALAXY_BASE } from './Galaxy'
-import { ObjectPerTypeWithName, useD3Simulation } from '../hooks/useD3Simulation'
-import { useD3ZoomEvents } from '../hooks/useD3ZoomEvents'
-import { useFitDataToDimensions } from '../hooks/useFitDataToDimensions'
-import { times, uniqueId } from 'lodash'
-import { useZoomLevel1Query, useStoriesQuery, EntityNames, ZoomLevel1Type } from 'src/generated/graphql'
-import { galaxyTypesToPositions } from '../galaxyConstants'
+import { ObjectPerTypeWithName, useD3Simulation } from './hooks/useD3Simulation'
 
 export function usePresenter(dimensions: Dimensions, selector: string) {
-    const { data: zoomLevel1Data } = useZoomLevel1Query({ fetchPolicy: 'no-cache',
-    nextFetchPolicy: 'no-cache'})
+    const { data: zoomLevel1Data } = useZoomLevel1Query({ fetchPolicy: 'no-cache', nextFetchPolicy: 'no-cache' })
     const { data: storiesData, loading: isLoading } = useStoriesQuery()
-    const objectsPerTypeWithIds = useMemo(
-        () => {
-            let archiveItem: ZoomLevel1Type
-            const items = zoomLevel1Data?.zoomLevel1.filter(item => {
+    const objectsPerTypeWithIds = useMemo(() => {
+        const items =
+            zoomLevel1Data?.zoomLevel1.filter(item => {
                 if (item.name === 'Archiefbestanddelen') {
-                    archiveItem = item
                     return false
                 }
                 if (item.id === EntityNames.Stories) {
@@ -26,28 +23,30 @@ export function usePresenter(dimensions: Dimensions, selector: string) {
 
                 return true
             }) ?? []
-            const newItems: ObjectPerTypeWithName[] = []
-            items.forEach(item => {
-                const newItem: ObjectPerTypeWithName = {
-                    ...item,
-                    ...galaxyTypesToPositions[item?.id],
-                    numberOfInstances: item.count,
-                    class: item.id?.toLowerCase()
-                }
+        const newItems: ObjectPerTypeWithName[] = []
+        items.forEach(item => {
+            console.log(item)
+            const config = galaxyTypesToPositions[item.id]
+            const newItem: ObjectPerTypeWithName = {
+                ...item,
+                id: item.id,
+                yFromCenter: config.yFromCenter,
+                xFromCenter: config.xFromCenter,
+                numberOfInstances: config.fixedNumberOfInstances ?? item.count,
+                class: item.id?.toLowerCase(),
+            }
 
-                if (item.name === 'Archieven') {
-                    newItem.itemsName = archiveItem?.name
-                    newItem.numberOfInstances = archiveItem?.count
-                    newItem.itemsCount = archiveItem.count
-                }
+            // if (item.name === 'Archieven') {
+            //     newItem.itemsName = archiveItem?.name
+            //     newItem.numberOfInstances = galaxyTypesToPositions[item.id].fixedNumberOfInstances ?? archiveItem?.count
+            //     newItem.itemsCount = archiveItem.count
+            // }
 
-                newItems.push(newItem)
-            })
-            
-            return newItems
-        },
-        [zoomLevel1Data]
-    )
+            newItems.push(newItem)
+        })
+
+        return newItems
+    }, [zoomLevel1Data])
 
     const stories = useMemo(() => {
         const data = storiesData?.stories?.data || []
@@ -59,11 +58,11 @@ export function usePresenter(dimensions: Dimensions, selector: string) {
                 parent: parents[Math.floor((Math.random() * data.length) / 10) + 1] ?? parents[0],
                 id: uniqueId(),
                 title: item?.attributes?.title ?? '',
-                slug: item?.attributes?.slug ?? ''
+                slug: item?.attributes?.slug ?? '',
             }))
             .slice(0, 1000)
     }, [storiesData])
-    
+
     const svgRef = useRef<SVGSVGElement | null>(null)
     const galaxyBase = GALAXY_BASE
     const dataDimensions = useFitDataToDimensions(galaxyBase, objectsPerTypeWithIds)
@@ -76,6 +75,6 @@ export function usePresenter(dimensions: Dimensions, selector: string) {
         ...zoomEvents,
         objectsPerTypeWithIds,
         stories,
-        isLoading
+        isLoading,
     }
 }

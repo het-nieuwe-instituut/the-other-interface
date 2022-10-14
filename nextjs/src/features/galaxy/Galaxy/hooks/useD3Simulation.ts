@@ -8,10 +8,12 @@ export interface ObjectPerTypeWithName extends ObjectPerType {
     name: string
     itemsName?: string
     itemsCount?: number
+    id: string
 }
 
 interface D3CollectionItem extends SimulationNodeDatum, ObjectPerTypeWithName {}
 interface DataDimensions {
+    id: string
     name: string
     takeSpace: number
 }
@@ -70,7 +72,7 @@ function useListenToSimulationTicks(
 }
 
 function getTakeSpaceFromDataDimensions(dataDimensions: DataDimensions[], d: Partial<D3CollectionItem>) {
-    const val = dataDimensions?.find(item => item.name === d.name)
+    const val = dataDimensions?.find(item => item.id === d.id)
 
     if (!val) {
         return 0
@@ -99,7 +101,7 @@ function adjustPostion(
     const halfHeight = (galaxyBase ?? 0) / 2
 
     simulation?.nodes().forEach(d => {
-        d3.select<BaseType, D3CollectionItem>(`#${d.name}`)
+        d3.select<BaseType, D3CollectionItem>(`#${d.id}`)
             .transition()
             .duration(100)
             .attr('x', d => {
