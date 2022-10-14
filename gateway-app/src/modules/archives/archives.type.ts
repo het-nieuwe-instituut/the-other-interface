@@ -1,4 +1,5 @@
 import { createUnionType, Field, InputType, ObjectType, registerEnumType } from '@nestjs/graphql'
+import { PoepleZoomLevel5DetailType } from '../people/people.type'
 import { ArchivesZoomLevel5Types } from './archives.service'
 
 @InputType()
@@ -64,6 +65,9 @@ export class ArchivesOtherZoomLevel5DetailType extends BaseArchiveZoomLevel5Type
 
     @Field(() => String, { nullable: true })
     public creatorHistory?: string
+
+    @Field(() => PoepleZoomLevel5DetailType, { nullable: true })
+    public populatedCreator?: PoepleZoomLevel5DetailType
 
     @Field(() => String, { nullable: true })
     public custodialHistory?: string

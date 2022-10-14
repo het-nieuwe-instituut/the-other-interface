@@ -100,7 +100,7 @@ export class ZoomLevel5Service {
             }))
     }
 
-    public getDetail(
+    public async getDetail(
         id: string,
         type: EntityNames,
         metadata?: { publicationType?: PublicationsZoomLevel5Types; archivesType?: ArchivesZoomLevel5Types }
@@ -113,16 +113,18 @@ export class ZoomLevel5Service {
                 return this.peopleService.getZoomLevel5Data(id)
             }
             case EntityNames.Publications: {
-                if (!metadata?.publicationType) {
-                    throw new Error(`publicationType is required`)
-                }
-                return this.publicationsService.getZoomLevel5Data(metadata.publicationType, id)
+                const subType = metadata?.publicationType
+                    ? metadata.publicationType
+                    : await this.publicationsService.determinePublicationType(id)
+
+                return this.publicationsService.getZoomLevel5Data(subType, id)
             }
             case EntityNames.Archives: {
-                if (!metadata?.archivesType) {
-                    throw new Error(`publicationType is required`)
-                }
-                return this.archivesService.getZoomLevel5Data(metadata.archivesType, id)
+                const subType = metadata?.archivesType
+                    ? metadata?.archivesType
+                    : await this.archivesService.determineArchiveType(id)
+
+                return this.archivesService.getZoomLevel5Data(subType, id)
             }
             case EntityNames.Stories:
             case EntityNames.External:

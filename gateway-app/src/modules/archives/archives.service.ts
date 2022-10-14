@@ -113,8 +113,8 @@ export class ArchivesService {
         'https://api.collectiedata.hetnieuweinstituut.nl/queries/Joran/zoom4-archives-count/run?'
 
     private readonly ZoomLevel5Endpoint = {
-        [ArchivesZoomLevel5Types.fonds]: 'zoom-5-archives/run',
-        [ArchivesZoomLevel5Types.other]: 'zoom-5-archives-fonds/run',
+        [ArchivesZoomLevel5Types.other]: 'zoom-5-archives/run',
+        [ArchivesZoomLevel5Types.fonds]: 'zoom-5-archives-fonds/run',
     }
 
     public constructor(private triplyService: TriplyService) {}
@@ -133,9 +133,10 @@ export class ArchivesService {
         )
 
         if (res.data[0].descriptionLevel === 'archief') {
-            return ArchivesZoomLevel5Types.fonds
+            return ArchivesZoomLevel5Types.other
         }
-        return ArchivesZoomLevel5Types.other
+
+        return ArchivesZoomLevel5Types.fonds
     }
 
     public async getZoomLevel2Data() {
