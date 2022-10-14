@@ -7,7 +7,7 @@ import { useId } from 'react'
 import { Zoom3Query } from 'src/generated/graphql'
 import { Circle } from '../components/Circle'
 import { SupportedLandingPages } from './PaginatedFilterCloudsContainer'
-import { usePresenter } from './usePresenter'
+import { getId, usePresenter } from './usePresenter'
 
 type Props = {
     zoom3: Zoom3Query['zoomLevel3']
@@ -41,7 +41,7 @@ const PaginatedFilterClouds: React.FunctionComponent<Props> = ({ dimensions, zoo
                 style={{ overflow: 'visible' }}
             >
                 {zoom3.map((item, index, array) => {
-                    const backgroundItem = backgrounds.find(background => background.id === item.uri)
+                    const backgroundItem = backgrounds.find(background => background.id === getId(item))
 
                     return (
                         <Circle

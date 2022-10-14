@@ -22,19 +22,14 @@ export function usePresenter(dimensions: Dimensions, data: Zoom3Query['zoomLevel
     const router = useRouter()
     const theme = useTheme()
     const client = useApolloClient()
-    const dataDimensions = useFitDataToDimensions(
-        dimensions,
-        data,
-        d => d.uri ?? '',
-        d => d.count ?? 0
-    )
+    const dataDimensions = useFitDataToDimensions(dimensions, data, getId, d => d.count ?? 0)
 
     const getColor = useCallback(() => {
         return theme.colors.levels.z2.colors[`${router.query.slug}Filters`][router.query.filter as string]
     }, [router.query.filter, router.query.slug, theme.colors.levels.z2.colors])
 
-    const backgrounds = useRandomBackgroundData(data, d => d.uri ?? '', getColor())
-
+    const backgrounds = useRandomBackgroundData(data, getId, getColor())
+    console.log(data)
     const { svgRef, simulation } = useD3Simulation(dimensions, data, selector, dataDimensions)
     const navigateTo = useCallback(
         (d: d3.SimulationNodeDatum & PaginatedFilterType) => {
@@ -76,4 +71,8 @@ export function usePresenter(dimensions: Dimensions, data: Zoom3Query['zoomLevel
         ...pagination,
         backgrounds,
     }
+}
+
+export function getId(d: Zoom3Query['zoomLevel3'][0]) {
+    return d.uri ?? d.name ?? ''
 }

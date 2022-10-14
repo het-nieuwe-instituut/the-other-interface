@@ -4,6 +4,7 @@ import { SimulationNodeDatum } from 'd3'
 import { MutableRefObject, useEffect, useRef } from 'react'
 import { DataDimension } from '../../hooks/useFitToDataToDimensions'
 import { Dimensions, PaginatedFilterType } from '../types'
+import { getId } from '../usePresenter'
 
 const collisionData = [{ id: 'collision' }]
 const collision = 120
@@ -78,7 +79,7 @@ function useListenToSimulationTicks(
 }
 
 function getDataDimension(dataDimensions: DataDimension[], d: Partial<D3CollectionItem>) {
-    return dataDimensions?.find(item => item.id === d.uri)
+    return dataDimensions?.find(item => item.id === getId(d))
 }
 
 function getTakeSpaceFromDataDimensions(dataDimensions: DataDimension[], d: Partial<D3CollectionItem>) {
