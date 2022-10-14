@@ -4,17 +4,69 @@ fragment carouselModuleFragment on ComponentModulesCarousel {
     id
     items {
         id
-        name
-        description
         picture {
             data {
                 attributes {
                     url
-                    caption
                 }
             }
         }
-        type
+        name
+        description
+        triply_record {
+            data {
+                id
+                attributes {
+                    type
+                    recordId
+                    archive {
+                        ... on ArchivesOtherZoomLevel5DetailType {
+                            id
+                            type
+                            creator
+                            objectNumber
+                        }
+                        ... on ArchivesFondsZoomLevel5DetailType {
+                            id
+                            objectNumber
+                            mediaReference
+                        }
+                    }
+                    object {
+                        title
+                        maker
+                        image
+                    }
+                    publication {
+                        ... on PublicationsAudioVisualZoomLevel5DetailType {
+                            id
+                            type
+                            title
+                        }
+                        ... on PublicationsArticleZoomLevel5DetailType {
+                            id
+                            type
+                            title
+                        }
+                        ... on PublicationsSerialZoomLevel5DetailType {
+                            id
+                            type
+                            title
+                        }
+                        ... on PublicationsBookZoomLevel5DetailType {
+                            id
+                            type
+                            title
+                            author
+                        }
+                    }
+                    people {
+                        name
+                        profession
+                    }
+                }
+            }
+        }
     }
     title
     type
