@@ -29,7 +29,7 @@ export function usePresenter(dimensions: Dimensions, data: Zoom3Query['zoomLevel
     }, [router.query.filter, router.query.slug, theme.colors.levels.z2.colors])
 
     const backgrounds = useRandomBackgroundData(data, getId, getColor())
-    console.log(data)
+
     const { svgRef, simulation } = useD3Simulation(dimensions, data, selector, dataDimensions)
     const navigateTo = useCallback(
         (d: d3.SimulationNodeDatum & PaginatedFilterType) => {

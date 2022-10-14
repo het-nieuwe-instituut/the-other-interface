@@ -19,9 +19,6 @@ export function usePresenter(dimensions: Dimensions, selector: string, zoom2: Zo
         [zoom2]
     )
 
-    // TODO solve rerender problems
-    // console.log(objectsPerTypeWithIds)
-
     const dataDimensions = useFitDataToDimensions(
         dimensions,
         objectsPerTypeWithIds,

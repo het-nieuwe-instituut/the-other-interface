@@ -74,7 +74,7 @@ export function usePresenter(stories: InstancesPerClass[]) {
         triangles,
         dataPoints,
         items: data?.zoomLevel1 ?? [],
-        loading
+        loading,
     }
 }
 
@@ -149,7 +149,6 @@ function drawPathByParent(svgRef: null, dataPoints: InstancesPerClassWithPoint[]
     d3Svg
         .selectAll('.StoriesSystem-dot')
         .on('mouseover', d => {
-            console.log(d.target.offsetParent.attributes['data-id'])
             const hoverDataPoint = dataPoints.find(
                 dataPoint => dataPoint.id === d.target.offsetParent.attributes['data-id'].value
             )
