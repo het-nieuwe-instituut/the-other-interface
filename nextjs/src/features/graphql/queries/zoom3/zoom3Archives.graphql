@@ -1,0 +1,8 @@
+query Zoom3Archives($filterId: String!, $page: Int!, $pageSize: Int!) {
+    zoomLevel3(entityName: Archives, filterId: $filterId, page: $page, pageSize: $pageSize) {
+        uri
+        name
+        count
+        total
+    }
+}
