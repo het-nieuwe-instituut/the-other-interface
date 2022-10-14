@@ -29,7 +29,7 @@ class BaseArchiveZoomLevel5Type {
 }
 
 @ObjectType()
-export class ArchivesOtherZoomLevel5DetailType extends BaseArchiveZoomLevel5Type {
+export class ArchivesFondsZoomLevel5DetailType extends BaseArchiveZoomLevel5Type {
     @Field(() => String, { nullable: true })
     public descriptionLevel?: string
 
@@ -107,7 +107,7 @@ export class ArchivesOtherZoomLevel5DetailType extends BaseArchiveZoomLevel5Type
 }
 
 @ObjectType()
-export class ArchivesFondsZoomLevel5DetailType extends BaseArchiveZoomLevel5Type {
+export class ArchivesOtherZoomLevel5DetailType extends BaseArchiveZoomLevel5Type {
     @Field(() => String, { nullable: true })
     public objectNumber?: string
 
