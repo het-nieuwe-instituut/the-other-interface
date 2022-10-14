@@ -30,6 +30,9 @@ export class ObjectsZoomLevel4FiltersArgs {
 
 @ObjectType()
 export class ObjectsZoomLevel5DetailType {
+    @Field()
+    public id: string
+
     @Field(() => String, { nullable: true })
     public image?: string | null
 
