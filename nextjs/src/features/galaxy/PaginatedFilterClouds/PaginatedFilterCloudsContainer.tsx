@@ -55,7 +55,7 @@ const PaginatedFilterCloudsContainer: React.FunctionComponent<Props> = props => 
     } = useZoom3Query[props.type]({
         variables: {
             filterId: (router.query.filter as string) ?? '',
-            page: parseInt((router.query.page as string) ?? '0'),
+            page: parseInt((router.query.page as string) ?? '1'),
             pageSize: 16,
         },
     })

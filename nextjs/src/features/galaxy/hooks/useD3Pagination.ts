@@ -18,9 +18,15 @@ export function useD3Pagination({ simulation, selector, svgRef, pathname, pageSi
     const router = useRouter()
 
     async function paginateNext() {
-        await animateOut()
+        const page = router.query.page ? parseInt(router.query.page as string) : null
+        if (!page) {
+            router.push({
+                pathname: pathname,
+                query: { page: 1 },
+            })
+            return
+        }
 
-        const page = router.query.page ? parseInt(router.query.page as string) : 0
         const newPage = page + 1
 
         const totalSizeExceeded = newPage > (total ?? 0)
@@ -28,6 +34,7 @@ export function useD3Pagination({ simulation, selector, svgRef, pathname, pageSi
             return
         }
 
+        await animateOut()
         router.push({
             pathname: pathname,
             query: { page: newPage },
@@ -35,16 +42,24 @@ export function useD3Pagination({ simulation, selector, svgRef, pathname, pageSi
     }
 
     async function paginateBack() {
-        await animateOut()
+        const page = router.query.page ? parseInt(router.query.page as string) : null
 
-        const page = router.query.page ? parseInt(router.query.page as string) : 0
+        if (!page) {
+            router.push({
+                pathname: pathname,
+                query: { page: 1 },
+            })
+            return
+        }
+
         const newPage = page - 1
 
-        const minimalSizeExceeded = newPage < 0
+        const minimalSizeExceeded = newPage < 1
         if (minimalSizeExceeded) {
             return
         }
 
+        await animateOut()
         router.push({
             pathname: pathname,
             query: { page: newPage },

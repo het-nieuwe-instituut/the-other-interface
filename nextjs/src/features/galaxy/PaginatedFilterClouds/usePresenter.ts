@@ -57,7 +57,7 @@ export function usePresenter(dimensions: Dimensions, data: Zoom3Query['zoomLevel
             },
         })
 
-        if (!res) {
+        if (!res?.zoomLevel?.length) {
             return 0
         }
 
