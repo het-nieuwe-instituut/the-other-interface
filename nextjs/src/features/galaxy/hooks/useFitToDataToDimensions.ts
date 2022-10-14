@@ -33,15 +33,18 @@ export function useFitDataToDimensions<
             return total + count
         }, 0)
         const totalOccupiedGridItems = totalSpaceGrid / totalObjects
+
         const newData = data.map(item => {
             const id = getName(item)
             const count = getCount(item)
             const dataDimension = prevDataDimensions.current.find(dataDimension => dataDimension.id === id)
             const takeSpace = totalOccupiedGridItems * count
 
+            const limitedTakeSpace = getLimitedTakeSpace(takeSpace)
+
             return {
                 id: id,
-                takeSpace: takeSpace < 300 ? 300 : takeSpace,
+                takeSpace: limitedTakeSpace,
                 randomMultiplier: dataDimension?.randomMultiplier ?? randomNumberBetweenPoints(0.8, 0.99),
             }
         })
@@ -51,4 +54,16 @@ export function useFitDataToDimensions<
     }, [dimensions, data])
 
     return dataDimensions
+}
+
+function getLimitedTakeSpace(takeSpace: number) {
+    if (takeSpace < 300) {
+        return 300
+    }
+
+    if (takeSpace > 750) {
+        return 750
+    }
+
+    return takeSpace
 }
