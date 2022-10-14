@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common'
+import { forwardRef, Inject, Injectable } from '@nestjs/common'
 import { Enum_Triplyrecord_Type, Sdk } from 'src/generated/strapi-sdk'
 import { StrapiUtils } from '../strapi/strapi.utils'
 import { ArchivesService, ArchivesZoomLevel5Types } from '../archives/archives.service'
@@ -61,7 +61,7 @@ export class ZoomLevel5Service {
         @Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk,
         private readonly objectsService: ObjectsService,
         private readonly peopleService: PeopleService,
-        private readonly publicationsService: PublicationsService,
+        @Inject(forwardRef(() => PublicationsService)) private readonly publicationsService: PublicationsService,
         private readonly archivesService: ArchivesService,
         private readonly triplyService: TriplyService
     ) {}

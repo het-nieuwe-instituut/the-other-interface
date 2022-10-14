@@ -8,7 +8,13 @@ import { ZoomLevel5Resolver } from './zoomLevel5.resolver'
 import { ZoomLevel5Service } from './zoomLevel5.service'
 
 @Module({
-    imports: [StrapiModule, ObjectsModule, PeopleModule, PublicationsModule, forwardRef(() => ArchivesModule)],
+    imports: [
+        StrapiModule,
+        ObjectsModule,
+        PeopleModule,
+        forwardRef(() => PublicationsModule),
+        forwardRef(() => ArchivesModule),
+    ],
     providers: [ZoomLevel5Service, ZoomLevel5Resolver],
     exports: [ZoomLevel5Service],
 })
