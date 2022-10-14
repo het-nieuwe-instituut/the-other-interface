@@ -15,8 +15,8 @@
     "buttonStyle": {
       "type": "enumeration",
       "enum": [
-        "default",
-        "large"
+        "Default",
+        "Large"
       ]
     },
     "buttonsModuleLayout": {

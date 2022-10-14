@@ -10,22 +10,22 @@
     "spacingTop": {
       "type": "enumeration",
       "enum": [
-        "sm",
-        "md",
-        "lg",
-        "xl"
+        "Sm",
+        "Md",
+        "Lg",
+        "Xl"
       ],
-      "default": "md"
+      "default": "Md"
     },
     "spacingBottom": {
       "type": "enumeration",
       "enum": [
-        "sm",
-        "md",
-        "lg",
-        "xl"
+        "Sm",
+        "Md",
+        "Lg",
+        "Xl"
       ],
-      "default": "md"
+      "default": "Md"
     }
   }
 }
