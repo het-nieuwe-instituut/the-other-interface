@@ -1,4 +1,5 @@
 import { Field, InputType, ObjectType } from '@nestjs/graphql'
+import { PoepleZoomLevel5DetailType } from '../people/people.type'
 
 @InputType()
 export class ObjectsZoomLevel4FiltersArgs {
@@ -64,6 +65,9 @@ export class ObjectsZoomLevel5DetailType {
 
     @Field(() => String, { nullable: true })
     public makerRoleLabel?: string | null
+
+    @Field(() => PoepleZoomLevel5DetailType, { nullable: true })
+    public populatedMaker?: PoepleZoomLevel5DetailType
 
     @Field(() => String, { nullable: true })
     public startDate?: string | null

@@ -10,7 +10,7 @@ import { ZoomLevel5Service } from './zoomLevel5.service'
 @Module({
     imports: [
         StrapiModule,
-        ObjectsModule,
+        forwardRef(() => ObjectsModule),
         PeopleModule,
         forwardRef(() => PublicationsModule),
         forwardRef(() => ArchivesModule),

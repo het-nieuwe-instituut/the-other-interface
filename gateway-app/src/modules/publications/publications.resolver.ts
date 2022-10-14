@@ -11,7 +11,7 @@ export class PublicationsAudioVisualResolver {
     public constructor(private readonly publicationsService: PublicationsService) {}
 
     @Query(() => PublicationsAudioVisualZoomLevel5DetailType)
-    public archiveOther() {
+    public publicationAudioVisual() {
         throw new Error('not yet implemented')
     }
 
@@ -26,7 +26,7 @@ export class PublicationsArticleResolver {
     public constructor(private readonly publicationsService: PublicationsService) {}
 
     @Query(() => PublicationsArticleZoomLevel5DetailType)
-    public archiveOther() {
+    public publicationArticle() {
         throw new Error('not yet implemented')
     }
 
@@ -41,7 +41,7 @@ export class PublicationsBookResolver {
     public constructor(private readonly publicationsService: PublicationsService) {}
 
     @Query(() => PublicationsBookZoomLevel5DetailType)
-    public archiveOther() {
+    public publicationBook() {
         throw new Error('not yet implemented')
     }
 
