@@ -2,6 +2,7 @@ import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import PaginationLeft from '@/icons/arrows/pagination-left.svg'
 import PaginationRight from '@/icons/arrows/pagination-right.svg'
 import { Box, Flex, Text } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 import { useId } from 'react'
 import { Zoom3Query } from 'src/generated/graphql'
 import { Circle } from '../components/Circle'
@@ -21,7 +22,7 @@ const PaginatedFilterClouds: React.FunctionComponent<Props> = ({ dimensions, zoo
     const { width, height } = dimensions
     const svgWidth = width
     const svgHeight = height
-
+    const router = useRouter()
     const id = useId().replaceAll(':', '')
     const { svgRef, zoomed, backgrounds, paginateBack, paginateNext, total, totalPages, currentPage } = usePresenter(
         dimensions,
@@ -41,6 +42,7 @@ const PaginatedFilterClouds: React.FunctionComponent<Props> = ({ dimensions, zoo
             >
                 {zoom3.map((item, index, array) => {
                     const backgroundItem = backgrounds.find(background => background.id === item.uri)
+
                     return (
                         <Circle
                             key={`${index}-${array.length}`}
@@ -61,7 +63,7 @@ const PaginatedFilterClouds: React.FunctionComponent<Props> = ({ dimensions, zoo
                                 {!zoomed && (
                                     <Box>
                                         <Text width="12.5rem" textStyle={'cloudText'}>
-                                            {t('people')}
+                                            {t(router.query.slug as SupportedLandingPages)}
                                         </Text>
                                         <Text width="12.5rem" textStyle={'cloudText'}>
                                             {t('genericBy', { name: item.name })}
@@ -84,7 +86,7 @@ const PaginatedFilterClouds: React.FunctionComponent<Props> = ({ dimensions, zoo
                     >
                         <Flex flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
                             <Text textStyle={'cloudText'} mb={4}>
-                                {total} {t('people')}
+                                {total} {t(router.query.slug as SupportedLandingPages)}
                             </Text>
                             <Flex alignItems={'center'} gap={1}>
                                 <Box as={'button'} pr="2" aria-label="left" onClick={paginateBack}>

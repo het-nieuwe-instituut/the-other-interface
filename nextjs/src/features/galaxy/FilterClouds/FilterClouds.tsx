@@ -1,6 +1,7 @@
 import { Circle } from '@/features/galaxy/components/Circle'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Box, Text } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 import { useId } from 'react'
 import { ZoomLevel2Query } from 'src/generated/graphql'
 import { SupportedLandingPages } from './FilterCloudsContainer'
@@ -19,6 +20,7 @@ const FilterClouds: React.FunctionComponent<Props> = ({ dimensions, type, zoomLe
     const { width, height } = dimensions
     const svgWidth = width
     const svgHeight = height
+    const router = useRouter()
     const id = useId().replaceAll(':', '')
     const { svgRef, zoomed, objectsPerTypeWithIds } = usePresenter(dimensions, id, zoomLevel2)
     const { t } = useTypeSafeTranslation('landingpage')
@@ -36,8 +38,8 @@ const FilterClouds: React.FunctionComponent<Props> = ({ dimensions, type, zoomLe
                         <Circle
                             key={`${index}-${array.length}`}
                             className={id}
-                            defaultBackground={`levels.z2.${type}Filters.${item.id}`}
-                            hoverBackground={`levels.z2.${type}Filters.${item.id}`}
+                            defaultBackground={`levels.z2.backgrounds.${type}Filters.${item.id}`}
+                            hoverBackground={`levels.z2.backgrounds.${type}Filters.${item.id}`}
                         >
                             <Box
                                 as="button"
@@ -52,7 +54,7 @@ const FilterClouds: React.FunctionComponent<Props> = ({ dimensions, type, zoomLe
                                 {!zoomed && (
                                     <Box>
                                         <Text width="12.5rem" textStyle={'cloudText'}>
-                                            {t('people')}
+                                            {t(router.query.slug as SupportedLandingPages)}
                                         </Text>
                                         <Text width="12.5rem" textStyle={'cloudText'}>
                                             {item.name}

@@ -6,6 +6,10 @@ import {
     useZoom3DPeopleQuery,
     useZoom3DPublicationsQuery,
     useZoom3ObjectsQuery,
+    Zoom3ArchivesDocument,
+    Zoom3DPeopleDocument,
+    Zoom3DPublicationsDocument,
+    Zoom3ObjectsDocument,
 } from 'src/generated/graphql'
 
 export enum SupportedLandingPages {
@@ -32,6 +36,13 @@ const useZoom3Query = {
     [SupportedLandingPages.Objects]: useZoom3ObjectsQuery,
     [SupportedLandingPages.People]: useZoom3DPeopleQuery,
     [SupportedLandingPages.Publications]: useZoom3DPublicationsQuery,
+}
+
+export const Zoom3QueryDocument = {
+    [SupportedLandingPages.Archives]: Zoom3ArchivesDocument,
+    [SupportedLandingPages.Objects]: Zoom3ObjectsDocument,
+    [SupportedLandingPages.People]: Zoom3DPeopleDocument,
+    [SupportedLandingPages.Publications]: Zoom3DPublicationsDocument,
 }
 
 const PaginatedFilterCloudsContainer: React.FunctionComponent<Props> = props => {
