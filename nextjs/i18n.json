@@ -5,6 +5,7 @@
         "*": ["common"],
         "story/*": ["stories"],
         "/landingpage/[slug]": ["landingpage"],
+        "/landingpage/[slug]/[filter]": ["landingpage"],
         "/": ["homepage"]
     }
 }

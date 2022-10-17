@@ -1,0 +1,16 @@
+query stories{
+	stories {
+		data {
+			id
+			attributes {
+				title
+				slug
+			}
+		}
+		meta {
+			pagination {
+				page
+			}
+		}
+	}
+}

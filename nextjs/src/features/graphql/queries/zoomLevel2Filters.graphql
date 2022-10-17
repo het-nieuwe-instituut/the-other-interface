@@ -1,0 +1,6 @@
+query zoomLevel2($entityName: EntityNames!){
+	zoomLevel2(entityName: $entityName) {
+		filter
+		id
+	}
+}
