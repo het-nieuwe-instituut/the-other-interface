@@ -1,0 +1,18 @@
+query ZoomLevel5ArchivesFonds {
+    zoomLevel5ArchivesFonds(id: "110000212") {
+        objectNumber
+        title
+        startDate
+        endDate
+        dateLabel
+        dimensionFree
+        mediaReference
+        mediaReferenceLabel
+        existenceOfOriginals
+        scopeContent
+        relatedMaterial
+        rights
+        rightsLabel
+        permanentLink
+    }
+}

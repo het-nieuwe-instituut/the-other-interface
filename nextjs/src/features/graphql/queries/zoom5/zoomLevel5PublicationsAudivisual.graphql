@@ -1,0 +1,32 @@
+query ZoomLevel5PublicationsAudiovisual {
+    zoomLevel5PublicationsAudiovisual(id: "300197096") {
+        typeOfPublication
+        typeOfPublicationLabel
+        title
+        author
+        authorLabel
+        authorRole
+        authorRoleLabel
+        publisher
+        publisherLabel
+        yearOfPublication
+        placeOfPublication
+        placeOfPublicationLabel
+        abstract
+        annotation
+        scope
+        language
+        languageLabel
+        medium
+        geographicalKeyword
+        geographicalKeywordLabel
+        subject
+        subjectLabel
+        relatedPerInst
+        relatedPerInstLabel
+        permanentLink
+        objectNumber
+        availability
+        shelfmark
+    }
+}

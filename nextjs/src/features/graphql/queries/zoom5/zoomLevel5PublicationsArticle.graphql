@@ -1,0 +1,32 @@
+query ZoomLevel5PublicationsArticle {
+    zoomLevel5PublicationsArticle(id: "300171648") {
+        typeOfPublication
+        typeOfPublicationLabel
+        title
+        author
+        authorLabel
+        authorRole
+        authorRoleLabel
+        sourceTitle
+        sourceTitleLabel
+        volume
+        issue
+        yearOfPublication
+        page
+        publisher
+        publisherLabel
+        abstract
+        language
+        languageLabel
+        geographicalKeyword
+        geographicalKeywordLabel
+        subject
+        subjectLabel
+        relatedPerInst
+        relatedPerInstLabel
+        objectNumber
+        availability
+        shelfmark
+        permanentLink
+    }
+}

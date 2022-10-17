@@ -1,0 +1,28 @@
+query ZoomLevel5ArchivesOther {
+    zoomLevel5ArchivesOther(id: "110746983") {
+        descriptionLevel
+        objectNumber
+        recordTitle
+        startDate
+        endDate
+        productionDate
+        extent
+        repository
+        repositoryLabel
+        creator
+        creatorLabel
+        creatorHistory
+        custodialHistory
+        systemOfArrangement
+        contentScope
+        conditionsGoverningAccess
+        relatedMaterial
+        appendices
+        source
+        partReference
+        partTitle
+        right
+        rightLabel
+        permanentLink
+    }
+}

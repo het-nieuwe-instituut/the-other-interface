@@ -1,0 +1,23 @@
+query ZoomLevel5PublicationsSerial {
+    zoomLevel5PublicationsSerial(id: "300319131") {
+        typeOfPublication
+        typeOfPublicationLabel
+        title
+        publisher
+        publisherLabel
+        yearOfPublication
+        placeOfPublication
+        placeOfPublicationLabel
+        subject
+        subjectLabel
+        language
+        languageLabel
+        continuedFrom
+        continuedAs
+        remarks
+        availability
+        shelfmark
+        holding
+        permanentLink
+    }
+}
