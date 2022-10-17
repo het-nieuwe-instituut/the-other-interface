@@ -9,6 +9,15 @@ export function useD3ZoomEvents(svgRef: MutableRefObject<SVGSVGElement | null>, 
     const router = useRouter()
     const [zoomLevel, setZoomLevel] = useState<ZoomLevel>(ZoomLevel.Zoom0)
 
+    useEffect(() => {
+        const {zoomLevel} = router.query as { zoomLevel: ZoomLevel}
+        if (!zoomLevel) {
+            setZoomLevel(ZoomLevel.Zoom0)
+            return
+        } 
+        setZoomLevel(zoomLevel)
+    }, [router])
+
     const zoom1stories = useCallback(() => {
         const d3Svg = d3.select(svgRef.current)
 
