@@ -112,7 +112,7 @@
       "type": "text",
       "maxLength": 250
     },
-    "people": {
+    "triplyRecords": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::triply-record.triply-record",

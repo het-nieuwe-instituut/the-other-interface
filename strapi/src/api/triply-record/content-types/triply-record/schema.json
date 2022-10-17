@@ -31,7 +31,7 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::story.story",
-      "inversedBy": "people"
+      "inversedBy": "triplyRecords"
     }
   }
 }
