@@ -2,7 +2,7 @@ import { ButtonsGrid } from '@/features/shared/components/ButtonsGrid/ButtonsGri
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { formatDate } from '@/features/shared/utils/dates'
 import { keyExtractor } from '@/features/shared/utils/lists'
-import { capitalizeFirstLetter } from '@/features/shared/utils/text'
+import { capitalizeFirstLetter, prepareTextToUrl } from '@/features/shared/utils/text'
 import { Box, Link, Text } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import {
@@ -10,10 +10,10 @@ import {
     ComponentCoreTimeframe,
     EnumComponentcorepublicationdateDisplaytype,
     EnumComponentmodulesbuttonsmoduleButtonstyle,
-    StoryBySlugQuery,
+    StoryEntity,
 } from 'src/generated/graphql'
 
-type Story = NonNullable<NonNullable<NonNullable<StoryBySlugQuery['stories']>['data']>[0]>
+type Story = StoryEntity
 interface Props {
     story: Story
 }
@@ -60,6 +60,32 @@ export const StoryMeta: React.FC<Props> = ({ story }) => {
                     </Text>
                 </Box>
             )}
+
+            {
+                !!story.attributes?.triplyRecords?.data?.length && (
+                    <Box marginBottom={'md'}>
+                        <Text textStyle={'h5'} mb={1}>
+                            {capitalizeFirstLetter(storiesT.t('people'))}
+                        </Text>
+
+                        <Box display={'flex'} flexDirection={'row'}>
+                            {story.attributes?.triplyRecords?.data.map((item, index, array) => {
+                                const hasItemAfter = array.length - 1 !== index
+                                return (
+                                    <Text textStyle={'micro'} key={keyExtractor(item, index, array)} mr={1}>
+                                        <NextLink href={`/people/${prepareTextToUrl(item.attributes?.people?.name)}}`} passHref>
+                                            <Link>
+                                                {item.attributes?.people?.name}
+                                                {hasItemAfter && ','}
+                                            </Link>
+                                        </NextLink>
+                                    </Text>
+                                )
+                            })}
+                        </Box>
+                    </Box>
+                )
+            }
 
             {!!story.attributes?.locations?.data.length && (
                 <Box marginBottom={'md'}>

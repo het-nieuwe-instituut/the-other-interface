@@ -112,11 +112,11 @@
       "type": "text",
       "maxLength": 250
     },
-    "triplyRecords": {
+    "people": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::triply-record.triply-record",
-      "mappedBy": "stories"
+      "inversedBy": "stories"
     }
   }
 }
