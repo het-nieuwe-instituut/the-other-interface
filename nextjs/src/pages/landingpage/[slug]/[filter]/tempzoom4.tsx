@@ -1,13 +1,16 @@
 import { SupportedLandingPages } from '@/features/galaxy/PaginatedFilterClouds/PaginatedFilterCloudsContainer'
 import { Box, Flex, Grid, GridItem, Img, Text, useTheme } from '@chakra-ui/react'
 import { useRef } from 'react'
-// import { useSize } from '@chakra-ui/react-use-size'
+import { useSize } from '@chakra-ui/react-use-size'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { useRouter } from 'next/router'
 import {
     LandingpageComponentsDynamicZone,
     useLandingpageBySlugQuery,
-    useZoom4Query,
+    useZoom4ArchivesQuery,
+    useZoom4ObjectsQuery,
+    useZoom4PeopleQuery,
+    useZoom4PublicationsQuery,
     ZoomLevel4Type,
 } from 'src/generated/graphql'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
@@ -32,7 +35,9 @@ export default Page
 export const TempZoom4Container: React.FC = () => {
     const { locale, query } = useRouter()
     const queryParams = query as unknown as LandingPageQueryParams
-    // const type = queryParams.slug
+    const type = queryParams.slug
+
+    console.log('TYPE', type)
     const { t } = useTypeSafeTranslation('common')
     const theme = useTheme()
 
@@ -43,7 +48,7 @@ export const TempZoom4Container: React.FC = () => {
         },
     })
     const graphRef = useRef<HTMLDivElement | null>(null)
-    // const sizes = useSize(graphRef)
+    const sizes = useSize(graphRef)
 
     if (loading) {
         return <p>loading</p>
@@ -67,12 +72,9 @@ export const TempZoom4Container: React.FC = () => {
                 ref={graphRef}
                 padding={6}
             >
-                {/* {sizes?.height && sizes?.width && ( */}
-                <PaginatedFilterContainer
-                    //type={type}
-                    dimensions={{ height: 800, width: 1189 }}
-                />
-                {/* )} */}
+                {sizes?.height && sizes?.width && (
+                    <PaginatedFilterContainer type={type} dimensions={{ height: 800, width: sizes?.width }} />
+                )}
             </Box>
             <Box px={{ xl: 6, base: 0 }}>
                 <Box backgroundColor={'white'} px={6} pt={6} maxW={theme.breakpoints.xl} marginX={'auto'} pb={1}>
@@ -95,36 +97,32 @@ export const TempZoom4Container: React.FC = () => {
 //     ssr: false,
 // })
 
-// const useZoom3Query = {
-//     [SupportedLandingPages.Archives]: useZoom3ArchivesQuery,
-//     [SupportedLandingPages.Objects]: useZoom3ObjectsQuery,
-//     [SupportedLandingPages.People]: useZoom3DPeopleQuery,
-//     [SupportedLandingPages.Publications]: useZoom3DPublicationsQuery,
-// }
-
-// export const Zoom3QueryDocument = {
-//     [SupportedLandingPages.Archives]: Zoom3ArchivesDocument,
-//     [SupportedLandingPages.Objects]: Zoom3ObjectsDocument,
-//     [SupportedLandingPages.People]: Zoom3DPeopleDocument,
-//     [SupportedLandingPages.Publications]: Zoom3DPublicationsDocument,
-// }
+const useZoom4Query = {
+    [SupportedLandingPages.Archives]: useZoom4ArchivesQuery,
+    [SupportedLandingPages.Objects]: useZoom4ObjectsQuery,
+    [SupportedLandingPages.People]: useZoom4PeopleQuery,
+    [SupportedLandingPages.Publications]: useZoom4PublicationsQuery,
+}
 
 type PaginatsedProps = {
     dimensions: {
         height: number
         width: number
     }
-    // type: SupportedLandingPages
+    type: SupportedLandingPages
 }
 
-const PaginatedFilterContainer: React.FunctionComponent<PaginatsedProps> = () => {
-    // const router = useRouter()
+const PaginatedFilterContainer: React.FunctionComponent<PaginatsedProps> = props => {
+    const { type } = props
+    const router = useRouter()
+
+    console.log('ROUTER', router.query.filter)
 
     const {
         data: zoom4,
         loading,
         error,
-    } = useZoom4Query({
+    } = useZoom4Query[type]({
         variables: {
             publicationsFilters: {
                 TypeOfPublication: 'audio-visueel materiaal',
