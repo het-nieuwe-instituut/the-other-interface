@@ -1,5 +1,5 @@
-query ZoomLevel5Object {
-    zoomLevel5Object(id: "9220") {
+query ZoomLevel5Object($id: String!) {
+    zoomLevel5Object(id: $id) {
         image
         imageLabel
         title

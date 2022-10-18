@@ -1,5 +1,5 @@
-query ZoomLevel5PublicationsSerial {
-    zoomLevel5PublicationsSerial(id: "300319131") {
+query ZoomLevel5PublicationsSerial($id: String!) {
+    zoomLevel5PublicationsSerial(id: $id) {
         typeOfPublication
         typeOfPublicationLabel
         title

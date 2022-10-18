@@ -7,6 +7,7 @@ type Props = {
         height: number
         width: number
     }
+    recordId: string
 }
 
 const DynamicRecordCloudsNoSsr = dynamic(() => import('./RecordClouds'), {
@@ -14,7 +15,11 @@ const DynamicRecordCloudsNoSsr = dynamic(() => import('./RecordClouds'), {
 })
 
 const RecordCloudsContainer: React.FunctionComponent<Props> = props => {
-    const { data, loading, error } = useZoomLevel5DetailQuery('object')
+    const { data, loading, error } = useZoomLevel5DetailQuery('object', {
+        variables: {
+            id: props.recordId,
+        },
+    })
 
     if (loading) {
         return <Text>Loading</Text>

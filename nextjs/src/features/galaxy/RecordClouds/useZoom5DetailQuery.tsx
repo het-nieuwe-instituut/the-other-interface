@@ -65,11 +65,15 @@ export const dataAccessor = {
 
 export type ZoomLevel5DetailResponses = ReturnType<typeof useZoomLevel5DetailQuery>['data']
 
-export function useZoomLevel5DetailQuery<T extends keyof typeof config>(type: T) {
+export function useZoomLevel5DetailQuery<T extends keyof typeof config>(
+    type: T,
+    options: { variables: Parameters<typeof config[keyof typeof config]['useHook']>[0]['variables'] }
+) {
     const configByType = getConfig<T>(type)
-    const query = configByType.useHook()
+    const query = configByType.useHook({
+        variables: options.variables,
+    })
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return {
         ...query,
         data: configByType.accessor(query.data),

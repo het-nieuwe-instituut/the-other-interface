@@ -1,5 +1,5 @@
-query ZoomLevel5Person {
-    zoomLevel5Person(id: "10991") {
+query ZoomLevel5Person($id: String!) {
+    zoomLevel5Person(id: $id) {
         name
         nameType
         nameVariation

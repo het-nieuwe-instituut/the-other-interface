@@ -6,14 +6,14 @@ import { useSize } from '@chakra-ui/react-use-size'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import { StoryComponentsDynamicZone, useStoryBySlugQuery } from 'src/generated/graphql'
-import { LandingPageQueryParams } from 'src/pages/landingpage/[slug]'
+import { StoryQueryParams } from 'src/pages/landingpage/[slug]/[filter]/[collection]/[record]'
 import RecordsCloudsContainer from '../../../galaxy/RecordClouds/RecordsCloudsContainer'
 import { StoryMeta } from '../../Meta/StoryMeta'
 
 export const StoryContainer: React.FC = () => {
     const router = useRouter()
     const { t } = useTypeSafeTranslation('common')
-    const queryParams = router.query as unknown as LandingPageQueryParams
+    const queryParams = router.query as unknown as StoryQueryParams
     const theme = useTheme()
     const graphRef = useRef<HTMLDivElement | null>(null)
     const sizes = useSize(graphRef)
@@ -21,7 +21,7 @@ export const StoryContainer: React.FC = () => {
     const { data, loading, error } = useStoryBySlugQuery({
         variables: {
             locale: router.locale,
-            slug: queryParams?.slug,
+            slug: queryParams?.record,
         },
     })
 
@@ -44,7 +44,7 @@ export const StoryContainer: React.FC = () => {
         <>
             <Box backgroundColor="graph" height="800px" ref={graphRef}>
                 {sizes?.height && sizes?.width && (
-                    <RecordsCloudsContainer dimensions={{ height: 800, width: sizes?.width }} />
+                    <RecordsCloudsContainer dimensions={{ height: 800, width: sizes?.width }} recordId={''} />
                 )}
             </Box>
 

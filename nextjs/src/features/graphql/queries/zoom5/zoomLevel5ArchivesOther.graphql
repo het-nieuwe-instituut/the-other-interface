@@ -1,5 +1,5 @@
-query ZoomLevel5ArchivesOther {
-    zoomLevel5ArchivesOther(id: "110746983") {
+query ZoomLevel5ArchivesOther($id: String!) {
+    zoomLevel5ArchivesOther(id: $id) {
         descriptionLevel
         objectNumber
         recordTitle

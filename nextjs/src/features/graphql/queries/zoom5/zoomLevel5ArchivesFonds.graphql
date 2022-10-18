@@ -1,5 +1,5 @@
-query ZoomLevel5ArchivesFonds {
-    zoomLevel5ArchivesFonds(id: "110000212") {
+query ZoomLevel5ArchivesFonds($id: String!) {
+    zoomLevel5ArchivesFonds(id: $id) {
         objectNumber
         title
         startDate
