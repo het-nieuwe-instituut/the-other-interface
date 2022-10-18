@@ -357,6 +357,41 @@ export const ssrZoom3DPublications = {
       withPage: withPageZoom3DPublications,
       usePage: useZoom3DPublications,
     }
+export async function getServerPageZoom4
+    (options: Omit<Apollo.QueryOptions<Types.Zoom4QueryVariables>, 'query'>, ctx?: any ){
+        const apolloClient = getApolloClient(ctx);
+        
+        const data = await apolloClient.query<Types.Zoom4Query>({ ...options, query: Operations.Zoom4Document });
+        
+        const apolloState = apolloClient.cache.extract();
+
+        return {
+            props: {
+                apolloState: apolloState,
+                data: data?.data,
+                error: data?.error ?? data?.errors ?? null,
+            },
+        };
+      }
+export const useZoom4 = (
+  optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.Zoom4Query, Types.Zoom4QueryVariables>) => {
+  const router = useRouter();
+  const options = optionsFunc ? optionsFunc(router) : {};
+  return useQuery(Operations.Zoom4Document, options);
+};
+export type PageZoom4Comp = React.FC<{data?: Types.Zoom4Query, error?: Apollo.ApolloError}>;
+export const withPageZoom4 = (optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.Zoom4Query, Types.Zoom4QueryVariables>) => (WrappedComponent:PageZoom4Comp) : NextPage  => (props) => {
+                const router = useRouter()
+                const options = optionsFunc ? optionsFunc(router) : {};
+                const {data, error } = useQuery(Operations.Zoom4Document, options)    
+                return <WrappedComponent {...props} data={data} error={error} /> ;
+                   
+            }; 
+export const ssrZoom4 = {
+      getServerPage: getServerPageZoom4,
+      withPage: withPageZoom4,
+      usePage: useZoom4,
+    }
 export async function getServerPageZoomLevel1
     (options: Omit<Apollo.QueryOptions<Types.ZoomLevel1QueryVariables>, 'query'>, ctx?: any ){
         const apolloClient = getApolloClient(ctx);
