@@ -36,7 +36,7 @@ export class TriplyService {
             )
         }
 
-        if (searchParams && searchParams.length) {
+        if (searchParams) {
             for (const [key, value] of Object.entries(searchParams)) {
                 endpoint.searchParams.append(key, value)
             }
