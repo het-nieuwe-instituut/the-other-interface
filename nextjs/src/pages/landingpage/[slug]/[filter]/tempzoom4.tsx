@@ -62,7 +62,7 @@ export const TempZoom4Container: React.FC = () => {
         <>
             <Box
                 bgGradient="radial(50% 50% at 50% 50%, #B5FD99 0%, rgba(181, 253, 153, 0) 76.56%)"
-                // backgroundColor="graph"
+                backgroundColor="graph"
                 height="800px"
                 ref={graphRef}
                 padding={6}
@@ -147,15 +147,31 @@ const PaginatedFilterContainer: React.FunctionComponent<PaginatsedProps> = () =>
     temp.splice(14, 0, {}) //TODO: Fix in pagination PR
 
     return (
-        <Grid templateColumns="repeat(6, 1fr)" gap={6} width={'100%'} px={12} height={'800px'}>
+        <Grid templateColumns="repeat(6, 1fr)" gap={6} width={'100%'} pl={11} pr={12} pb={4} height={'800px'}>
             {(temp || []).map((item, index) => {
                 if (index === 14) {
                     return <GridItem w="100%" h="100px" key={`${item.title}-${index}`} colSpan={2}></GridItem>
                 }
+
                 return (
-                    <GridItem w="100%" h="100px" key={`${item.title}-${index}`}>
+                    <GridItem
+                        w="100%"
+                        key={`${item.title}-${index}`}
+                        display={'flex'}
+                        justifyContent={'center'}
+                        alignItems={'center'}
+                        position={'relative'}
+                        top={`${randomShift()}px`}
+                        left={`${randomShift()}px`}
+                    >
                         {item.title && (
-                            <Flex flexDirection={'column'} alignItems={'center'}>
+                            <Flex
+                                flexDirection={'column'}
+                                alignItems={'center'}
+                                bgGradient="radial(50% 50% at 50% 50%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)"
+                                height={'90px'}
+                                width={'90px'}
+                            >
                                 <Img
                                     src={
                                         'https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?cs=srgb&dl=pexels-pixabay-45201.jpg&fm=jpg'
@@ -163,11 +179,9 @@ const PaginatedFilterContainer: React.FunctionComponent<PaginatsedProps> = () =>
                                     width={'48px'}
                                     height={'35px'}
                                 />
-                                <Text
-                                    textStyle={'galaxyH4'}
-                                    bgGradient="radial(50% 50% at 50% 50%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)"
-                                >
-                                    {item.title}
+
+                                <Text align={'center'} overflowWrap={'normal'} textStyle={'galaxyH4'} pt={1}>
+                                    {item.title.length > 32 ? `${item.title.slice(0, 32)}...` : item.title}
                                 </Text>
                             </Flex>
                         )}
@@ -176,4 +190,8 @@ const PaginatedFilterContainer: React.FunctionComponent<PaginatsedProps> = () =>
             })}
         </Grid>
     )
+}
+
+function randomShift() {
+    return Math.floor(Math.random() * 50)
 }
