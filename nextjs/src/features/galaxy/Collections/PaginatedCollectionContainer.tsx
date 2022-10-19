@@ -112,7 +112,7 @@ export const PaginatedCollectionContainer: React.FunctionComponent<PaginatsedPro
     zoom4Items.splice(14, 0, { record: '' })
 
     return (
-        <Grid templateColumns="repeat(6, 1fr)" gap={6} width={'100%'} pl={11} pr={12} pb={4} height={'800px'}>
+        <Grid templateColumns="repeat(6, 1fr)" gap={4} width={'100%'} pr={12} pb={4} height={'800px'}>
             {(zoom4Items || []).map((item, index) => {
                 if (index === 14) {
                     return (
@@ -125,6 +125,7 @@ export const PaginatedCollectionContainer: React.FunctionComponent<PaginatsedPro
                             justifyContent={'center'}
                             alignSelf={'center'}
                             className={'foreign-'}
+                            p={1}
                         >
                             <Flex flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
                                 <Text textStyle={'cloudText'}>
@@ -157,8 +158,8 @@ export const PaginatedCollectionContainer: React.FunctionComponent<PaginatsedPro
                         justifyContent={'center'}
                         alignItems={'center'}
                         position={'relative'}
-                        top={`${randomShift()}px`}
-                        left={`${randomShift()}px`}
+                        bottom={`${randomShift()}px`}
+                        left={`${randomShift(index) + 50}px`}
                     >
                         {item.title && (
                             <Flex
@@ -166,7 +167,7 @@ export const PaginatedCollectionContainer: React.FunctionComponent<PaginatsedPro
                                 alignItems={'center'}
                                 bgGradient="radial(50% 50% at 50% 50%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)"
                                 height={'90px'}
-                                width={'90px'}
+                                width={'140px'}
                             >
                                 <Img
                                     src={
@@ -188,6 +189,9 @@ export const PaginatedCollectionContainer: React.FunctionComponent<PaginatsedPro
     )
 }
 
-function randomShift() {
+function randomShift(index = 30) {
+    if (index === 0 || index === 23) {
+        return Math.floor(Math.random() * 50) + 40
+    }
     return Math.floor(Math.random() * 50)
 }
