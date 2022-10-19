@@ -1,7 +1,6 @@
 import { SupportedLandingPages } from '@/features/galaxy/PaginatedFilterClouds/PaginatedFilterCloudsContainer'
 import { Box, Flex, Grid, GridItem, Img, Text, useTheme } from '@chakra-ui/react'
-import { useRef } from 'react'
-import { useSize } from '@chakra-ui/react-use-size'
+import { useCallback, useState } from 'react'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { useRouter } from 'next/router'
 import {
@@ -30,6 +29,8 @@ export const TempZoom4Container: React.FC = () => {
     const { locale, query } = useRouter()
     const queryParams = query as unknown as LandingPageQueryParams
     const type = queryParams.slug
+    const [height, setHeight] = useState(0)
+    const [width, setWidth] = useState(0)
 
     const { t } = useTypeSafeTranslation('common')
     const theme = useTheme()
@@ -40,8 +41,13 @@ export const TempZoom4Container: React.FC = () => {
             slug: queryParams?.slug,
         },
     })
-    const graphRef = useRef<HTMLDivElement | null>(null)
-    const sizes = useSize(graphRef)
+
+    const measuredRef = useCallback((node: HTMLDivElement) => {
+        if (node !== null) {
+            setHeight(node.getBoundingClientRect().height)
+            setWidth(node.getBoundingClientRect().height)
+        }
+    }, [])
 
     if (loading) {
         return <p>loading</p>
@@ -62,12 +68,10 @@ export const TempZoom4Container: React.FC = () => {
                 bgGradient="radial(50% 50% at 50% 50%, #B5FD99 0%, rgba(181, 253, 153, 0) 76.56%)"
                 backgroundColor="graph"
                 height="800px"
-                ref={graphRef}
+                ref={measuredRef}
                 padding={6}
             >
-                {/* {sizes?.height && sizes?.width && ( */}
-                <PaginatedFilterContainer type={type} dimensions={{ height: 800, width: sizes?.width }} />
-                {/* )} */}
+                {height && width && <PaginatedFilterContainer type={type} dimensions={{ height: 800, width: width }} />}
             </Box>
             <Box px={{ xl: 6, base: 0 }}>
                 <Box backgroundColor={'white'} px={6} pt={6} maxW={theme.breakpoints.xl} marginX={'auto'} pb={1}>
