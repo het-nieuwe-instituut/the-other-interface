@@ -14,6 +14,8 @@ import {
 } from 'src/generated/graphql'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
+import PaginationLeft from '@/icons/arrows/pagination-left.svg'
+import PaginationRight from '@/icons/arrows/pagination-right.svg'
 
 export interface LandingPageQueryParams {
     slug: SupportedLandingPages
@@ -154,12 +156,7 @@ type PaginatsedProps = {
 const PaginatedFilterContainer: React.FunctionComponent<PaginatsedProps> = props => {
     const { type } = props
     const router = useRouter()
-
-    // const [path, setPath] = useState<{ filter: string; collection: string }>({ filter: '', collection: '' })
-
-    // useEffect(() => {
-    //     setPath({ filter: router.query.filter as string, collection: router.query.collection as string })
-    // }, [router])
+    const { t } = useTypeSafeTranslation('landingpage')
 
     const {
         data: zoom4,
@@ -175,20 +172,6 @@ const PaginatedFilterContainer: React.FunctionComponent<PaginatsedProps> = props
         },
     })
 
-    // const {
-    //     data: zoom4,
-    //     loading,
-    //     error,
-    // } = useZoom4Query[type]({
-    //     variables: {
-    //         publicationsFilters: {
-    //             TypeOfPublication: 'audio-visueel materiaal',
-    //         },
-    //         page: 1,
-    //         pageSize: 28,
-    //     },
-    // })
-
     if (loading) {
         return <Text>Loading</Text>
     }
@@ -201,11 +184,41 @@ const PaginatedFilterContainer: React.FunctionComponent<PaginatsedProps> = props
 
     temp.splice(14, 0, {}) //TODO: Fix in pagination PR
 
+    console.log(router.query)
+
     return (
         <Grid templateColumns="repeat(6, 1fr)" gap={6} width={'100%'} pl={11} pr={12} pb={4} height={'800px'}>
             {(temp || []).map((item, index) => {
                 if (index === 14) {
-                    return <GridItem w="100%" h="100px" key={`${item.title}-${index}`} colSpan={2}></GridItem>
+                    return (
+                        <GridItem
+                            w="100%"
+                            h="100px"
+                            key={`${item.title}-${index}`}
+                            colSpan={2}
+                            display={'flex'}
+                            justifyContent={'center'}
+                            alignSelf={'center'}
+                        >
+                            <Flex flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
+                                <Text textStyle={'cloudText'}>
+                                    {zoom4?.zoomLevel4.total} {t(router.query.slug as SupportedLandingPages)}
+                                </Text>
+                                <Text textStyle={'cloudText'} mb={4}>
+                                    {`by ${router.query.collection as string}`}
+                                </Text>
+                                <Flex alignItems={'center'} gap={1}>
+                                    <Box as={'button'} pr="2" aria-label="left" onClick={() => console.log('cleck')}>
+                                        <PaginationLeft />
+                                    </Box>
+                                    <Text textStyle={'cloudText'}>{`${1}/${1}`}</Text>
+                                    <Box as="button" pl="2" aria-label="right" onClick={() => console.log('cleck')}>
+                                        <PaginationRight />
+                                    </Box>
+                                </Flex>
+                            </Flex>
+                        </GridItem>
+                    )
                 }
 
                 return (
@@ -249,16 +262,4 @@ const PaginatedFilterContainer: React.FunctionComponent<PaginatsedProps> = props
 
 function randomShift() {
     return Math.floor(Math.random() * 50)
-}
-
-{
-    /* <Flex alignItems={'center'} gap={1}>
-<Box as={'button'} pr="2" aria-label="left" onClick={paginateBack}>
-    <PaginationLeft />
-</Box>
-<Text textStyle={'cloudText'}>{`${currentPage}/${totalPages}`}</Text>
-<Box as="button" pl="2" aria-label="right" onClick={paginateNext}>
-    <PaginationRight />
-</Box>
-</Flex> */
 }
