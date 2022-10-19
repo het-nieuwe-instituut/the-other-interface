@@ -2,13 +2,14 @@ import { Text } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { EntityNames, useZoomLevel2Query } from 'src/generated/graphql'
-import { LandingPageQueryParams } from 'src/pages/landingpage/[slug]'
+import Breadcrumbs from '../components/Breadcrumbs/Breadcrumbs'
 
 export enum SupportedLandingPages {
     Publications = 'publications',
     People = 'people',
     Archives = 'archives',
     Objects = 'objects',
+    Stories = 'stories'
 }
 
 type Props = {
@@ -23,11 +24,19 @@ const DynamicPaginatedFilterCloudsNoSsr = dynamic(() => import('./FilterClouds')
     ssr: false,
 })
 
-const TypeToEntityName: Record<string, EntityNames> = {
+export const DynamicGalaxyNoSsr = dynamic(() => import('../../galaxy/Galaxy/Galaxy'), {
+    ssr: false,
+})
+
+const TypeToEntityName: Record<string, EntityNames> = { 
     publications: EntityNames.Publications,
     people: EntityNames.People,
     objects: EntityNames.Objects,
     archives: EntityNames.Archives,
+}
+
+export interface LandingPageQueryParams {
+    slug: SupportedLandingPages
 }
 
 const FilterCloudsContainer: React.FunctionComponent<Props> = props => {
@@ -42,6 +51,7 @@ const FilterCloudsContainer: React.FunctionComponent<Props> = props => {
         variables: {
             entityName: TypeToEntityName[type],
         },
+        skip: !TypeToEntityName[type]
     })
 
     if (isFiltersLoading) {
@@ -52,13 +62,18 @@ const FilterCloudsContainer: React.FunctionComponent<Props> = props => {
         return <p>{filtersError.message}</p>
     }
 
+
     return (
         <>
-            <DynamicPaginatedFilterCloudsNoSsr
+            <Breadcrumbs />
+            {type === SupportedLandingPages.Stories ? (
+                 <DynamicGalaxyNoSsr dimensions={{ height: 800, width: props.dimensions.width }} />
+            ) : ( <DynamicPaginatedFilterCloudsNoSsr
                 zoomLevel2={filters?.zoomLevel2 ?? []}
                 dimensions={props.dimensions}
                 type={props.type}
-            />
+            />)}
+           
         </>
     )
 }

@@ -104,7 +104,7 @@ function adjustPostion(
     simulation?.nodes().forEach(d => {
         d3.select<BaseType, D3CollectionItem>(`#${d.id}`)
             .transition()
-            .duration(100)
+            .duration(100)  // here
             .attr('x', d => {
                 const x = d.xFromCenter ?? 0
 

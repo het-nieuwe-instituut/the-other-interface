@@ -7,6 +7,7 @@ import { Circle } from '../components/Circle'
 import { GalaxyShadowBackground } from '../components/GalaxyShadowBackground'
 
 import { usePresenter } from './usePresenter'
+import Breadcrumbs from '../components/Breadcrumbs/Breadcrumbs'
 
 interface Props {
     dimensions: Dimensions
@@ -36,6 +37,7 @@ const Galaxy: React.FC<Props> = ({ dimensions }) => {
             alignItems="center"
             justifyContent="center"
         >
+            <Breadcrumbs />
             {zoomLevel === ZoomLevel.Zoom0 && (
                 <Flex
                     height="100%"
