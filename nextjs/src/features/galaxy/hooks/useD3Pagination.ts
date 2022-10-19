@@ -6,7 +6,7 @@ import { MutableRefObject, useCallback } from 'react'
 import { D3CollectionItem } from '../PaginatedFilterClouds/hooks/useD3Simulation'
 
 interface Props {
-    simulation: MutableRefObject<Simulation<D3CollectionItem, undefined> | null>
+    simulation?: MutableRefObject<Simulation<D3CollectionItem, undefined> | null>
     selector: string
     svgRef: MutableRefObject<SVGSVGElement | null>
     pathname: string
@@ -22,7 +22,7 @@ export function useD3Pagination({ simulation, selector, svgRef, pathname, pageSi
         if (!page) {
             router.push({
                 pathname: pathname,
-                query: { page: 1 },
+                query: { page: 2 },
             })
             return
         }
@@ -67,7 +67,9 @@ export function useD3Pagination({ simulation, selector, svgRef, pathname, pageSi
     }
 
     const animateOut = useCallback(async () => {
-        simulation.current?.stop()
+        if (simulation) {
+            simulation.current?.stop()
+        }
         const d3Svg = d3.select(svgRef.current)
         const foreignNodes = d3Svg.selectAll(`.foreign-${selector}`)
 
