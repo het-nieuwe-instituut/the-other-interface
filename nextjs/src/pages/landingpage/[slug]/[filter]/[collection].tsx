@@ -15,12 +15,6 @@ import {
 } from 'src/generated/graphql'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
-// import dynamic from 'next/dynamic'
-// import { addApolloState, getApolloClient } from '@/features/graphql/config/apollo'
-// import { LandingpageContainer } from '@/features/pages/containers/LandingpageContainer/LandingpageContainer'
-// import { preparePageConfiguration } from '@/features/shared/utils/pageConfiguration'
-// import { GetServerSidePropsContext } from 'next'
-// import { LandingpageBySlugDocument, LandingpageBySlugQuery } from 'src/generated/graphql'
 
 export interface LandingPageQueryParams {
     slug: SupportedLandingPages
@@ -37,7 +31,6 @@ export const TempZoom4Container: React.FC = () => {
     const queryParams = query as unknown as LandingPageQueryParams
     const type = queryParams.slug
 
-    console.log('TYPE', type)
     const { t } = useTypeSafeTranslation('common')
     const theme = useTheme()
 
@@ -72,9 +65,9 @@ export const TempZoom4Container: React.FC = () => {
                 ref={graphRef}
                 padding={6}
             >
-                {sizes?.height && sizes?.width && (
-                    <PaginatedFilterContainer type={type} dimensions={{ height: 800, width: sizes?.width }} />
-                )}
+                {/* {sizes?.height && sizes?.width && ( */}
+                <PaginatedFilterContainer type={type} dimensions={{ height: 800, width: sizes?.width }} />
+                {/* )} */}
             </Box>
             <Box px={{ xl: 6, base: 0 }}>
                 <Box backgroundColor={'white'} px={6} pt={6} maxW={theme.breakpoints.xl} marginX={'auto'} pb={1}>
@@ -93,15 +86,57 @@ export const TempZoom4Container: React.FC = () => {
     )
 }
 
-// const DynamicPaginatedFilterCloudsNoSsr = dynamic(() => import('./PaginatedFilterClouds'), {
-//     ssr: false,
-// })
-
 const useZoom4Query = {
     [SupportedLandingPages.Archives]: useZoom4ArchivesQuery,
     [SupportedLandingPages.Objects]: useZoom4ObjectsQuery,
     [SupportedLandingPages.People]: useZoom4PeopleQuery,
     [SupportedLandingPages.Publications]: useZoom4PublicationsQuery,
+}
+
+const variableType = {
+    [SupportedLandingPages.Archives]: 'archivesFilters',
+    [SupportedLandingPages.Objects]: 'objectsFilters',
+    [SupportedLandingPages.People]: 'peopleFilters',
+
+    [SupportedLandingPages.Publications]: 'publicationsFilters',
+}
+
+const variableFilters: {
+    [key1: string]: {
+        [key: string]: string
+    }
+} = {
+    [SupportedLandingPages.Archives]: {
+        archives: 'Archives',
+        descriptionLevel: 'DescriptionLevel',
+        relatedName: 'RelatedName',
+        startDate: 'StartDate',
+    },
+    [SupportedLandingPages.Objects]: {
+        endDate: 'EndDate',
+        maker: 'Maker',
+        material: 'Material',
+        objectname: 'Objectname',
+        perInst: 'PerInst',
+        startDate: 'StartDate',
+        subject: 'Subject',
+        technique: 'Technique',
+    },
+    [SupportedLandingPages.People]: {
+        birthDate: 'BirthDate',
+        deathDate: 'DeathDate',
+        nameType: 'NameType',
+        period: 'Period',
+        place: 'Place',
+        profession: 'Profession',
+    },
+    [SupportedLandingPages.Publications]: {
+        author: 'Author',
+        geograficalKeyword: 'GeograficalKeyword',
+        relatedPerInst: 'RelatedPerInst',
+        subject: 'Subject',
+        typeOfPublication: 'TypeOfPublication',
+    },
 }
 
 type PaginatsedProps = {
@@ -116,7 +151,11 @@ const PaginatedFilterContainer: React.FunctionComponent<PaginatsedProps> = props
     const { type } = props
     const router = useRouter()
 
-    console.log('ROUTER', router.query.filter)
+    // const [path, setPath] = useState<{ filter: string; collection: string }>({ filter: '', collection: '' })
+
+    // useEffect(() => {
+    //     setPath({ filter: router.query.filter as string, collection: router.query.collection as string })
+    // }, [router])
 
     const {
         data: zoom4,
@@ -124,13 +163,27 @@ const PaginatedFilterContainer: React.FunctionComponent<PaginatsedProps> = props
         error,
     } = useZoom4Query[type]({
         variables: {
-            publicationsFilters: {
-                TypeOfPublication: 'audio-visueel materiaal',
+            [variableType[type]]: {
+                [variableFilters[type][router.query.filter as string]]: router.query.collection,
             },
             page: 1,
             pageSize: 28,
         },
     })
+
+    // const {
+    //     data: zoom4,
+    //     loading,
+    //     error,
+    // } = useZoom4Query[type]({
+    //     variables: {
+    //         publicationsFilters: {
+    //             TypeOfPublication: 'audio-visueel materiaal',
+    //         },
+    //         page: 1,
+    //         pageSize: 28,
+    //     },
+    // })
 
     if (loading) {
         return <Text>Loading</Text>
@@ -192,4 +245,16 @@ const PaginatedFilterContainer: React.FunctionComponent<PaginatsedProps> = props
 
 function randomShift() {
     return Math.floor(Math.random() * 50)
+}
+
+{
+    /* <Flex alignItems={'center'} gap={1}>
+<Box as={'button'} pr="2" aria-label="left" onClick={paginateBack}>
+    <PaginationLeft />
+</Box>
+<Text textStyle={'cloudText'}>{`${currentPage}/${totalPages}`}</Text>
+<Box as="button" pl="2" aria-label="right" onClick={paginateNext}>
+    <PaginationRight />
+</Box>
+</Flex> */
 }
