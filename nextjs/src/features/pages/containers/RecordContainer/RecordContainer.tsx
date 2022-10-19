@@ -4,16 +4,15 @@ import { Box, Grid, GridItem, useTheme } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
 import { useRef } from 'react'
 import { StoryComponentsDynamicZone } from 'src/generated/graphql'
-import { useGetZoom5Task } from 'src/pages/story/[slug]'
 import RecordsCloudsContainer from '../../../galaxy/RecordClouds/RecordsCloudsContainer'
 import { StoryMeta } from '../../Meta/StoryMeta'
+import { useGetZoom5RecordTask } from '../../tasks/getZoom5RecordTask'
 
-export const StoryContainer: React.FC = () => {
+export const RecordContainer: React.FC = () => {
     const theme = useTheme()
     const graphRef = useRef<HTMLDivElement | null>(null)
     const sizes = useSize(graphRef)
-
-    const { data, loading, error } = useGetZoom5Task()
+    const { data, loading, error } = useGetZoom5RecordTask()
 
     if (loading) {
         return <p>loading</p>
@@ -22,12 +21,8 @@ export const StoryContainer: React.FC = () => {
     if (error) {
         return <p>{error.message}</p>
     }
-    // StoryBySlug will always have one item
-    const story = data?.story
 
-    if (!story) {
-        return null
-    }
+    const story = data?.story
 
     return (
         <>
@@ -51,17 +46,20 @@ export const StoryContainer: React.FC = () => {
                         gap={'3.75rem'}
                     >
                         <GridItem area={'header'}>
-                            <PageHeader
-                                title={story.attributes?.title}
-                                preface={story.attributes?.description ?? undefined}
-                            />
+                            <PageHeader title={data?.detail?.title ?? ''} preface={data?.detail?.description ?? ''} />
                         </GridItem>
-                        <GridItem area={'meta'}>
-                            <StoryMeta story={story} />
-                        </GridItem>
+                        {story && (
+                            <GridItem area={'meta'}>
+                                <StoryMeta story={story} />
+                            </GridItem>
+                        )}
                     </Grid>
                 </Box>
-                <DynamicComponentRenderer components={story.attributes?.components as StoryComponentsDynamicZone[]} />
+                {story && (
+                    <DynamicComponentRenderer
+                        components={story.attributes?.components as StoryComponentsDynamicZone[]}
+                    />
+                )}
             </Box>
         </>
     )

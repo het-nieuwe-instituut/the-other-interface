@@ -1,13 +1,12 @@
 import { Text } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
-import { useZoomLevel5DetailQuery } from './useZoom5DetailQuery'
+import { useGetZoom5Task } from 'src/pages/story/[slug]'
 
 type Props = {
     dimensions: {
         height: number
         width: number
     }
-    recordId: string
 }
 
 const DynamicRecordCloudsNoSsr = dynamic(() => import('./RecordClouds'), {
@@ -15,11 +14,7 @@ const DynamicRecordCloudsNoSsr = dynamic(() => import('./RecordClouds'), {
 })
 
 const RecordCloudsContainer: React.FunctionComponent<Props> = props => {
-    const { data, loading, error } = useZoomLevel5DetailQuery('object', {
-        variables: {
-            id: props.recordId,
-        },
-    })
+    const { data, loading, error } = useGetZoom5Task()
 
     if (loading) {
         return <Text>Loading</Text>
@@ -31,7 +26,7 @@ const RecordCloudsContainer: React.FunctionComponent<Props> = props => {
 
     return (
         <>
-            <DynamicRecordCloudsNoSsr zoomLevel5={data} dimensions={props.dimensions} />
+            <DynamicRecordCloudsNoSsr zoomLevel5={data?.detail} dimensions={props.dimensions} />
         </>
     )
 }

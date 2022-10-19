@@ -1921,9 +1921,9 @@ export type ZoomLevel5RelationsType = {
   type: EntityNames;
 };
 
-export type ComponentCoreModuleLayoutsFragment = { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null };
-
 export type BaseTriplyRecordFragmentFragment = { __typename?: 'TriplyRecordEntity', id?: string | null, attributes?: { __typename?: 'TriplyRecord', recordId: string, type: EnumTriplyrecordType } | null };
+
+export type ComponentCoreModuleLayoutsFragment = { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null };
 
 export type ButtonsModuleFragmentFragment = { __typename?: 'ComponentModulesButtonsModule', id: string, buttonStyle?: EnumComponentmodulesbuttonsmoduleButtonstyle | null, buttons?: Array<{ __typename?: 'ComponentCoreButton', id: string, text?: string | null, url?: string | null, hasAttachment?: boolean | null, attachment?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null }> | null, buttonsModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } };
 
@@ -2093,7 +2093,7 @@ export type ZoomLevel2QueryVariables = Exact<{
 export type ZoomLevel2Query = { __typename?: 'Query', zoomLevel2: Array<{ __typename?: 'ZoomLevel2Type', filter: string, id: string }> };
 
 export const BaseTriplyRecordFragmentFragmentDoc = gql`
-    fragment baseTriplyRecordFragment on TriplyRecordEntity {
+    fragment BaseTriplyRecordFragment on TriplyRecordEntity {
   id
   attributes {
     recordId
@@ -2620,7 +2620,7 @@ export const StoryBySlugDocument = gql`
         }
         triplyRecords {
           data {
-            ...baseTriplyRecordFragment
+            ...BaseTriplyRecordFragment
           }
         }
       }

@@ -1,36 +1,26 @@
 import { addApolloState, getApolloClient } from '@/features/graphql/config/apollo'
-import { StoryContainer } from '@/features/pages/containers/StoryContainer/StoryContainer'
+import { RecordContainer } from '@/features/pages/containers/RecordContainer/RecordContainer'
+import { getZoom5RecordTask } from '@/features/pages/tasks/getZoom5RecordTask'
 import { preparePageConfiguration } from '@/features/shared/utils/pageConfiguration'
 import { GetServerSidePropsContext } from 'next'
-import { StoryBySlugDocument, StoryBySlugQuery } from 'src/generated/graphql'
 import { LandingPageFilterCollectionQueryParams } from '../[collection]'
 
-export interface StoryQueryParams extends LandingPageFilterCollectionQueryParams {
+export interface RecordQueryParams extends LandingPageFilterCollectionQueryParams {
     record: string
 }
 
 const Page = () => {
-    return <StoryContainer />
+    return <RecordContainer />
 }
 
 export default Page
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
-    const queryParams = context.query as unknown as StoryQueryParams
+    const queryParams = context.query as unknown as RecordQueryParams
     const record = queryParams.record
     const apolloClient = getApolloClient({ headers: context?.req?.headers })
 
-    const result = await apolloClient.query<StoryBySlugQuery>({
-        variables: {
-            locale: context.locale,
-            slug: record,
-        },
-        query: StoryBySlugDocument,
-    })
-
-    if (result.error || !result.data.stories?.data?.length) {
-        return { notFound: true }
-    }
+    await getZoom5RecordTask(apolloClient, context)
 
     preparePageConfiguration(apolloClient, {
         host: context.req.headers.host ?? '',

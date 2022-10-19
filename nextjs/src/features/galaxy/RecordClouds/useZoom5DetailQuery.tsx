@@ -1,4 +1,6 @@
+import { ApolloClient, NormalizedCache, NormalizedCacheObject, QueryOptions } from '@apollo/client'
 import {
+    EnumTriplyrecordType,
     useZoomLevel5ArchivesFondsQuery,
     useZoomLevel5ArchivesOtherQuery,
     useZoomLevel5ObjectQuery,
@@ -7,42 +9,64 @@ import {
     useZoomLevel5PublicationsAudiovisualQuery,
     useZoomLevel5PublicationsBookQuery,
     useZoomLevel5PublicationsSerialQuery,
+    ZoomLevel5ObjectDocument,
+    ZoomLevel5ObjectQuery,
+    ZoomLevel5ObjectQueryVariables,
+    ZoomLevel5PersonDocument,
+    ZoomLevel5PersonQuery,
+    ZoomLevel5PersonQueryVariables,
 } from 'src/generated/graphql'
 
-const config = {
-    ['archivesOther']: {
-        useHook: useZoomLevel5ArchivesOtherQuery,
-        accessor: (data?: ReturnType<typeof useZoomLevel5ArchivesOtherQuery>['data']) => data?.zoomLevel5ArchivesOther,
-    },
-    ['archivesFonds']: {
-        useHook: useZoomLevel5ArchivesFondsQuery,
-        accessor: (data?: ReturnType<typeof useZoomLevel5ArchivesFondsQuery>['data']) => data?.zoomLevel5ArchivesFonds,
-    },
-    ['publicationsSerial']: {
-        useHook: useZoomLevel5PublicationsSerialQuery,
-        accessor: (data?: ReturnType<typeof useZoomLevel5PublicationsSerialQuery>['data']) =>
-            data?.zoomLevel5PublicationsSerial,
-    },
-    ['publicationsArticle']: {
-        useHook: useZoomLevel5PublicationsArticleQuery,
-        accessor: (data?: ReturnType<typeof useZoomLevel5PublicationsArticleQuery>['data']) =>
-            data?.zoomLevel5PublicationsArticle,
-    },
-    ['publicationsAudiovisual']: {
-        useHook: useZoomLevel5PublicationsAudiovisualQuery,
-        accessor: (data?: ReturnType<typeof useZoomLevel5PublicationsAudiovisualQuery>['data']) =>
-            data?.zoomLevel5PublicationsAudiovisual,
-    },
-    ['publicationsBook']: {
-        useHook: useZoomLevel5PublicationsBookQuery,
-        accessor: (data?: ReturnType<typeof useZoomLevel5PublicationsBookQuery>['data']) =>
-            data?.zoomLevel5PublicationsBook,
-    },
-    ['object']: {
+export const config = {
+    // ['archivesOther']: {
+    //     useHook: useZoomLevel5ArchivesOtherQuery,
+    //     accessor: (data?: ReturnType<typeof useZoomLevel5ArchivesOtherQuery>['data']) => data?.zoomLevel5ArchivesOther,
+    // },
+    // ['archivesFonds']: {
+    //     useHook: useZoomLevel5ArchivesFondsQuery,
+    //     accessor: (data?: ReturnType<typeof useZoomLevel5ArchivesFondsQuery>['data']) => data?.zoomLevel5ArchivesFonds,
+    // },
+    // ['publicationsSerial']: {
+    //     useHook: useZoomLevel5PublicationsSerialQuery,
+    //     accessor: (data?: ReturnType<typeof useZoomLevel5PublicationsSerialQuery>['data']) =>
+    //         data?.zoomLevel5PublicationsSerial,
+    // },
+    // ['publicationsArticle']: {
+    //     useHook: useZoomLevel5PublicationsArticleQuery,
+    //     accessor: (data?: ReturnType<typeof useZoomLevel5PublicationsArticleQuery>['data']) =>
+    //         data?.zoomLevel5PublicationsArticle,
+    // },
+    // ['publicationsAudiovisual']: {
+    //     useHook: useZoomLevel5PublicationsAudiovisualQuery,
+    //     accessor: (data?: ReturnType<typeof useZoomLevel5PublicationsAudiovisualQuery>['data']) =>
+    //         data?.zoomLevel5PublicationsAudiovisual,
+    // },
+    // ['publicationsBook']: {
+    //     useHook: useZoomLevel5PublicationsBookQuery,
+    //     accessor: (data?: ReturnType<typeof useZoomLevel5PublicationsBookQuery>['data']) =>
+    //         data?.zoomLevel5PublicationsBook,
+    // },
+    [EnumTriplyrecordType.Object]: {
+        query: (
+            client: ApolloClient<NormalizedCacheObject>,
+            options: Omit<QueryOptions<ZoomLevel5ObjectQueryVariables, ZoomLevel5ObjectQuery>, 'query'>
+        ) =>
+            client.query<ZoomLevel5ObjectQuery, ZoomLevel5ObjectQueryVariables>({
+                ...options,
+                query: ZoomLevel5ObjectDocument,
+            }),
         useHook: useZoomLevel5ObjectQuery,
         accessor: (data?: ReturnType<typeof useZoomLevel5ObjectQuery>['data']) => data?.zoomLevel5Object,
     },
-    ['person']: {
+    [EnumTriplyrecordType.People]: {
+        query: (
+            client: ApolloClient<NormalizedCacheObject>,
+            options: Omit<QueryOptions<ZoomLevel5PersonQueryVariables, ZoomLevel5PersonQuery>, 'query'>
+        ) =>
+            client.query<ZoomLevel5PersonQuery, ZoomLevel5PersonQueryVariables>({
+                ...options,
+                query: ZoomLevel5PersonDocument,
+            }),
         useHook: useZoomLevel5PersonQuery,
         accessor: (data?: ReturnType<typeof useZoomLevel5PersonQuery>['data']) => data?.zoomLevel5Person,
     },
@@ -53,14 +77,14 @@ function getConfig<T extends keyof typeof config>(type: T) {
 }
 
 export const dataAccessor = {
-    ['archivesOther']: 'zoomLevel5ArchivesOther' as const,
-    ['archivesFonds']: 'zoomLevel5ArchivesFonds' as const,
-    ['publicationsSerial']: 'zoomLevel5PublicationsSerial' as const,
-    ['publicationsArticle']: 'zoomLevel5PublicationsSerial' as const,
-    ['publicationsAudiovisual']: 'zoomLevel5PublicationsSerial' as const,
-    ['publicationsBook']: 'zoomLevel5PublicationsSerial' as const,
-    ['object']: 'zoomLevel5Object' as const,
-    ['person']: 'zoomLevel5Person' as const,
+    // ['archivesOther']: 'zoomLevel5ArchivesOther' as const,
+    // ['archivesFonds']: 'zoomLevel5ArchivesFonds' as const,
+    // ['publicationsSerial']: 'zoomLevel5PublicationsSerial' as const,
+    // ['publicationsArticle']: 'zoomLevel5PublicationsSerial' as const,
+    // ['publicationsAudiovisual']: 'zoomLevel5PublicationsSerial' as const,
+    // ['publicationsBook']: 'zoomLevel5PublicationsSerial' as const,
+    [EnumTriplyrecordType.Object]: 'zoomLevel5Object' as const,
+    [EnumTriplyrecordType.People]: 'zoomLevel5Person' as const,
 }
 
 export type ZoomLevel5DetailResponses = ReturnType<typeof useZoomLevel5DetailQuery>['data']
