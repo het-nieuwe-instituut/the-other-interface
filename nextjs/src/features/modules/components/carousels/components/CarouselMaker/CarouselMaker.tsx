@@ -6,12 +6,15 @@ interface Props {
     name: string
     description: string
     boxSize: number
-} 
+}
 
 export const CarouselMaker = (props: Props) => {
     const { src, key, name, description, boxSize } = props;
         return (
-            <Flex flexDirection='column' mr='5'>
+            <Flex 
+                flexDirection='column' mr='5'           
+                width={`${boxSize}px!important`} 
+            >
                 <Img   
                     key={key}
                     src={src}
@@ -19,11 +22,24 @@ export const CarouselMaker = (props: Props) => {
                     objectFit='cover'
                     mb={'2'}
                     width={`${boxSize}px!important`} 
-                    height={`${boxSize}px`}
+                    height={`${boxSize}px!important`}
                     boxSize={`${boxSize}px!important`}
                 />
-                <Text textStyle={'h3'} mb={'1.5'}>{name}</Text>
-                <Text textStyle={'micro'}>{description}</Text>   
+                <Text 
+                    textStyle={'h3'}
+                    mb={'1.5'}  
+                    overflow={'hidden'}
+                    whiteSpace={'nowrap'}
+                    textOverflow={'ellipsis'}>
+                    {name}
+                </Text>
+                <Text 
+                    textStyle={'micro'}
+                    textOverflow={'ellipsis'}
+                    overflow={'hidden'}
+                    whiteSpace={'nowrap'}
+               >
+                {description}</Text>   
             </Flex>
         )                                
  }
