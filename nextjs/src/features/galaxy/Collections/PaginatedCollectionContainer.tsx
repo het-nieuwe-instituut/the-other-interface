@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { randomNumberBetweenPoints } from '@/features/shared/utils/numbers'
 import PaginationLeft from '@/icons/arrows/pagination-left.svg'
 import PaginationRight from '@/icons/arrows/pagination-right.svg'
 import { Box, Flex, Grid, GridItem, Img, Text } from '@chakra-ui/react'
+import { getRandomValues } from 'crypto'
 import { useRouter } from 'next/router'
 import { useId, useMemo } from 'react'
 import {
@@ -107,7 +109,7 @@ export const PaginatedCollectionContainer: React.FunctionComponent<PaginatsedPro
         return <p>{error.message}</p>
     }
 
-    return <PaginatedCollection {...props} zoom4={zoom4} />
+    return <PaginatedCollection {...props} dimensions={props.dimensions} zoom4={zoom4} />
 }
 
 export const PaginatedCollection: React.FunctionComponent<
@@ -128,7 +130,7 @@ export const PaginatedCollection: React.FunctionComponent<
             zoom4?.zoomLevel4?.nodes?.map((node, index) => ({
                 ...node,
                 randomBottom: randomShift(),
-                randomLeft: randomShift(index),
+                randomLeft: randomShift(),
             })),
         [zoom4?.zoomLevel4?.nodes]
     )
@@ -141,113 +143,102 @@ export const PaginatedCollection: React.FunctionComponent<
     )
 
     return (
-        <svg width={svgWidth} height={svgHeight} ref={svgRef} viewBox={`0 0 ${1000} ${1000}`}>
-            <Circle />
-            <Box
-                as={'foreignObject'}
-                width={1000}
-                height={500}
-                y={dimensions.height / 2 - 500 / 2}
-                overflow={'visible'}
-            >
-                <Grid templateColumns="repeat(6, 1fr)" gap={4} width={'100%'} height={'800px'}>
-                    {(items || []).map((item, index) => {
-                        if (index === 14) {
+        <svg width={svgWidth} height={svgHeight} ref={svgRef} viewBox={`0 0 ${svgHeight + 200} ${svgHeight - 100}`}>
+            <Box as={'foreignObject'} width={'100%'} height={'100%'} overflow={'visible'}>
+                <Flex justifyContent={'center'} alignItems={'center'} height={'100%'}>
+                    <Grid templateColumns="repeat(6, 1fr)" width={'100%'}>
+                        <GridItem
+                            w="100%"
+                            h="200px"
+                            colSpan={2}
+                            display={'flex'}
+                            justifyContent={'center'}
+                            alignSelf={'center'}
+                            p={1}
+                            colStart={3}
+                            rowStart={3}
+                        >
+                            <Flex flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
+                                <Text textStyle={'cloudText'}>
+                                    {zoom4?.zoomLevel4.total} {t(router.query.slug as any)}
+                                </Text>
+                                <Text textStyle={'cloudText'} mb={4}>
+                                    {`by ${router.query.collection as string}`}
+                                </Text>
+                                <Flex alignItems={'center'} gap={1}>
+                                    <Box as={'button'} pr="2" aria-label="left" onClick={paginateBack}>
+                                        <PaginationLeft />
+                                    </Box>
+                                    <Text textStyle={'cloudText'}>{`${currentPage}/${Math.ceil(
+                                        (zoom4?.zoomLevel4.total ?? 0) / 28
+                                    )}`}</Text>
+                                    <Box as="button" pl="2" aria-label="right" onClick={paginateNext}>
+                                        <PaginationRight />
+                                    </Box>
+                                </Flex>
+                            </Flex>
+                        </GridItem>
+                        {(items || []).map((item, index) => {
                             return (
                                 <GridItem
                                     w="100%"
-                                    h="100px"
                                     key={`${item.title}-${index}`}
-                                    colSpan={2}
                                     display={'flex'}
                                     justifyContent={'center'}
-                                    alignSelf={'center'}
-                                    p={1}
+                                    alignItems={'center'}
+                                    position={'relative'}
+                                    bottom={`${item.randomBottom}px`}
+                                    left={`${item.randomLeft}px`}
                                 >
-                                    <Flex flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
-                                        <Text textStyle={'cloudText'}>
-                                            {zoom4?.zoomLevel4.total} {t(router.query.slug as any)}
-                                        </Text>
-                                        <Text textStyle={'cloudText'} mb={4}>
-                                            {`by ${router.query.collection as string}`}
-                                        </Text>
-                                        <Flex alignItems={'center'} gap={1}>
-                                            <Box as={'button'} pr="2" aria-label="left" onClick={paginateBack}>
-                                                <PaginationLeft />
-                                            </Box>
-                                            <Text textStyle={'cloudText'}>{`${currentPage}/${Math.ceil(
-                                                (zoom4?.zoomLevel4.total ?? 0) / 28
-                                            )}`}</Text>
-                                            <Box as="button" pl="2" aria-label="right" onClick={paginateNext}>
-                                                <PaginationRight />
-                                            </Box>
-                                        </Flex>
-                                    </Flex>
+                                    <svg width={140} height={90} style={{ overflow: 'visible' }}>
+                                        <Box
+                                            as={'foreignObject'}
+                                            width={140}
+                                            height={90}
+                                            overflow={'visible'}
+                                            className={`foreign-${id}`}
+                                        >
+                                            {item.title && (
+                                                <Flex
+                                                    flexDirection={'column'}
+                                                    alignItems={'center'}
+                                                    justifyContent={'center'}
+                                                    bgGradient="radial(50% 50% at 50% 50%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)"
+                                                    height={'90px'}
+                                                    width={'140px'}
+                                                >
+                                                    <Img
+                                                        src={
+                                                            'https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?cs=srgb&dl=pexels-pixabay-45201.jpg&fm=jpg'
+                                                        }
+                                                        width={'48px'}
+                                                        height={'35px'}
+                                                    />
+
+                                                    <Text
+                                                        align={'center'}
+                                                        overflowWrap={'normal'}
+                                                        textStyle={'galaxyH4'}
+                                                        pt={1}
+                                                    >
+                                                        {item.title.length > 32
+                                                            ? `${item.title.slice(0, 32)}...`
+                                                            : item.title}
+                                                    </Text>
+                                                </Flex>
+                                            )}
+                                        </Box>
+                                    </svg>
                                 </GridItem>
                             )
-                        }
-
-                        return (
-                            <GridItem
-                                w="100%"
-                                key={`${item.title}-${index}`}
-                                display={'flex'}
-                                justifyContent={'center'}
-                                alignItems={'center'}
-                                position={'relative'}
-                                bottom={`${item.randomBottom}px`}
-                                left={`${item.randomLeft}px`}
-                            >
-                                <svg width={140} height={90} style={{ overflow: 'visible' }}>
-                                    <Box
-                                        as={'foreignObject'}
-                                        width={140}
-                                        height={90}
-                                        overflow={'visible'}
-                                        className={`foreign-${id}`}
-                                    >
-                                        {item.title && (
-                                            <Flex
-                                                flexDirection={'column'}
-                                                alignItems={'center'}
-                                                bgGradient="radial(50% 50% at 50% 50%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)"
-                                                height={'90px'}
-                                                width={'140px'}
-                                            >
-                                                <Img
-                                                    src={
-                                                        'https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?cs=srgb&dl=pexels-pixabay-45201.jpg&fm=jpg'
-                                                    }
-                                                    width={'48px'}
-                                                    height={'35px'}
-                                                />
-
-                                                <Text
-                                                    align={'center'}
-                                                    overflowWrap={'normal'}
-                                                    textStyle={'galaxyH4'}
-                                                    pt={1}
-                                                >
-                                                    {item.title.length > 32
-                                                        ? `${item.title.slice(0, 32)}...`
-                                                        : item.title}
-                                                </Text>
-                                            </Flex>
-                                        )}
-                                    </Box>
-                                </svg>
-                            </GridItem>
-                        )
-                    })}
-                </Grid>
+                        })}
+                    </Grid>
+                </Flex>
             </Box>
         </svg>
     )
 }
 
-function randomShift(index = 30) {
-    if (index === 0 || index === 23) {
-        return Math.floor(Math.random() * 50)
-    }
-    return Math.floor(Math.random() * 50)
+function randomShift() {
+    return Math.floor(randomNumberBetweenPoints(-20, 20))
 }

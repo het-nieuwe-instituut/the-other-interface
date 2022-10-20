@@ -28,11 +28,10 @@ export function useZoomToD3Element<DType>(
             const height = dimensions.height ?? 0
 
             const scale = 20
-            const x = (d.x ?? 0) - width / 2
-            const y = (d.y ?? 0) - height / 2
+            const x = (event.clientX ?? 0) - width / 2
+            const y = (event.clientY ?? 0) - height / 2
 
             d3Svg.attr(`opacity`, `1`)
-
             await d3Svg
                 .transition()
                 .duration(1500)

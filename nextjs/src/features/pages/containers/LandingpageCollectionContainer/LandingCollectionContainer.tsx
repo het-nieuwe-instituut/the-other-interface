@@ -57,18 +57,16 @@ export const LandingCollection: React.FC<{ data?: LandingpageBySlugQuery }> = ({
 
     return (
         <>
-            <Flex
+            <Box
                 // bgGradient="radial(50% 50% at 50% 50%, #B5FD99 0%, rgba(181, 253, 153, 0) 76.56%)"
                 backgroundColor="graph"
-                height="800px"
                 ref={graphRef}
-                justifyContent={'center'}
-                alignItems={'center'}
+                overflow={'hidden'}
             >
                 {sizes?.height && sizes?.width && (
                     <PaginatedCollectionContainer type={type} dimensions={{ height: 800, width: sizes.width }} />
                 )}
-            </Flex>
+            </Box>
             <Box px={{ xl: 6, base: 0 }}>
                 <Box backgroundColor={'white'} px={6} pt={6} maxW={theme.breakpoints.xl} marginX={'auto'} pb={1}>
                     <PageHeader
