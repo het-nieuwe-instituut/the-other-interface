@@ -5,7 +5,7 @@ import ArrowRightIcon from '@/icons/arrows/arrow-right.svg'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { navigationT } from 'locales/locales'
 
-const getLevel2or3 = (t: navigationT, type: string, filter?: string) => {
+const getLevel2 = (t: navigationT, type: string) => {
     const typeToName: Record<string, string> = {
         people: `${t('people')} filters`,
         publications: `${t('publication')} filters`,
@@ -17,7 +17,16 @@ const getLevel2or3 = (t: navigationT, type: string, filter?: string) => {
     return {
         name: `${typeToName[type]}`,
         link : {
-            pathname: filter ? `/landingpage/${type}/${filter}` : `/landingpage/${type}`
+            pathname: `/landingpage/${type}`
+        }
+    }
+}
+
+const getLevel3 = (t: navigationT, type: string, filter: string) => {
+    return {
+        name: t('selectedFilter'),
+        link: {
+            pathname: `/landingpage/${type}/${filter}`
         }
     }
 }
@@ -86,7 +95,7 @@ const getBreadcrumbsFromUrl = (asPath: string, query:  { zoomLevel: ZoomLevel}, 
         currentZoomLevel = 5
     }
 
-    const rawItems = [level0, level1, getLevel2or3(t, pathArray[startLandingIndex + 1]), getLevel2or3(t, pathArray[startLandingIndex + 1], pathArray[startLandingIndex + 2]), getLevel4(t, pathArray[startLandingIndex + 1], pathArray[startLandingIndex + 2], pathArray[startLandingIndex + 3]), getLevel5(t, pathArray[startStoryIndex + 1])]
+    const rawItems = [level0, level1, getLevel2(t, pathArray[startLandingIndex + 1]), getLevel3(t, pathArray[startLandingIndex + 1], pathArray[startLandingIndex + 2]), getLevel4(t, pathArray[startLandingIndex + 1], pathArray[startLandingIndex + 2], pathArray[startLandingIndex + 3]), getLevel5(t, pathArray[startStoryIndex + 1])]
     const items = rawItems.slice(0, currentZoomLevel + 1)
     return {
         items, 
@@ -113,7 +122,7 @@ const Breadcrumbs = () => {
     }
 
     return (
-        <Flex alignItems={'center'} position='absolute' zIndex={2}>
+        <Flex alignItems={'center'} position='absolute' zIndex={2} left={'24px'} top={'15px'}>
             {
                 items.map((item, index) => (
                     <>
