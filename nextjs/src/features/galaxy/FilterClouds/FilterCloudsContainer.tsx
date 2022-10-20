@@ -2,7 +2,6 @@ import { Text } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { EntityNames, useZoomLevel2Query } from 'src/generated/graphql'
-import Breadcrumbs from '../components/Breadcrumbs/Breadcrumbs'
 
 export enum SupportedLandingPages {
     Publications = 'publications',
@@ -65,7 +64,6 @@ const FilterCloudsContainer: React.FunctionComponent<Props> = props => {
 
     return (
         <>
-            <Breadcrumbs />
             {type === SupportedLandingPages.Stories ? (
                  <DynamicGalaxyNoSsr dimensions={{ height: 800, width: props.dimensions.width }} />
             ) : ( <DynamicPaginatedFilterCloudsNoSsr

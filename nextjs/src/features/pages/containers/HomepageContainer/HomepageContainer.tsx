@@ -1,3 +1,4 @@
+import Breadcrumbs from '@/features/galaxy/components/Breadcrumbs/Breadcrumbs'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 import { Box, useTheme } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
@@ -28,6 +29,7 @@ export const HomepageContainer = () => {
     return (
         <div>
             <Box backgroundColor="graph" height="800px" ref={graphRef}>
+                <Breadcrumbs />
                 {sizes?.height && sizes?.width && (
                     <DynamicGalaxyNoSsr dimensions={{ height: 800, width: sizes?.width }} />
                 )}
