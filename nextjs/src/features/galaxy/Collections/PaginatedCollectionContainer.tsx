@@ -20,14 +20,15 @@ const useZoom4Query = {
     [SupportedLandingPages.Objects]: useZoom4ObjectsQuery,
     [SupportedLandingPages.People]: useZoom4PeopleQuery,
     [SupportedLandingPages.Publications]: useZoom4PublicationsQuery,
+    [SupportedLandingPages.Stories]: useZoom4PublicationsQuery,
 }
 
 const variableType = {
     [SupportedLandingPages.Archives]: 'archivesFilters',
     [SupportedLandingPages.Objects]: 'objectsFilters',
     [SupportedLandingPages.People]: 'peopleFilters',
-
     [SupportedLandingPages.Publications]: 'publicationsFilters',
+    [SupportedLandingPages.Stories]: '',
 }
 
 const variableFilters: {
