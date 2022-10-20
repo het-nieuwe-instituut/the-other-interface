@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import PaginationLeft from '@/icons/arrows/pagination-left.svg'
 import PaginationRight from '@/icons/arrows/pagination-right.svg'
@@ -152,7 +153,7 @@ export const PaginatedCollectionContainer: React.FunctionComponent<PaginatsedPro
                                 >
                                     <Flex flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
                                         <Text textStyle={'cloudText'}>
-                                            {zoom4?.zoomLevel4.total} {t(router.query.slug as SupportedLandingPages)}
+                                            {zoom4?.zoomLevel4.total} {t(router.query.slug as any)}
                                         </Text>
                                         <Text textStyle={'cloudText'} mb={4}>
                                             {`by ${router.query.collection as string}`}
