@@ -34,8 +34,7 @@
         "modules.image",
         "modules.pullquote",
         "modules.table-module",
-        "modules.buttons-module",
-        "modules.grid-module"
+        "modules.buttons-module"
       ],
       "pluginOptions": {
         "i18n": {

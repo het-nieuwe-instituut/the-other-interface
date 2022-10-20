@@ -12,13 +12,22 @@
     "description": {
       "type": "text"
     },
-    "gridModuleLayout": {
+    "featuredFields": {
       "type": "component",
-      "repeatable": false,
-      "component": "core.module-layouts"
+      "repeatable": true,
+      "component": "core.featured-fields"
+    },
+    "fieldTypes": {
+      "type": "enumeration",
+      "enum": [
+        "TriplyRecords",
+        "Stories"
+      ]
+    },
+    "fieldTitlesAreInverted": {
+      "type": "boolean"
     },
     "fields": {
-      "displayName": "gridFeaturedFields",
       "type": "component",
       "repeatable": true,
       "component": "core.grid-featured-fields"
@@ -28,24 +37,19 @@
       "repeatable": true,
       "component": "core.button"
     },
-    "fieldTitlesAreInverted": {
-      "type": "boolean",
-      "default": false,
+    "gridModuleLayout": {
+      "type": "component",
+      "repeatable": false,
+      "component": "core.module-layouts"
+    },
+    "loadMoreButtonTitle": {
+      "type": "string",
+      "default": "Load More",
       "required": true
     },
-    "featuredFields": {
-      "displayName": "featuredFields",
-      "type": "component",
-      "repeatable": true,
-      "component": "core.featured-fields"
-    },
-    "fieldTypes": {
-      "type": "enumeration",
-      "enum": [
-        "triplyRecords",
-        "stories"
-      ],
-      "default": "stories",
+    "pageSize": {
+      "type": "integer",
+      "default": 6,
       "required": true
     }
   }
