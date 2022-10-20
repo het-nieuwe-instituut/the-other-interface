@@ -31,7 +31,8 @@
         "modules.image",
         "modules.table-module",
         "modules.title-module",
-        "modules.buttons-module"
+        "modules.buttons-module",
+        "modules.grid-module"
       ]
     },
     "Title": {

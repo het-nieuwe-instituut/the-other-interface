@@ -30,7 +30,7 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::story.story",
-      "inversedBy": "triplyRecords"
+      "mappedBy": "triplyRecords"
     }
   }
 }
