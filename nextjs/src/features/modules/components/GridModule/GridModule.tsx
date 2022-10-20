@@ -26,23 +26,23 @@ export const GridModule: React.FC<Props> = props => {
             paddingTop={layout.spacingTop}
         >
             {props.component.title && (
-                <Box mb={'md'}>
+                <Box mb={5}>
                     <Text textStyle="h1" as={'h2'}>
                         {props.component.title}
                     </Text>
                 </Box>
             )}
             {props.component.description && (
-                <Grid mb={'md'} templateColumns="repeat(3, 1fr)" gap={'md'}>
-                    <GridItem maxWidth={'55rem'} colSpan={2} paddingRight={'2xl'}>
+                <Grid mb={5} templateColumns={['repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(3, 1fr)']} gap={5}>
+                    <GridItem maxWidth={'55rem'} colSpan={2} paddingRight={31.5} paddingBottom={5}>
                         <Markdown>{props.component.description}</Markdown>
                     </GridItem>
                     {props.component.featuredFields && (
-                        <GridItem mb={'md'}>
-                            <Grid gap={'md'}>
+                        <GridItem mb={5}>
+                            <Grid gap={6}>
                                 {props.component.featuredFields.map(field => (
                                     <GridItem key={field.id}>
-                                        <Text textStyle="h5" as={'h5'}>
+                                        <Text textStyle="h5" as={'h5'} mb={1}>
                                             {field.value}
                                         </Text>
                                         <Text textStyle={'p'} as={'p'} fontSize={'small'}>
@@ -56,15 +56,10 @@ export const GridModule: React.FC<Props> = props => {
                 </Grid>
             )}
             {props.component.fields && (
-                <Grid mb={'md'} templateColumns={['repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(3, 1fr)']} gap={'md'}>
+                <Grid mb={10} templateColumns={['repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(3, 1fr)']} gap={5}>
                     {take(props.component.fields, showAmount).map(field => (
                         <GridItem key={field.id} w={'100%'}>
-                            <Image
-                                mb={'md'}
-                                w={'100%'}
-                                src={field.thumbnail?.data?.attributes?.url}
-                                alt="Dan Abramov"
-                            />
+                            <Image mb={5} w={'100%'} src={field.thumbnail?.data?.attributes?.url} alt="Dan Abramov" />
                             {renderFieldTitles(field)}
                         </GridItem>
                     ))}
@@ -91,7 +86,7 @@ export const GridModule: React.FC<Props> = props => {
         if (props.component.fieldTitlesAreInverted) {
             return (
                 <>
-                    <Text textStyle={'p'} as={'p'} fontSize={'small'} mb={'md'}>
+                    <Text textStyle={'p'} as={'p'} fontSize={'small'} mb={1}>
                         {field.subtitle}
                     </Text>
                     <Text textStyle="h4" as={'h4'}>
@@ -103,7 +98,7 @@ export const GridModule: React.FC<Props> = props => {
 
         return (
             <>
-                <Text textStyle="h4" as={'h4'} mb={'md'}>
+                <Text textStyle="h4" as={'h4'} mb={1}>
                     {field.title}
                 </Text>
                 <Text textStyle={'p'} as={'p'} fontSize={'small'}>
