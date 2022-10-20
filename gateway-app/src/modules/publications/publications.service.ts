@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common'
+import { forwardRef, Inject, Injectable } from '@nestjs/common'
 import { TriplyService } from '../triply/triply.service'
 import { TriplyUtils, ZoomLevel3ReturnData } from '../triply/triply.utils'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
+import { ZoomLevel5Service } from '../zoomLevel5/zoomLevel5.service'
 import { PublicationsZoomLevel4FiltersArgs } from './publications.type'
 
 export enum PublicationsZoomLevel3Ids {
@@ -212,7 +213,10 @@ export class PublicationsService {
     private readonly publicationDescriptionLevelEndpoint =
         'https://api.collectiedata.hetnieuweinstituut.nl/queries/Joran/zoom5-books-type-only/run?'
 
-    public constructor(private triplyService: TriplyService) {}
+    public constructor(
+        private readonly triplyService: TriplyService,
+        @Inject(forwardRef(() => ZoomLevel5Service)) private readonly zoomLevel5Service: ZoomLevel5Service
+    ) {}
 
     public async determinePublicationType(id: string) {
         interface TypeOfPublicationData {
@@ -330,5 +334,16 @@ export class PublicationsService {
         }
 
         throw new Error(`[Publications] Invalid filter input "${input}"`)
+    }
+
+    public resolveAuthor(publication: PublicationsZoomLevel5DataTypes) {
+        if (!('author' in publication) || !publication.author) {
+            return
+        }
+
+        const type = TriplyUtils.getEntityNameFromUri(publication.author)
+        const id = TriplyUtils.getIdFromUri(publication.author)
+
+        return this.zoomLevel5Service.getDetail(id, type)
     }
 }

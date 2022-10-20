@@ -1,11 +1,11 @@
 _type: export
 __export_format: 4
-__export_date: 2022-10-12T07:32:40.552Z
+__export_date: 2022-10-14T13:38:44.773Z
 __export_source: insomnia.desktop.app:v2022.6.0
 resources:
   - _id: req_d36dd2c14e474d7abc436370519db759
     parentId: fld_60bab26db1a7467991c800e2f04357a8
-    modified: 1665559875958
+    modified: 1665754676701
     created: 1665559396865
     url: "{{ _.baseUrl }}/graphql"
     name: TriplyRecordFragment
@@ -16,19 +16,24 @@ resources:
       text: '{"query":"fragment TriplyRecordFragment on TriplyRecord
         {\n\tcreatedAt\n\tupdatedAt\n\tpublishedAt\n\trecordId\n\ttype\n\tarchive
         {\n\t\t... on ArchivesOtherZoomLevel5DetailType
-        {\n\t\t\tid\n\t\t\ttype\n\t\t\tpartTitle\n\t\t}\n\t\t... on
+        {\n\t\t\tid\n\t\t\ttype\n\t\t\ttitle\n\t\t}\n\t\t... on
         ArchivesFondsZoomLevel5DetailType
-        {\n\t\t\tid\n\t\t\ttype\n\t\t\ttitle\n\t\t}\n\t}\n\tobject
-        {\n\t\tdescription\n\t}\n\tpublication {\n\t\t... on
-        PublicationsAudioVisualZoomLevel5DetailType
-        {\n\t\t\tid\n\t\t\ttype\n\t\t\ttitle\n\t\t}\n\t\t... on
-        PublicationsArticleZoomLevel5DetailType
-        {\n\t\t\tid\n\t\t\ttype\n\t\t\ttitle\n\t\t}\n\t\t... on
-        PublicationsSerialZoomLevel5DetailType
+        {\n\t\t\tid\n\t\t\ttype\n\t\t\tpartTitle\n\t\t\tpopulatedCreator
+        {\n\t\t\t\tid\n\t\t\t\tbirthDate\n\t\t\t\tprofession\n\t\t\t}\n\t\t}\n\t}\n\tobject
+        {\n\t\tid\n\t\tdescription\n\t\tpopulatedMaker
+        {\n\t\t\tid\n\t\t\tbirthDate\n\t\t\tprofession\n\t\t}\n\t}\n\tpublication
+        {\n\t\t... on PublicationsAudioVisualZoomLevel5DetailType
+        {\n\t\t\tid\n\t\t\ttype\n\t\t\ttitle\n\t\t\tpopulatedAuthor
+        {\n\t\t\t\tid\n\t\t\t\tbirthDate\n\t\t\t\tprofession\n\t\t\t}\n\t\t}\n\t\t...
+        on PublicationsArticleZoomLevel5DetailType
+        {\n\t\t\tid\n\t\t\ttype\n\t\t\ttitle\n\t\t\tpopulatedAuthor
+        {\n\t\t\t\tid\n\t\t\t\tbirthDate\n\t\t\t\tprofession\n\t\t\t}\n\t\t}\n\t\t...
+        on PublicationsSerialZoomLevel5DetailType
         {\n\t\t\tid\n\t\t\ttype\n\t\t\ttitle\n\t\t}\n\t\t... on
         PublicationsBookZoomLevel5DetailType
-        {\n\t\t\tid\n\t\t\ttype\n\t\t\ttitle\n\t\t}\n\t}\n\tpeople
-        {\n\t\tname\n\t\tnameType\n\t}\n}\n"}'
+        {\n\t\t\tid\n\t\t\ttype\n\t\t\ttitle\n\t\t\tpopulatedAuthor
+        {\n\t\t\t\tid\n\t\t\t\tbirthDate\n\t\t\t\tprofession\n\t\t\t}\n\t\t}\n\t}\n\tpeople
+        {\n\t\tid\n\t\tname\n\t\tnameType\n\t}\n}\n"}'
     parameters: []
     headers:
       - name: Content-Type
@@ -81,8 +86,7 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text:
-        '{"query":"query {\n\thomepage(publicationState: \"LIVE\", locale: \"nl\")
+      text: '{"query":"query {\n\thomepage(publicationState: \"LIVE\", locale: \"nl\")
         {\n\t\tdata {\n\t\t\tid\n\t\t\tattributes
         {\n\t\t\t\tTitle\n\t\t\t\tcomponents {\n\t\t\t\t\t... on
         ComponentModulesButtonsModule
@@ -148,8 +152,7 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text:
-        '{"query":"query menuPage($id: String, $locale: String) {\n\tmenupage(id:
+      text: '{"query":"query menuPage($id: String, $locale: String) {\n\tmenupage(id:
         $id, locale: $locale) {\n\t\tdata {\n\t\t\tid\n\t\t\tattributes
         {\n\t\t\t\tTitle\n\t\t\t\tslug\n\t\t\t\tcreatedAt\n\t\t\t\tupdatedAt\n\t\t\t\tpublishedAt\n\t\t\t\tlocale\n\t\t\t\tlocalizations
         {\n\t\t\t\t\tdata {\n\t\t\t\t\t\tid\n\t\t\t\t\t\tattributes
@@ -315,8 +318,7 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text:
-        '{"query":"query tables(\n\t$filters: TableFiltersInput\n\t$pagination:
+      text: '{"query":"query tables(\n\t$filters: TableFiltersInput\n\t$pagination:
         PaginationArg = {}\n\t$sort: [String!] = []\n\t$publicationState:
         String\n) {\n\ttables(\n\t\tfilters: $filters\n\t\tpagination:
         $pagination\n\t\tsort: $sort\n\t\tpublicationState:
@@ -424,8 +426,7 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text:
-        '{"query":"query {\n\tstories {\n\t\tdata {\n\t\t\tid\n\t\t\tattributes
+      text: '{"query":"query {\n\tstories {\n\t\tdata {\n\t\t\tid\n\t\t\tattributes
         {\n\t\t\t\tauthor {\n\t\t\t\t\tdata
         {\n\t\t\t\t\t\tid\n\t\t\t\t\t\tattributes
         {\n\t\t\t\t\t\t\tfirstName\n\t\t\t\t\t\t\tinsertion\n\t\t\t\t\t\t\tlastName\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t\tlocations
@@ -449,7 +450,7 @@ resources:
     _type: request
   - _id: req_da9626bccfd244309c17b2ff8b46d993
     parentId: fld_13c5fd867c8545c3a5309539679ba83f
-    modified: 1665559931580
+    modified: 1665754670193
     created: 1664823597730
     url: "{{ _.baseUrl }}/graphql"
     name: story
@@ -484,19 +485,24 @@ resources:
         {\n\t\t\t\t\tdata {\n\t\t\t\t\t\tid\n\t\t\t\t\t\tattributes
         {\n\t\t\t\t\t\t\tcreatedAt\n\t\t\t\t\t\t\tupdatedAt\n\t\t\t\t\t\t\tpublishedAt\n\t\t\t\t\t\t\trecordId\n\t\t\t\t\t\t\ttype\n\t\t\t\t\t\t\tarchive
         {\n\t\t\t\t\t\t\t\t... on ArchivesOtherZoomLevel5DetailType
-        {\n\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\ttype\n\t\t\t\t\t\t\t\t\tpartTitle\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t...
+        {\n\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\ttype\n\t\t\t\t\t\t\t\t\ttitle\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t...
         on ArchivesFondsZoomLevel5DetailType
-        {\n\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\ttype\n\t\t\t\t\t\t\t\t\ttitle\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\tobject
-        {\n\t\t\t\t\t\t\t\tdescription\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\tpublication
+        {\n\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\ttype\n\t\t\t\t\t\t\t\t\tpartTitle\n\t\t\t\t\t\t\t\t\tpopulatedCreator
+        {\n\t\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\t\tbirthDate\n\t\t\t\t\t\t\t\t\t\tprofession\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\tobject
+        {\n\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\tdescription\n\t\t\t\t\t\t\t\tpopulatedMaker
+        {\n\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\tbirthDate\n\t\t\t\t\t\t\t\t\tprofession\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\tpublication
         {\n\t\t\t\t\t\t\t\t... on PublicationsAudioVisualZoomLevel5DetailType
-        {\n\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\ttype\n\t\t\t\t\t\t\t\t\ttitle\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t...
+        {\n\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\ttype\n\t\t\t\t\t\t\t\t\ttitle\n\t\t\t\t\t\t\t\t\tpopulatedAuthor
+        {\n\t\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\t\tbirthDate\n\t\t\t\t\t\t\t\t\t\tprofession\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t...
         on PublicationsArticleZoomLevel5DetailType
-        {\n\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\ttype\n\t\t\t\t\t\t\t\t\ttitle\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t...
+        {\n\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\ttype\n\t\t\t\t\t\t\t\t\ttitle\n\t\t\t\t\t\t\t\t\tpopulatedAuthor
+        {\n\t\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\t\tbirthDate\n\t\t\t\t\t\t\t\t\t\tprofession\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t...
         on PublicationsSerialZoomLevel5DetailType
         {\n\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\ttype\n\t\t\t\t\t\t\t\t\ttitle\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t...
         on PublicationsBookZoomLevel5DetailType
-        {\n\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\ttype\n\t\t\t\t\t\t\t\t\ttitle\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\tpeople
-        {\n\t\t\t\t\t\t\t\tname\n\t\t\t\t\t\t\t\tnameType\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}\n"}'
+        {\n\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\ttype\n\t\t\t\t\t\t\t\t\ttitle\n\t\t\t\t\t\t\t\t\tpopulatedAuthor
+        {\n\t\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\t\tbirthDate\n\t\t\t\t\t\t\t\t\t\tprofession\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\tpeople
+        {\n\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\tname\n\t\t\t\t\t\t\t\tnameType\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}\n"}'
     parameters: []
     headers:
       - name: Content-Type
@@ -550,8 +556,7 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text:
-        '{"query":"query {\n\tlocations {\n\t\tdata {\n\t\t\tid\n\t\t\tattributes
+      text: '{"query":"query {\n\tlocations {\n\t\tdata {\n\t\t\tid\n\t\t\tattributes
         {\n\t\t\t\tcity\n\t\t\t}\n\t\t}\n\t\tmeta {\n\t\t\tpagination
         {\n\t\t\t\tpage\n\t\t\t}\n\t\t}\n\t}\n}\n"}'
     parameters: []
@@ -607,8 +612,7 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text:
-        '{"query":"query {\n\tauthors {\n\t\tdata {\n\t\t\tid\n\t\t\tattributes
+      text: '{"query":"query {\n\tauthors {\n\t\tdata {\n\t\t\tid\n\t\t\tattributes
         {\n\t\t\t\tfirstName\n\t\t\t\tinsertion\n\t\t\t\tlastName\n\t\t\t}\n\t\t\t\n\t\t}\n\t}\n}"}'
     parameters: []
     headers:
@@ -665,8 +669,7 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text:
-        '{"query":"query {\n\ttriplyRecords(filters: {type: {eq: \"archive\"}})
+      text: '{"query":"query {\n\ttriplyRecords(filters: {type: {eq: \"archive\"}})
         {\n\t\tdata {\n\t\t\tid\n\t\t\tattributes
         {\n\t\t\t\trecordId\n\t\t\t\ttype\n\t\t\t\tstories {\n\t\t\t\t\tdata
         {\n\t\t\t\t\t\tid\n\t\t\t\t\t\tattributes
@@ -832,7 +835,7 @@ resources:
     _type: request
   - _id: req_203429aa2ab54987ac7b452ffaee4e7c
     parentId: fld_2e4d378ece7940d293196c73bcedee62
-    modified: 1665499411854
+    modified: 1665666127811
     created: 1663591911654
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: relatedPerson"
@@ -841,7 +844,7 @@ resources:
     body:
       mimeType: application/graphql
       text: '{"query":"query {\n\tzoomLevel3(entityName: Publications, filterId:
-        \"relatedPerson\", page: 1, pageSize:
+        \"relatedPerson\", page: 14, pageSize:
         16)  {\n    uri\n\t\tname\n\t\tcount\n\t\ttotal\n\t}\n}"}'
     parameters: []
     headers:
@@ -880,7 +883,7 @@ resources:
     _type: request_group
   - _id: req_1613bfdb17dc4726825781b5ae47b4da
     parentId: fld_2e4d378ece7940d293196c73bcedee62
-    modified: 1665499415083
+    modified: 1665666206331
     created: 1663591927613
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: subject"
@@ -888,8 +891,7 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text:
-        '{"query":"query {\n\t\tzoomLevel3(entityName: Publications, filterId:
+      text: '{"query":"query {\n\t\tzoomLevel3(entityName: Publications, filterId:
         \"subject\", page: 1, pageSize:
         16)  {\n    uri\n\t\tname\n\t\tcount\n\t\ttotal\n\t}\n}"}'
     parameters: []
@@ -909,7 +911,7 @@ resources:
     _type: request
   - _id: req_e690b2ea8f904d0ca6b69be3ae4d4dc1
     parentId: fld_2e4d378ece7940d293196c73bcedee62
-    modified: 1665499417061
+    modified: 1665666208773
     created: 1663591935166
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: geographicalKeyword"
@@ -917,8 +919,7 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text:
-        '{"query":"query {\n\t\tzoomLevel3(entityName: Publications, filterId:
+      text: '{"query":"query {\n\t\tzoomLevel3(entityName: Publications, filterId:
         \"geographicalKeyword\", page: 1, pageSize:
         16)  {\n    uri\n\t\tname\n\t\tcount\n\t\ttotal\n\t}\n}"}'
     parameters: []
@@ -938,7 +939,7 @@ resources:
     _type: request
   - _id: req_cd1ebeafdb20489591b01a417a54290b
     parentId: fld_2e4d378ece7940d293196c73bcedee62
-    modified: 1665499418901
+    modified: 1665666210630
     created: 1663591947535
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: author"
@@ -946,8 +947,7 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text:
-        '{"query":"query {\n\t\tzoomLevel3(entityName: Publications, filterId:
+      text: '{"query":"query {\n\t\tzoomLevel3(entityName: Publications, filterId:
         \"author\", page: 1, pageSize:
         16)  {\n    uri\n\t\tname\n\t\tcount\n\t\ttotal\n\t}\n}"}'
     parameters: []
@@ -967,7 +967,7 @@ resources:
     _type: request
   - _id: req_0b0e22edd8f04ddeb84f12bd0c67503c
     parentId: fld_2e4d378ece7940d293196c73bcedee62
-    modified: 1665499421133
+    modified: 1665666212219
     created: 1663591957105
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: typeOfPublication"
@@ -975,8 +975,7 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text:
-        '{"query":"query {\n\t\tzoomLevel3(entityName: Publications, filterId:
+      text: '{"query":"query {\n\t\tzoomLevel3(entityName: Publications, filterId:
         \"typeOfPublication\", page: 1, pageSize:
         32)  {\n    uri\n\t\tname\n\t\tcount\n\t\ttotal\n\t}\n}"}'
     parameters: []
@@ -996,7 +995,7 @@ resources:
     _type: request
   - _id: req_e57d9b641dba45c782a85d6d05828c46
     parentId: fld_6a13fd5f66564f3a8dfade5a7fd87214
-    modified: 1665499427025
+    modified: 1665666214250
     created: 1663591475796
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: deathDate"
@@ -1034,7 +1033,7 @@ resources:
     _type: request_group
   - _id: req_84c16c9bcc91472689e573a16e50c740
     parentId: fld_6a13fd5f66564f3a8dfade5a7fd87214
-    modified: 1665499428386
+    modified: 1665666219917
     created: 1663591593549
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: nameType"
@@ -1062,7 +1061,7 @@ resources:
     _type: request
   - _id: req_fbe9115251634e1ab5680ab7346be8a3
     parentId: fld_6a13fd5f66564f3a8dfade5a7fd87214
-    modified: 1665499429757
+    modified: 1665666222304
     created: 1663591601822
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: birthDate"
@@ -1090,7 +1089,7 @@ resources:
     _type: request
   - _id: req_75a538064b274221b057f7a1b3e847dd
     parentId: fld_6a13fd5f66564f3a8dfade5a7fd87214
-    modified: 1665499431144
+    modified: 1665666224541
     created: 1663591614991
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: period"
@@ -1118,7 +1117,7 @@ resources:
     _type: request
   - _id: req_6928d96e9b7245049319b5bf23f5945f
     parentId: fld_6a13fd5f66564f3a8dfade5a7fd87214
-    modified: 1665499432539
+    modified: 1665666226152
     created: 1663591623464
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: place"
@@ -1146,7 +1145,7 @@ resources:
     _type: request
   - _id: req_5b4036a213414d07ad82f241cad0145e
     parentId: fld_6a13fd5f66564f3a8dfade5a7fd87214
-    modified: 1665499433658
+    modified: 1665666228235
     created: 1663591634383
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: profession"
@@ -1174,7 +1173,7 @@ resources:
     _type: request
   - _id: req_ef214cf7749a4703a5ac87419fca8837
     parentId: fld_9e94a5146e5745cc8dd300459a48aa6a
-    modified: 1665499436082
+    modified: 1665666230999
     created: 1663591017525
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: subject"
@@ -1212,7 +1211,7 @@ resources:
     _type: request_group
   - _id: req_49e6732c86624c62856c168b33a972cf
     parentId: fld_9e94a5146e5745cc8dd300459a48aa6a
-    modified: 1665499437158
+    modified: 1665666232700
     created: 1663591118362
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: personInstitution"
@@ -1240,7 +1239,7 @@ resources:
     _type: request
   - _id: req_9318935e2c4b4312bdd6fba7370fe5fc
     parentId: fld_9e94a5146e5745cc8dd300459a48aa6a
-    modified: 1665499438240
+    modified: 1665666234216
     created: 1663591155334
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: technique"
@@ -1268,7 +1267,7 @@ resources:
     _type: request
   - _id: req_c6d31a0ffbeb4c6bbbbbc1bb3aef2b2c
     parentId: fld_9e94a5146e5745cc8dd300459a48aa6a
-    modified: 1665499439267
+    modified: 1665666243509
     created: 1663591163929
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: objectName"
@@ -1296,7 +1295,7 @@ resources:
     _type: request
   - _id: req_0a024f8a6da84f5f8183e141d030a3d1
     parentId: fld_9e94a5146e5745cc8dd300459a48aa6a
-    modified: 1665499440363
+    modified: 1665666244866
     created: 1663591171892
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: creator"
@@ -1324,7 +1323,7 @@ resources:
     _type: request
   - _id: req_dd538e1ee34440d49afd764490cf1fe0
     parentId: fld_9e94a5146e5745cc8dd300459a48aa6a
-    modified: 1665499441406
+    modified: 1665666246637
     created: 1663591178529
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: date"
@@ -1352,7 +1351,7 @@ resources:
     _type: request
   - _id: req_9c9b58f0b24d4a3fb8cfe59499e9c3ef
     parentId: fld_9e94a5146e5745cc8dd300459a48aa6a
-    modified: 1665499442624
+    modified: 1665666248655
     created: 1663591187728
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: material"
@@ -1380,7 +1379,7 @@ resources:
     _type: request
   - _id: req_0e35d49a3d134b639ff960d713d36374
     parentId: fld_9f0600f89a4744d39279da7ca4c3ebf5
-    modified: 1665499444862
+    modified: 1665666290356
     created: 1663339936433
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: date"
@@ -1418,7 +1417,7 @@ resources:
     _type: request_group
   - _id: req_0746bb9aad874c6fb1b5aaf8d8182b9f
     parentId: fld_9f0600f89a4744d39279da7ca4c3ebf5
-    modified: 1665499446727
+    modified: 1665666288409
     created: 1663572238171
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: descriptionLevel"
@@ -1427,7 +1426,7 @@ resources:
     body:
       mimeType: application/graphql
       text: '{"query":"query {\n\t\tzoomLevel3(entityName: Archives, filterId:
-        \"descriptionLevel\", page: 1, pageSize:
+        \"descriptionLevel\", page: 2, pageSize:
         16)  {\n    uri\n\t\tname\n\t\tcount\n\t\ttotal\n\t}\n}"}'
     parameters: []
     headers:
@@ -1446,7 +1445,7 @@ resources:
     _type: request
   - _id: req_333a969dc0dc447f90d76bfcee8a1c80
     parentId: fld_9f0600f89a4744d39279da7ca4c3ebf5
-    modified: 1665499448944
+    modified: 1665753844206
     created: 1663572247866
     url: "{{ _.baseUrl }}/graphql"
     name: "filterOption: relatedNames"
@@ -1455,7 +1454,7 @@ resources:
     body:
       mimeType: application/graphql
       text: '{"query":"query {\n\t\tzoomLevel3(entityName: Archives, filterId:
-        \"relatedNames\", page: 1, pageSize:
+        \"relatedNames\", page: 10, pageSize:
         16)  {\n    uri\n\t\tname\n\t\tcount\n\t\ttotal\n\t}\n}"}'
     parameters: []
     headers:
@@ -1719,8 +1718,7 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text:
-        '{"query":"query {\n\tzoomLevel5PublicationsSerial(id: \"300319131\")
+      text: '{"query":"query {\n\tzoomLevel5PublicationsSerial(id: \"300319131\")
         {\n\t\ttypeOfPublication\n\t\ttypeOfPublicationLabel\n\t\ttitle\n\t\tpublisher\n\t\tpublisherLabel\n\t\tyearOfPublication\n\t\tplaceOfPublication\n\t\tplaceOfPublicationLabel\n\t\tsubject\n\t\tsubjectLabel\n\t\tlanguage\n\t\tlanguageLabel\n\t\tcontinuedFrom\n\t\tcontinuedAs\n\t\tremarks\n\t\tavailability\n\t\tshelfmark\n\t\tholding\n\t\tpermanentLink\n\t}\n}\n"}'
     parameters: []
     headers:
@@ -1747,8 +1745,7 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text:
-        '{"query":"query {\n\tzoomLevel5PublicationsArticle(id: \"300171648\")
+      text: '{"query":"query {\n\tzoomLevel5PublicationsArticle(id: \"300171648\")
         {\n\t\ttypeOfPublication\n\t\ttypeOfPublicationLabel\n\t\ttitle\n\t\tauthor\n\t\tauthorLabel\n\t\tauthorRole\n\t\tauthorRoleLabel\n\t\tsourceTitle\n\t\tsourceTitleLabel\n\t\tvolume\n\t\tissue\n\t\tyearOfPublication\n\t\tpage\n\t\tpublisher\n\t\tpublisherLabel\n\t\tabstract\n\t\tlanguage\n\t\tlanguageLabel\n\t\tgeographicalKeyword\n\t\tgeographicalKeywordLabel\n\t\tsubject\n\t\tsubjectLabel\n\t\trelatedPerInst\n\t\trelatedPerInstLabel\n\t\tobjectNumber\n\t\tavailability\n\t\tshelfmark\n\t\tpermanentLink\n\t}\n}\n"}'
     parameters: []
     headers:
@@ -1775,8 +1772,7 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text:
-        '{"query":"query {\n\tzoomLevel5PublicationsAudiovisual(id: \"300197096\")
+      text: '{"query":"query {\n\tzoomLevel5PublicationsAudiovisual(id: \"300197096\")
         {\n\t\ttypeOfPublication\n\t\ttypeOfPublicationLabel\n\t\ttitle\n\t\tauthor\n\t\tauthorLabel\n\t\tauthorRole\n\t\tauthorRoleLabel\n\t\tpublisher\n\t\tpublisherLabel\n\t\tyearOfPublication\n\t\tplaceOfPublication\n\t\tplaceOfPublicationLabel\n\t\tabstract\n\t\tannotation\n\t\tscope\n\t\tlanguage\n\t\tlanguageLabel\n\t\tmedium\n\t\tgeographicalKeyword\n\t\tgeographicalKeywordLabel\n\t\tsubject\n\t\tsubjectLabel\n\t\trelatedPerInst\n\t\trelatedPerInstLabel\n\t\tpermanentLink\n\t\tobjectNumber\n\t\tavailability\n\t\tshelfmark\n\t}\n}\n"}'
     parameters: []
     headers:
@@ -1797,7 +1793,7 @@ resources:
     parentId: fld_17de84e682c04137bb01bf07e4e9a9a2
     modified: 1665499377439
     created: 1663928044191
-    url: ""
+    url: "{{ _.baseUrl }}/graphql"
     name: relations
     description: ""
     method: POST
