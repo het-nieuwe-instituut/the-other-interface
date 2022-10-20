@@ -201,13 +201,9 @@ export const PaginatedCollectionContainer: React.FunctionComponent<PaginatsedPro
                                                 height={'90px'}
                                                 width={'140px'}
                                             >
-                                                <Img
-                                                    src={
-                                                        'https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?cs=srgb&dl=pexels-pixabay-45201.jpg&fm=jpg'
-                                                    }
-                                                    width={'48px'}
-                                                    height={'35px'}
-                                                />
+                                                {item.firstImage && (
+                                                    <Img src={item.firstImage} width={'48px'} height={'35px'} />
+                                                )}
 
                                                 <Text
                                                     align={'center'}
