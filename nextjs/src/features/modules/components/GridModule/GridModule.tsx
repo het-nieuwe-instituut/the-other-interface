@@ -56,9 +56,9 @@ export const GridModule: React.FC<Props> = props => {
                 </Grid>
             )}
             {props.component.fields && (
-                <Grid mb={10} templateColumns={['repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(3, 1fr)']} gap={5}>
+                <Grid templateColumns={['repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(3, 1fr)']} gap={5}>
                     {take(props.component.fields, showAmount).map(field => (
-                        <GridItem key={field.id} w={'100%'}>
+                        <GridItem key={field.id} w={'100%'} mb={10}>
                             <Image mb={5} w={'100%'} src={field.thumbnail?.data?.attributes?.url} alt="Dan Abramov" />
                             {renderFieldTitles(field)}
                         </GridItem>
