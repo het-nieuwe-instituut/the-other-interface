@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 import * as d3 from 'd3'
 import { MouseEvent, MutableRefObject, useCallback, useEffect, useRef, useState } from 'react'
 import { Dimensions } from '../types/galaxy'
@@ -47,9 +48,9 @@ export function useZoomToD3Element<DType>(
     useEffect(() => {
         const d3Svg = d3.select(svgRef.current)
         const nodeForeign = d3Svg.selectAll(selector)
-        clickListener.current = nodeForeign.on('click', (e, d) =>
-            clicked(e, d as d3.SimulationNodeDatum & DType, d3Svg, dimensions)
-        )
+        clickListener.current = nodeForeign.on('click', (e, d) => {
+            return clicked(e, d as d3.SimulationNodeDatum & DType, d3Svg, dimensions)
+        })
     }, [clicked, dimensions, selector, svgRef])
 
     return {

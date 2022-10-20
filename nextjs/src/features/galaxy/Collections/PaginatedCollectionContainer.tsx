@@ -10,6 +10,10 @@ import {
     useZoom4ObjectsQuery,
     useZoom4PeopleQuery,
     useZoom4PublicationsQuery,
+    Zoom4ArchivesQuery,
+    Zoom4ObjectsQuery,
+    Zoom4PeopleQuery,
+    Zoom4PublicationsQuery,
     ZoomLevel4ParentType,
 } from 'src/generated/graphql'
 import { Circle } from '../components/Circle'
@@ -81,14 +85,6 @@ type PaginatsedProps = {
 export const PaginatedCollectionContainer: React.FunctionComponent<PaginatsedProps> = props => {
     const { type } = props
     const router = useRouter()
-    const { t } = useTypeSafeTranslation('landingpage')
-    const { dimensions } = props
-    const { width, height } = dimensions
-    const svgWidth = width
-    const svgHeight = height
-
-    const id = useId().replaceAll(':', '')
-
     const {
         data: zoom4,
         loading,
@@ -102,6 +98,31 @@ export const PaginatedCollectionContainer: React.FunctionComponent<PaginatsedPro
             pageSize: 28,
         },
     })
+
+    if (loading) {
+        return <Text>Loading</Text>
+    }
+
+    if (error) {
+        return <p>{error.message}</p>
+    }
+
+    return <PaginatedCollection {...props} zoom4={zoom4} />
+}
+
+export const PaginatedCollection: React.FunctionComponent<
+    PaginatsedProps & {
+        zoom4: Zoom4ObjectsQuery | Zoom4ArchivesQuery | Zoom4PeopleQuery | Zoom4PublicationsQuery | undefined
+    }
+> = props => {
+    const { zoom4, dimensions } = props
+    const router = useRouter()
+    const { t } = useTypeSafeTranslation('landingpage')
+    const { width, height } = dimensions
+    const svgWidth = width
+    const svgHeight = height
+
+    const id = useId().replaceAll(':', '')
     const items = useMemo(
         () =>
             zoom4?.zoomLevel4?.nodes?.map((node, index) => ({
@@ -118,14 +139,6 @@ export const PaginatedCollectionContainer: React.FunctionComponent<PaginatsedPro
         id,
         dimensions
     )
-
-    if (loading) {
-        return <Text>Loading</Text>
-    }
-
-    if (error) {
-        return <p>{error.message}</p>
-    }
 
     return (
         <svg width={svgWidth} height={svgHeight} ref={svgRef} viewBox={`0 0 ${1000} ${1000}`}>
