@@ -1,12 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as d3 from 'd3'
 import { Simulation } from 'd3'
 import { useRouter } from 'next/router'
 import { MutableRefObject, useCallback } from 'react'
 
-import { D3CollectionItem } from '../PaginatedFilterClouds/hooks/useD3Simulation'
-
 interface Props {
-    simulation?: MutableRefObject<Simulation<D3CollectionItem, undefined> | null>
+    simulation?: MutableRefObject<Simulation<any, undefined> | null>
     selector: string
     svgRef: MutableRefObject<SVGSVGElement | null>
     pathname: string

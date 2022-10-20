@@ -1,5 +1,5 @@
 import { SupportedLandingPages } from '@/features/galaxy/PaginatedFilterClouds/PaginatedFilterCloudsContainer'
-import { LandingCollectionContainer } from '@/features/galaxy/Collections/LandingCollectionContainer'
+import { LandingCollectionContainer } from '@/features/pages/containers/LandingpageCollectionContainer/LandingCollectionContainer'
 
 export interface LandingPageQueryParams {
     slug: SupportedLandingPages
