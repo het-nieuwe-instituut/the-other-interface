@@ -7,9 +7,14 @@ import { getStoriesSystemDimensions } from '../Galaxy/Galaxy'
 export function useD3ZoomEvents(svgRef: MutableRefObject<SVGSVGElement | null>, dimensions: Dimensions) {
     const storiesSystemRef = useRef<SVGForeignObjectElement | null>(null)
     const router = useRouter()
-    const [zoomLevel, setZoomLevel] = useState<ZoomLevel>(ZoomLevel.Zoom0)
+    const asPath = router.asPath
+    const pathArray = asPath.split('/')
+    const isStoriesPage = pathArray.includes('stories')
+    const defaultZoom = isStoriesPage ? ZoomLevel.Zoom1Stories : ZoomLevel.Zoom0
 
-    const zoom1stories = useCallback(() => {
+    const [zoomLevel, setZoomLevel] = useState<ZoomLevel>(defaultZoom)
+
+    const zoom1stories = useCallback((duration = 1500, redirect = true) => {
         const d3Svg = d3.select(svgRef.current)
 
         const d3Stories = d3.select(storiesSystemRef.current)
@@ -19,13 +24,18 @@ export function useD3ZoomEvents(svgRef: MutableRefObject<SVGSVGElement | null>, 
 
         d3Stories
             .transition()
-            .duration(1500)
+            .duration(duration)
             .attr('transform', `translate(${0}, ${0})scale(${1.5})translate(${-stories.x}, ${-stories.y})`)
 
         nodeForeign
             .transition()
-            .duration(1500)
+            .duration(duration)
             .attr('transform', `translate(${0}, ${0})scale(${1.5})translate(${-stories.x}, ${-stories.y})`)
+
+        if (redirect) {
+            router.push('/landingpage/stories')
+        }
+        
     }, [dimensions, svgRef])
 
     const zoom1 = useCallback(() => {
@@ -62,6 +72,14 @@ export function useD3ZoomEvents(svgRef: MutableRefObject<SVGSVGElement | null>, 
         [router, svgRef]
     )
 
+     useEffect(() => {
+        const {zoomLevel} = router.query as { zoomLevel: ZoomLevel}
+
+        if (!isStoriesPage) {
+            zoomLevel ? setZoomLevel(zoomLevel) : setZoomLevel(ZoomLevel.Zoom0)
+        }
+    }, [router])
+
     useEffect(() => {
         if (zoomLevel === ZoomLevel.Zoom0) {
             zoomout()
@@ -70,7 +88,7 @@ export function useD3ZoomEvents(svgRef: MutableRefObject<SVGSVGElement | null>, 
             zoom1()
         }
         if (zoomLevel === ZoomLevel.Zoom1Stories) {
-            zoom1stories()
+            zoom1stories(1500, !isStoriesPage)
         }
     }, [zoom1, zoom1stories, zoomLevel, zoomout])
 
@@ -79,5 +97,6 @@ export function useD3ZoomEvents(svgRef: MutableRefObject<SVGSVGElement | null>, 
         zoomTo,
         zoomLevel,
         storiesSystemRef,
+        zoom1stories
     }
 }

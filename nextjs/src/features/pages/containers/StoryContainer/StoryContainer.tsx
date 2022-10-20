@@ -3,7 +3,7 @@ import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Box, Grid, GridItem, useTheme } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { StoryComponentsDynamicZone, useStoryBySlugQuery } from 'src/generated/graphql'
+import { StoryComponentsDynamicZone, StoryEntity, useStoryBySlugQuery } from 'src/generated/graphql'
 import { LandingPageQueryParams } from 'src/pages/landingpage/[slug]'
 import { StoryMeta } from '../../Meta/StoryMeta'
 
@@ -56,7 +56,7 @@ export const StoryContainer: React.FC = () => {
                         />
                     </GridItem>
                     <GridItem area={'meta'}>
-                        <StoryMeta story={story} />
+                        <StoryMeta story={story as StoryEntity} />
                     </GridItem>
                 </Grid>
             </Box>

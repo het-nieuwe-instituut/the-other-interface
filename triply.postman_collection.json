@@ -7,6 +7,80 @@
 	},
 	"item": [
 		{
+			"name": "Zoom 1",
+			"item": [
+				{
+					"name": "counts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/zoom-1-record-counts/run",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"zoom-1-record-counts",
+								"run"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Zoom 3",
+			"item": [
+				{
+					"name": "people death date filter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/zoom-3-people-death-date-filter/run",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"zoom-3-people-death-date-filter",
+								"run"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "publication author filter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/zoom-3-books-author-filter/run?page=10&pageSize=16",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"zoom-3-books-author-filter",
+								"run"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "10"
+								},
+								{
+									"key": "pageSize",
+									"value": "16"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Zoom 5",
 			"item": [
 				{
@@ -15,7 +89,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/zoom-5-archives/run?record",
+							"raw": "{{baseURL}}/zoom-5-archives/run?record=https://collectiedata.hetnieuweinstituut.nl/id/archives/110746983",
 							"host": [
 								"{{baseURL}}"
 							],
@@ -26,7 +100,55 @@
 							"query": [
 								{
 									"key": "record",
-									"value": null
+									"value": "https://collectiedata.hetnieuweinstituut.nl/id/archives/110746983"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "archive fonds",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/zoom-5-archives-fonds/run?record=https://collectiedata.hetnieuweinstituut.nl/id/archives/110000212",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"zoom-5-archives-fonds",
+								"run"
+							],
+							"query": [
+								{
+									"key": "record",
+									"value": "https://collectiedata.hetnieuweinstituut.nl/id/archives/110000212"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "books audiovisual",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/zoom-5-books-audiovisual/run?record=https://collectiedata.hetnieuweinstituut.nl/id/books/300169597",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"zoom-5-books-audiovisual",
+								"run"
+							],
+							"query": [
+								{
+									"key": "record",
+									"value": "https://collectiedata.hetnieuweinstituut.nl/id/books/300169597"
 								}
 							]
 						}
@@ -39,7 +161,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/zoom-5-objects/run?record",
+							"raw": "{{baseURL}}/zoom-5-objects/run?record=https://collectiedata.hetnieuweinstituut.nl/id/objects/316",
 							"host": [
 								"{{baseURL}}"
 							],
@@ -50,7 +172,7 @@
 							"query": [
 								{
 									"key": "record",
-									"value": null
+									"value": "https://collectiedata.hetnieuweinstituut.nl/id/objects/316"
 								}
 							]
 						}
@@ -87,7 +209,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/zoom-5-relations/run?record=09&externalSources=true",
+							"raw": "{{baseURL}}/zoom-5-relations/run?record=https://collectiedata.hetnieuweinstituut.nl/id/people/12971",
 							"host": [
 								"{{baseURL}}"
 							],
@@ -98,12 +220,88 @@
 							"query": [
 								{
 									"key": "record",
-									"value": "09"
+									"value": "https://collectiedata.hetnieuweinstituut.nl/id/people/12971"
 								},
 								{
 									"key": "externalSources",
-									"value": "true",
-									"description": "true/false"
+									"value": "false",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all related objects",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/zoom-5-relations/run?record=https://collectiedata.hetnieuweinstituut.nl/id/people/12971",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"zoom-5-relations",
+								"run"
+							],
+							"query": [
+								{
+									"key": "record",
+									"value": "https://collectiedata.hetnieuweinstituut.nl/id/people/12971"
+								},
+								{
+									"key": "externalSources",
+									"value": "false",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Search",
+			"item": [
+				{
+					"name": "elasticsearch",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"from\": 0,\n  \"size\": 10,\n  \"query\": {\n    \"bool\": {\n      \"must\": [\n        {\n          \"query_string\": {\n            \"query\": \"asd asdfatw\"\n          }\n        }\n      ]\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.collectiedata.hetnieuweinstituut.nl/datasets/the-other-interface-acceptance/knowledge-graph/services/knowledge-graph-ES/elasticsearch",
+							"protocol": "https",
+							"host": [
+								"api",
+								"collectiedata",
+								"hetnieuweinstituut",
+								"nl"
+							],
+							"path": [
+								"datasets",
+								"the-other-interface-acceptance",
+								"knowledge-graph",
+								"services",
+								"knowledge-graph-ES",
+								"elasticsearch"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "int",
+									"disabled": true
 								}
 							]
 						}
