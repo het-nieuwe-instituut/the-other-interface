@@ -18,8 +18,8 @@ const extractDataFromTripley = (record: Maybe<Partial<TriplyRecord>>, component?
     if (type === 'Archive') {
         const item = record.archive as ArchivesFondsZoomLevel5DetailType 
         return {
-            image: item?.mediaReference ?? imagePath,
-            name: item?.title ?? component?.name,
+            image:  imagePath,
+            name: item?.objectNumber ?? component?.name,
             description: item?.objectNumber ?? component?.description
         }
     }

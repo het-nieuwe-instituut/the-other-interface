@@ -22,14 +22,11 @@ fragment carouselModuleFragment on ComponentModulesCarousel {
                     archive {
                         ... on ArchivesOtherZoomLevel5DetailType {
                             id
-                            type
-                            creator
                             objectNumber
                         }
                         ... on ArchivesFondsZoomLevel5DetailType {
                             id
                             objectNumber
-                            mediaReference
                         }
                     }
                     object {
