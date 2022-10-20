@@ -43,6 +43,58 @@ query storyBySlug($locale: String, $slug: String!) {
                     date
                     displayType
                 }
+                triplyRecords {
+                    data {
+                        id
+                        attributes {
+                            type
+                            recordId
+                            archive {
+                                ... on ArchivesOtherZoomLevel5DetailType {
+                                    id
+                                    type
+                                    objectNumber
+                                }
+                                ... on ArchivesFondsZoomLevel5DetailType {
+                                    id
+                                    objectNumber
+                                }
+                            }
+                            object {
+                                title
+                                maker
+                                image
+                            }
+                            publication {
+                                ... on PublicationsAudioVisualZoomLevel5DetailType {
+                                    id
+                                    type
+                                    title
+                                }
+                                ... on PublicationsArticleZoomLevel5DetailType {
+                                    id
+                                    type
+                                    title
+                                }
+                                ... on PublicationsSerialZoomLevel5DetailType {
+                                    id
+                                    type
+                                    title
+                                }
+                                ... on PublicationsBookZoomLevel5DetailType {
+                                    id
+                                    type
+                                    title
+                                    author
+                                }
+                            }
+                            people {
+                                name
+                                profession
+                            }
+                        }
+                    }
+                }    
                 components {
                     ... on ComponentModulesTextModule {
                         ...textModuleFragment

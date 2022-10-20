@@ -29,6 +29,12 @@ const textStyles = {
         lineHeight: '125%',
         fontFamily: 'Univers bold',
     },
+    galaxyH4: {
+        color: `${colors.black}`,
+        fontSize: ['16px'],
+        fontWeight: '400',
+        lineHeight: '125%',
+    },
     h5: {
         color: `${colors.black}`,
         fontSize: ['12px', '14px', '12px', '12px'],

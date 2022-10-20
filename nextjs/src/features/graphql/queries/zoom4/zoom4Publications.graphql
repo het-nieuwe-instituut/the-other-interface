@@ -1,0 +1,12 @@
+query Zoom4Publications($publicationsFilters: PublicationsZoomLevel4FiltersArgs, $page: Int!, $pageSize: Int!) {
+    zoomLevel4(entityName: Publications, publicationsFilters: $publicationsFilters, page: $page, pageSize: $pageSize) {
+        total
+        hasMore
+        nodes {
+            record
+            title
+            firstImage
+            imageLabel
+        }
+    }
+}

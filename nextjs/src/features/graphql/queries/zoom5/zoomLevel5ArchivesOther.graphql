@@ -1,28 +1,7 @@
 query ZoomLevel5ArchivesOther($id: String!) {
     zoomLevel5ArchivesOther(id: $id) {
-        descriptionLevel
-        objectNumber
-        recordTitle
-        startDate
-        endDate
-        productionDate
-        extent
-        repository
-        repositoryLabel
-        creator
-        creatorLabel
-        creatorHistory
-        custodialHistory
-        systemOfArrangement
-        contentScope
-        conditionsGoverningAccess
-        relatedMaterial
-        appendices
-        source
-        partReference
-        partTitle
-        right
-        rightLabel
-        permanentLink
+        id
+        title
+        type
     }
 }

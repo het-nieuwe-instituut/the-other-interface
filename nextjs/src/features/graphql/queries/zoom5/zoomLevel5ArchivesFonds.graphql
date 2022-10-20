@@ -1,18 +1,7 @@
 query ZoomLevel5ArchivesFonds($id: String!) {
     zoomLevel5ArchivesFonds(id: $id) {
-        objectNumber
-        title
-        startDate
-        endDate
-        dateLabel
-        dimensionFree
-        mediaReference
-        mediaReferenceLabel
-        existenceOfOriginals
-        scopeContent
-        relatedMaterial
-        rights
-        rightsLabel
-        permanentLink
+        id
+        recordTitle
+        descriptionLevel
     }
 }

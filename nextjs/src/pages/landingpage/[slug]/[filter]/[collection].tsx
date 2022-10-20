@@ -1,11 +1,12 @@
-import { LandingPageFilterQueryParams } from '../[filter]'
+import { SupportedLandingPages } from '@/features/galaxy/PaginatedFilterClouds/PaginatedFilterCloudsContainer'
+import { LandingCollectionContainer } from '@/features/pages/containers/LandingpageCollectionContainer/LandingCollectionContainer'
 
-export interface LandingPageFilterCollectionQueryParams extends LandingPageFilterQueryParams {
-    collection: string
+export interface LandingPageQueryParams {
+    slug: SupportedLandingPages
 }
 
 const Page = () => {
-    return <p>test</p>
+    return <LandingCollectionContainer />
 }
 
 export default Page

@@ -23,6 +23,9 @@ export class PeopleZoomLevel4FiltersArgs {
 
 @ObjectType()
 export class PoepleZoomLevel5DetailType {
+    @Field()
+    public id: string
+
     @Field(() => String, { nullable: true })
     public name?: string | null
 

@@ -33,7 +33,7 @@ export function usePresenter(dimensions: Dimensions, data: Zoom3Query['zoomLevel
     const { svgRef, simulation } = useD3Simulation(dimensions, dataCopy, selector, dataDimensions)
     const navigateTo = useCallback(
         (d: d3.SimulationNodeDatum & PaginatedFilterType) => {
-            router.push(`${router.query.slug}/${d.name}`)
+            router.push(`/landingpage/${router.query.slug}/${router.query.filter}/${d.name}`)
         },
         [router]
     )
