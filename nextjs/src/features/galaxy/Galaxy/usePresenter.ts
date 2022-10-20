@@ -10,9 +10,10 @@ import {
 import { galaxyTypesToPositions } from '../galaxyConstants'
 import { useD3ZoomEvents } from '../hooks/useD3ZoomEvents'
 import { useFitDataToDimensions } from './hooks/useFitDataToDimensions'
-import { Dimensions } from '../types/galaxy'
+import { Dimensions, ZoomLevel } from '../types/galaxy'
 import { GALAXY_BASE } from './Galaxy'
 import { ObjectPerTypeWithName, useD3Simulation } from './hooks/useD3Simulation'
+import { useRouter } from 'next/router'
 
 function useObjectPerType(zoomLevel1Data?: ZoomLevel1Query) {
     const objectsPerTypeWithIds = useMemo(() => {
@@ -61,9 +62,7 @@ export function usePresenter(dimensions: Dimensions, selector: string) {
     const { data: zoomLevel1Data } = useZoomLevel1Query({ fetchPolicy: 'no-cache', nextFetchPolicy: 'no-cache' })
     const { data: storiesData, loading: isLoading } = useStoriesQuery()
     const objectsPerTypeWithIds = useObjectPerType(zoomLevel1Data)
-
-    console.log(zoomLevel1Data)
-    console.log(objectsPerTypeWithIds)
+    const router = useRouter()
 
     const stories = useMemo(() => {
         const data = storiesData?.stories?.data || []
@@ -80,6 +79,11 @@ export function usePresenter(dimensions: Dimensions, selector: string) {
             .slice(0, 1000)
     }, [storiesData])
 
+    const handleMoveToZoomLevel1 = () => {
+       router.push({pathname: '/',  query: { zoomLevel: ZoomLevel.Zoom1 }}, undefined, { shallow: true })
+       zoomEvents?.setZoomLevel(ZoomLevel.Zoom1)
+    }
+
     const svgRef = useRef<SVGSVGElement | null>(null)
     const galaxyBase = GALAXY_BASE
     const dataDimensions = useFitDataToDimensions(galaxyBase, objectsPerTypeWithIds)
@@ -93,5 +97,6 @@ export function usePresenter(dimensions: Dimensions, selector: string) {
         objectsPerTypeWithIds,
         stories,
         isLoading,
+        handleMoveToZoomLevel1
     }
 }

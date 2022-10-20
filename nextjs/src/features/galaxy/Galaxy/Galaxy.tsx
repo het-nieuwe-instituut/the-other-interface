@@ -22,7 +22,7 @@ export const GALAXY_BASE = 800
 const Galaxy: React.FC<Props> = ({ dimensions }) => {
     const { t } = useTypeSafeTranslation('homepage')
     const id = useId().replaceAll(':', '')
-    const { svgRef, setZoomLevel, zoomTo, zoomLevel, storiesSystemRef, isLoading, stories, objectsPerTypeWithIds } =
+    const { svgRef, setZoomLevel, zoomTo, zoomLevel, storiesSystemRef, isLoading, stories, objectsPerTypeWithIds, handleMoveToZoomLevel1 } =
         usePresenter(dimensions, id)
     const height = dimensions.height ?? 0
     const width = dimensions.width ?? 0
@@ -45,7 +45,7 @@ const Galaxy: React.FC<Props> = ({ dimensions }) => {
                     justifyContent={'center'}
                     zIndex={1}
                 >
-                    <button onClick={() => setZoomLevel(ZoomLevel.Zoom1)}>
+                    <button onClick={handleMoveToZoomLevel1}>
                         <Text width="12.5rem">{t('nationalCollectionForDutchArchitectureAndUrbanPlanning')}</Text>
                     </button>
                 </Flex>

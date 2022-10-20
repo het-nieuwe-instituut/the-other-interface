@@ -1,3 +1,4 @@
+import Breadcrumbs from '@/features/galaxy/components/Breadcrumbs/Breadcrumbs'
 import PaginatedFilterCloudsContainer from '@/features/galaxy/PaginatedFilterClouds/PaginatedFilterCloudsContainer'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
@@ -41,6 +42,7 @@ export const LandingpageFilterContainer: React.FC = () => {
 
     return (
         <>
+            <Breadcrumbs />
             <Box backgroundColor="graph" height="800px" ref={graphRef}>
                 {sizes?.height && sizes?.width && (
                     <PaginatedFilterCloudsContainer type={type} dimensions={{ height: 800, width: sizes?.width }} />
