@@ -26,7 +26,11 @@ const RecordCloudsContainer: React.FunctionComponent<Props> = props => {
 
     return (
         <>
-            <DynamicRecordCloudsNoSsr zoomLevel5={data?.detail} dimensions={props.dimensions} />
+            <DynamicRecordCloudsNoSsr
+                zoomLevel5={data?.detail}
+                relations={data.relations}
+                dimensions={props.dimensions}
+            />
         </>
     )
 }

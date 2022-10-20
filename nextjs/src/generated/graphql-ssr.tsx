@@ -357,6 +357,41 @@ export const ssrZoom3DPublications = {
       withPage: withPageZoom3DPublications,
       usePage: useZoom3DPublications,
     }
+export async function getServerPageObjectRelations
+    (options: Omit<Apollo.QueryOptions<Types.ObjectRelationsQueryVariables>, 'query'>, ctx?: any ){
+        const apolloClient = getApolloClient(ctx);
+        
+        const data = await apolloClient.query<Types.ObjectRelationsQuery>({ ...options, query: Operations.ObjectRelationsDocument });
+        
+        const apolloState = apolloClient.cache.extract();
+
+        return {
+            props: {
+                apolloState: apolloState,
+                data: data?.data,
+                error: data?.error ?? data?.errors ?? null,
+            },
+        };
+      }
+export const useObjectRelations = (
+  optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.ObjectRelationsQuery, Types.ObjectRelationsQueryVariables>) => {
+  const router = useRouter();
+  const options = optionsFunc ? optionsFunc(router) : {};
+  return useQuery(Operations.ObjectRelationsDocument, options);
+};
+export type PageObjectRelationsComp = React.FC<{data?: Types.ObjectRelationsQuery, error?: Apollo.ApolloError}>;
+export const withPageObjectRelations = (optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.ObjectRelationsQuery, Types.ObjectRelationsQueryVariables>) => (WrappedComponent:PageObjectRelationsComp) : NextPage  => (props) => {
+                const router = useRouter()
+                const options = optionsFunc ? optionsFunc(router) : {};
+                const {data, error } = useQuery(Operations.ObjectRelationsDocument, options)    
+                return <WrappedComponent {...props} data={data} error={error} /> ;
+                   
+            }; 
+export const ssrObjectRelations = {
+      getServerPage: getServerPageObjectRelations,
+      withPage: withPageObjectRelations,
+      usePage: useObjectRelations,
+    }
 export async function getServerPageZoomLevel5ArchivesFonds
     (options: Omit<Apollo.QueryOptions<Types.ZoomLevel5ArchivesFondsQueryVariables>, 'query'>, ctx?: any ){
         const apolloClient = getApolloClient(ctx);

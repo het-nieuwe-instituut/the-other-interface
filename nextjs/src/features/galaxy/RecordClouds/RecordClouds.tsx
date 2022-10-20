@@ -1,7 +1,7 @@
 import { keyExtractor } from '@/features/shared/utils/lists'
 import { Box, Flex, Link, Text } from '@chakra-ui/react'
 import NextImage from 'next/image'
-import { UploadFile } from 'src/generated/graphql'
+import { ObjectRelationsQuery, UploadFile } from 'src/generated/graphql'
 import { Circle } from '../components/Circle'
 import { ZoomLevel5DetailResponses } from './useZoom5DetailQuery'
 
@@ -11,22 +11,55 @@ type Props = {
         width: number
     }
     zoomLevel5: ZoomLevel5DetailResponses
+    relations: ObjectRelationsQuery['relations']
 }
 
-const RecordClouds: React.FunctionComponent<Props> = ({ dimensions, zoomLevel5 }) => {
+const RecordClouds: React.FunctionComponent<Props> = ({ dimensions, zoomLevel5, relations }) => {
     const { width, height } = dimensions
     const svgWidth = width
     const svgHeight = height
+    const angle = Math.PI * 2 * Math.random()
+    const radius = 50
+
+    const x = Math.cos(angle) * radius
+    const y = Math.sin(angle) * radius
 
     return (
-        <Box overflow="hidden" height={svgHeight} width={svgWidth}>
+        <Box overflow="visible" height={svgHeight} width={svgWidth}>
             <svg
                 width={svgWidth}
                 height={svgHeight}
                 viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
-                style={{ overflow: 'visible' }}
+                style={{ overflow: 'visible', paddingLeft: 100, paddingTop: 100 }}
             >
-                {renderHighLight()}
+                <circle r={radius} />
+                <circle fill={'blue'} cx={x} cy={y} r="10" />
+                {/* {renderHighLight()}
+                <Box
+                    as={'foreignObject'}
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    width={dimensions.width}
+                    height={dimensions.height}
+                    style={{ overflow: 'visible' }}
+                >
+                    {relations?.map(relation => {
+                        return (
+                            <Box key={relation.type}>
+                                <Text>{relation.type}</Text>
+                                {relation.randomRelations?.map(randomRelation => (
+                                    <Box key={relation.type}>
+                                        <Text pl={4}>{randomRelation.label}</Text>
+                                        {randomRelation.relations?.map(relation => (
+                                            <Text pl={8} key={relation.type}>
+                                                {relation.type}
+                                            </Text>
+                                        ))}
+                                    </Box>
+                                ))}
+                            </Box>
+                        )
+                    })}
+                </Box> */}
             </svg>
         </Box>
     )

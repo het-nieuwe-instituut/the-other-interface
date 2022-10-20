@@ -2,11 +2,15 @@ import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/Mod
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import { Box, Grid, GridItem, useTheme } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
+import dynamic from 'next/dynamic'
 import { useRef } from 'react'
 import { StoryComponentsDynamicZone } from 'src/generated/graphql'
-import RecordsCloudsContainer from '../../../galaxy/RecordClouds/RecordsCloudsContainer'
 import { StoryMeta } from '../../Meta/StoryMeta'
 import { useGetZoom5RecordTask } from '../../tasks/getZoom5RecordTask'
+
+const DynamicRecordCloudsNoSsr = dynamic(() => import('../../../galaxy/RecordClouds/RecordClouds'), {
+    ssr: false,
+})
 
 export const RecordContainer: React.FC = () => {
     const theme = useTheme()
@@ -27,8 +31,8 @@ export const RecordContainer: React.FC = () => {
     return (
         <>
             <Box backgroundColor="graph" height="800px" ref={graphRef}>
-                {sizes?.height && sizes?.width && (
-                    <RecordsCloudsContainer dimensions={{ height: 800, width: sizes?.width }} />
+                {data?.relations && sizes?.height && sizes?.width && (
+                    <DynamicRecordCloudsNoSsr zoomLevel5={data?.detail} relations={data.relations} dimensions={sizes} />
                 )}
             </Box>
 

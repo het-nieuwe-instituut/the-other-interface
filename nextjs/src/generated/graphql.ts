@@ -181,6 +181,23 @@ export const mockZoom3DPublicationsQuery = (resolver: ResponseResolver<GraphQLRe
  * @param resolver a function that accepts a captured request and may return a mocked response.
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
+ * mockObjectRelationsQuery((req, res, ctx) => {
+ *   const { id } = req.variables;
+ *   return res(
+ *     ctx.data({ relations })
+ *   )
+ * })
+ */
+export const mockObjectRelationsQuery = (resolver: ResponseResolver<GraphQLRequest<ObjectRelationsQueryVariables>, GraphQLContext<ObjectRelationsQuery>, any>) =>
+  graphql.query<ObjectRelationsQuery, ObjectRelationsQueryVariables>(
+    'ObjectRelations',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
  * mockZoomLevel5ArchivesFondsQuery((req, res, ctx) => {
  *   const { id } = req.variables;
  *   return res(
@@ -2024,6 +2041,13 @@ export type Zoom3DPublicationsQueryVariables = Exact<{
 
 export type Zoom3DPublicationsQuery = { __typename?: 'Query', zoomLevel3: Array<{ __typename?: 'ZoomLevel3Type', uri?: string | null, name?: string | null, count?: number | null, total?: number | null }> };
 
+export type ObjectRelationsQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type ObjectRelationsQuery = { __typename?: 'Query', relations?: Array<{ __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number, randomRelations?: Array<{ __typename?: 'RelatedRecordType', id: string, label: string, type: EntityNames, relations?: Array<{ __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number }> | null }> | null }> | null };
+
 export type ZoomLevel5ArchivesFondsQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
@@ -2890,6 +2914,51 @@ export function useZoom3DPublicationsLazyQuery(baseOptions?: Apollo.LazyQueryHoo
 export type Zoom3DPublicationsQueryHookResult = ReturnType<typeof useZoom3DPublicationsQuery>;
 export type Zoom3DPublicationsLazyQueryHookResult = ReturnType<typeof useZoom3DPublicationsLazyQuery>;
 export type Zoom3DPublicationsQueryResult = Apollo.QueryResult<Zoom3DPublicationsQuery, Zoom3DPublicationsQueryVariables>;
+export const ObjectRelationsDocument = gql`
+    query ObjectRelations($id: String!) {
+  relations(type: People, id: $id) {
+    type
+    total
+    randomRelations {
+      id
+      label
+      type
+      relations {
+        type
+        total
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useObjectRelationsQuery__
+ *
+ * To run a query within a React component, call `useObjectRelationsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useObjectRelationsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useObjectRelationsQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useObjectRelationsQuery(baseOptions: Apollo.QueryHookOptions<ObjectRelationsQuery, ObjectRelationsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ObjectRelationsQuery, ObjectRelationsQueryVariables>(ObjectRelationsDocument, options);
+      }
+export function useObjectRelationsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ObjectRelationsQuery, ObjectRelationsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ObjectRelationsQuery, ObjectRelationsQueryVariables>(ObjectRelationsDocument, options);
+        }
+export type ObjectRelationsQueryHookResult = ReturnType<typeof useObjectRelationsQuery>;
+export type ObjectRelationsLazyQueryHookResult = ReturnType<typeof useObjectRelationsLazyQuery>;
+export type ObjectRelationsQueryResult = Apollo.QueryResult<ObjectRelationsQuery, ObjectRelationsQueryVariables>;
 export const ZoomLevel5ArchivesFondsDocument = gql`
     query ZoomLevel5ArchivesFonds($id: String!) {
   zoomLevel5ArchivesFonds(id: $id) {
