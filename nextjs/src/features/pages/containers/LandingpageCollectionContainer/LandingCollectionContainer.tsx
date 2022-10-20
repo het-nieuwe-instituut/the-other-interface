@@ -12,6 +12,7 @@ import {
 } from 'src/generated/graphql'
 import { PaginatedCollectionContainer } from '../../../galaxy/Collections/PaginatedCollectionContainer'
 import { SupportedLandingPages } from '../../../galaxy/PaginatedFilterClouds/PaginatedFilterCloudsContainer'
+import Breadcrumbs from '@/features/galaxy/components/Breadcrumbs/Breadcrumbs'
 
 export interface LandingPageQueryParams {
     slug: SupportedLandingPages
@@ -57,6 +58,7 @@ export const LandingCollection: React.FC<{ data?: LandingpageBySlugQuery }> = ({
 
     return (
         <>
+         <Breadcrumbs />
             <Flex
                 // bgGradient="radial(50% 50% at 50% 50%, #B5FD99 0%, rgba(181, 253, 153, 0) 76.56%)"
                 backgroundColor="graph"
@@ -65,6 +67,7 @@ export const LandingCollection: React.FC<{ data?: LandingpageBySlugQuery }> = ({
                 justifyContent={'center'}
                 alignItems={'center'}
             >
+               
                 {sizes?.height && sizes?.width && (
                     <PaginatedCollectionContainer type={type} dimensions={{ height: 800, width: sizes.width }} />
                 )}
