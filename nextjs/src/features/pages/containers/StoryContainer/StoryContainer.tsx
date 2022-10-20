@@ -1,19 +1,24 @@
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
+import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Box, Grid, GridItem, useTheme } from '@chakra-ui/react'
-import { useSize } from '@chakra-ui/react-use-size'
-import { useRef } from 'react'
-import { StoryComponentsDynamicZone } from 'src/generated/graphql'
-import { useGetZoom5Task } from 'src/pages/story/[slug]'
-import RecordsCloudsContainer from '../../../galaxy/RecordClouds/RecordsCloudsContainer'
+import { useRouter } from 'next/router'
+import { StoryComponentsDynamicZone, StoryEntity, useStoryBySlugQuery } from 'src/generated/graphql'
+import { LandingPageQueryParams } from 'src/pages/landingpage/[slug]'
 import { StoryMeta } from '../../Meta/StoryMeta'
 
 export const StoryContainer: React.FC = () => {
+    const router = useRouter()
+    const { t } = useTypeSafeTranslation('common')
+    const queryParams = router.query as unknown as LandingPageQueryParams
     const theme = useTheme()
-    const graphRef = useRef<HTMLDivElement | null>(null)
-    const sizes = useSize(graphRef)
 
-    const { data, loading, error } = useGetZoom5Task()
+    const { data, loading, error } = useStoryBySlugQuery({
+        variables: {
+            locale: router.locale,
+            slug: queryParams?.slug,
+        },
+    })
 
     if (loading) {
         return <p>loading</p>
@@ -22,47 +27,42 @@ export const StoryContainer: React.FC = () => {
     if (error) {
         return <p>{error.message}</p>
     }
-    // StoryBySlug will always have one item
-    const story = data?.story
 
-    if (!story) {
-        return null
+    if (!data?.stories?.data?.length) {
+        return <p>{t('somethingWentWrong')}</p>
     }
 
-    return (
-        <>
-            <Box backgroundColor="graph" height="800px" ref={graphRef}>
-                {sizes?.height && sizes?.width && (
-                    <RecordsCloudsContainer dimensions={{ height: 800, width: sizes?.width }} />
-                )}
-            </Box>
+    // StoryBySlug will always have one item
+    const story = data?.stories?.data[0]
 
-            <Box px={{ xl: 6, base: 0 }}>
-                <Box backgroundColor={'white'} px={6} maxW={theme.breakpoints.xl} marginX={'auto'}>
-                    <Grid
-                        pt={6}
-                        templateAreas={{
-                            lg: `"header meta"`,
-                            base: `"meta"
+    return (
+        <Box px={{ xl: 6, base: 0 }}>
+            <Box backgroundColor={'white'} px={6} maxW={theme.breakpoints.xl} marginX={'auto'}>
+                <Grid
+                    pt={6}
+                    templateAreas={{
+                        lg: `"header meta"`,
+                        base: `"meta"
                             "header"`,
-                        }}
-                        templateColumns={{ lg: '1fr 22.438rem', base: `100% 100%` }}
-                        templateRows={{ lg: '1fr', base: `auto minmax(0, 1fr)` }}
-                        gap={'3.75rem'}
-                    >
-                        <GridItem area={'header'}>
-                            <PageHeader
-                                title={story.attributes?.title}
-                                preface={story.attributes?.description ?? undefined}
-                            />
-                        </GridItem>
-                        <GridItem area={'meta'}>
-                            <StoryMeta story={story} />
-                        </GridItem>
-                    </Grid>
-                </Box>
-                <DynamicComponentRenderer components={story.attributes?.components as StoryComponentsDynamicZone[]} />
+                    }}
+                    templateColumns={{ lg: '1fr 22.438rem', base: `100% 100%` }}
+                    templateRows={{ lg: '1fr', base: `auto minmax(0, 1fr)` }}
+                    gap={'3.75rem'}
+                >
+                    <GridItem area={'header'}>
+                        <PageHeader
+                            title={story.attributes?.title}
+                            preface={story.attributes?.description ?? undefined}
+                        />
+                    </GridItem>
+                    <GridItem area={'meta'}>
+                        <StoryMeta story={story as StoryEntity} />
+                    </GridItem>
+                </Grid>
             </Box>
-        </>
+            <DynamicComponentRenderer
+                components={data?.stories?.data[0]?.attributes?.components as StoryComponentsDynamicZone[]}
+            />
+        </Box>
     )
 }
