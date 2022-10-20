@@ -4,6 +4,7 @@ import {
     PublicationsArticleResolver,
     PublicationsAudioVisualResolver,
     PublicationsBookResolver,
+    PublicationsSerialResolver,
 } from './publications.resolver'
 import { PublicationsService } from './publications.service'
 
@@ -14,12 +15,14 @@ import { PublicationsService } from './publications.service'
         PublicationsAudioVisualResolver,
         PublicationsArticleResolver,
         PublicationsBookResolver,
+        PublicationsSerialResolver,
     ],
     exports: [
         PublicationsService,
         PublicationsAudioVisualResolver,
         PublicationsArticleResolver,
         PublicationsBookResolver,
+        PublicationsSerialResolver,
     ],
 })
 export class PublicationsModule {}

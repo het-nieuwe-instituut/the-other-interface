@@ -346,4 +346,15 @@ export class PublicationsService {
 
         return this.zoomLevel5Service.getDetail(id, type)
     }
+
+    public resolvePublisher(publication: PublicationsZoomLevel5DataTypes) {
+        if (!('publisher' in publication) || !publication.publisher) {
+            return
+        }
+
+        const type = TriplyUtils.getEntityNameFromUri(publication.publisher)
+        const id = TriplyUtils.getIdFromUri(publication.publisher)
+
+        return this.zoomLevel5Service.getDetail(id, type)
+    }
 }
