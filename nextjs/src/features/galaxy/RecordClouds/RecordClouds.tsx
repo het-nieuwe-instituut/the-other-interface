@@ -23,26 +23,30 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions, zoomLevel5, 
     const { width, height } = dimensions
     const svgWidth = width
     const svgHeight = height
-    const { svgRef } = usePresenter(relations)
+    // const { svgRef, relationsPositionData } = usePresenter(relations)
     // const angle = Math.PI * 2 * Math.random()
     // const radius = 50
 
     // const x = Math.cos(angle) * radius
     // const y = Math.sin(angle) * radius
-
+    console.log(zoomLevel5)
     return (
         <Box overflow="visible" height={svgHeight} width={svgWidth}>
             <svg
-                ref={svgRef}
+                // ref={svgRef}
                 width={svgWidth}
                 height={svgHeight}
                 viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
                 style={{ overflow: 'visible' }}
             >
-                {/* <circle r={radius} />
-                <circle fill={'blue'} cx={x} cy={y} r="10" /> */}
                 {renderHighLight()}
-                <Box
+                {/* {relationsPositionData.map((relation, index, array) => {
+                    return (
+                        <circle key={`${index}-${array.length}`} fill={'blue'} cx={relation.x} cy={relation.y} r="10" />
+                    )
+                })} */}
+
+                {/* <Box
                     as={'foreignObject'}
                     xmlns="http://www.w3.org/1999/xhtml"
                     width={dimensions.width}
@@ -66,7 +70,7 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions, zoomLevel5, 
                             </Box>
                         )
                     })}
-                </Box>
+                </Box> */}
             </svg>
         </Box>
     )

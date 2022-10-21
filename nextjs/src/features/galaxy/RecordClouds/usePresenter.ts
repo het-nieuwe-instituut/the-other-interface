@@ -2,13 +2,34 @@ import { useMemo, useRef } from 'react'
 import { EntityNames, ObjectRelationsQuery } from 'src/generated/graphql'
 
 const configuration = {
-    [EntityNames.Archives]: {},
-    [EntityNames.External]: {},
-    [EntityNames.Media]: {},
-    [EntityNames.Objects]: {},
-    [EntityNames.People]: {},
-    [EntityNames.Publications]: {},
-    [EntityNames.Stories]: {},
+    [EntityNames.Archives]: {
+        x: 0,
+        y: 0,
+    },
+    [EntityNames.External]: {
+        x: 0,
+        y: 0,
+    },
+    [EntityNames.Media]: {
+        x: 0,
+        y: 0,
+    },
+    [EntityNames.Objects]: {
+        x: 0,
+        y: 0,
+    },
+    [EntityNames.People]: {
+        x: 0,
+        y: 0,
+    },
+    [EntityNames.Publications]: {
+        x: 0,
+        y: 0,
+    },
+    [EntityNames.Stories]: {
+        x: 0,
+        y: 0,
+    },
 }
 
 interface ParentRelation {
@@ -25,7 +46,7 @@ interface Relation {
 }
 
 export function usePresenter(relations: ObjectRelationsQuery['relations']) {
-    const svgRef = useRef()
+    const svgRef = useRef<SVGSVGElement | null>(null)
 
     const relationsPositionData: ParentRelation[] = useMemo(() => {
         const test =
@@ -35,8 +56,8 @@ export function usePresenter(relations: ObjectRelationsQuery['relations']) {
                 return {
                     label: relation.type,
                     type: relation.type,
-                    x: 0,
-                    y: 0,
+                    x: config.x,
+                    y: config.y,
                     children:
                         relation.randomRelations?.map(randomRelation => {
                             return {

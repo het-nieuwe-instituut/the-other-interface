@@ -1,3 +1,4 @@
+import { useGetZoom5RecordTask } from '@/features/pages/tasks/getZoom5RecordTask'
 import { Text } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
 import { useGetZoom5Task } from 'src/pages/story/[slug]'
@@ -28,7 +29,7 @@ const RecordCloudsContainer: React.FunctionComponent<Props> = props => {
         <>
             <DynamicRecordCloudsNoSsr
                 zoomLevel5={data?.detail}
-                relations={data.relations}
+                // relations={data?.relations ?? []}
                 dimensions={props.dimensions}
             />
         </>
