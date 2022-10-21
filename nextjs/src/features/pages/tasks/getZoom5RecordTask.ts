@@ -1,4 +1,4 @@
-import { config } from '@/features/galaxy/RecordClouds/useZoom5DetailQuery'
+import { config, SupportedQuerys } from '@/features/galaxy/RecordClouds/useZoom5DetailQuery'
 import { gql, useQuery, ApolloClient, NormalizedCacheObject } from '@apollo/client'
 import { GetServerSidePropsContext } from 'next'
 
@@ -39,9 +39,11 @@ export async function getZoom5RecordTask(
 ) {
     const queryParams = context.query as unknown as RecordQueryParams
     const record = queryParams.record
-    const detailConfig = config['Object']
+    const type = record.split('-')[1] as SupportedQuerys
+    const id: string = record.split('-')[0]
+    const detailConfig = config[type]
     const [detailQuery, storyBySlugQuery, relations] = await Promise.all([
-        detailConfig.query(client, { variables: { id: record } }),
+        detailConfig.query(client, { variables: { id: id } }),
         client.query<StoryBySlugQuery, StoryBySlugQueryVariables>({
             variables: {
                 locale: context.locale,
@@ -51,7 +53,7 @@ export async function getZoom5RecordTask(
         }),
         client.query<ObjectRelationsQuery, ObjectRelationsQueryVariables>({
             variables: {
-                id: record,
+                id,
             },
             query: ObjectRelationsDocument,
         }),
@@ -61,7 +63,7 @@ export async function getZoom5RecordTask(
         query: Zoom5RecordDataDocument,
         data: {
             story: storyBySlugQuery.data.stories.data?.[0],
-            detail: detailQuery.data.zoomLevel5Object,
+            detail: detailConfig.accessor(detailQuery.data),
             relations: relations.data.relations,
         },
     })

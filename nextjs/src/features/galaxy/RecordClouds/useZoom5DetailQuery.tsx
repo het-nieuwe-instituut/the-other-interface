@@ -1,14 +1,7 @@
-import { ApolloClient, NormalizedCache, NormalizedCacheObject, QueryOptions } from '@apollo/client'
+import { ApolloClient, NormalizedCacheObject, QueryOptions } from '@apollo/client'
 import {
-    EnumTriplyrecordType,
-    useZoomLevel5ArchivesFondsQuery,
-    useZoomLevel5ArchivesOtherQuery,
     useZoomLevel5ObjectQuery,
     useZoomLevel5PersonQuery,
-    useZoomLevel5PublicationsArticleQuery,
-    useZoomLevel5PublicationsAudiovisualQuery,
-    useZoomLevel5PublicationsBookQuery,
-    useZoomLevel5PublicationsSerialQuery,
     ZoomLevel5ObjectDocument,
     ZoomLevel5ObjectQuery,
     ZoomLevel5ObjectQueryVariables,
@@ -17,6 +10,12 @@ import {
     ZoomLevel5PersonQueryVariables,
 } from 'src/generated/graphql'
 
+export enum SupportedQuerys {
+    people = 'people',
+    // 'archives' = 'archives',
+    // 'publications' = 'publications',
+    objects = 'objects',
+}
 export const config = {
     // ['archivesOther']: {
     //     useHook: useZoomLevel5ArchivesOtherQuery,
@@ -46,7 +45,7 @@ export const config = {
     //     accessor: (data?: ReturnType<typeof useZoomLevel5PublicationsBookQuery>['data']) =>
     //         data?.zoomLevel5PublicationsBook,
     // },
-    [EnumTriplyrecordType.Object]: {
+    [SupportedQuerys.objects]: {
         query: (
             client: ApolloClient<NormalizedCacheObject>,
             options: Omit<QueryOptions<ZoomLevel5ObjectQueryVariables, ZoomLevel5ObjectQuery>, 'query'>
@@ -58,7 +57,7 @@ export const config = {
         useHook: useZoomLevel5ObjectQuery,
         accessor: (data?: ReturnType<typeof useZoomLevel5ObjectQuery>['data']) => data?.zoomLevel5Object,
     },
-    [EnumTriplyrecordType.People]: {
+    [SupportedQuerys.people]: {
         query: (
             client: ApolloClient<NormalizedCacheObject>,
             options: Omit<QueryOptions<ZoomLevel5PersonQueryVariables, ZoomLevel5PersonQuery>, 'query'>
@@ -83,8 +82,8 @@ export const dataAccessor = {
     // ['publicationsArticle']: 'zoomLevel5PublicationsSerial' as const,
     // ['publicationsAudiovisual']: 'zoomLevel5PublicationsSerial' as const,
     // ['publicationsBook']: 'zoomLevel5PublicationsSerial' as const,
-    [EnumTriplyrecordType.Object]: 'zoomLevel5Object' as const,
-    [EnumTriplyrecordType.People]: 'zoomLevel5Person' as const,
+    [SupportedQuerys.objects]: 'zoomLevel5Object' as const,
+    [SupportedQuerys.people]: 'zoomLevel5Person' as const,
 }
 
 export type ZoomLevel5DetailResponses = ReturnType<typeof useZoomLevel5DetailQuery>['data']

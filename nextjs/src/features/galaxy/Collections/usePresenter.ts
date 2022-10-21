@@ -22,10 +22,11 @@ export function usePresenter(data: ZoomLevel4Type[], total: number, selector: st
     })
     const navigateTo = useCallback(
         async (d: d3.SimulationNodeDatum & ZoomLevel4Type) => {
-            router.push(
-                `/landingpage/${router.query.slug}/${router.query.filter}/${
-                    router.query.collection
-                }/${d.record.substring(d.record.lastIndexOf('/') + 1)}`
+            const splittedUrl = d.record.split('/')
+            return router.push(
+                `/landingpage/${router.query.slug}/${router.query.filter}/${router.query.collection}/${
+                    splittedUrl[splittedUrl.length - 1]
+                }-${splittedUrl[splittedUrl.length - 2]}`
             )
         },
         [router]
