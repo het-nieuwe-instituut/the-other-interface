@@ -1,3 +1,4 @@
+import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { typeColors } from '@/features/shared/styles/theme/foundations/colors'
 import { Box, Flex, Image, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
@@ -76,7 +77,6 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions, zoomLevel5 }
                         height: 100,
                         alt: zoomLevel5.imageLabel ?? undefined,
                     }}
-                    subTitle={'Publications'}
                     dimensions={dimensions}
                     queryType={zoomLevel5?.__typename}
                 />
@@ -86,7 +86,6 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions, zoomLevel5 }
             return (
                 <RecordCloudHighlight
                     title={zoomLevel5.name ?? undefined}
-                    subTitle={'Publications'}
                     dimensions={dimensions}
                     queryType={zoomLevel5?.__typename}
                 />
@@ -105,18 +104,17 @@ interface RecordCloudHighlightProps {
         alt?: string
     }
     title?: string
-    subTitle?: string
     dimensions: Dimensions
     queryType: NonNullable<ZoomLevel5DetailResponses>['__typename']
 }
 export const RecordCloudHighlight: React.FunctionComponent<RecordCloudHighlightProps> = ({
     image,
     title,
-    subTitle,
     dimensions,
     queryType,
 }) => {
     const router = useRouter()
+    const { t } = useTypeSafeTranslation('record')
     const queryParams = router.query as unknown as RecordQueryParams
     const record = queryParams.record
     const type = record.split('-')[1] as SupportedQuerys
@@ -143,7 +141,7 @@ export const RecordCloudHighlight: React.FunctionComponent<RecordCloudHighlightP
                 zIndex={1}
             >
                 <Text textStyle={'cloudTextMicro'} mb={2.5}>
-                    {subTitle}
+                    {t(type)}
                 </Text>
                 <Text textStyle={'cloudTextLarge'} maxWidth="412px" flexWrap={'wrap'} textAlign={'center'}>
                     {title}

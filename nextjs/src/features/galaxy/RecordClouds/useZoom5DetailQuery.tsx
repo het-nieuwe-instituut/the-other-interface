@@ -12,8 +12,8 @@ import {
 
 export enum SupportedQuerys {
     people = 'people',
-    // 'archives' = 'archives',
-    // 'publications' = 'publications',
+    archives = 'archives',
+    publications = 'publications',
     objects = 'objects',
 }
 export const config = {

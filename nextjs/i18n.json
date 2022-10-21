@@ -6,6 +6,7 @@
         "story/*": ["stories"],
         "/landingpage/[slug]": ["landingpage"],
         "/landingpage/[slug]/[filter]": ["landingpage"],
+        "/landingpage/[slug]/[filter]/[collection]/[record]": ["record"],
         "/": ["homepage"]
     }
 }
