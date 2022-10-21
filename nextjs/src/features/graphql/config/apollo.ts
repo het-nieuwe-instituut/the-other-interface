@@ -1,4 +1,5 @@
 import { ApolloClient, gql, InMemoryCache, NormalizedCacheObject } from '@apollo/client'
+
 import merge from 'deepmerge'
 import { IncomingHttpHeaders } from 'http'
 import isEqual from 'lodash/isEqual'
@@ -56,6 +57,7 @@ export const initializeApollo = ({ initialState }: IInitializeApollo = { headers
         // Restore the cache with the merged data
         _apolloClient.cache.restore(data)
     }
+    console.log(`Initialised Apollo on ${process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT}`)
 
     // For SSG and SSR always create a new Apollo Client
     if (typeof window === 'undefined') return _apolloClient
