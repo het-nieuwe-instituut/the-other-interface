@@ -127,7 +127,7 @@ export const PaginatedCollection: React.FunctionComponent<
     const id = useId().replaceAll(':', '')
     const items = useMemo(
         () =>
-            zoom4?.zoomLevel4?.nodes?.map((node, index) => ({
+            zoom4?.zoomLevel4?.nodes?.map(node => ({
                 ...node,
                 randomBottom: randomShift(),
                 randomLeft: randomShift(),
@@ -190,22 +190,20 @@ export const PaginatedCollection: React.FunctionComponent<
                                     bottom={`${item.randomBottom}px`}
                                     left={`${item.randomLeft}px`}
                                 >
-                                    <svg width={140} height={90} style={{ overflow: 'visible' }}>
-                                        <Box
-                                            as={'foreignObject'}
+                                    {item.title && (
+                                        <svg
                                             width={140}
                                             height={90}
-                                            overflow={'visible'}
+                                            viewBox={`0 0 ${140} ${90}`}
+                                            style={{ overflow: 'visible', opacity: 0 }}
                                             className={`foreign-${id}`}
                                         >
-                                            {item.title && (
+                                            <Box as={'foreignObject'} overflow={'visible'} width={140} height={90}>
                                                 <Flex
                                                     flexDirection={'column'}
                                                     alignItems={'center'}
                                                     justifyContent={'center'}
                                                     bgGradient="radial(50% 50% at 50% 50%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)"
-                                                    height={'90px'}
-                                                    width={'140px'}
                                                 >
                                                     <Img
                                                         src={
@@ -226,9 +224,9 @@ export const PaginatedCollection: React.FunctionComponent<
                                                             : item.title}
                                                     </Text>
                                                 </Flex>
-                                            )}
-                                        </Box>
-                                    </svg>
+                                            </Box>
+                                        </svg>
+                                    )}
                                 </GridItem>
                             )
                         })}
