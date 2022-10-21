@@ -4,8 +4,11 @@ import { Box, Flex, Image, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { RecordQueryParams } from 'src/pages/landingpage/[slug]/[filter]/[collection]/[record]'
 import { Circle } from '../components/Circle'
+
 import { Dimensions } from '../types/galaxy'
 import { SupportedQuerys, ZoomLevel5DetailResponses } from './useZoom5DetailQuery'
+import { ObjectRelationsQuery } from 'src/generated/graphql'
+import { usePresenter } from './usePresenter'
 
 type Props = {
     dimensions: {
@@ -13,13 +16,14 @@ type Props = {
         width: number
     }
     zoomLevel5: ZoomLevel5DetailResponses
-    // relations: ObjectRelationsQuery['relations']
+    relations: ObjectRelationsQuery['relations']
 }
 
-const RecordClouds: React.FunctionComponent<Props> = ({ dimensions, zoomLevel5 }) => {
+const RecordClouds: React.FunctionComponent<Props> = ({ dimensions, zoomLevel5, relations }) => {
     const { width, height } = dimensions
     const svgWidth = width
     const svgHeight = height
+    const { svgRef } = usePresenter(relations)
     // const angle = Math.PI * 2 * Math.random()
     // const radius = 50
 
@@ -29,6 +33,7 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions, zoomLevel5 }
     return (
         <Box overflow="visible" height={svgHeight} width={svgWidth}>
             <svg
+                ref={svgRef}
                 width={svgWidth}
                 height={svgHeight}
                 viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
@@ -37,7 +42,7 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions, zoomLevel5 }
                 {/* <circle r={radius} />
                 <circle fill={'blue'} cx={x} cy={y} r="10" /> */}
                 {renderHighLight()}
-                {/* <Box
+                <Box
                     as={'foreignObject'}
                     xmlns="http://www.w3.org/1999/xhtml"
                     width={dimensions.width}
@@ -61,7 +66,7 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions, zoomLevel5 }
                             </Box>
                         )
                     })}
-                </Box> */}
+                </Box>
             </svg>
         </Box>
     )
