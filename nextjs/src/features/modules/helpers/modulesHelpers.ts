@@ -1,4 +1,4 @@
-import { ArchivesFondsZoomLevel5DetailType, ComponentCoreCarouselItem, Maybe, PublicationsArticleZoomLevel5DetailType, TriplyRecord } from "src/generated/graphql";
+import { ArchivesFondsZoomLevel5DetailType, ArchivesOtherZoomLevel5DetailType, ArchivesZoomLevel5Types, ComponentCoreCarouselItem, Maybe, PublicationsArticleZoomLevel5DetailType, PublicationsSerialZoomLevel5DetailType, PublicationsZoomLevel5Types, TriplyRecord } from "src/generated/graphql";
 import { imageBasePath } from "../modulesConstants";
 
 const extractDataFromTripley = (record: Maybe<Partial<TriplyRecord>>, component?: Maybe<ComponentCoreCarouselItem>) => {
@@ -17,28 +17,30 @@ const extractDataFromTripley = (record: Maybe<Partial<TriplyRecord>>, component?
 
     if (type === 'Archive') {
         const item = record.archive as ArchivesFondsZoomLevel5DetailType 
+        const archiveName = record.archive?.type === ArchivesZoomLevel5Types.Fonds ? (record.archive as ArchivesFondsZoomLevel5DetailType)?.populatedCreator?.name  : (record.archive as ArchivesOtherZoomLevel5DetailType)?.title
         return {
-            image:  imagePath,
-            name: item?.objectNumber ?? component?.name,
-            description: item?.objectNumber ?? component?.description
+            image: imagePath,
+            name: component?.name ?? archiveName,
+            description: component?.description ?? item?.objectNumber 
         }
     }
 
     if (type === 'Object') {
         const item = record.object
         return {
-            image: item?.image ?? imagePath,
-            name: item?.title ?? component?.name,
-            description: item?.maker ?? component?.description
+            image: imagePath,
+            name: component?.name ?? item?.title,
+            description: component?.description ?? item?.populatedMaker?.name
         }
     }
 
     if (type === 'Publication') {
         const item = record.publication as PublicationsArticleZoomLevel5DetailType
+        const name = record.publication?.type === PublicationsZoomLevel5Types.Serial ? (record.publication as PublicationsSerialZoomLevel5DetailType).populatedPublisher?.name : (record.publication as PublicationsArticleZoomLevel5DetailType).populatedAuthor?.profession
         return {
             image: imagePath,
-            name: item?.title ?? component?.name,
-            description: item?.author ?? component?.description
+            name: component?.name ?? name,
+            description: component?.description ?? item?.author 
         }                             
     }
 
@@ -46,8 +48,8 @@ const extractDataFromTripley = (record: Maybe<Partial<TriplyRecord>>, component?
         const item = record.people 
         return {
             image: imagePath,
-            name: item?.name ?? component?.name,
-            description: item?.profession ?? component?.description
+            name:  component?.name ?? item?.name,
+            description: component?.description ?? item?.profession 
         }
     }
     return defaultResult
