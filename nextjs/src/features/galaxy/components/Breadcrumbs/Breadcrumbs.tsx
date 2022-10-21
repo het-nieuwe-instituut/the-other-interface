@@ -1,4 +1,5 @@
-import { Box, Flex } from '@chakra-ui/react'
+import React from 'react'
+import { Box, Flex, useTheme } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { ZoomLevel } from '../../types/galaxy'
 import ArrowRightIcon from '@/icons/arrows/arrow-right.svg'
@@ -106,14 +107,16 @@ const getBreadcrumbsFromUrl = (asPath: string, query:  { zoomLevel: ZoomLevel}, 
 
 const Breadcrumbs = () => {
     const router = useRouter()
+    const theme = useTheme()
     const  { t }  = useTypeSafeTranslation('navigation')
 
     const {items, currentZoomLevel} = getBreadcrumbsFromUrl(router.asPath, router?.query as { zoomLevel: ZoomLevel}, t)
 
     const handleRedirect = (link : {pathname: string, query?: {zoomLevel: string}}) => {
-        const shallow = currentZoomLevel === 0 || currentZoomLevel === 1 && link.pathname === '/'
-
-        if (router.query?.zoomLevel === link.query?.zoomLevel && link.pathname === router.asPath) {
+        const isFirstLevels = link.pathname === '/'
+        const shallow = currentZoomLevel === 0 || currentZoomLevel === 1 && isFirstLevels
+        const isTheSameLink = isFirstLevels ? link.pathname === router?.pathname : link?.pathname === router?.asPath
+        if (router.query?.zoomLevel === link.query?.zoomLevel && isTheSameLink) {
             router.reload()
             return
         }
@@ -122,20 +125,22 @@ const Breadcrumbs = () => {
     }
 
     return (
-        <Flex alignItems={'center'} position='absolute' zIndex={2} left={'24px'} top={'15px'}>
-            {
-                items.map((item, index) => (
-                    <>
-                    <Box as='div' mr={'10px'} cursor="pointer" textStyle='small' onClick={() => handleRedirect(item.link)}>{item.name}</Box>
-                    {index + 1 !== items.length && (
-                        <Box mr={'10px'} cursor="pointer">
-                            <ArrowRightIcon />
-                        </Box>
-                    ) }
-                    </>
-                ))
-            }
-        </Flex>
+        <Box maxW={theme.breakpoints.xl} marginX={'auto'} position='absolute' left={0} right={0}> 
+            <Flex alignItems={'center'} position='relative' zIndex={2} left={'24px'} top={'15px'}>
+                {
+                    items.map((item, index) => (
+                        <React.Fragment key={index}>
+                            <Box as='div' mr={'10px'} cursor="pointer" textStyle='small' onClick={() => handleRedirect(item.link)}>{item.name}</Box>
+                            {index + 1 !== items.length && (
+                                <Box mr={'10px'} cursor="pointer">
+                                    <ArrowRightIcon />
+                                </Box>
+                            ) }
+                        </React.Fragment>
+                    ))
+                }
+            </Flex>
+        </Box>
     )
 }
 
