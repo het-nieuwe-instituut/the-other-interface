@@ -62,6 +62,7 @@ export const LandingCollection: React.FC<{ data?: LandingpageBySlugQuery }> = ({
                 backgroundColor="graph"
                 ref={graphRef}
                 overflow={'hidden'}
+                height={800}
             >
                 {sizes?.height && sizes?.width && (
                     <PaginatedCollectionContainer type={type} dimensions={{ height: 800, width: sizes.width }} />

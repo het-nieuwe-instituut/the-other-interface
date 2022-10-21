@@ -4,7 +4,6 @@ import { randomNumberBetweenPoints } from '@/features/shared/utils/numbers'
 import PaginationLeft from '@/icons/arrows/pagination-left.svg'
 import PaginationRight from '@/icons/arrows/pagination-right.svg'
 import { Box, Flex, Grid, GridItem, Img, Text } from '@chakra-ui/react'
-import { getRandomValues } from 'crypto'
 import { useRouter } from 'next/router'
 import { useId, useMemo } from 'react'
 import {
@@ -18,7 +17,6 @@ import {
     Zoom4PublicationsQuery,
     ZoomLevel4ParentType,
 } from 'src/generated/graphql'
-import { Circle } from '../components/Circle'
 import { SupportedLandingPages } from '../FilterClouds/FilterCloudsContainer'
 import { usePresenter } from './usePresenter'
 
