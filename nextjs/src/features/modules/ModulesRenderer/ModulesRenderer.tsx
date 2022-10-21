@@ -24,11 +24,11 @@ interface Props {
     components: DynamicComponents
 }
 
-type DynamicComponents = 
-    Maybe<Array<HomepageComponentsDynamicZone>> 
-    | Maybe<Array<StoryComponentsDynamicZone>> 
-    | Maybe<Array<LandingpageComponentsDynamicZone>> 
-    |  Maybe<Array<MenupageComponentsDynamicZone>>
+type DynamicComponents =
+    | Maybe<Array<HomepageComponentsDynamicZone>>
+    | Maybe<Array<StoryComponentsDynamicZone>>
+    | Maybe<Array<LandingpageComponentsDynamicZone>>
+    | Maybe<Array<MenupageComponentsDynamicZone>>
 
 export function DynamicComponentRenderer(props: Props) {
     const theme = useTheme()

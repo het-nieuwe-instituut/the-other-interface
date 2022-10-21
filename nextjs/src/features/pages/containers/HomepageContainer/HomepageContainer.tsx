@@ -1,3 +1,5 @@
+import { GalaxyWrapper } from '@/features/shared/components/GalaxyWrapper/GalaxyWrapper'
+import { SearchButton } from '../../../shared/components/Buttons/SearchButton'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 import { Box, useTheme } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
@@ -26,19 +28,25 @@ export const HomepageContainer = () => {
     }
 
     return (
-        <div>
-            <Box backgroundColor="graph" height="800px" ref={graphRef}>
-                {sizes?.height && sizes?.width && (
-                    <DynamicGalaxyNoSsr dimensions={{ height: 800, width: sizes?.width }} />
+        <Box>
+            <GalaxyWrapper
+                renderHeader={() => <SearchButton>Search</SearchButton>}
+                renderFooter={() => <SearchButton>Search</SearchButton>}
+                renderGalaxy={() => (
+                    <Box backgroundColor="graph" height="800px" ref={graphRef}>
+                        {sizes?.height && sizes?.width && (
+                            <DynamicGalaxyNoSsr dimensions={{ height: 800, width: sizes?.width }} />
+                        )}
+                    </Box>
                 )}
-            </Box>
+            />
             <Box px={{ xl: 6, base: 0 }}>
-                <Box backgroundColor={'white'} maxW={theme.breakpoints.xl} marginX={'auto'} paddingTop={6}>
+                <Box backgroundColor={'white'} maxW={theme.breakpoints.xl} marginX={'auto'}>
                     <DynamicComponentRenderer
                         components={data?.homepage?.data?.attributes?.components as HomepageComponentsDynamicZone[]}
                     />
                 </Box>
             </Box>
-        </div>
+        </Box>
     )
 }
