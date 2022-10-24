@@ -1,21 +1,21 @@
 import { config, SupportedQuerys } from '@/features/galaxy/RecordClouds/useZoom5DetailQuery'
-import { gql, useQuery, ApolloClient, NormalizedCacheObject } from '@apollo/client'
+import { ApolloClient, gql, NormalizedCacheObject, useQuery } from '@apollo/client'
 import { GetServerSidePropsContext } from 'next'
 
 import {
-    StoryBySlugQuery,
-    ZoomLevel5ObjectQuery,
-    StoryBySlugDocument,
-    ObjectRelationsQuery,
-    StoryBySlugQueryVariables,
-    ObjectRelationsQueryVariables,
+    EntityNames,
     ObjectRelationsDocument,
+    ObjectRelationsQuery,
+    ObjectRelationsQueryVariables,
+    StoryBySlugDocument,
+    StoryBySlugQuery,
+    StoryBySlugQueryVariables,
+    ZoomLevel5ObjectQuery,
 } from 'src/generated/graphql'
 import { RecordQueryParams } from 'src/pages/landingpage/[slug]/[filter]/[collection]/[record]'
 
 const Zoom5RecordDataDocument = gql`
     query zoom5RecordData {
-        story @client
         detail @client
         relations @client
     }
@@ -59,12 +59,42 @@ export async function getZoom5RecordTask(
         }),
     ])
 
+    if (detailQuery.error || !detailQuery.data) {
+        console.error('Detail query error')
+        return
+    }
+
+    if (relations.error) {
+        console.error('No detailQuery data')
+        return
+    }
+
     client.writeQuery({
         query: Zoom5RecordDataDocument,
         data: {
             story: storyBySlugQuery.data.stories.data?.[0],
             detail: detailConfig.accessor(detailQuery.data),
-            relations: relations.data.relations,
+            relations: [
+                ...(relations.data.relations ?? []),
+                ...[
+                    {
+                        type: EntityNames.Objects,
+                        total: 50,
+                        randomRelations: [
+                            {
+                                id: 'test',
+                                label: 'some object',
+                                type: EntityNames.Objects,
+                            },
+                            {
+                                id: 'test2',
+                                label: 'some object 2',
+                                type: EntityNames.Objects,
+                            },
+                        ],
+                    },
+                ],
+            ],
         },
     })
 }

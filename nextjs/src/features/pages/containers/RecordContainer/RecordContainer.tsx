@@ -19,7 +19,6 @@ export const RecordContainer: React.FC = () => {
     if (error) {
         return <p>{error.message}</p>
     }
-    console.log(data)
 
     return <RecordPage data={data} />
 }
@@ -29,7 +28,7 @@ const RecordPage: React.FC<{ data?: ReturnType<typeof useGetZoom5RecordTask>['da
     const graphRef = useRef<HTMLDivElement | null>(null)
     const sizes = useSize(graphRef)
     // const story = data?.story
-    console.log(data)
+
     return (
         <>
             <Box backgroundColor="graph" height="800px" ref={graphRef}>

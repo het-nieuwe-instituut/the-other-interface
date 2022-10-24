@@ -71,29 +71,36 @@ export const typeColors = {
         default: 'radial-gradient(50% 50% at 50% 50%, rgba(124, 124, 124, 0.8) 0%, rgba(124, 124, 124, 0) 100%)',
         hover1: 'radial-gradient(50% 50% at 50% 50%, #A5D4FF 0%, rgba(87, 114, 255, 0.12) 78.13%, rgba(253, 252, 213, 0) 100%)',
         hover2: 'radial-gradient(50% 50% at 50% 50%, #5772FF 0%, rgba(95, 216, 255, 0.12) 78.13%, rgba(253, 252, 213, 0) 100%)',
-        hover3: 'adial-gradient(50% 50% at 50% 50%, #5FD8FF 0%, rgba(165, 212, 255, 0.12) 78.13%, rgba(253, 252, 213, 0) 100%)',
+        hover3: 'radial-gradient(50% 50% at 50% 50%, #5FD8FF 0%, rgba(165, 212, 255, 0.12) 78.13%, rgba(253, 252, 213, 0) 100%)',
+        related:
+            'radial-gradient(50% 50% at 50% 50%, rgba(165, 212, 255, 0.2) 0%, rgba(87, 114, 255, 0.024) 78.13%, rgba(253, 252, 213, 0) 100%);',
     },
     objects: {
         default: 'radial-gradient(50% 50% at 50% 50%, #F7FF96 0%, rgba(249, 255, 181, 0.12) 100%)',
         hover1: 'radial-gradient(50% 50% at 50% 50%, #A5FFAE 0%, rgba(76, 107, 81, 0.12) 78.13%, rgba(253, 252, 213, 0) 100%)',
         hover2: 'radial-gradient(50% 50% at 50% 50%, #4C6B51 0%, rgba(48, 226, 184, 0.12) 78.13%, rgba(253, 252, 213, 0) 100%)',
         hover3: 'radial-gradient(50% 50% at 50% 50%, #30E2B8 0%, rgba(165, 255, 174, 0.12) 78.13%, rgba(253, 252, 213, 0) 100%)',
+        related: 'radial-gradient(50% 50% at 50% 50%, rgba(165, 255, 174, 0.2) 19.79%, rgba(76, 107, 81, 0) 100%);',
     },
     people: {
         default: 'radial-gradient(50% 50% at 50% 50%, #F7FF96 0%, rgba(249, 255, 181, 0.12) 100%)',
         hover1: 'radial-gradient(50% 50% at 50% 50%, #FFA5A5 0%, rgba(255, 149, 238, 0.12) 78.13%, rgba(253, 252, 213, 0) 100%)',
         hover2: 'radial-gradient(50% 50% at 50% 50%, #FF95EE 0%, rgba(225, 166, 198, 0.12) 78.13%, rgba(253, 252, 213, 0) 100%)',
         hover3: 'radial-gradient(50% 50% at 50% 50%, #E1A6C6 0%, rgba(255, 165, 165, 0.12) 78.13%, rgba(253, 252, 213, 0) 100%)',
+        related:
+            'radial-gradient(50% 50% at 50% 50%, rgba(255, 165, 165, 0.2) 27.6%, rgba(255, 149, 238, 0.024) 100%);',
     },
     publications: {
         default: 'radial-gradient(50% 50% at 50% 50%, #F7FF96 0%, rgba(249, 255, 181, 0.12) 100%)',
         hover1: 'radial-gradient(50% 50% at 50% 50%, #FF3D00 0%, rgba(255, 149, 89, 0.12) 78.13%, rgba(253, 252, 213, 0) 100%)',
         hover2: 'radial-gradient(50% 50% at 50% 50%, #FF9559 0%, rgba(138, 42, 9, 0.12) 78.13%, rgba(253, 252, 213, 0) 100%)',
         hover3: 'radial-gradient(50% 50% at 50% 50%, #8A2A09 0%, rgba(255, 61, 0, 0.12) 78.13%, rgba(253, 252, 213, 0) 100%)',
+        related: 'radial-gradient(50% 50% at 50% 50%, rgba(255, 61, 0, 0.2) 14.58%, rgba(255, 149, 89, 0.024) 100%);',
     },
     stories: {
         default: 'radial-gradient(50% 50% at 50% 50%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)',
         hover: 'radial-gradient(50% 50% at 50% 50%, #666666 0%, rgba(102, 102, 102, 0) 100%)',
+        related: 'radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 255, 0.2) 40.1%, rgba(255, 255, 255, 0) 100%);',
     },
 }
 
@@ -127,6 +134,7 @@ const colors = {
             backgrounds: zoom2Backgrounds,
         },
     },
+    typeColors: typeColors,
 }
 
 export default colors
