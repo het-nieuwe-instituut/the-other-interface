@@ -1,7 +1,7 @@
 import { ObjectType, Field, createUnionType, ID, InputType } from '@nestjs/graphql'
 import { AuthorEntityResponse, AuthorFiltersInput } from '../author/author.type'
 import { LocationFiltersInput, LocationRelationResponseCollection } from '../location/location.type'
-import { ComponentModulesGridModule } from '../strapi/components/core/grid'
+import { ComponentModulesGridModule } from '../strapi/components/modules/gridModule'
 import {
     ComponentCorePublicationDate,
     ComponentCorePublicationDateFiltersInput,

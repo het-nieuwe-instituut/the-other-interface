@@ -64,3 +64,37 @@ fragment ComponentCoreTimeframeFragment on ComponentCoreTimeframe {
     yearEnd
     yearStart
 }
+
+fragment ComponentCoreFeaturedFieldsFragment on ComponentCoreFeaturedFields {
+    id
+    label
+    value
+}
+
+fragment ComponentCoreFieldsFragment on ComponentCoreFields {
+    id
+    label
+}
+
+fragment ComponentCoreGridFeaturedFieldsFragment on ComponentCoreGridFeaturedFields {
+    id
+    subtitle
+    title
+    thumbnail {
+        ...UploadFileEntityResponseFragment
+    }
+    triplyRecord {
+        data {
+            ...BaseTriplyRecordFragment
+        }
+    }
+}
+
+fragment ComponentCoreItemsFragment on ComponentCoreItems {
+    id
+    author
+    title
+    image {
+        ...UploadFileEntityResponseFragment
+    }
+}

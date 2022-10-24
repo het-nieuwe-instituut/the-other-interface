@@ -1,14 +1,9 @@
-import { Field, ID, InputType, Int, ObjectType, registerEnumType } from '@nestjs/graphql'
+import { Field, ID, InputType, ObjectType, registerEnumType } from '@nestjs/graphql'
 import { Enum_Componentmodulesgridmodule_Fieldtypes } from '../../../../generated/strapi-sdk'
 import { StoryEntityResponse, StoryFiltersInput } from '../../../story/story.type'
 import { TriplyRecordEntityResponse, TriplyRecordFiltersInput } from '../../../triplyRecord/triplyRecord.type'
-import { ComponentCoreButton, ComponentCoreButtonFiltersInput } from './button'
-import {
-    ComponentCoreModuleLayouts,
-    PaginationArg,
-    StringFilterInput,
-    UploadFileEntityResponse,
-} from '../../shared-types'
+import { ComponentCoreButtonFiltersInput } from './button'
+import { PaginationArg, StringFilterInput, UploadFileEntityResponse } from '../../shared-types'
 
 registerEnumType(Enum_Componentmodulesgridmodule_Fieldtypes, { name: 'Enum_Componentmodulesgridmodule_Fieldtypes' })
 
@@ -64,42 +59,6 @@ export class ComponentCoreItems {
 
     @Field(() => UploadFileEntityResponse, { nullable: true })
     public image?: UploadFileEntityResponse
-
-    @Field({ nullable: true })
-    public title?: string
-}
-
-@ObjectType()
-export class ComponentModulesGridModule {
-    @Field(() => [ComponentCoreButton], { nullable: true })
-    public buttons?: ComponentCoreButton[]
-
-    @Field({ nullable: true })
-    public description?: string
-
-    @Field(() => [ComponentCoreFeaturedFields], { nullable: true })
-    public featuredFields?: ComponentCoreFeaturedFields[]
-
-    @Field()
-    public fieldTitlesAreInverted: boolean
-
-    @Field(() => Enum_Componentmodulesgridmodule_Fieldtypes)
-    public fieldTypes: Enum_Componentmodulesgridmodule_Fieldtypes
-
-    @Field(() => [ComponentCoreGridFeaturedFields], { nullable: true })
-    public fields?: ComponentCoreGridFeaturedFields[]
-
-    @Field(() => ComponentCoreModuleLayouts)
-    public gridModuleLayout: ComponentCoreModuleLayouts
-
-    @Field(() => ID)
-    public id: string
-
-    @Field(() => Int)
-    public pageSize: number
-
-    @Field()
-    public showMoreButtonTitle: string
 
     @Field({ nullable: true })
     public title?: string

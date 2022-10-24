@@ -97,3 +97,25 @@ fragment ComponentModulesTitleModuleFragment on ComponentModulesTitleModule {
         ...ComponentCoreModuleLayoutsFragment
     }
 }
+
+fragment ComponentModulesGridModuleFragment on ComponentModulesGridModule {
+    id
+    description
+    pageSize
+    title
+    showMoreButtonTitle
+    fieldTitlesAreInverted
+    fieldTypes
+    buttons {
+        ...ComponentCoreButtonFragment
+    }
+    featuredFields {
+        ...ComponentCoreFeaturedFieldsFragment
+    }
+    fields {
+        ...ComponentCoreGridFeaturedFieldsFragment
+    }
+    gridModuleLayout {
+        ...ComponentCoreModuleLayoutsFragment
+    }
+}

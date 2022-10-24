@@ -12,6 +12,9 @@ fragment HomepageFragment on Homepage {
         ... on ComponentModulesImage {
             ...ComponentModulesImageFragment
         }
+        ... on ComponentModulesGridModule {
+            ...ComponentModulesGridModuleFragment
+        }
         ... on ComponentModulesPullquote {
             ...ComponentModulesPullquoteFragment
         }
