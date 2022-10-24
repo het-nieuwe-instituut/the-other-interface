@@ -4,7 +4,7 @@ import { Box, useTheme } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { HomepageComponentsDynamicZone, HomepageQuery, useHomepageQuery } from 'src/generated/graphql'
 
 export const DynamicGalaxyNoSsr = dynamic(() => import('../../../galaxy/Galaxy/Galaxy'), {
@@ -30,9 +30,32 @@ const Homepage: React.FC<{ data?: HomepageQuery }> = ({ data }) => {
     const sizes = useSize(graphRef)
     const theme = useTheme()
 
+    const [scrollPosition, setScrollPosition] = useState(0)
+    const handleScroll = () => {
+        const position = window.pageYOffset
+        setScrollPosition(position)
+    }
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll, { passive: true })
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll)
+        }
+    }, [])
+
     return (
         <div>
-            <Box backgroundColor="graph" height="800px" ref={graphRef} position={'sticky'} top="-750px" zIndex={40}>
+            <Box
+                backgroundColor="graph"
+                height="800px"
+                ref={graphRef}
+                position={'sticky'}
+                top="-750px"
+                zIndex={40}
+                onClick={ScrollToTop}
+                cursor={scrollPosition > 800 ? 'pointer' : 'cursor'} // Maybe?
+            >
                 <Box position={'sticky'} top="0px" height="0px">
                     <Breadcrumbs />
                 </Box>
@@ -51,4 +74,11 @@ const Homepage: React.FC<{ data?: HomepageQuery }> = ({ data }) => {
             </Box>
         </div>
     )
+
+    function ScrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        })
+    }
 }
