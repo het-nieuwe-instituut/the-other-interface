@@ -32,9 +32,11 @@ const Homepage: React.FC<{ data?: HomepageQuery }> = ({ data }) => {
 
     return (
         <div>
-            <Box backgroundColor="graph" height="800px" ref={graphRef} position={'sticky'} top="-750px" zIndex={1}>
-                <Box position={'sticky'} top="0px" height="50px">
+            <Box backgroundColor="graph" height="800px" ref={graphRef} position={'sticky'} top="-750px" zIndex={40}>
+                <Box position={'sticky'} top="0px" height="0px">
                     <Breadcrumbs />
+                </Box>
+                <Box>
                     {sizes?.height && sizes?.width && (
                         <DynamicGalaxyNoSsr dimensions={{ height: 800, width: sizes?.width }} />
                     )}
