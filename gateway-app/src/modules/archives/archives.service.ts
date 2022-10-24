@@ -133,10 +133,10 @@ export class ArchivesService {
         )
 
         if (res.data[0].descriptionLevel === 'archief') {
-            return ArchivesZoomLevel5Types.other
+            return ArchivesZoomLevel5Types.fonds
         }
 
-        return ArchivesZoomLevel5Types.fonds
+        return ArchivesZoomLevel5Types.other
     }
 
     public async getZoomLevel2Data() {
