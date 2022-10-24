@@ -60,6 +60,7 @@ const Homepage: React.FC<{ data?: HomepageQuery }> = ({ data }) => {
                 <Box position={'sticky'} top="0px" height="0px">
                     <Breadcrumbs />
                 </Box>
+
                 {sizes?.height && sizes?.width && (
                     <DynamicGalaxyNoSsr dimensions={{ height: 800, width: sizes?.width }} />
                 )}

@@ -75,6 +75,7 @@ export const LandingpageContainer: React.FC = () => {
                 <Box position={'sticky'} top="0px" height="0px">
                     <Breadcrumbs />
                 </Box>
+
                 {sizes?.height && sizes?.width && (
                     <DynamicFilterCloudsNoSsr type={type} dimensions={{ height: 800, width: sizes?.width }} />
                 )}

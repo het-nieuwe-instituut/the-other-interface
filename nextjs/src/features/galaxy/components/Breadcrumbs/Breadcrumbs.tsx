@@ -1,4 +1,5 @@
-import { Box, Flex } from '@chakra-ui/react'
+import React from 'react'
+import { Box, Flex, Link, useTheme } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { ZoomLevel } from '../../types/galaxy'
 import ArrowRightIcon from '@/icons/arrows/arrow-right.svg'
@@ -76,6 +77,11 @@ const getBreadcrumbsFromUrl = (asPath: string, query: { zoomLevel: ZoomLevel }, 
         currentZoomLevel = zoomLevel === ZoomLevel.Zoom1 ? 1 : 0
     }
 
+    const companyLevel = {
+        name: t('theNewInstitute'),
+        link: { pathname: '/' },
+    }
+
     const level0 = {
         name: t('zoom0'),
         link: { pathname: '/' },
@@ -95,6 +101,7 @@ const getBreadcrumbsFromUrl = (asPath: string, query: { zoomLevel: ZoomLevel }, 
     }
 
     const rawItems = [
+        companyLevel,
         level0,
         level1,
         getLevel2(t, pathArray[startLandingIndex + 1]),
@@ -107,7 +114,9 @@ const getBreadcrumbsFromUrl = (asPath: string, query: { zoomLevel: ZoomLevel }, 
         ),
         getLevel5(t, pathArray[startStoryIndex + 1]),
     ]
-    const items = rawItems.slice(0, currentZoomLevel + 1)
+    // company level and current level are always present, that's why it's +2
+    const items = rawItems.slice(0, currentZoomLevel + 2)
+
     return {
         items,
         currentZoomLevel,
@@ -116,6 +125,7 @@ const getBreadcrumbsFromUrl = (asPath: string, query: { zoomLevel: ZoomLevel }, 
 
 const Breadcrumbs = () => {
     const router = useRouter()
+    const theme = useTheme()
     const { t } = useTypeSafeTranslation('navigation')
 
     const { items, currentZoomLevel } = getBreadcrumbsFromUrl(
@@ -124,10 +134,12 @@ const Breadcrumbs = () => {
         t
     )
 
-    const handleRedirect = (link: { pathname: string; query?: { zoomLevel: string } }) => {
-        const shallow = currentZoomLevel === 0 || (currentZoomLevel === 1 && link.pathname === '/')
-
-        if (router.query?.zoomLevel === link.query?.zoomLevel && link.pathname === router.asPath) {
+    const handleRedirect = (link?: { pathname: string; query?: { zoomLevel: string } }) => {
+        if (!link) return
+        const isFirstLevels = link.pathname === '/'
+        const shallow = currentZoomLevel === 0 || (currentZoomLevel === 1 && isFirstLevels)
+        const isTheSameLink = isFirstLevels ? link.pathname === router?.pathname : link?.pathname === router?.asPath
+        if (router.query?.zoomLevel === link.query?.zoomLevel && isTheSameLink) {
             router.reload()
             return
         }
@@ -136,26 +148,29 @@ const Breadcrumbs = () => {
     }
 
     return (
-        <Flex alignItems={'center'} position="absolute" zIndex={2} left={'24px'} top={'15px'}>
-            {items.map((item, index) => (
-                <>
-                    <Box
-                        as="div"
-                        mr={'10px'}
-                        cursor="pointer"
-                        textStyle="small"
-                        onClick={() => handleRedirect(item.link)}
-                    >
-                        {item.name}
-                    </Box>
-                    {index + 1 !== items.length && (
-                        <Box mr={'10px'} cursor="pointer">
-                            <ArrowRightIcon />
-                        </Box>
-                    )}
-                </>
-            ))}
-        </Flex>
+        <Box maxW={theme.breakpoints.xl} marginX={'auto'} position="absolute" left={0} right={0}>
+            <Flex alignItems={'center'} position="relative" zIndex={2} left={'32px'} top={'15px'}>
+                {items.map((item, index) => (
+                    <React.Fragment key={index}>
+                        <Link
+                            mr={'2.5'}
+                            variant={'decorative'}
+                            cursor="pointer"
+                            textStyle="small"
+                            onClick={() => handleRedirect(item.link)}
+                        >
+                            {item.name}
+                        </Link>
+                        {index + 1 !== items.length && (
+                            <Box mr={'2.5'} cursor="pointer">
+                                <ArrowRightIcon />
+                            </Box>
+                        )}
+                    </React.Fragment>
+                ))}
+            </Flex>
+        </Box>
+        // >>>>>>> develop
     )
 }
 
