@@ -144,6 +144,55 @@ export type ComponentCoreCarouselItemFiltersInput = {
     type?: InputMaybe<StringFilterInput>
 }
 
+export type ComponentCoreFeaturedFields = {
+    __typename?: 'ComponentCoreFeaturedFields'
+    id: Scalars['ID']
+    label: Scalars['String']
+    value: Scalars['String']
+}
+
+export type ComponentCoreFeaturedFieldsFiltersInput = {
+    and?: InputMaybe<Array<InputMaybe<ComponentCoreFeaturedFieldsFiltersInput>>>
+    label?: InputMaybe<StringFilterInput>
+    not?: InputMaybe<ComponentCoreFeaturedFieldsFiltersInput>
+    or?: InputMaybe<Array<InputMaybe<ComponentCoreFeaturedFieldsFiltersInput>>>
+    value?: InputMaybe<StringFilterInput>
+}
+
+export type ComponentCoreFields = {
+    __typename?: 'ComponentCoreFields'
+    id: Scalars['ID']
+    label?: Maybe<Scalars['String']>
+}
+
+export type ComponentCoreGridFeaturedFields = {
+    __typename?: 'ComponentCoreGridFeaturedFields'
+    id: Scalars['ID']
+    story?: Maybe<StoryEntityResponse>
+    subtitle?: Maybe<Scalars['String']>
+    thumbnail?: Maybe<UploadFileEntityResponse>
+    title?: Maybe<Scalars['String']>
+    triplyRecord?: Maybe<TriplyRecordEntityResponse>
+}
+
+export type ComponentCoreGridFeaturedFieldsFiltersInput = {
+    and?: InputMaybe<Array<InputMaybe<ComponentCoreGridFeaturedFieldsFiltersInput>>>
+    not?: InputMaybe<ComponentCoreGridFeaturedFieldsFiltersInput>
+    or?: InputMaybe<Array<InputMaybe<ComponentCoreGridFeaturedFieldsFiltersInput>>>
+    story?: InputMaybe<StoryFiltersInput>
+    subtitle?: InputMaybe<StringFilterInput>
+    title?: InputMaybe<StringFilterInput>
+    triplyRecord?: InputMaybe<TriplyRecordFiltersInput>
+}
+
+export type ComponentCoreItems = {
+    __typename?: 'ComponentCoreItems'
+    author?: Maybe<Scalars['String']>
+    id: Scalars['ID']
+    image?: Maybe<UploadFileEntityResponse>
+    title?: Maybe<Scalars['String']>
+}
+
 export type ComponentCoreModuleLayouts = {
     __typename?: 'ComponentCoreModuleLayouts'
     id: Scalars['ID']
@@ -346,6 +395,39 @@ export type ComponentModulesCarouselItemsArgs = {
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
 }
 
+export type ComponentModulesGridModule = {
+    __typename?: 'ComponentModulesGridModule'
+    buttons?: Maybe<Array<Maybe<ComponentCoreButton>>>
+    description?: Maybe<Scalars['String']>
+    featuredFields?: Maybe<Array<Maybe<ComponentCoreFeaturedFields>>>
+    fieldTitlesAreInverted: Scalars['Boolean']
+    fieldTypes: Enum_Componentmodulesgridmodule_Fieldtypes
+    fields?: Maybe<Array<Maybe<ComponentCoreGridFeaturedFields>>>
+    gridModuleLayout: ComponentCoreModuleLayouts
+    id: Scalars['ID']
+    pageSize: Scalars['Int']
+    showMoreButtonTitle: Scalars['String']
+    title?: Maybe<Scalars['String']>
+}
+
+export type ComponentModulesGridModuleButtonsArgs = {
+    filters?: InputMaybe<ComponentCoreButtonFiltersInput>
+    pagination?: InputMaybe<PaginationArg>
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
+}
+
+export type ComponentModulesGridModuleFeaturedFieldsArgs = {
+    filters?: InputMaybe<ComponentCoreFeaturedFieldsFiltersInput>
+    pagination?: InputMaybe<PaginationArg>
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
+}
+
+export type ComponentModulesGridModuleFieldsArgs = {
+    filters?: InputMaybe<ComponentCoreGridFeaturedFieldsFiltersInput>
+    pagination?: InputMaybe<PaginationArg>
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
+}
+
 export type ComponentModulesImage = {
     __typename?: 'ComponentModulesImage'
     alt_text?: Maybe<Scalars['String']>
@@ -488,6 +570,11 @@ export enum Enum_Componentmodulescarousel_Type {
     Themes = 'Themes',
 }
 
+export enum Enum_Componentmodulesgridmodule_Fieldtypes {
+    Stories = 'Stories',
+    TriplyRecords = 'TriplyRecords',
+}
+
 export enum Enum_Triplyrecord_Type {
     Archive = 'Archive',
     Media = 'Media',
@@ -536,6 +623,10 @@ export type GenericMorph =
     | Author
     | ComponentCoreButton
     | ComponentCoreCarouselItem
+    | ComponentCoreFeaturedFields
+    | ComponentCoreFields
+    | ComponentCoreGridFeaturedFields
+    | ComponentCoreItems
     | ComponentCoreModuleLayouts
     | ComponentCorePageHeader
     | ComponentCorePublicationDate
@@ -546,6 +637,7 @@ export type GenericMorph =
     | ComponentCoreTimeframe
     | ComponentModulesButtonsModule
     | ComponentModulesCarousel
+    | ComponentModulesGridModule
     | ComponentModulesImage
     | ComponentModulesImageCarousel
     | ComponentModulesPullquote
@@ -585,6 +677,7 @@ export type HomepageLocalizationsArgs = {
 export type HomepageComponentsDynamicZone =
     | ComponentModulesButtonsModule
     | ComponentModulesCarousel
+    | ComponentModulesGridModule
     | ComponentModulesImage
     | ComponentModulesImageCarousel
     | ComponentModulesPullquote
@@ -746,6 +839,7 @@ export type LandingpageLocalizationsArgs = {
 
 export type LandingpageComponentsDynamicZone =
     | ComponentModulesButtonsModule
+    | ComponentModulesGridModule
     | ComponentModulesImage
     | ComponentModulesImageCarousel
     | ComponentModulesPullquote
@@ -912,6 +1006,7 @@ export type MenupageLocalizationsArgs = {
 
 export type MenupageComponentsDynamicZone =
     | ComponentModulesButtonsModule
+    | ComponentModulesGridModule
     | ComponentModulesImage
     | ComponentModulesImageCarousel
     | ComponentModulesPullquote
@@ -1511,6 +1606,7 @@ export type StoryTriplyRecordsArgs = {
 
 export type StoryComponentsDynamicZone =
     | ComponentModulesButtonsModule
+    | ComponentModulesGridModule
     | ComponentModulesImage
     | ComponentModulesImageCarousel
     | ComponentModulesPullquote
@@ -2268,6 +2364,7 @@ export type HomepageFragmentFragment = {
                   } | null
               } | null> | null
           }
+        | { __typename?: 'ComponentModulesGridModule' }
         | {
               __typename: 'ComponentModulesImage'
               alt_text?: string | null
@@ -2571,6 +2668,7 @@ export type HomepageQuery = {
                                           } | null
                                       } | null> | null
                                   }
+                                | { __typename?: 'ComponentModulesGridModule' }
                                 | {
                                       __typename: 'ComponentModulesImage'
                                       alt_text?: string | null
@@ -2844,6 +2942,7 @@ export type HomepageQuery = {
                               } | null
                           } | null> | null
                       }
+                    | { __typename?: 'ComponentModulesGridModule' }
                     | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -3068,6 +3167,7 @@ export type LandingpageFragmentFragment = {
                   } | null
               } | null> | null
           }
+        | { __typename?: 'ComponentModulesGridModule' }
         | {
               __typename: 'ComponentModulesImage'
               alt_text?: string | null
@@ -3306,6 +3406,7 @@ export type LandingpageEntityFragmentFragment = {
                                   } | null
                               } | null> | null
                           }
+                        | { __typename?: 'ComponentModulesGridModule' }
                         | {
                               __typename: 'ComponentModulesImage'
                               alt_text?: string | null
@@ -3519,6 +3620,7 @@ export type LandingpageEntityFragmentFragment = {
                       } | null
                   } | null> | null
               }
+            | { __typename?: 'ComponentModulesGridModule' }
             | {
                   __typename: 'ComponentModulesImage'
                   alt_text?: string | null
@@ -3767,6 +3869,7 @@ export type LandingPageQuery = {
                                           } | null
                                       } | null> | null
                                   }
+                                | { __typename?: 'ComponentModulesGridModule' }
                                 | {
                                       __typename: 'ComponentModulesImage'
                                       alt_text?: string | null
@@ -3980,6 +4083,7 @@ export type LandingPageQuery = {
                               } | null
                           } | null> | null
                       }
+                    | { __typename?: 'ComponentModulesGridModule' }
                     | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -4233,6 +4337,7 @@ export type LandingPagesQuery = {
                                           } | null
                                       } | null> | null
                                   }
+                                | { __typename?: 'ComponentModulesGridModule' }
                                 | {
                                       __typename: 'ComponentModulesImage'
                                       alt_text?: string | null
@@ -4446,6 +4551,7 @@ export type LandingPagesQuery = {
                               } | null
                           } | null> | null
                       }
+                    | { __typename?: 'ComponentModulesGridModule' }
                     | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -4765,6 +4871,7 @@ export type MenupageFragmentFragment = {
                   } | null
               } | null> | null
           }
+        | { __typename?: 'ComponentModulesGridModule' }
         | {
               __typename: 'ComponentModulesImage'
               alt_text?: string | null
@@ -5001,6 +5108,7 @@ export type MenupageEntityFragmentFragment = {
                                   } | null
                               } | null> | null
                           }
+                        | { __typename?: 'ComponentModulesGridModule' }
                         | {
                               __typename: 'ComponentModulesImage'
                               alt_text?: string | null
@@ -5214,6 +5322,7 @@ export type MenupageEntityFragmentFragment = {
                       } | null
                   } | null> | null
               }
+            | { __typename?: 'ComponentModulesGridModule' }
             | {
                   __typename: 'ComponentModulesImage'
                   alt_text?: string | null
@@ -5460,6 +5569,7 @@ export type MenuPageQuery = {
                                           } | null
                                       } | null> | null
                                   }
+                                | { __typename?: 'ComponentModulesGridModule' }
                                 | {
                                       __typename: 'ComponentModulesImage'
                                       alt_text?: string | null
@@ -5673,6 +5783,7 @@ export type MenuPageQuery = {
                               } | null
                           } | null> | null
                       }
+                    | { __typename?: 'ComponentModulesGridModule' }
                     | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -5924,6 +6035,7 @@ export type MenuPagesQuery = {
                                           } | null
                                       } | null> | null
                                   }
+                                | { __typename?: 'ComponentModulesGridModule' }
                                 | {
                                       __typename: 'ComponentModulesImage'
                                       alt_text?: string | null
@@ -6137,6 +6249,7 @@ export type MenuPagesQuery = {
                               } | null
                           } | null> | null
                       }
+                    | { __typename?: 'ComponentModulesGridModule' }
                     | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -6381,6 +6494,7 @@ export type StoriesQuery = {
                               } | null
                           } | null> | null
                       }
+                    | { __typename: 'ComponentModulesGridModule' }
                     | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -6702,6 +6816,7 @@ export type StoryQuery = {
                               } | null
                           } | null> | null
                       }
+                    | { __typename: 'ComponentModulesGridModule' }
                     | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -7067,6 +7182,7 @@ export type StoryFragmentFragment = {
                       } | null
                   } | null> | null
               }
+            | { __typename: 'ComponentModulesGridModule' }
             | {
                   __typename: 'ComponentModulesImage'
                   alt_text?: string | null
@@ -8072,6 +8188,7 @@ export type TriplyRecordQuery = {
                                           } | null
                                       } | null> | null
                                   }
+                                | { __typename: 'ComponentModulesGridModule' }
                                 | {
                                       __typename: 'ComponentModulesImage'
                                       alt_text?: string | null
@@ -8406,6 +8523,7 @@ export type TriplyRecordsQuery = {
                                           } | null
                                       } | null> | null
                                   }
+                                | { __typename: 'ComponentModulesGridModule' }
                                 | {
                                       __typename: 'ComponentModulesImage'
                                       alt_text?: string | null
@@ -8733,6 +8851,7 @@ export type TriplyRecordFragmentFragment = {
                                   } | null
                               } | null> | null
                           }
+                        | { __typename: 'ComponentModulesGridModule' }
                         | {
                               __typename: 'ComponentModulesImage'
                               alt_text?: string | null
