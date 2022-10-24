@@ -15,6 +15,12 @@ interface Props {
     component: ComponentModulesGridModule
 }
 
+const gridBreakpoints = {
+    sm: 'repeat(1, 1fr)',
+    md: 'repeat(2, 1fr)',
+    lg: 'repeat(3, 1fr)',
+}
+
 export const GridModule: React.FC<Props> = props => {
     const pageSize = props.component.pageSize || 6
     const [showAmount, setShowAmount] = useState(pageSize)
@@ -55,15 +61,7 @@ export const GridModule: React.FC<Props> = props => {
         }
 
         return (
-            <Grid
-                mb={5}
-                templateColumns={{
-                    sm: 'repeat(1, 1fr)',
-                    md: 'repeat(2, 1fr)',
-                    lg: 'repeat(3, 1fr)',
-                }}
-                gap={5}
-            >
+            <Grid mb={5} templateColumns={gridBreakpoints} gap={5}>
                 <GridItem maxWidth={'55rem'} colSpan={2} paddingRight={31.5} paddingBottom={5}>
                     <Markdown>{props.component.description}</Markdown>
                 </GridItem>
@@ -93,7 +91,7 @@ export const GridModule: React.FC<Props> = props => {
         }
 
         return (
-            <Grid templateColumns={['repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(3, 1fr)']} gap={5}>
+            <Grid templateColumns={gridBreakpoints} gap={5}>
                 {take(props.component.fields, showAmount).map(field => renderField(field))}
             </Grid>
         )
@@ -111,13 +109,13 @@ export const GridModule: React.FC<Props> = props => {
         // this should prioritize the thumbnail that is uploaded and fall back on a story's thumbnail
         // I could not find an image url on the story type
         // TODO: fallback on story image thumbnail
-        const thumbnailUrl = field.thumbnail?.data?.attributes?.url
+        const thumbnailUrl = field.thumbnail?.data?.attributes?.url || 'broken'
         const thumbnailAlt = field.thumbnail?.data?.attributes?.alternativeText || field.title || 'image'
 
         return (
             <NextLink key={field.id} href={`/story/${field.story?.data?.id}}`}>
                 <GridItem w={'100%'} mb={10} cursor={'pointer'}>
-                    <Image mb={5} w={'100%'} src={thumbnailUrl || 'broken'} alt={thumbnailAlt} />
+                    <Image mb={5} w={'100%'} src={thumbnailUrl} alt={thumbnailAlt} />
                     {renderFieldTitles(field)}
                 </GridItem>
             </NextLink>
@@ -127,7 +125,7 @@ export const GridModule: React.FC<Props> = props => {
     function renderTriplyRecord(field: ComponentCoreGridItem) {
         // TODO: fallback on triply record image thumbnail
         const thumbnailUrl =
-            field.thumbnail?.data?.attributes?.url || field.triplyRecord?.data?.attributes?.object?.image
+            field.thumbnail?.data?.attributes?.url || field.triplyRecord?.data?.attributes?.object?.image || 'broken'
         const thumbnailAlt =
             field.thumbnail?.data?.attributes?.alternativeText ||
             field.triplyRecord?.data?.attributes?.object?.title ||
@@ -137,7 +135,7 @@ export const GridModule: React.FC<Props> = props => {
         return (
             <NextLink key={field.id} href={`/record/${field.triplyRecord?.data?.id}}`}>
                 <GridItem w={'100%'} mb={10} cursor={'pointer'}>
-                    <Image mb={5} w={'100%'} src={thumbnailUrl || 'broken'} alt={thumbnailAlt} />
+                    <Image mb={5} w={'100%'} src={thumbnailUrl} alt={thumbnailAlt} />
                     {renderFieldTitles(field)}
                 </GridItem>
             </NextLink>
@@ -180,7 +178,7 @@ export const GridModule: React.FC<Props> = props => {
                 renderBefore={() =>
                     !allFieldsAreShown && (
                         <Button onClick={() => setShowAmount(showAmount + pageSize)}>
-                            {props.component.loadMoreButtonTitle}
+                            {props.component.showMoreButtonTitle}
                         </Button>
                     )
                 }

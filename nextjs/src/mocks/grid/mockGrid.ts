@@ -58,7 +58,7 @@ export type ComponentModulesGridModule = {
     fields?: Maybe<Array<ComponentCoreGridItem>>
     buttons?: Maybe<Array<ComponentCoreButton>>
     gridModuleLayout: ComponentCoreModuleLayouts
-    loadMoreButtonTitle?: Maybe<Scalars['String']>
+    showMoreButtonTitle?: Maybe<Scalars['String']>
     pageSize?: Maybe<number>
 }
 
@@ -106,7 +106,7 @@ export const componentMock: ComponentModulesGridModule = {
     ],
     buttons: [aComponentCoreButton(), aComponentCoreButton(), aComponentCoreButton(), aComponentCoreButton()],
     gridModuleLayout: aComponentCoreModuleLayouts(),
-    loadMoreButtonTitle: 'Load More',
+    showMoreButtonTitle: 'Load More',
 }
 
 export const componentMock2: ComponentModulesGridModule = {
@@ -120,7 +120,7 @@ export const componentMock2: ComponentModulesGridModule = {
     fieldTitlesAreInverted: false,
     fields: [getGridTriplyRecord(), getGridTriplyRecord(), getGridTriplyRecord()],
     gridModuleLayout: aComponentCoreModuleLayouts(),
-    loadMoreButtonTitle: 'Load More',
+    showMoreButtonTitle: 'Load More',
 }
 
 export const componentMock3: ComponentModulesGridModule = {
@@ -137,5 +137,5 @@ export const componentMock3: ComponentModulesGridModule = {
         getGridTriplyRecord(),
     ],
     gridModuleLayout: aComponentCoreModuleLayouts(),
-    loadMoreButtonTitle: 'Load More',
+    showMoreButtonTitle: 'Load More',
 }

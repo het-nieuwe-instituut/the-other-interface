@@ -22,10 +22,14 @@
       "enum": [
         "TriplyRecords",
         "Stories"
-      ]
+      ],
+      "required": true,
+      "default": "Stories"
     },
     "fieldTitlesAreInverted": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": false,
+      "required": true
     },
     "fields": {
       "type": "component",
@@ -40,11 +44,12 @@
     "gridModuleLayout": {
       "type": "component",
       "repeatable": false,
-      "component": "core.module-layouts"
+      "component": "core.module-layouts",
+      "required": true
     },
-    "loadMoreButtonTitle": {
+    "showMoreButtonTitle": {
       "type": "string",
-      "default": "Load More",
+      "default": "Show More",
       "required": true
     },
     "pageSize": {
