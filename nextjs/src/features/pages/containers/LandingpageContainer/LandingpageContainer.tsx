@@ -70,7 +70,7 @@ export const LandingpageContainer: React.FC = () => {
                 top="-750px"
                 zIndex={40}
                 onClick={ScrollToTop}
-                cursor={scrollPosition > 750 ? 'pointer' : 'cursor'}
+                cursor={scrollPosition >= 750 ? 'pointer' : 'cursor'}
             >
                 <Box position={'sticky'} top="0px" height="0px">
                     <Breadcrumbs />
