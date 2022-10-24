@@ -199,7 +199,7 @@ export class ObjectsService {
             { record: uri }
         )
 
-        return TriplyUtils.combineObjectArray(result.data)
+        return { ...TriplyUtils.combineObjectArray(result.data), id: objectId }
     }
 
     public validateFilterInput(input: string): ObjectsZoomLevel3Ids {

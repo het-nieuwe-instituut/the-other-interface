@@ -4,7 +4,8 @@
   "info": {
     "singularName": "triply-record",
     "pluralName": "triply-records",
-    "displayName": "TriplyRecord"
+    "displayName": "TriplyRecord",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -18,11 +19,11 @@
     "type": {
       "type": "enumeration",
       "enum": [
-        "archive",
-        "object",
-        "people",
-        "publication",
-        "media"
+        "Archive",
+        "Object",
+        "People",
+        "Publication",
+        "Media"
       ],
       "required": true
     },

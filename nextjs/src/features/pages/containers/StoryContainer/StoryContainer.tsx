@@ -3,7 +3,7 @@ import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Box, Grid, GridItem, useTheme } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { StoryComponentsDynamicZone, useStoryBySlugQuery } from 'src/generated/graphql'
+import { StoryComponentsDynamicZone, StoryEntity, useStoryBySlugQuery } from 'src/generated/graphql'
 import { LandingPageQueryParams } from 'src/pages/landingpage/[slug]'
 import { StoryMeta } from '../../Meta/StoryMeta'
 
@@ -36,7 +36,7 @@ export const StoryContainer: React.FC = () => {
     const story = data?.stories?.data[0]
 
     return (
-        <Box px={{ xl: 6, base: 0 }} py={{ xl: 6, base: 0 }}>
+        <Box px={{ xl: 6, base: 0 }}>
             <Box backgroundColor={'white'} px={6} maxW={theme.breakpoints.xl} marginX={'auto'}>
                 <Grid
                     pt={6}
@@ -56,11 +56,13 @@ export const StoryContainer: React.FC = () => {
                         />
                     </GridItem>
                     <GridItem area={'meta'}>
-                        <StoryMeta story={story} />
+                        <StoryMeta story={story as StoryEntity} />
                     </GridItem>
                 </Grid>
             </Box>
-            <DynamicComponentRenderer components={data?.stories?.data[0]?.attributes?.components as StoryComponentsDynamicZone[]} />
+            <DynamicComponentRenderer
+                components={data?.stories?.data[0]?.attributes?.components as StoryComponentsDynamicZone[]}
+            />
         </Box>
     )
 }

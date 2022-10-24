@@ -1,11 +1,11 @@
 import React from 'react'
 import {  Flex } from '@chakra-ui/react'
-import { ComponentCoreCarouselItem, EnumComponentmodulescarouselType, EnumComponentcorecarouselitemType, Maybe } from 'src/generated/graphql';
-import { imageBasePath } from '@/features/modules/modulesConstants';
+import { ComponentCoreCarouselItem, EnumComponentmodulescarouselType, EnumComponentcorecarouselitemType, Maybe, TriplyRecord } from 'src/generated/graphql';
 import { CarouselMaker } from '../CarouselMaker/CarouselMaker';
 import { CarouselHighlightItem } from '../CarouselHighlightItem/CarouselHighlightItem';
 import { CarouselTheme } from '../CarouselTheme/CarouselTheme';
 import { usePresenter } from './usePresenter';
+import { extractDataFromTripley } from '@/features/modules/helpers/modulesHelpers';
 
 interface Props {
     items: Maybe<ComponentCoreCarouselItem>[]
@@ -20,16 +20,16 @@ export const CarouselSlide = (props: Props) => {
         return (
             <Flex key={`${key}`} mb={'3'} justifyContent={justifySlide}>
                 {items?.map((component, index) => {
-                    const image = component?.picture?.data?.attributes
-                    const imagePath = imageBasePath + image?.url
+                    const record = component?.triply_record?.data?.attributes
+                    const {image, name, description} = extractDataFromTripley(record as TriplyRecord, component)
 
                     if (type === EnumComponentmodulescarouselType?.Makers) {
                         return (
                             <CarouselMaker
-                                src={imagePath}
+                                src={image}
                                 key={index}
-                                name={component?.name ?? ''}
-                                description={component?.description ?? ''}
+                                name={name ?? ''}
+                                description={description ?? ''}
                                 boxSize={itemWidth}
                             />
                         )
@@ -38,10 +38,10 @@ export const CarouselSlide = (props: Props) => {
                     if (type === EnumComponentmodulescarouselType?.Highlights) {
                         return (
                             <CarouselHighlightItem
-                                src={imagePath}
+                                src={image}
                                 key={index}
-                                name={component?.name ?? ''}
-                                description={component?.description ?? ''}
+                                name={name ?? ''}
+                                description={description ?? ''}
                              />
                         )
                     }
@@ -50,8 +50,8 @@ export const CarouselSlide = (props: Props) => {
                         return (
                             <CarouselTheme
                                 key={index}
-                                name={component?.name ?? ''}
-                                description={component?.description ?? ''}
+                                name={name ?? ''}
+                                description={description ?? ''}
                                 boxSize={itemWidth}
                              />
                         )
@@ -61,10 +61,10 @@ export const CarouselSlide = (props: Props) => {
                         if (component?.type === EnumComponentcorecarouselitemType.Maker) {
                             return (
                                 <CarouselMaker
-                                    src={imagePath}
+                                    src={image}
                                     key={index}
-                                    name={component?.name ?? ''}
-                                    description={component?.description ?? ''}
+                                    name={name ?? ''}
+                                    description={description ?? ''}
                                     boxSize={itemWidth}
                                 />
                             )
@@ -73,10 +73,10 @@ export const CarouselSlide = (props: Props) => {
                         if(component?.type === EnumComponentcorecarouselitemType.Highlight) {
                             return (
                                 <CarouselHighlightItem
-                                    src={imagePath}
+                                    src={image}
                                     key={index}
-                                    name={component?.name ?? ''}
-                                    description={component?.description ?? ''}
+                                    name={name ?? ''}
+                                    description={description ?? ''}
                                     width={itemWidth}
                              />
                             )

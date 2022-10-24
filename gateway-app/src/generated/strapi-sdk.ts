@@ -458,27 +458,27 @@ export enum Enum_Componentcorecarouselitem_Type {
 }
 
 export enum Enum_Componentcoremodulelayouts_Spacingbottom {
-    Lg = 'lg',
-    Md = 'md',
-    Sm = 'sm',
-    Xl = 'xl',
+    Lg = 'Lg',
+    Md = 'Md',
+    Sm = 'Sm',
+    Xl = 'Xl',
 }
 
 export enum Enum_Componentcoremodulelayouts_Spacingtop {
-    Lg = 'lg',
-    Md = 'md',
-    Sm = 'sm',
-    Xl = 'xl',
+    Lg = 'Lg',
+    Md = 'Md',
+    Sm = 'Sm',
+    Xl = 'Xl',
 }
 
 export enum Enum_Componentcorepublicationdate_Displaytype {
-    Date = 'date',
-    Year = 'year',
+    Date = 'Date',
+    Year = 'Year',
 }
 
 export enum Enum_Componentmodulesbuttonsmodule_Buttonstyle {
-    Default = 'default',
-    Large = 'large',
+    Default = 'Default',
+    Large = 'Large',
 }
 
 export enum Enum_Componentmodulescarousel_Type {
@@ -489,11 +489,11 @@ export enum Enum_Componentmodulescarousel_Type {
 }
 
 export enum Enum_Triplyrecord_Type {
-    Archive = 'archive',
-    Media = 'media',
-    Object = 'object',
-    People = 'people',
-    Publication = 'publication',
+    Archive = 'Archive',
+    Media = 'Media',
+    Object = 'Object',
+    People = 'People',
+    Publication = 'Publication',
 }
 
 export type Error = {
