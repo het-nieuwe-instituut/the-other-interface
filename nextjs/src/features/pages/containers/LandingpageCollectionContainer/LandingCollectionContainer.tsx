@@ -81,7 +81,7 @@ export const LandingCollection: React.FC<{ data?: LandingpageBySlugQuery }> = ({
                 top="-750px"
                 zIndex={40}
                 onClick={ScrollToTop}
-                cursor={scrollPosition > 50 ? 'pointer' : 'cursor'}
+                cursor={scrollPosition > 750 ? 'pointer' : 'cursor'}
             >
                 <Box position={'sticky'} top="0px" height="0px">
                     <Breadcrumbs />
@@ -102,7 +102,7 @@ export const LandingCollection: React.FC<{ data?: LandingpageBySlugQuery }> = ({
             <Box px={{ xl: 6, base: 0 }}>
                 <Box backgroundColor={'white'} px={6} pt={6} maxW={theme.breakpoints.xl} marginX={'auto'} pb={1}>
                     <PageHeader
-                        showPointer={scrollPosition < 50}
+                        showPointer={scrollPosition < 750}
                         handleClick={ScrollToContent}
                         title={landingpage?.attributes?.Title || undefined}
                         preface={landingpage?.attributes?.Description || undefined}

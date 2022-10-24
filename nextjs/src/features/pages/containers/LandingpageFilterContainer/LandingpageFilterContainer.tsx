@@ -65,7 +65,7 @@ export const LandingpageFilterContainer: React.FC = () => {
                 top="-750px"
                 zIndex={40}
                 onClick={ScrollToTop}
-                cursor={scrollPosition > 50 ? 'pointer' : 'cursor'}
+                cursor={scrollPosition > 750 ? 'pointer' : 'cursor'}
             >
                 <Box position={'sticky'} top="0px" height="0px">
                     <Breadcrumbs />
@@ -86,7 +86,7 @@ export const LandingpageFilterContainer: React.FC = () => {
                     paddingTop={6}
                 >
                     <PageHeader
-                        showPointer={scrollPosition < 50}
+                        showPointer={scrollPosition < 750}
                         handleClick={ScrollToContent}
                         title={landingpage.attributes?.Title || undefined}
                         preface={landingpage.attributes?.Description || undefined}
