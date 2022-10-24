@@ -29,9 +29,11 @@ export const HomepageContainer = () => {
     return (
         <div>
             <Box backgroundColor="graph" height="800px" ref={graphRef}>
-                <Breadcrumbs />
                 {sizes?.height && sizes?.width && (
-                    <DynamicGalaxyNoSsr dimensions={{ height: 800, width: sizes?.width }} />
+                    <>
+                        <Breadcrumbs />
+                        <DynamicGalaxyNoSsr dimensions={{ height: 800, width: sizes?.width }} />
+                    </>
                 )}
             </Box>
             <Box px={{ xl: 6, base: 0 }}>

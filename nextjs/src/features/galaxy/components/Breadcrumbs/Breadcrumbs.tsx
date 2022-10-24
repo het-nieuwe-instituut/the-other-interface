@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Flex, useTheme } from '@chakra-ui/react'
+import { Box, Flex, Link, useTheme } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { ZoomLevel } from '../../types/galaxy'
 import ArrowRightIcon from '@/icons/arrows/arrow-right.svg'
@@ -133,13 +133,13 @@ const Breadcrumbs = () => {
 
     return (
         <Box maxW={theme.breakpoints.xl} marginX={'auto'} position='absolute' left={0} right={0}> 
-            <Flex alignItems={'center'} position='relative' zIndex={2} left={'24px'} top={'15px'}>
+            <Flex alignItems={'center'} position='relative' zIndex={2} left={'32px'} top={'15px'}>
                 {
                     items.map((item, index) => (
                         <React.Fragment key={index}>
-                            <Box as='div' mr={'10px'} cursor="pointer" textStyle='small' onClick={() => handleRedirect(item.link)}>{item.name}</Box>
+                            <Link mr={'2.5'} variant={'decorative'} cursor="pointer" textStyle='small' onClick={() => handleRedirect(item.link)}>{item.name}</Link>
                             {index + 1 !== items.length && (
-                                <Box mr={'10px'} cursor="pointer">
+                                <Box mr={'2.5'} cursor="pointer">
                                     <ArrowRightIcon />
                                 </Box>
                             ) }
