@@ -7666,6 +7666,18 @@
             "deprecationReason": null
           },
           {
+            "name": "populatedPublisher",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "PoepleZoomLevel5DetailType",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "publisher",
             "description": null,
             "args": [],
@@ -8070,6 +8082,18 @@
           },
           {
             "name": "populatedAuthor",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "PoepleZoomLevel5DetailType",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "populatedPublisher",
             "description": null,
             "args": [],
             "type": {
@@ -8544,6 +8568,18 @@
             "deprecationReason": null
           },
           {
+            "name": "populatedPublisher",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "PoepleZoomLevel5DetailType",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "publisher",
             "description": null,
             "args": [],
@@ -8833,6 +8869,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "populatedPublisher",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "PoepleZoomLevel5DetailType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -9763,6 +9811,22 @@
               "ofType": {
                 "kind": "OBJECT",
                 "name": "PublicationsBookZoomLevel5DetailType",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "publicationSerial",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "PublicationsSerialZoomLevel5DetailType",
                 "ofType": null
               }
             },

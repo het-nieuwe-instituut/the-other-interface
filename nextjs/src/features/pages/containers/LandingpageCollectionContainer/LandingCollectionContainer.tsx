@@ -1,8 +1,9 @@
-import { useSize } from '@chakra-ui/react-use-size'
+import Breadcrumbs from '@/features/galaxy/components/Breadcrumbs/Breadcrumbs'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { Box, Flex, useTheme } from '@chakra-ui/react'
+import { Box, useTheme } from '@chakra-ui/react'
+import { useSize } from '@chakra-ui/react-use-size'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import {
@@ -57,6 +58,7 @@ export const LandingCollection: React.FC<{ data?: LandingpageBySlugQuery }> = ({
 
     return (
         <>
+            <Breadcrumbs />
             <Box
                 // bgGradient="radial(50% 50% at 50% 50%, #B5FD99 0%, rgba(181, 253, 153, 0) 76.56%)"
                 backgroundColor="graph"

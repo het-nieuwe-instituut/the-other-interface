@@ -5,7 +5,7 @@ import { useSize } from '@chakra-ui/react-use-size'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
-import { HomepageComponentsDynamicZone, useHomepageQuery } from 'src/generated/graphql'
+import { HomepageComponentsDynamicZone, HomepageQuery, useHomepageQuery } from 'src/generated/graphql'
 
 export const DynamicGalaxyNoSsr = dynamic(() => import('../../../galaxy/Galaxy/Galaxy'), {
     ssr: false,
@@ -14,10 +14,6 @@ export const DynamicGalaxyNoSsr = dynamic(() => import('../../../galaxy/Galaxy/G
 export const HomepageContainer = () => {
     const { locale } = useRouter()
     const { data, loading, error } = useHomepageQuery({ variables: { locale } })
-    const graphRef = useRef<HTMLDivElement | null>(null)
-    const sizes = useSize(graphRef)
-    const theme = useTheme()
-
     if (loading) {
         return <p>loading</p>
     }
@@ -26,12 +22,22 @@ export const HomepageContainer = () => {
         return <p>{error.message}</p>
     }
 
+    return <Homepage data={data} />
+}
+
+const Homepage: React.FC<{ data?: HomepageQuery }> = ({ data }) => {
+    const graphRef = useRef<HTMLDivElement | null>(null)
+    const sizes = useSize(graphRef)
+    const theme = useTheme()
+
     return (
         <div>
             <Box backgroundColor="graph" height="800px" ref={graphRef}>
-                <Breadcrumbs />
                 {sizes?.height && sizes?.width && (
-                    <DynamicGalaxyNoSsr dimensions={{ height: 800, width: sizes?.width }} />
+                    <>
+                        <Breadcrumbs />
+                        <DynamicGalaxyNoSsr dimensions={{ height: 800, width: sizes?.width }} />
+                    </>
                 )}
             </Box>
             <Box px={{ xl: 6, base: 0 }}>

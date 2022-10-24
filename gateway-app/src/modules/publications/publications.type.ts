@@ -63,6 +63,9 @@ export class PublicationsAudioVisualZoomLevel5DetailType extends BasePublication
     @Field(() => String, { nullable: true })
     public publisherLabel?: string
 
+    @Field(() => PoepleZoomLevel5DetailType, { nullable: true })
+    public populatedPublisher?: PoepleZoomLevel5DetailType
+
     @Field(() => String, { nullable: true })
     public yearOfPublication?: string
 
@@ -171,6 +174,9 @@ export class PublicationsArticleZoomLevel5DetailType extends BasePublicationZoom
     @Field(() => String, { nullable: true })
     public publisherLabel?: string
 
+    @Field(() => PoepleZoomLevel5DetailType, { nullable: true })
+    public populatedPublisher?: PoepleZoomLevel5DetailType
+
     @Field(() => String, { nullable: true })
     public abstract?: string
 
@@ -227,6 +233,9 @@ export class PublicationsSerialZoomLevel5DetailType extends BasePublicationZoomL
 
     @Field(() => String, { nullable: true })
     public publisherLabel?: string
+
+    @Field(() => PoepleZoomLevel5DetailType, { nullable: true })
+    public populatedPublisher?: PoepleZoomLevel5DetailType
 
     @Field(() => String, { nullable: true })
     public yearOfPublication?: string
@@ -302,6 +311,9 @@ export class PublicationsBookZoomLevel5DetailType extends BasePublicationZoomLev
 
     @Field(() => String, { nullable: true })
     public publisherLabel?: string
+
+    @Field(() => PoepleZoomLevel5DetailType, { nullable: true })
+    public populatedPublisher?: PoepleZoomLevel5DetailType
 
     @Field(() => String, { nullable: true })
     public yearOfPublication?: string
