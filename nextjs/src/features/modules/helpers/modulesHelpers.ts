@@ -16,8 +16,8 @@ const extractDataFromTripley = (record: Maybe<Partial<TriplyRecord>>, component?
     }
 
     if (type === 'Archive') {
-        const item = record.archive as ArchivesFondsZoomLevel5DetailType 
-        const archiveName = record.archive?.type === ArchivesZoomLevel5Types.Fonds ? (record.archive as ArchivesFondsZoomLevel5DetailType)?.populatedCreator?.name  : (record.archive as ArchivesOtherZoomLevel5DetailType)?.title
+        const item = record.archive as ArchivesFondsZoomLevel5DetailType
+        const archiveName = record.archive?.type === ArchivesZoomLevel5Types.Fonds ? (record.archive as ArchivesFondsZoomLevel5DetailType)?.recordTitle  : (record.archive as ArchivesOtherZoomLevel5DetailType)?.title
         return {
             image: imagePath,
             name: component?.name ?? archiveName,
@@ -30,17 +30,17 @@ const extractDataFromTripley = (record: Maybe<Partial<TriplyRecord>>, component?
         return {
             image: imagePath,
             name: component?.name ?? item?.title,
-            description: component?.description ?? item?.populatedMaker?.name
+            description: component?.description ?? item?.objectNumber
         }
     }
 
     if (type === 'Publication') {
-        const item = record.publication as PublicationsArticleZoomLevel5DetailType
-        const name = record.publication?.type === PublicationsZoomLevel5Types.Serial ? (record.publication as PublicationsSerialZoomLevel5DetailType).populatedPublisher?.name : (record.publication as PublicationsArticleZoomLevel5DetailType).populatedAuthor?.profession
+        const description = record.publication?.type === PublicationsZoomLevel5Types.Serial ? (record.publication as PublicationsSerialZoomLevel5DetailType).yearOfPublication : (record.publication as PublicationsArticleZoomLevel5DetailType).objectNumber
+        const name = record.publication?.title
         return {
             image: imagePath,
             name: component?.name ?? name,
-            description: component?.description ?? item?.author 
+            description: component?.description ?? description
         }                             
     }
 
@@ -49,7 +49,7 @@ const extractDataFromTripley = (record: Maybe<Partial<TriplyRecord>>, component?
         return {
             image: imagePath,
             name:  component?.name ?? item?.name,
-            description: component?.description ?? item?.profession 
+            description: component?.description ?? item?.nameType 
         }
     }
     return defaultResult

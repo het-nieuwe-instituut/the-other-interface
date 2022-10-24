@@ -30,8 +30,14 @@ fragment carouselModuleFragment on ComponentModulesCarousel {
                             id
                             objectNumber
                             populatedCreator {
+                                id
                                 name
+                                nationality
+                                place
+                                birthDate
+                                professionLabel
                             }
+                            recordTitle
                             type
                         }
                     }
@@ -40,6 +46,7 @@ fragment carouselModuleFragment on ComponentModulesCarousel {
                         populatedMaker {
                             name
                         }
+                        objectNumber
                         image
                     }
                     publication {
@@ -47,7 +54,9 @@ fragment carouselModuleFragment on ComponentModulesCarousel {
                             id
                             type
                             title
+                            objectNumber
                             populatedAuthor{
+                                id
                                 profession,
                                 name
                             }
@@ -56,6 +65,7 @@ fragment carouselModuleFragment on ComponentModulesCarousel {
                             id
                             type
                             title
+                            objectNumber
                             populatedAuthor{
                                 profession,
                                 name
@@ -65,6 +75,7 @@ fragment carouselModuleFragment on ComponentModulesCarousel {
                             id
                             type
                             title
+                            yearOfPublication
                             populatedPublisher{
                                 name   
                             }
@@ -73,6 +84,7 @@ fragment carouselModuleFragment on ComponentModulesCarousel {
                             id
                             type
                             title
+                            objectNumber
                             populatedAuthor{
                                 profession,
                                 name
@@ -81,7 +93,7 @@ fragment carouselModuleFragment on ComponentModulesCarousel {
                     }
                     people {
                         name
-                        profession
+                        nameType
                     }
                 }
             }
