@@ -99,6 +99,7 @@ fragment ComponentModulesTitleModuleFragment on ComponentModulesTitleModule {
 }
 
 fragment ComponentModulesGridModuleFragment on ComponentModulesGridModule {
+    __typename
     id
     description
     pageSize

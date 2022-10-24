@@ -2365,7 +2365,7 @@ export type HomepageFragmentFragment = {
               } | null> | null
           }
         | {
-              __typename?: 'ComponentModulesGridModule'
+              __typename: 'ComponentModulesGridModule'
               id: string
               description?: string | null
               pageSize: number
@@ -2767,7 +2767,7 @@ export type HomepageQuery = {
                                       } | null> | null
                                   }
                                 | {
-                                      __typename?: 'ComponentModulesGridModule'
+                                      __typename: 'ComponentModulesGridModule'
                                       id: string
                                       description?: string | null
                                       pageSize: number
@@ -3139,7 +3139,7 @@ export type HomepageQuery = {
                           } | null> | null
                       }
                     | {
-                          __typename?: 'ComponentModulesGridModule'
+                          __typename: 'ComponentModulesGridModule'
                           id: string
                           description?: string | null
                           pageSize: number
@@ -3462,7 +3462,7 @@ export type LandingpageFragmentFragment = {
               } | null> | null
           }
         | {
-              __typename?: 'ComponentModulesGridModule'
+              __typename: 'ComponentModulesGridModule'
               id: string
               description?: string | null
               pageSize: number
@@ -3799,7 +3799,7 @@ export type LandingpageEntityFragmentFragment = {
                               } | null> | null
                           }
                         | {
-                              __typename?: 'ComponentModulesGridModule'
+                              __typename: 'ComponentModulesGridModule'
                               id: string
                               description?: string | null
                               pageSize: number
@@ -4111,7 +4111,7 @@ export type LandingpageEntityFragmentFragment = {
                   } | null> | null
               }
             | {
-                  __typename?: 'ComponentModulesGridModule'
+                  __typename: 'ComponentModulesGridModule'
                   id: string
                   description?: string | null
                   pageSize: number
@@ -4458,7 +4458,7 @@ export type LandingPageQuery = {
                                       } | null> | null
                                   }
                                 | {
-                                      __typename?: 'ComponentModulesGridModule'
+                                      __typename: 'ComponentModulesGridModule'
                                       id: string
                                       description?: string | null
                                       pageSize: number
@@ -4770,7 +4770,7 @@ export type LandingPageQuery = {
                           } | null> | null
                       }
                     | {
-                          __typename?: 'ComponentModulesGridModule'
+                          __typename: 'ComponentModulesGridModule'
                           id: string
                           description?: string | null
                           pageSize: number
@@ -5122,7 +5122,7 @@ export type LandingPagesQuery = {
                                       } | null> | null
                                   }
                                 | {
-                                      __typename?: 'ComponentModulesGridModule'
+                                      __typename: 'ComponentModulesGridModule'
                                       id: string
                                       description?: string | null
                                       pageSize: number
@@ -5434,7 +5434,7 @@ export type LandingPagesQuery = {
                           } | null> | null
                       }
                     | {
-                          __typename?: 'ComponentModulesGridModule'
+                          __typename: 'ComponentModulesGridModule'
                           id: string
                           description?: string | null
                           pageSize: number
@@ -5852,7 +5852,7 @@ export type MenupageFragmentFragment = {
               } | null> | null
           }
         | {
-              __typename?: 'ComponentModulesGridModule'
+              __typename: 'ComponentModulesGridModule'
               id: string
               description?: string | null
               pageSize: number
@@ -6187,7 +6187,7 @@ export type MenupageEntityFragmentFragment = {
                               } | null> | null
                           }
                         | {
-                              __typename?: 'ComponentModulesGridModule'
+                              __typename: 'ComponentModulesGridModule'
                               id: string
                               description?: string | null
                               pageSize: number
@@ -6499,7 +6499,7 @@ export type MenupageEntityFragmentFragment = {
                   } | null> | null
               }
             | {
-                  __typename?: 'ComponentModulesGridModule'
+                  __typename: 'ComponentModulesGridModule'
                   id: string
                   description?: string | null
                   pageSize: number
@@ -6844,7 +6844,7 @@ export type MenuPageQuery = {
                                       } | null> | null
                                   }
                                 | {
-                                      __typename?: 'ComponentModulesGridModule'
+                                      __typename: 'ComponentModulesGridModule'
                                       id: string
                                       description?: string | null
                                       pageSize: number
@@ -7156,7 +7156,7 @@ export type MenuPageQuery = {
                           } | null> | null
                       }
                     | {
-                          __typename?: 'ComponentModulesGridModule'
+                          __typename: 'ComponentModulesGridModule'
                           id: string
                           description?: string | null
                           pageSize: number
@@ -7506,7 +7506,7 @@ export type MenuPagesQuery = {
                                       } | null> | null
                                   }
                                 | {
-                                      __typename?: 'ComponentModulesGridModule'
+                                      __typename: 'ComponentModulesGridModule'
                                       id: string
                                       description?: string | null
                                       pageSize: number
@@ -7818,7 +7818,7 @@ export type MenuPagesQuery = {
                           } | null> | null
                       }
                     | {
-                          __typename?: 'ComponentModulesGridModule'
+                          __typename: 'ComponentModulesGridModule'
                           id: string
                           description?: string | null
                           pageSize: number
@@ -9875,7 +9875,7 @@ export type ComponentModulesTitleModuleFragmentFragment = {
 }
 
 export type ComponentModulesGridModuleFragmentFragment = {
-    __typename?: 'ComponentModulesGridModule'
+    __typename: 'ComponentModulesGridModule'
     id: string
     description?: string | null
     pageSize: number
@@ -11856,6 +11856,7 @@ export const ComponentCoreGridFeaturedFieldsFragmentFragmentDoc = gql`
 `
 export const ComponentModulesGridModuleFragmentFragmentDoc = gql`
     fragment ComponentModulesGridModuleFragment on ComponentModulesGridModule {
+        __typename
         id
         description
         pageSize
