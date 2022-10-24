@@ -77,6 +77,11 @@ const getBreadcrumbsFromUrl = (asPath: string, query:  { zoomLevel: ZoomLevel}, 
         currentZoomLevel = zoomLevel === ZoomLevel.Zoom1 ? 1 : 0
     }
 
+    const companyLevel = {
+        name: t('theNewInstitute'),
+        link: {pathname: '/'}
+    }
+
     const level0 = {
         name: t('zoom0'),
         link: {pathname: '/'}
@@ -96,8 +101,9 @@ const getBreadcrumbsFromUrl = (asPath: string, query:  { zoomLevel: ZoomLevel}, 
         currentZoomLevel = 5
     }
 
-    const rawItems = [level0, level1, getLevel2(t, pathArray[startLandingIndex + 1]), getLevel3(t, pathArray[startLandingIndex + 1], pathArray[startLandingIndex + 2]), getLevel4(t, pathArray[startLandingIndex + 1], pathArray[startLandingIndex + 2], pathArray[startLandingIndex + 3]), getLevel5(t, pathArray[startStoryIndex + 1])]
-    const items = rawItems.slice(0, currentZoomLevel + 1)
+    const rawItems = [companyLevel, level0, level1, getLevel2(t, pathArray[startLandingIndex + 1]), getLevel3(t, pathArray[startLandingIndex + 1], pathArray[startLandingIndex + 2]), getLevel4(t, pathArray[startLandingIndex + 1], pathArray[startLandingIndex + 2], pathArray[startLandingIndex + 3]), getLevel5(t, pathArray[startStoryIndex + 1])]
+    // company level and current level are always present, that's why it's +2
+    const items = rawItems.slice(0, currentZoomLevel + 2)
     return {
         items, 
         currentZoomLevel
@@ -112,7 +118,8 @@ const Breadcrumbs = () => {
 
     const {items, currentZoomLevel} = getBreadcrumbsFromUrl(router.asPath, router?.query as { zoomLevel: ZoomLevel}, t)
 
-    const handleRedirect = (link : {pathname: string, query?: {zoomLevel: string}}) => {
+    const handleRedirect = (link? : {pathname: string, query?: {zoomLevel: string}}) => {
+        if (!link) return
         const isFirstLevels = link.pathname === '/'
         const shallow = currentZoomLevel === 0 || currentZoomLevel === 1 && isFirstLevels
         const isTheSameLink = isFirstLevels ? link.pathname === router?.pathname : link?.pathname === router?.asPath
