@@ -7,9 +7,10 @@ import { Box, useTheme } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { LandingpageComponentsDynamicZone, useLandingpageBySlugQuery } from 'src/generated/graphql'
 import { LandingPageQueryParams } from 'src/pages/landingpage/[slug]'
+import { ScrollToContent, ScrollToTop } from '../../utils/utils'
 
 const DynamicFilterCloudsNoSsr = dynamic(() => import('../../../galaxy/FilterClouds/FilterCloudsContainer'), {
     ssr: false,
@@ -31,6 +32,20 @@ export const LandingpageContainer: React.FC = () => {
     const graphRef = useRef<HTMLDivElement | null>(null)
     const sizes = useSize(graphRef)
 
+    const [scrollPosition, setScrollPosition] = useState(0)
+    const handleScroll = () => {
+        const position = window.pageYOffset
+        setScrollPosition(position)
+    }
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll, { passive: true })
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll)
+        }
+    }, [])
+
     if (loading) {
         return <p>loading</p>
     }
@@ -47,8 +62,19 @@ export const LandingpageContainer: React.FC = () => {
 
     return (
         <>
-            <Box backgroundColor="graph" height="800px" ref={graphRef}>
-                <Breadcrumbs />
+            <Box
+                backgroundColor="graph"
+                height="800px"
+                ref={graphRef}
+                position={'sticky'}
+                top="-750px"
+                zIndex={40}
+                onClick={ScrollToTop}
+                cursor={scrollPosition > 50 ? 'pointer' : 'cursor'}
+            >
+                <Box position={'sticky'} top="0px" height="0px">
+                    <Breadcrumbs />
+                </Box>
                 {sizes?.height && sizes?.width && (
                     <DynamicFilterCloudsNoSsr type={type} dimensions={{ height: 800, width: sizes?.width }} />
                 )}
@@ -63,6 +89,8 @@ export const LandingpageContainer: React.FC = () => {
                     paddingTop={6}
                 >
                     <PageHeader
+                        showPointer={scrollPosition < 50}
+                        handleClick={ScrollToContent}
                         title={landingpage.attributes?.Title || undefined}
                         preface={landingpage.attributes?.Description || undefined}
                     />

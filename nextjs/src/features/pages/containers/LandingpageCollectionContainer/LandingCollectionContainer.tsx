@@ -4,7 +4,7 @@ import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Box, Flex, useTheme } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
     LandingpageBySlugQuery,
     LandingpageComponentsDynamicZone,
@@ -13,6 +13,7 @@ import {
 import { PaginatedCollectionContainer } from '../../../galaxy/Collections/PaginatedCollectionContainer'
 import { SupportedLandingPages } from '../../../galaxy/PaginatedFilterClouds/PaginatedFilterCloudsContainer'
 import Breadcrumbs from '@/features/galaxy/components/Breadcrumbs/Breadcrumbs'
+import { ScrollToContent, ScrollToTop } from '../../utils/utils'
 
 export interface LandingPageQueryParams {
     slug: SupportedLandingPages
@@ -52,29 +53,57 @@ export const LandingCollection: React.FC<{ data?: LandingpageBySlugQuery }> = ({
 
     const theme = useTheme()
 
+    const [scrollPosition, setScrollPosition] = useState(0)
+    const handleScroll = () => {
+        const position = window.pageYOffset
+        setScrollPosition(position)
+    }
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll, { passive: true })
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll)
+        }
+    }, [])
+
     const graphRef = useRef<HTMLDivElement | null>(null)
     const sizes = useSize(graphRef)
     const landingpage = data?.landingpages?.data[0]
 
     return (
         <>
-         <Breadcrumbs />
-            <Flex
-                // bgGradient="radial(50% 50% at 50% 50%, #B5FD99 0%, rgba(181, 253, 153, 0) 76.56%)"
+            <Box
                 backgroundColor="graph"
                 height="800px"
                 ref={graphRef}
-                justifyContent={'center'}
-                alignItems={'center'}
+                position={'sticky'}
+                top="-750px"
+                zIndex={40}
+                onClick={ScrollToTop}
+                cursor={scrollPosition > 50 ? 'pointer' : 'cursor'}
             >
-               
-                {sizes?.height && sizes?.width && (
-                    <PaginatedCollectionContainer type={type} dimensions={{ height: 800, width: sizes.width }} />
-                )}
-            </Flex>
+                <Box position={'sticky'} top="0px" height="0px">
+                    <Breadcrumbs />
+                </Box>
+                <Flex
+                    bgGradient="radial(50% 50% at 50% 50%, #B5FD99 0%, rgba(181, 253, 153, 0) 76.56%)"
+                    backgroundColor="graph"
+                    height="800px"
+                    ref={graphRef}
+                    justifyContent={'center'}
+                    alignItems={'center'}
+                >
+                    {sizes?.height && sizes?.width && (
+                        <PaginatedCollectionContainer type={type} dimensions={{ height: 800, width: sizes.width }} />
+                    )}
+                </Flex>
+            </Box>
             <Box px={{ xl: 6, base: 0 }}>
                 <Box backgroundColor={'white'} px={6} pt={6} maxW={theme.breakpoints.xl} marginX={'auto'} pb={1}>
                     <PageHeader
+                        showPointer={scrollPosition < 50}
+                        handleClick={ScrollToContent}
                         title={landingpage?.attributes?.Title || undefined}
                         preface={landingpage?.attributes?.Description || undefined}
                     />

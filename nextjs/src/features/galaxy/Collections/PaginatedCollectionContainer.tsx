@@ -206,10 +206,10 @@ export const PaginatedCollectionContainer: React.FunctionComponent<PaginatsedPro
                                                 )}
 
                                                 <Text
+                                                    pt={item.firstImage ? 1 : 5}
                                                     align={'center'}
                                                     overflowWrap={'normal'}
                                                     textStyle={'galaxyH4'}
-                                                    pt={1}
                                                 >
                                                     {item.title.length > 32
                                                         ? `${item.title.slice(0, 32)}...`

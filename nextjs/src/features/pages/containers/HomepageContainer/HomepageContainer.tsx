@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
 import { HomepageComponentsDynamicZone, HomepageQuery, useHomepageQuery } from 'src/generated/graphql'
+import { ScrollToTop } from '../../utils/utils'
 
 export const DynamicGalaxyNoSsr = dynamic(() => import('../../../galaxy/Galaxy/Galaxy'), {
     ssr: false,
@@ -54,16 +55,14 @@ const Homepage: React.FC<{ data?: HomepageQuery }> = ({ data }) => {
                 top="-750px"
                 zIndex={40}
                 onClick={ScrollToTop}
-                cursor={scrollPosition > 800 ? 'pointer' : 'cursor'} // Maybe?
+                cursor={scrollPosition > 50 ? 'pointer' : 'cursor'}
             >
                 <Box position={'sticky'} top="0px" height="0px">
                     <Breadcrumbs />
                 </Box>
-                <Box>
-                    {sizes?.height && sizes?.width && (
-                        <DynamicGalaxyNoSsr dimensions={{ height: 800, width: sizes?.width }} />
-                    )}
-                </Box>
+                {sizes?.height && sizes?.width && (
+                    <DynamicGalaxyNoSsr dimensions={{ height: 800, width: sizes?.width }} />
+                )}
             </Box>
             <Box px={{ xl: 6, base: 0 }}>
                 <Box backgroundColor={'white'} maxW={theme.breakpoints.xl} marginX={'auto'} paddingTop={6}>
@@ -74,11 +73,4 @@ const Homepage: React.FC<{ data?: HomepageQuery }> = ({ data }) => {
             </Box>
         </div>
     )
-
-    function ScrollToTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-        })
-    }
 }
