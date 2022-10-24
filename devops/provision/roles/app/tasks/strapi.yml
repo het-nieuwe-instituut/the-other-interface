@@ -13,7 +13,7 @@
     recreate: true
     volumes:
       - /data/strapi-uploads:/my-path/public/uploads
-    env: "{{ app.env|combine({'NODE_ENV': 'production', 'VIRTUAL_HOST': app.web.api_url, 'VIRTUAL_PATH': '/', 'VIRTUAL_DEST': '/', 'LETSENCRYPT_HOST': app.web.api_url}) }}"
+    env: "{{ app.env|combine({'NODE_ENV': server_environment_name, 'VIRTUAL_HOST': app.web.api_url, 'VIRTUAL_PATH': '/', 'VIRTUAL_DEST': '/', 'LETSENCRYPT_HOST': app.web.api_url}) }}"
     networks:
       - name: "app-network"
         aliases:

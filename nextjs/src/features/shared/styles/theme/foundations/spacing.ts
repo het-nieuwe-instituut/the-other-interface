@@ -33,10 +33,14 @@ const spacing = {
     80: '20rem',
     96: '24rem',
     sm: '0.938rem', // '15px'
+    Sm: '0.938rem', // '15px' added uppercase variant to fix conversion issues
     md: '1.25rem', // '20px',
+    Md: '1.25rem', // '20px', added uppercase variant to fix conversion issues
     '2md': '1.875rem', //'30px',
     lg: '2.813rem', // '45px',
+    Lg: '2.813rem', // '45px', added uppercase variant to fix conversion issues
     xl: '5rem', // '80px',
+    Xl: '5rem', // '80px', added uppercase variant to fix conversion issues
     '2xl': '7.5rem', // '120px',
 }
 

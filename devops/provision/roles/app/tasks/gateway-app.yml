@@ -11,7 +11,7 @@
     #   - 127.0.0.1:5000:5000
     exposed_ports:
       - "5000"
-    env: "{{ app.env|combine({'NODE_ENV': 'production', 'VIRTUAL_HOST': app.web.api_url, 'VIRTUAL_PATH': '/gateway/', 'VIRTUAL_DEST': '/', 'LETSENCRYPT_HOST': app.web.api_url, 'APP_PORT': '5000', 'STRAPI_GRAPHQL_URL': 'http://strapi:1337/graphql'}) }}"
+    env: "{{ app.env|combine({'NODE_ENV': server_environment_name, 'VIRTUAL_HOST': app.web.api_url, 'VIRTUAL_PATH': '/gateway/', 'VIRTUAL_DEST': '/', 'LETSENCRYPT_HOST': app.web.api_url, 'APP_PORT': '5000', 'STRAPI_GRAPHQL_URL': 'http://strapi:1337/graphql'}) }}"
     networks:
       - name: "app-network"
         aliases:
