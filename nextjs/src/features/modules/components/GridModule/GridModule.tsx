@@ -106,7 +106,6 @@ export const GridModule: React.FC<Props> = props => {
         index: number,
         array: ComponentCoreGridFeaturedFields[]
     ) {
-        console.log(field)
         if (props.component.fieldTypes === EnumComponentmodulesgridmoduleFieldtypes.Stories) {
             return renderStory(field, index, array)
         }
@@ -191,7 +190,6 @@ export const GridModule: React.FC<Props> = props => {
     }
 
     function renderButtons() {
-        console.log(props.component.buttons)
         if (!props.component.buttons) {
             return
         }
