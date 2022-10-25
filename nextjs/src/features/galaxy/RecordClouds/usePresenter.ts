@@ -1,12 +1,26 @@
-import { useRef } from 'react'
+import { useCallback, useRef } from 'react'
 import { ObjectRelationsQuery } from 'src/generated/graphql'
-import { usePositionClouds } from './hooks/usePositionClouds'
+import { useD3HeroAnimateElement } from './hooks/useD3ClickAnimation'
 import { useD3CloudAnimationIn } from './hooks/useD3CloudAnimationIn'
+import { usePositionClouds } from './hooks/usePositionClouds'
+import { SVG_DIMENSIONS } from './RecordClouds'
 
+type Item = NonNullable<ObjectRelationsQuery['relations']>[0]
 export function usePresenter(relations: ObjectRelationsQuery['relations']) {
     const svgRef = useRef<SVGSVGElement | null>(null)
     const { relationsPositionData } = usePositionClouds(relations)
-    useD3CloudAnimationIn(svgRef)
+    const navigateTo = useCallback(async (d: d3.SimulationNodeDatum & Item) => {
+        console.log('navigate', d)
+    }, [])
+    const zoomEvents = useD3HeroAnimateElement<Item>(
+        svgRef,
+        relationsPositionData,
+        { width: SVG_DIMENSIONS.width, height: SVG_DIMENSIONS.height },
+        `.foreign-child`,
+        navigateTo
+    )
 
-    return { svgRef, relationsPositionData }
+    useD3CloudAnimationIn(svgRef, zoomEvents.zoomed)
+
+    return { svgRef, relationsPositionData, ...zoomEvents }
 }

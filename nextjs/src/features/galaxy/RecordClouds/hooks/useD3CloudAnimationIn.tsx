@@ -1,7 +1,7 @@
 import * as d3 from 'd3'
 import { MutableRefObject, useEffect } from 'react'
 
-export function useD3CloudAnimationIn(d3Svg: MutableRefObject<SVGSVGElement | null>) {
+export function useD3CloudAnimationIn(d3Svg: MutableRefObject<SVGSVGElement | null>, trigger: boolean) {
     useEffect(() => {
         async function animate() {
             const tHighlight = d3.transition().duration(900).ease(d3.easeCubic)
@@ -26,4 +26,24 @@ export function useD3CloudAnimationIn(d3Svg: MutableRefObject<SVGSVGElement | nu
 
         animate()
     }, [d3Svg])
+
+    useEffect(() => {
+        async function animateOut() {
+            const tHighlight = d3.transition().duration(900).ease(d3.easeCubic)
+            const tParents = d3.transition().duration(1100).ease(d3.easeCubic)
+            const d3SVG = d3.select(d3Svg.current)
+            const foreignParents = d3SVG.selectAll(`.foreign-parent`)
+            const foreignHiglights = d3SVG.selectAll(`.foreign-highlight`)
+            const foreignChildren = d3SVG.selectAll(`.foreign-child:not(#foreign-hero)`)
+            foreignHiglights.style('transform-origin', 'center')
+            foreignParents.style('transform-origin', 'center')
+            foreignChildren.style('transform-origin', 'center')
+            foreignParents.transition(tParents).attr('opacity', 0)
+            foreignHiglights.transition(tHighlight).attr('opacity', 0)
+            foreignChildren.transition().duration(1000).attr('opacity', 0)
+        }
+        if (trigger) {
+            animateOut()
+        }
+    }, [d3Svg, trigger])
 }

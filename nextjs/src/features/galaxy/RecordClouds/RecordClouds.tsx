@@ -40,8 +40,8 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions, zoomLevel5, 
                     return (
                         <>
                             <Circle
+                                key={`${index}-${array.length}-${relation.label}`}
                                 className="parent"
-                                key={`${index}-${array.length}-parent`}
                                 hoverBackground={relation.background}
                                 defaultBackground={relation.background}
                                 x={relation.x}
@@ -59,8 +59,8 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions, zoomLevel5, 
                             {relation.children.map((child, index, array) => {
                                 return (
                                     <Circle
+                                        key={`${index}-${array.length}-${child.label}`}
                                         className="child"
-                                        key={`${index}-${array.length}-child`}
                                         hoverBackground={`typeColors.${relation.type.toLowerCase()}.related`}
                                         defaultBackground={`typeColors.${relation.type.toLowerCase()}.related`}
                                         x={child.x}
