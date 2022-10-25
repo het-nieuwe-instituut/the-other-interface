@@ -35,8 +35,8 @@ const Homepage: React.FC<{ data?: HomepageQuery }> = ({ data }) => {
     return (
         <Box>
             <GalaxyWrapper
-                renderHeader={() => <Breadcrumbs />}
-                renderFooter={() => <GalaxyButton text="Go to searchportal" />}
+                renderTop={() => <Breadcrumbs />}
+                renderBottom={() => <GalaxyButton text="Go to searchportal" />}
                 renderGalaxy={() => (
                     <Box backgroundColor="graph" height="800px" ref={graphRef}>
                         {sizes?.height && sizes?.width && (
