@@ -72,12 +72,11 @@ export const LandingpageContainer: React.FC = () => {
                 onClick={ScrollToTop}
                 cursor={scrollPosition >= 750 ? 'pointer' : 'cursor'}
             >
-                <Box position={'sticky'} top="0px" height="0px">
-                    <Breadcrumbs />
-                </Box>
-
                 {sizes?.height && sizes?.width && (
-                    <DynamicFilterCloudsNoSsr type={type} dimensions={{ height: 800, width: sizes?.width }} />
+                    <>
+                        <Breadcrumbs />
+                        <DynamicFilterCloudsNoSsr type={type} dimensions={{ height: 800, width: sizes?.width }} />
+                    </>
                 )}
             </Box>
             <Box px={{ xl: 6, base: 0 }}>

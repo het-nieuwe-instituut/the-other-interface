@@ -148,7 +148,7 @@ const Breadcrumbs = () => {
     }
 
     return (
-        <Box maxW={theme.breakpoints.xl} marginX={'auto'} position="absolute" left={0} right={0}>
+        <Box maxW={theme.breakpoints.xl} marginX={'auto'} left={0} right={0} position={'sticky'} top="0px" height="0px">
             <Flex alignItems={'center'} position="relative" zIndex={2} left={'32px'} top={'15px'}>
                 {items.map((item, index) => (
                     <React.Fragment key={index}>

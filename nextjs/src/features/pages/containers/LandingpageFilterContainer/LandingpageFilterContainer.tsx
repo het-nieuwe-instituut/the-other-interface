@@ -67,12 +67,15 @@ export const LandingpageFilterContainer: React.FC = () => {
                 onClick={ScrollToTop}
                 cursor={scrollPosition >= 750 ? 'pointer' : 'cursor'}
             >
-                <Box position={'sticky'} top="0px" height="0px">
-                    <Breadcrumbs />
-                </Box>
                 <Box backgroundColor="graph" height="800px" ref={graphRef}>
                     {sizes?.height && sizes?.width && (
-                        <PaginatedFilterCloudsContainer type={type} dimensions={{ height: 800, width: sizes?.width }} />
+                        <>
+                            <Breadcrumbs />
+                            <PaginatedFilterCloudsContainer
+                                type={type}
+                                dimensions={{ height: 800, width: sizes?.width }}
+                            />
+                        </>
                     )}
                 </Box>
             </Box>

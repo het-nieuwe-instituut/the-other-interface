@@ -83,9 +83,6 @@ export const LandingCollection: React.FC<{ data?: LandingpageBySlugQuery }> = ({
                 onClick={ScrollToTop}
                 cursor={scrollPosition >= 750 ? 'pointer' : 'cursor'}
             >
-                <Box position={'sticky'} top="0px" height="0px">
-                    <Breadcrumbs />
-                </Box>
                 <Flex
                     bgGradient="radial(50% 50% at 50% 50%, #B5FD99 0%, rgba(181, 253, 153, 0) 76.56%)"
                     backgroundColor="graph"
@@ -95,7 +92,13 @@ export const LandingCollection: React.FC<{ data?: LandingpageBySlugQuery }> = ({
                     alignItems={'center'}
                 >
                     {sizes?.height && sizes?.width && (
-                        <PaginatedCollectionContainer type={type} dimensions={{ height: 800, width: sizes.width }} />
+                        <>
+                            <Breadcrumbs />
+                            <PaginatedCollectionContainer
+                                type={type}
+                                dimensions={{ height: 800, width: sizes.width }}
+                            />
+                        </>
                     )}
                 </Flex>
             </Box>
