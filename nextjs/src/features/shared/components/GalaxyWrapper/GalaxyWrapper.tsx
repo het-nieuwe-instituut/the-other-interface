@@ -1,20 +1,54 @@
-import { Box } from '@chakra-ui/react'
+import { Box, Flex, useTheme } from '@chakra-ui/react'
 
 interface Props {
-    renderTop: () => JSX.Element
-    renderBottom: () => JSX.Element
+    renderTopLeft?: () => JSX.Element
+    renderTopRight?: () => JSX.Element
+    renderBottom?: () => JSX.Element
     renderGalaxy: () => JSX.Element
 }
 
 export const GalaxyWrapper: React.FC<Props> = props => {
+    const theme = useTheme()
     return (
         <Box display="block" position={'relative'}>
-            <Box zIndex={2} pointerEvents={'none'} position={'absolute'} top={0} right={0} left={0}>
-                {props.renderTop()}
-            </Box>
-            <Box zIndex={2} pointerEvents={'none'} position={'absolute'} bottom={0} right={0} left={0}>
-                {props.renderBottom()}
-            </Box>
+            <Flex
+                zIndex={2}
+                maxW={theme.breakpoints.xl}
+                marginX={'auto'}
+                position="absolute"
+                left={0}
+                right={0}
+                justifyContent={'space-between'}
+            >
+                <Flex alignItems={'center'} position="relative" zIndex={2} left={'32px'} top={'15px'}>
+                    {props.renderTopLeft?.()}
+                </Flex>
+                <Flex alignItems={'center'} position="relative" zIndex={2} right={'32px'} top={'15px'}>
+                    {props?.renderTopRight?.()}
+                </Flex>
+            </Flex>
+            <Flex
+                zIndex={2}
+                maxW={theme.breakpoints.xl}
+                marginX={'auto'}
+                position="absolute"
+                left={0}
+                right={0}
+                bottom={0}
+                justifyContent={'space-between'}
+                backgroundColor={'#f0f'}
+            >
+                <Flex
+                    alignItems={'center'}
+                    position="relative"
+                    zIndex={2}
+                    left={'32px'}
+                    right={'32px'}
+                    backgroundColor={'#0f0'}
+                >
+                    {props?.renderBottom?.()}
+                </Flex>
+            </Flex>
             <Box zIndex={1} bottom={0} right={0} left={0}>
                 {props.renderGalaxy()}
             </Box>
