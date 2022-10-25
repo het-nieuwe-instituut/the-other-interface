@@ -1,7 +1,8 @@
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 export interface ZoomLevel3ReturnData {
-    count: string
-    label: string
+    total: string | null
+    count: string | null
+    label: string | null
     iri: string
 }
 
@@ -108,25 +109,12 @@ export class TriplyUtils {
     }
 
     public static parseLevel3OutputData(input: ZoomLevel3ReturnData[]) {
-        const totalRow = input.find(r => r.label === '@total')
-        const total = totalRow ? totalRow.count : null
-
-        const output = []
-
-        for (const d of input) {
-            if (d.label === '@total') {
-                continue
-            }
-
-            output.push({
-                uri: d.iri,
-                name: d.label || null,
-                count: d.count ? parseInt(d.count, 10) : null,
-                total,
-            })
-        }
-
-        return output
+        return input.map(i => ({
+            uri: i.iri,
+            name: i.label || null,
+            count: i.count ? parseInt(i.count, 10) : null,
+            total: i.total ? parseInt(i.total, 10) : null,
+        }))
     }
 
     // eslint-disable-next-line @typescript-eslint/ban-types

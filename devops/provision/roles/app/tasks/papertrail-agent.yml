@@ -1,0 +1,10 @@
+---
+- name: papertrail | agent | start
+  docker_container:
+    name: "papertrail-agent"
+    image: gliderlabs/logspout:latest
+    pull: true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    command: "{{ app.log.papertrail.destination }}"
+  tags: [papertrail, log]
