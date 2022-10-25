@@ -1,4 +1,5 @@
 {
     "nationalCollectionForDutchArchitectureAndUrbanPlanning": "National Collectie voor Nederlandse Architectuur en Stadsplanning",
-    "stories": "Stories"
+    "stories": "Stories",
+    "archiveItems": "{{count}} archive items"
 }
