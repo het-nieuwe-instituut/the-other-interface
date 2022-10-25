@@ -37,6 +37,7 @@ const buttonConfig = {
 }
 
 export const ButtonsGrid: React.FC<Props> = props => {
+    console.log(props)
     if (props.buttonStyle === EnumComponentmodulesbuttonsmoduleButtonstyle.Large) {
         return (
             <Grid templateColumns={{ base: '1fr', md: 'auto auto' }} gap={5}>
@@ -92,6 +93,7 @@ const GridButton: React.FC<GridButtonProps> = ({ button, index, array, config })
             <Button
                 variant={config.variant}
                 as={'a'}
+                // 1. add correct righticon
                 rightIcon={renderExternalLink(button)}
                 target={
                     !!button.url && isExternalURL(button.url, pageConfiguration.data?.host ?? '') ? '_blank' : undefined
