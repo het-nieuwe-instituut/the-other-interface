@@ -158,11 +158,11 @@ const Breadcrumbs = () => {
             height="0px"
             zIndex={2}
         >
-            <Flex alignItems={'center'} position="relative" left={'32px'} top={'15px'}>
+            <Flex alignItems={'center'} position="relative" left={'32px'} top={'15px'} zIndex={2}>
                 {items.map((item, index) => (
                     <React.Fragment key={index}>
                         <Link
-                            mr={'2.5'}
+                            mr={index === 0 ? '5' : '2.5'}
                             variant={'decorative'}
                             cursor="pointer"
                             textStyle="small"
@@ -170,7 +170,7 @@ const Breadcrumbs = () => {
                         >
                             {item.name}
                         </Link>
-                        {index + 1 !== items.length && (
+                        {index + 1 !== items.length && index !==0 && (
                             <Box mr={'2.5'} cursor="pointer">
                                 <ArrowRightIcon />
                             </Box>
@@ -178,7 +178,8 @@ const Breadcrumbs = () => {
                     </React.Fragment>
                 ))}
             </Flex>
-        </Box>
+        </Box>    
+        
     )
 }
 
