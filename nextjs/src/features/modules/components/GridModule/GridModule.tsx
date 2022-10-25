@@ -4,12 +4,14 @@ import { Markdown } from '@/features/shared/components/Markdown/Markdown'
 import { Box, Button, Grid, GridItem, Image, Text } from '@chakra-ui/react'
 import { take } from 'lodash'
 import { useState } from 'react'
-import {
-    ComponentCoreGridItem,
-    ComponentModulesGridModule,
-    EnumComponentfieldTypes,
-} from '../../../../mocks/grid/mockGrid'
 import NextLink from 'next/link'
+import {
+    ComponentCoreGridFeaturedFields,
+    ComponentModulesGridModule,
+    EnumComponentmodulesgridmoduleFieldtypes,
+} from 'src/generated/graphql'
+import { imageBasePath } from '../../modulesConstants'
+import { ExtractedTriplyFields, extractTriplyFields } from '../../helpers/triplyDataExtractor'
 
 interface Props {
     component: ComponentModulesGridModule
@@ -68,8 +70,8 @@ export const GridModule: React.FC<Props> = props => {
                 {props.component.featuredFields && (
                     <GridItem mb={5}>
                         <Grid gap={6}>
-                            {props.component.featuredFields.map(field => (
-                                <GridItem key={field.id}>
+                            {props.component.featuredFields.map((field, index, array) => (
+                                <GridItem key={keyExtractor(field.id, index, array)}>
                                     <Text textStyle="h5" as={'h5'} mb={1}>
                                         {field.value}
                                     </Text>
@@ -92,62 +94,82 @@ export const GridModule: React.FC<Props> = props => {
 
         return (
             <Grid templateColumns={gridBreakpoints} gap={5}>
-                {take(props.component.fields, showAmount).map(field => renderField(field))}
+                {take(props.component.fields, showAmount).map((field, index, array) =>
+                    renderField(field, index, array)
+                )}
             </Grid>
         )
     }
 
-    function renderField(field: ComponentCoreGridItem) {
-        if (props.component.fieldTypes === EnumComponentfieldTypes.Stories) {
-            return renderStory(field)
+    function renderField(
+        field: ComponentCoreGridFeaturedFields,
+        index: number,
+        array: ComponentCoreGridFeaturedFields[]
+    ) {
+        console.log(field)
+        if (props.component.fieldTypes === EnumComponentmodulesgridmoduleFieldtypes.Stories) {
+            return renderStory(field, index, array)
         }
 
-        return renderTriplyRecord(field)
+        return renderTriplyRecord(field, index, array)
     }
 
-    function renderStory(field: ComponentCoreGridItem) {
+    function renderStory(
+        field: ComponentCoreGridFeaturedFields,
+        index: number,
+        array: ComponentCoreGridFeaturedFields[]
+    ) {
         // this should prioritize the thumbnail that is uploaded and fall back on a story's thumbnail
         // I could not find an image url on the story type
         // TODO: fallback on story image thumbnail
-        const thumbnailUrl = field.thumbnail?.data?.attributes?.url || 'broken'
+        const thumbnailUrl = imageBasePath + (field.thumbnail?.data?.attributes?.url || 'broken')
         const thumbnailAlt = field.thumbnail?.data?.attributes?.alternativeText || field.title || 'image'
 
         return (
-            <NextLink key={field.id} href={`/story/${field.story?.data?.id}}`}>
+            <NextLink
+                key={keyExtractor(field.id, index, array)}
+                href={`/story/${field.story?.data?.attributes?.slug}}`}
+            >
                 <GridItem w={'100%'} mb={10} cursor={'pointer'}>
                     <Image mb={5} w={'100%'} src={thumbnailUrl} alt={thumbnailAlt} />
-                    {renderFieldTitles(field)}
+                    {renderFieldTitles({
+                        title: field.title || '',
+                        description: field.subtitle || '',
+                    })}
                 </GridItem>
             </NextLink>
         )
     }
 
-    function renderTriplyRecord(field: ComponentCoreGridItem) {
-        // TODO: fallback on triply record image thumbnail
-        const thumbnailUrl =
-            field.thumbnail?.data?.attributes?.url || field.triplyRecord?.data?.attributes?.object?.image || 'broken'
-        const thumbnailAlt =
-            field.thumbnail?.data?.attributes?.alternativeText ||
-            field.triplyRecord?.data?.attributes?.object?.title ||
-            field.title ||
-            'image'
+    function renderTriplyRecord(
+        field: ComponentCoreGridFeaturedFields,
+        index: number,
+        array: ComponentCoreGridFeaturedFields[]
+    ) {
+        const extractedFields = extractTriplyFields(
+            {
+                title: field.title || '',
+                description: field.subtitle || '',
+                imageUrl: field.thumbnail?.data?.attributes?.url || 'broken',
+            },
+            field.triplyRecord?.data?.attributes
+        )
 
+        // TODO: NextLink integration to a page where you can view a triply record
         return (
-            <NextLink key={field.id} href={`/record/${field.triplyRecord?.data?.id}}`}>
-                <GridItem w={'100%'} mb={10} cursor={'pointer'}>
-                    <Image mb={5} w={'100%'} src={thumbnailUrl} alt={thumbnailAlt} />
-                    {renderFieldTitles(field)}
-                </GridItem>
-            </NextLink>
+            <GridItem key={keyExtractor(field.id, index, array)} w={'100%'} mb={10} cursor={'pointer'}>
+                <Image mb={5} w={'100%'} src={extractedFields.imageUrl} alt={extractedFields.title} />
+                {renderFieldTitles(extractedFields)}
+            </GridItem>
         )
     }
 
-    function renderFieldTitles(field: ComponentCoreGridItem) {
+    function renderFieldTitles(field: Pick<ExtractedTriplyFields, 'description' | 'title'>) {
         if (props.component.fieldTitlesAreInverted) {
             return (
                 <>
                     <Text textStyle={'p'} as={'p'} fontSize={'small'} mb={1}>
-                        {field.subtitle}
+                        {field.description}
                     </Text>
                     <Text textStyle="h4" as={'h4'}>
                         {field.title}
@@ -162,13 +184,14 @@ export const GridModule: React.FC<Props> = props => {
                     {field.title}
                 </Text>
                 <Text textStyle={'p'} as={'p'} fontSize={'small'}>
-                    {field.subtitle}
+                    {field.description}
                 </Text>
             </>
         )
     }
 
     function renderButtons() {
+        console.log(props.component.buttons)
         if (!props.component.buttons) {
             return
         }
@@ -182,9 +205,14 @@ export const GridModule: React.FC<Props> = props => {
                         </Button>
                     )
                 }
-                buttons={props.component.buttons ?? []}
+                buttons={props.component.buttons}
                 flexDirection={undefined}
             />
         )
     }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function keyExtractor(id: string, index: number, array: any[]) {
+    return `${id}-${index}-${array.length}`
 }
