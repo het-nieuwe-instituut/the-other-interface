@@ -1,14 +1,19 @@
 import { Args, Query, Resolver } from '@nestjs/graphql'
 import { ArchivesZoomLevel5Types } from '../archives/archives.service'
-import { ArchivesFondsZoomLevel5DetailType, ArchivesOtherZoomLevel5DetailType } from '../archives/archives.type'
+import {
+    ArchivesFondsZoomLevel5DetailType,
+    ArchivesOtherZoomLevel5DetailType,
+    ArchiveZoomLevel5UnionType,
+} from '../archives/archives.type'
 import { ObjectsZoomLevel5DetailType } from '../objects/objects.type'
 import { PoepleZoomLevel5DetailType } from '../people/people.type'
-import { PublicationsZoomLevel5Types } from '../publications/publications.service'
+import { PublicationsService, PublicationsZoomLevel5Types } from '../publications/publications.service'
 import {
     PublicationsArticleZoomLevel5DetailType,
     PublicationsAudioVisualZoomLevel5DetailType,
     PublicationsBookZoomLevel5DetailType,
     PublicationsSerialZoomLevel5DetailType,
+    PublicationZoomLevel5UnionType,
 } from '../publications/publications.type'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { ZoomLevel5Service } from './zoomLevel5.service'
@@ -18,10 +23,15 @@ import {
     ZoomLevel5RelatedRecordType,
     ZoomLevel5RelationsType,
 } from './zoomLevel5.type'
+import { ArchivesService } from '../archives/archives.service'
 
 @Resolver(ZoomLevel5RelationsType)
 export class ZoomLevel5Resolver {
-    public constructor(private readonly zoomLevel5Service: ZoomLevel5Service) {}
+    public constructor(
+        private readonly zoomLevel5Service: ZoomLevel5Service,
+        private readonly archivesService: ArchivesService,
+        private readonly publicationsService: PublicationsService
+    ) {}
 
     @Query(() => [ZoomLevel5RelationsType], { nullable: true })
     public relations(@Args() args: ZoomLevel5Args) {
@@ -41,6 +51,15 @@ export class ZoomLevel5Resolver {
     @Query(() => PoepleZoomLevel5DetailType, { nullable: true })
     public zoomLevel5Person(@Args('id') objectId: string) {
         return this.zoomLevel5Service.getDetail(objectId, EntityNames.People)
+    }
+
+    @Query(() => PublicationZoomLevel5UnionType, { nullable: true })
+    public async zoomLevel5Publication(@Args('id') objectId: string) {
+        const type = await this.publicationsService.determinePublicationType(objectId)
+
+        return this.zoomLevel5Service.getDetail(objectId, EntityNames.Publications, {
+            publicationType: type,
+        })
     }
 
     @Query(() => PublicationsBookZoomLevel5DetailType, { nullable: true })
@@ -68,6 +87,15 @@ export class ZoomLevel5Resolver {
     public zoomLevel5PublicationsAudiovisual(@Args('id') objectId: string) {
         return this.zoomLevel5Service.getDetail(objectId, EntityNames.Publications, {
             publicationType: PublicationsZoomLevel5Types.audiovisual,
+        })
+    }
+
+    @Query(() => ArchiveZoomLevel5UnionType, { nullable: true })
+    public async zoomLevel5Archive(@Args('id') objectId: string) {
+        const type = await this.archivesService.determineArchiveType(objectId)
+
+        return this.zoomLevel5Service.getDetail(objectId, EntityNames.Archives, {
+            archivesType: type,
         })
     }
 
