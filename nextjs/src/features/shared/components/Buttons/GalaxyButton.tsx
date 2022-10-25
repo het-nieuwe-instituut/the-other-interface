@@ -2,10 +2,6 @@ import { Button, Text } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import ExternalLink from '@/icons/arrows/external-link.svg'
 
-interface GalaxyButtonProps {
-    text: string
-}
-
 // interface Props {}
 
 // export const ButtonsGrid: React.FC<Props> = props => {
@@ -28,12 +24,16 @@ interface GalaxyButtonProps {
 //     }
 // }
 
+interface GalaxyButtonProps {
+    text: string
+}
+
 export const GalaxyButton: React.FC<GalaxyButtonProps> = props => {
     return (
         <NextLink style={{ width: '100%' }} href={'www.url.nl'}>
-            {/* TODO: dont show button border */}
             <Button border="0px" as={'a'} rightIcon={renderExternalLink()} target={'http://localhost:3000/nl'}>
-                <Text as={'span'}> {props.text}</Text>
+                {/* TODO: align font size with design  (16px)*/}
+                <Text as={'span'}> {props.text} </Text>
             </Button>
         </NextLink>
     )

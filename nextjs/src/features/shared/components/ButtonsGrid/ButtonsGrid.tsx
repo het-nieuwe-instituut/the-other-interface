@@ -92,7 +92,6 @@ const GridButton: React.FC<GridButtonProps> = ({ button, index, array, config })
     return (
         <NextLink style={{ width: '100%' }} href={getURl(button)} passHref>
             <Button
-                //TODO: find prop that is responsible for border of button
                 variant={config.variant}
                 as={'a'}
                 rightIcon={renderExternalLink(button)}
