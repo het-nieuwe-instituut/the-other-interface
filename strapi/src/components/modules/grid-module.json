@@ -20,7 +20,7 @@
     "fieldTypes": {
       "type": "enumeration",
       "enum": [
-        "TriplyRecords",
+        "Triply",
         "Stories"
       ],
       "required": true,

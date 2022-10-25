@@ -1,11 +1,11 @@
 _type: export
 __export_format: 4
-__export_date: 2022-10-14T13:38:44.773Z
+__export_date: 2022-10-24T14:37:08.256Z
 __export_source: insomnia.desktop.app:v2022.6.0
 resources:
   - _id: req_d36dd2c14e474d7abc436370519db759
     parentId: fld_60bab26db1a7467991c800e2f04357a8
-    modified: 1665754676701
+    modified: 1666621317161
     created: 1665559396865
     url: "{{ _.baseUrl }}/graphql"
     name: TriplyRecordFragment
@@ -78,7 +78,7 @@ resources:
     _type: workspace
   - _id: req_93c0ce2563cf4aa9b03c65c3edf21db3
     parentId: fld_13c5fd867c8545c3a5309539679ba83f
-    modified: 1665559725225
+    modified: 1666622211738
     created: 1664870671868
     url: "{{ _.baseUrl }}/graphql"
     name: homepage
@@ -91,7 +91,32 @@ resources:
         {\n\t\t\t\tTitle\n\t\t\t\tcomponents {\n\t\t\t\t\t... on
         ComponentModulesButtonsModule
         {\n\t\t\t\t\t\tid\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t... on
-        ComponentModulesImage
+        ComponentModulesGridModule {\n\t\t\t\t\t\tbuttons
+        {\n\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\turl\n\t\t\t\t\t\t}\n\t\t\t\t\t\tdescription\n\t\t\t\t\t\tfeaturedFields
+        {\n\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\tlabel\n\t\t\t\t\t\t\tvalue\n\t\t\t\t\t\t}\n\t\t\t\t\t\tfields
+        {\n\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\tstory {\n\t\t\t\t\t\t\t\tdata
+        {\n\t\t\t\t\t\t\t\t\tattributes {\n\t\t\t\t\t\t\t\t\t\tauthor
+        {\n\t\t\t\t\t\t\t\t\t\t\tdata {\n\t\t\t\t\t\t\t\t\t\t\t\tattributes
+        {\n\t\t\t\t\t\t\t\t\t\t\t\t\tfirstName\n\t\t\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t\tupdatedAt\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\ttriplyRecord
+        {\n\t\t\t\t\t\t\t\tdata {\n\t\t\t\t\t\t\t\t\tattributes
+        {\n\t\t\t\t\t\t\t\t\t\tcreatedAt\n\t\t\t\t\t\t\t\t\t\tupdatedAt\n\t\t\t\t\t\t\t\t\t\trecordId\n\t\t\t\t\t\t\t\t\t\tarchive
+        {\n\t\t\t\t\t\t\t\t\t\t\t... on ArchivesOtherZoomLevel5DetailType
+        {\n\t\t\t\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\t\t\t\ttype\n\t\t\t\t\t\t\t\t\t\t\t\ttitle\n\t\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t\t\t...
+        on ArchivesFondsZoomLevel5DetailType
+        {\n\t\t\t\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\t\t\t\ttype\n\t\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t\tobject
+        {\n\t\t\t\t\t\t\t\t\t\t\tdescription\n\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t\tpublication
+        {\n\t\t\t\t\t\t\t\t\t\t\t... on
+        PublicationsAudioVisualZoomLevel5DetailType
+        {\n\t\t\t\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\t\t\t\ttype\n\t\t\t\t\t\t\t\t\t\t\t\ttitle\n\t\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t\t\t...
+        on PublicationsArticleZoomLevel5DetailType
+        {\n\t\t\t\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\t\t\t\ttype\n\t\t\t\t\t\t\t\t\t\t\t\ttitle\n\t\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t\t\t...
+        on PublicationsSerialZoomLevel5DetailType
+        {\n\t\t\t\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\t\t\t\ttype\n\t\t\t\t\t\t\t\t\t\t\t\ttitle\n\t\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t\t\t...
+        on PublicationsBookZoomLevel5DetailType
+        {\n\t\t\t\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\t\t\t\ttype\n\t\t\t\t\t\t\t\t\t\t\t\ttitle\n\t\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t\tpeople
+        {\n\t\t\t\t\t\t\t\t\t\t\tname\n\t\t\t\t\t\t\t\t\t\t\tnameType\n\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t}\n\t\t\t\t\t\tfieldTitlesAreInverted\n\t\t\t\t\t\tfieldTypes\n\t\t\t\t\t\tgridModuleLayout
+        {\n\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\tspacingTop\n\t\t\t\t\t\t\tspacingBottom\n\t\t\t\t\t\t}\n\t\t\t\t\t\tid\n\t\t\t\t\t\tpageSize\n\t\t\t\t\t\tshowMoreButtonTitle\n\t\t\t\t\t\ttitle\n\t\t\t\t\t}\n\t\t\t\t\t...
+        on ComponentModulesImage
         {\n\t\t\t\t\t\tid\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t... on
         ComponentModulesImageCarousel
         {\n\t\t\t\t\t\tid\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t... on
@@ -110,9 +135,9 @@ resources:
         {\n\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\tattributes
         {\n\t\t\t\t\t\t\t\t\t\ttype\n\t\t\t\t\t\t\t\t\t\trecordId\n\t\t\t\t\t\t\t\t\t\tarchive
         {\n\t\t\t\t\t\t\t\t\t\t\t... on ArchivesOtherZoomLevel5DetailType
-        {\n\t\t\t\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\t\t\t\ttype\n\t\t\t\t\t\t\t\t\t\t\t\tpartTitle\n\t\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t\t\t...
+        {\n\t\t\t\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\t\t\t\ttype\n\t\t\t\t\t\t\t\t\t\t\t\ttitle\n\t\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t\t\t...
         on ArchivesFondsZoomLevel5DetailType
-        {\n\t\t\t\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\t\t\t\ttype\n\t\t\t\t\t\t\t\t\t\t\t\ttitle\n\t\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t\tobject
+        {\n\t\t\t\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\t\t\t\ttype\n\t\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t\tobject
         {\n\t\t\t\t\t\t\t\t\t\t\tdescription\n\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t\tpublication
         {\n\t\t\t\t\t\t\t\t\t\t\t... on
         PublicationsAudioVisualZoomLevel5DetailType
@@ -144,7 +169,7 @@ resources:
     _type: request
   - _id: req_a26dfaf061ab48ce97c600ec52c6152b
     parentId: fld_13c5fd867c8545c3a5309539679ba83f
-    modified: 1665559408225
+    modified: 1666621342577
     created: 1664893862635
     url: "{{ _.baseUrl }}/graphql"
     name: menupage
@@ -174,7 +199,7 @@ resources:
     _type: request
   - _id: req_2962aefad60f4bf1bd12f4ab384d250e
     parentId: fld_13c5fd867c8545c3a5309539679ba83f
-    modified: 1665155061528
+    modified: 1666621341297
     created: 1664894329560
     url: "{{ _.baseUrl }}/graphql"
     name: menupages
@@ -211,7 +236,7 @@ resources:
     _type: request
   - _id: req_dd5bc4112fe44dc1b33dd2e86f58e12c
     parentId: fld_13c5fd867c8545c3a5309539679ba83f
-    modified: 1664895253121
+    modified: 1666621339533
     created: 1664894325278
     url: ""
     name: landingpage
@@ -1856,7 +1881,7 @@ resources:
     _type: request
   - _id: req_53c31274e53c47aaa4d38477ec26a421
     parentId: fld_17de84e682c04137bb01bf07e4e9a9a2
-    modified: 1665499381338
+    modified: 1666621309569
     created: 1664284790474
     url: "{{ _.baseUrl }}/graphql"
     name: object
