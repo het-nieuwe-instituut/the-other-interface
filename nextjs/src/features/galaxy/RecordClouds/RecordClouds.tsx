@@ -4,8 +4,9 @@ import { Circle } from '../components/Circle'
 
 import { EntityNames, ObjectRelationsQuery } from 'src/generated/graphql'
 import { RecordCloudHighlight } from './components/RecordHighlight'
-import { ParentRelation, usePresenter } from './usePresenter'
+import { usePresenter } from './usePresenter'
 import { ZoomLevel5DetailResponses } from './useZoom5DetailQuery'
+import { ParentRelation } from './hooks/usePositionClouds'
 
 type Props = {
     dimensions: {
@@ -39,6 +40,7 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions, zoomLevel5, 
                     return (
                         <>
                             <Circle
+                                className="parent"
                                 key={`${index}-${array.length}-parent`}
                                 hoverBackground={relation.background}
                                 defaultBackground={relation.background}
@@ -57,6 +59,7 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions, zoomLevel5, 
                             {relation.children.map((child, index, array) => {
                                 return (
                                     <Circle
+                                        className="child"
                                         key={`${index}-${array.length}-child`}
                                         hoverBackground={`typeColors.${relation.type.toLowerCase()}.related`}
                                         defaultBackground={`typeColors.${relation.type.toLowerCase()}.related`}

@@ -7,7 +7,6 @@ import { Circle } from '../../components/Circle'
 import { Dimensions } from '../../types/galaxy'
 import { SupportedQuerys, ZoomLevel5DetailResponses } from '../useZoom5DetailQuery'
 
-
 interface RecordCloudHighlightProps {
     image?: {
         url?: string
@@ -39,9 +38,10 @@ export const RecordCloudHighlight: React.FunctionComponent<RecordCloudHighlightP
             height={`${radius}px`}
             width={`${radius}px`}
             x={width / 2 - radius / 2}
-            y={height / 2 - radius / 2 }
+            y={height / 2 - radius / 2}
             defaultBackground={typeColors[type].hover1}
             hoverBackground={typeColors[type].hover1}
+            className={'highlight'}
         >
             <Flex
                 height={'100%'}
@@ -112,5 +112,3 @@ const GenericImage: React.FC<{
         </Box>
     )
 }
-
-
