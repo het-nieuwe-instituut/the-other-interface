@@ -48,9 +48,11 @@ export const LandingpageContainer: React.FC = () => {
     return (
         <>
             <Box backgroundColor="graph" height="800px" ref={graphRef}>
-                <Breadcrumbs />
                 {sizes?.height && sizes?.width && (
-                    <DynamicFilterCloudsNoSsr type={type} dimensions={{ height: 800, width: sizes?.width }} />
+                    <>
+                        <Breadcrumbs />
+                        <DynamicFilterCloudsNoSsr type={type} dimensions={{ height: 800, width: sizes?.width }} />
+                    </>
                 )}
             </Box>
             <Box px={{ xl: 6, base: 0 }}>
