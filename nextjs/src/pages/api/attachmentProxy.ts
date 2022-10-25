@@ -20,7 +20,6 @@ const attachmentProxy = (req: NextApiRequest, res: NextApiResponse) => {
 
     res.setHeader('content-disposition', 'attachment; filename=' + fileName)
 
-    console.log(process.env.NEXT_PUBLIC_REACT_APP_IMAGE_BASE_URL + filePath)
     request
         .get(process.env.NEXT_PUBLIC_REACT_APP_IMAGE_BASE_URL + filePath)
         .on('error', function () {

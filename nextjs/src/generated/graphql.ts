@@ -63,6 +63,22 @@ export const mockMenupageBySlugQuery = (resolver: ResponseResolver<GraphQLReques
  * @param resolver a function that accepts a captured request and may return a mocked response.
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
+ * mockStoriesQuery((req, res, ctx) => {
+ *   return res(
+ *     ctx.data({ stories })
+ *   )
+ * })
+ */
+export const mockStoriesQuery = (resolver: ResponseResolver<GraphQLRequest<StoriesQueryVariables>, GraphQLContext<StoriesQuery>, any>) =>
+  graphql.query<StoriesQuery, StoriesQueryVariables>(
+    'stories',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
  * mockStoryBySlugQuery((req, res, ctx) => {
  *   const { locale, slug } = req.variables;
  *   return res(
@@ -73,6 +89,209 @@ export const mockMenupageBySlugQuery = (resolver: ResponseResolver<GraphQLReques
 export const mockStoryBySlugQuery = (resolver: ResponseResolver<GraphQLRequest<StoryBySlugQueryVariables>, GraphQLContext<StoryBySlugQuery>, any>) =>
   graphql.query<StoryBySlugQuery, StoryBySlugQueryVariables>(
     'storyBySlug',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockZoom3Query((req, res, ctx) => {
+ *   const { filterId, page, pageSize } = req.variables;
+ *   return res(
+ *     ctx.data({ zoomLevel3 })
+ *   )
+ * })
+ */
+export const mockZoom3Query = (resolver: ResponseResolver<GraphQLRequest<Zoom3QueryVariables>, GraphQLContext<Zoom3Query>, any>) =>
+  graphql.query<Zoom3Query, Zoom3QueryVariables>(
+    'Zoom3',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockZoom3ArchivesQuery((req, res, ctx) => {
+ *   const { filterId, page, pageSize } = req.variables;
+ *   return res(
+ *     ctx.data({ zoomLevel3 })
+ *   )
+ * })
+ */
+export const mockZoom3ArchivesQuery = (resolver: ResponseResolver<GraphQLRequest<Zoom3ArchivesQueryVariables>, GraphQLContext<Zoom3ArchivesQuery>, any>) =>
+  graphql.query<Zoom3ArchivesQuery, Zoom3ArchivesQueryVariables>(
+    'Zoom3Archives',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockZoom3ObjectsQuery((req, res, ctx) => {
+ *   const { filterId, page, pageSize } = req.variables;
+ *   return res(
+ *     ctx.data({ zoomLevel3 })
+ *   )
+ * })
+ */
+export const mockZoom3ObjectsQuery = (resolver: ResponseResolver<GraphQLRequest<Zoom3ObjectsQueryVariables>, GraphQLContext<Zoom3ObjectsQuery>, any>) =>
+  graphql.query<Zoom3ObjectsQuery, Zoom3ObjectsQueryVariables>(
+    'Zoom3Objects',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockZoom3DPeopleQuery((req, res, ctx) => {
+ *   const { filterId, page, pageSize } = req.variables;
+ *   return res(
+ *     ctx.data({ zoomLevel3 })
+ *   )
+ * })
+ */
+export const mockZoom3DPeopleQuery = (resolver: ResponseResolver<GraphQLRequest<Zoom3DPeopleQueryVariables>, GraphQLContext<Zoom3DPeopleQuery>, any>) =>
+  graphql.query<Zoom3DPeopleQuery, Zoom3DPeopleQueryVariables>(
+    'Zoom3DPeople',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockZoom3DPublicationsQuery((req, res, ctx) => {
+ *   const { filterId, page, pageSize } = req.variables;
+ *   return res(
+ *     ctx.data({ zoomLevel3 })
+ *   )
+ * })
+ */
+export const mockZoom3DPublicationsQuery = (resolver: ResponseResolver<GraphQLRequest<Zoom3DPublicationsQueryVariables>, GraphQLContext<Zoom3DPublicationsQuery>, any>) =>
+  graphql.query<Zoom3DPublicationsQuery, Zoom3DPublicationsQueryVariables>(
+    'Zoom3DPublications',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockZoom4Query((req, res, ctx) => {
+ *   const { publicationsFilters, page, pageSize } = req.variables;
+ *   return res(
+ *     ctx.data({ zoomLevel4 })
+ *   )
+ * })
+ */
+export const mockZoom4Query = (resolver: ResponseResolver<GraphQLRequest<Zoom4QueryVariables>, GraphQLContext<Zoom4Query>, any>) =>
+  graphql.query<Zoom4Query, Zoom4QueryVariables>(
+    'Zoom4',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockZoom4ArchivesQuery((req, res, ctx) => {
+ *   const { archivesFilters, page, pageSize } = req.variables;
+ *   return res(
+ *     ctx.data({ zoomLevel4 })
+ *   )
+ * })
+ */
+export const mockZoom4ArchivesQuery = (resolver: ResponseResolver<GraphQLRequest<Zoom4ArchivesQueryVariables>, GraphQLContext<Zoom4ArchivesQuery>, any>) =>
+  graphql.query<Zoom4ArchivesQuery, Zoom4ArchivesQueryVariables>(
+    'Zoom4Archives',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockZoom4ObjectsQuery((req, res, ctx) => {
+ *   const { objectsFilters, page, pageSize } = req.variables;
+ *   return res(
+ *     ctx.data({ zoomLevel4 })
+ *   )
+ * })
+ */
+export const mockZoom4ObjectsQuery = (resolver: ResponseResolver<GraphQLRequest<Zoom4ObjectsQueryVariables>, GraphQLContext<Zoom4ObjectsQuery>, any>) =>
+  graphql.query<Zoom4ObjectsQuery, Zoom4ObjectsQueryVariables>(
+    'Zoom4Objects',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockZoom4PeopleQuery((req, res, ctx) => {
+ *   const { peopleFilters, page, pageSize } = req.variables;
+ *   return res(
+ *     ctx.data({ zoomLevel4 })
+ *   )
+ * })
+ */
+export const mockZoom4PeopleQuery = (resolver: ResponseResolver<GraphQLRequest<Zoom4PeopleQueryVariables>, GraphQLContext<Zoom4PeopleQuery>, any>) =>
+  graphql.query<Zoom4PeopleQuery, Zoom4PeopleQueryVariables>(
+    'Zoom4People',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockZoom4PublicationsQuery((req, res, ctx) => {
+ *   const { publicationsFilters, page, pageSize } = req.variables;
+ *   return res(
+ *     ctx.data({ zoomLevel4 })
+ *   )
+ * })
+ */
+export const mockZoom4PublicationsQuery = (resolver: ResponseResolver<GraphQLRequest<Zoom4PublicationsQueryVariables>, GraphQLContext<Zoom4PublicationsQuery>, any>) =>
+  graphql.query<Zoom4PublicationsQuery, Zoom4PublicationsQueryVariables>(
+    'Zoom4Publications',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockZoomLevel1Query((req, res, ctx) => {
+ *   return res(
+ *     ctx.data({ zoomLevel1 })
+ *   )
+ * })
+ */
+export const mockZoomLevel1Query = (resolver: ResponseResolver<GraphQLRequest<ZoomLevel1QueryVariables>, GraphQLContext<ZoomLevel1Query>, any>) =>
+  graphql.query<ZoomLevel1Query, ZoomLevel1QueryVariables>(
+    'zoomLevel1',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockZoomLevel2Query((req, res, ctx) => {
+ *   const { entityName } = req.variables;
+ *   return res(
+ *     ctx.data({ zoomLevel2 })
+ *   )
+ * })
+ */
+export const mockZoomLevel2Query = (resolver: ResponseResolver<GraphQLRequest<ZoomLevel2QueryVariables>, GraphQLContext<ZoomLevel2Query>, any>) =>
+  graphql.query<ZoomLevel2Query, ZoomLevel2QueryVariables>(
+    'zoomLevel2',
     resolver
   )
 
@@ -90,26 +309,6 @@ export type ArchiveZoomLevel5UnionType = ArchivesFondsZoomLevel5DetailType | Arc
 
 export type ArchivesFondsZoomLevel5DetailType = {
   __typename?: 'ArchivesFondsZoomLevel5DetailType';
-  dateLabel?: Maybe<Scalars['String']>;
-  dimensionFree?: Maybe<Scalars['String']>;
-  endDate?: Maybe<Scalars['String']>;
-  existenceOfOriginals?: Maybe<Scalars['String']>;
-  id: Scalars['String'];
-  mediaReference?: Maybe<Scalars['String']>;
-  mediaReferenceLabel?: Maybe<Scalars['String']>;
-  objectNumber?: Maybe<Scalars['String']>;
-  permanentLink?: Maybe<Scalars['String']>;
-  relatedMaterial?: Maybe<Scalars['String']>;
-  rights?: Maybe<Scalars['String']>;
-  rightsLabel?: Maybe<Scalars['String']>;
-  scopeContent?: Maybe<Scalars['String']>;
-  startDate?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  type: ArchivesZoomLevel5Types;
-};
-
-export type ArchivesOtherZoomLevel5DetailType = {
-  __typename?: 'ArchivesOtherZoomLevel5DetailType';
   appendices?: Maybe<Scalars['String']>;
   conditionsGoverningAccess?: Maybe<Scalars['String']>;
   contentScope?: Maybe<Scalars['String']>;
@@ -125,6 +324,7 @@ export type ArchivesOtherZoomLevel5DetailType = {
   partReference?: Maybe<Scalars['String']>;
   partTitle?: Maybe<Scalars['String']>;
   permanentLink?: Maybe<Scalars['String']>;
+  populatedCreator?: Maybe<PoepleZoomLevel5DetailType>;
   productionDate?: Maybe<Scalars['String']>;
   recordTitle?: Maybe<Scalars['String']>;
   relatedMaterial?: Maybe<Scalars['String']>;
@@ -135,6 +335,26 @@ export type ArchivesOtherZoomLevel5DetailType = {
   source?: Maybe<Scalars['String']>;
   startDate?: Maybe<Scalars['String']>;
   systemOfArrangement?: Maybe<Scalars['String']>;
+  type: ArchivesZoomLevel5Types;
+};
+
+export type ArchivesOtherZoomLevel5DetailType = {
+  __typename?: 'ArchivesOtherZoomLevel5DetailType';
+  dateLabel?: Maybe<Scalars['String']>;
+  dimensionFree?: Maybe<Scalars['String']>;
+  endDate?: Maybe<Scalars['String']>;
+  existenceOfOriginals?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  mediaReference?: Maybe<Scalars['String']>;
+  mediaReferenceLabel?: Maybe<Scalars['String']>;
+  objectNumber?: Maybe<Scalars['String']>;
+  permanentLink?: Maybe<Scalars['String']>;
+  relatedMaterial?: Maybe<Scalars['String']>;
+  rights?: Maybe<Scalars['String']>;
+  rightsLabel?: Maybe<Scalars['String']>;
+  scopeContent?: Maybe<Scalars['String']>;
+  startDate?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
   type: ArchivesZoomLevel5Types;
 };
 
@@ -514,6 +734,14 @@ export enum EnumComponentmodulescarouselType {
   Themes = 'Themes'
 }
 
+export enum EnumTriplyrecordType {
+  Archive = 'Archive',
+  Media = 'Media',
+  Object = 'Object',
+  People = 'People',
+  Publication = 'Publication'
+}
+
 export type Error = {
   __typename?: 'Error';
   code: Scalars['String'];
@@ -766,6 +994,7 @@ export type ObjectsZoomLevel5DetailType = {
   dimensionUnit?: Maybe<Scalars['String']>;
   dimensionValue?: Maybe<Scalars['String']>;
   endDate?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
   image?: Maybe<Scalars['String']>;
   imageLabel?: Maybe<Scalars['String']>;
   maker?: Maybe<Scalars['String']>;
@@ -779,6 +1008,7 @@ export type ObjectsZoomLevel5DetailType = {
   objectNameLabel?: Maybe<Scalars['String']>;
   objectNumber?: Maybe<Scalars['String']>;
   permanentLink?: Maybe<Scalars['String']>;
+  populatedMaker?: Maybe<PoepleZoomLevel5DetailType>;
   relatedObjectTitle?: Maybe<Scalars['String']>;
   rights?: Maybe<Scalars['String']>;
   rightsLabel?: Maybe<Scalars['String']>;
@@ -827,6 +1057,7 @@ export type PoepleZoomLevel5DetailType = {
   description?: Maybe<Scalars['String']>;
   endDate?: Maybe<Scalars['String']>;
   gender?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
   institution?: Maybe<Scalars['String']>;
   institutionLabel?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
@@ -863,6 +1094,8 @@ export type PublicationsArticleZoomLevel5DetailType = {
   objectNumber?: Maybe<Scalars['String']>;
   page?: Maybe<Scalars['String']>;
   permanentLink?: Maybe<Scalars['String']>;
+  populatedAuthor?: Maybe<PoepleZoomLevel5DetailType>;
+  populatedPublisher?: Maybe<PoepleZoomLevel5DetailType>;
   publisher?: Maybe<Scalars['String']>;
   publisherLabel?: Maybe<Scalars['String']>;
   relatedPerInst?: Maybe<Scalars['String']>;
@@ -899,6 +1132,8 @@ export type PublicationsAudioVisualZoomLevel5DetailType = {
   permanentLink?: Maybe<Scalars['String']>;
   placeOfPublication?: Maybe<Scalars['String']>;
   placeOfPublicationLabel?: Maybe<Scalars['String']>;
+  populatedAuthor?: Maybe<PoepleZoomLevel5DetailType>;
+  populatedPublisher?: Maybe<PoepleZoomLevel5DetailType>;
   publisher?: Maybe<Scalars['String']>;
   publisherLabel?: Maybe<Scalars['String']>;
   relatedPerInst?: Maybe<Scalars['String']>;
@@ -939,6 +1174,8 @@ export type PublicationsBookZoomLevel5DetailType = {
   permanentLink?: Maybe<Scalars['String']>;
   placeOfPublication?: Maybe<Scalars['String']>;
   placeOfPublicationLabel?: Maybe<Scalars['String']>;
+  populatedAuthor?: Maybe<PoepleZoomLevel5DetailType>;
+  populatedPublisher?: Maybe<PoepleZoomLevel5DetailType>;
   publisher?: Maybe<Scalars['String']>;
   publisherLabel?: Maybe<Scalars['String']>;
   relatedPerInst?: Maybe<Scalars['String']>;
@@ -966,6 +1203,7 @@ export type PublicationsSerialZoomLevel5DetailType = {
   permanentLink?: Maybe<Scalars['String']>;
   placeOfPublication?: Maybe<Scalars['String']>;
   placeOfPublicationLabel?: Maybe<Scalars['String']>;
+  populatedPublisher?: Maybe<PoepleZoomLevel5DetailType>;
   publisher?: Maybe<Scalars['String']>;
   publisherLabel?: Maybe<Scalars['String']>;
   remarks?: Maybe<Scalars['String']>;
@@ -997,6 +1235,7 @@ export enum PublicationsZoomLevel5Types {
 export type Query = {
   __typename?: 'Query';
   allRelations?: Maybe<Array<ZoomLevel5RelatedRecordType>>;
+  archiveOther: ArchivesFondsZoomLevel5DetailType;
   author: AuthorEntityResponse;
   authors: AuthorEntityResponseCollection;
   homepage: HomepageEntityResponse;
@@ -1006,6 +1245,11 @@ export type Query = {
   locations: LocationRelationResponseCollection;
   menupage: MenupageEntityResponse;
   menupages: MenupageEntityResponseCollection;
+  object: ObjectsZoomLevel5DetailType;
+  publicationArticle: PublicationsArticleZoomLevel5DetailType;
+  publicationAudioVisual: PublicationsAudioVisualZoomLevel5DetailType;
+  publicationBook: PublicationsBookZoomLevel5DetailType;
+  publicationSerial: PublicationsSerialZoomLevel5DetailType;
   relations?: Maybe<Array<ZoomLevel5RelationsType>>;
   stories: StoryEntityResponseCollection;
   story: StoryEntityResponse;
@@ -1381,7 +1625,7 @@ export type TriplyRecord = {
   publishedAt?: Maybe<Scalars['Date']>;
   recordId: Scalars['String'];
   stories?: Maybe<StoryRelationResponseCollection>;
-  type: Scalars['String'];
+  type: EnumTriplyrecordType;
   updatedAt?: Maybe<Scalars['Date']>;
 };
 
@@ -1647,7 +1891,7 @@ export type ComponentCoreModuleLayoutsFragment = { __typename?: 'ComponentCoreMo
 
 export type ButtonsModuleFragmentFragment = { __typename?: 'ComponentModulesButtonsModule', id: string, buttonStyle?: EnumComponentmodulesbuttonsmoduleButtonstyle | null, buttons?: Array<{ __typename?: 'ComponentCoreButton', id: string, text?: string | null, url?: string | null, hasAttachment?: boolean | null, attachment?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null }> | null, buttonsModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } };
 
-export type CarouselModuleFragmentFragment = { __typename?: 'ComponentModulesCarousel', id: string, title?: string | null, type?: EnumComponentmodulescarouselType | null, buttonText?: string | null, buttonUrl?: string | null, description?: string | null, items?: Array<{ __typename?: 'ComponentCoreCarouselItem', id: string, name?: string | null, description?: string | null, type?: EnumComponentcorecarouselitemType | null, picture?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null } | null } | null } | null }> | null, carouselModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } };
+export type CarouselModuleFragmentFragment = { __typename?: 'ComponentModulesCarousel', id: string, title?: string | null, type?: EnumComponentmodulescarouselType | null, buttonText?: string | null, buttonUrl?: string | null, description?: string | null, items?: Array<{ __typename?: 'ComponentCoreCarouselItem', id: string, name?: string | null, description?: string | null, picture?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null, triply_record?: { __typename?: 'TriplyRecordEntityResponse', data?: { __typename?: 'TriplyRecordEntity', id?: string | null, attributes?: { __typename?: 'TriplyRecord', type: EnumTriplyrecordType, recordId: string, archive?: { __typename?: 'ArchivesFondsZoomLevel5DetailType', id: string, objectNumber?: string | null, recordTitle?: string | null, type: ArchivesZoomLevel5Types, populatedCreator?: { __typename?: 'PoepleZoomLevel5DetailType', id: string, name?: string | null, nationality?: string | null, place?: string | null, birthDate?: string | null, professionLabel?: string | null } | null } | { __typename?: 'ArchivesOtherZoomLevel5DetailType', id: string, title?: string | null, objectNumber?: string | null, type: ArchivesZoomLevel5Types } | null, object?: { __typename?: 'ObjectsZoomLevel5DetailType', title?: string | null, objectNumber?: string | null, image?: string | null, populatedMaker?: { __typename?: 'PoepleZoomLevel5DetailType', name?: string | null } | null } | null, publication?: { __typename?: 'PublicationsArticleZoomLevel5DetailType', id: string, type: PublicationsZoomLevel5Types, title?: string | null, objectNumber?: string | null, populatedAuthor?: { __typename?: 'PoepleZoomLevel5DetailType', profession?: string | null, name?: string | null } | null } | { __typename?: 'PublicationsAudioVisualZoomLevel5DetailType', id: string, type: PublicationsZoomLevel5Types, title?: string | null, objectNumber?: string | null, populatedAuthor?: { __typename?: 'PoepleZoomLevel5DetailType', id: string, profession?: string | null, name?: string | null } | null } | { __typename?: 'PublicationsBookZoomLevel5DetailType', id: string, type: PublicationsZoomLevel5Types, title?: string | null, objectNumber?: string | null, populatedAuthor?: { __typename?: 'PoepleZoomLevel5DetailType', profession?: string | null, name?: string | null } | null } | { __typename?: 'PublicationsSerialZoomLevel5DetailType', id: string, type: PublicationsZoomLevel5Types, title?: string | null, yearOfPublication?: string | null, populatedPublisher?: { __typename?: 'PoepleZoomLevel5DetailType', name?: string | null } | null } | null, people?: { __typename?: 'PoepleZoomLevel5DetailType', name?: string | null, nameType?: string | null } | null } | null } | null } | null }> | null, carouselModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } };
 
 export type ImageCarouselModuleFragmentFragment = { __typename?: 'ComponentModulesImageCarousel', id: string, description?: string | null, images?: { __typename?: 'UploadFileRelationResponseCollection', data?: Array<{ __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, width?: number | null, height?: number | null, size: number } | null }> | null } | null, imageCarouselModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } };
 
@@ -1668,7 +1912,7 @@ export type HomepageQueryVariables = Exact<{
 }>;
 
 
-export type HomepageQuery = { __typename?: 'Query', homepage: { __typename?: 'HomepageEntityResponse', data?: { __typename?: 'HomepageEntity', id?: string | null, attributes?: { __typename?: 'Homepage', Title?: string | null, components?: Array<{ __typename?: 'ComponentModulesButtonsModule', id: string, buttonStyle?: EnumComponentmodulesbuttonsmoduleButtonstyle | null, buttons?: Array<{ __typename?: 'ComponentCoreButton', id: string, text?: string | null, url?: string | null, hasAttachment?: boolean | null, attachment?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null }> | null, buttonsModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesCarousel', id: string, title?: string | null, type?: EnumComponentmodulescarouselType | null, buttonText?: string | null, buttonUrl?: string | null, description?: string | null, items?: Array<{ __typename?: 'ComponentCoreCarouselItem', id: string, name?: string | null, description?: string | null, type?: EnumComponentcorecarouselitemType | null, picture?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null } | null } | null } | null }> | null, carouselModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesImage', id: string, caption?: string | null, alt_text?: string | null, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null }, imageModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesImageCarousel', id: string, description?: string | null, images?: { __typename?: 'UploadFileRelationResponseCollection', data?: Array<{ __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, width?: number | null, height?: number | null, size: number } | null }> | null } | null, imageCarouselModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesPullquote', id: string, text?: string | null, pullquoteModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesSubtitle', id: string, text?: string | null, subtitleModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesTableModule', id: string, table?: { __typename?: 'TableEntityResponse', data?: { __typename?: 'TableEntity', id?: string | null, attributes?: { __typename?: 'Table', name?: string | null, description?: string | null, Tablehead?: { __typename?: 'ComponentCoreTableHead', id: string, TableHeadItem?: Array<{ __typename?: 'ComponentCoreTableHeadItem', id?: string | null, label?: string | null }> | null } | null, TableBody?: Array<{ __typename?: 'ComponentCoreTableBody', id: string, TableBodyItem?: Array<{ __typename?: 'ComponentCoreTableBodyItem', id: string, value?: string | null }> | null }> | null } | null } | null } | null, tableModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesTextModule', id: string, Richtext?: string | null, textModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesTitleModule', id: string, Title?: string | null, titleModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'Error' }> | null } | null } | null } };
+export type HomepageQuery = { __typename?: 'Query', homepage: { __typename?: 'HomepageEntityResponse', data?: { __typename?: 'HomepageEntity', id?: string | null, attributes?: { __typename?: 'Homepage', Title?: string | null, components?: Array<{ __typename?: 'ComponentModulesButtonsModule', id: string, buttonStyle?: EnumComponentmodulesbuttonsmoduleButtonstyle | null, buttons?: Array<{ __typename?: 'ComponentCoreButton', id: string, text?: string | null, url?: string | null, hasAttachment?: boolean | null, attachment?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null }> | null, buttonsModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesCarousel', id: string, title?: string | null, type?: EnumComponentmodulescarouselType | null, buttonText?: string | null, buttonUrl?: string | null, description?: string | null, items?: Array<{ __typename?: 'ComponentCoreCarouselItem', id: string, name?: string | null, description?: string | null, picture?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null, triply_record?: { __typename?: 'TriplyRecordEntityResponse', data?: { __typename?: 'TriplyRecordEntity', id?: string | null, attributes?: { __typename?: 'TriplyRecord', type: EnumTriplyrecordType, recordId: string, archive?: { __typename?: 'ArchivesFondsZoomLevel5DetailType', id: string, objectNumber?: string | null, recordTitle?: string | null, type: ArchivesZoomLevel5Types, populatedCreator?: { __typename?: 'PoepleZoomLevel5DetailType', id: string, name?: string | null, nationality?: string | null, place?: string | null, birthDate?: string | null, professionLabel?: string | null } | null } | { __typename?: 'ArchivesOtherZoomLevel5DetailType', id: string, title?: string | null, objectNumber?: string | null, type: ArchivesZoomLevel5Types } | null, object?: { __typename?: 'ObjectsZoomLevel5DetailType', title?: string | null, objectNumber?: string | null, image?: string | null, populatedMaker?: { __typename?: 'PoepleZoomLevel5DetailType', name?: string | null } | null } | null, publication?: { __typename?: 'PublicationsArticleZoomLevel5DetailType', id: string, type: PublicationsZoomLevel5Types, title?: string | null, objectNumber?: string | null, populatedAuthor?: { __typename?: 'PoepleZoomLevel5DetailType', profession?: string | null, name?: string | null } | null } | { __typename?: 'PublicationsAudioVisualZoomLevel5DetailType', id: string, type: PublicationsZoomLevel5Types, title?: string | null, objectNumber?: string | null, populatedAuthor?: { __typename?: 'PoepleZoomLevel5DetailType', id: string, profession?: string | null, name?: string | null } | null } | { __typename?: 'PublicationsBookZoomLevel5DetailType', id: string, type: PublicationsZoomLevel5Types, title?: string | null, objectNumber?: string | null, populatedAuthor?: { __typename?: 'PoepleZoomLevel5DetailType', profession?: string | null, name?: string | null } | null } | { __typename?: 'PublicationsSerialZoomLevel5DetailType', id: string, type: PublicationsZoomLevel5Types, title?: string | null, yearOfPublication?: string | null, populatedPublisher?: { __typename?: 'PoepleZoomLevel5DetailType', name?: string | null } | null } | null, people?: { __typename?: 'PoepleZoomLevel5DetailType', name?: string | null, nameType?: string | null } | null } | null } | null } | null }> | null, carouselModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesImage', id: string, caption?: string | null, alt_text?: string | null, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null }, imageModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesImageCarousel', id: string, description?: string | null, images?: { __typename?: 'UploadFileRelationResponseCollection', data?: Array<{ __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, width?: number | null, height?: number | null, size: number } | null }> | null } | null, imageCarouselModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesPullquote', id: string, text?: string | null, pullquoteModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesSubtitle', id: string, text?: string | null, subtitleModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesTableModule', id: string, table?: { __typename?: 'TableEntityResponse', data?: { __typename?: 'TableEntity', id?: string | null, attributes?: { __typename?: 'Table', name?: string | null, description?: string | null, Tablehead?: { __typename?: 'ComponentCoreTableHead', id: string, TableHeadItem?: Array<{ __typename?: 'ComponentCoreTableHeadItem', id?: string | null, label?: string | null }> | null } | null, TableBody?: Array<{ __typename?: 'ComponentCoreTableBody', id: string, TableBodyItem?: Array<{ __typename?: 'ComponentCoreTableBodyItem', id: string, value?: string | null }> | null }> | null } | null } | null } | null, tableModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesTextModule', id: string, Richtext?: string | null, textModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesTitleModule', id: string, Title?: string | null, titleModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'Error' }> | null } | null } | null } };
 
 export type LandingpageBySlugQueryVariables = Exact<{
   locale?: InputMaybe<Scalars['String']>;
@@ -1686,13 +1930,120 @@ export type MenupageBySlugQueryVariables = Exact<{
 
 export type MenupageBySlugQuery = { __typename?: 'Query', menupages: { __typename?: 'MenupageEntityResponseCollection', data: Array<{ __typename?: 'MenupageEntity', id?: string | null, attributes?: { __typename?: 'Menupage', components?: Array<{ __typename?: 'ComponentModulesButtonsModule', id: string, buttonStyle?: EnumComponentmodulesbuttonsmoduleButtonstyle | null, buttons?: Array<{ __typename?: 'ComponentCoreButton', id: string, text?: string | null, url?: string | null, hasAttachment?: boolean | null, attachment?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null }> | null, buttonsModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesImage', id: string, caption?: string | null, alt_text?: string | null, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null }, imageModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesImageCarousel', id: string, description?: string | null, images?: { __typename?: 'UploadFileRelationResponseCollection', data?: Array<{ __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, width?: number | null, height?: number | null, size: number } | null }> | null } | null, imageCarouselModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesPullquote', id: string, text?: string | null, pullquoteModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesSubtitle', id: string, text?: string | null, subtitleModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesTableModule', id: string, table?: { __typename?: 'TableEntityResponse', data?: { __typename?: 'TableEntity', id?: string | null, attributes?: { __typename?: 'Table', name?: string | null, description?: string | null, Tablehead?: { __typename?: 'ComponentCoreTableHead', id: string, TableHeadItem?: Array<{ __typename?: 'ComponentCoreTableHeadItem', id?: string | null, label?: string | null }> | null } | null, TableBody?: Array<{ __typename?: 'ComponentCoreTableBody', id: string, TableBodyItem?: Array<{ __typename?: 'ComponentCoreTableBodyItem', id: string, value?: string | null }> | null }> | null } | null } | null } | null, tableModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesTextModule', id: string, Richtext?: string | null, textModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesTitleModule', id: string, Title?: string | null, titleModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'Error' }> | null } | null }> } };
 
+export type StoriesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type StoriesQuery = { __typename?: 'Query', stories: { __typename?: 'StoryEntityResponseCollection', data?: Array<{ __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, slug?: string | null } | null }> | null, meta?: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', page: number } } | null } };
+
 export type StoryBySlugQueryVariables = Exact<{
   locale?: InputMaybe<Scalars['String']>;
   slug: Scalars['String'];
 }>;
 
 
-export type StoryBySlugQuery = { __typename?: 'Query', stories: { __typename?: 'StoryEntityResponseCollection', data?: Array<{ __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, description?: string | null, shortDescription?: string | null, publishedAt?: any | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', id?: string | null, attributes?: { __typename?: 'Author', firstName: string, insertion?: string | null, lastName: string } | null } | null } | null, timeframe?: { __typename?: 'ComponentCoreTimeframe', id: string, yearStart?: number | null, yearEnd?: number | null } | null, locations?: { __typename?: 'LocationRelationResponseCollection', data: Array<{ __typename?: 'LocationEntity', id?: string | null, attributes?: { __typename?: 'Location', city?: string | null } | null }> } | null, publicationDate?: { __typename?: 'ComponentCorePublicationDate', date?: any | null, displayType?: EnumComponentcorepublicationdateDisplaytype | null } | null, components?: Array<{ __typename?: 'ComponentModulesButtonsModule', id: string, buttonStyle?: EnumComponentmodulesbuttonsmoduleButtonstyle | null, buttons?: Array<{ __typename?: 'ComponentCoreButton', id: string, text?: string | null, url?: string | null, hasAttachment?: boolean | null, attachment?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null }> | null, buttonsModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesCarousel' } | { __typename?: 'ComponentModulesImage', id: string, caption?: string | null, alt_text?: string | null, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null }, imageModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesImageCarousel', id: string, description?: string | null, images?: { __typename?: 'UploadFileRelationResponseCollection', data?: Array<{ __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, width?: number | null, height?: number | null, size: number } | null }> | null } | null, imageCarouselModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesPullquote', id: string, text?: string | null, pullquoteModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesSubtitle', id: string, text?: string | null, subtitleModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesTableModule', id: string, table?: { __typename?: 'TableEntityResponse', data?: { __typename?: 'TableEntity', id?: string | null, attributes?: { __typename?: 'Table', name?: string | null, description?: string | null, Tablehead?: { __typename?: 'ComponentCoreTableHead', id: string, TableHeadItem?: Array<{ __typename?: 'ComponentCoreTableHeadItem', id?: string | null, label?: string | null }> | null } | null, TableBody?: Array<{ __typename?: 'ComponentCoreTableBody', id: string, TableBodyItem?: Array<{ __typename?: 'ComponentCoreTableBodyItem', id: string, value?: string | null }> | null }> | null } | null } | null } | null, tableModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesTextModule', id: string, Richtext?: string | null, textModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesTitleModule', id: string, Title?: string | null, titleModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'Error' }> | null, storyLinks?: { __typename?: 'ComponentModulesButtonsModule', id: string, buttonStyle?: EnumComponentmodulesbuttonsmoduleButtonstyle | null, buttons?: Array<{ __typename?: 'ComponentCoreButton', id: string, text?: string | null, url?: string | null, hasAttachment?: boolean | null, attachment?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null }> | null, buttonsModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | null } | null }> | null } };
+export type StoryBySlugQuery = { __typename?: 'Query', stories: { __typename?: 'StoryEntityResponseCollection', data?: Array<{ __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, description?: string | null, shortDescription?: string | null, publishedAt?: any | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', id?: string | null, attributes?: { __typename?: 'Author', firstName: string, insertion?: string | null, lastName: string } | null } | null } | null, timeframe?: { __typename?: 'ComponentCoreTimeframe', id: string, yearStart?: number | null, yearEnd?: number | null } | null, locations?: { __typename?: 'LocationRelationResponseCollection', data: Array<{ __typename?: 'LocationEntity', id?: string | null, attributes?: { __typename?: 'Location', city?: string | null } | null }> } | null, publicationDate?: { __typename?: 'ComponentCorePublicationDate', date?: any | null, displayType?: EnumComponentcorepublicationdateDisplaytype | null } | null, triplyRecords?: { __typename?: 'TriplyRecordRelationResponseCollection', data: Array<{ __typename?: 'TriplyRecordEntity', id?: string | null, attributes?: { __typename?: 'TriplyRecord', type: EnumTriplyrecordType, recordId: string, archive?: { __typename?: 'ArchivesFondsZoomLevel5DetailType', id: string, objectNumber?: string | null } | { __typename?: 'ArchivesOtherZoomLevel5DetailType', id: string, type: ArchivesZoomLevel5Types, objectNumber?: string | null } | null, object?: { __typename?: 'ObjectsZoomLevel5DetailType', title?: string | null, maker?: string | null, image?: string | null } | null, publication?: { __typename?: 'PublicationsArticleZoomLevel5DetailType', id: string, type: PublicationsZoomLevel5Types, title?: string | null } | { __typename?: 'PublicationsAudioVisualZoomLevel5DetailType', id: string, type: PublicationsZoomLevel5Types, title?: string | null } | { __typename?: 'PublicationsBookZoomLevel5DetailType', id: string, type: PublicationsZoomLevel5Types, title?: string | null, author?: string | null } | { __typename?: 'PublicationsSerialZoomLevel5DetailType', id: string, type: PublicationsZoomLevel5Types, title?: string | null } | null, people?: { __typename?: 'PoepleZoomLevel5DetailType', name?: string | null, profession?: string | null } | null } | null }> } | null, components?: Array<{ __typename?: 'ComponentModulesButtonsModule', id: string, buttonStyle?: EnumComponentmodulesbuttonsmoduleButtonstyle | null, buttons?: Array<{ __typename?: 'ComponentCoreButton', id: string, text?: string | null, url?: string | null, hasAttachment?: boolean | null, attachment?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null }> | null, buttonsModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesCarousel' } | { __typename?: 'ComponentModulesImage', id: string, caption?: string | null, alt_text?: string | null, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null }, imageModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesImageCarousel', id: string, description?: string | null, images?: { __typename?: 'UploadFileRelationResponseCollection', data?: Array<{ __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, width?: number | null, height?: number | null, size: number } | null }> | null } | null, imageCarouselModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesPullquote', id: string, text?: string | null, pullquoteModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesSubtitle', id: string, text?: string | null, subtitleModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesTableModule', id: string, table?: { __typename?: 'TableEntityResponse', data?: { __typename?: 'TableEntity', id?: string | null, attributes?: { __typename?: 'Table', name?: string | null, description?: string | null, Tablehead?: { __typename?: 'ComponentCoreTableHead', id: string, TableHeadItem?: Array<{ __typename?: 'ComponentCoreTableHeadItem', id?: string | null, label?: string | null }> | null } | null, TableBody?: Array<{ __typename?: 'ComponentCoreTableBody', id: string, TableBodyItem?: Array<{ __typename?: 'ComponentCoreTableBodyItem', id: string, value?: string | null }> | null }> | null } | null } | null } | null, tableModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesTextModule', id: string, Richtext?: string | null, textModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesTitleModule', id: string, Title?: string | null, titleModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'Error' }> | null, storyLinks?: { __typename?: 'ComponentModulesButtonsModule', id: string, buttonStyle?: EnumComponentmodulesbuttonsmoduleButtonstyle | null, buttons?: Array<{ __typename?: 'ComponentCoreButton', id: string, text?: string | null, url?: string | null, hasAttachment?: boolean | null, attachment?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null }> | null, buttonsModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | null } | null }> | null } };
+
+export type Zoom3QueryVariables = Exact<{
+  filterId: Scalars['String'];
+  page: Scalars['Int'];
+  pageSize: Scalars['Int'];
+}>;
+
+
+export type Zoom3Query = { __typename?: 'Query', zoomLevel3: Array<{ __typename?: 'ZoomLevel3Type', uri?: string | null, name?: string | null, count?: number | null, total?: number | null }> };
+
+export type Zoom3ArchivesQueryVariables = Exact<{
+  filterId: Scalars['String'];
+  page: Scalars['Int'];
+  pageSize: Scalars['Int'];
+}>;
+
+
+export type Zoom3ArchivesQuery = { __typename?: 'Query', zoomLevel3: Array<{ __typename?: 'ZoomLevel3Type', uri?: string | null, name?: string | null, count?: number | null, total?: number | null }> };
+
+export type Zoom3ObjectsQueryVariables = Exact<{
+  filterId: Scalars['String'];
+  page: Scalars['Int'];
+  pageSize: Scalars['Int'];
+}>;
+
+
+export type Zoom3ObjectsQuery = { __typename?: 'Query', zoomLevel3: Array<{ __typename?: 'ZoomLevel3Type', uri?: string | null, name?: string | null, count?: number | null, total?: number | null }> };
+
+export type Zoom3DPeopleQueryVariables = Exact<{
+  filterId: Scalars['String'];
+  page: Scalars['Int'];
+  pageSize: Scalars['Int'];
+}>;
+
+
+export type Zoom3DPeopleQuery = { __typename?: 'Query', zoomLevel3: Array<{ __typename?: 'ZoomLevel3Type', uri?: string | null, name?: string | null, count?: number | null, total?: number | null }> };
+
+export type Zoom3DPublicationsQueryVariables = Exact<{
+  filterId: Scalars['String'];
+  page: Scalars['Int'];
+  pageSize: Scalars['Int'];
+}>;
+
+
+export type Zoom3DPublicationsQuery = { __typename?: 'Query', zoomLevel3: Array<{ __typename?: 'ZoomLevel3Type', uri?: string | null, name?: string | null, count?: number | null, total?: number | null }> };
+
+export type Zoom4QueryVariables = Exact<{
+  publicationsFilters?: InputMaybe<PublicationsZoomLevel4FiltersArgs>;
+  page: Scalars['Int'];
+  pageSize: Scalars['Int'];
+}>;
+
+
+export type Zoom4Query = { __typename?: 'Query', zoomLevel4: { __typename?: 'ZoomLevel4ParentType', total: number, hasMore: boolean, nodes?: Array<{ __typename?: 'ZoomLevel4Type', record: string, title?: string | null, firstImage?: string | null, imageLabel?: string | null }> | null } };
+
+export type Zoom4ArchivesQueryVariables = Exact<{
+  archivesFilters?: InputMaybe<ArchivesZoomLevel4FiltersArgs>;
+  page: Scalars['Int'];
+  pageSize: Scalars['Int'];
+}>;
+
+
+export type Zoom4ArchivesQuery = { __typename?: 'Query', zoomLevel4: { __typename?: 'ZoomLevel4ParentType', total: number, hasMore: boolean, nodes?: Array<{ __typename?: 'ZoomLevel4Type', record: string, title?: string | null, firstImage?: string | null, imageLabel?: string | null }> | null } };
+
+export type Zoom4ObjectsQueryVariables = Exact<{
+  objectsFilters?: InputMaybe<ObjectsZoomLevel4FiltersArgs>;
+  page: Scalars['Int'];
+  pageSize: Scalars['Int'];
+}>;
+
+
+export type Zoom4ObjectsQuery = { __typename?: 'Query', zoomLevel4: { __typename?: 'ZoomLevel4ParentType', total: number, hasMore: boolean, nodes?: Array<{ __typename?: 'ZoomLevel4Type', record: string, title?: string | null, firstImage?: string | null, imageLabel?: string | null }> | null } };
+
+export type Zoom4PeopleQueryVariables = Exact<{
+  peopleFilters?: InputMaybe<PeopleZoomLevel4FiltersArgs>;
+  page: Scalars['Int'];
+  pageSize: Scalars['Int'];
+}>;
+
+
+export type Zoom4PeopleQuery = { __typename?: 'Query', zoomLevel4: { __typename?: 'ZoomLevel4ParentType', total: number, hasMore: boolean, nodes?: Array<{ __typename?: 'ZoomLevel4Type', record: string, title?: string | null, firstImage?: string | null, imageLabel?: string | null }> | null } };
+
+export type Zoom4PublicationsQueryVariables = Exact<{
+  publicationsFilters?: InputMaybe<PublicationsZoomLevel4FiltersArgs>;
+  page: Scalars['Int'];
+  pageSize: Scalars['Int'];
+}>;
+
+
+export type Zoom4PublicationsQuery = { __typename?: 'Query', zoomLevel4: { __typename?: 'ZoomLevel4ParentType', total: number, hasMore: boolean, nodes?: Array<{ __typename?: 'ZoomLevel4Type', record: string, title?: string | null, firstImage?: string | null, imageLabel?: string | null }> | null } };
+
+export type ZoomLevel1QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ZoomLevel1Query = { __typename?: 'Query', zoomLevel1: Array<{ __typename?: 'ZoomLevel1Type', name: string, count: number, id: EntityNames }> };
+
+export type ZoomLevel2QueryVariables = Exact<{
+  entityName: EntityNames;
+}>;
+
+
+export type ZoomLevel2Query = { __typename?: 'Query', zoomLevel2: Array<{ __typename?: 'ZoomLevel2Type', filter: string, id: string }> };
 
 export const ComponentCoreModuleLayoutsFragmentDoc = gql`
     fragment componentCoreModuleLayouts on ComponentCoreModuleLayouts {
@@ -1731,17 +2082,100 @@ export const CarouselModuleFragmentFragmentDoc = gql`
   id
   items {
     id
-    name
-    description
     picture {
       data {
         attributes {
           url
-          caption
         }
       }
     }
-    type
+    name
+    description
+    triply_record {
+      data {
+        id
+        attributes {
+          type
+          recordId
+          archive {
+            ... on ArchivesOtherZoomLevel5DetailType {
+              id
+              title
+              objectNumber
+              type
+            }
+            ... on ArchivesFondsZoomLevel5DetailType {
+              id
+              objectNumber
+              populatedCreator {
+                id
+                name
+                nationality
+                place
+                birthDate
+                professionLabel
+              }
+              recordTitle
+              type
+            }
+          }
+          object {
+            title
+            populatedMaker {
+              name
+            }
+            objectNumber
+            image
+          }
+          publication {
+            ... on PublicationsAudioVisualZoomLevel5DetailType {
+              id
+              type
+              title
+              objectNumber
+              populatedAuthor {
+                id
+                profession
+                name
+              }
+            }
+            ... on PublicationsArticleZoomLevel5DetailType {
+              id
+              type
+              title
+              objectNumber
+              populatedAuthor {
+                profession
+                name
+              }
+            }
+            ... on PublicationsSerialZoomLevel5DetailType {
+              id
+              type
+              title
+              yearOfPublication
+              populatedPublisher {
+                name
+              }
+            }
+            ... on PublicationsBookZoomLevel5DetailType {
+              id
+              type
+              title
+              objectNumber
+              populatedAuthor {
+                profession
+                name
+              }
+            }
+          }
+          people {
+            name
+            nameType
+          }
+        }
+      }
+    }
   }
   title
   type
@@ -2098,6 +2532,51 @@ export function useMenupageBySlugLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
 export type MenupageBySlugQueryHookResult = ReturnType<typeof useMenupageBySlugQuery>;
 export type MenupageBySlugLazyQueryHookResult = ReturnType<typeof useMenupageBySlugLazyQuery>;
 export type MenupageBySlugQueryResult = Apollo.QueryResult<MenupageBySlugQuery, MenupageBySlugQueryVariables>;
+export const StoriesDocument = gql`
+    query stories {
+  stories {
+    data {
+      id
+      attributes {
+        title
+        slug
+      }
+    }
+    meta {
+      pagination {
+        page
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useStoriesQuery__
+ *
+ * To run a query within a React component, call `useStoriesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useStoriesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useStoriesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useStoriesQuery(baseOptions?: Apollo.QueryHookOptions<StoriesQuery, StoriesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<StoriesQuery, StoriesQueryVariables>(StoriesDocument, options);
+      }
+export function useStoriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<StoriesQuery, StoriesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<StoriesQuery, StoriesQueryVariables>(StoriesDocument, options);
+        }
+export type StoriesQueryHookResult = ReturnType<typeof useStoriesQuery>;
+export type StoriesLazyQueryHookResult = ReturnType<typeof useStoriesLazyQuery>;
+export type StoriesQueryResult = Apollo.QueryResult<StoriesQuery, StoriesQueryVariables>;
 export const StoryBySlugDocument = gql`
     query storyBySlug($locale: String, $slug: String!) {
   stories(locale: $locale, filters: {slug: {eq: $slug}}) {
@@ -2134,6 +2613,58 @@ export const StoryBySlugDocument = gql`
         publicationDate {
           date
           displayType
+        }
+        triplyRecords {
+          data {
+            id
+            attributes {
+              type
+              recordId
+              archive {
+                ... on ArchivesOtherZoomLevel5DetailType {
+                  id
+                  type
+                  objectNumber
+                }
+                ... on ArchivesFondsZoomLevel5DetailType {
+                  id
+                  objectNumber
+                }
+              }
+              object {
+                title
+                maker
+                image
+              }
+              publication {
+                ... on PublicationsAudioVisualZoomLevel5DetailType {
+                  id
+                  type
+                  title
+                }
+                ... on PublicationsArticleZoomLevel5DetailType {
+                  id
+                  type
+                  title
+                }
+                ... on PublicationsSerialZoomLevel5DetailType {
+                  id
+                  type
+                  title
+                }
+                ... on PublicationsBookZoomLevel5DetailType {
+                  id
+                  type
+                  title
+                  author
+                }
+              }
+              people {
+                name
+                profession
+              }
+            }
+          }
         }
         components {
           ... on ComponentModulesTextModule {
@@ -2207,3 +2738,545 @@ export function useStoryBySlugLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type StoryBySlugQueryHookResult = ReturnType<typeof useStoryBySlugQuery>;
 export type StoryBySlugLazyQueryHookResult = ReturnType<typeof useStoryBySlugLazyQuery>;
 export type StoryBySlugQueryResult = Apollo.QueryResult<StoryBySlugQuery, StoryBySlugQueryVariables>;
+export const Zoom3Document = gql`
+    query Zoom3($filterId: String!, $page: Int!, $pageSize: Int!) {
+  zoomLevel3(
+    entityName: Publications
+    filterId: $filterId
+    page: $page
+    pageSize: $pageSize
+  ) {
+    uri
+    name
+    count
+    total
+  }
+}
+    `;
+
+/**
+ * __useZoom3Query__
+ *
+ * To run a query within a React component, call `useZoom3Query` and pass it any options that fit your needs.
+ * When your component renders, `useZoom3Query` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useZoom3Query({
+ *   variables: {
+ *      filterId: // value for 'filterId'
+ *      page: // value for 'page'
+ *      pageSize: // value for 'pageSize'
+ *   },
+ * });
+ */
+export function useZoom3Query(baseOptions: Apollo.QueryHookOptions<Zoom3Query, Zoom3QueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<Zoom3Query, Zoom3QueryVariables>(Zoom3Document, options);
+      }
+export function useZoom3LazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Zoom3Query, Zoom3QueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<Zoom3Query, Zoom3QueryVariables>(Zoom3Document, options);
+        }
+export type Zoom3QueryHookResult = ReturnType<typeof useZoom3Query>;
+export type Zoom3LazyQueryHookResult = ReturnType<typeof useZoom3LazyQuery>;
+export type Zoom3QueryResult = Apollo.QueryResult<Zoom3Query, Zoom3QueryVariables>;
+export const Zoom3ArchivesDocument = gql`
+    query Zoom3Archives($filterId: String!, $page: Int!, $pageSize: Int!) {
+  zoomLevel3(
+    entityName: Archives
+    filterId: $filterId
+    page: $page
+    pageSize: $pageSize
+  ) {
+    uri
+    name
+    count
+    total
+  }
+}
+    `;
+
+/**
+ * __useZoom3ArchivesQuery__
+ *
+ * To run a query within a React component, call `useZoom3ArchivesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useZoom3ArchivesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useZoom3ArchivesQuery({
+ *   variables: {
+ *      filterId: // value for 'filterId'
+ *      page: // value for 'page'
+ *      pageSize: // value for 'pageSize'
+ *   },
+ * });
+ */
+export function useZoom3ArchivesQuery(baseOptions: Apollo.QueryHookOptions<Zoom3ArchivesQuery, Zoom3ArchivesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<Zoom3ArchivesQuery, Zoom3ArchivesQueryVariables>(Zoom3ArchivesDocument, options);
+      }
+export function useZoom3ArchivesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Zoom3ArchivesQuery, Zoom3ArchivesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<Zoom3ArchivesQuery, Zoom3ArchivesQueryVariables>(Zoom3ArchivesDocument, options);
+        }
+export type Zoom3ArchivesQueryHookResult = ReturnType<typeof useZoom3ArchivesQuery>;
+export type Zoom3ArchivesLazyQueryHookResult = ReturnType<typeof useZoom3ArchivesLazyQuery>;
+export type Zoom3ArchivesQueryResult = Apollo.QueryResult<Zoom3ArchivesQuery, Zoom3ArchivesQueryVariables>;
+export const Zoom3ObjectsDocument = gql`
+    query Zoom3Objects($filterId: String!, $page: Int!, $pageSize: Int!) {
+  zoomLevel3(
+    entityName: Objects
+    filterId: $filterId
+    page: $page
+    pageSize: $pageSize
+  ) {
+    uri
+    name
+    count
+    total
+  }
+}
+    `;
+
+/**
+ * __useZoom3ObjectsQuery__
+ *
+ * To run a query within a React component, call `useZoom3ObjectsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useZoom3ObjectsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useZoom3ObjectsQuery({
+ *   variables: {
+ *      filterId: // value for 'filterId'
+ *      page: // value for 'page'
+ *      pageSize: // value for 'pageSize'
+ *   },
+ * });
+ */
+export function useZoom3ObjectsQuery(baseOptions: Apollo.QueryHookOptions<Zoom3ObjectsQuery, Zoom3ObjectsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<Zoom3ObjectsQuery, Zoom3ObjectsQueryVariables>(Zoom3ObjectsDocument, options);
+      }
+export function useZoom3ObjectsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Zoom3ObjectsQuery, Zoom3ObjectsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<Zoom3ObjectsQuery, Zoom3ObjectsQueryVariables>(Zoom3ObjectsDocument, options);
+        }
+export type Zoom3ObjectsQueryHookResult = ReturnType<typeof useZoom3ObjectsQuery>;
+export type Zoom3ObjectsLazyQueryHookResult = ReturnType<typeof useZoom3ObjectsLazyQuery>;
+export type Zoom3ObjectsQueryResult = Apollo.QueryResult<Zoom3ObjectsQuery, Zoom3ObjectsQueryVariables>;
+export const Zoom3DPeopleDocument = gql`
+    query Zoom3DPeople($filterId: String!, $page: Int!, $pageSize: Int!) {
+  zoomLevel3(
+    entityName: People
+    filterId: $filterId
+    page: $page
+    pageSize: $pageSize
+  ) {
+    uri
+    name
+    count
+    total
+  }
+}
+    `;
+
+/**
+ * __useZoom3DPeopleQuery__
+ *
+ * To run a query within a React component, call `useZoom3DPeopleQuery` and pass it any options that fit your needs.
+ * When your component renders, `useZoom3DPeopleQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useZoom3DPeopleQuery({
+ *   variables: {
+ *      filterId: // value for 'filterId'
+ *      page: // value for 'page'
+ *      pageSize: // value for 'pageSize'
+ *   },
+ * });
+ */
+export function useZoom3DPeopleQuery(baseOptions: Apollo.QueryHookOptions<Zoom3DPeopleQuery, Zoom3DPeopleQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<Zoom3DPeopleQuery, Zoom3DPeopleQueryVariables>(Zoom3DPeopleDocument, options);
+      }
+export function useZoom3DPeopleLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Zoom3DPeopleQuery, Zoom3DPeopleQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<Zoom3DPeopleQuery, Zoom3DPeopleQueryVariables>(Zoom3DPeopleDocument, options);
+        }
+export type Zoom3DPeopleQueryHookResult = ReturnType<typeof useZoom3DPeopleQuery>;
+export type Zoom3DPeopleLazyQueryHookResult = ReturnType<typeof useZoom3DPeopleLazyQuery>;
+export type Zoom3DPeopleQueryResult = Apollo.QueryResult<Zoom3DPeopleQuery, Zoom3DPeopleQueryVariables>;
+export const Zoom3DPublicationsDocument = gql`
+    query Zoom3DPublications($filterId: String!, $page: Int!, $pageSize: Int!) {
+  zoomLevel3(
+    entityName: Publications
+    filterId: $filterId
+    page: $page
+    pageSize: $pageSize
+  ) {
+    uri
+    name
+    count
+    total
+  }
+}
+    `;
+
+/**
+ * __useZoom3DPublicationsQuery__
+ *
+ * To run a query within a React component, call `useZoom3DPublicationsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useZoom3DPublicationsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useZoom3DPublicationsQuery({
+ *   variables: {
+ *      filterId: // value for 'filterId'
+ *      page: // value for 'page'
+ *      pageSize: // value for 'pageSize'
+ *   },
+ * });
+ */
+export function useZoom3DPublicationsQuery(baseOptions: Apollo.QueryHookOptions<Zoom3DPublicationsQuery, Zoom3DPublicationsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<Zoom3DPublicationsQuery, Zoom3DPublicationsQueryVariables>(Zoom3DPublicationsDocument, options);
+      }
+export function useZoom3DPublicationsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Zoom3DPublicationsQuery, Zoom3DPublicationsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<Zoom3DPublicationsQuery, Zoom3DPublicationsQueryVariables>(Zoom3DPublicationsDocument, options);
+        }
+export type Zoom3DPublicationsQueryHookResult = ReturnType<typeof useZoom3DPublicationsQuery>;
+export type Zoom3DPublicationsLazyQueryHookResult = ReturnType<typeof useZoom3DPublicationsLazyQuery>;
+export type Zoom3DPublicationsQueryResult = Apollo.QueryResult<Zoom3DPublicationsQuery, Zoom3DPublicationsQueryVariables>;
+export const Zoom4Document = gql`
+    query Zoom4($publicationsFilters: PublicationsZoomLevel4FiltersArgs, $page: Int!, $pageSize: Int!) {
+  zoomLevel4(
+    entityName: Publications
+    publicationsFilters: $publicationsFilters
+    page: $page
+    pageSize: $pageSize
+  ) {
+    total
+    hasMore
+    nodes {
+      record
+      title
+      firstImage
+      imageLabel
+    }
+  }
+}
+    `;
+
+/**
+ * __useZoom4Query__
+ *
+ * To run a query within a React component, call `useZoom4Query` and pass it any options that fit your needs.
+ * When your component renders, `useZoom4Query` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useZoom4Query({
+ *   variables: {
+ *      publicationsFilters: // value for 'publicationsFilters'
+ *      page: // value for 'page'
+ *      pageSize: // value for 'pageSize'
+ *   },
+ * });
+ */
+export function useZoom4Query(baseOptions: Apollo.QueryHookOptions<Zoom4Query, Zoom4QueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<Zoom4Query, Zoom4QueryVariables>(Zoom4Document, options);
+      }
+export function useZoom4LazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Zoom4Query, Zoom4QueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<Zoom4Query, Zoom4QueryVariables>(Zoom4Document, options);
+        }
+export type Zoom4QueryHookResult = ReturnType<typeof useZoom4Query>;
+export type Zoom4LazyQueryHookResult = ReturnType<typeof useZoom4LazyQuery>;
+export type Zoom4QueryResult = Apollo.QueryResult<Zoom4Query, Zoom4QueryVariables>;
+export const Zoom4ArchivesDocument = gql`
+    query Zoom4Archives($archivesFilters: ArchivesZoomLevel4FiltersArgs, $page: Int!, $pageSize: Int!) {
+  zoomLevel4(
+    entityName: Archives
+    archivesFilters: $archivesFilters
+    page: $page
+    pageSize: $pageSize
+  ) {
+    total
+    hasMore
+    nodes {
+      record
+      title
+      firstImage
+      imageLabel
+    }
+  }
+}
+    `;
+
+/**
+ * __useZoom4ArchivesQuery__
+ *
+ * To run a query within a React component, call `useZoom4ArchivesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useZoom4ArchivesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useZoom4ArchivesQuery({
+ *   variables: {
+ *      archivesFilters: // value for 'archivesFilters'
+ *      page: // value for 'page'
+ *      pageSize: // value for 'pageSize'
+ *   },
+ * });
+ */
+export function useZoom4ArchivesQuery(baseOptions: Apollo.QueryHookOptions<Zoom4ArchivesQuery, Zoom4ArchivesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<Zoom4ArchivesQuery, Zoom4ArchivesQueryVariables>(Zoom4ArchivesDocument, options);
+      }
+export function useZoom4ArchivesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Zoom4ArchivesQuery, Zoom4ArchivesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<Zoom4ArchivesQuery, Zoom4ArchivesQueryVariables>(Zoom4ArchivesDocument, options);
+        }
+export type Zoom4ArchivesQueryHookResult = ReturnType<typeof useZoom4ArchivesQuery>;
+export type Zoom4ArchivesLazyQueryHookResult = ReturnType<typeof useZoom4ArchivesLazyQuery>;
+export type Zoom4ArchivesQueryResult = Apollo.QueryResult<Zoom4ArchivesQuery, Zoom4ArchivesQueryVariables>;
+export const Zoom4ObjectsDocument = gql`
+    query Zoom4Objects($objectsFilters: ObjectsZoomLevel4FiltersArgs, $page: Int!, $pageSize: Int!) {
+  zoomLevel4(
+    entityName: Objects
+    objectsFilters: $objectsFilters
+    page: $page
+    pageSize: $pageSize
+  ) {
+    total
+    hasMore
+    nodes {
+      record
+      title
+      firstImage
+      imageLabel
+    }
+  }
+}
+    `;
+
+/**
+ * __useZoom4ObjectsQuery__
+ *
+ * To run a query within a React component, call `useZoom4ObjectsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useZoom4ObjectsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useZoom4ObjectsQuery({
+ *   variables: {
+ *      objectsFilters: // value for 'objectsFilters'
+ *      page: // value for 'page'
+ *      pageSize: // value for 'pageSize'
+ *   },
+ * });
+ */
+export function useZoom4ObjectsQuery(baseOptions: Apollo.QueryHookOptions<Zoom4ObjectsQuery, Zoom4ObjectsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<Zoom4ObjectsQuery, Zoom4ObjectsQueryVariables>(Zoom4ObjectsDocument, options);
+      }
+export function useZoom4ObjectsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Zoom4ObjectsQuery, Zoom4ObjectsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<Zoom4ObjectsQuery, Zoom4ObjectsQueryVariables>(Zoom4ObjectsDocument, options);
+        }
+export type Zoom4ObjectsQueryHookResult = ReturnType<typeof useZoom4ObjectsQuery>;
+export type Zoom4ObjectsLazyQueryHookResult = ReturnType<typeof useZoom4ObjectsLazyQuery>;
+export type Zoom4ObjectsQueryResult = Apollo.QueryResult<Zoom4ObjectsQuery, Zoom4ObjectsQueryVariables>;
+export const Zoom4PeopleDocument = gql`
+    query Zoom4People($peopleFilters: PeopleZoomLevel4FiltersArgs, $page: Int!, $pageSize: Int!) {
+  zoomLevel4(
+    entityName: People
+    peopleFilters: $peopleFilters
+    page: $page
+    pageSize: $pageSize
+  ) {
+    total
+    hasMore
+    nodes {
+      record
+      title
+      firstImage
+      imageLabel
+    }
+  }
+}
+    `;
+
+/**
+ * __useZoom4PeopleQuery__
+ *
+ * To run a query within a React component, call `useZoom4PeopleQuery` and pass it any options that fit your needs.
+ * When your component renders, `useZoom4PeopleQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useZoom4PeopleQuery({
+ *   variables: {
+ *      peopleFilters: // value for 'peopleFilters'
+ *      page: // value for 'page'
+ *      pageSize: // value for 'pageSize'
+ *   },
+ * });
+ */
+export function useZoom4PeopleQuery(baseOptions: Apollo.QueryHookOptions<Zoom4PeopleQuery, Zoom4PeopleQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<Zoom4PeopleQuery, Zoom4PeopleQueryVariables>(Zoom4PeopleDocument, options);
+      }
+export function useZoom4PeopleLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Zoom4PeopleQuery, Zoom4PeopleQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<Zoom4PeopleQuery, Zoom4PeopleQueryVariables>(Zoom4PeopleDocument, options);
+        }
+export type Zoom4PeopleQueryHookResult = ReturnType<typeof useZoom4PeopleQuery>;
+export type Zoom4PeopleLazyQueryHookResult = ReturnType<typeof useZoom4PeopleLazyQuery>;
+export type Zoom4PeopleQueryResult = Apollo.QueryResult<Zoom4PeopleQuery, Zoom4PeopleQueryVariables>;
+export const Zoom4PublicationsDocument = gql`
+    query Zoom4Publications($publicationsFilters: PublicationsZoomLevel4FiltersArgs, $page: Int!, $pageSize: Int!) {
+  zoomLevel4(
+    entityName: Publications
+    publicationsFilters: $publicationsFilters
+    page: $page
+    pageSize: $pageSize
+  ) {
+    total
+    hasMore
+    nodes {
+      record
+      title
+      firstImage
+      imageLabel
+    }
+  }
+}
+    `;
+
+/**
+ * __useZoom4PublicationsQuery__
+ *
+ * To run a query within a React component, call `useZoom4PublicationsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useZoom4PublicationsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useZoom4PublicationsQuery({
+ *   variables: {
+ *      publicationsFilters: // value for 'publicationsFilters'
+ *      page: // value for 'page'
+ *      pageSize: // value for 'pageSize'
+ *   },
+ * });
+ */
+export function useZoom4PublicationsQuery(baseOptions: Apollo.QueryHookOptions<Zoom4PublicationsQuery, Zoom4PublicationsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<Zoom4PublicationsQuery, Zoom4PublicationsQueryVariables>(Zoom4PublicationsDocument, options);
+      }
+export function useZoom4PublicationsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Zoom4PublicationsQuery, Zoom4PublicationsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<Zoom4PublicationsQuery, Zoom4PublicationsQueryVariables>(Zoom4PublicationsDocument, options);
+        }
+export type Zoom4PublicationsQueryHookResult = ReturnType<typeof useZoom4PublicationsQuery>;
+export type Zoom4PublicationsLazyQueryHookResult = ReturnType<typeof useZoom4PublicationsLazyQuery>;
+export type Zoom4PublicationsQueryResult = Apollo.QueryResult<Zoom4PublicationsQuery, Zoom4PublicationsQueryVariables>;
+export const ZoomLevel1Document = gql`
+    query zoomLevel1 {
+  zoomLevel1 {
+    name
+    count
+    id
+  }
+}
+    `;
+
+/**
+ * __useZoomLevel1Query__
+ *
+ * To run a query within a React component, call `useZoomLevel1Query` and pass it any options that fit your needs.
+ * When your component renders, `useZoomLevel1Query` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useZoomLevel1Query({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useZoomLevel1Query(baseOptions?: Apollo.QueryHookOptions<ZoomLevel1Query, ZoomLevel1QueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ZoomLevel1Query, ZoomLevel1QueryVariables>(ZoomLevel1Document, options);
+      }
+export function useZoomLevel1LazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ZoomLevel1Query, ZoomLevel1QueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ZoomLevel1Query, ZoomLevel1QueryVariables>(ZoomLevel1Document, options);
+        }
+export type ZoomLevel1QueryHookResult = ReturnType<typeof useZoomLevel1Query>;
+export type ZoomLevel1LazyQueryHookResult = ReturnType<typeof useZoomLevel1LazyQuery>;
+export type ZoomLevel1QueryResult = Apollo.QueryResult<ZoomLevel1Query, ZoomLevel1QueryVariables>;
+export const ZoomLevel2Document = gql`
+    query zoomLevel2($entityName: EntityNames!) {
+  zoomLevel2(entityName: $entityName) {
+    filter
+    id
+  }
+}
+    `;
+
+/**
+ * __useZoomLevel2Query__
+ *
+ * To run a query within a React component, call `useZoomLevel2Query` and pass it any options that fit your needs.
+ * When your component renders, `useZoomLevel2Query` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useZoomLevel2Query({
+ *   variables: {
+ *      entityName: // value for 'entityName'
+ *   },
+ * });
+ */
+export function useZoomLevel2Query(baseOptions: Apollo.QueryHookOptions<ZoomLevel2Query, ZoomLevel2QueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ZoomLevel2Query, ZoomLevel2QueryVariables>(ZoomLevel2Document, options);
+      }
+export function useZoomLevel2LazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ZoomLevel2Query, ZoomLevel2QueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ZoomLevel2Query, ZoomLevel2QueryVariables>(ZoomLevel2Document, options);
+        }
+export type ZoomLevel2QueryHookResult = ReturnType<typeof useZoomLevel2Query>;
+export type ZoomLevel2LazyQueryHookResult = ReturnType<typeof useZoomLevel2LazyQuery>;
+export type ZoomLevel2QueryResult = Apollo.QueryResult<ZoomLevel2Query, ZoomLevel2QueryVariables>;

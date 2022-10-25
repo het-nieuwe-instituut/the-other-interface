@@ -1,4 +1,4 @@
-import { SupportedLandingPages } from '@/features/filters/FilterClouds/FilterClouds'
+import { SupportedLandingPages } from '@/features/galaxy/PaginatedFilterClouds/PaginatedFilterCloudsContainer'
 import { addApolloState, getApolloClient } from '@/features/graphql/config/apollo'
 import { LandingpageContainer } from '@/features/pages/containers/LandingpageContainer/LandingpageContainer'
 import { preparePageConfiguration } from '@/features/shared/utils/pageConfiguration'
@@ -33,7 +33,10 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
         return { notFound: true }
     }
 
-    preparePageConfiguration(apolloClient, { host: context.req.headers.host ?? '', imagePath: process.env.NEXT_PUBLIC_REACT_APP_IMAGE_BASE_URL ?? '' })
+    preparePageConfiguration(apolloClient, {
+        host: context.req.headers.host ?? '',
+        imagePath: process.env.NEXT_PUBLIC_REACT_APP_IMAGE_BASE_URL ?? '',
+    })
 
     const apolloState = apolloClient.cache.extract()
 

@@ -16,5 +16,6 @@
     "publications": "Publications",
     "people": "People",
     "archives": "Archives",
-    "objects": "Objects"
+    "objects": "Objects",
+    "genericBy": "By {{name}}"
 }

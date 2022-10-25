@@ -62,7 +62,12 @@ export class TriplyUtils {
             throw new Error('invalid uri')
         }
 
-        return s.pop()
+        const id = s.pop()
+        if (!id) {
+            throw new Error('invalid uri')
+        }
+
+        return id
     }
 
     public static getUriForTypeAndId(type: EntityNames, id: string) {

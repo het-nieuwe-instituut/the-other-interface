@@ -7,7 +7,7 @@
     restart_policy: always
     recreate: true
     keep_volumes: no
-    env: "{{ app.env|combine({'NODE_ENV': 'production', 'VIRTUAL_HOST': app.web.url, 'LETSENCRYPT_HOST': app.web.url}) }}"
+    env: "{{ app.env|combine({'NODE_ENV': server_environment_name, 'VIRTUAL_HOST': app.web.url, 'LETSENCRYPT_HOST': app.web.url}) }}"
     networks:
       - name: "app-network"
         aliases:
