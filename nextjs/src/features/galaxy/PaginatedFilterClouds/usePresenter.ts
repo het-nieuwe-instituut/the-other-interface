@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 import { Zoom3Query } from 'src/generated/graphql'
 import { useFitDataToDimensions } from '../hooks/useFitToDataToDimensions'
 
@@ -22,18 +22,18 @@ export function usePresenter(dimensions: Dimensions, data: Zoom3Query['zoomLevel
     const router = useRouter()
     const theme = useTheme()
     const client = useApolloClient()
-    const dataDimensions = useFitDataToDimensions(dimensions, data, getId, d => d.count ?? 0)
+    const dataCopy = useMemo(() => JSON.parse(JSON.stringify(data)), [data])
+    const dataDimensions = useFitDataToDimensions(dimensions, dataCopy, getId, d => d.count ?? 0)
 
     const getColor = useCallback(() => {
         return theme.colors.levels.z2.colors[`${router.query.slug}Filters`][router.query.filter as string]
     }, [router.query.filter, router.query.slug, theme.colors.levels.z2.colors])
 
-    const backgrounds = useRandomBackgroundData(data, getId, getColor())
-
-    const { svgRef, simulation } = useD3Simulation(dimensions, data, selector, dataDimensions)
+    const backgrounds = useRandomBackgroundData(dataCopy, getId, getColor())
+    const { svgRef, simulation } = useD3Simulation(dimensions, dataCopy, selector, dataDimensions)
     const navigateTo = useCallback(
         (d: d3.SimulationNodeDatum & PaginatedFilterType) => {
-            router.push(`${router.query.slug}/${d.name}`)
+            router.push(`/landingpage/${router.query.slug}/${router.query.filter}/${d.name}`)
         },
         [router]
     )

@@ -116,7 +116,7 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::triply-record.triply-record",
-      "mappedBy": "stories"
+      "inversedBy": "stories"
     }
   }
 }

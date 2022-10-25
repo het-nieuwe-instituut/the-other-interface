@@ -41,12 +41,14 @@ function useListenToSimulationTicks(
 
     // set default styles
     useEffect(() => {
+        if (!data) return
         const d3Svg = d3.select(svgRef.current)
         const nodeForeign = d3Svg.selectAll(`.foreign-${selector}`).data(data)
         nodeForeign.attr('opacity', 0).attr('width', 0).attr('height', 0)
     }, [data, selector, svgRef])
 
     useEffect(() => {
+        if (!data) return
         const d3Svg = d3.select(svgRef.current)
         const nodeForeign = d3Svg.selectAll(`.foreign-${selector}`).data<Partial<D3CollectionItem>>(data)
         const collisionObject = d3Svg.selectAll(`.foreign-collision`).data<Partial<D3CollisionData>>(collisionData)

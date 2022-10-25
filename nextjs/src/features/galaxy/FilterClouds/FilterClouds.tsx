@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { useId } from 'react'
 import { ZoomLevel2Query } from 'src/generated/graphql'
 import { SupportedLandingPages } from './FilterCloudsContainer'
+import { PossibleFilters } from './types'
 import { usePresenter } from './usePresenter'
 
 type Props = {
@@ -54,7 +55,7 @@ const FilterClouds: React.FunctionComponent<Props> = ({ dimensions, type, zoomLe
                                 {!zoomed && (
                                     <Box>
                                         <Text width="12.5rem" textStyle={'cloudText'}>
-                                            {t(router.query.slug as SupportedLandingPages)}
+                                            {t(router.query.slug as PossibleFilters)}
                                         </Text>
                                         <Text width="12.5rem" textStyle={'cloudText'}>
                                             {item.name}

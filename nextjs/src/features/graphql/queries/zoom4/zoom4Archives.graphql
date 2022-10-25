@@ -1,0 +1,12 @@
+query Zoom4Archives($archivesFilters: ArchivesZoomLevel4FiltersArgs, $page: Int!, $pageSize: Int!) {
+    zoomLevel4(entityName: Archives, archivesFilters: $archivesFilters, page: $page, pageSize: $pageSize) {
+        total
+        hasMore
+        nodes {
+            record
+            title
+            firstImage
+            imageLabel
+        }
+    }
+}

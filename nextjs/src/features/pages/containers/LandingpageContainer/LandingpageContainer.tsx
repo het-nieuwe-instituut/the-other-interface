@@ -1,3 +1,4 @@
+import Breadcrumbs from '@/features/galaxy/components/Breadcrumbs/Breadcrumbs'
 import { SupportedLandingPages } from '@/features/galaxy/FilterClouds/FilterCloudsContainer'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
@@ -48,7 +49,10 @@ export const LandingpageContainer: React.FC = () => {
         <>
             <Box backgroundColor="graph" height="800px" ref={graphRef}>
                 {sizes?.height && sizes?.width && (
-                    <DynamicFilterCloudsNoSsr type={type} dimensions={{ height: 800, width: sizes?.width }} />
+                    <>
+                        <Breadcrumbs />
+                        <DynamicFilterCloudsNoSsr type={type} dimensions={{ height: 800, width: sizes?.width }} />
+                    </>
                 )}
             </Box>
             <Box px={{ xl: 6, base: 0 }}>

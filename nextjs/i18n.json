@@ -2,7 +2,7 @@
     "locales": ["en", "nl"],
     "defaultLocale": "en",
     "pages": {
-        "*": ["common"],
+        "*": ["common", "navigation"],
         "story/*": ["stories"],
         "/landingpage/[slug]": ["landingpage"],
         "/landingpage/[slug]/[filter]": ["landingpage"],

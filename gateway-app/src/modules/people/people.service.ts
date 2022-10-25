@@ -187,7 +187,7 @@ export class PeopleService {
             { record: uri }
         )
 
-        return TriplyUtils.combineObjectArray(result.data)
+        return { ...TriplyUtils.combineObjectArray(result.data), id: objectId }
     }
 
     public validateFilterInput(input: string): PeopleZoomLevel3Ids {

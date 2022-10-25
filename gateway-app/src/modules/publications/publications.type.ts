@@ -1,4 +1,5 @@
 import { createUnionType, Field, InputType, ObjectType, registerEnumType } from '@nestjs/graphql'
+import { PoepleZoomLevel5DetailType } from '../people/people.type'
 import { PublicationsZoomLevel5Types } from './publications.service'
 
 @InputType()
@@ -53,11 +54,17 @@ export class PublicationsAudioVisualZoomLevel5DetailType extends BasePublication
     @Field(() => String, { nullable: true })
     public authorRoleLabel?: string
 
+    @Field(() => PoepleZoomLevel5DetailType, { nullable: true })
+    public populatedAuthor?: PoepleZoomLevel5DetailType
+
     @Field(() => String, { nullable: true })
     public publisher?: string
 
     @Field(() => String, { nullable: true })
     public publisherLabel?: string
+
+    @Field(() => PoepleZoomLevel5DetailType, { nullable: true })
+    public populatedPublisher?: PoepleZoomLevel5DetailType
 
     @Field(() => String, { nullable: true })
     public yearOfPublication?: string
@@ -140,6 +147,9 @@ export class PublicationsArticleZoomLevel5DetailType extends BasePublicationZoom
     @Field(() => String, { nullable: true })
     public authorRoleLabel?: string
 
+    @Field(() => PoepleZoomLevel5DetailType, { nullable: true })
+    public populatedAuthor?: PoepleZoomLevel5DetailType
+
     @Field(() => String, { nullable: true })
     public sourceTitle?: string
 
@@ -163,6 +173,9 @@ export class PublicationsArticleZoomLevel5DetailType extends BasePublicationZoom
 
     @Field(() => String, { nullable: true })
     public publisherLabel?: string
+
+    @Field(() => PoepleZoomLevel5DetailType, { nullable: true })
+    public populatedPublisher?: PoepleZoomLevel5DetailType
 
     @Field(() => String, { nullable: true })
     public abstract?: string
@@ -220,6 +233,9 @@ export class PublicationsSerialZoomLevel5DetailType extends BasePublicationZoomL
 
     @Field(() => String, { nullable: true })
     public publisherLabel?: string
+
+    @Field(() => PoepleZoomLevel5DetailType, { nullable: true })
+    public populatedPublisher?: PoepleZoomLevel5DetailType
 
     @Field(() => String, { nullable: true })
     public yearOfPublication?: string
@@ -287,11 +303,17 @@ export class PublicationsBookZoomLevel5DetailType extends BasePublicationZoomLev
     @Field(() => String, { nullable: true })
     public authorRoleLabel?: string
 
+    @Field(() => PoepleZoomLevel5DetailType, { nullable: true })
+    public populatedAuthor?: PoepleZoomLevel5DetailType
+
     @Field(() => String, { nullable: true })
     public publisher?: string
 
     @Field(() => String, { nullable: true })
     public publisherLabel?: string
+
+    @Field(() => PoepleZoomLevel5DetailType, { nullable: true })
+    public populatedPublisher?: PoepleZoomLevel5DetailType
 
     @Field(() => String, { nullable: true })
     public yearOfPublication?: string
