@@ -23,10 +23,12 @@ export function usePresenter(data: ZoomLevel4Type[], total: number, selector: st
     const navigateTo = useCallback(
         async (d: d3.SimulationNodeDatum & ZoomLevel4Type) => {
             const splittedUrl = d.record.split('/')
+
+            const id = splittedUrl[splittedUrl.length - 1]
+            const typeFromRecord = splittedUrl[splittedUrl.length - 2]
+            const type = getCorrectType(typeFromRecord)
             return router.push(
-                `/landingpage/${router.query.slug}/${router.query.filter}/${router.query.collection}/${
-                    splittedUrl[splittedUrl.length - 1]
-                }-${splittedUrl[splittedUrl.length - 2]}`
+                `/landingpage/${router.query.slug}/${router.query.filter}/${router.query.collection}/${id}-${type}`
             )
         },
         [router]
@@ -38,4 +40,22 @@ export function usePresenter(data: ZoomLevel4Type[], total: number, selector: st
         ...pagination,
         ...zoomEvents,
     }
+}
+
+function getCorrectType(type: string) {
+    const publications = ['books', 'audiovisual', 'article', 'serial']
+    const archives = ['fonds', 'other']
+
+    const isInPublicationList = !!publications.find(v => v === type)
+    const isInArchivesList = !!archives.find(v => v === type)
+
+    if (isInPublicationList) {
+        return 'publications'
+    }
+
+    if (isInArchivesList) {
+        return 'archives'
+    }
+
+    return type
 }

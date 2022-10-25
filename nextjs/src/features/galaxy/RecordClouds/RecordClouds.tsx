@@ -108,6 +108,64 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions, zoomLevel5, 
                 />
             )
         }
+        if (zoomLevel5?.__typename === 'PublicationsBookZoomLevel5DetailType') {
+            return (
+                <RecordCloudHighlight
+                    title={zoomLevel5.title ?? undefined}
+                    queryType={zoomLevel5?.__typename}
+                    dimensions={SVG_DIMENSIONS}
+                />
+            )
+        }
+        if (zoomLevel5?.__typename === 'PublicationsArticleZoomLevel5DetailType') {
+            return (
+                <RecordCloudHighlight
+                    title={zoomLevel5.title ?? undefined}
+                    queryType={zoomLevel5?.__typename}
+                    dimensions={SVG_DIMENSIONS}
+                />
+            )
+        }
+
+        if (zoomLevel5?.__typename === 'PublicationsAudioVisualZoomLevel5DetailType') {
+            return (
+                <RecordCloudHighlight
+                    title={zoomLevel5.title ?? undefined}
+                    queryType={zoomLevel5?.__typename}
+                    dimensions={SVG_DIMENSIONS}
+                />
+            )
+        }
+
+        if (zoomLevel5?.__typename === 'PublicationsSerialZoomLevel5DetailType') {
+            return (
+                <RecordCloudHighlight
+                    title={zoomLevel5.title ?? undefined}
+                    queryType={zoomLevel5?.__typename}
+                    dimensions={SVG_DIMENSIONS}
+                />
+            )
+        }
+
+        if (zoomLevel5?.__typename === 'ArchivesFondsZoomLevel5DetailType') {
+            return (
+                <RecordCloudHighlight
+                    title={zoomLevel5.recordTitle ?? undefined}
+                    queryType={zoomLevel5?.__typename}
+                    dimensions={SVG_DIMENSIONS}
+                />
+            )
+        }
+
+        if (zoomLevel5?.__typename === 'ArchivesOtherZoomLevel5DetailType') {
+            return (
+                <RecordCloudHighlight
+                    title={zoomLevel5.title ?? undefined}
+                    queryType={zoomLevel5?.__typename}
+                    dimensions={SVG_DIMENSIONS}
+                />
+            )
+        }
     }
 
     function getRelatedItemsTranslation(relation: ParentRelation) {

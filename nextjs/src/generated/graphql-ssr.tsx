@@ -567,6 +567,41 @@ export const ssrObjectRelations = {
       withPage: withPageObjectRelations,
       usePage: useObjectRelations,
     }
+export async function getServerPageZoomLevel5Archives
+    (options: Omit<Apollo.QueryOptions<Types.ZoomLevel5ArchivesQueryVariables>, 'query'>, ctx?: any ){
+        const apolloClient = getApolloClient(ctx);
+        
+        const data = await apolloClient.query<Types.ZoomLevel5ArchivesQuery>({ ...options, query: Operations.ZoomLevel5ArchivesDocument });
+        
+        const apolloState = apolloClient.cache.extract();
+
+        return {
+            props: {
+                apolloState: apolloState,
+                data: data?.data,
+                error: data?.error ?? data?.errors ?? null,
+            },
+        };
+      }
+export const useZoomLevel5Archives = (
+  optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.ZoomLevel5ArchivesQuery, Types.ZoomLevel5ArchivesQueryVariables>) => {
+  const router = useRouter();
+  const options = optionsFunc ? optionsFunc(router) : {};
+  return useQuery(Operations.ZoomLevel5ArchivesDocument, options);
+};
+export type PageZoomLevel5ArchivesComp = React.FC<{data?: Types.ZoomLevel5ArchivesQuery, error?: Apollo.ApolloError}>;
+export const withPageZoomLevel5Archives = (optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.ZoomLevel5ArchivesQuery, Types.ZoomLevel5ArchivesQueryVariables>) => (WrappedComponent:PageZoomLevel5ArchivesComp) : NextPage  => (props) => {
+                const router = useRouter()
+                const options = optionsFunc ? optionsFunc(router) : {};
+                const {data, error } = useQuery(Operations.ZoomLevel5ArchivesDocument, options)    
+                return <WrappedComponent {...props} data={data} error={error} /> ;
+                   
+            }; 
+export const ssrZoomLevel5Archives = {
+      getServerPage: getServerPageZoomLevel5Archives,
+      withPage: withPageZoomLevel5Archives,
+      usePage: useZoomLevel5Archives,
+    }
 export async function getServerPageZoomLevel5ArchivesFonds
     (options: Omit<Apollo.QueryOptions<Types.ZoomLevel5ArchivesFondsQueryVariables>, 'query'>, ctx?: any ){
         const apolloClient = getApolloClient(ctx);
@@ -671,6 +706,41 @@ export const ssrZoomLevel5Object = {
       getServerPage: getServerPageZoomLevel5Object,
       withPage: withPageZoomLevel5Object,
       usePage: useZoomLevel5Object,
+    }
+export async function getServerPageZoomLevel5Publication
+    (options: Omit<Apollo.QueryOptions<Types.ZoomLevel5PublicationQueryVariables>, 'query'>, ctx?: any ){
+        const apolloClient = getApolloClient(ctx);
+        
+        const data = await apolloClient.query<Types.ZoomLevel5PublicationQuery>({ ...options, query: Operations.ZoomLevel5PublicationDocument });
+        
+        const apolloState = apolloClient.cache.extract();
+
+        return {
+            props: {
+                apolloState: apolloState,
+                data: data?.data,
+                error: data?.error ?? data?.errors ?? null,
+            },
+        };
+      }
+export const useZoomLevel5Publication = (
+  optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.ZoomLevel5PublicationQuery, Types.ZoomLevel5PublicationQueryVariables>) => {
+  const router = useRouter();
+  const options = optionsFunc ? optionsFunc(router) : {};
+  return useQuery(Operations.ZoomLevel5PublicationDocument, options);
+};
+export type PageZoomLevel5PublicationComp = React.FC<{data?: Types.ZoomLevel5PublicationQuery, error?: Apollo.ApolloError}>;
+export const withPageZoomLevel5Publication = (optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.ZoomLevel5PublicationQuery, Types.ZoomLevel5PublicationQueryVariables>) => (WrappedComponent:PageZoomLevel5PublicationComp) : NextPage  => (props) => {
+                const router = useRouter()
+                const options = optionsFunc ? optionsFunc(router) : {};
+                const {data, error } = useQuery(Operations.ZoomLevel5PublicationDocument, options)    
+                return <WrappedComponent {...props} data={data} error={error} /> ;
+                   
+            }; 
+export const ssrZoomLevel5Publication = {
+      getServerPage: getServerPageZoomLevel5Publication,
+      withPage: withPageZoomLevel5Publication,
+      usePage: useZoomLevel5Publication,
     }
 export async function getServerPageZoomLevel5PublicationsArticle
     (options: Omit<Apollo.QueryOptions<Types.ZoomLevel5PublicationsArticleQueryVariables>, 'query'>, ctx?: any ){

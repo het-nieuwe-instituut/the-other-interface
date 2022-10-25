@@ -1,13 +1,21 @@
 import { ApolloClient, NormalizedCacheObject, QueryOptions } from '@apollo/client'
 import {
+    useZoomLevel5ArchivesQuery,
     useZoomLevel5ObjectQuery,
     useZoomLevel5PersonQuery,
+    useZoomLevel5PublicationQuery,
+    ZoomLevel5ArchivesDocument,
+    ZoomLevel5ArchivesQuery,
+    ZoomLevel5ArchivesQueryVariables,
     ZoomLevel5ObjectDocument,
     ZoomLevel5ObjectQuery,
     ZoomLevel5ObjectQueryVariables,
     ZoomLevel5PersonDocument,
     ZoomLevel5PersonQuery,
     ZoomLevel5PersonQueryVariables,
+    ZoomLevel5PublicationDocument,
+    ZoomLevel5PublicationQuery,
+    ZoomLevel5PublicationQueryVariables,
 } from 'src/generated/graphql'
 
 export enum SupportedQuerys {
@@ -17,34 +25,30 @@ export enum SupportedQuerys {
     objects = 'objects',
 }
 export const config = {
-    // ['archivesOther']: {
-    //     useHook: useZoomLevel5ArchivesOtherQuery,
-    //     accessor: (data?: ReturnType<typeof useZoomLevel5ArchivesOtherQuery>['data']) => data?.zoomLevel5ArchivesOther,
-    // },
-    // ['archivesFonds']: {
-    //     useHook: useZoomLevel5ArchivesFondsQuery,
-    //     accessor: (data?: ReturnType<typeof useZoomLevel5ArchivesFondsQuery>['data']) => data?.zoomLevel5ArchivesFonds,
-    // },
-    // ['publicationsSerial']: {
-    //     useHook: useZoomLevel5PublicationsSerialQuery,
-    //     accessor: (data?: ReturnType<typeof useZoomLevel5PublicationsSerialQuery>['data']) =>
-    //         data?.zoomLevel5PublicationsSerial,
-    // },
-    // ['publicationsArticle']: {
-    //     useHook: useZoomLevel5PublicationsArticleQuery,
-    //     accessor: (data?: ReturnType<typeof useZoomLevel5PublicationsArticleQuery>['data']) =>
-    //         data?.zoomLevel5PublicationsArticle,
-    // },
-    // ['publicationsAudiovisual']: {
-    //     useHook: useZoomLevel5PublicationsAudiovisualQuery,
-    //     accessor: (data?: ReturnType<typeof useZoomLevel5PublicationsAudiovisualQuery>['data']) =>
-    //         data?.zoomLevel5PublicationsAudiovisual,
-    // },
-    // ['publicationsBook']: {
-    //     useHook: useZoomLevel5PublicationsBookQuery,
-    //     accessor: (data?: ReturnType<typeof useZoomLevel5PublicationsBookQuery>['data']) =>
-    //         data?.zoomLevel5PublicationsBook,
-    // },
+    [SupportedQuerys.publications]: {
+        query: (
+            client: ApolloClient<NormalizedCacheObject>,
+            options: Omit<QueryOptions<ZoomLevel5PublicationQueryVariables, ZoomLevel5PublicationQuery>, 'query'>
+        ) =>
+            client.query<ZoomLevel5PublicationQuery, ZoomLevel5PublicationQueryVariables>({
+                ...options,
+                query: ZoomLevel5PublicationDocument,
+            }),
+        useHook: useZoomLevel5PublicationQuery,
+        accessor: (data?: ReturnType<typeof useZoomLevel5PublicationQuery>['data']) => data?.zoomLevel5Publication,
+    },
+    [SupportedQuerys.archives]: {
+        query: (
+            client: ApolloClient<NormalizedCacheObject>,
+            options: Omit<QueryOptions<ZoomLevel5ArchivesQueryVariables, ZoomLevel5ArchivesQuery>, 'query'>
+        ) =>
+            client.query<ZoomLevel5ArchivesQuery, ZoomLevel5ArchivesQueryVariables>({
+                ...options,
+                query: ZoomLevel5ArchivesDocument,
+            }),
+        useHook: useZoomLevel5ArchivesQuery,
+        accessor: (data?: ReturnType<typeof useZoomLevel5ArchivesQuery>['data']) => data?.zoomLevel5Archive,
+    },
     [SupportedQuerys.objects]: {
         query: (
             client: ApolloClient<NormalizedCacheObject>,
@@ -73,17 +77,6 @@ export const config = {
 
 function getConfig<T extends keyof typeof config>(type: T) {
     return config[type] as typeof config[T]
-}
-
-export const dataAccessor = {
-    // ['archivesOther']: 'zoomLevel5ArchivesOther' as const,
-    // ['archivesFonds']: 'zoomLevel5ArchivesFonds' as const,
-    // ['publicationsSerial']: 'zoomLevel5PublicationsSerial' as const,
-    // ['publicationsArticle']: 'zoomLevel5PublicationsSerial' as const,
-    // ['publicationsAudiovisual']: 'zoomLevel5PublicationsSerial' as const,
-    // ['publicationsBook']: 'zoomLevel5PublicationsSerial' as const,
-    [SupportedQuerys.objects]: 'zoomLevel5Object' as const,
-    [SupportedQuerys.people]: 'zoomLevel5Person' as const,
 }
 
 export type ZoomLevel5DetailResponses = ReturnType<typeof useZoomLevel5DetailQuery>['data']
