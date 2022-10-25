@@ -8,6 +8,7 @@ import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import { HomepageComponentsDynamicZone, HomepageQuery, useHomepageQuery } from 'src/generated/graphql'
+import { GalaxyFooter } from '@/features/shared/components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 
 export const DynamicGalaxyNoSsr = dynamic(() => import('../../../galaxy/Galaxy/Galaxy'), {
     ssr: false,
@@ -37,7 +38,7 @@ const Homepage: React.FC<{ data?: HomepageQuery }> = ({ data }) => {
             <GalaxyWrapper
                 renderTopLeft={() => <Breadcrumbs />}
                 // renderTopRight={() => <Menu />}
-                renderBottom={() => <GalaxyButton text="Go to searchportal" />}
+                renderBottom={() => <GalaxyFooter />}
             >
                 <Box backgroundColor="graph" height="800px" ref={graphRef}>
                     {sizes?.height && sizes?.width && (
