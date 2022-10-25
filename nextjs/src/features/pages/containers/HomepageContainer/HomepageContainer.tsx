@@ -1,10 +1,11 @@
 import Breadcrumbs from '@/features/galaxy/components/Breadcrumbs/Breadcrumbs'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
+import useScroll from '@/features/shared/hooks/useScroll'
 import { Box, useTheme } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
-import { useEffect, useRef, useState } from 'react'
+import { useRef } from 'react'
 import { HomepageComponentsDynamicZone, HomepageQuery, useHomepageQuery } from 'src/generated/graphql'
 import { ScrollToTop } from '../../utils/utils'
 
@@ -31,19 +32,7 @@ const Homepage: React.FC<{ data?: HomepageQuery }> = ({ data }) => {
     const sizes = useSize(graphRef)
     const theme = useTheme()
 
-    const [scrollPosition, setScrollPosition] = useState(0)
-    const handleScroll = () => {
-        const position = window.pageYOffset
-        setScrollPosition(position)
-    }
-
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll, { passive: true })
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll)
-        }
-    }, [])
+    const { scrollPosition } = useScroll()
 
     return (
         <div>

@@ -4,7 +4,7 @@ import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Box, Flex, useTheme } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { useEffect, useRef, useState } from 'react'
+import { useRef } from 'react'
 import {
     LandingpageBySlugQuery,
     LandingpageComponentsDynamicZone,
@@ -14,6 +14,7 @@ import { PaginatedCollectionContainer } from '../../../galaxy/Collections/Pagina
 import { SupportedLandingPages } from '../../../galaxy/PaginatedFilterClouds/PaginatedFilterCloudsContainer'
 import Breadcrumbs from '@/features/galaxy/components/Breadcrumbs/Breadcrumbs'
 import { ScrollToContent, ScrollToTop } from '../../utils/utils'
+import useScroll from '@/features/shared/hooks/useScroll'
 
 export interface LandingPageQueryParams {
     slug: SupportedLandingPages
@@ -53,19 +54,7 @@ export const LandingCollection: React.FC<{ data?: LandingpageBySlugQuery }> = ({
 
     const theme = useTheme()
 
-    const [scrollPosition, setScrollPosition] = useState(0)
-    const handleScroll = () => {
-        const position = window.pageYOffset
-        setScrollPosition(position)
-    }
-
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll, { passive: true })
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll)
-        }
-    }, [])
+    const { scrollPosition } = useScroll()
 
     const graphRef = useRef<HTMLDivElement | null>(null)
     const sizes = useSize(graphRef)
