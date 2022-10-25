@@ -6,10 +6,33 @@ interface GalaxyButtonProps {
     text: string
 }
 
+// interface Props {}
+
+// export const ButtonsGrid: React.FC<Props> = props => {
+//     return <Flex gap={2}>{renderButtons()}</Flex>
+
+//     function renderButtons() {
+//         return props.buttons?.map((button, index, array) => {
+//             const config = buttonConfig[props.buttonStyle ?? EnumComponentmodulesbuttonsmoduleButtonstyle.Default]
+
+//             if (!button) {
+//                 return null
+//             }
+
+//             return (
+//                 <Flex key={keyExtractor(button, index, array)}>
+//                     <GalaxyButton button={button} index={index} array={array} config={config} />
+//                 </Flex>
+//             )
+//         })
+//     }
+// }
+
 export const GalaxyButton: React.FC<GalaxyButtonProps> = props => {
     return (
         <NextLink style={{ width: '100%' }} href={'www.url.nl'}>
-            <Button as={'a'} rightIcon={renderExternalLink()} target={'http://localhost:3000/nl'}>
+            {/* TODO: dont show button border */}
+            <Button border="0px" as={'a'} rightIcon={renderExternalLink()} target={'http://localhost:3000/nl'}>
                 <Text as={'span'}> {props.text}</Text>
             </Button>
         </NextLink>

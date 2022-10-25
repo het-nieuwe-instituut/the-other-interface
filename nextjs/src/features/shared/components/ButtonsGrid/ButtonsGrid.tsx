@@ -87,13 +87,14 @@ interface GridButtonProps {
 }
 const GridButton: React.FC<GridButtonProps> = ({ button, index, array, config }) => {
     const pageConfiguration = usePageConfiguration()
+    console.log(config)
 
     return (
         <NextLink style={{ width: '100%' }} href={getURl(button)} passHref>
             <Button
+                //TODO: find prop that is responsible for border of button
                 variant={config.variant}
                 as={'a'}
-                // 1. add correct righticon
                 rightIcon={renderExternalLink(button)}
                 target={
                     !!button.url && isExternalURL(button.url, pageConfiguration.data?.host ?? '') ? '_blank' : undefined
