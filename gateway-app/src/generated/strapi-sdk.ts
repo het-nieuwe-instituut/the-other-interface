@@ -572,7 +572,7 @@ export enum Enum_Componentmodulescarousel_Type {
 
 export enum Enum_Componentmodulesgridmodule_Fieldtypes {
     Stories = 'Stories',
-    TriplyRecords = 'TriplyRecords',
+    Triply = 'Triply',
 }
 
 export enum Enum_Triplyrecord_Type {
