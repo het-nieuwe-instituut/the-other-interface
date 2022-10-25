@@ -26,7 +26,7 @@ const gridBreakpoints = {
 export const GridModule: React.FC<Props> = props => {
     const pageSize = props.component.pageSize || 6
     const [showAmount, setShowAmount] = useState(pageSize)
-    const allFieldsAreShown = showAmount === props.component.fields?.length
+    const allFieldsAreShown = showAmount >= (props.component.fields?.length || 0)
 
     return (
         <Box
