@@ -1,6 +1,8 @@
 ---
 - import_tasks: overlay-network.yml
-# # - import_tasks: papertrail-agent.yml
+
+- import_tasks: papertrail-agent.yml
+  when: "'log' in app"
 
 - import_tasks: nginx-proxy.yml
 
