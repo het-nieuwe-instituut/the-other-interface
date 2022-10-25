@@ -1,5 +1,5 @@
 import { GalaxyWrapper } from '@/features/shared/components/GalaxyWrapper/GalaxyWrapper'
-import { GalaxySearchButton } from '../../../shared/components/Buttons/GalaxySearchButton'
+import { GalaxyButton } from '../../../shared/components/Buttons/GalaxyButton'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 import { Box, useTheme } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
@@ -30,8 +30,8 @@ export const HomepageContainer = () => {
     return (
         <Box>
             <GalaxyWrapper
-                renderHeader={() => <GalaxySearchButton text="Search" />}
-                renderFooter={() => <GalaxySearchButton text="Go to searchportal" />}
+                renderHeader={() => <GalaxyButton text="Search" />}
+                renderFooter={() => <GalaxyButton text="Go to searchportal" />}
                 renderGalaxy={() => (
                     <Box backgroundColor="graph" height="800px" ref={graphRef}>
                         {sizes?.height && sizes?.width && (

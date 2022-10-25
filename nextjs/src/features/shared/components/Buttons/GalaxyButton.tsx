@@ -5,7 +5,7 @@ interface GalaxyButtonProps {
     text: string
 }
 
-export const GalaxySearchButton: React.FC<GalaxyButtonProps> = props => {
+export const GalaxyButton: React.FC<GalaxyButtonProps> = props => {
     return (
         <NextLink style={{ width: '100%' }} href={'www.url.nl'}>
             <Button as={'a'} target={'http://localhost:3000/nl'}>
