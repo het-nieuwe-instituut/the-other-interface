@@ -4,7 +4,7 @@ interface Props {
     renderTopLeft?: () => JSX.Element
     renderTopRight?: () => JSX.Element
     renderBottom?: () => JSX.Element
-    renderGalaxy: () => JSX.Element
+    children: React.ReactNode
 }
 
 export const GalaxyWrapper: React.FC<Props> = props => {
@@ -50,7 +50,7 @@ export const GalaxyWrapper: React.FC<Props> = props => {
                 </Flex>
             </Flex>
             <Box zIndex={1} bottom={0} right={0} left={0}>
-                {props.renderGalaxy()}
+                {props.children}
             </Box>
         </Box>
     )

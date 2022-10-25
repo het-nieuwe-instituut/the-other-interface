@@ -38,14 +38,13 @@ const Homepage: React.FC<{ data?: HomepageQuery }> = ({ data }) => {
                 renderTopLeft={() => <Breadcrumbs />}
                 // renderTopRight={() => <Menu />}
                 renderBottom={() => <GalaxyButton text="Go to searchportal" />}
-                renderGalaxy={() => (
-                    <Box backgroundColor="graph" height="800px" ref={graphRef}>
-                        {sizes?.height && sizes?.width && (
-                            <DynamicGalaxyNoSsr dimensions={{ height: 800, width: sizes?.width }} />
-                        )}
-                    </Box>
-                )}
-            />
+            >
+                <Box backgroundColor="graph" height="800px" ref={graphRef}>
+                    {sizes?.height && sizes?.width && (
+                        <DynamicGalaxyNoSsr dimensions={{ height: 800, width: sizes?.width }} />
+                    )}
+                </Box>
+            </GalaxyWrapper>
             <Box px={{ xl: 6, base: 0 }}>
                 <Box backgroundColor={'white'} maxW={theme.breakpoints.xl} marginX={'auto'}>
                     <DynamicComponentRenderer
