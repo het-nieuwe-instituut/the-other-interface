@@ -3,26 +3,25 @@ import { ApolloClient, gql, NormalizedCacheObject, useQuery } from '@apollo/clie
 import { GetServerSidePropsContext } from 'next'
 
 import {
-    EntityNames,
+    LandingpageBySlugDocument,
+    LandingpageBySlugQuery,
     ObjectRelationsDocument,
     ObjectRelationsQuery,
     ObjectRelationsQueryVariables,
-    StoryBySlugDocument,
-    StoryBySlugQuery,
-    StoryBySlugQueryVariables,
     ZoomLevel5ObjectQuery,
 } from 'src/generated/graphql'
 import { RecordQueryParams } from 'src/pages/landingpage/[slug]/[filter]/[collection]/[record]'
 
 const Zoom5RecordDataDocument = gql`
     query zoom5RecordData {
+        landingPage @client
         detail @client
         relations @client
     }
 `
 
 interface GetZoom5RecordQuery {
-    story: NonNullable<StoryBySlugQuery['stories']['data']>[0]
+    landingPage: NonNullable<LandingpageBySlugQuery['landingpages']['data'][0]>
     detail: ZoomLevel5ObjectQuery['zoomLevel5Object']
     relations: ObjectRelationsQuery['relations']
 }
@@ -38,18 +37,19 @@ export async function getZoom5RecordTask(
     context: GetServerSidePropsContext
 ) {
     const queryParams = context.query as unknown as RecordQueryParams
+    const slug = queryParams.slug
     const record = queryParams.record
     const type = record.split('-')[1] as SupportedQuerys
     const id: string = record.split('-')[0]
     const detailConfig = config[type]
-    const [detailQuery, storyBySlugQuery, relations] = await Promise.all([
+    const [detailQuery, landingPage, relations] = await Promise.all([
         detailConfig.query(client, { variables: { id: id } }),
-        client.query<StoryBySlugQuery, StoryBySlugQueryVariables>({
+        client.query<LandingpageBySlugQuery>({
             variables: {
                 locale: context.locale,
-                slug: 'test',
+                slug: slug,
             },
-            query: StoryBySlugDocument,
+            query: LandingpageBySlugDocument,
         }),
         client.query<ObjectRelationsQuery, ObjectRelationsQueryVariables>({
             variables: {
@@ -69,32 +69,14 @@ export async function getZoom5RecordTask(
         return
     }
 
+    console.log(relations.data.relations)
+
     client.writeQuery({
         query: Zoom5RecordDataDocument,
         data: {
-            story: storyBySlugQuery.data.stories.data?.[0],
+            landingPage: landingPage.data.landingpages.data[0],
             detail: detailConfig.accessor(detailQuery.data),
-            relations: [
-                ...(relations.data.relations ?? []),
-                ...[
-                    {
-                        type: EntityNames.Objects,
-                        total: 50,
-                        randomRelations: [
-                            {
-                                id: 'test',
-                                label: 'some object',
-                                type: EntityNames.Objects,
-                            },
-                            {
-                                id: 'test2',
-                                label: 'some object 2',
-                                type: EntityNames.Objects,
-                            },
-                        ],
-                    },
-                ],
-            ],
+            relations: relations.data.relations,
         },
     })
 }
