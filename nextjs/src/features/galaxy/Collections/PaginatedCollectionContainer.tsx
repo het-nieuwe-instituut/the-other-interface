@@ -141,42 +141,52 @@ export const PaginatedCollection: React.FunctionComponent<
     )
 
     return (
-        <svg width={svgWidth} height={svgHeight} ref={svgRef} viewBox={`0 0 ${svgHeight + 200} ${svgHeight - 100}`}>
-            <Box as={'foreignObject'} width={'100%'} height={'100%'} overflow={'visible'}>
-                <Flex justifyContent={'center'} alignItems={'center'} height={'100%'}>
-                    <Grid templateColumns="repeat(6, 1fr)" width={'100%'}>
-                        <GridItem
-                            w="100%"
-                            h="200px"
-                            colSpan={2}
-                            display={'flex'}
-                            justifyContent={'center'}
-                            alignSelf={'center'}
-                            p={1}
-                            colStart={3}
-                            rowStart={3}
-                        >
-                            <Flex flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
-                                <Text textStyle={'cloudText'}>
-                                    {zoom4?.zoomLevel4.total} {t(router.query.slug as any)}
-                                </Text>
-                                <Text textStyle={'cloudText'} mb={4}>
-                                    {`by ${router.query.collection as string}`}
-                                </Text>
-                                <Flex alignItems={'center'} gap={1}>
-                                    <Box as={'button'} pr="2" aria-label="left" onClick={paginateBack}>
-                                        <PaginationLeft />
-                                    </Box>
-                                    <Text textStyle={'cloudText'}>{`${currentPage}/${Math.ceil(
-                                        (zoom4?.zoomLevel4.total ?? 0) / 28
-                                    )}`}</Text>
-                                    <Box as="button" pl="2" aria-label="right" onClick={paginateNext}>
-                                        <PaginationRight />
-                                    </Box>
-                                </Flex>
-                            </Flex>
-                        </GridItem>
+        <Box overflow="hidden" height={svgHeight} width={svgWidth}>
+            <svg width={svgWidth} height={svgHeight} ref={svgRef} viewBox={`0 0 ${1000} ${1000}`}>
+                <Box
+                    as={'foreignObject'}
+                    width={1000}
+                    height={500}
+                    y={dimensions.height / 2 - 500 / 2}
+                    overflow={'visible'}
+                >
+                    <Grid templateColumns="repeat(6, 1fr)" gap={4} width={'100%'} height={'800px'}>
                         {(items || []).map((item, index) => {
+                            if (index === 14) {
+                                return (
+                                    <GridItem
+                                        w="100%"
+                                        h="100px"
+                                        key={`${item.title}-${index}`}
+                                        colSpan={2}
+                                        display={'flex'}
+                                        justifyContent={'center'}
+                                        alignSelf={'center'}
+                                        p={1}
+                                    >
+                                        <Flex flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
+                                            <Text textStyle={'cloudText'}>
+                                                {zoom4?.zoomLevel4.total} {t(router.query.slug as any)}
+                                            </Text>
+                                            <Text textStyle={'cloudText'} mb={4}>
+                                                {`by ${router.query.collection as string}`}
+                                            </Text>
+                                            <Flex alignItems={'center'} gap={1}>
+                                                <Box as={'button'} pr="2" aria-label="left" onClick={paginateBack}>
+                                                    <PaginationLeft />
+                                                </Box>
+                                                <Text textStyle={'cloudText'}>{`${currentPage}/${Math.ceil(
+                                                    (zoom4?.zoomLevel4.total ?? 0) / 28
+                                                )}`}</Text>
+                                                <Box as="button" pl="2" aria-label="right" onClick={paginateNext}>
+                                                    <PaginationRight />
+                                                </Box>
+                                            </Flex>
+                                        </Flex>
+                                    </GridItem>
+                                )
+                            }
+
                             return (
                                 <GridItem
                                     w="100%"
@@ -188,50 +198,47 @@ export const PaginatedCollection: React.FunctionComponent<
                                     bottom={`${item.randomBottom}px`}
                                     left={`${item.randomLeft}px`}
                                 >
-                                    {item.title && (
-                                        <svg
+                                    <svg width={140} height={90} style={{ overflow: 'visible' }}>
+                                        <Box
+                                            as={'foreignObject'}
                                             width={140}
                                             height={90}
-                                            viewBox={`0 0 ${140} ${90}`}
-                                            style={{ overflow: 'visible', opacity: 0 }}
+                                            overflow={'visible'}
                                             className={`foreign-${id}`}
                                         >
-                                            <Box as={'foreignObject'} overflow={'visible'} width={140} height={90}>
+                                            {item.title && (
                                                 <Flex
                                                     flexDirection={'column'}
                                                     alignItems={'center'}
-                                                    justifyContent={'center'}
                                                     bgGradient="radial(50% 50% at 50% 50%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)"
+                                                    height={'90px'}
+                                                    width={'140px'}
                                                 >
-                                                    <Img
-                                                        src={
-                                                            'https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?cs=srgb&dl=pexels-pixabay-45201.jpg&fm=jpg'
-                                                        }
-                                                        width={'48px'}
-                                                        height={'35px'}
-                                                    />
+                                                    {item.firstImage && (
+                                                        <Img src={item.firstImage} width={'48px'} height={'35px'} />
+                                                    )}
 
                                                     <Text
+                                                        pt={item.firstImage ? 1 : 5}
                                                         align={'center'}
                                                         overflowWrap={'normal'}
                                                         textStyle={'galaxyH4'}
-                                                        pt={1}
                                                     >
                                                         {item.title.length > 32
                                                             ? `${item.title.slice(0, 32)}...`
                                                             : item.title}
                                                     </Text>
                                                 </Flex>
-                                            </Box>
-                                        </svg>
-                                    )}
+                                            )}
+                                        </Box>
+                                    </svg>
                                 </GridItem>
                             )
                         })}
                     </Grid>
-                </Flex>
-            </Box>
-        </svg>
+                </Box>
+            </svg>
+        </Box>
     )
 }
 

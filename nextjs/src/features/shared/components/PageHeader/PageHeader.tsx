@@ -4,23 +4,13 @@ import { Markdown } from '../Markdown/Markdown'
 interface Props {
     title?: string
     preface?: string
+    handleClick?: () => void
+    showPointer?: boolean
 }
 
-// TODO: Breadcrumbs need to be moved to the very top of the page
-// Removed for now
-export const PageHeader: React.FC<Props> = ({ title, preface }) => {
+export const PageHeader: React.FC<Props> = ({ title, preface, handleClick, showPointer }) => {
     return (
-        <Box>
-            {/* <Breadcrumb separator="/">
-                <BreadcrumbItem>
-                    <BreadcrumbLink href="#" as={Link}>
-                        Home
-                    </BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbItem>
-                    <BreadcrumbLink href="#" as={Link}></BreadcrumbLink>
-                </BreadcrumbItem>
-            </Breadcrumb> */}
+        <Box onClick={handleClick ? handleClick : undefined} cursor={showPointer ? 'pointer' : 'cursor'}>
             <Text as={'h1'} textStyle={'h1'} pb={'md'}>
                 {title}
             </Text>
