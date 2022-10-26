@@ -25,7 +25,7 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions, zoomLevel5, 
     const svgHeight = height
     const { svgRef, relationsPositionData } = usePresenter(relations)
     const { t } = useLooseTypeSafeTranslation('record')
-
+    console.log(relations)
     return (
         <Box overflow="visible" height={svgHeight} width={svgWidth}>
             <svg
