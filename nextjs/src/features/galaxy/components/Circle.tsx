@@ -42,7 +42,6 @@ export const Circle: React.FC<Props> = props => {
                     transition: 'all 1s ease',
                     content: `''`,
                     background: props.defaultBackground,
-
                     display: 'block',
                     height: '100%',
                     position: 'absolute',
@@ -54,7 +53,6 @@ export const Circle: React.FC<Props> = props => {
                     transition: 'all 1s ease',
                     content: `''`,
                     background: props.hoverBackground,
-
                     display: 'block',
                     height: '100%',
                     position: 'absolute',

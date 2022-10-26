@@ -97,6 +97,7 @@ export interface ParentRelation {
     children: Relation[]
 }
 interface Relation {
+    id: string
     label: string
     type: EntityNames
     diameter: number
@@ -146,6 +147,7 @@ export function usePositionClouds(relations: ObjectRelationsQuery['relations']) 
 
                             // debugMode({ svgRef, childCenterPositionX, childCenterPositionY, centerX, centerY, x, y })
                             return {
+                                id: randomRelation.id,
                                 label: randomRelation.label,
                                 type: randomRelation.type,
                                 diameter: childConfig.diameter,

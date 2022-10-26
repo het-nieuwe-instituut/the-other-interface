@@ -3,6 +3,7 @@ import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import { Box, useTheme } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
 import dynamic from 'next/dynamic'
+import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import { LandingpageComponentsDynamicZone } from 'src/generated/graphql'
 import { useGetZoom5RecordTask } from '../../tasks/getZoom5RecordTask'
@@ -13,7 +14,6 @@ const DynamicRecordCloudsNoSsr = dynamic(() => import('../../../galaxy/RecordClo
 
 export const RecordContainer: React.FC = () => {
     const { data, loading, error } = useGetZoom5RecordTask()
-
     if (loading) {
         return <p>loading</p>
     }
@@ -26,15 +26,17 @@ export const RecordContainer: React.FC = () => {
 }
 
 const RecordPage: React.FC<{ data?: ReturnType<typeof useGetZoom5RecordTask>['data'] }> = ({ data }) => {
+    const router = useRouter()
     const theme = useTheme()
     const graphRef = useRef<HTMLDivElement | null>(null)
     const sizes = useSize(graphRef)
 
     return (
         <>
-            <Box backgroundColor="graph" height="800px" ref={graphRef}>
+            <Box backgroundColor="graph" height="800px" ref={graphRef} key={router.query.record as string}>
                 {sizes?.height && sizes?.width && (
                     <DynamicRecordCloudsNoSsr
+                        key={router.query.record as string}
                         zoomLevel5={data?.detail}
                         relations={data?.relations ?? []}
                         dimensions={sizes}

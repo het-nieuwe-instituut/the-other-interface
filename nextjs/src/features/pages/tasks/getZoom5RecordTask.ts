@@ -164,7 +164,7 @@ export function useZoomLevel5DetailQuery<T extends keyof typeof config>(
 
 export type ZoomLevel5DetailResponses = ReturnType<typeof useZoomLevel5DetailQuery>['data']
 
-const Zoom5RecordDataDocument = gql`
+export const Zoom5RecordDataDocument = gql`
     query zoom5RecordData {
         landingPage @client
         detail @client
@@ -172,18 +172,21 @@ const Zoom5RecordDataDocument = gql`
     }
 `
 
-interface GetZoom5RecordQuery {
-    landingPage: NonNullable<LandingpageBySlugQuery['landingpages']['data'][0]>
-    detail: ZoomLevel5ObjectQuery['zoomLevel5Object']
-    relations: ObjectRelationsQuery['relations']
+export interface GetZoom5RecordQuery {
+    landingPage?: NonNullable<LandingpageBySlugQuery['landingpages']['data'][0]>
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    detail?: any
+    relations?: ObjectRelationsQuery['relations']
 }
 
 export function useGetZoom5RecordTask() {
     const query = useQuery<GetZoom5RecordQuery>(Zoom5RecordDataDocument)
 
+    if (!query.data) {
+        return { ...query, data: query.previousData }
+    }
     return query
 }
-
 export async function getZoom5RecordTask(
     client: ApolloClient<NormalizedCacheObject>,
     context: GetServerSidePropsContext
@@ -194,7 +197,7 @@ export async function getZoom5RecordTask(
     const type = record.split('-')[1] as SupportedQuerys
     const id: string = record.split('-')[0]
     const configByType = config[type]
-    console.log(configByType.relationsQuery.query)
+
     const [detailQuery, landingPage, relations] = await Promise.all([
         configByType.zoomLevelQuery.query(client, { variables: { id: id } }),
         client.query<LandingpageBySlugQuery>({
@@ -207,8 +210,6 @@ export async function getZoom5RecordTask(
         configByType.relationsQuery.query(client, { variables: { id: id } }),
     ])
 
-    console.log(relations.data.relations, type, id)
-
     if (detailQuery.error || !detailQuery.data) {
         console.error('Detail query error')
         return
@@ -219,12 +220,13 @@ export async function getZoom5RecordTask(
         return
     }
 
-    client.writeQuery({
+    client.writeQuery<GetZoom5RecordQuery>({
         query: Zoom5RecordDataDocument,
         data: {
             landingPage: landingPage.data.landingpages.data[0],
             detail: configByType.zoomLevelQuery.accessor(detailQuery.data),
             relations: relations.data.relations,
         },
+        overwrite: true,
     })
 }
