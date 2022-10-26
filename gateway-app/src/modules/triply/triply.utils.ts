@@ -1,4 +1,5 @@
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
+
 export interface ZoomLevel3ReturnData {
     total: string | null
     count: string | null
@@ -7,7 +8,31 @@ export interface ZoomLevel3ReturnData {
 }
 
 export class TriplyUtils {
-    public static getEntityNameFromGraph(graph: string): EntityNames {
+    public static getExternalEntityNameFromUri(uri: string) {
+        const type = TriplyUtils.findExternalEntityNameFromUri(uri)
+
+        if (!type) {
+            throw new Error(`external type for uri ${uri} not implemented`)
+        }
+
+        return type
+    }
+
+    public static findExternalEntityNameFromUri(uri: string) {
+        if (uri.includes('rkd.nl')) {
+            return EntityNames.Rkd
+        }
+
+        if (uri.includes('wikidata.org')) {
+            return EntityNames.Wikidata
+        }
+
+        if (uri.includes('getty.edu')) {
+            return EntityNames.Getty
+        }
+    }
+
+    public static getEntityNameFromGraph(graph: string, possibleExternalUri?: string | null): EntityNames {
         const s = graph.split('/')
         if (!s.length) {
             throw new Error('invalid graph url')
@@ -26,14 +51,23 @@ export class TriplyUtils {
             case 'media':
                 return EntityNames.Media
             case 'seeAlso':
+                if (possibleExternalUri) {
+                    return TriplyUtils.getExternalEntityNameFromUri(possibleExternalUri)
+                }
+
                 return EntityNames.External
             default:
                 throw new Error(`type for graph ${type} not implemented`)
         }
     }
 
-    public static getEntityNameFromUri(graph: string): EntityNames {
-        const s = graph.split('/')
+    public static getEntityNameFromUri(uri: string): EntityNames {
+        const externalType = this.findExternalEntityNameFromUri(uri)
+        if (externalType) {
+            return externalType
+        }
+
+        const s = uri.split('/')
         if (!s.length || s.length < 2) {
             throw new Error('invalid graph url')
         }
@@ -53,7 +87,7 @@ export class TriplyUtils {
             case 'seeAlso':
                 return EntityNames.External
             default:
-                throw new Error(`type for graph ${type} not implemented`)
+                throw new Error(`type for uri ${uri} not implemented`)
         }
     }
 

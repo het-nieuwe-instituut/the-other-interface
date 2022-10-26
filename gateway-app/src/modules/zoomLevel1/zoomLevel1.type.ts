@@ -8,8 +8,15 @@ export enum EntityNames {
     Stories = 'Stories',
     External = 'External',
     Media = 'Media',
+
+    // external
+    Rkd = 'Rkd',
+    Wikidata = 'Wikidata',
+    Getty = 'Getty',
 }
 registerEnumType(EntityNames, { name: 'EntityNames' })
+
+export const externalEntityNames = [EntityNames.Rkd, EntityNames.Wikidata, EntityNames.Getty]
 
 @ObjectType()
 export class ZoomLevel1Type {
