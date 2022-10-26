@@ -22,8 +22,18 @@ export const GALAXY_BASE = 800
 const Galaxy: React.FC<Props> = ({ dimensions }) => {
     const { t } = useTypeSafeTranslation('homepage')
     const id = useId().replaceAll(':', '')
-    const { svgRef, setZoomLevel, zoomTo, zoomLevel, storiesSystemRef, isLoading, stories, objectsPerTypeWithIds, handleMoveToZoomLevel1 } =
-        usePresenter(dimensions, id)
+    const {
+        svgRef,
+        setZoomLevel,
+        zoomTo,
+        zoomLevel,
+        storiesSystemRef,
+        isLoading,
+        stories,
+        objectsPerTypeWithIds,
+        handleMoveToZoomLevel1,
+        archiefBestandDelen,
+    } = usePresenter(dimensions, id)
     const height = dimensions.height ?? 0
     const width = dimensions.width ?? 0
 
@@ -98,12 +108,27 @@ const Galaxy: React.FC<Props> = ({ dimensions }) => {
                                                 justifyContent="center"
                                             >
                                                 <Box>
-                                                    <Text width="12.5rem" textStyle={'cloudText'}>
-                                                        {item.name}
-                                                    </Text>
-                                                    <Text width="12.5rem" textStyle={'cloudText'}>
-                                                        {item.numberOfInstances}
-                                                    </Text>
+                                                    {item.name === 'Archieven' ? (
+                                                        <>
+                                                            <Text width="12.5rem" mb={1} textStyle={'cloudText'}>
+                                                                {item.numberOfInstances} {item.name.toLowerCase()}
+                                                            </Text>
+                                                            <Text width="12.5rem" textStyle={'cloudText'}>
+                                                                {t('archiveItems', {
+                                                                    count: archiefBestandDelen.count,
+                                                                })}
+                                                            </Text>
+                                                        </>
+                                                    ) : (
+                                                        <>
+                                                            <Text width="12.5rem" mb={1} textStyle={'cloudText'}>
+                                                                {item.name.toLowerCase()}
+                                                            </Text>
+                                                            <Text width="12.5rem" textStyle={'cloudText'}>
+                                                                {item.numberOfInstances}
+                                                            </Text>
+                                                        </>
+                                                    )}
                                                 </Box>
                                             </Box>
                                         )}
