@@ -1263,10 +1263,12 @@ export type Query = {
   zoomLevel2: Array<ZoomLevel2Type>;
   zoomLevel3: Array<ZoomLevel3Type>;
   zoomLevel4: ZoomLevel4ParentType;
+  zoomLevel5Archive?: Maybe<ArchiveZoomLevel5UnionType>;
   zoomLevel5ArchivesFonds?: Maybe<ArchivesFondsZoomLevel5DetailType>;
   zoomLevel5ArchivesOther?: Maybe<ArchivesOtherZoomLevel5DetailType>;
   zoomLevel5Object?: Maybe<ObjectsZoomLevel5DetailType>;
   zoomLevel5Person?: Maybe<PoepleZoomLevel5DetailType>;
+  zoomLevel5Publication?: Maybe<PublicationZoomLevel5UnionType>;
   zoomLevel5PublicationsArticle?: Maybe<PublicationsArticleZoomLevel5DetailType>;
   zoomLevel5PublicationsAudiovisual?: Maybe<PublicationsAudioVisualZoomLevel5DetailType>;
   zoomLevel5PublicationsBook?: Maybe<PublicationsBookZoomLevel5DetailType>;
@@ -1428,6 +1430,11 @@ export type QueryZoomLevel4Args = {
 };
 
 
+export type QueryZoomLevel5ArchiveArgs = {
+  id: Scalars['String'];
+};
+
+
 export type QueryZoomLevel5ArchivesFondsArgs = {
   id: Scalars['String'];
 };
@@ -1444,6 +1451,11 @@ export type QueryZoomLevel5ObjectArgs = {
 
 
 export type QueryZoomLevel5PersonArgs = {
+  id: Scalars['String'];
+};
+
+
+export type QueryZoomLevel5PublicationArgs = {
   id: Scalars['String'];
 };
 
