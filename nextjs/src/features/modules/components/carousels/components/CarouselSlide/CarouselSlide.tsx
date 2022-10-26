@@ -42,6 +42,7 @@ export const CarouselSlide = (props: Props) => {
                                 key={index}
                                 name={name ?? ''}
                                 description={description ?? ''}
+                                width={itemWidth}
                              />
                         )
                     }

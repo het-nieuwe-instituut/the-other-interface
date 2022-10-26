@@ -11,6 +11,7 @@ fragment carouselModuleFragment on ComponentModulesCarousel {
                 }
             }
         }
+        type
         name
         description
         triply_record {
