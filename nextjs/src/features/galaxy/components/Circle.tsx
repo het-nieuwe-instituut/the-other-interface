@@ -13,62 +13,60 @@ interface Props
 
 export const Circle: React.FC<Props> = props => {
     return (
-        <>
-            <Box
-                as={'foreignObject'}
-                xmlns="http://www.w3.org/1999/xhtml"
-                className={`foreign-${props.className}`}
-                id={props.id}
-                width={props.width}
-                height={props.height}
-                x={props.x}
-                y={props.y}
-                pointerEvents={props.pointerEvents as CSS.Property.PointerEvents}
-                style={{ overflow: 'visible' }}
-            >
-                <Flex
-                    width={'100%'}
-                    height="100%"
-                    transition={'all 1s ease'}
-                    position={'absolute'}
-                    _hover={{
-                        _before: {
-                            opacity: 0,
-                        },
-                        _after: {
-                            opacity: 1,
-                        },
-                    }}
-                    _before={{
-                        transition: 'all 1s ease',
-                        content: `''`,
-                        background: props.defaultBackground,
-
-                        display: 'block',
-                        height: '100%',
-                        position: 'absolute',
-                        top: '0',
-                        opacity: 1,
-                        width: '100%',
-                    }}
-                    _after={{
-                        transition: 'all 1s ease',
-                        content: `''`,
-                        background: props.hoverBackground,
-
-                        display: 'block',
-                        height: '100%',
-                        position: 'absolute',
-                        top: '0',
+        <Box
+            as={'foreignObject'}
+            xmlns="http://www.w3.org/1999/xhtml"
+            className={`foreign-${props.className}`}
+            id={props.id}
+            width={props.width}
+            height={props.height}
+            x={props.x}
+            y={props.y}
+            pointerEvents={props.pointerEvents as CSS.Property.PointerEvents}
+            style={{ overflow: 'visible' }}
+        >
+            <Flex
+                width={'100%'}
+                height="100%"
+                transition={'all 1s ease'}
+                position={'absolute'}
+                _hover={{
+                    _before: {
                         opacity: 0,
-                        width: '100%',
-                    }}
-                    justifyContent="center"
-                    alignItems="center"
-                >
-                    {props.children}
-                </Flex>
-            </Box>
-        </>
+                    },
+                    _after: {
+                        opacity: 1,
+                    },
+                }}
+                _before={{
+                    transition: 'all 1s ease',
+                    content: `''`,
+                    background: props.defaultBackground,
+
+                    display: 'block',
+                    height: '100%',
+                    position: 'absolute',
+                    top: '0',
+                    opacity: 1,
+                    width: '100%',
+                }}
+                _after={{
+                    transition: 'all 1s ease',
+                    content: `''`,
+                    background: props.hoverBackground,
+
+                    display: 'block',
+                    height: '100%',
+                    position: 'absolute',
+                    top: '0',
+                    opacity: 0,
+                    width: '100%',
+                }}
+                justifyContent="center"
+                alignItems="center"
+            >
+                {props.children}
+            </Flex>
+        </Box>
     )
 }

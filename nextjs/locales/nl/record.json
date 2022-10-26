@@ -1,0 +1,13 @@
+{
+    "publications": "Publications",
+    "people": "People",
+    "archives": "Archives",
+    "objects": "Objects",
+    "relatedPeople": "Showing {{count}} of {{total}} related people",
+    "relatedObjects": "Showing {{count}} of {{total}} related objects",
+    "relatedPublications": "Showing {{count}} of {{total}} related publications",
+    "relatedStories_other": "{{count}} related stories",
+    "relatedStories_one": "1 related story",
+    "relatedArchive_other": "{{count}} related archives",
+    "relatedArchive_one": "1 related archive"
+}

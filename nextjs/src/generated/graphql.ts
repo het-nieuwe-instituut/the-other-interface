@@ -266,6 +266,193 @@ export const mockZoom4PublicationsQuery = (resolver: ResponseResolver<GraphQLReq
  * @param resolver a function that accepts a captured request and may return a mocked response.
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
+ * mockObjectRelationsQuery((req, res, ctx) => {
+ *   const { id } = req.variables;
+ *   return res(
+ *     ctx.data({ relations })
+ *   )
+ * })
+ */
+export const mockObjectRelationsQuery = (resolver: ResponseResolver<GraphQLRequest<ObjectRelationsQueryVariables>, GraphQLContext<ObjectRelationsQuery>, any>) =>
+  graphql.query<ObjectRelationsQuery, ObjectRelationsQueryVariables>(
+    'ObjectRelations',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockZoomLevel5ArchivesQuery((req, res, ctx) => {
+ *   const { id } = req.variables;
+ *   return res(
+ *     ctx.data({ zoomLevel5Archive })
+ *   )
+ * })
+ */
+export const mockZoomLevel5ArchivesQuery = (resolver: ResponseResolver<GraphQLRequest<ZoomLevel5ArchivesQueryVariables>, GraphQLContext<ZoomLevel5ArchivesQuery>, any>) =>
+  graphql.query<ZoomLevel5ArchivesQuery, ZoomLevel5ArchivesQueryVariables>(
+    'ZoomLevel5Archives',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockZoomLevel5ArchivesFondsQuery((req, res, ctx) => {
+ *   const { id } = req.variables;
+ *   return res(
+ *     ctx.data({ zoomLevel5ArchivesFonds })
+ *   )
+ * })
+ */
+export const mockZoomLevel5ArchivesFondsQuery = (resolver: ResponseResolver<GraphQLRequest<ZoomLevel5ArchivesFondsQueryVariables>, GraphQLContext<ZoomLevel5ArchivesFondsQuery>, any>) =>
+  graphql.query<ZoomLevel5ArchivesFondsQuery, ZoomLevel5ArchivesFondsQueryVariables>(
+    'ZoomLevel5ArchivesFonds',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockZoomLevel5ArchivesOtherQuery((req, res, ctx) => {
+ *   const { id } = req.variables;
+ *   return res(
+ *     ctx.data({ zoomLevel5ArchivesOther })
+ *   )
+ * })
+ */
+export const mockZoomLevel5ArchivesOtherQuery = (resolver: ResponseResolver<GraphQLRequest<ZoomLevel5ArchivesOtherQueryVariables>, GraphQLContext<ZoomLevel5ArchivesOtherQuery>, any>) =>
+  graphql.query<ZoomLevel5ArchivesOtherQuery, ZoomLevel5ArchivesOtherQueryVariables>(
+    'ZoomLevel5ArchivesOther',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockZoomLevel5ObjectQuery((req, res, ctx) => {
+ *   const { id } = req.variables;
+ *   return res(
+ *     ctx.data({ zoomLevel5Object })
+ *   )
+ * })
+ */
+export const mockZoomLevel5ObjectQuery = (resolver: ResponseResolver<GraphQLRequest<ZoomLevel5ObjectQueryVariables>, GraphQLContext<ZoomLevel5ObjectQuery>, any>) =>
+  graphql.query<ZoomLevel5ObjectQuery, ZoomLevel5ObjectQueryVariables>(
+    'ZoomLevel5Object',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockZoomLevel5PublicationQuery((req, res, ctx) => {
+ *   const { id } = req.variables;
+ *   return res(
+ *     ctx.data({ zoomLevel5Publication })
+ *   )
+ * })
+ */
+export const mockZoomLevel5PublicationQuery = (resolver: ResponseResolver<GraphQLRequest<ZoomLevel5PublicationQueryVariables>, GraphQLContext<ZoomLevel5PublicationQuery>, any>) =>
+  graphql.query<ZoomLevel5PublicationQuery, ZoomLevel5PublicationQueryVariables>(
+    'ZoomLevel5Publication',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockZoomLevel5PublicationsArticleQuery((req, res, ctx) => {
+ *   const { id } = req.variables;
+ *   return res(
+ *     ctx.data({ zoomLevel5PublicationsArticle })
+ *   )
+ * })
+ */
+export const mockZoomLevel5PublicationsArticleQuery = (resolver: ResponseResolver<GraphQLRequest<ZoomLevel5PublicationsArticleQueryVariables>, GraphQLContext<ZoomLevel5PublicationsArticleQuery>, any>) =>
+  graphql.query<ZoomLevel5PublicationsArticleQuery, ZoomLevel5PublicationsArticleQueryVariables>(
+    'ZoomLevel5PublicationsArticle',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockZoomLevel5PublicationsAudiovisualQuery((req, res, ctx) => {
+ *   const { id } = req.variables;
+ *   return res(
+ *     ctx.data({ zoomLevel5PublicationsAudiovisual })
+ *   )
+ * })
+ */
+export const mockZoomLevel5PublicationsAudiovisualQuery = (resolver: ResponseResolver<GraphQLRequest<ZoomLevel5PublicationsAudiovisualQueryVariables>, GraphQLContext<ZoomLevel5PublicationsAudiovisualQuery>, any>) =>
+  graphql.query<ZoomLevel5PublicationsAudiovisualQuery, ZoomLevel5PublicationsAudiovisualQueryVariables>(
+    'ZoomLevel5PublicationsAudiovisual',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockZoomLevel5PublicationsBookQuery((req, res, ctx) => {
+ *   const { id } = req.variables;
+ *   return res(
+ *     ctx.data({ zoomLevel5PublicationsBook })
+ *   )
+ * })
+ */
+export const mockZoomLevel5PublicationsBookQuery = (resolver: ResponseResolver<GraphQLRequest<ZoomLevel5PublicationsBookQueryVariables>, GraphQLContext<ZoomLevel5PublicationsBookQuery>, any>) =>
+  graphql.query<ZoomLevel5PublicationsBookQuery, ZoomLevel5PublicationsBookQueryVariables>(
+    'ZoomLevel5PublicationsBook',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockZoomLevel5PublicationsSerialQuery((req, res, ctx) => {
+ *   const { id } = req.variables;
+ *   return res(
+ *     ctx.data({ zoomLevel5PublicationsSerial })
+ *   )
+ * })
+ */
+export const mockZoomLevel5PublicationsSerialQuery = (resolver: ResponseResolver<GraphQLRequest<ZoomLevel5PublicationsSerialQueryVariables>, GraphQLContext<ZoomLevel5PublicationsSerialQuery>, any>) =>
+  graphql.query<ZoomLevel5PublicationsSerialQuery, ZoomLevel5PublicationsSerialQueryVariables>(
+    'ZoomLevel5PublicationsSerial',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockZoomLevel5PersonQuery((req, res, ctx) => {
+ *   const { id } = req.variables;
+ *   return res(
+ *     ctx.data({ zoomLevel5Person })
+ *   )
+ * })
+ */
+export const mockZoomLevel5PersonQuery = (resolver: ResponseResolver<GraphQLRequest<ZoomLevel5PersonQueryVariables>, GraphQLContext<ZoomLevel5PersonQuery>, any>) =>
+  graphql.query<ZoomLevel5PersonQuery, ZoomLevel5PersonQueryVariables>(
+    'ZoomLevel5Person',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
  * mockZoomLevel1Query((req, res, ctx) => {
  *   return res(
  *     ctx.data({ zoomLevel1 })
@@ -1899,6 +2086,8 @@ export type ZoomLevel5RelationsType = {
   type: EntityNames;
 };
 
+export type BaseTriplyRecordFragmentFragment = { __typename?: 'TriplyRecordEntity', id?: string | null, attributes?: { __typename?: 'TriplyRecord', recordId: string, type: EnumTriplyrecordType } | null };
+
 export type ComponentCoreModuleLayoutsFragment = { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null };
 
 export type ButtonsModuleFragmentFragment = { __typename?: 'ComponentModulesButtonsModule', id: string, buttonStyle?: EnumComponentmodulesbuttonsmoduleButtonstyle | null, buttons?: Array<{ __typename?: 'ComponentCoreButton', id: string, text?: string | null, url?: string | null, hasAttachment?: boolean | null, attachment?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null }> | null, buttonsModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } };
@@ -2045,6 +2234,83 @@ export type Zoom4PublicationsQueryVariables = Exact<{
 
 export type Zoom4PublicationsQuery = { __typename?: 'Query', zoomLevel4: { __typename?: 'ZoomLevel4ParentType', total: number, hasMore: boolean, nodes?: Array<{ __typename?: 'ZoomLevel4Type', record: string, title?: string | null, firstImage?: string | null, imageLabel?: string | null }> | null } };
 
+export type ObjectRelationsQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type ObjectRelationsQuery = { __typename?: 'Query', relations?: Array<{ __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number, randomRelations?: Array<{ __typename?: 'RelatedRecordType', id: string, label: string, type: EntityNames, relations?: Array<{ __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number }> | null }> | null }> | null };
+
+export type ZoomLevel5ArchivesQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type ZoomLevel5ArchivesQuery = { __typename?: 'Query', zoomLevel5Archive?: { __typename: 'ArchivesFondsZoomLevel5DetailType', descriptionLevel?: string | null, objectNumber?: string | null, recordTitle?: string | null, startDate?: string | null, endDate?: string | null, productionDate?: string | null, extent?: string | null, repository?: string | null, repositoryLabel?: string | null, creator?: string | null, creatorLabel?: string | null, creatorHistory?: string | null, custodialHistory?: string | null, systemOfArrangement?: string | null, contentScope?: string | null, conditionsGoverningAccess?: string | null, relatedMaterial?: string | null, appendices?: string | null, source?: string | null, partReference?: string | null, partTitle?: string | null, right?: string | null, rightLabel?: string | null, permanentLink?: string | null } | { __typename: 'ArchivesOtherZoomLevel5DetailType', objectNumber?: string | null, title?: string | null, startDate?: string | null, endDate?: string | null, dateLabel?: string | null, dimensionFree?: string | null, mediaReference?: string | null, mediaReferenceLabel?: string | null, existenceOfOriginals?: string | null, scopeContent?: string | null, relatedMaterial?: string | null, rights?: string | null, rightsLabel?: string | null, permanentLink?: string | null } | null };
+
+export type ZoomLevel5ArchivesFondsQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type ZoomLevel5ArchivesFondsQuery = { __typename?: 'Query', zoomLevel5ArchivesFonds?: { __typename?: 'ArchivesFondsZoomLevel5DetailType', id: string, recordTitle?: string | null, descriptionLevel?: string | null } | null };
+
+export type ZoomLevel5ArchivesOtherQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type ZoomLevel5ArchivesOtherQuery = { __typename?: 'Query', zoomLevel5ArchivesOther?: { __typename?: 'ArchivesOtherZoomLevel5DetailType', id: string, title?: string | null, type: ArchivesZoomLevel5Types } | null };
+
+export type ZoomLevel5ObjectQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type ZoomLevel5ObjectQuery = { __typename?: 'Query', zoomLevel5Object?: { __typename?: 'ObjectsZoomLevel5DetailType', image?: string | null, imageLabel?: string | null, title?: string | null, titleType?: string | null, objectNumber?: string | null, objectName?: string | null, objectNameLabel?: string | null, archiveCollectionCode?: string | null, maker?: string | null, makerLabel?: string | null, makerRole?: string | null, makerRoleLabel?: string | null, startDate?: string | null, endDate?: string | null, numberOfParts?: string | null, scale?: string | null, technique?: string | null, techniqueLabel?: string | null, material?: string | null, materialLabel?: string | null, dimensionPart?: string | null, dimensionType?: string | null, dimensionValue?: string | null, dimensionUnit?: string | null, description?: string | null, associationPerson?: string | null, associationPersonLabel?: string | null, associationPersonType?: string | null, relatedObjectTitle?: string | null, creditLine?: string | null, rights?: string | null, rightsLabel?: string | null, creationPlace?: string | null, creationPlaceLabel?: string | null, permanentLink?: string | null } | null };
+
+export type ZoomLevel5PublicationQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type ZoomLevel5PublicationQuery = { __typename?: 'Query', zoomLevel5Publication?: { __typename: 'PublicationsArticleZoomLevel5DetailType', typeOfPublication?: string | null, typeOfPublicationLabel?: string | null, title?: string | null, author?: string | null, authorLabel?: string | null, authorRole?: string | null, authorRoleLabel?: string | null, sourceTitle?: string | null, sourceTitleLabel?: string | null, volume?: string | null, issue?: string | null, yearOfPublication?: string | null, page?: string | null, publisher?: string | null, publisherLabel?: string | null, abstract?: string | null, language?: string | null, languageLabel?: string | null, geographicalKeyword?: string | null, geographicalKeywordLabel?: string | null, subject?: string | null, subjectLabel?: string | null, relatedPerInst?: string | null, relatedPerInstLabel?: string | null, objectNumber?: string | null, availability?: string | null, shelfmark?: string | null, permanentLink?: string | null } | { __typename: 'PublicationsAudioVisualZoomLevel5DetailType', typeOfPublication?: string | null, typeOfPublicationLabel?: string | null, title?: string | null, author?: string | null, authorLabel?: string | null, authorRole?: string | null, authorRoleLabel?: string | null, publisher?: string | null, publisherLabel?: string | null, yearOfPublication?: string | null, placeOfPublication?: string | null, placeOfPublicationLabel?: string | null, abstract?: string | null, annotation?: string | null, scope?: string | null, language?: string | null, languageLabel?: string | null, medium?: string | null, geographicalKeyword?: string | null, geographicalKeywordLabel?: string | null, subject?: string | null, subjectLabel?: string | null, relatedPerInst?: string | null, relatedPerInstLabel?: string | null, permanentLink?: string | null, objectNumber?: string | null, availability?: string | null, shelfmark?: string | null } | { __typename: 'PublicationsBookZoomLevel5DetailType', typeOfPublication?: string | null, typeOfPublicationLabel?: string | null, title?: string | null, author?: string | null, authorLabel?: string | null, authorRole?: string | null, authorRoleLabel?: string | null, publisher?: string | null, publisherLabel?: string | null, yearOfPublication?: string | null, placeOfPublication?: string | null, placeOfPublicationLabel?: string | null, isbn?: string | null, description?: string | null, annotation?: string | null, codeOfArchive?: string | null, codeOfArchiveLabel?: string | null, edition?: string | null, illustration?: string | null, numberOfPages?: string | null, language?: string | null, languageLabel?: string | null, seriesLabel?: string | null, number?: string | null, geographicalKeyword?: string | null, geographicalKeywordLabel?: string | null, subject?: string | null, subjectLabel?: string | null, relatedPerInst?: string | null, relatedPerInstLabel?: string | null, objectNumber?: string | null, availability?: string | null, shelfmark?: string | null, permanentLink?: string | null } | { __typename: 'PublicationsSerialZoomLevel5DetailType', typeOfPublication?: string | null, typeOfPublicationLabel?: string | null, title?: string | null, publisher?: string | null, publisherLabel?: string | null, yearOfPublication?: string | null, placeOfPublication?: string | null, placeOfPublicationLabel?: string | null, subject?: string | null, subjectLabel?: string | null, language?: string | null, languageLabel?: string | null, continuedFrom?: string | null, continuedAs?: string | null, remarks?: string | null, availability?: string | null, shelfmark?: string | null, holding?: string | null, permanentLink?: string | null } | null };
+
+export type ZoomLevel5PublicationsArticleQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type ZoomLevel5PublicationsArticleQuery = { __typename?: 'Query', zoomLevel5PublicationsArticle?: { __typename?: 'PublicationsArticleZoomLevel5DetailType', typeOfPublication?: string | null, typeOfPublicationLabel?: string | null, title?: string | null, author?: string | null, authorLabel?: string | null, authorRole?: string | null, authorRoleLabel?: string | null, sourceTitle?: string | null, sourceTitleLabel?: string | null, volume?: string | null, issue?: string | null, yearOfPublication?: string | null, page?: string | null, publisher?: string | null, publisherLabel?: string | null, abstract?: string | null, language?: string | null, languageLabel?: string | null, geographicalKeyword?: string | null, geographicalKeywordLabel?: string | null, subject?: string | null, subjectLabel?: string | null, relatedPerInst?: string | null, relatedPerInstLabel?: string | null, objectNumber?: string | null, availability?: string | null, shelfmark?: string | null, permanentLink?: string | null } | null };
+
+export type ZoomLevel5PublicationsAudiovisualQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type ZoomLevel5PublicationsAudiovisualQuery = { __typename?: 'Query', zoomLevel5PublicationsAudiovisual?: { __typename?: 'PublicationsAudioVisualZoomLevel5DetailType', typeOfPublication?: string | null, typeOfPublicationLabel?: string | null, title?: string | null, author?: string | null, authorLabel?: string | null, authorRole?: string | null, authorRoleLabel?: string | null, publisher?: string | null, publisherLabel?: string | null, yearOfPublication?: string | null, placeOfPublication?: string | null, placeOfPublicationLabel?: string | null, abstract?: string | null, annotation?: string | null, scope?: string | null, language?: string | null, languageLabel?: string | null, medium?: string | null, geographicalKeyword?: string | null, geographicalKeywordLabel?: string | null, subject?: string | null, subjectLabel?: string | null, relatedPerInst?: string | null, relatedPerInstLabel?: string | null, permanentLink?: string | null, objectNumber?: string | null, availability?: string | null, shelfmark?: string | null } | null };
+
+export type ZoomLevel5PublicationsBookQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type ZoomLevel5PublicationsBookQuery = { __typename?: 'Query', zoomLevel5PublicationsBook?: { __typename?: 'PublicationsBookZoomLevel5DetailType', typeOfPublication?: string | null, typeOfPublicationLabel?: string | null, title?: string | null, author?: string | null, authorLabel?: string | null, authorRole?: string | null, authorRoleLabel?: string | null, publisher?: string | null, publisherLabel?: string | null, yearOfPublication?: string | null, placeOfPublication?: string | null, placeOfPublicationLabel?: string | null, isbn?: string | null, description?: string | null, annotation?: string | null, codeOfArchive?: string | null, codeOfArchiveLabel?: string | null, edition?: string | null, illustration?: string | null, numberOfPages?: string | null, language?: string | null, languageLabel?: string | null, seriesLabel?: string | null, number?: string | null, geographicalKeyword?: string | null, geographicalKeywordLabel?: string | null, subject?: string | null, subjectLabel?: string | null, relatedPerInst?: string | null, relatedPerInstLabel?: string | null, objectNumber?: string | null, availability?: string | null, shelfmark?: string | null, permanentLink?: string | null } | null };
+
+export type ZoomLevel5PublicationsSerialQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type ZoomLevel5PublicationsSerialQuery = { __typename?: 'Query', zoomLevel5PublicationsSerial?: { __typename?: 'PublicationsSerialZoomLevel5DetailType', typeOfPublication?: string | null, typeOfPublicationLabel?: string | null, title?: string | null, publisher?: string | null, publisherLabel?: string | null, yearOfPublication?: string | null, placeOfPublication?: string | null, placeOfPublicationLabel?: string | null, subject?: string | null, subjectLabel?: string | null, language?: string | null, languageLabel?: string | null, continuedFrom?: string | null, continuedAs?: string | null, remarks?: string | null, availability?: string | null, shelfmark?: string | null, holding?: string | null, permanentLink?: string | null } | null };
+
+export type ZoomLevel5PersonQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type ZoomLevel5PersonQuery = { __typename?: 'Query', zoomLevel5Person?: { __typename?: 'PoepleZoomLevel5DetailType', name?: string | null, nameType?: string | null, nameVariation?: string | null, birthDate?: string | null, birthPlace?: string | null, birthPlaceLabel?: string | null, deathDate?: string | null, deathPlace?: string | null, deathPlaceLabel?: string | null, place?: string | null, placeLabel?: string | null, startDate?: string | null, endDate?: string | null, nationality?: string | null, nationalityLabel?: string | null, institution?: string | null, institutionLabel?: string | null, profession?: string | null, professionLabel?: string | null, gender?: string | null, association?: string | null, associationLabel?: string | null, relatedItem?: string | null, relatedItemLabel?: string | null, description?: string | null, permanentLink?: string | null } | null };
+
 export type ZoomLevel1QueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -2057,6 +2323,15 @@ export type ZoomLevel2QueryVariables = Exact<{
 
 export type ZoomLevel2Query = { __typename?: 'Query', zoomLevel2: Array<{ __typename?: 'ZoomLevel2Type', filter: string, id: string }> };
 
+export const BaseTriplyRecordFragmentFragmentDoc = gql`
+    fragment BaseTriplyRecordFragment on TriplyRecordEntity {
+  id
+  attributes {
+    recordId
+    type
+  }
+}
+    `;
 export const ComponentCoreModuleLayoutsFragmentDoc = gql`
     fragment componentCoreModuleLayouts on ComponentCoreModuleLayouts {
   id
@@ -2710,6 +2985,11 @@ export const StoryBySlugDocument = gql`
             ...buttonsModuleFragment
           }
         }
+        triplyRecords {
+          data {
+            ...BaseTriplyRecordFragment
+          }
+        }
       }
     }
   }
@@ -2721,7 +3001,8 @@ ${TableModuleFragmentFragmentDoc}
 ${TitleModuleFragmentFragmentDoc}
 ${ImageCarouselModuleFragmentFragmentDoc}
 ${ButtonsModuleFragmentFragmentDoc}
-${SubtitleModuleFragmentFragmentDoc}`;
+${SubtitleModuleFragmentFragmentDoc}
+${BaseTriplyRecordFragmentFragmentDoc}`;
 
 /**
  * __useStoryBySlugQuery__
@@ -3221,6 +3502,728 @@ export function useZoom4PublicationsLazyQuery(baseOptions?: Apollo.LazyQueryHook
 export type Zoom4PublicationsQueryHookResult = ReturnType<typeof useZoom4PublicationsQuery>;
 export type Zoom4PublicationsLazyQueryHookResult = ReturnType<typeof useZoom4PublicationsLazyQuery>;
 export type Zoom4PublicationsQueryResult = Apollo.QueryResult<Zoom4PublicationsQuery, Zoom4PublicationsQueryVariables>;
+export const ObjectRelationsDocument = gql`
+    query ObjectRelations($id: String!) {
+  relations(type: People, id: $id) {
+    type
+    total
+    randomRelations {
+      id
+      label
+      type
+      relations {
+        type
+        total
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useObjectRelationsQuery__
+ *
+ * To run a query within a React component, call `useObjectRelationsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useObjectRelationsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useObjectRelationsQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useObjectRelationsQuery(baseOptions: Apollo.QueryHookOptions<ObjectRelationsQuery, ObjectRelationsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ObjectRelationsQuery, ObjectRelationsQueryVariables>(ObjectRelationsDocument, options);
+      }
+export function useObjectRelationsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ObjectRelationsQuery, ObjectRelationsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ObjectRelationsQuery, ObjectRelationsQueryVariables>(ObjectRelationsDocument, options);
+        }
+export type ObjectRelationsQueryHookResult = ReturnType<typeof useObjectRelationsQuery>;
+export type ObjectRelationsLazyQueryHookResult = ReturnType<typeof useObjectRelationsLazyQuery>;
+export type ObjectRelationsQueryResult = Apollo.QueryResult<ObjectRelationsQuery, ObjectRelationsQueryVariables>;
+export const ZoomLevel5ArchivesDocument = gql`
+    query ZoomLevel5Archives($id: String!) {
+  zoomLevel5Archive(id: $id) {
+    __typename
+    ... on ArchivesOtherZoomLevel5DetailType {
+      objectNumber
+      title
+      startDate
+      endDate
+      dateLabel
+      dimensionFree
+      mediaReference
+      mediaReferenceLabel
+      existenceOfOriginals
+      scopeContent
+      relatedMaterial
+      rights
+      rightsLabel
+      permanentLink
+    }
+    ... on ArchivesFondsZoomLevel5DetailType {
+      descriptionLevel
+      objectNumber
+      recordTitle
+      startDate
+      endDate
+      productionDate
+      extent
+      repository
+      repositoryLabel
+      creator
+      creatorLabel
+      creatorHistory
+      custodialHistory
+      systemOfArrangement
+      contentScope
+      conditionsGoverningAccess
+      relatedMaterial
+      appendices
+      source
+      partReference
+      partTitle
+      right
+      rightLabel
+      permanentLink
+    }
+  }
+}
+    `;
+
+/**
+ * __useZoomLevel5ArchivesQuery__
+ *
+ * To run a query within a React component, call `useZoomLevel5ArchivesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useZoomLevel5ArchivesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useZoomLevel5ArchivesQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useZoomLevel5ArchivesQuery(baseOptions: Apollo.QueryHookOptions<ZoomLevel5ArchivesQuery, ZoomLevel5ArchivesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ZoomLevel5ArchivesQuery, ZoomLevel5ArchivesQueryVariables>(ZoomLevel5ArchivesDocument, options);
+      }
+export function useZoomLevel5ArchivesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ZoomLevel5ArchivesQuery, ZoomLevel5ArchivesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ZoomLevel5ArchivesQuery, ZoomLevel5ArchivesQueryVariables>(ZoomLevel5ArchivesDocument, options);
+        }
+export type ZoomLevel5ArchivesQueryHookResult = ReturnType<typeof useZoomLevel5ArchivesQuery>;
+export type ZoomLevel5ArchivesLazyQueryHookResult = ReturnType<typeof useZoomLevel5ArchivesLazyQuery>;
+export type ZoomLevel5ArchivesQueryResult = Apollo.QueryResult<ZoomLevel5ArchivesQuery, ZoomLevel5ArchivesQueryVariables>;
+export const ZoomLevel5ArchivesFondsDocument = gql`
+    query ZoomLevel5ArchivesFonds($id: String!) {
+  zoomLevel5ArchivesFonds(id: $id) {
+    id
+    recordTitle
+    descriptionLevel
+  }
+}
+    `;
+
+/**
+ * __useZoomLevel5ArchivesFondsQuery__
+ *
+ * To run a query within a React component, call `useZoomLevel5ArchivesFondsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useZoomLevel5ArchivesFondsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useZoomLevel5ArchivesFondsQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useZoomLevel5ArchivesFondsQuery(baseOptions: Apollo.QueryHookOptions<ZoomLevel5ArchivesFondsQuery, ZoomLevel5ArchivesFondsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ZoomLevel5ArchivesFondsQuery, ZoomLevel5ArchivesFondsQueryVariables>(ZoomLevel5ArchivesFondsDocument, options);
+      }
+export function useZoomLevel5ArchivesFondsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ZoomLevel5ArchivesFondsQuery, ZoomLevel5ArchivesFondsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ZoomLevel5ArchivesFondsQuery, ZoomLevel5ArchivesFondsQueryVariables>(ZoomLevel5ArchivesFondsDocument, options);
+        }
+export type ZoomLevel5ArchivesFondsQueryHookResult = ReturnType<typeof useZoomLevel5ArchivesFondsQuery>;
+export type ZoomLevel5ArchivesFondsLazyQueryHookResult = ReturnType<typeof useZoomLevel5ArchivesFondsLazyQuery>;
+export type ZoomLevel5ArchivesFondsQueryResult = Apollo.QueryResult<ZoomLevel5ArchivesFondsQuery, ZoomLevel5ArchivesFondsQueryVariables>;
+export const ZoomLevel5ArchivesOtherDocument = gql`
+    query ZoomLevel5ArchivesOther($id: String!) {
+  zoomLevel5ArchivesOther(id: $id) {
+    id
+    title
+    type
+  }
+}
+    `;
+
+/**
+ * __useZoomLevel5ArchivesOtherQuery__
+ *
+ * To run a query within a React component, call `useZoomLevel5ArchivesOtherQuery` and pass it any options that fit your needs.
+ * When your component renders, `useZoomLevel5ArchivesOtherQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useZoomLevel5ArchivesOtherQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useZoomLevel5ArchivesOtherQuery(baseOptions: Apollo.QueryHookOptions<ZoomLevel5ArchivesOtherQuery, ZoomLevel5ArchivesOtherQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ZoomLevel5ArchivesOtherQuery, ZoomLevel5ArchivesOtherQueryVariables>(ZoomLevel5ArchivesOtherDocument, options);
+      }
+export function useZoomLevel5ArchivesOtherLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ZoomLevel5ArchivesOtherQuery, ZoomLevel5ArchivesOtherQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ZoomLevel5ArchivesOtherQuery, ZoomLevel5ArchivesOtherQueryVariables>(ZoomLevel5ArchivesOtherDocument, options);
+        }
+export type ZoomLevel5ArchivesOtherQueryHookResult = ReturnType<typeof useZoomLevel5ArchivesOtherQuery>;
+export type ZoomLevel5ArchivesOtherLazyQueryHookResult = ReturnType<typeof useZoomLevel5ArchivesOtherLazyQuery>;
+export type ZoomLevel5ArchivesOtherQueryResult = Apollo.QueryResult<ZoomLevel5ArchivesOtherQuery, ZoomLevel5ArchivesOtherQueryVariables>;
+export const ZoomLevel5ObjectDocument = gql`
+    query ZoomLevel5Object($id: String!) {
+  zoomLevel5Object(id: $id) {
+    image
+    imageLabel
+    title
+    titleType
+    objectNumber
+    objectName
+    objectNameLabel
+    archiveCollectionCode
+    maker
+    makerLabel
+    makerRole
+    makerRoleLabel
+    startDate
+    endDate
+    numberOfParts
+    scale
+    technique
+    techniqueLabel
+    material
+    materialLabel
+    dimensionPart
+    dimensionType
+    dimensionValue
+    dimensionUnit
+    description
+    associationPerson
+    associationPersonLabel
+    associationPersonType
+    relatedObjectTitle
+    creditLine
+    rights
+    rightsLabel
+    creationPlace
+    creationPlaceLabel
+    permanentLink
+  }
+}
+    `;
+
+/**
+ * __useZoomLevel5ObjectQuery__
+ *
+ * To run a query within a React component, call `useZoomLevel5ObjectQuery` and pass it any options that fit your needs.
+ * When your component renders, `useZoomLevel5ObjectQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useZoomLevel5ObjectQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useZoomLevel5ObjectQuery(baseOptions: Apollo.QueryHookOptions<ZoomLevel5ObjectQuery, ZoomLevel5ObjectQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ZoomLevel5ObjectQuery, ZoomLevel5ObjectQueryVariables>(ZoomLevel5ObjectDocument, options);
+      }
+export function useZoomLevel5ObjectLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ZoomLevel5ObjectQuery, ZoomLevel5ObjectQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ZoomLevel5ObjectQuery, ZoomLevel5ObjectQueryVariables>(ZoomLevel5ObjectDocument, options);
+        }
+export type ZoomLevel5ObjectQueryHookResult = ReturnType<typeof useZoomLevel5ObjectQuery>;
+export type ZoomLevel5ObjectLazyQueryHookResult = ReturnType<typeof useZoomLevel5ObjectLazyQuery>;
+export type ZoomLevel5ObjectQueryResult = Apollo.QueryResult<ZoomLevel5ObjectQuery, ZoomLevel5ObjectQueryVariables>;
+export const ZoomLevel5PublicationDocument = gql`
+    query ZoomLevel5Publication($id: String!) {
+  zoomLevel5Publication(id: $id) {
+    __typename
+    ... on PublicationsAudioVisualZoomLevel5DetailType {
+      typeOfPublication
+      typeOfPublicationLabel
+      title
+      author
+      authorLabel
+      authorRole
+      authorRoleLabel
+      publisher
+      publisherLabel
+      yearOfPublication
+      placeOfPublication
+      placeOfPublicationLabel
+      abstract
+      annotation
+      scope
+      language
+      languageLabel
+      medium
+      geographicalKeyword
+      geographicalKeywordLabel
+      subject
+      subjectLabel
+      relatedPerInst
+      relatedPerInstLabel
+      permanentLink
+      objectNumber
+      availability
+      shelfmark
+    }
+    ... on PublicationsArticleZoomLevel5DetailType {
+      typeOfPublication
+      typeOfPublicationLabel
+      title
+      author
+      authorLabel
+      authorRole
+      authorRoleLabel
+      sourceTitle
+      sourceTitleLabel
+      volume
+      issue
+      yearOfPublication
+      page
+      publisher
+      publisherLabel
+      abstract
+      language
+      languageLabel
+      geographicalKeyword
+      geographicalKeywordLabel
+      subject
+      subjectLabel
+      relatedPerInst
+      relatedPerInstLabel
+      objectNumber
+      availability
+      shelfmark
+      permanentLink
+    }
+    ... on PublicationsSerialZoomLevel5DetailType {
+      typeOfPublication
+      typeOfPublicationLabel
+      title
+      publisher
+      publisherLabel
+      yearOfPublication
+      placeOfPublication
+      placeOfPublicationLabel
+      subject
+      subjectLabel
+      language
+      languageLabel
+      continuedFrom
+      continuedAs
+      remarks
+      availability
+      shelfmark
+      holding
+      permanentLink
+    }
+    ... on PublicationsBookZoomLevel5DetailType {
+      typeOfPublication
+      typeOfPublicationLabel
+      title
+      author
+      authorLabel
+      authorRole
+      authorRoleLabel
+      publisher
+      publisherLabel
+      yearOfPublication
+      placeOfPublication
+      placeOfPublicationLabel
+      isbn
+      description
+      annotation
+      codeOfArchive
+      codeOfArchiveLabel
+      edition
+      illustration
+      numberOfPages
+      language
+      languageLabel
+      seriesLabel
+      number
+      geographicalKeyword
+      geographicalKeywordLabel
+      subject
+      subjectLabel
+      relatedPerInst
+      relatedPerInstLabel
+      objectNumber
+      availability
+      shelfmark
+      permanentLink
+    }
+  }
+}
+    `;
+
+/**
+ * __useZoomLevel5PublicationQuery__
+ *
+ * To run a query within a React component, call `useZoomLevel5PublicationQuery` and pass it any options that fit your needs.
+ * When your component renders, `useZoomLevel5PublicationQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useZoomLevel5PublicationQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useZoomLevel5PublicationQuery(baseOptions: Apollo.QueryHookOptions<ZoomLevel5PublicationQuery, ZoomLevel5PublicationQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ZoomLevel5PublicationQuery, ZoomLevel5PublicationQueryVariables>(ZoomLevel5PublicationDocument, options);
+      }
+export function useZoomLevel5PublicationLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ZoomLevel5PublicationQuery, ZoomLevel5PublicationQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ZoomLevel5PublicationQuery, ZoomLevel5PublicationQueryVariables>(ZoomLevel5PublicationDocument, options);
+        }
+export type ZoomLevel5PublicationQueryHookResult = ReturnType<typeof useZoomLevel5PublicationQuery>;
+export type ZoomLevel5PublicationLazyQueryHookResult = ReturnType<typeof useZoomLevel5PublicationLazyQuery>;
+export type ZoomLevel5PublicationQueryResult = Apollo.QueryResult<ZoomLevel5PublicationQuery, ZoomLevel5PublicationQueryVariables>;
+export const ZoomLevel5PublicationsArticleDocument = gql`
+    query ZoomLevel5PublicationsArticle($id: String!) {
+  zoomLevel5PublicationsArticle(id: $id) {
+    typeOfPublication
+    typeOfPublicationLabel
+    title
+    author
+    authorLabel
+    authorRole
+    authorRoleLabel
+    sourceTitle
+    sourceTitleLabel
+    volume
+    issue
+    yearOfPublication
+    page
+    publisher
+    publisherLabel
+    abstract
+    language
+    languageLabel
+    geographicalKeyword
+    geographicalKeywordLabel
+    subject
+    subjectLabel
+    relatedPerInst
+    relatedPerInstLabel
+    objectNumber
+    availability
+    shelfmark
+    permanentLink
+  }
+}
+    `;
+
+/**
+ * __useZoomLevel5PublicationsArticleQuery__
+ *
+ * To run a query within a React component, call `useZoomLevel5PublicationsArticleQuery` and pass it any options that fit your needs.
+ * When your component renders, `useZoomLevel5PublicationsArticleQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useZoomLevel5PublicationsArticleQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useZoomLevel5PublicationsArticleQuery(baseOptions: Apollo.QueryHookOptions<ZoomLevel5PublicationsArticleQuery, ZoomLevel5PublicationsArticleQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ZoomLevel5PublicationsArticleQuery, ZoomLevel5PublicationsArticleQueryVariables>(ZoomLevel5PublicationsArticleDocument, options);
+      }
+export function useZoomLevel5PublicationsArticleLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ZoomLevel5PublicationsArticleQuery, ZoomLevel5PublicationsArticleQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ZoomLevel5PublicationsArticleQuery, ZoomLevel5PublicationsArticleQueryVariables>(ZoomLevel5PublicationsArticleDocument, options);
+        }
+export type ZoomLevel5PublicationsArticleQueryHookResult = ReturnType<typeof useZoomLevel5PublicationsArticleQuery>;
+export type ZoomLevel5PublicationsArticleLazyQueryHookResult = ReturnType<typeof useZoomLevel5PublicationsArticleLazyQuery>;
+export type ZoomLevel5PublicationsArticleQueryResult = Apollo.QueryResult<ZoomLevel5PublicationsArticleQuery, ZoomLevel5PublicationsArticleQueryVariables>;
+export const ZoomLevel5PublicationsAudiovisualDocument = gql`
+    query ZoomLevel5PublicationsAudiovisual($id: String!) {
+  zoomLevel5PublicationsAudiovisual(id: $id) {
+    typeOfPublication
+    typeOfPublicationLabel
+    title
+    author
+    authorLabel
+    authorRole
+    authorRoleLabel
+    publisher
+    publisherLabel
+    yearOfPublication
+    placeOfPublication
+    placeOfPublicationLabel
+    abstract
+    annotation
+    scope
+    language
+    languageLabel
+    medium
+    geographicalKeyword
+    geographicalKeywordLabel
+    subject
+    subjectLabel
+    relatedPerInst
+    relatedPerInstLabel
+    permanentLink
+    objectNumber
+    availability
+    shelfmark
+  }
+}
+    `;
+
+/**
+ * __useZoomLevel5PublicationsAudiovisualQuery__
+ *
+ * To run a query within a React component, call `useZoomLevel5PublicationsAudiovisualQuery` and pass it any options that fit your needs.
+ * When your component renders, `useZoomLevel5PublicationsAudiovisualQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useZoomLevel5PublicationsAudiovisualQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useZoomLevel5PublicationsAudiovisualQuery(baseOptions: Apollo.QueryHookOptions<ZoomLevel5PublicationsAudiovisualQuery, ZoomLevel5PublicationsAudiovisualQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ZoomLevel5PublicationsAudiovisualQuery, ZoomLevel5PublicationsAudiovisualQueryVariables>(ZoomLevel5PublicationsAudiovisualDocument, options);
+      }
+export function useZoomLevel5PublicationsAudiovisualLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ZoomLevel5PublicationsAudiovisualQuery, ZoomLevel5PublicationsAudiovisualQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ZoomLevel5PublicationsAudiovisualQuery, ZoomLevel5PublicationsAudiovisualQueryVariables>(ZoomLevel5PublicationsAudiovisualDocument, options);
+        }
+export type ZoomLevel5PublicationsAudiovisualQueryHookResult = ReturnType<typeof useZoomLevel5PublicationsAudiovisualQuery>;
+export type ZoomLevel5PublicationsAudiovisualLazyQueryHookResult = ReturnType<typeof useZoomLevel5PublicationsAudiovisualLazyQuery>;
+export type ZoomLevel5PublicationsAudiovisualQueryResult = Apollo.QueryResult<ZoomLevel5PublicationsAudiovisualQuery, ZoomLevel5PublicationsAudiovisualQueryVariables>;
+export const ZoomLevel5PublicationsBookDocument = gql`
+    query ZoomLevel5PublicationsBook($id: String!) {
+  zoomLevel5PublicationsBook(id: $id) {
+    typeOfPublication
+    typeOfPublicationLabel
+    title
+    author
+    authorLabel
+    authorRole
+    authorRoleLabel
+    publisher
+    publisherLabel
+    yearOfPublication
+    placeOfPublication
+    placeOfPublicationLabel
+    isbn
+    description
+    annotation
+    codeOfArchive
+    codeOfArchiveLabel
+    edition
+    illustration
+    numberOfPages
+    language
+    languageLabel
+    seriesLabel
+    number
+    geographicalKeyword
+    geographicalKeywordLabel
+    subject
+    subjectLabel
+    relatedPerInst
+    relatedPerInstLabel
+    objectNumber
+    availability
+    shelfmark
+    permanentLink
+  }
+}
+    `;
+
+/**
+ * __useZoomLevel5PublicationsBookQuery__
+ *
+ * To run a query within a React component, call `useZoomLevel5PublicationsBookQuery` and pass it any options that fit your needs.
+ * When your component renders, `useZoomLevel5PublicationsBookQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useZoomLevel5PublicationsBookQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useZoomLevel5PublicationsBookQuery(baseOptions: Apollo.QueryHookOptions<ZoomLevel5PublicationsBookQuery, ZoomLevel5PublicationsBookQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ZoomLevel5PublicationsBookQuery, ZoomLevel5PublicationsBookQueryVariables>(ZoomLevel5PublicationsBookDocument, options);
+      }
+export function useZoomLevel5PublicationsBookLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ZoomLevel5PublicationsBookQuery, ZoomLevel5PublicationsBookQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ZoomLevel5PublicationsBookQuery, ZoomLevel5PublicationsBookQueryVariables>(ZoomLevel5PublicationsBookDocument, options);
+        }
+export type ZoomLevel5PublicationsBookQueryHookResult = ReturnType<typeof useZoomLevel5PublicationsBookQuery>;
+export type ZoomLevel5PublicationsBookLazyQueryHookResult = ReturnType<typeof useZoomLevel5PublicationsBookLazyQuery>;
+export type ZoomLevel5PublicationsBookQueryResult = Apollo.QueryResult<ZoomLevel5PublicationsBookQuery, ZoomLevel5PublicationsBookQueryVariables>;
+export const ZoomLevel5PublicationsSerialDocument = gql`
+    query ZoomLevel5PublicationsSerial($id: String!) {
+  zoomLevel5PublicationsSerial(id: $id) {
+    typeOfPublication
+    typeOfPublicationLabel
+    title
+    publisher
+    publisherLabel
+    yearOfPublication
+    placeOfPublication
+    placeOfPublicationLabel
+    subject
+    subjectLabel
+    language
+    languageLabel
+    continuedFrom
+    continuedAs
+    remarks
+    availability
+    shelfmark
+    holding
+    permanentLink
+  }
+}
+    `;
+
+/**
+ * __useZoomLevel5PublicationsSerialQuery__
+ *
+ * To run a query within a React component, call `useZoomLevel5PublicationsSerialQuery` and pass it any options that fit your needs.
+ * When your component renders, `useZoomLevel5PublicationsSerialQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useZoomLevel5PublicationsSerialQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useZoomLevel5PublicationsSerialQuery(baseOptions: Apollo.QueryHookOptions<ZoomLevel5PublicationsSerialQuery, ZoomLevel5PublicationsSerialQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ZoomLevel5PublicationsSerialQuery, ZoomLevel5PublicationsSerialQueryVariables>(ZoomLevel5PublicationsSerialDocument, options);
+      }
+export function useZoomLevel5PublicationsSerialLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ZoomLevel5PublicationsSerialQuery, ZoomLevel5PublicationsSerialQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ZoomLevel5PublicationsSerialQuery, ZoomLevel5PublicationsSerialQueryVariables>(ZoomLevel5PublicationsSerialDocument, options);
+        }
+export type ZoomLevel5PublicationsSerialQueryHookResult = ReturnType<typeof useZoomLevel5PublicationsSerialQuery>;
+export type ZoomLevel5PublicationsSerialLazyQueryHookResult = ReturnType<typeof useZoomLevel5PublicationsSerialLazyQuery>;
+export type ZoomLevel5PublicationsSerialQueryResult = Apollo.QueryResult<ZoomLevel5PublicationsSerialQuery, ZoomLevel5PublicationsSerialQueryVariables>;
+export const ZoomLevel5PersonDocument = gql`
+    query ZoomLevel5Person($id: String!) {
+  zoomLevel5Person(id: $id) {
+    name
+    nameType
+    nameVariation
+    birthDate
+    birthPlace
+    birthPlaceLabel
+    deathDate
+    deathPlace
+    deathPlaceLabel
+    place
+    placeLabel
+    startDate
+    endDate
+    nationality
+    nationalityLabel
+    institution
+    institutionLabel
+    profession
+    professionLabel
+    gender
+    association
+    associationLabel
+    relatedItem
+    relatedItemLabel
+    description
+    permanentLink
+  }
+}
+    `;
+
+/**
+ * __useZoomLevel5PersonQuery__
+ *
+ * To run a query within a React component, call `useZoomLevel5PersonQuery` and pass it any options that fit your needs.
+ * When your component renders, `useZoomLevel5PersonQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useZoomLevel5PersonQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useZoomLevel5PersonQuery(baseOptions: Apollo.QueryHookOptions<ZoomLevel5PersonQuery, ZoomLevel5PersonQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ZoomLevel5PersonQuery, ZoomLevel5PersonQueryVariables>(ZoomLevel5PersonDocument, options);
+      }
+export function useZoomLevel5PersonLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ZoomLevel5PersonQuery, ZoomLevel5PersonQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ZoomLevel5PersonQuery, ZoomLevel5PersonQueryVariables>(ZoomLevel5PersonDocument, options);
+        }
+export type ZoomLevel5PersonQueryHookResult = ReturnType<typeof useZoomLevel5PersonQuery>;
+export type ZoomLevel5PersonLazyQueryHookResult = ReturnType<typeof useZoomLevel5PersonLazyQuery>;
+export type ZoomLevel5PersonQueryResult = Apollo.QueryResult<ZoomLevel5PersonQuery, ZoomLevel5PersonQueryVariables>;
 export const ZoomLevel1Document = gql`
     query zoomLevel1 {
   zoomLevel1 {

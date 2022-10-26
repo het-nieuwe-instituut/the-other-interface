@@ -1,0 +1,38 @@
+query ZoomLevel5PublicationsBook($id: String!) {
+    zoomLevel5PublicationsBook(id: $id) {
+        typeOfPublication
+        typeOfPublicationLabel
+        title
+        author
+        authorLabel
+        authorRole
+        authorRoleLabel
+        publisher
+        publisherLabel
+        yearOfPublication
+        placeOfPublication
+        placeOfPublicationLabel
+        isbn
+        description
+        annotation
+        codeOfArchive
+        codeOfArchiveLabel
+        edition
+        illustration
+        numberOfPages
+        language
+        languageLabel
+        seriesLabel
+        number
+        geographicalKeyword
+        geographicalKeywordLabel
+        subject
+        subjectLabel
+        relatedPerInst
+        relatedPerInstLabel
+        objectNumber
+        availability
+        shelfmark
+        permanentLink
+    }
+}

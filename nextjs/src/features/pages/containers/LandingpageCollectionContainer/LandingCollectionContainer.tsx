@@ -1,8 +1,10 @@
-import { useSize } from '@chakra-ui/react-use-size'
+import Breadcrumbs from '@/features/galaxy/components/Breadcrumbs/Breadcrumbs'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import useScroll from '@/features/shared/hooks/useScroll'
 import { Box, useTheme } from '@chakra-ui/react'
+import { useSize } from '@chakra-ui/react-use-size'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import {
@@ -12,9 +14,7 @@ import {
 } from 'src/generated/graphql'
 import { PaginatedCollectionContainer } from '../../../galaxy/Collections/PaginatedCollectionContainer'
 import { SupportedLandingPages } from '../../../galaxy/PaginatedFilterClouds/PaginatedFilterCloudsContainer'
-import Breadcrumbs from '@/features/galaxy/components/Breadcrumbs/Breadcrumbs'
 import { ScrollToContent, ScrollToTop } from '../../utils/utils'
-import useScroll from '@/features/shared/hooks/useScroll'
 
 export interface LandingPageQueryParams {
     slug: SupportedLandingPages
@@ -64,7 +64,6 @@ export const LandingCollection: React.FC<{ data?: LandingpageBySlugQuery }> = ({
         <>
             <Box
                 backgroundColor="graph"
-                height="800px"
                 ref={graphRef}
                 position={'sticky'}
                 top="-750px"
@@ -74,6 +73,9 @@ export const LandingCollection: React.FC<{ data?: LandingpageBySlugQuery }> = ({
             >
                 <Box
                     bgGradient="radial(50% 50% at 50% 50%, #B5FD99 0%, rgba(181, 253, 153, 0) 76.56%)"
+                    backgroundRepeat={'no-repeat'}
+                    bgSize={'1691px 1691px'}
+                    backgroundPosition={'center'}
                     backgroundColor="graph"
                     height="800px"
                     ref={graphRef}

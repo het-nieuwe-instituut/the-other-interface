@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { randomNumberBetweenPoints } from '@/features/shared/utils/numbers'
 import PaginationLeft from '@/icons/arrows/pagination-left.svg'
 import PaginationRight from '@/icons/arrows/pagination-right.svg'
 import { Box, Flex, Grid, GridItem, Img, Text } from '@chakra-ui/react'
@@ -10,9 +11,12 @@ import {
     useZoom4ObjectsQuery,
     useZoom4PeopleQuery,
     useZoom4PublicationsQuery,
+    Zoom4ArchivesQuery,
+    Zoom4ObjectsQuery,
+    Zoom4PeopleQuery,
+    Zoom4PublicationsQuery,
     ZoomLevel4ParentType,
 } from 'src/generated/graphql'
-import { Circle } from '../components/Circle'
 import { SupportedLandingPages } from '../FilterClouds/FilterCloudsContainer'
 import { usePresenter } from './usePresenter'
 
@@ -81,14 +85,6 @@ type PaginatsedProps = {
 export const PaginatedCollectionContainer: React.FunctionComponent<PaginatsedProps> = props => {
     const { type } = props
     const router = useRouter()
-    const { t } = useTypeSafeTranslation('landingpage')
-    const { dimensions } = props
-    const { width, height } = dimensions
-    const svgWidth = width
-    const svgHeight = height
-
-    const id = useId().replaceAll(':', '')
-
     const {
         data: zoom4,
         loading,
@@ -102,12 +98,37 @@ export const PaginatedCollectionContainer: React.FunctionComponent<PaginatsedPro
             pageSize: 28,
         },
     })
+
+    if (loading) {
+        return <Text>Loading</Text>
+    }
+
+    if (error) {
+        return <p>{error.message}</p>
+    }
+
+    return <PaginatedCollection {...props} dimensions={props.dimensions} zoom4={zoom4} />
+}
+
+export const PaginatedCollection: React.FunctionComponent<
+    PaginatsedProps & {
+        zoom4: Zoom4ObjectsQuery | Zoom4ArchivesQuery | Zoom4PeopleQuery | Zoom4PublicationsQuery | undefined
+    }
+> = props => {
+    const { zoom4, dimensions } = props
+    const router = useRouter()
+    const { t } = useTypeSafeTranslation('landingpage')
+    const { width, height } = dimensions
+    const svgWidth = width
+    const svgHeight = height
+
+    const id = useId().replaceAll(':', '')
     const items = useMemo(
         () =>
-            zoom4?.zoomLevel4?.nodes?.map((node, index) => ({
+            zoom4?.zoomLevel4?.nodes?.map(node => ({
                 ...node,
                 randomBottom: randomShift(),
-                randomLeft: randomShift(index),
+                randomLeft: randomShift(),
             })),
         [zoom4?.zoomLevel4?.nodes]
     )
@@ -119,22 +140,9 @@ export const PaginatedCollectionContainer: React.FunctionComponent<PaginatsedPro
         dimensions
     )
 
-    if (loading) {
-        return <Text>Loading</Text>
-    }
-
-    if (error) {
-        return (
-            <Box display={'flex'} justifyContent={'center'} alignSelf={'center'} pt={20}>
-                <p>{error.message}</p>
-            </Box>
-        )
-    }
-
     return (
         <Box overflow="hidden" height={svgHeight} width={svgWidth}>
             <svg width={svgWidth} height={svgHeight} ref={svgRef} viewBox={`0 0 ${1000} ${1000}`}>
-                <Circle />
                 <Box
                     as={'foreignObject'}
                     width={1000}
@@ -234,9 +242,6 @@ export const PaginatedCollectionContainer: React.FunctionComponent<PaginatsedPro
     )
 }
 
-function randomShift(index = 30) {
-    if (index === 0 || index === 23) {
-        return Math.floor(Math.random() * 50)
-    }
-    return Math.floor(Math.random() * 50)
+function randomShift() {
+    return Math.floor(randomNumberBetweenPoints(-20, 20))
 }

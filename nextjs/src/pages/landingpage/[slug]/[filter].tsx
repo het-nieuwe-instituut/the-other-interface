@@ -1,10 +1,9 @@
 import { LandingpageFilterContainer } from '@/features/pages/containers/LandingpageFilterContainer/LandingpageFilterContainer'
 import { GetServerSidePropsContext } from 'next'
-import { EntityNames } from 'src/generated/graphql'
-import { getServerSideProps as mainGetServerSideProps } from '../[slug]'
+import { getServerSideProps as mainGetServerSideProps, LandingPageQueryParams } from '../[slug]'
 
-export interface LandingPageQueryParams {
-    slug: EntityNames
+export interface LandingPageFilterQueryParams extends LandingPageQueryParams {
+    filter: string
 }
 
 const Page = () => {

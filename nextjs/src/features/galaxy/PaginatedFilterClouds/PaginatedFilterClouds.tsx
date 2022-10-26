@@ -30,7 +30,6 @@ const PaginatedFilterClouds: React.FunctionComponent<Props> = ({ dimensions, zoo
         id
     )
     const { t } = useTypeSafeTranslation('landingpage')
-    console.log(zoom3)
 
     return (
         <Box overflow="hidden" height={svgHeight} width={svgWidth}>
