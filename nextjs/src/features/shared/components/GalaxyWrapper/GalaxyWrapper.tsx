@@ -36,16 +36,8 @@ export const GalaxyWrapper: React.FC<Props> = props => {
                 right={0}
                 bottom={0}
                 justifyContent={'space-between'}
-                backgroundColor={'#f0f'}
             >
-                <Flex
-                    alignItems={'center'}
-                    position="relative"
-                    zIndex={2}
-                    left={'32px'}
-                    right={'32px'}
-                    backgroundColor={'#0f0'}
-                >
+                <Flex alignItems={'center'} position="relative" zIndex={2} left={'32px'} right={'32px'}>
                     {props?.renderBottom?.()}
                 </Flex>
             </Flex>

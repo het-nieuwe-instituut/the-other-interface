@@ -37,7 +37,6 @@ const buttonConfig = {
 }
 
 export const ButtonsGrid: React.FC<Props> = props => {
-    console.log(props)
     if (props.buttonStyle === EnumComponentmodulesbuttonsmoduleButtonstyle.Large) {
         return (
             <Grid templateColumns={{ base: '1fr', md: 'auto auto' }} gap={5}>
@@ -87,7 +86,6 @@ interface GridButtonProps {
 }
 const GridButton: React.FC<GridButtonProps> = ({ button, index, array, config }) => {
     const pageConfiguration = usePageConfiguration()
-    console.log(config)
 
     return (
         <NextLink style={{ width: '100%' }} href={getURl(button)} passHref>
