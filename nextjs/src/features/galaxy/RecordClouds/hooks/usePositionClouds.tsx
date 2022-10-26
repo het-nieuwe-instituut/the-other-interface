@@ -199,7 +199,6 @@ function XandYToCenterBasedByDiameter({
     centerY,
     extraAngle,
 }: XandYToCenterBasedByDiameterOptions) {
-    // this can be done better, don't ask me what i actually did here
     let angle =
         angleBetweenPoints({ x: childCenterPositionX, y: childCenterPositionY }, { x: centerX, y: centerY }) +
         extraAngle

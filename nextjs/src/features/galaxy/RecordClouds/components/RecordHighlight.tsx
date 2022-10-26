@@ -1,3 +1,4 @@
+import { SupportedQuerys, ZoomLevel5DetailResponses } from '@/features/pages/tasks/getZoom5RecordTask'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { typeColors } from '@/features/shared/styles/theme/foundations/colors'
 import { Box, Flex, Image, Text } from '@chakra-ui/react'
@@ -5,7 +6,6 @@ import { useRouter } from 'next/router'
 import { RecordQueryParams } from 'src/pages/landingpage/[slug]/[filter]/[collection]/[record]'
 import { Circle } from '../../components/Circle'
 import { Dimensions } from '../../types/galaxy'
-import { SupportedQuerys, ZoomLevel5DetailResponses } from '../useZoom5DetailQuery'
 
 interface RecordCloudHighlightProps {
     image?: {

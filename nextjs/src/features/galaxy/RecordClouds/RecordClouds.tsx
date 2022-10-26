@@ -5,8 +5,8 @@ import { Circle } from '../components/Circle'
 import { EntityNames, ObjectRelationsQuery } from 'src/generated/graphql'
 import { RecordCloudHighlight } from './components/RecordHighlight'
 import { usePresenter } from './usePresenter'
-import { ZoomLevel5DetailResponses } from './useZoom5DetailQuery'
 import { ParentRelation } from './hooks/usePositionClouds'
+import { ZoomLevel5DetailResponses } from '@/features/pages/tasks/getZoom5RecordTask'
 
 type Props = {
     dimensions: {
