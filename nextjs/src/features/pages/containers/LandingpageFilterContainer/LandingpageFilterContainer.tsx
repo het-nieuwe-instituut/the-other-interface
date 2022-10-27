@@ -46,37 +46,31 @@ export const LandingpageFilterContainer: React.FC = () => {
 
     return (
         <>
+           
             <Box
-                backgroundColor="graph"
-                height="800px"
-                ref={graphRef}
-                position={'sticky'}
-                top="-750px"
-                zIndex={40}
-                onClick={ScrollToTop}
-                cursor={scrollPosition >= 750 ? 'pointer' : 'cursor'}
+                 backgroundColor="graph"
+                 height="750px"
+                 ref={graphRef}
             >
-                <Box backgroundColor="graph" height="800px" ref={graphRef}>
                     {sizes?.height && sizes?.width && (
                         <>
-                            <Breadcrumbs />
+                         <Breadcrumbs
+                            onWrapperClick={ScrollToTop}
+                            cursor={scrollPosition >= 750 ? 'pointer' : 'inherit'} 
+                            bg={scrollPosition >= 750 ? 'graph' : 'trasparent'}  
+                        />
+                        <Box position={'fixed'}>
                             <PaginatedFilterCloudsContainer
                                 type={type}
-                                dimensions={{ height: 800, width: sizes?.width }}
+                                dimensions={{ height: 750, width: sizes?.width }}
                             />
+                        </Box>
                         </>
+                        
                     )}
-                </Box>
             </Box>
-            <Box px={{ xl: 6, base: 0 }}>
-                <Box
-                    backgroundColor={'white'}
-                    px={6}
-                    maxW={theme.breakpoints.xl}
-                    marginX={'auto'}
-                    pb={1}
-                    paddingTop={6}
-                >
+            <Box px={{ xl: 6, base: 0 }} position={'relative'} zIndex={2} backgroundColor={'white'}>
+                <Box  maxW={theme.breakpoints.xl} marginX={'auto'} paddingTop={6}>
                     <PageHeader
                         showPointer={scrollPosition < 750}
                         handleClick={ScrollToContent}

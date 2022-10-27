@@ -41,7 +41,10 @@ const Galaxy: React.FC<Props> = ({ dimensions }) => {
         <Box
             height={height}
             boxSizing="border-box"
-            position={'relative'}
+            position={'fixed'}
+            top={0}
+            left={0}
+            zIndex={0}
             overflow="hidden"
             alignItems="center"
             justifyContent="center"
@@ -102,7 +105,7 @@ const Galaxy: React.FC<Props> = ({ dimensions }) => {
                                                 width="100%"
                                                 height="100%"
                                                 borderRadius="100%"
-                                                zIndex="100"
+                                                zIndex={1}
                                                 display="flex"
                                                 alignItems="center"
                                                 justifyContent="center"

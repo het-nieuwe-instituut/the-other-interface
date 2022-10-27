@@ -123,7 +123,13 @@ const getBreadcrumbsFromUrl = (asPath: string, query: { zoomLevel: ZoomLevel }, 
     }
 }
 
-const Breadcrumbs = () => {
+type Props = {
+    bg?: string
+    onWrapperClick?: () => void
+    cursor?: string
+}
+
+const Breadcrumbs = (props: Props) => {
     const router = useRouter()
     const theme = useTheme()
     const { t } = useTypeSafeTranslation('navigation')
@@ -149,16 +155,19 @@ const Breadcrumbs = () => {
 
     return (
         <Box
-            maxW={theme.breakpoints.xl}
-            marginX={'auto'}
             left={0}
             right={0}
             position={'sticky'}
             top="0px"
-            height="0px"
-            zIndex={2}
+            height="50px"
+            zIndex={3}
+            overflow={'hidden'}
+            width={'100%'}
+            cursor={props.cursor}
+            backgroundColor={props.bg ?? 'graph'}
+            onClick={props.onWrapperClick ?? undefined}
         >
-            <Flex alignItems={'center'} position="relative" left={'32px'} top={'15px'} zIndex={2}>
+            <Flex alignItems={'center'} position="relative" left={'32px'} top={'15px'} zIndex={2} marginX={'auto'} maxW={theme.breakpoints.xl}>
                 {items.map((item, index) => (
                     <React.Fragment key={index}>
                         <Link

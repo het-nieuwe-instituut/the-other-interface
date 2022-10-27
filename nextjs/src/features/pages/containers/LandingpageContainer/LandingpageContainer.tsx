@@ -51,44 +51,33 @@ export const LandingpageContainer: React.FC = () => {
 
     return (
         <>
+            <Breadcrumbs  onWrapperClick={ScrollToTop}
+                cursor={scrollPosition >= 750 ? 'pointer' : 'inherit'} />
             <Box
                 backgroundColor="graph"
-                height="800px"
+                height="750px"
                 ref={graphRef}
-                position={'sticky'}
-                top="-750px"
-                zIndex={40}
-                onClick={ScrollToTop}
-                cursor={scrollPosition >= 750 ? 'pointer' : 'cursor'}
             >
                 {sizes?.height && sizes?.width && (
-                    <>
-                        <Breadcrumbs />
+                    <Box position={'fixed'}>
                         <DynamicFilterCloudsNoSsr type={type} dimensions={{ height: 800, width: sizes?.width }} />
-                    </>
+                    </Box>
                 )}
             </Box>
-            <Box px={{ xl: 6, base: 0 }}>
-                <Box
-                    backgroundColor={'white'}
-                    px={6}
-                    maxW={theme.breakpoints.xl}
-                    marginX={'auto'}
-                    pb={1}
-                    paddingTop={6}
-                >
+            <Box px={{ xl: 6, base: 0 }} position={'relative'} zIndex={2} backgroundColor={'white'}>
+                <Box  maxW={theme.breakpoints.xl} marginX={'auto'} paddingTop={6}>
                     <PageHeader
                         showPointer={scrollPosition < 750}
                         handleClick={ScrollToContent}
                         title={landingpage.attributes?.Title || undefined}
                         preface={landingpage.attributes?.Description || undefined}
                     />
+                    <DynamicComponentRenderer
+                        components={
+                            data?.landingpages?.data[0]?.attributes?.components as LandingpageComponentsDynamicZone[]
+                        }
+                    />
                 </Box>
-                <DynamicComponentRenderer
-                    components={
-                        data?.landingpages?.data[0]?.attributes?.components as LandingpageComponentsDynamicZone[]
-                    }
-                />
             </Box>
         </>
     )

@@ -67,7 +67,7 @@ export const LandingCollection: React.FC<{ data?: LandingpageBySlugQuery }> = ({
                 ref={graphRef}
                 position={'sticky'}
                 top="-750px"
-                zIndex={40}
+                zIndex={0}
                 onClick={ScrollToTop}
                 cursor={scrollPosition >= 750 ? 'pointer' : 'cursor'}
             >
@@ -91,7 +91,7 @@ export const LandingCollection: React.FC<{ data?: LandingpageBySlugQuery }> = ({
                     )}
                 </Box>
             </Box>
-            <Box px={{ xl: 6, base: 0 }}>
+            <Box px={{ xl: 6, base: 0 }} position={'relative'} zIndex={2}>
                 <Box backgroundColor={'white'} px={6} pt={6} maxW={theme.breakpoints.xl} marginX={'auto'} pb={1}>
                     <PageHeader
                         showPointer={scrollPosition < 750}
