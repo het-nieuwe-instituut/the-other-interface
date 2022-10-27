@@ -80,11 +80,11 @@ export class ZoomLevel5Service {
             case EntityNames.People:
             case EntityNames.Publications:
                 return [
-                    ...(await this.getRelationsFromTriply(id, type, externalSource)),
+                    ...(await this.getTriplyRelations(id, type, externalSource)),
                     await this.getStoryRelationsForLinkedItem(id, type),
                 ]
             case EntityNames.Stories:
-                return this.getStoryRelations(id)
+                return this.getStoryRelations(id, externalSource)
             case EntityNames.External:
             // TODO
             default:
@@ -140,22 +140,15 @@ export class ZoomLevel5Service {
         }
     }
 
-    private async getRelationsFromTriply(id: string, type: EntityNames, externalSource?: TriplyExternalSourceEnum) {
-        const uri = TriplyUtils.getUriForTypeAndId(type, id)
-        const params = externalSource ? { ExternalSources: externalSource } : undefined
+    private async getTriplyRelations(id: string, type: EntityNames, externalSource?: TriplyExternalSourceEnum) {
+        const data = await this.getRelationDataFromTriply(id, type, externalSource)
 
-        const res = await this.triplyService.queryTriplyData<ZoomLevel5RelationData>(
-            `${this.relationsEndpoint}${uri}`,
-            undefined,
-            params
-        )
-
-        const groupedData = this.getGroupedRelationData(res.data)
+        const groupedData = this.getGroupedRelationData(data)
 
         return this.getFormattedGroupData(groupedData)
     }
 
-    private async getStoryRelations(id: string) {
+    private async getStoryRelations(id: string, externalSource?: TriplyExternalSourceEnum) {
         const relations = await this.strapiGqlSdk.storyTriplyRelations({ id })
         const triplyRecords = (relations.story?.data?.attributes?.triplyRecords?.data || []).filter(
             r => !!r.attributes?.recordId
@@ -177,7 +170,9 @@ export class ZoomLevel5Service {
         const promises = Object.entries(groupedRecords).map(async ([key, recordIds]) => {
             const type = StrapiUtils.getEntityNameForRecordType(key as Enum_Triplyrecord_Type)
             const randomRecordIds = getRandom2ItemsFromArray(recordIds)
-            const randomRelations = await Promise.all(randomRecordIds.map(id => this.getRelationsFromTriply(id, type)))
+            const randomRelations = await Promise.all(
+                randomRecordIds.map(id => this.getTriplyRelatedRecords(id, type, externalSource))
+            )
 
             return {
                 type,
@@ -231,6 +226,33 @@ export class ZoomLevel5Service {
             default:
                 throw new Error('not yet implemented')
         }
+    }
+
+    private async getTriplyRelatedRecords(id: string, type: EntityNames, externalSource?: TriplyExternalSourceEnum) {
+        const data = await this.getRelationDataFromTriply(id, type, externalSource)
+
+        const groupedData = this.getGroupedRelationData(data)
+        const formattedData = this.getFormattedGroupData(groupedData)
+
+        return {
+            id,
+            type,
+            label: '', // TODO: add after Triply updates endpoint to return the label
+            relations: formattedData,
+        }
+    }
+
+    private async getRelationDataFromTriply(id: string, type: EntityNames, externalSource?: TriplyExternalSourceEnum) {
+        const uri = TriplyUtils.getUriForTypeAndId(type, id)
+        const params = externalSource ? { ExternalSources: externalSource } : undefined
+
+        const res = await this.triplyService.queryTriplyData<ZoomLevel5RelationData>(
+            `${this.relationsEndpoint}${uri}`,
+            undefined,
+            params
+        )
+
+        return res.data
     }
 
     private getGroupedRelationData(data: ZoomLevel5RelationData[]) {
