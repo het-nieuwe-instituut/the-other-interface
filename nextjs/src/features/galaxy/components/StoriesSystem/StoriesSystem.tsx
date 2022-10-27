@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Box } from '@chakra-ui/react'
+import Link from 'next/link'
 import React from 'react'
 import { InstancesPerClass, usePresenter } from './usePresenter'
 
@@ -27,6 +28,7 @@ export const StoriesSystem: React.FC<Props> = ({ data = [], dimensions = default
             <style>
                 {`
                     .text { font: italic 13px sans-serif }
+                    .StoriesSystem-dot { cursor: pointer }
                 `}
             </style>
             <g>
@@ -36,22 +38,24 @@ export const StoriesSystem: React.FC<Props> = ({ data = [], dimensions = default
             </g>
             {dataPoints.map((item, index, array) => {
                 return (
-                    <g key={`${index}-${array.length}`} className="StoriesSystem-dot">
-                        <foreignObject
-                            x={`${item.point[0]}`}
-                            y={`${item.point[1]}`}
-                            height={'7.47px'}
-                            width={'7.47px'}
-                            className={`${item.parent}-dot`}
-                            data-id={item.id}
-                        >
-                            <Box
-                                height="100%"
-                                width="100%"
-                                background="radial-gradient(50% 50% at 50% 50%, #FFFFFF 0%, rgba(255, 255, 255, 0) 77.6%);"
-                            ></Box>
-                        </foreignObject>
-                    </g>
+                    <Link href={`/story/${item.slug}`} key={`${index}-${array.length}`}>
+                        <g className="StoriesSystem-dot">
+                            <foreignObject
+                                x={`${item.point[0]}`}
+                                y={`${item.point[1]}`}
+                                height={'7.47px'}
+                                width={'7.47px'}
+                                className={`${item.parent}-dot`}
+                                data-id={item.id}
+                            >
+                                <Box
+                                    height="100%"
+                                    width="100%"
+                                    background="radial-gradient(50% 50% at 50% 50%, #FFFFFF 0%, rgba(255, 255, 255, 0) 77.6%);"
+                                ></Box>
+                            </foreignObject>
+                        </g>
+                    </Link>
                 )
             })}
         </svg>
