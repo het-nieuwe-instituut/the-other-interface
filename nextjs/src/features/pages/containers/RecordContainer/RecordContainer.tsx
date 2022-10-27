@@ -37,8 +37,8 @@ const RecordPage: React.FC<{ data?: ReturnType<typeof useGetZoom5RecordTask>['da
                 {sizes?.height && sizes?.width && (
                     <DynamicRecordCloudsNoSsr
                         key={router.query.record as string}
-                        zoomLevel5={data?.detail}
-                        relations={data?.relations ?? []}
+                        zoomLevel5={data?.zoom5detail}
+                        relations={data?.zoom5relations ?? []}
                         dimensions={sizes}
                     />
                 )}
@@ -47,12 +47,12 @@ const RecordPage: React.FC<{ data?: ReturnType<typeof useGetZoom5RecordTask>['da
             <Box px={{ xl: 6, base: 0 }}>
                 <Box backgroundColor={'white'} px={6} pt={6} maxW={theme.breakpoints.xl} marginX={'auto'} pb={1}>
                     <PageHeader
-                        title={data?.landingPage?.attributes?.Title || undefined}
-                        preface={data?.landingPage?.attributes?.Description || undefined}
+                        title={data?.zoom5landingPage?.attributes?.Title || undefined}
+                        preface={data?.zoom5landingPage?.attributes?.Description || undefined}
                     />
                 </Box>
                 <DynamicComponentRenderer
-                    components={data?.landingPage?.attributes?.components as LandingpageComponentsDynamicZone[]}
+                    components={data?.zoom5landingPage?.attributes?.components as LandingpageComponentsDynamicZone[]}
                 />
             </Box>
         </>

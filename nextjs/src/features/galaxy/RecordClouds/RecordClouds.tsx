@@ -4,7 +4,7 @@ import { Circle } from '../components/Circle'
 
 import { ZoomLevel5DetailResponses } from '@/features/pages/tasks/getZoom5RecordTask'
 import React from 'react'
-import { EntityNames, ObjectRelationsQuery } from 'src/generated/graphql'
+import { EntityNames } from 'src/generated/graphql'
 import { RecordCloudHighlight } from './components/RecordHighlight'
 import { ParentRelation } from './hooks/usePositionClouds'
 import { usePresenter } from './usePresenter'
@@ -14,8 +14,8 @@ type Props = {
         height: number
         width: number
     }
-    zoomLevel5: ZoomLevel5DetailResponses
-    relations: ObjectRelationsQuery['relations']
+    zoomLevel5: ZoomLevel5DetailResponses['zoom5detail']
+    relations: ZoomLevel5DetailResponses['zoom5relations']
 }
 
 export const SVG_DIMENSIONS = { width: 1280, height: 800 }

@@ -142,41 +142,24 @@ const config = {
     },
 }
 
-function getConfig<T extends keyof typeof config>(type: T) {
-    return config[type] as typeof config[T]
-}
-
-export function useZoomLevel5DetailQuery<T extends keyof typeof config>(
-    type: T,
-    options: { variables: Parameters<typeof config[keyof typeof config]['zoomLevelQuery']['useHook']>[0]['variables'] }
-) {
-    const configByType = getConfig<T>(type)
-
-    const query = configByType.zoomLevelQuery.useHook({
-        variables: options.variables,
-    })
-
-    return {
-        ...query,
-        data: configByType.zoomLevelQuery.accessor(query.data),
-    }
-}
-
-export type ZoomLevel5DetailResponses = ReturnType<typeof useZoomLevel5DetailQuery>['data']
+export type ZoomLevel5DetailResponses = GetZoom5RecordQuery
 
 export const Zoom5RecordDataDocument = gql`
     query zoom5RecordData {
-        landingPage @client
-        detail @client
-        relations @client
+        zoom5landingPage @client
+        zoom5detail @client
+        zoom5relations @client
     }
 `
 
 export interface GetZoom5RecordQuery {
-    landingPage?: NonNullable<LandingpageBySlugQuery['landingpages']['data'][0]>
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    detail?: any
-    relations?: ObjectRelationsQuery['relations']
+    zoom5landingPage?: NonNullable<LandingpageBySlugQuery['landingpages']['data'][0]>
+    zoom5detail:
+        | ZoomLevel5PublicationQuery['zoomLevel5Publication']
+        | ZoomLevel5ArchivesQuery['zoomLevel5Archive']
+        | ZoomLevel5ObjectQuery['zoomLevel5Object']
+        | ZoomLevel5PersonQuery['zoomLevel5Person']
+    zoom5relations?: ObjectRelationsQuery['relations']
 }
 
 export function useGetZoom5RecordTask() {
@@ -223,9 +206,9 @@ export async function getZoom5RecordTask(
     client.writeQuery<GetZoom5RecordQuery>({
         query: Zoom5RecordDataDocument,
         data: {
-            landingPage: landingPage.data.landingpages.data[0],
-            detail: configByType.zoomLevelQuery.accessor(detailQuery.data),
-            relations: relations.data.relations,
+            zoom5landingPage: landingPage.data.landingpages.data[0],
+            zoom5detail: configByType.zoomLevelQuery.accessor(detailQuery.data),
+            zoom5relations: relations.data.relations,
         },
         overwrite: true,
     })

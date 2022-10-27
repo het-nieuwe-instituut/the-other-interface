@@ -15,7 +15,7 @@ interface RecordCloudHighlightProps {
         alt?: string
     }
     title?: string
-    queryType: NonNullable<ZoomLevel5DetailResponses>['__typename']
+    queryType: NonNullable<ZoomLevel5DetailResponses['zoom5detail']>['__typename']
     dimensions: Dimensions
 }
 
