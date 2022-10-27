@@ -150,7 +150,7 @@ function drawPathByParent(svgRef: null, dataPoints: InstancesPerClassWithPoint[]
         .selectAll('.StoriesSystem-dot')
         .on('mouseover', d => {
             const hoverDataPoint = dataPoints.find(
-                dataPoint => dataPoint.id === d.target.offsetParent.attributes['data-id'].value
+                dataPoint => dataPoint.id === d.target.offsetParent?.attributes['data-id']?.value
             )
 
             const filteredDataPoints = dataPoints.filter(dataPoint => dataPoint.parent === hoverDataPoint?.parent)
@@ -174,18 +174,8 @@ function drawPathByParent(svgRef: null, dataPoints: InstancesPerClassWithPoint[]
                         .x((d: any) => d.point[0])
                         .y((d: any) => d.point[1]) as any
                 )
-
-            if (hoverDataPoint) {
-                d3Svg
-                    .append('text')
-                    .attr('x', () => hoverDataPoint.point[0])
-                    .attr('y', () => hoverDataPoint.point[1] - 20)
-                    .attr('class', 'text')
-                    .text(() => hoverDataPoint.title)
-            }
         })
         .on('mouseout', () => {
             d3Svg.selectAll('path').remove()
-            d3Svg.selectAll('text').remove()
         })
 }
