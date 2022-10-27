@@ -18,6 +18,8 @@ export function usePresenter(relations: ObjectRelationsQuery['relations']) {
             if (d.type.toLowerCase() === 'stories') {
                 const newRoute = `/story/${d.label}`
 
+                client.cache.evict({ id: 'ROOT_QUERY', fieldName: 'zoom5detail' })
+                client.cache.evict({ id: 'ROOT_QUERY', fieldName: 'zoom5relations' })
                 await router.push(newRoute + '?galaxy=true')
                 return
             }

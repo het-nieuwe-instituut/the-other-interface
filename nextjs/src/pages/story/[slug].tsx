@@ -1,8 +1,8 @@
 import { addApolloState, getApolloClient } from '@/features/graphql/config/apollo'
 import { StoryContainer } from '@/features/pages/containers/StoryContainer/StoryContainer'
+import { getZoom5StoryTask } from '@/features/pages/tasks/getZoom5StoryTask'
 import { preparePageConfiguration } from '@/features/shared/utils/pageConfiguration'
 import { GetServerSidePropsContext } from 'next'
-import { StoryBySlugDocument, StoryBySlugQuery } from 'src/generated/graphql'
 
 export interface StoryQueryParams {
     slug: string
@@ -19,17 +19,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     const slug = queryParams.slug
     const apolloClient = getApolloClient({ headers: context?.req?.headers })
 
-    const result = await apolloClient.query<StoryBySlugQuery>({
-        variables: {
-            locale: context.locale,
-            slug: slug,
-        },
-        query: StoryBySlugDocument,
-    })
-
-    if (result.error || !result.data.stories?.data?.length) {
-        return { notFound: true }
-    }
+    await getZoom5StoryTask(apolloClient, context)
 
     preparePageConfiguration(apolloClient, {
         host: context.req.headers.host ?? '',

@@ -6,25 +6,18 @@ import { useSize } from '@chakra-ui/react-use-size'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
-import { StoryBySlugQuery, StoryComponentsDynamicZone, StoryEntity, useStoryBySlugQuery } from 'src/generated/graphql'
+import { StoryComponentsDynamicZone, StoryEntity } from 'src/generated/graphql'
 import { StoryMeta } from '../../Meta/StoryMeta'
-import { LandingPageQueryParams } from '../LandingpageCollectionContainer/LandingCollectionContainer'
+import { GetZoom5StoryQuery, useGetZoom5StoryTask } from '../../tasks/getZoom5StoryTask'
 
 const DynamicRecordCloudsNoSsr = dynamic(() => import('../../../galaxy/RecordClouds/RecordClouds'), {
     ssr: false,
 })
 
 export const StoryContainer: React.FC = () => {
-    const router = useRouter()
     const { t } = useTypeSafeTranslation('common')
-    const queryParams = router.query as unknown as LandingPageQueryParams
 
-    const { data, loading, error } = useStoryBySlugQuery({
-        variables: {
-            locale: router.locale,
-            slug: queryParams?.slug,
-        },
-    })
+    const { data, loading, error } = useGetZoom5StoryTask()
 
     if (loading) {
         return <p>loading</p>
@@ -34,14 +27,14 @@ export const StoryContainer: React.FC = () => {
         return <p>{error.message}</p>
     }
 
-    if (!data?.stories?.data?.length) {
+    if (!data || !data.zoom5Story) {
         return <p>{t('somethingWentWrong')}</p>
     }
 
-    return <Story story={data.stories.data[0]} />
+    return <Story data={data} />
 }
 
-const Story: React.FC<{ story?: NonNullable<NonNullable<StoryBySlugQuery['stories']>['data']>[0] }> = ({ story }) => {
+const Story: React.FC<{ data: GetZoom5StoryQuery }> = ({ data }) => {
     const router = useRouter()
     const theme = useTheme()
     const graphRef = useRef<HTMLDivElement | null>(null)
@@ -53,8 +46,8 @@ const Story: React.FC<{ story?: NonNullable<NonNullable<StoryBySlugQuery['storie
                 {sizes?.height && sizes?.width && (
                     <DynamicRecordCloudsNoSsr
                         key={router.query.record as string}
-                        zoomLevel5={story}
-                        relations={[]}
+                        zoomLevel5={data?.zoom5Story}
+                        relations={data?.zoom5relations}
                         dimensions={sizes}
                     />
                 )}
@@ -75,16 +68,18 @@ const Story: React.FC<{ story?: NonNullable<NonNullable<StoryBySlugQuery['storie
                     >
                         <GridItem area={'header'}>
                             <PageHeader
-                                title={story?.attributes?.title}
-                                preface={story?.attributes?.description ?? undefined}
+                                title={data.zoom5Story?.attributes?.title}
+                                preface={data.zoom5Story?.attributes?.description ?? undefined}
                             />
                         </GridItem>
                         <GridItem area={'meta'}>
-                            <StoryMeta story={story as StoryEntity} />
+                            <StoryMeta story={data.zoom5Story as StoryEntity} />
                         </GridItem>
                     </Grid>
                 </Box>
-                <DynamicComponentRenderer components={story?.attributes?.components as StoryComponentsDynamicZone[]} />
+                <DynamicComponentRenderer
+                    components={data.zoom5Story?.attributes?.components as StoryComponentsDynamicZone[]}
+                />
             </Box>
         </>
     )
