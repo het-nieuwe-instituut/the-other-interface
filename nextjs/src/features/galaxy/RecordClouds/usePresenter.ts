@@ -19,8 +19,8 @@ export function usePresenter(relations: ObjectRelationsQuery['relations']) {
                 d.id
             }-${d.type.toLowerCase()}`
 
-            client.cache.evict({ id: 'ROOT_QUERY', fieldName: 'detail' })
-            client.cache.evict({ id: 'ROOT_QUERY', fieldName: 'relations' })
+            client.cache.evict({ id: 'ROOT_QUERY', fieldName: 'zoom5detail' })
+            client.cache.evict({ id: 'ROOT_QUERY', fieldName: 'zoom5relations' })
 
             await router.push(newRoute + '?galaxy=true')
         },
