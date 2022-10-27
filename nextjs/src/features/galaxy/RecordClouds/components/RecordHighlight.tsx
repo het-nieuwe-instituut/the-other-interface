@@ -1,11 +1,10 @@
-import { SupportedQuerys, ZoomLevel5DetailResponses } from '@/features/pages/tasks/getZoom5RecordTask'
+import { SupportedQuerys } from '@/features/pages/tasks/getZoom5RecordTask'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { typeColors } from '@/features/shared/styles/theme/foundations/colors'
 import { Box, Flex, Image, keyframes, Text } from '@chakra-ui/react'
-import { useRouter } from 'next/router'
-import { RecordQueryParams } from 'src/pages/landingpage/[slug]/[filter]/[collection]/[record]'
 import { Circle } from '../../components/Circle'
 import { Dimensions } from '../../types/galaxy'
+import { ZoomLevel5Entities } from '../RecordClouds'
 
 interface RecordCloudHighlightProps {
     image?: {
@@ -15,7 +14,8 @@ interface RecordCloudHighlightProps {
         alt?: string
     }
     title?: string
-    queryType: NonNullable<ZoomLevel5DetailResponses['zoom5detail']>['__typename']
+    queryType: NonNullable<ZoomLevel5Entities>['__typename']
+    type: SupportedQuerys
     dimensions: Dimensions
 }
 
@@ -29,12 +29,9 @@ export const RecordCloudHighlight: React.FunctionComponent<RecordCloudHighlightP
     title,
     dimensions,
     queryType,
+    type,
 }) => {
-    const router = useRouter()
     const { t } = useTypeSafeTranslation('record')
-    const queryParams = router.query as unknown as RecordQueryParams
-    const record = queryParams.record
-    const type = record.split('-')[1] as SupportedQuerys
     const radius = 500
     const width = dimensions.width ?? 0
     const height = dimensions.height ?? 0

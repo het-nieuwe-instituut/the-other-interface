@@ -15,6 +15,13 @@ export function usePresenter(relations: ObjectRelationsQuery['relations']) {
     const { relationsPositionData } = usePositionClouds(relations)
     const navigateTo = useCallback(
         async (d: d3.SimulationNodeDatum & Item) => {
+            if (d.type.toLowerCase() === 'stories') {
+                const newRoute = `/story/${d.label}`
+
+                await router.push(newRoute + '?galaxy=true')
+                return
+            }
+
             const newRoute = `/landingpage/${router.query.slug}/${router.query.filter}/${router.query.collection}/${
                 d.id
             }-${d.type.toLowerCase()}`
