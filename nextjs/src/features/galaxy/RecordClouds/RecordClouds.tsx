@@ -1,5 +1,5 @@
 import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { Box, Text } from '@chakra-ui/react'
+import { Box, keyframes, Text } from '@chakra-ui/react'
 import { Circle } from '../components/Circle'
 
 import { ZoomLevel5DetailResponses } from '@/features/pages/tasks/getZoom5RecordTask'
@@ -19,12 +19,20 @@ type Props = {
 }
 
 export const SVG_DIMENSIONS = { width: 1280, height: 800 }
+const opacityIn = keyframes`
+    from {opacity: 0.3 }
+    to {opacity: 1}
+`
+
+const opacityOut = keyframes`
+    to {opacity: 0.3}
+`
 
 const RecordClouds: React.FunctionComponent<Props> = ({ dimensions, zoomLevel5, relations }) => {
     const { width, height } = dimensions
     const svgWidth = width
     const svgHeight = height
-    const { svgRef, relationsPositionData } = usePresenter(relations)
+    const { svgRef, relationsPositionData, zoomed } = usePresenter(relations)
     const { t } = useLooseTypeSafeTranslation('record')
 
     return (
@@ -67,6 +75,10 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions, zoomLevel5, 
                                         y={child.y}
                                         height={192}
                                         width={192}
+                                        backgroundAnimation={
+                                            zoomed ? `${opacityIn} 1500ms linear` : `${opacityOut} 0ms linear`
+                                        }
+                                        disableHover={true}
                                     >
                                         <Box width={'75%'} zIndex={1} data-child>
                                             <Text textStyle={'cloudText'} textAlign={'center'} flexWrap={'wrap'}>

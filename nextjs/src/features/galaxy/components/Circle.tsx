@@ -1,6 +1,6 @@
 import { Box, Flex } from '@chakra-ui/react'
-import React from 'react'
 import * as CSS from 'csstype'
+import React from 'react'
 
 interface Props
     extends Pick<
@@ -9,6 +9,8 @@ interface Props
     > {
     defaultBackground?: string
     hoverBackground?: string
+    backgroundAnimation?: string
+    disableHover?: boolean
 }
 
 export const Circle: React.FC<Props> = props => {
@@ -30,36 +32,48 @@ export const Circle: React.FC<Props> = props => {
                 height="100%"
                 transition={'all 1s ease'}
                 position={'absolute'}
-                _hover={{
-                    _before: {
-                        opacity: 0,
-                    },
-                    _after: {
-                        opacity: 1,
-                    },
-                }}
+                _hover={
+                    !props.disableHover
+                        ? {
+                              _before: {
+                                  opacity: 0,
+                              },
+                              _after: {
+                                  opacity: 1,
+                              },
+                          }
+                        : undefined
+                }
                 _before={{
-                    transition: 'all 1s ease',
+                    transition: !props.disableHover ? 'all 1s ease' : undefined,
                     content: `''`,
                     background: props.defaultBackground,
                     display: 'block',
                     height: '100%',
                     position: 'absolute',
                     top: '0',
-                    opacity: 1,
+                    opacity: !props.disableHover ? 1 : undefined,
                     width: '100%',
+                    animation: props.backgroundAnimation,
+                    animationFillMode: 'forwards',
                 }}
-                _after={{
-                    transition: 'all 1s ease',
-                    content: `''`,
-                    background: props.hoverBackground,
-                    display: 'block',
-                    height: '100%',
-                    position: 'absolute',
-                    top: '0',
-                    opacity: 0,
-                    width: '100%',
-                }}
+                _after={
+                    !props.disableHover
+                        ? {
+                              transition: 'all 1s ease',
+                              content: `''`,
+                              background: props.hoverBackground,
+                              display: 'block',
+                              height: '100%',
+                              position: 'absolute',
+                              top: '0',
+                              opacity: 0,
+                              width: '100%',
+                              animation: props.backgroundAnimation,
+                              animationFillMode: 'forwards',
+                          }
+                        : undefined
+                }
                 justifyContent="center"
                 alignItems="center"
             >
