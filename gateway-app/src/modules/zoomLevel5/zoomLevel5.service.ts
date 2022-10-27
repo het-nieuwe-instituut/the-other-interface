@@ -7,9 +7,9 @@ import { PeopleService } from '../people/people.service'
 import { PublicationsService, PublicationsZoomLevel5Types } from '../publications/publications.service'
 import { TriplyService } from '../triply/triply.service'
 import { TriplyUtils } from '../triply/triply.utils'
-import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
+import { EntityNames, externalEntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { getRandom2ItemsFromArray } from '../util/helpers'
-import { ZoomLevel5RelatedObjectsArgs } from './zoomLevel5.type'
+import { ZoomLevel5RelatedObjectsArgs, ZoomLevel5RelationsType } from './zoomLevel5.type'
 
 interface ZoomLevel5RelationData {
     graph: string // sample graph i.e. https://collectiedata.hetnieuweinstituut.nl/graph/people
@@ -38,7 +38,7 @@ interface ZoomLevel5RelatedObjectData {
 }
 
 // key is relation graph
-type GroupedRelationData = Record<string, RelationData>
+type GroupedRelationData = Partial<Record<EntityNames, RelationData>>
 
 interface RelationData {
     count: string
@@ -50,6 +50,13 @@ interface SampleData {
     label: string
     // key is relation graph
     groupedRelationData: GroupedRelationData
+}
+
+export enum TriplyExternalSourceEnum {
+    all = 'all',
+    rkd = 'rkd',
+    wikidata = 'wikidata',
+    getty = 'getty',
 }
 
 @Injectable()
@@ -66,18 +73,18 @@ export class ZoomLevel5Service {
         private readonly triplyService: TriplyService
     ) {}
 
-    public async getRelations(id: string, type: EntityNames) {
+    public async getRelations(id: string, type: EntityNames, externalSource?: TriplyExternalSourceEnum) {
         switch (type) {
             case EntityNames.Archives:
             case EntityNames.Objects:
             case EntityNames.People:
             case EntityNames.Publications:
                 return [
-                    ...(await this.getRelationsFromTriply(id, type)),
+                    ...(await this.getTriplyRelations(id, type, externalSource)),
                     await this.getStoryRelationsForLinkedItem(id, type),
                 ]
             case EntityNames.Stories:
-                return this.getStoryRelations(id)
+                return this.getStoryRelations(id, externalSource)
             case EntityNames.External:
             // TODO
             default:
@@ -133,53 +140,15 @@ export class ZoomLevel5Service {
         }
     }
 
-    private async getRelationsFromTriply(id: string, type: EntityNames) {
-        const uri = TriplyUtils.getUriForTypeAndId(type, id)
-        const res = await this.triplyService.queryTriplyData<ZoomLevel5RelationData>(`${this.relationsEndpoint}${uri}`)
+    private async getTriplyRelations(id: string, type: EntityNames, externalSource?: TriplyExternalSourceEnum) {
+        const data = await this.getRelationDataFromTriply(id, type, externalSource)
 
-        const groupedData: GroupedRelationData = {}
-        for (const relationData of res.data) {
-            if (!groupedData[relationData.graph]) {
-                groupedData[relationData.graph] = {
-                    count: relationData.count,
-                    groupedSampleData: {},
-                }
-            }
+        const groupedData = this.getGroupedRelationData(data)
 
-            const group = groupedData[relationData.graph]
-
-            if (!group.groupedSampleData[relationData.sample]) {
-                group.groupedSampleData[relationData.sample] = {
-                    label: relationData.sample_label,
-                    groupedRelationData: {},
-                }
-            }
-
-            const groupSample = group.groupedSampleData[relationData.sample]
-
-            if (!groupSample.groupedRelationData[relationData.graph_2]) {
-                groupSample.groupedRelationData[relationData.graph_2] = {
-                    count: relationData.count_2,
-                    groupedSampleData: {},
-                }
-            }
-        }
-
-        return Object.entries(groupedData).map(([k, v]) => {
-            const type = TriplyUtils.getEntityNameFromGraph(k)
-            const randomRelations = Object.entries(v.groupedSampleData).map(([k, v]) =>
-                this.formatTriplySampleData(k, v)
-            )
-
-            return {
-                type,
-                total: parseInt(v.count, 10),
-                randomRelations,
-            }
-        })
+        return this.getFormattedGroupData(groupedData)
     }
 
-    private async getStoryRelations(id: string) {
+    private async getStoryRelations(id: string, externalSource?: TriplyExternalSourceEnum) {
         const relations = await this.strapiGqlSdk.storyTriplyRelations({ id })
         const triplyRecords = (relations.story?.data?.attributes?.triplyRecords?.data || []).filter(
             r => !!r.attributes?.recordId
@@ -201,7 +170,9 @@ export class ZoomLevel5Service {
         const promises = Object.entries(groupedRecords).map(async ([key, recordIds]) => {
             const type = StrapiUtils.getEntityNameForRecordType(key as Enum_Triplyrecord_Type)
             const randomRecordIds = getRandom2ItemsFromArray(recordIds)
-            const randomRelations = await Promise.all(randomRecordIds.map(id => this.getRelationsFromTriply(id, type)))
+            const randomRelations = await Promise.all(
+                randomRecordIds.map(id => this.getTriplyRelatedRecords(id, type, externalSource))
+            )
 
             return {
                 type,
@@ -257,11 +228,107 @@ export class ZoomLevel5Service {
         }
     }
 
+    private async getTriplyRelatedRecords(id: string, type: EntityNames, externalSource?: TriplyExternalSourceEnum) {
+        const data = await this.getRelationDataFromTriply(id, type, externalSource)
+
+        const groupedData = this.getGroupedRelationData(data)
+        const formattedData = this.getFormattedGroupData(groupedData)
+
+        return {
+            id,
+            type,
+            label: '', // TODO: add after Triply updates endpoint to return the label
+            relations: formattedData,
+        }
+    }
+
+    private async getRelationDataFromTriply(id: string, type: EntityNames, externalSource?: TriplyExternalSourceEnum) {
+        const uri = TriplyUtils.getUriForTypeAndId(type, id)
+        const params = externalSource ? { ExternalSources: externalSource } : undefined
+
+        const res = await this.triplyService.queryTriplyData<ZoomLevel5RelationData>(
+            `${this.relationsEndpoint}${uri}`,
+            undefined,
+            params
+        )
+
+        return res.data
+    }
+
+    private getGroupedRelationData(data: ZoomLevel5RelationData[]) {
+        const groupedData: GroupedRelationData = {}
+
+        for (const relationData of data) {
+            const type = TriplyUtils.getEntityNameFromGraph(relationData.graph, relationData.sample_extern_1)
+
+            if (!groupedData[type]) {
+                groupedData[type] = { count: relationData.count, groupedSampleData: {} }
+            }
+
+            const group = groupedData[type] as RelationData
+
+            if (externalEntityNames.includes(type)) {
+                if (relationData.sample_extern_1) {
+                    group.groupedSampleData[relationData.sample_extern_1] = {
+                        label: relationData.sample_extern_1_label || '',
+                        groupedRelationData: {},
+                    }
+                }
+
+                if (relationData.sample_extern_2) {
+                    group.groupedSampleData[relationData.sample_extern_2] = {
+                        label: relationData.sample_extern_2_label || '',
+                        groupedRelationData: {},
+                    }
+                }
+
+                continue
+            }
+
+            if (!group.groupedSampleData[relationData.sample]) {
+                group.groupedSampleData[relationData.sample] = {
+                    label: relationData.sample_label,
+                    groupedRelationData: {},
+                }
+            }
+
+            const groupSample = group.groupedSampleData[relationData.sample]
+            const relatedType = TriplyUtils.getEntityNameFromGraph(relationData.graph_2)
+
+            if (!groupSample.groupedRelationData[relatedType]) {
+                groupSample.groupedRelationData[relatedType] = {
+                    count: relationData.count_2,
+                    groupedSampleData: {},
+                }
+            }
+        }
+
+        return groupedData
+    }
+
+    private getFormattedGroupData(groupedData: GroupedRelationData) {
+        const formattedData: ZoomLevel5RelationsType[] = []
+
+        Object.entries(groupedData).map(([type, v]) => {
+            const randomRelations = Object.entries(v.groupedSampleData).map(([k, v]) =>
+                this.formatTriplySampleData(k, v)
+            )
+
+            formattedData.push({
+                type: type as EntityNames,
+                total: parseInt(v.count, 10),
+                randomRelations,
+            })
+        })
+
+        return formattedData
+    }
+
     // expects key to be record uri
     private formatTriplySampleData(key: string, sampleData: SampleData) {
-        const relations = Object.entries(sampleData.groupedRelationData).map(([k, v]) => ({
-            type: TriplyUtils.getEntityNameFromGraph(k),
-            total: v.count,
+        const relations = Object.entries(sampleData.groupedRelationData).map(([relatedType, data]) => ({
+            type: relatedType as EntityNames,
+            total: data.count ? parseInt(data.count, 10) : 0,
         }))
 
         return {
