@@ -1,4 +1,4 @@
-import Breadcrumbs from '@/features/galaxy/components/Breadcrumbs/Breadcrumbs'
+import Breadcrumbs, { BreadcrumbsRenderModes } from '@/features/galaxy/components/Breadcrumbs/Breadcrumbs'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
@@ -62,34 +62,27 @@ export const LandingCollection: React.FC<{ data?: LandingpageBySlugQuery }> = ({
 
     return (
         <>
+            <Breadcrumbs
+                onWrapperClick={ScrollToTop}
+                mode={scrollPosition >= 750 ? BreadcrumbsRenderModes.STICKY : BreadcrumbsRenderModes.DEFAULT} 
+            />
             <Box
                 backgroundColor="graph"
+                height="800px"
                 ref={graphRef}
-                position={'sticky'}
-                top="-750px"
-                zIndex={0}
-                onClick={ScrollToTop}
-                cursor={scrollPosition >= 750 ? 'pointer' : 'cursor'}
+                bgGradient="radial(50% 50% at 50% 50%, #B5FD99 0%, rgba(181, 253, 153, 0) 76.56%)"
+                backgroundRepeat={'no-repeat'}
+                bgSize={'1691px 1691px'}
+                backgroundPosition={'center'}
             >
-                <Box
-                    bgGradient="radial(50% 50% at 50% 50%, #B5FD99 0%, rgba(181, 253, 153, 0) 76.56%)"
-                    backgroundRepeat={'no-repeat'}
-                    bgSize={'1691px 1691px'}
-                    backgroundPosition={'center'}
-                    backgroundColor="graph"
-                    height="800px"
-                    ref={graphRef}
-                >
-                    {sizes?.height && sizes?.width && (
-                        <>
-                            <Breadcrumbs />
-                            <PaginatedCollectionContainer
-                                type={type}
-                                dimensions={{ height: 800, width: sizes.width }}
-                            />
-                        </>
-                    )}
-                </Box>
+                {sizes?.height && sizes?.width && (
+                    <>
+                        <PaginatedCollectionContainer
+                            type={type}
+                            dimensions={{ height: 800, width: sizes.width }}
+                        />
+                    </>
+                )}
             </Box>
             <Box px={{ xl: 6, base: 0 }} position={'relative'} zIndex={2}>
                 <Box backgroundColor={'white'} px={6} pt={6} maxW={theme.breakpoints.xl} marginX={'auto'} pb={1}>

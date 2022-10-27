@@ -1,4 +1,4 @@
-import Breadcrumbs from '@/features/galaxy/components/Breadcrumbs/Breadcrumbs'
+import Breadcrumbs, { BreadcrumbsRenderModes } from '@/features/galaxy/components/Breadcrumbs/Breadcrumbs'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import useScroll from '@/features/shared/hooks/useScroll'
@@ -40,11 +40,11 @@ const Homepage: React.FC<{ data?: HomepageQuery }> = ({ data }) => {
             <Breadcrumbs 
                 bg={scrollPosition >= 750 ? 'graph' : 'trasparent'}  
                 onWrapperClick={ScrollToTop}
-                cursor={scrollPosition >= 750 ? 'pointer' : 'inherit'}
+                mode={scrollPosition >= 750 ? BreadcrumbsRenderModes.STICKY : BreadcrumbsRenderModes.DEFAULT}
             />
             <Box
                 backgroundColor="graph"
-                height="750px"
+                height="800px"
                 ref={graphRef}
             >
                 {sizes?.height && sizes?.width && (

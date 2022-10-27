@@ -1,4 +1,4 @@
-import Breadcrumbs from '@/features/galaxy/components/Breadcrumbs/Breadcrumbs'
+import Breadcrumbs, { BreadcrumbsRenderModes } from '@/features/galaxy/components/Breadcrumbs/Breadcrumbs'
 import { SupportedLandingPages } from '@/features/galaxy/FilterClouds/FilterCloudsContainer'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
@@ -52,10 +52,10 @@ export const LandingpageContainer: React.FC = () => {
     return (
         <>
             <Breadcrumbs  onWrapperClick={ScrollToTop}
-                cursor={scrollPosition >= 750 ? 'pointer' : 'inherit'} />
+                 mode={scrollPosition >= 750 ? BreadcrumbsRenderModes.STICKY : BreadcrumbsRenderModes.DEFAULT} />
             <Box
                 backgroundColor="graph"
-                height="750px"
+                height="800px"
                 ref={graphRef}
             >
                 {sizes?.height && sizes?.width && (

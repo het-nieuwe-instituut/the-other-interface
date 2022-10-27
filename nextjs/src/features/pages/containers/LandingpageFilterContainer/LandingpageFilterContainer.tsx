@@ -1,4 +1,4 @@
-import Breadcrumbs from '@/features/galaxy/components/Breadcrumbs/Breadcrumbs'
+import Breadcrumbs, { BreadcrumbsRenderModes } from '@/features/galaxy/components/Breadcrumbs/Breadcrumbs'
 import PaginatedFilterCloudsContainer from '@/features/galaxy/PaginatedFilterClouds/PaginatedFilterCloudsContainer'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
@@ -46,23 +46,22 @@ export const LandingpageFilterContainer: React.FC = () => {
 
     return (
         <>
-           
+        <Breadcrumbs
+                            onWrapperClick={ScrollToTop}
+                            mode={scrollPosition >= 750 ? BreadcrumbsRenderModes.STICKY : BreadcrumbsRenderModes.DEFAULT} 
+                        />
             <Box
                  backgroundColor="graph"
-                 height="750px"
+                 height="800px"
                  ref={graphRef}
             >
+                 
                     {sizes?.height && sizes?.width && (
                         <>
-                         <Breadcrumbs
-                            onWrapperClick={ScrollToTop}
-                            cursor={scrollPosition >= 750 ? 'pointer' : 'inherit'} 
-                            bg={scrollPosition >= 750 ? 'graph' : 'trasparent'}  
-                        />
                         <Box position={'fixed'}>
                             <PaginatedFilterCloudsContainer
                                 type={type}
-                                dimensions={{ height: 750, width: sizes?.width }}
+                                dimensions={{ height: 800, width: sizes?.width }}
                             />
                         </Box>
                         </>
