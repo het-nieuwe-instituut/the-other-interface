@@ -1,7 +1,7 @@
 import { SupportedQuerys, ZoomLevel5DetailResponses } from '@/features/pages/tasks/getZoom5RecordTask'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { typeColors } from '@/features/shared/styles/theme/foundations/colors'
-import { Box, Flex, Image, Text } from '@chakra-ui/react'
+import { Box, Flex, Image, keyframes, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { RecordQueryParams } from 'src/pages/landingpage/[slug]/[filter]/[collection]/[record]'
 import { Circle } from '../../components/Circle'
@@ -15,9 +15,15 @@ interface RecordCloudHighlightProps {
         alt?: string
     }
     title?: string
-    queryType: NonNullable<ZoomLevel5DetailResponses>['__typename']
+    queryType: NonNullable<ZoomLevel5DetailResponses['zoom5detail']>['__typename']
     dimensions: Dimensions
 }
+
+const appear = keyframes`
+  from {opacity: 0;}
+  to {opacity: 1}
+`
+
 export const RecordCloudHighlight: React.FunctionComponent<RecordCloudHighlightProps> = ({
     image,
     title,
@@ -32,6 +38,7 @@ export const RecordCloudHighlight: React.FunctionComponent<RecordCloudHighlightP
     const radius = 500
     const width = dimensions.width ?? 0
     const height = dimensions.height ?? 0
+    const appearAnimation = `${appear} 2s linear`
 
     return (
         <Circle
@@ -50,6 +57,7 @@ export const RecordCloudHighlight: React.FunctionComponent<RecordCloudHighlightP
                 flexDirection="column"
                 justifyContent="center"
                 zIndex={1}
+                animation={appearAnimation}
             >
                 <Text textStyle={'cloudTextMicro'} mb={2.5}>
                     {t(type)}
