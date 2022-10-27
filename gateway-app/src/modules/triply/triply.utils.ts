@@ -127,19 +127,19 @@ export class TriplyUtils {
         }
     }
 
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    public static combineObjectArray(results: Object[]) {
-        const output: { [x: string]: string } = {}
+    public static combineObjectArray<T extends object>(results: T[]): T | null {
+        const output: Partial<Record<keyof T, string>> = {}
+
         let nullFlag = true
         for (const result of results) {
             for (const filledPair of Object.entries(result).filter(e => !!e[1])) {
                 nullFlag = false
                 const [key, value] = filledPair
-                output[key] = value
+                output[key as keyof T] = value
             }
         }
 
-        return nullFlag ? null : output
+        return nullFlag ? null : (output as T)
     }
 
     public static parseLevel3OutputData(input: ZoomLevel3ReturnData[]) {
@@ -151,14 +151,13 @@ export class TriplyUtils {
         }))
     }
 
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    public static getQueryParamsFromObject(obj: Object): Record<string, string> {
-        const queryParams: Record<string, string> = {}
+    public static getQueryParamsFromObject<T extends object>(obj: T): Record<keyof T, string> {
+        const queryParams: Partial<Record<keyof T, string>> = {}
 
         for (const [filterName, filterValue] of Object.entries(obj)) {
-            queryParams[`${filterName}`] = filterValue
+            queryParams[filterName as keyof T] = filterValue
         }
 
-        return queryParams
+        return queryParams as Record<keyof T, string>
     }
 }
