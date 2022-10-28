@@ -46,7 +46,7 @@ export async function getZoom5StoryTask(
         query: StoryBySlugDocument,
     })
 
-    const storyId = storyBySlug.data.stories.data?.[0].id
+    const storyId = storyBySlug.data.stories.data?.[0]?.id
     if (storyBySlug.error || !storyBySlug.data || !storyId) {
         console.error('story query error')
         return

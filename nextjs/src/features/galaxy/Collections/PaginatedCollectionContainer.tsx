@@ -18,7 +18,9 @@ import {
     Zoom4PublicationsQuery,
     ZoomLevel4ParentType,
 } from 'src/generated/graphql'
+import { LandingPageFilterCollectionQueryParams } from 'src/pages/landingpage/[slug]/[filter]/[collection]'
 import { SupportedLandingPages } from '../FilterClouds/FilterCloudsContainer'
+import { getGalaxyTypeByTranslationsKey } from '../utils/translations'
 import { usePresenter } from './usePresenter'
 
 const useZoom4Query = {
@@ -118,7 +120,8 @@ export const PaginatedCollection: React.FunctionComponent<
 > = props => {
     const { zoom4, dimensions } = props
     const router = useRouter()
-    const { t } = useTypeSafeTranslation('landingpage')
+    const queryParams = router.query as unknown as LandingPageFilterCollectionQueryParams
+    const { t: tCommon } = useTypeSafeTranslation('common')
     const { width, height } = dimensions
     const svgWidth = width
     const svgHeight = height
@@ -141,6 +144,8 @@ export const PaginatedCollection: React.FunctionComponent<
         dimensions
     )
 
+    const total = Math.ceil((zoom4?.zoomLevel4.total ?? 0) / 28)
+
     return (
         <Box overflow="hidden" height={svgHeight} width={svgWidth}>
             <svg width={svgWidth} height={svgHeight} ref={svgRef} viewBox={`0 0 ${1000} ${1000}`}>
@@ -151,43 +156,55 @@ export const PaginatedCollection: React.FunctionComponent<
                     y={dimensions.height / 2 - 500 / 2}
                     overflow={'visible'}
                 >
-                    <Grid templateColumns="repeat(6, 1fr)" gap={4} width={'100%'} height={'800px'}>
-                        {(items || []).map((item, index) => {
-                            if (index === 14) {
-                                return (
-                                    <GridItem
-                                        w="100%"
-                                        h="100px"
-                                        key={`${item.title}-${index}`}
-                                        colSpan={2}
-                                        display={'flex'}
-                                        justifyContent={'center'}
-                                        alignSelf={'center'}
-                                        p={1}
-                                    >
-                                        <Flex flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
-                                            <Text textStyle={'cloudText'}>
-                                                {zoom4?.zoomLevel4.total} {t(router.query.slug as any)}
-                                            </Text>
-                                            <Text textStyle={'cloudText'} mb={4}>
-                                                {`by ${router.query.collection as string}`}
-                                            </Text>
-                                            <Flex alignItems={'center'} gap={1}>
-                                                <Box as={'button'} pr="2" aria-label="left" onClick={paginateBack}>
-                                                    <PaginationLeft />
-                                                </Box>
-                                                <Text textStyle={'cloudText'}>{`${currentPage}/${Math.ceil(
-                                                    (zoom4?.zoomLevel4.total ?? 0) / 28
-                                                )}`}</Text>
-                                                <Box as="button" pl="2" aria-label="right" onClick={paginateNext}>
-                                                    <PaginationRight />
-                                                </Box>
-                                            </Flex>
-                                        </Flex>
-                                    </GridItem>
-                                )
-                            }
+                    <Grid
+                        templateColumns="repeat(6, 1fr)"
+                        autoColumns={'100%'}
+                        autoRows={'150px'}
+                        gap={4}
+                        width={'100%'}
+                        height={'800px'}
+                    >
+                        <GridItem
+                            w="100%"
+                            h="100px"
+                            colSpan={2}
+                            display={'flex'}
+                            justifyContent={'center'}
+                            alignSelf={'center'}
+                            p={1}
+                            gridColumn={'3/5'}
+                            gridRow={3}
+                        >
+                            <Flex flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
+                                <Text textStyle={'cloudText'}>
+                                    {zoom4?.zoomLevel4.total}{' '}
+                                    {tCommon(getGalaxyTypeByTranslationsKey(queryParams.slug))}
+                                </Text>
+                                <Text textStyle={'cloudText'} mb={4}>
+                                    {router.query.collection}
+                                </Text>
+                                <Flex alignItems={'center'} gap={1}>
+                                    {parseInt(currentPage as string) !== 1 ? (
+                                        <Box as={'button'} pr="2" aria-label="left" onClick={paginateBack}>
+                                            <PaginationLeft />
+                                        </Box>
+                                    ) : (
+                                        <Box width={'30px'} />
+                                    )}
 
+                                    <Text textStyle={'cloudText'}>{`${currentPage}/${total}`}</Text>
+
+                                    {parseInt(currentPage as string) !== total ? (
+                                        <Box as="button" pl="2" aria-label="right" onClick={paginateNext}>
+                                            <PaginationRight />
+                                        </Box>
+                                    ) : (
+                                        <Box width={'30px'} />
+                                    )}
+                                </Flex>
+                            </Flex>
+                        </GridItem>
+                        {(items || []).map((item, index) => {
                             return (
                                 <GridItem
                                     w="100%"
