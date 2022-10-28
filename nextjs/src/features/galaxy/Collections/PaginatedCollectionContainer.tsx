@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { Loader } from '@/features/shared/components/Loading/Loading'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { randomNumberBetweenPoints } from '@/features/shared/utils/numbers'
 import PaginationLeft from '@/icons/arrows/pagination-left.svg'
@@ -100,7 +101,7 @@ export const PaginatedCollectionContainer: React.FunctionComponent<PaginatsedPro
     })
 
     if (loading) {
-        return <Text>Loading</Text>
+        return <Loader />
     }
 
     if (error) {

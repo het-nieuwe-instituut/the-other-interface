@@ -72,7 +72,9 @@ export function useD3Pagination({ simulation, selector, svgRef, pathname, pageSi
         const d3Svg = d3.select(svgRef.current)
         const foreignNodes = d3Svg.selectAll(`.foreign-${selector}`)
 
-        await foreignNodes.transition().duration(110).attr('width', 0).attr('height', 0).attr('opacity', 0).end()
+        foreignNodes.style('transform-origin', 'center')
+
+        await foreignNodes.transition().duration(300).style('transform', 'scale(0)').attr('opacity', 0).end()
     }, [selector, simulation, svgRef])
 
     return {
