@@ -22,10 +22,7 @@ export class ObjectsZoomLevel4FiltersArgs {
     public PerInst: string | null
 
     @Field(() => String, { nullable: true })
-    public StartDate: string | null
-
-    @Field(() => String, { nullable: true })
-    public EndDate: string | null
+    public date: string | null
 }
 
 @ObjectType()

@@ -58,10 +58,9 @@ export const anArchivesOtherZoomLevel5DetailType = (overrides?: Partial<Archives
 export const anArchivesZoomLevel4FiltersArgs = (overrides?: Partial<ArchivesZoomLevel4FiltersArgs>, _relationshipsToOmit: Array<string> = []): ArchivesZoomLevel4FiltersArgs => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ArchivesZoomLevel4FiltersArgs']);
     return {
-        DescriptionLevel: overrides && overrides.hasOwnProperty('DescriptionLevel') ? overrides.DescriptionLevel! : 'nobis',
-        EndDate: overrides && overrides.hasOwnProperty('EndDate') ? overrides.EndDate! : 'exercitationem',
-        RelatedName: overrides && overrides.hasOwnProperty('RelatedName') ? overrides.RelatedName! : 'blanditiis',
-        StartDate: overrides && overrides.hasOwnProperty('StartDate') ? overrides.StartDate! : 'in',
+        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : 'architecto',
+        descriptionLevel: overrides && overrides.hasOwnProperty('descriptionLevel') ? overrides.descriptionLevel! : 'ratione',
+        relatedName: overrides && overrides.hasOwnProperty('relatedName') ? overrides.relatedName! : 'ea',
     };
 };
 
@@ -781,14 +780,13 @@ export const aMenupageRelationResponseCollection = (overrides?: Partial<Menupage
 export const anObjectsZoomLevel4FiltersArgs = (overrides?: Partial<ObjectsZoomLevel4FiltersArgs>, _relationshipsToOmit: Array<string> = []): ObjectsZoomLevel4FiltersArgs => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ObjectsZoomLevel4FiltersArgs']);
     return {
-        EndDate: overrides && overrides.hasOwnProperty('EndDate') ? overrides.EndDate! : 'delectus',
         Maker: overrides && overrides.hasOwnProperty('Maker') ? overrides.Maker! : 'id',
         Material: overrides && overrides.hasOwnProperty('Material') ? overrides.Material! : 'deleniti',
         Objectname: overrides && overrides.hasOwnProperty('Objectname') ? overrides.Objectname! : 'omnis',
         PerInst: overrides && overrides.hasOwnProperty('PerInst') ? overrides.PerInst! : 'omnis',
-        StartDate: overrides && overrides.hasOwnProperty('StartDate') ? overrides.StartDate! : 'minus',
         Subject: overrides && overrides.hasOwnProperty('Subject') ? overrides.Subject! : 'voluptatem',
         Technique: overrides && overrides.hasOwnProperty('Technique') ? overrides.Technique! : 'doloremque',
+        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : 'fugit',
     };
 };
 

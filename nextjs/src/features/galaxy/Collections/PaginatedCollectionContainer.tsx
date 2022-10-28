@@ -22,6 +22,7 @@ import { LandingPageFilterCollectionQueryParams } from 'src/pages/landingpage/[s
 import { SupportedLandingPages } from '../FilterClouds/FilterCloudsContainer'
 import { getGalaxyTypeByTranslationsKey } from '../utils/translations'
 import { usePresenter } from './usePresenter'
+import { useZoom4QueryTask } from './zoom4QueryTask'
 
 const useZoom4Query = {
     [SupportedLandingPages.Archives]: useZoom4ArchivesQuery,
@@ -87,20 +88,7 @@ type PaginatsedProps = {
 
 export const PaginatedCollectionContainer: React.FunctionComponent<PaginatsedProps> = props => {
     const { type } = props
-    const router = useRouter()
-    const {
-        data: zoom4,
-        loading,
-        error,
-    } = useZoom4Query[type]({
-        variables: {
-            [variableType[type]]: {
-                [variableFilters[type][router.query.filter as string]]: router.query.collection,
-            },
-            page: parseInt((router.query.page as string) ?? '1'),
-            pageSize: 28,
-        },
-    })
+    const { data: zoom4, loading, error } = useZoom4QueryTask(type)
 
     if (loading) {
         return <Loader />
@@ -119,6 +107,7 @@ export const PaginatedCollection: React.FunctionComponent<
     }
 > = props => {
     const { zoom4, dimensions } = props
+
     const router = useRouter()
     const queryParams = router.query as unknown as LandingPageFilterCollectionQueryParams
     const { t: tCommon } = useTypeSafeTranslation('common')
