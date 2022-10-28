@@ -1,10 +1,10 @@
-import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Box, Flex, Text } from '@chakra-ui/react'
 import React, { forwardRef, useId } from 'react'
-import { Dimensions, ZoomLevel } from '../types/galaxy'
-import { StoriesSystem } from '../components/StoriesSystem/StoriesSystem'
 import { Circle } from '../components/Circle'
 import { GalaxyShadowBackground } from '../components/GalaxyShadowBackground'
+import { StoriesSystem } from '../components/StoriesSystem/StoriesSystem'
+import { Dimensions, ZoomLevel } from '../types/galaxy'
 
 import { usePresenter } from './usePresenter'
 
@@ -20,7 +20,7 @@ export interface InstancesPerClass {
 
 export const GALAXY_BASE = 800
 const Galaxy: React.FC<Props> = ({ dimensions }) => {
-    const { t } = useTypeSafeTranslation('homepage')
+    const { t } = useLooseTypeSafeTranslation('homepage')
     const id = useId().replaceAll(':', '')
     const {
         svgRef,
@@ -111,7 +111,7 @@ const Galaxy: React.FC<Props> = ({ dimensions }) => {
                                                     {item.name === 'Archieven' ? (
                                                         <>
                                                             <Text width="12.5rem" mb={1} textStyle={'cloudText'}>
-                                                                {item.numberOfInstances} {item.name.toLowerCase()}
+                                                                {t('archiveItems', { count: item.numberOfInstances })}
                                                             </Text>
                                                             <Text width="12.5rem" textStyle={'cloudText'}>
                                                                 {t('archiveItems', {
@@ -122,7 +122,7 @@ const Galaxy: React.FC<Props> = ({ dimensions }) => {
                                                     ) : (
                                                         <>
                                                             <Text width="12.5rem" mb={1} textStyle={'cloudText'}>
-                                                                {item.name.toLowerCase()}
+                                                                {t(item.id.toLowerCase())}
                                                             </Text>
                                                             <Text width="12.5rem" textStyle={'cloudText'}>
                                                                 {item.numberOfInstances}
