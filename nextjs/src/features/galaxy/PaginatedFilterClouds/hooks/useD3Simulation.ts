@@ -43,28 +43,32 @@ function useListenToSimulationTicks(
     useEffect(() => {
         if (!data) return
         const d3Svg = d3.select(svgRef.current)
-        const nodeForeign = d3Svg.selectAll(`.foreign-${selector}`).data(data)
-        nodeForeign.attr('opacity', 0).attr('width', 0).attr('height', 0)
-    }, [data, selector, svgRef])
+        const nodeForeign = d3Svg.selectAll(`.foreign-${selector}`).data<Partial<D3CollectionItem>>(data)
+        nodeForeign.style('transform', 'scale(0)').attr('opacity', 0)
+        nodeForeign.style('transform-origin', 'center')
+        nodeForeign.transition().duration(600).style('transform', 'scale(1)').attr('opacity', 1)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [data])
 
     useEffect(() => {
         if (!data) return
         const d3Svg = d3.select(svgRef.current)
         const nodeForeign = d3Svg.selectAll(`.foreign-${selector}`).data<Partial<D3CollectionItem>>(data)
         const collisionObject = d3Svg.selectAll(`.foreign-collision`).data<Partial<D3CollisionData>>(collisionData)
+        const width = dimensions.width ?? 0
+        const height = dimensions.height ?? 0
+
         nodeForeign
             .attr('x', d => (d.x ?? 0) + -getTakeSpaceFromDataDimensions(dataDimensions, d))
             .attr('y', d => (d.y ?? 0) + -getTakeSpaceFromDataDimensions(dataDimensions, d))
             .attr('width', d => getTakeSpaceFromDataDimensions(dataDimensions, d) * 2)
             .attr('height', d => getTakeSpaceFromDataDimensions(dataDimensions, d) * 2)
-            .style('transform', 'scale(0)')
-            .attr('opacity', 0)
-        nodeForeign.style('transform-origin', 'center')
-        nodeForeign.transition().duration(600).style('transform', 'scale(1)').attr('opacity', 1)
+
         simulation.current
-            ?.force('charge', d3.forceManyBody().strength(2))
-            .force('center', d3.forceCenter((dimensions.width ?? 0) / 2, (dimensions.height ?? 0) / 2))
-            ?.force(
+
+            ?.force('centerX', d3.forceX(width / 2).strength(0.01))
+            .force('centerY', d3.forceY(height / 2).strength(0.01))
+            .force(
                 'collide',
                 d3
                     .forceCollide()
@@ -145,19 +149,6 @@ function ticked(
         .attr('width', d => getTakeSpaceFromDataDimensions(dataDimensions, d) * 2)
         .attr('height', d => getTakeSpaceFromDataDimensions(dataDimensions, d) * 2)
         .attr('opacity', 1)
-
-    if (simulation) {
-        simulation
-            ?.force(
-                'collide',
-                d3
-                    .forceCollide()
-                    .strength(1)
-                    .radius(d => getDiameter(dataDimensions, d))
-            )
-            .force('centerX', d3.forceX(width / 2))
-            .force('centerY', d3.forceY(height / 2))
-    }
 }
 
 function getDiameter(dataDimensions: DataDimension[], d: Partial<D3CollectionItem>) {
