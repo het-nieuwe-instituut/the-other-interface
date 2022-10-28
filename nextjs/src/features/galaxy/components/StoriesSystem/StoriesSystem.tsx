@@ -48,7 +48,7 @@ export const StoriesSystem: React.FC<Props> = ({ data = [], dimensions = default
                                 data-id={item.id}
                             >
                                 <Box
-                                    onMouseEnter={() => showTooltip(item)}
+                                    onMouseEnter={e => showTooltip(e, item)}
                                     onMouseLeave={() => hideTooltip(item)}
                                     height="100%"
                                     width="100%"

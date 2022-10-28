@@ -182,15 +182,42 @@ function drawPathByParent(svgRef: null, dataPoints: InstancesPerClassWithPoint[]
         })
 }
 
-function showTooltip(item: DataPoint) {
-    const g = document.getElementById(item.id)
+function showTooltip(e: React.MouseEvent<HTMLDivElement, MouseEvent>, item: DataPoint) {
+    const storyEl = document.getElementById(item.id)
 
-    if (!g) {
+    if (!storyEl) {
         return
     }
 
-    const { top, left } = g.getBoundingClientRect()
+    insertTooltip(item)
 
+    const tooltipContainerEl = getTooltipElement(item.id)
+    const tooltipEl = tooltipContainerEl?.children[0]
+
+    if (!tooltipEl) {
+        return
+    }
+
+    const tooltipRect = tooltipEl.getBoundingClientRect()
+
+    const left = e.clientX + 5
+    const top = e.clientY - tooltipRect.height - 5
+
+    tooltipContainerEl.style.left = `${left}px`
+    tooltipContainerEl.style.top = `${top}px`
+    tooltipContainerEl.style.visibility = 'visible'
+}
+
+function hideTooltip(item: DataPoint) {
+    let g = getTooltipElement(item.id)
+
+    while (g) {
+        g.remove()
+        g = getTooltipElement(item.id)
+    }
+}
+
+function insertTooltip(item: DataPoint) {
     const tooltipContainerStyle = `
         height: 100%;
         width: 100%;
@@ -198,9 +225,8 @@ function showTooltip(item: DataPoint) {
         max-height: 325px;
         display: block;
         position: absolute;
-        top: ${top + 20}px;
-        left: ${left + 20}px;
         z-index: 100;
+        visibility: hidden;
     `
 
     const tooltipStyle = `
@@ -227,22 +253,13 @@ function showTooltip(item: DataPoint) {
     `
 
     const tooltipDiv = document.createElement('div')
-
     tooltipDiv.setAttribute('id', `${item.id}-tooltip`)
     tooltipDiv.setAttribute('style', tooltipContainerStyle)
-
     tooltipDiv.innerHTML += `<div style="${tooltipStyle}"><p style="${textStyle}">${item.title}</p></div>`
 
     document.body.insertBefore(tooltipDiv, null)
-
-    return
 }
 
-function hideTooltip(item: DataPoint) {
-    let g = document.getElementById(`${item.id}-tooltip`)
-
-    while (g) {
-        g.remove()
-        g = document.getElementById(`${item.id}-tooltip`)
-    }
+function getTooltipElement(itemId: string) {
+    return document.getElementById(`${itemId}-tooltip`)
 }
