@@ -5,6 +5,7 @@ fragment HomepageFragment on Homepage {
     locale
     publishedAt
     updatedAt
+    description
     components {
         ... on ComponentModulesTextModule {
             ...ComponentModulesTextModuleFragment

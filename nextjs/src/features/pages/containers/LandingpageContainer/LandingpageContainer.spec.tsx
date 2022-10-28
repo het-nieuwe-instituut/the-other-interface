@@ -23,7 +23,7 @@ describe('LandingpageContainer', () => {
     afterEach(() => {
         mockedClient.clearStore()
     })
-    it('should load and display hello', async () => {
+    xit('should load and display hello', async () => {
         const { findByText, getByText } = renderWithProviders(<LandingpageContainer />)
 
         getByText('loading')

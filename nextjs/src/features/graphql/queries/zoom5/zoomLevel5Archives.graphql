@@ -1,0 +1,47 @@
+query ZoomLevel5Archives($id: String!) {
+    zoomLevel5Archive(id: $id) {
+        __typename
+        ... on ArchivesOtherZoomLevel5DetailType {
+            objectNumber
+            title
+            startDate
+            endDate
+            dateLabel
+            dimensionFree
+            mediaReference
+            mediaReferenceLabel
+            existenceOfOriginals
+            scopeContent
+            relatedMaterial
+            rights
+            rightsLabel
+            permanentLink
+        }
+        ... on ArchivesFondsZoomLevel5DetailType {
+            descriptionLevel
+            objectNumber
+            recordTitle
+            startDate
+            endDate
+            productionDate
+            extent
+            repository
+            repositoryLabel
+            creator
+            creatorLabel
+            creatorHistory
+            custodialHistory
+            systemOfArrangement
+            contentScope
+            conditionsGoverningAccess
+            relatedMaterial
+            appendices
+            source
+            partReference
+            partTitle
+            right
+            rightLabel
+            permanentLink
+        }
+    }
+}

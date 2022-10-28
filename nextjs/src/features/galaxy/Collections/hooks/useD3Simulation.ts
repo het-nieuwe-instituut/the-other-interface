@@ -25,11 +25,10 @@ function useListenToSimulationTicks(
 ) {
     const nodesListener = useRef<d3.Simulation<SimulationNodeDatum, undefined> | undefined | null>(null)
 
-    // set default styles
     useEffect(() => {
-        if (!data) return
         const d3Svg = d3.select(svgRef.current)
-        const nodeForeign = d3Svg.selectAll(`.foreign-${selector}`).data(data)
+        const nodeForeign = d3Svg.selectAll(`.foreign-${selector}`)
+
         nodeForeign.attr('opacity', 0).attr('width', 0).attr('height', 0)
     }, [data, selector, svgRef])
 
@@ -38,7 +37,6 @@ function useListenToSimulationTicks(
         const d3Svg = d3.select(svgRef.current)
         const nodeForeign = d3Svg.selectAll(`.foreign-${selector}`).data<Partial<SimulationNodeDatum>>(data)
 
-        console.log(nodeForeign)
         if (!nodesListener.current) {
             nodesListener.current = simulation.current?.nodes([...data] as SimulationNodeDatum[]).on('tick', () => {
                 ticked(nodeForeign)
@@ -52,5 +50,5 @@ function useListenToSimulationTicks(
 }
 
 function ticked(nodeForeign: d3.Selection<d3.BaseType, Partial<SimulationNodeDatum>, SVGSVGElement | null, unknown>) {
-    nodeForeign.transition().duration(110).attr('opacity', 1)
+    nodeForeign.transition().duration(110).attr('opacity', 1).attr('width', 140).attr('height', 90).style('opacity', 1)
 }

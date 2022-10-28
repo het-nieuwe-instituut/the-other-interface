@@ -30,6 +30,9 @@ export class Homepage {
     public createdAt?: Date
 
     @Field({ nullable: true })
+    public description?: string
+
+    @Field({ nullable: true })
     public locale?: string
 
     @Field(() => HomepageRelationResponseCollection, { nullable: true })

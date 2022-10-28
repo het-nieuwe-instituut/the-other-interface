@@ -664,6 +664,7 @@ export type Homepage = {
     Title?: Maybe<Scalars['String']>
     components?: Maybe<Array<Maybe<HomepageComponentsDynamicZone>>>
     createdAt?: Maybe<Scalars['DateTime']>
+    description?: Maybe<Scalars['String']>
     locale?: Maybe<Scalars['String']>
     localizations?: Maybe<HomepageRelationResponseCollection>
     publishedAt?: Maybe<Scalars['DateTime']>
@@ -701,6 +702,7 @@ export type HomepageEntityResponse = {
 export type HomepageInput = {
     Title?: InputMaybe<Scalars['String']>
     components?: InputMaybe<Array<Scalars['HomepageComponentsDynamicZoneInput']>>
+    description?: InputMaybe<Scalars['String']>
     publishedAt?: InputMaybe<Scalars['DateTime']>
 }
 
@@ -2259,6 +2261,7 @@ export type HomepageFragmentFragment = {
     locale?: string | null
     publishedAt?: any | null
     updatedAt?: any | null
+    description?: string | null
     components?: Array<
         | {
               __typename: 'ComponentModulesButtonsModule'
@@ -2649,6 +2652,7 @@ export type HomepageQuery = {
                 locale?: string | null
                 publishedAt?: any | null
                 updatedAt?: any | null
+                description?: string | null
                 localizations?: {
                     __typename?: 'HomepageRelationResponseCollection'
                     data: Array<{
@@ -2661,6 +2665,7 @@ export type HomepageQuery = {
                             locale?: string | null
                             publishedAt?: any | null
                             updatedAt?: any | null
+                            description?: string | null
                             components?: Array<
                                 | {
                                       __typename: 'ComponentModulesButtonsModule'
@@ -12085,6 +12090,7 @@ export const HomepageFragmentFragmentDoc = gql`
         locale
         publishedAt
         updatedAt
+        description
         components {
             ... on ComponentModulesTextModule {
                 ...ComponentModulesTextModuleFragment
