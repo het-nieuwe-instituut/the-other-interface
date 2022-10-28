@@ -25,7 +25,6 @@ function useObjectPerType(zoomLevel1Data?: ZoomLevel1Query) {
 
         const newItems: ObjectPerTypeWithName[] = items.map(item => {
             const config = galaxyTypesToPositions[item.id]
-
             const newItem: ObjectPerTypeWithName = {
                 ...item,
                 id: item.id,
