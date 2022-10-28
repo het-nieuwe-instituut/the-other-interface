@@ -334,6 +334,23 @@ export const mockPublicationRelationsQuery = (resolver: ResponseResolver<GraphQL
  * @param resolver a function that accepts a captured request and may return a mocked response.
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
+ * mockStoriesRelationsQuery((req, res, ctx) => {
+ *   const { id } = req.variables;
+ *   return res(
+ *     ctx.data({ relations })
+ *   )
+ * })
+ */
+export const mockStoriesRelationsQuery = (resolver: ResponseResolver<GraphQLRequest<StoriesRelationsQueryVariables>, GraphQLContext<StoriesRelationsQuery>, any>) =>
+  graphql.query<StoriesRelationsQuery, StoriesRelationsQueryVariables>(
+    'StoriesRelations',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
  * mockZoomLevel5ArchivesQuery((req, res, ctx) => {
  *   const { id } = req.variables;
  *   return res(
@@ -2313,6 +2330,13 @@ export type PublicationRelationsQueryVariables = Exact<{
 
 export type PublicationRelationsQuery = { __typename?: 'Query', relations?: Array<{ __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number, randomRelations?: Array<{ __typename?: 'RelatedRecordType', id: string, label: string, type: EntityNames, relations?: Array<{ __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number }> | null }> | null }> | null };
 
+export type StoriesRelationsQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type StoriesRelationsQuery = { __typename?: 'Query', relations?: Array<{ __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number, randomRelations?: Array<{ __typename?: 'RelatedRecordType', id: string, label: string, type: EntityNames, relations?: Array<{ __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number }> | null }> | null }> | null };
+
 export type ZoomLevel5ArchivesQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
@@ -3754,6 +3778,51 @@ export function usePublicationRelationsLazyQuery(baseOptions?: Apollo.LazyQueryH
 export type PublicationRelationsQueryHookResult = ReturnType<typeof usePublicationRelationsQuery>;
 export type PublicationRelationsLazyQueryHookResult = ReturnType<typeof usePublicationRelationsLazyQuery>;
 export type PublicationRelationsQueryResult = Apollo.QueryResult<PublicationRelationsQuery, PublicationRelationsQueryVariables>;
+export const StoriesRelationsDocument = gql`
+    query StoriesRelations($id: String!) {
+  relations(type: Stories, id: $id) {
+    type
+    total
+    randomRelations {
+      id
+      label
+      type
+      relations {
+        type
+        total
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useStoriesRelationsQuery__
+ *
+ * To run a query within a React component, call `useStoriesRelationsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useStoriesRelationsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useStoriesRelationsQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useStoriesRelationsQuery(baseOptions: Apollo.QueryHookOptions<StoriesRelationsQuery, StoriesRelationsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<StoriesRelationsQuery, StoriesRelationsQueryVariables>(StoriesRelationsDocument, options);
+      }
+export function useStoriesRelationsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<StoriesRelationsQuery, StoriesRelationsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<StoriesRelationsQuery, StoriesRelationsQueryVariables>(StoriesRelationsDocument, options);
+        }
+export type StoriesRelationsQueryHookResult = ReturnType<typeof useStoriesRelationsQuery>;
+export type StoriesRelationsLazyQueryHookResult = ReturnType<typeof useStoriesRelationsLazyQuery>;
+export type StoriesRelationsQueryResult = Apollo.QueryResult<StoriesRelationsQuery, StoriesRelationsQueryVariables>;
 export const ZoomLevel5ArchivesDocument = gql`
     query ZoomLevel5Archives($id: String!) {
   zoomLevel5Archive(id: $id) {
