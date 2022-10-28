@@ -1,24 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { randomNumberBetweenPoints } from '@/features/shared/utils/numbers'
-import PaginationLeft from '@/icons/arrows/pagination-left.svg'
-import PaginationRight from '@/icons/arrows/pagination-right.svg'
-import { Box, Flex, Grid, GridItem, Img, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { useId, useMemo } from 'react'
 import {
     useZoom4ArchivesQuery,
     useZoom4ObjectsQuery,
     useZoom4PeopleQuery,
     useZoom4PublicationsQuery,
-    Zoom4ArchivesQuery,
-    Zoom4ObjectsQuery,
-    Zoom4PeopleQuery,
-    Zoom4PublicationsQuery,
-    ZoomLevel4ParentType,
 } from 'src/generated/graphql'
 import { SupportedLandingPages } from '../FilterClouds/FilterCloudsContainer'
-import { usePresenter } from './usePresenter'
 
 const useZoom4Query = {
     [SupportedLandingPages.Archives]: useZoom4ArchivesQuery,
@@ -37,18 +25,38 @@ const variableType = {
 }
 
 function ValueToDateFilters(value: string) {
-    const splitted = value.split(' - ')
+    if (value.includes('tot')) {
+        const splitted = value.split('tot').map(v => v.replace(' ', ''))
 
-    return {
-        StartDate: splitted[0],
-        EndDate: splitted[0],
+        return {
+            EndDate: splitted[0],
+        }
     }
+
+    if (value.includes('na')) {
+        const splitted = value.split('na').map(v => v.replace(' ', ''))
+
+        return {
+            StartDate: splitted[0],
+        }
+    }
+
+    if (value.includes(' - ')) {
+        const splitted = value.split(' - ')
+
+        return {
+            StartDate: splitted[0],
+            EndDate: splitted[1],
+        }
+    }
+
+    return {}
 }
 
 const variableFilters: {
     [key1: string]: {
         [key: string]: {
-            accessor: (value: string) => { [key: string]: string }
+            accessor: (value: string) => { [key: string]: string | undefined }
         }
     }
 } = {
@@ -68,29 +76,108 @@ const variableFilters: {
         },
     },
     [SupportedLandingPages.Objects]: {
-        endDate: 'EndDate',
-        maker: 'Maker',
-        material: 'Material',
-        objectname: 'Objectname',
-        perInst: 'PerInst',
-        startDate: 'StartDate',
-        subject: 'Subject',
-        technique: 'Technique',
+        date: {
+            accessor: ValueToDateFilters,
+        },
+        creator: {
+            accessor: value => ({
+                Maker: value,
+            }),
+        },
+        material: {
+            accessor: value => ({
+                Material: value,
+            }),
+        },
+        objectName: {
+            accessor: value => ({
+                Objectname: value,
+            }),
+        },
+        perInst: {
+            accessor: value => ({
+                PerInst: value,
+            }),
+        },
+        startDate: {
+            accessor: value => ({
+                StartDate: value,
+            }),
+        },
+        subject: {
+            accessor: value => ({
+                Subject: value,
+            }),
+        },
+        technique: {
+            accessor: value => ({
+                Technique: value,
+            }),
+        },
     },
     [SupportedLandingPages.People]: {
-        birthDate: 'BirthDate',
-        deathDate: 'DeathDate',
-        nameType: 'NameType',
-        period: 'Period',
-        place: 'Place',
-        profession: 'Profession',
+        birthDate: {
+            accessor: value => ({
+                BirthDate: value,
+            }),
+        },
+        deathDate: {
+            accessor: value => ({
+                DeathDate: value,
+            }),
+        },
+        nameType: {
+            accessor: value => ({
+                NameType: value,
+            }),
+        },
+        period: {
+            accessor: value => ({
+                Period: value,
+            }),
+        },
+        place: {
+            accessor: value => ({
+                Place: value,
+            }),
+        },
+        profession: {
+            accessor: value => ({
+                Profession: value,
+            }),
+        },
     },
     [SupportedLandingPages.Publications]: {
-        author: 'Author',
-        geograficalKeyword: 'GeograficalKeyword',
-        relatedPerInst: 'RelatedPerInst',
-        subject: 'Subject',
-        typeOfPublication: 'TypeOfPublication',
+        author: {
+            accessor: value => ({
+                Author: value,
+            }),
+        },
+        geographicalKeyword: {
+            accessor: value => ({
+                GeograficalKeyword: value,
+            }),
+        },
+        relatedPerson: {
+            accessor: value => ({
+                RelatedPerInst: value,
+            }),
+        },
+        relatedPerInst: {
+            accessor: value => ({
+                RelatedPerInst: value,
+            }),
+        },
+        subject: {
+            accessor: value => ({
+                Subject: value,
+            }),
+        },
+        typeOfPublication: {
+            accessor: value => ({
+                TypeOfPublication: value,
+            }),
+        },
     },
 }
 
