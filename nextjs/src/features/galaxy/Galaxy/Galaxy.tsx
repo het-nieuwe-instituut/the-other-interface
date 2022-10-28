@@ -27,9 +27,9 @@ const Galaxy: React.FC<Props> = ({ dimensions }) => {
         setZoomLevel,
         zoomTo,
         zoomLevel,
-        storiesSystemRef,
         isLoading,
         stories,
+        storiesSystemRef,
         objectsPerTypeWithIds,
         handleMoveToZoomLevel1,
         archiefBestandDelen,
@@ -80,6 +80,7 @@ const Galaxy: React.FC<Props> = ({ dimensions }) => {
 
                         <g className="circles">
                             {objectsPerTypeWithIds?.map((item, index, array) => {
+                                console.log(item)
                                 return (
                                     <Circle
                                         defaultBackground="levels.z0.galaxyCloud"
@@ -120,14 +121,16 @@ const Galaxy: React.FC<Props> = ({ dimensions }) => {
                                                             </Text>
                                                         </>
                                                     ) : (
-                                                        <>
-                                                            <Text width="12.5rem" mb={1} textStyle={'cloudText'}>
-                                                                {t(item.id.toLowerCase())}
-                                                            </Text>
-                                                            <Text width="12.5rem" textStyle={'cloudText'}>
-                                                                {item.numberOfInstances}
-                                                            </Text>
-                                                        </>
+                                                        item.name !== 'stories' && (
+                                                            <>
+                                                                <Text width="12.5rem" mb={1} textStyle={'cloudText'}>
+                                                                    {item.name.toLowerCase()}
+                                                                </Text>
+                                                                <Text width="12.5rem" textStyle={'cloudText'}>
+                                                                    {item.numberOfInstances}
+                                                                </Text>
+                                                            </>
+                                                        )
                                                     )}
                                                 </Box>
                                             </Box>
@@ -137,10 +140,12 @@ const Galaxy: React.FC<Props> = ({ dimensions }) => {
                             })}
                         </g>
 
-                        {!isLoading && stories?.length && zoomLevel === ZoomLevel.Zoom1 && (
+                        {objectsPerTypeWithIds.find(i => i.name === 'stories') && zoomLevel === ZoomLevel.Zoom1 && (
                             <foreignObject x={GALAXY_BASE / 2 + 75} y={GALAXY_BASE / 2 - 60} width={200} height={100}>
                                 <button onClick={() => setZoomLevel(ZoomLevel.Zoom1Stories)}>
-                                    <Text width="12.5rem">{stories.length}</Text>
+                                    <Text width="12.5rem">
+                                        {objectsPerTypeWithIds.find(i => i.name === 'stories')?.numberOfInstances}
+                                    </Text>
                                     <Text width="12.5rem">{t('stories')}</Text>
                                 </button>
                             </foreignObject>
