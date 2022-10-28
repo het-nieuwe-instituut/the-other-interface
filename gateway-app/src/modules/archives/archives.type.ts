@@ -5,16 +5,13 @@ import { ArchivesZoomLevel5Types } from './archives.service'
 @InputType()
 export class ArchivesZoomLevel4FiltersArgs {
     @Field(() => String, { nullable: true })
-    public StartDate: string | null
+    public date: string | null
 
     @Field(() => String, { nullable: true })
-    public EndDate: string | null
+    public descriptionLevel: string | null
 
     @Field(() => String, { nullable: true })
-    public DescriptionLevel: string | null
-
-    @Field(() => String, { nullable: true })
-    public RelatedName: string | null
+    public relatedName: string | null
 }
 
 registerEnumType(ArchivesZoomLevel5Types, { name: 'ArchivesZoomLevel5Types' })
