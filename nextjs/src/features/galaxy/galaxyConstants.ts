@@ -37,4 +37,16 @@ export const galaxyTypesToPositions: Record<
         xFromCenter: 0,
         yFromCenter: 0,
     },
+    [EntityNames.Wikidata]: {
+        xFromCenter: 0,
+        yFromCenter: 0,
+    },
+    [EntityNames.Rkd]: {
+        xFromCenter: 0,
+        yFromCenter: 0,
+    },
+    [EntityNames.Getty]: {
+        xFromCenter: 0,
+        yFromCenter: 0,
+    },
 }
