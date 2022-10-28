@@ -266,6 +266,23 @@ export const mockZoom4PublicationsQuery = (resolver: ResponseResolver<GraphQLReq
  * @param resolver a function that accepts a captured request and may return a mocked response.
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
+ * mockArchivesRelationsQuery((req, res, ctx) => {
+ *   const { id } = req.variables;
+ *   return res(
+ *     ctx.data({ relations })
+ *   )
+ * })
+ */
+export const mockArchivesRelationsQuery = (resolver: ResponseResolver<GraphQLRequest<ArchivesRelationsQueryVariables>, GraphQLContext<ArchivesRelationsQuery>, any>) =>
+  graphql.query<ArchivesRelationsQuery, ArchivesRelationsQueryVariables>(
+    'ArchivesRelations',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
  * mockObjectRelationsQuery((req, res, ctx) => {
  *   const { id } = req.variables;
  *   return res(
@@ -276,6 +293,40 @@ export const mockZoom4PublicationsQuery = (resolver: ResponseResolver<GraphQLReq
 export const mockObjectRelationsQuery = (resolver: ResponseResolver<GraphQLRequest<ObjectRelationsQueryVariables>, GraphQLContext<ObjectRelationsQuery>, any>) =>
   graphql.query<ObjectRelationsQuery, ObjectRelationsQueryVariables>(
     'ObjectRelations',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockPeopleRelationsQuery((req, res, ctx) => {
+ *   const { id } = req.variables;
+ *   return res(
+ *     ctx.data({ relations })
+ *   )
+ * })
+ */
+export const mockPeopleRelationsQuery = (resolver: ResponseResolver<GraphQLRequest<PeopleRelationsQueryVariables>, GraphQLContext<PeopleRelationsQuery>, any>) =>
+  graphql.query<PeopleRelationsQuery, PeopleRelationsQueryVariables>(
+    'PeopleRelations',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
+ * mockPublicationRelationsQuery((req, res, ctx) => {
+ *   const { id } = req.variables;
+ *   return res(
+ *     ctx.data({ relations })
+ *   )
+ * })
+ */
+export const mockPublicationRelationsQuery = (resolver: ResponseResolver<GraphQLRequest<PublicationRelationsQueryVariables>, GraphQLContext<PublicationRelationsQuery>, any>) =>
+  graphql.query<PublicationRelationsQuery, PublicationRelationsQueryVariables>(
+    'PublicationRelations',
     resolver
   )
 
@@ -2234,12 +2285,33 @@ export type Zoom4PublicationsQueryVariables = Exact<{
 
 export type Zoom4PublicationsQuery = { __typename?: 'Query', zoomLevel4: { __typename?: 'ZoomLevel4ParentType', total: number, hasMore: boolean, nodes?: Array<{ __typename?: 'ZoomLevel4Type', record: string, title?: string | null, firstImage?: string | null, imageLabel?: string | null }> | null } };
 
+export type ArchivesRelationsQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type ArchivesRelationsQuery = { __typename?: 'Query', relations?: Array<{ __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number, randomRelations?: Array<{ __typename?: 'RelatedRecordType', id: string, label: string, type: EntityNames, relations?: Array<{ __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number }> | null }> | null }> | null };
+
 export type ObjectRelationsQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
 export type ObjectRelationsQuery = { __typename?: 'Query', relations?: Array<{ __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number, randomRelations?: Array<{ __typename?: 'RelatedRecordType', id: string, label: string, type: EntityNames, relations?: Array<{ __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number }> | null }> | null }> | null };
+
+export type PeopleRelationsQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type PeopleRelationsQuery = { __typename?: 'Query', relations?: Array<{ __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number, randomRelations?: Array<{ __typename?: 'RelatedRecordType', id: string, label: string, type: EntityNames, relations?: Array<{ __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number }> | null }> | null }> | null };
+
+export type PublicationRelationsQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type PublicationRelationsQuery = { __typename?: 'Query', relations?: Array<{ __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number, randomRelations?: Array<{ __typename?: 'RelatedRecordType', id: string, label: string, type: EntityNames, relations?: Array<{ __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number }> | null }> | null }> | null };
 
 export type ZoomLevel5ArchivesQueryVariables = Exact<{
   id: Scalars['String'];
@@ -3502,9 +3574,54 @@ export function useZoom4PublicationsLazyQuery(baseOptions?: Apollo.LazyQueryHook
 export type Zoom4PublicationsQueryHookResult = ReturnType<typeof useZoom4PublicationsQuery>;
 export type Zoom4PublicationsLazyQueryHookResult = ReturnType<typeof useZoom4PublicationsLazyQuery>;
 export type Zoom4PublicationsQueryResult = Apollo.QueryResult<Zoom4PublicationsQuery, Zoom4PublicationsQueryVariables>;
+export const ArchivesRelationsDocument = gql`
+    query ArchivesRelations($id: String!) {
+  relations(type: Archives, id: $id) {
+    type
+    total
+    randomRelations {
+      id
+      label
+      type
+      relations {
+        type
+        total
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useArchivesRelationsQuery__
+ *
+ * To run a query within a React component, call `useArchivesRelationsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useArchivesRelationsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useArchivesRelationsQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useArchivesRelationsQuery(baseOptions: Apollo.QueryHookOptions<ArchivesRelationsQuery, ArchivesRelationsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ArchivesRelationsQuery, ArchivesRelationsQueryVariables>(ArchivesRelationsDocument, options);
+      }
+export function useArchivesRelationsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ArchivesRelationsQuery, ArchivesRelationsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ArchivesRelationsQuery, ArchivesRelationsQueryVariables>(ArchivesRelationsDocument, options);
+        }
+export type ArchivesRelationsQueryHookResult = ReturnType<typeof useArchivesRelationsQuery>;
+export type ArchivesRelationsLazyQueryHookResult = ReturnType<typeof useArchivesRelationsLazyQuery>;
+export type ArchivesRelationsQueryResult = Apollo.QueryResult<ArchivesRelationsQuery, ArchivesRelationsQueryVariables>;
 export const ObjectRelationsDocument = gql`
     query ObjectRelations($id: String!) {
-  relations(type: People, id: $id) {
+  relations(type: Objects, id: $id) {
     type
     total
     randomRelations {
@@ -3547,6 +3664,96 @@ export function useObjectRelationsLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
 export type ObjectRelationsQueryHookResult = ReturnType<typeof useObjectRelationsQuery>;
 export type ObjectRelationsLazyQueryHookResult = ReturnType<typeof useObjectRelationsLazyQuery>;
 export type ObjectRelationsQueryResult = Apollo.QueryResult<ObjectRelationsQuery, ObjectRelationsQueryVariables>;
+export const PeopleRelationsDocument = gql`
+    query PeopleRelations($id: String!) {
+  relations(type: People, id: $id) {
+    type
+    total
+    randomRelations {
+      id
+      label
+      type
+      relations {
+        type
+        total
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __usePeopleRelationsQuery__
+ *
+ * To run a query within a React component, call `usePeopleRelationsQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePeopleRelationsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePeopleRelationsQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function usePeopleRelationsQuery(baseOptions: Apollo.QueryHookOptions<PeopleRelationsQuery, PeopleRelationsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PeopleRelationsQuery, PeopleRelationsQueryVariables>(PeopleRelationsDocument, options);
+      }
+export function usePeopleRelationsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PeopleRelationsQuery, PeopleRelationsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PeopleRelationsQuery, PeopleRelationsQueryVariables>(PeopleRelationsDocument, options);
+        }
+export type PeopleRelationsQueryHookResult = ReturnType<typeof usePeopleRelationsQuery>;
+export type PeopleRelationsLazyQueryHookResult = ReturnType<typeof usePeopleRelationsLazyQuery>;
+export type PeopleRelationsQueryResult = Apollo.QueryResult<PeopleRelationsQuery, PeopleRelationsQueryVariables>;
+export const PublicationRelationsDocument = gql`
+    query PublicationRelations($id: String!) {
+  relations(type: Publications, id: $id) {
+    type
+    total
+    randomRelations {
+      id
+      label
+      type
+      relations {
+        type
+        total
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __usePublicationRelationsQuery__
+ *
+ * To run a query within a React component, call `usePublicationRelationsQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePublicationRelationsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePublicationRelationsQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function usePublicationRelationsQuery(baseOptions: Apollo.QueryHookOptions<PublicationRelationsQuery, PublicationRelationsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PublicationRelationsQuery, PublicationRelationsQueryVariables>(PublicationRelationsDocument, options);
+      }
+export function usePublicationRelationsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PublicationRelationsQuery, PublicationRelationsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PublicationRelationsQuery, PublicationRelationsQueryVariables>(PublicationRelationsDocument, options);
+        }
+export type PublicationRelationsQueryHookResult = ReturnType<typeof usePublicationRelationsQuery>;
+export type PublicationRelationsLazyQueryHookResult = ReturnType<typeof usePublicationRelationsLazyQuery>;
+export type PublicationRelationsQueryResult = Apollo.QueryResult<PublicationRelationsQuery, PublicationRelationsQueryVariables>;
 export const ZoomLevel5ArchivesDocument = gql`
     query ZoomLevel5Archives($id: String!) {
   zoomLevel5Archive(id: $id) {
