@@ -76,6 +76,9 @@ fragment StoryFragment on StoryEntity {
             ... on ComponentModulesPullquote {
                 ...ComponentModulesPullquoteFragment
             }
+            ... on ComponentModulesGridModule {
+                ...ComponentModulesGridModuleFragment
+            }
             ... on ComponentModulesTextModule {
                 ...ComponentModulesTextModuleFragment
             }

@@ -1,5 +1,5 @@
 query ObjectRelations($id: String!) {
-    relations(type: People, id: $id) {
+    relations(type: Objects, id: $id) {
         type
         total
         randomRelations {

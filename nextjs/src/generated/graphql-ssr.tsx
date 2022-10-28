@@ -532,6 +532,41 @@ export const ssrZoom4Publications = {
       withPage: withPageZoom4Publications,
       usePage: useZoom4Publications,
     }
+export async function getServerPageArchivesRelations
+    (options: Omit<Apollo.QueryOptions<Types.ArchivesRelationsQueryVariables>, 'query'>, ctx?: any ){
+        const apolloClient = getApolloClient(ctx);
+        
+        const data = await apolloClient.query<Types.ArchivesRelationsQuery>({ ...options, query: Operations.ArchivesRelationsDocument });
+        
+        const apolloState = apolloClient.cache.extract();
+
+        return {
+            props: {
+                apolloState: apolloState,
+                data: data?.data,
+                error: data?.error ?? data?.errors ?? null,
+            },
+        };
+      }
+export const useArchivesRelations = (
+  optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.ArchivesRelationsQuery, Types.ArchivesRelationsQueryVariables>) => {
+  const router = useRouter();
+  const options = optionsFunc ? optionsFunc(router) : {};
+  return useQuery(Operations.ArchivesRelationsDocument, options);
+};
+export type PageArchivesRelationsComp = React.FC<{data?: Types.ArchivesRelationsQuery, error?: Apollo.ApolloError}>;
+export const withPageArchivesRelations = (optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.ArchivesRelationsQuery, Types.ArchivesRelationsQueryVariables>) => (WrappedComponent:PageArchivesRelationsComp) : NextPage  => (props) => {
+                const router = useRouter()
+                const options = optionsFunc ? optionsFunc(router) : {};
+                const {data, error } = useQuery(Operations.ArchivesRelationsDocument, options)    
+                return <WrappedComponent {...props} data={data} error={error} /> ;
+                   
+            }; 
+export const ssrArchivesRelations = {
+      getServerPage: getServerPageArchivesRelations,
+      withPage: withPageArchivesRelations,
+      usePage: useArchivesRelations,
+    }
 export async function getServerPageObjectRelations
     (options: Omit<Apollo.QueryOptions<Types.ObjectRelationsQueryVariables>, 'query'>, ctx?: any ){
         const apolloClient = getApolloClient(ctx);
@@ -566,6 +601,111 @@ export const ssrObjectRelations = {
       getServerPage: getServerPageObjectRelations,
       withPage: withPageObjectRelations,
       usePage: useObjectRelations,
+    }
+export async function getServerPagePeopleRelations
+    (options: Omit<Apollo.QueryOptions<Types.PeopleRelationsQueryVariables>, 'query'>, ctx?: any ){
+        const apolloClient = getApolloClient(ctx);
+        
+        const data = await apolloClient.query<Types.PeopleRelationsQuery>({ ...options, query: Operations.PeopleRelationsDocument });
+        
+        const apolloState = apolloClient.cache.extract();
+
+        return {
+            props: {
+                apolloState: apolloState,
+                data: data?.data,
+                error: data?.error ?? data?.errors ?? null,
+            },
+        };
+      }
+export const usePeopleRelations = (
+  optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.PeopleRelationsQuery, Types.PeopleRelationsQueryVariables>) => {
+  const router = useRouter();
+  const options = optionsFunc ? optionsFunc(router) : {};
+  return useQuery(Operations.PeopleRelationsDocument, options);
+};
+export type PagePeopleRelationsComp = React.FC<{data?: Types.PeopleRelationsQuery, error?: Apollo.ApolloError}>;
+export const withPagePeopleRelations = (optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.PeopleRelationsQuery, Types.PeopleRelationsQueryVariables>) => (WrappedComponent:PagePeopleRelationsComp) : NextPage  => (props) => {
+                const router = useRouter()
+                const options = optionsFunc ? optionsFunc(router) : {};
+                const {data, error } = useQuery(Operations.PeopleRelationsDocument, options)    
+                return <WrappedComponent {...props} data={data} error={error} /> ;
+                   
+            }; 
+export const ssrPeopleRelations = {
+      getServerPage: getServerPagePeopleRelations,
+      withPage: withPagePeopleRelations,
+      usePage: usePeopleRelations,
+    }
+export async function getServerPagePublicationRelations
+    (options: Omit<Apollo.QueryOptions<Types.PublicationRelationsQueryVariables>, 'query'>, ctx?: any ){
+        const apolloClient = getApolloClient(ctx);
+        
+        const data = await apolloClient.query<Types.PublicationRelationsQuery>({ ...options, query: Operations.PublicationRelationsDocument });
+        
+        const apolloState = apolloClient.cache.extract();
+
+        return {
+            props: {
+                apolloState: apolloState,
+                data: data?.data,
+                error: data?.error ?? data?.errors ?? null,
+            },
+        };
+      }
+export const usePublicationRelations = (
+  optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.PublicationRelationsQuery, Types.PublicationRelationsQueryVariables>) => {
+  const router = useRouter();
+  const options = optionsFunc ? optionsFunc(router) : {};
+  return useQuery(Operations.PublicationRelationsDocument, options);
+};
+export type PagePublicationRelationsComp = React.FC<{data?: Types.PublicationRelationsQuery, error?: Apollo.ApolloError}>;
+export const withPagePublicationRelations = (optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.PublicationRelationsQuery, Types.PublicationRelationsQueryVariables>) => (WrappedComponent:PagePublicationRelationsComp) : NextPage  => (props) => {
+                const router = useRouter()
+                const options = optionsFunc ? optionsFunc(router) : {};
+                const {data, error } = useQuery(Operations.PublicationRelationsDocument, options)    
+                return <WrappedComponent {...props} data={data} error={error} /> ;
+                   
+            }; 
+export const ssrPublicationRelations = {
+      getServerPage: getServerPagePublicationRelations,
+      withPage: withPagePublicationRelations,
+      usePage: usePublicationRelations,
+    }
+export async function getServerPageStoriesRelations
+    (options: Omit<Apollo.QueryOptions<Types.StoriesRelationsQueryVariables>, 'query'>, ctx?: any ){
+        const apolloClient = getApolloClient(ctx);
+        
+        const data = await apolloClient.query<Types.StoriesRelationsQuery>({ ...options, query: Operations.StoriesRelationsDocument });
+        
+        const apolloState = apolloClient.cache.extract();
+
+        return {
+            props: {
+                apolloState: apolloState,
+                data: data?.data,
+                error: data?.error ?? data?.errors ?? null,
+            },
+        };
+      }
+export const useStoriesRelations = (
+  optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.StoriesRelationsQuery, Types.StoriesRelationsQueryVariables>) => {
+  const router = useRouter();
+  const options = optionsFunc ? optionsFunc(router) : {};
+  return useQuery(Operations.StoriesRelationsDocument, options);
+};
+export type PageStoriesRelationsComp = React.FC<{data?: Types.StoriesRelationsQuery, error?: Apollo.ApolloError}>;
+export const withPageStoriesRelations = (optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.StoriesRelationsQuery, Types.StoriesRelationsQueryVariables>) => (WrappedComponent:PageStoriesRelationsComp) : NextPage  => (props) => {
+                const router = useRouter()
+                const options = optionsFunc ? optionsFunc(router) : {};
+                const {data, error } = useQuery(Operations.StoriesRelationsDocument, options)    
+                return <WrappedComponent {...props} data={data} error={error} /> ;
+                   
+            }; 
+export const ssrStoriesRelations = {
+      getServerPage: getServerPageStoriesRelations,
+      withPage: withPageStoriesRelations,
+      usePage: useStoriesRelations,
     }
 export async function getServerPageZoomLevel5Archives
     (options: Omit<Apollo.QueryOptions<Types.ZoomLevel5ArchivesQueryVariables>, 'query'>, ctx?: any ){

@@ -1,11 +1,11 @@
 _type: export
 __export_format: 4
-__export_date: 2022-10-24T14:53:18.369Z
+__export_date: 2022-10-24T14:37:08.256Z
 __export_source: insomnia.desktop.app:v2022.6.0
 resources:
   - _id: req_d36dd2c14e474d7abc436370519db759
     parentId: fld_60bab26db1a7467991c800e2f04357a8
-    modified: 1666622840822
+    modified: 1666621317161
     created: 1665559396865
     url: "{{ _.baseUrl }}/graphql"
     name: TriplyRecordFragment
@@ -86,7 +86,8 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text: '{"query":"query {\n\thomepage(publicationState: \"LIVE\", locale: \"nl\")
+      text:
+        '{"query":"query {\n\thomepage(publicationState: \"LIVE\", locale: \"nl\")
         {\n\t\tdata {\n\t\t\tid\n\t\t\tattributes
         {\n\t\t\t\tTitle\n\t\t\t\tcomponents {\n\t\t\t\t\t... on
         ComponentModulesButtonsModule
@@ -177,7 +178,8 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text: '{"query":"query menuPage($id: String, $locale: String) {\n\tmenupage(id:
+      text:
+        '{"query":"query menuPage($id: String, $locale: String) {\n\tmenupage(id:
         $id, locale: $locale) {\n\t\tdata {\n\t\t\tid\n\t\t\tattributes
         {\n\t\t\t\tTitle\n\t\t\t\tslug\n\t\t\t\tcreatedAt\n\t\t\t\tupdatedAt\n\t\t\t\tpublishedAt\n\t\t\t\tlocale\n\t\t\t\tlocalizations
         {\n\t\t\t\t\tdata {\n\t\t\t\t\t\tid\n\t\t\t\t\t\tattributes
@@ -343,7 +345,8 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text: '{"query":"query tables(\n\t$filters: TableFiltersInput\n\t$pagination:
+      text:
+        '{"query":"query tables(\n\t$filters: TableFiltersInput\n\t$pagination:
         PaginationArg = {}\n\t$sort: [String!] = []\n\t$publicationState:
         String\n) {\n\ttables(\n\t\tfilters: $filters\n\t\tpagination:
         $pagination\n\t\tsort: $sort\n\t\tpublicationState:
@@ -451,7 +454,8 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text: '{"query":"query {\n\tstories {\n\t\tdata {\n\t\t\tid\n\t\t\tattributes
+      text:
+        '{"query":"query {\n\tstories {\n\t\tdata {\n\t\t\tid\n\t\t\tattributes
         {\n\t\t\t\tauthor {\n\t\t\t\t\tdata
         {\n\t\t\t\t\t\tid\n\t\t\t\t\t\tattributes
         {\n\t\t\t\t\t\t\tfirstName\n\t\t\t\t\t\t\tinsertion\n\t\t\t\t\t\t\tlastName\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t\tlocations
@@ -581,7 +585,8 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text: '{"query":"query {\n\tlocations {\n\t\tdata {\n\t\t\tid\n\t\t\tattributes
+      text:
+        '{"query":"query {\n\tlocations {\n\t\tdata {\n\t\t\tid\n\t\t\tattributes
         {\n\t\t\t\tcity\n\t\t\t}\n\t\t}\n\t\tmeta {\n\t\t\tpagination
         {\n\t\t\t\tpage\n\t\t\t}\n\t\t}\n\t}\n}\n"}'
     parameters: []
@@ -637,7 +642,8 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text: '{"query":"query {\n\tauthors {\n\t\tdata {\n\t\t\tid\n\t\t\tattributes
+      text:
+        '{"query":"query {\n\tauthors {\n\t\tdata {\n\t\t\tid\n\t\t\tattributes
         {\n\t\t\t\tfirstName\n\t\t\t\tinsertion\n\t\t\t\tlastName\n\t\t\t}\n\t\t\t\n\t\t}\n\t}\n}"}'
     parameters: []
     headers:
@@ -694,7 +700,8 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text: '{"query":"query {\n\ttriplyRecords(filters: {type: {eq: \"archive\"}})
+      text:
+        '{"query":"query {\n\ttriplyRecords(filters: {type: {eq: \"archive\"}})
         {\n\t\tdata {\n\t\t\tid\n\t\t\tattributes
         {\n\t\t\t\trecordId\n\t\t\t\ttype\n\t\t\t\tstories {\n\t\t\t\t\tdata
         {\n\t\t\t\t\t\tid\n\t\t\t\t\t\tattributes
@@ -916,7 +923,8 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text: '{"query":"query {\n\t\tzoomLevel3(entityName: Publications, filterId:
+      text:
+        '{"query":"query {\n\t\tzoomLevel3(entityName: Publications, filterId:
         \"subject\", page: 1, pageSize:
         16)  {\n    uri\n\t\tname\n\t\tcount\n\t\ttotal\n\t}\n}"}'
     parameters: []
@@ -944,7 +952,8 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text: '{"query":"query {\n\t\tzoomLevel3(entityName: Publications, filterId:
+      text:
+        '{"query":"query {\n\t\tzoomLevel3(entityName: Publications, filterId:
         \"geographicalKeyword\", page: 1, pageSize:
         16)  {\n    uri\n\t\tname\n\t\tcount\n\t\ttotal\n\t}\n}"}'
     parameters: []
@@ -972,7 +981,8 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text: '{"query":"query {\n\t\tzoomLevel3(entityName: Publications, filterId:
+      text:
+        '{"query":"query {\n\t\tzoomLevel3(entityName: Publications, filterId:
         \"author\", page: 1, pageSize:
         16)  {\n    uri\n\t\tname\n\t\tcount\n\t\ttotal\n\t}\n}"}'
     parameters: []
@@ -1000,7 +1010,8 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text: '{"query":"query {\n\t\tzoomLevel3(entityName: Publications, filterId:
+      text:
+        '{"query":"query {\n\t\tzoomLevel3(entityName: Publications, filterId:
         \"typeOfPublication\", page: 1, pageSize:
         32)  {\n    uri\n\t\tname\n\t\tcount\n\t\ttotal\n\t}\n}"}'
     parameters: []
@@ -1773,7 +1784,8 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text: '{"query":"query {\n\tzoomLevel5PublicationsSerial(id: \"300319131\")
+      text:
+        '{"query":"query {\n\tzoomLevel5PublicationsSerial(id: \"300319131\")
         {\n\t\ttypeOfPublication\n\t\ttypeOfPublicationLabel\n\t\ttitle\n\t\tpublisher\n\t\tpublisherLabel\n\t\tyearOfPublication\n\t\tplaceOfPublication\n\t\tplaceOfPublicationLabel\n\t\tsubject\n\t\tsubjectLabel\n\t\tlanguage\n\t\tlanguageLabel\n\t\tcontinuedFrom\n\t\tcontinuedAs\n\t\tremarks\n\t\tavailability\n\t\tshelfmark\n\t\tholding\n\t\tpermanentLink\n\t}\n}\n"}'
     parameters: []
     headers:
@@ -1800,7 +1812,8 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text: '{"query":"query {\n\tzoomLevel5PublicationsArticle(id: \"300171648\")
+      text:
+        '{"query":"query {\n\tzoomLevel5PublicationsArticle(id: \"300171648\")
         {\n\t\ttypeOfPublication\n\t\ttypeOfPublicationLabel\n\t\ttitle\n\t\tauthor\n\t\tauthorLabel\n\t\tauthorRole\n\t\tauthorRoleLabel\n\t\tsourceTitle\n\t\tsourceTitleLabel\n\t\tvolume\n\t\tissue\n\t\tyearOfPublication\n\t\tpage\n\t\tpublisher\n\t\tpublisherLabel\n\t\tabstract\n\t\tlanguage\n\t\tlanguageLabel\n\t\tgeographicalKeyword\n\t\tgeographicalKeywordLabel\n\t\tsubject\n\t\tsubjectLabel\n\t\trelatedPerInst\n\t\trelatedPerInstLabel\n\t\tobjectNumber\n\t\tavailability\n\t\tshelfmark\n\t\tpermanentLink\n\t}\n}\n"}'
     parameters: []
     headers:
@@ -1827,7 +1840,8 @@ resources:
     method: POST
     body:
       mimeType: application/graphql
-      text: '{"query":"query {\n\tzoomLevel5PublicationsAudiovisual(id: \"300197096\")
+      text:
+        '{"query":"query {\n\tzoomLevel5PublicationsAudiovisual(id: \"300197096\")
         {\n\t\ttypeOfPublication\n\t\ttypeOfPublicationLabel\n\t\ttitle\n\t\tauthor\n\t\tauthorLabel\n\t\tauthorRole\n\t\tauthorRoleLabel\n\t\tpublisher\n\t\tpublisherLabel\n\t\tyearOfPublication\n\t\tplaceOfPublication\n\t\tplaceOfPublicationLabel\n\t\tabstract\n\t\tannotation\n\t\tscope\n\t\tlanguage\n\t\tlanguageLabel\n\t\tmedium\n\t\tgeographicalKeyword\n\t\tgeographicalKeywordLabel\n\t\tsubject\n\t\tsubjectLabel\n\t\trelatedPerInst\n\t\trelatedPerInstLabel\n\t\tpermanentLink\n\t\tobjectNumber\n\t\tavailability\n\t\tshelfmark\n\t}\n}\n"}'
     parameters: []
     headers:
