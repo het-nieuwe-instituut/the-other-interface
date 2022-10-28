@@ -206,6 +206,7 @@ export const PaginatedCollection: React.FunctionComponent<
                                             height={90}
                                             overflow={'visible'}
                                             className={`foreign-${id}`}
+                                            opacity={0}
                                         >
                                             {item.title && (
                                                 <Flex
