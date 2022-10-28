@@ -8,10 +8,6 @@ import { Box, Flex, Grid, GridItem, Img, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useId, useMemo } from 'react'
 import {
-    useZoom4ArchivesQuery,
-    useZoom4ObjectsQuery,
-    useZoom4PeopleQuery,
-    useZoom4PublicationsQuery,
     Zoom4ArchivesQuery,
     Zoom4ObjectsQuery,
     Zoom4PeopleQuery,
@@ -23,60 +19,6 @@ import { SupportedLandingPages } from '../FilterClouds/FilterCloudsContainer'
 import { getGalaxyTypeByTranslationsKey } from '../utils/translations'
 import { usePresenter } from './usePresenter'
 import { useZoom4QueryTask } from './zoom4QueryTask'
-
-const useZoom4Query = {
-    [SupportedLandingPages.Archives]: useZoom4ArchivesQuery,
-    [SupportedLandingPages.Objects]: useZoom4ObjectsQuery,
-    [SupportedLandingPages.People]: useZoom4PeopleQuery,
-    [SupportedLandingPages.Publications]: useZoom4PublicationsQuery,
-    [SupportedLandingPages.Stories]: useZoom4PublicationsQuery,
-}
-
-const variableType = {
-    [SupportedLandingPages.Archives]: 'archivesFilters',
-    [SupportedLandingPages.Objects]: 'objectsFilters',
-    [SupportedLandingPages.People]: 'peopleFilters',
-    [SupportedLandingPages.Publications]: 'publicationsFilters',
-    [SupportedLandingPages.Stories]: '',
-}
-
-const variableFilters: {
-    [key1: string]: {
-        [key: string]: string
-    }
-} = {
-    [SupportedLandingPages.Archives]: {
-        archives: 'Archives',
-        descriptionLevel: 'DescriptionLevel',
-        relatedName: 'RelatedName',
-        startDate: 'StartDate',
-    },
-    [SupportedLandingPages.Objects]: {
-        endDate: 'EndDate',
-        maker: 'Maker',
-        material: 'Material',
-        objectname: 'Objectname',
-        perInst: 'PerInst',
-        startDate: 'StartDate',
-        subject: 'Subject',
-        technique: 'Technique',
-    },
-    [SupportedLandingPages.People]: {
-        birthDate: 'BirthDate',
-        deathDate: 'DeathDate',
-        nameType: 'NameType',
-        period: 'Period',
-        place: 'Place',
-        profession: 'Profession',
-    },
-    [SupportedLandingPages.Publications]: {
-        author: 'Author',
-        geograficalKeyword: 'GeograficalKeyword',
-        relatedPerInst: 'RelatedPerInst',
-        subject: 'Subject',
-        typeOfPublication: 'TypeOfPublication',
-    },
-}
 
 type PaginatsedProps = {
     dimensions: {
