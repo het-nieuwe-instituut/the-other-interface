@@ -480,6 +480,7 @@ export const aHomepage = (overrides?: Partial<Homepage>, _relationshipsToOmit: A
         Title: overrides && overrides.hasOwnProperty('Title') ? overrides.Title! : 'illum',
         components: overrides && overrides.hasOwnProperty('components') ? overrides.components! : [relationshipsToOmit.includes('ComponentModulesButtonsModule') ? {} as ComponentModulesButtonsModule : aComponentModulesButtonsModule({}, relationshipsToOmit)],
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : '1970-01-01T12:02:09.059Z',
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'est',
         locale: overrides && overrides.hasOwnProperty('locale') ? overrides.locale! : 'aut',
         localizations: overrides && overrides.hasOwnProperty('localizations') ? overrides.localizations! : relationshipsToOmit.includes('HomepageRelationResponseCollection') ? {} as HomepageRelationResponseCollection : aHomepageRelationResponseCollection({}, relationshipsToOmit),
         publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : '1970-01-09T06:26:40.004Z',

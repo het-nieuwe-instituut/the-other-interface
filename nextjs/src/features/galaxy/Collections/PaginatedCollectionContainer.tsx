@@ -19,6 +19,7 @@ import {
 } from 'src/generated/graphql'
 import { SupportedLandingPages } from '../FilterClouds/FilterCloudsContainer'
 import { usePresenter } from './usePresenter'
+import { useZoom4QueryTask } from './zoom4QueryTask'
 
 const useZoom4Query = {
     [SupportedLandingPages.Archives]: useZoom4ArchivesQuery,
@@ -84,20 +85,7 @@ type PaginatsedProps = {
 
 export const PaginatedCollectionContainer: React.FunctionComponent<PaginatsedProps> = props => {
     const { type } = props
-    const router = useRouter()
-    const {
-        data: zoom4,
-        loading,
-        error,
-    } = useZoom4Query[type]({
-        variables: {
-            [variableType[type]]: {
-                [variableFilters[type][router.query.filter as string]]: router.query.collection,
-            },
-            page: parseInt((router.query.page as string) ?? '1'),
-            pageSize: 28,
-        },
-    })
+    const { data: zoom4, loading, error } = useZoom4QueryTask(type)
 
     if (loading) {
         return <Text>Loading</Text>
@@ -116,6 +104,7 @@ export const PaginatedCollection: React.FunctionComponent<
     }
 > = props => {
     const { zoom4, dimensions } = props
+
     const router = useRouter()
     const { t } = useTypeSafeTranslation('landingpage')
     const { width, height } = dimensions

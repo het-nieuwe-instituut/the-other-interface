@@ -940,6 +940,7 @@ export type Homepage = {
   Title?: Maybe<Scalars['String']>;
   components?: Maybe<Array<HomepageComponentsDynamicZone>>;
   createdAt?: Maybe<Scalars['Date']>;
+  description?: Maybe<Scalars['String']>;
   locale?: Maybe<Scalars['String']>;
   localizations?: Maybe<HomepageRelationResponseCollection>;
   publishedAt?: Maybe<Scalars['Date']>;
