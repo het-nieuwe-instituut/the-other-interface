@@ -2420,6 +2420,14 @@ export type HomepageFragmentFragment = {
                   id: string
                   subtitle?: string | null
                   title?: string | null
+                  story?: {
+                      __typename?: 'StoryEntityResponse'
+                      data?: {
+                          __typename?: 'StoryEntity'
+                          id?: string | null
+                          attributes?: { __typename?: 'Story'; slug?: string | null } | null
+                      } | null
+                  } | null
                   thumbnail?: {
                       __typename?: 'UploadFileEntityResponse'
                       data?: {
@@ -2824,6 +2832,14 @@ export type HomepageQuery = {
                                           id: string
                                           subtitle?: string | null
                                           title?: string | null
+                                          story?: {
+                                              __typename?: 'StoryEntityResponse'
+                                              data?: {
+                                                  __typename?: 'StoryEntity'
+                                                  id?: string | null
+                                                  attributes?: { __typename?: 'Story'; slug?: string | null } | null
+                                              } | null
+                                          } | null
                                           thumbnail?: {
                                               __typename?: 'UploadFileEntityResponse'
                                               data?: {
@@ -3196,6 +3212,14 @@ export type HomepageQuery = {
                               id: string
                               subtitle?: string | null
                               title?: string | null
+                              story?: {
+                                  __typename?: 'StoryEntityResponse'
+                                  data?: {
+                                      __typename?: 'StoryEntity'
+                                      id?: string | null
+                                      attributes?: { __typename?: 'Story'; slug?: string | null } | null
+                                  } | null
+                              } | null
                               thumbnail?: {
                                   __typename?: 'UploadFileEntityResponse'
                                   data?: {
@@ -3519,6 +3543,14 @@ export type LandingpageFragmentFragment = {
                   id: string
                   subtitle?: string | null
                   title?: string | null
+                  story?: {
+                      __typename?: 'StoryEntityResponse'
+                      data?: {
+                          __typename?: 'StoryEntity'
+                          id?: string | null
+                          attributes?: { __typename?: 'Story'; slug?: string | null } | null
+                      } | null
+                  } | null
                   thumbnail?: {
                       __typename?: 'UploadFileEntityResponse'
                       data?: {
@@ -3856,6 +3888,14 @@ export type LandingpageEntityFragmentFragment = {
                                   id: string
                                   subtitle?: string | null
                                   title?: string | null
+                                  story?: {
+                                      __typename?: 'StoryEntityResponse'
+                                      data?: {
+                                          __typename?: 'StoryEntity'
+                                          id?: string | null
+                                          attributes?: { __typename?: 'Story'; slug?: string | null } | null
+                                      } | null
+                                  } | null
                                   thumbnail?: {
                                       __typename?: 'UploadFileEntityResponse'
                                       data?: {
@@ -4168,6 +4208,14 @@ export type LandingpageEntityFragmentFragment = {
                       id: string
                       subtitle?: string | null
                       title?: string | null
+                      story?: {
+                          __typename?: 'StoryEntityResponse'
+                          data?: {
+                              __typename?: 'StoryEntity'
+                              id?: string | null
+                              attributes?: { __typename?: 'Story'; slug?: string | null } | null
+                          } | null
+                      } | null
                       thumbnail?: {
                           __typename?: 'UploadFileEntityResponse'
                           data?: {
@@ -4515,6 +4563,14 @@ export type LandingPageQuery = {
                                           id: string
                                           subtitle?: string | null
                                           title?: string | null
+                                          story?: {
+                                              __typename?: 'StoryEntityResponse'
+                                              data?: {
+                                                  __typename?: 'StoryEntity'
+                                                  id?: string | null
+                                                  attributes?: { __typename?: 'Story'; slug?: string | null } | null
+                                              } | null
+                                          } | null
                                           thumbnail?: {
                                               __typename?: 'UploadFileEntityResponse'
                                               data?: {
@@ -4827,6 +4883,14 @@ export type LandingPageQuery = {
                               id: string
                               subtitle?: string | null
                               title?: string | null
+                              story?: {
+                                  __typename?: 'StoryEntityResponse'
+                                  data?: {
+                                      __typename?: 'StoryEntity'
+                                      id?: string | null
+                                      attributes?: { __typename?: 'Story'; slug?: string | null } | null
+                                  } | null
+                              } | null
                               thumbnail?: {
                                   __typename?: 'UploadFileEntityResponse'
                                   data?: {
@@ -5179,6 +5243,14 @@ export type LandingPagesQuery = {
                                           id: string
                                           subtitle?: string | null
                                           title?: string | null
+                                          story?: {
+                                              __typename?: 'StoryEntityResponse'
+                                              data?: {
+                                                  __typename?: 'StoryEntity'
+                                                  id?: string | null
+                                                  attributes?: { __typename?: 'Story'; slug?: string | null } | null
+                                              } | null
+                                          } | null
                                           thumbnail?: {
                                               __typename?: 'UploadFileEntityResponse'
                                               data?: {
@@ -5491,6 +5563,14 @@ export type LandingPagesQuery = {
                               id: string
                               subtitle?: string | null
                               title?: string | null
+                              story?: {
+                                  __typename?: 'StoryEntityResponse'
+                                  data?: {
+                                      __typename?: 'StoryEntity'
+                                      id?: string | null
+                                      attributes?: { __typename?: 'Story'; slug?: string | null } | null
+                                  } | null
+                              } | null
                               thumbnail?: {
                                   __typename?: 'UploadFileEntityResponse'
                                   data?: {
@@ -5909,6 +5989,14 @@ export type MenupageFragmentFragment = {
                   id: string
                   subtitle?: string | null
                   title?: string | null
+                  story?: {
+                      __typename?: 'StoryEntityResponse'
+                      data?: {
+                          __typename?: 'StoryEntity'
+                          id?: string | null
+                          attributes?: { __typename?: 'Story'; slug?: string | null } | null
+                      } | null
+                  } | null
                   thumbnail?: {
                       __typename?: 'UploadFileEntityResponse'
                       data?: {
@@ -6244,6 +6332,14 @@ export type MenupageEntityFragmentFragment = {
                                   id: string
                                   subtitle?: string | null
                                   title?: string | null
+                                  story?: {
+                                      __typename?: 'StoryEntityResponse'
+                                      data?: {
+                                          __typename?: 'StoryEntity'
+                                          id?: string | null
+                                          attributes?: { __typename?: 'Story'; slug?: string | null } | null
+                                      } | null
+                                  } | null
                                   thumbnail?: {
                                       __typename?: 'UploadFileEntityResponse'
                                       data?: {
@@ -6556,6 +6652,14 @@ export type MenupageEntityFragmentFragment = {
                       id: string
                       subtitle?: string | null
                       title?: string | null
+                      story?: {
+                          __typename?: 'StoryEntityResponse'
+                          data?: {
+                              __typename?: 'StoryEntity'
+                              id?: string | null
+                              attributes?: { __typename?: 'Story'; slug?: string | null } | null
+                          } | null
+                      } | null
                       thumbnail?: {
                           __typename?: 'UploadFileEntityResponse'
                           data?: {
@@ -6901,6 +7005,14 @@ export type MenuPageQuery = {
                                           id: string
                                           subtitle?: string | null
                                           title?: string | null
+                                          story?: {
+                                              __typename?: 'StoryEntityResponse'
+                                              data?: {
+                                                  __typename?: 'StoryEntity'
+                                                  id?: string | null
+                                                  attributes?: { __typename?: 'Story'; slug?: string | null } | null
+                                              } | null
+                                          } | null
                                           thumbnail?: {
                                               __typename?: 'UploadFileEntityResponse'
                                               data?: {
@@ -7213,6 +7325,14 @@ export type MenuPageQuery = {
                               id: string
                               subtitle?: string | null
                               title?: string | null
+                              story?: {
+                                  __typename?: 'StoryEntityResponse'
+                                  data?: {
+                                      __typename?: 'StoryEntity'
+                                      id?: string | null
+                                      attributes?: { __typename?: 'Story'; slug?: string | null } | null
+                                  } | null
+                              } | null
                               thumbnail?: {
                                   __typename?: 'UploadFileEntityResponse'
                                   data?: {
@@ -7563,6 +7683,14 @@ export type MenuPagesQuery = {
                                           id: string
                                           subtitle?: string | null
                                           title?: string | null
+                                          story?: {
+                                              __typename?: 'StoryEntityResponse'
+                                              data?: {
+                                                  __typename?: 'StoryEntity'
+                                                  id?: string | null
+                                                  attributes?: { __typename?: 'Story'; slug?: string | null } | null
+                                              } | null
+                                          } | null
                                           thumbnail?: {
                                               __typename?: 'UploadFileEntityResponse'
                                               data?: {
@@ -7875,6 +8003,14 @@ export type MenuPagesQuery = {
                               id: string
                               subtitle?: string | null
                               title?: string | null
+                              story?: {
+                                  __typename?: 'StoryEntityResponse'
+                                  data?: {
+                                      __typename?: 'StoryEntity'
+                                      id?: string | null
+                                      attributes?: { __typename?: 'Story'; slug?: string | null } | null
+                                  } | null
+                              } | null
                               thumbnail?: {
                                   __typename?: 'UploadFileEntityResponse'
                                   data?: {
@@ -8218,6 +8354,14 @@ export type StoriesQuery = {
                               id: string
                               subtitle?: string | null
                               title?: string | null
+                              story?: {
+                                  __typename?: 'StoryEntityResponse'
+                                  data?: {
+                                      __typename?: 'StoryEntity'
+                                      id?: string | null
+                                      attributes?: { __typename?: 'Story'; slug?: string | null } | null
+                                  } | null
+                              } | null
                               thumbnail?: {
                                   __typename?: 'UploadFileEntityResponse'
                                   data?: {
@@ -8638,6 +8782,14 @@ export type StoryQuery = {
                               id: string
                               subtitle?: string | null
                               title?: string | null
+                              story?: {
+                                  __typename?: 'StoryEntityResponse'
+                                  data?: {
+                                      __typename?: 'StoryEntity'
+                                      id?: string | null
+                                      attributes?: { __typename?: 'Story'; slug?: string | null } | null
+                                  } | null
+                              } | null
                               thumbnail?: {
                                   __typename?: 'UploadFileEntityResponse'
                                   data?: {
@@ -9102,6 +9254,14 @@ export type StoryFragmentFragment = {
                       id: string
                       subtitle?: string | null
                       title?: string | null
+                      story?: {
+                          __typename?: 'StoryEntityResponse'
+                          data?: {
+                              __typename?: 'StoryEntity'
+                              id?: string | null
+                              attributes?: { __typename?: 'Story'; slug?: string | null } | null
+                          } | null
+                      } | null
                       thumbnail?: {
                           __typename?: 'UploadFileEntityResponse'
                           data?: {
@@ -9539,6 +9699,14 @@ export type ComponentCoreGridFeaturedFieldsFragmentFragment = {
     id: string
     subtitle?: string | null
     title?: string | null
+    story?: {
+        __typename?: 'StoryEntityResponse'
+        data?: {
+            __typename?: 'StoryEntity'
+            id?: string | null
+            attributes?: { __typename?: 'Story'; slug?: string | null } | null
+        } | null
+    } | null
     thumbnail?: {
         __typename?: 'UploadFileEntityResponse'
         data?: {
@@ -9932,6 +10100,14 @@ export type ComponentModulesGridModuleFragmentFragment = {
         id: string
         subtitle?: string | null
         title?: string | null
+        story?: {
+            __typename?: 'StoryEntityResponse'
+            data?: {
+                __typename?: 'StoryEntity'
+                id?: string | null
+                attributes?: { __typename?: 'Story'; slug?: string | null } | null
+            } | null
+        } | null
         thumbnail?: {
             __typename?: 'UploadFileEntityResponse'
             data?: {
@@ -10389,6 +10565,14 @@ export type TriplyRecordQuery = {
                                           id: string
                                           subtitle?: string | null
                                           title?: string | null
+                                          story?: {
+                                              __typename?: 'StoryEntityResponse'
+                                              data?: {
+                                                  __typename?: 'StoryEntity'
+                                                  id?: string | null
+                                                  attributes?: { __typename?: 'Story'; slug?: string | null } | null
+                                              } | null
+                                          } | null
                                           thumbnail?: {
                                               __typename?: 'UploadFileEntityResponse'
                                               data?: {
@@ -10822,6 +11006,14 @@ export type TriplyRecordsQuery = {
                                           id: string
                                           subtitle?: string | null
                                           title?: string | null
+                                          story?: {
+                                              __typename?: 'StoryEntityResponse'
+                                              data?: {
+                                                  __typename?: 'StoryEntity'
+                                                  id?: string | null
+                                                  attributes?: { __typename?: 'Story'; slug?: string | null } | null
+                                              } | null
+                                          } | null
                                           thumbnail?: {
                                               __typename?: 'UploadFileEntityResponse'
                                               data?: {
@@ -11248,6 +11440,14 @@ export type TriplyRecordFragmentFragment = {
                                   id: string
                                   subtitle?: string | null
                                   title?: string | null
+                                  story?: {
+                                      __typename?: 'StoryEntityResponse'
+                                      data?: {
+                                          __typename?: 'StoryEntity'
+                                          id?: string | null
+                                          attributes?: { __typename?: 'Story'; slug?: string | null } | null
+                                      } | null
+                                  } | null
                                   thumbnail?: {
                                       __typename?: 'UploadFileEntityResponse'
                                       data?: {
@@ -11847,6 +12047,14 @@ export const ComponentCoreGridFeaturedFieldsFragmentFragmentDoc = gql`
         id
         subtitle
         title
+        story {
+            data {
+                id
+                attributes {
+                    slug
+                }
+            }
+        }
         thumbnail {
             ...UploadFileEntityResponseFragment
         }

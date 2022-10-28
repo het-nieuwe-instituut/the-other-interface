@@ -27,7 +27,7 @@ export const GridModule: React.FC<Props> = props => {
     const pageSize = props.component.pageSize || 6
     const [showAmount, setShowAmount] = useState(pageSize)
     const allFieldsAreShown = showAmount >= (props.component.fields?.length || 0)
-
+    console.log(props.component.fields)
     return (
         <Box
             width="100%"
@@ -88,6 +88,7 @@ export const GridModule: React.FC<Props> = props => {
     }
 
     function renderFields() {
+        console.log(props.component.fields)
         if (!props.component.fields) {
             return
         }
@@ -125,10 +126,7 @@ export const GridModule: React.FC<Props> = props => {
         const thumbnailAlt = field.thumbnail?.data?.attributes?.alternativeText || field.title || 'image'
 
         return (
-            <NextLink
-                key={keyExtractor(field.id, index, array)}
-                href={`/story/${field.story?.data?.attributes?.slug}}`}
-            >
+            <NextLink key={keyExtractor(field.id, index, array)} href={`/story/${field.story?.data?.attributes?.slug}`}>
                 <GridItem w={'100%'} mb={10} cursor={'pointer'}>
                     <Image mb={5} w={'100%'} src={thumbnailUrl} alt={thumbnailAlt} />
                     {renderFieldTitles({

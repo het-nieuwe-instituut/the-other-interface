@@ -80,6 +80,14 @@ fragment ComponentCoreGridFeaturedFieldsFragment on ComponentCoreGridFeaturedFie
     id
     subtitle
     title
+    story {
+        data {
+            id
+            attributes {
+                slug
+            }
+        }
+    }
     thumbnail {
         ...UploadFileEntityResponseFragment
     }
