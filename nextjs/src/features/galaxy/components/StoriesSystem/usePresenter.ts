@@ -75,6 +75,8 @@ export function usePresenter(stories: InstancesPerClass[]) {
         dataPoints,
         items: data?.zoomLevel1 ?? [],
         loading,
+        showTooltip,
+        hideTooltip,
     }
 }
 
@@ -178,4 +180,69 @@ function drawPathByParent(svgRef: null, dataPoints: InstancesPerClassWithPoint[]
         .on('mouseout', () => {
             d3Svg.selectAll('path').remove()
         })
+}
+
+function showTooltip(item: DataPoint) {
+    const g = document.getElementById(item.id)
+
+    if (!g) {
+        return
+    }
+
+    const { top, left } = g.getBoundingClientRect()
+
+    const tooltipContainerStyle = `
+        height: 100%;
+        width: 100%;
+        max-width: 325px;
+        max-height: 325px;
+        display: block;
+        position: absolute;
+        top: ${top + 20}px;
+        left: ${left + 20}px;
+        z-index: 100;
+    `
+
+    const tooltipStyle = `
+        width: fit-content;
+        max-height: 100%;
+        background-color: rgba(255, 255, 255, 0.85);
+        padding: 15px;
+        border-radius: 5px;
+    `
+
+    const textStyle = `
+        font-family: 'Univers';
+        font-style: normal;
+        font-weight: 900;
+        font-size: 16px;
+        line-height: 118%;
+        color: #001223;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        line-clamp: 4;
+        -webkit-box-orient: vertical;
+    `
+
+    const tooltipDiv = document.createElement('div')
+
+    tooltipDiv.setAttribute('id', `${item.id}-tooltip`)
+    tooltipDiv.setAttribute('style', tooltipContainerStyle)
+
+    tooltipDiv.innerHTML += `<div style="${tooltipStyle}"><p style="${textStyle}">${item.title}</p></div>`
+
+    document.body.insertBefore(tooltipDiv, null)
+
+    return
+}
+
+function hideTooltip(item: DataPoint) {
+    let g = document.getElementById(`${item.id}-tooltip`)
+
+    while (g) {
+        g.remove()
+        g = document.getElementById(`${item.id}-tooltip`)
+    }
 }
