@@ -150,7 +150,14 @@ export const PaginatedCollection: React.FunctionComponent<
                     y={dimensions.height / 2 - 500 / 2}
                     overflow={'visible'}
                 >
-                    <Grid templateColumns="repeat(6, 1fr)" gap={4} width={'100%'} height={'800px'}>
+                    <Grid
+                        templateColumns="repeat(6, 1fr)"
+                        autoColumns={'100%'}
+                        autoRows={'150px'}
+                        gap={4}
+                        width={'100%'}
+                        height={'800px'}
+                    >
                         {(items || []).map((item, index) => {
                             if (index === 14) {
                                 return (
