@@ -614,10 +614,9 @@ export type ArchivesOtherZoomLevel5DetailType = {
 };
 
 export type ArchivesZoomLevel4FiltersArgs = {
-  DescriptionLevel?: InputMaybe<Scalars['String']>;
-  EndDate?: InputMaybe<Scalars['String']>;
-  RelatedName?: InputMaybe<Scalars['String']>;
-  StartDate?: InputMaybe<Scalars['String']>;
+  date?: InputMaybe<Scalars['String']>;
+  descriptionLevel?: InputMaybe<Scalars['String']>;
+  relatedName?: InputMaybe<Scalars['String']>;
 };
 
 export enum ArchivesZoomLevel5Types {
@@ -1265,14 +1264,13 @@ export type MenupageRelationResponseCollection = {
 };
 
 export type ObjectsZoomLevel4FiltersArgs = {
-  EndDate?: InputMaybe<Scalars['String']>;
   Maker?: InputMaybe<Scalars['String']>;
   Material?: InputMaybe<Scalars['String']>;
   Objectname?: InputMaybe<Scalars['String']>;
   PerInst?: InputMaybe<Scalars['String']>;
-  StartDate?: InputMaybe<Scalars['String']>;
   Subject?: InputMaybe<Scalars['String']>;
   Technique?: InputMaybe<Scalars['String']>;
+  date?: InputMaybe<Scalars['String']>;
 };
 
 export type ObjectsZoomLevel5DetailType = {

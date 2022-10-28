@@ -588,7 +588,7 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "DescriptionLevel",
+            "name": "date",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -600,7 +600,7 @@
             "deprecationReason": null
           },
           {
-            "name": "EndDate",
+            "name": "descriptionLevel",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -612,19 +612,7 @@
             "deprecationReason": null
           },
           {
-            "name": "RelatedName",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "StartDate",
+            "name": "relatedName",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -6723,18 +6711,6 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "EndDate",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "Maker",
             "description": null,
             "type": {
@@ -6783,18 +6759,6 @@
             "deprecationReason": null
           },
           {
-            "name": "StartDate",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "Subject",
             "description": null,
             "type": {
@@ -6808,6 +6772,18 @@
           },
           {
             "name": "Technique",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "date",
             "description": null,
             "type": {
               "kind": "SCALAR",

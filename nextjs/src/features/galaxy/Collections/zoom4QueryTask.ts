@@ -1,6 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useRouter } from 'next/router'
 import {
+    ArchivesZoomLevel4FiltersArgs,
+    ObjectsZoomLevel4FiltersArgs,
+    PeopleZoomLevel4FiltersArgs,
+    PublicationsZoomLevel4FiltersArgs,
     useZoom4ArchivesQuery,
     useZoom4ObjectsQuery,
     useZoom4PeopleQuery,
@@ -24,60 +28,57 @@ const variableType = {
     [SupportedLandingPages.Stories]: '',
 }
 
-function ValueToDateFilters(value: string) {
-    if (value.includes('tot')) {
-        const splitted = value.split('tot').map(v => v.replace(' ', ''))
-
-        return {
-            EndDate: splitted[0],
+interface Filters {
+    [SupportedLandingPages.Archives]: {
+        [key: string]: {
+            accessor: (value: string) => ArchivesZoomLevel4FiltersArgs
         }
     }
-
-    if (value.includes('na')) {
-        const splitted = value.split('na').map(v => v.replace(' ', ''))
-
-        return {
-            StartDate: splitted[0],
+    [SupportedLandingPages.Objects]: {
+        [key: string]: {
+            accessor: (value: string) => ObjectsZoomLevel4FiltersArgs
         }
     }
-
-    if (value.includes(' - ')) {
-        const splitted = value.split(' - ')
-
-        return {
-            StartDate: splitted[0],
-            EndDate: splitted[1],
+    [SupportedLandingPages.People]: {
+        [key: string]: {
+            accessor: (value: string) => PeopleZoomLevel4FiltersArgs
         }
     }
-
-    return {}
+    [SupportedLandingPages.Publications]: {
+        [key: string]: {
+            accessor: (value: string) => PublicationsZoomLevel4FiltersArgs
+        }
+    }
+    [SupportedLandingPages.Stories]: {
+        [key: string]: {
+            accessor: (value: string) => Record<string, unknown>
+        }
+    }
 }
 
-const variableFilters: {
-    [key1: string]: {
-        [key: string]: {
-            accessor: (value: string) => { [key: string]: string | undefined }
-        }
-    }
-} = {
+const variableFilters: Filters = {
     [SupportedLandingPages.Archives]: {
         descriptionLevel: {
             accessor: value => ({
-                DescriptionLevel: value,
+                descriptionLevel: value,
             }),
         },
         relatedNames: {
             accessor: value => ({
-                RelatedName: value,
+                relatedName: value,
             }),
         },
         date: {
-            accessor: ValueToDateFilters,
+            accessor: value => ({
+                date: value,
+            }),
         },
     },
     [SupportedLandingPages.Objects]: {
         date: {
-            accessor: ValueToDateFilters,
+            accessor: value => ({
+                date: value,
+            }),
         },
         creator: {
             accessor: value => ({
@@ -101,7 +102,7 @@ const variableFilters: {
         },
         startDate: {
             accessor: value => ({
-                StartDate: value,
+                date: value,
             }),
         },
         subject: {
@@ -179,6 +180,7 @@ const variableFilters: {
             }),
         },
     },
+    [SupportedLandingPages.Stories]: {},
 }
 
 export function useZoom4QueryTask(type: SupportedLandingPages) {
