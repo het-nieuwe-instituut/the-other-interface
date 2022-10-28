@@ -1,5 +1,6 @@
 import Breadcrumbs from '@/features/galaxy/components/Breadcrumbs/Breadcrumbs'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
+import { Loader } from '@/features/shared/components/Loading/Loading'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import useScroll from '@/features/shared/hooks/useScroll'
@@ -33,7 +34,7 @@ export const LandingCollectionContainer: React.FC = () => {
     const { t } = useTypeSafeTranslation('common')
 
     if (loading) {
-        return <p>loading</p>
+        return <Loader />
     }
 
     if (error) {
