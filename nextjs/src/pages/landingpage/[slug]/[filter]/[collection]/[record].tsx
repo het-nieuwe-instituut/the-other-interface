@@ -2,15 +2,15 @@ import { addApolloState, getApolloClient } from '@/features/graphql/config/apoll
 import { RecordContainer } from '@/features/pages/containers/RecordContainer/RecordContainer'
 import { getZoom5RecordTask } from '@/features/pages/tasks/getZoom5RecordTask'
 import { preparePageConfiguration } from '@/features/shared/utils/pageConfiguration'
-import { GetServerSidePropsContext } from 'next'
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import { LandingPageFilterCollectionQueryParams } from '../[collection]'
 
 export interface RecordQueryParams extends LandingPageFilterCollectionQueryParams {
     record: string
 }
 
-const Page = () => {
-    return <RecordContainer />
+const Page = (pageProps: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+    return <RecordContainer key={pageProps.key} />
 }
 
 export default Page
@@ -32,6 +32,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     return addApolloState(apolloState, {
         props: {
             record,
+            key: record,
         },
     })
 }

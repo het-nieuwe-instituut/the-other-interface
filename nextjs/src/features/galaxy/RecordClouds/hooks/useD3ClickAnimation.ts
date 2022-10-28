@@ -6,11 +6,13 @@ import { Dimensions } from '../../types/galaxy'
 import { ParentRelation } from './usePositionClouds'
 
 export function useD3HeroAnimateElement<DType>(
+    disabled: boolean,
     svgRef: MutableRefObject<SVGSVGElement | null>,
     relations: ParentRelation[],
     dimensions: Dimensions,
     selector: string,
-    onComplete?: (d: d3.SimulationNodeDatum & DType) => void
+    onComplete?: (d: d3.SimulationNodeDatum & DType) => void,
+    onStart?: () => void
 ) {
     const storiesSystemRef = useRef<SVGForeignObjectElement | null>(null)
     const [zoomed, setZoomed] = useState<boolean>(false)
@@ -25,31 +27,38 @@ export function useD3HeroAnimateElement<DType>(
             dimensions: Dimensions
         ) => {
             event.stopPropagation()
+            if (disabled) {
+                return
+            }
             setZoomed(true)
+            onStart?.()
             const width = dimensions.width ?? 0
             const height = dimensions.height ?? 0
             const middleWidth = width / 2 - d.diameter / 2
             const middleHeight = height / 2 - d.diameter / 2
 
-            // d3Svg.attr(`opacity`, `1`)
             const item = d3.select(event.currentTarget)
             event.currentTarget.setAttribute('id', 'foreign-hero')
 
-            // console.log(scaleBase)
             const scale = 500 / d.diameter
 
-            item.transition().duration(1500).attr(`x`, middleWidth).attr(`y`, middleHeight)
             item.style('transform-origin', 'center')
+
+            const itemChildren = item.select('[data-child="true"]')
+            itemChildren.style('opacity', 1)
+            itemChildren.transition().duration(600).style('opacity', 0)
+
             await item
                 .transition()
                 .duration(1500)
                 .attr(`x`, middleWidth)
                 .attr(`y`, middleHeight)
                 .attr('transform', `scale(${scale})`)
+                .end()
 
             onComplete?.(d)
         },
-        [onComplete]
+        [onComplete, onStart]
     )
 
     useEffect(() => {

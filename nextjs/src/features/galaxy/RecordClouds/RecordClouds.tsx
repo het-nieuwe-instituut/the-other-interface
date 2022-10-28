@@ -1,29 +1,47 @@
 import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { Box, Text } from '@chakra-ui/react'
+import { Box, keyframes, Text } from '@chakra-ui/react'
 import { Circle } from '../components/Circle'
 
-import { EntityNames, ObjectRelationsQuery } from 'src/generated/graphql'
+import { SupportedQuerys, ZoomLevel5DetailResponses } from '@/features/pages/tasks/getZoom5RecordTask'
+import React from 'react'
+import { EntityNames, StoryBySlugQuery } from 'src/generated/graphql'
 import { RecordCloudHighlight } from './components/RecordHighlight'
-import { usePresenter } from './usePresenter'
 import { ParentRelation } from './hooks/usePositionClouds'
-import { ZoomLevel5DetailResponses } from '@/features/pages/tasks/getZoom5RecordTask'
+import { usePresenter } from './usePresenter'
+import { RecordQueryParams } from 'src/pages/landingpage/[slug]/[filter]/[collection]/[record]'
+import { useRouter } from 'next/router'
 
 type Props = {
     dimensions: {
         height: number
         width: number
     }
-    zoomLevel5: ZoomLevel5DetailResponses
-    relations: ObjectRelationsQuery['relations']
+    zoomLevel5: ZoomLevel5Entities
+    relations: ZoomLevel5DetailResponses['zoom5relations']
 }
 
+export type ZoomLevel5Entities =
+    | ZoomLevel5DetailResponses['zoom5detail']
+    | NonNullable<NonNullable<StoryBySlugQuery['stories']>['data']>[0]
+
 export const SVG_DIMENSIONS = { width: 1280, height: 800 }
+const opacityIn = keyframes`
+    from {opacity: 0.3 }
+    to {opacity: 1}
+`
+
+const opacityOut = keyframes`
+    to {opacity: 0.3}
+`
 
 const RecordClouds: React.FunctionComponent<Props> = ({ dimensions, zoomLevel5, relations }) => {
+    const router = useRouter()
+    const queryParams = router.query as unknown as RecordQueryParams
+
     const { width, height } = dimensions
     const svgWidth = width
     const svgHeight = height
-    const { svgRef, relationsPositionData } = usePresenter(relations)
+    const { svgRef, relationsPositionData, zoomed } = usePresenter(relations)
     const { t } = useLooseTypeSafeTranslation('record')
 
     return (
@@ -38,9 +56,8 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions, zoomLevel5, 
                 {renderHighLight()}
                 {relationsPositionData.map((relation, index, array) => {
                     return (
-                        <>
+                        <React.Fragment key={`${index}-${array.length}-${relation.label}`}>
                             <Circle
-                                key={`${index}-${array.length}-${relation.label}`}
                                 className="parent"
                                 hoverBackground={relation.background}
                                 defaultBackground={relation.background}
@@ -61,14 +78,18 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions, zoomLevel5, 
                                     <Circle
                                         key={`${index}-${array.length}-${child.label}`}
                                         className="child"
-                                        hoverBackground={`typeColors.${relation.type.toLowerCase()}.related`}
-                                        defaultBackground={`typeColors.${relation.type.toLowerCase()}.related`}
+                                        hoverBackground={`typeColors.${relation.type.toLowerCase()}.hover1`}
+                                        defaultBackground={`typeColors.${relation.type.toLowerCase()}.hover1`}
                                         x={child.x}
                                         y={child.y}
                                         height={192}
                                         width={192}
+                                        backgroundAnimation={
+                                            zoomed ? `${opacityIn} 1500ms linear` : `${opacityOut} 0ms linear`
+                                        }
+                                        disableHover={true}
                                     >
-                                        <Box width={'75%'} zIndex={1}>
+                                        <Box width={'75%'} zIndex={1} data-child>
                                             <Text textStyle={'cloudText'} textAlign={'center'} flexWrap={'wrap'}>
                                                 {child.label}
                                             </Text>
@@ -76,7 +97,7 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions, zoomLevel5, 
                                     </Circle>
                                 )
                             })}
-                        </>
+                        </React.Fragment>
                     )
                 })}
             </svg>
@@ -85,8 +106,12 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions, zoomLevel5, 
 
     function renderHighLight() {
         if (zoomLevel5?.__typename === 'ObjectsZoomLevel5DetailType') {
+            const record = queryParams.record
+            const type = record.split('-')[1] as SupportedQuerys
+
             return (
                 <RecordCloudHighlight
+                    type={type}
                     title={zoomLevel5.title ?? undefined}
                     image={{
                         url: zoomLevel5.image ?? undefined,
@@ -100,8 +125,11 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions, zoomLevel5, 
             )
         }
         if (zoomLevel5?.__typename === 'PoepleZoomLevel5DetailType') {
+            const record = queryParams.record
+            const type = record.split('-')[1] as SupportedQuerys
             return (
                 <RecordCloudHighlight
+                    type={type}
                     title={zoomLevel5.name ?? undefined}
                     queryType={zoomLevel5?.__typename}
                     dimensions={SVG_DIMENSIONS}
@@ -109,8 +137,11 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions, zoomLevel5, 
             )
         }
         if (zoomLevel5?.__typename === 'PublicationsBookZoomLevel5DetailType') {
+            const record = queryParams.record
+            const type = record.split('-')[1] as SupportedQuerys
             return (
                 <RecordCloudHighlight
+                    type={type}
                     title={zoomLevel5.title ?? undefined}
                     queryType={zoomLevel5?.__typename}
                     dimensions={SVG_DIMENSIONS}
@@ -118,8 +149,11 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions, zoomLevel5, 
             )
         }
         if (zoomLevel5?.__typename === 'PublicationsArticleZoomLevel5DetailType') {
+            const record = queryParams.record
+            const type = record.split('-')[1] as SupportedQuerys
             return (
                 <RecordCloudHighlight
+                    type={type}
                     title={zoomLevel5.title ?? undefined}
                     queryType={zoomLevel5?.__typename}
                     dimensions={SVG_DIMENSIONS}
@@ -128,8 +162,11 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions, zoomLevel5, 
         }
 
         if (zoomLevel5?.__typename === 'PublicationsAudioVisualZoomLevel5DetailType') {
+            const record = queryParams.record
+            const type = record.split('-')[1] as SupportedQuerys
             return (
                 <RecordCloudHighlight
+                    type={type}
                     title={zoomLevel5.title ?? undefined}
                     queryType={zoomLevel5?.__typename}
                     dimensions={SVG_DIMENSIONS}
@@ -138,8 +175,11 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions, zoomLevel5, 
         }
 
         if (zoomLevel5?.__typename === 'PublicationsSerialZoomLevel5DetailType') {
+            const record = queryParams.record
+            const type = record.split('-')[1] as SupportedQuerys
             return (
                 <RecordCloudHighlight
+                    type={type}
                     title={zoomLevel5.title ?? undefined}
                     queryType={zoomLevel5?.__typename}
                     dimensions={SVG_DIMENSIONS}
@@ -148,8 +188,11 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions, zoomLevel5, 
         }
 
         if (zoomLevel5?.__typename === 'ArchivesFondsZoomLevel5DetailType') {
+            const record = queryParams.record
+            const type = record.split('-')[1] as SupportedQuerys
             return (
                 <RecordCloudHighlight
+                    type={type}
                     title={zoomLevel5.recordTitle ?? undefined}
                     queryType={zoomLevel5?.__typename}
                     dimensions={SVG_DIMENSIONS}
@@ -158,9 +201,23 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions, zoomLevel5, 
         }
 
         if (zoomLevel5?.__typename === 'ArchivesOtherZoomLevel5DetailType') {
+            const record = queryParams.record
+            const type = record.split('-')[1] as SupportedQuerys
             return (
                 <RecordCloudHighlight
+                    type={type}
                     title={zoomLevel5.title ?? undefined}
+                    queryType={zoomLevel5?.__typename}
+                    dimensions={SVG_DIMENSIONS}
+                />
+            )
+        }
+
+        if (zoomLevel5?.__typename === 'StoryEntity') {
+            return (
+                <RecordCloudHighlight
+                    type={SupportedQuerys.stories}
+                    title={zoomLevel5.attributes?.title ?? undefined}
                     queryType={zoomLevel5?.__typename}
                     dimensions={SVG_DIMENSIONS}
                 />
