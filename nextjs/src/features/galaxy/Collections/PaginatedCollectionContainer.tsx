@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { Loader } from '@/features/shared/components/Loading/Loading'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { randomNumberBetweenPoints } from '@/features/shared/utils/numbers'
 import PaginationLeft from '@/icons/arrows/pagination-left.svg'
@@ -17,7 +18,9 @@ import {
     Zoom4PublicationsQuery,
     ZoomLevel4ParentType,
 } from 'src/generated/graphql'
+import { LandingPageFilterCollectionQueryParams } from 'src/pages/landingpage/[slug]/[filter]/[collection]'
 import { SupportedLandingPages } from '../FilterClouds/FilterCloudsContainer'
+import { getGalaxyTypeByTranslationsKey } from '../utils/translations'
 import { usePresenter } from './usePresenter'
 
 const useZoom4Query = {
@@ -100,7 +103,7 @@ export const PaginatedCollectionContainer: React.FunctionComponent<PaginatsedPro
     })
 
     if (loading) {
-        return <Text>Loading</Text>
+        return <Loader />
     }
 
     if (error) {
@@ -117,7 +120,8 @@ export const PaginatedCollection: React.FunctionComponent<
 > = props => {
     const { zoom4, dimensions } = props
     const router = useRouter()
-    const { t } = useTypeSafeTranslation('landingpage')
+    const queryParams = router.query as unknown as LandingPageFilterCollectionQueryParams
+    const { t: tCommon } = useTypeSafeTranslation('common')
     const { width, height } = dimensions
     const svgWidth = width
     const svgHeight = height
@@ -141,7 +145,6 @@ export const PaginatedCollection: React.FunctionComponent<
     )
 
     const total = Math.ceil((zoom4?.zoomLevel4.total ?? 0) / 28)
-    console.log(currentPage)
 
     return (
         <Box overflow="hidden" height={svgHeight} width={svgWidth}>
@@ -174,10 +177,11 @@ export const PaginatedCollection: React.FunctionComponent<
                         >
                             <Flex flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
                                 <Text textStyle={'cloudText'}>
-                                    {zoom4?.zoomLevel4.total} {t(router.query.slug as any)}
+                                    {zoom4?.zoomLevel4.total}{' '}
+                                    {tCommon(getGalaxyTypeByTranslationsKey(queryParams.slug))}
                                 </Text>
                                 <Text textStyle={'cloudText'} mb={4}>
-                                    {`by ${router.query.collection as string}`}
+                                    {router.query.collection}
                                 </Text>
                                 <Flex alignItems={'center'} gap={1}>
                                     {parseInt(currentPage as string) !== 1 ? (
@@ -219,6 +223,7 @@ export const PaginatedCollection: React.FunctionComponent<
                                             height={90}
                                             overflow={'visible'}
                                             className={`foreign-${id}`}
+                                            opacity={0}
                                         >
                                             {item.title && (
                                                 <Flex

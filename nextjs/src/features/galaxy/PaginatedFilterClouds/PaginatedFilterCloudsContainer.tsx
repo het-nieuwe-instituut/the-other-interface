@@ -1,4 +1,4 @@
-import { Text } from '@chakra-ui/react'
+import { Loader } from '@/features/shared/components/Loading/Loading'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import {
@@ -61,7 +61,7 @@ const PaginatedFilterCloudsContainer: React.FunctionComponent<Props> = props => 
     })
 
     if (loading) {
-        return <Text>Loading</Text>
+        return <Loader />
     }
 
     if (error) {

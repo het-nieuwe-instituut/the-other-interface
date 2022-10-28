@@ -1,4 +1,5 @@
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
+import { Loader } from '@/features/shared/components/Loading/Loading'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import { Box, useTheme } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
@@ -15,7 +16,7 @@ const DynamicRecordCloudsNoSsr = dynamic(() => import('../../../galaxy/RecordClo
 export const RecordContainer: React.FC = () => {
     const { data, loading, error } = useGetZoom5RecordTask()
     if (loading) {
-        return <p>loading</p>
+        return <Loader />
     }
 
     if (error) {

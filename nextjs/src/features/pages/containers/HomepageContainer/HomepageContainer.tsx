@@ -1,5 +1,6 @@
 import Breadcrumbs from '@/features/galaxy/components/Breadcrumbs/Breadcrumbs'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
+import { Loader } from '@/features/shared/components/Loading/Loading'
 import useScroll from '@/features/shared/hooks/useScroll'
 import { Box, useTheme } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
@@ -17,7 +18,7 @@ export const HomepageContainer = () => {
     const { locale } = useRouter()
     const { data, loading, error } = useHomepageQuery({ variables: { locale } })
     if (loading) {
-        return <p>loading</p>
+        return <Loader />
     }
 
     if (error) {

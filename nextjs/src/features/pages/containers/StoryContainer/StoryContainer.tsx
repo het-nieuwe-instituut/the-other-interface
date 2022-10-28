@@ -1,4 +1,5 @@
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
+import { Loader } from '@/features/shared/components/Loading/Loading'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Box, Grid, GridItem, useTheme } from '@chakra-ui/react'
@@ -20,7 +21,7 @@ export const StoryContainer: React.FC = () => {
     const { data, loading, error } = useGetZoom5StoryTask()
 
     if (loading) {
-        return <p>loading</p>
+        return <Loader />
     }
 
     if (error) {

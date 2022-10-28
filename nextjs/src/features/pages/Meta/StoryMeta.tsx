@@ -61,31 +61,32 @@ export const StoryMeta: React.FC<Props> = ({ story }) => {
                 </Box>
             )}
 
-            {
-                !!story.attributes?.triplyRecords?.data?.length && (
-                    <Box marginBottom={'md'}>
-                        <Text textStyle={'h5'} mb={1}>
-                            {capitalizeFirstLetter(storiesT.t('people'))}
-                        </Text>
+            {!!story.attributes?.triplyRecords?.data?.length && (
+                <Box marginBottom={'md'}>
+                    <Text textStyle={'h5'} mb={1}>
+                        {capitalizeFirstLetter(storiesT.t('people'))}
+                    </Text>
 
-                        <Box display={'flex'} flexDirection={'row'}>
-                            {story.attributes?.triplyRecords?.data.map((item, index, array) => {
-                                const hasItemAfter = array.length - 1 !== index
-                                return (
-                                    <Text textStyle={'micro'} key={keyExtractor(item, index, array)} mr={1}>
-                                        <NextLink href={`/people/${prepareTextToUrl(item.attributes?.people?.name)}}`} passHref>
-                                            <Link>
-                                                {item.attributes?.people?.name}
-                                                {hasItemAfter && ','}
-                                            </Link>
-                                        </NextLink>
-                                    </Text>
-                                )
-                            })}
-                        </Box>
+                    <Box display={'flex'} flexDirection={'row'}>
+                        {story.attributes?.triplyRecords?.data.map((item, index, array) => {
+                            const hasItemAfter = array.length - 1 !== index
+                            return (
+                                <Text textStyle={'micro'} key={keyExtractor(item, index, array)} mr={1}>
+                                    <NextLink
+                                        href={`/people/${prepareTextToUrl(item.attributes?.people?.name)}`}
+                                        passHref
+                                    >
+                                        <Link>
+                                            {item.attributes?.people?.name}
+                                            {hasItemAfter && ','}
+                                        </Link>
+                                    </NextLink>
+                                </Text>
+                            )
+                        })}
                     </Box>
-                )
-            }
+                </Box>
+            )}
 
             {!!story.attributes?.locations?.data.length && (
                 <Box marginBottom={'md'}>
@@ -98,7 +99,7 @@ export const StoryMeta: React.FC<Props> = ({ story }) => {
                             const hasItemAfter = array.length - 1 !== index
                             return (
                                 <Text textStyle={'micro'} key={keyExtractor(item, index, array)} mr={1}>
-                                    <NextLink href={`/locations/${item.attributes?.city}}`} passHref>
+                                    <NextLink href={`/locations/${item.attributes?.city}`} passHref>
                                         <Link>
                                             {item.attributes?.city}
                                             {hasItemAfter && ','}

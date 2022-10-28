@@ -34,18 +34,23 @@ function useListenToSimulationTicks(
 ) {
     const nodesListener = useRef<d3.Simulation<D3CollectionItem, undefined> | undefined | null>(null)
 
-    // set default styles
     useEffect(() => {
-        if (!data) return
         const d3Svg = d3.select(svgRef.current)
         const nodeForeign = d3Svg.selectAll(`.foreign-${selector}`).data(data)
-        nodeForeign.attr('opacity', 0).attr('width', 0).attr('height', 0)
-    }, [data, selector, svgRef])
+        nodeForeign.attr('opacity', 0).style('transform', 'scale(0)')
+        nodeForeign.style('transform-origin', 'center')
+        nodeForeign.transition().duration(600).style('transform', 'scale(1)').attr('opacity', 1)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     useEffect(() => {
         if (!data) return
         const d3Svg = d3.select(svgRef.current)
         const nodeForeign = d3Svg.selectAll(`.foreign-${selector}`).data(data)
+
+        nodeForeign
+            .attr('width', (d: D3CollectionItem) => getTakeSpaceFromDataDimensions(dataDimensions, d) * 2)
+            .attr('height', (d: D3CollectionItem) => getTakeSpaceFromDataDimensions(dataDimensions, d) * 2)
 
         simulation.current
             ?.force('charge', d3.forceManyBody().strength(0.1))
@@ -100,13 +105,6 @@ function ticked(
     nodeForeign
         .attr('x', (d: D3CollectionItem) => (d.x ?? 0) + -getTakeSpaceFromDataDimensions(dataDimensions, d))
         .attr('y', (d: D3CollectionItem) => (d.y ?? 0) + -getTakeSpaceFromDataDimensions(dataDimensions, d))
-
-    nodeForeign
-        .transition()
-        .duration(90)
-        .attr('width', (d: D3CollectionItem) => getTakeSpaceFromDataDimensions(dataDimensions, d) * 2)
-        .attr('height', (d: D3CollectionItem) => getTakeSpaceFromDataDimensions(dataDimensions, d) * 2)
-        .attr('opacity', 1)
 
     if (simulation) {
         simulation.current
