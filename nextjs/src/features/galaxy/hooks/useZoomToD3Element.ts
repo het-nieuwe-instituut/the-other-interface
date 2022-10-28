@@ -8,7 +8,8 @@ export function useZoomToD3Element<DType>(
     svgRef: MutableRefObject<SVGSVGElement | null>,
     dimensions: Dimensions,
     selector: string,
-    onComplete?: (d: d3.SimulationNodeDatum & DType) => void
+    onComplete?: (d: d3.SimulationNodeDatum & DType) => void,
+    data?: any[]
 ) {
     const storiesSystemRef = useRef<SVGForeignObjectElement | null>(null)
     const [zoomed, setZoomed] = useState<boolean>(false)
@@ -22,6 +23,7 @@ export function useZoomToD3Element<DType>(
             d3Svg: d3.Selection<SVGSVGElement | null, unknown, null, undefined>,
             dimensions: Dimensions
         ) => {
+            console.log(d)
             event.stopPropagation()
             setZoomed(true)
             const width = dimensions.width ?? 0
@@ -47,10 +49,12 @@ export function useZoomToD3Element<DType>(
     useEffect(() => {
         const d3Svg = d3.select(svgRef.current)
         const nodeForeign = d3Svg.selectAll(selector)
-        clickListener.current = nodeForeign.on('click', (e, d) => {
-            return clicked(e, d as d3.SimulationNodeDatum & DType, d3Svg, dimensions)
-        })
-    }, [clicked, dimensions, selector, svgRef])
+        clickListener.current = nodeForeign
+            .on('click', (e, d) => {
+                return clicked(e, d as d3.SimulationNodeDatum & DType, d3Svg, dimensions)
+            })
+            .data(data ? data : [])
+    }, [clicked, data, dimensions, selector, svgRef])
 
     return {
         setZoomed,
