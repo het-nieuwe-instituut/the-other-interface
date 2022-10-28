@@ -40,6 +40,7 @@ export enum SupportedQuerys {
     archives = 'archives',
     publications = 'publications',
     objects = 'objects',
+    stories = 'stories',
 }
 
 const config = {
@@ -179,6 +180,10 @@ export async function getZoom5RecordTask(
     const record = queryParams.record
     const type = record.split('-')[1] as SupportedQuerys
     const id: string = record.split('-')[0]
+
+    if (type === SupportedQuerys.stories) {
+        return
+    }
     const configByType = config[type]
 
     const [detailQuery, landingPage, relations] = await Promise.all([

@@ -3,6 +3,7 @@
     "people": "People",
     "archives": "Archives",
     "objects": "Objects",
+    "stories": "Stories",
     "relatedPeople": "Showing {{count}} of {{total}} related people",
     "relatedObjects": "Showing {{count}} of {{total}} related objects",
     "relatedPublications": "Showing {{count}} of {{total}} related publications",
