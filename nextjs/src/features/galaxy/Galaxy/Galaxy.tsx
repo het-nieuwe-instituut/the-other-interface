@@ -80,7 +80,6 @@ const Galaxy: React.FC<Props> = ({ dimensions }) => {
 
                         <g className="circles">
                             {objectsPerTypeWithIds?.map((item, index, array) => {
-                                console.log(item)
                                 return (
                                     <Circle
                                         defaultBackground="levels.z0.galaxyCloud"
