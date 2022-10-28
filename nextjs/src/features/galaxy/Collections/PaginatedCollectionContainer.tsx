@@ -17,7 +17,9 @@ import {
     Zoom4PublicationsQuery,
     ZoomLevel4ParentType,
 } from 'src/generated/graphql'
+import { LandingPageFilterCollectionQueryParams } from 'src/pages/landingpage/[slug]/[filter]/[collection]'
 import { SupportedLandingPages } from '../FilterClouds/FilterCloudsContainer'
+import { getGalaxyTypeByTranslationsKey } from '../utils/translations'
 import { usePresenter } from './usePresenter'
 
 const useZoom4Query = {
@@ -117,7 +119,8 @@ export const PaginatedCollection: React.FunctionComponent<
 > = props => {
     const { zoom4, dimensions } = props
     const router = useRouter()
-    const { t } = useTypeSafeTranslation('landingpage')
+    const queryParams = router.query as unknown as LandingPageFilterCollectionQueryParams
+    const { t: tCommon } = useTypeSafeTranslation('common')
     const { width, height } = dimensions
     const svgWidth = width
     const svgHeight = height
@@ -166,10 +169,11 @@ export const PaginatedCollection: React.FunctionComponent<
                                     >
                                         <Flex flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
                                             <Text textStyle={'cloudText'}>
-                                                {zoom4?.zoomLevel4.total} {t(router.query.slug as any)}
+                                                {zoom4?.zoomLevel4.total}{' '}
+                                                {tCommon(getGalaxyTypeByTranslationsKey(queryParams.slug))}
                                             </Text>
                                             <Text textStyle={'cloudText'} mb={4}>
-                                                {`by ${router.query.collection as string}`}
+                                                {router.query.collection}
                                             </Text>
                                             <Flex alignItems={'center'} gap={1}>
                                                 <Box as={'button'} pr="2" aria-label="left" onClick={paginateBack}>
