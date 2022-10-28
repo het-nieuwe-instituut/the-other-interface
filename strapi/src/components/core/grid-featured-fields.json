@@ -1,0 +1,37 @@
+{
+  "collectionName": "components_core_grid_featured_fields",
+  "info": {
+    "displayName": "gridFeaturedFields",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "story": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::story.story"
+    },
+    "thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "title": {
+      "type": "string"
+    },
+    "subtitle": {
+      "type": "string"
+    },
+    "triplyRecord": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::triply-record.triply-record"
+    }
+  }
+}
