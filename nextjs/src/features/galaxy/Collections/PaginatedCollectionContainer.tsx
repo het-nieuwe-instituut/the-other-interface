@@ -140,6 +140,9 @@ export const PaginatedCollection: React.FunctionComponent<
         dimensions
     )
 
+    const total = Math.ceil((zoom4?.zoomLevel4.total ?? 0) / 28)
+    console.log(currentPage)
+
     return (
         <Box overflow="hidden" height={svgHeight} width={svgWidth}>
             <svg width={svgWidth} height={svgHeight} ref={svgRef} viewBox={`0 0 ${1000} ${1000}`}>
@@ -158,42 +161,46 @@ export const PaginatedCollection: React.FunctionComponent<
                         width={'100%'}
                         height={'800px'}
                     >
-                        {(items || []).map((item, index) => {
-                            if (index === 14) {
-                                return (
-                                    <GridItem
-                                        w="100%"
-                                        h="100px"
-                                        key={`${item.title}-${index}`}
-                                        colSpan={2}
-                                        display={'flex'}
-                                        justifyContent={'center'}
-                                        alignSelf={'center'}
-                                        p={1}
-                                    >
-                                        <Flex flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
-                                            <Text textStyle={'cloudText'}>
-                                                {zoom4?.zoomLevel4.total} {t(router.query.slug as any)}
-                                            </Text>
-                                            <Text textStyle={'cloudText'} mb={4}>
-                                                {`by ${router.query.collection as string}`}
-                                            </Text>
-                                            <Flex alignItems={'center'} gap={1}>
-                                                <Box as={'button'} pr="2" aria-label="left" onClick={paginateBack}>
-                                                    <PaginationLeft />
-                                                </Box>
-                                                <Text textStyle={'cloudText'}>{`${currentPage}/${Math.ceil(
-                                                    (zoom4?.zoomLevel4.total ?? 0) / 28
-                                                )}`}</Text>
-                                                <Box as="button" pl="2" aria-label="right" onClick={paginateNext}>
-                                                    <PaginationRight />
-                                                </Box>
-                                            </Flex>
-                                        </Flex>
-                                    </GridItem>
-                                )
-                            }
+                        <GridItem
+                            w="100%"
+                            h="100px"
+                            colSpan={2}
+                            display={'flex'}
+                            justifyContent={'center'}
+                            alignSelf={'center'}
+                            p={1}
+                            gridColumn={'3/5'}
+                            gridRow={3}
+                        >
+                            <Flex flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
+                                <Text textStyle={'cloudText'}>
+                                    {zoom4?.zoomLevel4.total} {t(router.query.slug as any)}
+                                </Text>
+                                <Text textStyle={'cloudText'} mb={4}>
+                                    {`by ${router.query.collection as string}`}
+                                </Text>
+                                <Flex alignItems={'center'} gap={1}>
+                                    {parseInt(currentPage as string) !== 1 ? (
+                                        <Box as={'button'} pr="2" aria-label="left" onClick={paginateBack}>
+                                            <PaginationLeft />
+                                        </Box>
+                                    ) : (
+                                        <Box width={'30px'} />
+                                    )}
 
+                                    <Text textStyle={'cloudText'}>{`${currentPage}/${total}`}</Text>
+
+                                    {parseInt(currentPage as string) !== total ? (
+                                        <Box as="button" pl="2" aria-label="right" onClick={paginateNext}>
+                                            <PaginationRight />
+                                        </Box>
+                                    ) : (
+                                        <Box width={'30px'} />
+                                    )}
+                                </Flex>
+                            </Flex>
+                        </GridItem>
+                        {(items || []).map((item, index) => {
                             return (
                                 <GridItem
                                     w="100%"
