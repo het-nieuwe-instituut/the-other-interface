@@ -5,7 +5,7 @@ import { keyExtractor } from '@/features/shared/utils/lists'
 import { capitalizeFirstLetter } from '@/features/shared/utils/text'
 import Download from '@/icons/arrows/download.svg'
 import ExternalLink from '@/icons/arrows/external-link.svg'
-import { Button, Flex, Grid, propNames, ResponsiveValue, Text } from '@chakra-ui/react'
+import { Button, Flex, Grid, ResponsiveValue, Text } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import {
     ComponentCoreButton,
