@@ -14,7 +14,7 @@ export const Title: React.FC<Props> = props => {
             pt={props.component.titleModuleLayout?.spacingTop ?? undefined}
             pb={props.component.titleModuleLayout?.spacingBottom ?? undefined}
         >
-            <Text textStyle="h1" as={'h1'} maxWidth={'55rem'}>
+            <Text textStyle="h1" as={'h1'}>
                 {props.component.Title}
             </Text>
         </Box>
