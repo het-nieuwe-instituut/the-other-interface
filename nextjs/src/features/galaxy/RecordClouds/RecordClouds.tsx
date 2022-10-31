@@ -113,12 +113,12 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions, zoomLevel5, 
                 <RecordCloudHighlight
                     type={type}
                     title={zoomLevel5.title ?? undefined}
-                    image={{
-                        url: zoomLevel5.image ?? undefined,
-                        width: 100,
-                        height: 100,
-                        alt: zoomLevel5.imageLabel ?? undefined,
-                    }}
+                    // image={{
+                    //     url: zoomLevel5.image ?? undefined,
+                    //     width: 100,
+                    //     height: 100,
+                    //     alt: zoomLevel5.imageLabel ?? undefined,
+                    // }}
                     queryType={zoomLevel5?.__typename}
                     dimensions={SVG_DIMENSIONS}
                 />
