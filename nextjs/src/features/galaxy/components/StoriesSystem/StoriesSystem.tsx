@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Box } from '@chakra-ui/react'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { InstancesPerClass, usePresenter } from './usePresenter'
 
 interface Props {
@@ -21,7 +21,14 @@ const defaultDimensions = {
 export const StoriesSystem: React.FC<Props> = ({ data = [], dimensions = defaultDimensions }) => {
     const svgWidth = dimensions.width
     const svgHeight = dimensions.height
-    const { svgRef, triangles, dataPoints, showTooltip, hideTooltip } = usePresenter(data)
+    const { svgRef, triangles, dataPoints, showTooltip, hideTooltip, cleanupTooltips } = usePresenter(data)
+
+    useEffect(() => {
+        // cleanup any remaining visible tooltips on unmount
+        return () => {
+            cleanupTooltips()
+        }
+    }, [])
 
     return (
         <svg width={svgWidth} height={svgHeight} ref={svgRef}>
