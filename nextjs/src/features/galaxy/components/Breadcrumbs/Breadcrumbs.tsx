@@ -61,7 +61,7 @@ const getLevel5Landings = (t: navigationT, type: string, filter: string, filterT
     return {
         name: `${typeToName[type]} record`,
         link: {
-            pathname:  `/landingpage/${type}/${filter}/${filterType}/${record}`,
+            pathname: `/landingpage/${type}/${filter}/${filterType}/${record}`,
         },
     }
 }
@@ -99,23 +99,24 @@ const getBreadcrumbsFromUrl = (asPath: string, query: { zoomLevel: ZoomLevel }, 
     if (startStoryIndex !== -1) {
         currentZoomLevel = 5
         return {
-            items: [companyLevel,
-            level0,
-            level1,
-            {
-                name: `${t('stories')}`,
-                link: {
-                    pathname:  `/landingpage/stories`,
-                }
-            },
-            {
-                name: `${t('story')} record`,
-                link: {
-                    pathname:  `/landingpage/stories/${pathArray[startStoryIndex + 1]}`,
-                }
-            },
-             ],
-             currentZoomLevel
+            items: [
+                companyLevel,
+                level0,
+                level1,
+                {
+                    name: `${t('stories')}`,
+                    link: {
+                        pathname: `/landingpage/stories`,
+                    },
+                },
+                {
+                    name: `${t('story')} record`,
+                    link: {
+                        pathname: `/story/${pathArray[startStoryIndex + 1]}`,
+                    },
+                },
+            ],
+            currentZoomLevel,
         }
     }
 
@@ -131,7 +132,13 @@ const getBreadcrumbsFromUrl = (asPath: string, query: { zoomLevel: ZoomLevel }, 
             pathArray[startLandingIndex + 2],
             pathArray[startLandingIndex + 3]
         ),
-        getLevel5Landings(t, pathArray[startLandingIndex + 1], pathArray[startLandingIndex + 2], pathArray[startLandingIndex + 3], pathArray[startLandingIndex + 4]),
+        getLevel5Landings(
+            t,
+            pathArray[startLandingIndex + 1],
+            pathArray[startLandingIndex + 2],
+            pathArray[startLandingIndex + 3],
+            pathArray[startLandingIndex + 4]
+        ),
     ]
     // company level and current level are always present, that's why it's +2
     const items = rawItems.slice(0, currentZoomLevel + 2)
@@ -144,7 +151,7 @@ const getBreadcrumbsFromUrl = (asPath: string, query: { zoomLevel: ZoomLevel }, 
 
 export enum BreadcrumbsRenderModes {
     STICKY = 'STICKY',
-    DEFAULT = 'DEFAULT'
+    DEFAULT = 'DEFAULT',
 }
 
 type Props = {
@@ -177,7 +184,6 @@ const Breadcrumbs = (props: Props) => {
         router.push(link, undefined, { shallow })
     }
 
-
     return (
         <Box
             left={0}
@@ -192,7 +198,15 @@ const Breadcrumbs = (props: Props) => {
             backgroundColor={props.bg ?? 'graph'}
             onClick={props.onWrapperClick ?? undefined}
         >
-            <Flex alignItems={'center'} position="relative" left={'32px'} top={'15px'} zIndex={2} marginX={'auto'} maxW={theme.breakpoints.xl}>
+            <Flex
+                alignItems={'center'}
+                position="relative"
+                left={'32px'}
+                top={'15px'}
+                zIndex={2}
+                marginX={'auto'}
+                maxW={theme.breakpoints.xl}
+            >
                 {items.map((item, index) => (
                     <React.Fragment key={index}>
                         <Link
@@ -204,7 +218,7 @@ const Breadcrumbs = (props: Props) => {
                         >
                             {item.name}
                         </Link>
-                        {index + 1 !== items.length && index !==0 && (
+                        {index + 1 !== items.length && index !== 0 && (
                             <Box mr={'2.5'} cursor="pointer">
                                 <ArrowRightIcon />
                             </Box>
@@ -212,8 +226,7 @@ const Breadcrumbs = (props: Props) => {
                     </React.Fragment>
                 ))}
             </Flex>
-        </Box>    
-        
+        </Box>
     )
 }
 
