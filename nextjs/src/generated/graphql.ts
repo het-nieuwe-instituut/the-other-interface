@@ -2251,7 +2251,7 @@ export type MenupageBySlugQuery = { __typename?: 'Query', menupages: { __typenam
 export type StoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type StoriesQuery = { __typename?: 'Query', stories: { __typename?: 'StoryEntityResponseCollection', data?: Array<{ __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, slug?: string | null } | null }> | null, meta?: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', page: number } } | null } };
+export type StoriesQuery = { __typename?: 'Query', stories: { __typename?: 'StoryEntityResponseCollection', data?: Array<{ __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, slug?: string | null, description?: string | null } | null }> | null, meta?: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', page: number } } | null } };
 
 export type StoryBySlugQueryVariables = Exact<{
   locale?: InputMaybe<Scalars['String']>;
@@ -3090,6 +3090,7 @@ export const StoriesDocument = gql`
       attributes {
         title
         slug
+        description
       }
     }
     meta {
