@@ -15,19 +15,22 @@ interface LinkProps {
     children?: ReactNode
 }
 
-function LinkRenderer(props: LinkProps) {
-    return (
-        <a href={props.href} target="_blank" rel="noreferrer">
-            {props.children}
-        </a>
-    )
+const newTheing = {
+    a: (props: LinkProps) => {
+        return (
+            <a href={props.href} target="_blank" rel="noreferrer">
+                {props.children}
+            </a>
+        )
+    },
 }
 
 export const Markdown: React.FC<Props> = props => {
+    console.log(ChakraUIRenderer())
     return (
         <ReactMarkdown
             className={style.reactMarkDown}
-            components={{ ...ChakraUIRenderer(), a: LinkRenderer }}
+            components={ChakraUIRenderer(newTheing)}
             remarkPlugins={[remarkGfm]}
             rehypePlugins={[rehypeRaw]}
         >
