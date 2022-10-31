@@ -1,8 +1,10 @@
-import Breadcrumbs from '@/features/galaxy/components/Breadcrumbs/Breadcrumbs'
+import Breadcrumbs, { BreadcrumbsRenderModes } from '@/features/galaxy/components/Breadcrumbs/Breadcrumbs'
 import { SupportedLandingPages } from '@/features/galaxy/FilterClouds/FilterCloudsContainer'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
+import { Loader } from '@/features/shared/components/Loading/Loading'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import useScroll from '@/features/shared/hooks/useScroll'
 import { Box, useTheme } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
 import dynamic from 'next/dynamic'
@@ -10,6 +12,7 @@ import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import { LandingpageComponentsDynamicZone, useLandingpageBySlugQuery } from 'src/generated/graphql'
 import { LandingPageQueryParams } from 'src/pages/landingpage/[slug]'
+import { ScrollToContent, ScrollToTop } from '../../utils/utils'
 
 const DynamicFilterCloudsNoSsr = dynamic(() => import('../../../galaxy/FilterClouds/FilterCloudsContainer'), {
     ssr: false,
@@ -31,8 +34,10 @@ export const LandingpageContainer: React.FC = () => {
     const graphRef = useRef<HTMLDivElement | null>(null)
     const sizes = useSize(graphRef)
 
+    const { scrollPosition } = useScroll()
+
     if (loading) {
-        return <p>loading</p>
+        return <Loader />
     }
 
     if (error) {
@@ -47,33 +52,33 @@ export const LandingpageContainer: React.FC = () => {
 
     return (
         <>
-            <Box backgroundColor="graph" height="800px" ref={graphRef}>
+            <Breadcrumbs  onWrapperClick={ScrollToTop}
+                 mode={scrollPosition >= 750 ? BreadcrumbsRenderModes.STICKY : BreadcrumbsRenderModes.DEFAULT} />
+            <Box
+                backgroundColor="graph"
+                height="800px"
+                ref={graphRef}
+            >
                 {sizes?.height && sizes?.width && (
-                    <>
-                        <Breadcrumbs />
+                    <Box position={'fixed'}>
                         <DynamicFilterCloudsNoSsr type={type} dimensions={{ height: 800, width: sizes?.width }} />
-                    </>
+                    </Box>
                 )}
             </Box>
-            <Box px={{ xl: 6, base: 0 }}>
-                <Box
-                    backgroundColor={'white'}
-                    px={6}
-                    maxW={theme.breakpoints.xl}
-                    marginX={'auto'}
-                    pb={1}
-                    paddingTop={6}
-                >
+            <Box px={{ xl: 6, base: 0 }} position={'relative'} zIndex={2} backgroundColor={'white'}>
+                <Box  maxW={theme.breakpoints.xl} marginX={'auto'} paddingTop={6}>
                     <PageHeader
+                        showPointer={scrollPosition < 750}
+                        handleClick={ScrollToContent}
                         title={landingpage.attributes?.Title || undefined}
                         preface={landingpage.attributes?.Description || undefined}
                     />
+                    <DynamicComponentRenderer
+                        components={
+                            data?.landingpages?.data[0]?.attributes?.components as LandingpageComponentsDynamicZone[]
+                        }
+                    />
                 </Box>
-                <DynamicComponentRenderer
-                    components={
-                        data?.landingpages?.data[0]?.attributes?.components as LandingpageComponentsDynamicZone[]
-                    }
-                />
             </Box>
         </>
     )

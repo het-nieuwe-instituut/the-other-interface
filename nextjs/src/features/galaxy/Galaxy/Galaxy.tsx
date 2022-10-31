@@ -1,10 +1,10 @@
-import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Box, Flex, Text } from '@chakra-ui/react'
 import React, { forwardRef, useId } from 'react'
-import { Dimensions, ZoomLevel } from '../types/galaxy'
-import { StoriesSystem } from '../components/StoriesSystem/StoriesSystem'
 import { Circle } from '../components/Circle'
 import { GalaxyShadowBackground } from '../components/GalaxyShadowBackground'
+import { StoriesSystem } from '../components/StoriesSystem/StoriesSystem'
+import { Dimensions, ZoomLevel } from '../types/galaxy'
 
 import { usePresenter } from './usePresenter'
 
@@ -20,10 +20,20 @@ export interface InstancesPerClass {
 
 export const GALAXY_BASE = 800
 const Galaxy: React.FC<Props> = ({ dimensions }) => {
-    const { t } = useTypeSafeTranslation('homepage')
+    const { t } = useLooseTypeSafeTranslation('homepage')
     const id = useId().replaceAll(':', '')
-    const { svgRef, setZoomLevel, zoomTo, zoomLevel, storiesSystemRef, isLoading, stories, objectsPerTypeWithIds, handleMoveToZoomLevel1 } =
-        usePresenter(dimensions, id)
+    const {
+        svgRef,
+        setZoomLevel,
+        zoomTo,
+        zoomLevel,
+        isLoading,
+        stories,
+        storiesSystemRef,
+        objectsPerTypeWithIds,
+        handleMoveToZoomLevel1,
+        archiefBestandDelen,
+    } = usePresenter(dimensions, id)
     const height = dimensions.height ?? 0
     const width = dimensions.width ?? 0
 
@@ -31,7 +41,10 @@ const Galaxy: React.FC<Props> = ({ dimensions }) => {
         <Box
             height={height}
             boxSizing="border-box"
-            position={'relative'}
+            position={'fixed'}
+            top={0}
+            left={0}
+            zIndex={0}
             overflow="hidden"
             alignItems="center"
             justifyContent="center"
@@ -92,18 +105,35 @@ const Galaxy: React.FC<Props> = ({ dimensions }) => {
                                                 width="100%"
                                                 height="100%"
                                                 borderRadius="100%"
-                                                zIndex="100"
+                                                zIndex={1}
                                                 display="flex"
                                                 alignItems="center"
                                                 justifyContent="center"
                                             >
                                                 <Box>
-                                                    <Text width="12.5rem" textStyle={'cloudText'}>
-                                                        {item.name}
-                                                    </Text>
-                                                    <Text width="12.5rem" textStyle={'cloudText'}>
-                                                        {item.numberOfInstances}
-                                                    </Text>
+                                                    {item.name === 'Archieven' ? (
+                                                        <>
+                                                            <Text width="12.5rem" mb={1} textStyle={'cloudText'}>
+                                                                {t('archives', { count: item.numberOfInstances })}
+                                                            </Text>
+                                                            <Text width="12.5rem" textStyle={'cloudText'}>
+                                                                {t('archiveItems', {
+                                                                    count: archiefBestandDelen.count,
+                                                                })}
+                                                            </Text>
+                                                        </>
+                                                    ) : (
+                                                        item.name !== 'stories' && (
+                                                            <>
+                                                                <Text width="12.5rem" mb={1} textStyle={'cloudText'}>
+                                                                    {item.name.toLowerCase()}
+                                                                </Text>
+                                                                <Text width="12.5rem" textStyle={'cloudText'}>
+                                                                    {item.numberOfInstances}
+                                                                </Text>
+                                                            </>
+                                                        )
+                                                    )}
                                                 </Box>
                                             </Box>
                                         )}
@@ -112,10 +142,12 @@ const Galaxy: React.FC<Props> = ({ dimensions }) => {
                             })}
                         </g>
 
-                        {!isLoading && stories?.length && zoomLevel === ZoomLevel.Zoom1 && (
+                        {objectsPerTypeWithIds.find(i => i.name === 'stories') && zoomLevel === ZoomLevel.Zoom1 && (
                             <foreignObject x={GALAXY_BASE / 2 + 75} y={GALAXY_BASE / 2 - 60} width={200} height={100}>
                                 <button onClick={() => setZoomLevel(ZoomLevel.Zoom1Stories)}>
-                                    <Text width="12.5rem">{stories.length}</Text>
+                                    <Text width="12.5rem">
+                                        {objectsPerTypeWithIds.find(i => i.name === 'stories')?.numberOfInstances}
+                                    </Text>
                                     <Text width="12.5rem">{t('stories')}</Text>
                                 </button>
                             </foreignObject>

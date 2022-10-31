@@ -1,5 +1,6 @@
 import { createUnionType, Field, ID, InputType, ObjectType } from '@nestjs/graphql'
 import { PublicationState } from '../../generated/strapi-sdk'
+import { ComponentModulesGridModule } from '../strapi/components/modules/gridModule'
 import { ComponentModulesButtonsModule } from '../strapi/components/modules/buttonsModule'
 import { ComponentModulesCarousel } from '../strapi/components/modules/carousel'
 import { ComponentModulesImageCarousel } from '../strapi/components/modules/imageCarousel'
@@ -27,6 +28,9 @@ export class Homepage {
 
     @Field({ nullable: true })
     public createdAt?: Date
+
+    @Field({ nullable: true })
+    public description?: string
 
     @Field({ nullable: true })
     public locale?: string
@@ -77,6 +81,7 @@ export const HomepageComponentsDynamicZone = createUnionType({
         [
             ComponentModulesButtonsModule,
             ComponentModulesCarousel,
+            ComponentModulesGridModule,
             ComponentModulesImage,
             ComponentModulesImageCarousel,
             ComponentModulesPullquote,

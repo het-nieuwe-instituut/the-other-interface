@@ -7,6 +7,7 @@
 #import '../fragments/components/CarouselModule.fragment.graphql'
 #import '../fragments/components/ButtonsModule.fragment.graphql'
 #import '../fragments/components/SubtitleModule.fragment.graphql'
+#import '../fragments/components/GridModule.fragment.graphql'
 
 query homepage($locale: String) {
     homepage(locale: $locale) {
@@ -14,6 +15,7 @@ query homepage($locale: String) {
             id
             attributes {
                 Title
+                description
                 components {
                     ... on ComponentModulesTextModule {
                         ...textModuleFragment
@@ -41,6 +43,9 @@ query homepage($locale: String) {
                     }
                     ... on ComponentModulesSubtitle {
                         ...subtitleModuleFragment
+                    }
+                    ... on ComponentModulesGridModule {
+                        ...gridModuleFragment
                     }
                 }
             }

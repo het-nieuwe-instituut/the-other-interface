@@ -1,4 +1,5 @@
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
+import { Loader } from '@/features/shared/components/Loading/Loading'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { useRouter } from 'next/router'
 import { MenupageComponentsDynamicZone, useMenupageBySlugQuery } from 'src/generated/graphql'
@@ -17,7 +18,7 @@ export const MenupageContainer: React.FC = () => {
     })
 
     if (loading) {
-        return <p>loading</p>
+        return <Loader />
     }
 
     if (error) {
@@ -30,7 +31,9 @@ export const MenupageContainer: React.FC = () => {
 
     return (
         <div>
-            <DynamicComponentRenderer components={data?.menupages?.data[0]?.attributes?.components as MenupageComponentsDynamicZone[]} />
+            <DynamicComponentRenderer
+                components={data?.menupages?.data[0]?.attributes?.components as MenupageComponentsDynamicZone[]}
+            />
         </div>
     )
 }

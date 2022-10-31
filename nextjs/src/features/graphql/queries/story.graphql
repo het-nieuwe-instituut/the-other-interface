@@ -5,6 +5,8 @@
 #import '../fragments/components/TitleModule.fragment.graphql'
 #import '../fragments/components/ImageCarousel.fragment.graphql'
 #import '../fragments/components/ButtonsModule.fragment.graphql'
+#import '../fragments/components/GridModule.fragment.graphql'
+#import '../fragments/components/core/baseTriplyRecord.fragment.graphql'
 
 query storyBySlug($locale: String, $slug: String!) {
     stories(locale: $locale, filters: { slug: { eq: $slug } }) {
@@ -93,7 +95,7 @@ query storyBySlug($locale: String, $slug: String!) {
                             }
                         }
                     }
-                }    
+                }
                 components {
                     ... on ComponentModulesTextModule {
                         ...textModuleFragment
@@ -119,10 +121,18 @@ query storyBySlug($locale: String, $slug: String!) {
                     ... on ComponentModulesSubtitle {
                         ...subtitleModuleFragment
                     }
+                    ... on ComponentModulesGridModule {
+                        ...gridModuleFragment
+                    }
                 }
                 storyLinks {
                     ... on ComponentModulesButtonsModule {
                         ...buttonsModuleFragment
+                    }
+                }
+                triplyRecords {
+                    data {
+                        ...BaseTriplyRecordFragment
                     }
                 }
             }

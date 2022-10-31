@@ -11,7 +11,7 @@ export const GalaxyWrapper: React.FC<Props> = props => {
     const theme = useTheme()
     return (
         <Box display="block" position={'relative'}>
-            <Flex
+            {/* <Flex
                 zIndex={2}
                 maxW={theme.breakpoints.xl}
                 marginX={'auto'}
@@ -26,7 +26,7 @@ export const GalaxyWrapper: React.FC<Props> = props => {
                 <Flex alignItems={'center'} position="relative" zIndex={2} right={'32px'} top={'15px'}>
                     {props?.renderTopRight?.()}
                 </Flex>
-            </Flex>
+            </Flex> */}
             <Flex
                 zIndex={2}
                 maxW={theme.breakpoints.xl}
@@ -37,7 +37,7 @@ export const GalaxyWrapper: React.FC<Props> = props => {
                 bottom={0}
                 justifyContent={'space-between'}
             >
-                <Flex alignItems={'center'} position="relative" zIndex={2} left={'32px'} right={'32px'}>
+                <Flex alignItems={'center'} position="relative" zIndex={2} left={'16px'} right={'16px'}>
                     {props?.renderBottom?.()}
                 </Flex>
             </Flex>

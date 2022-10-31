@@ -1,6 +1,6 @@
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import ArrowRightIcon from '@/icons/arrows/arrow-right.svg'
-import { Box, Flex, Link } from '@chakra-ui/react'
+import { Box, Flex, Link, useTheme } from '@chakra-ui/react'
 import { navigationT } from 'locales/locales'
 import { useRouter } from 'next/router'
 import React from 'react'
@@ -49,19 +49,19 @@ const getLevel4 = (t: navigationT, type: string, filter: string, filterType: str
     }
 }
 
-const getLevel5 = (t: navigationT, type: string) => {
+const getLevel5Landings = (t: navigationT, type: string, filter: string, filterType: string, record: string) => {
     const typeToName: Record<string, string> = {
-        people: `${t('people')} filters`,
-        publications: `${t('publication')} filters`,
-        objects: `${t('object')} filters`,
-        archives: `${t('archive')} filters`,
+        people: `${t('people')}`,
+        publications: `${t('publication')}`,
+        objects: `${t('object')}`,
+        archives: `${t('archive')}`,
         stories: `${t('stories')}`,
     }
 
     return {
         name: `${typeToName[type]} record`,
         link: {
-            pathname: `/story/${type}`,
+            pathname: `/landingpage/${type}/${filter}/${filterType}/${record}`,
         },
     }
 }
@@ -96,8 +96,28 @@ const getBreadcrumbsFromUrl = (asPath: string, query: { zoomLevel: ZoomLevel }, 
         currentZoomLevel = pathArray.length - startLandingIndex
     }
 
-    if (pathArray.includes('story')) {
+    if (startStoryIndex !== -1) {
         currentZoomLevel = 5
+        return {
+            items: [
+                companyLevel,
+                level0,
+                level1,
+                {
+                    name: `${t('stories')}`,
+                    link: {
+                        pathname: `/landingpage/stories`,
+                    },
+                },
+                {
+                    name: `${t('story')} record`,
+                    link: {
+                        pathname: `/story/${pathArray[startStoryIndex + 1]}`,
+                    },
+                },
+            ],
+            currentZoomLevel,
+        }
     }
 
     const rawItems = [
@@ -112,18 +132,37 @@ const getBreadcrumbsFromUrl = (asPath: string, query: { zoomLevel: ZoomLevel }, 
             pathArray[startLandingIndex + 2],
             pathArray[startLandingIndex + 3]
         ),
-        getLevel5(t, pathArray[startStoryIndex + 1]),
+        getLevel5Landings(
+            t,
+            pathArray[startLandingIndex + 1],
+            pathArray[startLandingIndex + 2],
+            pathArray[startLandingIndex + 3],
+            pathArray[startLandingIndex + 4]
+        ),
     ]
     // company level and current level are always present, that's why it's +2
     const items = rawItems.slice(0, currentZoomLevel + 2)
+
     return {
         items,
         currentZoomLevel,
     }
 }
 
-const Breadcrumbs = () => {
+export enum BreadcrumbsRenderModes {
+    STICKY = 'STICKY',
+    DEFAULT = 'DEFAULT',
+}
+
+type Props = {
+    mode: BreadcrumbsRenderModes
+    bg?: string
+    onWrapperClick?: () => void
+}
+
+const Breadcrumbs = (props: Props) => {
     const router = useRouter()
+    const theme = useTheme()
     const { t } = useTypeSafeTranslation('navigation')
 
     const { items, currentZoomLevel } = getBreadcrumbsFromUrl(
@@ -146,26 +185,48 @@ const Breadcrumbs = () => {
     }
 
     return (
-        <Flex flexDirection={'row'} alignItems={'center'}>
-            {items.map((item, index) => (
-                <React.Fragment key={index}>
-                    <Link
-                        mr={'2.5'}
-                        variant={'decorative'}
-                        cursor="pointer"
-                        textStyle="small"
-                        onClick={() => handleRedirect(item.link)}
-                    >
-                        {item.name}
-                    </Link>
-                    {index + 1 !== items.length && (
-                        <Box mr={'2.5'} cursor="pointer">
-                            <ArrowRightIcon />
-                        </Box>
-                    )}
-                </React.Fragment>
-            ))}
-        </Flex>
+        <Box
+            left={0}
+            right={0}
+            position={'sticky'}
+            top="0px"
+            height={props?.mode === BreadcrumbsRenderModes.DEFAULT ? '0' : '50px'}
+            zIndex={3}
+            overflow={props?.mode === BreadcrumbsRenderModes.DEFAULT ? 'visible' : 'hidden'}
+            width={'100%'}
+            cursor={props?.mode === BreadcrumbsRenderModes.DEFAULT ? 'inherit' : 'pointer'}
+            backgroundColor={props.bg ?? 'graph'}
+            onClick={props.onWrapperClick ?? undefined}
+        >
+            <Flex
+                alignItems={'center'}
+                position="relative"
+                left={'32px'}
+                top={'15px'}
+                zIndex={2}
+                marginX={'auto'}
+                maxW={theme.breakpoints.xl}
+            >
+                {items.map((item, index) => (
+                    <React.Fragment key={index}>
+                        <Link
+                            mr={index === 0 ? '5' : '2.5'}
+                            variant={'decorative'}
+                            cursor="pointer"
+                            textStyle="small"
+                            onClick={() => handleRedirect(item.link)}
+                        >
+                            {item.name}
+                        </Link>
+                        {index + 1 !== items.length && index !== 0 && (
+                            <Box mr={'2.5'} cursor="pointer">
+                                <ArrowRightIcon />
+                            </Box>
+                        )}
+                    </React.Fragment>
+                ))}
+            </Flex>
+        </Box>
     )
 }
 

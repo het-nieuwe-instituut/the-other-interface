@@ -88,6 +88,26 @@ const textStyles = {
         fontSize: '16px',
         lineHeight: '135%',
     },
+    cloudTextLarge: {
+        fontFamily: "'Univers'",
+        fontStyle: 'normal',
+        fontWeight: '400',
+        fontSize: '32px',
+        lineHeight: '115%',
+        color: 'black',
+        textShadow: '0px 0px 4px #CCCED0, 0px 0px 4px #CCCED0',
+    },
+    cloudTextMicro: {
+        fontFamily: "'Univers'",
+        fontStyle: 'normal',
+        fontWeight: '400',
+        fontSize: '12px',
+        lineHeight: '135%',
+        color: 'black',
+
+        /* or 16px */
+        textShadow: '0px 0px 4px #CCCED0, 0px 0px 4px #CCCED0',
+    },
 }
 
 export default textStyles

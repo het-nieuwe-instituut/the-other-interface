@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as d3 from 'd3'
 import { MouseEvent, MutableRefObject, useCallback, useEffect, useRef, useState } from 'react'
 import { Dimensions } from '../types/galaxy'
@@ -7,7 +6,9 @@ export function useZoomToD3Element<DType>(
     svgRef: MutableRefObject<SVGSVGElement | null>,
     dimensions: Dimensions,
     selector: string,
-    onComplete?: (d: d3.SimulationNodeDatum & DType) => void
+    onComplete?: (d: d3.SimulationNodeDatum & DType) => void,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    data?: any[]
 ) {
     const storiesSystemRef = useRef<SVGForeignObjectElement | null>(null)
     const [zoomed, setZoomed] = useState<boolean>(false)
@@ -27,11 +28,10 @@ export function useZoomToD3Element<DType>(
             const height = dimensions.height ?? 0
 
             const scale = 20
-            const x = (d.x ?? 0) - width / 2
-            const y = (d.y ?? 0) - height / 2
+            const x = (event.clientX ?? 0) - width / 2
+            const y = (event.clientY ?? 0) - height / 2
 
             d3Svg.attr(`opacity`, `1`)
-
             await d3Svg
                 .transition()
                 .duration(1500)
@@ -47,10 +47,12 @@ export function useZoomToD3Element<DType>(
     useEffect(() => {
         const d3Svg = d3.select(svgRef.current)
         const nodeForeign = d3Svg.selectAll(selector)
-        clickListener.current = nodeForeign.on('click', (e, d) =>
-            clicked(e, d as d3.SimulationNodeDatum & DType, d3Svg, dimensions)
-        )
-    }, [clicked, dimensions, selector, svgRef])
+        clickListener.current = nodeForeign
+            .on('click', (e, d) => {
+                return clicked(e, d as d3.SimulationNodeDatum & DType, d3Svg, dimensions)
+            })
+            .data(data ? data : [])
+    }, [clicked, data, dimensions, selector, svgRef])
 
     return {
         setZoomed,

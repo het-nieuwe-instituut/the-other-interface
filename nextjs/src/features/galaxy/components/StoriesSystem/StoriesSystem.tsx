@@ -1,7 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Box } from '@chakra-ui/react'
-import React from 'react'
+import Link from 'next/link'
+import React, { useEffect } from 'react'
 import { InstancesPerClass, usePresenter } from './usePresenter'
 
 interface Props {
@@ -20,13 +21,20 @@ const defaultDimensions = {
 export const StoriesSystem: React.FC<Props> = ({ data = [], dimensions = defaultDimensions }) => {
     const svgWidth = dimensions.width
     const svgHeight = dimensions.height
-    const { svgRef, triangles, dataPoints } = usePresenter(data)
+    const { svgRef, triangles, dataPoints, showTooltip, hideTooltip, cleanupTooltips } = usePresenter(data)
+
+    useEffect(() => {
+        // cleanup any remaining visible tooltips on unmount
+        return () => {
+            cleanupTooltips()
+        }
+    }, [])
 
     return (
         <svg width={svgWidth} height={svgHeight} ref={svgRef}>
             <style>
                 {`
-                    .text { font: italic 13px sans-serif }
+                    .StoriesSystem-dot { cursor: pointer }
                 `}
             </style>
             <g>
@@ -34,9 +42,9 @@ export const StoriesSystem: React.FC<Props> = ({ data = [], dimensions = default
                     <polygon key={`${index}-${array.length}`} points={triangle.join()} fill={'transparent'}></polygon>
                 ))}
             </g>
-            {dataPoints.map((item, index, array) => {
-                return (
-                    <g key={`${index}-${array.length}`} className="StoriesSystem-dot">
+            {dataPoints.map((item, index, array) => (
+                <Link href={`/story/${item.slug}`} key={`${index}-${array.length}`}>
+                    <g className="StoriesSystem-dot" id={item.id}>
                         <foreignObject
                             x={`${item.point[0]}`}
                             y={`${item.point[1]}`}
@@ -46,14 +54,16 @@ export const StoriesSystem: React.FC<Props> = ({ data = [], dimensions = default
                             data-id={item.id}
                         >
                             <Box
+                                onMouseEnter={e => showTooltip(e, item)}
+                                onMouseLeave={() => hideTooltip(item)}
                                 height="100%"
                                 width="100%"
                                 background="radial-gradient(50% 50% at 50% 50%, #FFFFFF 0%, rgba(255, 255, 255, 0) 77.6%);"
                             ></Box>
                         </foreignObject>
                     </g>
-                )
-            })}
+                </Link>
+            ))}
         </svg>
     )
 }

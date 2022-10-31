@@ -96,8 +96,6 @@ export function useGalaxyController(dimensions: Dimensions, data: ObjectPerTypeW
     }, [svgRef.current, data, dimensions, dataDimensions])
 
     function zoomout() {
-        console.log('test')
-
         const d3Svg = d3.select(svgRef.current)
 
         d3Svg

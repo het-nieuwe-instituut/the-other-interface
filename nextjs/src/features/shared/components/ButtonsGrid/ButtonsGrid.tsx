@@ -23,6 +23,7 @@ interface Props {
     buttonStyle?: EnumComponentmodulesbuttonsmoduleButtonstyle
     buttons?: (ButtonType | null)[]
     flexDirection: ResponsiveValue<'column' | 'row'> | undefined
+    renderBefore?: () => any
 }
 
 const buttonConfig = {
@@ -40,12 +41,14 @@ export const ButtonsGrid: React.FC<Props> = props => {
     if (props.buttonStyle === EnumComponentmodulesbuttonsmoduleButtonstyle.Large) {
         return (
             <Grid templateColumns={{ base: '1fr', md: 'auto auto' }} gap={5}>
+                {props.renderBefore && props.renderBefore()}
                 {renderButtons()}
             </Grid>
         )
     }
     return (
         <Flex flexWrap={'wrap'} flexDirection={props.flexDirection} gap={2}>
+            {props.renderBefore && props.renderBefore()}
             {renderButtons()}
         </Flex>
     )

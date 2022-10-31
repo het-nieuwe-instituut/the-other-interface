@@ -1,24 +1,26 @@
+import { Box, useTheme } from '@chakra-ui/react'
 import {
+    ComponentModulesButtonsModule,
+    ComponentModulesCarousel,
+    ComponentModulesGridModule,
     ComponentModulesImage,
     ComponentModulesImageCarousel,
-    ComponentModulesCarousel,
-    ComponentModulesButtonsModule,
     HomepageComponentsDynamicZone,
-    Maybe,
     LandingpageComponentsDynamicZone,
+    Maybe,
     MenupageComponentsDynamicZone,
     StoryComponentsDynamicZone,
 } from 'src/generated/graphql'
-import MediaImage from '../components/Image/Image'
-import { ImageCarousel } from '../components/carousels/ImageCarousel/ImageCarousel'
+import { ButtonsModule } from '../components/ButtonsModule/ButtonsModule'
 import { CarouselModule } from '../components/carousels/Carousel/Carousel'
+import { ImageCarousel } from '../components/carousels/ImageCarousel/ImageCarousel'
+import { GridModule } from '../components/GridModule/GridModule'
+import MediaImage from '../components/Image/Image'
 import { Pullquote } from '../components/Pullquote/Pullquote'
 import { SubtitleModule } from '../components/SubtitleModule/SubtitleModule'
 import { TableModule } from '../components/TableModule/TableModule'
-import { Title } from '../components/Title/Title'
 import { TextModule } from '../components/TextModule/TextModule'
-import { ButtonsModule } from '../components/ButtonsModule/ButtonsModule'
-import { Box, useTheme } from '@chakra-ui/react'
+import { Title } from '../components/Title/Title'
 
 interface Props {
     components: DynamicComponents
@@ -34,7 +36,8 @@ export function DynamicComponentRenderer(props: Props) {
     const theme = useTheme()
     return (
         <Box maxW={theme.breakpoints.xl} marginX={'auto'}>
-            {props.components?.map((component, index, array) => {
+            {/* {[...[componentMock, componentMock2, componentMock3], ...(props.components || [])].map( */}
+            {[...(props.components || [])].map((component, index, array) => {
                 const typeName = component?.__typename
 
                 if (typeName) {
@@ -90,6 +93,15 @@ export function DynamicComponentRenderer(props: Props) {
                             <CarouselModule
                                 key={keyExtractor(component.id, index, array)}
                                 component={component as ComponentModulesCarousel}
+                            />
+                        )
+                    }
+
+                    if (component?.__typename === 'ComponentModulesGridModule') {
+                        return (
+                            <GridModule
+                                key={keyExtractor(component.id, index, array)}
+                                component={component as ComponentModulesGridModule}
                             />
                         )
                     }
