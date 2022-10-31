@@ -36,8 +36,6 @@ const RecordPage: React.FC<{ data?: ReturnType<typeof useGetZoom5RecordTask>['da
     const sizes = useSize(graphRef)
     const { scrollPosition } = useScroll()
 
-    console.log(data)
-
     return (
         <>
             <Breadcrumbs

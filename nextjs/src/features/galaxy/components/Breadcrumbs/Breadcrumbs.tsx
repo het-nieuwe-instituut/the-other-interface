@@ -50,7 +50,6 @@ const getLevel4 = (t: navigationT, type: string, filter: string, filterType: str
 }
 
 const getLevel5Landings = (t: navigationT, type: string, filter: string, filterType: string, record: string) => {
-    console.log(type)
     const typeToName: Record<string, string> = {
         people: `${t('people')}`,
         publications: `${t('publication')}`,
