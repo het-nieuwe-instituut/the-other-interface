@@ -2,9 +2,7 @@ import Breadcrumbs, { BreadcrumbsRenderModes } from '@/features/galaxy/component
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 import { GalaxyFooter } from '@/features/shared/components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 import { GalaxyWrapper } from '@/features/shared/components/GalaxyWrapper/GalaxyWrapper'
-import { Loader } from '@/features/shared/components/Loading/Loading'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
-import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import useScroll from '@/features/shared/hooks/useScroll'
 import { Box, Grid, GridItem, useTheme } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
@@ -13,31 +11,19 @@ import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import { StoryComponentsDynamicZone, StoryEntity } from 'src/generated/graphql'
 import { StoryMeta } from '../../Meta/StoryMeta'
-import { GetZoom5StoryQuery, useGetZoom5StoryTask } from '../../tasks/getZoom5StoryTask'
+import { GetZoom5StoryQuery } from '../../tasks/getZoom5StoryTask'
 import { ScrollToTop } from '../../utils/utils'
 
 const DynamicRecordCloudsNoSsr = dynamic(() => import('../../../galaxy/RecordClouds/RecordClouds'), {
     ssr: false,
 })
 
-export const StoryContainer: React.FC = () => {
-    const { t } = useTypeSafeTranslation('common')
+interface Props {
+    data: GetZoom5StoryQuery
+}
 
-    const { data, loading, error } = useGetZoom5StoryTask()
-
-    if (loading) {
-        return <Loader />
-    }
-
-    if (error) {
-        return <p>{error.message}</p>
-    }
-
-    if (!data || !data.zoom5Story) {
-        return <p>{t('somethingWentWrong')}</p>
-    }
-
-    return <Story data={data} />
+export const StoryContainer: React.FC<Props> = props => {
+    return <Story data={props.data} />
 }
 
 const Story: React.FC<{ data: GetZoom5StoryQuery }> = ({ data }) => {
@@ -58,8 +44,8 @@ const Story: React.FC<{ data: GetZoom5StoryQuery }> = ({ data }) => {
                     {sizes?.height && sizes?.width && (
                         <DynamicRecordCloudsNoSsr
                             key={router.query.record as string}
-                            zoomLevel5={data?.zoom5Story}
-                            relations={data?.zoom5relations}
+                            zoomLevel5={data?.story}
+                            relations={data?.relations}
                             dimensions={sizes}
                         />
                     )}
@@ -81,17 +67,17 @@ const Story: React.FC<{ data: GetZoom5StoryQuery }> = ({ data }) => {
                     >
                         <GridItem area={'header'}>
                             <PageHeader
-                                title={data.zoom5Story?.attributes?.title}
-                                preface={data.zoom5Story?.attributes?.description ?? undefined}
+                                title={data.story?.attributes?.title}
+                                preface={data.story?.attributes?.description ?? undefined}
                             />
                         </GridItem>
                         <GridItem area={'meta'}>
-                            <StoryMeta story={data.zoom5Story as StoryEntity} />
+                            <StoryMeta story={data.story as StoryEntity} />
                         </GridItem>
                     </Grid>
                 </Box>
                 <DynamicComponentRenderer
-                    components={data.zoom5Story?.attributes?.components as StoryComponentsDynamicZone[]}
+                    components={data.story?.attributes?.components as StoryComponentsDynamicZone[]}
                 />
             </Box>
         </>
