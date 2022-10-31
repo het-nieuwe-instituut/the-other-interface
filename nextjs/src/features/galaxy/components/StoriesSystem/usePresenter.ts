@@ -200,9 +200,7 @@ function hideTooltip(item: DataPoint) {
 }
 
 function cleanupTooltips() {
-    console.log('hit')
-    const ts = document.querySelectorAll('[id$="-tooltip"]')
-    ts.forEach(el => el.remove())
+    document.querySelectorAll('[id$="-tooltip"]').forEach(el => el.remove())
 }
 
 function insertTooltip(item: DataPoint) {
