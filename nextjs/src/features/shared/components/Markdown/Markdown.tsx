@@ -16,6 +16,7 @@ export const Markdown: React.FC<Props> = props => {
             components={ChakraUIRenderer()}
             remarkPlugins={[remarkGfm]}
             rehypePlugins={[rehypeRaw]}
+            linkTarget="_blank"
         >
             {DOMpurify.sanitize(props.children)}
         </ReactMarkdown>
