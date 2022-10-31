@@ -33,7 +33,7 @@ export function usePresenter(data: ZoomLevel4Type[], total: number, selector: st
         },
         [router]
     )
-    const zoomEvents = useZoomToD3Element<ZoomLevel4Type>(svgRef, dimensions, `.foreign-${selector}`, navigateTo)
+    const zoomEvents = useZoomToD3Element<ZoomLevel4Type>(svgRef, dimensions, `.foreign-${selector}`, navigateTo, data)
 
     return {
         svgRef,
