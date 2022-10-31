@@ -6,6 +6,8 @@ fragment imageModuleFragment on ComponentModulesImage {
         data {
             attributes {
                 url
+                height
+                width
             }
         }
     }
