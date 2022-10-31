@@ -5,7 +5,9 @@ import { Box, Flex, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useId } from 'react'
 import { Zoom3Query } from 'src/generated/graphql'
+import { LandingPageFilterQueryParams } from 'src/pages/landingpage/[slug]/[filter]'
 import { Circle } from '../components/Circle'
+import { getGalaxyTypeByTranslationsKey } from '../utils/translations'
 import { SupportedLandingPages } from './PaginatedFilterCloudsContainer'
 import { getId, usePresenter } from './usePresenter'
 
@@ -23,15 +25,17 @@ const PaginatedFilterClouds: React.FunctionComponent<Props> = ({ dimensions, zoo
     const svgWidth = width
     const svgHeight = height
     const router = useRouter()
+    const queryParams = router.query as unknown as LandingPageFilterQueryParams
     const id = useId().replaceAll(':', '')
     const { svgRef, zoomed, backgrounds, paginateBack, paginateNext, total, totalPages, currentPage } = usePresenter(
         dimensions,
         zoom3,
         id
     )
-    const { t } = useTypeSafeTranslation('landingpage')
-    console.log(zoom3)
+    const { t: tCommon } = useTypeSafeTranslation('common')
+    const { t: tLandingpage } = useTypeSafeTranslation('landingpage')
 
+    queryParams.slug
     return (
         <Box overflow="hidden" height={svgHeight} width={svgWidth}>
             <svg
@@ -64,10 +68,10 @@ const PaginatedFilterClouds: React.FunctionComponent<Props> = ({ dimensions, zoo
                                 {!zoomed && (
                                     <Box>
                                         <Text width="12.5rem" textStyle={'cloudText'}>
-                                            {t(router.query.slug as SupportedLandingPages)}
+                                            {tCommon(getGalaxyTypeByTranslationsKey(queryParams.slug))}
                                         </Text>
                                         <Text width="12.5rem" textStyle={'cloudText'}>
-                                            {t('genericBy', { name: item.name })}
+                                            {item.name}
                                         </Text>
                                     </Box>
                                 )}
@@ -87,7 +91,7 @@ const PaginatedFilterClouds: React.FunctionComponent<Props> = ({ dimensions, zoo
                     >
                         <Flex flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
                             <Text textStyle={'cloudText'} mb={4}>
-                                {total} {t(router.query.slug as SupportedLandingPages)}
+                                {total} {tLandingpage(router.query.slug as SupportedLandingPages)}
                             </Text>
                             <Flex alignItems={'center'} gap={1}>
                                 <Box as={'button'} pr="2" aria-label="left" onClick={paginateBack}>

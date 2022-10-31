@@ -1,0 +1,23 @@
+query ZoomLevel5PublicationsSerial($id: String!) {
+    zoomLevel5PublicationsSerial(id: $id) {
+        typeOfPublication
+        typeOfPublicationLabel
+        title
+        publisher
+        publisherLabel
+        yearOfPublication
+        placeOfPublication
+        placeOfPublicationLabel
+        subject
+        subjectLabel
+        language
+        languageLabel
+        continuedFrom
+        continuedAs
+        remarks
+        availability
+        shelfmark
+        holding
+        permanentLink
+    }
+}

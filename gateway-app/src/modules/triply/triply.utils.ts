@@ -1,12 +1,38 @@
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
+
 export interface ZoomLevel3ReturnData {
-    count: string
-    label: string
+    total: string | null
+    count: string | null
+    label: string | null
     iri: string
 }
 
 export class TriplyUtils {
-    public static getEntityNameFromGraph(graph: string): EntityNames {
+    public static getExternalEntityNameFromUri(uri: string) {
+        const type = TriplyUtils.findExternalEntityNameFromUri(uri)
+
+        if (!type) {
+            throw new Error(`external type for uri ${uri} not implemented`)
+        }
+
+        return type
+    }
+
+    public static findExternalEntityNameFromUri(uri: string) {
+        if (uri.includes('rkd.nl')) {
+            return EntityNames.Rkd
+        }
+
+        if (uri.includes('wikidata.org')) {
+            return EntityNames.Wikidata
+        }
+
+        if (uri.includes('getty.edu')) {
+            return EntityNames.Getty
+        }
+    }
+
+    public static getEntityNameFromGraph(graph: string, possibleExternalUri?: string | null): EntityNames {
         const s = graph.split('/')
         if (!s.length) {
             throw new Error('invalid graph url')
@@ -25,14 +51,23 @@ export class TriplyUtils {
             case 'media':
                 return EntityNames.Media
             case 'seeAlso':
+                if (possibleExternalUri) {
+                    return TriplyUtils.getExternalEntityNameFromUri(possibleExternalUri)
+                }
+
                 return EntityNames.External
             default:
                 throw new Error(`type for graph ${type} not implemented`)
         }
     }
 
-    public static getEntityNameFromUri(graph: string): EntityNames {
-        const s = graph.split('/')
+    public static getEntityNameFromUri(uri: string): EntityNames {
+        const externalType = this.findExternalEntityNameFromUri(uri)
+        if (externalType) {
+            return externalType
+        }
+
+        const s = uri.split('/')
         if (!s.length || s.length < 2) {
             throw new Error('invalid graph url')
         }
@@ -52,7 +87,7 @@ export class TriplyUtils {
             case 'seeAlso':
                 return EntityNames.External
             default:
-                throw new Error(`type for graph ${type} not implemented`)
+                throw new Error(`type for uri ${uri} not implemented`)
         }
     }
 
@@ -92,51 +127,37 @@ export class TriplyUtils {
         }
     }
 
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    public static combineObjectArray(results: Object[]) {
-        const output: { [x: string]: string } = {}
+    public static combineObjectArray<T extends object>(results: T[]): T | null {
+        const output: Partial<Record<keyof T, string>> = {}
+
         let nullFlag = true
         for (const result of results) {
             for (const filledPair of Object.entries(result).filter(e => !!e[1])) {
                 nullFlag = false
                 const [key, value] = filledPair
-                output[key] = value
+                output[key as keyof T] = value
             }
         }
 
-        return nullFlag ? null : output
+        return nullFlag ? null : (output as T)
     }
 
     public static parseLevel3OutputData(input: ZoomLevel3ReturnData[]) {
-        const totalRow = input.find(r => r.label === '@total')
-        const total = totalRow ? totalRow.count : null
-
-        const output = []
-
-        for (const d of input) {
-            if (d.label === '@total') {
-                continue
-            }
-
-            output.push({
-                uri: d.iri,
-                name: d.label || null,
-                count: d.count ? parseInt(d.count, 10) : null,
-                total,
-            })
-        }
-
-        return output
+        return input.map(i => ({
+            uri: i.iri,
+            name: i.label || null,
+            count: i.count ? parseInt(i.count, 10) : null,
+            total: i.total ? parseInt(i.total, 10) : null,
+        }))
     }
 
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    public static getQueryParamsFromObject(obj: Object): Record<string, string> {
-        const queryParams: Record<string, string> = {}
+    public static getQueryParamsFromObject<T extends object>(obj: T): Record<keyof T, string> {
+        const queryParams: Partial<Record<keyof T, string>> = {}
 
         for (const [filterName, filterValue] of Object.entries(obj)) {
-            queryParams[`${filterName}`] = filterValue
+            queryParams[filterName as keyof T] = filterValue
         }
 
-        return queryParams
+        return queryParams as Record<keyof T, string>
     }
 }

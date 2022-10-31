@@ -9,6 +9,9 @@ fragment MenupageFragment on Menupage {
         ... on ComponentModulesTextModule {
             ...ComponentModulesTextModuleFragment
         }
+        ... on ComponentModulesGridModule {
+            ...ComponentModulesGridModuleFragment
+        }
         ... on ComponentModulesSubtitle {
             ...ComponentModulesSubtitleFragment
         }

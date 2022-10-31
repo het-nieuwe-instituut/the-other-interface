@@ -5,12 +5,16 @@ fragment HomepageFragment on Homepage {
     locale
     publishedAt
     updatedAt
+    description
     components {
         ... on ComponentModulesTextModule {
             ...ComponentModulesTextModuleFragment
         }
         ... on ComponentModulesImage {
             ...ComponentModulesImageFragment
+        }
+        ... on ComponentModulesGridModule {
+            ...ComponentModulesGridModuleFragment
         }
         ... on ComponentModulesPullquote {
             ...ComponentModulesPullquoteFragment

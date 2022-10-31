@@ -4,8 +4,9 @@ import { Box, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useId } from 'react'
 import { ZoomLevel2Query } from 'src/generated/graphql'
+import { LandingPageQueryParams } from 'src/pages/landingpage/[slug]'
+import { getGalaxyTypeByTranslationsKey } from '../utils/translations'
 import { SupportedLandingPages } from './FilterCloudsContainer'
-import { PossibleFilters } from './types'
 import { usePresenter } from './usePresenter'
 
 type Props = {
@@ -22,9 +23,10 @@ const FilterClouds: React.FunctionComponent<Props> = ({ dimensions, type, zoomLe
     const svgWidth = width
     const svgHeight = height
     const router = useRouter()
+    const queryParams = router.query as unknown as LandingPageQueryParams
     const id = useId().replaceAll(':', '')
     const { svgRef, zoomed, objectsPerTypeWithIds } = usePresenter(dimensions, id, zoomLevel2)
-    const { t } = useTypeSafeTranslation('landingpage')
+    const { t } = useTypeSafeTranslation('common')
 
     return (
         <Box overflow="hidden" height={svgHeight} width={svgWidth}>
@@ -55,7 +57,7 @@ const FilterClouds: React.FunctionComponent<Props> = ({ dimensions, type, zoomLe
                                 {!zoomed && (
                                     <Box>
                                         <Text width="12.5rem" textStyle={'cloudText'}>
-                                            {t(router.query.slug as PossibleFilters)}
+                                            {t(getGalaxyTypeByTranslationsKey(queryParams.slug))}
                                         </Text>
                                         <Text width="12.5rem" textStyle={'cloudText'}>
                                             {item.name}

@@ -1,10 +1,19 @@
-import { ArgsType, createUnionType, Field, IntersectionType, ObjectType, PickType } from '@nestjs/graphql'
-import { IsString } from 'class-validator'
+import {
+    ArgsType,
+    createUnionType,
+    Field,
+    IntersectionType,
+    ObjectType,
+    PickType,
+    registerEnumType,
+} from '@nestjs/graphql'
+import { IsOptional, IsString } from 'class-validator'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { PoepleZoomLevel5DetailType } from '../people/people.type'
 import { ArchivesOtherZoomLevel5DetailType } from '../archives/archives.type'
 import { PublicationsBookZoomLevel5DetailType } from '../publications/publications.type'
 import { ObjectsZoomLevel5DetailType } from '../objects/objects.type'
+import { TriplyExternalSourceEnum } from './zoomLevel5.service'
 
 @ObjectType()
 export class ZoomLevel5RelationsType {
@@ -15,7 +24,7 @@ export class ZoomLevel5RelationsType {
     public total: number
 
     @Field(() => [RelatedRecordType], { nullable: true })
-    public randomRelations: RelatedRecordType[]
+    public randomRelations?: RelatedRecordType[]
 }
 
 @ObjectType()
@@ -117,6 +126,10 @@ export class ZoomLevel5Args {
     @Field()
     @IsString()
     public id: string
+
+    @Field(() => TriplyExternalSourceEnum, { nullable: true })
+    @IsOptional()
+    public externalSource?: TriplyExternalSourceEnum
 }
 
 @ArgsType()
@@ -131,3 +144,5 @@ export class ZoomLevel5RelatedObjectsArgs {
     @IsString()
     public id: string
 }
+
+registerEnumType(TriplyExternalSourceEnum, { name: 'TriplyExternalSourceEnum' })

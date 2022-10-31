@@ -1,0 +1,61 @@
+{
+  "collectionName": "components_modules_grid_modules",
+  "info": {
+    "displayName": "Grid module",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "featuredFields": {
+      "type": "component",
+      "repeatable": true,
+      "component": "core.featured-fields"
+    },
+    "fieldTypes": {
+      "type": "enumeration",
+      "enum": [
+        "Triply",
+        "Stories"
+      ],
+      "required": true,
+      "default": "Stories"
+    },
+    "fieldTitlesAreInverted": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "fields": {
+      "type": "component",
+      "repeatable": true,
+      "component": "core.grid-featured-fields"
+    },
+    "buttons": {
+      "type": "component",
+      "repeatable": true,
+      "component": "core.button"
+    },
+    "gridModuleLayout": {
+      "type": "component",
+      "repeatable": false,
+      "component": "core.module-layouts",
+      "required": true
+    },
+    "showMoreButtonTitle": {
+      "type": "string",
+      "default": "Show More",
+      "required": true
+    },
+    "pageSize": {
+      "type": "integer",
+      "default": 6,
+      "required": true
+    }
+  }
+}
