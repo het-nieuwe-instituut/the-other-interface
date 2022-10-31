@@ -1,10 +1,10 @@
-import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import ArrowRightIcon from '@/icons/arrows/arrow-right.svg'
-import { Box, Flex, Link, useTheme } from '@chakra-ui/react'
-import { navigationT } from 'locales/locales'
-import { useRouter } from 'next/router'
 import React from 'react'
+import { Box, Flex, Link, useTheme } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 import { ZoomLevel } from '../../types/galaxy'
+import ArrowRightIcon from '@/icons/arrows/arrow-right.svg'
+import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { navigationT } from 'locales/locales'
 
 const getLevel2 = (t: navigationT, type: string) => {
     const typeToName: Record<string, string> = {
