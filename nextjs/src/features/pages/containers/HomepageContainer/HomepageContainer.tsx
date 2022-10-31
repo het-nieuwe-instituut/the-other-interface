@@ -1,5 +1,6 @@
-import Breadcrumbs from '@/features/galaxy/components/Breadcrumbs/Breadcrumbs'
+import Breadcrumbs, { BreadcrumbsRenderModes } from '@/features/galaxy/components/Breadcrumbs/Breadcrumbs'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
+import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import { Loader } from '@/features/shared/components/Loading/Loading'
 import useScroll from '@/features/shared/hooks/useScroll'
 import { Box, useTheme } from '@chakra-ui/react'
@@ -8,7 +9,7 @@ import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import { HomepageComponentsDynamicZone, HomepageQuery, useHomepageQuery } from 'src/generated/graphql'
-import { ScrollToTop } from '../../utils/utils'
+import { ScrollToContent, ScrollToTop } from '../../utils/utils'
 
 export const DynamicGalaxyNoSsr = dynamic(() => import('../../../galaxy/Galaxy/Galaxy'), {
     ssr: false,
@@ -36,31 +37,32 @@ const Homepage: React.FC<{ data?: HomepageQuery }> = ({ data }) => {
     const { scrollPosition } = useScroll()
 
     return (
-        <div>
-            <Box
-                backgroundColor="graph"
-                height="800px"
-                ref={graphRef}
-                position={'sticky'}
-                top="-750px"
-                zIndex={40}
-                onClick={ScrollToTop}
-                cursor={scrollPosition >= 750 ? 'pointer' : 'cursor'}
-            >
+        <Box backgroundColor="graph">
+            <Breadcrumbs
+                bg={scrollPosition >= 750 ? 'graph' : 'trasparent'}
+                onWrapperClick={ScrollToTop}
+                mode={scrollPosition >= 750 ? BreadcrumbsRenderModes.STICKY : BreadcrumbsRenderModes.DEFAULT}
+            />
+            <Box backgroundColor="graph" height="800px" ref={graphRef}>
                 {sizes?.height && sizes?.width && (
-                    <>
-                        <Breadcrumbs />
+                    <Box position={'fixed'}>
                         <DynamicGalaxyNoSsr dimensions={{ height: 800, width: sizes?.width }} />
-                    </>
+                    </Box>
                 )}
             </Box>
-            <Box px={{ xl: 6, base: 0 }}>
-                <Box backgroundColor={'white'} maxW={theme.breakpoints.xl} marginX={'auto'} paddingTop={6}>
+            <Box px={{ xl: 6, base: 0 }} position={'relative'} zIndex={2} backgroundColor={'white'}>
+                <Box maxW={theme.breakpoints.xl} marginX={'auto'} paddingTop={6}>
+                    <PageHeader
+                        showPointer={scrollPosition < 750}
+                        handleClick={ScrollToContent}
+                        title={data?.homepage?.data?.attributes?.Title || undefined}
+                        preface={data?.homepage?.data?.attributes?.description || undefined}
+                    />
                     <DynamicComponentRenderer
                         components={data?.homepage?.data?.attributes?.components as HomepageComponentsDynamicZone[]}
                     />
                 </Box>
             </Box>
-        </div>
+        </Box>
     )
 }

@@ -1,7 +1,9 @@
+import Breadcrumbs, { BreadcrumbsRenderModes } from '@/features/galaxy/components/Breadcrumbs/Breadcrumbs'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 import { Loader } from '@/features/shared/components/Loading/Loading'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import useScroll from '@/features/shared/hooks/useScroll'
 import { Box, Grid, GridItem, useTheme } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
 import dynamic from 'next/dynamic'
@@ -10,6 +12,7 @@ import { useRef } from 'react'
 import { StoryComponentsDynamicZone, StoryEntity } from 'src/generated/graphql'
 import { StoryMeta } from '../../Meta/StoryMeta'
 import { GetZoom5StoryQuery, useGetZoom5StoryTask } from '../../tasks/getZoom5StoryTask'
+import { ScrollToTop } from '../../utils/utils'
 
 const DynamicRecordCloudsNoSsr = dynamic(() => import('../../../galaxy/RecordClouds/RecordClouds'), {
     ssr: false,
@@ -40,9 +43,14 @@ const Story: React.FC<{ data: GetZoom5StoryQuery }> = ({ data }) => {
     const theme = useTheme()
     const graphRef = useRef<HTMLDivElement | null>(null)
     const sizes = useSize(graphRef)
+    const { scrollPosition } = useScroll()
 
     return (
         <>
+            <Breadcrumbs
+                onWrapperClick={ScrollToTop}
+                mode={scrollPosition >= 750 ? BreadcrumbsRenderModes.STICKY : BreadcrumbsRenderModes.DEFAULT}
+            />
             <Box backgroundColor="graph" height="800px" ref={graphRef} key={router.query.record as string}>
                 {sizes?.height && sizes?.width && (
                     <DynamicRecordCloudsNoSsr
