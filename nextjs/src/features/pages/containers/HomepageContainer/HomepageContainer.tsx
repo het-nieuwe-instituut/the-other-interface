@@ -1,6 +1,7 @@
 import Breadcrumbs, { BreadcrumbsRenderModes } from '@/features/galaxy/components/Breadcrumbs/Breadcrumbs'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
+import { Loader } from '@/features/shared/components/Loading/Loading'
 import useScroll from '@/features/shared/hooks/useScroll'
 import { Box, useTheme } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
@@ -18,7 +19,7 @@ export const HomepageContainer = () => {
     const { locale } = useRouter()
     const { data, loading, error } = useHomepageQuery({ variables: { locale } })
     if (loading) {
-        return <p>loading</p>
+        return <Loader />
     }
 
     if (error) {
@@ -37,24 +38,20 @@ const Homepage: React.FC<{ data?: HomepageQuery }> = ({ data }) => {
 
     return (
         <Box backgroundColor="graph">
-            <Breadcrumbs 
-                bg={scrollPosition >= 750 ? 'graph' : 'trasparent'}  
+            <Breadcrumbs
+                bg={scrollPosition >= 750 ? 'graph' : 'trasparent'}
                 onWrapperClick={ScrollToTop}
                 mode={scrollPosition >= 750 ? BreadcrumbsRenderModes.STICKY : BreadcrumbsRenderModes.DEFAULT}
             />
-            <Box
-                backgroundColor="graph"
-                height="800px"
-                ref={graphRef}
-            >
+            <Box backgroundColor="graph" height="800px" ref={graphRef}>
                 {sizes?.height && sizes?.width && (
                     <Box position={'fixed'}>
-                        <DynamicGalaxyNoSsr dimensions={{ height: 800, width: sizes?.width }}  />
+                        <DynamicGalaxyNoSsr dimensions={{ height: 800, width: sizes?.width }} />
                     </Box>
                 )}
             </Box>
             <Box px={{ xl: 6, base: 0 }} position={'relative'} zIndex={2} backgroundColor={'white'}>
-                <Box  maxW={theme.breakpoints.xl} marginX={'auto'} paddingTop={6}>
+                <Box maxW={theme.breakpoints.xl} marginX={'auto'} paddingTop={6}>
                     <PageHeader
                         showPointer={scrollPosition < 750}
                         handleClick={ScrollToContent}

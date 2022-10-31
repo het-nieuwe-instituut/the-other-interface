@@ -1,7 +1,7 @@
 import { times, uniqueId } from 'lodash'
 import { useRouter } from 'next/router'
 import { useMemo, useRef } from 'react'
-import { EntityNames, useStoriesQuery, useZoomLevel1Query, ZoomLevel1Query } from 'src/generated/graphql'
+import { useStoriesQuery, useZoomLevel1Query, ZoomLevel1Query } from 'src/generated/graphql'
 import { galaxyTypesToPositions } from '../galaxyConstants'
 import { useD3ZoomEvents } from '../hooks/useD3ZoomEvents'
 import { Dimensions, ZoomLevel } from '../types/galaxy'
@@ -16,16 +16,12 @@ function useObjectPerType(zoomLevel1Data?: ZoomLevel1Query) {
                 if (item.name === 'Archiefbestanddelen') {
                     return false
                 }
-                if (item.id === EntityNames.Stories) {
-                    return false
-                }
 
                 return true
             }) ?? []
 
         const newItems: ObjectPerTypeWithName[] = items.map(item => {
             const config = galaxyTypesToPositions[item.id]
-
             const newItem: ObjectPerTypeWithName = {
                 ...item,
                 id: item.id,
@@ -50,9 +46,6 @@ function useArchiefBestandDeel(zoomLevel1Data?: ZoomLevel1Query) {
         const items =
             zoomLevel1Data?.zoomLevel1.filter(item => {
                 if (item.name === 'Archiefbestanddelen') {
-                    return false
-                }
-                if (item.id === EntityNames.Stories) {
                     return false
                 }
 
@@ -82,6 +75,7 @@ export function usePresenter(dimensions: Dimensions, selector: string) {
                 parent: parents[Math.floor((Math.random() * data.length) / 10) + 1] ?? parents[0],
                 id: uniqueId(),
                 title: item?.attributes?.title ?? '',
+                description: item?.attributes?.description ?? '',
                 slug: item?.attributes?.slug ?? '',
             }))
             .slice(0, 1000)

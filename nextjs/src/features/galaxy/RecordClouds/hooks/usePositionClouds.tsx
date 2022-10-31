@@ -10,8 +10,8 @@ const configuration = {
         x: 0,
         y: 0,
         diameter: 0,
-        internalDiameter: 128,
-        spaceBetweenChilds: 60,
+        internalDiameter: 0,
+        spaceBetweenChilds: 0,
         children: [],
     },
     [EntityNames.Media]: {
@@ -19,8 +19,36 @@ const configuration = {
         x: 0,
         y: 0,
         diameter: 0,
-        internalDiameter: 128,
-        spaceBetweenChilds: 60,
+        internalDiameter: 0,
+        spaceBetweenChilds: 0,
+        children: [],
+    },
+    [EntityNames.Getty]: {
+        background: '',
+        x: 0,
+        y: 0,
+        diameter: 0,
+        internalDiameter: 0,
+        spaceBetweenChilds: 0,
+        children: [],
+    },
+    [EntityNames.Rkd]: {
+        background: '',
+        x: 0,
+        y: 0,
+        diameter: 0,
+        internalDiameter: 0,
+        spaceBetweenChilds: 0,
+        children: [],
+    },
+
+    [EntityNames.Wikidata]: {
+        background: '',
+        x: 0,
+        y: 0,
+        diameter: 0,
+        internalDiameter: 0,
+        spaceBetweenChilds: 0,
         children: [],
     },
     [EntityNames.Archives]: {
@@ -97,6 +125,7 @@ export interface ParentRelation {
     children: Relation[]
 }
 interface Relation {
+    id: string
     label: string
     type: EntityNames
     diameter: number
@@ -146,6 +175,7 @@ export function usePositionClouds(relations: ObjectRelationsQuery['relations']) 
 
                             // debugMode({ svgRef, childCenterPositionX, childCenterPositionY, centerX, centerY, x, y })
                             return {
+                                id: randomRelation.id,
                                 label: randomRelation.label,
                                 type: randomRelation.type,
                                 diameter: childConfig.diameter,

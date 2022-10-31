@@ -1,6 +1,6 @@
 import { useInitializeD3Simulation } from '@/features/shared/hooks/useInitializeD3Simulation'
 import * as d3 from 'd3'
-import { SimulationNodeDatum } from 'd3'
+import { Simulation, SimulationNodeDatum } from 'd3'
 import { MutableRefObject, useEffect, useRef } from 'react'
 import { DataDimension } from '../../hooks/useFitToDataToDimensions'
 import { Dimensions, PaginatedFilterType } from '../types'
@@ -43,20 +43,32 @@ function useListenToSimulationTicks(
     useEffect(() => {
         if (!data) return
         const d3Svg = d3.select(svgRef.current)
-        const nodeForeign = d3Svg.selectAll(`.foreign-${selector}`).data(data)
-        nodeForeign.attr('opacity', 0).attr('width', 0).attr('height', 0)
-    }, [data, selector, svgRef])
+        const nodeForeign = d3Svg.selectAll(`.foreign-${selector}`).data<Partial<D3CollectionItem>>(data)
+        nodeForeign.style('transform', 'scale(0)').attr('opacity', 0)
+        nodeForeign.style('transform-origin', 'center')
+        nodeForeign.transition().duration(600).style('transform', 'scale(1)').attr('opacity', 1)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [data])
 
     useEffect(() => {
         if (!data) return
         const d3Svg = d3.select(svgRef.current)
         const nodeForeign = d3Svg.selectAll(`.foreign-${selector}`).data<Partial<D3CollectionItem>>(data)
         const collisionObject = d3Svg.selectAll(`.foreign-collision`).data<Partial<D3CollisionData>>(collisionData)
+        const width = dimensions.width ?? 0
+        const height = dimensions.height ?? 0
+
+        nodeForeign
+            .attr('x', d => (d.x ?? 0) + -getTakeSpaceFromDataDimensions(dataDimensions, d))
+            .attr('y', d => (d.y ?? 0) + -getTakeSpaceFromDataDimensions(dataDimensions, d))
+            .attr('width', d => getTakeSpaceFromDataDimensions(dataDimensions, d) * 2)
+            .attr('height', d => getTakeSpaceFromDataDimensions(dataDimensions, d) * 2)
 
         simulation.current
-            ?.force('charge', d3.forceManyBody().strength(2))
-            .force('center', d3.forceCenter((dimensions.width ?? 0) / 2, (dimensions.height ?? 0) / 2))
-            ?.force(
+
+            ?.force('centerX', d3.forceX(width / 2).strength(0.01))
+            .force('centerY', d3.forceY(height / 2).strength(0.01))
+            .force(
                 'collide',
                 d3
                     .forceCollide()
@@ -70,7 +82,11 @@ function useListenToSimulationTicks(
             nodesListener.current = simulation.current
                 ?.nodes([...collisionData, ...data] as D3CollectionItem[])
                 .on('tick', () => {
-                    ticked(dataDimensions, nodeForeign, collisionObject, dimensions)
+                    simulation.current?.force(
+                        'center',
+                        d3.forceCenter((dimensions.width ?? 0) / 2, (dimensions.height ?? 0) / 2)
+                    )
+                    ticked(simulation.current, dataDimensions, nodeForeign, collisionObject, dimensions)
                 })
         }
 
@@ -95,6 +111,7 @@ function getTakeSpaceFromDataDimensions(dataDimensions: DataDimension[], d: Part
 }
 
 function ticked(
+    simulation: Simulation<D3CollectionItem, undefined> | null,
     dataDimensions: DataDimension[],
     nodeForeign: d3.Selection<d3.BaseType, Partial<D3CollectionItem>, SVGSVGElement | null, unknown>,
     collisionObject: d3.Selection<d3.BaseType, Partial<D3CollisionData>, SVGSVGElement | null, unknown>,
@@ -102,6 +119,12 @@ function ticked(
 ) {
     const width = dimensions.width ?? 0
     const height = dimensions.height ?? 0
+
+    nodeForeign
+        .attr('x', d => (d.x ?? 0) + -getTakeSpaceFromDataDimensions(dataDimensions, d))
+        .attr('y', d => (d.y ?? 0) + -getTakeSpaceFromDataDimensions(dataDimensions, d))
+        .attr('width', d => getTakeSpaceFromDataDimensions(dataDimensions, d) * 2)
+        .attr('height', d => getTakeSpaceFromDataDimensions(dataDimensions, d) * 2)
 
     // bounding box
     nodeForeign
@@ -113,17 +136,6 @@ function ticked(
             const diameter = getDiameter(dataDimensions, d)
             return (d.y = Math.max(diameter, Math.min(height - diameter, d.y ?? 0)))
         })
-
-    nodeForeign
-        .attr('x', d => (d.x ?? 0) + -getTakeSpaceFromDataDimensions(dataDimensions, d))
-        .attr('y', d => (d.y ?? 0) + -getTakeSpaceFromDataDimensions(dataDimensions, d))
-
-    nodeForeign
-        .transition()
-        .duration(110)
-        .attr('width', d => getTakeSpaceFromDataDimensions(dataDimensions, d) * 2)
-        .attr('height', d => getTakeSpaceFromDataDimensions(dataDimensions, d) * 2)
-        .attr('opacity', 1)
 
     collisionObject
         .attr('x', d => {

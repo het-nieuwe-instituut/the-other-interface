@@ -1,6 +1,7 @@
 import Breadcrumbs, { BreadcrumbsRenderModes } from '@/features/galaxy/components/Breadcrumbs/Breadcrumbs'
 import PaginatedFilterCloudsContainer from '@/features/galaxy/PaginatedFilterClouds/PaginatedFilterCloudsContainer'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
+import { Loader } from '@/features/shared/components/Loading/Loading'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import useScroll from '@/features/shared/hooks/useScroll'
@@ -31,7 +32,7 @@ export const LandingpageFilterContainer: React.FC = () => {
     const { scrollPosition } = useScroll()
 
     if (loading) {
-        return <p>loading</p>
+        return <Loader />
     }
 
     if (error) {

@@ -1,4 +1,4 @@
-import { Text } from '@chakra-ui/react'
+import { Loader } from '@/features/shared/components/Loading/Loading'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { EntityNames, useZoomLevel2Query } from 'src/generated/graphql'
@@ -8,7 +8,7 @@ export enum SupportedLandingPages {
     People = 'people',
     Archives = 'archives',
     Objects = 'objects',
-    Stories = 'stories'
+    Stories = 'stories',
 }
 
 type Props = {
@@ -27,7 +27,7 @@ export const DynamicGalaxyNoSsr = dynamic(() => import('../../galaxy/Galaxy/Gala
     ssr: false,
 })
 
-const TypeToEntityName: Record<string, EntityNames> = { 
+const TypeToEntityName: Record<string, EntityNames> = {
     publications: EntityNames.Publications,
     people: EntityNames.People,
     objects: EntityNames.Objects,
@@ -50,28 +50,28 @@ const FilterCloudsContainer: React.FunctionComponent<Props> = props => {
         variables: {
             entityName: TypeToEntityName[type],
         },
-        skip: !TypeToEntityName[type]
+        skip: !TypeToEntityName[type],
     })
 
     if (isFiltersLoading) {
-        return <Text>Loading</Text>
+        return <Loader />
     }
 
     if (filtersError) {
         return <p>{filtersError.message}</p>
     }
 
-
     return (
         <>
             {type === SupportedLandingPages.Stories ? (
-                 <DynamicGalaxyNoSsr dimensions={{ height: 800, width: props.dimensions.width }} />
-            ) : ( <DynamicPaginatedFilterCloudsNoSsr
-                zoomLevel2={filters?.zoomLevel2 ?? []}
-                dimensions={props.dimensions}
-                type={props.type}
-            />)}
-           
+                <DynamicGalaxyNoSsr dimensions={{ height: 800, width: props.dimensions.width }} />
+            ) : (
+                <DynamicPaginatedFilterCloudsNoSsr
+                    zoomLevel2={filters?.zoomLevel2 ?? []}
+                    dimensions={props.dimensions}
+                    type={props.type}
+                />
+            )}
         </>
     )
 }

@@ -1,0 +1,105 @@
+#import '../core/moduleLayout.fragment.graphql'
+
+fragment gridModuleFragment on ComponentModulesGridModule {
+    buttons {
+        id
+        url
+        text
+    }
+    description
+    featuredFields {
+        id
+        label
+        value
+    }
+    fields {
+        id
+        title
+        subtitle
+        thumbnail {
+            data {
+                id
+                attributes {
+                    url
+                    alternativeText
+                }
+            }
+        }
+        story {
+            data {
+                attributes {
+                    slug
+                    author {
+                        data {
+                            attributes {
+                                firstName
+                            }
+                        }
+                    }
+                    updatedAt
+                }
+            }
+        }
+        triplyRecord {
+            data {
+                attributes {
+                    createdAt
+                    updatedAt
+                    recordId
+                    archive {
+                        ... on ArchivesOtherZoomLevel5DetailType {
+                            id
+                            type
+                            title
+                        }
+                        ... on ArchivesFondsZoomLevel5DetailType {
+                            id
+                            type
+                        }
+                    }
+                    object {
+                        description
+                        image
+                    }
+                    publication {
+                        ... on PublicationsAudioVisualZoomLevel5DetailType {
+                            id
+                            type
+                            title
+                        }
+                        ... on PublicationsArticleZoomLevel5DetailType {
+                            id
+                            type
+                            title
+                        }
+                        ... on PublicationsSerialZoomLevel5DetailType {
+                            id
+                            type
+                            title
+                        }
+                        ... on PublicationsBookZoomLevel5DetailType {
+                            id
+                            type
+                            title
+                        }
+                    }
+                    people {
+                        name
+                        nameType
+                    }
+                }
+            }
+        }
+    }
+    fieldTitlesAreInverted
+    fieldTypes
+    gridModuleLayout {
+        ... on ComponentCoreModuleLayouts {
+            ...componentCoreModuleLayouts
+        }
+    }
+    id
+    pageSize
+    showMoreButtonTitle
+    title
+}
