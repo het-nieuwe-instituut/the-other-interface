@@ -106,7 +106,7 @@ export class PeopleService {
         },
     ]
 
-    private readonly ZoomLevel4Endpoint = 'zoom-4-people/run'
+    private readonly ZoomLevel4Endpoint = 'zoom-4-people-V2/run'
     private readonly ZoomLevel4CountEndpoint =
         'https://api.collectiedata.hetnieuweinstituut.nl/queries/Joran/zoom4-people-count/run'
 

@@ -21,8 +21,7 @@ export enum ObjectsZoomLevel4Filters {
     Technique = 'Technique',
     Subject = 'Subject',
     PerInst = 'PerInst',
-    StartDate = 'StartDate',
-    EndDate = 'EndDate',
+    date = 'date',
 }
 
 interface ObjectFilterData {
@@ -117,7 +116,7 @@ export class ObjectsService {
         },
     ]
 
-    private readonly ZoomLevel4Endpoint = 'zoom-4-objects/run'
+    private readonly ZoomLevel4Endpoint = 'zoom-4-objects-V2/run'
 
     private readonly ZoomLevel5Endpoint = 'zoom-5-objects/run'
 

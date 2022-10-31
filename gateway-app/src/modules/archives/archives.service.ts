@@ -11,10 +11,9 @@ export enum ArchivesZoomLevel3Ids {
 }
 
 export enum ArchivesZoomLevel4Filters {
-    StartDate = 'StartDate',
-    EndDate = 'EndDate',
-    DescriptionLevel = 'DescriptionLevel',
-    RelatedName = 'RelatedName',
+    date = 'date',
+    descriptionLevel = 'descriptionLevel',
+    relatedName = 'relatedName',
 }
 
 interface ObjectFilterData {
@@ -102,7 +101,7 @@ export class ArchivesService {
         },
     ]
 
-    private readonly ZoomLevel4Endpoint = 'zoom-4-archives/run'
+    private readonly ZoomLevel4Endpoint = 'zoom-4-archives-V2/run'
 
     // TODO: change to convention when Triply adds this to normal space
     private readonly archivesDescriptionLevelEndpoint =
