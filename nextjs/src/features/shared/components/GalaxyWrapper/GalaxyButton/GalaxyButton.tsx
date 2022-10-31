@@ -13,6 +13,7 @@ export const GalaxyButton: React.FC<GalaxyButtonProps> = props => {
             <Button
                 pointerEvents={'all'}
                 border="0px"
+                padding="10px"
                 _hover={{ bg: 'transparent', textDecoration: 'underline' }}
                 _active={{ bg: 'transparent' }}
                 _focus={{ bg: 'transparent' }}
@@ -33,6 +34,7 @@ export const GalaxyButton: React.FC<GalaxyButtonProps> = props => {
         <Button
             pointerEvents={'all'}
             border="0px"
+            padding="10px"
             _hover={{ bg: 'transparent' }}
             _active={{ bg: 'transparent' }}
             _focus={{ bg: 'transparent' }}
