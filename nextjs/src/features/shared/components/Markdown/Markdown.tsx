@@ -15,7 +15,7 @@ interface LinkProps {
     children?: ReactNode
 }
 
-const newTheing = {
+const hyperlinks = {
     a: (props: LinkProps) => {
         return (
             <a href={props.href} target="_blank" rel="noreferrer">
@@ -30,7 +30,7 @@ export const Markdown: React.FC<Props> = props => {
     return (
         <ReactMarkdown
             className={style.reactMarkDown}
-            components={ChakraUIRenderer(newTheing)}
+            components={ChakraUIRenderer(hyperlinks)}
             remarkPlugins={[remarkGfm]}
             rehypePlugins={[rehypeRaw]}
         >
