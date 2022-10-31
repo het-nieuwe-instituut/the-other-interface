@@ -170,9 +170,9 @@ export class ArchivesService {
         }
 
         const searchParams: Record<string, string> = {}
-        for (const [filterName, filterValue] of Object.entries(filters)) {
-            searchParams[`${filterName}`] = filterValue
-        }
+        if (filters.date) searchParams.date = filters.date
+        if (filters.descriptionLevel) searchParams.DescriptionLevel = filters.descriptionLevel
+        if (filters.relatedName) searchParams.RelatedName = filters.relatedName
 
         const result = await this.triplyService.queryTriplyData<ArchivesZoomLevel4Data>(
             this.ZoomLevel4Endpoint,
