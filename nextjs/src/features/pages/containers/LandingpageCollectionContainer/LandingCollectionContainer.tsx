@@ -1,5 +1,7 @@
 import Breadcrumbs, { BreadcrumbsRenderModes } from '@/features/galaxy/components/Breadcrumbs/Breadcrumbs'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
+import { GalaxyFooter } from '@/features/shared/components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
+import { GalaxyWrapper } from '@/features/shared/components/GalaxyWrapper/GalaxyWrapper'
 import { Loader } from '@/features/shared/components/Loading/Loading'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
@@ -65,26 +67,29 @@ export const LandingCollection: React.FC<{ data?: LandingpageBySlugQuery }> = ({
         <>
             <Breadcrumbs
                 onWrapperClick={ScrollToTop}
-                mode={scrollPosition >= 750 ? BreadcrumbsRenderModes.STICKY : BreadcrumbsRenderModes.DEFAULT} 
+                mode={scrollPosition >= 750 ? BreadcrumbsRenderModes.STICKY : BreadcrumbsRenderModes.DEFAULT}
             />
-            <Box
-                backgroundColor="graph"
-                height="800px"
-                ref={graphRef}
-                bgGradient="radial(50% 50% at 50% 50%, #B5FD99 0%, rgba(181, 253, 153, 0) 76.56%)"
-                backgroundRepeat={'no-repeat'}
-                bgSize={'1691px 1691px'}
-                backgroundPosition={'center'}
-            >
-                {sizes?.height && sizes?.width && (
-                    <>
-                        <PaginatedCollectionContainer
-                            type={type}
-                            dimensions={{ height: 800, width: sizes.width }}
-                        />
-                    </>
-                )}
-            </Box>
+            <GalaxyWrapper renderBottom={() => <GalaxyFooter />}>
+                <Box
+                    backgroundColor="graph"
+                    height="800px"
+                    ref={graphRef}
+                    bgGradient="radial(50% 50% at 50% 50%, #B5FD99 0%, rgba(181, 253, 153, 0) 76.56%)"
+                    backgroundRepeat={'no-repeat'}
+                    bgSize={'1691px 1691px'}
+                    backgroundPosition={'center'}
+                >
+                    {sizes?.height && sizes?.width && (
+                        <>
+                            <PaginatedCollectionContainer
+                                type={type}
+                                dimensions={{ height: 800, width: sizes.width }}
+                            />
+                        </>
+                    )}
+                </Box>
+            </GalaxyWrapper>
+
             <Box px={{ xl: 6, base: 0 }} position={'relative'} zIndex={2}>
                 <Box backgroundColor={'white'} px={6} pt={6} maxW={theme.breakpoints.xl} marginX={'auto'} pb={1}>
                     <PageHeader
