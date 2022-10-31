@@ -5,11 +5,9 @@ interface GalaxyButtonProps {
     link?: string
     rightIcon?: JSX.Element
     leftIcon?: JSX.Element
-    textStyle?: string
 }
 
 export const GalaxyButton: React.FC<GalaxyButtonProps> = props => {
-    console.log(props)
     if (props.link) {
         return (
             <Button

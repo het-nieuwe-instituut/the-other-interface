@@ -11,7 +11,6 @@ export const GalaxyFooter: React.FC = () => {
                         link={'https://zoeken.hetnieuweinstituut.nl/nl/'}
                         text={'Go to Searchportal'}
                         rightIcon={renderExternalLink()}
-                        textStyle={'galaxyButton'}
                     />
                 </Box>
             </Flex>
