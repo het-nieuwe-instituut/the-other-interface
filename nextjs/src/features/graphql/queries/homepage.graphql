@@ -15,6 +15,7 @@ query homepage($locale: String) {
             id
             attributes {
                 Title
+                description
                 components {
                     ... on ComponentModulesTextModule {
                         ...textModuleFragment

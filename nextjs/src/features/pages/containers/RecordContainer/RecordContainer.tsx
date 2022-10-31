@@ -1,6 +1,8 @@
+import Breadcrumbs, { BreadcrumbsRenderModes } from '@/features/galaxy/components/Breadcrumbs/Breadcrumbs'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 import { Loader } from '@/features/shared/components/Loading/Loading'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
+import useScroll from '@/features/shared/hooks/useScroll'
 import { Box, useTheme } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
 import dynamic from 'next/dynamic'
@@ -8,6 +10,7 @@ import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import { LandingpageComponentsDynamicZone } from 'src/generated/graphql'
 import { useGetZoom5RecordTask } from '../../tasks/getZoom5RecordTask'
+import { ScrollToContent, ScrollToTop } from '../../utils/utils'
 
 const DynamicRecordCloudsNoSsr = dynamic(() => import('../../../galaxy/RecordClouds/RecordClouds'), {
     ssr: false,
@@ -31,9 +34,14 @@ const RecordPage: React.FC<{ data?: ReturnType<typeof useGetZoom5RecordTask>['da
     const theme = useTheme()
     const graphRef = useRef<HTMLDivElement | null>(null)
     const sizes = useSize(graphRef)
+    const { scrollPosition } = useScroll()
 
     return (
         <>
+            <Breadcrumbs
+                onWrapperClick={ScrollToTop}
+                mode={scrollPosition >= 750 ? BreadcrumbsRenderModes.STICKY : BreadcrumbsRenderModes.DEFAULT}
+            />
             <Box backgroundColor="graph" height="800px" ref={graphRef} key={router.query.record as string}>
                 {sizes?.height && sizes?.width && (
                     <DynamicRecordCloudsNoSsr
@@ -45,9 +53,11 @@ const RecordPage: React.FC<{ data?: ReturnType<typeof useGetZoom5RecordTask>['da
                 )}
             </Box>
 
-            <Box px={{ xl: 6, base: 0 }}>
-                <Box backgroundColor={'white'} px={6} pt={6} maxW={theme.breakpoints.xl} marginX={'auto'} pb={1}>
+            <Box px={{ xl: 6, base: 0 }} position={'relative'} zIndex={2} backgroundColor={'white'}>
+                <Box maxW={theme.breakpoints.xl} marginX={'auto'} paddingTop={6}>
                     <PageHeader
+                        showPointer={scrollPosition < 750}
+                        handleClick={ScrollToContent}
                         title={data?.zoom5landingPage?.attributes?.Title || undefined}
                         preface={data?.zoom5landingPage?.attributes?.Description || undefined}
                     />

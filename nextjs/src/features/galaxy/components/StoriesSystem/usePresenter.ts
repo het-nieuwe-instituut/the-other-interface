@@ -79,6 +79,7 @@ export function usePresenter(stories: InstancesPerClass[]) {
         loading,
         showTooltip,
         hideTooltip,
+        cleanupTooltips,
     }
 }
 
@@ -196,6 +197,10 @@ function showTooltip(e: React.MouseEvent<HTMLDivElement, MouseEvent>, item: Data
 
 function hideTooltip(item: DataPoint) {
     getTooltipElement(item.id)?.remove()
+}
+
+function cleanupTooltips() {
+    document.querySelectorAll('[id$="-tooltip"]').forEach(el => el.remove())
 }
 
 function insertTooltip(item: DataPoint) {

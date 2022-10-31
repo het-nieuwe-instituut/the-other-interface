@@ -10,7 +10,7 @@ interface Props {
 
 export const PageHeader: React.FC<Props> = ({ title, preface, handleClick, showPointer }) => {
     return (
-        <Box onClick={handleClick ? handleClick : undefined} cursor={showPointer ? 'pointer' : 'cursor'}>
+        <Box onClick={handleClick ? handleClick : undefined} cursor={showPointer ? 'pointer' : 'cursor'} pl={'24px'}>
             <Text as={'h1'} textStyle={'h1'} pb={'md'}>
                 {title}
             </Text>
