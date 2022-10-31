@@ -1,6 +1,8 @@
 import Breadcrumbs, { BreadcrumbsRenderModes } from '@/features/galaxy/components/Breadcrumbs/Breadcrumbs'
 import { SupportedLandingPages } from '@/features/galaxy/FilterClouds/FilterCloudsContainer'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
+import { GalaxyFooter } from '@/features/shared/components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
+import { GalaxyWrapper } from '@/features/shared/components/GalaxyWrapper/GalaxyWrapper'
 import { Loader } from '@/features/shared/components/Loading/Loading'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
@@ -52,21 +54,21 @@ export const LandingpageContainer: React.FC = () => {
 
     return (
         <>
-            <Breadcrumbs  onWrapperClick={ScrollToTop}
-                 mode={scrollPosition >= 750 ? BreadcrumbsRenderModes.STICKY : BreadcrumbsRenderModes.DEFAULT} />
-            <Box
-                backgroundColor="graph"
-                height="800px"
-                ref={graphRef}
-            >
-                {sizes?.height && sizes?.width && (
-                    <Box position={'fixed'}>
-                        <DynamicFilterCloudsNoSsr type={type} dimensions={{ height: 800, width: sizes?.width }} />
-                    </Box>
-                )}
-            </Box>
+            <Breadcrumbs
+                onWrapperClick={ScrollToTop}
+                mode={scrollPosition >= 750 ? BreadcrumbsRenderModes.STICKY : BreadcrumbsRenderModes.DEFAULT}
+            />
+            <GalaxyWrapper renderBottom={() => <GalaxyFooter />}>
+                <Box backgroundColor="graph" height="800px" ref={graphRef}>
+                    {sizes?.height && sizes?.width && (
+                        <Box position={'fixed'}>
+                            <DynamicFilterCloudsNoSsr type={type} dimensions={{ height: 800, width: sizes?.width }} />
+                        </Box>
+                    )}
+                </Box>
+            </GalaxyWrapper>
             <Box px={{ xl: 6, base: 0 }} position={'relative'} zIndex={2} backgroundColor={'white'}>
-                <Box  maxW={theme.breakpoints.xl} marginX={'auto'} paddingTop={6}>
+                <Box maxW={theme.breakpoints.xl} marginX={'auto'} paddingTop={6}>
                     <PageHeader
                         showPointer={scrollPosition < 750}
                         handleClick={ScrollToContent}

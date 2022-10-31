@@ -1,5 +1,7 @@
 import Breadcrumbs, { BreadcrumbsRenderModes } from '@/features/galaxy/components/Breadcrumbs/Breadcrumbs'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
+import { GalaxyFooter } from '@/features/shared/components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
+import { GalaxyWrapper } from '@/features/shared/components/GalaxyWrapper/GalaxyWrapper'
 import { Loader } from '@/features/shared/components/Loading/Loading'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
@@ -51,16 +53,18 @@ const Story: React.FC<{ data: GetZoom5StoryQuery }> = ({ data }) => {
                 onWrapperClick={ScrollToTop}
                 mode={scrollPosition >= 750 ? BreadcrumbsRenderModes.STICKY : BreadcrumbsRenderModes.DEFAULT}
             />
-            <Box backgroundColor="graph" height="800px" ref={graphRef} key={router.query.record as string}>
-                {sizes?.height && sizes?.width && (
-                    <DynamicRecordCloudsNoSsr
-                        key={router.query.record as string}
-                        zoomLevel5={data?.zoom5Story}
-                        relations={data?.zoom5relations}
-                        dimensions={sizes}
-                    />
-                )}
-            </Box>
+            <GalaxyWrapper renderBottom={() => <GalaxyFooter />}>
+                <Box backgroundColor="graph" height="800px" ref={graphRef} key={router.query.record as string}>
+                    {sizes?.height && sizes?.width && (
+                        <DynamicRecordCloudsNoSsr
+                            key={router.query.record as string}
+                            zoomLevel5={data?.zoom5Story}
+                            relations={data?.zoom5relations}
+                            dimensions={sizes}
+                        />
+                    )}
+                </Box>
+            </GalaxyWrapper>
 
             <Box px={{ xl: 6, base: 0 }}>
                 <Box backgroundColor={'white'} px={6} maxW={theme.breakpoints.xl} marginX={'auto'}>
