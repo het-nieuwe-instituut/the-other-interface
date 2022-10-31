@@ -45,11 +45,7 @@ const Homepage: React.FC<{ data?: HomepageQuery }> = ({ data }) => {
                 onWrapperClick={ScrollToTop}
                 mode={scrollPosition >= 750 ? BreadcrumbsRenderModes.STICKY : BreadcrumbsRenderModes.DEFAULT}
             />
-            <GalaxyWrapper
-                // renderTopLeft={() => <Breadcrumbs />}
-                // renderTopRight={() => <Menu />}
-                renderBottom={() => <GalaxyFooter />}
-            >
+            <GalaxyWrapper renderBottom={() => <GalaxyFooter />}>
                 <Box backgroundColor="graph" height="800px" ref={graphRef}>
                     {sizes?.height && sizes?.width && (
                         <Box position={'fixed'}>
