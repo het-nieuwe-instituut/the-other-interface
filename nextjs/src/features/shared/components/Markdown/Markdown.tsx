@@ -10,7 +10,6 @@ interface Props {
 }
 
 export const Markdown: React.FC<Props> = props => {
-    console.log(ChakraUIRenderer())
     return (
         <ReactMarkdown
             className={style.reactMarkDown}
