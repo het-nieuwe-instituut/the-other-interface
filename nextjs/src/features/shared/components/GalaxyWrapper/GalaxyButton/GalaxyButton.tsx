@@ -13,7 +13,6 @@ export const GalaxyButton: React.FC<GalaxyButtonProps> = props => {
             <Button
                 pointerEvents={'all'}
                 border="0px"
-                padding="10px"
                 _hover={{ bg: 'transparent', textDecoration: 'underline' }}
                 _active={{ bg: 'transparent' }}
                 _focus={{ bg: 'transparent' }}
@@ -22,7 +21,7 @@ export const GalaxyButton: React.FC<GalaxyButtonProps> = props => {
                 as={'a'}
                 href={props.link}
                 target={'_blank'}
-                display={'block'}
+                display={'flex'}
                 textStyle={'galaxyButton'}
             >
                 {props.text}
@@ -34,13 +33,13 @@ export const GalaxyButton: React.FC<GalaxyButtonProps> = props => {
         <Button
             pointerEvents={'all'}
             border="0px"
-            padding="10px"
             _hover={{ bg: 'transparent' }}
             _active={{ bg: 'transparent' }}
             _focus={{ bg: 'transparent' }}
             rightIcon={props.rightIcon}
             leftIcon={props.leftIcon}
             textStyle={'galaxyButton'}
+            display={'flex'}
         >
             {props.text}
         </Button>
