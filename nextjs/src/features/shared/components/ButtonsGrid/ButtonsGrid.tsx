@@ -5,7 +5,7 @@ import { keyExtractor } from '@/features/shared/utils/lists'
 import { capitalizeFirstLetter } from '@/features/shared/utils/text'
 import Download from '@/icons/arrows/download.svg'
 import ExternalLink from '@/icons/arrows/external-link.svg'
-import { Button, Flex, Grid, ResponsiveValue, Text } from '@chakra-ui/react'
+import { Button, Flex, Grid, propNames, ResponsiveValue, Text } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import {
     ComponentCoreButton,
@@ -24,6 +24,7 @@ interface Props {
     buttons?: (ButtonType | null)[]
     flexDirection: ResponsiveValue<'column' | 'row'> | undefined
     renderBefore?: () => any
+    buttonLayoutStyle?: { [key: string]: string }
 }
 
 const buttonConfig = {
@@ -74,7 +75,13 @@ export const ButtonsGrid: React.FC<Props> = props => {
             }
             return (
                 <Flex key={keyExtractor(button, index, array)}>
-                    <GridButton button={button} index={index} array={array} config={config} />
+                    <GridButton
+                        button={button}
+                        index={index}
+                        array={array}
+                        config={config}
+                        buttonLayoutStyle={props.buttonLayoutStyle}
+                    />
                 </Flex>
             )
         })
@@ -86,13 +93,15 @@ interface GridButtonProps {
     index: number
     array: Maybe<ButtonType>[]
     config: typeof buttonConfig['Default'] | typeof buttonConfig['Large']
+    buttonLayoutStyle?: { [key: string]: string }
 }
-const GridButton: React.FC<GridButtonProps> = ({ button, index, array, config }) => {
+const GridButton: React.FC<GridButtonProps> = ({ button, index, array, config, buttonLayoutStyle }) => {
     const pageConfiguration = usePageConfiguration()
 
     return (
         <NextLink style={{ width: '100%' }} href={getURl(button)} passHref>
             <Button
+                style={buttonLayoutStyle}
                 variant={config.variant}
                 as={'a'}
                 rightIcon={renderExternalLink(button)}
