@@ -1,6 +1,5 @@
-import { ApolloClient, gql, NormalizedCacheObject, useQuery } from '@apollo/client'
+import { ApolloClient, NormalizedCacheObject } from '@apollo/client'
 import { GetServerSidePropsContext } from 'next'
-
 import {
     ObjectRelationsQuery,
     PeopleRelationsQuery,
@@ -11,30 +10,15 @@ import {
 } from 'src/generated/graphql'
 import { StoryQueryParams } from 'src/pages/story/[slug]'
 
-export const Zoom5StoryDataDocument = gql`
-    query zoom5RecordData {
-        zoom5Story @client
-        zoom5relations @client
-    }
-`
-
 export interface GetZoom5StoryQuery {
-    zoom5Story?: NonNullable<NonNullable<NonNullable<StoryBySlugQuery>['stories']>['data']>[0]
-    zoom5relations?: ObjectRelationsQuery['relations']
+    story?: NonNullable<NonNullable<NonNullable<StoryBySlugQuery>['stories']>['data']>[0]
+    relations?: ObjectRelationsQuery['relations']
 }
 
-export function useGetZoom5StoryTask() {
-    const query = useQuery<GetZoom5StoryQuery>(Zoom5StoryDataDocument)
-
-    if (!query.data) {
-        return { ...query, data: query.previousData }
-    }
-    return query
-}
 export async function getZoom5StoryTask(
     client: ApolloClient<NormalizedCacheObject>,
     context: GetServerSidePropsContext
-) {
+): Promise<GetZoom5StoryQuery | undefined> {
     const queryParams = context.query as unknown as StoryQueryParams
     const slug = queryParams.slug
 
@@ -64,14 +48,8 @@ export async function getZoom5StoryTask(
         return
     }
 
-    const story = storyBySlug.data.stories.data?.[0]
-
-    client.writeQuery<GetZoom5StoryQuery>({
-        query: Zoom5StoryDataDocument,
-        data: {
-            zoom5Story: story,
-            zoom5relations: relations.data.relations,
-        },
-        overwrite: true,
-    })
+    return {
+        story: storyBySlug.data.stories.data?.[0],
+        relations: relations.data.relations,
+    }
 }
