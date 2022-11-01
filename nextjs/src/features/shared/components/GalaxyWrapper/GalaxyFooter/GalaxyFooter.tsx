@@ -15,7 +15,7 @@ export const GalaxyFooter: React.FC = () => {
 
                 <Box marginRight={'5px'}>
                     <GalaxyButton
-                        text={t('GoToSearchPortal')}
+                        text={t('goToSearchPortal')}
                         rightIcon={renderExternalLink()}
                         link={t('searchPortalUrl')}
                         target={'_blank'}
