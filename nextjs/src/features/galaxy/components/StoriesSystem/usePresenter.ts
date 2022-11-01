@@ -113,6 +113,71 @@ function useTriangles(stories: InstancesPerClass[]) {
     }
 }
 
+// TODO: commented out in case its needed. remove otherwise
+// function useDrawPathByDataPoints(dataPoints: DataPoint[]) {
+//     const svgRef = useRef(null)
+//     const initialized = useRef(false)
+
+//     useEffect(() => {
+//         if (!svgRef.current) {
+//             return
+//         }
+//         if (initialized.current) {
+//             return
+//         }
+//         initialized.current = true
+
+//         drawPathByParent(svgRef.current, dataPoints)
+
+//         return () => {
+//             initialized.current = false
+//         }
+//     }, [dataPoints])
+
+//     return {
+//         svgRef,
+//         initialized,
+//     }
+// }
+
+// function drawPathByParent(svgRef: null, dataPoints: InstancesPerClassWithPoint[]) {
+//     const d3Svg = d3.select(svgRef)
+
+//     // Add the line
+//     d3Svg
+//         .selectAll('.StoriesSystem-dot')
+//         .on('mouseover', d => {
+//             const hoverDataPoint = dataPoints.find(
+//                 dataPoint => dataPoint.id === d.target.offsetParent?.attributes['data-id']?.value
+//             )
+
+//             const filteredDataPoints = dataPoints.filter(dataPoint => dataPoint.parent === hoverDataPoint?.parent)
+//             const sortedDataPoints = filteredDataPoints.sort((a, b) => {
+//                 const totalA = a.point[0] + a.point[1]
+//                 const totalB = b.point[0] + b.point[1]
+//                 return totalA - totalB
+//             })
+
+//             d3Svg
+//                 .append('path')
+//                 .datum(sortedDataPoints)
+//                 .attr('fill', 'none')
+//                 .attr('stroke', '#666666')
+//                 .attr('filter', 'blur(2px)')
+//                 .attr('stroke-width', 1)
+//                 .attr(
+//                     'd',
+//                     d3
+//                         .line()
+//                         .x((d: any) => d.point[0])
+//                         .y((d: any) => d.point[1]) as any
+//                 )
+//         })
+//         .on('mouseout', () => {
+//             d3Svg.selectAll('path').remove()
+//         })
+// }
+
 function showTooltip(e: React.MouseEvent<HTMLDivElement, MouseEvent>, item: DataPoint) {
     const storyEl = document.getElementById(item.id)
     if (!storyEl) {
