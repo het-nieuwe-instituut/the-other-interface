@@ -7,6 +7,7 @@ import Download from '@/icons/arrows/download.svg'
 import ExternalLink from '@/icons/arrows/external-link.svg'
 import { Button, Flex, Grid, ResponsiveValue, Text } from '@chakra-ui/react'
 import NextLink from 'next/link'
+import { CSSProperties } from 'react'
 import {
     ComponentCoreButton,
     EnumComponentmodulesbuttonsmoduleButtonstyle,
@@ -24,7 +25,7 @@ interface Props {
     buttons?: (ButtonType | null)[]
     flexDirection: ResponsiveValue<'column' | 'row'> | undefined
     renderBefore?: () => any
-    buttonLayoutStyle?: { [key: string]: string }
+    buttonLayoutStyle?: CSSProperties
 }
 
 const buttonConfig = {
@@ -93,7 +94,7 @@ interface GridButtonProps {
     index: number
     array: Maybe<ButtonType>[]
     config: typeof buttonConfig['Default'] | typeof buttonConfig['Large']
-    buttonLayoutStyle?: { [key: string]: string }
+    buttonLayoutStyle?: CSSProperties
 }
 const GridButton: React.FC<GridButtonProps> = ({ button, index, array, config, buttonLayoutStyle }) => {
     const pageConfiguration = usePageConfiguration()
