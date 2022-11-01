@@ -19,9 +19,13 @@ const MediaImage = (props: MediaImageProps) => {
     const dimensions = useDimensions(imageRef, true)
     const originalHeight = image?.data?.attributes?.height ?? 1
     const originalWidth = image?.data?.attributes?.width ?? 1
-    const proportions = calculateImagePropotions(originalWidth, originalHeight, IMAGE_HEIGHT, dimensions?.borderBox.width || 1223)
+    const proportions = calculateImagePropotions(
+        originalWidth,
+        originalHeight,
+        IMAGE_HEIGHT,
+        dimensions?.borderBox.width || 1223
+    )
     const imagePath = imageBasePath + url
-    const { onClick } = props
 
     return (
         <Box
@@ -31,7 +35,7 @@ const MediaImage = (props: MediaImageProps) => {
             paddingTop={props.component.imageModuleLayout?.spacingTop ?? undefined}
         >
             <Box maxW={'80rem'} ref={imageRef}>
-                <Box onClick={onClick} cursor={'pointer'} pb="2.5">
+                <Box pb="2.5">
                     {/* <Img alt={alt_text || ''} src={imagePath} w="full" maxH={'42.5rem'} /> */}
                     <Image
                         src={imagePath}
