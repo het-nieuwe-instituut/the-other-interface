@@ -113,6 +113,10 @@ export const StoryMeta: React.FC<Props> = ({ story }) => {
             )}
             {story.attributes?.storyLinks && (
                 <ButtonsGrid
+                    buttonLayoutStyle={{
+                        whiteSpace: 'normal',
+                        wordWrap: 'break-word',
+                    }}
                     flexDirection="column"
                     buttons={story.attributes.storyLinks.buttons ?? []}
                     buttonStyle={EnumComponentmodulesbuttonsmoduleButtonstyle.Default}
