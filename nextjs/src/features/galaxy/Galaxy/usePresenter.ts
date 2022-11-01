@@ -10,17 +10,10 @@ import { ObjectPerTypeWithName, useD3Simulation } from './hooks/useD3Simulation'
 import { useFitDataToDimensions } from './hooks/useFitDataToDimensions'
 
 function useObjectPerType(zoomLevel1Data?: ZoomLevel1Query) {
-    const objectsPerTypeWithIds = useMemo(() => {
-        const items =
-            zoomLevel1Data?.zoomLevel1.filter(item => {
-                if (item.name === 'Archiefbestanddelen') {
-                    return false
-                }
+    const objectsPerTypeWithIds: ObjectPerTypeWithName[] = useMemo(() => {
+        const items = zoomLevel1Data?.zoomLevel1.filter(item => item.name !== 'Archiefbestanddelen') ?? []
 
-                return true
-            }) ?? []
-
-        const newItems: ObjectPerTypeWithName[] = items.map(item => {
+        return items.map(item => {
             const config = galaxyTypesToPositions[item.id]
             const newItem: ObjectPerTypeWithName = {
                 ...item,
@@ -34,28 +27,13 @@ function useObjectPerType(zoomLevel1Data?: ZoomLevel1Query) {
 
             return newItem
         })
-
-        return newItems
     }, [zoomLevel1Data])
 
     return objectsPerTypeWithIds
 }
 
 function useArchiefBestandDeel(zoomLevel1Data?: ZoomLevel1Query) {
-    const objectsPerTypeWithIds = useMemo(() => {
-        const items =
-            zoomLevel1Data?.zoomLevel1.filter(item => {
-                if (item.name === 'Archiefbestanddelen') {
-                    return false
-                }
-
-                return true
-            }) ?? []
-
-        return items[0]
-    }, [zoomLevel1Data])
-
-    return objectsPerTypeWithIds
+    return useMemo(() => zoomLevel1Data?.zoomLevel1.find(item => item.name === 'Archiefbestanddelen'), [zoomLevel1Data])
 }
 
 export function usePresenter(dimensions: Dimensions, selector: string) {
