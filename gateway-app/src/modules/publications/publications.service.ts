@@ -198,9 +198,7 @@ export class PublicationsService {
     ]
 
     private readonly ZoomLevel4Endpoint = 'zoom-4-books/run'
-
-    private readonly ZoomLevel4CountEndpoint =
-        'https://api.collectiedata.hetnieuweinstituut.nl/queries/Joran/zoom4-books-count/run'
+    private readonly ZoomLevel4CountEndpoint = 'zoom4-books-count/run'
 
     private readonly ZoomLevel5Endpoint = {
         [PublicationsZoomLevel5Types.article]: 'zoom-5-books-article/run',
