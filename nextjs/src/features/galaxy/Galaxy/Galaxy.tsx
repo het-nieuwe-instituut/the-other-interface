@@ -126,7 +126,7 @@ const Galaxy: React.FC<Props> = ({ dimensions }) => {
                                                         item.name !== 'stories' && (
                                                             <>
                                                                 <Text width="12.5rem" mb={1} textStyle={'cloudText'}>
-                                                                    {item.name}
+                                                                    {t(item.id.toLowerCase()) || item.name}
                                                                 </Text>
                                                                 <Text width="12.5rem" textStyle={'cloudText'}>
                                                                     {item.numberOfInstances}
