@@ -21,7 +21,7 @@ const defaultDimensions = {
 export const StoriesSystem: React.FC<Props> = ({ data = [], dimensions = defaultDimensions }) => {
     const svgWidth = dimensions.width
     const svgHeight = dimensions.height
-    const { svgRef, triangles, dataPoints, showTooltip, hideTooltip, cleanupTooltips } = usePresenter(data)
+    const { triangles, dataPoints, showTooltip, hideTooltip, cleanupTooltips } = usePresenter(data)
 
     useEffect(() => {
         // cleanup any remaining visible tooltips on unmount
@@ -31,7 +31,7 @@ export const StoriesSystem: React.FC<Props> = ({ data = [], dimensions = default
     }, [])
 
     return (
-        <svg width={svgWidth} height={svgHeight} ref={svgRef}>
+        <svg width={svgWidth} height={svgHeight}>
             <style>
                 {`
                     .StoriesSystem-dot { cursor: pointer }
