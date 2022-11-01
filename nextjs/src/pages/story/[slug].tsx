@@ -1,6 +1,6 @@
-import { addApolloState, getApolloClient } from '@/features/graphql/config/apollo'
+import { getApolloClient } from '@/features/graphql/config/apollo'
 import { StoryContainer } from '@/features/pages/containers/StoryContainer/StoryContainer'
-import { getZoom5StoryTask } from '@/features/pages/tasks/getZoom5StoryTask'
+import { GetZoom5StoryQuery, getZoom5StoryTask } from '@/features/pages/tasks/getZoom5StoryTask'
 import { preparePageConfiguration } from '@/features/shared/utils/pageConfiguration'
 import { GetServerSidePropsContext } from 'next'
 
@@ -8,29 +8,25 @@ export interface StoryQueryParams {
     slug: string
 }
 
-const Page = () => {
-    return <StoryContainer />
+interface Props {
+    data: GetZoom5StoryQuery
+}
+
+const Page = ({ data }: Props) => {
+    return <StoryContainer data={data} />
 }
 
 export default Page
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
-    const queryParams = context.query as unknown as StoryQueryParams
-    const slug = queryParams.slug
     const apolloClient = getApolloClient({ headers: context?.req?.headers })
 
-    await getZoom5StoryTask(apolloClient, context)
+    const data = await getZoom5StoryTask(apolloClient, context)
 
     preparePageConfiguration(apolloClient, {
         host: context.req.headers.host ?? '',
         imagePath: process.env.NEXT_PUBLIC_REACT_APP_IMAGE_BASE_URL ?? '',
     })
 
-    const apolloState = apolloClient.cache.extract()
-
-    return addApolloState(apolloState, {
-        props: {
-            slug,
-        },
-    })
+    return { props: { data } }
 }

@@ -4,7 +4,7 @@ import { useMemo } from 'react'
 import { EntityNames, ObjectRelationsQuery } from 'src/generated/graphql'
 import { SVG_DIMENSIONS } from '../RecordClouds'
 
-const configuration = {
+const configuration: Record<EntityNames, Config> = {
     [EntityNames.External]: {
         background: '',
         x: 0,
@@ -113,6 +113,19 @@ const configuration = {
     },
 }
 
+interface Config {
+    background: string
+    x: number
+    y: number
+    diameter: number
+    internalDiameter: number
+    spaceBetweenChilds: number
+    children: {
+        position: number
+        diameter: number
+    }[]
+}
+
 export interface ParentRelation {
     label: string
     type: EntityNames
@@ -133,58 +146,84 @@ interface Relation {
     y: number
 }
 
+interface ConfiguredRelation {
+    label: EntityNames
+    type: EntityNames
+    x: number
+    y: number
+    diameter: number
+    background: string
+    showing: number
+    total: number
+    children: ConfiguredRelationChild[]
+}
+
+interface ConfiguredRelationChild {
+    id: string
+    label: string
+    type: EntityNames
+    diameter: number
+    x: number
+    y: number
+}
+
 export function usePositionClouds(relations: ObjectRelationsQuery['relations']) {
     const relationsPositionData: ParentRelation[] = useMemo(() => {
-        const configuredRelations =
-            relations?.map(relation => {
-                const config = configuration[relation.type]
+        const configuredRelations: ConfiguredRelation[] = []
+        relations?.forEach(relation => {
+            const config = configuration[relation.type]
+            if (!config) {
+                return
+            }
 
-                return {
-                    label: relation.type,
-                    type: relation.type,
-                    x: config.x,
-                    y: config.y,
-                    diameter: config.diameter,
-                    background: config.background,
-                    showing: relation.randomRelations?.length ?? 0,
-                    total: relation.total,
-                    children:
-                        relation.randomRelations?.map((randomRelation, index, array) => {
-                            const childConfig = config.children[index]
-                            const parentX = config.x + config.diameter / 2
-                            const parentY = config.y + config.diameter / 2
-                            const centerX = (SVG_DIMENSIONS.width ?? 0) / 2
-                            const centerY = (SVG_DIMENSIONS.height ?? 0) / 2
-                            const childCenterPositionX = parentX
-                            const childCenterPositionY = parentY
-
-                            const radius = config.internalDiameter / 2
-                            const { x, y } = XandYToCenterBasedByDiameter({
-                                radius,
-                                childCenterPositionX,
-                                childCenterPositionY,
-                                centerX,
-                                centerY,
-                                extraAngle:
-                                    array.length === 1
-                                        ? 0
-                                        : index % 2
-                                        ? -config.spaceBetweenChilds
-                                        : config.spaceBetweenChilds,
-                            })
-
-                            // debugMode({ svgRef, childCenterPositionX, childCenterPositionY, centerX, centerY, x, y })
-                            return {
-                                id: randomRelation.id,
-                                label: randomRelation.label,
-                                type: randomRelation.type,
-                                diameter: childConfig.diameter,
-                                x: x - childConfig.diameter / 2,
-                                y: y - childConfig.diameter / 2,
-                            }
-                        }) ?? [],
+            const children: ConfiguredRelationChild[] = []
+            relation.randomRelations?.forEach((randomRelation, index, array) => {
+                if (index > config.children.length - 1 || !config.children[index]) {
+                    return
                 }
-            }) ?? []
+
+                const childConfig = config.children[index]
+                const parentX = config.x + config.diameter / 2
+                const parentY = config.y + config.diameter / 2
+                const centerX = (SVG_DIMENSIONS.width ?? 0) / 2
+                const centerY = (SVG_DIMENSIONS.height ?? 0) / 2
+                const childCenterPositionX = parentX
+                const childCenterPositionY = parentY
+
+                const radius = config.internalDiameter / 2
+                const { x, y } = XandYToCenterBasedByDiameter({
+                    radius,
+                    childCenterPositionX,
+                    childCenterPositionY,
+                    centerX,
+                    centerY,
+                    extraAngle:
+                        array.length === 1 ? 0 : index % 2 ? -config.spaceBetweenChilds : config.spaceBetweenChilds,
+                })
+
+                // debugMode({ svgRef, childCenterPositionX, childCenterPositionY, centerX, centerY, x, y })
+                children.push({
+                    id: randomRelation.id,
+                    label: randomRelation.label,
+                    type: randomRelation.type,
+                    diameter: childConfig.diameter,
+                    x: x - childConfig.diameter / 2,
+                    y: y - childConfig.diameter / 2,
+                })
+            })
+
+            configuredRelations.push({
+                label: relation.type,
+                type: relation.type,
+                x: config.x,
+                y: config.y,
+                diameter: config.diameter,
+                background: config.background,
+                showing: relation.randomRelations?.length ?? 0,
+                total: relation.total,
+                children,
+            })
+        })
 
         return configuredRelations
     }, [relations])
