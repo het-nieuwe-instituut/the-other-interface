@@ -146,6 +146,7 @@ export const PaginatedCollection: React.FunctionComponent<
                                     position={'relative'}
                                     bottom={`${item.randomBottom}px`}
                                     left={`${item.randomLeft}px`}
+                                    cursor="pointer"
                                 >
                                     <svg width={140} height={90} style={{ overflow: 'visible' }}>
                                         <Box

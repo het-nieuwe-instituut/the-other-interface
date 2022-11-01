@@ -49,7 +49,7 @@ const Homepage: React.FC<{ data?: HomepageQuery }> = ({ data }) => {
             <GalaxyWrapper renderTopRight={() => <GalaxyTopRight />} renderBottom={() => <GalaxyFooter />}>
                 <Box backgroundColor="graph" height="800px" ref={graphRef}>
                     {sizes?.height && sizes?.width && (
-                        <Box position={'fixed'}>
+                        <Box position={'fixed'} pointerEvents={'auto'}>
                             <DynamicGalaxyNoSsr dimensions={{ height: 800, width: sizes?.width }} />
                         </Box>
                     )}
