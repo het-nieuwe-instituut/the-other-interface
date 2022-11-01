@@ -18,6 +18,7 @@ export const GalaxyFooter: React.FC = () => {
                         text={'Go to Searchportal'}
                         rightIcon={renderExternalLink()}
                         link={t('searchPortalUrl')}
+                        target={'_blank'}
                     />
                 </Box>
                 {/* <Box marginRight={'5px'}>

@@ -5,13 +5,14 @@ import { GalaxyWrapper } from '@/features/shared/components/GalaxyWrapper/Galaxy
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import { Loader } from '@/features/shared/components/Loading/Loading'
 import useScroll from '@/features/shared/hooks/useScroll'
-import { Box, useTheme } from '@chakra-ui/react'
+import { Box, useTheme, Text } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import { HomepageComponentsDynamicZone, HomepageQuery, useHomepageQuery } from 'src/generated/graphql'
 import { ScrollToContent, ScrollToTop } from '../../utils/utils'
+import { GalaxyTopRight } from '@/features/shared/components/GalaxyWrapper/GalaxyTopRight/GalaxyTopRight'
 
 export const DynamicGalaxyNoSsr = dynamic(() => import('../../../galaxy/Galaxy/Galaxy'), {
     ssr: false,
@@ -45,7 +46,7 @@ const Homepage: React.FC<{ data?: HomepageQuery }> = ({ data }) => {
                 onWrapperClick={ScrollToTop}
                 mode={scrollPosition >= 750 ? BreadcrumbsRenderModes.STICKY : BreadcrumbsRenderModes.DEFAULT}
             />
-            <GalaxyWrapper renderBottom={() => <GalaxyFooter />}>
+            <GalaxyWrapper renderTopRight={() => <GalaxyTopRight />} renderBottom={() => <GalaxyFooter />}>
                 <Box backgroundColor="graph" height="800px" ref={graphRef}>
                     {sizes?.height && sizes?.width && (
                         <Box position={'fixed'}>
