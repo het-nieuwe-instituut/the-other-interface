@@ -5,7 +5,7 @@ import { GalaxyWrapper } from '@/features/shared/components/GalaxyWrapper/Galaxy
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import { Loader } from '@/features/shared/components/Loading/Loading'
 import useScroll from '@/features/shared/hooks/useScroll'
-import { Box, useTheme, Text } from '@chakra-ui/react'
+import { Box, useTheme } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
