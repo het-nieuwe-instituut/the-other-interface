@@ -80,12 +80,12 @@ export const LandingCollection: React.FC<{ data?: LandingpageBySlugQuery }> = ({
                     backgroundPosition={'center'}
                 >
                     {sizes?.height && sizes?.width && (
-                        <>
+                        <Box position={'fixed'}>
                             <PaginatedCollectionContainer
                                 type={type}
                                 dimensions={{ height: 800, width: sizes.width }}
                             />
-                        </>
+                        </Box>
                     )}
                 </Box>
             </GalaxyWrapper>
