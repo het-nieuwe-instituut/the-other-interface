@@ -1,9 +1,11 @@
+import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import ExternalLink from '@/icons/arrows/external-link.svg'
 // import OpenSearch from '@/icons/open-search.svg'
 import { Box, Flex } from '@chakra-ui/react'
 import { GalaxyButton } from '../GalaxyButton/GalaxyButton'
 
 export const GalaxyFooter: React.FC = () => {
+    const { t } = useTypeSafeTranslation('common')
     return (
         <Box>
             <Flex flexDirection={'row'} alignItems={'center'}>
@@ -15,7 +17,7 @@ export const GalaxyFooter: React.FC = () => {
                     <GalaxyButton
                         text={'Go to Searchportal'}
                         rightIcon={renderExternalLink()}
-                        link={'https://zoeken.hetnieuweinstituut.nl/nl/'}
+                        link={t('searchPortalUrl')}
                     />
                 </Box>
                 {/* <Box marginRight={'5px'}>
