@@ -1,8 +1,10 @@
 import { Box, Flex, Text } from '@chakra-ui/react'
+import useTranslation from 'next-translate/useTranslation'
 import { useEffect, useState } from 'react'
 import { GalaxyButton } from '../GalaxyButton/GalaxyButton'
 
 export const GalaxyTopRight: React.FC = () => {
+    const { lang } = useTranslation()
     const [EN, setENUrl] = useState('')
     const [NL, setNLUrl] = useState('')
 
@@ -13,9 +15,9 @@ export const GalaxyTopRight: React.FC = () => {
     return (
         <Box>
             <Flex flexDirection={'row'} alignItems={'center'} justifyContent={'center'}>
-                <GalaxyButton text={'NL'} link={NL} size={'sm'} />
-                <Text>|</Text>
-                <GalaxyButton text={'EN'} link={EN} size={'sm'} />
+                <GalaxyButton text={'NL'} link={NL} size={'sm'} disabled={lang === 'nl'} />
+                <Text margin={0}>|</Text>
+                <GalaxyButton text={'EN'} link={EN} size={'sm'} disabled={lang === 'en'} />
             </Flex>
         </Box>
     )

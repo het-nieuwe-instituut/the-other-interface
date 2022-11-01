@@ -7,6 +7,7 @@ interface GalaxyButtonProps {
     leftIcon?: JSX.Element
     size?: string
     target?: string
+    disabled?: boolean
 }
 
 export const GalaxyButton: React.FC<GalaxyButtonProps> = props => {
@@ -26,6 +27,7 @@ export const GalaxyButton: React.FC<GalaxyButtonProps> = props => {
                 display={'flex'}
                 textStyle={'galaxyButton'}
                 size={props.size || 'md'}
+                disabled={props.disabled}
             >
                 {props.text}
             </Button>
@@ -44,6 +46,7 @@ export const GalaxyButton: React.FC<GalaxyButtonProps> = props => {
             textStyle={'galaxyButton'}
             display={'flex'}
             size={props.size || 'md'}
+            disabled={props.disabled}
         >
             {props.text}
         </Button>
