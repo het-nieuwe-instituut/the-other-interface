@@ -10,23 +10,24 @@ interface Props {
 export const GalaxyWrapper: React.FC<Props> = props => {
     const theme = useTheme()
     return (
-        <Box display="block" position={'relative'}>
-            {/* <Flex
-                zIndex={2}
+        <Box display="block" position={'relative'} pointerEvents={'none'}>
+            <Flex
                 maxW={theme.breakpoints.xl}
                 marginX={'auto'}
-                position="absolute"
+                position="fixed"
                 left={0}
                 right={0}
                 justifyContent={'space-between'}
+                zIndex={5}
+                top={0}
             >
-                <Flex alignItems={'center'} position="relative" zIndex={2} left={'32px'} top={'15px'}>
+                <Flex alignItems={'center'} position="relative" zIndex={2} left={'32px'} top={'6px'}>
                     {props.renderTopLeft?.()}
                 </Flex>
-                <Flex alignItems={'center'} position="relative" zIndex={2} right={'32px'} top={'15px'}>
+                <Flex alignItems={'center'} position="relative" zIndex={2} right={'32px'} top={'6px'}>
                     {props?.renderTopRight?.()}
                 </Flex>
-            </Flex> */}
+            </Flex>
             <Flex
                 zIndex={2}
                 maxW={theme.breakpoints.xl}
