@@ -8,7 +8,7 @@ import { calcRandomTrianglePoint, selectRandomTriangle } from '../../utils/polyg
 export interface InstancesPerClass {
     slug: string
     title: string
-    description?: string
+    shortDescription?: string | null
     parent: string
     id: string
 }
@@ -56,7 +56,7 @@ interface DataPoint {
     point: number[]
     slug: string
     title: string
-    description?: string
+    shortDescription?: string | null
     parent: string
     id: string
 }
@@ -201,7 +201,7 @@ function insertTooltip(item: DataPoint) {
         <div style="${tooltipStyle}">
             <style>${descriptionStyle}</style>
             <p style="${titleStyle}">${item.title}</p>
-            ${item.description ? `<p class="description-blurred">${item.description}</p>` : ''}
+            ${item.shortDescription ? `<p class="description-blurred">${item.shortDescription}</p>` : ''}
         </div>
     `
 

@@ -5,7 +5,7 @@ query stories($pagination: PaginationArg) {
             attributes {
                 title
                 slug
-                description
+                shortDescription
             }
         }
         meta {

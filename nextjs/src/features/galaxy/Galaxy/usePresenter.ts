@@ -76,7 +76,7 @@ export function usePresenter(dimensions: Dimensions, selector: string) {
                 parent: parents[Math.floor((Math.random() * data.length) / 10) + 1] ?? parents[0],
                 id: uniqueId(),
                 title: item?.attributes?.title ?? '',
-                description: item?.attributes?.description ?? '',
+                shortDescription: item?.attributes?.shortDescription,
                 slug: item?.attributes?.slug ?? '',
             }))
             .slice(0, 1000)
