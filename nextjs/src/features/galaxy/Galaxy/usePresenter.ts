@@ -37,9 +37,10 @@ function useArchiefBestandDeel(zoomLevel1Data?: ZoomLevel1Query) {
 }
 
 export function usePresenter(dimensions: Dimensions, selector: string) {
+    const { locale } = useRouter()
     const { data: zoomLevel1Data } = useZoomLevel1Query({ fetchPolicy: 'no-cache', nextFetchPolicy: 'no-cache' })
     // TODO: remove hardcoded pageSize & paginate
-    const { data: storiesData, loading: isLoading } = useStoriesQuery({ variables: { pagination: { pageSize: 200 } } })
+    const { data: storiesData, loading: isLoading } = useStoriesQuery({ variables: { pagination: { pageSize: 200 }, locale } })
     const objectsPerTypeWithIds = useObjectPerType(zoomLevel1Data)
     const router = useRouter()
     const archiefBestandDelen = useArchiefBestandDeel(zoomLevel1Data)
