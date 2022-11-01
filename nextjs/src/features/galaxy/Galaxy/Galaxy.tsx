@@ -116,11 +116,13 @@ const Galaxy: React.FC<Props> = ({ dimensions }) => {
                                                             <Text width="12.5rem" mb={1} textStyle={'cloudText'}>
                                                                 {t('archives', { count: item.numberOfInstances })}
                                                             </Text>
-                                                            <Text width="12.5rem" textStyle={'cloudText'}>
-                                                                {t('archiveItems', {
-                                                                    count: archiefBestandDelen.count,
-                                                                })}
-                                                            </Text>
+                                                            {!!archiefBestandDelen?.count && (
+                                                                <Text width="12.5rem" textStyle={'cloudText'}>
+                                                                    {t('archiveItems', {
+                                                                        count: archiefBestandDelen.count,
+                                                                    })}
+                                                                </Text>
+                                                            )}
                                                         </>
                                                     ) : (
                                                         item.name !== 'stories' && (
