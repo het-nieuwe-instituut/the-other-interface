@@ -1,5 +1,5 @@
-query stories {
-    stories {
+query stories($pagination: PaginationArg) {
+    stories(pagination: $pagination) {
         data {
             id
             attributes {
