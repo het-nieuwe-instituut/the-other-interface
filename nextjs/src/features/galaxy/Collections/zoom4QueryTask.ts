@@ -95,7 +95,7 @@ const variableFilters: Filters = {
                 Objectname: value,
             }),
         },
-        perInst: {
+        personInstitution: {
             accessor: value => ({
                 PerInst: value,
             }),
