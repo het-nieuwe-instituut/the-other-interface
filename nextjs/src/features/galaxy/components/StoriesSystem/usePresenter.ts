@@ -52,7 +52,7 @@ const points = [
     [119.32357900682837, 86.78530163131654],
     [88.39289749506861, 47.48971883021295],
 ]
-interface DataPoint {
+export interface StoryDataPoint {
     point: number[]
     slug: string
     title: string
@@ -114,7 +114,7 @@ function useTriangles(stories: InstancesPerClass[]) {
 }
 
 // TODO: commented out in case its needed. remove otherwise
-// function useDrawPathByDataPoints(dataPoints: DataPoint[]) {
+// function useDrawPathByDataPoints(dataPoints: StoryDataPoint[]) {
 //     const svgRef = useRef(null)
 //     const initialized = useRef(false)
 
@@ -178,7 +178,7 @@ function useTriangles(stories: InstancesPerClass[]) {
 //         })
 // }
 
-function showTooltip(e: React.MouseEvent<HTMLDivElement, MouseEvent>, item: DataPoint) {
+function showTooltip(e: React.MouseEvent<HTMLDivElement, MouseEvent>, item: StoryDataPoint) {
     const storyEl = document.getElementById(item.id)
     if (!storyEl) {
         return
@@ -188,7 +188,7 @@ function showTooltip(e: React.MouseEvent<HTMLDivElement, MouseEvent>, item: Data
     positionAndShowTooltip(e, item)
 }
 
-function hideTooltip(item: DataPoint) {
+function hideTooltip(item: StoryDataPoint) {
     getTooltipElement(item.id)?.remove()
 }
 
@@ -196,7 +196,7 @@ function cleanupTooltips() {
     document.querySelectorAll('[id$="-tooltip"]').forEach(el => el.remove())
 }
 
-function insertTooltip(item: DataPoint) {
+function insertTooltip(item: StoryDataPoint) {
     const tooltipContainerStyle = `
         height: 100%;
         width: 100%;
@@ -273,7 +273,7 @@ function insertTooltip(item: DataPoint) {
     document.body.insertBefore(tooltipDiv, null)
 }
 
-function positionAndShowTooltip(e: React.MouseEvent<HTMLDivElement, MouseEvent>, item: DataPoint) {
+function positionAndShowTooltip(e: React.MouseEvent<HTMLDivElement, MouseEvent>, item: StoryDataPoint) {
     const tooltipContainerEl = getTooltipElement(item.id)
     const tooltipEl = tooltipContainerEl?.children[0]
     if (!tooltipEl) {
