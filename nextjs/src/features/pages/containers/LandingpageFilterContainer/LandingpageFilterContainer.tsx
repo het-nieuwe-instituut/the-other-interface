@@ -58,7 +58,7 @@ export const LandingpageFilterContainer: React.FC = () => {
                 <Box backgroundColor="graph" height="800px" ref={graphRef}>
                     {sizes?.height && sizes?.width && (
                         <>
-                            <Box position={'fixed'} pointerEvents={'auto'}>
+                            <Box position={'fixed'}>
                                 <PaginatedFilterCloudsContainer
                                     type={type}
                                     dimensions={{ height: 800, width: sizes?.width }}
