@@ -48,12 +48,14 @@ const RecordPage: React.FC<{ data?: ReturnType<typeof useGetZoom5RecordTask>['da
             <GalaxyWrapper renderTopRight={() => <GalaxyTopRight />} renderBottom={() => <GalaxyFooter />}>
                 <Box backgroundColor="graph" height="800px" ref={graphRef} key={router.query.record as string}>
                     {sizes?.height && sizes?.width && (
-                        <DynamicRecordCloudsNoSsr
-                            key={router.query.record as string}
-                            zoomLevel5={data?.zoom5detail}
-                            relations={data?.zoom5relations ?? []}
-                            dimensions={sizes}
-                        />
+                        <Box position={'fixed'}>
+                            <DynamicRecordCloudsNoSsr
+                                key={router.query.record as string}
+                                zoomLevel5={data?.zoom5detail}
+                                relations={data?.zoom5relations ?? []}
+                                dimensions={sizes}
+                            />
+                        </Box>
                     )}
                 </Box>
             </GalaxyWrapper>
