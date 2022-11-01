@@ -60,7 +60,8 @@ function useArchiefBestandDeel(zoomLevel1Data?: ZoomLevel1Query) {
 
 export function usePresenter(dimensions: Dimensions, selector: string) {
     const { data: zoomLevel1Data } = useZoomLevel1Query({ fetchPolicy: 'no-cache', nextFetchPolicy: 'no-cache' })
-    const { data: storiesData, loading: isLoading } = useStoriesQuery()
+    // TODO: remove hardcoded pageSize & paginate
+    const { data: storiesData, loading: isLoading } = useStoriesQuery({ variables: { pagination: { pageSize: 200 } } })
     const objectsPerTypeWithIds = useObjectPerType(zoomLevel1Data)
     const router = useRouter()
     const archiefBestandDelen = useArchiefBestandDeel(zoomLevel1Data)
@@ -75,7 +76,7 @@ export function usePresenter(dimensions: Dimensions, selector: string) {
                 parent: parents[Math.floor((Math.random() * data.length) / 10) + 1] ?? parents[0],
                 id: uniqueId(),
                 title: item?.attributes?.title ?? '',
-                description: item?.attributes?.description ?? '',
+                shortDescription: item?.attributes?.shortDescription,
                 slug: item?.attributes?.slug ?? '',
             }))
             .slice(0, 1000)
