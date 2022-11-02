@@ -1,7 +1,7 @@
 import { useApolloClient } from '@apollo/client'
 import { useRouter } from 'next/router'
 import { useCallback, useRef } from 'react'
-import { EntityNames, ObjectRelationsQuery } from 'src/generated/graphql'
+import { ObjectRelationsQuery } from 'src/generated/graphql'
 import { useD3HeroAnimateElement } from './hooks/useD3ClickAnimation'
 import { useD3CloudAnimationIn } from './hooks/useD3CloudAnimationIn'
 import { usePositionClouds } from './hooks/usePositionClouds'
@@ -17,15 +17,12 @@ export function usePresenter(relations: ObjectRelationsQuery['relations']) {
 
     const navigateTo = useCallback(
         async (d: d3.SimulationNodeDatum & Item) => {
-            if (d.type === EntityNames.Stories) {
-                if (!d.slug) {
-                    return
-                }
-                const newRoute = `/story/${d.slug}`
+            if (d.type.toLowerCase() === 'stories') {
+                const newRoute = `/story/${d.label}`
 
                 client.cache.evict({ id: 'ROOT_QUERY', fieldName: 'zoom5detail' })
                 client.cache.evict({ id: 'ROOT_QUERY', fieldName: 'zoom5relations' })
-                await router.push(newRoute)
+                await router.push(newRoute + '?galaxy=true')
                 return
             }
 
