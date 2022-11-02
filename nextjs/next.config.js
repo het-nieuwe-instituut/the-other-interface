@@ -16,6 +16,7 @@ const nextConfig = {
     i18n: {
         locales: ['nl', 'en'],
         defaultLocale: 'nl',
+        localeDetection: false
     },
     images: {
         domains: [
@@ -25,10 +26,6 @@ const nextConfig = {
             'hni-toi-acceptance.s3.eu-central-1.amazonaws.com',
             'hni-toi-production.s3.eu-central-1.amazonaws.com',
         ],
-    },
-    i18n: {
-        locales: ['nl', 'en'],
-        defaultLocale: 'nl',
     },
     output: 'standalone',
     serverRuntimeConfig: {

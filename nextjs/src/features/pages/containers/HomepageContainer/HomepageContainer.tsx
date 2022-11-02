@@ -20,6 +20,7 @@ export const DynamicGalaxyNoSsr = dynamic(() => import('../../../galaxy/Galaxy/G
 
 export const HomepageContainer = () => {
     const { locale } = useRouter()
+    console.log(locale)
     const { data, loading, error } = useHomepageQuery({ variables: { locale } })
     if (loading) {
         return <Loader />
