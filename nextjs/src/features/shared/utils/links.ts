@@ -6,3 +6,8 @@ export const isExternalURL = (url: string, origin: string) => {
         return false
     }
 }
+
+export function getPeoplePathForTriplyRecordId(id: string) {
+    // TODO: replace with correct id after routing is fixed/updated
+    return `/landingpage/people/nameType/persoon/${id}-people`
+}
