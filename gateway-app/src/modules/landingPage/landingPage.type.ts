@@ -11,6 +11,7 @@ import { ComponentModulesTextModule } from '../strapi/components/modules/textMod
 import { ComponentModulesTitleModule } from '../strapi/components/modules/titleModule'
 import { Error, PaginationArg, ResponseCollectionMeta } from '../strapi/shared-types'
 import { LandingpageFiltersInput, LandingpageRelationResponseCollection } from './landingPage.type.circular'
+import { ComponentModulesCarousel } from '../strapi/components/modules/carousel'
 
 @ObjectType()
 export class Landingpage {
@@ -113,6 +114,7 @@ export const LandingpageComponentsDynamicZone = createUnionType({
     types: () =>
         [
             ComponentModulesButtonsModule,
+            ComponentModulesCarousel,
             ComponentModulesGridModule,
             ComponentModulesImage,
             ComponentModulesImageCarousel,
