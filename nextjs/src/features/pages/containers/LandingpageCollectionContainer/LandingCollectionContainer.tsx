@@ -1,6 +1,7 @@
 import Breadcrumbs, { BreadcrumbsRenderModes } from '@/features/galaxy/components/Breadcrumbs/Breadcrumbs'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 import { GalaxyFooter } from '@/features/shared/components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
+import { GalaxyTopRight } from '@/features/shared/components/GalaxyWrapper/GalaxyTopRight/GalaxyTopRight'
 import { GalaxyWrapper } from '@/features/shared/components/GalaxyWrapper/GalaxyWrapper'
 import { Loader } from '@/features/shared/components/Loading/Loading'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
@@ -69,7 +70,7 @@ export const LandingCollection: React.FC<{ data?: LandingpageBySlugQuery }> = ({
                 onWrapperClick={ScrollToTop}
                 mode={scrollPosition >= 750 ? BreadcrumbsRenderModes.STICKY : BreadcrumbsRenderModes.DEFAULT}
             />
-            <GalaxyWrapper renderBottom={() => <GalaxyFooter />}>
+            <GalaxyWrapper renderTopRight={() => <GalaxyTopRight />} renderBottom={() => <GalaxyFooter />}>
                 <Box
                     backgroundColor="graph"
                     height="800px"
@@ -80,12 +81,12 @@ export const LandingCollection: React.FC<{ data?: LandingpageBySlugQuery }> = ({
                     backgroundPosition={'center'}
                 >
                     {sizes?.height && sizes?.width && (
-                        <>
+                        <Box position={'fixed'}>
                             <PaginatedCollectionContainer
                                 type={type}
                                 dimensions={{ height: 800, width: sizes.width }}
                             />
-                        </>
+                        </Box>
                     )}
                 </Box>
             </GalaxyWrapper>

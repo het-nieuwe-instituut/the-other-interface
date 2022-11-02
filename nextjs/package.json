@@ -48,7 +48,8 @@
         "react-responsive-carousel": "^3.2.23",
         "rehype-raw": "^6.1.1",
         "remark-gfm": "^3.0.1",
-        "request": "^2.88.2"
+        "request": "^2.88.2",
+        "sharp": "^0.31.1"
     },
     "devDependencies": {
         "@graphql-codegen/cli": "2.12.0",

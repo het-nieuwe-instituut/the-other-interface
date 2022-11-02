@@ -75,7 +75,8 @@ export const PaginatedCollection: React.FunctionComponent<
         dimensions
     )
 
-    const total = Math.ceil((zoom4?.zoomLevel4.total ?? 0) / 28)
+    const total =
+        zoom4?.zoomLevel4?.total && zoom4?.zoomLevel4?.total >= 28 ? Math.ceil(zoom4?.zoomLevel4?.total / 28) : 1
 
     return (
         <Box overflow="hidden" height={svgHeight} width={svgWidth}>
@@ -146,6 +147,7 @@ export const PaginatedCollection: React.FunctionComponent<
                                     position={'relative'}
                                     bottom={`${item.randomBottom}px`}
                                     left={`${item.randomLeft}px`}
+                                    cursor="pointer"
                                 >
                                     <svg width={140} height={90} style={{ overflow: 'visible' }}>
                                         <Box

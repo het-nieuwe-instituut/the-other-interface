@@ -10,17 +10,10 @@ import { ObjectPerTypeWithName, useD3Simulation } from './hooks/useD3Simulation'
 import { useFitDataToDimensions } from './hooks/useFitDataToDimensions'
 
 function useObjectPerType(zoomLevel1Data?: ZoomLevel1Query) {
-    const objectsPerTypeWithIds = useMemo(() => {
-        const items =
-            zoomLevel1Data?.zoomLevel1.filter(item => {
-                if (item.name === 'Archiefbestanddelen') {
-                    return false
-                }
+    const objectsPerTypeWithIds: ObjectPerTypeWithName[] = useMemo(() => {
+        const items = zoomLevel1Data?.zoomLevel1.filter(item => item.name !== 'Archiefbestanddelen') ?? []
 
-                return true
-            }) ?? []
-
-        const newItems: ObjectPerTypeWithName[] = items.map(item => {
+        return items.map(item => {
             const config = galaxyTypesToPositions[item.id]
             const newItem: ObjectPerTypeWithName = {
                 ...item,
@@ -34,34 +27,20 @@ function useObjectPerType(zoomLevel1Data?: ZoomLevel1Query) {
 
             return newItem
         })
-
-        return newItems
     }, [zoomLevel1Data])
 
     return objectsPerTypeWithIds
 }
 
 function useArchiefBestandDeel(zoomLevel1Data?: ZoomLevel1Query) {
-    const objectsPerTypeWithIds = useMemo(() => {
-        const items =
-            zoomLevel1Data?.zoomLevel1.filter(item => {
-                if (item.name === 'Archiefbestanddelen') {
-                    return false
-                }
-
-                return true
-            }) ?? []
-
-        return items[0]
-    }, [zoomLevel1Data])
-
-    return objectsPerTypeWithIds
+    return useMemo(() => zoomLevel1Data?.zoomLevel1.find(item => item.name === 'Archiefbestanddelen'), [zoomLevel1Data])
 }
 
 export function usePresenter(dimensions: Dimensions, selector: string) {
+    const { locale } = useRouter()
     const { data: zoomLevel1Data } = useZoomLevel1Query({ fetchPolicy: 'no-cache', nextFetchPolicy: 'no-cache' })
     // TODO: remove hardcoded pageSize & paginate
-    const { data: storiesData, loading: isLoading } = useStoriesQuery({ variables: { pagination: { pageSize: 200 } } })
+    const { data: storiesData, loading: isLoading } = useStoriesQuery({ variables: { pagination: { pageSize: 200 }, locale } })
     const objectsPerTypeWithIds = useObjectPerType(zoomLevel1Data)
     const router = useRouter()
     const archiefBestandDelen = useArchiefBestandDeel(zoomLevel1Data)

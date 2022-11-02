@@ -64,7 +64,7 @@ export const mockMenupageBySlugQuery = (resolver: ResponseResolver<GraphQLReques
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
  * mockStoriesQuery((req, res, ctx) => {
- *   const { pagination } = req.variables;
+ *   const { pagination, locale } = req.variables;
  *   return res(
  *     ctx.data({ stories })
  *   )
@@ -2251,6 +2251,7 @@ export type MenupageBySlugQuery = { __typename?: 'Query', menupages: { __typenam
 
 export type StoriesQueryVariables = Exact<{
   pagination?: InputMaybe<PaginationArg>;
+  locale?: InputMaybe<Scalars['String']>;
 }>;
 
 
@@ -3089,8 +3090,8 @@ export type MenupageBySlugQueryHookResult = ReturnType<typeof useMenupageBySlugQ
 export type MenupageBySlugLazyQueryHookResult = ReturnType<typeof useMenupageBySlugLazyQuery>;
 export type MenupageBySlugQueryResult = Apollo.QueryResult<MenupageBySlugQuery, MenupageBySlugQueryVariables>;
 export const StoriesDocument = gql`
-    query stories($pagination: PaginationArg) {
-  stories(pagination: $pagination) {
+    query stories($pagination: PaginationArg, $locale: String) {
+  stories(pagination: $pagination, locale: $locale) {
     data {
       id
       attributes {
@@ -3121,6 +3122,7 @@ export const StoriesDocument = gql`
  * const { data, loading, error } = useStoriesQuery({
  *   variables: {
  *      pagination: // value for 'pagination'
+ *      locale: // value for 'locale'
  *   },
  * });
  */

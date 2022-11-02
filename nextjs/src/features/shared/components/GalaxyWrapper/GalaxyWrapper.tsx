@@ -42,7 +42,7 @@ export const GalaxyWrapper: React.FC<Props> = props => {
                     {props?.renderBottom?.()}
                 </Flex>
             </Flex>
-            <Box zIndex={1} bottom={0} right={0} left={0}>
+            <Box zIndex={1} bottom={0} right={0} left={0} pointerEvents={'all'}>
                 {props.children}
             </Box>
         </Box>
