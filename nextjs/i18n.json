@@ -1,6 +1,7 @@
 {
     "locales": ["en", "nl"],
-    "defaultLocale": "en",
+    "defaultLocale": "nl",
+    "localeDetection": false,
     "pages": {
         "*": ["common", "navigation"],
         "story/*": ["stories", "record"],
