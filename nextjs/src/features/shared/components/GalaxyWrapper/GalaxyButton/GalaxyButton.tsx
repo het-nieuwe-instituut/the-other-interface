@@ -8,7 +8,6 @@ interface GalaxyButtonProps {
     size?: string
     target?: string
     disabled?: boolean
-    onClick?: () => Promise<boolean>;
 }
 
 export const GalaxyButton: React.FC<GalaxyButtonProps> = props => {
@@ -29,7 +28,6 @@ export const GalaxyButton: React.FC<GalaxyButtonProps> = props => {
                 textStyle={'galaxyButton'}
                 size={props.size || 'md'}
                 disabled={props.disabled}
-                onClick={props.onClick ?? undefined}
             >
                 {props.text}
             </Button>
@@ -40,7 +38,6 @@ export const GalaxyButton: React.FC<GalaxyButtonProps> = props => {
         <Button
             pointerEvents={'all'}
             border="0px"
-            onClick={props.onClick ?? undefined}
             _hover={{ bg: 'transparent' }}
             _active={{ bg: 'transparent' }}
             _focus={{ bg: 'transparent' }}
