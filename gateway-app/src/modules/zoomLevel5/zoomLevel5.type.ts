@@ -35,6 +35,9 @@ export class RelatedRecordType {
     @Field(() => EntityNames)
     public type: EntityNames
 
+    @Field({ nullable: true })
+    public slug?: string
+
     @Field()
     public label: string
 
