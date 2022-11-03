@@ -1,0 +1,14 @@
+version: '3'
+services:
+    postgres:
+        image: postgres:10
+        ports:
+            - 5432:5432
+        volumes:
+            - dbvolume:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_DB=strapi
+            - POSTGRES_PASSWORD=strapi
+            - PGDATA=/var/lib/postgresql/data/pgdata
+volumes:
+    dbvolume: {}

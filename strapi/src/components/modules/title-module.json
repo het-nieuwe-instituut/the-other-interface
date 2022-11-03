@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_modules_title_modules",
+  "info": {
+    "displayName": "Title module",
+    "icon": "ad",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "string",
+      "unique": false
+    },
+    "titleModuleLayout": {
+      "type": "component",
+      "repeatable": false,
+      "component": "core.module-layouts",
+      "required": true
+    }
+  }
+}

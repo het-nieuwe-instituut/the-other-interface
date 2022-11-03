@@ -1,0 +1,47 @@
+#import '../fragments/components/TextModule.fragment.graphql'
+#import '../fragments/components/PullquoteModule.fragment.graphql'
+#import '../fragments/components/ImageModule.fragment.graphql'
+#import '../fragments/components/TableModuleFragment.fragment.graphql'
+#import '../fragments/components/TitleModule.fragment.graphql'
+#import '../fragments/components/ImageCarousel.fragment.graphql'
+#import '../fragments/components/ButtonsModule.fragment.graphql'
+#import '../fragments/components/GridModule.fragment.graphql'
+
+query menupageBySlug($locale: String, $slug: String!) {
+    menupages(locale: $locale, filters: { slug: { eq: $slug } }) {
+        data {
+            id
+            attributes {
+                components {
+                    ... on ComponentModulesTextModule {
+                        ...textModuleFragment
+                    }
+                    ... on ComponentModulesImage {
+                        ...imageModuleFragment
+                    }
+                    ... on ComponentModulesPullquote {
+                        ...pullquoteModuleFragment
+                    }
+                    ... on ComponentModulesTableModule {
+                        ...tableModuleFragment
+                    }
+                    ... on ComponentModulesTitleModule {
+                        ...titleModuleFragment
+                    }
+                    ... on ComponentModulesImageCarousel {
+                        ...imageCarouselModuleFragment
+                    }
+                    ... on ComponentModulesButtonsModule {
+                        ...buttonsModuleFragment
+                    }
+                    ... on ComponentModulesSubtitle {
+                        ...subtitleModuleFragment
+                    }
+                    ... on ComponentModulesGridModule {
+                        ...gridModuleFragment
+                    }
+                }
+            }
+        }
+    }
+}

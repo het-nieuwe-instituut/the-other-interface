@@ -1,0 +1,11 @@
+#import '../core/moduleLayout.fragment.graphql'
+
+fragment subtitleModuleFragment on ComponentModulesSubtitle {
+    id
+    text
+    subtitleModuleLayout {
+        ... on ComponentCoreModuleLayouts {
+            ...componentCoreModuleLayouts
+        }
+    }
+}

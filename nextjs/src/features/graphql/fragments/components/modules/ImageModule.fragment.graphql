@@ -1,0 +1,21 @@
+#import '../core/moduleLayout.fragment.graphql'
+
+fragment imageModuleFragment on ComponentModulesImage {
+    id
+    image {
+        data {
+            attributes {
+                url
+                height
+                width
+            }
+        }
+    }
+    caption
+    alt_text
+    imageModuleLayout {
+        ... on ComponentCoreModuleLayouts {
+            ...componentCoreModuleLayouts
+        }
+    }
+}

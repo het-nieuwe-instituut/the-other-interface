@@ -1,0 +1,13 @@
+---
+- import_tasks: overlay-network.yml
+
+- import_tasks: papertrail-agent.yml
+  when: "'log' in app"
+
+- import_tasks: nginx-proxy.yml
+
+- import_tasks: strapi.yml
+- import_tasks: nextjs.yml
+- import_tasks: gateway-app.yml
+- import_tasks: cleanup.yml
+- import_tasks: backups.yml

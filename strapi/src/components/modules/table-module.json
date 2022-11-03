@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_modules_table_modules",
+  "info": {
+    "displayName": "Table module",
+    "icon": "table",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "table": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::table.table"
+    },
+    "tableModuleLayout": {
+      "type": "component",
+      "repeatable": false,
+      "component": "core.module-layouts",
+      "required": true
+    }
+  }
+}

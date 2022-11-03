@@ -1,0 +1,11 @@
+#import '../core/moduleLayout.fragment.graphql'
+
+fragment pullquoteModuleFragment on ComponentModulesPullquote {
+    id
+    text
+    pullquoteModuleLayout {
+        ... on ComponentCoreModuleLayouts {
+            ...componentCoreModuleLayouts
+        }
+    }
+}

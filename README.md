@@ -2,6 +2,11 @@
 
 # Getting started
 
+Make sure to open the `hni-toi.code-workspace` file in the root of the project so all your folders are configured correctly.
+If you use any other editors than VSCode, make sure all your folders work correctly with eslint, prettier and husky.
+
+For husky, make sure to run `npm run prepare`
+
 ## Using iTermocil
 
 If you use iTerm2, then you can use [iTermocil](https://github.com/TomAnthony/itermocil) to run all the startup commands at once:
@@ -13,11 +18,18 @@ If you use iTerm2, then you can use [iTermocil](https://github.com/TomAnthony/it
 
 ## Strapi backend
 
-- TODO
+- Install nodejs v16.15.1 (run `nvm use` to automatically use this version if you have nvm installed).
+- Run `npm install` in `./strapi` to install all packages.
+- Run `npm run copyenv` in `./strapi` to generate environment variables.
+- Make sure the database is running. Run `npm run start-services` to start the database.
+- Run `npm run develop` to start Strapi.
 
 ## Nestjs Gateway
 
-- TODO
+- Install nodejs v16.15.1 (run `nvm use` to automatically use this version if you have nvm installed).
+- Run `npm ci` in `./gateway-app` to install all packages.
+- Run `npm run copyenv` in `./gateway-app` to create .env file from .env.example.
+- Run `npm run start:debug` in `./gateway-app` to start the nestjs application.-
 
 ## Nextjs frontend
 
@@ -40,7 +52,6 @@ Initital setup was done using this command:
 
 - TODO
 
-
 ## Insomnia (API client)
 
 We use [Insomnia](https://insomnia.rest/) as API client, to test our graphql API. An export of our Insomnia workspace/collection is available in the `Insomnia.json` file in this git repo. Use the import feature in Insomnia to import the collection.
@@ -56,4 +67,3 @@ We use [Insomnia](https://insomnia.rest/) as API client, to test our graphql API
 # Infrastructure
 
 - TODO
-

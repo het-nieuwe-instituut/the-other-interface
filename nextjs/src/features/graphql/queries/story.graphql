@@ -1,0 +1,141 @@
+#import '../fragments/components/TextModule.fragment.graphql'
+#import '../fragments/components/PullquoteModule.fragment.graphql'
+#import '../fragments/components/ImageModule.fragment.graphql'
+#import '../fragments/components/TableModuleFragment.fragment.graphql'
+#import '../fragments/components/TitleModule.fragment.graphql'
+#import '../fragments/components/ImageCarousel.fragment.graphql'
+#import '../fragments/components/ButtonsModule.fragment.graphql'
+#import '../fragments/components/GridModule.fragment.graphql'
+#import '../fragments/components/core/baseTriplyRecord.fragment.graphql'
+
+query storyBySlug($locale: String, $slug: String!) {
+    stories(locale: $locale, filters: { slug: { eq: $slug } }) {
+        data {
+            id
+            attributes {
+                title
+                description
+                shortDescription
+                publishedAt
+                author {
+                    data {
+                        id
+                        attributes {
+                            firstName
+                            insertion
+                            lastName
+                        }
+                    }
+                }
+                timeframe {
+                    id
+                    yearStart
+                    yearEnd
+                }
+                locations {
+                    data {
+                        id
+                        attributes {
+                            city
+                        }
+                    }
+                }
+                publicationDate {
+                    date
+                    displayType
+                }
+                triplyRecords {
+                    data {
+                        id
+                        attributes {
+                            type
+                            recordId
+                            archive {
+                                ... on ArchivesOtherZoomLevel5DetailType {
+                                    id
+                                    type
+                                    objectNumber
+                                }
+                                ... on ArchivesFondsZoomLevel5DetailType {
+                                    id
+                                    objectNumber
+                                }
+                            }
+                            object {
+                                title
+                                maker
+                                image
+                            }
+                            publication {
+                                ... on PublicationsAudioVisualZoomLevel5DetailType {
+                                    id
+                                    type
+                                    title
+                                }
+                                ... on PublicationsArticleZoomLevel5DetailType {
+                                    id
+                                    type
+                                    title
+                                }
+                                ... on PublicationsSerialZoomLevel5DetailType {
+                                    id
+                                    type
+                                    title
+                                }
+                                ... on PublicationsBookZoomLevel5DetailType {
+                                    id
+                                    type
+                                    title
+                                    author
+                                }
+                            }
+                            people {
+                                name
+                                profession
+                            }
+                        }
+                    }
+                }
+                components {
+                    ... on ComponentModulesTextModule {
+                        ...textModuleFragment
+                    }
+                    ... on ComponentModulesImage {
+                        ...imageModuleFragment
+                    }
+                    ... on ComponentModulesPullquote {
+                        ...pullquoteModuleFragment
+                    }
+                    ... on ComponentModulesTableModule {
+                        ...tableModuleFragment
+                    }
+                    ... on ComponentModulesTitleModule {
+                        ...titleModuleFragment
+                    }
+                    ... on ComponentModulesImageCarousel {
+                        ...imageCarouselModuleFragment
+                    }
+                    ... on ComponentModulesButtonsModule {
+                        ...buttonsModuleFragment
+                    }
+                    ... on ComponentModulesSubtitle {
+                        ...subtitleModuleFragment
+                    }
+                    ... on ComponentModulesGridModule {
+                        ...gridModuleFragment
+                    }
+                }
+                storyLinks {
+                    ... on ComponentModulesButtonsModule {
+                        ...buttonsModuleFragment
+                    }
+                }
+                triplyRecords {
+                    data {
+                        ...BaseTriplyRecordFragment
+                    }
+                }
+            }
+        }
+    }
+}

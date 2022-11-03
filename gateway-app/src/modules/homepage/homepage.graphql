@@ -1,0 +1,63 @@
+fragment HomepageFragment on Homepage {
+    __typename
+    Title
+    createdAt
+    locale
+    publishedAt
+    updatedAt
+    description
+    components {
+        ... on ComponentModulesTextModule {
+            ...ComponentModulesTextModuleFragment
+        }
+        ... on ComponentModulesImage {
+            ...ComponentModulesImageFragment
+        }
+        ... on ComponentModulesGridModule {
+            ...ComponentModulesGridModuleFragment
+        }
+        ... on ComponentModulesPullquote {
+            ...ComponentModulesPullquoteFragment
+        }
+        ... on ComponentModulesCarousel {
+            ...ComponentModulesCarouselFragment
+        }
+        ... on ComponentModulesSubtitle {
+            ...ComponentModulesSubtitleFragment
+        }
+        ... on ComponentModulesTableModule {
+            ...ComponentModulesTableModuleFragment
+        }
+        ... on ComponentModulesTitleModule {
+            ...ComponentModulesTitleModuleFragment
+        }
+        ... on ComponentModulesImageCarousel {
+            ...ComponentModulesImageCarouselFragment
+        }
+        ... on ComponentModulesButtonsModule {
+            ...ComponentModulesButtonsModuleFragment
+        }
+        ... on Error {
+            ...ErrorFragment
+        }
+    }
+}
+
+query homepage($publicationState: PublicationState = LIVE, $locale: I18NLocaleCode) {
+    homepage(publicationState: $publicationState, locale: $locale) {
+        data {
+            id
+            attributes {
+                ...HomepageFragment
+                localizations {
+                    data {
+                        id
+                        attributes {
+                            ...HomepageFragment
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

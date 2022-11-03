@@ -1,0 +1,30 @@
+query ZoomLevel5Person($id: String!) {
+    zoomLevel5Person(id: $id) {
+        name
+        nameType
+        nameVariation
+        birthDate
+        birthPlace
+        birthPlaceLabel
+        deathDate
+        deathPlace
+        deathPlaceLabel
+        place
+        placeLabel
+        startDate
+        endDate
+        nationality
+        nationalityLabel
+        institution
+        institutionLabel
+        profession
+        professionLabel
+        gender
+        association
+        associationLabel
+        relatedItem
+        relatedItemLabel
+        description
+        permanentLink
+    }
+}

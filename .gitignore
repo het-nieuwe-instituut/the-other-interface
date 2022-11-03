@@ -1,2 +1,4 @@
 node_modules/
 itermocil.custom.yml
+.history/
+nextjs/.env

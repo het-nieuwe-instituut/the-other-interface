@@ -1,0 +1,35 @@
+name: Build Strapi/Nextjs/Gateway-app
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - ops/*
+      - OPS/*
+    # Trigger on any tag
+    tags:
+      - "*"
+
+env:
+  CR_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Docker Login
+        run: echo $CR_PAT | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+      - name: Build the Nextjs Docker image
+        run: cd nextjs && docker build . --file Dockerfile --tag ghcr.io/lifelynl/hni-toi-nextjs:${{ github.sha }}
+      - name: Build the Gateway-app Docker image
+        run: cd gateway-app && docker build . --file Dockerfile --tag ghcr.io/lifelynl/hni-toi-gateway-app:${{ github.sha }}
+      - name: Build the Strapi Docker image
+        run: cd strapi && docker build . --file Dockerfile --tag ghcr.io/lifelynl/hni-toi-strapi:${{ github.sha }}
+      - name: Push all Docker images
+        run: |
+          docker push ghcr.io/lifelynl/hni-toi-strapi:${{ github.sha }}
+          docker push ghcr.io/lifelynl/hni-toi-nextjs:${{ github.sha }}
+          docker push ghcr.io/lifelynl/hni-toi-gateway-app:${{ github.sha }}

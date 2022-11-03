@@ -1,0 +1,147 @@
+query stories(
+    $filters: StoryFiltersInput
+    $pagination: PaginationArg
+    $sort: [String]
+    $publicationState: PublicationState
+    $locale: I18NLocaleCode
+) {
+    stories(
+        filters: $filters
+        pagination: $pagination
+        sort: $sort
+        publicationState: $publicationState
+        locale: $locale
+    ) {
+        data {
+            ...StoryFragment
+        }
+        meta {
+            ...ResponseCollectionMetaFragment
+        }
+    }
+}
+
+query story($id: ID, $locale: I18NLocaleCode) {
+    story(id: $id, locale: $locale) {
+        data {
+            ...StoryFragment
+        }
+    }
+}
+
+# "$type" must be ENUM_TRIPLYRECORD_TYPE
+query storiesLinkedToTriplyRecord($recordId: String!, $type: String!) {
+    stories(filters: { triplyRecords: { recordId: { eq: $recordId }, type: { eq: $type } } }) {
+        data {
+            id
+            attributes {
+                title
+            }
+        }
+    }
+}
+
+query storyTriplyRelations($id: ID!) {
+    story(id: $id) {
+        data {
+            id
+            attributes {
+                triplyRecords {
+                    data {
+                        ...BaseTriplyRecordFragment
+                    }
+                }
+            }
+        }
+    }
+}
+
+query storiesTotal {
+    stories {
+        meta {
+            pagination {
+                total
+            }
+        }
+    }
+}
+
+fragment StoryFragment on StoryEntity {
+    id
+    attributes {
+        title
+        slug
+        components {
+            __typename
+            ... on ComponentModulesPullquote {
+                ...ComponentModulesPullquoteFragment
+            }
+            ... on ComponentModulesGridModule {
+                ...ComponentModulesGridModuleFragment
+            }
+            ... on ComponentModulesTextModule {
+                ...ComponentModulesTextModuleFragment
+            }
+            ... on ComponentModulesSubtitle {
+                ...ComponentModulesSubtitleFragment
+            }
+            ... on ComponentModulesTitleModule {
+                ...ComponentModulesTitleModuleFragment
+            }
+            ... on ComponentModulesImageCarousel {
+                ...ComponentModulesImageCarouselFragment
+            }
+            ... on ComponentModulesImage {
+                ...ComponentModulesImageFragment
+            }
+            ... on ComponentModulesTableModule {
+                ...ComponentModulesTableModuleFragment
+            }
+            ... on ComponentModulesButtonsModule {
+                ...ComponentModulesButtonsModuleFragment
+            }
+            ... on Error {
+                ...ErrorFragment
+            }
+        }
+        author {
+            data {
+                id
+            }
+        }
+        description
+        timeframe {
+            id
+            yearStart
+            yearEnd
+        }
+        locations {
+            data {
+                id
+            }
+        }
+        publicationDate {
+            id
+            date
+            displayType
+        }
+        shortDescription
+        triplyRecords {
+            data {
+                ...BaseTriplyRecordFragment
+            }
+        }
+        createdAt
+        updatedAt
+        publishedAt
+        localizations {
+            data {
+                id
+            }
+        }
+        locale
+        storyLinks {
+            ...ComponentModulesButtonsModuleFragment
+        }
+    }
+}

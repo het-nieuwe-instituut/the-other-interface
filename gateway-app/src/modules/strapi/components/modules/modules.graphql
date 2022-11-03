@@ -1,0 +1,122 @@
+fragment ComponentModulesButtonsModuleFragment on ComponentModulesButtonsModule {
+    id
+    buttonsModuleLayout {
+        ...ComponentCoreModuleLayoutsFragment
+    }
+    buttonStyle
+    __typename
+    buttons {
+        ...ComponentCoreButtonFragment
+    }
+}
+
+fragment ComponentModulesCarouselFragment on ComponentModulesCarousel {
+    id
+    carouselModuleLayout {
+        ...ComponentCoreModuleLayoutsFragment
+    }
+    buttonText
+    buttonUrl
+    description
+    __typename
+    items {
+        ...ComponentCoreCarouselItemFragment
+    }
+    title
+    type
+}
+
+fragment ComponentModulesImageCarouselFragment on ComponentModulesImageCarousel {
+    id
+    imageCarouselModuleLayout {
+        ...ComponentCoreModuleLayoutsFragment
+    }
+    description
+    __typename
+    images {
+        ...UploadFileRelationResponseCollectionFragment
+    }
+}
+
+fragment ComponentModulesImageFragment on ComponentModulesImage {
+    alt_text
+    caption
+    id
+    __typename
+    image {
+        ...UploadFileEntityResponseFragment
+    }
+    imageModuleLayout {
+        ...ComponentCoreModuleLayoutsFragment
+    }
+}
+
+fragment ComponentModulesPullquoteFragment on ComponentModulesPullquote {
+    id
+    __typename
+    pullquoteModuleLayout {
+        ...ComponentCoreModuleLayoutsFragment
+    }
+    text
+}
+
+fragment ComponentModulesSubtitleFragment on ComponentModulesSubtitle {
+    id
+    __typename
+    subtitleModuleLayout {
+        ...ComponentCoreModuleLayoutsFragment
+    }
+    text
+}
+
+fragment ComponentModulesTableModuleFragment on ComponentModulesTableModule {
+    id
+    __typename
+    tableModuleLayout {
+        ...ComponentCoreModuleLayoutsFragment
+    }
+    table {
+        ...TableEntityResponseFragment
+    }
+}
+
+fragment ComponentModulesTextModuleFragment on ComponentModulesTextModule {
+    Richtext
+    id
+    __typename
+    textModuleLayout {
+        ...ComponentCoreModuleLayoutsFragment
+    }
+}
+
+fragment ComponentModulesTitleModuleFragment on ComponentModulesTitleModule {
+    Title
+    id
+    __typename
+    titleModuleLayout {
+        ...ComponentCoreModuleLayoutsFragment
+    }
+}
+
+fragment ComponentModulesGridModuleFragment on ComponentModulesGridModule {
+    __typename
+    id
+    description
+    pageSize
+    title
+    showMoreButtonTitle
+    fieldTitlesAreInverted
+    fieldTypes
+    buttons {
+        ...ComponentCoreButtonFragment
+    }
+    featuredFields {
+        ...ComponentCoreFeaturedFieldsFragment
+    }
+    fields {
+        ...ComponentCoreGridFeaturedFieldsFragment
+    }
+    gridModuleLayout {
+        ...ComponentCoreModuleLayoutsFragment
+    }
+}

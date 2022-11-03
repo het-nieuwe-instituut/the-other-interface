@@ -1,0 +1,11 @@
+#import '../core/moduleLayout.fragment.graphql'
+
+fragment textModuleFragment on ComponentModulesTextModule {
+    id
+    Richtext
+    textModuleLayout {
+        ... on ComponentCoreModuleLayouts {
+            ...componentCoreModuleLayouts
+        }
+    }
+}

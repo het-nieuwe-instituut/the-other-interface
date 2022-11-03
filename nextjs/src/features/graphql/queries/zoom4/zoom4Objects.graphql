@@ -1,0 +1,12 @@
+query Zoom4Objects($objectsFilters: ObjectsZoomLevel4FiltersArgs, $page: Int!, $pageSize: Int!) {
+    zoomLevel4(entityName: Objects, objectsFilters: $objectsFilters, page: $page, pageSize: $pageSize) {
+        total
+        hasMore
+        nodes {
+            record
+            title
+            firstImage
+            imageLabel
+        }
+    }
+}

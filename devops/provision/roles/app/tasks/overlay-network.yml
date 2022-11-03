@@ -1,0 +1,4 @@
+- name: overlay-network | docker | create
+  docker_network:
+    name: "app-network"
+  tags: [network, deploy]

@@ -1,0 +1,33 @@
+#import '../core/moduleLayout.fragment.graphql'
+
+fragment tableModuleFragment on ComponentModulesTableModule {
+    id
+    table {
+        data {
+            id
+            attributes {
+                name
+                description
+                Tablehead {
+                    id
+                    TableHeadItem {
+                        id
+                        label
+                    }
+                }
+                TableBody {
+                    id
+                    TableBodyItem {
+                        id
+                        value
+                    }
+                }
+            }
+        }
+    }
+    tableModuleLayout {
+        ... on ComponentCoreModuleLayouts {
+            ...componentCoreModuleLayouts
+        }
+    }
+}

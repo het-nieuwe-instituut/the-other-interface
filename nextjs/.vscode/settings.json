@@ -1,13 +1,10 @@
 {
     "editor.formatOnSave": true,
-    "editor.rulers": [120],
-    "eslint.enable": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
     },
-    "typescript.tsdk": "node_modules/typescript/lib",
-    "eslint.runtime": "node",
-    "eslint.options": {
-        "ext": ".ts,.tsx"
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
     }
 }

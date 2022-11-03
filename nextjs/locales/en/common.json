@@ -1,0 +1,11 @@
+{
+    "somethingWentWrong": "Something went wrong",
+    "commonTest": "This is a common translation test, also testing counters: {{count}}",
+    "published": "Published {{date}}",
+    "archivesBy": "Archive items by",
+    "publicationsBy": "Publications by",
+    "peopleBy": "People by",
+    "objectsBy": "Objects by",
+    "searchPortalUrl": "https://zoeken.hetnieuweinstituut.nl/en/",
+    "goToSearchPortal": "Go to SearchPortal"
+}

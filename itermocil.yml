@@ -1,0 +1,12 @@
+windows:
+  - name: HNI-TOI
+    root: ~
+    pre: cwd=$(pwd)
+    layout: main-vertical-flipped
+    panes:
+      - cd gateway-app && nvm use && npm run start:debug
+      - cd gateway-app && nvm use && npm run test:watch
+      - cd strapi && nvm use && npm run start-services
+      - cd strapi && nvm use && npm run develop
+      - cd nextjs && nvm use && npm run dev
+      - nvm use && clear

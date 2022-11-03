@@ -1,0 +1,21 @@
+{
+    "byName": "by name",
+    "byDate": "by date",
+    "byDesLevel": "by de slevel",
+    "byPerson": "by person",
+    "byProject": "by project",
+    "bySubject": "by subject",
+    "byMaker": "by maker",
+    "byType": "by type",
+    "byPlace": "by place",
+    "byBirthDate": "by birth date",
+    "byProfession": "by profession",
+    "byDeathDate": "by death date",
+    "byAuthor": "by author",
+    "byLocation": "by location",
+    "publications": "Publications",
+    "people": "People",
+    "archives": "Archives",
+    "objects": "Objects",
+    "genericBy": "By {{name}}"
+}
