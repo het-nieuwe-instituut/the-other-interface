@@ -1,8 +1,9 @@
 import { ButtonsGrid } from '@/features/shared/components/ButtonsGrid/ButtonsGrid'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { formatDate } from '@/features/shared/utils/dates'
+import { getPeoplePathForTriplyRecordId } from '@/features/shared/utils/links'
 import { keyExtractor } from '@/features/shared/utils/lists'
-import { capitalizeFirstLetter, prepareTextToUrl } from '@/features/shared/utils/text'
+import { capitalizeFirstLetter } from '@/features/shared/utils/text'
 import { Box, Link, Text } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import {
@@ -10,6 +11,7 @@ import {
     ComponentCoreTimeframe,
     EnumComponentcorepublicationdateDisplaytype,
     EnumComponentmodulesbuttonsmoduleButtonstyle,
+    EnumTriplyrecordType,
     StoryEntity,
 } from 'src/generated/graphql'
 
@@ -21,6 +23,9 @@ interface Props {
 export const StoryMeta: React.FC<Props> = ({ story }) => {
     const commonT = useTypeSafeTranslation('common')
     const storiesT = useTypeSafeTranslation('stories')
+    const linkedPeopleRecords = story.attributes?.triplyRecords?.data.filter(
+        d => d.attributes?.type === EnumTriplyrecordType.People && !!d.attributes.recordId
+    )
 
     return (
         <Box>
@@ -62,23 +67,24 @@ export const StoryMeta: React.FC<Props> = ({ story }) => {
                 </Box>
             )}
 
-            {!!story.attributes?.triplyRecords?.data?.length && (
+            {!!linkedPeopleRecords?.length && (
                 <Box marginBottom={'md'}>
                     <Text textStyle={'h5'} mb={1}>
                         {capitalizeFirstLetter(storiesT.t('people'))}
                     </Text>
 
                     <Box display={'flex'} flexDirection={'row'}>
-                        {story.attributes?.triplyRecords?.data?.map((item, index, array) => {
+                        {linkedPeopleRecords.map((people, index, array) => {
                             const hasItemAfter = array.length - 1 !== index
                             return (
-                                <Text textStyle={'micro'} key={keyExtractor(item, index, array)} mr={1}>
+                                <Text textStyle={'micro'} key={keyExtractor(people, index, array)} mr={1}>
                                     <NextLink
-                                        href={`/people/${prepareTextToUrl(item.attributes?.people?.name)}`}
+                                        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                                        href={getPeoplePathForTriplyRecordId(people.attributes!.recordId)}
                                         passHref
                                     >
                                         <Link>
-                                            {item.attributes?.people?.name}
+                                            {people.attributes?.people?.name}
                                             {hasItemAfter && ','}
                                         </Link>
                                     </NextLink>
