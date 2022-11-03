@@ -1,3 +1,5 @@
+#import '../../../fragments/relatedRecordFragment.graphql'
+
 query PeopleRelations($id: String!) {
     relations(type: People, id: $id) {
         ...Zoom5RelationsFragment
