@@ -35,7 +35,7 @@ const Story: React.FC<{ data: GetZoom5StoryQuery }> = ({ data }) => {
     const { scrollPosition } = useScroll()
 
     return (
-        <>
+        <Box>
             <Breadcrumbs
                 onWrapperClick={ScrollToTop}
                 mode={scrollPosition >= 750 ? BreadcrumbsRenderModes.STICKY : BreadcrumbsRenderModes.DEFAULT}
@@ -71,16 +71,16 @@ const Story: React.FC<{ data: GetZoom5StoryQuery }> = ({ data }) => {
                                 title={data.story?.attributes?.title}
                                 preface={data.story?.attributes?.description ?? undefined}
                             />
+                            <DynamicComponentRenderer
+                                components={data.story?.attributes?.components as StoryComponentsDynamicZone[]}
+                            />
                         </GridItem>
                         <GridItem area={'meta'}>
                             <StoryMeta story={data.story as StoryEntity} />
                         </GridItem>
                     </Grid>
                 </Box>
-                <DynamicComponentRenderer
-                    components={data.story?.attributes?.components as StoryComponentsDynamicZone[]}
-                />
             </Box>
-        </>
+        </Box>
     )
 }
