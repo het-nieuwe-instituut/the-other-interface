@@ -76,7 +76,7 @@ const Galaxy: React.FC<Props> = ({ dimensions }) => {
                         {!isLoading && stories?.length && (
                             <StoriesSystemPosition dimensions={dimensions} ref={storiesSystemRef}>
                                 <StoriesSystem
-                                    disableLink={zoomLevel !== ZoomLevel.Zoom1Stories}
+                                    disableLinkAndHover={zoomLevel !== ZoomLevel.Zoom1Stories}
                                     data={stories ?? []}
                                 />
                             </StoriesSystemPosition>

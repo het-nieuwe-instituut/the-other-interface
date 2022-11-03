@@ -6,7 +6,7 @@ import React, { useEffect } from 'react'
 import { InstancesPerClass, StoryDataPoint, usePresenter } from './usePresenter'
 
 interface Props {
-    disableLink: boolean
+    disableLinkAndHover: boolean
     data: InstancesPerClass[]
     dimensions?: {
         height: number
@@ -19,7 +19,7 @@ const defaultDimensions = {
     height: 537.85,
 }
 
-export const StoriesSystem: React.FC<Props> = ({ data = [], dimensions = defaultDimensions, disableLink }) => {
+export const StoriesSystem: React.FC<Props> = ({ data = [], dimensions = defaultDimensions, disableLinkAndHover }) => {
     const svgWidth = dimensions.width
     const svgHeight = dimensions.height
     const { triangles, dataPoints, showTooltip, hideTooltip, cleanupTooltips } = usePresenter(data)
@@ -40,11 +40,11 @@ export const StoriesSystem: React.FC<Props> = ({ data = [], dimensions = default
             </g>
             {dataPoints.map((item, index, array) => (
                 <React.Fragment key={`${index}-${array.length}`}>
-                    {disableLink ? (
-                        renderDot(item, showTooltip, hideTooltip, 'default')
+                    {disableLinkAndHover ? (
+                        renderDot(item, showTooltip, hideTooltip, disableLinkAndHover)
                     ) : (
                         <Link className="pointer" href={`/story/${item.slug}`}>
-                            {renderDot(item, showTooltip, hideTooltip, 'pointer')}
+                            {renderDot(item, showTooltip, hideTooltip, disableLinkAndHover)}
                         </Link>
                     )}
                 </React.Fragment>
@@ -57,10 +57,10 @@ function renderDot(
     item: StoryDataPoint,
     showTooltip: (e: React.MouseEvent<HTMLDivElement, MouseEvent>, item: StoryDataPoint) => void,
     hideTooltip: (item: StoryDataPoint) => void,
-    cursor: 'pointer' | 'default'
+    disableLinkAndHover: boolean
 ) {
     return (
-        <g className="StoriesSystem-dot" style={{ cursor }} id={item.id}>
+        <g className="StoriesSystem-dot" style={{ cursor: disableLinkAndHover ? 'default' : 'pointer' }} id={item.id}>
             <foreignObject
                 x={`${item.point[0]}`}
                 y={`${item.point[1]}`}
@@ -70,8 +70,8 @@ function renderDot(
                 data-id={item.id}
             >
                 <Box
-                    onMouseEnter={e => showTooltip(e, item)}
-                    onMouseLeave={() => hideTooltip(item)}
+                    onMouseEnter={e => !disableLinkAndHover && showTooltip(e, item)}
+                    onMouseLeave={() => !disableLinkAndHover && hideTooltip(item)}
                     height="100%"
                     width="100%"
                     background="radial-gradient(50% 50% at 50% 50%, #FFFFFF 0%, rgba(255, 255, 255, 0) 77.6%);"
