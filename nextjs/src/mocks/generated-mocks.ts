@@ -1108,6 +1108,7 @@ export const aRelatedRecordType = (overrides?: Partial<RelatedRecordType>, _rela
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'nisi',
         label: overrides && overrides.hasOwnProperty('label') ? overrides.label! : 'sint',
         relations: overrides && overrides.hasOwnProperty('relations') ? overrides.relations! : [relationshipsToOmit.includes('ZoomLevel5RelationsType') ? {} as ZoomLevel5RelationsType : aZoomLevel5RelationsType({}, relationshipsToOmit)],
+        slug: overrides && overrides.hasOwnProperty('slug') ? overrides.slug! : 'veniam',
         type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : EntityNames.Archives,
     };
 };

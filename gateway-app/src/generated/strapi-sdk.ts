@@ -9098,7 +9098,7 @@ export type StoriesLinkedToTriplyRecordQuery = {
         data: Array<{
             __typename?: 'StoryEntity'
             id?: string | null
-            attributes?: { __typename?: 'Story'; title: string } | null
+            attributes?: { __typename?: 'Story'; slug?: string | null; title: string } | null
         }>
     } | null
 }
@@ -12925,6 +12925,7 @@ export const StoriesLinkedToTriplyRecordDocument = gql`
             data {
                 id
                 attributes {
+                    slug
                     title
                 }
             }

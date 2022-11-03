@@ -35,6 +35,7 @@ query storiesLinkedToTriplyRecord($recordId: String!, $type: String!) {
         data {
             id
             attributes {
+                slug
                 title
             }
         }

@@ -194,8 +194,11 @@ export class ZoomLevel5Service {
             .filter(s => !!s.id && !!s.attributes)
             .map(s => ({
                 id: s.id,
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                slug: s.attributes!.slug,
                 type: EntityNames.Stories,
-                label: s.attributes?.title,
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                label: s.attributes!.title,
             }))
 
         return {
