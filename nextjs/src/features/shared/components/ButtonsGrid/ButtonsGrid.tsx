@@ -137,7 +137,7 @@ function getGridColumns<I extends number, T extends Array<T[0]>>(index: I, array
         return index === array.length - 1 ? '1 / 3' : undefined
     }
 
-    return 1
+    return '1fr'
 }
 
 function getURl(button?: ButtonType | null) {
