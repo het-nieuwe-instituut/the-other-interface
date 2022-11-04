@@ -9,6 +9,7 @@ export interface ObjectPerTypeWithName extends ObjectPerType {
     itemsName?: string
     itemsCount?: number
     id: string
+    count: number
 }
 
 interface D3CollectionItem extends SimulationNodeDatum, ObjectPerTypeWithName {}

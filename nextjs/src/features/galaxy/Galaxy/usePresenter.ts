@@ -1,7 +1,7 @@
 import { times, uniqueId } from 'lodash'
 import { useRouter } from 'next/router'
 import { useMemo, useRef } from 'react'
-import { useStoriesQuery, useZoomLevel1Query, ZoomLevel1Query } from 'src/generated/graphql'
+import { EntityNames, useStoriesWithoutRelationsQuery, useZoomLevel1Query, ZoomLevel1Query } from 'src/generated/graphql'
 import { galaxyTypesToPositions } from '../galaxyConstants'
 import { useD3ZoomEvents } from '../hooks/useD3ZoomEvents'
 import { Dimensions, ZoomLevel } from '../types/galaxy'
@@ -37,19 +37,26 @@ function useArchiefBestandDeel(zoomLevel1Data?: ZoomLevel1Query) {
 }
 
 export function usePresenter(dimensions: Dimensions, selector: string) {
-    const { locale } = useRouter()
+    const { locale, query: { slug }, push } = useRouter()
+    const isStories = slug === 'stories'
+    const { data: storiesData, loading: isLoading } = useStoriesWithoutRelationsQuery({ variables: { pagination: { pageSize: 200 }, locale }})
     const { data: zoomLevel1Data } = useZoomLevel1Query({ fetchPolicy: 'no-cache', nextFetchPolicy: 'no-cache' })
     // TODO: remove hardcoded pageSize & paginate
-    const { data: storiesData, loading: isLoading } = useStoriesQuery({ variables: { pagination: { pageSize: 200 }, locale } })
     const objectsPerTypeWithIds = useObjectPerType(zoomLevel1Data)
-    const router = useRouter()
     const archiefBestandDelen = useArchiefBestandDeel(zoomLevel1Data)
 
     const stories = useMemo(() => {
-        const data = storiesData?.stories?.data || []
+        const data = storiesData?.storiesWithoutRelations?.data || []
+
+        if (isStories && !storiesData?.storiesWithoutRelations) return
+        if (!isStories && !objectsPerTypeWithIds) return
+
+        const storiesCount = objectsPerTypeWithIds.find(item => item.id === EntityNames.Stories)?.count
+        // on zoom level 0 and 1 we only need to show UI for galaxy, we don't need to fetch data. 
+        const endData = isStories ? data : Array(storiesCount).fill(0)
         const parents = times(data.length / 10, i => `test${i}`)
 
-        return data
+        return endData
             .map(item => ({
                 ...item,
                 parent: parents[Math.floor((Math.random() * data.length) / 10) + 1] ?? parents[0],
@@ -59,10 +66,10 @@ export function usePresenter(dimensions: Dimensions, selector: string) {
                 slug: item?.attributes?.slug ?? '',
             }))
             .slice(0, 1000)
-    }, [storiesData])
+    }, [storiesData, objectsPerTypeWithIds, isStories])
 
     const handleMoveToZoomLevel1 = () => {
-        router.push({ pathname: '/', query: { zoomLevel: ZoomLevel.Zoom1 } }, undefined, { shallow: true })
+        push({ pathname: '/', query: { zoomLevel: ZoomLevel.Zoom1 } }, undefined, { shallow: true })
         zoomEvents?.setZoomLevel(ZoomLevel.Zoom1)
     }
 

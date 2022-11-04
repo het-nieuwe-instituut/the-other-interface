@@ -147,6 +147,41 @@ export const ssrStories = {
       withPage: withPageStories,
       usePage: useStories,
     }
+export async function getServerPageStoriesWithoutRelations
+    (options: Omit<Apollo.QueryOptions<Types.StoriesWithoutRelationsQueryVariables>, 'query'>, ctx?: any ){
+        const apolloClient = getApolloClient(ctx);
+        
+        const data = await apolloClient.query<Types.StoriesWithoutRelationsQuery>({ ...options, query: Operations.StoriesWithoutRelationsDocument });
+        
+        const apolloState = apolloClient.cache.extract();
+
+        return {
+            props: {
+                apolloState: apolloState,
+                data: data?.data,
+                error: data?.error ?? data?.errors ?? null,
+            },
+        };
+      }
+export const useStoriesWithoutRelations = (
+  optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.StoriesWithoutRelationsQuery, Types.StoriesWithoutRelationsQueryVariables>) => {
+  const router = useRouter();
+  const options = optionsFunc ? optionsFunc(router) : {};
+  return useQuery(Operations.StoriesWithoutRelationsDocument, options);
+};
+export type PageStoriesWithoutRelationsComp = React.FC<{data?: Types.StoriesWithoutRelationsQuery, error?: Apollo.ApolloError}>;
+export const withPageStoriesWithoutRelations = (optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.StoriesWithoutRelationsQuery, Types.StoriesWithoutRelationsQueryVariables>) => (WrappedComponent:PageStoriesWithoutRelationsComp) : NextPage  => (props) => {
+                const router = useRouter()
+                const options = optionsFunc ? optionsFunc(router) : {};
+                const {data, error } = useQuery(Operations.StoriesWithoutRelationsDocument, options)    
+                return <WrappedComponent {...props} data={data} error={error} /> ;
+                   
+            }; 
+export const ssrStoriesWithoutRelations = {
+      getServerPage: getServerPageStoriesWithoutRelations,
+      withPage: withPageStoriesWithoutRelations,
+      usePage: useStoriesWithoutRelations,
+    }
 export async function getServerPageStoryBySlug
     (options: Omit<Apollo.QueryOptions<Types.StoryBySlugQueryVariables>, 'query'>, ctx?: any ){
         const apolloClient = getApolloClient(ctx);
