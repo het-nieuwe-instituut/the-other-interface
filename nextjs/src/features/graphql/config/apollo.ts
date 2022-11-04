@@ -20,6 +20,7 @@ const typeDefs = gql`
     }
 `
 
+
 const createApolloClient = () => {
     return new ApolloClient({
         ssrMode: typeof window === 'undefined',
