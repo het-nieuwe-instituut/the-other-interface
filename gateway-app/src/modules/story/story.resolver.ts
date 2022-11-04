@@ -90,7 +90,7 @@ export class StoryResolver {
     }
 
     @Query(() => StoryWithoutRelationsEntityResponse)
-    public async storyWithoutRelation(
+    public async storyWithoutRelations(
         @Args('id') id: string,
         @Args('locale', { nullable: true }) locale?: I18NLocaleCode
     ) {
