@@ -1,5 +1,15 @@
 query PublicationRelations($id: String!) {
     relations(type: Publications, id: $id) {
-        ...Zoom5RelationsFragment
+        type
+        total
+        randomRelations {
+            id
+            label
+            type
+            relations {
+                type
+                total
+            }
+        }
     }
 }

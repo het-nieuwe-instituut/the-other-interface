@@ -12,6 +12,7 @@ import { getRandom2ItemsFromArray } from '../util/helpers'
 import { ZoomLevel5RelatedObjectsArgs, ZoomLevel5RelationsType } from './zoomLevel5.type'
 
 interface ZoomLevel5RelationData {
+    originalEntity: string | null
     graph: string // sample graph i.e. https://collectiedata.hetnieuweinstituut.nl/graph/people
     count: string // number
 
@@ -240,7 +241,7 @@ export class ZoomLevel5Service {
         return {
             id,
             type,
-            label: '', // TODO: add after Triply updates endpoint to return the label
+            label: data.length ? data[0].originalEntity || '' : '',
             relations: formattedData,
         }
     }
