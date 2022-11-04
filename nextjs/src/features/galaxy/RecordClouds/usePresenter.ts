@@ -13,12 +13,15 @@ export function usePresenter(relations: ObjectRelationsQuery['relations']) {
     const router = useRouter()
     const svgRef = useRef<SVGSVGElement | null>(null)
     const { relationsPositionData } = usePositionClouds(relations)
-    const disableClick = (d: Item) => router.pathname.includes('/story/[slug]') || d.type === EntityNames.Stories
+    const disabledClick = router.pathname.includes('/story/[slug]')
 
     const navigateTo = useCallback(
         async (d: d3.SimulationNodeDatum & Item) => {
-            if (d.type.toLowerCase() === 'stories') {
-                const newRoute = `/story/${d.label}`
+            if (d.type === EntityNames.Stories) {
+                if (!d.slug) {
+                    return
+                }
+                const newRoute = `/story/${d.slug}`
 
                 client.cache.evict({ id: 'ROOT_QUERY', fieldName: 'zoom5detail' })
                 client.cache.evict({ id: 'ROOT_QUERY', fieldName: 'zoom5relations' })
@@ -39,7 +42,7 @@ export function usePresenter(relations: ObjectRelationsQuery['relations']) {
         [client.cache, router]
     )
     const zoomEvents = useD3HeroAnimateElement<Item>(
-        disableClick,
+        disabledClick,
         svgRef,
         relationsPositionData,
         { width: SVG_DIMENSIONS.width, height: SVG_DIMENSIONS.height },

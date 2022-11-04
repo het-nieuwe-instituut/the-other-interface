@@ -161,6 +161,7 @@ interface ConfiguredRelation {
 interface ConfiguredRelationChild {
     id: string
     label: string
+    slug?: string | null
     type: EntityNames
     diameter: number
     x: number
@@ -206,6 +207,7 @@ export function usePositionClouds(relations: ObjectRelationsQuery['relations']) 
                     id: randomRelation.id,
                     label: randomRelation.label,
                     type: randomRelation.type,
+                    slug: randomRelation.slug,
                     diameter: childConfig.diameter,
                     x: x - childConfig.diameter / 2,
                     y: y - childConfig.diameter / 2,

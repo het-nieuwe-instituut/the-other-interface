@@ -1,15 +1,5 @@
 query PeopleRelations($id: String!) {
     relations(type: People, id: $id) {
-        type
-        total
-        randomRelations {
-            id
-            label
-            type
-            relations {
-                type
-                total
-            }
-        }
+        ...zoom5RelationsFragment
     }
 }
