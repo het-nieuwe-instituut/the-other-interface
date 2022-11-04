@@ -157,7 +157,7 @@ export class ZoomLevel5Service {
 
         const groupedRecords: Record<Enum_Triplyrecord_Type | string, string[]> = {}
         for (const record of triplyRecords) {
-            if (!record.id || !record.attributes) {
+            if (!record.attributes?.recordId) {
                 continue
             }
 
@@ -165,7 +165,7 @@ export class ZoomLevel5Service {
                 groupedRecords[record.attributes.type] = []
             }
 
-            groupedRecords[record.attributes.type].push(record.id)
+            groupedRecords[record.attributes.type].push(record.attributes.recordId)
         }
 
         const promises = Object.entries(groupedRecords).map(async ([key, recordIds]) => {
