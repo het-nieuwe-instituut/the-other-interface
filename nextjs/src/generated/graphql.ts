@@ -80,6 +80,23 @@ export const mockStoriesQuery = (resolver: ResponseResolver<GraphQLRequest<Stori
  * @param resolver a function that accepts a captured request and may return a mocked response.
  * @see https://mswjs.io/docs/basics/response-resolver
  * @example
+ * mockStoriesWithoutRelationsQuery((req, res, ctx) => {
+ *   const { pagination, locale } = req.variables;
+ *   return res(
+ *     ctx.data({ storiesWithoutRelations })
+ *   )
+ * })
+ */
+export const mockStoriesWithoutRelationsQuery = (resolver: ResponseResolver<GraphQLRequest<StoriesWithoutRelationsQueryVariables>, GraphQLContext<StoriesWithoutRelationsQuery>, any>) =>
+  graphql.query<StoriesWithoutRelationsQuery, StoriesWithoutRelationsQueryVariables>(
+    'storiesWithoutRelations',
+    resolver
+  )
+
+/**
+ * @param resolver a function that accepts a captured request and may return a mocked response.
+ * @see https://mswjs.io/docs/basics/response-resolver
+ * @example
  * mockStoryBySlugQuery((req, res, ctx) => {
  *   const { locale, slug } = req.variables;
  *   return res(
@@ -1547,7 +1564,9 @@ export type Query = {
   publicationSerial: PublicationsSerialZoomLevel5DetailType;
   relations?: Maybe<Array<ZoomLevel5RelationsType>>;
   stories: StoryEntityResponseCollection;
+  storiesWithoutRelations: StoryWithoutRelationsEntityResponseCollection;
   story: StoryEntityResponse;
+  storyWithoutRelations: StoryWithoutRelationsEntityResponse;
   table: TableEntityResponse;
   tables: TableEntityResponseCollection;
   triplyRecord: TriplyRecordEntityResponse;
@@ -1658,7 +1677,22 @@ export type QueryStoriesArgs = {
 };
 
 
+export type QueryStoriesWithoutRelationsArgs = {
+  filters?: InputMaybe<StoryFiltersInput>;
+  locale?: InputMaybe<Scalars['String']>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<Scalars['String']>>;
+};
+
+
 export type QueryStoryArgs = {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+export type QueryStoryWithoutRelationsArgs = {
   id: Scalars['String'];
   locale?: InputMaybe<Scalars['String']>;
 };
@@ -1856,6 +1890,35 @@ export type StoryFiltersInput = {
 export type StoryRelationResponseCollection = {
   __typename?: 'StoryRelationResponseCollection';
   data: Array<StoryEntity>;
+};
+
+export type StoryWithoutRelations = {
+  __typename?: 'StoryWithoutRelations';
+  createdAt?: Maybe<Scalars['Date']>;
+  description?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+  publishedAt?: Maybe<Scalars['Date']>;
+  shortDescription?: Maybe<Scalars['String']>;
+  slug?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
+  updatedAt?: Maybe<Scalars['Date']>;
+};
+
+export type StoryWithoutRelationsEntity = {
+  __typename?: 'StoryWithoutRelationsEntity';
+  attributes?: Maybe<StoryWithoutRelations>;
+  id?: Maybe<Scalars['ID']>;
+};
+
+export type StoryWithoutRelationsEntityResponse = {
+  __typename?: 'StoryWithoutRelationsEntityResponse';
+  data?: Maybe<StoryWithoutRelationsEntity>;
+};
+
+export type StoryWithoutRelationsEntityResponseCollection = {
+  __typename?: 'StoryWithoutRelationsEntityResponseCollection';
+  data?: Maybe<Array<StoryWithoutRelationsEntity>>;
+  meta?: Maybe<ResponseCollectionMeta>;
 };
 
 export type StringFilterInput = {
@@ -2257,6 +2320,14 @@ export type StoriesQueryVariables = Exact<{
 
 
 export type StoriesQuery = { __typename?: 'Query', stories: { __typename?: 'StoryEntityResponseCollection', data?: Array<{ __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, slug?: string | null, shortDescription?: string | null } | null }> | null, meta?: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', page: number } } | null } };
+
+export type StoriesWithoutRelationsQueryVariables = Exact<{
+  pagination?: InputMaybe<PaginationArg>;
+  locale?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type StoriesWithoutRelationsQuery = { __typename?: 'Query', storiesWithoutRelations: { __typename?: 'StoryWithoutRelationsEntityResponseCollection', data?: Array<{ __typename?: 'StoryWithoutRelationsEntity', id?: string | null, attributes?: { __typename?: 'StoryWithoutRelations', title: string, slug?: string | null, shortDescription?: string | null } | null }> | null, meta?: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', page: number } } | null } };
 
 export type StoryBySlugQueryVariables = Exact<{
   locale?: InputMaybe<Scalars['String']>;
@@ -3142,6 +3213,54 @@ export function useStoriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<St
 export type StoriesQueryHookResult = ReturnType<typeof useStoriesQuery>;
 export type StoriesLazyQueryHookResult = ReturnType<typeof useStoriesLazyQuery>;
 export type StoriesQueryResult = Apollo.QueryResult<StoriesQuery, StoriesQueryVariables>;
+export const StoriesWithoutRelationsDocument = gql`
+    query storiesWithoutRelations($pagination: PaginationArg, $locale: String) {
+  storiesWithoutRelations(pagination: $pagination, locale: $locale) {
+    data {
+      id
+      attributes {
+        title
+        slug
+        shortDescription
+      }
+    }
+    meta {
+      pagination {
+        page
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useStoriesWithoutRelationsQuery__
+ *
+ * To run a query within a React component, call `useStoriesWithoutRelationsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useStoriesWithoutRelationsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useStoriesWithoutRelationsQuery({
+ *   variables: {
+ *      pagination: // value for 'pagination'
+ *      locale: // value for 'locale'
+ *   },
+ * });
+ */
+export function useStoriesWithoutRelationsQuery(baseOptions?: Apollo.QueryHookOptions<StoriesWithoutRelationsQuery, StoriesWithoutRelationsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<StoriesWithoutRelationsQuery, StoriesWithoutRelationsQueryVariables>(StoriesWithoutRelationsDocument, options);
+      }
+export function useStoriesWithoutRelationsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<StoriesWithoutRelationsQuery, StoriesWithoutRelationsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<StoriesWithoutRelationsQuery, StoriesWithoutRelationsQueryVariables>(StoriesWithoutRelationsDocument, options);
+        }
+export type StoriesWithoutRelationsQueryHookResult = ReturnType<typeof useStoriesWithoutRelationsQuery>;
+export type StoriesWithoutRelationsLazyQueryHookResult = ReturnType<typeof useStoriesWithoutRelationsLazyQuery>;
+export type StoriesWithoutRelationsQueryResult = Apollo.QueryResult<StoriesWithoutRelationsQuery, StoriesWithoutRelationsQueryVariables>;
 export const StoryBySlugDocument = gql`
     query storyBySlug($locale: String, $slug: String!) {
   stories(locale: $locale, filters: {slug: {eq: $slug}}) {

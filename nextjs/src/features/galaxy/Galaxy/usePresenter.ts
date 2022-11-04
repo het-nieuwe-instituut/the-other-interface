@@ -1,7 +1,7 @@
 import { times, uniqueId } from 'lodash'
 import { useRouter } from 'next/router'
 import { useMemo, useRef } from 'react'
-import { EntityNames, useStoriesQuery, useZoomLevel1Query, ZoomLevel1Query } from 'src/generated/graphql'
+import { EntityNames, useStoriesWithoutRelationsQuery, useZoomLevel1Query, ZoomLevel1Query } from 'src/generated/graphql'
 import { galaxyTypesToPositions } from '../galaxyConstants'
 import { useD3ZoomEvents } from '../hooks/useD3ZoomEvents'
 import { Dimensions, ZoomLevel } from '../types/galaxy'
@@ -39,16 +39,16 @@ function useArchiefBestandDeel(zoomLevel1Data?: ZoomLevel1Query) {
 export function usePresenter(dimensions: Dimensions, selector: string) {
     const { locale, query: { slug }, push } = useRouter()
     const isStories = slug === 'stories'
-    const { data: storiesData, loading: isLoading } = useStoriesQuery({ variables: { pagination: { pageSize: 200 }, locale }})
+    const { data: storiesData, loading: isLoading } = useStoriesWithoutRelationsQuery({ variables: { pagination: { pageSize: 200 }, locale }})
     const { data: zoomLevel1Data } = useZoomLevel1Query({ fetchPolicy: 'no-cache', nextFetchPolicy: 'no-cache' })
     // TODO: remove hardcoded pageSize & paginate
     const objectsPerTypeWithIds = useObjectPerType(zoomLevel1Data)
     const archiefBestandDelen = useArchiefBestandDeel(zoomLevel1Data)
 
     const stories = useMemo(() => {
-        const data = storiesData?.stories?.data || []
+        const data = storiesData?.storiesWithoutRelations?.data || []
 
-        if (isStories && !storiesData?.stories) return
+        if (isStories && !storiesData?.storiesWithoutRelations) return
         if (!isStories && !objectsPerTypeWithIds) return
 
         const storiesCount = objectsPerTypeWithIds.find(item => item.id === EntityNames.Stories)?.count
