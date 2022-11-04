@@ -21,10 +21,41 @@ query stories(
     }
 }
 
+query storiesWithoutRelations(
+    $filters: StoryFiltersInput
+    $pagination: PaginationArg
+    $sort: [String]
+    $publicationState: PublicationState
+    $locale: I18NLocaleCode
+) {
+    stories(
+        filters: $filters
+        pagination: $pagination
+        sort: $sort
+        publicationState: $publicationState
+        locale: $locale
+    ) {
+        data {
+            ...StoryWithoutRelationsFragment
+        }
+        meta {
+            ...ResponseCollectionMetaFragment
+        }
+    }
+}
+
 query story($id: ID, $locale: I18NLocaleCode) {
     story(id: $id, locale: $locale) {
         data {
             ...StoryFragment
+        }
+    }
+}
+
+query storyWithoutRelations($id: ID, $locale: I18NLocaleCode) {
+    story(id: $id, locale: $locale) {
+        data {
+            ...StoryWithoutRelationsFragment
         }
     }
 }
@@ -64,6 +95,20 @@ query storiesTotal {
                 total
             }
         }
+    }
+}
+
+fragment StoryWithoutRelationsFragment on StoryEntity {
+    id
+    attributes {
+        title
+        slug
+        description
+        shortDescription
+        createdAt
+        updatedAt
+        publishedAt
+        locale
     }
 }
 

@@ -1,4 +1,4 @@
-import { ObjectType, Field, createUnionType, ID, InputType } from '@nestjs/graphql'
+import { ObjectType, Field, createUnionType, ID, InputType, PickType } from '@nestjs/graphql'
 import { AuthorEntityResponse, AuthorFiltersInput } from '../author/author.type'
 import { LocationFiltersInput, LocationRelationResponseCollection } from '../location/location.type'
 import { ComponentModulesGridModule } from '../strapi/components/modules/gridModule'
@@ -86,6 +86,18 @@ export class Story {
     public updatedAt: Date
 }
 
+@ObjectType()
+export class StoryWithoutRelations extends PickType(Story, [
+    'createdAt',
+    'description',
+    'locale',
+    'publishedAt',
+    'shortDescription',
+    'slug',
+    'title',
+    'updatedAt',
+] as const) {}
+
 export const StoryComponentsDynamicZone = createUnionType({
     name: 'StoryComponentsDynamicZone',
     types: () =>
@@ -117,15 +129,39 @@ export class StoryEntity {
 }
 
 @ObjectType()
+export class StoryWithoutRelationsEntity {
+    @Field({ nullable: true })
+    public attributes?: StoryWithoutRelations
+
+    @Field(() => ID, { nullable: true })
+    public id?: string
+}
+
+@ObjectType()
 export class StoryEntityResponse {
     @Field({ nullable: true })
     public data?: StoryEntity
 }
 
 @ObjectType()
+export class StoryWithoutRelationsEntityResponse {
+    @Field({ nullable: true })
+    public data?: StoryWithoutRelationsEntity
+}
+
+@ObjectType()
 export class StoryEntityResponseCollection {
     @Field(() => [StoryEntity], { nullable: true })
     public data: StoryEntity[]
+
+    @Field(() => ResponseCollectionMeta, { nullable: true })
+    public meta: ResponseCollectionMeta
+}
+
+@ObjectType()
+export class StoryWithoutRelationsEntityResponseCollection {
+    @Field(() => [StoryWithoutRelationsEntity], { nullable: true })
+    public data: StoryWithoutRelationsEntity[]
 
     @Field(() => ResponseCollectionMeta, { nullable: true })
     public meta: ResponseCollectionMeta
