@@ -5223,6 +5223,11 @@
           },
           {
             "kind": "OBJECT",
+            "name": "ComponentModulesCarousel",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
             "name": "ComponentModulesGridModule",
             "ofType": null
           },

@@ -18,6 +18,9 @@ query landingpageBySlug($locale: String, $slug: String!) {
                     ... on ComponentModulesTextModule {
                         ...textModuleFragment
                     }
+                    ... on ComponentModulesCarousel {
+                        ...carouselModuleFragment
+                    }
                     ... on ComponentModulesImage {
                         ...imageModuleFragment
                     }

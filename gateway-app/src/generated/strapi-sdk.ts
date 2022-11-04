@@ -841,6 +841,7 @@ export type LandingpageLocalizationsArgs = {
 
 export type LandingpageComponentsDynamicZone =
     | ComponentModulesButtonsModule
+    | ComponentModulesCarousel
     | ComponentModulesGridModule
     | ComponentModulesImage
     | ComponentModulesImageCarousel
@@ -3491,6 +3492,66 @@ export type LandingpageFragmentFragment = {
               } | null> | null
           }
         | {
+              __typename: 'ComponentModulesCarousel'
+              id: string
+              buttonText?: string | null
+              buttonUrl?: string | null
+              description?: string | null
+              title?: string | null
+              type?: Enum_Componentmodulescarousel_Type | null
+              carouselModuleLayout: {
+                  __typename?: 'ComponentCoreModuleLayouts'
+                  id: string
+                  spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
+                  spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
+              }
+              items?: Array<{
+                  __typename?: 'ComponentCoreCarouselItem'
+                  id: string
+                  description?: string | null
+                  name?: string | null
+                  type?: Enum_Componentcorecarouselitem_Type | null
+                  picture?: {
+                      __typename?: 'UploadFileEntityResponse'
+                      data?: {
+                          __typename?: 'UploadFileEntity'
+                          id?: string | null
+                          attributes?: {
+                              __typename?: 'UploadFile'
+                              hash: string
+                              mime: string
+                              name: string
+                              provider: string
+                              size: number
+                              url: string
+                              alternativeText?: string | null
+                              caption?: string | null
+                              createdAt?: any | null
+                              ext?: string | null
+                              formats?: any | null
+                              height?: number | null
+                              previewUrl?: string | null
+                              provider_metadata?: any | null
+                              updatedAt?: any | null
+                              width?: number | null
+                          } | null
+                      } | null
+                  } | null
+                  triply_record?: {
+                      __typename?: 'TriplyRecordEntityResponse'
+                      data?: {
+                          __typename?: 'TriplyRecordEntity'
+                          id?: string | null
+                          attributes?: {
+                              __typename?: 'TriplyRecord'
+                              recordId: string
+                              type: Enum_Triplyrecord_Type
+                          } | null
+                      } | null
+                  } | null
+              } | null> | null
+          }
+        | {
               __typename: 'ComponentModulesGridModule'
               id: string
               description?: string | null
@@ -3836,6 +3897,66 @@ export type LandingpageEntityFragmentFragment = {
                               } | null> | null
                           }
                         | {
+                              __typename: 'ComponentModulesCarousel'
+                              id: string
+                              buttonText?: string | null
+                              buttonUrl?: string | null
+                              description?: string | null
+                              title?: string | null
+                              type?: Enum_Componentmodulescarousel_Type | null
+                              carouselModuleLayout: {
+                                  __typename?: 'ComponentCoreModuleLayouts'
+                                  id: string
+                                  spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
+                                  spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
+                              }
+                              items?: Array<{
+                                  __typename?: 'ComponentCoreCarouselItem'
+                                  id: string
+                                  description?: string | null
+                                  name?: string | null
+                                  type?: Enum_Componentcorecarouselitem_Type | null
+                                  picture?: {
+                                      __typename?: 'UploadFileEntityResponse'
+                                      data?: {
+                                          __typename?: 'UploadFileEntity'
+                                          id?: string | null
+                                          attributes?: {
+                                              __typename?: 'UploadFile'
+                                              hash: string
+                                              mime: string
+                                              name: string
+                                              provider: string
+                                              size: number
+                                              url: string
+                                              alternativeText?: string | null
+                                              caption?: string | null
+                                              createdAt?: any | null
+                                              ext?: string | null
+                                              formats?: any | null
+                                              height?: number | null
+                                              previewUrl?: string | null
+                                              provider_metadata?: any | null
+                                              updatedAt?: any | null
+                                              width?: number | null
+                                          } | null
+                                      } | null
+                                  } | null
+                                  triply_record?: {
+                                      __typename?: 'TriplyRecordEntityResponse'
+                                      data?: {
+                                          __typename?: 'TriplyRecordEntity'
+                                          id?: string | null
+                                          attributes?: {
+                                              __typename?: 'TriplyRecord'
+                                              recordId: string
+                                              type: Enum_Triplyrecord_Type
+                                          } | null
+                                      } | null
+                                  } | null
+                              } | null> | null
+                          }
+                        | {
                               __typename: 'ComponentModulesGridModule'
                               id: string
                               description?: string | null
@@ -4150,6 +4271,66 @@ export type LandingpageEntityFragmentFragment = {
                                   provider_metadata?: any | null
                                   updatedAt?: any | null
                                   width?: number | null
+                              } | null
+                          } | null
+                      } | null
+                  } | null> | null
+              }
+            | {
+                  __typename: 'ComponentModulesCarousel'
+                  id: string
+                  buttonText?: string | null
+                  buttonUrl?: string | null
+                  description?: string | null
+                  title?: string | null
+                  type?: Enum_Componentmodulescarousel_Type | null
+                  carouselModuleLayout: {
+                      __typename?: 'ComponentCoreModuleLayouts'
+                      id: string
+                      spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
+                      spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
+                  }
+                  items?: Array<{
+                      __typename?: 'ComponentCoreCarouselItem'
+                      id: string
+                      description?: string | null
+                      name?: string | null
+                      type?: Enum_Componentcorecarouselitem_Type | null
+                      picture?: {
+                          __typename?: 'UploadFileEntityResponse'
+                          data?: {
+                              __typename?: 'UploadFileEntity'
+                              id?: string | null
+                              attributes?: {
+                                  __typename?: 'UploadFile'
+                                  hash: string
+                                  mime: string
+                                  name: string
+                                  provider: string
+                                  size: number
+                                  url: string
+                                  alternativeText?: string | null
+                                  caption?: string | null
+                                  createdAt?: any | null
+                                  ext?: string | null
+                                  formats?: any | null
+                                  height?: number | null
+                                  previewUrl?: string | null
+                                  provider_metadata?: any | null
+                                  updatedAt?: any | null
+                                  width?: number | null
+                              } | null
+                          } | null
+                      } | null
+                      triply_record?: {
+                          __typename?: 'TriplyRecordEntityResponse'
+                          data?: {
+                              __typename?: 'TriplyRecordEntity'
+                              id?: string | null
+                              attributes?: {
+                                  __typename?: 'TriplyRecord'
+                                  recordId: string
+                                  type: Enum_Triplyrecord_Type
                               } | null
                           } | null
                       } | null
@@ -4511,6 +4692,66 @@ export type LandingPageQuery = {
                                       } | null> | null
                                   }
                                 | {
+                                      __typename: 'ComponentModulesCarousel'
+                                      id: string
+                                      buttonText?: string | null
+                                      buttonUrl?: string | null
+                                      description?: string | null
+                                      title?: string | null
+                                      type?: Enum_Componentmodulescarousel_Type | null
+                                      carouselModuleLayout: {
+                                          __typename?: 'ComponentCoreModuleLayouts'
+                                          id: string
+                                          spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
+                                          spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
+                                      }
+                                      items?: Array<{
+                                          __typename?: 'ComponentCoreCarouselItem'
+                                          id: string
+                                          description?: string | null
+                                          name?: string | null
+                                          type?: Enum_Componentcorecarouselitem_Type | null
+                                          picture?: {
+                                              __typename?: 'UploadFileEntityResponse'
+                                              data?: {
+                                                  __typename?: 'UploadFileEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'UploadFile'
+                                                      hash: string
+                                                      mime: string
+                                                      name: string
+                                                      provider: string
+                                                      size: number
+                                                      url: string
+                                                      alternativeText?: string | null
+                                                      caption?: string | null
+                                                      createdAt?: any | null
+                                                      ext?: string | null
+                                                      formats?: any | null
+                                                      height?: number | null
+                                                      previewUrl?: string | null
+                                                      provider_metadata?: any | null
+                                                      updatedAt?: any | null
+                                                      width?: number | null
+                                                  } | null
+                                              } | null
+                                          } | null
+                                          triply_record?: {
+                                              __typename?: 'TriplyRecordEntityResponse'
+                                              data?: {
+                                                  __typename?: 'TriplyRecordEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'TriplyRecord'
+                                                      recordId: string
+                                                      type: Enum_Triplyrecord_Type
+                                                  } | null
+                                              } | null
+                                          } | null
+                                      } | null> | null
+                                  }
+                                | {
                                       __typename: 'ComponentModulesGridModule'
                                       id: string
                                       description?: string | null
@@ -4825,6 +5066,66 @@ export type LandingPageQuery = {
                                           provider_metadata?: any | null
                                           updatedAt?: any | null
                                           width?: number | null
+                                      } | null
+                                  } | null
+                              } | null
+                          } | null> | null
+                      }
+                    | {
+                          __typename: 'ComponentModulesCarousel'
+                          id: string
+                          buttonText?: string | null
+                          buttonUrl?: string | null
+                          description?: string | null
+                          title?: string | null
+                          type?: Enum_Componentmodulescarousel_Type | null
+                          carouselModuleLayout: {
+                              __typename?: 'ComponentCoreModuleLayouts'
+                              id: string
+                              spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
+                              spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
+                          }
+                          items?: Array<{
+                              __typename?: 'ComponentCoreCarouselItem'
+                              id: string
+                              description?: string | null
+                              name?: string | null
+                              type?: Enum_Componentcorecarouselitem_Type | null
+                              picture?: {
+                                  __typename?: 'UploadFileEntityResponse'
+                                  data?: {
+                                      __typename?: 'UploadFileEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'UploadFile'
+                                          hash: string
+                                          mime: string
+                                          name: string
+                                          provider: string
+                                          size: number
+                                          url: string
+                                          alternativeText?: string | null
+                                          caption?: string | null
+                                          createdAt?: any | null
+                                          ext?: string | null
+                                          formats?: any | null
+                                          height?: number | null
+                                          previewUrl?: string | null
+                                          provider_metadata?: any | null
+                                          updatedAt?: any | null
+                                          width?: number | null
+                                      } | null
+                                  } | null
+                              } | null
+                              triply_record?: {
+                                  __typename?: 'TriplyRecordEntityResponse'
+                                  data?: {
+                                      __typename?: 'TriplyRecordEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'TriplyRecord'
+                                          recordId: string
+                                          type: Enum_Triplyrecord_Type
                                       } | null
                                   } | null
                               } | null
@@ -5191,6 +5492,66 @@ export type LandingPagesQuery = {
                                       } | null> | null
                                   }
                                 | {
+                                      __typename: 'ComponentModulesCarousel'
+                                      id: string
+                                      buttonText?: string | null
+                                      buttonUrl?: string | null
+                                      description?: string | null
+                                      title?: string | null
+                                      type?: Enum_Componentmodulescarousel_Type | null
+                                      carouselModuleLayout: {
+                                          __typename?: 'ComponentCoreModuleLayouts'
+                                          id: string
+                                          spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
+                                          spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
+                                      }
+                                      items?: Array<{
+                                          __typename?: 'ComponentCoreCarouselItem'
+                                          id: string
+                                          description?: string | null
+                                          name?: string | null
+                                          type?: Enum_Componentcorecarouselitem_Type | null
+                                          picture?: {
+                                              __typename?: 'UploadFileEntityResponse'
+                                              data?: {
+                                                  __typename?: 'UploadFileEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'UploadFile'
+                                                      hash: string
+                                                      mime: string
+                                                      name: string
+                                                      provider: string
+                                                      size: number
+                                                      url: string
+                                                      alternativeText?: string | null
+                                                      caption?: string | null
+                                                      createdAt?: any | null
+                                                      ext?: string | null
+                                                      formats?: any | null
+                                                      height?: number | null
+                                                      previewUrl?: string | null
+                                                      provider_metadata?: any | null
+                                                      updatedAt?: any | null
+                                                      width?: number | null
+                                                  } | null
+                                              } | null
+                                          } | null
+                                          triply_record?: {
+                                              __typename?: 'TriplyRecordEntityResponse'
+                                              data?: {
+                                                  __typename?: 'TriplyRecordEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'TriplyRecord'
+                                                      recordId: string
+                                                      type: Enum_Triplyrecord_Type
+                                                  } | null
+                                              } | null
+                                          } | null
+                                      } | null> | null
+                                  }
+                                | {
                                       __typename: 'ComponentModulesGridModule'
                                       id: string
                                       description?: string | null
@@ -5505,6 +5866,66 @@ export type LandingPagesQuery = {
                                           provider_metadata?: any | null
                                           updatedAt?: any | null
                                           width?: number | null
+                                      } | null
+                                  } | null
+                              } | null
+                          } | null> | null
+                      }
+                    | {
+                          __typename: 'ComponentModulesCarousel'
+                          id: string
+                          buttonText?: string | null
+                          buttonUrl?: string | null
+                          description?: string | null
+                          title?: string | null
+                          type?: Enum_Componentmodulescarousel_Type | null
+                          carouselModuleLayout: {
+                              __typename?: 'ComponentCoreModuleLayouts'
+                              id: string
+                              spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
+                              spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
+                          }
+                          items?: Array<{
+                              __typename?: 'ComponentCoreCarouselItem'
+                              id: string
+                              description?: string | null
+                              name?: string | null
+                              type?: Enum_Componentcorecarouselitem_Type | null
+                              picture?: {
+                                  __typename?: 'UploadFileEntityResponse'
+                                  data?: {
+                                      __typename?: 'UploadFileEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'UploadFile'
+                                          hash: string
+                                          mime: string
+                                          name: string
+                                          provider: string
+                                          size: number
+                                          url: string
+                                          alternativeText?: string | null
+                                          caption?: string | null
+                                          createdAt?: any | null
+                                          ext?: string | null
+                                          formats?: any | null
+                                          height?: number | null
+                                          previewUrl?: string | null
+                                          provider_metadata?: any | null
+                                          updatedAt?: any | null
+                                          width?: number | null
+                                      } | null
+                                  } | null
+                              } | null
+                              triply_record?: {
+                                  __typename?: 'TriplyRecordEntityResponse'
+                                  data?: {
+                                      __typename?: 'TriplyRecordEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'TriplyRecord'
+                                          recordId: string
+                                          type: Enum_Triplyrecord_Type
                                       } | null
                                   } | null
                               } | null
@@ -12360,6 +12781,9 @@ export const LandingpageFragmentFragmentDoc = gql`
             ... on ComponentModulesTextModule {
                 ...ComponentModulesTextModuleFragment
             }
+            ... on ComponentModulesCarousel {
+                ...ComponentModulesCarouselFragment
+            }
             ... on ComponentModulesGridModule {
                 ...ComponentModulesGridModuleFragment
             }
@@ -12390,6 +12814,7 @@ export const LandingpageFragmentFragmentDoc = gql`
         }
     }
     ${ComponentModulesTextModuleFragmentFragmentDoc}
+    ${ComponentModulesCarouselFragmentFragmentDoc}
     ${ComponentModulesGridModuleFragmentFragmentDoc}
     ${ComponentModulesSubtitleFragmentFragmentDoc}
     ${ComponentModulesTitleModuleFragmentFragmentDoc}
