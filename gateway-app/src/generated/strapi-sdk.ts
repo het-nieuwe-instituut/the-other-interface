@@ -9083,6 +9083,40 @@ export type StoriesQuery = {
     } | null
 }
 
+export type StoriesWithoutRelationsQueryVariables = Exact<{
+    filters?: InputMaybe<StoryFiltersInput>
+    pagination?: InputMaybe<PaginationArg>
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>
+    publicationState?: InputMaybe<PublicationState>
+    locale?: InputMaybe<Scalars['I18NLocaleCode']>
+}>
+
+export type StoriesWithoutRelationsQuery = {
+    __typename?: 'Query'
+    stories?: {
+        __typename?: 'StoryEntityResponseCollection'
+        data: Array<{
+            __typename?: 'StoryEntity'
+            id?: string | null
+            attributes?: {
+                __typename?: 'Story'
+                title: string
+                slug?: string | null
+                description?: string | null
+                shortDescription?: string | null
+                createdAt?: any | null
+                updatedAt?: any | null
+                publishedAt?: any | null
+                locale?: string | null
+            } | null
+        }>
+        meta: {
+            __typename?: 'ResponseCollectionMeta'
+            pagination: { __typename?: 'Pagination'; page: number; pageCount: number; pageSize: number; total: number }
+        }
+    } | null
+}
+
 export type StoryQueryVariables = Exact<{
     id?: InputMaybe<Scalars['ID']>
     locale?: InputMaybe<Scalars['I18NLocaleCode']>
@@ -9507,6 +9541,33 @@ export type StoryQuery = {
     } | null
 }
 
+export type StoryWithoutRelationsQueryVariables = Exact<{
+    id?: InputMaybe<Scalars['ID']>
+    locale?: InputMaybe<Scalars['I18NLocaleCode']>
+}>
+
+export type StoryWithoutRelationsQuery = {
+    __typename?: 'Query'
+    story?: {
+        __typename?: 'StoryEntityResponse'
+        data?: {
+            __typename?: 'StoryEntity'
+            id?: string | null
+            attributes?: {
+                __typename?: 'Story'
+                title: string
+                slug?: string | null
+                description?: string | null
+                shortDescription?: string | null
+                createdAt?: any | null
+                updatedAt?: any | null
+                publishedAt?: any | null
+                locale?: string | null
+            } | null
+        } | null
+    } | null
+}
+
 export type StoriesLinkedToTriplyRecordQueryVariables = Exact<{
     recordId: Scalars['String']
     type: Scalars['String']
@@ -9561,6 +9622,22 @@ export type StoriesTotalQuery = {
     stories?: {
         __typename?: 'StoryEntityResponseCollection'
         meta: { __typename?: 'ResponseCollectionMeta'; pagination: { __typename?: 'Pagination'; total: number } }
+    } | null
+}
+
+export type StoryWithoutRelationsFragmentFragment = {
+    __typename?: 'StoryEntity'
+    id?: string | null
+    attributes?: {
+        __typename?: 'Story'
+        title: string
+        slug?: string | null
+        description?: string | null
+        shortDescription?: string | null
+        createdAt?: any | null
+        updatedAt?: any | null
+        publishedAt?: any | null
+        locale?: string | null
     } | null
 }
 
@@ -12933,6 +13010,21 @@ export const MenupageEntityFragmentFragmentDoc = gql`
     }
     ${MenupageFragmentFragmentDoc}
 `
+export const StoryWithoutRelationsFragmentFragmentDoc = gql`
+    fragment StoryWithoutRelationsFragment on StoryEntity {
+        id
+        attributes {
+            title
+            slug
+            description
+            shortDescription
+            createdAt
+            updatedAt
+            publishedAt
+            locale
+        }
+    }
+`
 export const ComponentCorePageHeaderFragmentFragmentDoc = gql`
     fragment ComponentCorePageHeaderFragment on ComponentCorePageHeader {
         id
@@ -13334,6 +13426,32 @@ export const StoriesDocument = gql`
     ${StoryFragmentFragmentDoc}
     ${ResponseCollectionMetaFragmentFragmentDoc}
 `
+export const StoriesWithoutRelationsDocument = gql`
+    query storiesWithoutRelations(
+        $filters: StoryFiltersInput
+        $pagination: PaginationArg
+        $sort: [String]
+        $publicationState: PublicationState
+        $locale: I18NLocaleCode
+    ) {
+        stories(
+            filters: $filters
+            pagination: $pagination
+            sort: $sort
+            publicationState: $publicationState
+            locale: $locale
+        ) {
+            data {
+                ...StoryWithoutRelationsFragment
+            }
+            meta {
+                ...ResponseCollectionMetaFragment
+            }
+        }
+    }
+    ${StoryWithoutRelationsFragmentFragmentDoc}
+    ${ResponseCollectionMetaFragmentFragmentDoc}
+`
 export const StoryDocument = gql`
     query story($id: ID, $locale: I18NLocaleCode) {
         story(id: $id, locale: $locale) {
@@ -13343,6 +13461,16 @@ export const StoryDocument = gql`
         }
     }
     ${StoryFragmentFragmentDoc}
+`
+export const StoryWithoutRelationsDocument = gql`
+    query storyWithoutRelations($id: ID, $locale: I18NLocaleCode) {
+        story(id: $id, locale: $locale) {
+            data {
+                ...StoryWithoutRelationsFragment
+            }
+        }
+    }
+    ${StoryWithoutRelationsFragmentFragmentDoc}
 `
 export const StoriesLinkedToTriplyRecordDocument = gql`
     query storiesLinkedToTriplyRecord($recordId: String!, $type: String!) {
@@ -13609,6 +13737,20 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
                 'query'
             )
         },
+        storiesWithoutRelations(
+            variables?: StoriesWithoutRelationsQueryVariables,
+            requestHeaders?: Dom.RequestInit['headers']
+        ): Promise<StoriesWithoutRelationsQuery> {
+            return withWrapper(
+                wrappedRequestHeaders =>
+                    client.request<StoriesWithoutRelationsQuery>(StoriesWithoutRelationsDocument, variables, {
+                        ...requestHeaders,
+                        ...wrappedRequestHeaders,
+                    }),
+                'storiesWithoutRelations',
+                'query'
+            )
+        },
         story(variables?: StoryQueryVariables, requestHeaders?: Dom.RequestInit['headers']): Promise<StoryQuery> {
             return withWrapper(
                 wrappedRequestHeaders =>
@@ -13617,6 +13759,20 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
                         ...wrappedRequestHeaders,
                     }),
                 'story',
+                'query'
+            )
+        },
+        storyWithoutRelations(
+            variables?: StoryWithoutRelationsQueryVariables,
+            requestHeaders?: Dom.RequestInit['headers']
+        ): Promise<StoryWithoutRelationsQuery> {
+            return withWrapper(
+                wrappedRequestHeaders =>
+                    client.request<StoryWithoutRelationsQuery>(StoryWithoutRelationsDocument, variables, {
+                        ...requestHeaders,
+                        ...wrappedRequestHeaders,
+                    }),
+                'storyWithoutRelations',
                 'query'
             )
         },

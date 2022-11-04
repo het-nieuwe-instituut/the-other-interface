@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2022-10-28T13:26:30.346Z
+__export_date: 2022-11-04T09:17:28.975Z
 __export_source: insomnia.desktop.app:v2022.6.0
 resources:
   - _id: req_d36dd2c14e474d7abc436370519db759
@@ -39,7 +39,7 @@ resources:
       - name: Content-Type
         value: application/json
     authentication: {}
-    metaSortKey: -1665559396865
+    metaSortKey: -1665559396865å
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -443,7 +443,7 @@ resources:
     _type: request
   - _id: req_0585e8def454461484c03be3551936e0
     parentId: fld_13c5fd867c8545c3a5309539679ba83f
-    modified: 1664895106155
+    modified: 1667553336906
     created: 1661966595011
     url: "{{ _.baseUrl }}/graphql"
     name: stories
@@ -473,11 +473,40 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
+  - _id: req_6d9eab5141604886a5febf2366b70ad6
+    parentId: fld_13c5fd867c8545c3a5309539679ba83f
+    modified: 1667553434752
+    created: 1667553343432
+    url: "{{ _.baseUrl }}/graphql"
+    name: storiesWithoutRelations
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n\tstoriesWithoutRelations {\n\t\tdata
+        {\n\t\t\tid\n\t\t\tattributes
+        {\n\t\t\t\tcreatedAt\n\t\t\t\tdescription\n\t\t\t\tlocale\n\t\t\t\tpublishedAt\n\t\t\t\tshortDescription\n\t\t\t\tslug\n\t\t\t\ttitle\n\t\t\t\tupdatedAt\n\t\t\t}\n\t\t}\n\t\tmeta
+        {\n\t\t\tpagination {\n\t\t\t\tpage\n\t\t\t}\n\t\t}\n\t}\n}\n"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658904687174.375
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
   - _id: req_da9626bccfd244309c17b2ff8b46d993
     parentId: fld_13c5fd867c8545c3a5309539679ba83f
-    modified: 1665754670193
+    modified: 1667553389246
     created: 1664823597730
-    url: "{{ _.baseUrl }}/graphql"
+    url: ""
     name: story
     description: ""
     method: POST
@@ -535,6 +564,34 @@ resources:
         id: pair_4888895150804e04b42b02ba0fd8527d
     authentication: {}
     metaSortKey: -1658904687171.25
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_23101c7d35dc442095c3006f81ec8f59
+    parentId: fld_13c5fd867c8545c3a5309539679ba83f
+    modified: 1667553431465
+    created: 1667553395488
+    url: "{{ _.baseUrl }}/graphql"
+    name: storyWithoutRelations
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n\tstoryWithoutRelations(id: \"2\") {\n\t\tdata
+        {\n\t\t\tid\n\t\t\tattributes
+        {\n\t\t\t\tcreatedAt\n\t\t\t\tdescription\n\t\t\t\tlocale\n\t\t\t\tpublishedAt\n\t\t\t\tshortDescription\n\t\t\t\tslug\n\t\t\t\ttitle\n\t\t\t\tupdatedAt\n\t\t\t}\n\t\t}\n\t}\n}\n"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4888895150804e04b42b02ba0fd8527d
+    authentication: {}
+    metaSortKey: -1658904687168.125
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
