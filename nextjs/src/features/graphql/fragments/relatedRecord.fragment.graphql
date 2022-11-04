@@ -1,0 +1,14 @@
+fragment zoom5RelationsFragment on ZoomLevel5RelationsType {
+    type
+    total
+    randomRelations {
+        id
+        label
+        type
+        slug
+        relations {
+            type
+            total
+        }
+    }
+}

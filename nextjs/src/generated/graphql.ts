@@ -2290,6 +2290,8 @@ export type TextModuleFragmentFragment = { __typename?: 'ComponentModulesTextMod
 
 export type TitleModuleFragmentFragment = { __typename?: 'ComponentModulesTitleModule', id: string, Title?: string | null, titleModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } };
 
+export type Zoom5RelationsFragmentFragment = { __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number, randomRelations?: Array<{ __typename?: 'RelatedRecordType', id: string, label: string, type: EntityNames, slug?: string | null, relations?: Array<{ __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number }> | null }> | null };
+
 export type HomepageQueryVariables = Exact<{
   locale?: InputMaybe<Scalars['String']>;
 }>;
@@ -2432,35 +2434,35 @@ export type ArchivesRelationsQueryVariables = Exact<{
 }>;
 
 
-export type ArchivesRelationsQuery = { __typename?: 'Query', relations?: Array<{ __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number, randomRelations?: Array<{ __typename?: 'RelatedRecordType', id: string, label: string, type: EntityNames, relations?: Array<{ __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number }> | null }> | null }> | null };
+export type ArchivesRelationsQuery = { __typename?: 'Query', relations?: Array<{ __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number, randomRelations?: Array<{ __typename?: 'RelatedRecordType', id: string, label: string, type: EntityNames, slug?: string | null, relations?: Array<{ __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number }> | null }> | null }> | null };
 
 export type ObjectRelationsQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type ObjectRelationsQuery = { __typename?: 'Query', relations?: Array<{ __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number, randomRelations?: Array<{ __typename?: 'RelatedRecordType', id: string, label: string, type: EntityNames, relations?: Array<{ __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number }> | null }> | null }> | null };
+export type ObjectRelationsQuery = { __typename?: 'Query', relations?: Array<{ __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number, randomRelations?: Array<{ __typename?: 'RelatedRecordType', id: string, label: string, type: EntityNames, slug?: string | null, relations?: Array<{ __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number }> | null }> | null }> | null };
 
 export type PeopleRelationsQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type PeopleRelationsQuery = { __typename?: 'Query', relations?: Array<{ __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number, randomRelations?: Array<{ __typename?: 'RelatedRecordType', id: string, label: string, type: EntityNames, relations?: Array<{ __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number }> | null }> | null }> | null };
+export type PeopleRelationsQuery = { __typename?: 'Query', relations?: Array<{ __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number, randomRelations?: Array<{ __typename?: 'RelatedRecordType', id: string, label: string, type: EntityNames, slug?: string | null, relations?: Array<{ __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number }> | null }> | null }> | null };
 
 export type PublicationRelationsQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type PublicationRelationsQuery = { __typename?: 'Query', relations?: Array<{ __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number, randomRelations?: Array<{ __typename?: 'RelatedRecordType', id: string, label: string, type: EntityNames, relations?: Array<{ __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number }> | null }> | null }> | null };
+export type PublicationRelationsQuery = { __typename?: 'Query', relations?: Array<{ __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number, randomRelations?: Array<{ __typename?: 'RelatedRecordType', id: string, label: string, type: EntityNames, slug?: string | null, relations?: Array<{ __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number }> | null }> | null }> | null };
 
 export type StoriesRelationsQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type StoriesRelationsQuery = { __typename?: 'Query', relations?: Array<{ __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number, randomRelations?: Array<{ __typename?: 'RelatedRecordType', id: string, label: string, type: EntityNames, relations?: Array<{ __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number }> | null }> | null }> | null };
+export type StoriesRelationsQuery = { __typename?: 'Query', relations?: Array<{ __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number, randomRelations?: Array<{ __typename?: 'RelatedRecordType', id: string, label: string, type: EntityNames, slug?: string | null, relations?: Array<{ __typename?: 'ZoomLevel5RelationsType', type: EntityNames, total: number }> | null }> | null }> | null };
 
 export type ZoomLevel5ArchivesQueryVariables = Exact<{
   id: Scalars['String'];
@@ -2923,6 +2925,22 @@ export const TitleModuleFragmentFragmentDoc = gql`
   }
 }
     ${ComponentCoreModuleLayoutsFragmentDoc}`;
+export const Zoom5RelationsFragmentFragmentDoc = gql`
+    fragment zoom5RelationsFragment on ZoomLevel5RelationsType {
+  type
+  total
+  randomRelations {
+    id
+    label
+    type
+    slug
+    relations {
+      type
+      total
+    }
+  }
+}
+    `;
 export const HomepageDocument = gql`
     query homepage($locale: String) {
   homepage(locale: $locale) {
@@ -3905,20 +3923,10 @@ export type Zoom4PublicationsQueryResult = Apollo.QueryResult<Zoom4PublicationsQ
 export const ArchivesRelationsDocument = gql`
     query ArchivesRelations($id: String!) {
   relations(type: Archives, id: $id) {
-    type
-    total
-    randomRelations {
-      id
-      label
-      type
-      relations {
-        type
-        total
-      }
-    }
+    ...zoom5RelationsFragment
   }
 }
-    `;
+    ${Zoom5RelationsFragmentFragmentDoc}`;
 
 /**
  * __useArchivesRelationsQuery__
@@ -3950,20 +3958,10 @@ export type ArchivesRelationsQueryResult = Apollo.QueryResult<ArchivesRelationsQ
 export const ObjectRelationsDocument = gql`
     query ObjectRelations($id: String!) {
   relations(type: Objects, id: $id) {
-    type
-    total
-    randomRelations {
-      id
-      label
-      type
-      relations {
-        type
-        total
-      }
-    }
+    ...zoom5RelationsFragment
   }
 }
-    `;
+    ${Zoom5RelationsFragmentFragmentDoc}`;
 
 /**
  * __useObjectRelationsQuery__
@@ -3995,20 +3993,10 @@ export type ObjectRelationsQueryResult = Apollo.QueryResult<ObjectRelationsQuery
 export const PeopleRelationsDocument = gql`
     query PeopleRelations($id: String!) {
   relations(type: People, id: $id) {
-    type
-    total
-    randomRelations {
-      id
-      label
-      type
-      relations {
-        type
-        total
-      }
-    }
+    ...zoom5RelationsFragment
   }
 }
-    `;
+    ${Zoom5RelationsFragmentFragmentDoc}`;
 
 /**
  * __usePeopleRelationsQuery__
@@ -4040,20 +4028,10 @@ export type PeopleRelationsQueryResult = Apollo.QueryResult<PeopleRelationsQuery
 export const PublicationRelationsDocument = gql`
     query PublicationRelations($id: String!) {
   relations(type: Publications, id: $id) {
-    type
-    total
-    randomRelations {
-      id
-      label
-      type
-      relations {
-        type
-        total
-      }
-    }
+    ...zoom5RelationsFragment
   }
 }
-    `;
+    ${Zoom5RelationsFragmentFragmentDoc}`;
 
 /**
  * __usePublicationRelationsQuery__
@@ -4085,20 +4063,10 @@ export type PublicationRelationsQueryResult = Apollo.QueryResult<PublicationRela
 export const StoriesRelationsDocument = gql`
     query StoriesRelations($id: String!) {
   relations(type: Stories, id: $id) {
-    type
-    total
-    randomRelations {
-      id
-      label
-      type
-      relations {
-        type
-        total
-      }
-    }
+    ...zoom5RelationsFragment
   }
 }
-    `;
+    ${Zoom5RelationsFragmentFragmentDoc}`;
 
 /**
  * __useStoriesRelationsQuery__

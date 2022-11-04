@@ -6,7 +6,7 @@ import { Dimensions } from '../../types/galaxy'
 import { ParentRelation } from './usePositionClouds'
 
 export function useD3HeroAnimateElement<DType>(
-    shouldDisable: (d: any) => boolean,
+    disabledClick: boolean,
     svgRef: MutableRefObject<SVGSVGElement | null>,
     relations: ParentRelation[],
     dimensions: Dimensions,
@@ -27,7 +27,7 @@ export function useD3HeroAnimateElement<DType>(
             dimensions: Dimensions
         ) => {
             event.stopPropagation()
-            if (shouldDisable(d)) {
+            if (disabledClick) {
                 return
             }
             setZoomed(true)
