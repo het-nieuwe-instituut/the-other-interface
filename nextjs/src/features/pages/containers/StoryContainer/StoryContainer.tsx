@@ -71,9 +71,6 @@ const Story: React.FC<{ data: GetZoom5StoryQuery }> = ({ data }) => {
                                 title={data.story?.attributes?.title}
                                 preface={data.story?.attributes?.description ?? undefined}
                             />
-                            <DynamicComponentRenderer
-                                components={data.story?.attributes?.components as StoryComponentsDynamicZone[]}
-                            />
                         </GridItem>
                         <GridItem area={'meta'}>
                             <StoryMeta story={data.story as StoryEntity} />
@@ -81,6 +78,9 @@ const Story: React.FC<{ data: GetZoom5StoryQuery }> = ({ data }) => {
                     </Grid>
                 </Box>
             </Box>
+            <DynamicComponentRenderer
+                components={data.story?.attributes?.components as StoryComponentsDynamicZone[]}
+            />
         </Box>
     )
 }

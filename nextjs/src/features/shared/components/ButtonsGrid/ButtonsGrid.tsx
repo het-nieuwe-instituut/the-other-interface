@@ -109,7 +109,7 @@ const GridButton: React.FC<GridButtonProps> = ({ button, index, array, config, b
                 target={
                     !!button.url && isExternalURL(button.url, pageConfiguration.data?.host ?? '') ? '_blank' : undefined
                 }
-                gridColumn={{ base: '1fr', md: getGridColumns(index, array) }}
+                gridColumn={{ base: 1, md: getGridColumns(index, array) }}
                 bg={'white'}
             >
                 <Text as={'span'} textStyle={config.textStyle} color={'currentcolor'} verticalAlign={'text-bottom'}>
@@ -137,7 +137,7 @@ function getGridColumns<I extends number, T extends Array<T[0]>>(index: I, array
         return index === array.length - 1 ? '1 / 3' : undefined
     }
 
-    return '1fr'
+    return 1
 }
 
 function getURl(button?: ButtonType | null) {
