@@ -2,6 +2,7 @@
 
 fragment tableModuleFragment on ComponentModulesTableModule {
     id
+    __typename
     table {
         data {
             id

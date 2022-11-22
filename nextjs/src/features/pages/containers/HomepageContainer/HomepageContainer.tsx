@@ -3,33 +3,44 @@ import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/Mod
 import { GalaxyFooter } from '@/features/shared/components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 import { GalaxyWrapper } from '@/features/shared/components/GalaxyWrapper/GalaxyWrapper'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
-import { Loader } from '@/features/shared/components/Loading/Loading'
+// import { Loader } from '@/features/shared/components/Loading/Loading'
 import useScroll from '@/features/shared/hooks/useScroll'
 import { Box, useTheme } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
 import dynamic from 'next/dynamic'
-import { useRouter } from 'next/router'
 import { useRef } from 'react'
-import { HomepageComponentsDynamicZone, HomepageQuery, useHomepageQuery } from 'src/generated/graphql'
+import { HomepageComponentsDynamicZone, HomepageQuery, ZoomLevel1Query } from 'src/generated/graphql'
 import { ScrollToContent, ScrollToTop } from '../../utils/utils'
 import { GalaxyTopRight } from '@/features/shared/components/GalaxyWrapper/GalaxyTopRight/GalaxyTopRight'
+import { HomepageProvider } from './HomepageContext'
 
 export const DynamicGalaxyNoSsr = dynamic(() => import('../../../galaxy/Galaxy/Galaxy'), {
-    ssr: false,
+    ssr: true,
 })
 
-export const HomepageContainer = () => {
-    const { locale } = useRouter()
-    const { data, loading, error } = useHomepageQuery({ variables: { locale } })
-    if (loading) {
-        return <Loader />
-    }
+export type Props = {
+    homepage: HomepageQuery | undefined,
+    host?: string | null,
+    imagePath?: string
+    zoomLevel1Data: ZoomLevel1Query | undefined
+}
 
-    if (error) {
-        return <p>{error.message}</p>
-    }
+export const HomepageContainer = (props: Props) => {
+    // const { locale } = useRouter()
+    // const { data, loading, error } = useHomepageQuery({ variables: { locale } })
+    // if (loading) {
+    //     return <Loader />
+    // }
 
-    return <Homepage data={data} />
+    // if (error) {
+    //     return <p>{error.message}</p>
+    // }
+
+    return (
+        <HomepageProvider zoomLevel1={props.zoomLevel1Data}>
+            <Homepage data={props.homepage} />
+        </HomepageProvider>
+    )
 }
 
 const Homepage: React.FC<{ data?: HomepageQuery }> = ({ data }) => {

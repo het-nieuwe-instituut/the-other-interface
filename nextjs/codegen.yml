@@ -4,10 +4,9 @@ documents: 'src/features/graphql/**/*.graphql'
 generates:
     src/generated/graphql.ts:
         plugins:
-            - 'typescript-msw'
             - 'typescript'
             - 'typescript-operations'
-            - 'typescript-react-apollo'
+            - 'typescript-graphql-request'
         config:
             namingConvention:
                 typeNames: change-case-all#pascalCase

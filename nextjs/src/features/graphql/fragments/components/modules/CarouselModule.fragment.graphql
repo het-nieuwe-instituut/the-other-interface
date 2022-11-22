@@ -2,6 +2,7 @@
 
 fragment carouselModuleFragment on ComponentModulesCarousel {
     id
+    __typename
     items {
         id
         picture {

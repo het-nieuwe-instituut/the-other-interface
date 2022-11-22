@@ -1,7 +1,9 @@
+import HomepageContext from '@/features/pages/containers/HomepageContainer/HomepageContext'
+import LandingpageContext from '@/features/pages/containers/LandingpageContainer/LandingpageContext'
 import { times, uniqueId } from 'lodash'
 import { useRouter } from 'next/router'
-import { useMemo, useRef } from 'react'
-import { EntityNames, useStoriesWithoutRelationsQuery, useZoomLevel1Query, ZoomLevel1Query } from 'src/generated/graphql'
+import { useContext, useMemo, useRef } from 'react'
+import { EntityNames, ZoomLevel1Query } from 'src/generated/graphql'
 import { galaxyTypesToPositions } from '../galaxyConstants'
 import { useD3ZoomEvents } from '../hooks/useD3ZoomEvents'
 import { Dimensions, ZoomLevel } from '../types/galaxy'
@@ -37,36 +39,39 @@ function useArchiefBestandDeel(zoomLevel1Data?: ZoomLevel1Query) {
 }
 
 export function usePresenter(dimensions: Dimensions, selector: string) {
-    const { locale, query: { slug }, push } = useRouter()
-    const isStories = slug === 'stories'
-    const { data: storiesData, loading: isLoading } = useStoriesWithoutRelationsQuery({ variables: { pagination: { pageSize: 200 }, locale }})
-    const { data: zoomLevel1Data } = useZoomLevel1Query({ fetchPolicy: 'no-cache', nextFetchPolicy: 'no-cache' })
+    const {  push } = useRouter()
+    // const isStories = slug === 'stories'
+    // const { data: storiesData, loading: isLoading } = useStoriesWithoutRelationsQuery({ variables: { pagination: { pageSize: 200 }, locale }})
+    const { zoomLevel1 } = useContext(HomepageContext)
+    const { stories: storiesData } = useContext(LandingpageContext)
     // TODO: remove hardcoded pageSize & paginate
-    const objectsPerTypeWithIds = useObjectPerType(zoomLevel1Data)
-    const archiefBestandDelen = useArchiefBestandDeel(zoomLevel1Data)
+    const objectsPerTypeWithIds = useObjectPerType(zoomLevel1)
+    const archiefBestandDelen = useArchiefBestandDeel(zoomLevel1)
 
     const stories = useMemo(() => {
-        const data = storiesData?.storiesWithoutRelations?.data || []
+        // const data = storiesData?.storiesWithoutRelations?.data || []
 
-        if (isStories && !storiesData?.storiesWithoutRelations) return
-        if (!isStories && !objectsPerTypeWithIds) return
+        // if (isStories && !storiesData?.storiesWithoutRelations) return
+        // if (!isStories && !objectsPerTypeWithIds) return
 
         const storiesCount = objectsPerTypeWithIds.find(item => item.id === EntityNames.Stories)?.count
         // on zoom level 0 and 1 we only need to show UI for galaxy, we don't need to fetch data. 
-        const endData = isStories ? data : Array(storiesCount).fill(0)
-        const parents = times(data.length / 10, i => `test${i}`)
+        const endData =  storiesData ? storiesData : Array(storiesCount).fill(0)
+        const parents = times(endData.length / 10, i => `test${i}`)
+
+        console.log(endData)
 
         return endData
             .map(item => ({
                 ...item,
-                parent: parents[Math.floor((Math.random() * data.length) / 10) + 1] ?? parents[0],
+                parent: parents[Math.floor((Math.random() * endData.length) / 10) + 1] ?? parents[0],
                 id: uniqueId(),
                 title: item?.attributes?.title ?? '',
                 shortDescription: item?.attributes?.shortDescription,
                 slug: item?.attributes?.slug ?? '',
             }))
             .slice(0, 1000)
-    }, [storiesData, objectsPerTypeWithIds, isStories])
+    },  [objectsPerTypeWithIds, storiesData])
 
     const handleMoveToZoomLevel1 = () => {
         push({ pathname: '/', query: { zoomLevel: ZoomLevel.Zoom1 } }, undefined, { shallow: true })
@@ -85,7 +90,7 @@ export function usePresenter(dimensions: Dimensions, selector: string) {
         ...zoomEvents,
         objectsPerTypeWithIds,
         stories,
-        isLoading,
+        isLoading: false,
         archiefBestandDelen,
         handleMoveToZoomLevel1,
     }

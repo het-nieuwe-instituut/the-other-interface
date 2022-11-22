@@ -1,6 +1,7 @@
 #import '../core/moduleLayout.fragment.graphql'
 
 fragment gridModuleFragment on ComponentModulesGridModule {
+    __typename
     buttons {
         id
         url

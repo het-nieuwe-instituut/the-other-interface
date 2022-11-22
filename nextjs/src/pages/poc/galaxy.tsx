@@ -51,7 +51,6 @@ function useQuery<T, Q extends () => ReturnType<Q>>(keys: T, query: Q) {
 
 function Page() {
     const { isLoading, isError, data } = useQuery(['galaxy'], () => fetchOnbjectsPerType())
-    console.log()
     if (isLoading) {
         return <p>loading....</p>
     }
