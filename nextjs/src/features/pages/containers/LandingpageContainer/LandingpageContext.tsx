@@ -20,8 +20,6 @@ export const LandingpageProvider: React.FC<Props> = ({ zoomLevel2, children, sto
     const [_zoomLevel2, setZoom1Level2] = useState(zoomLevel2)
     const [_stories, setStories] = useState(stories)
 
-    console.log(stories)
-
     return (
         <LandingpageContext.Provider value={{
             zoomLevel2: _zoomLevel2,

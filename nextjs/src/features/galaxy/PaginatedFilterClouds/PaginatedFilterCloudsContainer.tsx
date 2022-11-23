@@ -1,16 +1,7 @@
-import { Loader } from '@/features/shared/components/Loading/Loading'
+import LandingpageFilterContext from '@/features/pages/containers/LandingpageFilterContainer/LandingpageFilterContext'
 import dynamic from 'next/dynamic'
-import { useRouter } from 'next/router'
-import {
-    useZoom3ArchivesQuery,
-    useZoom3DPeopleQuery,
-    useZoom3DPublicationsQuery,
-    useZoom3ObjectsQuery,
-    Zoom3ArchivesDocument,
-    Zoom3DPeopleDocument,
-    Zoom3DPublicationsDocument,
-    Zoom3ObjectsDocument,
-} from 'src/generated/graphql'
+import { useContext } from 'react'
+
 
 export enum SupportedLandingPages {
     Publications = 'publications',
@@ -31,42 +22,9 @@ const DynamicPaginatedFilterCloudsNoSsr = dynamic(() => import('./PaginatedFilte
     ssr: false,
 })
 
-const useZoom3Query = {
-    [SupportedLandingPages.Archives]: useZoom3ArchivesQuery,
-    [SupportedLandingPages.Objects]: useZoom3ObjectsQuery,
-    [SupportedLandingPages.People]: useZoom3DPeopleQuery,
-    [SupportedLandingPages.Publications]: useZoom3DPublicationsQuery,
-}
-
-export const Zoom3QueryDocument = {
-    [SupportedLandingPages.Archives]: Zoom3ArchivesDocument,
-    [SupportedLandingPages.Objects]: Zoom3ObjectsDocument,
-    [SupportedLandingPages.People]: Zoom3DPeopleDocument,
-    [SupportedLandingPages.Publications]: Zoom3DPublicationsDocument,
-}
-
 const PaginatedFilterCloudsContainer: React.FunctionComponent<Props> = props => {
-    const router = useRouter()
 
-    const {
-        data: zoom3,
-        loading,
-        error,
-    } = useZoom3Query[props.type]({
-        variables: {
-            filterId: (router.query.filter as string) ?? '',
-            page: parseInt((router.query.page as string) ?? '1'),
-            pageSize: 16,
-        },
-    })
-
-    if (loading) {
-        return <Loader />
-    }
-
-    if (error) {
-        return <p>{error.message}</p>
-    }
+    const {zoomLevel3: zoom3} = useContext(LandingpageFilterContext)
 
     return (
         <>
