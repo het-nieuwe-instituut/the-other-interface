@@ -3,7 +3,7 @@ import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/Mod
 import { GalaxyFooter } from '@/features/shared/components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 import { GalaxyTopRight } from '@/features/shared/components/GalaxyWrapper/GalaxyTopRight/GalaxyTopRight'
 import { GalaxyWrapper } from '@/features/shared/components/GalaxyWrapper/GalaxyWrapper'
-import { Loader } from '@/features/shared/components/Loading/Loading'
+// import { Loader } from '@/features/shared/components/Loading/Loading'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import useScroll from '@/features/shared/hooks/useScroll'
@@ -14,9 +14,8 @@ import { useRef } from 'react'
 import {
     LandingpageBySlugQuery,
     LandingpageComponentsDynamicZone,
-    useLandingpageBySlugQuery,
 } from 'src/generated/graphql'
-import { PaginatedCollectionContainer } from '../../../galaxy/Collections/PaginatedCollectionContainer'
+import { PaginatedCollection } from '../../../galaxy/Collections/PaginatedCollectionContainer'
 import { SupportedLandingPages } from '../../../galaxy/PaginatedFilterClouds/PaginatedFilterCloudsContainer'
 import { ScrollToContent, ScrollToTop } from '../../utils/utils'
 
@@ -24,25 +23,22 @@ export interface LandingPageQueryParams {
     slug: SupportedLandingPages
 }
 
-export const LandingCollectionContainer: React.FC = () => {
-    const { locale, query } = useRouter()
-    const queryParams = query as unknown as LandingPageQueryParams
+interface Props {
+    landingpage: LandingpageBySlugQuery | undefined
+}
 
-    const { data, loading, error } = useLandingpageBySlugQuery({
-        variables: {
-            locale: locale,
-            slug: queryParams?.slug,
-        },
-    })
+export const LandingCollectionContainer = (props: Props) => {
+
+    const { landingpage: data } = props
     const { t } = useTypeSafeTranslation('common')
 
-    if (loading) {
-        return <Loader />
-    }
+    // if (loading) {
+    //     return <Loader />
+    // }
 
-    if (error) {
-        return <p>{error.message}</p>
-    }
+    // if (error) {
+    //     return <p>{error.message}</p>
+    // }
 
     if (!data?.landingpages?.data.length) {
         return <p>{t('somethingWentWrong')}</p>
@@ -82,7 +78,7 @@ export const LandingCollection: React.FC<{ data?: LandingpageBySlugQuery }> = ({
                 >
                     {sizes?.height && sizes?.width && (
                         <Box position={'fixed'}>
-                            <PaginatedCollectionContainer
+                            <PaginatedCollection
                                 type={type}
                                 dimensions={{ height: 800, width: sizes.width }}
                             />

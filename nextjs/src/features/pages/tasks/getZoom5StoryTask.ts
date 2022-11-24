@@ -1,14 +1,8 @@
-import { ApolloClient, NormalizedCacheObject } from '@apollo/client'
-import { GetServerSidePropsContext } from 'next'
+import ApiClient from '@/features/graphql/api'
 import {
     ObjectRelationsQuery,
-    PeopleRelationsQuery,
-    PeopleRelationsQueryVariables,
-    StoriesRelationsDocument,
-    StoryBySlugDocument,
     StoryBySlugQuery,
 } from 'src/generated/graphql'
-import { StoryQueryParams } from 'src/pages/story/[slug]'
 
 export interface GetZoom5StoryQuery {
     story?: NonNullable<NonNullable<NonNullable<StoryBySlugQuery>['stories']>['data']>[0]
@@ -16,40 +10,27 @@ export interface GetZoom5StoryQuery {
 }
 
 export async function getZoom5StoryTask(
-    client: ApolloClient<NormalizedCacheObject>,
-    context: GetServerSidePropsContext
-): Promise<GetZoom5StoryQuery | undefined> {
-    const queryParams = context.query as unknown as StoryQueryParams
-    const slug = queryParams.slug
+    slug: string,
+    locale: string
+) {
+    try {
+        const storyBySlug = await ApiClient?.storyBySlug({slug, locale})
+        const storyId = storyBySlug?.stories.data?.[0]?.id
 
-    const storyBySlug = await client.query<StoryBySlugQuery>({
-        variables: {
-            locale: context.locale,
-            slug: slug,
-        },
-        query: StoryBySlugDocument,
-    })
+        if (!storyId) {
+            throw new Error('cant find id')
+        }
+    
+        const relations = await ApiClient?.StoriesRelations({id: storyId})
 
-    const storyId = storyBySlug.data.stories.data?.[0]?.id
-    if (storyBySlug.error || !storyBySlug.data || !storyId) {
-        console.error('story query error')
-        return
+        return {
+            story: storyBySlug?.stories.data?.[0],
+            relations: relations?.relations,
+        }
+    } catch(e) {
+        if (e) {
+            console.error('story query error')
+        }
     }
-
-    const relations = await client.query<PeopleRelationsQuery, PeopleRelationsQueryVariables>({
-        variables: {
-            id: storyId,
-        },
-        query: StoriesRelationsDocument,
-    })
-
-    if (relations.error) {
-        console.error('No detailQuery data')
-        return
-    }
-
-    return {
-        story: storyBySlug.data.stories.data?.[0],
-        relations: relations.data.relations,
-    }
+    
 }

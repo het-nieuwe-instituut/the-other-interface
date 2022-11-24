@@ -1,39 +1,14 @@
-import { ApolloClient, gql, NormalizedCacheObject, QueryOptions, useQuery } from '@apollo/client'
-import { GetServerSidePropsContext } from 'next'
+import ApiClient from '@/features/graphql/api'
+import { gql, useQuery } from '@apollo/client'
 
 import {
-    ArchivesRelationsDocument,
-    ArchivesRelationsQuery,
-    ArchivesRelationsQueryVariables,
-    LandingpageBySlugDocument,
-    LandingpageBySlugQuery,
-    ObjectRelationsDocument,
     ObjectRelationsQuery,
-    ObjectRelationsQueryVariables,
-    PeopleRelationsDocument,
-    PeopleRelationsQuery,
-    PeopleRelationsQueryVariables,
-    PublicationRelationsDocument,
-    PublicationRelationsQuery,
-    PublicationRelationsQueryVariables,
-    useZoomLevel5ArchivesQuery,
-    useZoomLevel5ObjectQuery,
-    useZoomLevel5PersonQuery,
-    useZoomLevel5PublicationQuery,
-    ZoomLevel5ArchivesDocument,
+    StoryBySlugQuery,
     ZoomLevel5ArchivesQuery,
-    ZoomLevel5ArchivesQueryVariables,
-    ZoomLevel5ObjectDocument,
     ZoomLevel5ObjectQuery,
-    ZoomLevel5ObjectQueryVariables,
-    ZoomLevel5PersonDocument,
     ZoomLevel5PersonQuery,
-    ZoomLevel5PersonQueryVariables,
-    ZoomLevel5PublicationDocument,
     ZoomLevel5PublicationQuery,
-    ZoomLevel5PublicationQueryVariables,
 } from 'src/generated/graphql'
-import { RecordQueryParams } from 'src/pages/landingpage/[slug]/[filter]/[collection]/[record]'
 
 export enum SupportedQuerys {
     people = 'people',
@@ -45,105 +20,28 @@ export enum SupportedQuerys {
 
 const config = {
     [SupportedQuerys.publications]: {
-        zoomLevelQuery: {
-            query: (
-                client: ApolloClient<NormalizedCacheObject>,
-                options: Omit<QueryOptions<ZoomLevel5PublicationQueryVariables, ZoomLevel5PublicationQuery>, 'query'>
-            ) =>
-                client.query<ZoomLevel5PublicationQuery, ZoomLevel5PublicationQueryVariables>({
-                    ...options,
-                    query: ZoomLevel5PublicationDocument,
-                }),
-            useHook: useZoomLevel5PublicationQuery,
-            accessor: (data?: ReturnType<typeof useZoomLevel5PublicationQuery>['data']) => data?.zoomLevel5Publication,
-        },
-        relationsQuery: {
-            query: (
-                client: ApolloClient<NormalizedCacheObject>,
-                options: Omit<QueryOptions<PublicationRelationsQueryVariables, PublicationRelationsQuery>, 'query'>
-            ) =>
-                client.query<PublicationRelationsQuery, PublicationRelationsQueryVariables>({
-                    ...options,
-                    query: PublicationRelationsDocument,
-                }),
-        },
+        zoomLevelQuery: ApiClient?.ZoomLevel5Publication,
+        relationsQuery: ApiClient?.PublicationRelations,
+        accesor: (data?: ZoomLevel5PublicationQuery) => data?.zoomLevel5Publication
     },
     [SupportedQuerys.archives]: {
-        zoomLevelQuery: {
-            query: (
-                client: ApolloClient<NormalizedCacheObject>,
-                options: Omit<QueryOptions<ZoomLevel5ArchivesQueryVariables, ZoomLevel5ArchivesQuery>, 'query'>
-            ) =>
-                client.query<ZoomLevel5ArchivesQuery, ZoomLevel5ArchivesQueryVariables>({
-                    ...options,
-                    query: ZoomLevel5ArchivesDocument,
-                }),
-            useHook: useZoomLevel5ArchivesQuery,
-            accessor: (data?: ReturnType<typeof useZoomLevel5ArchivesQuery>['data']) => data?.zoomLevel5Archive,
-        },
-        relationsQuery: {
-            query: (
-                client: ApolloClient<NormalizedCacheObject>,
-                options: Omit<QueryOptions<ArchivesRelationsQueryVariables, ArchivesRelationsQuery>, 'query'>
-            ) =>
-                client.query<ArchivesRelationsQuery, ArchivesRelationsQueryVariables>({
-                    ...options,
-                    query: ArchivesRelationsDocument,
-                }),
-        },
+        zoomLevelQuery: ApiClient?.ZoomLevel5Archives,
+        relationsQuery: ApiClient?.ArchivesRelations,
+        accesor: (data?: ZoomLevel5ArchivesQuery) => data?.zoomLevel5Archive
     },
     [SupportedQuerys.objects]: {
-        zoomLevelQuery: {
-            query: (
-                client: ApolloClient<NormalizedCacheObject>,
-                options: Omit<QueryOptions<ZoomLevel5ObjectQueryVariables, ZoomLevel5ObjectQuery>, 'query'>
-            ) =>
-                client.query<ZoomLevel5ObjectQuery, ZoomLevel5ObjectQueryVariables>({
-                    ...options,
-                    query: ZoomLevel5ObjectDocument,
-                }),
-            useHook: useZoomLevel5ObjectQuery,
-            accessor: (data?: ReturnType<typeof useZoomLevel5ObjectQuery>['data']) => data?.zoomLevel5Object,
-        },
-
-        relationsQuery: {
-            query: (
-                client: ApolloClient<NormalizedCacheObject>,
-                options: Omit<QueryOptions<ObjectRelationsQueryVariables, ObjectRelationsQuery>, 'query'>
-            ) =>
-                client.query<ObjectRelationsQuery, ObjectRelationsQueryVariables>({
-                    ...options,
-                    query: ObjectRelationsDocument,
-                }),
-        },
+        zoomLevelQuery: ApiClient?.ZoomLevel5Object,
+        relationsQuery: ApiClient?.ObjectRelations,
+        accesor: (data?: ZoomLevel5ObjectQuery) => data?.zoomLevel5Object
     },
     [SupportedQuerys.people]: {
-        zoomLevelQuery: {
-            query: (
-                client: ApolloClient<NormalizedCacheObject>,
-                options: Omit<QueryOptions<ZoomLevel5PersonQueryVariables, ZoomLevel5PersonQuery>, 'query'>
-            ) =>
-                client.query<ZoomLevel5PersonQuery, ZoomLevel5PersonQueryVariables>({
-                    ...options,
-                    query: ZoomLevel5PersonDocument,
-                }),
-            useHook: useZoomLevel5PersonQuery,
-            accessor: (data?: ReturnType<typeof useZoomLevel5PersonQuery>['data']) => data?.zoomLevel5Person,
-        },
-        relationsQuery: {
-            query: (
-                client: ApolloClient<NormalizedCacheObject>,
-                options: Omit<QueryOptions<PeopleRelationsQueryVariables, PeopleRelationsQuery>, 'query'>
-            ) =>
-                client.query<PeopleRelationsQuery, PeopleRelationsQueryVariables>({
-                    ...options,
-                    query: PeopleRelationsDocument,
-                }),
-        },
+        zoomLevelQuery: ApiClient?.ZoomLevel5Person,
+        relationsQuery: ApiClient?.PeopleRelations,
+        accesor: (data?: ZoomLevel5PersonQuery) => data?.zoomLevel5Person
     },
 }
 
-export type ZoomLevel5DetailResponses = GetZoom5RecordQuery
+export type ZoomLevel5DetailResponses = Zoom5RecordResult
 
 export const Zoom5RecordDataDocument = gql`
     query zoom5RecordData {
@@ -153,18 +51,18 @@ export const Zoom5RecordDataDocument = gql`
     }
 `
 
-export interface GetZoom5RecordQuery {
-    zoom5landingPage?: NonNullable<LandingpageBySlugQuery['landingpages']['data'][0]>
+export interface Zoom5RecordResult {
     zoom5detail:
         | ZoomLevel5PublicationQuery['zoomLevel5Publication']
         | ZoomLevel5ArchivesQuery['zoomLevel5Archive']
         | ZoomLevel5ObjectQuery['zoomLevel5Object']
         | ZoomLevel5PersonQuery['zoomLevel5Person']
+        | NonNullable<NonNullable<StoryBySlugQuery['stories']>['data']>[0]
     zoom5relations?: ObjectRelationsQuery['relations']
 }
 
 export function useGetZoom5RecordTask() {
-    const query = useQuery<GetZoom5RecordQuery>(Zoom5RecordDataDocument)
+    const query = useQuery<Zoom5RecordResult>(Zoom5RecordDataDocument)
 
     if (!query.data) {
         return { ...query, data: query.previousData }
@@ -172,49 +70,28 @@ export function useGetZoom5RecordTask() {
     return query
 }
 export async function getZoom5RecordTask(
-    client: ApolloClient<NormalizedCacheObject>,
-    context: GetServerSidePropsContext
+    record: string
 ) {
-    const queryParams = context.query as unknown as RecordQueryParams
-    const slug = queryParams.slug
-    const record = queryParams.record
-    const type = record.split('-')[1] as SupportedQuerys
-    const id: string = record.split('-')[0]
+    try {
+        const type = record.split('-')[1] as SupportedQuerys
+        const id: string = record.split('-')[0]
+    
+        if (type === SupportedQuerys.stories) {
+            return
+        }
+        const configByType = config[type]
+    
+        const [detailQuery, relations] = await Promise.all([
+            configByType.zoomLevelQuery?.({ id: id } ),
+            configByType.relationsQuery?.({ id: id } ),
+        ])
 
-    if (type === SupportedQuerys.stories) {
-        return
+        return {
+            // zoom5landingPage: landingPage.data.landingpages.data[0],
+            zoom5detail: configByType.accesor(detailQuery),
+            zoom5relations: relations?.relations
+        }
+    } catch(e) {
+        console.log(e, 'Error accured in zoom level 5 task')
     }
-    const configByType = config[type]
-
-    const [detailQuery, landingPage, relations] = await Promise.all([
-        configByType.zoomLevelQuery.query(client, { variables: { id: id } }),
-        client.query<LandingpageBySlugQuery>({
-            variables: {
-                locale: context.locale,
-                slug: slug,
-            },
-            query: LandingpageBySlugDocument,
-        }),
-        configByType.relationsQuery.query(client, { variables: { id: id } }),
-    ])
-
-    if (detailQuery.error || !detailQuery.data) {
-        console.error('Detail query error')
-        return
-    }
-
-    if (relations.error) {
-        console.error('No detailQuery data')
-        return
-    }
-
-    client.writeQuery<GetZoom5RecordQuery>({
-        query: Zoom5RecordDataDocument,
-        data: {
-            zoom5landingPage: landingPage.data.landingpages.data[0],
-            zoom5detail: configByType.zoomLevelQuery.accessor(detailQuery.data),
-            zoom5relations: relations.data.relations,
-        },
-        overwrite: true,
-    })
 }

@@ -25,9 +25,6 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     const slug = queryParams.slug
     const filterId = queryParams.filter
     const page = parseInt(queryParams.page ?? 1)
-    console.log(page, 'query params page')
-    console.log(filterId, 'query param filterid')
-    console.log(slug, 'slug')
 
     const landingpage = await ApiClient?.landingpageBySlug({slug, locale: context?.locale})
     
