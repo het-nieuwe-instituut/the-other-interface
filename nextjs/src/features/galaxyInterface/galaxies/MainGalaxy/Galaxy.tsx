@@ -1,18 +1,20 @@
 import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Box, Flex, Text } from '@chakra-ui/react'
 import React, { forwardRef, useId } from 'react'
-import { StoriesWithoutRelationsQuery, ZoomLevel1Query } from 'src/generated/graphql'
 import { Circle } from '../../../galaxy/components/Circle'
 import { GalaxyShadowBackground } from '../../../galaxy/components/GalaxyShadowBackground'
-import { StoriesSystem } from '../../../galaxy/components/StoriesSystem/StoriesSystem'
-import { Dimensions, ZoomLevel } from '../../../galaxy/types/galaxy'
+import { Dimensions } from '../../../galaxy/types/galaxy'
+import { ZoomStates } from '../../types/galaxy'
+import { mapArchiveComponent } from './mappers/mapArchiveComponent'
+import { CloudItem, StoriesItem } from './types'
 
 import { usePresenter } from './usePresenter'
 
-interface Props {
+export interface MainGalaxyProps {
     dimensions: Dimensions
-    zoomLevel1Data: ZoomLevel1Query
-    storiesData: StoriesWithoutRelationsQuery
+    cloudData: CloudItem[]
+    storiesData: StoriesItem[]
+    archiveComponent: ReturnType<typeof mapArchiveComponent>
 }
 
 export interface InstancesPerClass {
@@ -22,20 +24,25 @@ export interface InstancesPerClass {
 }
 
 export const GALAXY_BASE = 800
-const Galaxy: React.FC<Props> = ({ dimensions, zoomLevel1Data, storiesData }) => {
+const MainGalaxyProps: React.FC<MainGalaxyProps> = props => {
     const { t } = useLooseTypeSafeTranslation('homepage')
     const id = useId().replaceAll(':', '')
     const {
         svgRef,
         setZoomLevel,
         zoomTo,
-        zoomLevel,
         stories,
         storiesSystemRef,
-        objectsPerTypeWithIds,
-        handleMoveToZoomLevel1,
-        archiefBestandDelen,
-    } = usePresenter(zoomLevel1Data, storiesData, dimensions, id)
+        cloudData,
+        storiesData,
+        dimensions,
+        conditions,
+        archiveComponent,
+    } = usePresenter({
+        ...props,
+        id,
+        selector: id,
+    })
     const height = dimensions.height ?? 0
     const width = dimensions.width ?? 0
 
@@ -51,7 +58,7 @@ const Galaxy: React.FC<Props> = ({ dimensions, zoomLevel1Data, storiesData }) =>
             alignItems="center"
             justifyContent="center"
         >
-            {zoomLevel === ZoomLevel.Zoom0 && (
+            {conditions.isZoom0 && (
                 <Flex
                     height="100%"
                     width="100%"
@@ -60,7 +67,7 @@ const Galaxy: React.FC<Props> = ({ dimensions, zoomLevel1Data, storiesData }) =>
                     justifyContent={'center'}
                     zIndex={1}
                 >
-                    <button onClick={handleMoveToZoomLevel1}>
+                    <button onClick={() => undefined}>
                         <Text width="12.5rem">{t('nationalCollectionForDutchArchitectureAndUrbanPlanning')}</Text>
                     </button>
                 </Flex>
@@ -75,19 +82,16 @@ const Galaxy: React.FC<Props> = ({ dimensions, zoomLevel1Data, storiesData }) =>
                     viewBox={`0 0 ${GALAXY_BASE} ${GALAXY_BASE}`}
                 >
                     <>
-                        {stories?.length && (
+                        {/* {stories?.length && (
                             <StoriesSystemPosition dimensions={dimensions} ref={storiesSystemRef}>
-                                <StoriesSystem
-                                    disableLinkAndHover={zoomLevel !== ZoomLevel.Zoom1Stories}
-                                    data={stories ?? []}
-                                />
+                                <StoriesSystem disableLinkAndHover={conditions.isZoom1Stories} data={storiesData} />
                             </StoriesSystemPosition>
-                        )}
+                        )} */}
 
                         <GalaxyShadowBackground dimensions={dimensions} />
 
                         <g className="circles">
-                            {objectsPerTypeWithIds?.map((item, index, array) => {
+                            {cloudData?.map((item, index, array) => {
                                 return (
                                     <Circle
                                         defaultBackground="levels.z0.galaxyCloud"
@@ -95,9 +99,9 @@ const Galaxy: React.FC<Props> = ({ dimensions, zoomLevel1Data, storiesData }) =>
                                         key={`${index}-${array.length}`}
                                         className={id}
                                         id={item.id}
-                                        pointerEvents={zoomLevel === ZoomLevel.Zoom1Stories ? 'none' : undefined}
+                                        pointerEvents={conditions.isZoom1Stories ? 'none' : undefined}
                                     >
-                                        {zoomLevel === ZoomLevel.Zoom1 && (
+                                        {conditions.isZoom1 && (
                                             <Box
                                                 onClick={() =>
                                                     zoomTo(
@@ -121,10 +125,12 @@ const Galaxy: React.FC<Props> = ({ dimensions, zoomLevel1Data, storiesData }) =>
                                                             <Text width="12.5rem" mb={1} textStyle={'cloudText'}>
                                                                 {t('archives', { count: item.numberOfInstances })}
                                                             </Text>
-                                                            {!!archiefBestandDelen?.count && (
+                                                            {/* TODO */}
+                                                            {console.log(archiveComponent)}
+                                                            {!!archiveComponent?.count && (
                                                                 <Text width="12.5rem" textStyle={'cloudText'}>
                                                                     {t('archiveItems', {
-                                                                        count: archiefBestandDelen.count,
+                                                                        count: archiveComponent.count,
                                                                     })}
                                                                 </Text>
                                                             )}
@@ -149,11 +155,11 @@ const Galaxy: React.FC<Props> = ({ dimensions, zoomLevel1Data, storiesData }) =>
                             })}
                         </g>
 
-                        {objectsPerTypeWithIds.find(i => i.name === 'stories') && zoomLevel === ZoomLevel.Zoom1 && (
+                        {cloudData.find(i => i.name === 'stories') && conditions.isZoom1 && (
                             <foreignObject x={GALAXY_BASE / 2 + 75} y={GALAXY_BASE / 2 - 60} width={200} height={100}>
-                                <button onClick={() => setZoomLevel(ZoomLevel.Zoom1Stories)}>
+                                <button onClick={() => setZoomLevel(ZoomStates.Zoom1ToZoom1Stories)}>
                                     <Text width="12.5rem">
-                                        {objectsPerTypeWithIds.find(i => i.name === 'stories')?.numberOfInstances}
+                                        {cloudData.find(i => i.name === 'stories')?.numberOfInstances}
                                     </Text>
                                     <Text width="12.5rem">{t('stories')}</Text>
                                 </button>
@@ -165,7 +171,7 @@ const Galaxy: React.FC<Props> = ({ dimensions, zoomLevel1Data, storiesData }) =>
         </Box>
     )
 }
-export default Galaxy
+export default MainGalaxyProps
 
 export const STORIES_SYSTEM_MAX_WIDTH = 537.85
 const StoriesSystemPosition = forwardRef<

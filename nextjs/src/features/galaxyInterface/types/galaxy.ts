@@ -21,8 +21,10 @@ export enum ZoomStates {
     Zoom1ToZoom0 = 'Zoom1ToZoom0',
     Zoom1ToZoom1Stories = 'Zoom1ToZoom1Stories',
     Zoom1Stories = 'Zoom1Stories', // non animated state
+    Zoom1ToZoom2 = 'Zoom1ToZoom2',
     Zoom1StoriesToZoom1 = 'Zoom1StoriesToZoom1',
     Zoom1StoriesToZoom5 = 'Zoom1StoriesToZoom5',
+    Zoom2ToZoom1 = 'Zoom2ToZoom1',
     Zoom2 = 'z2', // non animated state
     Zoom3 = 'z3', // non animated state
     Zoom4 = 'z4', // non animated state

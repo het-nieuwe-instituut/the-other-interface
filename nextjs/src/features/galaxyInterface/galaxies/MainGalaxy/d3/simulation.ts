@@ -1,34 +1,19 @@
 import * as d3 from 'd3'
 import { BaseType, SimulationNodeDatum } from 'd3'
+import { CloudItem } from '../types'
 
-export interface ObjectPerTypeWithName extends ObjectPerType {
-    name: string
-    itemsName?: string
-    itemsCount?: number
-    id: string
-    count: number
-}
-
-export interface D3CollectionItem extends SimulationNodeDatum, ObjectPerTypeWithName {}
+export interface D3CollectionItem extends SimulationNodeDatum, CloudItem {}
 export interface DataDimensions {
     id: string
     name: string
     takeSpace: number
 }
-export interface ObjectPerType {
-    class: string
-    numberOfInstances: number
-    fixedNumberOfInstances: number
-    xFromCenter: number
-    yFromCenter: number
-}
-
 interface Options {
     simulation: d3.Simulation<D3CollectionItem, undefined> | null
     dataDimensions: DataDimensions[]
     galaxyBase: number
-    data: ObjectPerTypeWithName[]
-    nodes: d3.Selection<d3.BaseType, ObjectPerTypeWithName, SVGSVGElement | null, unknown>
+    data: CloudItem[]
+    nodes: d3.Selection<d3.BaseType, CloudItem, SVGSVGElement | null, unknown>
 }
 
 export function initializeD3(options: Options) {
@@ -55,7 +40,7 @@ function getTakeSpaceFromDataDimensions(dataDimensions: DataDimensions[], d: Par
 
 function ticked(
     dataDimensions: DataDimensions[],
-    nodeForeign: d3.Selection<d3.BaseType, ObjectPerTypeWithName, d3.BaseType, unknown>
+    nodeForeign: d3.Selection<d3.BaseType, CloudItem, d3.BaseType, unknown>
 ) {
     nodeForeign
         .attr('x', (d: D3CollectionItem) => (d.x ?? 0) + -getTakeSpaceFromDataDimensions(dataDimensions, d))

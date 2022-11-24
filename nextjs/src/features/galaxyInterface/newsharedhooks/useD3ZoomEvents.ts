@@ -57,17 +57,34 @@ export function useD3ZoomEvents(svgRef: MutableRefObject<SVGSVGElement | null>, 
         if (activeZoom === ZoomStates.Zoom0) {
             scaleZoom({ d3Svg, duration: 0, scale: 0.2 })
         }
-        if (activeZoom === ZoomStates.Zoom0) {
-            scaleZoom({ d3Svg, duration: 0, scale: 0.2 })
-        }
         if (activeZoom === ZoomStates.Zoom0ToZoom1) {
-            scaleZoom({ d3Svg, duration: 1500, scale: 1 })
+            scaleZoom({ d3Svg, duration: 1500, scale: 1, startScale: 0.2 })
+        }
+        if (activeZoom === ZoomStates.Zoom1) {
+            scaleZoom({ d3Svg, duration: 0, scale: 1 })
         }
         if (activeZoom === ZoomStates.Zoom1ToZoom0) {
-            scaleZoom({ d3Svg, duration: 1500, scale: 0.2 })
+            scaleZoom({ d3Svg, duration: 1500, scale: 0.2, startScale: 1 })
+        }
+        if (activeZoom === ZoomStates.Zoom1ToZoom1Stories) {
+            const stories = getStoriesSystemDimensions(dimensions)
+            scaleZoom({
+                d3Svg,
+                duration: 1500,
+                scale: 1.5,
+                startScale: 1,
+                translateX: -stories.x,
+                translateY: -stories.y,
+            })
+        }
+        if (activeZoom === ZoomStates.Zoom1ToZoom2) {
+            scaleZoom({ d3Svg, duration: 1500, scale: 0.2, startScale: 1 })
+        }
+        if (activeZoom === ZoomStates.Zoom2ToZoom1) {
+            scaleZoom({ d3Svg, duration: 1500, scale: 1, startScale: 20, opacity: 1, startOpacity: 0 })
         }
         if (activeZoom === ZoomStates.Zoom1Stories) {
-            zoom1stories(1500)
+            scaleZoom({ d3Svg, duration: 1500, scale: 1.5, startScale: 1 })
         }
     }, [zoom1stories, activeZoom, svgRef])
 
@@ -83,14 +100,29 @@ export function useD3ZoomEvents(svgRef: MutableRefObject<SVGSVGElement | null>, 
 interface Options {
     d3Svg: d3.Selection<SVGSVGElement | null, unknown, null, undefined>
     scale?: number
+    startScale?: number
+    opacity?: number
+    startOpacity?: number
+    translateX?: number
+    translateY?: number
     duration?: number
 }
 
-// animations
-function scaleZoom(options: Options) {
-    const { d3Svg, scale = 2, duration = 1500 } = options
-    d3Svg
+async function scaleZoom(options: Options) {
+    const { d3Svg, scale = 2, duration = 1500, startScale, startOpacity, opacity } = options
+
+    if (startScale) {
+        await d3Svg
+            .transition()
+            .duration(0)
+            .attr('opacity', startOpacity)
+            .attr('transform', `translate(` + 0 + ',' + 0 + ')scale(' + startScale + ')translate(' + 0 + ',' + 0 + ')')
+            .end()
+    }
+    await d3Svg
         .transition()
         .duration(duration)
+        .attr('opacity', opacity)
         .attr('transform', 'translate(' + 0 + ',' + 0 + ')scale(' + scale + ')translate(' + 0 + ',' + 0 + ')')
+        .end()
 }

@@ -9,7 +9,7 @@ import { DynamicGalaxyContainer } from './components/containers/DynamicGalaxyCon
 import { usePresenter } from './usePresenter'
 
 const DEBUG = true
-export const GalaxyInterface: React.FC = () => {
+export const GalaxyInterface: React.FC<{ data: unknown[] }> = () => {
     const { activeZoom, setActiveZoom } = usePresenter()
     const graphRef = useRef<HTMLDivElement | null>(null)
     const sizes = useSize(graphRef)
@@ -55,6 +55,7 @@ export const GalaxyInterface: React.FC = () => {
             ZoomStates.Zoom1ToZoom0,
             ZoomStates.Zoom1Stories,
             ZoomStates.Zoom1,
+            ZoomStates.Zoom2ToZoom1,
         ]
         if (!activeZoom) {
             return <p>not able to render anything</p>

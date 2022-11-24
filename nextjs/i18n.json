@@ -3,7 +3,7 @@
     "defaultLocale": "nl",
     "localeDetection": false,
     "pages": {
-        "*": ["common", "navigation"],
+        "*": ["common", "navigation", "homepage"],
         "story/*": ["stories", "record"],
         "/landingpage/[slug]": ["landingpage"],
         "/landingpage/[slug]/[filter]": ["landingpage"],

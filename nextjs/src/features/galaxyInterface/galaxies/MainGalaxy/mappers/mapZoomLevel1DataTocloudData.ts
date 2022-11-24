@@ -1,13 +1,13 @@
 import { galaxyTypesToPositions } from '@/features/galaxy/galaxyConstants'
 import { ZoomLevel1Query } from 'src/generated/graphql'
-import { ObjectPerTypeWithName } from '../d3/simulation'
+import { CloudItem } from '../types'
 
-export function mappedObjectPerType(zoomLevel1Data?: ZoomLevel1Query) {
+export function mapZoomLevel1DataTocloudData(zoomLevel1Data?: ZoomLevel1Query): CloudItem[] {
     const items = zoomLevel1Data?.zoomLevel1.filter(item => item.name !== 'Archiefbestanddelen') ?? []
 
     return items.map(item => {
         const config = galaxyTypesToPositions[item.id]
-        const newItem: ObjectPerTypeWithName = {
+        const newItem = {
             ...item,
             id: item.id,
             yFromCenter: config.yFromCenter,
