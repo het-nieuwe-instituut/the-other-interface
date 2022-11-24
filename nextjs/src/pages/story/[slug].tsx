@@ -4,7 +4,6 @@ import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 
 export interface StoryQueryParams {
     slug: string,
-    locale: string
 }
 
 const Page = (pageProps: InferGetServerSidePropsType<typeof getServerSideProps>) => {
@@ -17,7 +16,7 @@ export default Page
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
     const queryParams = context.query as unknown as StoryQueryParams
-    const locale = queryParams.locale
+    const locale = context.locale ?? 'en'
     const slug = queryParams.slug
 
     const { story, relations } = await getZoom5StoryTask(slug, locale) ?? {}
