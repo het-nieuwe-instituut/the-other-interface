@@ -12,6 +12,7 @@ query storyBySlug($locale: String, $slug: String!) {
     stories(locale: $locale, filters: { slug: { eq: $slug } }) {
         data {
             id
+             __typename
             attributes {
                 title
                 description

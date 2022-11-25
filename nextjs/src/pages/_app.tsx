@@ -1,7 +1,5 @@
-import { useApollo } from '@/features/graphql/config/apollo'
 import Fonts from '@/features/shared/components/Fonts/Fonts'
 import { theme } from '@/features/shared/styles/theme/theme'
-import { ApolloProvider } from '@apollo/client'
 import { ChakraProvider } from '@chakra-ui/react'
 import { ThemeProvider } from '@emotion/react'
 import type { AppProps } from 'next/app'
@@ -13,10 +11,8 @@ import 'keen-slider/keen-slider.min.css'
 import Script from 'next/script'
 
 function MyApp({ Component, pageProps }: AppProps) {
-    const apolloClient = useApollo(pageProps)
-
     return (
-        <ApolloProvider client={apolloClient}>
+        <>
             {
                 process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
                     <>
@@ -44,7 +40,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                     </ChakraProvider>
                 </ThemeProvider>
             </Provider>
-        </ApolloProvider>
+        </>
     )
 }
 

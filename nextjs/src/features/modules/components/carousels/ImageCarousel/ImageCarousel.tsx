@@ -6,7 +6,6 @@ import ArrowLeftIcon from '@/icons/arrows/arrow-left-long.svg'
 import ArrowRightIcon from '@/icons/arrows/arrow-right-long.svg'
 import Image from 'next/image'
 import usePresenter from './usePresenter'
-import { usePageConfiguration } from '@/features/shared/hooks/pageConfiguration'
 
 interface Props {
     component: ComponentModulesImageCarousel
@@ -20,7 +19,6 @@ export const ImageCarousel = (props: Props) => {
     const items = images?.data
     const { carouselRef, handlePaginationPrev, handlePaginationNext, sliderRef, calculateImagePropotions, size } =
         usePresenter(items)
-    const pageConfiguration = usePageConfiguration()
 
     return (
         <Box as="div" backgroundColor={'white'} ref={carouselRef} position="relative" pl={'6'}>
@@ -36,7 +34,7 @@ export const ImageCarousel = (props: Props) => {
                     {items?.map((item: UploadFileEntity, index) => {
                         const originalHeight = item?.attributes?.height ?? 1
                         const originalWidth = item?.attributes?.width ?? 1
-                        const imageBasePath = pageConfiguration.data?.imagePath ?? ''
+                        const imageBasePath = process.env.imagePath ?? ''
                         const imagePath = imageBasePath + item?.attributes?.url
                         const caption = item?.attributes?.caption
                         const proportions = calculateImagePropotions(originalWidth, originalHeight, IMAGE_HEIGHT, size)

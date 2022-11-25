@@ -12,7 +12,7 @@ export interface LandingPageFilterQueryParams extends LandingPageQueryParams {
 
 const Page = (props:  Awaited<ReturnType<typeof getServerSideProps>>['props']) => {
     return (
-        <LandingpageFilterProvider zoomLevel3={props.zoomLevel3}>
+        <LandingpageFilterProvider zoomLevel3={props.zoomLevel3 ?? null}>
             <LandingpageFilterContainer landingpage={props?.landingpage} />
         </LandingpageFilterProvider>
     )
@@ -26,10 +26,10 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     const filterId = queryParams.filter
     const page = parseInt(queryParams.page ?? 1)
 
-    const landingpage = await ApiClient?.landingpageBySlug({slug, locale: context?.locale})
-    
-    const zoomLevel3 =  await zoom3Query[slug]?.({ filterId, page, pageSize: 16  }) ?? null
-
+    const [landingpage, zoomLevel3] = await Promise.all([
+        ApiClient?.landingpageBySlug({slug, locale: context?.locale}),
+        zoom3Query[slug]?.({ filterId, page, pageSize: 16  })
+    ])
 
     return {
         props: {

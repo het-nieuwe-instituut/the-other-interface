@@ -51,8 +51,9 @@ function useListenToSimulationTicks(
     galaxyBase: number
 ) {
     const nodesListener = useRef<d3.Simulation<D3CollectionItem, undefined> | undefined | null>(null)
-
+    console.log('HEREEEEEEE')
     useEffect(() => {
+        console.log(data, 'heeereee')
         if (!data) return
         const d3Svg = d3.select(svgRef.current)
         const nodeForeign = d3Svg.selectAll(`.foreign-${selector}`)?.data(data)

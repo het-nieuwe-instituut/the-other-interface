@@ -2,7 +2,6 @@ import { zoom4QueryTask } from '@/features/galaxy/Collections/zoom4QueryTask'
 import ApiClient from '@/features/graphql/api'
 import { LandingpageCollectionProvider } from '@/features/pages/containers/LandingpageCollectionContainer/LadingpageCollectionContext'
 import { LandingCollectionContainer } from '@/features/pages/containers/LandingpageCollectionContainer/LandingCollectionContainer'
-// import { zoom3Query } from '@/features/pages/containers/LandingpageFilterContainer/zoom3Query.mapper'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import { LandingPageFilterQueryParams } from '../[filter]'
 
@@ -25,13 +24,14 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     const filterId = queryParams.filter
     const collection = queryParams.collection
 
-    const landingpage = await ApiClient?.landingpageBySlug({slug, locale: context?.locale})
-    
-    const zoomLevel4 =  await zoom4QueryTask(slug, {
-        filter: filterId,
-        page: queryParams.page ?? '1',
-        collection
-    })
+    const [landingpage, zoomLevel4] = await Promise.all([
+        ApiClient?.landingpageBySlug({slug, locale: context?.locale}),
+        zoom4QueryTask(slug, {
+            filter: filterId,
+            page: queryParams.page ?? '1',
+            collection
+        })
+    ])
 
     return {
         props: {

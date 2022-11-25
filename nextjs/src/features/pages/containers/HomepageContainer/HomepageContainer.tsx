@@ -7,16 +7,16 @@ import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import useScroll from '@/features/shared/hooks/useScroll'
 import { Box, useTheme } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
-import dynamic from 'next/dynamic'
 import { useRef } from 'react'
 import { HomepageComponentsDynamicZone, HomepageQuery, ZoomLevel1Query } from 'src/generated/graphql'
 import { ScrollToContent, ScrollToTop } from '../../utils/utils'
 import { GalaxyTopRight } from '@/features/shared/components/GalaxyWrapper/GalaxyTopRight/GalaxyTopRight'
 import { HomepageProvider } from './HomepageContext'
+import DynamicGalaxy from '../../../galaxy/Galaxy/Galaxy'
 
-export const DynamicGalaxyNoSsr = dynamic(() => import('../../../galaxy/Galaxy/Galaxy'), {
-    ssr: true,
-})
+// export const DynamicGalaxyNoSsr = dynamic(() => import('../../../galaxy/Galaxy/Galaxy'), {
+//     ssr: true,
+// })
 
 export type Props = {
     homepage: HomepageQuery | undefined,
@@ -45,7 +45,7 @@ export const HomepageContainer = (props: Props) => {
 
 const Homepage: React.FC<{ data?: HomepageQuery }> = ({ data }) => {
     const graphRef = useRef<HTMLDivElement | null>(null)
-    const sizes = useSize(graphRef)
+    const sizes = useSize(graphRef) ?? {height: 1000, width: 1000} // to have ssr
     const theme = useTheme()
 
     const { scrollPosition } = useScroll()
@@ -61,7 +61,7 @@ const Homepage: React.FC<{ data?: HomepageQuery }> = ({ data }) => {
                 <Box backgroundColor="graph" height="800px" ref={graphRef}>
                     {sizes?.height && sizes?.width && (
                         <Box position={'fixed'}>
-                            <DynamicGalaxyNoSsr dimensions={{ height: 800, width: sizes?.width }} />
+                            <DynamicGalaxy dimensions={{ height: 800, width: sizes?.width }} />
                         </Box>
                     )}
                 </Box>

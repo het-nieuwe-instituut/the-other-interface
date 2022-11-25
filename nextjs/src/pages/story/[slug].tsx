@@ -21,10 +21,5 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
 
     const { story, relations } = await getZoom5StoryTask(slug, locale) ?? {}
 
-    // preparePageConfiguration(apolloClient, {
-    //     host: context.req.headers.host ?? '',
-    //     imagePath: process.env.NEXT_PUBLIC_REACT_APP_IMAGE_BASE_URL ?? '',
-    // })
-
     return { props: { story, relations } }
 }

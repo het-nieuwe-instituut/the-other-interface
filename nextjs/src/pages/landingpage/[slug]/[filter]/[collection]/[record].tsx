@@ -24,16 +24,6 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
         getZoom5RecordTask(record)
     ])
 
-    // const { zoom5detail, zoom5relations} = await getZoom5RecordTask(record)
-    // const landingpage = a
-
-    // preparePageConfiguration(apolloClient, {
-    //     host: context.req.headers.host ?? '',
-    //     imagePath: process.env.NEXT_PUBLIC_REACT_APP_IMAGE_BASE_URL ?? '',
-    // })
-
-    // const apolloState = apolloClient.cache.extract()
-
     return  {
         props: {
             record,

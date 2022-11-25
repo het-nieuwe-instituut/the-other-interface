@@ -27,15 +27,6 @@ interface Props {
 }
 
 export const RecordContainer = (props: Props) => {
-    // const { data, loading, error } = useGetZoom5RecordTask()
-    // if (loading) {
-    //     return <Loader />
-    // }
-
-    // if (error) {
-    //     return <p>{error.message}</p>
-    // }
-
     return (
         <RecordProvider zoomLevel5={props.zoom5 ?? null} >
             <RecordPage landingpage={props.landingpage} />

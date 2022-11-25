@@ -34,8 +34,11 @@ const Galaxy: React.FC<Props> = ({ dimensions }) => {
         handleMoveToZoomLevel1,
         archiefBestandDelen,
     } = usePresenter(dimensions, id)
-    const height = dimensions.height ?? 0
-    const width = dimensions.width ?? 0
+    const height = dimensions.height ?? 800
+    const width = dimensions.width ?? 800
+
+    console.log(objectsPerTypeWithIds)
+    console.log(zoomLevel)
 
     return (
         <Box

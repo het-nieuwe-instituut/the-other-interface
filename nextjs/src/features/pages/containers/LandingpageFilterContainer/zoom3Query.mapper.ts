@@ -1,5 +1,5 @@
 import ApiClient from "@/features/graphql/api";
-import { Zoom3ArchivesQuery, Zoom3DPeopleQuery, Zoom3DPublicationsQuery, Zoom3ObjectsQuery, Zoom3Query } from "src/generated/graphql";
+import { Zoom3ArchivesQuery, Zoom3DPeopleQuery, Zoom3DPublicationsQuery, Zoom3ObjectsQuery } from "src/generated/graphql";
 
 export enum SupportedLandingPages {
     Publications = 'publications',
