@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import LandingpageCollectionContext from '@/features/pages/containers/LandingpageCollectionContainer/LadingpageCollectionContext'
-// import { Loader } from '@/features/shared/components/Loading/Loading'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { randomNumberBetweenPoints } from '@/features/shared/utils/numbers'
 import PaginationLeft from '@/icons/arrows/pagination-left.svg'
@@ -15,7 +13,6 @@ import { LandingPageFilterCollectionQueryParams } from 'src/pages/landingpage/[s
 import { SupportedLandingPages } from '../FilterClouds/FilterCloudsContainer'
 import { getGalaxyTypeByTranslationsKey } from '../utils/translations'
 import { usePresenter } from './usePresenter'
-// import { useZoom4QueryTask } from './zoom4QueryTask'
 
 type PaginatsedProps = {
     dimensions: {

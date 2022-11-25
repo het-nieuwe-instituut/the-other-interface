@@ -23,20 +23,3 @@ generates:
             namingConvention:
                 typeNames: change-case-all#pascalCase
                 enumValues: change-case-all#capitalCase
-    # src/generated/graphql-ssr.tsx:
-    #     config:
-    #         documentMode: external
-    #         importDocumentNodeExternallyFrom: ./graphql
-    #         reactApolloVersion: 3
-    #         withHooks: true
-    #         contextTypeRequired: false
-    #         apolloClientInstanceImport: ../features/graphql/config/apollo
-    #         reactImport: "import React from 'react'"
-    #         namingConvention:
-    #             typeNames: change-case-all#pascalCase
-    #             enumValues: change-case-all#capitalCase
-    #     preset: import-types
-    #     presetConfig:
-    #         typesPath: ./graphql
-    #     plugins:
-    #         - 'graphql-codegen-apollo-next-ssr' # replace by - graphql-codegen-apollo-next-ssr
