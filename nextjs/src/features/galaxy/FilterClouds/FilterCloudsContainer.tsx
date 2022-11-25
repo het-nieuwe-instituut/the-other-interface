@@ -1,7 +1,9 @@
-import { Loader } from '@/features/shared/components/Loading/Loading'
+import LandingpageContext from '@/features/pages/containers/LandingpageContainer/LandingpageContext'
+// import { Loader } from '@/features/shared/components/Loading/Loading'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
-import { EntityNames, useZoomLevel2Query } from 'src/generated/graphql'
+import { useContext } from 'react'
+import { EntityNames } from 'src/generated/graphql'
 
 export enum SupportedLandingPages {
     Publications = 'publications',
@@ -27,7 +29,7 @@ export const DynamicGalaxyNoSsr = dynamic(() => import('../../galaxy/Galaxy/Gala
     ssr: false,
 })
 
-const TypeToEntityName: Record<string, EntityNames> = {
+export const TypeToEntityName: Record<string, EntityNames> = {
     publications: EntityNames.Publications,
     people: EntityNames.People,
     objects: EntityNames.Objects,
@@ -42,24 +44,15 @@ const FilterCloudsContainer: React.FunctionComponent<Props> = props => {
     const router = useRouter()
     const queryParams = router.query as unknown as LandingPageQueryParams
     const type = queryParams.slug
-    const {
-        data: filters,
-        loading: isFiltersLoading,
-        error: filtersError,
-    } = useZoomLevel2Query({
-        variables: {
-            entityName: TypeToEntityName[type],
-        },
-        skip: !TypeToEntityName[type],
-    })
+    const { zoomLevel2: filters } = useContext(LandingpageContext)
 
-    if (isFiltersLoading) {
-        return <Loader />
-    }
+    // if (isFiltersLoading) {
+    //     return <Loader />
+    // }
 
-    if (filtersError) {
-        return <p>{filtersError.message}</p>
-    }
+    // if (filtersError) {
+    //     return <p>{filtersError.message}</p>
+    // }
 
     return (
         <>

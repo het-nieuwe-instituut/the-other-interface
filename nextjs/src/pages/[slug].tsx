@@ -1,44 +1,27 @@
-import { addApolloState, getApolloClient } from '@/features/graphql/config/apollo'
+import ApiClient from '@/features/graphql/api'
 import { MenupageContainer } from '@/features/pages/containers/MenupageContainer/MenupageContainer'
-import { preparePageConfiguration } from '@/features/shared/utils/pageConfiguration'
-import { GetServerSidePropsContext } from 'next'
-import { MenupageBySlugDocument, MenupageBySlugQuery } from 'src/generated/graphql'
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 
 export interface MenupageQueryParams {
     slug: string
 }
 
-const Page = () => {
-    return <MenupageContainer />
+const Page = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+    return <MenupageContainer menupage={props.menupage} />
 }
 
 export default Page
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
     const queryParams = context.query as unknown as MenupageQueryParams
-    const slug = queryParams.slug
+    const { slug } = queryParams
+    const { locale } = context;
 
-    const apolloClient = getApolloClient({ headers: context?.req?.headers })
+    const menupage = await ApiClient?.menupageBySlug({slug, locale})
 
-    const result = await apolloClient.query<MenupageBySlugQuery>({
-        variables: {
-            locale: context.locale,
-            slug: slug,
-        },
-        query: MenupageBySlugDocument,
-    })
-
-    if (result.error || !result.data.menupages?.data.length) {
-        return { notFound: true }
-    }
-
-    preparePageConfiguration(apolloClient, { host: context.req.headers.host ?? '', imagePath: process.env.NEXT_PUBLIC_REACT_APP_IMAGE_BASE_URL ?? '' })
-
-    const apolloState = apolloClient.cache.extract()
-
-    return addApolloState(apolloState, {
+    return  {
         props: {
-            slug,
+            menupage
         },
-    })
+    }
 }

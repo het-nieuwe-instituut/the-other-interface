@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import HomepageContext from '@/features/pages/containers/HomepageContainer/HomepageContext'
 import earcut from 'earcut'
-import { useMemo } from 'react'
-import { useZoomLevel1Query } from 'src/generated/graphql'
+import { useContext, useMemo } from 'react'
+// import { useZoomLevel1Query } from 'src/generated/graphql'
 import { calcRandomTrianglePoint, selectRandomTriangle } from '../../utils/polygons'
 
 export interface InstancesPerClass {
@@ -63,12 +64,12 @@ export interface StoryDataPoint {
 
 export function usePresenter(stories: InstancesPerClass[]) {
     const { triangles, dataPoints } = useTriangles(stories)
-    const { data, loading } = useZoomLevel1Query()
+    const { zoomLevel1: data } = useContext(HomepageContext)
     return {
         triangles,
         dataPoints,
         items: data?.zoomLevel1 ?? [],
-        loading,
+        loading: false,
         showTooltip,
         hideTooltip,
         cleanupTooltips,

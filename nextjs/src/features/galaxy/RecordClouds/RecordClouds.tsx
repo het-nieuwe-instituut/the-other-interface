@@ -3,21 +3,20 @@ import { Box, keyframes, Text } from '@chakra-ui/react'
 import { Circle } from '../components/Circle'
 
 import { SupportedQuerys, ZoomLevel5DetailResponses } from '@/features/pages/tasks/getZoom5RecordTask'
-import React from 'react'
+import React, { useContext } from 'react'
 import { EntityNames, StoryBySlugQuery } from 'src/generated/graphql'
 import { RecordCloudHighlight } from './components/RecordHighlight'
 import { ParentRelation } from './hooks/usePositionClouds'
 import { usePresenter } from './usePresenter'
 import { RecordQueryParams } from 'src/pages/landingpage/[slug]/[filter]/[collection]/[record]'
 import { useRouter } from 'next/router'
+import RecordContext from '@/features/pages/containers/RecordContainer/RecordContext'
 
 type Props = {
     dimensions: {
         height: number
         width: number
     }
-    zoomLevel5: ZoomLevel5Entities
-    relations: ZoomLevel5DetailResponses['zoom5relations']
 }
 
 export type ZoomLevel5Entities =
@@ -34,11 +33,12 @@ const opacityOut = keyframes`
     to {opacity: 0.3}
 `
 
-const RecordClouds: React.FunctionComponent<Props> = ({ dimensions, zoomLevel5, relations }) => {
+const RecordClouds: React.FunctionComponent<Props> = ({ dimensions }) => {
     const router = useRouter()
     const queryParams = router.query as unknown as RecordQueryParams
 
     const { width, height } = dimensions
+    const {relations, detail: zoomLevel5 } = useContext(RecordContext)
     const svgWidth = width
     const svgHeight = height
     const { svgRef, relationsPositionData, zoomed } = usePresenter(relations)

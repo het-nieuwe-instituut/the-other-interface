@@ -1,4 +1,3 @@
-import { useApolloClient } from '@apollo/client'
 import { useRouter } from 'next/router'
 import { useCallback, useRef } from 'react'
 import { EntityNames, ObjectRelationsQuery } from 'src/generated/graphql'
@@ -9,7 +8,6 @@ import { SVG_DIMENSIONS } from './RecordClouds'
 
 type Item = NonNullable<NonNullable<ObjectRelationsQuery['relations']>[0]['randomRelations']>[0]
 export function usePresenter(relations: ObjectRelationsQuery['relations']) {
-    const client = useApolloClient()
     const router = useRouter()
     const svgRef = useRef<SVGSVGElement | null>(null)
     const { relationsPositionData } = usePositionClouds(relations)
@@ -23,8 +21,8 @@ export function usePresenter(relations: ObjectRelationsQuery['relations']) {
                 }
                 const newRoute = `/story/${d.slug}`
 
-                client.cache.evict({ id: 'ROOT_QUERY', fieldName: 'zoom5detail' })
-                client.cache.evict({ id: 'ROOT_QUERY', fieldName: 'zoom5relations' })
+                // client.cache.evict({ id: 'ROOT_QUERY', fieldName: 'zoom5detail' })
+                // client.cache.evict({ id: 'ROOT_QUERY', fieldName: 'zoom5relations' })
                 await router.push(newRoute + '?galaxy=true')
                 return
             }
@@ -33,13 +31,13 @@ export function usePresenter(relations: ObjectRelationsQuery['relations']) {
                 d.id
             }-${d.type.toLowerCase()}`
 
-            client.cache.evict({ id: 'ROOT_QUERY', fieldName: 'zoom5detail' })
-            client.cache.evict({ id: 'ROOT_QUERY', fieldName: 'zoom5relations' })
+            // client.cache.evict({ id: 'ROOT_QUERY', fieldName: 'zoom5detail' })
+            // client.cache.evict({ id: 'ROOT_QUERY', fieldName: 'zoom5relations' })
 
             await router.push(newRoute + '?galaxy=true')
         },
 
-        [client.cache, router]
+        [router]
     )
     const zoomEvents = useD3HeroAnimateElement<Item>(
         disabledClick,

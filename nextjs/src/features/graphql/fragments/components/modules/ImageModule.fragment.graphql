@@ -2,6 +2,7 @@
 
 fragment imageModuleFragment on ComponentModulesImage {
     id
+    __typename
     image {
         data {
             attributes {

@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { usePageConfiguration } from '@/features/shared/hooks/pageConfiguration'
 import { isExternalURL } from '@/features/shared/utils/links'
 import { keyExtractor } from '@/features/shared/utils/lists'
 import { capitalizeFirstLetter } from '@/features/shared/utils/text'
@@ -97,7 +96,6 @@ interface GridButtonProps {
     buttonLayoutStyle?: CSSProperties
 }
 const GridButton: React.FC<GridButtonProps> = ({ button, index, array, config, buttonLayoutStyle }) => {
-    const pageConfiguration = usePageConfiguration()
 
     return (
         <NextLink style={{ width: '100%' }} href={getURl(button)} passHref>
@@ -107,7 +105,7 @@ const GridButton: React.FC<GridButtonProps> = ({ button, index, array, config, b
                 as={'a'}
                 rightIcon={renderExternalLink(button)}
                 target={
-                    !!button.url && isExternalURL(button.url, pageConfiguration.data?.host ?? '') ? '_blank' : undefined
+                    !!button.url && isExternalURL(button.url, process.env.host ?? '') ? '_blank' : undefined
                 }
                 gridColumn={{ base: 1, md: getGridColumns(index, array) }}
                 bg={'white'}
@@ -124,7 +122,7 @@ const GridButton: React.FC<GridButtonProps> = ({ button, index, array, config, b
             return <Download />
         }
 
-        if (!button?.url || !isExternalURL(button.url, pageConfiguration.data?.host ?? '')) {
+        if (!button?.url || !isExternalURL(button.url, process.env.host ?? '')) {
             return undefined
         }
 

@@ -1,7 +1,5 @@
-import { useApollo } from '@/features/graphql/config/apollo'
 import Fonts from '@/features/shared/components/Fonts/Fonts'
 import { theme } from '@/features/shared/styles/theme/theme'
-import { ApolloProvider } from '@apollo/client'
 import { ChakraProvider } from '@chakra-ui/react'
 import { ThemeProvider } from '@emotion/react'
 import type { AppProps } from 'next/app'
@@ -11,12 +9,11 @@ import '../styles/globals.css'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import 'keen-slider/keen-slider.min.css'
 import Script from 'next/script'
+import ErrorBoundaryProvider from '@/features/modules/components/ErrorBoundary/ErrorBoundary'
 
 function MyApp({ Component, pageProps }: AppProps) {
-    const apolloClient = useApollo(pageProps)
-
     return (
-        <ApolloProvider client={apolloClient}>
+        <>
             {
                 process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
                     <>
@@ -40,11 +37,13 @@ function MyApp({ Component, pageProps }: AppProps) {
                 <ThemeProvider theme={theme}>
                     <ChakraProvider theme={theme}>
                         <Fonts />
-                        <Component {...pageProps} />
+                        <ErrorBoundaryProvider>
+                            <Component {...pageProps} />
+                        </ErrorBoundaryProvider>
                     </ChakraProvider>
                 </ThemeProvider>
             </Provider>
-        </ApolloProvider>
+        </>
     )
 }
 
