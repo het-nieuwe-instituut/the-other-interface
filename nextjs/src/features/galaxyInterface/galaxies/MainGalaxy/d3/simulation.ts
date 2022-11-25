@@ -14,17 +14,18 @@ interface Options {
     galaxyBase: number
     data: CloudItem[]
     nodes: d3.Selection<d3.BaseType, CloudItem, SVGSVGElement | null, unknown>
+    duration?: number
 }
 
 export function initializeD3(options: Options) {
-    const { simulation, dataDimensions, galaxyBase, nodes, data } = options
+    const { simulation, dataDimensions, galaxyBase, nodes, data, duration } = options
     simulation
         ?.force('charge', d3.forceManyBody().strength(0.1))
         .force('center', d3.forceCenter((galaxyBase ?? 0) / 2, (galaxyBase ?? 0) / 2))
 
     return simulation?.nodes(data as D3CollectionItem[]).on('tick', () => {
         ticked(dataDimensions, nodes)
-        adjustPostion(simulation, dataDimensions, galaxyBase)
+        adjustPostion(simulation, dataDimensions, galaxyBase, duration)
     })
 }
 
@@ -52,7 +53,8 @@ function ticked(
 function adjustPostion(
     simulation: d3.Simulation<D3CollectionItem, undefined> | null,
     dataDimensions: DataDimensions[],
-    galaxyBase: number
+    galaxyBase: number,
+    duration?: number
 ) {
     const halfWidth = (galaxyBase ?? 0) / 2
     const halfHeight = (galaxyBase ?? 0) / 2
@@ -60,7 +62,7 @@ function adjustPostion(
     simulation?.nodes().forEach(d => {
         d3.select<BaseType, D3CollectionItem>(`#${d.id}`)
             .transition()
-            .duration(100)
+            .duration(duration ?? 100)
             .attr('x', d => {
                 const x = d.xFromCenter ?? 0
 

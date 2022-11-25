@@ -12,20 +12,23 @@ export function useRouteTransitions() {
             router.replace({
                 query: { ...router.query, zoomLevel: ZoomStates.Zoom0 },
             })
+            return
         }
         if (activeZoom === ZoomStates.Zoom1) {
             router.replace({
                 query: { ...router.query, zoomLevel: ZoomStates.Zoom1 },
             })
+            return
         }
         if (activeZoom === ZoomStates.Zoom1Stories) {
             router.replace({
                 query: { ...router.query, zoomLevel: ZoomStates.Zoom1Stories },
             })
+            return
         }
         if (activeZoom === ZoomStates.Zoom2Initial) {
-            console.log('nav')
             router.push('/galaxyInterfaceLanding')
+            return
         }
     }, [activeZoom])
 }
