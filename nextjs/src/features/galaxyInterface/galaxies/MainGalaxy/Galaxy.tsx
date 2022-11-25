@@ -1,5 +1,5 @@
-import store from '@/features/shared/configs/store'
 import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { useStore } from '@/features/shared/hooks/useStore'
 import { Box, Flex, Text } from '@chakra-ui/react'
 import React, { forwardRef, useId } from 'react'
 import { Circle } from '../../../galaxy/components/Circle'
@@ -28,6 +28,7 @@ export interface InstancesPerClass {
 
 export const GALAXY_BASE = 800
 const MainGalaxyProps: React.FC<MainGalaxyProps> = props => {
+    const store = useStore()
     const { t } = useLooseTypeSafeTranslation('homepage')
     const id = useId().replaceAll(':', '')
     const { svgRef, storiesSystemRef, cloudData, storiesData, dimensions, conditions, archiveComponent } = usePresenter(
@@ -117,6 +118,7 @@ const MainGalaxyProps: React.FC<MainGalaxyProps> = props => {
                                                                         translateY: item.yFromCenter,
                                                                     },
                                                                 },
+                                                                afterAnimationState: ZoomStates.Zoom2Initial,
                                                             })
                                                         )
                                                     }

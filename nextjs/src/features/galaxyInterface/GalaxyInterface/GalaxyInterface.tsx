@@ -8,6 +8,7 @@ import { Box, Button } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
 import { memo, useRef } from 'react'
 import { ZoomStates } from '../types/galaxy'
+import { DynamicFilterCloudsContainer } from './components/containers/DynamicFilterCloudsContainer'
 import { DynamicGalaxyContainer } from './components/containers/DynamicGalaxyContainer'
 import { usePresenter } from './usePresenter'
 
@@ -50,25 +51,31 @@ export const GalaxyInterface: React.FC = () => {
     )
 }
 
+const mainGalaxyIncluded = [
+    ZoomStates.Zoom0,
+    ZoomStates.Zoom0ToZoom1,
+    ZoomStates.Zoom1ToZoom0,
+    ZoomStates.Zoom1Stories,
+    ZoomStates.Zoom1,
+    ZoomStates.Zoom2ToZoom1,
+    ZoomStates.Zoom1ToZoom2,
+    ZoomStates.Zoom1ToZoom1Stories,
+    ZoomStates.Zoom1StoriesToZoom1,
+    ZoomStates.Zoom1StoriesToZoom5,
+]
+const landingGalaxyIncluded = [ZoomStates.Zoom2, ZoomStates.Zoom2Initial, ZoomStates.Zoom2ToZoom3]
+
 const GalaxySwitch: React.FC<{ activeZoom: ZoomStates | null; sizes: ReturnType<typeof useSize> }> = props => {
     const { activeZoom, sizes } = props
-    const galaxyIncluded = [
-        ZoomStates.Zoom0,
-        ZoomStates.Zoom0ToZoom1,
-        ZoomStates.Zoom1ToZoom0,
-        ZoomStates.Zoom1Stories,
-        ZoomStates.Zoom1,
-        ZoomStates.Zoom2ToZoom1,
-        ZoomStates.Zoom1ToZoom2,
-        ZoomStates.Zoom1ToZoom1Stories,
-        ZoomStates.Zoom1StoriesToZoom1,
-        ZoomStates.Zoom1StoriesToZoom5,
-    ]
+
     if (!activeZoom) {
         return <p>not able to render anything</p>
     }
-    if (galaxyIncluded.includes(activeZoom)) {
+    if (mainGalaxyIncluded.includes(activeZoom)) {
         return <DynamicGalaxyContainer dimensions={{ height: 800, width: sizes?.width }} />
+    }
+    if (landingGalaxyIncluded.includes(activeZoom)) {
+        return <DynamicFilterCloudsContainer dimensions={{ height: 800, width: sizes?.width }} />
     }
     return null
 }

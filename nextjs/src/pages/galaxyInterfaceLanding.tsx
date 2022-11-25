@@ -146,7 +146,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
         props: {
             host: context.req.headers.host || null,
             reduxState: prepareReduxState({
-                galaxyInterface: { activeZoom: (context.query.zoomLevel as ZoomStates) ?? ZoomStates.Zoom0 },
+                galaxyInterface: { activeZoom: (context.query.zoomLevel as ZoomStates) ?? ZoomStates.Zoom2 },
             }),
         },
     }

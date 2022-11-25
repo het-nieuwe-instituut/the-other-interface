@@ -158,70 +158,77 @@ export function useD3ZoomEvents(svgRef: MutableRefObject<SVGSVGElement | null>, 
                 })
             }
             if (activeZoom === ZoomStates.Zoom1StoriesToZoom1) {
-                const stories = getStoriesSystemDimensions(dimensions)
-                const d3Stories = d3.select(storiesSystemRef.current)
-                const nodeForeign = d3Svg.select(`.circles`)
-                await Promise.all([
-                    scaleZoom({
-                        d3Ref: d3Svg,
-                        initial: {
-                            scale: 1,
-                        },
-                    }),
-                    scaleZoom({
-                        d3Ref: d3Stories,
-                        initial: {
-                            scale: 1.5,
-                            translateX: -stories.x,
-                            translateY: -stories.y,
-                        },
-                        to: {
-                            duration: 1500,
-                            scale: 1,
-                            translateX: stories.x,
-                            translateY: stories.y,
-                        },
-                    }),
-                    scaleZoom({
-                        d3Ref: nodeForeign,
-                        initial: {
-                            scale: 1.5,
-                            translateX: -stories.x,
-                            translateY: -stories.y,
-                        },
-                        to: {
-                            duration: 1500,
-                            scale: 1,
-                            translateX: stories.x,
-                            translateY: stories.y,
-                        },
-                    }),
-                ])
+                animationWrapper(store, async () => {
+                    const stories = getStoriesSystemDimensions(dimensions)
+                    const d3Stories = d3.select(storiesSystemRef.current)
+                    const nodeForeign = d3Svg.select(`.circles`)
+                    await Promise.all([
+                        scaleZoom({
+                            d3Ref: d3Svg,
+                            initial: {
+                                scale: 1,
+                            },
+                        }),
+                        scaleZoom({
+                            d3Ref: d3Stories,
+                            initial: {
+                                scale: 1.5,
+                                translateX: -stories.x,
+                                translateY: -stories.y,
+                            },
+                            to: {
+                                duration: 1500,
+                                scale: 1,
+                                translateX: stories.x,
+                                translateY: stories.y,
+                            },
+                        }),
+                        scaleZoom({
+                            d3Ref: nodeForeign,
+                            initial: {
+                                scale: 1.5,
+                                translateX: -stories.x,
+                                translateY: -stories.y,
+                            },
+                            to: {
+                                duration: 1500,
+                                scale: 1,
+                                translateX: stories.x,
+                                translateY: stories.y,
+                            },
+                        }),
+                    ])
+                })
             }
             if (activeZoom === ZoomStates.Zoom1ToZoom2) {
-                const item = store.getState().galaxyInterface.activeZoomData
-                scaleZoom({
-                    d3Ref: d3Svg,
-                    to: {
-                        duration: 1500,
-                        scale: 20,
-                        ...item?.to,
-                    },
-                    initial: { scale: 1 },
+                animationWrapper(store, async () => {
+                    const item = store.getState().galaxyInterface.activeZoomData
+                    await scaleZoom({
+                        d3Ref: d3Svg,
+                        to: {
+                            duration: 1500,
+                            scale: 20,
+                            opacity: 0,
+                            ...item?.to,
+                        },
+                        initial: { scale: 1 },
+                    })
                 })
             }
             if (activeZoom === ZoomStates.Zoom2ToZoom1) {
-                scaleZoom({
-                    d3Ref: d3Svg,
-                    to: {
-                        duration: 1500,
-                        scale: 1,
-                        opacity: 1,
-                    },
-                    initial: {
-                        scale: 20,
-                        opacity: 0,
-                    },
+                animationWrapper(store, async () => {
+                    await scaleZoom({
+                        d3Ref: d3Svg,
+                        to: {
+                            duration: 1500,
+                            scale: 1,
+                            opacity: 1,
+                        },
+                        initial: {
+                            scale: 20,
+                            opacity: 0,
+                        },
+                    })
                 })
             }
         }
