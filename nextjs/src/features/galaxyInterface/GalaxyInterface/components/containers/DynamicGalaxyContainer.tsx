@@ -1,8 +1,10 @@
 import { Dimensions } from '@/features/galaxy/types/galaxy'
 import { mapArchiveComponent } from '@/features/galaxyInterface/galaxies/MainGalaxy/mappers/mapArchiveComponent'
+import { mappedStoriesToCloudStoriesItems } from '@/features/galaxyInterface/galaxies/MainGalaxy/mappers/mappedStoriesToCloudStoriesItems'
 import { mapZoomLevel1DataTocloudData } from '@/features/galaxyInterface/galaxies/MainGalaxy/mappers/mapZoomLevel1DataTocloudData'
+import { times, uniqueId } from 'lodash'
 import dynamic from 'next/dynamic'
-import { EntityNames } from 'src/generated/graphql'
+import { EntityNames, StoriesWithoutRelationsQuery } from 'src/generated/graphql'
 
 export const DynamicGalaxyNoSsr = dynamic(() => import('../../../galaxies/MainGalaxy/Galaxy'), {
     ssr: false,
@@ -48,11 +50,29 @@ const zoom1Stub = {
         },
     ],
 }
+
+const storiesWithoutRelationsQuery: StoriesWithoutRelationsQuery = {
+    __typename: 'Query',
+    storiesWithoutRelations: {
+        __typename: 'StoryWithoutRelationsEntityResponseCollection',
+        data: times(100, () => ({
+            __typename: 'StoryWithoutRelationsEntity' as const,
+            id: uniqueId(),
+            attributes: {
+                __typename: 'StoryWithoutRelations',
+                title: 'title',
+                slug: 'slug',
+                shortDescription: 'short description',
+            },
+        })),
+    },
+}
 export const DynamicGalaxyContainer: React.FC<{ dimensions: Dimensions }> = ({ dimensions }) => {
+    const mappedCloudItems = mapZoomLevel1DataTocloudData(zoom1Stub)
     return (
         <DynamicGalaxyNoSsr
-            cloudData={mapZoomLevel1DataTocloudData(zoom1Stub)}
-            storiesData={[]}
+            cloudData={mappedCloudItems}
+            storiesData={mappedStoriesToCloudStoriesItems(storiesWithoutRelationsQuery, mappedCloudItems)}
             archiveComponent={mapArchiveComponent(zoom1Stub)}
             dimensions={dimensions}
         />

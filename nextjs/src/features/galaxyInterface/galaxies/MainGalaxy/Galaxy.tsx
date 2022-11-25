@@ -1,9 +1,12 @@
+import store from '@/features/shared/configs/store'
 import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Box, Flex, Text } from '@chakra-ui/react'
 import React, { forwardRef, useId } from 'react'
 import { Circle } from '../../../galaxy/components/Circle'
 import { GalaxyShadowBackground } from '../../../galaxy/components/GalaxyShadowBackground'
 import { Dimensions } from '../../../galaxy/types/galaxy'
+import { StoriesSystem } from '../../components/StoriesSystem/StoriesSystem'
+import { galaxyInterfaceActions } from '../../stores/galaxyInterface.store'
 import { ZoomStates } from '../../types/galaxy'
 import { mapArchiveComponent } from './mappers/mapArchiveComponent'
 import { CloudItem, StoriesItem } from './types'
@@ -30,8 +33,7 @@ const MainGalaxyProps: React.FC<MainGalaxyProps> = props => {
     const {
         svgRef,
         setZoomLevel,
-        zoomTo,
-        stories,
+
         storiesSystemRef,
         cloudData,
         storiesData,
@@ -82,11 +84,11 @@ const MainGalaxyProps: React.FC<MainGalaxyProps> = props => {
                     viewBox={`0 0 ${GALAXY_BASE} ${GALAXY_BASE}`}
                 >
                     <>
-                        {/* {stories?.length && (
+                        {storiesData?.length && (
                             <StoriesSystemPosition dimensions={dimensions} ref={storiesSystemRef}>
                                 <StoriesSystem disableLinkAndHover={conditions.isZoom1Stories} data={storiesData} />
                             </StoriesSystemPosition>
-                        )} */}
+                        )}
 
                         <GalaxyShadowBackground dimensions={dimensions} />
 
@@ -103,13 +105,21 @@ const MainGalaxyProps: React.FC<MainGalaxyProps> = props => {
                                     >
                                         {conditions.isZoom1 && (
                                             <Box
-                                                onClick={() =>
-                                                    zoomTo(
-                                                        -item.xFromCenter,
-                                                        item.yFromCenter,
-                                                        `/landingpage/${item.class}`
+                                                onClick={() => {
+                                                    console.log('test')
+
+                                                    return store.dispatch(
+                                                        galaxyInterfaceActions.setActiveZoom({
+                                                            activeZoom: ZoomStates.Zoom1ToZoom2,
+                                                            activeZoomData: {
+                                                                to: {
+                                                                    translateX: -item.xFromCenter,
+                                                                    translateY: item.yFromCenter,
+                                                                },
+                                                            },
+                                                        })
                                                     )
-                                                }
+                                                }}
                                                 as="button"
                                                 width="100%"
                                                 height="100%"

@@ -1,4 +1,4 @@
-import { ObjectPerTypeWithName } from '../d3/simulation'
+import { CloudItem } from '../types'
 
 export interface DataDimensions {
     name: string
@@ -6,7 +6,7 @@ export interface DataDimensions {
     id: string
 }
 
-export function fitDataToDimensions(base: number, data: ObjectPerTypeWithName[]) {
+export function fitDataToDimensions(base: number, data: CloudItem[]) {
     const totalSpace = base * base
     const gridItemSpace = 12
     const totalSpaceGrid = totalSpace / (gridItemSpace * gridItemSpace)

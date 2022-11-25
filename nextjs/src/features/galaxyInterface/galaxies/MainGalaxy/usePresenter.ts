@@ -1,7 +1,9 @@
-import { useMemo, useRef } from 'react'
+import { useCallback, useMemo, useRef } from 'react'
+import { useStore } from 'react-redux'
 
 import { Dimensions } from '../../../galaxy/types/galaxy'
 import { useD3ZoomEvents } from '../../newsharedhooks/useD3ZoomEvents'
+import { galaxyInterfaceActions } from '../../stores/galaxyInterface.store'
 import { ZoomStates } from '../../types/galaxy'
 import { GALAXY_BASE, MainGalaxyProps } from './Galaxy'
 import { useD3Simulation } from './hooks/useD3Simulation'
@@ -17,7 +19,7 @@ interface Props extends MainGalaxyProps {
 }
 
 export function usePresenter(props: Props) {
-    const { cloudData, storiesData, dimensions, selector } = props
+    const { cloudData, dimensions, selector } = props
     const galaxyBase = GALAXY_BASE
     // const archiefBestandDelen = useArchiefBestandDeel(zoomLevel1Data)
     const svgRef = useRef<SVGSVGElement | null>(null)
@@ -29,13 +31,12 @@ export function usePresenter(props: Props) {
         svgRef,
         dataDimensions,
         ...zoomEvents,
-        stories: storiesData,
         ...props,
         // archiefBestandDelen,
         conditions: {
             isZoom0: zoomEvents.zoomLevel ? [ZoomStates.Zoom0].includes(zoomEvents.zoomLevel) : false,
             isZoom1: zoomEvents.zoomLevel
-                ? [ZoomStates.Zoom0, ZoomStates.Zoom0ToZoom1].includes(zoomEvents.zoomLevel)
+                ? [ZoomStates.Zoom0, ZoomStates.Zoom1, ZoomStates.Zoom0ToZoom1].includes(zoomEvents.zoomLevel)
                 : false,
             isZoom1Stories: zoomEvents.zoomLevel
                 ? [ZoomStates.Zoom0, ZoomStates.Zoom0ToZoom1].includes(zoomEvents.zoomLevel)

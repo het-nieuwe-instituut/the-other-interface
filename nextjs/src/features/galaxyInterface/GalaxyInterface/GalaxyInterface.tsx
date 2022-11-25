@@ -56,6 +56,10 @@ export const GalaxyInterface: React.FC<{ data: unknown[] }> = () => {
             ZoomStates.Zoom1Stories,
             ZoomStates.Zoom1,
             ZoomStates.Zoom2ToZoom1,
+            ZoomStates.Zoom1ToZoom2,
+            ZoomStates.Zoom1ToZoom1Stories,
+            ZoomStates.Zoom1StoriesToZoom1,
+            ZoomStates.Zoom1StoriesToZoom5,
         ]
         if (!activeZoom) {
             return <p>not able to render anything</p>
