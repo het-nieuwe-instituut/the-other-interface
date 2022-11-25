@@ -30,21 +30,13 @@ export const GALAXY_BASE = 800
 const MainGalaxyProps: React.FC<MainGalaxyProps> = props => {
     const { t } = useLooseTypeSafeTranslation('homepage')
     const id = useId().replaceAll(':', '')
-    const {
-        svgRef,
-        setZoomLevel,
-
-        storiesSystemRef,
-        cloudData,
-        storiesData,
-        dimensions,
-        conditions,
-        archiveComponent,
-    } = usePresenter({
-        ...props,
-        id,
-        selector: id,
-    })
+    const { svgRef, storiesSystemRef, cloudData, storiesData, dimensions, conditions, archiveComponent } = usePresenter(
+        {
+            ...props,
+            id,
+            selector: id,
+        }
+    )
     const height = dimensions.height ?? 0
     const width = dimensions.width ?? 0
 
@@ -69,7 +61,16 @@ const MainGalaxyProps: React.FC<MainGalaxyProps> = props => {
                     justifyContent={'center'}
                     zIndex={1}
                 >
-                    <button onClick={() => undefined}>
+                    <button
+                        onClick={() =>
+                            store.dispatch(
+                                galaxyInterfaceActions.setActiveZoom({
+                                    activeZoom: ZoomStates.Zoom0ToZoom1,
+                                    afterAnimationState: ZoomStates.Zoom1,
+                                })
+                            )
+                        }
+                    >
                         <Text width="12.5rem">{t('nationalCollectionForDutchArchitectureAndUrbanPlanning')}</Text>
                     </button>
                 </Flex>
@@ -106,19 +107,27 @@ const MainGalaxyProps: React.FC<MainGalaxyProps> = props => {
                                         {conditions.isZoom1 && (
                                             <Box
                                                 onClick={() => {
-                                                    console.log('test')
-
-                                                    return store.dispatch(
-                                                        galaxyInterfaceActions.setActiveZoom({
-                                                            activeZoom: ZoomStates.Zoom1ToZoom2,
-                                                            activeZoomData: {
-                                                                to: {
-                                                                    translateX: -item.xFromCenter,
-                                                                    translateY: item.yFromCenter,
+                                                    if (item.name !== 'stories') {
+                                                        store.dispatch(
+                                                            galaxyInterfaceActions.setActiveZoom({
+                                                                activeZoom: ZoomStates.Zoom1ToZoom2,
+                                                                activeZoomData: {
+                                                                    to: {
+                                                                        translateX: -item.xFromCenter,
+                                                                        translateY: item.yFromCenter,
+                                                                    },
                                                                 },
-                                                            },
-                                                        })
-                                                    )
+                                                            })
+                                                        )
+                                                    }
+                                                    if (item.name === 'stories') {
+                                                        store.dispatch(
+                                                            galaxyInterfaceActions.setActiveZoom({
+                                                                activeZoom: ZoomStates.Zoom1ToZoom1Stories,
+                                                                afterAnimationState: ZoomStates.Zoom1Stories,
+                                                            })
+                                                        )
+                                                    }
                                                 }}
                                                 as="button"
                                                 width="100%"
@@ -167,7 +176,7 @@ const MainGalaxyProps: React.FC<MainGalaxyProps> = props => {
 
                         {cloudData.find(i => i.name === 'stories') && conditions.isZoom1 && (
                             <foreignObject x={GALAXY_BASE / 2 + 75} y={GALAXY_BASE / 2 - 60} width={200} height={100}>
-                                <button onClick={() => setZoomLevel(ZoomStates.Zoom1ToZoom1Stories)}>
+                                <button>
                                     <Text width="12.5rem">
                                         {cloudData.find(i => i.name === 'stories')?.numberOfInstances}
                                     </Text>

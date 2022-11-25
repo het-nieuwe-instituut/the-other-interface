@@ -1,9 +1,7 @@
-import { useCallback, useMemo, useRef } from 'react'
-import { useStore } from 'react-redux'
+import { useMemo, useRef } from 'react'
 
 import { Dimensions } from '../../../galaxy/types/galaxy'
 import { useD3ZoomEvents } from '../../newsharedhooks/useD3ZoomEvents'
-import { galaxyInterfaceActions } from '../../stores/galaxyInterface.store'
 import { ZoomStates } from '../../types/galaxy'
 import { GALAXY_BASE, MainGalaxyProps } from './Galaxy'
 import { useD3Simulation } from './hooks/useD3Simulation'

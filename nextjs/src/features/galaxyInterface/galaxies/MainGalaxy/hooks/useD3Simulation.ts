@@ -1,12 +1,12 @@
 import { useInitializeD3Simulation } from '@/features/shared/hooks/useInitializeD3Simulation'
 import * as d3 from 'd3'
 import { MutableRefObject, useEffect, useRef } from 'react'
-import { D3CollectionItem, initializeD3, ObjectPerTypeWithName } from '../d3/simulation'
-import { DataDimensions } from './useFitDataToDimensions'
+import { D3CollectionItem, DataDimensions, initializeD3 } from '../d3/simulation'
+import { CloudItem } from '../types'
 
 interface Props {
     svgRef: MutableRefObject<SVGSVGElement | null>
-    data: ObjectPerTypeWithName[]
+    data: CloudItem[]
     selector: string
     dataDimensions: DataDimensions[]
     galaxyBase: number

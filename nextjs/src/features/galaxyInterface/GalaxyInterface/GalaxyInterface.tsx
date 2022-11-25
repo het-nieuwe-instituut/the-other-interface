@@ -1,5 +1,8 @@
 import Breadcrumbs, { BreadcrumbsRenderModes } from '@/features/galaxy/components/Breadcrumbs/Breadcrumbs'
 import { ScrollToTop } from '@/features/pages/utils/utils'
+import { GalaxyFooter } from '@/features/shared/components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
+import { GalaxyTopRight } from '@/features/shared/components/GalaxyWrapper/GalaxyTopRight/GalaxyTopRight'
+import { GalaxyWrapper } from '@/features/shared/components/GalaxyWrapper/GalaxyWrapper'
 import useScroll from '@/features/shared/hooks/useScroll'
 import { Box, Button } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
@@ -9,7 +12,7 @@ import { DynamicGalaxyContainer } from './components/containers/DynamicGalaxyCon
 import { usePresenter } from './usePresenter'
 
 const DEBUG = true
-export const GalaxyInterface: React.FC<{ data: unknown[] }> = () => {
+export const GalaxyInterface: React.FC = () => {
     const { activeZoom, setActiveZoom } = usePresenter()
     const graphRef = useRef<HTMLDivElement | null>(null)
     const sizes = useSize(graphRef)
@@ -17,23 +20,21 @@ export const GalaxyInterface: React.FC<{ data: unknown[] }> = () => {
 
     return (
         <>
-            <Box
-                backgroundColor="graph"
-                height="800px"
-                ref={graphRef}
-                position={'sticky'}
-                top="-750px"
-                zIndex={40}
-                onClick={ScrollToTop}
-                cursor={scrollPosition >= 750 ? 'pointer' : 'cursor'}
-            >
-                {sizes?.height && sizes?.width && (
-                    <>
-                        <Breadcrumbs mode={BreadcrumbsRenderModes.STICKY} />
-                        <MemoizedGalaxyWrapper activeZoom={activeZoom} sizes={sizes} />
-                    </>
-                )}
-            </Box>
+            <Breadcrumbs
+                bg={scrollPosition >= 750 ? 'graph' : 'trasparent'}
+                onWrapperClick={ScrollToTop}
+                mode={scrollPosition >= 750 ? BreadcrumbsRenderModes.STICKY : BreadcrumbsRenderModes.DEFAULT}
+            />
+            <GalaxyWrapper renderTopRight={() => <GalaxyTopRight />} renderBottom={() => <GalaxyFooter />}>
+                <Box backgroundColor="graph" height="800px" ref={graphRef}>
+                    {sizes?.height && sizes?.width && (
+                        <Box position={'fixed'}>
+                            <MemoizedGalaxySwitch activeZoom={activeZoom} sizes={sizes} />
+                        </Box>
+                    )}
+                </Box>
+            </GalaxyWrapper>
+
             {DEBUG && (
                 <Box zIndex={100000}>
                     {Object.values(ZoomStates).map(t => {
@@ -49,7 +50,7 @@ export const GalaxyInterface: React.FC<{ data: unknown[] }> = () => {
     )
 }
 
-const GalaxyWrapper: React.FC<{ activeZoom: ZoomStates | null; sizes: ReturnType<typeof useSize> }> = props => {
+const GalaxySwitch: React.FC<{ activeZoom: ZoomStates | null; sizes: ReturnType<typeof useSize> }> = props => {
     const { activeZoom, sizes } = props
     const galaxyIncluded = [
         ZoomStates.Zoom0,
@@ -72,4 +73,4 @@ const GalaxyWrapper: React.FC<{ activeZoom: ZoomStates | null; sizes: ReturnType
     return null
 }
 
-const MemoizedGalaxyWrapper = memo(GalaxyWrapper)
+const MemoizedGalaxySwitch = memo(GalaxySwitch)

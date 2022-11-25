@@ -5,7 +5,7 @@ const Home = () => {
     return (
         <>
             <GalaxyInterface />
-            <Box px={{ xl: 6, base: 0 }}>
+            <Box px={{ xl: 6, base: 0 }} position={'relative'} zIndex={2} backgroundColor={'white'}>
                 <p>content</p>
                 <p>content</p>
                 <p>content</p>

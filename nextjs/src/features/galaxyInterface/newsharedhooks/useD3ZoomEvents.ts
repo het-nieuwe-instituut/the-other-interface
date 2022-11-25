@@ -73,10 +73,6 @@ export function useD3ZoomEvents(svgRef: MutableRefObject<SVGSVGElement | null>, 
                             initial: {
                                 scale: 1,
                             },
-                            after: {
-                                translateX: stories.x,
-                                translateY: stories.y,
-                            },
                         }),
                         scaleZoom({
                             d3Ref: nodeForeign,
@@ -89,29 +85,25 @@ export function useD3ZoomEvents(svgRef: MutableRefObject<SVGSVGElement | null>, 
                             initial: {
                                 scale: 1,
                             },
-                            after: {
-                                translateX: stories.x,
-                                translateY: stories.y,
-                            },
                         }),
                     ])
 
-                    cleanup = () => {
-                        scaleZoom({
-                            d3Ref: nodeForeign,
-                            initial: {
-                                translateX: stories.x,
-                                translateY: stories.y,
-                            },
-                        })
-                        scaleZoom({
-                            d3Ref: d3Stories,
-                            initial: {
-                                translateX: stories.x,
-                                translateY: stories.y,
-                            },
-                        })
-                    }
+                    // cleanup = () => {
+                    //     scaleZoom({
+                    //         d3Ref: nodeForeign,
+                    //         initial: {
+                    //             translateX: stories.x,
+                    //             translateY: stories.y,
+                    //         },
+                    //     })
+                    //     scaleZoom({
+                    //         d3Ref: d3Stories,
+                    //         initial: {
+                    //             translateX: stories.x,
+                    //             translateY: stories.y,
+                    //         },
+                    //     })
+                    // }
                 })
             }
             if (activeZoom === ZoomStates.Zoom1Stories) {
@@ -119,88 +111,92 @@ export function useD3ZoomEvents(svgRef: MutableRefObject<SVGSVGElement | null>, 
                     const stories = getStoriesSystemDimensions(dimensions)
                     const d3Stories = d3.select(storiesSystemRef.current)
                     const nodeForeign = d3Svg.select(`.circles`)
-                    await scaleZoom({
-                        d3Ref: d3Svg,
-                        initial: {
-                            scale: 1,
-                        },
-                    })
-                    await scaleZoom({
-                        d3Ref: d3Stories,
-                        to: {
-                            scale: 1.5,
-                            translateX: -stories.x,
-                            translateY: -stories.y,
-                        },
-                        initial: {
-                            scale: 1,
-                        },
-                    })
-                    await scaleZoom({
-                        d3Ref: nodeForeign,
-                        to: {
-                            scale: 1.5,
-                            translateX: -stories.x,
-                            translateY: -stories.y,
-                        },
-                        initial: {
-                            scale: 1,
-                        },
-                    })
-                    cleanup = () => {
+
+                    await Promise.all([
                         scaleZoom({
-                            d3Ref: nodeForeign,
-                            initial: {
-                                translateX: stories.x,
-                                translateY: stories.y,
+                            d3Ref: d3Svg,
+                            to: {
+                                scale: 1,
                             },
-                        })
+                        }),
                         scaleZoom({
                             d3Ref: d3Stories,
-                            initial: {
-                                translateX: stories.x,
-                                translateY: stories.y,
+
+                            to: {
+                                scale: 1.5,
+                                translateX: -stories.x,
+                                translateY: -stories.y,
                             },
-                        })
-                    }
+                        }),
+                        scaleZoom({
+                            d3Ref: nodeForeign,
+                            to: {
+                                scale: 1.5,
+                                translateX: -stories.x,
+                                translateY: -stories.y,
+                            },
+                        }),
+                    ])
+
+                    // cleanup = () => {
+                    //     console.log('cleanup')
+                    //     scaleZoom({
+                    //         d3Ref: nodeForeign,
+                    //         initial: {
+                    //             translateX: stories.x,
+                    //             translateY: stories.y,
+                    //         },
+                    //     })
+                    //     scaleZoom({
+                    //         d3Ref: d3Stories,
+                    //         initial: {
+                    //             translateX: stories.x,
+                    //             translateY: stories.y,
+                    //         },
+                    //     })
+                    // }
                 })
             }
             if (activeZoom === ZoomStates.Zoom1StoriesToZoom1) {
                 const stories = getStoriesSystemDimensions(dimensions)
                 const d3Stories = d3.select(storiesSystemRef.current)
                 const nodeForeign = d3Svg.select(`.circles`)
-                scaleZoom({
-                    d3Ref: d3Stories,
-                    to: {
-                        duration: 1500,
-                        scale: 1.5,
-                    },
-                    initial: {
-                        scale: 1,
-                        translateX: -stories.x,
-                        translateY: -stories.y,
-                    },
-                    after: {
-                        translateX: stories.x,
-                        translateY: stories.y,
-                    },
-                })
-                scaleZoom({
-                    d3Ref: nodeForeign,
-                    to: {
-                        duration: 1500,
-                        scale: 1,
-                    },
-                    initial: {
-                        scale: 1.5,
-                        translateX: stories.x,
-                        translateY: stories.y,
-                    },
-                    after: {
-                        translateX: -stories.x,
-                        translateY: -stories.y,
-                    },
-                })
+                await Promise.all([
+                    scaleZoom({
+                        d3Ref: d3Svg,
+                        initial: {
+                            scale: 1,
+                        },
+                    }),
+                    scaleZoom({
+                        d3Ref: d3Stories,
+                        initial: {
+                            scale: 1.5,
+                            translateX: -stories.x,
+                            translateY: -stories.y,
+                        },
+                        to: {
+                            duration: 1500,
+                            scale: 1,
+                            translateX: stories.x,
+                            translateY: stories.y,
+                        },
+                    }),
+                    scaleZoom({
+                        d3Ref: nodeForeign,
+                        initial: {
+                            scale: 1.5,
+                            translateX: -stories.x,
+                            translateY: -stories.y,
+                        },
+                        to: {
+                            duration: 1500,
+                            scale: 1,
+                            translateX: stories.x,
+                            translateY: stories.y,
+                        },
+                    }),
+                ])
             }
             if (activeZoom === ZoomStates.Zoom1ToZoom2) {
                 const item = store.getState().galaxyInterface.activeZoomData
@@ -292,7 +288,15 @@ async function scaleZoom(options: D3AnimationStyleProps) {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function transitionUtilityFn(d3Ref: d3.Selection<any, unknown, null, undefined>, to: AnimatedProps) {
-    const { opacity = 1, translateX = 0, translateY = 0, startTranslateX = 0, startTranslateY = 0, duration = 0 } = to
+    const {
+        opacity = 1,
+        translateX = 0,
+        translateY = 0,
+        startTranslateX = 0,
+        startTranslateY = 0,
+        duration = 0,
+        scale = 1,
+    } = to
     return d3Ref
         .transition()
         .duration(duration)
@@ -304,7 +308,7 @@ function transitionUtilityFn(d3Ref: d3.Selection<any, unknown, null, undefined>,
                 ',' +
                 startTranslateY +
                 ')scale(' +
-                to.scale +
+                scale +
                 ')translate(' +
                 translateX +
                 ',' +
