@@ -3,7 +3,7 @@ import { ScrollToTop } from '@/features/pages/utils/utils'
 import useScroll from '@/features/shared/hooks/useScroll'
 import { Box, Button } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
-import { useRef } from 'react'
+import { memo, useRef } from 'react'
 import { ZoomStates } from '../types/galaxy'
 import { DynamicGalaxyContainer } from './components/containers/DynamicGalaxyContainer'
 import { usePresenter } from './usePresenter'
@@ -30,7 +30,7 @@ export const GalaxyInterface: React.FC<{ data: unknown[] }> = () => {
                 {sizes?.height && sizes?.width && (
                     <>
                         <Breadcrumbs mode={BreadcrumbsRenderModes.STICKY} />
-                        {renderContent()}
+                        <MemoizedGalaxyWrapper activeZoom={activeZoom} sizes={sizes} />
                     </>
                 )}
             </Box>
@@ -47,25 +47,29 @@ export const GalaxyInterface: React.FC<{ data: unknown[] }> = () => {
             )}
         </>
     )
-
-    function renderContent() {
-        const galaxyIncluded = [
-            ZoomStates.Zoom0,
-            ZoomStates.Zoom0ToZoom1,
-            ZoomStates.Zoom1ToZoom0,
-            ZoomStates.Zoom1Stories,
-            ZoomStates.Zoom1,
-            ZoomStates.Zoom2ToZoom1,
-            ZoomStates.Zoom1ToZoom2,
-            ZoomStates.Zoom1ToZoom1Stories,
-            ZoomStates.Zoom1StoriesToZoom1,
-            ZoomStates.Zoom1StoriesToZoom5,
-        ]
-        if (!activeZoom) {
-            return <p>not able to render anything</p>
-        }
-        if (galaxyIncluded.includes(activeZoom)) {
-            return <DynamicGalaxyContainer dimensions={{ height: 800, width: sizes?.width }} />
-        }
-    }
 }
+
+const GalaxyWrapper: React.FC<{ activeZoom: ZoomStates | null; sizes: ReturnType<typeof useSize> }> = props => {
+    const { activeZoom, sizes } = props
+    const galaxyIncluded = [
+        ZoomStates.Zoom0,
+        ZoomStates.Zoom0ToZoom1,
+        ZoomStates.Zoom1ToZoom0,
+        ZoomStates.Zoom1Stories,
+        ZoomStates.Zoom1,
+        ZoomStates.Zoom2ToZoom1,
+        ZoomStates.Zoom1ToZoom2,
+        ZoomStates.Zoom1ToZoom1Stories,
+        ZoomStates.Zoom1StoriesToZoom1,
+        ZoomStates.Zoom1StoriesToZoom5,
+    ]
+    if (!activeZoom) {
+        return <p>not able to render anything</p>
+    }
+    if (galaxyIncluded.includes(activeZoom)) {
+        return <DynamicGalaxyContainer dimensions={{ height: 800, width: sizes?.width }} />
+    }
+    return null
+}
+
+const MemoizedGalaxyWrapper = memo(GalaxyWrapper)
