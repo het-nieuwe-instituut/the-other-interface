@@ -1,6 +1,6 @@
 import { zoom4QueryTask } from '@/features/galaxy/Collections/zoom4QueryTask'
 import ApiClient from '@/features/graphql/api'
-import { LandingpageCollectionProvider } from '@/features/pages/containers/LandingpageCollectionContainer/LadingpageCollectionContext'
+import { LandingpageCollectionProvider } from '@/features/pages/containers/LandingpageCollectionContainer/LandingpageCollectionContext'
 import { LandingCollectionContainer } from '@/features/pages/containers/LandingpageCollectionContainer/LandingCollectionContainer'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import { LandingPageFilterQueryParams } from '../[filter]'

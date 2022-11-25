@@ -1,4 +1,4 @@
-import LandingpageCollectionContext from '@/features/pages/containers/LandingpageCollectionContainer/LadingpageCollectionContext'
+import LandingpageCollectionContext from '@/features/pages/containers/LandingpageCollectionContainer/LandingpageCollectionContext'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { randomNumberBetweenPoints } from '@/features/shared/utils/numbers'
 import PaginationLeft from '@/icons/arrows/pagination-left.svg'
