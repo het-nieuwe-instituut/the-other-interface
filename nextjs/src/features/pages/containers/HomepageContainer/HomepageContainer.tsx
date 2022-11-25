@@ -26,16 +26,6 @@ export type Props = {
 }
 
 export const HomepageContainer = (props: Props) => {
-    // const { locale } = useRouter()
-    // const { data, loading, error } = useHomepageQuery({ variables: { locale } })
-    // if (loading) {
-    //     return <Loader />
-    // }
-
-    // if (error) {
-    //     return <p>{error.message}</p>
-    // }
-
     return (
         <HomepageProvider zoomLevel1={props.zoomLevel1Data}>
             <Homepage data={props.homepage} />
@@ -45,7 +35,7 @@ export const HomepageContainer = (props: Props) => {
 
 const Homepage: React.FC<{ data?: HomepageQuery }> = ({ data }) => {
     const graphRef = useRef<HTMLDivElement | null>(null)
-    const sizes = useSize(graphRef) ?? {height: 1000, width: 1000} // to have ssr
+    const sizes = useSize(graphRef)
     const theme = useTheme()
 
     const { scrollPosition } = useScroll()

@@ -9,6 +9,7 @@ import '../styles/globals.css'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import 'keen-slider/keen-slider.min.css'
 import Script from 'next/script'
+import ErrorBoundaryProvider from '@/features/modules/components/ErrorBoundary/ErrorBoundary'
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (
@@ -36,7 +37,9 @@ function MyApp({ Component, pageProps }: AppProps) {
                 <ThemeProvider theme={theme}>
                     <ChakraProvider theme={theme}>
                         <Fonts />
-                        <Component {...pageProps} />
+                        <ErrorBoundaryProvider>
+                            <Component {...pageProps} />
+                        </ErrorBoundaryProvider>
                     </ChakraProvider>
                 </ThemeProvider>
             </Provider>
