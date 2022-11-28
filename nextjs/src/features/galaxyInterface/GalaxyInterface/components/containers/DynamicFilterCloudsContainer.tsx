@@ -1,5 +1,6 @@
 import { SupportedLandingPages } from '@/features/galaxy/PaginatedFilterClouds/PaginatedFilterCloudsContainer'
 import { Dimensions } from '@/features/galaxy/types/galaxy'
+import { zoom2ToFilterCloudData } from '@/features/galaxyInterface/galaxies/FilterClouds/mappers/zoom2ToFilterCloudData'
 import { uniqueId } from 'lodash'
 import dynamic from 'next/dynamic'
 import { ZoomLevel2Query } from 'src/generated/graphql'
@@ -18,7 +19,7 @@ const zoom2Stub: ZoomLevel2Query = {
 export const DynamicFilterCloudsContainer: React.FC<{ dimensions: Dimensions }> = ({ dimensions }) => {
     return (
         <DynamicGalaxyNoSsr
-            zoomLevel2={zoom2Stub.zoomLevel2}
+            filterCloudData={zoom2ToFilterCloudData(zoom2Stub)}
             type={SupportedLandingPages.Publications}
             dimensions={dimensions}
         />

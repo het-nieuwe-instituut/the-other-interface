@@ -200,6 +200,22 @@ export function useD3ZoomEvents(svgRef: MutableRefObject<SVGSVGElement | null>, 
                     ])
                 })
             }
+            if (activeZoom === ZoomStates.ZoomOutToZoom1) {
+                animationWrapper(store, async () => {
+                    await scaleZoom({
+                        d3Ref: d3Svg,
+                        to: {
+                            duration: 1500,
+                            scale: 1,
+                            opacity: 1,
+                        },
+                        initial: {
+                            scale: 20,
+                            opacity: 0,
+                        },
+                    })
+                })
+            }
             if (activeZoom === ZoomStates.Zoom1ToZoom2) {
                 animationWrapper(store, async () => {
                     const item = store.getState().galaxyInterface.activeZoomData
@@ -221,12 +237,12 @@ export function useD3ZoomEvents(svgRef: MutableRefObject<SVGSVGElement | null>, 
                         d3Ref: d3Svg,
                         to: {
                             duration: 1500,
-                            scale: 1,
-                            opacity: 1,
+                            scale: 0,
+                            opacity: 0,
                         },
                         initial: {
-                            scale: 20,
-                            opacity: 0,
+                            scale: 1,
+                            opacity: 1,
                         },
                     })
                 })
@@ -274,6 +290,7 @@ async function animationWrapper(store: ReturnType<typeof useStore>, animate: () 
         store.dispatch(
             galaxyInterfaceActions.setActiveZoom({
                 activeZoom: store.getState().galaxyInterface.afterAnimationState ?? null,
+                afterAnimationState: null,
             })
         )
     }

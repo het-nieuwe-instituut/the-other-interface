@@ -1,43 +1,23 @@
 import { useFitDataToDimensions } from '@/features/galaxy/hooks/useFitToDataToDimensions'
-import { useZoomToD3Element } from '@/features/galaxy/hooks/useZoomToD3Element'
-import { randomNumberBetweenPoints } from '@/features/shared/utils/numbers'
-import { useRouter } from 'next/router'
-import { useCallback, useMemo } from 'react'
-import { ZoomLevel2Query } from 'src/generated/graphql'
+import { useD3ZoomEvents } from '../../newsharedhooks/useD3ZoomEvents'
+import { Dimensions } from '../../types/galaxy'
 import { useD3Simulation } from './hooks/useD3Simulation'
-import { Dimensions, FilterType } from './types'
+import { FilterCloudItem } from './types'
 
-export function usePresenter(dimensions: Dimensions, selector: string, zoom2: ZoomLevel2Query['zoomLevel2']) {
-    const router = useRouter()
-    const objectsPerTypeWithIds = useMemo(
-        () =>
-            zoom2.map(item => ({
-                ...item,
-                name: item?.filter,
-                numberOfInstances: randomNumberBetweenPoints(60, 250),
-            })),
-        [zoom2]
-    )
-
+export function usePresenter(dimensions: Dimensions, selector: string, filterCloudData: FilterCloudItem[]) {
     const dataDimensions = useFitDataToDimensions(
         dimensions,
-        objectsPerTypeWithIds,
+        filterCloudData,
         d => d.name,
         d => d.numberOfInstances
     )
-    const { svgRef } = useD3Simulation(dimensions, objectsPerTypeWithIds, selector, dataDimensions)
-    const navigateTo = useCallback(
-        async (d: d3.SimulationNodeDatum & FilterType) => {
-            router.push(`${router.query.slug}/${d.id}`)
-        },
-        [router]
-    )
-    const zoomEvents = useZoomToD3Element<FilterType>(svgRef, dimensions, `.foreign-${selector}`, navigateTo)
+    const { svgRef } = useD3Simulation(dimensions, filterCloudData, selector, dataDimensions)
+    const zoomEvents = useD3ZoomEvents(svgRef, dimensions)
 
     return {
         svgRef,
         dataDimensions,
         ...zoomEvents,
-        objectsPerTypeWithIds,
+        filterCloudData,
     }
 }

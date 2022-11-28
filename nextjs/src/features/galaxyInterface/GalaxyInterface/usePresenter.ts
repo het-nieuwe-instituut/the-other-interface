@@ -12,9 +12,6 @@ export const usePresenter = () => {
 
     return {
         activeZoom: activeZoom,
-        setActiveZoom: (zoom: ZoomStates) =>
-            store.dispatch(
-                galaxyInterfaceActions.setActiveZoom({ activeZoom: zoom, afterAnimationState: ZoomStates.Zoom1 })
-            ),
+        setActiveZoom: (zoom: ZoomStates) => store.dispatch(galaxyInterfaceActions.setActiveZoom({ activeZoom: zoom })),
     }
 }

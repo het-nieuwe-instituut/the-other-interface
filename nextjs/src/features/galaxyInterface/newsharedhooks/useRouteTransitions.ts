@@ -26,6 +26,7 @@ export function useRouteTransitions() {
             })
             return
         }
+
         if (activeZoom === ZoomStates.Zoom2Initial) {
             router.push('/galaxyInterfaceLanding')
             return

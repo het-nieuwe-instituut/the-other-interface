@@ -57,13 +57,18 @@ const mainGalaxyIncluded = [
     ZoomStates.Zoom1ToZoom0,
     ZoomStates.Zoom1Stories,
     ZoomStates.Zoom1,
-    ZoomStates.Zoom2ToZoom1,
     ZoomStates.Zoom1ToZoom2,
     ZoomStates.Zoom1ToZoom1Stories,
     ZoomStates.Zoom1StoriesToZoom1,
     ZoomStates.Zoom1StoriesToZoom5,
+    ZoomStates.ZoomOutToZoom1,
 ]
-const landingGalaxyIncluded = [ZoomStates.Zoom2, ZoomStates.Zoom2Initial, ZoomStates.Zoom2ToZoom3]
+const landingGalaxyIncluded = [
+    ZoomStates.Zoom2,
+    ZoomStates.Zoom2Initial,
+    ZoomStates.Zoom2ToZoom3,
+    ZoomStates.Zoom2ToZoom1,
+]
 
 const GalaxySwitch: React.FC<{ activeZoom: ZoomStates | null; sizes: ReturnType<typeof useSize> }> = props => {
     const { activeZoom, sizes } = props

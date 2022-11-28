@@ -21,7 +21,9 @@ export enum PossibleFilters {
     ByLocation = 'byLocation',
 }
 
-export interface Dimensions {
-    height?: number | null
-    width?: number | null
+export interface FilterCloudItem {
+    name: string
+    numberOfInstances: number
+    filter: string
+    id: string
 }
