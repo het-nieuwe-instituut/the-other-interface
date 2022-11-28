@@ -247,6 +247,21 @@ export function useD3ZoomEvents(svgRef: MutableRefObject<SVGSVGElement | null>, 
                     })
                 })
             }
+            if (activeZoom === ZoomStates.Zoom2ToZoom3) {
+                animationWrapper(store, async () => {
+                    const item = store.getState().galaxyInterface.activeZoomData
+                    await scaleZoom({
+                        d3Ref: d3Svg,
+                        to: {
+                            duration: 1500,
+                            scale: 20,
+                            opacity: 0,
+                            ...item?.to,
+                        },
+                        initial: { scale: 1 },
+                    })
+                })
+            }
         }
 
         init()

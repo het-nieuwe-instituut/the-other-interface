@@ -1,14 +1,15 @@
 import { Circle } from '@/features/galaxy/components/Circle'
+import { SupportedLandingPages } from '@/features/galaxy/FilterClouds/FilterCloudsContainer'
 import { getGalaxyTypeByTranslationsKey } from '@/features/galaxy/utils/translations'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { useStore } from '@/features/shared/hooks/useStore'
 import { Box, Button, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { useId } from 'react'
+import { memo, useId } from 'react'
 import { LandingPageQueryParams } from 'src/pages/landingpage/[slug]'
 import { galaxyInterfaceActions } from '../../stores/galaxyInterface.store'
 import { Dimensions, ZoomStates } from '../../types/galaxy'
-import { SupportedLandingPages } from './FilterCloudsContainer'
+import { zoomByD3Data } from '../../utils/navigation'
 import { FilterCloudItem } from './types'
 import { usePresenter } from './usePresenter'
 
@@ -27,7 +28,7 @@ const FilterClouds: React.FunctionComponent<Props> = props => {
     const router = useRouter()
     const queryParams = router.query as unknown as LandingPageQueryParams
     const id = useId().replaceAll(':', '')
-    const { svgRef, filterCloudData, zoomLevel } = usePresenter(dimensions, id, props.filterCloudData)
+    const { svgRef, clonedFilterData, zoomLevel } = usePresenter(dimensions, id, props.filterCloudData)
     const { t } = useTypeSafeTranslation('common')
 
     return (
@@ -50,7 +51,7 @@ const FilterClouds: React.FunctionComponent<Props> = props => {
                 ref={svgRef}
                 viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
             >
-                {filterCloudData?.map((item, index, array) => {
+                {clonedFilterData?.map((item, index, array) => {
                     return (
                         <Circle
                             key={`${index}-${array.length}`}
@@ -67,6 +68,7 @@ const FilterClouds: React.FunctionComponent<Props> = props => {
                                 display="flex"
                                 alignItems="center"
                                 justifyContent="center"
+                                onClick={() => zoomByD3Data({ dimensions, store, d3x: item.x, d3y: item.y })}
                             >
                                 {ZoomStates.Zoom2ToZoom3 !== zoomLevel && (
                                     <Box>
@@ -87,4 +89,5 @@ const FilterClouds: React.FunctionComponent<Props> = props => {
     )
 }
 
-export default FilterClouds
+export const MemoizedFilterClouds = memo(FilterClouds)
+export default MemoizedFilterClouds

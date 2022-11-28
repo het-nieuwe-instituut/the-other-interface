@@ -16,6 +16,15 @@ interface Options {
     duration?: number
 }
 
+export function initializeD3AnimateOpacity(
+    nodes: d3.Selection<d3.BaseType, D3CollectionItem, SVGSVGElement | null, unknown>
+) {
+    nodes.attr('opacity', 0).style('transform', 'scale(0)')
+    nodes.style('transform-origin', 'center')
+    nodes.transition().duration(600).style('transform', 'scale(1)').attr('opacity', 1)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+}
+
 export function initializeD3(options: Options) {
     const { simulation, nodes, dataDimensions, dimensions, data } = options
     nodes
@@ -23,7 +32,7 @@ export function initializeD3(options: Options) {
         .attr('height', (d: D3CollectionItem) => getTakeSpaceFromDataDimensions(dataDimensions, d) * 2)
 
     simulation
-        ?.force('charge', d3.forceManyBody().strength(0.1))
+        ?.force('charge', d3.forceManyBody().strength(1))
         .force('center', d3.forceCenter((dimensions.width ?? 0) / 2, (dimensions.height ?? 0) / 2))
 
     return simulation?.nodes(data as D3CollectionItem[]).on('tick', () => {
@@ -35,7 +44,7 @@ function getDataDimension(dataDimensions: DataDimension[], d: Partial<D3Collecti
     return dataDimensions?.find(item => item.id === d.name)
 }
 
-function getTakeSpaceFromDataDimensions(dataDimensions: DataDimension[], d: Partial<D3CollectionItem>) {
+export function getTakeSpaceFromDataDimensions(dataDimensions: DataDimension[], d: Partial<D3CollectionItem>) {
     const val = getDataDimension(dataDimensions, d)
 
     if (!val) {

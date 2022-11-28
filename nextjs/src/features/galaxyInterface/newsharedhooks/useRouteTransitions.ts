@@ -31,5 +31,10 @@ export function useRouteTransitions() {
             router.push('/galaxyInterfaceLanding')
             return
         }
+
+        if (activeZoom === ZoomStates.Zoom3) {
+            router.push('/galaxyInterface3')
+            return
+        }
     }, [activeZoom])
 }
