@@ -112,7 +112,15 @@ export class ZoomLevel5Service {
             .map(d => ({
                 id: TriplyUtils.getIdFromUri(d.externObj),
                 type: relatedObjectsType,
-                ...this.getRecordSpecificFieldsFromRelatedObject(relatedObjectsType, d),
+                name: d.label,
+                pidWorkURI: d.pidWorkURI,
+                profession: d.profession,
+                professionLabel: d.professionLabel,
+                birthDate: d.birthDate,
+                availability: d.availability,
+                date: d.date,
+                creator: d.creator,
+                creatorLabel: d.creatorLabel,
             }))
     }
 
@@ -214,33 +222,6 @@ export class ZoomLevel5Service {
             type: EntityNames.Stories,
             total: res.stories?.data.length || 0,
             randomRelations: randomStories,
-        }
-    }
-
-    private getRecordSpecificFieldsFromRelatedObject(type: EntityNames, d: ZoomLevel5RelatedObjectData) {
-        switch (type) {
-            case EntityNames.Archives:
-            case EntityNames.Objects:
-            case EntityNames.Publications:
-            case EntityNames.People:
-                return {
-                    name: d.label,
-                    pidWorkURI: d.pidWorkURI,
-                    profession: d.profession,
-                    professionLabel: d.professionLabel,
-                    birthDate: d.birthDate,
-                    availability: d.availability,
-                    date: d.date,
-                    creator: d.creator,
-                    creatorLabel: d.creatorLabel,
-                }
-            case EntityNames.Stories:
-            // TODO: waiting on triply to implement
-            case EntityNames.External:
-            // TODO: waiting on triply to implement
-            case EntityNames.Media:
-            default:
-                throw new Error('not yet implemented')
         }
     }
 
