@@ -3,8 +3,8 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "ENV=staging next dev",
-        "build": "next build",
+        "dev": "ENV=test next dev",
+        "build": "ENV=production next build",
         "start": "next start",
         "lint": "next lint",
         "lint-staged": "lint-staged",
