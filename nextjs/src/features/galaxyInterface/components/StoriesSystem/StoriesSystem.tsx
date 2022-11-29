@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Box } from '@chakra-ui/react'
 import Link from 'next/link'
-import React, { useEffect } from 'react'
+import React, { memo, useEffect } from 'react'
 import { StoriesItem } from '../../galaxies/MainGalaxy/types'
 import { StoryDataPoint, usePresenter } from './usePresenter'
 
@@ -81,3 +81,4 @@ function renderDot(
         </g>
     )
 }
+export const MemoizedStoriesSystem = memo(StoriesSystem)

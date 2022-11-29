@@ -5,7 +5,7 @@ import React, { forwardRef, useId } from 'react'
 import { Circle } from '../../../galaxy/components/Circle'
 import { GalaxyShadowBackground } from '../../../galaxy/components/GalaxyShadowBackground'
 import { Dimensions } from '../../../galaxy/types/galaxy'
-import { StoriesSystem } from '../../components/StoriesSystem/StoriesSystem'
+import { MemoizedStoriesSystem } from '../../components/StoriesSystem/StoriesSystem'
 import { galaxyInterfaceActions } from '../../stores/galaxyInterface.store'
 import { ZoomStates } from '../../types/galaxy'
 import { mapArchiveComponent } from './mappers/mapArchiveComponent'
@@ -88,7 +88,10 @@ const MainGalaxyProps: React.FC<MainGalaxyProps> = props => {
                     <>
                         {storiesData?.length && (
                             <StoriesSystemPosition dimensions={dimensions} ref={storiesSystemRef}>
-                                <StoriesSystem disableLinkAndHover={conditions.isZoom1Stories} data={storiesData} />
+                                <MemoizedStoriesSystem
+                                    disableLinkAndHover={conditions.isZoom1Stories}
+                                    data={storiesData}
+                                />
                             </StoriesSystemPosition>
                         )}
 

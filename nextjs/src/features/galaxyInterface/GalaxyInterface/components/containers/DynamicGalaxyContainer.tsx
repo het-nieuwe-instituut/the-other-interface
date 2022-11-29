@@ -4,6 +4,7 @@ import { mappedStoriesToCloudStoriesItems } from '@/features/galaxyInterface/gal
 import { mapZoomLevel1DataTocloudData } from '@/features/galaxyInterface/galaxies/MainGalaxy/mappers/mapZoomLevel1DataTocloudData'
 import { times, uniqueId } from 'lodash'
 import dynamic from 'next/dynamic'
+import { useMemo } from 'react'
 import { EntityNames, StoriesWithoutRelationsQuery } from 'src/generated/graphql'
 
 export const DynamicGalaxyNoSsr = dynamic(() => import('../../../galaxies/MainGalaxy/Galaxy'), {
@@ -68,12 +69,18 @@ const storiesWithoutRelationsQuery: StoriesWithoutRelationsQuery = {
     },
 }
 export const DynamicGalaxyContainer: React.FC<{ dimensions: Dimensions }> = ({ dimensions }) => {
-    const mappedCloudItems = mapZoomLevel1DataTocloudData(zoom1Stub)
+    const cloudData = useMemo(() => mapZoomLevel1DataTocloudData(zoom1Stub), [])
+    const storiesData = useMemo(
+        () => mappedStoriesToCloudStoriesItems(storiesWithoutRelationsQuery, cloudData),
+        [cloudData]
+    )
+    const archiveComponent = useMemo(() => mapArchiveComponent(zoom1Stub), [])
+
     return (
         <DynamicGalaxyNoSsr
-            cloudData={mappedCloudItems}
-            storiesData={mappedStoriesToCloudStoriesItems(storiesWithoutRelationsQuery, mappedCloudItems)}
-            archiveComponent={mapArchiveComponent(zoom1Stub)}
+            cloudData={cloudData}
+            storiesData={storiesData}
+            archiveComponent={archiveComponent}
             dimensions={dimensions}
         />
     )
