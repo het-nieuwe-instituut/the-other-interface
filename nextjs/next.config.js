@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /** @type {import('next').NextConfig} */
 const nextTranslate = require('next-translate')
-const { parsed } = require('dotenv').config({ path: `.env.${process.env.ENV}` })
+const { parsed } = require('dotenv').config({ path: `.env.${process.env.ENV ?? 'production'}` })
 
 const nextConfig = {
     webpack(config) {
