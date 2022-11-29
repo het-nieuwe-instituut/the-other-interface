@@ -36,6 +36,9 @@ export class ZoomLevel4Type {
 
     @Field(() => String, { nullable: true })
     public imageLabel: string | null
+
+    @Field(() => String, { nullable: true })
+    public pidWorkURI?: string | null
 }
 
 @ObjectType()

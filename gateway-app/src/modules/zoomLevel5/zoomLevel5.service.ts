@@ -36,6 +36,14 @@ interface ZoomLevel5RelatedObjectData {
     graph: string // i.e. https://collectiedata.hetnieuweinstituut.nl/graph/people
     label: string
     externObj: string // i.e. https://collectiedata.hetnieuweinstituut.nl/id/people/25376
+    pidWorkURI: string | null
+    profession: string | null
+    professionLabel: string | null
+    birthDate: string | null
+    availability: string | null
+    date: string | null
+    creator: string | null
+    creatorLabel: string | null
 }
 
 // key is relation graph
@@ -104,7 +112,15 @@ export class ZoomLevel5Service {
             .map(d => ({
                 id: TriplyUtils.getIdFromUri(d.externObj),
                 type: relatedObjectsType,
-                ...this.getRecordSpecificFieldsFromRelatedObject(relatedObjectsType, d),
+                name: d.label,
+                pidWorkURI: d.pidWorkURI,
+                profession: d.profession,
+                professionLabel: d.professionLabel,
+                birthDate: d.birthDate,
+                availability: d.availability,
+                date: d.date,
+                creator: d.creator,
+                creatorLabel: d.creatorLabel,
             }))
     }
 
@@ -206,29 +222,6 @@ export class ZoomLevel5Service {
             type: EntityNames.Stories,
             total: res.stories?.data.length || 0,
             randomRelations: randomStories,
-        }
-    }
-
-    private getRecordSpecificFieldsFromRelatedObject(type: EntityNames, d: ZoomLevel5RelatedObjectData) {
-        switch (type) {
-            case EntityNames.People:
-                return {
-                    name: d.label,
-                    // these are not yet returned from triply endpoint
-                    // birthDate: d.birthDate,
-                    // profession: d.profession,
-                }
-            case EntityNames.Archives:
-            // TODO: waiting on triply to implement
-            case EntityNames.Objects:
-            // TODO: waiting on triply to implement
-            case EntityNames.Publications:
-            // TODO: waiting on triply to implement
-            case EntityNames.Stories:
-            case EntityNames.External:
-            case EntityNames.Media:
-            default:
-                throw new Error('not yet implemented')
         }
     }
 

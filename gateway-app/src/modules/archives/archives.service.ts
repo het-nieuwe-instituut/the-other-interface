@@ -25,6 +25,7 @@ interface ArchivesZoomLevel4Data {
     title: string | null
     firstImage: string | null
     imageLabel: string | null
+    pidWorkURI: string | null
 }
 
 export enum ArchivesZoomLevel5Types {
@@ -74,6 +75,7 @@ export interface ArchivesOtherDetailZoomLevel5Data {
     right?: string
     rightLabel?: string
     permanentLink?: string
+    pidWorkURI?: string
 }
 
 type ArchivesZoomLeve5DataType = ArchivesOtherDetailZoomLevel5Data | ArchivesFondsDetailZoomLevel5Data
@@ -201,6 +203,7 @@ export class ArchivesService {
                     title: res.title,
                     firstImage: res.firstImage,
                     imageLabel: res.imageLabel,
+                    pidWorkUri: res.pidWorkURI,
                 }
             }),
         }
