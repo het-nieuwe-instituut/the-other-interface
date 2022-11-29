@@ -13,7 +13,8 @@ const getApiService = (headers?: IncomingHttpHeaders) => {
         headers: headers as Record<string, string>
     } : undefined
 
-    const client = new GraphQLClient(process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT ?? '',  options)
+
+    const client = new GraphQLClient(process.env.parsed.NEXT_PUBLIC_GRAPHQL_ENDPOINT ?? '',  options)
 
     ApiClient = getSdk(client)
 
