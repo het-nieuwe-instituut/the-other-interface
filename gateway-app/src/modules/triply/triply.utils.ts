@@ -1,3 +1,5 @@
+import { ArchivesZoomLevel5Types } from '../archives/archives.service'
+import { PublicationsZoomLevel5Types } from '../publications/publications.service'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 
 export interface ZoomLevel3ReturnData {
@@ -6,6 +8,14 @@ export interface ZoomLevel3ReturnData {
     label: string | null
     iri: string
 }
+
+export type TriplyRecordType =
+    | {
+          type: EntityNames.People | EntityNames.Objects
+          id: string
+      }
+    | { type: EntityNames.Publications; id: string; publicationType: PublicationsZoomLevel5Types }
+    | { type: EntityNames.Media; id: string; archiveType: ArchivesZoomLevel5Types }
 
 export class TriplyUtils {
     public static getExternalEntityNameFromUri(uri: string) {
