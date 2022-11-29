@@ -23,7 +23,7 @@ jobs:
       - name: Docker Login
         run: echo $CR_PAT | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       - name: Build the Nextjs Docker image
-        run: cd nextjs && docker build . --file Dockerfile --tag ghcr.io/lifelynl/hni-toi-nextjs:${{ github.sha }}
+        run: cd nextjs && docker build . --build-arg ENV=staging --file Dockerfile --tag ghcr.io/lifelynl/hni-toi-nextjs:${{ github.sha }}-staging
       - name: Build the Gateway-app Docker image
         run: cd gateway-app && docker build . --file Dockerfile --tag ghcr.io/lifelynl/hni-toi-gateway-app:${{ github.sha }}
       - name: Build the Strapi Docker image
@@ -31,5 +31,5 @@ jobs:
       - name: Push all Docker images
         run: |
           docker push ghcr.io/lifelynl/hni-toi-strapi:${{ github.sha }}
-          docker push ghcr.io/lifelynl/hni-toi-nextjs:${{ github.sha }}
+          docker push ghcr.io/lifelynl/hni-toi-nextjs:${{ github.sha }}-staging
           docker push ghcr.io/lifelynl/hni-toi-gateway-app:${{ github.sha }}

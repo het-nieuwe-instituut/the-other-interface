@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /** @type {import('next').NextConfig} */
 const nextTranslate = require('next-translate')
+const { parsed } = require('dotenv').config({ path: `.env.${process.env.ENV ?? 'production'}` })
 
 const nextConfig = {
     webpack(config) {
@@ -28,6 +29,9 @@ const nextConfig = {
         ],
     },
     output: 'standalone',
+    env: {
+        parsed
+    },
     serverRuntimeConfig: {
         NEXT_PUBLIC_REACT_APP_IMAGE_BASE_URL: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
     },
