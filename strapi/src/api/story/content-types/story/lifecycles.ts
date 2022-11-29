@@ -12,6 +12,14 @@ export default {
             event.params.data.slug = await getSlug(event)
         }
     },
+
+    async afterUpdate(event) {
+        if (event.params.data.triplyRecords !== undefined && event.result.localizations?.length) {
+            const data = { triplyRecords: event.params.data.triplyRecords }
+        
+            event.result.localizations.forEach(s => strapi.entityService.update('api::story.story', s.id, { data }))
+      	}
+    }
 }
 
 async function getSlug(event) {
