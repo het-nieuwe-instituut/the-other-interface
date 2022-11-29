@@ -1,12 +1,4 @@
-import {
-    ArgsType,
-    createUnionType,
-    Field,
-    IntersectionType,
-    ObjectType,
-    PickType,
-    registerEnumType,
-} from '@nestjs/graphql'
+import { ArgsType, Field, IntersectionType, ObjectType, PickType, registerEnumType } from '@nestjs/graphql'
 import { IsOptional, IsString } from 'class-validator'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { PoepleZoomLevel5DetailType } from '../people/people.type'
@@ -93,33 +85,41 @@ export class ZoomLevel5RelatedPublicationType extends IntersectionType(
     public type: EntityNames
 }
 
-export const ZoomLevel5RelatedRecordType = createUnionType({
-    name: 'ZoomLevel5RelatedRecordType',
-    types: () =>
-        [
-            ZoomLevel5RelatedPeopleType,
-            ZoomLevel5RelatedArchiveType,
-            ZoomLevel5RelatedObjectType,
-            ZoomLevel5RelatedPublicationType,
-        ] as const,
-    resolveType(baseType: BaseZoomLevel5RelatedRecordType) {
-        switch (baseType.type) {
-            case EntityNames.People:
-                return ZoomLevel5RelatedPeopleType
-            case EntityNames.Archives:
-                return ZoomLevel5RelatedArchiveType
-            case EntityNames.Objects:
-                return ZoomLevel5RelatedObjectType
-            case EntityNames.Publications:
-                return ZoomLevel5RelatedPublicationType
-            case EntityNames.Stories:
-            case EntityNames.External:
-            case EntityNames.Media:
-            default:
-                throw new Error('not yet implemented')
-        }
-    },
-})
+@ObjectType()
+export class ZoomLevel5RelatedRecordType {
+    @Field(() => String)
+    public id: string
+
+    @Field(() => EntityNames)
+    public type: EntityNames
+
+    @Field(() => String, { nullable: true })
+    public name?: string
+
+    @Field(() => String, { nullable: true })
+    public pidWorkURI?: string
+
+    @Field(() => String, { nullable: true })
+    public profession?: string
+
+    @Field(() => String, { nullable: true })
+    public professionLabel?: string
+
+    @Field(() => String, { nullable: true })
+    public birthDate?: string
+
+    @Field(() => String, { nullable: true })
+    public availability?: string
+
+    @Field(() => String, { nullable: true })
+    public date?: string
+
+    @Field(() => String, { nullable: true })
+    public creator?: string
+
+    @Field(() => String, { nullable: true })
+    public creatorLabel?: string
+}
 
 @ArgsType()
 export class ZoomLevel5Args {
