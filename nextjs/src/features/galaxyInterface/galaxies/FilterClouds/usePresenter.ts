@@ -1,6 +1,6 @@
 import { useFitDataToDimensions } from '@/features/galaxy/hooks/useFitToDataToDimensions'
 import { useD3DataCopy } from '@/features/shared/hooks/copy'
-import { useD3ZoomEvents } from '../../newsharedhooks/useD3ZoomEvents'
+import { useD3ZoomEvents } from '../../hooks/useD3ZoomEvents'
 import { Dimensions } from '../../types/galaxy'
 import { useD3Simulation } from './hooks/useD3Simulation'
 import { FilterCloudItem } from './types'

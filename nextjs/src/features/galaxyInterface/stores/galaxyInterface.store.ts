@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { D3AnimationStyleProps } from '../newsharedhooks/useD3ZoomEvents'
+import { D3AnimationStyleProps } from '../hooks/useD3ZoomEvents'
 import { ZoomStates } from '../types/galaxy'
 
 export type GalaxyInterfaceStateState = {

@@ -2,7 +2,7 @@ import { useD3DataCopy } from '@/features/shared/hooks/copy'
 import { useMemo, useRef } from 'react'
 
 import { Dimensions } from '../../../galaxy/types/galaxy'
-import { useD3ZoomEvents } from '../../newsharedhooks/useD3ZoomEvents'
+import { useD3ZoomEvents } from '../../hooks/useD3ZoomEvents'
 import { ZoomStates } from '../../types/galaxy'
 import { GALAXY_BASE, MainGalaxyProps } from './Galaxy'
 import { useD3Simulation } from './hooks/useD3Simulation'

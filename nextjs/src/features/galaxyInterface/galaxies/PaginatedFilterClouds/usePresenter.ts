@@ -5,7 +5,7 @@ import { useD3Pagination } from '@/features/galaxy/hooks/useD3Pagination'
 import { useFitDataToDimensions } from '@/features/galaxy/hooks/useFitToDataToDimensions'
 import { useRandomBackgroundData } from '@/features/galaxy/hooks/useRandomColorData'
 import { useD3DataCopy } from '@/features/shared/hooks/copy'
-import { useD3ZoomEvents } from '../../newsharedhooks/useD3ZoomEvents'
+import { useD3ZoomEvents } from '../../hooks/useD3ZoomEvents'
 import { PaginatedFilterCloudsProps } from './PaginatedFilterClouds'
 
 interface Props extends PaginatedFilterCloudsProps {
