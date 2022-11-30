@@ -8,6 +8,7 @@ import { Box, Button } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
 import { memo, useRef } from 'react'
 import { ZoomStates } from '../types/galaxy'
+import { DynamicCollectionCloudsContainer } from './components/containers/DynamicCollectionGalaxyContainer'
 import { DynamicFilterCloudsContainer } from './components/containers/DynamicFilterCloudsContainer'
 import { DynamicGalaxyContainer } from './components/containers/DynamicGalaxyContainer'
 import { DynamicPaginatedFilterCloudsContainer } from './components/containers/DynamicPaginatedFilterContainer'
@@ -90,7 +91,7 @@ const GalaxySwitch: React.FC<{ activeZoom: ZoomStates | null; sizes: ReturnType<
         return <DynamicPaginatedFilterCloudsContainer dimensions={{ height: 800, width: sizes?.width ?? 0 }} />
     }
     if (includesZoomStatesZoom4Galaxy.includes(activeZoom)) {
-        return <DynamicFilterCloudsContainer dimensions={{ height: 800, width: sizes?.width ?? 0 }} />
+        return <DynamicCollectionCloudsContainer dimensions={{ height: 800, width: sizes?.width ?? 0 }} />
     }
     if (includesZoomStatesZoom5Galaxy.includes(activeZoom)) {
         return <DynamicFilterCloudsContainer dimensions={{ height: 800, width: sizes?.width ?? 0 }} />
