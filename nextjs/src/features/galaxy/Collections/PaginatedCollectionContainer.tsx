@@ -3,11 +3,11 @@ import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { randomNumberBetweenPoints } from '@/features/shared/utils/numbers'
 import PaginationLeft from '@/icons/arrows/pagination-left.svg'
 import PaginationRight from '@/icons/arrows/pagination-right.svg'
-import { Box, Flex, Grid, GridItem, Text } from '@chakra-ui/react'
+import { Box, Flex, Grid, GridItem, Img, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useContext, useId, useMemo } from 'react'
 import {
-    ZoomLevel4ParentType,
+    ZoomLevel4ParentType, ZoomLevel4Type,
 } from 'src/generated/graphql'
 import { LandingPageFilterCollectionQueryParams } from 'src/pages/landingpage/[slug]/[filter]/[collection]'
 import { SupportedLandingPages } from '../FilterClouds/FilterCloudsContainer'
@@ -144,15 +144,12 @@ export const PaginatedCollection: React.FunctionComponent<
                                                     height={'90px'}
                                                     width={'140px'}
                                                 >
-                                                    {/* TODO: uncomment when image urls are fixed */}
-                                                    {/* {item.firstImage && (
-                                                        <Img src={item.firstImage} width={'48px'} height={'35px'} />
-                                                    )} */}
+                                                    {(item as ZoomLevel4Type)?.pidWorkURI && (
+                                                        <Img src={(item as ZoomLevel4Type)?.pidWorkURI ?? 'broken'} width={'48px'} height={'35px'} />
+                                                    )}
 
                                                     <Text
-                                                        // TODO: uncomment when image urls are fixed
-                                                        // pt={item.firstImage ? 1 : 5}
-                                                        pt={5}
+                                                        pt={(item as ZoomLevel4Type)?.pidWorkURI ? 1 : 5}
                                                         align={'center'}
                                                         overflowWrap={'normal'}
                                                         textStyle={'galaxyH4'}
