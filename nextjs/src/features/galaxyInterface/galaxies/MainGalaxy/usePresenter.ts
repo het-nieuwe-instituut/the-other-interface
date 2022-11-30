@@ -1,3 +1,4 @@
+import { useD3DataCopy } from '@/features/shared/hooks/copy'
 import { useMemo, useRef } from 'react'
 
 import { Dimensions } from '../../../galaxy/types/galaxy'
@@ -18,11 +19,12 @@ interface Props extends MainGalaxyProps {
 
 export function usePresenter(props: Props) {
     const { cloudData, dimensions, selector } = props
+    const cloudDataCopy = useD3DataCopy(cloudData)
     const galaxyBase = GALAXY_BASE
     // const archiefBestandDelen = useArchiefBestandDeel(zoomLevel1Data)
     const svgRef = useRef<SVGSVGElement | null>(null)
-    const dataDimensions = useMemo(() => fitDataToDimensions(galaxyBase, cloudData), [cloudData, galaxyBase])
-    useD3Simulation({ svgRef, data: cloudData, selector, dataDimensions, galaxyBase })
+    const dataDimensions = useMemo(() => fitDataToDimensions(galaxyBase, cloudDataCopy), [cloudDataCopy, galaxyBase])
+    useD3Simulation({ svgRef, data: cloudDataCopy, selector, dataDimensions, galaxyBase })
     const zoomEvents = useD3ZoomEvents(svgRef, dimensions)
 
     return {
@@ -31,7 +33,7 @@ export function usePresenter(props: Props) {
         ...zoomEvents,
         ...props,
         // archiefBestandDelen,
-        cloudData: cloudData.map(item => ({ ...item, selector })),
+        cloudData: cloudDataCopy.map(item => ({ ...item, selector })),
         conditions: {
             isZoom0: zoomEvents.zoomLevel ? [ZoomStates.Zoom0].includes(zoomEvents.zoomLevel) : false,
             isZoom1: zoomEvents.zoomLevel

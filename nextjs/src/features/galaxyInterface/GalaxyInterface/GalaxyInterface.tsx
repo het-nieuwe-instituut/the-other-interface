@@ -10,6 +10,7 @@ import { memo, useRef } from 'react'
 import { ZoomStates } from '../types/galaxy'
 import { DynamicFilterCloudsContainer } from './components/containers/DynamicFilterCloudsContainer'
 import { DynamicGalaxyContainer } from './components/containers/DynamicGalaxyContainer'
+import { DynamicPaginatedFilterCloudsContainer } from './components/containers/DynamicPaginatedFilterContainer'
 import { usePresenter } from './usePresenter'
 
 const DEBUG = true
@@ -51,7 +52,7 @@ export const GalaxyInterface: React.FC = () => {
     )
 }
 
-const mainGalaxyIncluded = [
+const includesZoomStatesMainGalaxy = [
     ZoomStates.Zoom0,
     ZoomStates.Zoom0ToZoom1,
     ZoomStates.Zoom1ToZoom0,
@@ -63,12 +64,15 @@ const mainGalaxyIncluded = [
     ZoomStates.Zoom1StoriesToZoom5,
     ZoomStates.ZoomOutToZoom1,
 ]
-const landingGalaxyIncluded = [
+const includesZoomStatesZoom2Galaxy = [
     ZoomStates.Zoom2,
     ZoomStates.Zoom2Initial,
     ZoomStates.Zoom2ToZoom3,
     ZoomStates.Zoom2ToZoom1,
 ]
+const includesZoomStatesZoom3Galaxy = [ZoomStates.Zoom3]
+const includesZoomStatesZoom4Galaxy = [ZoomStates.Zoom4]
+const includesZoomStatesZoom5Galaxy = [ZoomStates.Zoom5]
 
 const GalaxySwitch: React.FC<{ activeZoom: ZoomStates | null; sizes: ReturnType<typeof useSize> }> = props => {
     const { activeZoom, sizes } = props
@@ -76,11 +80,20 @@ const GalaxySwitch: React.FC<{ activeZoom: ZoomStates | null; sizes: ReturnType<
     if (!activeZoom) {
         return <p>not able to render anything</p>
     }
-    if (mainGalaxyIncluded.includes(activeZoom)) {
-        return <DynamicGalaxyContainer dimensions={{ height: 800, width: sizes?.width }} />
+    if (includesZoomStatesMainGalaxy.includes(activeZoom)) {
+        return <DynamicGalaxyContainer dimensions={{ height: 800, width: sizes?.width ?? 0 }} />
     }
-    if (landingGalaxyIncluded.includes(activeZoom)) {
-        return <DynamicFilterCloudsContainer dimensions={{ height: 800, width: sizes?.width }} />
+    if (includesZoomStatesZoom2Galaxy.includes(activeZoom)) {
+        return <DynamicFilterCloudsContainer dimensions={{ height: 800, width: sizes?.width ?? 0 }} />
+    }
+    if (includesZoomStatesZoom3Galaxy.includes(activeZoom)) {
+        return <DynamicPaginatedFilterCloudsContainer dimensions={{ height: 800, width: sizes?.width ?? 0 }} />
+    }
+    if (includesZoomStatesZoom4Galaxy.includes(activeZoom)) {
+        return <DynamicFilterCloudsContainer dimensions={{ height: 800, width: sizes?.width ?? 0 }} />
+    }
+    if (includesZoomStatesZoom5Galaxy.includes(activeZoom)) {
+        return <DynamicFilterCloudsContainer dimensions={{ height: 800, width: sizes?.width ?? 0 }} />
     }
     return null
 }

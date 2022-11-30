@@ -1,4 +1,4 @@
-import { Dimensions } from '@/features/galaxy/types/galaxy'
+import { Dimensions } from '../../../types/galaxy'
 import { mapArchiveComponent } from '@/features/galaxyInterface/galaxies/MainGalaxy/mappers/mapArchiveComponent'
 import { mappedStoriesToCloudStoriesItems } from '@/features/galaxyInterface/galaxies/MainGalaxy/mappers/mappedStoriesToCloudStoriesItems'
 import { mapZoomLevel1DataTocloudData } from '@/features/galaxyInterface/galaxies/MainGalaxy/mappers/mapZoomLevel1DataTocloudData'

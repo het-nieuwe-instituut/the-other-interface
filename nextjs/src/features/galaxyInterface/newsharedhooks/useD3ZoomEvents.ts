@@ -137,24 +137,6 @@ export function useD3ZoomEvents(svgRef: MutableRefObject<SVGSVGElement | null>, 
                             },
                         }),
                     ])
-
-                    // cleanup = () => {
-                    //     console.log('cleanup')
-                    //     scaleZoom({
-                    //         d3Ref: nodeForeign,
-                    //         initial: {
-                    //             translateX: stories.x,
-                    //             translateY: stories.y,
-                    //         },
-                    //     })
-                    //     scaleZoom({
-                    //         d3Ref: d3Stories,
-                    //         initial: {
-                    //             translateX: stories.x,
-                    //             translateY: stories.y,
-                    //         },
-                    //     })
-                    // }
                 })
             }
             if (activeZoom === ZoomStates.Zoom1StoriesToZoom1) {

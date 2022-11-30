@@ -1,6 +1,6 @@
 export interface Dimensions {
-    height?: number | null
-    width?: number | null
+    height: number
+    width: number
 }
 
 export enum ZoomLevel {

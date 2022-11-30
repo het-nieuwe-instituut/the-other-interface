@@ -1,10 +1,9 @@
 import { SupportedLandingPages } from '@/features/galaxy/PaginatedFilterClouds/PaginatedFilterCloudsContainer'
-import { Dimensions } from '@/features/galaxy/types/galaxy'
+import { Dimensions } from '../../../types/galaxy'
 import { zoom2ToFilterCloudData } from '@/features/galaxyInterface/galaxies/FilterClouds/mappers/zoom2ToFilterCloudData'
 import dynamic from 'next/dynamic'
 import { useMemo } from 'react'
 import { ZoomLevel2Query } from 'src/generated/graphql'
-import { MemoizedFilterClouds } from '../../../galaxies/FilterClouds/FilterClouds'
 
 export const DynamicGalaxyNoSsr = dynamic(() => import('../../../galaxies/FilterClouds/FilterClouds'), {
     ssr: false,
@@ -21,7 +20,7 @@ export const DynamicFilterCloudsContainer: React.FC<{ dimensions: Dimensions }> 
     const filterCloudData = useMemo(() => zoom2ToFilterCloudData(zoom2Stub), [])
 
     return (
-        <MemoizedFilterClouds
+        <DynamicGalaxyNoSsr
             filterCloudData={filterCloudData}
             type={SupportedLandingPages.Publications}
             dimensions={dimensions}

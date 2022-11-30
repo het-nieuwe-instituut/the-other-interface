@@ -32,9 +32,9 @@ export function useRouteTransitions() {
             return
         }
 
-        if (activeZoom === ZoomStates.Zoom3) {
-            router.push('/galaxyInterface3')
-            return
-        }
+        // if (activeZoom === ZoomStates.Zoom3) {
+        //     router.push('/galaxyInterface3')
+        //     return
+        // }
     }, [activeZoom])
 }
