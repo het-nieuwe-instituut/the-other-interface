@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /** @type {import('next').NextConfig} */
 const nextTranslate = require('next-translate')
-const { parsed } = require('dotenv').config({ path: `.env.${process.env.ENV ?? 'production'}` })
+const env = require('dotenv').config({ path: `.env.${process.env.ENV ?? 'production'}` }).parsed
 
 const nextConfig = {
     webpack(config) {
@@ -29,7 +29,7 @@ const nextConfig = {
     },
     output: 'standalone',
     env: {
-        parsed,
+        env,
     },
 }
 
