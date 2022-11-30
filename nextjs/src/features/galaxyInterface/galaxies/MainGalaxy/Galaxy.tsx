@@ -2,9 +2,9 @@ import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translation
 import { useStore } from '@/features/shared/hooks/useStore'
 import { Box, Flex, Text } from '@chakra-ui/react'
 import React, { forwardRef, useId } from 'react'
-import { Circle } from '../../../galaxy/components/Circle'
 import { GalaxyShadowBackground } from '../../../galaxy/components/GalaxyShadowBackground'
 import { Dimensions } from '../../../galaxy/types/galaxy'
+import { Cloud } from '../../components/Cloud'
 import { MemoizedStoriesSystem } from '../../components/StoriesSystem/StoriesSystem'
 import { galaxyInterfaceActions } from '../../stores/galaxyInterface.store'
 import { ZoomStates } from '../../types/galaxy'
@@ -27,7 +27,7 @@ export interface InstancesPerClass {
 }
 
 export const GALAXY_BASE = 800
-const MainGalaxyProps: React.FC<MainGalaxyProps> = props => {
+const MainGalaxy: React.FC<MainGalaxyProps> = props => {
     const store = useStore()
     const { t } = useLooseTypeSafeTranslation('homepage')
     const id = useId().replaceAll(':', '')
@@ -100,11 +100,11 @@ const MainGalaxyProps: React.FC<MainGalaxyProps> = props => {
                         <g className="circles">
                             {cloudData?.map((item, index, array) => {
                                 return (
-                                    <Circle
+                                    <Cloud
                                         defaultBackground="levels.z0.galaxyCloud"
                                         hoverBackground={`levels.z1.${item.class}.hover1`}
                                         key={`${index}-${array.length}`}
-                                        className={id}
+                                        className={item.selector}
                                         id={item.id}
                                         pointerEvents={conditions.isZoom1Stories ? 'none' : undefined}
                                     >
@@ -174,7 +174,7 @@ const MainGalaxyProps: React.FC<MainGalaxyProps> = props => {
                                                 </Box>
                                             </Box>
                                         )}
-                                    </Circle>
+                                    </Cloud>
                                 )
                             })}
                         </g>
@@ -195,7 +195,7 @@ const MainGalaxyProps: React.FC<MainGalaxyProps> = props => {
         </Box>
     )
 }
-export default MainGalaxyProps
+export default MainGalaxy
 
 export const STORIES_SYSTEM_MAX_WIDTH = 537.85
 const StoriesSystemPosition = forwardRef<

@@ -31,6 +31,7 @@ export function usePresenter(props: Props) {
         ...zoomEvents,
         ...props,
         // archiefBestandDelen,
+        cloudData: cloudData.map(item => ({ ...item, selector })),
         conditions: {
             isZoom0: zoomEvents.zoomLevel ? [ZoomStates.Zoom0].includes(zoomEvents.zoomLevel) : false,
             isZoom1: zoomEvents.zoomLevel

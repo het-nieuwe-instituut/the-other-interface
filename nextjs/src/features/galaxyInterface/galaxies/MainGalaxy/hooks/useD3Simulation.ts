@@ -35,7 +35,7 @@ function useListenToSimulationTicks(
 
     useEffect(() => {
         const d3Svg = d3.select(svgRef.current)
-        const nodes = d3Svg.selectAll(`.foreign-${selector}`)?.data(data)
+        const nodes = d3Svg.selectAll(`.${selector}`)?.data(data)
 
         if (!nodesListener.current) {
             nodesListener.current = initializeD3({
