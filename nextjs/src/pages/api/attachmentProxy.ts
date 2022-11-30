@@ -5,7 +5,7 @@ import request from 'request'
 const attachmentProxy = (req: NextApiRequest, res: NextApiResponse) => {
     const filePath = req.query.filename
 
-    if (!filePath || !process.env.NEXT_PUBLIC_REACT_APP_IMAGE_BASE_URL) {
+    if (!filePath || !process.env.parsed.NEXT_PUBLIC_REACT_APP_IMAGE_BASE_URL) {
         res.writeHead(404, { 'Content-Type': 'text/html' })
         res.write('<h1>404 not found</h1>')
         res.end()
@@ -21,7 +21,7 @@ const attachmentProxy = (req: NextApiRequest, res: NextApiResponse) => {
     res.setHeader('content-disposition', 'attachment; filename=' + fileName)
 
     request
-        .get(process.env.NEXT_PUBLIC_REACT_APP_IMAGE_BASE_URL + filePath)
+        .get(process.env.parsed.NEXT_PUBLIC_REACT_APP_IMAGE_BASE_URL + filePath)
         .on('error', function () {
             res.writeHead(404, { 'Content-Type': 'text/html' })
             res.write('<h1>404 not found</h1>')

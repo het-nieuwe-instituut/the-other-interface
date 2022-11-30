@@ -6,6 +6,7 @@ import ArrowLeftIcon from '@/icons/arrows/arrow-left-long.svg'
 import ArrowRightIcon from '@/icons/arrows/arrow-right-long.svg'
 import Image from 'next/image'
 import usePresenter from './usePresenter'
+import { imageBasePath } from '@/features/modules/modulesConstants'
 
 interface Props {
     component: ComponentModulesImageCarousel
@@ -34,7 +35,6 @@ export const ImageCarousel = (props: Props) => {
                     {items?.map((item: UploadFileEntity, index) => {
                         const originalHeight = item?.attributes?.height ?? 1
                         const originalWidth = item?.attributes?.width ?? 1
-                        const imageBasePath = process.env.imagePath ?? ''
                         const imagePath = imageBasePath + item?.attributes?.url
                         const caption = item?.attributes?.caption
                         const proportions = calculateImagePropotions(originalWidth, originalHeight, IMAGE_HEIGHT, size)

@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /** @type {import('next').NextConfig} */
 const nextTranslate = require('next-translate')
+const env = require('dotenv').config({ path: `.env.${process.env.ENV ?? 'production'}` })
+const parsed = env.parsed
 
 const nextConfig = {
     webpack(config) {
@@ -8,7 +10,6 @@ const nextConfig = {
             test: /\.svg$/,
             use: ['@svgr/webpack'],
         })
-
         return config
     },
     reactStrictMode: true,
@@ -16,7 +17,7 @@ const nextConfig = {
     i18n: {
         locales: ['nl', 'en'],
         defaultLocale: 'nl',
-        localeDetection: false
+        localeDetection: false,
     },
     images: {
         domains: [
@@ -28,11 +29,8 @@ const nextConfig = {
         ],
     },
     output: 'standalone',
-    serverRuntimeConfig: {
-        NEXT_PUBLIC_REACT_APP_IMAGE_BASE_URL: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
-    },
-    publicRuntimeConfig: {
-        NEXT_PUBLIC_REACT_APP_IMAGE_BASE_URL: process.env.NEXT_PUBLIC_REACT_APP_IMAGE_BASE_URL,
+    env: {
+        parsed,
     },
 }
 

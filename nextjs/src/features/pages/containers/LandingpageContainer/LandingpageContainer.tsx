@@ -4,9 +4,7 @@ import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/Mod
 import { GalaxyFooter } from '@/features/shared/components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 import { GalaxyTopRight } from '@/features/shared/components/GalaxyWrapper/GalaxyTopRight/GalaxyTopRight'
 import { GalaxyWrapper } from '@/features/shared/components/GalaxyWrapper/GalaxyWrapper'
-// import { Loader } from '@/features/shared/components/Loading/Loading'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
-import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import useScroll from '@/features/shared/hooks/useScroll'
 import { Box, useTheme } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
@@ -27,7 +25,6 @@ interface Props {
 export const LandingpageContainer = (props: Props) => {
     const { landingpage: data} = props
     const type = props.slug
-    const { t } = useTypeSafeTranslation('common')
     const theme = useTheme()
 
     const graphRef = useRef<HTMLDivElement | null>(null)
@@ -42,10 +39,6 @@ export const LandingpageContainer = (props: Props) => {
     // if (error) {
     //     return <p>{error.message}</p>
     // }
-
-    if (!data?.landingpages?.data.length) {
-        return <p>{t('somethingWentWrong')}</p>
-    }
 
     const landingpage = data?.landingpages?.data[0]
 
@@ -69,8 +62,8 @@ export const LandingpageContainer = (props: Props) => {
                     <PageHeader
                         showPointer={scrollPosition < 750}
                         handleClick={ScrollToContent}
-                        title={landingpage.attributes?.Title || undefined}
-                        preface={landingpage.attributes?.Description || undefined}
+                        title={landingpage?.attributes?.Title || undefined}
+                        preface={landingpage?.attributes?.Description || undefined}
                     />
                     <DynamicComponentRenderer
                         components={

@@ -2,7 +2,7 @@
 - name: nextjs | docker | start
   docker_container:
     name: "nextjs"
-    image: ghcr.io/lifelynl/hni-toi-nextjs:{{ tag }}
+    image: ghcr.io/lifelynl/hni-toi-nextjs:{{ tag }}-{{ server_environment_name }}
     state: started
     restart_policy: always
     recreate: true
