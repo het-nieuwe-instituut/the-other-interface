@@ -17,13 +17,12 @@ export function usePresenter(props: Props) {
     const theme = useTheme()
     const dataCopy = useD3DataCopy(paginatedCloudItems)
     const dataDimensions = useFitDataToDimensions(dimensions, dataCopy, getId, d => d.count ?? 0)
-
     const getColor = useCallback(() => {
         return theme.colors.levels.z2.colors[`${type}Filters`][filter as string]
     }, [filter, type, theme.colors.levels.z2.colors])
     const backgrounds = useRandomBackgroundData(dataCopy, getId, getColor())
     const { svgRef, simulation } = useD3Simulation(dimensions, dataCopy, selector, dataDimensions)
-    const zoomEvents = useD3ZoomEvents(svgRef, dimensions)
+    const zoomEvents = useD3ZoomEvents({ svgRef, dimensions })
     const pagination = useD3Pagination({
         simulation,
         selector,

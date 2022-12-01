@@ -38,7 +38,6 @@ const FilterClouds: React.FunctionComponent<Props> = props => {
                     store.dispatch(
                         galaxyInterfaceActions.setActiveZoom({
                             activeZoom: ZoomStates.Zoom2ToZoom1,
-                            afterAnimationState: ZoomStates.ZoomOutToZoom1,
                         })
                     )
                 }

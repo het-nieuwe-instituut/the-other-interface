@@ -5,10 +5,15 @@ import * as d3 from 'd3'
 import { MutableRefObject, useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { getStoriesSystemDimensions } from '../galaxies/MainGalaxy/Galaxy'
-import { GalaxyInterfaceStateState, galaxyInterfaceActions } from '../stores/galaxyInterface.store'
+import { galaxyInterfaceActions, GalaxyInterfaceStateState } from '../stores/galaxyInterface.store'
 import { ZoomStates } from '../types/galaxy'
 
-export function useD3ZoomEvents(svgRef: MutableRefObject<SVGSVGElement | null>, dimensions: Dimensions) {
+interface Options {
+    svgRef: MutableRefObject<SVGSVGElement | null>
+    dimensions: Dimensions
+}
+export function useD3ZoomEvents(options: Options) {
+    const { svgRef, dimensions } = options
     const storiesSystemRef = useRef<SVGForeignObjectElement | null>(null)
     const store = useStore()
     const activeZoom = useSelector((state: State) => state.galaxyInterface.activeZoom)
@@ -22,227 +27,411 @@ export function useD3ZoomEvents(svgRef: MutableRefObject<SVGSVGElement | null>, 
             d3Svg.attr('transition', 'none')
 
             if (activeZoom === ZoomStates.Zoom0) {
-                animationWrapper(store, async () => {
-                    await scaleZoom({ d3Ref: d3Svg, to: { duration: 0, scale: 0.2 } })
-                })
+                await scaleZoom({ d3Ref: d3Svg, to: { duration: 0, scale: 0.2 } })
             }
             if (activeZoom === ZoomStates.Zoom0ToZoom1) {
-                animationWrapper(store, async () => {
-                    await scaleZoom({
-                        d3Ref: d3Svg,
-                        to: { duration: 1500, scale: 1 },
-                        initial: { scale: 0.2 },
-                    })
+                await scaleZoom({
+                    d3Ref: d3Svg,
+                    to: { duration: 1500, scale: 1 },
+                    initial: { scale: 0.2 },
                 })
+                store.dispatch(
+                    galaxyInterfaceActions.setActiveZoom({
+                        activeZoom: ZoomStates.Zoom1,
+                    })
+                )
             }
             if (activeZoom === ZoomStates.Zoom1) {
-                animationWrapper(store, async () => {
-                    await scaleZoom({ d3Ref: d3Svg, initial: { duration: 0, scale: 1 } })
-                })
+                await scaleZoom({ d3Ref: d3Svg, initial: { duration: 0, scale: 1 } })
             }
             if (activeZoom === ZoomStates.Zoom1ToZoom0) {
-                animationWrapper(store, async () => {
-                    await scaleZoom({
-                        d3Ref: d3Svg,
-                        initial: { duration: 0, scale: 1 },
-                        to: { duration: 1500, scale: 0.2 },
-                    })
+                await scaleZoom({
+                    d3Ref: d3Svg,
+                    initial: { duration: 0, scale: 1 },
+                    to: { duration: 1500, scale: 0.2 },
                 })
+                store.dispatch(
+                    galaxyInterfaceActions.setActiveZoom({
+                        activeZoom: ZoomStates.Zoom0,
+                    })
+                )
             }
             if (activeZoom === ZoomStates.Zoom1ToZoom1Stories) {
-                animationWrapper(store, async () => {
-                    const stories = getStoriesSystemDimensions(dimensions)
-                    const d3Stories = d3.select(storiesSystemRef.current)
-                    const nodeForeign = d3Svg.select(`.circles`)
+                const stories = getStoriesSystemDimensions(dimensions)
+                const d3Stories = d3.select(storiesSystemRef.current)
+                const nodeForeign = d3Svg.select(`.circles`)
 
-                    await Promise.all([
-                        scaleZoom({
-                            d3Ref: d3Svg,
-                            initial: {
-                                scale: 1,
-                            },
-                        }),
-                        scaleZoom({
-                            d3Ref: d3Stories,
-                            to: {
-                                duration: 1500,
-                                scale: 1.5,
-                                translateX: -stories.x,
-                                translateY: -stories.y,
-                            },
-                            initial: {
-                                scale: 1,
-                            },
-                        }),
-                        scaleZoom({
-                            d3Ref: nodeForeign,
-                            to: {
-                                duration: 1500,
-                                scale: 1.5,
-                                translateX: -stories.x,
-                                translateY: -stories.y,
-                            },
-                            initial: {
-                                scale: 1,
-                            },
-                        }),
-                    ])
-
-                    // cleanup = () => {
-                    //     scaleZoom({
-                    //         d3Ref: nodeForeign,
-                    //         initial: {
-                    //             translateX: stories.x,
-                    //             translateY: stories.y,
-                    //         },
-                    //     })
-                    //     scaleZoom({
-                    //         d3Ref: d3Stories,
-                    //         initial: {
-                    //             translateX: stories.x,
-                    //             translateY: stories.y,
-                    //         },
-                    //     })
-                    // }
-                })
+                await Promise.all([
+                    scaleZoom({
+                        d3Ref: d3Svg,
+                        initial: {
+                            scale: 1,
+                        },
+                    }),
+                    scaleZoom({
+                        d3Ref: d3Stories,
+                        to: {
+                            duration: 1500,
+                            scale: 1.5,
+                            translateX: -stories.x,
+                            translateY: -stories.y,
+                        },
+                        initial: {
+                            scale: 1,
+                        },
+                    }),
+                    scaleZoom({
+                        d3Ref: nodeForeign,
+                        to: {
+                            duration: 1500,
+                            scale: 1.5,
+                            translateX: -stories.x,
+                            translateY: -stories.y,
+                        },
+                        initial: {
+                            scale: 1,
+                        },
+                    }),
+                ])
+                store.dispatch(
+                    galaxyInterfaceActions.setActiveZoom({
+                        activeZoom: ZoomStates.Zoom1Stories,
+                    })
+                )
             }
             if (activeZoom === ZoomStates.Zoom1Stories) {
-                animationWrapper(store, async () => {
-                    const stories = getStoriesSystemDimensions(dimensions)
-                    const d3Stories = d3.select(storiesSystemRef.current)
-                    const nodeForeign = d3Svg.select(`.circles`)
+                const stories = getStoriesSystemDimensions(dimensions)
+                const d3Stories = d3.select(storiesSystemRef.current)
+                const nodeForeign = d3Svg.select(`.circles`)
 
-                    await Promise.all([
-                        scaleZoom({
-                            d3Ref: d3Svg,
-                            to: {
-                                scale: 1,
-                            },
-                        }),
-                        scaleZoom({
-                            d3Ref: d3Stories,
+                await Promise.all([
+                    scaleZoom({
+                        d3Ref: d3Svg,
+                        to: {
+                            scale: 1,
+                        },
+                    }),
+                    scaleZoom({
+                        d3Ref: d3Stories,
 
-                            to: {
-                                scale: 1.5,
-                                translateX: -stories.x,
-                                translateY: -stories.y,
-                            },
-                        }),
-                        scaleZoom({
-                            d3Ref: nodeForeign,
-                            to: {
-                                scale: 1.5,
-                                translateX: -stories.x,
-                                translateY: -stories.y,
-                            },
-                        }),
-                    ])
-                })
+                        to: {
+                            scale: 1.5,
+                            translateX: -stories.x,
+                            translateY: -stories.y,
+                        },
+                    }),
+                    scaleZoom({
+                        d3Ref: nodeForeign,
+                        to: {
+                            scale: 1.5,
+                            translateX: -stories.x,
+                            translateY: -stories.y,
+                        },
+                    }),
+                ])
             }
             if (activeZoom === ZoomStates.Zoom1StoriesToZoom1) {
-                animationWrapper(store, async () => {
-                    const stories = getStoriesSystemDimensions(dimensions)
-                    const d3Stories = d3.select(storiesSystemRef.current)
-                    const nodeForeign = d3Svg.select(`.circles`)
-                    await Promise.all([
-                        scaleZoom({
-                            d3Ref: d3Svg,
-                            initial: {
-                                scale: 1,
-                            },
-                        }),
-                        scaleZoom({
-                            d3Ref: d3Stories,
-                            initial: {
-                                scale: 1.5,
-                                translateX: -stories.x,
-                                translateY: -stories.y,
-                            },
-                            to: {
-                                duration: 1500,
-                                scale: 1,
-                                translateX: stories.x,
-                                translateY: stories.y,
-                            },
-                        }),
-                        scaleZoom({
-                            d3Ref: nodeForeign,
-                            initial: {
-                                scale: 1.5,
-                                translateX: -stories.x,
-                                translateY: -stories.y,
-                            },
-                            to: {
-                                duration: 1500,
-                                scale: 1,
-                                translateX: stories.x,
-                                translateY: stories.y,
-                            },
-                        }),
-                    ])
-                })
+                const stories = getStoriesSystemDimensions(dimensions)
+                const d3Stories = d3.select(storiesSystemRef.current)
+                const nodeForeign = d3Svg.select(`.circles`)
+                await Promise.all([
+                    scaleZoom({
+                        d3Ref: d3Svg,
+                        initial: {
+                            scale: 1,
+                        },
+                    }),
+                    scaleZoom({
+                        d3Ref: d3Stories,
+                        initial: {
+                            scale: 1.5,
+                            translateX: -stories.x,
+                            translateY: -stories.y,
+                        },
+                        to: {
+                            duration: 1500,
+                            scale: 1,
+                            translateX: stories.x,
+                            translateY: stories.y,
+                        },
+                    }),
+                    scaleZoom({
+                        d3Ref: nodeForeign,
+                        initial: {
+                            scale: 1.5,
+                            translateX: -stories.x,
+                            translateY: -stories.y,
+                        },
+                        to: {
+                            duration: 1500,
+                            scale: 1,
+                            translateX: stories.x,
+                            translateY: stories.y,
+                        },
+                    }),
+                ])
+                store.dispatch(
+                    galaxyInterfaceActions.setActiveZoom({
+                        activeZoom: ZoomStates.Zoom1,
+                    })
+                )
             }
             if (activeZoom === ZoomStates.ZoomOutToZoom1) {
-                animationWrapper(store, async () => {
-                    await scaleZoom({
-                        d3Ref: d3Svg,
-                        to: {
-                            duration: 1500,
-                            scale: 1,
-                            opacity: 1,
-                        },
-                        initial: {
-                            scale: 20,
-                            opacity: 0,
-                        },
-                    })
+                await scaleZoom({
+                    d3Ref: d3Svg,
+                    to: {
+                        duration: 1500,
+                        scale: 1,
+                        opacity: 1,
+                    },
+                    initial: {
+                        scale: 20,
+                        opacity: 0,
+                    },
                 })
+
+                store.dispatch(
+                    galaxyInterfaceActions.setActiveZoom({
+                        activeZoom: ZoomStates.Zoom1,
+                    })
+                )
             }
             if (activeZoom === ZoomStates.Zoom1ToZoom2) {
-                animationWrapper(store, async () => {
-                    const item = store.getState().galaxyInterface.activeZoomData
-                    await scaleZoom({
-                        d3Ref: d3Svg,
-                        to: {
-                            duration: 1500,
-                            scale: 20,
-                            opacity: 0,
-                            ...item?.to,
-                        },
-                        initial: { scale: 1 },
-                    })
+                const item = store.getState().galaxyInterface.activeZoomData
+                await scaleZoom({
+                    d3Ref: d3Svg,
+                    to: {
+                        duration: 1500,
+                        scale: 20,
+                        opacity: 0,
+                        ...item?.to,
+                    },
+                    initial: { scale: 1 },
                 })
+                store.dispatch(
+                    galaxyInterfaceActions.setActiveZoom({
+                        activeZoom: ZoomStates.Zoom2Initial,
+                    })
+                )
             }
             if (activeZoom === ZoomStates.Zoom2ToZoom1) {
-                animationWrapper(store, async () => {
-                    await scaleZoom({
-                        d3Ref: d3Svg,
-                        to: {
-                            duration: 1500,
-                            scale: 0,
-                            opacity: 0,
-                        },
-                        initial: {
-                            scale: 1,
-                            opacity: 1,
-                        },
-                    })
+                await scaleZoom({
+                    d3Ref: d3Svg,
+                    to: {
+                        duration: 1500,
+                        scale: 0,
+                        opacity: 0,
+                    },
+                    initial: {
+                        scale: 1,
+                        opacity: 1,
+                    },
                 })
+                store.dispatch(
+                    galaxyInterfaceActions.setActiveZoom({
+                        activeZoom: ZoomStates.ZoomOutToZoom1,
+                    })
+                )
+            }
+            if (activeZoom === ZoomStates.Zoom2Initial) {
+                await scaleZoom({
+                    d3Ref: d3Svg,
+                    to: {
+                        duration: 1500,
+                        scale: 1,
+                        opacity: 1,
+                    },
+                    initial: { scale: 0, opacity: 0 },
+                })
+                store.dispatch(
+                    galaxyInterfaceActions.setActiveZoom({
+                        activeZoom: ZoomStates.Zoom2,
+                    })
+                )
+            }
+            if (activeZoom === ZoomStates.Zoom2) {
+                await scaleZoom({ d3Ref: d3Svg, initial: { duration: 0, scale: 1 } })
             }
             if (activeZoom === ZoomStates.Zoom2ToZoom3) {
-                animationWrapper(store, async () => {
-                    const item = store.getState().galaxyInterface.activeZoomData
-                    await scaleZoom({
-                        d3Ref: d3Svg,
-                        to: {
-                            duration: 1500,
-                            scale: 20,
-                            opacity: 0,
-                            ...item?.to,
-                        },
-                        initial: { scale: 1 },
-                    })
+                const item = store.getState().galaxyInterface.activeZoomData
+                await scaleZoom({
+                    d3Ref: d3Svg,
+                    to: {
+                        duration: 1500,
+                        scale: 20,
+                        opacity: 0,
+                        ...item?.to,
+                    },
+                    initial: { scale: 1 },
                 })
+                store.dispatch(
+                    galaxyInterfaceActions.setActiveZoom({
+                        activeZoom: ZoomStates.Zoom3Initial,
+                    })
+                )
+            }
+            if (activeZoom === ZoomStates.ZoomOutToZoom2) {
+                await scaleZoom({
+                    d3Ref: d3Svg,
+                    to: {
+                        duration: 1500,
+                        scale: 1,
+                        opacity: 1,
+                    },
+                    initial: { scale: 20, opacity: 0 },
+                })
+                store.dispatch(
+                    galaxyInterfaceActions.setActiveZoom({
+                        activeZoom: ZoomStates.Zoom2,
+                    })
+                )
+            }
+
+            // ZOOM 3
+            if (activeZoom === ZoomStates.Zoom3Initial) {
+                await scaleZoom({
+                    d3Ref: d3Svg,
+                    to: {
+                        duration: 1500,
+                        scale: 1,
+                        opacity: 1,
+                    },
+                    initial: { scale: 0, opacity: 0 },
+                })
+                store.dispatch(
+                    galaxyInterfaceActions.setActiveZoom({
+                        activeZoom: ZoomStates.Zoom3,
+                    })
+                )
+            }
+            if (activeZoom === ZoomStates.Zoom3) {
+                await scaleZoom({ d3Ref: d3Svg, initial: { duration: 0, scale: 1 } })
+            }
+            if (activeZoom === ZoomStates.Zoom3ToZoom2) {
+                await scaleZoom({
+                    d3Ref: d3Svg,
+                    to: {
+                        duration: 1500,
+                        scale: 0,
+                        opacity: 0,
+                    },
+                    initial: { scale: 1 },
+                })
+                store.dispatch(
+                    galaxyInterfaceActions.setActiveZoom({
+                        activeZoom: ZoomStates.ZoomOutToZoom3,
+                    })
+                )
+            }
+            if (activeZoom === ZoomStates.Zoom3ToZoom4) {
+                const item = store.getState().galaxyInterface.activeZoomData
+                await scaleZoom({
+                    d3Ref: d3Svg,
+                    to: {
+                        duration: 1500,
+                        scale: 20,
+                        opacity: 0,
+                        ...item?.to,
+                    },
+                    initial: { scale: 1 },
+                })
+                store.dispatch(
+                    galaxyInterfaceActions.setActiveZoom({
+                        activeZoom: ZoomStates.Zoom4Initial,
+                    })
+                )
+            }
+
+            if (activeZoom === ZoomStates.ZoomOutToZoom3) {
+                await scaleZoom({
+                    d3Ref: d3Svg,
+                    to: {
+                        duration: 1500,
+                        scale: 1,
+                        opacity: 1,
+                    },
+                    initial: { scale: 20, opacity: 0 },
+                })
+
+                store.dispatch(
+                    galaxyInterfaceActions.setActiveZoom({
+                        activeZoom: ZoomStates.Zoom3,
+                    })
+                )
+            }
+
+            // ZOOM 4
+            if (activeZoom === ZoomStates.Zoom4Initial) {
+                await scaleZoom({
+                    d3Ref: d3Svg,
+                    to: {
+                        duration: 1500,
+                        scale: 1,
+                        opacity: 1,
+                    },
+                    initial: { scale: 0, opacity: 0 },
+                })
+                store.dispatch(
+                    galaxyInterfaceActions.setActiveZoom({
+                        activeZoom: ZoomStates.Zoom4,
+                    })
+                )
+            }
+
+            if (activeZoom === ZoomStates.Zoom4) {
+                await scaleZoom({ d3Ref: d3Svg, initial: { duration: 0, scale: 1 } })
+            }
+
+            if (activeZoom === ZoomStates.Zoom4ToZoom3) {
+                await scaleZoom({
+                    d3Ref: d3Svg,
+                    to: {
+                        duration: 1500,
+                        scale: 0,
+                        opacity: 0,
+                    },
+                    initial: { scale: 1 },
+                })
+                store.dispatch(
+                    galaxyInterfaceActions.setActiveZoom({
+                        activeZoom: ZoomStates.Zoom3,
+                    })
+                )
+            }
+            if (activeZoom === ZoomStates.Zoom4ToZoom5) {
+                const item = store.getState().galaxyInterface.activeZoomData
+                await scaleZoom({
+                    d3Ref: d3Svg,
+                    to: {
+                        duration: 1500,
+                        scale: 20,
+                        opacity: 0,
+                        ...item?.to,
+                    },
+                    initial: { scale: 1 },
+                })
+                store.dispatch(
+                    galaxyInterfaceActions.setActiveZoom({
+                        activeZoom: ZoomStates.Zoom5,
+                    })
+                )
+            }
+
+            if (activeZoom === ZoomStates.ZoomOutToZoom4) {
+                await scaleZoom({
+                    d3Ref: d3Svg,
+                    to: {
+                        duration: 1500,
+                        scale: 1,
+                        opacity: 1,
+                    },
+                    initial: { scale: 20, opacity: 0 },
+                })
+                store.dispatch(
+                    galaxyInterfaceActions.setActiveZoom({
+                        activeZoom: ZoomStates.Zoom4,
+                    })
+                )
             }
         }
 
@@ -252,6 +441,7 @@ export function useD3ZoomEvents(svgRef: MutableRefObject<SVGSVGElement | null>, 
             cleanup()
             cleanup = () => undefined
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [activeZoom, svgRef, dimensions, store])
 
     return {
@@ -277,20 +467,6 @@ export interface D3AnimationStyleProps {
     initial?: AnimatedProps
     to?: AnimatedProps
     after?: AnimatedProps
-}
-
-async function animationWrapper(store: ReturnType<typeof useStore>, animate: () => void | Promise<void>) {
-    await animate()
-
-    // update after animation
-    if (store.getState().galaxyInterface.afterAnimationState) {
-        store.dispatch(
-            galaxyInterfaceActions.setActiveZoom({
-                activeZoom: store.getState().galaxyInterface.afterAnimationState ?? null,
-                afterAnimationState: null,
-            })
-        )
-    }
 }
 
 async function scaleZoom(options: D3AnimationStyleProps) {

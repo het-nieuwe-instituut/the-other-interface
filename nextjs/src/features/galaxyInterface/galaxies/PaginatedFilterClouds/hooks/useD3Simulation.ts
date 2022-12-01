@@ -3,8 +3,8 @@ import { useInitializeD3Simulation } from '@/features/shared/hooks/useInitialize
 import * as d3 from 'd3'
 import { SimulationNodeDatum } from 'd3'
 import { MutableRefObject, useEffect, useRef } from 'react'
-import { fadeScaleInD3, initializeD3 } from '../d3/simulation'
 import { Dimensions } from '../../../types/galaxy'
+import { initializeD3 } from '../d3/simulation'
 import { PaginatedCloudItem } from '../types'
 
 const collisionData = [{ id: 'collision' }]
@@ -39,16 +39,6 @@ function useListenToSimulationTicks(
     dataDimensions: DataDimension[]
 ) {
     const nodesListener = useRef<d3.Simulation<D3CollectionItem, undefined> | undefined | null>(null)
-
-    // set default styles
-    useEffect(() => {
-        if (!data) return
-        const d3Svg = d3.select(svgRef.current)
-        const nodes = d3Svg.selectAll(`.foreign-${selector}`).data<Partial<D3CollectionItem>>(data)
-
-        fadeScaleInD3(nodes)
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [data])
 
     useEffect(() => {
         if (!data) return

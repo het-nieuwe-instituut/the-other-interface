@@ -25,7 +25,7 @@ export function usePresenter(props: Props) {
     const svgRef = useRef<SVGSVGElement | null>(null)
     const dataDimensions = useMemo(() => fitDataToDimensions(galaxyBase, cloudDataCopy), [cloudDataCopy, galaxyBase])
     useD3Simulation({ svgRef, data: cloudDataCopy, selector, dataDimensions, galaxyBase })
-    const zoomEvents = useD3ZoomEvents(svgRef, dimensions)
+    const zoomEvents = useD3ZoomEvents({ svgRef, dimensions })
 
     return {
         svgRef,
@@ -37,7 +37,7 @@ export function usePresenter(props: Props) {
         conditions: {
             isZoom0: zoomEvents.zoomLevel ? [ZoomStates.Zoom0].includes(zoomEvents.zoomLevel) : false,
             isZoom1: zoomEvents.zoomLevel
-                ? [ZoomStates.Zoom0, ZoomStates.Zoom1, ZoomStates.Zoom0ToZoom1].includes(zoomEvents.zoomLevel)
+                ? [ZoomStates.Zoom1, ZoomStates.Zoom0ToZoom1].includes(zoomEvents.zoomLevel)
                 : false,
             isZoom1Stories: zoomEvents.zoomLevel
                 ? [ZoomStates.Zoom0, ZoomStates.Zoom0ToZoom1].includes(zoomEvents.zoomLevel)

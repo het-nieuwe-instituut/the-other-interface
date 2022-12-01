@@ -1,12 +1,9 @@
 import { DataDimension } from '@/features/galaxy/hooks/useFitToDataToDimensions'
 import { Dimensions } from '@/features/galaxy/types/galaxy'
-import { ZoomStates } from '@/features/galaxyInterface/types/galaxy'
-import { State } from '@/features/shared/configs/store'
 import { useInitializeD3Simulation } from '@/features/shared/hooks/useInitializeD3Simulation'
 import * as d3 from 'd3'
 import { MutableRefObject, useEffect, useRef } from 'react'
-import { useSelector } from 'react-redux'
-import { D3CollectionItem, initializeD3, initializeD3AnimateOpacity } from '../d3/simulation'
+import { D3CollectionItem, initializeD3 } from '../d3/simulation'
 import { FilterCloudItem } from '../types'
 
 export function useD3Simulation(
@@ -33,19 +30,7 @@ function useListenToSimulationTicks(
     selector: string,
     dataDimensions: DataDimension[]
 ) {
-    const activeZoom = useSelector<State>(state => state.galaxyInterface.activeZoom)
     const nodesListener = useRef<d3.Simulation<D3CollectionItem, undefined> | undefined | null>(null)
-
-    useEffect(() => {
-        const d3Svg = d3.select(svgRef.current)
-        const nodeForeign = d3Svg.selectAll(`.foreign-${selector}`).data(data)
-
-        if (activeZoom === ZoomStates.Zoom2Initial) {
-            initializeD3AnimateOpacity(nodeForeign)
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [activeZoom])
-
     useEffect(() => {
         if (!data) return
         const d3Svg = d3.select(svgRef.current)

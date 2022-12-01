@@ -25,7 +25,6 @@ export function zoomByD3Data(options: Options) {
                     translateY: -y,
                 },
             },
-            afterAnimationState: ZoomStates.Zoom3,
         })
     )
 }

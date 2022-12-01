@@ -39,14 +39,17 @@ export const GalaxyInterface: React.FC = () => {
             </GalaxyWrapper>
 
             {DEBUG && (
-                <Box zIndex={100000}>
-                    {Object.values(ZoomStates).map(t => {
-                        return (
-                            <Button key={t} onClick={() => setActiveZoom(t)}>
-                                {t}
-                            </Button>
-                        )
-                    })}
+                <Box>
+                    <p>{activeZoom}</p>
+                    <Box zIndex={100000}>
+                        {Object.values(ZoomStates).map((t, index) => {
+                            return (
+                                <Button key={t + index} onClick={() => setActiveZoom(t)}>
+                                    {t}
+                                </Button>
+                            )
+                        })}
+                    </Box>
                 </Box>
             )}
         </>
@@ -70,9 +73,22 @@ const includesZoomStatesZoom2Galaxy = [
     ZoomStates.Zoom2Initial,
     ZoomStates.Zoom2ToZoom3,
     ZoomStates.Zoom2ToZoom1,
+    ZoomStates.ZoomOutToZoom2,
 ]
-const includesZoomStatesZoom3Galaxy = [ZoomStates.Zoom3]
-const includesZoomStatesZoom4Galaxy = [ZoomStates.Zoom4]
+const includesZoomStatesZoom3Galaxy = [
+    ZoomStates.Zoom3,
+    ZoomStates.Zoom3Initial,
+    ZoomStates.Zoom3ToZoom2,
+    ZoomStates.Zoom3ToZoom4,
+    ZoomStates.ZoomOutToZoom3,
+]
+const includesZoomStatesZoom4Galaxy = [
+    ZoomStates.Zoom4,
+    ZoomStates.Zoom4Initial,
+    ZoomStates.Zoom4ToZoom3,
+    ZoomStates.Zoom4ToZoom5,
+    ZoomStates.ZoomOutToZoom4,
+]
 const includesZoomStatesZoom5Galaxy = [ZoomStates.Zoom5]
 
 const GalaxySwitch: React.FC<{ activeZoom: ZoomStates | null; sizes: ReturnType<typeof useSize> }> = props => {

@@ -8,6 +8,7 @@ import { Box, Flex, Grid, GridItem, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { memo, useId } from 'react'
 import { LandingPageFilterCollectionQueryParams } from 'src/pages/landingpage/[slug]/[filter]/[collection]'
+import { Cloud } from '../../components/Cloud'
 import { CollectionCloudItem } from './types'
 import { usePresenter } from './usePresenter'
 
@@ -35,12 +36,28 @@ export const PaginatedCollection: React.FunctionComponent<PaginatedCollectionPro
         dimensions: { height, width },
         total,
         paginatedCollectionData,
+        type,
     } = usePresenter({ ...props, selector: id })
-
+    const startY = height / 2 - 500 / 2
     return (
         <Box overflow="hidden" height={height} width={width}>
-            <svg width={width} height={height} ref={svgRef} viewBox={`0 0 ${1000} ${1000}`}>
-                <Box as={'foreignObject'} width={1000} height={500} y={height / 2 - 500 / 2} overflow={'visible'}>
+            <svg
+                width={width}
+                height={height}
+                ref={svgRef}
+                viewBox={`0 0 ${1000} ${1000}`}
+                style={{ overflow: 'visible' }}
+            >
+                <Cloud
+                    x={-250}
+                    y={-250}
+                    defaultBackground={`levels.z1.${type}.hover1`}
+                    hoverBackground={`levels.z1.${type}.hover1`}
+                    pointerEvents={'none'}
+                    height={1500}
+                    width={1500}
+                />
+                <Box as={'foreignObject'} width={1000} height={500} y={startY} overflow={'visible'}>
                     <Grid
                         templateColumns="repeat(6, 1fr)"
                         autoColumns={'100%'}
@@ -108,7 +125,6 @@ export const PaginatedCollection: React.FunctionComponent<PaginatedCollectionPro
                                             height={90}
                                             overflow={'visible'}
                                             className={`foreign-${id}`}
-                                            opacity={0}
                                         >
                                             {item.title && (
                                                 <Flex

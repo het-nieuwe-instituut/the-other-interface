@@ -77,7 +77,6 @@ const MainGalaxy: React.FC<MainGalaxyProps> = props => {
                             store.dispatch(
                                 galaxyInterfaceActions.setActiveZoom({
                                     activeZoom: ZoomStates.Zoom0ToZoom1,
-                                    afterAnimationState: ZoomStates.Zoom1,
                                 })
                             )
                         }
@@ -130,7 +129,6 @@ const MainGalaxy: React.FC<MainGalaxyProps> = props => {
                                                                     translateY: item.yFromCenter,
                                                                 },
                                                             },
-                                                            afterAnimationState: ZoomStates.Zoom2Initial,
                                                         })
                                                     )
                                                 }}
@@ -149,8 +147,6 @@ const MainGalaxy: React.FC<MainGalaxyProps> = props => {
                                                             <Text width="12.5rem" mb={1} textStyle={'cloudText'}>
                                                                 {t('archives', { count: item.numberOfInstances })}
                                                             </Text>
-                                                            {/* TODO */}
-                                                            {console.log(archiveComponent)}
                                                             {!!archiveComponent?.count && (
                                                                 <Text width="12.5rem" textStyle={'cloudText'}>
                                                                     {t('archiveItems', {
@@ -184,7 +180,6 @@ const MainGalaxy: React.FC<MainGalaxyProps> = props => {
                                         store.dispatch(
                                             galaxyInterfaceActions.setActiveZoom({
                                                 activeZoom: ZoomStates.Zoom1ToZoom1Stories,
-                                                afterAnimationState: ZoomStates.Zoom1Stories,
                                             })
                                         )
                                     }

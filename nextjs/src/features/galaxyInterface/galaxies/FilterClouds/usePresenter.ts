@@ -14,7 +14,7 @@ export function usePresenter(dimensions: Dimensions, selector: string, filterClo
         d => d.numberOfInstances
     )
     const { svgRef } = useD3Simulation(dimensions, clonedFilterData, selector, dataDimensions)
-    const zoomEvents = useD3ZoomEvents(svgRef, dimensions)
+    const zoomEvents = useD3ZoomEvents({ svgRef, dimensions })
 
     return {
         svgRef,
