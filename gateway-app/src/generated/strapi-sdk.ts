@@ -395,6 +395,14 @@ export type ComponentModulesCarouselItemsArgs = {
     sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
 }
 
+export type ComponentModulesCollectionRelation = {
+    __typename?: 'ComponentModulesCollectionRelation'
+    author?: Maybe<AuthorEntityResponse>
+    id: Scalars['ID']
+    story?: Maybe<StoryEntityResponse>
+    triplyRecord?: Maybe<TriplyRecordEntityResponse>
+}
+
 export type ComponentModulesGridModule = {
     __typename?: 'ComponentModulesGridModule'
     buttons?: Maybe<Array<Maybe<ComponentCoreButton>>>
@@ -432,9 +440,11 @@ export type ComponentModulesImage = {
     __typename?: 'ComponentModulesImage'
     alt_text?: Maybe<Scalars['String']>
     caption?: Maybe<Scalars['String']>
+    captionRelation?: Maybe<ComponentModulesCollectionRelation>
     id: Scalars['ID']
     image: UploadFileEntityResponse
     imageModuleLayout: ComponentCoreModuleLayouts
+    imageRelation?: Maybe<ComponentModulesCollectionRelation>
 }
 
 export type ComponentModulesImageCarousel = {
@@ -637,6 +647,7 @@ export type GenericMorph =
     | ComponentCoreTimeframe
     | ComponentModulesButtonsModule
     | ComponentModulesCarousel
+    | ComponentModulesCollectionRelation
     | ComponentModulesGridModule
     | ComponentModulesImage
     | ComponentModulesImageCarousel
@@ -2512,6 +2523,106 @@ export type HomepageFragmentFragment = {
                   spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
                   spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
               }
+              captionRelation?: {
+                  __typename?: 'ComponentModulesCollectionRelation'
+                  id: string
+                  author?: {
+                      __typename?: 'AuthorEntityResponse'
+                      data?: {
+                          __typename?: 'AuthorEntity'
+                          id?: string | null
+                          attributes?: {
+                              __typename?: 'Author'
+                              firstName: string
+                              insertion?: string | null
+                              lastName: string
+                              createdAt?: any | null
+                              updatedAt?: any | null
+                              publishedAt?: any | null
+                          } | null
+                      } | null
+                  } | null
+                  story?: {
+                      __typename?: 'StoryEntityResponse'
+                      data?: {
+                          __typename?: 'StoryEntity'
+                          id?: string | null
+                          attributes?: {
+                              __typename?: 'Story'
+                              title: string
+                              slug?: string | null
+                              description?: string | null
+                              shortDescription?: string | null
+                              createdAt?: any | null
+                              updatedAt?: any | null
+                              publishedAt?: any | null
+                              locale?: string | null
+                          } | null
+                      } | null
+                  } | null
+                  triplyRecord?: {
+                      __typename?: 'TriplyRecordEntityResponse'
+                      data?: {
+                          __typename?: 'TriplyRecordEntity'
+                          id?: string | null
+                          attributes?: {
+                              __typename?: 'TriplyRecord'
+                              recordId: string
+                              type: Enum_Triplyrecord_Type
+                          } | null
+                      } | null
+                  } | null
+              } | null
+              imageRelation?: {
+                  __typename?: 'ComponentModulesCollectionRelation'
+                  id: string
+                  author?: {
+                      __typename?: 'AuthorEntityResponse'
+                      data?: {
+                          __typename?: 'AuthorEntity'
+                          id?: string | null
+                          attributes?: {
+                              __typename?: 'Author'
+                              firstName: string
+                              insertion?: string | null
+                              lastName: string
+                              createdAt?: any | null
+                              updatedAt?: any | null
+                              publishedAt?: any | null
+                          } | null
+                      } | null
+                  } | null
+                  story?: {
+                      __typename?: 'StoryEntityResponse'
+                      data?: {
+                          __typename?: 'StoryEntity'
+                          id?: string | null
+                          attributes?: {
+                              __typename?: 'Story'
+                              title: string
+                              slug?: string | null
+                              description?: string | null
+                              shortDescription?: string | null
+                              createdAt?: any | null
+                              updatedAt?: any | null
+                              publishedAt?: any | null
+                              locale?: string | null
+                          } | null
+                      } | null
+                  } | null
+                  triplyRecord?: {
+                      __typename?: 'TriplyRecordEntityResponse'
+                      data?: {
+                          __typename?: 'TriplyRecordEntity'
+                          id?: string | null
+                          attributes?: {
+                              __typename?: 'TriplyRecord'
+                              recordId: string
+                              type: Enum_Triplyrecord_Type
+                          } | null
+                      } | null
+                  } | null
+              } | null
           }
         | {
               __typename: 'ComponentModulesImageCarousel'
@@ -2924,6 +3035,106 @@ export type HomepageQuery = {
                                           spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
                                           spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
                                       }
+                                      captionRelation?: {
+                                          __typename?: 'ComponentModulesCollectionRelation'
+                                          id: string
+                                          author?: {
+                                              __typename?: 'AuthorEntityResponse'
+                                              data?: {
+                                                  __typename?: 'AuthorEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'Author'
+                                                      firstName: string
+                                                      insertion?: string | null
+                                                      lastName: string
+                                                      createdAt?: any | null
+                                                      updatedAt?: any | null
+                                                      publishedAt?: any | null
+                                                  } | null
+                                              } | null
+                                          } | null
+                                          story?: {
+                                              __typename?: 'StoryEntityResponse'
+                                              data?: {
+                                                  __typename?: 'StoryEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'Story'
+                                                      title: string
+                                                      slug?: string | null
+                                                      description?: string | null
+                                                      shortDescription?: string | null
+                                                      createdAt?: any | null
+                                                      updatedAt?: any | null
+                                                      publishedAt?: any | null
+                                                      locale?: string | null
+                                                  } | null
+                                              } | null
+                                          } | null
+                                          triplyRecord?: {
+                                              __typename?: 'TriplyRecordEntityResponse'
+                                              data?: {
+                                                  __typename?: 'TriplyRecordEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'TriplyRecord'
+                                                      recordId: string
+                                                      type: Enum_Triplyrecord_Type
+                                                  } | null
+                                              } | null
+                                          } | null
+                                      } | null
+                                      imageRelation?: {
+                                          __typename?: 'ComponentModulesCollectionRelation'
+                                          id: string
+                                          author?: {
+                                              __typename?: 'AuthorEntityResponse'
+                                              data?: {
+                                                  __typename?: 'AuthorEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'Author'
+                                                      firstName: string
+                                                      insertion?: string | null
+                                                      lastName: string
+                                                      createdAt?: any | null
+                                                      updatedAt?: any | null
+                                                      publishedAt?: any | null
+                                                  } | null
+                                              } | null
+                                          } | null
+                                          story?: {
+                                              __typename?: 'StoryEntityResponse'
+                                              data?: {
+                                                  __typename?: 'StoryEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'Story'
+                                                      title: string
+                                                      slug?: string | null
+                                                      description?: string | null
+                                                      shortDescription?: string | null
+                                                      createdAt?: any | null
+                                                      updatedAt?: any | null
+                                                      publishedAt?: any | null
+                                                      locale?: string | null
+                                                  } | null
+                                              } | null
+                                          } | null
+                                          triplyRecord?: {
+                                              __typename?: 'TriplyRecordEntityResponse'
+                                              data?: {
+                                                  __typename?: 'TriplyRecordEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'TriplyRecord'
+                                                      recordId: string
+                                                      type: Enum_Triplyrecord_Type
+                                                  } | null
+                                              } | null
+                                          } | null
+                                      } | null
                                   }
                                 | {
                                       __typename: 'ComponentModulesImageCarousel'
@@ -3304,6 +3515,106 @@ export type HomepageQuery = {
                               spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
                               spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
                           }
+                          captionRelation?: {
+                              __typename?: 'ComponentModulesCollectionRelation'
+                              id: string
+                              author?: {
+                                  __typename?: 'AuthorEntityResponse'
+                                  data?: {
+                                      __typename?: 'AuthorEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'Author'
+                                          firstName: string
+                                          insertion?: string | null
+                                          lastName: string
+                                          createdAt?: any | null
+                                          updatedAt?: any | null
+                                          publishedAt?: any | null
+                                      } | null
+                                  } | null
+                              } | null
+                              story?: {
+                                  __typename?: 'StoryEntityResponse'
+                                  data?: {
+                                      __typename?: 'StoryEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'Story'
+                                          title: string
+                                          slug?: string | null
+                                          description?: string | null
+                                          shortDescription?: string | null
+                                          createdAt?: any | null
+                                          updatedAt?: any | null
+                                          publishedAt?: any | null
+                                          locale?: string | null
+                                      } | null
+                                  } | null
+                              } | null
+                              triplyRecord?: {
+                                  __typename?: 'TriplyRecordEntityResponse'
+                                  data?: {
+                                      __typename?: 'TriplyRecordEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'TriplyRecord'
+                                          recordId: string
+                                          type: Enum_Triplyrecord_Type
+                                      } | null
+                                  } | null
+                              } | null
+                          } | null
+                          imageRelation?: {
+                              __typename?: 'ComponentModulesCollectionRelation'
+                              id: string
+                              author?: {
+                                  __typename?: 'AuthorEntityResponse'
+                                  data?: {
+                                      __typename?: 'AuthorEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'Author'
+                                          firstName: string
+                                          insertion?: string | null
+                                          lastName: string
+                                          createdAt?: any | null
+                                          updatedAt?: any | null
+                                          publishedAt?: any | null
+                                      } | null
+                                  } | null
+                              } | null
+                              story?: {
+                                  __typename?: 'StoryEntityResponse'
+                                  data?: {
+                                      __typename?: 'StoryEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'Story'
+                                          title: string
+                                          slug?: string | null
+                                          description?: string | null
+                                          shortDescription?: string | null
+                                          createdAt?: any | null
+                                          updatedAt?: any | null
+                                          publishedAt?: any | null
+                                          locale?: string | null
+                                      } | null
+                                  } | null
+                              } | null
+                              triplyRecord?: {
+                                  __typename?: 'TriplyRecordEntityResponse'
+                                  data?: {
+                                      __typename?: 'TriplyRecordEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'TriplyRecord'
+                                          recordId: string
+                                          type: Enum_Triplyrecord_Type
+                                      } | null
+                                  } | null
+                              } | null
+                          } | null
                       }
                     | {
                           __typename: 'ComponentModulesImageCarousel'
@@ -3695,6 +4006,106 @@ export type LandingpageFragmentFragment = {
                   spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
                   spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
               }
+              captionRelation?: {
+                  __typename?: 'ComponentModulesCollectionRelation'
+                  id: string
+                  author?: {
+                      __typename?: 'AuthorEntityResponse'
+                      data?: {
+                          __typename?: 'AuthorEntity'
+                          id?: string | null
+                          attributes?: {
+                              __typename?: 'Author'
+                              firstName: string
+                              insertion?: string | null
+                              lastName: string
+                              createdAt?: any | null
+                              updatedAt?: any | null
+                              publishedAt?: any | null
+                          } | null
+                      } | null
+                  } | null
+                  story?: {
+                      __typename?: 'StoryEntityResponse'
+                      data?: {
+                          __typename?: 'StoryEntity'
+                          id?: string | null
+                          attributes?: {
+                              __typename?: 'Story'
+                              title: string
+                              slug?: string | null
+                              description?: string | null
+                              shortDescription?: string | null
+                              createdAt?: any | null
+                              updatedAt?: any | null
+                              publishedAt?: any | null
+                              locale?: string | null
+                          } | null
+                      } | null
+                  } | null
+                  triplyRecord?: {
+                      __typename?: 'TriplyRecordEntityResponse'
+                      data?: {
+                          __typename?: 'TriplyRecordEntity'
+                          id?: string | null
+                          attributes?: {
+                              __typename?: 'TriplyRecord'
+                              recordId: string
+                              type: Enum_Triplyrecord_Type
+                          } | null
+                      } | null
+                  } | null
+              } | null
+              imageRelation?: {
+                  __typename?: 'ComponentModulesCollectionRelation'
+                  id: string
+                  author?: {
+                      __typename?: 'AuthorEntityResponse'
+                      data?: {
+                          __typename?: 'AuthorEntity'
+                          id?: string | null
+                          attributes?: {
+                              __typename?: 'Author'
+                              firstName: string
+                              insertion?: string | null
+                              lastName: string
+                              createdAt?: any | null
+                              updatedAt?: any | null
+                              publishedAt?: any | null
+                          } | null
+                      } | null
+                  } | null
+                  story?: {
+                      __typename?: 'StoryEntityResponse'
+                      data?: {
+                          __typename?: 'StoryEntity'
+                          id?: string | null
+                          attributes?: {
+                              __typename?: 'Story'
+                              title: string
+                              slug?: string | null
+                              description?: string | null
+                              shortDescription?: string | null
+                              createdAt?: any | null
+                              updatedAt?: any | null
+                              publishedAt?: any | null
+                              locale?: string | null
+                          } | null
+                      } | null
+                  } | null
+                  triplyRecord?: {
+                      __typename?: 'TriplyRecordEntityResponse'
+                      data?: {
+                          __typename?: 'TriplyRecordEntity'
+                          id?: string | null
+                          attributes?: {
+                              __typename?: 'TriplyRecord'
+                              recordId: string
+                              type: Enum_Triplyrecord_Type
+                          } | null
+                      } | null
+                  } | null
+              } | null
           }
         | {
               __typename: 'ComponentModulesImageCarousel'
@@ -4100,6 +4511,106 @@ export type LandingpageEntityFragmentFragment = {
                                   spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
                                   spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
                               }
+                              captionRelation?: {
+                                  __typename?: 'ComponentModulesCollectionRelation'
+                                  id: string
+                                  author?: {
+                                      __typename?: 'AuthorEntityResponse'
+                                      data?: {
+                                          __typename?: 'AuthorEntity'
+                                          id?: string | null
+                                          attributes?: {
+                                              __typename?: 'Author'
+                                              firstName: string
+                                              insertion?: string | null
+                                              lastName: string
+                                              createdAt?: any | null
+                                              updatedAt?: any | null
+                                              publishedAt?: any | null
+                                          } | null
+                                      } | null
+                                  } | null
+                                  story?: {
+                                      __typename?: 'StoryEntityResponse'
+                                      data?: {
+                                          __typename?: 'StoryEntity'
+                                          id?: string | null
+                                          attributes?: {
+                                              __typename?: 'Story'
+                                              title: string
+                                              slug?: string | null
+                                              description?: string | null
+                                              shortDescription?: string | null
+                                              createdAt?: any | null
+                                              updatedAt?: any | null
+                                              publishedAt?: any | null
+                                              locale?: string | null
+                                          } | null
+                                      } | null
+                                  } | null
+                                  triplyRecord?: {
+                                      __typename?: 'TriplyRecordEntityResponse'
+                                      data?: {
+                                          __typename?: 'TriplyRecordEntity'
+                                          id?: string | null
+                                          attributes?: {
+                                              __typename?: 'TriplyRecord'
+                                              recordId: string
+                                              type: Enum_Triplyrecord_Type
+                                          } | null
+                                      } | null
+                                  } | null
+                              } | null
+                              imageRelation?: {
+                                  __typename?: 'ComponentModulesCollectionRelation'
+                                  id: string
+                                  author?: {
+                                      __typename?: 'AuthorEntityResponse'
+                                      data?: {
+                                          __typename?: 'AuthorEntity'
+                                          id?: string | null
+                                          attributes?: {
+                                              __typename?: 'Author'
+                                              firstName: string
+                                              insertion?: string | null
+                                              lastName: string
+                                              createdAt?: any | null
+                                              updatedAt?: any | null
+                                              publishedAt?: any | null
+                                          } | null
+                                      } | null
+                                  } | null
+                                  story?: {
+                                      __typename?: 'StoryEntityResponse'
+                                      data?: {
+                                          __typename?: 'StoryEntity'
+                                          id?: string | null
+                                          attributes?: {
+                                              __typename?: 'Story'
+                                              title: string
+                                              slug?: string | null
+                                              description?: string | null
+                                              shortDescription?: string | null
+                                              createdAt?: any | null
+                                              updatedAt?: any | null
+                                              publishedAt?: any | null
+                                              locale?: string | null
+                                          } | null
+                                      } | null
+                                  } | null
+                                  triplyRecord?: {
+                                      __typename?: 'TriplyRecordEntityResponse'
+                                      data?: {
+                                          __typename?: 'TriplyRecordEntity'
+                                          id?: string | null
+                                          attributes?: {
+                                              __typename?: 'TriplyRecord'
+                                              recordId: string
+                                              type: Enum_Triplyrecord_Type
+                                          } | null
+                                      } | null
+                                  } | null
+                              } | null
                           }
                         | {
                               __typename: 'ComponentModulesImageCarousel'
@@ -4480,6 +4991,106 @@ export type LandingpageEntityFragmentFragment = {
                       spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
                       spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
                   }
+                  captionRelation?: {
+                      __typename?: 'ComponentModulesCollectionRelation'
+                      id: string
+                      author?: {
+                          __typename?: 'AuthorEntityResponse'
+                          data?: {
+                              __typename?: 'AuthorEntity'
+                              id?: string | null
+                              attributes?: {
+                                  __typename?: 'Author'
+                                  firstName: string
+                                  insertion?: string | null
+                                  lastName: string
+                                  createdAt?: any | null
+                                  updatedAt?: any | null
+                                  publishedAt?: any | null
+                              } | null
+                          } | null
+                      } | null
+                      story?: {
+                          __typename?: 'StoryEntityResponse'
+                          data?: {
+                              __typename?: 'StoryEntity'
+                              id?: string | null
+                              attributes?: {
+                                  __typename?: 'Story'
+                                  title: string
+                                  slug?: string | null
+                                  description?: string | null
+                                  shortDescription?: string | null
+                                  createdAt?: any | null
+                                  updatedAt?: any | null
+                                  publishedAt?: any | null
+                                  locale?: string | null
+                              } | null
+                          } | null
+                      } | null
+                      triplyRecord?: {
+                          __typename?: 'TriplyRecordEntityResponse'
+                          data?: {
+                              __typename?: 'TriplyRecordEntity'
+                              id?: string | null
+                              attributes?: {
+                                  __typename?: 'TriplyRecord'
+                                  recordId: string
+                                  type: Enum_Triplyrecord_Type
+                              } | null
+                          } | null
+                      } | null
+                  } | null
+                  imageRelation?: {
+                      __typename?: 'ComponentModulesCollectionRelation'
+                      id: string
+                      author?: {
+                          __typename?: 'AuthorEntityResponse'
+                          data?: {
+                              __typename?: 'AuthorEntity'
+                              id?: string | null
+                              attributes?: {
+                                  __typename?: 'Author'
+                                  firstName: string
+                                  insertion?: string | null
+                                  lastName: string
+                                  createdAt?: any | null
+                                  updatedAt?: any | null
+                                  publishedAt?: any | null
+                              } | null
+                          } | null
+                      } | null
+                      story?: {
+                          __typename?: 'StoryEntityResponse'
+                          data?: {
+                              __typename?: 'StoryEntity'
+                              id?: string | null
+                              attributes?: {
+                                  __typename?: 'Story'
+                                  title: string
+                                  slug?: string | null
+                                  description?: string | null
+                                  shortDescription?: string | null
+                                  createdAt?: any | null
+                                  updatedAt?: any | null
+                                  publishedAt?: any | null
+                                  locale?: string | null
+                              } | null
+                          } | null
+                      } | null
+                      triplyRecord?: {
+                          __typename?: 'TriplyRecordEntityResponse'
+                          data?: {
+                              __typename?: 'TriplyRecordEntity'
+                              id?: string | null
+                              attributes?: {
+                                  __typename?: 'TriplyRecord'
+                                  recordId: string
+                                  type: Enum_Triplyrecord_Type
+                              } | null
+                          } | null
+                      } | null
+                  } | null
               }
             | {
                   __typename: 'ComponentModulesImageCarousel'
@@ -4895,6 +5506,106 @@ export type LandingPageQuery = {
                                           spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
                                           spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
                                       }
+                                      captionRelation?: {
+                                          __typename?: 'ComponentModulesCollectionRelation'
+                                          id: string
+                                          author?: {
+                                              __typename?: 'AuthorEntityResponse'
+                                              data?: {
+                                                  __typename?: 'AuthorEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'Author'
+                                                      firstName: string
+                                                      insertion?: string | null
+                                                      lastName: string
+                                                      createdAt?: any | null
+                                                      updatedAt?: any | null
+                                                      publishedAt?: any | null
+                                                  } | null
+                                              } | null
+                                          } | null
+                                          story?: {
+                                              __typename?: 'StoryEntityResponse'
+                                              data?: {
+                                                  __typename?: 'StoryEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'Story'
+                                                      title: string
+                                                      slug?: string | null
+                                                      description?: string | null
+                                                      shortDescription?: string | null
+                                                      createdAt?: any | null
+                                                      updatedAt?: any | null
+                                                      publishedAt?: any | null
+                                                      locale?: string | null
+                                                  } | null
+                                              } | null
+                                          } | null
+                                          triplyRecord?: {
+                                              __typename?: 'TriplyRecordEntityResponse'
+                                              data?: {
+                                                  __typename?: 'TriplyRecordEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'TriplyRecord'
+                                                      recordId: string
+                                                      type: Enum_Triplyrecord_Type
+                                                  } | null
+                                              } | null
+                                          } | null
+                                      } | null
+                                      imageRelation?: {
+                                          __typename?: 'ComponentModulesCollectionRelation'
+                                          id: string
+                                          author?: {
+                                              __typename?: 'AuthorEntityResponse'
+                                              data?: {
+                                                  __typename?: 'AuthorEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'Author'
+                                                      firstName: string
+                                                      insertion?: string | null
+                                                      lastName: string
+                                                      createdAt?: any | null
+                                                      updatedAt?: any | null
+                                                      publishedAt?: any | null
+                                                  } | null
+                                              } | null
+                                          } | null
+                                          story?: {
+                                              __typename?: 'StoryEntityResponse'
+                                              data?: {
+                                                  __typename?: 'StoryEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'Story'
+                                                      title: string
+                                                      slug?: string | null
+                                                      description?: string | null
+                                                      shortDescription?: string | null
+                                                      createdAt?: any | null
+                                                      updatedAt?: any | null
+                                                      publishedAt?: any | null
+                                                      locale?: string | null
+                                                  } | null
+                                              } | null
+                                          } | null
+                                          triplyRecord?: {
+                                              __typename?: 'TriplyRecordEntityResponse'
+                                              data?: {
+                                                  __typename?: 'TriplyRecordEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'TriplyRecord'
+                                                      recordId: string
+                                                      type: Enum_Triplyrecord_Type
+                                                  } | null
+                                              } | null
+                                          } | null
+                                      } | null
                                   }
                                 | {
                                       __typename: 'ComponentModulesImageCarousel'
@@ -5275,6 +5986,106 @@ export type LandingPageQuery = {
                               spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
                               spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
                           }
+                          captionRelation?: {
+                              __typename?: 'ComponentModulesCollectionRelation'
+                              id: string
+                              author?: {
+                                  __typename?: 'AuthorEntityResponse'
+                                  data?: {
+                                      __typename?: 'AuthorEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'Author'
+                                          firstName: string
+                                          insertion?: string | null
+                                          lastName: string
+                                          createdAt?: any | null
+                                          updatedAt?: any | null
+                                          publishedAt?: any | null
+                                      } | null
+                                  } | null
+                              } | null
+                              story?: {
+                                  __typename?: 'StoryEntityResponse'
+                                  data?: {
+                                      __typename?: 'StoryEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'Story'
+                                          title: string
+                                          slug?: string | null
+                                          description?: string | null
+                                          shortDescription?: string | null
+                                          createdAt?: any | null
+                                          updatedAt?: any | null
+                                          publishedAt?: any | null
+                                          locale?: string | null
+                                      } | null
+                                  } | null
+                              } | null
+                              triplyRecord?: {
+                                  __typename?: 'TriplyRecordEntityResponse'
+                                  data?: {
+                                      __typename?: 'TriplyRecordEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'TriplyRecord'
+                                          recordId: string
+                                          type: Enum_Triplyrecord_Type
+                                      } | null
+                                  } | null
+                              } | null
+                          } | null
+                          imageRelation?: {
+                              __typename?: 'ComponentModulesCollectionRelation'
+                              id: string
+                              author?: {
+                                  __typename?: 'AuthorEntityResponse'
+                                  data?: {
+                                      __typename?: 'AuthorEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'Author'
+                                          firstName: string
+                                          insertion?: string | null
+                                          lastName: string
+                                          createdAt?: any | null
+                                          updatedAt?: any | null
+                                          publishedAt?: any | null
+                                      } | null
+                                  } | null
+                              } | null
+                              story?: {
+                                  __typename?: 'StoryEntityResponse'
+                                  data?: {
+                                      __typename?: 'StoryEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'Story'
+                                          title: string
+                                          slug?: string | null
+                                          description?: string | null
+                                          shortDescription?: string | null
+                                          createdAt?: any | null
+                                          updatedAt?: any | null
+                                          publishedAt?: any | null
+                                          locale?: string | null
+                                      } | null
+                                  } | null
+                              } | null
+                              triplyRecord?: {
+                                  __typename?: 'TriplyRecordEntityResponse'
+                                  data?: {
+                                      __typename?: 'TriplyRecordEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'TriplyRecord'
+                                          recordId: string
+                                          type: Enum_Triplyrecord_Type
+                                      } | null
+                                  } | null
+                              } | null
+                          } | null
                       }
                     | {
                           __typename: 'ComponentModulesImageCarousel'
@@ -5695,6 +6506,106 @@ export type LandingPagesQuery = {
                                           spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
                                           spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
                                       }
+                                      captionRelation?: {
+                                          __typename?: 'ComponentModulesCollectionRelation'
+                                          id: string
+                                          author?: {
+                                              __typename?: 'AuthorEntityResponse'
+                                              data?: {
+                                                  __typename?: 'AuthorEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'Author'
+                                                      firstName: string
+                                                      insertion?: string | null
+                                                      lastName: string
+                                                      createdAt?: any | null
+                                                      updatedAt?: any | null
+                                                      publishedAt?: any | null
+                                                  } | null
+                                              } | null
+                                          } | null
+                                          story?: {
+                                              __typename?: 'StoryEntityResponse'
+                                              data?: {
+                                                  __typename?: 'StoryEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'Story'
+                                                      title: string
+                                                      slug?: string | null
+                                                      description?: string | null
+                                                      shortDescription?: string | null
+                                                      createdAt?: any | null
+                                                      updatedAt?: any | null
+                                                      publishedAt?: any | null
+                                                      locale?: string | null
+                                                  } | null
+                                              } | null
+                                          } | null
+                                          triplyRecord?: {
+                                              __typename?: 'TriplyRecordEntityResponse'
+                                              data?: {
+                                                  __typename?: 'TriplyRecordEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'TriplyRecord'
+                                                      recordId: string
+                                                      type: Enum_Triplyrecord_Type
+                                                  } | null
+                                              } | null
+                                          } | null
+                                      } | null
+                                      imageRelation?: {
+                                          __typename?: 'ComponentModulesCollectionRelation'
+                                          id: string
+                                          author?: {
+                                              __typename?: 'AuthorEntityResponse'
+                                              data?: {
+                                                  __typename?: 'AuthorEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'Author'
+                                                      firstName: string
+                                                      insertion?: string | null
+                                                      lastName: string
+                                                      createdAt?: any | null
+                                                      updatedAt?: any | null
+                                                      publishedAt?: any | null
+                                                  } | null
+                                              } | null
+                                          } | null
+                                          story?: {
+                                              __typename?: 'StoryEntityResponse'
+                                              data?: {
+                                                  __typename?: 'StoryEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'Story'
+                                                      title: string
+                                                      slug?: string | null
+                                                      description?: string | null
+                                                      shortDescription?: string | null
+                                                      createdAt?: any | null
+                                                      updatedAt?: any | null
+                                                      publishedAt?: any | null
+                                                      locale?: string | null
+                                                  } | null
+                                              } | null
+                                          } | null
+                                          triplyRecord?: {
+                                              __typename?: 'TriplyRecordEntityResponse'
+                                              data?: {
+                                                  __typename?: 'TriplyRecordEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'TriplyRecord'
+                                                      recordId: string
+                                                      type: Enum_Triplyrecord_Type
+                                                  } | null
+                                              } | null
+                                          } | null
+                                      } | null
                                   }
                                 | {
                                       __typename: 'ComponentModulesImageCarousel'
@@ -6075,6 +6986,106 @@ export type LandingPagesQuery = {
                               spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
                               spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
                           }
+                          captionRelation?: {
+                              __typename?: 'ComponentModulesCollectionRelation'
+                              id: string
+                              author?: {
+                                  __typename?: 'AuthorEntityResponse'
+                                  data?: {
+                                      __typename?: 'AuthorEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'Author'
+                                          firstName: string
+                                          insertion?: string | null
+                                          lastName: string
+                                          createdAt?: any | null
+                                          updatedAt?: any | null
+                                          publishedAt?: any | null
+                                      } | null
+                                  } | null
+                              } | null
+                              story?: {
+                                  __typename?: 'StoryEntityResponse'
+                                  data?: {
+                                      __typename?: 'StoryEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'Story'
+                                          title: string
+                                          slug?: string | null
+                                          description?: string | null
+                                          shortDescription?: string | null
+                                          createdAt?: any | null
+                                          updatedAt?: any | null
+                                          publishedAt?: any | null
+                                          locale?: string | null
+                                      } | null
+                                  } | null
+                              } | null
+                              triplyRecord?: {
+                                  __typename?: 'TriplyRecordEntityResponse'
+                                  data?: {
+                                      __typename?: 'TriplyRecordEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'TriplyRecord'
+                                          recordId: string
+                                          type: Enum_Triplyrecord_Type
+                                      } | null
+                                  } | null
+                              } | null
+                          } | null
+                          imageRelation?: {
+                              __typename?: 'ComponentModulesCollectionRelation'
+                              id: string
+                              author?: {
+                                  __typename?: 'AuthorEntityResponse'
+                                  data?: {
+                                      __typename?: 'AuthorEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'Author'
+                                          firstName: string
+                                          insertion?: string | null
+                                          lastName: string
+                                          createdAt?: any | null
+                                          updatedAt?: any | null
+                                          publishedAt?: any | null
+                                      } | null
+                                  } | null
+                              } | null
+                              story?: {
+                                  __typename?: 'StoryEntityResponse'
+                                  data?: {
+                                      __typename?: 'StoryEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'Story'
+                                          title: string
+                                          slug?: string | null
+                                          description?: string | null
+                                          shortDescription?: string | null
+                                          createdAt?: any | null
+                                          updatedAt?: any | null
+                                          publishedAt?: any | null
+                                          locale?: string | null
+                                      } | null
+                                  } | null
+                              } | null
+                              triplyRecord?: {
+                                  __typename?: 'TriplyRecordEntityResponse'
+                                  data?: {
+                                      __typename?: 'TriplyRecordEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'TriplyRecord'
+                                          recordId: string
+                                          type: Enum_Triplyrecord_Type
+                                      } | null
+                                  } | null
+                              } | null
+                          } | null
                       }
                     | {
                           __typename: 'ComponentModulesImageCarousel'
@@ -6501,6 +7512,106 @@ export type MenupageFragmentFragment = {
                   spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
                   spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
               }
+              captionRelation?: {
+                  __typename?: 'ComponentModulesCollectionRelation'
+                  id: string
+                  author?: {
+                      __typename?: 'AuthorEntityResponse'
+                      data?: {
+                          __typename?: 'AuthorEntity'
+                          id?: string | null
+                          attributes?: {
+                              __typename?: 'Author'
+                              firstName: string
+                              insertion?: string | null
+                              lastName: string
+                              createdAt?: any | null
+                              updatedAt?: any | null
+                              publishedAt?: any | null
+                          } | null
+                      } | null
+                  } | null
+                  story?: {
+                      __typename?: 'StoryEntityResponse'
+                      data?: {
+                          __typename?: 'StoryEntity'
+                          id?: string | null
+                          attributes?: {
+                              __typename?: 'Story'
+                              title: string
+                              slug?: string | null
+                              description?: string | null
+                              shortDescription?: string | null
+                              createdAt?: any | null
+                              updatedAt?: any | null
+                              publishedAt?: any | null
+                              locale?: string | null
+                          } | null
+                      } | null
+                  } | null
+                  triplyRecord?: {
+                      __typename?: 'TriplyRecordEntityResponse'
+                      data?: {
+                          __typename?: 'TriplyRecordEntity'
+                          id?: string | null
+                          attributes?: {
+                              __typename?: 'TriplyRecord'
+                              recordId: string
+                              type: Enum_Triplyrecord_Type
+                          } | null
+                      } | null
+                  } | null
+              } | null
+              imageRelation?: {
+                  __typename?: 'ComponentModulesCollectionRelation'
+                  id: string
+                  author?: {
+                      __typename?: 'AuthorEntityResponse'
+                      data?: {
+                          __typename?: 'AuthorEntity'
+                          id?: string | null
+                          attributes?: {
+                              __typename?: 'Author'
+                              firstName: string
+                              insertion?: string | null
+                              lastName: string
+                              createdAt?: any | null
+                              updatedAt?: any | null
+                              publishedAt?: any | null
+                          } | null
+                      } | null
+                  } | null
+                  story?: {
+                      __typename?: 'StoryEntityResponse'
+                      data?: {
+                          __typename?: 'StoryEntity'
+                          id?: string | null
+                          attributes?: {
+                              __typename?: 'Story'
+                              title: string
+                              slug?: string | null
+                              description?: string | null
+                              shortDescription?: string | null
+                              createdAt?: any | null
+                              updatedAt?: any | null
+                              publishedAt?: any | null
+                              locale?: string | null
+                          } | null
+                      } | null
+                  } | null
+                  triplyRecord?: {
+                      __typename?: 'TriplyRecordEntityResponse'
+                      data?: {
+                          __typename?: 'TriplyRecordEntity'
+                          id?: string | null
+                          attributes?: {
+                              __typename?: 'TriplyRecord'
+                              recordId: string
+                              type: Enum_Triplyrecord_Type
+                          } | null
+                      } | null
+                  } | null
+              } | null
           }
         | {
               __typename: 'ComponentModulesImageCarousel'
@@ -6844,6 +7955,106 @@ export type MenupageEntityFragmentFragment = {
                                   spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
                                   spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
                               }
+                              captionRelation?: {
+                                  __typename?: 'ComponentModulesCollectionRelation'
+                                  id: string
+                                  author?: {
+                                      __typename?: 'AuthorEntityResponse'
+                                      data?: {
+                                          __typename?: 'AuthorEntity'
+                                          id?: string | null
+                                          attributes?: {
+                                              __typename?: 'Author'
+                                              firstName: string
+                                              insertion?: string | null
+                                              lastName: string
+                                              createdAt?: any | null
+                                              updatedAt?: any | null
+                                              publishedAt?: any | null
+                                          } | null
+                                      } | null
+                                  } | null
+                                  story?: {
+                                      __typename?: 'StoryEntityResponse'
+                                      data?: {
+                                          __typename?: 'StoryEntity'
+                                          id?: string | null
+                                          attributes?: {
+                                              __typename?: 'Story'
+                                              title: string
+                                              slug?: string | null
+                                              description?: string | null
+                                              shortDescription?: string | null
+                                              createdAt?: any | null
+                                              updatedAt?: any | null
+                                              publishedAt?: any | null
+                                              locale?: string | null
+                                          } | null
+                                      } | null
+                                  } | null
+                                  triplyRecord?: {
+                                      __typename?: 'TriplyRecordEntityResponse'
+                                      data?: {
+                                          __typename?: 'TriplyRecordEntity'
+                                          id?: string | null
+                                          attributes?: {
+                                              __typename?: 'TriplyRecord'
+                                              recordId: string
+                                              type: Enum_Triplyrecord_Type
+                                          } | null
+                                      } | null
+                                  } | null
+                              } | null
+                              imageRelation?: {
+                                  __typename?: 'ComponentModulesCollectionRelation'
+                                  id: string
+                                  author?: {
+                                      __typename?: 'AuthorEntityResponse'
+                                      data?: {
+                                          __typename?: 'AuthorEntity'
+                                          id?: string | null
+                                          attributes?: {
+                                              __typename?: 'Author'
+                                              firstName: string
+                                              insertion?: string | null
+                                              lastName: string
+                                              createdAt?: any | null
+                                              updatedAt?: any | null
+                                              publishedAt?: any | null
+                                          } | null
+                                      } | null
+                                  } | null
+                                  story?: {
+                                      __typename?: 'StoryEntityResponse'
+                                      data?: {
+                                          __typename?: 'StoryEntity'
+                                          id?: string | null
+                                          attributes?: {
+                                              __typename?: 'Story'
+                                              title: string
+                                              slug?: string | null
+                                              description?: string | null
+                                              shortDescription?: string | null
+                                              createdAt?: any | null
+                                              updatedAt?: any | null
+                                              publishedAt?: any | null
+                                              locale?: string | null
+                                          } | null
+                                      } | null
+                                  } | null
+                                  triplyRecord?: {
+                                      __typename?: 'TriplyRecordEntityResponse'
+                                      data?: {
+                                          __typename?: 'TriplyRecordEntity'
+                                          id?: string | null
+                                          attributes?: {
+                                              __typename?: 'TriplyRecord'
+                                              recordId: string
+                                              type: Enum_Triplyrecord_Type
+                                          } | null
+                                      } | null
+                                  } | null
+                              } | null
                           }
                         | {
                               __typename: 'ComponentModulesImageCarousel'
@@ -7164,6 +8375,106 @@ export type MenupageEntityFragmentFragment = {
                       spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
                       spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
                   }
+                  captionRelation?: {
+                      __typename?: 'ComponentModulesCollectionRelation'
+                      id: string
+                      author?: {
+                          __typename?: 'AuthorEntityResponse'
+                          data?: {
+                              __typename?: 'AuthorEntity'
+                              id?: string | null
+                              attributes?: {
+                                  __typename?: 'Author'
+                                  firstName: string
+                                  insertion?: string | null
+                                  lastName: string
+                                  createdAt?: any | null
+                                  updatedAt?: any | null
+                                  publishedAt?: any | null
+                              } | null
+                          } | null
+                      } | null
+                      story?: {
+                          __typename?: 'StoryEntityResponse'
+                          data?: {
+                              __typename?: 'StoryEntity'
+                              id?: string | null
+                              attributes?: {
+                                  __typename?: 'Story'
+                                  title: string
+                                  slug?: string | null
+                                  description?: string | null
+                                  shortDescription?: string | null
+                                  createdAt?: any | null
+                                  updatedAt?: any | null
+                                  publishedAt?: any | null
+                                  locale?: string | null
+                              } | null
+                          } | null
+                      } | null
+                      triplyRecord?: {
+                          __typename?: 'TriplyRecordEntityResponse'
+                          data?: {
+                              __typename?: 'TriplyRecordEntity'
+                              id?: string | null
+                              attributes?: {
+                                  __typename?: 'TriplyRecord'
+                                  recordId: string
+                                  type: Enum_Triplyrecord_Type
+                              } | null
+                          } | null
+                      } | null
+                  } | null
+                  imageRelation?: {
+                      __typename?: 'ComponentModulesCollectionRelation'
+                      id: string
+                      author?: {
+                          __typename?: 'AuthorEntityResponse'
+                          data?: {
+                              __typename?: 'AuthorEntity'
+                              id?: string | null
+                              attributes?: {
+                                  __typename?: 'Author'
+                                  firstName: string
+                                  insertion?: string | null
+                                  lastName: string
+                                  createdAt?: any | null
+                                  updatedAt?: any | null
+                                  publishedAt?: any | null
+                              } | null
+                          } | null
+                      } | null
+                      story?: {
+                          __typename?: 'StoryEntityResponse'
+                          data?: {
+                              __typename?: 'StoryEntity'
+                              id?: string | null
+                              attributes?: {
+                                  __typename?: 'Story'
+                                  title: string
+                                  slug?: string | null
+                                  description?: string | null
+                                  shortDescription?: string | null
+                                  createdAt?: any | null
+                                  updatedAt?: any | null
+                                  publishedAt?: any | null
+                                  locale?: string | null
+                              } | null
+                          } | null
+                      } | null
+                      triplyRecord?: {
+                          __typename?: 'TriplyRecordEntityResponse'
+                          data?: {
+                              __typename?: 'TriplyRecordEntity'
+                              id?: string | null
+                              attributes?: {
+                                  __typename?: 'TriplyRecord'
+                                  recordId: string
+                                  type: Enum_Triplyrecord_Type
+                              } | null
+                          } | null
+                      } | null
+                  } | null
               }
             | {
                   __typename: 'ComponentModulesImageCarousel'
@@ -7517,6 +8828,106 @@ export type MenuPageQuery = {
                                           spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
                                           spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
                                       }
+                                      captionRelation?: {
+                                          __typename?: 'ComponentModulesCollectionRelation'
+                                          id: string
+                                          author?: {
+                                              __typename?: 'AuthorEntityResponse'
+                                              data?: {
+                                                  __typename?: 'AuthorEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'Author'
+                                                      firstName: string
+                                                      insertion?: string | null
+                                                      lastName: string
+                                                      createdAt?: any | null
+                                                      updatedAt?: any | null
+                                                      publishedAt?: any | null
+                                                  } | null
+                                              } | null
+                                          } | null
+                                          story?: {
+                                              __typename?: 'StoryEntityResponse'
+                                              data?: {
+                                                  __typename?: 'StoryEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'Story'
+                                                      title: string
+                                                      slug?: string | null
+                                                      description?: string | null
+                                                      shortDescription?: string | null
+                                                      createdAt?: any | null
+                                                      updatedAt?: any | null
+                                                      publishedAt?: any | null
+                                                      locale?: string | null
+                                                  } | null
+                                              } | null
+                                          } | null
+                                          triplyRecord?: {
+                                              __typename?: 'TriplyRecordEntityResponse'
+                                              data?: {
+                                                  __typename?: 'TriplyRecordEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'TriplyRecord'
+                                                      recordId: string
+                                                      type: Enum_Triplyrecord_Type
+                                                  } | null
+                                              } | null
+                                          } | null
+                                      } | null
+                                      imageRelation?: {
+                                          __typename?: 'ComponentModulesCollectionRelation'
+                                          id: string
+                                          author?: {
+                                              __typename?: 'AuthorEntityResponse'
+                                              data?: {
+                                                  __typename?: 'AuthorEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'Author'
+                                                      firstName: string
+                                                      insertion?: string | null
+                                                      lastName: string
+                                                      createdAt?: any | null
+                                                      updatedAt?: any | null
+                                                      publishedAt?: any | null
+                                                  } | null
+                                              } | null
+                                          } | null
+                                          story?: {
+                                              __typename?: 'StoryEntityResponse'
+                                              data?: {
+                                                  __typename?: 'StoryEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'Story'
+                                                      title: string
+                                                      slug?: string | null
+                                                      description?: string | null
+                                                      shortDescription?: string | null
+                                                      createdAt?: any | null
+                                                      updatedAt?: any | null
+                                                      publishedAt?: any | null
+                                                      locale?: string | null
+                                                  } | null
+                                              } | null
+                                          } | null
+                                          triplyRecord?: {
+                                              __typename?: 'TriplyRecordEntityResponse'
+                                              data?: {
+                                                  __typename?: 'TriplyRecordEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'TriplyRecord'
+                                                      recordId: string
+                                                      type: Enum_Triplyrecord_Type
+                                                  } | null
+                                              } | null
+                                          } | null
+                                      } | null
                                   }
                                 | {
                                       __typename: 'ComponentModulesImageCarousel'
@@ -7837,6 +9248,106 @@ export type MenuPageQuery = {
                               spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
                               spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
                           }
+                          captionRelation?: {
+                              __typename?: 'ComponentModulesCollectionRelation'
+                              id: string
+                              author?: {
+                                  __typename?: 'AuthorEntityResponse'
+                                  data?: {
+                                      __typename?: 'AuthorEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'Author'
+                                          firstName: string
+                                          insertion?: string | null
+                                          lastName: string
+                                          createdAt?: any | null
+                                          updatedAt?: any | null
+                                          publishedAt?: any | null
+                                      } | null
+                                  } | null
+                              } | null
+                              story?: {
+                                  __typename?: 'StoryEntityResponse'
+                                  data?: {
+                                      __typename?: 'StoryEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'Story'
+                                          title: string
+                                          slug?: string | null
+                                          description?: string | null
+                                          shortDescription?: string | null
+                                          createdAt?: any | null
+                                          updatedAt?: any | null
+                                          publishedAt?: any | null
+                                          locale?: string | null
+                                      } | null
+                                  } | null
+                              } | null
+                              triplyRecord?: {
+                                  __typename?: 'TriplyRecordEntityResponse'
+                                  data?: {
+                                      __typename?: 'TriplyRecordEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'TriplyRecord'
+                                          recordId: string
+                                          type: Enum_Triplyrecord_Type
+                                      } | null
+                                  } | null
+                              } | null
+                          } | null
+                          imageRelation?: {
+                              __typename?: 'ComponentModulesCollectionRelation'
+                              id: string
+                              author?: {
+                                  __typename?: 'AuthorEntityResponse'
+                                  data?: {
+                                      __typename?: 'AuthorEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'Author'
+                                          firstName: string
+                                          insertion?: string | null
+                                          lastName: string
+                                          createdAt?: any | null
+                                          updatedAt?: any | null
+                                          publishedAt?: any | null
+                                      } | null
+                                  } | null
+                              } | null
+                              story?: {
+                                  __typename?: 'StoryEntityResponse'
+                                  data?: {
+                                      __typename?: 'StoryEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'Story'
+                                          title: string
+                                          slug?: string | null
+                                          description?: string | null
+                                          shortDescription?: string | null
+                                          createdAt?: any | null
+                                          updatedAt?: any | null
+                                          publishedAt?: any | null
+                                          locale?: string | null
+                                      } | null
+                                  } | null
+                              } | null
+                              triplyRecord?: {
+                                  __typename?: 'TriplyRecordEntityResponse'
+                                  data?: {
+                                      __typename?: 'TriplyRecordEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'TriplyRecord'
+                                          recordId: string
+                                          type: Enum_Triplyrecord_Type
+                                      } | null
+                                  } | null
+                              } | null
+                          } | null
                       }
                     | {
                           __typename: 'ComponentModulesImageCarousel'
@@ -8195,6 +9706,106 @@ export type MenuPagesQuery = {
                                           spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
                                           spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
                                       }
+                                      captionRelation?: {
+                                          __typename?: 'ComponentModulesCollectionRelation'
+                                          id: string
+                                          author?: {
+                                              __typename?: 'AuthorEntityResponse'
+                                              data?: {
+                                                  __typename?: 'AuthorEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'Author'
+                                                      firstName: string
+                                                      insertion?: string | null
+                                                      lastName: string
+                                                      createdAt?: any | null
+                                                      updatedAt?: any | null
+                                                      publishedAt?: any | null
+                                                  } | null
+                                              } | null
+                                          } | null
+                                          story?: {
+                                              __typename?: 'StoryEntityResponse'
+                                              data?: {
+                                                  __typename?: 'StoryEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'Story'
+                                                      title: string
+                                                      slug?: string | null
+                                                      description?: string | null
+                                                      shortDescription?: string | null
+                                                      createdAt?: any | null
+                                                      updatedAt?: any | null
+                                                      publishedAt?: any | null
+                                                      locale?: string | null
+                                                  } | null
+                                              } | null
+                                          } | null
+                                          triplyRecord?: {
+                                              __typename?: 'TriplyRecordEntityResponse'
+                                              data?: {
+                                                  __typename?: 'TriplyRecordEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'TriplyRecord'
+                                                      recordId: string
+                                                      type: Enum_Triplyrecord_Type
+                                                  } | null
+                                              } | null
+                                          } | null
+                                      } | null
+                                      imageRelation?: {
+                                          __typename?: 'ComponentModulesCollectionRelation'
+                                          id: string
+                                          author?: {
+                                              __typename?: 'AuthorEntityResponse'
+                                              data?: {
+                                                  __typename?: 'AuthorEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'Author'
+                                                      firstName: string
+                                                      insertion?: string | null
+                                                      lastName: string
+                                                      createdAt?: any | null
+                                                      updatedAt?: any | null
+                                                      publishedAt?: any | null
+                                                  } | null
+                                              } | null
+                                          } | null
+                                          story?: {
+                                              __typename?: 'StoryEntityResponse'
+                                              data?: {
+                                                  __typename?: 'StoryEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'Story'
+                                                      title: string
+                                                      slug?: string | null
+                                                      description?: string | null
+                                                      shortDescription?: string | null
+                                                      createdAt?: any | null
+                                                      updatedAt?: any | null
+                                                      publishedAt?: any | null
+                                                      locale?: string | null
+                                                  } | null
+                                              } | null
+                                          } | null
+                                          triplyRecord?: {
+                                              __typename?: 'TriplyRecordEntityResponse'
+                                              data?: {
+                                                  __typename?: 'TriplyRecordEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'TriplyRecord'
+                                                      recordId: string
+                                                      type: Enum_Triplyrecord_Type
+                                                  } | null
+                                              } | null
+                                          } | null
+                                      } | null
                                   }
                                 | {
                                       __typename: 'ComponentModulesImageCarousel'
@@ -8515,6 +10126,106 @@ export type MenuPagesQuery = {
                               spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
                               spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
                           }
+                          captionRelation?: {
+                              __typename?: 'ComponentModulesCollectionRelation'
+                              id: string
+                              author?: {
+                                  __typename?: 'AuthorEntityResponse'
+                                  data?: {
+                                      __typename?: 'AuthorEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'Author'
+                                          firstName: string
+                                          insertion?: string | null
+                                          lastName: string
+                                          createdAt?: any | null
+                                          updatedAt?: any | null
+                                          publishedAt?: any | null
+                                      } | null
+                                  } | null
+                              } | null
+                              story?: {
+                                  __typename?: 'StoryEntityResponse'
+                                  data?: {
+                                      __typename?: 'StoryEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'Story'
+                                          title: string
+                                          slug?: string | null
+                                          description?: string | null
+                                          shortDescription?: string | null
+                                          createdAt?: any | null
+                                          updatedAt?: any | null
+                                          publishedAt?: any | null
+                                          locale?: string | null
+                                      } | null
+                                  } | null
+                              } | null
+                              triplyRecord?: {
+                                  __typename?: 'TriplyRecordEntityResponse'
+                                  data?: {
+                                      __typename?: 'TriplyRecordEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'TriplyRecord'
+                                          recordId: string
+                                          type: Enum_Triplyrecord_Type
+                                      } | null
+                                  } | null
+                              } | null
+                          } | null
+                          imageRelation?: {
+                              __typename?: 'ComponentModulesCollectionRelation'
+                              id: string
+                              author?: {
+                                  __typename?: 'AuthorEntityResponse'
+                                  data?: {
+                                      __typename?: 'AuthorEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'Author'
+                                          firstName: string
+                                          insertion?: string | null
+                                          lastName: string
+                                          createdAt?: any | null
+                                          updatedAt?: any | null
+                                          publishedAt?: any | null
+                                      } | null
+                                  } | null
+                              } | null
+                              story?: {
+                                  __typename?: 'StoryEntityResponse'
+                                  data?: {
+                                      __typename?: 'StoryEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'Story'
+                                          title: string
+                                          slug?: string | null
+                                          description?: string | null
+                                          shortDescription?: string | null
+                                          createdAt?: any | null
+                                          updatedAt?: any | null
+                                          publishedAt?: any | null
+                                          locale?: string | null
+                                      } | null
+                                  } | null
+                              } | null
+                              triplyRecord?: {
+                                  __typename?: 'TriplyRecordEntityResponse'
+                                  data?: {
+                                      __typename?: 'TriplyRecordEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'TriplyRecord'
+                                          recordId: string
+                                          type: Enum_Triplyrecord_Type
+                                      } | null
+                                  } | null
+                              } | null
+                          } | null
                       }
                     | {
                           __typename: 'ComponentModulesImageCarousel'
@@ -8866,6 +10577,106 @@ export type StoriesQuery = {
                               spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
                               spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
                           }
+                          captionRelation?: {
+                              __typename?: 'ComponentModulesCollectionRelation'
+                              id: string
+                              author?: {
+                                  __typename?: 'AuthorEntityResponse'
+                                  data?: {
+                                      __typename?: 'AuthorEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'Author'
+                                          firstName: string
+                                          insertion?: string | null
+                                          lastName: string
+                                          createdAt?: any | null
+                                          updatedAt?: any | null
+                                          publishedAt?: any | null
+                                      } | null
+                                  } | null
+                              } | null
+                              story?: {
+                                  __typename?: 'StoryEntityResponse'
+                                  data?: {
+                                      __typename?: 'StoryEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'Story'
+                                          title: string
+                                          slug?: string | null
+                                          description?: string | null
+                                          shortDescription?: string | null
+                                          createdAt?: any | null
+                                          updatedAt?: any | null
+                                          publishedAt?: any | null
+                                          locale?: string | null
+                                      } | null
+                                  } | null
+                              } | null
+                              triplyRecord?: {
+                                  __typename?: 'TriplyRecordEntityResponse'
+                                  data?: {
+                                      __typename?: 'TriplyRecordEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'TriplyRecord'
+                                          recordId: string
+                                          type: Enum_Triplyrecord_Type
+                                      } | null
+                                  } | null
+                              } | null
+                          } | null
+                          imageRelation?: {
+                              __typename?: 'ComponentModulesCollectionRelation'
+                              id: string
+                              author?: {
+                                  __typename?: 'AuthorEntityResponse'
+                                  data?: {
+                                      __typename?: 'AuthorEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'Author'
+                                          firstName: string
+                                          insertion?: string | null
+                                          lastName: string
+                                          createdAt?: any | null
+                                          updatedAt?: any | null
+                                          publishedAt?: any | null
+                                      } | null
+                                  } | null
+                              } | null
+                              story?: {
+                                  __typename?: 'StoryEntityResponse'
+                                  data?: {
+                                      __typename?: 'StoryEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'Story'
+                                          title: string
+                                          slug?: string | null
+                                          description?: string | null
+                                          shortDescription?: string | null
+                                          createdAt?: any | null
+                                          updatedAt?: any | null
+                                          publishedAt?: any | null
+                                          locale?: string | null
+                                      } | null
+                                  } | null
+                              } | null
+                              triplyRecord?: {
+                                  __typename?: 'TriplyRecordEntityResponse'
+                                  data?: {
+                                      __typename?: 'TriplyRecordEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'TriplyRecord'
+                                          recordId: string
+                                          type: Enum_Triplyrecord_Type
+                                      } | null
+                                  } | null
+                              } | null
+                          } | null
                       }
                     | {
                           __typename: 'ComponentModulesImageCarousel'
@@ -9328,6 +11139,106 @@ export type StoryQuery = {
                               spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
                               spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
                           }
+                          captionRelation?: {
+                              __typename?: 'ComponentModulesCollectionRelation'
+                              id: string
+                              author?: {
+                                  __typename?: 'AuthorEntityResponse'
+                                  data?: {
+                                      __typename?: 'AuthorEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'Author'
+                                          firstName: string
+                                          insertion?: string | null
+                                          lastName: string
+                                          createdAt?: any | null
+                                          updatedAt?: any | null
+                                          publishedAt?: any | null
+                                      } | null
+                                  } | null
+                              } | null
+                              story?: {
+                                  __typename?: 'StoryEntityResponse'
+                                  data?: {
+                                      __typename?: 'StoryEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'Story'
+                                          title: string
+                                          slug?: string | null
+                                          description?: string | null
+                                          shortDescription?: string | null
+                                          createdAt?: any | null
+                                          updatedAt?: any | null
+                                          publishedAt?: any | null
+                                          locale?: string | null
+                                      } | null
+                                  } | null
+                              } | null
+                              triplyRecord?: {
+                                  __typename?: 'TriplyRecordEntityResponse'
+                                  data?: {
+                                      __typename?: 'TriplyRecordEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'TriplyRecord'
+                                          recordId: string
+                                          type: Enum_Triplyrecord_Type
+                                      } | null
+                                  } | null
+                              } | null
+                          } | null
+                          imageRelation?: {
+                              __typename?: 'ComponentModulesCollectionRelation'
+                              id: string
+                              author?: {
+                                  __typename?: 'AuthorEntityResponse'
+                                  data?: {
+                                      __typename?: 'AuthorEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'Author'
+                                          firstName: string
+                                          insertion?: string | null
+                                          lastName: string
+                                          createdAt?: any | null
+                                          updatedAt?: any | null
+                                          publishedAt?: any | null
+                                      } | null
+                                  } | null
+                              } | null
+                              story?: {
+                                  __typename?: 'StoryEntityResponse'
+                                  data?: {
+                                      __typename?: 'StoryEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'Story'
+                                          title: string
+                                          slug?: string | null
+                                          description?: string | null
+                                          shortDescription?: string | null
+                                          createdAt?: any | null
+                                          updatedAt?: any | null
+                                          publishedAt?: any | null
+                                          locale?: string | null
+                                      } | null
+                                  } | null
+                              } | null
+                              triplyRecord?: {
+                                  __typename?: 'TriplyRecordEntityResponse'
+                                  data?: {
+                                      __typename?: 'TriplyRecordEntity'
+                                      id?: string | null
+                                      attributes?: {
+                                          __typename?: 'TriplyRecord'
+                                          recordId: string
+                                          type: Enum_Triplyrecord_Type
+                                      } | null
+                                  } | null
+                              } | null
+                          } | null
                       }
                     | {
                           __typename: 'ComponentModulesImageCarousel'
@@ -9843,6 +11754,106 @@ export type StoryFragmentFragment = {
                       spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
                       spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
                   }
+                  captionRelation?: {
+                      __typename?: 'ComponentModulesCollectionRelation'
+                      id: string
+                      author?: {
+                          __typename?: 'AuthorEntityResponse'
+                          data?: {
+                              __typename?: 'AuthorEntity'
+                              id?: string | null
+                              attributes?: {
+                                  __typename?: 'Author'
+                                  firstName: string
+                                  insertion?: string | null
+                                  lastName: string
+                                  createdAt?: any | null
+                                  updatedAt?: any | null
+                                  publishedAt?: any | null
+                              } | null
+                          } | null
+                      } | null
+                      story?: {
+                          __typename?: 'StoryEntityResponse'
+                          data?: {
+                              __typename?: 'StoryEntity'
+                              id?: string | null
+                              attributes?: {
+                                  __typename?: 'Story'
+                                  title: string
+                                  slug?: string | null
+                                  description?: string | null
+                                  shortDescription?: string | null
+                                  createdAt?: any | null
+                                  updatedAt?: any | null
+                                  publishedAt?: any | null
+                                  locale?: string | null
+                              } | null
+                          } | null
+                      } | null
+                      triplyRecord?: {
+                          __typename?: 'TriplyRecordEntityResponse'
+                          data?: {
+                              __typename?: 'TriplyRecordEntity'
+                              id?: string | null
+                              attributes?: {
+                                  __typename?: 'TriplyRecord'
+                                  recordId: string
+                                  type: Enum_Triplyrecord_Type
+                              } | null
+                          } | null
+                      } | null
+                  } | null
+                  imageRelation?: {
+                      __typename?: 'ComponentModulesCollectionRelation'
+                      id: string
+                      author?: {
+                          __typename?: 'AuthorEntityResponse'
+                          data?: {
+                              __typename?: 'AuthorEntity'
+                              id?: string | null
+                              attributes?: {
+                                  __typename?: 'Author'
+                                  firstName: string
+                                  insertion?: string | null
+                                  lastName: string
+                                  createdAt?: any | null
+                                  updatedAt?: any | null
+                                  publishedAt?: any | null
+                              } | null
+                          } | null
+                      } | null
+                      story?: {
+                          __typename?: 'StoryEntityResponse'
+                          data?: {
+                              __typename?: 'StoryEntity'
+                              id?: string | null
+                              attributes?: {
+                                  __typename?: 'Story'
+                                  title: string
+                                  slug?: string | null
+                                  description?: string | null
+                                  shortDescription?: string | null
+                                  createdAt?: any | null
+                                  updatedAt?: any | null
+                                  publishedAt?: any | null
+                                  locale?: string | null
+                              } | null
+                          } | null
+                      } | null
+                      triplyRecord?: {
+                          __typename?: 'TriplyRecordEntityResponse'
+                          data?: {
+                              __typename?: 'TriplyRecordEntity'
+                              id?: string | null
+                              attributes?: {
+                                  __typename?: 'TriplyRecord'
+                                  recordId: string
+                                  type: Enum_Triplyrecord_Type
+                              } | null
+                          } | null
+                      } | null
+                  } | null
               }
             | {
                   __typename: 'ComponentModulesImageCarousel'
@@ -10274,6 +12285,53 @@ export type ComponentCoreItemsFragmentFragment = {
     } | null
 }
 
+export type ComponentModulesCollectionRelationFragmentFragment = {
+    __typename?: 'ComponentModulesCollectionRelation'
+    id: string
+    author?: {
+        __typename?: 'AuthorEntityResponse'
+        data?: {
+            __typename?: 'AuthorEntity'
+            id?: string | null
+            attributes?: {
+                __typename?: 'Author'
+                firstName: string
+                insertion?: string | null
+                lastName: string
+                createdAt?: any | null
+                updatedAt?: any | null
+                publishedAt?: any | null
+            } | null
+        } | null
+    } | null
+    story?: {
+        __typename?: 'StoryEntityResponse'
+        data?: {
+            __typename?: 'StoryEntity'
+            id?: string | null
+            attributes?: {
+                __typename?: 'Story'
+                title: string
+                slug?: string | null
+                description?: string | null
+                shortDescription?: string | null
+                createdAt?: any | null
+                updatedAt?: any | null
+                publishedAt?: any | null
+                locale?: string | null
+            } | null
+        } | null
+    } | null
+    triplyRecord?: {
+        __typename?: 'TriplyRecordEntityResponse'
+        data?: {
+            __typename?: 'TriplyRecordEntity'
+            id?: string | null
+            attributes?: { __typename?: 'TriplyRecord'; recordId: string; type: Enum_Triplyrecord_Type } | null
+        } | null
+    } | null
+}
+
 export type ComponentModulesButtonsModuleFragmentFragment = {
     __typename: 'ComponentModulesButtonsModule'
     id: string
@@ -10451,6 +12509,98 @@ export type ComponentModulesImageFragmentFragment = {
         spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
         spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
     }
+    captionRelation?: {
+        __typename?: 'ComponentModulesCollectionRelation'
+        id: string
+        author?: {
+            __typename?: 'AuthorEntityResponse'
+            data?: {
+                __typename?: 'AuthorEntity'
+                id?: string | null
+                attributes?: {
+                    __typename?: 'Author'
+                    firstName: string
+                    insertion?: string | null
+                    lastName: string
+                    createdAt?: any | null
+                    updatedAt?: any | null
+                    publishedAt?: any | null
+                } | null
+            } | null
+        } | null
+        story?: {
+            __typename?: 'StoryEntityResponse'
+            data?: {
+                __typename?: 'StoryEntity'
+                id?: string | null
+                attributes?: {
+                    __typename?: 'Story'
+                    title: string
+                    slug?: string | null
+                    description?: string | null
+                    shortDescription?: string | null
+                    createdAt?: any | null
+                    updatedAt?: any | null
+                    publishedAt?: any | null
+                    locale?: string | null
+                } | null
+            } | null
+        } | null
+        triplyRecord?: {
+            __typename?: 'TriplyRecordEntityResponse'
+            data?: {
+                __typename?: 'TriplyRecordEntity'
+                id?: string | null
+                attributes?: { __typename?: 'TriplyRecord'; recordId: string; type: Enum_Triplyrecord_Type } | null
+            } | null
+        } | null
+    } | null
+    imageRelation?: {
+        __typename?: 'ComponentModulesCollectionRelation'
+        id: string
+        author?: {
+            __typename?: 'AuthorEntityResponse'
+            data?: {
+                __typename?: 'AuthorEntity'
+                id?: string | null
+                attributes?: {
+                    __typename?: 'Author'
+                    firstName: string
+                    insertion?: string | null
+                    lastName: string
+                    createdAt?: any | null
+                    updatedAt?: any | null
+                    publishedAt?: any | null
+                } | null
+            } | null
+        } | null
+        story?: {
+            __typename?: 'StoryEntityResponse'
+            data?: {
+                __typename?: 'StoryEntity'
+                id?: string | null
+                attributes?: {
+                    __typename?: 'Story'
+                    title: string
+                    slug?: string | null
+                    description?: string | null
+                    shortDescription?: string | null
+                    createdAt?: any | null
+                    updatedAt?: any | null
+                    publishedAt?: any | null
+                    locale?: string | null
+                } | null
+            } | null
+        } | null
+        triplyRecord?: {
+            __typename?: 'TriplyRecordEntityResponse'
+            data?: {
+                __typename?: 'TriplyRecordEntity'
+                id?: string | null
+                attributes?: { __typename?: 'TriplyRecord'; recordId: string; type: Enum_Triplyrecord_Type } | null
+            } | null
+        } | null
+    } | null
 }
 
 export type ComponentModulesPullquoteFragmentFragment = {
@@ -11154,6 +13304,106 @@ export type TriplyRecordQuery = {
                                           spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
                                           spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
                                       }
+                                      captionRelation?: {
+                                          __typename?: 'ComponentModulesCollectionRelation'
+                                          id: string
+                                          author?: {
+                                              __typename?: 'AuthorEntityResponse'
+                                              data?: {
+                                                  __typename?: 'AuthorEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'Author'
+                                                      firstName: string
+                                                      insertion?: string | null
+                                                      lastName: string
+                                                      createdAt?: any | null
+                                                      updatedAt?: any | null
+                                                      publishedAt?: any | null
+                                                  } | null
+                                              } | null
+                                          } | null
+                                          story?: {
+                                              __typename?: 'StoryEntityResponse'
+                                              data?: {
+                                                  __typename?: 'StoryEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'Story'
+                                                      title: string
+                                                      slug?: string | null
+                                                      description?: string | null
+                                                      shortDescription?: string | null
+                                                      createdAt?: any | null
+                                                      updatedAt?: any | null
+                                                      publishedAt?: any | null
+                                                      locale?: string | null
+                                                  } | null
+                                              } | null
+                                          } | null
+                                          triplyRecord?: {
+                                              __typename?: 'TriplyRecordEntityResponse'
+                                              data?: {
+                                                  __typename?: 'TriplyRecordEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'TriplyRecord'
+                                                      recordId: string
+                                                      type: Enum_Triplyrecord_Type
+                                                  } | null
+                                              } | null
+                                          } | null
+                                      } | null
+                                      imageRelation?: {
+                                          __typename?: 'ComponentModulesCollectionRelation'
+                                          id: string
+                                          author?: {
+                                              __typename?: 'AuthorEntityResponse'
+                                              data?: {
+                                                  __typename?: 'AuthorEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'Author'
+                                                      firstName: string
+                                                      insertion?: string | null
+                                                      lastName: string
+                                                      createdAt?: any | null
+                                                      updatedAt?: any | null
+                                                      publishedAt?: any | null
+                                                  } | null
+                                              } | null
+                                          } | null
+                                          story?: {
+                                              __typename?: 'StoryEntityResponse'
+                                              data?: {
+                                                  __typename?: 'StoryEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'Story'
+                                                      title: string
+                                                      slug?: string | null
+                                                      description?: string | null
+                                                      shortDescription?: string | null
+                                                      createdAt?: any | null
+                                                      updatedAt?: any | null
+                                                      publishedAt?: any | null
+                                                      locale?: string | null
+                                                  } | null
+                                              } | null
+                                          } | null
+                                          triplyRecord?: {
+                                              __typename?: 'TriplyRecordEntityResponse'
+                                              data?: {
+                                                  __typename?: 'TriplyRecordEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'TriplyRecord'
+                                                      recordId: string
+                                                      type: Enum_Triplyrecord_Type
+                                                  } | null
+                                              } | null
+                                          } | null
+                                      } | null
                                   }
                                 | {
                                       __typename: 'ComponentModulesImageCarousel'
@@ -11595,6 +13845,106 @@ export type TriplyRecordsQuery = {
                                           spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
                                           spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
                                       }
+                                      captionRelation?: {
+                                          __typename?: 'ComponentModulesCollectionRelation'
+                                          id: string
+                                          author?: {
+                                              __typename?: 'AuthorEntityResponse'
+                                              data?: {
+                                                  __typename?: 'AuthorEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'Author'
+                                                      firstName: string
+                                                      insertion?: string | null
+                                                      lastName: string
+                                                      createdAt?: any | null
+                                                      updatedAt?: any | null
+                                                      publishedAt?: any | null
+                                                  } | null
+                                              } | null
+                                          } | null
+                                          story?: {
+                                              __typename?: 'StoryEntityResponse'
+                                              data?: {
+                                                  __typename?: 'StoryEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'Story'
+                                                      title: string
+                                                      slug?: string | null
+                                                      description?: string | null
+                                                      shortDescription?: string | null
+                                                      createdAt?: any | null
+                                                      updatedAt?: any | null
+                                                      publishedAt?: any | null
+                                                      locale?: string | null
+                                                  } | null
+                                              } | null
+                                          } | null
+                                          triplyRecord?: {
+                                              __typename?: 'TriplyRecordEntityResponse'
+                                              data?: {
+                                                  __typename?: 'TriplyRecordEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'TriplyRecord'
+                                                      recordId: string
+                                                      type: Enum_Triplyrecord_Type
+                                                  } | null
+                                              } | null
+                                          } | null
+                                      } | null
+                                      imageRelation?: {
+                                          __typename?: 'ComponentModulesCollectionRelation'
+                                          id: string
+                                          author?: {
+                                              __typename?: 'AuthorEntityResponse'
+                                              data?: {
+                                                  __typename?: 'AuthorEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'Author'
+                                                      firstName: string
+                                                      insertion?: string | null
+                                                      lastName: string
+                                                      createdAt?: any | null
+                                                      updatedAt?: any | null
+                                                      publishedAt?: any | null
+                                                  } | null
+                                              } | null
+                                          } | null
+                                          story?: {
+                                              __typename?: 'StoryEntityResponse'
+                                              data?: {
+                                                  __typename?: 'StoryEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'Story'
+                                                      title: string
+                                                      slug?: string | null
+                                                      description?: string | null
+                                                      shortDescription?: string | null
+                                                      createdAt?: any | null
+                                                      updatedAt?: any | null
+                                                      publishedAt?: any | null
+                                                      locale?: string | null
+                                                  } | null
+                                              } | null
+                                          } | null
+                                          triplyRecord?: {
+                                              __typename?: 'TriplyRecordEntityResponse'
+                                              data?: {
+                                                  __typename?: 'TriplyRecordEntity'
+                                                  id?: string | null
+                                                  attributes?: {
+                                                      __typename?: 'TriplyRecord'
+                                                      recordId: string
+                                                      type: Enum_Triplyrecord_Type
+                                                  } | null
+                                              } | null
+                                          } | null
+                                      } | null
                                   }
                                 | {
                                       __typename: 'ComponentModulesImageCarousel'
@@ -12029,6 +14379,106 @@ export type TriplyRecordFragmentFragment = {
                                   spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
                                   spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
                               }
+                              captionRelation?: {
+                                  __typename?: 'ComponentModulesCollectionRelation'
+                                  id: string
+                                  author?: {
+                                      __typename?: 'AuthorEntityResponse'
+                                      data?: {
+                                          __typename?: 'AuthorEntity'
+                                          id?: string | null
+                                          attributes?: {
+                                              __typename?: 'Author'
+                                              firstName: string
+                                              insertion?: string | null
+                                              lastName: string
+                                              createdAt?: any | null
+                                              updatedAt?: any | null
+                                              publishedAt?: any | null
+                                          } | null
+                                      } | null
+                                  } | null
+                                  story?: {
+                                      __typename?: 'StoryEntityResponse'
+                                      data?: {
+                                          __typename?: 'StoryEntity'
+                                          id?: string | null
+                                          attributes?: {
+                                              __typename?: 'Story'
+                                              title: string
+                                              slug?: string | null
+                                              description?: string | null
+                                              shortDescription?: string | null
+                                              createdAt?: any | null
+                                              updatedAt?: any | null
+                                              publishedAt?: any | null
+                                              locale?: string | null
+                                          } | null
+                                      } | null
+                                  } | null
+                                  triplyRecord?: {
+                                      __typename?: 'TriplyRecordEntityResponse'
+                                      data?: {
+                                          __typename?: 'TriplyRecordEntity'
+                                          id?: string | null
+                                          attributes?: {
+                                              __typename?: 'TriplyRecord'
+                                              recordId: string
+                                              type: Enum_Triplyrecord_Type
+                                          } | null
+                                      } | null
+                                  } | null
+                              } | null
+                              imageRelation?: {
+                                  __typename?: 'ComponentModulesCollectionRelation'
+                                  id: string
+                                  author?: {
+                                      __typename?: 'AuthorEntityResponse'
+                                      data?: {
+                                          __typename?: 'AuthorEntity'
+                                          id?: string | null
+                                          attributes?: {
+                                              __typename?: 'Author'
+                                              firstName: string
+                                              insertion?: string | null
+                                              lastName: string
+                                              createdAt?: any | null
+                                              updatedAt?: any | null
+                                              publishedAt?: any | null
+                                          } | null
+                                      } | null
+                                  } | null
+                                  story?: {
+                                      __typename?: 'StoryEntityResponse'
+                                      data?: {
+                                          __typename?: 'StoryEntity'
+                                          id?: string | null
+                                          attributes?: {
+                                              __typename?: 'Story'
+                                              title: string
+                                              slug?: string | null
+                                              description?: string | null
+                                              shortDescription?: string | null
+                                              createdAt?: any | null
+                                              updatedAt?: any | null
+                                              publishedAt?: any | null
+                                              locale?: string | null
+                                          } | null
+                                      } | null
+                                  } | null
+                                  triplyRecord?: {
+                                      __typename?: 'TriplyRecordEntityResponse'
+                                      data?: {
+                                          __typename?: 'TriplyRecordEntity'
+                                          id?: string | null
+                                          attributes?: {
+                                              __typename?: 'TriplyRecord'
+                                              recordId: string
+                                              type: Enum_Triplyrecord_Type
+                                          } | null
+                                      } | null
+                                  } | null
+                              } | null
                           }
                         | {
                               __typename: 'ComponentModulesImageCarousel'
@@ -12434,19 +14884,6 @@ export type UsersPermissionsUsersQuery = {
     } | null
 }
 
-export const AuthorFragmentFragmentDoc = gql`
-    fragment AuthorFragment on AuthorEntity {
-        id
-        attributes {
-            firstName
-            insertion
-            lastName
-            createdAt
-            updatedAt
-            publishedAt
-        }
-    }
-`
 export const ComponentCoreModuleLayoutsFragmentFragmentDoc = gql`
     fragment ComponentCoreModuleLayoutsFragment on ComponentCoreModuleLayouts {
         id
@@ -12496,6 +14933,66 @@ export const UploadFileEntityResponseFragmentFragmentDoc = gql`
     }
     ${UploadFileFragmentFragmentDoc}
 `
+export const AuthorFragmentFragmentDoc = gql`
+    fragment AuthorFragment on AuthorEntity {
+        id
+        attributes {
+            firstName
+            insertion
+            lastName
+            createdAt
+            updatedAt
+            publishedAt
+        }
+    }
+`
+export const StoryWithoutRelationsFragmentFragmentDoc = gql`
+    fragment StoryWithoutRelationsFragment on StoryEntity {
+        id
+        attributes {
+            title
+            slug
+            description
+            shortDescription
+            createdAt
+            updatedAt
+            publishedAt
+            locale
+        }
+    }
+`
+export const BaseTriplyRecordFragmentFragmentDoc = gql`
+    fragment BaseTriplyRecordFragment on TriplyRecordEntity {
+        id
+        attributes {
+            recordId
+            type
+        }
+    }
+`
+export const ComponentModulesCollectionRelationFragmentFragmentDoc = gql`
+    fragment ComponentModulesCollectionRelationFragment on ComponentModulesCollectionRelation {
+        id
+        author {
+            data {
+                ...AuthorFragment
+            }
+        }
+        story {
+            data {
+                ...StoryWithoutRelationsFragment
+            }
+        }
+        triplyRecord {
+            data {
+                ...BaseTriplyRecordFragment
+            }
+        }
+    }
+    ${AuthorFragmentFragmentDoc}
+    ${StoryWithoutRelationsFragmentFragmentDoc}
+    ${BaseTriplyRecordFragmentFragmentDoc}
+`
 export const ComponentModulesImageFragmentFragmentDoc = gql`
     fragment ComponentModulesImageFragment on ComponentModulesImage {
         alt_text
@@ -12508,9 +15005,16 @@ export const ComponentModulesImageFragmentFragmentDoc = gql`
         imageModuleLayout {
             ...ComponentCoreModuleLayoutsFragment
         }
+        captionRelation {
+            ...ComponentModulesCollectionRelationFragment
+        }
+        imageRelation {
+            ...ComponentModulesCollectionRelationFragment
+        }
     }
     ${UploadFileEntityResponseFragmentFragmentDoc}
     ${ComponentCoreModuleLayoutsFragmentFragmentDoc}
+    ${ComponentModulesCollectionRelationFragmentFragmentDoc}
 `
 export const ComponentCoreButtonFragmentFragmentDoc = gql`
     fragment ComponentCoreButtonFragment on ComponentCoreButton {
@@ -12529,15 +15033,6 @@ export const ComponentCoreFeaturedFieldsFragmentFragmentDoc = gql`
         id
         label
         value
-    }
-`
-export const BaseTriplyRecordFragmentFragmentDoc = gql`
-    fragment BaseTriplyRecordFragment on TriplyRecordEntity {
-        id
-        attributes {
-            recordId
-            type
-        }
     }
 `
 export const ComponentCoreGridFeaturedFieldsFragmentFragmentDoc = gql`
@@ -13009,21 +15504,6 @@ export const MenupageEntityFragmentFragmentDoc = gql`
         }
     }
     ${MenupageFragmentFragmentDoc}
-`
-export const StoryWithoutRelationsFragmentFragmentDoc = gql`
-    fragment StoryWithoutRelationsFragment on StoryEntity {
-        id
-        attributes {
-            title
-            slug
-            description
-            shortDescription
-            createdAt
-            updatedAt
-            publishedAt
-            locale
-        }
-    }
 `
 export const ComponentCorePageHeaderFragmentFragmentDoc = gql`
     fragment ComponentCorePageHeaderFragment on ComponentCorePageHeader {
