@@ -1,7 +1,10 @@
 import { Dimensions } from '../../../types/galaxy'
 import { mapArchiveComponent } from '@/features/galaxyInterface/galaxies/MainGalaxy/mappers/mapArchiveComponent'
 import { mappedStoriesToCloudStoriesItems } from '@/features/galaxyInterface/galaxies/MainGalaxy/mappers/mappedStoriesToCloudStoriesItems'
-import { mapZoomLevel1DataTocloudData } from '@/features/galaxyInterface/galaxies/MainGalaxy/mappers/mapZoomLevel1DataTocloudData'
+import {
+    mapZoom1ToStoriesMeta,
+    mapZoomLevel1DataTocloudData,
+} from '@/features/galaxyInterface/galaxies/MainGalaxy/mappers/mapZoomLevel1DataTocloudData'
 import { times, uniqueId } from 'lodash'
 import dynamic from 'next/dynamic'
 import { useMemo } from 'react'
@@ -75,11 +78,13 @@ export const DynamicGalaxyContainer: React.FC<{ dimensions: Dimensions }> = ({ d
         [cloudData]
     )
     const archiveComponent = useMemo(() => mapArchiveComponent(zoom1Stub), [])
+    const storyMeta = useMemo(() => mapZoom1ToStoriesMeta(zoom1Stub), [])
 
     return (
         <DynamicGalaxyNoSsr
             cloudData={cloudData}
             storiesData={storiesData}
+            storiesMetaData={storyMeta}
             archiveComponent={archiveComponent}
             dimensions={dimensions}
         />

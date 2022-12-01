@@ -17,6 +17,9 @@ export interface MainGalaxyProps {
     dimensions: Dimensions
     cloudData: CloudItem[]
     storiesData: StoriesItem[]
+    storiesMetaData: {
+        numberOfInstances: number
+    }
     archiveComponent: ReturnType<typeof mapArchiveComponent>
 }
 
@@ -31,13 +34,20 @@ const MainGalaxy: React.FC<MainGalaxyProps> = props => {
     const store = useStore()
     const { t } = useLooseTypeSafeTranslation('homepage')
     const id = useId().replaceAll(':', '')
-    const { svgRef, storiesSystemRef, cloudData, storiesData, dimensions, conditions, archiveComponent } = usePresenter(
-        {
-            ...props,
-            id,
-            selector: id,
-        }
-    )
+    const {
+        svgRef,
+        storiesSystemRef,
+        cloudData,
+        storiesData,
+        dimensions,
+        conditions,
+        archiveComponent,
+        storiesMetaData,
+    } = usePresenter({
+        ...props,
+        id,
+        selector: id,
+    })
     const height = dimensions.height ?? 0
     const width = dimensions.width ?? 0
 
@@ -111,28 +121,18 @@ const MainGalaxy: React.FC<MainGalaxyProps> = props => {
                                         {conditions.isZoom1 && (
                                             <Box
                                                 onClick={() => {
-                                                    if (item.name !== 'stories') {
-                                                        store.dispatch(
-                                                            galaxyInterfaceActions.setActiveZoom({
-                                                                activeZoom: ZoomStates.Zoom1ToZoom2,
-                                                                activeZoomData: {
-                                                                    to: {
-                                                                        translateX: -item.xFromCenter,
-                                                                        translateY: item.yFromCenter,
-                                                                    },
+                                                    store.dispatch(
+                                                        galaxyInterfaceActions.setActiveZoom({
+                                                            activeZoom: ZoomStates.Zoom1ToZoom2,
+                                                            activeZoomData: {
+                                                                to: {
+                                                                    translateX: -item.xFromCenter,
+                                                                    translateY: item.yFromCenter,
                                                                 },
-                                                                afterAnimationState: ZoomStates.Zoom2Initial,
-                                                            })
-                                                        )
-                                                    }
-                                                    if (item.name === 'stories') {
-                                                        store.dispatch(
-                                                            galaxyInterfaceActions.setActiveZoom({
-                                                                activeZoom: ZoomStates.Zoom1ToZoom1Stories,
-                                                                afterAnimationState: ZoomStates.Zoom1Stories,
-                                                            })
-                                                        )
-                                                    }
+                                                            },
+                                                            afterAnimationState: ZoomStates.Zoom2Initial,
+                                                        })
+                                                    )
                                                 }}
                                                 as="button"
                                                 width="100%"
@@ -160,16 +160,14 @@ const MainGalaxy: React.FC<MainGalaxyProps> = props => {
                                                             )}
                                                         </>
                                                     ) : (
-                                                        item.name !== 'stories' && (
-                                                            <>
-                                                                <Text width="12.5rem" mb={1} textStyle={'cloudText'}>
-                                                                    {t(item.id.toLowerCase()) || item.name}
-                                                                </Text>
-                                                                <Text width="12.5rem" textStyle={'cloudText'}>
-                                                                    {item.numberOfInstances}
-                                                                </Text>
-                                                            </>
-                                                        )
+                                                        <>
+                                                            <Text width="12.5rem" mb={1} textStyle={'cloudText'}>
+                                                                {t(item.id.toLowerCase()) || item.name}
+                                                            </Text>
+                                                            <Text width="12.5rem" textStyle={'cloudText'}>
+                                                                {item.numberOfInstances}
+                                                            </Text>
+                                                        </>
                                                     )}
                                                 </Box>
                                             </Box>
@@ -179,12 +177,19 @@ const MainGalaxy: React.FC<MainGalaxyProps> = props => {
                             })}
                         </g>
 
-                        {cloudData.find(i => i.name === 'stories') && conditions.isZoom1 && (
+                        {storiesMetaData && conditions.isZoom1 && (
                             <foreignObject x={GALAXY_BASE / 2 + 75} y={GALAXY_BASE / 2 - 60} width={200} height={100}>
-                                <button>
-                                    <Text width="12.5rem">
-                                        {cloudData.find(i => i.name === 'stories')?.numberOfInstances}
-                                    </Text>
+                                <button
+                                    onClick={() =>
+                                        store.dispatch(
+                                            galaxyInterfaceActions.setActiveZoom({
+                                                activeZoom: ZoomStates.Zoom1ToZoom1Stories,
+                                                afterAnimationState: ZoomStates.Zoom1Stories,
+                                            })
+                                        )
+                                    }
+                                >
+                                    <Text width="12.5rem">{storiesMetaData.numberOfInstances}</Text>
                                     <Text width="12.5rem">{t('stories')}</Text>
                                 </button>
                             </foreignObject>
