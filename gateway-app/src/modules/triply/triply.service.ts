@@ -8,11 +8,15 @@ import { PaginationArgs } from '../util/paginationArgs.type'
 export class TriplyService {
     private readonly endpointBaseURL: string
     private readonly apiKey: string
-    private readonly baseQueryPath = '/queries/the-other-interface'
+    private readonly baseQueryPath: string
 
     public constructor(configService: ConfigService, private readonly httpService: HttpService) {
         this.endpointBaseURL = configService.getOrThrow('TRIPLI_API_BASEURL')
         this.apiKey = configService.getOrThrow('TRIPLY_API_KEY')
+        this.baseQueryPath =
+            configService.getOrThrow('ENV') === 'development'
+                ? '/queries/the-other-interface-acceptance'
+                : '/queries/the-other-interface'
     }
 
     private defaultPage = '1'

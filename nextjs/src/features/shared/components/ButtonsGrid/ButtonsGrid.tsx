@@ -105,7 +105,7 @@ const GridButton: React.FC<GridButtonProps> = ({ button, index, array, config, b
                 as={'a'}
                 rightIcon={renderExternalLink(button)}
                 target={
-                    !!button.url && isExternalURL(button.url, process.env.host ?? '') ? '_blank' : undefined
+                    !!button.url && isExternalURL(button.url, process.env.parsed.NEXT_PUBLIC_URL ?? '') ? '_blank' : undefined
                 }
                 gridColumn={{ base: 1, md: getGridColumns(index, array) }}
                 bg={'white'}
@@ -122,7 +122,7 @@ const GridButton: React.FC<GridButtonProps> = ({ button, index, array, config, b
             return <Download />
         }
 
-        if (!button?.url || !isExternalURL(button.url, process.env.host ?? '')) {
+        if (!button?.url || !isExternalURL(button.url, process.env.parsed.NEXT_PUBLIC_URL ?? '')) {
             return undefined
         }
 

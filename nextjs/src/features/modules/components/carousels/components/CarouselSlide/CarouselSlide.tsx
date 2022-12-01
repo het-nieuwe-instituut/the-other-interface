@@ -1,11 +1,11 @@
 import React from 'react'
 import {  Flex } from '@chakra-ui/react'
-import { ComponentCoreCarouselItem, EnumComponentmodulescarouselType, EnumComponentcorecarouselitemType, Maybe, TriplyRecord } from 'src/generated/graphql';
+import { ComponentCoreCarouselItem, EnumComponentmodulescarouselType, EnumComponentcorecarouselitemType, Maybe } from 'src/generated/graphql';
 import { CarouselMaker } from '../CarouselMaker/CarouselMaker';
 import { CarouselHighlightItem } from '../CarouselHighlightItem/CarouselHighlightItem';
 import { CarouselTheme } from '../CarouselTheme/CarouselTheme';
 import { usePresenter } from './usePresenter';
-import { extractDataFromTripley } from '@/features/modules/helpers/modulesHelpers';
+import { extractTriplyFields } from '@/features/modules/helpers/triplyDataExtractor';
 
 interface Props {
     items: Maybe<ComponentCoreCarouselItem>[]
@@ -21,7 +21,14 @@ export const CarouselSlide = (props: Props) => {
             <Flex key={`${key}`} mb={'3'} justifyContent={justifySlide}>
                 {items?.map((component, index) => {
                     const record = component?.triply_record?.data?.attributes
-                    const {image, name, description} = extractDataFromTripley(record as TriplyRecord, component)
+                    const {title: name, description, imageUrl: image} = extractTriplyFields(
+                        {
+                            title: component?.name || '',
+                            description: component?.description || '',
+                            imageUrl: component?.picture?.data?.attributes?.url || 'broken',
+                        },
+                        record
+                    )
 
                     if (type === EnumComponentmodulescarouselType?.Makers) {
                         return (
