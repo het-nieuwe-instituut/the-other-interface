@@ -7,18 +7,15 @@ import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import useScroll from '@/features/shared/hooks/useScroll'
 import { Box, Grid, GridItem, useTheme } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
-import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import { StoryBySlugQuery, StoryComponentsDynamicZone, StoryEntity } from 'src/generated/graphql'
+import RecordClouds from '../../../galaxy/RecordClouds/RecordClouds'
 import { StoryMeta } from '../../Meta/StoryMeta'
 import { GetZoom5StoryQuery } from '../../tasks/getZoom5StoryTask'
 import { ScrollToTop } from '../../utils/utils'
 import { RecordProvider } from '../RecordContainer/RecordContext'
 
-const DynamicRecordCloudsNoSsr = dynamic(() => import('../../../galaxy/RecordClouds/RecordClouds'), {
-    ssr: false,
-})
 
 interface Props {
     record: GetZoom5StoryQuery['story']
@@ -54,7 +51,7 @@ const Story = (props: PageProps) => {
             <GalaxyWrapper renderTopRight={() => <GalaxyTopRight />} renderBottom={() => <GalaxyFooter />}>
                 <Box backgroundColor="graph" height="800px" ref={graphRef} key={router.query.record as string}>
                     {sizes?.height && sizes?.width && (
-                        <DynamicRecordCloudsNoSsr
+                        <RecordClouds
                             key={router.query.record as string}
                             dimensions={sizes}
                         />
