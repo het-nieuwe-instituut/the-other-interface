@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { StoryService } from '../story/story.service'
-import { TriplyService } from '../triply/triply.service'
+import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { EntityNames } from './zoomLevel1.type'
 
 interface ObjectPerTypeData {
@@ -8,7 +8,11 @@ interface ObjectPerTypeData {
     dataset: string
     graph: string
 }
-
+const objectPerTypeDataKeys: KeysToVerify<ObjectPerTypeData> = {
+    count: true,
+    dataset: true,
+    graph: true,
+}
 @Injectable()
 export class ZoomLevel1Service {
     private readonly EntityIdentifierMapping = [
@@ -44,7 +48,7 @@ export class ZoomLevel1Service {
 
         const endpoint = 'zoom-1-record-counts/run'
 
-        const result = await this.triplyService.queryTriplyData<ObjectPerTypeData>(endpoint)
+        const result = await this.triplyService.queryTriplyData<ObjectPerTypeData>(endpoint, objectPerTypeDataKeys)
         const triplyData = result.data.map(r => {
             return {
                 name: r.dataset,

@@ -1,6 +1,6 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common'
-import { TriplyService } from '../triply/triply.service'
-import { TriplyUtils, ZoomLevel3ReturnData } from '../triply/triply.utils'
+import { KeysToVerify, TriplyService } from '../triply/triply.service'
+import { TriplyUtils, ZoomLevel3ReturnData, zoomLevel3ReturnDataKeys } from '../triply/triply.utils'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { ZoomLevel5Service } from '../zoomLevel5/zoomLevel5.service'
 import { PublicationsZoomLevel4FiltersArgs } from './publications.type'
@@ -24,10 +24,17 @@ export enum PublicationsZoomLevel4Filters {
 interface PublicationsFilterData {
     filter: string
 }
+const publicationsFilterDataKeys: KeysToVerify<PublicationsFilterData> = {
+    filter: true,
+}
 
 interface PublicationsZoomLevel4Data {
     record: string
     title: string
+}
+const publicationsZoomLevel4DataKeys: KeysToVerify<PublicationsZoomLevel4Data> = {
+    record: true,
+    title: true,
 }
 
 interface PublicationsBooksDetailZoomLevel5Data {
@@ -66,6 +73,42 @@ interface PublicationsBooksDetailZoomLevel5Data {
     shelfmark?: string
     permanentLink?: string
 }
+const publicationsBooksDetailZoomLevel5DataKeys: KeysToVerify<PublicationsBooksDetailZoomLevel5Data> = {
+    typeOfPublication: true,
+    typeOfPublicationLabel: true,
+    title: true,
+    author: true,
+    authorLabel: true,
+    authorRole: true,
+    authorRoleLabel: true,
+    publisher: true,
+    publisherLabel: true,
+    yearOfPublication: true,
+    placeOfPublication: true,
+    placeOfPublicationLabel: true,
+    isbn: true,
+    description: true,
+    annotation: true,
+    codeOfArchive: true,
+    codeOfArchiveLabel: true,
+    edition: true,
+    illustration: true,
+    numberOfPages: true,
+    language: true,
+    languageLabel: true,
+    seriesLabel: true,
+    number: true,
+    geographicalKeyword: true,
+    geographicalKeywordLabel: true,
+    subject: true,
+    subjectLabel: true,
+    relatedPerInst: true,
+    relatedPerInstLabel: true,
+    objectNumber: true,
+    availability: true,
+    shelfmark: true,
+    permanentLink: true,
+}
 
 interface PublicationsSerialDetailZoomLevel5Data {
     typeOfPublication?: string
@@ -87,6 +130,27 @@ interface PublicationsSerialDetailZoomLevel5Data {
     shelfmark?: string
     holding?: string
     permanentLink?: string
+}
+const publicationsSerialDetailZoomLevel5DataKeys: KeysToVerify<PublicationsSerialDetailZoomLevel5Data> = {
+    typeOfPublication: true,
+    typeOfPublicationLabel: true,
+    title: true,
+    publisher: true,
+    publisherLabel: true,
+    yearOfPublication: true,
+    placeOfPublication: true,
+    placeOfPublicationLabel: true,
+    subject: true,
+    subjectLabel: true,
+    language: true,
+    languageLabel: true,
+    continuedFrom: true,
+    continuedAs: true,
+    remarks: true,
+    availability: true,
+    shelfmark: true,
+    holding: true,
+    permanentLink: true,
 }
 
 interface PublicationArticleDetailZoomLevel5Data {
@@ -119,6 +183,36 @@ interface PublicationArticleDetailZoomLevel5Data {
     shelfmark?: string
     permanentLink?: string
 }
+const publicationArticleDetailZoomLevel5DataKeys: KeysToVerify<PublicationArticleDetailZoomLevel5Data> = {
+    typeOfPublication: true,
+    typeOfPublicationLabel: true,
+    title: true,
+    author: true,
+    authorLabel: true,
+    authorRole: true,
+    authorRoleLabel: true,
+    sourceTitle: true,
+    sourceTitleLabel: true,
+    volume: true,
+    issue: true,
+    yearOfPublication: true,
+    page: true,
+    publisher: true,
+    publisherLabel: true,
+    abstract: true,
+    language: true,
+    languageLabel: true,
+    geographicalKeyword: true,
+    geographicalKeywordLabel: true,
+    subject: true,
+    subjectLabel: true,
+    relatedPerInst: true,
+    relatedPerInstLabel: true,
+    objectNumber: true,
+    availability: true,
+    shelfmark: true,
+    permanentLink: true,
+}
 
 interface PublicationsAudioVisualDetailZoomLevel5Data {
     typeOfPublication?: string
@@ -150,18 +244,54 @@ interface PublicationsAudioVisualDetailZoomLevel5Data {
     availability?: string
     shelfmark?: string
 }
-
-type PublicationsZoomLevel5DataTypes =
-    | PublicationsBooksDetailZoomLevel5Data
-    | PublicationsSerialDetailZoomLevel5Data
-    | PublicationArticleDetailZoomLevel5Data
-    | PublicationsAudioVisualDetailZoomLevel5Data
+const publicationsAudioVisualDetailZoomLevel5DataKeys: KeysToVerify<PublicationsAudioVisualDetailZoomLevel5Data> = {
+    typeOfPublication: true,
+    typeOfPublicationLabel: true,
+    title: true,
+    author: true,
+    authorLabel: true,
+    authorRole: true,
+    authorRoleLabel: true,
+    publisher: true,
+    publisherLabel: true,
+    yearOfPublication: true,
+    placeOfPublication: true,
+    placeOfPublicationLabel: true,
+    abstract: true,
+    annotation: true,
+    scope: true,
+    language: true,
+    languageLabel: true,
+    medium: true,
+    geographicalKeyword: true,
+    geographicalKeywordLabel: true,
+    subject: true,
+    subjectLabel: true,
+    relatedPerInst: true,
+    relatedPerInstLabel: true,
+    permanentLink: true,
+    objectNumber: true,
+    availability: true,
+    shelfmark: true,
+}
 
 export enum PublicationsZoomLevel5Types {
     serial = 'serial',
     book = 'book',
     article = 'article',
     audiovisual = 'audiovisual',
+}
+
+type PublicationsZoomLevel5DataTypes =
+    | PublicationsBooksDetailZoomLevel5Data
+    | PublicationsSerialDetailZoomLevel5Data
+    | PublicationArticleDetailZoomLevel5Data
+    | PublicationsAudioVisualDetailZoomLevel5Data
+const publicationsZoomLevel5DataTypeKeys = {
+    [PublicationsZoomLevel5Types.article]: publicationArticleDetailZoomLevel5DataKeys,
+    [PublicationsZoomLevel5Types.audiovisual]: publicationsAudioVisualDetailZoomLevel5DataKeys,
+    [PublicationsZoomLevel5Types.book]: publicationsBooksDetailZoomLevel5DataKeys,
+    [PublicationsZoomLevel5Types.serial]: publicationsSerialDetailZoomLevel5DataKeys,
 }
 
 @Injectable()
@@ -221,10 +351,15 @@ export class PublicationsService {
             record: string
             typeOfPublication: string
         }
+        const typeOfPublicationDataKeys: KeysToVerify<TypeOfPublicationData> = {
+            record: true,
+            typeOfPublication: true,
+        }
 
         const uri = TriplyUtils.getUriForTypeAndId(EntityNames.Publications, id)
         const res = await this.triplyService.queryTriplyData<TypeOfPublicationData>(
             this.publicationDescriptionLevelEndpoint,
+            typeOfPublicationDataKeys,
             undefined,
             { record: uri }
         )
@@ -251,7 +386,11 @@ export class PublicationsService {
     }
 
     public async getZoomLevel2Data() {
-        const result = await this.triplyService.queryTriplyData<PublicationsFilterData>(this.zoomLevel2Endpoint)
+        const result = await this.triplyService.queryTriplyData<PublicationsFilterData>(
+            this.zoomLevel2Endpoint,
+            publicationsFilterDataKeys
+        )
+
         return result.data
             .map(r => {
                 const filterMapping = this.ZoomLevel3Mapping.find(m => m.name === r.filter)
@@ -268,10 +407,11 @@ export class PublicationsService {
             throw new Error(`[Publications] Mapping ${id} not found`)
         }
 
-        const result = await this.triplyService.queryTriplyData<ZoomLevel3ReturnData>(mapping?.endpoint, {
-            page,
-            pageSize,
-        })
+        const result = await this.triplyService.queryTriplyData<ZoomLevel3ReturnData>(
+            mapping?.endpoint,
+            zoomLevel3ReturnDataKeys,
+            { page, pageSize }
+        )
 
         return TriplyUtils.parseLevel3OutputData(result.data)
     }
@@ -285,14 +425,13 @@ export class PublicationsService {
 
         const result = await this.triplyService.queryTriplyData<PublicationsZoomLevel4Data>(
             this.ZoomLevel4Endpoint,
-            {
-                page,
-                pageSize,
-            },
+            publicationsZoomLevel4DataKeys,
+            { page, pageSize },
             searchParams
         )
         const countResult = await this.triplyService.queryTriplyData<{ count?: number }>(
             this.ZoomLevel4CountEndpoint,
+            { count: true },
             undefined,
             searchParams
         )
@@ -318,6 +457,7 @@ export class PublicationsService {
         const uri = TriplyUtils.getUriForTypeAndId(EntityNames.Publications, objectId)
         const result = await this.triplyService.queryTriplyData<PublicationsZoomLevel5DataTypes>(
             this.ZoomLevel5Endpoint[publicationType],
+            publicationsZoomLevel5DataTypeKeys[publicationType],
             undefined,
             { record: uri }
         )

@@ -1,10 +1,17 @@
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
+import { KeysToVerify } from './triply.service'
 
 export interface ZoomLevel3ReturnData {
     total: string | null
     count: string | null
     label: string | null
     iri: string
+}
+export const zoomLevel3ReturnDataKeys: KeysToVerify<ZoomLevel3ReturnData> = {
+    total: true,
+    count: true,
+    label: true,
+    iri: true,
 }
 
 export class TriplyUtils {

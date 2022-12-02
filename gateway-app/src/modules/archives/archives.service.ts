@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
-import { TriplyService } from '../triply/triply.service'
-import { TriplyUtils, ZoomLevel3ReturnData } from '../triply/triply.utils'
+import { KeysToVerify, TriplyService } from '../triply/triply.service'
+import { TriplyUtils, ZoomLevel3ReturnData, zoomLevel3ReturnDataKeys } from '../triply/triply.utils'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { ArchivesZoomLevel4FiltersArgs } from './archives.type'
 
@@ -19,6 +19,7 @@ export enum ArchivesZoomLevel4Filters {
 interface ObjectFilterData {
     filter: string
 }
+const objectFilterDataKeys: KeysToVerify<ObjectFilterData> = { filter: true }
 
 interface ArchivesZoomLevel4Data {
     record: string
@@ -26,6 +27,13 @@ interface ArchivesZoomLevel4Data {
     firstImage: string | null
     imageLabel: string | null
     pidWorkURI: string | null
+}
+const archivesZoomLevel4DataKeys: KeysToVerify<ArchivesZoomLevel4Data> = {
+    record: true,
+    title: true,
+    firstImage: true,
+    imageLabel: true,
+    pidWorkURI: true,
 }
 
 export enum ArchivesZoomLevel5Types {
@@ -48,6 +56,22 @@ export interface ArchivesFondsDetailZoomLevel5Data {
     rights?: string
     rightsLabel?: string
     permanentLink?: string
+}
+const archivesFondsDetailZoomLevel5DataKeys: KeysToVerify<ArchivesFondsDetailZoomLevel5Data> = {
+    objectNumber: true,
+    title: true,
+    startDate: true,
+    endDate: true,
+    dateLabel: true,
+    dimensionFree: true,
+    mediaReference: true,
+    mediaReferenceLabel: true,
+    existenceOfOriginals: true,
+    scopeContent: true,
+    relatedMaterial: true,
+    rights: true,
+    rightsLabel: true,
+    permanentLink: true,
 }
 
 export interface ArchivesOtherDetailZoomLevel5Data {
@@ -77,8 +101,39 @@ export interface ArchivesOtherDetailZoomLevel5Data {
     permanentLink?: string
     pidWorkURI?: string
 }
+const archivesOtherDetailZoomLevel5DataKeys: KeysToVerify<ArchivesOtherDetailZoomLevel5Data> = {
+    descriptionLevel: true,
+    objectNumber: true,
+    recordTitle: true,
+    startDate: true,
+    endDate: true,
+    productionDate: true,
+    extent: true,
+    repository: true,
+    repositoryLabel: true,
+    creator: true,
+    creatorLabel: true,
+    creatorHistory: true,
+    custodialHistory: true,
+    systemOfArrangement: true,
+    contentScope: true,
+    conditionsGoverningAccess: true,
+    relatedMaterial: true,
+    appendices: true,
+    source: true,
+    partReference: true,
+    partTitle: true,
+    right: true,
+    rightLabel: true,
+    permanentLink: true,
+    pidWorkURI: true,
+}
 
 type ArchivesZoomLeve5DataType = ArchivesOtherDetailZoomLevel5Data | ArchivesFondsDetailZoomLevel5Data
+const archivesZoomLevel5DataKeys = {
+    [ArchivesZoomLevel5Types.other]: archivesOtherDetailZoomLevel5DataKeys,
+    [ArchivesZoomLevel5Types.fonds]: archivesFondsDetailZoomLevel5DataKeys,
+}
 
 @Injectable()
 export class ArchivesService {
@@ -123,10 +178,15 @@ export class ArchivesService {
             record: string
             descriptionLevel: string
         }
+        const keys: KeysToVerify<ArchivesDescriptionLevelData> = {
+            record: true,
+            descriptionLevel: true,
+        }
 
         const uri = TriplyUtils.getUriForTypeAndId(EntityNames.Archives, id)
         const res = await this.triplyService.queryTriplyData<ArchivesDescriptionLevelData>(
             this.archivesDescriptionLevelEndpoint,
+            keys,
             undefined,
             { record: uri }
         )
@@ -139,7 +199,11 @@ export class ArchivesService {
     }
 
     public async getZoomLevel2Data() {
-        const result = await this.triplyService.queryTriplyData<ObjectFilterData>(this.zoomLevel2Endpoint)
+        const result = await this.triplyService.queryTriplyData<ObjectFilterData>(
+            this.zoomLevel2Endpoint,
+            objectFilterDataKeys
+        )
+
         return result.data
             .map(r => {
                 const filterMapping = this.ZoomLevel3Mapping.find(m => m.name === r.filter)
@@ -156,10 +220,11 @@ export class ArchivesService {
             throw new Error(`[Archives] Mapping ${id} not found`)
         }
 
-        const result = await this.triplyService.queryTriplyData<ZoomLevel3ReturnData>(mapping?.endpoint, {
-            page,
-            pageSize,
-        })
+        const result = await this.triplyService.queryTriplyData<ZoomLevel3ReturnData>(
+            mapping?.endpoint,
+            zoomLevel3ReturnDataKeys,
+            { page, pageSize }
+        )
 
         return TriplyUtils.parseLevel3OutputData(result.data)
     }
@@ -176,15 +241,14 @@ export class ArchivesService {
 
         const result = await this.triplyService.queryTriplyData<ArchivesZoomLevel4Data>(
             this.ZoomLevel4Endpoint,
-            {
-                page,
-                pageSize,
-            },
+            archivesZoomLevel4DataKeys,
+            { page, pageSize },
             searchParams
         )
 
         const countResult = await this.triplyService.queryTriplyData<{ count?: number }>(
             this.ZoomLevel4CountEndpoint,
+            { count: true },
             undefined,
             searchParams
         )
@@ -212,6 +276,7 @@ export class ArchivesService {
 
         const result = await this.triplyService.queryTriplyData<ArchivesZoomLeve5DataType>(
             this.ZoomLevel5Endpoint[type],
+            archivesZoomLevel5DataKeys[type],
             undefined,
             { record: uri }
         )

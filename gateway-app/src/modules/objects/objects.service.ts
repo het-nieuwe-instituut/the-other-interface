@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
-import { TriplyService } from '../triply/triply.service'
-import { TriplyUtils, ZoomLevel3ReturnData } from '../triply/triply.utils'
+import { KeysToVerify, TriplyService } from '../triply/triply.service'
+import { TriplyUtils, ZoomLevel3ReturnData, zoomLevel3ReturnDataKeys } from '../triply/triply.utils'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { ObjectsZoomLevel4FiltersArgs } from './objects.type'
 
@@ -27,6 +27,9 @@ export enum ObjectsZoomLevel4Filters {
 interface ObjectFilterData {
     filter: string
 }
+const objectFilterDataKeys: KeysToVerify<ObjectFilterData> = {
+    filter: true,
+}
 
 interface ObjectsZoomLevel4Data {
     record: string
@@ -34,6 +37,13 @@ interface ObjectsZoomLevel4Data {
     firstImage: string | null
     imageLabel: string | null
     pidWorkURI: string | null
+}
+const objectsZoomLevel4DataKeys: KeysToVerify<ObjectsZoomLevel4Data> = {
+    record: true,
+    title: true,
+    firstImage: true,
+    imageLabel: true,
+    pidWorkURI: true,
 }
 
 interface ObjectsDetailZoomLevel5Data {
@@ -73,7 +83,43 @@ interface ObjectsDetailZoomLevel5Data {
     creationPlaceLabel?: string
     permanentLink?: string
 }
-
+const objectsDetailZoomLevel5DataKeys: KeysToVerify<ObjectsDetailZoomLevel5Data> = {
+    image: true,
+    imageLabel: true,
+    title: true,
+    titleType: true,
+    objectNumber: true,
+    objectName: true,
+    objectNameLabel: true,
+    archiveCollectionCode: true,
+    maker: true,
+    makerLabel: true,
+    makerRole: true,
+    makerRoleLabel: true,
+    startDate: true,
+    endDate: true,
+    numberOfParts: true,
+    scale: true,
+    technique: true,
+    techniqueLabel: true,
+    material: true,
+    materialLabel: true,
+    dimensionPart: true,
+    dimensionType: true,
+    dimensionValue: true,
+    dimensionUnit: true,
+    description: true,
+    associationPerson: true,
+    associationPersonLabel: true,
+    associationPersonType: true,
+    relatedObjectTitle: true,
+    creditLine: true,
+    rights: true,
+    rightsLabel: true,
+    creationPlace: true,
+    creationPlaceLabel: true,
+    permanentLink: true,
+}
 @Injectable()
 export class ObjectsService {
     protected entityType = 'triply'
@@ -127,7 +173,11 @@ export class ObjectsService {
     public constructor(private triplyService: TriplyService) {}
 
     public async getZoomLevel2Data() {
-        const result = await this.triplyService.queryTriplyData<ObjectFilterData>(this.zoomLevel2Endpoint)
+        const result = await this.triplyService.queryTriplyData<ObjectFilterData>(
+            this.zoomLevel2Endpoint,
+            objectFilterDataKeys
+        )
+
         return result.data
             .map(r => {
                 const filterMapping = this.ZoomLevel3Mapping.find(m => m.name === r.filter)
@@ -144,10 +194,11 @@ export class ObjectsService {
             throw new Error(`[Objects] Mapping ${id} not found`)
         }
 
-        const result = await this.triplyService.queryTriplyData<ZoomLevel3ReturnData>(mapping?.endpoint, {
-            page,
-            pageSize,
-        })
+        const result = await this.triplyService.queryTriplyData<ZoomLevel3ReturnData>(
+            mapping?.endpoint,
+            zoomLevel3ReturnDataKeys,
+            { page, pageSize }
+        )
 
         return TriplyUtils.parseLevel3OutputData(result.data)
     }
@@ -161,15 +212,14 @@ export class ObjectsService {
 
         const result = await this.triplyService.queryTriplyData<ObjectsZoomLevel4Data>(
             this.ZoomLevel4Endpoint,
-            {
-                page,
-                pageSize,
-            },
+            objectsZoomLevel4DataKeys,
+            { page, pageSize },
             searchParams
         )
 
         const countResult = await this.triplyService.queryTriplyData<{ count?: number }>(
             this.ZoomLevel4CountEndpoint,
+            { count: true },
             undefined,
             searchParams
         )
@@ -196,6 +246,7 @@ export class ObjectsService {
         const uri = TriplyUtils.getUriForTypeAndId(EntityNames.Objects, objectId)
         const result = await this.triplyService.queryTriplyData<ObjectsDetailZoomLevel5Data>(
             this.ZoomLevel5Endpoint,
+            objectsDetailZoomLevel5DataKeys,
             undefined,
             { record: uri }
         )
