@@ -147,8 +147,8 @@ export class ArchivesOtherZoomLevel5DetailType extends BaseArchiveZoomLevel5Type
     @Field(() => String, { nullable: true })
     public permanentLink?: string
 
-    @Field({ nullable: true })
-    public pidWorkURI?: string
+    @Field(() => [String], { nullable: true })
+    public pidWorkURIs?: string[]
 }
 
 export const ArchiveZoomLevel5UnionType = createUnionType({

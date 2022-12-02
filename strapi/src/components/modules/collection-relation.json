@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_modules_collection_relations",
+  "info": {
+    "displayName": "collectionRelation",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "author": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::author.author"
+    },
+    "story": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::story.story"
+    },
+    "triplyRecord": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::triply-record.triply-record"
+    }
+  }
+}
