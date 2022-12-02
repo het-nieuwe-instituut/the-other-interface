@@ -216,7 +216,10 @@ export class ArchivesService {
             { record: uri }
         )
 
-        return { ...TriplyUtils.combineObjectArray(result.data), type, id: objectId }
+        const pidWorkURIs: Set<string> = new Set()
+        result.data.forEach(d => 'pidWorkURI' in d && d.pidWorkURI && pidWorkURIs.add(d.pidWorkURI))
+
+        return { ...TriplyUtils.combineObjectArray(result.data), pidWorkURIs, type, id: objectId }
     }
 
     public validateFilterInput(input: string): ArchivesZoomLevel3Ids {
