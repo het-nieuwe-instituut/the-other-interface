@@ -71,7 +71,9 @@ function renderDot(
                 data-id={item.id}
             >
                 <Box
-                    onMouseEnter={e => !disableLinkAndHover && showTooltip(e, item)}
+                    onMouseEnter={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
+                        !disableLinkAndHover && showTooltip(e, item)
+                    }
                     onMouseLeave={() => !disableLinkAndHover && hideTooltip(item)}
                     height="100%"
                     width="100%"

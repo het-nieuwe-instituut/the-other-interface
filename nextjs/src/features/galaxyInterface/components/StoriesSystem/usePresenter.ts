@@ -3,7 +3,6 @@
 import { calcRandomTrianglePoint, selectRandomTriangle } from '@/features/galaxy/utils/polygons'
 import earcut from 'earcut'
 import { useMemo } from 'react'
-import { useZoomLevel1Query } from 'src/generated/graphql'
 import { StoriesItem } from '../../galaxies/MainGalaxy/types'
 
 const points = [
@@ -51,12 +50,9 @@ export interface StoryDataPoint extends StoriesItem {
 
 export function usePresenter(stories: StoriesItem[]) {
     const { triangles, dataPoints } = useTriangles(stories)
-    const { data, loading } = useZoomLevel1Query()
     return {
         triangles,
         dataPoints,
-        items: data?.zoomLevel1 ?? [],
-        loading,
         showTooltip,
         hideTooltip,
         cleanupTooltips,
