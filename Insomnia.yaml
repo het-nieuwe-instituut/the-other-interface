@@ -791,7 +791,7 @@ resources:
     _type: request
   - _id: req_bb8d9c352e5d4b579d857e8a70e52b13
     parentId: wrk_495bc411648844949d6c2b88c3ac4cb2
-    modified: 1666957198170
+    modified: 1669889275474
     created: 1661783093300
     url: https://hni-toi-production-api.lifely.nl/gateway/graphql
     name: counts (Zoom 1)
@@ -1748,7 +1748,7 @@ resources:
     _type: request_group
   - _id: req_1a1a5f2262154aedb6464b8484301908
     parentId: fld_dc8e1d13132e4e3da71f9f90b1a55a54
-    modified: 1669632641953
+    modified: 1669889442145
     created: 1664372356024
     url: "{{ _.baseUrl }}/graphql"
     name: other
@@ -1757,7 +1757,7 @@ resources:
     body:
       mimeType: application/graphql
       text: '{"query":"query {\n\tzoomLevel5ArchivesOther(id: \"110746983\")
-        {\n\t\tobjectNumber\n\t\ttitle\n\t\tstartDate\n\t\tendDate\n\t\tdateLabel\n\t\tdimensionFree\n\t\tmediaReference\n\t\tmediaReferenceLabel\n\t\texistenceOfOriginals\n\t\tscopeContent\n\t\trelatedMaterial\n\t\trights\n\t\trightsLabel\n\t\tpermanentLink\n\t\tpidWorkURI\n\t}\n}\n"}'
+        {\n\t\tobjectNumber\n\t\ttitle\n\t\tstartDate\n\t\tendDate\n\t\tdateLabel\n\t\tdimensionFree\n\t\tmediaReference\n\t\tmediaReferenceLabel\n\t\texistenceOfOriginals\n\t\tscopeContent\n\t\trelatedMaterial\n\t\trights\n\t\trightsLabel\n\t\tpermanentLink\n\t\tpidWorkURIs\n\t}\n}\n"}'
     parameters: []
     headers:
       - name: Content-Type
