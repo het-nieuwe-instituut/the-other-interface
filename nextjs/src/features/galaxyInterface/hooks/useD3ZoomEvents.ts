@@ -394,7 +394,7 @@ export function useD3ZoomEvents(options: Options) {
                 })
                 store.dispatch(
                     galaxyInterfaceActions.setActiveZoom({
-                        activeZoom: ZoomStates.Zoom3,
+                        activeZoom: ZoomStates.ZoomOutToZoom3,
                     })
                 )
             }
@@ -430,6 +430,31 @@ export function useD3ZoomEvents(options: Options) {
                 store.dispatch(
                     galaxyInterfaceActions.setActiveZoom({
                         activeZoom: ZoomStates.Zoom4,
+                    })
+                )
+            }
+
+            // ZOOM 5
+            if (activeZoom === ZoomStates.Zoom5) {
+                await scaleZoom({ d3Ref: d3Svg, initial: { duration: 0, scale: 1 } })
+            }
+
+            if (activeZoom === ZoomStates.Zoom5Initial) {
+                await scaleZoom({ d3Ref: d3Svg, initial: { duration: 0, scale: 1 } })
+            }
+            if (activeZoom === ZoomStates.Zoom5ToZoom4) {
+                await scaleZoom({
+                    d3Ref: d3Svg,
+                    to: {
+                        duration: 1500,
+                        scale: 0,
+                        opacity: 0,
+                    },
+                    initial: { scale: 1 },
+                })
+                store.dispatch(
+                    galaxyInterfaceActions.setActiveZoom({
+                        activeZoom: ZoomStates.ZoomOutToZoom4,
                     })
                 )
             }

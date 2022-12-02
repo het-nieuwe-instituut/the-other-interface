@@ -12,6 +12,7 @@ import { DynamicCollectionCloudsContainer } from './components/containers/Dynami
 import { DynamicFilterCloudsContainer } from './components/containers/DynamicFilterCloudsContainer'
 import { DynamicGalaxyContainer } from './components/containers/DynamicGalaxyContainer'
 import { DynamicPaginatedFilterCloudsContainer } from './components/containers/DynamicPaginatedFilterContainer'
+import { DynamicRecordCloudsContainer } from './components/containers/DynamicRecordCloudsContainer'
 import { usePresenter } from './usePresenter'
 
 const DEBUG = true
@@ -56,7 +57,7 @@ export const GalaxyInterface: React.FC = () => {
     )
 }
 
-const includesZoomStatesMainGalaxy = [
+export const includesZoomStatesMainGalaxy = [
     ZoomStates.Zoom0,
     ZoomStates.Zoom0ToZoom1,
     ZoomStates.Zoom1ToZoom0,
@@ -68,28 +69,34 @@ const includesZoomStatesMainGalaxy = [
     ZoomStates.Zoom1StoriesToZoom5,
     ZoomStates.ZoomOutToZoom1,
 ]
-const includesZoomStatesZoom2Galaxy = [
+export const includesZoomStatesZoom2Galaxy = [
     ZoomStates.Zoom2,
     ZoomStates.Zoom2Initial,
     ZoomStates.Zoom2ToZoom3,
     ZoomStates.Zoom2ToZoom1,
     ZoomStates.ZoomOutToZoom2,
 ]
-const includesZoomStatesZoom3Galaxy = [
+export const includesZoomStatesZoom3Galaxy = [
     ZoomStates.Zoom3,
     ZoomStates.Zoom3Initial,
     ZoomStates.Zoom3ToZoom2,
     ZoomStates.Zoom3ToZoom4,
     ZoomStates.ZoomOutToZoom3,
 ]
-const includesZoomStatesZoom4Galaxy = [
+export const includesZoomStatesZoom4Galaxy = [
     ZoomStates.Zoom4,
     ZoomStates.Zoom4Initial,
     ZoomStates.Zoom4ToZoom3,
     ZoomStates.Zoom4ToZoom5,
     ZoomStates.ZoomOutToZoom4,
 ]
-const includesZoomStatesZoom5Galaxy = [ZoomStates.Zoom5]
+export const includesZoomStatesZoom5Galaxy = [
+    ZoomStates.Zoom5Initial,
+    ZoomStates.Zoom5,
+    ZoomStates.Zoom5ToRelation,
+    ZoomStates.Zoom4ToZoom5,
+    ZoomStates.Zoom5ToZoom4,
+]
 
 const GalaxySwitch: React.FC<{ activeZoom: ZoomStates | null; sizes: ReturnType<typeof useSize> }> = props => {
     const { activeZoom, sizes } = props
@@ -110,7 +117,7 @@ const GalaxySwitch: React.FC<{ activeZoom: ZoomStates | null; sizes: ReturnType<
         return <DynamicCollectionCloudsContainer dimensions={{ height: 800, width: sizes?.width ?? 0 }} />
     }
     if (includesZoomStatesZoom5Galaxy.includes(activeZoom)) {
-        return <DynamicFilterCloudsContainer dimensions={{ height: 800, width: sizes?.width ?? 0 }} />
+        return <DynamicRecordCloudsContainer dimensions={{ height: 800, width: sizes?.width ?? 0 }} />
     }
     return null
 }
