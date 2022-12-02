@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2022-12-01T10:11:04.944Z
+__export_date: 2022-12-01T14:15:25.359Z
 __export_source: insomnia.desktop.app:v2022.6.0
 resources:
   - _id: req_d36dd2c14e474d7abc436370519db759
@@ -475,7 +475,7 @@ resources:
     _type: request
   - _id: req_6d9eab5141604886a5febf2366b70ad6
     parentId: fld_13c5fd867c8545c3a5309539679ba83f
-    modified: 1667553434752
+    modified: 1669903839625
     created: 1667553343432
     url: "{{ _.baseUrl }}/graphql"
     name: storiesWithoutRelations
@@ -504,21 +504,39 @@ resources:
     _type: request
   - _id: req_da9626bccfd244309c17b2ff8b46d993
     parentId: fld_13c5fd867c8545c3a5309539679ba83f
-    modified: 1667553389246
+    modified: 1669904111037
     created: 1664823597730
-    url: ""
+    url: "{{ _.baseUrl }}/graphql"
     name: story
     description: ""
     method: POST
     body:
       mimeType: application/graphql
-      text: '{"query":"query {\n\tstory(id: \"2\") {\n\t\tdata
+      text: '{"query":"query {\n\tstory(id: \"34\") {\n\t\tdata
         {\n\t\t\tid\n\t\t\tattributes {\n\t\t\t\tcomponents {\n\t\t\t\t\t... on
         ComponentModulesButtonsModule
         {\n\t\t\t\t\t\tid\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t... on
         ComponentModulesImage
-        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t... on
-        ComponentModulesImageCarousel
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\t__typename\n\t\t\t\t\t\timageRelation
+        {\n\t\t\t\t\t\t\tauthor {\n\t\t\t\t\t\t\t\tdata
+        {\n\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\tattributes
+        {\n\t\t\t\t\t\t\t\t\t\tfirstName\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\tstory
+        {\n\t\t\t\t\t\t\t\tdata
+        {\n\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\tattributes
+        {\n\t\t\t\t\t\t\t\t\t\tslug\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\ttriplyRecord
+        {\n\t\t\t\t\t\t\t\tdata
+        {\n\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\tattributes
+        {\n\t\t\t\t\t\t\t\t\t\trecordId\n\t\t\t\t\t\t\t\t\t\ttype\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t}\n\t\t\t\t\t\tcaptionRelation
+        {\n\t\t\t\t\t\t\tauthor {\n\t\t\t\t\t\t\t\tdata
+        {\n\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\tattributes
+        {\n\t\t\t\t\t\t\t\t\t\tfirstName\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\tstory
+        {\n\t\t\t\t\t\t\t\tdata
+        {\n\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\tattributes
+        {\n\t\t\t\t\t\t\t\t\t\tslug\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\ttriplyRecord
+        {\n\t\t\t\t\t\t\t\tdata
+        {\n\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\tattributes
+        {\n\t\t\t\t\t\t\t\t\t\trecordId\n\t\t\t\t\t\t\t\t\t\ttype\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t\t...
+        on ComponentModulesImageCarousel
         {\n\t\t\t\t\t\tid\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t... on
         ComponentModulesPullquote
         {\n\t\t\t\t\t\tid\n\t\t\t\t\t\ttext\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t...
@@ -574,7 +592,7 @@ resources:
     _type: request
   - _id: req_23101c7d35dc442095c3006f81ec8f59
     parentId: fld_13c5fd867c8545c3a5309539679ba83f
-    modified: 1667553431465
+    modified: 1669903848187
     created: 1667553395488
     url: "{{ _.baseUrl }}/graphql"
     name: storyWithoutRelations

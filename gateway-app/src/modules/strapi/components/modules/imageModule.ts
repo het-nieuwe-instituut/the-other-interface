@@ -1,5 +1,6 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql'
 import { ComponentCoreModuleLayouts, UploadFileEntityResponse } from '../../shared-types'
+import { ComponentModulesCollectionRelation } from './collectionRelation'
 
 @ObjectType()
 export class ComponentModulesImage {
@@ -17,4 +18,10 @@ export class ComponentModulesImage {
 
     @Field(() => ComponentCoreModuleLayouts)
     public imageModuleLayout: ComponentCoreModuleLayouts
+
+    @Field(() => ComponentModulesCollectionRelation, { nullable: true })
+    public captionRelation?: ComponentModulesCollectionRelation
+
+    @Field(() => ComponentModulesCollectionRelation, { nullable: true })
+    public imageRelation?: ComponentModulesCollectionRelation
 }
