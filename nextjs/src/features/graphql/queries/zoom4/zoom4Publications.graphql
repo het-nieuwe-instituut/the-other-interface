@@ -7,6 +7,7 @@ query Zoom4Publications($publicationsFilters: PublicationsZoomLevel4FiltersArgs,
             title
             firstImage
             imageLabel
+            pidWorkURI
         }
     }
 }

@@ -5,7 +5,6 @@ import { GalaxyFooter } from '@/features/shared/components/GalaxyWrapper/GalaxyF
 import { GalaxyTopRight } from '@/features/shared/components/GalaxyWrapper/GalaxyTopRight/GalaxyTopRight'
 import { GalaxyWrapper } from '@/features/shared/components/GalaxyWrapper/GalaxyWrapper'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
-import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import useScroll from '@/features/shared/hooks/useScroll'
 import { Box, useTheme } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
@@ -24,7 +23,6 @@ export const LandingpageFilterContainer = (props: Props) => {
     const { landingpage: data } = props;
     const queryParams = query as unknown as LandingPageQueryParams
     const type = queryParams.slug
-    const { t } = useTypeSafeTranslation('common')
     const theme = useTheme()
     const graphRef = useRef<HTMLDivElement | null>(null)
     const sizes = useSize(graphRef)
@@ -39,9 +37,9 @@ export const LandingpageFilterContainer = (props: Props) => {
     //     return <p>{error.message}</p>
     // }
 
-    if (!data?.landingpages?.data.length) {
-        return <p>{t('somethingWentWrong')}</p>
-    }
+    // if (!data?.landingpages?.data.length) {
+    //     return <p>{t('somethingWentWrong')}</p>
+    // }
 
     const landingpage = data?.landingpages?.data[0]
 
@@ -71,8 +69,8 @@ export const LandingpageFilterContainer = (props: Props) => {
                     <PageHeader
                         showPointer={scrollPosition < 750}
                         handleClick={ScrollToContent}
-                        title={landingpage.attributes?.Title || undefined}
-                        preface={landingpage.attributes?.Description || undefined}
+                        title={landingpage?.attributes?.Title || undefined}
+                        preface={landingpage?.attributes?.Description || undefined}
                     />
                 </Box>
                 <DynamicComponentRenderer

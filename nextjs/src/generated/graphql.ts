@@ -60,6 +60,7 @@ export type ArchivesOtherZoomLevel5DetailType = {
   mediaReferenceLabel?: Maybe<Scalars['String']>;
   objectNumber?: Maybe<Scalars['String']>;
   permanentLink?: Maybe<Scalars['String']>;
+  pidWorkURI?: Maybe<Scalars['String']>;
   relatedMaterial?: Maybe<Scalars['String']>;
   rights?: Maybe<Scalars['String']>;
   rightsLabel?: Maybe<Scalars['String']>;
@@ -1664,38 +1665,25 @@ export type ZoomLevel4Type = {
   __typename?: 'ZoomLevel4Type';
   firstImage?: Maybe<Scalars['String']>;
   imageLabel?: Maybe<Scalars['String']>;
+  pidWorkURI?: Maybe<Scalars['String']>;
   record: Scalars['String'];
   title?: Maybe<Scalars['String']>;
 };
 
-export type ZoomLevel5RelatedArchiveType = {
-  __typename?: 'ZoomLevel5RelatedArchiveType';
-  id: Scalars['String'];
-  type: EntityNames;
-};
-
-export type ZoomLevel5RelatedObjectType = {
-  __typename?: 'ZoomLevel5RelatedObjectType';
-  id: Scalars['String'];
-  type: EntityNames;
-};
-
-export type ZoomLevel5RelatedPeopleType = {
-  __typename?: 'ZoomLevel5RelatedPeopleType';
+export type ZoomLevel5RelatedRecordType = {
+  __typename?: 'ZoomLevel5RelatedRecordType';
+  availability?: Maybe<Scalars['String']>;
   birthDate?: Maybe<Scalars['String']>;
+  creator?: Maybe<Scalars['String']>;
+  creatorLabel?: Maybe<Scalars['String']>;
+  date?: Maybe<Scalars['String']>;
   id: Scalars['String'];
   name?: Maybe<Scalars['String']>;
+  pidWorkURI?: Maybe<Scalars['String']>;
   profession?: Maybe<Scalars['String']>;
+  professionLabel?: Maybe<Scalars['String']>;
   type: EntityNames;
 };
-
-export type ZoomLevel5RelatedPublicationType = {
-  __typename?: 'ZoomLevel5RelatedPublicationType';
-  id: Scalars['String'];
-  type: EntityNames;
-};
-
-export type ZoomLevel5RelatedRecordType = ZoomLevel5RelatedArchiveType | ZoomLevel5RelatedObjectType | ZoomLevel5RelatedPeopleType | ZoomLevel5RelatedPublicationType;
 
 export type ZoomLevel5RelationsType = {
   __typename?: 'ZoomLevel5RelationsType';
@@ -1823,13 +1811,14 @@ export type Zoom3DPublicationsQueryVariables = Exact<{
 export type Zoom3DPublicationsQuery = { __typename?: 'Query', zoomLevel3: Array<{ __typename?: 'ZoomLevel3Type', uri?: string | null, name?: string | null, count?: number | null, total?: number | null }> };
 
 export type Zoom4QueryVariables = Exact<{
+  entityName: EntityNames;
   publicationsFilters?: InputMaybe<PublicationsZoomLevel4FiltersArgs>;
   page: Scalars['Int'];
-  pageSize: Scalars['Int'];
+  pageSize?: InputMaybe<Scalars['Int']>;
 }>;
 
 
-export type Zoom4Query = { __typename?: 'Query', zoomLevel4: { __typename?: 'ZoomLevel4ParentType', total: number, hasMore: boolean, nodes?: Array<{ __typename?: 'ZoomLevel4Type', record: string, title?: string | null, firstImage?: string | null, imageLabel?: string | null }> | null } };
+export type Zoom4Query = { __typename?: 'Query', zoomLevel4: { __typename?: 'ZoomLevel4ParentType', total: number, hasMore: boolean, nodes?: Array<{ __typename?: 'ZoomLevel4Type', record: string, title?: string | null, firstImage?: string | null, imageLabel?: string | null, pidWorkURI?: string | null }> | null } };
 
 export type Zoom4ArchivesQueryVariables = Exact<{
   archivesFilters?: InputMaybe<ArchivesZoomLevel4FiltersArgs>;
@@ -1838,7 +1827,7 @@ export type Zoom4ArchivesQueryVariables = Exact<{
 }>;
 
 
-export type Zoom4ArchivesQuery = { __typename?: 'Query', zoomLevel4: { __typename?: 'ZoomLevel4ParentType', total: number, hasMore: boolean, nodes?: Array<{ __typename?: 'ZoomLevel4Type', record: string, title?: string | null, firstImage?: string | null, imageLabel?: string | null }> | null } };
+export type Zoom4ArchivesQuery = { __typename?: 'Query', zoomLevel4: { __typename?: 'ZoomLevel4ParentType', total: number, hasMore: boolean, nodes?: Array<{ __typename?: 'ZoomLevel4Type', record: string, title?: string | null, firstImage?: string | null, imageLabel?: string | null, pidWorkURI?: string | null }> | null } };
 
 export type Zoom4ObjectsQueryVariables = Exact<{
   objectsFilters?: InputMaybe<ObjectsZoomLevel4FiltersArgs>;
@@ -1847,7 +1836,7 @@ export type Zoom4ObjectsQueryVariables = Exact<{
 }>;
 
 
-export type Zoom4ObjectsQuery = { __typename?: 'Query', zoomLevel4: { __typename?: 'ZoomLevel4ParentType', total: number, hasMore: boolean, nodes?: Array<{ __typename?: 'ZoomLevel4Type', record: string, title?: string | null, firstImage?: string | null, imageLabel?: string | null }> | null } };
+export type Zoom4ObjectsQuery = { __typename?: 'Query', zoomLevel4: { __typename?: 'ZoomLevel4ParentType', total: number, hasMore: boolean, nodes?: Array<{ __typename?: 'ZoomLevel4Type', record: string, title?: string | null, firstImage?: string | null, imageLabel?: string | null, pidWorkURI?: string | null }> | null } };
 
 export type Zoom4PeopleQueryVariables = Exact<{
   peopleFilters?: InputMaybe<PeopleZoomLevel4FiltersArgs>;
@@ -1856,7 +1845,7 @@ export type Zoom4PeopleQueryVariables = Exact<{
 }>;
 
 
-export type Zoom4PeopleQuery = { __typename?: 'Query', zoomLevel4: { __typename?: 'ZoomLevel4ParentType', total: number, hasMore: boolean, nodes?: Array<{ __typename?: 'ZoomLevel4Type', record: string, title?: string | null, firstImage?: string | null, imageLabel?: string | null }> | null } };
+export type Zoom4PeopleQuery = { __typename?: 'Query', zoomLevel4: { __typename?: 'ZoomLevel4ParentType', total: number, hasMore: boolean, nodes?: Array<{ __typename?: 'ZoomLevel4Type', record: string, title?: string | null, firstImage?: string | null, imageLabel?: string | null, pidWorkURI?: string | null }> | null } };
 
 export type Zoom4PublicationsQueryVariables = Exact<{
   publicationsFilters?: InputMaybe<PublicationsZoomLevel4FiltersArgs>;
@@ -1865,7 +1854,7 @@ export type Zoom4PublicationsQueryVariables = Exact<{
 }>;
 
 
-export type Zoom4PublicationsQuery = { __typename?: 'Query', zoomLevel4: { __typename?: 'ZoomLevel4ParentType', total: number, hasMore: boolean, nodes?: Array<{ __typename?: 'ZoomLevel4Type', record: string, title?: string | null, firstImage?: string | null, imageLabel?: string | null }> | null } };
+export type Zoom4PublicationsQuery = { __typename?: 'Query', zoomLevel4: { __typename?: 'ZoomLevel4ParentType', total: number, hasMore: boolean, nodes?: Array<{ __typename?: 'ZoomLevel4Type', record: string, title?: string | null, firstImage?: string | null, imageLabel?: string | null, pidWorkURI?: string | null }> | null } };
 
 export type ArchivesRelationsQueryVariables = Exact<{
   id: Scalars['String'];
@@ -2802,9 +2791,9 @@ export const Zoom3DPublicationsDocument = gql`
 }
     `;
 export const Zoom4Document = gql`
-    query Zoom4($publicationsFilters: PublicationsZoomLevel4FiltersArgs, $page: Int!, $pageSize: Int!) {
+    query Zoom4($entityName: EntityNames!, $publicationsFilters: PublicationsZoomLevel4FiltersArgs, $page: Int!, $pageSize: Int) {
   zoomLevel4(
-    entityName: Publications
+    entityName: $entityName
     publicationsFilters: $publicationsFilters
     page: $page
     pageSize: $pageSize
@@ -2816,6 +2805,7 @@ export const Zoom4Document = gql`
       title
       firstImage
       imageLabel
+      pidWorkURI
     }
   }
 }
@@ -2835,6 +2825,7 @@ export const Zoom4ArchivesDocument = gql`
       title
       firstImage
       imageLabel
+      pidWorkURI
     }
   }
 }
@@ -2854,6 +2845,7 @@ export const Zoom4ObjectsDocument = gql`
       title
       firstImage
       imageLabel
+      pidWorkURI
     }
   }
 }
@@ -2873,6 +2865,7 @@ export const Zoom4PeopleDocument = gql`
       title
       firstImage
       imageLabel
+      pidWorkURI
     }
   }
 }
@@ -2892,6 +2885,7 @@ export const Zoom4PublicationsDocument = gql`
       title
       firstImage
       imageLabel
+      pidWorkURI
     }
   }
 }
