@@ -3,11 +3,11 @@
     "defaultLocale": "nl",
     "localeDetection": false,
     "pages": {
-        "*": ["common", "navigation", "homepage"],
-        "story/*": ["stories", "record"],
+        "*": ["common", "navigation"],
+        "story/*": ["stories", "record", "landingpage"],
         "/landingpage/[slug]": ["landingpage"],
         "/landingpage/[slug]/[filter]": ["landingpage"],
-        "/landingpage/[slug]/[filter]/[collection]/[record]": ["record"],
+        "/landingpage/[slug]/[filter]/[collection]/[record]": ["record", "landingpage"],
         "/": ["homepage"]
     }
 }

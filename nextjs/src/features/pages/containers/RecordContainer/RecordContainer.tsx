@@ -3,22 +3,17 @@ import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/Mod
 import { GalaxyFooter } from '@/features/shared/components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 import { GalaxyTopRight } from '@/features/shared/components/GalaxyWrapper/GalaxyTopRight/GalaxyTopRight'
 import { GalaxyWrapper } from '@/features/shared/components/GalaxyWrapper/GalaxyWrapper'
-// import { Loader } from '@/features/shared/components/Loading/Loading'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import useScroll from '@/features/shared/hooks/useScroll'
 import { Box, useTheme } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
-import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import { LandingpageBySlugQuery, LandingpageComponentsDynamicZone } from 'src/generated/graphql'
+import RecordClouds from '../../../galaxy/RecordClouds/RecordClouds'
 import { Zoom5RecordResult } from '../../tasks/getZoom5RecordTask'
 import { ScrollToContent, ScrollToTop } from '../../utils/utils'
 import { RecordProvider } from './RecordContext'
-
-const DynamicRecordCloudsNoSsr = dynamic(() => import('../../../galaxy/RecordClouds/RecordClouds'), {
-    ssr: false,
-})
 
 interface Props {
     zoom5: Zoom5RecordResult | undefined,
@@ -57,7 +52,7 @@ const RecordPage = (props: PageProps) => {
                 <Box backgroundColor="graph" height="800px" ref={graphRef} key={router.query.record as string}>
                     {sizes?.height && sizes?.width && (
                         <Box position={'fixed'}>
-                            <DynamicRecordCloudsNoSsr
+                            <RecordClouds
                                 key={router.query.record as string}
                                 dimensions={sizes}
                             />
