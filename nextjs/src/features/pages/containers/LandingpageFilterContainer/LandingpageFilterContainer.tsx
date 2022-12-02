@@ -4,7 +4,6 @@ import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/Mod
 import { GalaxyFooter } from '@/features/shared/components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 import { GalaxyTopRight } from '@/features/shared/components/GalaxyWrapper/GalaxyTopRight/GalaxyTopRight'
 import { GalaxyWrapper } from '@/features/shared/components/GalaxyWrapper/GalaxyWrapper'
-import { Loader } from '@/features/shared/components/Loading/Loading'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import useScroll from '@/features/shared/hooks/useScroll'
@@ -12,35 +11,33 @@ import { Box, useTheme } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
-import { LandingpageComponentsDynamicZone, useLandingpageBySlugQuery } from 'src/generated/graphql'
+import { LandingpageBySlugQuery, LandingpageComponentsDynamicZone } from 'src/generated/graphql'
 import { LandingPageQueryParams } from 'src/pages/landingpage/[slug]'
 import { ScrollToContent, ScrollToTop } from '../../utils/utils'
 
-export const LandingpageFilterContainer: React.FC = () => {
-    const { locale, query } = useRouter()
+interface Props {
+    landingpage: LandingpageBySlugQuery | undefined
+}
+
+export const LandingpageFilterContainer = (props: Props) => {
+    const {  query } = useRouter()
+    const { landingpage: data } = props;
     const queryParams = query as unknown as LandingPageQueryParams
     const type = queryParams.slug
     const { t } = useTypeSafeTranslation('common')
     const theme = useTheme()
-
-    const { data, loading, error } = useLandingpageBySlugQuery({
-        variables: {
-            locale: locale,
-            slug: queryParams?.slug,
-        },
-    })
     const graphRef = useRef<HTMLDivElement | null>(null)
     const sizes = useSize(graphRef)
 
     const { scrollPosition } = useScroll()
 
-    if (loading) {
-        return <Loader />
-    }
+    // if (loading) {
+    //     return <Loader />
+    // }
 
-    if (error) {
-        return <p>{error.message}</p>
-    }
+    // if (error) {
+    //     return <p>{error.message}</p>
+    // }
 
     if (!data?.landingpages?.data.length) {
         return <p>{t('somethingWentWrong')}</p>

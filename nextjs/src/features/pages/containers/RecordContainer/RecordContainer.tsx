@@ -3,7 +3,7 @@ import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/Mod
 import { GalaxyFooter } from '@/features/shared/components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 import { GalaxyTopRight } from '@/features/shared/components/GalaxyWrapper/GalaxyTopRight/GalaxyTopRight'
 import { GalaxyWrapper } from '@/features/shared/components/GalaxyWrapper/GalaxyWrapper'
-import { Loader } from '@/features/shared/components/Loading/Loading'
+// import { Loader } from '@/features/shared/components/Loading/Loading'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import useScroll from '@/features/shared/hooks/useScroll'
 import { Box, useTheme } from '@chakra-ui/react'
@@ -11,33 +11,41 @@ import { useSize } from '@chakra-ui/react-use-size'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
-import { LandingpageComponentsDynamicZone } from 'src/generated/graphql'
-import { useGetZoom5RecordTask } from '../../tasks/getZoom5RecordTask'
+import { LandingpageBySlugQuery, LandingpageComponentsDynamicZone } from 'src/generated/graphql'
+import { Zoom5RecordResult } from '../../tasks/getZoom5RecordTask'
 import { ScrollToContent, ScrollToTop } from '../../utils/utils'
+import { RecordProvider } from './RecordContext'
 
 const DynamicRecordCloudsNoSsr = dynamic(() => import('../../../galaxy/RecordClouds/RecordClouds'), {
     ssr: false,
 })
 
-export const RecordContainer: React.FC = () => {
-    const { data, loading, error } = useGetZoom5RecordTask()
-    if (loading) {
-        return <Loader />
-    }
-
-    if (error) {
-        return <p>{error.message}</p>
-    }
-
-    return <RecordPage data={data} />
+interface Props {
+    zoom5: Zoom5RecordResult | undefined,
+    landingpage: LandingpageBySlugQuery | undefined,
+    record: string
 }
 
-const RecordPage: React.FC<{ data?: ReturnType<typeof useGetZoom5RecordTask>['data'] }> = ({ data }) => {
+export const RecordContainer = (props: Props) => {
+    return (
+        <RecordProvider zoomLevel5={props.zoom5 ?? null} >
+            <RecordPage landingpage={props.landingpage} />
+        </RecordProvider>
+    )
+}
+
+
+interface PageProps {
+    landingpage: LandingpageBySlugQuery | undefined,
+}
+
+const RecordPage = (props: PageProps) => {
     const router = useRouter()
     const theme = useTheme()
     const graphRef = useRef<HTMLDivElement | null>(null)
     const sizes = useSize(graphRef)
     const { scrollPosition } = useScroll()
+    const attributes = props.landingpage?.landingpages?.data[0]?.attributes;
 
     return (
         <>
@@ -51,8 +59,6 @@ const RecordPage: React.FC<{ data?: ReturnType<typeof useGetZoom5RecordTask>['da
                         <Box position={'fixed'}>
                             <DynamicRecordCloudsNoSsr
                                 key={router.query.record as string}
-                                zoomLevel5={data?.zoom5detail}
-                                relations={data?.zoom5relations ?? []}
                                 dimensions={sizes}
                             />
                         </Box>
@@ -65,12 +71,12 @@ const RecordPage: React.FC<{ data?: ReturnType<typeof useGetZoom5RecordTask>['da
                     <PageHeader
                         showPointer={scrollPosition < 750}
                         handleClick={ScrollToContent}
-                        title={data?.zoom5landingPage?.attributes?.Title || undefined}
-                        preface={data?.zoom5landingPage?.attributes?.Description || undefined}
+                        title={attributes?.Title || undefined}
+                        preface={attributes?.Description || undefined}
                     />
                 </Box>
                 <DynamicComponentRenderer
-                    components={data?.zoom5landingPage?.attributes?.components as LandingpageComponentsDynamicZone[]}
+                    components={attributes?.components as LandingpageComponentsDynamicZone[]}
                 />
             </Box>
         </>

@@ -1,24 +1,18 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { Loader } from '@/features/shared/components/Loading/Loading'
+import LandingpageCollectionContext from '@/features/pages/containers/LandingpageCollectionContainer/LandingpageCollectionContext'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { randomNumberBetweenPoints } from '@/features/shared/utils/numbers'
 import PaginationLeft from '@/icons/arrows/pagination-left.svg'
 import PaginationRight from '@/icons/arrows/pagination-right.svg'
 import { Box, Flex, Grid, GridItem, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { useId, useMemo } from 'react'
+import { useContext, useId, useMemo } from 'react'
 import {
-    Zoom4ArchivesQuery,
-    Zoom4ObjectsQuery,
-    Zoom4PeopleQuery,
-    Zoom4PublicationsQuery,
     ZoomLevel4ParentType,
 } from 'src/generated/graphql'
 import { LandingPageFilterCollectionQueryParams } from 'src/pages/landingpage/[slug]/[filter]/[collection]'
 import { SupportedLandingPages } from '../FilterClouds/FilterCloudsContainer'
 import { getGalaxyTypeByTranslationsKey } from '../utils/translations'
 import { usePresenter } from './usePresenter'
-import { useZoom4QueryTask } from './zoom4QueryTask'
 
 type PaginatsedProps = {
     dimensions: {
@@ -28,28 +22,12 @@ type PaginatsedProps = {
     type: SupportedLandingPages
 }
 
-export const PaginatedCollectionContainer: React.FunctionComponent<PaginatsedProps> = props => {
-    const { type } = props
-    const { data: zoom4, loading, error } = useZoom4QueryTask(type)
-
-    if (loading) {
-        return <Loader />
-    }
-
-    if (error) {
-        return <p>{error.message}</p>
-    }
-
-    return <PaginatedCollection {...props} dimensions={props.dimensions} zoom4={zoom4} />
-}
 
 export const PaginatedCollection: React.FunctionComponent<
-    PaginatsedProps & {
-        zoom4: Zoom4ObjectsQuery | Zoom4ArchivesQuery | Zoom4PeopleQuery | Zoom4PublicationsQuery | undefined
-    }
+    PaginatsedProps
 > = props => {
-    const { zoom4, dimensions } = props
-
+    const { zoomLevel4: zoom4 } = useContext(LandingpageCollectionContext)
+    const { dimensions } = props
     const router = useRouter()
     const queryParams = router.query as unknown as LandingPageFilterCollectionQueryParams
     const { t: tCommon } = useTypeSafeTranslation('common')

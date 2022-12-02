@@ -2,8 +2,6 @@ import { render, renderHook, RenderOptions } from '@testing-library/react'
 import React, { PropsWithChildren } from 'react'
 import { Provider } from 'react-redux'
 import defaultStore from 'src/features/shared/configs/store'
-import { ApolloProvider } from '@apollo/client'
-import { mockedClient } from '@/features/graphql/config/mockedApollo'
 import { ThemeProvider } from '@chakra-ui/react'
 import { theme } from '../styles/theme/theme'
 
@@ -18,9 +16,7 @@ export function renderWithProviders(
     function Wrapper({ children }: PropsWithChildren): JSX.Element {
         return (
             <ThemeProvider theme={theme}>
-                <ApolloProvider client={mockedClient}>
                     <Provider store={store}>{children}</Provider>
-                </ApolloProvider>
             </ThemeProvider>
         )
     }

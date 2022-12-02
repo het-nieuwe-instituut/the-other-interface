@@ -25,6 +25,7 @@ interface ArchivesZoomLevel4Data {
     title: string | null
     firstImage: string | null
     imageLabel: string | null
+    pidWorkURI: string | null
 }
 
 export enum ArchivesZoomLevel5Types {
@@ -74,6 +75,7 @@ export interface ArchivesOtherDetailZoomLevel5Data {
     right?: string
     rightLabel?: string
     permanentLink?: string
+    pidWorkURI?: string
 }
 
 type ArchivesZoomLeve5DataType = ArchivesOtherDetailZoomLevel5Data | ArchivesFondsDetailZoomLevel5Data
@@ -107,9 +109,7 @@ export class ArchivesService {
     private readonly archivesDescriptionLevelEndpoint =
         'https://api.collectiedata.hetnieuweinstituut.nl/queries/Joran/zoom5-archives-type-only/run?'
 
-    // TODO: change to convention when Triply adds this to normal space
-    private readonly ZoomLevel4CountEndpoint =
-        'https://api.collectiedata.hetnieuweinstituut.nl/queries/Joran/zoom4-archives-count/run?'
+    private readonly ZoomLevel4CountEndpoint = 'zoom4-archives-count/run?'
 
     private readonly ZoomLevel5Endpoint = {
         [ArchivesZoomLevel5Types.other]: 'zoom-5-archives/run',
@@ -201,6 +201,7 @@ export class ArchivesService {
                     title: res.title,
                     firstImage: res.firstImage,
                     imageLabel: res.imageLabel,
+                    pidWorkUri: res.pidWorkURI,
                 }
             }),
         }
@@ -215,7 +216,10 @@ export class ArchivesService {
             { record: uri }
         )
 
-        return { ...TriplyUtils.combineObjectArray(result.data), type, id: objectId }
+        const pidWorkURIs: Set<string> = new Set()
+        result.data.forEach(d => 'pidWorkURI' in d && d.pidWorkURI && pidWorkURIs.add(d.pidWorkURI))
+
+        return { ...TriplyUtils.combineObjectArray(result.data), pidWorkURIs, type, id: objectId }
     }
 
     public validateFilterInput(input: string): ArchivesZoomLevel3Ids {

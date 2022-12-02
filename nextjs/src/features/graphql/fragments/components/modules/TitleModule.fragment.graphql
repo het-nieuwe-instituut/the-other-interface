@@ -2,6 +2,7 @@
 
 fragment titleModuleFragment on ComponentModulesTitleModule {
     id
+    __typename
     Title
     titleModuleLayout {
         ... on ComponentCoreModuleLayouts {

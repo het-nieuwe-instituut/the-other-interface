@@ -1,38 +1,29 @@
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
-import { Loader } from '@/features/shared/components/Loading/Loading'
-import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { useRouter } from 'next/router'
-import { MenupageComponentsDynamicZone, useMenupageBySlugQuery } from 'src/generated/graphql'
-import { MenupageQueryParams } from 'src/pages/[slug]'
+import { MenupageBySlugQuery, MenupageComponentsDynamicZone } from 'src/generated/graphql'
 
-export const MenupageContainer: React.FC = () => {
-    const router = useRouter()
-    const { t } = useTypeSafeTranslation('common')
-    const queryParams = router.query as unknown as MenupageQueryParams
+interface Props {
+    menupage: MenupageBySlugQuery | undefined
+}
 
-    const { data, loading, error } = useMenupageBySlugQuery({
-        variables: {
-            locale: router.locale,
-            slug: queryParams?.slug,
-        },
-    })
+export const MenupageContainer = (props: Props) => {
 
-    if (loading) {
-        return <Loader />
-    }
 
-    if (error) {
-        return <p>{error.message}</p>
-    }
+    // if (loading) {
+    //     return <Loader />
+    // }
 
-    if (!data?.menupages?.data.length) {
-        return <p>{t('somethingWentWrong')}</p>
-    }
+    // if (error) {
+    //     return <p>{error.message}</p>
+    // }
+
+    // if (!data?.menupages?.data.length) {
+    //     return <p>{t('somethingWentWrong')}</p>
+    // }
 
     return (
         <div>
             <DynamicComponentRenderer
-                components={data?.menupages?.data[0]?.attributes?.components as MenupageComponentsDynamicZone[]}
+                components={props?.menupage?.menupages?.data?.[0]?.attributes?.components as MenupageComponentsDynamicZone[]}
             />
         </div>
     )

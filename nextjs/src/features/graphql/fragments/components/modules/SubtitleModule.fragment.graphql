@@ -2,6 +2,7 @@
 
 fragment subtitleModuleFragment on ComponentModulesSubtitle {
     id
+    __typename
     text
     subtitleModuleLayout {
         ... on ComponentCoreModuleLayouts {

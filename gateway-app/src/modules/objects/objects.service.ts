@@ -33,6 +33,7 @@ interface ObjectsZoomLevel4Data {
     title: string | null
     firstImage: string | null
     imageLabel: string | null
+    pidWorkURI: string | null
 }
 
 interface ObjectsDetailZoomLevel5Data {
@@ -185,6 +186,7 @@ export class ObjectsService {
                     title: res.title,
                     firstImage: res.firstImage,
                     imageLabel: res.imageLabel,
+                    pidWorkURI: res.pidWorkURI,
                 }
             }),
         }

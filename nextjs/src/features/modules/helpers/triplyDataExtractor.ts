@@ -2,6 +2,8 @@ import {
     ArchivesFondsZoomLevel5DetailType,
     Maybe,
     PublicationsArticleZoomLevel5DetailType,
+    PublicationsSerialZoomLevel5DetailType,
+    PublicationsZoomLevel5Types,
     TriplyRecord,
 } from 'src/generated/graphql'
 import { imageBasePath } from '../modulesConstants'
@@ -32,7 +34,7 @@ const extractTriplyFields = (
 
         return {
             ...defaultFields,
-            title: item?.objectNumber ?? defaultFields?.title,
+            title: item?.recordTitle ?? defaultFields?.title,
             description: item?.objectNumber ?? defaultFields?.description,
         }
     }
@@ -43,17 +45,21 @@ const extractTriplyFields = (
             ...defaultFields,
             imageUrl: item?.image ?? defaultFields.imageUrl,
             title: item?.title ?? defaultFields?.title,
-            description: item?.maker ?? defaultFields?.description,
+            description: item?.objectNumber ?? defaultFields?.description,
         }
     }
 
     if (triplyType === 'Publication') {
-        const item = record.publication as PublicationsArticleZoomLevel5DetailType
+        const description =
+            record.publication?.type === PublicationsZoomLevel5Types.Serial
+                ? (record.publication as PublicationsSerialZoomLevel5DetailType).yearOfPublication
+                : (record.publication as PublicationsArticleZoomLevel5DetailType).objectNumber
+        const title = record.publication?.title
 
         return {
             ...defaultFields,
-            title: item?.title ?? defaultFields?.title,
-            description: item?.author ?? defaultFields?.description,
+            title: title ?? defaultFields?.title,
+            description: description ?? defaultFields?.description,
         }
     }
 
@@ -63,7 +69,7 @@ const extractTriplyFields = (
         return {
             ...defaultFields,
             title: item?.name ?? defaultFields?.title,
-            description: item?.profession ?? defaultFields?.description,
+            description: item?.nameType ?? defaultFields?.description,
         }
     }
 

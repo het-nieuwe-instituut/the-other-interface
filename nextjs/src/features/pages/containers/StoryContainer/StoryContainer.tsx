@@ -10,24 +10,35 @@ import { useSize } from '@chakra-ui/react-use-size'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
-import { StoryComponentsDynamicZone, StoryEntity } from 'src/generated/graphql'
+import { StoryBySlugQuery, StoryComponentsDynamicZone, StoryEntity } from 'src/generated/graphql'
 import { StoryMeta } from '../../Meta/StoryMeta'
 import { GetZoom5StoryQuery } from '../../tasks/getZoom5StoryTask'
 import { ScrollToTop } from '../../utils/utils'
+import { RecordProvider } from '../RecordContainer/RecordContext'
 
 const DynamicRecordCloudsNoSsr = dynamic(() => import('../../../galaxy/RecordClouds/RecordClouds'), {
     ssr: false,
 })
 
 interface Props {
-    data: GetZoom5StoryQuery
+    record: GetZoom5StoryQuery['story']
+    relations: GetZoom5StoryQuery['relations']
+    story: NonNullable<NonNullable<NonNullable<StoryBySlugQuery>['stories']>['data']>[0] | undefined
 }
 
 export const StoryContainer: React.FC<Props> = props => {
-    return <Story data={props.data} />
+    return (
+        <RecordProvider zoomLevel5={{zoom5detail: props?.record, zoom5relations: props?.relations} ?? null} >
+             <Story story={props.story} />
+        </RecordProvider>
+    )
 }
 
-const Story: React.FC<{ data: GetZoom5StoryQuery }> = ({ data }) => {
+interface PageProps {
+    story: NonNullable<NonNullable<NonNullable<StoryBySlugQuery>['stories']>['data']>[0] | undefined
+}
+
+const Story = (props: PageProps) => {
     const router = useRouter()
     const theme = useTheme()
     const graphRef = useRef<HTMLDivElement | null>(null)
@@ -45,8 +56,6 @@ const Story: React.FC<{ data: GetZoom5StoryQuery }> = ({ data }) => {
                     {sizes?.height && sizes?.width && (
                         <DynamicRecordCloudsNoSsr
                             key={router.query.record as string}
-                            zoomLevel5={data?.story}
-                            relations={data?.relations}
                             dimensions={sizes}
                         />
                     )}
@@ -68,18 +77,18 @@ const Story: React.FC<{ data: GetZoom5StoryQuery }> = ({ data }) => {
                     >
                         <GridItem area={'header'}>
                             <PageHeader
-                                title={data.story?.attributes?.title}
-                                preface={data.story?.attributes?.description ?? undefined}
+                                title={props.story?.attributes?.title}
+                                preface={props.story?.attributes?.description ?? undefined}
                             />
                         </GridItem>
                         <GridItem area={'meta'}>
-                            <StoryMeta story={data.story as StoryEntity} />
+                            <StoryMeta story={props.story as StoryEntity} />
                         </GridItem>
                     </Grid>
                 </Box>
             </Box>
             <DynamicComponentRenderer
-                components={data.story?.attributes?.components as StoryComponentsDynamicZone[]}
+                components={props.story?.attributes?.components as StoryComponentsDynamicZone[]}
             />
         </Box>
     )

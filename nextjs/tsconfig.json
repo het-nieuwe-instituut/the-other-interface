@@ -20,6 +20,6 @@
             "@/icons/*": ["src/features/shared/assets/icons/*"]
         }
     },
-    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/features/shared/types/*.ts"],
     "exclude": ["node_modules", "src/generated", "src/mocks"]
 }

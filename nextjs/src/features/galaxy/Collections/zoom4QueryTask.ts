@@ -1,23 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useRouter } from 'next/router'
+import ApiClient from '@/features/graphql/api'
 import {
     ArchivesZoomLevel4FiltersArgs,
     ObjectsZoomLevel4FiltersArgs,
     PeopleZoomLevel4FiltersArgs,
     PublicationsZoomLevel4FiltersArgs,
-    useZoom4ArchivesQuery,
-    useZoom4ObjectsQuery,
-    useZoom4PeopleQuery,
-    useZoom4PublicationsQuery,
+    Zoom4ArchivesQuery,
+    Zoom4ObjectsQuery,
+    Zoom4PeopleQuery,
+    Zoom4PublicationsQuery,
 } from 'src/generated/graphql'
 import { SupportedLandingPages } from '../FilterClouds/FilterCloudsContainer'
 
 const useZoom4Query = {
-    [SupportedLandingPages.Archives]: useZoom4ArchivesQuery,
-    [SupportedLandingPages.Objects]: useZoom4ObjectsQuery,
-    [SupportedLandingPages.People]: useZoom4PeopleQuery,
-    [SupportedLandingPages.Publications]: useZoom4PublicationsQuery,
-    [SupportedLandingPages.Stories]: useZoom4PublicationsQuery,
+    [SupportedLandingPages.Archives]: ApiClient?.Zoom4Archives,
+    [SupportedLandingPages.Objects]: ApiClient?.Zoom4Objects,
+    [SupportedLandingPages.People]: ApiClient?.Zoom4People,
+    [SupportedLandingPages.Publications]: ApiClient?.Zoom4Publications,
+    [SupportedLandingPages.Stories]: ApiClient?.Zoom4Publications,
 }
 
 const variableType = {
@@ -183,20 +183,21 @@ const variableFilters: Filters = {
     [SupportedLandingPages.Stories]: {},
 }
 
-export function useZoom4QueryTask(type: SupportedLandingPages) {
-    const router = useRouter()
-    const collection = router.query.collection
+export function zoom4QueryTask(type: SupportedLandingPages, {page, filter, collection} : {
+    filter: string, collection: string, page: string
+}) {
     const filtersType = variableType[type]
-    const config = variableFilters[type][router.query.filter as string]
-    const query = useZoom4Query[type]({
-        variables: {
-            [filtersType]: {
-                ...config.accessor(collection as string),
-            },
-            page: parseInt((router.query.page as string) ?? '1'),
-            pageSize: 28,
+    const config = variableFilters[type][filter]
+    const query = useZoom4Query[type]?.({
+        [filtersType]: {
+            ...config.accessor(collection as string),
         },
+        page: parseInt((page as string) ?? '1'),
+        pageSize: 28,
     })
 
     return query
 }
+
+
+export type Zoom4ReturnType = Zoom4ArchivesQuery | Zoom4ObjectsQuery | Zoom4PeopleQuery | Zoom4PublicationsQuery

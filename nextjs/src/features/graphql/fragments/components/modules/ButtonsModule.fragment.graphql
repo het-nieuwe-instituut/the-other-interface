@@ -2,6 +2,7 @@
 
 fragment buttonsModuleFragment on ComponentModulesButtonsModule {
     id
+    __typename
     buttons {
         id
         text

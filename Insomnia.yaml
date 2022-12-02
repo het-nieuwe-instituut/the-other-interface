@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2022-11-04T09:17:28.975Z
+__export_date: 2022-12-01T14:15:25.359Z
 __export_source: insomnia.desktop.app:v2022.6.0
 resources:
   - _id: req_d36dd2c14e474d7abc436370519db759
@@ -475,7 +475,7 @@ resources:
     _type: request
   - _id: req_6d9eab5141604886a5febf2366b70ad6
     parentId: fld_13c5fd867c8545c3a5309539679ba83f
-    modified: 1667553434752
+    modified: 1669903839625
     created: 1667553343432
     url: "{{ _.baseUrl }}/graphql"
     name: storiesWithoutRelations
@@ -504,21 +504,39 @@ resources:
     _type: request
   - _id: req_da9626bccfd244309c17b2ff8b46d993
     parentId: fld_13c5fd867c8545c3a5309539679ba83f
-    modified: 1667553389246
+    modified: 1669904111037
     created: 1664823597730
-    url: ""
+    url: "{{ _.baseUrl }}/graphql"
     name: story
     description: ""
     method: POST
     body:
       mimeType: application/graphql
-      text: '{"query":"query {\n\tstory(id: \"2\") {\n\t\tdata
+      text: '{"query":"query {\n\tstory(id: \"34\") {\n\t\tdata
         {\n\t\t\tid\n\t\t\tattributes {\n\t\t\t\tcomponents {\n\t\t\t\t\t... on
         ComponentModulesButtonsModule
         {\n\t\t\t\t\t\tid\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t... on
         ComponentModulesImage
-        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t... on
-        ComponentModulesImageCarousel
+        {\n\t\t\t\t\t\tid\n\t\t\t\t\t\t__typename\n\t\t\t\t\t\timageRelation
+        {\n\t\t\t\t\t\t\tauthor {\n\t\t\t\t\t\t\t\tdata
+        {\n\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\tattributes
+        {\n\t\t\t\t\t\t\t\t\t\tfirstName\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\tstory
+        {\n\t\t\t\t\t\t\t\tdata
+        {\n\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\tattributes
+        {\n\t\t\t\t\t\t\t\t\t\tslug\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\ttriplyRecord
+        {\n\t\t\t\t\t\t\t\tdata
+        {\n\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\tattributes
+        {\n\t\t\t\t\t\t\t\t\t\trecordId\n\t\t\t\t\t\t\t\t\t\ttype\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t}\n\t\t\t\t\t\tcaptionRelation
+        {\n\t\t\t\t\t\t\tauthor {\n\t\t\t\t\t\t\t\tdata
+        {\n\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\tattributes
+        {\n\t\t\t\t\t\t\t\t\t\tfirstName\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\tstory
+        {\n\t\t\t\t\t\t\t\tdata
+        {\n\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\tattributes
+        {\n\t\t\t\t\t\t\t\t\t\tslug\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\ttriplyRecord
+        {\n\t\t\t\t\t\t\t\tdata
+        {\n\t\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\t\tattributes
+        {\n\t\t\t\t\t\t\t\t\t\trecordId\n\t\t\t\t\t\t\t\t\t\ttype\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t\t...
+        on ComponentModulesImageCarousel
         {\n\t\t\t\t\t\tid\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t... on
         ComponentModulesPullquote
         {\n\t\t\t\t\t\tid\n\t\t\t\t\t\ttext\n\t\t\t\t\t\t__typename\n\t\t\t\t\t}\n\t\t\t\t\t...
@@ -574,7 +592,7 @@ resources:
     _type: request
   - _id: req_23101c7d35dc442095c3006f81ec8f59
     parentId: fld_13c5fd867c8545c3a5309539679ba83f
-    modified: 1667553431465
+    modified: 1669903848187
     created: 1667553395488
     url: "{{ _.baseUrl }}/graphql"
     name: storyWithoutRelations
@@ -773,7 +791,7 @@ resources:
     _type: request
   - _id: req_bb8d9c352e5d4b579d857e8a70e52b13
     parentId: wrk_495bc411648844949d6c2b88c3ac4cb2
-    modified: 1666957198170
+    modified: 1669889275474
     created: 1661783093300
     url: https://hni-toi-production-api.lifely.nl/gateway/graphql
     name: counts (Zoom 1)
@@ -1556,7 +1574,7 @@ resources:
     _type: request
   - _id: req_929340760c4d46e0a95df717261d1d78
     parentId: fld_203efa38a76d40d7b331f8402a9d20a1
-    modified: 1666962789148
+    modified: 1669632707153
     created: 1663846123431
     url: "{{ _.baseUrl }}/graphql"
     name: archives
@@ -1567,7 +1585,8 @@ resources:
       text: '{"query":"query {\n\tzoomLevel4(\n\t\tentityName:
         Archives\n\t\tarchivesFilters: {\n\t\t\t\tdate: \"tot
         1300\"\n\t\t}\n\t\tpage: 1,\n\t\tpageSize: 2\n\t)
-        {\n\t\ttotal\n\t\tnodes {\n\t\t\trecord\n\t\t}\n\t}\n}\n"}'
+        {\n\t\ttotal\n\t\tnodes
+        {\n\t\t\trecord\n\t\t\tpidWorkURI\n\t\t\tfirstImage\n\t\t\timageLabel\n\t\t\ttitle\n\t\t}\n\t}\n}\n"}'
     parameters: []
     headers:
       - name: Content-Type
@@ -1595,7 +1614,7 @@ resources:
     _type: request_group
   - _id: req_2ed7ec1718974b89b50a24d01c2f7fbb
     parentId: fld_203efa38a76d40d7b331f8402a9d20a1
-    modified: 1666963247154
+    modified: 1669632737372
     created: 1663919975465
     url: "{{ _.baseUrl }}/graphql"
     name: objects
@@ -1605,7 +1624,8 @@ resources:
       mimeType: application/graphql
       text: '{"query":"query {\n\tzoomLevel4(\n\t\tentityName:
         Objects\n\t\tobjectsFilters: {\n\t\t\tdate: \"1800 -
-        1900\"\n\t\t}\n\t\tpage: 1\n\t) {\n\t\ttotal\n\t}\n}\n"}'
+        1900\"\n\t\t}\n\t\tpage: 1\n\t) {\n\t\ttotal\n\t\tnodes
+        {\n\t\t\trecord\n\t\t\ttitle\n\t\t\tpidWorkURI\n\t\t\ttitle\n\t\t\timageLabel\n\t\t}\n\t}\n}\n"}'
     parameters: []
     headers:
       - name: Content-Type
@@ -1681,7 +1701,7 @@ resources:
     _type: request
   - _id: req_51341427ac83471e85eb26d9ccbe524f
     parentId: fld_dc8e1d13132e4e3da71f9f90b1a55a54
-    modified: 1666623030042
+    modified: 1669632647017
     created: 1664371991673
     url: "{{ _.baseUrl }}/graphql"
     name: Fonds
@@ -1690,7 +1710,7 @@ resources:
     body:
       mimeType: application/graphql
       text: '{"query":"query {\n\tzoomLevel5ArchivesFonds(id: \"110000212\")
-        {\n\t\tobjectNumber\n\t\ttitle\n\t\tstartDate\n\t\tendDate\n\t\tdateLabel\n\t\tdimensionFree\n\t\tmediaReference\n\t\tmediaReferenceLabel\n\t\texistenceOfOriginals\n\t\tscopeContent\n\t\trelatedMaterial\n\t\trights\n\t\trightsLabel\n\t\tpermanentLink\n\t}\n}\n"}'
+        {\n\t\tdescriptionLevel\n\t\tobjectNumber\n\t\trecordTitle\n\t\tstartDate\n\t\tendDate\n\t\tproductionDate\n\t\textent\n\t\trepository\n\t\trepositoryLabel\n\t\tcreator\n\t\tcreatorLabel\n\t\tcreatorHistory\n\t\tcustodialHistory\n\t\tsystemOfArrangement\n\t\tcontentScope\n\t\tconditionsGoverningAccess\n\t\trelatedMaterial\n\t\tappendices\n\t\tsource\n\t\tpartReference\n\t\tpartTitle\n\t\tright\n\t\trightLabel\n\t\tpermanentLink\n\t}\n}\n"}'
     parameters: []
     headers:
       - name: Content-Type
@@ -1728,16 +1748,16 @@ resources:
     _type: request_group
   - _id: req_1a1a5f2262154aedb6464b8484301908
     parentId: fld_dc8e1d13132e4e3da71f9f90b1a55a54
-    modified: 1666623031462
+    modified: 1669889442145
     created: 1664372356024
-    url: ""
+    url: "{{ _.baseUrl }}/graphql"
     name: other
     description: ""
     method: POST
     body:
       mimeType: application/graphql
       text: '{"query":"query {\n\tzoomLevel5ArchivesOther(id: \"110746983\")
-        {\n\t\tdescriptionLevel\n\t\tobjectNumber\n\t\trecordTitle\n\t\tstartDate\n\t\tendDate\n\t\tproductionDate\n\t\textent\n\t\trepository\n\t\trepositoryLabel\n\t\tcreator\n\t\tcreatorLabel\n\t\tcreatorHistory\n\t\tcustodialHistory\n\t\tsystemOfArrangement\n\t\tcontentScope\n\t\tconditionsGoverningAccess\n\t\trelatedMaterial\n\t\tappendices\n\t\tsource\n\t\tpartReference\n\t\tpartTitle\n\t\tright\n\t\trightLabel\n\t\tpermanentLink\n\t}\n}\n"}'
+        {\n\t\tobjectNumber\n\t\ttitle\n\t\tstartDate\n\t\tendDate\n\t\tdateLabel\n\t\tdimensionFree\n\t\tmediaReference\n\t\tmediaReferenceLabel\n\t\texistenceOfOriginals\n\t\tscopeContent\n\t\trelatedMaterial\n\t\trights\n\t\trightsLabel\n\t\tpermanentLink\n\t\tpidWorkURIs\n\t}\n}\n"}'
     parameters: []
     headers:
       - name: Content-Type
@@ -1755,7 +1775,7 @@ resources:
     _type: request
   - _id: req_a78ea2c7129648a8837e234825cdc747
     parentId: fld_dc8e1d13132e4e3da71f9f90b1a55a54
-    modified: 1666623175367
+    modified: 1669632651791
     created: 1666622980063
     url: "{{ _.baseUrl }}/graphql"
     name: archive (union)
@@ -1765,7 +1785,7 @@ resources:
       mimeType: application/graphql
       text: '{"query":"query {\n\tzoomLevel5Archive(id: \"110746983\")
         {\n\t\t__typename\n\t\t... on ArchivesOtherZoomLevel5DetailType
-        {\n\t\t\tobjectNumber\n\t\t\ttitle\n\t\t\tstartDate\n\t\t\tendDate\n\t\t\tdateLabel\n\t\t\tdimensionFree\n\t\t\tmediaReference\n\t\t\tmediaReferenceLabel\n\t\t\texistenceOfOriginals\n\t\t\tscopeContent\n\t\t\trelatedMaterial\n\t\t\trights\n\t\t\trightsLabel\n\t\t\tpermanentLink\n\t\t}\n\t\t...
+        {\n\t\t\tobjectNumber\n\t\t\ttitle\n\t\t\tstartDate\n\t\t\tendDate\n\t\t\tdateLabel\n\t\t\tdimensionFree\n\t\t\tmediaReference\n\t\t\tmediaReferenceLabel\n\t\t\texistenceOfOriginals\n\t\t\tscopeContent\n\t\t\trelatedMaterial\n\t\t\trights\n\t\t\trightsLabel\n\t\t\tpermanentLink\n\t\t\tpidWorkURI\n\t\t}\n\t\t...
         on ArchivesFondsZoomLevel5DetailType
         {\n\t\t\tdescriptionLevel\n\t\t\tobjectNumber\n\t\t\trecordTitle\n\t\t\tstartDate\n\t\t\tendDate\n\t\t\tproductionDate\n\t\t\textent\n\t\t\trepository\n\t\t\trepositoryLabel\n\t\t\tcreator\n\t\t\tcreatorLabel\n\t\t\tcreatorHistory\n\t\t\tcustodialHistory\n\t\t\tsystemOfArrangement\n\t\t\tcontentScope\n\t\t\tconditionsGoverningAccess\n\t\t\trelatedMaterial\n\t\t\tappendices\n\t\t\tsource\n\t\t\tpartReference\n\t\t\tpartTitle\n\t\t\tright\n\t\t\trightLabel\n\t\t\tpermanentLink\n\t\t}\n\t}\n}\n"}'
     parameters: []
@@ -1938,7 +1958,7 @@ resources:
     _type: request
   - _id: req_b1eb21c365b946eba8c7d4682a8167c8
     parentId: fld_17de84e682c04137bb01bf07e4e9a9a2
-    modified: 1665499377439
+    modified: 1669632538118
     created: 1663928044191
     url: "{{ _.baseUrl }}/graphql"
     name: relations
@@ -1967,7 +1987,7 @@ resources:
     _type: request
   - _id: req_db36d2060f6f4f02bc4c7604834c88aa
     parentId: fld_17de84e682c04137bb01bf07e4e9a9a2
-    modified: 1666955449759
+    modified: 1669632529368
     created: 1665148373334
     url: "{{ _.baseUrl }}/graphql"
     name: allRelations
@@ -1976,16 +1996,8 @@ resources:
     body:
       mimeType: application/graphql
       text: '{"query":"query {\n\tallRelations(type: People, id: \"10\",
-        relatedObjectsType: People) {\n\t\t\t... on ZoomLevel5RelatedPeopleType
-        {\n\t\t\t\tid\n\t\t\t\ttype\n\t\t\t\tname\n\t\t\t\tprofession # triply
-        doesnt return this field yet\n\t\t\t\tbirthDate # triply doesnt return
-        this field yet\n\t\t\t}\n      ... on ZoomLevel5RelatedArchiveType
-        {\n\t\t\t\t# waiting on triply to implement
-        these\n\t\t\t\tid\n\t\t\t\ttype\n\t\t\t}\n\t\t      ... on
-        ZoomLevel5RelatedObjectType {\n\t\t\t\t# waiting on triply to implement
-        these\n\t\t\t\tid\n\t\t\t\ttype\n\t\t\t}\n\t\t      ... on
-        ZoomLevel5RelatedPublicationType {\n\t\t\t\t# waiting on triply to
-        implement these\n\t\t\t\tid\n\t\t\t\ttype\n\t\t\t}\n\t}\n}"}'
+        relatedObjectsType: People)
+        {\n\t\tavailability\n\t\tbirthDate\n\t\tcreator\n\t\tcreatorLabel\n\t\tdate\n\t\tid\n\t\tname\n\t\tpidWorkURI\n\t\tprofession\n\t\tprofessionLabel\n\t\ttype\n\t}\n}\n"}'
     parameters: []
     headers:
       - name: Content-Type
@@ -2003,7 +2015,7 @@ resources:
     _type: request
   - _id: req_53c31274e53c47aaa4d38477ec26a421
     parentId: fld_17de84e682c04137bb01bf07e4e9a9a2
-    modified: 1666621309569
+    modified: 1669632670718
     created: 1664284790474
     url: "{{ _.baseUrl }}/graphql"
     name: object
