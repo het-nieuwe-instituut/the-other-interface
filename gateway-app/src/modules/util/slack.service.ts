@@ -27,6 +27,7 @@ export class SlackService {
             return res
         } catch (err) {
             console.log('Post message to Slack channel failed', channel, text)
+            console.log('Error', JSON.stringify(err))
         }
     }
 }

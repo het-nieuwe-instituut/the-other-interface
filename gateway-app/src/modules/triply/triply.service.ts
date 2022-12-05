@@ -81,7 +81,7 @@ export class TriplyService {
         }
 
         const res = await this.fetch<ReturnDataType>(endpoint)
-        this.checkResponseType(res, keysToVerify)
+        this.checkResponseType(res.data, keysToVerify)
 
         return res
     }
