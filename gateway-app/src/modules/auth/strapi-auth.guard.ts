@@ -11,6 +11,6 @@ export class StrapiAuthGuard implements CanActivate {
     }
     public canActivate(context: ExecutionContext) {
         const req = context.switchToHttp().getRequest()
-        return this.strapiApiKey === req.headers['X-API-KEY']
+        return this.strapiApiKey === req.headers['x-api-key']
     }
 }
