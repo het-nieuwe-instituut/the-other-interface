@@ -7,6 +7,8 @@ import { useRandomBackgroundData } from '@/features/galaxy/hooks/useRandomColorD
 import { useD3DataCopy } from '@/features/shared/hooks/copy'
 import { useD3ZoomEvents } from '../../hooks/useD3ZoomEvents'
 import { PaginatedFilterCloudsProps } from './PaginatedFilterClouds'
+import { includesZoomStatesZoom3Galaxy } from '../../GalaxyInterface/GalaxyInterface'
+import { ZoomStates } from '../../types/galaxy'
 
 interface Props extends PaginatedFilterCloudsProps {
     selector: string
@@ -40,6 +42,9 @@ export function usePresenter(props: Props) {
         ...props,
         paginatedCloudItems: dataCopy,
         backgrounds,
+        conditionals: {
+            shouldDisplayText: includesZoomStatesZoom3Galaxy.includes(zoomEvents.zoomLevel as ZoomStates),
+        },
     }
 }
 

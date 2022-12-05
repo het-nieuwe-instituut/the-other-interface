@@ -1,7 +1,9 @@
 import { State } from '@/features/shared/configs/store'
+import { isEqual } from 'lodash'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import { UrlObject } from 'url'
 import {
     includesZoomStatesMainGalaxy,
     includesZoomStatesZoom2Galaxy,
@@ -14,7 +16,7 @@ function useNavigate() {
     const router = useRouter()
     const navigate = useCallback(
         (path: string) => {
-            if (router.pathname !== path) {
+            if (decodeURIComponent(router.asPath).replaceAll(' ', '') !== path.replaceAll(' ', '')) {
                 router.push(path)
             }
         },
@@ -24,83 +26,88 @@ function useNavigate() {
     return { navigate }
 }
 
+function useReplace() {
+    const router = useRouter()
+    const replace = useCallback(
+        (url: UrlObject) => {
+            if (!isEqual(router.query, url.query)) {
+                router.push(url)
+            }
+        },
+        [router]
+    )
+
+    return { replace }
+}
+
 export function useRouteTransitions() {
     const router = useRouter()
     const activeZoom = useSelector((state: State) => state.galaxyInterface.activeZoom)
     const params = useSelector((state: State) => state.galaxyInterface.params)
     const { navigate } = useNavigate()
+    const { replace } = useReplace()
 
     useEffect(() => {
-        if (!activeZoom) {
-            return
-        }
-        if (includesZoomStatesMainGalaxy.includes(activeZoom)) {
-            delete router.query.preservedZoom
-            router.pathname = '/'
-            if (activeZoom === ZoomStates.Zoom1) {
-                router.query.preservedZoom = ZoomStates.Zoom1
-            }
-
-            router.push(router, undefined, { shallow: true })
-
-            return
-        }
-        if (includesZoomStatesZoom2Galaxy.includes(activeZoom)) {
-            if (!params) {
-                console.error('params are needed for these states')
+        function init() {
+            if (!activeZoom) {
                 return
             }
+            if (includesZoomStatesMainGalaxy.includes(activeZoom)) {
+                if ([ZoomStates.Zoom1, ZoomStates.Zoom1ToZoom2].includes(activeZoom)) {
+                    replace({
+                        query: { ...router.query, preservedZoom: ZoomStates.Zoom1 },
+                    })
 
-            navigate(
-                `/landingpage/${Object.values(params)
-                    .map(param => param.toLowerCase())
-                    .join('/')}`
-            )
-            return
-        }
-        if (includesZoomStatesZoom3Galaxy.includes(activeZoom)) {
-            if (!params) {
-                console.error('params are needed for these states')
+                    return
+                }
+                if (activeZoom === ZoomStates.Zoom1Stories) {
+                    router.push('/landingpage/stories', undefined, { shallow: true })
+
+                    return
+                }
+
+                router.push('/', undefined, { shallow: true })
+            }
+            if (includesZoomStatesZoom2Galaxy.includes(activeZoom)) {
+                if (!params) {
+                    console.error('params are needed for these states')
+                    return
+                }
+
+                navigate(`/landingpage/${params.slug}`)
+
                 return
             }
+            if (includesZoomStatesZoom3Galaxy.includes(activeZoom)) {
+                if (!params) {
+                    console.error('params are needed for these states')
+                    return
+                }
 
-            navigate(
-                `/landingpage/${Object.values(params)
-                    .map(param => param.toLowerCase())
-                    .join('/')}`
-            )
-            return
-        }
-        if (includesZoomStatesZoom4Galaxy.includes(activeZoom)) {
-            if (!params) {
-                console.error('params are needed for these states')
+                navigate(`/landingpage/${params.slug}/${params.filter}`)
                 return
             }
+            if (includesZoomStatesZoom4Galaxy.includes(activeZoom)) {
+                if (!params) {
+                    console.error('params are needed for these states')
+                    return
+                }
 
-            navigate(
-                `/landingpage/${Object.values(params)
-                    .map(param => param.toLowerCase())
-                    .join('/')}`
-            )
-            return
-        }
-        if (includesZoomStatesZoom5Galaxy.includes(activeZoom)) {
-            if (!params) {
-                console.error('params are needed for these states')
+                navigate(`/landingpage/${params.slug}/${params.filter}/${params.collection}`)
                 return
             }
+            if (includesZoomStatesZoom5Galaxy.includes(activeZoom)) {
+                if (!params) {
+                    console.error('params are needed for these states')
+                    return
+                }
 
-            navigate(
-                `/landingpage/${Object.values(params)
-                    .map(param => param.toLowerCase())
-                    .join('/')}`
-            )
-            return
+                navigate(`/landingpage/${params.slug}/${params.filter}/${params.collection}/${params.record}`)
+                return
+            }
         }
+        init()
 
-        // if (activeZoom === ZoomStates.Zoom3) {
-        //     router.push('/galaxyInterface3')
-        //     return
-        // }
-    }, [activeZoom, navigate, params, router])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [activeZoom])
 }

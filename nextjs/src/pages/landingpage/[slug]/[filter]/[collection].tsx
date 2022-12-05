@@ -4,9 +4,11 @@ import { LandingpageCollectionProvider } from '@/features/pages/containers/Landi
 import { LandingCollectionContainer } from '@/features/pages/containers/LandingpageCollectionContainer/LandingCollectionContainer'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import { LandingPageFilterQueryParams } from '../[filter]'
+import { prepareReduxState } from '@/features/shared/configs/store'
+import { ZoomStates } from '@/features/galaxyInterface/types/galaxy'
 
 export interface LandingPageFilterCollectionQueryParams extends LandingPageFilterQueryParams {
-    collection: string,
+    collection: string
     page: string
 }
 
@@ -25,18 +27,24 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     const collection = queryParams.collection
 
     const [landingpage, zoomLevel4] = await Promise.all([
-        ApiClient?.landingpageBySlug({slug, locale: context?.locale}),
+        ApiClient?.landingpageBySlug({ slug, locale: context?.locale }),
         zoom4QueryTask(slug, {
             filter: filterId,
             page: queryParams.page ?? '1',
-            collection
-        })
+            collection,
+        }),
     ])
 
     return {
         props: {
             landingpage,
             zoomLevel4,
+            reduxState: prepareReduxState({
+                galaxyInterface: {
+                    activeZoom: ZoomStates.Zoom4Initial,
+                    params: { slug, filter: filterId, collection: collection },
+                },
+            }),
         },
     }
 }

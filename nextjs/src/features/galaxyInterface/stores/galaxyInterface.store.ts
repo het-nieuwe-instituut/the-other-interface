@@ -5,7 +5,7 @@ import { ZoomStates } from '../types/galaxy'
 export type GalaxyInterfaceStateState = {
     activeZoom: ZoomStates | null
     activeZoomData?: Omit<D3AnimationStyleProps, 'd3Ref'>
-    params?: { [key: string]: string }
+    params?: { slug?: string; filter?: string; collection?: string; record?: string }
 }
 
 export const filetsInitialState: GalaxyInterfaceStateState = {

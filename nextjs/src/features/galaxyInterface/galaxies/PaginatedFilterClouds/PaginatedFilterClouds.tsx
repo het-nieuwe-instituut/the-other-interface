@@ -37,7 +37,9 @@ const PaginatedFilterClouds: React.FunctionComponent<PaginatedFilterCloudsProps>
         totalPages,
         currentPage,
         paginatedCloudItems,
-        zoomLevel,
+        conditionals,
+        type,
+        filter,
     } = usePresenter({ ...props, selector: id })
     const { width, height } = dimensions
     const { t: tCommon } = useTypeSafeTranslation('common')
@@ -88,11 +90,16 @@ const PaginatedFilterClouds: React.FunctionComponent<PaginatedFilterCloudsProps>
                                                     translateY: -y,
                                                 },
                                             },
+                                            params: {
+                                                slug: type,
+                                                filter: filter,
+                                                collection: item.name,
+                                            },
                                         })
                                     )
                                 }}
                             >
-                                {zoomLevel === ZoomStates.Zoom3 && (
+                                {conditionals.shouldDisplayText && (
                                     <Box>
                                         <Text width="12.5rem" textStyle={'cloudText'}>
                                             {tCommon(getGalaxyTypeByTranslationsKey(queryParams.slug))}

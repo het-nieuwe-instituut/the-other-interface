@@ -2,6 +2,7 @@
 import { SupportedLandingPages } from '@/features/galaxy/PaginatedFilterClouds/PaginatedFilterCloudsContainer'
 import { getGalaxyTypeByTranslationsKey } from '@/features/galaxy/utils/translations'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { useStore } from '@/features/shared/hooks/useStore'
 import PaginationLeft from '@/icons/arrows/pagination-left.svg'
 import PaginationRight from '@/icons/arrows/pagination-right.svg'
 import { Box, Flex, Grid, GridItem, Text } from '@chakra-ui/react'
@@ -9,6 +10,8 @@ import { useRouter } from 'next/router'
 import { memo, useId } from 'react'
 import { LandingPageFilterCollectionQueryParams } from 'src/pages/landingpage/[slug]/[filter]/[collection]'
 import { Cloud } from '../../components/Cloud'
+import { ZoomStates } from '../../types/galaxy'
+import { zoomByD3Data } from '../../utils/navigation'
 import { CollectionCloudItem } from './types'
 import { usePresenter } from './usePresenter'
 
@@ -18,6 +21,8 @@ export interface PaginatedCollectionProps {
         width: number
     }
     type: SupportedLandingPages
+    filter: string
+    collection: string
     paginatedCollectionData: CollectionCloudItem[]
     total: number
 }
@@ -26,7 +31,7 @@ export const PaginatedCollection: React.FunctionComponent<PaginatedCollectionPro
     const router = useRouter()
     const queryParams = router.query as unknown as LandingPageFilterCollectionQueryParams
     const { t: tCommon } = useTypeSafeTranslation('common')
-
+    const store = useStore()
     const id = useId().replaceAll(':', '')
     const {
         paginateBack,
@@ -37,6 +42,8 @@ export const PaginatedCollection: React.FunctionComponent<PaginatedCollectionPro
         total,
         paginatedCollectionData,
         type,
+        filter,
+        collection,
     } = usePresenter({ ...props, selector: id })
     const startY = height / 2 - 500 / 2
     return (
@@ -125,6 +132,26 @@ export const PaginatedCollection: React.FunctionComponent<PaginatedCollectionPro
                                             height={90}
                                             overflow={'visible'}
                                             className={`foreign-${id}`}
+                                            onClick={(e: MouseEvent) => {
+                                                const splittedUrl = item.record.split('/')
+                                                const id = splittedUrl[splittedUrl.length - 1]
+                                                const typeFromRecord = splittedUrl[splittedUrl.length - 2]
+                                                const recordType = getCorrectType(typeFromRecord)
+
+                                                return zoomByD3Data({
+                                                    dimensions: { width, height },
+                                                    store,
+                                                    d3x: e.clientX,
+                                                    d3y: e.clientY,
+                                                    toZoomState: ZoomStates.Zoom4ToZoom5,
+                                                    params: {
+                                                        slug: type,
+                                                        filter: filter,
+                                                        collection: collection,
+                                                        record: `${id}-${recordType}`,
+                                                    },
+                                                })
+                                            }}
                                         >
                                             {item.title && (
                                                 <Flex
@@ -163,6 +190,24 @@ export const PaginatedCollection: React.FunctionComponent<PaginatedCollectionPro
             </svg>
         </Box>
     )
+}
+
+function getCorrectType(type: string) {
+    const publications = ['books', 'audiovisual', 'article', 'serial']
+    const archives = ['fonds', 'other']
+
+    const isInPublicationList = !!publications.find(v => v === type)
+    const isInArchivesList = !!archives.find(v => v === type)
+
+    if (isInPublicationList) {
+        return 'publications'
+    }
+
+    if (isInArchivesList) {
+        return 'archives'
+    }
+
+    return type
 }
 
 const MemoizedPaginatedCollection = memo(PaginatedCollection)

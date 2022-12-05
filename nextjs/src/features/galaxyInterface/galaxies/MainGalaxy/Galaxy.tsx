@@ -129,7 +129,7 @@ const MainGalaxy: React.FC<MainGalaxyProps> = props => {
                                                                     translateY: item.yFromCenter,
                                                                 },
                                                             },
-                                                            params: { slug: item.id },
+                                                            params: { slug: item.id.toLowerCase() },
                                                         })
                                                     )
                                                 }}

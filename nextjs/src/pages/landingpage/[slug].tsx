@@ -45,7 +45,11 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
             zoomLevel2,
             stories,
             reduxState: prepareReduxState({
-                galaxyInterface: { activeZoom: ZoomStates.Zoom2Initial, params: { slug } },
+                galaxyInterface: {
+                    activeZoom:
+                        slug === EntityNames.Stories.toLowerCase() ? ZoomStates.Zoom1Stories : ZoomStates.Zoom2Initial,
+                    params: { slug },
+                },
             }),
         },
     }

@@ -273,14 +273,13 @@ export function useD3ZoomEvents(options: Options) {
                     },
                     initial: { scale: 1 },
                 })
-                console.log(params)
 
-                // store.dispatch(
-                //     galaxyInterfaceActions.setActiveZoom({
-                //         params: params,
-                //         activeZoom: ZoomStates.Zoom3Initial,
-                //     })
-                // )
+                store.dispatch(
+                    galaxyInterfaceActions.setActiveZoom({
+                        params: params,
+                        activeZoom: ZoomStates.Zoom3Initial,
+                    })
+                )
             }
             if (activeZoom === ZoomStates.ZoomOutToZoom2) {
                 await scaleZoom({
@@ -432,7 +431,7 @@ export function useD3ZoomEvents(options: Options) {
                 store.dispatch(
                     galaxyInterfaceActions.setActiveZoom({
                         params: params,
-                        activeZoom: ZoomStates.Zoom5,
+                        activeZoom: ZoomStates.Zoom5Initial,
                     })
                 )
             }

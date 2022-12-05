@@ -75,8 +75,8 @@ const FilterClouds: React.FunctionComponent<Props> = props => {
                                         d3y: item.y,
                                         toZoomState: ZoomStates.Zoom2ToZoom3,
                                         params: {
-                                            type,
-                                            filter: item.filter,
+                                            slug: type,
+                                            filter: item.id,
                                         },
                                     })
                                 }
