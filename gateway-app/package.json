@@ -34,6 +34,7 @@
         "@nestjs/core": "^9.0.0",
         "@nestjs/graphql": "^10.0.21",
         "@nestjs/platform-express": "^9.0.0",
+        "@slack/web-api": "^6.8.0",
         "apollo-server-express": "^3.10.0",
         "graphql": "^16.5.0",
         "lodash": "^4.17.21",
