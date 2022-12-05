@@ -7,9 +7,11 @@ interface Options {
     dimensions: Dimensions
     d3y?: number
     d3x?: number
+    toZoomState: ZoomStates
+    params: { [key: string]: string }
 }
 export function zoomByD3Data(options: Options) {
-    const { dimensions, d3x, d3y, store } = options
+    const { dimensions, d3x, d3y, store, params, toZoomState } = options
     const width = dimensions.width ?? 0
     const height = dimensions.height ?? 0
 
@@ -18,13 +20,14 @@ export function zoomByD3Data(options: Options) {
 
     store.dispatch(
         galaxyInterfaceActions.setActiveZoom({
-            activeZoom: ZoomStates.Zoom2ToZoom3,
+            activeZoom: toZoomState,
             activeZoomData: {
                 to: {
                     translateX: -x,
                     translateY: -y,
                 },
             },
+            params,
         })
     )
 }

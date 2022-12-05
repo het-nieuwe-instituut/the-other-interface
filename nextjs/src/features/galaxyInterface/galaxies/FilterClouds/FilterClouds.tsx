@@ -67,7 +67,19 @@ const FilterClouds: React.FunctionComponent<Props> = props => {
                                 display="flex"
                                 alignItems="center"
                                 justifyContent="center"
-                                onClick={() => zoomByD3Data({ dimensions, store, d3x: item.x, d3y: item.y })}
+                                onClick={() =>
+                                    zoomByD3Data({
+                                        dimensions,
+                                        store,
+                                        d3x: item.x,
+                                        d3y: item.y,
+                                        toZoomState: ZoomStates.Zoom2ToZoom3,
+                                        params: {
+                                            type,
+                                            filter: item.filter,
+                                        },
+                                    })
+                                }
                             >
                                 {ZoomStates.Zoom2ToZoom3 !== zoomLevel && (
                                     <Box>

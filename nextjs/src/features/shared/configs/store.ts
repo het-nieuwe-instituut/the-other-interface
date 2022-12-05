@@ -14,3 +14,7 @@ export const createStore = <A extends Record<string, unknown>>(preloadedState?: 
         preloadedState,
     })
 }
+
+export function prepareReduxState(state: Partial<State>) {
+    return state
+}

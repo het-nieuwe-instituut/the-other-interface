@@ -17,6 +17,7 @@ export function useD3ZoomEvents(options: Options) {
     const storiesSystemRef = useRef<SVGForeignObjectElement | null>(null)
     const store = useStore()
     const activeZoom = useSelector((state: State) => state.galaxyInterface.activeZoom)
+    const params = useSelector((state: State) => state.galaxyInterface.params)
 
     useEffect(() => {
         let cleanup: () => void | undefined = () => undefined
@@ -37,6 +38,7 @@ export function useD3ZoomEvents(options: Options) {
                 })
                 store.dispatch(
                     galaxyInterfaceActions.setActiveZoom({
+                        params: params,
                         activeZoom: ZoomStates.Zoom1,
                     })
                 )
@@ -52,6 +54,7 @@ export function useD3ZoomEvents(options: Options) {
                 })
                 store.dispatch(
                     galaxyInterfaceActions.setActiveZoom({
+                        params: params,
                         activeZoom: ZoomStates.Zoom0,
                     })
                 )
@@ -95,6 +98,7 @@ export function useD3ZoomEvents(options: Options) {
                 ])
                 store.dispatch(
                     galaxyInterfaceActions.setActiveZoom({
+                        params: params,
                         activeZoom: ZoomStates.Zoom1Stories,
                     })
                 )
@@ -172,6 +176,7 @@ export function useD3ZoomEvents(options: Options) {
                 ])
                 store.dispatch(
                     galaxyInterfaceActions.setActiveZoom({
+                        params: params,
                         activeZoom: ZoomStates.Zoom1,
                     })
                 )
@@ -192,6 +197,7 @@ export function useD3ZoomEvents(options: Options) {
 
                 store.dispatch(
                     galaxyInterfaceActions.setActiveZoom({
+                        params: params,
                         activeZoom: ZoomStates.Zoom1,
                     })
                 )
@@ -210,6 +216,7 @@ export function useD3ZoomEvents(options: Options) {
                 })
                 store.dispatch(
                     galaxyInterfaceActions.setActiveZoom({
+                        params: params,
                         activeZoom: ZoomStates.Zoom2Initial,
                     })
                 )
@@ -229,6 +236,7 @@ export function useD3ZoomEvents(options: Options) {
                 })
                 store.dispatch(
                     galaxyInterfaceActions.setActiveZoom({
+                        params: params,
                         activeZoom: ZoomStates.ZoomOutToZoom1,
                     })
                 )
@@ -246,6 +254,7 @@ export function useD3ZoomEvents(options: Options) {
                 store.dispatch(
                     galaxyInterfaceActions.setActiveZoom({
                         activeZoom: ZoomStates.Zoom2,
+                        params: params,
                     })
                 )
             }
@@ -264,11 +273,14 @@ export function useD3ZoomEvents(options: Options) {
                     },
                     initial: { scale: 1 },
                 })
-                store.dispatch(
-                    galaxyInterfaceActions.setActiveZoom({
-                        activeZoom: ZoomStates.Zoom3Initial,
-                    })
-                )
+                console.log(params)
+
+                // store.dispatch(
+                //     galaxyInterfaceActions.setActiveZoom({
+                //         params: params,
+                //         activeZoom: ZoomStates.Zoom3Initial,
+                //     })
+                // )
             }
             if (activeZoom === ZoomStates.ZoomOutToZoom2) {
                 await scaleZoom({
@@ -282,6 +294,7 @@ export function useD3ZoomEvents(options: Options) {
                 })
                 store.dispatch(
                     galaxyInterfaceActions.setActiveZoom({
+                        params: params,
                         activeZoom: ZoomStates.Zoom2,
                     })
                 )
@@ -300,6 +313,7 @@ export function useD3ZoomEvents(options: Options) {
                 })
                 store.dispatch(
                     galaxyInterfaceActions.setActiveZoom({
+                        params: params,
                         activeZoom: ZoomStates.Zoom3,
                     })
                 )
@@ -319,6 +333,7 @@ export function useD3ZoomEvents(options: Options) {
                 })
                 store.dispatch(
                     galaxyInterfaceActions.setActiveZoom({
+                        params: params,
                         activeZoom: ZoomStates.ZoomOutToZoom3,
                     })
                 )
@@ -337,6 +352,7 @@ export function useD3ZoomEvents(options: Options) {
                 })
                 store.dispatch(
                     galaxyInterfaceActions.setActiveZoom({
+                        params: params,
                         activeZoom: ZoomStates.Zoom4Initial,
                     })
                 )
@@ -355,6 +371,7 @@ export function useD3ZoomEvents(options: Options) {
 
                 store.dispatch(
                     galaxyInterfaceActions.setActiveZoom({
+                        params: params,
                         activeZoom: ZoomStates.Zoom3,
                     })
                 )
@@ -373,6 +390,7 @@ export function useD3ZoomEvents(options: Options) {
                 })
                 store.dispatch(
                     galaxyInterfaceActions.setActiveZoom({
+                        params: params,
                         activeZoom: ZoomStates.Zoom4,
                     })
                 )
@@ -394,6 +412,7 @@ export function useD3ZoomEvents(options: Options) {
                 })
                 store.dispatch(
                     galaxyInterfaceActions.setActiveZoom({
+                        params: params,
                         activeZoom: ZoomStates.ZoomOutToZoom3,
                     })
                 )
@@ -412,6 +431,7 @@ export function useD3ZoomEvents(options: Options) {
                 })
                 store.dispatch(
                     galaxyInterfaceActions.setActiveZoom({
+                        params: params,
                         activeZoom: ZoomStates.Zoom5,
                     })
                 )
@@ -429,6 +449,7 @@ export function useD3ZoomEvents(options: Options) {
                 })
                 store.dispatch(
                     galaxyInterfaceActions.setActiveZoom({
+                        params: params,
                         activeZoom: ZoomStates.Zoom4,
                     })
                 )
@@ -454,6 +475,7 @@ export function useD3ZoomEvents(options: Options) {
                 })
                 store.dispatch(
                     galaxyInterfaceActions.setActiveZoom({
+                        params: params,
                         activeZoom: ZoomStates.ZoomOutToZoom4,
                     })
                 )

@@ -1,34 +1,92 @@
 import { State } from '@/features/shared/configs/store'
-import router from 'next/router'
-import { useEffect } from 'react'
+import { useRouter } from 'next/router'
+import { useCallback, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { ZoomStates } from '../types/galaxy'
+import {
+    includesZoomStatesMainGalaxy,
+    includesZoomStatesZoom2Galaxy,
+    includesZoomStatesZoom3Galaxy,
+    includesZoomStatesZoom4Galaxy,
+    includesZoomStatesZoom5Galaxy,
+} from '../GalaxyInterface/GalaxyInterface'
+function useNavigate() {
+    const router = useRouter()
+    const navigate = useCallback(
+        (path: string) => {
+            if (router.pathname !== path) {
+                router.push(path)
+            }
+        },
+        [router]
+    )
+
+    return { navigate }
+}
 
 export function useRouteTransitions() {
     const activeZoom = useSelector((state: State) => state.galaxyInterface.activeZoom)
+    const params = useSelector((state: State) => state.galaxyInterface.params)
+    const { navigate } = useNavigate()
 
     useEffect(() => {
-        if (activeZoom === ZoomStates.Zoom0) {
-            router.replace({
-                query: { ...router.query, zoomLevel: ZoomStates.Zoom0 },
-            })
+        if (!activeZoom) {
             return
         }
-        if (activeZoom === ZoomStates.Zoom1) {
-            router.replace({
-                query: { ...router.query, zoomLevel: ZoomStates.Zoom1 },
-            })
-            return
-        }
-        if (activeZoom === ZoomStates.Zoom1Stories) {
-            router.replace({
-                query: { ...router.query, zoomLevel: ZoomStates.Zoom1Stories },
-            })
-            return
-        }
+        if (includesZoomStatesMainGalaxy.includes(activeZoom)) {
+            navigate('/')
 
-        if (activeZoom === ZoomStates.Zoom2Initial) {
-            router.push('/galaxyInterfaceLanding')
+            return
+        }
+        if (includesZoomStatesZoom2Galaxy.includes(activeZoom)) {
+            if (!params) {
+                console.error('params are needed for these states')
+                return
+            }
+
+            navigate(
+                `/landingpage/${Object.values(params)
+                    .map(param => param.toLowerCase())
+                    .join('/')}`
+            )
+            return
+        }
+        if (includesZoomStatesZoom3Galaxy.includes(activeZoom)) {
+            if (!params) {
+                console.error('params are needed for these states')
+                return
+            }
+
+            navigate(
+                `/landingpage/${Object.values(params)
+                    .map(param => param.toLowerCase())
+                    .join('/')}`
+            )
+            return
+        }
+        if (includesZoomStatesZoom4Galaxy.includes(activeZoom)) {
+            if (!params) {
+                console.error('params are needed for these states')
+                return
+            }
+
+            navigate(
+                `/landingpage/${Object.values(params)
+                    .map(param => param.toLowerCase())
+                    .join('/')}`
+            )
+            return
+        }
+        if (includesZoomStatesZoom5Galaxy.includes(activeZoom)) {
+            if (!params) {
+                console.error('params are needed for these states')
+                return
+            }
+
+            navigate(
+                `/landingpage/${Object.values(params)
+                    .map(param => param.toLowerCase())
+                    .join('/')}`
+            )
             return
         }
 
@@ -36,5 +94,5 @@ export function useRouteTransitions() {
         //     router.push('/galaxyInterface3')
         //     return
         // }
-    }, [activeZoom])
+    }, [activeZoom, navigate, params])
 }
