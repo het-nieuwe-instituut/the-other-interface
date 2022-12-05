@@ -24,9 +24,11 @@ import { MenuPageModule } from './modules/menuPage/menuPage.module'
 import { TableModule } from './modules/table/table.module'
 import { UserModule } from './modules/user/user.module'
 import { UtilModule } from './modules/util/util.module'
+import { AuthModule } from './modules/auth/auth.module'
 
 @Module({
     imports: [
+        AuthModule,
         UtilModule,
         StoryModule,
         TriplyModule,
