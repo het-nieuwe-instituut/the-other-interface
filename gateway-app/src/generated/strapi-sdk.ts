@@ -1772,6 +1772,7 @@ export type TableInput = {
 export type TriplyRecord = {
     __typename?: 'TriplyRecord'
     createdAt?: Maybe<Scalars['DateTime']>
+    label?: Maybe<Scalars['String']>
     publishedAt?: Maybe<Scalars['DateTime']>
     recordId: Scalars['String']
     stories?: Maybe<StoryRelationResponseCollection>
@@ -1807,6 +1808,7 @@ export type TriplyRecordFiltersInput = {
     and?: InputMaybe<Array<InputMaybe<TriplyRecordFiltersInput>>>
     createdAt?: InputMaybe<DateTimeFilterInput>
     id?: InputMaybe<IdFilterInput>
+    label?: InputMaybe<StringFilterInput>
     not?: InputMaybe<TriplyRecordFiltersInput>
     or?: InputMaybe<Array<InputMaybe<TriplyRecordFiltersInput>>>
     publishedAt?: InputMaybe<DateTimeFilterInput>
@@ -1817,6 +1819,7 @@ export type TriplyRecordFiltersInput = {
 }
 
 export type TriplyRecordInput = {
+    label?: InputMaybe<Scalars['String']>
     publishedAt?: InputMaybe<Scalars['DateTime']>
     recordId?: InputMaybe<Scalars['String']>
     stories?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
