@@ -7,7 +7,7 @@ import { useContext, useMemo } from 'react'
 import { Dimensions } from '../../../types/galaxy'
 
 export const DynamicPaginatedCollectionContainerNoSsr = dynamic(
-    () => import('../../../galaxies/CollectionClouds/PaginatedCollectionContainer'),
+    () => import('../../../galaxies/CollectionClouds/PaginatedCollection'),
     {
         ssr: false,
     }
@@ -25,6 +25,7 @@ export const DynamicCollectionCloudsContainer: React.FC<{ dimensions: Dimensions
         <DynamicPaginatedCollectionContainerNoSsr
             paginatedCollectionData={filterCloudData}
             total={100}
+            page={parseInt(router.query.page as string)}
             type={(router.query.slug as SupportedLandingPages) ?? SupportedLandingPages.Publications}
             collection={router.query.collection as string}
             filter={(router.query.filter as string) ?? 'typeOfPublication'}

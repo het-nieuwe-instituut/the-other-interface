@@ -38,7 +38,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     return {
         props: {
             record,
-            zoom5: zoom5 ?? null,
+            zoom5: zoom5,
             landingpage,
             reduxState: prepareReduxState({
                 galaxyInterface: {

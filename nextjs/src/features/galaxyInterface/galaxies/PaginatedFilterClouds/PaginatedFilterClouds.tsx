@@ -20,6 +20,7 @@ export interface PaginatedFilterCloudsProps {
     dimensions: Dimensions
     type: SupportedLandingPages
     filter: string
+    page: number
 }
 
 const PaginatedFilterClouds: React.FunctionComponent<PaginatedFilterCloudsProps> = props => {

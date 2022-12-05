@@ -1,5 +1,5 @@
 import { State } from '@/features/shared/configs/store'
-import { isEqual } from 'lodash'
+import { isEmpty, isEqual } from 'lodash'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect } from 'react'
 import { useSelector } from 'react-redux'
@@ -15,9 +15,16 @@ import { ZoomStates } from '../types/galaxy'
 function useNavigate() {
     const router = useRouter()
     const navigate = useCallback(
-        (path: string) => {
-            if (decodeURIComponent(router.asPath).replaceAll(' ', '') !== path.replaceAll(' ', '')) {
-                router.push(path)
+        (path: string, params?: { [key: string]: string | undefined }) => {
+            const searchParams = new URLSearchParams(params as Record<string, string>)
+            const pathWithParams = `${path.replaceAll(' ', '')}${!isEmpty(params) ? `?${searchParams}` : ''}`
+
+            const asPath = decodeURIComponent(router.asPath).replaceAll(' ', '')
+
+            if (asPath !== pathWithParams) {
+                console.log(pathWithParams, asPath)
+
+                router.push({ pathname: path, query: params })
             }
         },
         [router]
@@ -79,21 +86,33 @@ export function useRouteTransitions() {
                 return
             }
             if (includesZoomStatesZoom3Galaxy.includes(activeZoom)) {
+                if (ZoomStates.Zoom3ToInitial === activeZoom) {
+                    return
+                }
                 if (!params) {
                     console.error('params are needed for these states')
                     return
                 }
 
-                navigate(`/landingpage/${params.slug}/${params.filter}`)
+                navigate(
+                    `/landingpage/${params.slug}/${params.filter}`,
+                    params?.page ? { page: params.page } : { page: '1' }
+                )
                 return
             }
             if (includesZoomStatesZoom4Galaxy.includes(activeZoom)) {
+                if (ZoomStates.Zoom4ToInitial === activeZoom) {
+                    return
+                }
                 if (!params) {
                     console.error('params are needed for these states')
                     return
                 }
 
-                navigate(`/landingpage/${params.slug}/${params.filter}/${params.collection}`)
+                navigate(
+                    `/landingpage/${params.slug}/${params.filter}/${params.collection}`,
+                    params?.page ? { page: params.page } : { page: '1' }
+                )
                 return
             }
             if (includesZoomStatesZoom5Galaxy.includes(activeZoom)) {
@@ -107,7 +126,5 @@ export function useRouteTransitions() {
             }
         }
         init()
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [activeZoom])
+    }, [activeZoom, navigate, params, replace, router])
 }

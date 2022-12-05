@@ -1,28 +1,31 @@
-import { useD3Pagination } from '@/features/galaxy/hooks/useD3Pagination'
+import { State } from '@/features/shared/configs/store'
 import { useD3DataCopy } from '@/features/shared/hooks/copy'
-import { useRouter } from 'next/router'
+import { useSelector } from 'react-redux'
+import { useD3Pagination } from '../../hooks/useD3Pagination'
 import { useD3ZoomEvents } from '../../hooks/useD3ZoomEvents'
+import { ZoomStates } from '../../types/galaxy'
 import { useD3Simulation } from './hooks/useD3Simulation'
-import { PaginatedCollectionProps } from './PaginatedCollectionContainer'
+import { PaginatedCollectionProps } from './PaginatedCollection'
 
 interface Props extends PaginatedCollectionProps {
     selector: string
 }
 export function usePresenter(props: Props) {
-    const { dimensions, paginatedCollectionData, selector, total } = props
-    const router = useRouter()
+    const { dimensions, paginatedCollectionData, total } = props
     const dataCopy = useD3DataCopy(paginatedCollectionData)
-    const { svgRef, simulation } = useD3Simulation(dimensions)
+    const { svgRef } = useD3Simulation(dimensions)
     const zoomEvents = useD3ZoomEvents({ dimensions, svgRef })
+    const params = useSelector((state: State) => state.galaxyInterface.params)
     const pagination = useD3Pagination({
-        simulation,
-        selector,
-        svgRef,
         pageSize: 28,
-        pathname: `/landingpage/${router.query.slug}/${router.query.filter}/${router.query.collection}`,
+        page: props.page,
         total: total ?? 0,
+        states: {
+            zoomBackState: ZoomStates.Zoom4ToInitial,
+            zoomInState: ZoomStates.Zoom4Initial,
+        },
+        params,
     })
-    console.log(dataCopy)
 
     return {
         svgRef,

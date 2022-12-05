@@ -79,6 +79,7 @@ export const includesZoomStatesZoom2Galaxy = [
 export const includesZoomStatesZoom3Galaxy = [
     ZoomStates.Zoom3,
     ZoomStates.Zoom3Initial,
+    ZoomStates.Zoom3ToInitial,
     ZoomStates.Zoom3ToZoom2,
     ZoomStates.Zoom3ToZoom4,
     ZoomStates.ZoomOutToZoom3,
@@ -88,6 +89,7 @@ export const includesZoomStatesZoom4Galaxy = [
     ZoomStates.Zoom4Initial,
     ZoomStates.Zoom4ToZoom3,
     ZoomStates.Zoom4ToZoom5,
+    ZoomStates.Zoom4ToInitial,
     ZoomStates.ZoomOutToZoom4,
 ]
 export const includesZoomStatesZoom5Galaxy = [

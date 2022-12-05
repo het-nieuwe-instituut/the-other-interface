@@ -17,6 +17,7 @@ export const DynamicPaginatedFilterCloudsContainer: React.FC<{ dimensions: Dimen
 
     return (
         <MemoizedPaginatedFilterClouds
+            page={parseInt(router.query.page as string)}
             paginatedCloudItems={filterCloudData}
             total={zoomLevel3?.zoomLevel3[0].total ?? 0}
             type={(router.query.slug as SupportedLandingPages) ?? SupportedLandingPages.Publications}

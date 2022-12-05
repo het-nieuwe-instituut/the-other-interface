@@ -25,6 +25,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     const slug = queryParams.slug
     const filterId = queryParams.filter
     const collection = queryParams.collection
+    const page = queryParams.page
 
     const [landingpage, zoomLevel4] = await Promise.all([
         ApiClient?.landingpageBySlug({ slug, locale: context?.locale }),
@@ -42,7 +43,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
             reduxState: prepareReduxState({
                 galaxyInterface: {
                     activeZoom: ZoomStates.Zoom4Initial,
-                    params: { slug, filter: filterId, collection: collection },
+                    params: { slug, filter: filterId, collection: collection, page },
                 },
             }),
         },

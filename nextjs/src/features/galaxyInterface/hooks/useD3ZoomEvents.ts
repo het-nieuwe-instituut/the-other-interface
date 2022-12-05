@@ -317,6 +317,23 @@ export function useD3ZoomEvents(options: Options) {
                     })
                 )
             }
+            if (activeZoom === ZoomStates.Zoom3ToInitial) {
+                await scaleZoom({
+                    d3Ref: d3Svg,
+                    to: {
+                        duration: 1500,
+                        scale: 0,
+                        opacity: 0,
+                    },
+                    initial: { scale: 1 },
+                })
+                store.dispatch(
+                    galaxyInterfaceActions.setActiveZoom({
+                        params: params,
+                        activeZoom: ZoomStates.Zoom3Initial,
+                    })
+                )
+            }
             if (activeZoom === ZoomStates.Zoom3) {
                 await scaleZoom({ d3Ref: d3Svg, initial: { duration: 0, scale: 1 } })
             }
@@ -387,6 +404,8 @@ export function useD3ZoomEvents(options: Options) {
                     },
                     initial: { scale: 0, opacity: 0 },
                 })
+                console.log('to zoom 4', params)
+
                 store.dispatch(
                     galaxyInterfaceActions.setActiveZoom({
                         params: params,
@@ -413,6 +432,24 @@ export function useD3ZoomEvents(options: Options) {
                     galaxyInterfaceActions.setActiveZoom({
                         params: params,
                         activeZoom: ZoomStates.ZoomOutToZoom3,
+                    })
+                )
+            }
+
+            if (activeZoom === ZoomStates.Zoom4ToInitial) {
+                await scaleZoom({
+                    d3Ref: d3Svg,
+                    to: {
+                        duration: 1500,
+                        scale: 0,
+                        opacity: 0,
+                    },
+                    initial: { scale: 1 },
+                })
+                store.dispatch(
+                    galaxyInterfaceActions.setActiveZoom({
+                        params: params,
+                        activeZoom: ZoomStates.Zoom4Initial,
                     })
                 )
             }

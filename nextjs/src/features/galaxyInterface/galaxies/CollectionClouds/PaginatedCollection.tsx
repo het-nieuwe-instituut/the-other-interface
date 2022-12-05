@@ -25,6 +25,7 @@ export interface PaginatedCollectionProps {
     collection: string
     paginatedCollectionData: CollectionCloudItem[]
     total: number
+    page: number
 }
 
 export const PaginatedCollection: React.FunctionComponent<PaginatedCollectionProps> = props => {
