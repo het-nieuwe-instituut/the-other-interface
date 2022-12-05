@@ -9,6 +9,7 @@ import {
     includesZoomStatesZoom4Galaxy,
     includesZoomStatesZoom5Galaxy,
 } from '../GalaxyInterface/GalaxyInterface'
+import { ZoomStates } from '../types/galaxy'
 function useNavigate() {
     const router = useRouter()
     const navigate = useCallback(
@@ -24,6 +25,7 @@ function useNavigate() {
 }
 
 export function useRouteTransitions() {
+    const router = useRouter()
     const activeZoom = useSelector((state: State) => state.galaxyInterface.activeZoom)
     const params = useSelector((state: State) => state.galaxyInterface.params)
     const { navigate } = useNavigate()
@@ -33,7 +35,13 @@ export function useRouteTransitions() {
             return
         }
         if (includesZoomStatesMainGalaxy.includes(activeZoom)) {
-            navigate('/')
+            delete router.query.preservedZoom
+            router.pathname = '/'
+            if (activeZoom === ZoomStates.Zoom1) {
+                router.query.preservedZoom = ZoomStates.Zoom1
+            }
+
+            router.push(router, undefined, { shallow: true })
 
             return
         }
@@ -94,5 +102,5 @@ export function useRouteTransitions() {
         //     router.push('/galaxyInterface3')
         //     return
         // }
-    }, [activeZoom, navigate, params])
+    }, [activeZoom, navigate, params, router])
 }
