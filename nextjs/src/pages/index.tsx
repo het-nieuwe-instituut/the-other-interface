@@ -22,7 +22,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
             zoomLevel1Data,
             reduxState: prepareReduxState({
                 galaxyInterface: {
-                    activeZoom: context.query.preservedZoom as ZoomStates,
+                    activeZoom: (context.query?.preservedZoom as ZoomStates) ?? ZoomStates.Zoom0,
                 },
             }),
         },
