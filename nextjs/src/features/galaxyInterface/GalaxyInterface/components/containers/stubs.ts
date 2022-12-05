@@ -141,3 +141,56 @@ export const zoom4Stub: Zoom4Query = {
         ],
     },
 }
+
+export const relationsStub = [
+    {
+        __typename: 'ZoomLevel5RelationsType' as const,
+        type: EntityNames.People,
+        total: 100,
+        randomRelations: [
+            {
+                __typename: 'RelatedRecordType' as const,
+                id: uniqueId(),
+                label: 'label',
+                type: EntityNames.People,
+                slug: 'mySlug',
+                relations: [],
+            },
+        ],
+    },
+]
+
+export const publicationsStub = [
+    {
+        __typename: 'PublicationsArticleZoomLevel5DetailType' as const,
+        typeOfPublication: '82T}yRO/k2',
+        typeOfPublicationLabel: "=Hr<:?;'(v",
+        title: "mIJ{FzI6'r",
+        author: 'dg.ZBg+!O!',
+        authorLabel: '46MC:@_`=6',
+        authorRole: "Ku+'V'ShR;",
+        authorRoleLabel: '@gx<?D({"i',
+        sourceTitle: 'ky@-V?NJue',
+        sourceTitleLabel: '7O=?M!v`&l',
+        volume: 'zoGJ[%u2LL',
+        issue: 'AtC?}B:"A]',
+        yearOfPublication: "W-6|'V6AlM",
+        page: 'ZM$p#dek&Z',
+        publisher: '71a^O=Gv0z',
+        publisherLabel: '#CO\\CO>TW!',
+        abstract: ')6je_[DZgm',
+        language: "'HIXL5N0/M",
+        languageLabel: 'bZZ.`hnN/J',
+        geographicalKeyword: '.1fm-n,D0_',
+        geographicalKeywordLabel: '[=<kyG>G/B',
+        subject: 'QNu&2"op4b',
+        subjectLabel: 'jBTGE/5Z)7',
+        relatedPerInst: ".>w':;)JfF",
+        relatedPerInstLabel: 'Cp5(V]YFUG',
+        objectNumber: 'eI&/Vti6|O',
+        availability: 'za(0z8m[Rd',
+        shelfmark: 'f(JxXD>/#|',
+        permanentLink: 'Jf{|m\\JlL0',
+    },
+]
+export const zoom5DetailStub = publicationsStub[0]

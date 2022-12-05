@@ -94,7 +94,6 @@ export const includesZoomStatesZoom5Galaxy = [
     ZoomStates.Zoom5Initial,
     ZoomStates.Zoom5,
     ZoomStates.Zoom5ToRelation,
-    ZoomStates.Zoom4ToZoom5,
     ZoomStates.Zoom5ToZoom4,
 ]
 

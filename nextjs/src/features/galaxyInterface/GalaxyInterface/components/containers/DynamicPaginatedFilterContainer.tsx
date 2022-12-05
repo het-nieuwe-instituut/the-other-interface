@@ -11,6 +11,10 @@ export const DynamicPaginatedFilterCloudsContainer: React.FC<{ dimensions: Dimen
     const { zoomLevel3 } = useContext(LandingpageFilterContext)
     const filterCloudData = useMemo(() => zoom3QueryToPaginatedFilterCloudData(zoomLevel3), [zoomLevel3])
 
+    if (!zoomLevel3?.zoomLevel3?.length) {
+        return null
+    }
+
     return (
         <MemoizedPaginatedFilterClouds
             paginatedCloudItems={filterCloudData}

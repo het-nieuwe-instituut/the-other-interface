@@ -41,6 +41,10 @@ export const DynamicGalaxyContainer: React.FC<{ dimensions: Dimensions }> = ({ d
     const archiveComponent = useMemo(() => mapArchiveComponent(zoomLevel1), [zoomLevel1])
     const storyMeta = useMemo(() => mapZoom1ToStoriesMeta(zoomLevel1), [zoomLevel1])
 
+    if (!zoomLevel1?.zoomLevel1.length) {
+        return null
+    }
+
     return (
         <DynamicGalaxyNoSsr
             cloudData={cloudData}

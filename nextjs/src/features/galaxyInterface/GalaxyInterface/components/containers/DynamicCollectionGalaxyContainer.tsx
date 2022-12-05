@@ -18,6 +18,9 @@ export const DynamicCollectionCloudsContainer: React.FC<{ dimensions: Dimensions
     const { zoomLevel4 } = useContext(LandingpageCollectionContext)
     const filterCloudData = useMemo(() => zoom4DataToCollectionGalaxyData(zoomLevel4), [zoomLevel4])
 
+    if (!zoomLevel4?.zoomLevel4?.nodes?.length) {
+        return null
+    }
     return (
         <DynamicPaginatedCollectionContainerNoSsr
             paginatedCollectionData={filterCloudData}

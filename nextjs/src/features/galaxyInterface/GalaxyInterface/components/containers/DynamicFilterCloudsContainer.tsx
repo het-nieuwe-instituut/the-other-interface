@@ -15,5 +15,9 @@ export const DynamicFilterCloudsContainer: React.FC<{ dimensions: Dimensions }> 
     const filterCloudData = useMemo(() => zoom2ToFilterCloudData(zoomLevel2), [zoomLevel2])
     const slug = useRouter()?.query?.slug as SupportedLandingPages
 
+    if (!zoomLevel2?.zoomLevel2.length) {
+        return null
+    }
+
     return <DynamicGalaxyNoSsr filterCloudData={filterCloudData} type={slug} dimensions={dimensions} />
 }
