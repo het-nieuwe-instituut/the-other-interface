@@ -4,11 +4,8 @@ import * as d3 from 'd3'
 import { SimulationNodeDatum } from 'd3'
 import { MutableRefObject, useEffect, useRef } from 'react'
 import { Dimensions } from '../../../types/galaxy'
-import { initializeD3 } from '../d3/simulation'
+import { initializeD3, listenToD3Ticks } from '../d3/simulation'
 import { PaginatedCloudItem } from '../types'
-
-const collisionData = [{ id: 'collision' }]
-type CollisionData = typeof collisionData[0]
 
 export type D3PaginatedCloudItem = SimulationNodeDatum & PaginatedCloudItem
 export interface D3CollectionItem extends D3PaginatedCloudItem, CollisionData {}
@@ -29,6 +26,9 @@ export function useD3Simulation(
         simulation,
     }
 }
+
+export type CollisionData = typeof collisionData[0]
+const collisionData = [{ id: 'collision' }]
 
 function useListenToSimulationTicks(
     simulation: MutableRefObject<d3.Simulation<D3CollectionItem, undefined> | null>,

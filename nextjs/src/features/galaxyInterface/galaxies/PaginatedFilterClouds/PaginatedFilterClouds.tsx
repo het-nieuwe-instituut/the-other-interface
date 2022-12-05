@@ -9,6 +9,7 @@ import { Box, Flex, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { memo, useId } from 'react'
 import { LandingPageFilterQueryParams } from 'src/pages/landingpage/[slug]/[filter]'
+import { Cloud } from '../../components/Cloud'
 import { galaxyInterfaceActions } from '../../stores/galaxyInterface.store'
 import { Dimensions, ZoomStates } from '../../types/galaxy'
 import { PaginatedCloudItem } from './types'
@@ -59,9 +60,9 @@ const PaginatedFilterClouds: React.FunctionComponent<PaginatedFilterCloudsProps>
                     const backgroundItem = backgrounds.find(background => background.id === getId(item))
 
                     return (
-                        <Circle
+                        <Cloud
                             key={`${index}-${array.length}`}
-                            className={id}
+                            className={`foreign-${id}`}
                             defaultBackground={backgroundItem?.background}
                             hoverBackground={backgroundItem?.background}
                         >
@@ -111,10 +112,10 @@ const PaginatedFilterClouds: React.FunctionComponent<PaginatedFilterCloudsProps>
                                     </Box>
                                 )}
                             </Box>
-                        </Circle>
+                        </Cloud>
                     )
                 })}
-                <Circle className={'collision'}>
+                <Cloud className={'foreign-collision'}>
                     <Flex
                         width="100%"
                         height="100%"
@@ -139,7 +140,7 @@ const PaginatedFilterClouds: React.FunctionComponent<PaginatedFilterCloudsProps>
                             </Flex>
                         </Flex>
                     </Flex>
-                </Circle>
+                </Cloud>
             </svg>
         </Box>
     )
