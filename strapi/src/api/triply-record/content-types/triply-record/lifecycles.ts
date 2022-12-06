@@ -1,4 +1,4 @@
-import fetch from "node-fetch";
+import axios from "axios";
 
 export default {
   async beforeCreate(event) {
@@ -16,12 +16,12 @@ export default {
 
 async function getLabelForRecord({ recordId, type }) {
   try {
-    const res = await fetch(
+    const res = await axios.get(
       `${process.env.GATEWAY_BASE_URL}/zoomLevel5/detail?recordId=${recordId}&type=${type}`,
       { headers: { "x-api-key": process.env.GATEWAY_API_TOKEN } }
     );
-    const data = await res.json();
-    const label = getLabelFromTriplyData(data, type) || "-";
+
+    const label = getLabelFromTriplyData(res.data, type) || "-";
 
     return `${label} (${recordId}/${type})`;
   } catch (err) {

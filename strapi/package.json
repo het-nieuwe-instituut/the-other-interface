@@ -17,7 +17,6 @@
     "@strapi/plugin-users-permissions": "4.3.2",
     "@strapi/provider-upload-aws-s3": "^4.4.3",
     "@strapi/strapi": "4.3.2",
-    "node-fetch": "^2.6.7",
     "pg": "8.6.0",
     "sharp": "^0.31.0",
     "slugify": "^1.6.5"
