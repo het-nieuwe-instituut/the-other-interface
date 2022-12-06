@@ -7,4 +7,5 @@ export interface Config {
     TRIPLY_API_BASEURL: string
     SLACK_TOKEN: string
     SLACK_SYSTEM_NOTIFICATION_CHANNEL: string
+    STRAPI_AUTH_GUARD_API_KEY: string
 }
