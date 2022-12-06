@@ -1,15 +1,12 @@
 import { DataDimension } from '@/features/galaxy/hooks/useFitToDataToDimensions'
 import { useInitializeD3Simulation } from '@/features/shared/hooks/useInitializeD3Simulation'
 import * as d3 from 'd3'
-import { SimulationNodeDatum } from 'd3'
 import { MutableRefObject, useEffect, useRef } from 'react'
 import { Dimensions } from '../../../types/galaxy'
-import { initializeD3, listenToD3Ticks } from '../d3/simulation'
-import { PaginatedCloudItem } from '../types'
+import { D3CollectionItem, D3CollisionData, initializeD3 } from '../d3/simulation'
 
-export type D3PaginatedCloudItem = SimulationNodeDatum & PaginatedCloudItem
-export interface D3CollectionItem extends D3PaginatedCloudItem, CollisionData {}
-export interface D3CollisionData extends SimulationNodeDatum, CollisionData {}
+const collisionData = [{ id: 'collision' }]
+export type CollisionData = typeof collisionData[0]
 
 export function useD3Simulation(
     dimensions: Dimensions,
@@ -27,9 +24,6 @@ export function useD3Simulation(
     }
 }
 
-export type CollisionData = typeof collisionData[0]
-const collisionData = [{ id: 'collision' }]
-
 function useListenToSimulationTicks(
     simulation: MutableRefObject<d3.Simulation<D3CollectionItem, undefined> | null>,
     dimensions: Dimensions,
@@ -44,7 +38,9 @@ function useListenToSimulationTicks(
         if (!data) return
         const d3Svg = d3.select(svgRef.current)
         const nodes = d3Svg.selectAll(`.foreign-${selector}`).data<Partial<D3CollectionItem>>(data)
-        const collisionObject = d3Svg.selectAll(`.foreign-collision`).data<Partial<D3CollisionData>>(collisionData)
+        const collisionObject = d3Svg
+            .selectAll(`.foreign-collision`)
+            .data<Partial<D3CollisionData>>([...collisionData, ...data])
 
         if (!nodesListener.current) {
             nodesListener.current = initializeD3({

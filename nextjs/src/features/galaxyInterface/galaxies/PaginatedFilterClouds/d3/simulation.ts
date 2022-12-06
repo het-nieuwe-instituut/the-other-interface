@@ -2,16 +2,17 @@ import { DataDimension } from '@/features/galaxy/hooks/useFitToDataToDimensions'
 import { Dimensions } from '@/features/galaxyInterface/types/galaxy'
 import * as d3 from 'd3'
 import { SimulationNodeDatum } from 'd3'
+import { CollisionData } from '../hooks/useD3Simulation'
 import { PaginatedCloudItem } from '../types'
 import { getId } from '../usePresenter'
 
-const collisionData = [{ id: 'collision' }]
 const collision = 120
-type CollisionData = typeof collisionData[0]
 
 export type D3PaginatedCloudItem = SimulationNodeDatum & PaginatedCloudItem
 export interface D3CollectionItem extends D3PaginatedCloudItem, CollisionData {}
-export interface D3CollisionData extends SimulationNodeDatum, CollisionData {}
+export interface D3CollisionData extends SimulationNodeDatum {
+    id?: string
+}
 
 export function fadeScaleInD3(nodes: d3.Selection<d3.BaseType, D3PaginatedCloudItem, SVGSVGElement | null, unknown>) {
     nodes.style('transform', 'scale(0)').attr('opacity', 0)
@@ -52,7 +53,7 @@ export function initializeD3(options: Options) {
                 })
         )
 
-    return simulation?.nodes([...collisionData, ...data] as D3CollectionItem[]).on('tick', () => {
+    return simulation?.nodes(data as D3CollectionItem[]).on('tick', () => {
         simulation?.force('center', d3.forceCenter((dimensions.width ?? 0) / 2, (dimensions.height ?? 0) / 2))
         ticked(dataDimensions, nodes, collisionObject, dimensions)
     })
