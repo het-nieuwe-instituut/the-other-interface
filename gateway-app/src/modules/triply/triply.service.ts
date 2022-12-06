@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { lastValueFrom } from 'rxjs'
 import { PaginationArgs } from '../util/paginationArgs.type'
+import { SlackService } from '../util/slack.service'
 
 /**
  * Due to typescript's limitations, we decided to use this approach to verify expected
@@ -38,7 +39,11 @@ export class TriplyService {
     private readonly apiKey: string
     private readonly baseQueryPath: string
 
-    public constructor(configService: ConfigService, private readonly httpService: HttpService) {
+    public constructor(
+        configService: ConfigService,
+        private readonly httpService: HttpService,
+        private readonly slackService: SlackService
+    ) {
         this.endpointBaseURL = configService.getOrThrow('TRIPLI_API_BASEURL')
         this.apiKey = configService.getOrThrow('TRIPLY_API_KEY')
         this.baseQueryPath =
@@ -76,7 +81,7 @@ export class TriplyService {
         }
 
         const res = await this.fetch<ReturnDataType>(endpoint)
-        this.checkResponseType(res, keysToVerify)
+        this.checkResponseType(res.data, keysToVerify)
 
         return res
     }
@@ -106,17 +111,21 @@ export class TriplyService {
         try {
             Object.keys(keysToVerify).forEach(k => {
                 if (!(k in responseData[0])) {
-                    // TODO: report to slack after integration
-                    console.log(
-                        `${String(k)} belonging to ${JSON.stringify(keysToVerify)} is not returned in ${JSON.stringify(
-                            responseData
-                        )}`
-                    )
+                    const message = `${String(k)} belonging to ${JSON.stringify(
+                        keysToVerify
+                    )} is not returned in ${JSON.stringify(responseData)}`
+
+                    // response is irrelevant, no need to await
+                    this.slackService.postMessageToChannel(this.slackService.channels.systemNotification, message)
                 }
             })
         } catch (err) {
-            // TODO: report to slack after integration
-            console.log('Unable to test keys', keysToVerify)
+            const message = `Unable to test keys ${JSON.stringify(keysToVerify)} in response ${JSON.stringify(
+                responseData
+            )}`
+
+            // response is irrelevant, no need to await
+            this.slackService.postMessageToChannel(this.slackService.channels.systemNotification, message)
         }
     }
 }
