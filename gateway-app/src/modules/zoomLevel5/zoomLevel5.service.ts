@@ -5,7 +5,7 @@ import { ArchivesService, ArchivesZoomLevel5Types } from '../archives/archives.s
 import { ObjectsService } from '../objects/objects.service'
 import { PeopleService } from '../people/people.service'
 import { PublicationsService, PublicationsZoomLevel5Types } from '../publications/publications.service'
-import { TriplyService } from '../triply/triply.service'
+import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { TriplyUtils } from '../triply/triply.utils'
 import { EntityNames, externalEntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { getRandom2ItemsFromArray } from '../util/helpers'
@@ -30,6 +30,23 @@ interface ZoomLevel5RelationData {
     sample_extern_1_label: string | null
     sample_extern_2_label: string | null
 }
+const zoomLevel5RelationDataKeys: KeysToVerify<ZoomLevel5RelationData> = {
+    originalEntity: true,
+    graph: true,
+    count: true,
+    sample: true,
+    sample_label: true,
+    graph_2: true,
+    count_2: true,
+    sample_1: true,
+    sample_2: true,
+    sample_1_label: true,
+    sample_2_label: true,
+    sample_extern_1: true,
+    sample_extern_2: true,
+    sample_extern_1_label: true,
+    sample_extern_2_label: true,
+}
 
 interface ZoomLevel5RelatedObjectData {
     dataset: string
@@ -44,6 +61,20 @@ interface ZoomLevel5RelatedObjectData {
     date: string | null
     creator: string | null
     creatorLabel: string | null
+}
+const zoomLevel5RelatedObjectDataKeys: KeysToVerify<ZoomLevel5RelatedObjectData> = {
+    dataset: true,
+    graph: true,
+    label: true,
+    externObj: true,
+    pidWorkURI: true,
+    profession: true,
+    professionLabel: true,
+    birthDate: true,
+    availability: true,
+    date: true,
+    creator: true,
+    creatorLabel: true,
 }
 
 // key is relation graph
@@ -104,7 +135,8 @@ export class ZoomLevel5Service {
     public async getAllRelations({ id, type, relatedObjectsType }: ZoomLevel5RelatedObjectsArgs) {
         const uri = TriplyUtils.getUriForTypeAndId(type, id)
         const res = await this.triplyService.queryTriplyData<ZoomLevel5RelatedObjectData>(
-            `${this.relatedObjectsEndpoint}${uri}`
+            `${this.relatedObjectsEndpoint}${uri}`,
+            zoomLevel5RelatedObjectDataKeys
         )
 
         return res.data
@@ -245,6 +277,7 @@ export class ZoomLevel5Service {
 
         const res = await this.triplyService.queryTriplyData<ZoomLevel5RelationData>(
             `${this.relationsEndpoint}${uri}`,
+            zoomLevel5RelationDataKeys,
             undefined,
             params
         )
