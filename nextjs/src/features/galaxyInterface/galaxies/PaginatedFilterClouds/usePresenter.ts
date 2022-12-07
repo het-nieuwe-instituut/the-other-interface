@@ -1,16 +1,20 @@
-import { useCallback } from 'react'
-import { D3PaginatedCloudItem, useD3Simulation } from './hooks/useD3Simulation'
-import { useTheme } from '@chakra-ui/react'
 import { useFitDataToDimensions } from '@/features/galaxy/hooks/useFitToDataToDimensions'
 import { useRandomBackgroundData } from '@/features/galaxy/hooks/useRandomColorData'
-import { useD3DataCopy } from '@/features/shared/hooks/copy'
-import { useD3ZoomEvents } from '../../hooks/useD3ZoomEvents'
-import { PaginatedFilterCloudsProps } from './PaginatedFilterClouds'
-import { includesZoomStatesZoom3Galaxy } from '../../GalaxyInterface/GalaxyInterface'
-import { ZoomStates } from '../../types/galaxy'
-import { useD3Pagination } from '../../hooks/useD3Pagination'
 import { State } from '@/features/shared/configs/store'
-import { useSelector } from 'react-redux'
+import { useD3DataCopy } from '@/features/shared/hooks/copy'
+import { useTheme } from '@chakra-ui/react'
+import { SimulationNodeDatum } from 'd3'
+import { useCallback } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { includesZoomStatesZoom3Galaxy } from '../../GalaxyInterface/GalaxyInterface'
+import { useD3Pagination } from '../../hooks/useD3Pagination'
+import { useD3ZoomEvents } from '../../hooks/useD3ZoomEvents'
+import { galaxyInterfaceActions } from '../../stores/galaxyInterface.store'
+import { ZoomStates } from '../../types/galaxy'
+import { D3PaginatedCloudItem } from './d3/simulation'
+import { useD3Simulation } from './hooks/useD3Simulation'
+import { PaginatedFilterCloudsProps } from './PaginatedFilterClouds'
+import { PaginatedCloudItem } from './types'
 
 interface Props extends PaginatedFilterCloudsProps {
     selector: string
@@ -18,6 +22,7 @@ interface Props extends PaginatedFilterCloudsProps {
 
 export function usePresenter(props: Props) {
     const { total, selector, dimensions, paginatedCloudItems, type, filter } = props
+    const dispatch = useDispatch()
     const theme = useTheme()
     const params = useSelector((state: State) => state.galaxyInterface.params)
     const dataCopy = useD3DataCopy(paginatedCloudItems)
@@ -38,6 +43,33 @@ export function usePresenter(props: Props) {
         },
         params,
     })
+    const handleClick = (
+        event: Partial<{ clientX?: number; clientY: number }>,
+        item: PaginatedCloudItem & SimulationNodeDatum
+    ) => {
+        const width = dimensions.width ?? 0
+        const height = dimensions.height ?? 0
+
+        const x = (event.clientX ?? 0) - width / 2
+        const y = (event.clientY ?? 0) - height / 2
+
+        dispatch(
+            galaxyInterfaceActions.setActiveZoom({
+                activeZoom: ZoomStates.Zoom3ToZoom4,
+                activeZoomData: {
+                    to: {
+                        translateX: -x,
+                        translateY: -y,
+                    },
+                },
+                params: {
+                    slug: type,
+                    filter: filter,
+                    collection: item.name,
+                },
+            })
+        )
+    }
 
     return {
         svgRef,
@@ -47,6 +79,9 @@ export function usePresenter(props: Props) {
         ...props,
         paginatedCloudItems: dataCopy,
         backgrounds,
+        events: {
+            handleClick,
+        },
         conditionals: {
             shouldDisplayText: includesZoomStatesZoom3Galaxy.includes(zoomEvents.zoomLevel as ZoomStates),
         },

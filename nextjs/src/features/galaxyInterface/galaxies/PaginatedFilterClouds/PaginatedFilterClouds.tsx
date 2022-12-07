@@ -1,8 +1,6 @@
-import { Circle } from '@/features/galaxy/components/Circle'
 import { SupportedLandingPages } from '@/features/galaxy/PaginatedFilterClouds/PaginatedFilterCloudsContainer'
 import { getGalaxyTypeByTranslationsKey } from '@/features/galaxy/utils/translations'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { useStore } from '@/features/shared/hooks/useStore'
 import PaginationLeft from '@/icons/arrows/pagination-left.svg'
 import PaginationRight from '@/icons/arrows/pagination-right.svg'
 import { Box, Flex, Text } from '@chakra-ui/react'
@@ -10,8 +8,7 @@ import { useRouter } from 'next/router'
 import { memo, useId } from 'react'
 import { LandingPageFilterQueryParams } from 'src/pages/landingpage/[slug]/[filter]'
 import { Cloud } from '../../components/Cloud'
-import { galaxyInterfaceActions } from '../../stores/galaxyInterface.store'
-import { Dimensions, ZoomStates } from '../../types/galaxy'
+import { Dimensions } from '../../types/galaxy'
 import { PaginatedCloudItem } from './types'
 import { getId, usePresenter } from './usePresenter'
 
@@ -28,7 +25,6 @@ const PaginatedFilterClouds: React.FunctionComponent<PaginatedFilterCloudsProps>
     const router = useRouter()
     const queryParams = router.query as unknown as LandingPageFilterQueryParams
     const id = useId().replaceAll(':', '')
-    const store = useStore()
     const {
         svgRef,
         dimensions,
@@ -40,8 +36,7 @@ const PaginatedFilterClouds: React.FunctionComponent<PaginatedFilterCloudsProps>
         currentPage,
         paginatedCloudItems,
         conditionals,
-        type,
-        filter,
+        events: { handleClick },
     } = usePresenter({ ...props, selector: id })
     const { width, height } = dimensions
     const { t: tCommon } = useTypeSafeTranslation('common')
@@ -75,31 +70,7 @@ const PaginatedFilterClouds: React.FunctionComponent<PaginatedFilterCloudsProps>
                                 display="flex"
                                 alignItems="center"
                                 justifyContent="center"
-                                onClick={(e: unknown) => {
-                                    const event = e as MouseEvent
-                                    const width = dimensions.width ?? 0
-                                    const height = dimensions.height ?? 0
-
-                                    const x = (event.clientX ?? 0) - width / 2
-                                    const y = (event.clientY ?? 0) - height / 2
-
-                                    store.dispatch(
-                                        galaxyInterfaceActions.setActiveZoom({
-                                            activeZoom: ZoomStates.Zoom3ToZoom4,
-                                            activeZoomData: {
-                                                to: {
-                                                    translateX: -x,
-                                                    translateY: -y,
-                                                },
-                                            },
-                                            params: {
-                                                slug: type,
-                                                filter: filter,
-                                                collection: item.name,
-                                            },
-                                        })
-                                    )
-                                }}
+                                onClick={(e: unknown) => handleClick(e as MouseEvent, item)}
                             >
                                 {conditionals.shouldDisplayText && (
                                     <Box>
