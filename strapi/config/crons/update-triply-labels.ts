@@ -1,3 +1,4 @@
+import axios from "axios";
 import { Strapi } from "@strapi/strapi";
 import { TriplyRecordService } from "../../src/api/triply-record/services/triply-record";
 
@@ -13,34 +14,56 @@ const triplyApi = "api::triply-record.triply-record";
 
 export default async function (strapi: Strapi) {
   const start = new Date().getTime();
-
-  const total = await strapi.db.query(triplyApi).count("*");
   const failedRecordData: FailedRecordData[] = [];
 
-  for (let offset = 0; offset < total; offset += limit) {
-    console.log(`Updating ${offset}-${offset + limit} of ${total}...`);
+  try {
+    const total = await strapi.db.query(triplyApi).count("*");
+    console.log(`[UpdateTriplyLabels] will attempt to update ${total} records`);
 
-    const records = await strapi.db
-      .query(triplyApi)
-      .findMany({ limit, offset });
+    for (let offset = 0; offset < total; offset += limit) {
+      console.log(`[UpdateTriplyLabels] updating ${offset}-${offset + limit}`);
 
-    for (const record of records) {
-      await updateRecordLabel(record, (failedData) =>
-        failedRecordData.push(failedData)
+      const records = await strapi.db
+        .query(triplyApi)
+        .findMany({ limit, offset });
+
+      for (const record of records) {
+        try {
+          await updateRecordLabel(record, failedRecordData.push.bind(this));
+          await new Promise((resolve) => setTimeout(resolve, timeToSleep));
+        } catch (err) {
+          const { recordId, type } = record;
+          const errorText = JSON.stringify(err);
+
+          failedRecordData.push({ recordId, type, errorText });
+        }
+      }
+
+      const totalTime = Math.ceil((new Date().getTime() - start) / 1000);
+      const slept = Math.ceil((timeToSleep * limit) / 1000);
+      console.log(
+        `[UpdateTriplyLabels] iteration took ${totalTime}s, slept ${slept}s`
       );
-      await new Promise((resolve) => setTimeout(resolve, timeToSleep));
     }
 
     const totalTime = Math.ceil((new Date().getTime() - start) / 1000);
-    const slept = Math.ceil((timeToSleep * limit) / 1000);
+    const slept = Math.ceil((timeToSleep * total) / 1000);
+    console.log(
+      `[UpdateTriplyLabels] in total, took ${totalTime}s, slept ${slept}s`
+    );
+    console.log(
+      `[UpdateTriplyLabels] failed ${failedRecordData.length} out of ${total}`
+    );
 
-    console.log(`iteration took ${totalTime}s, slept ${slept}s`);
+    await reportToSlack(
+      `Periodic triply update successful with ${
+        failedRecordData.length
+      } failed attempts.\n${JSON.stringify(failedRecordData)}`
+    );
+  } catch (err) {
+    console.log(err);
+    await reportToSlack("Periodic triply label update failed.");
   }
-
-  const totalTime = Math.ceil((new Date().getTime() - start) / 1000);
-  const slept = Math.ceil((timeToSleep * total) / 1000);
-  console.log(`in total, took ${totalTime}s, slept ${slept}s`);
-  console.log(`failed ${failedRecordData.length} out of ${total}`);
 }
 
 async function updateRecordLabel(
@@ -52,8 +75,20 @@ async function updateRecordLabel(
   const label = await strapi.service<TriplyRecordService>(triplyApi).getLabel({
     recordId,
     type,
-    onError: (failedData) => onError(failedData),
+    onError,
   });
 
   await strapi.db.query(triplyApi).update({ where: { id }, data: { label } });
+}
+
+async function reportToSlack(message: string) {
+  try {
+    await axios.post(
+      `${process.env.GATEWAY_BASE_URL}/utils/slackMessage`,
+      { message },
+      { headers: { "x-api-key": process.env.GATEWAY_API_TOKEN } }
+    );
+  } catch (err) {
+    console.log("[UpdateTriplyLabels] report to slack failed", err);
+  }
 }
