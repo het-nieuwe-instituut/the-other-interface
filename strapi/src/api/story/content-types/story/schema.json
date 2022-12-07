@@ -32,7 +32,8 @@
         "i18n": {
           "localized": false
         }
-      }
+      },
+      "required": true
     },
     "components": {
       "type": "dynamiczone",
