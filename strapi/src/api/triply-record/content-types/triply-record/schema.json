@@ -32,6 +32,9 @@
       "relation": "manyToMany",
       "target": "api::story.story",
       "mappedBy": "triplyRecords"
+    },
+    "label": {
+      "type": "string"
     }
   }
 }

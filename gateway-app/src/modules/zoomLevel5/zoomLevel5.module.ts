@@ -6,6 +6,7 @@ import { PeopleModule } from '../people/people.module'
 import { PublicationsModule } from '../publications/publications.module'
 import { ZoomLevel5Resolver } from './zoomLevel5.resolver'
 import { ZoomLevel5Service } from './zoomLevel5.service'
+import { ZoomLevel5Controller } from './zoomLevel5.controller'
 
 @Module({
     imports: [
@@ -17,5 +18,6 @@ import { ZoomLevel5Service } from './zoomLevel5.service'
     ],
     providers: [ZoomLevel5Service, ZoomLevel5Resolver],
     exports: [ZoomLevel5Service],
+    controllers: [ZoomLevel5Controller],
 })
 export class ZoomLevel5Module {}
