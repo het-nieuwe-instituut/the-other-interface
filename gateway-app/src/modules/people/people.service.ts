@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
-import { TriplyService } from '../triply/triply.service'
-import { TriplyUtils, ZoomLevel3ReturnData } from '../triply/triply.utils'
+import { KeysToVerify, TriplyService } from '../triply/triply.service'
+import { TriplyUtils, ZoomLevel3ReturnData, zoomLevel3ReturnDataKeys } from '../triply/triply.utils'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { PeopleZoomLevel4FiltersArgs } from './people.type'
 
@@ -25,6 +25,9 @@ export enum PeopleZoomLevel4Filters {
 interface PeopleFilterData {
     filter: string
 }
+const peopleFilterDataKeys: KeysToVerify<PeopleFilterData> = {
+    filter: true,
+}
 
 export interface PeopleData {
     name: string | null
@@ -36,6 +39,10 @@ export interface PeopleData {
 interface PeopleZoomLevel4Data {
     record: string
     name: string
+}
+const peopleZoomLevel4DataKeys: KeysToVerify<PeopleZoomLevel4Data> = {
+    record: true,
+    name: true,
 }
 
 interface PeopleDetailZoomLevel5Data {
@@ -65,6 +72,34 @@ interface PeopleDetailZoomLevel5Data {
     relatedItemLabel?: string
     description?: string
     permanentLink?: string
+}
+const peopleDetailZoomLevel5DataKeys: KeysToVerify<PeopleDetailZoomLevel5Data> = {
+    name: true,
+    nameType: true,
+    nameVariation: true,
+    birthDate: true,
+    birthPlace: true,
+    birthPlaceLabel: true,
+    deathDate: true,
+    deathPlace: true,
+    deathPlaceLabel: true,
+    place: true,
+    placeLabel: true,
+    startDate: true,
+    endDate: true,
+    nationality: true,
+    nationalityLabel: true,
+    institution: true,
+    institutionLabel: true,
+    profession: true,
+    professionLabel: true,
+    gender: true,
+    association: true,
+    associationLabel: true,
+    relatedItem: true,
+    relatedItemLabel: true,
+    description: true,
+    permanentLink: true,
 }
 
 @Injectable()
@@ -115,7 +150,11 @@ export class PeopleService {
     public constructor(private triplyService: TriplyService) {}
 
     public async getZoomLevel2Data() {
-        const result = await this.triplyService.queryTriplyData<PeopleFilterData>(this.zoomLevel2Endpoint)
+        const result = await this.triplyService.queryTriplyData<PeopleFilterData>(
+            this.zoomLevel2Endpoint,
+            peopleFilterDataKeys
+        )
+
         return result.data
             .map(r => {
                 const filterMapping = this.ZoomLevel3Mapping.find(m => m.name === r.filter)
@@ -132,10 +171,11 @@ export class PeopleService {
             throw new Error(`[People] Mapping ${id} not found`)
         }
 
-        const result = await this.triplyService.queryTriplyData<ZoomLevel3ReturnData>(mapping?.endpoint, {
-            page,
-            pageSize,
-        })
+        const result = await this.triplyService.queryTriplyData<ZoomLevel3ReturnData>(
+            mapping?.endpoint,
+            zoomLevel3ReturnDataKeys,
+            { page, pageSize }
+        )
 
         return TriplyUtils.parseLevel3OutputData(result.data)
     }
@@ -149,15 +189,14 @@ export class PeopleService {
 
         const result = await this.triplyService.queryTriplyData<PeopleZoomLevel4Data>(
             this.ZoomLevel4Endpoint,
-            {
-                page,
-                pageSize,
-            },
+            peopleZoomLevel4DataKeys,
+            { page, pageSize },
             searchParams
         )
 
         const countResult = await this.triplyService.queryTriplyData<{ count?: number }>(
             this.ZoomLevel4CountEndpoint,
+            { count: true },
             undefined,
             searchParams
         )
@@ -183,6 +222,7 @@ export class PeopleService {
         const uri = TriplyUtils.getUriForTypeAndId(EntityNames.People, objectId)
         const result = await this.triplyService.queryTriplyData<PeopleDetailZoomLevel5Data>(
             this.ZoomLevel5Endpoint,
+            peopleDetailZoomLevel5DataKeys,
             undefined,
             { record: uri }
         )
