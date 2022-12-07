@@ -3,5 +3,6 @@ query ZoomLevel5ArchivesOther($id: String!) {
         id
         title
         type
+        pidWorkURIs
     }
 }

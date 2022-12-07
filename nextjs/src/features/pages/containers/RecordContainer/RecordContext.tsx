@@ -1,11 +1,10 @@
 import { createContext, useEffect, useState } from "react";
 // import { StoryBySlugQuery } from "src/generated/graphql";
-import { Zoom5RecordResult } from "../../tasks/getZoom5RecordTask";
+import { Zoom5RecordResult } from "../../tasks/zoom5Config";
 
 
 interface RecordContextProps {
     detail: Zoom5RecordResult['zoom5detail'],
-    relations: Zoom5RecordResult['zoom5relations']
     setZoomLevel5: (zoomLevel: Zoom5RecordResult) => void
 }
 
@@ -25,7 +24,6 @@ export const RecordProvider: React.FC<Props> = ({ zoomLevel5, children}) => {
 
     return (
         <RecordContext.Provider value={{
-            relations: _zoomLevel5?.zoom5relations,
             detail: _zoomLevel5?.zoom5detail,
             setZoomLevel5,
         }}> 
