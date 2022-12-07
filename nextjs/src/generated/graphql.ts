@@ -60,7 +60,7 @@ export type ArchivesOtherZoomLevel5DetailType = {
   mediaReferenceLabel?: Maybe<Scalars['String']>;
   objectNumber?: Maybe<Scalars['String']>;
   permanentLink?: Maybe<Scalars['String']>;
-  pidWorkURI?: Maybe<Scalars['String']>;
+  pidWorkURIs?: Maybe<Array<Scalars['String']>>;
   relatedMaterial?: Maybe<Scalars['String']>;
   rights?: Maybe<Scalars['String']>;
   rightsLabel?: Maybe<Scalars['String']>;
@@ -316,6 +316,14 @@ export type ComponentModulesCarousel = {
   type?: Maybe<EnumComponentmodulescarouselType>;
 };
 
+export type ComponentModulesCollectionRelation = {
+  __typename?: 'ComponentModulesCollectionRelation';
+  author?: Maybe<AuthorEntityResponse>;
+  id: Scalars['ID'];
+  story?: Maybe<StoryEntityResponse>;
+  triplyRecord?: Maybe<TriplyRecordEntityResponse>;
+};
+
 export type ComponentModulesGridModule = {
   __typename?: 'ComponentModulesGridModule';
   buttons?: Maybe<Array<ComponentCoreButton>>;
@@ -335,9 +343,11 @@ export type ComponentModulesImage = {
   __typename?: 'ComponentModulesImage';
   alt_text?: Maybe<Scalars['String']>;
   caption?: Maybe<Scalars['String']>;
+  captionRelation?: Maybe<ComponentModulesCollectionRelation>;
   id: Scalars['ID'];
   image: UploadFileEntityResponse;
   imageModuleLayout: ComponentCoreModuleLayouts;
+  imageRelation?: Maybe<ComponentModulesCollectionRelation>;
 };
 
 export type ComponentModulesImageCarousel = {
@@ -1903,21 +1913,21 @@ export type ZoomLevel5ArchivesFondsQueryVariables = Exact<{
 }>;
 
 
-export type ZoomLevel5ArchivesFondsQuery = { __typename?: 'Query', zoomLevel5ArchivesFonds?: { __typename?: 'ArchivesFondsZoomLevel5DetailType', id: string, recordTitle?: string | null, descriptionLevel?: string | null } | null };
+export type ZoomLevel5ArchivesFondsQuery = { __typename?: 'Query', zoomLevel5ArchivesFonds?: { __typename: 'ArchivesFondsZoomLevel5DetailType', id: string, recordTitle?: string | null, descriptionLevel?: string | null } | null };
 
 export type ZoomLevel5ArchivesOtherQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type ZoomLevel5ArchivesOtherQuery = { __typename?: 'Query', zoomLevel5ArchivesOther?: { __typename?: 'ArchivesOtherZoomLevel5DetailType', id: string, title?: string | null, type: ArchivesZoomLevel5Types } | null };
+export type ZoomLevel5ArchivesOtherQuery = { __typename?: 'Query', zoomLevel5ArchivesOther?: { __typename?: 'ArchivesOtherZoomLevel5DetailType', id: string, title?: string | null, type: ArchivesZoomLevel5Types, pidWorkURIs?: Array<string> | null } | null };
 
 export type ZoomLevel5ObjectQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type ZoomLevel5ObjectQuery = { __typename?: 'Query', zoomLevel5Object?: { __typename?: 'ObjectsZoomLevel5DetailType', image?: string | null, imageLabel?: string | null, title?: string | null, titleType?: string | null, objectNumber?: string | null, objectName?: string | null, objectNameLabel?: string | null, archiveCollectionCode?: string | null, maker?: string | null, makerLabel?: string | null, makerRole?: string | null, makerRoleLabel?: string | null, startDate?: string | null, endDate?: string | null, numberOfParts?: string | null, scale?: string | null, technique?: string | null, techniqueLabel?: string | null, material?: string | null, materialLabel?: string | null, dimensionPart?: string | null, dimensionType?: string | null, dimensionValue?: string | null, dimensionUnit?: string | null, description?: string | null, associationPerson?: string | null, associationPersonLabel?: string | null, associationPersonType?: string | null, relatedObjectTitle?: string | null, creditLine?: string | null, rights?: string | null, rightsLabel?: string | null, creationPlace?: string | null, creationPlaceLabel?: string | null, permanentLink?: string | null } | null };
+export type ZoomLevel5ObjectQuery = { __typename?: 'Query', zoomLevel5Object?: { __typename: 'ObjectsZoomLevel5DetailType', image?: string | null, imageLabel?: string | null, title?: string | null, titleType?: string | null, objectNumber?: string | null, objectName?: string | null, objectNameLabel?: string | null, archiveCollectionCode?: string | null, maker?: string | null, makerLabel?: string | null, makerRole?: string | null, makerRoleLabel?: string | null, startDate?: string | null, endDate?: string | null, numberOfParts?: string | null, scale?: string | null, technique?: string | null, techniqueLabel?: string | null, material?: string | null, materialLabel?: string | null, dimensionPart?: string | null, dimensionType?: string | null, dimensionValue?: string | null, dimensionUnit?: string | null, description?: string | null, associationPerson?: string | null, associationPersonLabel?: string | null, associationPersonType?: string | null, relatedObjectTitle?: string | null, creditLine?: string | null, rights?: string | null, rightsLabel?: string | null, creationPlace?: string | null, creationPlaceLabel?: string | null, permanentLink?: string | null } | null };
 
 export type ZoomLevel5PublicationQueryVariables = Exact<{
   id: Scalars['String'];
@@ -1931,35 +1941,35 @@ export type ZoomLevel5PublicationsArticleQueryVariables = Exact<{
 }>;
 
 
-export type ZoomLevel5PublicationsArticleQuery = { __typename?: 'Query', zoomLevel5PublicationsArticle?: { __typename?: 'PublicationsArticleZoomLevel5DetailType', typeOfPublication?: string | null, typeOfPublicationLabel?: string | null, title?: string | null, author?: string | null, authorLabel?: string | null, authorRole?: string | null, authorRoleLabel?: string | null, sourceTitle?: string | null, sourceTitleLabel?: string | null, volume?: string | null, issue?: string | null, yearOfPublication?: string | null, page?: string | null, publisher?: string | null, publisherLabel?: string | null, abstract?: string | null, language?: string | null, languageLabel?: string | null, geographicalKeyword?: string | null, geographicalKeywordLabel?: string | null, subject?: string | null, subjectLabel?: string | null, relatedPerInst?: string | null, relatedPerInstLabel?: string | null, objectNumber?: string | null, availability?: string | null, shelfmark?: string | null, permanentLink?: string | null } | null };
+export type ZoomLevel5PublicationsArticleQuery = { __typename?: 'Query', zoomLevel5PublicationsArticle?: { __typename: 'PublicationsArticleZoomLevel5DetailType', typeOfPublication?: string | null, typeOfPublicationLabel?: string | null, title?: string | null, author?: string | null, authorLabel?: string | null, authorRole?: string | null, authorRoleLabel?: string | null, sourceTitle?: string | null, sourceTitleLabel?: string | null, volume?: string | null, issue?: string | null, yearOfPublication?: string | null, page?: string | null, publisher?: string | null, publisherLabel?: string | null, abstract?: string | null, language?: string | null, languageLabel?: string | null, geographicalKeyword?: string | null, geographicalKeywordLabel?: string | null, subject?: string | null, subjectLabel?: string | null, relatedPerInst?: string | null, relatedPerInstLabel?: string | null, objectNumber?: string | null, availability?: string | null, shelfmark?: string | null, permanentLink?: string | null } | null };
 
 export type ZoomLevel5PublicationsAudiovisualQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type ZoomLevel5PublicationsAudiovisualQuery = { __typename?: 'Query', zoomLevel5PublicationsAudiovisual?: { __typename?: 'PublicationsAudioVisualZoomLevel5DetailType', typeOfPublication?: string | null, typeOfPublicationLabel?: string | null, title?: string | null, author?: string | null, authorLabel?: string | null, authorRole?: string | null, authorRoleLabel?: string | null, publisher?: string | null, publisherLabel?: string | null, yearOfPublication?: string | null, placeOfPublication?: string | null, placeOfPublicationLabel?: string | null, abstract?: string | null, annotation?: string | null, scope?: string | null, language?: string | null, languageLabel?: string | null, medium?: string | null, geographicalKeyword?: string | null, geographicalKeywordLabel?: string | null, subject?: string | null, subjectLabel?: string | null, relatedPerInst?: string | null, relatedPerInstLabel?: string | null, permanentLink?: string | null, objectNumber?: string | null, availability?: string | null, shelfmark?: string | null } | null };
+export type ZoomLevel5PublicationsAudiovisualQuery = { __typename?: 'Query', zoomLevel5PublicationsAudiovisual?: { __typename: 'PublicationsAudioVisualZoomLevel5DetailType', typeOfPublication?: string | null, typeOfPublicationLabel?: string | null, title?: string | null, author?: string | null, authorLabel?: string | null, authorRole?: string | null, authorRoleLabel?: string | null, publisher?: string | null, publisherLabel?: string | null, yearOfPublication?: string | null, placeOfPublication?: string | null, placeOfPublicationLabel?: string | null, abstract?: string | null, annotation?: string | null, scope?: string | null, language?: string | null, languageLabel?: string | null, medium?: string | null, geographicalKeyword?: string | null, geographicalKeywordLabel?: string | null, subject?: string | null, subjectLabel?: string | null, relatedPerInst?: string | null, relatedPerInstLabel?: string | null, permanentLink?: string | null, objectNumber?: string | null, availability?: string | null, shelfmark?: string | null } | null };
 
 export type ZoomLevel5PublicationsBookQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type ZoomLevel5PublicationsBookQuery = { __typename?: 'Query', zoomLevel5PublicationsBook?: { __typename?: 'PublicationsBookZoomLevel5DetailType', typeOfPublication?: string | null, typeOfPublicationLabel?: string | null, title?: string | null, author?: string | null, authorLabel?: string | null, authorRole?: string | null, authorRoleLabel?: string | null, publisher?: string | null, publisherLabel?: string | null, yearOfPublication?: string | null, placeOfPublication?: string | null, placeOfPublicationLabel?: string | null, isbn?: string | null, description?: string | null, annotation?: string | null, codeOfArchive?: string | null, codeOfArchiveLabel?: string | null, edition?: string | null, illustration?: string | null, numberOfPages?: string | null, language?: string | null, languageLabel?: string | null, seriesLabel?: string | null, number?: string | null, geographicalKeyword?: string | null, geographicalKeywordLabel?: string | null, subject?: string | null, subjectLabel?: string | null, relatedPerInst?: string | null, relatedPerInstLabel?: string | null, objectNumber?: string | null, availability?: string | null, shelfmark?: string | null, permanentLink?: string | null } | null };
+export type ZoomLevel5PublicationsBookQuery = { __typename?: 'Query', zoomLevel5PublicationsBook?: { __typename: 'PublicationsBookZoomLevel5DetailType', typeOfPublication?: string | null, typeOfPublicationLabel?: string | null, title?: string | null, author?: string | null, authorLabel?: string | null, authorRole?: string | null, authorRoleLabel?: string | null, publisher?: string | null, publisherLabel?: string | null, yearOfPublication?: string | null, placeOfPublication?: string | null, placeOfPublicationLabel?: string | null, isbn?: string | null, description?: string | null, annotation?: string | null, codeOfArchive?: string | null, codeOfArchiveLabel?: string | null, edition?: string | null, illustration?: string | null, numberOfPages?: string | null, language?: string | null, languageLabel?: string | null, seriesLabel?: string | null, number?: string | null, geographicalKeyword?: string | null, geographicalKeywordLabel?: string | null, subject?: string | null, subjectLabel?: string | null, relatedPerInst?: string | null, relatedPerInstLabel?: string | null, objectNumber?: string | null, availability?: string | null, shelfmark?: string | null, permanentLink?: string | null } | null };
 
 export type ZoomLevel5PublicationsSerialQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type ZoomLevel5PublicationsSerialQuery = { __typename?: 'Query', zoomLevel5PublicationsSerial?: { __typename?: 'PublicationsSerialZoomLevel5DetailType', typeOfPublication?: string | null, typeOfPublicationLabel?: string | null, title?: string | null, publisher?: string | null, publisherLabel?: string | null, yearOfPublication?: string | null, placeOfPublication?: string | null, placeOfPublicationLabel?: string | null, subject?: string | null, subjectLabel?: string | null, language?: string | null, languageLabel?: string | null, continuedFrom?: string | null, continuedAs?: string | null, remarks?: string | null, availability?: string | null, shelfmark?: string | null, holding?: string | null, permanentLink?: string | null } | null };
+export type ZoomLevel5PublicationsSerialQuery = { __typename?: 'Query', zoomLevel5PublicationsSerial?: { __typename: 'PublicationsSerialZoomLevel5DetailType', typeOfPublication?: string | null, typeOfPublicationLabel?: string | null, title?: string | null, publisher?: string | null, publisherLabel?: string | null, yearOfPublication?: string | null, placeOfPublication?: string | null, placeOfPublicationLabel?: string | null, subject?: string | null, subjectLabel?: string | null, language?: string | null, languageLabel?: string | null, continuedFrom?: string | null, continuedAs?: string | null, remarks?: string | null, availability?: string | null, shelfmark?: string | null, holding?: string | null, permanentLink?: string | null } | null };
 
 export type ZoomLevel5PersonQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type ZoomLevel5PersonQuery = { __typename?: 'Query', zoomLevel5Person?: { __typename?: 'PoepleZoomLevel5DetailType', name?: string | null, nameType?: string | null, nameVariation?: string | null, birthDate?: string | null, birthPlace?: string | null, birthPlaceLabel?: string | null, deathDate?: string | null, deathPlace?: string | null, deathPlaceLabel?: string | null, place?: string | null, placeLabel?: string | null, startDate?: string | null, endDate?: string | null, nationality?: string | null, nationalityLabel?: string | null, institution?: string | null, institutionLabel?: string | null, profession?: string | null, professionLabel?: string | null, gender?: string | null, association?: string | null, associationLabel?: string | null, relatedItem?: string | null, relatedItemLabel?: string | null, description?: string | null, permanentLink?: string | null } | null };
+export type ZoomLevel5PersonQuery = { __typename?: 'Query', zoomLevel5Person?: { __typename: 'PoepleZoomLevel5DetailType', name?: string | null, nameType?: string | null, nameVariation?: string | null, birthDate?: string | null, birthPlace?: string | null, birthPlaceLabel?: string | null, deathDate?: string | null, deathPlace?: string | null, deathPlaceLabel?: string | null, place?: string | null, placeLabel?: string | null, startDate?: string | null, endDate?: string | null, nationality?: string | null, nationalityLabel?: string | null, institution?: string | null, institutionLabel?: string | null, profession?: string | null, professionLabel?: string | null, gender?: string | null, association?: string | null, associationLabel?: string | null, relatedItem?: string | null, relatedItemLabel?: string | null, description?: string | null, permanentLink?: string | null } | null };
 
 export type ZoomLevel1QueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2930,6 +2940,7 @@ export const ZoomLevel5ArchivesDocument = gql`
   zoomLevel5Archive(id: $id) {
     __typename
     ... on ArchivesOtherZoomLevel5DetailType {
+      __typename
       objectNumber
       title
       startDate
@@ -2946,6 +2957,7 @@ export const ZoomLevel5ArchivesDocument = gql`
       permanentLink
     }
     ... on ArchivesFondsZoomLevel5DetailType {
+      __typename
       descriptionLevel
       objectNumber
       recordTitle
@@ -2977,6 +2989,7 @@ export const ZoomLevel5ArchivesDocument = gql`
 export const ZoomLevel5ArchivesFondsDocument = gql`
     query ZoomLevel5ArchivesFonds($id: String!) {
   zoomLevel5ArchivesFonds(id: $id) {
+    __typename
     id
     recordTitle
     descriptionLevel
@@ -2989,12 +3002,14 @@ export const ZoomLevel5ArchivesOtherDocument = gql`
     id
     title
     type
+    pidWorkURIs
   }
 }
     `;
 export const ZoomLevel5ObjectDocument = gql`
     query ZoomLevel5Object($id: String!) {
   zoomLevel5Object(id: $id) {
+    __typename
     image
     imageLabel
     title
@@ -3038,6 +3053,7 @@ export const ZoomLevel5PublicationDocument = gql`
   zoomLevel5Publication(id: $id) {
     __typename
     ... on PublicationsAudioVisualZoomLevel5DetailType {
+      __typename
       typeOfPublication
       typeOfPublicationLabel
       title
@@ -3068,6 +3084,7 @@ export const ZoomLevel5PublicationDocument = gql`
       shelfmark
     }
     ... on PublicationsArticleZoomLevel5DetailType {
+      __typename
       typeOfPublication
       typeOfPublicationLabel
       title
@@ -3098,6 +3115,7 @@ export const ZoomLevel5PublicationDocument = gql`
       permanentLink
     }
     ... on PublicationsSerialZoomLevel5DetailType {
+      __typename
       typeOfPublication
       typeOfPublicationLabel
       title
@@ -3119,6 +3137,7 @@ export const ZoomLevel5PublicationDocument = gql`
       permanentLink
     }
     ... on PublicationsBookZoomLevel5DetailType {
+      __typename
       typeOfPublication
       typeOfPublicationLabel
       title
@@ -3160,6 +3179,7 @@ export const ZoomLevel5PublicationDocument = gql`
 export const ZoomLevel5PublicationsArticleDocument = gql`
     query ZoomLevel5PublicationsArticle($id: String!) {
   zoomLevel5PublicationsArticle(id: $id) {
+    __typename
     typeOfPublication
     typeOfPublicationLabel
     title
@@ -3194,6 +3214,7 @@ export const ZoomLevel5PublicationsArticleDocument = gql`
 export const ZoomLevel5PublicationsAudiovisualDocument = gql`
     query ZoomLevel5PublicationsAudiovisual($id: String!) {
   zoomLevel5PublicationsAudiovisual(id: $id) {
+    __typename
     typeOfPublication
     typeOfPublicationLabel
     title
@@ -3228,6 +3249,7 @@ export const ZoomLevel5PublicationsAudiovisualDocument = gql`
 export const ZoomLevel5PublicationsBookDocument = gql`
     query ZoomLevel5PublicationsBook($id: String!) {
   zoomLevel5PublicationsBook(id: $id) {
+    __typename
     typeOfPublication
     typeOfPublicationLabel
     title
@@ -3268,6 +3290,7 @@ export const ZoomLevel5PublicationsBookDocument = gql`
 export const ZoomLevel5PublicationsSerialDocument = gql`
     query ZoomLevel5PublicationsSerial($id: String!) {
   zoomLevel5PublicationsSerial(id: $id) {
+    __typename
     typeOfPublication
     typeOfPublicationLabel
     title
@@ -3293,6 +3316,7 @@ export const ZoomLevel5PublicationsSerialDocument = gql`
 export const ZoomLevel5PersonDocument = gql`
     query ZoomLevel5Person($id: String!) {
   zoomLevel5Person(id: $id) {
+    __typename
     name
     nameType
     nameVariation

@@ -3,7 +3,7 @@ import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { randomNumberBetweenPoints } from '@/features/shared/utils/numbers'
 import PaginationLeft from '@/icons/arrows/pagination-left.svg'
 import PaginationRight from '@/icons/arrows/pagination-right.svg'
-import { Box, Flex, Grid, GridItem, Img, Text } from '@chakra-ui/react'
+import { Box, Flex, Grid, GridItem, Image, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useContext, useId, useMemo } from 'react'
 import {
@@ -145,7 +145,8 @@ export const PaginatedCollection: React.FunctionComponent<
                                                     width={'140px'}
                                                 >
                                                     {(item as ZoomLevel4Type)?.pidWorkURI && (
-                                                        <Img src={(item as ZoomLevel4Type)?.pidWorkURI ?? 'broken'} width={'48px'} height={'35px'} />
+                                                        //TODO ask LBA about fallback image here
+                                                        <Image src={(item as ZoomLevel4Type)?.pidWorkURI ?? 'broken'} width={'48px'} height={'35px'} alt={''} fallbackSrc='https://via.placeholder.com/150' />
                                                     )}
 
                                                     <Text
