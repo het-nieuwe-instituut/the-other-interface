@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { TriplyUtils, ZoomLevel3ReturnData, zoomLevel3ReturnDataKeys } from '../triply/triply.utils'
+import { CustomError } from '../util/customError'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { ObjectsZoomLevel4FiltersArgs } from './objects.type'
 
@@ -191,7 +192,7 @@ export class ObjectsService {
         const mapping = this.ZoomLevel3Mapping.find(m => m.id === id)
 
         if (!mapping) {
-            throw new Error(`[Objects] Mapping ${id} not found`)
+            throw CustomError.internalCritical(`[Objects] Mapping ${id} not found`)
         }
 
         const result = await this.triplyService.queryTriplyData<ZoomLevel3ReturnData>(
@@ -260,6 +261,6 @@ export class ObjectsService {
             return ObjectsZoomLevel3Ids[input as ObjectsZoomLevel3Ids]
         }
 
-        throw new Error(`[Objects] Invalid filter input "${input}"`)
+        throw CustomError.internalCritical(`[Objects] Invalid filter input "${input}"`)
     }
 }

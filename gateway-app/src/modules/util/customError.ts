@@ -1,6 +1,8 @@
 export enum CustomErrorType {
-    validation = 'validation',
-    domain = 'domain',
+    internal = 'internal',
+    internalCritical = 'internalCritical',
+    external = 'external',
+    externalCritical = 'externalCritical',
     // if changed, make sure to update the typesToIgnore in rollbarInterceptor.ts
 }
 
@@ -10,11 +12,19 @@ export class CustomError extends Error {
         super(`[${type}]: ${message}`)
     }
 
-    public static ValidationError(message: string) {
-        return new CustomError(CustomErrorType.validation, message)
+    public static internal(message: string) {
+        return new CustomError(CustomErrorType.internal, message)
     }
 
-    public static DomainError(message: string) {
-        return new CustomError(CustomErrorType.domain, message)
+    public static internalCritical(message: string) {
+        return new CustomError(CustomErrorType.internalCritical, message)
+    }
+
+    public static external(message: string) {
+        return new CustomError(CustomErrorType.external, message)
+    }
+
+    public static externalCritical(message: string) {
+        return new CustomError(CustomErrorType.externalCritical, message)
     }
 }

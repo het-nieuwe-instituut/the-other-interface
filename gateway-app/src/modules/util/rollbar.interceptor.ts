@@ -5,7 +5,7 @@ import { RollbarService } from './rollbar.service'
 
 @Injectable()
 export class RollbarInterceptor implements NestInterceptor {
-    private readonly typesToIgnore = [CustomErrorType.domain, CustomErrorType.validation]
+    private readonly typesToIgnore = [CustomErrorType.internal, CustomErrorType.external]
 
     public constructor(private readonly rollbarService: RollbarService) {}
 
