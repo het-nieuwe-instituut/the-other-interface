@@ -1,10 +1,11 @@
 import { render, renderHook, RenderOptions } from '@testing-library/react'
 import React, { PropsWithChildren } from 'react'
 import { Provider } from 'react-redux'
-import defaultStore from 'src/features/shared/configs/store'
 import { ThemeProvider } from '@chakra-ui/react'
 import { theme } from '../styles/theme/theme'
+import { createStore } from '../configs/store'
 
+const defaultStore = createStore()
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
     store?: typeof defaultStore
 }
@@ -16,7 +17,7 @@ export function renderWithProviders(
     function Wrapper({ children }: PropsWithChildren): JSX.Element {
         return (
             <ThemeProvider theme={theme}>
-                    <Provider store={store}>{children}</Provider>
+                <Provider store={store}>{children}</Provider>
             </ThemeProvider>
         )
     }
