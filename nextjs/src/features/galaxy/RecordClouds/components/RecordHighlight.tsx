@@ -1,4 +1,4 @@
-import { SupportedQuerys } from '@/features/pages/tasks/getZoom5RecordTask'
+import { SupportedQuerys } from '@/features/pages/tasks/zoom5Config'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { typeColors } from '@/features/shared/styles/theme/foundations/colors'
 import { Box, Flex, Image, keyframes, Text } from '@chakra-ui/react'

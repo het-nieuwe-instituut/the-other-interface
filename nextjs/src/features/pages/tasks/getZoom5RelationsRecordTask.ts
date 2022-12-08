@@ -1,7 +1,7 @@
 import { SupportedQuerys, zoom5Config } from "./zoom5Config"
 
 
-export async function getZoom5RecordTask(record: string) {
+export async function getZoom5RelationsRecordTask(record: string) {
     try {
         const type = record.split('-')[1] as SupportedQuerys
         const id: string = record.split('-')[0]
@@ -9,12 +9,13 @@ export async function getZoom5RecordTask(record: string) {
         if (type === SupportedQuerys.stories) {
             return
         }
+        
         const configByType = zoom5Config[type]
 
-        const detailQuery = await configByType.zoomLevelQuery?.({ id: id })
+        const relations = await configByType.relationsQuery?.({ id: id })
 
         return {
-            zoom5detail: configByType.accesor(detailQuery) ?? null,
+            zoom5relations: relations,
         }
     } catch (e) {
         console.log(e, 'Error accured in zoom level 5 task')

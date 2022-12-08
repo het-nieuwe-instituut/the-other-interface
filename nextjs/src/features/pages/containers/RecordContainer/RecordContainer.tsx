@@ -11,7 +11,7 @@ import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import { LandingpageBySlugQuery, LandingpageComponentsDynamicZone } from 'src/generated/graphql'
 import RecordClouds from '../../../galaxy/RecordClouds/RecordClouds'
-import { Zoom5RecordResult } from '../../tasks/getZoom5RecordTask'
+import { Zoom5RecordResult } from '../../tasks/zoom5Config'
 import { ScrollToContent, ScrollToTop } from '../../utils/utils'
 import { RecordProvider } from './RecordContext'
 
