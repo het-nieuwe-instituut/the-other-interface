@@ -3,7 +3,7 @@
 import * as d3 from 'd3'
 import { MouseEvent, MutableRefObject, useCallback, useEffect, useRef, useState } from 'react'
 import { Dimensions } from '../../../types/galaxy'
-import { ParentRelation } from './usePositionClouds'
+import { ParentRelation } from '../utils/calculus'
 
 export function useD3HeroAnimateElement<DType>(
     disabledClick: boolean,
