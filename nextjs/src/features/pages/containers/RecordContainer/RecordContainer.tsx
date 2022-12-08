@@ -16,22 +16,21 @@ import { ScrollToContent, ScrollToTop } from '../../utils/utils'
 import { RecordProvider } from './RecordContext'
 
 interface Props {
-    zoom5: Zoom5RecordResult | undefined,
-    landingpage: LandingpageBySlugQuery | undefined,
+    zoom5: Zoom5RecordResult | undefined
+    landingpage: LandingpageBySlugQuery | undefined
     record: string
 }
 
 export const RecordContainer = (props: Props) => {
     return (
-        <RecordProvider zoomLevel5={props.zoom5 ?? null} >
+        <RecordProvider zoomLevel5={props.zoom5 ?? null}>
             <RecordPage landingpage={props.landingpage} />
         </RecordProvider>
     )
 }
 
-
 interface PageProps {
-    landingpage: LandingpageBySlugQuery | undefined,
+    landingpage: LandingpageBySlugQuery | undefined
 }
 
 const RecordPage = (props: PageProps) => {
@@ -40,7 +39,7 @@ const RecordPage = (props: PageProps) => {
     const graphRef = useRef<HTMLDivElement | null>(null)
     const sizes = useSize(graphRef)
     const { scrollPosition } = useScroll()
-    const attributes = props.landingpage?.landingpages?.data[0]?.attributes;
+    const attributes = props.landingpage?.landingpages?.data[0]?.attributes
 
     return (
         <>
@@ -52,10 +51,7 @@ const RecordPage = (props: PageProps) => {
                 <Box backgroundColor="graph" height="800px" ref={graphRef} key={router.query.record as string}>
                     {sizes?.height && sizes?.width && (
                         <Box position={'fixed'}>
-                            <RecordClouds
-                                key={router.query.record as string}
-                                dimensions={sizes}
-                            />
+                            <RecordClouds key={router.query.record as string} dimensions={sizes} />
                         </Box>
                     )}
                 </Box>
@@ -70,9 +66,7 @@ const RecordPage = (props: PageProps) => {
                         preface={attributes?.Description || undefined}
                     />
                 </Box>
-                <DynamicComponentRenderer
-                    components={attributes?.components as LandingpageComponentsDynamicZone[]}
-                />
+                <DynamicComponentRenderer components={attributes?.components as LandingpageComponentsDynamicZone[]} />
             </Box>
         </>
     )

@@ -2,14 +2,13 @@ import { useRouter } from 'next/router'
 import { useCallback, useMemo } from 'react'
 import { Zoom3Query } from 'src/generated/graphql'
 import { useFitDataToDimensions } from '../hooks/useFitToDataToDimensions'
-
-import { useD3Pagination } from '../hooks/useD3Pagination'
 import { useRandomBackgroundData } from '../hooks/useRandomColorData'
 import { useZoomToD3Element } from '../hooks/useZoomToD3Element'
 import { useD3Simulation } from './hooks/useD3Simulation'
 
 import { useTheme } from '@chakra-ui/react'
 import { PaginatedFilterType } from './types'
+import { useD3Pagination } from '../hooks/useD3Pagination'
 
 interface Dimensions {
     height?: number | null
