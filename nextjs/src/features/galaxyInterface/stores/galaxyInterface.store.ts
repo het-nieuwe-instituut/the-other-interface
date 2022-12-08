@@ -26,9 +26,9 @@ export const galaxyInterfaceSlice = createSlice({
                 params?: GalaxyInterfaceStateState['params']
             }>
         ) => {
-            state.activeZoomData = action.payload?.activeZoomData
-            state.activeZoom = action.payload.activeZoom
-            state.params = action.payload.params
+            state.activeZoomData = action.payload?.activeZoomData ?? state.activeZoomData
+            state.activeZoom = action.payload.activeZoom ?? state.activeZoom
+            state.params = { ...state.params, ...action.payload.params }
         },
     },
 })

@@ -368,7 +368,7 @@ export function useD3ZoomEvents(options: Options) {
                 })
                 dispatch(
                     galaxyInterfaceActions.setActiveZoom({
-                        params: params,
+                        params: { ...params, page: undefined },
                         activeZoom: ZoomStates.Zoom4Initial,
                     })
                 )
@@ -467,7 +467,7 @@ export function useD3ZoomEvents(options: Options) {
                 })
                 dispatch(
                     galaxyInterfaceActions.setActiveZoom({
-                        params: params,
+                        params: { ...params, page: undefined },
                         activeZoom: ZoomStates.Zoom5Initial,
                     })
                 )
