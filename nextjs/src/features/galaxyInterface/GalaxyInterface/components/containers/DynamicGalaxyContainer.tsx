@@ -11,7 +11,7 @@ import { useContext, useMemo } from 'react'
 import { StoriesWithoutRelationsQuery } from 'src/generated/graphql'
 import { Dimensions } from '../../../types/galaxy'
 
-export const DynamicGalaxyNoSsr = dynamic(() => import('../../../galaxies/MainGalaxy/Galaxy'), {
+export const DynamicGalaxyNoSsr = dynamic(() => import('../../../galaxies/MainGalaxy/MainGalaxy'), {
     ssr: false,
 })
 

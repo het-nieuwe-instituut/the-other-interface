@@ -38,10 +38,12 @@ function useReplace() {
     const replace = useCallback(
         (url: UrlObject) => {
             if (!isEqual(router.query, url.query)) {
+                console.log(router.query, url.query)
+
                 router.push(url)
             }
         },
-        [router]
+        [router, router.query]
     )
 
     return { replace }
@@ -60,7 +62,7 @@ export function useRouteTransitions() {
                 return
             }
             if (includesZoomStatesMainGalaxy.includes(activeZoom)) {
-                if ([ZoomStates.Zoom1, ZoomStates.Zoom1ToZoom2].includes(activeZoom)) {
+                if ([ZoomStates.Zoom1, ZoomStates.Zoom1ToZoom2, ZoomStates.Zoom1ToZoom1Stories].includes(activeZoom)) {
                     replace({
                         query: { ...router.query, preservedZoom: ZoomStates.Zoom1 },
                     })
@@ -68,12 +70,12 @@ export function useRouteTransitions() {
                     return
                 }
                 if (activeZoom === ZoomStates.Zoom1Stories) {
-                    router.push('/landingpage/stories', undefined, { shallow: true })
+                    navigate('/landingpage/stories')
 
                     return
                 }
 
-                router.push('/', undefined, { shallow: true })
+                navigate(`/`, params)
             }
             if (includesZoomStatesZoom2Galaxy.includes(activeZoom)) {
                 if (!params) {

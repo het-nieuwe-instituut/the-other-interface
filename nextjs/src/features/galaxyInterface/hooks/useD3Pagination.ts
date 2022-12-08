@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useStore } from '@/features/shared/hooks/useStore'
+import { useDispatch } from 'react-redux'
 import { galaxyInterfaceActions } from '../stores/galaxyInterface.store'
 import { ZoomStates } from '../types/galaxy'
 
@@ -15,11 +15,9 @@ interface Props {
 }
 
 export function useD3Pagination({ pageSize, total, page, states, params }: Props) {
-    const store = useStore()
+    const dispatch = useDispatch()
 
     async function paginateNext() {
-        console.log(page)
-
         const newPage = (page ?? 0) + 1
 
         const totalSizeExceeded = newPage > (total ?? 0)
@@ -29,7 +27,7 @@ export function useD3Pagination({ pageSize, total, page, states, params }: Props
 
         console.log(newPage)
 
-        store.dispatch(
+        dispatch(
             galaxyInterfaceActions.setActiveZoom({
                 activeZoom: states.zoomBackState,
                 params: { ...params, page: newPage.toString() },
@@ -49,7 +47,7 @@ export function useD3Pagination({ pageSize, total, page, states, params }: Props
             return
         }
 
-        store.dispatch(
+        dispatch(
             galaxyInterfaceActions.setActiveZoom({
                 activeZoom: states.zoomBackState,
                 params: { ...params, page: newPage.toString() },

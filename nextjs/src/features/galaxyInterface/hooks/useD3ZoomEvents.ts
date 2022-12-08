@@ -3,7 +3,7 @@ import { State } from '@/features/shared/configs/store'
 import * as d3 from 'd3'
 import { MutableRefObject, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getStoriesSystemDimensions } from '../galaxies/MainGalaxy/Galaxy'
+import { getStoriesSystemDimensions } from '../galaxies/MainGalaxy/MainGalaxy'
 import { galaxyInterfaceActions, GalaxyInterfaceStateState } from '../stores/galaxyInterface.store'
 import { ZoomStates } from '../types/galaxy'
 

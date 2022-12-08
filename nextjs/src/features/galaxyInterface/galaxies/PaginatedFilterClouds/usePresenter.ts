@@ -20,9 +20,43 @@ interface Props extends PaginatedFilterCloudsProps {
     selector: string
 }
 
+function useSetActiveZoom(options: Pick<Props, 'dimensions' | 'filter' | 'type'>) {
+    const dispatch = useDispatch()
+    const handleSetActiveZoom = useCallback(
+        (event: Partial<{ clientX?: number; clientY: number }>, item: PaginatedCloudItem & SimulationNodeDatum) => {
+            const { dimensions, type, filter } = options
+            const width = dimensions.width ?? 0
+            const height = dimensions.height ?? 0
+
+            const x = (event.clientX ?? 0) - width / 2
+            const y = (event.clientY ?? 0) - height / 2
+
+            dispatch(
+                galaxyInterfaceActions.setActiveZoom({
+                    activeZoom: ZoomStates.Zoom3ToZoom4,
+                    activeZoomData: {
+                        to: {
+                            translateX: -x,
+                            translateY: -y,
+                        },
+                    },
+                    params: {
+                        slug: type,
+                        filter: filter,
+                        collection: item.name,
+                    },
+                })
+            )
+        },
+        [dispatch, options]
+    )
+
+    return handleSetActiveZoom
+}
+
 export function usePresenter(props: Props) {
     const { total, selector, dimensions, paginatedCloudItems, type, filter } = props
-    const dispatch = useDispatch()
+
     const theme = useTheme()
     const params = useSelector((state: State) => state.galaxyInterface.params)
     const dataCopy = useD3DataCopy(paginatedCloudItems)
@@ -43,33 +77,7 @@ export function usePresenter(props: Props) {
         },
         params,
     })
-    const handleClick = (
-        event: Partial<{ clientX?: number; clientY: number }>,
-        item: PaginatedCloudItem & SimulationNodeDatum
-    ) => {
-        const width = dimensions.width ?? 0
-        const height = dimensions.height ?? 0
-
-        const x = (event.clientX ?? 0) - width / 2
-        const y = (event.clientY ?? 0) - height / 2
-
-        dispatch(
-            galaxyInterfaceActions.setActiveZoom({
-                activeZoom: ZoomStates.Zoom3ToZoom4,
-                activeZoomData: {
-                    to: {
-                        translateX: -x,
-                        translateY: -y,
-                    },
-                },
-                params: {
-                    slug: type,
-                    filter: filter,
-                    collection: item.name,
-                },
-            })
-        )
-    }
+    const handleSetActiveZoom = useSetActiveZoom(props)
 
     return {
         svgRef,
@@ -80,7 +88,7 @@ export function usePresenter(props: Props) {
         paginatedCloudItems: dataCopy,
         backgrounds,
         events: {
-            handleClick,
+            handleClick: handleSetActiveZoom,
         },
         conditionals: {
             shouldDisplayText: includesZoomStatesZoom3Galaxy.includes(zoomEvents.zoomLevel as ZoomStates),

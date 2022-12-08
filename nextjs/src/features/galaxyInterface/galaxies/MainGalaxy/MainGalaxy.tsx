@@ -1,13 +1,11 @@
 import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { useStore } from '@/features/shared/hooks/useStore'
 import { Box, Flex, Text } from '@chakra-ui/react'
 import React, { forwardRef, useId } from 'react'
+import { EntityNames } from 'src/generated/graphql'
 import { GalaxyShadowBackground } from '../../../galaxy/components/GalaxyShadowBackground'
 import { Dimensions } from '../../../galaxy/types/galaxy'
 import { Cloud } from '../../components/Cloud'
 import { MemoizedStoriesSystem } from '../../components/StoriesSystem/StoriesSystem'
-import { galaxyInterfaceActions } from '../../stores/galaxyInterface.store'
-import { ZoomStates } from '../../types/galaxy'
 import { mapArchiveComponent } from './mappers/mapArchiveComponent'
 import { CloudItem, StoriesItem } from './types'
 
@@ -31,7 +29,6 @@ export interface InstancesPerClass {
 
 export const GALAXY_BASE = 800
 const MainGalaxy: React.FC<MainGalaxyProps> = props => {
-    const store = useStore()
     const { t } = useLooseTypeSafeTranslation('homepage')
     const id = useId().replaceAll(':', '')
     const {
@@ -43,6 +40,7 @@ const MainGalaxy: React.FC<MainGalaxyProps> = props => {
         conditions,
         archiveComponent,
         storiesMetaData,
+        events: { handleZoomToZoom2, handleZoomToStories, handleZoom0ToZoom1 },
     } = usePresenter({
         ...props,
         id,
@@ -72,15 +70,7 @@ const MainGalaxy: React.FC<MainGalaxyProps> = props => {
                     justifyContent={'center'}
                     zIndex={1}
                 >
-                    <button
-                        onClick={() =>
-                            store.dispatch(
-                                galaxyInterfaceActions.setActiveZoom({
-                                    activeZoom: ZoomStates.Zoom0ToZoom1,
-                                })
-                            )
-                        }
-                    >
+                    <button onClick={() => handleZoom0ToZoom1()}>
                         <Text width="12.5rem">{t('nationalCollectionForDutchArchitectureAndUrbanPlanning')}</Text>
                     </button>
                 </Flex>
@@ -120,18 +110,7 @@ const MainGalaxy: React.FC<MainGalaxyProps> = props => {
                                         {conditions.isZoom1 && (
                                             <Box
                                                 onClick={() => {
-                                                    store.dispatch(
-                                                        galaxyInterfaceActions.setActiveZoom({
-                                                            activeZoom: ZoomStates.Zoom1ToZoom2,
-                                                            activeZoomData: {
-                                                                to: {
-                                                                    translateX: -item.xFromCenter,
-                                                                    translateY: item.yFromCenter,
-                                                                },
-                                                            },
-                                                            params: { slug: item.id.toLowerCase() },
-                                                        })
-                                                    )
+                                                    handleZoomToZoom2(item)
                                                 }}
                                                 as="button"
                                                 width="100%"
@@ -143,7 +122,7 @@ const MainGalaxy: React.FC<MainGalaxyProps> = props => {
                                                 justifyContent="center"
                                             >
                                                 <Box>
-                                                    {item.name === 'Archieven' ? (
+                                                    {item.id === EntityNames.Archives ? (
                                                         <>
                                                             <Text width="12.5rem" mb={1} textStyle={'cloudText'}>
                                                                 {t('archives', { count: item.numberOfInstances })}
@@ -176,15 +155,7 @@ const MainGalaxy: React.FC<MainGalaxyProps> = props => {
 
                         {storiesMetaData && conditions.isZoom1 && (
                             <foreignObject x={GALAXY_BASE / 2 + 75} y={GALAXY_BASE / 2 - 60} width={200} height={100}>
-                                <button
-                                    onClick={() =>
-                                        store.dispatch(
-                                            galaxyInterfaceActions.setActiveZoom({
-                                                activeZoom: ZoomStates.Zoom1ToZoom1Stories,
-                                            })
-                                        )
-                                    }
-                                >
+                                <button onClick={() => handleZoomToStories()}>
                                     <Text width="12.5rem">{storiesMetaData.numberOfInstances}</Text>
                                     <Text width="12.5rem">{t('stories')}</Text>
                                 </button>
