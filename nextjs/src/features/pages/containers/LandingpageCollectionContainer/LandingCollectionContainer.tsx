@@ -1,23 +1,13 @@
-import Breadcrumbs, { BreadcrumbsRenderModes } from '@/features/galaxy/components/Breadcrumbs/Breadcrumbs'
+import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
-import { GalaxyFooter } from '@/features/shared/components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
-import { GalaxyTopRight } from '@/features/shared/components/GalaxyWrapper/GalaxyTopRight/GalaxyTopRight'
-import { GalaxyWrapper } from '@/features/shared/components/GalaxyWrapper/GalaxyWrapper'
 // import { Loader } from '@/features/shared/components/Loading/Loading'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import useScroll from '@/features/shared/hooks/useScroll'
 import { Box, useTheme } from '@chakra-ui/react'
-import { useSize } from '@chakra-ui/react-use-size'
-import { useRouter } from 'next/router'
-import { useRef } from 'react'
-import {
-    LandingpageBySlugQuery,
-    LandingpageComponentsDynamicZone,
-} from 'src/generated/graphql'
-import { PaginatedCollection } from '../../../galaxy/Collections/PaginatedCollectionContainer'
+import { LandingpageBySlugQuery, LandingpageComponentsDynamicZone } from 'src/generated/graphql'
 import { SupportedLandingPages } from '../../../galaxy/PaginatedFilterClouds/PaginatedFilterCloudsContainer'
-import { ScrollToContent, ScrollToTop } from '../../utils/utils'
+import { ScrollToContent } from '../../utils/utils'
 
 export interface LandingPageQueryParams {
     slug: SupportedLandingPages
@@ -28,7 +18,6 @@ interface Props {
 }
 
 export const LandingCollectionContainer = (props: Props) => {
-
     const { landingpage: data } = props
     const { t } = useTypeSafeTranslation('common')
 
@@ -48,44 +37,14 @@ export const LandingCollectionContainer = (props: Props) => {
 }
 
 export const LandingCollection: React.FC<{ data?: LandingpageBySlugQuery }> = ({ data }) => {
-    const { query } = useRouter()
-    const queryParams = query as unknown as LandingPageQueryParams
-    const type = queryParams.slug
-
     const theme = useTheme()
 
     const { scrollPosition } = useScroll()
-
-    const graphRef = useRef<HTMLDivElement | null>(null)
-    const sizes = useSize(graphRef)
     const landingpage = data?.landingpages?.data[0]
 
     return (
         <>
-            <Breadcrumbs
-                onWrapperClick={ScrollToTop}
-                mode={scrollPosition >= 750 ? BreadcrumbsRenderModes.STICKY : BreadcrumbsRenderModes.DEFAULT}
-            />
-            <GalaxyWrapper renderTopRight={() => <GalaxyTopRight />} renderBottom={() => <GalaxyFooter />}>
-                <Box
-                    backgroundColor="graph"
-                    height="800px"
-                    ref={graphRef}
-                    bgGradient="radial(50% 50% at 50% 50%, #B5FD99 0%, rgba(181, 253, 153, 0) 76.56%)"
-                    backgroundRepeat={'no-repeat'}
-                    bgSize={'1691px 1691px'}
-                    backgroundPosition={'center'}
-                >
-                    {sizes?.height && sizes?.width && (
-                        <Box position={'fixed'}>
-                            <PaginatedCollection
-                                type={type}
-                                dimensions={{ height: 800, width: sizes.width }}
-                            />
-                        </Box>
-                    )}
-                </Box>
-            </GalaxyWrapper>
+            <GalaxyInterface />
 
             <Box px={{ xl: 6, base: 0 }} position={'relative'} zIndex={2}>
                 <Box backgroundColor={'white'} px={6} pt={6} maxW={theme.breakpoints.xl} marginX={'auto'} pb={1}>

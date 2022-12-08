@@ -1,15 +1,14 @@
 // example
 
-import store from '@/features/shared/configs/store'
+import { AnyAction, Dispatch } from '@reduxjs/toolkit'
 import { filtersActions } from '../filtersSlice'
 import { FilterTypes } from '../filtersTypes'
 
-const getFiltersTask = (filterType: FilterTypes) => {
-
+const getFiltersTask = (dispatch: Dispatch<AnyAction>, filterType: FilterTypes) => {
     // do some formating if it's needed
 
     //save something to store, for example active filter
-    store.dispatch(filtersActions.setActiveFilter({ activeFilter: filterType }))
+    dispatch(filtersActions.setActiveFilter({ activeFilter: filterType }))
     // return data
 
     return []
