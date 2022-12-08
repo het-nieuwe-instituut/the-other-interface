@@ -1,23 +1,27 @@
-/**
- * triply-record service.
- */
+const axios = require("axios");
 
-import axios from "axios";
-import { factories } from "@strapi/strapi";
-import { Service } from "@strapi/strapi/lib/core-api/service";
+let failedCount = 0;
 
-export type TriplyRecordService = Service & {
-  getLabel: (params: { recordId: string; type: string }) => Promise<string>;
+module.exports = {
+  async up(knex) {
+    const res = await knex.raw(
+      'SELECT id, record_id "recordId", "type" FROM triply_records'
+    );
+    if (!res || !res.rows || !res.rows.length) {
+      console.log("no triply records to migrate, returning");
+      return;
+    }
+
+    for (const { id, recordId, type } of res.rows) {
+      const label = await getLabel({ recordId, type });
+      await knex.from("triply_records").update({ label }).where({ id });
+    }
+
+    console.log(`${failedCount} out of ${res.rows.length} failed`);
+  },
 };
 
-export default factories.createCoreService(
-  "api::triply-record.triply-record",
-  ({ strapi }): TriplyRecordService => ({
-    getLabel,
-  })
-);
-
-async function getLabel({ recordId, type }): Promise<string> {
+async function getLabel({ recordId, type }) {
   try {
     const res = await axios.get(
       `${process.env.GATEWAY_BASE_URL}/zoomLevel5/detail`,
@@ -31,10 +35,8 @@ async function getLabel({ recordId, type }): Promise<string> {
 
     return `${label} (${recordId}/${type})`;
   } catch (err) {
-    console.log(
-      `[Lifecycles - TriplyRecord] failed to get detail for ${recordId} ${type}.`,
-      JSON.stringify(err)
-    );
+    console.log(`failed to get the label for ${recordId} ${type}.`);
+    failedCount++;
 
     return `- (${recordId}/${type})`;
   }

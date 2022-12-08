@@ -10,9 +10,13 @@ interface SlackChannel {
 @Injectable()
 export class SlackService {
     private readonly webClient: WebClient
+    private readonly ignoreRequest: boolean
+
     public readonly channels: SlackChannel
 
     public constructor(configService: ConfigService<Config>) {
+        this.ignoreRequest = configService.get('ENV') === 'development'
+
         this.webClient = new WebClient(configService.getOrThrow('SLACK_TOKEN'))
         this.channels = {
             systemNotification: configService.getOrThrow('SLACK_SYSTEM_NOTIFICATION_CHANNEL'),
@@ -20,6 +24,11 @@ export class SlackService {
     }
 
     public async postMessageToChannel(channel: string, text: string) {
+        if (this.ignoreRequest) {
+            console.log('ignoring slack service request')
+            return
+        }
+
         try {
             const res = await this.webClient.chat.postMessage({ channel, text })
             console.log('Message successfully posted to slack channel')
