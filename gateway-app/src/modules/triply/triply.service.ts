@@ -115,14 +115,14 @@ export class TriplyService {
                         keysToVerify
                     )} is not returned in ${JSON.stringify(responseData)}`
 
-                    this.rollbarService.log(message)
+                    this.rollbarService.logError(message)
                 }
             })
         } catch (err) {
             const message = `Unable to test keys ${JSON.stringify(keysToVerify)} in response ${JSON.stringify(
                 responseData
             )}`
-            this.rollbarService.log(message)
+            this.rollbarService.logError(message)
         }
     }
 }

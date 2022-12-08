@@ -17,9 +17,18 @@ export class RollbarService {
         })
     }
 
-    public async log(arg: RollbarType.LogArgument) {
+    public async logError(arg: RollbarType.LogArgument) {
         try {
-            this.rollbar.log(arg)
+            this.rollbar.error(arg)
+        } catch (err) {
+            console.log('Logging to rollbar failed', arg)
+            console.log('Error', JSON.stringify(err))
+        }
+    }
+
+    public async logInfo(arg: RollbarType.LogArgument) {
+        try {
+            this.rollbar.info(arg)
         } catch (err) {
             console.log('Logging to rollbar failed', arg)
             console.log('Error', JSON.stringify(err))
