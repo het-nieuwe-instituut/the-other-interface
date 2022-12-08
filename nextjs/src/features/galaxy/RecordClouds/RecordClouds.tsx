@@ -1,16 +1,14 @@
-import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { Box, keyframes, Text } from '@chakra-ui/react'
-import { Circle } from '../components/Circle'
+import { Box } from '@chakra-ui/react'
 
-import { SupportedQuerys, ZoomLevel5DetailResponses } from '@/features/pages/tasks/getZoom5RecordTask'
+import { SupportedQuerys, ZoomLevel5DetailResponses } from '@/features/pages/tasks/zoom5Config'
 import React, { useContext } from 'react'
-import { EntityNames, StoryBySlugQuery } from 'src/generated/graphql'
+import { ArchivesOtherZoomLevel5DetailType, StoryBySlugQuery } from 'src/generated/graphql'
 import { RecordCloudHighlight } from './components/RecordHighlight'
-import { ParentRelation } from './hooks/usePositionClouds'
 import { usePresenter } from './usePresenter'
 import { RecordQueryParams } from 'src/pages/landingpage/[slug]/[filter]/[collection]/[record]'
 import { useRouter } from 'next/router'
 import RecordContext from '@/features/pages/containers/RecordContainer/RecordContext'
+import dynamic from 'next/dynamic'
 
 type Props = {
     dimensions: {
@@ -24,25 +22,20 @@ export type ZoomLevel5Entities =
     | NonNullable<NonNullable<StoryBySlugQuery['stories']>['data']>[0]
 
 export const SVG_DIMENSIONS = { width: 1280, height: 800 }
-const opacityIn = keyframes`
-    from {opacity: 0.3 }
-    to {opacity: 1}
-`
 
-const opacityOut = keyframes`
-    to {opacity: 0.3}
-`
+const DynamicRecordRelationsNoSsr = dynamic(() => import('./components/RecordRelations/RecordRelations'), {
+    ssr: false,
+})
 
 const RecordClouds: React.FunctionComponent<Props> = ({ dimensions }) => {
     const router = useRouter()
     const queryParams = router.query as unknown as RecordQueryParams
 
     const { width, height } = dimensions
-    const {relations, detail: zoomLevel5 } = useContext(RecordContext)
+    const { detail: zoomLevel5 } = useContext(RecordContext)
     const svgWidth = width
     const svgHeight = height
-    const { svgRef, relationsPositionData, zoomed } = usePresenter(relations)
-    const { t } = useLooseTypeSafeTranslation('record')
+    const { svgRef } = usePresenter()
 
     return (
         <Box overflow="visible" height={svgHeight} width={svgWidth}>
@@ -54,52 +47,7 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions }) => {
                 style={{ overflow: 'visible' }}
             >
                 {renderHighLight()}
-                {relationsPositionData.map((relation, index, array) => {
-                    return (
-                        <React.Fragment key={`${index}-${array.length}-${relation.label}`}>
-                            <Circle
-                                className="parent"
-                                hoverBackground={relation.background}
-                                defaultBackground={relation.background}
-                                x={relation.x}
-                                y={relation.y}
-                                height={relation.diameter}
-                                width={relation.diameter}
-                            >
-                                <Box width={'75%'} zIndex={1} position={'absolute'}>
-                                    <Text textStyle={'cloudText'} textAlign={'center'} flexWrap={'wrap'}>
-                                        {getRelatedItemsTranslation(relation)}
-                                    </Text>
-                                </Box>
-                            </Circle>
-
-                            {relation.children.map((child, index, array) => {
-                                return (
-                                    <Circle
-                                        key={`${index}-${array.length}-${child.label}`}
-                                        className="child"
-                                        hoverBackground={`typeColors.${relation.type.toLowerCase()}.hover1`}
-                                        defaultBackground={`typeColors.${relation.type.toLowerCase()}.hover1`}
-                                        x={child.x}
-                                        y={child.y}
-                                        height={192}
-                                        width={192}
-                                        backgroundAnimation={
-                                            zoomed ? `${opacityIn} 1500ms linear` : `${opacityOut} 0ms linear`
-                                        }
-                                        disableHover={true}
-                                    >
-                                        <Box width={'75%'} zIndex={1} data-child>
-                                            <Text textStyle={'cloudText'} textAlign={'center'} flexWrap={'wrap'}>
-                                                {child.label}
-                                            </Text>
-                                        </Box>
-                                    </Circle>
-                                )
-                            })}
-                        </React.Fragment>
-                    )
-                })}
+                <DynamicRecordRelationsNoSsr />
             </svg>
         </Box>
     )
@@ -208,6 +156,13 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions }) => {
                     type={type}
                     title={zoomLevel5.title ?? undefined}
                     queryType={zoomLevel5?.__typename}
+                      image={{
+                        url: (zoomLevel5 as ArchivesOtherZoomLevel5DetailType).pidWorkURIs?.[0] ?? undefined,
+                        width: 100,
+                        height: 100,
+                        // TODO ask Lois about alt
+                        alt: '',
+                    }}
                     dimensions={SVG_DIMENSIONS}
                 />
             )
@@ -223,19 +178,6 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions }) => {
                 />
             )
         }
-    }
-
-    function getRelatedItemsTranslation(relation: ParentRelation) {
-        if (relation.type === EntityNames.People)
-            return t('relatedPeople', { count: relation.showing, total: relation.total })
-        if (relation.type === EntityNames.Objects)
-            return t('relatedObjects', { count: relation.showing, total: relation.total })
-        if (relation.type === EntityNames.Publications)
-            return t('relatedPublications', { count: relation.showing, total: relation.total })
-        if (relation.type === EntityNames.Archives) return t('relatedArchive', { count: relation.showing })
-        if (relation.type === EntityNames.Stories) return t('relatedStories', { count: relation.showing })
-
-        return ''
     }
 }
 
