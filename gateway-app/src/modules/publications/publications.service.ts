@@ -346,12 +346,10 @@ export class PublicationsService {
 
     public async determinePublicationType(id: string) {
         interface TypeOfPublicationData {
-            record: string
-            typeOfPublication: string
+            type: string
         }
         const typeOfPublicationDataKeys: KeysToVerify<TypeOfPublicationData> = {
-            record: true,
-            typeOfPublication: true,
+            type: true,
         }
 
         const uri = TriplyUtils.getUriForTypeAndId(EntityNames.Publications, id)
@@ -366,7 +364,7 @@ export class PublicationsService {
             return PublicationsZoomLevel5Types.book
         }
 
-        switch (res.data[0].typeOfPublication) {
+        switch (res.data[0].type) {
             case 'zoom_5-books-serial':
                 return PublicationsZoomLevel5Types.serial
             case 'zoom_5-books-article':
