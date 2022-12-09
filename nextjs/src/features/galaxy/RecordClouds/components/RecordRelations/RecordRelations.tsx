@@ -1,7 +1,7 @@
 import { Box, keyframes, Text } from '@chakra-ui/react'
 import { Circle } from '../../../components/Circle'
 import React from "react"
-import { EntityNames } from 'src/generated/graphql'
+import { EntityNames, ZoomLevel5RelationsType } from 'src/generated/graphql'
 import { ParentRelation } from '../../hooks/usePositionClouds'
 import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { usePresenter } from './usePresenter'
@@ -15,9 +15,14 @@ const opacityOut = keyframes`
     to {opacity: 0.3}
 `
 
-const RecordClouds = () => {
+interface RecordCloudsProps {
+    relations: Array<ZoomLevel5RelationsType>
+    parentRef:  React.RefObject<SVGSVGElement>
+}
+
+const RecordClouds = (props: RecordCloudsProps) => {
     const { t } = useLooseTypeSafeTranslation('record')
-    const { relationsPositionData, zoomed } = usePresenter()
+    const { relationsPositionData, zoomed } = usePresenter(props.relations, props.parentRef)
     return (
         <>
          {relationsPositionData.map((relation, index, array) => {
@@ -53,7 +58,7 @@ const RecordClouds = () => {
                                         backgroundAnimation={
                                             zoomed ? `${opacityIn} 1500ms linear` : `${opacityOut} 0ms linear`
                                         }
-                                        disableHover={true}
+                                        // disableHover={true}
                                     >
                                         <Box width={'75%'} zIndex={1} data-child>
                                             <Text textStyle={'cloudText'} textAlign={'center'} flexWrap={'wrap'}>

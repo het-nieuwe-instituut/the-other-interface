@@ -8,7 +8,7 @@ export interface StoryQueryParams {
 
 const Page = (pageProps: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     return (
-        <StoryContainer record={pageProps?.story} relations={pageProps?.relations} story={pageProps?.story} />
+        <StoryContainer record={pageProps?.story} story={pageProps?.story} />
     )
 }
 
@@ -19,7 +19,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     const locale = context.locale ?? 'en'
     const slug = queryParams.slug
 
-    const { story, relations } = await getZoom5StoryTask(slug, locale) ?? {}
+    const { story } = await getZoom5StoryTask(slug, locale) ?? {}
 
-    return { props: { story, relations } }
+    return { props: { story } }
 }

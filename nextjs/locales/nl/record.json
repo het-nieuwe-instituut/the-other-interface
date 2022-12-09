@@ -7,7 +7,7 @@
     "relatedPeople": "Toon {{count}} van {{total}} gerelateerde personen",
     "relatedObjects": "Toon {{count}} van {{total}} gerelateerde objecten",
     "relatedPublications": "Toon {{count}} van {{total}} gerelateerde publicaties",
-    "relatedStories_other": "{{count}} relagerelateerdeted stories",
+    "relatedStories_other": "{{count}} gerelateerde stories",
     "relatedStories_one": "1 gerelateerd story",
     "relatedArchive_other": "{{count}} gerelateerde archieven",
     "relatedArchive_one": "1 gerelateerd archief"

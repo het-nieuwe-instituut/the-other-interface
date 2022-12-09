@@ -1,10 +1,10 @@
 import { Box } from '@chakra-ui/react'
 
 import { SupportedQuerys, ZoomLevel5DetailResponses } from '@/features/pages/tasks/zoom5Config'
-import React, { useContext } from 'react'
+import React, { createRef, useContext } from 'react'
 import { ArchivesOtherZoomLevel5DetailType, StoryBySlugQuery } from 'src/generated/graphql'
 import { RecordCloudHighlight } from './components/RecordHighlight'
-import { usePresenter } from './usePresenter'
+
 import { RecordQueryParams } from 'src/pages/landingpage/[slug]/[filter]/[collection]/[record]'
 import { useRouter } from 'next/router'
 import RecordContext from '@/features/pages/containers/RecordContainer/RecordContext'
@@ -23,7 +23,7 @@ export type ZoomLevel5Entities =
 
 export const SVG_DIMENSIONS = { width: 1280, height: 800 }
 
-const DynamicRecordRelationsNoSsr = dynamic(() => import('./components/RecordRelations/RecordRelations'), {
+const DynamicRecordContainerRelationsNoSsr = dynamic(() => import('./containers/RecordRelationsContainer'), {
     ssr: false,
 })
 
@@ -35,7 +35,7 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions }) => {
     const { detail: zoomLevel5 } = useContext(RecordContext)
     const svgWidth = width
     const svgHeight = height
-    const { svgRef } = usePresenter()
+    const svgRef = createRef<SVGSVGElement>()
 
     return (
         <Box overflow="visible" height={svgHeight} width={svgWidth}>
@@ -47,7 +47,7 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions }) => {
                 style={{ overflow: 'visible' }}
             >
                 {renderHighLight()}
-                <DynamicRecordRelationsNoSsr />
+                <DynamicRecordContainerRelationsNoSsr parentRef={svgRef} />
             </svg>
         </Box>
     )

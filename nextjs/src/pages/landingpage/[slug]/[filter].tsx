@@ -38,7 +38,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
             landingpage,
             zoomLevel3,
             reduxState: prepareReduxState({
-                galaxyInterface: { activeZoom: ZoomStates.Zoom3Initial, params: { slug, filter: filterId, page } },
+                galaxyInterface: { activeZoom: ZoomStates.Zoom3Initial, params: { slug, filter: filterId, page: queryParams.page } },
             }),
         },
     }

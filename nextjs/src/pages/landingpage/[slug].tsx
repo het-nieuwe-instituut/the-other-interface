@@ -13,6 +13,7 @@ export interface LandingPageQueryParams {
 }
 
 const Page = (props: Awaited<ReturnType<typeof getServerSideProps>>['props']) => {
+    console.log(props.stories)
     return (
         <LandingpageProvider
             zoomLevel2={props.zoomLevel2 ?? null}
