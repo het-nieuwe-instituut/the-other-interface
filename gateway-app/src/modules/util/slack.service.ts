@@ -25,7 +25,7 @@ export class SlackService {
 
     public async postMessageToChannel(channel: string, text: string) {
         if (this.ignoreRequest) {
-            console.log('ignoring slack service request')
+            console.log('ignoring slack service request', text)
             return
         }
 

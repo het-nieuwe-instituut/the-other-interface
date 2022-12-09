@@ -1,58 +1,58 @@
-import slugify from 'slugify'
+import slugify from "slugify";
+import utils from "@strapi/utils";
+
+const { ValidationError } = utils.errors;
+const storyApi = "api::story.story";
 
 export default {
-    async beforeCreate(event) {
-        if (event.params.data.title) {
-            event.params.data.slug = await getSlug(event)
-        }
-    },
-
-    async beforeUpdate(event) {
-      if (event.params.data.title) {
-            event.params.data.slug = await getSlug(event)
-        }
-    },
-
-    async afterUpdate(event) {
-        if (event.params.data.triplyRecords !== undefined && event.result.localizations?.length) {
-            const data = { triplyRecords: event.params.data.triplyRecords }
-        
-            event.result.localizations.forEach(s => strapi.entityService.update('api::story.story', s.id, { data }))
-      	}
+  beforeCreate(event) {
+    if (!event.params.data.slug) {
+      throw new ValidationError("slug must be provided");
     }
+
+    if (event.params.data.slug) {
+      event.params.data.slug = getSlug(event.params.data.slug);
+    }
+  },
+
+  async beforeUpdate(event) {
+    const story = await strapi.entityService.findOne(
+      storyApi,
+      event.params.where.id
+    );
+
+    if (event.params.data.slug && event.params.data.slug !== story.slug) {
+      event.params.data.slug = getSlug(event.params.data.slug);
+    }
+  },
+
+  afterCreate(event) {
+    applyToAllLocales(event);
+  },
+
+  afterUpdate(event) {
+    applyToAllLocales(event);
+  },
+};
+
+function getSlug(text) {
+  return slugify(text, { lower: true, strict: true });
 }
 
-async function getSlug(event) {
-    const id = event.params.where?.id
-    if (!id) {
-        return getTitleSlug(event.params.data.title)
+function applyToAllLocales(event) {
+  if (event.result.localizations?.length) {
+    const data: Object = {};
+
+    if (event.params.data.triplyRecords !== undefined) {
+      data["triplyRecords"] = event.params.data.triplyRecords;
     }
 
-	  const story = await strapi.query('api::story.story').findOne({ where: { id } })
-    if (story.locale = 'en') {
-        return getTitleSlug(story.title)
+    if (event.params.data.slug) {
+      data["slug"] = event.params.data.slug;
     }
 
-    const englishStory = await strapi.query('api::story.story').findOne({
-        where: {
-            id: {
-                $in: `(
-                    SELECT en.id FROM stories en
-                    INNER JOIN stories_localizations_links l ON l.story_id = en.id
-                    WHERE link.inv_story_id = ${id}
-                    AND en.locale = 'en'
-                )`
-            }
-        }
-    })
-
-    if (!englishStory) {
-        return getTitleSlug(story.title)
-    }
-
-    return getTitleSlug(englishStory.title)
-}
-
-function getTitleSlug(title) {
-    return slugify(title, { lower: true, strict: true })
+    event.result.localizations.forEach((s) =>
+      strapi.entityService.update(storyApi, s.id, { data })
+    );
+  }
 }

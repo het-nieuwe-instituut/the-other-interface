@@ -7,8 +7,16 @@ import { factories } from "@strapi/strapi";
 import { Service } from "@strapi/strapi/lib/core-api/service";
 
 export type TriplyRecordService = Service & {
-  getLabel: (params: { recordId: string; type: string }) => Promise<string>;
+  getLabel: (params: GetLabelParams) => Promise<string>;
 };
+
+export interface GetLabelParams {
+  recordId: string;
+  type: string;
+  onError?: (
+    params: Pick<GetLabelParams, "recordId" | "type"> & { errorText: string }
+  ) => void;
+}
 
 export default factories.createCoreService(
   "api::triply-record.triply-record",
@@ -17,7 +25,9 @@ export default factories.createCoreService(
   })
 );
 
-async function getLabel({ recordId, type }): Promise<string> {
+async function getLabel(args: GetLabelParams): Promise<string> {
+  const { onError, recordId, type } = args;
+
   try {
     const res = await axios.get(
       `${process.env.GATEWAY_BASE_URL}/zoomLevel5/detail`,
@@ -27,32 +37,43 @@ async function getLabel({ recordId, type }): Promise<string> {
       }
     );
 
-    const label = getLabelFromTriplyData(res.data, type) || "-";
-
-    return `${label} (${recordId}/${type})`;
+    return `${getLabelFromTriplyData(res.data, type)} (${recordId}/${type})`;
   } catch (err) {
-    console.log(
-      `[Lifecycles - TriplyRecord] failed to get detail for ${recordId} ${type}.`,
-      JSON.stringify(err)
-    );
+    const errorText = JSON.stringify(err);
+
+    if (!onError) {
+      console.log(
+        `[Lifecycles - TriplyRecord] failed to get detail for ${recordId} ${type}.`,
+        errorText
+      );
+    } else {
+      onError({ errorText, recordId, type });
+    }
 
     return `- (${recordId}/${type})`;
   }
 }
 
-function getLabelFromTriplyData(triplyData, type) {
+function getLabelFromTriplyData(triplyData, type): string {
+  let label;
   switch (type) {
     case "Archive":
-      return triplyData.objectNumber;
+      label = triplyData.objectNumber;
     case "Object":
-      return triplyData.objectNumber;
+      label = triplyData.objectNumber;
     case "People":
-      return triplyData.name;
+      label = triplyData.name;
     case "Publication":
-      return triplyData.title;
+      label = triplyData.title;
     case "Media":
     // not yet implemented
-    default:
-      return "";
   }
+
+  label = label?.trim() || "-";
+
+  if (label.length > 200) {
+    return label.slice(0, 200) + "...";
+  }
+
+  return label;
 }
