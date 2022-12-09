@@ -159,7 +159,11 @@ export class ArchivesService {
     ]
 
     private readonly ZoomLevel4Endpoint = 'zoom-4-archives-V2/run'
-    private readonly archivesDescriptionLevelEndpoint = '/Zoom-5-archives-type/run?'
+
+    // TODO: change to convention when Triply adds this to normal space
+    private readonly archivesDescriptionLevelEndpoint =
+        'https://api.collectiedata.hetnieuweinstituut.nl/queries/Joran/zoom5-archives-type-only/run?'
+
     private readonly ZoomLevel4CountEndpoint = 'zoom4-archives-count/run?'
 
     private readonly ZoomLevel5Endpoint = {
@@ -187,11 +191,10 @@ export class ArchivesService {
             { record: uri }
         )
 
-        if (res.data[0].descriptionLevel === 'zoom-5-archives-fonds') {
+        if (res.data[0].descriptionLevel === 'archief') {
             return ArchivesZoomLevel5Types.fonds
         }
 
-        // res.data[0].descriptionLevel === 'zoom-5-archives'
         return ArchivesZoomLevel5Types.other
     }
 
