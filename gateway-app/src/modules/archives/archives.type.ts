@@ -97,7 +97,7 @@ export class ArchivesFondsZoomLevel5DetailType extends BaseArchiveZoomLevel5Type
     public right?: string
 
     @Field(() => String, { nullable: true })
-    public rightLabel?: string
+    public rightsLabel?: string
 
     @Field(() => String, { nullable: true })
     public permanentLink?: string
