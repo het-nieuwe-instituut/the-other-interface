@@ -58,7 +58,6 @@ const RecordClouds = (props: RecordCloudsProps) => {
                                         backgroundAnimation={
                                             zoomed ? `${opacityIn} 1500ms linear` : `${opacityOut} 0ms linear`
                                         }
-                                        // disableHover={true}
                                     >
                                         <Box width={'75%'} zIndex={1} data-child>
                                             <Text textStyle={'cloudText'} textAlign={'center'} flexWrap={'wrap'}>
