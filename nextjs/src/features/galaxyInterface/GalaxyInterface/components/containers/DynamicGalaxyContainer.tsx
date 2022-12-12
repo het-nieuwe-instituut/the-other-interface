@@ -23,7 +23,6 @@ export const DynamicGalaxyContainer: React.FC<{ dimensions: Dimensions }> = ({ d
         () => {
             const storiesCount = zoomLevel1?.zoomLevel1.find(item => item.id === EntityNames.Stories)?.count ?? 0
             const endData = stories ? stories : Array(storiesCount).fill(0)
-            console.log(mappedStoriesToCloudStoriesItems(endData), 'end data')
             return mappedStoriesToCloudStoriesItems(endData)
         },
         [zoomLevel1, stories]

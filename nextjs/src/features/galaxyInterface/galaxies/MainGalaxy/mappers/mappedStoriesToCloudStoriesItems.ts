@@ -1,10 +1,8 @@
 import { times, uniqueId } from 'lodash'
 import { StoriesItem } from '../types'
 
-export function mappedStoriesToCloudStoriesItems(
-    // TODO refactor to generic type :T 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    storiesData: any[],
+export function mappedStoriesToCloudStoriesItems<T extends {attributes : {title: string, shortDescription: string, slug: string}}>(
+    storiesData: T[],
 ): StoriesItem[] {
     const parents = times(storiesData.length / 10, i => `test${i}`)
     return storiesData
