@@ -4,7 +4,7 @@ import { getGalaxyTypeByTranslationsKey } from '@/features/galaxy/utils/translat
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import PaginationLeft from '@/icons/arrows/pagination-left.svg'
 import PaginationRight from '@/icons/arrows/pagination-right.svg'
-import { Box, Flex, Grid, GridItem, Text } from '@chakra-ui/react'
+import { Box, Flex, Grid, GridItem, Image, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { memo, useId } from 'react'
 import { LandingPageFilterCollectionQueryParams } from 'src/pages/landingpage/[slug]/[filter]/[collection]'
@@ -29,6 +29,10 @@ export const PaginatedCollection: React.FunctionComponent<PaginatedCollectionPro
     const router = useRouter()
     const queryParams = router.query as unknown as LandingPageFilterCollectionQueryParams
     const { t: tCommon } = useTypeSafeTranslation('common')
+    
+    const hideImage = (image: HTMLImageElement) => {
+        image.style.display = 'none'
+    }
 
     const id = useId().replaceAll(':', '')
     const {
@@ -139,11 +143,10 @@ export const PaginatedCollection: React.FunctionComponent<PaginatedCollectionPro
                                                     height={'90px'}
                                                     width={'140px'}
                                                 >
-                                                    {/* TODO: uncomment when image urls are fixed */}
-                                                    {/* {item.firstImage && (
-                                                        <Img src={item.firstImage} width={'48px'} height={'35px'} />
-                                                    )} */}
-
+                                                    
+                                                    {item.firstImage && (
+                                                        <Image src={item.firstImage} alt={''} width={'48px'} height={'35px'} ignoreFallback onError={(e) => hideImage(e?.target as HTMLImageElement)} />
+                                                    )}
                                                     <Text
                                                         // TODO: uncomment when image urls are fixed
                                                         // pt={item.firstImage ? 1 : 5}

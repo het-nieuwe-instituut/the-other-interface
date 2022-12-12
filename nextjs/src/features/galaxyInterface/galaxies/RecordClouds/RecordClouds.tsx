@@ -1,4 +1,4 @@
-import { SupportedQuerys, ZoomLevel5DetailResponses } from '@/features/pages/tasks/getZoom5RecordTask'
+import { ZoomLevel5DetailResponses, SupportedQuerys } from '@/features/pages/tasks/zoom5Config'
 import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Box, keyframes, Text } from '@chakra-ui/react'
 import React, { memo } from 'react'
@@ -6,8 +6,8 @@ import { EntityNames, StoryBySlugQuery } from 'src/generated/graphql'
 import { Cloud } from '../../components/Cloud'
 import { Dimensions, ZoomStates } from '../../types/galaxy'
 import { RecordCloudHighlight } from './components/RecordHighlight'
-import { ParentRelation } from './hooks/usePositionClouds'
 import { usePresenter } from './usePresenter'
+import { ParentRelation } from './utils/calculus'
 
 export interface RecordCloudProps {
     dimensions: Dimensions

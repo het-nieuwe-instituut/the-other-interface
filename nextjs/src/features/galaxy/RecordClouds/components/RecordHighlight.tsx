@@ -96,9 +96,14 @@ const PersonImage: React.FC<{
         alt?: string
     }
 }> = ({ image }) => {
+
+    const hideImage = (image: HTMLImageElement) => {
+        image.style.display = 'none'
+    }
+
     return (
         <Box borderRadius={'100%'} mt={7} height={200} width={200} overflow={'hidden'} background={'black'}>
-            <Image height={200} objectFit={'cover'} src={image?.url} alt={image?.alt ?? ''} />
+            <Image height={200} objectFit={'cover'} src={image?.url} alt={image?.alt ?? ''} onError={(e) => hideImage(e?.target as HTMLImageElement)} />
         </Box>
     )
 }
