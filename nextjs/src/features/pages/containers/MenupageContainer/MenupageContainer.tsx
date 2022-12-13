@@ -6,8 +6,6 @@ interface Props {
 }
 
 export const MenupageContainer = (props: Props) => {
-
-
     // if (loading) {
     //     return <Loader />
     // }
