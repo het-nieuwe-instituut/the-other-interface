@@ -2,13 +2,14 @@ import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { KeysToVerify } from './triply.service'
 
 export interface ZoomLevel3ReturnData {
-    total: string | null
+    numberOfRows: string
     count: string | null
     label: string | null
     iri: string
 }
+
 export const zoomLevel3ReturnDataKeys: KeysToVerify<ZoomLevel3ReturnData> = {
-    total: true,
+    numberOfRows: true,
     count: true,
     label: true,
     iri: true,
@@ -154,7 +155,7 @@ export class TriplyUtils {
             uri: i.iri,
             name: i.label || null,
             count: i.count ? parseInt(i.count, 10) : null,
-            total: i.total ? parseInt(i.total, 10) : null,
+            total: i.numberOfRows ? parseInt(i.numberOfRows, 10) : null,
         }))
     }
 
