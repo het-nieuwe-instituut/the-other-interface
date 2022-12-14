@@ -338,9 +338,7 @@ export class PublicationsService {
         [PublicationsZoomLevel5Types.serial]: 'zoom-5-books-serial/run',
     }
 
-    // TODO: change to convention when Triply adds this to normal space
-    private readonly publicationDescriptionLevelEndpoint =
-        'https://api.collectiedata.hetnieuweinstituut.nl/queries/Joran/zoom5-books-type-only/run?'
+    private readonly publicationDescriptionLevelEndpoint = 'Zoom-5-books-type/run'
 
     public constructor(
         private readonly triplyService: TriplyService,
@@ -349,12 +347,10 @@ export class PublicationsService {
 
     public async determinePublicationType(id: string) {
         interface TypeOfPublicationData {
-            record: string
-            typeOfPublication: string
+            type: string
         }
         const typeOfPublicationDataKeys: KeysToVerify<TypeOfPublicationData> = {
-            record: true,
-            typeOfPublication: true,
+            type: true,
         }
 
         const uri = TriplyUtils.getUriForTypeAndId(EntityNames.Publications, id)
@@ -369,20 +365,16 @@ export class PublicationsService {
             return PublicationsZoomLevel5Types.book
         }
 
-        switch (res.data[0].typeOfPublication) {
-            case 'tijdschrift': {
+        switch (res.data[0].type) {
+            case 'zoom_5-books-serial':
                 return PublicationsZoomLevel5Types.serial
-            }
-            case 'tijdschriftartikel': {
+            case 'zoom_5-books-article':
                 return PublicationsZoomLevel5Types.article
-            }
-            case 'audio-visueel materiaal': {
+            case 'zoom_5-books-audiovisual':
                 return PublicationsZoomLevel5Types.audiovisual
-            }
-            case 'boek':
-            default: {
+            case 'zoom_5-books-book':
+            default:
                 return PublicationsZoomLevel5Types.book
-            }
         }
     }
 

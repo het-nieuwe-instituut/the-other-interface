@@ -43,18 +43,25 @@ async function getLabel({ recordId, type }) {
 }
 
 function getLabelFromTriplyData(triplyData, type) {
+  let label;
   switch (type) {
     case "Archive":
-      return triplyData.objectNumber;
+      label = triplyData.objectNumber;
     case "Object":
-      return triplyData.objectNumber;
+      label = triplyData.objectNumber;
     case "People":
-      return triplyData.name;
+      label = triplyData.name;
     case "Publication":
-      return triplyData.title;
+      label = triplyData.title;
     case "Media":
     // not yet implemented
-    default:
-      return "";
   }
+
+  label = label?.trim() || "-";
+
+  if (label.length > 200) {
+    return label.slice(0, 200) + "...";
+  }
+
+  return label;
 }

@@ -7,7 +7,7 @@ export function zoom4DataToCollectionGalaxyData(zoom4?: Zoom4Query | null): Coll
         zoom4?.zoomLevel4?.nodes?.map(node => ({
             record: node.record,
             title: node.title,
-            firstImage: node.firstImage,
+            firstImage: node?.pidWorkURI,
             imageLabel: node.imageLabel,
             marginLeft: randomShift(),
             marginBottom: randomShift(),

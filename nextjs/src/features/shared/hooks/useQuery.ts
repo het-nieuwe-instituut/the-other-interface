@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
+import { useState } from "react"
 
-function useQuery<T, Q extends () => ReturnType<Q>>(keys: T, query: Q) {
+function useQuery<Q extends () => ReturnType<Q>>(query: Q) {
     const [isLoading, setIsloading] = useState(false)
     const [isError, setIsError] = useState(false)
     const [data, setData] = useState<Awaited<ReturnType<Q>> | undefined>(undefined)
