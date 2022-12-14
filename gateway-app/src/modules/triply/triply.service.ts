@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { lastValueFrom } from 'rxjs'
 import { PaginationArgs } from '../util/paginationArgs.type'
-import { SlackService } from '../util/slack.service'
+import { RollbarService } from '../util/rollbar.service'
 
 /**
  * Due to typescript's limitations, we decided to use this approach to verify expected
@@ -42,7 +42,7 @@ export class TriplyService {
     public constructor(
         configService: ConfigService,
         private readonly httpService: HttpService,
-        private readonly slackService: SlackService
+        private readonly rollbarService: RollbarService
     ) {
         this.endpointBaseURL = configService.getOrThrow('TRIPLI_API_BASEURL')
         this.apiKey = configService.getOrThrow('TRIPLY_API_KEY')
@@ -116,17 +116,14 @@ export class TriplyService {
                 if (!receivedKeys.includes(k)) {
                     const message = `"${k}" is not returned in ${JSON.stringify(receivedKeys)}`
 
-                    // response is irrelevant, no need to await
-                    this.slackService.postMessageToChannel(this.slackService.channels.systemNotification, message)
+                    this.rollbarService.log(message)
                 }
             })
         } catch (err) {
             const message = `Unable to test keys ${JSON.stringify(keysToVerify)} in response ${JSON.stringify(
                 responseData
             )}`
-
-            // response is irrelevant, no need to await
-            this.slackService.postMessageToChannel(this.slackService.channels.systemNotification, message)
+            this.rollbarService.log(message)
         }
     }
 }
