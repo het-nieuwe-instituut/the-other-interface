@@ -13,15 +13,12 @@ export async function getZoom5StoryTask(slug: string, locale: string) {
 
         if (!storyId) {
             return null
-            throw new Error('cant find id')
         }
-
-        const relations = await ApiClient?.StoriesRelations({ id: storyId })
-
+        
         return {
             story: storyBySlug?.stories.data?.[0],
-            relations: relations?.relations,
         }
+        
     } catch (e) {
         if (e) {
             console.error('story query error')

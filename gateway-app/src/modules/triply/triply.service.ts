@@ -109,11 +109,12 @@ export class TriplyService {
         }
 
         try {
-            Object.keys(keysToVerify).forEach(k => {
-                if (!(k in responseData[0])) {
-                    const message = `${String(k)} belonging to ${JSON.stringify(
-                        keysToVerify
-                    )} is not returned in ${JSON.stringify(responseData)}`
+            const expectedKeys = Object.keys(keysToVerify)
+            const receivedKeys = Object.keys(responseData[0])
+
+            expectedKeys.forEach(k => {
+                if (!receivedKeys.includes(k)) {
+                    const message = `"${k}" is not returned in ${JSON.stringify(receivedKeys)}`
 
                     this.rollbarService.log(message)
                 }

@@ -19,13 +19,12 @@ import { RecordProvider } from '../RecordContainer/RecordContext'
 
 interface Props {
     record: GetZoom5StoryQuery['story']
-    relations: GetZoom5StoryQuery['relations']
     story: NonNullable<NonNullable<NonNullable<StoryBySlugQuery>['stories']>['data']>[0] | undefined
 }
 
 export const StoryContainer: React.FC<Props> = props => {
     return (
-        <RecordProvider zoomLevel5={{zoom5detail: props?.record, zoom5relations: props?.relations} ?? null} >
+        <RecordProvider zoomLevel5={{zoom5detail: props?.record} ?? null} >
              <Story story={props.story} />
         </RecordProvider>
     )

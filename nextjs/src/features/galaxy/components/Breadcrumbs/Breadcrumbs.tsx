@@ -5,6 +5,7 @@ import { ZoomLevel } from '../../types/galaxy'
 import ArrowRightIcon from '@/icons/arrows/arrow-right.svg'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { navigationT } from 'locales/locales'
+import { ZoomStates } from '@/features/galaxyInterface/types/galaxy'
 
 const getLevel2 = (t: navigationT, type: string) => {
     const typeToName: Record<string, string> = {
@@ -19,6 +20,7 @@ const getLevel2 = (t: navigationT, type: string) => {
         name: `${typeToName[type]}`,
         link: {
             pathname: `/landingpage/${type}`,
+            query: 'page=1'
         },
     }
 }
@@ -28,6 +30,7 @@ const getLevel3 = (t: navigationT, type: string, filter: string) => {
         name: t('selectedFilter'),
         link: {
             pathname: `/landingpage/${type}/${filter}`,
+            query: 'page=1'
         },
     }
 }
@@ -45,6 +48,7 @@ const getLevel4 = (t: navigationT, type: string, filter: string, filterType: str
         name: `${typeToName[type]}`,
         link: {
             pathname: `/landingpage/${type}/${filter}/${filterType}`,
+            query: 'page=1'
         },
     }
 }
@@ -89,7 +93,7 @@ const getBreadcrumbsFromUrl = (asPath: string, query: { zoomLevel: ZoomLevel }, 
 
     const level1 = {
         name: t('zoom1'),
-        link: { pathname: '/', query: { zoomLevel: ZoomLevel.Zoom1 } },
+        link: { pathname: '/', query: { preservedZoom:  ZoomStates.Zoom1 } },
     }
 
     if (pathArray.includes('landingpage')) {

@@ -25,8 +25,6 @@ export function useD3Pagination({ pageSize, total, page, states, params }: Props
             return
         }
 
-        console.log(newPage)
-
         dispatch(
             galaxyInterfaceActions.setActiveZoom({
                 activeZoom: states.zoomBackState,

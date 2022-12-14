@@ -1,8 +1,6 @@
 import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
-// import { Loader } from '@/features/shared/components/Loading/Loading'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
-import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import useScroll from '@/features/shared/hooks/useScroll'
 import { Box, useTheme } from '@chakra-ui/react'
 import { LandingpageBySlugQuery, LandingpageComponentsDynamicZone } from 'src/generated/graphql'
@@ -19,20 +17,6 @@ interface Props {
 
 export const LandingCollectionContainer = (props: Props) => {
     const { landingpage: data } = props
-    const { t } = useTypeSafeTranslation('common')
-
-    // if (loading) {
-    //     return <Loader />
-    // }
-
-    // if (error) {
-    //     return <p>{error.message}</p>
-    // }
-
-    if (!data?.landingpages?.data.length) {
-        return <p>{t('somethingWentWrong')}</p>
-    }
-
     return <LandingCollection data={data} />
 }
 

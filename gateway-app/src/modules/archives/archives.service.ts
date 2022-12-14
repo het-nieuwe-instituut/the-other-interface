@@ -97,7 +97,7 @@ export interface ArchivesOtherDetailZoomLevel5Data {
     partReference?: string
     partTitle?: string
     right?: string
-    rightLabel?: string
+    rightsLabel?: string
     permanentLink?: string
     pidWorkURI?: string
 }
@@ -124,7 +124,7 @@ const archivesOtherDetailZoomLevel5DataKeys: KeysToVerify<ArchivesOtherDetailZoo
     partReference: true,
     partTitle: true,
     right: true,
-    rightLabel: true,
+    rightsLabel: true,
     permanentLink: true,
     pidWorkURI: true,
 }

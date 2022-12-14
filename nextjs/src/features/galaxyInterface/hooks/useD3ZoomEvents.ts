@@ -404,7 +404,6 @@ export function useD3ZoomEvents(options: Options) {
                     },
                     initial: { scale: 0, opacity: 0 },
                 })
-                console.log('to zoom 4', params)
 
                 dispatch(
                     galaxyInterfaceActions.setActiveZoom({

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import * as d3 from 'd3'
-import { MouseEvent, MutableRefObject, useCallback, useEffect, useRef, useState } from 'react'
+import { MouseEvent, MutableRefObject, useCallback, useLayoutEffect, useRef, useState } from 'react'
 import { Dimensions } from '../../types/galaxy'
 import { ParentRelation } from './usePositionClouds'
 
@@ -61,7 +61,7 @@ export function useD3HeroAnimateElement<DType>(
         [onComplete, onStart]
     )
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const d3Svg = d3.select(svgRef.current)
         const nodeForeign = d3Svg.selectAll(selector)
         const flattenedRandomRelations =
