@@ -18,12 +18,9 @@ function useNavigate() {
         (path: string, params?: { [key: string]: string | undefined }) => {
             const searchParams = new URLSearchParams(params as Record<string, string>)
             const pathWithParams = `${path.replaceAll(' ', '')}${!isEmpty(params) ? `?${searchParams}` : ''}`
-
             const asPath = decodeURIComponent(router.asPath).replaceAll(' ', '')
 
             if (asPath !== pathWithParams) {
-                console.log(pathWithParams, asPath)
-
                 router.push({ pathname: path, query: params })
             }
         },
@@ -61,29 +58,40 @@ export function useRouteTransitions() {
             if (!activeZoom) {
                 return
             }
-            if (includesZoomStatesMainGalaxy.includes(activeZoom)) {
-                if ([ZoomStates.Zoom1, ZoomStates.Zoom1ToZoom2, ZoomStates.Zoom1ToZoom1Stories].includes(activeZoom)) {
-                    replace({
-                        query: { ...router.query, preservedZoom: ZoomStates.Zoom1 },
-                    })
 
-                    return
-                }
-                if (activeZoom === ZoomStates.Zoom1Stories) {
-                    navigate('/landingpage/stories')
-
-                    return
-                }
-
-                navigate(`/`, params)
+            if(router.query.preservedZoom === activeZoom) {
+                return
             }
+
+            // if (includesZoomStatesMainGalaxy.includes(activeZoom)) {
+            //     if ([ZoomStates.Zoom1, ZoomStates.Zoom1ToZoom2, ZoomStates.Zoom1ToZoom1Stories].includes(activeZoom)) {
+            //         replace({
+            //             query: { ...router.query, preservedZoom: ZoomStates.Zoom1 },
+            //         })
+
+            //         return
+            //     }
+            //     if (activeZoom === ZoomStates.Zoom1Stories) {
+            //         navigate('/landingpage/stories', {
+            //             ...router.query, 
+            //             preservedZoom: ZoomStates.Zoom1Stories
+            //         })
+
+            //         return
+            //     }
+
+            //     navigate(`/`, params)
+            // }
             if (includesZoomStatesZoom2Galaxy.includes(activeZoom)) {
                 if (!params) {
                     console.error('params are needed for these states')
                     return
                 }
 
-                navigate(`/landingpage/${params.slug}`)
+                navigate(`/landingpage/${params.slug}`, {
+                    ...router.query,
+                    preservedZoom: ZoomStates.Zoom2
+                })
 
                 return
             }
@@ -91,14 +99,20 @@ export function useRouteTransitions() {
                 if (ZoomStates.Zoom3ToInitial === activeZoom) {
                     return
                 }
+
                 if (!params) {
                     console.error('params are needed for these states')
                     return
                 }
 
                 navigate(
-                    `/landingpage/${params.slug}/${params.filter}`,
-                    params?.page ? { page: params.page } : { page: '1' }
+                    `/landingpage/${params.slug}`,
+                     { 
+                        ...router.query,
+                        preservedZoom: ZoomStates.Zoom3,
+                        page: params.page ?? router.query.page as string ?? '1',
+                        filter: router.query.filter as string ?? params.filter 
+                    }
                 )
                 return
             }
@@ -112,8 +126,14 @@ export function useRouteTransitions() {
                 }
 
                 navigate(
-                    `/landingpage/${params.slug}/${params.filter}/${params.collection}`,
-                    params?.page ? { page: params.page } : { page: '1' }
+                    `/landingpage/${params.slug}`,
+                    { 
+                        ...router.query, 
+                        preservedZoom: ZoomStates.Zoom4, 
+                        page: params.page ?? router.query.page as string ?? '1', 
+                        filter: router.query.filter as string ?? params.filter,
+                        collection: router.query.collection as string ?? params.collection
+                    }
                 )
                 return
             }
@@ -123,7 +143,7 @@ export function useRouteTransitions() {
                     return
                 }
 
-                navigate(`/landingpage/${params.slug}/${params.filter}/${params.collection}/${params.record}`)
+                navigate(`/landingpage/${params.slug}/${params.record}`)
                 return
             }
         }

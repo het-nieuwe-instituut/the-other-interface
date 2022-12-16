@@ -69,6 +69,9 @@ export const includesZoomStatesMainGalaxy = [
     ZoomStates.Zoom1StoriesToZoom5,
     ZoomStates.ZoomOutToZoom1,
 ]
+
+export const includesZoomedStatesMainGalaxy = [ZoomStates.Zoom1, ZoomStates.Zoom1ToZoom2, ZoomStates.Zoom1ToZoom1Stories]
+
 export const includesZoomStatesZoom2Galaxy = [
     ZoomStates.Zoom2,
     ZoomStates.Zoom2Initial,

@@ -1,6 +1,9 @@
 import { Dimensions } from '@/features/galaxy/types/galaxy'
+import { zoom3Query } from '@/features/pages/tasks/zoom3Query.mapper'
 import { State } from '@/features/shared/configs/store'
 import * as d3 from 'd3'
+import { redirect } from 'next/dist/server/api-utils'
+import { useRouter } from 'next/router'
 import { MutableRefObject, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getStoriesSystemDimensions } from '../galaxies/MainGalaxy/MainGalaxy'
@@ -13,8 +16,11 @@ interface Options {
 }
 export function useD3ZoomEvents(options: Options) {
     const { svgRef, dimensions } = options
+    const router = useRouter()
     const storiesSystemRef = useRef<SVGForeignObjectElement | null>(null)
-    const activeZoom = useSelector((state: State) => state.galaxyInterface.activeZoom)
+    // const activeZoom = router?.query?.preservedZoom ?? ZoomStates.Zoom0
+    // console.log(activeZoom)
+     const activeZoom = useSelector((state: State) => state.galaxyInterface.activeZoom)
     const activeZoomData = useSelector((state: State) => state.galaxyInterface.activeZoomData)
     const params = useSelector((state: State) => state.galaxyInterface.params)
     const dispatch = useDispatch()
@@ -36,12 +42,19 @@ export function useD3ZoomEvents(options: Options) {
                     to: { duration: 1500, scale: 1 },
                     initial: { scale: 0.2 },
                 })
-                dispatch(
-                    galaxyInterfaceActions.setActiveZoom({
-                        params: params,
-                        activeZoom: ZoomStates.Zoom1,
-                    })
-                )
+                router.replace({
+                    pathname: router.pathname,
+                    query: {
+                        ...router.query,
+                        preservedZoom: ZoomStates.Zoom1
+                    }
+                })
+                // dispatch(
+                //     galaxyInterfaceActions.setActiveZoom({
+                //         params: params,
+                //         activeZoom: ZoomStates.Zoom1,
+                //     })
+                // )
             }
             if (activeZoom === ZoomStates.Zoom1) {
                 await scaleZoom({ d3Ref: d3Svg, initial: { duration: 0, scale: 1 } })
@@ -96,12 +109,16 @@ export function useD3ZoomEvents(options: Options) {
                         },
                     }),
                 ])
-                dispatch(
-                    galaxyInterfaceActions.setActiveZoom({
-                        params: params,
-                        activeZoom: ZoomStates.Zoom1Stories,
-                    })
-                )
+                router.push({
+                    pathname: '/landingpage/stories',
+                    query: { preservedZoom: ZoomStates.Zoom1Stories}
+                })
+                // dispatch(
+                //     galaxyInterfaceActions.setActiveZoom({
+                //         params: params,
+                //         activeZoom: ZoomStates.Zoom1Stories,
+                //     })
+                // )
             }
             if (activeZoom === ZoomStates.Zoom1Stories) {
                 const stories = getStoriesSystemDimensions(dimensions)
@@ -595,3 +612,4 @@ function transitionUtilityFn(d3Ref: d3.Selection<any, unknown, null, undefined>,
         )
         .end()
 }
+

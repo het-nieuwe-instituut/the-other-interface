@@ -5,7 +5,7 @@ import React, { createRef, useContext } from 'react'
 import { ArchivesOtherZoomLevel5DetailType, StoryBySlugQuery } from 'src/generated/graphql'
 import { RecordCloudHighlight } from './components/RecordHighlight'
 
-import { RecordQueryParams } from 'src/pages/landingpage/[slug]/[filter]/[collection]/[record]'
+import { RecordQueryParams } from 'src/pages/landingpage/[slug]/[record]'
 import { useRouter } from 'next/router'
 import RecordContext from '@/features/pages/containers/RecordContainer/RecordContext'
 import dynamic from 'next/dynamic'

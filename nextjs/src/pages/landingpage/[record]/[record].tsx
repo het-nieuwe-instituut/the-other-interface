@@ -4,10 +4,12 @@ import { RecordContainer } from '@/features/pages/containers/RecordContainer/Rec
 import { getZoom5RecordTask } from '@/features/pages/tasks/getZoom5RecordTask'
 import { prepareReduxState } from '@/features/shared/configs/store'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
-import { LandingPageFilterCollectionQueryParams } from '../[collection]'
 
-export interface RecordQueryParams extends LandingPageFilterCollectionQueryParams {
+export interface RecordQueryParams {
     record: string
+    slug: string,
+    filter: string
+    collection: string
 }
 
 const Page = (pageProps: InferGetServerSidePropsType<typeof getServerSideProps>) => {

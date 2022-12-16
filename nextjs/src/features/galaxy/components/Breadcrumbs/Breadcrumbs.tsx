@@ -1,13 +1,13 @@
 import React from 'react'
 import { Box, Flex, Link, useTheme } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { ZoomLevel } from '../../types/galaxy'
 import ArrowRightIcon from '@/icons/arrows/arrow-right.svg'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { navigationT } from 'locales/locales'
 import { ZoomStates } from '@/features/galaxyInterface/types/galaxy'
+import { includesZoomedStatesMainGalaxy } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
 
-const getLevel2 = (t: navigationT, type: string) => {
+const getLandingPageBreadcrumb = (t: navigationT, type: string) => {
     const typeToName: Record<string, string> = {
         people: `${t('people')} filters`,
         publications: `${t('publication')} filters`,
@@ -25,35 +25,7 @@ const getLevel2 = (t: navigationT, type: string) => {
     }
 }
 
-const getLevel3 = (t: navigationT, type: string, filter: string) => {
-    return {
-        name: t('selectedFilter'),
-        link: {
-            pathname: `/landingpage/${type}/${filter}`,
-            query: 'page=1'
-        },
-    }
-}
-
-const getLevel4 = (t: navigationT, type: string, filter: string, filterType: string) => {
-    const typeToName: Record<string, string> = {
-        people: `${t('people')}`,
-        publications: `${t('publications')}`,
-        objects: `${t('objects')}`,
-        archives: `${t('archives')}`,
-        stories: `${t('stories')}`,
-    }
-
-    return {
-        name: `${typeToName[type]}`,
-        link: {
-            pathname: `/landingpage/${type}/${filter}/${filterType}`,
-            query: 'page=1'
-        },
-    }
-}
-
-const getLevel5Landings = (t: navigationT, type: string, filter: string, filterType: string, record: string) => {
+const getRecordBreadcrumb = (t: navigationT, type: string, record: string) => {
     const typeToName: Record<string, string> = {
         people: `${t('people')}`,
         publications: `${t('publication')}`,
@@ -65,20 +37,33 @@ const getLevel5Landings = (t: navigationT, type: string, filter: string, filterT
     return {
         name: `${typeToName[type]} record`,
         link: {
-            pathname: `/landingpage/${type}/${filter}/${filterType}/${record}`,
+            pathname: `/landingpage/${type}/${record}`,
         },
     }
 }
 
-const getBreadcrumbsFromUrl = (asPath: string, query: { zoomLevel: ZoomLevel }, t: navigationT) => {
+const getBreadcrumbsFromUrl = (asPath: string, query: { preservedZoom: ZoomStates }, t: navigationT) => {
     let currentZoomLevel = 0
-    let pathArray = asPath.split('/')
+    const path = asPath.split('?')
+    let pathArray = path[0].split('/')
     pathArray = pathArray.filter(item => item !== '')
-    const startLandingIndex = pathArray.findIndex(item => item === 'landingpage')
-    const startStoryIndex = pathArray.findIndex(item => item === 'story')
-    const { zoomLevel } = query
-    if (zoomLevel) {
-        currentZoomLevel = zoomLevel === ZoomLevel.Zoom1 ? 1 : 0
+    const startLandingIndex = pathArray.findIndex(item => item === 'landingpage' || item === 'story')
+    const { preservedZoom } = query
+
+    if (pathArray.length === 0) {
+        currentZoomLevel = 0
+    }
+
+    if (includesZoomedStatesMainGalaxy.includes(preservedZoom)) {
+       currentZoomLevel = 1
+    }
+
+    if (pathArray[startLandingIndex + 1] && !pathArray[startLandingIndex + 2]) {
+        currentZoomLevel = 2
+    }
+
+    if (pathArray[startLandingIndex + 1] && pathArray[startLandingIndex + 2]) {
+        currentZoomLevel = 3
     }
 
     const companyLevel = {
@@ -96,53 +81,13 @@ const getBreadcrumbsFromUrl = (asPath: string, query: { zoomLevel: ZoomLevel }, 
         link: { pathname: '/', query: { preservedZoom:  ZoomStates.Zoom1 } },
     }
 
-    if (pathArray.includes('landingpage')) {
-        currentZoomLevel = pathArray.length - startLandingIndex
-    }
-
-    if (startStoryIndex !== -1) {
-        currentZoomLevel = 5
-        return {
-            items: [
-                companyLevel,
-                level0,
-                level1,
-                {
-                    name: `${t('stories')}`,
-                    link: {
-                        pathname: `/landingpage/stories`,
-                    },
-                },
-                {
-                    name: `${t('story')} record`,
-                    link: {
-                        pathname: `/story/${pathArray[startStoryIndex + 1]}`,
-                    },
-                },
-            ],
-            currentZoomLevel,
-        }
-    }
 
     const rawItems = [
         companyLevel,
         level0,
         level1,
-        getLevel2(t, pathArray[startLandingIndex + 1]),
-        getLevel3(t, pathArray[startLandingIndex + 1], pathArray[startLandingIndex + 2]),
-        getLevel4(
-            t,
-            pathArray[startLandingIndex + 1],
-            pathArray[startLandingIndex + 2],
-            pathArray[startLandingIndex + 3]
-        ),
-        getLevel5Landings(
-            t,
-            pathArray[startLandingIndex + 1],
-            pathArray[startLandingIndex + 2],
-            pathArray[startLandingIndex + 3],
-            pathArray[startLandingIndex + 4]
-        ),
+        getLandingPageBreadcrumb(t, pathArray[startLandingIndex + 1]),
+        getRecordBreadcrumb(t, pathArray[startLandingIndex + 1], pathArray[startLandingIndex + 2]),
     ]
     // company level and current level are always present, that's why it's +2
     const items = rawItems.slice(0, currentZoomLevel + 2)
@@ -171,7 +116,7 @@ const Breadcrumbs = (props: Props) => {
 
     const { items, currentZoomLevel } = getBreadcrumbsFromUrl(
         router.asPath,
-        router?.query as { zoomLevel: ZoomLevel },
+        router?.query as { preservedZoom: ZoomStates },
         t
     )
 
