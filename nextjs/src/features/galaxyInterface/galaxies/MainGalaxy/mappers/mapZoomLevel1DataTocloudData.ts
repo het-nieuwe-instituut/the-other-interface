@@ -1,11 +1,13 @@
 import { galaxyTypesToPositions } from '@/features/galaxy/galaxyConstants'
+import { zoom1Stub } from '@/features/galaxyInterface/GalaxyInterface/components/containers/stubs'
 import { EntityNames, ZoomLevel1Query } from 'src/generated/graphql'
 import { CloudItem } from '../types'
 
 export function mapZoomLevel1DataTocloudData(zoomLevel1Data?: ZoomLevel1Query): CloudItem[] {
-    const items = zoomLevel1Data?.zoomLevel1.filter(item => item.name !== 'Archiefbestanddelen') ?? []
+    const items = zoomLevel1Data?.zoomLevel1.length ? zoomLevel1Data?.zoomLevel1 : zoom1Stub.zoomLevel1
+    const filteredItems = items.filter(item => item.name !== 'Archiefbestanddelen') ?? []
 
-    return items
+    return filteredItems
         .map(item => {
             const config = galaxyTypesToPositions[item.id]
             const newItem = {
