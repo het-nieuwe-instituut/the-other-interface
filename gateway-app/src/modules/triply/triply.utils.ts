@@ -1,3 +1,4 @@
+import { CustomError } from '../util/customError'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { KeysToVerify } from './triply.service'
 
@@ -20,7 +21,7 @@ export class TriplyUtils {
         const type = TriplyUtils.findExternalEntityNameFromUri(uri)
 
         if (!type) {
-            throw new Error(`external type for uri ${uri} not implemented`)
+            throw CustomError.externalCritical(`external type for uri ${uri} not implemented`)
         }
 
         return type
@@ -43,7 +44,7 @@ export class TriplyUtils {
     public static getEntityNameFromGraph(graph: string, possibleExternalUri?: string | null): EntityNames {
         const s = graph.split('/')
         if (!s.length) {
-            throw new Error('invalid graph url')
+            throw CustomError.external('invalid graph url')
         }
 
         const type = s.pop()
@@ -65,7 +66,7 @@ export class TriplyUtils {
 
                 return EntityNames.External
             default:
-                throw new Error(`type for graph ${type} not implemented`)
+                throw CustomError.externalCritical(`type for graph ${type} not implemented`)
         }
     }
 
@@ -77,7 +78,7 @@ export class TriplyUtils {
 
         const s = uri.split('/')
         if (!s.length || s.length < 2) {
-            throw new Error('invalid graph url')
+            throw CustomError.external('invalid graph url')
         }
 
         const type = s[s.length - 2]
@@ -95,19 +96,19 @@ export class TriplyUtils {
             case 'seeAlso':
                 return EntityNames.External
             default:
-                throw new Error(`type for uri ${uri} not implemented`)
+                throw CustomError.externalCritical(`type for uri ${uri} not implemented`)
         }
     }
 
     public static getIdFromUri(uri: string) {
         const s = uri.split('/')
         if (!s.length) {
-            throw new Error('invalid uri')
+            throw CustomError.external('invalid uri')
         }
 
         const id = s.pop()
         if (!id) {
-            throw new Error('invalid uri')
+            throw CustomError.external('invalid uri')
         }
 
         return id
@@ -128,10 +129,10 @@ export class TriplyUtils {
             case EntityNames.Media:
                 return `${baseURL}/media/${id}`
             case EntityNames.Stories:
-                throw new Error('not a triply type')
+                throw CustomError.externalCritical('not a triply type')
             case EntityNames.External:
             default:
-                throw new Error(`uri for type ${type} not implemented`)
+                throw CustomError.externalCritical(`uri for type ${type} not implemented`)
         }
     }
 

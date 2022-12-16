@@ -1,6 +1,7 @@
 import { Scalar, CustomScalar } from '@nestjs/graphql'
 import { Kind, ValueNode } from 'graphql'
 import { isString } from 'lodash'
+import { CustomError } from './customError'
 
 @Scalar('Date', () => Date)
 export class DateScalar implements CustomScalar<Date, unknown> {
@@ -14,7 +15,7 @@ export class DateScalar implements CustomScalar<Date, unknown> {
     // value sent to the client
     public serialize(val: unknown): Date {
         if (!isString(val)) {
-            throw new Error(`${val} is not a valid date input`)
+            throw CustomError.internal(`${val} is not a valid date input`)
         }
 
         return this.parseDateString(val)
@@ -29,13 +30,13 @@ export class DateScalar implements CustomScalar<Date, unknown> {
             return this.parseDateString(val.value)
         }
 
-        throw new Error(`${val} is not a valid date input`)
+        throw CustomError.internal(`${val} is not a valid date input`)
     }
 
     private parseDateString(val: string) {
         const date = Date.parse(val)
         if (isNaN(date)) {
-            throw new Error(`${val} is not a valid date input`)
+            throw CustomError.internal(`${val} is not a valid date input`)
         }
 
         return new Date(date)
