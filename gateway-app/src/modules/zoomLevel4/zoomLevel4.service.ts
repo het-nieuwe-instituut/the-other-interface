@@ -7,6 +7,7 @@ import { PeopleService } from '../people/people.service'
 import { PeopleZoomLevel4FiltersArgs } from '../people/people.type'
 import { PublicationsService } from '../publications/publications.service'
 import { PublicationsZoomLevel4FiltersArgs } from '../publications/publications.type'
+import { CustomError } from '../util/customError'
 import { PaginationArgs } from '../util/paginationArgs.type'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 
@@ -70,7 +71,7 @@ export class ZoomLevel4Service {
             }
             case EntityNames.Stories:
             default: {
-                throw new Error(`Zoomlevel 4 for ${entity} not implemented`)
+                throw CustomError.internalCritical(`Zoomlevel 4 for ${entity} not implemented`)
             }
         }
     }

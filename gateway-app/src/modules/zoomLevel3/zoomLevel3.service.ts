@@ -3,6 +3,7 @@ import { ArchivesService } from '../archives/archives.service'
 import { ObjectsService } from '../objects/objects.service'
 import { PeopleService } from '../people/people.service'
 import { PublicationsService } from '../publications/publications.service'
+import { CustomError } from '../util/customError'
 import { PaginationArgs } from '../util/paginationArgs.type'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { ZoomLevel3IdType } from './zoomLevel3.type'
@@ -36,7 +37,7 @@ export class ZoomLevel3Service {
             }
             case EntityNames.Stories:
             default: {
-                throw new Error(`[ZoomLevel3] ${entity} not implemented yet`)
+                throw CustomError.internalCritical(`[ZoomLevel3] ${entity} not implemented yet`)
             }
         }
     }

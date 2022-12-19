@@ -1,6 +1,7 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common'
 import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { TriplyUtils, ZoomLevel3ReturnData, zoomLevel3ReturnDataKeys } from '../triply/triply.utils'
+import { CustomError } from '../util/customError'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { ZoomLevel5Service } from '../zoomLevel5/zoomLevel5.service'
 import { PublicationsZoomLevel4FiltersArgs } from './publications.type'
@@ -396,7 +397,7 @@ export class PublicationsService {
         const mapping = this.ZoomLevel3Mapping.find(m => m.id === id)
 
         if (!mapping) {
-            throw new Error(`[Publications] Mapping ${id} not found`)
+            throw CustomError.internalCritical(`[Publications] Mapping ${id} not found`)
         }
 
         const result = await this.triplyService.queryTriplyData<ZoomLevel3ReturnData>(
@@ -463,7 +464,7 @@ export class PublicationsService {
             return PublicationsZoomLevel3Ids[input as PublicationsZoomLevel3Ids]
         }
 
-        throw new Error(`[Publications] Invalid filter input "${input}"`)
+        throw CustomError.internalCritical(`[Publications] Invalid filter input "${input}"`)
     }
 
     public resolveAuthor(publication: PublicationsZoomLevel5DataTypes) {

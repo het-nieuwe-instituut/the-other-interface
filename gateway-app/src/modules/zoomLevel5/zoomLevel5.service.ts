@@ -10,6 +10,7 @@ import { TriplyUtils } from '../triply/triply.utils'
 import { EntityNames, externalEntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { getRandom2ItemsFromArray } from '../util/helpers'
 import { ZoomLevel5RelatedObjectsArgs, ZoomLevel5RelationsType } from './zoomLevel5.type'
+import { CustomError } from '../util/customError'
 
 interface ZoomLevel5RelationData {
     originalEntity: string | null
@@ -128,7 +129,7 @@ export class ZoomLevel5Service {
             case EntityNames.External:
             // TODO
             default:
-                throw new Error('type not implemented')
+                throw CustomError.internalCritical('type not implemented')
         }
     }
 
@@ -185,7 +186,7 @@ export class ZoomLevel5Service {
             case EntityNames.Stories:
             case EntityNames.External:
             default:
-                throw new Error('type not implemented')
+                throw CustomError.internalCritical('type not implemented')
         }
     }
 

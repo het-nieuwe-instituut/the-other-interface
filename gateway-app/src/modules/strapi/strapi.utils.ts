@@ -1,4 +1,5 @@
 import { Enum_Triplyrecord_Type } from '../../generated/strapi-sdk'
+import { CustomError } from '../util/customError'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 
 export class StrapiUtils {
@@ -17,7 +18,7 @@ export class StrapiUtils {
             case EntityNames.Stories:
             case EntityNames.External:
             default:
-                throw new Error(`type for entity ${name} not implemented`)
+                throw CustomError.internalCritical(`type for entity ${name} not implemented`)
         }
     }
 
@@ -34,7 +35,7 @@ export class StrapiUtils {
             case Enum_Triplyrecord_Type.Media:
                 return EntityNames.Media
             default:
-                throw new Error(`type for entity ${name} not implemented`)
+                throw CustomError.internalCritical(`type for entity ${name} not implemented`)
         }
     }
 }
