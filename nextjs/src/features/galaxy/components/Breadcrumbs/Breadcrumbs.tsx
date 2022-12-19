@@ -8,19 +8,21 @@ import { ZoomStates } from '@/features/galaxyInterface/types/galaxy'
 import { includesZoomedStatesMainGalaxy } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
 
 const getLandingPageBreadcrumb = (t: navigationT, type: string) => {
+    const adjustedType = type === 'story' ? 'stories' : type
+    const preservedZoom = adjustedType == 'stories' ? ZoomStates.Zoom1Stories : ZoomStates.Zoom2
     const typeToName: Record<string, string> = {
-        people: `${t('people')} filters`,
-        publications: `${t('publication')} filters`,
-        objects: `${t('object')} filters`,
-        archives: `${t('archive')} filters`,
+        people: `${t('people')}`,
+        publications: `${t('publication')}`,
+        objects: `${t('object')}`,
+        archives: `${t('archive')}`,
         stories: `${t('stories')}`,
     }
 
     return {
-        name: `${typeToName[type]}`,
+        name: `${typeToName[adjustedType]}`,
         link: {
-            pathname: `/landingpage/${type}`,
-            query: 'page=1'
+            pathname: `/landingpage/${adjustedType}`,
+            query: `preservedZoom=${preservedZoom}&page=1`
         },
     }
 }
@@ -35,9 +37,18 @@ const getRecordBreadcrumb = (t: navigationT, type: string, record: string) => {
     }
 
     return {
-        name: `${typeToName[type]} record`,
+        name: `${typeToName[type]} ${t('record')}`,
         link: {
-            pathname: `/landingpage/${type}/${record}`,
+            pathname:`/landingpage/${type}/${record}`,
+        },
+    }
+}
+
+const getStoryRecordBreadcrumb = (t: navigationT, record: string) => {
+    return {
+        name: `${t('story')} ${t('record')}`,
+        link: {
+            pathname: `${record}`,
         },
     }
 }
@@ -47,8 +58,12 @@ const getBreadcrumbsFromUrl = (asPath: string, query: { preservedZoom: ZoomState
     const path = asPath.split('?')
     let pathArray = path[0].split('/')
     pathArray = pathArray.filter(item => item !== '')
-    const startLandingIndex = pathArray.findIndex(item => item === 'landingpage' || item === 'story')
+    const isStory = pathArray[0] === 'story'
+    const startIndex =  isStory ? -1 : pathArray.findIndex(item => item === 'landingpage') 
+    
+    
     const { preservedZoom } = query
+
 
     if (pathArray.length === 0) {
         currentZoomLevel = 0
@@ -58,11 +73,11 @@ const getBreadcrumbsFromUrl = (asPath: string, query: { preservedZoom: ZoomState
        currentZoomLevel = 1
     }
 
-    if (pathArray[startLandingIndex + 1] && !pathArray[startLandingIndex + 2]) {
+    if (pathArray[startIndex + 1] && !pathArray[startIndex + 2]) {
         currentZoomLevel = 2
     }
 
-    if (pathArray[startLandingIndex + 1] && pathArray[startLandingIndex + 2]) {
+    if (pathArray[startIndex + 1] && pathArray[startIndex + 2] || isStory) {
         currentZoomLevel = 3
     }
 
@@ -73,7 +88,7 @@ const getBreadcrumbsFromUrl = (asPath: string, query: { preservedZoom: ZoomState
 
     const level0 = {
         name: t('zoom0'),
-        link: { pathname: '/' },
+        link: { pathname: '/', query: `preservedZoom=${ZoomStates.Zoom0}` },
     }
 
     const level1 = {
@@ -86,8 +101,8 @@ const getBreadcrumbsFromUrl = (asPath: string, query: { preservedZoom: ZoomState
         companyLevel,
         level0,
         level1,
-        getLandingPageBreadcrumb(t, pathArray[startLandingIndex + 1]),
-        getRecordBreadcrumb(t, pathArray[startLandingIndex + 1], pathArray[startLandingIndex + 2]),
+        getLandingPageBreadcrumb(t, pathArray[startIndex + 1]),
+        isStory ? getStoryRecordBreadcrumb(t, pathArray[1]) : getRecordBreadcrumb(t, pathArray[startIndex + 1], pathArray[startIndex + 2]),
     ]
     // company level and current level are always present, that's why it's +2
     const items = rawItems.slice(0, currentZoomLevel + 2)

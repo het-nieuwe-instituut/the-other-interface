@@ -10,7 +10,6 @@ import { fitDataToDimensions } from './mappers/mappedFittingDimensionsData'
 import { CloudItem, StoriesItem } from './types'
 import { useDispatch } from 'react-redux'
 import { galaxyInterfaceActions } from '../../stores/galaxyInterface.store'
-import { useRouter } from 'next/router'
 
 interface Props extends MainGalaxyProps {
     dimensions: Dimensions
@@ -22,7 +21,6 @@ interface Props extends MainGalaxyProps {
 
 export function usePresenter(props: Props) {
     const { cloudData, dimensions, selector } = props
-    const router = useRouter()
     const dispatch = useDispatch()
     const cloudDataCopy = useD3DataCopy(cloudData)
     const galaxyBase = GALAXY_BASE
@@ -41,19 +39,12 @@ export function usePresenter(props: Props) {
         // archiefBestandDelen,
         cloudData: cloudDataWithSelector,
         events: {
-            handleZoomToStories: () => {
-                router.push({
-                    pathname: '/landingpage/stories',
-                    query: {
-                        preservedZoom: ZoomStates.Zoom1Stories
-                    }
-                })      
-            },
-                // dispatch(
-                //     galaxyInterfaceActions.setActiveZoom({
-                //         activeZoom: ZoomStates.Zoom1ToZoom1Stories,
-                //     })
-                // ),
+            handleZoomToStories: () =>
+                dispatch(
+                    galaxyInterfaceActions.setActiveZoom({
+                        activeZoom: ZoomStates.Zoom1ToZoom1Stories,
+                    })
+                ),
             handleZoomToZoom2: (item: typeof cloudDataWithSelector[0]) =>
                 dispatch(
                     galaxyInterfaceActions.setActiveZoom({
@@ -67,19 +58,12 @@ export function usePresenter(props: Props) {
                         params: { slug: item.id.toLowerCase() },
                     })
                 ),
-            handleZoom0ToZoom1: () => {
-                router.push({
-                    pathname: '/',
-                    query: {
-                        preservedZoom: ZoomStates.Zoom0ToZoom1
-                    }
-                })
-            }
-                // dispatch(
-                //     galaxyInterfaceActions.setActiveZoom({
-                //         activeZoom: ZoomStates.Zoom0ToZoom1,
-                //     })
-                // ),
+            handleZoom0ToZoom1: () =>
+                dispatch(
+                    galaxyInterfaceActions.setActiveZoom({
+                        activeZoom: ZoomStates.Zoom0ToZoom1,
+                    })
+                ),
         },
         conditions: {
             isZoom0: zoomEvents.zoomLevel ? [ZoomStates.Zoom0].includes(zoomEvents.zoomLevel) : false,

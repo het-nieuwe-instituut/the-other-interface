@@ -5,6 +5,7 @@ import { useCallback, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { UrlObject } from 'url'
 import {
+    animationInProgress,
     includesZoomStatesMainGalaxy,
     includesZoomStatesZoom2Galaxy,
     includesZoomStatesZoom3Galaxy,
@@ -35,12 +36,10 @@ function useReplace() {
     const replace = useCallback(
         (url: UrlObject) => {
             if (!isEqual(router.query, url.query)) {
-                console.log(router.query, url.query)
-
                 router.push(url)
             }
         },
-        [router, router.query]
+        [router]
     )
 
     return { replace }
@@ -59,29 +58,34 @@ export function useRouteTransitions() {
                 return
             }
 
-            if(router.query.preservedZoom === activeZoom) {
+            if (animationInProgress.includes(activeZoom)) {
                 return
             }
 
-            // if (includesZoomStatesMainGalaxy.includes(activeZoom)) {
-            //     if ([ZoomStates.Zoom1, ZoomStates.Zoom1ToZoom2, ZoomStates.Zoom1ToZoom1Stories].includes(activeZoom)) {
-            //         replace({
-            //             query: { ...router.query, preservedZoom: ZoomStates.Zoom1 },
-            //         })
+            if (router.query.preservedZoom === activeZoom) {
+                return
+            }
 
-            //         return
-            //     }
-            //     if (activeZoom === ZoomStates.Zoom1Stories) {
-            //         navigate('/landingpage/stories', {
-            //             ...router.query, 
-            //             preservedZoom: ZoomStates.Zoom1Stories
-            //         })
 
-            //         return
-            //     }
+            if (includesZoomStatesMainGalaxy.includes(activeZoom)) {
+                if ([ZoomStates.Zoom1, ZoomStates.Zoom1ToZoom2, ZoomStates.Zoom1ToZoom1Stories].includes(activeZoom)) {
+                    replace({
+                        query: { ...router.query, preservedZoom: ZoomStates.Zoom1 },
+                    })
 
-            //     navigate(`/`, params)
-            // }
+                    return
+                }
+                if (activeZoom === ZoomStates.Zoom1Stories) {
+                    navigate('/landingpage/stories', {
+                        ...router.query, 
+                        preservedZoom: ZoomStates.Zoom1Stories
+                    })
+
+                    return
+                }
+
+                navigate(`/`, params)
+            }
             if (includesZoomStatesZoom2Galaxy.includes(activeZoom)) {
                 if (!params) {
                     console.error('params are needed for these states')
