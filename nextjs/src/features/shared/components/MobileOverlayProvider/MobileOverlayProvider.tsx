@@ -10,7 +10,7 @@ interface Props {
 
 const MobileOverlayProvider = (props: Props) => {
     const breakpoint = useBreakpoint()
-    const isMobile = breakpoint === 'sm' || breakpoint == 'md'
+    const isMobile = breakpoint === 'sm' 
 
     return (
         <Box overflow={'hidden'}>
