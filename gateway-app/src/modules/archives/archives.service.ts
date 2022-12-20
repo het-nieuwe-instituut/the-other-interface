@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { TriplyUtils, ZoomLevel3ReturnData, zoomLevel3ReturnDataKeys } from '../triply/triply.utils'
+import { CustomError } from '../util/customError'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { ArchivesZoomLevel4FiltersArgs } from './archives.type'
 
@@ -97,7 +98,7 @@ export interface ArchivesOtherDetailZoomLevel5Data {
     partReference?: string
     partTitle?: string
     right?: string
-    rightLabel?: string
+    rightsLabel?: string
     permanentLink?: string
     pidWorkURI?: string
 }
@@ -124,7 +125,7 @@ const archivesOtherDetailZoomLevel5DataKeys: KeysToVerify<ArchivesOtherDetailZoo
     partReference: true,
     partTitle: true,
     right: true,
-    rightLabel: true,
+    rightsLabel: true,
     permanentLink: true,
     pidWorkURI: true,
 }
@@ -217,7 +218,7 @@ export class ArchivesService {
         const mapping = this.ZoomLevel3Mapping.find(m => m.id === id)
 
         if (!mapping) {
-            throw new Error(`[Archives] Mapping ${id} not found`)
+            throw CustomError.internalCritical(`[Archives] Mapping ${id} not found`)
         }
 
         const result = await this.triplyService.queryTriplyData<ZoomLevel3ReturnData>(
@@ -293,6 +294,6 @@ export class ArchivesService {
             return ArchivesZoomLevel3Ids[input as ArchivesZoomLevel3Ids]
         }
 
-        throw new Error(`[Archives] Invalid filter input "${input}"`)
+        throw CustomError.internalCritical(`[Archives] Invalid filter input "${input}"`)
     }
 }

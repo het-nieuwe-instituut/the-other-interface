@@ -1,4 +1,5 @@
 import { Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
+import { CustomError } from '../util/customError'
 import { PublicationsService } from './publications.service'
 import {
     PublicationsArticleZoomLevel5DetailType,
@@ -13,7 +14,7 @@ export class PublicationsAudioVisualResolver {
 
     @Query(() => PublicationsAudioVisualZoomLevel5DetailType)
     public publicationAudioVisual() {
-        throw new Error('not yet implemented')
+        throw CustomError.internal('not yet implemented')
     }
 
     @ResolveField()
@@ -33,7 +34,7 @@ export class PublicationsArticleResolver {
 
     @Query(() => PublicationsArticleZoomLevel5DetailType)
     public publicationArticle() {
-        throw new Error('not yet implemented')
+        throw CustomError.internal('not yet implemented')
     }
 
     @ResolveField()
@@ -53,7 +54,7 @@ export class PublicationsBookResolver {
 
     @Query(() => PublicationsBookZoomLevel5DetailType)
     public publicationBook() {
-        throw new Error('not yet implemented')
+        throw CustomError.internal('not yet implemented')
     }
 
     @ResolveField()
@@ -73,7 +74,7 @@ export class PublicationsSerialResolver {
 
     @Query(() => PublicationsSerialZoomLevel5DetailType)
     public publicationSerial() {
-        throw new Error('not yet implemented')
+        throw CustomError.internal('not yet implemented')
     }
 
     @ResolveField()

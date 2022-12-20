@@ -1,6 +1,7 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common'
 import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { TriplyUtils, ZoomLevel3ReturnData, zoomLevel3ReturnDataKeys } from '../triply/triply.utils'
+import { CustomError } from '../util/customError'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { ZoomLevel5Service } from '../zoomLevel5/zoomLevel5.service'
 import { PublicationsZoomLevel4FiltersArgs } from './publications.type'
@@ -337,9 +338,7 @@ export class PublicationsService {
         [PublicationsZoomLevel5Types.serial]: 'zoom-5-books-serial/run',
     }
 
-    // TODO: change to convention when Triply adds this to normal space
-    private readonly publicationDescriptionLevelEndpoint =
-        'https://api.collectiedata.hetnieuweinstituut.nl/queries/Joran/zoom5-books-type-only/run?'
+    private readonly publicationDescriptionLevelEndpoint = 'Zoom-5-books-type/run'
 
     public constructor(
         private readonly triplyService: TriplyService,
@@ -348,12 +347,10 @@ export class PublicationsService {
 
     public async determinePublicationType(id: string) {
         interface TypeOfPublicationData {
-            record: string
-            typeOfPublication: string
+            type: string
         }
         const typeOfPublicationDataKeys: KeysToVerify<TypeOfPublicationData> = {
-            record: true,
-            typeOfPublication: true,
+            type: true,
         }
 
         const uri = TriplyUtils.getUriForTypeAndId(EntityNames.Publications, id)
@@ -368,20 +365,16 @@ export class PublicationsService {
             return PublicationsZoomLevel5Types.book
         }
 
-        switch (res.data[0].typeOfPublication) {
-            case 'tijdschrift': {
+        switch (res.data[0].type) {
+            case 'zoom_5-books-serial':
                 return PublicationsZoomLevel5Types.serial
-            }
-            case 'tijdschriftartikel': {
+            case 'zoom_5-books-article':
                 return PublicationsZoomLevel5Types.article
-            }
-            case 'audio-visueel materiaal': {
+            case 'zoom_5-books-audiovisual':
                 return PublicationsZoomLevel5Types.audiovisual
-            }
-            case 'boek':
-            default: {
+            case 'zoom_5-books-book':
+            default:
                 return PublicationsZoomLevel5Types.book
-            }
         }
     }
 
@@ -404,7 +397,7 @@ export class PublicationsService {
         const mapping = this.ZoomLevel3Mapping.find(m => m.id === id)
 
         if (!mapping) {
-            throw new Error(`[Publications] Mapping ${id} not found`)
+            throw CustomError.internalCritical(`[Publications] Mapping ${id} not found`)
         }
 
         const result = await this.triplyService.queryTriplyData<ZoomLevel3ReturnData>(
@@ -471,7 +464,7 @@ export class PublicationsService {
             return PublicationsZoomLevel3Ids[input as PublicationsZoomLevel3Ids]
         }
 
-        throw new Error(`[Publications] Invalid filter input "${input}"`)
+        throw CustomError.internalCritical(`[Publications] Invalid filter input "${input}"`)
     }
 
     public resolveAuthor(publication: PublicationsZoomLevel5DataTypes) {
