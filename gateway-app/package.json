@@ -39,6 +39,7 @@
         "graphql": "^16.5.0",
         "lodash": "^4.17.21",
         "reflect-metadata": "^0.1.13",
+        "rollbar": "^2.26.0",
         "rxjs": "^7.5.5"
     },
     "devDependencies": {

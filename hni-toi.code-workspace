@@ -1,20 +1,26 @@
 {
-  "folders": [
-	{
-		"path": "."
-	},
-	{
-		"path": "nextjs"
-	},
-	{
-		"path": "gateway-app"
-	},
-	{
-		"path": "docs"
-	},
-	{
-		"path": "strapi"
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "nextjs"
+		},
+		{
+			"path": "gateway-app"
+		},
+		{
+			"path": "docs"
+		},
+		{
+			"path": "strapi"
+		}
+	],
+	"settings": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+		"editor.codeActionsOnSave": {
+			"source.fixAll.eslint": true
+		}
 	}
-],
-  "settings": {}
 }
