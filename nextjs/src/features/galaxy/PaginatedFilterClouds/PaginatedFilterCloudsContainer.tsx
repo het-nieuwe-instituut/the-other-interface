@@ -1,5 +1,5 @@
 
-import LandingpageFilterContext from '@/features/pages/containers/LandingpageFilterContainer/LandingpageFilterContext'
+import LandingpageContext from '@/features/pages/containers/LandingpageContainer/LandingpageContext'
 import dynamic from 'next/dynamic'
 import { useContext } from 'react'
 
@@ -25,7 +25,7 @@ const DynamicPaginatedFilterCloudsNoSsr = dynamic(() => import('./PaginatedFilte
 
 const PaginatedFilterCloudsContainer: React.FunctionComponent<Props> = props => {
 
-    const {zoomLevel3: zoom3} = useContext(LandingpageFilterContext)
+    const {zoomLevel3: zoom3} = useContext(LandingpageContext)
 
     return (
         <>

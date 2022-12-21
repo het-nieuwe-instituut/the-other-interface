@@ -162,7 +162,6 @@ function drawPathByParent(svgRef: null, dataPoints: InstancesPerClassWithPoint[]
                         }) as any
                 )
 
-            console.log(d)
             d3Svg
                 .append('text')
                 .attr('x', parseInt(d.offsetX) - 0)

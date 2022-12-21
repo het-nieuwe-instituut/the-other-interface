@@ -15,12 +15,12 @@ const opacityOut = keyframes`
     to {opacity: 0.3}
 `
 
-interface RecordCloudsProps {
+interface RecoredRelationsProps {
     relations: Array<ZoomLevel5RelationsType>
     parentRef:  React.RefObject<SVGSVGElement>
 }
 
-const RecordClouds = (props: RecordCloudsProps) => {
+const RecoredRelations = (props: RecoredRelationsProps) => {
     const { t } = useLooseTypeSafeTranslation('record')
     const { relationsPositionData, zoomed } = usePresenter(props.relations, props.parentRef)
     return (
@@ -87,4 +87,4 @@ const RecordClouds = (props: RecordCloudsProps) => {
     }
 }
 
-export default RecordClouds
+export default RecoredRelations

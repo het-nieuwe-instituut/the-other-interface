@@ -6,7 +6,6 @@ import PaginationRight from '@/icons/arrows/pagination-right.svg'
 import { Box, Flex, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { memo, useId } from 'react'
-import { LandingPageFilterQueryParams } from 'src/pages/landingpage/[slug]/[filter]'
 import { Cloud } from '../../components/Cloud'
 import { Dimensions } from '../../types/galaxy'
 import { PaginatedCloudItem } from './types'
@@ -21,9 +20,13 @@ export interface PaginatedFilterCloudsProps {
     page: number
 }
 
+type PaginatedCouldFiltersParams = {
+    slug: SupportedLandingPages
+}
+
 const PaginatedFilterClouds: React.FunctionComponent<PaginatedFilterCloudsProps> = props => {
     const router = useRouter()
-    const queryParams = router.query as unknown as LandingPageFilterQueryParams
+    const queryParams = router.query as unknown as PaginatedCouldFiltersParams
     const id = useId().replaceAll(':', '')
     const {
         svgRef,

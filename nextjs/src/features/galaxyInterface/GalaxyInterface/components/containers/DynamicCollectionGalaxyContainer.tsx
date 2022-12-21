@@ -1,6 +1,6 @@
 import { SupportedLandingPages } from '@/features/galaxy/PaginatedFilterClouds/PaginatedFilterCloudsContainer'
 import { zoom4DataToCollectionGalaxyData } from '@/features/galaxyInterface/galaxies/CollectionClouds/mappers/Zoom4DataToCollectionGalaxyData'
-import LandingpageCollectionContext from '@/features/pages/containers/LandingpageCollectionContainer/LandingpageCollectionContext'
+import LandingpageContext from '@/features/pages/containers/LandingpageContainer/LandingpageContext'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useContext, useMemo } from 'react'
@@ -15,12 +15,13 @@ export const DynamicPaginatedCollectionContainerNoSsr = dynamic(
 
 export const DynamicCollectionCloudsContainer: React.FC<{ dimensions: Dimensions }> = ({ dimensions }) => {
     const router = useRouter()
-    const { zoomLevel4 } = useContext(LandingpageCollectionContext)
+    const { zoomLevel4 } = useContext(LandingpageContext)
     const filterCloudData = useMemo(() => zoom4DataToCollectionGalaxyData(zoomLevel4), [zoomLevel4])
 
     if (!zoomLevel4?.zoomLevel4?.nodes?.length) {
         return null
     }
+    
     return (
         <DynamicPaginatedCollectionContainerNoSsr
             paginatedCollectionData={filterCloudData}
