@@ -4,9 +4,12 @@ export function getTriangleArea(triangle: [[number, number], [number, number], [
     return 0.5 * ((b[0] - a[0]) * (c[1] - a[1]) - (c[0] - a[0]) * (b[1] - a[1]))
 }
 
-export function calcRandomTrianglePoint(triangle: [[number, number], [number, number], [number, number]]) {
-    let wb = Math.random()
-    let wc = Math.random()
+export function calcRandomTrianglePoint(
+    getRandomNumber: () => number,
+    triangle: [[number, number], [number, number], [number, number]]
+) {
+    let wb = getRandomNumber()
+    let wc = getRandomNumber()
 
     // point will be outside of the triangle, invert weights
     if (wb + wc > 1) {
@@ -40,9 +43,12 @@ export function generateTriangleDistribution(triangles: [[number, number], [numb
     return cumulativeDistribution
 }
 
-export function selectRandomTriangle(triangles: [[number, number], [number, number], [number, number]][]) {
+export function selectRandomTriangle(
+    getRandomNumber: () => number,
+    triangles: [[number, number], [number, number], [number, number]][]
+) {
     const cumulativeDistribution = generateTriangleDistribution(triangles)
-    const rnd = Math.random()
+    const rnd = getRandomNumber()
     const index = cumulativeDistribution.findIndex(v => v > rnd)
 
     return triangles[index]
