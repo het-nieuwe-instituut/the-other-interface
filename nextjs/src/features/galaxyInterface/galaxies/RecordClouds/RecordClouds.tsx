@@ -1,15 +1,15 @@
-import { ZoomLevel5DetailResponses, SupportedQuerys } from '@/features/pages/tasks/zoom5Config'
-import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { Box, keyframes, Text } from '@chakra-ui/react'
-import React, { memo } from 'react'
-import { EntityNames, StoryBySlugQuery } from 'src/generated/graphql'
-import { Cloud } from '../../components/Cloud'
-import { Dimensions, ZoomStates } from '../../types/galaxy'
-import { RecordCloudHighlight } from './components/RecordHighlight'
-import { usePresenter } from './usePresenter'
-import { ParentRelation } from './utils/calculus'
+import { Box } from '@chakra-ui/react'
 
-export interface RecordCloudProps {
+import { SupportedQuerys, ZoomLevel5DetailResponses } from '@/features/pages/tasks/zoom5Config'
+import React from 'react'
+import { ArchivesOtherZoomLevel5DetailType, StoryBySlugQuery } from 'src/generated/graphql'
+import { RecordCloudHighlight } from './components/RecordHighlight'
+
+import dynamic from 'next/dynamic'
+import { Dimensions } from '../../types/galaxy'
+import { usePresenter } from './usePresenter'
+
+export type RecordCloudProps = {
     dimensions: Dimensions
     zoomLevel5: ZoomLevel5Entities
     relations: ZoomLevel5DetailResponses['zoom5relations']
@@ -21,24 +21,17 @@ export type ZoomLevel5Entities =
     | NonNullable<NonNullable<StoryBySlugQuery['stories']>['data']>[0]
 
 export const SVG_DIMENSIONS = { width: 1280, height: 800 }
-const opacityIn = keyframes`
-    from {opacity: 0.3 }
-    to {opacity: 1}
-`
 
-const opacityOut = keyframes`
-    to {opacity: 0.3}
-`
+const DynamicRecordContainerRelationsNoSsr = dynamic(() => import('./containers/RecordRelationsContainer'), {
+    ssr: false,
+})
 
 const RecordClouds: React.FunctionComponent<RecordCloudProps> = props => {
-    const { t } = useLooseTypeSafeTranslation('record')
     const {
         svgRef,
-        relationsPositionData,
         dimensions: { height, width },
         type,
         zoomLevel5,
-        zoomLevel,
     } = usePresenter(props)
 
     return (
@@ -51,54 +44,7 @@ const RecordClouds: React.FunctionComponent<RecordCloudProps> = props => {
                 style={{ overflow: 'visible' }}
             >
                 {renderHighLight()}
-                {relationsPositionData.map((relation, index, array) => {
-                    return (
-                        <React.Fragment key={`${index}-${array.length}-${relation.label}`}>
-                            <Cloud
-                                className="foreign-parent"
-                                hoverBackground={relation.background}
-                                defaultBackground={relation.background}
-                                x={relation.x}
-                                y={relation.y}
-                                height={relation.diameter}
-                                width={relation.diameter}
-                            >
-                                <Box width={'75%'} zIndex={1} position={'absolute'}>
-                                    <Text textStyle={'cloudText'} textAlign={'center'} flexWrap={'wrap'}>
-                                        {getRelatedItemsTranslation(relation)}
-                                    </Text>
-                                </Box>
-                            </Cloud>
-
-                            {relation.children.map((child, index, array) => {
-                                return (
-                                    <Cloud
-                                        key={`${index}-${array.length}-${child.label}`}
-                                        className="foreign-child"
-                                        hoverBackground={`typeColors.${relation.type.toLowerCase()}.hover1`}
-                                        defaultBackground={`typeColors.${relation.type.toLowerCase()}.hover1`}
-                                        x={child.x}
-                                        y={child.y}
-                                        height={192}
-                                        width={192}
-                                        backgroundAnimation={
-                                            zoomLevel === ZoomStates.Zoom5
-                                                ? `${opacityIn} 1500ms linear`
-                                                : `${opacityOut} 0ms linear`
-                                        }
-                                        disableHover={true}
-                                    >
-                                        <Box width={'75%'} zIndex={1} data-child>
-                                            <Text textStyle={'cloudText'} textAlign={'center'} flexWrap={'wrap'}>
-                                                {child.label}
-                                            </Text>
-                                        </Box>
-                                    </Cloud>
-                                )
-                            })}
-                        </React.Fragment>
-                    )
-                })}
+                <DynamicRecordContainerRelationsNoSsr parentRef={svgRef} />
             </svg>
         </Box>
     )
@@ -198,6 +144,13 @@ const RecordClouds: React.FunctionComponent<RecordCloudProps> = props => {
                     type={type}
                     title={zoomLevel5.title ?? undefined}
                     queryType={zoomLevel5?.__typename}
+                    image={{
+                        url: (zoomLevel5 as ArchivesOtherZoomLevel5DetailType).pidWorkURIs?.[0] ?? undefined,
+                        width: 100,
+                        height: 100,
+                        // TODO ask Lois about alt
+                        alt: '',
+                    }}
                     dimensions={SVG_DIMENSIONS}
                 />
             )
@@ -215,20 +168,6 @@ const RecordClouds: React.FunctionComponent<RecordCloudProps> = props => {
             )
         }
     }
-
-    function getRelatedItemsTranslation(relation: ParentRelation) {
-        if (relation.type === EntityNames.People)
-            return t('relatedPeople', { count: relation.showing, total: relation.total })
-        if (relation.type === EntityNames.Objects)
-            return t('relatedObjects', { count: relation.showing, total: relation.total })
-        if (relation.type === EntityNames.Publications)
-            return t('relatedPublications', { count: relation.showing, total: relation.total })
-        if (relation.type === EntityNames.Archives) return t('relatedArchive', { count: relation.showing })
-        if (relation.type === EntityNames.Stories) return t('relatedStories', { count: relation.showing })
-
-        return ''
-    }
 }
 
-export const MemoizedRecordClouds = memo(RecordClouds)
-export default MemoizedRecordClouds
+export default RecordClouds

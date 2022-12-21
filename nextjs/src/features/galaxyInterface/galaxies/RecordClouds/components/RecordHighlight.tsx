@@ -1,9 +1,9 @@
+import { Dimensions } from '@/features/galaxy/types/galaxy'
 import { Cloud } from '@/features/galaxyInterface/components/Cloud'
 import { SupportedQuerys } from '@/features/pages/tasks/zoom5Config'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { typeColors } from '@/features/shared/styles/theme/foundations/colors'
 import { Box, Flex, Image, keyframes, Text } from '@chakra-ui/react'
-import { Dimensions } from '../../../types/galaxy'
 import { ZoomLevel5Entities } from '../RecordClouds'
 
 interface RecordCloudHighlightProps {
@@ -98,9 +98,19 @@ const PersonImage: React.FC<{
         alt?: string
     }
 }> = ({ image }) => {
+    const hideImage = (image: HTMLImageElement) => {
+        image.style.display = 'none'
+    }
+
     return (
         <Box borderRadius={'100%'} mt={7} height={200} width={200} overflow={'hidden'} background={'black'}>
-            <Image height={200} objectFit={'cover'} src={image?.url} alt={image?.alt ?? ''} />
+            <Image
+                height={200}
+                objectFit={'cover'}
+                src={image?.url}
+                alt={image?.alt ?? ''}
+                onError={e => hideImage(e?.target as HTMLImageElement)}
+            />
         </Box>
     )
 }
