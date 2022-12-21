@@ -34,6 +34,12 @@ const Page = (props: Awaited<ReturnType<typeof getServerSideProps>>['props']) =>
 
 export default Page
 
+const ZoomMapper: Partial<Record<ZoomStates, ZoomStates>> = {
+    [ZoomStates.Zoom2]: ZoomStates.Zoom2Initial,
+    [ZoomStates.Zoom3]: ZoomStates.Zoom3Initial,
+    [ZoomStates.Zoom4]: ZoomStates.Zoom4Initial
+}
+
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
     const {slug, preservedZoom, filter, collection, page} = context.query as unknown as LandingPageQueryParams
     const locale = context.locale
@@ -44,7 +50,6 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     let stories = null
 
     if (entityName && includesZoomStatesZoom2Galaxy.includes(preservedZoom)) {
-        console.log('i am here zoom 2')
         zoomLevel2 = await ApiClient?.zoomLevel2({ entityName })
     }
 
@@ -53,11 +58,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     }
 
     if (includesZoomStatesZoom3Galaxy.includes(preservedZoom) && filter ) {
-        console.log(page)
-        console.log(filter)
-        console.log(slug)
         zoomLevel3 = await zoom3Query[slug]?.({ filterId: filter, page: parseInt(page ?? '1'), pageSize: 16 })
-        console.log(zoomLevel3)
     }
 
     if (includesZoomStatesZoom4Galaxy.includes(preservedZoom) && filter && collection) {
@@ -80,7 +81,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
             stories,
             reduxState: prepareReduxState({
                 galaxyInterface: {
-                    activeZoom: preservedZoom,
+                    activeZoom: ZoomMapper[preservedZoom] ?? preservedZoom,
                     params: { slug },
                 },
             }),

@@ -45,6 +45,14 @@ function useReplace() {
     return { replace }
 }
 
+
+const ZoomMapper: Partial<Record<ZoomStates, ZoomStates>> = {
+    [ZoomStates.Zoom2Initial]: ZoomStates.Zoom2,
+    [ZoomStates.Zoom3Initial]: ZoomStates.Zoom3,
+    [ZoomStates.Zoom4Initial]: ZoomStates.Zoom4
+}
+
+
 export function useRouteTransitions() {
     const router = useRouter()
     const activeZoom = useSelector((state: State) => state.galaxyInterface.activeZoom)
@@ -58,17 +66,19 @@ export function useRouteTransitions() {
                 return
             }
 
+            // we don't need any navigation if animation in progress
             if (animationInProgress.includes(activeZoom)) {
                 return
             }
 
-            if (router.query.preservedZoom === activeZoom) {
+            // we don't need any navigation if we already on the page. 
+            if (router.query.preservedZoom === activeZoom || router.query.preservedZoom && router.query.preservedZoom === ZoomMapper[activeZoom]) {
                 return
             }
 
 
             if (includesZoomStatesMainGalaxy.includes(activeZoom)) {
-                if ([ZoomStates.Zoom1, ZoomStates.Zoom1ToZoom2, ZoomStates.Zoom1ToZoom1Stories].includes(activeZoom)) {
+                if ([ZoomStates.Zoom1].includes(activeZoom)) {
                     replace({
                         query: { ...router.query, preservedZoom: ZoomStates.Zoom1 },
                     })
