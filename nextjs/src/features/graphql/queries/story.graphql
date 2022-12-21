@@ -12,7 +12,7 @@ query storyBySlug($locale: String, $slug: String!) {
     stories(locale: $locale, filters: { slug: { eq: $slug } }) {
         data {
             id
-             __typename
+            __typename
             attributes {
                 title
                 description
@@ -134,6 +134,21 @@ query storyBySlug($locale: String, $slug: String!) {
                 triplyRecords {
                     data {
                         ...BaseTriplyRecordFragment
+                    }
+                }
+            }
+        }
+    }
+}
+
+query storyImages($id: String!) {
+    story(id: $id) {
+        data {
+            id
+            attributes {
+                components {
+                    ... on ComponentModulesImage {
+                        ...imageModuleFragment
                     }
                 }
             }
