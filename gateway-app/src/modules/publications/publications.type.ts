@@ -1,5 +1,6 @@
 import { createUnionType, Field, InputType, ObjectType, registerEnumType } from '@nestjs/graphql'
 import { PoepleZoomLevel5DetailType } from '../people/people.type'
+import { CustomError } from '../util/customError'
 import { PublicationsZoomLevel5Types } from './publications.service'
 
 @InputType()
@@ -411,7 +412,7 @@ export const PublicationZoomLevel5UnionType = createUnionType({
             case PublicationsZoomLevel5Types.book:
                 return PublicationsBookZoomLevel5DetailType
             default:
-                throw new Error(`publication type ${publication.type} cannot be resolved`)
+                throw CustomError.externalCritical(`publication type ${publication.type} cannot be resolved`)
         }
     },
 })

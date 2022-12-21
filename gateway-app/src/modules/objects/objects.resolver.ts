@@ -1,5 +1,6 @@
 import { Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
 import { TriplyUtils } from '../triply/triply.utils'
+import { CustomError } from '../util/customError'
 import { ZoomLevel5Service } from '../zoomLevel5/zoomLevel5.service'
 import { ObjectsZoomLevel5DetailType } from './objects.type'
 
@@ -9,7 +10,7 @@ export class ObjectsResolver {
 
     @Query(() => ObjectsZoomLevel5DetailType)
     public object() {
-        throw new Error('not yet implemented')
+        throw CustomError.internal('not yet implemented')
     }
 
     @ResolveField()

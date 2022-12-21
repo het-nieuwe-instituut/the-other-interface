@@ -3,6 +3,7 @@ import { ArchivesService } from '../archives/archives.service'
 import { ObjectsService } from '../objects/objects.service'
 import { PeopleService } from '../people/people.service'
 import { PublicationsService } from '../publications/publications.service'
+import { CustomError } from '../util/customError'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 
 @Injectable()
@@ -30,7 +31,7 @@ export class ZoomLevel2Service {
             }
             case EntityNames.Stories:
             default: {
-                throw new Error(`[ZoomLevel2] ${entity} not implemented yet`)
+                throw CustomError.internalCritical(`[ZoomLevel2] ${entity} not implemented yet`)
             }
         }
     }

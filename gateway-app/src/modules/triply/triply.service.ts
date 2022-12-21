@@ -116,14 +116,14 @@ export class TriplyService {
                 if (!receivedKeys.includes(k)) {
                     const message = `"${k}" is not returned in ${JSON.stringify(receivedKeys)}`
 
-                    this.rollbarService.log(message)
+                    this.rollbarService.logError(message)
                 }
             })
         } catch (err) {
             const message = `Unable to test keys ${JSON.stringify(keysToVerify)} in response ${JSON.stringify(
                 responseData
             )}`
-            this.rollbarService.log(message)
+            this.rollbarService.logError(message)
         }
     }
 }
