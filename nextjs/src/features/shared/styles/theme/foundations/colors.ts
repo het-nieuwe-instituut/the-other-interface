@@ -121,6 +121,7 @@ const colors = {
             shadow: '#CCCED0',
         },
     },
+    mobileOverlay: 'rgb(204, 206, 208, 0.65)',
 
     levels: {
         z0: {

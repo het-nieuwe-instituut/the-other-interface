@@ -71,7 +71,9 @@ export function usePresenter(props: Props) {
                 ? [ZoomStates.Zoom1, ZoomStates.Zoom0ToZoom1].includes(zoomEvents.zoomLevel)
                 : false,
             isZoom1Stories: zoomEvents.zoomLevel
-                ? [ZoomStates.Zoom0, ZoomStates.Zoom0ToZoom1].includes(zoomEvents.zoomLevel)
+                ? [ZoomStates.Zoom1StoriesToZoom5, ZoomStates.Zoom1StoriesToZoom1, ZoomStates.Zoom1Stories].includes(
+                      zoomEvents.zoomLevel
+                  )
                 : false,
         },
     }

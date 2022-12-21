@@ -8,7 +8,7 @@ import { LandingpageContainer } from '@/features/pages/containers/LandingpageCon
 import { LandingpageProvider } from '@/features/pages/containers/LandingpageContainer/LandingpageContext'
 import { zoom3Query } from '@/features/pages/tasks/zoom3Query.mapper'
 import { prepareReduxState } from '@/features/shared/configs/store'
-import { GetServerSidePropsContext } from 'next'
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import { EntityNames } from 'src/generated/graphql'
 
 export interface LandingPageQueryParams {
@@ -19,7 +19,7 @@ export interface LandingPageQueryParams {
     page?: string
 }
 
-const Page = (props: Awaited<ReturnType<typeof getServerSideProps>>['props']) => {
+const Page = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     return (
         <LandingpageProvider
             zoomLevel2={props.zoomLevel2 ?? null}

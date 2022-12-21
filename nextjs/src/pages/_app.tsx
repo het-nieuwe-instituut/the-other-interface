@@ -9,6 +9,7 @@ import ErrorBoundaryProvider from '@/features/modules/components/ErrorBoundary/E
 import { createStore } from '@/features/shared/configs/store'
 import { useMemo } from 'react'
 import { Provider } from 'react-redux'
+import MobileOverlayProvider from '@/features/shared/components/MobileOverlayProvider/MobileOverlayProvider'
 
 function MyApp({ Component, pageProps }: AppProps) {
     const store = useMemo(() => createStore(pageProps.reduxState), [pageProps.reduxState])
@@ -37,7 +38,9 @@ function MyApp({ Component, pageProps }: AppProps) {
                     <ChakraProvider theme={theme}>
                         <Fonts />
                         <ErrorBoundaryProvider>
-                            <Component {...pageProps} />
+                            <MobileOverlayProvider>
+                                <Component {...pageProps} />
+                            </MobileOverlayProvider>
                         </ErrorBoundaryProvider>
                     </ChakraProvider>
                 </ThemeProvider>

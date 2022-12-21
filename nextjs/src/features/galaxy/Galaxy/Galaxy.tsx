@@ -3,7 +3,6 @@ import { Box, Flex, Text } from '@chakra-ui/react'
 import React, { forwardRef, useId } from 'react'
 import { Circle } from '../components/Circle'
 import { GalaxyShadowBackground } from '../components/GalaxyShadowBackground'
-import { StoriesSystem } from '../components/StoriesSystem/StoriesSystem'
 import { Dimensions, ZoomLevel } from '../types/galaxy'
 
 import { usePresenter } from './usePresenter'
@@ -75,10 +74,10 @@ const Galaxy: React.FC<Props> = ({ dimensions }) => {
                     <>
                         {!isLoading && stories?.length && (
                             <StoriesSystemPosition dimensions={dimensions} ref={storiesSystemRef}>
-                                <StoriesSystem
+                                {/* <StoriesSystem
                                     disableLinkAndHover={zoomLevel !== ZoomLevel.Zoom1Stories}
                                     data={stories ?? []}
-                                />
+                                /> */}
                             </StoriesSystemPosition>
                         )}
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Flex, Link, useTheme } from '@chakra-ui/react'
+import { Box, Flex, Link, useBreakpoint, useTheme } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import ArrowRightIcon from '@/icons/arrows/arrow-right.svg'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
@@ -128,6 +128,8 @@ const Breadcrumbs = (props: Props) => {
     const router = useRouter()
     const theme = useTheme()
     const { t } = useTypeSafeTranslation('navigation')
+    const breakpoint = useBreakpoint()
+    const isMobile = breakpoint === 'sm'
 
     const { items, currentZoomLevel } = getBreadcrumbsFromUrl(
         router.asPath,
@@ -146,6 +148,10 @@ const Breadcrumbs = (props: Props) => {
         }
 
         router.push(link, undefined, { shallow })
+    }
+
+    if(isMobile) {
+        return null
     }
 
     return (
