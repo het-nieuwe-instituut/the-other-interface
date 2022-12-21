@@ -4,7 +4,7 @@ import { LandingpageFilterContainer } from '@/features/pages/containers/Landingp
 import { LandingpageFilterProvider } from '@/features/pages/containers/LandingpageFilterContainer/LandingpageFilterContext'
 import { zoom3Query } from '@/features/pages/containers/LandingpageFilterContainer/zoom3Query.mapper'
 import { prepareReduxState } from '@/features/shared/configs/store'
-import { GetServerSidePropsContext } from 'next'
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import { LandingPageQueryParams } from '../[slug]'
 
 export interface LandingPageFilterQueryParams extends LandingPageQueryParams {
@@ -12,7 +12,7 @@ export interface LandingPageFilterQueryParams extends LandingPageQueryParams {
     page: string
 }
 
-const Page = (props: Awaited<ReturnType<typeof getServerSideProps>>['props']) => {
+const Page = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     return (
         <LandingpageFilterProvider zoomLevel3={props.zoomLevel3 ?? null}>
             <LandingpageFilterContainer landingpage={props?.landingpage} />

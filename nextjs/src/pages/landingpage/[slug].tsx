@@ -5,14 +5,14 @@ import ApiClient from '@/features/graphql/api'
 import { LandingpageContainer } from '@/features/pages/containers/LandingpageContainer/LandingpageContainer'
 import { LandingpageProvider } from '@/features/pages/containers/LandingpageContainer/LandingpageContext'
 import { prepareReduxState } from '@/features/shared/configs/store'
-import { GetServerSidePropsContext } from 'next'
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import { EntityNames } from 'src/generated/graphql'
 
 export interface LandingPageQueryParams {
     slug: SupportedLandingPages
 }
 
-const Page = (props: Awaited<ReturnType<typeof getServerSideProps>>['props']) => {
+const Page = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     return (
         <LandingpageProvider
             zoomLevel2={props.zoomLevel2 ?? null}
