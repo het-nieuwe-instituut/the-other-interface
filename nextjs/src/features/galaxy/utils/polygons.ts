@@ -11,8 +11,6 @@ export function calcRandomTrianglePoint(
     let wb = getRandomNumber()
     let wc = getRandomNumber()
 
-    console.log(wb)
-
     // point will be outside of the triangle, invert weights
     if (wb + wc > 1) {
         wb = 1 - wb
