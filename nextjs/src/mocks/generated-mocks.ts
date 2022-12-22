@@ -25,7 +25,7 @@ export const anArchivesFondsZoomLevel5DetailType = (overrides?: Partial<Archives
         repository: overrides && overrides.hasOwnProperty('repository') ? overrides.repository! : 'reprehenderit',
         repositoryLabel: overrides && overrides.hasOwnProperty('repositoryLabel') ? overrides.repositoryLabel! : 'adipisci',
         right: overrides && overrides.hasOwnProperty('right') ? overrides.right! : 'quam',
-        rightsLabel: overrides && overrides.hasOwnProperty('rightsLabel') ? overrides.rightsLabel! : 'voluptas',
+        rightLabel: overrides && overrides.hasOwnProperty('rightLabel') ? overrides.rightLabel! : 'culpa',
         source: overrides && overrides.hasOwnProperty('source') ? overrides.source! : 'nam',
         startDate: overrides && overrides.hasOwnProperty('startDate') ? overrides.startDate! : 'ut',
         systemOfArrangement: overrides && overrides.hasOwnProperty('systemOfArrangement') ? overrides.systemOfArrangement! : 'consequatur',

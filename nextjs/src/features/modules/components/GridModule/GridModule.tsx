@@ -124,7 +124,7 @@ export const GridModule: React.FC<Props> = props => {
         const thumbnailAlt = field.thumbnail?.data?.attributes?.alternativeText || field.title || 'image'
 
         return (
-            <NextLink key={keyExtractor(field.id, index, array)} href={`/story/${field.story?.data?.attributes?.slug}`}>
+            <NextLink key={keyExtractor(field.id, index, array)} href={`/story/${field.story?.data?.id}-${field.story?.data?.attributes?.slug}`}>
                 <GridItem w={'100%'} mb={10} cursor={'pointer'}>
                     <Image mb={5} w={'100%'} src={thumbnailUrl} alt={thumbnailAlt} />
                     {renderFieldTitles({

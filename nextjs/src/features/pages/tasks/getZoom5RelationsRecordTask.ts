@@ -1,11 +1,12 @@
+import { extractSlugAndId, extractType } from "@/features/galaxyInterface/utils/extractors"
 import ApiClient from "@/features/graphql/api"
 import { SupportedQuerys, zoom5Config } from "./zoom5Config"
 
 
-export async function getZoom5RelationsRecordTask(record: string) {
+export async function getZoom5RelationsRecordTask(path: string, record: string) {
     try {
-        const type = record.split('-')[1] as SupportedQuerys
-        const id: string = record.split('-')[0]
+        const { id } = extractSlugAndId(record)
+        const type = extractType(path)
         let realtions
 
         if (type === SupportedQuerys.stories) {
