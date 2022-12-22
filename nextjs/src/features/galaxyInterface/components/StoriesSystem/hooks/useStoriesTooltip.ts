@@ -57,7 +57,7 @@ function showTooltip(e: React.MouseEvent<HTMLDivElement, MouseEvent>, item: Tool
             imgEl.setAttribute('src', imgComponent.image.data.attributes.url)
             imgEl.setAttribute('alt', imgComponent.alt_text || '')
         })
-        .catch()
+        .catch(() => document.getElementById(`${getElementId(item.id)}-spinner`)?.remove())
 
     insertTooltip(item)
     positionAndShowTooltip(e, item)
