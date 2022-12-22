@@ -88,7 +88,7 @@ const MainGalaxy: React.FC<MainGalaxyProps> = props => {
                         {storiesData?.length && (
                             <StoriesSystemPosition dimensions={dimensions} ref={storiesSystemRef}>
                                 <MemoizedStoriesSystem
-                                    disableLinkAndHover={conditions.isZoom1Stories}
+                                    disableLinkAndHover={!conditions.isZoom1Stories}
                                     data={storiesData}
                                 />
                             </StoriesSystemPosition>

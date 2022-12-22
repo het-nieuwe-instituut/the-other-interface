@@ -9,7 +9,6 @@ import { ScrollToContent } from '../../utils/utils'
 
 interface Props {
     landingpage: LandingpageBySlugQuery | undefined
-    slug: SupportedLandingPages
 }
 
 export const LandingpageContainer = (props: Props) => {

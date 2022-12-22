@@ -10,7 +10,6 @@ export async function getZoom5RelationsRecordTask(record: string) {
 
         if (type === SupportedQuerys.stories) {
             realtions =  await ApiClient?.StoriesRelations({ id })
-
             return {
                 zoom5relations: realtions,
             }

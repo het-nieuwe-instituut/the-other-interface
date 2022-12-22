@@ -5,6 +5,7 @@ import { useCallback, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { UrlObject } from 'url'
 import {
+    animationInProgress,
     includesZoomStatesMainGalaxy,
     includesZoomStatesZoom2Galaxy,
     includesZoomStatesZoom3Galaxy,
@@ -18,12 +19,9 @@ function useNavigate() {
         (path: string, params?: { [key: string]: string | undefined }) => {
             const searchParams = new URLSearchParams(params as Record<string, string>)
             const pathWithParams = `${path.replaceAll(' ', '')}${!isEmpty(params) ? `?${searchParams}` : ''}`
-
             const asPath = decodeURIComponent(router.asPath).replaceAll(' ', '')
 
             if (asPath !== pathWithParams) {
-                console.log(pathWithParams, asPath)
-
                 router.push({ pathname: path, query: params })
             }
         },
@@ -38,16 +36,22 @@ function useReplace() {
     const replace = useCallback(
         (url: UrlObject) => {
             if (!isEqual(router.query, url.query)) {
-                console.log(router.query, url.query)
-
                 router.push(url)
             }
         },
-        [router, router.query]
+        [router]
     )
 
     return { replace }
 }
+
+
+const ZoomMapper: Partial<Record<ZoomStates, ZoomStates>> = {
+    [ZoomStates.Zoom2Initial]: ZoomStates.Zoom2,
+    [ZoomStates.Zoom3Initial]: ZoomStates.Zoom3,
+    [ZoomStates.Zoom4Initial]: ZoomStates.Zoom4
+}
+
 
 export function useRouteTransitions() {
     const router = useRouter()
@@ -61,8 +65,20 @@ export function useRouteTransitions() {
             if (!activeZoom) {
                 return
             }
+
+            // we don't need any navigation if animation in progress
+            if (animationInProgress.includes(activeZoom)) {
+                return
+            }
+
+            // we don't need any navigation if we already on the page. 
+            if (router.query.preservedZoom === activeZoom || router.query.preservedZoom && router.query.preservedZoom === ZoomMapper[activeZoom]) {
+                return
+            }
+
+
             if (includesZoomStatesMainGalaxy.includes(activeZoom)) {
-                if ([ZoomStates.Zoom1, ZoomStates.Zoom1ToZoom2, ZoomStates.Zoom1ToZoom1Stories].includes(activeZoom)) {
+                if ([ZoomStates.Zoom1].includes(activeZoom)) {
                     replace({
                         query: { ...router.query, preservedZoom: ZoomStates.Zoom1 },
                     })
@@ -70,7 +86,10 @@ export function useRouteTransitions() {
                     return
                 }
                 if (activeZoom === ZoomStates.Zoom1Stories) {
-                    navigate('/landingpage/stories')
+                    navigate('/landingpage/stories', {
+                        ...router.query, 
+                        preservedZoom: ZoomStates.Zoom1Stories
+                    })
 
                     return
                 }
@@ -83,7 +102,10 @@ export function useRouteTransitions() {
                     return
                 }
 
-                navigate(`/landingpage/${params.slug}`)
+                navigate(`/landingpage/${params.slug}`, {
+                    ...router.query,
+                    preservedZoom: ZoomStates.Zoom2
+                })
 
                 return
             }
@@ -91,14 +113,20 @@ export function useRouteTransitions() {
                 if (ZoomStates.Zoom3ToInitial === activeZoom) {
                     return
                 }
+
                 if (!params) {
                     console.error('params are needed for these states')
                     return
                 }
 
                 navigate(
-                    `/landingpage/${params.slug}/${params.filter}`,
-                    params?.page ? { page: params.page } : { page: '1' }
+                    `/landingpage/${params.slug}`,
+                     { 
+                        ...router.query,
+                        preservedZoom: ZoomStates.Zoom3,
+                        page: params.page ?? router.query.page as string ?? '1',
+                        filter: router.query.filter as string ?? params.filter 
+                    }
                 )
                 return
             }
@@ -112,8 +140,14 @@ export function useRouteTransitions() {
                 }
 
                 navigate(
-                    `/landingpage/${params.slug}/${params.filter}/${params.collection}`,
-                    params?.page ? { page: params.page } : { page: '1' }
+                    `/landingpage/${params.slug}`,
+                    { 
+                        ...router.query, 
+                        preservedZoom: ZoomStates.Zoom4, 
+                        page: params.page ?? router.query.page as string ?? '1', 
+                        filter: router.query.filter as string ?? params.filter,
+                        collection: router.query.collection as string ?? params.collection
+                    }
                 )
                 return
             }
@@ -123,7 +157,7 @@ export function useRouteTransitions() {
                     return
                 }
 
-                navigate(`/landingpage/${params.slug}/${params.filter}/${params.collection}/${params.record}`)
+                navigate(`/landingpage/${params.slug}/${params.record}`)
                 return
             }
         }

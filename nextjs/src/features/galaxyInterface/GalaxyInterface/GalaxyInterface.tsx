@@ -69,6 +69,31 @@ export const includesZoomStatesMainGalaxy = [
     ZoomStates.Zoom1StoriesToZoom5,
     ZoomStates.ZoomOutToZoom1,
 ]
+
+export const animationInProgress = [
+    ZoomStates.Zoom0ToZoom1,
+    ZoomStates.Zoom1ToZoom0,
+    ZoomStates.Zoom1ToZoom1Stories,
+    ZoomStates.Zoom1StoriesToZoom1,
+    ZoomStates.Zoom1StoriesToZoom5,
+    ZoomStates.ZoomOutToZoom1,
+    ZoomStates.Zoom1ToZoom2,
+    ZoomStates.Zoom2ToZoom3,
+    ZoomStates.Zoom2ToZoom1,
+    ZoomStates.ZoomOutToZoom2,
+    ZoomStates.Zoom3ToInitial,
+    ZoomStates.Zoom3ToZoom2,
+    ZoomStates.Zoom3ToZoom4,
+    ZoomStates.ZoomOutToZoom3,
+    ZoomStates.Zoom4ToZoom3,
+    ZoomStates.Zoom4ToZoom5,
+    ZoomStates.ZoomOutToZoom4,
+    ZoomStates.Zoom5ToRelation,
+    ZoomStates.Zoom5ToZoom4,
+]
+
+export const includesZoomedStatesMainGalaxy = [ZoomStates.Zoom1, ZoomStates.Zoom1ToZoom2, ZoomStates.Zoom1ToZoom1Stories]
+
 export const includesZoomStatesZoom2Galaxy = [
     ZoomStates.Zoom2,
     ZoomStates.Zoom2Initial,

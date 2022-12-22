@@ -1,4 +1,4 @@
-import LandingpageCollectionContext from '@/features/pages/containers/LandingpageCollectionContainer/LandingpageCollectionContext'
+import LandingpageContext from '@/features/pages/containers/LandingpageContainer/LandingpageContext'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { randomNumberBetweenPoints } from '@/features/shared/utils/numbers'
 import PaginationLeft from '@/icons/arrows/pagination-left.svg'
@@ -9,9 +9,8 @@ import { useContext, useId, useMemo } from 'react'
 import {
     ZoomLevel4ParentType, ZoomLevel4Type,
 } from 'src/generated/graphql'
-import { LandingPageFilterCollectionQueryParams } from 'src/pages/landingpage/[slug]/[filter]/[collection]'
 import { SupportedLandingPages } from '../FilterClouds/FilterCloudsContainer'
-import { getGalaxyTypeByTranslationsKey } from '../utils/translations'
+import { galaxyTypeByTransltions, getGalaxyTypeByTranslationsKey } from '../utils/translations'
 import { usePresenter } from './usePresenter'
 
 type PaginatsedProps = {
@@ -22,14 +21,18 @@ type PaginatsedProps = {
     type: SupportedLandingPages
 }
 
+type PaginatedCollectionParams = {
+    slug: keyof typeof galaxyTypeByTransltions
+}
+
 
 export const PaginatedCollection: React.FunctionComponent<
     PaginatsedProps
 > = props => {
-    const { zoomLevel4: zoom4 } = useContext(LandingpageCollectionContext)
+    const { zoomLevel4: zoom4 } = useContext(LandingpageContext)
     const { dimensions } = props
     const router = useRouter()
-    const queryParams = router.query as unknown as LandingPageFilterCollectionQueryParams
+    const queryParams = router.query as unknown as PaginatedCollectionParams
     const { t: tCommon } = useTypeSafeTranslation('common')
     const { width, height } = dimensions
     const svgWidth = width

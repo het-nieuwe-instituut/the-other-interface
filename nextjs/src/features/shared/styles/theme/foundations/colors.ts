@@ -97,7 +97,7 @@ export const typeColors = {
         hover3: 'radial-gradient(50% 50% at 50% 50%, #8A2A09 0%, rgba(255, 61, 0, 0.12) 78.13%, rgba(253, 252, 213, 0) 100%)',
         related: 'radial-gradient(50% 50% at 50% 50%, rgba(255, 61, 0, 0.2) 14.58%, rgba(255, 149, 89, 0.024) 100%);',
     },
-    stories: {
+    story: {
         hover1: 'radial-gradient(50% 50% at 50% 50%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)',
         default: 'radial-gradient(50% 50% at 50% 50%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)',
         hover: 'radial-gradient(50% 50% at 50% 50%, #666666 0%, rgba(102, 102, 102, 0) 100%)',
@@ -121,6 +121,7 @@ const colors = {
             shadow: '#CCCED0',
         },
     },
+    mobileOverlay: 'rgb(204, 206, 208, 0.65)',
 
     levels: {
         z0: {

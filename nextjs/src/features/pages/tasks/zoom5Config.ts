@@ -14,7 +14,7 @@ export enum SupportedQuerys {
     archives = 'archives',
     publications = 'publications',
     objects = 'objects',
-    stories = 'stories',
+    stories = 'story',
 }
 
 export const zoom5Config = {

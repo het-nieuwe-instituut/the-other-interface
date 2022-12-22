@@ -7,7 +7,6 @@ import PaginationRight from '@/icons/arrows/pagination-right.svg'
 import { Box, Flex, Grid, GridItem, Image, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { memo, useId } from 'react'
-import { LandingPageFilterCollectionQueryParams } from 'src/pages/landingpage/[slug]/[filter]/[collection]'
 import { Cloud } from '../../components/Cloud'
 import { CollectionCloudItem } from './types'
 import { usePresenter } from './usePresenter'
@@ -25,9 +24,13 @@ export interface PaginatedCollectionProps {
     page: number
 }
 
+type PaginatedCollectionQueryParams = {
+    slug: SupportedLandingPages
+}
+
 export const PaginatedCollection: React.FunctionComponent<PaginatedCollectionProps> = props => {
     const router = useRouter()
-    const queryParams = router.query as unknown as LandingPageFilterCollectionQueryParams
+    const queryParams = router.query as unknown as PaginatedCollectionQueryParams
     const { t: tCommon } = useTypeSafeTranslation('common')
     
     const hideImage = (image: HTMLImageElement) => {
