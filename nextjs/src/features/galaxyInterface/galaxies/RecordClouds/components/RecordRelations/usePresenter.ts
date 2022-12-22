@@ -2,12 +2,12 @@ import { useRouter } from 'next/router'
 import { useCallback } from 'react'
 import { EntityNames, ObjectRelationsQuery, ZoomLevel5RelationsType } from 'src/generated/graphql'
 import { useD3HeroAnimateElement } from '../../hooks/useD3ClickAnimation'
-import { useD3CloudAnimationIn } from '../../hooks/useD3CloudAnimationIn'
+
 import { usePositionClouds } from '../../hooks/usePositionClouds'
 import { SVG_DIMENSIONS } from '../../RecordClouds'
 
 type Item = NonNullable<NonNullable<ObjectRelationsQuery['relations']>[0]['randomRelations']>[0]
-export function usePresenter(relations: Array<ZoomLevel5RelationsType>, parentRef:  React.RefObject<SVGSVGElement>) {
+export function usePresenter(relations: Array<ZoomLevel5RelationsType>, parentRef: React.RefObject<SVGSVGElement>) {
     const router = useRouter()
     const { relationsPositionData } = usePositionClouds(relations)
 
@@ -22,14 +22,12 @@ export function usePresenter(relations: Array<ZoomLevel5RelationsType>, parentRe
                 return
             }
 
-            await router.push(`/landingpage/${d.type.toLowerCase()}/${
-                d.id
-            }`)
+            await router.push(`/landingpage/${d.type.toLowerCase()}/${d.id}`)
         },
 
         [router]
     )
-    
+
     const zoomEvents = useD3HeroAnimateElement<Item>(
         false,
         parentRef,
@@ -39,7 +37,7 @@ export function usePresenter(relations: Array<ZoomLevel5RelationsType>, parentRe
         navigateTo
     )
 
-    useD3CloudAnimationIn(parentRef, zoomEvents.zoomed)
+    // useD3HiglightAnimation(parentRef, zoomEvents.zoomed)
 
     return { parentRef, ...zoomEvents, relationsPositionData }
 }

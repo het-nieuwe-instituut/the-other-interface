@@ -12,7 +12,6 @@ import { usePresenter } from './usePresenter'
 export type RecordCloudProps = {
     dimensions: Dimensions
     zoomLevel5: ZoomLevel5Entities
-    relations: ZoomLevel5DetailResponses['zoom5relations']
     type: SupportedQuerys
 }
 
