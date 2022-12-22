@@ -19,7 +19,10 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     const locale = context.locale ?? 'en'
     const slug = queryParams.slug
 
-    const { story } = await getZoom5StoryTask(slug, locale) ?? {}
+    const { story } = await getZoom5StoryTask(slug, locale)
+	if (!story) {
+		return { props: {} }
+	}
 
     return { props: { story } }
 }
