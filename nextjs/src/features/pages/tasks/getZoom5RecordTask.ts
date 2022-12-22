@@ -1,10 +1,10 @@
+import { extractSlugAndId } from "@/features/galaxyInterface/utils/extractors"
 import { SupportedQuerys, zoom5Config } from "./zoom5Config"
 
 
-export async function getZoom5RecordTask(record: string) {
+export async function getZoom5RecordTask(type: SupportedQuerys, record: string) {
     try {
-        const type = record.split('-')[1] as SupportedQuerys
-        const id: string = record.split('-')[0]
+        const { id } = extractSlugAndId(record)
 
         if (type === SupportedQuerys.stories) {
             return

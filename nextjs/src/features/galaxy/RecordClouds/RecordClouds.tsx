@@ -8,7 +8,7 @@ import { RecordCloudHighlight } from './components/RecordHighlight'
 import { useRouter } from 'next/router'
 import RecordContext from '@/features/pages/containers/RecordContainer/RecordContext'
 import dynamic from 'next/dynamic'
-import { RecordQueryParams } from 'src/pages/landingpage/[slug]/[record]'
+import { extractType } from '@/features/galaxyInterface/utils/extractors'
 
 type Props = {
     dimensions: {
@@ -29,7 +29,6 @@ const DynamicRecordContainerRelationsNoSsr = dynamic(() => import('./containers/
 
 const RecordClouds: React.FunctionComponent<Props> = ({ dimensions }) => {
     const router = useRouter()
-    const queryParams = router.query as unknown as RecordQueryParams
 
     const { width, height } = dimensions
     const { detail: zoomLevel5 } = useContext(RecordContext)
@@ -54,8 +53,7 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions }) => {
 
     function renderHighLight() {
         if (zoomLevel5?.__typename === 'ObjectsZoomLevel5DetailType') {
-            const record = queryParams.record
-            const type = record.split('-')[1] as SupportedQuerys
+            const type = extractType(router?.asPath)
 
             return (
                 <RecordCloudHighlight
@@ -73,8 +71,7 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions }) => {
             )
         }
         if (zoomLevel5?.__typename === 'PoepleZoomLevel5DetailType') {
-            const record = queryParams.record
-            const type = record.split('-')[1] as SupportedQuerys
+            const type = extractType(router?.asPath)
             return (
                 <RecordCloudHighlight
                     type={type}
@@ -85,8 +82,7 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions }) => {
             )
         }
         if (zoomLevel5?.__typename === 'PublicationsBookZoomLevel5DetailType') {
-            const record = queryParams.record
-            const type = record.split('-')[1] as SupportedQuerys
+            const type = extractType(router?.asPath)
             return (
                 <RecordCloudHighlight
                     type={type}
@@ -97,8 +93,7 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions }) => {
             )
         }
         if (zoomLevel5?.__typename === 'PublicationsArticleZoomLevel5DetailType') {
-            const record = queryParams.record
-            const type = record.split('-')[1] as SupportedQuerys
+            const type = extractType(router?.asPath)
             return (
                 <RecordCloudHighlight
                     type={type}
@@ -110,8 +105,7 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions }) => {
         }
 
         if (zoomLevel5?.__typename === 'PublicationsAudioVisualZoomLevel5DetailType') {
-            const record = queryParams.record
-            const type = record.split('-')[1] as SupportedQuerys
+            const type = extractType(router?.asPath)
             return (
                 <RecordCloudHighlight
                     type={type}
@@ -123,8 +117,7 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions }) => {
         }
 
         if (zoomLevel5?.__typename === 'PublicationsSerialZoomLevel5DetailType') {
-            const record = queryParams.record
-            const type = record.split('-')[1] as SupportedQuerys
+            const type = extractType(router?.asPath)
             return (
                 <RecordCloudHighlight
                     type={type}
@@ -136,8 +129,7 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions }) => {
         }
 
         if (zoomLevel5?.__typename === 'ArchivesFondsZoomLevel5DetailType') {
-            const record = queryParams.record
-            const type = record.split('-')[1] as SupportedQuerys
+            const type = extractType(router?.asPath)
             return (
                 <RecordCloudHighlight
                     type={type}
@@ -149,8 +141,7 @@ const RecordClouds: React.FunctionComponent<Props> = ({ dimensions }) => {
         }
 
         if (zoomLevel5?.__typename === 'ArchivesOtherZoomLevel5DetailType') {
-            const record = queryParams.record
-            const type = record.split('-')[1] as SupportedQuerys
+            const type = extractType(router?.asPath)
             return (
                 <RecordCloudHighlight
                     type={type}

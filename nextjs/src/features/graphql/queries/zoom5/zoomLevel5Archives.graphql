@@ -42,7 +42,7 @@ query ZoomLevel5Archives($id: String!) {
             partReference
             partTitle
             right
-            rightsLabel
+            rightLabel
             permanentLink
         }
     }

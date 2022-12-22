@@ -18,13 +18,13 @@ export function usePresenter(relations: Array<ZoomLevel5RelationsType>, parentRe
                     return
                 }
 
-                await router.push(`/story/${d.slug}`)
+                await router.push(`/story/${d.id}-${d.slug}`)
                 return
             }
 
             await router.push(`/landingpage/${d.type.toLowerCase()}/${
                 d.id
-            }`)
+            }-${d.type}`)
         },
 
         [router]
