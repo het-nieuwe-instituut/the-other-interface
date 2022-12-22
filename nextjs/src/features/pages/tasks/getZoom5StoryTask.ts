@@ -9,16 +9,17 @@ export interface GetZoom5StoryQuery {
 
 export async function getZoom5StoryTask(record: string, locale: string) {
     try {
-        const {slug} = extractSlugAndId(record)
+        const { slug } = extractSlugAndId(record)
         const storyBySlug = await ApiClient?.storyBySlug({ slug, locale })
 
         return {
             story: storyBySlug?.stories?.data?.[0],
         }
-        
     } catch (e) {
         if (e) {
             console.error('story query error')
         }
+
+        return {}
     }
 }
