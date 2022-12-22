@@ -1,4 +1,8 @@
 import { useEffect } from 'react'
+import ApiClient from '@/features/graphql/api'
+import { isEmpty } from 'lodash'
+import { ImageModuleFragmentFragment } from 'src/generated/graphql'
+import { getSpinnerHTML } from '@/features/shared/components/Loading/spinner'
 
 export function useStoriesTooltip() {
     useEffect(() => {
@@ -26,6 +30,34 @@ function showTooltip(e: React.MouseEvent<HTMLDivElement, MouseEvent>, item: Tool
     if (!storyEl) {
         return
     }
+
+    ApiClient?.storyImages({ id: item.id })
+        .then(res => {
+            const spinnerEl = document.getElementById(`${getElementId(item.id)}-spinner`)
+
+            const components = res?.story.data?.attributes?.components?.filter(c => !isEmpty(c))
+            if (!components?.length) {
+                spinnerEl?.remove()
+                return
+            }
+
+            const imgComponent = components[0] as ImageModuleFragmentFragment
+            if (!imgComponent.image.data?.attributes?.url) {
+                spinnerEl?.remove()
+                return
+            }
+
+            const imgEl = getTooltipElement(item.id)?.querySelector('img')
+            if (!imgEl) {
+                spinnerEl?.remove()
+                return
+            }
+
+            spinnerEl?.remove()
+            imgEl.setAttribute('src', imgComponent.image.data.attributes.url)
+            imgEl.setAttribute('alt', imgComponent.alt_text || '')
+        })
+        .catch(() => document.getElementById(`${getElementId(item.id)}-spinner`)?.remove())
 
     insertTooltip(item)
     positionAndShowTooltip(e, item)
@@ -100,15 +132,24 @@ function insertTooltip(item: TooltipData) {
             background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.95) 73.44%);
             border-radius: 5px;
         }
+		.spinner {
+			display: flex;
+			align-items: center;
+			margin: 8px 0;
+		}
     `
 
+    const elId = getElementId(item.id)
+
     const tooltipDiv = document.createElement('div')
-    tooltipDiv.setAttribute('id', `${item.id}-tooltip`)
+    tooltipDiv.setAttribute('id', elId)
     tooltipDiv.setAttribute('style', tooltipContainerStyle)
     tooltipDiv.innerHTML += `
         <div style="${tooltipStyle}">
             <style>${descriptionStyle}</style>
             <p style="${titleStyle}">${item.title}</p>
+			${getSpinnerHTML({ id: `${elId}-spinner`, className: 'spinner', size: 20 })}
+			<img src="" alt="" style="max-width: 100%; max-height: 200px" />
             ${item.shortDescription ? `<p class="description-blurred">${item.shortDescription}</p>` : ''}
         </div>
     `
@@ -142,5 +183,9 @@ function positionAndShowTooltip(e: React.MouseEvent<HTMLDivElement, MouseEvent>,
 }
 
 function getTooltipElement(itemId: string) {
-    return document.getElementById(`${itemId}-tooltip`)
+    return document.getElementById(getElementId(itemId))
+}
+
+function getElementId(itemId: string) {
+    return `${itemId}-tooltip`
 }
