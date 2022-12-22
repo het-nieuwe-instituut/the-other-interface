@@ -42,7 +42,7 @@ export type ArchivesFondsZoomLevel5DetailType = {
   repository?: Maybe<Scalars['String']>;
   repositoryLabel?: Maybe<Scalars['String']>;
   right?: Maybe<Scalars['String']>;
-  rightLabel?: Maybe<Scalars['String']>;
+  rightsLabel?: Maybe<Scalars['String']>;
   source?: Maybe<Scalars['String']>;
   startDate?: Maybe<Scalars['String']>;
   systemOfArrangement?: Maybe<Scalars['String']>;
@@ -1913,7 +1913,7 @@ export type ZoomLevel5ArchivesQueryVariables = Exact<{
 }>;
 
 
-export type ZoomLevel5ArchivesQuery = { __typename?: 'Query', zoomLevel5Archive?: { __typename: 'ArchivesFondsZoomLevel5DetailType', descriptionLevel?: string | null, objectNumber?: string | null, recordTitle?: string | null, startDate?: string | null, endDate?: string | null, productionDate?: string | null, extent?: string | null, repository?: string | null, repositoryLabel?: string | null, creator?: string | null, creatorLabel?: string | null, creatorHistory?: string | null, custodialHistory?: string | null, systemOfArrangement?: string | null, contentScope?: string | null, conditionsGoverningAccess?: string | null, relatedMaterial?: string | null, appendices?: string | null, source?: string | null, partReference?: string | null, partTitle?: string | null, right?: string | null, rightLabel?: string | null, permanentLink?: string | null } | { __typename: 'ArchivesOtherZoomLevel5DetailType', objectNumber?: string | null, title?: string | null, startDate?: string | null, endDate?: string | null, dateLabel?: string | null, dimensionFree?: string | null, mediaReference?: string | null, mediaReferenceLabel?: string | null, existenceOfOriginals?: string | null, scopeContent?: string | null, relatedMaterial?: string | null, rights?: string | null, rightsLabel?: string | null, permanentLink?: string | null } | null };
+export type ZoomLevel5ArchivesQuery = { __typename?: 'Query', zoomLevel5Archive?: { __typename: 'ArchivesFondsZoomLevel5DetailType', descriptionLevel?: string | null, objectNumber?: string | null, recordTitle?: string | null, startDate?: string | null, endDate?: string | null, productionDate?: string | null, extent?: string | null, repository?: string | null, repositoryLabel?: string | null, creator?: string | null, creatorLabel?: string | null, creatorHistory?: string | null, custodialHistory?: string | null, systemOfArrangement?: string | null, contentScope?: string | null, conditionsGoverningAccess?: string | null, relatedMaterial?: string | null, appendices?: string | null, source?: string | null, partReference?: string | null, partTitle?: string | null, right?: string | null, rightsLabel?: string | null, permanentLink?: string | null } | { __typename: 'ArchivesOtherZoomLevel5DetailType', objectNumber?: string | null, title?: string | null, startDate?: string | null, endDate?: string | null, dateLabel?: string | null, dimensionFree?: string | null, mediaReference?: string | null, mediaReferenceLabel?: string | null, existenceOfOriginals?: string | null, scopeContent?: string | null, relatedMaterial?: string | null, rights?: string | null, rightsLabel?: string | null, permanentLink?: string | null } | null };
 
 export type ZoomLevel5ArchivesFondsQueryVariables = Exact<{
   id: Scalars['String'];
@@ -3003,7 +3003,7 @@ export const ZoomLevel5ArchivesDocument = gql`
       partReference
       partTitle
       right
-      rightLabel
+      rightsLabel
       permanentLink
     }
   }
