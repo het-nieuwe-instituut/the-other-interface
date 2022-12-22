@@ -37,7 +37,7 @@ export const StoriesSystem: React.FC<Props> = ({ data = [], dimensions = default
                     {disableLinkAndHover ? (
                         renderDot(item, showTooltip, hideTooltip, disableLinkAndHover)
                     ) : (
-                        <Link className="pointer" href={`/story/${item.slug}`}>
+                        <Link className="pointer" href={`/story/${item.id}-${item.slug}`}>
                             {renderDot(item, showTooltip, hideTooltip, disableLinkAndHover)}
                         </Link>
                     )}

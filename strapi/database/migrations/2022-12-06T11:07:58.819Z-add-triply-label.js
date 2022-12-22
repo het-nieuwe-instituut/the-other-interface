@@ -4,20 +4,25 @@ let failedCount = 0;
 
 module.exports = {
   async up(knex) {
-    const res = await knex.raw(
-      'SELECT id, record_id "recordId", "type" FROM triply_records'
-    );
-    if (!res || !res.rows || !res.rows.length) {
-      console.log("no triply records to migrate, returning");
-      return;
-    }
+    try {
+      const res = await knex.raw(
+        'SELECT id, record_id "recordId", "type" FROM triply_records'
+      );
+      if (!res || !res.rows || !res.rows.length) {
+        console.log("no triply records to migrate, returning");
+        return;
+      }
 
-    for (const { id, recordId, type } of res.rows) {
-      const label = await getLabel({ recordId, type });
-      await knex.from("triply_records").update({ label }).where({ id });
+      for (const { id, recordId, type } of res.rows) {
+        const label = await getLabel({ recordId, type });
+        await knex.from("triply_records").update({ label }).where({ id });
+      }
+      console.log(`${failedCount} out of ${res.rows.length} failed`);
+    } catch {
+      console.log(
+        "migration failed, if you are not using a blank db, this shouldn't happen"
+      );
     }
-
-    console.log(`${failedCount} out of ${res.rows.length} failed`);
   },
 };
 

@@ -301,7 +301,7 @@
             "deprecationReason": null
           },
           {
-            "name": "rightsLabel",
+            "name": "rightLabel",
             "description": null,
             "args": [],
             "type": {
