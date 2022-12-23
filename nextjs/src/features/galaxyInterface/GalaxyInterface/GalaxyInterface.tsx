@@ -15,7 +15,7 @@ import { DynamicPaginatedFilterCloudsContainer } from './components/containers/D
 import { DynamicRecordCloudsContainer } from './components/containers/DynamicRecordCloudsContainer'
 import { usePresenter } from './usePresenter'
 
-const DEBUG = true
+const DEBUG = false
 export const GalaxyInterface: React.FC = () => {
     const { activeZoom, setActiveZoom } = usePresenter()
     const graphRef = useRef<HTMLDivElement | null>(null)
