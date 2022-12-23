@@ -2,10 +2,10 @@ import { Box, keyframes, Text } from '@chakra-ui/react'
 import React from 'react'
 import { EntityNames, ZoomLevel5RelationsType } from 'src/generated/graphql'
 
-import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { usePresenter } from './usePresenter'
 import { Cloud } from '@/features/galaxyInterface/components/Cloud'
+import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { ParentRelation } from '../../utils/calculus'
+import { usePresenter } from './usePresenter'
 
 const opacityIn = keyframes`
     from {opacity: 0.3 }
