@@ -57,22 +57,30 @@ export function useRouteTransitions() {
     const router = useRouter()
     const activeZoom = useSelector((state: State) => state.galaxyInterface.activeZoom)
     const params = useSelector((state: State) => state.galaxyInterface.params)
+    
     const { navigate } = useNavigate()
     const { replace } = useReplace()
 
     useEffect(() => {
         function init() {
+           
             if (!activeZoom) {
+                return
+            }
+
+            const isTheSamePage =  params?.page && router.query.page && (params?.page as string) === router.query.page
+            const isTheSameZoom = router.query.preservedZoom === activeZoom || router.query.preservedZoom && router.query.preservedZoom === ZoomMapper[activeZoom]
+
+            if (!params?.page && isTheSameZoom) {
+                return
+            }
+
+            if (isTheSameZoom && isTheSamePage) {
                 return
             }
 
             // we don't need any navigation if animation in progress
             if (animationInProgress.includes(activeZoom)) {
-                return
-            }
-
-            // we don't need any navigation if we already on the page. 
-            if (router.query.preservedZoom === activeZoom || router.query.preservedZoom && router.query.preservedZoom === ZoomMapper[activeZoom]) {
                 return
             }
 
