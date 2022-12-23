@@ -494,7 +494,6 @@ export function useD3ZoomEvents(options: Options) {
             if (activeZoom === ZoomStates.Zoom5) {
                 await scaleZoom({ d3Ref: d3Svg, initial: { duration: 0, scale: 1 } })
             }
-
             if (activeZoom === ZoomStates.Zoom5Initial) {
                 await scaleZoom({ d3Ref: d3Svg, initial: { duration: 0, scale: 1 } })
             }

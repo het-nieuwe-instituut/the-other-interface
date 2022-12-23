@@ -43,8 +43,10 @@ export enum ZoomStates {
     Zoom4ToZoom5 = 'Zoom4ToZoom5',
     ZoomOutToZoom4 = 'ZoomOutToZoom4',
     Zoom5Initial = 'Zoom5Initial',
+    Zoom5InitialWithoutHighlightAnimation = 'Zoom5InitialWithoutHighlightAnimation',
     Zoom5 = 'Zoom5', // non animated state
     Zoom5ToRelation = 'Zoom5ToRelation',
+    Zoom5ToRelationStill = 'Zoom5ToRelationStill',
     Zoom5ToZoom4 = 'Zoom5ToZoom4',
     // zoomedTo = 'ZoomedTo', // idk what this is
 }

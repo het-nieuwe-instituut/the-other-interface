@@ -45,17 +45,16 @@ function useReplace() {
     return { replace }
 }
 
-
 const ZoomMapper: Partial<Record<ZoomStates, ZoomStates>> = {
     [ZoomStates.Zoom2Initial]: ZoomStates.Zoom2,
     [ZoomStates.Zoom3Initial]: ZoomStates.Zoom3,
-    [ZoomStates.Zoom4Initial]: ZoomStates.Zoom4
+    [ZoomStates.Zoom4Initial]: ZoomStates.Zoom4,
 }
-
 
 export function useRouteTransitions() {
     const router = useRouter()
     const activeZoom = useSelector((state: State) => state.galaxyInterface.activeZoom)
+    const prevActiveZoom = useSelector((state: State) => state.galaxyInterface.prevActiveZoom)
     const params = useSelector((state: State) => state.galaxyInterface.params)
     const { navigate } = useNavigate()
     const { replace } = useReplace()
@@ -71,11 +70,13 @@ export function useRouteTransitions() {
                 return
             }
 
-            // we don't need any navigation if we already on the page. 
-            if (router.query.preservedZoom === activeZoom || router.query.preservedZoom && router.query.preservedZoom === ZoomMapper[activeZoom]) {
+            // we don't need any navigation if we already on the page.
+            if (
+                router.query.preservedZoom === activeZoom ||
+                (router.query.preservedZoom && router.query.preservedZoom === ZoomMapper[activeZoom])
+            ) {
                 return
             }
-
 
             if (includesZoomStatesMainGalaxy.includes(activeZoom)) {
                 if ([ZoomStates.Zoom1].includes(activeZoom)) {
@@ -87,8 +88,8 @@ export function useRouteTransitions() {
                 }
                 if (activeZoom === ZoomStates.Zoom1Stories) {
                     navigate('/landingpage/stories', {
-                        ...router.query, 
-                        preservedZoom: ZoomStates.Zoom1Stories
+                        ...router.query,
+                        preservedZoom: ZoomStates.Zoom1Stories,
                     })
 
                     return
@@ -104,7 +105,7 @@ export function useRouteTransitions() {
 
                 navigate(`/landingpage/${params.slug}`, {
                     ...router.query,
-                    preservedZoom: ZoomStates.Zoom2
+                    preservedZoom: ZoomStates.Zoom2,
                 })
 
                 return
@@ -119,15 +120,12 @@ export function useRouteTransitions() {
                     return
                 }
 
-                navigate(
-                    `/landingpage/${params.slug}`,
-                     { 
-                        ...router.query,
-                        preservedZoom: ZoomStates.Zoom3,
-                        page: params.page ?? router.query.page as string ?? '1',
-                        filter: router.query.filter as string ?? params.filter 
-                    }
-                )
+                navigate(`/landingpage/${params.slug}`, {
+                    ...router.query,
+                    preservedZoom: ZoomStates.Zoom3,
+                    page: params.page ?? (router.query.page as string) ?? '1',
+                    filter: (router.query.filter as string) ?? params.filter,
+                })
                 return
             }
             if (includesZoomStatesZoom4Galaxy.includes(activeZoom)) {
@@ -139,21 +137,31 @@ export function useRouteTransitions() {
                     return
                 }
 
-                navigate(
-                    `/landingpage/${params.slug}`,
-                    { 
-                        ...router.query, 
-                        preservedZoom: ZoomStates.Zoom4, 
-                        page: params.page ?? router.query.page as string ?? '1', 
-                        filter: router.query.filter as string ?? params.filter,
-                        collection: router.query.collection as string ?? params.collection
-                    }
-                )
+                navigate(`/landingpage/${params.slug}`, {
+                    ...router.query,
+                    preservedZoom: ZoomStates.Zoom4,
+                    page: params.page ?? (router.query.page as string) ?? '1',
+                    filter: (router.query.filter as string) ?? params.filter,
+                    collection: (router.query.collection as string) ?? params.collection,
+                })
                 return
             }
             if (includesZoomStatesZoom5Galaxy.includes(activeZoom)) {
+                const navigatedFromZoom5Page = prevActiveZoom
+                    ? includesZoomStatesZoom5Galaxy.includes(prevActiveZoom)
+                    : false
+
                 if (!params) {
                     console.error('params are needed for these states')
+                    return
+                }
+
+                console.log(params)
+
+                if (navigatedFromZoom5Page) {
+                    navigate(`/landingpage/${params.slug}/${params.record}`, {
+                        preservedZoom: ZoomStates.Zoom5InitialWithoutHighlightAnimation,
+                    })
                     return
                 }
 
@@ -162,5 +170,5 @@ export function useRouteTransitions() {
             }
         }
         init()
-    }, [activeZoom, navigate, params, replace, router])
+    }, [activeZoom, navigate, params, prevActiveZoom, replace, router])
 }

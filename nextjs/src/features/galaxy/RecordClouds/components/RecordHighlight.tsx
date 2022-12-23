@@ -17,26 +17,12 @@ interface RecordCloudHighlightProps {
     queryType: NonNullable<ZoomLevel5Entities>['__typename']
     type: SupportedQuerys
     dimensions: Dimensions
-    animationState: 'in' | 'none' | 'out'
 }
 
-enum AnimationStates {
-    in = 'in',
-    none = 'none',
-    out = 'out',
-}
-
-const animationStates = {
-    [AnimationStates.in]: keyframes`
-    from {opacity: 0;}
-    to {opacity: 1}
-  `,
-    [AnimationStates.out]: keyframes`
-  from {opacity: 1;}
-  to {opacity: 0}
-`,
-    [AnimationStates.none]: undefined,
-}
+const appear = keyframes`
+  from {opacity: 0;}
+  to {opacity: 1}
+`
 
 export const RecordCloudHighlight: React.FunctionComponent<RecordCloudHighlightProps> = ({
     image,
@@ -44,13 +30,12 @@ export const RecordCloudHighlight: React.FunctionComponent<RecordCloudHighlightP
     dimensions,
     queryType,
     type,
-    animationState,
 }) => {
     const { t } = useTypeSafeTranslation('record')
     const radius = 500
     const width = dimensions.width ?? 0
     const height = dimensions.height ?? 0
-    const animation = animationStates[animationState] ? `${animationStates[animationState]} 2s linear` : undefined
+    const appearAnimation = `${appear} 2s linear`
 
     return (
         <Circle
@@ -69,7 +54,7 @@ export const RecordCloudHighlight: React.FunctionComponent<RecordCloudHighlightP
                 flexDirection="column"
                 justifyContent="center"
                 zIndex={1}
-                animation={animation}
+                animation={appearAnimation}
             >
                 <Text textStyle={'cloudTextMicro'} mb={2.5}>
                     {t(type)}

@@ -6,7 +6,7 @@ import { GalaxyWrapper } from '@/features/shared/components/GalaxyWrapper/Galaxy
 import useScroll from '@/features/shared/hooks/useScroll'
 import { Box, Button } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
-import { memo, useRef } from 'react'
+import { Fragment, memo, useId, useRef } from 'react'
 import { ZoomStates } from '../types/galaxy'
 import { DynamicCollectionCloudsContainer } from './components/containers/DynamicCollectionGalaxyContainer'
 import { DynamicFilterCloudsContainer } from './components/containers/DynamicFilterCloudsContainer'
@@ -21,9 +21,10 @@ export const GalaxyInterface: React.FC = () => {
     const graphRef = useRef<HTMLDivElement | null>(null)
     const sizes = useSize(graphRef)
     const { scrollPosition } = useScroll()
+    const id = useId()
 
     return (
-        <>
+        <Fragment key={id}>
             <Breadcrumbs
                 bg={scrollPosition >= 750 ? 'graph' : 'trasparent'}
                 onWrapperClick={ScrollToTop}
@@ -53,7 +54,7 @@ export const GalaxyInterface: React.FC = () => {
                     </Box>
                 </Box>
             )}
-        </>
+        </Fragment>
     )
 }
 
@@ -92,7 +93,11 @@ export const animationInProgress = [
     ZoomStates.Zoom5ToZoom4,
 ]
 
-export const includesZoomedStatesMainGalaxy = [ZoomStates.Zoom1, ZoomStates.Zoom1ToZoom2, ZoomStates.Zoom1ToZoom1Stories]
+export const includesZoomedStatesMainGalaxy = [
+    ZoomStates.Zoom1,
+    ZoomStates.Zoom1ToZoom2,
+    ZoomStates.Zoom1ToZoom1Stories,
+]
 
 export const includesZoomStatesZoom2Galaxy = [
     ZoomStates.Zoom2,
@@ -120,6 +125,8 @@ export const includesZoomStatesZoom4Galaxy = [
 export const includesZoomStatesZoom5Galaxy = [
     ZoomStates.Zoom5Initial,
     ZoomStates.Zoom5,
+    ZoomStates.Zoom5ToRelationStill,
+    ZoomStates.Zoom5InitialWithoutHighlightAnimation,
     ZoomStates.Zoom5ToRelation,
     ZoomStates.Zoom5ToZoom4,
 ]

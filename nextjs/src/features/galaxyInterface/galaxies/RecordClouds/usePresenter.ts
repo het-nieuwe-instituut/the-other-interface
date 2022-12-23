@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { useD3ZoomEvents } from '../../hooks/useD3ZoomEvents'
-import { getAnimationStateBasedByZoom } from '../../hooks/utils'
+import { getHighlightAnimationState } from '../../hooks/utils'
+
 import { useD3HighlighAnimation } from './hooks/useD3HighlighAnimation'
 import { RecordCloudProps } from './RecordClouds'
 
@@ -11,7 +12,7 @@ export function usePresenter(props: Props) {
     const svgRef = useRef<SVGSVGElement | null>(null)
 
     const zoomEvents = useD3ZoomEvents({ svgRef, dimensions })
-    const animationState = getAnimationStateBasedByZoom(zoomEvents.zoomLevel)
+    const animationState = getHighlightAnimationState(zoomEvents.zoomLevel)
     useD3HighlighAnimation(svgRef, animationState)
 
     return { svgRef, animationState, ...zoomEvents, ...props }

@@ -14,7 +14,6 @@ export const DynamicRecordCloudsContainer: React.FC<{ dimensions: Dimensions }> 
     return (
         <MemoizedRecordClouds
             zoomLevel5={zoom5Context.detail}
-            relations={[]}
             dimensions={dimensions}
             type={SupportedQuerys.publications}
         />

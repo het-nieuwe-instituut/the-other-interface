@@ -8,9 +8,10 @@ import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 
 export interface RecordQueryParams {
     record: string
-    slug: SupportedQuerys,
+    slug: SupportedQuerys
     filter: string
     collection: string
+    preservedZoom?: ZoomStates
 }
 
 const Page = (pageProps: InferGetServerSidePropsType<typeof getServerSideProps>) => {
@@ -30,6 +31,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     const queryParams = context.query as unknown as RecordQueryParams
     const record = queryParams.record
     const slug = queryParams.slug
+    const preservedZoom = queryParams.preservedZoom
 
     const [landingpage, zoom5] = await Promise.all([
         ApiClient?.landingpageBySlug({ slug, locale: context?.locale }),
@@ -43,7 +45,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
             landingpage,
             reduxState: prepareReduxState({
                 galaxyInterface: {
-                    activeZoom: ZoomStates.Zoom5Initial,
+                    activeZoom: preservedZoom ? preservedZoom : ZoomStates.Zoom5Initial,
                     params: { slug, record: record },
                 },
             }),
