@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import ApiClient from '@/features/graphql/api'
 import { isEmpty } from 'lodash'
 import { ImageModuleFragmentFragment } from 'src/generated/graphql'
-import { getSpinnerHTML } from '@/features/shared/components/Loading/spinner'
+import { getPulseLoaderHTML } from '@/features/shared/components/Loading/pulseLoader'
 
 export function useStoriesTooltip() {
     useEffect(() => {
@@ -148,7 +148,7 @@ function insertTooltip(item: TooltipData) {
         <div style="${tooltipStyle}">
             <style>${descriptionStyle}</style>
             <p style="${titleStyle}">${item.title}</p>
-			${getSpinnerHTML({ id: `${elId}-spinner`, className: 'spinner', size: 20 })}
+			${getPulseLoaderHTML({ id: `${elId}-spinner`, className: 'spinner' })}
 			<img src="" alt="" style="max-width: 100%; max-height: 200px" />
             ${item.shortDescription ? `<p class="description-blurred">${item.shortDescription}</p>` : ''}
         </div>
