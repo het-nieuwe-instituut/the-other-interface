@@ -1,9 +1,9 @@
-import { Dimensions } from '@/features/galaxy/types/galaxy'
-import { Cloud } from '@/features/galaxyInterface/components/Cloud'
 import { SupportedQuerys } from '@/features/pages/tasks/zoom5Config'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { typeColors } from '@/features/shared/styles/theme/foundations/colors'
 import { Box, Flex, Image, keyframes, Text } from '@chakra-ui/react'
+import { Dimensions } from '@/features/galaxy/types/galaxy'
+import { Cloud } from '@/features/galaxyInterface/components/Cloud'
 import { ZoomLevel5Entities } from '../RecordClouds'
 
 interface RecordCloudHighlightProps {
@@ -17,13 +17,26 @@ interface RecordCloudHighlightProps {
     queryType: NonNullable<ZoomLevel5Entities>['__typename']
     type: SupportedQuerys
     dimensions: Dimensions
-    className: string
+    animationState: 'in' | 'none' | 'out'
 }
 
-const appear = keyframes`
-  from {opacity: 0;}
-  to {opacity: 1}
-`
+enum AnimationStates {
+    in = 'in',
+    none = 'none',
+    out = 'out',
+}
+
+const animationStates = {
+    [AnimationStates.in]: keyframes`
+    from {opacity: 0;}
+    to {opacity: 1}
+  `,
+    [AnimationStates.out]: keyframes`
+  from {opacity: 1;}
+  to {opacity: 0}
+`,
+    [AnimationStates.none]: undefined,
+}
 
 export const RecordCloudHighlight: React.FunctionComponent<RecordCloudHighlightProps> = ({
     image,
@@ -31,13 +44,13 @@ export const RecordCloudHighlight: React.FunctionComponent<RecordCloudHighlightP
     dimensions,
     queryType,
     type,
-    className,
+    animationState,
 }) => {
     const { t } = useTypeSafeTranslation('record')
     const radius = 500
     const width = dimensions.width ?? 0
     const height = dimensions.height ?? 0
-    const appearAnimation = `${appear} 2s linear`
+    const animation = animationStates[animationState] ? `${animationStates[animationState]} 2s linear` : undefined
 
     return (
         <Cloud
@@ -47,7 +60,7 @@ export const RecordCloudHighlight: React.FunctionComponent<RecordCloudHighlightP
             y={height / 2 - radius / 2}
             defaultBackground={typeColors[type].hover1}
             hoverBackground={typeColors[type].hover1}
-            className={className}
+            className={'highlight'}
         >
             <Flex
                 height={'100%'}
@@ -56,7 +69,7 @@ export const RecordCloudHighlight: React.FunctionComponent<RecordCloudHighlightP
                 flexDirection="column"
                 justifyContent="center"
                 zIndex={1}
-                animation={appearAnimation}
+                animation={animation}
             >
                 <Text textStyle={'cloudTextMicro'} mb={2.5}>
                     {t(type)}
