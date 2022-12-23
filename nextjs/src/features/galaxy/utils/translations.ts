@@ -1,4 +1,4 @@
-const galaxyTypeByTransltions = {
+export const galaxyTypeByTransltions = {
     ['publications']: 'publicationsBy' as const,
     ['archives']: 'archivesBy' as const,
     ['people']: 'peopleBy' as const,

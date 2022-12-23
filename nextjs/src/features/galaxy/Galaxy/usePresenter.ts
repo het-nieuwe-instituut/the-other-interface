@@ -39,7 +39,7 @@ function useArchiefBestandDeel(zoomLevel1Data?: ZoomLevel1Query) {
 }
 
 export function usePresenter(dimensions: Dimensions, selector: string) {
-    const {  push } = useRouter()
+    const { push } = useRouter()
     const { zoomLevel1 } = useContext(HomepageContext)
     const { stories: storiesData } = useContext(LandingpageContext)
     // TODO: remove hardcoded pageSize & paginate
@@ -48,21 +48,21 @@ export function usePresenter(dimensions: Dimensions, selector: string) {
 
     const stories = useMemo(() => {
         const storiesCount = objectsPerTypeWithIds.find(item => item.id === EntityNames.Stories)?.count
-        // on zoom level 0 and 1 we only need to show UI for galaxy, we don't need to fetch data. 
-        const endData =  storiesData ? storiesData : Array(storiesCount).fill(0)
+        // on zoom level 0 and 1 we only need to show UI for galaxy, we don't need to fetch data.
+        const endData = storiesData ? storiesData : Array(storiesCount).fill(0)
         const parents = times(endData.length / 10, i => `test${i}`)
 
         return endData
             .map(item => ({
                 ...item,
                 parent: parents[Math.floor((Math.random() * endData.length) / 10) + 1] ?? parents[0],
-                id: uniqueId(),
+                id: item?.id ?? `dummy-id-${uniqueId()}`,
                 title: item?.attributes?.title ?? '',
                 shortDescription: item?.attributes?.shortDescription,
                 slug: item?.attributes?.slug ?? '',
             }))
             .slice(0, 1000)
-    },  [objectsPerTypeWithIds, storiesData])
+    }, [objectsPerTypeWithIds, storiesData])
 
     const handleMoveToZoomLevel1 = () => {
         push({ pathname: '/', query: { zoomLevel: ZoomLevel.Zoom1 } }, undefined, { shallow: true })

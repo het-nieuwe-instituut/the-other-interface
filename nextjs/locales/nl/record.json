@@ -4,6 +4,7 @@
     "archives": "Archieven",
     "objects": "Objecten",
     "stories": "Stories",
+    "story": "Story",
     "relatedPeople": "Toon {{count}} van {{total}} gerelateerde personen",
     "relatedObjects": "Toon {{count}} van {{total}} gerelateerde objecten",
     "relatedPublications": "Toon {{count}} van {{total}} gerelateerde publicaties",

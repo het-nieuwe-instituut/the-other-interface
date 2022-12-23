@@ -1,6 +1,6 @@
 import { SupportedLandingPages } from '@/features/galaxy/PaginatedFilterClouds/PaginatedFilterCloudsContainer'
 import { zoom3QueryToPaginatedFilterCloudData } from '@/features/galaxyInterface/galaxies/PaginatedFilterClouds/mappers/zoom3QueryToPaginatedFilterCloudData'
-import LandingpageFilterContext from '@/features/pages/containers/LandingpageFilterContainer/LandingpageFilterContext'
+import LandingpageContext from '@/features/pages/containers/LandingpageContainer/LandingpageContext'
 import { useRouter } from 'next/router'
 import { useContext, useMemo } from 'react'
 import MemoizedPaginatedFilterClouds from '../../../galaxies/PaginatedFilterClouds/PaginatedFilterClouds'
@@ -8,7 +8,7 @@ import { Dimensions } from '../../../types/galaxy'
 
 export const DynamicPaginatedFilterCloudsContainer: React.FC<{ dimensions: Dimensions }> = ({ dimensions }) => {
     const router = useRouter()
-    const { zoomLevel3 } = useContext(LandingpageFilterContext)
+    const { zoomLevel3 } = useContext(LandingpageContext)
     const filterCloudData = useMemo(() => zoom3QueryToPaginatedFilterCloudData(zoomLevel3), [zoomLevel3])
 
     if (!zoomLevel3?.zoomLevel3?.length) {

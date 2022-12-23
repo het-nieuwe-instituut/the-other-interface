@@ -2,9 +2,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Box } from '@chakra-ui/react'
 import Link from 'next/link'
-import React, { memo, useEffect } from 'react'
+import React, { memo } from 'react'
 import { StoriesItem } from '../../galaxies/MainGalaxy/types'
-import { StoryDataPoint, usePresenter } from './usePresenter'
+import { usePresenter } from './usePresenter'
 
 interface Props {
     disableLinkAndHover: boolean
@@ -23,14 +23,7 @@ const defaultDimensions = {
 export const StoriesSystem: React.FC<Props> = ({ data = [], dimensions = defaultDimensions, disableLinkAndHover }) => {
     const svgWidth = dimensions.width
     const svgHeight = dimensions.height
-    const { triangles, dataPoints, showTooltip, hideTooltip, cleanupTooltips } = usePresenter(data)
-
-    useEffect(() => {
-        // cleanup any remaining visible tooltips on unmount
-        return () => {
-            cleanupTooltips()
-        }
-    }, [])
+    const { triangles, dataPoints, showTooltip, hideTooltip } = usePresenter(data)
 
     return (
         <svg width={svgWidth} height={svgHeight}>
@@ -44,7 +37,7 @@ export const StoriesSystem: React.FC<Props> = ({ data = [], dimensions = default
                     {disableLinkAndHover ? (
                         renderDot(item, showTooltip, hideTooltip, disableLinkAndHover)
                     ) : (
-                        <Link className="pointer" href={`/story/${item.slug}`}>
+                        <Link className="pointer" href={`/story/${item.id}-${item.slug}`}>
                             {renderDot(item, showTooltip, hideTooltip, disableLinkAndHover)}
                         </Link>
                     )}
@@ -55,9 +48,9 @@ export const StoriesSystem: React.FC<Props> = ({ data = [], dimensions = default
 }
 
 function renderDot(
-    item: StoryDataPoint,
-    showTooltip: (e: React.MouseEvent<HTMLDivElement, MouseEvent>, item: StoryDataPoint) => void,
-    hideTooltip: (item: StoryDataPoint) => void,
+    item: ReturnType<typeof usePresenter>['dataPoints'][0],
+    showTooltip: ReturnType<typeof usePresenter>['showTooltip'],
+    hideTooltip: ReturnType<typeof usePresenter>['hideTooltip'],
     disableLinkAndHover: boolean
 ) {
     return (

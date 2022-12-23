@@ -5,7 +5,6 @@ import { Box, Flex, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useId } from 'react'
 import { Zoom3Query } from 'src/generated/graphql'
-import { LandingPageFilterQueryParams } from 'src/pages/landingpage/[slug]/[filter]'
 import { Circle } from '../components/Circle'
 import { getGalaxyTypeByTranslationsKey } from '../utils/translations'
 import { SupportedLandingPages } from './PaginatedFilterCloudsContainer'
@@ -20,12 +19,16 @@ type Props = {
     type: SupportedLandingPages
 }
 
+type PaginatedFilterCloudsParams = {
+    slug: SupportedLandingPages
+}
+
 const PaginatedFilterClouds: React.FunctionComponent<Props> = ({ dimensions, zoom3 }) => {
     const { width, height } = dimensions
     const svgWidth = width
     const svgHeight = height
     const router = useRouter()
-    const queryParams = router.query as unknown as LandingPageFilterQueryParams
+    const queryParams = router.query as unknown as PaginatedFilterCloudsParams
     const id = useId().replaceAll(':', '')
     const { svgRef, zoomed, backgrounds, paginateBack, paginateNext, total, totalPages, currentPage } = usePresenter(
         dimensions,
