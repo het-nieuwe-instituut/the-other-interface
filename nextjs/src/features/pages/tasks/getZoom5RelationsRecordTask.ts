@@ -6,21 +6,14 @@ export async function getZoom5RelationsRecordTask(path: string, record: string) 
     try {
         const { id } = extractSlugAndId(record)
         const type = extractType(path)
-        let realtions
 
-        if (type === SupportedQuerys.stories) {
-            realtions = await ApiClient?.StoriesRelations({ id })
-            return {
-                zoom5relations: realtions,
-            }
-        }
-
-        const configByType = zoom5Config[type]
-
-        realtions = await configByType.relationsQuery?.({ id: id })
+        const relations =
+            type === SupportedQuerys.stories
+                ? await ApiClient?.StoriesRelations({ id })
+                : await zoom5Config[type].relationsQuery?.({ id })
 
         return {
-            zoom5relations: realtions,
+            zoom5relations: relations,
         }
     } catch (e) {
         console.log(e, 'Error accured in zoom level 5 task')
