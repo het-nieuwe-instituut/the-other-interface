@@ -18,6 +18,7 @@ interface RecordCloudHighlightProps {
     type: SupportedQuerys
     dimensions: Dimensions
     animationState: 'in' | 'none' | 'out'
+    className: string
 }
 
 enum AnimationStates {
@@ -45,6 +46,7 @@ export const RecordCloudHighlight: React.FunctionComponent<RecordCloudHighlightP
     queryType,
     type,
     animationState,
+    className,
 }) => {
     const { t } = useTypeSafeTranslation('record')
     const radius = 500
@@ -60,7 +62,7 @@ export const RecordCloudHighlight: React.FunctionComponent<RecordCloudHighlightP
             y={height / 2 - radius / 2}
             defaultBackground={typeColors[type].hover1}
             hoverBackground={typeColors[type].hover1}
-            className={'highlight'}
+            className={className}
         >
             <Flex
                 height={'100%'}

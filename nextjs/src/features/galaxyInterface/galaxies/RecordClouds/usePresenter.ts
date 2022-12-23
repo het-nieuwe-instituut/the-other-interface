@@ -11,9 +11,10 @@ export function usePresenter(props: Props) {
     const svgRef = useRef<SVGSVGElement | null>(null)
 
     const zoomEvents = useD3ZoomEvents({ svgRef, dimensions })
-    useD3HiglightAnimation(svgRef, getHighlightAnimationState(zoomEvents.zoomLevel))
+    const animationState = getHighlightAnimationState(zoomEvents.zoomLevel)
+    useD3HiglightAnimation(svgRef, animationState)
 
-    return { svgRef, ...zoomEvents, ...props }
+    return { svgRef, animationState, ...zoomEvents, ...props }
 }
 function getHighlightAnimationState(zoomLevel: ZoomStates | null) {
     const config = {

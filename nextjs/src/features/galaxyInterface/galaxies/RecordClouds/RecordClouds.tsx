@@ -31,6 +31,7 @@ const RecordClouds: React.FunctionComponent<RecordCloudProps> = props => {
         dimensions: { height, width },
         type,
         zoomLevel5,
+        animationState,
     } = usePresenter(props)
 
     return (
@@ -63,6 +64,7 @@ const RecordClouds: React.FunctionComponent<RecordCloudProps> = props => {
                     // }}
                     queryType={zoomLevel5?.__typename}
                     dimensions={SVG_DIMENSIONS}
+                    animationState={animationState}
                 />
             )
         }
@@ -74,6 +76,7 @@ const RecordClouds: React.FunctionComponent<RecordCloudProps> = props => {
                     title={zoomLevel5.name ?? undefined}
                     queryType={zoomLevel5?.__typename}
                     dimensions={SVG_DIMENSIONS}
+                    animationState={animationState}
                 />
             )
         }
@@ -85,6 +88,7 @@ const RecordClouds: React.FunctionComponent<RecordCloudProps> = props => {
                     title={zoomLevel5.title ?? undefined}
                     queryType={zoomLevel5?.__typename}
                     dimensions={SVG_DIMENSIONS}
+                    animationState={animationState}
                 />
             )
         }
@@ -96,6 +100,7 @@ const RecordClouds: React.FunctionComponent<RecordCloudProps> = props => {
                     title={zoomLevel5.title ?? undefined}
                     queryType={zoomLevel5?.__typename}
                     dimensions={SVG_DIMENSIONS}
+                    animationState={animationState}
                 />
             )
         }
@@ -108,6 +113,7 @@ const RecordClouds: React.FunctionComponent<RecordCloudProps> = props => {
                     title={zoomLevel5.title ?? undefined}
                     queryType={zoomLevel5?.__typename}
                     dimensions={SVG_DIMENSIONS}
+                    animationState={animationState}
                 />
             )
         }
@@ -120,6 +126,7 @@ const RecordClouds: React.FunctionComponent<RecordCloudProps> = props => {
                     title={zoomLevel5.title ?? undefined}
                     queryType={zoomLevel5?.__typename}
                     dimensions={SVG_DIMENSIONS}
+                    animationState={animationState}
                 />
             )
         }
@@ -132,6 +139,7 @@ const RecordClouds: React.FunctionComponent<RecordCloudProps> = props => {
                     title={zoomLevel5.recordTitle ?? undefined}
                     queryType={zoomLevel5?.__typename}
                     dimensions={SVG_DIMENSIONS}
+                    animationState={animationState}
                 />
             )
         }
@@ -151,6 +159,7 @@ const RecordClouds: React.FunctionComponent<RecordCloudProps> = props => {
                         alt: '',
                     }}
                     dimensions={SVG_DIMENSIONS}
+                    animationState={animationState}
                 />
             )
         }
@@ -163,6 +172,7 @@ const RecordClouds: React.FunctionComponent<RecordCloudProps> = props => {
                     title={zoomLevel5.attributes?.title ?? undefined}
                     queryType={zoomLevel5?.__typename}
                     dimensions={SVG_DIMENSIONS}
+                    animationState={animationState}
                 />
             )
         }
