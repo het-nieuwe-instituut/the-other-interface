@@ -1,6 +1,7 @@
 import { useLooseTypeSafeTranslation } from "@/features/shared/hooks/translations"
 import { Box, Text, Flex, Link, useBreakpoint } from '@chakra-ui/react'
 import { useEffect } from "react";
+import { MAX_Z_INDEX } from "../../constants/mainConstants";
 import { GalaxyTopRight } from "../GalaxyWrapper/GalaxyTopRight/GalaxyTopRight";
 
 
@@ -32,7 +33,7 @@ const MobileOverlay = () => {
     }, [])
 
     return (
-        <Flex width={'100%'} height={'100%'} position={'fixed'} top={0} right={0} zIndex={9999} background={'mobileOverlay'} overflow={'hidden'} backdropBlur={'20px'}>
+        <Flex width={'100%'} height={'100%'} position={'fixed'} top={0} right={0} zIndex={MAX_Z_INDEX - 1 } background={'mobileOverlay'} overflow={'hidden'} backdropBlur={'20px'}>
             <Flex paddingLeft={8} paddingTop={4} justifyContent={'space-between'} flexDirection={'row'} height={'40px'} overflow={'hidden'} alignItems={'center'} width={'100%'} marginRight={4}>
                 <Link 
                     href={'/'} 

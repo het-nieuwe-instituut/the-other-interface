@@ -17,6 +17,7 @@ interface Props {
 export const CarouselSlide = (props: Props) => {
     const { items, key, type, carouselRef } = props;
     const { itemWidth, justifySlide } = usePresenter(type, carouselRef);
+    console.log(itemWidth)
         return (
             <Flex key={`${key}`} mb={'3'} justifyContent={justifySlide}>
                 {items?.map((component, index) => {

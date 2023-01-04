@@ -1,0 +1,48 @@
+query menuPages(
+	$filters: MenupageFiltersInput
+	$pagination: PaginationArg = {}
+	$sort: [String!] = []
+	$publicationState: String
+	$locale: String
+) {
+	menupages(
+		filters: $filters
+		pagination: $pagination
+		sort: $sort
+		publicationState: $publicationState
+		locale: $locale
+	) {
+		data {
+			id
+			attributes {
+				Title
+				slug
+				createdAt
+				updatedAt
+				publishedAt
+				locale
+				localizations {
+					data {
+						id
+						attributes {
+							Title
+							slug
+							createdAt
+							updatedAt
+							publishedAt
+							locale
+						}
+					}
+				}
+			}
+		}
+		meta {
+			pagination {
+				page
+				pageSize
+				pageCount
+				total
+			}
+		}
+	}
+}

@@ -1,8 +1,9 @@
-import { Box, Flex, Text } from '@chakra-ui/react'
+import { Flex, Text } from '@chakra-ui/react'
 import useTranslation from 'next-translate/useTranslation'
 // import { useEffect, useState } from 'react'
 import { GalaxyButton } from '../GalaxyButton/GalaxyButton'
 import setLanguage from 'next-translate/setLanguage'
+import { MenuButton } from '../../MenuButton/MenuButton'
 
 export const GalaxyTopRight: React.FC = () => {
     const { lang } = useTranslation()
@@ -14,13 +15,14 @@ export const GalaxyTopRight: React.FC = () => {
     // })
 
     return (
-        <Box>
+        <Flex alignItems={'center'}>
             <Flex flexDirection={'row'} alignItems={'center'} justifyContent={'center'}>
                 <GalaxyButton text={'NL'} size={'sm'} disabled={lang === 'nl'} onClick={async () => await setLanguage('nl')}/>
                 <Text margin={0}>|</Text>
                 <GalaxyButton text={'EN'} size={'sm'} disabled={lang === 'en'} onClick={async () => await setLanguage('en')} />
             </Flex>
-        </Box>
+            <MenuButton />
+        </Flex>
     )
 
     // function initUrls() {
