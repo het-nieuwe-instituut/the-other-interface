@@ -74,5 +74,34 @@ export const Link: ComponentStyleConfig = {
                 background: 'linear-gradient(90deg, #FFA5A5 0%, rgba(255, 149, 238, 0.12) 100%)',
             },
         },
+        navigation: {
+            color: `${colors.black}`,
+            underline: 'none',
+            textDecoration: 'none',
+            borderBottom: 'none',
+
+            _hover: {
+                color: `${colors.white}!important`,
+                underline: 'none',
+                textDecoration: 'none',
+                borderBottom: 'none',
+                textShadow: `0px 0px 4px rgba(0, 0, 0, 0.25), 0px 0px 4px #000000, 0px 0px 4px #000000`
+            },
+
+            _active: {
+                color: `${colors.white}`,
+                underline: 'none',
+                textDecoration: 'none',
+                borderBottom: 'none',
+                textShadow: `0px 0px 4px rgba(0, 0, 0, 0.25), 0px 0px 4px #000000, 0px 0px 4px #000000`
+            },
+
+            _visited: {
+                underline: 'none',
+                textDecoration: 'none',
+                borderBottom: 'none',
+                color: `${colors.black}`,
+            }
+        }
     },
 }

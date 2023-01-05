@@ -1,6 +1,5 @@
 import Breadcrumbs, { BreadcrumbsRenderModes } from "@/features/galaxy/components/Breadcrumbs/Breadcrumbs";
-import { Flex, Box, Text, theme, Link as ChhakraLink, useBreakpoint } from "@chakra-ui/react"
-import Link from 'next/link'
+import { Flex, Box, Text, theme, Link, useBreakpoint } from "@chakra-ui/react"
 import { useSelector } from "react-redux";
 import { State } from "../../configs/store";
 import { MAX_Z_INDEX } from "../../constants/mainConstants";
@@ -39,14 +38,14 @@ export const Navigation = () => {
             {
                 isMobile ? (
                     <Flex paddingLeft={8} paddingTop={4} justifyContent={'space-between'} flexDirection={'row'} height={'40px'} overflow={'hidden'} alignItems={'center'} width={'100%'} marginRight={4}>
-                        <ChhakraLink 
+                        <Link 
                             href={'/'} 
                             variant={'decorative'}
                             cursor="pointer"
                             textStyle="small"
                         >
                             {tNavigation('theNewInstitute')}    
-                        </ChhakraLink>
+                        </Link>
                         <Box marginRight={'8'}>
                             <GalaxyTopRight />
                         </Box>
@@ -79,32 +78,30 @@ export const Navigation = () => {
                         {tNavigation('explore_collection')}
                     </Text>
 
-                    <Text textStyle={'h1'} mb={'sm'}>
-                        <Link href='/landingpage/stories?preservedZoom=Zoom1Stories'>
+                        <Link href='/landingpage/stories?preservedZoom=Zoom1Stories' variant={'navigation'} cursor="pointer" textStyle={'h1'} mb={'sm'}>
                             {tNavigation('stories')}
                         </Link>
-                    </Text>
                     
-                    <Text textStyle={'h1'} mb={'sm'}>
-                        <Link href='/landingpage/archives?preservedZoom=Zoom2'>
+                    
+                        <Link href='/landingpage/archives?preservedZoom=Zoom2' variant={'navigation'} cursor="pointer" textStyle={'h1'} mb={'sm'}>
                             {tNavigation('archives')}
                         </Link>
-                    </Text>
-                    <Text textStyle={'h1'} mb={'sm'}>
-                        <Link href='/landingpage/objects?preservedZoom=Zoom2'>
+                   
+                    
+                        <Link href='/landingpage/objects?preservedZoom=Zoom2' variant={'navigation'} cursor="pointer" textStyle={'h1'} mb={'sm'}>
                             {tNavigation('objects')}
                         </Link>
-                    </Text>
-                    <Text textStyle={'h1'} mb={'sm'}>
-                        <Link href='/landingpage/people?preservedZoom=Zoom2'>
+                    
+                    
+                        <Link href='/landingpage/people?preservedZoom=Zoom2' variant={'navigation'} cursor="pointer" textStyle={'h1'} mb={'sm'}>
                             {tNavigation('people')}
                         </Link>
-                    </Text>
-                    <Text textStyle={'h1'} mb={'sm'}>
-                        <Link href='/landingpage/publications?preservedZoom=Zoom2'>
-                            {tNavigation('publications')}
-                        </Link>
-                    </Text>
+                 
+    
+                        <Link href='/landingpage/publications?preservedZoom=Zoom2' variant={'navigation'} cursor="pointer" textStyle={'h1'} mb={'sm'}>
+                            {tNavigation('publications')}</Link>
+                        
+    
                 </Flex>
                 
                 <Flex maxWidth={'398px'} minWidth={'388px'} flexDirection={'column'}>
@@ -114,11 +111,9 @@ export const Navigation = () => {
 
                     {
                         menupages?.menupages?.data.map(item => (
-                                <Text textStyle={'h3'} mb={'sm'} key={item?.id}>
-                                    <Link href={`/menupage/${item?.attributes?.slug}`}>
+                                    <Link href={`/menupage/${item?.attributes?.slug}`} variant={'navigation'} cursor="pointer" textStyle={'h3'} mb={'sm'} key={item?.id}>
                                         {capitalizeFirstLetter(item?.attributes?.Title ?? '')}
                                     </Link>
-                                </Text>
                             )
                         )
                     }
