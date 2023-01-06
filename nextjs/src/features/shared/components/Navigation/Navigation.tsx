@@ -34,7 +34,7 @@ export const Navigation = () => {
     const isMobile = breakpoint === 'sm'
   
     return (
-        <Box sx={{ animation: isMenuOpen ? `${fadeIn} 300ms linear` : `${fadeOut}, 300ms linear`, visibility: isMenuOpen ? 'visible' : 'hidden'}}  height={'100vh'} width={'100%'} position={'fixed'} px={{ xl: 6, base: 0 }}  background={theme.colors.white} zIndex={MAX_Z_INDEX} top={0} right={0} opacity={0.95}>
+        <Box visibility={isMenuOpen ? 'visible' : 'hidden'} animation={isMenuOpen ? `${fadeIn} 300ms linear` : `${fadeOut}, 300ms linear`}  height={'100vh'} width={'100%'} position={'fixed'} px={{ xl: 6, base: 0 }}  background={theme.colors.white} zIndex={MAX_Z_INDEX} top={0} right={0} opacity={0.95}>
             {
                 isMobile ? (
                     <Flex paddingLeft={8} paddingTop={4} justifyContent={'space-between'} flexDirection={'row'} height={'40px'} overflow={'hidden'} alignItems={'center'} width={'100%'} marginRight={4}>
@@ -52,7 +52,7 @@ export const Navigation = () => {
                     </Flex>
                 ) : (
                     <Flex
-                        maxW={theme.breakpoints.xl}
+                        maxW={'xl'}
                         marginX={'auto'}
                         position={'fixed'}
                         left={0}
