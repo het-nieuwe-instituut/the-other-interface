@@ -26,8 +26,6 @@ export const CarouselModule: React.FC<Props> = props => {
         handlePressButton,
     } = usePresenter(type, items, buttonUrl)
 
-    console.log(type)
-
     return (
         <Box
             as="div"
