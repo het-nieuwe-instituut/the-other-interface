@@ -1,4 +1,6 @@
 import { Flex, Text, useBreakpoint, Link } from "@chakra-ui/react"
+import { useLooseTypeSafeTranslation } from "../../hooks/translations"
+import useQuery from "../../hooks/useQuery"
 
 
 const linksMockTop = [
@@ -17,7 +19,9 @@ const linksMockTop = [
 
 export const Footer = () => {
     const breakpoint = useBreakpoint()
+    const { lang } = useLooseTypeSafeTranslation('navigation')
     const isMobile = breakpoint === 'sm'
+    const { data } = useQuery(() => getMenuPagesTask(lang))
     return (
         <Flex justifyContent={'space-between'} minHeight={'185px'} px={'8'} pt={'24'} marginX={'auto'} maxWidth={'90em'} paddingTop={'36px'} paddingBottom={'36px'}>
             <Flex backgroundColor={'blue'} flex={0.16}>
@@ -33,10 +37,8 @@ export const Footer = () => {
                         +31(0)10-4401200 Info@hetnieuweinstituut.net
                     </Text>
                 </Flex>
-                {
-                    isMobile ? (
-                        <></>
-                    ) : (
+                
+                
                         <Flex backgroundColor={'grey'} flex={0.3}>
                             <>
                             {
@@ -54,8 +56,8 @@ export const Footer = () => {
                             </>
                             
                         </Flex>
-                    )
-                }
+                    
+                
                 
                 <Flex backgroundColor={'black'} flex={0.1}>
 
