@@ -11,5 +11,18 @@
     "relatedStories": "{{count}} related stories",
     "relatedStories_one": "1 related story",
     "relatedArchive": "{{count}} related archives",
-    "relatedArchive_one": "1 related archive"
+    "relatedArchive_one": "1 related archive",
+    "metaObject_id": "Object ID",
+    "metaObject_archive": "Archive",
+    "metaObject_makers": "Maker(s)",
+    "metaObject_dates": "Dates",
+    "metaObject_place": "Place",
+    "metaObject_name": "Object name",
+    "metaObject_materials": "Materials",
+    "metaObject_techniques": "Techniques",
+    "metaObject_partCount": "Number of parts",
+    "metaObject_dimensions": "Dimensions",
+    "metaObject_credits": "Creditline",
+    "metaObject_rights": "Rights",
+    "metaObject_more": "More info on Handle"
 }
