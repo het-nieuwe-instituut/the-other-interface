@@ -252,7 +252,12 @@ export class ObjectsService {
             { record: uri }
         )
 
-        return { ...TriplyUtils.combineObjectArray(result.data), id: objectId }
+        return {
+            ...TriplyUtils.combineObjectArray(result.data),
+            id: objectId,
+            ...this.getDimensionValueFromData(result.data),
+            dimensionUnit: result.data.find(d => d.dimensionUnit)?.dimensionUnit,
+        }
     }
 
     public validateFilterInput(input: string): ObjectsZoomLevel3Ids {
@@ -262,5 +267,13 @@ export class ObjectsService {
         }
 
         throw CustomError.internalCritical(`[Objects] Invalid filter input "${input}"`)
+    }
+
+    private getDimensionValueFromData(data: ObjectsDetailZoomLevel5Data[]) {
+        const dimHeight = data.find(d => d.dimensionType === 'hoogte')?.dimensionValue
+        const dimWidth = data.find(d => d.dimensionType === 'breedte')?.dimensionValue
+        const dimDepth = data.find(d => d.dimensionType === 'diepte')?.dimensionValue
+
+        return { dimDepth, dimWidth, dimHeight }
     }
 }

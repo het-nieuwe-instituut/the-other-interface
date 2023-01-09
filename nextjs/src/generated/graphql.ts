@@ -750,10 +750,10 @@ export type ObjectsZoomLevel5DetailType = {
   creationPlaceLabel?: Maybe<Scalars['String']>;
   creditLine?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
-  dimensionPart?: Maybe<Scalars['String']>;
-  dimensionType?: Maybe<Scalars['String']>;
+  dimDepth?: Maybe<Scalars['String']>;
+  dimHeight?: Maybe<Scalars['String']>;
+  dimWidth?: Maybe<Scalars['String']>;
   dimensionUnit?: Maybe<Scalars['String']>;
-  dimensionValue?: Maybe<Scalars['String']>;
   endDate?: Maybe<Scalars['String']>;
   id: Scalars['String'];
   image?: Maybe<Scalars['String']>;
@@ -1945,7 +1945,7 @@ export type ZoomLevel5ObjectQueryVariables = Exact<{
 }>;
 
 
-export type ZoomLevel5ObjectQuery = { __typename?: 'Query', zoomLevel5Object?: { __typename: 'ObjectsZoomLevel5DetailType', image?: string | null, imageLabel?: string | null, title?: string | null, titleType?: string | null, objectNumber?: string | null, objectName?: string | null, objectNameLabel?: string | null, archiveCollectionCode?: string | null, maker?: string | null, makerLabel?: string | null, makerRole?: string | null, makerRoleLabel?: string | null, startDate?: string | null, endDate?: string | null, numberOfParts?: string | null, scale?: string | null, technique?: string | null, techniqueLabel?: string | null, material?: string | null, materialLabel?: string | null, dimensionPart?: string | null, dimensionType?: string | null, dimensionValue?: string | null, dimensionUnit?: string | null, description?: string | null, associationPerson?: string | null, associationPersonLabel?: string | null, associationPersonType?: string | null, relatedObjectTitle?: string | null, creditLine?: string | null, rights?: string | null, rightsLabel?: string | null, creationPlace?: string | null, creationPlaceLabel?: string | null, permanentLink?: string | null } | null };
+export type ZoomLevel5ObjectQuery = { __typename?: 'Query', zoomLevel5Object?: { __typename: 'ObjectsZoomLevel5DetailType', image?: string | null, imageLabel?: string | null, title?: string | null, titleType?: string | null, objectNumber?: string | null, objectName?: string | null, objectNameLabel?: string | null, archiveCollectionCode?: string | null, maker?: string | null, makerLabel?: string | null, makerRole?: string | null, makerRoleLabel?: string | null, startDate?: string | null, endDate?: string | null, numberOfParts?: string | null, scale?: string | null, technique?: string | null, techniqueLabel?: string | null, material?: string | null, materialLabel?: string | null, dimHeight?: string | null, dimWidth?: string | null, dimDepth?: string | null, dimensionUnit?: string | null, description?: string | null, associationPerson?: string | null, associationPersonLabel?: string | null, associationPersonType?: string | null, relatedObjectTitle?: string | null, creditLine?: string | null, rights?: string | null, rightsLabel?: string | null, creationPlace?: string | null, creationPlaceLabel?: string | null, permanentLink?: string | null } | null };
 
 export type ZoomLevel5PublicationQueryVariables = Exact<{
   id: Scalars['String'];
@@ -3108,9 +3108,9 @@ export const ZoomLevel5ObjectDocument = gql`
     techniqueLabel
     material
     materialLabel
-    dimensionPart
-    dimensionType
-    dimensionValue
+    dimHeight
+    dimWidth
+    dimDepth
     dimensionUnit
     description
     associationPerson

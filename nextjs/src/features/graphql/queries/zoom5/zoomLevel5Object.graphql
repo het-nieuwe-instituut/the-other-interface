@@ -21,9 +21,9 @@ query ZoomLevel5Object($id: String!) {
         techniqueLabel
         material
         materialLabel
-        dimensionPart
-        dimensionType
-        dimensionValue
+        dimHeight
+        dimWidth
+        dimDepth
         dimensionUnit
         description
         associationPerson

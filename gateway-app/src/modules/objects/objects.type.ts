@@ -94,13 +94,13 @@ export class ObjectsZoomLevel5DetailType {
     public materialLabel?: string | null
 
     @Field(() => String, { nullable: true })
-    public dimensionPart?: string | null
+    public dimHeight?: string | null
 
     @Field(() => String, { nullable: true })
-    public dimensionType?: string | null
+    public dimWidth?: string | null
 
     @Field(() => String, { nullable: true })
-    public dimensionValue?: string | null
+    public dimDepth?: string | null
 
     @Field(() => String, { nullable: true })
     public dimensionUnit?: string | null
