@@ -247,13 +247,13 @@ export class ArchivesService {
             searchParams
         )
 
-        const countResult = await this.triplyService.queryTriplyData<{ count?: number }>(
+        const countResult = await this.triplyService.queryTriplyData<{ count?: string }>(
             this.ZoomLevel4CountEndpoint,
             { count: true },
             undefined,
             searchParams
         )
-        const total = countResult.data.pop()?.count || 0
+        const total = parseInt(countResult.data.pop()?.count || '0', 10)
 
         return {
             total,
