@@ -21,11 +21,11 @@ export const DynamicCollectionCloudsContainer: React.FC<{ dimensions: Dimensions
     if (!zoomLevel4?.zoomLevel4?.nodes?.length) {
         return null
     }
-    
+
     return (
         <DynamicPaginatedCollectionContainerNoSsr
             paginatedCollectionData={filterCloudData}
-            total={100}
+            total={zoomLevel4.zoomLevel4.total}
             page={parseInt(router.query.page as string)}
             type={(router.query.slug as SupportedLandingPages) ?? SupportedLandingPages.Publications}
             collection={router.query.collection as string}
