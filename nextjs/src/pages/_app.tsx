@@ -3,6 +3,7 @@ import { theme } from '@/features/shared/styles/theme/theme'
 import { ChakraProvider } from '@chakra-ui/react'
 import { ThemeProvider } from '@emotion/react'
 import 'keen-slider/keen-slider.min.css'
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import type { AppProps } from 'next/app'
 import Script from 'next/script'
 import ErrorBoundaryProvider from '@/features/modules/components/ErrorBoundary/ErrorBoundary'
