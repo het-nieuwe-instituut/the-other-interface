@@ -45,8 +45,10 @@ fragment carouselModuleFragment on ComponentModulesCarousel {
                     }
                     object {
                         title
-                        populatedMaker {
-                            name
+                        makers {
+                            populatedMaker {
+                                name
+                            }
                         }
                         objectNumber
                         image
@@ -57,9 +59,9 @@ fragment carouselModuleFragment on ComponentModulesCarousel {
                             type
                             title
                             objectNumber
-                            populatedAuthor{
+                            populatedAuthor {
                                 id
-                                profession,
+                                profession
                                 name
                             }
                         }
@@ -68,8 +70,8 @@ fragment carouselModuleFragment on ComponentModulesCarousel {
                             type
                             title
                             objectNumber
-                            populatedAuthor{
-                                profession,
+                            populatedAuthor {
+                                profession
                                 name
                             }
                         }
@@ -78,8 +80,8 @@ fragment carouselModuleFragment on ComponentModulesCarousel {
                             type
                             title
                             yearOfPublication
-                            populatedPublisher{
-                                name   
+                            populatedPublisher {
+                                name
                             }
                         }
                         ... on PublicationsBookZoomLevel5DetailType {
@@ -87,8 +89,8 @@ fragment carouselModuleFragment on ComponentModulesCarousel {
                             type
                             title
                             objectNumber
-                            populatedAuthor{
-                                profession,
+                            populatedAuthor {
+                                profession
                                 name
                             }
                         }

@@ -9,10 +9,13 @@ query ZoomLevel5Object($id: String!) {
         objectName
         objectNameLabel
         archiveCollectionCode
-        maker
-        makerLabel
-        makerRole
-        makerRoleLabel
+        makers {
+            id
+            maker
+            makerLabel
+            makerRole
+            makerRoleLabel
+        }
         startDate
         endDate
         numberOfParts

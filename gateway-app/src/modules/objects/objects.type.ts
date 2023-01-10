@@ -1,4 +1,4 @@
-import { Field, InputType, ObjectType } from '@nestjs/graphql'
+import { Field, ID, InputType, ObjectType } from '@nestjs/graphql'
 import { PoepleZoomLevel5DetailType } from '../people/people.type'
 
 @InputType()
@@ -54,20 +54,8 @@ export class ObjectsZoomLevel5DetailType {
     @Field(() => String, { nullable: true })
     public archiveCollectionCode?: string | null
 
-    @Field(() => String, { nullable: true })
-    public maker?: string | null
-
-    @Field(() => String, { nullable: true })
-    public makerLabel?: string | null
-
-    @Field(() => String, { nullable: true })
-    public makerRole?: string | null
-
-    @Field(() => String, { nullable: true })
-    public makerRoleLabel?: string | null
-
-    @Field(() => PoepleZoomLevel5DetailType, { nullable: true })
-    public populatedMaker?: PoepleZoomLevel5DetailType
+    @Field(() => [ObjectMakerType], { nullable: true })
+    public makers?: ObjectMakerType[]
 
     @Field(() => String, { nullable: true })
     public startDate?: string | null
@@ -137,4 +125,25 @@ export class ObjectsZoomLevel5DetailType {
 
     @Field(() => String, { nullable: true })
     public permanentLink?: string | null
+}
+
+@ObjectType()
+export class ObjectMakerType {
+    @Field(() => ID)
+    public id: string
+
+    @Field(() => String, { nullable: true })
+    public maker: string | null
+
+    @Field(() => String, { nullable: true })
+    public makerLabel?: string | null
+
+    @Field(() => String, { nullable: true })
+    public makerRole?: string | null
+
+    @Field(() => String, { nullable: true })
+    public makerRoleLabel?: string | null
+
+    @Field(() => PoepleZoomLevel5DetailType, { nullable: true })
+    public populatedMaker?: PoepleZoomLevel5DetailType
 }

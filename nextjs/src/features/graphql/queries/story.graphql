@@ -64,7 +64,9 @@ query storyBySlug($locale: String, $slug: String!) {
                             }
                             object {
                                 title
-                                maker
+                                makers {
+                                    maker
+                                }
                                 image
                             }
                             publication {

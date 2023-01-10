@@ -3,7 +3,7 @@ import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { TriplyUtils, ZoomLevel3ReturnData, zoomLevel3ReturnDataKeys } from '../triply/triply.utils'
 import { CustomError } from '../util/customError'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
-import { ObjectsZoomLevel4FiltersArgs } from './objects.type'
+import { ObjectMakerType, ObjectsZoomLevel4FiltersArgs } from './objects.type'
 
 export enum ObjectsZoomLevel3Ids {
     subject = 'subject',
@@ -257,6 +257,7 @@ export class ObjectsService {
             id: objectId,
             ...this.getDimensionValueFromData(result.data),
             dimensionUnit: result.data.find(d => d.dimensionUnit)?.dimensionUnit,
+            makers: this.getMakersValueFromData(result.data),
         }
     }
 
@@ -275,5 +276,19 @@ export class ObjectsService {
         const dimDepth = data.find(d => d.dimensionType === 'diepte')?.dimensionValue
 
         return { dimDepth, dimWidth, dimHeight }
+    }
+
+    private getMakersValueFromData(data: ObjectsDetailZoomLevel5Data[]): ObjectMakerType[] {
+        return data
+            .filter(d => !!d.maker)
+            .map(d => ({
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                id: TriplyUtils.getIdFromUri(d.maker!),
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                maker: d.maker!,
+                makerLabel: d.makerLabel,
+                makerRole: d.makerRole,
+                makerRoleLabel: d.makerRoleLabel,
+            }))
     }
 }
