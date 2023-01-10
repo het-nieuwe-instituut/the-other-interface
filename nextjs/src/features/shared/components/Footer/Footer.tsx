@@ -1,69 +1,129 @@
-import { Flex, Text, useBreakpoint, Link } from "@chakra-ui/react"
-import { useLooseTypeSafeTranslation } from "../../hooks/translations"
-import useQuery from "../../hooks/useQuery"
-
-
-const linksMockTop = [
-    {
-        title: 'Exhibitions and activities',
-        to: '/'
-    }, 
-    {
-        title: 'Browse our web magazines',
-        to: '/'
-    }, {
-        title: 'Subscribe to our newsletter',
-            to: '/'
-    }
-]
+import { Flex, Text, Link, theme } from '@chakra-ui/react'
+import { FOOTER_Z_INDEX } from '../../constants/mainConstants'
+import { useLooseTypeSafeTranslation } from '../../hooks/translations'
+import useQuery from '../../hooks/useQuery'
+import { getMenuPagesTask } from '../../tasks/getMenuPagesTask'
+import { capitalizeFirstLetter } from '../../utils/text'
 
 export const Footer = () => {
-    const breakpoint = useBreakpoint()
     const { lang } = useLooseTypeSafeTranslation('navigation')
-    const isMobile = breakpoint === 'sm'
     const { data } = useQuery(() => getMenuPagesTask(lang))
-    return (
-        <Flex justifyContent={'space-between'} minHeight={'185px'} px={'8'} pt={'24'} marginX={'auto'} maxWidth={'90em'} paddingTop={'36px'} paddingBottom={'36px'}>
-            <Flex backgroundColor={'blue'} flex={0.16}>
-                <Text textStyle='h3' css={{ transform: "rotate(180deg)", writingMode: "vertical-rl"}}>Het Nieuwe Instituut</Text>
-            </Flex>
-            <Flex justifyContent={'space-between'} flex={0.76}>
-                {/* on mobile should be different flex */}
-                <Flex backgroundColor={'red'} flex={0.3} flexDirection={'column'} justifyContent={'space-between'}>
-                    <Text textStyle={'body'}>
-                        Het Nieuwe Instituut Museumpark 25 3015CB Rotterdam
-                    </Text>
-                    <Text textStyle={'body'}>
-                        +31(0)10-4401200 Info@hetnieuweinstituut.net
-                    </Text>
-                </Flex>
-                
-                
-                        <Flex backgroundColor={'grey'} flex={0.3}>
-                            <>
-                            {
-                                linksMockTop.map(link => (
-                                    <Link  
-                                        key={Math.random()}
-                                        href={`${link.to}`}
-                                        variant={'decorative'}
-                                        cursor="pointer"
-                                        textStyle="small">
-                                            {link.title} 
-                                            </Link>
-                                ))
-                            }
-                            </>
-                            
-                        </Flex>
-                    
-                
-                
-                <Flex backgroundColor={'black'} flex={0.1}>
+    const menupages = data?.menupages?.menupages.data
+    const sectionOne = menupages?.slice(0, 5)
+    const sectionTwo = menupages?.slice(5, 10)
 
-                </Flex>
+    return (
+        <Flex
+            justifyContent={'space-between'}
+            minHeight={{ sm: '428px', md: '428px', lg: '233px', xl: '233px', '2xl': '233px' }}
+            px={'8'}
+            pt={'24'}
+            marginX={'auto'}
+            maxWidth={'90em'}
+            paddingTop={'36px'}
+            paddingBottom={'36px'}
+            background={theme.colors.white}
+            position={'relative'}
+            zIndex={FOOTER_Z_INDEX}
+        >
+            <Flex
+                flex={0.16}
+                position={'relative'}
+                justifyContent={{ sm: 'flex-start', md: 'flex-start', lg: 'center', xl: 'center' }}
+            >
+                <Text
+                    textStyle="h3"
+                    position={'absolute'}
+                    top={0}
+                    transform={'rotate(180deg)'}
+                    css={{ writingMode: 'vertical-rl' }}
+                    textAlign={'center'}
+                >
+                    Het Nieuwe Instituut
+                </Text>
             </Flex>
-            
-        </Flex>    
+
+            <Flex
+                justifyContent={'space-between'}
+                flex={0.76}
+                flexWrap={'wrap'}
+                flexDirection={{ sm: 'column', md: 'column', lg: 'unset', xl: 'row' }}
+            >
+                <Flex flex={0.3} flexDirection={'column'} justifyContent={'space-between'}>
+                    <Link
+                        mr={2}
+                        href={`https://goo.gl/maps/m5EvkSa3z321G68z6`}
+                        variant={'decorative'}
+                        cursor="pointer"
+                        textStyle="body"
+                    >
+                        Het Nieuwe Instituut Museumpark 25 3015CB Rotterdam
+                    </Link>
+                    <Flex flexDirection={'column'}>
+                        <Link
+                            mr={2}
+                            href={`tel:+31(0)10-4401200`}
+                            variant={'decorative'}
+                            cursor="pointer"
+                            textStyle="body"
+                        >
+                            +31(0)10-4401200
+                        </Link>
+                        <Link
+                            href={`mailto:info@hetnieuweinstituut.net`}
+                            variant={'decorative'}
+                            cursor="pointer"
+                            textStyle="body"
+                        >
+                            Info@hetnieuweinstituut.net
+                        </Link>
+                    </Flex>
+                </Flex>
+
+                {sectionOne && sectionOne?.length > 0 && (
+                    <Flex
+                        flex={0.3}
+                        flexDirection={'column'}
+                        minW={{ sm: '400px', md: '400px', lg: 'unset', xl: 'unset' }}
+                    >
+                        <>
+                            {sectionOne.map(link => (
+                                <Link
+                                    key={Math.random()}
+                                    href={`${link?.attributes?.slug}`}
+                                    variant={'decorative'}
+                                    cursor="pointer"
+                                    textStyle="small"
+                                >
+                                    {capitalizeFirstLetter(link?.attributes?.Title ?? '')}
+                                </Link>
+                            ))}
+                        </>
+                    </Flex>
+                )}
+
+                {sectionTwo && sectionTwo?.length > 0 && (
+                    <Flex
+                        flex={0.3}
+                        flexDirection={'column'}
+                        minW={{ sm: '400px', md: '400px', lg: 'unset', xl: 'unset' }}
+                    >
+                        <>
+                            {sectionTwo.map(link => (
+                                <Link
+                                    key={Math.random()}
+                                    href={`${link?.attributes?.slug}`}
+                                    variant={'decorative'}
+                                    cursor="pointer"
+                                    textStyle="small"
+                                >
+                                    {capitalizeFirstLetter(link?.attributes?.Title ?? '')}
+                                </Link>
+                            ))}
+                        </>
+                    </Flex>
+                )}
+            </Flex>
+        </Flex>
     )
 }

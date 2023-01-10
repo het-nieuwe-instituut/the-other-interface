@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import useQuery from "../../hooks/useQuery"
-import { getMenuPagesTask } from "./getMenuPagesTask"
+import { getMenuPagesTask } from "../../tasks/getMenuPagesTask"
 
 export const usePresenter = (lang: string, isMenuOpen: boolean) => {
     const { data } = useQuery(() => getMenuPagesTask(lang))
