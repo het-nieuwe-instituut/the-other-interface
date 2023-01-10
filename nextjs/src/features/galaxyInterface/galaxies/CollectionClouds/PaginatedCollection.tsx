@@ -32,7 +32,7 @@ export const PaginatedCollection: React.FunctionComponent<PaginatedCollectionPro
     const router = useRouter()
     const queryParams = router.query as unknown as PaginatedCollectionQueryParams
     const { t: tCommon } = useTypeSafeTranslation('common')
-    
+
     const hideImage = (image: HTMLImageElement) => {
         image.style.display = 'none'
     }
@@ -49,7 +49,10 @@ export const PaginatedCollection: React.FunctionComponent<PaginatedCollectionPro
         type,
         events: { zoomToZoom5 },
     } = usePresenter({ ...props, selector: id })
+
     const startY = height / 2 - 500 / 2
+    const totalPage = Math.floor(total / 28) || 1
+
     return (
         <Box overflow="hidden" height={height} width={width}>
             <svg
@@ -104,9 +107,9 @@ export const PaginatedCollection: React.FunctionComponent<PaginatedCollectionPro
                                         <Box width={'30px'} />
                                     )}
 
-                                    <Text textStyle={'cloudText'}>{`${currentPage}/${total}`}</Text>
+                                    <Text textStyle={'cloudText'}>{`${currentPage}/${totalPage}`}</Text>
 
-                                    {currentPage !== total ? (
+                                    {currentPage !== totalPage ? (
                                         <Box as="button" pl="2" aria-label="right" onClick={paginateNext}>
                                             <PaginationRight />
                                         </Box>
@@ -146,9 +149,15 @@ export const PaginatedCollection: React.FunctionComponent<PaginatedCollectionPro
                                                     height={'90px'}
                                                     width={'140px'}
                                                 >
-                                                    
                                                     {item.firstImage && (
-                                                        <Image src={item.firstImage} alt={''} width={'48px'} height={'35px'} ignoreFallback onError={(e) => hideImage(e?.target as HTMLImageElement)} />
+                                                        <Image
+                                                            src={item.firstImage}
+                                                            alt={''}
+                                                            width={'48px'}
+                                                            height={'35px'}
+                                                            ignoreFallback
+                                                            onError={e => hideImage(e?.target as HTMLImageElement)}
+                                                        />
                                                     )}
                                                     <Text
                                                         // TODO: uncomment when image urls are fixed
