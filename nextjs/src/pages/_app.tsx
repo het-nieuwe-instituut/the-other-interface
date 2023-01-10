@@ -12,7 +12,7 @@ import { useMemo } from 'react'
 import { Provider } from 'react-redux'
 import MobileOverlayProvider from '@/features/shared/components/MobileOverlayProvider/MobileOverlayProvider'
 import { NavigationOverlayProvider } from '@/features/shared/components/Navigation/Navigation'
-
+import { Footer } from '@/features/shared/components/Footer/Footer'
 
 function MyApp({ Component, pageProps }: AppProps) {
     const store = useMemo(() => createStore(pageProps.reduxState), [pageProps.reduxState])
@@ -43,7 +43,10 @@ function MyApp({ Component, pageProps }: AppProps) {
                         <ErrorBoundaryProvider>
                             <NavigationOverlayProvider>
                                 <MobileOverlayProvider>
-                                    <Component {...pageProps} />
+                                    <>
+                                        <Component {...pageProps} />
+                                        <Footer />
+                                    </>
                                 </MobileOverlayProvider>
                             </NavigationOverlayProvider>
                         </ErrorBoundaryProvider>
