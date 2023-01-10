@@ -20,10 +20,16 @@ query ZoomLevel5Object($id: String!) {
         endDate
         numberOfParts
         scale
-        technique
-        techniqueLabel
-        material
-        materialLabel
+        techniques {
+            id
+            technique
+            techniqueLabel
+        }
+        materials {
+            id
+            material
+            materialLabel
+        }
         dimHeight
         dimWidth
         dimDepth

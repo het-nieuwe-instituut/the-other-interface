@@ -69,17 +69,11 @@ export class ObjectsZoomLevel5DetailType {
     @Field(() => String, { nullable: true })
     public scale?: string | null
 
-    @Field(() => String, { nullable: true })
-    public technique?: string | null
+    @Field(() => [ObjectTechniqueType], { nullable: true })
+    public techniques?: ObjectTechniqueType[]
 
-    @Field(() => String, { nullable: true })
-    public techniqueLabel?: string | null
-
-    @Field(() => String, { nullable: true })
-    public material?: string | null
-
-    @Field(() => String, { nullable: true })
-    public materialLabel?: string | null
+    @Field(() => [ObjectMaterialType], { nullable: true })
+    public materials?: ObjectMaterialType[]
 
     @Field(() => String, { nullable: true })
     public dimHeight?: string | null
@@ -146,4 +140,28 @@ export class ObjectMakerType {
 
     @Field(() => PoepleZoomLevel5DetailType, { nullable: true })
     public populatedMaker?: PoepleZoomLevel5DetailType
+}
+
+@ObjectType()
+export class ObjectMaterialType {
+    @Field(() => ID)
+    public id: string
+
+    @Field(() => String)
+    public material: string
+
+    @Field(() => String, { nullable: true })
+    public materialLabel?: string | null
+}
+
+@ObjectType()
+export class ObjectTechniqueType {
+    @Field(() => ID)
+    public id: string
+
+    @Field(() => String)
+    public technique: string
+
+    @Field(() => String, { nullable: true })
+    public techniqueLabel?: string | null
 }
