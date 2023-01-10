@@ -11,6 +11,8 @@ import { createStore } from '@/features/shared/configs/store'
 import { useMemo } from 'react'
 import { Provider } from 'react-redux'
 import MobileOverlayProvider from '@/features/shared/components/MobileOverlayProvider/MobileOverlayProvider'
+import { NavigationOverlayProvider } from '@/features/shared/components/Navigation/Navigation'
+
 
 function MyApp({ Component, pageProps }: AppProps) {
     const store = useMemo(() => createStore(pageProps.reduxState), [pageProps.reduxState])
@@ -39,9 +41,11 @@ function MyApp({ Component, pageProps }: AppProps) {
                     <ChakraProvider theme={theme}>
                         <Fonts />
                         <ErrorBoundaryProvider>
-                            <MobileOverlayProvider>
-                                <Component {...pageProps} />
-                            </MobileOverlayProvider>
+                            <NavigationOverlayProvider>
+                                <MobileOverlayProvider>
+                                    <Component {...pageProps} />
+                                </MobileOverlayProvider>
+                            </NavigationOverlayProvider>
                         </ErrorBoundaryProvider>
                     </ChakraProvider>
                 </ThemeProvider>
