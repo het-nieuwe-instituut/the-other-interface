@@ -17,11 +17,10 @@ export const Footer = () => {
             justifyContent={'space-between'}
             minHeight={{ sm: '428px', md: '428px', lg: '233px', xl: '233px', '2xl': '233px' }}
             px={'8'}
-            pt={'24'}
             marginX={'auto'}
             maxWidth={'90em'}
-            paddingTop={'36px'}
-            paddingBottom={'36px'}
+            paddingTop={'9'}
+            paddingBottom={'9'}
             background={theme.colors.white}
             position={'relative'}
             zIndex={FOOTER_Z_INDEX}

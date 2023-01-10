@@ -26,7 +26,6 @@ export const MenupageContainer = (props: Props) => {
             width={'100%'}
             px={{ xl: 6, base: 0 }}
             background={theme.colors.white}
-            // zIndex={MAX_Z_INDEX}
         >
             <StaticHeader />
             <DynamicComponentRenderer
