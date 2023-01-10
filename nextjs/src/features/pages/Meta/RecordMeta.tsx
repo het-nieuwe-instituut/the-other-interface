@@ -1,9 +1,10 @@
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { Box, Text } from '@chakra-ui/react'
+import { Link, Box, Text } from '@chakra-ui/react'
 import { TranslationKeys } from 'locales/locales'
 import React from 'react'
 import { ZoomLevel5ObjectQuery } from 'src/generated/graphql'
 import { Zoom5RecordResult } from '../tasks/zoom5Config'
+import NextLink from 'next/link'
 
 interface Props {
     attributes: Zoom5RecordResult['zoom5detail']
@@ -20,15 +21,14 @@ export const RecordMeta: React.FC<Props> = ({ attributes }) => {
     return (
         <Box>
             {renderAttribute('metaObject_id', renderTextValue(attributes.objectNumber))}
-            {/* TODO */}
-            {renderAttribute('metaObject_archive', <></>)}
-            {renderAttribute('metaObject_makers', <></>)}
+            {renderAttribute('metaObject_archive', renderTextValue(attributes.archiveCollectionCode))}
+            {renderAttribute('metaObject_makers', renderMakers(attributes))}
             {renderAttribute('metaObject_dates', renderTimeframe(attributes.startDate, attributes.endDate))}
             {renderAttribute('metaObject_place', renderTextValue(attributes.creationPlace))}
-            {/* TODO */}
-            {renderAttribute('metaObject_name', <></>)}
-            {renderAttribute('metaObject_materials', <></>)}
-            {renderAttribute('metaObject_techniques', <></>)}
+            {/* TODO: where is this supposed to go */}
+            {renderAttribute('metaObject_name', renderTextLink(`/where/to`, attributes.objectName))}
+            {renderAttribute('metaObject_materials', renderMaterials(attributes))}
+            {renderAttribute('metaObject_techniques', renderTechniques(attributes))}
             {renderAttribute('metaObject_partCount', renderTextValue(attributes.numberOfParts))}
             {renderAttribute('metaObject_dimensions', renderTextValue(getDimensionText(attributes)))}
             {renderAttribute('metaObject_credits', renderTextValue(attributes.creditLine))}
@@ -72,5 +72,39 @@ export const RecordMeta: React.FC<Props> = ({ attributes }) => {
         }
 
         return `${dims} ${attributes?.dimensionUnit || ''}`
+    }
+
+    function renderMakers(attributes: ZoomLevel5ObjectQuery['zoomLevel5Object']) {
+        return attributes?.makers?.map((m, i) =>
+            renderTextLinkListItem(`/landingpage/people/${m.id}-people`, i, m.makerLabel)
+        )
+    }
+
+    function renderMaterials(attributes: ZoomLevel5ObjectQuery['zoomLevel5Object']) {
+        // TODO: where is this supposed to go
+        return attributes?.materials?.map((m, i) => renderTextLinkListItem(`/where/to/${m.id}`, i, m.materialLabel))
+    }
+
+    function renderTechniques(attributes: ZoomLevel5ObjectQuery['zoomLevel5Object']) {
+        // TODO: where is this supposed to go
+        return attributes?.techniques?.map((m, i) => renderTextLinkListItem(`/where/to/${m.id}`, i, m.techniqueLabel))
+    }
+
+    function renderTextLinkListItem(to: string, key: number, text?: string | null) {
+        return (
+            <Box marginBottom={1} key={key}>
+                {renderTextLink(to, text)}
+            </Box>
+        )
+    }
+
+    function renderTextLink(to: string, text?: string | null) {
+        return (
+            <Text textStyle="micro">
+                <NextLink href={to} passHref>
+                    <Link>{text}</Link>
+                </NextLink>
+            </Text>
+        )
     }
 }
