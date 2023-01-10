@@ -6,6 +6,8 @@ import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { navigationT } from 'locales/locales'
 import { ZoomStates } from '@/features/galaxyInterface/types/galaxy'
 import { includesZoomedStatesMainGalaxy } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
+import { useSelector } from 'react-redux'
+import { State } from '@/features/shared/configs/store'
 
 type BreadcrumbType = {
     name: string
@@ -139,6 +141,7 @@ const Breadcrumbs = (props: Props) => {
     const { t } = useTypeSafeTranslation('navigation')
     const breakpoint = useBreakpoint()
     const isMobile = breakpoint === 'sm'
+    const isMenuOpen = useSelector((state: State) => state.shared.isMenuOpen)
 
     const { items } = getBreadcrumbsFromUrl(router.asPath, router?.query as { preservedZoom: ZoomStates }, t)
 
@@ -154,7 +157,7 @@ const Breadcrumbs = (props: Props) => {
         router.push(link, undefined)
     }
 
-    if (isMobile) {
+    if (isMobile || isMenuOpen) {
         return null
     }
 

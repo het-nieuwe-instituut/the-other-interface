@@ -1,5 +1,5 @@
 import { Flex, Link, Box } from '@chakra-ui/react'
-import { MAX_Z_INDEX } from '../../constants/mainConstants'
+import { STATIC_HEADER_Z_INDEX } from '../../constants/mainConstants'
 import { useLooseTypeSafeTranslation } from '../../hooks/translations'
 import { GalaxyTopRight } from '../GalaxyWrapper/GalaxyTopRight/GalaxyTopRight'
 
@@ -22,10 +22,18 @@ export const StaticHeader = () => {
                 maxWidth={{ sm: 'initial', md: '90em', lg: '90em', xl: '90em' }}
                 left={0}
                 right={0}
-                zIndex={MAX_Z_INDEX}
+                zIndex={STATIC_HEADER_Z_INDEX}
                 pointerEvents={'all'}
             >
-                <Link href={'/'} variant={'decorative'} cursor="pointer" textStyle="small">
+                <Link
+                    href={'/'}
+                    variant={'decorative'}
+                    cursor="pointer"
+                    textStyle="small"
+                    whiteSpace={'nowrap'}
+                    textOverflow={'ellipsis'}
+                    overflow={'hidden'}
+                >
                     {tNavigation('theNewInstitute')}
                 </Link>
                 <Box marginRight={'8'}>

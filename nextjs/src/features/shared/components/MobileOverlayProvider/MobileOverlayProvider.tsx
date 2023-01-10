@@ -1,8 +1,7 @@
 import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { Box, Text, Flex, Link, useBreakpoint } from '@chakra-ui/react'
-import { useEffect } from 'react'
+import { Box, Text, Flex, useBreakpoint } from '@chakra-ui/react'
 import { MOBILE_OVERLAY_Z_INDEX } from '../../constants/mainConstants'
-import { GalaxyTopRight } from '../GalaxyWrapper/GalaxyTopRight/GalaxyTopRight'
+import { StaticHeader } from '../StaticHeader/StaticHeader'
 
 interface Props {
     children: React.ReactNode
@@ -22,46 +21,39 @@ const MobileOverlayProvider = (props: Props) => {
 
 const MobileOverlay = () => {
     const { t: tCommon } = useLooseTypeSafeTranslation('common')
-    const { t: tNavigation } = useLooseTypeSafeTranslation('navigation')
-
-    useEffect(() => {
-        document.body.style.overflow = 'hidden'
-        return () => {
-            document.body.style.overflow = 'visible'
-        }
-    }, [])
 
     return (
         <Flex
             width={'100%'}
-            height={'100%'}
+            height={'100vh'}
             position={'fixed'}
+            px={{ xl: 6, base: 0 }}
             top={0}
             right={0}
             zIndex={MOBILE_OVERLAY_Z_INDEX}
-            background={'mobileOverlay'}
             overflow={'hidden'}
-            backdropBlur={'20px'}
+            _before={{
+                content: '""',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100vh',
+                height: '100vh',
+                backgroundColor: '#CCCED0',
+                filter: 'blur(20px) opacity(0.6)',
+                zIndex: `${MOBILE_OVERLAY_Z_INDEX - 1}`,
+            }}
         >
-            <Flex
-                paddingLeft={8}
-                paddingTop={4}
-                justifyContent={'space-between'}
-                flexDirection={'row'}
-                height={'40px'}
-                overflow={'hidden'}
-                alignItems={'center'}
-                width={'100%'}
-                marginRight={4}
+            <StaticHeader />
+            <Box
+                position={'absolute'}
+                left={0}
+                paddingRight={'40px'}
+                alignSelf={'center'}
+                right={0}
+                marginLeft={5}
+                zIndex={MOBILE_OVERLAY_Z_INDEX}
             >
-                <Link href={'/'} variant={'decorative'} cursor="pointer" textStyle="small">
-                    {tNavigation('theNewInstitute')}
-                </Link>
-                <Box marginRight={'4'}>
-                    <GalaxyTopRight />
-                </Box>
-            </Flex>
-            <Box position={'absolute'} left={0} paddingRight={'40px'} alignSelf={'center'} right={0} marginLeft={5}>
                 <Text variant={'body'} mb={5}>
                     {tCommon('theNewInstitueDescription')}
                 </Text>
