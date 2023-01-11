@@ -99,7 +99,7 @@ const configuration: Record<EntityNames, Config> = {
         ],
     },
     [EntityNames.Stories]: {
-        background: typeColors.archives.default,
+        background: typeColors.story.default,
         x: 1121,
         y: 240,
         diameter: 128,
