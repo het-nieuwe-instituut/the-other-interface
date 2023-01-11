@@ -6,7 +6,7 @@ import { ArchivesOtherZoomLevel5DetailType, StoryBySlugQuery } from 'src/generat
 import { RecordCloudHighlight } from './components/RecordHighlight'
 
 import dynamic from 'next/dynamic'
-import { Dimensions } from '../../types/galaxy'
+import { Dimensions, ZoomStates } from '../../types/galaxy'
 import { usePresenter } from './usePresenter'
 
 export type RecordCloudProps = {
@@ -32,6 +32,7 @@ const RecordClouds: React.FunctionComponent<RecordCloudProps> = props => {
         type,
         zoomLevel5,
         animationState,
+        zoomLevel,
     } = usePresenter(props)
 
     return (
@@ -50,6 +51,9 @@ const RecordClouds: React.FunctionComponent<RecordCloudProps> = props => {
     )
 
     function renderHighLight() {
+        if (ZoomStates.Zoom5ToRelationStill === zoomLevel) {
+            return null
+        }
         if (zoomLevel5?.__typename === 'ObjectsZoomLevel5DetailType') {
             return (
                 <RecordCloudHighlight

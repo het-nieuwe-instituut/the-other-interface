@@ -4,19 +4,20 @@ import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import useScroll from '@/features/shared/hooks/useScroll'
 import { Box, useTheme } from '@chakra-ui/react'
 import { LandingpageBySlugQuery, LandingpageComponentsDynamicZone } from 'src/generated/graphql'
-import { Zoom5RecordResult } from '../../tasks/zoom5Config'
+import { SupportedQuerys, Zoom5RecordResult } from '../../tasks/zoom5Config'
 import { ScrollToContent } from '../../utils/utils'
 import { RecordProvider } from './RecordContext'
 
 interface Props {
     zoom5: Zoom5RecordResult | undefined
+    type: SupportedQuerys
     landingpage: LandingpageBySlugQuery | undefined
     record: string
 }
 
 export const RecordContainer = (props: Props) => {
     return (
-        <RecordProvider zoomLevel5={props.zoom5 ?? null}>
+        <RecordProvider type={props.type} zoomLevel5={props.zoom5 ?? null}>
             <RecordPage landingpage={props.landingpage} />
         </RecordProvider>
     )

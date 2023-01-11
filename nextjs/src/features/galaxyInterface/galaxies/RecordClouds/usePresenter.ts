@@ -1,8 +1,9 @@
 import { useRef } from 'react'
 import { useD3ZoomEvents } from '../../hooks/useD3ZoomEvents'
 import { getHighlightAnimationState } from '../../hooks/utils'
+import { ZoomStates } from '../../types/galaxy'
 
-import { useD3HighlighAnimation } from './hooks/useD3HighlighAnimation'
+import { AnimationState, useD3HighlighAnimation } from './hooks/useD3HighlighAnimation'
 import { RecordCloudProps } from './RecordClouds'
 
 type Props = RecordCloudProps
@@ -13,7 +14,10 @@ export function usePresenter(props: Props) {
 
     const zoomEvents = useD3ZoomEvents({ svgRef, dimensions })
     const animationState = getHighlightAnimationState(zoomEvents.zoomLevel)
-    useD3HighlighAnimation(svgRef, animationState)
+    useD3HighlighAnimation(
+        svgRef,
+        zoomEvents.zoomLevel === ZoomStates.Zoom5InitialWithoutHighlightAnimation ? AnimationState.none : animationState
+    )
 
     return { svgRef, animationState, ...zoomEvents, ...props }
 }

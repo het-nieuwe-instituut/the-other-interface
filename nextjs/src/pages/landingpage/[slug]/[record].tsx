@@ -15,8 +15,12 @@ export interface RecordQueryParams {
 }
 
 const Page = (pageProps: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+    if (!pageProps.zoom5?.type) {
+        return <p>no type received</p>
+    }
     return (
         <RecordContainer
+            type={pageProps.zoom5?.type}
             key={pageProps.record}
             zoom5={pageProps?.zoom5}
             landingpage={pageProps?.landingpage}
@@ -35,7 +39,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
 
     const [landingpage, zoom5] = await Promise.all([
         ApiClient?.landingpageBySlug({ slug, locale: context?.locale }),
-        getZoom5RecordTask(slug, record),
+        getZoom5RecordTask(record),
     ])
 
     return {

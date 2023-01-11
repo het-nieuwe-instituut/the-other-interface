@@ -1,6 +1,5 @@
 import MemoizedRecordClouds from '@/features/galaxyInterface/galaxies/RecordClouds/RecordClouds'
 import RecordContext from '@/features/pages/containers/RecordContainer/RecordContext'
-import { SupportedQuerys } from '@/features/pages/tasks/zoom5Config'
 import { useContext } from 'react'
 import { Dimensions } from '../../../types/galaxy'
 
@@ -11,11 +10,5 @@ export const DynamicRecordCloudsContainer: React.FC<{ dimensions: Dimensions }> 
         return null
     }
 
-    return (
-        <MemoizedRecordClouds
-            zoomLevel5={zoom5Context.detail}
-            dimensions={dimensions}
-            type={SupportedQuerys.publications}
-        />
-    )
+    return <MemoizedRecordClouds zoomLevel5={zoom5Context.detail} dimensions={dimensions} type={zoom5Context.type} />
 }

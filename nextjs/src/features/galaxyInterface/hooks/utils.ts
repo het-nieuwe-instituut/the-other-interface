@@ -4,7 +4,7 @@ import { ZoomStates } from '../types/galaxy'
 export function getHighlightAnimationState(zoomLevel: ZoomStates | null) {
     const config = {
         [ZoomStates.Zoom5]: AnimationState.none,
-        [ZoomStates.Zoom5InitialWithoutHighlightAnimation]: AnimationState.none,
+        [ZoomStates.Zoom5InitialWithoutHighlightAnimation]: AnimationState.in,
         [ZoomStates.Zoom5Initial]: AnimationState.in,
         [ZoomStates.Zoom5ToRelation]: AnimationState.out,
         [ZoomStates.Zoom5ToZoom4]: AnimationState.out,

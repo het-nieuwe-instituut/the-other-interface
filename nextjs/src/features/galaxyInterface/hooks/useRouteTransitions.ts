@@ -3,6 +3,7 @@ import { isEmpty, isEqual } from 'lodash'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import { EntityNames } from 'src/generated/graphql'
 import { UrlObject } from 'url'
 import {
     animationInProgress,
@@ -171,6 +172,17 @@ export function useRouteTransitions() {
                 }
 
                 console.log(params)
+
+                if (params.slug === EntityNames.Stories) {
+                    if (!params.slug) {
+                        return
+                    }
+
+                    navigate(`/story/${params.record}`, {
+                        preservedZoom: ZoomStates.Zoom5InitialWithoutHighlightAnimation,
+                    })
+                    return
+                }
 
                 if (navigatedFromZoom5Page) {
                     navigate(`/landingpage/${params.slug}/${params.record}`, {

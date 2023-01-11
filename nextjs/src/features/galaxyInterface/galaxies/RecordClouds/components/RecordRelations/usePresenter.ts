@@ -21,9 +21,10 @@ export function usePresenter(relations: Array<ZoomLevel5RelationsType>, parentRe
         async (d: d3.SimulationNodeDatum & Item) => {
             dispatch(
                 galaxyInterfaceActions.setActiveZoom({
-                    activeZoom: ZoomStates.Zoom5,
+                    activeZoom: ZoomStates.Zoom5ToRelationStill,
                     params: {
                         ...params,
+                        slug: d.type.toLowerCase(),
                         record: `${d.id}-${d.type}`,
                     },
                 })
