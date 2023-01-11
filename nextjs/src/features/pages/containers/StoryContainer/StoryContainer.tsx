@@ -5,16 +5,18 @@ import { Box, Grid, GridItem, useTheme } from '@chakra-ui/react'
 import { StoryBySlugQuery, StoryComponentsDynamicZone, StoryEntity } from 'src/generated/graphql'
 import { StoryMeta } from '../../Meta/StoryMeta'
 import { GetZoom5StoryQuery } from '../../tasks/getZoom5StoryTask'
+import { SupportedQuerys } from '../../tasks/zoom5Config'
 import { RecordProvider } from '../RecordContainer/RecordContext'
 
 interface Props {
     record: GetZoom5StoryQuery['story']
     story: NonNullable<NonNullable<NonNullable<StoryBySlugQuery>['stories']>['data']>[0] | undefined
+    type: SupportedQuerys
 }
 
 export const StoryContainer: React.FC<Props> = props => {
     return (
-        <RecordProvider zoomLevel5={{ zoom5detail: props?.record } ?? null}>
+        <RecordProvider type={props.type} zoomLevel5={{ zoom5detail: props?.record } ?? null}>
             <Story story={props.story} />
         </RecordProvider>
     )

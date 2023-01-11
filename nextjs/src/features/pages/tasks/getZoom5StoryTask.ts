@@ -14,6 +14,7 @@ export async function getZoom5StoryTask(record: string, locale: string) {
 
         return {
             story: storyBySlug?.stories?.data?.[0],
+            type: slug,
         }
     } catch (e) {
         if (e) {

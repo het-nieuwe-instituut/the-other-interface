@@ -1,9 +1,9 @@
+import { SupportedQuerys } from '@/features/pages/tasks/zoom5Config'
 import { State } from '@/features/shared/configs/store'
 import { isEmpty, isEqual } from 'lodash'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { EntityNames } from 'src/generated/graphql'
 import { UrlObject } from 'url'
 import {
     animationInProgress,
@@ -14,6 +14,7 @@ import {
     includesZoomStatesZoom5Galaxy,
 } from '../GalaxyInterface/GalaxyInterface'
 import { ZoomStates } from '../types/galaxy'
+import { extractSlugAndId } from '../utils/extractors'
 function useNavigate() {
     const router = useRouter()
     const navigate = useCallback(
@@ -165,32 +166,34 @@ export function useRouteTransitions() {
                 const navigatedFromZoom5Page = prevActiveZoom
                     ? includesZoomStatesZoom5Galaxy.includes(prevActiveZoom)
                     : false
-
                 if (!params) {
                     console.error('params are needed for these states')
                     return
                 }
 
-                console.log(params)
-
-                if (params.slug === EntityNames.Stories) {
+                const { slug } = extractSlugAndId(params.slug ?? '')
+                if (
+                    ![
+                        SupportedQuerys.archives,
+                        SupportedQuerys.objects,
+                        SupportedQuerys.publications,
+                        SupportedQuerys.people,
+                    ].includes(slug)
+                ) {
                     if (!params.slug) {
                         return
                     }
-
                     navigate(`/story/${params.record}`, {
                         preservedZoom: ZoomStates.Zoom5InitialWithoutHighlightAnimation,
                     })
                     return
                 }
-
                 if (navigatedFromZoom5Page) {
                     navigate(`/landingpage/${params.slug}/${params.record}`, {
                         preservedZoom: ZoomStates.Zoom5InitialWithoutHighlightAnimation,
                     })
                     return
                 }
-
                 navigate(`/landingpage/${params.slug}/${params.record}`)
                 return
             }
