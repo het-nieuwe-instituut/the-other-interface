@@ -10,9 +10,10 @@ interface RelationsContainerProps {
 
 const RelationsContainer = (props: RelationsContainerProps) => {
     const router = useRouter()
-    const { record } = router.query
+    const { record, slug } = router.query
 
-    const { data } = useQuery(() => getZoom5RelationsRecordTask(router.asPath, record as string))
+    const { data } = useQuery(() => getZoom5RelationsRecordTask(router.asPath, (record as string) ?? (slug as string)))
+
     const relations = useMemo(() => {
         return data?.zoom5relations?.relations?.filter(item => item?.total > 0)
     }, [data?.zoom5relations?.relations])

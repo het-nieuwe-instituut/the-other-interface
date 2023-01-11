@@ -4,7 +4,7 @@ import { ZoomStates } from '@/features/galaxyInterface/types/galaxy'
 import { State } from '@/features/shared/configs/store'
 import { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { ObjectRelationsQuery, ZoomLevel5RelationsType } from 'src/generated/graphql'
+import { EntityNames, ObjectRelationsQuery, ZoomLevel5RelationsType } from 'src/generated/graphql'
 import { useD3RelationsAnimation } from '../../hooks/usD3RelationsAnimation'
 import { useD3HeroAnimateElement } from '../../hooks/useD3ClickAnimation'
 import { usePositionClouds } from '../../hooks/usePositionClouds'
@@ -19,6 +19,21 @@ export function usePresenter(relations: Array<ZoomLevel5RelationsType>, parentRe
 
     const afterAnimate = useCallback(
         async (d: d3.SimulationNodeDatum & Item) => {
+            console.log(d, d.type === EntityNames.Stories)
+
+            if (d.type === EntityNames.Stories) {
+                dispatch(
+                    galaxyInterfaceActions.setActiveZoom({
+                        activeZoom: ZoomStates.Zoom5ToRelationStill,
+                        params: {
+                            ...params,
+                            slug: d.slug ?? '',
+                            record: `${d.id}-${d.slug}`,
+                        },
+                    })
+                )
+                return
+            }
             dispatch(
                 galaxyInterfaceActions.setActiveZoom({
                     activeZoom: ZoomStates.Zoom5ToRelationStill,
