@@ -32,17 +32,19 @@ export const StoriesSystem: React.FC<Props> = ({ data = [], dimensions = default
                     <polygon key={`${index}-${array.length}`} points={triangle.join()} fill={'transparent'}></polygon>
                 ))}
             </g>
-            {dataPoints.map((item, index, array) => (
-                <React.Fragment key={`${index}-${array.length}`}>
-                    {disableLinkAndHover ? (
-                        renderDot(item, showTooltip, hideTooltip, disableLinkAndHover)
-                    ) : (
-                        <Link className="pointer" href={`/story/${item.id}-${item.slug}`}>
-                            {renderDot(item, showTooltip, hideTooltip, disableLinkAndHover)}
-                        </Link>
-                    )}
-                </React.Fragment>
-            ))}
+            {dataPoints.map((item, index, array) => {
+                return (
+                    <React.Fragment key={`${index}-${array.length}`}>
+                        {disableLinkAndHover ? (
+                            renderDot(item, showTooltip, hideTooltip, disableLinkAndHover)
+                        ) : (
+                            <Link className="pointer" href={`/story/${item.id}-${item.slug}`}>
+                                {renderDot(item, showTooltip, hideTooltip, disableLinkAndHover)}
+                            </Link>
+                        )}
+                    </React.Fragment>
+                )
+            })}
         </svg>
     )
 }
