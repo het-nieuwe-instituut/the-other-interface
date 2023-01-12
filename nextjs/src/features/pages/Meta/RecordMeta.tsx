@@ -89,17 +89,22 @@ export const RecordMeta: React.FC<Props> = ({ attributes }) => {
         )
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     function renderArchiveMeta(attributes: NonNullable<ZoomLevel5ArchivesQuery['zoomLevel5Archive']>) {
         return (
             <>
-                {/* archive id */}
-                {/* creators */}
-                {/* period */}
-                {/* extent */}
-                {/* repository */}
-                {/* conditions governing access */}
-                {/* rights (hide) */}
+                {renderAttribute('metaArchive_archiveId', renderTextValue(attributes.objectNumber))}
+                {renderAttribute('metaArchive_creators', renderArchiveCreators(attributes))}
+                {renderAttribute('metaArchive_period', renderTimeframe(attributes.startDate, attributes.endDate))}
+                {'extent' in attributes && renderAttribute('metaArchive_extent', renderTextValue(attributes.extent))}
+                {'repositoryLabel' in attributes &&
+                    renderAttribute('metaArchive_repository', renderTextValue(attributes.repositoryLabel))}
+                {'conditionsGoverningAccess' in attributes &&
+                    renderAttribute(
+                        'metaArchive_conditionsGoverningAccess',
+                        renderTextValue(attributes.conditionsGoverningAccess)
+                    )}
+                {/* TODO: uncomment when ready -- Triply is still working on the returned values */}
+                {/* {renderAttribute('metaArchive_rights', renderTextValue(attributes.rightsLabel))} */}
             </>
         )
     }
@@ -254,6 +259,16 @@ export const RecordMeta: React.FC<Props> = ({ attributes }) => {
         }
 
         return associations.map((n, i) => renderListItem(i, renderTextValue(n.associationLabel)))
+    }
+
+    function renderArchiveCreators(attributes: NonNullable<ZoomLevel5ArchivesQuery['zoomLevel5Archive']>) {
+        if (!('creators' in attributes) || !attributes.creators?.length) {
+            return null
+        }
+
+        return attributes.creators.map((c, i) =>
+            renderListItem(i, renderTextLink(`/landingpage/people/${c.id}-people`, c.creatorLabel))
+        )
     }
 
     function getEntityNameForType(type: NonNullable<Zoom5RecordResult['zoom5detail']>['__typename']) {
