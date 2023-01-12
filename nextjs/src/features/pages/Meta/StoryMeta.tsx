@@ -17,13 +17,13 @@ import {
 
 type Story = StoryEntity
 interface Props {
-    story: Story
+    story?: Story
 }
 
 export const StoryMeta: React.FC<Props> = ({ story }) => {
     const commonT = useTypeSafeTranslation('common')
     const storiesT = useTypeSafeTranslation('stories')
-    const linkedPeopleRecords = story.attributes?.triplyRecords?.data.filter(
+    const linkedPeopleRecords = story?.attributes?.triplyRecords?.data.filter(
         d => d.attributes?.type === EnumTriplyrecordType.People && !!d.attributes.recordId
     )
 
@@ -32,37 +32,39 @@ export const StoryMeta: React.FC<Props> = ({ story }) => {
             <Box marginBottom={'md'}>
                 <Text textStyle={'micro'} marginBottom={1}>
                     {commonT.t('published', {
-                        date: story.attributes?.publicationDate
+                        date: story?.attributes?.publicationDate
                             ? formatPublicationDate(
-                                  story.attributes?.publicationDate.displayType,
-                                  story.attributes?.publicationDate.date
+                                  story?.attributes?.publicationDate.displayType,
+                                  story?.attributes?.publicationDate.date
                               )
                             : formatPublicationDate(
                                   EnumComponentcorepublicationdateDisplaytype.Year,
-                                  story.attributes?.publishedAt
+                                  story?.attributes?.publishedAt
                               ),
                     })}
                 </Text>
-                {story.attributes?.author?.data?.attributes && (
-                    <Text textStyle={'micro'}>{formatAuthor(story.attributes?.author?.data?.attributes)}</Text>
+                {story?.attributes?.author?.data?.attributes && (
+                    <Text textStyle={'micro'}>{formatAuthor(story?.attributes?.author?.data?.attributes)}</Text>
                 )}
             </Box>
 
-            {story.attributes?.shortDescription && (
+            {story?.attributes?.shortDescription && (
                 <Text textStyle={'micro'} marginBottom={'md'}>
-                    {story.attributes?.shortDescription}
+                    {story?.attributes?.shortDescription}
                 </Text>
             )}
 
-            {!!story.attributes?.timeframe && (
+            {!!story?.attributes?.timeframe && (
                 <Box marginBottom={'md'}>
                     <Text textStyle={'h5'} mb={1}>
                         {capitalizeFirstLetter(storiesT.t('time'))}
                     </Text>
                     <Text textStyle={'micro'}>
-                        <NextLink href={'/timeframes'} passHref>
-                            <Link>{formatTimeframe(story.attributes?.timeframe)}</Link>
-                        </NextLink>
+                        {/* <NextLink href={'/timeframes'} passHref> TODO: Re-add click when timeline implemented
+                            <Link> */}
+                        {formatTimeframe(story.attributes?.timeframe)}
+                        {/* </Link>
+                        </NextLink> */}
                     </Text>
                 </Box>
             )}
@@ -95,37 +97,37 @@ export const StoryMeta: React.FC<Props> = ({ story }) => {
                 </Box>
             )}
 
-            {!!story.attributes?.locations?.data.length && (
+            {!!story?.attributes?.locations?.data.length && (
                 <Box marginBottom={'md'}>
                     <Text textStyle={'h5'} mb={1}>
                         {capitalizeFirstLetter(storiesT.t('locations'))}
                     </Text>
 
                     <Box display={'flex'} flexDirection={'row'}>
-                        {story.attributes?.locations?.data.map((item, index, array) => {
+                        {story?.attributes?.locations?.data.map((item, index, array) => {
                             const hasItemAfter = array.length - 1 !== index
                             return (
                                 <Text textStyle={'micro'} key={keyExtractor(item, index, array)} mr={1}>
-                                    <NextLink href={`/locations/${item.attributes?.city}`} passHref>
-                                        <Link>
-                                            {item.attributes?.city}
-                                            {hasItemAfter && ','}
-                                        </Link>
-                                    </NextLink>
+                                    {/* <NextLink href={`/locations/${item.attributes?.city}`} passHref> TODO: Re-add click when map implemented
+                                        <Link> */}
+                                    {item.attributes?.city}
+                                    {hasItemAfter && ','}
+                                    {/* </Link>
+                                    </NextLink> */}
                                 </Text>
                             )
                         })}
                     </Box>
                 </Box>
             )}
-            {story.attributes?.storyLinks && (
+            {story?.attributes?.storyLinks && (
                 <ButtonsGrid
                     buttonLayoutStyle={{
                         whiteSpace: 'normal',
                         wordWrap: 'break-word',
                     }}
                     flexDirection="column"
-                    buttons={story.attributes.storyLinks.buttons ?? []}
+                    buttons={story?.attributes.storyLinks.buttons ?? []}
                     buttonStyle={EnumComponentmodulesbuttonsmoduleButtonstyle.Default}
                 ></ButtonsGrid>
             )}

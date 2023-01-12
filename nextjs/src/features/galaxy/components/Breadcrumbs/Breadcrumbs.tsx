@@ -1,11 +1,22 @@
 import React from 'react'
-import { Box, Flex, Link, useBreakpoint, useTheme } from '@chakra-ui/react'
+import { Box, Flex, Link, useBreakpoint, useTheme, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import ArrowRightIcon from '@/icons/arrows/arrow-right.svg'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { navigationT } from 'locales/locales'
 import { ZoomStates } from '@/features/galaxyInterface/types/galaxy'
 import { includesZoomedStatesMainGalaxy } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
+
+type BreadcrumbType = {
+    name: string
+    additionalName?: string
+    link: {
+        pathname: string
+        query?: {
+            preservedZoom: string
+        }
+    }
+}
 
 const getLandingPageBreadcrumb = (t: navigationT, type: string) => {
     const adjustedType = type === 'story' ? 'stories' : type
@@ -22,7 +33,7 @@ const getLandingPageBreadcrumb = (t: navigationT, type: string) => {
         name: `${typeToName[adjustedType]}`,
         link: {
             pathname: `/landingpage/${adjustedType}`,
-            query: `preservedZoom=${preservedZoom}&page=1`
+            query: `preservedZoom=${preservedZoom}&page=1`,
         },
     }
 }
@@ -39,7 +50,7 @@ const getRecordBreadcrumb = (t: navigationT, type: string, record: string) => {
     return {
         name: `${typeToName[type]} ${t('record')}`,
         link: {
-            pathname:`/landingpage/${type}/${record}`,
+            pathname: `/landingpage/${type}/${record}`,
         },
     }
 }
@@ -53,59 +64,57 @@ const getStoryRecordBreadcrumb = (t: navigationT, record: string) => {
     }
 }
 
-const getBreadcrumbsFromUrl = (asPath: string, query: { preservedZoom: ZoomStates }, t: navigationT) => {
+const getBreadcrumbsFromUrl = (
+    asPath: string,
+    query: { preservedZoom: ZoomStates },
+    t: navigationT
+): { items: BreadcrumbType[]; currentZoomLevel: number } => {
     let currentZoomLevel = 0
     const path = asPath.split('?')
     let pathArray = path[0].split('/')
     pathArray = pathArray.filter(item => item !== '')
     const isStory = pathArray[0] === 'story'
-    const startIndex =  isStory ? -1 : pathArray.findIndex(item => item === 'landingpage') 
-    
-    
-    const { preservedZoom } = query
+    const startIndex = isStory ? -1 : pathArray.findIndex(item => item === 'landingpage')
 
+    const { preservedZoom } = query
 
     if (pathArray.length === 0) {
         currentZoomLevel = 0
     }
 
     if (includesZoomedStatesMainGalaxy.includes(preservedZoom)) {
-       currentZoomLevel = 1
+        currentZoomLevel = 1
     }
 
     if (pathArray[startIndex + 1] && !pathArray[startIndex + 2]) {
         currentZoomLevel = 2
     }
 
-    if (pathArray[startIndex + 1] && pathArray[startIndex + 2] || isStory) {
+    if ((pathArray[startIndex + 1] && pathArray[startIndex + 2]) || isStory) {
         currentZoomLevel = 3
-    }
-
-    const companyLevel = {
-        name: t('theNewInstitute'),
-        link: { pathname: '/' },
     }
 
     const level0 = {
         name: t('zoom0'),
-        link: { pathname: '/', query: `preservedZoom=${ZoomStates.Zoom0}` },
+        additionalName: t('theNewInstitute'),
+        link: { pathname: '/' },
     }
 
     const level1 = {
         name: t('zoom1'),
-        link: { pathname: '/', query: { preservedZoom:  ZoomStates.Zoom1 } },
+        link: { pathname: '/', query: { preservedZoom: ZoomStates.Zoom1 } },
     }
 
-
     const rawItems = [
-        companyLevel,
         level0,
         level1,
         getLandingPageBreadcrumb(t, pathArray[startIndex + 1]),
-        isStory ? getStoryRecordBreadcrumb(t, pathArray[1]) : getRecordBreadcrumb(t, pathArray[startIndex + 1], pathArray[startIndex + 2]),
+        isStory
+            ? getStoryRecordBreadcrumb(t, pathArray[1])
+            : getRecordBreadcrumb(t, pathArray[startIndex + 1], pathArray[startIndex + 2]),
     ]
-    // company level and current level are always present, that's why it's +2
-    const items = rawItems.slice(0, currentZoomLevel + 2)
+    // company level and current level are always present, that's why it's +1
+    const items = rawItems.slice(0, currentZoomLevel + 1)
 
     return {
         items,
@@ -131,26 +140,21 @@ const Breadcrumbs = (props: Props) => {
     const breakpoint = useBreakpoint()
     const isMobile = breakpoint === 'sm'
 
-    const { items, currentZoomLevel } = getBreadcrumbsFromUrl(
-        router.asPath,
-        router?.query as { preservedZoom: ZoomStates },
-        t
-    )
+    const { items } = getBreadcrumbsFromUrl(router.asPath, router?.query as { preservedZoom: ZoomStates }, t)
 
-    const handleRedirect = (link?: { pathname: string; query?: { zoomLevel: string } }) => {
+    const handleRedirect = (link?: { pathname: string; query?: { preservedZoom: string } }) => {
         if (!link) return
         const isFirstLevels = link.pathname === '/'
-        const shallow = currentZoomLevel === 0 || (currentZoomLevel === 1 && isFirstLevels)
         const isTheSameLink = isFirstLevels ? link.pathname === router?.pathname : link?.pathname === router?.asPath
-        if (router.query?.zoomLevel === link.query?.zoomLevel && isTheSameLink) {
+        if (router.query?.preservedZoom === link.query?.preservedZoom && isTheSameLink) {
             router.reload()
             return
         }
 
-        router.push(link, undefined, { shallow })
+        router.push(link, undefined)
     }
 
-    if(isMobile) {
+    if (isMobile) {
         return null
     }
 
@@ -184,9 +188,11 @@ const Breadcrumbs = (props: Props) => {
                             variant={'decorative'}
                             cursor="pointer"
                             textStyle="small"
+                            display={'inherit'}
                             onClick={() => handleRedirect(item.link)}
                         >
-                            {item.name}
+                            <Text>{item.name}</Text>
+                            {item?.additionalName && <Text ml={4}>{item.additionalName}</Text>}
                         </Link>
                         {index + 1 !== items.length && index !== 0 && (
                             <Box mr={'2.5'} cursor="pointer">
