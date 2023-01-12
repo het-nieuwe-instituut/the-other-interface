@@ -52,15 +52,13 @@ const RecordPage = (props: PageProps) => {
             <GalaxyWrapper renderTopRight={() => <GalaxyTopRight />} renderBottom={() => <GalaxyFooter />}>
                 <Box backgroundColor="graph" height="800px" ref={graphRef} key={router.query.record as string}>
                     {sizes?.height && sizes?.width && (
-                        <Box position={'fixed'}>
-                            <RecordClouds key={router.query.record as string} dimensions={sizes} />
-                        </Box>
+                        <RecordClouds key={router.query.record as string} dimensions={sizes} />
                     )}
                 </Box>
             </GalaxyWrapper>
 
-            <Box px={{ xl: 6, base: 0 }} position={'relative'} zIndex={2} backgroundColor={'white'}>
-                <Box maxW={theme.breakpoints.xl} marginX={'auto'} paddingTop={6}>
+            <Box px={{ xl: 6, base: 0 }}>
+                <Box backgroundColor="white" px={6} maxW={theme.breakpoints.xl} marginX={'auto'}>
                     <Grid
                         pt={6}
                         templateAreas={{ lg: `"header meta"`, base: `"meta" "header"` }}
