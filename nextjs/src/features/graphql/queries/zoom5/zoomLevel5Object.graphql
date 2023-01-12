@@ -1,6 +1,7 @@
 query ZoomLevel5Object($id: String!) {
     zoomLevel5Object(id: $id) {
         __typename
+        id
         image
         imageLabel
         title

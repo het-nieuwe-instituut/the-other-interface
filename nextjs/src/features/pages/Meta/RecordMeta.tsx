@@ -1,10 +1,13 @@
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { Link, Box, Text } from '@chakra-ui/react'
+import ExternalLink from '@/icons/arrows/external-link.svg'
+import { Link, Box, Text, Button } from '@chakra-ui/react'
 import { TranslationKeys } from 'locales/locales'
 import React from 'react'
 import { ZoomLevel5ObjectQuery } from 'src/generated/graphql'
 import { Zoom5RecordResult } from '../tasks/zoom5Config'
 import NextLink from 'next/link'
+import { getTriplyRecordPathForTypeAndId } from '@/features/shared/utils/links'
+import { TypeToEntityName } from '@/features/galaxy/FilterClouds/FilterCloudsContainer'
 
 interface Props {
     attributes: Zoom5RecordResult['zoom5detail']
@@ -25,20 +28,23 @@ export const RecordMeta: React.FC<Props> = ({ attributes }) => {
             {renderAttribute('metaObject_makers', renderMakers(attributes))}
             {renderAttribute('metaObject_dates', renderTimeframe(attributes.startDate, attributes.endDate))}
             {renderAttribute('metaObject_place', renderTextValue(attributes.creationPlace))}
-            {/* TODO: where is this supposed to go */}
-            {renderAttribute('metaObject_name', renderTextLink(`/where/to`, attributes.objectName))}
+            {renderAttribute('metaObject_name', renderTextValue(attributes.objectNameLabel))}
             {renderAttribute('metaObject_materials', renderMaterials(attributes))}
             {renderAttribute('metaObject_techniques', renderTechniques(attributes))}
             {renderAttribute('metaObject_partCount', renderTextValue(attributes.numberOfParts))}
             {renderAttribute('metaObject_dimensions', renderTextValue(getDimensionText(attributes)))}
             {renderAttribute('metaObject_credits', renderTextValue(attributes.creditLine))}
-            {renderAttribute('metaObject_rights', renderTextValue(attributes.rightsLabel))}
-            {/* TODO: what is this supposed to be */}
-            {renderAttribute('metaObject_more', <></>)}
+            {/* TODO: uncomment when ready -- Triply is still working on the returned values */}
+            {/* {renderAttribute('metaObject_rights', renderTextValue(attributes.rightsLabel))} */}
+            {renderButton(attributes.id, attributes.__typename)}
         </Box>
     )
 
     function renderAttribute(labelKey: TranslationKeys['record'], value: React.ReactNode) {
+        if (!value) {
+            return null
+        }
+
         return (
             <Box marginBottom="md">
                 <Text textStyle="h5" mb={1}>
@@ -50,6 +56,10 @@ export const RecordMeta: React.FC<Props> = ({ attributes }) => {
     }
 
     function renderTextValue(value?: string | null) {
+        if (!value) {
+            return null
+        }
+
         return (
             <Text textStyle="micro" mb={1}>
                 {value}
@@ -75,25 +85,35 @@ export const RecordMeta: React.FC<Props> = ({ attributes }) => {
     }
 
     function renderMakers(attributes: ZoomLevel5ObjectQuery['zoomLevel5Object']) {
-        return attributes?.makers?.map((m, i) =>
-            renderTextLinkListItem(`/landingpage/people/${m.id}-people`, i, m.makerLabel)
+        if (!attributes?.makers?.length) {
+            return null
+        }
+
+        return attributes.makers.map((m, i) =>
+            renderListItem(i, renderTextLink(`/landingpage/people/${m.id}-people`, m.makerLabel))
         )
     }
 
     function renderMaterials(attributes: ZoomLevel5ObjectQuery['zoomLevel5Object']) {
-        // TODO: where is this supposed to go
-        return attributes?.materials?.map((m, i) => renderTextLinkListItem(`/where/to/${m.id}`, i, m.materialLabel))
+        if (!attributes?.materials?.length) {
+            return null
+        }
+
+        return attributes.materials.map((m, i) => renderListItem(i, renderTextValue(m.materialLabel)))
     }
 
     function renderTechniques(attributes: ZoomLevel5ObjectQuery['zoomLevel5Object']) {
-        // TODO: where is this supposed to go
-        return attributes?.techniques?.map((m, i) => renderTextLinkListItem(`/where/to/${m.id}`, i, m.techniqueLabel))
+        if (!attributes?.techniques?.length) {
+            return null
+        }
+
+        return attributes.techniques.map((m, i) => renderListItem(i, renderTextValue(m.techniqueLabel)))
     }
 
-    function renderTextLinkListItem(to: string, key: number, text?: string | null) {
+    function renderListItem(key: number, value: React.ReactNode) {
         return (
             <Box marginBottom={1} key={key}>
-                {renderTextLink(to, text)}
+                {value}
             </Box>
         )
     }
@@ -105,6 +125,30 @@ export const RecordMeta: React.FC<Props> = ({ attributes }) => {
                     <Link>{text}</Link>
                 </NextLink>
             </Text>
+        )
+    }
+
+    function renderButton(id: string, type: NonNullable<Zoom5RecordResult['zoom5detail']>['__typename']) {
+        return (
+            <Box marginTop="8">
+                <NextLink
+                    style={{ width: '100%' }}
+                    href={getTriplyRecordPathForTypeAndId(TypeToEntityName[type], id)}
+                    passHref
+                >
+                    <Button
+                        style={{ whiteSpace: 'normal', wordWrap: 'break-word' }}
+                        as="a"
+                        rightIcon={<ExternalLink />}
+                        target="_blank"
+                        bg="white"
+                    >
+                        <Text as="span" color="currentcolor" verticalAlign="text-bottom">
+                            {recordT.t('metaObject_more')}
+                        </Text>
+                    </Button>
+                </NextLink>
+            </Box>
         )
     }
 }

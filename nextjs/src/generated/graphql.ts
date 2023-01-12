@@ -1963,7 +1963,7 @@ export type ZoomLevel5ObjectQueryVariables = Exact<{
 }>;
 
 
-export type ZoomLevel5ObjectQuery = { __typename?: 'Query', zoomLevel5Object?: { __typename: 'ObjectsZoomLevel5DetailType', image?: string | null, imageLabel?: string | null, title?: string | null, titleType?: string | null, objectNumber?: string | null, objectName?: string | null, objectNameLabel?: string | null, archiveCollectionCode?: string | null, startDate?: string | null, endDate?: string | null, numberOfParts?: string | null, scale?: string | null, dimHeight?: string | null, dimWidth?: string | null, dimDepth?: string | null, dimensionUnit?: string | null, description?: string | null, associationPerson?: string | null, associationPersonLabel?: string | null, associationPersonType?: string | null, relatedObjectTitle?: string | null, creditLine?: string | null, rights?: string | null, rightsLabel?: string | null, creationPlace?: string | null, creationPlaceLabel?: string | null, permanentLink?: string | null, makers?: Array<{ __typename?: 'ObjectMakerType', id: string, maker?: string | null, makerLabel?: string | null, makerRole?: string | null, makerRoleLabel?: string | null }> | null, techniques?: Array<{ __typename?: 'ObjectTechniqueType', id: string, technique: string, techniqueLabel?: string | null }> | null, materials?: Array<{ __typename?: 'ObjectMaterialType', id: string, material: string, materialLabel?: string | null }> | null } | null };
+export type ZoomLevel5ObjectQuery = { __typename?: 'Query', zoomLevel5Object?: { __typename: 'ObjectsZoomLevel5DetailType', id: string, image?: string | null, imageLabel?: string | null, title?: string | null, titleType?: string | null, objectNumber?: string | null, objectName?: string | null, objectNameLabel?: string | null, archiveCollectionCode?: string | null, startDate?: string | null, endDate?: string | null, numberOfParts?: string | null, scale?: string | null, dimHeight?: string | null, dimWidth?: string | null, dimDepth?: string | null, dimensionUnit?: string | null, description?: string | null, associationPerson?: string | null, associationPersonLabel?: string | null, associationPersonType?: string | null, relatedObjectTitle?: string | null, creditLine?: string | null, rights?: string | null, rightsLabel?: string | null, creationPlace?: string | null, creationPlaceLabel?: string | null, permanentLink?: string | null, makers?: Array<{ __typename?: 'ObjectMakerType', id: string, maker?: string | null, makerLabel?: string | null, makerRole?: string | null, makerRoleLabel?: string | null }> | null, techniques?: Array<{ __typename?: 'ObjectTechniqueType', id: string, technique: string, techniqueLabel?: string | null }> | null, materials?: Array<{ __typename?: 'ObjectMaterialType', id: string, material: string, materialLabel?: string | null }> | null } | null };
 
 export type ZoomLevel5PublicationQueryVariables = Exact<{
   id: Scalars['String'];
@@ -3110,6 +3110,7 @@ export const ZoomLevel5ObjectDocument = gql`
     query ZoomLevel5Object($id: String!) {
   zoomLevel5Object(id: $id) {
     __typename
+    id
     image
     imageLabel
     title

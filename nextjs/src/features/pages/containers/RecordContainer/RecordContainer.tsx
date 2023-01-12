@@ -44,7 +44,7 @@ const RecordPage = (props: PageProps) => {
     const attributes = props.landingpage?.landingpages?.data[0]?.attributes
 
     return (
-        <>
+        <Box>
             <Breadcrumbs
                 onWrapperClick={ScrollToTop}
                 mode={scrollPosition >= 750 ? BreadcrumbsRenderModes.STICKY : BreadcrumbsRenderModes.DEFAULT}
@@ -75,9 +75,6 @@ const RecordPage = (props: PageProps) => {
                                 title={attributes?.Title || undefined}
                                 preface={attributes?.Description || undefined}
                             />
-                            <DynamicComponentRenderer
-                                components={attributes?.components as LandingpageComponentsDynamicZone[]}
-                            />
                         </GridItem>
                         <GridItem area="meta">
                             <RecordMeta attributes={props.zoom5?.zoom5detail} />
@@ -85,6 +82,7 @@ const RecordPage = (props: PageProps) => {
                     </Grid>
                 </Box>
             </Box>
-        </>
+            <DynamicComponentRenderer components={attributes?.components as LandingpageComponentsDynamicZone[]} />
+        </Box>
     )
 }
