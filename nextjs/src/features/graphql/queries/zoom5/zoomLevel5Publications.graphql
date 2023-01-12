@@ -2,6 +2,7 @@ query ZoomLevel5Publication($id: String!) {
     zoomLevel5Publication(id: $id) {
         __typename
         ... on PublicationsAudioVisualZoomLevel5DetailType {
+            id
             __typename
             typeOfPublication
             typeOfPublicationLabel
@@ -34,6 +35,7 @@ query ZoomLevel5Publication($id: String!) {
         }
         ... on PublicationsArticleZoomLevel5DetailType {
             __typename
+            id
             typeOfPublication
             typeOfPublicationLabel
             title
@@ -64,6 +66,7 @@ query ZoomLevel5Publication($id: String!) {
             permanentLink
         }
         ... on PublicationsSerialZoomLevel5DetailType {
+            id
             __typename
             typeOfPublication
             typeOfPublicationLabel
@@ -86,6 +89,7 @@ query ZoomLevel5Publication($id: String!) {
             permanentLink
         }
         ... on PublicationsBookZoomLevel5DetailType {
+            id
             __typename
             typeOfPublication
             typeOfPublicationLabel

@@ -1,5 +1,6 @@
 query ZoomLevel5PublicationsBook($id: String!) {
     zoomLevel5PublicationsBook(id: $id) {
+        id
         __typename
         typeOfPublication
         typeOfPublicationLabel

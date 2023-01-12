@@ -16,7 +16,7 @@ export function getPeoplePathForTriplyRecordId(id: string) {
 
 export function getTriplyRecordPathForTypeAndId(type: EntityNames, id: string) {
     const baseURL = 'https://collectiedata.hetnieuweinstituut.nl/id/'
-
+    console.log(id, type)
     switch (type) {
         case EntityNames.People:
             return `${baseURL}/people/${id}`

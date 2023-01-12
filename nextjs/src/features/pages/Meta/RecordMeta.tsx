@@ -3,11 +3,16 @@ import ExternalLink from '@/icons/arrows/external-link.svg'
 import { Link, Box, Text, Button } from '@chakra-ui/react'
 import { TranslationKeys } from 'locales/locales'
 import React from 'react'
-import { ZoomLevel5ObjectQuery } from 'src/generated/graphql'
+import {
+    EntityNames,
+    ZoomLevel5ArchivesQuery,
+    ZoomLevel5ObjectQuery,
+    ZoomLevel5PersonQuery,
+    ZoomLevel5PublicationQuery,
+} from 'src/generated/graphql'
 import { Zoom5RecordResult } from '../tasks/zoom5Config'
 import NextLink from 'next/link'
 import { getTriplyRecordPathForTypeAndId } from '@/features/shared/utils/links'
-import { TypeToEntityName } from '@/features/galaxy/FilterClouds/FilterCloudsContainer'
 
 interface Props {
     attributes: Zoom5RecordResult['zoom5detail']
@@ -17,28 +22,92 @@ export const RecordMeta: React.FC<Props> = ({ attributes }) => {
     const recordT = useTypeSafeTranslation('record')
     const commonT = useTypeSafeTranslation('common')
 
-    if (attributes?.__typename !== 'ObjectsZoomLevel5DetailType') {
+    if (!attributes?.id) {
         return null
     }
 
     return (
         <Box>
-            {renderAttribute('metaObject_id', renderTextValue(attributes.objectNumber))}
-            {renderAttribute('metaObject_archive', renderTextValue(attributes.archiveCollectionCode))}
-            {renderAttribute('metaObject_makers', renderMakers(attributes))}
-            {renderAttribute('metaObject_dates', renderTimeframe(attributes.startDate, attributes.endDate))}
-            {renderAttribute('metaObject_place', renderTextValue(attributes.creationPlace))}
-            {renderAttribute('metaObject_name', renderTextValue(attributes.objectNameLabel))}
-            {renderAttribute('metaObject_materials', renderMaterials(attributes))}
-            {renderAttribute('metaObject_techniques', renderTechniques(attributes))}
-            {renderAttribute('metaObject_partCount', renderTextValue(attributes.numberOfParts))}
-            {renderAttribute('metaObject_dimensions', renderTextValue(getDimensionText(attributes)))}
-            {renderAttribute('metaObject_credits', renderTextValue(attributes.creditLine))}
-            {/* TODO: uncomment when ready -- Triply is still working on the returned values */}
-            {/* {renderAttribute('metaObject_rights', renderTextValue(attributes.rightsLabel))} */}
+            {renderTypeSpecificFields()}
             {renderButton(attributes.id, attributes.__typename)}
         </Box>
     )
+
+    function renderTypeSpecificFields() {
+        switch (attributes?.__typename) {
+            case 'ObjectsZoomLevel5DetailType':
+                return renderObjectMeta(attributes)
+            case 'PoepleZoomLevel5DetailType':
+                return renderPersonMeta(attributes)
+            case 'ArchivesFondsZoomLevel5DetailType':
+            case 'ArchivesOtherZoomLevel5DetailType':
+                return renderArchiveMeta(attributes)
+            case 'PublicationsArticleZoomLevel5DetailType':
+            case 'PublicationsAudioVisualZoomLevel5DetailType':
+            case 'PublicationsBookZoomLevel5DetailType':
+            case 'PublicationsSerialZoomLevel5DetailType':
+                return renderPublicationMeta(attributes)
+            default:
+                return null
+        }
+    }
+
+    function renderObjectMeta(attributes: NonNullable<ZoomLevel5ObjectQuery['zoomLevel5Object']>) {
+        return (
+            <>
+                {renderAttribute('metaObject_id', renderTextValue(attributes.objectNumber))}
+                {renderAttribute('metaObject_archive', renderTextValue(attributes.archiveCollectionCode))}
+                {renderAttribute('metaObject_makers', renderMakers(attributes.makers))}
+                {renderAttribute('metaObject_dates', renderTimeframe(attributes.startDate, attributes.endDate))}
+                {renderAttribute('metaObject_place', renderTextValue(attributes.creationPlace))}
+                {renderAttribute('metaObject_name', renderTextValue(attributes.objectNameLabel))}
+                {renderAttribute('metaObject_materials', renderMaterials(attributes.materials))}
+                {renderAttribute('metaObject_techniques', renderTechniques(attributes.techniques))}
+                {renderAttribute('metaObject_partCount', renderTextValue(attributes.numberOfParts))}
+                {renderAttribute('metaObject_dimensions', renderTextValue(getDimensionText(attributes)))}
+                {renderAttribute('metaObject_credits', renderTextValue(attributes.creditLine))}
+                {/* TODO: uncomment when ready -- Triply is still working on the returned values */}
+                {/* {renderAttribute('metaObject_rights', renderTextValue(attributes.rightsLabel))} */}
+            </>
+        )
+    }
+
+    function renderPersonMeta(attributes: NonNullable<ZoomLevel5PersonQuery['zoomLevel5Person']>) {
+        return (
+            <>
+                {renderAttribute('metaPerson_occupation', renderTextValue(attributes.professionLabel))}
+                {renderAttribute('metaPerson_nameType', renderPersonNameTypes(attributes.nameTypes))}
+                {renderAttribute('metaPerson_gender', renderTextValue(attributes.gender))}
+                {renderAttribute('metaPerson_born', renderTextValue(getBirthText(attributes)))}
+                {renderAttribute('metaPerson_died', renderTextValue(getDeathText(attributes)))}
+                {renderAttribute('metaPerson_period', renderTimeframe(attributes.startDate, attributes.endDate))}
+                {renderAttribute('metaPerson_nationality', renderTextValue(attributes.nationalityLabel))}
+                {renderAttribute('metaPerson_place', renderTextValue(attributes.placeLabel))}
+                {renderAttribute('metaPerson_institution', renderTextValue(attributes.institutionLabel))}
+                {renderAttribute('metaPerson_associations', renderPersonAssociations(attributes.associations))}
+            </>
+        )
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    function renderArchiveMeta(attributes: NonNullable<ZoomLevel5ArchivesQuery['zoomLevel5Archive']>) {
+        return (
+            <>
+                {/* archive id */}
+                {/* creators */}
+                {/* period */}
+                {/* extent */}
+                {/* repository */}
+                {/* conditions governing access */}
+                {/* rights (hide) */}
+            </>
+        )
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    function renderPublicationMeta(attributes: NonNullable<ZoomLevel5PublicationQuery['zoomLevel5Publication']>) {
+        return <>{/* TODO */}</>
+    }
 
     function renderAttribute(labelKey: TranslationKeys['record'], value: React.ReactNode) {
         if (!value) {
@@ -71,43 +140,43 @@ export const RecordMeta: React.FC<Props> = ({ attributes }) => {
         return renderTextValue([startDate, endDate].filter(item => !!item).join('-'))
     }
 
-    function getDimensionText(attributes: ZoomLevel5ObjectQuery['zoomLevel5Object']) {
-        const h = attributes?.dimHeight ? `${attributes.dimHeight}${commonT.t('heightAbbr')}` : ''
-        const w = attributes?.dimWidth ? `${attributes.dimWidth}${commonT.t('widthAbbr')}` : ''
-        const d = attributes?.dimDepth ? `${attributes.dimDepth}${commonT.t('depthAbbr')}` : ''
+    function getDimensionText(attributes: NonNullable<ZoomLevel5ObjectQuery['zoomLevel5Object']>) {
+        const h = attributes.dimHeight ? `${attributes.dimHeight}${commonT.t('heightAbbr')}` : ''
+        const w = attributes.dimWidth ? `${attributes.dimWidth}${commonT.t('widthAbbr')}` : ''
+        const d = attributes.dimDepth ? `${attributes.dimDepth}${commonT.t('depthAbbr')}` : ''
 
         const dims = [h, w, d].filter(dim => !!dim).join(' x ')
         if (!dims) {
             return
         }
 
-        return `${dims} ${attributes?.dimensionUnit || ''}`
+        return `${dims} ${attributes.dimensionUnit || ''}`
     }
 
-    function renderMakers(attributes: ZoomLevel5ObjectQuery['zoomLevel5Object']) {
-        if (!attributes?.makers?.length) {
+    function renderMakers(makers: NonNullable<ZoomLevel5ObjectQuery['zoomLevel5Object']>['makers']) {
+        if (!makers?.length) {
             return null
         }
 
-        return attributes.makers.map((m, i) =>
+        return makers.map((m, i) =>
             renderListItem(i, renderTextLink(`/landingpage/people/${m.id}-people`, m.makerLabel))
         )
     }
 
-    function renderMaterials(attributes: ZoomLevel5ObjectQuery['zoomLevel5Object']) {
-        if (!attributes?.materials?.length) {
+    function renderMaterials(materials: NonNullable<ZoomLevel5ObjectQuery['zoomLevel5Object']>['materials']) {
+        if (!materials?.length) {
             return null
         }
 
-        return attributes.materials.map((m, i) => renderListItem(i, renderTextValue(m.materialLabel)))
+        return materials.map((m, i) => renderListItem(i, renderTextValue(m.materialLabel)))
     }
 
-    function renderTechniques(attributes: ZoomLevel5ObjectQuery['zoomLevel5Object']) {
-        if (!attributes?.techniques?.length) {
+    function renderTechniques(techniques: NonNullable<ZoomLevel5ObjectQuery['zoomLevel5Object']>['techniques']) {
+        if (!techniques?.length) {
             return null
         }
 
-        return attributes.techniques.map((m, i) => renderListItem(i, renderTextValue(m.techniqueLabel)))
+        return techniques.map((m, i) => renderListItem(i, renderTextValue(m.techniqueLabel)))
     }
 
     function renderListItem(key: number, value: React.ReactNode) {
@@ -129,13 +198,14 @@ export const RecordMeta: React.FC<Props> = ({ attributes }) => {
     }
 
     function renderButton(id: string, type: NonNullable<Zoom5RecordResult['zoom5detail']>['__typename']) {
+        const entityName = getEntityNameForType(type)
+        if (!entityName) {
+            return null
+        }
+
         return (
             <Box marginTop="8">
-                <NextLink
-                    style={{ width: '100%' }}
-                    href={getTriplyRecordPathForTypeAndId(TypeToEntityName[type], id)}
-                    passHref
-                >
+                <NextLink style={{ width: '100%' }} href={getTriplyRecordPathForTypeAndId(entityName, id)} passHref>
                     <Button
                         style={{ whiteSpace: 'normal', wordWrap: 'break-word' }}
                         as="a"
@@ -150,5 +220,58 @@ export const RecordMeta: React.FC<Props> = ({ attributes }) => {
                 </NextLink>
             </Box>
         )
+    }
+
+    function getBirthText(attributes: NonNullable<ZoomLevel5PersonQuery['zoomLevel5Person']>) {
+        if (!attributes.birthDate || !attributes.birthPlaceLabel) {
+            return null
+        }
+
+        return [attributes.birthPlaceLabel, attributes.birthDate].filter(a => !!a).join(', ')
+    }
+
+    function getDeathText(attributes: NonNullable<ZoomLevel5PersonQuery['zoomLevel5Person']>) {
+        if (!attributes.deathDate || !attributes.deathPlaceLabel) {
+            return null
+        }
+
+        return [attributes.deathPlaceLabel, attributes.deathDate].filter(a => !!a).join(', ')
+    }
+
+    function renderPersonNameTypes(nameTypes: NonNullable<ZoomLevel5PersonQuery['zoomLevel5Person']>['nameTypes']) {
+        if (!nameTypes?.length) {
+            return null
+        }
+
+        return nameTypes.map((n, i) => renderListItem(i, renderTextValue(n)))
+    }
+
+    function renderPersonAssociations(
+        associations: NonNullable<ZoomLevel5PersonQuery['zoomLevel5Person']>['associations']
+    ) {
+        if (!associations?.length) {
+            return null
+        }
+
+        return associations.map((n, i) => renderListItem(i, renderTextValue(n.associationLabel)))
+    }
+
+    function getEntityNameForType(type: NonNullable<Zoom5RecordResult['zoom5detail']>['__typename']) {
+        switch (type) {
+            case 'ObjectsZoomLevel5DetailType':
+                return EntityNames.Objects
+            case 'PoepleZoomLevel5DetailType':
+                return EntityNames.People
+            case 'ArchivesFondsZoomLevel5DetailType':
+            case 'ArchivesOtherZoomLevel5DetailType':
+                return EntityNames.Archives
+            case 'PublicationsArticleZoomLevel5DetailType':
+            case 'PublicationsAudioVisualZoomLevel5DetailType':
+            case 'PublicationsBookZoomLevel5DetailType':
+            case 'PublicationsSerialZoomLevel5DetailType':
+                return EntityNames.Publications
+            default:
+                return null
+        }
     }
 }

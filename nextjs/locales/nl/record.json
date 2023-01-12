@@ -24,5 +24,22 @@
     "metaObject_dimensions": "Dimensions",
     "metaObject_credits": "Creditline",
     "metaObject_rights": "Rights",
-    "metaObject_more": "More info on Handle"
+    "metaObject_more": "More info on Handle",
+    "metaPerson_occupation": "Occupation",
+    "metaPerson_nameType": "Name type",
+    "metaPerson_gender": "Gender",
+    "metaPerson_born": "Born",
+    "metaPerson_died": "Died",
+    "metaPerson_period": "Period",
+    "metaPerson_nationality": "Nationality",
+    "metaPerson_place": "Place",
+    "metaPerson_institution": "Institution",
+    "metaPerson_associations": "Associations",
+    "metaArchive_archiveId": "Archive id",
+    "metaArchive_creators": "Creators",
+    "metaArchive_period": "Period",
+    "metaArchive_extent": "Extent",
+    "metaArchive_repository": "Repository",
+    "metaArchive_conditionsGoverningAccess": "Conditions governing access",
+    "metaArchive_rights": "Rights"
 }

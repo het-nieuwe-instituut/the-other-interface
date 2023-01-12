@@ -3,6 +3,7 @@ query ZoomLevel5Archives($id: String!) {
         __typename
         ... on ArchivesOtherZoomLevel5DetailType {
             __typename
+            id
             objectNumber
             title
             startDate
@@ -20,6 +21,7 @@ query ZoomLevel5Archives($id: String!) {
         }
         ... on ArchivesFondsZoomLevel5DetailType {
             __typename
+            id
             descriptionLevel
             objectNumber
             recordTitle
