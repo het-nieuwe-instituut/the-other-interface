@@ -3,7 +3,7 @@ import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { TriplyUtils, ZoomLevel3ReturnData, zoomLevel3ReturnDataKeys } from '../triply/triply.utils'
 import { CustomError } from '../util/customError'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
-import { ArchivesZoomLevel4FiltersArgs } from './archives.type'
+import { ArchivesFondsCreatorType, ArchivesZoomLevel4FiltersArgs } from './archives.type'
 
 export enum ArchivesZoomLevel3Ids {
     date = 'date',
@@ -285,7 +285,13 @@ export class ArchivesService {
         const pidWorkURIs: Set<string> = new Set()
         result.data.forEach(d => 'pidWorkURI' in d && d.pidWorkURI && pidWorkURIs.add(d.pidWorkURI))
 
-        return { ...TriplyUtils.combineObjectArray(result.data), pidWorkURIs, type, id: objectId }
+        return {
+            ...TriplyUtils.combineObjectArray(result.data),
+            pidWorkURIs,
+            type,
+            id: objectId,
+            creators: this.getCreatorsValueFromData(result.data),
+        }
     }
 
     public validateFilterInput(input: string): ArchivesZoomLevel3Ids {
@@ -295,5 +301,18 @@ export class ArchivesService {
         }
 
         throw CustomError.internalCritical(`[Archives] Invalid filter input "${input}"`)
+    }
+
+    private getCreatorsValueFromData(data: ArchivesZoomLeve5DataType[]): ArchivesFondsCreatorType[] {
+        return data
+            .filter(d => 'creator' in d && !!d.creator)
+            .map((d: ArchivesOtherDetailZoomLevel5Data) => ({
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                id: TriplyUtils.getIdFromUri(d.creator!),
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                creator: d.creator!,
+                creatorHistory: d.creatorHistory,
+                creatorLabel: d.creatorLabel,
+            }))
     }
 }

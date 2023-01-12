@@ -31,13 +31,15 @@ fragment carouselModuleFragment on ComponentModulesCarousel {
                         ... on ArchivesFondsZoomLevel5DetailType {
                             id
                             objectNumber
-                            populatedCreator {
-                                id
-                                name
-                                nationality
-                                place
-                                birthDate
-                                professionLabel
+                            creators {
+                                populatedCreator {
+                                    id
+                                    name
+                                    nationality
+                                    place
+                                    birthDate
+                                    professionLabel
+                                }
                             }
                             recordTitle
                             type

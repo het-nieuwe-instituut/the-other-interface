@@ -1,4 +1,4 @@
-import { Field, ID, InputType, ObjectType } from '@nestjs/graphql'
+import { Field, InputType, ObjectType } from '@nestjs/graphql'
 import { PoepleZoomLevel5DetailType } from '../people/people.type'
 
 @InputType()
@@ -123,7 +123,7 @@ export class ObjectsZoomLevel5DetailType {
 
 @ObjectType()
 export class ObjectMakerType {
-    @Field(() => ID)
+    @Field(() => String)
     public id: string
 
     @Field(() => String, { nullable: true })
@@ -144,7 +144,7 @@ export class ObjectMakerType {
 
 @ObjectType()
 export class ObjectMaterialType {
-    @Field(() => ID)
+    @Field(() => String)
     public id: string
 
     @Field(() => String)
@@ -156,7 +156,7 @@ export class ObjectMaterialType {
 
 @ObjectType()
 export class ObjectTechniqueType {
-    @Field(() => ID)
+    @Field(() => String)
     public id: string
 
     @Field(() => String)

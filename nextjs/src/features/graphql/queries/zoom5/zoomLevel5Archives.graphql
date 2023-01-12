@@ -31,9 +31,12 @@ query ZoomLevel5Archives($id: String!) {
             extent
             repository
             repositoryLabel
-            creator
-            creatorLabel
-            creatorHistory
+            creators {
+                id
+                creator
+                creatorLabel
+                creatorHistory
+            }
             custodialHistory
             systemOfArrangement
             contentScope

@@ -54,17 +54,8 @@ export class ArchivesFondsZoomLevel5DetailType extends BaseArchiveZoomLevel5Type
     @Field(() => String, { nullable: true })
     public repositoryLabel?: string
 
-    @Field(() => String, { nullable: true })
-    public creator?: string
-
-    @Field(() => String, { nullable: true })
-    public creatorLabel?: string
-
-    @Field(() => String, { nullable: true })
-    public creatorHistory?: string
-
-    @Field(() => PoepleZoomLevel5DetailType, { nullable: true })
-    public populatedCreator?: PoepleZoomLevel5DetailType
+    @Field(() => [ArchivesFondsCreatorType], { nullable: true })
+    public creators?: ArchivesFondsCreatorType[]
 
     @Field(() => String, { nullable: true })
     public custodialHistory?: string
@@ -101,6 +92,24 @@ export class ArchivesFondsZoomLevel5DetailType extends BaseArchiveZoomLevel5Type
 
     @Field(() => String, { nullable: true })
     public permanentLink?: string
+}
+
+@ObjectType()
+export class ArchivesFondsCreatorType {
+    @Field(() => String)
+    public id: string
+
+    @Field(() => String)
+    public creator: string
+
+    @Field(() => String, { nullable: true })
+    public creatorLabel?: string
+
+    @Field(() => String, { nullable: true })
+    public creatorHistory?: string
+
+    @Field(() => PoepleZoomLevel5DetailType, { nullable: true })
+    public populatedCreator?: PoepleZoomLevel5DetailType
 }
 
 @ObjectType()
