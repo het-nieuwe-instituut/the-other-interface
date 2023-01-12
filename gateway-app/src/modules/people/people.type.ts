@@ -26,11 +26,11 @@ export class PoepleZoomLevel5DetailType {
     @Field()
     public id: string
 
-    @Field(() => String, { nullable: true })
-    public name?: string | null
+    @Field(() => String)
+    public name: string
 
-    @Field(() => String, { nullable: true })
-    public nameType?: string | null
+    @Field(() => [String], { nullable: true })
+    public nameTypes?: string[]
 
     @Field(() => String, { nullable: true })
     public nameVariation?: string | null
@@ -86,11 +86,8 @@ export class PoepleZoomLevel5DetailType {
     @Field(() => String, { nullable: true })
     public gender?: string | null
 
-    @Field(() => String, { nullable: true })
-    public association?: string | null
-
-    @Field(() => String, { nullable: true })
-    public associationLabel?: string | null
+    @Field(() => [PeopleAssociationType], { nullable: true })
+    public associations?: PeopleAssociationType[]
 
     @Field(() => String, { nullable: true })
     public relatedItem?: string | null
@@ -103,4 +100,13 @@ export class PoepleZoomLevel5DetailType {
 
     @Field(() => String, { nullable: true })
     public permanentLink?: string | null
+}
+
+@ObjectType()
+export class PeopleAssociationType {
+    @Field(() => String)
+    public association: string
+
+    @Field(() => String, { nullable: true })
+    public associationLabel?: string | null
 }

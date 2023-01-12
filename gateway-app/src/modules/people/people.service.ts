@@ -3,7 +3,7 @@ import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { TriplyUtils, ZoomLevel3ReturnData, zoomLevel3ReturnDataKeys } from '../triply/triply.utils'
 import { CustomError } from '../util/customError'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
-import { PeopleZoomLevel4FiltersArgs } from './people.type'
+import { PeopleAssociationType, PeopleZoomLevel4FiltersArgs } from './people.type'
 
 export enum PeopleZoomLevel3Ids {
     deathDate = 'deathDate',
@@ -228,7 +228,12 @@ export class PeopleService {
             { record: uri }
         )
 
-        return { ...TriplyUtils.combineObjectArray(result.data), id: objectId }
+        return {
+            ...TriplyUtils.combineObjectArray(result.data),
+            id: objectId,
+            nameTypes: result.data.filter(d => !!d.nameType).map(d => d.nameType),
+            associations: this.getAssociationsFromData(result.data),
+        }
     }
 
     public validateFilterInput(input: string): PeopleZoomLevel3Ids {
@@ -238,5 +243,15 @@ export class PeopleService {
         }
 
         throw CustomError.internalCritical(`[People] Invalid filter input "${input}"`)
+    }
+
+    private getAssociationsFromData(data: PeopleDetailZoomLevel5Data[]): PeopleAssociationType[] {
+        return data
+            .filter(d => !!d.association)
+            .map(d => ({
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                association: d.association!,
+                associationLabel: d.associationLabel,
+            }))
     }
 }

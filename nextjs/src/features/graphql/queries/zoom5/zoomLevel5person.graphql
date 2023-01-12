@@ -1,8 +1,9 @@
 query ZoomLevel5Person($id: String!) {
     zoomLevel5Person(id: $id) {
         __typename
+        id
         name
-        nameType
+        nameTypes
         nameVariation
         birthDate
         birthPlace
@@ -21,8 +22,10 @@ query ZoomLevel5Person($id: String!) {
         profession
         professionLabel
         gender
-        association
-        associationLabel
+        associations {
+            association
+            associationLabel
+        }
         relatedItem
         relatedItemLabel
         description

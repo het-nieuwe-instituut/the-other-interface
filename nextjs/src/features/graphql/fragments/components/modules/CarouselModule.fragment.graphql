@@ -97,7 +97,7 @@ fragment carouselModuleFragment on ComponentModulesCarousel {
                     }
                     people {
                         name
-                        nameType
+                        nameTypes
                     }
                 }
             }

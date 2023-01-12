@@ -86,7 +86,7 @@ fragment gridModuleFragment on ComponentModulesGridModule {
                     }
                     people {
                         name
-                        nameType
+                        nameTypes
                     }
                 }
             }
