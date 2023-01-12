@@ -1,11 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import ApiClient from '@/features/graphql/api'
+import useQuery from '@/features/shared/hooks/useQuery'
 import { Box } from '@chakra-ui/react'
+import isEmpty from 'lodash/isEmpty'
 import Link from 'next/link'
 import React, { memo, useState } from 'react'
-import { PortalWithState, Portal } from 'react-portal'
+import { PortalWithState } from 'react-portal'
+import { ImageModuleFragmentFragment } from 'src/generated/graphql'
 import { StoriesItem } from '../../galaxies/MainGalaxy/types'
-import { Tooltip } from './Tooltip'
+import { GalaxyTooltip } from '../GalaxyTooltip/GalaxyTooltip'
 import { usePresenter } from './usePresenter'
 
 interface Props {
@@ -91,11 +95,7 @@ function RenderDot(item: ReturnType<typeof usePresenter>['dataPoints'][0], disab
                                 width="100%"
                                 background="radial-gradient(50% 50% at 50% 50%, #FFFFFF 0%, rgba(255, 255, 255, 0) 77.6%);"
                             ></Box>
-                            {portal(
-                                <Box position={'fixed'} left={x + 16} top={y} zIndex="100">
-                                    <Tooltip id={item.id} title={item.title} description={item.shortDescription} />
-                                </Box>
-                            )}
+                            {portal(<GalaxyPositionTooltip item={item} x={x} y={y} />)}
                         </React.Fragment>
                     )}
                 </PortalWithState>
@@ -105,3 +105,27 @@ function RenderDot(item: ReturnType<typeof usePresenter>['dataPoints'][0], disab
 }
 
 export const MemoizedStoriesSystem = memo(StoriesSystem)
+
+const GalaxyPositionTooltip: React.FC<{
+    item: ReturnType<typeof usePresenter>['dataPoints'][0]
+    x: number
+    y: number
+}> = ({ item, x, y }) => {
+    const { isLoading, isError, data } = useQuery(() => ApiClient?.storyImages({ id: item.id }))
+    const components = data?.story.data?.attributes?.components?.filter(c => !isEmpty(c))
+    const imgComponent = components?.find(x => x !== undefined) as ImageModuleFragmentFragment | undefined
+
+    return (
+        <Box position={'fixed'} left={x + 16} top={y} zIndex="100">
+            <GalaxyTooltip
+                isError={isError}
+                isLoading={isLoading}
+                description={item.shortDescription}
+                title={item.title}
+                url={imgComponent?.image.data?.attributes?.url}
+                alt={imgComponent?.alt_text ?? undefined}
+            />
+            {/* <Tooltip id={item.id} description={item.shortDescription} title={item.title} /> */}
+        </Box>
+    )
+}

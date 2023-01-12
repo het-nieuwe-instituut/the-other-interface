@@ -1,16 +1,15 @@
-import ApiClient from '@/features/graphql/api'
-import useQuery from '@/features/shared/hooks/useQuery'
-import { useWindowSize } from '@/features/shared/hooks/useWindowSize'
 import { Box, Image, keyframes, Text } from '@chakra-ui/react'
-import isEmpty from 'lodash/isEmpty'
 
-import React, { useEffect, useRef, useState } from 'react'
-import { ImageModuleFragmentFragment } from 'src/generated/graphql'
+import React from 'react'
+import { useGalaxyTooltip } from './useGalaxyTooltip'
 
-interface Props {
-    id: string
-    title: string
-    description: string
+export interface GalaxyTooltipProps {
+    title?: string
+    url?: string
+    alt?: string
+    description?: string
+    isError?: boolean
+    isLoading?: boolean
 }
 
 const flicker = keyframes`
@@ -27,43 +26,33 @@ const show = keyframes`
 const flickerAnimation = `${flicker} 600ms infinite`
 const showAnimation = `${show} 360ms forwards`
 
-export const Tooltip: React.FC<Props> = ({ id, title, description }) => {
-    const { height: windowHeight = 0, width: windowWidth = 0 } = useWindowSize()
-    const [growing, setGrowing] = useState(true)
-    const [loading, setLoading] = useState(true)
-    const [height, setHeight] = useState<number>(0)
-    const [width, setWidth] = useState<number>(0)
-    const ref = useRef<HTMLDivElement | null>(null)
-    const { isLoading, isError, data } = useQuery(() => ApiClient?.storyImages({ id: id }))
-    const components = data?.story.data?.attributes?.components?.filter(c => !isEmpty(c))
-    const imgComponent = components?.find(x => x !== undefined) as ImageModuleFragmentFragment | undefined
-    const offsetTop = ref.current?.getBoundingClientRect().top ?? 0
-    const offsetLeft = ref.current?.getBoundingClientRect().left ?? 0
-    const loadingAll = loading || isLoading
+export const GalaxyTooltip: React.FC<GalaxyTooltipProps> = props => {
+    const {
+        ref,
+        height,
+        isError,
+        url,
+        alt,
+        title,
+        description,
+        loadingAll,
+        setGrowing,
+        growing,
+        positionAdjustMents,
+        setLoading,
+        setHeight,
+        setWidth,
+    } = useGalaxyTooltip(props)
     const grow = keyframes`
         0%   { width: 80px; height: 49px; }
         100% { width: 300px; height: ${height}px; }
     `
     const adjust = keyframes`
         0%   { margin-top: 0; margin-left: 0 }
-        100% {  margin-top: ${-getAdjustVerticalPosition(
-            windowHeight,
-            offsetTop,
-            height
-        )}px; margin-left: ${-getAdjustHorizontalPosition(windowWidth, offsetLeft, width)}px; }
+        100% {  margin-top: ${positionAdjustMents.top}px; margin-left: ${positionAdjustMents.left}px; }
     `
     const growAnimation = `${grow} 160ms linear`
     const adjustAnimation = `${adjust} 160ms forwards`
-
-    useEffect(() => {
-        if (!imgComponent?.image.data?.attributes?.url) {
-            setLoading(false)
-            setHeight(ref.current?.getBoundingClientRect().height ?? 0)
-            setWidth(ref.current?.getBoundingClientRect().width ?? 0)
-        }
-    }, [imgComponent?.image.data?.attributes?.url])
-
-    console.log(windowWidth, offsetLeft, width)
 
     return (
         <Box marginTop={0} animation={!(loadingAll || growing) ? adjustAnimation : ''} pointerEvents={'none'}>
@@ -84,12 +73,12 @@ export const Tooltip: React.FC<Props> = ({ id, title, description }) => {
                         <Box padding="15px">
                             <Text textStyle={'h5'}>{title}</Text>
 
-                            {imgComponent?.image.data?.attributes?.url && (
+                            {url && (
                                 <Box width={'100%'}>
                                     <Image
-                                        src={imgComponent?.image.data?.attributes?.url ?? ''}
+                                        src={url ?? ''}
                                         width={'100%'}
-                                        alt={imgComponent?.alt_text ?? ''}
+                                        alt={alt ?? ''}
                                         onLoad={() => {
                                             setLoading(false)
                                             setHeight(ref.current?.getBoundingClientRect().height ?? 0)
@@ -110,20 +99,4 @@ export const Tooltip: React.FC<Props> = ({ id, title, description }) => {
             </Box>
         </Box>
     )
-}
-
-function getAdjustHorizontalPosition(windowWidth: number, offsetLeft: number, elementWidth: number) {
-    if (windowWidth < offsetLeft + elementWidth) {
-        return elementWidth + 34
-    }
-
-    return 0
-}
-
-function getAdjustVerticalPosition(windowHeight: number, offsetTop: number, elementHeight: number) {
-    if (windowHeight < offsetTop + elementHeight) {
-        return offsetTop + elementHeight - windowHeight
-    }
-
-    return 0
 }
