@@ -1,13 +1,16 @@
 query ZoomLevel5PublicationsArticle($id: String!) {
     zoomLevel5PublicationsArticle(id: $id) {
+        id
         __typename
         typeOfPublication
         typeOfPublicationLabel
         title
-        author
-        authorLabel
-        authorRole
-        authorRoleLabel
+        authors {
+            author
+            authorLabel
+            authorRole
+            authorRoleLabel
+        }
         sourceTitle
         sourceTitleLabel
         volume

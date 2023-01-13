@@ -3,6 +3,7 @@ query ZoomLevel5Archives($id: String!) {
         __typename
         ... on ArchivesOtherZoomLevel5DetailType {
             __typename
+            id
             objectNumber
             title
             startDate
@@ -20,6 +21,7 @@ query ZoomLevel5Archives($id: String!) {
         }
         ... on ArchivesFondsZoomLevel5DetailType {
             __typename
+            id
             descriptionLevel
             objectNumber
             recordTitle
@@ -29,9 +31,12 @@ query ZoomLevel5Archives($id: String!) {
             extent
             repository
             repositoryLabel
-            creator
-            creatorLabel
-            creatorHistory
+            creators {
+                id
+                creator
+                creatorLabel
+                creatorHistory
+            }
             custodialHistory
             systemOfArrangement
             contentScope

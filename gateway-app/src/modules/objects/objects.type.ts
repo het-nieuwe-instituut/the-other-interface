@@ -54,20 +54,8 @@ export class ObjectsZoomLevel5DetailType {
     @Field(() => String, { nullable: true })
     public archiveCollectionCode?: string | null
 
-    @Field(() => String, { nullable: true })
-    public maker?: string | null
-
-    @Field(() => String, { nullable: true })
-    public makerLabel?: string | null
-
-    @Field(() => String, { nullable: true })
-    public makerRole?: string | null
-
-    @Field(() => String, { nullable: true })
-    public makerRoleLabel?: string | null
-
-    @Field(() => PoepleZoomLevel5DetailType, { nullable: true })
-    public populatedMaker?: PoepleZoomLevel5DetailType
+    @Field(() => [ObjectMakerType], { nullable: true })
+    public makers?: ObjectMakerType[]
 
     @Field(() => String, { nullable: true })
     public startDate?: string | null
@@ -81,26 +69,20 @@ export class ObjectsZoomLevel5DetailType {
     @Field(() => String, { nullable: true })
     public scale?: string | null
 
-    @Field(() => String, { nullable: true })
-    public technique?: string | null
+    @Field(() => [ObjectTechniqueType], { nullable: true })
+    public techniques?: ObjectTechniqueType[]
+
+    @Field(() => [ObjectMaterialType], { nullable: true })
+    public materials?: ObjectMaterialType[]
 
     @Field(() => String, { nullable: true })
-    public techniqueLabel?: string | null
+    public dimHeight?: string | null
 
     @Field(() => String, { nullable: true })
-    public material?: string | null
+    public dimWidth?: string | null
 
     @Field(() => String, { nullable: true })
-    public materialLabel?: string | null
-
-    @Field(() => String, { nullable: true })
-    public dimensionPart?: string | null
-
-    @Field(() => String, { nullable: true })
-    public dimensionType?: string | null
-
-    @Field(() => String, { nullable: true })
-    public dimensionValue?: string | null
+    public dimDepth?: string | null
 
     @Field(() => String, { nullable: true })
     public dimensionUnit?: string | null
@@ -137,4 +119,49 @@ export class ObjectsZoomLevel5DetailType {
 
     @Field(() => String, { nullable: true })
     public permanentLink?: string | null
+}
+
+@ObjectType()
+export class ObjectMakerType {
+    @Field(() => String)
+    public id: string
+
+    @Field(() => String, { nullable: true })
+    public maker: string | null
+
+    @Field(() => String, { nullable: true })
+    public makerLabel?: string | null
+
+    @Field(() => String, { nullable: true })
+    public makerRole?: string | null
+
+    @Field(() => String, { nullable: true })
+    public makerRoleLabel?: string | null
+
+    @Field(() => PoepleZoomLevel5DetailType, { nullable: true })
+    public populatedMaker?: PoepleZoomLevel5DetailType
+}
+
+@ObjectType()
+export class ObjectMaterialType {
+    @Field(() => String)
+    public id: string
+
+    @Field(() => String)
+    public material: string
+
+    @Field(() => String, { nullable: true })
+    public materialLabel?: string | null
+}
+
+@ObjectType()
+export class ObjectTechniqueType {
+    @Field(() => String)
+    public id: string
+
+    @Field(() => String)
+    public technique: string
+
+    @Field(() => String, { nullable: true })
+    public techniqueLabel?: string | null
 }

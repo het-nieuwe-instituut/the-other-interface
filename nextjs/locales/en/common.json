@@ -10,5 +10,8 @@
     "goToSearchPortal": "Go to Search portal",
     "tryAgain": "Try again",
     "theNewInstitueDescription": "The Other Interface is Het Nieuwe Instituut's platform for narrativizing the National Collection for Dutch Architecture and Urban Planning, online. Browse and filter the collection, create your own collection, and read institutional stories.",
-    "mobileVersionIsNotYetThere": "The mobile site is currently in development. For the moment, please visit the site on a desktop browser."
+    "mobileVersionIsNotYetThere": "The mobile site is currently in development. For the moment, please visit the site on a desktop browser.",
+    "heightAbbr": "h",
+    "widthAbbr": "w",
+    "depthAbbr": "d"
 }

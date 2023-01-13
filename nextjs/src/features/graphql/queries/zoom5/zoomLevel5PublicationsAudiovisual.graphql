@@ -1,13 +1,16 @@
 query ZoomLevel5PublicationsAudiovisual($id: String!) {
     zoomLevel5PublicationsAudiovisual(id: $id) {
+        id
         __typename
         typeOfPublication
         typeOfPublicationLabel
         title
-        author
-        authorLabel
-        authorRole
-        authorRoleLabel
+        authors {
+            author
+            authorLabel
+            authorRole
+            authorRoleLabel
+        }
         publisher
         publisherLabel
         yearOfPublication

@@ -69,7 +69,7 @@ const extractTriplyFields = (
         return {
             ...defaultFields,
             title: item?.name ?? defaultFields?.title,
-            description: item?.nameType ?? defaultFields?.description,
+            description: item?.nameTypes?.join(', ') ?? defaultFields?.description,
         }
     }
 

@@ -1,6 +1,7 @@
 query ZoomLevel5Object($id: String!) {
     zoomLevel5Object(id: $id) {
         __typename
+        id
         image
         imageLabel
         title
@@ -9,21 +10,30 @@ query ZoomLevel5Object($id: String!) {
         objectName
         objectNameLabel
         archiveCollectionCode
-        maker
-        makerLabel
-        makerRole
-        makerRoleLabel
+        makers {
+            id
+            maker
+            makerLabel
+            makerRole
+            makerRoleLabel
+        }
         startDate
         endDate
         numberOfParts
         scale
-        technique
-        techniqueLabel
-        material
-        materialLabel
-        dimensionPart
-        dimensionType
-        dimensionValue
+        techniques {
+            id
+            technique
+            techniqueLabel
+        }
+        materials {
+            id
+            material
+            materialLabel
+        }
+        dimHeight
+        dimWidth
+        dimDepth
         dimensionUnit
         description
         associationPerson

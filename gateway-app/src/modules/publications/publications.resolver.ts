@@ -2,6 +2,7 @@ import { Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
 import { CustomError } from '../util/customError'
 import { PublicationsService } from './publications.service'
 import {
+    PublicationAuthorType,
     PublicationsArticleZoomLevel5DetailType,
     PublicationsAudioVisualZoomLevel5DetailType,
     PublicationsBookZoomLevel5DetailType,
@@ -16,13 +17,6 @@ export class PublicationsAudioVisualResolver {
     public publicationAudioVisual() {
         throw CustomError.internal('not yet implemented')
     }
-
-    @ResolveField()
-    public populatedAuthor(@Parent() publication: PublicationsAudioVisualZoomLevel5DetailType) {
-        return this.publicationsService.resolveAuthor(publication)
-    }
-
-    @ResolveField()
     public populatedPublisher(@Parent() publication: PublicationsAudioVisualZoomLevel5DetailType) {
         return this.publicationsService.resolvePublisher(publication)
     }
@@ -38,11 +32,6 @@ export class PublicationsArticleResolver {
     }
 
     @ResolveField()
-    public populatedAuthor(@Parent() publication: PublicationsArticleZoomLevel5DetailType) {
-        return this.publicationsService.resolveAuthor(publication)
-    }
-
-    @ResolveField()
     public populatedPublisher(@Parent() publication: PublicationsArticleZoomLevel5DetailType) {
         return this.publicationsService.resolvePublisher(publication)
     }
@@ -55,11 +44,6 @@ export class PublicationsBookResolver {
     @Query(() => PublicationsBookZoomLevel5DetailType)
     public publicationBook() {
         throw CustomError.internal('not yet implemented')
-    }
-
-    @ResolveField()
-    public populatedAuthor(@Parent() publication: PublicationsBookZoomLevel5DetailType) {
-        return this.publicationsService.resolveAuthor(publication)
     }
 
     @ResolveField()
@@ -80,5 +64,15 @@ export class PublicationsSerialResolver {
     @ResolveField()
     public populatedPublisher(@Parent() publication: PublicationsSerialZoomLevel5DetailType) {
         return this.publicationsService.resolvePublisher(publication)
+    }
+}
+
+@Resolver(PublicationAuthorType)
+export class PublicationAuthorResolver {
+    public constructor(private readonly publicationsService: PublicationsService) {}
+
+    @ResolveField()
+    public populatedAuthor(@Parent() publication: PublicationsBookZoomLevel5DetailType) {
+        return this.publicationsService.resolveAuthor(publication)
     }
 }

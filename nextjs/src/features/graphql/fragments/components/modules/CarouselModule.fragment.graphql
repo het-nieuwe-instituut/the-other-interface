@@ -31,13 +31,15 @@ fragment carouselModuleFragment on ComponentModulesCarousel {
                         ... on ArchivesFondsZoomLevel5DetailType {
                             id
                             objectNumber
-                            populatedCreator {
-                                id
-                                name
-                                nationality
-                                place
-                                birthDate
-                                professionLabel
+                            creators {
+                                populatedCreator {
+                                    id
+                                    name
+                                    nationality
+                                    place
+                                    birthDate
+                                    professionLabel
+                                }
                             }
                             recordTitle
                             type
@@ -45,8 +47,10 @@ fragment carouselModuleFragment on ComponentModulesCarousel {
                     }
                     object {
                         title
-                        populatedMaker {
-                            name
+                        makers {
+                            populatedMaker {
+                                name
+                            }
                         }
                         objectNumber
                         image
@@ -57,10 +61,12 @@ fragment carouselModuleFragment on ComponentModulesCarousel {
                             type
                             title
                             objectNumber
-                            populatedAuthor{
-                                id
-                                profession,
-                                name
+                            authors {
+                                populatedAuthor {
+                                    id
+                                    profession
+                                    name
+                                }
                             }
                         }
                         ... on PublicationsArticleZoomLevel5DetailType {
@@ -68,9 +74,11 @@ fragment carouselModuleFragment on ComponentModulesCarousel {
                             type
                             title
                             objectNumber
-                            populatedAuthor{
-                                profession,
-                                name
+                            authors {
+                                populatedAuthor {
+                                    profession
+                                    name
+                                }
                             }
                         }
                         ... on PublicationsSerialZoomLevel5DetailType {
@@ -78,8 +86,8 @@ fragment carouselModuleFragment on ComponentModulesCarousel {
                             type
                             title
                             yearOfPublication
-                            populatedPublisher{
-                                name   
+                            populatedPublisher {
+                                name
                             }
                         }
                         ... on PublicationsBookZoomLevel5DetailType {
@@ -87,15 +95,17 @@ fragment carouselModuleFragment on ComponentModulesCarousel {
                             type
                             title
                             objectNumber
-                            populatedAuthor{
-                                profession,
-                                name
+                            authors {
+                                populatedAuthor {
+                                    profession
+                                    name
+                                }
                             }
                         }
                     }
                     people {
                         name
-                        nameType
+                        nameTypes
                     }
                 }
             }

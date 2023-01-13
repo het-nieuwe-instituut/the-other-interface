@@ -1,5 +1,6 @@
 query ZoomLevel5PublicationsSerial($id: String!) {
     zoomLevel5PublicationsSerial(id: $id) {
+        id
         __typename
         typeOfPublication
         typeOfPublicationLabel

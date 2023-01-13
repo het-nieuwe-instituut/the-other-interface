@@ -1,6 +1,7 @@
 import { forwardRef, Module } from '@nestjs/common'
 import { ZoomLevel5Module } from '../zoomLevel5/zoomLevel5.module'
 import {
+    PublicationAuthorResolver,
     PublicationsArticleResolver,
     PublicationsAudioVisualResolver,
     PublicationsBookResolver,
@@ -16,6 +17,7 @@ import { PublicationsService } from './publications.service'
         PublicationsArticleResolver,
         PublicationsBookResolver,
         PublicationsSerialResolver,
+        PublicationAuthorResolver,
     ],
     exports: [
         PublicationsService,
@@ -23,6 +25,7 @@ import { PublicationsService } from './publications.service'
         PublicationsArticleResolver,
         PublicationsBookResolver,
         PublicationsSerialResolver,
+        PublicationAuthorResolver,
     ],
 })
 export class PublicationsModule {}

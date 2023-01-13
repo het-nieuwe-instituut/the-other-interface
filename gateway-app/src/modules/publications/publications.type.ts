@@ -43,20 +43,8 @@ export class PublicationsAudioVisualZoomLevel5DetailType extends BasePublication
     @Field(() => String, { nullable: true })
     public title?: string
 
-    @Field(() => String, { nullable: true })
-    public author?: string
-
-    @Field(() => String, { nullable: true })
-    public authorLabel?: string
-
-    @Field(() => String, { nullable: true })
-    public authorRole?: string
-
-    @Field(() => String, { nullable: true })
-    public authorRoleLabel?: string
-
-    @Field(() => PoepleZoomLevel5DetailType, { nullable: true })
-    public populatedAuthor?: PoepleZoomLevel5DetailType
+    @Field(() => [PublicationAuthorType], { nullable: true })
+    public authors?: PublicationAuthorType[]
 
     @Field(() => String, { nullable: true })
     public publisher?: string
@@ -136,20 +124,8 @@ export class PublicationsArticleZoomLevel5DetailType extends BasePublicationZoom
     @Field(() => String, { nullable: true })
     public title?: string
 
-    @Field(() => String, { nullable: true })
-    public author?: string
-
-    @Field(() => String, { nullable: true })
-    public authorLabel?: string
-
-    @Field(() => String, { nullable: true })
-    public authorRole?: string
-
-    @Field(() => String, { nullable: true })
-    public authorRoleLabel?: string
-
-    @Field(() => PoepleZoomLevel5DetailType, { nullable: true })
-    public populatedAuthor?: PoepleZoomLevel5DetailType
+    @Field(() => [PublicationAuthorType], { nullable: true })
+    public authors?: PublicationAuthorType[]
 
     @Field(() => String, { nullable: true })
     public sourceTitle?: string
@@ -292,20 +268,8 @@ export class PublicationsBookZoomLevel5DetailType extends BasePublicationZoomLev
     @Field(() => String, { nullable: true })
     public title?: string
 
-    @Field(() => String, { nullable: true })
-    public author?: string
-
-    @Field(() => String, { nullable: true })
-    public authorLabel?: string
-
-    @Field(() => String, { nullable: true })
-    public authorRole?: string
-
-    @Field(() => String, { nullable: true })
-    public authorRoleLabel?: string
-
-    @Field(() => PoepleZoomLevel5DetailType, { nullable: true })
-    public populatedAuthor?: PoepleZoomLevel5DetailType
+    @Field(() => [PublicationAuthorType], { nullable: true })
+    public authors?: PublicationAuthorType[]
 
     @Field(() => String, { nullable: true })
     public publisher?: string
@@ -416,3 +380,24 @@ export const PublicationZoomLevel5UnionType = createUnionType({
         }
     },
 })
+
+@ObjectType()
+export class PublicationAuthorType {
+    @Field(() => String)
+    public id: string
+
+    @Field(() => String)
+    public author: string
+
+    @Field(() => String, { nullable: true })
+    public authorLabel?: string
+
+    @Field(() => String, { nullable: true })
+    public authorRole?: string
+
+    @Field(() => String, { nullable: true })
+    public authorRoleLabel?: string
+
+    @Field(() => PoepleZoomLevel5DetailType, { nullable: true })
+    public populatedAuthor?: PoepleZoomLevel5DetailType
+}

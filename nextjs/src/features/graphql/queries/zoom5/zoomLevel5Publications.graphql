@@ -2,14 +2,18 @@ query ZoomLevel5Publication($id: String!) {
     zoomLevel5Publication(id: $id) {
         __typename
         ... on PublicationsAudioVisualZoomLevel5DetailType {
+            id
             __typename
             typeOfPublication
             typeOfPublicationLabel
             title
-            author
-            authorLabel
-            authorRole
-            authorRoleLabel
+            authors {
+                id
+                author
+                authorLabel
+                authorRole
+                authorRoleLabel
+            }
             publisher
             publisherLabel
             yearOfPublication
@@ -34,13 +38,17 @@ query ZoomLevel5Publication($id: String!) {
         }
         ... on PublicationsArticleZoomLevel5DetailType {
             __typename
+            id
             typeOfPublication
             typeOfPublicationLabel
             title
-            author
-            authorLabel
-            authorRole
-            authorRoleLabel
+            authors {
+                id
+                author
+                authorLabel
+                authorRole
+                authorRoleLabel
+            }
             sourceTitle
             sourceTitleLabel
             volume
@@ -64,6 +72,7 @@ query ZoomLevel5Publication($id: String!) {
             permanentLink
         }
         ... on PublicationsSerialZoomLevel5DetailType {
+            id
             __typename
             typeOfPublication
             typeOfPublicationLabel
@@ -86,14 +95,18 @@ query ZoomLevel5Publication($id: String!) {
             permanentLink
         }
         ... on PublicationsBookZoomLevel5DetailType {
+            id
             __typename
             typeOfPublication
             typeOfPublicationLabel
             title
-            author
-            authorLabel
-            authorRole
-            authorRoleLabel
+            authors {
+                id
+                author
+                authorLabel
+                authorRole
+                authorRoleLabel
+            }
             publisher
             publisherLabel
             yearOfPublication

@@ -3,7 +3,7 @@ import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { TriplyUtils, ZoomLevel3ReturnData, zoomLevel3ReturnDataKeys } from '../triply/triply.utils'
 import { CustomError } from '../util/customError'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
-import { ObjectsZoomLevel4FiltersArgs } from './objects.type'
+import { ObjectMakerType, ObjectMaterialType, ObjectsZoomLevel4FiltersArgs, ObjectTechniqueType } from './objects.type'
 
 export enum ObjectsZoomLevel3Ids {
     subject = 'subject',
@@ -252,7 +252,15 @@ export class ObjectsService {
             { record: uri }
         )
 
-        return { ...TriplyUtils.combineObjectArray(result.data), id: objectId }
+        return {
+            ...TriplyUtils.combineObjectArray(result.data),
+            id: objectId,
+            ...this.getDimensionValueFromData(result.data),
+            dimensionUnit: result.data.find(d => d.dimensionUnit)?.dimensionUnit,
+            makers: this.getMakersValueFromData(result.data),
+            materials: this.getMaterialsValueFromData(result.data),
+            techniques: this.getTechniquesValueFromData(result.data),
+        }
     }
 
     public validateFilterInput(input: string): ObjectsZoomLevel3Ids {
@@ -262,5 +270,51 @@ export class ObjectsService {
         }
 
         throw CustomError.internalCritical(`[Objects] Invalid filter input "${input}"`)
+    }
+
+    private getDimensionValueFromData(data: ObjectsDetailZoomLevel5Data[]) {
+        const dimHeight = data.find(d => d.dimensionType === 'hoogte')?.dimensionValue
+        const dimWidth = data.find(d => d.dimensionType === 'breedte')?.dimensionValue
+        const dimDepth = data.find(d => d.dimensionType === 'diepte')?.dimensionValue
+
+        return { dimDepth, dimWidth, dimHeight }
+    }
+
+    private getMakersValueFromData(data: ObjectsDetailZoomLevel5Data[]): ObjectMakerType[] {
+        return data
+            .filter(d => !!d.maker)
+            .map(d => ({
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                id: TriplyUtils.getIdFromUri(d.maker!),
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                maker: d.maker!,
+                makerLabel: d.makerLabel,
+                makerRole: d.makerRole,
+                makerRoleLabel: d.makerRoleLabel,
+            }))
+    }
+
+    private getMaterialsValueFromData(data: ObjectsDetailZoomLevel5Data[]): ObjectMaterialType[] {
+        return data
+            .filter(d => !!d.material)
+            .map(d => ({
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                id: TriplyUtils.getIdFromUri(d.material!),
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                material: d.material!,
+                materialLabel: d.materialLabel,
+            }))
+    }
+
+    private getTechniquesValueFromData(data: ObjectsDetailZoomLevel5Data[]): ObjectTechniqueType[] {
+        return data
+            .filter(d => !!d.technique)
+            .map(d => ({
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                id: TriplyUtils.getIdFromUri(d.technique!),
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                technique: d.technique!,
+                techniqueLabel: d.techniqueLabel,
+            }))
     }
 }
