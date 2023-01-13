@@ -18,7 +18,6 @@ export const Footer = () => {
             minHeight={{ sm: '428px', md: '428px', lg: '233px', xl: '233px', '2xl': '233px' }}
             px={'8'}
             marginX={'auto'}
-            maxWidth={'90em'}
             paddingTop={'9'}
             paddingBottom={'9'}
             background={theme.colors.white}
