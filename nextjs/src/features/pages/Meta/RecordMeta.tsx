@@ -109,9 +109,20 @@ export const RecordMeta: React.FC<Props> = ({ attributes }) => {
         )
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     function renderPublicationMeta(attributes: NonNullable<ZoomLevel5PublicationQuery['zoomLevel5Publication']>) {
-        return <>{/* TODO */}</>
+        return (
+            <>
+                {'isbn' in attributes && renderAttribute('metaPublication_isbn', renderTextValue(attributes.isbn))}
+                {renderAttribute('metaPublication_authors', renderPublicationAuthors(attributes))}
+                {renderAttribute('metaPublication_type', renderTextValue(attributes.typeOfPublicationLabel))}
+                {renderAttribute('metaPublication_publisher', renderTextValue(attributes.publisherLabel))}
+                {renderAttribute('metaPublication_year', renderTextValue(attributes.yearOfPublication))}
+                {'placeOfPublicationLabel' in attributes &&
+                    renderAttribute('metaPublication_place', renderTextValue(attributes.placeOfPublicationLabel))}
+                {'geographicalKeywordLabel' in attributes &&
+                    renderAttribute('metaPublication_place', renderTextValue(attributes.geographicalKeywordLabel))}
+            </>
+        )
     }
 
     function renderAttribute(labelKey: TranslationKeys['record'], value: React.ReactNode) {
@@ -219,7 +230,7 @@ export const RecordMeta: React.FC<Props> = ({ attributes }) => {
                         bg="white"
                     >
                         <Text as="span" color="currentcolor" verticalAlign="text-bottom">
-                            {recordT.t('metaObject_more')}
+                            {recordT.t('meta_more')}
                         </Text>
                     </Button>
                 </NextLink>
@@ -268,6 +279,16 @@ export const RecordMeta: React.FC<Props> = ({ attributes }) => {
 
         return attributes.creators.map((c, i) =>
             renderListItem(i, renderTextLink(`/landingpage/people/${c.id}-people`, c.creatorLabel))
+        )
+    }
+
+    function renderPublicationAuthors(attributes: NonNullable<ZoomLevel5PublicationQuery['zoomLevel5Publication']>) {
+        if (!('authors' in attributes) || !attributes.authors?.length) {
+            return null
+        }
+
+        return attributes.authors.map((a, i) =>
+            renderListItem(i, renderTextLink(`/landingpage/people/${a.id}-people`, a.authorLabel))
         )
     }
 
