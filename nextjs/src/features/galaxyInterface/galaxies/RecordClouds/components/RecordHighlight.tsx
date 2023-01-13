@@ -1,9 +1,9 @@
-import { Cloud } from '@/features/galaxyInterface/components/Cloud'
 import { SupportedQuerys } from '@/features/pages/tasks/zoom5Config'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { typeColors } from '@/features/shared/styles/theme/foundations/colors'
 import { Box, Flex, Image, keyframes, Text } from '@chakra-ui/react'
-import { Dimensions } from '../../../types/galaxy'
+import { Dimensions } from '@/features/galaxy/types/galaxy'
+import { Cloud } from '@/features/galaxyInterface/components/Cloud'
 import { ZoomLevel5Entities } from '../RecordClouds'
 
 interface RecordCloudHighlightProps {
@@ -17,13 +17,27 @@ interface RecordCloudHighlightProps {
     queryType: NonNullable<ZoomLevel5Entities>['__typename']
     type: SupportedQuerys
     dimensions: Dimensions
+    animationState: 'in' | 'none' | 'out'
     className: string
 }
 
-const appear = keyframes`
-  from {opacity: 0;}
-  to {opacity: 1}
-`
+enum AnimationStates {
+    in = 'in',
+    none = 'none',
+    out = 'out',
+}
+
+const animationStates = {
+    [AnimationStates.in]: keyframes`
+    from {opacity: 0;}
+    to {opacity: 1}
+  `,
+    [AnimationStates.out]: keyframes`
+  from {opacity: 1;}
+  to {opacity: 0}
+`,
+    [AnimationStates.none]: undefined,
+}
 
 export const RecordCloudHighlight: React.FunctionComponent<RecordCloudHighlightProps> = ({
     image,
@@ -31,13 +45,14 @@ export const RecordCloudHighlight: React.FunctionComponent<RecordCloudHighlightP
     dimensions,
     queryType,
     type,
+    animationState,
     className,
 }) => {
     const { t } = useTypeSafeTranslation('record')
     const radius = 500
     const width = dimensions.width ?? 0
     const height = dimensions.height ?? 0
-    const appearAnimation = `${appear} 2s linear`
+    const animation = animationStates[animationState] ? `${animationStates[animationState]} 2s linear` : undefined
 
     return (
         <Cloud
@@ -56,7 +71,7 @@ export const RecordCloudHighlight: React.FunctionComponent<RecordCloudHighlightP
                 flexDirection="column"
                 justifyContent="center"
                 zIndex={1}
-                animation={appearAnimation}
+                animation={animation}
             >
                 <Text textStyle={'cloudTextMicro'} mb={2.5}>
                     {t(type)}
@@ -98,9 +113,19 @@ const PersonImage: React.FC<{
         alt?: string
     }
 }> = ({ image }) => {
+    const hideImage = (image: HTMLImageElement) => {
+        image.style.display = 'none'
+    }
+
     return (
         <Box borderRadius={'100%'} mt={7} height={200} width={200} overflow={'hidden'} background={'black'}>
-            <Image height={200} objectFit={'cover'} src={image?.url} alt={image?.alt ?? ''} />
+            <Image
+                height={200}
+                objectFit={'cover'}
+                src={image?.url}
+                alt={image?.alt ?? ''}
+                onError={e => hideImage(e?.target as HTMLImageElement)}
+            />
         </Box>
     )
 }

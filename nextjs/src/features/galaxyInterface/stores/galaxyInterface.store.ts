@@ -4,12 +4,21 @@ import { ZoomStates } from '../types/galaxy'
 
 export type GalaxyInterfaceStateState = {
     activeZoom: ZoomStates | null
+    prevActiveZoom?: ZoomStates | null
     activeZoomData?: Omit<D3AnimationStyleProps, 'd3Ref'>
-    params?: { slug?: string; filter?: string; collection?: string; record?: string; page?: string }
+    params?: {
+        slug?: string
+        filter?: string
+        collection?: string
+        record?: string
+        page?: string
+        preservedZoom?: ZoomStates // between page reloads
+    }
 }
 
 export const filetsInitialState: GalaxyInterfaceStateState = {
     activeZoom: null,
+    prevActiveZoom: null,
     params: {},
     activeZoomData: undefined,
 }
@@ -26,6 +35,7 @@ export const galaxyInterfaceSlice = createSlice({
                 params?: GalaxyInterfaceStateState['params']
             }>
         ) => {
+            state.prevActiveZoom = state.activeZoom
             state.activeZoomData = action.payload?.activeZoomData ?? state.activeZoomData
             state.activeZoom = action.payload.activeZoom ?? state.activeZoom
             state.params = { ...state.params, ...action.payload.params }

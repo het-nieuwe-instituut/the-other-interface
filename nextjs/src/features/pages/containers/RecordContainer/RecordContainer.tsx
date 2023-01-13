@@ -1,30 +1,24 @@
-import Breadcrumbs, { BreadcrumbsRenderModes } from '@/features/galaxy/components/Breadcrumbs/Breadcrumbs'
+import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
-import { GalaxyFooter } from '@/features/shared/components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
-import { GalaxyTopRight } from '@/features/shared/components/GalaxyWrapper/GalaxyTopRight/GalaxyTopRight'
-import { GalaxyWrapper } from '@/features/shared/components/GalaxyWrapper/GalaxyWrapper'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import useScroll from '@/features/shared/hooks/useScroll'
 import { Box, Grid, GridItem, useTheme } from '@chakra-ui/react'
-import { useSize } from '@chakra-ui/react-use-size'
-import { useRouter } from 'next/router'
-import { useRef } from 'react'
 import { LandingpageBySlugQuery, LandingpageComponentsDynamicZone } from 'src/generated/graphql'
-import RecordClouds from '../../../galaxy/RecordClouds/RecordClouds'
 import { RecordMeta } from '../../Meta/RecordMeta'
-import { Zoom5RecordResult } from '../../tasks/zoom5Config'
-import { ScrollToContent, ScrollToTop } from '../../utils/utils'
+import { ScrollToContent } from '../../utils/utils'
+import { SupportedQuerys, Zoom5RecordResult } from '../../tasks/zoom5Config'
 import { RecordProvider } from './RecordContext'
 
 interface Props {
     zoom5: Zoom5RecordResult | undefined
+    type: SupportedQuerys
     landingpage: LandingpageBySlugQuery | undefined
     record: string
 }
 
 export const RecordContainer = (props: Props) => {
     return (
-        <RecordProvider zoomLevel5={props.zoom5 ?? null}>
+        <RecordProvider zoomLevel5={props.zoom5 ?? null} type={props.type}>
             <RecordPage landingpage={props.landingpage} zoom5={props.zoom5} />
         </RecordProvider>
     )
@@ -36,27 +30,14 @@ interface PageProps {
 }
 
 const RecordPage = (props: PageProps) => {
-    const router = useRouter()
     const theme = useTheme()
-    const graphRef = useRef<HTMLDivElement | null>(null)
-    const sizes = useSize(graphRef)
+
     const { scrollPosition } = useScroll()
     const attributes = props.landingpage?.landingpages?.data[0]?.attributes
 
     return (
         <Box>
-            <Breadcrumbs
-                onWrapperClick={ScrollToTop}
-                mode={scrollPosition >= 750 ? BreadcrumbsRenderModes.STICKY : BreadcrumbsRenderModes.DEFAULT}
-            />
-            <GalaxyWrapper renderTopRight={() => <GalaxyTopRight />} renderBottom={() => <GalaxyFooter />}>
-                <Box backgroundColor="graph" height="800px" ref={graphRef} key={router.query.record as string}>
-                    {sizes?.height && sizes?.width && (
-                        <RecordClouds key={router.query.record as string} dimensions={sizes} />
-                    )}
-                </Box>
-            </GalaxyWrapper>
-
+            <GalaxyInterface />
             <Box px={{ xl: 6, base: 0 }}>
                 <Box backgroundColor="white" px={6} maxW={theme.breakpoints.xl} marginX={'auto'}>
                     <Grid

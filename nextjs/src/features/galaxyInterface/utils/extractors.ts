@@ -3,7 +3,7 @@ import { SupportedQuerys } from '@/features/pages/tasks/zoom5Config'
 export const extractSlugAndId = (path: string) => {
     const index = path.indexOf('-')
     const id = path.substring(0, index)
-    const slug = path.substring(index + 1)
+    const slug = path.substring(index + 1).toLowerCase() as SupportedQuerys
 
     return {
         slug,

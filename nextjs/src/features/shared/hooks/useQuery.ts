@@ -1,5 +1,5 @@
-import { useEffect } from "react"
-import { useState } from "react"
+import { useEffect } from 'react'
+import { useState } from 'react'
 
 function useQuery<Q extends () => ReturnType<Q>>(query: Q) {
     const [isLoading, setIsloading] = useState(false)
@@ -15,6 +15,7 @@ function useQuery<Q extends () => ReturnType<Q>>(query: Q) {
                 setIsloading(false)
                 setData(result as Awaited<ReturnType<Q>> | undefined)
             } catch {
+                setIsloading(false)
                 setIsError(true)
             }
         }
