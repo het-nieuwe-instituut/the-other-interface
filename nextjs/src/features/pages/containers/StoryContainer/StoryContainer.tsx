@@ -29,10 +29,10 @@ interface PageProps {
 const Story = (props: PageProps) => {
     const theme = useTheme()
     return (
-        <Box>
+        <>
             <GalaxyInterface />
 
-            <Box px={{ xl: 6, base: 0 }}>
+            <Box px={{ xl: 6, base: 0 }} position={'relative'} zIndex={2} backgroundColor={'white'}>
                 <Box backgroundColor={'white'} px={6} maxW={theme.breakpoints.xl} marginX={'auto'}>
                     <Grid
                         pt={6}
@@ -56,10 +56,10 @@ const Story = (props: PageProps) => {
                         </GridItem>
                     </Grid>
                 </Box>
+                <DynamicComponentRenderer
+                    components={props.story?.attributes?.components as StoryComponentsDynamicZone[]}
+                />
             </Box>
-            <DynamicComponentRenderer
-                components={props.story?.attributes?.components as StoryComponentsDynamicZone[]}
-            />
-        </Box>
+        </>
     )
 }
