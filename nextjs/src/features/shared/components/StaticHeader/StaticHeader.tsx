@@ -36,7 +36,7 @@ export const StaticHeader = () => {
                 >
                     {tNavigation('theNewInstitute')}
                 </Link>
-                <Box marginRight={'8'}>
+                <Box marginRight={'8'} marginTop={'-3px'}>
                     <GalaxyTopRight />
                 </Box>
             </Flex>

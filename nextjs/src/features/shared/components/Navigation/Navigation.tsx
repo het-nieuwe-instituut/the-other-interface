@@ -8,6 +8,7 @@ import { GalaxyFooter } from '../GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 import { usePresenter } from './usePresenter'
 import { keyframes } from '@emotion/react'
 import { StaticHeader } from '../StaticHeader/StaticHeader'
+import { useRef } from 'react'
 
 const fadeIn = keyframes({ from: { opacity: 0 }, to: { opacity: 0.85 } })
 const fadeOut = keyframes({ from: { opacity: 0.85 }, to: { opacity: 0 } })
@@ -18,7 +19,9 @@ interface Props {
 
 export const NavigationOverlayProvider = (props: Props) => {
     return (
-        <Box overflow={'hidden'}>
+        <Box
+            overflow={'hidden'}
+        >
             <Navigation />
             {props.children}
         </Box>
@@ -31,9 +34,12 @@ export const Navigation = () => {
     const { menupages } = usePresenter(lang, isMenuOpen)
     const breakpoint = useBreakpoint()
     const isMobile = breakpoint === 'sm'
+    const ref = useRef<HTMLDivElement | null>(null)
+
 
     return (
         <Box
+            ref={ref}
             visibility={isMenuOpen ? 'visible' : 'hidden'}
             animation={isMenuOpen ? `${fadeIn} 300ms linear` : `${fadeOut}, 300ms linear`}
             height={'100vh'}
@@ -43,13 +49,14 @@ export const Navigation = () => {
             zIndex={NAVIGATION_OVERLAY_Z_INDEX}
             top={0}
             right={0}
+            overflow={'auto'}
             _before={{
                 content: '""',
                 position: 'absolute',
                 top: 0,
                 left: 0,
                 width: '100%',
-                height: '100vh',
+                height: ref?.current?.scrollHeight || '100vh',
                 backgroundColor: '#CCCED0',
                 filter: 'blur(10px)',
                 background: 'rgba(255, 255, 255, 0.85)',
