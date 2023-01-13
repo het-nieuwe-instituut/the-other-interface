@@ -1,17 +1,15 @@
 {
-    "publications": "Publications",
-    "people": "People",
-    "archives": "Archives",
-    "objects": "Objects",
+    "publications": "Publication",
+    "people": "Person/Institution",
+    "archives": "Archive item",
+    "objects": "Object",
     "stories": "Stories",
     "story": "Story",
-    "relatedPeople": "Showing {{count}} of {{total}} related people",
+    "relatedPeople": "Showing {{count}} of {{total}} related persons/institutions",
     "relatedObjects": "Showing {{count}} of {{total}} related objects",
     "relatedPublications": "Showing {{count}} of {{total}} related publications",
     "relatedStories": "{{count}} related stories",
     "relatedStories_one": "1 related story",
-    "relatedArchive": "{{count}} related archives",
-    "relatedArchive_one": "1 related archive",
     "metaObject_id": "Object ID",
     "metaObject_archive": "Archive",
     "metaObject_makers": "Makers",
@@ -48,5 +46,7 @@
     "metaPublication_publisher": "Publisher",
     "metaPublication_year": "Year of publication",
     "metaPublication_publicationPlace": "Place of publication",
-    "metaPublication_place": "Place"
+    "metaPublication_place": "Place",
+    "relatedArchive": "{{count}} related archive items",
+    "relatedArchive_one": "1 related archive item"
 }
