@@ -1,20 +1,20 @@
-import { extractSlugAndId } from "@/features/galaxyInterface/utils/extractors"
-import { SupportedQuerys, zoom5Config } from "./zoom5Config"
+import { extractSlugAndId } from '@/features/galaxyInterface/utils/extractors'
+import { SupportedQuerys, zoom5Config } from './zoom5Config'
 
-
-export async function getZoom5RecordTask(type: SupportedQuerys, record: string) {
+export async function getZoom5RecordTask(record: string) {
     try {
-        const { id } = extractSlugAndId(record)
+        const { id, slug } = extractSlugAndId(record)
 
-        if (type === SupportedQuerys.stories) {
+        if (slug === SupportedQuerys.stories) {
             return
         }
-        const configByType = zoom5Config[type]
+        const configByType = zoom5Config[slug]
 
         const detailQuery = await configByType.zoomLevelQuery?.({ id: id })
 
         return {
             zoom5detail: configByType.accesor(detailQuery) ?? null,
+            type: slug,
         }
     } catch (e) {
         console.log(e, 'Error accured in zoom level 5 task')
