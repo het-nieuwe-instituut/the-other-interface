@@ -1,5 +1,6 @@
+import { useLimitPrefaceHeight } from '@/features/pages/containers/RecordContainer/useLimitPrefaceHeight'
 import { Box, Link, Text } from '@chakra-ui/react'
-import { useEffect, useRef, useState } from 'react'
+import { useRef } from 'react'
 import { useTypeSafeTranslation } from '../../hooks/translations'
 import { Markdown } from '../Markdown/Markdown'
 import styles from './PageHeader.module.css'
@@ -16,14 +17,7 @@ export const PageHeader: React.FC<Props> = ({ title, preface, handleClick, showP
     const commonT = useTypeSafeTranslation('common')
 
     const prefaceRef = useRef<HTMLDivElement>(null)
-    const [prefaceHeight, setPrefaceHeight] = useState(0)
-    const [limitPrefaceHeight, setLimitPrefaceHeight] = useState(!!constrainPreface)
-
-    useEffect(() => {
-        if (!prefaceHeight) {
-            setPrefaceHeight(prefaceRef.current?.clientHeight ?? 0)
-        }
-    }, [prefaceRef.current?.clientHeight, prefaceHeight])
+    const [limitPrefaceHeight, setLimitPrefaceHeight] = useLimitPrefaceHeight(prefaceRef, constrainPreface)
 
     return (
         <Box onClick={handleClick ? handleClick : undefined} cursor={showPointer ? 'pointer' : 'cursor'}>
@@ -32,13 +26,10 @@ export const PageHeader: React.FC<Props> = ({ title, preface, handleClick, showP
             </Text>
             {preface && (
                 <Box mb="1" position="relative">
-                    <div
-                        ref={prefaceRef}
-                        className={shouldLimitPrefaceHeight() ? styles.limitedMarkdownContainer : undefined}
-                    >
+                    <div ref={prefaceRef} className={limitPrefaceHeight ? styles.limitedMarkdownContainer : undefined}>
                         <Markdown>{preface}</Markdown>
                     </div>
-                    {shouldLimitPrefaceHeight() && (
+                    {limitPrefaceHeight && (
                         <>
                             <div className={styles.blur} />
                             {renderReadMoreButton()}
@@ -51,15 +42,11 @@ export const PageHeader: React.FC<Props> = ({ title, preface, handleClick, showP
 
     function renderReadMoreButton() {
         return (
-            <Link onClick={() => setLimitPrefaceHeight(!limitPrefaceHeight)}>
+            <Link onClick={() => setLimitPrefaceHeight(false)}>
                 <Text as="span" color="currentcolor">
                     {commonT.t('readMore')}
                 </Text>
             </Link>
         )
-    }
-
-    function shouldLimitPrefaceHeight() {
-        return limitPrefaceHeight && prefaceHeight > 500
     }
 }
