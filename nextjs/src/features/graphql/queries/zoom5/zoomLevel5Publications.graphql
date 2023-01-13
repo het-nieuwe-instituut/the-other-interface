@@ -7,10 +7,13 @@ query ZoomLevel5Publication($id: String!) {
             typeOfPublication
             typeOfPublicationLabel
             title
-            author
-            authorLabel
-            authorRole
-            authorRoleLabel
+            authors {
+                id
+                author
+                authorLabel
+                authorRole
+                authorRoleLabel
+            }
             publisher
             publisherLabel
             yearOfPublication
@@ -39,10 +42,13 @@ query ZoomLevel5Publication($id: String!) {
             typeOfPublication
             typeOfPublicationLabel
             title
-            author
-            authorLabel
-            authorRole
-            authorRoleLabel
+            authors {
+                id
+                author
+                authorLabel
+                authorRole
+                authorRoleLabel
+            }
             sourceTitle
             sourceTitleLabel
             volume
@@ -94,10 +100,13 @@ query ZoomLevel5Publication($id: String!) {
             typeOfPublication
             typeOfPublicationLabel
             title
-            author
-            authorLabel
-            authorRole
-            authorRoleLabel
+            authors {
+                id
+                author
+                authorLabel
+                authorRole
+                authorRoleLabel
+            }
             publisher
             publisherLabel
             yearOfPublication

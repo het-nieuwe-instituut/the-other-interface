@@ -4,7 +4,7 @@ import { TriplyUtils, ZoomLevel3ReturnData, zoomLevel3ReturnDataKeys } from '../
 import { CustomError } from '../util/customError'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { ZoomLevel5Service } from '../zoomLevel5/zoomLevel5.service'
-import { PublicationsZoomLevel4FiltersArgs } from './publications.type'
+import { PublicationAuthorType, PublicationsZoomLevel4FiltersArgs } from './publications.type'
 
 export enum PublicationsZoomLevel3Ids {
     relatedPerson = 'relatedPerson',
@@ -295,6 +295,11 @@ const publicationsZoomLevel5DataTypeKeys = {
     [PublicationsZoomLevel5Types.serial]: publicationsSerialDetailZoomLevel5DataKeys,
 }
 
+type PublicationsWithAuthors =
+    | PublicationsBooksDetailZoomLevel5Data
+    | PublicationArticleDetailZoomLevel5Data
+    | PublicationsAudioVisualDetailZoomLevel5Data
+
 @Injectable()
 export class PublicationsService {
     protected entityType = 'triply'
@@ -455,7 +460,12 @@ export class PublicationsService {
             { record: uri }
         )
 
-        return { ...TriplyUtils.combineObjectArray(result.data), id: objectId, type: publicationType }
+        return {
+            ...TriplyUtils.combineObjectArray(result.data),
+            id: objectId,
+            type: publicationType,
+            authors: this.getAuthorsValueFromData(result.data),
+        }
     }
 
     public validateFilterInput(input: string): PublicationsZoomLevel3Ids {
@@ -487,5 +497,19 @@ export class PublicationsService {
         const id = TriplyUtils.getIdFromUri(publication.publisher)
 
         return this.zoomLevel5Service.getDetail(id, type)
+    }
+
+    private getAuthorsValueFromData(data: PublicationsZoomLevel5DataTypes[]): PublicationAuthorType[] {
+        return data
+            .filter(d => 'author' in d && !!d.author)
+            .map((d: PublicationsWithAuthors) => ({
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                id: TriplyUtils.getIdFromUri(d.author!),
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                author: d.author!,
+                authorLabel: d.authorLabel,
+                authorRole: d.authorRole,
+                authorRoleLabel: d.authorRoleLabel,
+            }))
     }
 }

@@ -61,10 +61,12 @@ fragment carouselModuleFragment on ComponentModulesCarousel {
                             type
                             title
                             objectNumber
-                            populatedAuthor {
-                                id
-                                profession
-                                name
+                            authors {
+                                populatedAuthor {
+                                    id
+                                    profession
+                                    name
+                                }
                             }
                         }
                         ... on PublicationsArticleZoomLevel5DetailType {
@@ -72,9 +74,11 @@ fragment carouselModuleFragment on ComponentModulesCarousel {
                             type
                             title
                             objectNumber
-                            populatedAuthor {
-                                profession
-                                name
+                            authors {
+                                populatedAuthor {
+                                    profession
+                                    name
+                                }
                             }
                         }
                         ... on PublicationsSerialZoomLevel5DetailType {
@@ -91,9 +95,11 @@ fragment carouselModuleFragment on ComponentModulesCarousel {
                             type
                             title
                             objectNumber
-                            populatedAuthor {
-                                profession
-                                name
+                            authors {
+                                populatedAuthor {
+                                    profession
+                                    name
+                                }
                             }
                         }
                     }

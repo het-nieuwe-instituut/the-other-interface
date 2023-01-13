@@ -89,7 +89,9 @@ query storyBySlug($locale: String, $slug: String!) {
                                     id
                                     type
                                     title
-                                    author
+                                    authors {
+                                        author
+                                    }
                                 }
                             }
                             people {
