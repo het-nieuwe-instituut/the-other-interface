@@ -1,15 +1,15 @@
 {
-    "publications": "Publicaties",
-    "people": "Personen",
-    "archives": "Archieven",
-    "objects": "Objecten",
+    "publications": "Publicatie",
+    "people": "Persoon/Instelling",
+    "archives": "Archiefbestanddeel",
+    "objects": "Object",
     "stories": "Stories",
     "story": "Story",
-    "relatedPeople": "Toon {{count}} van {{total}} gerelateerde personen",
-    "relatedObjects": "Toon {{count}} van {{total}} gerelateerde objecten",
-    "relatedPublications": "Toon {{count}} van {{total}} gerelateerde publicaties",
+    "relatedPeople": "Toon {{count}} van de {{total}} gerelateerde personen/instellingen",
+    "relatedObjects": "Toon {{count}} van de {{total}} gerelateerde objecten",
+    "relatedPublications": "Toon {{count}} van de {{total}} gerelateerde publicaties",
     "relatedStories_other": "{{count}} gerelateerde stories",
-    "relatedStories_one": "1 gerelateerd story",
-    "relatedArchive_other": "{{count}} gerelateerde archieven",
-    "relatedArchive_one": "1 gerelateerd archief"
+    "relatedStories_one": "1 gerelateerde story",
+    "relatedArchive_other": "{{count}} gerelateerde archiefbestanddelen",
+    "relatedArchive_one": "1 gerelateerd archiefbestanddeel"
 }

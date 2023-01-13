@@ -4,6 +4,6 @@
     "archiveItems": "{{count}} Archiefbestanddelen",
     "archives": "{{count}} Archieven",
     "objects": "Objecten",
-    "people": "Personen en Instellingen",
+    "people": "Personen/Instellingen",
     "publications": "Publicaties"
 }

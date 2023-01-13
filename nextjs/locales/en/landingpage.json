@@ -1,8 +1,8 @@
 {
     "byName": "by name",
     "byDate": "by date",
-    "byDesLevel": "by de slevel",
-    "byPerson": "by person",
+    "byDesLevel": "by description level",
+    "byPerson": "by person/institution",
     "byProject": "by project",
     "bySubject": "by subject",
     "byMaker": "by maker",
@@ -14,8 +14,8 @@
     "byAuthor": "by author",
     "byLocation": "by location",
     "publications": "Publications",
-    "people": "People",
-    "archives": "Archives",
+    "people": "Persons/Institutions",
+    "archives": "Archive items",
     "objects": "Objects",
     "genericBy": "By {{name}}"
 }

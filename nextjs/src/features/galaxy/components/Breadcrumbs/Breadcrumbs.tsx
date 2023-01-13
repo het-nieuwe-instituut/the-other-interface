@@ -23,9 +23,9 @@ const getLandingPageBreadcrumb = (t: navigationT, type: string) => {
     const preservedZoom = adjustedType == 'stories' ? ZoomStates.Zoom1Stories : ZoomStates.Zoom2
     const typeToName: Record<string, string> = {
         people: `${t('people')}`,
-        publications: `${t('publication')}`,
-        objects: `${t('object')}`,
-        archives: `${t('archive')}`,
+        publications: `${t('publications')}`,
+        objects: `${t('objects')}`,
+        archives: `${t('archives')}`,
         stories: `${t('stories')}`,
     }
 
@@ -40,15 +40,15 @@ const getLandingPageBreadcrumb = (t: navigationT, type: string) => {
 
 const getRecordBreadcrumb = (t: navigationT, type: string, record: string) => {
     const typeToName: Record<string, string> = {
-        people: `${t('people')}`,
+        people: `${t('person')}`,
         publications: `${t('publication')}`,
         objects: `${t('object')}`,
         archives: `${t('archive')}`,
-        stories: `${t('stories')}`,
+        stories: `${t('story')}`,
     }
 
     return {
-        name: `${typeToName[type]} ${t('record')}`,
+        name: `${typeToName[type]}`,
         link: {
             pathname: `/landingpage/${type}/${record}`,
         },
@@ -57,7 +57,7 @@ const getRecordBreadcrumb = (t: navigationT, type: string, record: string) => {
 
 const getStoryRecordBreadcrumb = (t: navigationT, record: string) => {
     return {
-        name: `${t('story')} ${t('record')}`,
+        name: `${t('story')}`,
         link: {
             pathname: `${record}`,
         },
