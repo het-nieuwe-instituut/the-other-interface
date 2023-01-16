@@ -53,6 +53,7 @@ const RecordPage = (props: PageProps) => {
                                 handleClick={ScrollToContent}
                                 title={attributes?.Title || undefined}
                                 preface={attributes?.Description || undefined}
+                                constrainPreface
                             />
                         </GridItem>
                         <GridItem area="meta">
