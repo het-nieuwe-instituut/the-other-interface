@@ -49,7 +49,6 @@ export const Navigation = () => {
             zIndex={NAVIGATION_OVERLAY_Z_INDEX}
             top={0}
             right={0}
-            overflow={'auto'}
             _before={{
                 content: '""',
                 position: 'absolute',
@@ -73,7 +72,7 @@ export const Navigation = () => {
                 position={'relative'}
                 zIndex={MAX_Z_INDEX}
             >
-                <Flex maxWidth={'711px'} minWidth={'388px'} flexDirection={'column'} pb={20}>
+                <Flex maxWidth={'711px'} minWidth={'388px'} flexDirection={'column'} pb={20} pr={{sm: '32px'}}>
                     <Text textStyle={'micro'} mb={'5'}>
                         {tNavigation('explore_collection')}
                     </Text>
@@ -150,7 +149,7 @@ export const Navigation = () => {
             </Flex>
 
             <Flex
-                pt={{ sm: '58px', md: '58px', lg: '94px', xl: '94px' }}
+                pt={{ sm: '48px', md: '48px', lg: '94px', xl: '94px' }}
                 pl={4}
                 maxWidth={'90em'}
                 marginX={isMobile ? 'initial' : 'auto'}
