@@ -12,6 +12,7 @@
         "eslint": "eslint",
         "prettier": "prettier",
         "test": "jest",
+        "clean": "rm -rf .next && rm -rf node_modules",
         "codegen": "graphql-codegen --config codegen.yml",
         "codegen:watch": "nodemon --watch ./src/features/graphql --ext graphql --exec \"npm run codegen\""
     },

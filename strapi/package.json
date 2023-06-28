@@ -9,6 +9,7 @@
     "build": "strapi build",
     "start-services": "docker-compose --project-name=hni-toi up",
     "strapi": "strapi",
+    "clean": "rm -rf node_modules && rm -rf .cache && rm -rf dist",
     "copyenv": "./.bin/init-env"
   },
   "dependencies": {
