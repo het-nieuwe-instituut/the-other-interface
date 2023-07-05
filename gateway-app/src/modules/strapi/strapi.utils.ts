@@ -1,7 +1,9 @@
-import { Enum_Triplyrecord_Type } from '../../generated/strapi-sdk'
+// prettier-ignore
+import { Enum_Triplyrecord_Type } from '../../generated/strapi-sdk';
 import { CustomError } from '../util/customError'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 
+// prettier-ignore
 export class StrapiUtils {
   public static getRecordTypeForEntityName(name: EntityNames) {
     switch (name) {

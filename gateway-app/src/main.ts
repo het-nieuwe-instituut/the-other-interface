@@ -7,6 +7,7 @@ import { Config } from './config/config'
 import { RollbarInterceptor } from './modules/util/rollbar.interceptor'
 import { RollbarService } from './modules/util/rollbar.service'
 
+// prettier-ignore
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
   const configService = app.get<ConfigService<Config>>(ConfigService)

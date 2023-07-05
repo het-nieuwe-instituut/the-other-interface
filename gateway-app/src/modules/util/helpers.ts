@@ -1,5 +1,6 @@
 import { random } from 'lodash'
 
+// prettier-ignore
 export function getRandom2ItemsFromArray<T>(arr: T[]) {
   if (!arr.length) {
     return []

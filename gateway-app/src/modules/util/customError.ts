@@ -1,3 +1,4 @@
+// prettier-ignore
 export enum CustomErrorType {
   internal = 'internal',
   internalCritical = 'internalCritical',
@@ -6,6 +7,7 @@ export enum CustomErrorType {
   // if changed, make sure to update the typesToIgnore in rollbarInterceptor.ts
 }
 
+// prettier-ignore
 export class CustomError extends Error {
   private constructor(type: CustomErrorType, message: string) {
     // if updating this format, make sure to update the shouldReport in rollbarInterceptor.ts
