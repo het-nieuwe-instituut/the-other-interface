@@ -2,21 +2,22 @@ import { SupportedQuerys } from '@/features/pages/tasks/zoom5Config'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { typeColors } from '@/features/shared/styles/theme/foundations/colors'
 import { Box, Flex, Image, keyframes, Text } from '@chakra-ui/react'
+
 import { Circle } from '../../components/Circle'
 import { Dimensions } from '../../types/galaxy'
 import { ZoomLevel5Entities } from '../RecordClouds'
 
 interface RecordCloudHighlightProps {
-    image?: {
-        url?: string
-        width: number
-        height: number
-        alt?: string
-    }
-    title?: string
-    queryType: NonNullable<ZoomLevel5Entities>['__typename']
-    type: SupportedQuerys
-    dimensions: Dimensions
+  image?: {
+    url?: string
+    width: number
+    height: number
+    alt?: string
+  }
+  title?: string
+  queryType: NonNullable<ZoomLevel5Entities>['__typename']
+  type: SupportedQuerys
+  dimensions: Dimensions
 }
 
 const appear = keyframes`
@@ -25,105 +26,112 @@ const appear = keyframes`
 `
 
 export const RecordCloudHighlight: React.FunctionComponent<RecordCloudHighlightProps> = ({
-    image,
-    title,
-    dimensions,
-    queryType,
-    type,
+  image,
+  title,
+  dimensions,
+  queryType,
+  type,
 }) => {
-    const { t } = useTypeSafeTranslation('record')
-    const radius = 500
-    const width = dimensions.width ?? 0
-    const height = dimensions.height ?? 0
-    const appearAnimation = `${appear} 2s linear`
+  const { t } = useTypeSafeTranslation('record')
+  const radius = 500
+  const width = dimensions.width ?? 0
+  const height = dimensions.height ?? 0
+  const appearAnimation = `${appear} 2s linear`
 
-    return (
-        <Circle
-            height={`${radius}px`}
-            width={`${radius}px`}
-            x={width / 2 - radius / 2}
-            y={height / 2 - radius / 2}
-            defaultBackground={typeColors[type].hover1}
-            hoverBackground={typeColors[type].hover1}
-            className={'highlight'}
-        >
-            <Flex
-                height={'100%'}
-                width={'100%'}
-                alignItems="center"
-                flexDirection="column"
-                justifyContent="center"
-                zIndex={1}
-                animation={appearAnimation}
-            >
-                <Text textStyle={'cloudTextMicro'} mb={2.5}>
-                    {t(type)}
-                </Text>
-                <Text textStyle={'cloudTextLarge'} maxWidth="412px" flexWrap={'wrap'} textAlign={'center'}>
-                    {title}
-                </Text>
+  return (
+    <Circle
+      height={`${radius}px`}
+      width={`${radius}px`}
+      x={width / 2 - radius / 2}
+      y={height / 2 - radius / 2}
+      defaultBackground={typeColors[type].hover1}
+      hoverBackground={typeColors[type].hover1}
+      className={'highlight'}
+    >
+      <Flex
+        height={'100%'}
+        width={'100%'}
+        alignItems="center"
+        flexDirection="column"
+        justifyContent="center"
+        zIndex={1}
+        animation={appearAnimation}
+      >
+        <Text textStyle={'cloudTextMicro'} mb={2.5}>
+          {t(type)}
+        </Text>
+        <Text textStyle={'cloudTextLarge'} maxWidth="412px" flexWrap={'wrap'} textAlign={'center'}>
+          {title}
+        </Text>
 
-                {renderImage()}
-            </Flex>
-        </Circle>
-    )
+        {renderImage()}
+      </Flex>
+    </Circle>
+  )
 
-    function renderImage() {
-        if (!image || !image.url) {
-            return
-        }
-
-        const options = {
-            url: 'https://cdn.pixabay.com/photo/2013/07/12/17/47/test-pattern-152459_960_720.png',
-            height: 100,
-            width: 100,
-            alt: '',
-        }
-
-        if (queryType === 'PoepleZoomLevel5DetailType') {
-            return <PersonImage image={options} />
-        }
-
-        return <GenericImage image={options} />
+  function renderImage() {
+    if (!image || !image.url) {
+      return
     }
+
+    const options = {
+      url: 'https://cdn.pixabay.com/photo/2013/07/12/17/47/test-pattern-152459_960_720.png',
+      height: 100,
+      width: 100,
+      alt: '',
+    }
+
+    if (queryType === 'PoepleZoomLevel5DetailType') {
+      return <PersonImage image={options} />
+    }
+
+    return <GenericImage image={options} />
+  }
 }
 
 const PersonImage: React.FC<{
-    image?: {
-        url?: string
-        width: number
-        height: number
-        alt?: string
-    }
+  image?: {
+    url?: string
+    width: number
+    height: number
+    alt?: string
+  }
 }> = ({ image }) => {
-    const hideImage = (image: HTMLImageElement) => {
-        image.style.display = 'none'
-    }
+  const hideImage = (image: HTMLImageElement) => {
+    image.style.display = 'none'
+  }
 
-    return (
-        <Box borderRadius={'100%'} mt={7} height={200} width={200} overflow={'hidden'} background={'black'}>
-            <Image
-                height={200}
-                objectFit={'cover'}
-                src={image?.url}
-                alt={image?.alt ?? ''}
-                onError={e => hideImage(e?.target as HTMLImageElement)}
-            />
-        </Box>
-    )
+  return (
+    <Box
+      borderRadius={'100%'}
+      mt={7}
+      height={200}
+      width={200}
+      overflow={'hidden'}
+      background={'black'}
+    >
+      <Image
+        height={200}
+        objectFit={'cover'}
+        src={image?.url}
+        alt={image?.alt ?? ''}
+        onError={e => hideImage(e?.target as HTMLImageElement)}
+      />
+    </Box>
+  )
 }
 
 const GenericImage: React.FC<{
-    image?: {
-        url?: string
-        width: number
-        height: number
-        alt?: string
-    }
+  image?: {
+    url?: string
+    width: number
+    height: number
+    alt?: string
+  }
 }> = ({ image }) => {
-    return (
-        <Box width={200} mt={7} overflow={'hidden'} background={'black'}>
-            <Image objectFit={'cover'} src={image?.url} alt={image?.alt ?? ''} />
-        </Box>
-    )
+  return (
+    <Box width={200} mt={7} overflow={'hidden'} background={'black'}>
+      <Image objectFit={'cover'} src={image?.url} alt={image?.alt ?? ''} />
+    </Box>
+  )
 }

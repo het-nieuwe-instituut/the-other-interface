@@ -1,72 +1,65 @@
-const axios = require("axios");
+const axios = require('axios')
 
-let failedCount = 0;
+let failedCount = 0
 
 module.exports = {
   async up(knex) {
     try {
-      const res = await knex.raw(
-        'SELECT id, record_id "recordId", "type" FROM triply_records'
-      );
+      const res = await knex.raw('SELECT id, record_id "recordId", "type" FROM triply_records')
       if (!res || !res.rows || !res.rows.length) {
-        console.log("no triply records to migrate, returning");
-        return;
+        console.log('no triply records to migrate, returning')
+        return
       }
 
       for (const { id, recordId, type } of res.rows) {
-        const label = await getLabel({ recordId, type });
-        await knex.from("triply_records").update({ label }).where({ id });
+        const label = await getLabel({ recordId, type })
+        await knex.from('triply_records').update({ label }).where({ id })
       }
-      console.log(`${failedCount} out of ${res.rows.length} failed`);
+      console.log(`${failedCount} out of ${res.rows.length} failed`)
     } catch {
-      console.log(
-        "migration failed, if you are not using a blank db, this shouldn't happen"
-      );
+      console.log("migration failed, if you are not using a blank db, this shouldn't happen")
     }
   },
-};
+}
 
 async function getLabel({ recordId, type }) {
   try {
-    const res = await axios.get(
-      `${process.env.GATEWAY_BASE_URL}/zoomLevel5/detail`,
-      {
-        params: { recordId, type },
-        headers: { "x-api-key": process.env.GATEWAY_API_TOKEN },
-      }
-    );
+    const res = await axios.get(`${process.env.GATEWAY_BASE_URL}/zoomLevel5/detail`, {
+      params: { recordId, type },
+      headers: { 'x-api-key': process.env.GATEWAY_API_TOKEN },
+    })
 
-    const label = getLabelFromTriplyData(res.data, type) || "-";
+    const label = getLabelFromTriplyData(res.data, type) || '-'
 
-    return `${label} (${recordId}/${type})`;
+    return `${label} (${recordId}/${type})`
   } catch (err) {
-    console.log(`failed to get the label for ${recordId} ${type}.`);
-    failedCount++;
+    console.log(`failed to get the label for ${recordId} ${type}.`)
+    failedCount++
 
-    return `- (${recordId}/${type})`;
+    return `- (${recordId}/${type})`
   }
 }
 
 function getLabelFromTriplyData(triplyData, type) {
-  let label;
+  let label
   switch (type) {
-    case "Archive":
-      label = triplyData.objectNumber;
-    case "Object":
-      label = triplyData.objectNumber;
-    case "People":
-      label = triplyData.name;
-    case "Publication":
-      label = triplyData.title;
-    case "Media":
+    case 'Archive':
+      label = triplyData.objectNumber
+    case 'Object':
+      label = triplyData.objectNumber
+    case 'People':
+      label = triplyData.name
+    case 'Publication':
+      label = triplyData.title
+    case 'Media':
     // not yet implemented
   }
 
-  label = label?.trim() || "-";
+  label = label?.trim() || '-'
 
   if (label.length > 200) {
-    return label.slice(0, 200) + "...";
+    return label.slice(0, 200) + '...'
   }
 
-  return label;
+  return label
 }

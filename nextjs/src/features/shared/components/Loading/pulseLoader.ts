@@ -1,5 +1,5 @@
 export function getPulseLoaderHTML({ id, className }: { id?: string; className?: string }) {
-    const style = `
+  const style = `
 		.pulse-loader {
 			margin-left: 6px;
 			margin-top: 6px;
@@ -36,7 +36,7 @@ export function getPulseLoaderHTML({ id, className }: { id?: string; className?:
 		}
 	`
 
-    return `
+  return `
 		<div id="${id}" class="${className}">
 			<style>${style}</style>
 			<div class="pulse-loader"></div>			

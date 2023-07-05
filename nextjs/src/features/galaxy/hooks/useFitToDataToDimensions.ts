@@ -3,67 +3,69 @@ import { randomNumberBetweenPoints } from '@/features/shared/utils/numbers'
 import { useEffect, useRef, useState } from 'react'
 
 export interface DataDimension {
-    id: string
-    takeSpace: number
-    randomMultiplier: number
+  id: string
+  takeSpace: number
+  randomMultiplier: number
 }
 
 export function useFitDataToDimensions<
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    _,
-    TData extends Array<TData[0]>,
-    GetName extends (d: TData[0]) => string,
-    GetCount extends (d: TData[0]) => number
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _,
+  TData extends Array<TData[0]>,
+  GetName extends (d: TData[0]) => string,
+  GetCount extends (d: TData[0]) => number
 >(dimensions: Dimensions, data: TData, getName: GetName, getCount: GetCount) {
-    const [dataDimensions, setDataDimensions] = useState<DataDimension[]>([])
-    const prevDataDimensions = useRef<DataDimension[]>([])
+  const [dataDimensions, setDataDimensions] = useState<DataDimension[]>([])
+  const prevDataDimensions = useRef<DataDimension[]>([])
 
-    useEffect(() => {
-        if (!data) return
-        const height = dimensions.height ?? 0
-        const width = dimensions.width ?? 0
-        const squareSide: number = height > width ? width : height
+  useEffect(() => {
+    if (!data) return
+    const height = dimensions.height ?? 0
+    const width = dimensions.width ?? 0
+    const squareSide: number = height > width ? width : height
 
-        const totalSpace = squareSide * squareSide
-        const gridItemSpace = 12
-        const totalSpaceGrid = totalSpace / (gridItemSpace * gridItemSpace)
+    const totalSpace = squareSide * squareSide
+    const gridItemSpace = 12
+    const totalSpaceGrid = totalSpace / (gridItemSpace * gridItemSpace)
 
-        const totalObjects = data.reduce((total, item) => {
-            const count = getCount(item)
-            return total + count
-        }, 0)
-        const totalOccupiedGridItems = totalSpaceGrid / totalObjects
+    const totalObjects = data.reduce((total, item) => {
+      const count = getCount(item)
+      return total + count
+    }, 0)
+    const totalOccupiedGridItems = totalSpaceGrid / totalObjects
 
-        const newData = data.map(item => {
-            const id = getName(item)
-            const count = getCount(item)
-            const dataDimension = prevDataDimensions.current.find(dataDimension => dataDimension.id === id)
-            const takeSpace = totalOccupiedGridItems * count
+    const newData = data.map(item => {
+      const id = getName(item)
+      const count = getCount(item)
+      const dataDimension = prevDataDimensions.current.find(
+        dataDimension => dataDimension.id === id
+      )
+      const takeSpace = totalOccupiedGridItems * count
 
-            const limitedTakeSpace = getLimitedTakeSpace(takeSpace)
+      const limitedTakeSpace = getLimitedTakeSpace(takeSpace)
 
-            return {
-                id: id,
-                takeSpace: limitedTakeSpace,
-                randomMultiplier: dataDimension?.randomMultiplier ?? randomNumberBetweenPoints(0.8, 0.99),
-            }
-        })
-        prevDataDimensions.current = newData
-        setDataDimensions(newData)
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [dimensions, data])
+      return {
+        id: id,
+        takeSpace: limitedTakeSpace,
+        randomMultiplier: dataDimension?.randomMultiplier ?? randomNumberBetweenPoints(0.8, 0.99),
+      }
+    })
+    prevDataDimensions.current = newData
+    setDataDimensions(newData)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dimensions, data])
 
-    return dataDimensions
+  return dataDimensions
 }
 
 function getLimitedTakeSpace(takeSpace: number) {
-    if (takeSpace < 300) {
-        return 300
-    }
+  if (takeSpace < 300) {
+    return 300
+  }
 
-    if (takeSpace > 750) {
-        return 750
-    }
+  if (takeSpace > 750) {
+    return 750
+  }
 
-    return takeSpace
+  return takeSpace
 }

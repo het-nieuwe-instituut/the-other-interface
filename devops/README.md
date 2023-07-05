@@ -26,4 +26,5 @@
 `aws s3 cp --sse-c --sse-c-key={{ app.aws.sse_key }} s3://bucket-name/some-backup-file.tar.gz .`
 
 ## Versions
+
 - Ansible: 2.5

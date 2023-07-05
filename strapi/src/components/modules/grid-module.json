@@ -19,10 +19,7 @@
     },
     "fieldTypes": {
       "type": "enumeration",
-      "enum": [
-        "Triply",
-        "Stories"
-      ],
+      "enum": ["Triply", "Stories"],
       "required": true,
       "default": "Stories"
     },

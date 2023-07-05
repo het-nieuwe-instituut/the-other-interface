@@ -18,13 +18,7 @@
     },
     "type": {
       "type": "enumeration",
-      "enum": [
-        "Archive",
-        "Object",
-        "People",
-        "Publication",
-        "Media"
-      ],
+      "enum": ["Archive", "Object", "People", "Publication", "Media"],
       "required": true
     },
     "stories": {

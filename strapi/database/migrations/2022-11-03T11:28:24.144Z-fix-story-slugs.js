@@ -12,11 +12,9 @@ module.exports = {
         AND en.locale = 'en'
         AND en.slug != stories.slug;
         `
-      );
+      )
     } catch {
-      console.log(
-        "migration failed, if you are not using a blank db, this shouldn't happen"
-      );
+      console.log("migration failed, if you are not using a blank db, this shouldn't happen")
     }
   },
-};
+}

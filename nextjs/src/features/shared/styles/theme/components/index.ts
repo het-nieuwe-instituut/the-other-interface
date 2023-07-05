@@ -4,8 +4,8 @@ import { Link } from './Link/Link'
 import TableComponents from './Table/Table'
 
 export const components = {
-    Breadcrumb,
-    Link,
-    Button,
-    ...TableComponents,
+  Breadcrumb,
+  Link,
+  Button,
+  ...TableComponents,
 }

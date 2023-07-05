@@ -2,10 +2,10 @@ module.exports = {
   semi: false,
   singleQuote: true,
   tabWidth: 2,
-  trailingComma: "es5",
+  trailingComma: 'es5',
   printWidth: 100,
-  arrowParens: "avoid",
-  endOfLine: "lf",
-  importOrder: ["^src/(.*)$", "^[./]"],
-  importOrderSeparation: true
-};
+  arrowParens: 'avoid',
+  endOfLine: 'lf',
+  importOrder: ['^src/(.*)$', '^[./]'],
+  importOrderSeparation: true,
+}

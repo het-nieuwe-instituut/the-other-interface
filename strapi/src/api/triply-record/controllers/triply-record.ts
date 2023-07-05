@@ -1,7 +1,6 @@
 /**
  *  triply-record controller
  */
-
 import { factories } from '@strapi/strapi'
 
-export default factories.createCoreController('api::triply-record.triply-record');
+export default factories.createCoreController('api::triply-record.triply-record')
