@@ -20,7 +20,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - name: npm ci
+
+      - name: Install nextjs dependencies
         run: cd nextjs && npm ci
-      - name: npm run test
+
+      - name: Check styles
+        run: npm run format-check
+
+      - name: Run nextjs tests
         run: cd nextjs && npm run test
