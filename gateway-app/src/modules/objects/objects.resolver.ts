@@ -6,24 +6,24 @@ import { ObjectMakerType, ObjectsZoomLevel5DetailType } from './objects.type'
 
 @Resolver(ObjectsZoomLevel5DetailType)
 export class ObjectsResolver {
-    @Query(() => ObjectsZoomLevel5DetailType)
-    public object() {
-        throw CustomError.internal('not yet implemented')
-    }
+  @Query(() => ObjectsZoomLevel5DetailType)
+  public object() {
+    throw CustomError.internal('not yet implemented')
+  }
 }
 
 @Resolver(ObjectMakerType)
 export class ObjectMakerResolver {
-    public constructor(private readonly zoomLevel5Service: ZoomLevel5Service) {}
-    @ResolveField()
-    public populatedMaker(@Parent() object: ObjectMakerType) {
-        if (!object.maker) {
-            return
-        }
-
-        const type = TriplyUtils.getEntityNameFromUri(object.maker)
-        const id = TriplyUtils.getIdFromUri(object.maker)
-
-        return this.zoomLevel5Service.getDetail(id, type)
+  public constructor(private readonly zoomLevel5Service: ZoomLevel5Service) {}
+  @ResolveField()
+  public populatedMaker(@Parent() object: ObjectMakerType) {
+    if (!object.maker) {
+      return
     }
+
+    const type = TriplyUtils.getEntityNameFromUri(object.maker)
+    const id = TriplyUtils.getIdFromUri(object.maker)
+
+    return this.zoomLevel5Service.getDetail(id, type)
+  }
 }

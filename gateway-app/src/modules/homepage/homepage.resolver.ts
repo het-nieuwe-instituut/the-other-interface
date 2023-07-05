@@ -6,13 +6,13 @@ import { HomepageEntityResponse } from './homepage.type'
 
 @Resolver()
 export class HomepageResolver {
-    public constructor(@Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk) {}
+  public constructor(@Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk) {}
 
-    @Query(() => HomepageEntityResponse)
-    public async homepage(
-        @Args('publicationState', { nullable: true }) publicationState?: PublicationState,
-        @Args('locale', { nullable: true }) locale?: I18NLocaleCode
-    ) {
-        return (await this.strapiGqlSdk.homepage({ publicationState, locale })).homepage
-    }
+  @Query(() => HomepageEntityResponse)
+  public async homepage(
+    @Args('publicationState', { nullable: true }) publicationState?: PublicationState,
+    @Args('locale', { nullable: true }) locale?: I18NLocaleCode
+  ) {
+    return (await this.strapiGqlSdk.homepage({ publicationState, locale })).homepage
+  }
 }

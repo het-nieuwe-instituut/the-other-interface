@@ -3,7 +3,7 @@ import { StrapiModule } from '../strapi/strapi.module'
 import { MenuPageResolver } from './menuPage.resolver'
 
 @Module({
-    imports: [StrapiModule],
-    providers: [MenuPageResolver],
+  imports: [StrapiModule],
+  providers: [MenuPageResolver],
 })
 export class MenuPageModule {}

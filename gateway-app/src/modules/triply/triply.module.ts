@@ -4,5 +4,9 @@ import { StoryModule } from '../story/story.module'
 import { TriplyService } from './triply.service'
 
 @Global()
-@Module({ imports: [HttpModule, StoryModule], providers: [TriplyService], exports: [TriplyService] })
+@Module({
+  imports: [HttpModule, StoryModule],
+  providers: [TriplyService],
+  exports: [TriplyService],
+})
 export class TriplyModule {}

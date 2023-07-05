@@ -3,39 +3,39 @@ import { BooleanFilterInput, StringFilterInput, UploadFileEntityResponse } from 
 
 @ObjectType()
 export class ComponentCoreButton {
-    @Field(() => ID)
-    public id: string
+  @Field(() => ID)
+  public id: string
 
-    @Field(() => UploadFileEntityResponse, { nullable: true })
-    public attachment?: UploadFileEntityResponse
+  @Field(() => UploadFileEntityResponse, { nullable: true })
+  public attachment?: UploadFileEntityResponse
 
-    @Field({ nullable: true })
-    public hasAttachment?: boolean
+  @Field({ nullable: true })
+  public hasAttachment?: boolean
 
-    @Field({ nullable: true })
-    public text?: string
+  @Field({ nullable: true })
+  public text?: string
 
-    @Field({ nullable: true })
-    public url?: string
+  @Field({ nullable: true })
+  public url?: string
 }
 
 @InputType()
 export class ComponentCoreButtonFiltersInput {
-    @Field(() => [ComponentCoreButtonFiltersInput], { nullable: true })
-    public and?: ComponentCoreButtonFiltersInput[]
+  @Field(() => [ComponentCoreButtonFiltersInput], { nullable: true })
+  public and?: ComponentCoreButtonFiltersInput[]
 
-    @Field(() => BooleanFilterInput, { nullable: true })
-    public hasAttachment?: BooleanFilterInput
+  @Field(() => BooleanFilterInput, { nullable: true })
+  public hasAttachment?: BooleanFilterInput
 
-    @Field(() => ComponentCoreButtonFiltersInput, { nullable: true })
-    public not?: ComponentCoreButtonFiltersInput
+  @Field(() => ComponentCoreButtonFiltersInput, { nullable: true })
+  public not?: ComponentCoreButtonFiltersInput
 
-    @Field(() => [ComponentCoreButtonFiltersInput], { nullable: true })
-    public or?: ComponentCoreButtonFiltersInput[]
+  @Field(() => [ComponentCoreButtonFiltersInput], { nullable: true })
+  public or?: ComponentCoreButtonFiltersInput[]
 
-    @Field(() => StringFilterInput, { nullable: true })
-    public text?: StringFilterInput
+  @Field(() => StringFilterInput, { nullable: true })
+  public text?: StringFilterInput
 
-    @Field(() => StringFilterInput, { nullable: true })
-    public url?: StringFilterInput
+  @Field(() => StringFilterInput, { nullable: true })
+  public url?: StringFilterInput
 }

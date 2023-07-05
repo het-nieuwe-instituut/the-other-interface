@@ -12,67 +12,71 @@ import { PaginationArgs } from '../util/paginationArgs.type'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 
 interface ZoomLevel4FilterInput {
-    archivesFilters: ArchivesZoomLevel4FiltersArgs | null
-    objectsFilters: ObjectsZoomLevel4FiltersArgs | null
-    peopleFilters: PeopleZoomLevel4FiltersArgs | null
-    publicationsFilters: PublicationsZoomLevel4FiltersArgs | null
+  archivesFilters: ArchivesZoomLevel4FiltersArgs | null
+  objectsFilters: ObjectsZoomLevel4FiltersArgs | null
+  peopleFilters: PeopleZoomLevel4FiltersArgs | null
+  publicationsFilters: PublicationsZoomLevel4FiltersArgs | null
 }
 
 @Injectable()
 export class ZoomLevel4Service {
-    public constructor(
-        private readonly archivesService: ArchivesService,
-        private readonly objectsService: ObjectsService,
-        private readonly peopleService: PeopleService,
-        private readonly publicationsService: PublicationsService
-    ) {}
-    public getData(entity: EntityNames, filters: ZoomLevel4FilterInput, paginationArgs: PaginationArgs) {
-        switch (entity) {
-            case EntityNames.Archives: {
-                if (!filters.archivesFilters) {
-                    return
-                }
-                return this.archivesService.getZoomLevel4Data(
-                    filters.archivesFilters,
-                    paginationArgs.page,
-                    paginationArgs.pageSize
-                )
-            }
-            case EntityNames.Objects: {
-                if (!filters.objectsFilters) {
-                    return
-                }
-                return this.objectsService.getZoomLevel4Data(
-                    filters.objectsFilters,
-                    paginationArgs.page,
-                    paginationArgs.pageSize
-                )
-            }
-
-            case EntityNames.People: {
-                if (!filters.peopleFilters) {
-                    return
-                }
-                return this.peopleService.getZoomLevel4Data(
-                    filters.peopleFilters,
-                    paginationArgs.page,
-                    paginationArgs.pageSize
-                )
-            }
-            case EntityNames.Publications: {
-                if (!filters.publicationsFilters) {
-                    return
-                }
-                return this.publicationsService.getZoomLevel4Data(
-                    filters.publicationsFilters,
-                    paginationArgs.page,
-                    paginationArgs.pageSize
-                )
-            }
-            case EntityNames.Stories:
-            default: {
-                throw CustomError.internalCritical(`Zoomlevel 4 for ${entity} not implemented`)
-            }
+  public constructor(
+    private readonly archivesService: ArchivesService,
+    private readonly objectsService: ObjectsService,
+    private readonly peopleService: PeopleService,
+    private readonly publicationsService: PublicationsService
+  ) {}
+  public getData(
+    entity: EntityNames,
+    filters: ZoomLevel4FilterInput,
+    paginationArgs: PaginationArgs
+  ) {
+    switch (entity) {
+      case EntityNames.Archives: {
+        if (!filters.archivesFilters) {
+          return
         }
+        return this.archivesService.getZoomLevel4Data(
+          filters.archivesFilters,
+          paginationArgs.page,
+          paginationArgs.pageSize
+        )
+      }
+      case EntityNames.Objects: {
+        if (!filters.objectsFilters) {
+          return
+        }
+        return this.objectsService.getZoomLevel4Data(
+          filters.objectsFilters,
+          paginationArgs.page,
+          paginationArgs.pageSize
+        )
+      }
+
+      case EntityNames.People: {
+        if (!filters.peopleFilters) {
+          return
+        }
+        return this.peopleService.getZoomLevel4Data(
+          filters.peopleFilters,
+          paginationArgs.page,
+          paginationArgs.pageSize
+        )
+      }
+      case EntityNames.Publications: {
+        if (!filters.publicationsFilters) {
+          return
+        }
+        return this.publicationsService.getZoomLevel4Data(
+          filters.publicationsFilters,
+          paginationArgs.page,
+          paginationArgs.pageSize
+        )
+      }
+      case EntityNames.Stories:
+      default: {
+        throw CustomError.internalCritical(`Zoomlevel 4 for ${entity} not implemented`)
+      }
     }
+  }
 }

@@ -4,8 +4,8 @@ import { ObjectMakerResolver, ObjectsResolver } from './objects.resolver'
 import { ObjectsService } from './objects.service'
 
 @Module({
-    imports: [forwardRef(() => ZoomLevel5Module)],
-    providers: [ObjectsService, ObjectsResolver, ObjectMakerResolver],
-    exports: [ObjectsService, ObjectsResolver, ObjectMakerResolver],
+  imports: [forwardRef(() => ZoomLevel5Module)],
+  providers: [ObjectsService, ObjectsResolver, ObjectMakerResolver],
+  exports: [ObjectsService, ObjectsResolver, ObjectMakerResolver],
 })
 export class ObjectsModule {}

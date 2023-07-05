@@ -3,12 +3,12 @@ import { ComponentCoreModuleLayouts } from '../../shared-types'
 
 @ObjectType()
 export class ComponentModulesTextModule {
-    @Field({ nullable: true })
-    public Richtext?: string
+  @Field({ nullable: true })
+  public Richtext?: string
 
-    @Field(() => ID)
-    public id: string
+  @Field(() => ID)
+  public id: string
 
-    @Field(() => ComponentCoreModuleLayouts)
-    public textModuleLayout: ComponentCoreModuleLayouts
+  @Field(() => ComponentCoreModuleLayouts)
+  public textModuleLayout: ComponentCoreModuleLayouts
 }
