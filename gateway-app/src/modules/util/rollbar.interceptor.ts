@@ -5,33 +5,33 @@ import { RollbarService } from './rollbar.service'
 
 @Injectable()
 export class RollbarInterceptor implements NestInterceptor {
-    private readonly typesToIgnore = [CustomErrorType.internal, CustomErrorType.external]
+  private readonly typesToIgnore = [CustomErrorType.internal, CustomErrorType.external]
 
-    public constructor(private readonly rollbarService: RollbarService) {}
+  public constructor(private readonly rollbarService: RollbarService) {}
 
-    public intercept(_context: ExecutionContext, next: CallHandler): Observable<unknown> {
-        return next.handle().pipe(
-            catchError(e => {
-                if (this.shouldReport(e)) {
-                    this.rollbarService.logError(e)
-                }
-
-                throw e
-            })
-        )
-    }
-
-    private shouldReport(e: unknown) {
-        if (!e || typeof e !== 'object' || !('message' in e) || typeof e.message !== 'string') {
-            return true
+  public intercept(_context: ExecutionContext, next: CallHandler): Observable<unknown> {
+    return next.handle().pipe(
+      catchError(e => {
+        if (this.shouldReport(e)) {
+          this.rollbarService.logError(e)
         }
 
-        for (const typeToIgnore of this.typesToIgnore) {
-            if (e.message.startsWith(`[${typeToIgnore}]: `)) {
-                return false
-            }
-        }
+        throw e
+      })
+    )
+  }
 
-        return true
+  private shouldReport(e: unknown) {
+    if (!e || typeof e !== 'object' || !('message' in e) || typeof e.message !== 'string') {
+      return true
     }
+
+    for (const typeToIgnore of this.typesToIgnore) {
+      if (e.message.startsWith(`[${typeToIgnore}]: `)) {
+        return false
+      }
+    }
+
+    return true
+  }
 }

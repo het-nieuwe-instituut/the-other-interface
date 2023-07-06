@@ -5,15 +5,15 @@ import { TriplyRecordEntityResponse } from '../../../triplyRecord/triplyRecord.t
 
 @ObjectType()
 export class ComponentModulesCollectionRelation {
-    @Field(() => AuthorEntityResponse, { nullable: true })
-    public author?: AuthorEntityResponse
+  @Field(() => AuthorEntityResponse, { nullable: true })
+  public author?: AuthorEntityResponse
 
-    @Field(() => ID)
-    public id: string
+  @Field(() => ID)
+  public id: string
 
-    @Field(() => StoryEntityResponse, { nullable: true })
-    public story?: StoryEntityResponse
+  @Field(() => StoryEntityResponse, { nullable: true })
+  public story?: StoryEntityResponse
 
-    @Field(() => TriplyRecordEntityResponse, { nullable: true })
-    public triplyRecord?: TriplyRecordEntityResponse
+  @Field(() => TriplyRecordEntityResponse, { nullable: true })
+  public triplyRecord?: TriplyRecordEntityResponse
 }

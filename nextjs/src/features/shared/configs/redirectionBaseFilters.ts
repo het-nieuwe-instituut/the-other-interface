@@ -12,9 +12,6 @@
 //     }
 // }
 
-const redirectionBaseFilters = {
-
-}
-
+const redirectionBaseFilters = {}
 
 export default redirectionBaseFilters

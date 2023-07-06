@@ -3,70 +3,71 @@ import LandingpageContext from '@/features/pages/containers/LandingpageContainer
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
+
 import { EntityNames } from 'src/generated/graphql'
 
 export enum SupportedLandingPages {
-    Publications = 'publications',
-    People = 'people',
-    Archives = 'archives',
-    Objects = 'objects',
-    Stories = 'stories',
+  Publications = 'publications',
+  People = 'people',
+  Archives = 'archives',
+  Objects = 'objects',
+  Stories = 'stories',
 }
 
 type Props = {
-    dimensions: {
-        height: number
-        width: number
-    }
-    type: SupportedLandingPages
+  dimensions: {
+    height: number
+    width: number
+  }
+  type: SupportedLandingPages
 }
 
 const DynamicPaginatedFilterCloudsNoSsr = dynamic(() => import('./FilterClouds'), {
-    ssr: false,
+  ssr: false,
 })
 
 export const DynamicGalaxyNoSsr = dynamic(() => import('../../galaxy/Galaxy/Galaxy'), {
-    ssr: false,
+  ssr: false,
 })
 
 export const TypeToEntityName: Record<string, EntityNames> = {
-    publications: EntityNames.Publications,
-    people: EntityNames.People,
-    objects: EntityNames.Objects,
-    archives: EntityNames.Archives,
+  publications: EntityNames.Publications,
+  people: EntityNames.People,
+  objects: EntityNames.Objects,
+  archives: EntityNames.Archives,
 }
 
 export interface LandingPageQueryParams {
-    slug: SupportedLandingPages
+  slug: SupportedLandingPages
 }
 
 const FilterCloudsContainer: React.FunctionComponent<Props> = props => {
-    const router = useRouter()
-    const queryParams = router.query as unknown as LandingPageQueryParams
-    const type = queryParams.slug
-    const { zoomLevel2: filters } = useContext(LandingpageContext)
+  const router = useRouter()
+  const queryParams = router.query as unknown as LandingPageQueryParams
+  const type = queryParams.slug
+  const { zoomLevel2: filters } = useContext(LandingpageContext)
 
-    // if (isFiltersLoading) {
-    //     return <Loader />
-    // }
+  // if (isFiltersLoading) {
+  //     return <Loader />
+  // }
 
-    // if (filtersError) {
-    //     return <p>{filtersError.message}</p>
-    // }
+  // if (filtersError) {
+  //     return <p>{filtersError.message}</p>
+  // }
 
-    return (
-        <>
-            {type === SupportedLandingPages.Stories ? (
-                <DynamicGalaxyNoSsr dimensions={{ height: 800, width: props.dimensions.width }} />
-            ) : (
-                <DynamicPaginatedFilterCloudsNoSsr
-                    zoomLevel2={filters?.zoomLevel2 ?? []}
-                    dimensions={props.dimensions}
-                    type={props.type}
-                />
-            )}
-        </>
-    )
+  return (
+    <>
+      {type === SupportedLandingPages.Stories ? (
+        <DynamicGalaxyNoSsr dimensions={{ height: 800, width: props.dimensions.width }} />
+      ) : (
+        <DynamicPaginatedFilterCloudsNoSsr
+          zoomLevel2={filters?.zoomLevel2 ?? []}
+          dimensions={props.dimensions}
+          type={props.type}
+        />
+      )}
+    </>
+  )
 }
 
 export default FilterCloudsContainer

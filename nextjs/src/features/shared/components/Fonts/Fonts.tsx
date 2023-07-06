@@ -1,9 +1,9 @@
 import { Global } from '@emotion/react'
 
 const Fonts = () => {
-    return (
-        <Global
-            styles={`
+  return (
+    <Global
+      styles={`
                 /*
                 This CSS resource incorporates links to font software which is the valuable copyrighted property of Monotype and/or its suppliers. You may not attempt to copy, install, redistribute, convert, modify or reverse engineer this font software. Please contact Monotype with any questions regarding Web Fonts: https://www.linotype.com
                 */
@@ -25,8 +25,8 @@ const Fonts = () => {
                     src:url("/Fonts/1476056/98753b06-fa76-448d-adfe-c48d096d7555.woff2") format("woff2"),url("/Fonts/1476056/3d91ae6c-54b8-4354-8257-5b4bf04cc5ef.woff") format("woff");
                 }
           `}
-        />
-    )
+    />
+  )
 }
 
 export default Fonts

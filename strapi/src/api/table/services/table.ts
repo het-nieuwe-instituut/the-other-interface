@@ -1,7 +1,6 @@
 /**
  * table service.
  */
+import { factories } from '@strapi/strapi'
 
-import { factories } from '@strapi/strapi';
-
-export default factories.createCoreService('api::table.table');
+export default factories.createCoreService('api::table.table')

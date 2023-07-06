@@ -3,6 +3,6 @@ import { MenupageEntity } from './menuPage.type'
 
 @ObjectType()
 export class MenupageRelationResponseCollection {
-    @Field(() => [MenupageEntity], { nullable: true })
-    public data: MenupageEntity[]
+  @Field(() => [MenupageEntity], { nullable: true })
+  public data: MenupageEntity[]
 }

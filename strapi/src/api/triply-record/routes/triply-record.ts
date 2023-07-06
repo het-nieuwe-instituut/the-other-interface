@@ -1,7 +1,6 @@
 /**
  * triply-record router.
  */
+import { factories } from '@strapi/strapi'
 
-import { factories } from '@strapi/strapi';
-
-export default factories.createCoreRouter('api::triply-record.triply-record');
+export default factories.createCoreRouter('api::triply-record.triply-record')

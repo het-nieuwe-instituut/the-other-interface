@@ -1,5 +1,13 @@
-export function getSpinnerHTML({ id, className, size = 80 }: { id?: string; className?: string; size?: number }) {
-    const style = `
+export function getSpinnerHTML({
+  id,
+  className,
+  size = 80,
+}: {
+  id?: string
+  className?: string
+  size?: number
+}) {
+  const style = `
 	.lds-ripple {
 		display: inline-block;
 		position: relative;
@@ -49,7 +57,7 @@ export function getSpinnerHTML({ id, className, size = 80 }: { id?: string; clas
 	  
 	`
 
-    return `
+  return `
 		<div id="${id}" class="${className}">
 			<style>${style}</style>
 			<div class="lds-ripple">

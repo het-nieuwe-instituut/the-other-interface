@@ -14,10 +14,7 @@
     },
     "buttonStyle": {
       "type": "enumeration",
-      "enum": [
-        "Default",
-        "Large"
-      ]
+      "enum": ["Default", "Large"]
     },
     "buttonsModuleLayout": {
       "type": "component",

@@ -1,3 +1,3 @@
 export const Header = () => {
-    console.log('component')
+  console.log('component')
 }

@@ -23,10 +23,14 @@
     "graphql:codegen:watch": "cd nextjs && npm run codegen:watch",
     "docker:start": "cd strapi && npm run start-services",
     "itermocil": "(ls Itermocil.custom.yml > /dev/null && itermocil --here --layout ./Itermocil.custom.yml) || itermocil --here",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "format-check": "prettier --check \"**/**/*.{js,jsx,ts,tsx}\""
   },
   "devDependencies": {
-    "husky": "^8.0.1"
+    "@trivago/prettier-plugin-sort-imports": "^4.1.1",
+    "husky": "^8.0.1",
+    "prettier": "2.8.8"
   },
   "dependencies": {
     "concurrently": "^8.2.0",

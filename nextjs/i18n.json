@@ -1,12 +1,12 @@
 {
-    "locales": ["en", "nl"],
-    "defaultLocale": "nl",
-    "localeDetection": false,
-    "pages": {
-        "*": ["common", "navigation"],
-        "/story/[slug]": ["stories", "record", "landingpage"],
-        "/landingpage/[slug]": ["landingpage"],
-        "/landingpage/[slug]/[record]": ["record", "landingpage"],
-        "/": ["homepage"]
-    }
+  "locales": ["en", "nl"],
+  "defaultLocale": "nl",
+  "localeDetection": false,
+  "pages": {
+    "*": ["common", "navigation"],
+    "/story/[slug]": ["stories", "record", "landingpage"],
+    "/landingpage/[slug]": ["landingpage"],
+    "/landingpage/[slug]/[record]": ["record", "landingpage"],
+    "/": ["homepage"]
+  }
 }

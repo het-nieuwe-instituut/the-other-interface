@@ -1,0 +1,5 @@
+**/dist
+**/.cache
+**/.next
+
+gateway-app/src/**

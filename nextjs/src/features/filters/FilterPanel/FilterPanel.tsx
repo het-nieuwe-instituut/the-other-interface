@@ -3,13 +3,13 @@ import { FilterPanelButton } from './FilterPanelStyled'
 import usePresenter from './usePresenter'
 
 const FiltersPanel = () => {
-    const { setFilter } = usePresenter()
+  const { setFilter } = usePresenter()
 
-    return (
-        <div>
-            <FilterPanelButton onClick={() => setFilter(FilterTypes.MAKER)}>Set Filter</FilterPanelButton>
-        </div>
-    )
+  return (
+    <div>
+      <FilterPanelButton onClick={() => setFilter(FilterTypes.MAKER)}>Set Filter</FilterPanelButton>
+    </div>
+  )
 }
 
 export default FiltersPanel

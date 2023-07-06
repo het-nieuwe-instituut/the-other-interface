@@ -7,7 +7,7 @@ import { ZoomLevel3Resolver } from './zoomLevel3.resolver'
 import { ZoomLevel3Service } from './zoomLevel3.service'
 
 @Module({
-    imports: [ArchivesModule, ObjectsModule, PeopleModule, PublicationsModule],
-    providers: [ZoomLevel3Service, ZoomLevel3Resolver],
+  imports: [ArchivesModule, ObjectsModule, PeopleModule, PublicationsModule],
+  providers: [ZoomLevel3Service, ZoomLevel3Resolver],
 })
 export class ZoomLevel3Module {}

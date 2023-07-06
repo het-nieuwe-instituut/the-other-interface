@@ -6,8 +6,8 @@ import { UtilController } from './util.controller'
 
 @Global()
 @Module({
-    providers: [DateScalar, SlackService, RollbarService],
-    exports: [SlackService, RollbarService],
-    controllers: [UtilController],
+  providers: [DateScalar, SlackService, RollbarService],
+  exports: [SlackService, RollbarService],
+  controllers: [UtilController],
 })
 export class UtilModule {}

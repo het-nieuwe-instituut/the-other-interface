@@ -4,8 +4,8 @@ import { ArchivesFondsCreatorResolver, ArchivesOtherResolver } from './archives.
 import { ArchivesService } from './archives.service'
 
 @Module({
-    imports: [forwardRef(() => ZoomLevel5Module)],
-    providers: [ArchivesService, ArchivesOtherResolver, ArchivesFondsCreatorResolver],
-    exports: [ArchivesService, ArchivesOtherResolver, ArchivesFondsCreatorResolver],
+  imports: [forwardRef(() => ZoomLevel5Module)],
+  providers: [ArchivesService, ArchivesOtherResolver, ArchivesFondsCreatorResolver],
+  exports: [ArchivesService, ArchivesOtherResolver, ArchivesFondsCreatorResolver],
 })
 export class ArchivesModule {}

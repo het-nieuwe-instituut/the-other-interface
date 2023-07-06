@@ -7,27 +7,27 @@ registerEnumType(Enum_Componentmodulescarousel_Type, { name: 'Enum_Componentmodu
 
 @ObjectType()
 export class ComponentModulesCarousel {
-    @Field(() => ID)
-    public id: string
+  @Field(() => ID)
+  public id: string
 
-    @Field(() => ComponentCoreModuleLayouts)
-    public carouselModuleLayout: ComponentCoreModuleLayouts
+  @Field(() => ComponentCoreModuleLayouts)
+  public carouselModuleLayout: ComponentCoreModuleLayouts
 
-    @Field({ nullable: true })
-    public buttonText?: string
+  @Field({ nullable: true })
+  public buttonText?: string
 
-    @Field({ nullable: true })
-    public buttonUrl?: string
+  @Field({ nullable: true })
+  public buttonUrl?: string
 
-    @Field({ nullable: true })
-    public description?: string
+  @Field({ nullable: true })
+  public description?: string
 
-    @Field(() => [ComponentCoreCarouselItem], { nullable: true })
-    public items?: ComponentCoreCarouselItem[]
+  @Field(() => [ComponentCoreCarouselItem], { nullable: true })
+  public items?: ComponentCoreCarouselItem[]
 
-    @Field({ nullable: true })
-    public title?: string
+  @Field({ nullable: true })
+  public title?: string
 
-    @Field(() => Enum_Componentmodulescarousel_Type, { nullable: true })
-    public type?: Enum_Componentmodulescarousel_Type
+  @Field(() => Enum_Componentmodulescarousel_Type, { nullable: true })
+  public type?: Enum_Componentmodulescarousel_Type
 }

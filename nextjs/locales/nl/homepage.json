@@ -1,9 +1,9 @@
 {
-    "nationalCollectionForDutchArchitectureAndUrbanPlanning": "Rijkscollectie voor Nederlandse Architectuur en Stedenbouw",
-    "stories": "Stories",
-    "archiveItems": "{{count}} Archiefbestanddelen",
-    "archives": "{{count}} Archieven",
-    "objects": "Objecten",
-    "people": "Personen/Instellingen",
-    "publications": "Publicaties"
+  "nationalCollectionForDutchArchitectureAndUrbanPlanning": "Rijkscollectie voor Nederlandse Architectuur en Stedenbouw",
+  "stories": "Stories",
+  "archiveItems": "{{count}} Archiefbestanddelen",
+  "archives": "{{count}} Archieven",
+  "objects": "Objecten",
+  "people": "Personen/Instellingen",
+  "publications": "Publicaties"
 }

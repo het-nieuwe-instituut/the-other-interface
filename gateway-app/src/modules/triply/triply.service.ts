@@ -35,95 +35,98 @@ export type KeysToVerify<T> = Record<keyof T, true>
 
 @Injectable()
 export class TriplyService {
-    private readonly endpointBaseURL: string
-    private readonly apiKey: string
-    private readonly baseQueryPath: string
+  private readonly endpointBaseURL: string
+  private readonly apiKey: string
+  private readonly baseQueryPath: string
 
-    public constructor(
-        configService: ConfigService,
-        private readonly httpService: HttpService,
-        private readonly rollbarService: RollbarService
-    ) {
-        this.endpointBaseURL = configService.getOrThrow('TRIPLI_API_BASEURL')
-        this.apiKey = configService.getOrThrow('TRIPLY_API_KEY')
-        this.baseQueryPath =
-            configService.getOrThrow('ENV') === 'development'
-                ? '/queries/the-other-interface-acceptance'
-                : '/queries/the-other-interface'
+  public constructor(
+    configService: ConfigService,
+    private readonly httpService: HttpService,
+    private readonly rollbarService: RollbarService
+  ) {
+    this.endpointBaseURL = configService.getOrThrow('TRIPLI_API_BASEURL')
+    this.apiKey = configService.getOrThrow('TRIPLY_API_KEY')
+    this.baseQueryPath =
+      configService.getOrThrow('ENV') === 'development'
+        ? '/queries/the-other-interface-acceptance'
+        : '/queries/the-other-interface'
+  }
+
+  private defaultPage = '1'
+  private defaultPageSize = '16'
+
+  public async queryTriplyData<ReturnDataType>(
+    endpointArg: string,
+    keysToVerify: KeysToVerify<ReturnDataType>,
+    paginationArgs?: PaginationArgs,
+    searchParams?: Record<string, string>
+  ) {
+    const endpoint = this.getEndpointForArg(endpointArg)
+
+    if (paginationArgs) {
+      endpoint.searchParams.append(
+        'page',
+        paginationArgs.page ? paginationArgs.page.toString() : this.defaultPage
+      )
+      endpoint.searchParams.append(
+        'pageSize',
+        paginationArgs.pageSize ? paginationArgs.pageSize.toString() : this.defaultPageSize
+      )
     }
 
-    private defaultPage = '1'
-    private defaultPageSize = '16'
-
-    public async queryTriplyData<ReturnDataType>(
-        endpointArg: string,
-        keysToVerify: KeysToVerify<ReturnDataType>,
-        paginationArgs?: PaginationArgs,
-        searchParams?: Record<string, string>
-    ) {
-        const endpoint = this.getEndpointForArg(endpointArg)
-
-        if (paginationArgs) {
-            endpoint.searchParams.append(
-                'page',
-                paginationArgs.page ? paginationArgs.page.toString() : this.defaultPage
-            )
-            endpoint.searchParams.append(
-                'pageSize',
-                paginationArgs.pageSize ? paginationArgs.pageSize.toString() : this.defaultPageSize
-            )
-        }
-
-        if (searchParams) {
-            for (const [key, value] of Object.entries(searchParams)) {
-                endpoint.searchParams.append(key, value)
-            }
-        }
-
-        const res = await this.fetch<ReturnDataType>(endpoint)
-        this.checkResponseType(res.data, keysToVerify)
-
-        return res
+    if (searchParams) {
+      for (const [key, value] of Object.entries(searchParams)) {
+        endpoint.searchParams.append(key, value)
+      }
     }
 
-    private fetch<ReturnDataType>(endpoint: URL) {
-        const headers = { Authorization: `Bearer ${this.apiKey}` }
-        const res = this.httpService.get<ReturnDataType[]>(endpoint.toString(), { headers })
+    const res = await this.fetch<ReturnDataType>(endpoint)
+    this.checkResponseType(res.data, keysToVerify)
 
-        return lastValueFrom(res)
+    return res
+  }
+
+  private fetch<ReturnDataType>(endpoint: URL) {
+    const headers = { Authorization: `Bearer ${this.apiKey}` }
+    const res = this.httpService.get<ReturnDataType[]>(endpoint.toString(), { headers })
+
+    return lastValueFrom(res)
+  }
+
+  private getEndpointForArg(endpointArg: string) {
+    if (endpointArg.startsWith('https://')) {
+      return new URL(endpointArg)
     }
 
-    private getEndpointForArg(endpointArg: string) {
-        if (endpointArg.startsWith('https://')) {
-            return new URL(endpointArg)
-        }
+    const endpointSuffix = endpointArg.startsWith('/') ? endpointArg : `/${endpointArg}`
 
-        const endpointSuffix = endpointArg.startsWith('/') ? endpointArg : `/${endpointArg}`
+    return new URL(`${this.endpointBaseURL}${this.baseQueryPath}${endpointSuffix}`)
+  }
 
-        return new URL(`${this.endpointBaseURL}${this.baseQueryPath}${endpointSuffix}`)
+  private checkResponseType<ReturnDataType>(
+    responseData: unknown,
+    keysToVerify: KeysToVerify<ReturnDataType>
+  ) {
+    if (!responseData || !Array.isArray(responseData) || !responseData.length) {
+      return
     }
 
-    private checkResponseType<ReturnDataType>(responseData: unknown, keysToVerify: KeysToVerify<ReturnDataType>) {
-        if (!responseData || !Array.isArray(responseData) || !responseData.length) {
-            return
+    try {
+      const expectedKeys = Object.keys(keysToVerify)
+      const receivedKeys = Object.keys(responseData[0])
+
+      expectedKeys.forEach(k => {
+        if (!receivedKeys.includes(k)) {
+          const message = `"${k}" is not returned in ${JSON.stringify(receivedKeys)}`
+
+          this.rollbarService.logError(message)
         }
-
-        try {
-            const expectedKeys = Object.keys(keysToVerify)
-            const receivedKeys = Object.keys(responseData[0])
-
-            expectedKeys.forEach(k => {
-                if (!receivedKeys.includes(k)) {
-                    const message = `"${k}" is not returned in ${JSON.stringify(receivedKeys)}`
-
-                    this.rollbarService.logError(message)
-                }
-            })
-        } catch (err) {
-            const message = `Unable to test keys ${JSON.stringify(keysToVerify)} in response ${JSON.stringify(
-                responseData
-            )}`
-            this.rollbarService.logError(message)
-        }
+      })
+    } catch (err) {
+      const message = `Unable to test keys ${JSON.stringify(
+        keysToVerify
+      )} in response ${JSON.stringify(responseData)}`
+      this.rollbarService.logError(message)
     }
+  }
 }

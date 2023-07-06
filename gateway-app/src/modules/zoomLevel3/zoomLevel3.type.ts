@@ -6,30 +6,30 @@ import { PublicationsZoomLevel3Ids } from '../publications/publications.service'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 
 export type ZoomLevel3IdType =
-    | ArchivesZoomLevel3Ids
-    | ObjectsZoomLevel3Ids
-    | PeopleZoomLevel3Ids
-    | PublicationsZoomLevel3Ids
+  | ArchivesZoomLevel3Ids
+  | ObjectsZoomLevel3Ids
+  | PeopleZoomLevel3Ids
+  | PublicationsZoomLevel3Ids
 @ArgsType()
 export class ZoomLevel3Args {
-    @Field(() => EntityNames, { nullable: false })
-    public entityName: EntityNames
+  @Field(() => EntityNames, { nullable: false })
+  public entityName: EntityNames
 
-    @Field(() => String, { nullable: false })
-    public filterId: ZoomLevel3IdType
+  @Field(() => String, { nullable: false })
+  public filterId: ZoomLevel3IdType
 }
 
 @ObjectType()
 export class ZoomLevel3Type {
-    @Field(() => String, { nullable: true })
-    public uri: string | null
+  @Field(() => String, { nullable: true })
+  public uri: string | null
 
-    @Field(() => String, { nullable: true })
-    public name: string | null
+  @Field(() => String, { nullable: true })
+  public name: string | null
 
-    @Field(() => Int, { nullable: true })
-    public count: number | null
+  @Field(() => Int, { nullable: true })
+  public count: number | null
 
-    @Field(() => Int, { nullable: true })
-    public total: number | null
+  @Field(() => Int, { nullable: true })
+  public total: number | null
 }
