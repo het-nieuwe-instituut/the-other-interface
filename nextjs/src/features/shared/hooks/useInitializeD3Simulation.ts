@@ -2,8 +2,8 @@ import * as d3 from 'd3'
 import { SimulationNodeDatum } from 'd3'
 import { useEffect, useRef } from 'react'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function useInitializeD3Simulation<D3CollectionItem extends SimulationNodeDatum>(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   deps?: any[]
 ) {
   const simulation = useRef<d3.Simulation<D3CollectionItem, undefined> | null>(null)

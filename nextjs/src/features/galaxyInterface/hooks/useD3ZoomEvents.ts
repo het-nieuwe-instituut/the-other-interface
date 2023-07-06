@@ -565,8 +565,8 @@ async function scaleZoom(options: D3AnimationStyleProps) {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function transitionUtilityFn(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   d3Ref: d3.Selection<any, unknown, null, undefined>,
   to: AnimatedProps
 ) {
