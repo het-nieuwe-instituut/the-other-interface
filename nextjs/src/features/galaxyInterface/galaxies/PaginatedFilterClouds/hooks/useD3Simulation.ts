@@ -7,7 +7,7 @@ import { Dimensions } from '../../../types/galaxy'
 import { D3CollectionItem, D3CollisionData, initializeD3 } from '../d3/simulation'
 
 const collisionData = [{ id: 'collision' }]
-export type CollisionData = (typeof collisionData)[0]
+export type CollisionData = typeof collisionData[0]
 
 export function useD3Simulation(
   dimensions: Dimensions,

@@ -9,7 +9,7 @@ import { getId } from '../usePresenter'
 
 const collisionData = [{ id: 'collision' }]
 const collision = 120
-type CollisionData = (typeof collisionData)[0]
+type CollisionData = typeof collisionData[0]
 
 export interface D3CollectionItem extends SimulationNodeDatum, PaginatedFilterType, CollisionData {}
 export interface D3CollisionData extends SimulationNodeDatum, CollisionData {}
