@@ -48,7 +48,7 @@ export function usePresenter(props: Props) {
             activeZoom: ZoomStates.Zoom1ToZoom1Stories,
           })
         ),
-      handleZoomToZoom2: (item: typeof cloudDataWithSelector[0]) =>
+      handleZoomToZoom2: (item: (typeof cloudDataWithSelector)[0]) =>
         dispatch(
           galaxyInterfaceActions.setActiveZoom({
             activeZoom: ZoomStates.Zoom1ToZoom2,

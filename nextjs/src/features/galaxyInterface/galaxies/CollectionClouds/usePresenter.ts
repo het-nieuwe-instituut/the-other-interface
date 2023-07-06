@@ -33,7 +33,7 @@ export function usePresenter(props: Props) {
 
   return {
     events: {
-      zoomToZoom5: (event: MouseEvent, item: typeof dataCopy[0]) => {
+      zoomToZoom5: (event: MouseEvent, item: (typeof dataCopy)[0]) => {
         const splittedUrl = item.record.split('/')
         const id = splittedUrl[splittedUrl.length - 1]
         const typeFromRecord = splittedUrl[splittedUrl.length - 2]

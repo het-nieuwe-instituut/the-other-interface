@@ -27,7 +27,7 @@ export function usePresenter(props: Props) {
   return {
     ...props,
     events: {
-      handleZoomToZoom3: (item: typeof clonedFilterData[0]) =>
+      handleZoomToZoom3: (item: (typeof clonedFilterData)[0]) =>
         zoomByD3Data({
           dimensions,
           dispatch,

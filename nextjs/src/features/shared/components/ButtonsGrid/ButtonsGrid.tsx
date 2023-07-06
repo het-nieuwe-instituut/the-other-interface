@@ -94,7 +94,7 @@ interface GridButtonProps {
   button: ButtonType
   index: number
   array: Maybe<ButtonType>[]
-  config: typeof buttonConfig['Default'] | typeof buttonConfig['Large']
+  config: (typeof buttonConfig)['Default'] | (typeof buttonConfig)['Large']
   buttonLayoutStyle?: CSSProperties
 }
 const GridButton: React.FC<GridButtonProps> = ({
