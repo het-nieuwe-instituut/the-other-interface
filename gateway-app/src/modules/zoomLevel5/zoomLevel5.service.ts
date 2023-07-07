@@ -16,7 +16,7 @@ import { ZoomLevel5RelatedObjectsArgs, ZoomLevel5RelationsType } from './zoomLev
 import { CustomError } from '../util/customError'
 
 interface ZoomLevel5RelationData {
-  originalEntity: string | null
+  label: string | null
   graph: string // sample graph i.e. https://collectiedata.hetnieuweinstituut.nl/graph/people
   count: string // number
 
@@ -35,7 +35,7 @@ interface ZoomLevel5RelationData {
   sample_extern_2_label: string | null
 }
 const zoomLevel5RelationDataKeys: KeysToVerify<ZoomLevel5RelationData> = {
-  originalEntity: true,
+  label: true,
   graph: true,
   count: true,
   sample: true,
@@ -286,7 +286,7 @@ export class ZoomLevel5Service {
     return {
       id,
       type,
-      label: data.length ? data[0].originalEntity || '' : '',
+      label: data.length ? data[0].label || '' : '',
       relations: formattedData,
     }
   }
