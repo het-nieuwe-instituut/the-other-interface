@@ -48,20 +48,21 @@ async function getLabel(args: GetLabelParams): Promise<string> {
   }
 }
 
-function getLabelFromTriplyData(triplyData, type): string {
-  let label
+function getLabelFromType(triplyData, type): string {
   switch (type) {
     case 'Archive':
-      label = triplyData.objectNumber
     case 'Object':
-      label = triplyData.objectNumber
-    case 'People':
-      label = triplyData.name
     case 'Publication':
-      label = triplyData.title
-    case 'Media':
-    // not yet implemented
+      return `${triplyData.objectNumber} ${triplyData.title}`
+    case 'People':
+      return triplyData.name
+    default:
+      return '-'
   }
+}
+
+function getLabelFromTriplyData(triplyData, type): string {
+  let label = getLabelFromType(triplyData, type)
 
   label = label?.trim() || '-'
 
