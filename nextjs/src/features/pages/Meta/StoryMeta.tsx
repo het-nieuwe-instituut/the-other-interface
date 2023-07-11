@@ -24,8 +24,12 @@ interface Props {
 export const StoryMeta: React.FC<Props> = ({ story }) => {
   const commonT = useTypeSafeTranslation('common')
   const storiesT = useTypeSafeTranslation('stories')
+
   const linkedPeopleRecords = story?.attributes?.triplyRecords?.data.filter(
-    d => d.attributes?.type === EnumTriplyrecordType.People && !!d.attributes.recordId
+    d =>
+      d.attributes?.type === EnumTriplyrecordType.People &&
+      !!d.attributes.recordId &&
+      !!d.attributes?.people?.name
   )
 
   return (
@@ -78,7 +82,7 @@ export const StoryMeta: React.FC<Props> = ({ story }) => {
             {capitalizeFirstLetter(storiesT.t('people'))}
           </Text>
 
-          <Box display={'flex'} flexDirection={'row'}>
+          <Box display={'flex'} flexDirection={'row'} flexWrap={'wrap'} gap={'2px'}>
             {linkedPeopleRecords.map((people, index, array) => {
               const hasItemAfter = array.length - 1 !== index
               return (
