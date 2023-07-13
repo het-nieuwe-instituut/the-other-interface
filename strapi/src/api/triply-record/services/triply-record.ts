@@ -52,7 +52,10 @@ async function getLabel(args: GetLabelParams): Promise<string> {
 
 function getLabelFromType(triplyData, type): string {
   switch (type) {
-    case 'Archive':
+    case 'Archive': {
+      const title = triplyData.type === 'fonds' ? triplyData.recordTitle : triplyData.title
+      return `${triplyData.objectNumber || DEFAULT_LABEL} ${title || DEFAULT_LABEL}`
+    }
     case 'Object':
     case 'Publication':
       return `${triplyData.objectNumber || DEFAULT_LABEL} ${triplyData.title || DEFAULT_LABEL}`
