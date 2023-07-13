@@ -9,6 +9,8 @@ export type TriplyRecordService = Service & {
   getLabel: (params: GetLabelParams) => Promise<string>
 }
 
+const DEFAULT_LABEL = '-'
+
 export interface GetLabelParams {
   recordId: string
   type: string
@@ -48,22 +50,26 @@ async function getLabel(args: GetLabelParams): Promise<string> {
   }
 }
 
-function getLabelFromTriplyData(triplyData, type): string {
-  let label
+function getLabelFromType(triplyData, type): string {
   switch (type) {
-    case 'Archive':
-      label = triplyData.objectNumber
+    case 'Archive': {
+      const title = triplyData.type === 'fonds' ? triplyData.recordTitle : triplyData.title
+      return `${triplyData.objectNumber || DEFAULT_LABEL} ${title || DEFAULT_LABEL}`
+    }
     case 'Object':
-      label = triplyData.objectNumber
-    case 'People':
-      label = triplyData.name
     case 'Publication':
-      label = triplyData.title
-    case 'Media':
-    // not yet implemented
+      return `${triplyData.objectNumber || DEFAULT_LABEL} ${triplyData.title || DEFAULT_LABEL}`
+    case 'People':
+      return triplyData.name
+    default:
+      return DEFAULT_LABEL
   }
+}
 
-  label = label?.trim() || '-'
+function getLabelFromTriplyData(triplyData, type): string {
+  let label = getLabelFromType(triplyData, type)
+
+  label = label?.trim() || DEFAULT_LABEL
 
   if (label.length > 200) {
     return label.slice(0, 200) + '...'
