@@ -1,3 +1,10 @@
+const sharedPlugins = {
+  'ni-toi-preview-link': {
+    enabled: true,
+    resolve: './src/plugins/ni-toi-preview-link',
+  },
+}
+
 export default ({ env }) => {
   // Only enable S3 storage on live environments (staging/acceptance/production)
   if (env('NODE_ENV') === 'production') {
@@ -20,8 +27,11 @@ export default ({ env }) => {
           },
         },
       },
+      ...sharedPlugins,
     }
   }
 
-  return {}
+  return {
+    ...sharedPlugins,
+  }
 }
