@@ -1,5 +1,8 @@
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { getTriplyRecordPathForTypeAndId } from '@/features/shared/utils/links'
+import {
+  getPeoplePathForTriplyRecordId,
+  getTriplyRecordPathForTypeAndId,
+} from '@/features/shared/utils/links'
 import ExternalLink from '@/icons/arrows/external-link.svg'
 import { Link, Box, Text, Button } from '@chakra-ui/react'
 import { TranslationKeys } from 'locales/locales'
@@ -204,7 +207,7 @@ export const RecordMeta: React.FC<Props> = ({ attributes }) => {
     }
 
     return makers.map((m, i) =>
-      renderListItem(i, renderTextLink(`/landingpage/people/${m.id}-people`, m.makerLabel))
+      renderListItem(i, renderTextLink(getPeoplePathForTriplyRecordId(m.id), m.makerLabel))
     )
   }
 
@@ -322,7 +325,7 @@ export const RecordMeta: React.FC<Props> = ({ attributes }) => {
     }
 
     return attributes.creators.map((c, i) =>
-      renderListItem(i, renderTextLink(`/landingpage/people/${c.id}-people`, c.creatorLabel))
+      renderListItem(i, renderTextLink(getPeoplePathForTriplyRecordId(c.id), c.creatorLabel))
     )
   }
 
@@ -334,7 +337,7 @@ export const RecordMeta: React.FC<Props> = ({ attributes }) => {
     }
 
     return attributes.authors.map((a, i) =>
-      renderListItem(i, renderTextLink(`/landingpage/people/${a.id}-people`, a.authorLabel))
+      renderListItem(i, renderTextLink(getPeoplePathForTriplyRecordId(a.id), a.authorLabel))
     )
   }
 
