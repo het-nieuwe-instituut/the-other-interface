@@ -3,8 +3,8 @@
  * Initializer
  *
  */
-
 import React, { useEffect, useRef } from 'react'
+
 import pluginId from '../../pluginId'
 
 type InitializerProps = {

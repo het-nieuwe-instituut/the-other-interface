@@ -3,8 +3,8 @@
  * HomePage
  *
  */
-
 import React from 'react'
+
 import pluginId from '../../pluginId'
 
 const HomePage: React.VoidFunctionComponent = () => {
