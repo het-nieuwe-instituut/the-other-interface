@@ -3,9 +3,9 @@
  * HomePage
  *
  */
+import React from 'react'
 
-import React from 'react';
-import pluginId from '../../pluginId';
+import pluginId from '../../pluginId'
 
 const HomePage: React.VoidFunctionComponent = () => {
   return (
@@ -13,7 +13,7 @@ const HomePage: React.VoidFunctionComponent = () => {
       <h1>{pluginId}&apos;s HomePage</h1>
       <p>Happy coding</p>
     </div>
-  );
-};
+  )
+}
 
-export default HomePage;
+export default HomePage

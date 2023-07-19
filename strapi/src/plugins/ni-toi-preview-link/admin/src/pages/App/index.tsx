@@ -4,12 +4,12 @@
  * contain code that should be seen on all pages. (e.g. navigation bar)
  *
  */
+import { NotFound } from '@strapi/helper-plugin'
+import React from 'react'
+import { Switch, Route } from 'react-router-dom'
 
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-import { NotFound } from '@strapi/helper-plugin';
-import pluginId from '../../pluginId';
-import HomePage from '../HomePage';
+import pluginId from '../../pluginId'
+import HomePage from '../HomePage'
 
 const App: React.VoidFunctionComponent = () => {
   return (
@@ -19,7 +19,7 @@ const App: React.VoidFunctionComponent = () => {
         <Route component={NotFound} />
       </Switch>
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App
