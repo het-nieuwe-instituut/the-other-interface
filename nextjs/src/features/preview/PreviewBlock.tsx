@@ -18,6 +18,7 @@ export const PreviewBlock = () => {
         background: 'white',
         display: 'flex',
         flexDirection: 'row',
+        color: 'black',
       }}
     >
       <div
@@ -30,7 +31,13 @@ export const PreviewBlock = () => {
       </div>
       <div>
         <p>You are currently viewing in Preview Mode. </p>
-        <button tabIndex={0} onClick={() => exitPreviewMode()} onKeyDown={() => exitPreviewMode()}>
+        <button
+          tabIndex={0}
+          onClick={() => exitPreviewMode()}
+          onKeyDown={() => exitPreviewMode()}
+          onMouseEnter={e => (e.currentTarget.style.color = 'blue ')}
+          onMouseLeave={e => (e.currentTarget.style.color = 'black')}
+        >
           Turn Off Preview Mode
         </button>
       </div>

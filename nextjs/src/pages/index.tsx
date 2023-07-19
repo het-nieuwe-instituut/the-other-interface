@@ -2,7 +2,7 @@ import { ZoomStates } from '@/features/galaxyInterface/types/galaxy'
 import ApiClient from '@/features/graphql/api'
 import { HomepageContainer } from '@/features/pages/containers/HomepageContainer/HomepageContainer'
 import { prepareReduxState } from '@/features/shared/configs/store'
-import { PublicationState } from '@/features/shared/types/enums'
+import { getPublicationState } from '@/features/shared/utils/publication-state'
 import { GetServerSidePropsContext } from 'next'
 
 const Home = (props: Awaited<ReturnType<typeof getServerSideProps>>['props']) => {
@@ -12,10 +12,7 @@ const Home = (props: Awaited<ReturnType<typeof getServerSideProps>>['props']) =>
 export default Home
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
-  const publicationState =
-    context.preview == false || context.preview == null
-      ? PublicationState.Live
-      : PublicationState.Preview
+  const publicationState = getPublicationState(context.preview)
   const locale = context.locale
 
   const [homepage, zoomLevel1Data] = await Promise.all([
@@ -25,7 +22,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
 
   return {
     props: {
-      publicationState: publicationState,
+      publicationState,
       host: context.req.headers.host || null,
       homepage,
       zoomLevel1Data,

@@ -24,6 +24,7 @@ const LandingPagePreviewInputSchema = z.object({
 })
 
 const StoryPreviewinputSchema = z.object({
+  id: z.number(),
   slug: z.string(),
 })
 
@@ -58,7 +59,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
       },
       () => {
         const data = StoryPreviewinputSchema.parse(parsedData)
-        return `/story/${data.slug}`
+        return `/story/${data.id}-${data.slug}?preview=true`
       }
     )
     .with(
@@ -76,7 +77,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
       },
       () => {
         const data = MenupagePreviewinputSchema.parse(parsedData)
-        return `/menupage/${data.slug}`
+        return `/menupage/${data.slug}?preview=true`
       }
     )
     .exhaustive()
