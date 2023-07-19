@@ -14,7 +14,7 @@ const PreviewLink = () => {
       style={{ width: '100%' }}
       href={`${CUSTOM_VARIABLES.CLIENT_FRONTEND_PREVIEW_URL}?secret=${
         CUSTOM_VARIABLES.CLIENT_PREVIEW_SECRET
-      }&data=${JSON.stringify(initialData)}&${collectionTypeSlug}`}
+      }&data=${JSON.stringify(initialData)}&collectionTypeSlug=${collectionTypeSlug}`}
       variant="secondary"
       target="_blank"
       rel="noopener noreferrer"

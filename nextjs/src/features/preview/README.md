@@ -1,0 +1,1 @@
+This folder is responsible for eveything related to the site preview feature

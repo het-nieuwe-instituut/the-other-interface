@@ -1,4 +1,5 @@
 import ErrorBoundaryProvider from '@/features/modules/components/ErrorBoundary/ErrorBoundary'
+import { PreviewBlock } from '@/features/preview/PreviewBlock'
 import DisableScroll from '@/features/shared/components/DisableScroll/DisableScroll'
 import Fonts from '@/features/shared/components/Fonts/Fonts'
 import { Footer } from '@/features/shared/components/Footer/Footer'
@@ -6,6 +7,7 @@ import MobileOverlayProvider from '@/features/shared/components/MobileOverlayPro
 import { NavigationOverlayProvider } from '@/features/shared/components/Navigation/Navigation'
 import { createStore } from '@/features/shared/configs/store'
 import { theme } from '@/features/shared/styles/theme/theme'
+import { PublicationState } from '@/features/shared/types/enums'
 import { ChakraProvider } from '@chakra-ui/react'
 import { ThemeProvider } from '@emotion/react'
 import 'keen-slider/keen-slider.min.css'
@@ -20,6 +22,8 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
+      {'publicationState' in pageProps &&
+        pageProps.publicationState === PublicationState.Preview && <PreviewBlock />}
       {process.env.parsed.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
         <>
           <Script
