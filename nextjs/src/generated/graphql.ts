@@ -1774,6 +1774,7 @@ export type LandingpageBySlugQuery = { __typename?: 'Query', landingpages: { __t
 export type MenupageBySlugQueryVariables = Exact<{
   locale?: InputMaybe<Scalars['String']>;
   slug: Scalars['String'];
+  publicationState?: InputMaybe<Scalars['String']>;
 }>;
 
 
@@ -2554,8 +2555,12 @@ ${ButtonsModuleFragmentFragmentDoc}
 ${SubtitleModuleFragmentFragmentDoc}
 ${GridModuleFragmentFragmentDoc}`;
 export const MenupageBySlugDocument = gql`
-    query menupageBySlug($locale: String, $slug: String!) {
-  menupages(locale: $locale, filters: {slug: {eq: $slug}}) {
+    query menupageBySlug($locale: String, $slug: String!, $publicationState: String = "LIVE") {
+  menupages(
+    locale: $locale
+    filters: {slug: {eq: $slug}}
+    publicationState: $publicationState
+  ) {
     data {
       id
       attributes {

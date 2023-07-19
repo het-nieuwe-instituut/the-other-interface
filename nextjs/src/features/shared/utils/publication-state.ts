@@ -1,7 +1,7 @@
 import { PublicationState } from '../types/enums'
 
 export const getPublicationState = (isPreview?: boolean | null) => {
-  if (!isPreview) return PublicationState.Live
+  if (isPreview === true) return PublicationState.Preview
 
-  return PublicationState.Preview
+  return PublicationState.Live
 }

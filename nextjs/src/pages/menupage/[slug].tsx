@@ -18,7 +18,10 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   const slug = queryParams.slug
   const publicationState = getPublicationState(context.preview)
 
-  const menupage = await ApiClient?.menupageBySlug({ slug })
+  const menupage = await ApiClient?.menupageBySlug({
+    slug,
+    publicationState: publicationState as string,
+  })
 
   return {
     props: {
