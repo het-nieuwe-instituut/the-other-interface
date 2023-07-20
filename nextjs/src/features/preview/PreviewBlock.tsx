@@ -2,6 +2,7 @@ import Router from 'next/router'
 
 export const PreviewBlock = () => {
   // using style prop here because chakra / emotionCSS providers are not available here
+
   return (
     <div
       style={{
@@ -14,7 +15,7 @@ export const PreviewBlock = () => {
         top: 0,
         left: 0,
         right: 0,
-        zIndex: 1000,
+        zIndex: 11000,
         background: 'white',
         display: 'flex',
         flexDirection: 'row',

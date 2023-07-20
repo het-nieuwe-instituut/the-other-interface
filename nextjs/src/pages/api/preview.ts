@@ -32,10 +32,6 @@ const MenupagePreviewinputSchema = z.object({
   slug: z.string(),
 })
 
-// const HomepagePreviewInputSchema = z.object({
-//   slug: z.string(),
-// })
-
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   console.log(req.query)
   const queryParams = QueryParams.parse(req.query)
@@ -67,8 +63,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
         collectionTypeSlug: supportedCollectionType.Enum['api::homepage.homepage'],
       },
       () => {
-        // const data = HomepagePreviewInputSchema.parse(parsedData)
-        return `/`
+        return `/?preview=true`
       }
     )
     .with(
