@@ -6,6 +6,8 @@ type Data = {
   message: string
 }
 
+type UrlPath = `/${string}`
+
 const supportedCollectionType = z.enum([
   'api::landingpage.landingpage',
   'api::story.story',
@@ -39,7 +41,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
     return res.status(401).json({ message: 'Invalid token' })
   }
 
-  let url: `/${string}`
+  let url: UrlPath
 
   switch (collectionTypeSlug) {
     case supportedCollectionType.Enum['api::landingpage.landingpage']:
