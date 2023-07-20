@@ -21,7 +21,7 @@ const nextConfig = {
   },
   images: {
     domains: [
-      'hni-toi-staging-api.lifely.nl',
+      'hni-toi-test-api.lifely.nl',
       'localhost',
       'hni-toi-staging.s3.eu-central-1.amazonaws.com',
       'hni-toi-acceptance.s3.eu-central-1.amazonaws.com',
