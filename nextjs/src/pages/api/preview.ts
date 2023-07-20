@@ -46,7 +46,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
       { collectionTypeSlug: supportedCollectionType.Enum['api::landingpage.landingpage'] },
       () => {
         const data = LandingPagePreviewInputSchema.parse(parsedData)
-        return `/landingpage/${data.slug}?preview=true`
+        return `/landingpage/${data.slug}`
       }
     )
     .with(
@@ -55,7 +55,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
       },
       () => {
         const data = StoryPreviewinputSchema.parse(parsedData)
-        return `/story/${data.id}-${data.slug}?preview=true`
+        return `/story/${data.id}-${data.slug}`
       }
     )
     .with(
@@ -63,7 +63,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
         collectionTypeSlug: supportedCollectionType.Enum['api::homepage.homepage'],
       },
       () => {
-        return `/?preview=true`
+        return `/`
       }
     )
     .with(
@@ -72,7 +72,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
       },
       () => {
         const data = MenupagePreviewinputSchema.parse(parsedData)
-        return `/menupage/${data.slug}?preview=true`
+        return `/menupage/${data.slug}`
       }
     )
     .exhaustive()

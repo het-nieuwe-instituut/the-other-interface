@@ -2669,6 +2669,7 @@ export type HomepageQuery = {
 export type LandingpageBySlugQueryVariables = Exact<{
   locale?: InputMaybe<Scalars['String']>
   slug: Scalars['String']
+  publicationState?: InputMaybe<Scalars['String']>
 }>
 
 export type LandingpageBySlugQuery = {
@@ -5345,8 +5346,12 @@ export const HomepageDocument = gql`
   ${GridModuleFragmentFragmentDoc}
 `
 export const LandingpageBySlugDocument = gql`
-  query landingpageBySlug($locale: String, $slug: String!) {
-    landingpages(locale: $locale, filters: { slug: { eq: $slug } }) {
+  query landingpageBySlug($locale: String, $slug: String!, $publicationState: String = "LIVE") {
+    landingpages(
+      locale: $locale
+      filters: { slug: { eq: $slug } }
+      publicationState: $publicationState
+    ) {
       data {
         id
         attributes {
