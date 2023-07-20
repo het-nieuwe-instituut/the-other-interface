@@ -39,7 +39,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
     return res.status(401).json({ message: 'Invalid token' })
   }
 
-  let url: string
+  let url: `/${string}`
 
   switch (collectionTypeSlug) {
     case supportedCollectionType.Enum['api::landingpage.landingpage']:
