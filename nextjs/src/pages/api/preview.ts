@@ -33,7 +33,6 @@ const MenupagePreviewinputSchema = z.object({
 })
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
-  console.log(req.query)
   const queryParams = QueryParams.parse(req.query)
   const parsedData = JSON.parse(queryParams.data) as unknown
 
