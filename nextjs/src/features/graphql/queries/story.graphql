@@ -8,8 +8,8 @@
 #import '../fragments/components/GridModule.fragment.graphql'
 #import '../fragments/components/core/baseTriplyRecord.fragment.graphql'
 
-query storyBySlug($locale: String, $slug: String!) {
-    stories(locale: $locale, filters: { slug: { eq: $slug } }) {
+query storyBySlug($locale: String, $slug: String!, $publicationState: String = "LIVE") {
+  stories(locale: $locale, filters: { slug: { eq: $slug } }, publicationState: $publicationState) {
         data {
             id
             __typename

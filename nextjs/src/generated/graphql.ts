@@ -1,7 +1,6 @@
 import { GraphQLClient } from 'graphql-request'
 import * as Dom from 'graphql-request/dist/types.dom'
 import gql from 'graphql-tag'
-
 export type Maybe<T> = T | null
 export type InputMaybe<T> = Maybe<T>
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] }
@@ -2215,6 +2214,7 @@ export type Zoom5RelationsFragmentFragment = {
 
 export type HomepageQueryVariables = Exact<{
   locale?: InputMaybe<Scalars['String']>
+  publicationState?: InputMaybe<Scalars['String']>
 }>
 
 export type HomepageQuery = {
@@ -2669,6 +2669,7 @@ export type HomepageQuery = {
 export type LandingpageBySlugQueryVariables = Exact<{
   locale?: InputMaybe<Scalars['String']>
   slug: Scalars['String']
+  publicationState?: InputMaybe<Scalars['String']>
 }>
 
 export type LandingpageBySlugQuery = {
@@ -3123,6 +3124,7 @@ export type LandingpageBySlugQuery = {
 export type MenupageBySlugQueryVariables = Exact<{
   locale?: InputMaybe<Scalars['String']>
   slug: Scalars['String']
+  publicationState?: InputMaybe<Scalars['String']>
 }>
 
 export type MenupageBySlugQuery = {
@@ -3535,6 +3537,7 @@ export type StoriesWithoutRelationsQuery = {
 export type StoryBySlugQueryVariables = Exact<{
   locale?: InputMaybe<Scalars['String']>
   slug: Scalars['String']
+  publicationState?: InputMaybe<Scalars['String']>
 }>
 
 export type StoryBySlugQuery = {
@@ -5288,8 +5291,8 @@ export const Zoom5RelationsFragmentFragmentDoc = gql`
   }
 `
 export const HomepageDocument = gql`
-  query homepage($locale: String) {
-    homepage(locale: $locale) {
+  query homepage($locale: String, $publicationState: String = "LIVE") {
+    homepage(locale: $locale, publicationState: $publicationState) {
       data {
         id
         attributes {
@@ -5343,8 +5346,12 @@ export const HomepageDocument = gql`
   ${GridModuleFragmentFragmentDoc}
 `
 export const LandingpageBySlugDocument = gql`
-  query landingpageBySlug($locale: String, $slug: String!) {
-    landingpages(locale: $locale, filters: { slug: { eq: $slug } }) {
+  query landingpageBySlug($locale: String, $slug: String!, $publicationState: String = "LIVE") {
+    landingpages(
+      locale: $locale
+      filters: { slug: { eq: $slug } }
+      publicationState: $publicationState
+    ) {
       data {
         id
         attributes {
@@ -5398,8 +5405,12 @@ export const LandingpageBySlugDocument = gql`
   ${GridModuleFragmentFragmentDoc}
 `
 export const MenupageBySlugDocument = gql`
-  query menupageBySlug($locale: String, $slug: String!) {
-    menupages(locale: $locale, filters: { slug: { eq: $slug } }) {
+  query menupageBySlug($locale: String, $slug: String!, $publicationState: String = "LIVE") {
+    menupages(
+      locale: $locale
+      filters: { slug: { eq: $slug } }
+      publicationState: $publicationState
+    ) {
       data {
         id
         attributes {
@@ -5535,8 +5546,12 @@ export const StoriesWithoutRelationsDocument = gql`
   }
 `
 export const StoryBySlugDocument = gql`
-  query storyBySlug($locale: String, $slug: String!) {
-    stories(locale: $locale, filters: { slug: { eq: $slug } }) {
+  query storyBySlug($locale: String, $slug: String!, $publicationState: String = "LIVE") {
+    stories(
+      locale: $locale
+      filters: { slug: { eq: $slug } }
+      publicationState: $publicationState
+    ) {
       data {
         id
         __typename

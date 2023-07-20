@@ -13,6 +13,7 @@ import { LandingpageContainer } from '@/features/pages/containers/LandingpageCon
 import { LandingpageProvider } from '@/features/pages/containers/LandingpageContainer/LandingpageContext'
 import { zoom3Query } from '@/features/pages/tasks/zoom3Query.mapper'
 import { prepareReduxState } from '@/features/shared/configs/store'
+import { getPublicationState } from '@/features/shared/utils/publication-state'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 
 import { EntityNames } from 'src/generated/graphql'
@@ -49,6 +50,7 @@ const ZoomMapper: Partial<Record<ZoomStates, ZoomStates>> = {
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
   const { slug, preservedZoom, filter, collection, page } =
     context.query as unknown as LandingPageQueryParams
+  const publicationState = getPublicationState(context.preview)
   const locale = context.locale
   const entityName = TypeToEntityName[slug]
   let zoomLevel2 = null
@@ -83,11 +85,16 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     })
   }
 
-  const landingpage = await ApiClient?.landingpageBySlug({ slug, locale: context?.locale })
+  const landingpage = await ApiClient?.landingpageBySlug({
+    slug,
+    locale: context?.locale,
+    publicationState,
+  })
 
   return {
     props: {
       slug,
+      publicationState,
       landingpage,
       zoomLevel2,
       zoomLevel3,
@@ -95,7 +102,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
       stories,
       reduxState: prepareReduxState({
         galaxyInterface: {
-          activeZoom: ZoomMapper[preservedZoom] ?? preservedZoom,
+          activeZoom: ZoomMapper[preservedZoom] ?? preservedZoom ?? null,
           params: { slug },
         },
       }),

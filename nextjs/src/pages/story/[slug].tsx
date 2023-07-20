@@ -2,6 +2,7 @@ import { ZoomStates } from '@/features/galaxyInterface/types/galaxy'
 import { StoryContainer } from '@/features/pages/containers/StoryContainer/StoryContainer'
 import { getZoom5StoryTask } from '@/features/pages/tasks/getZoom5StoryTask'
 import { prepareReduxState } from '@/features/shared/configs/store'
+import { getPublicationState } from '@/features/shared/utils/publication-state'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 
 export interface StoryQueryParams {
@@ -23,14 +24,16 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   const locale = context.locale ?? 'en'
   const slug = queryParams.slug
   const preservedZoom = queryParams.preservedZoom
+  const publicationState = getPublicationState(context.preview)
 
-  const { story, type } = await getZoom5StoryTask(slug, locale)
+  const { story, type } = await getZoom5StoryTask({ record: slug, locale, publicationState })
   if (!story) {
     return { props: {} }
   }
 
   return {
     props: {
+      publicationState,
       story,
       type,
       reduxState: prepareReduxState({
