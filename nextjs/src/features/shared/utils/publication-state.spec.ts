@@ -1,5 +1,4 @@
 import { PublicationState } from '../types/enums'
-
 import { getPublicationState } from './publication-state'
 
 describe('getPublicationState', () => {
