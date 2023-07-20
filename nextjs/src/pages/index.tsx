@@ -16,7 +16,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   const locale = context.locale
 
   const [homepage, zoomLevel1Data] = await Promise.all([
-    ApiClient?.homepage({ locale, publicationState: publicationState }),
+    ApiClient?.homepage({ locale, publicationState }),
     ApiClient?.zoomLevel1(),
   ])
 

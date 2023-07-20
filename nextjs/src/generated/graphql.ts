@@ -5290,7 +5290,7 @@ export const Zoom5RelationsFragmentFragmentDoc = gql`
   }
 `
 export const HomepageDocument = gql`
-  query homepage($locale: String, $publicationState: String) {
+  query homepage($locale: String, $publicationState: String = "LIVE") {
     homepage(locale: $locale, publicationState: $publicationState) {
       data {
         id

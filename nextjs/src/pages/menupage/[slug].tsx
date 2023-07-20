@@ -20,7 +20,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
 
   const menupage = await ApiClient?.menupageBySlug({
     slug,
-    publicationState: publicationState as string,
+    publicationState: publicationState,
   })
 
   return {
