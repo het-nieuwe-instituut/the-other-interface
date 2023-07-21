@@ -1,8 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from 'next'
-import { z } from 'zod'
 import { ZoomStates } from '@/features/galaxyInterface/types/galaxy'
 import { LOCALES } from '@/features/shared/constants/locales'
+import type { NextApiRequest, NextApiResponse } from 'next'
+import { z } from 'zod'
 
 type Data = {
   message: string
@@ -61,6 +61,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
     case supportedCollectionType.Enum['api::landingpage.landingpage']: {
       const { slug, locale } = LandingPagePreviewInputSchema.parse(parsedData)
       const landingLocale = getUrlLocale(locale)
+
       // TODO: remove it when we refactored the galaxy
       const zoomState = slug === 'stories' ? ZoomStates.Zoom1ToZoom1Stories : ZoomStates.Zoom2
 
