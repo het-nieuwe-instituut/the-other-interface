@@ -1,4 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import { ZoomStates } from '@/features/galaxyInterface/types/galaxy'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { z } from 'zod'
 
@@ -14,6 +15,7 @@ const supportedCollectionType = z.enum([
   'api::menupage.menupage',
   'api::homepage.homepage',
 ])
+
 const QueryParams = z.object({
   secret: z.string(),
   collectionTypeSlug: supportedCollectionType,
@@ -45,11 +47,16 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
 
   switch (collectionTypeSlug) {
     case supportedCollectionType.Enum['api::landingpage.landingpage']:
-      const landingPageData = LandingPagePreviewInputSchema.parse(parsedData)
-      url = `/landingpage/${landingPageData.slug}`
+      const { slug } = LandingPagePreviewInputSchema.parse(parsedData)
+
+      // TODO: remove it when we refactored the galaxy
+      const zoomState = slug === 'stories' ? ZoomStates.Zoom1ToZoom1Stories : ZoomStates.Zoom2
+      url = `/landingpage/${slug}?preservedZoom=${zoomState}`
+
       break
     case supportedCollectionType.Enum['api::story.story']:
       const storyData = StoryPreviewinputSchema.parse(parsedData)
+
       url = `/story/${storyData.id}-${storyData.slug}`
       break
     case supportedCollectionType.Enum['api::homepage.homepage']:
