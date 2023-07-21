@@ -7,7 +7,7 @@ import React from 'react'
 const PreviewLink = () => {
   const { initialData, slug: collectionTypeSlug } = useCMEditViewDataManager()
 
-  if (initialData?.publishedAt) return null
+  if (!initialData?.createdAt || initialData?.publishedAt) return null
 
   return (
     <LinkButton
