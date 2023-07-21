@@ -1,7 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { ZoomStates } from '@/features/galaxyInterface/types/galaxy'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { z } from 'zod'
+
+import { ZoomStates } from '@/features/galaxyInterface/types/galaxy'
+import { LOCALES } from '@/features/shared/constants/locales'
 
 type Data = {
   message: string
@@ -16,6 +18,8 @@ const supportedCollectionType = z.enum([
   'api::homepage.homepage',
 ])
 
+const locale = z.enum(LOCALES)
+
 const QueryParams = z.object({
   secret: z.string(),
   collectionTypeSlug: supportedCollectionType,
@@ -24,16 +28,25 @@ const QueryParams = z.object({
 
 const LandingPagePreviewInputSchema = z.object({
   slug: z.string(),
+  locale,
 })
 
 const StoryPreviewinputSchema = z.object({
   id: z.number(),
   slug: z.string(),
+  locale,
 })
 
-const MenupagePreviewinputSchema = z.object({
+const MenuPagePreviewinputSchema = z.object({
   slug: z.string(),
+  locale,
 })
+
+const HomePagePreviewinputSchema = z.object({
+  locale,
+})
+
+const getUrlLocale = (locale: 'en' | 'nl') => (locale === 'en' ? '/en' : '')
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   const { collectionTypeSlug, secret, data } = QueryParams.parse(req.query)
@@ -46,26 +59,40 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
   let url: UrlPath
 
   switch (collectionTypeSlug) {
-    case supportedCollectionType.Enum['api::landingpage.landingpage']:
-      const { slug } = LandingPagePreviewInputSchema.parse(parsedData)
-
+    case supportedCollectionType.Enum['api::landingpage.landingpage']: {
+      const { slug, locale } = LandingPagePreviewInputSchema.parse(parsedData)
+      const landingLocale = getUrlLocale(locale)
       // TODO: remove it when we refactored the galaxy
       const zoomState = slug === 'stories' ? ZoomStates.Zoom1ToZoom1Stories : ZoomStates.Zoom2
-      url = `/landingpage/${slug}?preservedZoom=${zoomState}`
 
+      url = `${landingLocale}/landingpage/${slug}?preservedZoom=${zoomState}`
       break
-    case supportedCollectionType.Enum['api::story.story']:
-      const storyData = StoryPreviewinputSchema.parse(parsedData)
+    }
 
-      url = `/story/${storyData.id}-${storyData.slug}`
+    case supportedCollectionType.Enum['api::story.story']: {
+      const { id, locale, slug } = StoryPreviewinputSchema.parse(parsedData)
+      const storyLocale = getUrlLocale(locale)
+
+      url = `${storyLocale}/story/${id}-${slug}`
       break
-    case supportedCollectionType.Enum['api::homepage.homepage']:
-      url = `/`
+    }
+
+    case supportedCollectionType.Enum['api::homepage.homepage']: {
+      const { locale } = HomePagePreviewinputSchema.parse(parsedData)
+      const homePageLocale = getUrlLocale(locale)
+
+      url = `${homePageLocale}/`
       break
-    case supportedCollectionType.Enum['api::menupage.menupage']:
-      const menuPageData = MenupagePreviewinputSchema.parse(parsedData)
-      url = `/menupage/${menuPageData.slug}`
+    }
+
+    case supportedCollectionType.Enum['api::menupage.menupage']: {
+      const { locale, slug } = MenuPagePreviewinputSchema.parse(parsedData)
+      const menuPageLocale = getUrlLocale(locale)
+
+      url = `${menuPageLocale}/menupage/${slug}`
       break
+    }
+
     default:
       throw new Error('Unmatched collectionTypeSlug')
   }
