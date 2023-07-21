@@ -49,6 +49,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
     case supportedCollectionType.Enum['api::landingpage.landingpage']:
       const { slug } = LandingPagePreviewInputSchema.parse(parsedData)
 
+      // TODO: remove it when we refactored the galaxy
       const zoomState = slug === 'stories' ? ZoomStates.Zoom1ToZoom1Stories : ZoomStates.Zoom2
       url = `/landingpage/${slug}?preservedZoom=${zoomState}`
 
