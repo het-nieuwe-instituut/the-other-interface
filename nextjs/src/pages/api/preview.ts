@@ -1,6 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { ZoomStates } from '@/features/galaxyInterface/types/galaxy'
 import { LOCALES } from '@/features/shared/constants/locales'
+import { Locale } from '@/features/shared/utils/locale'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { z } from 'zod'
 
@@ -45,7 +46,7 @@ const HomePagePreviewinputSchema = z.object({
   locale,
 })
 
-const getUrlLocale = (locale: 'en' | 'nl') => (locale === 'en' ? '/en' : '')
+const getUrlLocale = (locale: Locale) => (locale === 'en' ? '/en' : '')
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   const { collectionTypeSlug, secret, data } = QueryParams.parse(req.query)
