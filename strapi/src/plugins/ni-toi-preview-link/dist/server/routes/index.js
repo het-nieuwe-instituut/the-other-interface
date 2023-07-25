@@ -9,4 +9,12 @@ exports.default = [
             policies: [],
         },
     },
+    {
+        method: 'GET',
+        path: '/preview-config',
+        handler: 'myController.config',
+        config: {
+            policies: [],
+        },
+    },
 ];
