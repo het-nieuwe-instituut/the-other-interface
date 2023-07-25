@@ -1,43 +1,23 @@
 const { getService } = require('@strapi/plugin-content-manager/server/utils')
 
 module.exports = plugin => {
-  const controller = plugin.controllers['collection-types']
+  //   // example of customizing a controller
+  //   const controller = plugin.controllers['collection-types']
+  //   controller.strapiFindOne = controller.findOne
 
-  // Save the original create controller action
-  controller.strapiCreate = controller.create
-  controller.strapiFind = controller.findOne
+  //   controller.findOne = async ctx => {
+  //     const { model } = ctx.params
+  //     const { body } = ctx.response
 
-  // extend action find
-  controller.findOne = async ctx => {
-    const { model } = ctx.params
-    const { body } = ctx.request
+  //     return controller.strapiFindOne(ctx)
+  //   }
 
-    // console.log(ctx.params)
-    // console.log(ctx.request)
-
-    // if (model === 'api::story.story') {
-    //   const data: Object = {}
-    //   const story = await strapi.entityService.findOne('api::story.story', ctx.params.id, {
-    //     populate: ['triplyRecords', 'locations', 'createdBy', 'updatedBy'],
-    //   })
-
-    //   if (story.triplyRecords !== undefined) {
-    //     data['triplyRecords'] = story.triplyRecords
-    //   }
-
-    //   //   if (story.triplyRecords) {
-    //   //     data['slug'] = event.params.data.slug
-    //   //   }
-
-    //   console.log(story)
-    //   console.log(data)
-
-    //   const newData = await strapi.entityService.update('api::story.story', story.id, { data })
-    //   console.log(newData)
-    // }
-
-    return controller.strapiFind(ctx)
-  }
+  //   // Example of adding a middleware to a route
+  //   const index = plugin.routes.admin.routes.findIndex(
+  //     route => route.handler === 'collection-types.findOne'
+  //   )
+  //   const item = plugin.routes.admin.routes[index]
+  //   item.config.middlewares = ['api::story.pupulate-triply-fill-from-another-locale']
 
   return plugin
 }

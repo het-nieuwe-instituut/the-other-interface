@@ -5,7 +5,6 @@ export default (options, { strapi }) => {
     await next()
 
     if (ctx.request.body.model === storyApi) {
-      console.log('after')
       const story = await strapi.entityService.findOne(storyApi, ctx.request.body.id, {
         populate: ['triplyRecords'],
       })
