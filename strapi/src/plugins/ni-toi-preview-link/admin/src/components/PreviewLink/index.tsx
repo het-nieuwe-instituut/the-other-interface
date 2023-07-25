@@ -14,8 +14,8 @@ const PreviewLink = () => {
       size="S"
       startIcon={<Eye />}
       style={{ width: '100%' }}
-      href={`${CUSTOM_VARIABLES.CLIENT_FRONTEND_PREVIEW_URL}?secret=${
-        CUSTOM_VARIABLES.CLIENT_PREVIEW_SECRET
+      href={`${process.env.STRAPI_ADMIN_CLIENT_FRONTEND_PREVIEW_URL}?secret=${
+        process.env.STRAPI_ADMIN_CLIENT_PREVIEW_SECRET
       }&data=${JSON.stringify(initialData)}&collectionTypeSlug=${collectionTypeSlug}`}
       variant="secondary"
       target="_blank"
