@@ -1,4 +1,0 @@
-declare const CUSTOM_VARIABLES: {
-  CLIENT_FRONTEND_PREVIEW_URL: string
-  CLIENT_PREVIEW_SECRET: string
-}
