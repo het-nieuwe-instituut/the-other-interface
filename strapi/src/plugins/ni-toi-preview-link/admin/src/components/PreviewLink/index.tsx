@@ -7,6 +7,10 @@ import React from 'react'
 const PreviewLink = () => {
   const { initialData, slug: collectionTypeSlug } = useCMEditViewDataManager()
 
+  const clientPreviewUrl = process.env.STRAPI_ADMIN_CLIENT_FRONTEND_PREVIEW_URL
+
+  const clientPreviewSecret = process.env.STRAPI_ADMIN_CLIENT_PREVIEW_SECRET
+
   if (!initialData?.createdAt || initialData?.publishedAt) return null
 
   return (
@@ -14,9 +18,9 @@ const PreviewLink = () => {
       size="S"
       startIcon={<Eye />}
       style={{ width: '100%' }}
-      href={`${CUSTOM_VARIABLES.CLIENT_FRONTEND_PREVIEW_URL}?secret=${
-        CUSTOM_VARIABLES.CLIENT_PREVIEW_SECRET
-      }&data=${JSON.stringify(initialData)}&collectionTypeSlug=${collectionTypeSlug}`}
+      href={`${clientPreviewUrl}?secret=${clientPreviewSecret}&data=${JSON.stringify(
+        initialData
+      )}&collectionTypeSlug=${collectionTypeSlug}`}
       variant="secondary"
       target="_blank"
       rel="noopener noreferrer"
