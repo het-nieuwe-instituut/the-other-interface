@@ -3,7 +3,6 @@ import { LinkButton } from '@strapi/design-system/LinkButton'
 import { useCMEditViewDataManager } from '@strapi/helper-plugin'
 import Eye from '@strapi/icons/Eye'
 import React from 'react'
-
 import { usePreviewConfig } from '../../utils/hooks/usePreviewConfig'
 
 const PreviewLink = () => {
