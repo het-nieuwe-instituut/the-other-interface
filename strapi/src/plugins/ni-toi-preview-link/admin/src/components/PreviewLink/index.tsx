@@ -3,45 +3,25 @@ import { LinkButton } from '@strapi/design-system/LinkButton'
 import { useCMEditViewDataManager } from '@strapi/helper-plugin'
 import Eye from '@strapi/icons/Eye'
 import React from 'react'
-import { useQuery } from 'react-query'
 
-import axiosInstance from '../../utils/axiosInstance'
-
-const fetchPreviewConfig = async () => {
-  try {
-    const { data, headers } = await axiosInstance.get('/ni-toi-preview-link/preview-config')
-
-    if (!headers['content-type'].includes('application/json')) {
-      throw new Error('Not found')
-    }
-
-    return data
-  } catch (error) {
-    throw new Error(error)
-  }
-}
+import { usePreviewConfig } from '../../utils/hooks/usePreviewConfig'
 
 const PreviewLink = () => {
+  const { data: previewConfig, isLoading, isError } = usePreviewConfig()
   const { initialData, slug: collectionTypeSlug } = useCMEditViewDataManager()
 
-  const { isLoading, isError, data, error } = useQuery({
-    queryFn: fetchPreviewConfig,
-  })
+  if (!initialData?.createdAt || initialData?.publishedAt || isError) return null
 
-  if (!initialData?.createdAt || initialData?.publishedAt) return null
-
-  if (isLoading) return <span>Loading...</span>
-
-  if (isError && error) return error
+  if (isLoading) return <div>Preview is Loading...</div>
 
   return (
     <LinkButton
       size="S"
       startIcon={<Eye />}
       style={{ width: '100%' }}
-      href={`${data.clientPreviewUrl}?secret=${data.clientPreviewSecret}&data=${JSON.stringify(
-        initialData
-      )}&collectionTypeSlug=${collectionTypeSlug}`}
+      href={`${previewConfig.clientPreviewUrl}?secret=${
+        previewConfig.clientPreviewSecret
+      }&data=${JSON.stringify(initialData)}&collectionTypeSlug=${collectionTypeSlug}`}
       variant="secondary"
       target="_blank"
       rel="noopener noreferrer"
