@@ -1,8 +1,8 @@
 export default [
   {
     method: 'GET',
-    path: '/',
-    handler: 'myController.index',
+    path: '/preview-config',
+    handler: 'myController.config',
     config: {
       policies: [],
     },

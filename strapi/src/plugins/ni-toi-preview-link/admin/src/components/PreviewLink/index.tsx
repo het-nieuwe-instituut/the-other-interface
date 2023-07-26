@@ -4,23 +4,24 @@ import { useCMEditViewDataManager } from '@strapi/helper-plugin'
 import Eye from '@strapi/icons/Eye'
 import React from 'react'
 
+import { usePreviewConfig } from '../../utils/hooks/usePreviewConfig'
+
 const PreviewLink = () => {
+  const { data: previewConfig, isLoading, isError } = usePreviewConfig()
   const { initialData, slug: collectionTypeSlug } = useCMEditViewDataManager()
 
-  const clientPreviewUrl = process.env.STRAPI_ADMIN_CLIENT_FRONTEND_PREVIEW_URL
+  if (!initialData?.createdAt || initialData?.publishedAt || isError) return null
 
-  const clientPreviewSecret = process.env.STRAPI_ADMIN_CLIENT_PREVIEW_SECRET
-
-  if (!initialData?.createdAt || initialData?.publishedAt) return null
+  if (isLoading) return <div>Preview is Loading...</div>
 
   return (
     <LinkButton
       size="S"
       startIcon={<Eye />}
       style={{ width: '100%' }}
-      href={`${clientPreviewUrl}?secret=${clientPreviewSecret}&data=${JSON.stringify(
-        initialData
-      )}&collectionTypeSlug=${collectionTypeSlug}`}
+      href={`${previewConfig.clientPreviewUrl}?secret=${
+        previewConfig.clientPreviewSecret
+      }&data=${JSON.stringify(initialData)}&collectionTypeSlug=${collectionTypeSlug}`}
       variant="secondary"
       target="_blank"
       rel="noopener noreferrer"

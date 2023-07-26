@@ -3,8 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = [
     {
         method: 'GET',
-        path: '/',
-        handler: 'myController.index',
+        path: '/preview-config',
+        handler: 'myController.config',
         config: {
             policies: [],
         },
