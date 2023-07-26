@@ -1,4 +1,5 @@
 import { useQuery } from 'react-query'
+
 import axiosInstance from '../../utils/axiosInstance'
 
 const fetchPreviewConfig = async () => {
