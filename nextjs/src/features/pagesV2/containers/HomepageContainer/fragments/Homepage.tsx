@@ -1,6 +1,6 @@
-import { HomepageQuery } from 'src/generated/graphql'
-import { GalaxyInterface } from '@/features/galaxyInterfaceV2/GalaxyInterface/GalaxyInterface'
 import { Box } from '@chakra-ui/react'
+import { GalaxyInterface } from '@/features/galaxyInterfaceV2/GalaxyInterface/GalaxyInterface'
+import { HomepageQuery } from 'src/generated/graphql'
 
 import { EditorialLayer } from './EditorialLayer'
 
