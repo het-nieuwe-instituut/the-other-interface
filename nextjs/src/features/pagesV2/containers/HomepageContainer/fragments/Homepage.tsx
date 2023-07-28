@@ -1,5 +1,5 @@
-import { Box } from '@chakra-ui/react'
 import { GalaxyInterface } from '@/features/galaxyInterfaceV2/GalaxyInterface/GalaxyInterface'
+import { Box } from '@chakra-ui/react'
 
 import { HomepageQuery } from 'src/generated/graphql'
 
