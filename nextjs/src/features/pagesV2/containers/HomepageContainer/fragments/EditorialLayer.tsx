@@ -1,8 +1,8 @@
+import { HomepageComponentsDynamicZone, HomepageQuery } from 'src/generated/graphql'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import useScroll from '@/features/shared/hooks/useScroll'
 import { Box, useTheme } from '@chakra-ui/react'
-import { HomepageComponentsDynamicZone, HomepageQuery } from 'src/generated/graphql'
 
 import { ScrollToContent } from '../../../utils/utils'
 
