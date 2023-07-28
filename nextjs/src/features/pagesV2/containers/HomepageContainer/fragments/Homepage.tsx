@@ -8,7 +8,6 @@ export const Homepage: React.FC<{ data?: HomepageQuery }> = ({ data }) => {
   return (
     <Box backgroundColor="graph">
       <GalaxyInterface />
-
       <EditorialLayer data={data} />
     </Box>
   )

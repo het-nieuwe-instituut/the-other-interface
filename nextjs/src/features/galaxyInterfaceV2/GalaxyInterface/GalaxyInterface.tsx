@@ -1,13 +1,14 @@
 import { GalaxyWrapper } from '@/features/shared/components/GalaxyWrapper/GalaxyWrapper'
-import { Box } from '@chakra-ui/react'
+import { Box, Button } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
 import { Fragment, useId, useRef } from 'react'
 
 import { useZoomPresenter } from './useZoomPresenter'
 import { MemoizedGalaxySwitch } from './GalaxySwitch'
+import { ZoomStates } from '../types/galaxy'
 
 export const GalaxyInterface: React.FC = () => {
-  const { activeZoom } = useZoomPresenter()
+  const { activeZoom, setActiveZoom } = useZoomPresenter()
   const graphRef = useRef<HTMLDivElement | null>(null)
   const sizes = useSize(graphRef)
   const id = useId()
@@ -24,6 +25,19 @@ export const GalaxyInterface: React.FC = () => {
               <MemoizedGalaxySwitch activeZoom={activeZoom} sizes={sizes} />
             </Box>
           )}
+        </Box>
+
+        <Box>
+          <p>{activeZoom}</p>
+          <Box zIndex={100000}>
+            {Object.values(ZoomStates).map((t, index) => {
+              return (
+                <Button key={t + index} onClick={() => setActiveZoom(t)}>
+                  {t}
+                </Button>
+              )
+            })}
+          </Box>
         </Box>
       </GalaxyWrapper>
     </Fragment>

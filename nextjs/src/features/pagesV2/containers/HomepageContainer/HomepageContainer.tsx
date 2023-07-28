@@ -1,5 +1,5 @@
-import { HomepageQuery } from 'src/generated/graphql'
 import { ZoomStates } from '@/features/galaxyInterfaceV2/types/galaxy'
+import { HomepageQuery } from 'src/generated/graphql'
 
 import { HomepageProvider, Homepage } from './fragments'
 

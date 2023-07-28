@@ -1,5 +1,6 @@
 import { useSize } from '@chakra-ui/react-use-size'
 import { memo } from 'react'
+
 import { ZoomStates } from '../types/galaxy'
 import {
   zoomStatesMainGalaxy,
