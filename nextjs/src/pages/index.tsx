@@ -1,6 +1,6 @@
 import { ZoomStates } from '@/features/galaxyInterface/types/galaxy'
 import ApiClient from '@/features/graphql/api'
-import { HomepageContainer } from '@/features/pages/containers/HomepageContainer/HomepageContainer'
+import { HomepageContainer } from '@/features/pagesV2/containers/HomepageContainer/HomepageContainer'
 import { prepareReduxState } from '@/features/shared/configs/store'
 import { getPublicationState } from '@/features/shared/utils/publication-state'
 import { GetServerSidePropsContext } from 'next'
@@ -26,6 +26,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
       host: context.req.headers.host || null,
       homepage,
       zoomLevel1Data,
+      activeZoom: (context.query?.preservedZoom as ZoomStates) ?? ZoomStates.Zoom0,
       reduxState: prepareReduxState({
         galaxyInterface: {
           activeZoom: (context.query?.preservedZoom as ZoomStates) ?? ZoomStates.Zoom0,
