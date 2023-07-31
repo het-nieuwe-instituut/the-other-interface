@@ -8,17 +8,30 @@ import { NavigationOverlayProvider } from '@/features/shared/components/Navigati
 import { createStore } from '@/features/shared/configs/store'
 import { theme } from '@/features/shared/styles/theme/theme'
 import { PublicationState } from '@/features/shared/types/enums'
-import { ChakraProvider } from '@chakra-ui/react'
+import { Button, ChakraProvider } from '@chakra-ui/react'
 import { ThemeProvider } from '@emotion/react'
 import 'keen-slider/keen-slider.min.css'
 import type { AppProps } from 'next/app'
+import { useRouter } from 'next/router'
 import Script from 'next/script'
 import { useMemo } from 'react'
 import { Provider } from 'react-redux'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
+import { getCookie, setCookie } from 'cookies-next'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const store = useMemo(() => createStore(pageProps.reduxState), [pageProps.reduxState])
+  const router = useRouter()
+
+  const handleClick = () => {
+    const isMockedServer = getCookie('isMockedServer')
+    if (isMockedServer) {
+      setCookie('isMockedServer', false)
+    } else {
+      setCookie('isMockedServer', true)
+    }
+    router.reload()
+  }
 
   return (
     <>
@@ -32,11 +45,11 @@ function MyApp({ Component, pageProps }: AppProps) {
           />
           <Script id="google-analytics" strategy="afterInteractive">
             {`
-                                window.dataLayer = window.dataLayer || [];
-                                function gtag(){dataLayer.push(arguments);}
-                                gtag('js', new Date());
-                                gtag('config', '${process.env.parsed.NEXT_PUBLIC_GA_MEASUREMENT_ID}');
-                            `}
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${process.env.parsed.NEXT_PUBLIC_GA_MEASUREMENT_ID}');
+            `}
           </Script>
         </>
       )}
@@ -50,6 +63,21 @@ function MyApp({ Component, pageProps }: AppProps) {
                 <NavigationOverlayProvider>
                   <MobileOverlayProvider>
                     <>
+                      {/* {process.env.NEXT_ENV === 'local' ||
+                        (process.env.NEXT_ENV === 'test' && ( */}
+                      <Button
+                        zIndex={312312}
+                        position={'absolute'}
+                        top={10}
+                        left={8}
+                        w={200}
+                        h={10}
+                        onClick={handleClick}
+                      >
+                        {'Switch server'}
+                      </Button>
+                      {/* ))} */}
+
                       <div id={'galaxy-root'}></div>
                       <Component {...pageProps} />
                       <Footer />
