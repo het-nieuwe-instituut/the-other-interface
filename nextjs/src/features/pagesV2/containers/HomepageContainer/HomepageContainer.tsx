@@ -13,14 +13,18 @@ export const DynamicMainGalaxyNoSsr = dynamic(
   }
 )
 
-export const HomepageContainer: React.FC<{ data?: HomepageQuery }> = ({ data }) => {
+export type Props = {
+  homepage: HomepageQuery | undefined
+}
+
+export const HomepageContainer: React.FC<Props> = ({ homepage }) => {
   return (
     <Box backgroundColor="graph">
       <GalaxyInterface>
         <DynamicMainGalaxyNoSsr />
       </GalaxyInterface>
 
-      <EditorialLayer data={data} />
+      <EditorialLayer data={homepage} />
     </Box>
   )
 }
