@@ -1,6 +1,7 @@
 import { HomepageQuery, ZoomLevel1Query } from 'src/generated/graphql'
 
 import { HomepageProvider, Homepage } from './fragments'
+
 export type Props = {
   homepage: HomepageQuery | undefined
   host?: string | null
