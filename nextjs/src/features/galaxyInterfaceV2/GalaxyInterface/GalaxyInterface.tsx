@@ -3,8 +3,8 @@ import { Box } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
 import { Fragment, useId, useRef } from 'react'
 
-import { usePresenter } from './usePresenter'
 import { MemoizedGalaxySwitch } from './GalaxySwitch'
+import { usePresenter } from './usePresenter'
 
 export const GalaxyInterface: React.FC = () => {
   const { activeZoom } = usePresenter()
