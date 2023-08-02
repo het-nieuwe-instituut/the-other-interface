@@ -1,4 +1,5 @@
 import { useState } from 'react'
+
 import { ZoomLevel1Query } from 'src/generated/graphql'
 
 import { HomepageContext } from './HomepageContext'
