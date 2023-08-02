@@ -1,4 +1,4 @@
-import { GalaxyWrapper } from '@/features/shared/components/GalaxyWrapper/GalaxyWrapper'
+import { GalaxyWrapper } from '@/features/shared/components/GalaxyWrapperV2/GalaxyWrapper'
 import { Box } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
 import { Fragment, useId, useRef } from 'react'
