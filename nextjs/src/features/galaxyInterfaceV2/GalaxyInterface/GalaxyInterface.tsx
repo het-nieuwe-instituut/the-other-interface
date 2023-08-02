@@ -4,10 +4,10 @@ import { useSize } from '@chakra-ui/react-use-size'
 import { Fragment, useId, useRef } from 'react'
 
 import { MemoizedGalaxySwitch } from './GalaxySwitch'
-import { useZoomPresenter } from './useZoomPresenter'
+import { usePresenter } from './usePresenter'
 
 export const GalaxyInterface: React.FC = () => {
-  const { activeZoom } = useZoomPresenter()
+  const { activeZoom } = usePresenter()
   const graphRef = useRef<HTMLDivElement | null>(null)
   const sizes = useSize(graphRef)
   const id = useId()
@@ -15,7 +15,7 @@ export const GalaxyInterface: React.FC = () => {
   return (
     <Fragment key={id}>
       <GalaxyWrapper>
-        <Box backgroundColor="graph" height="800px" ref={graphRef}>
+        <Box backgroundColor="blue.100" height="100vh" ref={graphRef}>
           {sizes?.height && sizes?.width && (
             <Box position={'fixed'}>
               <MemoizedGalaxySwitch activeZoom={activeZoom} sizes={sizes} />

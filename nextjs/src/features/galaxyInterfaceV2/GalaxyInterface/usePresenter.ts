@@ -1,7 +1,7 @@
 import { useGalaxyInterface } from '../stores/useGalaxyInterface'
 import { ZoomStates } from '../types/galaxy'
 
-export const useZoomPresenter = () => {
+export const usePresenter = () => {
   const { state, dispatch } = useGalaxyInterface()
 
   return {

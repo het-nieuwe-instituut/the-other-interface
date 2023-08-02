@@ -126,7 +126,7 @@ export const typeColors = {
   story: storyColors,
 }
 
-const colors = {
+const oldColors = {
   graph: '#CCCED0',
   mainBg: 'rgba(255, 255, 255, 0.85)',
   other: '#CCCED0',
@@ -158,6 +158,15 @@ const colors = {
     },
   },
   typeColors: typeColors,
+}
+
+const blue = {
+  '100': '#D5F3FB',
+}
+
+const colors = {
+  ...oldColors,
+  blue,
 }
 
 export default colors
