@@ -1,6 +1,8 @@
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+
 import { ZoomStates } from '../types/galaxy'
 
-export type GalaxyInterfaceState = {
+export type GalaxyInterfaceStateState = {
   activeZoom: ZoomStates | null
   prevActiveZoom?: ZoomStates | null
   params?: {
@@ -9,34 +11,33 @@ export type GalaxyInterfaceState = {
     collection?: string
     record?: string
     page?: string
-    preservedZoom?: ZoomStates
+    preservedZoom?: ZoomStates // between page reloads
   }
 }
 
-export const galaxyInitialState: GalaxyInterfaceState = {
+export const filetsInitialState: GalaxyInterfaceStateState = {
   activeZoom: null,
   prevActiveZoom: null,
   params: {},
 }
 
-export type GalaxyAction = {
-  type: string
-  payload: {
-    activeZoom?: GalaxyInterfaceState['activeZoom']
-    params?: GalaxyInterfaceState['params']
-  }
-}
+export const galaxyInterfaceSlice = createSlice({
+  name: 'galaxyInterface',
+  initialState: filetsInitialState,
+  reducers: {
+    setActiveZoom: (
+      state,
+      action: PayloadAction<{
+        activeZoom: GalaxyInterfaceStateState['activeZoom']
+        params?: GalaxyInterfaceStateState['params']
+      }>
+    ) => {
+      state.prevActiveZoom = state.activeZoom
+      state.activeZoom = action.payload.activeZoom ?? state.activeZoom
+      state.params = { ...state.params, ...action.payload.params }
+    },
+  },
+})
 
-export const galaxyInterfaceReducer = (state: GalaxyInterfaceState, action: GalaxyAction) => {
-  switch (action.type) {
-    case 'setActiveZoom':
-      return {
-        ...state,
-        prevActiveZoom: state.activeZoom,
-        activeZoom: action.payload.activeZoom ?? state.activeZoom,
-        params: { ...state.params, ...action.payload.params },
-      }
-    default:
-      return state
-  }
-}
+// export the action
+export const galaxyInterfaceActions = galaxyInterfaceSlice.actions

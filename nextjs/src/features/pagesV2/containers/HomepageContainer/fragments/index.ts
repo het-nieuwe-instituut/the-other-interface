@@ -1,2 +1,2 @@
-export { HomepageProvider } from './HomepageContext'
+export { HomepageProvider } from './HomepageProvider'
 export { Homepage } from './Homepage'

@@ -1,18 +1,17 @@
-import { ZoomStates } from '@/features/galaxyInterfaceV2/types/galaxy'
-
-import { HomepageQuery } from 'src/generated/graphql'
+import { HomepageQuery, ZoomLevel1Query } from 'src/generated/graphql'
 
 import { HomepageProvider, Homepage } from './fragments'
-
-type Props = {
-  homepage?: HomepageQuery
-  activeZoom: ZoomStates
+export type Props = {
+  homepage: HomepageQuery | undefined
+  host?: string | null
+  imagePath?: string
+  zoomLevel1Data: ZoomLevel1Query | undefined
 }
 
-export const HomepageContainer: React.FC<Props> = ({ homepage, activeZoom }) => {
+export const HomepageContainer = (props: Props) => {
   return (
-    <HomepageProvider activeZoom={activeZoom}>
-      <Homepage data={homepage} />
+    <HomepageProvider zoomLevel1={props.zoomLevel1Data}>
+      <Homepage data={props.homepage} />
     </HomepageProvider>
   )
 }

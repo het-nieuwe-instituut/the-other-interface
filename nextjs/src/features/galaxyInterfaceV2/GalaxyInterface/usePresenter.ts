@@ -1,12 +1,18 @@
-import { useGalaxyInterface } from '../stores/useGalaxyInterface'
+import { State } from '@/features/shared/configs/store'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { useRouteTransitions } from '../hooks/useRouteTransitions'
+import { galaxyInterfaceActions } from '../stores/galaxyInterface.store'
 import { ZoomStates } from '../types/galaxy'
 
 export const usePresenter = () => {
-  const { state, dispatch } = useGalaxyInterface()
+  const activeZoom = useSelector((state: State) => state.galaxyInterface.activeZoom)
+  const dispatch = useDispatch()
+  useRouteTransitions()
 
   return {
-    activeZoom: state.activeZoom,
+    activeZoom: activeZoom,
     setActiveZoom: (zoom: ZoomStates) =>
-      dispatch({ type: 'setActiveZoom', payload: { activeZoom: zoom } }),
+      dispatch(galaxyInterfaceActions.setActiveZoom({ activeZoom: zoom })),
   }
 }
