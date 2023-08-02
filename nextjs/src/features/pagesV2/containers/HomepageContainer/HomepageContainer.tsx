@@ -1,18 +1,30 @@
-import { HomepageQuery, ZoomLevel1Query } from 'src/generated/graphql'
+import { GalaxyInterface } from '@/features/galaxyInterfaceV2/GalaxyInterface/GalaxyInterface'
+import { Box } from '@chakra-ui/react'
+import dynamic from 'next/dynamic'
 
-import { HomepageProvider, Homepage } from './fragments'
+import { HomepageQuery } from 'src/generated/graphql'
+
+import { EditorialLayer } from './fragments'
+
+export const DynamicMainGalaxyNoSsr = dynamic(
+  () => import('../../../galaxyInterfaceV2/galaxies/MainGalaxy/MainGalaxy'),
+  {
+    ssr: false,
+  }
+)
 
 export type Props = {
   homepage: HomepageQuery | undefined
-  host?: string | null
-  imagePath?: string
-  zoomLevel1Data: ZoomLevel1Query | undefined
 }
 
-export const HomepageContainer = (props: Props) => {
+export const HomepageContainer: React.FC<Props> = ({ homepage }) => {
   return (
-    <HomepageProvider zoomLevel1={props.zoomLevel1Data}>
-      <Homepage data={props.homepage} />
-    </HomepageProvider>
+    <Box backgroundColor="graph">
+      <GalaxyInterface>
+        <DynamicMainGalaxyNoSsr />
+      </GalaxyInterface>
+
+      <EditorialLayer data={homepage} />
+    </Box>
   )
 }
