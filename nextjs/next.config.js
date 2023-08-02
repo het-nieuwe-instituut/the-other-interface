@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /** @type {import('next').NextConfig} */
 const nextTranslate = require('next-translate')
+
 const env = require('dotenv').config({ path: `.env.${process.env.ENV ?? 'production'}` })
 const parsed = env.parsed
 
@@ -31,6 +32,7 @@ const nextConfig = {
   },
   output: 'standalone',
   env: {
+    NEXT_PUBLIC_RANDOM: true,
     parsed,
   },
 }
