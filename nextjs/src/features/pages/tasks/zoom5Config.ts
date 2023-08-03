@@ -1,4 +1,4 @@
-import ApiClient from '@/features/graphql/api'
+import { type ApiClientType } from '@/features/graphql/api'
 
 import {
   ObjectRelationsQuery,
@@ -17,28 +17,28 @@ export enum SupportedQuerys {
   stories = 'story',
 }
 
-export const zoom5Config = {
+export const zoom5Config = (api: ApiClientType) => ({
   [SupportedQuerys.publications]: {
-    zoomLevelQuery: ApiClient?.ZoomLevel5Publication,
-    relationsQuery: ApiClient?.PublicationRelations,
+    zoomLevelQuery: api?.ZoomLevel5Publication,
+    relationsQuery: api?.PublicationRelations,
     accesor: (data?: ZoomLevel5PublicationQuery) => data?.zoomLevel5Publication,
   },
   [SupportedQuerys.archives]: {
-    zoomLevelQuery: ApiClient?.ZoomLevel5Archives,
-    relationsQuery: ApiClient?.ArchivesRelations,
+    zoomLevelQuery: api?.ZoomLevel5Archives,
+    relationsQuery: api?.ArchivesRelations,
     accesor: (data?: ZoomLevel5ArchivesQuery) => data?.zoomLevel5Archive,
   },
   [SupportedQuerys.objects]: {
-    zoomLevelQuery: ApiClient?.ZoomLevel5Object,
-    relationsQuery: ApiClient?.ObjectRelations,
+    zoomLevelQuery: api?.ZoomLevel5Object,
+    relationsQuery: api?.ObjectRelations,
     accesor: (data?: ZoomLevel5ObjectQuery) => data?.zoomLevel5Object,
   },
   [SupportedQuerys.people]: {
-    zoomLevelQuery: ApiClient?.ZoomLevel5Person,
-    relationsQuery: ApiClient?.PeopleRelations,
+    zoomLevelQuery: api?.ZoomLevel5Person,
+    relationsQuery: api?.PeopleRelations,
     accesor: (data?: ZoomLevel5PersonQuery) => data?.zoomLevel5Person,
   },
-}
+})
 
 export type ZoomLevel5DetailResponses = Zoom5RecordResult
 

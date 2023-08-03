@@ -8,13 +8,14 @@ import {
   includesZoomStatesZoom4Galaxy,
 } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
 import { ZoomStates } from '@/features/galaxyInterface/types/galaxy'
-import ApiClient from '@/features/graphql/api'
 import { LandingpageContainer } from '@/features/pages/containers/LandingpageContainer/LandingpageContainer'
 import { LandingpageProvider } from '@/features/pages/containers/LandingpageContainer/LandingpageContext'
 import { zoom3Query } from '@/features/pages/tasks/zoom3Query.mapper'
 import { prepareReduxState } from '@/features/shared/configs/store'
+import { initApiClient } from '@/features/shared/utils/api'
 import { getPublicationState } from '@/features/shared/utils/publication-state'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
+import util from 'util'
 
 import { EntityNames } from 'src/generated/graphql'
 
@@ -58,15 +59,18 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   let zoomLevel4 = null
   let stories = null
 
+  const api = initApiClient(context)
+
   if (entityName && includesZoomStatesZoom2Galaxy.includes(preservedZoom)) {
-    zoomLevel2 = await ApiClient?.zoomLevel2({ entityName })
+    const api = initApiClient(context)
+    zoomLevel2 = await api.zoomLevel2({ entityName })
   }
 
   if (
     slug === EntityNames.Stories.toLowerCase() &&
     includesZoomStatesMainGalaxy.includes(preservedZoom)
   ) {
-    stories = await ApiClient?.storiesWithoutRelations({ pagination: { pageSize: 200 }, locale })
+    stories = await api.storiesWithoutRelations({ pagination: { pageSize: 200 }, locale })
   }
 
   if (includesZoomStatesZoom3Galaxy.includes(preservedZoom) && filter) {
@@ -85,11 +89,13 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     })
   }
 
-  const landingpage = await ApiClient?.landingpageBySlug({
+  const landingpage = await api.landingpageBySlug({
     slug,
     locale: context?.locale,
     publicationState,
   })
+
+  console.log(util.inspect(landingpage, false, null, true /* enable colors */))
 
   return {
     props: {

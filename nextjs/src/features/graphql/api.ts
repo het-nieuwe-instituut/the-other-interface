@@ -39,3 +39,5 @@ class ApiClientClass {
 const ApiClient = new ApiClientClass(process?.env?.parsed?.NEXT_PUBLIC_GRAPHQL_ENDPOINT ?? '')
 
 export default ApiClient
+
+export type ApiClientType = Sdk
