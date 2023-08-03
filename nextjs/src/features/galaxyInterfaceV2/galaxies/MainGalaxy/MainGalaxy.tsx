@@ -11,6 +11,8 @@ const MainGalaxy: React.FC = () => {
         backgroundImage={`url('${cloudSvg}')`}
         backgroundSize="cover"
         backgroundRepeat="no-repeat"
+        borderRadius="50%"
+        border="1px solid red"
         w="144.4vw"
         h="144.4vw"
         // left="32vw"
@@ -34,6 +36,8 @@ const MainGalaxy: React.FC = () => {
         backgroundImage={`url('${cloudSvg}')`}
         backgroundSize="cover"
         backgroundRepeat="no-repeat"
+        borderRadius="50%"
+        border="1px solid red"
         w="135.4vw"
         h="135.4vw"
         // top="44vh"
@@ -56,6 +60,8 @@ const MainGalaxy: React.FC = () => {
         backgroundImage={`url('${cloudSvg}')`}
         backgroundSize="cover"
         backgroundRepeat="no-repeat"
+        borderRadius="50%"
+        border="1px solid red"
         w="84.41vw"
         h="84.41vw"
         // bottom="22vh"
@@ -78,6 +84,8 @@ const MainGalaxy: React.FC = () => {
         backgroundImage={`url('${cloudSvg}')`}
         backgroundSize="cover"
         backgroundRepeat="no-repeat"
+        borderRadius="50%"
+        border="1px solid red"
         w="62.42vw"
         h="62.42vw"
         // top="23.7vh"
