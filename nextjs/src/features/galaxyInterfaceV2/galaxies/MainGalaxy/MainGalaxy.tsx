@@ -11,17 +11,21 @@ const MainGalaxy: React.FC = () => {
         backgroundImage={`url('${cloudSvg}')`}
         backgroundSize="cover"
         backgroundRepeat="no-repeat"
-        // w="144.4vw"
-        // h="144.4vw"
+        w="144.4vw"
+        h="144.4vw"
         // left="32vw"
         // bottom="34vh"
-        w="1847px"
-        h="1847px"
         left="-1441px"
         top="-307px"
       />
 
-      <Text position="absolute" left="4.2vw" bottom="44vh" textStyle="headingTimesLarge.lg">
+      <Text
+        position="absolute"
+        left="4.2vw"
+        bottom="44vh"
+        textStyle="headingTimesLarge.lg"
+        color="brownAlpha.100"
+      >
         Archives
       </Text>
 
@@ -30,16 +34,20 @@ const MainGalaxy: React.FC = () => {
         backgroundImage={`url('${cloudSvg}')`}
         backgroundSize="cover"
         backgroundRepeat="no-repeat"
-        // w="135.4vw"
-        // h="135.4vw"
+        w="135.4vw"
+        h="135.4vw"
         // top="44vh"
         // left="13vw"
-        w="1733.67px"
-        h="1733.67px"
         top="494px"
         left="248px"
       />
-      <Text position="absolute" right="14vw" bottom="27.5vh" textStyle="headingTimesLarge.lg">
+      <Text
+        position="absolute"
+        right="14vw"
+        bottom="27.5vh"
+        textStyle="headingTimesLarge.lg"
+        color="brownAlpha.100"
+      >
         Publications
       </Text>
 
@@ -48,16 +56,20 @@ const MainGalaxy: React.FC = () => {
         backgroundImage={`url('${cloudSvg}')`}
         backgroundSize="cover"
         backgroundRepeat="no-repeat"
-        // w="84.41vw"
-        // h="84.41vw"
+        w="84.41vw"
+        h="84.41vw"
         // bottom="22vh"
         // right="calc(-100vw / 2 - 5.4vw)"
-        w="1080.47px"
-        h="1080.47px"
         top="-421px"
         left="993.92px"
       />
-      <Text position="absolute" right="5.4vw" top="12.7vh" textStyle="headingTimesLarge.lg">
+      <Text
+        position="absolute"
+        right="5.4vw"
+        top="12.7vh"
+        textStyle="headingTimesLarge.lg"
+        color="brownAlpha.100"
+      >
         Objects
       </Text>
 
@@ -66,16 +78,20 @@ const MainGalaxy: React.FC = () => {
         backgroundImage={`url('${cloudSvg}')`}
         backgroundSize="cover"
         backgroundRepeat="no-repeat"
-        // w="62.42vw"
-        // h="62.42vw"
+        w="62.42vw"
+        h="62.42vw"
         // top="23.7vh"
         // right="44vw"
-        w="799px"
-        h="799px"
         top="-578px"
         left="166px"
       />
-      <Text position="absolute" left="41vw" top="6.4vh" textStyle="headingTimesLarge.lg">
+      <Text
+        position="absolute"
+        left="41vw"
+        top="6.4vh"
+        textStyle="headingTimesLarge.lg"
+        color="brownAlpha.100"
+      >
         People
       </Text>
     </Box>
