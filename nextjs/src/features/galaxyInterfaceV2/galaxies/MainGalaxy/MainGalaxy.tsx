@@ -17,8 +17,10 @@ const MainGalaxy: React.FC = () => {
         h="144.4vw"
         // left="32vw"
         // bottom="34vh"
-        left="-1441px"
-        top="-307px"
+        left="-154.01vh"
+        top="-23.98vw"
+        // left="-1441px"
+        // top="-307px"
       />
 
       <Text
@@ -42,8 +44,10 @@ const MainGalaxy: React.FC = () => {
         h="135.4vw"
         // top="44vh"
         // left="13vw"
-        top="494px"
-        left="248px"
+        top="52.83vh"
+        left="19.38vw"
+        // top="494px"
+        // left="248px"
       />
       <Text
         position="absolute"
@@ -64,10 +68,12 @@ const MainGalaxy: React.FC = () => {
         border="1px solid red"
         w="84.41vw"
         h="84.41vw"
-        // bottom="22vh"
-        // right="calc(-100vw / 2 - 5.4vw)"
-        top="-421px"
-        left="993.92px"
+        // top="22vh"
+        // left="5.4vw"
+        top="-44.98vh"
+        left="77.65vw"
+        // top="-421px"
+        // left="993.92px"
       />
       <Text
         position="absolute"
@@ -89,9 +95,11 @@ const MainGalaxy: React.FC = () => {
         w="62.42vw"
         h="62.42vw"
         // top="23.7vh"
-        // right="44vw"
-        top="-578px"
-        left="166px"
+        // left="44vw"
+        top="-61.81vh"
+        left="12.97vw"
+        // top="-578px"
+        // left="166px"
       />
       <Text
         position="absolute"
