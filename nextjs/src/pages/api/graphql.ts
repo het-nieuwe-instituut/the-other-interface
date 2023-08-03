@@ -10,6 +10,8 @@ import {
   objectZoomLevel2Data,
   archivesZoomLevel2Data,
 } from '../../mocks/mockData/zoomLevel2Data'
+import { zoomLevel3Data } from '../../mocks/mockData/zoomLevel3Data'
+import { zoomLevel4Data } from '../../mocks/mockData/zoomLevel4Data'
 
 import { createYoga } from 'graphql-yoga'
 
@@ -23,6 +25,10 @@ const customResolvers = {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     homepage(publicationState: string, locale: string) {
       return HomePageData.homepage
+    },
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    landingpages(slug: string, locale: string) {
+      return LandingPagesData.landingpages
     },
     zoomLevel1() {
       return ZoomLevel1Data
@@ -44,13 +50,12 @@ const customResolvers = {
           return []
       }
     },
-    // // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    // landingpageBySlug(slug: string, locale: string, publicationState: string) {
-    //   return HomePageData.homepage
-    // },
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    landingpages(slug: string, locale: string) {
-      return LandingPagesData.landingpages
+
+    zoomLevel3() {
+      return zoomLevel3Data
+    },
+    zoomLevel4() {
+      return zoomLevel4Data
     },
   },
 }

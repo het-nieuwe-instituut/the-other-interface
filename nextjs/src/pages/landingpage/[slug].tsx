@@ -74,7 +74,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   }
 
   if (includesZoomStatesZoom3Galaxy.includes(preservedZoom) && filter) {
-    zoomLevel3 = await zoom3Query[slug]?.({
+    zoomLevel3 = await zoom3Query(api)[slug]?.({
       filterId: filter,
       page: parseInt(page ?? '1'),
       pageSize: 16,
@@ -82,11 +82,16 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   }
 
   if (includesZoomStatesZoom4Galaxy.includes(preservedZoom) && filter && collection) {
-    zoomLevel4 = await zoom4QueryTask(slug, {
-      filter,
-      page: page ?? '1',
-      collection,
-    })
+    zoomLevel4 = await zoom4QueryTask(
+      slug,
+      {
+        filter,
+        page: page ?? '1',
+        collection,
+      },
+      api
+    )
+    console.log(util.inspect(zoomLevel4, false, null, true /* enable colors */))
   }
 
   const landingpage = await api.landingpageBySlug({
@@ -94,8 +99,6 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     locale: context?.locale,
     publicationState,
   })
-
-  console.log(util.inspect(landingpage, false, null, true /* enable colors */))
 
   return {
     props: {

@@ -1,6 +1,6 @@
 import { GraphQLClient } from 'graphql-request'
-import { IncomingHttpHeaders } from 'http'
 import { getSdk, Sdk } from 'src/generated/graphql'
+
 
 class ApiClientClass {
   private ApiClient: Sdk | null = null
@@ -11,16 +11,10 @@ class ApiClientClass {
     this.getApiService()
   }
 
-  getApiService(headers?: IncomingHttpHeaders) {
+  getApiService(headers?: Record<string, string>) {
     if (this.ApiClient) return this.ApiClient
 
-    const options = headers
-      ? {
-          headers: headers as Record<string, string>,
-        }
-      : undefined
-
-    const client = new GraphQLClient(this.endpoint, options)
+    const client = new GraphQLClient(this.endpoint, headers)
 
     this.ApiClient = getSdk(client)
 
@@ -36,7 +30,7 @@ class ApiClientClass {
 }
 
 // Provide initial base URL in the constructor
-const ApiClient = new ApiClientClass(process?.env?.parsed?.NEXT_PUBLIC_GRAPHQL_ENDPOINT ?? '')
+const ApiClient = new ApiClientClass(process?.env?.NEXT_PUBLIC_GRAPHQL_ENDPOINT ?? '')
 
 export default ApiClient
 

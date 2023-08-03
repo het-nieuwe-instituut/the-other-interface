@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { useMemo } from 'react'
 
 import RecordRelations from '../components/RecordRelations/RecordRelations'
+import { initApiClient } from '@/features/shared/utils/api'
 
 interface RelationsContainerProps {
   parentRef: React.RefObject<SVGSVGElement>
@@ -13,8 +14,10 @@ const RelationsContainer = (props: RelationsContainerProps) => {
   const router = useRouter()
   const { record, slug } = router.query
 
+  const apiClient = initApiClient(null)
+
   const { data } = useQuery(() =>
-    getZoom5RelationsRecordTask(router.asPath, (record as string) ?? (slug as string))
+    getZoom5RelationsRecordTask(router.asPath, (record as string) ?? (slug as string), apiClient)
   )
 
   const relations = useMemo(() => {
