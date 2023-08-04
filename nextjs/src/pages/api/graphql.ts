@@ -14,6 +14,7 @@ import { zoomLevel3Data } from '../../mocks/mockData/zoomLevel3Data'
 import { zoomLevel4Data } from '../../mocks/mockData/zoomLevel4Data'
 import { zoomLevel5Data } from '../../mocks/mockData/zoomLevel5Data'
 import { storiesWithoutRelations } from '../../mocks/mockData/storiesWithoutRelationsData'
+import { storyImagesMock } from '../../mocks/mockData/storyImagesData'
 
 import { createYoga } from 'graphql-yoga'
 
@@ -51,6 +52,10 @@ const customResolvers = {
         default:
           return []
       }
+    },
+
+    story() {
+      return storyImagesMock.story
     },
 
     storiesWithoutRelations() {

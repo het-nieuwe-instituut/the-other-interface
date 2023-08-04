@@ -8,8 +8,8 @@ export const initApiClient = (context: GetServerSidePropsContext | null) => {
     // We're on the server
     isMockedServer = getCookie('isMockedServer', context)
   } else {
-    // We're on the client
-    isMockedServer = Cookies.get('isMockedServer')
+    // We're on the client, it return string instead of boolean
+    isMockedServer = Cookies.get('isMockedServer') === 'true'
   }
 
   if (isMockedServer) {
