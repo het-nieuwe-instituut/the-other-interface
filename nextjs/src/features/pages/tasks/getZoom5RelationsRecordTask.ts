@@ -11,7 +11,6 @@ export async function getZoom5RelationsRecordTask(
   try {
     const { id } = extractSlugAndId(record)
     const type = extractType(path)
-    
 
     const relations =
       type === SupportedQuerys.stories

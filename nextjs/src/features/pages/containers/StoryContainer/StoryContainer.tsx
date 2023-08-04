@@ -18,10 +18,7 @@ interface Props {
 
 export const StoryContainer: React.FC<Props> = props => {
   return (
-    <RecordProvider
-      type={props.type}
-      zoomLevel5={{ zoom5detail: props?.record } ?? null}
-    >
+    <RecordProvider type={props.type} zoomLevel5={{ zoom5detail: props?.record } ?? null}>
       <Story story={props.story} />
     </RecordProvider>
   )

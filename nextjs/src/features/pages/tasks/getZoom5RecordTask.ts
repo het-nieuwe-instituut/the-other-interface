@@ -1,7 +1,7 @@
 import { extractSlugAndId } from '@/features/galaxyInterface/utils/extractors'
+import { type ApiClientType } from '@/features/graphql/api'
 
 import { SupportedQuerys, zoom5Config } from './zoom5Config'
-import { type ApiClientType } from '@/features/graphql/api'
 
 export async function getZoom5RecordTask(record: string, api: ApiClientType) {
   try {

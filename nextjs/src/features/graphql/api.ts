@@ -1,4 +1,5 @@
 import { GraphQLClient } from 'graphql-request'
+
 import { getSdk, Sdk } from 'src/generated/graphql'
 
 class ApiClientClass {

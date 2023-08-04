@@ -1,9 +1,16 @@
+import { JsonFileLoader } from '@graphql-tools/json-file-loader'
+import { loadSchemaSync } from '@graphql-tools/load'
+import { addResolversToSchema } from '@graphql-tools/schema'
+import { createYoga } from 'graphql-yoga'
+
 import { HomePageData } from '../../mocks/mockData/homepageData'
 import { LandingPagesData } from '../../mocks/mockData/landingpagesData'
+import { menuPagesData } from '../../mocks/mockData/menuPagesData'
+import { relationsData } from '../../mocks/mockData/relationsData'
+import { storiesData } from '../../mocks/mockData/storiesData'
+import { storiesWithoutRelations } from '../../mocks/mockData/storiesWithoutRelationsData'
+import { storyData } from '../../mocks/mockData/storyData'
 import { ZoomLevel1Data } from '../../mocks/mockData/zoomLevel1Data'
-import { loadSchemaSync } from '@graphql-tools/load'
-import { JsonFileLoader } from '@graphql-tools/json-file-loader'
-import { addResolversToSchema } from '@graphql-tools/schema'
 import {
   peopleZoomLevel2Data,
   publicationZoomLevel2Data,
@@ -13,13 +20,6 @@ import {
 import { zoomLevel3Data } from '../../mocks/mockData/zoomLevel3Data'
 import { zoomLevel4Data } from '../../mocks/mockData/zoomLevel4Data'
 import { zoomLevel5Data } from '../../mocks/mockData/zoomLevel5Data'
-import { storiesWithoutRelations } from '../../mocks/mockData/storiesWithoutRelationsData'
-import { storyData } from '../../mocks/mockData/storyData'
-import { storiesData } from '../../mocks/mockData/storiesData'
-import { relationsData } from '../../mocks/mockData/relationsData'
-import { menuPagesData } from '../../mocks/mockData/menuPagesData'
-
-import { createYoga } from 'graphql-yoga'
 
 const schema = loadSchemaSync('./graphql.schema.json', {
   loaders: [new JsonFileLoader()],

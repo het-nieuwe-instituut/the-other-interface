@@ -1,8 +1,9 @@
 import { Button } from '@chakra-ui/react'
-import usePresenter from './usePreseter'
+import { getCookie } from 'cookies-next'
+
 import { SWITCH_SERVER_Z_INDEX } from '../../constants/mainConstants'
 import { useTypeSafeTranslation } from '../../hooks/translations'
-import { getCookie } from 'cookies-next'
+import usePresenter from './usePreseter'
 
 function SwitchServerButton() {
   const { handleClick } = usePresenter()

@@ -2,6 +2,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import useQuery from '@/features/shared/hooks/useQuery'
+import { initApiClient } from '@/features/shared/utils/api'
 import { Box } from '@chakra-ui/react'
 import isEmpty from 'lodash/isEmpty'
 import Link from 'next/link'
@@ -13,7 +14,6 @@ import { ImageModuleFragmentFragment } from 'src/generated/graphql'
 import { StoriesItem } from '../../galaxies/MainGalaxy/types'
 import { GalaxyTooltip } from '../GalaxyTooltip/GalaxyTooltip'
 import { usePresenter } from './usePresenter'
-import { initApiClient } from '@/features/shared/utils/api'
 
 interface Props {
   disableLinkAndHover: boolean

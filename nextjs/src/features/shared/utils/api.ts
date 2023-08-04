@@ -1,7 +1,8 @@
+import ApiClient from '@/features/graphql/api'
+import { CookieValueTypes, getCookie } from 'cookies-next'
 import Cookies from 'js-cookie'
 import { GetServerSidePropsContext } from 'next'
-import { CookieValueTypes, getCookie } from 'cookies-next'
-import ApiClient from '@/features/graphql/api'
+
 export const initApiClient = (context: GetServerSidePropsContext | null) => {
   let isMockedServer: CookieValueTypes
   if (context) {

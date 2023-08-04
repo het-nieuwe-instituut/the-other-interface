@@ -1,10 +1,10 @@
 import { getZoom5RelationsRecordTask } from '@/features/pages/tasks/getZoom5RelationsRecordTask'
 import useQuery from '@/features/shared/hooks/useQuery'
+import { initApiClient } from '@/features/shared/utils/api'
 import { useRouter } from 'next/router'
 import { useMemo } from 'react'
 
 import RecordRelations from '../components/RecordRelations/RecordRelations'
-import { initApiClient } from '@/features/shared/utils/api'
 
 interface RelationsContainerProps {
   parentRef: React.RefObject<SVGSVGElement>
