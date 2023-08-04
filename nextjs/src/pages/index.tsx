@@ -4,7 +4,6 @@ import { prepareReduxState } from '@/features/shared/configs/store'
 import { initApiClient } from '@/features/shared/utils/api'
 import { getPublicationState } from '@/features/shared/utils/publication-state'
 import { GetServerSidePropsContext } from 'next'
-import util from 'util'
 
 const Home = (props: Awaited<ReturnType<typeof getServerSideProps>>['props']) => {
   return <HomepageContainer {...props} />
@@ -21,8 +20,6 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     api?.homepage({ locale, publicationState }),
     api?.zoomLevel1(),
   ])
-
-  console.log(util.inspect(zoomLevel1Data, false, null, true /* enable colors */))
 
   return {
     props: {

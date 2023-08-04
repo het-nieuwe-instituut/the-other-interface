@@ -24,8 +24,6 @@ export function usePresenter(
 
   const afterAnimate = useCallback(
     async (d: d3.SimulationNodeDatum & Item) => {
-      console.log(d, d.type === EntityNames.Stories)
-
       if (d.type === EntityNames.Stories) {
         dispatch(
           galaxyInterfaceActions.setActiveZoom({

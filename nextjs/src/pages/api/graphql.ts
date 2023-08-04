@@ -14,7 +14,10 @@ import { zoomLevel3Data } from '../../mocks/mockData/zoomLevel3Data'
 import { zoomLevel4Data } from '../../mocks/mockData/zoomLevel4Data'
 import { zoomLevel5Data } from '../../mocks/mockData/zoomLevel5Data'
 import { storiesWithoutRelations } from '../../mocks/mockData/storiesWithoutRelationsData'
-import { storyImagesMock } from '../../mocks/mockData/storyImagesData'
+import { storyData } from '../../mocks/mockData/storyData'
+import { storiesData } from '../../mocks/mockData/storiesData'
+import { relationsData } from '../../mocks/mockData/relationsData'
+import { menuPagesData } from '../../mocks/mockData/menuPagesData'
 
 import { createYoga } from 'graphql-yoga'
 
@@ -54,21 +57,48 @@ const customResolvers = {
       }
     },
 
-    story() {
-      return storyImagesMock.story
-    },
-
-    storiesWithoutRelations() {
-      return storiesWithoutRelations.storiesWithoutRelations
-    },
     zoomLevel3() {
       return zoomLevel3Data
     },
     zoomLevel4() {
       return zoomLevel4Data
     },
+    // TODO if you want to check galaxy traveling more then to from object to story - mock this
+    zoomLevel5Publication() {
+      return null
+    },
+    zoomLevel5Person() {
+      return null
+    },
+    zoomLevel5Archive() {
+      return null
+    },
     zoomLevel5Object() {
       return zoomLevel5Data['zoomLevel5Object'].zoom5detail
+    },
+
+    story() {
+      return storyData.story
+    },
+
+    stories() {
+      return storiesData.stories
+    },
+
+    storiesWithoutRelations() {
+      return storiesWithoutRelations.storiesWithoutRelations
+    },
+
+    relations: () => {
+      return relationsData.relations
+    },
+
+    menupages() {
+      return menuPagesData.menupages
+    },
+
+    menupage() {
+      return menuPagesData.menupages.data[0]
     },
   },
 }

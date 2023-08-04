@@ -1,6 +1,5 @@
 export const zoomLevel5Object = {
   zoom5detail: {
-    __typename: 'ObjectsZoomLevel5DetailType',
     id: '1982',
     image: 'https://example-mock-data.com/media/1982',
     imageLabel: 'Mocked DUIK_20.1.1.tif',

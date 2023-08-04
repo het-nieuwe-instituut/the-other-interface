@@ -4,7 +4,6 @@ import { initApiClient } from '@/features/shared/utils/api'
 import { GetServerSidePropsContext } from 'next'
 
 import { ObjectRelationsQuery, StoryBySlugQuery } from 'src/generated/graphql'
-import util from 'util'
 
 export interface GetZoom5StoryQuery {
   story?: NonNullable<NonNullable<NonNullable<StoryBySlugQuery>['stories']>['data']>[0]
@@ -32,8 +31,6 @@ export async function getZoom5StoryTask(
       locale,
       publicationState,
     })
-
-    console.log(util.inspect(storyBySlug, false, null, true /* enable colors */))
 
     return {
       story: storyBySlug?.stories?.data?.[0],

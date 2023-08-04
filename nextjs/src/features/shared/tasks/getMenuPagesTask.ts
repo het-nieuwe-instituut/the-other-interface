@@ -1,8 +1,9 @@
-import ApiClient from '@/features/graphql/api'
+import { initApiClient } from '../utils/api'
 
 export async function getMenuPagesTask(locale: string) {
   try {
-    const menupages = await ApiClient?.menuPages({ locale })
+    const api = initApiClient(null)
+    const menupages = await api?.menuPages({ locale })
 
     return {
       menupages,

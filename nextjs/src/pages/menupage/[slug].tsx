@@ -1,5 +1,5 @@
-import ApiClient from '@/features/graphql/api'
 import { MenupageContainer } from '@/features/pages/containers/MenupageContainer/MenupageContainer'
+import { initApiClient } from '@/features/shared/utils/api'
 import { getPublicationState } from '@/features/shared/utils/publication-state'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 
@@ -18,7 +18,9 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   const slug = queryParams.slug
   const publicationState = getPublicationState(context.preview)
 
-  const menupage = await ApiClient?.menupageBySlug({
+  const api = initApiClient(context)
+
+  const menupage = await api?.menupageBySlug({
     slug,
     publicationState: publicationState,
   })

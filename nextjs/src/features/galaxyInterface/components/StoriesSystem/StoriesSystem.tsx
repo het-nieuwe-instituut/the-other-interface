@@ -127,7 +127,6 @@ const GalaxyPositionTooltip: React.FC<{
 }> = ({ item, x, y }) => {
   const api = initApiClient(null)
   const { isLoading, isError, data } = useQuery(() => api?.storyImages({ id: item.id }))
-  console.log(data, 'data')
   const components = data?.story.data?.attributes?.components?.filter(c => !isEmpty(c))
   const imgComponent = components?.find(x => x !== undefined) as
     | ImageModuleFragmentFragment
