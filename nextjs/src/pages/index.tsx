@@ -27,6 +27,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
       host: context.req.headers.host || null,
       homepage,
       zoomLevel1Data,
+      activeZoom: (context.query?.preservedZoom as ZoomStates) ?? ZoomStates.Zoom0,
       reduxState: prepareReduxState({
         galaxyInterface: {
           activeZoom: (context.query?.preservedZoom as ZoomStates) ?? ZoomStates.Zoom0,
