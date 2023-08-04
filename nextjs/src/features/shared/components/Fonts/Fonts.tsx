@@ -26,7 +26,7 @@ const Fonts = () => {
                 }
                 @font-face{
                   font-family:"Times Dot";
-                  src:url("/Fonts/timesDot/TimesDot.otf") format("otf"),url("/Fonts/timesDot/TimesDot.woff") format("woff");
+                  src:url("/Fonts/timesDot/TimesDot.woff") format("woff"),url("/Fonts/timesDot/TimesDot.woff2") format("woff2");
                 }
           `}
     />
