@@ -1,6 +1,7 @@
 import { extractSlugAndId } from '@/features/galaxyInterface/utils/extractors'
 import { ApiClientType } from '@/features/graphql/api'
 import { PublicationState } from '@/features/shared/types/enums'
+
 import { ObjectRelationsQuery, StoryBySlugQuery } from 'src/generated/graphql'
 
 export interface GetZoom5StoryQuery {
