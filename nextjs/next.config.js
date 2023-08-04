@@ -32,7 +32,6 @@ const nextConfig = {
   },
   output: 'standalone',
   env: {
-    NEXT_PUBLIC_RANDOM: true,
     parsed,
   },
 }
