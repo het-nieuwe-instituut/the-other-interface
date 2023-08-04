@@ -7,8 +7,6 @@ interface Props {
   children: CollectionType
 }
 
-export type CloudSize = `${string}vw`
-
 export const CloudTitle: React.FC<Props> = ({ position, children }) => (
   <Text position="absolute" textStyle="headingTimesLarge.lg" style={{ ...position }}>
     {children}

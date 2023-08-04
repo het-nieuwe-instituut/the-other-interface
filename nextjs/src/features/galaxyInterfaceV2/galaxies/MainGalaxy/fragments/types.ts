@@ -5,4 +5,6 @@ export type Position = {
   left?: string
 }
 
+export type CloudSize = `${string}vw`
+
 export type CollectionType = 'Archives' | 'Publications' | 'Objects' | 'People'
