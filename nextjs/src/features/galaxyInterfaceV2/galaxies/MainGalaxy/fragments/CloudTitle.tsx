@@ -1,11 +1,6 @@
 import { Text } from '@chakra-ui/react'
 
-type Position = {
-  top?: string
-  right?: string
-  bottom?: string
-  left?: string
-}
+import { Position } from './type'
 
 interface Props {
   position: Position
