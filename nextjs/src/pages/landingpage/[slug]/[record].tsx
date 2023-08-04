@@ -5,6 +5,7 @@ import { SupportedQuerys } from '@/features/pages/tasks/zoom5Config'
 import { prepareReduxState } from '@/features/shared/configs/store'
 import { initApiClient } from '@/features/shared/utils/api'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
+import util from 'util'
 
 export interface RecordQueryParams {
   record: string
@@ -42,6 +43,8 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     api?.landingpageBySlug({ slug, locale: context?.locale }),
     getZoom5RecordTask(record, api),
   ])
+
+  console.log(util.inspect(zoom5, false, null, true /* enable colors */))
 
   return {
     props: {

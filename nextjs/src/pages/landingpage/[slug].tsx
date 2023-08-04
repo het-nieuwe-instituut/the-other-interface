@@ -15,7 +15,6 @@ import { prepareReduxState } from '@/features/shared/configs/store'
 import { initApiClient } from '@/features/shared/utils/api'
 import { getPublicationState } from '@/features/shared/utils/publication-state'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
-import util from 'util'
 
 import { EntityNames } from 'src/generated/graphql'
 
@@ -91,7 +90,6 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
       },
       api
     )
-    console.log(util.inspect(zoomLevel4, false, null, true /* enable colors */))
   }
 
   const landingpage = await api.landingpageBySlug({

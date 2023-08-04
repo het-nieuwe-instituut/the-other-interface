@@ -65,34 +65,4 @@ export const zoomLevel3Data = [
     count: 644,
     total: 31464,
   },
-  {
-    uri: 'https://some-mocked-uri',
-    name: 'Mocked Filter 12',
-    count: 631,
-    total: 31464,
-  },
-  {
-    uri: 'https://some-mocked-uri',
-    name: 'Mocked Filter 13',
-    count: 628,
-    total: 31464,
-  },
-  {
-    uri: 'https://some-mocked-uri',
-    name: 'Mocked Filter 14',
-    count: 590,
-    total: 31464,
-  },
-  {
-    uri: 'https://some-mocked-uri',
-    name: 'Mocked Filter 15',
-    count: 579,
-    total: 31464,
-  },
-  {
-    uri: 'https://some-mocked-uri',
-    name: 'Mocked Filter 16',
-    count: 578,
-    total: 31464,
-  },
 ]

@@ -12,6 +12,7 @@ import {
 } from '../../mocks/mockData/zoomLevel2Data'
 import { zoomLevel3Data } from '../../mocks/mockData/zoomLevel3Data'
 import { zoomLevel4Data } from '../../mocks/mockData/zoomLevel4Data'
+import { zoomLevel5Data } from '../../mocks/mockData/zoomLevel5Data'
 
 import { createYoga } from 'graphql-yoga'
 
@@ -56,6 +57,9 @@ const customResolvers = {
     },
     zoomLevel4() {
       return zoomLevel4Data
+    },
+    zoomLevel5Object() {
+      return zoomLevel5Data['zoomLevel5Object'].zoom5detail
     },
   },
 }

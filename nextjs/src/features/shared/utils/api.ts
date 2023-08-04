@@ -6,7 +6,7 @@ export const initApiClient = (context: GetServerSidePropsContext | null) => {
   let isMockedServer: CookieValueTypes
   if (context) {
     // We're on the server
-    isMockedServer = getCookie('isMockedServer')
+    isMockedServer = getCookie('isMockedServer', context)
   } else {
     // We're on the client
     isMockedServer = Cookies.get('isMockedServer')

@@ -1,7 +1,6 @@
 import { GraphQLClient } from 'graphql-request'
 import { getSdk, Sdk } from 'src/generated/graphql'
 
-
 class ApiClientClass {
   private ApiClient: Sdk | null = null
   private endpoint: string
