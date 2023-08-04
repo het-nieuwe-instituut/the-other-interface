@@ -1,8 +1,15 @@
 import { Box } from '@chakra-ui/react'
 
-import { CloudTitle, Cloud } from './fragments'
+import { CloudTitle, Cloud, CloudSize, CollectionType, Position } from './fragments'
 
-const collectionClouds = [
+interface CollectionCloud {
+  title: CollectionType
+  size: CloudSize
+  titlePosition: Position
+  cloudPosition: Position
+}
+
+const collectionClouds: CollectionCloud[] = [
   {
     title: 'Archives',
     size: '144.4vw',
@@ -29,17 +36,15 @@ const collectionClouds = [
   },
 ]
 
-const MainGalaxy: React.FC = () => {
-  return (
-    <Box position="relative" width="100vw" height="100vh">
-      {collectionClouds.map(cloud => (
-        <>
-          <Cloud size={cloud.size} position={cloud.cloudPosition} />
-          <CloudTitle position={cloud.titlePosition}>{cloud.title}</CloudTitle>
-        </>
-      ))}
-    </Box>
-  )
-}
+const MainGalaxy: React.FC = () => (
+  <Box position="relative" width="100vw" height="100vh">
+    {collectionClouds.map(cloud => (
+      <>
+        <Cloud size={cloud.size} position={cloud.cloudPosition} />
+        <CloudTitle position={cloud.titlePosition}>{cloud.title}</CloudTitle>
+      </>
+    ))}
+  </Box>
+)
 
 export default MainGalaxy

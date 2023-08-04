@@ -1,11 +1,13 @@
 import { Text } from '@chakra-ui/react'
 
-import { Position } from './type'
+import { CollectionType, Position } from './types'
 
 interface Props {
   position: Position
-  children: string
+  children: CollectionType
 }
+
+export type CloudSize = `${string}vw`
 
 export const CloudTitle: React.FC<Props> = ({ position, children }) => (
   <Text position="absolute" textStyle="headingTimesLarge.lg" style={{ ...position }}>

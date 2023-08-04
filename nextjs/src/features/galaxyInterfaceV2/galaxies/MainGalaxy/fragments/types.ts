@@ -4,3 +4,5 @@ export type Position = {
   bottom?: string
   left?: string
 }
+
+export type CollectionType = 'Archives' | 'Publications' | 'Objects' | 'People'
