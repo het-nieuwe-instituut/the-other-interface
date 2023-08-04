@@ -7,6 +7,7 @@ module.exports = {
   async up(knex) {
     try {
       const res = await knex.raw('SELECT id, record_id "recordId", "type" FROM triply_records')
+
       if (!res || !res.rows || !res.rows.length) {
         console.log('no triply records to migrate, returning')
         return
@@ -39,7 +40,7 @@ async function getLabel({ recordId, type }) {
   }
 }
 
-function getLabelFromType(triplyData, type): string {
+function getLabelFromType(triplyData, type) {
   switch (type) {
     case 'Archive': {
       const title = triplyData.type === 'fonds' ? triplyData.recordTitle : triplyData.title
@@ -55,7 +56,7 @@ function getLabelFromType(triplyData, type): string {
   }
 }
 
-function getLabelFromTriplyData(triplyData, type): string {
+function getLabelFromTriplyData(triplyData, type) {
   let label = getLabelFromType(triplyData, type)
 
   label = label?.trim() || DEFAULT_LABEL
