@@ -1,5 +1,5 @@
-import ApiClient from '@/features/graphql/api'
 import { HomepageContainer } from '@/features/pagesV2/containers/HomepageContainer/HomepageContainer'
+import { initApiClient } from '@/features/shared/utils/api'
 import { getPublicationState } from '@/features/shared/utils/publication-state'
 import { GetServerSidePropsContext } from 'next'
 
@@ -12,10 +12,11 @@ export default Home
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
   const publicationState = getPublicationState(context.preview)
   const locale = context.locale
+  const api = initApiClient(context)
 
   const [homepage] = await Promise.all([
-    ApiClient?.homepage({ locale, publicationState }),
-    ApiClient?.zoomLevel1(),
+    api?.homepage({ locale, publicationState }),
+    api?.zoomLevel1(),
   ])
 
   return {

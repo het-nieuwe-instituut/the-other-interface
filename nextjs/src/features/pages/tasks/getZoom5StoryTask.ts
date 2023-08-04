@@ -1,8 +1,6 @@
 import { extractSlugAndId } from '@/features/galaxyInterface/utils/extractors'
+import { ApiClientType } from '@/features/graphql/api'
 import { PublicationState } from '@/features/shared/types/enums'
-import { initApiClient } from '@/features/shared/utils/api'
-import { GetServerSidePropsContext } from 'next'
-
 import { ObjectRelationsQuery, StoryBySlugQuery } from 'src/generated/graphql'
 
 export interface GetZoom5StoryQuery {
@@ -21,11 +19,10 @@ export async function getZoom5StoryTask(
     locale: string
     publicationState: PublicationState
   },
-  context?: GetServerSidePropsContext
+  api?: ApiClientType
 ) {
   try {
     const { slug } = extractSlugAndId(record)
-    const api = context ? initApiClient(context) : initApiClient(null)
     const storyBySlug = await api?.storyBySlug({
       slug,
       locale,
