@@ -15,6 +15,7 @@ import { prepareReduxState } from '@/features/shared/configs/store'
 import { initApiClient } from '@/features/shared/utils/api'
 import { getPublicationState } from '@/features/shared/utils/publication-state'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
+import util from 'util'
 
 import { EntityNames } from 'src/generated/graphql'
 
@@ -70,6 +71,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     includesZoomStatesMainGalaxy.includes(preservedZoom)
   ) {
     stories = await api.storiesWithoutRelations({ pagination: { pageSize: 200 }, locale })
+    console.log(util.inspect(stories, false, null, true /* enable colors */))
   }
 
   if (includesZoomStatesZoom3Galaxy.includes(preservedZoom) && filter) {

@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import ApiClient from '@/features/graphql/api'
 import useQuery from '@/features/shared/hooks/useQuery'
 import { Box } from '@chakra-ui/react'
 import isEmpty from 'lodash/isEmpty'
@@ -14,6 +13,7 @@ import { ImageModuleFragmentFragment } from 'src/generated/graphql'
 import { StoriesItem } from '../../galaxies/MainGalaxy/types'
 import { GalaxyTooltip } from '../GalaxyTooltip/GalaxyTooltip'
 import { usePresenter } from './usePresenter'
+import { initApiClient } from '@/features/shared/utils/api'
 
 interface Props {
   disableLinkAndHover: boolean
@@ -125,7 +125,10 @@ const GalaxyPositionTooltip: React.FC<{
   x: number
   y: number
 }> = ({ item, x, y }) => {
-  const { isLoading, isError, data } = useQuery(() => ApiClient?.storyImages({ id: item.id }))
+  console.log(item, 'item')
+  const api = initApiClient(null)
+  const { isLoading, isError, data } = useQuery(() => api?.storyImages({ id: item.id }))
+  console.log(isError, 'data')
   const components = data?.story.data?.attributes?.components?.filter(c => !isEmpty(c))
   const imgComponent = components?.find(x => x !== undefined) as
     | ImageModuleFragmentFragment
