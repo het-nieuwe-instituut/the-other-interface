@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react'
+import { Fragment } from 'react'
 
 import { CloudTitle, Cloud, CloudSize, CollectionType, Position } from './fragments'
-import { Fragment } from 'react'
 
 interface CollectionCloud {
   title: CollectionType
