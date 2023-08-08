@@ -1,6 +1,6 @@
 import colors from '../foundations/colors'
 
-const textStyles = {
+const oldTextStyles = {
   h1: {
     color: `${colors.black}`,
     fontSize: ['48px', '52px', '62px', '62px'],
@@ -108,6 +108,23 @@ const textStyles = {
     /* or 16px */
     textShadow: '0px 0px 4px #CCCED0, 0px 0px 4px #CCCED0',
   },
+}
+
+const headingTimesLarge = {
+  lg: {
+    fontFamily: "'Times Dot'",
+    fontStyle: 'normal',
+    fontWeight: '400',
+    fontSize: '2.5vw',
+    lineHeight: '41.6px',
+    color: 'brownAlpha.100',
+  },
+}
+
+const textStyles = {
+  ...oldTextStyles,
+
+  headingTimesLarge,
 }
 
 export default textStyles
