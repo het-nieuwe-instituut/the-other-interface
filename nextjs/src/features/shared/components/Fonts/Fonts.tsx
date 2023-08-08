@@ -24,6 +24,10 @@ const Fonts = () => {
                     font-family:"Univers bold oblique";
                     src:url("/Fonts/1476056/98753b06-fa76-448d-adfe-c48d096d7555.woff2") format("woff2"),url("/Fonts/1476056/3d91ae6c-54b8-4354-8257-5b4bf04cc5ef.woff") format("woff");
                 }
+                @font-face{
+                  font-family:"Times Dot";
+                  src:url("/Fonts/timesDot/TimesDot.woff") format("woff"),url("/Fonts/timesDot/TimesDot.woff2") format("woff2");
+                }
           `}
     />
   )

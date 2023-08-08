@@ -160,6 +160,11 @@ const oldColors = {
   typeColors: typeColors,
 }
 
+const brownAlpha = {
+  '40': 'RGBA(73, 40, 11, .4)',
+  '100': '#49280B',
+}
+
 const blue = {
   '100': '#D5F3FB',
 }
@@ -167,6 +172,7 @@ const blue = {
 const colors = {
   ...oldColors,
   blue,
+  brownAlpha,
 }
 
 export default colors
