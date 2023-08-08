@@ -63,7 +63,7 @@ const customResolvers = {
     zoomLevel4() {
       return zoomLevel4Data
     },
-    // TODO if you want to check galaxy traveling more then to from object to story - mock this
+    // TODO this can be implemented in case we want to test transition before zoom level 5 object and another type. So far it works only from object to story
     zoomLevel5Publication() {
       return null
     },

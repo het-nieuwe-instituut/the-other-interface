@@ -1,6 +1,6 @@
 import { getCookie } from 'cookies-next'
 
-const test = getCookie('test')
+const isMockedServer = getCookie('isMockedServer')
 
 const baseUrlWithRealData = process?.env?.parsed?.NEXT_PUBLIC_REACT_APP_IMAGE_BASE_URL
   ? process.env.parsed.NEXT_PUBLIC_REACT_APP_IMAGE_BASE_URL
@@ -8,4 +8,4 @@ const baseUrlWithRealData = process?.env?.parsed?.NEXT_PUBLIC_REACT_APP_IMAGE_BA
 
 const baseUrlWithMockData = ''
 
-export const imageBasePath = test ? baseUrlWithRealData : baseUrlWithMockData
+export const imageBasePath = isMockedServer ? baseUrlWithMockData : baseUrlWithRealData
