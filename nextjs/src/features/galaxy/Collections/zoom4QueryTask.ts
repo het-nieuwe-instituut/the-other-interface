@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import ApiClient from '@/features/graphql/api'
+import { type ApiClientType } from '@/features/graphql/api'
 
 import {
   ArchivesZoomLevel4FiltersArgs,
@@ -14,13 +14,13 @@ import {
 
 import { SupportedLandingPages } from '../FilterClouds/FilterCloudsContainer'
 
-const useZoom4Query = {
-  [SupportedLandingPages.Archives]: ApiClient?.Zoom4Archives,
-  [SupportedLandingPages.Objects]: ApiClient?.Zoom4Objects,
-  [SupportedLandingPages.People]: ApiClient?.Zoom4People,
-  [SupportedLandingPages.Publications]: ApiClient?.Zoom4Publications,
-  [SupportedLandingPages.Stories]: ApiClient?.Zoom4Publications,
-}
+const zoom4Config = (api: ApiClientType) => ({
+  [SupportedLandingPages.Archives]: api?.Zoom4Archives,
+  [SupportedLandingPages.Objects]: api?.Zoom4Objects,
+  [SupportedLandingPages.People]: api?.Zoom4People,
+  [SupportedLandingPages.Publications]: api?.Zoom4Publications,
+  [SupportedLandingPages.Stories]: api?.Zoom4Publications,
+})
 
 const variableType = {
   [SupportedLandingPages.Archives]: 'archivesFilters',
@@ -195,11 +195,12 @@ export function zoom4QueryTask(
     filter: string
     collection: string
     page: string
-  }
+  },
+  api: ApiClientType
 ) {
   const filtersType = variableType[type]
   const config = variableFilters[type][filter]
-  const query = useZoom4Query[type]?.({
+  const query = zoom4Config(api)[type]?.({
     [filtersType]: {
       ...config.accessor(collection as string),
     },

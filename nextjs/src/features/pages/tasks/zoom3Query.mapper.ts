@@ -1,4 +1,4 @@
-import ApiClient from '@/features/graphql/api'
+import { type ApiClientType } from '@/features/graphql/api'
 
 import {
   Zoom3ArchivesQuery,
@@ -14,12 +14,12 @@ export enum SupportedLandingPages {
   Objects = 'objects',
 }
 
-export const zoom3Query = {
-  [SupportedLandingPages.Archives]: ApiClient?.Zoom3Archives,
-  [SupportedLandingPages.Objects]: ApiClient?.Zoom3Objects,
-  [SupportedLandingPages.People]: ApiClient?.Zoom3DPeople,
-  [SupportedLandingPages.Publications]: ApiClient?.Zoom3DPublications,
-}
+export const zoom3Query = (api: ApiClientType) => ({
+  [SupportedLandingPages.Archives]: api?.Zoom3Archives,
+  [SupportedLandingPages.Objects]: api?.Zoom3Objects,
+  [SupportedLandingPages.People]: api?.Zoom3DPeople,
+  [SupportedLandingPages.Publications]: api?.Zoom3DPublications,
+})
 
 export type Zoom3ReturnType =
   | Zoom3ArchivesQuery

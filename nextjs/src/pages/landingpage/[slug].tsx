@@ -8,11 +8,11 @@ import {
   includesZoomStatesZoom4Galaxy,
 } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
 import { ZoomStates } from '@/features/galaxyInterface/types/galaxy'
-import ApiClient from '@/features/graphql/api'
 import { LandingpageContainer } from '@/features/pages/containers/LandingpageContainer/LandingpageContainer'
 import { LandingpageProvider } from '@/features/pages/containers/LandingpageContainer/LandingpageContext'
 import { zoom3Query } from '@/features/pages/tasks/zoom3Query.mapper'
 import { prepareReduxState } from '@/features/shared/configs/store'
+import { initApiClient } from '@/features/shared/utils/api'
 import { getPublicationState } from '@/features/shared/utils/publication-state'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 
@@ -58,19 +58,22 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   let zoomLevel4 = null
   let stories = null
 
+  const api = initApiClient(context)
+
   if (entityName && includesZoomStatesZoom2Galaxy.includes(preservedZoom)) {
-    zoomLevel2 = await ApiClient?.zoomLevel2({ entityName })
+    const api = initApiClient(context)
+    zoomLevel2 = await api.zoomLevel2({ entityName })
   }
 
   if (
     slug === EntityNames.Stories.toLowerCase() &&
     includesZoomStatesMainGalaxy.includes(preservedZoom)
   ) {
-    stories = await ApiClient?.storiesWithoutRelations({ pagination: { pageSize: 200 }, locale })
+    stories = await api.storiesWithoutRelations({ pagination: { pageSize: 200 }, locale })
   }
 
   if (includesZoomStatesZoom3Galaxy.includes(preservedZoom) && filter) {
-    zoomLevel3 = await zoom3Query[slug]?.({
+    zoomLevel3 = await zoom3Query(api)[slug]?.({
       filterId: filter,
       page: parseInt(page ?? '1'),
       pageSize: 16,
@@ -78,14 +81,18 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   }
 
   if (includesZoomStatesZoom4Galaxy.includes(preservedZoom) && filter && collection) {
-    zoomLevel4 = await zoom4QueryTask(slug, {
-      filter,
-      page: page ?? '1',
-      collection,
-    })
+    zoomLevel4 = await zoom4QueryTask(
+      slug,
+      {
+        filter,
+        page: page ?? '1',
+        collection,
+      },
+      api
+    )
   }
 
-  const landingpage = await ApiClient?.landingpageBySlug({
+  const landingpage = await api.landingpageBySlug({
     slug,
     locale: context?.locale,
     publicationState,

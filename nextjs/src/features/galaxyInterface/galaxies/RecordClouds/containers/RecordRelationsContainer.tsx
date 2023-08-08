@@ -1,5 +1,6 @@
 import { getZoom5RelationsRecordTask } from '@/features/pages/tasks/getZoom5RelationsRecordTask'
 import useQuery from '@/features/shared/hooks/useQuery'
+import { initApiClient } from '@/features/shared/utils/api'
 import { useRouter } from 'next/router'
 import { useMemo } from 'react'
 
@@ -13,8 +14,10 @@ const RelationsContainer = (props: RelationsContainerProps) => {
   const router = useRouter()
   const { record, slug } = router.query
 
+  const apiClient = initApiClient()
+
   const { data } = useQuery(() =>
-    getZoom5RelationsRecordTask(router.asPath, (record as string) ?? (slug as string))
+    getZoom5RelationsRecordTask(router.asPath, (record as string) ?? (slug as string), apiClient)
   )
 
   const relations = useMemo(() => {

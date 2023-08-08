@@ -12,10 +12,16 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { ThemeProvider } from '@emotion/react'
 import 'keen-slider/keen-slider.min.css'
 import type { AppProps } from 'next/app'
+import dynamic from 'next/dynamic'
 import Script from 'next/script'
 import { useMemo } from 'react'
 import { Provider } from 'react-redux'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
+
+const DynamicSwitchServerButton = dynamic(
+  () => import('../features/shared/components/SwitchServerButton/SwitchServerButton'),
+  { ssr: false }
+)
 
 function MyApp({ Component, pageProps }: AppProps) {
   const store = useMemo(() => createStore(pageProps.reduxState), [pageProps.reduxState])
@@ -32,11 +38,11 @@ function MyApp({ Component, pageProps }: AppProps) {
           />
           <Script id="google-analytics" strategy="afterInteractive">
             {`
-                                window.dataLayer = window.dataLayer || [];
-                                function gtag(){dataLayer.push(arguments);}
-                                gtag('js', new Date());
-                                gtag('config', '${process.env.parsed.NEXT_PUBLIC_GA_MEASUREMENT_ID}');
-                            `}
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${process.env.parsed.NEXT_PUBLIC_GA_MEASUREMENT_ID}');
+            `}
           </Script>
         </>
       )}
@@ -50,6 +56,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 <NavigationOverlayProvider>
                   <MobileOverlayProvider>
                     <>
+                      <DynamicSwitchServerButton />
                       <div id={'galaxy-root'}></div>
                       <Component {...pageProps} />
                       <Footer />

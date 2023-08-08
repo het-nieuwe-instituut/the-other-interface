@@ -1,9 +1,9 @@
 import { ZoomStates } from '@/features/galaxyInterface/types/galaxy'
-import ApiClient from '@/features/graphql/api'
 import { RecordContainer } from '@/features/pages/containers/RecordContainer/RecordContainer'
 import { getZoom5RecordTask } from '@/features/pages/tasks/getZoom5RecordTask'
 import { SupportedQuerys } from '@/features/pages/tasks/zoom5Config'
 import { prepareReduxState } from '@/features/shared/configs/store'
+import { initApiClient } from '@/features/shared/utils/api'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 
 export interface RecordQueryParams {
@@ -36,10 +36,11 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   const record = queryParams.record
   const slug = queryParams.slug
   const preservedZoom = queryParams.preservedZoom
+  const api = initApiClient(context)
 
   const [landingpage, zoom5] = await Promise.all([
-    ApiClient?.landingpageBySlug({ slug, locale: context?.locale }),
-    getZoom5RecordTask(record),
+    api?.landingpageBySlug({ slug, locale: context?.locale }),
+    getZoom5RecordTask(record, api),
   ])
 
   return {

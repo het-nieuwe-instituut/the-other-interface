@@ -1,5 +1,6 @@
 import { getZoom5RelationsRecordTask } from '@/features/pages/tasks/getZoom5RelationsRecordTask'
 import useQuery from '@/features/shared/hooks/useQuery'
+import { initApiClient } from '@/features/shared/utils/api'
 import { useRouter } from 'next/router'
 import { useMemo } from 'react'
 
@@ -12,9 +13,10 @@ interface RelationsContainerProps {
 const RelationsContainer = (props: RelationsContainerProps) => {
   const router = useRouter()
   const { record, slug } = router.query
+  const api = initApiClient()
 
   const { data } = useQuery(() =>
-    getZoom5RelationsRecordTask(router.asPath, (record || slug) as string)
+    getZoom5RelationsRecordTask(router.asPath, (record || slug) as string, api)
   )
   const relations = useMemo(() => {
     return data?.zoom5relations?.relations?.filter(item => item?.total > 0)

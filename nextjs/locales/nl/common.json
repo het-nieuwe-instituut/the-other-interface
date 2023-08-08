@@ -14,5 +14,7 @@
   "heightAbbr": "h",
   "widthAbbr": "b",
   "depthAbbr": "d",
-  "readMore": "Lees verder"
+  "readMore": "Lees verder",
+  "switchToMockedServer": "Overschakelen naar tests server",
+  "switchToLiveServer": "Overschakelen naar live server"
 }

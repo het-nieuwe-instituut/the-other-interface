@@ -1,5 +1,5 @@
-import ApiClient from '@/features/graphql/api'
 import { MenupageContainer } from '@/features/pages/containers/MenupageContainer/MenupageContainer'
+import { initApiClient } from '@/features/shared/utils/api'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 
 export interface MenupageQueryParams {
@@ -16,8 +16,9 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   const queryParams = context.query as unknown as MenupageQueryParams
   const { slug } = queryParams
   const { locale } = context
+  const api = initApiClient(context)
 
-  const menupage = await ApiClient?.menupageBySlug({ slug, locale })
+  const menupage = await api?.menupageBySlug({ slug, locale })
 
   return {
     props: {
