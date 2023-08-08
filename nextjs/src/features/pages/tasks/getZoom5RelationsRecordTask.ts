@@ -1,5 +1,5 @@
 import { extractSlugAndId, extractType } from '@/features/galaxyInterface/utils/extractors'
-import { ApiClientType } from '@/features/graphql/api'
+import { type ApiClientType } from '@/features/graphql/api'
 
 import { SupportedQuerys, zoom5Config } from './zoom5Config'
 

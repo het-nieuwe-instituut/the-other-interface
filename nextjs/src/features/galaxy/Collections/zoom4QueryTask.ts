@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ApiClientType } from '@/features/graphql/api'
+import { type ApiClientType } from '@/features/graphql/api'
 
 import {
   ArchivesZoomLevel4FiltersArgs,

@@ -2,7 +2,7 @@ import { initApiClient } from '../utils/api'
 
 export async function getMenuPagesTask(locale: string) {
   try {
-    const api = initApiClient(null)
+    const api = initApiClient()
     const menupages = await api?.menuPages({ locale })
 
     return {

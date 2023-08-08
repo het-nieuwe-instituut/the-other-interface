@@ -13,7 +13,7 @@ interface RelationsContainerProps {
 const RelationsContainer = (props: RelationsContainerProps) => {
   const router = useRouter()
   const { record, slug } = router.query
-  const api = initApiClient(null)
+  const api = initApiClient()
 
   const { data } = useQuery(() =>
     getZoom5RelationsRecordTask(router.asPath, (record || slug) as string, api)

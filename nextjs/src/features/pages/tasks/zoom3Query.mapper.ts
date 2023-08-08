@@ -1,4 +1,4 @@
-import { ApiClientType } from '@/features/graphql/api'
+import { type ApiClientType } from '@/features/graphql/api'
 
 import {
   Zoom3ArchivesQuery,

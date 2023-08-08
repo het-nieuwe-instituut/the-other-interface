@@ -14,7 +14,7 @@ const RelationsContainer = (props: RelationsContainerProps) => {
   const router = useRouter()
   const { record, slug } = router.query
 
-  const apiClient = initApiClient(null)
+  const apiClient = initApiClient()
 
   const { data } = useQuery(() =>
     getZoom5RelationsRecordTask(router.asPath, (record as string) ?? (slug as string), apiClient)
