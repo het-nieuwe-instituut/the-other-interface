@@ -6,6 +6,7 @@ import {
   PublicationsZoomLevel5Types,
   TriplyRecord,
 } from 'src/generated/graphql'
+
 import { imageBasePath } from '../modulesConstants'
 
 interface DefaultTriplyFields {
