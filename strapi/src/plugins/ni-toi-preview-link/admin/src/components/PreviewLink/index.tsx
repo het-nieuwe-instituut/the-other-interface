@@ -15,7 +15,7 @@ const PreviewLink = () => {
   const getPrimitiveValues = (data: Record<string, any>) => {
     const primitives: PrimitivesObject = {}
     for (const key in data) {
-      if (data.hasOwnProperty(key)) {
+      if (data.hasOwnProperty(key) && key !== 'Description') {
         if (['string', 'number', 'boolean'].includes(typeof data[key])) {
           primitives[key] = data[key]
         }
