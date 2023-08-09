@@ -1,9 +1,6 @@
-import { getCookie } from 'cookies-next'
-
-const isMockedServer = getCookie('isMockedServer')
-
-const baseUrlWithRealData = process?.env?.parsed?.NEXT_PUBLIC_REACT_APP_IMAGE_BASE_URL || ''
-
-const baseUrlWithMockData = ''
-
-export const imageBasePath = isMockedServer ? baseUrlWithMockData : baseUrlWithRealData
+export const imageBasePath = (url?: string) => {
+  if (process.env.NEXT_PUBLIC_ENV === 'local' && !url?.includes('http')) {
+    return `http://localhost:1337${url}`
+  }
+  return url
+}

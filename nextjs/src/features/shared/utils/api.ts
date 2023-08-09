@@ -16,7 +16,7 @@ export const initApiClient = (context: GetServerSidePropsContext | null = null) 
     ApiClient.setBaseUrl(`${protocol}://${host}/api/graphql`)
   }
 
-  if (isMockedServer === undefined && process.env.NEXT_PUBLIC_ENV === 'development') {
+  if (isMockedServer === undefined && process.env.NEXT_PUBLIC_ENV === 'local') {
     setCookie('isMockedServer', true)
     setUpMockedServer()
     return ApiClient.getApiService()

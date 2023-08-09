@@ -6,7 +6,6 @@ import {
   PublicationsZoomLevel5Types,
   TriplyRecord,
 } from 'src/generated/graphql'
-
 import { imageBasePath } from '../modulesConstants'
 
 interface DefaultTriplyFields {
@@ -26,7 +25,7 @@ const extractTriplyFields = (
   if (!triplyType) {
     return {
       ...defaultFields,
-      imageUrl: imageBasePath + defaultFields.imageUrl,
+      imageUrl: imageBasePath(defaultFields.imageUrl) || 'broken',
     }
   }
 
