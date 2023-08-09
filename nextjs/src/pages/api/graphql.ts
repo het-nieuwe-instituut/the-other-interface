@@ -3,6 +3,7 @@ import { loadSchemaSync } from '@graphql-tools/load'
 import { addResolversToSchema } from '@graphql-tools/schema'
 import { createYoga } from 'graphql-yoga'
 
+import '../../../graphql.schema.json'
 import { HomePageData } from '../../mocks/mockData/homepageData'
 import { LandingPagesData } from '../../mocks/mockData/landingpagesData'
 import { menuPagesData } from '../../mocks/mockData/menuPagesData'
