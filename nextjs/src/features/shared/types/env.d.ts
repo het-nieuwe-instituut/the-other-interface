@@ -6,6 +6,7 @@ declare namespace NodeJS {
       NEXT_PUBLIC_URL: string
       NEXT_PUBLIC_DOMAIN_NAME: string
       NEXT_PUBLIC_GA_MEASUREMENT_ID: string
+      NEXT_PUBLIC_ENV: string
     }
   }
 }
