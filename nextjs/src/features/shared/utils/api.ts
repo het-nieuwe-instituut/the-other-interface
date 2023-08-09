@@ -8,7 +8,8 @@ export const initApiClient = (context: GetServerSidePropsContext | null = null) 
     : getCookie('isMockedServer')
 
   function setUpMockedServer() {
-    const protocol = context?.req?.headers['x-forwarded-proto'] || 'http'
+    const isLocal = process.env.parsed.NEXT_PUBLIC_ENV === 'local'
+    const protocol = isLocal ? 'http' : 'https'
     const host =
       context?.req?.headers['x-forwarded-host'] ||
       context?.req?.headers.host ||
@@ -16,7 +17,7 @@ export const initApiClient = (context: GetServerSidePropsContext | null = null) 
     ApiClient.setBaseUrl(`${protocol}://${host}/api/graphql`)
   }
 
-  if (isMockedServer === undefined && process.env.NEXT_PUBLIC_ENV === 'local') {
+  if (isMockedServer === undefined && process.env.parsed.NEXT_PUBLIC_ENV === 'local') {
     setCookie('isMockedServer', true)
     setUpMockedServer()
     return ApiClient.getApiService()
