@@ -6,9 +6,25 @@ import React from 'react'
 
 import { usePreviewConfig } from '../../utils/hooks/usePreviewConfig'
 
+type PrimitivesObject = Record<string, string | number | boolean>
+
 const PreviewLink = () => {
   const { data: previewConfig, isLoading, isError } = usePreviewConfig()
   const { initialData, slug: collectionTypeSlug } = useCMEditViewDataManager()
+
+  const getPrimitiveValues = (data: Record<string, any>) => {
+    const primitives: PrimitivesObject = {}
+    for (const key in data) {
+      if (data.hasOwnProperty(key)) {
+        if (['string', 'number', 'boolean'].includes(typeof data[key])) {
+          primitives[key] = data[key]
+        }
+      }
+    }
+    return primitives
+  }
+
+  const primitivesData = getPrimitiveValues(initialData)
 
   if (!initialData?.createdAt || initialData?.publishedAt || isError) return null
 
@@ -21,7 +37,7 @@ const PreviewLink = () => {
       style={{ width: '100%' }}
       href={`${previewConfig.clientPreviewUrl}?secret=${
         previewConfig.clientPreviewSecret
-      }&data=${JSON.stringify(initialData)}&collectionTypeSlug=${collectionTypeSlug}`}
+      }&data=${JSON.stringify(primitivesData)}&collectionTypeSlug=${collectionTypeSlug}`}
       variant="secondary"
       target="_blank"
       rel="noopener noreferrer"
