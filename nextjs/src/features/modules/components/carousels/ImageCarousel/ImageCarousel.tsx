@@ -43,7 +43,7 @@ export const ImageCarousel = (props: Props) => {
           {items?.map((item: UploadFileEntity, index) => {
             const originalHeight = item?.attributes?.height ?? 1
             const originalWidth = item?.attributes?.width ?? 1
-            const imagePath = imageBasePath(item?.attributes?.url)
+            const imagePath = imageBasePath(item?.attributes?.url) || 'broken'
             const caption = item?.attributes?.caption
             const proportions = calculateImagePropotions(
               originalWidth,
