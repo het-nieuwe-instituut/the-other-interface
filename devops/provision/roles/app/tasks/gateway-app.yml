@@ -11,7 +11,7 @@
     #   - 127.0.0.1:5000:5000
     exposed_ports:
       - "5000"
-    env: "{{ app.env|combine(app.gatewayapp.env)|combine({'NODE_ENV': server_environment_name, 'VIRTUAL_HOST': app.web.api_url, 'VIRTUAL_PATH': '/gateway/', 'VIRTUAL_DEST': '/', 'LETSENCRYPT_HOST': app.web.api_url}) }}"
+    env: "{{ app.env|combine(app.gatewayapp.env)|combine({'NODE_ENV': 'production', 'VIRTUAL_HOST': app.web.api_url, 'VIRTUAL_PATH': '/gateway/', 'VIRTUAL_DEST': '/', 'LETSENCRYPT_HOST': app.web.api_url}) }}"
     networks:
       - name: "app-network"
         aliases:
