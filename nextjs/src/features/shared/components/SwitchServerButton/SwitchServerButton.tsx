@@ -9,8 +9,7 @@ function SwitchServerButton() {
   const { handleClick } = usePresenter()
   const { t } = useTypeSafeTranslation('common')
 
-  if (process.env.NEXT_PUBLIC_ENV !== 'test' && process.env.NEXT_PUBLIC_ENV !== 'development')
-    return null
+  if (process.env.NEXT_PUBLIC_ENV !== 'test' && process.env.NEXT_PUBLIC_ENV !== 'local') return null
 
   return (
     <Button
