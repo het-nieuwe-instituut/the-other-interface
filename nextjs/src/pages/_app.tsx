@@ -1,7 +1,7 @@
+import './../styles/globals.css'
 import ErrorBoundaryProvider from '@/features/modules/components/ErrorBoundary/ErrorBoundary'
 import { PreviewBlock } from '@/features/preview/PreviewBlock'
 import DisableScroll from '@/features/shared/components/DisableScroll/DisableScroll'
-import Fonts from '@/features/shared/components/Fonts/Fonts'
 import { Footer } from '@/features/shared/components/Footer/Footer'
 import MobileOverlayProvider from '@/features/shared/components/MobileOverlayProvider/MobileOverlayProvider'
 import { NavigationOverlayProvider } from '@/features/shared/components/Navigation/Navigation'
@@ -17,6 +17,7 @@ import Script from 'next/script'
 import { useMemo } from 'react'
 import { Provider } from 'react-redux'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
+import { AppHead } from '@/features/shared/components/Head/AppHead'
 
 const DynamicSwitchServerButton = dynamic(
   () => import('../features/shared/components/SwitchServerButton/SwitchServerButton'),
@@ -28,6 +29,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
+      <AppHead />
       {'publicationState' in pageProps &&
         pageProps.publicationState === PublicationState.Preview && <PreviewBlock />}
       {process.env.parsed.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
@@ -50,7 +52,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Provider store={store}>
         <ThemeProvider theme={theme}>
           <ChakraProvider theme={theme}>
-            <Fonts />
             <ErrorBoundaryProvider>
               <DisableScroll>
                 <NavigationOverlayProvider>
