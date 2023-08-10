@@ -1,7 +1,14 @@
 import { Box } from '@chakra-ui/react'
 import { Fragment } from 'react'
 
-import { CloudTitle, Cloud, CloudSize, CollectionType, Position } from './fragments'
+import {
+  CloudTitle,
+  Cloud,
+  CloudSize,
+  CollectionType,
+  Position,
+  StoriesContainer,
+} from './fragments'
 
 interface CollectionCloud {
   title: CollectionType
@@ -43,6 +50,7 @@ const MainGalaxy: React.FC = () => (
       <Fragment key={cloud.title}>
         <Cloud size={cloud.size} position={cloud.cloudPosition} />
         <CloudTitle position={cloud.titlePosition}>{cloud.title}</CloudTitle>
+        <StoriesContainer />
       </Fragment>
     ))}
   </Box>
