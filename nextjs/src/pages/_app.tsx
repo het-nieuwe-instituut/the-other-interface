@@ -1,8 +1,8 @@
-import './../styles/globals.css'
 import ErrorBoundaryProvider from '@/features/modules/components/ErrorBoundary/ErrorBoundary'
 import { PreviewBlock } from '@/features/preview/PreviewBlock'
 import DisableScroll from '@/features/shared/components/DisableScroll/DisableScroll'
 import { Footer } from '@/features/shared/components/Footer/Footer'
+import { AppHead } from '@/features/shared/components/Head/AppHead'
 import MobileOverlayProvider from '@/features/shared/components/MobileOverlayProvider/MobileOverlayProvider'
 import { NavigationOverlayProvider } from '@/features/shared/components/Navigation/Navigation'
 import { createStore } from '@/features/shared/configs/store'
@@ -17,7 +17,8 @@ import Script from 'next/script'
 import { useMemo } from 'react'
 import { Provider } from 'react-redux'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
-import { AppHead } from '@/features/shared/components/Head/AppHead'
+
+import './../styles/globals.css'
 
 const DynamicSwitchServerButton = dynamic(
   () => import('../features/shared/components/SwitchServerButton/SwitchServerButton'),
