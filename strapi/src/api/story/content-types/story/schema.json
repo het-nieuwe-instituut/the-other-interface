@@ -119,6 +119,12 @@
       "relation": "manyToMany",
       "target": "api::triply-record.triply-record",
       "inversedBy": "stories"
+    },
+    "themes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::theme.theme",
+      "inversedBy": "stories"
     }
   }
 }
