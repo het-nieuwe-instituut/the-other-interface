@@ -68,11 +68,15 @@ fragment ComponentModulesImageFragment on ComponentModulesImage {
     imageModuleLayout {
         ...ComponentCoreModuleLayoutsFragment
     }
-    captionRelation {
-        ...ComponentModulesCollectionRelationFragment
+    triplyRecord {
+        data {
+            ...BaseTriplyRecordFragment
+        }
     }
-    imageRelation {
-        ...ComponentModulesCollectionRelationFragment
+    story {
+        data {
+            ...StoryWithoutRelationsFragment
+        }
     }
 }
 

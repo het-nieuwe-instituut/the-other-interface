@@ -29,6 +29,7 @@ const MediaImage = (props: MediaImageProps) => {
   )
   const imagePath = imageBasePath(url) || 'broken'
 
+  console.log(props)
   return (
     <Box
       backgroundColor={'white'}
