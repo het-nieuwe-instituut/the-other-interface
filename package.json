@@ -38,4 +38,6 @@
     "strapi": "file:strapi",
     "wait-on": "^7.0.1"
   }
+
+  
 }
