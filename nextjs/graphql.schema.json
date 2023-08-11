@@ -1614,7 +1614,7 @@
             "deprecationReason": null
           },
           {
-            "name": "triply_record",
+            "name": "triplyRecord",
             "description": null,
             "args": [],
             "type": {

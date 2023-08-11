@@ -16,7 +16,7 @@ fragment ComponentCoreCarouselItemFragment on ComponentCoreCarouselItem {
         ...UploadFileEntityResponseFragment
     }
     type
-    triply_record {
+    triplyRecord {
         data {
             ...BaseTriplyRecordFragment
         }

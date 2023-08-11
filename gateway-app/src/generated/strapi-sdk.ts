@@ -130,7 +130,7 @@ export type ComponentCoreCarouselItem = {
   id: Scalars['ID']
   name?: Maybe<Scalars['String']>
   picture?: Maybe<UploadFileEntityResponse>
-  triply_record?: Maybe<TriplyRecordEntityResponse>
+  triplyRecord?: Maybe<TriplyRecordEntityResponse>
   type?: Maybe<Enum_Componentcorecarouselitem_Type>
 }
 
@@ -140,7 +140,7 @@ export type ComponentCoreCarouselItemFiltersInput = {
   name?: InputMaybe<StringFilterInput>
   not?: InputMaybe<ComponentCoreCarouselItemFiltersInput>
   or?: InputMaybe<Array<InputMaybe<ComponentCoreCarouselItemFiltersInput>>>
-  triply_record?: InputMaybe<TriplyRecordFiltersInput>
+  triplyRecord?: InputMaybe<TriplyRecordFiltersInput>
   type?: InputMaybe<StringFilterInput>
 }
 
@@ -2374,7 +2374,7 @@ export type HomepageFragmentFragment = {
               } | null
             } | null
           } | null
-          triply_record?: {
+          triplyRecord?: {
             __typename?: 'TriplyRecordEntityResponse'
             data?: {
               __typename?: 'TriplyRecordEntity'
@@ -2816,7 +2816,7 @@ export type HomepageQuery = {
                           } | null
                         } | null
                       } | null
-                      triply_record?: {
+                      triplyRecord?: {
                         __typename?: 'TriplyRecordEntityResponse'
                         data?: {
                           __typename?: 'TriplyRecordEntity'
@@ -3226,7 +3226,7 @@ export type HomepageQuery = {
                     } | null
                   } | null
                 } | null
-                triply_record?: {
+                triplyRecord?: {
                   __typename?: 'TriplyRecordEntityResponse'
                   data?: {
                     __typename?: 'TriplyRecordEntity'
@@ -3647,7 +3647,7 @@ export type LandingpageFragmentFragment = {
               } | null
             } | null
           } | null
-          triply_record?: {
+          triplyRecord?: {
             __typename?: 'TriplyRecordEntityResponse'
             data?: {
               __typename?: 'TriplyRecordEntity'
@@ -4082,7 +4082,7 @@ export type LandingpageEntityFragmentFragment = {
                       } | null
                     } | null
                   } | null
-                  triply_record?: {
+                  triplyRecord?: {
                     __typename?: 'TriplyRecordEntityResponse'
                     data?: {
                       __typename?: 'TriplyRecordEntity'
@@ -4492,7 +4492,7 @@ export type LandingpageEntityFragmentFragment = {
                 } | null
               } | null
             } | null
-            triply_record?: {
+            triplyRecord?: {
               __typename?: 'TriplyRecordEntityResponse'
               data?: {
                 __typename?: 'TriplyRecordEntity'
@@ -4937,7 +4937,7 @@ export type LandingPageQuery = {
                           } | null
                         } | null
                       } | null
-                      triply_record?: {
+                      triplyRecord?: {
                         __typename?: 'TriplyRecordEntityResponse'
                         data?: {
                           __typename?: 'TriplyRecordEntity'
@@ -5347,7 +5347,7 @@ export type LandingPageQuery = {
                     } | null
                   } | null
                 } | null
-                triply_record?: {
+                triplyRecord?: {
                   __typename?: 'TriplyRecordEntityResponse'
                   data?: {
                     __typename?: 'TriplyRecordEntity'
@@ -5797,7 +5797,7 @@ export type LandingPagesQuery = {
                           } | null
                         } | null
                       } | null
-                      triply_record?: {
+                      triplyRecord?: {
                         __typename?: 'TriplyRecordEntityResponse'
                         data?: {
                           __typename?: 'TriplyRecordEntity'
@@ -6207,7 +6207,7 @@ export type LandingPagesQuery = {
                     } | null
                   } | null
                 } | null
-                triply_record?: {
+                triplyRecord?: {
                   __typename?: 'TriplyRecordEntityResponse'
                   data?: {
                     __typename?: 'TriplyRecordEntity'
@@ -10773,7 +10773,7 @@ export type ComponentCoreCarouselItemFragmentFragment = {
       } | null
     } | null
   } | null
-  triply_record?: {
+  triplyRecord?: {
     __typename?: 'TriplyRecordEntityResponse'
     data?: {
       __typename?: 'TriplyRecordEntity'
@@ -11081,7 +11081,7 @@ export type ComponentModulesCarouselFragmentFragment = {
         } | null
       } | null
     } | null
-    triply_record?: {
+    triplyRecord?: {
       __typename?: 'TriplyRecordEntityResponse'
       data?: {
         __typename?: 'TriplyRecordEntity'
@@ -13499,7 +13499,7 @@ export const ComponentCoreCarouselItemFragmentFragmentDoc = gql`
       ...UploadFileEntityResponseFragment
     }
     type
-    triply_record {
+    triplyRecord {
       data {
         ...BaseTriplyRecordFragment
       }

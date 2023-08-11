@@ -24,7 +24,7 @@ export class ComponentCoreCarouselItem {
   public type?: Enum_Componentcorecarouselitem_Type
 
   @Field(() => TriplyRecordEntityResponse, { nullable: true })
-  public triply_record?: TriplyRecordEntityResponse
+  public triplyRecord?: TriplyRecordEntityResponse
 }
 
 @InputType()
@@ -48,7 +48,7 @@ export class ComponentCoreCarouselItemFiltersInput {
   public type?: StringFilterInput
 
   @Field(() => TriplyRecordFiltersInput, { nullable: true })
-  public triply_record?: TriplyRecordFiltersInput
+  public triplyRecord?: TriplyRecordFiltersInput
 }
 
 @InputType()
