@@ -5,6 +5,7 @@ import {
 } from '../../../triplyRecord/triplyRecord.type'
 import { Enum_Componentcorecarouselitem_Type } from '../../../../generated/strapi-sdk'
 import { PaginationArg, StringFilterInput, UploadFileEntityResponse } from '../../shared-types'
+import { StoryEntityResponse } from 'src/modules/story/story.type'
 
 @ObjectType()
 export class ComponentCoreCarouselItem {
@@ -25,6 +26,9 @@ export class ComponentCoreCarouselItem {
 
   @Field(() => TriplyRecordEntityResponse, { nullable: true })
   public triplyRecord?: TriplyRecordEntityResponse
+
+  @Field(() => StoryEntityResponse, { nullable: true })
+  public story?: StoryEntityResponse
 }
 
 @InputType()
@@ -49,6 +53,9 @@ export class ComponentCoreCarouselItemFiltersInput {
 
   @Field(() => TriplyRecordFiltersInput, { nullable: true })
   public triplyRecord?: TriplyRecordFiltersInput
+
+  @Field(() => StoryEntityResponse, { nullable: true })
+  public story?: StoryEntityResponse
 }
 
 @InputType()

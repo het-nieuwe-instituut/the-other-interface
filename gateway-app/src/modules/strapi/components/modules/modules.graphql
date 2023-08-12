@@ -55,6 +55,9 @@ fragment ComponentModulesImageCarouselFragment on ComponentModulesImageCarousel 
     images {
         ...UploadFileRelationResponseCollectionFragment
     }
+    items {
+        ...ComponentCoreImageCarouselItemFragment
+    }
 }
 
 fragment ComponentModulesImageFragment on ComponentModulesImage {

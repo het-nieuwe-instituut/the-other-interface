@@ -181,6 +181,7 @@ export const aComponentCoreCarouselItem = (overrides?: Partial<ComponentCoreCaro
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'e6259d63-611f-4e6c-84e7-28ad8094f5b8',
         name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'adipisci',
         picture: overrides && overrides.hasOwnProperty('picture') ? overrides.picture! : relationshipsToOmit.includes('UploadFileEntityResponse') ? {} as UploadFileEntityResponse : anUploadFileEntityResponse({}, relationshipsToOmit),
+        story: overrides && overrides.hasOwnProperty('story') ? overrides.story! : relationshipsToOmit.includes('StoryEntityResponse') ? {} as StoryEntityResponse : aStoryEntityResponse({}, relationshipsToOmit),
         triplyRecord: overrides && overrides.hasOwnProperty('triplyRecord') ? overrides.triplyRecord! : relationshipsToOmit.includes('TriplyRecordEntityResponse') ? {} as TriplyRecordEntityResponse : aTriplyRecordEntityResponse({}, relationshipsToOmit),
         type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : EnumComponentcorecarouselitemType.Highlight,
     };
@@ -412,6 +413,7 @@ export const aComponentModulesImageCarousel = (overrides?: Partial<ComponentModu
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'caa291cc-f344-4c8e-b7ad-3f6d9c22152d',
         imageCarouselModuleLayout: overrides && overrides.hasOwnProperty('imageCarouselModuleLayout') ? overrides.imageCarouselModuleLayout! : relationshipsToOmit.includes('ComponentCoreModuleLayouts') ? {} as ComponentCoreModuleLayouts : aComponentCoreModuleLayouts({}, relationshipsToOmit),
         images: overrides && overrides.hasOwnProperty('images') ? overrides.images! : relationshipsToOmit.includes('UploadFileRelationResponseCollection') ? {} as UploadFileRelationResponseCollection : anUploadFileRelationResponseCollection({}, relationshipsToOmit),
+        items: overrides && overrides.hasOwnProperty('items') ? overrides.items! : [relationshipsToOmit.includes('ComponentCoreCarouselItem') ? {} as ComponentCoreCarouselItem : aComponentCoreCarouselItem({}, relationshipsToOmit)],
     };
 };
 

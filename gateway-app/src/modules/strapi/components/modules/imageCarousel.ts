@@ -5,6 +5,7 @@ import {
   UploadFileFiltersInput,
   UploadFileRelationResponseCollection,
 } from '../../shared-types'
+import { ComponentCoreCarouselItem } from '../core/carouselItem'
 
 @ObjectType()
 export class ComponentModulesImageCarousel {
@@ -19,6 +20,9 @@ export class ComponentModulesImageCarousel {
 
   @Field(() => UploadFileRelationResponseCollection, { nullable: true })
   public images?: UploadFileRelationResponseCollection
+
+  @Field(() => [ComponentCoreCarouselItem], { nullable: true })
+  public items?: ComponentCoreCarouselItem[]
 }
 
 @InputType()
