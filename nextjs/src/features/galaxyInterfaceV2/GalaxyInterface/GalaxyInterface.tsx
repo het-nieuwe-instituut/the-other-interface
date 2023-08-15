@@ -1,3 +1,5 @@
+import { GalaxyTopRight } from '@/features/shared/components/GalaxyWrapper/GalaxyTopRight/GalaxyTopRight'
+import { GalaxyWrapper } from '@/features/shared/components/GalaxyWrapper/GalaxyWrapper'
 import { Box } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
 import { Fragment, useId, useRef } from 'react'
@@ -13,9 +15,11 @@ export const GalaxyInterface: React.FC<Props> = ({ children }) => {
 
   return (
     <Fragment key={id}>
-      <Box backgroundColor="blue.100" height="100vh" ref={graphRef}>
-        {sizes?.height && sizes?.width && <Box position={'fixed'}>{children}</Box>}
-      </Box>
+      <GalaxyWrapper renderTopRight={() => <GalaxyTopRight />}>
+        <Box backgroundColor="blue.100" height="100vh" ref={graphRef}>
+          {sizes?.height && sizes?.width && <Box position={'fixed'}>{children}</Box>}
+        </Box>
+      </GalaxyWrapper>
     </Fragment>
   )
 }
