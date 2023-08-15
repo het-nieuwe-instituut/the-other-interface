@@ -1,7 +1,7 @@
 import { extendTheme } from '@chakra-ui/react'
 
 import { components } from './components'
-import foundations from './foundations'
+import foundations, { newFoundations } from './foundations'
 import { styles } from './styles'
 
 const direction = 'ltr'
@@ -14,10 +14,13 @@ const config = {
 
 export type AppTheme = typeof foundations
 
-export const theme = extendTheme({
+export const newTheme = extendTheme({
   direction,
-  fonts: { heading: `Univers bold`, body: `Univers` },
-  ...foundations,
+  fonts: {
+    heading: `Impact`,
+    body: `Social`,
+  },
+  ...newFoundations,
   config,
   styles,
   components,

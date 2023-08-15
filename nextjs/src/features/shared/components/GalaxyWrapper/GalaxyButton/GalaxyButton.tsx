@@ -26,7 +26,7 @@ export const GalaxyButton: React.FC<GalaxyButtonProps> = props => {
         href={props.link}
         target={props.target || undefined}
         display={'flex'}
-        textStyle={'galaxyButton'}
+        textStyle={'h3'}
         size={props.size || 'md'}
         disabled={props.disabled}
         onClick={props.onClick ?? undefined}

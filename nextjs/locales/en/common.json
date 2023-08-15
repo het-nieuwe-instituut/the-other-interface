@@ -15,6 +15,6 @@
   "widthAbbr": "w",
   "depthAbbr": "d",
   "readMore": "Read more",
-  "switchToMockedServer": "Switch to test server",
-  "switchToLiveServer": "Switch to live server"
+  "switchToMockedServer": "Switch to mocked server",
+  "switchToLiveServer": "Switch to test server"
 }
