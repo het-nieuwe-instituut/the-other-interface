@@ -1,6 +1,12 @@
+import { ThemeProviderContext } from '@/features/shared/components/providers/ThemeProvider'
 import { Global } from '@emotion/react'
+import { useContext } from 'react'
 
 const Fonts = () => {
+  const context = useContext(ThemeProviderContext)
+  if (context.theme === 'newTheme') {
+    return null
+  }
   return (
     <Global
       styles={`

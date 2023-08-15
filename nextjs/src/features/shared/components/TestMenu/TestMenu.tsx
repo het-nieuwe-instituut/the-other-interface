@@ -44,7 +44,9 @@ export function TestMenu() {
           )}
 
           <MenuList zIndex={SWITCH_SERVER_Z_INDEX}>
-            <MenuItem onClick={() => themeProviderContext.toggleTheme()}>Toggle theme</MenuItem>
+            <MenuItem onClick={() => themeProviderContext.toggleTheme()}>
+              Toggle theme (current: {themeProviderContext.theme ?? ''}){' '}
+            </MenuItem>
             <MenuItem onClick={() => setIsDevMenuHidden(true)}>
               hide dev menu (reload the page to get it back)
             </MenuItem>

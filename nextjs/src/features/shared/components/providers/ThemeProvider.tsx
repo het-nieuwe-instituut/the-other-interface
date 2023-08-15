@@ -5,7 +5,7 @@ import { newTheme } from '../../styles/theme/newTheme'
 import { theme } from '../../styles/theme/theme'
 
 export const ThemeProviderContext = React.createContext({
-  theme: newTheme,
+  theme: 'oldTheme',
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   toggleTheme: () => {},
 })
@@ -17,11 +17,11 @@ export function ThemeProvider({ children }: PropsWithChildren) {
     oldTheme: theme,
   }
   const selectedTheme = themes[themeString]
-  console.log(themeString, selectedTheme)
+
   return (
     <ThemeProviderContext.Provider
       value={{
-        theme: selectedTheme,
+        theme: themeString,
         toggleTheme: () => setThemeString(themeString === 'oldTheme' ? 'newTheme' : 'oldTheme'),
       }}
     >

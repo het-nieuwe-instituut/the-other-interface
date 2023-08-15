@@ -1,9 +1,8 @@
 import { extendTheme } from '@chakra-ui/react'
 
 import { components } from './components'
-import foundations from './foundations'
+import foundations, { newFoundations } from './foundations'
 import { styles } from './styles'
-import newTypography from './foundations/newTypography'
 
 const direction = 'ltr'
 
@@ -21,7 +20,7 @@ export const newTheme = extendTheme({
     heading: `Impact`,
     body: `Social`,
   },
-  ...{ ...foundations, ...{ typeography: newTypography } },
+  ...newFoundations,
   config,
   styles,
   components,

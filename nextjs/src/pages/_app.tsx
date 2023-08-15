@@ -47,7 +47,9 @@ function MyApp({ Component, pageProps }: AppProps) {
               <NavigationOverlayProvider>
                 <MobileOverlayProvider>
                   <>
+                    {/* TODO: delete this component when new font fully integrated */}
                     <Fonts />
+
                     <TestMenu />
                     <div id={'galaxy-root'}></div>
                     <Component {...pageProps} />
