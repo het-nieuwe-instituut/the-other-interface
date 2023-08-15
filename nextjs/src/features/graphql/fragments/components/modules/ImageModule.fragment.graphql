@@ -12,6 +12,16 @@ fragment imageModuleFragment on ComponentModulesImage {
             }
         }
     }
+    story {
+        data {
+            ...StoryWithoutRelationsFragment
+        }
+    }
+    triplyRecord {
+        data {
+            ...BaseTriplyRecordFragment
+        }
+    }
     caption
     alt_text
     imageModuleLayout {

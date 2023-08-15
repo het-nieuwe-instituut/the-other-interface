@@ -109,6 +109,13 @@ fragment StoryWithoutRelationsFragment on StoryEntity {
         updatedAt
         publishedAt
         locale
+        author {
+            data {
+                attributes {
+                    firstName
+                }
+            }
+        }
     }
 }
 

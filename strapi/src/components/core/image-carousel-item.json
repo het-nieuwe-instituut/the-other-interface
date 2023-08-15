@@ -1,7 +1,7 @@
 {
-  "collectionName": "components_core_carousel_items",
+  "collectionName": "components_core_image_carousel_items",
   "info": {
-    "displayName": "CarouselItem",
+    "displayName": "ImageCarouselItem",
     "description": ""
   },
   "options": {},
@@ -11,31 +11,27 @@
       "multiple": false,
       "required": false,
       "allowedTypes": [
-        "images"
+        "images",
+        "files",
+        "videos",
+        "audios"
       ]
     },
     "name": {
       "type": "string"
     },
     "description": {
-      "type": "text"
-    },
-    "type": {
-      "type": "enumeration",
-      "enum": [
-        "Maker",
-        "Highlight"
-      ]
-    },
-    "triply_record": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::triply-record.triply-record"
+      "type": "string"
     },
     "story": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::story.story"
+    },
+    "triplyRecord": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::triply-record.triply-record"
     }
   }
 }
