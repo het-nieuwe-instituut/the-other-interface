@@ -25,7 +25,7 @@ export class ComponentCoreCarouselItem {
   public type?: Enum_Componentcorecarouselitem_Type
 
   @Field(() => TriplyRecordEntityResponse, { nullable: true })
-  public triplyRecord?: TriplyRecordEntityResponse
+  public triply_record?: TriplyRecordEntityResponse
 
   @Field(() => StoryEntityResponse, { nullable: true })
   public story?: StoryEntityResponse
