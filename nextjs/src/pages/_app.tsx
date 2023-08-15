@@ -12,16 +12,13 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { ThemeProvider } from '@emotion/react'
 import 'keen-slider/keen-slider.min.css'
 import type { AppProps } from 'next/app'
-import dynamic from 'next/dynamic'
 import Script from 'next/script'
 import { useMemo } from 'react'
 import { Provider } from 'react-redux'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 
-const DynamicSwitchServerButton = dynamic(
-  () => import('../features/shared/components/SwitchServerButton/SwitchServerButton'),
-  { ssr: false }
-)
+import { TestMenu } from '@/features/shared/components/TestMenu/TestMenu'
+import './../styles/globals.css'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const store = useMemo(() => createStore(pageProps.reduxState), [pageProps.reduxState])
@@ -29,7 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       {'publicationState' in pageProps &&
-        pageProps.publicationState === PublicationState.Preview && <PreviewBlock />}
+        pageProps.publicationState !== PublicationState.Preview && <PreviewBlock />}
       {process.env.parsed.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
         <>
           <Script
@@ -56,7 +53,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 <NavigationOverlayProvider>
                   <MobileOverlayProvider>
                     <>
-                      <DynamicSwitchServerButton />
+                      <TestMenu />
                       <div id={'galaxy-root'}></div>
                       <Component {...pageProps} />
                       <Footer />
