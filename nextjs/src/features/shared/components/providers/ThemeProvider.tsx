@@ -1,6 +1,7 @@
 import { ChakraProvider } from '@chakra-ui/react'
 import { ThemeProvider as EmotionThemeProvider } from '@emotion/react'
 import React, { PropsWithChildren } from 'react'
+
 import { newTheme } from '../../styles/theme/newTheme'
 import { theme } from '../../styles/theme/theme'
 

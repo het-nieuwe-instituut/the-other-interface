@@ -16,6 +16,7 @@ import Script from 'next/script'
 import { useMemo } from 'react'
 import { Provider } from 'react-redux'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
+
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }: AppProps) {

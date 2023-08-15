@@ -1,8 +1,8 @@
 import { breakpoints } from './breakpoints'
 import colors from './colors'
+import newTextStyles from './newTypography'
 import spacing from './spacing'
 import textStyles from './typography'
-import newTextStyles from './newTypography'
 
 const foundations = {
   colors,
