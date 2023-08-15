@@ -52,7 +52,7 @@ export class ComponentCoreCarouselItemFiltersInput {
   public type?: StringFilterInput
 
   @Field(() => TriplyRecordFiltersInput, { nullable: true })
-  public triplyRecord?: TriplyRecordFiltersInput
+  public triply_record?: TriplyRecordFiltersInput
 
   @Field(() => StoryEntityResponse, { nullable: true })
   public story?: StoryEntityResponse

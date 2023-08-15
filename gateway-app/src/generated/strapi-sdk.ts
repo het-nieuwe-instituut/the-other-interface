@@ -3,7 +3,6 @@
 import { GraphQLClient } from 'graphql-request'
 import * as Dom from 'graphql-request/dist/types.dom'
 import gql from 'graphql-tag'
-
 export type Maybe<T> = T | null
 export type InputMaybe<T> = Maybe<T>
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] }
@@ -132,7 +131,7 @@ export type ComponentCoreCarouselItem = {
   name?: Maybe<Scalars['String']>
   picture?: Maybe<UploadFileEntityResponse>
   story?: Maybe<StoryEntityResponse>
-  triplyRecord?: Maybe<TriplyRecordEntityResponse>
+  triply_record?: Maybe<TriplyRecordEntityResponse>
   type?: Maybe<Enum_Componentcorecarouselitem_Type>
 }
 
@@ -143,7 +142,7 @@ export type ComponentCoreCarouselItemFiltersInput = {
   not?: InputMaybe<ComponentCoreCarouselItemFiltersInput>
   or?: InputMaybe<Array<InputMaybe<ComponentCoreCarouselItemFiltersInput>>>
   story?: InputMaybe<StoryFiltersInput>
-  triplyRecord?: InputMaybe<TriplyRecordFiltersInput>
+  triply_record?: InputMaybe<TriplyRecordFiltersInput>
   type?: InputMaybe<StringFilterInput>
 }
 
@@ -2405,7 +2404,7 @@ export type HomepageFragmentFragment = {
               } | null
             } | null
           } | null
-          triplyRecord?: {
+          triply_record?: {
             __typename?: 'TriplyRecordEntityResponse'
             data?: {
               __typename?: 'TriplyRecordEntity'
@@ -2598,6 +2597,13 @@ export type HomepageFragmentFragment = {
               updatedAt?: any | null
               publishedAt?: any | null
               locale?: string | null
+              author?: {
+                __typename?: 'AuthorEntityResponse'
+                data?: {
+                  __typename?: 'AuthorEntity'
+                  attributes?: { __typename?: 'Author'; firstName: string } | null
+                } | null
+              } | null
             } | null
           } | null
         } | null
@@ -2907,7 +2913,7 @@ export type HomepageQuery = {
                           } | null
                         } | null
                       } | null
-                      triplyRecord?: {
+                      triply_record?: {
                         __typename?: 'TriplyRecordEntityResponse'
                         data?: {
                           __typename?: 'TriplyRecordEntity'
@@ -3100,6 +3106,13 @@ export type HomepageQuery = {
                           updatedAt?: any | null
                           publishedAt?: any | null
                           locale?: string | null
+                          author?: {
+                            __typename?: 'AuthorEntityResponse'
+                            data?: {
+                              __typename?: 'AuthorEntity'
+                              attributes?: { __typename?: 'Author'; firstName: string } | null
+                            } | null
+                          } | null
                         } | null
                       } | null
                     } | null
@@ -3377,7 +3390,7 @@ export type HomepageQuery = {
                     } | null
                   } | null
                 } | null
-                triplyRecord?: {
+                triply_record?: {
                   __typename?: 'TriplyRecordEntityResponse'
                   data?: {
                     __typename?: 'TriplyRecordEntity'
@@ -3570,6 +3583,13 @@ export type HomepageQuery = {
                     updatedAt?: any | null
                     publishedAt?: any | null
                     locale?: string | null
+                    author?: {
+                      __typename?: 'AuthorEntityResponse'
+                      data?: {
+                        __typename?: 'AuthorEntity'
+                        attributes?: { __typename?: 'Author'; firstName: string } | null
+                      } | null
+                    } | null
                   } | null
                 } | null
               } | null
@@ -3858,7 +3878,7 @@ export type LandingpageFragmentFragment = {
               } | null
             } | null
           } | null
-          triplyRecord?: {
+          triply_record?: {
             __typename?: 'TriplyRecordEntityResponse'
             data?: {
               __typename?: 'TriplyRecordEntity'
@@ -4051,6 +4071,13 @@ export type LandingpageFragmentFragment = {
               updatedAt?: any | null
               publishedAt?: any | null
               locale?: string | null
+              author?: {
+                __typename?: 'AuthorEntityResponse'
+                data?: {
+                  __typename?: 'AuthorEntity'
+                  attributes?: { __typename?: 'Author'; firstName: string } | null
+                } | null
+              } | null
             } | null
           } | null
         } | null
@@ -4353,7 +4380,7 @@ export type LandingpageEntityFragmentFragment = {
                       } | null
                     } | null
                   } | null
-                  triplyRecord?: {
+                  triply_record?: {
                     __typename?: 'TriplyRecordEntityResponse'
                     data?: {
                       __typename?: 'TriplyRecordEntity'
@@ -4546,6 +4573,13 @@ export type LandingpageEntityFragmentFragment = {
                       updatedAt?: any | null
                       publishedAt?: any | null
                       locale?: string | null
+                      author?: {
+                        __typename?: 'AuthorEntityResponse'
+                        data?: {
+                          __typename?: 'AuthorEntity'
+                          attributes?: { __typename?: 'Author'; firstName: string } | null
+                        } | null
+                      } | null
                     } | null
                   } | null
                 } | null
@@ -4823,7 +4857,7 @@ export type LandingpageEntityFragmentFragment = {
                 } | null
               } | null
             } | null
-            triplyRecord?: {
+            triply_record?: {
               __typename?: 'TriplyRecordEntityResponse'
               data?: {
                 __typename?: 'TriplyRecordEntity'
@@ -5016,6 +5050,13 @@ export type LandingpageEntityFragmentFragment = {
                 updatedAt?: any | null
                 publishedAt?: any | null
                 locale?: string | null
+                author?: {
+                  __typename?: 'AuthorEntityResponse'
+                  data?: {
+                    __typename?: 'AuthorEntity'
+                    attributes?: { __typename?: 'Author'; firstName: string } | null
+                  } | null
+                } | null
               } | null
             } | null
           } | null
@@ -5328,7 +5369,7 @@ export type LandingPageQuery = {
                           } | null
                         } | null
                       } | null
-                      triplyRecord?: {
+                      triply_record?: {
                         __typename?: 'TriplyRecordEntityResponse'
                         data?: {
                           __typename?: 'TriplyRecordEntity'
@@ -5521,6 +5562,13 @@ export type LandingPageQuery = {
                           updatedAt?: any | null
                           publishedAt?: any | null
                           locale?: string | null
+                          author?: {
+                            __typename?: 'AuthorEntityResponse'
+                            data?: {
+                              __typename?: 'AuthorEntity'
+                              attributes?: { __typename?: 'Author'; firstName: string } | null
+                            } | null
+                          } | null
                         } | null
                       } | null
                     } | null
@@ -5798,7 +5846,7 @@ export type LandingPageQuery = {
                     } | null
                   } | null
                 } | null
-                triplyRecord?: {
+                triply_record?: {
                   __typename?: 'TriplyRecordEntityResponse'
                   data?: {
                     __typename?: 'TriplyRecordEntity'
@@ -5991,6 +6039,13 @@ export type LandingPageQuery = {
                     updatedAt?: any | null
                     publishedAt?: any | null
                     locale?: string | null
+                    author?: {
+                      __typename?: 'AuthorEntityResponse'
+                      data?: {
+                        __typename?: 'AuthorEntity'
+                        attributes?: { __typename?: 'Author'; firstName: string } | null
+                      } | null
+                    } | null
                   } | null
                 } | null
               } | null
@@ -6308,7 +6363,7 @@ export type LandingPagesQuery = {
                           } | null
                         } | null
                       } | null
-                      triplyRecord?: {
+                      triply_record?: {
                         __typename?: 'TriplyRecordEntityResponse'
                         data?: {
                           __typename?: 'TriplyRecordEntity'
@@ -6501,6 +6556,13 @@ export type LandingPagesQuery = {
                           updatedAt?: any | null
                           publishedAt?: any | null
                           locale?: string | null
+                          author?: {
+                            __typename?: 'AuthorEntityResponse'
+                            data?: {
+                              __typename?: 'AuthorEntity'
+                              attributes?: { __typename?: 'Author'; firstName: string } | null
+                            } | null
+                          } | null
                         } | null
                       } | null
                     } | null
@@ -6778,7 +6840,7 @@ export type LandingPagesQuery = {
                     } | null
                   } | null
                 } | null
-                triplyRecord?: {
+                triply_record?: {
                   __typename?: 'TriplyRecordEntityResponse'
                   data?: {
                     __typename?: 'TriplyRecordEntity'
@@ -6971,6 +7033,13 @@ export type LandingPagesQuery = {
                     updatedAt?: any | null
                     publishedAt?: any | null
                     locale?: string | null
+                    author?: {
+                      __typename?: 'AuthorEntityResponse'
+                      data?: {
+                        __typename?: 'AuthorEntity'
+                        attributes?: { __typename?: 'Author'; firstName: string } | null
+                      } | null
+                    } | null
                   } | null
                 } | null
               } | null
@@ -7491,6 +7560,13 @@ export type MenupageFragmentFragment = {
               updatedAt?: any | null
               publishedAt?: any | null
               locale?: string | null
+              author?: {
+                __typename?: 'AuthorEntityResponse'
+                data?: {
+                  __typename?: 'AuthorEntity'
+                  attributes?: { __typename?: 'Author'; firstName: string } | null
+                } | null
+              } | null
             } | null
           } | null
         } | null
@@ -7916,6 +7992,13 @@ export type MenupageEntityFragmentFragment = {
                       updatedAt?: any | null
                       publishedAt?: any | null
                       locale?: string | null
+                      author?: {
+                        __typename?: 'AuthorEntityResponse'
+                        data?: {
+                          __typename?: 'AuthorEntity'
+                          attributes?: { __typename?: 'Author'; firstName: string } | null
+                        } | null
+                      } | null
                     } | null
                   } | null
                 } | null
@@ -8318,6 +8401,13 @@ export type MenupageEntityFragmentFragment = {
                 updatedAt?: any | null
                 publishedAt?: any | null
                 locale?: string | null
+                author?: {
+                  __typename?: 'AuthorEntityResponse'
+                  data?: {
+                    __typename?: 'AuthorEntity'
+                    attributes?: { __typename?: 'Author'; firstName: string } | null
+                  } | null
+                } | null
               } | null
             } | null
           } | null
@@ -8753,6 +8843,13 @@ export type MenuPageQuery = {
                           updatedAt?: any | null
                           publishedAt?: any | null
                           locale?: string | null
+                          author?: {
+                            __typename?: 'AuthorEntityResponse'
+                            data?: {
+                              __typename?: 'AuthorEntity'
+                              attributes?: { __typename?: 'Author'; firstName: string } | null
+                            } | null
+                          } | null
                         } | null
                       } | null
                     } | null
@@ -9155,6 +9252,13 @@ export type MenuPageQuery = {
                     updatedAt?: any | null
                     publishedAt?: any | null
                     locale?: string | null
+                    author?: {
+                      __typename?: 'AuthorEntityResponse'
+                      data?: {
+                        __typename?: 'AuthorEntity'
+                        attributes?: { __typename?: 'Author'; firstName: string } | null
+                      } | null
+                    } | null
                   } | null
                 } | null
               } | null
@@ -9595,6 +9699,13 @@ export type MenuPagesQuery = {
                           updatedAt?: any | null
                           publishedAt?: any | null
                           locale?: string | null
+                          author?: {
+                            __typename?: 'AuthorEntityResponse'
+                            data?: {
+                              __typename?: 'AuthorEntity'
+                              attributes?: { __typename?: 'Author'; firstName: string } | null
+                            } | null
+                          } | null
                         } | null
                       } | null
                     } | null
@@ -9997,6 +10108,13 @@ export type MenuPagesQuery = {
                     updatedAt?: any | null
                     publishedAt?: any | null
                     locale?: string | null
+                    author?: {
+                      __typename?: 'AuthorEntityResponse'
+                      data?: {
+                        __typename?: 'AuthorEntity'
+                        attributes?: { __typename?: 'Author'; firstName: string } | null
+                      } | null
+                    } | null
                   } | null
                 } | null
               } | null
@@ -10436,6 +10554,13 @@ export type StoriesQuery = {
                     updatedAt?: any | null
                     publishedAt?: any | null
                     locale?: string | null
+                    author?: {
+                      __typename?: 'AuthorEntityResponse'
+                      data?: {
+                        __typename?: 'AuthorEntity'
+                        attributes?: { __typename?: 'Author'; firstName: string } | null
+                      } | null
+                    } | null
                   } | null
                 } | null
               } | null
@@ -10739,6 +10864,13 @@ export type StoriesWithoutRelationsQuery = {
         updatedAt?: any | null
         publishedAt?: any | null
         locale?: string | null
+        author?: {
+          __typename?: 'AuthorEntityResponse'
+          data?: {
+            __typename?: 'AuthorEntity'
+            attributes?: { __typename?: 'Author'; firstName: string } | null
+          } | null
+        } | null
       } | null
     }>
     meta: {
@@ -10992,6 +11124,13 @@ export type StoryQuery = {
                     updatedAt?: any | null
                     publishedAt?: any | null
                     locale?: string | null
+                    author?: {
+                      __typename?: 'AuthorEntityResponse'
+                      data?: {
+                        __typename?: 'AuthorEntity'
+                        attributes?: { __typename?: 'Author'; firstName: string } | null
+                      } | null
+                    } | null
                   } | null
                 } | null
               } | null
@@ -11282,6 +11421,13 @@ export type StoryWithoutRelationsQuery = {
         updatedAt?: any | null
         publishedAt?: any | null
         locale?: string | null
+        author?: {
+          __typename?: 'AuthorEntityResponse'
+          data?: {
+            __typename?: 'AuthorEntity'
+            attributes?: { __typename?: 'Author'; firstName: string } | null
+          } | null
+        } | null
       } | null
     } | null
   } | null
@@ -11360,6 +11506,13 @@ export type StoryWithoutRelationsFragmentFragment = {
     updatedAt?: any | null
     publishedAt?: any | null
     locale?: string | null
+    author?: {
+      __typename?: 'AuthorEntityResponse'
+      data?: {
+        __typename?: 'AuthorEntity'
+        attributes?: { __typename?: 'Author'; firstName: string } | null
+      } | null
+    } | null
   } | null
 }
 
@@ -11592,6 +11745,13 @@ export type StoryFragmentFragment = {
                 updatedAt?: any | null
                 publishedAt?: any | null
                 locale?: string | null
+                author?: {
+                  __typename?: 'AuthorEntityResponse'
+                  data?: {
+                    __typename?: 'AuthorEntity'
+                    attributes?: { __typename?: 'Author'; firstName: string } | null
+                  } | null
+                } | null
               } | null
             } | null
           } | null
@@ -11924,7 +12084,7 @@ export type ComponentCoreCarouselItemFragmentFragment = {
       } | null
     } | null
   } | null
-  triplyRecord?: {
+  triply_record?: {
     __typename?: 'TriplyRecordEntityResponse'
     data?: {
       __typename?: 'TriplyRecordEntity'
@@ -12185,6 +12345,13 @@ export type ComponentModulesCollectionRelationFragmentFragment = {
         updatedAt?: any | null
         publishedAt?: any | null
         locale?: string | null
+        author?: {
+          __typename?: 'AuthorEntityResponse'
+          data?: {
+            __typename?: 'AuthorEntity'
+            attributes?: { __typename?: 'Author'; firstName: string } | null
+          } | null
+        } | null
       } | null
     } | null
   } | null
@@ -12293,7 +12460,7 @@ export type ComponentModulesCarouselFragmentFragment = {
         } | null
       } | null
     } | null
-    triplyRecord?: {
+    triply_record?: {
       __typename?: 'TriplyRecordEntityResponse'
       data?: {
         __typename?: 'TriplyRecordEntity'
@@ -12470,6 +12637,13 @@ export type ComponentModulesImageFragmentFragment = {
         updatedAt?: any | null
         publishedAt?: any | null
         locale?: string | null
+        author?: {
+          __typename?: 'AuthorEntityResponse'
+          data?: {
+            __typename?: 'AuthorEntity'
+            attributes?: { __typename?: 'Author'; firstName: string } | null
+          } | null
+        } | null
       } | null
     } | null
   } | null
@@ -13223,6 +13397,13 @@ export type TriplyRecordQuery = {
                           updatedAt?: any | null
                           publishedAt?: any | null
                           locale?: string | null
+                          author?: {
+                            __typename?: 'AuthorEntityResponse'
+                            data?: {
+                              __typename?: 'AuthorEntity'
+                              attributes?: { __typename?: 'Author'; firstName: string } | null
+                            } | null
+                          } | null
                         } | null
                       } | null
                     } | null
@@ -13746,6 +13927,13 @@ export type TriplyRecordsQuery = {
                           updatedAt?: any | null
                           publishedAt?: any | null
                           locale?: string | null
+                          author?: {
+                            __typename?: 'AuthorEntityResponse'
+                            data?: {
+                              __typename?: 'AuthorEntity'
+                              attributes?: { __typename?: 'Author'; firstName: string } | null
+                            } | null
+                          } | null
                         } | null
                       } | null
                     } | null
@@ -14268,6 +14456,13 @@ export type TriplyRecordFragmentFragment = {
                       updatedAt?: any | null
                       publishedAt?: any | null
                       locale?: string | null
+                      author?: {
+                        __typename?: 'AuthorEntityResponse'
+                        data?: {
+                          __typename?: 'AuthorEntity'
+                          attributes?: { __typename?: 'Author'; firstName: string } | null
+                        } | null
+                      } | null
                     } | null
                   } | null
                 } | null
@@ -14804,6 +14999,13 @@ export const StoryWithoutRelationsFragmentFragmentDoc = gql`
       updatedAt
       publishedAt
       locale
+      author {
+        data {
+          attributes {
+            firstName
+          }
+        }
+      }
     }
   }
 `
@@ -14927,7 +15129,7 @@ export const ComponentCoreCarouselItemFragmentFragmentDoc = gql`
       ...UploadFileEntityResponseFragment
     }
     type
-    triplyRecord {
+    triply_record {
       data {
         ...BaseTriplyRecordFragment
       }

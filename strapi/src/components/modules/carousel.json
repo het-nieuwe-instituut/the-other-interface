@@ -23,7 +23,12 @@
     },
     "type": {
       "type": "enumeration",
-      "enum": ["Makers", "Highlights", "Combined", "Themes"]
+      "enum": [
+        "Makers",
+        "Highlights",
+        "Combined",
+        "Themes"
+      ]
     },
     "description": {
       "type": "text"

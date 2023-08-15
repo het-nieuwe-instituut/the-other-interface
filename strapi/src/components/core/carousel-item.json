@@ -27,7 +27,7 @@
         "Highlight"
       ]
     },
-    "triplyRecord": {
+    "triply_record": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::triply-record.triply-record"

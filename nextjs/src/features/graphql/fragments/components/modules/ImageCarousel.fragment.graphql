@@ -37,67 +37,12 @@ fragment imageCarouselModuleFragment on ComponentModulesImageCarousel {
         }
         story {
             data {
-                attributes {
-                    slug
-                    author {
-                        data {
-                            attributes {
-                                firstName
-                            }
-                        }
-                    }
-                    updatedAt
-                }
+                ...StoryWithoutRelationsFragment
             }
         }
         triplyRecord {
             data {
-                attributes {
-                    createdAt
-                    updatedAt
-                    recordId
-                    archive {
-                        ... on ArchivesOtherZoomLevel5DetailType {
-                            id
-                            type
-                            title
-                        }
-                        ... on ArchivesFondsZoomLevel5DetailType {
-                            id
-                            type
-                        }
-                    }
-                    object {
-                        description
-                        image
-                    }
-                    publication {
-                        ... on PublicationsAudioVisualZoomLevel5DetailType {
-                            id
-                            type
-                            title
-                        }
-                        ... on PublicationsArticleZoomLevel5DetailType {
-                            id
-                            type
-                            title
-                        }
-                        ... on PublicationsSerialZoomLevel5DetailType {
-                            id
-                            type
-                            title
-                        }
-                        ... on PublicationsBookZoomLevel5DetailType {
-                            id
-                            type
-                            title
-                        }
-                    }
-                    people {
-                        name
-                        nameTypes
-                    }
-                }
+                ...BaseTriplyRecordFragment
             }
         }
     }

@@ -18,7 +18,6 @@ interface Props {
 const IMAGE_HEIGHT = 600
 
 export const ImageCarousel = (props: Props) => {
-  console.log(props, 'important')
   const { images } = props.component
   const items = images?.data
   const {
