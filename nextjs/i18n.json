@@ -7,6 +7,7 @@
     "/story/[slug]": ["stories", "record", "landingpage"],
     "/landingpage/[slug]": ["landingpage"],
     "/landingpage/[slug]/[record]": ["record", "landingpage"],
-    "/": ["homepage"]
+    "/": ["homepage"],
+    "/v2": ["homepage"]
   }
 }
