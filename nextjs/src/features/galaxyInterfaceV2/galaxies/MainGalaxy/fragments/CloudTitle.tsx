@@ -8,7 +8,12 @@ interface Props {
 }
 
 export const CloudTitle: React.FC<Props> = ({ position, children }) => (
-  <Text position="absolute" textStyle="headingTimesLarge.lg" style={{ ...position }}>
+  <Text
+    position="absolute"
+    textStyle="headingTimesLarge.lg"
+    filter="blur(2px)"
+    style={{ ...position }}
+  >
     {children}
   </Text>
 )

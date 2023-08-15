@@ -1,6 +1,7 @@
-import { Box } from '@chakra-ui/react'
+import { Box, Image, Text } from '@chakra-ui/react'
 
 import { Position } from './types'
+import { HOMEPAGE_Z_INDEXES } from './constants'
 
 // For readability advantage, we are using the object representation.
 type PositioningTemplate = {
@@ -24,11 +25,34 @@ const positioningTemplate: PositioningTemplate = {
   7: { top: 0, right: 0 },
 }
 
+const stories = [
+  {
+    title: 'Oral Herstories',
+    image: 'https://picsum.photos/150/100',
+  },
+  {
+    title: 'Nelly &',
+    image: 'https://picsum.photos/104/160',
+  },
+  {
+    title: 'De Witdruk',
+    image: 'https://picsum.photos/104/160',
+  },
+  {
+    title: 'Collecting Other Types',
+    image: 'https://picsum.photos/150/100',
+  },
+  {
+    title: 'Architect Portrait',
+    image: 'https://picsum.photos/104/160',
+  },
+]
+
 export const StoriesContainer: React.FC = () => (
   <Box
     position="absolute"
-    top="12.73%"
-    right="17.58vw"
+    top="13%"
+    right="18vw"
     w="65vw"
     h="55%"
     display="grid"
@@ -37,11 +61,16 @@ export const StoriesContainer: React.FC = () => (
     gap="20px"
     border="1px solid red"
   >
-    {[0, 1, 2, 3, 4, 5, 6, 7].map((el, index) => {
+    {stories.map((story, index) => {
       const positioning = positioningTemplate[index]
 
       return (
-        <Box key={el} border="1px solid blue" position="relative">
+        <Box
+          key={story.title}
+          position="relative"
+          zIndex={HOMEPAGE_Z_INDEXES.STORIES}
+          border="1px solid blue"
+        >
           {positioning && (
             <Box
               position="absolute"
@@ -52,9 +81,31 @@ export const StoriesContainer: React.FC = () => (
               maxH="80%"
               minW="70%"
               minH="70%"
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              justifyContent="center"
               border="1px solid green"
             >
-              {el}
+              <Image
+                src={story.image}
+                maxW="100%"
+                maxH="20%"
+                objectFit="contain"
+                alt={story.title}
+              />
+              <Box w="100%">
+                <Text
+                  w="100%"
+                  align="center"
+                  whiteSpace="nowrap"
+                  overflow="hidden"
+                  textOverflow="ellipsis"
+                  // add font style
+                >
+                  {story.title}
+                </Text>
+              </Box>
             </Box>
           )}
         </Box>
