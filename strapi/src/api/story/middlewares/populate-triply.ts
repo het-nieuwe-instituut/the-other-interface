@@ -6,7 +6,7 @@ export default (options, { strapi }) => {
 
     if (ctx.request.body.model === storyApi) {
       const story = await strapi.entityService.findOne(storyApi, ctx.request.body.id, {
-        populate: ['triplyRecords'],
+        populate: ['triplyRecords', 'author', 'locations', 'themes'],
       })
 
       ctx.response.body = {
@@ -14,6 +14,9 @@ export default (options, { strapi }) => {
         nonLocalizedFields: {
           ...ctx.response.body.nonLocalizedFields,
           triplyRecords: story.triplyRecords,
+          author: story.author,
+          locations: story.locations,
+          themes: story.themes,
         },
       }
     }

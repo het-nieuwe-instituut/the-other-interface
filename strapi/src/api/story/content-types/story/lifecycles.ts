@@ -44,6 +44,18 @@ function applyToAllLocales(event) {
       data['triplyRecords'] = event.params.data.triplyRecords
     }
 
+    if (event.params.data.locations !== undefined) {
+      data['locations'] = event.params.data.locations
+    }
+
+    if (event.params.data.author !== undefined) {
+      data['author'] = event.params.data.author
+    }
+
+    if (event.params.data.themes !== undefined) {
+      data['themes'] = event.params.data.themes
+    }
+
     if (event.params.data.slug) {
       data['slug'] = event.params.data.slug
     }
