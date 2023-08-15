@@ -26,7 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       {'publicationState' in pageProps &&
-        pageProps.publicationState !== PublicationState.Preview && <PreviewBlock />}
+        pageProps.publicationState === PublicationState.Preview && <PreviewBlock />}
       {process.env.parsed.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
         <>
           <Script
