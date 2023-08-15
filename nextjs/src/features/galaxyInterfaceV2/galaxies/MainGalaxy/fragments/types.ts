@@ -7,4 +7,4 @@ export type Position = {
 
 export type CloudSize = `${string}vw`
 
-export type CollectionType = 'Archives' | 'Publications' | 'Objects' | 'People'
+export type CollectionType = 'archives' | 'publications' | 'objects' | 'people'
