@@ -128,7 +128,7 @@ const MainGalaxy: React.FC<MainGalaxyProps> = props => {
                           {item.id === EntityNames.Archives ? (
                             <>
                               <Text width="12.5rem" mb={1} textStyle={'cloudText'}>
-                                {t('archives', { count: item.numberOfInstances })}
+                                {t('archivesWithCount', { count: item.numberOfInstances })}
                               </Text>
                               {!!archiveComponent?.count && (
                                 <Text width="12.5rem" textStyle={'cloudText'}>
