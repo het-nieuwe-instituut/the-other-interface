@@ -1,4 +1,5 @@
 import ErrorBoundaryProvider from '@/features/modules/components/ErrorBoundary/ErrorBoundary'
+import Fonts from '@/features/modules/components/Fonts/Fonts'
 import { PreviewBlock } from '@/features/preview/PreviewBlock'
 import DisableScroll from '@/features/shared/components/DisableScroll/DisableScroll'
 import { Footer } from '@/features/shared/components/Footer/Footer'
@@ -46,6 +47,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               <NavigationOverlayProvider>
                 <MobileOverlayProvider>
                   <>
+                    <Fonts />
                     <TestMenu />
                     <div id={'galaxy-root'}></div>
                     <Component {...pageProps} />
