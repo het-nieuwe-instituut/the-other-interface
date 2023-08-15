@@ -5,6 +5,7 @@ import Fonts from '@/features/shared/components/Fonts/Fonts'
 import { Footer } from '@/features/shared/components/Footer/Footer'
 import MobileOverlayProvider from '@/features/shared/components/MobileOverlayProvider/MobileOverlayProvider'
 import { NavigationOverlayProvider } from '@/features/shared/components/Navigation/Navigation'
+import { TestMenu } from '@/features/shared/components/TestMenu/TestMenu'
 import { createStore } from '@/features/shared/configs/store'
 import { theme } from '@/features/shared/styles/theme/theme'
 import { PublicationState } from '@/features/shared/types/enums'
@@ -17,7 +18,6 @@ import { useMemo } from 'react'
 import { Provider } from 'react-redux'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 
-import { TestMenu } from '@/features/shared/components/TestMenu/TestMenu'
 import './../styles/globals.css'
 
 function MyApp({ Component, pageProps }: AppProps) {

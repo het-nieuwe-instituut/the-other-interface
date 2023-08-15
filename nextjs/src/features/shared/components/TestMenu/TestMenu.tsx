@@ -1,8 +1,9 @@
+import SettingsIcon from '@/icons/open-menu.svg'
 import { Button, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
-import SettingsIcon from '@/icons/open-menu.svg'
-import { SWITCH_SERVER_Z_INDEX } from '../../constants/mainConstants'
 import { useState } from 'react'
+
+import { SWITCH_SERVER_Z_INDEX } from '../../constants/mainConstants'
 
 const DynamicSwitchServerButton = dynamic(
   () => import('../SwitchServerButton/SwitchServerButton'),
