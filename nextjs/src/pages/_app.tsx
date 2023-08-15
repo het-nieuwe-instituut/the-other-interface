@@ -5,6 +5,7 @@ import { Footer } from '@/features/shared/components/Footer/Footer'
 import { AppHead } from '@/features/shared/components/Head/AppHead'
 import MobileOverlayProvider from '@/features/shared/components/MobileOverlayProvider/MobileOverlayProvider'
 import { NavigationOverlayProvider } from '@/features/shared/components/Navigation/Navigation'
+import { TestMenu } from '@/features/shared/components/TestMenu/TestMenu'
 import { createStore } from '@/features/shared/configs/store'
 import { theme } from '@/features/shared/styles/theme/theme'
 import { PublicationState } from '@/features/shared/types/enums'
@@ -12,18 +13,12 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { ThemeProvider } from '@emotion/react'
 import 'keen-slider/keen-slider.min.css'
 import type { AppProps } from 'next/app'
-import dynamic from 'next/dynamic'
 import Script from 'next/script'
 import { useMemo } from 'react'
 import { Provider } from 'react-redux'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 
 import './../styles/globals.css'
-
-const DynamicSwitchServerButton = dynamic(
-  () => import('../features/shared/components/SwitchServerButton/SwitchServerButton'),
-  { ssr: false }
-)
 
 function MyApp({ Component, pageProps }: AppProps) {
   const store = useMemo(() => createStore(pageProps.reduxState), [pageProps.reduxState])
@@ -58,7 +53,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 <NavigationOverlayProvider>
                   <MobileOverlayProvider>
                     <>
-                      <DynamicSwitchServerButton />
+                      <TestMenu />
                       <div id={'galaxy-root'}></div>
                       <Component {...pageProps} />
                       <Footer />
