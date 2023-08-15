@@ -3,6 +3,7 @@ import Fonts from '@/features/modules/components/Fonts/Fonts'
 import { PreviewBlock } from '@/features/preview/PreviewBlock'
 import DisableScroll from '@/features/shared/components/DisableScroll/DisableScroll'
 import { Footer } from '@/features/shared/components/Footer/Footer'
+import { AppHead } from '@/features/shared/components/Head/AppHead'
 import MobileOverlayProvider from '@/features/shared/components/MobileOverlayProvider/MobileOverlayProvider'
 import { NavigationOverlayProvider } from '@/features/shared/components/Navigation/Navigation'
 import { TestMenu } from '@/features/shared/components/TestMenu/TestMenu'
@@ -15,6 +16,7 @@ import Script from 'next/script'
 import { useMemo } from 'react'
 import { Provider } from 'react-redux'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
+import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const store = useMemo(() => createStore(pageProps.reduxState), [pageProps.reduxState])
@@ -50,6 +52,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                     {/* TODO: delete this component when new font fully integrated */}
                     <Fonts />
 
+                    <AppHead />
                     <TestMenu />
                     <div id={'galaxy-root'}></div>
                     <Component {...pageProps} />
