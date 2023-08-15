@@ -41,7 +41,7 @@ export function TestMenu() {
             </MenuButton>
           )}
 
-          <MenuList>
+          <MenuList zIndex={SWITCH_SERVER_Z_INDEX}>
             <MenuItem onClick={() => setIsDevMenuHidden(true)}>
               hide dev menu (reload the page to get it back)
             </MenuItem>
