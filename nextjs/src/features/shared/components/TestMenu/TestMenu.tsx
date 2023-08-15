@@ -1,9 +1,10 @@
 import SettingsIcon from '@/icons/open-menu.svg'
 import { Button, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 
 import { SWITCH_SERVER_Z_INDEX } from '../../constants/mainConstants'
+import { ThemeProviderContext } from '../providers/ThemeProvider'
 
 const DynamicSwitchServerButton = dynamic(
   () => import('../SwitchServerButton/SwitchServerButton'),
@@ -11,6 +12,7 @@ const DynamicSwitchServerButton = dynamic(
 )
 
 export function TestMenu() {
+  const themeProviderContext = useContext(ThemeProviderContext)
   const [isDevMenuHidden, setIsDevMenuHidden] = useState(false)
   if (
     process.env.parsed.NEXT_PUBLIC_ENV !== 'test' &&
@@ -42,6 +44,7 @@ export function TestMenu() {
           )}
 
           <MenuList zIndex={SWITCH_SERVER_Z_INDEX}>
+            <MenuItem onClick={() => themeProviderContext.toggleTheme()}>Toggle theme</MenuItem>
             <MenuItem onClick={() => setIsDevMenuHidden(true)}>
               hide dev menu (reload the page to get it back)
             </MenuItem>

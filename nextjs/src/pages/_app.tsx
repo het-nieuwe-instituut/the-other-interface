@@ -2,15 +2,12 @@ import ErrorBoundaryProvider from '@/features/modules/components/ErrorBoundary/E
 import { PreviewBlock } from '@/features/preview/PreviewBlock'
 import DisableScroll from '@/features/shared/components/DisableScroll/DisableScroll'
 import { Footer } from '@/features/shared/components/Footer/Footer'
-import { AppHead } from '@/features/shared/components/Head/AppHead'
 import MobileOverlayProvider from '@/features/shared/components/MobileOverlayProvider/MobileOverlayProvider'
 import { NavigationOverlayProvider } from '@/features/shared/components/Navigation/Navigation'
 import { TestMenu } from '@/features/shared/components/TestMenu/TestMenu'
+import { ThemeProvider } from '@/features/shared/components/providers/ThemeProvider'
 import { createStore } from '@/features/shared/configs/store'
-import { theme } from '@/features/shared/styles/theme/theme'
 import { PublicationState } from '@/features/shared/types/enums'
-import { ChakraProvider } from '@chakra-ui/react'
-import { ThemeProvider } from '@emotion/react'
 import 'keen-slider/keen-slider.min.css'
 import type { AppProps } from 'next/app'
 import Script from 'next/script'
@@ -18,14 +15,11 @@ import { useMemo } from 'react'
 import { Provider } from 'react-redux'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 
-import './../styles/globals.css'
-
 function MyApp({ Component, pageProps }: AppProps) {
   const store = useMemo(() => createStore(pageProps.reduxState), [pageProps.reduxState])
 
   return (
     <>
-      <AppHead />
       {'publicationState' in pageProps &&
         pageProps.publicationState === PublicationState.Preview && <PreviewBlock />}
       {process.env.parsed.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
@@ -46,23 +40,21 @@ function MyApp({ Component, pageProps }: AppProps) {
       )}
 
       <Provider store={store}>
-        <ThemeProvider theme={theme}>
-          <ChakraProvider theme={theme}>
-            <ErrorBoundaryProvider>
-              <DisableScroll>
-                <NavigationOverlayProvider>
-                  <MobileOverlayProvider>
-                    <>
-                      <TestMenu />
-                      <div id={'galaxy-root'}></div>
-                      <Component {...pageProps} />
-                      <Footer />
-                    </>
-                  </MobileOverlayProvider>
-                </NavigationOverlayProvider>
-              </DisableScroll>
-            </ErrorBoundaryProvider>
-          </ChakraProvider>
+        <ThemeProvider>
+          <ErrorBoundaryProvider>
+            <DisableScroll>
+              <NavigationOverlayProvider>
+                <MobileOverlayProvider>
+                  <>
+                    <TestMenu />
+                    <div id={'galaxy-root'}></div>
+                    <Component {...pageProps} />
+                    <Footer />
+                  </>
+                </MobileOverlayProvider>
+              </NavigationOverlayProvider>
+            </DisableScroll>
+          </ErrorBoundaryProvider>
         </ThemeProvider>
       </Provider>
     </>
