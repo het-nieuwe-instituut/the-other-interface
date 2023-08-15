@@ -3,6 +3,7 @@
 import { GraphQLClient } from 'graphql-request'
 import * as Dom from 'graphql-request/dist/types.dom'
 import gql from 'graphql-tag'
+
 export type Maybe<T> = T | null
 export type InputMaybe<T> = Maybe<T>
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] }
@@ -12311,64 +12312,6 @@ export type ComponentCoreItemsFragmentFragment = {
   } | null
 }
 
-export type ComponentModulesCollectionRelationFragmentFragment = {
-  __typename?: 'ComponentModulesCollectionRelation'
-  id: string
-  author?: {
-    __typename?: 'AuthorEntityResponse'
-    data?: {
-      __typename?: 'AuthorEntity'
-      id?: string | null
-      attributes?: {
-        __typename?: 'Author'
-        firstName: string
-        insertion?: string | null
-        lastName: string
-        createdAt?: any | null
-        updatedAt?: any | null
-        publishedAt?: any | null
-      } | null
-    } | null
-  } | null
-  story?: {
-    __typename?: 'StoryEntityResponse'
-    data?: {
-      __typename?: 'StoryEntity'
-      id?: string | null
-      attributes?: {
-        __typename?: 'Story'
-        title: string
-        slug: string
-        description?: string | null
-        shortDescription?: string | null
-        createdAt?: any | null
-        updatedAt?: any | null
-        publishedAt?: any | null
-        locale?: string | null
-        author?: {
-          __typename?: 'AuthorEntityResponse'
-          data?: {
-            __typename?: 'AuthorEntity'
-            attributes?: { __typename?: 'Author'; firstName: string } | null
-          } | null
-        } | null
-      } | null
-    } | null
-  } | null
-  triplyRecord?: {
-    __typename?: 'TriplyRecordEntityResponse'
-    data?: {
-      __typename?: 'TriplyRecordEntity'
-      id?: string | null
-      attributes?: {
-        __typename?: 'TriplyRecord'
-        recordId: string
-        type: Enum_Triplyrecord_Type
-      } | null
-    } | null
-  } | null
-}
-
 export type ComponentModulesButtonsModuleFragmentFragment = {
   __typename: 'ComponentModulesButtonsModule'
   id: string
@@ -14929,6 +14872,19 @@ export type UsersPermissionsUsersQuery = {
   } | null
 }
 
+export const AuthorFragmentFragmentDoc = gql`
+  fragment AuthorFragment on AuthorEntity {
+    id
+    attributes {
+      firstName
+      insertion
+      lastName
+      createdAt
+      updatedAt
+      publishedAt
+    }
+  }
+`
 export const ComponentCoreModuleLayoutsFragmentFragmentDoc = gql`
   fragment ComponentCoreModuleLayoutsFragment on ComponentCoreModuleLayouts {
     id
@@ -15600,42 +15556,6 @@ export const ComponentCoreItemsFragmentFragmentDoc = gql`
     }
   }
   ${UploadFileEntityResponseFragmentFragmentDoc}
-`
-export const AuthorFragmentFragmentDoc = gql`
-  fragment AuthorFragment on AuthorEntity {
-    id
-    attributes {
-      firstName
-      insertion
-      lastName
-      createdAt
-      updatedAt
-      publishedAt
-    }
-  }
-`
-export const ComponentModulesCollectionRelationFragmentFragmentDoc = gql`
-  fragment ComponentModulesCollectionRelationFragment on ComponentModulesCollectionRelation {
-    id
-    author {
-      data {
-        ...AuthorFragment
-      }
-    }
-    story {
-      data {
-        ...StoryWithoutRelationsFragment
-      }
-    }
-    triplyRecord {
-      data {
-        ...BaseTriplyRecordFragment
-      }
-    }
-  }
-  ${AuthorFragmentFragmentDoc}
-  ${StoryWithoutRelationsFragmentFragmentDoc}
-  ${BaseTriplyRecordFragmentFragmentDoc}
 `
 export const PaginationFragmentFragmentDoc = gql`
   fragment PaginationFragment on Pagination {
