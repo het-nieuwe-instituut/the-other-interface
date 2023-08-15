@@ -24,10 +24,9 @@ export const PreviewBlock = () => {
           border: '1px solid blue',
           paddingLeft: 8,
           paddingRight: 8,
-          paddingTop: 4,
-          paddingBottom: 4,
+          paddingTop: 8,
+          paddingBottom: 8,
           top: 0,
-
           maxWidth: 300,
 
           background: 'white',
@@ -45,7 +44,7 @@ export const PreviewBlock = () => {
           <p style={{ fontSize: 24 }}>&#x26A0;</p>
         </div>
         <div>
-          <p>You are currently in preview mode </p>
+          <p style={{ marginBottom: 10 }}>You are currently in preview mode </p>
           <button
             style={{
               border: 1,
