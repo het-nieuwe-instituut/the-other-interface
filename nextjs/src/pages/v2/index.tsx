@@ -14,10 +14,13 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   const locale = context.locale
   const api = initApiClient(context)
 
-  const [homepage] = await Promise.all([
+  const [homepage, themes] = await Promise.all([
     api?.homepage({ locale, publicationState }),
-    api?.zoomLevel1(),
+    // api?.zoomLevel1(),
+    api?.themes({ locale, publicationState }),
   ])
+
+  console.log({ themes: themes.themes.data[0].attributes?.stories?.data[0].attributes })
 
   return {
     props: {

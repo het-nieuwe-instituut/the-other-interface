@@ -1,0 +1,20 @@
+fragment ThemeFragment on ThemeEntity {
+    id
+    attributes {
+        name
+        stories {
+            data {
+                ...StoryWithoutRelationsFragment
+            }
+        }
+        createdAt
+        updatedAt
+        publishedAt
+        localizations {
+            data {
+                id
+            }
+        }
+        locale
+    }
+}

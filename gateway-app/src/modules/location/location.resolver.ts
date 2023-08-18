@@ -26,7 +26,7 @@ export class LocationResolver {
   @Query(() => LocationRelationResponseCollection)
   public async locations(
     @Args('filters', { nullable: true }) filters?: LocationFiltersInput,
-    @Args('pagaination', { nullable: true }) pagination?: PaginationArg,
+    @Args('pagination', { nullable: true }) pagination?: PaginationArg,
     @Args('sort', { nullable: true, type: () => [String] }) sort?: string[],
     @Args('publicationState', { nullable: true }) publicationState?: PublicationState,
     @Args('locale', { nullable: true }) locale?: I18NLocaleCode
