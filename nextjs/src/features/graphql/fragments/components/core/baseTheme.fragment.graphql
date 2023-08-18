@@ -4,7 +4,7 @@ fragment ThemeFragment on ThemeEntity {
         name
         stories {
             data {
-                ...StoryWithoutRelationsFragment
+                ...StoryFragment
             }
         }
         createdAt

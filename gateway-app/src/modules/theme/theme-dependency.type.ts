@@ -1,31 +1,6 @@
 import { Field, ObjectType } from '@nestjs/graphql'
 import { ThemeRelationResponseCollection } from './theme.type'
-// import { ResponseCollectionMeta, UploadFileEntityResponse } from '../strapi/shared-types'
 import { StoryRelationResponseCollection } from '../story/story.type'
-
-// @ObjectType()
-// export class ThemeStoryItem {
-//   @Field(() => ID, { nullable: true })
-//   public id?: string
-
-//   @Field({ nullable: true })
-//   public slug?: string
-
-//   @Field({ nullable: false })
-//   public title: string
-
-//   @Field(() => UploadFileEntityResponse)
-//   public image: UploadFileEntityResponse
-// }
-
-// @ObjectType()
-// export class ThemeStoryRelationResponseCollection {
-//   @Field(() => [ThemeStoryItem], { nullable: false })
-//   public data: ThemeStoryItem[]
-
-//   @Field(() => ResponseCollectionMeta, { nullable: true })
-//   public meta: ResponseCollectionMeta
-// }
 
 @ObjectType()
 export class Theme {

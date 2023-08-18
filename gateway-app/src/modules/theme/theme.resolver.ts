@@ -1,6 +1,6 @@
 import { Inject } from '@nestjs/common'
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
-import { ComponentModulesImage, PublicationState, Sdk } from '../../generated/strapi-sdk'
+import { PublicationState, Sdk } from '../../generated/strapi-sdk'
 import { I18NLocaleCode, PaginationArg } from '../strapi/shared-types'
 import {
   ThemeEntityResponse,
@@ -62,32 +62,6 @@ export class ThemeFieldResolver {
       })
 
       return res.stories
-
-      // TODO logic to add image to story
-
-      // const storiesWithImage = res.stories?.data.map(storyEntity => {
-      //   const components = storyEntity.attributes?.components || []
-
-      //   // Find the first 'Image' component.
-      //   const imageComponent = components.find(
-      //     comp => comp?.__typename === 'ComponentModulesImage'
-      //   ) as ComponentModulesImage
-
-      //   // If an 'Image' component is found, extract the whole image entity.
-      //   const firstImage = imageComponent ? imageComponent.image.data?.attributes : null
-
-      //   // Add the 'firstImage' field to the 'attributes' of StoryEntity.
-      //   return {
-      //     id: storyEntity.id,
-      //     title: storyEntity.attributes?.title,
-      //     slug: storyEntity.attributes?.slug,
-      //     image: firstImage,
-      //   }
-      // })
-
-      // return {
-      //   ...storiesWithImage,
-      // }
     }
     return []
   }

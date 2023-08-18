@@ -38,19 +38,6 @@ fragment ThemeFragment on ThemeEntity {
                 ...StoryFragment
             }
         }
-        # storiesWithImages {
-        #     data {
-        #         id
-        #         title
-        #         slug
-        #         image {
-        #             id
-        #             url
-        #             width
-        #             height
-        #         }
-        #     }
-        # }
         createdAt
         updatedAt
         publishedAt
