@@ -10,7 +10,9 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "caption": {
       "type": "text"
@@ -24,16 +26,15 @@
       "component": "core.module-layouts",
       "required": true
     },
-    "imageRelation": {
-      "displayName": "collectionRelation",
-      "type": "component",
-      "repeatable": false,
-      "component": "modules.collection-relation"
+    "triplyRecord": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::triply-record.triply-record"
     },
-    "captionRelation": {
-      "type": "component",
-      "repeatable": false,
-      "component": "modules.collection-relation"
+    "story": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::story.story"
     }
   }
 }

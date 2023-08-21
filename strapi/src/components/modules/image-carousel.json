@@ -10,7 +10,9 @@
       "type": "media",
       "multiple": true,
       "required": false,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "description": {
       "type": "text"
@@ -20,6 +22,12 @@
       "repeatable": false,
       "component": "core.module-layouts",
       "required": true
+    },
+    "items": {
+      "displayName": "ImageCarouselItem",
+      "type": "component",
+      "repeatable": true,
+      "component": "core.image-carousel-item"
     }
   }
 }

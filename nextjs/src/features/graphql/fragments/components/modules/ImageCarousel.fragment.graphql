@@ -20,4 +20,30 @@ fragment imageCarouselModuleFragment on ComponentModulesImageCarousel {
             ...componentCoreModuleLayouts
         }
     }
+    items {
+        description
+        id
+        name
+        picture {
+            data {
+                attributes {
+                    url,
+                    caption,
+                    width,
+                    height,
+                    size
+                }
+            }
+        }
+        story {
+            data {
+                ...StoryWithoutRelationsFragment
+            }
+        }
+        triplyRecord {
+            data {
+                ...BaseTriplyRecordFragment
+            }
+        }
+    }
 }

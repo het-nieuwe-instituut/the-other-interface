@@ -2,7 +2,7 @@ import { Box, Text, useDimensions } from '@chakra-ui/react'
 import Image from 'next/image'
 import { createRef } from 'react'
 
-import { ComponentModulesImage, UploadFile } from 'src/generated/graphql'
+import { ComponentModulesImage } from 'src/generated/graphql'
 
 import { calculateImagePropotions } from '../../helpers/modulesHelpers'
 import { imageBasePath } from '../../modulesConstants'
@@ -16,7 +16,7 @@ const IMAGE_HEIGHT = 680
 
 const MediaImage = (props: MediaImageProps) => {
   const { image, alt_text, caption } = props.component
-  const { url } = image?.data?.attributes as UploadFile
+  const url = image?.data?.attributes?.url
   const imageRef = createRef<HTMLDivElement>()
   const dimensions = useDimensions(imageRef, true)
   const originalHeight = image?.data?.attributes?.height ?? 1

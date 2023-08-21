@@ -1,22 +1,3 @@
-fragment ComponentModulesCollectionRelationFragment on ComponentModulesCollectionRelation {
-    id
-    author {
-        data {
-            ...AuthorFragment
-        }
-    }
-    story {
-        data {
-            ...StoryWithoutRelationsFragment
-        }
-    }
-    triplyRecord {
-        data {
-            ...BaseTriplyRecordFragment
-        }
-    }
-}
-
 fragment ComponentModulesButtonsModuleFragment on ComponentModulesButtonsModule {
     id
     buttonsModuleLayout {
@@ -55,6 +36,9 @@ fragment ComponentModulesImageCarouselFragment on ComponentModulesImageCarousel 
     images {
         ...UploadFileRelationResponseCollectionFragment
     }
+    items {
+        ...ComponentCoreImageCarouselItemFragment
+    }
 }
 
 fragment ComponentModulesImageFragment on ComponentModulesImage {
@@ -68,11 +52,15 @@ fragment ComponentModulesImageFragment on ComponentModulesImage {
     imageModuleLayout {
         ...ComponentCoreModuleLayoutsFragment
     }
-    captionRelation {
-        ...ComponentModulesCollectionRelationFragment
+    triplyRecord {
+        data {
+            ...BaseTriplyRecordFragment
+        }
     }
-    imageRelation {
-        ...ComponentModulesCollectionRelationFragment
+    story {
+        data {
+            ...StoryWithoutRelationsFragment
+        }
     }
 }
 

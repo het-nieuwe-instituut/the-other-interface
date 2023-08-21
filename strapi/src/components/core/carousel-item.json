@@ -10,7 +10,9 @@
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "name": {
       "type": "string"
@@ -20,12 +22,20 @@
     },
     "type": {
       "type": "enumeration",
-      "enum": ["Maker", "Highlight"]
+      "enum": [
+        "Maker",
+        "Highlight"
+      ]
     },
     "triply_record": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::triply-record.triply-record"
+    },
+    "story": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::story.story"
     }
   }
 }

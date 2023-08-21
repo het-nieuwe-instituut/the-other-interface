@@ -3,3 +3,6 @@ itermocil.custom.yml
 .history/
 nextjs/.env
 backups
+
+# webstorm
+.idea
