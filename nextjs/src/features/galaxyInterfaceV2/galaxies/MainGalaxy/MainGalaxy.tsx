@@ -55,6 +55,7 @@ const MainGalaxy: React.FC = () => {
           <CloudTitle position={cloud.titlePosition}>{t(cloud.title)}</CloudTitle>
         </Fragment>
       ))}
+      <StoriesContainer />
     </Box>
   )
 }

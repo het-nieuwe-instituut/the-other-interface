@@ -1,7 +1,8 @@
-import { Box, Image, Text } from '@chakra-ui/react'
+import { Box, Image, Text, Grid, GridItem } from '@chakra-ui/react'
 
 import { Position } from './types'
 import { HOMEPAGE_Z_INDEXES } from './constants'
+import { useMemo } from 'react'
 
 // For readability advantage, we are using the object representation.
 type PositioningTemplate = {
@@ -48,68 +49,83 @@ const stories = [
   },
 ]
 
-export const StoriesContainer: React.FC = () => (
-  <Box
-    position="absolute"
-    top="13%"
-    right="18vw"
-    w="65vw"
-    h="55%"
-    display="grid"
-    gridTemplateColumns="repeat(4, 1fr)"
-    gridTemplateRows="repeat(2, 1fr)"
-    gap="20px"
-    border="1px solid red"
-  >
-    {stories.map((story, index) => {
-      const positioning = positioningTemplate[index]
+export const StoriesContainer: React.FC = () => {
+  const positionedStories = useMemo(() => {
+    let lastStoryIndex = 0
+    const positionedStories = []
 
-      return (
-        <Box
-          key={story.title}
-          position="relative"
-          zIndex={HOMEPAGE_Z_INDEXES.STORIES}
-          border="1px solid blue"
-        >
-          {positioning && (
-            <Box
-              position="absolute"
-              style={{
-                ...positioning,
-              }}
-              maxW="80%"
-              maxH="80%"
-              minW="70%"
-              minH="70%"
-              display="flex"
-              flexDirection="column"
-              alignItems="center"
-              justifyContent="center"
-              border="1px solid green"
-            >
-              <Image
-                src={story.image}
-                maxW="100%"
-                maxH="20%"
-                objectFit="contain"
-                alt={story.title}
-              />
-              <Box w="100%">
-                <Text
-                  w="100%"
-                  align="center"
-                  whiteSpace="nowrap"
-                  overflow="hidden"
-                  textOverflow="ellipsis"
-                  // add font style
-                >
-                  {story.title}
-                </Text>
+    for (const position of Object.values(positioningTemplate)) {
+      if (!position) {
+        positionedStories.push(null)
+      } else {
+        positionedStories.push({ ...stories[lastStoryIndex], position })
+        lastStoryIndex++
+      }
+    }
+
+    return positionedStories
+  }, [stories])
+
+  console.log('positionedStories', positionedStories)
+
+  return (
+    <Grid
+      position="absolute"
+      top="13%"
+      right="18vw"
+      w="65vw"
+      h="55%"
+      templateColumns="repeat(4, 1fr)"
+      templateRows="repeat(2, 1fr)"
+      gap="20px"
+      border="1px solid red"
+    >
+      {positionedStories.map((positionedStory, index) => {
+        return (
+          <GridItem
+            key={positionedStory?.title ?? `empty-${index}`}
+            position="relative"
+            zIndex={HOMEPAGE_Z_INDEXES.STORIES}
+            border="1px solid blue"
+          >
+            {positionedStory && (
+              <Box
+                position="absolute"
+                style={{ ...positionedStory.position }}
+                maxW="80%"
+                maxH="80%"
+                minW="70%"
+                minH="70%"
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+                justifyContent="center"
+                border="1px solid green"
+              >
+                <Image
+                  src={positionedStory.image}
+                  maxW="100%"
+                  maxH="20%"
+                  objectFit="contain"
+                  alt={positionedStory.title}
+                />
+                <Box w="100%">
+                  <Text
+                    w="100%"
+                    align="center"
+                    whiteSpace="nowrap"
+                    overflow="hidden"
+                    textOverflow="ellipsis"
+                    // add font style
+                  >
+                    {positionedStory.title}
+                  </Text>
+                </Box>
               </Box>
-            </Box>
-          )}
-        </Box>
-      )
-    })}
-  </Box>
-)
+            )}
+          </GridItem>
+        )
+      })}
+    </Grid>
+  )
+}
