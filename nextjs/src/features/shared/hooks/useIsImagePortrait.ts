@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react'
 
-export const usePresenter = (src: string) => {
+export const useIsImagePortrait = (src: string) => {
   const [isPortrait, setIsPortrait] = useState<boolean | null>(null)
 
   useEffect(() => {
+    if (typeof window === 'undefined') {
+      return
+    }
+
     const img = new window.Image()
     img.src = src
 
