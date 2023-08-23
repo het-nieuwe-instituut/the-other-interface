@@ -1,5 +1,5 @@
-import { Box, Text, GridItem, Flex } from '@chakra-ui/react'
 import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
+import { Box, Text, GridItem, Flex } from '@chakra-ui/react'
 
 import { Position } from './types'
 import { HOMEPAGE_Z_INDEXES } from './constants'

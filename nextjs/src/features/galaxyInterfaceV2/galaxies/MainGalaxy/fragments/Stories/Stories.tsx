@@ -3,7 +3,7 @@ import { Grid } from '@chakra-ui/react'
 import { Story } from '../Story'
 import { usePresenter } from './usePresenter'
 
-const stories = [
+const fakeStories = [
   {
     title: 'Oral Herstories',
     image: 'https://picsum.photos/500/500',
@@ -27,7 +27,7 @@ const stories = [
 ]
 
 export const Stories: React.FC = () => {
-  const { positionedStories } = usePresenter(stories)
+  const { positionedStories } = usePresenter(fakeStories)
 
   return (
     <Grid
