@@ -8,3 +8,9 @@ export type Position = {
 export type CloudSize = `${string}vw`
 
 export type CollectionType = 'archives' | 'publications' | 'objects' | 'people'
+
+//  WIll be replaced with business logic integrated
+export type Story = {
+  title: string
+  image: string
+}

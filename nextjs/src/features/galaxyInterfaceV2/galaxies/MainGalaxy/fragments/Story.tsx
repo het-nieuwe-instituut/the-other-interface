@@ -1,4 +1,4 @@
-import { Box, Text, GridItem } from '@chakra-ui/react'
+import { Box, Text, GridItem, Flex } from '@chakra-ui/react'
 
 import { Position } from './types'
 import { HOMEPAGE_Z_INDEXES } from './constants'
@@ -15,12 +15,11 @@ type Props = {
 export const Story: React.FC<Props> = ({ story }) => (
   <GridItem position="relative" zIndex={HOMEPAGE_Z_INDEXES.STORIES} border="1px solid blue">
     {story && (
-      <Box
+      <Flex
         position="absolute"
         style={{ ...story.position }}
         width="80%"
         height="80%"
-        display="flex"
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
@@ -30,7 +29,7 @@ export const Story: React.FC<Props> = ({ story }) => (
         <ResponsiveImage
           src={story.image}
           alt={story.title}
-          maxHeight="calc(100% - 1.6vw - 10px)" // where 1.6vw is a title height, 10px is gap
+          maxHeight="calc(100% - 2vw - 10px)" // where 1.6vw is a title's line height, 10px is gap
         />
 
         <Box w="100%">
@@ -44,7 +43,7 @@ export const Story: React.FC<Props> = ({ story }) => (
             {story.title}
           </Text>
         </Box>
-      </Box>
+      </Flex>
     )}
   </GridItem>
 )
