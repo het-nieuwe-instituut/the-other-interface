@@ -1,8 +1,8 @@
-import { Box, Image, Text, Grid, GridItem } from '@chakra-ui/react'
+import { Grid } from '@chakra-ui/react'
 
 import { Position } from './types'
-import { HOMEPAGE_Z_INDEXES } from './constants'
 import { useMemo } from 'react'
+import { Story } from './Story'
 
 // For readability advantage, we are using the object representation.
 type PositioningTemplate = {
@@ -49,6 +49,7 @@ const stories = [
   },
 ]
 
+//  TODO: usePresenter
 export const StoriesContainer: React.FC = () => {
   const positionedStories = useMemo(() => {
     let lastStoryIndex = 0
@@ -66,8 +67,6 @@ export const StoriesContainer: React.FC = () => {
     return positionedStories
   }, [stories])
 
-  console.log('positionedStories', positionedStories)
-
   return (
     <Grid
       position="absolute"
@@ -80,52 +79,9 @@ export const StoriesContainer: React.FC = () => {
       gap="20px"
       border="1px solid red"
     >
-      {positionedStories.map((positionedStory, index) => {
-        return (
-          <GridItem
-            key={positionedStory?.title ?? `empty-${index}`}
-            position="relative"
-            zIndex={HOMEPAGE_Z_INDEXES.STORIES}
-            border="1px solid blue"
-          >
-            {positionedStory && (
-              <Box
-                position="absolute"
-                style={{ ...positionedStory.position }}
-                maxW="80%"
-                maxH="80%"
-                minW="70%"
-                minH="70%"
-                display="flex"
-                flexDirection="column"
-                alignItems="center"
-                justifyContent="center"
-                border="1px solid green"
-              >
-                <Image
-                  src={positionedStory.image}
-                  maxW="100%"
-                  maxH="20%"
-                  objectFit="contain"
-                  alt={positionedStory.title}
-                />
-                <Box w="100%">
-                  <Text
-                    w="100%"
-                    align="center"
-                    whiteSpace="nowrap"
-                    overflow="hidden"
-                    textOverflow="ellipsis"
-                    // add font style
-                  >
-                    {positionedStory.title}
-                  </Text>
-                </Box>
-              </Box>
-            )}
-          </GridItem>
-        )
-      })}
+      {positionedStories.map((positionedStory, index) => (
+        <Story key={positionedStory?.title ?? `empty-${index}`} story={positionedStory} />
+      ))}
     </Grid>
   )
 }
