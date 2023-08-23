@@ -2,14 +2,7 @@ import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Box } from '@chakra-ui/react'
 import { Fragment } from 'react'
 
-import {
-  CloudTitle,
-  Cloud,
-  CloudSize,
-  CollectionType,
-  Position,
-  StoriesContainer,
-} from './fragments'
+import { CloudTitle, Cloud, CloudSize, CollectionType, Position, Stories } from './fragments'
 
 interface CollectionCloud {
   title: CollectionType
@@ -55,7 +48,8 @@ const MainGalaxy: React.FC = () => {
           <CloudTitle position={cloud.titlePosition}>{t(cloud.title)}</CloudTitle>
         </Fragment>
       ))}
-      <StoriesContainer />
+
+      <Stories />
     </Box>
   )
 }

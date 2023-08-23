@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+
 import { Position, Story } from '../types'
 
 // For readability advantage, we are using the object representation.

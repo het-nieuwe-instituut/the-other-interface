@@ -1,8 +1,8 @@
 import { Box, Text, GridItem, Flex } from '@chakra-ui/react'
+import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
 
 import { Position } from './types'
 import { HOMEPAGE_Z_INDEXES } from './constants'
-import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
 
 type Props = {
   story: {
@@ -13,7 +13,7 @@ type Props = {
 }
 
 export const Story: React.FC<Props> = ({ story }) => (
-  <GridItem position="relative" zIndex={HOMEPAGE_Z_INDEXES.STORIES} border="1px solid blue">
+  <GridItem position="relative" zIndex={HOMEPAGE_Z_INDEXES.STORIES}>
     {story && (
       <Flex
         position="absolute"
@@ -24,7 +24,6 @@ export const Story: React.FC<Props> = ({ story }) => (
         alignItems="center"
         justifyContent="center"
         gap="10px"
-        border="1px solid green"
       >
         <ResponsiveImage
           src={story.image}

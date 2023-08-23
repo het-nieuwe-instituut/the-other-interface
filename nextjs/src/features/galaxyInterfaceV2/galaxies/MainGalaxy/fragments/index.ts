@@ -1,4 +1,4 @@
 export * from './CloudTitle'
 export * from './Cloud'
 export * from './types'
-export * from './StoriesContainer'
+export * from './Stories'

@@ -26,7 +26,7 @@ const stories = [
   },
 ]
 
-export const StoriesContainer: React.FC = () => {
+export const Stories: React.FC = () => {
   const { positionedStories } = usePresenter(stories)
 
   return (
@@ -39,7 +39,6 @@ export const StoriesContainer: React.FC = () => {
       templateColumns="repeat(4, 1fr)"
       templateRows="repeat(2, 1fr)"
       gap="20px"
-      border="1px solid red"
     >
       {positionedStories.map((positionedStory, index) => (
         <Story key={positionedStory?.title ?? `empty-${index}`} story={positionedStory} />
