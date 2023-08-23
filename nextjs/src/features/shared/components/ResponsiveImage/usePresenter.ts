@@ -6,8 +6,19 @@ export const usePresenter = (src: string) => {
   useEffect(() => {
     const img = new window.Image()
     img.src = src
+
     img.onload = function () {
       setIsPortrait(img.height > img.width)
+    }
+
+    img.onerror = function () {
+      console.error(`Failed to load image: ${src}`)
+      setIsPortrait(null)
+    }
+
+    return () => {
+      img.onload = null
+      img.onerror = null
     }
   }, [src])
 

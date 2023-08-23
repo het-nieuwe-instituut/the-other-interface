@@ -29,7 +29,7 @@ const positioningTemplate: PositioningTemplate = {
 const stories = [
   {
     title: 'Oral Herstories',
-    image: 'https://picsum.photos/150/100',
+    image: 'https://picsum.photos/500/500',
   },
   {
     title: 'Nelly &',

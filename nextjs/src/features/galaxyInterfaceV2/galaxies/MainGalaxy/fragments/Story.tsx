@@ -27,7 +27,11 @@ export const Story: React.FC<Props> = ({ story }) => (
         gap="10px"
         border="1px solid green"
       >
-        <ResponsiveImage src={story.image} alt={story.title} />
+        <ResponsiveImage
+          src={story.image}
+          alt={story.title}
+          maxHeight="calc(100% - 1.6vw - 10px)" // where 1.6vw is a title height, 10px is gap
+        />
 
         <Box w="100%">
           <Text
