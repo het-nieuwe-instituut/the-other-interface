@@ -1,5 +1,6 @@
 import { Flex, Image } from '@chakra-ui/react'
 import React from 'react'
+
 import { useIsImagePortrait } from '../../hooks/useIsImagePortrait'
 
 type ResponsiveImageProps = {
