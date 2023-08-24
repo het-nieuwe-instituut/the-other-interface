@@ -29,7 +29,6 @@
     "kill-ports": "npx kill-port 1337 5000 3000"
   },
   "devDependencies": {
-    "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "husky": "^8.0.1",
     "prettier": "2.8.8"
   },
