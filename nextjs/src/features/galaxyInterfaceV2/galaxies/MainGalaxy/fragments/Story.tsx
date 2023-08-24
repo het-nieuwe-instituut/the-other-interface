@@ -13,7 +13,7 @@ type Props = {
 }
 
 export const Story: React.FC<Props> = ({ story }) => (
-  <GridItem position="relative" zIndex={HOMEPAGE_Z_INDEXES.STORIES}>
+  <GridItem position="relative" zIndex={HOMEPAGE_Z_INDEXES.STORY}>
     {story && (
       <Flex
         position="absolute"

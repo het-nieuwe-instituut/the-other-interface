@@ -27,6 +27,8 @@ export interface LandingPageQueryParams {
 }
 
 const Page = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  console.log('props', props)
+
   return (
     <LandingpageProvider
       zoomLevel2={props.zoomLevel2 ?? null}
