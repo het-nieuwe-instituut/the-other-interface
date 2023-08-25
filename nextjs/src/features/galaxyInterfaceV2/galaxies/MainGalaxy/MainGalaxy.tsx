@@ -29,16 +29,14 @@ const collectionClouds: CollectionCloud[] = [
   },
 ]
 
-const MainGalaxy: React.FC = () => {
-  return (
-    <Box position="relative" width="100vw" height="100vh">
-      {collectionClouds.map(cloud => (
-        <Cloud key={cloud.title} cloud={cloud} />
-      ))}
+const MainGalaxy: React.FC = () => (
+  <Box position="relative" width="100vw" height="100vh">
+    {collectionClouds.map(cloud => (
+      <Cloud key={cloud.title} cloud={cloud} />
+    ))}
 
-      <Stories />
-    </Box>
-  )
-}
+    <Stories />
+  </Box>
+)
 
 export default MainGalaxy

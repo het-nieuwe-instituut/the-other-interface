@@ -1,1 +1,0 @@
-export { EditorialLayer } from './EditorialLayer'
