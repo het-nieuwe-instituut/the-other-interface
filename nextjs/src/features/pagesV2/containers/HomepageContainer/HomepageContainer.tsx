@@ -13,7 +13,7 @@ export const DynamicMainGalaxyNoSsr = dynamic(
 )
 
 export type Props = {
-  homepage: HomepageQuery | undefined
+  homepage?: HomepageQuery
 }
 
 export const HomepageContainer: React.FC<Props> = ({ homepage }) => {

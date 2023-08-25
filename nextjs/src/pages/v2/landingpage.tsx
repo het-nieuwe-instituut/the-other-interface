@@ -8,7 +8,7 @@ import { getPublicationState } from '@/features/shared/utils/publication-state'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 
 interface LandingPageQueryParams {
-  type: SupportedLandingPages
+  category: SupportedLandingPages
   locale: Locale
 }
 
@@ -19,20 +19,20 @@ const LandingPage = (props: InferGetServerSidePropsType<typeof getServerSideProp
 export default LandingPage
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
-  const { type, locale = 'en' } = context.query as unknown as LandingPageQueryParams
+  const { category, locale = 'en' } = context.query as unknown as LandingPageQueryParams
   const publicationState = getPublicationState(context.preview)
 
   const api = initApiClient(context)
 
   const landingpage = await api.landingpageBySlug({
-    slug: TypeToEntityName[type],
+    slug: TypeToEntityName[category],
     locale,
     publicationState,
   })
 
   return {
     props: {
-      type,
+      category,
       publicationState,
       landingpage,
     },
