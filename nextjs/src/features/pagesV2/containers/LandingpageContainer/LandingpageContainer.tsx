@@ -3,7 +3,7 @@ import { EditorialLayer } from '@/features/shared/components/EditorialLayer/Edit
 import dynamic from 'next/dynamic'
 import { Box } from '@chakra-ui/react'
 
-import { LandingpageBySlugQuery, LandingpageComponentsDynamicZone } from 'src/generated/graphql'
+import { LandingpageBySlugQuery } from 'src/generated/graphql'
 
 export const DynamicMainGalaxyNoSsr = dynamic(
   () => import('../../../galaxyInterfaceV2/galaxies/CategoryGalaxy/CategoryGalaxy'),
@@ -29,7 +29,7 @@ export const LandingpageContainer: React.FC<Props> = ({ landingpage }) => {
         <EditorialLayer
           title={editorialData.Title}
           preface={editorialData.Description}
-          components={editorialData.components as LandingpageComponentsDynamicZone[]}
+          components={editorialData.components}
         />
       )}
     </Box>
