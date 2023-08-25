@@ -17,18 +17,21 @@ interface Props {
 }
 
 export const LandingpageContainer: React.FC<Props> = ({ landingpage }) => {
-  const page = landingpage?.landingpages.data[0]
+  const editorialData = landingpage?.landingpages?.data[0]?.attributes
+
   return (
     <Box backgroundColor="graph">
       <GalaxyInterface>
         <DynamicMainGalaxyNoSsr />
       </GalaxyInterface>
 
-      <EditorialLayer
-        title={page?.attributes?.Title}
-        preface={page?.attributes?.Description}
-        components={page?.attributes?.components as LandingpageComponentsDynamicZone[]}
-      />
+      {editorialData && (
+        <EditorialLayer
+          title={editorialData.Title}
+          preface={editorialData.Description}
+          components={editorialData.components as LandingpageComponentsDynamicZone[]}
+        />
+      )}
     </Box>
   )
 }

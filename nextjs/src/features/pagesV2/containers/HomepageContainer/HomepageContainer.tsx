@@ -17,19 +17,21 @@ export type Props = {
 }
 
 export const HomepageContainer: React.FC<Props> = ({ homepage }) => {
+  const editorialData = homepage?.homepage?.data?.attributes
+
   return (
     <Box backgroundColor="graph">
       <GalaxyInterface>
         <DynamicMainGalaxyNoSsr />
       </GalaxyInterface>
 
-      <EditorialLayer
-        title={homepage?.homepage?.data?.attributes?.Title}
-        preface={homepage?.homepage?.data?.attributes?.description}
-        components={
-          homepage?.homepage?.data?.attributes?.components as HomepageComponentsDynamicZone[]
-        }
-      />
+      {editorialData && (
+        <EditorialLayer
+          title={editorialData.Title}
+          preface={editorialData.description}
+          components={editorialData.components as HomepageComponentsDynamicZone[]}
+        />
+      )}
     </Box>
   )
 }
