@@ -1,17 +1,8 @@
-import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Box } from '@chakra-ui/react'
-import { Fragment } from 'react'
 
-import { CloudTitle, Cloud, CloudSize, CollectionType, Position, Stories } from './fragments'
+import { Cloud, CategoryCloud, Stories } from './fragments'
 
-interface CollectionCloud {
-  title: CollectionType
-  size: CloudSize
-  titlePosition: Position
-  cloudPosition: Position
-}
-
-const collectionClouds: CollectionCloud[] = [
+const categoryClouds: CategoryCloud[] = [
   {
     title: 'archives',
     size: '144.4vw',
@@ -38,20 +29,14 @@ const collectionClouds: CollectionCloud[] = [
   },
 ]
 
-const MainGalaxy: React.FC = () => {
-  const { t } = useTypeSafeTranslation('homepage')
-  return (
-    <Box position="relative" width="100vw" height="100vh">
-      {collectionClouds.map(cloud => (
-        <Fragment key={cloud.title}>
-          <Cloud size={cloud.size} position={cloud.cloudPosition} />
-          <CloudTitle position={cloud.titlePosition}>{t(cloud.title)}</CloudTitle>
-        </Fragment>
-      ))}
+const MainGalaxy: React.FC = () => (
+  <Box position="relative" width="100vw" height="100vh">
+    {categoryClouds.map(cloud => (
+      <Cloud key={cloud.title} cloud={cloud} />
+    ))}
 
-      <Stories />
-    </Box>
-  )
-}
+    <Stories />
+  </Box>
+)
 
 export default MainGalaxy
