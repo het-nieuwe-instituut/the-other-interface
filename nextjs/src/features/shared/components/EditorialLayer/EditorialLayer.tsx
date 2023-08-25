@@ -13,11 +13,7 @@ interface Props {
   components: DynamicComponents
 }
 
-export const EditorialLayer: React.FC<Props> = ({
-  components,
-  preface = undefined,
-  title = undefined,
-}) => {
+export const EditorialLayer: React.FC<Props> = ({ components, preface, title }) => {
   const theme = useTheme()
   const { scrollPosition } = useScroll()
 
