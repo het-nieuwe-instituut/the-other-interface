@@ -12,11 +12,9 @@ export interface LandingPageQueryParams {
   locale: Locale
 }
 
-const LandingPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  console.log('props', props)
-
-  return <LandingpageContainer landingpage={props.landingpage} />
-}
+const LandingPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => (
+  <LandingpageContainer landingpage={props.landingpage} />
+)
 
 export default LandingPage
 

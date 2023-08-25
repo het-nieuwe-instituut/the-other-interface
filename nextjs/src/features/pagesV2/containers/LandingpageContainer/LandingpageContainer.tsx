@@ -6,7 +6,7 @@ import { LandingpageBySlugQuery } from 'src/generated/graphql'
 import { EditorialLayer } from './fragments'
 
 export const DynamicMainGalaxyNoSsr = dynamic(
-  () => import('../../../galaxyInterfaceV2/galaxies/MainGalaxy/MainGalaxy'),
+  () => import('../../../galaxyInterfaceV2/galaxies/CategoryGalaxy/CategoryGalaxy'),
   {
     ssr: false,
   }
