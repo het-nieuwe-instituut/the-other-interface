@@ -9,7 +9,7 @@ export type CloudSize = `${string}vw`
 
 export type CollectionType = 'archives' | 'publications' | 'objects' | 'people'
 
-export type CollectionCloud = {
+export type CategoryCloud = {
   title: CollectionType
   size: CloudSize
   titlePosition: Position
