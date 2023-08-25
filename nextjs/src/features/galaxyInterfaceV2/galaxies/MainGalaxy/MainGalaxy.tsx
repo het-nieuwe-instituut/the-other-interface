@@ -1,8 +1,8 @@
 import { Box } from '@chakra-ui/react'
 
-import { Cloud, CollectionCloud, Stories } from './fragments'
+import { Cloud, CategoryCloud, Stories } from './fragments'
 
-const collectionClouds: CollectionCloud[] = [
+const categoryClouds: CategoryCloud[] = [
   {
     title: 'archives',
     size: '144.4vw',
@@ -31,7 +31,7 @@ const collectionClouds: CollectionCloud[] = [
 
 const MainGalaxy: React.FC = () => (
   <Box position="relative" width="100vw" height="100vh">
-    {collectionClouds.map(cloud => (
+    {categoryClouds.map(cloud => (
       <Cloud key={cloud.title} cloud={cloud} />
     ))}
 

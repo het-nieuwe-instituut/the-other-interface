@@ -2,12 +2,12 @@ import { Box, LinkBox, LinkOverlay } from '@chakra-ui/react'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import Link from 'next/link'
 
-import { CollectionCloud } from './types'
+import { CategoryCloud } from './types'
 import { HOMEPAGE_Z_INDEXES } from './constants'
 import { CloudTitle } from './CloudTitle'
 
 interface Props {
-  cloud: CollectionCloud
+  cloud: CategoryCloud
 }
 
 export const Cloud: React.FC<Props> = ({ cloud }) => {
