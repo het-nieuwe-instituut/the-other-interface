@@ -13,7 +13,7 @@ interface Props {
 export const Cloud: React.FC<Props> = ({ cloud }) => {
   const { t } = useTypeSafeTranslation('homepage')
 
-  const { title, size, cloudPosition, titlePosition } = cloud
+  const { title: category, size, cloudPosition, titlePosition } = cloud
 
   return (
     <>
@@ -31,11 +31,11 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
         _hover={{ transform: 'scale(1.1)' }}
         transition="all .2s ease-in-out"
       >
-        <Link href={`/v2/landingpage?type=${title}`} passHref>
+        <Link href={`/v2/landingpage?category=${category}`} passHref>
           <LinkOverlay as={Box} w="100%" h="100%" />
         </Link>
       </LinkBox>
-      <CloudTitle position={titlePosition}>{t(title)}</CloudTitle>
+      <CloudTitle position={titlePosition}>{t(category)}</CloudTitle>
     </>
   )
 }
