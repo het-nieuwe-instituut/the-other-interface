@@ -3,7 +3,7 @@ import { EditorialLayer } from '@/features/shared/components/EditorialLayer/Edit
 import { Box } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
 
-import { HomepageQuery, HomepageComponentsDynamicZone } from 'src/generated/graphql'
+import { HomepageQuery } from 'src/generated/graphql'
 
 export const DynamicMainGalaxyNoSsr = dynamic(
   () => import('../../../galaxyInterfaceV2/galaxies/MainGalaxy/MainGalaxy'),
@@ -29,7 +29,7 @@ export const HomepageContainer: React.FC<Props> = ({ homepage }) => {
         <EditorialLayer
           title={editorialData.Title}
           preface={editorialData.description}
-          components={editorialData.components as HomepageComponentsDynamicZone[]}
+          components={editorialData.components}
         />
       )}
     </Box>

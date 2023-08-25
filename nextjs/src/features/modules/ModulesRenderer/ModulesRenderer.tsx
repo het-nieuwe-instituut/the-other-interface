@@ -7,7 +7,8 @@ import {
   ComponentModulesImage,
   ComponentModulesImageCarousel,
   HomepageComponentsDynamicZone,
-  LandingpageComponentsDynamicZone,
+  HomepageQuery,
+  LandingpageBySlugQuery,
   Maybe,
   MenupageComponentsDynamicZone,
   StoryComponentsDynamicZone,
@@ -29,9 +30,12 @@ interface Props {
 }
 
 export type DynamicComponents =
+  | NonNullable<NonNullable<HomepageQuery['homepage']['data']>['attributes']>['components']
+  | NonNullable<
+      NonNullable<LandingpageBySlugQuery['landingpages']['data']>[0]['attributes']
+    >['components']
   | Maybe<Array<HomepageComponentsDynamicZone>>
   | Maybe<Array<StoryComponentsDynamicZone>>
-  | Maybe<Array<LandingpageComponentsDynamicZone>>
   | Maybe<Array<MenupageComponentsDynamicZone>>
 
 export function DynamicComponentRenderer(props: Props) {
