@@ -28,7 +28,7 @@ interface Props {
   components: DynamicComponents
 }
 
-type DynamicComponents =
+export type DynamicComponents =
   | Maybe<Array<HomepageComponentsDynamicZone>>
   | Maybe<Array<StoryComponentsDynamicZone>>
   | Maybe<Array<LandingpageComponentsDynamicZone>>

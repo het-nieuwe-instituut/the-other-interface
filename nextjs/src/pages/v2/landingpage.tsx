@@ -7,7 +7,7 @@ import { Locale } from '@/features/shared/utils/locale'
 import { getPublicationState } from '@/features/shared/utils/publication-state'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 
-export interface LandingPageQueryParams {
+interface LandingPageQueryParams {
   type: SupportedLandingPages
   locale: Locale
 }

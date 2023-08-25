@@ -1,10 +1,9 @@
 import { GalaxyInterface } from '@/features/galaxyInterfaceV2/GalaxyInterface/GalaxyInterface'
+import { EditorialLayer } from '@/features/shared/components/EditorialLayer/EditorialLayer'
 import { Box } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
 
-import { HomepageQuery } from 'src/generated/graphql'
-
-import { EditorialLayer } from './fragments'
+import { HomepageQuery, HomepageComponentsDynamicZone } from 'src/generated/graphql'
 
 export const DynamicMainGalaxyNoSsr = dynamic(
   () => import('../../../galaxyInterfaceV2/galaxies/MainGalaxy/MainGalaxy'),
@@ -24,7 +23,13 @@ export const HomepageContainer: React.FC<Props> = ({ homepage }) => {
         <DynamicMainGalaxyNoSsr />
       </GalaxyInterface>
 
-      <EditorialLayer data={homepage} />
+      <EditorialLayer
+        title={homepage?.homepage?.data?.attributes?.Title}
+        preface={homepage?.homepage?.data?.attributes?.description}
+        components={
+          homepage?.homepage?.data?.attributes?.components as HomepageComponentsDynamicZone[]
+        }
+      />
     </Box>
   )
 }
