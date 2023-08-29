@@ -22,7 +22,7 @@
       "target": "api::story.story",
       "mappedBy": "themes"
     },
-    "Name": {
+    "name": {
       "type": "string",
       "pluginOptions": {
         "i18n": {

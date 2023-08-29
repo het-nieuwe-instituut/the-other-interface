@@ -1,0 +1,27 @@
+query themes(
+    $filters: ThemeFiltersInput
+    $pagination: PaginationArg
+    $sort: [String!]
+    $publicationState: String
+    $locale: String
+) {
+    themes(
+        filters: $filters
+        pagination: $pagination
+        sort: $sort
+        publicationState: $publicationState
+        locale: $locale
+    ) {
+        data {
+            ...ThemeFragment
+        }
+        meta {
+			pagination {
+				page
+				pageSize
+				pageCount
+				total
+			}
+		}
+    }
+}
