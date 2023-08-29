@@ -25,6 +25,7 @@ import { TableModule } from './modules/table/table.module'
 import { UserModule } from './modules/user/user.module'
 import { UtilModule } from './modules/util/util.module'
 import { AuthModule } from './modules/auth/auth.module'
+import { ThemeModule } from './modules/theme/theme.module'
 
 @Module({
   imports: [
@@ -62,6 +63,7 @@ import { AuthModule } from './modules/auth/auth.module'
     MenuPageModule,
     TableModule,
     UserModule,
+    ThemeModule,
   ],
 })
 export class AppModule {}

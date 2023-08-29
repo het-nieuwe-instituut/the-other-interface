@@ -37,8 +37,8 @@ import {
 
 @ObjectType()
 export class StoryRelationResponseCollection {
-  @Field(() => [StoryEntity], { nullable: false })
-  public data: StoryEntity[]
+  @Field(() => [StoryEntity], { nullable: true })
+  public data?: StoryEntity[]
 }
 
 @ObjectType()

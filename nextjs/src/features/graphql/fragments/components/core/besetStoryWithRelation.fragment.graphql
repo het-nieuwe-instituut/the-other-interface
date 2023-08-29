@@ -1,0 +1,72 @@
+fragment StoryFragment on StoryEntity {
+    id
+    attributes {
+        title
+        slug
+        components {
+            ... on ComponentModulesTextModule {
+                ...textModuleFragment
+            }
+            ... on ComponentModulesImage {
+                ...imageModuleFragment
+            }
+            ... on ComponentModulesPullquote {
+                ...pullquoteModuleFragment
+            }
+            ... on ComponentModulesTableModule {
+                ...tableModuleFragment
+            }
+            ... on ComponentModulesTitleModule {
+                ...titleModuleFragment
+            }
+            ... on ComponentModulesImageCarousel {
+                ...imageCarouselModuleFragment
+            }
+            ... on ComponentModulesButtonsModule {
+                ...buttonsModuleFragment
+            }
+            ... on ComponentModulesSubtitle {
+                ...subtitleModuleFragment
+            }
+            ... on ComponentModulesGridModule {
+                ...gridModuleFragment
+            }
+        }
+        author {
+            data {
+                id
+            }
+        }
+        description
+        timeframe {
+            id
+            yearStart
+            yearEnd
+        }
+        locations {
+            data {
+                id
+            }
+        }
+        publicationDate {
+            id
+            date
+            displayType
+        }
+        shortDescription
+        triplyRecords {
+            data {
+                ...BaseTriplyRecordFragment
+            }
+        }
+        createdAt
+        updatedAt
+        publishedAt
+        localizations {
+            data {
+                id
+            }
+        }
+        locale
+    }
+}

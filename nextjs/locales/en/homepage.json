@@ -6,5 +6,6 @@
   "objects": "Objects",
   "archives": "Archives",
   "people": "Persons",
-  "publications": "Publications"
+  "publications": "Publications",
+  "storiesOver": "Stories on {{title}}"
 }
