@@ -31,9 +31,6 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     }),
   ])
 
-  // console.log({ themes: themes.themes.data[0].attributes?.stories?.data[0].attributes })
-  console.log({ themes })
-
   return {
     props: {
       publicationState,
