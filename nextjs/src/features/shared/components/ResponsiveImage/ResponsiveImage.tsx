@@ -28,7 +28,6 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
     <Image
       src={src}
       width={isPortrait ? 'auto' : '100%'}
-      height={isPortrait ? '100%' : 'auto'}
       maxHeight={maxHeight}
       objectFit="contain"
       alt={alt}
