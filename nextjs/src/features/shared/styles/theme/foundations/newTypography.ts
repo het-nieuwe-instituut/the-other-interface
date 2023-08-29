@@ -116,6 +116,11 @@ const oldTextStyles = {
 }
 
 const headingTimesLarge = {
+  '2xl': {
+    fontFamily: "'Times Dot'",
+    fontWeight: '400',
+    fontSize: '96px',
+  },
   lg: {
     fontFamily: "'Times Dot'",
     fontStyle: 'normal',

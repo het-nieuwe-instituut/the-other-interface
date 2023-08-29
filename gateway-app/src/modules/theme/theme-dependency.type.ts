@@ -22,9 +22,6 @@ export class Theme {
   @Field(() => StoryRelationResponseCollection, { nullable: true })
   public stories?: StoryRelationResponseCollection
 
-  // @Field(() => ThemeStoryRelationResponseCollection, { nullable: true })
-  // public storiesWithImages?: ThemeStoryRelationResponseCollection
-
   @Field({ nullable: true })
   public updatedAt?: Date
 }

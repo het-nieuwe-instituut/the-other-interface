@@ -50,15 +50,15 @@ export class ThemeEntity {
 }
 @ObjectType()
 export class ThemeRelationResponseCollection {
-  @Field(() => [ThemeEntity], { nullable: false })
-  public data: ThemeEntity[]
+  @Field(() => [ThemeEntity], { nullable: true })
+  public data?: ThemeEntity[]
 
   @Field(() => ResponseCollectionMeta, { nullable: true })
-  public meta: ResponseCollectionMeta
+  public meta?: ResponseCollectionMeta
 }
 
 @ObjectType()
 export class ThemeEntityResponse {
   @Field(() => ThemeEntity, { nullable: true })
-  public data: ThemeEntity
+  public data?: ThemeEntity
 }
