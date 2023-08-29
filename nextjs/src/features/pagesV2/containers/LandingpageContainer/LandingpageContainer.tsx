@@ -1,5 +1,6 @@
 import { GalaxyInterface } from '@/features/galaxyInterfaceV2/GalaxyInterface/GalaxyInterface'
 import { EditorialLayer } from '@/features/shared/components/EditorialLayer/EditorialLayer'
+import { GalaxyRecordsFilter } from '@/features/shared/components/v2/GalaxyWrapper/GalaxyRecordsFilter/GalaxyRecordsFilter'
 import dynamic from 'next/dynamic'
 import { Box } from '@chakra-ui/react'
 
@@ -21,7 +22,7 @@ export const LandingpageContainer: React.FC<Props> = ({ landingpage }) => {
 
   return (
     <Box backgroundColor="graph">
-      <GalaxyInterface>
+      <GalaxyInterface renderFooterCenter={<GalaxyRecordsFilter />}>
         <DynamicMainGalaxyNoSsr />
       </GalaxyInterface>
 
