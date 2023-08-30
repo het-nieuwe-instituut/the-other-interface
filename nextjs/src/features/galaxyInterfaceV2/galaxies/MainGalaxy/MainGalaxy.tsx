@@ -42,7 +42,7 @@ const MainGalaxy: React.FC<Props> = ({ storyTitle }) => (
 
     <Stories />
 
-    <ThemeTitle title={storyTitle ?? ''} />
+    <ThemeTitle title={storyTitle} />
   </Box>
 )
 

@@ -2,11 +2,14 @@ import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translation
 import { Text } from '@chakra-ui/react'
 
 interface Props {
-  title: string
+  title?: string
 }
 
 export const ThemeTitle: React.FC<Props> = ({ title }) => {
   const { t } = useLooseTypeSafeTranslation('homepage')
+
+  if (!title) return null
+
   return (
     <Text
       textStyle="headingTimesLarge.2xl"
