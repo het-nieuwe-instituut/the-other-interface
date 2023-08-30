@@ -5,6 +5,7 @@ interface Props {
   selectedOption: string
 }
 
+// SHould become a dropdown later when we would implement that functionality
 export const FilterDropdown: React.FC<Props> = ({ title, selectedOption }) => {
   return (
     <GridItem

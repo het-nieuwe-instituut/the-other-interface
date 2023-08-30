@@ -8,6 +8,7 @@
     "/landingpage/[slug]": ["landingpage"],
     "/landingpage/[slug]/[record]": ["record", "landingpage"],
     "/": ["homepage"],
-    "/v2": ["homepage"]
+    "/v2": ["homepage"],
+    "/v2/landingpage": ["landingpage"]
   }
 }

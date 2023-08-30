@@ -1,4 +1,3 @@
-import { CategoryToEntityName } from '@/features/galaxyInterfaceV2/types'
 import { LandingpageContainer } from '@/features/pagesV2/containers/LandingpageContainer/LandingpageContainer'
 import { CloudCategory } from '@/features/shared/types/categories'
 import { initApiClient } from '@/features/shared/utils/api'
@@ -18,13 +17,14 @@ const LandingPage = (props: InferGetServerSidePropsType<typeof getServerSideProp
 export default LandingPage
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
-  const { category, locale = 'en' } = context.query as unknown as LandingPageQueryParams
+  const { category } = context.query as unknown as LandingPageQueryParams
+  const locale = context.locale
   const publicationState = getPublicationState(context.preview)
 
   const api = initApiClient(context)
 
   const landingpage = await api.landingpageBySlug({
-    slug: CategoryToEntityName[category],
+    slug: category,
     locale,
     publicationState,
   })
