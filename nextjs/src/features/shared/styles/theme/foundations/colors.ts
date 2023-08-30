@@ -173,11 +173,16 @@ const blueAlpha = {
   '100': 'RGBA(159, 238, 255, 1)',
 }
 
+const navyAlpha = {
+  '100': 'RGBA(0, 13, 20, 1)',
+}
+
 const colors = {
   ...oldColors,
   blue,
   brownAlpha,
   blueAlpha,
+  navyAlpha,
 }
 
 export default colors

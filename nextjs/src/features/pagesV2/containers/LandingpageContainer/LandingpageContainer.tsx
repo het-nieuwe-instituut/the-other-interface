@@ -20,9 +20,11 @@ interface Props {
 export const LandingpageContainer: React.FC<Props> = ({ landingpage }) => {
   const editorialData = landingpage?.landingpages?.data[0]?.attributes
 
+  console.log('editorialData', editorialData)
+
   return (
     <Box backgroundColor="graph">
-      <GalaxyInterface renderFooterCenter={<GalaxyRecordsFilter />}>
+      <GalaxyInterface renderFooterCenter={<GalaxyRecordsFilter category={'a'} />}>
         <DynamicMainGalaxyNoSsr />
       </GalaxyInterface>
 
