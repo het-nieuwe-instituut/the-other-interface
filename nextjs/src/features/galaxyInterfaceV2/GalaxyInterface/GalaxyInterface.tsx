@@ -1,18 +1,15 @@
 import { GalaxyFooter } from '@/features/shared/components/v2/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 import { GalaxyTopRight } from '@/features/shared/components/v2/GalaxyWrapper/GalaxyTopRight/GalaxyTopRight'
 import { Box, Flex, useTheme } from '@chakra-ui/react'
-
 import { useSize } from '@chakra-ui/react-use-size'
-import { ThemeTitle } from '../components/ThemeTitle/ThemeTitle'
 import { useRef } from 'react'
 
 interface Props {
   renderFooterCenter?: JSX.Element
   children: React.ReactNode
-  storyTitle?: string
 }
 
-export const GalaxyInterface: React.FC<Props> = ({ children, storyTitle, renderFooterCenter }) => {
+export const GalaxyInterface: React.FC<Props> = ({ children, renderFooterCenter }) => {
   const theme = useTheme()
   const graphRef = useRef<HTMLDivElement | null>(null)
   const sizes = useSize(graphRef)
@@ -40,7 +37,6 @@ export const GalaxyInterface: React.FC<Props> = ({ children, storyTitle, renderF
       <Box height="100vh" bottom={0} right={0} left={0} backgroundColor="blue.100" ref={graphRef}>
         {sizes?.height && sizes?.width && <Box position={'fixed'}>{children}</Box>}
       </Box>
-      <ThemeTitle title={storyTitle ?? ''} />
     </Box>
   )
 }
