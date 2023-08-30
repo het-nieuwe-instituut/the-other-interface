@@ -21,6 +21,7 @@ import {
 import { zoomLevel3Data } from '../../mocks/mockData/zoomLevel3Data'
 import { zoomLevel4Data } from '../../mocks/mockData/zoomLevel4Data'
 import { zoomLevel5Data } from '../../mocks/mockData/zoomLevel5Data'
+import { themesData } from '../../mocks/mockData/themesData'
 
 const schema = loadSchemaSync('./graphql.schema.json', {
   loaders: [new JsonFileLoader()],
@@ -100,6 +101,10 @@ const customResolvers = {
 
     menupage() {
       return menuPagesData.menupages.data[0]
+    },
+
+    themes() {
+      return themesData.themes
     },
   },
 }
