@@ -16,7 +16,7 @@ export const ThemeTitle: React.FC<Props> = ({ title }) => {
       color={'blueAlpha.100'}
       noOfLines={1}
     >
-      {t('StoriesOver', {
+      {t('storiesOver', {
         title,
       })}
     </Text>

@@ -25,9 +25,9 @@ export const GalaxyInterface: React.FC<Props> = ({ children, storyTitle, renderF
         position="fixed"
         left={0}
         right={0}
+        top={0}
         justifyContent={'space-between'}
         zIndex={5}
-        top={0}
       >
         <Flex alignItems={'center'} position="relative" zIndex={2} left={'32px'} top={'6px'}></Flex>
         <Flex alignItems={'center'} position="relative" zIndex={2} right={'32px'} top={'6px'}>
@@ -37,15 +37,7 @@ export const GalaxyInterface: React.FC<Props> = ({ children, storyTitle, renderF
       <Box position="absolute" left="24px" right="24px" bottom="24px" zIndex={1000}>
         <GalaxyFooter renderFooterCenter={renderFooterCenter} />
       </Box>
-      <Box
-        bottom={0}
-        right={0}
-        left={0}
-        pointerEvents={'all'}
-        backgroundColor="blue.100"
-        height="100vh"
-        ref={graphRef}
-      >
+      <Box height="100vh" bottom={0} right={0} left={0} backgroundColor="blue.100" ref={graphRef}>
         {sizes?.height && sizes?.width && <Box position={'fixed'}>{children}</Box>}
       </Box>
       <ThemeTitle title={storyTitle ?? ''} />
