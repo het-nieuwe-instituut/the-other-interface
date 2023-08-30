@@ -17,5 +17,6 @@
   "people": "Personen/Instellingen",
   "archives": "Archiefbestanddelen",
   "objects": "Objecten",
-  "genericBy": "Op {{name}}"
+  "genericBy": "Op {{name}}",
+  "category": "Categorie"
 }

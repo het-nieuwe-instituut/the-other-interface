@@ -1,19 +1,18 @@
-import { TypeToEntityName } from '@/features/galaxy/FilterClouds/FilterCloudsContainer'
-import { SupportedLandingPages } from '@/features/galaxy/PaginatedFilterClouds/PaginatedFilterCloudsContainer'
+import { CategoryToEntityName } from '@/features/galaxyInterfaceV2/types'
 import { LandingpageContainer } from '@/features/pagesV2/containers/LandingpageContainer/LandingpageContainer'
-
+import { CloudCategory } from '@/features/shared/types/categories'
 import { initApiClient } from '@/features/shared/utils/api'
 import { Locale } from '@/features/shared/utils/locale'
 import { getPublicationState } from '@/features/shared/utils/publication-state'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 
 interface LandingPageQueryParams {
-  category: SupportedLandingPages
+  category: CloudCategory
   locale: Locale
 }
 
 const LandingPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => (
-  <LandingpageContainer landingpage={props.landingpage} />
+  <LandingpageContainer landingpage={props.landingpage} category={props.category} />
 )
 
 export default LandingPage
@@ -25,7 +24,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   const api = initApiClient(context)
 
   const landingpage = await api.landingpageBySlug({
-    slug: TypeToEntityName[category],
+    slug: CategoryToEntityName[category],
     locale,
     publicationState,
   })

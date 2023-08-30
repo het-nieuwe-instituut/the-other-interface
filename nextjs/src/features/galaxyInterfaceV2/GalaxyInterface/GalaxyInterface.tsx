@@ -18,7 +18,7 @@ export const GalaxyInterface: React.FC<Props> = ({ children, storyTitle, renderF
   const sizes = useSize(graphRef)
 
   return (
-    <Box display="block" position={'relative'} pointerEvents={'none'}>
+    <Box display="block" position={'relative'}>
       <Flex
         maxW={theme.breakpoints.xl}
         marginX={'auto'}
@@ -38,7 +38,6 @@ export const GalaxyInterface: React.FC<Props> = ({ children, storyTitle, renderF
         <GalaxyFooter renderFooterCenter={renderFooterCenter} />
       </Box>
       <Box
-        zIndex={1}
         bottom={0}
         right={0}
         left={0}
