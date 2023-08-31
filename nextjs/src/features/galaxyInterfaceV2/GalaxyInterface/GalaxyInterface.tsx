@@ -26,12 +26,12 @@ export const GalaxyInterface: React.FC<Props> = ({ children, renderFooterCenter 
         justifyContent={'space-between'}
         zIndex={5}
       >
-        <Flex alignItems={'center'} position="relative" zIndex={2} left={'32px'} top={'6px'}></Flex>
-        <Flex alignItems={'center'} position="relative" zIndex={2} right={'32px'} top={'6px'}>
+        <Flex alignItems={'center'} position="relative" zIndex={2} left={8} top={1}></Flex>
+        <Flex alignItems={'center'} position="relative" zIndex={2} right={8} top={1}>
           <GalaxyTopRight />
         </Flex>
       </Flex>
-      <Box position="absolute" left="24px" right="24px" bottom="24px" zIndex={1000}>
+      <Box position="absolute" left={6} right={6} bottom={6} zIndex={1000}>
         <GalaxyFooter renderFooterCenter={renderFooterCenter} />
       </Box>
       <Box height="100vh" bottom={0} right={0} left={0} backgroundColor="blue.100" ref={graphRef}>

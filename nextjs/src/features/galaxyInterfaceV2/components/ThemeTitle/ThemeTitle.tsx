@@ -12,11 +12,11 @@ export const ThemeTitle: React.FC<Props> = ({ title }) => {
 
   return (
     <Text
-      textStyle="headingTimesLarge.2xl"
       position={'absolute'}
-      bottom="80px"
-      left="24px"
+      bottom={20}
+      left={6}
       color={'blueAlpha.100'}
+      textStyle="headingTimesLarge.2xl"
       noOfLines={1}
     >
       {t('storiesOver', {

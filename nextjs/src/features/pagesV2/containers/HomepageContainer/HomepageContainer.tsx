@@ -23,7 +23,7 @@ export const HomepageContainer: React.FC<Props> = ({ homepage, themes }) => {
 
   return (
     <Box backgroundColor="graph">
-      <GalaxyInterface storyTitle={storyTitle}>
+      <GalaxyInterface>
         <DynamicMainGalaxyNoSsr storyTitle={storyTitle} />
       </GalaxyInterface>
 
