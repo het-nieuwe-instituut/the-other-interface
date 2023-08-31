@@ -11,42 +11,39 @@ type PositioningTemplate = {
 const positioningTemplate: PositioningTemplate = {
   0: {
     top: 0,
-    left: 0,
+    left: '15%',
   },
   1: {
-    right: 0,
+    left: 0,
     bottom: 0,
   },
   2: {
-    top: 0,
-    left: 0,
+    top: '10%',
+    left: '15%',
   },
   3: { top: 0, left: 0 },
   4: {
-    top: 0,
+    top: '10%',
     left: 0,
   },
   5: {
-    top: 0,
-    left: 0,
+    bottom: 0,
+    left: '15%',
   },
-  6: { left: 0, bottom: 0 },
-  7: { top: 0, right: 0 },
+  6: { left: 0, top: 0 },
+  7: { top: '10%', right: 0 },
   8: {
     top: 0,
-    left: 0,
+    right: 0,
   },
   9: {
-    top: 0,
-    left: 0,
+    right: 0,
+    bottom: 0,
   },
-  10: {
-    top: 0,
-    left: 0,
-  },
+  10: { top: '10%', right: 0 },
   11: {
     top: 0,
-    left: 0,
+    left: '15%',
   },
 }
 

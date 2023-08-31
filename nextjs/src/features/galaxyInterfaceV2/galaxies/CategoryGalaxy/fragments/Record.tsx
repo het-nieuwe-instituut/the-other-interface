@@ -16,12 +16,13 @@ export const Record: React.FC<Props> = ({ record }) => (
       <Flex
         position="absolute"
         style={{ ...record.position }}
-        width="80%"
+        width="70%"
         height="80%"
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
         gap="10px"
+        border={'1px solid purple'}
       >
         <ResponsiveImage
           src={record.image}
