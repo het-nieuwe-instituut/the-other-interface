@@ -47,6 +47,7 @@ export const usePresenter = (stories: StoryEntity[]) => {
     const mapStory = (story: StoryEntity) => ({
       title: story?.attributes?.title ?? '',
       image: findImageUrl(story?.attributes?.components ?? []),
+      id: Math.floor(Math.random() * (99999 + 1)),
     })
 
     return Object.values(positioningTemplate).map(position => {
