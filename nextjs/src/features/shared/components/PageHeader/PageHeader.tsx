@@ -1,10 +1,10 @@
-import { useLimitPrefaceHeight } from '@/features/pages/containers/RecordContainer/useLimitPrefaceHeight'
 import { Box, Link, Text } from '@chakra-ui/react'
 import { useRef } from 'react'
 
 import { useTypeSafeTranslation } from '../../hooks/translations'
 import { Markdown } from '../Markdown/Markdown'
 import styles from './PageHeader.module.css'
+import { useLimitPrefaceHeight } from './useLimitPrefaceHeight'
 
 interface Props {
   title?: string

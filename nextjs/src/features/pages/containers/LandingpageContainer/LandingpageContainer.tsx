@@ -1,43 +1,40 @@
 import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
-import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
-import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
-import useScroll from '@/features/shared/hooks/useScroll'
-import { Box, useTheme } from '@chakra-ui/react'
+import { EditorialLayer } from '@/features/shared/components/EditorialLayer/EditorialLayer'
+import { GalaxyRecordsFilter } from '@/features/galaxyInterface/components/GalaxyWrapper/GalaxyRecordsFilter/GalaxyRecordsFilter'
+import dynamic from 'next/dynamic'
+import { Box } from '@chakra-ui/react'
+import { CloudCategory } from '@/features/shared/types/categories'
 
-import { LandingpageBySlugQuery, LandingpageComponentsDynamicZone } from 'src/generated/graphql'
+import { LandingpageBySlugQuery } from 'src/generated/graphql'
 
-import { ScrollToContent } from '../../utils/utils'
+export const DynamicMainGalaxyNoSsr = dynamic(
+  () => import('../../../galaxyInterface/galaxies/CategoryGalaxy/CategoryGalaxy'),
+  {
+    ssr: false,
+  }
+)
 
 interface Props {
-  landingpage: LandingpageBySlugQuery | undefined
+  category: CloudCategory
+  landingpage?: LandingpageBySlugQuery
 }
 
-export const LandingpageContainer = (props: Props) => {
-  const { landingpage: data } = props
-  const theme = useTheme()
-
-  const { scrollPosition } = useScroll()
-  const landingpage = data?.landingpages?.data[0]
+export const LandingpageContainer: React.FC<Props> = ({ category, landingpage }) => {
+  const editorialData = landingpage?.landingpages?.data[0]?.attributes
 
   return (
-    <>
-      <GalaxyInterface />
-      <Box px={{ xl: 6, base: 0 }} position={'relative'} zIndex={2} backgroundColor={'white'}>
-        <Box maxW={theme.breakpoints.xl} marginX={'auto'} paddingTop={6}>
-          <PageHeader
-            showPointer={scrollPosition < 750}
-            handleClick={ScrollToContent}
-            title={landingpage?.attributes?.Title || undefined}
-            preface={landingpage?.attributes?.Description || undefined}
-          />
-          <DynamicComponentRenderer
-            components={
-              data?.landingpages?.data[0]?.attributes
-                ?.components as LandingpageComponentsDynamicZone[]
-            }
-          />
-        </Box>
-      </Box>
-    </>
+    <Box backgroundColor="graph">
+      <GalaxyInterface renderFooterCenter={<GalaxyRecordsFilter category={category} />}>
+        <DynamicMainGalaxyNoSsr />
+      </GalaxyInterface>
+
+      {editorialData && (
+        <EditorialLayer
+          title={editorialData.Title}
+          preface={editorialData.Description}
+          components={editorialData.components}
+        />
+      )}
+    </Box>
   )
 }

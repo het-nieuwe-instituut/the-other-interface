@@ -7,9 +7,9 @@ import { State } from '../../configs/store'
 import { MAX_Z_INDEX, NAVIGATION_OVERLAY_Z_INDEX } from '../../constants/mainConstants'
 import { useLooseTypeSafeTranslation } from '../../hooks/translations'
 import { capitalizeFirstLetter } from '../../utils/text'
-import { GalaxyFooter } from '../GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 import { StaticHeader } from '../StaticHeader/StaticHeader'
 import { usePresenter } from './usePresenter'
+import { GalaxyFooter } from '@/features/galaxyInterface/components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 
 const fadeIn = keyframes({ from: { opacity: 0 }, to: { opacity: 0.85 } })
 const fadeOut = keyframes({ from: { opacity: 0.85 }, to: { opacity: 0 } })
