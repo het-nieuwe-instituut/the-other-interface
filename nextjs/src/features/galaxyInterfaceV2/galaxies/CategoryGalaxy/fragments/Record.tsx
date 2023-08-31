@@ -1,23 +1,21 @@
 import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
+import { Position } from '@/features/shared/types/position'
 import { Box, Text, GridItem, Flex } from '@chakra-ui/react'
 
-import { HOMEPAGE_Z_INDEXES } from './constants'
-import { Position } from '@/features/shared/types/position'
+import { Record as TRecord } from './types'
 
 type Props = {
-  story: {
-    title: string
-    image: string
+  record: TRecord & {
     position: Position
-  } | null
+  }
 }
 
-export const Story: React.FC<Props> = ({ story }) => (
-  <GridItem position="relative" zIndex={HOMEPAGE_Z_INDEXES.STORY}>
-    {story && (
+export const Record: React.FC<Props> = ({ record }) => (
+  <GridItem position="relative" border={'1px solid blue'}>
+    {record && (
       <Flex
         position="absolute"
-        style={{ ...story.position }}
+        style={{ ...record.position }}
         width="80%"
         height="80%"
         flexDirection="column"
@@ -26,8 +24,8 @@ export const Story: React.FC<Props> = ({ story }) => (
         gap="10px"
       >
         <ResponsiveImage
-          src={story.image}
-          alt={story.title}
+          src={record.image}
+          alt={record.title}
           maxHeight="calc(100% - 2vw - 10px)" // where 1.6vw is a title's line height, 10px is gap
         />
 
@@ -39,7 +37,7 @@ export const Story: React.FC<Props> = ({ story }) => (
             textOverflow="ellipsis"
             textStyle="headingTimesLarge.md"
           >
-            {story.title}
+            {record.title}
           </Text>
         </Box>
       </Flex>

@@ -1,11 +1,5 @@
 import { CloudCategory } from '@/features/shared/types/categories'
-
-export type Position = {
-  top?: string | 0
-  right?: string | 0
-  bottom?: string | 0
-  left?: string | 0
-}
+import { Position } from '@/features/shared/types/position'
 
 export type CloudSize = `${string}vw`
 

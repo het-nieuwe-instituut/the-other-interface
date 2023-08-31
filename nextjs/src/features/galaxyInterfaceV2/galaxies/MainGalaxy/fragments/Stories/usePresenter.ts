@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
+import { Position } from '@/features/shared/types/position'
 
-import { Position, Story } from '../types'
+import { Story } from '../types'
 
 // For readability advantage, we are using the object representation.
 type PositioningTemplate = {
