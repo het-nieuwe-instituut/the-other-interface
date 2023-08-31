@@ -2,31 +2,7 @@ import { Grid } from '@chakra-ui/react'
 
 import { Story } from '../Story'
 import { usePresenter } from './usePresenter'
-import { ComponentModulesImage, StoryEntity } from 'src/generated/graphql'
-import { useMemo } from 'react'
-
-const fakeStories = [
-  {
-    title: 'Oral Herstories',
-    image: 'https://picsum.photos/500/500',
-  },
-  {
-    title: 'Nelly &',
-    image: 'https://picsum.photos/104/160',
-  },
-  {
-    title: 'De Witdruk',
-    image: 'https://picsum.photos/104/160',
-  },
-  {
-    title: 'Collecting Other Types',
-    image: 'https://picsum.photos/150/100',
-  },
-  {
-    title: 'Architect Portrait',
-    image: 'https://picsum.photos/104/160',
-  },
-]
+import { StoryEntity } from 'src/generated/graphql'
 
 type Props = {
   stories: StoryEntity[]
