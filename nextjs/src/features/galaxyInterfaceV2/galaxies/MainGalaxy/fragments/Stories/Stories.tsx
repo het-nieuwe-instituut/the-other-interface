@@ -2,6 +2,8 @@ import { Grid } from '@chakra-ui/react'
 
 import { Story } from '../Story'
 import { usePresenter } from './usePresenter'
+import { ComponentModulesImage, StoryEntity } from 'src/generated/graphql'
+import { useMemo } from 'react'
 
 const fakeStories = [
   {
@@ -26,8 +28,12 @@ const fakeStories = [
   },
 ]
 
-export const Stories: React.FC = () => {
-  const { positionedStories } = usePresenter(fakeStories)
+type Props = {
+  stories: StoryEntity[]
+}
+
+export const Stories: React.FC<Props> = ({ stories }) => {
+  const { positionedStories } = usePresenter(stories)
 
   return (
     <Grid

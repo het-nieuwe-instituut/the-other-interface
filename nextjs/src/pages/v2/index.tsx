@@ -19,8 +19,6 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   const api = initApiClient(context)
   const { page } = context.query as unknown as HomePageQueryParams
 
-  console.log(parseInt(page ?? '1'))
-
   const [homepage, themes] = await Promise.all([
     api?.homepage({ locale, publicationState }),
     // api?.zoomLevel1(),

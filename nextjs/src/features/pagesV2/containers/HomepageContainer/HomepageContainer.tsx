@@ -3,7 +3,7 @@ import { EditorialLayer } from '@/features/shared/components/EditorialLayer/Edit
 import { Box } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
 
-import { HomepageQuery, ThemesQuery } from 'src/generated/graphql'
+import { HomepageQuery, StoryEntity, ThemesQuery } from 'src/generated/graphql'
 
 export const DynamicMainGalaxyNoSsr = dynamic(
   () => import('../../../galaxyInterfaceV2/galaxies/MainGalaxy/MainGalaxy'),
@@ -19,12 +19,13 @@ export type Props = {
 
 export const HomepageContainer: React.FC<Props> = ({ homepage, themes }) => {
   const editorialData = homepage?.homepage?.data?.attributes
-  const storyTitle = themes?.themes.data?.[0].attributes?.name
+  const storyTitle = themes?.themes.data?.[0]?.attributes?.name
+  const stories = themes?.themes.data?.[0]?.attributes?.stories?.data
 
   return (
     <Box backgroundColor="graph">
       <GalaxyInterface>
-        <DynamicMainGalaxyNoSsr storyTitle={storyTitle} />
+        <DynamicMainGalaxyNoSsr stories={stories as StoryEntity[]} storyTitle={storyTitle} />
       </GalaxyInterface>
 
       {editorialData && (
