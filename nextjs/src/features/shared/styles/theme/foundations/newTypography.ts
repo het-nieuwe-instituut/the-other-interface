@@ -120,6 +120,7 @@ const headingTimesLarge = {
     fontFamily: "'Times Dot'",
     fontWeight: '400',
     fontSize: '96px',
+    lineHeight: '96px',
   },
   lg: {
     fontFamily: "'Times Dot'",

@@ -115,6 +115,7 @@ const headingTimesLarge = {
     fontFamily: "'Times Dot'",
     fontWeight: '400',
     fontSize: '96px',
+    lineHeight: '96px',
   },
   lg: {
     fontFamily: "'Times Dot'",
@@ -133,10 +134,21 @@ const headingTimesLarge = {
   },
 }
 
+const socialLarge = {
+  lg: {
+    fontFamily: "'ABC Social'",
+    fontSize: '21px',
+    fontWeight: 400,
+    lineHeight: '27px',
+  },
+  sm: { fontFamily: "'ABC Social'", fontSize: '12px', fontWeight: 400, lineHeight: '15px' },
+}
+
 const textStyles = {
   ...oldTextStyles,
 
   headingTimesLarge,
+  socialLarge,
 }
 
 export default textStyles

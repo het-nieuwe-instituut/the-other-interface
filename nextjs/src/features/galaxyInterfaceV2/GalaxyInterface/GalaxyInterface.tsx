@@ -1,28 +1,42 @@
-import { GalaxyTopRight } from '@/features/shared/components/GalaxyWrapper/GalaxyTopRight/GalaxyTopRight'
-import { GalaxyWrapper } from '@/features/shared/components/GalaxyWrapper/GalaxyWrapper'
-import { Box } from '@chakra-ui/react'
+import { GalaxyFooter } from '@/features/shared/components/v2/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
+import { GalaxyTopRight } from '@/features/shared/components/v2/GalaxyWrapper/GalaxyTopRight/GalaxyTopRight'
+import { Box, Flex, useTheme } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
-import { Fragment, useId, useRef } from 'react'
-import { ThemeTitle } from '../components/ThemeTitle/ThemeTitle'
+import { useRef } from 'react'
 
 interface Props {
+  renderFooterCenter?: JSX.Element
   children: React.ReactNode
-  storyTitle?: string
 }
 
-export const GalaxyInterface: React.FC<Props> = ({ children, storyTitle }) => {
-  const id = useId()
+export const GalaxyInterface: React.FC<Props> = ({ children, renderFooterCenter }) => {
+  const theme = useTheme()
   const graphRef = useRef<HTMLDivElement | null>(null)
   const sizes = useSize(graphRef)
 
   return (
-    <Fragment key={id}>
-      <GalaxyWrapper renderTopRight={() => <GalaxyTopRight />}>
-        <Box backgroundColor="blue.100" height="100vh" ref={graphRef}>
-          {sizes?.height && sizes?.width && <Box position={'fixed'}>{children}</Box>}
-        </Box>
-        <ThemeTitle title={storyTitle ?? ''} />
-      </GalaxyWrapper>
-    </Fragment>
+    <Box display="block" position={'relative'}>
+      <Flex
+        maxW={theme.breakpoints.xl}
+        marginX={'auto'}
+        position="fixed"
+        left={0}
+        right={0}
+        top={0}
+        justifyContent={'space-between'}
+        zIndex={5}
+      >
+        <Flex alignItems={'center'} position="relative" zIndex={2} left={8} top={1}></Flex>
+        <Flex alignItems={'center'} position="relative" zIndex={2} right={8} top={1}>
+          <GalaxyTopRight />
+        </Flex>
+      </Flex>
+      <Box position="absolute" left={6} right={6} bottom={6} zIndex={1000}>
+        <GalaxyFooter renderFooterCenter={renderFooterCenter} />
+      </Box>
+      <Box height="100vh" bottom={0} right={0} left={0} backgroundColor="blue.100" ref={graphRef}>
+        {sizes?.height && sizes?.width && <Box position={'fixed'}>{children}</Box>}
+      </Box>
+    </Box>
   )
 }

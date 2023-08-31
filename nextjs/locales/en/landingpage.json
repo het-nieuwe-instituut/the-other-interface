@@ -17,5 +17,6 @@
   "people": "Persons/Institutions",
   "archives": "Archive items",
   "objects": "Objects",
-  "genericBy": "By {{name}}"
+  "genericBy": "By {{name}}",
+  "category": "Category"
 }

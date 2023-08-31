@@ -1,3 +1,5 @@
+import { CloudCategory } from '@/features/shared/types/categories'
+
 export type Position = {
   top?: string | 0
   right?: string | 0
@@ -7,10 +9,8 @@ export type Position = {
 
 export type CloudSize = `${string}vw`
 
-export type CollectionType = 'archives' | 'publications' | 'objects' | 'people'
-
 export type CategoryCloud = {
-  title: CollectionType
+  title: CloudCategory
   size: CloudSize
   titlePosition: Position
   cloudPosition: Position

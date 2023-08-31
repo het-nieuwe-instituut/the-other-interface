@@ -1,6 +1,7 @@
 import { Box } from '@chakra-ui/react'
 
 import { Cloud, CategoryCloud, Stories } from './fragments'
+import { ThemeTitle } from '../../components/ThemeTitle/ThemeTitle'
 
 const categoryClouds: CategoryCloud[] = [
   {
@@ -29,13 +30,19 @@ const categoryClouds: CategoryCloud[] = [
   },
 ]
 
-const MainGalaxy: React.FC = () => (
+interface Props {
+  storyTitle?: string
+}
+
+const MainGalaxy: React.FC<Props> = ({ storyTitle }) => (
   <Box position="relative" width="100vw" height="100vh">
     {categoryClouds.map(cloud => (
       <Cloud key={cloud.title} cloud={cloud} />
     ))}
 
     <Stories />
+
+    <ThemeTitle title={storyTitle} />
   </Box>
 )
 

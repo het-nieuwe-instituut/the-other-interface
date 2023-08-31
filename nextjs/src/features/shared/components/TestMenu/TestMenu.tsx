@@ -30,13 +30,14 @@ export function TestMenu() {
               as={Button}
               zIndex={SWITCH_SERVER_Z_INDEX}
               position={'fixed'}
-              right={10}
-              bottom={10}
+              right={5}
+              top={14}
               background={'white'}
               display={'flex'}
               justifyContent={'center'}
               alignItems={'center'}
-              h={14}
+              h={10}
+              padding="5px"
               leftIcon={<SettingsIcon />}
             >
               {'DEV'}
