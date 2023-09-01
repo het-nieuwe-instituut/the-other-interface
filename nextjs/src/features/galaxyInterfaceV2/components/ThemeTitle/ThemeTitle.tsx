@@ -16,9 +16,12 @@ export const ThemeTitle: React.FC<Props> = ({ title }) => {
       position={'absolute'}
       bottom={`calc(${GALAXY_EDITORIAL_LAYER_PART} + 9%)`}
       left={6}
+      maxWidth={'65vw'}
+      isTruncated
       color={'blueAlpha.100'}
       textStyle="headingTimesLarge.2xl"
-      noOfLines={1}
+      fontSize={'7.5vw'}
+      lineHeight={'7.5vw'}
     >
       {t('storiesOver', {
         title,
