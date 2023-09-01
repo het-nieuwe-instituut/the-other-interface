@@ -1,3 +1,5 @@
+import { CloudCategory } from '@/features/shared/types/categories'
+
 export const fakeData = [
   {
     id: 1,
@@ -17,7 +19,7 @@ export const fakeData = [
   {
     id: 11,
     title: 'Collecting Other Types',
-    image: 'https://picsum.photos/150/100',
+    image: 'https://picsum.photos/250/100',
   },
   {
     id: 17,
@@ -55,25 +57,12 @@ export const fakeData = [
     image: 'https://picsum.photos/500/500',
   },
   {
-    id: 71,
-    title: 'Monument on the Dam',
-    image: 'https://picsum.photos/104/160',
-  },
-  {
-    id: 81,
-    title: 'The minimum dwelling',
-    image: 'https://picsum.photos/104/160',
-  },
-  {
-    id: 91,
-    title: 'Collecting Other Types',
-    image: 'https://picsum.photos/150/100',
-  },
-  {
     id: 101,
-    title: 'Architect Portrait',
-    image: 'https://picsum.photos/104/160',
+    title: 'Architect Portrait Types',
+    image: 'https://picsum.photos/215/136',
   },
 ]
 
-export const fakeObjects = fakeData.map(record => ({ ...record, categoryType: 'objects' }))
+export const fakeObjects: ((typeof fakeData)[number] & {
+  categoryType: CloudCategory
+})[] = fakeData.map(record => ({ ...record, categoryType: 'publications' }))

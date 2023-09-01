@@ -3,7 +3,7 @@ import { Records } from './fragments/Records/Records'
 
 const CategoryGalaxy: React.FC = () => {
   return (
-    <Box position="relative" width="100vw" height="100vh">
+    <Box position="relative" width="100vw" height="100vh" overflow={'hidden'}>
       <Records />
     </Box>
   )

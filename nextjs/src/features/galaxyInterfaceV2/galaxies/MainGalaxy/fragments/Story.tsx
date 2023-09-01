@@ -38,6 +38,8 @@ export const Story: React.FC<Props> = ({ story }) => (
             overflow="hidden"
             textOverflow="ellipsis"
             textStyle="headingTimesLarge.md"
+            fontSize="1.5vw"
+            lineHeight="2vw"
           >
             {story.title}
           </Text>

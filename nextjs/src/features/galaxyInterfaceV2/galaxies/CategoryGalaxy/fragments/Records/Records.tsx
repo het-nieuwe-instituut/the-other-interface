@@ -19,8 +19,8 @@ export const Records: React.FC = () => {
       templateRows="repeat(3, 1fr)"
       border={'1px solid pink'}
     >
-      {positionedRecords.map((record, index) => (
-        <Record key={record?.title ?? `empty-${index}`} record={record} />
+      {positionedRecords.map(record => (
+        <Record key={record.id} record={record} />
       ))}
     </Grid>
   )
