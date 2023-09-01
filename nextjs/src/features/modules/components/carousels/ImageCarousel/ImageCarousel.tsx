@@ -2,7 +2,7 @@ import { imageBasePath } from '@/features/modules/modulesConstants'
 import ArrowLeftIcon from '@/icons/arrows/arrow-left-long.svg'
 import ArrowRightIcon from '@/icons/arrows/arrow-right-long.svg'
 import { Box, Flex, Text } from '@chakra-ui/react'
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 import React from 'react'
 
 import { ComponentModulesImageCarousel, UploadFileEntity } from 'src/generated/graphql'
