@@ -32,7 +32,15 @@ const Fonts = () => {
                 }
                 @font-face{
                   font-family:"Times Dot";
-                  src:url("/Fonts/timesDot/TimesDot.woff") format("woff"),url("/Fonts/timesDot/TimesDot.woff2") format("woff2");
+                  src:url("/Fonts/timesDot/TimesDot.woff") format("woff"),url("/Fonts/timesDot/TimesDot.woff") format("woff");
+                }
+                @font-face{
+                  font-family:"Times Dot Bold";
+                  src:url("/Fonts/timesDot/TimesDotBol.woff") format("woff"),url("/Fonts/timesDot/TimesDotBol.woff") format("woff");
+                }
+                @font-face{
+                  font-family:"Times Dot Italic";
+                  src:url("/Fonts/timesDot/TimesDotItalic.woff") format("woff"),url("/Fonts/timesDot/TimesDotItalic.woff") format("woff");
                 }
           `}
     />
