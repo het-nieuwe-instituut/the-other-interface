@@ -1,3 +1,4 @@
+'use client'
 import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Box, Text, Flex, useBreakpoint } from '@chakra-ui/react'
 

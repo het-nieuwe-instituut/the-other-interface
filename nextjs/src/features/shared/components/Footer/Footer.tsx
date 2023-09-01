@@ -1,3 +1,4 @@
+'use client'
 import { Flex, Text, Link, theme } from '@chakra-ui/react'
 
 import { FOOTER_Z_INDEX } from '../../constants/mainConstants'

@@ -1,3 +1,4 @@
+'use client'
 import { Flex, Box, Text, Link, useBreakpoint } from '@chakra-ui/react'
 import { keyframes } from '@emotion/react'
 import { useRef } from 'react'

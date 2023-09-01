@@ -1,3 +1,4 @@
+'use client'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Button } from '@chakra-ui/react'
 import React, { useState } from 'react'

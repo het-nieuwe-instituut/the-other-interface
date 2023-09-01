@@ -1,3 +1,4 @@
+'use client'
 import { ThemeProviderContext } from '@/features/shared/components/providers/ThemeProvider'
 import { Global } from '@emotion/react'
 import { useContext } from 'react'

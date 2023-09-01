@@ -1,5 +1,5 @@
 import { getCookie, setCookie } from 'cookies-next'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 
 const usePresenter = () => {
   const router = useRouter()
@@ -11,7 +11,7 @@ const usePresenter = () => {
     } else {
       setCookie('isMockedServer', true)
     }
-    router.reload()
+    router.refresh()
   }
 
   return {
