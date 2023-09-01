@@ -82,7 +82,7 @@ export const Navigation = () => {
           </Text>
 
           <Link
-            href="/landingpage/stories?preservedZoom=Zoom1Stories"
+            href="/landingpage?category=stories"
             variant={'navigation'}
             cursor="pointer"
             textStyle={'h1'}
@@ -92,7 +92,7 @@ export const Navigation = () => {
           </Link>
 
           <Link
-            href="/landingpage/archives?preservedZoom=Zoom2"
+            href="/landingpage?category=archives"
             variant={'navigation'}
             cursor="pointer"
             textStyle={'h1'}
@@ -102,7 +102,7 @@ export const Navigation = () => {
           </Link>
 
           <Link
-            href="/landingpage/objects?preservedZoom=Zoom2"
+            href="/landingpage?caregory=objects"
             variant={'navigation'}
             cursor="pointer"
             textStyle={'h1'}
@@ -112,7 +112,7 @@ export const Navigation = () => {
           </Link>
 
           <Link
-            href="/landingpage/people?preservedZoom=Zoom2"
+            href="/landingpage?caregory=people"
             variant={'navigation'}
             cursor="pointer"
             textStyle={'h1'}
@@ -122,7 +122,7 @@ export const Navigation = () => {
           </Link>
 
           <Link
-            href="/landingpage/publications?preservedZoom=Zoom2"
+            href="/landingpage?category=publications"
             variant={'navigation'}
             cursor="pointer"
             textStyle={'h1'}
