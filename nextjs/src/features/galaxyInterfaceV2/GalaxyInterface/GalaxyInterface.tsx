@@ -1,5 +1,6 @@
 import { GalaxyFooter } from '@/features/shared/components/v2/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 import { GalaxyTopRight } from '@/features/shared/components/v2/GalaxyWrapper/GalaxyTopRight/GalaxyTopRight'
+import { GALAXY_EDITORIAL_LAYER_PART } from '@/features/shared/constants/mainConstants'
 import { Box, Flex, useTheme } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
 import { useRef } from 'react'
@@ -34,7 +35,15 @@ export const GalaxyInterface: React.FC<Props> = ({ children, renderFooterCenter 
       <Box position="absolute" left={6} right={6} bottom={6} zIndex={1000}>
         <GalaxyFooter renderFooterCenter={renderFooterCenter} />
       </Box>
-      <Box height="100vh" bottom={0} right={0} left={0} backgroundColor="blue.100" ref={graphRef}>
+      <Box
+        position="relative"
+        height={`calc(100vh - ${GALAXY_EDITORIAL_LAYER_PART})`}
+        bottom={0}
+        right={0}
+        left={0}
+        backgroundColor="blue.100"
+        ref={graphRef}
+      >
         {sizes?.height && sizes?.width && <Box position={'fixed'}>{children}</Box>}
       </Box>
     </Box>
