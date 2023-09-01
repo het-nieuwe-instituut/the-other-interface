@@ -8,7 +8,7 @@ import Fallback5 from '@/features/shared/assets/images/fallbacks/5.svg'
 
 const fallbacks = [Fallback1, Fallback2, Fallback3, Fallback4, Fallback5]
 
-export const useRandomFallback = () => {
+export const useRandomImageFallback = () => {
   const [randomFallback, setRandomFallback] = useState<React.FC | null>(null)
 
   useEffect(() => {

@@ -1,8 +1,7 @@
-import { Flex, Image } from '@chakra-ui/react'
+import { Box, Image } from '@chakra-ui/react'
 import React from 'react'
 
 import { useIsImagePortrait } from '../../hooks/useIsImagePortrait'
-import { useRandomFallback } from '../../hooks/useRandomFallback'
 
 type ResponsiveImageProps = {
   src: string | null
@@ -16,21 +15,28 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   maxHeight = '100%',
 }) => {
   const { isLoading, isPortrait } = useIsImagePortrait(src)
-  const { RandomFallback } = useRandomFallback()
 
   if (isLoading) {
     return (
-      <Flex height="50%" alignItems="center" justifyContent="center">
+      <Box height="50%" alignItems="center" justifyContent="center" color="blueAlpha.100">
         isLoading...
-      </Flex>
+      </Box>
     )
   }
 
+  // Math.floor(Math.random() * fallbacks.length
+
   if (isPortrait === null || !src) {
     return (
-      <Flex height="50%" alignItems="center" justifyContent="center">
-        {RandomFallback && <RandomFallback />}
-      </Flex>
+      <Box height="50%" alignItems="center" justifyContent="center" color="blueAlpha.100">
+        <Box
+          height="100px"
+          width="100px"
+          backgroundImage={`url('/images/fallbacks/${Math.floor(Math.random() * 5) + 1}.svg')`}
+          backgroundSize="cover"
+          backgroundRepeat="no-repeat"
+        />
+      </Box>
     )
   }
 

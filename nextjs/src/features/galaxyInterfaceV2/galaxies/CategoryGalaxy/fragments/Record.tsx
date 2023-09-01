@@ -15,7 +15,7 @@ export const Record: React.FC<Props> = ({ record }) => {
   const { image, categoryType, position, title } = record
 
   return (
-    <GridItem position="relative">
+    <GridItem position="relative" border="1px solid pink">
       <Flex
         position="absolute"
         style={{ ...position }}
@@ -25,6 +25,7 @@ export const Record: React.FC<Props> = ({ record }) => {
         alignItems="center"
         justifyContent="center"
         gap="8px"
+        border="1px solid white"
       >
         <ResponsiveImage
           src={image}

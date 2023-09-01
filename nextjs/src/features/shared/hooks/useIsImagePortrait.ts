@@ -5,12 +5,9 @@ export const useIsImagePortrait = (src: string | null) => {
   const [isPortrait, setIsPortrait] = useState<boolean | null>(null)
 
   useEffect(() => {
-    if (!src) return
+    if (typeof window === 'undefined' || !src) return
 
     setIsLoading(true)
-    if (typeof window === 'undefined') {
-      return
-    }
 
     const img = new window.Image()
     img.src = src
