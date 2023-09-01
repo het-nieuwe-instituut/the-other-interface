@@ -35,9 +35,7 @@ export const Record: React.FC<Props> = ({ record }) => {
         <Box w="100%" color="blueAlpha.100">
           <Text
             align="center"
-            whiteSpace="nowrap"
-            overflow="hidden"
-            textOverflow="ellipsis"
+            isTruncated
             textStyle="headingTimesLarge.md"
             fontSize={'1.6vw'}
             lineHeight={'1.6vw'}
