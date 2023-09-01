@@ -10,7 +10,6 @@ type Props = {
 
 export const Stories: React.FC<Props> = ({ stories }) => {
   const { positionedStories } = usePresenter(stories)
-
   return (
     <Grid
       position="absolute"
@@ -22,8 +21,8 @@ export const Stories: React.FC<Props> = ({ stories }) => {
       templateRows="repeat(2, 1fr)"
       gap="20px"
     >
-      {positionedStories.map((positionedStory, index) => (
-        <Story key={positionedStory?.title ?? `empty-${index}`} story={positionedStory} />
+      {positionedStories.map(positionedStory => (
+        <Story key={positionedStory?.id} story={positionedStory} />
       ))}
     </Grid>
   )
