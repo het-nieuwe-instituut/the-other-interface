@@ -1,11 +1,11 @@
-import { Flex, Image, Text } from '@chakra-ui/react'
-import React, { Fragment } from 'react'
+import { Flex, Image } from '@chakra-ui/react'
+import React from 'react'
 
 import { useIsImagePortrait } from '../../hooks/useIsImagePortrait'
 import { useRandomFallback } from '../../hooks/useRandomFallback'
 
 type ResponsiveImageProps = {
-  src: string
+  src: string | null
   alt: string
   maxHeight?: string
 }
@@ -21,19 +21,15 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   if (isLoading) {
     return (
       <Flex height="50%" alignItems="center" justifyContent="center">
-        isLoading
+        isLoading...
       </Flex>
     )
   }
 
-  if (isPortrait === null) {
+  if (isPortrait === null || !src) {
     return (
       <Flex height="50%" alignItems="center" justifyContent="center">
-        {isLoading ? (
-          <Text>isLoading</Text>
-        ) : (
-          <Fragment>{RandomFallback && <RandomFallback />}</Fragment>
-        )}
+        {RandomFallback && <RandomFallback />}
       </Flex>
     )
   }

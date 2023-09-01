@@ -1,9 +1,9 @@
 import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
 import { Position } from '@/features/shared/types/position'
-import { Box, Text, GridItem, Flex } from '@chakra-ui/react'
+import { GridItem, Flex } from '@chakra-ui/react'
 
 import { Record as TRecord } from './types'
-import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { RecordText } from './RecordText'
 
 type Props = {
   record: TRecord & {
@@ -12,8 +12,6 @@ type Props = {
 }
 
 export const Record: React.FC<Props> = ({ record }) => {
-  const { t } = useTypeSafeTranslation('landingpage')
-
   const { image, categoryType, position, title } = record
 
   return (
@@ -34,26 +32,13 @@ export const Record: React.FC<Props> = ({ record }) => {
           maxHeight="calc(100% - 2.5vw - 12px)" // where 2.6vw are a texts' line heights, 12px are gaps
         />
 
-        <Box w="100%" color="blueAlpha.100">
-          <Text
-            align="center"
-            isTruncated
-            textStyle="headingTimesLarge.md"
-            fontSize={'1.6vw'}
-            lineHeight={'1.6vw'}
-          >
-            {title}
-          </Text>
-          <Text
-            align="center"
-            textStyle="headingTimesLarge.sm"
-            fontSize={'0.9vw'}
-            lineHeight={'0.9vw'}
-            mt={'4px'}
-          >
-            {t(categoryType)}
-          </Text>
-        </Box>
+        <RecordText
+          title={title}
+          categoryType={categoryType}
+          css={{
+            position: !image ? 'absolute' : 'relative',
+          }}
+        />
       </Flex>
     </GridItem>
   )

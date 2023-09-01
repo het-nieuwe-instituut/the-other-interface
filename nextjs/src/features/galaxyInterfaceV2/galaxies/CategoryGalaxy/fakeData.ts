@@ -39,7 +39,7 @@ export const fakeData = [
   {
     id: 31,
     title: 'The minimum dwelling',
-    image: 'https://picsum.photos/104/160',
+    image: null,
   },
   {
     id: 41,
@@ -49,7 +49,7 @@ export const fakeData = [
   {
     id: 51,
     title: 'Architect Portrait',
-    image: 'https://picsum.photos/104/160',
+    image: null,
   },
   {
     id: 61,

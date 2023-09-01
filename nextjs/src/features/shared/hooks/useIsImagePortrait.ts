@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 
-export const useIsImagePortrait = (src: string) => {
+export const useIsImagePortrait = (src: string | null) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isPortrait, setIsPortrait] = useState<boolean | null>(null)
 
   useEffect(() => {
+    if (!src) return
+
     setIsLoading(true)
     if (typeof window === 'undefined') {
       return
