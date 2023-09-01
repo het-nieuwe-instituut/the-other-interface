@@ -13,10 +13,10 @@
   "byDeathDate": "op sterfte datum",
   "byAuthor": "op auteur",
   "byLocation": "op locatie",
-  "publications": "Publicaties",
-  "people": "Personen/Instellingen",
-  "archives": "Archiefbestanddelen",
   "objects": "Objecten",
+  "archives": "Archieven",
+  "people": "Personen",
+  "publications": "Publicaties",
   "genericBy": "Op {{name}}",
   "category": "Categorie"
 }
