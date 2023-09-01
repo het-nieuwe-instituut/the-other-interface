@@ -1,5 +1,5 @@
 'use client'
-import { Flex, Box, Text, Link, useBreakpoint } from '@chakra-ui/react'
+import { Flex, Box, Text, Link, useBreakpoint } from '../../configs/chakra'
 import { keyframes } from '@emotion/react'
 import { useRef } from 'react'
 import { useSelector } from 'react-redux'

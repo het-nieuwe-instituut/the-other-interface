@@ -1,4 +1,4 @@
-import { MenuItem } from '@chakra-ui/react'
+import { MenuItem } from '../../configs/chakra'
 import { getCookie } from 'cookies-next'
 
 import { useTypeSafeTranslation } from '../../hooks/translations'

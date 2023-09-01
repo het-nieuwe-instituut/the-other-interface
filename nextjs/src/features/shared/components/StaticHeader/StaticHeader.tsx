@@ -1,4 +1,4 @@
-import { Flex, Link, Box } from '@chakra-ui/react'
+import { Flex, Link, Box } from '../../configs/chakra'
 
 import { STATIC_HEADER_Z_INDEX } from '../../constants/mainConstants'
 import { useLooseTypeSafeTranslation } from '../../hooks/translations'

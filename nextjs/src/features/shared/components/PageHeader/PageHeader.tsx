@@ -1,5 +1,5 @@
 'use client'
-import { Box, Link, Text } from '@chakra-ui/react'
+import { Box, Link, Text } from '../../configs/chakra'
 import { useRef } from 'react'
 
 import { useTypeSafeTranslation } from '../../hooks/translations'

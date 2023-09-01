@@ -27,4 +27,10 @@ export {
   useTheme,
   theme,
   Link,
+  Spinner,
+  Image,
+  MenuItem,
+  Menu,
+  MenuButton,
+  MenuList,
 } from '@chakra-ui/react'

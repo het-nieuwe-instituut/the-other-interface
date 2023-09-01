@@ -1,6 +1,6 @@
 import MenuIconClose from '@/icons/close-menu.svg'
 import MenuIconOpen from '@/icons/open-menu.svg'
-import { Box } from '@chakra-ui/react'
+import { Box } from '../../configs/chakra'
 
 import { MAX_Z_INDEX } from '../../constants/mainConstants'
 import { usePresenter } from './usePresenter'
