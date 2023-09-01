@@ -1,11 +1,11 @@
 import { Grid } from '@chakra-ui/react'
 
 import { usePresenter } from './usePresenter'
-import { fakeObjects } from '../../fakeData'
+import { fakePublications } from '../../fakeData'
 import { Record } from '../Record'
 
 export const Records: React.FC = () => {
-  const { positionedRecords } = usePresenter(fakeObjects)
+  const { positionedRecords } = usePresenter(fakePublications)
 
   return (
     <Grid
@@ -17,7 +17,6 @@ export const Records: React.FC = () => {
       right="2vw"
       templateColumns="repeat(4, 1fr)"
       templateRows="repeat(3, 1fr)"
-      border={'1px solid pink'}
     >
       {positionedRecords.map(record => (
         <Record key={record.id} record={record} />

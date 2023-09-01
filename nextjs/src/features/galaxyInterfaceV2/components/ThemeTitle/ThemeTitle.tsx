@@ -14,7 +14,7 @@ export const ThemeTitle: React.FC<Props> = ({ title }) => {
   return (
     <Text
       position={'absolute'}
-      bottom={`calc(${GALAXY_EDITORIAL_LAYER_PART} + 84px)`}
+      bottom={`calc(${GALAXY_EDITORIAL_LAYER_PART} + 9%)`}
       left={6}
       color={'blueAlpha.100'}
       textStyle="headingTimesLarge.2xl"

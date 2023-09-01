@@ -63,6 +63,6 @@ export const fakeData = [
   },
 ]
 
-export const fakeObjects: ((typeof fakeData)[number] & {
+export const fakePublications: ((typeof fakeData)[number] & {
   categoryType: CloudCategory
 })[] = fakeData.map(record => ({ ...record, categoryType: 'publications' }))
