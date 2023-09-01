@@ -18,7 +18,7 @@ export const fakeData = [
   },
   {
     id: 11,
-    title: 'Collecting Other Types',
+    title: 'Collecting Other Types Types',
     image: 'https://picsum.photos/250/100',
   },
   {
@@ -33,7 +33,7 @@ export const fakeData = [
   },
   {
     id: 21,
-    title: 'Monument on the Dam',
+    title: 'Monument on the Dam Types',
     image: 'https://picsum.photos/104/160',
   },
   {
