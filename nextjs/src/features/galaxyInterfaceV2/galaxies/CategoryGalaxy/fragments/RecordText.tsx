@@ -13,7 +13,7 @@ export const RecordText: React.FC<Props> = ({ title, categoryType, css }) => {
   const { t } = useTypeSafeTranslation('landingpage')
 
   return (
-    <Box w="100%" color="blueAlpha.100" css={css} border="1px solid blue">
+    <Box w="100%" color="blueAlpha.100" css={css}>
       <Text
         align="center"
         isTruncated
