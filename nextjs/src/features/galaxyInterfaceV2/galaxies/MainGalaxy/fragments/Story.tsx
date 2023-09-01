@@ -34,9 +34,7 @@ export const Story: React.FC<Props> = ({ story }) => (
         <Box w="100%">
           <Text
             align="center"
-            whiteSpace="nowrap"
-            overflow="hidden"
-            textOverflow="ellipsis"
+            isTruncated
             textStyle="headingTimesLarge.md"
             fontSize="1.5vw"
             lineHeight="2vw"
