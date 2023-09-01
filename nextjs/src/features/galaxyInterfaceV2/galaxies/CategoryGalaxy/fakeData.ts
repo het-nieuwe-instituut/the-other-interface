@@ -9,7 +9,7 @@ export const fakeData = [
   {
     id: 12,
     title: 'Monument on the Dam',
-    image: 'https://picsum.photos/104/160',
+    image: null,
   },
   {
     id: 15,

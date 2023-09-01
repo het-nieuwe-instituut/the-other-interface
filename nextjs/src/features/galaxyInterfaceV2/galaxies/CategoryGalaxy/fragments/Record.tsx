@@ -14,11 +14,13 @@ type Props = {
 export const Record: React.FC<Props> = ({ record }) => {
   const { t } = useTypeSafeTranslation('landingpage')
 
+  const { image, categoryType, position, title } = record
+
   return (
     <GridItem position="relative">
       <Flex
         position="absolute"
-        style={{ ...record.position }}
+        style={{ ...position }}
         width="70%"
         height="80%"
         flexDirection="column"
@@ -27,8 +29,8 @@ export const Record: React.FC<Props> = ({ record }) => {
         gap="8px"
       >
         <ResponsiveImage
-          src={record.image}
-          alt={record.title}
+          src={image}
+          alt={title}
           maxHeight="calc(100% - 2.5vw - 12px)" // where 2.6vw are a texts' line heights, 12px are gaps
         />
 
@@ -40,7 +42,7 @@ export const Record: React.FC<Props> = ({ record }) => {
             fontSize={'1.6vw'}
             lineHeight={'1.6vw'}
           >
-            {record.title}
+            {title}
           </Text>
           <Text
             align="center"
@@ -49,7 +51,7 @@ export const Record: React.FC<Props> = ({ record }) => {
             lineHeight={'0.9vw'}
             mt={'4px'}
           >
-            {t(record.categoryType)}
+            {t(categoryType)}
           </Text>
         </Box>
       </Flex>

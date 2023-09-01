@@ -5,5 +5,5 @@ export type Record = {
   id: number
   categoryType: CloudCategory
   title: string
-  image: string
+  image: string | null
 }
