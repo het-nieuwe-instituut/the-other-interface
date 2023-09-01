@@ -1,3 +1,4 @@
+'use client'
 import ChakraUIRenderer from 'chakra-ui-markdown-renderer'
 import DOMpurify from 'isomorphic-dompurify'
 import ReactMarkdown from 'react-markdown'

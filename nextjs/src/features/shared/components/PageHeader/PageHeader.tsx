@@ -1,3 +1,4 @@
+'use client'
 import { Box, Link, Text } from '@chakra-ui/react'
 import { useRef } from 'react'
 

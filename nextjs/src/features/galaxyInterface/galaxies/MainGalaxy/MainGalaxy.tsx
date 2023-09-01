@@ -1,3 +1,4 @@
+'use client'
 import { Box } from '@chakra-ui/react'
 
 import { Cloud, CategoryCloud, Stories } from './fragments'

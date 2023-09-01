@@ -7,7 +7,7 @@ import DisableScroll from '@/features/shared/components/DisableScroll/DisableScr
 import { Footer } from '@/features/shared/components/Footer/Footer'
 import { AppHead } from '@/features/shared/components/Head/AppHead'
 import MobileOverlayProvider from '@/features/shared/components/MobileOverlayProvider/MobileOverlayProvider'
-import { NavigationOverlayProvider } from '@/features/shared/components/Navigation/Navigation'
+// import { NavigationOverlayProvider } from '@/features/shared/components/Navigation/Navigation'
 import { TestMenu } from '@/features/shared/components/TestMenu/TestMenu'
 import 'keen-slider/keen-slider.min.css'
 import Script from 'next/script'
@@ -39,23 +39,24 @@ function MyApp({ children }: { children: React.ReactNode }) {
           <ThemeProvider>
             <ErrorBoundaryProvider>
               <DisableScroll>
-                <NavigationOverlayProvider>
-                  <MobileOverlayProvider>
-                    <>
-                      {/* <ErrorBoundaryProvider>
+                {/* Comment till replace fetch of menu pages to new api */}
+                {/* <NavigationOverlayProvider> */}
+                <MobileOverlayProvider>
+                  <>
+                    {/* <ErrorBoundaryProvider>
                   
                     
                          */}
-                      <Fonts />
+                    <Fonts />
 
-                      <AppHead />
-                      <TestMenu />
-                      {children}
-                      <Footer />
-                      {/* //      */}
-                    </>
-                  </MobileOverlayProvider>
-                </NavigationOverlayProvider>
+                    <AppHead />
+                    <TestMenu />
+                    {children}
+                    <Footer />
+                    {/* //      */}
+                  </>
+                </MobileOverlayProvider>
+                {/* </NavigationOverlayProvider> */}
               </DisableScroll>
             </ErrorBoundaryProvider>
           </ThemeProvider>

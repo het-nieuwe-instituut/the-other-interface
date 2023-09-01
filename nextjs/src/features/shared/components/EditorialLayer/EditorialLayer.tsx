@@ -1,10 +1,11 @@
+'use client'
 import {
   DynamicComponentRenderer,
   DynamicComponents,
 } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import useScroll from '@/features/shared/hooks/useScroll'
-import { Box, useTheme } from '@chakra-ui/react'
+import { Box, useTheme } from '../../configs/chakra'
 import { scrollToContent } from '../../utils/scroll'
 
 interface Props {
