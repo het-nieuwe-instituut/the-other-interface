@@ -11,7 +11,7 @@ export const Records: React.FC = () => {
     <Grid
       position="absolute"
       w="96vw"
-      h="70vh"
+      h="70%"
       top="7%"
       left="2vw"
       right="2vw"
