@@ -9,9 +9,3 @@ export type CategoryCloud = {
   titlePosition: Position
   cloudPosition: Position
 }
-
-//  WIll be replaced with business logic integrated
-export type Story = {
-  title: string
-  image: string
-}

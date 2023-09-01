@@ -1,5 +1,4 @@
 import { useMemo } from 'react'
-import { Position } from '@/features/shared/types/position'
 
 import {
   ComponentModulesImage,
@@ -7,6 +6,7 @@ import {
   StoryEntity,
 } from 'src/generated/graphql'
 import { imageBasePath } from '@/features/modules/modulesConstants'
+import { Position } from '@/features/shared/types/position'
 
 // For readability advantage, we are using the object representation.
 type PositioningTemplate = {
@@ -44,10 +44,18 @@ export const usePresenter = (stories: StoryEntity[]) => {
   const positionedStories = useMemo(() => {
     let lastStoryIndex = 0
 
-    const mapStory = (story: StoryEntity) => ({
-      title: story?.attributes?.title ?? '',
-      image: findImageUrl(story?.attributes?.components ?? []),
-    })
+    const mapStory = (story: StoryEntity) => {
+      const storyId = story?.id
+      const storyLocale = story?.attributes?.locale
+      return {
+        title: story?.attributes?.title ?? '',
+        image: findImageUrl(story?.attributes?.components ?? []),
+        id:
+          storyId && storyLocale
+            ? `${storyId}-${storyLocale}`
+            : Math.floor(Math.random() * (99999 + 1)),
+      }
+    }
 
     return Object.values(positioningTemplate).map(position => {
       if (!position) {
