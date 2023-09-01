@@ -129,8 +129,15 @@ const headingTimesLarge = {
     fontFamily: "'Times Dot'",
     fontStyle: 'normal',
     fontWeight: '400',
-    fontSize: '1.5vw',
-    lineHeight: '2vw',
+    fontSize: '20px',
+    lineHeight: '21px',
+  },
+  sm: {
+    fontFamily: "'Times Dot'",
+    fontStyle: 'normal',
+    fontWeight: '400',
+    fontSize: '12px',
+    lineHeight: '12px',
   },
 }
 

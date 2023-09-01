@@ -1,12 +1,12 @@
 import { useMemo } from 'react'
 
-import { Position } from '../types'
 import {
   ComponentModulesImage,
   HomepageComponentsDynamicZone,
   StoryEntity,
 } from 'src/generated/graphql'
 import { imageBasePath } from '@/features/modules/modulesConstants'
+import { Position } from '@/features/shared/types/position'
 
 // For readability advantage, we are using the object representation.
 type PositioningTemplate = {

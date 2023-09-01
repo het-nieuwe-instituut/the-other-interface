@@ -1,3 +1,4 @@
+import { GALAXY_EDITORIAL_LAYER_PART } from '@/features/shared/constants/mainConstants'
 import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Text } from '@chakra-ui/react'
 
@@ -13,7 +14,7 @@ export const ThemeTitle: React.FC<Props> = ({ title }) => {
   return (
     <Text
       position={'absolute'}
-      bottom={20}
+      bottom={`calc(${GALAXY_EDITORIAL_LAYER_PART} + 9%)`}
       left={6}
       color={'blueAlpha.100'}
       textStyle="headingTimesLarge.2xl"

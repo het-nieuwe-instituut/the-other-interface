@@ -2,7 +2,7 @@ import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/Re
 import { Box, Text, GridItem, Flex } from '@chakra-ui/react'
 
 import { HOMEPAGE_Z_INDEXES } from './constants'
-import { Position } from './types'
+import { Position } from '@/features/shared/types/position'
 
 type Props = {
   story: {
@@ -38,6 +38,8 @@ export const Story: React.FC<Props> = ({ story }) => (
             overflow="hidden"
             textOverflow="ellipsis"
             textStyle="headingTimesLarge.md"
+            fontSize="1.5vw"
+            lineHeight="2vw"
           >
             {story.title}
           </Text>
