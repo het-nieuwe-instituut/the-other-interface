@@ -1,17 +1,12 @@
 import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
 import { EditorialLayer } from '@/features/shared/components/EditorialLayer/EditorialLayer'
-import dynamic from 'next/dynamic'
-import { Box } from '@chakra-ui/react'
+import { GalaxyRecordsFilter } from '@/features/galaxyInterface/components/GalaxyWrapper/GalaxyRecordsFilter/GalaxyRecordsFilter'
+
 import { CloudCategory } from '@/features/shared/types/categories'
 
 import { LandingpageBySlugQuery } from 'src/generated/graphql'
-
-export const DynamicMainGalaxyNoSsr = dynamic(
-  () => import('../../../galaxyInterface/galaxies/CategoryGalaxy/CategoryGalaxy'),
-  {
-    ssr: false,
-  }
-)
+import CategoryGalaxy from '../../../galaxyInterface/galaxies/CategoryGalaxy/CategoryGalaxy'
+import { Box } from '@/features/shared/configs/chakra'
 
 interface Props {
   category: CloudCategory
@@ -23,8 +18,8 @@ export const LandingpageContainer: React.FC<Props> = ({ landingpage }) => {
 
   return (
     <Box backgroundColor="graph">
-      <GalaxyInterface>
-        <DynamicMainGalaxyNoSsr />
+      <GalaxyInterface renderFooterCenter={<GalaxyRecordsFilter category={category} />}>
+        <CategoryGalaxy />
       </GalaxyInterface>
 
       {editorialData && (

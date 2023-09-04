@@ -18,6 +18,5 @@ export default async function Page() {
       pagination: { page: parseInt('1' ?? '1'), pageSize: 1 },
     }),
   ])
-  console.log(homepage, themes)
   return <HomepageContainer themes={themes} homepage={homepage} />
 }

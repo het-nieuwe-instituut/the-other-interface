@@ -1,8 +1,8 @@
-import { Text, GridItem } from '@chakra-ui/react'
+import { GridItem, Text } from '@/features/shared/configs/chakra'
 
 interface Props {
-  title: string
-  selectedOption: string
+  title?: string
+  selectedOption?: string
 }
 
 // SHould become a dropdown later when we would implement that functionality

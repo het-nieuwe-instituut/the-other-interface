@@ -1,3 +1,4 @@
+'use client'
 import { Box } from '@chakra-ui/react'
 import { Records } from './fragments'
 import { GalaxyFooter } from '../../components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'

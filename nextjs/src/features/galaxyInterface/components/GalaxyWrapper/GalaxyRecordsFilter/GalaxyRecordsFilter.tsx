@@ -1,11 +1,11 @@
-import { Grid } from '@chakra-ui/react'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 
 import { FilterDropdown } from './fragments'
 import { CloudCategory } from '@/features/shared/types/categories'
+import { Grid } from '@/features/shared/configs/chakra'
 
 interface Props {
-  category: CloudCategory
+  category?: CloudCategory
 }
 
 export const GalaxyRecordsFilter: React.FC<Props> = ({ category }) => {
