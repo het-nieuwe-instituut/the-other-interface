@@ -1,10 +1,22 @@
 import { useEffect } from 'react'
 
-import useQuery from '../../hooks/useQuery'
-import { getMenuPagesTask } from '../../tasks/getMenuPagesTask'
+import { useQuery } from '@tanstack/react-query'
+import initApiClientService from '../../utils/initApiClientService'
+import useTranslation from 'next-translate/useTranslation'
+import { State } from '../../configs/store'
+import { useSelector } from 'react-redux'
 
-export const usePresenter = (lang: string, isMenuOpen: boolean) => {
-  const { data } = useQuery(() => getMenuPagesTask(lang))
+export const usePresenter = () => {
+  const api = initApiClientService()
+  const { t: tNavigation, lang } = useTranslation('navigation')
+  const isMenuOpen = useSelector((state: State) => state?.shared?.isMenuOpen)
+
+  const result = useQuery({
+    queryKey: ['stream-hydrate-menu-pages'],
+    queryFn: () => api?.menuPages({ locale: lang }),
+  })
+
+  console.log(result)
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -19,6 +31,9 @@ export const usePresenter = (lang: string, isMenuOpen: boolean) => {
   }, [isMenuOpen])
 
   return {
-    menupages: data?.menupages,
+    menupages: result?.data ?? { menupages: { data: [] } },
+    tNavigation,
+    lang,
+    isMenuOpen,
   }
 }

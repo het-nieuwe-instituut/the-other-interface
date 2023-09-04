@@ -2,11 +2,7 @@
 import { Flex, Box, Text, Link, useBreakpoint } from '../../configs/chakra'
 import { keyframes } from '@emotion/react'
 import { useRef } from 'react'
-import { useSelector } from 'react-redux'
-
-import { State } from '../../configs/store'
 import { MAX_Z_INDEX, NAVIGATION_OVERLAY_Z_INDEX } from '../../constants/mainConstants'
-import { useLooseTypeSafeTranslation } from '../../hooks/translations'
 import { capitalizeFirstLetter } from '../../utils/text'
 import { StaticHeader } from '../StaticHeader/StaticHeader'
 import { usePresenter } from './usePresenter'
@@ -15,23 +11,8 @@ import { GalaxyFooter } from '@/features/galaxyInterface/components/GalaxyWrappe
 const fadeIn = keyframes({ from: { opacity: 0 }, to: { opacity: 0.85 } })
 const fadeOut = keyframes({ from: { opacity: 0.85 }, to: { opacity: 0 } })
 
-interface Props {
-  children: React.ReactNode
-}
-
-export const NavigationOverlayProvider = (props: Props) => {
-  return (
-    <Box overflow={'hidden'}>
-      <Navigation />
-      {props.children}
-    </Box>
-  )
-}
-
 export const Navigation = () => {
-  const { t: tNavigation, lang } = useLooseTypeSafeTranslation('navigation')
-  const isMenuOpen = useSelector((state: State) => state.shared.isMenuOpen)
-  const { menupages } = usePresenter(lang, isMenuOpen)
+  const { menupages, tNavigation, isMenuOpen } = usePresenter()
   const breakpoint = useBreakpoint()
   const isMobile = breakpoint === 'sm'
   const ref = useRef<HTMLDivElement | null>(null)

@@ -2,15 +2,21 @@
 import { Flex, Text, Link, theme } from '../../configs/chakra'
 
 import { FOOTER_Z_INDEX } from '../../constants/mainConstants'
-import { useLooseTypeSafeTranslation } from '../../hooks/translations'
-import useQuery from '../../hooks/useQuery'
-import { getMenuPagesTask } from '../../tasks/getMenuPagesTask'
 import { capitalizeFirstLetter } from '../../utils/text'
+import useTranslation from 'next-translate/useTranslation'
+import { useQuery } from '@tanstack/react-query'
+import initApiClientService from '../../utils/initApiClientService'
 
 export const Footer = () => {
-  const { lang } = useLooseTypeSafeTranslation('navigation')
-  const { data } = useQuery(() => getMenuPagesTask(lang))
-  const menupages = data?.menupages?.menupages.data
+  const api = initApiClientService()
+  const { lang } = useTranslation()
+
+  const { data } = useQuery({
+    queryKey: ['stream-hydrate-menu-pages'],
+    queryFn: () => api?.menuPages({ locale: lang }),
+  })
+
+  const menupages = data?.menupages?.data
   const sectionOne = menupages?.slice(0, 5)
   const sectionTwo = menupages?.slice(5, 10)
 

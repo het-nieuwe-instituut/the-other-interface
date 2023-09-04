@@ -5,8 +5,8 @@ export const initApiClient = ({
   hostHeader,
   isMockedServer,
 }: {
-  hostHeader: string | null
-  isMockedServer: boolean
+  hostHeader?: string | null
+  isMockedServer?: boolean
 }) => {
   function setUpMockedServer() {
     const isLocal = process.env.parsed.NEXT_PUBLIC_ENV === 'local'

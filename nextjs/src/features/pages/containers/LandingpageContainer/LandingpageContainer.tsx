@@ -15,7 +15,6 @@ interface Props {
 
 export const LandingpageContainer: React.FC<Props> = ({ landingpage }) => {
   const editorialData = landingpage?.landingpages?.data[0]?.attributes
-
   return (
     <Box backgroundColor="graph">
       <GalaxyInterface renderFooterCenter={<GalaxyRecordsFilter category={category} />}>
