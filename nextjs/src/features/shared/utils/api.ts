@@ -1,13 +1,12 @@
 import ApiClient from '@/features/graphql/api'
 import { setCookie } from 'cookies-next'
-import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies'
 
 export const initApiClient = ({
   hostHeader,
   isMockedServer,
 }: {
   hostHeader: string | null
-  isMockedServer: RequestCookie | undefined
+  isMockedServer: boolean
 }) => {
   function setUpMockedServer() {
     const isLocal = process.env.parsed.NEXT_PUBLIC_ENV === 'local'
