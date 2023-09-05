@@ -2,7 +2,7 @@ import { Flex, Link, Box } from '@chakra-ui/react'
 
 import { STATIC_HEADER_Z_INDEX } from '../../constants/mainConstants'
 import { useLooseTypeSafeTranslation } from '../../hooks/translations'
-import { GalaxyTopRight } from '../GalaxyWrapper/GalaxyTopRight/GalaxyTopRight'
+import { GalaxyTopRight } from '@/features/galaxyInterface/components/GalaxyWrapper/GalaxyTopRight/GalaxyTopRight'
 
 export const StaticHeader = () => {
   const { t: tNavigation } = useLooseTypeSafeTranslation('navigation')
