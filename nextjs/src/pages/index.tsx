@@ -1,9 +1,11 @@
-import { ZoomStates } from '@/features/galaxyInterface/types/galaxy'
 import { HomepageContainer } from '@/features/pages/containers/HomepageContainer/HomepageContainer'
-import { prepareReduxState } from '@/features/shared/configs/store'
 import { initApiClient } from '@/features/shared/utils/api'
 import { getPublicationState } from '@/features/shared/utils/publication-state'
 import { GetServerSidePropsContext } from 'next'
+
+export interface HomePageQueryParams {
+  page?: string
+}
 
 const Home = (props: Awaited<ReturnType<typeof getServerSideProps>>['props']) => {
   return <HomepageContainer {...props} />
@@ -15,24 +17,24 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   const publicationState = getPublicationState(context.preview)
   const locale = context.locale
   const api = initApiClient(context)
+  const { page } = context.query as unknown as HomePageQueryParams
 
-  const [homepage, zoomLevel1Data] = await Promise.all([
+  const [homepage, themes] = await Promise.all([
     api?.homepage({ locale, publicationState }),
-    api?.zoomLevel1(),
+    // api?.zoomLevel1(),
+    api?.themes({
+      locale,
+      publicationState,
+      pagination: { page: parseInt(page ?? '1'), pageSize: 1 },
+      sort: 'createdAt:asc',
+    }),
   ])
 
   return {
     props: {
       publicationState,
-      host: context.req.headers.host || null,
       homepage,
-      zoomLevel1Data,
-      activeZoom: (context.query?.preservedZoom as ZoomStates) ?? ZoomStates.Zoom0,
-      reduxState: prepareReduxState({
-        galaxyInterface: {
-          activeZoom: (context.query?.preservedZoom as ZoomStates) ?? ZoomStates.Zoom0,
-        },
-      }),
+      themes,
     },
   }
 }
