@@ -13,7 +13,7 @@ type Props = {
 }
 
 export const Story: React.FC<Props> = ({ story }) => (
-  <GridItem position="relative" zIndex={HOMEPAGE_Z_INDEXES.STORY}>
+  <GridItem position="relative">
     {story && (
       <Flex
         position="absolute"
@@ -24,6 +24,7 @@ export const Story: React.FC<Props> = ({ story }) => (
         alignItems="center"
         justifyContent="center"
         gap="10px"
+        zIndex={HOMEPAGE_Z_INDEXES.STORY}
       >
         <ResponsiveImage
           src={story.image}
