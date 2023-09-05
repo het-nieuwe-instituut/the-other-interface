@@ -1,11 +1,11 @@
 import { Grid } from '@chakra-ui/react'
 
 import { usePresenter } from './usePresenter'
-import { fakePublications } from '../../fakeData'
+import { fakeData } from '../../fakeData'
 import { Record } from '../Record'
 
 export const Records: React.FC = () => {
-  const { positionedRecords } = usePresenter(fakePublications)
+  const { positionedRecords } = usePresenter(fakeData)
 
   return (
     <Grid

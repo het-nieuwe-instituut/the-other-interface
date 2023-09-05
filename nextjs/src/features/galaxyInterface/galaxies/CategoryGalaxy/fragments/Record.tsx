@@ -1,6 +1,7 @@
 import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
 import { Position } from '@/features/shared/types/position'
 import { GridItem, Flex } from '@chakra-ui/react'
+import { CloudCategory } from '@/features/shared/types/categories'
 
 import { Record as TRecord } from './types'
 import { RecordText } from './RecordText'
@@ -8,11 +9,12 @@ import { RecordText } from './RecordText'
 type Props = {
   record: TRecord & {
     position: Position
+    category: CloudCategory
   }
 }
 
 export const Record: React.FC<Props> = ({ record }) => {
-  const { image, categoryType, position, title } = record
+  const { thumbnail, category, position, title } = record
 
   return (
     <GridItem position="relative">
@@ -27,16 +29,16 @@ export const Record: React.FC<Props> = ({ record }) => {
         gap="8px"
       >
         <ResponsiveImage
-          src={image}
+          src={thumbnail}
           alt={title}
           maxHeight="calc(100% - 2.5vw - 12px)" // where 2.6vw are a texts' line heights, 12px are gaps
         />
 
         <RecordText
           title={title}
-          categoryType={categoryType}
+          categoryType={category}
           css={{
-            position: !image ? 'absolute' : 'relative',
+            position: !thumbnail ? 'absolute' : 'relative',
           }}
         />
       </Flex>
