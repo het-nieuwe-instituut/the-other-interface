@@ -12,6 +12,7 @@ export const CloudTitle: React.FC<Props> = ({ position, children }) => (
   <Text
     position="absolute"
     textStyle="headingTimesLarge.lg"
+    color="blueAlpha.100"
     filter={'blur(2px)'}
     style={{ ...position }}
   >
