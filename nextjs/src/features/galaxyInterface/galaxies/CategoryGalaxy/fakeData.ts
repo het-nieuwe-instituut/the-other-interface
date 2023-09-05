@@ -36,7 +36,7 @@ export const fakeData = [
   },
   {
     id: 31,
-    title: 'The minimum dwelling',
+    title: 'The minimum dwelling dwellingdwelling',
     thumbnail: null,
   },
   {

@@ -1,22 +1,20 @@
-<svg width="141" height="139" viewBox="0 0 141 139" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g filter="url(#filter0_f_1131_10539)">
-<ellipse cx="70.6344" cy="69.5802" rx="61.7139" ry="65.5735" transform="rotate(52.2392 70.6344 69.5802)" fill="#9FEEFF" fill-opacity="0.15"/>
-<ellipse cx="70.6344" cy="69.5802" rx="61.7139" ry="65.5735" transform="rotate(52.2392 70.6344 69.5802)" fill="url(#paint0_linear_1131_10539)"/>
+<svg width="176" height="138" viewBox="0 0 176 138" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_f_347_22544)">
+<ellipse cx="87.6375" cy="68.9903" rx="58.2696" ry="81.8257" transform="rotate(67.7723 87.6375 68.9903)" fill="#9FEEFF" fill-opacity="0.15"/>
+<ellipse cx="87.6375" cy="68.9903" rx="58.2696" ry="81.8257" transform="rotate(67.7723 87.6375 68.9903)" fill="url(#paint0_linear_347_22544)"/>
 </g>
 <defs>
-<filter id="filter0_f_1131_10539" x="0.476562" y="0.389648" width="140.316" height="138.381" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<filter id="filter0_f_347_22544" x="2.72949" y="0.789795" width="169.815" height="136.401" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
 <feFlood flood-opacity="0" result="BackgroundImageFix"/>
 <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-<feGaussianBlur stdDeviation="3" result="effect1_foregroundBlur_1131_10539"/>
+<feGaussianBlur stdDeviation="3" result="effect1_foregroundBlur_347_22544"/>
 </filter>
-<linearGradient id="paint0_linear_1131_10539" x1="139.107" y1="30.1755" x2="9.28352" y2="79.7442" gradientUnits="userSpaceOnUse">
-<stop stop-color="#9FEEFF"/>
+<linearGradient id="paint0_linear_347_22544" x1="156.012" y1="145.087" x2="126.44" y2="-19.1516" gradientUnits="userSpaceOnUse">
+<stop stop-color="#9FEEFF" stop-opacity="0.41"/>
 <stop offset="0.136364" stop-color="#9FEEFF" stop-opacity="0"/>
-<stop offset="0.165351" stop-color="#9FEEFF" stop-opacity="0"/>
 <stop offset="0.427083" stop-color="#9FEEFF" stop-opacity="0"/>
 <stop offset="0.696853" stop-color="#9FEEFF" stop-opacity="0.2"/>
 <stop offset="0.942708" stop-color="#9FEEFF" stop-opacity="0"/>
-<stop offset="1" stop-color="white" stop-opacity="0.3"/>
 <stop offset="1" stop-color="#9FEEFF" stop-opacity="0.3"/>
 </linearGradient>
 </defs>
