@@ -36,6 +36,7 @@ export const Story: React.FC<Props> = ({ story }) => (
             align="center"
             isTruncated
             textStyle="headingTimesLarge.md"
+            color="blueAlpha.100"
             fontSize="1.5vw"
             lineHeight="2vw"
           >

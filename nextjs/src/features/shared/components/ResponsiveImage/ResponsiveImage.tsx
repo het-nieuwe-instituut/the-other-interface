@@ -1,10 +1,10 @@
-import { Flex, Image } from '@chakra-ui/react'
+import { Box, Image } from '@chakra-ui/react'
 import React from 'react'
 
 import { useIsImagePortrait } from '../../hooks/useIsImagePortrait'
 
 type ResponsiveImageProps = {
-  src: string
+  src: string | null
   alt: string
   maxHeight?: string
 }
@@ -14,13 +14,27 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   alt,
   maxHeight = '100%',
 }) => {
-  const { isPortrait } = useIsImagePortrait(src)
+  const { isLoading, isPortrait } = useIsImagePortrait(src)
 
-  if (isPortrait === null) {
+  if (isLoading) {
     return (
-      <Flex height="50%" alignItems="center" justifyContent="center">
-        Loading...
-      </Flex>
+      <Box height="50%" alignItems="center" justifyContent="center" color="blueAlpha.100">
+        isLoading...
+      </Box>
+    )
+  }
+
+  if (isPortrait === null || !src) {
+    return (
+      <Box
+        maxHeight={maxHeight}
+        height="100%"
+        width="100%"
+        backgroundImage={`url('/images/fallbacks/${Math.floor(Math.random() * 5) + 1}.svg')`}
+        backgroundSize="contain"
+        backgroundRepeat="no-repeat"
+        backgroundPosition="center"
+      />
     )
   }
 
