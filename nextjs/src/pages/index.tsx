@@ -26,6 +26,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
       locale,
       publicationState,
       pagination: { page: parseInt(page ?? '1'), pageSize: 1 },
+      sort: 'createdAt:asc',
     }),
   ])
 

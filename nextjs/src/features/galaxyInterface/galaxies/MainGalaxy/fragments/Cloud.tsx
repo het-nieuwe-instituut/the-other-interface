@@ -35,7 +35,7 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
           <LinkOverlay as={Box} w="100%" h="100%" />
         </Link>
       </LinkBox>
-      <CloudTitle position={titlePosition}>{t(category)}</CloudTitle>
+      <CloudTitle position={titlePosition}>{t(category) ?? ''}</CloudTitle>
     </>
   )
 }
