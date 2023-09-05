@@ -51,9 +51,9 @@ export class ThemeFieldResolver {
   public async stories(@Parent() theme: Theme) {
     if (theme.stories?.data && theme.stories?.data.length) {
       const res = await this.strapiGqlSdk.stories({
+        locale: theme.locale,
         filters: {
           or: theme.stories.data.map(ent => {
-            //TODO add image
             return {
               id: { eq: ent.id },
             }
