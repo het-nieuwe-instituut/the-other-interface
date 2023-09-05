@@ -38,6 +38,7 @@ export const GalaxyInterface: React.FC<Props> = ({ children, renderFooterCenter 
       <Box
         position="relative"
         height={`calc(100vh - ${GALAXY_EDITORIAL_LAYER_PART})`}
+        // height={`calc(100vh)`}
         bottom={0}
         right={0}
         left={0}
