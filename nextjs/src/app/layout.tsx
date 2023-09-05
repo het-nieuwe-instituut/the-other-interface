@@ -4,10 +4,8 @@ import ErrorBoundaryProvider from '@/features/modules/components/ErrorBoundary/E
 import Fonts from '@/features/modules/components/Fonts/Fonts'
 // import { PreviewBlock } from '@/features/preview/PreviewBlock'
 import DisableScroll from '@/features/shared/components/DisableScroll/DisableScroll'
-import { Footer } from '@/features/shared/components/Footer/Footer'
 import { AppHead } from '@/features/shared/components/Head/AppHead'
 import MobileOverlayProvider from '@/features/shared/components/MobileOverlayProvider/MobileOverlayProvider'
-import { NavigationOverlayProvider } from '@/features/shared/components/providers/NavigationOverlayProvider'
 import { TestMenu } from '@/features/shared/components/TestMenu/TestMenu'
 import 'keen-slider/keen-slider.min.css'
 import Script from 'next/script'
@@ -15,6 +13,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css'
 
 import '../styles/globals.css'
 import ReactQueryProvider from '@/features/shared/components/providers/ReactQueryProvider'
+import BaseElementWrapper from '@/features/shared/components/wrappers/BaseElementsWrapper'
 
 function MyApp({ children }: { children: React.ReactNode }) {
   return (
@@ -39,28 +38,26 @@ function MyApp({ children }: { children: React.ReactNode }) {
         <ReduxStoreProvider>
           <ReactQueryProvider>
             <ThemeProvider>
-              <ErrorBoundaryProvider>
-                <DisableScroll>
-                  {/* Comment till replace fetch of menu pages to new api */}
-                  <NavigationOverlayProvider>
-                    <MobileOverlayProvider>
-                      <>
-                        {/* <ErrorBoundaryProvider>
+              {/* <ErrorBoundaryProvider> */}
+              <DisableScroll>
+                {/* Comment till replace fetch of menu pages to new api */}
+                <MobileOverlayProvider>
+                  <>
+                    {/* <ErrorBoundaryProvider>
                   
                     
                          */}
-                        <Fonts />
+                    <Fonts />
 
-                        <AppHead />
-                        <TestMenu />
-                        {children}
-                        {/* <Footer /> */}
-                        {/* //      */}
-                      </>
-                    </MobileOverlayProvider>
-                  </NavigationOverlayProvider>
-                </DisableScroll>
-              </ErrorBoundaryProvider>
+                    <AppHead />
+                    <TestMenu />
+                    {children}
+                    <BaseElementWrapper />
+                    {/* //      */}
+                  </>
+                </MobileOverlayProvider>
+              </DisableScroll>
+              {/* </ErrorBoundaryProvider> */}
             </ThemeProvider>
           </ReactQueryProvider>
         </ReduxStoreProvider>

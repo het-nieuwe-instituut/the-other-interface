@@ -1,21 +1,22 @@
 'use client'
-import { Flex, Box, Text, Link, useBreakpoint } from '../../configs/chakra'
+import { Flex, Box, Text, Link } from '../../configs/chakra'
 import { keyframes } from '@emotion/react'
-import { useRef } from 'react'
 import { MAX_Z_INDEX, NAVIGATION_OVERLAY_Z_INDEX } from '../../constants/mainConstants'
 import { capitalizeFirstLetter } from '../../utils/text'
 import { StaticHeader } from '../StaticHeader/StaticHeader'
 import { usePresenter } from './usePresenter'
 import { GalaxyFooter } from '@/features/galaxyInterface/components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
+import { MenuPagesQuery } from 'src/generated/graphql'
 
 const fadeIn = keyframes({ from: { opacity: 0 }, to: { opacity: 0.85 } })
 const fadeOut = keyframes({ from: { opacity: 0.85 }, to: { opacity: 0 } })
 
-export const Navigation = () => {
-  const { menupages, tNavigation, isMenuOpen } = usePresenter()
-  const breakpoint = useBreakpoint()
-  const isMobile = breakpoint === 'sm'
-  const ref = useRef<HTMLDivElement | null>(null)
+type Props = {
+  menupages: MenuPagesQuery
+}
+
+export const Navigation = ({ menupages }: Props) => {
+  const { tNavigation, isMenuOpen, ref, isMobile } = usePresenter()
 
   return (
     <Box
@@ -119,7 +120,7 @@ export const Navigation = () => {
             {tNavigation('more_to_do')}
           </Text>
 
-          {menupages?.data.map(item => (
+          {menupages?.menupages?.data?.map(item => (
             <Link
               href={`/menupage/${item?.attributes?.slug}`}
               variant={'navigation'}

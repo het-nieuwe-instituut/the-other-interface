@@ -1,3 +1,4 @@
+'use client'
 import { Flex, Link, Box } from '../../configs/chakra'
 
 import { STATIC_HEADER_Z_INDEX } from '../../constants/mainConstants'

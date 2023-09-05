@@ -4,13 +4,16 @@ import { Flex, Text, Link, theme } from '../../configs/chakra'
 import { FOOTER_Z_INDEX } from '../../constants/mainConstants'
 import { capitalizeFirstLetter } from '../../utils/text'
 import { useMenuPages } from '../../hooks/queries/useMenuPages'
+import { MenuPagesQuery } from 'src/generated/graphql'
 
-export const Footer = () => {
-  const { data } = useMenuPages()
+type Props = {
+  menupages: MenuPagesQuery
+}
 
-  const menupages = data?.menupages?.data
-  const sectionOne = menupages?.slice(0, 5)
-  const sectionTwo = menupages?.slice(5, 10)
+export const Footer = ({ menupages }: Props) => {
+  const menupagesCpy = menupages?.menupages?.data
+  const sectionOne = menupagesCpy?.slice(0, 5)
+  const sectionTwo = menupagesCpy?.slice(5, 10)
 
   return (
     <Flex
