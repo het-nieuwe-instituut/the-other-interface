@@ -119,7 +119,7 @@ export const Navigation = () => {
             {tNavigation('more_to_do')}
           </Text>
 
-          {menupages?.menupages?.data.map(item => (
+          {menupages?.data.map(item => (
             <Link
               href={`/menupage/${item?.attributes?.slug}`}
               variant={'navigation'}

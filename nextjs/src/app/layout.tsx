@@ -54,7 +54,7 @@ function MyApp({ children }: { children: React.ReactNode }) {
                         <AppHead />
                         <TestMenu />
                         {children}
-                        <Footer />
+                        {/* <Footer /> */}
                         {/* //      */}
                       </>
                     </MobileOverlayProvider>
