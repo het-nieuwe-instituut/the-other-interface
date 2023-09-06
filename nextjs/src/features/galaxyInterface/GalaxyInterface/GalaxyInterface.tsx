@@ -3,14 +3,12 @@ import { Box, Flex, useTheme } from '@chakra-ui/react'
 import { useSize } from '@chakra-ui/react-use-size'
 import { useRef } from 'react'
 import { GalaxyTopRight } from '../components/GalaxyWrapper/GalaxyTopRight/GalaxyTopRight'
-import { GalaxyFooter } from '../components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 
 interface Props {
-  renderFooterCenter?: JSX.Element
   children: React.ReactNode
 }
 
-export const GalaxyInterface: React.FC<Props> = ({ children, renderFooterCenter }) => {
+export const GalaxyInterface: React.FC<Props> = ({ children }) => {
   const theme = useTheme()
   const graphRef = useRef<HTMLDivElement | null>(null)
   const sizes = useSize(graphRef)
@@ -32,9 +30,7 @@ export const GalaxyInterface: React.FC<Props> = ({ children, renderFooterCenter 
           <GalaxyTopRight />
         </Flex>
       </Flex>
-      <Box position="absolute" left={6} right={6} bottom={6} zIndex={1000}>
-        <GalaxyFooter renderFooterCenter={renderFooterCenter} />
-      </Box>
+
       <Box
         position="relative"
         height={`calc(100vh - ${GALAXY_EDITORIAL_LAYER_PART})`}
