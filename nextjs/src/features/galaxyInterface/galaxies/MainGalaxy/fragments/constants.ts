@@ -1,4 +1,5 @@
 export const HOMEPAGE_Z_INDEXES = {
   CLOUD: 10,
   STORY: 20,
+  THEME_TITLE: 11,
 }
