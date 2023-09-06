@@ -11,13 +11,7 @@ const CategoryGalaxy: React.FC = () => {
   } = useRouter()
 
   return (
-    <Box
-      position="relative"
-      width="100vw"
-      height="100vh"
-      overflow={'hidden'}
-      backgroundColor={'navyAlpha.100'}
-    >
+    <Box position="relative" width="100vw" height="100vh" overflow={'hidden'}>
       <Records />
 
       <GalaxyFooter
