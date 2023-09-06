@@ -52,6 +52,7 @@ export class ThemeFieldResolver {
     if (theme.stories?.data && theme.stories?.data.length) {
       const res = await this.strapiGqlSdk.stories({
         locale: theme.locale,
+        sort: ['createdAt:asc'],
         filters: {
           or: theme.stories.data.map(ent => {
             return {
