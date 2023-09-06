@@ -13,6 +13,7 @@ export const CloudTitle: React.FC<Props> = ({ position, children }) => (
     position="absolute"
     textStyle="headingTimesLarge.lg"
     color="blueAlpha.100"
+    pointerEvents={'none'}
     style={{ ...position }}
   >
     {children}

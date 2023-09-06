@@ -23,6 +23,7 @@ export const ThemeTitle: React.FC<Props> = ({ title }) => {
       textStyle="headingTimesLarge.2xl"
       fontSize={'7vw'}
       lineHeight={'7vw'}
+      pointerEvents={'none'}
       zIndex={HOMEPAGE_Z_INDEXES.THEME_TITLE}
     >
       {t('storiesOver', {
