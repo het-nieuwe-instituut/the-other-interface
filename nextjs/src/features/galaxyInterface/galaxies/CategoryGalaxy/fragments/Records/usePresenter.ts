@@ -2,8 +2,8 @@ import { useMemo } from 'react'
 
 import { Record } from '../types'
 import { Position } from '@/features/shared/types/position'
-import { useRouter } from 'next/router'
 import { CloudCategory } from '@/features/shared/types/categories'
+import { useSearchParams } from 'next/navigation'
 
 // For readability advantage, we are using the object representation.
 type PositioningTemplate = {
@@ -50,9 +50,8 @@ const positioningTemplate: PositioningTemplate = {
 }
 
 export const usePresenter = (records: Record[]) => {
-  const {
-    query: { category },
-  } = useRouter()
+  const searchParams = useSearchParams()
+  const category = searchParams?.get('category')
 
   const positionedRecords = useMemo(() => {
     let lastStoryIndex = 0
