@@ -1,6 +1,5 @@
 import { ReduxStoreProvider } from '@/features/shared/components/providers/ReduxStoreProdivder'
 import { ThemeProvider } from '@/features/shared/components/providers/ThemeProvider'
-import ErrorBoundaryProvider from '@/features/modules/components/ErrorBoundary/ErrorBoundary'
 import Fonts from '@/features/modules/components/Fonts/Fonts'
 // import { PreviewBlock } from '@/features/preview/PreviewBlock'
 import DisableScroll from '@/features/shared/components/DisableScroll/DisableScroll'

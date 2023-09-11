@@ -46,7 +46,7 @@ const MobileOverlay = () => {
         zIndex: `${MOBILE_OVERLAY_Z_INDEX - 1}`,
       }}
     >
-      {/* <StaticHeader /> */}
+      <StaticHeader />
       <Box
         position={'absolute'}
         left={0}

@@ -3,7 +3,6 @@ import { Flex, Text, Link, theme } from '../../configs/chakra'
 
 import { FOOTER_Z_INDEX } from '../../constants/mainConstants'
 import { capitalizeFirstLetter } from '../../utils/text'
-import { useMenuPages } from '../../hooks/queries/useMenuPages'
 import { MenuPagesQuery } from 'src/generated/graphql'
 
 type Props = {
