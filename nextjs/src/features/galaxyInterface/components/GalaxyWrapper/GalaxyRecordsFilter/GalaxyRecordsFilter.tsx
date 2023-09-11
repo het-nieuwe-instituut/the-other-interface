@@ -20,7 +20,7 @@ export const GalaxyRecordsFilter: React.FC<Props> = ({ category }) => {
       backgroundColor={'blueAlpha.100'}
       padding={'5px 20px'}
     >
-      <FilterDropdown title={t('category') ?? ''} selectedOption={t(category) ?? ''} />
+      <FilterDropdown title={t('category')} selectedOption={t(category) ?? ''} />
     </Grid>
   )
 }
