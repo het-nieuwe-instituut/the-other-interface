@@ -92,7 +92,6 @@ export const PreviewBlock = () => {
 
 async function exitPreviewMode(cb: () => void) {
   const response = await fetch('/api/exit-preview')
-  console.log('response', response)
   if (response) {
     cb()
   }
