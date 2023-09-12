@@ -9,6 +9,8 @@ const parsed = env.parsed
 
 const nextConfig = {
   webpack(config) {
+    config.externals = [...config.externals, 'canvas', 'bufferutil', 'utf-8-validate']
+
     config.module.rules.push({
       test: /\.svg$/,
       use: ['@svgr/webpack'],
