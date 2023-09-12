@@ -1,3 +1,5 @@
+'use client'
+
 import { ChakraProvider } from '@chakra-ui/react'
 import { ThemeProvider as EmotionThemeProvider } from '@emotion/react'
 import React, { PropsWithChildren } from 'react'

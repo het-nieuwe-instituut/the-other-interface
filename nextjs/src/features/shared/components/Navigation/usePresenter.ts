@@ -1,10 +1,17 @@
-import { useEffect } from 'react'
+'use client'
+import { useEffect, useRef } from 'react'
 
-import useQuery from '../../hooks/useQuery'
-import { getMenuPagesTask } from '../../tasks/getMenuPagesTask'
+import useTranslation from 'next-translate/useTranslation'
+import { State } from '../../configs/store'
+import { useSelector } from 'react-redux'
+import { useBreakpoint } from '../../configs/chakra'
 
-export const usePresenter = (lang: string, isMenuOpen: boolean) => {
-  const { data } = useQuery(() => getMenuPagesTask(lang))
+export const usePresenter = () => {
+  const ref = useRef<HTMLDivElement | null>(null)
+  const isMenuOpen = useSelector((state: State) => state?.shared?.isMenuOpen)
+  const breakpoint = useBreakpoint()
+  const { t: tNavigation, lang } = useTranslation('navigation')
+  const isMobile = breakpoint === 'sm'
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -19,6 +26,11 @@ export const usePresenter = (lang: string, isMenuOpen: boolean) => {
   }, [isMenuOpen])
 
   return {
-    menupages: data?.menupages,
+    tNavigation,
+    lang,
+    isMenuOpen,
+    ref,
+    isMobile,
+    breakpoint,
   }
 }

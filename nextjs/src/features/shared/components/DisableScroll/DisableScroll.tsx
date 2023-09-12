@@ -1,4 +1,5 @@
-import { useBreakpoint } from '@chakra-ui/react'
+'use client'
+import { useBreakpoint } from '../../configs/chakra'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 

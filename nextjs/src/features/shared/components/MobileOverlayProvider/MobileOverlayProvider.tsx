@@ -1,5 +1,6 @@
+'use client'
 import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { Box, Text, Flex, useBreakpoint } from '@chakra-ui/react'
+import { Box, Text, Flex, useBreakpoint } from '../../configs/chakra'
 
 import { MOBILE_OVERLAY_Z_INDEX } from '../../constants/mainConstants'
 import { StaticHeader } from '../StaticHeader/StaticHeader'

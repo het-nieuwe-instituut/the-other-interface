@@ -1,3 +1,4 @@
+'use client'
 import { Box } from '@chakra-ui/react'
 
 import { Cloud, CategoryCloud, Stories } from './fragments'
@@ -36,14 +37,16 @@ interface Props {
   stories: StoryEntity[]
 }
 
-const MainGalaxy: React.FC<Props> = ({ storyTitle, stories }) => (
-  <Box position="relative" width="100vw" height="100vh">
-    {categoryClouds.map(cloud => (
-      <Cloud key={cloud.title} cloud={cloud} />
-    ))}
-    <Stories stories={stories} />
-    <ThemeTitle title={storyTitle} />
-  </Box>
-)
+const MainGalaxy: React.FC<Props> = ({ storyTitle, stories }) => {
+  return (
+    <Box position="relative" width="100vw" height="100vh">
+      {categoryClouds.map(cloud => (
+        <Cloud key={cloud.title} cloud={cloud} />
+      ))}
+      <Stories stories={stories} />
+      <ThemeTitle title={storyTitle} />
+    </Box>
+  )
+}
 
 export default MainGalaxy

@@ -1,4 +1,4 @@
-import { Box, Image } from '@chakra-ui/react'
+import { Box, Image } from '../../configs/chakra'
 import React from 'react'
 
 import { useIsImagePortrait } from '../../hooks/useIsImagePortrait'

@@ -1,5 +1,6 @@
+'use client'
 import SettingsIcon from '@/icons/open-menu.svg'
-import { Button, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
+import { Button, Menu, MenuButton, MenuItem, MenuList } from '../../configs/chakra'
 import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 

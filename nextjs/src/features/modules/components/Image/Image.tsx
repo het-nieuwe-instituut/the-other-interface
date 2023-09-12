@@ -1,5 +1,5 @@
 import { Box, Text, useDimensions } from '@chakra-ui/react'
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 import { createRef } from 'react'
 
 import { ComponentModulesImage } from 'src/generated/graphql'

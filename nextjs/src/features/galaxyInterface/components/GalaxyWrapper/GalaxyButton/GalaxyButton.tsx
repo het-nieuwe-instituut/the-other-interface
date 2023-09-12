@@ -8,7 +8,7 @@ interface GalaxyButtonProps {
   size?: string
   target?: string
   disabled?: boolean
-  onClick?: () => Promise<boolean>
+  onClick?: () => void
 }
 
 export const GalaxyButton: React.FC<GalaxyButtonProps> = props => {

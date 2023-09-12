@@ -1,17 +1,18 @@
-import { Flex, Text, Link, theme } from '@chakra-ui/react'
+'use client'
+import { Flex, Text, Link, theme } from '../../configs/chakra'
 
 import { FOOTER_Z_INDEX } from '../../constants/mainConstants'
-import { useLooseTypeSafeTranslation } from '../../hooks/translations'
-import useQuery from '../../hooks/useQuery'
-import { getMenuPagesTask } from '../../tasks/getMenuPagesTask'
 import { capitalizeFirstLetter } from '../../utils/text'
+import { MenuPagesQuery } from 'src/generated/graphql'
 
-export const Footer = () => {
-  const { lang } = useLooseTypeSafeTranslation('navigation')
-  const { data } = useQuery(() => getMenuPagesTask(lang))
-  const menupages = data?.menupages?.menupages.data
-  const sectionOne = menupages?.slice(0, 5)
-  const sectionTwo = menupages?.slice(5, 10)
+type Props = {
+  menupages: MenuPagesQuery
+}
+
+export const Footer = ({ menupages }: Props) => {
+  const menupagesCpy = menupages?.menupages?.data
+  const sectionOne = menupagesCpy?.slice(0, 5)
+  const sectionTwo = menupagesCpy?.slice(5, 10)
 
   return (
     <Flex

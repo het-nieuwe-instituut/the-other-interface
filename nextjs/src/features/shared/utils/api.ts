@@ -1,19 +1,17 @@
 import ApiClient from '@/features/graphql/api'
-import { CookieValueTypes, getCookie, setCookie } from 'cookies-next'
-import { GetServerSidePropsContext } from 'next'
+import { setCookie } from 'cookies-next'
 
-export const initApiClient = (context: GetServerSidePropsContext | null = null) => {
-  const isMockedServer: CookieValueTypes = context
-    ? getCookie('isMockedServer', context)
-    : getCookie('isMockedServer')
-
+export const initApiClient = ({
+  hostHeader,
+  isMockedServer,
+}: {
+  hostHeader?: string | null
+  isMockedServer?: boolean
+}) => {
   function setUpMockedServer() {
     const isLocal = process.env.parsed.NEXT_PUBLIC_ENV === 'local'
     const protocol = isLocal ? 'http' : 'https'
-    const host =
-      context?.req?.headers['x-forwarded-host'] ||
-      context?.req?.headers.host ||
-      window.location.host
+    const host = hostHeader || window.location.host
     ApiClient.setBaseUrl(`${protocol}://${host}/api/graphql`)
   }
 

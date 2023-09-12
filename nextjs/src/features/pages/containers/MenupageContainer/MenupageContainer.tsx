@@ -1,3 +1,4 @@
+'use client'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 import { StaticHeader } from '@/features/shared/components/StaticHeader/StaticHeader'
 import { Box, theme } from '@chakra-ui/react'

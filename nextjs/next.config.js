@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /** @type {import('next').NextConfig} */
-const nextTranslate = require('next-translate')
+const nextTranslate = require('next-translate-plugin')
 
 const env = require('dotenv').config({
   path: `.env.${process.env.NEXT_PUBLIC_ENV ?? 'production'}`,

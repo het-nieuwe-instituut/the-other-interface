@@ -1,6 +1,6 @@
 import { Box } from '@chakra-ui/react'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 
 import { CategoryCloud } from './types'
 import { HOMEPAGE_Z_INDEXES } from './constants'

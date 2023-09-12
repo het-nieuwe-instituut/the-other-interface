@@ -1,8 +1,9 @@
+'use client'
 import { GALAXY_EDITORIAL_LAYER_PART } from '@/features/shared/constants/mainConstants'
-import { Box, Flex, useTheme } from '@chakra-ui/react'
+import { GalaxyTopRight } from '@/features/galaxyInterface/components/GalaxyWrapper/GalaxyTopRight/GalaxyTopRight'
 import { useSize } from '@chakra-ui/react-use-size'
 import { useRef } from 'react'
-import { GalaxyTopRight } from '../components/GalaxyWrapper/GalaxyTopRight/GalaxyTopRight'
+import { Box, Flex, useTheme } from '@/features/shared/configs/chakra'
 
 interface Props {
   children: React.ReactNode
