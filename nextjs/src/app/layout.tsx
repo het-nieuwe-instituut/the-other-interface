@@ -1,7 +1,6 @@
 import { ReduxStoreProvider } from '@/features/shared/components/providers/ReduxStoreProdivder'
 import { ThemeProvider } from '@/features/shared/components/providers/ThemeProvider'
 import Fonts from '@/features/modules/components/Fonts/Fonts'
-// import { PreviewBlock } from '@/features/preview/PreviewBlock'
 import DisableScroll from '@/features/shared/components/DisableScroll/DisableScroll'
 import { AppHead } from '@/features/shared/components/Head/AppHead'
 import MobileOverlayProvider from '@/features/shared/components/MobileOverlayProvider/MobileOverlayProvider'
@@ -13,11 +12,15 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import '../styles/globals.css'
 import ReactQueryProvider from '@/features/shared/components/providers/ReactQueryProvider'
 import BaseElementWrapper from '@/features/shared/components/wrappers/BaseElementsWrapper'
+import { draftMode } from 'next/headers'
+import { PreviewBlock } from '@/features/preview/PreviewBlock'
 
 function MyApp({ children }: { children: React.ReactNode }) {
+  const { isEnabled } = draftMode()
   return (
     <html lang="en">
       <body>
+        {isEnabled && <PreviewBlock />}
         {process.env.parsed.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
           <>
             <Script
@@ -37,32 +40,21 @@ function MyApp({ children }: { children: React.ReactNode }) {
         <ReduxStoreProvider>
           <ReactQueryProvider>
             <ThemeProvider>
-              {/* <ErrorBoundaryProvider> */}
               <DisableScroll>
-                {/* Comment till replace fetch of menu pages to new api */}
                 <MobileOverlayProvider>
                   <>
-                    {/* <ErrorBoundaryProvider>
-                  
-                    
-                         */}
                     <Fonts />
-
                     <AppHead />
                     <TestMenu />
                     {children}
                     <BaseElementWrapper />
-                    {/* //      */}
                   </>
                 </MobileOverlayProvider>
               </DisableScroll>
-              {/* </ErrorBoundaryProvider> */}
             </ThemeProvider>
           </ReactQueryProvider>
         </ReduxStoreProvider>
       </body>
-      {/* {'publicationState' in pageProps &&
-        pageProps.publicationState === PublicationState.Preview && <PreviewBlock />} */}
     </html>
   )
 }

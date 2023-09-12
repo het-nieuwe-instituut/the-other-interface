@@ -1,10 +1,16 @@
-import Router from 'next/router'
+'use client'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 export const PreviewBlock = () => {
   const [isHidden, setIsHidden] = useState(false)
-  // using style prop here because chakra / emotionCSS providers are not available here
+  const router = useRouter()
 
+  const refresh = () => {
+    router.refresh()
+  }
+
+  // using style prop here because chakra / emotionCSS providers are not available here
   if (isHidden) return null
   return (
     <div
@@ -54,8 +60,8 @@ export const PreviewBlock = () => {
               paddingRight: 8,
             }}
             tabIndex={0}
-            onClick={() => exitPreviewMode()}
-            onKeyDown={() => exitPreviewMode()}
+            onClick={() => exitPreviewMode(refresh)}
+            onKeyDown={() => exitPreviewMode(refresh)}
             onMouseEnter={e => (e.currentTarget.style.color = 'blue ')}
             onMouseLeave={e => (e.currentTarget.style.color = 'black')}
             title="Turns off preview mode and displays live content"
@@ -84,9 +90,10 @@ export const PreviewBlock = () => {
   )
 }
 
-async function exitPreviewMode() {
+async function exitPreviewMode(cb: () => void) {
   const response = await fetch('/api/exit-preview')
+  console.log('response', response)
   if (response) {
-    Router.reload()
+    cb()
   }
 }
