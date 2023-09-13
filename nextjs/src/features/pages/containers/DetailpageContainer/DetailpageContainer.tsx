@@ -1,9 +1,7 @@
 'use client'
 import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
 import { EditorialLayer } from '@/features/shared/components/EditorialLayer/EditorialLayer'
-
 import { Category } from '@/features/shared/utils/categories'
-
 import { StoryByIdQuery, LandingpageBySlugQuery } from 'src/generated/graphql'
 import { Box } from '@/features/shared/configs/chakra'
 
@@ -25,8 +23,6 @@ interface Props {
 }
 
 export const DetailpageContainer: React.FC<Props> = ({ id, category, editorialData }) => {
-  console.log('data', editorialData)
-
   return (
     <Box backgroundColor="graph">
       <GalaxyInterface>
