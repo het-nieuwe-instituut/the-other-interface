@@ -1,7 +1,7 @@
 import { Box, Text, BoxProps } from '@chakra-ui/react'
 
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { CloudCategory } from '@/features/shared/types/categories'
+import { CloudCategory } from '@/features/shared/utils/categories'
 
 type Props = {
   categoryType: CloudCategory

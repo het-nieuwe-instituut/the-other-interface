@@ -4,7 +4,7 @@ import { Records } from './fragments'
 import { GalaxyFooter } from '../../components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 import { GalaxyRecordsFilter } from '../../components/GalaxyWrapper/GalaxyRecordsFilter/GalaxyRecordsFilter'
 import { useSearchParams } from 'next/navigation'
-import { CloudCategory } from '@/features/shared/types/categories'
+import { CloudCategory } from '@/features/shared/utils/categories'
 
 const CategoryGalaxy: React.FC = () => {
   const searchParams = useSearchParams()

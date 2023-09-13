@@ -1,4 +1,4 @@
-import { CloudCategory } from '@/features/shared/types/categories'
+import { CloudCategory } from '@/features/shared/utils/categories'
 import { Position } from '@/features/shared/types/position'
 
 export type CloudSize = `${string}vw`

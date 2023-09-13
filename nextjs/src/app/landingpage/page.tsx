@@ -1,6 +1,6 @@
 import useTranslation from 'next-translate/useTranslation'
 import { LandingpageContainer } from '@/features/pages/containers/LandingpageContainer/LandingpageContainer'
-import { CloudCategory } from '@/features/shared/types/categories'
+import { CloudCategory } from '@/features/shared/utils/categories'
 import initApiServerService from '@/features/shared/utils/initApiServerService'
 import { draftMode } from 'next/headers'
 import { PublicationState } from '@/features/shared/types/enums'
