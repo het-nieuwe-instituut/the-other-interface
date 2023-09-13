@@ -4,23 +4,34 @@ import { EditorialLayer } from '@/features/shared/components/EditorialLayer/Edit
 
 import { Category } from '@/features/shared/utils/categories'
 
-import { StoryByIdQuery } from 'src/generated/graphql'
+import { StoryByIdQuery, LandingpageBySlugQuery } from 'src/generated/graphql'
 import { Box } from '@/features/shared/configs/chakra'
+
+export interface DetailpageEditorialLayer {
+  title?: string | null
+  description?: string | null
+  components:
+    | NonNullable<
+        NonNullable<LandingpageBySlugQuery['landingpages']['data']>[0]['attributes']
+      >['components']
+    | NonNullable<NonNullable<StoryByIdQuery['stories']['data']>[0]['attributes']>['components']
+    | null
+}
 
 interface Props {
   category: Category
   id: string
-  data: StoryByIdQuery | null
+  editorialData: DetailpageEditorialLayer
 }
 
-export const DetailpageContainer: React.FC<Props> = ({ id, category, data }) => {
-  console.log('data', data)
-  const editorialData = data?.stories?.data?.[0]?.attributes
+export const DetailpageContainer: React.FC<Props> = ({ id, category, editorialData }) => {
+  console.log('data', editorialData)
 
   return (
     <Box backgroundColor="graph">
       <GalaxyInterface>
         <Box color={'white'}>{category}</Box>
+        <Box color={'white'}>{id}</Box>
       </GalaxyInterface>
 
       {editorialData && (

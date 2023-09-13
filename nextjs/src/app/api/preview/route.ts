@@ -40,7 +40,7 @@ export async function GET(request: NextRequest) {
     }
 
     case supportedCollectionType.Enum['api::story.story']: {
-      url = `/story/${id}-${slug}`
+      url = `/detail/stories/${id}`
       break
     }
 

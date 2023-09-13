@@ -11,7 +11,7 @@ import {
   LandingpageBySlugQuery,
   Maybe,
   MenupageComponentsDynamicZone,
-  StoryComponentsDynamicZone,
+  StoryByIdQuery,
 } from 'src/generated/graphql'
 
 import { ButtonsModule } from '../components/ButtonsModule/ButtonsModule'
@@ -35,7 +35,7 @@ export type DynamicComponents =
       NonNullable<LandingpageBySlugQuery['landingpages']['data']>[0]['attributes']
     >['components']
   | Maybe<Array<HomepageComponentsDynamicZone>>
-  | Maybe<Array<StoryComponentsDynamicZone>>
+  | NonNullable<NonNullable<StoryByIdQuery['stories']['data']>[0]['attributes']>['components']
   | Maybe<Array<MenupageComponentsDynamicZone>>
 
 export function DynamicComponentRenderer(props: Props) {
