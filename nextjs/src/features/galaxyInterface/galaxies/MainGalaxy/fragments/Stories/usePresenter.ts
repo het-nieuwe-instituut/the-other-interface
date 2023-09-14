@@ -50,10 +50,8 @@ export const usePresenter = (stories: StoryEntity[]) => {
       return {
         title: story?.attributes?.title ?? '',
         image: findImageUrl(story?.attributes?.components ?? []),
-        id:
-          storyId && storyLocale
-            ? `${storyId}-${storyLocale}`
-            : Math.floor(Math.random() * (99999 + 1)),
+        locale: storyLocale || 'nl',
+        id: storyId || `${Math.floor(Math.random() * (99999 + 1))}`,
       }
     }
 
