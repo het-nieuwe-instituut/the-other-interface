@@ -1,7 +1,7 @@
 import initApiServerService from '@/features/shared/utils/initApiServerService'
 import { PublicationState } from '@/features/shared/types/enums'
 import { DetailpageEditorialLayer } from '@/features/pages/containers/DetailpageContainer/DetailpageContainer'
-import { Category } from '@/features/shared/utils/categories'
+import { CATEGORIES, Category } from '@/features/shared/utils/categories'
 
 export async function getRecordEditorialContent({
   category,
@@ -22,7 +22,7 @@ export async function getRecordEditorialContent({
     components: null,
   }
 
-  if (category === 'stories') {
+  if (category === CATEGORIES.stories) {
     const result = await api.storyById({
       id,
       locale: lang,
