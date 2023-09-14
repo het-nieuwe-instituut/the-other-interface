@@ -5,6 +5,7 @@ import { CloudCategory } from '@/features/shared/utils/categories'
 
 import { Record as TRecord } from './types'
 import { RecordText } from './RecordText'
+import { useRouter } from 'next/navigation'
 
 type Props = {
   record: TRecord & {
@@ -14,7 +15,12 @@ type Props = {
 }
 
 export const Record: React.FC<Props> = ({ record }) => {
-  const { thumbnail, category, position, title } = record
+  const { id, thumbnail, category, position, title } = record
+  const router = useRouter()
+
+  const handleClick = () => {
+    router.push(`/detail/${category}/${id}`)
+  }
 
   return (
     <GridItem position="relative">
@@ -27,6 +33,10 @@ export const Record: React.FC<Props> = ({ record }) => {
         alignItems="center"
         justifyContent="center"
         gap="8px"
+        cursor={'pointer'}
+        onClick={handleClick}
+        _hover={{ transform: 'scale(1.05)' }}
+        transition="all .4s ease-in-out"
       >
         <ResponsiveImage
           src={thumbnail}
