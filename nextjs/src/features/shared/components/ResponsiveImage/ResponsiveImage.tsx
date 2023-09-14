@@ -5,7 +5,7 @@ import { useIsImagePortrait } from '../../hooks/useIsImagePortrait'
 
 type ResponsiveImageProps = {
   src: string | null
-  alt: string
+  alt?: string
   maxHeight?: string
 }
 

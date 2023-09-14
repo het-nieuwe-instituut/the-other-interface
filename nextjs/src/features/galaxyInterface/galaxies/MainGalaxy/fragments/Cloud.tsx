@@ -35,7 +35,7 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
         backdropFilter={'blur(1.5px)'}
         cursor="pointer"
         _hover={{ transform: 'scale(1.1)' }}
-        transition="all .2s ease-in-out"
+        transition="all .4s ease-in-out"
         onClick={handleCloudClick}
       />
       <CloudTitle position={titlePosition}>{t(category) ?? ''}</CloudTitle>

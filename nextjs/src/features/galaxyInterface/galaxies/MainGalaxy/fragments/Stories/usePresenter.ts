@@ -44,16 +44,16 @@ export const usePresenter = (stories: StoryEntity[]) => {
   const positionedStories = useMemo(() => {
     let lastStoryIndex = 0
 
+    console.log('stories', stories)
+
     const mapStory = (story: StoryEntity) => {
       const storyId = story?.id
       const storyLocale = story?.attributes?.locale
       return {
         title: story?.attributes?.title ?? '',
         image: findImageUrl(story?.attributes?.components ?? []),
-        id:
-          storyId && storyLocale
-            ? `${storyId}-${storyLocale}`
-            : Math.floor(Math.random() * (99999 + 1)),
+        locale: storyLocale || 'nl',
+        id: storyId || `${Math.floor(Math.random() * (99999 + 1))}`,
       }
     }
 
