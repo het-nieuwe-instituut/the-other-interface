@@ -44,8 +44,6 @@ export const usePresenter = (stories: StoryEntity[]) => {
   const positionedStories = useMemo(() => {
     let lastStoryIndex = 0
 
-    console.log('stories', stories)
-
     const mapStory = (story: StoryEntity) => {
       const storyId = story?.id
       const storyLocale = story?.attributes?.locale
