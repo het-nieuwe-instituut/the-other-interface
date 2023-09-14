@@ -1,7 +1,7 @@
 import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
 import { Position } from '@/features/shared/types/position'
 import { GridItem, Flex } from '@chakra-ui/react'
-import { CloudCategory } from '@/features/shared/types/categories'
+import { CloudCategory } from '@/features/shared/utils/categories'
 
 import { Record as TRecord } from './types'
 import { RecordText } from './RecordText'

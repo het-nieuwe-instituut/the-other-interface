@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 
 import { Record } from '../types'
 import { Position } from '@/features/shared/types/position'
-import { CloudCategory } from '@/features/shared/types/categories'
+import { CloudCategory } from '@/features/shared/utils/categories'
 import { useSearchParams } from 'next/navigation'
 
 // For readability advantage, we are using the object representation.

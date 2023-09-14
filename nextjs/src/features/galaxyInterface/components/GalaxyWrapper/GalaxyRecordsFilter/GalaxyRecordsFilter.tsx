@@ -1,7 +1,7 @@
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 
 import { FilterDropdown } from './fragments'
-import { CloudCategory } from '@/features/shared/types/categories'
+import { CloudCategory } from '@/features/shared/utils/categories'
 import { Grid } from '@/features/shared/configs/chakra'
 
 interface Props {

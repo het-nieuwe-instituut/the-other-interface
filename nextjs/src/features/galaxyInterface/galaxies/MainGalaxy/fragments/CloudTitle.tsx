@@ -1,6 +1,6 @@
 import { Text } from '@chakra-ui/react'
 import { TranslationKeys } from 'locales/locales'
-import { CloudCategory } from '@/features/shared/types/categories'
+import { CloudCategory } from '@/features/shared/utils/categories'
 import { Position } from '@/features/shared/types/position'
 
 interface Props {
