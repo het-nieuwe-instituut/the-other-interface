@@ -11,10 +11,10 @@ import { ObjectsModule } from './modules/objects/objects.module'
 import { PeopleModule } from './modules/people/people.module'
 import { PublicationsModule } from './modules/publications/publications.module'
 import { ZoomLevel1Module } from './modules/zoomLevel1/zoomLevel1.module'
-import { ZoomLevel2Module } from './modules/zoomLevel2/zoomLevel2.module'
+// import { ZoomLevel2Module } from './modules/zoomLevel2_old/zoomLevel2.module'
 import { ZoomLevel3Module } from './modules/zoomLevel3/zoomLevel3.module'
 import { ZoomLevel5Module } from './modules/zoomLevel5/zoomLevel5.module'
-import { ZoomLevel4Module } from './modules/zoomLevel4/zoomLevel4.module'
+import { ZoomLevel2Module } from './modules/zoomLevel2/zoomLevel2.module'
 import { HomepageModule } from './modules/homepage/homepage.module'
 import { TriplyRecordModule } from './modules/triplyRecord/triplyRecord.module'
 import { AuthorModule } from './modules/author/author.module'
@@ -53,7 +53,6 @@ import { ThemeModule } from './modules/theme/theme.module'
     ZoomLevel1Module,
     ZoomLevel2Module,
     ZoomLevel3Module,
-    ZoomLevel4Module,
     ZoomLevel5Module,
     TriplyRecordModule,
     AuthorModule,

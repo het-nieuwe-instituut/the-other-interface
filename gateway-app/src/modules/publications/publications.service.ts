@@ -4,7 +4,7 @@ import { TriplyUtils, ZoomLevel3ReturnData, zoomLevel3ReturnDataKeys } from '../
 import { CustomError } from '../util/customError'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { ZoomLevel5Service } from '../zoomLevel5/zoomLevel5.service'
-import { PublicationAuthorType, PublicationsZoomLevel4FiltersArgs } from './publications.type'
+import { PublicationAuthorType } from './publications.type'
 
 export enum PublicationsZoomLevel3Ids {
   relatedPerson = 'relatedPerson',
@@ -22,20 +22,16 @@ export enum PublicationsZoomLevel4Filters {
   RelatedPerInst = 'RelatedPerInst',
 }
 
-interface PublicationsFilterData {
-  filter: string
-}
-const publicationsFilterDataKeys: KeysToVerify<PublicationsFilterData> = {
-  filter: true,
+export interface PublicationsZoomLevel2Data {
+  thumbnail: true
+  title: true
+  id: true
 }
 
-interface PublicationsZoomLevel4Data {
-  record: string
-  title: string
-}
-const publicationsZoomLevel4DataKeys: KeysToVerify<PublicationsZoomLevel4Data> = {
-  record: true,
+export const publicationsZoomLevel2DataKeys: KeysToVerify<PublicationsZoomLevel2Data> = {
+  thumbnail: true,
   title: true,
+  id: true,
 }
 
 interface PublicationsBooksDetailZoomLevel5Data {
@@ -307,7 +303,8 @@ type PublicationsWithAuthors =
 @Injectable()
 export class PublicationsService {
   protected entityType = 'triply'
-  private readonly zoomLevel2Endpoint = 'zoom-2-books/run'
+  private readonly ZoomLevel2Endpoint =
+    'https://api.collectiedata.hetnieuweinstituut.nl/queries/zoom-2/books-landingPage/run'
 
   private readonly ZoomLevel3Mapping = [
     {
@@ -337,7 +334,6 @@ export class PublicationsService {
     },
   ]
 
-  private readonly ZoomLevel4Endpoint = 'zoom-4-books/run'
   private readonly ZoomLevel4CountEndpoint = 'zoom4-books-count/run'
 
   private readonly ZoomLevel5Endpoint = {
@@ -388,21 +384,6 @@ export class PublicationsService {
     }
   }
 
-  public async getZoomLevel2Data() {
-    const result = await this.triplyService.queryTriplyData<PublicationsFilterData>(
-      this.zoomLevel2Endpoint,
-      publicationsFilterDataKeys
-    )
-
-    return result.data
-      .map(r => {
-        const filterMapping = this.ZoomLevel3Mapping.find(m => m.name === r.filter)
-        if (!filterMapping) return
-        return { filter: filterMapping.name, id: filterMapping.id }
-      })
-      .filter(f => !!f?.id)
-  }
-
   public async getZoomLevel3Data(id: PublicationsZoomLevel3Ids, page = 1, pageSize = 16) {
     const mapping = this.ZoomLevel3Mapping.find(m => m.id === id)
 
@@ -419,42 +400,20 @@ export class PublicationsService {
     return TriplyUtils.parseLevel3OutputData(result.data)
   }
 
-  public async getZoomLevel4Data(
-    filters: PublicationsZoomLevel4FiltersArgs,
-    page = 1,
-    pageSize = 48
-  ) {
-    if (Object.keys(filters).length === 0) {
-      return []
-    }
-
-    const searchParams = TriplyUtils.getQueryParamsFromObject(filters)
-
-    const result = await this.triplyService.queryTriplyData<PublicationsZoomLevel4Data>(
-      this.ZoomLevel4Endpoint,
-      publicationsZoomLevel4DataKeys,
-      { page, pageSize },
-      searchParams
+  public async getZoomLevel2Data(page = 1, pageSize = 48) {
+    const result = await this.triplyService.queryTriplyData<PublicationsZoomLevel2Data>(
+      this.ZoomLevel2Endpoint,
+      publicationsZoomLevel2DataKeys,
+      { page, pageSize }
     )
-    const countResult = await this.triplyService.queryTriplyData<{ count?: string }>(
-      this.ZoomLevel4CountEndpoint,
-      { count: true },
-      undefined,
-      searchParams
-    )
-    const total = parseInt(countResult.data.pop()?.count || '0', 10)
 
     return {
-      total,
-      appliedFilters: JSON.stringify(filters),
       page,
-      hasMore: page * pageSize < total,
       nodes: result.data.map(res => {
         return {
-          record: res.record,
+          thumbnail: res.thumbnail,
           title: res.title,
-          firstImage: null,
-          imageLabel: null,
+          id: res.id,
         }
       }),
     }

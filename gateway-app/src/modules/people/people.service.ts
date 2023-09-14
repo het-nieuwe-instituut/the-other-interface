@@ -3,7 +3,7 @@ import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { TriplyUtils, ZoomLevel3ReturnData, zoomLevel3ReturnDataKeys } from '../triply/triply.utils'
 import { CustomError } from '../util/customError'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
-import { PeopleAssociationType, PeopleZoomLevel4FiltersArgs } from './people.type'
+import { PeopleAssociationType } from './people.type'
 
 export enum PeopleZoomLevel3Ids {
   deathDate = 'deathDate',
@@ -37,13 +37,15 @@ export interface PeopleData {
   nationalityLabel: string | null
 }
 
-interface PeopleZoomLevel4Data {
-  record: string
-  name: string
+interface PeopleZoomLevel2Data {
+  thumbnail: string
+  title: string
+  id: string
 }
-const peopleZoomLevel4DataKeys: KeysToVerify<PeopleZoomLevel4Data> = {
-  record: true,
-  name: true,
+const peopleZoomLevel2DataKeys: KeysToVerify<PeopleZoomLevel2Data> = {
+  thumbnail: true,
+  title: true,
+  id: true,
 }
 
 interface PeopleDetailZoomLevel5Data {
@@ -143,7 +145,8 @@ export class PeopleService {
     },
   ]
 
-  private readonly ZoomLevel4Endpoint = 'zoom-4-people-V2/run'
+  private readonly ZoomLevel2Endpoint =
+    'https://api.collectiedata.hetnieuweinstituut.nl/queries/zoom-2/people-landingPage/run'
   private readonly ZoomLevel4CountEndpoint =
     'https://api.collectiedata.hetnieuweinstituut.nl/queries/Joran/zoom4-people-count/run'
 
@@ -151,9 +154,9 @@ export class PeopleService {
 
   public constructor(private triplyService: TriplyService) {}
 
-  public async getZoomLevel2Data() {
+  public async getZoomLevel2DataOld() {
     const result = await this.triplyService.queryTriplyData<PeopleFilterData>(
-      this.zoomLevel2Endpoint,
+      this.ZoomLevel2Endpoint,
       peopleFilterDataKeys
     )
 
@@ -182,39 +185,20 @@ export class PeopleService {
     return TriplyUtils.parseLevel3OutputData(result.data)
   }
 
-  public async getZoomLevel4Data(filters: PeopleZoomLevel4FiltersArgs, page = 1, pageSize = 48) {
-    if (Object.keys(filters).length === 0) {
-      return []
-    }
-
-    const searchParams = TriplyUtils.getQueryParamsFromObject(filters)
-
-    const result = await this.triplyService.queryTriplyData<PeopleZoomLevel4Data>(
-      this.ZoomLevel4Endpoint,
-      peopleZoomLevel4DataKeys,
-      { page, pageSize },
-      searchParams
+  public async getZoomLevel2Data(page = 1, pageSize = 48) {
+    const result = await this.triplyService.queryTriplyData<PeopleZoomLevel2Data>(
+      this.ZoomLevel2Endpoint,
+      peopleZoomLevel2DataKeys,
+      { page, pageSize }
     )
-
-    const countResult = await this.triplyService.queryTriplyData<{ count?: string }>(
-      this.ZoomLevel4CountEndpoint,
-      { count: true },
-      undefined,
-      searchParams
-    )
-    const total = parseInt(countResult.data.pop()?.count || '0', 10)
 
     return {
-      total,
-      appliedFilters: JSON.stringify(filters),
       page,
-      hasMore: page * pageSize < total,
       nodes: result.data.map(res => {
         return {
-          record: res.record,
-          title: res.name,
-          firstImage: null,
-          imageLabel: null,
+          thumbnail: res.thumbnail,
+          title: res.title,
+          id: res.id,
         }
       }),
     }

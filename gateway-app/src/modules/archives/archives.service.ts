@@ -3,7 +3,7 @@ import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { TriplyUtils, ZoomLevel3ReturnData, zoomLevel3ReturnDataKeys } from '../triply/triply.utils'
 import { CustomError } from '../util/customError'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
-import { ArchivesFondsCreatorType, ArchivesZoomLevel4FiltersArgs } from './archives.type'
+import { ArchivesFondsCreatorType } from './archives.type'
 
 export enum ArchivesZoomLevel3Ids {
   date = 'date',
@@ -17,24 +17,16 @@ export enum ArchivesZoomLevel4Filters {
   relatedName = 'relatedName',
 }
 
-interface ObjectFilterData {
-  filter: string
+export interface ArchivesZoomLevel2Data {
+  thumbnail: true
+  title: true
+  id: true
 }
-const objectFilterDataKeys: KeysToVerify<ObjectFilterData> = { filter: true }
 
-interface ArchivesZoomLevel4Data {
-  record: string
-  title: string | null
-  firstImage: string | null
-  imageLabel: string | null
-  pidWorkURI: string | null
-}
-const archivesZoomLevel4DataKeys: KeysToVerify<ArchivesZoomLevel4Data> = {
-  record: true,
+export const archivesZoomLevel2DataKeys: KeysToVerify<ArchivesZoomLevel2Data> = {
+  thumbnail: true,
   title: true,
-  firstImage: true,
-  imageLabel: true,
-  pidWorkURI: true,
+  id: true,
 }
 
 export enum ArchivesZoomLevel5Types {
@@ -161,7 +153,8 @@ export class ArchivesService {
     },
   ]
 
-  private readonly ZoomLevel4Endpoint = 'zoom-4-archives-V2/run'
+  private readonly ZoomLevel2Endpoint =
+    'https://api.collectiedata.hetnieuweinstituut.nl/queries/zoom-2/archives-landingPage/run'
 
   // TODO: change to convention when Triply adds this to normal space
   private readonly archivesDescriptionLevelEndpoint =
@@ -201,21 +194,6 @@ export class ArchivesService {
     return ArchivesZoomLevel5Types.other
   }
 
-  public async getZoomLevel2Data() {
-    const result = await this.triplyService.queryTriplyData<ObjectFilterData>(
-      this.zoomLevel2Endpoint,
-      objectFilterDataKeys
-    )
-
-    return result.data
-      .map(r => {
-        const filterMapping = this.ZoomLevel3Mapping.find(m => m.name === r.filter)
-        if (!filterMapping) return
-        return { filter: filterMapping.name, id: filterMapping.id }
-      })
-      .filter(f => !!f?.id)
-  }
-
   public async getZoomLevel3Data(id: ArchivesZoomLevel3Ids, page = 1, pageSize = 16) {
     const mapping = this.ZoomLevel3Mapping.find(m => m.id === id)
 
@@ -232,43 +210,20 @@ export class ArchivesService {
     return TriplyUtils.parseLevel3OutputData(result.data)
   }
 
-  public async getZoomLevel4Data(filters: ArchivesZoomLevel4FiltersArgs, page = 1, pageSize = 48) {
-    if (Object.keys(filters).length === 0) {
-      return []
-    }
-
-    const searchParams: Record<string, string> = {}
-    if (filters.date) searchParams.date = filters.date
-    if (filters.descriptionLevel) searchParams.DescriptionLevel = filters.descriptionLevel
-    if (filters.relatedName) searchParams.RelatedName = filters.relatedName
-
-    const result = await this.triplyService.queryTriplyData<ArchivesZoomLevel4Data>(
-      this.ZoomLevel4Endpoint,
-      archivesZoomLevel4DataKeys,
-      { page, pageSize },
-      searchParams
+  public async getZoomLevel2Data(page = 1, pageSize = 48) {
+    const result = await this.triplyService.queryTriplyData<ArchivesZoomLevel2Data>(
+      this.ZoomLevel2Endpoint,
+      archivesZoomLevel2DataKeys,
+      { page, pageSize }
     )
-
-    const countResult = await this.triplyService.queryTriplyData<{ count?: string }>(
-      this.ZoomLevel4CountEndpoint,
-      { count: true },
-      undefined,
-      searchParams
-    )
-    const total = parseInt(countResult.data.pop()?.count || '0', 10)
 
     return {
-      total,
-      appliedFilters: JSON.stringify(filters),
       page,
-      hasMore: page * pageSize < total,
       nodes: result.data.map(res => {
         return {
-          record: res.record,
+          thumbnail: res.thumbnail,
           title: res.title,
-          firstImage: res.firstImage,
-          imageLabel: res.imageLabel,
-          pidWorkUri: res.pidWorkURI,
+          id: res.id,
         }
       }),
     }

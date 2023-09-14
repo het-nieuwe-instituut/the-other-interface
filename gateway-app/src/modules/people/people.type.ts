@@ -1,7 +1,7 @@
 import { Field, InputType, ObjectType } from '@nestjs/graphql'
 
 @InputType()
-export class PeopleZoomLevel4FiltersArgs {
+export class PeopleZoomLevel2FiltersArgs {
   @Field(() => String, { nullable: true })
   public NameType: string | null
 

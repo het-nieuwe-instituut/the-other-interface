@@ -3,7 +3,7 @@ import { PoepleZoomLevel5DetailType } from '../people/people.type'
 import { ArchivesZoomLevel5Types } from './archives.service'
 
 @InputType()
-export class ArchivesZoomLevel4FiltersArgs {
+export class ArchivesZoomLevel2FiltersArgs {
   @Field(() => String, { nullable: true })
   public date: string | null
 
