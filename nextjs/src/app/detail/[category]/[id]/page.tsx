@@ -7,7 +7,7 @@ import { notFound } from 'next/navigation'
 import { getRecordEditorialContent } from '@/features/pages/tasks/getRecordEditorialContent'
 
 function assertIsCategory(category: string): asserts category is Category {
-  if (!CATEGORIES.includes(category as Category)) {
+  if (!Object.values(CATEGORIES).includes(category as Category)) {
     notFound()
   }
 }
