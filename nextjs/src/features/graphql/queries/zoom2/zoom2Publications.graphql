@@ -1,0 +1,9 @@
+query Zoom2Publications($page: Int!, $pageSize: Int!) {
+    zoomLevel2(entityName: Publications, page: $page, pageSize: $pageSize) {
+        nodes {
+            title
+			thumbnail
+			id
+        }
+    }
+}

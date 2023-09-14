@@ -76,12 +76,6 @@ export type ArchivesOtherZoomLevel5DetailType = {
   type: ArchivesZoomLevel5Types;
 };
 
-export type ArchivesZoomLevel4FiltersArgs = {
-  date?: InputMaybe<Scalars['String']>;
-  descriptionLevel?: InputMaybe<Scalars['String']>;
-  relatedName?: InputMaybe<Scalars['String']>;
-};
-
 export enum ArchivesZoomLevel5Types {
   Fonds = 'fonds',
   Other = 'other'
@@ -764,16 +758,6 @@ export type ObjectTechniqueType = {
   techniqueLabel?: Maybe<Scalars['String']>;
 };
 
-export type ObjectsZoomLevel4FiltersArgs = {
-  Maker?: InputMaybe<Scalars['String']>;
-  Material?: InputMaybe<Scalars['String']>;
-  Objectname?: InputMaybe<Scalars['String']>;
-  PerInst?: InputMaybe<Scalars['String']>;
-  Subject?: InputMaybe<Scalars['String']>;
-  Technique?: InputMaybe<Scalars['String']>;
-  date?: InputMaybe<Scalars['String']>;
-};
-
 export type ObjectsZoomLevel5DetailType = {
   __typename?: 'ObjectsZoomLevel5DetailType';
   archiveCollectionCode?: Maybe<Scalars['String']>;
@@ -828,15 +812,6 @@ export type PeopleAssociationType = {
   __typename?: 'PeopleAssociationType';
   association: Scalars['String'];
   associationLabel?: Maybe<Scalars['String']>;
-};
-
-export type PeopleZoomLevel4FiltersArgs = {
-  BirthDate?: InputMaybe<Scalars['String']>;
-  DeathDate?: InputMaybe<Scalars['String']>;
-  NameType?: InputMaybe<Scalars['String']>;
-  Period?: InputMaybe<Scalars['String']>;
-  Place?: InputMaybe<Scalars['String']>;
-  Profession?: InputMaybe<Scalars['String']>;
 };
 
 export type PoepleZoomLevel5DetailType = {
@@ -1009,14 +984,6 @@ export type PublicationsSerialZoomLevel5DetailType = {
   yearOfPublication?: Maybe<Scalars['String']>;
 };
 
-export type PublicationsZoomLevel4FiltersArgs = {
-  Author?: InputMaybe<Scalars['String']>;
-  GeograficalKeyword?: InputMaybe<Scalars['String']>;
-  RelatedPerInst?: InputMaybe<Scalars['String']>;
-  Subject?: InputMaybe<Scalars['String']>;
-  TypeOfPublication?: InputMaybe<Scalars['String']>;
-};
-
 export enum PublicationsZoomLevel5Types {
   Article = 'article',
   Audiovisual = 'audiovisual',
@@ -1056,9 +1023,8 @@ export type Query = {
   usersPermissionsUser: UsersPermissionsUserEntityResponse;
   usersPermissionsUsers: UsersPermissionsUserEntityResponseCollection;
   zoomLevel1: Array<ZoomLevel1Type>;
-  zoomLevel2: Array<ZoomLevel2Type>;
+  zoomLevel2: ZoomLevel2ParentType;
   zoomLevel3: Array<ZoomLevel3Type>;
-  zoomLevel4: ZoomLevel4ParentType;
   zoomLevel5Archive?: Maybe<ArchiveZoomLevel5UnionType>;
   zoomLevel5ArchivesFonds?: Maybe<ArchivesFondsZoomLevel5DetailType>;
   zoomLevel5ArchivesOther?: Maybe<ArchivesOtherZoomLevel5DetailType>;
@@ -1235,6 +1201,8 @@ export type QueryUsersPermissionsUsersArgs = {
 
 export type QueryZoomLevel2Args = {
   entityName: EntityNames;
+  page: Scalars['Int'];
+  pageSize?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -1243,17 +1211,6 @@ export type QueryZoomLevel3Args = {
   filterId: Scalars['String'];
   page: Scalars['Int'];
   pageSize?: InputMaybe<Scalars['Int']>;
-};
-
-
-export type QueryZoomLevel4Args = {
-  archivesFilters?: InputMaybe<ArchivesZoomLevel4FiltersArgs>;
-  entityName: EntityNames;
-  objectsFilters?: InputMaybe<ObjectsZoomLevel4FiltersArgs>;
-  page: Scalars['Int'];
-  pageSize?: InputMaybe<Scalars['Int']>;
-  peopleFilters?: InputMaybe<PeopleZoomLevel4FiltersArgs>;
-  publicationsFilters?: InputMaybe<PublicationsZoomLevel4FiltersArgs>;
 };
 
 
@@ -1737,10 +1694,17 @@ export type ZoomLevel1Type = {
   name: Scalars['String'];
 };
 
+export type ZoomLevel2ParentType = {
+  __typename?: 'ZoomLevel2ParentType';
+  nodes?: Maybe<Array<ZoomLevel2Type>>;
+  page: Scalars['Int'];
+};
+
 export type ZoomLevel2Type = {
   __typename?: 'ZoomLevel2Type';
-  filter: Scalars['String'];
-  id: Scalars['String'];
+  id?: Maybe<Scalars['String']>;
+  thumbnail?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
 };
 
 export type ZoomLevel3Type = {
@@ -1749,24 +1713,6 @@ export type ZoomLevel3Type = {
   name?: Maybe<Scalars['String']>;
   total?: Maybe<Scalars['Int']>;
   uri?: Maybe<Scalars['String']>;
-};
-
-export type ZoomLevel4ParentType = {
-  __typename?: 'ZoomLevel4ParentType';
-  appliedFilters?: Maybe<Scalars['String']>;
-  hasMore: Scalars['Boolean'];
-  nodes?: Maybe<Array<ZoomLevel4Type>>;
-  page: Scalars['Int'];
-  total: Scalars['Int'];
-};
-
-export type ZoomLevel4Type = {
-  __typename?: 'ZoomLevel4Type';
-  firstImage?: Maybe<Scalars['String']>;
-  imageLabel?: Maybe<Scalars['String']>;
-  pidWorkURI?: Maybe<Scalars['String']>;
-  record: Scalars['String'];
-  title?: Maybe<Scalars['String']>;
 };
 
 export type ZoomLevel5RelatedRecordType = {
@@ -1903,6 +1849,47 @@ export type ThemesQueryVariables = Exact<{
 
 export type ThemesQuery = { __typename?: 'Query', themes: { __typename?: 'ThemeRelationResponseCollection', data?: Array<{ __typename?: 'ThemeEntity', id?: string | null, attributes?: { __typename?: 'Theme', name: string, createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, locale?: string | null, stories?: { __typename?: 'StoryRelationResponseCollection', data?: Array<{ __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, slug?: string | null, description?: string | null, shortDescription?: string | null, createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, locale?: string | null, components?: Array<{ __typename: 'ComponentModulesButtonsModule', id: string, buttonStyle?: EnumComponentmodulesbuttonsmoduleButtonstyle | null, buttons?: Array<{ __typename?: 'ComponentCoreButton', id: string, text?: string | null, url?: string | null, hasAttachment?: boolean | null, attachment?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null }> | null, buttonsModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename: 'ComponentModulesGridModule', description?: string | null, fieldTitlesAreInverted: boolean, fieldTypes: EnumComponentmodulesgridmoduleFieldtypes, id: string, pageSize: number, showMoreButtonTitle: string, title?: string | null, buttons?: Array<{ __typename?: 'ComponentCoreButton', id: string, url?: string | null, text?: string | null }> | null, featuredFields?: Array<{ __typename?: 'ComponentCoreFeaturedFields', id: string, label: string, value: string }> | null, fields?: Array<{ __typename?: 'ComponentCoreGridFeaturedFields', id: string, title?: string | null, subtitle?: string | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } | null, story?: { __typename?: 'StoryEntityResponse', data?: { __typename?: 'StoryEntity', attributes?: { __typename?: 'Story', slug?: string | null, updatedAt?: any | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', attributes?: { __typename?: 'Author', firstName: string } | null } | null } | null } | null } | null } | null, triplyRecord?: { __typename?: 'TriplyRecordEntityResponse', data?: { __typename?: 'TriplyRecordEntity', attributes?: { __typename?: 'TriplyRecord', createdAt?: any | null, updatedAt?: any | null, recordId: string, archive?: { __typename?: 'ArchivesFondsZoomLevel5DetailType', id: string, type: ArchivesZoomLevel5Types } | { __typename?: 'ArchivesOtherZoomLevel5DetailType', id: string, type: ArchivesZoomLevel5Types, title?: string | null } | null, object?: { __typename?: 'ObjectsZoomLevel5DetailType', description?: string | null, image?: string | null } | null, publication?: { __typename?: 'PublicationsArticleZoomLevel5DetailType', id: string, type: PublicationsZoomLevel5Types, title?: string | null } | { __typename?: 'PublicationsAudioVisualZoomLevel5DetailType', id: string, type: PublicationsZoomLevel5Types, title?: string | null } | { __typename?: 'PublicationsBookZoomLevel5DetailType', id: string, type: PublicationsZoomLevel5Types, title?: string | null } | { __typename?: 'PublicationsSerialZoomLevel5DetailType', id: string, type: PublicationsZoomLevel5Types, title?: string | null } | null, people?: { __typename?: 'PoepleZoomLevel5DetailType', name: string, nameTypes?: Array<string> | null } | null } | null } | null } | null }> | null, gridModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename: 'ComponentModulesImage', id: string, caption?: string | null, alt_text?: string | null, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, height?: number | null, width?: number | null } | null } | null }, story?: { __typename?: 'StoryEntityResponse', data?: { __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, slug?: string | null, description?: string | null, shortDescription?: string | null, createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, locale?: string | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', attributes?: { __typename?: 'Author', firstName: string } | null } | null } | null } | null } | null } | null, triplyRecord?: { __typename?: 'TriplyRecordEntityResponse', data?: { __typename?: 'TriplyRecordEntity', id?: string | null, attributes?: { __typename?: 'TriplyRecord', recordId: string, type: EnumTriplyrecordType } | null } | null } | null, imageModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename: 'ComponentModulesImageCarousel', id: string, description?: string | null, images?: { __typename?: 'UploadFileRelationResponseCollection', data?: Array<{ __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, width?: number | null, height?: number | null, size: number } | null }> | null } | null, imageCarouselModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null }, items?: Array<{ __typename?: 'ComponentCoreImageCarouselItem', description?: string | null, id: string, name?: string | null, picture?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, width?: number | null, height?: number | null, size: number } | null } | null } | null, story?: { __typename?: 'StoryEntityResponse', data?: { __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, slug?: string | null, description?: string | null, shortDescription?: string | null, createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, locale?: string | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', attributes?: { __typename?: 'Author', firstName: string } | null } | null } | null } | null } | null } | null, triplyRecord?: { __typename?: 'TriplyRecordEntityResponse', data?: { __typename?: 'TriplyRecordEntity', id?: string | null, attributes?: { __typename?: 'TriplyRecord', recordId: string, type: EnumTriplyrecordType } | null } | null } | null }> | null } | { __typename: 'ComponentModulesPullquote', id: string, text?: string | null, pullquoteModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename: 'ComponentModulesSubtitle', id: string, text?: string | null, subtitleModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename: 'ComponentModulesTableModule', id: string, table?: { __typename?: 'TableEntityResponse', data?: { __typename?: 'TableEntity', id?: string | null, attributes?: { __typename?: 'Table', name?: string | null, description?: string | null, Tablehead?: { __typename?: 'ComponentCoreTableHead', id: string, TableHeadItem?: Array<{ __typename?: 'ComponentCoreTableHeadItem', id?: string | null, label?: string | null }> | null } | null, TableBody?: Array<{ __typename?: 'ComponentCoreTableBody', id: string, TableBodyItem?: Array<{ __typename?: 'ComponentCoreTableBodyItem', id: string, value?: string | null }> | null }> | null } | null } | null } | null, tableModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename: 'ComponentModulesTextModule', id: string, Richtext?: string | null, textModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename: 'ComponentModulesTitleModule', id: string, Title?: string | null, titleModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'Error' }> | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', id?: string | null } | null } | null, timeframe?: { __typename?: 'ComponentCoreTimeframe', id: string, yearStart?: number | null, yearEnd?: number | null } | null, locations?: { __typename?: 'LocationRelationResponseCollection', data: Array<{ __typename?: 'LocationEntity', id?: string | null }> } | null, publicationDate?: { __typename?: 'ComponentCorePublicationDate', id?: string | null, date?: any | null, displayType?: EnumComponentcorepublicationdateDisplaytype | null } | null, triplyRecords?: { __typename?: 'TriplyRecordRelationResponseCollection', data: Array<{ __typename?: 'TriplyRecordEntity', id?: string | null, attributes?: { __typename?: 'TriplyRecord', recordId: string, type: EnumTriplyrecordType } | null }> } | null, localizations?: { __typename?: 'StoryRelationResponseCollection', data?: Array<{ __typename?: 'StoryEntity', id?: string | null }> | null } | null } | null }> | null } | null, localizations?: { __typename?: 'ThemeRelationResponseCollection', data?: Array<{ __typename?: 'ThemeEntity', id?: string | null }> | null } | null } | null }> | null, meta?: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', page: number, pageSize: number, pageCount: number, total: number } } | null } };
 
+export type Zoom2QueryVariables = Exact<{
+  entityName: EntityNames;
+  page: Scalars['Int'];
+  pageSize?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type Zoom2Query = { __typename?: 'Query', zoomLevel2: { __typename?: 'ZoomLevel2ParentType', nodes?: Array<{ __typename?: 'ZoomLevel2Type', title?: string | null, thumbnail?: string | null, id?: string | null }> | null } };
+
+export type Zoom2ArchivesQueryVariables = Exact<{
+  page: Scalars['Int'];
+  pageSize: Scalars['Int'];
+}>;
+
+
+export type Zoom2ArchivesQuery = { __typename?: 'Query', zoomLevel2: { __typename?: 'ZoomLevel2ParentType', nodes?: Array<{ __typename?: 'ZoomLevel2Type', title?: string | null, thumbnail?: string | null, id?: string | null }> | null } };
+
+export type Zoom2ObjectsQueryVariables = Exact<{
+  page: Scalars['Int'];
+  pageSize: Scalars['Int'];
+}>;
+
+
+export type Zoom2ObjectsQuery = { __typename?: 'Query', zoomLevel2: { __typename?: 'ZoomLevel2ParentType', nodes?: Array<{ __typename?: 'ZoomLevel2Type', title?: string | null, thumbnail?: string | null, id?: string | null }> | null } };
+
+export type Zoom2PeopleQueryVariables = Exact<{
+  page: Scalars['Int'];
+  pageSize: Scalars['Int'];
+}>;
+
+
+export type Zoom2PeopleQuery = { __typename?: 'Query', zoomLevel2: { __typename?: 'ZoomLevel2ParentType', nodes?: Array<{ __typename?: 'ZoomLevel2Type', title?: string | null, thumbnail?: string | null, id?: string | null }> | null } };
+
+export type Zoom2PublicationsQueryVariables = Exact<{
+  page: Scalars['Int'];
+  pageSize: Scalars['Int'];
+}>;
+
+
+export type Zoom2PublicationsQuery = { __typename?: 'Query', zoomLevel2: { __typename?: 'ZoomLevel2ParentType', nodes?: Array<{ __typename?: 'ZoomLevel2Type', title?: string | null, thumbnail?: string | null, id?: string | null }> | null } };
+
 export type Zoom3QueryVariables = Exact<{
   filterId: Scalars['String'];
   page: Scalars['Int'];
@@ -1947,52 +1934,6 @@ export type Zoom3DPublicationsQueryVariables = Exact<{
 
 
 export type Zoom3DPublicationsQuery = { __typename?: 'Query', zoomLevel3: Array<{ __typename?: 'ZoomLevel3Type', uri?: string | null, name?: string | null, count?: number | null, total?: number | null }> };
-
-export type Zoom4QueryVariables = Exact<{
-  entityName: EntityNames;
-  publicationsFilters?: InputMaybe<PublicationsZoomLevel4FiltersArgs>;
-  page: Scalars['Int'];
-  pageSize?: InputMaybe<Scalars['Int']>;
-}>;
-
-
-export type Zoom4Query = { __typename?: 'Query', zoomLevel4: { __typename?: 'ZoomLevel4ParentType', total: number, hasMore: boolean, nodes?: Array<{ __typename?: 'ZoomLevel4Type', record: string, title?: string | null, firstImage?: string | null, imageLabel?: string | null, pidWorkURI?: string | null }> | null } };
-
-export type Zoom4ArchivesQueryVariables = Exact<{
-  archivesFilters?: InputMaybe<ArchivesZoomLevel4FiltersArgs>;
-  page: Scalars['Int'];
-  pageSize: Scalars['Int'];
-}>;
-
-
-export type Zoom4ArchivesQuery = { __typename?: 'Query', zoomLevel4: { __typename?: 'ZoomLevel4ParentType', total: number, hasMore: boolean, nodes?: Array<{ __typename?: 'ZoomLevel4Type', record: string, title?: string | null, firstImage?: string | null, imageLabel?: string | null, pidWorkURI?: string | null }> | null } };
-
-export type Zoom4ObjectsQueryVariables = Exact<{
-  objectsFilters?: InputMaybe<ObjectsZoomLevel4FiltersArgs>;
-  page: Scalars['Int'];
-  pageSize: Scalars['Int'];
-}>;
-
-
-export type Zoom4ObjectsQuery = { __typename?: 'Query', zoomLevel4: { __typename?: 'ZoomLevel4ParentType', total: number, hasMore: boolean, nodes?: Array<{ __typename?: 'ZoomLevel4Type', record: string, title?: string | null, firstImage?: string | null, imageLabel?: string | null, pidWorkURI?: string | null }> | null } };
-
-export type Zoom4PeopleQueryVariables = Exact<{
-  peopleFilters?: InputMaybe<PeopleZoomLevel4FiltersArgs>;
-  page: Scalars['Int'];
-  pageSize: Scalars['Int'];
-}>;
-
-
-export type Zoom4PeopleQuery = { __typename?: 'Query', zoomLevel4: { __typename?: 'ZoomLevel4ParentType', total: number, hasMore: boolean, nodes?: Array<{ __typename?: 'ZoomLevel4Type', record: string, title?: string | null, firstImage?: string | null, imageLabel?: string | null, pidWorkURI?: string | null }> | null } };
-
-export type Zoom4PublicationsQueryVariables = Exact<{
-  publicationsFilters?: InputMaybe<PublicationsZoomLevel4FiltersArgs>;
-  page: Scalars['Int'];
-  pageSize: Scalars['Int'];
-}>;
-
-
-export type Zoom4PublicationsQuery = { __typename?: 'Query', zoomLevel4: { __typename?: 'ZoomLevel4ParentType', total: number, hasMore: boolean, nodes?: Array<{ __typename?: 'ZoomLevel4Type', record: string, title?: string | null, firstImage?: string | null, imageLabel?: string | null, pidWorkURI?: string | null }> | null } };
 
 export type ArchivesRelationsQueryVariables = Exact<{
   id: Scalars['String'];
@@ -2103,13 +2044,6 @@ export type ZoomLevel1QueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type ZoomLevel1Query = { __typename?: 'Query', zoomLevel1: Array<{ __typename?: 'ZoomLevel1Type', name: string, count: number, id: EntityNames }> };
-
-export type ZoomLevel2QueryVariables = Exact<{
-  entityName: EntityNames;
-}>;
-
-
-export type ZoomLevel2Query = { __typename?: 'Query', zoomLevel2: Array<{ __typename?: 'ZoomLevel2Type', filter: string, id: string }> };
 
 export const ComponentCoreModuleLayoutsFragmentDoc = gql`
     fragment componentCoreModuleLayouts on ComponentCoreModuleLayouts {
@@ -3046,6 +2980,61 @@ export const ThemesDocument = gql`
   }
 }
     ${ThemeFragmentFragmentDoc}`;
+export const Zoom2Document = gql`
+    query Zoom2($entityName: EntityNames!, $page: Int!, $pageSize: Int) {
+  zoomLevel2(entityName: $entityName, page: $page, pageSize: $pageSize) {
+    nodes {
+      title
+      thumbnail
+      id
+    }
+  }
+}
+    `;
+export const Zoom2ArchivesDocument = gql`
+    query Zoom2Archives($page: Int!, $pageSize: Int!) {
+  zoomLevel2(entityName: Archives, page: $page, pageSize: $pageSize) {
+    nodes {
+      title
+      thumbnail
+      id
+    }
+  }
+}
+    `;
+export const Zoom2ObjectsDocument = gql`
+    query Zoom2Objects($page: Int!, $pageSize: Int!) {
+  zoomLevel2(entityName: Objects, page: $page, pageSize: $pageSize) {
+    nodes {
+      title
+      thumbnail
+      id
+    }
+  }
+}
+    `;
+export const Zoom2PeopleDocument = gql`
+    query Zoom2People($page: Int!, $pageSize: Int!) {
+  zoomLevel2(entityName: People, page: $page, pageSize: $pageSize) {
+    nodes {
+      title
+      thumbnail
+      id
+    }
+  }
+}
+    `;
+export const Zoom2PublicationsDocument = gql`
+    query Zoom2Publications($page: Int!, $pageSize: Int!) {
+  zoomLevel2(entityName: Publications, page: $page, pageSize: $pageSize) {
+    nodes {
+      title
+      thumbnail
+      id
+    }
+  }
+}
+    `;
 export const Zoom3Document = gql`
     query Zoom3($filterId: String!, $page: Int!, $pageSize: Int!) {
   zoomLevel3(
@@ -3118,106 +3107,6 @@ export const Zoom3DPublicationsDocument = gql`
     name
     count
     total
-  }
-}
-    `;
-export const Zoom4Document = gql`
-    query Zoom4($entityName: EntityNames!, $publicationsFilters: PublicationsZoomLevel4FiltersArgs, $page: Int!, $pageSize: Int) {
-  zoomLevel4(
-    entityName: $entityName
-    publicationsFilters: $publicationsFilters
-    page: $page
-    pageSize: $pageSize
-  ) {
-    total
-    hasMore
-    nodes {
-      record
-      title
-      firstImage
-      imageLabel
-      pidWorkURI
-    }
-  }
-}
-    `;
-export const Zoom4ArchivesDocument = gql`
-    query Zoom4Archives($archivesFilters: ArchivesZoomLevel4FiltersArgs, $page: Int!, $pageSize: Int!) {
-  zoomLevel4(
-    entityName: Archives
-    archivesFilters: $archivesFilters
-    page: $page
-    pageSize: $pageSize
-  ) {
-    total
-    hasMore
-    nodes {
-      record
-      title
-      firstImage
-      imageLabel
-      pidWorkURI
-    }
-  }
-}
-    `;
-export const Zoom4ObjectsDocument = gql`
-    query Zoom4Objects($objectsFilters: ObjectsZoomLevel4FiltersArgs, $page: Int!, $pageSize: Int!) {
-  zoomLevel4(
-    entityName: Objects
-    objectsFilters: $objectsFilters
-    page: $page
-    pageSize: $pageSize
-  ) {
-    total
-    hasMore
-    nodes {
-      record
-      title
-      firstImage
-      imageLabel
-      pidWorkURI
-    }
-  }
-}
-    `;
-export const Zoom4PeopleDocument = gql`
-    query Zoom4People($peopleFilters: PeopleZoomLevel4FiltersArgs, $page: Int!, $pageSize: Int!) {
-  zoomLevel4(
-    entityName: People
-    peopleFilters: $peopleFilters
-    page: $page
-    pageSize: $pageSize
-  ) {
-    total
-    hasMore
-    nodes {
-      record
-      title
-      firstImage
-      imageLabel
-      pidWorkURI
-    }
-  }
-}
-    `;
-export const Zoom4PublicationsDocument = gql`
-    query Zoom4Publications($publicationsFilters: PublicationsZoomLevel4FiltersArgs, $page: Int!, $pageSize: Int!) {
-  zoomLevel4(
-    entityName: Publications
-    publicationsFilters: $publicationsFilters
-    page: $page
-    pageSize: $pageSize
-  ) {
-    total
-    hasMore
-    nodes {
-      record
-      title
-      firstImage
-      imageLabel
-      pidWorkURI
-    }
   }
 }
     `;
@@ -3717,14 +3606,6 @@ export const ZoomLevel1Document = gql`
   }
 }
     `;
-export const ZoomLevel2Document = gql`
-    query zoomLevel2($entityName: EntityNames!) {
-  zoomLevel2(entityName: $entityName) {
-    filter
-    id
-  }
-}
-    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
@@ -3760,6 +3641,21 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     themes(variables?: ThemesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ThemesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ThemesQuery>(ThemesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'themes', 'query');
     },
+    Zoom2(variables: Zoom2QueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom2Query> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Zoom2Query>(Zoom2Document, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Zoom2', 'query');
+    },
+    Zoom2Archives(variables: Zoom2ArchivesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom2ArchivesQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Zoom2ArchivesQuery>(Zoom2ArchivesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Zoom2Archives', 'query');
+    },
+    Zoom2Objects(variables: Zoom2ObjectsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom2ObjectsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Zoom2ObjectsQuery>(Zoom2ObjectsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Zoom2Objects', 'query');
+    },
+    Zoom2People(variables: Zoom2PeopleQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom2PeopleQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Zoom2PeopleQuery>(Zoom2PeopleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Zoom2People', 'query');
+    },
+    Zoom2Publications(variables: Zoom2PublicationsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom2PublicationsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Zoom2PublicationsQuery>(Zoom2PublicationsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Zoom2Publications', 'query');
+    },
     Zoom3(variables: Zoom3QueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom3Query> {
       return withWrapper((wrappedRequestHeaders) => client.request<Zoom3Query>(Zoom3Document, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Zoom3', 'query');
     },
@@ -3774,21 +3670,6 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     Zoom3DPublications(variables: Zoom3DPublicationsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom3DPublicationsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Zoom3DPublicationsQuery>(Zoom3DPublicationsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Zoom3DPublications', 'query');
-    },
-    Zoom4(variables: Zoom4QueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom4Query> {
-      return withWrapper((wrappedRequestHeaders) => client.request<Zoom4Query>(Zoom4Document, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Zoom4', 'query');
-    },
-    Zoom4Archives(variables: Zoom4ArchivesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom4ArchivesQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<Zoom4ArchivesQuery>(Zoom4ArchivesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Zoom4Archives', 'query');
-    },
-    Zoom4Objects(variables: Zoom4ObjectsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom4ObjectsQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<Zoom4ObjectsQuery>(Zoom4ObjectsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Zoom4Objects', 'query');
-    },
-    Zoom4People(variables: Zoom4PeopleQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom4PeopleQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<Zoom4PeopleQuery>(Zoom4PeopleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Zoom4People', 'query');
-    },
-    Zoom4Publications(variables: Zoom4PublicationsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom4PublicationsQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<Zoom4PublicationsQuery>(Zoom4PublicationsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Zoom4Publications', 'query');
     },
     ArchivesRelations(variables: ArchivesRelationsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ArchivesRelationsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ArchivesRelationsQuery>(ArchivesRelationsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ArchivesRelations', 'query');
@@ -3837,9 +3718,6 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     zoomLevel1(variables?: ZoomLevel1QueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ZoomLevel1Query> {
       return withWrapper((wrappedRequestHeaders) => client.request<ZoomLevel1Query>(ZoomLevel1Document, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'zoomLevel1', 'query');
-    },
-    zoomLevel2(variables: ZoomLevel2QueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ZoomLevel2Query> {
-      return withWrapper((wrappedRequestHeaders) => client.request<ZoomLevel2Query>(ZoomLevel2Document, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'zoomLevel2', 'query');
     }
   };
 }

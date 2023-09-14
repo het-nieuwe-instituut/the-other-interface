@@ -1,0 +1,9 @@
+query Zoom2People($page: Int!, $pageSize: Int!) {
+    zoomLevel2(entityName: People, page: $page, pageSize: $pageSize) {
+        nodes {
+            title
+			thumbnail
+			id
+        }
+    }
+}

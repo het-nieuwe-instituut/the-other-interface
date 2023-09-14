@@ -43,7 +43,7 @@ const customResolvers = {
     },
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    zoomLevel2(filter: string, params: { entityName: string }) {
+    zoomLevel2(params: { entityName: string; page: number; pageSize: number }) {
       const { entityName } = params
       switch (entityName) {
         case 'Publications':
@@ -61,9 +61,6 @@ const customResolvers = {
 
     zoomLevel3() {
       return zoomLevel3Data
-    },
-    zoomLevel4() {
-      return zoomLevel4Data
     },
     // TODO this can be implemented in case we want to test transition before zoom level 5 object and another type. So far it works only from object to story
     zoomLevel5Publication() {
