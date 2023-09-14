@@ -11,8 +11,6 @@ type Props = {
 export const Stories: React.FC<Props> = ({ stories }) => {
   const { positionedStories } = usePresenter(stories)
 
-  console.log('positionedStories', positionedStories)
-
   return (
     <Grid
       position="absolute"
