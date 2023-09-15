@@ -4,10 +4,8 @@
   "localeDetection": false,
   "pages": {
     "*": ["common", "navigation"],
-    "/story/[slug]": ["stories", "record", "landingpage"],
-    "/landingpage/[slug]": ["landingpage"],
-    "/landingpage/[slug]/[record]": ["record", "landingpage"],
     "/": ["homepage"],
-    "/landingpage": ["landingpage"]
+    "/landingpage": ["category"],
+    "/detail/[category]/[id]": ["category"]
   }
 }
