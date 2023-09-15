@@ -28,5 +28,5 @@ export default async function Page({ params }: { params: { category: string; id:
     lang,
   })
 
-  return <DetailpageContainer category={category} id={id} editorialData={editorialData} />
+  return <DetailpageContainer editorialData={editorialData} />
 }

@@ -6,7 +6,7 @@ import { GalaxyRecordsFilter } from '../../components/GalaxyWrapper/GalaxyRecord
 import { useSearchParams } from 'next/navigation'
 import { CloudCategory } from '@/features/shared/utils/categories'
 
-const CategoryGalaxy: React.FC = () => {
+export const CategoryGalaxy: React.FC = () => {
   const searchParams = useSearchParams()
   const category = searchParams?.get('category')
 
@@ -20,5 +20,3 @@ const CategoryGalaxy: React.FC = () => {
     </Box>
   )
 }
-
-export default CategoryGalaxy

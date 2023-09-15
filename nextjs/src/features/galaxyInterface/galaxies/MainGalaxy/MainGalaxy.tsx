@@ -37,7 +37,7 @@ interface Props {
   stories: StoryEntity[]
 }
 
-const MainGalaxy: React.FC<Props> = ({ storyTitle, stories }) => {
+export const MainGalaxy: React.FC<Props> = ({ storyTitle, stories }) => {
   return (
     <Box position="relative" width="100vw" height="100vh">
       {categoryClouds.map(cloud => (
@@ -48,5 +48,3 @@ const MainGalaxy: React.FC<Props> = ({ storyTitle, stories }) => {
     </Box>
   )
 }
-
-export default MainGalaxy
