@@ -4,15 +4,15 @@ export const fakeDetailedRecord = {
   thumbnail: 'https://picsum.photos/350/200',
 }
 
-export const fakeStories = [
+export const fakeRelations = [
   {
     id: 1,
-    title: 'Only Surviving Model',
-    thumbnail: 'https://picsum.photos/500/500',
+    title: 'Only Surviving Model Model ',
+    thumbnail: 'https://picsum.photos/700/500',
   },
   {
     id: 12,
-    title: 'Monument on the Dam',
+    title: 'Monument on the Dam ',
     thumbnail: null,
   },
 ]

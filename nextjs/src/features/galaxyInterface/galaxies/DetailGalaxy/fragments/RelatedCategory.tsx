@@ -5,7 +5,7 @@ interface Props {
   category: CloudCategory
 }
 
-export const RelatedCategoryRecords: React.FC<Props> = ({ category }) => {
+export const RelatedCategory: React.FC<Props> = ({ category }) => {
   return (
     <GridItem border={'1px solid pink'} color={'white'}>
       {category}
