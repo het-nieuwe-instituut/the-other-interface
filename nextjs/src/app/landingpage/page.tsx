@@ -22,5 +22,11 @@ export default async function Page({ searchParams }: { searchParams: { category:
       pageSize: 12,
     }),
   ])
-  return <LandingpageContainer landingpage={landingpage} category={category as CloudCategory} zoom2={zoom2}/>
+  return (
+    <LandingpageContainer
+      landingpage={landingpage}
+      category={category as CloudCategory}
+      zoom2={zoom2}
+    />
+  )
 }

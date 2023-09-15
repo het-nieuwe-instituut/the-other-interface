@@ -1,4 +1,4 @@
-import { EntityNames } from "src/generated/graphql"
+import { EntityNames } from 'src/generated/graphql'
 
 export const CLOUD_CATEGORIES = {
   archives: 'archives',
