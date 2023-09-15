@@ -1,0 +1,14 @@
+{
+  "category": "Category",
+  "objects": "Objects",
+  "archives": "Archives",
+  "people": "People",
+  "publications": "Publications",
+  "stories": "Stories",
+
+  "object": "Object",
+  "archive": "Archive",
+  "person": "Person",
+  "publication": "Publication",
+  "story": "Story"
+}

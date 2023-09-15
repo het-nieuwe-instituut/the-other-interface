@@ -1,7 +1,8 @@
 import { Box, Text, BoxProps } from '@chakra-ui/react'
 
-import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { CloudCategory } from '@/features/shared/utils/categories'
+import { toSingularCategory } from '@/features/shared/utils/toSingularCategory'
 
 type Props = {
   categoryType: CloudCategory
@@ -10,7 +11,7 @@ type Props = {
 }
 
 export const RecordText: React.FC<Props> = ({ title, categoryType, css }) => {
-  const { t } = useTypeSafeTranslation('landingpage')
+  const { t } = useLooseTypeSafeTranslation('category')
 
   return (
     <Box w="100%" color="blueAlpha.100" css={css}>
@@ -30,7 +31,7 @@ export const RecordText: React.FC<Props> = ({ title, categoryType, css }) => {
         lineHeight={'0.9vw'}
         mt={'4px'}
       >
-        {t(categoryType)}
+        {t(toSingularCategory(categoryType))}
       </Text>
     </Box>
   )
