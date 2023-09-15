@@ -4,7 +4,7 @@
   "localeDetection": false,
   "pages": {
     "*": ["common", "navigation"],
-    "/": ["homepage"],
+    "/": ["homepage", "category"],
     "/landingpage": ["category"],
     "/detail/[category]/[id]": ["category"]
   }

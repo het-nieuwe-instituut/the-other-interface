@@ -20,6 +20,7 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
 
   return (
     <GridItem
+      border={'1px solid pink'}
       color={'white'}
       gridRow={gridRow}
       gridColumn={gridColumn}
@@ -34,12 +35,13 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
-        gap="8px"
+        gap="12px"
+        border={'1px solid red'}
       >
         <ResponsiveImage
           src={thumbnail}
           alt={title}
-          maxHeight={!thumbnail ? '100%' : 'calc(100% - 2.5vw - 16px)'} // where 2.6vw are a texts' line heights, 16px are gaps
+          maxHeight={!thumbnail ? '100%' : 'calc(100% - 2.5vw - 20px)'} // where 2.6vw are a texts' line heights, 16px are gaps
         />
 
         <Box w="100%" color="blueAlpha.100" position={!thumbnail ? 'absolute' : 'relative'}>

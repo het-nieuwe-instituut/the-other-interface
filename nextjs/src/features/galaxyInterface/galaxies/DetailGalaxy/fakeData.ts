@@ -1,7 +1,7 @@
 export const fakeDetailedRecord = {
   id: 1,
   title: 'Only Surviving Model Only Surviving Model',
-  thumbnail: 'https://picsum.photos/300/200',
+  thumbnail: 'https://picsum.photos/350/200',
 }
 
 export const fakeStories = [
