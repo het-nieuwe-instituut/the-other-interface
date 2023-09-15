@@ -156,6 +156,9 @@ export class ArchivesService {
   private readonly ZoomLevel2Endpoint =
     'https://api.collectiedata.hetnieuweinstituut.nl/queries/zoom-2/archives-landingPage/run'
 
+  private readonly ZoomLevel2CountEndpoint =
+    'https://api.collectiedata.hetnieuweinstituut.nl/queries/zoom-2/archives-landingPage-count/run'
+
   // TODO: change to convention when Triply adds this to normal space
   private readonly archivesDescriptionLevelEndpoint =
     'https://api.collectiedata.hetnieuweinstituut.nl/queries/Joran/zoom5-archives-type-only/run?'
@@ -217,8 +220,17 @@ export class ArchivesService {
       { page, pageSize }
     )
 
+    const countResult = await this.triplyService.queryTriplyData<{ total?: string }>(
+      this.ZoomLevel2CountEndpoint,
+      { total: true },
+      undefined
+    )
+
+    const total = countResult?.data.pop()?.total ?? '0'
+
     return {
       page,
+      total,
       nodes: result.data.map(res => {
         return {
           thumbnail: res.thumbnail,

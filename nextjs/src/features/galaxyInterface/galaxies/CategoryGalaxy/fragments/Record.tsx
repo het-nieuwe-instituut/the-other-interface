@@ -3,12 +3,12 @@ import { Position } from '@/features/shared/types/position'
 import { GridItem, Flex } from '@chakra-ui/react'
 import { CloudCategory } from '@/features/shared/utils/categories'
 
-import { Record as TRecord } from './types'
 import { RecordText } from './RecordText'
 import { useRouter } from 'next/navigation'
+import { ZoomLevel2Type } from 'src/generated/graphql'
 
 type Props = {
-  record: TRecord & {
+  record: ZoomLevel2Type & {
     position: Position
     category: CloudCategory
   }
@@ -39,13 +39,13 @@ export const Record: React.FC<Props> = ({ record }) => {
         transition="all .4s ease-in-out"
       >
         <ResponsiveImage
-          src={thumbnail}
-          alt={title}
+          src={thumbnail ?? ''}
+          alt={title ?? ''}
           maxHeight="calc(100% - 2.5vw - 12px)" // where 2.6vw are a texts' line heights, 12px are gaps
         />
 
         <RecordText
-          title={title}
+          title={title ?? ''}
           categoryType={category}
           css={{
             position: !thumbnail ? 'absolute' : 'relative',

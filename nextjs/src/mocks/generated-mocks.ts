@@ -1645,6 +1645,7 @@ export const aZoomLevel2ParentType = (overrides?: Partial<ZoomLevel2ParentType>,
     return {
         nodes: overrides && overrides.hasOwnProperty('nodes') ? overrides.nodes! : [relationshipsToOmit.includes('ZoomLevel2Type') ? {} as ZoomLevel2Type : aZoomLevel2Type({}, relationshipsToOmit)],
         page: overrides && overrides.hasOwnProperty('page') ? overrides.page! : 8062,
+        total: overrides && overrides.hasOwnProperty('total') ? overrides.total! : 'voluptate',
     };
 };
 

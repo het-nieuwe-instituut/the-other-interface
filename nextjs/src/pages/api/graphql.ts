@@ -19,9 +19,9 @@ import {
   archivesZoomLevel2Data,
 } from '../../mocks/mockData/zoomLevel2Data'
 import { zoomLevel3Data } from '../../mocks/mockData/zoomLevel3Data'
-import { zoomLevel4Data } from '../../mocks/mockData/zoomLevel4Data'
 import { zoomLevel5Data } from '../../mocks/mockData/zoomLevel5Data'
 import { themesData } from '../../mocks/mockData/themesData'
+import { EntityNames } from 'src/generated/graphql'
 
 const schema = loadSchemaSync('./graphql.schema.json', {
   loaders: [new JsonFileLoader()],
@@ -43,8 +43,16 @@ const customResolvers = {
     },
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    zoomLevel2(params: { entityName: string; page: number; pageSize: number }) {
-      const { entityName } = params
+    zoomLevel2(
+      root: unknown,
+      args: {
+        entityName: EntityNames // Add or remove as required
+        page: number
+        pageSize: number
+        total: string
+      }
+    ) {
+      const { entityName } = args
       switch (entityName) {
         case 'Publications':
           return publicationZoomLevel2Data
@@ -55,7 +63,10 @@ const customResolvers = {
         case 'Archives':
           return archivesZoomLevel2Data
         default:
-          return []
+          return {
+            data: [],
+            total: '0',
+          }
       }
     },
 

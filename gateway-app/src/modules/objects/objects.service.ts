@@ -114,7 +114,6 @@ const objectsDetailZoomLevel5DataKeys: KeysToVerify<ObjectsDetailZoomLevel5Data>
 @Injectable()
 export class ObjectsService {
   protected entityType = 'triply'
-  private readonly zoomLevel2Endpoint = 'zoom-2-objects/run'
 
   private readonly ZoomLevel3Mapping = [
     {
@@ -157,10 +156,10 @@ export class ObjectsService {
   private readonly ZoomLevel2Endpoint =
     'https://api.collectiedata.hetnieuweinstituut.nl/queries/zoom-2/objects-landingPage/run'
 
-  private readonly ZoomLevel5Endpoint = 'zoom-5-objects/run'
+  private readonly ZoomLevel2CountEndpoint =
+    'https://api.collectiedata.hetnieuweinstituut.nl/queries/zoom-2/objects-landingPage-count/run'
 
-  private readonly ZoomLevel4CountEndpoint =
-    'https://api.collectiedata.hetnieuweinstituut.nl/queries/Joran/zoom4-objects-count/run?'
+  private readonly ZoomLevel5Endpoint = 'zoom-5-objects/run'
 
   public constructor(private triplyService: TriplyService) {}
 
@@ -187,10 +186,18 @@ export class ObjectsService {
       { page, pageSize }
     )
 
+    const countResult = await this.triplyService.queryTriplyData<{ total?: string }>(
+      this.ZoomLevel2CountEndpoint,
+      { total: true },
+      undefined
+    )
+
+    const total = countResult?.data.pop()?.total ?? '0'
+
     return {
       page,
+      total,
       nodes: result.data.map(res => {
-        console.log({ res })
         return {
           thumbnail: res.thumbnail,
           title: res.title,

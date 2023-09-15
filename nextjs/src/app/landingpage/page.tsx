@@ -4,7 +4,6 @@ import { CATEGORIES_TO_ENTITY_MAPPER, CloudCategory } from '@/features/shared/ut
 import initApiServerService from '@/features/shared/utils/initApiServerService'
 import { draftMode } from 'next/headers'
 import { PublicationState } from '@/features/shared/types/enums'
-import { EntityNames } from 'src/generated/graphql'
 
 export default async function Page({ searchParams }: { searchParams: { category: string } }) {
   const { category } = searchParams
@@ -23,6 +22,5 @@ export default async function Page({ searchParams }: { searchParams: { category:
       pageSize: 12,
     }),
   ])
-  console.log({ zoom2 })
-  return <LandingpageContainer landingpage={landingpage} category={category as CloudCategory} />
+  return <LandingpageContainer landingpage={landingpage} category={category as CloudCategory} zoom2={zoom2}/>
 }

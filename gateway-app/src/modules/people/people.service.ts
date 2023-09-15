@@ -23,13 +23,6 @@ export enum PeopleZoomLevel4Filters {
   DeathDate = 'DeathDate',
 }
 
-interface PeopleFilterData {
-  filter: string
-}
-const peopleFilterDataKeys: KeysToVerify<PeopleFilterData> = {
-  filter: true,
-}
-
 export interface PeopleData {
   name: string | null
   birthDate: string | null
@@ -147,27 +140,12 @@ export class PeopleService {
 
   private readonly ZoomLevel2Endpoint =
     'https://api.collectiedata.hetnieuweinstituut.nl/queries/zoom-2/people-landingPage/run'
-  private readonly ZoomLevel4CountEndpoint =
-    'https://api.collectiedata.hetnieuweinstituut.nl/queries/Joran/zoom4-people-count/run'
+  private readonly ZoomLevel2CountEndpoint =
+    'https://api.collectiedata.hetnieuweinstituut.nl/queries/zoom-2/people-landingPage-count/run'
 
   private readonly ZoomLevel5Endpoint = 'zoom-5-people/run'
 
   public constructor(private triplyService: TriplyService) {}
-
-  public async getZoomLevel2DataOld() {
-    const result = await this.triplyService.queryTriplyData<PeopleFilterData>(
-      this.ZoomLevel2Endpoint,
-      peopleFilterDataKeys
-    )
-
-    return result.data
-      .map(r => {
-        const filterMapping = this.ZoomLevel3Mapping.find(m => m.name === r.filter)
-        if (!filterMapping) return
-        return { filter: filterMapping.name, id: filterMapping.id }
-      })
-      .filter(f => !!f?.id)
-  }
 
   public async getZoomLevel3Data(id: PeopleZoomLevel3Ids, page = 1, pageSize = 16) {
     const mapping = this.ZoomLevel3Mapping.find(m => m.id === id)
@@ -192,8 +170,17 @@ export class PeopleService {
       { page, pageSize }
     )
 
+    const countResult = await this.triplyService.queryTriplyData<{ total?: string }>(
+      this.ZoomLevel2CountEndpoint,
+      { total: true },
+      undefined
+    )
+
+    const total = countResult?.data.pop()?.total ?? '0'
+
     return {
       page,
+      total,
       nodes: result.data.map(res => {
         return {
           thumbnail: res.thumbnail,

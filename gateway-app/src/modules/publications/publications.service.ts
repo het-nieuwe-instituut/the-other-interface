@@ -306,6 +306,9 @@ export class PublicationsService {
   private readonly ZoomLevel2Endpoint =
     'https://api.collectiedata.hetnieuweinstituut.nl/queries/zoom-2/books-landingPage/run'
 
+  private readonly ZoomLevel2CountEndpoint =
+    'https://api.collectiedata.hetnieuweinstituut.nl/queries/zoom-2/books-landingPage-count/run'
+
   private readonly ZoomLevel3Mapping = [
     {
       id: PublicationsZoomLevel3Ids.relatedPerson,
@@ -407,8 +410,17 @@ export class PublicationsService {
       { page, pageSize }
     )
 
+    const countResult = await this.triplyService.queryTriplyData<{ total?: string }>(
+      this.ZoomLevel2CountEndpoint,
+      { total: true },
+      undefined
+    )
+
+    const total = countResult?.data.pop()?.total ?? '0'
+
     return {
       page,
+      total,
       nodes: result.data.map(res => {
         return {
           thumbnail: res.thumbnail,
