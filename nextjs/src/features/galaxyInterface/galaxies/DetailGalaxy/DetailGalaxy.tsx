@@ -29,7 +29,7 @@ export const DetailGalaxy: React.FC = () => {
           <RelatedCategoryRecords key={cloudCategory} category={cloudCategory} />
         ))}
 
-        <RelatedStories />
+        <RelatedStories gridRow="1 / 3" />
       </Grid>
     </Box>
   )
