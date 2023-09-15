@@ -1,5 +1,5 @@
 import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
-import MainGalaxy from '@/features/galaxyInterface/galaxies/MainGalaxy/MainGalaxy'
+import { MainGalaxy } from '@/features/galaxyInterface/galaxies/MainGalaxy/MainGalaxy'
 import { EditorialLayer } from '@/features/shared/components/EditorialLayer/EditorialLayer'
 import { Box } from '../../../shared/configs/chakra'
 // import dynamic from 'next/dynamic'

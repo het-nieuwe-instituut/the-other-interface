@@ -9,6 +9,7 @@ import landingpage from './en/landingpage.json'
 import navigation from './en/navigation.json'
 import record from './en/record.json'
 import stories from './en/stories.json'
+import category from './en/category.json'
 
 export type TranslationKeys = {
   common: Paths<typeof common>
@@ -17,6 +18,7 @@ export type TranslationKeys = {
   landingpage: Paths<typeof landingpage>
   navigation: Paths<typeof navigation>
   record: Paths<typeof record>
+  category: Paths<typeof category>
 }
 
 export type navigationT = (

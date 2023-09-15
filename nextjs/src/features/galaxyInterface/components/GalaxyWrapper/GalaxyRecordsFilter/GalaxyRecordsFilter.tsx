@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const GalaxyRecordsFilter: React.FC<Props> = ({ category }) => {
-  const { t } = useTypeSafeTranslation('landingpage')
+  const { t } = useTypeSafeTranslation('category')
 
   return (
     <Grid

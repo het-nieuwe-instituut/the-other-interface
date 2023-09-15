@@ -1,9 +1,9 @@
 'use client'
 import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
 import { EditorialLayer } from '@/features/shared/components/EditorialLayer/EditorialLayer'
-import { Category } from '@/features/shared/utils/categories'
 import { StoryByIdQuery, LandingpageBySlugQuery } from 'src/generated/graphql'
 import { Box } from '@/features/shared/configs/chakra'
+import { DetailGalaxy } from '@/features/galaxyInterface/galaxies/DetailGalaxy/DetailGalaxy'
 
 export interface DetailpageEditorialLayer {
   title?: string | null
@@ -17,17 +17,14 @@ export interface DetailpageEditorialLayer {
 }
 
 interface Props {
-  category: Category
-  id: string
   editorialData: DetailpageEditorialLayer
 }
 
-export const DetailpageContainer: React.FC<Props> = ({ id, category, editorialData }) => {
+export const DetailpageContainer: React.FC<Props> = ({ editorialData }) => {
   return (
     <Box backgroundColor="graph">
       <GalaxyInterface>
-        <Box color={'white'}>{category}</Box>
-        <Box color={'white'}>{id}</Box>
+        <DetailGalaxy />
       </GalaxyInterface>
 
       {editorialData && (
