@@ -13,6 +13,7 @@ export const FilterDropdown: React.FC<Props> = ({ title, selectedOption }) => {
       borderRadius={'5px'}
       padding={'4px 8px'}
       color={'blueAlpha.100'}
+      width={'fit-content'}
     >
       <Text textStyle="socialLarge.sm">{title}</Text>
       <Text textStyle="socialLarge.lg">{selectedOption}</Text>

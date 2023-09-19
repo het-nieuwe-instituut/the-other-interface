@@ -4,7 +4,7 @@ import { CustomError } from '../util/customError'
 import { PublicationsZoomLevel5Types } from './publications.service'
 
 @InputType()
-export class PublicationsZoomLevel4FiltersArgs {
+export class PublicationsZoomLevel2FiltersArgs {
   @Field(() => String, { nullable: true })
   public Author: string | null
 

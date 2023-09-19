@@ -1,9 +1,9 @@
 import { useMemo } from 'react'
 
-import { Record } from '../types'
 import { Position } from '@/features/shared/types/position'
 import { CloudCategory } from '@/features/shared/utils/categories'
 import { useSearchParams } from 'next/navigation'
+import { ZoomLevel2Type } from 'src/generated/graphql'
 
 // For readability advantage, we are using the object representation.
 type PositioningTemplate = {
@@ -49,7 +49,7 @@ const positioningTemplate: PositioningTemplate = {
   },
 }
 
-export const usePresenter = (records: Record[]) => {
+export const usePresenter = (records: ZoomLevel2Type[]) => {
   const searchParams = useSearchParams()
   const category = searchParams?.get('category')
 

@@ -10,5 +10,6 @@
   "archive": "Archief",
   "person": "Persoon",
   "publication": "Publicatie",
-  "story": "Story"
+  "story": "Story",
+  "resultsFor": "{{total}} resultaten voor"
 }

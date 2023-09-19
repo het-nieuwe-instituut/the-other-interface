@@ -1,39 +1,58 @@
-const publicationZoomLevel2Data = [
-  { filter: 'Soort publicatie', id: 'typeOfPublication' },
-  { filter: 'Geografisch trefwoord', id: 'geographicalKeyword' },
-  { filter: 'Auteur(s)', id: 'author' },
-  { filter: 'Gerelateerde persoon/instelling', id: 'relatedPerson' },
-  { filter: 'Onderwerp', id: 'subject' },
-]
+const publicationZoomLevel2Data = {
+  nodes: [
+    { title: 'Publication 1', id: '1', thumbnail: 'https://picsum.photos/500' },
+    { title: 'Publication 2', id: '2', thumbnail: 'https://picsum.photos/500' },
+    { title: 'Publication 3', id: '3', thumbnail: null },
+    { title: 'Publication 4', id: '4', thumbnail: 'https://picsum.photos/500' },
+    { title: 'Publication 5', id: '5', thumbnail: 'https://picsum.photos/500' },
+    { title: 'Publication 6', id: '6', thumbnail: 'https://picsum.photos/500' },
+  ],
+  page: 1,
+  total: '255'
+};
 
-const objectZoomLevel2Data = [
-  { filter: 'Vervaardiger', id: 'creator' },
-  { filter: 'Datering', id: 'date' },
-  { filter: 'Onderwerp', id: 'subject' },
-  { filter: 'Technieken', id: 'technique' },
-  { filter: 'Objectnaam', id: 'objectName' },
-  { filter: 'Materialen', id: 'material' },
-  { filter: 'Persoon/instelling', id: 'personInstitution' },
-]
+const objectZoomLevel2Data = {
+  nodes: [
+    { title: 'Object 1', id: '1', thumbnail: 'https://picsum.photos/500' },
+    { title: 'Object 2', id: '2', thumbnail: 'https://picsum.photos/500' },
+    { title: 'Object 3', id: '3', thumbnail: null },
+    { title: 'Object 4', id: '4', thumbnail: 'https://picsum.photos/500' },
+    { title: 'Object 5', id: '5', thumbnail: 'https://picsum.photos/500' },
+    { title: 'Object 6', id: '6', thumbnail: 'https://picsum.photos/500' },
+  ],
+  page: 1,
+  total: '255'
+};
 
-const peopleZoomLevel2Data = [
-  { filter: 'Naam soort', id: 'nameType' },
-  { filter: 'Geboortedatum', id: 'birthDate' },
-  { filter: 'Overlijdensdatum', id: 'deathDate' },
-  { filter: 'Periode', id: 'period' },
-  { filter: 'Beroep/Werkveld', id: 'profession' },
-  { filter: 'Plaats', id: 'place' },
-]
+const peopleZoomLevel2Data = {
+  nodes: [
+    { title: 'Person 1', id: '1', thumbnail: 'https://picsum.photos/500' },
+    { title: 'Person 2', id: '2', thumbnail: 'https://picsum.photos/500' },
+    { title: 'Person 3', id: '3', thumbnail: null },
+    { title: 'Person 4', id: '4', thumbnail: 'https://picsum.photos/500' },
+    { title: 'Person 5', id: '5', thumbnail: 'https://picsum.photos/500' },
+    { title: 'Person 6', id: '6', thumbnail: 'https://picsum.photos/500' },
+  ],
+  page: 1,
+  total: '255'
+};
 
-const archivesZoomLevel2Data = [
-  { filter: 'Datering', id: 'date' },
-  { filter: 'Beschrijvingsniveau', id: 'descriptionLevel' },
-  { filter: 'Gerelateerde namen', id: 'relatedNames' },
-]
+const archivesZoomLevel2Data = {
+  nodes: [
+    { title: 'Archives 1', id: '1', thumbnail: 'https://picsum.photos/500' },
+    { title: 'Archives 2', id: '2', thumbnail: 'https://picsum.photos/500' },
+    { title: 'Archives 3', id: '3', thumbnail: null },
+    { title: 'Archives 4', id: '4', thumbnail: 'https://picsum.photos/500' },
+    { title: 'Archives 5', id: '5', thumbnail: 'https://picsum.photos/500' },
+    { title: 'Archives 6', id: '6', thumbnail: 'https://picsum.photos/500' },
+  ],
+  page: 1,
+  total: '255'
+};
 
 export {
   publicationZoomLevel2Data,
   objectZoomLevel2Data,
   peopleZoomLevel2Data,
   archivesZoomLevel2Data,
-}
+};

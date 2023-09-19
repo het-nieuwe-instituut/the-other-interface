@@ -6,11 +6,11 @@ import { toSingularCategory } from '@/features/shared/utils/toSingularCategory'
 
 type Props = {
   categoryType: CloudCategory
-  title: string
+  title?: string | null
   css?: BoxProps['css']
 }
 
-export const RecordText: React.FC<Props> = ({ title, categoryType, css }) => {
+export const RecordText: React.FC<Props> = ({ title = '', categoryType, css }) => {
   const { t } = useLooseTypeSafeTranslation('category')
 
   return (

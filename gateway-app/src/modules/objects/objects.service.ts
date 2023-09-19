@@ -3,12 +3,7 @@ import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { TriplyUtils, ZoomLevel3ReturnData, zoomLevel3ReturnDataKeys } from '../triply/triply.utils'
 import { CustomError } from '../util/customError'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
-import {
-  ObjectMakerType,
-  ObjectMaterialType,
-  ObjectsZoomLevel4FiltersArgs,
-  ObjectTechniqueType,
-} from './objects.type'
+import { ObjectMakerType, ObjectMaterialType, ObjectTechniqueType } from './objects.type'
 
 export enum ObjectsZoomLevel3Ids {
   subject = 'subject',
@@ -30,26 +25,16 @@ export enum ObjectsZoomLevel4Filters {
   date = 'date',
 }
 
-interface ObjectFilterData {
-  filter: string
-}
-const objectFilterDataKeys: KeysToVerify<ObjectFilterData> = {
-  filter: true,
+interface ObjectsZoomLevel2Data {
+  thumbnail: string
+  title: string
+  id: string
 }
 
-interface ObjectsZoomLevel4Data {
-  record: string
-  title: string | null
-  firstImage: string | null
-  imageLabel: string | null
-  pidWorkURI: string | null
-}
-const objectsZoomLevel4DataKeys: KeysToVerify<ObjectsZoomLevel4Data> = {
-  record: true,
+const objectsZoomLevel2DataKeys: KeysToVerify<ObjectsZoomLevel2Data> = {
+  thumbnail: true,
   title: true,
-  firstImage: true,
-  imageLabel: true,
-  pidWorkURI: true,
+  id: true,
 }
 
 interface ObjectsDetailZoomLevel5Data {
@@ -129,7 +114,6 @@ const objectsDetailZoomLevel5DataKeys: KeysToVerify<ObjectsDetailZoomLevel5Data>
 @Injectable()
 export class ObjectsService {
   protected entityType = 'triply'
-  private readonly zoomLevel2Endpoint = 'zoom-2-objects/run'
 
   private readonly ZoomLevel3Mapping = [
     {
@@ -169,29 +153,15 @@ export class ObjectsService {
     },
   ]
 
-  private readonly ZoomLevel4Endpoint = 'zoom-4-objects-V2/run'
+  private readonly ZoomLevel2Endpoint =
+    'https://api.collectiedata.hetnieuweinstituut.nl/queries/zoom-2/objects-landingPage/run'
+
+  private readonly ZoomLevel2CountEndpoint =
+    'https://api.collectiedata.hetnieuweinstituut.nl/queries/zoom-2/objects-landingPage-count/run'
 
   private readonly ZoomLevel5Endpoint = 'zoom-5-objects/run'
 
-  private readonly ZoomLevel4CountEndpoint =
-    'https://api.collectiedata.hetnieuweinstituut.nl/queries/Joran/zoom4-objects-count/run?'
-
   public constructor(private triplyService: TriplyService) {}
-
-  public async getZoomLevel2Data() {
-    const result = await this.triplyService.queryTriplyData<ObjectFilterData>(
-      this.zoomLevel2Endpoint,
-      objectFilterDataKeys
-    )
-
-    return result.data
-      .map(r => {
-        const filterMapping = this.ZoomLevel3Mapping.find(m => m.name === r.filter)
-        if (!filterMapping) return
-        return { filter: filterMapping.name, id: filterMapping.id }
-      })
-      .filter(f => !!f?.id)
-  }
 
   public async getZoomLevel3Data(id: ObjectsZoomLevel3Ids, page = 1, pageSize = 16) {
     const mapping = this.ZoomLevel3Mapping.find(m => m.id === id)
@@ -209,40 +179,29 @@ export class ObjectsService {
     return TriplyUtils.parseLevel3OutputData(result.data)
   }
 
-  public async getZoomLevel4Data(filters: ObjectsZoomLevel4FiltersArgs, page = 1, pageSize = 48) {
-    if (Object.keys(filters).length === 0) {
-      return []
-    }
-
-    const searchParams = TriplyUtils.getQueryParamsFromObject(filters)
-
-    const result = await this.triplyService.queryTriplyData<ObjectsZoomLevel4Data>(
-      this.ZoomLevel4Endpoint,
-      objectsZoomLevel4DataKeys,
-      { page, pageSize },
-      searchParams
+  public async getZoomLevel2Data(page = 1, pageSize = 48) {
+    const result = await this.triplyService.queryTriplyData<ObjectsZoomLevel2Data>(
+      this.ZoomLevel2Endpoint,
+      objectsZoomLevel2DataKeys,
+      { page, pageSize }
     )
 
-    const countResult = await this.triplyService.queryTriplyData<{ count?: string }>(
-      this.ZoomLevel4CountEndpoint,
-      { count: true },
-      undefined,
-      searchParams
+    const countResult = await this.triplyService.queryTriplyData<{ total?: string }>(
+      this.ZoomLevel2CountEndpoint,
+      { total: true },
+      undefined
     )
-    const total = parseInt(countResult.data.pop()?.count || '0', 10)
+
+    const total = countResult?.data.pop()?.total ?? '0'
 
     return {
-      total,
-      appliedFilters: JSON.stringify(filters),
       page,
-      hasMore: page * pageSize < total,
+      total,
       nodes: result.data.map(res => {
         return {
-          record: res.record,
+          thumbnail: res.thumbnail,
           title: res.title,
-          firstImage: res.firstImage,
-          imageLabel: res.imageLabel,
-          pidWorkURI: res.pidWorkURI,
+          id: res.id,
         }
       }),
     }
