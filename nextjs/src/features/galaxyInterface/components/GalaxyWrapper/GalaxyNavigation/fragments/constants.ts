@@ -17,7 +17,6 @@ export const galaxyZooms = {
     zoom: 3,
     title: 'detail',
     alignItems: 'flex-end',
-    link: (category: CloudCategory, id: string) => `/detail/${category}/${id}`,
   },
 } as const
 

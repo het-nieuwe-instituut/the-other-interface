@@ -7,7 +7,7 @@ import { galaxyZooms } from './fragments/constants'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 
 export const GalaxyNavigation: React.FC = () => {
-  const { currentZoomNumber } = usePresenter()
+  const { currentZoomNumber, previousZoomLinks } = usePresenter()
   const { t } = useTypeSafeTranslation('navigation')
 
   return (
@@ -22,8 +22,12 @@ export const GalaxyNavigation: React.FC = () => {
       <Text textStyle="socialLarge.sm">{t('zoom')}</Text>
 
       <Grid templateColumns="repeat(3, 1fr)" mt={'4px'}>
-        {Object.values(galaxyZooms).map(zoom => (
-          <NavigationLink zoomData={zoom} currentZoomNumber={currentZoomNumber} />
+        {Object.values(galaxyZooms).map(navigationItem => (
+          <NavigationLink
+            zoomData={navigationItem}
+            currentZoomNumber={currentZoomNumber}
+            link={previousZoomLinks[navigationItem.zoom]}
+          />
         ))}
       </Grid>
     </Box>
