@@ -4,13 +4,13 @@ import React from 'react'
 import { useIsImagePortrait } from '../../hooks/useIsImagePortrait'
 
 type ResponsiveImageProps = {
-  src: string | null
+  src?: string | null
   alt?: string
   maxHeight?: string
 }
 
 export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
-  src,
+  src = '',
   alt,
   maxHeight = '100%',
 }) => {

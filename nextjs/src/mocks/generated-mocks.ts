@@ -1,4 +1,4 @@
-import { ArchivesFondsCreatorType, ArchivesFondsZoomLevel5DetailType, ArchivesOtherZoomLevel5DetailType, ArchivesZoomLevel4FiltersArgs, Author, AuthorEntity, AuthorEntityResponse, AuthorEntityResponseCollection, AuthorFiltersInput, BooleanFilterInput, ComponentCoreButton, ComponentCoreButtonFiltersInput, ComponentCoreCarouselItem, ComponentCoreFeaturedFields, ComponentCoreGridFeaturedFields, ComponentCoreImageCarouselItem, ComponentCoreModuleLayouts, ComponentCoreModuleLayoutsFiltersInput, ComponentCorePublicationDate, ComponentCorePublicationDateFiltersInput, ComponentCoreTableBody, ComponentCoreTableBodyFiltersInput, ComponentCoreTableBodyItem, ComponentCoreTableBodyItemFiltersInput, ComponentCoreTableHead, ComponentCoreTableHeadFiltersInput, ComponentCoreTableHeadItem, ComponentCoreTableHeadItemFiltersInput, ComponentCoreTimeframe, ComponentCoreTimeframeFiltersInput, ComponentModulesButtonsModule, ComponentModulesButtonsModuleFiltersInput, ComponentModulesCarousel, ComponentModulesGridModule, ComponentModulesImage, ComponentModulesImageCarousel, ComponentModulesPullquote, ComponentModulesSubtitle, ComponentModulesTableModule, ComponentModulesTextModule, ComponentModulesTitleModule, DateFilterInput, DateTimeFilterInput, Error, Homepage, HomepageEntity, HomepageEntityResponse, HomepageRelationResponseCollection, IdFilterInput, Landingpage, LandingpageEntity, LandingpageEntityResponse, LandingpageEntityResponseCollection, LandingpageFiltersInput, LandingpageRelationResponseCollection, Location, LocationEntity, LocationEntityResponse, LocationFiltersInput, LocationRelationResponseCollection, LongFilterInput, Menupage, MenupageEntity, MenupageEntityResponse, MenupageEntityResponseCollection, MenupageFiltersInput, MenupageRelationResponseCollection, ObjectMakerType, ObjectMaterialType, ObjectTechniqueType, ObjectsZoomLevel4FiltersArgs, ObjectsZoomLevel5DetailType, Pagination, PaginationArg, PeopleAssociationType, PeopleZoomLevel4FiltersArgs, PoepleZoomLevel5DetailType, PublicationAuthorType, PublicationsArticleZoomLevel5DetailType, PublicationsAudioVisualZoomLevel5DetailType, PublicationsBookZoomLevel5DetailType, PublicationsSerialZoomLevel5DetailType, PublicationsZoomLevel4FiltersArgs, Query, RelatedRecordType, ResponseCollectionMeta, Story, StoryEntity, StoryEntityResponse, StoryEntityResponseCollection, StoryFiltersInput, StoryRelationResponseCollection, StoryWithoutRelations, StoryWithoutRelationsEntity, StoryWithoutRelationsEntityResponse, StoryWithoutRelationsEntityResponseCollection, StringFilterInput, Table, TableEntity, TableEntityResponse, TableEntityResponseCollection, TableFiltersInput, Theme, ThemeEntity, ThemeEntityResponse, ThemeFiltersInput, ThemeRelationResponseCollection, TriplyRecord, TriplyRecordEntity, TriplyRecordEntityResponse, TriplyRecordFiltersInput, TriplyRecordRelationResponseCollection, UploadFile, UploadFileEntity, UploadFileEntityResponse, UploadFileRelationResponseCollection, UsersPermissionsPermission, UsersPermissionsPermissionEntity, UsersPermissionsPermissionFiltersInput, UsersPermissionsPermissionRelationResponseCollection, UsersPermissionsRole, UsersPermissionsRoleEntity, UsersPermissionsRoleEntityResponse, UsersPermissionsRoleFiltersInput, UsersPermissionsUser, UsersPermissionsUserEntity, UsersPermissionsUserEntityResponse, UsersPermissionsUserEntityResponseCollection, UsersPermissionsUserFiltersInput, UsersPermissionsUserRelationResponseCollection, ZoomLevel1Type, ZoomLevel2Type, ZoomLevel3Type, ZoomLevel4ParentType, ZoomLevel4Type, ZoomLevel5RelatedRecordType, ZoomLevel5RelationsType, ArchivesZoomLevel5Types, EntityNames, EnumComponentcorecarouselitemType, EnumComponentcoremodulelayoutsSpacingbottom, EnumComponentcoremodulelayoutsSpacingtop, EnumComponentcorepublicationdateDisplaytype, EnumComponentmodulesbuttonsmoduleButtonstyle, EnumComponentmodulescarouselType, EnumComponentmodulesgridmoduleFieldtypes, EnumTriplyrecordType, PublicationsZoomLevel5Types, TriplyExternalSourceEnum } from '../generated/graphql';
+import { ArchivesFondsCreatorType, ArchivesFondsZoomLevel5DetailType, ArchivesOtherZoomLevel5DetailType, Author, AuthorEntity, AuthorEntityResponse, AuthorEntityResponseCollection, AuthorFiltersInput, BooleanFilterInput, ComponentCoreButton, ComponentCoreButtonFiltersInput, ComponentCoreCarouselItem, ComponentCoreFeaturedFields, ComponentCoreGridFeaturedFields, ComponentCoreImageCarouselItem, ComponentCoreModuleLayouts, ComponentCoreModuleLayoutsFiltersInput, ComponentCorePublicationDate, ComponentCorePublicationDateFiltersInput, ComponentCoreTableBody, ComponentCoreTableBodyFiltersInput, ComponentCoreTableBodyItem, ComponentCoreTableBodyItemFiltersInput, ComponentCoreTableHead, ComponentCoreTableHeadFiltersInput, ComponentCoreTableHeadItem, ComponentCoreTableHeadItemFiltersInput, ComponentCoreTimeframe, ComponentCoreTimeframeFiltersInput, ComponentModulesButtonsModule, ComponentModulesButtonsModuleFiltersInput, ComponentModulesCarousel, ComponentModulesGridModule, ComponentModulesImage, ComponentModulesImageCarousel, ComponentModulesPullquote, ComponentModulesSubtitle, ComponentModulesTableModule, ComponentModulesTextModule, ComponentModulesTitleModule, DateFilterInput, DateTimeFilterInput, Error, Homepage, HomepageEntity, HomepageEntityResponse, HomepageRelationResponseCollection, IdFilterInput, Landingpage, LandingpageEntity, LandingpageEntityResponse, LandingpageEntityResponseCollection, LandingpageFiltersInput, LandingpageRelationResponseCollection, Location, LocationEntity, LocationEntityResponse, LocationFiltersInput, LocationRelationResponseCollection, LongFilterInput, Menupage, MenupageEntity, MenupageEntityResponse, MenupageEntityResponseCollection, MenupageFiltersInput, MenupageRelationResponseCollection, ObjectMakerType, ObjectMaterialType, ObjectTechniqueType, ObjectsZoomLevel5DetailType, Pagination, PaginationArg, PeopleAssociationType, PoepleZoomLevel5DetailType, PublicationAuthorType, PublicationsArticleZoomLevel5DetailType, PublicationsAudioVisualZoomLevel5DetailType, PublicationsBookZoomLevel5DetailType, PublicationsSerialZoomLevel5DetailType, Query, RelatedRecordType, ResponseCollectionMeta, Story, StoryEntity, StoryEntityResponse, StoryEntityResponseCollection, StoryFiltersInput, StoryRelationResponseCollection, StoryWithoutRelations, StoryWithoutRelationsEntity, StoryWithoutRelationsEntityResponse, StoryWithoutRelationsEntityResponseCollection, StringFilterInput, Table, TableEntity, TableEntityResponse, TableEntityResponseCollection, TableFiltersInput, Theme, ThemeEntity, ThemeEntityResponse, ThemeFiltersInput, ThemeRelationResponseCollection, TriplyRecord, TriplyRecordEntity, TriplyRecordEntityResponse, TriplyRecordFiltersInput, TriplyRecordRelationResponseCollection, UploadFile, UploadFileEntity, UploadFileEntityResponse, UploadFileRelationResponseCollection, UsersPermissionsPermission, UsersPermissionsPermissionEntity, UsersPermissionsPermissionFiltersInput, UsersPermissionsPermissionRelationResponseCollection, UsersPermissionsRole, UsersPermissionsRoleEntity, UsersPermissionsRoleEntityResponse, UsersPermissionsRoleFiltersInput, UsersPermissionsUser, UsersPermissionsUserEntity, UsersPermissionsUserEntityResponse, UsersPermissionsUserEntityResponseCollection, UsersPermissionsUserFiltersInput, UsersPermissionsUserRelationResponseCollection, ZoomLevel1Type, ZoomLevel2ParentType, ZoomLevel2Type, ZoomLevel3Type, ZoomLevel5RelatedRecordType, ZoomLevel5RelationsType, ArchivesZoomLevel5Types, EntityNames, EnumComponentcorecarouselitemType, EnumComponentcoremodulelayoutsSpacingbottom, EnumComponentcoremodulelayoutsSpacingtop, EnumComponentcorepublicationdateDisplaytype, EnumComponentmodulesbuttonsmoduleButtonstyle, EnumComponentmodulescarouselType, EnumComponentmodulesgridmoduleFieldtypes, EnumTriplyrecordType, PublicationsZoomLevel5Types, TriplyExternalSourceEnum } from '../generated/graphql';
 
 export const anArchivesFondsCreatorType = (overrides?: Partial<ArchivesFondsCreatorType>, _relationshipsToOmit: Array<string> = []): ArchivesFondsCreatorType => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ArchivesFondsCreatorType']);
@@ -61,15 +61,6 @@ export const anArchivesOtherZoomLevel5DetailType = (overrides?: Partial<Archives
         startDate: overrides && overrides.hasOwnProperty('startDate') ? overrides.startDate! : 'deserunt',
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'praesentium',
         type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : ArchivesZoomLevel5Types.Fonds,
-    };
-};
-
-export const anArchivesZoomLevel4FiltersArgs = (overrides?: Partial<ArchivesZoomLevel4FiltersArgs>, _relationshipsToOmit: Array<string> = []): ArchivesZoomLevel4FiltersArgs => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'ArchivesZoomLevel4FiltersArgs']);
-    return {
-        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : 'architecto',
-        descriptionLevel: overrides && overrides.hasOwnProperty('descriptionLevel') ? overrides.descriptionLevel! : 'ratione',
-        relatedName: overrides && overrides.hasOwnProperty('relatedName') ? overrides.relatedName! : 'ea',
     };
 };
 
@@ -832,19 +823,6 @@ export const anObjectTechniqueType = (overrides?: Partial<ObjectTechniqueType>, 
     };
 };
 
-export const anObjectsZoomLevel4FiltersArgs = (overrides?: Partial<ObjectsZoomLevel4FiltersArgs>, _relationshipsToOmit: Array<string> = []): ObjectsZoomLevel4FiltersArgs => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'ObjectsZoomLevel4FiltersArgs']);
-    return {
-        Maker: overrides && overrides.hasOwnProperty('Maker') ? overrides.Maker! : 'id',
-        Material: overrides && overrides.hasOwnProperty('Material') ? overrides.Material! : 'deleniti',
-        Objectname: overrides && overrides.hasOwnProperty('Objectname') ? overrides.Objectname! : 'omnis',
-        PerInst: overrides && overrides.hasOwnProperty('PerInst') ? overrides.PerInst! : 'omnis',
-        Subject: overrides && overrides.hasOwnProperty('Subject') ? overrides.Subject! : 'voluptatem',
-        Technique: overrides && overrides.hasOwnProperty('Technique') ? overrides.Technique! : 'doloremque',
-        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : 'fugit',
-    };
-};
-
 export const anObjectsZoomLevel5DetailType = (overrides?: Partial<ObjectsZoomLevel5DetailType>, _relationshipsToOmit: Array<string> = []): ObjectsZoomLevel5DetailType => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ObjectsZoomLevel5DetailType']);
     return {
@@ -907,18 +885,6 @@ export const aPeopleAssociationType = (overrides?: Partial<PeopleAssociationType
     return {
         association: overrides && overrides.hasOwnProperty('association') ? overrides.association! : 'ut',
         associationLabel: overrides && overrides.hasOwnProperty('associationLabel') ? overrides.associationLabel! : 'minima',
-    };
-};
-
-export const aPeopleZoomLevel4FiltersArgs = (overrides?: Partial<PeopleZoomLevel4FiltersArgs>, _relationshipsToOmit: Array<string> = []): PeopleZoomLevel4FiltersArgs => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'PeopleZoomLevel4FiltersArgs']);
-    return {
-        BirthDate: overrides && overrides.hasOwnProperty('BirthDate') ? overrides.BirthDate! : 'reiciendis',
-        DeathDate: overrides && overrides.hasOwnProperty('DeathDate') ? overrides.DeathDate! : 'molestiae',
-        NameType: overrides && overrides.hasOwnProperty('NameType') ? overrides.NameType! : 'optio',
-        Period: overrides && overrides.hasOwnProperty('Period') ? overrides.Period! : 'porro',
-        Place: overrides && overrides.hasOwnProperty('Place') ? overrides.Place! : 'quam',
-        Profession: overrides && overrides.hasOwnProperty('Profession') ? overrides.Profession! : 'occaecati',
     };
 };
 
@@ -1102,17 +1068,6 @@ export const aPublicationsSerialZoomLevel5DetailType = (overrides?: Partial<Publ
     };
 };
 
-export const aPublicationsZoomLevel4FiltersArgs = (overrides?: Partial<PublicationsZoomLevel4FiltersArgs>, _relationshipsToOmit: Array<string> = []): PublicationsZoomLevel4FiltersArgs => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'PublicationsZoomLevel4FiltersArgs']);
-    return {
-        Author: overrides && overrides.hasOwnProperty('Author') ? overrides.Author! : 'repudiandae',
-        GeograficalKeyword: overrides && overrides.hasOwnProperty('GeograficalKeyword') ? overrides.GeograficalKeyword! : 'quaerat',
-        RelatedPerInst: overrides && overrides.hasOwnProperty('RelatedPerInst') ? overrides.RelatedPerInst! : 'qui',
-        Subject: overrides && overrides.hasOwnProperty('Subject') ? overrides.Subject! : 'quae',
-        TypeOfPublication: overrides && overrides.hasOwnProperty('TypeOfPublication') ? overrides.TypeOfPublication! : 'inventore',
-    };
-};
-
 export const aQuery = (overrides?: Partial<Query>, _relationshipsToOmit: Array<string> = []): Query => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'Query']);
     return {
@@ -1146,9 +1101,8 @@ export const aQuery = (overrides?: Partial<Query>, _relationshipsToOmit: Array<s
         usersPermissionsUser: overrides && overrides.hasOwnProperty('usersPermissionsUser') ? overrides.usersPermissionsUser! : relationshipsToOmit.includes('UsersPermissionsUserEntityResponse') ? {} as UsersPermissionsUserEntityResponse : aUsersPermissionsUserEntityResponse({}, relationshipsToOmit),
         usersPermissionsUsers: overrides && overrides.hasOwnProperty('usersPermissionsUsers') ? overrides.usersPermissionsUsers! : relationshipsToOmit.includes('UsersPermissionsUserEntityResponseCollection') ? {} as UsersPermissionsUserEntityResponseCollection : aUsersPermissionsUserEntityResponseCollection({}, relationshipsToOmit),
         zoomLevel1: overrides && overrides.hasOwnProperty('zoomLevel1') ? overrides.zoomLevel1! : [relationshipsToOmit.includes('ZoomLevel1Type') ? {} as ZoomLevel1Type : aZoomLevel1Type({}, relationshipsToOmit)],
-        zoomLevel2: overrides && overrides.hasOwnProperty('zoomLevel2') ? overrides.zoomLevel2! : [relationshipsToOmit.includes('ZoomLevel2Type') ? {} as ZoomLevel2Type : aZoomLevel2Type({}, relationshipsToOmit)],
+        zoomLevel2: overrides && overrides.hasOwnProperty('zoomLevel2') ? overrides.zoomLevel2! : relationshipsToOmit.includes('ZoomLevel2ParentType') ? {} as ZoomLevel2ParentType : aZoomLevel2ParentType({}, relationshipsToOmit),
         zoomLevel3: overrides && overrides.hasOwnProperty('zoomLevel3') ? overrides.zoomLevel3! : [relationshipsToOmit.includes('ZoomLevel3Type') ? {} as ZoomLevel3Type : aZoomLevel3Type({}, relationshipsToOmit)],
-        zoomLevel4: overrides && overrides.hasOwnProperty('zoomLevel4') ? overrides.zoomLevel4! : relationshipsToOmit.includes('ZoomLevel4ParentType') ? {} as ZoomLevel4ParentType : aZoomLevel4ParentType({}, relationshipsToOmit),
         zoomLevel5Archive: overrides && overrides.hasOwnProperty('zoomLevel5Archive') ? overrides.zoomLevel5Archive! : relationshipsToOmit.includes('ArchivesFondsZoomLevel5DetailType') ? {} as ArchivesFondsZoomLevel5DetailType : anArchivesFondsZoomLevel5DetailType({}, relationshipsToOmit),
         zoomLevel5ArchivesFonds: overrides && overrides.hasOwnProperty('zoomLevel5ArchivesFonds') ? overrides.zoomLevel5ArchivesFonds! : relationshipsToOmit.includes('ArchivesFondsZoomLevel5DetailType') ? {} as ArchivesFondsZoomLevel5DetailType : anArchivesFondsZoomLevel5DetailType({}, relationshipsToOmit),
         zoomLevel5ArchivesOther: overrides && overrides.hasOwnProperty('zoomLevel5ArchivesOther') ? overrides.zoomLevel5ArchivesOther! : relationshipsToOmit.includes('ArchivesOtherZoomLevel5DetailType') ? {} as ArchivesOtherZoomLevel5DetailType : anArchivesOtherZoomLevel5DetailType({}, relationshipsToOmit),
@@ -1686,11 +1640,21 @@ export const aZoomLevel1Type = (overrides?: Partial<ZoomLevel1Type>, _relationsh
     };
 };
 
+export const aZoomLevel2ParentType = (overrides?: Partial<ZoomLevel2ParentType>, _relationshipsToOmit: Array<string> = []): ZoomLevel2ParentType => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'ZoomLevel2ParentType']);
+    return {
+        nodes: overrides && overrides.hasOwnProperty('nodes') ? overrides.nodes! : [relationshipsToOmit.includes('ZoomLevel2Type') ? {} as ZoomLevel2Type : aZoomLevel2Type({}, relationshipsToOmit)],
+        page: overrides && overrides.hasOwnProperty('page') ? overrides.page! : 8062,
+        total: overrides && overrides.hasOwnProperty('total') ? overrides.total! : 'voluptate',
+    };
+};
+
 export const aZoomLevel2Type = (overrides?: Partial<ZoomLevel2Type>, _relationshipsToOmit: Array<string> = []): ZoomLevel2Type => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ZoomLevel2Type']);
     return {
-        filter: overrides && overrides.hasOwnProperty('filter') ? overrides.filter! : 'qui',
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'aut',
+        thumbnail: overrides && overrides.hasOwnProperty('thumbnail') ? overrides.thumbnail! : 'consequatur',
+        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'eaque',
     };
 };
 
@@ -1701,28 +1665,6 @@ export const aZoomLevel3Type = (overrides?: Partial<ZoomLevel3Type>, _relationsh
         name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'asperiores',
         total: overrides && overrides.hasOwnProperty('total') ? overrides.total! : 6476,
         uri: overrides && overrides.hasOwnProperty('uri') ? overrides.uri! : 'qui',
-    };
-};
-
-export const aZoomLevel4ParentType = (overrides?: Partial<ZoomLevel4ParentType>, _relationshipsToOmit: Array<string> = []): ZoomLevel4ParentType => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'ZoomLevel4ParentType']);
-    return {
-        appliedFilters: overrides && overrides.hasOwnProperty('appliedFilters') ? overrides.appliedFilters! : 'est',
-        hasMore: overrides && overrides.hasOwnProperty('hasMore') ? overrides.hasMore! : true,
-        nodes: overrides && overrides.hasOwnProperty('nodes') ? overrides.nodes! : [relationshipsToOmit.includes('ZoomLevel4Type') ? {} as ZoomLevel4Type : aZoomLevel4Type({}, relationshipsToOmit)],
-        page: overrides && overrides.hasOwnProperty('page') ? overrides.page! : 908,
-        total: overrides && overrides.hasOwnProperty('total') ? overrides.total! : 3138,
-    };
-};
-
-export const aZoomLevel4Type = (overrides?: Partial<ZoomLevel4Type>, _relationshipsToOmit: Array<string> = []): ZoomLevel4Type => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'ZoomLevel4Type']);
-    return {
-        firstImage: overrides && overrides.hasOwnProperty('firstImage') ? overrides.firstImage! : 'odio',
-        imageLabel: overrides && overrides.hasOwnProperty('imageLabel') ? overrides.imageLabel! : 'ipsa',
-        pidWorkURI: overrides && overrides.hasOwnProperty('pidWorkURI') ? overrides.pidWorkURI! : 'voluptatem',
-        record: overrides && overrides.hasOwnProperty('record') ? overrides.record! : 'eligendi',
-        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'aut',
     };
 };
 

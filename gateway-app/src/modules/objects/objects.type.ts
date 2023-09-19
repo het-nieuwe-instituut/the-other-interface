@@ -2,7 +2,7 @@ import { Field, InputType, ObjectType } from '@nestjs/graphql'
 import { PoepleZoomLevel5DetailType } from '../people/people.type'
 
 @InputType()
-export class ObjectsZoomLevel4FiltersArgs {
+export class ObjectsZoomLevel2FiltersArgs {
   @Field(() => String, { nullable: true })
   public Objectname: string | null
 
