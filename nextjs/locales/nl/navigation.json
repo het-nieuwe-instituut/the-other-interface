@@ -14,5 +14,10 @@
   "selectedFilter": "Geselecteerde filter",
   "theNewInstitute": "Het Nieuwe Instituut",
   "explore_collection": "Ontdek de Collectie",
-  "more_to_do": "Meer te doen"
+  "more_to_do": "Meer te doen",
+
+  "zoom": "Zoomen",
+  "collection": "Collectie",
+  "category": "Categorie",
+  "detail": "Detail"
 }

@@ -1,5 +1,4 @@
-import { CloudCategory } from '@/features/shared/utils/categories'
-import { useRouter, useParams, usePathname } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { useMemo } from 'react'
 
 export const usePresenter = () => {

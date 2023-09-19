@@ -4,9 +4,12 @@ import { Box, Grid, Text } from '@chakra-ui/react'
 import { usePresenter } from './usePresenter'
 import { NavigationLink } from './fragments/NavigationLink'
 import { galaxyZooms } from './fragments/constants'
+import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 
 export const GalaxyNavigation: React.FC = () => {
   const { currentZoomNumber } = usePresenter()
+  const { t } = useTypeSafeTranslation('navigation')
+
   return (
     <Box
       height="60px"
@@ -16,7 +19,7 @@ export const GalaxyNavigation: React.FC = () => {
       zIndex={FOOTER_Z_INDEX}
       color={'navyAlpha.100'}
     >
-      <Text textStyle="socialLarge.sm">Zoom</Text>
+      <Text textStyle="socialLarge.sm">{t('zoom')}</Text>
 
       <Grid templateColumns="repeat(3, 1fr)" mt={'4px'}>
         {Object.values(galaxyZooms).map(zoom => (

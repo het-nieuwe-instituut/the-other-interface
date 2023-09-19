@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const Cloud: React.FC<Props> = ({ cloud }) => {
-  const { t } = useTypeSafeTranslation('category')
+  const { t } = useTypeSafeTranslation('homepage')
   const router = useRouter()
 
   const { title: category, size, cloudPosition, titlePosition } = cloud

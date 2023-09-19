@@ -2,6 +2,7 @@
 import { Box, Text, Flex } from '@chakra-ui/react'
 import { useRouter } from 'next/navigation'
 import { GalaxyZoom } from './constants'
+import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 
 type Props = {
   zoomData: GalaxyZoom
@@ -11,6 +12,7 @@ type Props = {
 export const NavigationLink: React.FC<Props> = ({ zoomData, currentZoomNumber }) => {
   const { alignItems, link, title, zoom } = zoomData
   const router = useRouter()
+  const { t } = useTypeSafeTranslation('navigation')
 
   const isClickable = zoom < currentZoomNumber
   const isCurrentZoom = zoom === currentZoomNumber
@@ -37,7 +39,7 @@ export const NavigationLink: React.FC<Props> = ({ zoomData, currentZoomNumber })
         mt={'4px'}
         color={isCurrentZoom || isClickable ? 'navyAlpha.100' : 'navyAlpha.25'}
       >
-        {title}
+        {t(title)}
       </Text>
     </Flex>
   )
