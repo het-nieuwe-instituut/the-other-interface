@@ -1,6 +1,8 @@
+type PositionValue = `${string}vw` | `${string}vh` | `${string}%` | 0 | `calc(${string})`
+
 export type Position = {
-  top?: string | 0
-  right?: string | 0
-  bottom?: string | 0
-  left?: string | 0
+  top?: PositionValue
+  right?: PositionValue
+  bottom?: PositionValue
+  left?: PositionValue
 }
