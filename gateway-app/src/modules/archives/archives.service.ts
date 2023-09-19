@@ -1,21 +1,8 @@
 import { Injectable } from '@nestjs/common'
 import { KeysToVerify, TriplyService } from '../triply/triply.service'
-import { TriplyUtils, ZoomLevel3ReturnData, zoomLevel3ReturnDataKeys } from '../triply/triply.utils'
-import { CustomError } from '../util/customError'
+import { TriplyUtils } from '../triply/triply.utils'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { ArchivesFondsCreatorType } from './archives.type'
-
-export enum ArchivesZoomLevel3Ids {
-  date = 'date',
-  descriptionLevel = 'descriptionLevel',
-  relatedNames = 'relatedNames',
-}
-
-export enum ArchivesZoomLevel4Filters {
-  date = 'date',
-  descriptionLevel = 'descriptionLevel',
-  relatedName = 'relatedName',
-}
 
 export interface ArchivesZoomLevel2Data {
   thumbnail: true
@@ -29,12 +16,12 @@ export const archivesZoomLevel2DataKeys: KeysToVerify<ArchivesZoomLevel2Data> = 
   id: true,
 }
 
-export enum ArchivesZoomLevel5Types {
+export enum ArchivesZoomLevel3Types {
   fonds = 'fonds',
   other = 'other',
 }
 
-export interface ArchivesFondsDetailZoomLevel5Data {
+export interface ArchivesFondsDetailZoomLevel3Data {
   objectNumber?: string
   title?: string
   startDate?: string
@@ -50,7 +37,7 @@ export interface ArchivesFondsDetailZoomLevel5Data {
   rightsLabel?: string
   permanentLink?: string
 }
-const archivesFondsDetailZoomLevel5DataKeys: KeysToVerify<ArchivesFondsDetailZoomLevel5Data> = {
+const archivesFondsDetailZoomLevel3DataKeys: KeysToVerify<ArchivesFondsDetailZoomLevel3Data> = {
   objectNumber: true,
   title: true,
   startDate: true,
@@ -67,7 +54,7 @@ const archivesFondsDetailZoomLevel5DataKeys: KeysToVerify<ArchivesFondsDetailZoo
   permanentLink: true,
 }
 
-export interface ArchivesOtherDetailZoomLevel5Data {
+export interface ArchivesOtherDetailZoomLevel3Data {
   descriptionLevel?: string
   objectNumber?: string
   recordTitle?: string
@@ -94,7 +81,7 @@ export interface ArchivesOtherDetailZoomLevel5Data {
   permanentLink?: string
   pidWorkURI?: string
 }
-const archivesOtherDetailZoomLevel5DataKeys: KeysToVerify<ArchivesOtherDetailZoomLevel5Data> = {
+const archivesOtherDetailZoomLevel3DataKeys: KeysToVerify<ArchivesOtherDetailZoomLevel3Data> = {
   descriptionLevel: true,
   objectNumber: true,
   recordTitle: true,
@@ -122,36 +109,17 @@ const archivesOtherDetailZoomLevel5DataKeys: KeysToVerify<ArchivesOtherDetailZoo
   pidWorkURI: true,
 }
 
-type ArchivesZoomLeve5DataType =
-  | ArchivesOtherDetailZoomLevel5Data
-  | ArchivesFondsDetailZoomLevel5Data
-const archivesZoomLevel5DataKeys = {
-  [ArchivesZoomLevel5Types.other]: archivesOtherDetailZoomLevel5DataKeys,
-  [ArchivesZoomLevel5Types.fonds]: archivesFondsDetailZoomLevel5DataKeys,
+type ArchivesZoomLeve3DataType =
+  | ArchivesOtherDetailZoomLevel3Data
+  | ArchivesFondsDetailZoomLevel3Data
+const archivesZoomLevel3DataKeys = {
+  [ArchivesZoomLevel3Types.other]: archivesOtherDetailZoomLevel3DataKeys,
+  [ArchivesZoomLevel3Types.fonds]: archivesFondsDetailZoomLevel3DataKeys,
 }
 
 @Injectable()
 export class ArchivesService {
   protected entityType = 'triply'
-  private readonly zoomLevel2Endpoint = 'zoom-2-archives/run'
-
-  private readonly ZoomLevel3Mapping = [
-    {
-      id: ArchivesZoomLevel3Ids.date,
-      name: 'Datering',
-      endpoint: 'zoom-3-archives-date-filter/run',
-    },
-    {
-      id: ArchivesZoomLevel3Ids.descriptionLevel,
-      name: 'Beschrijvingsniveau',
-      endpoint: 'zoom-3-archives-description-level-filter/run',
-    },
-    {
-      id: ArchivesZoomLevel3Ids.relatedNames,
-      name: 'Gerelateerde namen',
-      endpoint: 'zoom-3-archives-related-names-filter/run',
-    },
-  ]
 
   private readonly ZoomLevel2Endpoint =
     'https://api.collectiedata.hetnieuweinstituut.nl/queries/zoom-2/archives-landingPage/run'
@@ -161,13 +129,11 @@ export class ArchivesService {
 
   // TODO: change to convention when Triply adds this to normal space
   private readonly archivesDescriptionLevelEndpoint =
-    'https://api.collectiedata.hetnieuweinstituut.nl/queries/Joran/zoom5-archives-type-only/run?'
+    'https://api.collectiedata.hetnieuweinstituut.nl/queries/Joran/zoom3-archives-type-only/run?'
 
-  private readonly ZoomLevel4CountEndpoint = 'zoom4-archives-count/run?'
-
-  private readonly ZoomLevel5Endpoint = {
-    [ArchivesZoomLevel5Types.other]: 'zoom-5-archives/run',
-    [ArchivesZoomLevel5Types.fonds]: 'zoom-5-archives-fonds/run',
+  private readonly ZoomLevel3Endpoint = {
+    [ArchivesZoomLevel3Types.other]: 'zoom-3-archives/run',
+    [ArchivesZoomLevel3Types.fonds]: 'zoom-3-archives-fonds/run',
   }
 
   public constructor(private triplyService: TriplyService) {}
@@ -191,26 +157,10 @@ export class ArchivesService {
     )
 
     if (res.data[0].descriptionLevel === 'archief') {
-      return ArchivesZoomLevel5Types.fonds
+      return ArchivesZoomLevel3Types.fonds
     }
 
-    return ArchivesZoomLevel5Types.other
-  }
-
-  public async getZoomLevel3Data(id: ArchivesZoomLevel3Ids, page = 1, pageSize = 16) {
-    const mapping = this.ZoomLevel3Mapping.find(m => m.id === id)
-
-    if (!mapping) {
-      throw CustomError.internalCritical(`[Archives] Mapping ${id} not found`)
-    }
-
-    const result = await this.triplyService.queryTriplyData<ZoomLevel3ReturnData>(
-      mapping?.endpoint,
-      zoomLevel3ReturnDataKeys,
-      { page, pageSize }
-    )
-
-    return TriplyUtils.parseLevel3OutputData(result.data)
+    return ArchivesZoomLevel3Types.other
   }
 
   public async getZoomLevel2Data(page = 1, pageSize = 48) {
@@ -241,12 +191,12 @@ export class ArchivesService {
     }
   }
 
-  public async getZoomLevel5Data(type: ArchivesZoomLevel5Types, objectId: string) {
+  public async getZoomLevel3Data(type: ArchivesZoomLevel3Types, objectId: string) {
     const uri = TriplyUtils.getUriForTypeAndId(EntityNames.Archives, objectId)
 
-    const result = await this.triplyService.queryTriplyData<ArchivesZoomLeve5DataType>(
-      this.ZoomLevel5Endpoint[type],
-      archivesZoomLevel5DataKeys[type],
+    const result = await this.triplyService.queryTriplyData<ArchivesZoomLeve3DataType>(
+      this.ZoomLevel3Endpoint[type],
+      archivesZoomLevel3DataKeys[type],
       undefined,
       { record: uri }
     )
@@ -263,19 +213,10 @@ export class ArchivesService {
     }
   }
 
-  public validateFilterInput(input: string): ArchivesZoomLevel3Ids {
-    if (Object.keys(ArchivesZoomLevel3Ids).includes(input)) {
-      // we can do this since we do key=value
-      return ArchivesZoomLevel3Ids[input as ArchivesZoomLevel3Ids]
-    }
-
-    throw CustomError.internalCritical(`[Archives] Invalid filter input "${input}"`)
-  }
-
-  private getCreatorsValueFromData(data: ArchivesZoomLeve5DataType[]): ArchivesFondsCreatorType[] {
+  private getCreatorsValueFromData(data: ArchivesZoomLeve3DataType[]): ArchivesFondsCreatorType[] {
     return data
       .filter(d => 'creator' in d && !!d.creator)
-      .map((d: ArchivesOtherDetailZoomLevel5Data) => ({
+      .map((d: ArchivesOtherDetailZoomLevel3Data) => ({
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         id: TriplyUtils.getIdFromUri(d.creator!),
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

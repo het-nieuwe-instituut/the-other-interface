@@ -1,29 +1,8 @@
 import { Injectable } from '@nestjs/common'
 import { KeysToVerify, TriplyService } from '../triply/triply.service'
-import { TriplyUtils, ZoomLevel3ReturnData, zoomLevel3ReturnDataKeys } from '../triply/triply.utils'
-import { CustomError } from '../util/customError'
+import { TriplyUtils } from '../triply/triply.utils'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { ObjectMakerType, ObjectMaterialType, ObjectTechniqueType } from './objects.type'
-
-export enum ObjectsZoomLevel3Ids {
-  subject = 'subject',
-  personInstitution = 'personInstitution',
-  technique = 'technique',
-  objectName = 'objectName',
-  creator = 'creator',
-  date = 'date',
-  material = 'material',
-}
-
-export enum ObjectsZoomLevel4Filters {
-  Objectname = 'Objectname',
-  Maker = 'Maker',
-  Material = 'Objectname',
-  Technique = 'Technique',
-  Subject = 'Subject',
-  PerInst = 'PerInst',
-  date = 'date',
-}
 
 interface ObjectsZoomLevel2Data {
   thumbnail: string
@@ -37,7 +16,7 @@ const objectsZoomLevel2DataKeys: KeysToVerify<ObjectsZoomLevel2Data> = {
   id: true,
 }
 
-interface ObjectsDetailZoomLevel5Data {
+interface ObjectsDetailZoomLevel3Data {
   image?: string
   imageLabel?: string
   title?: string
@@ -74,7 +53,7 @@ interface ObjectsDetailZoomLevel5Data {
   creationPlaceLabel?: string
   permanentLink?: string
 }
-const objectsDetailZoomLevel5DataKeys: KeysToVerify<ObjectsDetailZoomLevel5Data> = {
+const objectsDetailZoomLevel3DataKeys: KeysToVerify<ObjectsDetailZoomLevel3Data> = {
   image: true,
   imageLabel: true,
   title: true,
@@ -115,69 +94,15 @@ const objectsDetailZoomLevel5DataKeys: KeysToVerify<ObjectsDetailZoomLevel5Data>
 export class ObjectsService {
   protected entityType = 'triply'
 
-  private readonly ZoomLevel3Mapping = [
-    {
-      id: ObjectsZoomLevel3Ids.subject,
-      name: 'Onderwerp',
-      endpoint: 'zoom-3-objects-subject-filter/run',
-    },
-    {
-      id: ObjectsZoomLevel3Ids.personInstitution,
-      name: 'Persoon/instelling',
-      endpoint: 'zoom-3-objects-person-institution-filter/run',
-    },
-    {
-      id: ObjectsZoomLevel3Ids.technique,
-      name: 'Technieken',
-      endpoint: 'zoom-3-objects-technique-filter/run',
-    },
-    {
-      id: ObjectsZoomLevel3Ids.objectName,
-      name: 'Objectnaam',
-      endpoint: 'zoom-3-objects-objectname-filter/run',
-    },
-    {
-      id: ObjectsZoomLevel3Ids.creator,
-      name: 'Vervaardiger',
-      endpoint: 'zoom-3-objects-creator-filter/run',
-    },
-    {
-      id: ObjectsZoomLevel3Ids.date,
-      name: 'Datering',
-      endpoint: 'zoom-3-objects-date-filter/run',
-    },
-    {
-      id: ObjectsZoomLevel3Ids.material,
-      name: 'Materialen',
-      endpoint: 'zoom-3-objects-material-filter/run',
-    },
-  ]
-
   private readonly ZoomLevel2Endpoint =
     'https://api.collectiedata.hetnieuweinstituut.nl/queries/zoom-2/objects-landingPage/run'
 
   private readonly ZoomLevel2CountEndpoint =
     'https://api.collectiedata.hetnieuweinstituut.nl/queries/zoom-2/objects-landingPage-count/run'
 
-  private readonly ZoomLevel5Endpoint = 'zoom-5-objects/run'
+  private readonly ZoomLevel3Endpoint = 'zoom-3-objects/run'
 
   public constructor(private triplyService: TriplyService) {}
-
-  public async getZoomLevel3Data(id: ObjectsZoomLevel3Ids, page = 1, pageSize = 16) {
-    const mapping = this.ZoomLevel3Mapping.find(m => m.id === id)
-
-    if (!mapping) {
-      throw CustomError.internalCritical(`[Objects] Mapping ${id} not found`)
-    }
-
-    const result = await this.triplyService.queryTriplyData<ZoomLevel3ReturnData>(
-      mapping?.endpoint,
-      zoomLevel3ReturnDataKeys,
-      { page, pageSize }
-    )
-
-    return TriplyUtils.parseLevel3OutputData(result.data)
-  }
 
   public async getZoomLevel2Data(page = 1, pageSize = 48) {
     const result = await this.triplyService.queryTriplyData<ObjectsZoomLevel2Data>(
@@ -207,11 +132,11 @@ export class ObjectsService {
     }
   }
 
-  public async getZoomLevel5Data(objectId: string) {
+  public async getZoomLevel3Data(objectId: string) {
     const uri = TriplyUtils.getUriForTypeAndId(EntityNames.Objects, objectId)
-    const result = await this.triplyService.queryTriplyData<ObjectsDetailZoomLevel5Data>(
-      this.ZoomLevel5Endpoint,
-      objectsDetailZoomLevel5DataKeys,
+    const result = await this.triplyService.queryTriplyData<ObjectsDetailZoomLevel3Data>(
+      this.ZoomLevel3Endpoint,
+      objectsDetailZoomLevel3DataKeys,
       undefined,
       { record: uri }
     )
@@ -227,16 +152,7 @@ export class ObjectsService {
     }
   }
 
-  public validateFilterInput(input: string): ObjectsZoomLevel3Ids {
-    if (Object.keys(ObjectsZoomLevel3Ids).includes(input)) {
-      // we can do this since we do key=value
-      return ObjectsZoomLevel3Ids[input as ObjectsZoomLevel3Ids]
-    }
-
-    throw CustomError.internalCritical(`[Objects] Invalid filter input "${input}"`)
-  }
-
-  private getDimensionValueFromData(data: ObjectsDetailZoomLevel5Data[]) {
+  private getDimensionValueFromData(data: ObjectsDetailZoomLevel3Data[]) {
     const dimHeight = data.find(d => d.dimensionType === 'hoogte')?.dimensionValue
     const dimWidth = data.find(d => d.dimensionType === 'breedte')?.dimensionValue
     const dimDepth = data.find(d => d.dimensionType === 'diepte')?.dimensionValue
@@ -244,7 +160,7 @@ export class ObjectsService {
     return { dimDepth, dimWidth, dimHeight }
   }
 
-  private getMakersValueFromData(data: ObjectsDetailZoomLevel5Data[]): ObjectMakerType[] {
+  private getMakersValueFromData(data: ObjectsDetailZoomLevel3Data[]): ObjectMakerType[] {
     return data
       .filter(d => !!d.maker)
       .map(d => ({
@@ -258,7 +174,7 @@ export class ObjectsService {
       }))
   }
 
-  private getMaterialsValueFromData(data: ObjectsDetailZoomLevel5Data[]): ObjectMaterialType[] {
+  private getMaterialsValueFromData(data: ObjectsDetailZoomLevel3Data[]): ObjectMaterialType[] {
     return data
       .filter(d => !!d.material)
       .map(d => ({
@@ -270,7 +186,7 @@ export class ObjectsService {
       }))
   }
 
-  private getTechniquesValueFromData(data: ObjectsDetailZoomLevel5Data[]): ObjectTechniqueType[] {
+  private getTechniquesValueFromData(data: ObjectsDetailZoomLevel3Data[]): ObjectTechniqueType[] {
     return data
       .filter(d => !!d.technique)
       .map(d => ({

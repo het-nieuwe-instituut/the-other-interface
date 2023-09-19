@@ -1,32 +1,8 @@
 import { Field, InputType, ObjectType } from '@nestjs/graphql'
-import { PoepleZoomLevel5DetailType } from '../people/people.type'
-
-@InputType()
-export class ObjectsZoomLevel2FiltersArgs {
-  @Field(() => String, { nullable: true })
-  public Objectname: string | null
-
-  @Field(() => String, { nullable: true })
-  public Maker: string | null
-
-  @Field(() => String, { nullable: true })
-  public Material: string | null
-
-  @Field(() => String, { nullable: true })
-  public Technique: string | null
-
-  @Field(() => String, { nullable: true })
-  public Subject: string | null
-
-  @Field(() => String, { nullable: true })
-  public PerInst: string | null
-
-  @Field(() => String, { nullable: true })
-  public date: string | null
-}
+import { PoepleZoomLevel3DetailType } from '../people/people.type'
 
 @ObjectType()
-export class ObjectsZoomLevel5DetailType {
+export class ObjectsZoomLevel3DetailType {
   @Field()
   public id: string
 
@@ -138,8 +114,8 @@ export class ObjectMakerType {
   @Field(() => String, { nullable: true })
   public makerRoleLabel?: string | null
 
-  @Field(() => PoepleZoomLevel5DetailType, { nullable: true })
-  public populatedMaker?: PoepleZoomLevel5DetailType
+  @Field(() => PoepleZoomLevel3DetailType, { nullable: true })
+  public populatedMaker?: PoepleZoomLevel3DetailType
 }
 
 @ObjectType()

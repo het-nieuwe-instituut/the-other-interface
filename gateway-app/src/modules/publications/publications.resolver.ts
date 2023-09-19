@@ -3,66 +3,66 @@ import { CustomError } from '../util/customError'
 import { PublicationsService } from './publications.service'
 import {
   PublicationAuthorType,
-  PublicationsArticleZoomLevel5DetailType,
-  PublicationsAudioVisualZoomLevel5DetailType,
-  PublicationsBookZoomLevel5DetailType,
-  PublicationsSerialZoomLevel5DetailType,
+  PublicationsArticleZoomLevel3DetailType,
+  PublicationsAudioVisualZoomLevel3DetailType,
+  PublicationsBookZoomLevel3DetailType,
+  PublicationsSerialZoomLevel3DetailType,
 } from './publications.type'
 
-@Resolver(PublicationsAudioVisualZoomLevel5DetailType)
+@Resolver(PublicationsAudioVisualZoomLevel3DetailType)
 export class PublicationsAudioVisualResolver {
   public constructor(private readonly publicationsService: PublicationsService) {}
 
-  @Query(() => PublicationsAudioVisualZoomLevel5DetailType)
+  @Query(() => PublicationsAudioVisualZoomLevel3DetailType)
   public publicationAudioVisual() {
     throw CustomError.internal('not yet implemented')
   }
-  public populatedPublisher(@Parent() publication: PublicationsAudioVisualZoomLevel5DetailType) {
+  public populatedPublisher(@Parent() publication: PublicationsAudioVisualZoomLevel3DetailType) {
     return this.publicationsService.resolvePublisher(publication)
   }
 }
 
-@Resolver(PublicationsArticleZoomLevel5DetailType)
+@Resolver(PublicationsArticleZoomLevel3DetailType)
 export class PublicationsArticleResolver {
   public constructor(private readonly publicationsService: PublicationsService) {}
 
-  @Query(() => PublicationsArticleZoomLevel5DetailType)
+  @Query(() => PublicationsArticleZoomLevel3DetailType)
   public publicationArticle() {
     throw CustomError.internal('not yet implemented')
   }
 
   @ResolveField()
-  public populatedPublisher(@Parent() publication: PublicationsArticleZoomLevel5DetailType) {
+  public populatedPublisher(@Parent() publication: PublicationsArticleZoomLevel3DetailType) {
     return this.publicationsService.resolvePublisher(publication)
   }
 }
 
-@Resolver(PublicationsBookZoomLevel5DetailType)
+@Resolver(PublicationsBookZoomLevel3DetailType)
 export class PublicationsBookResolver {
   public constructor(private readonly publicationsService: PublicationsService) {}
 
-  @Query(() => PublicationsBookZoomLevel5DetailType)
+  @Query(() => PublicationsBookZoomLevel3DetailType)
   public publicationBook() {
     throw CustomError.internal('not yet implemented')
   }
 
   @ResolveField()
-  public populatedPublisher(@Parent() publication: PublicationsBookZoomLevel5DetailType) {
+  public populatedPublisher(@Parent() publication: PublicationsBookZoomLevel3DetailType) {
     return this.publicationsService.resolvePublisher(publication)
   }
 }
 
-@Resolver(PublicationsSerialZoomLevel5DetailType)
+@Resolver(PublicationsSerialZoomLevel3DetailType)
 export class PublicationsSerialResolver {
   public constructor(private readonly publicationsService: PublicationsService) {}
 
-  @Query(() => PublicationsSerialZoomLevel5DetailType)
+  @Query(() => PublicationsSerialZoomLevel3DetailType)
   public publicationSerial() {
     throw CustomError.internal('not yet implemented')
   }
 
   @ResolveField()
-  public populatedPublisher(@Parent() publication: PublicationsSerialZoomLevel5DetailType) {
+  public populatedPublisher(@Parent() publication: PublicationsSerialZoomLevel3DetailType) {
     return this.publicationsService.resolvePublisher(publication)
   }
 }
@@ -72,7 +72,7 @@ export class PublicationAuthorResolver {
   public constructor(private readonly publicationsService: PublicationsService) {}
 
   @ResolveField()
-  public populatedAuthor(@Parent() publication: PublicationsBookZoomLevel5DetailType) {
+  public populatedAuthor(@Parent() publication: PublicationsBookZoomLevel3DetailType) {
     return this.publicationsService.resolveAuthor(publication)
   }
 }

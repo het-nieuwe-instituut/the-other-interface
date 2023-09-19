@@ -1,26 +1,9 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common'
 import { KeysToVerify, TriplyService } from '../triply/triply.service'
-import { TriplyUtils, ZoomLevel3ReturnData, zoomLevel3ReturnDataKeys } from '../triply/triply.utils'
-import { CustomError } from '../util/customError'
+import { TriplyUtils } from '../triply/triply.utils'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
-import { ZoomLevel5Service } from '../zoomLevel5/zoomLevel5.service'
+import { ZoomLevel3Service } from '../zoomLevel3/zoomLevel3.service'
 import { PublicationAuthorType } from './publications.type'
-
-export enum PublicationsZoomLevel3Ids {
-  relatedPerson = 'relatedPerson',
-  subject = 'subject',
-  geographicalKeyword = 'geographicalKeyword',
-  author = 'author',
-  typeOfPublication = 'typeOfPublication',
-}
-
-export enum PublicationsZoomLevel4Filters {
-  Author = 'Author',
-  TypeOfPublication = 'TypeOfPublication',
-  GeograficalKeyword = 'GeograficalKeyword',
-  Subject = 'Subject',
-  RelatedPerInst = 'RelatedPerInst',
-}
 
 export interface PublicationsZoomLevel2Data {
   thumbnail: true
@@ -34,7 +17,7 @@ export const publicationsZoomLevel2DataKeys: KeysToVerify<PublicationsZoomLevel2
   id: true,
 }
 
-interface PublicationsBooksDetailZoomLevel5Data {
+interface PublicationsBooksDetailZoomLevel3Data {
   typeOfPublication?: string
   typeOfPublicationLabel?: string
   title?: string
@@ -70,7 +53,7 @@ interface PublicationsBooksDetailZoomLevel5Data {
   shelfmark?: string
   permanentLink?: string
 }
-const publicationsBooksDetailZoomLevel5DataKeys: KeysToVerify<PublicationsBooksDetailZoomLevel5Data> =
+const publicationsBooksDetailZoomLevel3DataKeys: KeysToVerify<PublicationsBooksDetailZoomLevel3Data> =
   {
     typeOfPublication: true,
     typeOfPublicationLabel: true,
@@ -108,7 +91,7 @@ const publicationsBooksDetailZoomLevel5DataKeys: KeysToVerify<PublicationsBooksD
     permanentLink: true,
   }
 
-interface PublicationsSerialDetailZoomLevel5Data {
+interface PublicationsSerialDetailZoomLevel3Data {
   typeOfPublication?: string
   typeOfPublicationLabel?: string
   title?: string
@@ -129,7 +112,7 @@ interface PublicationsSerialDetailZoomLevel5Data {
   holding?: string
   permanentLink?: string
 }
-const publicationsSerialDetailZoomLevel5DataKeys: KeysToVerify<PublicationsSerialDetailZoomLevel5Data> =
+const publicationsSerialDetailZoomLevel3DataKeys: KeysToVerify<PublicationsSerialDetailZoomLevel3Data> =
   {
     typeOfPublication: true,
     typeOfPublicationLabel: true,
@@ -152,7 +135,7 @@ const publicationsSerialDetailZoomLevel5DataKeys: KeysToVerify<PublicationsSeria
     permanentLink: true,
   }
 
-interface PublicationArticleDetailZoomLevel5Data {
+interface PublicationArticleDetailZoomLevel3Data {
   typeOfPublication?: string
   typeOfPublicationLabel?: string
   title?: string
@@ -182,7 +165,7 @@ interface PublicationArticleDetailZoomLevel5Data {
   shelfmark?: string
   permanentLink?: string
 }
-const publicationArticleDetailZoomLevel5DataKeys: KeysToVerify<PublicationArticleDetailZoomLevel5Data> =
+const publicationArticleDetailZoomLevel3DataKeys: KeysToVerify<PublicationArticleDetailZoomLevel3Data> =
   {
     typeOfPublication: true,
     typeOfPublicationLabel: true,
@@ -214,7 +197,7 @@ const publicationArticleDetailZoomLevel5DataKeys: KeysToVerify<PublicationArticl
     permanentLink: true,
   }
 
-interface PublicationsAudioVisualDetailZoomLevel5Data {
+interface PublicationsAudioVisualDetailZoomLevel3Data {
   typeOfPublication?: string
   typeOfPublicationLabel?: string
   title?: string
@@ -244,7 +227,7 @@ interface PublicationsAudioVisualDetailZoomLevel5Data {
   availability?: string
   shelfmark?: string
 }
-const publicationsAudioVisualDetailZoomLevel5DataKeys: KeysToVerify<PublicationsAudioVisualDetailZoomLevel5Data> =
+const publicationsAudioVisualDetailZoomLevel3DataKeys: KeysToVerify<PublicationsAudioVisualDetailZoomLevel3Data> =
   {
     typeOfPublication: true,
     typeOfPublicationLabel: true,
@@ -276,29 +259,29 @@ const publicationsAudioVisualDetailZoomLevel5DataKeys: KeysToVerify<Publications
     shelfmark: true,
   }
 
-export enum PublicationsZoomLevel5Types {
+export enum PublicationsZoomLevel3Types {
   serial = 'serial',
   book = 'book',
   article = 'article',
   audiovisual = 'audiovisual',
 }
 
-type PublicationsZoomLevel5DataTypes =
-  | PublicationsBooksDetailZoomLevel5Data
-  | PublicationsSerialDetailZoomLevel5Data
-  | PublicationArticleDetailZoomLevel5Data
-  | PublicationsAudioVisualDetailZoomLevel5Data
-const publicationsZoomLevel5DataTypeKeys = {
-  [PublicationsZoomLevel5Types.article]: publicationArticleDetailZoomLevel5DataKeys,
-  [PublicationsZoomLevel5Types.audiovisual]: publicationsAudioVisualDetailZoomLevel5DataKeys,
-  [PublicationsZoomLevel5Types.book]: publicationsBooksDetailZoomLevel5DataKeys,
-  [PublicationsZoomLevel5Types.serial]: publicationsSerialDetailZoomLevel5DataKeys,
+type PublicationsZoomLevel3DataTypes =
+  | PublicationsBooksDetailZoomLevel3Data
+  | PublicationsSerialDetailZoomLevel3Data
+  | PublicationArticleDetailZoomLevel3Data
+  | PublicationsAudioVisualDetailZoomLevel3Data
+const publicationsZoomLevel3DataTypeKeys = {
+  [PublicationsZoomLevel3Types.article]: publicationArticleDetailZoomLevel3DataKeys,
+  [PublicationsZoomLevel3Types.audiovisual]: publicationsAudioVisualDetailZoomLevel3DataKeys,
+  [PublicationsZoomLevel3Types.book]: publicationsBooksDetailZoomLevel3DataKeys,
+  [PublicationsZoomLevel3Types.serial]: publicationsSerialDetailZoomLevel3DataKeys,
 }
 
 type PublicationsWithAuthors =
-  | PublicationsBooksDetailZoomLevel5Data
-  | PublicationArticleDetailZoomLevel5Data
-  | PublicationsAudioVisualDetailZoomLevel5Data
+  | PublicationsBooksDetailZoomLevel3Data
+  | PublicationArticleDetailZoomLevel3Data
+  | PublicationsAudioVisualDetailZoomLevel3Data
 
 @Injectable()
 export class PublicationsService {
@@ -309,49 +292,21 @@ export class PublicationsService {
   private readonly ZoomLevel2CountEndpoint =
     'https://api.collectiedata.hetnieuweinstituut.nl/queries/zoom-2/books-landingPage-count/run'
 
-  private readonly ZoomLevel3Mapping = [
-    {
-      id: PublicationsZoomLevel3Ids.relatedPerson,
-      name: 'Gerelateerde persoon/instelling',
-      endpoint: 'zoom-3-books-related-person-filter/run',
-    },
-    {
-      id: PublicationsZoomLevel3Ids.subject,
-      name: 'Onderwerp',
-      endpoint: 'zoom-3-books-subject-filter/run',
-    },
-    {
-      id: PublicationsZoomLevel3Ids.geographicalKeyword,
-      name: 'Geografisch trefwoord',
-      endpoint: 'zoom-3-books-geographical-keyword-filter/run',
-    },
-    {
-      id: PublicationsZoomLevel3Ids.author,
-      name: 'Auteur(s)',
-      endpoint: 'zoom-3-books-author-filter/run',
-    },
-    {
-      id: PublicationsZoomLevel3Ids.typeOfPublication,
-      name: 'Soort publicatie',
-      endpoint: 'zoom-3-books-type-of-publication-filter/run',
-    },
-  ]
-
   private readonly ZoomLevel4CountEndpoint = 'zoom4-books-count/run'
 
-  private readonly ZoomLevel5Endpoint = {
-    [PublicationsZoomLevel5Types.article]: 'zoom-5-books-article/run',
-    [PublicationsZoomLevel5Types.audiovisual]: 'zoom-5-books-audiovisual/run',
-    [PublicationsZoomLevel5Types.book]: 'zoom-5-books-book/run',
-    [PublicationsZoomLevel5Types.serial]: 'zoom-5-books-serial/run',
+  private readonly ZoomLevel3Endpoint = {
+    [PublicationsZoomLevel3Types.article]: 'zoom-3-books-article/run',
+    [PublicationsZoomLevel3Types.audiovisual]: 'zoom-3-books-audiovisual/run',
+    [PublicationsZoomLevel3Types.book]: 'zoom-3-books-book/run',
+    [PublicationsZoomLevel3Types.serial]: 'zoom-3-books-serial/run',
   }
 
-  private readonly publicationDescriptionLevelEndpoint = 'Zoom-5-books-type/run'
+  private readonly publicationDescriptionLevelEndpoint = 'Zoom-3-books-type/run'
 
   public constructor(
     private readonly triplyService: TriplyService,
-    @Inject(forwardRef(() => ZoomLevel5Service))
-    private readonly zoomLevel5Service: ZoomLevel5Service
+    @Inject(forwardRef(() => ZoomLevel3Service))
+    private readonly zoomLevel3Service: ZoomLevel3Service
   ) {}
 
   public async determinePublicationType(id: string) {
@@ -371,36 +326,20 @@ export class PublicationsService {
     )
 
     if (!res?.data?.length) {
-      return PublicationsZoomLevel5Types.book
+      return PublicationsZoomLevel3Types.book
     }
 
     switch (res.data[0].type) {
-      case 'zoom_5-books-serial':
-        return PublicationsZoomLevel5Types.serial
-      case 'zoom_5-books-article':
-        return PublicationsZoomLevel5Types.article
-      case 'zoom_5-books-audiovisual':
-        return PublicationsZoomLevel5Types.audiovisual
-      case 'zoom_5-books-book':
+      case 'zoom_3-books-serial':
+        return PublicationsZoomLevel3Types.serial
+      case 'zoom_3-books-article':
+        return PublicationsZoomLevel3Types.article
+      case 'zoom_3-books-audiovisual':
+        return PublicationsZoomLevel3Types.audiovisual
+      case 'zoom_3-books-book':
       default:
-        return PublicationsZoomLevel5Types.book
+        return PublicationsZoomLevel3Types.book
     }
-  }
-
-  public async getZoomLevel3Data(id: PublicationsZoomLevel3Ids, page = 1, pageSize = 16) {
-    const mapping = this.ZoomLevel3Mapping.find(m => m.id === id)
-
-    if (!mapping) {
-      throw CustomError.internalCritical(`[Publications] Mapping ${id} not found`)
-    }
-
-    const result = await this.triplyService.queryTriplyData<ZoomLevel3ReturnData>(
-      mapping?.endpoint,
-      zoomLevel3ReturnDataKeys,
-      { page, pageSize }
-    )
-
-    return TriplyUtils.parseLevel3OutputData(result.data)
   }
 
   public async getZoomLevel2Data(page = 1, pageSize = 48) {
@@ -431,11 +370,11 @@ export class PublicationsService {
     }
   }
 
-  public async getZoomLevel5Data(publicationType: PublicationsZoomLevel5Types, objectId: string) {
+  public async getZoomLevel3Data(publicationType: PublicationsZoomLevel3Types, objectId: string) {
     const uri = TriplyUtils.getUriForTypeAndId(EntityNames.Publications, objectId)
-    const result = await this.triplyService.queryTriplyData<PublicationsZoomLevel5DataTypes>(
-      this.ZoomLevel5Endpoint[publicationType],
-      publicationsZoomLevel5DataTypeKeys[publicationType],
+    const result = await this.triplyService.queryTriplyData<PublicationsZoomLevel3DataTypes>(
+      this.ZoomLevel3Endpoint[publicationType],
+      publicationsZoomLevel3DataTypeKeys[publicationType],
       undefined,
       { record: uri }
     )
@@ -448,16 +387,7 @@ export class PublicationsService {
     }
   }
 
-  public validateFilterInput(input: string): PublicationsZoomLevel3Ids {
-    if (Object.keys(PublicationsZoomLevel3Ids).includes(input)) {
-      // we can do this since we do key=value
-      return PublicationsZoomLevel3Ids[input as PublicationsZoomLevel3Ids]
-    }
-
-    throw CustomError.internalCritical(`[Publications] Invalid filter input "${input}"`)
-  }
-
-  public resolveAuthor(publication: PublicationsZoomLevel5DataTypes) {
+  public resolveAuthor(publication: PublicationsZoomLevel3DataTypes) {
     if (!('author' in publication) || !publication.author) {
       return
     }
@@ -465,10 +395,10 @@ export class PublicationsService {
     const type = TriplyUtils.getEntityNameFromUri(publication.author)
     const id = TriplyUtils.getIdFromUri(publication.author)
 
-    return this.zoomLevel5Service.getDetail(id, type)
+    return this.zoomLevel3Service.getDetail(id, type)
   }
 
-  public resolvePublisher(publication: PublicationsZoomLevel5DataTypes) {
+  public resolvePublisher(publication: PublicationsZoomLevel3DataTypes) {
     if (!('publisher' in publication) || !publication.publisher) {
       return
     }
@@ -476,11 +406,11 @@ export class PublicationsService {
     const type = TriplyUtils.getEntityNameFromUri(publication.publisher)
     const id = TriplyUtils.getIdFromUri(publication.publisher)
 
-    return this.zoomLevel5Service.getDetail(id, type)
+    return this.zoomLevel3Service.getDetail(id, type)
   }
 
   private getAuthorsValueFromData(
-    data: PublicationsZoomLevel5DataTypes[]
+    data: PublicationsZoomLevel3DataTypes[]
   ): PublicationAuthorType[] {
     return data
       .filter(d => 'author' in d && !!d.author)

@@ -7,10 +7,10 @@ import {
   ResponseCollectionMeta,
   StringFilterInput,
 } from '../strapi/shared-types'
-import { ArchiveZoomLevel5UnionType } from '../archives/archives.type'
-import { ObjectsZoomLevel5DetailType } from '../objects/objects.type'
-import { PublicationZoomLevel5UnionType } from '../publications/publications.type'
-import { PoepleZoomLevel5DetailType } from '../people/people.type'
+import { ArchiveZoomLevel3UnionType } from '../archives/archives.type'
+import { ObjectsZoomLevel3DetailType } from '../objects/objects.type'
+import { PublicationZoomLevel3UnionType } from '../publications/publications.type'
+import { PoepleZoomLevel3DetailType } from '../people/people.type'
 
 registerEnumType(Enum_Triplyrecord_Type, { name: 'Enum_Triplyrecord_Type' })
 
@@ -34,17 +34,17 @@ export class TriplyRecord {
   @Field({ nullable: true })
   public updatedAt?: Date
 
-  @Field(() => ArchiveZoomLevel5UnionType, { nullable: true })
-  public archive?: typeof ArchiveZoomLevel5UnionType
+  @Field(() => ArchiveZoomLevel3UnionType, { nullable: true })
+  public archive?: typeof ArchiveZoomLevel3UnionType
 
-  @Field(() => ObjectsZoomLevel5DetailType, { nullable: true })
-  public object?: ObjectsZoomLevel5DetailType
+  @Field(() => ObjectsZoomLevel3DetailType, { nullable: true })
+  public object?: ObjectsZoomLevel3DetailType
 
-  @Field(() => PublicationZoomLevel5UnionType, { nullable: true })
-  public publication?: typeof PublicationZoomLevel5UnionType
+  @Field(() => PublicationZoomLevel3UnionType, { nullable: true })
+  public publication?: typeof PublicationZoomLevel3UnionType
 
-  @Field(() => PoepleZoomLevel5DetailType, { nullable: true })
-  public people?: PoepleZoomLevel5DetailType
+  @Field(() => PoepleZoomLevel3DetailType, { nullable: true })
+  public people?: PoepleZoomLevel3DetailType
 }
 
 @ObjectType()

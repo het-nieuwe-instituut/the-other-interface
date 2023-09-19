@@ -1,12 +1,12 @@
 import { Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
 import { TriplyUtils } from '../triply/triply.utils'
 import { CustomError } from '../util/customError'
-import { ZoomLevel5Service } from '../zoomLevel5/zoomLevel5.service'
-import { ObjectMakerType, ObjectsZoomLevel5DetailType } from './objects.type'
+import { ZoomLevel3Service } from '../zoomLevel3/zoomLevel3.service'
+import { ObjectMakerType, ObjectsZoomLevel3DetailType } from './objects.type'
 
-@Resolver(ObjectsZoomLevel5DetailType)
+@Resolver(ObjectsZoomLevel3DetailType)
 export class ObjectsResolver {
-  @Query(() => ObjectsZoomLevel5DetailType)
+  @Query(() => ObjectsZoomLevel3DetailType)
   public object() {
     throw CustomError.internal('not yet implemented')
   }
@@ -14,7 +14,7 @@ export class ObjectsResolver {
 
 @Resolver(ObjectMakerType)
 export class ObjectMakerResolver {
-  public constructor(private readonly zoomLevel5Service: ZoomLevel5Service) {}
+  public constructor(private readonly zoomLevel3Service: ZoomLevel3Service) {}
   @ResolveField()
   public populatedMaker(@Parent() object: ObjectMakerType) {
     if (!object.maker) {
@@ -24,6 +24,6 @@ export class ObjectMakerResolver {
     const type = TriplyUtils.getEntityNameFromUri(object.maker)
     const id = TriplyUtils.getIdFromUri(object.maker)
 
-    return this.zoomLevel5Service.getDetail(id, type)
+    return this.zoomLevel3Service.getDetail(id, type)
   }
 }

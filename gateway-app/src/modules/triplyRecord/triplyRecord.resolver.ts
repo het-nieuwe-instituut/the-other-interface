@@ -71,7 +71,7 @@ export class TriplyRecordFieldResolver {
 
     const type = await this.archivesService.determineArchiveType(triplyRecord.recordId)
 
-    return this.archivesService.getZoomLevel5Data(type, triplyRecord.recordId)
+    return this.archivesService.getZoomLevel3Data(type, triplyRecord.recordId)
   }
 
   @ResolveField()
@@ -80,7 +80,7 @@ export class TriplyRecordFieldResolver {
       return
     }
 
-    return this.objectsService.getZoomLevel5Data(triplyRecord.recordId)
+    return this.objectsService.getZoomLevel3Data(triplyRecord.recordId)
   }
 
   @ResolveField()
@@ -91,7 +91,7 @@ export class TriplyRecordFieldResolver {
 
     const type = await this.publicationService.determinePublicationType(triplyRecord.recordId)
 
-    return this.publicationService.getZoomLevel5Data(type, triplyRecord.recordId)
+    return this.publicationService.getZoomLevel3Data(type, triplyRecord.recordId)
   }
 
   @ResolveField()
@@ -100,6 +100,6 @@ export class TriplyRecordFieldResolver {
       return
     }
 
-    return this.peopleService.getZoomLevel5Data(triplyRecord.recordId)
+    return this.peopleService.getZoomLevel3Data(triplyRecord.recordId)
   }
 }

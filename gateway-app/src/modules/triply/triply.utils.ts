@@ -1,20 +1,5 @@
 import { CustomError } from '../util/customError'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
-import { KeysToVerify } from './triply.service'
-
-export interface ZoomLevel3ReturnData {
-  numberOfRows: string
-  count: string | null
-  label: string | null
-  iri: string
-}
-
-export const zoomLevel3ReturnDataKeys: KeysToVerify<ZoomLevel3ReturnData> = {
-  numberOfRows: true,
-  count: true,
-  label: true,
-  iri: true,
-}
 
 export class TriplyUtils {
   public static getExternalEntityNameFromUri(uri: string) {
@@ -152,15 +137,6 @@ export class TriplyUtils {
     }
 
     return nullFlag ? null : (output as T)
-  }
-
-  public static parseLevel3OutputData(input: ZoomLevel3ReturnData[]) {
-    return input.map(i => ({
-      uri: i.iri,
-      name: i.label || null,
-      count: i.count ? parseInt(i.count, 10) : null,
-      total: i.numberOfRows ? parseInt(i.numberOfRows, 10) : null,
-    }))
   }
 
   public static getQueryParamsFromObject<T extends object>(obj: T): Record<keyof T, string> {

@@ -12,7 +12,6 @@ import { PeopleModule } from './modules/people/people.module'
 import { PublicationsModule } from './modules/publications/publications.module'
 import { ZoomLevel1Module } from './modules/zoomLevel1/zoomLevel1.module'
 import { ZoomLevel3Module } from './modules/zoomLevel3/zoomLevel3.module'
-import { ZoomLevel5Module } from './modules/zoomLevel5/zoomLevel5.module'
 import { ZoomLevel2Module } from './modules/zoomLevel2/zoomLevel2.module'
 import { HomepageModule } from './modules/homepage/homepage.module'
 import { TriplyRecordModule } from './modules/triplyRecord/triplyRecord.module'
@@ -52,7 +51,6 @@ import { ThemeModule } from './modules/theme/theme.module'
     ZoomLevel1Module,
     ZoomLevel2Module,
     ZoomLevel3Module,
-    ZoomLevel5Module,
     TriplyRecordModule,
     AuthorModule,
     LocationModule,
