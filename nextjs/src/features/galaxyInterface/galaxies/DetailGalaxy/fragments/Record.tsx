@@ -2,11 +2,11 @@ import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/Re
 import { GridItem, Flex } from '@chakra-ui/react'
 import { useRouter } from 'next/navigation'
 
-import { PositionedRecord, Record as TRecord } from './types'
+import { PositionedRecord } from './types'
 import { RecordText } from './RecordText'
 
 type Props = {
-  record: TRecord & PositionedRecord
+  record: PositionedRecord
 }
 
 export const Record: React.FC<Props> = ({ record }) => {
