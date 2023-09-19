@@ -1,10 +1,16 @@
 'use client'
-import { CloudCategory } from '@/features/shared/utils/categories'
+import { CLOUD_CATEGORIES, CloudCategory } from '@/features/shared/utils/categories'
 import { Box, Grid } from '@chakra-ui/react'
 import { useParams } from 'next/navigation'
 import { RelatedCategory, RelatedStories } from './fragments'
+import { GridParams } from './fragments/types'
 
-const relatedCategories: CloudCategory[] = ['people', 'objects', 'publications', 'archives']
+const relatedCategories: Array<{ category: CloudCategory; grid: GridParams }> = [
+  { category: CLOUD_CATEGORIES.people, grid: { gridRow: '1 / 2', gridColumn: '1 / 2' } },
+  { category: CLOUD_CATEGORIES.objects, grid: { gridRow: '1 / 2', gridColumn: '3 / 4' } },
+  { category: CLOUD_CATEGORIES.publications, grid: { gridRow: '2 / 3', gridColumn: '3 / 4' } },
+  { category: CLOUD_CATEGORIES.archives, grid: { gridRow: '2 / 3', gridColumn: '1 / 2' } },
+]
 
 export const DetailGalaxy: React.FC = () => {
   const params = useParams()
@@ -25,8 +31,13 @@ export const DetailGalaxy: React.FC = () => {
         templateColumns="repeat(3, 1fr)"
         templateRows="repeat(2, 1fr)"
       >
-        {relatedCategories.map(cloudCategory => (
-          <RelatedCategory key={cloudCategory} category={cloudCategory} />
+        {relatedCategories.map(({ category: cloudCategory, grid }) => (
+          <RelatedCategory
+            key={cloudCategory}
+            category={cloudCategory}
+            gridRow={grid.gridRow}
+            gridColumn={grid.gridColumn}
+          />
         ))}
 
         <RelatedStories gridRow="1 / 3" />
