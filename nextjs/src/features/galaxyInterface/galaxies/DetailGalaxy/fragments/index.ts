@@ -1,2 +1,2 @@
 export * from './RelatedStories'
-export * from './RelatedCategoryRecords'
+export * from './RelatedCategory'
