@@ -1,6 +1,6 @@
 import { Grid, GridItem } from '@chakra-ui/react'
 import { DetailedRecord } from '../DetailedRecord'
-import { fakeRelations } from '../../fakeData'
+import { fakeStories } from '../../fakeData'
 import { usePresenter } from './usePresenter'
 import { Record } from '../Record'
 
@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const RelatedStories: React.FC<Props> = ({ gridRow }) => {
-  const { positionedStories } = usePresenter(fakeRelations)
+  const { positionedStories } = usePresenter(fakeStories)
 
   return (
     <GridItem gridRow={gridRow} gridColumn="2" color="white">

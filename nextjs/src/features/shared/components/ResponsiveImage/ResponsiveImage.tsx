@@ -34,6 +34,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
         backgroundSize="contain"
         backgroundRepeat="no-repeat"
         backgroundPosition="center"
+        border={'1px solid yellow'}
       />
     )
   }
@@ -45,6 +46,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
       maxHeight={maxHeight}
       objectFit="contain"
       alt={alt}
+      border={'1px solid yellow'}
     />
   )
 }
