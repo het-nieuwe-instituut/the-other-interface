@@ -1,4 +1,4 @@
-import { CloudCategory } from '@/features/shared/utils/categories'
+import { CLOUD_CATEGORIES, CloudCategory } from '@/features/shared/utils/categories'
 import { PositioningTemplate } from '../types'
 
 type Templates = {
@@ -98,8 +98,8 @@ const people: PositioningTemplate[] = [
 ]
 
 export const positioningTemplate: Templates = {
-  objects,
-  publications,
-  archives,
-  people,
+  [CLOUD_CATEGORIES.objects]: objects,
+  [CLOUD_CATEGORIES.publications]: publications,
+  [CLOUD_CATEGORIES.archives]: archives,
+  [CLOUD_CATEGORIES.people]: people,
 }
