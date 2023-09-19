@@ -20,8 +20,6 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
 
   return (
     <GridItem
-      border={'1px solid pink'}
-      color={'white'}
       gridRow={gridRow}
       gridColumn={gridColumn}
       display="flex"
@@ -36,7 +34,6 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
         alignItems="center"
         justifyContent="center"
         gap="12px"
-        border={'1px solid red'}
       >
         <ResponsiveImage
           src={thumbnail}

@@ -2,7 +2,7 @@
 import { CloudCategory } from '@/features/shared/utils/categories'
 import { Box, Grid } from '@chakra-ui/react'
 import { useParams } from 'next/navigation'
-import { RelatedCategoryRecords, RelatedStories } from './fragments'
+import { RelatedCategory, RelatedStories } from './fragments'
 
 const relatedCategories: CloudCategory[] = ['people', 'objects', 'publications', 'archives']
 
@@ -26,7 +26,7 @@ export const DetailGalaxy: React.FC = () => {
         templateRows="repeat(2, 1fr)"
       >
         {relatedCategories.map(cloudCategory => (
-          <RelatedCategoryRecords key={cloudCategory} category={cloudCategory} />
+          <RelatedCategory key={cloudCategory} category={cloudCategory} />
         ))}
 
         <RelatedStories gridRow="1 / 3" />

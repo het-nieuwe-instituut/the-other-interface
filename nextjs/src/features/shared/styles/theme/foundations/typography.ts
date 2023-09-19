@@ -139,6 +139,13 @@ const headingTimesLarge = {
     fontSize: '12px',
     lineHeight: '12px',
   },
+  sx: {
+    fontFamily: "'Times Dot'",
+    fontStyle: 'normal',
+    fontWeight: '400',
+    fontSize: '9px',
+    lineHeight: '9px',
+  },
 }
 
 const socialLarge = {
