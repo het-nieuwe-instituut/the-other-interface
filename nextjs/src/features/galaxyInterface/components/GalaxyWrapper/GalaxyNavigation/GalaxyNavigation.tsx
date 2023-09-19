@@ -1,20 +1,12 @@
 'use client'
-
 import { FOOTER_Z_INDEX } from '@/features/shared/constants/mainConstants'
-import { Box, Grid, Text, GridItem } from '@chakra-ui/react'
+import { Box, Grid, Text } from '@chakra-ui/react'
+import { usePresenter } from './usePresenter'
+import { NavigationLink } from './fragments/NavigationLink'
+import { galaxyZooms } from './fragments/constants'
 
-const pages = [
-  {
-    title: 'Collection',
-  },
-  {
-    title: 'Category',
-  },
-  {
-    title: 'Detail',
-  },
-]
 export const GalaxyNavigation: React.FC = () => {
+  const { currentZoomNumber } = usePresenter()
   return (
     <Box
       height="60px"
@@ -26,21 +18,9 @@ export const GalaxyNavigation: React.FC = () => {
     >
       <Text textStyle="socialLarge.sm">Zoom</Text>
 
-      <Grid templateColumns="repeat(3, 1fr)" border={'1px solid red'}>
-        {pages.map(({ title }) => (
-          <GridItem key={title} border={'1px solid red'}>
-            <Box
-              border={'1px solid'}
-              borderColor={'navyAlpha.100'}
-              width="10px"
-              height="10px"
-              borderRadius="50%"
-            />
-
-            <Text textStyle="socialLarge.sm" mt={'4px'}>
-              {title}
-            </Text>
-          </GridItem>
+      <Grid templateColumns="repeat(3, 1fr)" mt={'4px'}>
+        {Object.values(galaxyZooms).map(zoom => (
+          <NavigationLink zoomData={zoom} currentZoomNumber={currentZoomNumber} />
         ))}
       </Grid>
     </Box>
