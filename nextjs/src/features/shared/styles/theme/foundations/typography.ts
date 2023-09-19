@@ -150,12 +150,12 @@ const headingTimesLarge = {
 
 const socialLarge = {
   lg: {
-    fontFamily: "'ABC Social'",
+    fontFamily: "'Social'",
     fontSize: '21px',
     fontWeight: 400,
     lineHeight: '27px',
   },
-  sm: { fontFamily: "'ABC Social'", fontSize: '12px', fontWeight: 400, lineHeight: '15px' },
+  sm: { fontFamily: "'Social'", fontSize: '12px', fontWeight: 400, lineHeight: '15px' },
 }
 
 const textStyles = {

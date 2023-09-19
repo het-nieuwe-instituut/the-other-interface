@@ -25,7 +25,7 @@ export const DetailGalaxy: React.FC = () => {
       <Grid
         position="absolute"
         w="96vw"
-        h="70%"
+        h={`calc(80% - 1rem - 60px)`} // considering fixed height of galaxy footer
         top="6%"
         left="2vw"
         right="2vw"
