@@ -4,6 +4,7 @@ import { Box, Grid } from '@chakra-ui/react'
 import { useParams } from 'next/navigation'
 import { RelatedCategory, RelatedStories } from './fragments'
 import { GridParams } from './fragments/types'
+import { GalaxyFooter } from '../../components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 
 const relatedCategories: Array<{ category: CloudCategory; grid: GridParams }> = [
   { category: CLOUD_CATEGORIES.people, grid: { gridRow: '1 / 2', gridColumn: '1 / 2' } },
@@ -42,6 +43,8 @@ export const DetailGalaxy: React.FC = () => {
 
         <RelatedStories gridRow="1 / 3" />
       </Grid>
+
+      <GalaxyFooter />
     </Box>
   )
 }
