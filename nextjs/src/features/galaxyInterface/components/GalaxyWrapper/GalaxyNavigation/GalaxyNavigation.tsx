@@ -22,7 +22,7 @@ export const GalaxyNavigation: React.FC = () => {
       <Text textStyle="socialLarge.sm">{t('zoom')}</Text>
 
       <Grid templateColumns="repeat(3, 1fr)" mt={'4px'}>
-        {Object.values(galaxyZooms).map(navigationItem => (
+        {galaxyZooms.map(navigationItem => (
           <NavigationLink
             zoomData={navigationItem}
             currentZoomNumber={currentZoomNumber}

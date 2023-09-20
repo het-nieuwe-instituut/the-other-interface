@@ -1,19 +1,19 @@
-export const galaxyZooms = {
-  1: {
+export const galaxyZooms = [
+  {
     zoom: 1,
     title: 'collection',
     alignItems: 'flex-start',
   },
-  2: {
+  {
     zoom: 2,
     title: 'category',
     alignItems: 'center',
   },
-  3: {
+  {
     zoom: 3,
     title: 'detail',
     alignItems: 'flex-end',
   },
-} as const
+] as const
 
-export type GalaxyZoom = (typeof galaxyZooms)[keyof typeof galaxyZooms]
+export type GalaxyZoom = (typeof galaxyZooms)[number]
