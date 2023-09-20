@@ -1,10 +1,8 @@
-import { CATEGORIES, CLOUD_CATEGORIES, CloudCategory } from '@/features/shared/utils/categories'
+import { CLOUD_CATEGORIES, CloudCategory } from '@/features/shared/utils/categories'
 import { useParams, usePathname } from 'next/navigation'
 import { useMemo } from 'react'
 
 const getZoom2Link = (category?: string) => {
-  if (category === CATEGORIES.stories) return '/'
-
   if (Object.values(CLOUD_CATEGORIES).includes(category as CloudCategory)) {
     return `/landingpage?category=${category}`
   }

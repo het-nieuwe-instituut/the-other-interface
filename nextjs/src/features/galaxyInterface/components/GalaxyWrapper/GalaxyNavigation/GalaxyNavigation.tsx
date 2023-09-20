@@ -2,9 +2,9 @@
 import { FOOTER_Z_INDEX } from '@/features/shared/constants/mainConstants'
 import { Box, Grid, Text } from '@chakra-ui/react'
 import { usePresenter } from './usePresenter'
-import { NavigationLink } from './fragments/NavigationLink'
 import { galaxyZooms } from './fragments/constants'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { NavigationLink } from './fragments/NavigationLink/NavigationLink'
 
 export const GalaxyNavigation: React.FC = () => {
   const { currentZoomNumber, previousZoomLinks } = usePresenter()

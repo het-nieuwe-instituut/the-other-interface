@@ -1,5 +1,3 @@
-import { CloudCategory } from '@/features/shared/utils/categories'
-
 export const galaxyZooms = {
   1: {
     zoom: 1,
