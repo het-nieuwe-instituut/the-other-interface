@@ -1,5 +1,6 @@
 import { GALAXY_EDITORIAL_LAYER_PART } from '@/features/shared/constants/mainConstants'
 import { Grid, GridItem } from '@chakra-ui/react'
+import { GalaxyNavigation } from '../GalaxyNavigation/GalaxyNavigation'
 
 interface Props {
   renderFooterCenter?: JSX.Element
@@ -18,7 +19,7 @@ export const GalaxyFooter: React.FC<Props> = ({ renderFooterCenter }) => {
     >
       <GridItem></GridItem>
       <GridItem>{renderFooterCenter}</GridItem>
-      <GridItem></GridItem>
+      <GalaxyNavigation />
     </Grid>
   )
 }

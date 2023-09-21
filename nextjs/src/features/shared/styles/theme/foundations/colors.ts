@@ -175,6 +175,7 @@ const blueAlpha = {
 
 const navyAlpha = {
   '100': 'RGBA(0, 13, 20, 1)',
+  '25': 'RGBA(0, 13, 20, .25)',
 }
 
 const colors = {
