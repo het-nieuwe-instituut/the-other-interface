@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { CATEGORIES } from '@/features/shared/utils/categories'
-
-import { PositioningTemplate, Record, PositionedRecord } from '../types'
+import { PositioningTemplate } from '@/features/shared/types/position'
+import { Record, PositionedRecord } from '../types'
 
 const positioningTemplate: PositioningTemplate[] = [
   {

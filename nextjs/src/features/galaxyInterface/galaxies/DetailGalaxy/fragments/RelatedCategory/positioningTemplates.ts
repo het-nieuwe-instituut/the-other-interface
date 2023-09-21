@@ -1,5 +1,5 @@
 import { CLOUD_CATEGORIES, CloudCategory } from '@/features/shared/utils/categories'
-import { PositioningTemplate } from '../types'
+import { PositioningTemplate } from '@/features/shared/types/position'
 
 type Templates = {
   [K in CloudCategory]: PositioningTemplate[]
