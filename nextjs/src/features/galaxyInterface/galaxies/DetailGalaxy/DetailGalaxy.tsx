@@ -3,7 +3,7 @@ import { CLOUD_CATEGORIES, CloudCategory } from '@/features/shared/utils/categor
 import { Box, Grid } from '@chakra-ui/react'
 import { useParams } from 'next/navigation'
 import { RelatedCategory, RelatedStories } from './fragments'
-import { GridParams } from './fragments/types'
+import { GridParams } from '@/features/shared/types/position'
 import { GalaxyFooter } from '../../components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 
 const relatedCategories: Array<{ category: CloudCategory; grid: GridParams }> = [

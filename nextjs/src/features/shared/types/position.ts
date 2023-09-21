@@ -6,3 +6,13 @@ export type Position = {
   bottom?: PositionValue
   left?: PositionValue
 }
+
+export type GridParams = {
+  gridRow: `${number} / ${number}`
+  gridColumn: `${number} / ${number}`
+}
+
+export type PositioningTemplate = {
+  position: Position
+  grid: GridParams
+}
