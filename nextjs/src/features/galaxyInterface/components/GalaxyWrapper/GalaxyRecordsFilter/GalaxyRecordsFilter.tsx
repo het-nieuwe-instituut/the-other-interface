@@ -23,7 +23,7 @@ export const GalaxyRecordsFilter: React.FC<Props> = ({ category, total }) => {
       padding={'5px 20px'}
       zIndex={FOOTER_Z_INDEX}
     >
-      <Flex justifyContent={'center'} alignItems={'center'} mr={4}>
+      <Flex justifyContent={'center'} alignItems={'center'} mr={4} height="50px">
         <Text textStyle="socialLarge.lg">{t('resultsFor', { total })}</Text>
       </Flex>
       <FilterDropdown title={t('category')} selectedOption={t(category) ?? ''} />
