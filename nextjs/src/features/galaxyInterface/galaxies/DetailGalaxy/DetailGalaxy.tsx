@@ -4,6 +4,7 @@ import { Box, Grid } from '@chakra-ui/react'
 import { useParams } from 'next/navigation'
 import { RelatedCategory, RelatedStories } from './fragments'
 import { GridParams } from './fragments/types'
+import { Zoom3Record } from '@/features/pages/tasks/getZoom3Record'
 
 const relatedCategories: Array<{ category: CloudCategory; grid: GridParams }> = [
   { category: CLOUD_CATEGORIES.people, grid: { gridRow: '1 / 2', gridColumn: '1 / 2' } },
@@ -12,7 +13,11 @@ const relatedCategories: Array<{ category: CloudCategory; grid: GridParams }> = 
   { category: CLOUD_CATEGORIES.archives, grid: { gridRow: '2 / 3', gridColumn: '1 / 2' } },
 ]
 
-export const DetailGalaxy: React.FC = () => {
+type Props = {
+  record: Zoom3Record
+}
+
+export const DetailGalaxy: React.FC<Props> = ({ record }) => {
   const params = useParams()
   const category = params?.category
   const id = params?.id
@@ -40,7 +45,7 @@ export const DetailGalaxy: React.FC = () => {
           />
         ))}
 
-        <RelatedStories gridRow="1 / 3" />
+        <RelatedStories gridRow="1 / 3" record={record} />
       </Grid>
     </Box>
   )

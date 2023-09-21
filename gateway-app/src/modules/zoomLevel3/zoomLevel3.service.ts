@@ -14,6 +14,7 @@ import { EntityNames, externalEntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { getRandom2ItemsFromArray } from '../util/helpers'
 import { ZoomLevel3RelatedObjectsArgs, ZoomLevel3RelationsType } from './zoomLevel3.type'
 import { CustomError } from '../util/customError'
+import { StoryService } from '../story/story.service'
 
 interface ZoomLevel3RelationData {
   label: string | null

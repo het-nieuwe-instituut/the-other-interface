@@ -1,12 +1,8 @@
 import { useMemo } from 'react'
 
-import {
-  ComponentModulesImage,
-  HomepageComponentsDynamicZone,
-  StoryEntity,
-} from 'src/generated/graphql'
-import { imageBasePath } from '@/features/modules/modulesConstants'
+import { StoryEntity } from 'src/generated/graphql'
 import { Position } from '@/features/shared/types/position'
+import { extractStoryData } from '@/features/shared/helpers/extractStoryData'
 
 // For readability advantage, we are using the object representation.
 type PositioningTemplate = {
@@ -30,36 +26,16 @@ const positioningTemplate: PositioningTemplate = {
   7: { top: 0, right: 0 },
 }
 
-const findImageUrl = (components: HomepageComponentsDynamicZone[]): string => {
-  const imageComponent = components?.find(
-    component => component.__typename === 'ComponentModulesImage'
-  ) as ComponentModulesImage
-
-  const url = imageComponent?.image.data?.attributes?.url ?? ''
-
-  return imageBasePath(url) ?? ''
-}
-
 export const usePresenter = (stories: StoryEntity[]) => {
   const positionedStories = useMemo(() => {
     let lastStoryIndex = 0
-
-    const mapStory = (story: StoryEntity) => {
-      const storyId = story?.id
-      const storyLocale = story?.attributes?.locale
-      return {
-        title: story?.attributes?.title ?? '',
-        image: findImageUrl(story?.attributes?.components ?? []),
-        locale: storyLocale || 'nl',
-        id: storyId || `${Math.floor(Math.random() * (99999 + 1))}`,
-      }
-    }
 
     return Object.values(positioningTemplate).map(position => {
       if (!position) {
         return null
       } else {
-        const mappedStory = mapStory(stories?.[lastStoryIndex])
+        const mappedStory = extractStoryData(stories?.[lastStoryIndex])
+        if (!mappedStory) return null
         lastStoryIndex++
         return { ...mappedStory, position }
       }

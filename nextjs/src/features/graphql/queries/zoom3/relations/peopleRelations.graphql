@@ -1,5 +1,5 @@
 query PeopleRelations($id: String!) {
     relations(type: People, id: $id) {
-        ...zoom5RelationsFragment
+        ...zoom3RelationsFragment
     }
 }

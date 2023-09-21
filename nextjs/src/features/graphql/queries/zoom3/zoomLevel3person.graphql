@@ -1,5 +1,5 @@
-query ZoomLevel5Person($id: String!) {
-    zoomLevel5Person(id: $id) {
+query ZoomLevel3Person($id: String!) {
+    zoomLevel3Person(id: $id) {
         __typename
         id
         name

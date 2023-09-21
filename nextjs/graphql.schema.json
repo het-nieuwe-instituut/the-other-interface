@@ -8,7 +8,7 @@
     "types": [
       {
         "kind": "UNION",
-        "name": "ArchiveZoomLevel5UnionType",
+        "name": "ArchiveZoomLevel3UnionType",
         "description": null,
         "fields": null,
         "inputFields": null,
@@ -17,12 +17,12 @@
         "possibleTypes": [
           {
             "kind": "OBJECT",
-            "name": "ArchivesFondsZoomLevel5DetailType",
+            "name": "ArchivesFondsZoomLevel3DetailType",
             "ofType": null
           },
           {
             "kind": "OBJECT",
-            "name": "ArchivesOtherZoomLevel5DetailType",
+            "name": "ArchivesOtherZoomLevel3DetailType",
             "ofType": null
           }
         ]
@@ -94,7 +94,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "PoepleZoomLevel5DetailType",
+              "name": "PoepleZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -108,7 +108,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "ArchivesFondsZoomLevel5DetailType",
+        "name": "ArchivesFondsZoomLevel3DetailType",
         "description": null,
         "fields": [
           {
@@ -408,7 +408,7 @@
               "name": null,
               "ofType": {
                 "kind": "ENUM",
-                "name": "ArchivesZoomLevel5Types",
+                "name": "ArchivesZoomLevel3Types",
                 "ofType": null
               }
             },
@@ -423,7 +423,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "ArchivesOtherZoomLevel5DetailType",
+        "name": "ArchivesOtherZoomLevel3DetailType",
         "description": null,
         "fields": [
           {
@@ -639,7 +639,7 @@
               "name": null,
               "ofType": {
                 "kind": "ENUM",
-                "name": "ArchivesZoomLevel5Types",
+                "name": "ArchivesZoomLevel3Types",
                 "ofType": null
               }
             },
@@ -654,7 +654,7 @@
       },
       {
         "kind": "ENUM",
-        "name": "ArchivesZoomLevel5Types",
+        "name": "ArchivesZoomLevel3Types",
         "description": null,
         "fields": null,
         "inputFields": null,
@@ -6951,7 +6951,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "PoepleZoomLevel5DetailType",
+              "name": "PoepleZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -7075,7 +7075,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "ObjectsZoomLevel5DetailType",
+        "name": "ObjectsZoomLevel3DetailType",
         "description": null,
         "fields": [
           {
@@ -7659,7 +7659,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "PoepleZoomLevel5DetailType",
+        "name": "PoepleZoomLevel3DetailType",
         "description": null,
         "fields": [
           {
@@ -8083,7 +8083,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "PoepleZoomLevel5DetailType",
+              "name": "PoepleZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -8097,7 +8097,7 @@
       },
       {
         "kind": "UNION",
-        "name": "PublicationZoomLevel5UnionType",
+        "name": "PublicationZoomLevel3UnionType",
         "description": null,
         "fields": null,
         "inputFields": null,
@@ -8106,29 +8106,29 @@
         "possibleTypes": [
           {
             "kind": "OBJECT",
-            "name": "PublicationsArticleZoomLevel5DetailType",
+            "name": "PublicationsArticleZoomLevel3DetailType",
             "ofType": null
           },
           {
             "kind": "OBJECT",
-            "name": "PublicationsAudioVisualZoomLevel5DetailType",
+            "name": "PublicationsAudioVisualZoomLevel3DetailType",
             "ofType": null
           },
           {
             "kind": "OBJECT",
-            "name": "PublicationsBookZoomLevel5DetailType",
+            "name": "PublicationsBookZoomLevel3DetailType",
             "ofType": null
           },
           {
             "kind": "OBJECT",
-            "name": "PublicationsSerialZoomLevel5DetailType",
+            "name": "PublicationsSerialZoomLevel3DetailType",
             "ofType": null
           }
         ]
       },
       {
         "kind": "OBJECT",
-        "name": "PublicationsArticleZoomLevel5DetailType",
+        "name": "PublicationsArticleZoomLevel3DetailType",
         "description": null,
         "fields": [
           {
@@ -8293,7 +8293,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "PoepleZoomLevel5DetailType",
+              "name": "PoepleZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -8428,7 +8428,7 @@
               "name": null,
               "ofType": {
                 "kind": "ENUM",
-                "name": "PublicationsZoomLevel5Types",
+                "name": "PublicationsZoomLevel3Types",
                 "ofType": null
               }
             },
@@ -8491,7 +8491,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "PublicationsAudioVisualZoomLevel5DetailType",
+        "name": "PublicationsAudioVisualZoomLevel3DetailType",
         "description": null,
         "fields": [
           {
@@ -8680,7 +8680,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "PoepleZoomLevel5DetailType",
+              "name": "PoepleZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -8803,7 +8803,7 @@
               "name": null,
               "ofType": {
                 "kind": "ENUM",
-                "name": "PublicationsZoomLevel5Types",
+                "name": "PublicationsZoomLevel3Types",
                 "ofType": null
               }
             },
@@ -8854,7 +8854,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "PublicationsBookZoomLevel5DetailType",
+        "name": "PublicationsBookZoomLevel3DetailType",
         "description": null,
         "fields": [
           {
@@ -9115,7 +9115,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "PoepleZoomLevel5DetailType",
+              "name": "PoepleZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -9238,7 +9238,7 @@
               "name": null,
               "ofType": {
                 "kind": "ENUM",
-                "name": "PublicationsZoomLevel5Types",
+                "name": "PublicationsZoomLevel3Types",
                 "ofType": null
               }
             },
@@ -9289,7 +9289,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "PublicationsSerialZoomLevel5DetailType",
+        "name": "PublicationsSerialZoomLevel3DetailType",
         "description": null,
         "fields": [
           {
@@ -9422,7 +9422,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "PoepleZoomLevel5DetailType",
+              "name": "PoepleZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -9521,7 +9521,7 @@
               "name": null,
               "ofType": {
                 "kind": "ENUM",
-                "name": "PublicationsZoomLevel5Types",
+                "name": "PublicationsZoomLevel3Types",
                 "ofType": null
               }
             },
@@ -9572,7 +9572,7 @@
       },
       {
         "kind": "ENUM",
-        "name": "PublicationsZoomLevel5Types",
+        "name": "PublicationsZoomLevel3Types",
         "description": null,
         "fields": null,
         "inputFields": null,
@@ -9671,7 +9671,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "ZoomLevel5RelatedRecordType",
+                  "name": "ZoomLevel3RelatedRecordType",
                   "ofType": null
                 }
               }
@@ -9688,7 +9688,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "ArchivesFondsZoomLevel5DetailType",
+                "name": "ArchivesFondsZoomLevel3DetailType",
                 "ofType": null
               }
             },
@@ -10233,7 +10233,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "ObjectsZoomLevel5DetailType",
+                "name": "ObjectsZoomLevel3DetailType",
                 "ofType": null
               }
             },
@@ -10249,7 +10249,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "PublicationsArticleZoomLevel5DetailType",
+                "name": "PublicationsArticleZoomLevel3DetailType",
                 "ofType": null
               }
             },
@@ -10265,7 +10265,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "PublicationsAudioVisualZoomLevel5DetailType",
+                "name": "PublicationsAudioVisualZoomLevel3DetailType",
                 "ofType": null
               }
             },
@@ -10281,7 +10281,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "PublicationsBookZoomLevel5DetailType",
+                "name": "PublicationsBookZoomLevel3DetailType",
                 "ofType": null
               }
             },
@@ -10297,7 +10297,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "PublicationsSerialZoomLevel5DetailType",
+                "name": "PublicationsSerialZoomLevel3DetailType",
                 "ofType": null
               }
             },
@@ -10361,7 +10361,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "ZoomLevel5RelationsType",
+                  "name": "ZoomLevel3RelationsType",
                   "ofType": null
                 }
               }
@@ -11143,92 +11143,7 @@
             "deprecationReason": null
           },
           {
-            "name": "zoomLevel3",
-            "description": null,
-            "args": [
-              {
-                "name": "entityName",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "ENUM",
-                    "name": "EntityNames",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "filterId",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "page",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "Int",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "pageSize",
-                "description": null,
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "OBJECT",
-                    "name": "ZoomLevel3Type",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "zoomLevel5Archive",
+            "name": "zoomLevel3Archive",
             "description": null,
             "args": [
               {
@@ -11250,14 +11165,14 @@
             ],
             "type": {
               "kind": "UNION",
-              "name": "ArchiveZoomLevel5UnionType",
+              "name": "ArchiveZoomLevel3UnionType",
               "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "zoomLevel5ArchivesFonds",
+            "name": "zoomLevel3ArchivesFonds",
             "description": null,
             "args": [
               {
@@ -11279,14 +11194,14 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "ArchivesFondsZoomLevel5DetailType",
+              "name": "ArchivesFondsZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "zoomLevel5ArchivesOther",
+            "name": "zoomLevel3ArchivesOther",
             "description": null,
             "args": [
               {
@@ -11308,14 +11223,14 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "ArchivesOtherZoomLevel5DetailType",
+              "name": "ArchivesOtherZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "zoomLevel5Object",
+            "name": "zoomLevel3Object",
             "description": null,
             "args": [
               {
@@ -11337,14 +11252,14 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "ObjectsZoomLevel5DetailType",
+              "name": "ObjectsZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "zoomLevel5Person",
+            "name": "zoomLevel3Person",
             "description": null,
             "args": [
               {
@@ -11366,14 +11281,14 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "PoepleZoomLevel5DetailType",
+              "name": "PoepleZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "zoomLevel5Publication",
+            "name": "zoomLevel3Publication",
             "description": null,
             "args": [
               {
@@ -11395,14 +11310,14 @@
             ],
             "type": {
               "kind": "UNION",
-              "name": "PublicationZoomLevel5UnionType",
+              "name": "PublicationZoomLevel3UnionType",
               "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "zoomLevel5PublicationsArticle",
+            "name": "zoomLevel3PublicationsArticle",
             "description": null,
             "args": [
               {
@@ -11424,14 +11339,14 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "PublicationsArticleZoomLevel5DetailType",
+              "name": "PublicationsArticleZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "zoomLevel5PublicationsAudiovisual",
+            "name": "zoomLevel3PublicationsAudiovisual",
             "description": null,
             "args": [
               {
@@ -11453,14 +11368,14 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "PublicationsAudioVisualZoomLevel5DetailType",
+              "name": "PublicationsAudioVisualZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "zoomLevel5PublicationsBook",
+            "name": "zoomLevel3PublicationsBook",
             "description": null,
             "args": [
               {
@@ -11482,14 +11397,14 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "PublicationsBookZoomLevel5DetailType",
+              "name": "PublicationsBookZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "zoomLevel5PublicationsSerial",
+            "name": "zoomLevel3PublicationsSerial",
             "description": null,
             "args": [
               {
@@ -11511,7 +11426,7 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "PublicationsSerialZoomLevel5DetailType",
+              "name": "PublicationsSerialZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -11572,7 +11487,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "ZoomLevel5RelationsType",
+                  "name": "ZoomLevel3RelationsType",
                   "ofType": null
                 }
               }
@@ -13629,7 +13544,7 @@
             "args": [],
             "type": {
               "kind": "UNION",
-              "name": "ArchiveZoomLevel5UnionType",
+              "name": "ArchiveZoomLevel3UnionType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -13653,7 +13568,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "ObjectsZoomLevel5DetailType",
+              "name": "ObjectsZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -13665,7 +13580,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "PoepleZoomLevel5DetailType",
+              "name": "PoepleZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -13677,7 +13592,7 @@
             "args": [],
             "type": {
               "kind": "UNION",
-              "name": "PublicationZoomLevel5UnionType",
+              "name": "PublicationZoomLevel3UnionType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -15534,66 +15449,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "ZoomLevel3Type",
-        "description": null,
-        "fields": [
-          {
-            "name": "count",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "name",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "total",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "uri",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "ZoomLevel5RelatedRecordType",
+        "name": "ZoomLevel3RelatedRecordType",
         "description": null,
         "fields": [
           {
@@ -15744,7 +15600,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "ZoomLevel5RelationsType",
+        "name": "ZoomLevel3RelationsType",
         "description": null,
         "fields": [
           {

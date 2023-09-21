@@ -1,7 +1,7 @@
-query ZoomLevel5Publication($id: String!) {
-    zoomLevel5Publication(id: $id) {
+query ZoomLevel3Publication($id: String!) {
+    zoomLevel3Publication(id: $id) {
         __typename
-        ... on PublicationsAudioVisualZoomLevel5DetailType {
+        ... on PublicationsAudioVisualZoomLevel3DetailType {
             id
             __typename
             typeOfPublication
@@ -36,7 +36,7 @@ query ZoomLevel5Publication($id: String!) {
             availability
             shelfmark
         }
-        ... on PublicationsArticleZoomLevel5DetailType {
+        ... on PublicationsArticleZoomLevel3DetailType {
             __typename
             id
             typeOfPublication
@@ -71,7 +71,7 @@ query ZoomLevel5Publication($id: String!) {
             shelfmark
             permanentLink
         }
-        ... on PublicationsSerialZoomLevel5DetailType {
+        ... on PublicationsSerialZoomLevel3DetailType {
             id
             __typename
             typeOfPublication
@@ -94,7 +94,7 @@ query ZoomLevel5Publication($id: String!) {
             holding
             permanentLink
         }
-        ... on PublicationsBookZoomLevel5DetailType {
+        ... on PublicationsBookZoomLevel3DetailType {
             id
             __typename
             typeOfPublication

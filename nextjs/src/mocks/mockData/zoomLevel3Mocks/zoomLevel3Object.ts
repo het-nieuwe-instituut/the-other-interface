@@ -1,4 +1,4 @@
-export const zoomLevel5Object = {
+export const zoomLevel3Object = {
   zoom5detail: {
     id: '1982',
     image: 'https://example-mock-data.com/media/1982',

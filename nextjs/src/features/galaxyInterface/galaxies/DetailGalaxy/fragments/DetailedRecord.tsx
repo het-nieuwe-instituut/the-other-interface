@@ -2,19 +2,18 @@ import { Box, GridItem, Text, Flex } from '@chakra-ui/react'
 import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
 import { useParams } from 'next/navigation'
 import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
-
-import { fakeDetailedRecord } from '../fakeData'
 import { Category } from '@/features/shared/utils/categories'
 import { toSingularCategory } from '@/features/shared/utils/toSingularCategory'
+import { Zoom3Record } from '@/features/pages/tasks/getZoom3Record'
 
 interface Props {
   gridRow: string
   gridColumn: string
+  record: Zoom3Record
 }
 
-export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
+export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn, record }) => {
   const { t } = useLooseTypeSafeTranslation('category')
-  const { title, thumbnail } = fakeDetailedRecord
   const params = useParams()
   const category = params?.category as Category
 
@@ -36,12 +35,12 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
         gap="12px"
       >
         <ResponsiveImage
-          src={thumbnail}
-          alt={title}
-          maxHeight={!thumbnail ? '100%' : 'calc(100% - 2.5vw - 20px)'} // where 2.6vw are a texts' line heights, 16px are gaps
+          src={record?.image}
+          alt={record?.title}
+          maxHeight={!record?.image ? '100%' : 'calc(100% - 2.5vw - 20px)'} // where 2.6vw are a texts' line heights, 16px are gaps
         />
 
-        <Box w="100%" color="blueAlpha.100" position={!thumbnail ? 'absolute' : 'relative'}>
+        <Box w="100%" color="blueAlpha.100" position={!record?.image ? 'absolute' : 'relative'}>
           <Text
             align="center"
             isTruncated
@@ -49,7 +48,7 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
             fontSize={'1.6vw'}
             lineHeight={'1.6vw'}
           >
-            {title}
+            {record?.title}
           </Text>
           <Text
             align="center"

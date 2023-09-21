@@ -1,4 +1,4 @@
-fragment zoom5RelationsFragment on ZoomLevel5RelationsType {
+fragment zoom3RelationsFragment on ZoomLevel3RelationsType {
     type
     total
     randomRelations {

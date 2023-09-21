@@ -3,12 +3,14 @@ import { DetailedRecord } from '../DetailedRecord'
 import { fakeStories } from '../../fakeData'
 import { usePresenter } from './usePresenter'
 import { Record } from '../Record'
+import { Zoom3Record } from '@/features/pages/tasks/getZoom3Record'
 
 interface Props {
   gridRow: string
+  record: Zoom3Record
 }
 
-export const RelatedStories: React.FC<Props> = ({ gridRow }) => {
+export const RelatedStories: React.FC<Props> = ({ gridRow, record }) => {
   const { positionedStories } = usePresenter(fakeStories)
 
   return (
@@ -18,7 +20,7 @@ export const RelatedStories: React.FC<Props> = ({ gridRow }) => {
           <Record key={story.id} record={story} />
         ))}
 
-        <DetailedRecord gridRow="2 / 4" gridColumn="1 / 3" />
+        <DetailedRecord gridRow="2 / 4" gridColumn="1 / 3" record={record}/>
       </Grid>
     </GridItem>
   )

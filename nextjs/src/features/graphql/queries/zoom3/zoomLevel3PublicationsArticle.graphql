@@ -1,5 +1,5 @@
-query ZoomLevel5PublicationsArticle($id: String!) {
-    zoomLevel5PublicationsArticle(id: $id) {
+query ZoomLevel3PublicationsArticle($id: String!) {
+    zoomLevel3PublicationsArticle(id: $id) {
         id
         __typename
         typeOfPublication

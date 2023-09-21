@@ -48,12 +48,12 @@ fragment gridModuleFragment on ComponentModulesGridModule {
                     updatedAt
                     recordId
                     archive {
-                        ... on ArchivesOtherZoomLevel5DetailType {
+                        ... on ArchivesOtherZoomLevel3DetailType {
                             id
                             type
                             title
                         }
-                        ... on ArchivesFondsZoomLevel5DetailType {
+                        ... on ArchivesFondsZoomLevel3DetailType {
                             id
                             type
                         }
@@ -63,22 +63,22 @@ fragment gridModuleFragment on ComponentModulesGridModule {
                         image
                     }
                     publication {
-                        ... on PublicationsAudioVisualZoomLevel5DetailType {
+                        ... on PublicationsAudioVisualZoomLevel3DetailType {
                             id
                             type
                             title
                         }
-                        ... on PublicationsArticleZoomLevel5DetailType {
+                        ... on PublicationsArticleZoomLevel3DetailType {
                             id
                             type
                             title
                         }
-                        ... on PublicationsSerialZoomLevel5DetailType {
+                        ... on PublicationsSerialZoomLevel3DetailType {
                             id
                             type
                             title
                         }
-                        ... on PublicationsBookZoomLevel5DetailType {
+                        ... on PublicationsBookZoomLevel3DetailType {
                             id
                             type
                             title

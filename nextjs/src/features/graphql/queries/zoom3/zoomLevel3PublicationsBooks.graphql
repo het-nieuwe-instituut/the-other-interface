@@ -1,5 +1,5 @@
-query ZoomLevel5PublicationsAudiovisual($id: String!) {
-    zoomLevel5PublicationsAudiovisual(id: $id) {
+query ZoomLevel3PublicationsBook($id: String!) {
+    zoomLevel3PublicationsBook(id: $id) {
         id
         __typename
         typeOfPublication
@@ -16,21 +16,27 @@ query ZoomLevel5PublicationsAudiovisual($id: String!) {
         yearOfPublication
         placeOfPublication
         placeOfPublicationLabel
-        abstract
+        isbn
+        description
         annotation
-        scope
+        codeOfArchive
+        codeOfArchiveLabel
+        edition
+        illustration
+        numberOfPages
         language
         languageLabel
-        medium
+        seriesLabel
+        number
         geographicalKeyword
         geographicalKeywordLabel
         subject
         subjectLabel
         relatedPerInst
         relatedPerInstLabel
-        permanentLink
         objectNumber
         availability
         shelfmark
+        permanentLink
     }
 }

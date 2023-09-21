@@ -1,5 +1,5 @@
-query ZoomLevel5Object($id: String!) {
-    zoomLevel5Object(id: $id) {
+query ZoomLevel3Object($id: String!) {
+    zoomLevel3Object(id: $id) {
         __typename
         id
         image

@@ -19,7 +19,6 @@ import {
   archivesZoomLevel2Data,
 } from '../../mocks/mockData/zoomLevel2Data'
 import { zoomLevel3Data } from '../../mocks/mockData/zoomLevel3Data'
-import { zoomLevel5Data } from '../../mocks/mockData/zoomLevel5Data'
 import { themesData } from '../../mocks/mockData/themesData'
 import { EntityNames } from 'src/generated/graphql'
 
@@ -69,22 +68,18 @@ const customResolvers = {
           }
       }
     },
-
-    zoomLevel3() {
-      return zoomLevel3Data
-    },
     // TODO this can be implemented in case we want to test transition before zoom level 5 object and another type. So far it works only from object to story
-    zoomLevel5Publication() {
+    zoomLevel3Publication() {
       return null
     },
-    zoomLevel5Person() {
+    zoomLevel3Person() {
       return null
     },
-    zoomLevel5Archive() {
+    zoomLevel3Archive() {
       return null
     },
-    zoomLevel5Object() {
-      return zoomLevel5Data['zoomLevel5Object'].zoom5detail
+    zoomLevel3Object() {
+      return zoomLevel3Data['zoomLevel3Object'].zoom3detail
     },
 
     story() {

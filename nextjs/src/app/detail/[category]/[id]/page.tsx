@@ -5,6 +5,8 @@ import { PublicationState } from '@/features/shared/types/enums'
 import { DetailpageContainer } from '@/features/pages/containers/DetailpageContainer/DetailpageContainer'
 import { notFound } from 'next/navigation'
 import { getRecordEditorialContent } from '@/features/pages/tasks/getRecordEditorialContent'
+import initApiServerService from '@/features/shared/utils/initApiServerService'
+import { getZoom3RecordTask } from '@/features/pages/tasks/getZoom3Record'
 
 function assertIsCategory(category: string): asserts category is Category {
   if (!Object.values(CATEGORIES).includes(category as Category)) {
@@ -20,13 +22,29 @@ export default async function Page({ params }: { params: { category: string; id:
   const { isEnabled } = draftMode()
   const { lang } = useTranslation()
 
-  const publicationState = isEnabled ? PublicationState.Preview : PublicationState.Live
-  const editorialData = await getRecordEditorialContent({
-    category,
-    id,
-    publicationState,
-    lang,
-  })
+  const api = initApiServerService()
 
-  return <DetailpageContainer editorialData={editorialData} />
+  const publicationState = isEnabled ? PublicationState.Preview : PublicationState.Live
+  const payload =
+    category === CATEGORIES.stories
+      ? {
+          id,
+          locale: lang,
+          publicationState,
+        }
+      : { id }
+  const [editorialData, detail] = await Promise.all([
+    await getRecordEditorialContent({
+      category,
+      id,
+      publicationState,
+      lang,
+    }),
+
+    await getZoom3RecordTask(category, payload, api),
+  ])
+
+  // TODO create separate type for detail and mock result to it
+
+  return <DetailpageContainer editorialData={editorialData} record={detail} />
 }

@@ -1,0 +1,8 @@
+query ZoomLevel3ArchivesFonds($id: String!) {
+    zoomLevel3ArchivesFonds(id: $id) {
+        __typename
+        id
+        recordTitle
+        descriptionLevel
+    }
+}
