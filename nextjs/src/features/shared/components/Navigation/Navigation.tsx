@@ -5,7 +5,6 @@ import { MAX_Z_INDEX, NAVIGATION_OVERLAY_Z_INDEX } from '../../constants/mainCon
 import { capitalizeFirstLetter } from '../../utils/text'
 import { StaticHeader } from '../StaticHeader/StaticHeader'
 import { usePresenter } from './usePresenter'
-import { GalaxyFooter } from '@/features/galaxyInterface/components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 import { MenuPagesQuery } from 'src/generated/graphql'
 
 const fadeIn = keyframes({ from: { opacity: 0 }, to: { opacity: 0.85 } })
@@ -16,7 +15,7 @@ type Props = {
 }
 
 export const Navigation = ({ menupages }: Props) => {
-  const { tNavigation, isMenuOpen, ref, isMobile } = usePresenter()
+  const { tNavigation, isMenuOpen, ref } = usePresenter()
 
   return (
     <Box
@@ -133,17 +132,6 @@ export const Navigation = ({ menupages }: Props) => {
             </Link>
           ))}
         </Flex>
-      </Flex>
-
-      <Flex
-        pt={{ sm: '48px', md: '48px', lg: '94px', xl: '94px' }}
-        pl={4}
-        maxWidth={'90em'}
-        marginX={isMobile ? 'initial' : 'auto'}
-        zIndex={MAX_Z_INDEX}
-        position={'relative'}
-      >
-        <GalaxyFooter />
       </Flex>
     </Box>
   )
