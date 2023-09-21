@@ -6,29 +6,61 @@ import {
   StoryEntity,
 } from 'src/generated/graphql'
 import { imageBasePath } from '@/features/modules/modulesConstants'
-import { Position } from '@/features/shared/types/position'
+import { PositioningTemplate } from '@/features/shared/types/position'
+import { PositionedStory } from '../types'
 
-// For readability advantage, we are using the object representation.
-type PositioningTemplate = {
-  [index: number]: Position | null
-}
-
-const positioningTemplate: PositioningTemplate = {
-  0: {
-    top: 0,
-    left: 0,
+const positioningTemplate: PositioningTemplate[] = [
+  {
+    position: {
+      top: 0,
+      left: 0,
+    },
+    grid: {
+      gridRow: '1 / 2',
+      gridColumn: '1 / 2',
+    },
   },
-  1: {
-    right: 0,
-    bottom: 0,
+  {
+    position: {
+      right: 0,
+      bottom: 0,
+    },
+    grid: {
+      gridRow: '1 / 2',
+      gridColumn: '2 / 3',
+    },
   },
-  2: null,
-  3: { top: 0, left: 0 },
-  4: null,
-  5: null,
-  6: { left: 0, bottom: 0 },
-  7: { top: 0, right: 0 },
-}
+  {
+    position: {
+      left: 0,
+      bottom: 0,
+    },
+    grid: {
+      gridRow: '2 / 3',
+      gridColumn: '3 / 4',
+    },
+  },
+  {
+    position: {
+      top: 0,
+      left: 0,
+    },
+    grid: {
+      gridRow: '1 / 2',
+      gridColumn: '4 / 5',
+    },
+  },
+  {
+    position: {
+      top: 0,
+      right: 0,
+    },
+    grid: {
+      gridRow: '2 / 3',
+      gridColumn: '4 / 5',
+    },
+  },
+]
 
 const findImageUrl = (components: HomepageComponentsDynamicZone[]): string => {
   const imageComponent = components?.find(
@@ -40,30 +72,36 @@ const findImageUrl = (components: HomepageComponentsDynamicZone[]): string => {
   return imageBasePath(url) ?? ''
 }
 
+const mapStory = (story: StoryEntity) => {
+  const storyId = story?.id
+  const storyLocale = story?.attributes?.locale
+  return {
+    title: story?.attributes?.title ?? '',
+    image: findImageUrl(story?.attributes?.components ?? []),
+    locale: storyLocale || 'nl',
+    id: `${storyId}-${storyLocale}` || `${Math.floor(Math.random() * (99999 + 1))}`,
+  }
+}
+
 export const usePresenter = (stories: StoryEntity[]) => {
   const positionedStories = useMemo(() => {
-    let lastStoryIndex = 0
+    const positionedStories: PositionedStory[] = []
 
-    const mapStory = (story: StoryEntity) => {
-      const storyId = story?.id
-      const storyLocale = story?.attributes?.locale
-      return {
-        title: story?.attributes?.title ?? '',
-        image: findImageUrl(story?.attributes?.components ?? []),
-        locale: storyLocale || 'nl',
-        id: storyId || `${Math.floor(Math.random() * (99999 + 1))}`,
-      }
-    }
+    positioningTemplate.forEach((template, index) => {
+      const record = stories[index]
 
-    return Object.values(positioningTemplate).map(position => {
-      if (!position) {
-        return null
-      } else {
-        const mappedStory = mapStory(stories?.[lastStoryIndex])
-        lastStoryIndex++
-        return { ...mappedStory, position }
+      if (record) {
+        const mappedStory = mapStory(stories?.[index])
+
+        positionedStories.push({
+          ...mappedStory,
+          position: template.position,
+          grid: template.grid,
+        })
       }
     })
+
+    return positionedStories
   }, [stories])
 
   return {

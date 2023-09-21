@@ -3,24 +3,16 @@ import { Box, Text, GridItem, Flex } from '@chakra-ui/react'
 import { useRouter } from 'next/navigation'
 
 import { HOMEPAGE_Z_INDEXES } from './constants'
-import { Position } from '@/features/shared/types/position'
+import { PositionedStory } from './types'
 
 type Props = {
-  story: {
-    id: string
-    title: string
-    image: string
-    position: Position
-    locale: string
-  } | null
+  story: PositionedStory
 }
 
 export const Story: React.FC<Props> = ({ story }) => {
   const router = useRouter()
 
-  if (!story) return <Box />
-
-  const { id, title, image, position } = story
+  const { id, title, image, position, grid } = story
 
   const isClickable = !!title
 
@@ -31,7 +23,7 @@ export const Story: React.FC<Props> = ({ story }) => {
   }
 
   return (
-    <GridItem position="relative">
+    <GridItem position="relative" css={{ ...grid }}>
       <Flex
         position="absolute"
         style={{ ...position }}

@@ -12,7 +12,7 @@ export type Props = {
 export const HomepageContainer: React.FC<Props> = ({ homepage, themes }) => {
   const editorialData = homepage?.homepage?.data?.attributes
   const storyTitle = themes?.themes.data?.[0]?.attributes?.name
-  const stories = themes?.themes.data?.[0]?.attributes?.stories?.data
+  const stories = themes?.themes.data?.[0]?.attributes?.stories?.data || []
 
   return (
     <Box backgroundColor="graph">
