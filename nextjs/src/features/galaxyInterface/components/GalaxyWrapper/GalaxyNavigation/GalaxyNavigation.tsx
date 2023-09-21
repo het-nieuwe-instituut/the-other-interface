@@ -24,6 +24,7 @@ export const GalaxyNavigation: React.FC = () => {
       <Grid templateColumns="repeat(3, 1fr)" mt={'4px'}>
         {galaxyZooms.map(navigationItem => (
           <NavigationLink
+            key={navigationItem.title}
             zoomData={navigationItem}
             currentZoomNumber={currentZoomNumber}
             link={previousZoomLinks[navigationItem.zoom]}
