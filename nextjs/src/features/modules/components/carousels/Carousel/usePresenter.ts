@@ -1,7 +1,7 @@
 import useCalculateItemsPerSlide from '@/features/modules/hooks/calculateSlidesSizes'
 import { useBreakpointValue } from '@chakra-ui/react'
 import { chunk } from 'lodash'
-import Router from 'next/router'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 import {
@@ -16,6 +16,8 @@ export const usePresenter = (
   buttonUrl: Maybe<string> | undefined
 ) => {
   const [currentSlide, updateCurrentSlide] = useState(0)
+  const router = useRouter()
+
   const { ITEMS_PER_PAGE } = useCalculateItemsPerSlide(
     type ?? EnumComponentmodulescarouselType.Highlights
   )
@@ -35,7 +37,7 @@ export const usePresenter = (
   }
 
   const handlePressButton = () => {
-    Router.push(buttonUrl ?? '')
+    router.push(buttonUrl ?? '')
   }
 
   const showPagination = pagesCount > 1
