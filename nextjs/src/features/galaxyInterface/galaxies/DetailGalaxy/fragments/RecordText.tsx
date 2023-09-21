@@ -19,17 +19,17 @@ export const RecordText: React.FC<Props> = ({ title, categoryType, css }) => {
         align="center"
         isTruncated
         textStyle="headingTimesLarge.sm"
-        fontSize={'0.9vw'}
-        lineHeight={'0.9vw'}
+        fontSize={'clamp(12px, .9vw, 20px)'}
+        lineHeight={'normal'}
       >
         {title}
       </Text>
       <Text
         align="center"
         textStyle="headingTimesLarge.sm"
-        fontSize={'0.7vw'}
-        lineHeight={'0.7vw'}
-        mt={'4px'}
+        fontSize={'clamp(9px, .7vw, 18px)'}
+        lineHeight={'normal'}
+        mt={'2px'}
       >
         {t(toSingularCategory(categoryType))}
       </Text>

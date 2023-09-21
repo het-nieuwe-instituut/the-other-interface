@@ -46,16 +46,16 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
             align="center"
             isTruncated
             textStyle="headingTimesLarge.md"
-            fontSize={'1.6vw'}
-            lineHeight={'1.6vw'}
+            fontSize={'clamp(20px, 1.6vw, 40px)'}
+            lineHeight={'normal'}
           >
             {title}
           </Text>
           <Text
             align="center"
             textStyle="headingTimesLarge.sm"
-            fontSize={'0.9vw'}
-            lineHeight={'0.9vw'}
+            fontSize={'clamp(12px, .9vw, 20px)'}
+            lineHeight={'normal'}
             mt={'8px'}
           >
             {t(toSingularCategory(category))}
