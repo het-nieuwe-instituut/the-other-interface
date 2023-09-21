@@ -23,7 +23,7 @@ export const Stories: React.FC<Props> = ({ stories }) => {
       gap="20px"
     >
       {positionedStories.map(positionedStory => (
-        <Story key={positionedStory.id} story={positionedStory} />
+        <Story key={`${positionedStory.id}-${positionedStory.locale}`} story={positionedStory} />
       ))}
     </Grid>
   )

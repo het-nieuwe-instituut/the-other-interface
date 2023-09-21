@@ -79,7 +79,7 @@ const mapStory = (story: StoryEntity) => {
     title: story?.attributes?.title ?? '',
     image: findImageUrl(story?.attributes?.components ?? []),
     locale: storyLocale || 'nl',
-    id: `${storyId}-${storyLocale}` || `${Math.floor(Math.random() * (99999 + 1))}`,
+    id: storyId || `${Math.floor(Math.random() * (99999 + 1))}`,
   }
 }
 
