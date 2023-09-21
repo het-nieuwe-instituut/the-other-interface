@@ -2,8 +2,6 @@ import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/Gala
 import { MainGalaxy } from '@/features/galaxyInterface/galaxies/MainGalaxy/MainGalaxy'
 import { EditorialLayer } from '@/features/shared/components/EditorialLayer/EditorialLayer'
 import { Box } from '../../../shared/configs/chakra'
-// import dynamic from 'next/dynamic'
-
 import { HomepageQuery, StoryEntity, ThemesQuery } from 'src/generated/graphql'
 
 export type Props = {
