@@ -7,6 +7,7 @@ import { notFound } from 'next/navigation'
 import { getRecordEditorialContent } from '@/features/pages/tasks/getRecordEditorialContent'
 import initApiServerService from '@/features/shared/utils/initApiServerService'
 import { getZoom3RecordTask } from '@/features/pages/tasks/getZoom3Record'
+import { getZoom3RelationsTask } from '@/features/pages/tasks/getZoom3Relations'
 
 function assertIsCategory(category: string): asserts category is Category {
   if (!Object.values(CATEGORIES).includes(category as Category)) {
@@ -33,6 +34,9 @@ export default async function Page({ params }: { params: { category: string; id:
           publicationState,
         }
       : { id }
+
+  await getZoom3RelationsTask(category, id, lang, api)
+
   const [editorialData, detail] = await Promise.all([
     await getRecordEditorialContent({
       category,

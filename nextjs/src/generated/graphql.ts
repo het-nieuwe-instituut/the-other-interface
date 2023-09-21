@@ -1111,6 +1111,7 @@ export type QueryMenupagesArgs = {
 export type QueryRelationsArgs = {
   externalSource?: InputMaybe<TriplyExternalSourceEnum>;
   id: Scalars['String'];
+  lang: Scalars['String'];
   type: EntityNames;
 };
 
@@ -1876,6 +1877,7 @@ export type Zoom2PublicationsQuery = { __typename?: 'Query', zoomLevel2: { __typ
 
 export type ArchivesRelationsQueryVariables = Exact<{
   id: Scalars['String'];
+  lang: Scalars['String'];
 }>;
 
 
@@ -1883,6 +1885,7 @@ export type ArchivesRelationsQuery = { __typename?: 'Query', relations?: Array<{
 
 export type ObjectRelationsQueryVariables = Exact<{
   id: Scalars['String'];
+  lang: Scalars['String'];
 }>;
 
 
@@ -1890,6 +1893,7 @@ export type ObjectRelationsQuery = { __typename?: 'Query', relations?: Array<{ _
 
 export type PeopleRelationsQueryVariables = Exact<{
   id: Scalars['String'];
+  lang: Scalars['String'];
 }>;
 
 
@@ -1897,6 +1901,7 @@ export type PeopleRelationsQuery = { __typename?: 'Query', relations?: Array<{ _
 
 export type PublicationRelationsQueryVariables = Exact<{
   id: Scalars['String'];
+  lang: Scalars['String'];
 }>;
 
 
@@ -1904,10 +1909,20 @@ export type PublicationRelationsQuery = { __typename?: 'Query', relations?: Arra
 
 export type StoriesRelationsQueryVariables = Exact<{
   id: Scalars['String'];
+  lang: Scalars['String'];
 }>;
 
 
 export type StoriesRelationsQuery = { __typename?: 'Query', relations?: Array<{ __typename?: 'ZoomLevel3RelationsType', type: EntityNames, total: number, randomRelations?: Array<{ __typename?: 'RelatedRecordType', id: string, label: string, type: EntityNames, slug?: string | null, relations?: Array<{ __typename?: 'ZoomLevel3RelationsType', type: EntityNames, total: number }> | null }> | null }> | null };
+
+export type Zoom3QueryVariables = Exact<{
+  entityName: EntityNames;
+  page: Scalars['Int'];
+  pageSize?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type Zoom3Query = { __typename?: 'Query', zoomLevel2: { __typename?: 'ZoomLevel2ParentType', total: string, page: number, nodes?: Array<{ __typename?: 'ZoomLevel2Type', title?: string | null, thumbnail?: string | null, id?: string | null }> | null } };
 
 export type ZoomLevel3ArchivesQueryVariables = Exact<{
   id: Scalars['String'];
@@ -2985,40 +3000,53 @@ export const Zoom2PublicationsDocument = gql`
 }
     `;
 export const ArchivesRelationsDocument = gql`
-    query ArchivesRelations($id: String!) {
-  relations(type: Archives, id: $id) {
+    query ArchivesRelations($id: String!, $lang: String!) {
+  relations(type: Archives, id: $id, lang: $lang) {
     ...zoom3RelationsFragment
   }
 }
     ${Zoom3RelationsFragmentFragmentDoc}`;
 export const ObjectRelationsDocument = gql`
-    query ObjectRelations($id: String!) {
-  relations(type: Objects, id: $id) {
+    query ObjectRelations($id: String!, $lang: String!) {
+  relations(type: Objects, id: $id, lang: $lang) {
     ...zoom3RelationsFragment
   }
 }
     ${Zoom3RelationsFragmentFragmentDoc}`;
 export const PeopleRelationsDocument = gql`
-    query PeopleRelations($id: String!) {
-  relations(type: People, id: $id) {
+    query PeopleRelations($id: String!, $lang: String!) {
+  relations(type: People, id: $id, lang: $lang) {
     ...zoom3RelationsFragment
   }
 }
     ${Zoom3RelationsFragmentFragmentDoc}`;
 export const PublicationRelationsDocument = gql`
-    query PublicationRelations($id: String!) {
-  relations(type: Publications, id: $id) {
+    query PublicationRelations($id: String!, $lang: String!) {
+  relations(type: Publications, id: $id, lang: $lang) {
     ...zoom3RelationsFragment
   }
 }
     ${Zoom3RelationsFragmentFragmentDoc}`;
 export const StoriesRelationsDocument = gql`
-    query StoriesRelations($id: String!) {
-  relations(type: Stories, id: $id) {
+    query StoriesRelations($id: String!, $lang: String!) {
+  relations(type: Stories, id: $id, lang: $lang) {
     ...zoom3RelationsFragment
   }
 }
     ${Zoom3RelationsFragmentFragmentDoc}`;
+export const Zoom3Document = gql`
+    query Zoom3($entityName: EntityNames!, $page: Int!, $pageSize: Int) {
+  zoomLevel2(entityName: $entityName, page: $page, pageSize: $pageSize) {
+    total
+    page
+    nodes {
+      title
+      thumbnail
+      id
+    }
+  }
+}
+    `;
 export const ZoomLevel3ArchivesDocument = gql`
     query ZoomLevel3Archives($id: String!) {
   zoomLevel3Archive(id: $id) {
@@ -3544,6 +3572,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     StoriesRelations(variables: StoriesRelationsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<StoriesRelationsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<StoriesRelationsQuery>(StoriesRelationsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'StoriesRelations', 'query');
+    },
+    Zoom3(variables: Zoom3QueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom3Query> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Zoom3Query>(Zoom3Document, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Zoom3', 'query');
     },
     ZoomLevel3Archives(variables: ZoomLevel3ArchivesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ZoomLevel3ArchivesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ZoomLevel3ArchivesQuery>(ZoomLevel3ArchivesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ZoomLevel3Archives', 'query');

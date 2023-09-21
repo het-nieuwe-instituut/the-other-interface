@@ -73,6 +73,27 @@ query storiesLinkedToTriplyRecord($recordId: String!, $type: String!) {
     }
 }
 
+query storiesLinkedToTheme($id: ID!, $locale: I18NLocaleCode) {
+    story(id: $id, locale: $locale) {
+        data {
+            attributes {
+                themes {
+                    data {
+                        id
+                        attributes {
+                            stories {
+                                data {
+                                    id
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 query storyTriplyRelations($id: ID!) {
     story(id: $id) {
         data {

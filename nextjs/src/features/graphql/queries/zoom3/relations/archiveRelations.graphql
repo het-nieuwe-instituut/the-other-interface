@@ -1,5 +1,5 @@
-query ArchivesRelations($id: String!) {
-    relations(type: Archives, id: $id) {
+query ArchivesRelations($id: String!, $lang: String! ) {
+    relations(type: Archives, id: $id, lang: $lang) {
         ...zoom3RelationsFragment
     }
 }

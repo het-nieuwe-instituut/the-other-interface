@@ -137,6 +137,10 @@ export class ZoomLevel3Args {
   @IsString()
   public id: string
 
+  @Field()
+  @IsOptional()
+  public lang?: string
+
   @Field(() => TriplyExternalSourceEnum, { nullable: true })
   @IsOptional()
   public externalSource?: TriplyExternalSourceEnum

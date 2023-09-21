@@ -11569,6 +11569,38 @@ export type StoriesLinkedToTriplyRecordQuery = {
   } | null
 }
 
+export type StoriesLinkedToThemeQueryVariables = Exact<{
+  id: Scalars['ID']
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>
+}>
+
+export type StoriesLinkedToThemeQuery = {
+  __typename?: 'Query'
+  story?: {
+    __typename?: 'StoryEntityResponse'
+    data?: {
+      __typename?: 'StoryEntity'
+      attributes?: {
+        __typename?: 'Story'
+        themes?: {
+          __typename?: 'ThemeRelationResponseCollection'
+          data: Array<{
+            __typename?: 'ThemeEntity'
+            id?: string | null
+            attributes?: {
+              __typename?: 'Theme'
+              stories?: {
+                __typename?: 'StoryRelationResponseCollection'
+                data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
+              } | null
+            } | null
+          }>
+        } | null
+      } | null
+    } | null
+  } | null
+}
+
 export type StoryTriplyRelationsQueryVariables = Exact<{
   id: Scalars['ID']
 }>
@@ -17723,6 +17755,28 @@ export const StoriesLinkedToTriplyRecordDocument = gql`
     }
   }
 `
+export const StoriesLinkedToThemeDocument = gql`
+  query storiesLinkedToTheme($id: ID!, $locale: I18NLocaleCode) {
+    story(id: $id, locale: $locale) {
+      data {
+        attributes {
+          themes {
+            data {
+              id
+              attributes {
+                stories {
+                  data {
+                    id
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`
 export const StoryTriplyRelationsDocument = gql`
   query storyTriplyRelations($id: ID!) {
     story(id: $id) {
@@ -18084,6 +18138,20 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
             { ...requestHeaders, ...wrappedRequestHeaders }
           ),
         'storiesLinkedToTriplyRecord',
+        'query'
+      )
+    },
+    storiesLinkedToTheme(
+      variables: StoriesLinkedToThemeQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<StoriesLinkedToThemeQuery> {
+      return withWrapper(
+        wrappedRequestHeaders =>
+          client.request<StoriesLinkedToThemeQuery>(StoriesLinkedToThemeDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'storiesLinkedToTheme',
         'query'
       )
     },

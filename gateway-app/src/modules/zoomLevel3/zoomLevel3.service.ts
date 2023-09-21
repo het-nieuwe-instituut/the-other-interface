@@ -1,5 +1,10 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common'
-import { Enum_Triplyrecord_Type, Sdk } from 'src/generated/strapi-sdk'
+import {
+  Enum_Triplyrecord_Type,
+  Sdk,
+  StoriesLinkedToThemeQuery,
+  ThemeEntity,
+} from 'src/generated/strapi-sdk'
 import { StrapiUtils } from '../strapi/strapi.utils'
 import { ArchivesService, ArchivesZoomLevel3Types } from '../archives/archives.service'
 import { ObjectsService } from '../objects/objects.service'
@@ -14,7 +19,6 @@ import { EntityNames, externalEntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { getRandom2ItemsFromArray } from '../util/helpers'
 import { ZoomLevel3RelatedObjectsArgs, ZoomLevel3RelationsType } from './zoomLevel3.type'
 import { CustomError } from '../util/customError'
-import { StoryService } from '../story/story.service'
 
 interface ZoomLevel3RelationData {
   label: string | null
@@ -122,19 +126,23 @@ export class ZoomLevel3Service {
   public async getRelations(
     id: string,
     type: EntityNames,
+    lang?: string,
     externalSource?: TriplyExternalSourceEnum
   ) {
+    console.log('i am here')
     switch (type) {
       case EntityNames.Archives:
       case EntityNames.Objects:
       case EntityNames.People:
       case EntityNames.Publications:
+        console.log(type)
         return [
           ...(await this.getTriplyRelations(id, type, externalSource)),
           await this.getStoryRelationsForLinkedItem(id, type),
         ]
       case EntityNames.Stories:
-        return this.getStoryRelations(id, externalSource)
+        console.log(type)
+        return this.getStoryRelations(id, lang, externalSource)
       case EntityNames.External:
       // TODO
       default:
@@ -214,11 +222,21 @@ export class ZoomLevel3Service {
     return this.getFormattedGroupData(groupedData)
   }
 
-  private async getStoryRelations(id: string, externalSource?: TriplyExternalSourceEnum) {
+  private async getStoryRelations(
+    id: string,
+    lang?: string,
+    externalSource?: TriplyExternalSourceEnum
+  ) {
+    console.log('getStoryRelations', id, externalSource)
     const relations = await this.strapiGqlSdk.storyTriplyRelations({ id })
+    const relations2 = await this.strapiGqlSdk.storiesLinkedToTheme({ id, locale: lang })
+    console.log(relations2.story?.data?.attributes?.themes)
     const triplyRecords = (relations.story?.data?.attributes?.triplyRecords?.data || []).filter(
       r => !!r.attributes?.recordId
     )
+
+    const storyIds = this.extractStoryIds(relations2)
+    console.log(storyIds)
 
     const groupedRecords: Record<Enum_Triplyrecord_Type | string, string[]> = {}
     for (const record of triplyRecords) {
@@ -395,5 +413,23 @@ export class ZoomLevel3Service {
       label: sampleData.label,
       relations,
     }
+  }
+
+  private extractStoryIds(response: StoriesLinkedToThemeQuery): string[] {
+    const themesData = response?.story?.data?.attributes?.themes?.data || []
+
+    const storyIds: string[] = []
+
+    for (const theme of themesData) {
+      for (const story of theme?.attributes?.stories?.data || []) {
+        if (!story.id) {
+          continue
+        }
+        storyIds.push(story.id)
+      }
+    }
+
+    // Remove duplicates if there are any
+    return [...new Set(storyIds)]
   }
 }
