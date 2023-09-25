@@ -103,19 +103,20 @@ export class TriplyUtils {
   }
 
   public static getUriForTypeAndId(type: EntityNames, id: string) {
-    const baseURL = 'https://collectiedata.hetnieuweinstituut.nl/id'
+    const baseURL =
+      'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing'
 
     switch (type) {
       case EntityNames.People:
-        return `${baseURL}/people/${id}`
+        return `${baseURL}/people-recordRelations/run?id=${id}`
       case EntityNames.Archives:
-        return `${baseURL}/archives/${id}`
+        return `${baseURL}/archives-recordRelations/run?id=${id}`
       case EntityNames.Publications:
-        return `${baseURL}/books/${id}`
+        return `${baseURL}/publications-recordRelations/run?id=${id}`
       case EntityNames.Objects:
-        return `${baseURL}/objects/${id}`
+        return `${baseURL}/objects-recordRelations/run?id=${id}`
       case EntityNames.Media:
-        return `${baseURL}/media/${id}`
+        throw CustomError.externalCritical('not a triply type')
       case EntityNames.Stories:
         throw CustomError.externalCritical('not a triply type')
       case EntityNames.External:

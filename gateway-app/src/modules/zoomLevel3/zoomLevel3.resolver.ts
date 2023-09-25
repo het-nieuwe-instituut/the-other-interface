@@ -38,7 +38,7 @@ export class ZoomLevel3Resolver {
 
   @Query(() => [ZoomLevel3RelationsType], { nullable: true })
   public relations(@Args() args: ZoomLevel3Args) {
-    return this.zoomLevel3Service.getRelations(args.id, args.type, args?.lang, args.externalSource)
+    return this.zoomLevel3Service.getRelations(args.id, args.type, args?.lang)
   }
 
   @Query(() => [ZoomLevel3RelatedRecordType], { nullable: true })

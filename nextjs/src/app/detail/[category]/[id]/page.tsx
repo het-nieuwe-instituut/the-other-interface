@@ -35,8 +35,8 @@ export default async function Page({ params }: { params: { category: string; id:
         }
       : { id }
 
-  await getZoom3RelationsTask(category, id, lang, api)
-
+  const relations = await getZoom3RelationsTask(category, id, lang, api)
+  console.log(relations)
   const [editorialData, detail] = await Promise.all([
     await getRecordEditorialContent({
       category,
@@ -46,6 +46,7 @@ export default async function Page({ params }: { params: { category: string; id:
     }),
 
     await getZoom3RecordTask(category, payload, api),
+    ,
   ])
 
   // TODO create separate type for detail and mock result to it

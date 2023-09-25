@@ -11580,6 +11580,7 @@ export type StoriesLinkedToThemeQuery = {
     __typename?: 'StoryEntityResponse'
     data?: {
       __typename?: 'StoryEntity'
+      id?: string | null
       attributes?: {
         __typename?: 'Story'
         themes?: {
@@ -11598,6 +11599,138 @@ export type StoriesLinkedToThemeQuery = {
         } | null
       } | null
     } | null
+  } | null
+}
+
+export type StoriesByIdsQueryVariables = Exact<{
+  storiesIds: Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>
+}>
+
+export type StoriesByIdsQuery = {
+  __typename?: 'Query'
+  stories?: {
+    __typename?: 'StoryEntityResponseCollection'
+    data: Array<{
+      __typename?: 'StoryEntity'
+      attributes?: {
+        __typename?: 'Story'
+        title: string
+        slug: string
+        locale?: string | null
+        components?: Array<
+          | { __typename?: 'ComponentModulesButtonsModule' }
+          | { __typename?: 'ComponentModulesGridModule' }
+          | {
+              __typename: 'ComponentModulesImage'
+              alt_text?: string | null
+              caption?: string | null
+              id: string
+              image: {
+                __typename?: 'UploadFileEntityResponse'
+                data?: {
+                  __typename?: 'UploadFileEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'UploadFile'
+                    hash: string
+                    mime: string
+                    name: string
+                    provider: string
+                    size: number
+                    url: string
+                    alternativeText?: string | null
+                    caption?: string | null
+                    createdAt?: any | null
+                    ext?: string | null
+                    formats?: any | null
+                    height?: number | null
+                    previewUrl?: string | null
+                    provider_metadata?: any | null
+                    updatedAt?: any | null
+                    width?: number | null
+                  } | null
+                } | null
+              }
+              imageModuleLayout: {
+                __typename?: 'ComponentCoreModuleLayouts'
+                id: string
+                spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
+                spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
+              }
+              triplyRecord?: {
+                __typename?: 'TriplyRecordEntityResponse'
+                data?: {
+                  __typename?: 'TriplyRecordEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'TriplyRecord'
+                    recordId: string
+                    type: Enum_Triplyrecord_Type
+                  } | null
+                } | null
+              } | null
+              story?: {
+                __typename?: 'StoryEntityResponse'
+                data?: {
+                  __typename?: 'StoryEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Story'
+                    title: string
+                    slug: string
+                    description?: string | null
+                    shortDescription?: string | null
+                    createdAt?: any | null
+                    updatedAt?: any | null
+                    publishedAt?: any | null
+                    locale?: string | null
+                    author?: {
+                      __typename?: 'AuthorEntityResponse'
+                      data?: {
+                        __typename?: 'AuthorEntity'
+                        attributes?: { __typename?: 'Author'; firstName: string } | null
+                      } | null
+                    } | null
+                  } | null
+                } | null
+              } | null
+            }
+          | { __typename?: 'ComponentModulesImageCarousel' }
+          | { __typename?: 'ComponentModulesPullquote' }
+          | { __typename?: 'ComponentModulesSubtitle' }
+          | { __typename?: 'ComponentModulesTableModule' }
+          | { __typename?: 'ComponentModulesTextModule' }
+          | { __typename?: 'ComponentModulesTitleModule' }
+          | { __typename?: 'Error' }
+          | null
+        > | null
+        localizations?: {
+          __typename?: 'StoryRelationResponseCollection'
+          data: Array<{
+            __typename?: 'StoryEntity'
+            id?: string | null
+            attributes?: {
+              __typename?: 'Story'
+              title: string
+              slug: string
+              description?: string | null
+              shortDescription?: string | null
+              createdAt?: any | null
+              updatedAt?: any | null
+              publishedAt?: any | null
+              locale?: string | null
+              author?: {
+                __typename?: 'AuthorEntityResponse'
+                data?: {
+                  __typename?: 'AuthorEntity'
+                  attributes?: { __typename?: 'Author'; firstName: string } | null
+                } | null
+              } | null
+            } | null
+          }>
+        } | null
+      } | null
+    }>
   } | null
 }
 
@@ -17759,6 +17892,7 @@ export const StoriesLinkedToThemeDocument = gql`
   query storiesLinkedToTheme($id: ID!, $locale: I18NLocaleCode) {
     story(id: $id, locale: $locale) {
       data {
+        id
         attributes {
           themes {
             data {
@@ -17776,6 +17910,31 @@ export const StoriesLinkedToThemeDocument = gql`
       }
     }
   }
+`
+export const StoriesByIdsDocument = gql`
+  query storiesByIds($storiesIds: [ID]!) {
+    stories(filters: { id: { in: $storiesIds } }) {
+      data {
+        attributes {
+          title
+          slug
+          locale
+          components {
+            ... on ComponentModulesImage {
+              ...ComponentModulesImageFragment
+            }
+          }
+          localizations {
+            data {
+              ...StoryWithoutRelationsFragment
+            }
+          }
+        }
+      }
+    }
+  }
+  ${ComponentModulesImageFragmentFragmentDoc}
+  ${StoryWithoutRelationsFragmentFragmentDoc}
 `
 export const StoryTriplyRelationsDocument = gql`
   query storyTriplyRelations($id: ID!) {
@@ -18152,6 +18311,20 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
             ...wrappedRequestHeaders,
           }),
         'storiesLinkedToTheme',
+        'query'
+      )
+    },
+    storiesByIds(
+      variables: StoriesByIdsQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<StoriesByIdsQuery> {
+      return withWrapper(
+        wrappedRequestHeaders =>
+          client.request<StoriesByIdsQuery>(StoriesByIdsDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'storiesByIds',
         'query'
       )
     },

@@ -34,14 +34,11 @@ export class RelatedRecordType {
   @Field(() => EntityNames)
   public type: EntityNames
 
-  @Field({ nullable: true })
-  public slug?: string
+  @Field()
+  public title: string
 
   @Field()
-  public label: string
-
-  @Field(() => [ZoomLevel3RelationsType], { nullable: true })
-  public relations: ZoomLevel3RelationsType[]
+  public thumbnail: string
 }
 
 @ObjectType()
@@ -140,10 +137,6 @@ export class ZoomLevel3Args {
   @Field()
   @IsOptional()
   public lang?: string
-
-  @Field(() => TriplyExternalSourceEnum, { nullable: true })
-  @IsOptional()
-  public externalSource?: TriplyExternalSourceEnum
 }
 
 @ArgsType()
