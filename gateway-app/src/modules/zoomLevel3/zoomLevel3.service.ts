@@ -1,23 +1,15 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common'
-import {
-  Enum_Triplyrecord_Type,
-  Sdk,
-  StoriesLinkedToThemeQuery,
-  ThemeEntity,
-} from 'src/generated/strapi-sdk'
+import { Enum_Triplyrecord_Type, Sdk, StoriesLinkedToThemeQuery } from 'src/generated/strapi-sdk'
 import { StrapiUtils } from '../strapi/strapi.utils'
-import { ArchivesService, ArchivesZoomLevel3Types } from '../archives/archives.service'
+import { ArchivesService } from '../archives/archives.service'
 import { ObjectsService } from '../objects/objects.service'
 import { PeopleService } from '../people/people.service'
-import {
-  PublicationsService,
-  PublicationsZoomLevel3Types,
-} from '../publications/publications.service'
+import { PublicationsService } from '../publications/publications.service'
 import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { TriplyUtils } from '../triply/triply.utils'
-import { EntityNames, externalEntityNames } from '../zoomLevel1/zoomLevel1.type'
+import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { getRandom2ItemsFromArray } from '../util/helpers'
-import { ZoomLevel3RelatedObjectsArgs, ZoomLevel3RelationsType } from './zoomLevel3.type'
+// import { ZoomLevel3RelatedObjectsArgs } from './zoomLevel3.type'
 import { CustomError } from '../util/customError'
 
 interface ZoomLevel3RelationData {
@@ -105,7 +97,7 @@ export class ZoomLevel3Service {
   ) {}
 
   public async getRelations(id: string, type: EntityNames, lang?: string) {
-    console.log('i am here')
+    console.log(type)
     switch (type) {
       case EntityNames.Archives:
       case EntityNames.Objects:
@@ -125,38 +117,32 @@ export class ZoomLevel3Service {
     }
   }
 
-  public async getAllRelations({ id, type, relatedObjectsType }: ZoomLevel3RelatedObjectsArgs) {
-    const uri = TriplyUtils.getUriForTypeAndId(type, id)
-    const res = await this.triplyService.queryTriplyData<ZoomLevel3RelatedObjectData>(
-      `${this.relatedObjectsEndpoint}${uri}`,
-      zoomLevel3RelatedObjectDataKeys
-    )
+  // public async getAllRelations({ id, type, relatedObjectsType }: ZoomLevel3RelatedObjectsArgs) {
+  //   console.log('get all relations')
+  //   const uri = TriplyUtils.getUriForTypeAndId(type, id)
+  //   const res = await this.triplyService.queryTriplyData<ZoomLevel3RelatedObjectData>(
+  //     `${this.relatedObjectsEndpoint}${uri}`,
+  //     zoomLevel3RelatedObjectDataKeys
+  //   )
 
-    return res.data
-      .filter(d => TriplyUtils.getEntityNameFromGraph(d.graph) === relatedObjectsType)
-      .map(d => ({
-        id: TriplyUtils.getIdFromUri(d.externObj),
-        type: relatedObjectsType,
-        name: d.label,
-        pidWorkURI: d.pidWorkURI,
-        profession: d.profession,
-        professionLabel: d.professionLabel,
-        birthDate: d.birthDate,
-        availability: d.availability,
-        date: d.date,
-        creator: d.creator,
-        creatorLabel: d.creatorLabel,
-      }))
-  }
+  //   return res.data
+  //     .filter(d => TriplyUtils.getEntityNameFromGraph(d.graph) === relatedObjectsType)
+  //     .map(d => ({
+  //       id: TriplyUtils.getIdFromUri(d.externObj),
+  //       type: relatedObjectsType,
+  //       name: d.label,
+  //       pidWorkURI: d.pidWorkURI,
+  //       profession: d.profession,
+  //       professionLabel: d.professionLabel,
+  //       birthDate: d.birthDate,
+  //       availability: d.availability,
+  //       date: d.date,
+  //       creator: d.creator,
+  //       creatorLabel: d.creatorLabel,
+  //     }))
+  // }
 
-  public async getDetail(
-    id: string,
-    type: EntityNames,
-    metadata?: {
-      publicationType?: PublicationsZoomLevel3Types
-      archivesType?: ArchivesZoomLevel3Types
-    }
-  ) {
+  public async getDetail(id: string, type: EntityNames) {
     switch (type) {
       case EntityNames.Objects: {
         return this.objectsService.getZoomLevel3Data(id)
@@ -165,18 +151,14 @@ export class ZoomLevel3Service {
         return this.peopleService.getZoomLevel3Data(id)
       }
       case EntityNames.Publications: {
-        const subType = metadata?.publicationType
-          ? metadata.publicationType
-          : await this.publicationsService.determinePublicationType(id)
-
-        return this.publicationsService.getZoomLevel3Data(subType, id)
+        return this.publicationsService.getZoomLevel3Data(type, id)
       }
       case EntityNames.Archives: {
-        const subType = metadata?.archivesType
-          ? metadata?.archivesType
-          : await this.archivesService.determineArchiveType(id)
+        // const subType = metadata?.archivesType
+        //   ? metadata?.archivesType
+        //   : await this.archivesService.determineArchiveType(id)
 
-        return this.archivesService.getZoomLevel3Data(subType, id)
+        return this.archivesService.getZoomLevel3Data(EntityNames.Archives, id)
       }
       case EntityNames.Stories:
       case EntityNames.External:

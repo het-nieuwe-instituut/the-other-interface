@@ -1,25 +1,7 @@
 query ZoomLevel3PublicationsSerial($id: String!) {
     zoomLevel3PublicationsSerial(id: $id) {
-        id
         __typename
-        typeOfPublication
-        typeOfPublicationLabel
         title
-        publisher
-        publisherLabel
-        yearOfPublication
-        placeOfPublication
-        placeOfPublicationLabel
-        subject
-        subjectLabel
-        language
-        languageLabel
-        continuedFrom
-        continuedAs
-        remarks
-        availability
-        shelfmark
-        holding
-        permanentLink
+        thumbnail
     }
 }

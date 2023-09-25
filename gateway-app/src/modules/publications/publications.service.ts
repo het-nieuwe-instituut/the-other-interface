@@ -3,7 +3,6 @@ import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { TriplyUtils } from '../triply/triply.utils'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { ZoomLevel3Service } from '../zoomLevel3/zoomLevel3.service'
-import { PublicationAuthorType } from './publications.type'
 
 export interface PublicationsZoomLevel2Data {
   thumbnail: true
@@ -17,271 +16,16 @@ export const publicationsZoomLevel2DataKeys: KeysToVerify<PublicationsZoomLevel2
   id: true,
 }
 
-interface PublicationsBooksDetailZoomLevel3Data {
-  typeOfPublication?: string
-  typeOfPublicationLabel?: string
-  title?: string
-  author?: string
-  authorLabel?: string
-  authorRole?: string
-  authorRoleLabel?: string
-  publisher?: string
-  publisherLabel?: string
-  yearOfPublication?: string
-  placeOfPublication?: string
-  placeOfPublicationLabel?: string
-  isbn?: string
-  description?: string
-  annotation?: string
-  codeOfArchive?: string
-  codeOfArchiveLabel?: string
-  edition?: string
-  illustration?: string
-  numberOfPages?: string
-  language?: string
-  languageLabel?: string
-  seriesLabel?: string
-  number?: string
-  geographicalKeyword?: string
-  geographicalKeywordLabel?: string
-  subject?: string
-  subjectLabel?: string
-  relatedPerInst?: string
-  relatedPerInstLabel?: string
-  objectNumber?: string
-  availability?: string
-  shelfmark?: string
-  permanentLink?: string
+interface PublicationsZoomLevel3Data {
+  thumbnail: true
+  title: true
+  id: true
 }
-const publicationsBooksDetailZoomLevel3DataKeys: KeysToVerify<PublicationsBooksDetailZoomLevel3Data> =
-  {
-    typeOfPublication: true,
-    typeOfPublicationLabel: true,
-    title: true,
-    author: true,
-    authorLabel: true,
-    authorRole: true,
-    authorRoleLabel: true,
-    publisher: true,
-    publisherLabel: true,
-    yearOfPublication: true,
-    placeOfPublication: true,
-    placeOfPublicationLabel: true,
-    isbn: true,
-    description: true,
-    annotation: true,
-    codeOfArchive: true,
-    codeOfArchiveLabel: true,
-    edition: true,
-    illustration: true,
-    numberOfPages: true,
-    language: true,
-    languageLabel: true,
-    seriesLabel: true,
-    number: true,
-    geographicalKeyword: true,
-    geographicalKeywordLabel: true,
-    subject: true,
-    subjectLabel: true,
-    relatedPerInst: true,
-    relatedPerInstLabel: true,
-    objectNumber: true,
-    availability: true,
-    shelfmark: true,
-    permanentLink: true,
-  }
-
-interface PublicationsSerialDetailZoomLevel3Data {
-  typeOfPublication?: string
-  typeOfPublicationLabel?: string
-  title?: string
-  publisher?: string
-  publisherLabel?: string
-  yearOfPublication?: string
-  placeOfPublication?: string
-  placeOfPublicationLabel?: string
-  subject?: string
-  subjectLabel?: string
-  language?: string
-  languageLabel?: string
-  continuedFrom?: string
-  continuedAs?: string
-  remarks?: string
-  availability?: string
-  shelfmark?: string
-  holding?: string
-  permanentLink?: string
+const publicationsDetailZoomLevel3DataKeys: KeysToVerify<PublicationsZoomLevel3Data> = {
+  thumbnail: true,
+  title: true,
+  id: true,
 }
-const publicationsSerialDetailZoomLevel3DataKeys: KeysToVerify<PublicationsSerialDetailZoomLevel3Data> =
-  {
-    typeOfPublication: true,
-    typeOfPublicationLabel: true,
-    title: true,
-    publisher: true,
-    publisherLabel: true,
-    yearOfPublication: true,
-    placeOfPublication: true,
-    placeOfPublicationLabel: true,
-    subject: true,
-    subjectLabel: true,
-    language: true,
-    languageLabel: true,
-    continuedFrom: true,
-    continuedAs: true,
-    remarks: true,
-    availability: true,
-    shelfmark: true,
-    holding: true,
-    permanentLink: true,
-  }
-
-interface PublicationArticleDetailZoomLevel3Data {
-  typeOfPublication?: string
-  typeOfPublicationLabel?: string
-  title?: string
-  author?: string
-  authorLabel?: string
-  authorRole?: string
-  authorRoleLabel?: string
-  sourceTitle?: string
-  sourceTitleLabel?: string
-  volume?: string
-  issue?: string
-  yearOfPublication?: string
-  page?: string
-  publisher?: string
-  publisherLabel?: string
-  abstract?: string
-  language?: string
-  languageLabel?: string
-  geographicalKeyword?: string
-  geographicalKeywordLabel?: string
-  subject?: string
-  subjectLabel?: string
-  relatedPerInst?: string
-  relatedPerInstLabel?: string
-  objectNumber?: string
-  availability?: string
-  shelfmark?: string
-  permanentLink?: string
-}
-const publicationArticleDetailZoomLevel3DataKeys: KeysToVerify<PublicationArticleDetailZoomLevel3Data> =
-  {
-    typeOfPublication: true,
-    typeOfPublicationLabel: true,
-    title: true,
-    author: true,
-    authorLabel: true,
-    authorRole: true,
-    authorRoleLabel: true,
-    sourceTitle: true,
-    sourceTitleLabel: true,
-    volume: true,
-    issue: true,
-    yearOfPublication: true,
-    page: true,
-    publisher: true,
-    publisherLabel: true,
-    abstract: true,
-    language: true,
-    languageLabel: true,
-    geographicalKeyword: true,
-    geographicalKeywordLabel: true,
-    subject: true,
-    subjectLabel: true,
-    relatedPerInst: true,
-    relatedPerInstLabel: true,
-    objectNumber: true,
-    availability: true,
-    shelfmark: true,
-    permanentLink: true,
-  }
-
-interface PublicationsAudioVisualDetailZoomLevel3Data {
-  typeOfPublication?: string
-  typeOfPublicationLabel?: string
-  title?: string
-  author?: string
-  authorLabel?: string
-  authorRole?: string
-  authorRoleLabel?: string
-  publisher?: string
-  publisherLabel?: string
-  yearOfPublication?: string
-  placeOfPublication?: string
-  placeOfPublicationLabel?: string
-  abstract?: string
-  annotation?: string
-  scope?: string
-  language?: string
-  languageLabel?: string
-  medium?: string
-  geographicalKeyword?: string
-  geographicalKeywordLabel?: string
-  subject?: string
-  subjectLabel?: string
-  relatedPerInst?: string
-  relatedPerInstLabel?: string
-  permanentLink?: string
-  objectNumber?: string
-  availability?: string
-  shelfmark?: string
-}
-const publicationsAudioVisualDetailZoomLevel3DataKeys: KeysToVerify<PublicationsAudioVisualDetailZoomLevel3Data> =
-  {
-    typeOfPublication: true,
-    typeOfPublicationLabel: true,
-    title: true,
-    author: true,
-    authorLabel: true,
-    authorRole: true,
-    authorRoleLabel: true,
-    publisher: true,
-    publisherLabel: true,
-    yearOfPublication: true,
-    placeOfPublication: true,
-    placeOfPublicationLabel: true,
-    abstract: true,
-    annotation: true,
-    scope: true,
-    language: true,
-    languageLabel: true,
-    medium: true,
-    geographicalKeyword: true,
-    geographicalKeywordLabel: true,
-    subject: true,
-    subjectLabel: true,
-    relatedPerInst: true,
-    relatedPerInstLabel: true,
-    permanentLink: true,
-    objectNumber: true,
-    availability: true,
-    shelfmark: true,
-  }
-
-export enum PublicationsZoomLevel3Types {
-  serial = 'serial',
-  book = 'book',
-  article = 'article',
-  audiovisual = 'audiovisual',
-}
-
-type PublicationsZoomLevel3DataTypes =
-  | PublicationsBooksDetailZoomLevel3Data
-  | PublicationsSerialDetailZoomLevel3Data
-  | PublicationArticleDetailZoomLevel3Data
-  | PublicationsAudioVisualDetailZoomLevel3Data
-const publicationsZoomLevel3DataTypeKeys = {
-  [PublicationsZoomLevel3Types.article]: publicationArticleDetailZoomLevel3DataKeys,
-  [PublicationsZoomLevel3Types.audiovisual]: publicationsAudioVisualDetailZoomLevel3DataKeys,
-  [PublicationsZoomLevel3Types.book]: publicationsBooksDetailZoomLevel3DataKeys,
-  [PublicationsZoomLevel3Types.serial]: publicationsSerialDetailZoomLevel3DataKeys,
-}
-
-type PublicationsWithAuthors =
-  | PublicationsBooksDetailZoomLevel3Data
-  | PublicationArticleDetailZoomLevel3Data
-  | PublicationsAudioVisualDetailZoomLevel3Data
 
 @Injectable()
 export class PublicationsService {
@@ -292,14 +36,8 @@ export class PublicationsService {
   private readonly ZoomLevel2CountEndpoint =
     'https://api.collectiedata.hetnieuweinstituut.nl/queries/zoom-2/books-landingPage-count/run'
 
-  private readonly ZoomLevel4CountEndpoint = 'zoom4-books-count/run'
-
-  private readonly ZoomLevel3Endpoint = {
-    [PublicationsZoomLevel3Types.article]: 'zoom-3-books-article/run',
-    [PublicationsZoomLevel3Types.audiovisual]: 'zoom-3-books-audiovisual/run',
-    [PublicationsZoomLevel3Types.book]: 'zoom-3-books-book/run',
-    [PublicationsZoomLevel3Types.serial]: 'zoom-3-books-serial/run',
-  }
+  private readonly ZoomLevel3Endpoint =
+    'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/publications-recordPage/run?'
 
   private readonly publicationDescriptionLevelEndpoint = 'Zoom-3-books-type/run'
 
@@ -308,39 +46,6 @@ export class PublicationsService {
     @Inject(forwardRef(() => ZoomLevel3Service))
     private readonly zoomLevel3Service: ZoomLevel3Service
   ) {}
-
-  public async determinePublicationType(id: string) {
-    interface TypeOfPublicationData {
-      type: string
-    }
-    const typeOfPublicationDataKeys: KeysToVerify<TypeOfPublicationData> = {
-      type: true,
-    }
-
-    const uri = TriplyUtils.getUriForTypeAndId(EntityNames.Publications, id)
-    const res = await this.triplyService.queryTriplyData<TypeOfPublicationData>(
-      this.publicationDescriptionLevelEndpoint,
-      typeOfPublicationDataKeys,
-      undefined,
-      { record: uri }
-    )
-
-    if (!res?.data?.length) {
-      return PublicationsZoomLevel3Types.book
-    }
-
-    switch (res.data[0].type) {
-      case 'zoom_3-books-serial':
-        return PublicationsZoomLevel3Types.serial
-      case 'zoom_3-books-article':
-        return PublicationsZoomLevel3Types.article
-      case 'zoom_3-books-audiovisual':
-        return PublicationsZoomLevel3Types.audiovisual
-      case 'zoom_3-books-book':
-      default:
-        return PublicationsZoomLevel3Types.book
-    }
-  }
 
   public async getZoomLevel2Data(page = 1, pageSize = 48) {
     const result = await this.triplyService.queryTriplyData<PublicationsZoomLevel2Data>(
@@ -370,58 +75,20 @@ export class PublicationsService {
     }
   }
 
-  public async getZoomLevel3Data(publicationType: PublicationsZoomLevel3Types, objectId: string) {
-    const uri = TriplyUtils.getUriForTypeAndId(EntityNames.Publications, objectId)
-    const result = await this.triplyService.queryTriplyData<PublicationsZoomLevel3DataTypes>(
-      this.ZoomLevel3Endpoint[publicationType],
-      publicationsZoomLevel3DataTypeKeys[publicationType],
-      undefined,
-      { record: uri }
+  public async getZoomLevel3Data(type: EntityNames, id: string) {
+    const uri = TriplyUtils.getUriForTypeAndId(EntityNames.Publications, id)
+    const result = await this.triplyService.queryTriplyData<PublicationsZoomLevel3Data>(
+      this.ZoomLevel3Endpoint,
+      publicationsDetailZoomLevel3DataKeys,
+      { page: 1, pageSize: 2 },
+      { id: uri }
     )
 
     return {
-      ...TriplyUtils.combineObjectArray(result.data),
-      id: objectId,
-      type: publicationType,
-      authors: this.getAuthorsValueFromData(result.data),
+      type,
+      id,
+      thumbnail: result.data[0]?.thumbnail,
+      title: result.data[0]?.title,
     }
-  }
-
-  public resolveAuthor(publication: PublicationsZoomLevel3DataTypes) {
-    if (!('author' in publication) || !publication.author) {
-      return
-    }
-
-    const type = TriplyUtils.getEntityNameFromUri(publication.author)
-    const id = TriplyUtils.getIdFromUri(publication.author)
-
-    return this.zoomLevel3Service.getDetail(id, type)
-  }
-
-  public resolvePublisher(publication: PublicationsZoomLevel3DataTypes) {
-    if (!('publisher' in publication) || !publication.publisher) {
-      return
-    }
-
-    const type = TriplyUtils.getEntityNameFromUri(publication.publisher)
-    const id = TriplyUtils.getIdFromUri(publication.publisher)
-
-    return this.zoomLevel3Service.getDetail(id, type)
-  }
-
-  private getAuthorsValueFromData(
-    data: PublicationsZoomLevel3DataTypes[]
-  ): PublicationAuthorType[] {
-    return data
-      .filter(d => 'author' in d && !!d.author)
-      .map((d: PublicationsWithAuthors) => ({
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        id: TriplyUtils.getIdFromUri(d.author!),
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        author: d.author!,
-        authorLabel: d.authorLabel,
-        authorRole: d.authorRole,
-        authorRoleLabel: d.authorRoleLabel,
-      }))
   }
 }

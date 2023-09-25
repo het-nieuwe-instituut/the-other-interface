@@ -3,12 +3,8 @@ fragment zoom3RelationsFragment on ZoomLevel3RelationsType {
     total
     randomRelations {
         id
-        label
         type
-        slug
-        relations {
-            type
-            total
-        }
+        title
+        thumbnail
     }
 }

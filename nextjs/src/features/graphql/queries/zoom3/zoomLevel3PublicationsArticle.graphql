@@ -1,36 +1,7 @@
 query ZoomLevel3PublicationsArticle($id: String!) {
     zoomLevel3PublicationsArticle(id: $id) {
-        id
         __typename
-        typeOfPublication
-        typeOfPublicationLabel
         title
-        authors {
-            author
-            authorLabel
-            authorRole
-            authorRoleLabel
-        }
-        sourceTitle
-        sourceTitleLabel
-        volume
-        issue
-        yearOfPublication
-        page
-        publisher
-        publisherLabel
-        abstract
-        language
-        languageLabel
-        geographicalKeyword
-        geographicalKeywordLabel
-        subject
-        subjectLabel
-        relatedPerInst
-        relatedPerInstLabel
-        objectNumber
-        availability
-        shelfmark
-        permanentLink
+        thumbnail
     }
 }

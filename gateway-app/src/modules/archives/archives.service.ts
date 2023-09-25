@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common'
 import { KeysToVerify, TriplyService } from '../triply/triply.service'
-import { TriplyUtils } from '../triply/triply.utils'
+// import { TriplyUtils } from '../triply/triply.utils'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
-import { ArchivesFondsCreatorType } from './archives.type'
+// import { ArchivesFondsCreatorType } from './archives.type'
 
 export interface ArchivesZoomLevel2Data {
   thumbnail: true
@@ -16,105 +16,15 @@ export const archivesZoomLevel2DataKeys: KeysToVerify<ArchivesZoomLevel2Data> = 
   id: true,
 }
 
-export enum ArchivesZoomLevel3Types {
-  fonds = 'fonds',
-  other = 'other',
-}
-
-export interface ArchivesFondsDetailZoomLevel3Data {
-  objectNumber?: string
+export interface ArchivesDetailZoomLevel3DataType {
+  id?: string
   title?: string
-  startDate?: string
-  endDate?: string
-  dateLabel?: string
-  dimensionFree?: string
-  mediaReference?: string
-  mediaReferenceLabel?: string
-  existenceOfOriginals?: string
-  scopeContent?: string
-  relatedMaterial?: string
-  rights?: string
-  rightsLabel?: string
-  permanentLink?: string
+  thumbnail?: string
 }
-const archivesFondsDetailZoomLevel3DataKeys: KeysToVerify<ArchivesFondsDetailZoomLevel3Data> = {
-  objectNumber: true,
+const archivesDetailZoomLevel3DataKeys: KeysToVerify<ArchivesDetailZoomLevel3DataType> = {
+  id: true,
   title: true,
-  startDate: true,
-  endDate: true,
-  dateLabel: true,
-  dimensionFree: true,
-  mediaReference: true,
-  mediaReferenceLabel: true,
-  existenceOfOriginals: true,
-  scopeContent: true,
-  relatedMaterial: true,
-  rights: true,
-  rightsLabel: true,
-  permanentLink: true,
-}
-
-export interface ArchivesOtherDetailZoomLevel3Data {
-  descriptionLevel?: string
-  objectNumber?: string
-  recordTitle?: string
-  startDate?: string
-  endDate?: string
-  productionDate?: string
-  extent?: string
-  repository?: string
-  repositoryLabel?: string
-  creator?: string
-  creatorLabel?: string
-  creatorHistory?: string
-  custodialHistory?: string
-  systemOfArrangement?: string
-  contentScope?: string
-  conditionsGoverningAccess?: string
-  relatedMaterial?: string
-  appendices?: string
-  source?: string
-  partReference?: string
-  partTitle?: string
-  right?: string
-  rightsLabel?: string
-  permanentLink?: string
-  pidWorkURI?: string
-}
-const archivesOtherDetailZoomLevel3DataKeys: KeysToVerify<ArchivesOtherDetailZoomLevel3Data> = {
-  descriptionLevel: true,
-  objectNumber: true,
-  recordTitle: true,
-  startDate: true,
-  endDate: true,
-  productionDate: true,
-  extent: true,
-  repository: true,
-  repositoryLabel: true,
-  creator: true,
-  creatorLabel: true,
-  creatorHistory: true,
-  custodialHistory: true,
-  systemOfArrangement: true,
-  contentScope: true,
-  conditionsGoverningAccess: true,
-  relatedMaterial: true,
-  appendices: true,
-  source: true,
-  partReference: true,
-  partTitle: true,
-  right: true,
-  rightsLabel: true,
-  permanentLink: true,
-  pidWorkURI: true,
-}
-
-type ArchivesZoomLeve3DataType =
-  | ArchivesOtherDetailZoomLevel3Data
-  | ArchivesFondsDetailZoomLevel3Data
-const archivesZoomLevel3DataKeys = {
-  [ArchivesZoomLevel3Types.other]: archivesOtherDetailZoomLevel3DataKeys,
-  [ArchivesZoomLevel3Types.fonds]: archivesFondsDetailZoomLevel3DataKeys,
+  thumbnail: true,
 }
 
 @Injectable()
@@ -128,40 +38,38 @@ export class ArchivesService {
     'https://api.collectiedata.hetnieuweinstituut.nl/queries/zoom-2/archives-landingPage-count/run'
 
   // TODO: change to convention when Triply adds this to normal space
-  private readonly archivesDescriptionLevelEndpoint =
-    'https://api.collectiedata.hetnieuweinstituut.nl/queries/Joran/zoom3-archives-type-only/run?'
+  // private readonly archivesDescriptionLevelEndpoint =
+  //   'https://api.collectiedata.hetnieuweinstituut.nl/queries/Joran/zoom3-archives-type-only/run?'
 
-  private readonly ZoomLevel3Endpoint = {
-    [ArchivesZoomLevel3Types.other]: 'zoom-3-archives/run',
-    [ArchivesZoomLevel3Types.fonds]: 'zoom-3-archives-fonds/run',
-  }
+  private readonly ZoomLevel3Endpoint =
+    'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/archives-recordPage/run?'
 
   public constructor(private triplyService: TriplyService) {}
 
-  public async determineArchiveType(id: string) {
-    interface ArchivesDescriptionLevelData {
-      record: string
-      descriptionLevel: string
-    }
-    const keys: KeysToVerify<ArchivesDescriptionLevelData> = {
-      record: true,
-      descriptionLevel: true,
-    }
+  // public async determineArchiveType(id: string) {
+  //   interface ArchivesDescriptionLevelData {
+  //     record: string
+  //     descriptionLevel: string
+  //   }
+  //   const keys: KeysToVerify<ArchivesDescriptionLevelData> = {
+  //     record: true,
+  //     descriptionLevel: true,
+  //   }
 
-    const uri = TriplyUtils.getUriForTypeAndId(EntityNames.Archives, id)
-    const res = await this.triplyService.queryTriplyData<ArchivesDescriptionLevelData>(
-      this.archivesDescriptionLevelEndpoint,
-      keys,
-      undefined,
-      { record: uri }
-    )
+  //   const uri = TriplyUtils.getUriForTypeAndId(EntityNames.Archives, id)
+  //   const res = await this.triplyService.queryTriplyData<ArchivesDescriptionLevelData>(
+  //     this.archivesDescriptionLevelEndpoint,
+  //     keys,
+  //     undefined,
+  //     { record: uri }
+  //   )
 
-    if (res.data[0].descriptionLevel === 'archief') {
-      return ArchivesZoomLevel3Types.fonds
-    }
+  //   if (res.data[0].descriptionLevel === 'archief') {
+  //     return ArchivesZoomLevel3Types.fonds
+  //   }
 
-    return ArchivesZoomLevel3Types.other
-  }
+  //   return ArchivesZoomLevel3Types.other
+  // }
 
   public async getZoomLevel2Data(page = 1, pageSize = 48) {
     const result = await this.triplyService.queryTriplyData<ArchivesZoomLevel2Data>(
@@ -191,38 +99,35 @@ export class ArchivesService {
     }
   }
 
-  public async getZoomLevel3Data(type: ArchivesZoomLevel3Types, objectId: string) {
-    const uri = TriplyUtils.getUriForTypeAndId(EntityNames.Archives, objectId)
-
-    const result = await this.triplyService.queryTriplyData<ArchivesZoomLeve3DataType>(
-      this.ZoomLevel3Endpoint[type],
-      archivesZoomLevel3DataKeys[type],
-      undefined,
-      { record: uri }
+  public async getZoomLevel3Data(type: EntityNames, id: string) {
+    const result = await this.triplyService.queryTriplyData<ArchivesDetailZoomLevel3DataType>(
+      this.ZoomLevel3Endpoint,
+      archivesDetailZoomLevel3DataKeys,
+      { page: 1, pageSize: 2 },
+      { id }
     )
 
-    const pidWorkURIs: Set<string> = new Set()
-    result.data.forEach(d => 'pidWorkURI' in d && d.pidWorkURI && pidWorkURIs.add(d.pidWorkURI))
+    // const pidWorkURIs: Set<string> = new Set()
+    // result.data.forEach(d => 'pidWorkURI' in d && d.pidWorkURI && pidWorkURIs.add(d.pidWorkURI))
 
     return {
-      ...TriplyUtils.combineObjectArray(result.data),
-      pidWorkURIs,
       type,
-      id: objectId,
-      creators: this.getCreatorsValueFromData(result.data),
+      id,
+      thumbnail: result.data[0]?.thumbnail,
+      title: result.data[0]?.title,
     }
   }
 
-  private getCreatorsValueFromData(data: ArchivesZoomLeve3DataType[]): ArchivesFondsCreatorType[] {
-    return data
-      .filter(d => 'creator' in d && !!d.creator)
-      .map((d: ArchivesOtherDetailZoomLevel3Data) => ({
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        id: TriplyUtils.getIdFromUri(d.creator!),
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        creator: d.creator!,
-        creatorHistory: d.creatorHistory,
-        creatorLabel: d.creatorLabel,
-      }))
-  }
+  // private getCreatorsValueFromData(data: ArchivesZoomLeve3DataType[]): ArchivesFondsCreatorType[] {
+  //   return data
+  //     .filter(d => 'creator' in d && !!d.creator)
+  //     .map((d: ArchivesOtherDetailZoomLevel3Data) => ({
+  //       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  //       id: TriplyUtils.getIdFromUri(d.creator!),
+  //       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  //       creator: d.creator!,
+  //       creatorHistory: d.creatorHistory,
+  //       creatorLabel: d.creatorLabel,
+  //     }))
+  // }
 }

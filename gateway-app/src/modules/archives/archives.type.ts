@@ -1,161 +1,63 @@
-import { createUnionType, Field, ObjectType, registerEnumType } from '@nestjs/graphql'
-import { PoepleZoomLevel3DetailType } from '../people/people.type'
-import { ArchivesZoomLevel3Types } from './archives.service'
+import { Field, ObjectType } from '@nestjs/graphql'
+import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
+// import { PoepleZoomLevel3DetailType } from '../people/people.type'
+// import { ArchivesZoomLevel3Types } from './archives.service'
+// import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 
-registerEnumType(ArchivesZoomLevel3Types, { name: 'ArchivesZoomLevel3Types' })
+// registerEnumType(ArchivesZoomLevel3Types, { name: 'ArchivesZoomLevel3Types' })
 
 @ObjectType()
-class BaseArchiveZoomLevel3Type {
+export class ArchiveZoomLevel3Type {
   @Field()
   public id: string
 
-  @Field(() => ArchivesZoomLevel3Types)
-  public type: ArchivesZoomLevel3Types
-}
-
-@ObjectType()
-export class ArchivesFondsZoomLevel3DetailType extends BaseArchiveZoomLevel3Type {
-  @Field(() => String, { nullable: true })
-  public descriptionLevel?: string
-
-  @Field(() => String, { nullable: true })
-  public objectNumber?: string
-
-  @Field(() => String, { nullable: true })
-  public recordTitle?: string
-
-  @Field(() => String, { nullable: true })
-  public startDate?: string
-
-  @Field(() => String, { nullable: true })
-  public endDate?: string
-
-  @Field(() => String, { nullable: true })
-  public productionDate?: string
-
-  @Field(() => String, { nullable: true })
-  public extent?: string
-
-  @Field(() => String, { nullable: true })
-  public repository?: string
-
-  @Field(() => String, { nullable: true })
-  public repositoryLabel?: string
-
-  @Field(() => [ArchivesFondsCreatorType], { nullable: true })
-  public creators?: ArchivesFondsCreatorType[]
-
-  @Field(() => String, { nullable: true })
-  public custodialHistory?: string
-
-  @Field(() => String, { nullable: true })
-  public systemOfArrangement?: string
-
-  @Field(() => String, { nullable: true })
-  public contentScope?: string
-
-  @Field(() => String, { nullable: true })
-  public conditionsGoverningAccess?: string
-
-  @Field(() => String, { nullable: true })
-  public relatedMaterial?: string
-
-  @Field(() => String, { nullable: true })
-  public appendices?: string
-
-  @Field(() => String, { nullable: true })
-  public source?: string
-
-  @Field(() => String, { nullable: true })
-  public partReference?: string
-
-  @Field(() => String, { nullable: true })
-  public partTitle?: string
-
-  @Field(() => String, { nullable: true })
-  public right?: string
-
-  @Field(() => String, { nullable: true })
-  public rightsLabel?: string
-
-  @Field(() => String, { nullable: true })
-  public permanentLink?: string
-}
-
-@ObjectType()
-export class ArchivesFondsCreatorType {
-  @Field(() => String)
-  public id: string
+  @Field(() => EntityNames)
+  public type: EntityNames
 
   @Field(() => String)
-  public creator: string
+  public title: string
 
-  @Field(() => String, { nullable: true })
-  public creatorLabel?: string
-
-  @Field(() => String, { nullable: true })
-  public creatorHistory?: string
-
-  @Field(() => PoepleZoomLevel3DetailType, { nullable: true })
-  public populatedCreator?: PoepleZoomLevel3DetailType
+  @Field(() => String)
+  public thumbnail: string
 }
 
-@ObjectType()
-export class ArchivesOtherZoomLevel3DetailType extends BaseArchiveZoomLevel3Type {
-  @Field(() => String, { nullable: true })
-  public objectNumber?: string
+// @ObjectType()
+// export class ArchivesFondsZoomLevel3DetailType extends BaseArchiveZoomLevel3Type {
 
-  @Field(() => String, { nullable: true })
-  public title?: string
+// }
 
-  @Field(() => String, { nullable: true })
-  public startDate?: string
+// @ObjectType()
+// export class ArchivesFondsCreatorType {
+//   @Field()
+//   public id: string
 
-  @Field(() => String, { nullable: true })
-  public endDate?: string
+//   @Field(() => EntityNames)
+//   public type: EntityNames
 
-  @Field(() => String, { nullable: true })
-  public dateLabel?: string
+//   @Field(() => String)
+//   public title: string
 
-  @Field(() => String, { nullable: true })
-  public dimensionFree?: string
+//   @Field(() => String)
+//   public thumbnail: string
+// }
 
-  @Field(() => String, { nullable: true })
-  public mediaReference?: string
+// @ObjectType()
+// export class ArchivesOtherZoomLevel3DetailType extends BaseArchiveZoomLevel3Type {
+//   @Field(() => String)
+//   public title: string
 
-  @Field(() => String, { nullable: true })
-  public mediaReferenceLabel?: string
+//   @Field(() => String)
+//   public thumbnail: string
+// }
 
-  @Field(() => String, { nullable: true })
-  public existenceOfOriginals?: string
+// export const ArchiveZoomLevel3UnionType = createUnionType({
+//   name: 'ArchiveZoomLevel3UnionType',
+//   types: () => [ArchivesOtherZoomLevel3DetailType, ArchivesFondsZoomLevel3DetailType] as const,
+//   resolveType: (archive: BaseArchiveZoomLevel3Type) => {
+//     if (archive.type === ArchivesZoomLevel3Types.other) {
+//       return ArchivesOtherZoomLevel3DetailType
+//     }
 
-  @Field(() => String, { nullable: true })
-  public scopeContent?: string
-
-  @Field(() => String, { nullable: true })
-  public relatedMaterial?: string
-
-  @Field(() => String, { nullable: true })
-  public rights?: string
-
-  @Field(() => String, { nullable: true })
-  public rightsLabel?: string
-
-  @Field(() => String, { nullable: true })
-  public permanentLink?: string
-
-  @Field(() => [String], { nullable: true })
-  public pidWorkURIs?: string[]
-}
-
-export const ArchiveZoomLevel3UnionType = createUnionType({
-  name: 'ArchiveZoomLevel3UnionType',
-  types: () => [ArchivesOtherZoomLevel3DetailType, ArchivesFondsZoomLevel3DetailType] as const,
-  resolveType: (archive: BaseArchiveZoomLevel3Type) => {
-    if (archive.type === ArchivesZoomLevel3Types.other) {
-      return ArchivesOtherZoomLevel3DetailType
-    }
-
-    return ArchivesFondsZoomLevel3DetailType
-  },
-})
+//     return ArchivesFondsZoomLevel3DetailType
+//   },
+// })

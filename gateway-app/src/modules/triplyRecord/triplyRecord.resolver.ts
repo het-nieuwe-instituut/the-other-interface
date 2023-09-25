@@ -12,6 +12,7 @@ import {
   TriplyRecordFiltersInput,
   TriplyRecordRelationResponseCollection,
 } from './triplyRecord.type'
+import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 
 @Resolver()
 export class TriplyRecordResolver {
@@ -65,13 +66,13 @@ export class TriplyRecordFieldResolver {
 
   @ResolveField()
   public async archive(@Parent() triplyRecord: TriplyRecord) {
-    if (triplyRecord.type !== Enum_Triplyrecord_Type.Archive) {
-      return
-    }
+    // if (triplyRecord.type !== Enum_Triplyrecord_Type.Archive) {
+    //   return
+    // }
 
-    const type = await this.archivesService.determineArchiveType(triplyRecord.recordId)
+    // const type = await this.archivesService.determineArchiveType(triplyRecord.recordId)
 
-    return this.archivesService.getZoomLevel3Data(type, triplyRecord.recordId)
+    return this.archivesService.getZoomLevel3Data(EntityNames.Archives, triplyRecord.recordId)
   }
 
   @ResolveField()
@@ -85,13 +86,16 @@ export class TriplyRecordFieldResolver {
 
   @ResolveField()
   public async publication(@Parent() triplyRecord: TriplyRecord) {
-    if (triplyRecord.type !== Enum_Triplyrecord_Type.Publication) {
-      return
-    }
+    // if (triplyRecord.type !== Enum_Triplyrecord_Type.Publication) {
+    //   return
+    // }
 
-    const type = await this.publicationService.determinePublicationType(triplyRecord.recordId)
+    // const type = await this.publicationService.determinePublicationType(triplyRecord.recordId)
 
-    return this.publicationService.getZoomLevel3Data(type, triplyRecord.recordId)
+    return this.publicationService.getZoomLevel3Data(
+      EntityNames.Publications,
+      triplyRecord.recordId
+    )
   }
 
   @ResolveField()

@@ -1,54 +1,7 @@
 query ZoomLevel3Archives($id: String!) {
     zoomLevel3Archive(id: $id) {
         __typename
-        ... on ArchivesOtherZoomLevel3DetailType {
-            __typename
-            id
-            objectNumber
-            title
-            startDate
-            endDate
-            dateLabel
-            dimensionFree
-            mediaReference
-            mediaReferenceLabel
-            existenceOfOriginals
-            scopeContent
-            relatedMaterial
-            rights
-            rightsLabel
-            permanentLink
-        }
-        ... on ArchivesFondsZoomLevel3DetailType {
-            __typename
-            id
-            descriptionLevel
-            objectNumber
-            recordTitle
-            startDate
-            endDate
-            productionDate
-            extent
-            repository
-            repositoryLabel
-            creators {
-                id
-                creator
-                creatorLabel
-                creatorHistory
-            }
-            custodialHistory
-            systemOfArrangement
-            contentScope
-            conditionsGoverningAccess
-            relatedMaterial
-            appendices
-            source
-            partReference
-            partTitle
-            right
-            rightsLabel
-            permanentLink
-        }
+        title
+        thumbnail
     }
 }

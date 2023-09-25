@@ -1,8 +1,6 @@
 query ZoomLevel3ArchivesOther($id: String!) {
     zoomLevel3ArchivesOther(id: $id) {
-        id
         title
-        type
-        pidWorkURIs
+        thumbnail
     }
 }

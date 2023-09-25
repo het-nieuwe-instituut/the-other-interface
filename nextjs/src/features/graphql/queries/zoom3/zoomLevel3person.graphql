@@ -1,34 +1,7 @@
 query ZoomLevel3Person($id: String!) {
     zoomLevel3Person(id: $id) {
         __typename
-        id
-        name
-        nameTypes
-        nameVariation
-        birthDate
-        birthPlace
-        birthPlaceLabel
-        deathDate
-        deathPlace
-        deathPlaceLabel
-        place
-        placeLabel
-        startDate
-        endDate
-        nationality
-        nationalityLabel
-        institution
-        institutionLabel
-        profession
-        professionLabel
-        gender
-        associations {
-            association
-            associationLabel
-        }
-        relatedItem
-        relatedItemLabel
-        description
-        permanentLink
+        title
+        thumbnail
     }
 }
