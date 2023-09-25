@@ -1,6 +1,7 @@
 query ZoomLevel3Person($id: String!) {
     zoomLevel3Person(id: $id) {
         __typename
+        id
         title
         thumbnail
     }

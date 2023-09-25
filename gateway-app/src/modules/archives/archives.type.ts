@@ -11,13 +11,13 @@ export class ArchiveZoomLevel3Type {
   @Field()
   public id: string
 
-  @Field(() => EntityNames)
+  @Field(() => EntityNames, { nullable: true })
   public type: EntityNames
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   public title: string
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   public thumbnail: string
 }
 

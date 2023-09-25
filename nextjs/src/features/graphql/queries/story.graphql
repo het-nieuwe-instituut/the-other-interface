@@ -52,51 +52,21 @@ query storyById($locale: String, $id: ID, $publicationState: String = "LIVE") {
                             type
                             recordId
                             archive {
-                                ... on ArchivesOtherZoomLevel3DetailType {
-                                    id
-                                    type
-                                    objectNumber
-                                }
-                                ... on ArchivesFondsZoomLevel3DetailType {
-                                    id
-                                    objectNumber
-                                }
+                                type
+                                id
                             }
                             object {
                                 title
-                                makers {
-                                    maker
-                                }
-                                image
+                                thumbnail
                             }
                             publication {
-                                ... on PublicationsAudioVisualZoomLevel3DetailType {
-                                    id
-                                    type
-                                    title
-                                }
-                                ... on PublicationsArticleZoomLevel3DetailType {
-                                    id
-                                    type
-                                    title
-                                }
-                                ... on PublicationsSerialZoomLevel3DetailType {
-                                    id
-                                    type
-                                    title
-                                }
-                                ... on PublicationsBookZoomLevel3DetailType {
-                                    id
-                                    type
-                                    title
-                                    authors {
-                                        author
-                                    }
-                                }
+                               id
+                               type
+                               title
+                               thumbnail
                             }
                             people {
-                                name
-                                profession
+                                title
                             }
                         }
                     }

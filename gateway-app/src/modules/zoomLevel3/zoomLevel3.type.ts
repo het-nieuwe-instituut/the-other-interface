@@ -16,10 +16,10 @@ import { TriplyExternalSourceEnum } from './zoomLevel3.service'
 
 @ObjectType()
 export class ZoomLevel3RelationsType {
-  @Field(() => EntityNames)
+  @Field(() => EntityNames, { nullable: true })
   public type: EntityNames
 
-  @Field()
+  @Field({ nullable: true })
   public total: number
 
   @Field(() => [RelatedRecordType], { nullable: true })
@@ -28,16 +28,16 @@ export class ZoomLevel3RelationsType {
 
 @ObjectType()
 export class RelatedRecordType {
-  @Field()
+  @Field({ nullable: true })
   public id: string
 
-  @Field(() => EntityNames)
+  @Field(() => EntityNames, { nullable: true })
   public type: EntityNames
 
-  @Field()
+  @Field({ nullable: true })
   public title: string
 
-  @Field()
+  @Field({ nullable: true })
   public thumbnail: string
 }
 

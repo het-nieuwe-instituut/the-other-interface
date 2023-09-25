@@ -1,7 +1,0 @@
-query ZoomLevel3PublicationsSerial($id: String!) {
-    zoomLevel3PublicationsSerial(id: $id) {
-        __typename
-        title
-        thumbnail
-    }
-}

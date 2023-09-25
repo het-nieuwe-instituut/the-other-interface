@@ -1,6 +1,0 @@
-query ZoomLevel3PublicationsBook($id: String!) {
-    zoomLevel3PublicationsBook(id: $id) {
-        title
-        thumbnail
-    }
-}
