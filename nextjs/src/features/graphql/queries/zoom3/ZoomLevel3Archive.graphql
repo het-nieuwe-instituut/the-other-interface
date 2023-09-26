@@ -1,4 +1,4 @@
-query ZoomLevel3Archives($id: String!) {
+query ZoomLevel3Archive($id: String!) {
     zoomLevel3Archive(id: $id) {
         __typename
         id

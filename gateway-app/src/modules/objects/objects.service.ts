@@ -70,12 +70,13 @@ export class ObjectsService {
   }
 
   public async getZoomLevel3Data(id: string) {
-    const uri = TriplyUtils.getUriForTypeAndId(EntityNames.Objects, id)
+    // const uri = TriplyUtils.getUriForTypeAndId(EntityNames.Objects, id)
     const result = await this.triplyService.queryTriplyData<ObjectsDetailZoomLevel3Data>(
       this.ZoomLevel3Endpoint,
       objectsDetailZoomLevel3DataKeys,
-      { page: 1, pageSize: 2 },
-      { record: uri }
+      // TODO ask Tanja about returning only one record
+      { page: 1, pageSize: 1 },
+      { id }
     )
 
     return {

@@ -97,7 +97,6 @@ export class ZoomLevel3Service {
   ) {}
 
   public async getRelations(id: string, type: EntityNames, lang?: string) {
-    console.log(type)
     switch (type) {
       case EntityNames.Archives:
       case EntityNames.Objects:
@@ -108,7 +107,6 @@ export class ZoomLevel3Service {
           await this.getStoryRelationsForLinkedItem(id, type),
         ]
       case EntityNames.Stories:
-        console.log(type)
         return this.getStoryRelations(id, lang)
       case EntityNames.External:
       // TODO
@@ -116,31 +114,6 @@ export class ZoomLevel3Service {
         throw CustomError.internalCritical('type not implemented')
     }
   }
-
-  // public async getAllRelations({ id, type, relatedObjectsType }: ZoomLevel3RelatedObjectsArgs) {
-  //   console.log('get all relations')
-  //   const uri = TriplyUtils.getUriForTypeAndId(type, id)
-  //   const res = await this.triplyService.queryTriplyData<ZoomLevel3RelatedObjectData>(
-  //     `${this.relatedObjectsEndpoint}${uri}`,
-  //     zoomLevel3RelatedObjectDataKeys
-  //   )
-
-  //   return res.data
-  //     .filter(d => TriplyUtils.getEntityNameFromGraph(d.graph) === relatedObjectsType)
-  //     .map(d => ({
-  //       id: TriplyUtils.getIdFromUri(d.externObj),
-  //       type: relatedObjectsType,
-  //       name: d.label,
-  //       pidWorkURI: d.pidWorkURI,
-  //       profession: d.profession,
-  //       professionLabel: d.professionLabel,
-  //       birthDate: d.birthDate,
-  //       availability: d.availability,
-  //       date: d.date,
-  //       creator: d.creator,
-  //       creatorLabel: d.creatorLabel,
-  //     }))
-  // }
 
   public async getDetail(id: string, type: EntityNames) {
     switch (type) {
@@ -154,10 +127,6 @@ export class ZoomLevel3Service {
         return this.publicationsService.getZoomLevel3Data(type, id)
       }
       case EntityNames.Archives: {
-        // const subType = metadata?.archivesType
-        //   ? metadata?.archivesType
-        //   : await this.archivesService.determineArchiveType(id)
-
         return this.archivesService.getZoomLevel3Data(EntityNames.Archives, id)
       }
       case EntityNames.Stories:
@@ -202,9 +171,7 @@ export class ZoomLevel3Service {
     const promises = Object.entries(groupedRecords).map(async ([key, recordIds]) => {
       const type = StrapiUtils.getEntityNameForRecordType(key as Enum_Triplyrecord_Type)
       const randomRecordIds = getRandom2ItemsFromArray(recordIds)
-      const randomRelations = await Promise.all(
-        randomRecordIds.map(id => this.getTriplyRelatedRecords(id, type))
-      )
+      const randomRelations = await Promise.all(randomRecordIds.map(id => this.getDetail(id, type)))
 
       return {
         type,
