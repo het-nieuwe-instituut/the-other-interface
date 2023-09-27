@@ -37,3 +37,4 @@ export const getZoom3Queries = (type: Category, api: Sdk) => {
       }
   }
 }
+

@@ -168,28 +168,23 @@ export class ZoomLevel3Service {
       groupedRecords[record.attributes.type].push(record.attributes.recordId)
     }
 
-    const promises = Object.entries(groupedRecords).map(async ([key, recordIds]) => {
+    const data = Object.entries(groupedRecords).map(([key, recordIds]) => {
       const type = StrapiUtils.getEntityNameForRecordType(key as Enum_Triplyrecord_Type)
       const randomRecordIds = getRandom2ItemsFromArray(recordIds)
-      const randomRelations = await Promise.all(randomRecordIds.map(id => this.getDetail(id, type)))
+      // const randomRelations = await Promise.all(randomRecordIds.map(id => this.getDetail(id, type)))
 
       return {
         type,
-        randomRelations: randomRelations,
+        randomRelations: randomRecordIds,
       }
     })
 
     const storyIds = this.extractStoryIds(storyRelations)
-    const randomRecordIds = getRandom2ItemsFromArray(storyIds)
-    const stories = await this.strapiGqlSdk.storiesByIds({ storiesIds: randomRecordIds })
-    const data = await Promise.all(promises)
+    // const randomRecordIds = getRandom2ItemsFromArray(storyIds)
+    // const stories = await this.strapiGqlSdk.storiesByIds({ storiesIds: randomRecordIds })
+    // const data = await Promise.all(promises)
 
-    const returnData = [
-      ...data,
-      { type: EntityNames.Stories, relations: stories?.stories?.data || [] },
-    ]
-
-    return [...data, { type: EntityNames.Stories, randomRelations: stories?.stories?.data || [] }]
+    return [...data, { type: EntityNames.Stories, randomRelations: storyIds || [] }]
   }
 
   private async getStoryRelationsForLinkedItem(id: string, entityName: EntityNames) {

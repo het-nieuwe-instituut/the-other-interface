@@ -21,15 +21,10 @@ export async function getZoom3RelationsTask(type: Category, id: string, locale: 
     const configByType = getZoom3Queries(type, api)
 
     if (type === CATEGORIES.stories) {
-      console.log('i am here')
-      const item = await api?.StoriesRelations({ id, lang: locale })
-      console.log(item)
+      return await api?.StoriesRelations({ id, lang: locale })
+    } else {
+      return await configByType?.relationsQuery?.({ id, lang: locale })
     }
-    // return item
-    // } else {
-    //   const data = await configByType?.relationsQuery?.({ id, lang: locale })
-    //   console.log(data)
-    // }
 
     // console.log({ relations })
   } catch (e) {

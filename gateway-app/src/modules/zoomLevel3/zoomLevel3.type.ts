@@ -22,8 +22,8 @@ export class ZoomLevel3RelationsType {
   @Field({ nullable: true })
   public total: number
 
-  @Field(() => [RelatedRecordType], { nullable: true })
-  public randomRelations?: RelatedRecordType[]
+  @Field(() => [String], { nullable: true })
+  public randomRelations?: string[]
 }
 
 @ObjectType()

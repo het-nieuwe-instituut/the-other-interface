@@ -1,10 +1,5 @@
 fragment zoom3RelationsFragment on ZoomLevel3RelationsType {
     type
     total
-    randomRelations {
-        id
-        type
-        title
-        thumbnail
-    }
+    randomRelations
 }

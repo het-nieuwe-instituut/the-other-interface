@@ -36,7 +36,7 @@ export default async function Page({ params }: { params: { category: string; id:
       : { id }
 
   const relations = await getZoom3RelationsTask(category, id, lang, api)
-  console.log(relations)
+  // console.log(JSON.stringify(relations, null, 2))
 
   const [editorialData, detail] = await Promise.all([
     await getRecordEditorialContent({
@@ -48,6 +48,8 @@ export default async function Page({ params }: { params: { category: string; id:
 
     await getZoom3RecordTask(category, payload, api),
   ])
+
+  // console.log({ detail })
 
   // console.log(detail)
 
