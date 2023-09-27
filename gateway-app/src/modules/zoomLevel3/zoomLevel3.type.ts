@@ -8,7 +8,7 @@ import {
 } from '@nestjs/graphql'
 import { IsOptional, IsString } from 'class-validator'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
-// import { PoepleZoomLevel3DetailType } from '../people/people.type'
+// import { PeopleZoomLevel3DetailType } from '../people/people.type'
 // import { ArchivesOtherZoomLevel3DetailType } from '../archives/archives.type'
 // import { PublicationsBookZoomLevel3DetailType } from '../publications/publications.type'
 // import { ObjectsZoomLevel3DetailType } from '../objects/objects.type'
@@ -53,7 +53,7 @@ export class BaseZoomLevel3RelatedRecordType {
 // @ObjectType()
 // export class ZoomLevel3RelatedPeopleType extends IntersectionType(
 //   BaseZoomLevel3RelatedRecordType,
-//   PickType(PoepleZoomLevel3DetailType, ['name', 'birthDate', 'profession'] as const)
+//   PickType(PeopleZoomLevel3DetailType, ['name', 'birthDate', 'profession'] as const)
 // ) {
 //   @Field(() => EntityNames)
 //   public type: EntityNames

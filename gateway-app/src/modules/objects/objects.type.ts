@@ -1,6 +1,6 @@
 import { Field, ObjectType } from '@nestjs/graphql'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
-// import { PoepleZoomLevel3DetailType } from '../people/people.type'
+// import { PeopleZoomLevel3DetailType } from '../people/people.type'
 // import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 
 @ObjectType()

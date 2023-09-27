@@ -10,7 +10,7 @@ import {
 import { ArchiveZoomLevel3Type } from '../archives/archives.type'
 import { ObjectsZoomLevel3DetailType } from '../objects/objects.type'
 import { PublicationZoomLevel3DetailType } from '../publications/publications.type'
-import { PoepleZoomLevel3DetailType } from '../people/people.type'
+import { PeopleZoomLevel3DetailType } from '../people/people.type'
 
 registerEnumType(Enum_Triplyrecord_Type, { name: 'Enum_Triplyrecord_Type' })
 
@@ -43,8 +43,8 @@ export class TriplyRecord {
   @Field(() => PublicationZoomLevel3DetailType, { nullable: true })
   public publication?: typeof PublicationZoomLevel3DetailType
 
-  @Field(() => PoepleZoomLevel3DetailType, { nullable: true })
-  public people?: PoepleZoomLevel3DetailType
+  @Field(() => PeopleZoomLevel3DetailType, { nullable: true })
+  public people?: PeopleZoomLevel3DetailType
 }
 
 @ObjectType()
