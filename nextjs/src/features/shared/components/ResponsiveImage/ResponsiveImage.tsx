@@ -5,7 +5,7 @@ import { useIsImagePortrait } from '../../hooks/useIsImagePortrait'
 
 type ResponsiveImageProps = {
   src?: string | null
-  alt?: string
+  alt?: string | null
   maxHeight?: string
 }
 
@@ -44,7 +44,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
       width={isPortrait ? 'auto' : '100%'}
       maxHeight={maxHeight}
       objectFit="contain"
-      alt={alt}
+      alt={alt || 'image without title'}
     />
   )
 }

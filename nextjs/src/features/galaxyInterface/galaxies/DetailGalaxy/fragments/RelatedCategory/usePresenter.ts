@@ -1,22 +1,25 @@
 import { useMemo } from 'react'
 import { CloudCategory } from '@/features/shared/utils/categories'
 
-import { Record, PositionedRecord } from '../types'
+import { PositionedRecord, Relation } from '../types'
 import { positioningTemplate } from './positioningTemplates'
 
-export const usePresenter = (category: CloudCategory, records: Record[]) => {
-  const positionedStories = useMemo(() => {
-    const positionedStories: PositionedRecord[] = []
+export const usePresenter = (category: CloudCategory, relations: Relation[]) => {
+  const positionedRecords = useMemo(() => {
+    const positionedRecords: PositionedRecord[] = []
     const categoryPositioningTemplate = positioningTemplate[category]
+    const categoryRelations = relations.find(
+      relation => relation.type.toLocaleLowerCase() === category
+    )?.randomRelations
 
-    if (!categoryPositioningTemplate) return []
+    if (!categoryPositioningTemplate || !categoryRelations) return []
 
     categoryPositioningTemplate.forEach((template, index) => {
-      const record = records[index]
+      const record = categoryRelations[index]
 
       if (record) {
-        positionedStories.push({
-          ...record,
+        positionedRecords.push({
+          id: record,
           position: template.position,
           grid: template.grid,
           category,
@@ -24,10 +27,10 @@ export const usePresenter = (category: CloudCategory, records: Record[]) => {
       }
     })
 
-    return positionedStories
-  }, [records])
+    return positionedRecords
+  }, [relations, category])
 
   return {
-    positionedStories,
+    positionedRecords,
   }
 }

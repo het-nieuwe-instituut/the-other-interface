@@ -45,6 +45,7 @@ export const DetailGalaxy: React.FC<Props> = ({ record, relations }) => {
             category={cloudCategory}
             gridRow={grid.gridRow}
             gridColumn={grid.gridColumn}
+            relations={relations}
           />
         ))}
 

@@ -12,7 +12,7 @@ type Payload =
 
 export type Zoom3Record = {
   title: string
-  image: string
+  thumbnail: string
   locale: string
   id: string
 } | null
@@ -28,18 +28,16 @@ export async function getZoom3RecordTask(type: Category, payload: Payload, api: 
 
     const configByType = getZoom3Queries(type, api)
 
-    console.log({ configByType: configByType?.zoomLevelQuery, type })
-
     const data = await configByType?.zoomLevelQuery?.(payload)
     const item = configByType?.accesor?.(data)
 
-    // console.log(item, 'this is item')
+    console.log('configByType', item)
+
+    if (!item?.thumbnail && !item?.title) return null
+
     return {
-      id: item?.id ?? '',
-      // TODO map name
-      title: item?.title ?? '',
+      ...item,
       locale: 'nl',
-      image: item?.thumbnail ?? '',
     }
   } catch (e) {
     console.log(e, 'Error accured in zoom level 3 task')

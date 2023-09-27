@@ -5,10 +5,9 @@ import { StoryByIdQuery, LandingpageBySlugQuery } from 'src/generated/graphql'
 import { Box } from '@/features/shared/configs/chakra'
 import { DetailGalaxy } from '@/features/galaxyInterface/galaxies/DetailGalaxy/DetailGalaxy'
 import { Zoom3Record } from '../../tasks/getZoom3Record'
-import { Category } from '@/features/shared/utils/categories'
 
 type Relation = {
-  type: Category
+  type: string
   total: null
   randomRelations: string[]
 }

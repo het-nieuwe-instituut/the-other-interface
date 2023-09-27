@@ -24,7 +24,7 @@ export const extractStoryData = (story: StoryEntity | null) => {
   const storyLocale = story?.attributes?.locale
   return {
     title: story?.attributes?.title ?? '',
-    image: findImageUrl(story?.attributes?.components ?? []),
+    thumbnail: findImageUrl(story?.attributes?.components ?? []),
     locale: storyLocale || 'nl',
     id: storyId || `${Math.floor(Math.random() * (99999 + 1))}`,
   }

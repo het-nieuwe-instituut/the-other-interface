@@ -76,7 +76,6 @@ export class ZoomLevel3Service {
   }
 
   public async getDetail(id: string, type: EntityNames) {
-    console.log('type', type, EntityNames.Archives)
     switch (type) {
       case EntityNames.Objects: {
         return this.objectsService.getZoomLevel3Data(id)

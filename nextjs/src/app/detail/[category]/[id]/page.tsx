@@ -35,8 +35,6 @@ export default async function Page({ params }: { params: { category: string; id:
         }
       : { id }
 
-  // const relations = await getZoom3RelationsTask(category, id, lang, api)
-
   const relations = [
     { type: 'Publications', total: null, randomRelations: ['111', '123'] },
     { type: 'People', total: null, randomRelations: ['111', '123'] },

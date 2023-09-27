@@ -35,12 +35,12 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn, record })
         gap="12px"
       >
         <ResponsiveImage
-          src={record?.image}
+          src={record?.thumbnail}
           alt={record?.title}
-          maxHeight={!record?.image ? '100%' : 'calc(100% - 2.5vw - 20px)'} // where 2.6vw are a texts' line heights, 16px are gaps
+          maxHeight={!record?.thumbnail ? '100%' : 'calc(100% - 2.5vw - 20px)'} // where 2.6vw are a texts' line heights, 16px are gaps
         />
 
-        <Box w="100%" color="blueAlpha.100" position={!record?.image ? 'absolute' : 'relative'}>
+        <Box w="100%" color="blueAlpha.100" position={!record?.thumbnail ? 'absolute' : 'relative'}>
           <Text
             align="center"
             isTruncated
