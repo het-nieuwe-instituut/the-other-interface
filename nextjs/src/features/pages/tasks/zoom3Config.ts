@@ -2,7 +2,7 @@ import { CATEGORIES, Category } from '@/features/shared/utils/categories'
 
 import {
   Sdk,
-  ZoomLevel3ArchivesQuery,
+  ZoomLevel3ArchiveQuery,
   ZoomLevel3ObjectQuery,
   ZoomLevel3PersonQuery,
   ZoomLevel3PublicationQuery,
@@ -18,9 +18,9 @@ export const getZoom3Queries = (type: Category, api: Sdk) => {
       }
     case CATEGORIES.archives:
       return {
-        zoomLevelQuery: api.ZoomLevel3Archives,
+        zoomLevelQuery: api.ZoomLevel3Archive,
         relationsQuery: api.ArchivesRelations,
-        accesor: (data?: ZoomLevel3ArchivesQuery) => data?.zoomLevel3Archive,
+        accesor: (data?: ZoomLevel3ArchiveQuery) => data?.zoomLevel3Archive,
       }
     case CATEGORIES.publications:
       return {
@@ -37,4 +37,3 @@ export const getZoom3Queries = (type: Category, api: Sdk) => {
       }
   }
 }
-

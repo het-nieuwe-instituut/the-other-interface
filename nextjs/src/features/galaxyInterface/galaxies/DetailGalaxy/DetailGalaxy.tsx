@@ -20,7 +20,7 @@ type Props = {
   relations: Relation[]
 }
 
-export const DetailGalaxy: React.FC<Props> = ({ record }) => {
+export const DetailGalaxy: React.FC<Props> = ({ record, relations }) => {
   const params = useParams()
   const category = params?.category
   const id = params?.id

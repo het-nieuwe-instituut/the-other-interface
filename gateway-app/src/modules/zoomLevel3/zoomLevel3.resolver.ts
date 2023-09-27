@@ -1,5 +1,5 @@
 import { Args, Query, Resolver } from '@nestjs/graphql'
-import { ArchiveZoomLevel3Type } from '../archives/archives.type'
+import { ArchiveZoomLevel3DetailType } from '../archives/archives.type'
 import { ObjectsZoomLevel3DetailType } from '../objects/objects.type'
 import { PeopleZoomLevel3DetailType } from '../people/people.type'
 import { PublicationsService } from '../publications/publications.service'
@@ -42,7 +42,7 @@ export class ZoomLevel3Resolver {
     return this.zoomLevel3Service.getDetail(objectId, EntityNames.Publications)
   }
 
-  @Query(() => ArchiveZoomLevel3Type, { nullable: true })
+  @Query(() => ArchiveZoomLevel3DetailType, { nullable: true })
   public async zoomLevel3Archive(@Args('id') objectId: string) {
     return this.zoomLevel3Service.getDetail(objectId, EntityNames.Archives)
   }

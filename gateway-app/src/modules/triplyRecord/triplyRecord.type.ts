@@ -7,7 +7,7 @@ import {
   ResponseCollectionMeta,
   StringFilterInput,
 } from '../strapi/shared-types'
-import { ArchiveZoomLevel3Type } from '../archives/archives.type'
+import { ArchiveZoomLevel3DetailType } from '../archives/archives.type'
 import { ObjectsZoomLevel3DetailType } from '../objects/objects.type'
 import { PublicationZoomLevel3DetailType } from '../publications/publications.type'
 import { PeopleZoomLevel3DetailType } from '../people/people.type'
@@ -34,8 +34,8 @@ export class TriplyRecord {
   @Field({ nullable: true })
   public updatedAt?: Date
 
-  @Field(() => ArchiveZoomLevel3Type, { nullable: true })
-  public archive?: typeof ArchiveZoomLevel3Type
+  @Field(() => ArchiveZoomLevel3DetailType, { nullable: true })
+  public archive?: typeof ArchiveZoomLevel3DetailType
 
   @Field(() => ObjectsZoomLevel3DetailType, { nullable: true })
   public object?: ObjectsZoomLevel3DetailType

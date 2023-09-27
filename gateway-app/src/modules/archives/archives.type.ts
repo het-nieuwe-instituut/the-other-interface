@@ -7,7 +7,7 @@ import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 // registerEnumType(ArchivesZoomLevel3Types, { name: 'ArchivesZoomLevel3Types' })
 
 @ObjectType()
-export class ArchiveZoomLevel3Type {
+export class ArchiveZoomLevel3DetailType {
   @Field()
   public id: string
 

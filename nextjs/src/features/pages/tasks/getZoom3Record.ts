@@ -28,6 +28,8 @@ export async function getZoom3RecordTask(type: Category, payload: Payload, api: 
 
     const configByType = getZoom3Queries(type, api)
 
+    console.log({ configByType: configByType?.zoomLevelQuery, type })
+
     const data = await configByType?.zoomLevelQuery?.(payload)
     const item = configByType?.accesor?.(data)
 
