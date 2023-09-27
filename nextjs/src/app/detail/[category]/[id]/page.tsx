@@ -57,6 +57,8 @@ export default async function Page({ params }: { params: { category: string; id:
     await getZoom3RelationsTask(category, id, lang, api),
   ])
 
+  console.log(relationsIds)
+
   // console.log({ detail })
 
   // console.log(detail)

@@ -13,10 +13,10 @@ import { getRandom2ItemsFromArray } from '../util/helpers'
 import { CustomError } from '../util/customError'
 
 interface ZoomLevel3RelationData {
-  id: string
+  idRelation: string
 }
 const zoomLevel3RelationDataKeys: KeysToVerify<ZoomLevel3RelationData> = {
-  id: true,
+  idRelation: true,
 }
 
 // key is relation graph
@@ -152,38 +152,31 @@ export class ZoomLevel3Service {
     }
   }
 
-  private async getTriplyRelatedRecords(
-    id: string,
-    type: EntityNames,
-    externalSource?: TriplyExternalSourceEnum
-  ) {
-    const entityNames = Object.values(EntityNames)
+  private async getTriplyRelatedRecords(id: string, type: EntityNames) {
     const data = await Promise.all(
-      entityNames.map(async entityName => {
-        // const triplyType =  StrapiUtils.getRecordTypeForEntityName(entityName)
-        return {
-          id,
-          type: entityName,
-          relations: await this.getRelationDataFromTriply(id, entityName, externalSource),
+      [EntityNames.Archives, EntityNames.Objects, EntityNames.People, EntityNames.Publications].map(
+        async entityName => {
+          const data = await this.getRelationDataFromTriply(id, entityName)
+
+          return {
+            id,
+            type: entityName,
+            randomRelations: data.map(d => d?.idRelation || ''),
+          }
         }
-      })
+      )
     )
+
     return data
   }
 
-  private async getRelationDataFromTriply(
-    id: string,
-    type: EntityNames,
-    externalSource?: TriplyExternalSourceEnum
-  ) {
+  private async getRelationDataFromTriply(id: string, type: EntityNames) {
     const uri = TriplyUtils.getUriForTypeAndId(type, id)
-    const params = externalSource ? { ExternalSources: externalSource } : undefined
 
     const res = await this.triplyService.queryTriplyData<ZoomLevel3RelationData>(
-      `${this.relationsEndpoint}${uri}`,
+      `${uri}`,
       zoomLevel3RelationDataKeys,
-      undefined,
-      params
+      { page: 1, pageSize: 2 }
     )
 
     return res.data
