@@ -14,49 +14,9 @@ import { CustomError } from '../util/customError'
 
 interface ZoomLevel3RelationData {
   id: string
-  holder: string // sample graph i.e. https://collectiedata.hetnieuweinstituut.nl/graph/people
-  title: string // number
-
-  thumbnail: string // i.e. https://collectiedata.hetnieuweinstituut.nl/id/books/300323890
-  subject: string
-  record: string // sample has a relation of type i.e. https://collectiedata.hetnieuweinstituut.nl/graph/people
 }
 const zoomLevel3RelationDataKeys: KeysToVerify<ZoomLevel3RelationData> = {
   id: true,
-  holder: true,
-  title: true,
-  thumbnail: true,
-  subject: true,
-  record: true,
-}
-
-interface ZoomLevel3RelatedObjectData {
-  dataset: string
-  graph: string // i.e. https://collectiedata.hetnieuweinstituut.nl/graph/people
-  label: string
-  externObj: string // i.e. https://collectiedata.hetnieuweinstituut.nl/id/people/25376
-  pidWorkURI: string | null
-  profession: string | null
-  professionLabel: string | null
-  birthDate: string | null
-  availability: string | null
-  date: string | null
-  creator: string | null
-  creatorLabel: string | null
-}
-const zoomLevel3RelatedObjectDataKeys: KeysToVerify<ZoomLevel3RelatedObjectData> = {
-  dataset: true,
-  graph: true,
-  label: true,
-  externObj: true,
-  pidWorkURI: true,
-  profession: true,
-  professionLabel: true,
-  birthDate: true,
-  availability: true,
-  date: true,
-  creator: true,
-  creatorLabel: true,
 }
 
 // key is relation graph
@@ -103,7 +63,7 @@ export class ZoomLevel3Service {
       case EntityNames.People:
       case EntityNames.Publications:
         return [
-          await this.getTriplyRelatedRecords(id, type),
+          ...(await this.getTriplyRelatedRecords(id, type)),
           await this.getStoryRelationsForLinkedItem(id, type),
         ]
       case EntityNames.Stories:
@@ -136,18 +96,6 @@ export class ZoomLevel3Service {
         throw CustomError.internalCritical('type not implemented')
     }
   }
-
-  // private async getTriplyRelations(
-  //   id: string,
-  //   type: EntityNames,
-  //   externalSource?: TriplyExternalSourceEnum
-  // ) {
-  //   const data = await this.getRelationDataFromTriply(id, type, externalSource)
-
-  //   const groupedData = this.getGroupedRelationData(data, type)
-
-  //   return this.getFormattedGroupData(groupedData)
-  // }
 
   private async getStoryRelations(id: string, lang?: string) {
     const storyRelations = await this.strapiGqlSdk.storiesLinkedToTheme({ id, locale: lang })
@@ -196,14 +144,7 @@ export class ZoomLevel3Service {
 
     const randomStories = getRandom2ItemsFromArray(res.stories?.data || [])
       .filter(s => !!s.id && !!s.attributes)
-      .map(s => ({
-        id: s.id,
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        slug: s.attributes!.slug,
-        type: EntityNames.Stories,
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        label: s.attributes!.title,
-      }))
+      .map(s => s?.id || '')
 
     return {
       type: EntityNames.Stories,
@@ -217,20 +158,18 @@ export class ZoomLevel3Service {
     type: EntityNames,
     externalSource?: TriplyExternalSourceEnum
   ) {
-    const data = await this.getRelationDataFromTriply(id, type, externalSource)
-
-    // const groupedData = this.getGroupedRelationData(data, type)
-    // const formattedData = this.getFormattedGroupData(groupedData)
-
-    return {
-      id,
-      type,
-      relations: data.map(d => ({
-        id: d?.id,
-        title: d.title,
-        thumbnail: d.thumbnail,
-      })),
-    }
+    const entityNames = Object.values(EntityNames)
+    const data = await Promise.all(
+      entityNames.map(async entityName => {
+        // const triplyType =  StrapiUtils.getRecordTypeForEntityName(entityName)
+        return {
+          id,
+          type: entityName,
+          relations: await this.getRelationDataFromTriply(id, entityName, externalSource),
+        }
+      })
+    )
+    return data
   }
 
   private async getRelationDataFromTriply(

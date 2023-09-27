@@ -8,7 +8,7 @@
     "types": [
       {
         "kind": "OBJECT",
-        "name": "ArchiveZoomLevel3DetailType",
+        "name": "ArchiveZoomLevel3Type",
         "description": null,
         "fields": [
           {
@@ -6469,7 +6469,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "PeopleZoomLevel3DetailType",
+        "name": "PoepleZoomLevel3DetailType",
         "description": null,
         "fields": [
           {
@@ -6607,7 +6607,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "ArchiveZoomLevel3DetailType",
+                "name": "ArchiveZoomLevel3Type",
                 "ofType": null
               }
             },
@@ -8040,7 +8040,7 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "ArchiveZoomLevel3DetailType",
+              "name": "ArchiveZoomLevel3Type",
               "ofType": null
             },
             "isDeprecated": false,
@@ -8098,7 +8098,7 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "PeopleZoomLevel3DetailType",
+              "name": "PoepleZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -10119,7 +10119,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "ArchiveZoomLevel3DetailType",
+              "name": "ArchiveZoomLevel3Type",
               "ofType": null
             },
             "isDeprecated": false,
@@ -10155,7 +10155,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "PeopleZoomLevel3DetailType",
+              "name": "PoepleZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,

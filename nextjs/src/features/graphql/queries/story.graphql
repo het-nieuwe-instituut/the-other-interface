@@ -15,99 +15,9 @@ query storyById($locale: String, $id: ID, $publicationState: String = "LIVE") {
             __typename
             attributes {
                 title
-                description
-                shortDescription
-                publishedAt
-                author {
-                    data {
-                        id
-                        attributes {
-                            firstName
-                            insertion
-                            lastName
-                        }
-                    }
-                }
-                timeframe {
-                    id
-                    yearStart
-                    yearEnd
-                }
-                locations {
-                    data {
-                        id
-                        attributes {
-                            city
-                        }
-                    }
-                }
-                publicationDate {
-                    date
-                    displayType
-                }
-                triplyRecords {
-                    data {
-                        id
-                        attributes {
-                            type
-                            recordId
-                            archive {
-                                type
-                                id
-                            }
-                            object {
-                                title
-                                thumbnail
-                            }
-                            publication {
-                               id
-                               type
-                               title
-                               thumbnail
-                            }
-                            people {
-                                title
-                            }
-                        }
-                    }
-                }
                 components {
-                    ... on ComponentModulesTextModule {
-                        ...textModuleFragment
-                    }
                     ... on ComponentModulesImage {
                         ...imageModuleFragment
-                    }
-                    ... on ComponentModulesPullquote {
-                        ...pullquoteModuleFragment
-                    }
-                    ... on ComponentModulesTableModule {
-                        ...tableModuleFragment
-                    }
-                    ... on ComponentModulesTitleModule {
-                        ...titleModuleFragment
-                    }
-                    ... on ComponentModulesImageCarousel {
-                        ...imageCarouselModuleFragment
-                    }
-                    ... on ComponentModulesButtonsModule {
-                        ...buttonsModuleFragment
-                    }
-                    ... on ComponentModulesSubtitle {
-                        ...subtitleModuleFragment
-                    }
-                    ... on ComponentModulesGridModule {
-                        ...gridModuleFragment
-                    }
-                }
-                storyLinks {
-                    ... on ComponentModulesButtonsModule {
-                        ...buttonsModuleFragment
-                    }
-                }
-                triplyRecords {
-                    data {
-                        ...BaseTriplyRecordFragment
                     }
                 }
             }
