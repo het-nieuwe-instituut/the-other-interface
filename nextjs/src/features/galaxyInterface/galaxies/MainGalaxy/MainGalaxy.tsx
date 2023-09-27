@@ -4,6 +4,7 @@ import { Box } from '@chakra-ui/react'
 import { Cloud, CategoryCloud, Stories } from './fragments'
 import { ThemeTitle } from '../../components/ThemeTitle/ThemeTitle'
 import { StoryEntity } from 'src/generated/graphql'
+import { GalaxyFooter } from '../../components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 
 const categoryClouds: CategoryCloud[] = [
   {
@@ -45,6 +46,8 @@ export const MainGalaxy: React.FC<Props> = ({ storyTitle, stories }) => {
       ))}
       <Stories stories={stories} />
       <ThemeTitle title={storyTitle} />
+
+      <GalaxyFooter />
     </Box>
   )
 }

@@ -4,7 +4,7 @@ import { Grid, GridItem } from '@chakra-ui/react'
 import { fakeRelations } from '../../fakeData'
 import { usePresenter } from './usePresenter'
 import { Record } from '../Record'
-import { GridParams } from '../types'
+import { GridParams } from '@/features/shared/types/position'
 
 interface Props extends GridParams {
   category: CloudCategory

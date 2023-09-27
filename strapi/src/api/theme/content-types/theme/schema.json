@@ -15,20 +15,21 @@
       "localized": true
     }
   },
-  "attributes": {
-    "stories": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::story.story",
-      "mappedBy": "themes"
-    },
-    "name": {
+  "attributes": {   
+     "name": {
       "type": "string",
+      "required": true,
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       }
+    },
+    "stories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::story.story",
+      "mappedBy": "themes"
     }
   }
 }
