@@ -175,7 +175,7 @@ export class ZoomLevel3Service {
 
       return {
         type,
-        relations: randomRelations,
+        randomRelations: randomRelations,
       }
     })
 
@@ -184,7 +184,12 @@ export class ZoomLevel3Service {
     const stories = await this.strapiGqlSdk.storiesByIds({ storiesIds: randomRecordIds })
     const data = await Promise.all(promises)
 
-    return [...data, { type: EntityNames.Stories, relations: stories?.stories?.data || [] }]
+    const returnData = [
+      ...data,
+      { type: EntityNames.Stories, relations: stories?.stories?.data || [] },
+    ]
+
+    return [...data, { type: EntityNames.Stories, randomRelations: stories?.stories?.data || [] }]
   }
 
   private async getStoryRelationsForLinkedItem(id: string, entityName: EntityNames) {

@@ -24,11 +24,12 @@ export async function getZoom3RelationsTask(type: Category, id: string, locale: 
       console.log('i am here')
       const item = await api?.StoriesRelations({ id, lang: locale })
       console.log(item)
-      // return item
-    } else {
-      const data = await configByType?.relationsQuery?.({ id, lang: locale })
-      console.log(data)
     }
+    // return item
+    // } else {
+    //   const data = await configByType?.relationsQuery?.({ id, lang: locale })
+    //   console.log(data)
+    // }
 
     // console.log({ relations })
   } catch (e) {
