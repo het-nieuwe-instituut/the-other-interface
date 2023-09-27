@@ -10,9 +10,9 @@ export class ArchivesZoomLevel3Resolver {
 
   @Query(() => ArchiveZoomLevel3Type)
   public archivesDetailZoomLevel3(@Parent() archiveCreator: ArchiveZoomLevel3Type) {
-    if (!archiveCreator.id) {
-      return
-    }
+    // if (!archiveCreator.id) {
+    //   return
+    // }
 
     return this.zoomLevel3Service.getDetail(archiveCreator?.id, EntityNames?.Archives)
   }

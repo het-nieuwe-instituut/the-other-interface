@@ -71,6 +71,9 @@ export class ObjectsService {
 
   public async getZoomLevel3Data(id: string) {
     // const uri = TriplyUtils.getUriForTypeAndId(EntityNames.Objects, id)
+
+    console.log('uri', objectsDetailZoomLevel3DataKeys, this.ZoomLevel3Endpoint)
+
     const result = await this.triplyService.queryTriplyData<ObjectsDetailZoomLevel3Data>(
       this.ZoomLevel3Endpoint,
       objectsDetailZoomLevel3DataKeys,

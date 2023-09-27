@@ -76,12 +76,13 @@ export class PublicationsService {
   }
 
   public async getZoomLevel3Data(type: EntityNames, id: string) {
-    const uri = TriplyUtils.getUriForTypeAndId(EntityNames.Publications, id)
+    // const uri = TriplyUtils.getUriForTypeAndId(EntityNames.Publications, id)
+
     const result = await this.triplyService.queryTriplyData<PublicationsZoomLevel3Data>(
       this.ZoomLevel3Endpoint,
       publicationsDetailZoomLevel3DataKeys,
       { page: 1, pageSize: 2 },
-      { id: uri }
+      { id }
     )
 
     return {

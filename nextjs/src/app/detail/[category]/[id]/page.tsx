@@ -35,10 +35,19 @@ export default async function Page({ params }: { params: { category: string; id:
         }
       : { id }
 
-  const relations = await getZoom3RelationsTask(category, id, lang, api)
+  // const relations = await getZoom3RelationsTask(category, id, lang, api)
+
+  const relations = [
+    { type: 'Publications', total: null, randomRelations: ['111', '123'] },
+    { type: 'People', total: null, randomRelations: ['111', '123'] },
+    { type: 'Archives', total: null, randomRelations: ['111', '123'] },
+    { type: 'Stories', total: null, randomRelations: ['111', '123'] },
+    { type: 'Objects', total: null, randomRelations: ['101', '1'] },
+  ]
+
   // console.log(JSON.stringify(relations, null, 2))
 
-  const [editorialData, detail] = await Promise.all([
+  const [editorialData, detail = null] = await Promise.all([
     await getRecordEditorialContent({
       category,
       id,
@@ -49,11 +58,11 @@ export default async function Page({ params }: { params: { category: string; id:
     await getZoom3RecordTask(category, payload, api),
   ])
 
-  // console.log({ detail })
+  console.log({ detail })
 
   // console.log(detail)
 
   // TODO create separate type for detail and mock result to it
 
-  return <DetailpageContainer editorialData={editorialData} record={detail} />
+  return <DetailpageContainer editorialData={editorialData} record={detail} relations={relations} />
 }

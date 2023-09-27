@@ -6,6 +6,7 @@ import { RelatedCategory, RelatedStories } from './fragments'
 import { GridParams } from '@/features/shared/types/position'
 import { GalaxyFooter } from '../../components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 import { Zoom3Record } from '@/features/pages/tasks/getZoom3Record'
+import { Relation } from './fragments/types'
 
 const relatedCategories: Array<{ category: CloudCategory; grid: GridParams }> = [
   { category: CLOUD_CATEGORIES.people, grid: { gridRow: '1 / 2', gridColumn: '1 / 2' } },
@@ -16,6 +17,7 @@ const relatedCategories: Array<{ category: CloudCategory; grid: GridParams }> = 
 
 type Props = {
   record: Zoom3Record
+  relations: Relation[]
 }
 
 export const DetailGalaxy: React.FC<Props> = ({ record }) => {
