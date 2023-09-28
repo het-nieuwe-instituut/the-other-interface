@@ -15,6 +15,7 @@ query storyById($locale: String, $id: ID, $publicationState: String = "LIVE") {
             __typename
             attributes {
                 title
+                description
                 components {
                     ... on ComponentModulesImage {
                         ...imageModuleFragment
@@ -39,3 +40,5 @@ query storyImages($id: String!) {
         }
     }
 }
+
+# 

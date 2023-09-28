@@ -8,7 +8,7 @@
     "types": [
       {
         "kind": "OBJECT",
-        "name": "ArchiveZoomLevel3Type",
+        "name": "ArchiveZoomLevel3DetailType",
         "description": null,
         "fields": [
           {
@@ -6607,7 +6607,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "ArchiveZoomLevel3Type",
+                "name": "ArchiveZoomLevel3DetailType",
                 "ofType": null
               }
             },
@@ -8040,7 +8040,7 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "ArchiveZoomLevel3Type",
+              "name": "ArchiveZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -10119,7 +10119,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "ArchiveZoomLevel3Type",
+              "name": "ArchiveZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,
