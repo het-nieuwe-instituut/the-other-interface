@@ -142,7 +142,7 @@ export class ZoomLevel3Service {
     })
 
     const randomStories = getRandom2ItemsFromArray(res.stories?.data || [])
-      .filter(s => !!s.id && !!s.attributes)
+      .filter(s => !!s?.id && !!s.attributes)
       .map(s => s?.id || '')
 
     console.log('getStoryRelationsForLinkedItem', {
