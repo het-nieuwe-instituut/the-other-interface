@@ -6469,7 +6469,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "PoepleZoomLevel3DetailType",
+        "name": "PeopleZoomLevel3DetailType",
         "description": null,
         "fields": [
           {
@@ -8098,7 +8098,7 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "PoepleZoomLevel3DetailType",
+              "name": "PeopleZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -10155,7 +10155,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "PoepleZoomLevel3DetailType",
+              "name": "PeopleZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,

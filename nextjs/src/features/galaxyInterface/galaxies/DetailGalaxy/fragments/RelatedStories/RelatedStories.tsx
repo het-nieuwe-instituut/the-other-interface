@@ -1,17 +1,18 @@
 import { Grid, GridItem } from '@chakra-ui/react'
 import { DetailedRecord } from '../DetailedRecord'
-import { fakeStories } from '../../fakeData'
 import { usePresenter } from './usePresenter'
 import { Record } from '../Record'
 import { Zoom3Record } from '@/features/pages/tasks/getZoom3Record'
+import { Relation } from '../types'
 
 interface Props {
   gridRow: string
   record: Zoom3Record
+  relations: Relation[]
 }
 
-export const RelatedStories: React.FC<Props> = ({ gridRow, record }) => {
-  const { positionedStories } = usePresenter(fakeStories)
+export const RelatedStories: React.FC<Props> = ({ gridRow, record, relations }) => {
+  const { positionedStories } = usePresenter(relations)
 
   return (
     <GridItem gridRow={gridRow} gridColumn="2" color="white">
@@ -20,7 +21,7 @@ export const RelatedStories: React.FC<Props> = ({ gridRow, record }) => {
           <Record key={story.id} record={story} />
         ))}
 
-        <DetailedRecord gridRow="2 / 4" gridColumn="1 / 3" record={record}/>
+        <DetailedRecord gridRow="2 / 4" gridColumn="1 / 3" record={record} />
       </Grid>
     </GridItem>
   )

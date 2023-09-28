@@ -7,7 +7,6 @@ import { notFound } from 'next/navigation'
 import { getRecordEditorialContent } from '@/features/pages/tasks/getRecordEditorialContent'
 import initApiServerService from '@/features/shared/utils/initApiServerService'
 import { getZoom3RecordTask } from '@/features/pages/tasks/getZoom3Record'
-import { getZoom3RelationsTask } from '@/features/pages/tasks/getZoom3Relations'
 
 function assertIsCategory(category: string): asserts category is Category {
   if (!Object.values(CATEGORIES).includes(category as Category)) {
@@ -36,16 +35,16 @@ export default async function Page({ params }: { params: { category: string; id:
       : { id }
 
   const relations = [
-    { type: 'Publications', total: null, randomRelations: ['111', '123'] },
-    { type: 'People', total: null, randomRelations: ['111', '123'] },
-    { type: 'Archives', total: null, randomRelations: ['111', '123'] },
-    { type: 'Stories', total: null, randomRelations: ['111', '123'] },
-    { type: 'Objects', total: null, randomRelations: ['101', '1'] },
+    { type: 'Publications', total: null, randomRelations: ['300230524', '300165507'] },
+    { type: 'People', total: null, randomRelations: ['18344', '22384'] },
+    { type: 'Archives', total: null, randomRelations: ['110000631', '110000565'] },
+    { type: 'Stories', total: null, randomRelations: ['1', '3'] },
+    { type: 'Objects', total: null, randomRelations: ['4261', '3487'] },
   ]
 
   // console.log(JSON.stringify(relations, null, 2))
 
-  const [editorialData, detail = null, relationsIds] = await Promise.all([
+  const [editorialData, detail = null] = await Promise.all([
     await getRecordEditorialContent({
       category,
       id,
@@ -54,14 +53,14 @@ export default async function Page({ params }: { params: { category: string; id:
     }),
 
     await getZoom3RecordTask(category, payload, api),
-    await getZoom3RelationsTask(category, id, lang, api),
+    // await getZoom3RelationsTask(category, id, lang, api),
   ])
 
-  console.log(relationsIds)
+  // console.log({ editorialData })
 
-  // console.log({ detail })
+  console.log({ detail })
 
-  // console.log(detail)
+  // console.log({ relationsIds }) d
 
   // TODO create separate type for detail and mock result to it
 

@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { CATEGORIES } from '@/features/shared/utils/categories'
 import { PositioningTemplate } from '@/features/shared/types/position'
-import { Record, PositionedRecord } from '../types'
+import { PositionedRecord, Relation } from '../types'
 
 const positioningTemplate: PositioningTemplate[] = [
   {
@@ -26,16 +26,22 @@ const positioningTemplate: PositioningTemplate[] = [
   },
 ]
 
-export const usePresenter = (records: Record[]) => {
+export const usePresenter = (relations: Relation[]) => {
   const positionedStories = useMemo(() => {
+    const storiesRelations = relations.find(
+      relation => relation.type.toLocaleLowerCase() === CATEGORIES.stories
+    )?.randomRelations
+
+    if (!storiesRelations) return []
+
     const positionedStories: PositionedRecord[] = []
 
     positioningTemplate.forEach((template, index) => {
-      const record = records[index]
+      const record = storiesRelations[index]
 
       if (record) {
         positionedStories.push({
-          ...record,
+          id: record,
           position: template.position,
           grid: template.grid,
           category: CATEGORIES.stories,
@@ -44,7 +50,7 @@ export const usePresenter = (records: Record[]) => {
     })
 
     return positionedStories
-  }, [records])
+  }, [relations])
 
   return {
     positionedStories,

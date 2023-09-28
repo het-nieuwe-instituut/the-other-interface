@@ -1,6 +1,14 @@
 import { CATEGORIES, Category } from '@/features/shared/utils/categories'
 import { getZoom3Queries } from './zoom3Config'
-import { Sdk, StoryByIdQuery, StoryEntity } from 'src/generated/graphql'
+import {
+  Sdk,
+  StoryByIdQuery,
+  StoryEntity,
+  PeopleZoomLevel3DetailType,
+  ArchiveZoomLevel3Type,
+  ObjectsZoomLevel3DetailType,
+  PublicationZoomLevel3DetailType,
+} from 'src/generated/graphql'
 import { PublicationState } from '@/features/shared/types/enums'
 import { extractStoryData } from '@/features/shared/helpers/extractStoryData'
 
@@ -10,12 +18,12 @@ type Payload =
     }
   | { lang?: string; publicationState: PublicationState; id: string }
 
-export type Zoom3Record = {
-  title: string
-  thumbnail: string
-  locale: string
-  id: string
-} | null
+export type Zoom3Record =
+  | PeopleZoomLevel3DetailType
+  | ArchiveZoomLevel3Type
+  | ObjectsZoomLevel3DetailType
+  | PublicationZoomLevel3DetailType
+  | null
 
 export async function getZoom3RecordTask(type: Category, payload: Payload, api: Sdk) {
   try {
@@ -30,8 +38,6 @@ export async function getZoom3RecordTask(type: Category, payload: Payload, api: 
 
     const data = await configByType?.zoomLevelQuery?.(payload)
     const item = configByType?.accesor?.(data)
-
-    console.log('configByType', item)
 
     if (!item?.thumbnail && !item?.title) return null
 

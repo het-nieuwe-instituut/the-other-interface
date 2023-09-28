@@ -109,8 +109,6 @@ export class ArchivesService {
       { id }
     )
 
-    console.log('result', result)
-
     // const pidWorkURIs: Set<string> = new Set()
     // result.data.forEach(d => 'pidWorkURI' in d && d.pidWorkURI && pidWorkURIs.add(d.pidWorkURI))
 

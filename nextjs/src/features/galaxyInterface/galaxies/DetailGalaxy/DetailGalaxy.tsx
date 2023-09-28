@@ -49,7 +49,7 @@ export const DetailGalaxy: React.FC<Props> = ({ record, relations }) => {
           />
         ))}
 
-        <RelatedStories gridRow="1 / 3" record={record} />
+        <RelatedStories gridRow="1 / 3" record={record} relations={relations} />
       </Grid>
 
       <GalaxyFooter />
