@@ -6,8 +6,6 @@ import { RelatedCategory, RelatedStories } from './fragments'
 import { GridParams } from '@/features/shared/types/position'
 import { GalaxyFooter } from '../../components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 
-import { useRecordRelations } from '@/features/shared/hooks/queries/useRecordRelations'
-
 const relatedCategories: Array<{ category: CloudCategory; grid: GridParams }> = [
   { category: CLOUD_CATEGORIES.people, grid: { gridRow: '1 / 2', gridColumn: '1 / 2' } },
   { category: CLOUD_CATEGORIES.objects, grid: { gridRow: '1 / 2', gridColumn: '3 / 4' } },
@@ -19,8 +17,6 @@ export const DetailGalaxy: React.FC = () => {
   const params = useParams()
   const category = params?.category as Category
   const id = params?.id as string
-
-  const { data } = useRecordRelations(category, id)
 
   if (!category || !id) return null
 
@@ -42,11 +38,10 @@ export const DetailGalaxy: React.FC = () => {
             category={cloudCategory}
             gridRow={grid.gridRow}
             gridColumn={grid.gridColumn}
-            relations={data?.relations}
           />
         ))}
 
-        <RelatedStories gridRow="1 / 3" relations={data?.relations} />
+        <RelatedStories gridRow="1 / 3" />
       </Grid>
 
       <GalaxyFooter />

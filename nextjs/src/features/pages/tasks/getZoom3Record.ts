@@ -5,7 +5,7 @@ import {
   StoryByIdQuery,
   StoryEntity,
   PeopleZoomLevel3DetailType,
-  ArchiveZoomLevel3Type,
+  ArchiveZoomLevel3DetailType,
   ObjectsZoomLevel3DetailType,
   PublicationZoomLevel3DetailType,
 } from 'src/generated/graphql'
@@ -20,7 +20,7 @@ type Payload =
 
 export type Zoom3Record =
   | PeopleZoomLevel3DetailType
-  | ArchiveZoomLevel3Type
+  | ArchiveZoomLevel3DetailType
   | ObjectsZoomLevel3DetailType
   | PublicationZoomLevel3DetailType
   | null

@@ -5,7 +5,7 @@ import { Zoom3Relations } from '@/features/pages/tasks/getZoom3Relations'
 import { PositionedRecord } from '../types'
 import { positioningTemplate } from './positioningTemplates'
 
-export const usePresenter = (category: CloudCategory, relations: Zoom3Relations) => {
+export const usePresenter = (category: CloudCategory, relations: Zoom3Relations = []) => {
   const positionedRecords = useMemo(() => {
     if (!relations) return []
 
