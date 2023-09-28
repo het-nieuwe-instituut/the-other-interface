@@ -19,8 +19,6 @@ export const Record: React.FC<Props> = ({ record }) => {
     router.push(`/detail/${category}/${id}`)
   }
 
-  console.log('data', data)
-
   if (!data) return null
 
   return (

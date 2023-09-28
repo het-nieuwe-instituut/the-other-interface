@@ -1,7 +1,9 @@
 import { useMemo } from 'react'
 import { CATEGORIES } from '@/features/shared/utils/categories'
 import { PositioningTemplate } from '@/features/shared/types/position'
-import { PositionedRecord, Relation } from '../types'
+import { Zoom3Relations } from '@/features/pages/tasks/getZoom3Relations'
+
+import { PositionedRecord } from '../types'
 
 const positioningTemplate: PositioningTemplate[] = [
   {
@@ -26,10 +28,12 @@ const positioningTemplate: PositioningTemplate[] = [
   },
 ]
 
-export const usePresenter = (relations: Relation[]) => {
+export const usePresenter = (relations: Zoom3Relations) => {
   const positionedStories = useMemo(() => {
+    if (!relations) return []
+
     const storiesRelations = relations.find(
-      relation => relation.type.toLocaleLowerCase() === CATEGORIES.stories
+      relation => relation.type?.toLocaleLowerCase() === CATEGORIES.stories
     )?.randomRelations
 
     if (!storiesRelations) return []

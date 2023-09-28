@@ -34,15 +34,13 @@ export default async function Page({ params }: { params: { category: string; id:
         }
       : { id }
 
-  const relations = [
-    { type: 'Publications', total: null, randomRelations: ['300230524', '300165507'] },
-    { type: 'People', total: null, randomRelations: ['18344', '22384'] },
-    { type: 'Archives', total: null, randomRelations: ['110000631', '110000565'] },
-    { type: 'Stories', total: null, randomRelations: ['1', '3'] },
-    { type: 'Objects', total: null, randomRelations: ['4261', '3487'] },
-  ]
-
-  // console.log(JSON.stringify(relations, null, 2))
+  // const relations = [
+  //   { type: 'Publications', total: null, randomRelations: ['300230524', '300165507'] },
+  //   { type: 'People', total: null, randomRelations: ['18344', '22384'] },
+  //   { type: 'Archives', total: null, randomRelations: ['110000631', '110000565'] },
+  //   { type: 'Stories', total: null, randomRelations: ['1', '3'] },
+  //   { type: 'Objects', total: null, randomRelations: ['4261', '3487'] },
+  // ]
 
   const [editorialData, detail = null] = await Promise.all([
     await getRecordEditorialContent({
@@ -53,16 +51,13 @@ export default async function Page({ params }: { params: { category: string; id:
     }),
 
     await getZoom3RecordTask(category, payload, api),
-    // await getZoom3RelationsTask(category, id, lang, api),
   ])
 
   // console.log({ editorialData })
 
   console.log({ detail })
 
-  // console.log({ relationsIds }) d
-
   // TODO create separate type for detail and mock result to it
 
-  return <DetailpageContainer editorialData={editorialData} record={detail} relations={relations} />
+  return <DetailpageContainer editorialData={editorialData} record={detail} />
 }

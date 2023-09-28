@@ -6,12 +6,6 @@ import { Box } from '@/features/shared/configs/chakra'
 import { DetailGalaxy } from '@/features/galaxyInterface/galaxies/DetailGalaxy/DetailGalaxy'
 import { Zoom3Record } from '../../tasks/getZoom3Record'
 
-type Relation = {
-  type: string
-  total: null
-  randomRelations: string[]
-}
-
 export interface DetailpageEditorialLayer {
   title?: string | null
   description?: string | null
@@ -25,14 +19,13 @@ export interface DetailpageEditorialLayer {
 interface Props {
   editorialData: DetailpageEditorialLayer
   record: Zoom3Record
-  relations: Relation[]
 }
 
-export const DetailpageContainer: React.FC<Props> = ({ editorialData, record, relations }) => {
+export const DetailpageContainer: React.FC<Props> = ({ editorialData, record }) => {
   return (
     <Box backgroundColor="graph">
       <GalaxyInterface>
-        <DetailGalaxy record={record} relations={relations} />
+        <DetailGalaxy record={record} />
       </GalaxyInterface>
 
       {editorialData && (

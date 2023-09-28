@@ -4,14 +4,19 @@ import { Grid, GridItem } from '@chakra-ui/react'
 import { usePresenter } from './usePresenter'
 import { Record } from '../Record'
 import { GridParams } from '@/features/shared/types/position'
-import { Relation } from '../types'
+import { Zoom3Relations } from '@/features/pages/tasks/getZoom3Relations'
 
 interface Props extends GridParams {
   category: CloudCategory
-  relations: Relation[]
+  relations: Zoom3Relations
 }
 
-export const RelatedCategory: React.FC<Props> = ({ category, gridRow, gridColumn, relations }) => {
+export const RelatedCategory: React.FC<Props> = ({
+  category,
+  gridRow,
+  gridColumn,
+  relations = [],
+}) => {
   const { positionedRecords } = usePresenter(category, relations)
 
   console.log('positionedRecords', positionedRecords)

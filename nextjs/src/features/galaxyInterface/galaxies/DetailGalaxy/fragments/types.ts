@@ -13,9 +13,3 @@ export type PositionedRecord = {
   grid: GridParams
   category: Category
 }
-
-export type Relation = {
-  type: string
-  total: null
-  randomRelations: string[]
-}

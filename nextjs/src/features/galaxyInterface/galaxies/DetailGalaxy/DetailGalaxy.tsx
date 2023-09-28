@@ -1,12 +1,12 @@
 'use client'
-import { CLOUD_CATEGORIES, CloudCategory } from '@/features/shared/utils/categories'
+import { CLOUD_CATEGORIES, Category, CloudCategory } from '@/features/shared/utils/categories'
 import { Box, Grid } from '@chakra-ui/react'
 import { useParams } from 'next/navigation'
 import { RelatedCategory, RelatedStories } from './fragments'
 import { GridParams } from '@/features/shared/types/position'
 import { GalaxyFooter } from '../../components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 import { Zoom3Record } from '@/features/pages/tasks/getZoom3Record'
-import { Relation } from './fragments/types'
+import { useRecordRelations } from '@/features/shared/hooks/queries/useRecordRelations'
 
 const relatedCategories: Array<{ category: CloudCategory; grid: GridParams }> = [
   { category: CLOUD_CATEGORIES.people, grid: { gridRow: '1 / 2', gridColumn: '1 / 2' } },
@@ -17,13 +17,14 @@ const relatedCategories: Array<{ category: CloudCategory; grid: GridParams }> = 
 
 type Props = {
   record: Zoom3Record
-  relations: Relation[]
 }
 
-export const DetailGalaxy: React.FC<Props> = ({ record, relations }) => {
+export const DetailGalaxy: React.FC<Props> = ({ record }) => {
   const params = useParams()
-  const category = params?.category
-  const id = params?.id
+  const category = params?.category as Category
+  const id = params?.id as string
+
+  const { data } = useRecordRelations(category, id)
 
   if (!category || !id) return null
 
@@ -45,11 +46,11 @@ export const DetailGalaxy: React.FC<Props> = ({ record, relations }) => {
             category={cloudCategory}
             gridRow={grid.gridRow}
             gridColumn={grid.gridColumn}
-            relations={relations}
+            relations={data?.relations}
           />
         ))}
 
-        <RelatedStories gridRow="1 / 3" record={record} relations={relations} />
+        <RelatedStories gridRow="1 / 3" record={record} relations={data?.relations} />
       </Grid>
 
       <GalaxyFooter />

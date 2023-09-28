@@ -145,6 +145,12 @@ export class ZoomLevel3Service {
       .filter(s => !!s.id && !!s.attributes)
       .map(s => s?.id || '')
 
+    console.log('getStoryRelationsForLinkedItem', {
+      type: EntityNames.Stories,
+      total: res.stories?.data.length || 0,
+      randomRelations: randomStories,
+    })
+
     return {
       type: EntityNames.Stories,
       total: res.stories?.data.length || 0,
@@ -154,17 +160,22 @@ export class ZoomLevel3Service {
 
   private async getTriplyRelatedRecords(id: string, type: EntityNames) {
     const data = await Promise.all(
-      [EntityNames.Archives, EntityNames.Objects, EntityNames.People, EntityNames.Publications].map(
-        async entityName => {
-          const data = await this.getRelationDataFromTriply(id, entityName)
+      // EntityNames.Archives,
+      [EntityNames.Objects, EntityNames.People, EntityNames.Publications].map(async entityName => {
+        const data = await this.getRelationDataFromTriply(id, entityName)
 
-          return {
-            id,
-            type: entityName,
-            randomRelations: data.map(d => d?.idRelation || ''),
-          }
+        console.log('getTriplyRelatedRecords', {
+          id,
+          type: entityName,
+          randomRelations: data.map(d => d?.idRelation || ''),
+        })
+
+        return {
+          id,
+          type: entityName,
+          randomRelations: data.map(d => d?.idRelation || ''),
         }
-      )
+      })
     )
 
     return data
@@ -176,7 +187,8 @@ export class ZoomLevel3Service {
     const res = await this.triplyService.queryTriplyData<ZoomLevel3RelationData>(
       `${uri}`,
       zoomLevel3RelationDataKeys,
-      { page: 1, pageSize: 2 }
+      { page: 1, pageSize: 2 },
+      { id }
     )
 
     return res.data

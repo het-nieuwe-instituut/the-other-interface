@@ -1,15 +1,18 @@
 import { useMemo } from 'react'
 import { CloudCategory } from '@/features/shared/utils/categories'
+import { Zoom3Relations } from '@/features/pages/tasks/getZoom3Relations'
 
-import { PositionedRecord, Relation } from '../types'
+import { PositionedRecord } from '../types'
 import { positioningTemplate } from './positioningTemplates'
 
-export const usePresenter = (category: CloudCategory, relations: Relation[]) => {
+export const usePresenter = (category: CloudCategory, relations: Zoom3Relations) => {
   const positionedRecords = useMemo(() => {
+    if (!relations) return []
+
     const positionedRecords: PositionedRecord[] = []
     const categoryPositioningTemplate = positioningTemplate[category]
     const categoryRelations = relations.find(
-      relation => relation.type.toLocaleLowerCase() === category
+      relation => relation.type?.toLocaleLowerCase() === category
     )?.randomRelations
 
     if (!categoryPositioningTemplate || !categoryRelations) return []

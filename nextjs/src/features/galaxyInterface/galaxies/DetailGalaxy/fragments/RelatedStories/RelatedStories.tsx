@@ -3,15 +3,15 @@ import { DetailedRecord } from '../DetailedRecord'
 import { usePresenter } from './usePresenter'
 import { Record } from '../Record'
 import { Zoom3Record } from '@/features/pages/tasks/getZoom3Record'
-import { Relation } from '../types'
+import { Zoom3Relations } from '@/features/pages/tasks/getZoom3Relations'
 
 interface Props {
   gridRow: string
   record: Zoom3Record
-  relations: Relation[]
+  relations: Zoom3Relations
 }
 
-export const RelatedStories: React.FC<Props> = ({ gridRow, record, relations }) => {
+export const RelatedStories: React.FC<Props> = ({ gridRow, record, relations = [] }) => {
   const { positionedStories } = usePresenter(relations)
 
   return (
