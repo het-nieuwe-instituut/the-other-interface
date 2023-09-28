@@ -4,18 +4,20 @@ import { useParams } from 'next/navigation'
 import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Category } from '@/features/shared/utils/categories'
 import { toSingularCategory } from '@/features/shared/utils/toSingularCategory'
-import { Zoom3Record } from '@/features/pages/tasks/getZoom3Record'
+import { useRecordDetail } from '@/features/shared/hooks/queries/useRecordDetail'
 
 interface Props {
   gridRow: string
   gridColumn: string
-  record: Zoom3Record
 }
 
-export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn, record }) => {
+export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
   const { t } = useLooseTypeSafeTranslation('category')
   const params = useParams()
   const category = params?.category as Category
+  const id = params?.id as string
+
+  const { data: record } = useRecordDetail(category, id)
 
   return (
     <GridItem

@@ -161,21 +161,23 @@ export class ZoomLevel3Service {
   private async getTriplyRelatedRecords(id: string, type: EntityNames) {
     const data = await Promise.all(
       // EntityNames.Archives,
-      [EntityNames.Objects, EntityNames.People, EntityNames.Publications].map(async entityName => {
-        const data = await this.getRelationDataFromTriply(id, entityName)
+      [EntityNames.Archives, EntityNames.Objects, EntityNames.People, EntityNames.Publications].map(
+        async entityName => {
+          const data = await this.getRelationDataFromTriply(id, entityName)
 
-        console.log('getTriplyRelatedRecords', {
-          id,
-          type: entityName,
-          randomRelations: data.map(d => d?.idRelation || ''),
-        })
+          console.log('getTriplyRelatedRecords', {
+            id,
+            type: entityName,
+            randomRelations: data.map(d => d?.idRelation || ''),
+          })
 
-        return {
-          id,
-          type: entityName,
-          randomRelations: data.map(d => d?.idRelation || ''),
+          return {
+            id,
+            type: entityName,
+            randomRelations: data.map(d => d?.idRelation || ''),
+          }
         }
-      })
+      )
     )
 
     return data

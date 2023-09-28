@@ -19,8 +19,6 @@ export const RelatedCategory: React.FC<Props> = ({
 }) => {
   const { positionedRecords } = usePresenter(category, relations)
 
-  console.log('positionedRecords', positionedRecords)
-
   return (
     <GridItem color={'white'} gridRow={gridRow} gridColumn={gridColumn}>
       <Grid height="100%" templateColumns="repeat(2, 1fr)" templateRows="repeat(2, 1fr)">

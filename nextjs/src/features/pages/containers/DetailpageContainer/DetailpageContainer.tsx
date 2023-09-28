@@ -4,7 +4,6 @@ import { EditorialLayer } from '@/features/shared/components/EditorialLayer/Edit
 import { StoryByIdQuery, LandingpageBySlugQuery } from 'src/generated/graphql'
 import { Box } from '@/features/shared/configs/chakra'
 import { DetailGalaxy } from '@/features/galaxyInterface/galaxies/DetailGalaxy/DetailGalaxy'
-import { Zoom3Record } from '../../tasks/getZoom3Record'
 
 export interface DetailpageEditorialLayer {
   title?: string | null
@@ -18,14 +17,13 @@ export interface DetailpageEditorialLayer {
 }
 interface Props {
   editorialData: DetailpageEditorialLayer
-  record: Zoom3Record
 }
 
-export const DetailpageContainer: React.FC<Props> = ({ editorialData, record }) => {
+export const DetailpageContainer: React.FC<Props> = ({ editorialData }) => {
   return (
     <Box backgroundColor="graph">
       <GalaxyInterface>
-        <DetailGalaxy record={record} />
+        <DetailGalaxy />
       </GalaxyInterface>
 
       {editorialData && (
