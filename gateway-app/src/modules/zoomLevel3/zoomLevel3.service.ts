@@ -154,27 +154,24 @@ export class ZoomLevel3Service {
 
   private async getTriplyRelatedRecords(id: string) {
     const data = await Promise.all(
-      // EntityNames.Archives
-      [EntityNames.Archives, EntityNames.Objects, EntityNames.People, EntityNames.Publications].map(
-        async entityName => {
-          try {
-            const data = await this.getRelationDataFromTriply(id, entityName)
+      [EntityNames.Objects, EntityNames.People, EntityNames.Publications].map(async entityName => {
+        try {
+          const data = await this.getRelationDataFromTriply(id, entityName)
 
-            return {
-              id,
-              type: entityName,
-              randomRelations: data.map(d => d?.idRelation || ''),
-            }
-          } catch (error) {
-            console.error(`Error fetching data for entity ${entityName}:`, error)
-            return {
-              id,
-              type: entityName,
-              randomRelations: [],
-            }
+          return {
+            id,
+            type: entityName,
+            randomRelations: data.map(d => d?.idRelation || ''),
+          }
+        } catch (error) {
+          console.error(`Error fetching data for entity ${entityName}:`, error)
+          return {
+            id,
+            type: entityName,
+            randomRelations: [],
           }
         }
-      )
+      })
     )
 
     return data
