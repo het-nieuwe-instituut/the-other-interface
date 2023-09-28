@@ -12,14 +12,13 @@ type Props = {
 
 export const Record: React.FC<Props> = ({ record }) => {
   const { id, category, position, grid } = record
-  const { data } = useRecordDetail(category, id)
+  const { data, isLoading } = useRecordDetail(category, id)
   const router = useRouter()
 
   const handleClick = () => {
     router.push(`/detail/${category}/${id}`)
   }
-
-  if (!data) return null
+  if (!data && !isLoading) return null
 
   return (
     <GridItem position="relative" css={{ ...grid }}>
@@ -38,16 +37,16 @@ export const Record: React.FC<Props> = ({ record }) => {
         style={{ ...position }}
       >
         <ResponsiveImage
-          src={data.thumbnail}
-          alt={data.title}
-          maxHeight={!data.thumbnail ? '80%' : 'calc(100% - 1.6vw - 12px)'} // where 2.6vw are a texts' line heights, 16px are gaps
+          src={data?.thumbnail}
+          alt={data?.title}
+          maxHeight={!data?.thumbnail ? '80%' : 'calc(100% - 1.6vw - 12px)'} // where 2.6vw are a texts' line heights, 16px are gaps
         />
 
         <RecordText
-          title={data.title}
+          title={data?.title}
           categoryType={category}
           css={{
-            position: !data.thumbnail ? 'absolute' : 'relative',
+            position: !data?.thumbnail ? 'absolute' : 'relative',
           }}
         />
       </Flex>
