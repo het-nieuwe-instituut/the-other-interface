@@ -1,8 +1,14 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export const useIsImagePortrait = (src: string | null) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isPortrait, setIsPortrait] = useState<boolean | null>(null)
+
+  const fallbackImageRef = useRef<string | null>(null)
+
+  if (!fallbackImageRef.current) {
+    fallbackImageRef.current = `url('/images/fallbacks/${Math.floor(Math.random() * 5) + 1}.svg')`
+  }
 
   useEffect(() => {
     if (typeof window === 'undefined' || !src) return
@@ -32,5 +38,6 @@ export const useIsImagePortrait = (src: string | null) => {
   return {
     isPortrait,
     isLoading,
+    fallbackImage: fallbackImageRef.current,
   }
 }

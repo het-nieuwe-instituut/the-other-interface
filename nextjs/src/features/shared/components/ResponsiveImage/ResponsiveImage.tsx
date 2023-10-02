@@ -11,18 +11,10 @@ type ResponsiveImageProps = {
 
 export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   src = '',
-  alt,
+  alt = '',
   maxHeight = '100%',
 }) => {
-  const { isLoading, isPortrait } = useIsImagePortrait(src)
-
-  if (isLoading) {
-    return (
-      <Box height="50%" alignItems="center" justifyContent="center" color="blueAlpha.100">
-        isLoading...
-      </Box>
-    )
-  }
+  const { isPortrait, fallbackImage } = useIsImagePortrait(src)
 
   if (isPortrait === null || !src) {
     return (
@@ -30,7 +22,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
         maxHeight={maxHeight}
         height="100%"
         width="100%"
-        backgroundImage={`url('/images/fallbacks/${Math.floor(Math.random() * 5) + 1}.svg')`}
+        backgroundImage={fallbackImage}
         backgroundSize="contain"
         backgroundRepeat="no-repeat"
         backgroundPosition="center"
