@@ -49,20 +49,24 @@ fragment gridModuleFragment on ComponentModulesGridModule {
                     recordId
                     archive {
                         id
-                        title
                         type
+                        title
+                        objectNumber
                     }
                     object {
-                        title
+                        description
                         thumbnail
                     }
                     publication {
-                       id
-                       type
-                       title
+                        id
+                        type
+                        title
+                        yearOfPublication
+                        objectNumber
                     }
                     people {
-                        title
+                        name
+                        nameTypes
                     }
                 }
             }

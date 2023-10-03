@@ -20,11 +20,123 @@ export interface ArchivesDetailZoomLevel3DataType {
   id?: string
   title?: string
   thumbnail?: string
+  objectNumber?: string
 }
 const archivesDetailZoomLevel3DataKeys: KeysToVerify<ArchivesDetailZoomLevel3DataType> = {
   id: true,
   title: true,
   thumbnail: true,
+  objectNumber: true,
+}
+
+export enum ArchivesZoomLevel3Types {
+  fonds = 'fonds',
+  other = 'other',
+}
+
+export interface ArchivesFondsDetailZoomLevel3Data {
+  id: string
+  thumnail?: string
+  objectNumber?: string
+  title?: string
+  startDate?: string
+  endDate?: string
+  dateLabel?: string
+  dimensionFree?: string
+  mediaReference?: string
+  mediaReferenceLabel?: string
+  existenceOfOriginals?: string
+  scopeContent?: string
+  relatedMaterial?: string
+  rights?: string
+  rightsLabel?: string
+  permanentLink?: string
+}
+
+const archivesFondsDetailZoomLevel3DataKeys: KeysToVerify<ArchivesFondsDetailZoomLevel3Data> = {
+  id: true,
+  thumnail: true,
+  objectNumber: true,
+  title: true,
+  startDate: true,
+  endDate: true,
+  dateLabel: true,
+  dimensionFree: true,
+  mediaReference: true,
+  mediaReferenceLabel: true,
+  existenceOfOriginals: true,
+  scopeContent: true,
+  relatedMaterial: true,
+  rights: true,
+  rightsLabel: true,
+  permanentLink: true,
+}
+
+export interface ArchivesOtherDetailZoomLevel3Data {
+  id: string
+  thumbnail?: string
+  descriptionLevel?: string
+  objectNumber?: string
+  recordTitle?: string
+  startDate?: string
+  endDate?: string
+  productionDate?: string
+  extent?: string
+  repository?: string
+  repositoryLabel?: string
+  creator?: string
+  creatorLabel?: string
+  creatorHistory?: string
+  custodialHistory?: string
+  systemOfArrangement?: string
+  contentScope?: string
+  conditionsGoverningAccess?: string
+  relatedMaterial?: string
+  appendices?: string
+  source?: string
+  partReference?: string
+  partTitle?: string
+  right?: string
+  rightsLabel?: string
+  permanentLink?: string
+  pidWorkURI?: string
+}
+
+const archivesOtherDetailZoomLevel3DataKeys: KeysToVerify<ArchivesOtherDetailZoomLevel3Data> = {
+  id: true,
+  thumbnail: true,
+  descriptionLevel: true,
+  objectNumber: true,
+  recordTitle: true,
+  startDate: true,
+  endDate: true,
+  productionDate: true,
+  extent: true,
+  repository: true,
+  repositoryLabel: true,
+  creator: true,
+  creatorLabel: true,
+  creatorHistory: true,
+  custodialHistory: true,
+  systemOfArrangement: true,
+  contentScope: true,
+  conditionsGoverningAccess: true,
+  relatedMaterial: true,
+  appendices: true,
+  source: true,
+  partReference: true,
+  partTitle: true,
+  right: true,
+  rightsLabel: true,
+  permanentLink: true,
+  pidWorkURI: true,
+}
+type ArchivesZoomLeve3DataType =
+  | ArchivesOtherDetailZoomLevel3Data
+  | ArchivesFondsDetailZoomLevel3Data
+const archivesZoomLevel3DataKeys = {
+  [ArchivesZoomLevel3Types.other]: archivesOtherDetailZoomLevel3DataKeys,
+  [ArchivesZoomLevel3Types.fonds]: archivesFondsDetailZoomLevel3DataKeys,
 }
 
 @Injectable()
@@ -107,12 +219,10 @@ export class ArchivesService {
       { id }
     )
 
-    // const pidWorkURIs: Set<string> = new Set()
-    // result.data.forEach(d => 'pidWorkURI' in d && d.pidWorkURI && pidWorkURIs.add(d.pidWorkURI))
-
     return {
       type,
       id,
+      objectNumber: result.data[0]?.objectNumber,
       thumbnail: result.data[0]?.thumbnail,
       title: result.data[0]?.title,
     }

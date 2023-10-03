@@ -123,7 +123,7 @@ export class ZoomLevel3Service {
 
       return {
         type,
-        randomRelations: randomRecordIds,
+        randomRelations: randomRecordIds ?? [],
       }
     })
 
@@ -148,7 +148,7 @@ export class ZoomLevel3Service {
     return {
       type: EntityNames.Stories,
       total: res.stories?.data.length || 0,
-      randomRelations: randomStories,
+      randomRelations: randomStories ?? [],
     }
   }
 

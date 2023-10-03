@@ -20,12 +20,79 @@ interface ObjectsDetailZoomLevel3Data {
   thumbnail: true
   title: true
   id: true
+  imageLabel?: string
+  titleType?: string
+  objectNumber?: string
+  objectName?: string
+  objectNameLabel?: string
+  archiveCollectionCode?: string
+  maker?: string
+  makerLabel?: string
+  makerRole?: string
+  makerRoleLabel?: string
+  startDate?: string
+  endDate?: string
+  numberOfParts?: string
+  scale?: string
+  technique?: string
+  techniqueLabel?: string
+  material?: string
+  materialLabel?: string
+  dimensionPart?: string
+  dimensionType?: string
+  dimensionValue?: string
+  dimensionUnit?: string
+  description?: string
+  associationPerson?: string
+  associationPersonLabel?: string
+  associationPersonType?: string
+  relatedObjectTitle?: string
+  creditLine?: string
+  rights?: string
+  rightsLabel?: string
+  creationPlace?: string
+  creationPlaceLabel?: string
+  permanentLink?: string
 }
 const objectsDetailZoomLevel3DataKeys: KeysToVerify<ObjectsDetailZoomLevel3Data> = {
   thumbnail: true,
   title: true,
   id: true,
+  imageLabel: true,
+  titleType: true,
+  objectNumber: true,
+  objectName: true,
+  objectNameLabel: true,
+  archiveCollectionCode: true,
+  maker: true,
+  makerLabel: true,
+  makerRole: true,
+  makerRoleLabel: true,
+  startDate: true,
+  endDate: true,
+  numberOfParts: true,
+  scale: true,
+  technique: true,
+  techniqueLabel: true,
+  material: true,
+  materialLabel: true,
+  dimensionPart: true,
+  dimensionType: true,
+  dimensionValue: true,
+  dimensionUnit: true,
+  description: true,
+  associationPerson: true,
+  associationPersonLabel: true,
+  associationPersonType: true,
+  relatedObjectTitle: true,
+  creditLine: true,
+  rights: true,
+  rightsLabel: true,
+  creationPlace: true,
+  creationPlaceLabel: true,
+  permanentLink: true,
 }
+
 @Injectable()
 export class ObjectsService {
   protected entityType = 'triply'

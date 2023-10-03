@@ -1856,7 +1856,7 @@ export type Theme = {
   createdAt?: Maybe<Scalars['DateTime']>
   locale?: Maybe<Scalars['String']>
   localizations?: Maybe<ThemeRelationResponseCollection>
-  name?: Maybe<Scalars['String']>
+  name: Scalars['String']
   publishedAt?: Maybe<Scalars['DateTime']>
   stories?: Maybe<StoryRelationResponseCollection>
   updatedAt?: Maybe<Scalars['DateTime']>
@@ -13378,7 +13378,7 @@ export type ThemeQuery = {
       id?: string | null
       attributes?: {
         __typename?: 'Theme'
-        name?: string | null
+        name: string
         createdAt?: any | null
         updatedAt?: any | null
         publishedAt?: any | null
@@ -13913,7 +13913,7 @@ export type ThemesQuery = {
       id?: string | null
       attributes?: {
         __typename?: 'Theme'
-        name?: string | null
+        name: string
         createdAt?: any | null
         updatedAt?: any | null
         publishedAt?: any | null
@@ -14446,7 +14446,7 @@ export type ThemeFragmentFragment = {
   id?: string | null
   attributes?: {
     __typename?: 'Theme'
-    name?: string | null
+    name: string
     createdAt?: any | null
     updatedAt?: any | null
     publishedAt?: any | null

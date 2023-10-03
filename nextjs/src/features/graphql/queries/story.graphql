@@ -17,8 +17,42 @@ query storyById($locale: String, $id: ID, $publicationState: String = "LIVE") {
                 title
                 description
                 components {
+                    ... on ComponentModulesTextModule {
+                        ...textModuleFragment
+                    }
                     ... on ComponentModulesImage {
                         ...imageModuleFragment
+                    }
+                    ... on ComponentModulesPullquote {
+                        ...pullquoteModuleFragment
+                    }
+                    ... on ComponentModulesTableModule {
+                        ...tableModuleFragment
+                    }
+                    ... on ComponentModulesTitleModule {
+                        ...titleModuleFragment
+                    }
+                    ... on ComponentModulesImageCarousel {
+                        ...imageCarouselModuleFragment
+                    }
+                    ... on ComponentModulesButtonsModule {
+                        ...buttonsModuleFragment
+                    }
+                    ... on ComponentModulesSubtitle {
+                        ...subtitleModuleFragment
+                    }
+                    ... on ComponentModulesGridModule {
+                        ...gridModuleFragment
+                    }
+                }
+                storyLinks {
+                    ... on ComponentModulesButtonsModule {
+                        ...buttonsModuleFragment
+                    }
+                }
+                triplyRecords {
+                    data {
+                        ...BaseTriplyRecordFragment
                     }
                 }
             }
@@ -40,5 +74,3 @@ query storyImages($id: String!) {
         }
     }
 }
-
-# 
