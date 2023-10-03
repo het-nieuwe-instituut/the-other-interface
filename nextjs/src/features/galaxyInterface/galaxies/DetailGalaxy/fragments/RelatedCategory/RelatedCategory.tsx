@@ -15,7 +15,8 @@ interface Props extends GridParams {
 export const RelatedCategory: React.FC<Props> = ({ gridRow, gridColumn, category }) => {
   const params = useParams()
   const id = params?.id as string
-  const { data } = useRecordRelations(category, id)
+  const recordCategory = params?.category as CloudCategory
+  const { data } = useRecordRelations(recordCategory, id)
   const { positionedRecords } = usePresenter(category, data?.relations)
 
   return (

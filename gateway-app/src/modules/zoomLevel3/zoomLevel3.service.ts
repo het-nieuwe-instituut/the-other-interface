@@ -158,11 +158,10 @@ export class ZoomLevel3Service {
         async entityName => {
           try {
             const data = await this.getRelationDataFromTriply(id, entityName)
-
             return {
               id,
               type: entityName,
-              randomRelations: data.map(d => d?.idRelation || ''),
+              randomRelations: data.map(d => d?.idRelation).filter(d => !!d),
             }
           } catch (error) {
             console.error(`Error fetching data for entity ${entityName}:`, error)
@@ -175,6 +174,8 @@ export class ZoomLevel3Service {
         }
       )
     )
+
+    console.log('getTriplyRelatedRecords', data)
 
     return data
   }

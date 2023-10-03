@@ -100,8 +100,6 @@ export class ArchivesService {
   }
 
   public async getZoomLevel3Data(type: EntityNames, id: string) {
-    console.log('uri', archivesDetailZoomLevel3DataKeys, this.ZoomLevel3Endpoint)
-
     const result = await this.triplyService.queryTriplyData<ArchivesDetailZoomLevel3DataType>(
       this.ZoomLevel3Endpoint,
       archivesDetailZoomLevel3DataKeys,
