@@ -69,19 +69,23 @@ const customResolvers = {
       }
     },
 
-    zoomLevel3Publication() {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    zoomLevel3Publication(id: string) {
       return zoomLevel3Data.zoomLevel3Publication
     },
 
-    zoomLevel3Person() {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    zoomLevel3Person(id: string) {
       return zoomLevel3Data.zoomLevel3Person
     },
 
-    zoomLevel3Archive() {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    zoomLevel3Archive(id: string) {
       return zoomLevel3Data.zoomLevel3Archive
     },
 
-    zoomLevel3Object() {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    zoomLevel3Object(id: string) {
       return zoomLevel3Data.zoomLevel3Object
     },
 
