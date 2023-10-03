@@ -1,7 +1,4 @@
-import {
-  Maybe,
-  TriplyRecord,
-} from 'src/generated/graphql'
+import { Maybe, TriplyRecord } from 'src/generated/graphql'
 
 import { imageBasePath } from '../modulesConstants'
 
