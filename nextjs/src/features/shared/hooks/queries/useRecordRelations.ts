@@ -12,7 +12,7 @@ export function useRecordRelations(type: Category, id: string) {
   const queryFn = () => getZoom3RelationsTask({ type, id, locale: lang, api })
 
   return useQuery({
-    queryKey: ['record-relations', id],
+    queryKey: ['record-relations', id, type, lang],
     queryFn,
   })
 }
