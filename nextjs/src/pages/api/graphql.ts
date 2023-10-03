@@ -68,18 +68,21 @@ const customResolvers = {
           }
       }
     },
-    // TODO this can be implemented in case we want to test transition before zoom level 5 object and another type. So far it works only from object to story
+
     zoomLevel3Publication() {
-      return null
+      return zoomLevel3Data.zoomLevel3Publication
     },
+
     zoomLevel3Person() {
-      return null
+      return zoomLevel3Data.zoomLevel3Person
     },
+
     zoomLevel3Archive() {
-      return null
+      return zoomLevel3Data.zoomLevel3Archive
     },
+
     zoomLevel3Object() {
-      return zoomLevel3Data['zoomLevel3Object'].zoom3detail
+      return zoomLevel3Data.zoomLevel3Object
     },
 
     story() {
@@ -95,7 +98,7 @@ const customResolvers = {
     },
 
     relations: () => {
-      return relationsData.relations
+      return zoomLevel3Data.relations.relations
     },
 
     menupages() {

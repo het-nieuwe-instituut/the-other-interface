@@ -1,7 +1,7 @@
 export const zoomLevel3Object = {
   zoom5detail: {
     id: '1982',
-    image: 'https://example-mock-data.com/media/1982',
+    thumbnail: 'https://example-mock-data.com/media/1982',
     imageLabel: 'Mocked DUIK_20.1.1.tif',
     title: 'Mocked Situatietekening Sanatorium Zonnestraal (Hilversum) Mocked',
     titleType: 'huidig',
@@ -63,4 +63,5 @@ export const zoomLevel3Object = {
     permanentLink: 'https://example-mock-data.com/permalink/1982',
   },
   type: 'objects',
+
 }
