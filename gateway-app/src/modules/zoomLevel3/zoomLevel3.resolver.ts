@@ -1,9 +1,21 @@
 import { Args, Query, Resolver } from '@nestjs/graphql'
-import { ArchiveZoomLevel3DetailType, ArchiveZoomLevel3UnionType, ArchivesFondsZoomLevel3DetailType, ArchivesOtherZoomLevel3DetailType } from '../archives/archives.type'
+import {
+  ArchiveZoomLevel3DetailType,
+  ArchiveZoomLevel3UnionType,
+  ArchivesFondsZoomLevel3DetailType,
+  ArchivesOtherZoomLevel3DetailType,
+} from '../archives/archives.type'
 import { ObjectsZoomLevel3DetailType } from '../objects/objects.type'
 import { PeopleZoomLevel3DetailType } from '../people/people.type'
 import { PublicationsService } from '../publications/publications.service'
-import { PublicationZoomLevel3DetailType, PublicationZoomLevel3UnionType, PublicationsArticleZoomLevel3DetailType, PublicationsAudioVisualZoomLevel3DetailType, PublicationsBookZoomLevel3DetailType, PublicationsSerialZoomLevel3DetailType } from '../publications/publications.type'
+import {
+  PublicationZoomLevel3DetailType,
+  PublicationZoomLevel3UnionType,
+  PublicationsArticleZoomLevel3DetailType,
+  PublicationsAudioVisualZoomLevel3DetailType,
+  PublicationsBookZoomLevel3DetailType,
+  PublicationsSerialZoomLevel3DetailType,
+} from '../publications/publications.type'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { ZoomLevel3Service } from './zoomLevel3.service'
 import { ZoomLevel3Args, ZoomLevel3RelationsType } from './zoomLevel3.type'
