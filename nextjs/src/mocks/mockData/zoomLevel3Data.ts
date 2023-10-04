@@ -1,68 +1,43 @@
-export const zoomLevel3Data = [
-  {
-    uri: 'https://some-mocked-uri',
-    name: 'Mocked Filter 1',
-    count: 2339,
-    total: 31464,
-  },
-  {
-    uri: 'https://some-mocked-uri',
-    name: 'Mocked Filter 2',
-    count: 1735,
-    total: 31464,
-  },
-  {
-    uri: 'https://some-mocked-uri',
-    name: 'Mocked Filter 3',
-    count: 1080,
-    total: 31464,
-  },
-  {
-    uri: 'https://some-mocked-uri',
-    name: 'Mocked Filter 4',
-    count: 929,
-    total: 31464,
-  },
-  {
-    uri: 'https://some-mocked-uri',
-    name: 'Mocked Filter 5',
-    count: 893,
-    total: 31464,
-  },
-  {
-    uri: 'https://some-mocked-uri',
-    name: 'Mocked Filter 6',
-    count: 874,
-    total: 31464,
-  },
-  {
-    uri: 'https://some-mocked-uri',
-    name: 'Mocked Filter 7',
-    count: 768,
-    total: 31464,
-  },
-  {
-    uri: 'https://some-mocked-uri',
-    name: 'Mocked Filter 8',
-    count: 718,
-    total: 31464,
-  },
-  {
-    uri: 'https://some-mocked-uri',
-    name: 'Mocked Filter 9',
-    count: 713,
-    total: 31464,
-  },
-  {
-    uri: 'https://some-mocked-uri',
-    name: 'Mocked Filter 10',
-    count: 707,
-    total: 31464,
-  },
-  {
-    uri: 'https://some-mocked-uri',
-    name: 'Mocked Filter 11',
-    count: 644,
-    total: 31464,
-  },
-]
+
+const relations = {
+  relations: [
+    { type: 'Publications', total: null, randomRelations: ['300230524', '300165507'] },
+    { type: 'People', total: null, randomRelations: ['18344', '22384'] },
+    { type: 'Archives', total: null, randomRelations: ['110000631', '110000565'] },
+    { type: 'Stories', total: null, randomRelations: ['1', '3'] },
+    { type: 'Objects', total: null, randomRelations: ['4261', '3487'] },
+  ]
+}
+
+const zoomLevel3ObjectDetail = {   
+  id: '1',
+  thumbnail: 'https://picsum.photos/500/150',
+  title: 'Mocked Situatietekening Sanatorium Zonnestraal (Hilversum) Mocked',
+}
+
+const zoomLevel3PersonDetail = {   
+  id: '2',
+  thumbnail: 'https://picsum.photos/200/400',
+  title: 'Wall, Alex',
+}
+
+const zoomLevel3ArchiveDetail = {   
+  id: '3',
+  thumbnail: 'https://picsum.photos/300/200',
+  title: 'Correspondentie',
+}
+
+const zoomLevel3PublicationDetail = {   
+  id: '4',
+  thumbnail: 'https://picsum.photos/500/200',
+  title: 'Bd.25',
+}
+
+
+export const zoomLevel3Data = {
+  zoomLevel3Object: zoomLevel3ObjectDetail,
+  zoomLevel3Person: zoomLevel3PersonDetail,
+  zoomLevel3Archive: zoomLevel3ArchiveDetail,
+  zoomLevel3Publication: zoomLevel3PublicationDetail,
+  relations
+}

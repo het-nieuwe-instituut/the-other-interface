@@ -1,32 +1,50 @@
-import { createUnionType, Field, InputType, ObjectType, registerEnumType } from '@nestjs/graphql'
-import { PoepleZoomLevel5DetailType } from '../people/people.type'
-import { ArchivesZoomLevel5Types } from './archives.service'
+import { Field, ObjectType, createUnionType, registerEnumType } from '@nestjs/graphql'
+import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
+import { ArchivesZoomLevel3Types } from './archives.service'
+import { PeopleZoomLevel3DetailType } from '../people/people.type'
+// import { PeopleZoomLevel3DetailType } from '../people/people.type'
+// import { ArchivesZoomLevel3Types } from './archives.service'
+// import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 
-@InputType()
-export class ArchivesZoomLevel2FiltersArgs {
-  @Field(() => String, { nullable: true })
-  public date: string | null
-
-  @Field(() => String, { nullable: true })
-  public descriptionLevel: string | null
-
-  @Field(() => String, { nullable: true })
-  public relatedName: string | null
-}
-
-registerEnumType(ArchivesZoomLevel5Types, { name: 'ArchivesZoomLevel5Types' })
+// registerEnumType(ArchivesZoomLevel3Types, { name: 'ArchivesZoomLevel3Types' })
 
 @ObjectType()
-class BaseArchiveZoomLevel5Type {
+export class ArchiveZoomLevel3DetailType {
   @Field()
   public id: string
 
-  @Field(() => ArchivesZoomLevel5Types)
-  public type: ArchivesZoomLevel5Types
+  @Field(() => EntityNames, { nullable: true })
+  public type: EntityNames
+
+  @Field(() => String, { nullable: true })
+  public title: string
+
+  @Field(() => String, { nullable: true })
+  public thumbnail: string
+
+  @Field(() => String, { nullable: true })
+  public objectNumber?: string
+}
+
+registerEnumType(ArchivesZoomLevel3Types, { name: 'ArchivesZoomLevel3Types' })
+
+@ObjectType()
+class BaseArchiveZoomLevel3Type {
+  @Field()
+  public id: string
+
+  @Field(() => ArchivesZoomLevel3Types)
+  public type: ArchivesZoomLevel3Types
+
+  @Field(() => String, { nullable: true })
+  public title?: string
+
+  @Field(() => String, { nullable: true })
+  public thumbnail: string
 }
 
 @ObjectType()
-export class ArchivesFondsZoomLevel5DetailType extends BaseArchiveZoomLevel5Type {
+export class ArchivesFondsZoomLevel3DetailType extends BaseArchiveZoomLevel3Type {
   @Field(() => String, { nullable: true })
   public descriptionLevel?: string
 
@@ -108,17 +126,14 @@ export class ArchivesFondsCreatorType {
   @Field(() => String, { nullable: true })
   public creatorHistory?: string
 
-  @Field(() => PoepleZoomLevel5DetailType, { nullable: true })
-  public populatedCreator?: PoepleZoomLevel5DetailType
+  @Field(() => PeopleZoomLevel3DetailType, { nullable: true })
+  public populatedCreator?: PeopleZoomLevel3DetailType
 }
 
 @ObjectType()
-export class ArchivesOtherZoomLevel5DetailType extends BaseArchiveZoomLevel5Type {
+export class ArchivesOtherZoomLevel3DetailType extends BaseArchiveZoomLevel3Type {
   @Field(() => String, { nullable: true })
   public objectNumber?: string
-
-  @Field(() => String, { nullable: true })
-  public title?: string
 
   @Field(() => String, { nullable: true })
   public startDate?: string
@@ -160,14 +175,14 @@ export class ArchivesOtherZoomLevel5DetailType extends BaseArchiveZoomLevel5Type
   public pidWorkURIs?: string[]
 }
 
-export const ArchiveZoomLevel5UnionType = createUnionType({
+export const ArchiveZoomLevel3UnionType = createUnionType({
   name: 'ArchiveZoomLevel5UnionType',
-  types: () => [ArchivesOtherZoomLevel5DetailType, ArchivesFondsZoomLevel5DetailType] as const,
-  resolveType: (archive: BaseArchiveZoomLevel5Type) => {
-    if (archive.type === ArchivesZoomLevel5Types.other) {
-      return ArchivesOtherZoomLevel5DetailType
+  types: () => [ArchivesOtherZoomLevel3DetailType, ArchivesFondsZoomLevel3DetailType] as const,
+  resolveType: (archive: BaseArchiveZoomLevel3Type) => {
+    if (archive.type === ArchivesZoomLevel3Types.other) {
+      return ArchivesOtherZoomLevel3DetailType
     }
 
-    return ArchivesFondsZoomLevel5DetailType
+    return ArchivesFondsZoomLevel3DetailType
   },
 })

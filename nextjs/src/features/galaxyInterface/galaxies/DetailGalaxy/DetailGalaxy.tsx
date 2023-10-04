@@ -1,5 +1,5 @@
 'use client'
-import { CLOUD_CATEGORIES, CloudCategory } from '@/features/shared/utils/categories'
+import { CLOUD_CATEGORIES, Category, CloudCategory } from '@/features/shared/utils/categories'
 import { Box, Grid } from '@chakra-ui/react'
 import { useParams } from 'next/navigation'
 import { RelatedCategory, RelatedStories } from './fragments'
@@ -15,8 +15,8 @@ const relatedCategories: Array<{ category: CloudCategory; grid: GridParams }> = 
 
 export const DetailGalaxy: React.FC = () => {
   const params = useParams()
-  const category = params?.category
-  const id = params?.id
+  const category = params?.category as Category
+  const id = params?.id as string
 
   if (!category || !id) return null
 

@@ -1,8 +1,0 @@
-query Zoom3DPeople($filterId: String!, $page: Int!, $pageSize: Int!) {
-    zoomLevel3(entityName: People, filterId: $filterId, page: $page, pageSize: $pageSize) {
-        uri
-        name
-        count
-        total
-    }
-}

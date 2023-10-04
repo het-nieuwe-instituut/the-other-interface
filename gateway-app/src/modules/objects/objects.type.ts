@@ -1,43 +1,25 @@
-import { Field, InputType, ObjectType } from '@nestjs/graphql'
-import { PoepleZoomLevel5DetailType } from '../people/people.type'
-
-@InputType()
-export class ObjectsZoomLevel2FiltersArgs {
-  @Field(() => String, { nullable: true })
-  public Objectname: string | null
-
-  @Field(() => String, { nullable: true })
-  public Maker: string | null
-
-  @Field(() => String, { nullable: true })
-  public Material: string | null
-
-  @Field(() => String, { nullable: true })
-  public Technique: string | null
-
-  @Field(() => String, { nullable: true })
-  public Subject: string | null
-
-  @Field(() => String, { nullable: true })
-  public PerInst: string | null
-
-  @Field(() => String, { nullable: true })
-  public date: string | null
-}
+import { Field, ObjectType } from '@nestjs/graphql'
+import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
+import { PeopleZoomLevel3DetailType } from '../people/people.type'
+// import { PeopleZoomLevel3DetailType } from '../people/people.type'
+// import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 
 @ObjectType()
-export class ObjectsZoomLevel5DetailType {
+export class ObjectsZoomLevel3DetailType {
   @Field()
   public id: string
 
   @Field(() => String, { nullable: true })
-  public image?: string | null
+  public title: string
+
+  @Field(() => EntityNames, { nullable: true })
+  public type: EntityNames
+
+  @Field(() => String, { nullable: true })
+  public thumbnail: string
 
   @Field(() => String, { nullable: true })
   public imageLabel?: string | null
-
-  @Field(() => String, { nullable: true })
-  public title?: string | null
 
   @Field(() => String, { nullable: true })
   public titleType?: string | null
@@ -138,8 +120,8 @@ export class ObjectMakerType {
   @Field(() => String, { nullable: true })
   public makerRoleLabel?: string | null
 
-  @Field(() => PoepleZoomLevel5DetailType, { nullable: true })
-  public populatedMaker?: PoepleZoomLevel5DetailType
+  @Field(() => PeopleZoomLevel3DetailType, { nullable: true })
+  public populatedMaker?: PeopleZoomLevel3DetailType
 }
 
 @ObjectType()

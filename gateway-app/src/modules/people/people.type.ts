@@ -1,30 +1,19 @@
-import { Field, InputType, ObjectType } from '@nestjs/graphql'
-
-@InputType()
-export class PeopleZoomLevel2FiltersArgs {
-  @Field(() => String, { nullable: true })
-  public NameType: string | null
-
-  @Field(() => String, { nullable: true })
-  public Profession: string | null
-
-  @Field(() => String, { nullable: true })
-  public Place: string | null
-
-  @Field(() => String, { nullable: true })
-  public Period: string | null
-
-  @Field(() => String, { nullable: true })
-  public BirthDate: string | null
-
-  @Field(() => String, { nullable: true })
-  public DeathDate: string | null
-}
+import { Field, ObjectType } from '@nestjs/graphql'
+import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 
 @ObjectType()
-export class PoepleZoomLevel5DetailType {
+export class PeopleZoomLevel3DetailType {
   @Field()
   public id: string
+
+  @Field(() => String, { nullable: true })
+  public title: string
+
+  @Field(() => EntityNames, { nullable: true })
+  public type: EntityNames
+
+  @Field(() => String, { nullable: true })
+  public thumbnail: string
 
   @Field(() => String)
   public name: string

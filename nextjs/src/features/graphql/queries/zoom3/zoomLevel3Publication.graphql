@@ -1,0 +1,8 @@
+query ZoomLevel3Publication($id: String!) {
+    zoomLevel3Publication(id: $id) {
+        id
+        __typename
+        title
+        thumbnail
+    }
+}

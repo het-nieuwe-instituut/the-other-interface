@@ -21,12 +21,15 @@ export default async function Page({ params }: { params: { category: string; id:
   const { lang } = useTranslation()
 
   const publicationState = isEnabled ? PublicationState.Preview : PublicationState.Live
+
   const editorialData = await getRecordEditorialContent({
     category,
     id,
     publicationState,
     lang,
   })
+
+  // TODO create separate type for detail and mock result to it
 
   return <DetailpageContainer editorialData={editorialData} />
 }

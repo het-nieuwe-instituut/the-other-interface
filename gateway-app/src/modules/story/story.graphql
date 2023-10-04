@@ -73,6 +73,50 @@ query storiesLinkedToTriplyRecord($recordId: String!, $type: String!) {
     }
 }
 
+query storiesLinkedToTheme($id: ID!, $locale: I18NLocaleCode) {
+    story(id: $id, locale: $locale) {
+        data {
+            id
+            attributes {
+                themes {
+                    data {
+                        id
+                        attributes {
+                            stories {
+                                data {
+                                    id
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+query storiesByIds($storiesIds: [ID]!) {
+    stories(filters: { id: { in: $storiesIds } }) {
+        data {
+            attributes {
+                title
+                slug
+                locale
+                components {
+                    ... on ComponentModulesImage {
+                        ...ComponentModulesImageFragment
+                    }
+                }
+                localizations{
+                    data {
+                        ...StoryWithoutRelationsFragment
+                    }
+                }
+            }
+        }
+    }
+}
+
 query storyTriplyRelations($id: ID!) {
     story(id: $id) {
         data {

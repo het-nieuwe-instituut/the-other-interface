@@ -7,7 +7,8 @@ export type Record = {
   thumbnail: string | null
 }
 
-export type PositionedRecord = Record & {
+export type PositionedRecord = {
+  id: string
   position: Position
   grid: GridParams
   category: Category

@@ -1,0 +1,8 @@
+query ZoomLevel3Archive($id: String!) {
+    zoomLevel3Archive(id: $id) {
+        __typename
+        id
+        title
+        thumbnail
+    }
+}

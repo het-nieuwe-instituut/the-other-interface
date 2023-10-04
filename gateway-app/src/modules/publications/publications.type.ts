@@ -1,39 +1,51 @@
-import { createUnionType, Field, InputType, ObjectType, registerEnumType } from '@nestjs/graphql'
-import { PoepleZoomLevel5DetailType } from '../people/people.type'
+import { Field, ObjectType, createUnionType, registerEnumType } from '@nestjs/graphql'
+import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
+import { PublicationsZoomLevel3Types } from './publications.service'
+import { PeopleZoomLevel3DetailType } from '../people/people.type'
 import { CustomError } from '../util/customError'
-import { PublicationsZoomLevel5Types } from './publications.service'
 
-@InputType()
-export class PublicationsZoomLevel2FiltersArgs {
-  @Field(() => String, { nullable: true })
-  public Author: string | null
-
-  @Field(() => String, { nullable: true })
-  public TypeOfPublication: string | null
-
-  @Field(() => String, { nullable: true })
-  public GeograficalKeyword: string | null
-
-  @Field(() => String, { nullable: true })
-  public Subject: string | null
-
-  @Field(() => String, { nullable: true })
-  public RelatedPerInst: string | null
-}
-
-registerEnumType(PublicationsZoomLevel5Types, { name: 'PublicationsZoomLevel5Types' })
+// registerEnumType(PublicationsZoomLevel3Types, { name: 'PublicationsZoomLevel3Types' })
 
 @ObjectType()
-class BasePublicationZoomLevel5Type {
+export class PublicationZoomLevel3DetailType {
   @Field()
   public id: string
 
-  @Field(() => PublicationsZoomLevel5Types)
-  public type: PublicationsZoomLevel5Types
+  @Field(() => String, { nullable: true })
+  public title: string
+
+  @Field(() => EntityNames, { nullable: true })
+  public type: EntityNames
+
+  @Field(() => String, { nullable: true })
+  public thumbnail: string
+
+  @Field(() => String, { nullable: true })
+  public objectNumber: string
+
+  @Field(() => String, { nullable: true })
+  public yearOfPublication: string
+}
+
+registerEnumType(PublicationsZoomLevel3Types, { name: 'PublicationsZoomLevel3Types' })
+
+@ObjectType()
+class BasePublicationZoomLevel3Type {
+  @Field()
+  public id: string
+
+  @Field(() => PublicationsZoomLevel3Types)
+  public type: PublicationsZoomLevel3Types
+
+  @Field(() => String, { nullable: true })
+  public title?: string
+
+  @Field(() => String, { nullable: true })
+  public thumbnail: string
 }
 
 @ObjectType()
-export class PublicationsAudioVisualZoomLevel5DetailType extends BasePublicationZoomLevel5Type {
+export class PublicationsAudioVisualZoomLevel3DetailType extends BasePublicationZoomLevel3Type {
   @Field(() => String, { nullable: true })
   public typeOfPublication?: string
 
@@ -52,8 +64,8 @@ export class PublicationsAudioVisualZoomLevel5DetailType extends BasePublication
   @Field(() => String, { nullable: true })
   public publisherLabel?: string
 
-  @Field(() => PoepleZoomLevel5DetailType, { nullable: true })
-  public populatedPublisher?: PoepleZoomLevel5DetailType
+  @Field(() => PeopleZoomLevel3DetailType, { nullable: true })
+  public populatedPublisher?: PeopleZoomLevel3DetailType
 
   @Field(() => String, { nullable: true })
   public yearOfPublication?: string
@@ -114,7 +126,7 @@ export class PublicationsAudioVisualZoomLevel5DetailType extends BasePublication
 }
 
 @ObjectType()
-export class PublicationsArticleZoomLevel5DetailType extends BasePublicationZoomLevel5Type {
+export class PublicationsArticleZoomLevel3DetailType extends BasePublicationZoomLevel3Type {
   @Field(() => String, { nullable: true })
   public typeOfPublication?: string
 
@@ -151,8 +163,8 @@ export class PublicationsArticleZoomLevel5DetailType extends BasePublicationZoom
   @Field(() => String, { nullable: true })
   public publisherLabel?: string
 
-  @Field(() => PoepleZoomLevel5DetailType, { nullable: true })
-  public populatedPublisher?: PoepleZoomLevel5DetailType
+  @Field(() => PeopleZoomLevel3DetailType, { nullable: true })
+  public populatedPublisher?: PeopleZoomLevel3DetailType
 
   @Field(() => String, { nullable: true })
   public abstract?: string
@@ -195,7 +207,7 @@ export class PublicationsArticleZoomLevel5DetailType extends BasePublicationZoom
 }
 
 @ObjectType()
-export class PublicationsSerialZoomLevel5DetailType extends BasePublicationZoomLevel5Type {
+export class PublicationsSerialZoomLevel3DetailType extends BasePublicationZoomLevel3Type {
   @Field(() => String, { nullable: true })
   public typeOfPublication?: string
 
@@ -211,8 +223,8 @@ export class PublicationsSerialZoomLevel5DetailType extends BasePublicationZoomL
   @Field(() => String, { nullable: true })
   public publisherLabel?: string
 
-  @Field(() => PoepleZoomLevel5DetailType, { nullable: true })
-  public populatedPublisher?: PoepleZoomLevel5DetailType
+  @Field(() => PeopleZoomLevel3DetailType, { nullable: true })
+  public populatedPublisher?: PeopleZoomLevel3DetailType
 
   @Field(() => String, { nullable: true })
   public yearOfPublication?: string
@@ -258,7 +270,7 @@ export class PublicationsSerialZoomLevel5DetailType extends BasePublicationZoomL
 }
 
 @ObjectType()
-export class PublicationsBookZoomLevel5DetailType extends BasePublicationZoomLevel5Type {
+export class PublicationsBookZoomLevel3DetailType extends BasePublicationZoomLevel3Type {
   @Field(() => String, { nullable: true })
   public typeOfPublication?: string
 
@@ -277,8 +289,8 @@ export class PublicationsBookZoomLevel5DetailType extends BasePublicationZoomLev
   @Field(() => String, { nullable: true })
   public publisherLabel?: string
 
-  @Field(() => PoepleZoomLevel5DetailType, { nullable: true })
-  public populatedPublisher?: PoepleZoomLevel5DetailType
+  @Field(() => PeopleZoomLevel3DetailType, { nullable: true })
+  public populatedPublisher?: PeopleZoomLevel3DetailType
 
   @Field(() => String, { nullable: true })
   public yearOfPublication?: string
@@ -356,25 +368,25 @@ export class PublicationsBookZoomLevel5DetailType extends BasePublicationZoomLev
   public permanentLink?: string
 }
 
-export const PublicationZoomLevel5UnionType = createUnionType({
-  name: 'PublicationZoomLevel5UnionType',
+export const PublicationZoomLevel3UnionType = createUnionType({
+  name: 'PublicationZoomLevel3UnionType',
   types: () =>
     [
-      PublicationsAudioVisualZoomLevel5DetailType,
-      PublicationsArticleZoomLevel5DetailType,
-      PublicationsSerialZoomLevel5DetailType,
-      PublicationsBookZoomLevel5DetailType,
+      PublicationsAudioVisualZoomLevel3DetailType,
+      PublicationsArticleZoomLevel3DetailType,
+      PublicationsSerialZoomLevel3DetailType,
+      PublicationsBookZoomLevel3DetailType,
     ] as const,
-  resolveType: (publication: BasePublicationZoomLevel5Type) => {
+  resolveType: (publication: BasePublicationZoomLevel3Type) => {
     switch (publication.type) {
-      case PublicationsZoomLevel5Types.audiovisual:
-        return PublicationsAudioVisualZoomLevel5DetailType
-      case PublicationsZoomLevel5Types.article:
-        return PublicationsArticleZoomLevel5DetailType
-      case PublicationsZoomLevel5Types.serial:
-        return PublicationsSerialZoomLevel5DetailType
-      case PublicationsZoomLevel5Types.book:
-        return PublicationsBookZoomLevel5DetailType
+      case PublicationsZoomLevel3Types.audiovisual:
+        return PublicationsAudioVisualZoomLevel3DetailType
+      case PublicationsZoomLevel3Types.article:
+        return PublicationsArticleZoomLevel3DetailType
+      case PublicationsZoomLevel3Types.serial:
+        return PublicationsSerialZoomLevel3DetailType
+      case PublicationsZoomLevel3Types.book:
+        return PublicationsBookZoomLevel3DetailType
       default:
         throw CustomError.externalCritical(
           `publication type ${publication.type} cannot be resolved`
@@ -400,6 +412,6 @@ export class PublicationAuthorType {
   @Field(() => String, { nullable: true })
   public authorRoleLabel?: string
 
-  @Field(() => PoepleZoomLevel5DetailType, { nullable: true })
-  public populatedAuthor?: PoepleZoomLevel5DetailType
+  @Field(() => PeopleZoomLevel3DetailType, { nullable: true })
+  public populatedAuthor?: PeopleZoomLevel3DetailType
 }

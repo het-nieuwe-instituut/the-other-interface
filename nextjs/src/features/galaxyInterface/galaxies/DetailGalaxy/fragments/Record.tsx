@@ -4,18 +4,21 @@ import { useRouter } from 'next/navigation'
 
 import { PositionedRecord } from './types'
 import { RecordText } from './RecordText'
+import { useRecordDetail } from '@/features/shared/hooks/queries/useRecordDetail'
 
 type Props = {
   record: PositionedRecord
 }
 
 export const Record: React.FC<Props> = ({ record }) => {
-  const { id, thumbnail, category, position, grid, title } = record
+  const { id, category, position, grid } = record
+  const { data, isLoading } = useRecordDetail(category, id)
   const router = useRouter()
 
   const handleClick = () => {
     router.push(`/detail/${category}/${id}`)
   }
+  if (!data && !isLoading) return null
 
   return (
     <GridItem position="relative" css={{ ...grid }}>
@@ -34,16 +37,16 @@ export const Record: React.FC<Props> = ({ record }) => {
         style={{ ...position }}
       >
         <ResponsiveImage
-          src={thumbnail}
-          alt={title}
-          maxHeight={!thumbnail ? '80%' : 'calc(100% - 1.6vw - 12px)'} // where 2.6vw are a texts' line heights, 16px are gaps
+          src={data?.thumbnail}
+          alt={data?.title}
+          maxHeight={!data?.thumbnail ? '80%' : 'calc(100% - 1.6vw - 12px)'} // where 2.6vw are a texts' line heights, 16px are gaps
         />
 
         <RecordText
-          title={title}
+          title={data?.title}
           categoryType={category}
           css={{
-            position: !thumbnail ? 'absolute' : 'relative',
+            position: !data?.thumbnail ? 'absolute' : 'relative',
           }}
         />
       </Flex>

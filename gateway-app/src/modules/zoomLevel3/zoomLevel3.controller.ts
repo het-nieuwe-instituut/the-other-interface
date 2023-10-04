@@ -3,16 +3,16 @@ import { Response } from 'express'
 import { Enum_Triplyrecord_Type } from '../../generated/strapi-sdk'
 import { StrapiAuthGuard } from '../auth/strapi-auth.guard'
 import { StrapiUtils } from '../strapi/strapi.utils'
-import { ZoomLevel5Service } from './zoomLevel5.service'
+import { ZoomLevel3Service } from './zoomLevel3.service'
 
 interface DetailQueryParams {
   recordId?: string
   type?: string
 }
 
-@Controller('/zoomLevel5')
-export class ZoomLevel5Controller {
-  public constructor(private readonly zoomLevel5Service: ZoomLevel5Service) {}
+@Controller('/zoomLevel3')
+export class ZoomLevel3Controller {
+  public constructor(private readonly zoomLevel3Service: ZoomLevel3Service) {}
 
   @Get('/detail')
   @UseGuards(StrapiAuthGuard)
@@ -31,7 +31,7 @@ export class ZoomLevel5Controller {
         )
     }
 
-    const detail = await this.zoomLevel5Service.getDetail(
+    const detail = await this.zoomLevel3Service.getDetail(
       params.recordId,
       StrapiUtils.getEntityNameForRecordType(params.type as Enum_Triplyrecord_Type)
     )

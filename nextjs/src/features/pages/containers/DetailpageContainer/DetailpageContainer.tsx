@@ -15,7 +15,6 @@ export interface DetailpageEditorialLayer {
     | NonNullable<NonNullable<StoryByIdQuery['stories']['data']>[0]['attributes']>['components']
     | null
 }
-
 interface Props {
   editorialData: DetailpageEditorialLayer
 }

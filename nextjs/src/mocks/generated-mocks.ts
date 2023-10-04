@@ -1,4 +1,15 @@
-import { ArchivesFondsCreatorType, ArchivesFondsZoomLevel5DetailType, ArchivesOtherZoomLevel5DetailType, Author, AuthorEntity, AuthorEntityResponse, AuthorEntityResponseCollection, AuthorFiltersInput, BooleanFilterInput, ComponentCoreButton, ComponentCoreButtonFiltersInput, ComponentCoreCarouselItem, ComponentCoreFeaturedFields, ComponentCoreGridFeaturedFields, ComponentCoreImageCarouselItem, ComponentCoreModuleLayouts, ComponentCoreModuleLayoutsFiltersInput, ComponentCorePublicationDate, ComponentCorePublicationDateFiltersInput, ComponentCoreTableBody, ComponentCoreTableBodyFiltersInput, ComponentCoreTableBodyItem, ComponentCoreTableBodyItemFiltersInput, ComponentCoreTableHead, ComponentCoreTableHeadFiltersInput, ComponentCoreTableHeadItem, ComponentCoreTableHeadItemFiltersInput, ComponentCoreTimeframe, ComponentCoreTimeframeFiltersInput, ComponentModulesButtonsModule, ComponentModulesButtonsModuleFiltersInput, ComponentModulesCarousel, ComponentModulesGridModule, ComponentModulesImage, ComponentModulesImageCarousel, ComponentModulesPullquote, ComponentModulesSubtitle, ComponentModulesTableModule, ComponentModulesTextModule, ComponentModulesTitleModule, DateFilterInput, DateTimeFilterInput, Error, Homepage, HomepageEntity, HomepageEntityResponse, HomepageRelationResponseCollection, IdFilterInput, Landingpage, LandingpageEntity, LandingpageEntityResponse, LandingpageEntityResponseCollection, LandingpageFiltersInput, LandingpageRelationResponseCollection, Location, LocationEntity, LocationEntityResponse, LocationFiltersInput, LocationRelationResponseCollection, LongFilterInput, Menupage, MenupageEntity, MenupageEntityResponse, MenupageEntityResponseCollection, MenupageFiltersInput, MenupageRelationResponseCollection, ObjectMakerType, ObjectMaterialType, ObjectTechniqueType, ObjectsZoomLevel5DetailType, Pagination, PaginationArg, PeopleAssociationType, PoepleZoomLevel5DetailType, PublicationAuthorType, PublicationsArticleZoomLevel5DetailType, PublicationsAudioVisualZoomLevel5DetailType, PublicationsBookZoomLevel5DetailType, PublicationsSerialZoomLevel5DetailType, Query, RelatedRecordType, ResponseCollectionMeta, Story, StoryEntity, StoryEntityResponse, StoryEntityResponseCollection, StoryFiltersInput, StoryRelationResponseCollection, StoryWithoutRelations, StoryWithoutRelationsEntity, StoryWithoutRelationsEntityResponse, StoryWithoutRelationsEntityResponseCollection, StringFilterInput, Table, TableEntity, TableEntityResponse, TableEntityResponseCollection, TableFiltersInput, Theme, ThemeEntity, ThemeEntityResponse, ThemeFiltersInput, ThemeRelationResponseCollection, TriplyRecord, TriplyRecordEntity, TriplyRecordEntityResponse, TriplyRecordFiltersInput, TriplyRecordRelationResponseCollection, UploadFile, UploadFileEntity, UploadFileEntityResponse, UploadFileRelationResponseCollection, UsersPermissionsPermission, UsersPermissionsPermissionEntity, UsersPermissionsPermissionFiltersInput, UsersPermissionsPermissionRelationResponseCollection, UsersPermissionsRole, UsersPermissionsRoleEntity, UsersPermissionsRoleEntityResponse, UsersPermissionsRoleFiltersInput, UsersPermissionsUser, UsersPermissionsUserEntity, UsersPermissionsUserEntityResponse, UsersPermissionsUserEntityResponseCollection, UsersPermissionsUserFiltersInput, UsersPermissionsUserRelationResponseCollection, ZoomLevel1Type, ZoomLevel2ParentType, ZoomLevel2Type, ZoomLevel3Type, ZoomLevel5RelatedRecordType, ZoomLevel5RelationsType, ArchivesZoomLevel5Types, EntityNames, EnumComponentcorecarouselitemType, EnumComponentcoremodulelayoutsSpacingbottom, EnumComponentcoremodulelayoutsSpacingtop, EnumComponentcorepublicationdateDisplaytype, EnumComponentmodulesbuttonsmoduleButtonstyle, EnumComponentmodulescarouselType, EnumComponentmodulesgridmoduleFieldtypes, EnumTriplyrecordType, PublicationsZoomLevel5Types, TriplyExternalSourceEnum } from '../generated/graphql';
+import { ArchiveZoomLevel3DetailType, ArchivesFondsCreatorType, ArchivesFondsZoomLevel3DetailType, ArchivesOtherZoomLevel3DetailType, Author, AuthorEntity, AuthorEntityResponse, AuthorEntityResponseCollection, AuthorFiltersInput, BooleanFilterInput, ComponentCoreButton, ComponentCoreButtonFiltersInput, ComponentCoreCarouselItem, ComponentCoreFeaturedFields, ComponentCoreGridFeaturedFields, ComponentCoreImageCarouselItem, ComponentCoreModuleLayouts, ComponentCoreModuleLayoutsFiltersInput, ComponentCorePublicationDate, ComponentCorePublicationDateFiltersInput, ComponentCoreTableBody, ComponentCoreTableBodyFiltersInput, ComponentCoreTableBodyItem, ComponentCoreTableBodyItemFiltersInput, ComponentCoreTableHead, ComponentCoreTableHeadFiltersInput, ComponentCoreTableHeadItem, ComponentCoreTableHeadItemFiltersInput, ComponentCoreTimeframe, ComponentCoreTimeframeFiltersInput, ComponentModulesButtonsModule, ComponentModulesButtonsModuleFiltersInput, ComponentModulesCarousel, ComponentModulesGridModule, ComponentModulesImage, ComponentModulesImageCarousel, ComponentModulesPullquote, ComponentModulesSubtitle, ComponentModulesTableModule, ComponentModulesTextModule, ComponentModulesTitleModule, DateFilterInput, DateTimeFilterInput, Error, Homepage, HomepageEntity, HomepageEntityResponse, HomepageRelationResponseCollection, IdFilterInput, Landingpage, LandingpageEntity, LandingpageEntityResponse, LandingpageEntityResponseCollection, LandingpageFiltersInput, LandingpageRelationResponseCollection, Location, LocationEntity, LocationEntityResponse, LocationFiltersInput, LocationRelationResponseCollection, LongFilterInput, Menupage, MenupageEntity, MenupageEntityResponse, MenupageEntityResponseCollection, MenupageFiltersInput, MenupageRelationResponseCollection, ObjectMakerType, ObjectMaterialType, ObjectTechniqueType, ObjectsZoomLevel3DetailType, Pagination, PaginationArg, PeopleAssociationType, PeopleZoomLevel3DetailType, PublicationAuthorType, PublicationZoomLevel3DetailType, PublicationsArticleZoomLevel3DetailType, PublicationsAudioVisualZoomLevel3DetailType, PublicationsBookZoomLevel3DetailType, PublicationsSerialZoomLevel3DetailType, Query, ResponseCollectionMeta, Story, StoryEntity, StoryEntityResponse, StoryEntityResponseCollection, StoryFiltersInput, StoryRelationResponseCollection, StoryWithoutRelations, StoryWithoutRelationsEntity, StoryWithoutRelationsEntityResponse, StoryWithoutRelationsEntityResponseCollection, StringFilterInput, Table, TableEntity, TableEntityResponse, TableEntityResponseCollection, TableFiltersInput, Theme, ThemeEntity, ThemeEntityResponse, ThemeFiltersInput, ThemeRelationResponseCollection, TriplyRecord, TriplyRecordEntity, TriplyRecordEntityResponse, TriplyRecordFiltersInput, TriplyRecordRelationResponseCollection, UploadFile, UploadFileEntity, UploadFileEntityResponse, UploadFileRelationResponseCollection, UsersPermissionsPermission, UsersPermissionsPermissionEntity, UsersPermissionsPermissionFiltersInput, UsersPermissionsPermissionRelationResponseCollection, UsersPermissionsRole, UsersPermissionsRoleEntity, UsersPermissionsRoleEntityResponse, UsersPermissionsRoleFiltersInput, UsersPermissionsUser, UsersPermissionsUserEntity, UsersPermissionsUserEntityResponse, UsersPermissionsUserEntityResponseCollection, UsersPermissionsUserFiltersInput, UsersPermissionsUserRelationResponseCollection, ZoomLevel1Type, ZoomLevel2ParentType, ZoomLevel2Type, ZoomLevel3RelationsType, ArchivesZoomLevel3Types, EntityNames, EnumComponentcorecarouselitemType, EnumComponentcoremodulelayoutsSpacingbottom, EnumComponentcoremodulelayoutsSpacingtop, EnumComponentcorepublicationdateDisplaytype, EnumComponentmodulesbuttonsmoduleButtonstyle, EnumComponentmodulescarouselType, EnumComponentmodulesgridmoduleFieldtypes, EnumTriplyrecordType, PublicationsZoomLevel3Types } from '../generated/graphql';
+
+export const anArchiveZoomLevel3DetailType = (overrides?: Partial<ArchiveZoomLevel3DetailType>, _relationshipsToOmit: Array<string> = []): ArchiveZoomLevel3DetailType => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'ArchiveZoomLevel3DetailType']);
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'tempora',
+        objectNumber: overrides && overrides.hasOwnProperty('objectNumber') ? overrides.objectNumber! : 'consequatur',
+        thumbnail: overrides && overrides.hasOwnProperty('thumbnail') ? overrides.thumbnail! : 'consequatur',
+        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'enim',
+        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : EntityNames.Archives,
+    };
+};
 
 export const anArchivesFondsCreatorType = (overrides?: Partial<ArchivesFondsCreatorType>, _relationshipsToOmit: Array<string> = []): ArchivesFondsCreatorType => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ArchivesFondsCreatorType']);
@@ -7,60 +18,63 @@ export const anArchivesFondsCreatorType = (overrides?: Partial<ArchivesFondsCrea
         creatorHistory: overrides && overrides.hasOwnProperty('creatorHistory') ? overrides.creatorHistory! : 'omnis',
         creatorLabel: overrides && overrides.hasOwnProperty('creatorLabel') ? overrides.creatorLabel! : 'pariatur',
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'quam',
-        populatedCreator: overrides && overrides.hasOwnProperty('populatedCreator') ? overrides.populatedCreator! : relationshipsToOmit.includes('PoepleZoomLevel5DetailType') ? {} as PoepleZoomLevel5DetailType : aPoepleZoomLevel5DetailType({}, relationshipsToOmit),
+        populatedCreator: overrides && overrides.hasOwnProperty('populatedCreator') ? overrides.populatedCreator! : relationshipsToOmit.includes('PeopleZoomLevel3DetailType') ? {} as PeopleZoomLevel3DetailType : aPeopleZoomLevel3DetailType({}, relationshipsToOmit),
     };
 };
 
-export const anArchivesFondsZoomLevel5DetailType = (overrides?: Partial<ArchivesFondsZoomLevel5DetailType>, _relationshipsToOmit: Array<string> = []): ArchivesFondsZoomLevel5DetailType => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'ArchivesFondsZoomLevel5DetailType']);
+export const anArchivesFondsZoomLevel3DetailType = (overrides?: Partial<ArchivesFondsZoomLevel3DetailType>, _relationshipsToOmit: Array<string> = []): ArchivesFondsZoomLevel3DetailType => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'ArchivesFondsZoomLevel3DetailType']);
     return {
-        appendices: overrides && overrides.hasOwnProperty('appendices') ? overrides.appendices! : 'et',
-        conditionsGoverningAccess: overrides && overrides.hasOwnProperty('conditionsGoverningAccess') ? overrides.conditionsGoverningAccess! : 'et',
-        contentScope: overrides && overrides.hasOwnProperty('contentScope') ? overrides.contentScope! : 'et',
+        appendices: overrides && overrides.hasOwnProperty('appendices') ? overrides.appendices! : 'ducimus',
+        conditionsGoverningAccess: overrides && overrides.hasOwnProperty('conditionsGoverningAccess') ? overrides.conditionsGoverningAccess! : 'animi',
+        contentScope: overrides && overrides.hasOwnProperty('contentScope') ? overrides.contentScope! : 'quis',
         creators: overrides && overrides.hasOwnProperty('creators') ? overrides.creators! : [relationshipsToOmit.includes('ArchivesFondsCreatorType') ? {} as ArchivesFondsCreatorType : anArchivesFondsCreatorType({}, relationshipsToOmit)],
-        custodialHistory: overrides && overrides.hasOwnProperty('custodialHistory') ? overrides.custodialHistory! : 'temporibus',
-        descriptionLevel: overrides && overrides.hasOwnProperty('descriptionLevel') ? overrides.descriptionLevel! : 'et',
-        endDate: overrides && overrides.hasOwnProperty('endDate') ? overrides.endDate! : 'itaque',
-        extent: overrides && overrides.hasOwnProperty('extent') ? overrides.extent! : 'accusamus',
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'incidunt',
-        objectNumber: overrides && overrides.hasOwnProperty('objectNumber') ? overrides.objectNumber! : 'molestiae',
-        partReference: overrides && overrides.hasOwnProperty('partReference') ? overrides.partReference! : 'atque',
-        partTitle: overrides && overrides.hasOwnProperty('partTitle') ? overrides.partTitle! : 'fuga',
-        permanentLink: overrides && overrides.hasOwnProperty('permanentLink') ? overrides.permanentLink! : 'laudantium',
-        productionDate: overrides && overrides.hasOwnProperty('productionDate') ? overrides.productionDate! : 'id',
-        recordTitle: overrides && overrides.hasOwnProperty('recordTitle') ? overrides.recordTitle! : 'tempora',
-        relatedMaterial: overrides && overrides.hasOwnProperty('relatedMaterial') ? overrides.relatedMaterial! : 'quos',
-        repository: overrides && overrides.hasOwnProperty('repository') ? overrides.repository! : 'reprehenderit',
-        repositoryLabel: overrides && overrides.hasOwnProperty('repositoryLabel') ? overrides.repositoryLabel! : 'adipisci',
-        right: overrides && overrides.hasOwnProperty('right') ? overrides.right! : 'quam',
-        rightsLabel: overrides && overrides.hasOwnProperty('rightsLabel') ? overrides.rightsLabel! : 'voluptas',
-        source: overrides && overrides.hasOwnProperty('source') ? overrides.source! : 'nam',
-        startDate: overrides && overrides.hasOwnProperty('startDate') ? overrides.startDate! : 'ut',
-        systemOfArrangement: overrides && overrides.hasOwnProperty('systemOfArrangement') ? overrides.systemOfArrangement! : 'consequatur',
-        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : ArchivesZoomLevel5Types.Fonds,
+        custodialHistory: overrides && overrides.hasOwnProperty('custodialHistory') ? overrides.custodialHistory! : 'necessitatibus',
+        descriptionLevel: overrides && overrides.hasOwnProperty('descriptionLevel') ? overrides.descriptionLevel! : 'dolorem',
+        endDate: overrides && overrides.hasOwnProperty('endDate') ? overrides.endDate! : 'mollitia',
+        extent: overrides && overrides.hasOwnProperty('extent') ? overrides.extent! : 'sint',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'sunt',
+        objectNumber: overrides && overrides.hasOwnProperty('objectNumber') ? overrides.objectNumber! : 'aut',
+        partReference: overrides && overrides.hasOwnProperty('partReference') ? overrides.partReference! : 'maiores',
+        partTitle: overrides && overrides.hasOwnProperty('partTitle') ? overrides.partTitle! : 'est',
+        permanentLink: overrides && overrides.hasOwnProperty('permanentLink') ? overrides.permanentLink! : 'nulla',
+        productionDate: overrides && overrides.hasOwnProperty('productionDate') ? overrides.productionDate! : 'nesciunt',
+        recordTitle: overrides && overrides.hasOwnProperty('recordTitle') ? overrides.recordTitle! : 'qui',
+        relatedMaterial: overrides && overrides.hasOwnProperty('relatedMaterial') ? overrides.relatedMaterial! : 'quia',
+        repository: overrides && overrides.hasOwnProperty('repository') ? overrides.repository! : 'delectus',
+        repositoryLabel: overrides && overrides.hasOwnProperty('repositoryLabel') ? overrides.repositoryLabel! : 'unde',
+        right: overrides && overrides.hasOwnProperty('right') ? overrides.right! : 'molestias',
+        rightsLabel: overrides && overrides.hasOwnProperty('rightsLabel') ? overrides.rightsLabel! : 'quisquam',
+        source: overrides && overrides.hasOwnProperty('source') ? overrides.source! : 'ut',
+        startDate: overrides && overrides.hasOwnProperty('startDate') ? overrides.startDate! : 'harum',
+        systemOfArrangement: overrides && overrides.hasOwnProperty('systemOfArrangement') ? overrides.systemOfArrangement! : 'et',
+        thumbnail: overrides && overrides.hasOwnProperty('thumbnail') ? overrides.thumbnail! : 'aliquid',
+        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'rem',
+        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : ArchivesZoomLevel3Types.Fonds,
     };
 };
 
-export const anArchivesOtherZoomLevel5DetailType = (overrides?: Partial<ArchivesOtherZoomLevel5DetailType>, _relationshipsToOmit: Array<string> = []): ArchivesOtherZoomLevel5DetailType => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'ArchivesOtherZoomLevel5DetailType']);
+export const anArchivesOtherZoomLevel3DetailType = (overrides?: Partial<ArchivesOtherZoomLevel3DetailType>, _relationshipsToOmit: Array<string> = []): ArchivesOtherZoomLevel3DetailType => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'ArchivesOtherZoomLevel3DetailType']);
     return {
-        dateLabel: overrides && overrides.hasOwnProperty('dateLabel') ? overrides.dateLabel! : 'sint',
-        dimensionFree: overrides && overrides.hasOwnProperty('dimensionFree') ? overrides.dimensionFree! : 'corrupti',
-        endDate: overrides && overrides.hasOwnProperty('endDate') ? overrides.endDate! : 'molestiae',
-        existenceOfOriginals: overrides && overrides.hasOwnProperty('existenceOfOriginals') ? overrides.existenceOfOriginals! : 'beatae',
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'occaecati',
-        mediaReference: overrides && overrides.hasOwnProperty('mediaReference') ? overrides.mediaReference! : 'dignissimos',
-        mediaReferenceLabel: overrides && overrides.hasOwnProperty('mediaReferenceLabel') ? overrides.mediaReferenceLabel! : 'fugit',
-        objectNumber: overrides && overrides.hasOwnProperty('objectNumber') ? overrides.objectNumber! : 'similique',
-        permanentLink: overrides && overrides.hasOwnProperty('permanentLink') ? overrides.permanentLink! : 'quia',
-        pidWorkURIs: overrides && overrides.hasOwnProperty('pidWorkURIs') ? overrides.pidWorkURIs! : ['labore'],
-        relatedMaterial: overrides && overrides.hasOwnProperty('relatedMaterial') ? overrides.relatedMaterial! : 'quia',
-        rights: overrides && overrides.hasOwnProperty('rights') ? overrides.rights! : 'impedit',
-        rightsLabel: overrides && overrides.hasOwnProperty('rightsLabel') ? overrides.rightsLabel! : 'laborum',
-        scopeContent: overrides && overrides.hasOwnProperty('scopeContent') ? overrides.scopeContent! : 'officiis',
-        startDate: overrides && overrides.hasOwnProperty('startDate') ? overrides.startDate! : 'deserunt',
-        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'praesentium',
-        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : ArchivesZoomLevel5Types.Fonds,
+        dateLabel: overrides && overrides.hasOwnProperty('dateLabel') ? overrides.dateLabel! : 'asperiores',
+        dimensionFree: overrides && overrides.hasOwnProperty('dimensionFree') ? overrides.dimensionFree! : 'laudantium',
+        endDate: overrides && overrides.hasOwnProperty('endDate') ? overrides.endDate! : 'perspiciatis',
+        existenceOfOriginals: overrides && overrides.hasOwnProperty('existenceOfOriginals') ? overrides.existenceOfOriginals! : 'suscipit',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'ex',
+        mediaReference: overrides && overrides.hasOwnProperty('mediaReference') ? overrides.mediaReference! : 'facere',
+        mediaReferenceLabel: overrides && overrides.hasOwnProperty('mediaReferenceLabel') ? overrides.mediaReferenceLabel! : 'enim',
+        objectNumber: overrides && overrides.hasOwnProperty('objectNumber') ? overrides.objectNumber! : 'qui',
+        permanentLink: overrides && overrides.hasOwnProperty('permanentLink') ? overrides.permanentLink! : 'qui',
+        pidWorkURIs: overrides && overrides.hasOwnProperty('pidWorkURIs') ? overrides.pidWorkURIs! : ['totam'],
+        relatedMaterial: overrides && overrides.hasOwnProperty('relatedMaterial') ? overrides.relatedMaterial! : 'harum',
+        rights: overrides && overrides.hasOwnProperty('rights') ? overrides.rights! : 'dignissimos',
+        rightsLabel: overrides && overrides.hasOwnProperty('rightsLabel') ? overrides.rightsLabel! : 'voluptas',
+        scopeContent: overrides && overrides.hasOwnProperty('scopeContent') ? overrides.scopeContent! : 'omnis',
+        startDate: overrides && overrides.hasOwnProperty('startDate') ? overrides.startDate! : 'voluptatem',
+        thumbnail: overrides && overrides.hasOwnProperty('thumbnail') ? overrides.thumbnail! : 'repudiandae',
+        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'iste',
+        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : ArchivesZoomLevel3Types.Fonds,
     };
 };
 
@@ -801,7 +815,7 @@ export const anObjectMakerType = (overrides?: Partial<ObjectMakerType>, _relatio
         makerLabel: overrides && overrides.hasOwnProperty('makerLabel') ? overrides.makerLabel! : 'accusamus',
         makerRole: overrides && overrides.hasOwnProperty('makerRole') ? overrides.makerRole! : 'doloribus',
         makerRoleLabel: overrides && overrides.hasOwnProperty('makerRoleLabel') ? overrides.makerRoleLabel! : 'expedita',
-        populatedMaker: overrides && overrides.hasOwnProperty('populatedMaker') ? overrides.populatedMaker! : relationshipsToOmit.includes('PoepleZoomLevel5DetailType') ? {} as PoepleZoomLevel5DetailType : aPoepleZoomLevel5DetailType({}, relationshipsToOmit),
+        populatedMaker: overrides && overrides.hasOwnProperty('populatedMaker') ? overrides.populatedMaker! : relationshipsToOmit.includes('PeopleZoomLevel3DetailType') ? {} as PeopleZoomLevel3DetailType : aPeopleZoomLevel3DetailType({}, relationshipsToOmit),
     };
 };
 
@@ -823,40 +837,41 @@ export const anObjectTechniqueType = (overrides?: Partial<ObjectTechniqueType>, 
     };
 };
 
-export const anObjectsZoomLevel5DetailType = (overrides?: Partial<ObjectsZoomLevel5DetailType>, _relationshipsToOmit: Array<string> = []): ObjectsZoomLevel5DetailType => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'ObjectsZoomLevel5DetailType']);
+export const anObjectsZoomLevel3DetailType = (overrides?: Partial<ObjectsZoomLevel3DetailType>, _relationshipsToOmit: Array<string> = []): ObjectsZoomLevel3DetailType => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'ObjectsZoomLevel3DetailType']);
     return {
-        archiveCollectionCode: overrides && overrides.hasOwnProperty('archiveCollectionCode') ? overrides.archiveCollectionCode! : 'nihil',
-        associationPerson: overrides && overrides.hasOwnProperty('associationPerson') ? overrides.associationPerson! : 'eveniet',
-        associationPersonLabel: overrides && overrides.hasOwnProperty('associationPersonLabel') ? overrides.associationPersonLabel! : 'eum',
-        associationPersonType: overrides && overrides.hasOwnProperty('associationPersonType') ? overrides.associationPersonType! : 'quis',
-        creationPlace: overrides && overrides.hasOwnProperty('creationPlace') ? overrides.creationPlace! : 'molestias',
-        creationPlaceLabel: overrides && overrides.hasOwnProperty('creationPlaceLabel') ? overrides.creationPlaceLabel! : 'ut',
-        creditLine: overrides && overrides.hasOwnProperty('creditLine') ? overrides.creditLine! : 'hic',
-        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'et',
-        dimDepth: overrides && overrides.hasOwnProperty('dimDepth') ? overrides.dimDepth! : 'non',
-        dimHeight: overrides && overrides.hasOwnProperty('dimHeight') ? overrides.dimHeight! : 'quis',
-        dimWidth: overrides && overrides.hasOwnProperty('dimWidth') ? overrides.dimWidth! : 'dolore',
-        dimensionUnit: overrides && overrides.hasOwnProperty('dimensionUnit') ? overrides.dimensionUnit! : 'et',
-        endDate: overrides && overrides.hasOwnProperty('endDate') ? overrides.endDate! : 'commodi',
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'mollitia',
-        image: overrides && overrides.hasOwnProperty('image') ? overrides.image! : 'voluptatem',
-        imageLabel: overrides && overrides.hasOwnProperty('imageLabel') ? overrides.imageLabel! : 'occaecati',
+        archiveCollectionCode: overrides && overrides.hasOwnProperty('archiveCollectionCode') ? overrides.archiveCollectionCode! : 'ipsam',
+        associationPerson: overrides && overrides.hasOwnProperty('associationPerson') ? overrides.associationPerson! : 'rerum',
+        associationPersonLabel: overrides && overrides.hasOwnProperty('associationPersonLabel') ? overrides.associationPersonLabel! : 'aperiam',
+        associationPersonType: overrides && overrides.hasOwnProperty('associationPersonType') ? overrides.associationPersonType! : 'fuga',
+        creationPlace: overrides && overrides.hasOwnProperty('creationPlace') ? overrides.creationPlace! : 'omnis',
+        creationPlaceLabel: overrides && overrides.hasOwnProperty('creationPlaceLabel') ? overrides.creationPlaceLabel! : 'soluta',
+        creditLine: overrides && overrides.hasOwnProperty('creditLine') ? overrides.creditLine! : 'aspernatur',
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'voluptatem',
+        dimDepth: overrides && overrides.hasOwnProperty('dimDepth') ? overrides.dimDepth! : 'dicta',
+        dimHeight: overrides && overrides.hasOwnProperty('dimHeight') ? overrides.dimHeight! : 'facere',
+        dimWidth: overrides && overrides.hasOwnProperty('dimWidth') ? overrides.dimWidth! : 'ut',
+        dimensionUnit: overrides && overrides.hasOwnProperty('dimensionUnit') ? overrides.dimensionUnit! : 'provident',
+        endDate: overrides && overrides.hasOwnProperty('endDate') ? overrides.endDate! : 'nihil',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'adipisci',
+        imageLabel: overrides && overrides.hasOwnProperty('imageLabel') ? overrides.imageLabel! : 'magnam',
         makers: overrides && overrides.hasOwnProperty('makers') ? overrides.makers! : [relationshipsToOmit.includes('ObjectMakerType') ? {} as ObjectMakerType : anObjectMakerType({}, relationshipsToOmit)],
         materials: overrides && overrides.hasOwnProperty('materials') ? overrides.materials! : [relationshipsToOmit.includes('ObjectMaterialType') ? {} as ObjectMaterialType : anObjectMaterialType({}, relationshipsToOmit)],
-        numberOfParts: overrides && overrides.hasOwnProperty('numberOfParts') ? overrides.numberOfParts! : 'atque',
-        objectName: overrides && overrides.hasOwnProperty('objectName') ? overrides.objectName! : 'autem',
-        objectNameLabel: overrides && overrides.hasOwnProperty('objectNameLabel') ? overrides.objectNameLabel! : 'quo',
-        objectNumber: overrides && overrides.hasOwnProperty('objectNumber') ? overrides.objectNumber! : 'corporis',
-        permanentLink: overrides && overrides.hasOwnProperty('permanentLink') ? overrides.permanentLink! : 'deleniti',
-        relatedObjectTitle: overrides && overrides.hasOwnProperty('relatedObjectTitle') ? overrides.relatedObjectTitle! : 'non',
-        rights: overrides && overrides.hasOwnProperty('rights') ? overrides.rights! : 'accusantium',
-        rightsLabel: overrides && overrides.hasOwnProperty('rightsLabel') ? overrides.rightsLabel! : 'ut',
-        scale: overrides && overrides.hasOwnProperty('scale') ? overrides.scale! : 'officiis',
-        startDate: overrides && overrides.hasOwnProperty('startDate') ? overrides.startDate! : 'officiis',
+        numberOfParts: overrides && overrides.hasOwnProperty('numberOfParts') ? overrides.numberOfParts! : 'aliquam',
+        objectName: overrides && overrides.hasOwnProperty('objectName') ? overrides.objectName! : 'explicabo',
+        objectNameLabel: overrides && overrides.hasOwnProperty('objectNameLabel') ? overrides.objectNameLabel! : 'autem',
+        objectNumber: overrides && overrides.hasOwnProperty('objectNumber') ? overrides.objectNumber! : 'quos',
+        permanentLink: overrides && overrides.hasOwnProperty('permanentLink') ? overrides.permanentLink! : 'quas',
+        relatedObjectTitle: overrides && overrides.hasOwnProperty('relatedObjectTitle') ? overrides.relatedObjectTitle! : 'aut',
+        rights: overrides && overrides.hasOwnProperty('rights') ? overrides.rights! : 'qui',
+        rightsLabel: overrides && overrides.hasOwnProperty('rightsLabel') ? overrides.rightsLabel! : 'omnis',
+        scale: overrides && overrides.hasOwnProperty('scale') ? overrides.scale! : 'qui',
+        startDate: overrides && overrides.hasOwnProperty('startDate') ? overrides.startDate! : 'asperiores',
         techniques: overrides && overrides.hasOwnProperty('techniques') ? overrides.techniques! : [relationshipsToOmit.includes('ObjectTechniqueType') ? {} as ObjectTechniqueType : anObjectTechniqueType({}, relationshipsToOmit)],
-        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'ad',
-        titleType: overrides && overrides.hasOwnProperty('titleType') ? overrides.titleType! : 'reiciendis',
+        thumbnail: overrides && overrides.hasOwnProperty('thumbnail') ? overrides.thumbnail! : 'esse',
+        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'ut',
+        titleType: overrides && overrides.hasOwnProperty('titleType') ? overrides.titleType! : 'unde',
+        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : EntityNames.Archives,
     };
 };
 
@@ -888,35 +903,38 @@ export const aPeopleAssociationType = (overrides?: Partial<PeopleAssociationType
     };
 };
 
-export const aPoepleZoomLevel5DetailType = (overrides?: Partial<PoepleZoomLevel5DetailType>, _relationshipsToOmit: Array<string> = []): PoepleZoomLevel5DetailType => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'PoepleZoomLevel5DetailType']);
+export const aPeopleZoomLevel3DetailType = (overrides?: Partial<PeopleZoomLevel3DetailType>, _relationshipsToOmit: Array<string> = []): PeopleZoomLevel3DetailType => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'PeopleZoomLevel3DetailType']);
     return {
         associations: overrides && overrides.hasOwnProperty('associations') ? overrides.associations! : [relationshipsToOmit.includes('PeopleAssociationType') ? {} as PeopleAssociationType : aPeopleAssociationType({}, relationshipsToOmit)],
-        birthDate: overrides && overrides.hasOwnProperty('birthDate') ? overrides.birthDate! : 'est',
-        birthPlace: overrides && overrides.hasOwnProperty('birthPlace') ? overrides.birthPlace! : 'corrupti',
-        birthPlaceLabel: overrides && overrides.hasOwnProperty('birthPlaceLabel') ? overrides.birthPlaceLabel! : 'magnam',
-        deathDate: overrides && overrides.hasOwnProperty('deathDate') ? overrides.deathDate! : 'nulla',
-        deathPlace: overrides && overrides.hasOwnProperty('deathPlace') ? overrides.deathPlace! : 'tenetur',
-        deathPlaceLabel: overrides && overrides.hasOwnProperty('deathPlaceLabel') ? overrides.deathPlaceLabel! : 'iusto',
-        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'voluptas',
-        endDate: overrides && overrides.hasOwnProperty('endDate') ? overrides.endDate! : 'et',
-        gender: overrides && overrides.hasOwnProperty('gender') ? overrides.gender! : 'quia',
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'hic',
-        institution: overrides && overrides.hasOwnProperty('institution') ? overrides.institution! : 'repellat',
-        institutionLabel: overrides && overrides.hasOwnProperty('institutionLabel') ? overrides.institutionLabel! : 'distinctio',
-        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'aspernatur',
-        nameTypes: overrides && overrides.hasOwnProperty('nameTypes') ? overrides.nameTypes! : ['aut'],
-        nameVariation: overrides && overrides.hasOwnProperty('nameVariation') ? overrides.nameVariation! : 'minus',
-        nationality: overrides && overrides.hasOwnProperty('nationality') ? overrides.nationality! : 'atque',
-        nationalityLabel: overrides && overrides.hasOwnProperty('nationalityLabel') ? overrides.nationalityLabel! : 'enim',
-        permanentLink: overrides && overrides.hasOwnProperty('permanentLink') ? overrides.permanentLink! : 'esse',
-        place: overrides && overrides.hasOwnProperty('place') ? overrides.place! : 'est',
-        placeLabel: overrides && overrides.hasOwnProperty('placeLabel') ? overrides.placeLabel! : 'quasi',
-        profession: overrides && overrides.hasOwnProperty('profession') ? overrides.profession! : 'id',
-        professionLabel: overrides && overrides.hasOwnProperty('professionLabel') ? overrides.professionLabel! : 'beatae',
-        relatedItem: overrides && overrides.hasOwnProperty('relatedItem') ? overrides.relatedItem! : 'facilis',
-        relatedItemLabel: overrides && overrides.hasOwnProperty('relatedItemLabel') ? overrides.relatedItemLabel! : 'quibusdam',
-        startDate: overrides && overrides.hasOwnProperty('startDate') ? overrides.startDate! : 'accusantium',
+        birthDate: overrides && overrides.hasOwnProperty('birthDate') ? overrides.birthDate! : 'sed',
+        birthPlace: overrides && overrides.hasOwnProperty('birthPlace') ? overrides.birthPlace! : 'non',
+        birthPlaceLabel: overrides && overrides.hasOwnProperty('birthPlaceLabel') ? overrides.birthPlaceLabel! : 'qui',
+        deathDate: overrides && overrides.hasOwnProperty('deathDate') ? overrides.deathDate! : 'deleniti',
+        deathPlace: overrides && overrides.hasOwnProperty('deathPlace') ? overrides.deathPlace! : 'officiis',
+        deathPlaceLabel: overrides && overrides.hasOwnProperty('deathPlaceLabel') ? overrides.deathPlaceLabel! : 'eius',
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'dolorem',
+        endDate: overrides && overrides.hasOwnProperty('endDate') ? overrides.endDate! : 'voluptate',
+        gender: overrides && overrides.hasOwnProperty('gender') ? overrides.gender! : 'recusandae',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'praesentium',
+        institution: overrides && overrides.hasOwnProperty('institution') ? overrides.institution! : 'et',
+        institutionLabel: overrides && overrides.hasOwnProperty('institutionLabel') ? overrides.institutionLabel! : 'ullam',
+        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'repudiandae',
+        nameTypes: overrides && overrides.hasOwnProperty('nameTypes') ? overrides.nameTypes! : ['cum'],
+        nameVariation: overrides && overrides.hasOwnProperty('nameVariation') ? overrides.nameVariation! : 'eaque',
+        nationality: overrides && overrides.hasOwnProperty('nationality') ? overrides.nationality! : 'quia',
+        nationalityLabel: overrides && overrides.hasOwnProperty('nationalityLabel') ? overrides.nationalityLabel! : 'sint',
+        permanentLink: overrides && overrides.hasOwnProperty('permanentLink') ? overrides.permanentLink! : 'deleniti',
+        place: overrides && overrides.hasOwnProperty('place') ? overrides.place! : 'nobis',
+        placeLabel: overrides && overrides.hasOwnProperty('placeLabel') ? overrides.placeLabel! : 'est',
+        profession: overrides && overrides.hasOwnProperty('profession') ? overrides.profession! : 'ut',
+        professionLabel: overrides && overrides.hasOwnProperty('professionLabel') ? overrides.professionLabel! : 'odit',
+        relatedItem: overrides && overrides.hasOwnProperty('relatedItem') ? overrides.relatedItem! : 'ad',
+        relatedItemLabel: overrides && overrides.hasOwnProperty('relatedItemLabel') ? overrides.relatedItemLabel! : 'eum',
+        startDate: overrides && overrides.hasOwnProperty('startDate') ? overrides.startDate! : 'sunt',
+        thumbnail: overrides && overrides.hasOwnProperty('thumbnail') ? overrides.thumbnail! : 'soluta',
+        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'illum',
+        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : EntityNames.Archives,
     };
 };
 
@@ -928,151 +946,167 @@ export const aPublicationAuthorType = (overrides?: Partial<PublicationAuthorType
         authorRole: overrides && overrides.hasOwnProperty('authorRole') ? overrides.authorRole! : 'quod',
         authorRoleLabel: overrides && overrides.hasOwnProperty('authorRoleLabel') ? overrides.authorRoleLabel! : 'optio',
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'accusantium',
-        populatedAuthor: overrides && overrides.hasOwnProperty('populatedAuthor') ? overrides.populatedAuthor! : relationshipsToOmit.includes('PoepleZoomLevel5DetailType') ? {} as PoepleZoomLevel5DetailType : aPoepleZoomLevel5DetailType({}, relationshipsToOmit),
+        populatedAuthor: overrides && overrides.hasOwnProperty('populatedAuthor') ? overrides.populatedAuthor! : relationshipsToOmit.includes('PeopleZoomLevel3DetailType') ? {} as PeopleZoomLevel3DetailType : aPeopleZoomLevel3DetailType({}, relationshipsToOmit),
     };
 };
 
-export const aPublicationsArticleZoomLevel5DetailType = (overrides?: Partial<PublicationsArticleZoomLevel5DetailType>, _relationshipsToOmit: Array<string> = []): PublicationsArticleZoomLevel5DetailType => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'PublicationsArticleZoomLevel5DetailType']);
+export const aPublicationZoomLevel3DetailType = (overrides?: Partial<PublicationZoomLevel3DetailType>, _relationshipsToOmit: Array<string> = []): PublicationZoomLevel3DetailType => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'PublicationZoomLevel3DetailType']);
     return {
-        abstract: overrides && overrides.hasOwnProperty('abstract') ? overrides.abstract! : 'qui',
-        authors: overrides && overrides.hasOwnProperty('authors') ? overrides.authors! : [relationshipsToOmit.includes('PublicationAuthorType') ? {} as PublicationAuthorType : aPublicationAuthorType({}, relationshipsToOmit)],
-        availability: overrides && overrides.hasOwnProperty('availability') ? overrides.availability! : 'enim',
-        geographicalKeyword: overrides && overrides.hasOwnProperty('geographicalKeyword') ? overrides.geographicalKeyword! : 'cum',
-        geographicalKeywordLabel: overrides && overrides.hasOwnProperty('geographicalKeywordLabel') ? overrides.geographicalKeywordLabel! : 'ullam',
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'hic',
-        issue: overrides && overrides.hasOwnProperty('issue') ? overrides.issue! : 'quod',
-        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : 'eius',
-        languageLabel: overrides && overrides.hasOwnProperty('languageLabel') ? overrides.languageLabel! : 'aut',
-        objectNumber: overrides && overrides.hasOwnProperty('objectNumber') ? overrides.objectNumber! : 'beatae',
-        page: overrides && overrides.hasOwnProperty('page') ? overrides.page! : 'aut',
-        permanentLink: overrides && overrides.hasOwnProperty('permanentLink') ? overrides.permanentLink! : 'quae',
-        populatedPublisher: overrides && overrides.hasOwnProperty('populatedPublisher') ? overrides.populatedPublisher! : relationshipsToOmit.includes('PoepleZoomLevel5DetailType') ? {} as PoepleZoomLevel5DetailType : aPoepleZoomLevel5DetailType({}, relationshipsToOmit),
-        publisher: overrides && overrides.hasOwnProperty('publisher') ? overrides.publisher! : 'nihil',
-        publisherLabel: overrides && overrides.hasOwnProperty('publisherLabel') ? overrides.publisherLabel! : 'quia',
-        relatedPerInst: overrides && overrides.hasOwnProperty('relatedPerInst') ? overrides.relatedPerInst! : 'necessitatibus',
-        relatedPerInstLabel: overrides && overrides.hasOwnProperty('relatedPerInstLabel') ? overrides.relatedPerInstLabel! : 'porro',
-        shelfmark: overrides && overrides.hasOwnProperty('shelfmark') ? overrides.shelfmark! : 'officiis',
-        sourceTitle: overrides && overrides.hasOwnProperty('sourceTitle') ? overrides.sourceTitle! : 'natus',
-        sourceTitleLabel: overrides && overrides.hasOwnProperty('sourceTitleLabel') ? overrides.sourceTitleLabel! : 'placeat',
-        subject: overrides && overrides.hasOwnProperty('subject') ? overrides.subject! : 'voluptatibus',
-        subjectLabel: overrides && overrides.hasOwnProperty('subjectLabel') ? overrides.subjectLabel! : 'autem',
-        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'consequatur',
-        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : PublicationsZoomLevel5Types.Article,
-        typeOfPublication: overrides && overrides.hasOwnProperty('typeOfPublication') ? overrides.typeOfPublication! : 'facere',
-        typeOfPublicationLabel: overrides && overrides.hasOwnProperty('typeOfPublicationLabel') ? overrides.typeOfPublicationLabel! : 'est',
-        volume: overrides && overrides.hasOwnProperty('volume') ? overrides.volume! : 'cupiditate',
-        yearOfPublication: overrides && overrides.hasOwnProperty('yearOfPublication') ? overrides.yearOfPublication! : 'tenetur',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'a',
+        objectNumber: overrides && overrides.hasOwnProperty('objectNumber') ? overrides.objectNumber! : 'quibusdam',
+        thumbnail: overrides && overrides.hasOwnProperty('thumbnail') ? overrides.thumbnail! : 'corporis',
+        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'ab',
+        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : EntityNames.Archives,
+        yearOfPublication: overrides && overrides.hasOwnProperty('yearOfPublication') ? overrides.yearOfPublication! : 'possimus',
     };
 };
 
-export const aPublicationsAudioVisualZoomLevel5DetailType = (overrides?: Partial<PublicationsAudioVisualZoomLevel5DetailType>, _relationshipsToOmit: Array<string> = []): PublicationsAudioVisualZoomLevel5DetailType => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'PublicationsAudioVisualZoomLevel5DetailType']);
+export const aPublicationsArticleZoomLevel3DetailType = (overrides?: Partial<PublicationsArticleZoomLevel3DetailType>, _relationshipsToOmit: Array<string> = []): PublicationsArticleZoomLevel3DetailType => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'PublicationsArticleZoomLevel3DetailType']);
     return {
-        abstract: overrides && overrides.hasOwnProperty('abstract') ? overrides.abstract! : 'alias',
-        annotation: overrides && overrides.hasOwnProperty('annotation') ? overrides.annotation! : 'consequatur',
+        abstract: overrides && overrides.hasOwnProperty('abstract') ? overrides.abstract! : 'voluptatum',
         authors: overrides && overrides.hasOwnProperty('authors') ? overrides.authors! : [relationshipsToOmit.includes('PublicationAuthorType') ? {} as PublicationAuthorType : aPublicationAuthorType({}, relationshipsToOmit)],
-        availability: overrides && overrides.hasOwnProperty('availability') ? overrides.availability! : 'ea',
-        geographicalKeyword: overrides && overrides.hasOwnProperty('geographicalKeyword') ? overrides.geographicalKeyword! : 'id',
-        geographicalKeywordLabel: overrides && overrides.hasOwnProperty('geographicalKeywordLabel') ? overrides.geographicalKeywordLabel! : 'ut',
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'deserunt',
-        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : 'illo',
-        languageLabel: overrides && overrides.hasOwnProperty('languageLabel') ? overrides.languageLabel! : 'consequuntur',
-        medium: overrides && overrides.hasOwnProperty('medium') ? overrides.medium! : 'tenetur',
-        objectNumber: overrides && overrides.hasOwnProperty('objectNumber') ? overrides.objectNumber! : 'consequatur',
-        permanentLink: overrides && overrides.hasOwnProperty('permanentLink') ? overrides.permanentLink! : 'atque',
-        placeOfPublication: overrides && overrides.hasOwnProperty('placeOfPublication') ? overrides.placeOfPublication! : 'ut',
-        placeOfPublicationLabel: overrides && overrides.hasOwnProperty('placeOfPublicationLabel') ? overrides.placeOfPublicationLabel! : 'voluptatem',
-        populatedPublisher: overrides && overrides.hasOwnProperty('populatedPublisher') ? overrides.populatedPublisher! : relationshipsToOmit.includes('PoepleZoomLevel5DetailType') ? {} as PoepleZoomLevel5DetailType : aPoepleZoomLevel5DetailType({}, relationshipsToOmit),
-        publisher: overrides && overrides.hasOwnProperty('publisher') ? overrides.publisher! : 'pariatur',
-        publisherLabel: overrides && overrides.hasOwnProperty('publisherLabel') ? overrides.publisherLabel! : 'ut',
-        relatedPerInst: overrides && overrides.hasOwnProperty('relatedPerInst') ? overrides.relatedPerInst! : 'ut',
-        relatedPerInstLabel: overrides && overrides.hasOwnProperty('relatedPerInstLabel') ? overrides.relatedPerInstLabel! : 'quis',
-        scope: overrides && overrides.hasOwnProperty('scope') ? overrides.scope! : 'officia',
-        shelfmark: overrides && overrides.hasOwnProperty('shelfmark') ? overrides.shelfmark! : 'nulla',
+        availability: overrides && overrides.hasOwnProperty('availability') ? overrides.availability! : 'consequatur',
+        geographicalKeyword: overrides && overrides.hasOwnProperty('geographicalKeyword') ? overrides.geographicalKeyword! : 'voluptatem',
+        geographicalKeywordLabel: overrides && overrides.hasOwnProperty('geographicalKeywordLabel') ? overrides.geographicalKeywordLabel! : 'dolore',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'dicta',
+        issue: overrides && overrides.hasOwnProperty('issue') ? overrides.issue! : 'velit',
+        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : 'doloribus',
+        languageLabel: overrides && overrides.hasOwnProperty('languageLabel') ? overrides.languageLabel! : 'enim',
+        objectNumber: overrides && overrides.hasOwnProperty('objectNumber') ? overrides.objectNumber! : 'similique',
+        page: overrides && overrides.hasOwnProperty('page') ? overrides.page! : 'qui',
+        permanentLink: overrides && overrides.hasOwnProperty('permanentLink') ? overrides.permanentLink! : 'nobis',
+        populatedPublisher: overrides && overrides.hasOwnProperty('populatedPublisher') ? overrides.populatedPublisher! : relationshipsToOmit.includes('PeopleZoomLevel3DetailType') ? {} as PeopleZoomLevel3DetailType : aPeopleZoomLevel3DetailType({}, relationshipsToOmit),
+        publisher: overrides && overrides.hasOwnProperty('publisher') ? overrides.publisher! : 'iusto',
+        publisherLabel: overrides && overrides.hasOwnProperty('publisherLabel') ? overrides.publisherLabel! : 'dolorem',
+        relatedPerInst: overrides && overrides.hasOwnProperty('relatedPerInst') ? overrides.relatedPerInst! : 'nam',
+        relatedPerInstLabel: overrides && overrides.hasOwnProperty('relatedPerInstLabel') ? overrides.relatedPerInstLabel! : 'ipsam',
+        shelfmark: overrides && overrides.hasOwnProperty('shelfmark') ? overrides.shelfmark! : 'sint',
+        sourceTitle: overrides && overrides.hasOwnProperty('sourceTitle') ? overrides.sourceTitle! : 'nisi',
+        sourceTitleLabel: overrides && overrides.hasOwnProperty('sourceTitleLabel') ? overrides.sourceTitleLabel! : 'minus',
         subject: overrides && overrides.hasOwnProperty('subject') ? overrides.subject! : 'deserunt',
-        subjectLabel: overrides && overrides.hasOwnProperty('subjectLabel') ? overrides.subjectLabel! : 'mollitia',
-        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'ratione',
-        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : PublicationsZoomLevel5Types.Article,
-        typeOfPublication: overrides && overrides.hasOwnProperty('typeOfPublication') ? overrides.typeOfPublication! : 'doloremque',
-        typeOfPublicationLabel: overrides && overrides.hasOwnProperty('typeOfPublicationLabel') ? overrides.typeOfPublicationLabel! : 'quia',
-        yearOfPublication: overrides && overrides.hasOwnProperty('yearOfPublication') ? overrides.yearOfPublication! : 'eos',
-    };
-};
-
-export const aPublicationsBookZoomLevel5DetailType = (overrides?: Partial<PublicationsBookZoomLevel5DetailType>, _relationshipsToOmit: Array<string> = []): PublicationsBookZoomLevel5DetailType => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'PublicationsBookZoomLevel5DetailType']);
-    return {
-        annotation: overrides && overrides.hasOwnProperty('annotation') ? overrides.annotation! : 'laboriosam',
-        authors: overrides && overrides.hasOwnProperty('authors') ? overrides.authors! : [relationshipsToOmit.includes('PublicationAuthorType') ? {} as PublicationAuthorType : aPublicationAuthorType({}, relationshipsToOmit)],
-        availability: overrides && overrides.hasOwnProperty('availability') ? overrides.availability! : 'in',
-        codeOfArchive: overrides && overrides.hasOwnProperty('codeOfArchive') ? overrides.codeOfArchive! : 'aut',
-        codeOfArchiveLabel: overrides && overrides.hasOwnProperty('codeOfArchiveLabel') ? overrides.codeOfArchiveLabel! : 'omnis',
-        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'nemo',
-        edition: overrides && overrides.hasOwnProperty('edition') ? overrides.edition! : 'ducimus',
-        geographicalKeyword: overrides && overrides.hasOwnProperty('geographicalKeyword') ? overrides.geographicalKeyword! : 'quam',
-        geographicalKeywordLabel: overrides && overrides.hasOwnProperty('geographicalKeywordLabel') ? overrides.geographicalKeywordLabel! : 'eius',
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'et',
-        illustration: overrides && overrides.hasOwnProperty('illustration') ? overrides.illustration! : 'non',
-        isbn: overrides && overrides.hasOwnProperty('isbn') ? overrides.isbn! : 'quis',
-        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : 'quis',
-        languageLabel: overrides && overrides.hasOwnProperty('languageLabel') ? overrides.languageLabel! : 'est',
-        number: overrides && overrides.hasOwnProperty('number') ? overrides.number! : 'ipsam',
-        numberOfPages: overrides && overrides.hasOwnProperty('numberOfPages') ? overrides.numberOfPages! : 'neque',
-        objectNumber: overrides && overrides.hasOwnProperty('objectNumber') ? overrides.objectNumber! : 'totam',
-        permanentLink: overrides && overrides.hasOwnProperty('permanentLink') ? overrides.permanentLink! : 'aut',
-        placeOfPublication: overrides && overrides.hasOwnProperty('placeOfPublication') ? overrides.placeOfPublication! : 'laborum',
-        placeOfPublicationLabel: overrides && overrides.hasOwnProperty('placeOfPublicationLabel') ? overrides.placeOfPublicationLabel! : 'rerum',
-        populatedPublisher: overrides && overrides.hasOwnProperty('populatedPublisher') ? overrides.populatedPublisher! : relationshipsToOmit.includes('PoepleZoomLevel5DetailType') ? {} as PoepleZoomLevel5DetailType : aPoepleZoomLevel5DetailType({}, relationshipsToOmit),
-        publisher: overrides && overrides.hasOwnProperty('publisher') ? overrides.publisher! : 'commodi',
-        publisherLabel: overrides && overrides.hasOwnProperty('publisherLabel') ? overrides.publisherLabel! : 'ad',
-        relatedPerInst: overrides && overrides.hasOwnProperty('relatedPerInst') ? overrides.relatedPerInst! : 'natus',
-        relatedPerInstLabel: overrides && overrides.hasOwnProperty('relatedPerInstLabel') ? overrides.relatedPerInstLabel! : 'recusandae',
-        seriesLabel: overrides && overrides.hasOwnProperty('seriesLabel') ? overrides.seriesLabel! : 'rerum',
-        shelfmark: overrides && overrides.hasOwnProperty('shelfmark') ? overrides.shelfmark! : 'ut',
-        subject: overrides && overrides.hasOwnProperty('subject') ? overrides.subject! : 'rerum',
-        subjectLabel: overrides && overrides.hasOwnProperty('subjectLabel') ? overrides.subjectLabel! : 'vero',
-        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'eos',
-        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : PublicationsZoomLevel5Types.Article,
-        typeOfPublication: overrides && overrides.hasOwnProperty('typeOfPublication') ? overrides.typeOfPublication! : 'rerum',
-        typeOfPublicationLabel: overrides && overrides.hasOwnProperty('typeOfPublicationLabel') ? overrides.typeOfPublicationLabel! : 'aut',
-        yearOfPublication: overrides && overrides.hasOwnProperty('yearOfPublication') ? overrides.yearOfPublication! : 'enim',
-    };
-};
-
-export const aPublicationsSerialZoomLevel5DetailType = (overrides?: Partial<PublicationsSerialZoomLevel5DetailType>, _relationshipsToOmit: Array<string> = []): PublicationsSerialZoomLevel5DetailType => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'PublicationsSerialZoomLevel5DetailType']);
-    return {
-        availability: overrides && overrides.hasOwnProperty('availability') ? overrides.availability! : 'error',
-        continuedAs: overrides && overrides.hasOwnProperty('continuedAs') ? overrides.continuedAs! : 'natus',
-        continuedFrom: overrides && overrides.hasOwnProperty('continuedFrom') ? overrides.continuedFrom! : 'vel',
-        holding: overrides && overrides.hasOwnProperty('holding') ? overrides.holding! : 'aliquam',
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'perspiciatis',
-        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : 'placeat',
-        languageLabel: overrides && overrides.hasOwnProperty('languageLabel') ? overrides.languageLabel! : 'omnis',
-        permanentLink: overrides && overrides.hasOwnProperty('permanentLink') ? overrides.permanentLink! : 'in',
-        placeOfPublication: overrides && overrides.hasOwnProperty('placeOfPublication') ? overrides.placeOfPublication! : 'ducimus',
-        placeOfPublicationLabel: overrides && overrides.hasOwnProperty('placeOfPublicationLabel') ? overrides.placeOfPublicationLabel! : 'quod',
-        populatedPublisher: overrides && overrides.hasOwnProperty('populatedPublisher') ? overrides.populatedPublisher! : relationshipsToOmit.includes('PoepleZoomLevel5DetailType') ? {} as PoepleZoomLevel5DetailType : aPoepleZoomLevel5DetailType({}, relationshipsToOmit),
-        publisher: overrides && overrides.hasOwnProperty('publisher') ? overrides.publisher! : 'earum',
-        publisherLabel: overrides && overrides.hasOwnProperty('publisherLabel') ? overrides.publisherLabel! : 'pariatur',
-        remarks: overrides && overrides.hasOwnProperty('remarks') ? overrides.remarks! : 'eius',
-        shelfmark: overrides && overrides.hasOwnProperty('shelfmark') ? overrides.shelfmark! : 'sed',
-        subject: overrides && overrides.hasOwnProperty('subject') ? overrides.subject! : 'quasi',
-        subjectLabel: overrides && overrides.hasOwnProperty('subjectLabel') ? overrides.subjectLabel! : 'veniam',
+        subjectLabel: overrides && overrides.hasOwnProperty('subjectLabel') ? overrides.subjectLabel! : 'quia',
+        thumbnail: overrides && overrides.hasOwnProperty('thumbnail') ? overrides.thumbnail! : 'soluta',
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'non',
-        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : PublicationsZoomLevel5Types.Article,
-        typeOfPublication: overrides && overrides.hasOwnProperty('typeOfPublication') ? overrides.typeOfPublication! : 'et',
-        typeOfPublicationLabel: overrides && overrides.hasOwnProperty('typeOfPublicationLabel') ? overrides.typeOfPublicationLabel! : 'voluptate',
-        yearOfPublication: overrides && overrides.hasOwnProperty('yearOfPublication') ? overrides.yearOfPublication! : 'aliquid',
+        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : PublicationsZoomLevel3Types.Article,
+        typeOfPublication: overrides && overrides.hasOwnProperty('typeOfPublication') ? overrides.typeOfPublication! : 'consectetur',
+        typeOfPublicationLabel: overrides && overrides.hasOwnProperty('typeOfPublicationLabel') ? overrides.typeOfPublicationLabel! : 'ducimus',
+        volume: overrides && overrides.hasOwnProperty('volume') ? overrides.volume! : 'velit',
+        yearOfPublication: overrides && overrides.hasOwnProperty('yearOfPublication') ? overrides.yearOfPublication! : 'cumque',
+    };
+};
+
+export const aPublicationsAudioVisualZoomLevel3DetailType = (overrides?: Partial<PublicationsAudioVisualZoomLevel3DetailType>, _relationshipsToOmit: Array<string> = []): PublicationsAudioVisualZoomLevel3DetailType => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'PublicationsAudioVisualZoomLevel3DetailType']);
+    return {
+        abstract: overrides && overrides.hasOwnProperty('abstract') ? overrides.abstract! : 'eveniet',
+        annotation: overrides && overrides.hasOwnProperty('annotation') ? overrides.annotation! : 'voluptate',
+        authors: overrides && overrides.hasOwnProperty('authors') ? overrides.authors! : [relationshipsToOmit.includes('PublicationAuthorType') ? {} as PublicationAuthorType : aPublicationAuthorType({}, relationshipsToOmit)],
+        availability: overrides && overrides.hasOwnProperty('availability') ? overrides.availability! : 'quidem',
+        geographicalKeyword: overrides && overrides.hasOwnProperty('geographicalKeyword') ? overrides.geographicalKeyword! : 'voluptatem',
+        geographicalKeywordLabel: overrides && overrides.hasOwnProperty('geographicalKeywordLabel') ? overrides.geographicalKeywordLabel! : 'cumque',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'voluptas',
+        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : 'est',
+        languageLabel: overrides && overrides.hasOwnProperty('languageLabel') ? overrides.languageLabel! : 'voluptas',
+        medium: overrides && overrides.hasOwnProperty('medium') ? overrides.medium! : 'voluptas',
+        objectNumber: overrides && overrides.hasOwnProperty('objectNumber') ? overrides.objectNumber! : 'aperiam',
+        permanentLink: overrides && overrides.hasOwnProperty('permanentLink') ? overrides.permanentLink! : 'eos',
+        placeOfPublication: overrides && overrides.hasOwnProperty('placeOfPublication') ? overrides.placeOfPublication! : 'et',
+        placeOfPublicationLabel: overrides && overrides.hasOwnProperty('placeOfPublicationLabel') ? overrides.placeOfPublicationLabel! : 'soluta',
+        populatedPublisher: overrides && overrides.hasOwnProperty('populatedPublisher') ? overrides.populatedPublisher! : relationshipsToOmit.includes('PeopleZoomLevel3DetailType') ? {} as PeopleZoomLevel3DetailType : aPeopleZoomLevel3DetailType({}, relationshipsToOmit),
+        publisher: overrides && overrides.hasOwnProperty('publisher') ? overrides.publisher! : 'ullam',
+        publisherLabel: overrides && overrides.hasOwnProperty('publisherLabel') ? overrides.publisherLabel! : 'veritatis',
+        relatedPerInst: overrides && overrides.hasOwnProperty('relatedPerInst') ? overrides.relatedPerInst! : 'nesciunt',
+        relatedPerInstLabel: overrides && overrides.hasOwnProperty('relatedPerInstLabel') ? overrides.relatedPerInstLabel! : 'culpa',
+        scope: overrides && overrides.hasOwnProperty('scope') ? overrides.scope! : 'qui',
+        shelfmark: overrides && overrides.hasOwnProperty('shelfmark') ? overrides.shelfmark! : 'cum',
+        subject: overrides && overrides.hasOwnProperty('subject') ? overrides.subject! : 'eius',
+        subjectLabel: overrides && overrides.hasOwnProperty('subjectLabel') ? overrides.subjectLabel! : 'rerum',
+        thumbnail: overrides && overrides.hasOwnProperty('thumbnail') ? overrides.thumbnail! : 'voluptas',
+        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'beatae',
+        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : PublicationsZoomLevel3Types.Article,
+        typeOfPublication: overrides && overrides.hasOwnProperty('typeOfPublication') ? overrides.typeOfPublication! : 'consequatur',
+        typeOfPublicationLabel: overrides && overrides.hasOwnProperty('typeOfPublicationLabel') ? overrides.typeOfPublicationLabel! : 'molestiae',
+        yearOfPublication: overrides && overrides.hasOwnProperty('yearOfPublication') ? overrides.yearOfPublication! : 'expedita',
+    };
+};
+
+export const aPublicationsBookZoomLevel3DetailType = (overrides?: Partial<PublicationsBookZoomLevel3DetailType>, _relationshipsToOmit: Array<string> = []): PublicationsBookZoomLevel3DetailType => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'PublicationsBookZoomLevel3DetailType']);
+    return {
+        annotation: overrides && overrides.hasOwnProperty('annotation') ? overrides.annotation! : 'dolor',
+        authors: overrides && overrides.hasOwnProperty('authors') ? overrides.authors! : [relationshipsToOmit.includes('PublicationAuthorType') ? {} as PublicationAuthorType : aPublicationAuthorType({}, relationshipsToOmit)],
+        availability: overrides && overrides.hasOwnProperty('availability') ? overrides.availability! : 'delectus',
+        codeOfArchive: overrides && overrides.hasOwnProperty('codeOfArchive') ? overrides.codeOfArchive! : 'ex',
+        codeOfArchiveLabel: overrides && overrides.hasOwnProperty('codeOfArchiveLabel') ? overrides.codeOfArchiveLabel! : 'porro',
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'quaerat',
+        edition: overrides && overrides.hasOwnProperty('edition') ? overrides.edition! : 'earum',
+        geographicalKeyword: overrides && overrides.hasOwnProperty('geographicalKeyword') ? overrides.geographicalKeyword! : 'natus',
+        geographicalKeywordLabel: overrides && overrides.hasOwnProperty('geographicalKeywordLabel') ? overrides.geographicalKeywordLabel! : 'placeat',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'fugit',
+        illustration: overrides && overrides.hasOwnProperty('illustration') ? overrides.illustration! : 'in',
+        isbn: overrides && overrides.hasOwnProperty('isbn') ? overrides.isbn! : 'earum',
+        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : 'saepe',
+        languageLabel: overrides && overrides.hasOwnProperty('languageLabel') ? overrides.languageLabel! : 'qui',
+        number: overrides && overrides.hasOwnProperty('number') ? overrides.number! : 'eos',
+        numberOfPages: overrides && overrides.hasOwnProperty('numberOfPages') ? overrides.numberOfPages! : 'nihil',
+        objectNumber: overrides && overrides.hasOwnProperty('objectNumber') ? overrides.objectNumber! : 'maxime',
+        permanentLink: overrides && overrides.hasOwnProperty('permanentLink') ? overrides.permanentLink! : 'dicta',
+        placeOfPublication: overrides && overrides.hasOwnProperty('placeOfPublication') ? overrides.placeOfPublication! : 'non',
+        placeOfPublicationLabel: overrides && overrides.hasOwnProperty('placeOfPublicationLabel') ? overrides.placeOfPublicationLabel! : 'et',
+        populatedPublisher: overrides && overrides.hasOwnProperty('populatedPublisher') ? overrides.populatedPublisher! : relationshipsToOmit.includes('PeopleZoomLevel3DetailType') ? {} as PeopleZoomLevel3DetailType : aPeopleZoomLevel3DetailType({}, relationshipsToOmit),
+        publisher: overrides && overrides.hasOwnProperty('publisher') ? overrides.publisher! : 'perferendis',
+        publisherLabel: overrides && overrides.hasOwnProperty('publisherLabel') ? overrides.publisherLabel! : 'eius',
+        relatedPerInst: overrides && overrides.hasOwnProperty('relatedPerInst') ? overrides.relatedPerInst! : 'nesciunt',
+        relatedPerInstLabel: overrides && overrides.hasOwnProperty('relatedPerInstLabel') ? overrides.relatedPerInstLabel! : 'architecto',
+        seriesLabel: overrides && overrides.hasOwnProperty('seriesLabel') ? overrides.seriesLabel! : 'asperiores',
+        shelfmark: overrides && overrides.hasOwnProperty('shelfmark') ? overrides.shelfmark! : 'mollitia',
+        subject: overrides && overrides.hasOwnProperty('subject') ? overrides.subject! : 'reprehenderit',
+        subjectLabel: overrides && overrides.hasOwnProperty('subjectLabel') ? overrides.subjectLabel! : 'temporibus',
+        thumbnail: overrides && overrides.hasOwnProperty('thumbnail') ? overrides.thumbnail! : 'occaecati',
+        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'deleniti',
+        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : PublicationsZoomLevel3Types.Article,
+        typeOfPublication: overrides && overrides.hasOwnProperty('typeOfPublication') ? overrides.typeOfPublication! : 'id',
+        typeOfPublicationLabel: overrides && overrides.hasOwnProperty('typeOfPublicationLabel') ? overrides.typeOfPublicationLabel! : 'natus',
+        yearOfPublication: overrides && overrides.hasOwnProperty('yearOfPublication') ? overrides.yearOfPublication! : 'quo',
+    };
+};
+
+export const aPublicationsSerialZoomLevel3DetailType = (overrides?: Partial<PublicationsSerialZoomLevel3DetailType>, _relationshipsToOmit: Array<string> = []): PublicationsSerialZoomLevel3DetailType => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'PublicationsSerialZoomLevel3DetailType']);
+    return {
+        availability: overrides && overrides.hasOwnProperty('availability') ? overrides.availability! : 'nihil',
+        continuedAs: overrides && overrides.hasOwnProperty('continuedAs') ? overrides.continuedAs! : 'voluptatem',
+        continuedFrom: overrides && overrides.hasOwnProperty('continuedFrom') ? overrides.continuedFrom! : 'recusandae',
+        holding: overrides && overrides.hasOwnProperty('holding') ? overrides.holding! : 'doloremque',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'eaque',
+        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : 'nulla',
+        languageLabel: overrides && overrides.hasOwnProperty('languageLabel') ? overrides.languageLabel! : 'similique',
+        permanentLink: overrides && overrides.hasOwnProperty('permanentLink') ? overrides.permanentLink! : 'eaque',
+        placeOfPublication: overrides && overrides.hasOwnProperty('placeOfPublication') ? overrides.placeOfPublication! : 'corrupti',
+        placeOfPublicationLabel: overrides && overrides.hasOwnProperty('placeOfPublicationLabel') ? overrides.placeOfPublicationLabel! : 'ut',
+        populatedPublisher: overrides && overrides.hasOwnProperty('populatedPublisher') ? overrides.populatedPublisher! : relationshipsToOmit.includes('PeopleZoomLevel3DetailType') ? {} as PeopleZoomLevel3DetailType : aPeopleZoomLevel3DetailType({}, relationshipsToOmit),
+        publisher: overrides && overrides.hasOwnProperty('publisher') ? overrides.publisher! : 'quas',
+        publisherLabel: overrides && overrides.hasOwnProperty('publisherLabel') ? overrides.publisherLabel! : 'sed',
+        remarks: overrides && overrides.hasOwnProperty('remarks') ? overrides.remarks! : 'ullam',
+        shelfmark: overrides && overrides.hasOwnProperty('shelfmark') ? overrides.shelfmark! : 'et',
+        subject: overrides && overrides.hasOwnProperty('subject') ? overrides.subject! : 'in',
+        subjectLabel: overrides && overrides.hasOwnProperty('subjectLabel') ? overrides.subjectLabel! : 'laborum',
+        thumbnail: overrides && overrides.hasOwnProperty('thumbnail') ? overrides.thumbnail! : 'id',
+        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'aliquid',
+        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : PublicationsZoomLevel3Types.Article,
+        typeOfPublication: overrides && overrides.hasOwnProperty('typeOfPublication') ? overrides.typeOfPublication! : 'officiis',
+        typeOfPublicationLabel: overrides && overrides.hasOwnProperty('typeOfPublicationLabel') ? overrides.typeOfPublicationLabel! : 'quisquam',
+        yearOfPublication: overrides && overrides.hasOwnProperty('yearOfPublication') ? overrides.yearOfPublication! : 'in',
     };
 };
 
 export const aQuery = (overrides?: Partial<Query>, _relationshipsToOmit: Array<string> = []): Query => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'Query']);
     return {
-        allRelations: overrides && overrides.hasOwnProperty('allRelations') ? overrides.allRelations! : [relationshipsToOmit.includes('ZoomLevel5RelatedRecordType') ? {} as ZoomLevel5RelatedRecordType : aZoomLevel5RelatedRecordType({}, relationshipsToOmit)],
-        archiveOther: overrides && overrides.hasOwnProperty('archiveOther') ? overrides.archiveOther! : relationshipsToOmit.includes('ArchivesFondsZoomLevel5DetailType') ? {} as ArchivesFondsZoomLevel5DetailType : anArchivesFondsZoomLevel5DetailType({}, relationshipsToOmit),
+        archiveOther: overrides && overrides.hasOwnProperty('archiveOther') ? overrides.archiveOther! : relationshipsToOmit.includes('ArchivesFondsZoomLevel3DetailType') ? {} as ArchivesFondsZoomLevel3DetailType : anArchivesFondsZoomLevel3DetailType({}, relationshipsToOmit),
+        archivesDetailZoomLevel3: overrides && overrides.hasOwnProperty('archivesDetailZoomLevel3') ? overrides.archivesDetailZoomLevel3! : relationshipsToOmit.includes('ArchiveZoomLevel3DetailType') ? {} as ArchiveZoomLevel3DetailType : anArchiveZoomLevel3DetailType({}, relationshipsToOmit),
         author: overrides && overrides.hasOwnProperty('author') ? overrides.author! : relationshipsToOmit.includes('AuthorEntityResponse') ? {} as AuthorEntityResponse : anAuthorEntityResponse({}, relationshipsToOmit),
         authors: overrides && overrides.hasOwnProperty('authors') ? overrides.authors! : relationshipsToOmit.includes('AuthorEntityResponseCollection') ? {} as AuthorEntityResponseCollection : anAuthorEntityResponseCollection({}, relationshipsToOmit),
         homepage: overrides && overrides.hasOwnProperty('homepage') ? overrides.homepage! : relationshipsToOmit.includes('HomepageEntityResponse') ? {} as HomepageEntityResponse : aHomepageEntityResponse({}, relationshipsToOmit),
@@ -1082,12 +1116,13 @@ export const aQuery = (overrides?: Partial<Query>, _relationshipsToOmit: Array<s
         locations: overrides && overrides.hasOwnProperty('locations') ? overrides.locations! : relationshipsToOmit.includes('LocationRelationResponseCollection') ? {} as LocationRelationResponseCollection : aLocationRelationResponseCollection({}, relationshipsToOmit),
         menupage: overrides && overrides.hasOwnProperty('menupage') ? overrides.menupage! : relationshipsToOmit.includes('MenupageEntityResponse') ? {} as MenupageEntityResponse : aMenupageEntityResponse({}, relationshipsToOmit),
         menupages: overrides && overrides.hasOwnProperty('menupages') ? overrides.menupages! : relationshipsToOmit.includes('MenupageEntityResponseCollection') ? {} as MenupageEntityResponseCollection : aMenupageEntityResponseCollection({}, relationshipsToOmit),
-        object: overrides && overrides.hasOwnProperty('object') ? overrides.object! : relationshipsToOmit.includes('ObjectsZoomLevel5DetailType') ? {} as ObjectsZoomLevel5DetailType : anObjectsZoomLevel5DetailType({}, relationshipsToOmit),
-        publicationArticle: overrides && overrides.hasOwnProperty('publicationArticle') ? overrides.publicationArticle! : relationshipsToOmit.includes('PublicationsArticleZoomLevel5DetailType') ? {} as PublicationsArticleZoomLevel5DetailType : aPublicationsArticleZoomLevel5DetailType({}, relationshipsToOmit),
-        publicationAudioVisual: overrides && overrides.hasOwnProperty('publicationAudioVisual') ? overrides.publicationAudioVisual! : relationshipsToOmit.includes('PublicationsAudioVisualZoomLevel5DetailType') ? {} as PublicationsAudioVisualZoomLevel5DetailType : aPublicationsAudioVisualZoomLevel5DetailType({}, relationshipsToOmit),
-        publicationBook: overrides && overrides.hasOwnProperty('publicationBook') ? overrides.publicationBook! : relationshipsToOmit.includes('PublicationsBookZoomLevel5DetailType') ? {} as PublicationsBookZoomLevel5DetailType : aPublicationsBookZoomLevel5DetailType({}, relationshipsToOmit),
-        publicationSerial: overrides && overrides.hasOwnProperty('publicationSerial') ? overrides.publicationSerial! : relationshipsToOmit.includes('PublicationsSerialZoomLevel5DetailType') ? {} as PublicationsSerialZoomLevel5DetailType : aPublicationsSerialZoomLevel5DetailType({}, relationshipsToOmit),
-        relations: overrides && overrides.hasOwnProperty('relations') ? overrides.relations! : [relationshipsToOmit.includes('ZoomLevel5RelationsType') ? {} as ZoomLevel5RelationsType : aZoomLevel5RelationsType({}, relationshipsToOmit)],
+        objectDetailZoomLevel3: overrides && overrides.hasOwnProperty('objectDetailZoomLevel3') ? overrides.objectDetailZoomLevel3! : relationshipsToOmit.includes('ObjectsZoomLevel3DetailType') ? {} as ObjectsZoomLevel3DetailType : anObjectsZoomLevel3DetailType({}, relationshipsToOmit),
+        publicationArticle: overrides && overrides.hasOwnProperty('publicationArticle') ? overrides.publicationArticle! : relationshipsToOmit.includes('PublicationsArticleZoomLevel3DetailType') ? {} as PublicationsArticleZoomLevel3DetailType : aPublicationsArticleZoomLevel3DetailType({}, relationshipsToOmit),
+        publicationAudioVisual: overrides && overrides.hasOwnProperty('publicationAudioVisual') ? overrides.publicationAudioVisual! : relationshipsToOmit.includes('PublicationsAudioVisualZoomLevel3DetailType') ? {} as PublicationsAudioVisualZoomLevel3DetailType : aPublicationsAudioVisualZoomLevel3DetailType({}, relationshipsToOmit),
+        publicationBook: overrides && overrides.hasOwnProperty('publicationBook') ? overrides.publicationBook! : relationshipsToOmit.includes('PublicationsBookZoomLevel3DetailType') ? {} as PublicationsBookZoomLevel3DetailType : aPublicationsBookZoomLevel3DetailType({}, relationshipsToOmit),
+        publicationDetailZoomLevel3: overrides && overrides.hasOwnProperty('publicationDetailZoomLevel3') ? overrides.publicationDetailZoomLevel3! : relationshipsToOmit.includes('PublicationZoomLevel3DetailType') ? {} as PublicationZoomLevel3DetailType : aPublicationZoomLevel3DetailType({}, relationshipsToOmit),
+        publicationSerial: overrides && overrides.hasOwnProperty('publicationSerial') ? overrides.publicationSerial! : relationshipsToOmit.includes('PublicationsSerialZoomLevel3DetailType') ? {} as PublicationsSerialZoomLevel3DetailType : aPublicationsSerialZoomLevel3DetailType({}, relationshipsToOmit),
+        relations: overrides && overrides.hasOwnProperty('relations') ? overrides.relations! : [relationshipsToOmit.includes('ZoomLevel3RelationsType') ? {} as ZoomLevel3RelationsType : aZoomLevel3RelationsType({}, relationshipsToOmit)],
         stories: overrides && overrides.hasOwnProperty('stories') ? overrides.stories! : relationshipsToOmit.includes('StoryEntityResponseCollection') ? {} as StoryEntityResponseCollection : aStoryEntityResponseCollection({}, relationshipsToOmit),
         storiesWithoutRelations: overrides && overrides.hasOwnProperty('storiesWithoutRelations') ? overrides.storiesWithoutRelations! : relationshipsToOmit.includes('StoryWithoutRelationsEntityResponseCollection') ? {} as StoryWithoutRelationsEntityResponseCollection : aStoryWithoutRelationsEntityResponseCollection({}, relationshipsToOmit),
         story: overrides && overrides.hasOwnProperty('story') ? overrides.story! : relationshipsToOmit.includes('StoryEntityResponse') ? {} as StoryEntityResponse : aStoryEntityResponse({}, relationshipsToOmit),
@@ -1102,28 +1137,18 @@ export const aQuery = (overrides?: Partial<Query>, _relationshipsToOmit: Array<s
         usersPermissionsUsers: overrides && overrides.hasOwnProperty('usersPermissionsUsers') ? overrides.usersPermissionsUsers! : relationshipsToOmit.includes('UsersPermissionsUserEntityResponseCollection') ? {} as UsersPermissionsUserEntityResponseCollection : aUsersPermissionsUserEntityResponseCollection({}, relationshipsToOmit),
         zoomLevel1: overrides && overrides.hasOwnProperty('zoomLevel1') ? overrides.zoomLevel1! : [relationshipsToOmit.includes('ZoomLevel1Type') ? {} as ZoomLevel1Type : aZoomLevel1Type({}, relationshipsToOmit)],
         zoomLevel2: overrides && overrides.hasOwnProperty('zoomLevel2') ? overrides.zoomLevel2! : relationshipsToOmit.includes('ZoomLevel2ParentType') ? {} as ZoomLevel2ParentType : aZoomLevel2ParentType({}, relationshipsToOmit),
-        zoomLevel3: overrides && overrides.hasOwnProperty('zoomLevel3') ? overrides.zoomLevel3! : [relationshipsToOmit.includes('ZoomLevel3Type') ? {} as ZoomLevel3Type : aZoomLevel3Type({}, relationshipsToOmit)],
-        zoomLevel5Archive: overrides && overrides.hasOwnProperty('zoomLevel5Archive') ? overrides.zoomLevel5Archive! : relationshipsToOmit.includes('ArchivesFondsZoomLevel5DetailType') ? {} as ArchivesFondsZoomLevel5DetailType : anArchivesFondsZoomLevel5DetailType({}, relationshipsToOmit),
-        zoomLevel5ArchivesFonds: overrides && overrides.hasOwnProperty('zoomLevel5ArchivesFonds') ? overrides.zoomLevel5ArchivesFonds! : relationshipsToOmit.includes('ArchivesFondsZoomLevel5DetailType') ? {} as ArchivesFondsZoomLevel5DetailType : anArchivesFondsZoomLevel5DetailType({}, relationshipsToOmit),
-        zoomLevel5ArchivesOther: overrides && overrides.hasOwnProperty('zoomLevel5ArchivesOther') ? overrides.zoomLevel5ArchivesOther! : relationshipsToOmit.includes('ArchivesOtherZoomLevel5DetailType') ? {} as ArchivesOtherZoomLevel5DetailType : anArchivesOtherZoomLevel5DetailType({}, relationshipsToOmit),
-        zoomLevel5Object: overrides && overrides.hasOwnProperty('zoomLevel5Object') ? overrides.zoomLevel5Object! : relationshipsToOmit.includes('ObjectsZoomLevel5DetailType') ? {} as ObjectsZoomLevel5DetailType : anObjectsZoomLevel5DetailType({}, relationshipsToOmit),
-        zoomLevel5Person: overrides && overrides.hasOwnProperty('zoomLevel5Person') ? overrides.zoomLevel5Person! : relationshipsToOmit.includes('PoepleZoomLevel5DetailType') ? {} as PoepleZoomLevel5DetailType : aPoepleZoomLevel5DetailType({}, relationshipsToOmit),
-        zoomLevel5Publication: overrides && overrides.hasOwnProperty('zoomLevel5Publication') ? overrides.zoomLevel5Publication! : relationshipsToOmit.includes('PublicationsArticleZoomLevel5DetailType') ? {} as PublicationsArticleZoomLevel5DetailType : aPublicationsArticleZoomLevel5DetailType({}, relationshipsToOmit),
-        zoomLevel5PublicationsArticle: overrides && overrides.hasOwnProperty('zoomLevel5PublicationsArticle') ? overrides.zoomLevel5PublicationsArticle! : relationshipsToOmit.includes('PublicationsArticleZoomLevel5DetailType') ? {} as PublicationsArticleZoomLevel5DetailType : aPublicationsArticleZoomLevel5DetailType({}, relationshipsToOmit),
-        zoomLevel5PublicationsAudiovisual: overrides && overrides.hasOwnProperty('zoomLevel5PublicationsAudiovisual') ? overrides.zoomLevel5PublicationsAudiovisual! : relationshipsToOmit.includes('PublicationsAudioVisualZoomLevel5DetailType') ? {} as PublicationsAudioVisualZoomLevel5DetailType : aPublicationsAudioVisualZoomLevel5DetailType({}, relationshipsToOmit),
-        zoomLevel5PublicationsBook: overrides && overrides.hasOwnProperty('zoomLevel5PublicationsBook') ? overrides.zoomLevel5PublicationsBook! : relationshipsToOmit.includes('PublicationsBookZoomLevel5DetailType') ? {} as PublicationsBookZoomLevel5DetailType : aPublicationsBookZoomLevel5DetailType({}, relationshipsToOmit),
-        zoomLevel5PublicationsSerial: overrides && overrides.hasOwnProperty('zoomLevel5PublicationsSerial') ? overrides.zoomLevel5PublicationsSerial! : relationshipsToOmit.includes('PublicationsSerialZoomLevel5DetailType') ? {} as PublicationsSerialZoomLevel5DetailType : aPublicationsSerialZoomLevel5DetailType({}, relationshipsToOmit),
-    };
-};
-
-export const aRelatedRecordType = (overrides?: Partial<RelatedRecordType>, _relationshipsToOmit: Array<string> = []): RelatedRecordType => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'RelatedRecordType']);
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'nisi',
-        label: overrides && overrides.hasOwnProperty('label') ? overrides.label! : 'sint',
-        relations: overrides && overrides.hasOwnProperty('relations') ? overrides.relations! : [relationshipsToOmit.includes('ZoomLevel5RelationsType') ? {} as ZoomLevel5RelationsType : aZoomLevel5RelationsType({}, relationshipsToOmit)],
-        slug: overrides && overrides.hasOwnProperty('slug') ? overrides.slug! : 'veniam',
-        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : EntityNames.Archives,
+        zoomLevel3Archive: overrides && overrides.hasOwnProperty('zoomLevel3Archive') ? overrides.zoomLevel3Archive! : relationshipsToOmit.includes('ArchiveZoomLevel3DetailType') ? {} as ArchiveZoomLevel3DetailType : anArchiveZoomLevel3DetailType({}, relationshipsToOmit),
+        zoomLevel3Object: overrides && overrides.hasOwnProperty('zoomLevel3Object') ? overrides.zoomLevel3Object! : relationshipsToOmit.includes('ObjectsZoomLevel3DetailType') ? {} as ObjectsZoomLevel3DetailType : anObjectsZoomLevel3DetailType({}, relationshipsToOmit),
+        zoomLevel3Person: overrides && overrides.hasOwnProperty('zoomLevel3Person') ? overrides.zoomLevel3Person! : relationshipsToOmit.includes('PeopleZoomLevel3DetailType') ? {} as PeopleZoomLevel3DetailType : aPeopleZoomLevel3DetailType({}, relationshipsToOmit),
+        zoomLevel3Publication: overrides && overrides.hasOwnProperty('zoomLevel3Publication') ? overrides.zoomLevel3Publication! : relationshipsToOmit.includes('PublicationZoomLevel3DetailType') ? {} as PublicationZoomLevel3DetailType : aPublicationZoomLevel3DetailType({}, relationshipsToOmit),
+        zoomLevel5Archive: overrides && overrides.hasOwnProperty('zoomLevel5Archive') ? overrides.zoomLevel5Archive! : relationshipsToOmit.includes('ArchivesFondsZoomLevel3DetailType') ? {} as ArchivesFondsZoomLevel3DetailType : anArchivesFondsZoomLevel3DetailType({}, relationshipsToOmit),
+        zoomLevel5ArchivesFonds: overrides && overrides.hasOwnProperty('zoomLevel5ArchivesFonds') ? overrides.zoomLevel5ArchivesFonds! : relationshipsToOmit.includes('ArchivesFondsZoomLevel3DetailType') ? {} as ArchivesFondsZoomLevel3DetailType : anArchivesFondsZoomLevel3DetailType({}, relationshipsToOmit),
+        zoomLevel5ArchivesOther: overrides && overrides.hasOwnProperty('zoomLevel5ArchivesOther') ? overrides.zoomLevel5ArchivesOther! : relationshipsToOmit.includes('ArchivesOtherZoomLevel3DetailType') ? {} as ArchivesOtherZoomLevel3DetailType : anArchivesOtherZoomLevel3DetailType({}, relationshipsToOmit),
+        zoomLevel5Publication: overrides && overrides.hasOwnProperty('zoomLevel5Publication') ? overrides.zoomLevel5Publication! : relationshipsToOmit.includes('PublicationsArticleZoomLevel3DetailType') ? {} as PublicationsArticleZoomLevel3DetailType : aPublicationsArticleZoomLevel3DetailType({}, relationshipsToOmit),
+        zoomLevel5PublicationsArticle: overrides && overrides.hasOwnProperty('zoomLevel5PublicationsArticle') ? overrides.zoomLevel5PublicationsArticle! : relationshipsToOmit.includes('PublicationsArticleZoomLevel3DetailType') ? {} as PublicationsArticleZoomLevel3DetailType : aPublicationsArticleZoomLevel3DetailType({}, relationshipsToOmit),
+        zoomLevel5PublicationsAudiovisual: overrides && overrides.hasOwnProperty('zoomLevel5PublicationsAudiovisual') ? overrides.zoomLevel5PublicationsAudiovisual! : relationshipsToOmit.includes('PublicationsAudioVisualZoomLevel3DetailType') ? {} as PublicationsAudioVisualZoomLevel3DetailType : aPublicationsAudioVisualZoomLevel3DetailType({}, relationshipsToOmit),
+        zoomLevel5PublicationsBook: overrides && overrides.hasOwnProperty('zoomLevel5PublicationsBook') ? overrides.zoomLevel5PublicationsBook! : relationshipsToOmit.includes('PublicationsBookZoomLevel3DetailType') ? {} as PublicationsBookZoomLevel3DetailType : aPublicationsBookZoomLevel3DetailType({}, relationshipsToOmit),
+        zoomLevel5PublicationsSerial: overrides && overrides.hasOwnProperty('zoomLevel5PublicationsSerial') ? overrides.zoomLevel5PublicationsSerial! : relationshipsToOmit.includes('PublicationsSerialZoomLevel3DetailType') ? {} as PublicationsSerialZoomLevel3DetailType : aPublicationsSerialZoomLevel3DetailType({}, relationshipsToOmit),
     };
 };
 
@@ -1386,11 +1411,11 @@ export const aThemeRelationResponseCollection = (overrides?: Partial<ThemeRelati
 export const aTriplyRecord = (overrides?: Partial<TriplyRecord>, _relationshipsToOmit: Array<string> = []): TriplyRecord => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'TriplyRecord']);
     return {
-        archive: overrides && overrides.hasOwnProperty('archive') ? overrides.archive! : relationshipsToOmit.includes('ArchivesFondsZoomLevel5DetailType') ? {} as ArchivesFondsZoomLevel5DetailType : anArchivesFondsZoomLevel5DetailType({}, relationshipsToOmit),
+        archive: overrides && overrides.hasOwnProperty('archive') ? overrides.archive! : relationshipsToOmit.includes('ArchiveZoomLevel3DetailType') ? {} as ArchiveZoomLevel3DetailType : anArchiveZoomLevel3DetailType({}, relationshipsToOmit),
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : '1970-01-03T05:28:06.708Z',
-        object: overrides && overrides.hasOwnProperty('object') ? overrides.object! : relationshipsToOmit.includes('ObjectsZoomLevel5DetailType') ? {} as ObjectsZoomLevel5DetailType : anObjectsZoomLevel5DetailType({}, relationshipsToOmit),
-        people: overrides && overrides.hasOwnProperty('people') ? overrides.people! : relationshipsToOmit.includes('PoepleZoomLevel5DetailType') ? {} as PoepleZoomLevel5DetailType : aPoepleZoomLevel5DetailType({}, relationshipsToOmit),
-        publication: overrides && overrides.hasOwnProperty('publication') ? overrides.publication! : relationshipsToOmit.includes('PublicationsArticleZoomLevel5DetailType') ? {} as PublicationsArticleZoomLevel5DetailType : aPublicationsArticleZoomLevel5DetailType({}, relationshipsToOmit),
+        object: overrides && overrides.hasOwnProperty('object') ? overrides.object! : relationshipsToOmit.includes('ObjectsZoomLevel3DetailType') ? {} as ObjectsZoomLevel3DetailType : anObjectsZoomLevel3DetailType({}, relationshipsToOmit),
+        people: overrides && overrides.hasOwnProperty('people') ? overrides.people! : relationshipsToOmit.includes('PeopleZoomLevel3DetailType') ? {} as PeopleZoomLevel3DetailType : aPeopleZoomLevel3DetailType({}, relationshipsToOmit),
+        publication: overrides && overrides.hasOwnProperty('publication') ? overrides.publication! : relationshipsToOmit.includes('PublicationZoomLevel3DetailType') ? {} as PublicationZoomLevel3DetailType : aPublicationZoomLevel3DetailType({}, relationshipsToOmit),
         publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : '1970-01-17T03:41:53.182Z',
         recordId: overrides && overrides.hasOwnProperty('recordId') ? overrides.recordId! : 'in',
         stories: overrides && overrides.hasOwnProperty('stories') ? overrides.stories! : relationshipsToOmit.includes('StoryRelationResponseCollection') ? {} as StoryRelationResponseCollection : aStoryRelationResponseCollection({}, relationshipsToOmit),
@@ -1658,38 +1683,11 @@ export const aZoomLevel2Type = (overrides?: Partial<ZoomLevel2Type>, _relationsh
     };
 };
 
-export const aZoomLevel3Type = (overrides?: Partial<ZoomLevel3Type>, _relationshipsToOmit: Array<string> = []): ZoomLevel3Type => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'ZoomLevel3Type']);
+export const aZoomLevel3RelationsType = (overrides?: Partial<ZoomLevel3RelationsType>, _relationshipsToOmit: Array<string> = []): ZoomLevel3RelationsType => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'ZoomLevel3RelationsType']);
     return {
-        count: overrides && overrides.hasOwnProperty('count') ? overrides.count! : 8464,
-        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'asperiores',
-        total: overrides && overrides.hasOwnProperty('total') ? overrides.total! : 6476,
-        uri: overrides && overrides.hasOwnProperty('uri') ? overrides.uri! : 'qui',
-    };
-};
-
-export const aZoomLevel5RelatedRecordType = (overrides?: Partial<ZoomLevel5RelatedRecordType>, _relationshipsToOmit: Array<string> = []): ZoomLevel5RelatedRecordType => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'ZoomLevel5RelatedRecordType']);
-    return {
-        availability: overrides && overrides.hasOwnProperty('availability') ? overrides.availability! : 'voluptas',
-        birthDate: overrides && overrides.hasOwnProperty('birthDate') ? overrides.birthDate! : 'corrupti',
-        creator: overrides && overrides.hasOwnProperty('creator') ? overrides.creator! : 'consequatur',
-        creatorLabel: overrides && overrides.hasOwnProperty('creatorLabel') ? overrides.creatorLabel! : 'iste',
-        date: overrides && overrides.hasOwnProperty('date') ? overrides.date! : 'et',
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'expedita',
-        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'pariatur',
-        pidWorkURI: overrides && overrides.hasOwnProperty('pidWorkURI') ? overrides.pidWorkURI! : 'eum',
-        profession: overrides && overrides.hasOwnProperty('profession') ? overrides.profession! : 'ab',
-        professionLabel: overrides && overrides.hasOwnProperty('professionLabel') ? overrides.professionLabel! : 'voluptas',
-        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : EntityNames.Archives,
-    };
-};
-
-export const aZoomLevel5RelationsType = (overrides?: Partial<ZoomLevel5RelationsType>, _relationshipsToOmit: Array<string> = []): ZoomLevel5RelationsType => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'ZoomLevel5RelationsType']);
-    return {
-        randomRelations: overrides && overrides.hasOwnProperty('randomRelations') ? overrides.randomRelations! : [relationshipsToOmit.includes('RelatedRecordType') ? {} as RelatedRecordType : aRelatedRecordType({}, relationshipsToOmit)],
-        total: overrides && overrides.hasOwnProperty('total') ? overrides.total! : 9.57,
+        randomRelations: overrides && overrides.hasOwnProperty('randomRelations') ? overrides.randomRelations! : ['id'],
+        total: overrides && overrides.hasOwnProperty('total') ? overrides.total! : 2.42,
         type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : EntityNames.Archives,
     };
 };

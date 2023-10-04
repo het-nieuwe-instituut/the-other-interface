@@ -1,5 +1,0 @@
-query ArchivesRelations($id: String!) {
-    relations(type: Archives, id: $id) {
-        ...zoom5RelationsFragment
-    }
-}

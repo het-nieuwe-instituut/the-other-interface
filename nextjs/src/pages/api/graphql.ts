@@ -7,7 +7,6 @@ import '../../../graphql.schema.json'
 import { HomePageData } from '../../mocks/mockData/homepageData'
 import { LandingPagesData } from '../../mocks/mockData/landingpagesData'
 import { menuPagesData } from '../../mocks/mockData/menuPagesData'
-import { relationsData } from '../../mocks/mockData/relationsData'
 import { storiesData } from '../../mocks/mockData/storiesData'
 import { storiesWithoutRelations } from '../../mocks/mockData/storiesWithoutRelationsData'
 import { storyData } from '../../mocks/mockData/storyData'
@@ -19,7 +18,6 @@ import {
   archivesZoomLevel2Data,
 } from '../../mocks/mockData/zoomLevel2Data'
 import { zoomLevel3Data } from '../../mocks/mockData/zoomLevel3Data'
-import { zoomLevel5Data } from '../../mocks/mockData/zoomLevel5Data'
 import { themesData } from '../../mocks/mockData/themesData'
 import { EntityNames } from 'src/generated/graphql'
 
@@ -70,21 +68,24 @@ const customResolvers = {
       }
     },
 
-    zoomLevel3() {
-      return zoomLevel3Data
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    zoomLevel3Publication(id: string) {
+      return zoomLevel3Data.zoomLevel3Publication
     },
-    // TODO this can be implemented in case we want to test transition before zoom level 5 object and another type. So far it works only from object to story
-    zoomLevel5Publication() {
-      return null
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    zoomLevel3Person(id: string) {
+      return zoomLevel3Data.zoomLevel3Person
     },
-    zoomLevel5Person() {
-      return null
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    zoomLevel3Archive(id: string) {
+      return zoomLevel3Data.zoomLevel3Archive
     },
-    zoomLevel5Archive() {
-      return null
-    },
-    zoomLevel5Object() {
-      return zoomLevel5Data['zoomLevel5Object'].zoom5detail
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    zoomLevel3Object(id: string) {
+      return zoomLevel3Data.zoomLevel3Object
     },
 
     story() {
@@ -100,7 +101,7 @@ const customResolvers = {
     },
 
     relations: () => {
-      return relationsData.relations
+      return zoomLevel3Data.relations.relations
     },
 
     menupages() {

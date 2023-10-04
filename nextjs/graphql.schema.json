@@ -7,6 +7,81 @@
     "subscriptionType": null,
     "types": [
       {
+        "kind": "OBJECT",
+        "name": "ArchiveZoomLevel3DetailType",
+        "description": null,
+        "fields": [
+          {
+            "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "objectNumber",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "thumbnail",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "title",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "EntityNames",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "UNION",
         "name": "ArchiveZoomLevel5UnionType",
         "description": null,
@@ -17,12 +92,12 @@
         "possibleTypes": [
           {
             "kind": "OBJECT",
-            "name": "ArchivesFondsZoomLevel5DetailType",
+            "name": "ArchivesFondsZoomLevel3DetailType",
             "ofType": null
           },
           {
             "kind": "OBJECT",
-            "name": "ArchivesOtherZoomLevel5DetailType",
+            "name": "ArchivesOtherZoomLevel3DetailType",
             "ofType": null
           }
         ]
@@ -94,7 +169,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "PoepleZoomLevel5DetailType",
+              "name": "PeopleZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -108,7 +183,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "ArchivesFondsZoomLevel5DetailType",
+        "name": "ArchivesFondsZoomLevel3DetailType",
         "description": null,
         "fields": [
           {
@@ -400,6 +475,30 @@
             "deprecationReason": null
           },
           {
+            "name": "thumbnail",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "title",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "type",
             "description": null,
             "args": [],
@@ -408,7 +507,7 @@
               "name": null,
               "ofType": {
                 "kind": "ENUM",
-                "name": "ArchivesZoomLevel5Types",
+                "name": "ArchivesZoomLevel3Types",
                 "ofType": null
               }
             },
@@ -423,7 +522,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "ArchivesOtherZoomLevel5DetailType",
+        "name": "ArchivesOtherZoomLevel3DetailType",
         "description": null,
         "fields": [
           {
@@ -619,6 +718,18 @@
             "deprecationReason": null
           },
           {
+            "name": "thumbnail",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "title",
             "description": null,
             "args": [],
@@ -639,7 +750,7 @@
               "name": null,
               "ofType": {
                 "kind": "ENUM",
-                "name": "ArchivesZoomLevel5Types",
+                "name": "ArchivesZoomLevel3Types",
                 "ofType": null
               }
             },
@@ -654,7 +765,7 @@
       },
       {
         "kind": "ENUM",
-        "name": "ArchivesZoomLevel5Types",
+        "name": "ArchivesZoomLevel3Types",
         "description": null,
         "fields": null,
         "inputFields": null,
@@ -6951,7 +7062,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "PoepleZoomLevel5DetailType",
+              "name": "PeopleZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -7075,7 +7186,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "ObjectsZoomLevel5DetailType",
+        "name": "ObjectsZoomLevel3DetailType",
         "description": null,
         "fields": [
           {
@@ -7246,18 +7357,6 @@
                 "name": "String",
                 "ofType": null
               }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "image",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -7455,6 +7554,18 @@
             "deprecationReason": null
           },
           {
+            "name": "thumbnail",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "title",
             "description": null,
             "args": [],
@@ -7473,6 +7584,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "EntityNames",
               "ofType": null
             },
             "isDeprecated": false,
@@ -7659,7 +7782,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "PoepleZoomLevel5DetailType",
+        "name": "PeopleZoomLevel3DetailType",
         "description": null,
         "fields": [
           {
@@ -7997,6 +8120,42 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "thumbnail",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "title",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "EntityNames",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -8083,7 +8242,94 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "PoepleZoomLevel5DetailType",
+              "name": "PeopleZoomLevel3DetailType",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "PublicationZoomLevel3DetailType",
+        "description": null,
+        "fields": [
+          {
+            "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "objectNumber",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "thumbnail",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "title",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "EntityNames",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "yearOfPublication",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
@@ -8097,7 +8343,7 @@
       },
       {
         "kind": "UNION",
-        "name": "PublicationZoomLevel5UnionType",
+        "name": "PublicationZoomLevel3UnionType",
         "description": null,
         "fields": null,
         "inputFields": null,
@@ -8106,29 +8352,29 @@
         "possibleTypes": [
           {
             "kind": "OBJECT",
-            "name": "PublicationsArticleZoomLevel5DetailType",
+            "name": "PublicationsArticleZoomLevel3DetailType",
             "ofType": null
           },
           {
             "kind": "OBJECT",
-            "name": "PublicationsAudioVisualZoomLevel5DetailType",
+            "name": "PublicationsAudioVisualZoomLevel3DetailType",
             "ofType": null
           },
           {
             "kind": "OBJECT",
-            "name": "PublicationsBookZoomLevel5DetailType",
+            "name": "PublicationsBookZoomLevel3DetailType",
             "ofType": null
           },
           {
             "kind": "OBJECT",
-            "name": "PublicationsSerialZoomLevel5DetailType",
+            "name": "PublicationsSerialZoomLevel3DetailType",
             "ofType": null
           }
         ]
       },
       {
         "kind": "OBJECT",
-        "name": "PublicationsArticleZoomLevel5DetailType",
+        "name": "PublicationsArticleZoomLevel3DetailType",
         "description": null,
         "fields": [
           {
@@ -8293,7 +8539,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "PoepleZoomLevel5DetailType",
+              "name": "PeopleZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -8408,6 +8654,18 @@
             "deprecationReason": null
           },
           {
+            "name": "thumbnail",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "title",
             "description": null,
             "args": [],
@@ -8428,7 +8686,7 @@
               "name": null,
               "ofType": {
                 "kind": "ENUM",
-                "name": "PublicationsZoomLevel5Types",
+                "name": "PublicationsZoomLevel3Types",
                 "ofType": null
               }
             },
@@ -8491,7 +8749,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "PublicationsAudioVisualZoomLevel5DetailType",
+        "name": "PublicationsAudioVisualZoomLevel3DetailType",
         "description": null,
         "fields": [
           {
@@ -8680,7 +8938,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "PoepleZoomLevel5DetailType",
+              "name": "PeopleZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -8783,6 +9041,18 @@
             "deprecationReason": null
           },
           {
+            "name": "thumbnail",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "title",
             "description": null,
             "args": [],
@@ -8803,7 +9073,7 @@
               "name": null,
               "ofType": {
                 "kind": "ENUM",
-                "name": "PublicationsZoomLevel5Types",
+                "name": "PublicationsZoomLevel3Types",
                 "ofType": null
               }
             },
@@ -8854,7 +9124,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "PublicationsBookZoomLevel5DetailType",
+        "name": "PublicationsBookZoomLevel3DetailType",
         "description": null,
         "fields": [
           {
@@ -9115,7 +9385,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "PoepleZoomLevel5DetailType",
+              "name": "PeopleZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -9218,6 +9488,18 @@
             "deprecationReason": null
           },
           {
+            "name": "thumbnail",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "title",
             "description": null,
             "args": [],
@@ -9238,7 +9520,7 @@
               "name": null,
               "ofType": {
                 "kind": "ENUM",
-                "name": "PublicationsZoomLevel5Types",
+                "name": "PublicationsZoomLevel3Types",
                 "ofType": null
               }
             },
@@ -9289,7 +9571,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "PublicationsSerialZoomLevel5DetailType",
+        "name": "PublicationsSerialZoomLevel3DetailType",
         "description": null,
         "fields": [
           {
@@ -9422,7 +9704,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "PoepleZoomLevel5DetailType",
+              "name": "PeopleZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -9501,6 +9783,18 @@
             "deprecationReason": null
           },
           {
+            "name": "thumbnail",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "title",
             "description": null,
             "args": [],
@@ -9521,7 +9815,7 @@
               "name": null,
               "ofType": {
                 "kind": "ENUM",
-                "name": "PublicationsZoomLevel5Types",
+                "name": "PublicationsZoomLevel3Types",
                 "ofType": null
               }
             },
@@ -9572,7 +9866,7 @@
       },
       {
         "kind": "ENUM",
-        "name": "PublicationsZoomLevel5Types",
+        "name": "PublicationsZoomLevel3Types",
         "description": null,
         "fields": null,
         "inputFields": null,
@@ -9611,75 +9905,6 @@
         "description": null,
         "fields": [
           {
-            "name": "allRelations",
-            "description": null,
-            "args": [
-              {
-                "name": "id",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "relatedObjectsType",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "ENUM",
-                    "name": "EntityNames",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "type",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "ENUM",
-                    "name": "EntityNames",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "ZoomLevel5RelatedRecordType",
-                  "ofType": null
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "archiveOther",
             "description": null,
             "args": [],
@@ -9688,7 +9913,23 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "ArchivesFondsZoomLevel5DetailType",
+                "name": "ArchivesFondsZoomLevel3DetailType",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "archivesDetailZoomLevel3",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "ArchiveZoomLevel3DetailType",
                 "ofType": null
               }
             },
@@ -10225,7 +10466,7 @@
             "deprecationReason": null
           },
           {
-            "name": "object",
+            "name": "objectDetailZoomLevel3",
             "description": null,
             "args": [],
             "type": {
@@ -10233,7 +10474,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "ObjectsZoomLevel5DetailType",
+                "name": "ObjectsZoomLevel3DetailType",
                 "ofType": null
               }
             },
@@ -10249,7 +10490,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "PublicationsArticleZoomLevel5DetailType",
+                "name": "PublicationsArticleZoomLevel3DetailType",
                 "ofType": null
               }
             },
@@ -10265,7 +10506,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "PublicationsAudioVisualZoomLevel5DetailType",
+                "name": "PublicationsAudioVisualZoomLevel3DetailType",
                 "ofType": null
               }
             },
@@ -10281,7 +10522,23 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "PublicationsBookZoomLevel5DetailType",
+                "name": "PublicationsBookZoomLevel3DetailType",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "publicationDetailZoomLevel3",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "PublicationZoomLevel3DetailType",
                 "ofType": null
               }
             },
@@ -10297,7 +10554,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "PublicationsSerialZoomLevel5DetailType",
+                "name": "PublicationsSerialZoomLevel3DetailType",
                 "ofType": null
               }
             },
@@ -10309,19 +10566,23 @@
             "description": null,
             "args": [
               {
-                "name": "externalSource",
+                "name": "id",
                 "description": null,
                 "type": {
-                  "kind": "ENUM",
-                  "name": "TriplyExternalSourceEnum",
-                  "ofType": null
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
                 },
                 "defaultValue": null,
                 "isDeprecated": false,
                 "deprecationReason": null
               },
               {
-                "name": "id",
+                "name": "lang",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -10361,7 +10622,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "ZoomLevel5RelationsType",
+                  "name": "ZoomLevel3RelationsType",
                   "ofType": null
                 }
               }
@@ -11143,27 +11404,11 @@
             "deprecationReason": null
           },
           {
-            "name": "zoomLevel3",
+            "name": "zoomLevel3Archive",
             "description": null,
             "args": [
               {
-                "name": "entityName",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "ENUM",
-                    "name": "EntityNames",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "filterId",
+                "name": "id",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -11177,30 +11422,31 @@
                 "defaultValue": null,
                 "isDeprecated": false,
                 "deprecationReason": null
-              },
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ArchiveZoomLevel3DetailType",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "zoomLevel3Object",
+            "description": null,
+            "args": [
               {
-                "name": "page",
+                "name": "id",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
                   "ofType": {
                     "kind": "SCALAR",
-                    "name": "Int",
+                    "name": "String",
                     "ofType": null
                   }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "pageSize",
-                "description": null,
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
                 },
                 "defaultValue": null,
                 "isDeprecated": false,
@@ -11208,21 +11454,67 @@
               }
             ],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
+              "kind": "OBJECT",
+              "name": "ObjectsZoomLevel3DetailType",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "zoomLevel3Person",
+            "description": null,
+            "args": [
+              {
+                "name": "id",
+                "description": null,
+                "type": {
                   "kind": "NON_NULL",
                   "name": null,
                   "ofType": {
-                    "kind": "OBJECT",
-                    "name": "ZoomLevel3Type",
+                    "kind": "SCALAR",
+                    "name": "String",
                     "ofType": null
                   }
-                }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
               }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "PeopleZoomLevel3DetailType",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "zoomLevel3Publication",
+            "description": null,
+            "args": [
+              {
+                "name": "id",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "PublicationZoomLevel3DetailType",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -11279,7 +11571,7 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "ArchivesFondsZoomLevel5DetailType",
+              "name": "ArchivesFondsZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -11308,65 +11600,7 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "ArchivesOtherZoomLevel5DetailType",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "zoomLevel5Object",
-            "description": null,
-            "args": [
-              {
-                "name": "id",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "OBJECT",
-              "name": "ObjectsZoomLevel5DetailType",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "zoomLevel5Person",
-            "description": null,
-            "args": [
-              {
-                "name": "id",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "OBJECT",
-              "name": "PoepleZoomLevel5DetailType",
+              "name": "ArchivesOtherZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -11395,7 +11629,7 @@
             ],
             "type": {
               "kind": "UNION",
-              "name": "PublicationZoomLevel5UnionType",
+              "name": "PublicationZoomLevel3UnionType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -11424,7 +11658,7 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "PublicationsArticleZoomLevel5DetailType",
+              "name": "PublicationsArticleZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -11453,7 +11687,7 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "PublicationsAudioVisualZoomLevel5DetailType",
+              "name": "PublicationsAudioVisualZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -11482,7 +11716,7 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "PublicationsBookZoomLevel5DetailType",
+              "name": "PublicationsBookZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -11511,99 +11745,8 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "PublicationsSerialZoomLevel5DetailType",
+              "name": "PublicationsSerialZoomLevel3DetailType",
               "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "RelatedRecordType",
-        "description": null,
-        "fields": [
-          {
-            "name": "id",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "label",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "relations",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "ZoomLevel5RelationsType",
-                  "ofType": null
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "slug",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "type",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "EntityNames",
-                "ofType": null
-              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -13584,41 +13727,6 @@
         "possibleTypes": null
       },
       {
-        "kind": "ENUM",
-        "name": "TriplyExternalSourceEnum",
-        "description": null,
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": [
-          {
-            "name": "all",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "getty",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "rkd",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "wikidata",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "possibleTypes": null
-      },
-      {
         "kind": "OBJECT",
         "name": "TriplyRecord",
         "description": null,
@@ -13628,8 +13736,8 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "UNION",
-              "name": "ArchiveZoomLevel5UnionType",
+              "kind": "OBJECT",
+              "name": "ArchiveZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -13653,7 +13761,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "ObjectsZoomLevel5DetailType",
+              "name": "ObjectsZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -13665,7 +13773,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "PoepleZoomLevel5DetailType",
+              "name": "PeopleZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -13676,8 +13784,8 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "UNION",
-              "name": "PublicationZoomLevel5UnionType",
+              "kind": "OBJECT",
+              "name": "PublicationZoomLevel3DetailType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -15534,217 +15642,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "ZoomLevel3Type",
-        "description": null,
-        "fields": [
-          {
-            "name": "count",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "name",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "total",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "uri",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "ZoomLevel5RelatedRecordType",
-        "description": null,
-        "fields": [
-          {
-            "name": "availability",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "birthDate",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "creator",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "creatorLabel",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "date",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "name",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "pidWorkURI",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "profession",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "professionLabel",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "type",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "EntityNames",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "ZoomLevel5RelationsType",
+        "name": "ZoomLevel3RelationsType",
         "description": null,
         "fields": [
           {
@@ -15758,8 +15656,8 @@
                 "kind": "NON_NULL",
                 "name": null,
                 "ofType": {
-                  "kind": "OBJECT",
-                  "name": "RelatedRecordType",
+                  "kind": "SCALAR",
+                  "name": "String",
                   "ofType": null
                 }
               }
@@ -15772,13 +15670,9 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Float",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -15788,13 +15682,9 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "EntityNames",
-                "ofType": null
-              }
+              "kind": "ENUM",
+              "name": "EntityNames",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null

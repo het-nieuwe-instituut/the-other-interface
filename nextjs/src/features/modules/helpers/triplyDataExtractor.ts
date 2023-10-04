@@ -1,11 +1,4 @@
-import {
-  ArchivesFondsZoomLevel5DetailType,
-  Maybe,
-  PublicationsArticleZoomLevel5DetailType,
-  PublicationsSerialZoomLevel5DetailType,
-  PublicationsZoomLevel5Types,
-  TriplyRecord,
-} from 'src/generated/graphql'
+import { Maybe, TriplyRecord } from 'src/generated/graphql'
 
 import { imageBasePath } from '../modulesConstants'
 
@@ -31,11 +24,10 @@ const extractTriplyFields = (
   }
 
   if (triplyType === 'Archive') {
-    const item = record.archive as ArchivesFondsZoomLevel5DetailType
-
+    const item = record.archive
     return {
       ...defaultFields,
-      title: item?.recordTitle ?? defaultFields?.title,
+      title: item?.title ?? defaultFields?.title,
       description: item?.objectNumber ?? defaultFields?.description,
     }
   }
@@ -44,17 +36,14 @@ const extractTriplyFields = (
     const item = record.object
     return {
       ...defaultFields,
-      imageUrl: item?.image ?? defaultFields.imageUrl,
+      imageUrl: item?.thumbnail ?? defaultFields.imageUrl,
       title: item?.title ?? defaultFields?.title,
       description: item?.objectNumber ?? defaultFields?.description,
     }
   }
 
   if (triplyType === 'Publication') {
-    const description =
-      record.publication?.type === PublicationsZoomLevel5Types.Serial
-        ? (record.publication as PublicationsSerialZoomLevel5DetailType).yearOfPublication
-        : (record.publication as PublicationsArticleZoomLevel5DetailType).objectNumber
+    const description = record.publication?.yearOfPublication ?? record?.publication?.objectNumber
     const title = record.publication?.title
 
     return {
