@@ -1,14 +1,14 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common'
 import { KeysToVerify, TriplyService } from '../triply/triply.service'
-// import { TriplyUtils } from '../triply/triply.utils'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { ZoomLevel3Service } from '../zoomLevel3/zoomLevel3.service'
 import { TriplyUtils } from '../triply/triply.utils'
+import { getHttpThumbnailOrNull } from '../util/helpers'
 
 export interface PublicationsZoomLevel2Data {
-  thumbnail: true
-  title: true
-  id: true
+  thumbnail: string
+  title: string
+  id: string
 }
 
 export const publicationsZoomLevel2DataKeys: KeysToVerify<PublicationsZoomLevel2Data> = {
@@ -18,11 +18,11 @@ export const publicationsZoomLevel2DataKeys: KeysToVerify<PublicationsZoomLevel2
 }
 
 interface PublicationsZoomLevel3Data {
-  thumbnail: true
-  title: true
-  id: true
-  yearOfPublication: true
-  objectNumber: true
+  thumbnail?: string
+  title?: string
+  id: string
+  yearOfPublication?: string
+  objectNumber?: string
 }
 const publicationsDetailZoomLevel3DataKeys: KeysToVerify<PublicationsZoomLevel3Data> = {
   thumbnail: true,
@@ -363,8 +363,6 @@ export class PublicationsService {
   }
 
   public async getZoomLevel3Data(type: EntityNames, id: string) {
-    // const uri = TriplyUtils.getUriForTypeAndId(EntityNames.Publications, id)
-
     const result = await this.triplyService.queryTriplyData<PublicationsZoomLevel3Data>(
       this.ZoomLevel3Endpoint,
       publicationsDetailZoomLevel3DataKeys,
@@ -375,7 +373,7 @@ export class PublicationsService {
     return {
       type,
       id,
-      thumbnail: result.data[0]?.thumbnail,
+      thumbnail: getHttpThumbnailOrNull(result.data[0]?.thumbnail),
       title: result.data[0]?.title,
       objectNumber: result.data[0]?.objectNumber,
       yearOfPublication: result.data[0]?.yearOfPublication,

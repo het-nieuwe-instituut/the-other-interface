@@ -1,13 +1,12 @@
 import { Injectable } from '@nestjs/common'
 import { KeysToVerify, TriplyService } from '../triply/triply.service'
-// import { TriplyUtils } from '../triply/triply.utils'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
-// import { ArchivesFondsCreatorType } from './archives.type'
+import { getHttpThumbnailOrNull } from '../util/helpers'
 
 export interface ArchivesZoomLevel2Data {
-  thumbnail: true
-  title: true
-  id: true
+  thumbnail: string
+  title: string
+  id: string
 }
 
 export const archivesZoomLevel2DataKeys: KeysToVerify<ArchivesZoomLevel2Data> = {
@@ -223,7 +222,7 @@ export class ArchivesService {
       type,
       id,
       objectNumber: result.data[0]?.objectNumber,
-      thumbnail: result.data[0]?.thumbnail,
+      thumbnail: getHttpThumbnailOrNull(result.data[0]?.thumbnail),
       title: result.data[0]?.title,
     }
   }

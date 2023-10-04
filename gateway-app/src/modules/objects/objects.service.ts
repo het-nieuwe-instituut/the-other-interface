@@ -1,8 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { KeysToVerify, TriplyService } from '../triply/triply.service'
-import { TriplyUtils } from '../triply/triply.utils'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
-// import { ObjectMakerType, ObjectMaterialType, ObjectTechniqueType } from './objects.type'
+import { getHttpThumbnailOrNull } from '../util/helpers'
 
 interface ObjectsZoomLevel2Data {
   thumbnail: string
@@ -17,9 +16,9 @@ const objectsZoomLevel2DataKeys: KeysToVerify<ObjectsZoomLevel2Data> = {
 }
 
 interface ObjectsDetailZoomLevel3Data {
-  thumbnail: true
-  title: true
-  id: true
+  thumbnail?: string
+  title?: string
+  id: string
   imageLabel?: string
   titleType?: string
   objectNumber?: string
@@ -137,12 +136,9 @@ export class ObjectsService {
   }
 
   public async getZoomLevel3Data(id: string) {
-    // const uri = TriplyUtils.getUriForTypeAndId(EntityNames.Objects, id)
-
     const result = await this.triplyService.queryTriplyData<ObjectsDetailZoomLevel3Data>(
       this.ZoomLevel3Endpoint,
       objectsDetailZoomLevel3DataKeys,
-      // TODO ask Tanja about returning only one record
       { page: 1, pageSize: 1 },
       { id }
     )
@@ -150,7 +146,7 @@ export class ObjectsService {
     return {
       type: EntityNames.Objects,
       id,
-      thumbnail: result.data[0]?.thumbnail,
+      thumbnail: getHttpThumbnailOrNull(result.data[0]?.thumbnail),
       title: result.data[0]?.title,
     }
   }

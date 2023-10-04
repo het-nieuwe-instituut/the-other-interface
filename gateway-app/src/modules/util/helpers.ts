@@ -1,6 +1,6 @@
 import { random } from 'lodash'
 
-export function getRandom2ItemsFromArray<T>(arr: T[]): T[] {
+export function getRandom2ItemsFromArray<T>(arr: T | T[]): T[] {
   if (!Array.isArray(arr)) {
     return []
   }
@@ -17,4 +17,12 @@ export function getRandom2ItemsFromArray<T>(arr: T[]): T[] {
   const random2 = cp.splice(rand2, 1)[0]
 
   return [random1, random2]
+}
+
+export function getHttpThumbnailOrNull(image?: string | null) {
+  if (image?.includes('http')) {
+    return image
+  }
+
+  return null
 }
