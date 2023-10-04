@@ -1,10 +1,9 @@
 import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
 import { GridItem, Flex } from '@chakra-ui/react'
-import { useRouter } from 'next/navigation'
 
-import { PositionedRecord } from './types'
+import { PositionedRecord } from '../types'
 import { RecordText } from './RecordText'
-import { useRecordDetail } from '@/features/shared/hooks/queries/useRecordDetail'
+import { usePresenter } from './usePresenter'
 
 type Props = {
   record: PositionedRecord
@@ -12,13 +11,9 @@ type Props = {
 
 export const Record: React.FC<Props> = ({ record }) => {
   const { id, category, position, grid } = record
-  const { data, isLoading } = useRecordDetail(category, id)
-  const router = useRouter()
+  const { recordDetails, isLoading, handleClick } = usePresenter(id, category)
 
-  const handleClick = () => {
-    router.push(`/detail/${category}/${id}`)
-  }
-  if (!data && !isLoading) return null
+  if (!recordDetails && !isLoading) return null
 
   return (
     <GridItem position="relative" css={{ ...grid }}>
@@ -37,16 +32,16 @@ export const Record: React.FC<Props> = ({ record }) => {
         style={{ ...position }}
       >
         <ResponsiveImage
-          src={data?.thumbnail}
-          alt={data?.title}
-          maxHeight={!data?.thumbnail ? '80%' : 'calc(100% - 1.6vw - 12px)'} // where 2.6vw are a texts' line heights, 16px are gaps
+          src={recordDetails?.thumbnail}
+          alt={recordDetails?.title}
+          maxHeight={!recordDetails?.thumbnail ? '80%' : 'calc(100% - 1.6vw - 12px)'} // where 2.6vw are a texts' line heights, 16px are gaps
         />
 
         <RecordText
-          title={data?.title}
+          title={recordDetails?.title}
           categoryType={category}
           css={{
-            position: !data?.thumbnail ? 'absolute' : 'relative',
+            position: !recordDetails?.thumbnail ? 'absolute' : 'relative',
           }}
         />
       </Flex>

@@ -1,17 +1,23 @@
 import { useMemo } from 'react'
 import { CloudCategory } from '@/features/shared/utils/categories'
-import { Zoom3Relations } from '@/features/pages/tasks/getZoom3Relations'
 
 import { PositionedRecord } from '../types'
 import { positioningTemplate } from './positioningTemplates'
+import { useRecordRelations } from '@/features/shared/hooks/queries/useRecordRelations'
+import { useParams } from 'next/navigation'
 
-export const usePresenter = (category: CloudCategory, relations: Zoom3Relations = []) => {
+export const usePresenter = (category: CloudCategory) => {
+  const params = useParams()
+  const id = params?.id as string
+  const recordCategory = params?.category as CloudCategory
+  const { data } = useRecordRelations(recordCategory, id)
+
   const positionedRecords = useMemo(() => {
-    if (!relations) return []
+    if (!data?.relations) return []
 
     const positionedRecords: PositionedRecord[] = []
     const categoryPositioningTemplate = positioningTemplate[category]
-    const categoryRelations = relations.find(
+    const categoryRelations = data?.relations.find(
       relation => relation.type?.toLocaleLowerCase() === category
     )?.randomRelations
 
@@ -31,7 +37,7 @@ export const usePresenter = (category: CloudCategory, relations: Zoom3Relations 
     })
 
     return positionedRecords
-  }, [relations, category])
+  }, [data?.relations, category])
 
   return {
     positionedRecords,
