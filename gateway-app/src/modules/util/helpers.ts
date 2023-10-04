@@ -20,7 +20,7 @@ export function getRandom2ItemsFromArray<T>(arr: T | T[]): T[] {
 }
 
 export function getHttpThumbnailOrNull(image?: string | null) {
-  if (image?.includes('http')) {
+  if (image?.startsWith('http')) {
     return image
   }
 

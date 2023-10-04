@@ -31,7 +31,7 @@ describe('getHttpThumbnailOrNull', () => {
     expect(getHttpThumbnailOrNull(undefined)).toEqual(null)
   })
 
-  it('returns the input if it includes "http"', () => {
+  it('returns the input if it starts with "http"', () => {
     expect(getHttpThumbnailOrNull('http://example.com')).toEqual('http://example.com')
     expect(getHttpThumbnailOrNull('https://example.com')).toEqual('https://example.com')
     expect(getHttpThumbnailOrNull('http://example.com/image.jpg')).toEqual(
@@ -42,7 +42,8 @@ describe('getHttpThumbnailOrNull', () => {
     )
   })
 
-  it('returns null if the input does not include "http"', () => {
+  it('returns null if the input does not start with "http"', () => {
+    expect(getHttpThumbnailOrNull('example.com/http://')).toEqual(null)
     expect(getHttpThumbnailOrNull('example.com')).toEqual(null)
     expect(getHttpThumbnailOrNull('example.com/image.jpg')).toEqual(null)
     expect(getHttpThumbnailOrNull('ftp://example.com')).toEqual(null)
