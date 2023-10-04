@@ -1,11 +1,9 @@
 'use client'
 import { Grid, GridItem } from '@chakra-ui/react'
-import { useParams } from 'next/navigation'
 
 import { usePresenter } from './usePresenter'
 import { Record } from '../Record'
 import { GridParams } from '@/features/shared/types/position'
-import { useRecordRelations } from '@/features/shared/hooks/queries/useRecordRelations'
 import { CloudCategory } from '@/features/shared/utils/categories'
 
 interface Props extends GridParams {
@@ -13,11 +11,7 @@ interface Props extends GridParams {
 }
 
 export const RelatedCategory: React.FC<Props> = ({ gridRow, gridColumn, category }) => {
-  const params = useParams()
-  const id = params?.id as string
-  const recordCategory = params?.category as CloudCategory
-  const { data } = useRecordRelations(recordCategory, id)
-  const { positionedRecords } = usePresenter(category, data?.relations)
+  const { positionedRecords } = usePresenter(category)
 
   return (
     <GridItem color={'white'} gridRow={gridRow} gridColumn={gridColumn}>
