@@ -1,7 +1,6 @@
 import { Box, Image } from '../../configs/chakra'
 import React from 'react'
-
-import { useIsImagePortrait } from '../../hooks/useIsImagePortrait'
+import { usePresenter } from './usePresenter'
 
 type ResponsiveImageProps = {
   src?: string | null
@@ -14,7 +13,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   alt = '',
   maxHeight = '100%',
 }) => {
-  const { isPortrait, fallbackImage } = useIsImagePortrait(src)
+  const { isPortrait, fallbackImage } = usePresenter(src)
 
   if (isPortrait === null || !src) {
     return (
