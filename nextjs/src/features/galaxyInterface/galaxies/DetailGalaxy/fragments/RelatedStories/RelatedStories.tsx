@@ -1,7 +1,7 @@
 import { Grid, GridItem } from '@chakra-ui/react'
 import { DetailedRecord } from '../DetailedRecord'
 import { usePresenter } from './usePresenter'
-import { Record } from '../Record'
+import { Record } from '../Record/Record'
 
 interface Props {
   gridRow: string

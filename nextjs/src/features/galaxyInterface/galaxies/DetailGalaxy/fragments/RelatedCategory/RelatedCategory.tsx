@@ -2,7 +2,7 @@
 import { Grid, GridItem } from '@chakra-ui/react'
 
 import { usePresenter } from './usePresenter'
-import { Record } from '../Record'
+import { Record } from '../Record/Record'
 import { GridParams } from '@/features/shared/types/position'
 import { CloudCategory } from '@/features/shared/utils/categories'
 
