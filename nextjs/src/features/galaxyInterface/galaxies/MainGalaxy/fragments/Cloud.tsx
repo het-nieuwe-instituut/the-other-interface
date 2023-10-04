@@ -26,7 +26,7 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
         position="absolute"
         w={size}
         h={size}
-        backgroundImage="url(images/cloud.svg)"
+        backgroundImage="url(/images/cloud.svg)"
         backgroundSize="cover"
         backgroundRepeat="no-repeat"
         style={{ ...cloudPosition }}
