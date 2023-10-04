@@ -28,7 +28,7 @@ async function getLabel(args: GetLabelParams): Promise<string> {
   const { onError, recordId, type } = args
 
   try {
-    const res = await axios.get(`${process.env.GATEWAY_BASE_URL}/zoomLevel5/detail`, {
+    const res = await axios.get(`${process.env.GATEWAY_BASE_URL}/zoomLevel3/detail`, {
       params: { recordId, type },
       headers: { 'x-api-key': process.env.GATEWAY_API_TOKEN },
     })
@@ -52,10 +52,7 @@ async function getLabel(args: GetLabelParams): Promise<string> {
 
 function getLabelFromType(triplyData, type): string {
   switch (type) {
-    case 'Archive': {
-      const title = triplyData.type === 'fonds' ? triplyData.recordTitle : triplyData.title
-      return `${triplyData.objectNumber || DEFAULT_LABEL} ${title || DEFAULT_LABEL}`
-    }
+    case 'Archive':
     case 'Object':
     case 'Publication':
       return `${triplyData.objectNumber || DEFAULT_LABEL} ${triplyData.title || DEFAULT_LABEL}`
