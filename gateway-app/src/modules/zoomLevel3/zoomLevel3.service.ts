@@ -9,7 +9,6 @@ import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { TriplyUtils } from '../triply/triply.utils'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { getRandom2ItemsFromArray } from '../util/helpers'
-// import { ZoomLevel3RelatedObjectsArgs } from './zoomLevel3.type'
 import { CustomError } from '../util/customError'
 
 interface ZoomLevel3RelationData {
@@ -43,9 +42,6 @@ export enum TriplyExternalSourceEnum {
 
 @Injectable()
 export class ZoomLevel3Service {
-  private relationsEndpoint = '/zoom-3-relations/run?record='
-  private relatedObjectsEndpoint = '/zoom-3-relatedObjects/run?record='
-
   public constructor(
     @Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk,
     private readonly objectsService: ObjectsService,

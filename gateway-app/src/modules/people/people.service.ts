@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { KeysToVerify, TriplyService } from '../triply/triply.service'
-import { TriplyUtils } from '../triply/triply.utils'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
+import { getHttpThumbnailOrNull } from '../util/helpers'
 
 interface PeopleZoomLevel2Data {
   thumbnail: string
@@ -15,8 +15,8 @@ const peopleZoomLevel2DataKeys: KeysToVerify<PeopleZoomLevel2Data> = {
 }
 
 interface PeopleDetailZoomLevel3Data {
-  thumbnail: string
-  title: string
+  thumbnail?: string
+  title?: string
   id: string
   nameType?: string
   nameVariation?: string
@@ -117,8 +117,6 @@ export class PeopleService {
   }
 
   public async getZoomLevel3Data(id: string) {
-    // const uri = TriplyUtils.getUriForTypeAndId(EntityNames.People, id)
-
     const result = await this.triplyService.queryTriplyData<PeopleDetailZoomLevel3Data>(
       this.ZoomLevel3Endpoint,
       peopleDetailZoomLevel3DataKeys,
@@ -129,7 +127,7 @@ export class PeopleService {
     return {
       type: EntityNames.People,
       id,
-      thumbnail: result.data[0]?.thumbnail,
+      thumbnail: getHttpThumbnailOrNull(result.data[0]?.thumbnail),
       title: result.data[0]?.title,
     }
   }
