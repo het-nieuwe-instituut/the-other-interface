@@ -64,8 +64,6 @@ export class ZoomLevel3Service {
         ]
       case EntityNames.Stories:
         return this.getStoryRelations(id, lang)
-      case EntityNames.External:
-      // TODO
       default:
         throw CustomError.internalCritical('type not implemented')
     }
@@ -80,13 +78,12 @@ export class ZoomLevel3Service {
         return this.peopleService.getZoomLevel3Data(id)
       }
       case EntityNames.Publications: {
-        return this.publicationsService.getZoomLevel3Data(type, id)
+        return this.publicationsService.getZoomLevel3Data(id)
       }
       case EntityNames.Archives: {
-        return this.archivesService.getZoomLevel3Data(EntityNames.Archives, id)
+        return this.archivesService.getZoomLevel3Data(id)
       }
-      case EntityNames.Stories:
-      case EntityNames.External:
+
       default:
         throw CustomError.internalCritical('type not implemented')
     }
@@ -175,8 +172,6 @@ export class ZoomLevel3Service {
         }
       )
     )
-
-    console.log('getTriplyRelatedRecords', data)
 
     return data
   }

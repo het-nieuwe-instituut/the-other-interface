@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { getHttpThumbnailOrNull } from '../util/helpers'
+import { TriplyUtils } from '../triply/triply.utils'
 
 interface PeopleZoomLevel2Data {
   thumbnail: string
@@ -125,10 +126,10 @@ export class PeopleService {
     )
 
     return {
+      ...TriplyUtils.combineObjectArray(result.data),
       type: EntityNames.People,
       id,
       thumbnail: getHttpThumbnailOrNull(result.data[0]?.thumbnail),
-      title: result.data[0]?.title,
     }
   }
 }

@@ -57,7 +57,7 @@ function getLabelFromType(triplyData, type): string {
     case 'Publication':
       return `${triplyData.objectNumber || DEFAULT_LABEL} ${triplyData.title || DEFAULT_LABEL}`
     case 'People':
-      return triplyData.name
+      return triplyData.title || DEFAULT_LABEL
     default:
       return DEFAULT_LABEL
   }
