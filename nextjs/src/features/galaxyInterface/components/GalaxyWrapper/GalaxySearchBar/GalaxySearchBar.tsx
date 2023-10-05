@@ -3,7 +3,7 @@ import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Flex, Grid, Text } from '@chakra-ui/react'
 import { FOOTER_Z_INDEX } from '@/features/shared/constants/mainConstants'
 import { usePresenter } from './usePresenter'
-import { CategoryFilter } from './fragments'
+import { CategoryFilter } from './CategoryFilter/CategoryFilter'
 
 interface Props {
   totalResults: string
