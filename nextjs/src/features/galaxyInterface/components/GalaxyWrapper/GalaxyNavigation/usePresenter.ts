@@ -1,3 +1,4 @@
+import { getCurrentZoomNumber } from '@/features/shared/helpers/getCurrentZoomNumber'
 import { CLOUD_CATEGORIES, CloudCategory } from '@/features/shared/utils/categories'
 import { useParams, usePathname } from 'next/navigation'
 
@@ -7,12 +8,6 @@ const getZoom2Link = (category?: string) => {
   }
 
   return null
-}
-
-const getCurrentZoomNumber = (pathname?: string | null) => {
-  if (pathname?.includes('detail')) return 3
-  if (pathname?.includes('landingpage')) return 2
-  return 1
 }
 
 export const usePresenter = () => {
