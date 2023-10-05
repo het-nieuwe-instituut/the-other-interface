@@ -1,1 +1,1 @@
-export * from './FilterDropdown'
+export * from './CategoryFilter'

@@ -1,9 +1,9 @@
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 
-import { Flex, Grid, Text } from '@/features/shared/configs/chakra'
+import { Flex, Grid, Text } from '@chakra-ui/react'
 import { FOOTER_Z_INDEX } from '@/features/shared/constants/mainConstants'
 import { usePresenter } from './usePresenter'
-import { FilterDropdown } from './fragments'
+import { CategoryFilter } from './fragments'
 
 interface Props {
   totalResults: string
@@ -31,7 +31,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ totalResults }) => {
       )}
 
       {showInitialCategory && category && (
-        <FilterDropdown title={t('category')} selectedOption={t(category)} />
+        <CategoryFilter title={t('category')} selectedOption={t(category)} />
       )}
     </Grid>
   )
