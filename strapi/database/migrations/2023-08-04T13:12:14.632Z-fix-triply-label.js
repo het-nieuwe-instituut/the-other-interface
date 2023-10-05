@@ -42,15 +42,12 @@ async function getLabel({ recordId, type }) {
 
 function getLabelFromType(triplyData, type) {
   switch (type) {
-    case 'Archive': {
-      const title = triplyData.type === 'fonds' ? triplyData.recordTitle : triplyData.title
-      return `${triplyData.objectNumber || DEFAULT_LABEL} ${title || DEFAULT_LABEL}`
-    }
+    case 'Archive':
     case 'Object':
     case 'Publication':
       return `${triplyData.objectNumber || DEFAULT_LABEL} ${triplyData.title || DEFAULT_LABEL}`
     case 'People':
-      return triplyData.name
+      return triplyData.title || DEFAULT_LABEL
     default:
       return DEFAULT_LABEL
   }
