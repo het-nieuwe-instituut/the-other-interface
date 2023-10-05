@@ -14,6 +14,7 @@ export const SearchFilterBox: React.FC<Props> = ({ category, subCategory, action
       padding={'4px 8px'}
       color={'blueAlpha.100'}
       width={'fit-content'}
+      zIndex={'inherit'}
     >
       <Flex position="relative" width="100%" alignItems={'center'} justifyContent={'space-between'}>
         <Text textStyle="socialLarge.sm">{category}</Text>

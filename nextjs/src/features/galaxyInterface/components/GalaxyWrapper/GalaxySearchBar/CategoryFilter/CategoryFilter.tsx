@@ -1,22 +1,21 @@
 import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/SearchFilterBox'
 import { ChangeButton } from '@/features/shared/components/SearchFilterBox/buttons/ChangeButton/ChangeButton'
-
-import { useState } from 'react'
+import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 
 interface Props {
-  title?: string
   selectedOption?: string
+  onClick: () => void
+  isOpen: boolean
 }
 
-export const CategoryFilter: React.FC<Props> = ({ title, selectedOption }) => {
-  // TODO: move to search bar use selector
-  const [isOpen, setIsOpen] = useState(false)
+export const CategoryFilter: React.FC<Props> = ({ onClick, isOpen, selectedOption }) => {
+  const { t } = useTypeSafeTranslation('category')
 
   return (
     <SearchFilterBox
-      category={title}
+      category={t('category')}
       subCategory={selectedOption}
-      actionButton={<ChangeButton onClick={() => setIsOpen(!isOpen)} isOpen={isOpen} />}
+      actionButton={<ChangeButton onClick={onClick} isOpen={isOpen} />}
     />
   )
 }
