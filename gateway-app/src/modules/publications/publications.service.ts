@@ -362,7 +362,7 @@ export class PublicationsService {
     }
   }
 
-  public async getZoomLevel3Data(type: EntityNames, id: string) {
+  public async getZoomLevel3Data(id: string) {
     const result = await this.triplyService.queryTriplyData<PublicationsZoomLevel3Data>(
       this.ZoomLevel3Endpoint,
       publicationsDetailZoomLevel3DataKeys,
@@ -371,12 +371,10 @@ export class PublicationsService {
     )
 
     return {
-      type,
+      ...TriplyUtils.combineObjectArray(result.data),
+      type: EntityNames.Publications,
       id,
       thumbnail: getHttpThumbnailOrNull(result.data[0]?.thumbnail),
-      title: result.data[0]?.title,
-      objectNumber: result.data[0]?.objectNumber,
-      yearOfPublication: result.data[0]?.yearOfPublication,
     }
   }
 
