@@ -1,12 +1,16 @@
 import { GALAXY_EDITORIAL_LAYER_PART } from '@/features/shared/constants/mainConstants'
 import { Grid, GridItem } from '@chakra-ui/react'
 import { GalaxyNavigation } from '../GalaxyNavigation/GalaxyNavigation'
+import { GalaxySearchBar } from '../GalaxySearchBar/GalaxySearchBar'
+import { usePresenter } from './usePresenter'
 
 interface Props {
-  renderFooterCenter?: JSX.Element
+  totalResults?: string
 }
 
-export const GalaxyFooter: React.FC<Props> = ({ renderFooterCenter }) => {
+export const GalaxyFooter: React.FC<Props> = ({ totalResults = '' }) => {
+  const { showSearchBar } = usePresenter()
+
   return (
     <Grid
       position="absolute"
@@ -18,7 +22,7 @@ export const GalaxyFooter: React.FC<Props> = ({ renderFooterCenter }) => {
       gap="5px"
     >
       <GridItem></GridItem>
-      <GridItem>{renderFooterCenter}</GridItem>
+      <GridItem>{showSearchBar && <GalaxySearchBar totalResults={totalResults} />}</GridItem>
       <GalaxyNavigation />
     </Grid>
   )
