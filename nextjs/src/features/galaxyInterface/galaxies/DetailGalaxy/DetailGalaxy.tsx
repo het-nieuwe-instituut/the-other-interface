@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation'
 import { RelatedCategory, RelatedStories } from './fragments'
 import { GridParams } from '@/features/shared/types/position'
 import { GalaxyFooter } from '../../components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
+import BlurOverlay from '@/features/shared/components/BlurOverlay/BlurOverlay'
 
 const relatedCategories: Array<{ category: CloudCategory; grid: GridParams }> = [
   { category: CLOUD_CATEGORIES.people, grid: { gridRow: '1 / 2', gridColumn: '1 / 2' } },
@@ -22,6 +23,7 @@ export const DetailGalaxy: React.FC = () => {
 
   return (
     <Box position="relative" width="100vw" height="100vh" overflow={'hidden'}>
+      <BlurOverlay />
       <Grid
         position="absolute"
         w="96vw"

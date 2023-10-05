@@ -6,6 +6,8 @@ import { usePresenter } from './usePresenter'
 import { CategoryFilter } from './CategoryFilter/CategoryFilter'
 import { SuggestionBar } from './SuggestionBar/SuggestionBar'
 import { useState } from 'react'
+import { FilterInput, FilterCloseButton } from './fragments'
+
 
 interface Props {
   totalResults: string
@@ -22,7 +24,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ totalResults }) => {
     <Grid
       position={'relative'}
       height="60px"
-      templateColumns="auto 1fr"
+      templateColumns="auto auto 1fr auto"
       gap="5px"
       borderRadius={isSuggestsOpen ? '0 0 5px 5px' : '5px'}
       transition={'border-radius 0.3s ease-in-out'}
@@ -51,6 +53,8 @@ export const GalaxySearchBar: React.FC<Props> = ({ totalResults }) => {
       )}
 
       <SuggestionBar isOpen={isSuggestsOpen} />
+      <FilterInput />
+      <FilterCloseButton />
     </Grid>
   )
 }
