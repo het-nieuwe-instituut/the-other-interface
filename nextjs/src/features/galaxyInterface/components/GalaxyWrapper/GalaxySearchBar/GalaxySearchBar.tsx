@@ -14,7 +14,7 @@ interface Props {
 export const GalaxySearchBar: React.FC<Props> = ({ totalResults }) => {
   const { t } = useTypeSafeTranslation('category')
   // TODO: move to use selector
-  const [isOpen, setIsOpen] = useState(false)
+  const [isSuggestsOpen, setIsSuggestsOpen] = useState(false)
 
   const { category, showInitialCategory } = usePresenter()
 
@@ -24,26 +24,33 @@ export const GalaxySearchBar: React.FC<Props> = ({ totalResults }) => {
       height="60px"
       templateColumns="auto 1fr"
       gap="5px"
-      borderRadius={'5px'} // TODO: {'0 0 5px 5px'} if suggestion bar open
+      borderRadius={isSuggestsOpen ? '0 0 5px 5px' : '5px'}
+      transition={'border-radius 0.3s ease-in-out'}
       backgroundColor={'blueAlpha.100'}
       padding={'5px 20px'}
       zIndex={FOOTER_Z_INDEX}
     >
       {totalResults && (
-        <Flex justifyContent={'center'} alignItems={'center'} mr={4} height="50px">
+        <Flex
+          justifyContent={'center'}
+          alignItems={'center'}
+          mr={4}
+          height="50px"
+          zIndex={'inherit'}
+        >
           <Text textStyle="socialLarge.lg">{t('resultsFor', { total: totalResults })}</Text>
         </Flex>
       )}
 
       {showInitialCategory && category && (
         <CategoryFilter
-          onClick={() => setIsOpen(!isOpen)}
-          isOpen={isOpen}
+          onClick={() => setIsSuggestsOpen(!isSuggestsOpen)}
+          isOpen={isSuggestsOpen}
           selectedOption={t(category)}
         />
       )}
 
-      <SuggestionBar isOpen={isOpen} />
+      <SuggestionBar isOpen={isSuggestsOpen} />
     </Grid>
   )
 }
