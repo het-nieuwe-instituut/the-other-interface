@@ -2,10 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export type SharedState = {
   isMenuOpen: boolean
+  isSearchModeActive: boolean
 }
 
 export const sharedInitialState: SharedState = {
   isMenuOpen: false,
+  isSearchModeActive: false,
 }
 
 export const sharedSlice = createSlice({
@@ -19,6 +21,14 @@ export const sharedSlice = createSlice({
       }>
     ) => {
       state.isMenuOpen = action.payload?.isMenuOpen ?? state.isMenuOpen
+    },
+    searchModeActive: (
+      state,
+      action: PayloadAction<{
+        isSearchModeActive: SharedState['isSearchModeActive']
+      }>
+    ) => {
+      state.isSearchModeActive = action.payload?.isSearchModeActive ?? state.isSearchModeActive
     },
   },
 })
