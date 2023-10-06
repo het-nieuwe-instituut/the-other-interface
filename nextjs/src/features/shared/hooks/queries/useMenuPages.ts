@@ -12,5 +12,6 @@ export function useMenuPages(): UseQueryResult<MenuPagesQuery> {
   return useQuery({
     queryKey: ['menu-pages', lang],
     queryFn,
+    refetchOnWindowFocus: false,
   })
 }
