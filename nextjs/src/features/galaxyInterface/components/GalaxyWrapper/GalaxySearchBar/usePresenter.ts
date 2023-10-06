@@ -1,9 +1,10 @@
 import { State } from '@/features/shared/configs/store'
 import { getCurrentZoomNumber } from '@/features/shared/helpers/getCurrentZoomNumber'
+import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { sharedActions } from '@/features/shared/stores/shared.store'
 import { CATEGORIES, Category } from '@/features/shared/utils/categories'
 import { useParams, usePathname, useSearchParams } from 'next/navigation'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 export const usePresenter = () => {
@@ -12,6 +13,9 @@ export const usePresenter = () => {
   const searchParams = useSearchParams()
   const dispatch = useDispatch()
   const isSearchModeActive = useSelector((state: State) => state.shared.isSearchModeActive)
+  const { t } = useTypeSafeTranslation('category')
+  // TODO: move to use selector
+  const [isSuggestsOpen, setIsSuggestsOpen] = useState(false)
 
   // TODO: refactor this, probably put category on zoom 3 to search param ?
   const getCurrentCategory = () => {
@@ -45,6 +49,7 @@ export const usePresenter = () => {
   }
 
   const category = getCurrentCategory()
+  const currentZoomNumber = getCurrentZoomNumber(pathname)
 
   return {
     category,
@@ -52,5 +57,9 @@ export const usePresenter = () => {
     handleSearchModeOpen,
     handleSearchModeClose,
     isSearchModeActive,
+    t,
+    isSuggestsOpen,
+    setIsSuggestsOpen,
+    currentZoomNumber,
   }
 }

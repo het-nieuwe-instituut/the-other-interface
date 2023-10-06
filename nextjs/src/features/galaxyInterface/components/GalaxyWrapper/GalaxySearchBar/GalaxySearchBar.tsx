@@ -1,11 +1,8 @@
-import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-
 import { Flex, Grid, Text } from '@chakra-ui/react'
 import { FOOTER_Z_INDEX } from '@/features/shared/constants/mainConstants'
 import { usePresenter } from './usePresenter'
 import { CategoryFilter } from './CategoryFilter/CategoryFilter'
 import { SuggestionBar } from './SuggestionBar/SuggestionBar'
-import { useState } from 'react'
 import { FilterInput, FilterCloseButton } from './fragments'
 
 interface Props {
@@ -13,23 +10,23 @@ interface Props {
 }
 
 export const GalaxySearchBar: React.FC<Props> = ({ totalResults }) => {
-  const { t } = useTypeSafeTranslation('category')
-  // TODO: move to use selector
-  const [isSuggestsOpen, setIsSuggestsOpen] = useState(false)
-
   const {
     category,
     showInitialCategory,
     isSearchModeActive,
     handleSearchModeClose,
     handleSearchModeOpen,
+    setIsSuggestsOpen,
+    currentZoomNumber,
+    isSuggestsOpen,
+    t,
   } = usePresenter()
 
   return (
     <Grid
       position={'relative'}
       height="60px"
-      templateColumns="auto auto 1fr auto"
+      templateColumns={currentZoomNumber === 2 ? 'auto auto 1fr auto' : 'auto 1fr auto'}
       gap="5px"
       borderRadius={isSuggestsOpen ? '0 0 5px 5px' : '5px'}
       transition={'border-radius 0.3s ease-in-out'}

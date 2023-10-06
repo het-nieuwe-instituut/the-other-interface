@@ -9,9 +9,8 @@ const BlurOverlay: React.FC = () => {
       left={0}
       right={0}
       bottom={0}
-      backdropFilter="blur(3px)"
-      bg="rgba(255, 255, 255, 0.4)"
-      pointerEvents="none"
+      backdropFilter="blur(60px)"
+      backgroundColor={'blueAlpha.60'}
       zIndex={SEARCH_MODE_OVERLAY_Z_INDEX}
     />
   )
