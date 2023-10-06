@@ -3,7 +3,7 @@ import { EditorialLayer } from '@/features/shared/components/EditorialLayer/Edit
 import { CloudCategory } from '@/features/shared/utils/categories'
 import { LandingpageBySlugQuery, Zoom2Query } from 'src/generated/graphql'
 import { CategoryGalaxy } from '../../../galaxyInterface/galaxies/CategoryGalaxy/CategoryGalaxy'
-import { Box } from '@/features/shared/configs/chakra'
+import { Box } from '@chakra-ui/react'
 
 interface Props {
   category: CloudCategory
