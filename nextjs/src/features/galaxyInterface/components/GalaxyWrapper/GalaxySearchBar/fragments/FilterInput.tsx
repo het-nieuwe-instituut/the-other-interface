@@ -7,12 +7,13 @@ interface Props {
   value?: string
 }
 
-export const FilterInput: React.FC<Props> = ({ placeholder, onChange, value }) => {
+export const FilterInput: React.FC<Props> = ({ placeholder, onChange, value, onFocus }) => {
   return (
     <Input
       type="text"
       placeholder={placeholder}
       onChange={onChange}
+      onFocus={onFocus}
       value={value}
       bg="transparent"
       border="none"

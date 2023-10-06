@@ -1,11 +1,11 @@
 'use client'
-import { CLOUD_CATEGORIES, Category, CloudCategory } from '@/features/shared/utils/categories'
+import { CLOUD_CATEGORIES, CloudCategory } from '@/features/shared/utils/categories'
 import { Box, Grid } from '@chakra-ui/react'
-import { useParams } from 'next/navigation'
 import { RelatedCategory, RelatedStories } from './fragments'
 import { GridParams } from '@/features/shared/types/position'
 import { GalaxyFooter } from '../../components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 import BlurOverlay from '@/features/shared/components/BlurOverlay/BlurOverlay'
+import { usePresenter } from './usePresenter'
 
 const relatedCategories: Array<{ category: CloudCategory; grid: GridParams }> = [
   { category: CLOUD_CATEGORIES.people, grid: { gridRow: '1 / 2', gridColumn: '1 / 2' } },
@@ -15,15 +15,13 @@ const relatedCategories: Array<{ category: CloudCategory; grid: GridParams }> = 
 ]
 
 export const DetailGalaxy: React.FC = () => {
-  const params = useParams()
-  const category = params?.category as Category
-  const id = params?.id as string
+  const { category, id, isSearchModeActive } = usePresenter()
 
   if (!category || !id) return null
 
   return (
     <Box position="relative" width="100vw" height="100vh" overflow={'hidden'}>
-      <BlurOverlay />
+      {isSearchModeActive && <BlurOverlay />}
       <Grid
         position="absolute"
         w="96vw"

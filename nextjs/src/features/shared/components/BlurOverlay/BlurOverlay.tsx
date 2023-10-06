@@ -1,4 +1,5 @@
 import { Box } from '@chakra-ui/react'
+import { SEARCH_MODE_OVERLAY_Z_INDEX } from '../../constants/mainConstants'
 
 const BlurOverlay: React.FC = () => {
   return (
@@ -11,7 +12,7 @@ const BlurOverlay: React.FC = () => {
       backdropFilter="blur(3px)"
       bg="rgba(255, 255, 255, 0.4)"
       pointerEvents="none"
-      zIndex={99999}
+      zIndex={SEARCH_MODE_OVERLAY_Z_INDEX}
     />
   )
 }

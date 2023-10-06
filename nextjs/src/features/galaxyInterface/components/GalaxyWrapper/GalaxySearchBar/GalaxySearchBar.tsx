@@ -8,7 +8,6 @@ import { SuggestionBar } from './SuggestionBar/SuggestionBar'
 import { useState } from 'react'
 import { FilterInput, FilterCloseButton } from './fragments'
 
-
 interface Props {
   totalResults: string
 }
@@ -18,7 +17,13 @@ export const GalaxySearchBar: React.FC<Props> = ({ totalResults }) => {
   // TODO: move to use selector
   const [isSuggestsOpen, setIsSuggestsOpen] = useState(false)
 
-  const { category, showInitialCategory } = usePresenter()
+  const {
+    category,
+    showInitialCategory,
+    isSearchModeActive,
+    handleSearchModeClose,
+    handleSearchModeOpen,
+  } = usePresenter()
 
   return (
     <Grid
@@ -51,10 +56,9 @@ export const GalaxySearchBar: React.FC<Props> = ({ totalResults }) => {
           selectedOption={t(category)}
         />
       )}
-
       <SuggestionBar isOpen={isSuggestsOpen} />
-      <FilterInput />
-      <FilterCloseButton />
+      <FilterInput onFocus={handleSearchModeOpen} />
+      {isSearchModeActive && <FilterCloseButton handleClick={handleSearchModeClose} />}
     </Grid>
   )
 }

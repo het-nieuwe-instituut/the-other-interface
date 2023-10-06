@@ -1,7 +1,11 @@
 import { Button } from '@chakra-ui/react'
 import CrossIcon from '@/icons/cross-icon.svg'
 
-export const FilterCloseButton: React.FC = () => {
+type Props = {
+  handleClick: () => void
+}
+
+export const FilterCloseButton: React.FC<Props> = ({ handleClick }) => {
   return (
     <Button
       bg="transparent"
@@ -9,8 +13,9 @@ export const FilterCloseButton: React.FC = () => {
       _active={{ bg: 'transparent' }}
       border={'none'}
       p={0}
+      onClick={handleClick}
     >
-      <CrossIcon boxSize="20px" />
+      <CrossIcon />
     </Button>
   )
 }
