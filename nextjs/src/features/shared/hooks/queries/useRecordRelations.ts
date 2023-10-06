@@ -14,5 +14,6 @@ export function useRecordRelations(type: Category, id: string) {
   return useQuery({
     queryKey: ['record-relations', id, type, lang],
     queryFn,
+    refetchOnWindowFocus: false,
   })
 }

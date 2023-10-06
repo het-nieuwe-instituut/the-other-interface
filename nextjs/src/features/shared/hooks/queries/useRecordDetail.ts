@@ -12,5 +12,6 @@ export function useRecordDetail(type: Category, id: string) {
   return useQuery({
     queryKey: ['record-detail', id],
     queryFn,
+    refetchOnWindowFocus: false,
   })
 }
