@@ -7,6 +7,7 @@ import MobileOverlayProvider from '@/features/shared/components/MobileOverlayPro
 import { TestMenu } from '@/features/shared/components/TestMenu/TestMenu'
 import 'keen-slider/keen-slider.min.css'
 import Script from 'next/script'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 
 import '../styles/globals.css'
@@ -52,6 +53,7 @@ function MyApp({ children }: { children: React.ReactNode }) {
                 </MobileOverlayProvider>
               </DisableScroll>
             </ThemeProvider>
+            <ReactQueryDevtools initialIsOpen={false} />
           </ReactQueryProvider>
         </ReduxStoreProvider>
       </body>
