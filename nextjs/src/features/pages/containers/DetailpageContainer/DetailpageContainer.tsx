@@ -2,7 +2,7 @@
 import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
 import { EditorialLayer } from '@/features/shared/components/EditorialLayer/EditorialLayer'
 import { StoryByIdQuery, LandingpageBySlugQuery } from 'src/generated/graphql'
-import { Box } from '@/features/shared/configs/chakra'
+import { Box } from '@chakra-ui/react'
 import { DetailGalaxy } from '@/features/galaxyInterface/galaxies/DetailGalaxy/DetailGalaxy'
 
 export interface DetailpageEditorialLayer {
