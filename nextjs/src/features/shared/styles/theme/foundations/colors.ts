@@ -172,6 +172,7 @@ const blue = {
 const blueAlpha = {
   '100': 'RGBA(159, 238, 255, 1)',
   '80': 'rgba(159, 238, 255, 0.8)',
+  '60': 'rgba(159, 238, 255.0.6)',
 }
 
 const navyAlpha = {
