@@ -20,7 +20,9 @@ export const SuggestionBar: React.FC<Props> = ({ isOpen = false, children }) => 
       zIndex={FOOTER_Z_INDEX - 1}
       transform={isOpen ? 'translateY(0)' : 'translateY(100%)'}
       transition={
-        'transform 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s ease-in-out'
+        isOpen
+          ? 'transform 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s ease-in-out'
+          : 'transform 0.3s ease-in-out 0.1s, opacity 0.3s ease-in-out, visibility 0.3s ease-in-out'
       }
       opacity={isOpen ? 1 : 0}
       visibility={isOpen ? 'visible' : 'hidden'}
@@ -28,7 +30,13 @@ export const SuggestionBar: React.FC<Props> = ({ isOpen = false, children }) => 
       templateColumns={'146px 1fr'}
     >
       <Box width="146px" border="1px solid red"></Box>
-      <Box overflow="hidden" width="100%">
+      <Box
+        overflow="hidden"
+        width="100%"
+        opacity={isOpen ? 1 : 0}
+        visibility={isOpen ? 'visible' : 'hidden'}
+        transition="opacity 0.1s ease-in-out 0.2s, visibility 0.1s ease-in-out 0.2s"
+      >
         <Flex gap="5px" width={'100%'} overflowX="auto" paddingBottom="20px" marginBottom="-20px">
           {children}
         </Flex>

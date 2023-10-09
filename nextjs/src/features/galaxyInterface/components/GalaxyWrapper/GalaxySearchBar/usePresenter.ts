@@ -45,6 +45,7 @@ export const usePresenter = () => {
 
   const handleSearchModeClose = () => {
     dispatch(sharedActions.searchModeActive({ isSearchModeActive: false }))
+    setIsCategorySuggestionsOpen(false)
   }
 
   const category = getCurrentCategory()
