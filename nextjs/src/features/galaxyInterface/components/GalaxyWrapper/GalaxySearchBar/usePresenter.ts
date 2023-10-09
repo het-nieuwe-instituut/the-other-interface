@@ -2,7 +2,7 @@ import { State } from '@/features/shared/configs/store'
 import { getCurrentZoomNumber } from '@/features/shared/helpers/getCurrentZoomNumber'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { sharedActions } from '@/features/shared/stores/shared.store'
-import { CATEGORIES, Category, CloudCategory } from '@/features/shared/utils/categories'
+import { CATEGORIES, Category } from '@/features/shared/utils/categories'
 import { useParams, usePathname, useSearchParams } from 'next/navigation'
 import { useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -56,7 +56,6 @@ export const usePresenter = () => {
 
   const handleSearchModeClose = () => {
     dispatch(sharedActions.searchModeActive({ isSearchModeActive: false }))
-    dispatch(sharedActions.searchCategory({ searchCategory: initialCategory }))
     dispatch(sharedActions.categorySuggestionsOpen({ categorySuggestionsOpen: false }))
   }
 

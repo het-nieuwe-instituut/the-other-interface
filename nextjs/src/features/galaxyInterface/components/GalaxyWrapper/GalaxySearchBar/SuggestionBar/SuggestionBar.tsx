@@ -26,10 +26,9 @@ export const SuggestionBar: React.FC<Props> = ({ isOpen = false, children }) => 
       }
       opacity={isOpen ? 1 : 0}
       visibility={isOpen ? 'visible' : 'hidden'}
-      border="1px solid red"
       templateColumns={'146px 1fr'}
     >
-      <Box width="146px" border="1px solid red"></Box>
+      <Box width="146px"></Box>
       <Box
         overflow="hidden"
         width="100%"
