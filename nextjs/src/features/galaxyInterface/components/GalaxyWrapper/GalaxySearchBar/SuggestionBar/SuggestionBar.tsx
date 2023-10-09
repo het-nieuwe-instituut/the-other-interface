@@ -1,16 +1,12 @@
-import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/SearchFilterBox'
 import { FOOTER_Z_INDEX } from '@/features/shared/constants/mainConstants'
-import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { CLOUD_CATEGORIES } from '@/features/shared/utils/categories'
 import { Flex, Box, Grid } from '@chakra-ui/react'
 
 interface Props {
   isOpen?: boolean
+  children?: React.ReactNode
 }
 
-export const SuggestionBar: React.FC<Props> = ({ isOpen = false }) => {
-  const { t } = useTypeSafeTranslation('category')
-
+export const SuggestionBar: React.FC<Props> = ({ isOpen = false, children }) => {
   return (
     <Grid
       position={'absolute'}
@@ -34,13 +30,7 @@ export const SuggestionBar: React.FC<Props> = ({ isOpen = false }) => {
       <Box width="146px" border="1px solid red"></Box>
       <Box overflow="hidden" width="100%">
         <Flex gap="5px" width={'100%'} overflowX="auto" paddingBottom="20px" marginBottom="-20px">
-          {[...Object.values(CLOUD_CATEGORIES), ...Object.values(CLOUD_CATEGORIES)].map(
-            category => (
-              <Box key={category}>
-                <SearchFilterBox category={t('category')} subCategory={t(category)} />
-              </Box>
-            )
-          )}
+          {children}
         </Flex>
       </Box>
     </Grid>

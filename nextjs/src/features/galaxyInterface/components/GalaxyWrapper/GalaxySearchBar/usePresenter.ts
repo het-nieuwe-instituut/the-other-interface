@@ -14,8 +14,7 @@ export const usePresenter = () => {
   const dispatch = useDispatch()
   const isSearchModeActive = useSelector((state: State) => state.shared.isSearchModeActive)
   const { t } = useTypeSafeTranslation('category')
-  // TODO: move to use selector
-  const [isSuggestsOpen, setIsSuggestsOpen] = useState(false)
+  const [isCategorySuggestionsOpen, setIsCategorySuggestionsOpen] = useState(false)
 
   // TODO: refactor this, probably put category on zoom 3 to search param ?
   const getCurrentCategory = () => {
@@ -58,8 +57,8 @@ export const usePresenter = () => {
     handleSearchModeClose,
     isSearchModeActive,
     t,
-    isSuggestsOpen,
-    setIsSuggestsOpen,
+    isCategorySuggestionsOpen,
+    setIsCategorySuggestionsOpen,
     currentZoomNumber,
   }
 }

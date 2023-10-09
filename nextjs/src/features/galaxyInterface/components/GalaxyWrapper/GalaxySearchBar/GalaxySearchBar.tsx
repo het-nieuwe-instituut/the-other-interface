@@ -4,6 +4,7 @@ import { usePresenter } from './usePresenter'
 import { CategoryFilter } from './CategoryFilter/CategoryFilter'
 import { SuggestionBar } from './SuggestionBar/SuggestionBar'
 import { FilterInput, FilterCloseButton } from './fragments'
+import { CategorySuggestions } from '../CategorySuggestions/CategorySuggestions'
 
 interface Props {
   totalResults: string
@@ -16,9 +17,9 @@ export const GalaxySearchBar: React.FC<Props> = ({ totalResults }) => {
     isSearchModeActive,
     handleSearchModeClose,
     handleSearchModeOpen,
-    setIsSuggestsOpen,
+    isCategorySuggestionsOpen,
     currentZoomNumber,
-    isSuggestsOpen,
+    setIsCategorySuggestionsOpen,
     t,
   } = usePresenter()
 
@@ -28,7 +29,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ totalResults }) => {
       height="60px"
       templateColumns={currentZoomNumber === 2 ? 'auto auto 1fr auto' : 'auto 1fr auto'}
       gap="5px"
-      borderRadius={isSuggestsOpen ? '0 0 5px 5px' : '5px'}
+      borderRadius={isCategorySuggestionsOpen ? '0 0 5px 5px' : '5px'}
       transition={'border-radius 0.3s ease-in-out'}
       backgroundColor={'blueAlpha.100'}
       padding={'5px 20px'}
@@ -48,12 +49,14 @@ export const GalaxySearchBar: React.FC<Props> = ({ totalResults }) => {
 
       {showInitialCategory && category && (
         <CategoryFilter
-          onClick={() => setIsSuggestsOpen(!isSuggestsOpen)}
-          isOpen={isSuggestsOpen}
+          onClick={() => setIsCategorySuggestionsOpen(!isCategorySuggestionsOpen)}
+          isOpen={isCategorySuggestionsOpen}
           selectedOption={t(category)}
         />
       )}
-      <SuggestionBar isOpen={isSuggestsOpen} />
+      <SuggestionBar isOpen={isCategorySuggestionsOpen}>
+        <CategorySuggestions />
+      </SuggestionBar>
       <FilterInput onFocus={handleSearchModeOpen} />
       {isSearchModeActive && <FilterCloseButton handleClick={handleSearchModeClose} />}
     </Grid>
