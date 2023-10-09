@@ -26,7 +26,13 @@ export const SearchFilterBox: React.FC<Props> = ({
       cursor={isClickable ? 'pointer' : 'default'}
       onClick={onClick}
     >
-      <Flex position="relative" width="100%" alignItems={'center'} justifyContent={'space-between'}>
+      <Flex
+        position="relative"
+        width="100%"
+        alignItems={'center'}
+        gap="5px"
+        justifyContent={'space-between'}
+      >
         <Text textStyle="socialLarge.sm">{category}</Text>
 
         {actionButton && (

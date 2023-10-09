@@ -5,6 +5,7 @@ import { CategoryFilter } from './CategoryFilter/CategoryFilter'
 import { SuggestionBar } from './SuggestionBar/SuggestionBar'
 import { FilterInput, FilterCloseButton } from './fragments'
 import { CategorySuggestions } from '../CategorySuggestions/CategorySuggestions'
+import { GoButton } from './fragments/GoButton'
 
 interface Props {
   totalResults: string
@@ -19,6 +20,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ totalResults }) => {
     isCategorySuggestionsOpen,
     currentZoomNumber,
     setIsCategorySuggestionsOpen,
+    handleGoClick,
     t,
   } = usePresenter()
 
@@ -46,18 +48,23 @@ export const GalaxySearchBar: React.FC<Props> = ({ totalResults }) => {
         </Flex>
       )}
 
-      {category && (
-        <CategoryFilter
-          onClick={() => setIsCategorySuggestionsOpen(!isCategorySuggestionsOpen)}
-          isOpen={isCategorySuggestionsOpen}
-          selectedOption={t(category)}
-        />
-      )}
+      <CategoryFilter
+        onClick={() => setIsCategorySuggestionsOpen(!isCategorySuggestionsOpen)}
+        isOpen={isCategorySuggestionsOpen}
+        selectedOption={category ? t(category) : ''}
+      />
+
       <SuggestionBar isOpen={isCategorySuggestionsOpen}>
         <CategorySuggestions />
       </SuggestionBar>
       <FilterInput onFocus={handleSearchModeOpen} />
-      {isSearchModeActive && <FilterCloseButton handleClick={handleSearchModeClose} />}
+
+      {isSearchModeActive && (
+        <Flex gap="15px" border="1px solid red" alignItems={'center'}>
+          <GoButton handleClick={handleGoClick} />
+          <FilterCloseButton handleClick={handleSearchModeClose} />
+        </Flex>
+      )}
     </Grid>
   )
 }

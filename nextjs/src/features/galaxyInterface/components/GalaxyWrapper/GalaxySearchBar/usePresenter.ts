@@ -3,11 +3,12 @@ import { getCurrentZoomNumber } from '@/features/shared/helpers/getCurrentZoomNu
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { sharedActions } from '@/features/shared/stores/shared.store'
 import { CATEGORIES, Category } from '@/features/shared/utils/categories'
-import { useParams, usePathname, useSearchParams } from 'next/navigation'
+import { useParams, usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 export const usePresenter = () => {
+  const router = useRouter()
   const pathname = usePathname()
   const params = useParams()
   const searchParams = useSearchParams()
@@ -61,6 +62,10 @@ export const usePresenter = () => {
 
   const currentZoomNumber = getCurrentZoomNumber(pathname)
 
+  const handleGoClick = () => {
+    router.push(`/landingpage?category=${searchCategory}`)
+  }
+
   return {
     category: searchCategory,
     handleSearchModeOpen,
@@ -76,5 +81,6 @@ export const usePresenter = () => {
       )
     },
     currentZoomNumber,
+    handleGoClick,
   }
 }
