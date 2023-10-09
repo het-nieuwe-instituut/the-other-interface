@@ -4,9 +4,17 @@ interface Props {
   category?: string
   subCategory?: string
   actionButton?: React.ReactNode
+  isClickable?: boolean
+  onClick?: () => void
 }
 
-export const SearchFilterBox: React.FC<Props> = ({ category, subCategory, actionButton }) => {
+export const SearchFilterBox: React.FC<Props> = ({
+  category,
+  subCategory,
+  actionButton,
+  isClickable = false,
+  onClick,
+}) => {
   return (
     <GridItem
       backgroundColor={'navyAlpha.100'}
@@ -15,6 +23,8 @@ export const SearchFilterBox: React.FC<Props> = ({ category, subCategory, action
       color={'blueAlpha.100'}
       width={'fit-content'}
       zIndex={'inherit'}
+      cursor={isClickable ? 'pointer' : 'default'}
+      onClick={onClick}
     >
       <Flex position="relative" width="100%" alignItems={'center'} justifyContent={'space-between'}>
         <Text textStyle="socialLarge.sm">{category}</Text>

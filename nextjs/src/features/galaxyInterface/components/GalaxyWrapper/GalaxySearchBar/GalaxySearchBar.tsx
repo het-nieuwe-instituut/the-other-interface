@@ -13,7 +13,6 @@ interface Props {
 export const GalaxySearchBar: React.FC<Props> = ({ totalResults }) => {
   const {
     category,
-    showInitialCategory,
     isSearchModeActive,
     handleSearchModeClose,
     handleSearchModeOpen,
@@ -47,7 +46,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ totalResults }) => {
         </Flex>
       )}
 
-      {showInitialCategory && category && (
+      {category && (
         <CategoryFilter
           onClick={() => setIsCategorySuggestionsOpen(!isCategorySuggestionsOpen)}
           isOpen={isCategorySuggestionsOpen}
