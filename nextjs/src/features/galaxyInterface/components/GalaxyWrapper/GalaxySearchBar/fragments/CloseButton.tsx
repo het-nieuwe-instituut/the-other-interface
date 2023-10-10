@@ -5,7 +5,7 @@ type Props = {
   handleClick: () => void
 }
 
-export const FilterCloseButton: React.FC<Props> = ({ handleClick }) => {
+export const CloseButton: React.FC<Props> = ({ handleClick }) => {
   return (
     <Button
       bg="transparent"
@@ -14,6 +14,7 @@ export const FilterCloseButton: React.FC<Props> = ({ handleClick }) => {
       border={'none'}
       p={0}
       padding={'0'}
+      minWidth="auto"
       onClick={handleClick}
     >
       <CrossIcon />

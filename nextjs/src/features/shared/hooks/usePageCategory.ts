@@ -19,13 +19,12 @@ export const usePageCategory = () => {
     if (params?.category === CATEGORIES.stories) {
       const cloudCategoriesArray = Object.values(CLOUD_CATEGORIES)
       category = cloudCategoriesArray[Math.floor(Math.random() * cloudCategoriesArray.length)]
-      console.log('usePageCategory', pathname, params, searchParams)
     } else {
       category = params?.category as CloudCategory
     }
 
     return category
-  }, [pathname])
+  }, [pathname, searchParams])
 
   return {
     pageCategory,

@@ -3,7 +3,7 @@ import { FOOTER_Z_INDEX } from '@/features/shared/constants/mainConstants'
 import { usePresenter } from './usePresenter'
 import { CategoryFilter } from './CategoryFilter/CategoryFilter'
 import { SuggestionBar } from './SuggestionBar/SuggestionBar'
-import { FilterInput, FilterCloseButton } from './fragments'
+import { FilterInput, CloseButton } from './fragments'
 import { CategorySuggestions } from '../CategorySuggestions/CategorySuggestions'
 import { GoButton } from './fragments/GoButton'
 
@@ -48,9 +48,9 @@ export const GalaxySearchBar: React.FC = () => {
       <FilterInput onFocus={handleSearchModeOpen} />
 
       {isSearchModeActive && (
-        <Flex gap="15px" border="1px solid red" alignItems={'center'}>
+        <Flex gap="15px" alignItems={'center'}>
           <GoButton handleClick={handleGoClick} />
-          <FilterCloseButton handleClick={handleSearchModeClose} />
+          <CloseButton handleClick={handleSearchModeClose} />
         </Flex>
       )}
     </Grid>

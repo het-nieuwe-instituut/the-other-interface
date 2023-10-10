@@ -1,2 +1,2 @@
-export * from './FilterCloseButton'
+export * from './CloseButton'
 export * from './FilterInput'
