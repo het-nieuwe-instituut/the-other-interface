@@ -1,5 +1,6 @@
 import { State } from '@/features/shared/configs/store'
 import { getCurrentZoomNumber } from '@/features/shared/helpers/getCurrentZoomNumber'
+import { useZoom2SearchResult } from '@/features/shared/hooks/queries/useZoom2SearchResult'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { usePageCategory } from '@/features/shared/hooks/usePageCategory'
 import { sharedActions } from '@/features/shared/stores/shared.store'
@@ -19,6 +20,8 @@ export const usePresenter = () => {
   const { t } = useTypeSafeTranslation('category')
 
   const { pageCategory } = usePageCategory()
+
+  const { data } = useZoom2SearchResult(pageCategory)
 
   useEffect(() => {
     dispatch(sharedActions.searchCategory({ searchCategory: pageCategory }))
@@ -63,5 +66,6 @@ export const usePresenter = () => {
     },
     currentZoomNumber,
     handleGoClick,
+    searchResultAmount: data?.zoomLevel2?.total || '0',
   }
 }

@@ -5,11 +5,11 @@ import { Record } from '../Record'
 import { Zoom2Query } from 'src/generated/graphql'
 
 type Props = {
-  zoom2: Zoom2Query
+  zoom2?: Zoom2Query
 }
 
 export const Records: React.FC<Props> = ({ zoom2 }) => {
-  const { positionedRecords } = usePresenter(zoom2.zoomLevel2.nodes ?? [])
+  const { positionedRecords } = usePresenter(zoom2?.zoomLevel2.nodes ?? [])
 
   return (
     <Grid
