@@ -13,6 +13,7 @@ export const FilterCloseButton: React.FC<Props> = ({ handleClick }) => {
       _active={{ bg: 'transparent' }}
       border={'none'}
       p={0}
+      padding={'0'}
       onClick={handleClick}
     >
       <CrossIcon />
