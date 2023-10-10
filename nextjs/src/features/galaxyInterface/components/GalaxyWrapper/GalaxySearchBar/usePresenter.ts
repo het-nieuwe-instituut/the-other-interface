@@ -44,10 +44,9 @@ export const usePresenter = () => {
     dispatch(sharedActions.categorySuggestionsOpen({ categorySuggestionsOpen: false }))
   }
 
-  const currentZoomNumber = getCurrentZoomNumber(pathname)
-
   const handleGoClick = () => {
     router.push(`/landingpage?category=${searchCategory}`)
+    handleSearchModeClose()
   }
 
   return {
@@ -64,7 +63,7 @@ export const usePresenter = () => {
         })
       )
     },
-    currentZoomNumber,
+
     handleGoClick,
     searchResultAmount: data?.zoomLevel2?.total || '0',
   }

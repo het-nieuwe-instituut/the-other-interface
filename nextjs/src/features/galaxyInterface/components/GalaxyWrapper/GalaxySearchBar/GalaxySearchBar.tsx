@@ -14,7 +14,6 @@ export const GalaxySearchBar: React.FC = () => {
     handleSearchModeClose,
     handleSearchModeOpen,
     isCategorySuggestionsOpen,
-    currentZoomNumber,
     setIsCategorySuggestionsOpen,
     handleGoClick,
     t,
@@ -25,7 +24,7 @@ export const GalaxySearchBar: React.FC = () => {
     <Grid
       position={'relative'}
       height="60px"
-      templateColumns={currentZoomNumber === 2 ? 'auto auto 1fr auto' : 'auto 1fr auto'}
+      templateColumns="auto auto 1fr auto"
       gap="5px"
       borderRadius={isCategorySuggestionsOpen ? '0 0 5px 5px' : '5px'}
       transition={'border-radius 0.3s ease-in-out'}
