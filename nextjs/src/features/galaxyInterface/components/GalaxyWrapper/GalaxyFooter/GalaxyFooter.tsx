@@ -4,11 +4,7 @@ import { GalaxyNavigation } from '../GalaxyNavigation/GalaxyNavigation'
 import { GalaxySearchBar } from '../GalaxySearchBar/GalaxySearchBar'
 import { usePresenter } from './usePresenter'
 
-interface Props {
-  totalResults?: string
-}
-
-export const GalaxyFooter: React.FC<Props> = ({ totalResults = '' }) => {
+export const GalaxyFooter: React.FC = () => {
   const { showSearchBar } = usePresenter()
 
   return (
@@ -22,7 +18,7 @@ export const GalaxyFooter: React.FC<Props> = ({ totalResults = '' }) => {
       gap="5px"
     >
       <GridItem></GridItem>
-      <GridItem>{showSearchBar && <GalaxySearchBar totalResults={totalResults} />}</GridItem>
+      <GridItem>{showSearchBar && <GalaxySearchBar />}</GridItem>
       <GalaxyNavigation />
     </Grid>
   )

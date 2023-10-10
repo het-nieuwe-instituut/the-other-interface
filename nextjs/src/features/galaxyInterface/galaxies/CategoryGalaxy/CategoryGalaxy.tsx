@@ -13,7 +13,7 @@ export const CategoryGalaxy: React.FC = () => {
       {isSearchModeActive && <BlurOverlay />}
       <Records zoom2={searchResult} />
 
-      <GalaxyFooter totalResults={searchResult?.zoomLevel2?.total} />
+      <GalaxyFooter />
     </Box>
   )
 }

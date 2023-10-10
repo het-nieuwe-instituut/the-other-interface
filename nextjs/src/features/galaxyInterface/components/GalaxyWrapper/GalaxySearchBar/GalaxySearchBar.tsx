@@ -7,11 +7,7 @@ import { FilterInput, FilterCloseButton } from './fragments'
 import { CategorySuggestions } from '../CategorySuggestions/CategorySuggestions'
 import { GoButton } from './fragments/GoButton'
 
-interface Props {
-  totalResults: string
-}
-
-export const GalaxySearchBar: React.FC<Props> = ({ totalResults }) => {
+export const GalaxySearchBar: React.FC = () => {
   const {
     category,
     isSearchModeActive,
@@ -22,6 +18,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ totalResults }) => {
     setIsCategorySuggestionsOpen,
     handleGoClick,
     t,
+    searchResultAmount,
   } = usePresenter()
 
   return (
@@ -36,17 +33,9 @@ export const GalaxySearchBar: React.FC<Props> = ({ totalResults }) => {
       padding={'5px 20px'}
       zIndex={FOOTER_Z_INDEX}
     >
-      {totalResults && (
-        <Flex
-          justifyContent={'center'}
-          alignItems={'center'}
-          mr={4}
-          height="50px"
-          zIndex={'inherit'}
-        >
-          <Text textStyle="socialLarge.lg">{t('resultsFor', { total: totalResults })}</Text>
-        </Flex>
-      )}
+      <Flex justifyContent={'center'} alignItems={'center'} mr={4} height="50px" zIndex={'inherit'}>
+        <Text textStyle="socialLarge.lg">{t('resultsFor', { total: searchResultAmount })}</Text>
+      </Flex>
 
       <CategoryFilter
         onClick={() => setIsCategorySuggestionsOpen(!isCategorySuggestionsOpen)}
