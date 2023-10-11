@@ -18,6 +18,8 @@ export const GalaxySearchBar: React.FC = () => {
     handleGoClick,
     t,
     searchResultAmount,
+    inputValue,
+    handleInputChange,
   } = usePresenter()
 
   return (
@@ -45,7 +47,7 @@ export const GalaxySearchBar: React.FC = () => {
       <SuggestionBar isOpen={isCategorySuggestionsOpen}>
         <CategorySuggestions />
       </SuggestionBar>
-      <FilterInput onFocus={handleSearchModeOpen} />
+      <FilterInput onFocus={handleSearchModeOpen} value={inputValue} onChange={handleInputChange} />
 
       {isSearchModeActive && (
         <Flex gap="15px" alignItems={'center'}>
