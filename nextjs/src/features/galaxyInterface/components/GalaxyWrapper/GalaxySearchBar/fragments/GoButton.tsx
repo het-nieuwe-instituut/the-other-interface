@@ -18,6 +18,7 @@ export const GoButton: React.FC<Props> = ({ handleClick }) => {
       cursor={'pointer'}
       color={'navyAlpha.100'}
       _hover={{ borderColor: 'transparent', bg: 'navyAlpha.100', color: 'blueAlpha.100' }}
+      transition="all 0.2s ease-in-out"
     >
       <Text textStyle="socialLarge.sm">Go</Text>
     </Flex>

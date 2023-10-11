@@ -9,13 +9,14 @@ export const CloseButton: React.FC<Props> = ({ handleClick }) => {
   return (
     <Button
       bg="transparent"
-      _hover={{ bg: 'transparent' }}
-      _active={{ bg: 'transparent' }}
       border={'none'}
       p={0}
       padding={'0'}
       minWidth="auto"
       onClick={handleClick}
+      _hover={{ bg: 'transparent', transform: 'scale(1.2)' }}
+      _active={{ bg: 'transparent' }}
+      transition="transform 0.2s ease-in-out"
     >
       <CrossIcon />
     </Button>

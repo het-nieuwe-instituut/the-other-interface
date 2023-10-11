@@ -53,6 +53,11 @@ export const usePresenter = () => {
     handleSearchModeClose()
   }
 
+  const handleClearAllClick = () => {
+    dispatch(sharedActions.searchCategory({ searchCategory: pageCategory }))
+    setInputValue('')
+  }
+
   return {
     category: searchCategory,
     handleSearchModeOpen,
@@ -71,5 +76,6 @@ export const usePresenter = () => {
     searchResultAmount: data?.zoomLevel2?.total || '0',
     inputValue,
     handleInputChange,
+    handleClearAllClick,
   }
 }
