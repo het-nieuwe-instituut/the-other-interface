@@ -1,3 +1,4 @@
+import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Text } from '@chakra-ui/react'
 
 type Props = {
@@ -5,6 +6,8 @@ type Props = {
 }
 
 export const ClearAllButton: React.FC<Props> = ({ handleClick }) => {
+  const { t } = useTypeSafeTranslation('common')
+
   return (
     <Text
       textStyle="socialLarge.sm"
@@ -16,7 +19,7 @@ export const ClearAllButton: React.FC<Props> = ({ handleClick }) => {
       onClick={handleClick}
       transition="all 0.2s ease-in-out"
     >
-      Clear all
+      {t('clearAll')}
     </Text>
   )
 }

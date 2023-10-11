@@ -1,3 +1,4 @@
+import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Flex, Text } from '@chakra-ui/react'
 
 type Props = {
@@ -5,6 +6,8 @@ type Props = {
 }
 
 export const GoButton: React.FC<Props> = ({ handleClick }) => {
+  const { t } = useTypeSafeTranslation('common')
+
   return (
     <Flex
       height={'32px'}
@@ -20,7 +23,7 @@ export const GoButton: React.FC<Props> = ({ handleClick }) => {
       _hover={{ borderColor: 'transparent', bg: 'navyAlpha.100', color: 'blueAlpha.100' }}
       transition="all 0.2s ease-in-out"
     >
-      <Text textStyle="socialLarge.sm">Go</Text>
+      <Text textStyle="socialLarge.sm">{t('go')}</Text>
     </Flex>
   )
 }

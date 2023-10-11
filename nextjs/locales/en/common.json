@@ -16,5 +16,7 @@
   "depthAbbr": "d",
   "readMore": "Read more",
   "switchToMockedServer": "Switch to mocked server",
-  "switchToLiveServer": "Switch to test server"
+  "switchToLiveServer": "Switch to test server",
+  "clearAll": "Clear all",
+  "go": "Go"
 }
