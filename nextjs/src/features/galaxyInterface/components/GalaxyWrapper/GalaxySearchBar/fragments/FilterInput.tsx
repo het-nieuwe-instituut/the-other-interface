@@ -16,6 +16,7 @@ export const FilterInput: React.FC<Props> = ({ placeholder, onChange, value, onF
       onFocus={onFocus}
       value={value}
       bg="transparent"
+      padding={'0'}
       border="none"
       _focus={{
         boxShadow: 'none',

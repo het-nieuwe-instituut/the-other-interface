@@ -49,7 +49,9 @@ export const usePresenter = () => {
   }
 
   const handleGoClick = () => {
-    router.push(`/landingpage?category=${searchCategory}&search=${inputValue}`)
+    const searchParam = inputValue ? `&search=${inputValue}` : ''
+
+    router.push(`/landingpage?category=${searchCategory}${searchParam}`)
     handleSearchModeClose()
   }
 

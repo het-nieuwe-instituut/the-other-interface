@@ -29,14 +29,14 @@ export const GalaxySearchBar: React.FC = () => {
       position={'relative'}
       height="60px"
       templateColumns="auto auto 1fr auto"
-      gap="5px"
+      gap="10px"
       borderRadius={isCategorySuggestionsOpen ? '0 0 5px 5px' : '5px'}
       transition={'border-radius 0.3s ease-in-out'}
       backgroundColor={'blueAlpha.100'}
       padding={'5px 20px'}
       zIndex={FOOTER_Z_INDEX}
     >
-      <Flex justifyContent={'center'} alignItems={'center'} mr={4} height="50px" zIndex={'inherit'}>
+      <Flex justifyContent={'center'} alignItems={'center'} height="50px" zIndex={'inherit'}>
         <Text textStyle="socialLarge.lg">{t('resultsFor', { total: searchResultAmount })}</Text>
       </Flex>
 
