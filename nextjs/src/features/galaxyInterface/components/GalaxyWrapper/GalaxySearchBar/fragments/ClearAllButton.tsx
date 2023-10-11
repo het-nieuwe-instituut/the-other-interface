@@ -10,7 +10,7 @@ export const ClearAllButton: React.FC<Props> = ({ handleClick }) => {
 
   return (
     <Text
-      textStyle="socialLarge.sm"
+      textStyle="socialLarge.md"
       color={'navyAlpha.100'}
       cursor={'pointer'}
       borderBottom={'1px solid'}
