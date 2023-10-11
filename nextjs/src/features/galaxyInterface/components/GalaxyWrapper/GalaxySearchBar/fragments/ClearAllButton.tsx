@@ -1,5 +1,5 @@
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { Text } from '@chakra-ui/react'
+import { Text, Button } from '@chakra-ui/react'
 
 type Props = {
   handleClick: () => void
@@ -9,17 +9,20 @@ export const ClearAllButton: React.FC<Props> = ({ handleClick }) => {
   const { t } = useTypeSafeTranslation('common')
 
   return (
-    <Text
-      textStyle="socialLarge.md"
-      color={'navyAlpha.100'}
-      cursor={'pointer'}
+    <Button
+      bg="transparent"
+      border={'none'}
+      padding={'0'}
+      minWidth="auto"
       borderBottom={'1px solid'}
+      borderRadius={'0'}
       borderColor={'navyAlpha.100'}
-      _hover={{ borderColor: 'transparent', bg: 'navyAlpha.100', color: 'blueAlpha.100' }}
       onClick={handleClick}
+      color={'navyAlpha.100'}
+      _hover={{ bg: 'navyAlpha.100', color: 'blueAlpha.100' }}
       transition="all 0.2s ease-in-out"
     >
-      {t('clearAll')}
-    </Text>
+      <Text textStyle="socialLarge.md"> {t('clearAll')}</Text>
+    </Button>
   )
 }
