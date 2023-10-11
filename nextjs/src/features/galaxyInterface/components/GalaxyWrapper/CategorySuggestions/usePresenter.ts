@@ -8,13 +8,14 @@ import { useDispatch, useSelector } from 'react-redux'
 export const usePresenter = () => {
   const dispatch = useDispatch()
 
-  const searchCategory = useSelector((state: State) => state.shared.searchCategory)
+  const { searchCategory, isCategorySuggestionsOpen } = useSelector((state: State) => state.shared)
 
   const { t } = useTypeSafeTranslation('category')
 
   return {
     t,
     searchCategory,
+    isCategorySuggestionsOpen,
     setSearchCategory: (category: CloudCategory) => {
       dispatch(sharedActions.searchCategory({ searchCategory: category }))
     },
