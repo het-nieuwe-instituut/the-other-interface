@@ -29,7 +29,7 @@ export const GalaxySearchBar: React.FC = () => {
       position={'relative'}
       height="60px"
       templateColumns="auto auto 1fr auto"
-      gap="10px"
+      gap="15px"
       borderRadius={isCategorySuggestionsOpen ? '0 0 5px 5px' : '5px'}
       transition={'border-radius 0.3s ease-in-out'}
       backgroundColor={'blueAlpha.100'}
