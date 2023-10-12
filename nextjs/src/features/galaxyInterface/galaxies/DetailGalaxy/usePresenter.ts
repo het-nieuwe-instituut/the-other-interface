@@ -8,6 +8,7 @@ export const usePresenter = () => {
   const category = params?.category as Category
   const id = params?.id as string
   const isSearchModeActive = useSelector((state: State) => state.shared.isSearchModeActive)
+
   return {
     category,
     id,

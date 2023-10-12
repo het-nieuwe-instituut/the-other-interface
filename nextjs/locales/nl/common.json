@@ -16,5 +16,7 @@
   "depthAbbr": "d",
   "readMore": "Lees verder",
   "switchToMockedServer": "Overschakelen naar mocked server",
-  "switchToLiveServer": "Overschakelen naar live server"
+  "switchToLiveServer": "Overschakelen naar live server",
+  "clearAll": "Clear all",
+  "go": "Go"
 }

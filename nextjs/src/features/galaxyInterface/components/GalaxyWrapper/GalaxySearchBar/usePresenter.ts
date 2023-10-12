@@ -1,40 +1,39 @@
 import { State } from '@/features/shared/configs/store'
-import { getCurrentZoomNumber } from '@/features/shared/helpers/getCurrentZoomNumber'
+import { useZoom2SearchResult } from '@/features/shared/hooks/queries/useZoom2SearchResult'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { usePageCategory } from '@/features/shared/hooks/usePageCategory'
 import { sharedActions } from '@/features/shared/stores/shared.store'
-import { CATEGORIES, Category } from '@/features/shared/utils/categories'
-import { useParams, usePathname, useSearchParams } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 export const usePresenter = () => {
+  const router = useRouter()
   const pathname = usePathname()
-  const params = useParams()
-  const searchParams = useSearchParams()
   const dispatch = useDispatch()
-  const isSearchModeActive = useSelector((state: State) => state.shared.isSearchModeActive)
+  const searchParams = useSearchParams()
+  const { isSearchModeActive, searchCategory, isCategorySuggestionsOpen } = useSelector(
+    (state: State) => state.shared
+  )
+
   const { t } = useTypeSafeTranslation('category')
-  // TODO: move to use selector
-  const [isSuggestsOpen, setIsSuggestsOpen] = useState(false)
+  const { pageCategory } = usePageCategory()
+  const { data } = useZoom2SearchResult(pageCategory)
 
-  // TODO: refactor this, probably put category on zoom 3 to search param ?
-  const getCurrentCategory = () => {
-    const currentZoomNumber = getCurrentZoomNumber(pathname)
+  const [inputValue, setInputValue] = useState('')
 
-    if (currentZoomNumber === 2) {
-      return searchParams?.get('category') as Category
-    }
-
-    if (currentZoomNumber === 3) {
-      return params?.category as Category
-    }
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value)
   }
 
   useEffect(() => {
-    ;() => {
+    dispatch(sharedActions.searchCategory({ searchCategory: pageCategory }))
+    setInputValue(searchParams?.get('search') || '')
+
+    return () => {
       dispatch(sharedActions.searchModeActive({ isSearchModeActive: false }))
     }
-  })
+  }, [pageCategory, searchParams, dispatch])
 
   useEffect(() => {
     dispatch(sharedActions.searchModeActive({ isSearchModeActive: false }))
@@ -46,20 +45,39 @@ export const usePresenter = () => {
 
   const handleSearchModeClose = () => {
     dispatch(sharedActions.searchModeActive({ isSearchModeActive: false }))
+    dispatch(sharedActions.categorySuggestionsOpen({ categorySuggestionsOpen: false }))
   }
 
-  const category = getCurrentCategory()
-  const currentZoomNumber = getCurrentZoomNumber(pathname)
+  const handleGoClick = () => {
+    const searchParam = inputValue ? `&search=${inputValue}` : ''
+
+    router.push(`/landingpage?category=${searchCategory}${searchParam}`)
+    handleSearchModeClose()
+  }
+
+  const handleClearAllClick = () => {
+    dispatch(sharedActions.searchCategory({ searchCategory: pageCategory }))
+    setInputValue('')
+  }
 
   return {
-    category,
-    showInitialCategory: category !== CATEGORIES.stories,
+    category: searchCategory,
     handleSearchModeOpen,
     handleSearchModeClose,
     isSearchModeActive,
     t,
-    isSuggestsOpen,
-    setIsSuggestsOpen,
-    currentZoomNumber,
+    isCategorySuggestionsOpen,
+    setIsCategorySuggestionsOpen: (isCategorySuggestionsOpen: boolean) => {
+      dispatch(
+        sharedActions.categorySuggestionsOpen({
+          categorySuggestionsOpen: isCategorySuggestionsOpen,
+        })
+      )
+    },
+    handleGoClick,
+    searchResultAmount: data?.zoomLevel2?.total || '0',
+    inputValue,
+    handleInputChange,
+    handleClearAllClick,
   }
 }
