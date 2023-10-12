@@ -5,6 +5,7 @@ interface Props {
   subCategory?: string
   actionButton?: React.ReactNode
   isClickable?: boolean
+  zIndex?: number
   onClick?: () => void
 }
 
@@ -14,6 +15,7 @@ export const SearchFilterBox: React.FC<Props> = ({
   actionButton,
   isClickable = false,
   onClick,
+  zIndex,
 }) => {
   return (
     <GridItem
@@ -22,7 +24,7 @@ export const SearchFilterBox: React.FC<Props> = ({
       padding={'4px 8px'}
       color={'blueAlpha.100'}
       width={'fit-content'}
-      zIndex={'inherit'}
+      zIndex={zIndex || 'inherit'}
       cursor={isClickable ? 'pointer' : 'default'}
       onClick={onClick}
     >
