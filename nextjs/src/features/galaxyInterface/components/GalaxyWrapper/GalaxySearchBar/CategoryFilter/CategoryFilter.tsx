@@ -17,7 +17,8 @@ export const CategoryFilter: React.FC<Props> = ({ onClick, isOpen, selectedOptio
       zIndex={FOOTER_Z_INDEX + 1}
       category={t('category')}
       subCategory={selectedOption}
-      actionButton={<ChangeButton onClick={onClick} isOpen={isOpen} />}
+      onClick={onClick}
+      actionButton={<ChangeButton isOpen={isOpen} />}
     />
   )
 }
