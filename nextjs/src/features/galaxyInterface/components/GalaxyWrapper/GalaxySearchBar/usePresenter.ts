@@ -4,7 +4,7 @@ import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { usePageCategory } from '@/features/shared/hooks/usePageCategory'
 import { sharedActions } from '@/features/shared/stores/shared.store'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 export const usePresenter = () => {
@@ -43,22 +43,38 @@ export const usePresenter = () => {
     dispatch(sharedActions.searchModeActive({ isSearchModeActive: true }))
   }
 
+  const resetSearchFilters = () => {
+    dispatch(sharedActions.searchCategory({ searchCategory: pageCategory }))
+    setInputValue(searchParams?.get('search') || '')
+  }
+
   const handleSearchModeClose = () => {
     dispatch(sharedActions.searchModeActive({ isSearchModeActive: false }))
     dispatch(sharedActions.categorySuggestionsOpen({ categorySuggestionsOpen: false }))
+
+    resetSearchFilters()
   }
 
-  const handleGoClick = () => {
+  const handleGoClick = useCallback(() => {
     const searchParam = inputValue ? `&search=${inputValue}` : ''
-
     router.push(`/landingpage?category=${searchCategory}${searchParam}`)
-    handleSearchModeClose()
-  }
 
-  const handleClearAllClick = () => {
-    dispatch(sharedActions.searchCategory({ searchCategory: pageCategory }))
-    setInputValue('')
-  }
+    handleSearchModeClose()
+  }, [inputValue, searchCategory, router])
+
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === 'Enter') {
+        handleGoClick()
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyPress)
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress)
+    }
+  }, [handleGoClick])
 
   return {
     category: searchCategory,
@@ -78,6 +94,5 @@ export const usePresenter = () => {
     searchResultAmount: data?.zoomLevel2?.total || '0',
     inputValue,
     handleInputChange,
-    handleClearAllClick,
   }
 }

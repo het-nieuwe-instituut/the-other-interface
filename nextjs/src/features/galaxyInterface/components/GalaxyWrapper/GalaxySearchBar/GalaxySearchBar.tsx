@@ -6,7 +6,6 @@ import { SuggestionBar } from './SuggestionBar/SuggestionBar'
 import { FilterInput, CloseButton } from './fragments'
 import { CategorySuggestions } from '../CategorySuggestions/CategorySuggestions'
 import { GoButton } from './fragments/GoButton'
-import { ClearAllButton } from './fragments/ClearAllButton'
 
 export const GalaxySearchBar: React.FC = () => {
   const {
@@ -21,7 +20,6 @@ export const GalaxySearchBar: React.FC = () => {
     searchResultAmount,
     inputValue,
     handleInputChange,
-    handleClearAllClick,
   } = usePresenter()
 
   return (
@@ -55,7 +53,6 @@ export const GalaxySearchBar: React.FC = () => {
 
       {isSearchModeActive && (
         <Flex gap="12px" alignItems={'center'}>
-          <ClearAllButton handleClick={handleClearAllClick} />
           <GoButton handleClick={handleGoClick} />
           <CloseButton handleClick={handleSearchModeClose} />
         </Flex>

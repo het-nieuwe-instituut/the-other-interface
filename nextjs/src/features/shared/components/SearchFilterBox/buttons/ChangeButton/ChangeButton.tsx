@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react'
 
 interface Props {
-  onClick: () => void
+  onClick?: () => void
   isOpen: boolean
 }
 

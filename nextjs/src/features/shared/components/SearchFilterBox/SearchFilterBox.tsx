@@ -4,7 +4,6 @@ interface Props {
   category?: string
   subCategory?: string
   actionButton?: React.ReactNode
-  isClickable?: boolean
   zIndex?: number
   onClick?: () => void
 }
@@ -13,7 +12,6 @@ export const SearchFilterBox: React.FC<Props> = ({
   category,
   subCategory,
   actionButton,
-  isClickable = false,
   onClick,
   zIndex,
 }) => {
@@ -25,7 +23,7 @@ export const SearchFilterBox: React.FC<Props> = ({
       color={'blueAlpha.100'}
       width={'fit-content'}
       zIndex={zIndex || 'inherit'}
-      cursor={isClickable ? 'pointer' : 'default'}
+      cursor={onClick ? 'pointer' : 'default'}
       onClick={onClick}
     >
       <Flex

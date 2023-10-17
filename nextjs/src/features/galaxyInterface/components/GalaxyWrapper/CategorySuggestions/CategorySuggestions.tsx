@@ -16,7 +16,6 @@ export const CategorySuggestions: React.FC = () => {
             key={category}
             category={t('category')}
             subCategory={t(category)}
-            isClickable
             onClick={() => setSearchCategory(category)}
           />
         ))}
