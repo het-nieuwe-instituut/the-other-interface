@@ -6,7 +6,7 @@ const getZoom2Link = (searchParam: string, category?: string) => {
   const search = searchParam ? `&search=${searchParam}` : ''
 
   if (Object.values(CLOUD_CATEGORIES).includes(category as CloudCategory)) {
-    return `/landingpage?category=${category}${search}}`
+    return `/landingpage?category=${category}${search}`
   }
 
   return null
