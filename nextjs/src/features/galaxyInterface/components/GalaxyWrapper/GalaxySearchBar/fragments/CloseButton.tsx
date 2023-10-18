@@ -14,7 +14,7 @@ export const CloseButton: React.FC<Props> = ({ handleClick }) => {
       padding={'0'}
       minWidth="auto"
       onClick={handleClick}
-      _hover={{ bg: 'transparent', transform: 'scale(1.2)' }}
+      _hover={{ bg: 'transparent' }}
       _active={{ bg: 'transparent' }}
       transition="transform 0.2s ease-in-out"
     >
