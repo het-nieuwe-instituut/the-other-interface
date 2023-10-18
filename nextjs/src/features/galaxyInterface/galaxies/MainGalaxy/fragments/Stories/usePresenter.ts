@@ -85,6 +85,8 @@ const mapStory = (story: StoryEntity) => {
 
 export const usePresenter = (stories: StoryEntity[]) => {
   const positionedStories = useMemo(() => {
+    if (!stories) return []
+
     const positionedStories: PositionedStory[] = []
 
     positioningTemplate.forEach((template, index) => {
