@@ -16,7 +16,7 @@ type Payload =
   | {
       id: string
     }
-  | { lang?: string; publicationState: PublicationState; id: string }
+  | { locale?: string; publicationState: PublicationState; id: string }
 
 export type Zoom3Record =
   | PeopleZoomLevel3DetailType
@@ -39,6 +39,7 @@ export async function getZoom3RecordTask(type: Category, payload: Payload, api: 
     const data = await configByType?.zoomLevelQuery?.(payload)
     const item = configByType?.accesor?.(data)
 
+    // TODO this might cause console errors 'Cannot return null for non-nullable field'
     if (!item?.thumbnail && !item?.title) return null
 
     return {

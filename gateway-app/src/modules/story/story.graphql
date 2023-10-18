@@ -21,6 +21,41 @@ query stories(
     }
 }
 
+query storiesByLocale(
+    $id: IDFilterInput
+    $pagination: PaginationArg
+    $sort: [String]
+    $publicationState: PublicationState
+    $locale: StringFilterInput
+) {
+    stories(
+        filters: {
+            or: [
+                {
+                    id: $id,
+                    locale: $locale
+                },
+                {
+                    id: $id,
+                    localizations: {
+                        locale: $locale
+                    }
+                }
+            ]
+        },
+        pagination: $pagination,
+        sort: $sort,
+        publicationState: $publicationState
+    ) {
+        data {
+            ...LocalizedStoryFragment
+        }
+        meta {
+            ...ResponseCollectionMetaFragment
+        }
+    }
+}
+
 query storiesWithoutRelations(
     $filters: StoryFiltersInput
     $pagination: PaginationArg
@@ -158,6 +193,65 @@ fragment StoryWithoutRelationsFragment on StoryEntity {
                 attributes {
                     firstName
                 }
+            }
+        }
+    }
+}
+
+fragment NestedStoryFragment on StoryEntity {
+    id
+    attributes {
+        title
+        slug
+        description
+        shortDescription
+        createdAt
+        updatedAt
+        publishedAt
+        locale
+        author {
+            data {
+                attributes {
+                    firstName
+                }
+            }
+        }
+        components {
+            __typename
+            ... on ComponentModulesImage {
+                ...ComponentModulesImageFragment
+            }
+        }
+    }
+}
+
+fragment LocalizedStoryFragment on StoryEntity {
+    id
+    attributes {
+        title
+        slug
+        description
+        shortDescription
+        createdAt
+        updatedAt
+        publishedAt
+        locale
+        author {
+            data {
+                attributes {
+                    firstName
+                }
+            }
+        }
+        components {
+            __typename
+            ... on ComponentModulesImage {
+                ...ComponentModulesImageFragment
+            }
+        }
+        localizations {
+            data {
+                ...NestedStoryFragment
             }
         }
     }

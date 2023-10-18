@@ -52,15 +52,36 @@ export class StoryResolver {
     @Args('publicationState', { nullable: true }) publicationState?: PublicationState,
     @Args('locale', { nullable: true }) locale?: I18NLocaleCode
   ) {
-    const res = await this.strapiGqlSdk.stories({
-      filters: filters || undefined,
+    const inputArgs = {
+      id: filters?.id || undefined, // assuming your filters might contain an ID
       pagination: pagination || {},
       sort: sort || [],
       publicationState: publicationState || undefined,
-      locale: locale || undefined,
-    })
+      locale: {
+        eq: locale || undefined,
+      },
+    }
 
-    return res.stories
+    const res = await this.strapiGqlSdk.storiesByLocale(inputArgs)
+    if (res?.stories?.data[0]?.attributes?.locale === locale || !locale) {
+      return res.stories
+    }
+
+    const localizedStory = res.stories?.data[0]?.attributes?.localizations?.data?.find(
+      l => l.attributes?.locale === locale
+    )
+
+    if (localizedStory) {
+      return {
+        data: [localizedStory],
+        meta: res?.stories?.meta,
+      }
+    }
+
+    return {
+      data: [],
+      meta: {},
+    }
   }
 
   @Query(() => StoryEntityResponse)
