@@ -20,6 +20,7 @@ export const GalaxySearchBar: React.FC = () => {
     searchResultAmount,
     inputValue,
     handleInputChange,
+    searchBarRef,
   } = usePresenter()
 
   return (
@@ -35,6 +36,7 @@ export const GalaxySearchBar: React.FC = () => {
       zIndex={FOOTER_Z_INDEX}
       onClick={!isSearchModeActive ? handleSearchModeOpen : undefined}
       cursor={!isSearchModeActive ? 'pointer' : 'default'}
+      ref={searchBarRef}
     >
       <Flex justifyContent={'center'} alignItems={'center'} height="50px" zIndex={'inherit'}>
         <Text textStyle="socialLarge.lg">{t('resultsFor', { total: searchResultAmount })}</Text>

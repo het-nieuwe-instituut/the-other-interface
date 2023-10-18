@@ -4,7 +4,7 @@ import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { usePageCategory } from '@/features/shared/hooks/usePageCategory'
 import { sharedActions } from '@/features/shared/stores/shared.store'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 export const usePresenter = () => {
@@ -12,6 +12,7 @@ export const usePresenter = () => {
   const pathname = usePathname()
   const dispatch = useDispatch()
   const searchParams = useSearchParams()
+  const searchBarRef = useRef<HTMLDivElement>(null)
   const { isSearchModeActive, searchCategory, isCategorySuggestionsOpen } = useSelector(
     (state: State) => state.shared
   )
@@ -43,38 +44,52 @@ export const usePresenter = () => {
     dispatch(sharedActions.searchModeActive({ isSearchModeActive: true }))
   }
 
-  const resetSearchFilters = () => {
+  const resetSearchFilters = useCallback(() => {
     dispatch(sharedActions.searchCategory({ searchCategory: pageCategory }))
     setInputValue(searchParams?.get('search') || '')
-  }
+  }, [searchParams, pageCategory, dispatch])
 
-  const handleSearchModeClose = () => {
+  const handleSearchModeClose = useCallback(() => {
     dispatch(sharedActions.searchModeActive({ isSearchModeActive: false }))
     dispatch(sharedActions.categorySuggestionsOpen({ categorySuggestionsOpen: false }))
 
     resetSearchFilters()
-  }
+  }, [dispatch, resetSearchFilters])
 
   const handleGoClick = useCallback(() => {
     const searchParam = inputValue ? `&search=${inputValue}` : ''
     router.push(`/landingpage?category=${searchCategory}${searchParam}`)
 
     handleSearchModeClose()
-  }, [inputValue, searchCategory, router])
+  }, [inputValue, searchCategory, router, handleSearchModeClose])
 
   useEffect(() => {
-    const handleKeyPress = (e: KeyboardEvent) => {
+    const handleEnterPress = (e: KeyboardEvent) => {
       if (e.key === 'Enter') {
         handleGoClick()
       }
     }
 
-    document.addEventListener('keydown', handleKeyPress)
+    document.addEventListener('keydown', handleEnterPress)
 
     return () => {
-      document.removeEventListener('keydown', handleKeyPress)
+      document.removeEventListener('keydown', handleEnterPress)
     }
   }, [handleGoClick])
+
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (searchBarRef.current && !searchBarRef.current.contains(event.target as Node)) {
+        handleSearchModeClose()
+      }
+    }
+
+    document.addEventListener('mousedown', handleOutsideClick)
+
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick)
+    }
+  }, [handleSearchModeClose])
 
   return {
     category: searchCategory,
@@ -94,5 +109,6 @@ export const usePresenter = () => {
     searchResultAmount: data?.zoomLevel2?.total || '0',
     inputValue,
     handleInputChange,
+    searchBarRef,
   }
 }

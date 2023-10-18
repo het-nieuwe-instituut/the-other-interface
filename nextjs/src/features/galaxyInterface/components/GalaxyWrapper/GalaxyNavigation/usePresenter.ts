@@ -11,7 +11,6 @@ const getZoom2Link = (searchParam: string, category?: string) => {
 
   return null
 }
-
 export const usePresenter = () => {
   const pathname = usePathname()
   const params = useParams()
