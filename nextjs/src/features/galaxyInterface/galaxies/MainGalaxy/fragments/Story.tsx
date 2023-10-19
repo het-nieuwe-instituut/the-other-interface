@@ -1,9 +1,10 @@
 import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
 import { Box, Text, GridItem, Flex } from '@chakra-ui/react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 import { HOMEPAGE_Z_INDEXES } from './constants'
 import { PositionedStory } from './types'
+import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 
 type Props = {
   story: PositionedStory
@@ -11,6 +12,8 @@ type Props = {
 
 export const Story: React.FC<Props> = ({ story }) => {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const lang = searchParams?.get('lang')
 
   const { id, title, image, position, grid } = story
 
@@ -18,8 +21,9 @@ export const Story: React.FC<Props> = ({ story }) => {
 
   const handleClick = () => {
     if (!title) return
-
-    router.push(`/detail/stories/${id}`)
+    let url = `/detail/stories/${id}`
+    url = addLocaleToUrl(url, lang)
+    router.push(url)
   }
 
   return (

@@ -6,6 +6,7 @@ import { CloudCategory } from '@/features/shared/utils/categories'
 import { RecordText } from './RecordText'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { ZoomLevel2Type } from 'src/generated/graphql'
+import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 
 type Props = {
   record: ZoomLevel2Type & {
@@ -17,13 +18,16 @@ type Props = {
 export const Record: React.FC<Props> = ({ record }) => {
   const { id, thumbnail, category, position, title } = record
   const searchParams = useSearchParams()
+  const lang = searchParams?.get('lang')
   const router = useRouter()
 
   const handleClick = () => {
     const searchParam = searchParams?.get('search')
     const search = searchParam ? `?search=${searchParam}` : ''
+    let url = `/detail/${category}/${id}${search}`
+    url = addLocaleToUrl(url, lang)
 
-    router.push(`/detail/${category}/${id}${search}`)
+    router.push(url)
   }
 
   return (

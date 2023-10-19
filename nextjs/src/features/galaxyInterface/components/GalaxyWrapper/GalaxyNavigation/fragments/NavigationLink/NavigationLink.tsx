@@ -1,9 +1,10 @@
 'use client'
 import { Box, Text, Flex } from '@chakra-ui/react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { GalaxyZoom } from '../constants'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { usePresenter } from './usePresenter'
+import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 
 type Props = {
   zoomData: GalaxyZoom
@@ -14,6 +15,8 @@ type Props = {
 export const NavigationLink: React.FC<Props> = ({ zoomData, currentZoomNumber, link }) => {
   const { zoom, title, alignItems } = zoomData
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const lang = searchParams?.get('lang')
   const { t } = useTypeSafeTranslation('navigation')
   const { isClickable, isCurrentZoom, lineStyle, isDisabled } = usePresenter(
     zoom,
@@ -22,8 +25,9 @@ export const NavigationLink: React.FC<Props> = ({ zoomData, currentZoomNumber, l
 
   const handleNavigation = () => {
     if (!link) return
+    const url = addLocaleToUrl(link, lang)
 
-    router.push(link)
+    router.push(url)
   }
 
   return (
