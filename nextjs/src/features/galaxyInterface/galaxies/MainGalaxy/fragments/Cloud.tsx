@@ -1,10 +1,11 @@
 import { Box } from '@chakra-ui/react'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 import { CategoryCloud } from './types'
 import { HOMEPAGE_Z_INDEXES } from './constants'
 import { CloudTitle } from './CloudTitle'
+import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 
 interface Props {
   cloud: CategoryCloud
@@ -13,11 +14,15 @@ interface Props {
 export const Cloud: React.FC<Props> = ({ cloud }) => {
   const { t } = useTypeSafeTranslation('homepage')
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const lang = searchParams?.get('lang')
 
   const { title: category, size, cloudPosition, titlePosition } = cloud
 
   const handleCloudClick = () => {
-    router.push(`/landingpage?category=${category}`)
+    let url = `/landingpage?category=${category}`
+    url = addLocaleToUrl(url, lang)
+    router.push(url)
   }
 
   return (

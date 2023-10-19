@@ -1,7 +1,8 @@
 import useCalculateItemsPerSlide from '@/features/modules/hooks/calculateSlidesSizes'
+import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useBreakpointValue } from '@chakra-ui/react'
 import { chunk } from 'lodash'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 
 import {
@@ -17,6 +18,8 @@ export const usePresenter = (
 ) => {
   const [currentSlide, updateCurrentSlide] = useState(0)
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const lang = searchParams?.get('lang')
 
   const { ITEMS_PER_PAGE } = useCalculateItemsPerSlide(
     type ?? EnumComponentmodulescarouselType.Highlights
@@ -37,7 +40,9 @@ export const usePresenter = (
   }
 
   const handlePressButton = () => {
-    router.push(buttonUrl ?? '')
+    if (!buttonUrl) return
+    const url = addLocaleToUrl(buttonUrl, lang)
+    router.push(url ?? '')
   }
 
   const showPagination = pagesCount > 1

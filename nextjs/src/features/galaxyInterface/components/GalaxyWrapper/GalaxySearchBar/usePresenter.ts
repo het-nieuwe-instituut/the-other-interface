@@ -1,4 +1,5 @@
 import { State } from '@/features/shared/configs/store'
+import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useZoom2SearchResult } from '@/features/shared/hooks/queries/useZoom2SearchResult'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { usePageCategory } from '@/features/shared/hooks/usePageCategory'
@@ -12,6 +13,8 @@ export const usePresenter = () => {
   const pathname = usePathname()
   const dispatch = useDispatch()
   const searchParams = useSearchParams()
+
+  const lang = searchParams?.get('lang')
   const searchBarRef = useRef<HTMLDivElement>(null)
   const { isSearchModeActive, searchCategory, isCategorySuggestionsOpen } = useSelector(
     (state: State) => state.shared
@@ -58,10 +61,12 @@ export const usePresenter = () => {
 
   const handleGoClick = useCallback(() => {
     const searchParam = inputValue ? `&search=${inputValue}` : ''
-    router.push(`/landingpage?category=${searchCategory}${searchParam}`)
+    let url = `/landingpage?category=${searchCategory}${searchParam}`
+    url = addLocaleToUrl(url, lang)
+    router.push(url)
 
     handleSearchModeClose()
-  }, [inputValue, searchCategory, router, handleSearchModeClose])
+  }, [inputValue, searchCategory, router, handleSearchModeClose, lang])
 
   useEffect(() => {
     const handleEnterPress = (e: KeyboardEvent) => {
