@@ -1,4 +1,5 @@
 'use client'
+import { useSearchParams } from 'next/navigation'
 import { Flex, Text, Link, theme } from '../../configs/chakra'
 
 import { FOOTER_Z_INDEX } from '../../constants/mainConstants'
@@ -13,6 +14,8 @@ export const Footer = ({ menupages }: Props) => {
   const menupagesCpy = menupages?.menupages?.data
   const sectionOne = menupagesCpy?.slice(0, 5)
   const sectionTwo = menupagesCpy?.slice(5, 10)
+  const searchParams = useSearchParams()
+  const lang = searchParams?.get('lang')
 
   return (
     <Flex
@@ -112,7 +115,7 @@ export const Footer = ({ menupages }: Props) => {
               {sectionTwo.map(link => (
                 <Link
                   key={Math.random()}
-                  href={`${link?.attributes?.slug}`}
+                  href={`/menupage/${link?.attributes?.slug}?lang=${lang}`}
                   variant={'decorative'}
                   cursor="pointer"
                   textStyle="small"

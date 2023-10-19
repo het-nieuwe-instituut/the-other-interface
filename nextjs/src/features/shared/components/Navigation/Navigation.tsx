@@ -15,7 +15,7 @@ type Props = {
 }
 
 export const Navigation = ({ menupages }: Props) => {
-  const { tNavigation, isMenuOpen, ref } = usePresenter()
+  const { tNavigation, isMenuOpen, ref, lang } = usePresenter()
 
   return (
     <Box
@@ -64,7 +64,7 @@ export const Navigation = ({ menupages }: Props) => {
           </Text>
 
           <Link
-            href="/landingpage?category=stories"
+            href={`/landingpage?category=stories&lang=${lang}`}
             variant={'navigation'}
             cursor="pointer"
             textStyle={'h1'}
@@ -74,7 +74,7 @@ export const Navigation = ({ menupages }: Props) => {
           </Link>
 
           <Link
-            href="/landingpage?category=archives"
+            href={`/landingpage?category=archives&lang=${lang}`}
             variant={'navigation'}
             cursor="pointer"
             textStyle={'h1'}
@@ -84,7 +84,7 @@ export const Navigation = ({ menupages }: Props) => {
           </Link>
 
           <Link
-            href="/landingpage?caregory=objects"
+            href={`/landingpage?caregory=objects&lang=${lang}`}
             variant={'navigation'}
             cursor="pointer"
             textStyle={'h1'}
@@ -94,7 +94,7 @@ export const Navigation = ({ menupages }: Props) => {
           </Link>
 
           <Link
-            href="/landingpage?caregory=people"
+            href={`/landingpage?caregory=people&lang=${lang}`}
             variant={'navigation'}
             cursor="pointer"
             textStyle={'h1'}
@@ -104,7 +104,7 @@ export const Navigation = ({ menupages }: Props) => {
           </Link>
 
           <Link
-            href="/landingpage?category=publications"
+            href={`/landingpage?category=publications&lang=${lang}`}
             variant={'navigation'}
             cursor="pointer"
             textStyle={'h1'}
@@ -121,7 +121,7 @@ export const Navigation = ({ menupages }: Props) => {
 
           {menupages?.menupages?.data?.map(item => (
             <Link
-              href={`/menupage/${item?.attributes?.slug}`}
+              href={`/menupage/${item?.attributes?.slug}?lang=${lang}`}
               variant={'navigation'}
               cursor="pointer"
               textStyle={'h3'}

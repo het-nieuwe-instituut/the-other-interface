@@ -1,6 +1,9 @@
 export const addLocaleToUrl = (url: string, lang?: string | null) => {
-  if (lang) {
-    url += `&lang=${lang}`
+  if (!lang) {
+    return url
   }
-  return url
+
+  // If the URL already has a query string, append with '&', otherwise use '?'
+  const separator = url.includes('?') ? '&' : '?'
+  return `${url}${separator}lang=${lang}`
 }
