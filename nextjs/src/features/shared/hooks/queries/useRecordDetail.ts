@@ -10,7 +10,7 @@ export function useRecordDetail(type: Category, id: string) {
   const searchParams = useSearchParams()
   const lang = searchParams?.get('lang')
 
-  const queryFn = () => getZoom3RecordTask(type, { id, locale: lang }, api)
+  const queryFn = () => getZoom3RecordTask(type, { id, locale: lang ?? 'nl' }, api)
 
   return useQuery({
     queryKey: ['record-detail', id, lang],
