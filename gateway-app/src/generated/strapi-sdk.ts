@@ -18480,9 +18480,7 @@ export const StoriesByLocaleDocument = gql`
     $locale: StringFilterInput
   ) {
     stories(
-      filters: {
-        or: [{ id: $id, locale: $locale }, { id: $id, localizations: { locale: $locale } }]
-      }
+      filters: { id: $id, locale: $locale }
       pagination: $pagination
       sort: $sort
       publicationState: $publicationState
