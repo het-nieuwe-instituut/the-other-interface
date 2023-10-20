@@ -10963,7 +10963,6 @@ export type StoriesByLocaleQueryVariables = Exact<{
   pagination?: InputMaybe<PaginationArg>
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>
   publicationState?: InputMaybe<PublicationState>
-  locale?: InputMaybe<StringFilterInput>
 }>
 
 export type StoriesByLocaleQuery = {
@@ -20144,10 +20143,9 @@ export const StoriesByLocaleDocument = gql`
     $pagination: PaginationArg
     $sort: [String]
     $publicationState: PublicationState
-    $locale: StringFilterInput
   ) {
     stories(
-      filters: { id: $id, locale: $locale }
+      filters: { id: $id }
       pagination: $pagination
       sort: $sort
       publicationState: $publicationState
