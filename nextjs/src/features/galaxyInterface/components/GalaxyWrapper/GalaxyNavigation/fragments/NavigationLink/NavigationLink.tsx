@@ -41,11 +41,11 @@ export const NavigationLink: React.FC<Props> = ({ zoomData, currentZoomNumber, l
       <Box
         position={'relative'}
         border={'1px solid'}
-        borderColor={isClickable && !isDisabled ? 'navyAlpha.100' : 'navyAlpha.25'}
+        borderColor={isClickable && !isDisabled ? 'pinkAlpha.100' : 'pinkAlpha.40'}
         width="10px"
         height="10px"
         borderRadius="50%"
-        backgroundColor={isCurrentZoom ? 'navyAlpha.100' : 'transparent'}
+        backgroundColor={isCurrentZoom ? 'pinkAlpha.100' : 'transparent'}
         {...(zoom !== 1 && {
           _after: {
             content: '""',
@@ -63,7 +63,7 @@ export const NavigationLink: React.FC<Props> = ({ zoomData, currentZoomNumber, l
       <Text
         textStyle="socialLarge.sm"
         mt={'4px'}
-        color={(isCurrentZoom || isClickable) && !isDisabled ? 'navyAlpha.100' : 'navyAlpha.25'}
+        color={(isCurrentZoom || isClickable) && !isDisabled ? 'pinkAlpha.100' : 'pinkAlpha.40'}
       >
         {t(title)}
       </Text>

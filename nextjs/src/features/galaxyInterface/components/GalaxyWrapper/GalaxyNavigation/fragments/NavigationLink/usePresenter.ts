@@ -4,16 +4,16 @@ import { CATEGORIES } from '@/features/shared/utils/categories'
 const getLineStyle = (isCurrentZoom: boolean, isClickable: boolean, isNextZoom: boolean) => {
   if (isCurrentZoom || isClickable) {
     return {
-      backgroundColor: 'navyAlpha.100',
+      backgroundColor: 'pinkAlpha.100',
     }
   }
   if (isNextZoom) {
     return {
-      backgroundImage: 'linear-gradient(90deg, #000D14 9.46%, rgba(0, 13, 20, 0.25) 93.12%)',
+      backgroundImage: 'linear-gradient(90deg, #FFE6DD 9.46%, rgba(255, 230, 221, 0.4) 93.12%)',
     }
   }
   return {
-    backgroundColor: 'navyAlpha.25',
+    backgroundColor: 'pinkAlpha.40',
   }
 }
 
