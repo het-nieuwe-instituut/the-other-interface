@@ -12,14 +12,14 @@ export const GoButton: React.FC<Props> = ({ handleClick }) => {
     <Button
       bg="transparent"
       border={'1px solid'}
-      borderColor={'navyAlpha.100'}
+      borderColor={'pinkAlpha.100'}
       padding={'0'}
       p={'6px 7px'}
       borderRadius={'3px'}
       minWidth="auto"
       onClick={handleClick}
-      color={'navyAlpha.100'}
-      _hover={{ borderColor: 'transparent', bg: 'navyAlpha.100', color: 'blueAlpha.100' }}
+      color={'pinkAlpha.100'}
+      _hover={{ borderColor: 'transparent', bg: 'pinkAlpha.100', color: 'blueAlpha.100' }}
       transition="all 0.2s ease-in-out"
     >
       <Text textStyle="socialLarge.md">{t('go')}</Text>

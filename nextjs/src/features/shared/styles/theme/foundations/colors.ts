@@ -183,17 +183,11 @@ const blueAlpha = {
   '60': 'RGBA(0, 81, 255, .6)',
 }
 
-const navyAlpha = {
-  '100': 'RGBA(0, 13, 20, 1)',
-  '25': 'RGBA(0, 13, 20, .25)',
-}
-
 const colors = {
   ...oldColors,
   blue,
   brownAlpha,
   blueAlpha,
-  navyAlpha,
   pinkAlpha,
 }
 

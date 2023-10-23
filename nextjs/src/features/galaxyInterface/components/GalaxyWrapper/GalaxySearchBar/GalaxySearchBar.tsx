@@ -37,6 +37,7 @@ export const GalaxySearchBar: React.FC = () => {
       onClick={!isSearchModeActive ? handleSearchModeOpen : undefined}
       cursor={!isSearchModeActive ? 'pointer' : 'default'}
       ref={searchBarRef}
+      color={'pinkAlpha.100'}
     >
       <Flex justifyContent={'center'} alignItems={'center'} height="50px" zIndex={'inherit'}>
         <Text textStyle="socialLarge.lg">{t('resultsFor', { total: searchResultAmount })}</Text>
