@@ -34,15 +34,15 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
-        gap="12px"
+        gap="5px"
       >
         <ResponsiveImage
           src={record?.thumbnail}
           alt={record?.title}
-          maxHeight={!record?.thumbnail ? '100%' : 'calc(100% - 2.5vw - 20px)'} // where 2.6vw are a texts' line heights, 16px are gaps
+          maxHeight="calc(100% - 2vw - 8px)" // where 2.6vw are a texts' line heights, 8px are gaps
         />
 
-        <Box w="100%" color="blueAlpha.100" position={!record?.thumbnail ? 'absolute' : 'relative'}>
+        <Box w="100%" color="blueAlpha.100">
           <Text
             align="center"
             isTruncated
@@ -57,7 +57,7 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
             textStyle="headingTimesLarge.sm"
             fontSize={'clamp(12px, .9vw, 20px)'}
             lineHeight={'normal'}
-            mt={'8px'}
+            mt={'3px'}
           >
             {t(toSingularCategory(category))}
           </Text>
