@@ -26,22 +26,10 @@ query storiesByLocale(
     $pagination: PaginationArg
     $sort: [String]
     $publicationState: PublicationState
-    $locale: StringFilterInput
 ) {
     stories(
         filters: {
-            or: [
-                {
-                    id: $id,
-                    locale: $locale
-                },
-                {
-                    id: $id,
-                    localizations: {
-                        locale: $locale
-                    }
-                }
-            ]
+            id: $id,
         },
         pagination: $pagination,
         sort: $sort,
@@ -55,6 +43,7 @@ query storiesByLocale(
         }
     }
 }
+
 
 query storiesWithoutRelations(
     $filters: StoryFiltersInput
@@ -217,9 +206,36 @@ fragment NestedStoryFragment on StoryEntity {
             }
         }
         components {
-            __typename
+           __typename
+            ... on ComponentModulesPullquote {
+                ...ComponentModulesPullquoteFragment
+            }
+            ... on ComponentModulesGridModule {
+                ...ComponentModulesGridModuleFragment
+            }
+            ... on ComponentModulesTextModule {
+                ...ComponentModulesTextModuleFragment
+            }
+            ... on ComponentModulesSubtitle {
+                ...ComponentModulesSubtitleFragment
+            }
+            ... on ComponentModulesTitleModule {
+                ...ComponentModulesTitleModuleFragment
+            }
+            ... on ComponentModulesImageCarousel {
+                ...ComponentModulesImageCarouselFragment
+            }
             ... on ComponentModulesImage {
                 ...ComponentModulesImageFragment
+            }
+            ... on ComponentModulesTableModule {
+                ...ComponentModulesTableModuleFragment
+            }
+            ... on ComponentModulesButtonsModule {
+                ...ComponentModulesButtonsModuleFragment
+            }
+            ... on Error {
+                ...ErrorFragment
             }
         }
     }
@@ -244,9 +260,36 @@ fragment LocalizedStoryFragment on StoryEntity {
             }
         }
         components {
-            __typename
+           __typename
+            ... on ComponentModulesPullquote {
+                ...ComponentModulesPullquoteFragment
+            }
+            ... on ComponentModulesGridModule {
+                ...ComponentModulesGridModuleFragment
+            }
+            ... on ComponentModulesTextModule {
+                ...ComponentModulesTextModuleFragment
+            }
+            ... on ComponentModulesSubtitle {
+                ...ComponentModulesSubtitleFragment
+            }
+            ... on ComponentModulesTitleModule {
+                ...ComponentModulesTitleModuleFragment
+            }
+            ... on ComponentModulesImageCarousel {
+                ...ComponentModulesImageCarouselFragment
+            }
             ... on ComponentModulesImage {
                 ...ComponentModulesImageFragment
+            }
+            ... on ComponentModulesTableModule {
+                ...ComponentModulesTableModuleFragment
+            }
+            ... on ComponentModulesButtonsModule {
+                ...ComponentModulesButtonsModuleFragment
+            }
+            ... on Error {
+                ...ErrorFragment
             }
         }
         localizations {

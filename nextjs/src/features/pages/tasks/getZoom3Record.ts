@@ -16,7 +16,7 @@ type Payload =
   | {
       id: string
     }
-  | { locale?: string; publicationState: PublicationState; id: string }
+  | { locale?: string | null; publicationState: PublicationState; id: string }
 
 export type Zoom3Record =
   | PeopleZoomLevel3DetailType
