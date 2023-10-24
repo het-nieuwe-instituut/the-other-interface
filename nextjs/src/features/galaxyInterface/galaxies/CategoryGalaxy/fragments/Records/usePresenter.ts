@@ -1,59 +1,18 @@
 import { useMemo } from 'react'
 
-import { Position } from '@/features/shared/types/position'
+import { useZoom2SearchResult } from '@/features/shared/hooks/queries/useZoom2SearchResult'
 import { CloudCategory } from '@/features/shared/utils/categories'
 import { useSearchParams } from 'next/navigation'
-import { ZoomLevel2Type } from 'src/generated/graphql'
+import { positioningTemplate } from './templates'
 
-// For readability advantage, we are using the object representation.
-type PositioningTemplate = {
-  [index: number]: Position
-}
-
-const positioningTemplate: PositioningTemplate = {
-  0: {
-    top: 0,
-    left: '15%',
-  },
-  1: {
-    left: 0,
-    bottom: 0,
-  },
-  2: {
-    top: '10%',
-    left: '15%',
-  },
-  3: { top: 0, left: 0 },
-  4: {
-    top: '10%',
-    left: 0,
-  },
-  5: {
-    bottom: 0,
-    left: '15%',
-  },
-  6: { left: 0, top: 0 },
-  7: { top: '10%', right: 0 },
-  8: {
-    top: 0,
-    right: 0,
-  },
-  9: {
-    right: 0,
-    bottom: 0,
-  },
-  10: { top: '10%', right: 0 },
-  11: {
-    top: 0,
-    left: '15%',
-  },
-}
-
-export const usePresenter = (records: ZoomLevel2Type[]) => {
+export const usePresenter = () => {
   const searchParams = useSearchParams()
-  const category = searchParams?.get('category')
+  const category = searchParams?.get('category') as CloudCategory
+
+  const { data } = useZoom2SearchResult(category)
 
   const positionedRecords = useMemo(() => {
+    const records = data?.zoomLevel2.nodes ?? []
     let lastStoryIndex = 0
     const positionedRecords = []
 
@@ -67,7 +26,7 @@ export const usePresenter = (records: ZoomLevel2Type[]) => {
     }
 
     return positionedRecords
-  }, [records, category])
+  }, [data?.zoomLevel2.nodes, category])
 
   return {
     positionedRecords,

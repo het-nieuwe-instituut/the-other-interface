@@ -2,14 +2,9 @@ import { Grid } from '@chakra-ui/react'
 
 import { usePresenter } from './usePresenter'
 import { Record } from '../Record'
-import { Zoom2Query } from 'src/generated/graphql'
 
-type Props = {
-  zoom2?: Zoom2Query
-}
-
-export const Records: React.FC<Props> = ({ zoom2 }) => {
-  const { positionedRecords } = usePresenter(zoom2?.zoomLevel2.nodes ?? [])
+export const Records: React.FC = () => {
+  const { positionedRecords } = usePresenter()
 
   return (
     <Grid
@@ -21,6 +16,7 @@ export const Records: React.FC<Props> = ({ zoom2 }) => {
       right="2vw"
       templateColumns="repeat(4, 1fr)"
       templateRows="repeat(3, 1fr)"
+      border={`1px solid black`}
     >
       {positionedRecords.map(record => (
         <Record key={record.id} record={record} />

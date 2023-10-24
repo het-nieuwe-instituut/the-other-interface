@@ -31,7 +31,7 @@ export const Record: React.FC<Props> = ({ record }) => {
   }
 
   return (
-    <GridItem position="relative">
+    <GridItem position="relative" border={`1px solid black`}>
       <Flex
         position="absolute"
         style={{ ...position }}
@@ -45,6 +45,7 @@ export const Record: React.FC<Props> = ({ record }) => {
         onClick={handleClick}
         _hover={{ transform: 'scale(1.05)' }}
         transition="all .4s ease-in-out"
+        border={`1px solid black`}
       >
         <ResponsiveImage
           src={thumbnail}
