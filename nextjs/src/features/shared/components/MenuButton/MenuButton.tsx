@@ -1,6 +1,6 @@
 import MenuIconClose from '@/icons/close-menu.svg'
 import MenuIconOpen from '@/icons/open-menu.svg'
-import { Box } from '../../configs/chakra'
+import { Flex, Box } from '../../configs/chakra'
 
 import { MAX_Z_INDEX } from '../../constants/mainConstants'
 import { usePresenter } from './usePresenter'
@@ -8,12 +8,13 @@ import { usePresenter } from './usePresenter'
 export const MenuButton = () => {
   const { isMenuOpen, handleOpenMenu } = usePresenter()
   return (
-    <Box
+    <Flex
       ml={'8'}
       pointerEvents={'auto'}
       cursor="pointer"
       position={'relative'}
       zIndex={MAX_Z_INDEX}
+      alignItems={'center'}
     >
       {isMenuOpen ? (
         <Box as={'button'} aria-label="menu open" onClick={() => handleOpenMenu(false)}>
@@ -24,6 +25,6 @@ export const MenuButton = () => {
           <MenuIconOpen />
         </Box>
       )}
-    </Box>
+    </Flex>
   )
 }

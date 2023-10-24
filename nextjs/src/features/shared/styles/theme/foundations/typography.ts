@@ -148,6 +148,15 @@ const headingTimesLarge = {
   },
 }
 
+const impactNew = {
+  xl: {
+    fontFamily: "'Impact'",
+    fontSize: '80px',
+    lineHeight: '80px',
+    fontWeight: 400,
+  },
+}
+
 const socialLarge = {
   lg: {
     fontFamily: "'Social'",
@@ -159,11 +168,21 @@ const socialLarge = {
   sm: { fontFamily: "'Social'", fontSize: '12px', fontWeight: 400, lineHeight: '15px' },
 }
 
+const socialMedium = {
+  md: {
+    fontFamily: "'Social'",
+    fontSize: '24px',
+    fontWeight: 700,
+    lineHeight: '31.2px',
+  },
+}
+
 const textStyles = {
   ...oldTextStyles,
-
   headingTimesLarge,
   socialLarge,
+  socialMedium,
+  impactNew,
 }
 
 export default textStyles

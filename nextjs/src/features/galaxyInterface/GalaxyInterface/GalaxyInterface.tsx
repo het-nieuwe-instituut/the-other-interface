@@ -1,8 +1,8 @@
 'use client'
 import { GALAXY_EDITORIAL_LAYER_PART } from '@/features/shared/constants/mainConstants'
-import { GalaxyTopRight } from '@/features/galaxyInterface/components/GalaxyWrapper/GalaxyTopRight/GalaxyTopRight'
 import { Box, Flex } from '@chakra-ui/react'
 import { usePresenter } from './usePresenter'
+import { StaticHeader } from '@/features/shared/components/StaticHeader/StaticHeader'
 
 interface Props {
   children: React.ReactNode
@@ -24,9 +24,7 @@ export const GalaxyInterface: React.FC<Props> = ({ children }) => {
         zIndex={5}
       >
         <Flex alignItems={'center'} position="relative" zIndex={2} left={8} top={1}></Flex>
-        <Flex alignItems={'center'} position="relative" zIndex={2} right={8} top={1}>
-          <GalaxyTopRight />
-        </Flex>
+        <StaticHeader />
       </Flex>
 
       <Box

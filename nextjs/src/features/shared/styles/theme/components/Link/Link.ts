@@ -76,32 +76,38 @@ export const Link: ComponentStyleConfig = {
       },
     },
     navigation: {
-      color: `${colors.black}`,
+      color: `${colors.pinkAlpha['100']}`,
       underline: 'none',
       textDecoration: 'none',
       borderBottom: 'none',
 
       _hover: {
-        color: `${colors.white}!important`,
+        color: `${colors.pinkAlpha['60']}!important`,
         underline: 'none',
         textDecoration: 'none',
         borderBottom: 'none',
-        textShadow: `0px 0px 4px rgba(0, 0, 0, 0.25), 0px 0px 4px #000000, 0px 0px 4px #000000`,
       },
 
       _active: {
-        color: `${colors.white}`,
+        color: `${colors.pinkAlpha['100']}`,
         underline: 'none',
         textDecoration: 'none',
         borderBottom: 'none',
-        textShadow: `0px 0px 4px rgba(0, 0, 0, 0.25), 0px 0px 4px #000000, 0px 0px 4px #000000`,
       },
 
       _visited: {
+        color: `${colors.pinkAlpha['100']}`,
         underline: 'none',
         textDecoration: 'none',
         borderBottom: 'none',
-        color: `${colors.black}`,
+      },
+
+      _focus: {
+        underline: 'none',
+        textDecoration: 'none',
+        borderBottom: 'none',
+        color: `${colors.blueAlphaNew['100']}`,
+        backgroundColor: colors.pinkAlpha['100'],
       },
     },
   },
