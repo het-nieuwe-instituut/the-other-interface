@@ -24,7 +24,7 @@ export const Record: React.FC<Props> = ({ record }) => {
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
-        gap="8px"
+        gap="5px"
         cursor={'pointer'}
         onClick={handleClick}
         _hover={{ transform: 'scale(1.05)' }}
@@ -34,16 +34,10 @@ export const Record: React.FC<Props> = ({ record }) => {
         <ResponsiveImage
           src={recordDetails?.thumbnail}
           alt={recordDetails?.title}
-          maxHeight={!recordDetails?.thumbnail ? '80%' : 'calc(100% - 1.6vw - 12px)'} // where 2.6vw are a texts' line heights, 16px are gaps
+          maxHeight={'calc(100% - 1.6vw - 5px)'} // where 1.6vw are a texts' line heights, 5px are gaps
         />
 
-        <RecordText
-          title={recordDetails?.title}
-          categoryType={category}
-          css={{
-            position: !recordDetails?.thumbnail ? 'absolute' : 'relative',
-          }}
-        />
+        <RecordText title={recordDetails?.title} categoryType={category} />
       </Flex>
     </GridItem>
   )

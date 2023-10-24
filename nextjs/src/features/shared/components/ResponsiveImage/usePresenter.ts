@@ -5,7 +5,7 @@ export const usePresenter = (src: string | null) => {
   const fallbackImageRef = useRef<string | null>(null)
 
   if (!fallbackImageRef.current) {
-    fallbackImageRef.current = `url('/images/fallbacks/${Math.floor(Math.random() * 5) + 1}.svg')`
+    fallbackImageRef.current = `url('/images/fallbacks/${Math.floor(Math.random() * 9) + 1}.svg')`
   }
 
   const { isPortrait } = useIsImagePortrait(src)
