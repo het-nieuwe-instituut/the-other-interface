@@ -3,7 +3,7 @@ import { useMemo } from 'react'
 import { useZoom2SearchResult } from '@/features/shared/hooks/queries/useZoom2SearchResult'
 import { CloudCategory } from '@/features/shared/utils/categories'
 import { useSearchParams } from 'next/navigation'
-import { positioningTemplate } from './templates'
+import { positioningTemplate } from './positioningTemplates'
 
 export const usePresenter = () => {
   const searchParams = useSearchParams()
