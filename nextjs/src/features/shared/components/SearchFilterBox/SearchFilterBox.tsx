@@ -17,7 +17,7 @@ export const SearchFilterBox: React.FC<Props> = ({
 }) => {
   return (
     <GridItem
-      backgroundColor={'navyAlpha.100'}
+      backgroundColor={'pinkAlpha.100'}
       borderRadius={'5px'}
       padding={'4px 8px'}
       color={'blueAlpha.100'}

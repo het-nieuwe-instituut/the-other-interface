@@ -38,7 +38,7 @@ export const GalaxyInterface: React.FC<Props> = ({ children }) => {
         bottom={0}
         right={0}
         left={0}
-        backgroundColor={'navyAlpha.100'}
+        backgroundColor={'pinkAlpha.100'}
         ref={graphRef}
       >
         {sizes?.height && sizes?.width && <Box position={'fixed'}>{children}</Box>}

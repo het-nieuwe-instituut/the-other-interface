@@ -17,7 +17,7 @@ export const GalaxyNavigation: React.FC = () => {
       backgroundColor={'blueAlpha.100'}
       padding={'6px 12px'}
       zIndex={FOOTER_Z_INDEX}
-      color={'navyAlpha.100'}
+      color={'pinkAlpha.100'}
     >
       <Text textStyle="socialLarge.sm">{t('zoom')}</Text>
 

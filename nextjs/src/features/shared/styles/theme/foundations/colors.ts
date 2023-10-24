@@ -169,15 +169,18 @@ const blue = {
   '100': '#D5F3FB',
 }
 
-const blueAlpha = {
-  '100': 'RGBA(159, 238, 255, 1)',
-  '80': 'rgba(159, 238, 255, 0.8)',
-  '60': 'rgba(159, 238, 255.0.6)',
+const pinkAlpha = {
+  '100': 'RGBA(255, 230, 221, 1)',
+  '60': 'RGBA(255, 230, 221, .6)',
+  '40': 'RGBA(255, 230, 221, .40)',
+  '25': 'RGBA(255, 230, 221, .25)',
 }
 
-const navyAlpha = {
-  '100': 'RGBA(0, 13, 20, 1)',
-  '25': 'RGBA(0, 13, 20, .25)',
+const blueAlpha = {
+  '100': 'RGBA(0, 81, 255, 1)',
+  '90': 'RGBA(0, 81, 255, .9)',
+  '80': 'RGBA(0, 81, 255, .8)',
+  '60': 'RGBA(0, 81, 255, .6)',
 }
 
 const colors = {
@@ -185,7 +188,7 @@ const colors = {
   blue,
   brownAlpha,
   blueAlpha,
-  navyAlpha,
+  pinkAlpha,
 }
 
 export default colors
