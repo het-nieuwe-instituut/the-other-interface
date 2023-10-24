@@ -9,6 +9,7 @@ import { useBreakpoint } from '../../configs/chakra'
 export const usePresenter = () => {
   const ref = useRef<HTMLDivElement | null>(null)
   const isMenuOpen = useSelector((state: State) => state?.shared?.isMenuOpen)
+  const userLooksOn = useSelector((state: State) => state.shared.userLooksOn)
   const breakpoint = useBreakpoint()
   const { t: tNavigation, lang } = useTranslation('navigation')
   const isMobile = breakpoint === 'sm'
@@ -32,5 +33,6 @@ export const usePresenter = () => {
     ref,
     isMobile,
     breakpoint,
+    userLooksOn,
   }
 }

@@ -15,7 +15,8 @@ type Props = {
 }
 
 export const Navigation = ({ menupages }: Props) => {
-  const { tNavigation, isMenuOpen, ref, lang } = usePresenter()
+  const { tNavigation, isMenuOpen, ref, lang, userLooksOn } = usePresenter()
+  console.log(userLooksOn)
 
   return (
     <Box
@@ -38,7 +39,7 @@ export const Navigation = ({ menupages }: Props) => {
         height: ref?.current?.scrollHeight || '100vh',
         backgroundColor: '#CCCED0',
         filter: 'blur(10px)',
-        background: 'rgba(255, 255, 255, 0.85)',
+        background: 'rgba(0, 81, 255, 0.8)',
       }}
     >
       <StaticHeader />

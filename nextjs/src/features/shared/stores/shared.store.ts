@@ -1,11 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { CloudCategory } from '../utils/categories'
+import { USER_LOOKS_ON } from '../constants/mainConstants'
 
 export type SharedState = {
   isMenuOpen: boolean
   isSearchModeActive: boolean
   searchCategory: CloudCategory | null
   isCategorySuggestionsOpen: boolean
+  userLooksOn: (typeof USER_LOOKS_ON)[keyof typeof USER_LOOKS_ON]
 }
 
 export const sharedInitialState: SharedState = {
@@ -13,6 +15,7 @@ export const sharedInitialState: SharedState = {
   isSearchModeActive: false,
   searchCategory: null,
   isCategorySuggestionsOpen: false,
+  userLooksOn: USER_LOOKS_ON.GALAXY,
 }
 
 export const sharedSlice = createSlice({
@@ -57,6 +60,10 @@ export const sharedSlice = createSlice({
       }
       state.isCategorySuggestionsOpen =
         action.payload?.categorySuggestionsOpen ?? state.isCategorySuggestionsOpen
+    },
+
+    userChangeLooksOn: (state, action: PayloadAction<{ lookOn: SharedState['userLooksOn'] }>) => {
+      state.userLooksOn = action.payload.lookOn
     },
   },
 })

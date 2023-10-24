@@ -1,18 +1,15 @@
 'use client'
 import { GALAXY_EDITORIAL_LAYER_PART } from '@/features/shared/constants/mainConstants'
 import { GalaxyTopRight } from '@/features/galaxyInterface/components/GalaxyWrapper/GalaxyTopRight/GalaxyTopRight'
-import { useSize } from '@chakra-ui/react-use-size'
-import { useRef } from 'react'
-import { Box, Flex, useTheme } from '@chakra-ui/react'
+import { Box, Flex } from '@chakra-ui/react'
+import { usePresenter } from './usePresenter'
 
 interface Props {
   children: React.ReactNode
 }
 
 export const GalaxyInterface: React.FC<Props> = ({ children }) => {
-  const theme = useTheme()
-  const graphRef = useRef<HTMLDivElement | null>(null)
-  const sizes = useSize(graphRef)
+  const { theme, sizes, graphRef } = usePresenter()
 
   return (
     <Box display="block" position={'relative'}>
