@@ -82,4 +82,43 @@ export const positioningTemplate2: PositioningTemplate = {
   },
 }
 
-export const positioningTemplate = positioningTemplate2
+export const positioningTemplate3: PositioningTemplate = {
+  0: {
+    top: '10%',
+    right: 0,
+  },
+  1: {
+    top: 0,
+    left: '15%',
+  },
+  2: {
+    bottom: 0,
+    right: 0,
+  },
+  3: { top: 0, right: 0 },
+  4: {
+    bottom: 0,
+    left: '15%',
+  },
+  5: {
+    top: '10%',
+    left: 0,
+  },
+  6: { top: 0, left: 0 },
+  7: { top: '10%', right: 0 },
+  8: {
+    bottom: 0,
+    left: 0,
+  },
+  9: {
+    top: 0,
+    right: '15%',
+  },
+  10: { top: '10%', right: '15%' },
+  11: {
+    top: 0,
+    left: 0,
+  },
+}
+
+export const positioningTemplate = positioningTemplate3
