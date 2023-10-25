@@ -16,7 +16,6 @@ export const Records: React.FC = () => {
       right="2vw"
       templateColumns="repeat(4, 1fr)"
       templateRows="repeat(3, 1fr)"
-      border={`1px solid black`}
     >
       {positionedRecords.map(record => (
         <Record key={record.id} record={record} />

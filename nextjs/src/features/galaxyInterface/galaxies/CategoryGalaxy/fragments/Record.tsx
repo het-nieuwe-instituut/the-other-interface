@@ -1,6 +1,6 @@
 import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
 import { Position } from '@/features/shared/types/position'
-import { GridItem, Flex } from '@chakra-ui/react'
+import { GridItem, Flex, GridItemProps } from '@chakra-ui/react'
 import { CloudCategory } from '@/features/shared/utils/categories'
 
 import { RecordText } from './RecordText'
@@ -13,9 +13,11 @@ type Props = {
     position: Position
     category: CloudCategory
   }
+
+  css?: GridItemProps['css']
 }
 
-export const Record: React.FC<Props> = ({ record }) => {
+export const Record: React.FC<Props> = ({ record, css }) => {
   const { id, thumbnail, category, position, title } = record
   const searchParams = useSearchParams()
   const lang = searchParams?.get('lang')
@@ -31,7 +33,7 @@ export const Record: React.FC<Props> = ({ record }) => {
   }
 
   return (
-    <GridItem position="relative" border={`1px solid black`}>
+    <GridItem position="relative" css={css}>
       <Flex
         position="absolute"
         style={{ ...position }}
@@ -45,7 +47,6 @@ export const Record: React.FC<Props> = ({ record }) => {
         onClick={handleClick}
         _hover={{ transform: 'scale(1.05)' }}
         transition="all .4s ease-in-out"
-        border={`1px solid black`}
       >
         <ResponsiveImage
           src={thumbnail}
