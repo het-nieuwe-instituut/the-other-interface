@@ -19,9 +19,7 @@ export const usePresenter = () => {
     let lastStoryIndex = 0
     const positionedRecords = []
 
-    const positioningTemplate = currentTemplate
-
-    for (const position of Object.values(positioningTemplate)) {
+    for (const position of Object.values(currentTemplate)) {
       positionedRecords.push({
         ...records[lastStoryIndex],
         position,

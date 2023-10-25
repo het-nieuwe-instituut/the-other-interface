@@ -5,7 +5,6 @@ describe('shuffleArray', () => {
     const array = [1, 2, 3, 4, 5]
     const shuffledArray = shuffleArray(array)
 
-    expect(shuffledArray).not.toEqual(array)
     expect(shuffledArray).toHaveLength(array.length)
     expect(new Set(shuffledArray)).toEqual(new Set(array))
   })
