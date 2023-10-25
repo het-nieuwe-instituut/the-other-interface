@@ -1,6 +1,6 @@
 import { Position } from '@/features/shared/types/position'
 
-type PositioningTemplate = {
+export type PositioningTemplate = {
   [index: number]: Position
 }
 
@@ -237,4 +237,22 @@ export const positioningTemplate6: PositioningTemplate = {
     right: 0,
   },
 }
+
+export const positioningTemplates = [
+  positioningTemplate1,
+  positioningTemplate2,
+  positioningTemplate3,
+  positioningTemplate4,
+  positioningTemplate5,
+  positioningTemplate6,
+]
+
 export const positioningTemplate = positioningTemplate6
+
+export function shuffleArray<T>(array: T[]) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[array[i], array[j]] = [array[j], array[i]]
+  }
+  return array
+}
