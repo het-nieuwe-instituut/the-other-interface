@@ -6,12 +6,12 @@ import { usePresenter } from './usePresenter'
 import BlurOverlay from '@/features/shared/components/BlurOverlay/BlurOverlay'
 
 export const CategoryGalaxy: React.FC = () => {
-  const { isSearchModeActive, searchResult } = usePresenter()
+  const { isSearchModeActive } = usePresenter()
 
   return (
     <Box position="relative" width="100vw" height="100vh" overflow={'hidden'}>
       {isSearchModeActive && <BlurOverlay />}
-      <Records zoom2={searchResult} />
+      <Records />
 
       <GalaxyFooter />
     </Box>
