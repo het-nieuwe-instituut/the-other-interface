@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 
 import { useZoom2SearchResult } from '@/features/shared/hooks/queries/useZoom2SearchResult'
 import { CloudCategory } from '@/features/shared/utils/categories'
