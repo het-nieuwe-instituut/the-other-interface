@@ -164,6 +164,12 @@ const socialLarge = {
     fontWeight: 400,
     lineHeight: '27px',
   },
+  navigation: {
+    fontFamily: "'Social'",
+    fontSize: '16px',
+    fontWeight: 400,
+    lineHeight: '20.8px',
+  },
   md: { fontFamily: "'Social'", fontSize: '14px', fontWeight: 400, lineHeight: '14px' },
   sm: { fontFamily: "'Social'", fontSize: '12px', fontWeight: 400, lineHeight: '15px' },
 }

@@ -6,6 +6,8 @@ import { capitalizeFirstLetter } from '../../utils/text'
 import { StaticHeader } from '../StaticHeader/StaticHeader'
 import { usePresenter } from './usePresenter'
 import { MenuPagesQuery } from 'src/generated/graphql'
+import useTranslation from 'next-translate/useTranslation'
+import { useSearchParams } from 'next/navigation'
 
 const fadeIn = keyframes({ from: { opacity: 0 }, to: { opacity: 0.8 } })
 const fadeOut = keyframes({ from: { opacity: 0.85 }, to: { opacity: 0 } })
@@ -15,7 +17,11 @@ type Props = {
 }
 
 export const Navigation = ({ menupages }: Props) => {
-  const { tNavigation, isMenuOpen, ref, lang, navTextStyle } = usePresenter()
+  const { isMenuOpen, ref, navTextStyle } = usePresenter()
+  const { t: tNavigation, lang } = useTranslation('navigation')
+  // this line is needed to re-render the component when the language changes, it dosent work without it
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const searchParams = useSearchParams()
 
   return (
     <Box
@@ -66,6 +72,7 @@ export const Navigation = ({ menupages }: Props) => {
             href={`/landingpage?category=stories&lang=${lang}`}
             variant={'navigation'}
             cursor="pointer"
+            tabIndex={0}
             textStyle={navTextStyle}
             mb={'sm'}
           >
@@ -114,22 +121,41 @@ export const Navigation = ({ menupages }: Props) => {
         </Flex>
 
         <Flex maxWidth={'398px'} minWidth={'388px'} flexDirection={'column'}>
-          <Text textStyle={'socialMedium.md'} color={'pinkAlpha.100'} mb={'5'}>
-            {tNavigation('more_to_do')}
-          </Text>
-
-          {menupages?.menupages?.data?.map(item => (
+          <Flex flexDirection={'column'} mb={20}>
+            <Text textStyle={'socialMedium.md'} color={'pinkAlpha.100'} mb={'5'} fontSize={'21px'}>
+              {tNavigation('about')}
+            </Text>
+            <Text textStyle={'socialLarge.navigation'} color={'pinkAlpha.100'} mb={4}>
+              {tNavigation('aboutDescription')}
+            </Text>
             <Link
-              href={`/menupage/${item?.attributes?.slug}?lang=${lang}`}
-              variant={'navigation'}
-              cursor="pointer"
-              textStyle={'h3'}
-              mb={'sm'}
-              key={item?.id}
+              variant={'navigationDecorative'}
+              href={`/menupage/about?lang=${lang}`}
+              width={'fit-content'}
             >
-              {capitalizeFirstLetter(item?.attributes?.Title ?? '')}
+              {tNavigation('readMore')}
             </Link>
-          ))}
+          </Flex>
+
+          <Flex flexDirection={'column'}>
+            <Text textStyle={'socialMedium.md'} color={'pinkAlpha.100'} mb={'4'}>
+              {tNavigation('more')}
+            </Text>
+            {menupages?.menupages?.data?.map(item => {
+              if (item?.attributes?.slug === '/about') return null
+              return (
+                <Link
+                  href={`/menupage/${item?.attributes?.slug}?lang=${lang}`}
+                  variant={'navigationDecorative'}
+                  cursor="pointer"
+                  mb={'sm'}
+                  key={item?.id}
+                >
+                  {capitalizeFirstLetter(item?.attributes?.Title ?? '')}
+                </Link>
+              )
+            })}
+          </Flex>
         </Flex>
       </Flex>
     </Box>

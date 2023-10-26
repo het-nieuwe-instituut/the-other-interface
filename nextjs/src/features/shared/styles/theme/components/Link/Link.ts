@@ -1,6 +1,7 @@
 import { ComponentStyleConfig } from '@chakra-ui/react'
 
 import colors from '../../foundations/colors'
+import textStyles from '../../foundations/typography'
 
 export const Link: ComponentStyleConfig = {
   baseStyle: props => {
@@ -82,7 +83,7 @@ export const Link: ComponentStyleConfig = {
       borderBottom: 'none',
 
       _hover: {
-        color: `${colors.pinkAlpha['60']}!important`,
+        color: `${colors.pinkAlpha['60']}`,
         underline: 'none',
         textDecoration: 'none',
         borderBottom: 'none',
@@ -106,8 +107,36 @@ export const Link: ComponentStyleConfig = {
         underline: 'none',
         textDecoration: 'none',
         borderBottom: 'none',
-        color: `${colors.blueAlphaNew['100']}`,
-        backgroundColor: colors.pinkAlpha['100'],
+        color: `${colors.blueAlphaNew['100']}!important`,
+        backgroundColor: `${colors.pinkAlpha['100']}`,
+      },
+    },
+    navigationDecorative: {
+      color: `${colors.pinkAlpha['100']} !important`,
+      textUnderlineOffset: '0.25em',
+      textDecoration: 'underline',
+      textStyle: `${textStyles.socialLarge.navigation}`,
+      underline: 'none',
+      borderBottom: 'none',
+
+      _hover: {
+        color: `${colors.pinkAlpha['60']} !important`,
+        borderBottom: 'none',
+        textUnderlineOffset: '0.25em',
+        textDecoration: 'underline',
+      },
+      _active: {
+        color: `${colors.pinkAlpha['60']} !important`,
+        borderBottom: 'none',
+        textUnderlineOffset: '0.25em',
+        textDecoration: 'underline',
+      },
+      _focus: {
+        color: `${colors.blueAlphaNew['100']} !important`,
+        backgroundColor: `${colors.pinkAlpha['100']} !important`,
+        borderBottom: 'none',
+        textUnderlineOffset: '0.25em',
+        textDecoration: 'underline',
       },
     },
   },
