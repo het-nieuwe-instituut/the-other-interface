@@ -4,19 +4,17 @@ import { useState } from 'react'
 import colors from '@/features/shared/styles/theme/foundations/colors'
 
 type Props = {
-  handleClick: () => void
+  handleClick?: () => void
   side?: 'left' | 'right'
   disabled?: boolean
 }
 
-colors
 export const PaginationButton: React.FC<Props> = ({
   handleClick,
   side = 'left',
   disabled = false,
 }) => {
   const rotation = side === 'left' ? '' : 'rotate(180deg)'
-
   const [fillColor, setFillColor] = useState(colors.blueAlpha[100])
 
   return (
@@ -30,9 +28,9 @@ export const PaginationButton: React.FC<Props> = ({
       border="none"
       borderRadius={'0'}
       display={'flex'}
-      _focus={{ boxShadow: 'none' }}
-      _disabled={{ bg: 'blueAlpha.100' }}
       disabled={disabled}
+      _focus={{ boxShadow: 'none' }}
+      // _disabled={{ cursor: 'default' }}
       onMouseEnter={() => setFillColor(colors.pinkAlpha[100])} // Set fill color to transparent on hover
       onMouseLeave={() => setFillColor(colors.blueAlpha[100])}
     >

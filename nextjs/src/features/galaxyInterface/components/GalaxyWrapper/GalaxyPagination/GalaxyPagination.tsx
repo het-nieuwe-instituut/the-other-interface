@@ -1,12 +1,24 @@
 'use client'
 import { FOOTER_Z_INDEX } from '@/features/shared/constants/mainConstants'
 import { Flex, Grid, Text } from '@chakra-ui/react'
-import { usePresenter } from './usePresenter'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { PaginationButton } from './fragments/PaginationButton'
 
-export const GalaxyPagination: React.FC = () => {
-  const { pagesAmount, isLoading, page } = usePresenter()
+type Props = {
+  currentPageNumber: number
+  pagesAmount: number
+  isLoading: boolean
+  handleLeftClick?: () => void
+  handleRightClick?: () => void
+}
+
+export const GalaxyPagination: React.FC<Props> = ({
+  currentPageNumber,
+  pagesAmount,
+  isLoading,
+  handleLeftClick,
+  handleRightClick,
+}) => {
   const { t } = useTypeSafeTranslation('navigation')
 
   if (isLoading) return null
@@ -23,7 +35,7 @@ export const GalaxyPagination: React.FC = () => {
       templateColumns="40px 1fr 40px"
       gap="5px"
     >
-      <PaginationButton handleClick={() => console.log('left')} disabled={page === 1} />
+      <PaginationButton handleClick={handleLeftClick} disabled={currentPageNumber === 1} />
 
       <Flex
         flexDirection={'column'}
@@ -35,12 +47,12 @@ export const GalaxyPagination: React.FC = () => {
       >
         <Text>{t('page')}</Text>
         <Flex gap="3px" flexWrap={'wrap'} justifyContent={'center'}>
-          <Text>1</Text>
+          <Text>{currentPageNumber}</Text>
           <Text>{t('of')}</Text>
           <Text>{pagesAmount}</Text>
         </Flex>
       </Flex>
-      <PaginationButton side="right" handleClick={() => console.log('right')} />
+      <PaginationButton side="right" handleClick={handleRightClick} />
     </Grid>
   )
 }

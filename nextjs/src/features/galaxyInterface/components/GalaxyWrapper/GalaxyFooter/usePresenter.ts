@@ -7,6 +7,5 @@ export const usePresenter = () => {
 
   return {
     showSearchBar: currentZoomNumber === 2 || currentZoomNumber === 3,
-    showPagination: currentZoomNumber === 2,
   }
 }
