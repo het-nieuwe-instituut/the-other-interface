@@ -1,6 +1,7 @@
 import { ComponentStyleConfig } from '@chakra-ui/react'
 
 import colors from '../../foundations/colors'
+import textStyles from '../../foundations/typography'
 
 export const Link: ComponentStyleConfig = {
   baseStyle: props => {
@@ -76,32 +77,66 @@ export const Link: ComponentStyleConfig = {
       },
     },
     navigation: {
-      color: `${colors.black}`,
+      color: `${colors.pinkAlpha['100']}`,
       underline: 'none',
       textDecoration: 'none',
       borderBottom: 'none',
 
       _hover: {
-        color: `${colors.white}!important`,
+        color: `${colors.pinkAlpha['60']}`,
         underline: 'none',
         textDecoration: 'none',
         borderBottom: 'none',
-        textShadow: `0px 0px 4px rgba(0, 0, 0, 0.25), 0px 0px 4px #000000, 0px 0px 4px #000000`,
       },
 
       _active: {
-        color: `${colors.white}`,
+        color: `${colors.pinkAlpha['100']}`,
         underline: 'none',
         textDecoration: 'none',
         borderBottom: 'none',
-        textShadow: `0px 0px 4px rgba(0, 0, 0, 0.25), 0px 0px 4px #000000, 0px 0px 4px #000000`,
       },
 
       _visited: {
+        color: `${colors.pinkAlpha['100']}`,
         underline: 'none',
         textDecoration: 'none',
         borderBottom: 'none',
-        color: `${colors.black}`,
+      },
+
+      _focus: {
+        underline: 'none',
+        textDecoration: 'none',
+        borderBottom: 'none',
+        color: `${colors.blueAlphaNew['100']}!important`,
+        backgroundColor: `${colors.pinkAlpha['100']}`,
+      },
+    },
+    navigationDecorative: {
+      color: `${colors.pinkAlpha['100']} !important`,
+      textUnderlineOffset: '0.25em',
+      textDecoration: 'underline',
+      textStyle: `${textStyles.socialLarge.navigation}`,
+      underline: 'none',
+      borderBottom: 'none',
+
+      _hover: {
+        color: `${colors.pinkAlpha['60']} !important`,
+        borderBottom: 'none',
+        textUnderlineOffset: '0.25em',
+        textDecoration: 'underline',
+      },
+      _active: {
+        color: `${colors.pinkAlpha['60']} !important`,
+        borderBottom: 'none',
+        textUnderlineOffset: '0.25em',
+        textDecoration: 'underline',
+      },
+      _focus: {
+        color: `${colors.blueAlphaNew['100']} !important`,
+        backgroundColor: `${colors.pinkAlpha['100']} !important`,
+        borderBottom: 'none',
+        textUnderlineOffset: '0.25em',
+        textDecoration: 'underline',
       },
     },
   },
