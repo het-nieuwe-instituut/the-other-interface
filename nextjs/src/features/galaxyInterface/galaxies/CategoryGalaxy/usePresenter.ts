@@ -2,7 +2,7 @@ import { State } from '@/features/shared/configs/store'
 import { useZoom2SearchResult } from '@/features/shared/hooks/queries/useZoom2SearchResult'
 import { CloudCategory } from '@/features/shared/utils/categories'
 import { useSearchParams } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 export const usePresenter = () => {
@@ -13,6 +13,10 @@ export const usePresenter = () => {
   const category = searchParams?.get('category') as CloudCategory
 
   const { data, isLoading } = useZoom2SearchResult(category, currentPageNumber)
+
+  useEffect(() => {
+    setCurrentPageNumber(1)
+  }, [category])
 
   const recordsPerPage = 12
 
@@ -35,7 +39,7 @@ export const usePresenter = () => {
 
   return {
     isSearchModeActive,
-    isLoading,
+    isLoading: false,
     currentPageNumber,
     pagesAmount: searchResultAmount ? Math.ceil(searchResultAmount / recordsPerPage) : 0,
     searchResult: data,
