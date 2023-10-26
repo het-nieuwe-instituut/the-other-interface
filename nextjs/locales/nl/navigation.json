@@ -19,5 +19,8 @@
   "zoom": "Zoom",
   "collection": "Collectie",
   "category": "Categorie",
-  "detail": "Detail"
+  "detail": "Detail",
+
+  "page": "Pagina",
+  "of": "van"
 }
