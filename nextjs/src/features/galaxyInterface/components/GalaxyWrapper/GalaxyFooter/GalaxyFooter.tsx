@@ -3,9 +3,10 @@ import { Grid, GridItem } from '@chakra-ui/react'
 import { GalaxyNavigation } from '../GalaxyNavigation/GalaxyNavigation'
 import { GalaxySearchBar } from '../GalaxySearchBar/GalaxySearchBar'
 import { usePresenter } from './usePresenter'
+import { GalaxyPagination } from '../GalaxyPagination/GalaxyPagination'
 
 export const GalaxyFooter: React.FC = () => {
-  const { showSearchBar } = usePresenter()
+  const { showSearchBar, showPagination } = usePresenter()
 
   return (
     <Grid
@@ -17,7 +18,8 @@ export const GalaxyFooter: React.FC = () => {
       templateColumns="165px 1fr 230px"
       gap="5px"
     >
-      <GridItem></GridItem>
+      <GridItem>{showPagination && <GalaxyPagination />}</GridItem>
+
       <GridItem>{showSearchBar && <GalaxySearchBar />}</GridItem>
       <GalaxyNavigation />
     </Grid>

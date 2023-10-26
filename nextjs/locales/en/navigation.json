@@ -19,5 +19,8 @@
   "zoom": "Zoom",
   "collection": "Collection",
   "category": "Category",
-  "detail": "Detail"
+  "detail": "Detail",
+
+  "page": "Page",
+  "of": "of"
 }
