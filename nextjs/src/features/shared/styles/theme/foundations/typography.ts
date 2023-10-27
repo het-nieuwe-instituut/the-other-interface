@@ -156,7 +156,7 @@ const impactNew = {
   },
   md: {
     fontFamily: "'Impact'",
-    fontSize: '30px',
+    fontSize: '25px',
     lineHeight: '30px',
     fontWeight: 400,
   },

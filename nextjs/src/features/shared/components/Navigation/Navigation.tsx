@@ -117,11 +117,11 @@ export const Navigation = ({ menupages }: Props) => {
         </Flex>
 
         <Flex maxWidth={'398px'} minWidth={'388px'} flexDirection={'column'}>
-          <Flex flexDirection={'column'} mb={20}>
+          <Flex flexDirection={'column'} mb={15}>
             <Text textStyle={'socialMedium.md'} color={'pinkAlpha.100'} mb={'5'} fontSize={'21px'}>
               {tNavigation('about')}
             </Text>
-            <Text textStyle={'socialLarge.navigation'} color={'pinkAlpha.100'} mb={4}>
+            <Text textStyle={'socialLarge.navigation'} color={'pinkAlpha.100'} mb={3}>
               {tNavigation('aboutDescription')}
             </Text>
             <Link

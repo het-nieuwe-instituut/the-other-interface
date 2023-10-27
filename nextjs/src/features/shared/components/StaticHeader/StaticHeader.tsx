@@ -15,7 +15,7 @@ export const StaticHeader = () => {
   return (
     <>
       <Flex
-        paddingLeft={8}
+        paddingLeft={1}
         paddingTop={4}
         justifyContent={'space-between'}
         flexDirection={'row'}

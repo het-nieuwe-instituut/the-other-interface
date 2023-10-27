@@ -28,11 +28,9 @@ export const GalaxyTopRight: React.FC = () => {
                 textOverflow={'ellipsis'}
                 overflow={'hidden'}
                 textStyle={'socialLarge.lg'}
-                mr={4}
+                mr={'10px'}
                 onClick={e => {
-                  e.preventDefault()
-                  changeLanguage(locale)
-                  e.currentTarget.blur()
+                  changeLanguage(e, locale)
                 }}
                 color={getLanguageToggleColor(isMenuOpen, lang === locale)}
               >
