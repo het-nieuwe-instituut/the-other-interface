@@ -121,9 +121,8 @@ const headingTimesLarge = {
     fontFamily: "'Times Dot'",
     fontStyle: 'normal',
     fontWeight: '400',
-    fontSize: '2.5vw',
-    lineHeight: '3.2vw',
-    color: 'brownAlpha.100',
+    fontSize: '32px',
+    lineHeight: '33.6px',
   },
   md: {
     fontFamily: "'Times Dot'",
@@ -153,6 +152,12 @@ const impactNew = {
     fontFamily: "'Impact'",
     fontSize: '80px',
     lineHeight: '80px',
+    fontWeight: 400,
+  },
+  md: {
+    fontFamily: "'Impact'",
+    fontSize: '30px',
+    lineHeight: '30px',
     fontWeight: 400,
   },
 }

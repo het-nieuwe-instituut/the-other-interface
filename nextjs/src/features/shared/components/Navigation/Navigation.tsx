@@ -7,7 +7,6 @@ import { StaticHeader } from '../StaticHeader/StaticHeader'
 import { usePresenter } from './usePresenter'
 import { MenuPagesQuery } from 'src/generated/graphql'
 import useTranslation from 'next-translate/useTranslation'
-import { useSearchParams } from 'next/navigation'
 
 const fadeIn = keyframes({ from: { opacity: 0 }, to: { opacity: 0.8 } })
 const fadeOut = keyframes({ from: { opacity: 0.85 }, to: { opacity: 0 } })
@@ -19,9 +18,6 @@ type Props = {
 export const Navigation = ({ menupages }: Props) => {
   const { isMenuOpen, ref, navTextStyle } = usePresenter()
   const { t: tNavigation, lang } = useTranslation('navigation')
-  // this line is needed to re-render the component when the language changes, it dosent work without it
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const searchParams = useSearchParams()
 
   return (
     <Box
