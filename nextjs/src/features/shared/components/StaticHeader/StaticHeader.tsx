@@ -1,21 +1,17 @@
 'use client'
-import { useSelector } from 'react-redux'
 import { Flex, Link, Box } from '../../configs/chakra'
-import { State } from '../../configs/store'
 
 import { STATIC_HEADER_Z_INDEX, USER_LOOKS_ON } from '../../constants/mainConstants'
-import { useLooseTypeSafeTranslation } from '../../hooks/translations'
 import { GalaxyTopRight } from '@/features/galaxyInterface/components/GalaxyWrapper/GalaxyTopRight/GalaxyTopRight'
+import { usePresenter } from './usePresenter'
 
 export const StaticHeader = () => {
-  const { t: tNavigation } = useLooseTypeSafeTranslation('navigation')
-  const isMenuOpen = useSelector((state: State) => state.shared.isMenuOpen)
-  const userLooksOn = useSelector((state: State) => state.shared.userLooksOn)
+  const { tNavigation, userLooksOn, isMenuOpen } = usePresenter()
 
   return (
     <>
       <Flex
-        paddingLeft={1}
+        paddingLeft={8}
         paddingTop={4}
         justifyContent={'space-between'}
         flexDirection={'row'}
