@@ -15,7 +15,7 @@ export class PeopleZoomLevel3DetailType {
   @Field(() => String, { nullable: true })
   public thumbnail: string
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   public name: string
 
   @Field(() => [String], { nullable: true })
