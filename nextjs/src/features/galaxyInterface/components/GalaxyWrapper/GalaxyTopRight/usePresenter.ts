@@ -1,9 +1,7 @@
 import React from 'react'
 import { useSearchParams, usePathname, useRouter } from 'next/navigation'
-// import useTranslation from 'next-translate/useTranslation'
 
 export const usePresenter = () => {
-  // const { lang } = useTranslation()
   const searchParams = useSearchParams()
   const router = useRouter()
   const pathname = usePathname()
