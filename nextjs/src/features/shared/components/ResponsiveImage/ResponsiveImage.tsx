@@ -20,7 +20,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
       <Box
         maxHeight={maxHeight}
         height="100%"
-        width={isPortrait ? 'auto' : '100%'}
+        width="100%"
         backgroundImage={fallbackImage}
         backgroundSize="contain"
         backgroundRepeat="no-repeat"
