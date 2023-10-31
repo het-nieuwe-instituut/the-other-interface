@@ -26,12 +26,12 @@ export const GalaxyPagination: React.FC<Props> = ({
   return (
     <Grid
       height="60px"
-      backgroundColor={'transparent'}
+      backgroundColor={'blueAlpha.100'}
       padding={'4px'}
+      borderRadius={'5px'}
       zIndex={FOOTER_Z_INDEX}
       color={'pinkAlpha.100'}
       border={'1px solid'}
-      borderColor={'blueAlpha.100'}
       templateColumns="40px 1fr 40px"
       gap="5px"
     >
@@ -41,7 +41,6 @@ export const GalaxyPagination: React.FC<Props> = ({
         flexDirection={'column'}
         justifyContent={'center'}
         alignItems={'center'}
-        color={'blueAlpha.100'}
         textStyle="socialLarge.md"
         gap="3px"
       >

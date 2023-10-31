@@ -15,7 +15,7 @@ export const PaginationButton: React.FC<Props> = ({
   disabled = false,
 }) => {
   const rotation = side === 'left' ? '' : 'rotate(180deg)'
-  const [fillColor, setFillColor] = useState(colors.blueAlpha[100])
+  const [fillColor, setFillColor] = useState(colors.pinkAlpha[100])
 
   return (
     <Button
@@ -23,16 +23,16 @@ export const PaginationButton: React.FC<Props> = ({
       p={0}
       padding={'0'}
       onClick={handleClick}
-      _hover={{ bg: 'blueAlpha.100' }}
+      _hover={{ bg: 'pinkAlpha.100' }}
       transition="transform all 0.2s ease-in-out"
       border="none"
-      borderRadius={'0'}
+      borderRadius={'3px'}
       display={'flex'}
       disabled={disabled}
       _focus={{ boxShadow: 'none' }}
       // _disabled={{ cursor: 'default' }}
-      onMouseEnter={() => setFillColor(colors.pinkAlpha[100])} // Set fill color to transparent on hover
-      onMouseLeave={() => setFillColor(colors.blueAlpha[100])}
+      onMouseEnter={() => setFillColor(colors.blueAlpha[100])} // Set fill color to transparent on hover
+      onMouseLeave={() => setFillColor(colors.pinkAlpha[100])}
     >
       <ArrowIcon rotation={rotation} fill={fillColor} />
     </Button>
