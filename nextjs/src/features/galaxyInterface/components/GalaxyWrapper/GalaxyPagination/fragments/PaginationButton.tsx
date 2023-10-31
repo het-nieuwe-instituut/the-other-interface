@@ -19,18 +19,18 @@ export const PaginationButton: React.FC<Props> = ({
 
   return (
     <Button
-      bg="transparent"
+      bg="blueAlpha.100"
       p={0}
       padding={'0'}
       onClick={handleClick}
-      _hover={{ bg: 'pinkAlpha.100' }}
       transition="transform all 0.2s ease-in-out"
       border="none"
       borderRadius={'3px'}
       display={'flex'}
-      disabled={disabled}
+      isDisabled={disabled}
       _focus={{ boxShadow: 'none' }}
-      // _disabled={{ cursor: 'default' }}
+      _disabled={{ opacity: '0.3', cursor: 'default', _hover: { bg: 'blueAlpha.100' } }}
+      _hover={{ bg: 'pinkAlpha.100' }}
       onMouseEnter={() => setFillColor(colors.blueAlpha[100])} // Set fill color to transparent on hover
       onMouseLeave={() => setFillColor(colors.pinkAlpha[100])}
     >

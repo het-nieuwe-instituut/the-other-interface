@@ -51,7 +51,11 @@ export const GalaxyPagination: React.FC<Props> = ({
           <Text>{pagesAmount}</Text>
         </Flex>
       </Flex>
-      <PaginationButton side="right" handleClick={handleRightClick} />
+      <PaginationButton
+        side="right"
+        handleClick={handleRightClick}
+        disabled={currentPageNumber === pagesAmount}
+      />
     </Grid>
   )
 }
