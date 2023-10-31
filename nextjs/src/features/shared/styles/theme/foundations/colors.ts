@@ -181,6 +181,7 @@ const blueAlpha = {
   '90': 'RGBA(0, 81, 255, .9)',
   '80': 'RGBA(0, 81, 255, .8)',
   '60': 'RGBA(0, 81, 255, .6)',
+  '50': 'RGBA(0, 81, 255, .5)',
 }
 
 const blueAlphaNew = {

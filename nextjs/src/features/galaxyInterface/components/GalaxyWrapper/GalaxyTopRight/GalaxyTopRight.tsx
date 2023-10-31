@@ -1,29 +1,44 @@
 'usc client'
-import { Flex, Text } from '@chakra-ui/react'
+import { Flex, Link } from '@chakra-ui/react'
 import { Fragment } from 'react'
 import { LOCALES } from '@/features/shared/constants/locales'
 
 import { MenuButton } from '../../../../shared/components/MenuButton/MenuButton'
-import { GalaxyButton } from '../GalaxyButton/GalaxyButton'
 import { usePresenter } from './usePresenter'
 
+import { State } from '@/features/shared/configs/store'
+import { useSelector } from 'react-redux'
+import { getLanguageToggleColor } from './getLanguageToggleColor'
+
 export const GalaxyTopRight: React.FC = () => {
-  const { lang, changeLanguage } = usePresenter()
+  const { changeLanguage, lang } = usePresenter()
+  const isMenuOpen = useSelector((state: State) => state.shared.isMenuOpen)
 
   return (
     <Flex alignItems={'center'}>
       <Flex flexDirection={'row'} alignItems={'center'} justifyContent={'center'}>
-        {LOCALES.map((locale, index) => (
-          <Fragment key={locale}>
-            <GalaxyButton
-              text={locale.toUpperCase()}
-              size={'sm'}
-              disabled={lang === locale}
-              onClick={() => changeLanguage(locale)}
-            />
-            {index < LOCALES.length - 1 && <Text margin={0}>|</Text>}
-          </Fragment>
-        ))}
+        {LOCALES.map(locale => {
+          return (
+            <Fragment key={locale}>
+              <Link
+                href={'/'}
+                variant={isMenuOpen ? 'navigation' : 'navigationOnTopOfTheGalaxy'}
+                cursor="pointer"
+                whiteSpace={'nowrap'}
+                textOverflow={'ellipsis'}
+                overflow={'hidden'}
+                textStyle={'socialLarge.lg'}
+                mr={'10px'}
+                onClick={e => {
+                  changeLanguage(e, locale)
+                }}
+                color={getLanguageToggleColor(isMenuOpen, lang === locale)}
+              >
+                {locale.toUpperCase()}
+              </Link>
+            </Fragment>
+          )
+        })}
       </Flex>
       <MenuButton />
     </Flex>

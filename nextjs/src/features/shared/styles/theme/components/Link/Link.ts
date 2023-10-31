@@ -107,8 +107,53 @@ export const Link: ComponentStyleConfig = {
         underline: 'none',
         textDecoration: 'none',
         borderBottom: 'none',
-        color: `${colors.blueAlphaNew['100']}!important`,
+        color: `${colors.blueAlpha['100']}!important`,
         backgroundColor: `${colors.pinkAlpha['100']}`,
+      },
+
+      _disabled: {
+        color: `${colors.blueAlpha['50']} !important`,
+      },
+    },
+    navigationOnTopOfTheGalaxy: {
+      color: `${colors.blueAlpha['100']}`,
+      underline: 'none',
+      textDecoration: 'none',
+      borderBottom: 'none',
+      outline: 'none !important',
+
+      _hover: {
+        color: `${colors.blueAlpha['50']}`,
+        underline: 'none',
+        textDecoration: 'none',
+        borderBottom: 'none',
+      },
+
+      _active: {
+        color: `${colors.blueAlpha['100']}`,
+        underline: 'none',
+        textDecoration: 'none',
+        borderBottom: 'none',
+      },
+
+      _visited: {
+        color: `${colors.blueAlpha['100']}`,
+        underline: 'none',
+        textDecoration: 'none',
+        borderBottom: 'none',
+      },
+
+      _focus: {
+        underline: 'none !important',
+        textDecoration: 'none !important',
+        border: 'none !important',
+        color: `${colors.blueAlpha['100']}!important`,
+        backgroundColor: `${colors.pinkAlpha['100']}`,
+        outline: 'none !important',
+      },
+
+      _disabled: {
+        color: `${colors.pinkAlpha['60']} !important`,
       },
     },
     navigationDecorative: {
