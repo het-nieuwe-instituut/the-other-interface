@@ -6,7 +6,6 @@ export type SharedState = {
   isMenuOpen: boolean
   isSearchModeActive: boolean
   searchCategory: CloudCategory | null
-  searchPageNumber: number
   isCategorySuggestionsOpen: boolean
   userLooksOn: (typeof USER_LOOKS_ON)[keyof typeof USER_LOOKS_ON]
 }
@@ -15,7 +14,6 @@ export const sharedInitialState: SharedState = {
   isMenuOpen: false,
   isSearchModeActive: false,
   searchCategory: null,
-  searchPageNumber: 1,
   isCategorySuggestionsOpen: false,
   userLooksOn: USER_LOOKS_ON.GALAXY,
 }
@@ -49,14 +47,7 @@ export const sharedSlice = createSlice({
       state.searchCategory = action.payload?.searchCategory
       state.isCategorySuggestionsOpen = false
     },
-    searchPageNumber: (
-      state,
-      action: PayloadAction<{
-        searchPageNumber: SharedState['searchPageNumber']
-      }>
-    ) => {
-      state.searchPageNumber = action.payload?.searchPageNumber ?? state.searchPageNumber
-    },
+
     categorySuggestionsOpen: (
       state,
       action: PayloadAction<{

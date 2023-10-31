@@ -5,15 +5,13 @@ import { useSearchParams } from 'next/navigation'
 import { positioningTemplates } from './positioningTemplates'
 import { usePositioningTemplates } from '@/features/shared/hooks/usePositioningTemplates'
 import { ZoomLevel2Type } from 'src/generated/graphql'
-import { useSelector } from 'react-redux'
-import { State } from '@/features/shared/configs/store'
 
 export const usePresenter = (records: ZoomLevel2Type[]) => {
   const searchParams = useSearchParams()
   const category = searchParams?.get('category') as CloudCategory
-  const searchPageNumber = useSelector((state: State) => state.shared.searchPageNumber)
+  const page = Number(searchParams?.get('page') as string) || 1
 
-  const { currentTemplate } = usePositioningTemplates(positioningTemplates, searchPageNumber)
+  const { currentTemplate } = usePositioningTemplates(positioningTemplates, page)
 
   const positionedRecords = useMemo(() => {
     let lastStoryIndex = 0
