@@ -22,9 +22,7 @@ export const usePresenter = () => {
 
   const searchResultAmount = Number(data?.zoomLevel2?.total) || 0
 
-  const pagesAmount = searchResultAmount
-    ? Math.ceil(Number(data?.zoomLevel2?.total) / MAX_RECORDS_PER_PAGE)
-    : 0
+  const pagesAmount = searchResultAmount ? Math.ceil(searchResultAmount / MAX_RECORDS_PER_PAGE) : 0
 
   const paginate = (pageNumber: number) => {
     const search = searchParam ? `&search=${searchParam}` : ''
