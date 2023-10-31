@@ -16,7 +16,7 @@ type Props = {
 }
 
 export const Navigation = ({ menupages }: Props) => {
-  const { isMenuOpen, ref, navTextStyle } = usePresenter()
+  const { isMenuOpen, ref, navTextStyle, overflowValue } = usePresenter()
   const { t: tNavigation, lang } = useTranslation('navigation')
 
   return (
@@ -29,6 +29,7 @@ export const Navigation = ({ menupages }: Props) => {
       position={'fixed'}
       px={{ xl: 6, base: 0 }}
       zIndex={NAVIGATION_OVERLAY_Z_INDEX}
+      overflow={overflowValue}
       top={0}
       right={0}
       _before={{
@@ -64,7 +65,7 @@ export const Navigation = ({ menupages }: Props) => {
             {tNavigation('explore_collection')}
           </Text>
 
-          <Link
+          {/* <Link
             href={`/landingpage?category=stories&lang=${lang}`}
             variant={'navigation'}
             cursor="pointer"
@@ -73,7 +74,7 @@ export const Navigation = ({ menupages }: Props) => {
             mb={'sm'}
           >
             {tNavigation('stories')}
-          </Link>
+          </Link> */}
 
           <Link
             href={`/landingpage?category=archives&lang=${lang}`}
@@ -117,7 +118,8 @@ export const Navigation = ({ menupages }: Props) => {
         </Flex>
 
         <Flex maxWidth={'398px'} minWidth={'388px'} flexDirection={'column'}>
-          <Flex flexDirection={'column'} mb={15}>
+          {/* Initial value was 15. Inscread after we decided to remove more link, to compensate */}
+          <Flex flexDirection={'column'} mb={['63px']}>
             <Text textStyle={'socialMedium.md'} color={'pinkAlpha.100'} mb={'5'} fontSize={'21px'}>
               {tNavigation('about')}
             </Text>
@@ -134,9 +136,9 @@ export const Navigation = ({ menupages }: Props) => {
           </Flex>
 
           <Flex flexDirection={'column'}>
-            <Text textStyle={'socialMedium.md'} color={'pinkAlpha.100'} mb={'4'}>
+            {/* <Text textStyle={'socialMedium.md'} color={'pinkAlpha.100'} mb={'4'}>
               {tNavigation('more')}
-            </Text>
+            </Text> */}
             {menupages?.menupages?.data?.map(item => {
               if (item?.attributes?.slug === '/about') return null
               return (
