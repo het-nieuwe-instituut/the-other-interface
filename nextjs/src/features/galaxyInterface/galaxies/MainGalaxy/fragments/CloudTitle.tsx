@@ -15,6 +15,8 @@ export const CloudTitle: React.FC<Props> = ({ position, children }) => (
     color="blueAlpha.100"
     pointerEvents={'none'}
     style={{ ...position }}
+    fontSize={'2.5vw'}
+    lineHeight={'3.2vw'}
   >
     {children}
   </Text>

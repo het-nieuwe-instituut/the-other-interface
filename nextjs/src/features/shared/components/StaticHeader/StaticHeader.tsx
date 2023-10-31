@@ -1,12 +1,13 @@
 'use client'
 import { Flex, Link, Box } from '../../configs/chakra'
 
-import { STATIC_HEADER_Z_INDEX } from '../../constants/mainConstants'
-import { useLooseTypeSafeTranslation } from '../../hooks/translations'
+import { STATIC_HEADER_Z_INDEX, USER_LOOKS_ON } from '../../constants/mainConstants'
 import { GalaxyTopRight } from '@/features/galaxyInterface/components/GalaxyWrapper/GalaxyTopRight/GalaxyTopRight'
+import { usePresenter } from './usePresenter'
 
 export const StaticHeader = () => {
-  const { t: tNavigation } = useLooseTypeSafeTranslation('navigation')
+  const { tNavigation, userLooksOn, isMenuOpen } = usePresenter()
+
   return (
     <>
       <Flex
@@ -27,17 +28,24 @@ export const StaticHeader = () => {
         zIndex={STATIC_HEADER_Z_INDEX}
         pointerEvents={'all'}
       >
-        <Link
-          href={'/'}
-          variant={'decorative'}
-          cursor="pointer"
-          textStyle="small"
-          whiteSpace={'nowrap'}
-          textOverflow={'ellipsis'}
-          overflow={'hidden'}
-        >
-          {tNavigation('theNewInstitute')}
-        </Link>
+        <Flex alignItems={'center'}>
+          <Link
+            href={'/'}
+            variant={isMenuOpen ? 'navigation' : 'navigationOnTopOfTheGalaxy'}
+            cursor="pointer"
+            whiteSpace={'nowrap'}
+            textOverflow={'ellipsis'}
+            overflow={'hidden'}
+            textStyle={
+              userLooksOn === USER_LOOKS_ON.GALAXY ? 'headingTimesLarge.lg' : 'impactNew.md'
+            }
+          >
+            {tNavigation('theNewInstitute')}
+            {' • '}
+            {tNavigation('collectionPlatform')}
+          </Link>
+        </Flex>
+
         <Box marginRight={'8'} marginTop={'-3px'}>
           <GalaxyTopRight />
         </Box>
