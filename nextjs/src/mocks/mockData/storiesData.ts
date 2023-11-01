@@ -1,7 +1,7 @@
 import { storyMock } from './storyData'
 
 export const storiesData = {
-  stories: {
+  storiesByLocale: {
     data: [storyMock],
   },
 }
