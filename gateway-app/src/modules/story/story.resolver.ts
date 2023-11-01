@@ -44,9 +44,8 @@ export class StoryFieldResolver {
 export class StoryResolver {
   public constructor(@Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk) {}
 
-  // TODO this should a be a stories and i should copy logic and create something like storiesByLocale and also on front end i should use this new one
   @Query(() => StoryEntityResponseCollection)
-  public async stories(
+  public async storiesByLocale(
     @Args('filters', { nullable: true }) filters?: StoryFiltersInput,
     @Args('pagination', { nullable: true }) pagination?: PaginationArg,
     @Args('sort', { nullable: true, type: () => [String] }) sort?: string[],
@@ -73,6 +72,25 @@ export class StoryResolver {
     return {
       data: [],
     }
+  }
+
+  @Query(() => StoryEntityResponseCollection)
+  public async stories(
+    @Args('filters', { nullable: true }) filters?: StoryFiltersInput,
+    @Args('pagination', { nullable: true }) pagination?: PaginationArg,
+    @Args('sort', { nullable: true, type: () => [String] }) sort?: string[],
+    @Args('publicationState', { nullable: true }) publicationState?: PublicationState,
+    @Args('locale', { nullable: true }) locale?: I18NLocaleCode
+  ) {
+    const res = await this.strapiGqlSdk.stories({
+      filters: filters || undefined,
+      pagination: pagination || {},
+      sort: sort || [],
+      publicationState: publicationState || undefined,
+      locale: locale || undefined,
+    })
+
+    return res.stories
   }
 
   @Query(() => StoryEntityResponse)
