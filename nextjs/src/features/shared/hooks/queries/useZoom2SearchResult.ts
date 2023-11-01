@@ -33,7 +33,7 @@ export function useZoom2SearchResult({
       if (page === pageAmount) return
 
       const nextPage = page + 1
-      // Prefetch the next page's data
+
       queryClient.prefetchQuery(['search-result', category, nextPage], () =>
         api.Zoom2({
           entityName,
