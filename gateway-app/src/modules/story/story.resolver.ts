@@ -44,6 +44,7 @@ export class StoryFieldResolver {
 export class StoryResolver {
   public constructor(@Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk) {}
 
+  // TODO this should a be a stories and i should copy logic and create something like storiesByLocale and also on front end i should use this new one
   @Query(() => StoryEntityResponseCollection)
   public async stories(
     @Args('filters', { nullable: true }) filters?: StoryFiltersInput,
@@ -52,35 +53,25 @@ export class StoryResolver {
     @Args('publicationState', { nullable: true }) publicationState?: PublicationState,
     @Args('locale', { nullable: true }) locale?: I18NLocaleCode
   ) {
-    const inputArgs = {
-      id: filters?.id || undefined, // assuming your filters might contain an ID
-      pagination: pagination || {},
-      sort: sort || [],
-      publicationState: publicationState || undefined,
-      locale: {
-        eq: locale || undefined,
-      },
+    const res = await this.strapiGqlSdk.storyByLocale({ id: filters?.id?.eq })
+    if (res?.story?.data?.attributes?.locale === locale || !locale) {
+      return {
+        data: [res.story?.data],
+      }
     }
 
-    const res = await this.strapiGqlSdk.storiesByLocale(inputArgs)
-    if (res?.stories?.data[0]?.attributes?.locale === locale || !locale) {
-      return res.stories
-    }
-
-    const localizedStory = res.stories?.data[0]?.attributes?.localizations?.data?.find(
+    const localizedStory = res.story?.data?.attributes?.localizations?.data?.find(
       l => l.attributes?.locale === locale
     )
 
     if (localizedStory) {
       return {
         data: [localizedStory],
-        meta: res?.stories?.meta,
       }
     }
 
     return {
       data: [],
-      meta: {},
     }
   }
 

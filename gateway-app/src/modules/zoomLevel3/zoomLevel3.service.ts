@@ -90,8 +90,21 @@ export class ZoomLevel3Service {
   }
 
   private async getStoryRelations(id: string, lang?: string) {
-    const storyRelations = await this.strapiGqlSdk.storiesLinkedToTheme({ id, locale: lang })
-    const relations = await this.strapiGqlSdk.storyTriplyRelations({ id })
+    let storyId = id
+    const res = await this.strapiGqlSdk.storyByLocale({ id })
+
+    if (res?.story?.data?.attributes?.locale !== lang && lang) {
+      const localizedStory = res?.story?.data?.attributes?.localizations?.data?.find(
+        l => l.attributes?.locale === lang
+      )
+      storyId = localizedStory?.id || id
+    }
+
+    const storyRelations = await this.strapiGqlSdk.storiesLinkedToTheme({
+      id: storyId,
+      locale: lang,
+    })
+    const relations = await this.strapiGqlSdk.storyTriplyRelations({ id: storyId })
     const triplyRecords = (relations.story?.data?.attributes?.triplyRecords?.data || []).filter(
       r => !!r.attributes?.recordId
     )
@@ -120,7 +133,7 @@ export class ZoomLevel3Service {
       }
     })
 
-    const storyIds = this.extractStoryIds(storyRelations)
+    const storyIds = this.extractStoryIds(storyRelations, storyId)
     // const randomRecordIds = getRandom2ItemsFromArray(storyIds)
     // const stories = await this.strapiGqlSdk.storiesByIds({ storiesIds: randomRecordIds })
     // const data = await Promise.all(promises)
@@ -275,14 +288,14 @@ export class ZoomLevel3Service {
   //   }
   // }
 
-  private extractStoryIds(response: StoriesLinkedToThemeQuery): string[] {
+  private extractStoryIds(response: StoriesLinkedToThemeQuery, excludeId?: string): string[] {
     const themesData = response?.story?.data?.attributes?.themes?.data || []
 
     const storyIds: string[] = []
 
     for (const theme of themesData) {
       for (const story of theme?.attributes?.stories?.data || []) {
-        if (!story.id) {
+        if (!story.id || story.id === excludeId) {
           continue
         }
         storyIds.push(story.id)
