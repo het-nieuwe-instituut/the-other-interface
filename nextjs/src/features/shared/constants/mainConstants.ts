@@ -14,3 +14,5 @@ export const USER_LOOKS_ON = {
   GALAXY: 'galaxy',
   EDITORIAL: 'editorial',
 } as const
+
+export const ZOOM2_RECORDS_PER_PAGE = 12

@@ -190,6 +190,19 @@ export class ArchivesService {
       { page, pageSize }
     )
 
+    return {
+      page,
+      nodes: result.data.map(res => {
+        return {
+          thumbnail: res.thumbnail,
+          title: res.title,
+          id: res.id,
+        }
+      }),
+    }
+  }
+
+  public async getZoomLevel2DataAmount() {
     const countResult = await this.triplyService.queryTriplyData<{ total?: string }>(
       this.ZoomLevel2CountEndpoint,
       { total: true },
@@ -199,15 +212,7 @@ export class ArchivesService {
     const total = countResult?.data.pop()?.total ?? '0'
 
     return {
-      page,
       total,
-      nodes: result.data.map(res => {
-        return {
-          thumbnail: res.thumbnail,
-          title: res.title,
-          id: res.id,
-        }
-      }),
     }
   }
 
