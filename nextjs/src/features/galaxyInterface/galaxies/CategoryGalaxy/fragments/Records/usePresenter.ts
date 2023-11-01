@@ -32,8 +32,6 @@ export const usePresenter = (records: ZoomLevel2Type[]) => {
     return positionedRecords
   }, [records, category, currentTemplate])
 
-  console.log('positionedRecords', page, positionedRecords)
-
   return {
     positionedRecords,
   }
