@@ -44,6 +44,16 @@ query storiesByLocale(
     }
 }
 
+query storyByLocale(
+    $id: ID
+) {
+    story(id: $id) {
+        data {
+            ...LocalizedStoryFragment
+        }
+    }
+}
+
 
 query storiesWithoutRelations(
     $filters: StoryFiltersInput
