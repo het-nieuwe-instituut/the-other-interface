@@ -35,7 +35,9 @@ export type DynamicComponents =
       NonNullable<LandingpageBySlugQuery['landingpages']['data']>[0]['attributes']
     >['components']
   | Maybe<Array<HomepageComponentsDynamicZone>>
-  | NonNullable<NonNullable<StoryByIdQuery['stories']['data']>[0]['attributes']>['components']
+  | NonNullable<
+      NonNullable<StoryByIdQuery['storiesByLocale']['data']>[0]['attributes']
+    >['components']
   | Maybe<Array<MenupageComponentsDynamicZone>>
 
 export function DynamicComponentRenderer(props: Props) {
