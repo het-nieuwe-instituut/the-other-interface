@@ -3,7 +3,15 @@ import { useQuery, useQueryClient } from '@tanstack/react-query'
 import initApiClientService from '../../utils/initApiClientService'
 import { CATEGORIES_TO_ENTITY_MAPPER, CloudCategory } from '@/features/shared/utils/categories'
 
-export function useZoom2SearchResult(category: CloudCategory, page = 1) {
+export function useZoom2SearchResult({
+  category,
+  pageAmount,
+  page,
+}: {
+  category: CloudCategory
+  pageAmount: number
+  page: number
+}) {
   const api = initApiClientService()
   const queryClient = useQueryClient()
 
@@ -19,14 +27,16 @@ export function useZoom2SearchResult(category: CloudCategory, page = 1) {
     queryFn,
     refetchOnWindowFocus: false,
     onSuccess: () => {
-      // Prefetch the next page's data
-      queryClient.prefetchQuery(['search-result', category, page + 1], () =>
-        api.Zoom2({
-          entityName: CATEGORIES_TO_ENTITY_MAPPER[category as CloudCategory],
-          page: page + 1,
-          pageSize: 12,
-        })
-      )
+      if (page !== pageAmount) {
+        // Prefetch the next page's data
+        queryClient.prefetchQuery(['search-result', category, page + 1], () =>
+          api.Zoom2({
+            entityName: CATEGORIES_TO_ENTITY_MAPPER[category as CloudCategory],
+            page: page + 1,
+            pageSize: 12,
+          })
+        )
+      }
     },
   })
 }

@@ -10,9 +10,9 @@ export const CategoryGalaxy: React.FC = () => {
   const {
     searchResult,
     isSearchModeActive,
-    isLoading,
+    isResultAmountLoading,
     currentPageNumber,
-    pagesAmount,
+    pageAmount,
     increasePageNumber,
     decreasePageNumber,
   } = usePresenter()
@@ -26,8 +26,8 @@ export const CategoryGalaxy: React.FC = () => {
         galaxyPagination={
           <GalaxyPagination
             currentPageNumber={currentPageNumber}
-            pagesAmount={pagesAmount}
-            isLoading={isLoading}
+            pageAmount={pageAmount}
+            isResultAmountLoading={isResultAmountLoading}
             handleLeftClick={decreasePageNumber}
             handleRightClick={increasePageNumber}
           />

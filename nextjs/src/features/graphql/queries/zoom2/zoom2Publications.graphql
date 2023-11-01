@@ -1,6 +1,5 @@
 query Zoom2Publications($page: Int!, $pageSize: Int!) {
     zoomLevel2(entityName: Publications, page: $page, pageSize: $pageSize) {
-        total,
         page,
         nodes {
             title

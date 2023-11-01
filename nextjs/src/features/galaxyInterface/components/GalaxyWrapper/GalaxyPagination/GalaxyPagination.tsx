@@ -6,22 +6,20 @@ import { PaginationButton } from './fragments/PaginationButton'
 
 type Props = {
   currentPageNumber: number
-  pagesAmount: number
-  isLoading: boolean
+  pageAmount: number
+  isResultAmountLoading: boolean
   handleLeftClick?: () => void
   handleRightClick?: () => void
 }
 
 export const GalaxyPagination: React.FC<Props> = ({
   currentPageNumber,
-  pagesAmount,
-  isLoading,
+  pageAmount,
+  isResultAmountLoading,
   handleLeftClick,
   handleRightClick,
 }) => {
   const { t } = useTypeSafeTranslation('navigation')
-
-  if (isLoading) return null
 
   return (
     <Grid
@@ -35,7 +33,10 @@ export const GalaxyPagination: React.FC<Props> = ({
       templateColumns="40px 1fr 40px"
       gap="5px"
     >
-      <PaginationButton handleClick={handleLeftClick} disabled={currentPageNumber === 1} />
+      <PaginationButton
+        handleClick={handleLeftClick}
+        disabled={isResultAmountLoading || currentPageNumber === 1}
+      />
 
       <Flex
         flexDirection={'column'}
@@ -44,17 +45,21 @@ export const GalaxyPagination: React.FC<Props> = ({
         textStyle="socialLarge.md"
         gap="3px"
       >
-        <Text>{t('page')}</Text>
-        <Flex gap="3px" flexWrap={'wrap'} justifyContent={'center'}>
-          <Text>{currentPageNumber}</Text>
-          <Text>{t('of')}</Text>
-          <Text>{pagesAmount}</Text>
-        </Flex>
+        {!isResultAmountLoading && (
+          <>
+            <Text>{t('page')}</Text>
+            <Flex gap="3px" flexWrap={'wrap'} justifyContent={'center'}>
+              <Text>{currentPageNumber}</Text>
+              <Text>{t('of')}</Text>
+              <Text>{pageAmount}</Text>
+            </Flex>
+          </>
+        )}
       </Flex>
       <PaginationButton
         side="right"
         handleClick={handleRightClick}
-        disabled={currentPageNumber === pagesAmount}
+        disabled={isResultAmountLoading || currentPageNumber === pageAmount}
       />
     </Grid>
   )

@@ -115,17 +115,8 @@ export class ObjectsService {
       { page, pageSize }
     )
 
-    const countResult = await this.triplyService.queryTriplyData<{ total?: string }>(
-      this.ZoomLevel2CountEndpoint,
-      { total: true },
-      undefined
-    )
-
-    const total = countResult?.data.pop()?.total ?? '0'
-
     return {
       page,
-      total,
       nodes: result.data.map(res => {
         return {
           thumbnail: res.thumbnail,

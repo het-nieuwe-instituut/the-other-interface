@@ -26,9 +26,6 @@ export class ZoomLevel2ParentType {
 
   @Field(() => Int, { nullable: false })
   public page: number
-
-  @Field(() => String, { nullable: false })
-  public total: string
 }
 
 @ObjectType()

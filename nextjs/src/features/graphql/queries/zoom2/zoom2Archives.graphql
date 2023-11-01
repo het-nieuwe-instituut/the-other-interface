@@ -1,6 +1,5 @@
 query Zoom2Archives($page: Int!, $pageSize: Int!) {
     zoomLevel2(entityName: Archives, page: $page, pageSize: $pageSize) {
-        total,
         page,
         nodes {
             title
