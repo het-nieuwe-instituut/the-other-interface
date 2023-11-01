@@ -1,6 +1,6 @@
 import { State } from '@/features/shared/configs/store'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
-import { useZoom2SearchResult } from '@/features/shared/hooks/queries/useZoom2SearchResult'
+import { useZoom2SearchResultAmount } from '@/features/shared/hooks/queries/useZoom2SearchResultAmount'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { usePageCategory } from '@/features/shared/hooks/usePageCategory'
 import { sharedActions } from '@/features/shared/stores/shared.store'
@@ -22,7 +22,7 @@ export const usePresenter = () => {
 
   const { t } = useTypeSafeTranslation('category')
   const { pageCategory } = usePageCategory()
-  const { data } = useZoom2SearchResult(pageCategory)
+  const { data } = useZoom2SearchResultAmount(pageCategory)
 
   const [inputValue, setInputValue] = useState('')
 
@@ -111,7 +111,7 @@ export const usePresenter = () => {
       )
     },
     handleGoClick,
-    searchResultAmount: data?.zoomLevel2?.total || '0',
+    searchResultAmount: data?.zoomLevel2Amount?.total || '0',
     inputValue,
     handleInputChange,
     searchBarRef,

@@ -2,9 +2,14 @@ import { Grid } from '@chakra-ui/react'
 
 import { usePresenter } from './usePresenter'
 import { Record } from '../Record'
+import { ZoomLevel2Type } from 'src/generated/graphql'
 
-export const Records: React.FC = () => {
-  const { positionedRecords } = usePresenter()
+type Props = {
+  records: ZoomLevel2Type[]
+}
+
+export const Records: React.FC<Props> = ({ records }) => {
+  const { positionedRecords } = usePresenter(records)
 
   return (
     <Grid

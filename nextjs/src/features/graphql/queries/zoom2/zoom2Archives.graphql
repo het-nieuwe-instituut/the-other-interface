@@ -1,11 +1,17 @@
 query Zoom2Archives($page: Int!, $pageSize: Int!) {
     zoomLevel2(entityName: Archives, page: $page, pageSize: $pageSize) {
-        total,
         page,
         nodes {
             title
 			thumbnail
 			id
         }
+    }
+}
+
+
+query Zoom2ArchiveAmount {
+    zoomLevel2Amount(entityName: Archives) {
+        total
     }
 }

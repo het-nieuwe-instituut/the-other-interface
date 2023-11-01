@@ -39,4 +39,26 @@ export class ZoomLevel2Service {
       }
     }
   }
+
+  public getDataAmount(entity: EntityNames) {
+    switch (entity) {
+      case EntityNames.Archives: {
+        return this.archivesService.getZoomLevel2DataAmount()
+      }
+      case EntityNames.Objects: {
+        return this.objectsService.getZoomLevel2DataAmount()
+      }
+
+      case EntityNames.People: {
+        return this.peopleService.getZoomLevel2DataAmount()
+      }
+      case EntityNames.Publications: {
+        return this.publicationsService.getZoomLevel2DataAmount()
+      }
+      case EntityNames.Stories:
+      default: {
+        throw CustomError.internalCritical(`Zoomlevel 2 for ${entity} not implemented`)
+      }
+    }
+  }
 }
