@@ -1,6 +1,6 @@
 import { State } from '@/features/shared/configs/store'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
-import { useZoom2SearchResult } from '@/features/shared/hooks/queries/useZoom2SearchResult'
+import { useZoom2SearchResultAmount } from '@/features/shared/hooks/queries/useZoom2SearchResultAmount'
 import { CloudCategory } from '@/features/shared/utils/categories'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useSelector } from 'react-redux'
@@ -18,9 +18,9 @@ export const usePresenter = () => {
   const searchParam = searchParams?.get('search') || ''
   const lang = searchParams?.get('lang')
 
-  const { data, isLoading } = useZoom2SearchResult(category, page)
+  const { data, isLoading } = useZoom2SearchResultAmount(category)
 
-  const searchResultAmount = Number(data?.zoomLevel2?.total) || 0
+  const searchResultAmount = Number(data?.zoomLevel2Amount?.total) || 0
 
   const pagesAmount = searchResultAmount ? Math.ceil(searchResultAmount / MAX_RECORDS_PER_PAGE) : 0
 

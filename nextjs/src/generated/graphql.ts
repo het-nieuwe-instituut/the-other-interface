@@ -1055,6 +1055,7 @@ export type Query = {
   usersPermissionsUsers: UsersPermissionsUserEntityResponseCollection;
   zoomLevel1: Array<ZoomLevel1Type>;
   zoomLevel2: ZoomLevel2ParentType;
+  zoomLevel2Amount: ZoomLevel2AmountParentType;
   zoomLevel3Archive?: Maybe<ArchiveZoomLevel3DetailType>;
   zoomLevel3Object?: Maybe<ObjectsZoomLevel3DetailType>;
   zoomLevel3Person?: Maybe<PeopleZoomLevel3DetailType>;
@@ -1228,6 +1229,11 @@ export type QueryZoomLevel2Args = {
   entityName: EntityNames;
   page: Scalars['Int'];
   pageSize?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type QueryZoomLevel2AmountArgs = {
+  entityName: EntityNames;
 };
 
 
@@ -1705,6 +1711,11 @@ export type ZoomLevel1Type = {
   name: Scalars['String'];
 };
 
+export type ZoomLevel2AmountParentType = {
+  __typename?: 'ZoomLevel2AmountParentType';
+  total: Scalars['String'];
+};
+
 export type ZoomLevel2ParentType = {
   __typename?: 'ZoomLevel2ParentType';
   nodes?: Maybe<Array<ZoomLevel2Type>>;
@@ -1847,6 +1858,13 @@ export type Zoom2QueryVariables = Exact<{
 
 export type Zoom2Query = { __typename?: 'Query', zoomLevel2: { __typename?: 'ZoomLevel2ParentType', total: string, page: number, nodes?: Array<{ __typename?: 'ZoomLevel2Type', title?: string | null, thumbnail?: string | null, id?: string | null }> | null } };
 
+export type Zoom2AmountQueryVariables = Exact<{
+  entityName: EntityNames;
+}>;
+
+
+export type Zoom2AmountQuery = { __typename?: 'Query', zoomLevel2Amount: { __typename?: 'ZoomLevel2AmountParentType', total: string } };
+
 export type Zoom2ArchivesQueryVariables = Exact<{
   page: Scalars['Int'];
   pageSize: Scalars['Int'];
@@ -1854,6 +1872,11 @@ export type Zoom2ArchivesQueryVariables = Exact<{
 
 
 export type Zoom2ArchivesQuery = { __typename?: 'Query', zoomLevel2: { __typename?: 'ZoomLevel2ParentType', total: string, page: number, nodes?: Array<{ __typename?: 'ZoomLevel2Type', title?: string | null, thumbnail?: string | null, id?: string | null }> | null } };
+
+export type Zoom2ArchiveAmountQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Zoom2ArchiveAmountQuery = { __typename?: 'Query', zoomLevel2Amount: { __typename?: 'ZoomLevel2AmountParentType', total: string } };
 
 export type Zoom2ObjectsQueryVariables = Exact<{
   page: Scalars['Int'];
@@ -1863,6 +1886,11 @@ export type Zoom2ObjectsQueryVariables = Exact<{
 
 export type Zoom2ObjectsQuery = { __typename?: 'Query', zoomLevel2: { __typename?: 'ZoomLevel2ParentType', total: string, page: number, nodes?: Array<{ __typename?: 'ZoomLevel2Type', title?: string | null, thumbnail?: string | null, id?: string | null }> | null } };
 
+export type Zoom2ObjectsAmountQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Zoom2ObjectsAmountQuery = { __typename?: 'Query', zoomLevel2Amount: { __typename?: 'ZoomLevel2AmountParentType', total: string } };
+
 export type Zoom2PeopleQueryVariables = Exact<{
   page: Scalars['Int'];
   pageSize: Scalars['Int'];
@@ -1870,6 +1898,11 @@ export type Zoom2PeopleQueryVariables = Exact<{
 
 
 export type Zoom2PeopleQuery = { __typename?: 'Query', zoomLevel2: { __typename?: 'ZoomLevel2ParentType', total: string, page: number, nodes?: Array<{ __typename?: 'ZoomLevel2Type', title?: string | null, thumbnail?: string | null, id?: string | null }> | null } };
+
+export type Zoom2PeopleAmountQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Zoom2PeopleAmountQuery = { __typename?: 'Query', zoomLevel2Amount: { __typename?: 'ZoomLevel2AmountParentType', total: string } };
 
 export type Zoom2PublicationsQueryVariables = Exact<{
   page: Scalars['Int'];
@@ -1879,12 +1912,10 @@ export type Zoom2PublicationsQueryVariables = Exact<{
 
 export type Zoom2PublicationsQuery = { __typename?: 'Query', zoomLevel2: { __typename?: 'ZoomLevel2ParentType', total: string, page: number, nodes?: Array<{ __typename?: 'ZoomLevel2Type', title?: string | null, thumbnail?: string | null, id?: string | null }> | null } };
 
-export type ZoomLevel3ArchiveQueryVariables = Exact<{
-  id: Scalars['String'];
-}>;
+export type Zoom2PublicationsAmountQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ZoomLevel3ArchiveQuery = { __typename?: 'Query', zoomLevel3Archive?: { __typename: 'ArchiveZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: string | null } | null };
+export type Zoom2PublicationsAmountQuery = { __typename?: 'Query', zoomLevel2Amount: { __typename?: 'ZoomLevel2AmountParentType', total: string } };
 
 export type ArchivesRelationsQueryVariables = Exact<{
   id: Scalars['String'];
@@ -1925,6 +1956,13 @@ export type StoriesRelationsQueryVariables = Exact<{
 
 
 export type StoriesRelationsQuery = { __typename?: 'Query', relations?: Array<{ __typename?: 'ZoomLevel3RelationsType', type?: EntityNames | null, total?: number | null, randomRelations?: Array<string> | null }> | null };
+
+export type ZoomLevel3ArchiveQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type ZoomLevel3ArchiveQuery = { __typename?: 'Query', zoomLevel3Archive?: { __typename: 'ArchiveZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: string | null } | null };
 
 export type ZoomLevel3ObjectQueryVariables = Exact<{
   id: Scalars['String'];
@@ -2786,6 +2824,13 @@ export const Zoom2Document = gql`
   }
 }
     `;
+export const Zoom2AmountDocument = gql`
+    query Zoom2Amount($entityName: EntityNames!) {
+  zoomLevel2Amount(entityName: $entityName) {
+    total
+  }
+}
+    `;
 export const Zoom2ArchivesDocument = gql`
     query Zoom2Archives($page: Int!, $pageSize: Int!) {
   zoomLevel2(entityName: Archives, page: $page, pageSize: $pageSize) {
@@ -2796,6 +2841,13 @@ export const Zoom2ArchivesDocument = gql`
       thumbnail
       id
     }
+  }
+}
+    `;
+export const Zoom2ArchiveAmountDocument = gql`
+    query Zoom2ArchiveAmount {
+  zoomLevel2Amount(entityName: Archives) {
+    total
   }
 }
     `;
@@ -2812,6 +2864,13 @@ export const Zoom2ObjectsDocument = gql`
   }
 }
     `;
+export const Zoom2ObjectsAmountDocument = gql`
+    query Zoom2ObjectsAmount {
+  zoomLevel2Amount(entityName: Objects) {
+    total
+  }
+}
+    `;
 export const Zoom2PeopleDocument = gql`
     query Zoom2People($page: Int!, $pageSize: Int!) {
   zoomLevel2(entityName: People, page: $page, pageSize: $pageSize) {
@@ -2822,6 +2881,13 @@ export const Zoom2PeopleDocument = gql`
       thumbnail
       id
     }
+  }
+}
+    `;
+export const Zoom2PeopleAmountDocument = gql`
+    query Zoom2PeopleAmount {
+  zoomLevel2Amount(entityName: People) {
+    total
   }
 }
     `;
@@ -2838,13 +2904,10 @@ export const Zoom2PublicationsDocument = gql`
   }
 }
     `;
-export const ZoomLevel3ArchiveDocument = gql`
-    query ZoomLevel3Archive($id: String!) {
-  zoomLevel3Archive(id: $id) {
-    __typename
-    id
-    title
-    thumbnail
+export const Zoom2PublicationsAmountDocument = gql`
+    query Zoom2PublicationsAmount {
+  zoomLevel2Amount(entityName: Publications) {
+    total
   }
 }
     `;
@@ -2883,6 +2946,16 @@ export const StoriesRelationsDocument = gql`
   }
 }
     ${Zoom3RelationsFragmentFragmentDoc}`;
+export const ZoomLevel3ArchiveDocument = gql`
+    query ZoomLevel3Archive($id: String!) {
+  zoomLevel3Archive(id: $id) {
+    __typename
+    id
+    title
+    thumbnail
+  }
+}
+    `;
 export const ZoomLevel3ObjectDocument = gql`
     query ZoomLevel3Object($id: String!) {
   zoomLevel3Object(id: $id) {
@@ -2960,20 +3033,32 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     Zoom2(variables: Zoom2QueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom2Query> {
       return withWrapper((wrappedRequestHeaders) => client.request<Zoom2Query>(Zoom2Document, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Zoom2', 'query');
     },
+    Zoom2Amount(variables: Zoom2AmountQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom2AmountQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Zoom2AmountQuery>(Zoom2AmountDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Zoom2Amount', 'query');
+    },
     Zoom2Archives(variables: Zoom2ArchivesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom2ArchivesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Zoom2ArchivesQuery>(Zoom2ArchivesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Zoom2Archives', 'query');
+    },
+    Zoom2ArchiveAmount(variables?: Zoom2ArchiveAmountQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom2ArchiveAmountQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Zoom2ArchiveAmountQuery>(Zoom2ArchiveAmountDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Zoom2ArchiveAmount', 'query');
     },
     Zoom2Objects(variables: Zoom2ObjectsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom2ObjectsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Zoom2ObjectsQuery>(Zoom2ObjectsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Zoom2Objects', 'query');
     },
+    Zoom2ObjectsAmount(variables?: Zoom2ObjectsAmountQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom2ObjectsAmountQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Zoom2ObjectsAmountQuery>(Zoom2ObjectsAmountDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Zoom2ObjectsAmount', 'query');
+    },
     Zoom2People(variables: Zoom2PeopleQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom2PeopleQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Zoom2PeopleQuery>(Zoom2PeopleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Zoom2People', 'query');
+    },
+    Zoom2PeopleAmount(variables?: Zoom2PeopleAmountQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom2PeopleAmountQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Zoom2PeopleAmountQuery>(Zoom2PeopleAmountDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Zoom2PeopleAmount', 'query');
     },
     Zoom2Publications(variables: Zoom2PublicationsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom2PublicationsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Zoom2PublicationsQuery>(Zoom2PublicationsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Zoom2Publications', 'query');
     },
-    ZoomLevel3Archive(variables: ZoomLevel3ArchiveQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ZoomLevel3ArchiveQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<ZoomLevel3ArchiveQuery>(ZoomLevel3ArchiveDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ZoomLevel3Archive', 'query');
+    Zoom2PublicationsAmount(variables?: Zoom2PublicationsAmountQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom2PublicationsAmountQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Zoom2PublicationsAmountQuery>(Zoom2PublicationsAmountDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Zoom2PublicationsAmount', 'query');
     },
     ArchivesRelations(variables: ArchivesRelationsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ArchivesRelationsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ArchivesRelationsQuery>(ArchivesRelationsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ArchivesRelations', 'query');
@@ -2989,6 +3074,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     StoriesRelations(variables: StoriesRelationsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<StoriesRelationsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<StoriesRelationsQuery>(StoriesRelationsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'StoriesRelations', 'query');
+    },
+    ZoomLevel3Archive(variables: ZoomLevel3ArchiveQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ZoomLevel3ArchiveQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ZoomLevel3ArchiveQuery>(ZoomLevel3ArchiveDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ZoomLevel3Archive', 'query');
     },
     ZoomLevel3Object(variables: ZoomLevel3ObjectQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ZoomLevel3ObjectQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ZoomLevel3ObjectQuery>(ZoomLevel3ObjectDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ZoomLevel3Object', 'query');

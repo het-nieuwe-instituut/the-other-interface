@@ -9,3 +9,9 @@ query Zoom2People($page: Int!, $pageSize: Int!) {
         }
     }
 }
+
+query Zoom2PeopleAmount {
+    zoomLevel2Amount(entityName: People) {
+        total
+    }
+}

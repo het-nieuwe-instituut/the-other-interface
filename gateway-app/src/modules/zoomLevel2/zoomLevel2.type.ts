@@ -30,3 +30,9 @@ export class ZoomLevel2ParentType {
   @Field(() => String, { nullable: false })
   public total: string
 }
+
+@ObjectType()
+export class ZoomLevel2AmountParentType {
+  @Field(() => String, { nullable: false })
+  public total: string
+}

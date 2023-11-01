@@ -362,6 +362,20 @@ export class PublicationsService {
     }
   }
 
+  public async getZoomLevel2DataAmount() {
+    const countResult = await this.triplyService.queryTriplyData<{ total?: string }>(
+      this.ZoomLevel2CountEndpoint,
+      { total: true },
+      undefined
+    )
+
+    const total = countResult?.data.pop()?.total ?? '0'
+
+    return {
+      total,
+    }
+  }
+
   public async getZoomLevel3Data(id: string) {
     const result = await this.triplyService.queryTriplyData<PublicationsZoomLevel3Data>(
       this.ZoomLevel3Endpoint,

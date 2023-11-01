@@ -9,3 +9,10 @@ query Zoom2Archives($page: Int!, $pageSize: Int!) {
         }
     }
 }
+
+
+query Zoom2ArchiveAmount {
+    zoomLevel2Amount(entityName: Archives) {
+        total
+    }
+}

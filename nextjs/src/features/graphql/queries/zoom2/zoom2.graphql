@@ -9,3 +9,9 @@ query Zoom2($entityName: EntityNames!  $page: Int!, $pageSize: Int) {
         }
     }
 }
+
+query Zoom2Amount($entityName: EntityNames!) {
+    zoomLevel2Amount(entityName: $entityName) {
+        total
+    }
+}

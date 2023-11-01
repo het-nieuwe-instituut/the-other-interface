@@ -9,3 +9,9 @@ query Zoom2Publications($page: Int!, $pageSize: Int!) {
         }
     }
 }
+
+query Zoom2PublicationsAmount {
+    zoomLevel2Amount(entityName: Publications) {
+        total
+    }
+}
