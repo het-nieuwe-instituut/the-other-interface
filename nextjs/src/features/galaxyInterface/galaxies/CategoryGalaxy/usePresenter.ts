@@ -8,7 +8,6 @@ import { useSelector } from 'react-redux'
 
 export const usePresenter = () => {
   const isSearchModeActive = useSelector((state: State) => state.shared.isSearchModeActive)
-
   const searchParams = useSearchParams()
   const category = searchParams?.get('category') as CloudCategory
   const page = Number(searchParams?.get('page') as string) || 1
