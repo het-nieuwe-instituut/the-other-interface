@@ -92,8 +92,8 @@ const customResolvers = {
       return storyData.story
     },
 
-    stories() {
-      return storiesData.stories
+    storiesByLocale() {
+      return storiesData.storiesByLocale
     },
 
     storiesWithoutRelations() {
