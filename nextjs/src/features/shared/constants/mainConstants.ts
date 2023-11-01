@@ -16,3 +16,4 @@ export const USER_LOOKS_ON = {
 } as const
 
 export const ZOOM2_RECORDS_PER_PAGE = 12
+export const DEFAULT_PAGE_NUMBER = 1
