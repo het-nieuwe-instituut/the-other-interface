@@ -10,14 +10,14 @@ export const usePresenter = () => {
   const isSearchModeActive = useSelector((state: State) => state.shared.isSearchModeActive)
   const searchParams = useSearchParams()
   const category = searchParams?.get('category') as CloudCategory
-  const page = Number(searchParams?.get('page') as string) || 1
 
   const { data: resultAmount, isLoading: isResultAmountLoading } =
     useZoom2SearchResultAmount(category)
 
   const searchResultAmount = Number(resultAmount?.zoomLevel2Amount?.total) || 0
 
-  const { pageAmount, increasePageNumber, decreasePageNumber } = usePagination(searchResultAmount)
+  const { page, pageAmount, increasePageNumber, decreasePageNumber } =
+    usePagination(searchResultAmount)
 
   const { data: results } = useZoom2SearchResult({ category, pageAmount, page })
 

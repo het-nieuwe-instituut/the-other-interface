@@ -1,12 +1,16 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { ZOOM2_RECORDS_PER_PAGE } from '../constants/mainConstants'
 
+const DEFAULT_PAGE_NUMBER = 1
+
 export const usePagination = (searchResultAmount: number) => {
   const pathname = usePathname()
   const router = useRouter()
   const searchParams = useSearchParams()
 
-  const page = searchParams ? Number(searchParams.get('page') as string) : 1
+  const page = searchParams
+    ? Math.max(DEFAULT_PAGE_NUMBER, Number(searchParams.get('page') as string))
+    : DEFAULT_PAGE_NUMBER
   const pageAmount = searchResultAmount ? Math.ceil(searchResultAmount / ZOOM2_RECORDS_PER_PAGE) : 0
 
   const paginate = (pageNumber: number) => {
@@ -34,6 +38,7 @@ export const usePagination = (searchResultAmount: number) => {
   }
 
   return {
+    page,
     pageAmount,
     paginate,
     increasePageNumber,
