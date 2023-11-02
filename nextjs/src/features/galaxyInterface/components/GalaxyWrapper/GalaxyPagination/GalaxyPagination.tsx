@@ -23,6 +23,7 @@ export const GalaxyPagination: React.FC<Props> = ({
 
   return (
     <Grid
+      position={'relative'}
       height="60px"
       backgroundColor={'blueAlpha.100'}
       padding={'4px'}
