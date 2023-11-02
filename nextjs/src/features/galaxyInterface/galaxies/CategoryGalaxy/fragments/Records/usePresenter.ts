@@ -32,15 +32,10 @@ export const usePresenter = (records: ZoomLevel2Type[]) => {
       lastStoryIndex++
     }
 
-    console.log(
-      page,
-      positionedRecords.map(record => record.id)
-    )
     return positionedRecords
   }, [records, category, currentTemplate])
 
   return {
     positionedRecords,
-    page,
   }
 }

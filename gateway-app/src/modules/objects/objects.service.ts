@@ -121,11 +121,6 @@ export class ObjectsService {
       id: res.id,
     }))
 
-    console.log(
-      'uniqueNodes',
-      uniqueNodes.map(n => n.id)
-    )
-
     return {
       page,
       nodes: uniqueNodes,
