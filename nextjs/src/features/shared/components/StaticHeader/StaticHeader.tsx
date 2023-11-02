@@ -6,7 +6,7 @@ import { GalaxyTopRight } from '@/features/galaxyInterface/components/GalaxyWrap
 import { usePresenter } from './usePresenter'
 
 export const StaticHeader = () => {
-  const { tNavigation, userLooksOn, isMenuOpen } = usePresenter()
+  const { tNavigation, userLooksOn, isMenuOpen, lang } = usePresenter()
 
   return (
     <>
@@ -15,7 +15,7 @@ export const StaticHeader = () => {
         paddingTop={4}
         justifyContent={'space-between'}
         flexDirection={'row'}
-        height={'40px'}
+        height={'auto'}
         overflow={'hidden'}
         alignItems={'center'}
         width={'100%'}
@@ -30,7 +30,7 @@ export const StaticHeader = () => {
       >
         <Flex alignItems={'center'}>
           <Link
-            href={'/'}
+            href={lang ? `/?lang=${lang}` : '/?lang=nl'}
             variant={isMenuOpen ? 'navigation' : 'navigationOnTopOfTheGalaxy'}
             cursor="pointer"
             whiteSpace={'nowrap'}
@@ -40,9 +40,13 @@ export const StaticHeader = () => {
               userLooksOn === USER_LOOKS_ON.GALAXY ? 'headingTimesLarge.lg' : 'impactNew.md'
             }
           >
-            {tNavigation('theNewInstitute')}
+            <Box as="span" mr={'10px'}>
+              {tNavigation('theNewInstitute')}
+            </Box>
             {' • '}
-            {tNavigation('collectionPlatform')}
+            <Box as="span" ml={'10px'}>
+              {tNavigation('collectionPlatform')}
+            </Box>
           </Link>
         </Flex>
 
