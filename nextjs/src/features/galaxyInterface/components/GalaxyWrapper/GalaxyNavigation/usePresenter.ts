@@ -1,11 +1,11 @@
 import { getCurrentZoomNumber } from '@/features/shared/helpers/getCurrentZoomNumber'
-import { CLOUD_CATEGORIES, CloudCategory } from '@/features/shared/utils/categories'
+import { CLOUD_CATEGORIES_ARRAY, CloudCategory } from '@/features/shared/utils/categories'
 import { useParams, usePathname, useSearchParams } from 'next/navigation'
 
 const getZoom2Link = (searchParam: string, category?: string) => {
   const search = searchParam ? `&search=${searchParam}` : ''
 
-  if (Object.values(CLOUD_CATEGORIES).includes(category as CloudCategory)) {
+  if (CLOUD_CATEGORIES_ARRAY.includes(category as CloudCategory)) {
     return `/landingpage?category=${category}${search}`
   }
 

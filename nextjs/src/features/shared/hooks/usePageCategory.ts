@@ -1,7 +1,7 @@
 import { useParams, usePathname, useSearchParams } from 'next/navigation'
 import { useMemo } from 'react'
 import { getCurrentZoomNumber } from '../helpers/getCurrentZoomNumber'
-import { CATEGORIES, CloudCategory, CLOUD_CATEGORIES } from '../utils/categories'
+import { CATEGORIES, CloudCategory, CLOUD_CATEGORIES_ARRAY } from '../utils/categories'
 
 export const usePageCategory = () => {
   const pathname = usePathname()
@@ -17,8 +17,7 @@ export const usePageCategory = () => {
     }
 
     if (params?.category === CATEGORIES.stories) {
-      const cloudCategoriesArray = Object.values(CLOUD_CATEGORIES)
-      category = cloudCategoriesArray[Math.floor(Math.random() * cloudCategoriesArray.length)]
+      category = CLOUD_CATEGORIES_ARRAY[Math.floor(Math.random() * CLOUD_CATEGORIES_ARRAY.length)]
     } else {
       category = params?.category as CloudCategory
     }
