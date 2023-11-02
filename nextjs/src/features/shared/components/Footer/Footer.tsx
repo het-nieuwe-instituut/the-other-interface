@@ -7,7 +7,7 @@ import { MenuPagesQuery } from 'src/generated/graphql'
 import { usePresenter } from './usePresenter'
 
 type Props = {
-  menupages: MenuPagesQuery
+  menupages?: MenuPagesQuery
 }
 
 export const Footer = ({ menupages }: Props) => {

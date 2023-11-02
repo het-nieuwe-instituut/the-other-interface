@@ -9,12 +9,10 @@ export default function BaseElementWrapper() {
   const { data } = useMenuPages()
   return (
     <>
-      {data && (
-        <>
-          <Navigation menupages={data} />
-          <Footer menupages={data} />
-        </>
-      )}
+      <>
+        <Navigation menupages={data} />
+        <Footer menupages={data} />
+      </>
     </>
   )
 }

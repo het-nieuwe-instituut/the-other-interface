@@ -12,7 +12,7 @@ const fadeIn = keyframes({ from: { opacity: 0 }, to: { opacity: 0.8 } })
 const fadeOut = keyframes({ from: { opacity: 0.85 }, to: { opacity: 0 } })
 
 type Props = {
-  menupages: MenuPagesQuery
+  menupages?: MenuPagesQuery
 }
 
 export const Navigation = ({ menupages }: Props) => {
@@ -87,7 +87,7 @@ export const Navigation = ({ menupages }: Props) => {
           </Link>
 
           <Link
-            href={`/landingpage?caregory=objects&lang=${lang}`}
+            href={`/landingpage?category=objects&lang=${lang}`}
             variant={'navigation'}
             cursor="pointer"
             textStyle={navTextStyle}
@@ -97,7 +97,7 @@ export const Navigation = ({ menupages }: Props) => {
           </Link>
 
           <Link
-            href={`/landingpage?caregory=people&lang=${lang}`}
+            href={`/landingpage?category=people&lang=${lang}`}
             variant={'navigation'}
             cursor="pointer"
             textStyle={navTextStyle}
