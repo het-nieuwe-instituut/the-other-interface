@@ -32,7 +32,6 @@ const nextConfig = {
       'hni-toi-acceptance.s3.eu-central-1.amazonaws.com',
       'hni-toi-production.s3.eu-central-1.amazonaws.com',
       'picsum.photos',
-      'hdl.handle.net',
     ],
   },
   output: 'standalone',
