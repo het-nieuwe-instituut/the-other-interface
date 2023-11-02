@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
-import { getHttpThumbnailOrNull } from '../util/helpers'
+import { getHttpThumbnailOrNull, getUniqueById } from '../util/helpers'
 import { TriplyUtils } from '../triply/triply.utils'
 
 interface PeopleZoomLevel2Data {
@@ -96,15 +96,15 @@ export class PeopleService {
       { page, pageSize }
     )
 
+    const uniqueNodes = getUniqueById(result.data).map(res => ({
+      thumbnail: res.thumbnail,
+      title: res.title,
+      id: res.id,
+    }))
+
     return {
       page,
-      nodes: result.data.map(res => {
-        return {
-          thumbnail: res.thumbnail,
-          title: res.title,
-          id: res.id,
-        }
-      }),
+      nodes: uniqueNodes,
     }
   }
 

@@ -1,4 +1,4 @@
-import { getHttpThumbnailOrNull, getRandom2ItemsFromArray } from './helpers'
+import { getHttpThumbnailOrNull, getRandom2ItemsFromArray, getUniqueById } from './helpers'
 
 describe('getRandom2ItemsFromArray', () => {
   it('returns an empty array if the input array is not an array', () => {
@@ -47,5 +47,21 @@ describe('getHttpThumbnailOrNull', () => {
     expect(getHttpThumbnailOrNull('example.com')).toEqual(null)
     expect(getHttpThumbnailOrNull('example.com/image.jpg')).toEqual(null)
     expect(getHttpThumbnailOrNull('ftp://example.com')).toEqual(null)
+  })
+})
+describe('getUniqueById', () => {
+  it('returns an empty array if the input array is empty', () => {
+    expect(getUniqueById([])).toEqual([])
+  })
+
+  it('returns the original array if all items have unique ids', () => {
+    const input = [{ id: 1 }, { id: 2 }, { id: 3 }]
+    expect(getUniqueById(input)).toEqual(input)
+  })
+
+  it('returns an array with only unique items based on their ids', () => {
+    const input = [{ id: 1 }, { id: 2 }, { id: 1 }, { id: 3 }, { id: 2 }]
+    const expectedOutput = [{ id: 1 }, { id: 2 }, { id: 3 }]
+    expect(getUniqueById(input)).toEqual(expectedOutput)
   })
 })

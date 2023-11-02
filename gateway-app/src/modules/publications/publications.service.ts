@@ -3,7 +3,7 @@ import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { ZoomLevel3Service } from '../zoomLevel3/zoomLevel3.service'
 import { TriplyUtils } from '../triply/triply.utils'
-import { getHttpThumbnailOrNull } from '../util/helpers'
+import { getHttpThumbnailOrNull, getUniqueById } from '../util/helpers'
 
 export interface PublicationsZoomLevel2Data {
   thumbnail: string
@@ -341,15 +341,15 @@ export class PublicationsService {
       { page, pageSize }
     )
 
+    const uniqueNodes = getUniqueById(result.data).map(res => ({
+      thumbnail: res.thumbnail,
+      title: res.title,
+      id: res.id,
+    }))
+
     return {
       page,
-      nodes: result.data.map(res => {
-        return {
-          thumbnail: res.thumbnail,
-          title: res.title,
-          id: res.id,
-        }
-      }),
+      nodes: uniqueNodes,
     }
   }
 

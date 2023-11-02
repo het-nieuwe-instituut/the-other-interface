@@ -21,6 +21,9 @@ export const usePresenter = (records: ZoomLevel2Type[]) => {
     const positionedRecords = []
 
     for (const position of Object.values(currentTemplate)) {
+      const record = records[lastStoryIndex]
+      if (!record) break
+
       positionedRecords.push({
         ...records[lastStoryIndex],
         position,
@@ -29,10 +32,15 @@ export const usePresenter = (records: ZoomLevel2Type[]) => {
       lastStoryIndex++
     }
 
+    console.log(
+      page,
+      positionedRecords.map(record => record.id)
+    )
     return positionedRecords
   }, [records, category, currentTemplate])
 
   return {
     positionedRecords,
+    page,
   }
 }
