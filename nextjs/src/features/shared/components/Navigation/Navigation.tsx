@@ -11,8 +11,15 @@ import useTranslation from 'next-translate/useTranslation'
 const fadeIn = keyframes({ from: { opacity: 0 }, to: { opacity: 0.8 } })
 const fadeOut = keyframes({ from: { opacity: 0.85 }, to: { opacity: 0 } })
 
+const categories = [
+  { name: 'archives', translationKey: 'archives' },
+  { name: 'objects', translationKey: 'objects' },
+  { name: 'people', translationKey: 'people' },
+  { name: 'publications', translationKey: 'publications' },
+]
+
 type Props = {
-  menupages: MenuPagesQuery
+  menupages?: MenuPagesQuery
 }
 
 export const Navigation = ({ menupages }: Props) => {
@@ -65,56 +72,18 @@ export const Navigation = ({ menupages }: Props) => {
             {tNavigation('explore_collection')}
           </Text>
 
-          {/* <Link
-            href={`/landingpage?category=stories&lang=${lang}`}
-            variant={'navigation'}
-            cursor="pointer"
-            tabIndex={0}
-            textStyle={navTextStyle}
-            mb={'sm'}
-          >
-            {tNavigation('stories')}
-          </Link> */}
-
-          <Link
-            href={`/landingpage?category=archives&lang=${lang}`}
-            variant={'navigation'}
-            cursor="pointer"
-            textStyle={navTextStyle}
-            mb={'sm'}
-          >
-            {tNavigation('archives')}
-          </Link>
-
-          <Link
-            href={`/landingpage?caregory=objects&lang=${lang}`}
-            variant={'navigation'}
-            cursor="pointer"
-            textStyle={navTextStyle}
-            mb={'sm'}
-          >
-            {tNavigation('objects')}
-          </Link>
-
-          <Link
-            href={`/landingpage?caregory=people&lang=${lang}`}
-            variant={'navigation'}
-            cursor="pointer"
-            textStyle={navTextStyle}
-            mb={'sm'}
-          >
-            {tNavigation('people')}
-          </Link>
-
-          <Link
-            href={`/landingpage?category=publications&lang=${lang}`}
-            variant={'navigation'}
-            cursor="pointer"
-            textStyle={navTextStyle}
-            mb={'sm'}
-          >
-            {tNavigation('publications')}
-          </Link>
+          {categories.map(category => (
+            <Link
+              key={category.name}
+              href={`/landingpage?category=${category.name}&lang=${lang}`}
+              variant={'navigation'}
+              cursor="pointer"
+              textStyle={navTextStyle}
+              mb={'sm'}
+            >
+              {tNavigation(category.translationKey)}
+            </Link>
+          ))}
         </Flex>
 
         <Flex maxWidth={'398px'} minWidth={'388px'} flexDirection={'column'}>

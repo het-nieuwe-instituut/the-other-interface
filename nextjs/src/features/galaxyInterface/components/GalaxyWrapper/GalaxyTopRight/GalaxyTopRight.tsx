@@ -32,7 +32,7 @@ export const GalaxyTopRight: React.FC = () => {
                 onClick={e => {
                   changeLanguage(e, locale)
                 }}
-                color={getLanguageToggleColor(isMenuOpen, lang === locale)}
+                color={getLanguageToggleColor(isMenuOpen, lang !== locale)}
               >
                 {locale.toUpperCase()}
               </Link>
