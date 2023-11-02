@@ -8,7 +8,6 @@ const publicationZoomLevel2Data = {
     { title: 'Publication 6', id: '6', thumbnail: 'https://picsum.photos/500' },
   ],
   page: 1,
-  total: '255'
 };
 
 const objectZoomLevel2Data = {
@@ -21,7 +20,6 @@ const objectZoomLevel2Data = {
     { title: 'Object 6', id: '6', thumbnail: 'https://picsum.photos/500' },
   ],
   page: 1,
-  total: '255'
 };
 
 const peopleZoomLevel2Data = {
@@ -34,7 +32,6 @@ const peopleZoomLevel2Data = {
     { title: 'Person 6', id: '6', thumbnail: 'https://picsum.photos/500' },
   ],
   page: 1,
-  total: '255'
 };
 
 const archivesZoomLevel2Data = {
@@ -47,12 +44,33 @@ const archivesZoomLevel2Data = {
     { title: 'Archives 6', id: '6', thumbnail: 'https://picsum.photos/500' },
   ],
   page: 1,
+};
+
+
+const publicationZoomLevel2DataAmount = {
+  total: '25555'
+};
+
+const objectZoomLevel2DataAmount = {
+  total: '1274'
+};
+
+const peopleZoomLevel2DataAmount = {
+  total: '345674'
+};
+
+const archivesZoomLevel2DataAmount = {
   total: '255'
 };
+
 
 export {
   publicationZoomLevel2Data,
   objectZoomLevel2Data,
   peopleZoomLevel2Data,
   archivesZoomLevel2Data,
+  publicationZoomLevel2DataAmount,
+  objectZoomLevel2DataAmount,
+  peopleZoomLevel2DataAmount,
+  archivesZoomLevel2DataAmount,
 };

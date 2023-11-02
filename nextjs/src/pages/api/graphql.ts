@@ -16,6 +16,10 @@ import {
   publicationZoomLevel2Data,
   objectZoomLevel2Data,
   archivesZoomLevel2Data,
+  publicationZoomLevel2DataAmount,
+  objectZoomLevel2DataAmount,
+  peopleZoomLevel2DataAmount,
+  archivesZoomLevel2DataAmount,
 } from '../../mocks/mockData/zoomLevel2Data'
 import { zoomLevel3Data } from '../../mocks/mockData/zoomLevel3Data'
 import { themesData } from '../../mocks/mockData/themesData'
@@ -47,7 +51,6 @@ const customResolvers = {
         entityName: EntityNames // Add or remove as required
         page: number
         pageSize: number
-        total: string
       }
     ) {
       const { entityName } = args
@@ -63,6 +66,29 @@ const customResolvers = {
         default:
           return {
             data: [],
+          }
+      }
+    },
+
+    zoomLevel2Amount(
+      root: unknown,
+      args: {
+        entityName: EntityNames
+        total: string
+      }
+    ) {
+      const { entityName } = args
+      switch (entityName) {
+        case 'Publications':
+          return publicationZoomLevel2DataAmount
+        case 'Objects':
+          return objectZoomLevel2DataAmount
+        case 'People':
+          return peopleZoomLevel2DataAmount
+        case 'Archives':
+          return archivesZoomLevel2DataAmount
+        default:
+          return {
             total: '0',
           }
       }
@@ -92,8 +118,8 @@ const customResolvers = {
       return storyData.story
     },
 
-    stories() {
-      return storiesData.stories
+    storiesByLocale() {
+      return storiesData.storiesByLocale
     },
 
     storiesWithoutRelations() {

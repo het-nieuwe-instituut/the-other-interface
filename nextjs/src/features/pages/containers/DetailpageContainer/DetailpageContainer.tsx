@@ -12,7 +12,9 @@ export interface DetailpageEditorialLayer {
     | NonNullable<
         NonNullable<LandingpageBySlugQuery['landingpages']['data']>[0]['attributes']
       >['components']
-    | NonNullable<NonNullable<StoryByIdQuery['stories']['data']>[0]['attributes']>['components']
+    | NonNullable<
+        NonNullable<StoryByIdQuery['storiesByLocale']['data']>[0]['attributes']
+      >['components']
     | null
 }
 interface Props {

@@ -1,7 +1,5 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { ZOOM2_RECORDS_PER_PAGE } from '../constants/mainConstants'
-
-const DEFAULT_PAGE_NUMBER = 1
+import { DEFAULT_PAGE_NUMBER, ZOOM2_RECORDS_PER_PAGE } from '../constants/mainConstants'
 
 export const usePagination = (searchResultAmount: number) => {
   const pathname = usePathname()

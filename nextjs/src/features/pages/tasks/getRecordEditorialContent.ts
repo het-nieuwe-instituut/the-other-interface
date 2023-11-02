@@ -29,7 +29,7 @@ export async function getRecordEditorialContent({
       publicationState,
     })
 
-    const attributes = result?.stories?.data?.[0]?.attributes
+    const attributes = result?.storiesByLocale?.data?.[0]?.attributes
 
     editorialData.title = attributes?.title
     editorialData.description = attributes?.description
