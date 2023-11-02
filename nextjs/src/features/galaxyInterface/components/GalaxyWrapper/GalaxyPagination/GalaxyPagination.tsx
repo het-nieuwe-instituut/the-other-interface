@@ -23,6 +23,7 @@ export const GalaxyPagination: React.FC<Props> = ({
 
   return (
     <Grid
+      position={'relative'}
       height="60px"
       backgroundColor={'blueAlpha.100'}
       padding={'4px'}
@@ -48,11 +49,10 @@ export const GalaxyPagination: React.FC<Props> = ({
         {!isResultAmountLoading && (
           <>
             <Text>{t('page')}</Text>
-            <Flex gap="3px" flexWrap={'wrap'} justifyContent={'center'}>
-              <Text>{currentPageNumber}</Text>
-              <Text>{t('of')}</Text>
-              <Text>{pageAmount}</Text>
-            </Flex>
+            <Text>
+              {currentPageNumber} {t('of')}
+            </Text>
+            <Text>{pageAmount}</Text>
           </>
         )}
       </Flex>
