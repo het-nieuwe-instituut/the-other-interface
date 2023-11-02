@@ -40,9 +40,13 @@ export const StaticHeader = () => {
               userLooksOn === USER_LOOKS_ON.GALAXY ? 'headingTimesLarge.lg' : 'impactNew.md'
             }
           >
-            {tNavigation('theNewInstitute')}
+            <Box as="span" mr={'10px'}>
+              {tNavigation('theNewInstitute')}
+            </Box>
             {' • '}
-            {tNavigation('collectionPlatform')}
+            <Box as="span" ml={'10px'}>
+              {tNavigation('collectionPlatform')}
+            </Box>
           </Link>
         </Flex>
 
