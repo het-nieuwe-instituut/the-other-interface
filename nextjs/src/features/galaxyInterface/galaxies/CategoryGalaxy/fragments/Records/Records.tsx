@@ -15,7 +15,7 @@ export const Records: React.FC<Props> = ({ records }) => {
     <Grid
       position="absolute"
       w="96vw"
-      h={`calc(80% - 1.7rem - 60px)`}
+      h={`calc(80% - 1.7rem - 60px)`} // considering fixed height of galaxy footer
       top="7%"
       left="2vw"
       right="2vw"
