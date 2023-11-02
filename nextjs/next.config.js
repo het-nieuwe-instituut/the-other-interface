@@ -20,7 +20,6 @@ const nextConfig = {
   async headers() {
     return [
       {
-        // Matching all SVG files from /images/fallbacks folder
         source: '/images/fallbacks/:path*.svg',
         headers: [
           {
