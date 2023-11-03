@@ -1,5 +1,6 @@
 import { usePathname, useRouter, useSearchParams, notFound } from 'next/navigation'
 import { DEFAULT_PAGE_NUMBER, ZOOM2_RECORDS_PER_PAGE } from '../constants/mainConstants'
+import { useCallback, useEffect } from 'react'
 
 export const usePagination = (searchResultAmount: number) => {
   const pathname = usePathname()
@@ -15,29 +16,48 @@ export const usePagination = (searchResultAmount: number) => {
     notFound()
   }
 
-  const paginate = (pageNumber: number) => {
-    const updatedSearchParams = searchParams
-      ? new URLSearchParams(searchParams.toString())
-      : new URLSearchParams()
+  const paginate = useCallback(
+    (pageNumber: number) => {
+      const updatedSearchParams = searchParams
+        ? new URLSearchParams(searchParams.toString())
+        : new URLSearchParams()
 
-    updatedSearchParams.set('page', String(pageNumber))
+      updatedSearchParams.set('page', String(pageNumber))
 
-    const url = pathname + `?${updatedSearchParams.toString()}`
+      const url = pathname + `?${updatedSearchParams.toString()}`
 
-    router.push(url)
-  }
+      router.push(url)
+    },
+    [pathname, router, searchParams]
+  )
 
-  const increasePageNumber = () => {
+  const increasePageNumber = useCallback(() => {
     if (page < pageAmount) {
       paginate(page + 1)
     }
-  }
+  }, [page, pageAmount, paginate])
 
-  const decreasePageNumber = () => {
+  const decreasePageNumber = useCallback(() => {
     if (page > 1) {
       paginate(page - 1)
     }
-  }
+  }, [page, paginate])
+
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight') {
+        increasePageNumber()
+      } else if (e.key === 'ArrowLeft') {
+        decreasePageNumber()
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyPress)
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress)
+    }
+  }, [increasePageNumber, decreasePageNumber])
 
   return {
     page,
