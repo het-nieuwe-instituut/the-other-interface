@@ -39,7 +39,7 @@ export const PageHeader: React.FC<Props> = ({
         {title}
       </Text>
       {preface && (
-        <Box mb="1" position="relative">
+        <Box position="relative">
           <div
             ref={prefaceRef}
             className={limitPrefaceHeight ? styles.limitedMarkdownContainer : undefined}

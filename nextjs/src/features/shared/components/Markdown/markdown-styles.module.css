@@ -1,4 +1,9 @@
 /* TODO: Set based on breakpoints - need to be confirmed with design team*/
+
+.reactMarkDown p {
+    margin: 0;
+}
+
 @media only screen and (min-width: 1024px) {
     .reactMarkDown p {
         font-size: 20px;
