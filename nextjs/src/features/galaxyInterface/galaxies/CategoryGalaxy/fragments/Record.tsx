@@ -40,7 +40,7 @@ export const Record: React.FC<Props> = ({ record }) => {
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
-        gap="10px"
+        gap="5px"
         cursor={'pointer'}
         onClick={handleClick}
         _hover={{ transform: 'scale(1.05)' }}
@@ -49,7 +49,7 @@ export const Record: React.FC<Props> = ({ record }) => {
         <ResponsiveImage
           src={thumbnail}
           alt={title ?? ''}
-          maxHeight="calc(100% - 2.6vw - 15px)" // where 2.6vw are a texts' line heights, 15px are gaps
+          maxHeight="calc(100% - 2.6vw - 7px)" // where 2.6vw are a texts' line heights, 15px are gaps
         />
 
         <RecordText title={title} categoryType={category} />

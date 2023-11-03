@@ -1,4 +1,4 @@
-import { Box, GridItem, Text, Flex } from '@chakra-ui/react'
+import { GridItem, Text, Flex } from '@chakra-ui/react'
 import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
 import { useParams } from 'next/navigation'
 import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
@@ -34,21 +34,28 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
-        gap="5px"
+        gap="2px"
       >
         <ResponsiveImage
           src={record?.thumbnail}
           alt={record?.title}
-          maxHeight="calc(100% - 2vw - 8px)" // where 2.6vw are a texts' line heights, 8px are gaps
+          maxHeight="calc(100% - 3vw - 8px)" // where 2.6vw are a texts' line heights, 8px are gaps
         />
 
-        <Box w="100%" color="blueAlpha.100">
+        <Flex
+          w="100%"
+          color="blueAlpha.100"
+          direction="column"
+          flex="1"
+          justifyContent="space-between"
+        >
           <Text
             align="center"
             isTruncated
             textStyle="headingTimesLarge.md"
             fontSize={'clamp(20px, 1.6vw, 40px)'}
             lineHeight={'normal'}
+            mb="auto"
           >
             {record?.title}
           </Text>
@@ -57,11 +64,10 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
             textStyle="headingTimesLarge.sm"
             fontSize={'clamp(12px, .9vw, 20px)'}
             lineHeight={'normal'}
-            mt={'3px'}
           >
             {t(toSingularCategory(category))}
           </Text>
-        </Box>
+        </Flex>
       </Flex>
     </GridItem>
   )

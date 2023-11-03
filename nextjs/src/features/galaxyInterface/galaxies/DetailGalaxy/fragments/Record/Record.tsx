@@ -24,7 +24,7 @@ export const Record: React.FC<Props> = ({ record }) => {
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
-        gap="5px"
+        gap="2px"
         cursor={'pointer'}
         onClick={handleClick}
         _hover={{ transform: 'scale(1.05)' }}
@@ -34,7 +34,7 @@ export const Record: React.FC<Props> = ({ record }) => {
         <ResponsiveImage
           src={recordDetails?.thumbnail}
           alt={recordDetails?.title}
-          maxHeight={'calc(100% - 1.6vw - 5px)'} // where 1.6vw are a texts' line heights, 5px are gaps
+          maxHeight={'calc(100% - 2vw - 5px)'} // where 1.6vw are a texts' line heights, 5px are gaps
         />
 
         <RecordText title={recordDetails?.title} categoryType={category} />
