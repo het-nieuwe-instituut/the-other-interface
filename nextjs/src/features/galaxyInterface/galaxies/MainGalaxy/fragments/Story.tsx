@@ -36,7 +36,7 @@ export const Story: React.FC<Props> = ({ story }) => {
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
-        gap="10px"
+        gap="5px"
         zIndex={HOMEPAGE_Z_INDEXES.STORY}
         cursor={isClickable ? 'pointer' : 'default'}
         onClick={handleClick}
@@ -46,9 +46,9 @@ export const Story: React.FC<Props> = ({ story }) => {
         <ResponsiveImage
           src={image}
           alt={title}
-          maxHeight="calc(100% - 2vw - 10px)" // where 1.6vw is a title's line height, 10px is gap
+          maxHeight="calc(100% - 2vw - 5px)" // where 2vw is a title's line height, 5px is gap
         />
-        <Box w="100%">
+        <Box w="100%" flex="1">
           <Text
             align="center"
             isTruncated

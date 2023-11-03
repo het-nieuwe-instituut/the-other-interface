@@ -1,4 +1,4 @@
-import { Image } from '@chakra-ui/react'
+import { Flex, Image } from '@chakra-ui/react'
 import React from 'react'
 import { usePresenter } from './usePresenter'
 
@@ -16,12 +16,20 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   const { isPortrait, displaySrc } = usePresenter(src)
 
   return (
-    <Image
-      src={displaySrc}
-      width={isPortrait ? 'auto' : '100%'}
-      maxHeight={maxHeight}
-      objectFit="contain"
-      alt={alt || 'image without title'}
-    />
+    <Flex
+      height={maxHeight}
+      width="100%"
+      direction="column"
+      justify="flex-end"
+      flex={`0 0 ${maxHeight}`}
+    >
+      <Image
+        src={displaySrc}
+        width={isPortrait ? 'auto' : '100%'}
+        maxHeight={'100%'}
+        objectFit="contain"
+        alt={alt || 'image without title'}
+      />
+    </Flex>
   )
 }
