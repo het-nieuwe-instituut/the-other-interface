@@ -7,6 +7,8 @@ export const CLOUD_CATEGORIES = {
   people: 'people',
 } as const
 
+export const CLOUD_CATEGORIES_ARRAY = Object.values(CLOUD_CATEGORIES)
+
 export const CATEGORIES = { ...CLOUD_CATEGORIES, stories: 'stories' } as const
 
 export type CloudCategory = (typeof CLOUD_CATEGORIES)[keyof typeof CLOUD_CATEGORIES]

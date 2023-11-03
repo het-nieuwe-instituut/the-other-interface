@@ -3,6 +3,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query'
 import initApiClientService from '../../utils/initApiClientService'
 import { CATEGORIES_TO_ENTITY_MAPPER, CloudCategory } from '@/features/shared/utils/categories'
 import { ZOOM2_RECORDS_PER_PAGE } from '../../constants/mainConstants'
+import { useEffect, useState } from 'react'
 
 export function useZoom2SearchResult({
   category,
@@ -16,18 +17,28 @@ export function useZoom2SearchResult({
   const api = initApiClientService()
   const queryClient = useQueryClient()
 
+  const [shouldFetch, setShouldFetch] = useState(false)
+
   const entityName = CATEGORIES_TO_ENTITY_MAPPER[category as CloudCategory]
 
-  const queryFn = () =>
-    api.Zoom2({
-      entityName,
-      page,
-      pageSize: ZOOM2_RECORDS_PER_PAGE,
-    })
+  useEffect(() => {
+    setShouldFetch(false)
+    // Fetch data only if user is at least 180 ms on a page
+    const handle = setTimeout(() => setShouldFetch(true), 180)
+
+    return () => clearTimeout(handle)
+  }, [page])
 
   return useQuery({
     queryKey: ['search-result', category, page],
-    queryFn,
+    queryFn: () => {
+      return api.Zoom2({
+        entityName,
+        page,
+        pageSize: ZOOM2_RECORDS_PER_PAGE,
+      })
+    },
+    enabled: shouldFetch,
     refetchOnWindowFocus: false,
     onSuccess: () => {
       if (page === pageAmount) return
