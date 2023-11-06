@@ -24,7 +24,10 @@ export function useZoom2SearchResult({
   useEffect(() => {
     setShouldFetch(false)
     // Fetch data only if user is at least 300 ms on a page
-    const handle = setTimeout(() => setShouldFetch(true), 300)
+    const handle = setTimeout(() => {
+      console.log('FETCH STARTED')
+      setShouldFetch(true)
+    }, 5000)
 
     return () => clearTimeout(handle)
   }, [page])
