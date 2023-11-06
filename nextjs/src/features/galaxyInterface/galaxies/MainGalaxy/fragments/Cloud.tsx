@@ -37,7 +37,6 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
         style={{ ...cloudPosition }}
         borderRadius="50%"
         zIndex={HOMEPAGE_Z_INDEXES.CLOUD}
-        backdropFilter={'blur(1.5px)'}
         cursor="pointer"
         _hover={{ transform: 'scale(1.1)' }}
         transition="all .4s ease-in-out"

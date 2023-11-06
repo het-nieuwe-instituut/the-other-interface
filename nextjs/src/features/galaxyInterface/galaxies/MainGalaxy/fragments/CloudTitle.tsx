@@ -11,12 +11,13 @@ interface Props {
 export const CloudTitle: React.FC<Props> = ({ position, children }) => (
   <Text
     position="absolute"
+    style={{ ...position }}
     textStyle="headingTimesLarge.lg"
     color="blueAlpha.100"
     pointerEvents={'none'}
-    style={{ ...position }}
     fontSize={'2.5vw'}
     lineHeight={'3.2vw'}
+    filter={'blur(1.5px)'}
   >
     {children}
   </Text>
