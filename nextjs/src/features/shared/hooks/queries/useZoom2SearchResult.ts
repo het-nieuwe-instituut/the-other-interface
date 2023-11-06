@@ -27,7 +27,7 @@ export function useZoom2SearchResult({
     const handle = setTimeout(() => {
       console.log('FETCH STARTED')
       setShouldFetch(true)
-    }, 5000)
+    }, 500)
 
     return () => clearTimeout(handle)
   }, [page])
@@ -41,7 +41,7 @@ export function useZoom2SearchResult({
         pageSize: ZOOM2_RECORDS_PER_PAGE,
       })
     },
-    enabled: shouldFetch,
+    enabled: false,
     refetchOnWindowFocus: false,
     onSuccess: () => {
       if (page === pageAmount) return
