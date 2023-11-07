@@ -30,8 +30,6 @@ export const Record: React.FC<Props> = ({ record }) => {
     router.push(url)
   }
 
-  console.log('Record: ', record)
-
   return (
     <GridItem position="relative">
       <Flex
@@ -41,7 +39,7 @@ export const Record: React.FC<Props> = ({ record }) => {
         height="80%"
         flexDirection="column"
         alignItems="center"
-        justifyContent="flex-end"
+        justifyContent="center"
         gap="5px"
         cursor={'pointer'}
         onClick={handleClick}
