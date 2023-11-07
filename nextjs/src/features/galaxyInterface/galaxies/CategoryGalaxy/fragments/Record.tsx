@@ -50,6 +50,7 @@ export const Record: React.FC<Props> = ({ record }) => {
           src={thumbnail}
           alt={title ?? ''}
           maxHeight="calc(100% - 2.6vw - 7px)" // where 2.6vw are a texts' line heights, 15px are gaps
+          size={'16vw'}
         />
 
         <RecordText title={title} categoryType={category} />
