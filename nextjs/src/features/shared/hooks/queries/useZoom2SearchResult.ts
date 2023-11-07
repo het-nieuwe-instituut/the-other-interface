@@ -8,12 +8,10 @@ export function useZoom2SearchResult({
   category,
   pageAmount,
   page,
-  shouldFetch = true,
 }: {
   category: CloudCategory
   pageAmount: number
   page: number
-  shouldFetch?: boolean
 }) {
   const api = initApiClientService()
   const queryClient = useQueryClient()
@@ -29,7 +27,7 @@ export function useZoom2SearchResult({
         pageSize: ZOOM2_RECORDS_PER_PAGE,
       })
     },
-    enabled: shouldFetch,
+
     refetchOnWindowFocus: false,
     onSuccess: () => {
       if (page === pageAmount) return
