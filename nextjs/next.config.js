@@ -26,6 +26,7 @@ const nextConfig = {
     localeDetection: false,
   },
   images: {
+    minimumCacheTTL: 60,
     domains: [
       'hni-toi-test-api.lifely.nl',
       'localhost',
