@@ -17,7 +17,7 @@ export const TextModule: React.FC<Props> = props => {
   return (
     <Box
       px={6}
-      backgroundColor={'white'}
+      backgroundColor={'inherit'}
       pb={props.component.textModuleLayout?.spacingBottom ?? undefined}
       pt={props.component.textModuleLayout?.spacingTop ?? undefined}
       overflow={'auto'} // needed due to strange behaviour of generated markdown content
