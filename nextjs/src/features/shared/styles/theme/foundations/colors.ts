@@ -188,6 +188,11 @@ const blueAlphaNew = {
   '100': 'RGBA(0, 81, 255, 1)',
 }
 
+const ivoryAlpha = {
+  '100': 'RGBA(249, 246, 238, 1)',
+  '90': 'RGBA(249, 246, 238, .9)',
+}
+
 const colors = {
   ...oldColors,
   blue,
@@ -195,6 +200,7 @@ const colors = {
   blueAlpha,
   pinkAlpha,
   blueAlphaNew,
+  ivoryAlpha,
 }
 
 export default colors
