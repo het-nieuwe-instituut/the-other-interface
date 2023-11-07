@@ -29,7 +29,7 @@ export const TableModule: React.FC<Props> = props => {
   if (breakpoint === 'sm' || breakpoint === 'base') {
     return (
       <Box
-        backgroundColor={'white'}
+        backgroundColor={'inherit'}
         px={6}
         pb={props.component.tableModuleLayout?.spacingBottom ?? undefined}
         pt={props.component.tableModuleLayout?.spacingTop ?? undefined}
@@ -47,7 +47,7 @@ export const TableModule: React.FC<Props> = props => {
 
   return (
     <Box
-      backgroundColor={'white'}
+      backgroundColor={'inherit'}
       px={6}
       pb={props.component.tableModuleLayout?.spacingBottom ?? undefined}
       pt={props.component.tableModuleLayout?.spacingTop ?? undefined}

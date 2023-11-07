@@ -30,7 +30,7 @@ export const ImageCarousel = (props: Props) => {
   } = usePresenter(items)
 
   return (
-    <Box as="div" backgroundColor={'white'} ref={carouselRef} position="relative" pl={'6'}>
+    <Box as="div" backgroundColor={'inherit'} ref={carouselRef} position="relative" pl={'6'}>
       <>
         <ArrowPrevContainer>
           <ArrowLeftIcon onClick={handlePaginationPrev} />
