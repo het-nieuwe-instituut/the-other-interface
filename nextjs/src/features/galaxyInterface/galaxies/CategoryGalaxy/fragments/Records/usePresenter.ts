@@ -18,6 +18,8 @@ export const usePresenter = (records: ZoomLevel2Type[]) => {
     let lastStoryIndex = 0
     const positionedRecords = []
 
+    if (records.length === 0) return []
+
     for (const position of Object.values(currentTemplate)) {
       positionedRecords.push({
         ...records[lastStoryIndex],
