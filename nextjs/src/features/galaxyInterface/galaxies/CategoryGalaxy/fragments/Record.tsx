@@ -30,6 +30,8 @@ export const Record: React.FC<Props> = ({ record }) => {
     router.push(url)
   }
 
+  console.log('Record: ', record)
+
   return (
     <GridItem position="relative">
       <Flex
