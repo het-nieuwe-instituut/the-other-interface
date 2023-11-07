@@ -6,7 +6,6 @@ const env = require('dotenv').config({
   path: `.env.${process.env.NEXT_PUBLIC_ENV ?? 'production'}`,
 })
 const parsed = env.parsed
-
 const nextConfig = {
   webpack(config) {
     config.externals = [...config.externals, 'canvas', 'bufferutil', 'utf-8-validate']
@@ -16,6 +15,20 @@ const nextConfig = {
       use: ['@svgr/webpack'],
     })
     return config
+  },
+
+  headers() {
+    return [
+      {
+        source: '/(.*).svg',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+    ]
   },
 
   reactStrictMode: true,
