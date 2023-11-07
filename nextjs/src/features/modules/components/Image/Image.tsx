@@ -31,7 +31,7 @@ const MediaImage = (props: MediaImageProps) => {
 
   return (
     <Box
-      backgroundColor={'white'}
+      backgroundColor={'inherit'}
       px={6}
       paddingBottom={props.component.imageModuleLayout?.spacingBottom ?? undefined}
       paddingTop={props.component.imageModuleLayout?.spacingTop ?? undefined}
