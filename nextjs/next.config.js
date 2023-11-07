@@ -39,7 +39,7 @@ const nextConfig = {
     localeDetection: false,
   },
   images: {
-    minimumCacheTTL: 60,
+    minimumCacheTTL: 31536000,
     domains: [
       'hni-toi-test-api.lifely.nl',
       'localhost',
