@@ -8,10 +8,10 @@ export const usePresenter = (src: string | null) => {
     fallbackImageRef.current = `/images/fallbacks/${Math.floor(Math.random() * 9) + 1}.svg`
   }
 
-  const { isPortrait } = useIsImagePortrait(src)
+  const { dimensions, isSuccessfullyLoaded } = useIsImagePortrait(src)
 
   return {
-    isPortrait,
-    displaySrc: isPortrait === null || !src ? fallbackImageRef.current : src,
+    displaySrc: !isSuccessfullyLoaded || !src ? fallbackImageRef.current : src,
+    dimensions,
   }
 }

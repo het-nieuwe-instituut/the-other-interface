@@ -47,6 +47,7 @@ export const Story: React.FC<Props> = ({ story }) => {
           src={image}
           alt={title}
           maxHeight="calc(100% - 2vw - 5px)" // where 2vw is a title's line height, 5px is gap
+          size={'12vw'}
         />
         <Box w="100%" flex="1">
           <Text

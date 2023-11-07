@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react'
 
 export const useIsImagePortrait = (src: string | null) => {
   const [isLoading, setIsLoading] = useState(false)
-  const [isPortrait, setIsPortrait] = useState<boolean | null>(null)
+  const [isSuccessfullyLoaded, setIsSuccessfullyLoaded] = useState(false)
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
 
   useEffect(() => {
     if (typeof window === 'undefined' || !src) return
@@ -13,13 +14,14 @@ export const useIsImagePortrait = (src: string | null) => {
     img.src = src
 
     img.onload = function () {
-      setIsPortrait(img.height > img.width)
+      setIsSuccessfullyLoaded(true)
+      setDimensions({ width: img.naturalWidth, height: img.naturalHeight })
       setIsLoading(false)
     }
 
     img.onerror = function () {
       console.error(`Failed to load image: ${src}`)
-      setIsPortrait(null)
+      setIsSuccessfullyLoaded(false)
       setIsLoading(false)
     }
 
@@ -30,7 +32,8 @@ export const useIsImagePortrait = (src: string | null) => {
   }, [src])
 
   return {
-    isPortrait,
+    isSuccessfullyLoaded,
+    dimensions,
     isLoading,
   }
 }
