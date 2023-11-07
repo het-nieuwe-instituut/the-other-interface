@@ -25,6 +25,8 @@ export const usePresenter = () => {
   const { page, pageAmount, increasePageNumber, decreasePageNumber } =
     usePagination(searchResultAmount)
 
+  console.log(`${page}, RERENDER, shouldFetch: ${shouldFetch}}`)
+
   useEffect(() => {
     setShouldFetch(false)
     console.log(`${page}, useEffect, shouldFetch: ${shouldFetch}}`)
