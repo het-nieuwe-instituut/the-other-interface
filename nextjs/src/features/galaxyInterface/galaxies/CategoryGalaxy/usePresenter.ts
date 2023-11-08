@@ -23,11 +23,16 @@ export const usePresenter = () => {
   const { page, pageAmount, increasePageNumber, decreasePageNumber } =
     usePagination(searchResultAmount)
 
-  const { data: results } = useZoom2SearchResult({ category, pageAmount, page })
+  const { data: results, isLoading: isResultLoading } = useZoom2SearchResult({
+    category,
+    pageAmount,
+    page,
+  })
 
   return {
     isSearchModeActive,
     isResultAmountLoading,
+    isResultLoading,
     currentPageNumber: page,
     pageAmount,
     searchResult: results,
