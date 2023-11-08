@@ -9,7 +9,6 @@ export function useRecordDetail(type: Category, id: string) {
   const api = initApiClientService()
   const searchParams = useSearchParams()
   const lang = searchParams?.get('lang')
-
   const queryFn = () => getZoom3RecordTask(type, { id, locale: lang ?? 'nl' }, api)
 
   return useQuery({

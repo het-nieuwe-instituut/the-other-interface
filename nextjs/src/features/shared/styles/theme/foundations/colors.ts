@@ -190,6 +190,7 @@ const blueAlphaNew = {
 
 const ivoryAlpha = {
   '100': 'RGBA(249, 246, 238, 1)',
+  '95': 'RGBA(249, 246, 238, .95)',
   '90': 'RGBA(249, 246, 238, .9)',
 }
 
