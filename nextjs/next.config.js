@@ -33,6 +33,7 @@ const nextConfig = {
 
   reactStrictMode: true,
   swcMinify: true,
+
   i18n: {
     locales: ['nl', 'en'],
     defaultLocale: 'nl',
@@ -49,6 +50,8 @@ const nextConfig = {
       'picsum.photos',
       'hdl.handle.net',
     ],
+    deviceSizes: [576, 1024, 1440],
+    formats: ['image/webp'],
   },
   output: 'standalone',
   env: {

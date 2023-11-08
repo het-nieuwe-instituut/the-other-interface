@@ -22,6 +22,7 @@ export const SearchFilterBox: React.FC<Props> = ({
       padding={'4px 8px'}
       color={'blueAlpha.100'}
       width={'fit-content'}
+      height={'100%'}
       zIndex={zIndex || 'inherit'}
       cursor={onClick ? 'pointer' : 'default'}
       onClick={onClick}

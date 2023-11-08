@@ -3,7 +3,7 @@ import { ZOOM2_RECORDS_PER_PAGE } from '../constants/mainConstants'
 import { useCallback, useEffect } from 'react'
 import { usePageNumber } from '@/features/shared/hooks/usePageNumber'
 
-export const usePagination = (searchResultAmount: number) => {
+export const usePagination = (searchResultAmount: number, isKeyPressDisabled = true) => {
   const pathname = usePathname()
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -44,6 +44,8 @@ export const usePagination = (searchResultAmount: number) => {
 
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
+      if (isKeyPressDisabled) return
+
       if (e.key === 'ArrowRight') {
         increasePageNumber()
       } else if (e.key === 'ArrowLeft') {
@@ -56,7 +58,7 @@ export const usePagination = (searchResultAmount: number) => {
     return () => {
       document.removeEventListener('keydown', handleKeyPress)
     }
-  }, [increasePageNumber, decreasePageNumber])
+  }, [increasePageNumber, decreasePageNumber, isKeyPressDisabled])
 
   return {
     page,
