@@ -6,7 +6,6 @@ const env = require('dotenv').config({
   path: `.env.${process.env.NEXT_PUBLIC_ENV ?? 'production'}`,
 })
 const parsed = env.parsed
-
 const nextConfig = {
   webpack(config) {
     config.externals = [...config.externals, 'canvas', 'bufferutil', 'utf-8-validate']
@@ -18,6 +17,20 @@ const nextConfig = {
     return config
   },
 
+  headers() {
+    return [
+      {
+        source: '/(.*).svg',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+    ]
+  },
+
   reactStrictMode: true,
   swcMinify: true,
   i18n: {
@@ -26,7 +39,7 @@ const nextConfig = {
     localeDetection: false,
   },
   images: {
-    minimumCacheTTL: 60,
+    minimumCacheTTL: 31536000,
     domains: [
       'hni-toi-test-api.lifely.nl',
       'localhost',

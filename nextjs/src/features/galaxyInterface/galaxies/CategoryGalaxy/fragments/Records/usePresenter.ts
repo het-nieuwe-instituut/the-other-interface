@@ -5,16 +5,14 @@ import { useSearchParams } from 'next/navigation'
 import { positioningTemplates } from './positioningTemplates'
 import { usePositioningTemplates } from '@/features/shared/hooks/usePositioningTemplates'
 import { ZoomLevel2Type } from 'src/generated/graphql'
-import { DEFAULT_PAGE_NUMBER } from '@/features/shared/constants/mainConstants'
+import { usePageNumber } from '@/features/shared/hooks/usePageNumber'
 
 export const usePresenter = (records: ZoomLevel2Type[]) => {
   const searchParams = useSearchParams()
   const category = searchParams?.get('category') as CloudCategory
-  const page = searchParams
-    ? Math.max(DEFAULT_PAGE_NUMBER, Number(searchParams.get('page') as string))
-    : DEFAULT_PAGE_NUMBER
+  const { pageNumber } = usePageNumber()
 
-  const { currentTemplate } = usePositioningTemplates(positioningTemplates, page)
+  const { currentTemplate } = usePositioningTemplates(positioningTemplates, pageNumber)
 
   const positionedRecords = useMemo(() => {
     let lastStoryIndex = 0
@@ -23,7 +21,7 @@ export const usePresenter = (records: ZoomLevel2Type[]) => {
     for (const position of Object.values(currentTemplate)) {
       positionedRecords.push({
         ...records[lastStoryIndex],
-        key: lastStoryIndex,
+        key: `${pageNumber}-${lastStoryIndex}`,
         position,
         category: category as CloudCategory,
       })
@@ -31,7 +29,7 @@ export const usePresenter = (records: ZoomLevel2Type[]) => {
     }
 
     return positionedRecords
-  }, [records, category, currentTemplate])
+  }, [records, category, currentTemplate, pageNumber])
 
   return {
     positionedRecords,
