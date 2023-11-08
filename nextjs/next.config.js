@@ -50,7 +50,7 @@ const nextConfig = {
       'picsum.photos',
       'hdl.handle.net',
     ],
-    deviceSizes: [420, 576, 1024, 1440, 1537],
+    deviceSizes: [576, 1024, 1440],
     formats: ['image/webp'],
   },
   output: 'standalone',
