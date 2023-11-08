@@ -6,12 +6,14 @@ import { ZOOM2_RECORDS_PER_PAGE } from '../../constants/mainConstants'
 
 export function useZoom2SearchResult({
   category,
-  pageAmount,
-  page,
+  pageAmount = 1,
+  page = 1,
+  enabled = true,
 }: {
   category: CloudCategory
-  pageAmount: number
-  page: number
+  pageAmount?: number
+  page?: number
+  enabled?: boolean
 }) {
   const api = initApiClientService()
   const queryClient = useQueryClient()
@@ -27,6 +29,7 @@ export function useZoom2SearchResult({
         pageSize: ZOOM2_RECORDS_PER_PAGE,
       })
     },
+    enabled,
 
     refetchOnWindowFocus: false,
     onSuccess: () => {
