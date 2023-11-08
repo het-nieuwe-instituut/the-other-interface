@@ -33,5 +33,6 @@ export const usePresenter = (cloud: CategoryCloud) => {
     size,
     cloudPosition,
     titlePosition,
+    data,
   }
 }
