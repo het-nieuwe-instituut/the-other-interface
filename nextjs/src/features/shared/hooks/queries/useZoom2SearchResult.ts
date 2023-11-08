@@ -8,10 +8,12 @@ export function useZoom2SearchResult({
   category,
   pageAmount,
   page,
+  enabled = true,
 }: {
   category: CloudCategory
   pageAmount: number
   page: number
+  enabled?: boolean
 }) {
   const api = initApiClientService()
   const queryClient = useQueryClient()
@@ -20,6 +22,7 @@ export function useZoom2SearchResult({
 
   return useQuery({
     queryKey: ['search-result', category, page],
+    enabled,
     queryFn: () => {
       return api.Zoom2({
         entityName,

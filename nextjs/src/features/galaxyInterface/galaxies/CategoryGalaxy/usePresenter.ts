@@ -4,12 +4,15 @@ import { useZoom2SearchResultAmount } from '@/features/shared/hooks/queries/useZ
 import { usePagination } from '@/features/shared/hooks/usePagination'
 import { CLOUD_CATEGORIES_ARRAY, CloudCategory } from '@/features/shared/utils/categories'
 import { notFound, useSearchParams } from 'next/navigation'
+import { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 export const usePresenter = () => {
   const isSearchModeActive = useSelector((state: State) => state.shared.isSearchModeActive)
   const searchParams = useSearchParams()
   const category = searchParams?.get('category') as CloudCategory
+  const [shouldFetch, setShouldFetch] = useState(false)
+  const isCurrentPage = useRef(false)
 
   if (!CLOUD_CATEGORIES_ARRAY.includes(category)) {
     notFound()
@@ -23,11 +26,32 @@ export const usePresenter = () => {
   const { page, pageAmount, increasePageNumber, decreasePageNumber } =
     usePagination(searchResultAmount)
 
+  useEffect(() => {
+    setShouldFetch(false)
+    isCurrentPage.current = true
+    // console.log(`${page}, ${isCurrentPage.current} useEffect, ${shouldFetch}}`)
+
+    // Fetch data only if user is at least 300 ms on a page
+    const handle = setTimeout(() => {
+      console.log(`${page}, ${isCurrentPage.current}, setTimeout, ${shouldFetch}`)
+      if (isCurrentPage.current) {
+        setShouldFetch(true)
+      }
+    }, 200)
+
+    return () => {
+      clearTimeout(handle)
+      isCurrentPage.current = false
+    }
+  }, [page])
+
   const { data: results, isLoading: isResultLoading } = useZoom2SearchResult({
     category,
     pageAmount,
     page,
+    enabled: shouldFetch,
   })
+  //
 
   return {
     isSearchModeActive,
