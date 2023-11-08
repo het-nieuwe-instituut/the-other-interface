@@ -23,6 +23,7 @@ export const usePresenter = (records: ZoomLevel2Type[]) => {
     for (const position of Object.values(currentTemplate)) {
       positionedRecords.push({
         ...records[lastStoryIndex],
+        key: lastStoryIndex,
         position,
         category: category as CloudCategory,
       })

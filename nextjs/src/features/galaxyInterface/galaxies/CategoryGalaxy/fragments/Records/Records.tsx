@@ -23,7 +23,7 @@ export const Records: React.FC<Props> = ({ records }) => {
       templateRows="repeat(3, 1fr)"
     >
       {positionedRecords.map(record => (
-        <Record key={record.id} record={record} />
+        <Record key={record.key} record={record} />
       ))}
     </Grid>
   )

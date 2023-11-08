@@ -5,6 +5,7 @@ import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translation
 import { Category } from '@/features/shared/utils/categories'
 import { toSingularCategory } from '@/features/shared/utils/toSingularCategory'
 import { useRecordDetail } from '@/features/shared/hooks/queries/useRecordDetail'
+import { notFound } from 'next/navigation'
 
 interface Props {
   gridRow: string
@@ -17,7 +18,11 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
   const category = params?.category as Category
   const id = params?.id as string
 
-  const { data: record } = useRecordDetail(category, id)
+  const { data: record, isLoading } = useRecordDetail(category, id)
+
+  if (!isLoading && !record) {
+    notFound()
+  }
 
   return (
     <GridItem
@@ -40,6 +45,7 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
           src={record?.thumbnail}
           alt={record?.title}
           maxHeight="calc(100% - 3vw - 8px)" // where 2.6vw are a texts' line heights, 8px are gaps
+          size={'25vw'}
         />
 
         <Flex
