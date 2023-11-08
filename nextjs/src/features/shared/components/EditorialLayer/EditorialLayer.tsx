@@ -19,7 +19,7 @@ export const EditorialLayer: React.FC<Props> = ({ components, preface, title }) 
   const { scrollPosition } = useScroll()
 
   return (
-    <Box px={{ xl: 6, base: 0 }} position={'relative'} zIndex={2} backgroundColor={'ivoryAlpha.90'}>
+    <Box px={{ xl: 6, base: 0 }} position={'relative'} zIndex={2} backgroundColor={'ivoryAlpha.95'}>
       <Box maxW={theme.breakpoints.xl} marginX={'auto'} paddingTop={6}>
         <PageHeader
           showPointer={scrollPosition < 750}
