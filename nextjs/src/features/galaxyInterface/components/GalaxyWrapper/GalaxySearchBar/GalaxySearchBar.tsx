@@ -1,4 +1,4 @@
-import { Flex, Grid, Text } from '@chakra-ui/react'
+import { Box, Flex, Grid, Text } from '@chakra-ui/react'
 import { FOOTER_Z_INDEX } from '@/features/shared/constants/mainConstants'
 import { usePresenter } from './usePresenter'
 import { CategoryFilter } from './CategoryFilter/CategoryFilter'
@@ -28,7 +28,7 @@ export const GalaxySearchBar: React.FC = () => {
       position={'relative'}
       height="60px"
       templateColumns={
-        isSearchModeActive ? 'auto minmax(20px, 1fr) minmax(60px, auto)' : 'auto  minmax(20px, 1fr)'
+        isSearchModeActive ? 'auto minmax(20px, 1fr) minmax(60px, auto)' : 'auto minmax(20px, 1fr)'
       }
       gap="15px"
       borderRadius={isCategorySuggestionsOpen ? '0 0 5px 5px' : '5px'}
@@ -53,23 +53,27 @@ export const GalaxySearchBar: React.FC = () => {
         <Text textStyle="socialLarge.lg">{t('resultsFor')}</Text>
       </Flex>
 
-      <Grid
-        templateColumns={'auto minmax(70px, 1fr)'}
-        gap="15px"
-        height={'100%'}
-        overflowX={'auto'}
-      >
-        <CategoryFilter
-          onClick={() => setIsCategorySuggestionsOpen(!isCategorySuggestionsOpen)}
-          isOpen={isCategorySuggestionsOpen}
-          selectedOption={category ? t(category) : ''}
-        />
-        <FilterInput
-          onFocus={handleSearchModeOpen}
-          value={inputValue}
-          onChange={handleInputChange}
-        />
-      </Grid>
+      <Box overflow="hidden" height={'100%'}>
+        <Grid
+          templateColumns={'auto minmax(70px, 1fr)'}
+          gap="15px"
+          width="100%"
+          overflowX="auto"
+          paddingBottom="25px"
+          marginBottom="-25px"
+        >
+          <CategoryFilter
+            onClick={() => setIsCategorySuggestionsOpen(!isCategorySuggestionsOpen)}
+            isOpen={isCategorySuggestionsOpen}
+            selectedOption={category ? t(category) : ''}
+          />
+          <FilterInput
+            onFocus={handleSearchModeOpen}
+            value={inputValue}
+            onChange={handleInputChange}
+          />
+        </Grid>
+      </Box>
 
       {isSearchModeActive && (
         <Flex gap="12px" alignItems={'center'}>
