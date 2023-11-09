@@ -25,9 +25,9 @@ export const CategoryGalaxy: React.FC = () => {
       position="relative"
       width="100vw"
       height="100vh"
-      justifyContent={'center'}
       alignItems={'center'}
       overflow={'hidden'}
+      padding={'0 25px'}
     >
       {isSearchModeActive && <BlurOverlay />}
       {isResultLoading ? <Loader /> : <Records records={searchResult?.zoomLevel2?.nodes ?? []} />}

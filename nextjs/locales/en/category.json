@@ -11,5 +11,6 @@
   "person": "Person",
   "publication": "Publication",
   "story": "Story",
-  "resultsFor": "Results for"
+  "resultsFor": "Results for",
+  "noResultsFound": "No results found"
 }
