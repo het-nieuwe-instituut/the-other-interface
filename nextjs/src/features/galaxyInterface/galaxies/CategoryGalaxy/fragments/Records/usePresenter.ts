@@ -51,13 +51,11 @@ export const usePresenter = (pageAmount: number) => {
 
   const { data: results, isLoading: isResultLoading } = useZoom2SearchResult({
     category,
-    pageAmount,
     page: pageNumber,
   })
 
   const { data: nextResults } = useZoom2SearchResult({
     category,
-    pageAmount,
     page: nextPage,
     enabled: !isLastPage,
   })
