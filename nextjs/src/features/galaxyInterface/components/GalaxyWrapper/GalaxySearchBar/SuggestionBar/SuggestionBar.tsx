@@ -13,12 +13,12 @@ export const SuggestionBar: React.FC<Props> = ({ isOpen = false, children }) => 
       bottom={'60px'}
       height="75px"
       width={'100%'}
-      gap="20px"
+      gap="15px"
       borderRadius={'5px 5px 0 0'}
       backgroundColor={'blueAlpha.80'}
-      padding={'5px 20px'}
+      padding={'5px 15px'}
       zIndex={FOOTER_Z_INDEX - 1}
-      transform={isOpen ? 'translateY(0)' : 'translateY(100%)'}
+      transform={isOpen ? 'translateY(0)' : 'translateY(90%)'}
       transition={
         isOpen
           ? 'transform 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s ease-in-out'
@@ -26,7 +26,7 @@ export const SuggestionBar: React.FC<Props> = ({ isOpen = false, children }) => 
       }
       opacity={isOpen ? 1 : 0}
       visibility={isOpen ? 'visible' : 'hidden'}
-      templateColumns={'146px 1fr'}
+      templateColumns={'145px 1fr'}
     >
       <Box width="146px"></Box>
       <Box

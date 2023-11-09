@@ -28,7 +28,9 @@ export const GalaxySearchBar: React.FC = () => {
       position={'relative'}
       height="60px"
       templateColumns={
-        isSearchModeActive ? 'auto minmax(20px, 1fr) minmax(60px, auto)' : 'auto minmax(20px, 1fr)'
+        isSearchModeActive
+          ? '145px minmax(20px, 1fr) minmax(60px, auto)'
+          : '145px minmax(20px, 1fr)'
       }
       gap="15px"
       borderRadius={isCategorySuggestionsOpen ? '0 0 5px 5px' : '5px'}
@@ -76,7 +78,7 @@ export const GalaxySearchBar: React.FC = () => {
       </Box>
 
       {isSearchModeActive && (
-        <Flex gap="12px" alignItems={'center'}>
+        <Flex gap="12px" alignItems={'center'} zIndex={'inherit'}>
           <GoButton handleClick={handleGoClick} />
           <CloseButton handleClick={handleSearchModeClose} />
         </Flex>
