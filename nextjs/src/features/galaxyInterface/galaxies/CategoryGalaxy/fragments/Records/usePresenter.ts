@@ -61,7 +61,6 @@ export const usePresenter = (pageAmount: number) => {
   })
 
   const records = useMemo(() => results?.zoomLevel2?.nodes || [], [results])
-
   const nextRecords = useMemo(() => nextResults?.zoomLevel2?.nodes || [], [nextResults])
 
   const { currentTemplate, nextTemplate } = usePositioningTemplates(

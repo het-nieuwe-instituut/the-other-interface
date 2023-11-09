@@ -10,7 +10,9 @@ export const usePresenter = (src: string | null) => {
 
   const { isSuccessfullyLoaded } = useIsImagePortrait(src)
 
+  const showFallbackImage = !isSuccessfullyLoaded || !src
   return {
-    displaySrc: !isSuccessfullyLoaded || !src ? fallbackImageRef.current : src,
+    fallbackImage: fallbackImageRef.current,
+    isSuccessfullyLoaded: !showFallbackImage && isSuccessfullyLoaded,
   }
 }

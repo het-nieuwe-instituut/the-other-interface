@@ -1,9 +1,10 @@
-import { Grid, Text, Box } from '@chakra-ui/react'
+import { Text, Box } from '@chakra-ui/react'
 
 import { usePresenter } from './usePresenter'
 import { Record } from '../Record'
 import { GALAXY_EDITORIAL_LAYER_PART } from '@/features/shared/constants/mainConstants'
 import { Loader } from '@/features/galaxyInterface/components/Loader/Loader'
+import { RecordsGrid } from '../RecordsGrid'
 
 type Props = {
   pageAmount: number
@@ -35,39 +36,17 @@ export const Records: React.FC<Props> = ({ pageAmount }) => {
 
   return (
     <Box width={'100%'} height={'100%'}>
-      <Grid
-        position="absolute"
-        w="96vw"
-        h={`calc(80% - 1.7rem - 60px)`} // considering fixed height of galaxy footer
-        top="7%"
-        left="2vw"
-        right="2vw"
-        templateColumns="repeat(4, 1fr)"
-        templateRows="repeat(3, 1fr)"
-        zIndex={100}
-      >
+      <RecordsGrid css={{ zIndex: 100 }}>
         {positionedRecords.map(record => (
           <Record key={record.key} record={record} />
         ))}
-      </Grid>
+      </RecordsGrid>
 
-      <Grid
-        position="absolute"
-        w="96vw"
-        h={`calc(80% - 1.7rem - 60px)`} // considering fixed height of galaxy footer
-        top="7%"
-        left="2vw"
-        right="2vw"
-        templateColumns="repeat(4, 1fr)"
-        templateRows="repeat(3, 1fr)"
-        filter={'blur(6px)'}
-        opacity={0.2}
-        zIndex={99}
-      >
+      <RecordsGrid css={{ zIndex: 99, opacity: 0.2, filter: 'blur(6px)' }}>
         {nextPositionedRecords.map(record => (
           <Record key={record.key} record={record} />
         ))}
-      </Grid>
+      </RecordsGrid>
     </Box>
   )
 }
