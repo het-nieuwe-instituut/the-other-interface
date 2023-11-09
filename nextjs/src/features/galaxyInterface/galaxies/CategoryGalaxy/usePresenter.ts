@@ -1,5 +1,4 @@
 import { State } from '@/features/shared/configs/store'
-import { useZoom2SearchResult } from '@/features/shared/hooks/queries/useZoom2SearchResult'
 import { useZoom2SearchResultAmount } from '@/features/shared/hooks/queries/useZoom2SearchResultAmount'
 import { usePagination } from '@/features/shared/hooks/usePagination'
 import { CLOUD_CATEGORIES_ARRAY, CloudCategory } from '@/features/shared/utils/categories'
@@ -25,19 +24,11 @@ export const usePresenter = () => {
     isSearchModeActive
   )
 
-  const { data: results, isLoading: isResultLoading } = useZoom2SearchResult({
-    category,
-    pageAmount,
-    page,
-  })
-
   return {
     isSearchModeActive,
     isResultAmountLoading,
-    isResultLoading,
     currentPageNumber: page,
     pageAmount,
-    searchResult: results,
     increasePageNumber,
     decreasePageNumber,
   }

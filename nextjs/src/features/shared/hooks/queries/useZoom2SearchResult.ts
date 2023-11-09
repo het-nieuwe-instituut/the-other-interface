@@ -18,6 +18,9 @@ export function useZoom2SearchResult({
   const api = initApiClientService()
   const queryClient = useQueryClient()
 
+  const isLastPage = page === pageAmount
+  const nextPage = page + 1
+
   const entityName = CATEGORIES_TO_ENTITY_MAPPER[category as CloudCategory]
 
   return useQuery({
@@ -30,20 +33,17 @@ export function useZoom2SearchResult({
       })
     },
     enabled,
-
     refetchOnWindowFocus: false,
-    onSuccess: () => {
-      if (page === pageAmount) return
+    // onSuccess: () => {
+    //   if (isLastPage) return
 
-      const nextPage = page + 1
-
-      queryClient.prefetchQuery(['search-result', category, nextPage], () =>
-        api.Zoom2({
-          entityName,
-          page: nextPage,
-          pageSize: ZOOM2_RECORDS_PER_PAGE,
-        })
-      )
-    },
+    //   queryClient.prefetchQuery(['search-result', category, nextPage], () =>
+    //     api.Zoom2({
+    //       entityName,
+    //       page: nextPage,
+    //       pageSize: ZOOM2_RECORDS_PER_PAGE,
+    //     })
+    //   )
+    // },
   })
 }
