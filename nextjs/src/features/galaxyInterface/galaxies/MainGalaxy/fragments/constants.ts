@@ -3,3 +3,8 @@ export const HOMEPAGE_Z_INDEXES = {
   STORY: 20,
   THEME_TITLE: 11,
 }
+
+export const LANDINGPAGE_Z_INDEXES = {
+  CURRENT_PAGE: 20,
+  NEXT_PAGE: 10,
+}

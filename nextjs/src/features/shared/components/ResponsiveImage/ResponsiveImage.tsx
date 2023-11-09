@@ -16,18 +16,33 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   maxHeight = '100%',
   size = '200px',
 }) => {
-  const { displaySrc } = usePresenter(src)
+  const { fallbackImage, isSuccessfullyLoaded } = usePresenter(src)
 
   return (
     <Box position="relative" maxHeight={maxHeight} width={'100%'} flex={`1 1 ${maxHeight}`}>
       <Image
-        src={displaySrc}
+        src={fallbackImage}
         alt={alt || 'image without title'}
         sizes={size}
         fill
         style={{
           objectFit: 'contain',
           objectPosition: 'bottom',
+          transition: 'visibility 0.35s ease-in-out',
+          visibility: isSuccessfullyLoaded ? 'hidden' : 'visible',
+        }}
+      />
+
+      <Image
+        src={src || ''}
+        alt={alt || 'image without title'}
+        sizes={size}
+        fill
+        style={{
+          objectFit: 'contain',
+          objectPosition: 'bottom',
+          opacity: isSuccessfullyLoaded ? 1 : 0,
+          transition: 'opacity 1s ease-in-out',
         }}
       />
     </Box>

@@ -6,18 +6,14 @@ import { usePresenter } from './usePresenter'
 import BlurOverlay from '@/features/shared/components/BlurOverlay/BlurOverlay'
 import { GalaxyPagination } from '../../components/GalaxyWrapper/GalaxyPagination/GalaxyPagination'
 
-import { Loader } from '../../components/Loader/Loader'
-
 export const CategoryGalaxy: React.FC = () => {
   const {
-    searchResult,
     isSearchModeActive,
     isResultAmountLoading,
     currentPageNumber,
     pageAmount,
     increasePageNumber,
     decreasePageNumber,
-    isResultLoading,
   } = usePresenter()
 
   return (
@@ -26,11 +22,12 @@ export const CategoryGalaxy: React.FC = () => {
       width="100vw"
       height="100vh"
       alignItems={'center'}
+      justifyContent={'center'}
       overflow={'hidden'}
       padding={'0 25px'}
     >
       {isSearchModeActive && <BlurOverlay />}
-      {isResultLoading ? <Loader /> : <Records records={searchResult?.zoomLevel2?.nodes ?? []} />}
+      <Records pageAmount={pageAmount} />
 
       <GalaxyFooter
         galaxyPagination={
