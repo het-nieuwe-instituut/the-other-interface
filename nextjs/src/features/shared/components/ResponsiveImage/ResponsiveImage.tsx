@@ -28,8 +28,8 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
         style={{
           objectFit: 'contain',
           objectPosition: 'bottom',
-          opacity: isSuccessfullyLoaded ? 0 : 1,
-          transition: 'opacity 0.4s ease-in-out',
+          transition: 'visibility 0.35s ease-in-out',
+          visibility: isSuccessfullyLoaded ? 'hidden' : 'visible',
         }}
       />
 
@@ -42,8 +42,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
           objectFit: 'contain',
           objectPosition: 'bottom',
           opacity: isSuccessfullyLoaded ? 1 : 0,
-          transition: 'opacity 0.4s ease-in-out, transform 0.6s ease-in-out',
-          transform: isSuccessfullyLoaded ? 'scale(1)' : 'scale(0.6)',
+          transition: 'opacity 1s ease-in-out',
         }}
       />
     </Box>
