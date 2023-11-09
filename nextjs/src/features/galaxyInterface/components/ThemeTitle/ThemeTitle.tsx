@@ -21,8 +21,8 @@ export const ThemeTitle: React.FC<Props> = ({ title }) => {
       isTruncated
       color={'blueAlpha.100'}
       textStyle="headingTimesLarge.2xl"
-      fontSize={'7vw'}
-      lineHeight={'7vw'}
+      fontSize={{ sm: '64px', md: '80px', lg: '80px', xl: '96px', '2xl': '95px' }}
+      lineHeight={'normal'}
       pointerEvents={'none'}
       zIndex={HOMEPAGE_Z_INDEXES.THEME_TITLE}
     >
