@@ -5,6 +5,7 @@ import { Record } from '../Record'
 import { GALAXY_EDITORIAL_LAYER_PART } from '@/features/shared/constants/mainConstants'
 import { Loader } from '@/features/galaxyInterface/components/Loader/Loader'
 import { RecordsGrid } from '../RecordsGrid'
+import { LANDINGPAGE_Z_INDEXES } from '../../../MainGalaxy/fragments/constants'
 
 type Props = {
   pageAmount: number
@@ -36,13 +37,15 @@ export const Records: React.FC<Props> = ({ pageAmount }) => {
 
   return (
     <Box width={'100%'} height={'100%'}>
-      <RecordsGrid css={{ zIndex: 100 }}>
+      <RecordsGrid css={{ zIndex: LANDINGPAGE_Z_INDEXES.CURRENT_PAGE }}>
         {positionedRecords.map(record => (
           <Record key={record.key} record={record} />
         ))}
       </RecordsGrid>
 
-      <RecordsGrid css={{ zIndex: 99, opacity: 0.2, filter: 'blur(6px)' }}>
+      <RecordsGrid
+        css={{ zIndex: LANDINGPAGE_Z_INDEXES.NEXT_PAGE, opacity: 0.2, filter: 'blur(6px)' }}
+      >
         {nextPositionedRecords.map(record => (
           <Record key={record.key} record={record} />
         ))}
