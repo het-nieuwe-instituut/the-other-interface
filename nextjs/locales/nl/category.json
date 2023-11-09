@@ -11,5 +11,6 @@
   "person": "Persoon",
   "publication": "Publicatie",
   "story": "Story",
-  "resultsFor": "Resultaten voor"
+  "resultsFor": "Resultaten voor",
+  "noResultsFound": "Geen resultaten gevonden"
 }
