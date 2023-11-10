@@ -30,7 +30,7 @@ const getPositionedRecords = ({
 
     positionedRecords.push({
       ...record,
-      key: `${pageNumber}-${lastStoryIndex}`,
+      key: `zoom2-${pageNumber}-${lastStoryIndex}`,
       position,
       category,
     })
@@ -45,11 +45,15 @@ export const usePresenter = (pageAmount: number) => {
   const { t } = useTypeSafeTranslation('category')
   const category = searchParams?.get('category') as CloudCategory
   const { pageNumber } = usePageNumber()
+  const { currentTemplate, nextTemplate } = usePositioningTemplates(
+    positioningTemplates,
+    pageNumber
+  )
 
   const isLastPage = pageNumber === pageAmount
   const nextPage = pageNumber + 1
 
-  const { data: results, isLoading: isResultLoading } = useZoom2SearchResult({
+  const { data: currentResults, isLoading: isResultLoading } = useZoom2SearchResult({
     category,
     page: pageNumber,
   })
@@ -60,22 +64,17 @@ export const usePresenter = (pageAmount: number) => {
     enabled: !isLastPage,
   })
 
-  const records = useMemo(() => results?.zoomLevel2?.nodes || [], [results])
+  const currentRecords = useMemo(() => currentResults?.zoomLevel2?.nodes || [], [currentResults])
   const nextRecords = useMemo(() => nextResults?.zoomLevel2?.nodes || [], [nextResults])
 
-  const { currentTemplate, nextTemplate } = usePositioningTemplates(
-    positioningTemplates,
-    pageNumber
-  )
-
-  const positionedRecords = useMemo(() => {
+  const currentPositionedRecords = useMemo(() => {
     return getPositionedRecords({
-      records,
+      records: currentRecords,
       pageNumber,
       category,
       currentTemplate,
     })
-  }, [records, category, currentTemplate, pageNumber])
+  }, [currentRecords, category, currentTemplate, pageNumber])
 
   const nextPositionedRecords = useMemo(() => {
     return getPositionedRecords({
@@ -88,8 +87,10 @@ export const usePresenter = (pageAmount: number) => {
 
   return {
     isResultLoading,
-    positionedRecords,
+    currentPositionedRecords,
     nextPositionedRecords,
+    isCurrentRecordsEmpty: currentRecords.length === 0,
+    isNextRecordsEmpty: nextRecords.length === 0,
     t,
   }
 }
