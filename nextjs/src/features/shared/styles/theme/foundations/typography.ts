@@ -110,6 +110,13 @@ const oldTextStyles = {
     /* or 16px */
     textShadow: '0px 0px 4px #CCCED0, 0px 0px 4px #CCCED0',
   },
+  recordText: {
+    fontSize: ['32px', '32px', '32px', '21px'],
+    fontFamily: "'Social'",
+    fontStyle: 'normal',
+    lineHeight: '130%',
+    letterSpacing: ['0.32px', '0.32px', '0.32px', '0.21px'],
+  },
 }
 
 const headingTimesLarge = {
