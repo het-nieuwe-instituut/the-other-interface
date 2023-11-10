@@ -21,15 +21,20 @@ export default async function Page({ params }: { params: { category: string; id:
   const { lang } = useTranslation()
 
   const publicationState = isEnabled ? PublicationState.Preview : PublicationState.Live
+  let editorialData
 
-  const editorialData = await getRecordEditorialContent({
-    category,
-    id,
-    publicationState,
-    lang,
-  })
+  if (category !== CATEGORIES.stories) {
+    editorialData = await getRecordEditorialContent({
+      category,
+      id,
+      publicationState,
+      lang,
+    })
+  } else {
+    editorialData = null
+  }
 
   // TODO create separate type for detail and mock result to it
 
-  return <DetailpageContainer editorialData={editorialData} />
+  return <DetailpageContainer editorialData={editorialData} category={category} />
 }
