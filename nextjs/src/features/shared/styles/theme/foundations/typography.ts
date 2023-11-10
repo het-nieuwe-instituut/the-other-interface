@@ -2,11 +2,13 @@ import colors from '../foundations/colors'
 
 const oldTextStyles = {
   h1: {
-    color: `${colors.black}`,
-    fontSize: ['48px', '52px', '62px', '62px'],
-    fontWeight: '900',
-    lineHeight: '118%',
-    fontFamily: 'Univers bold',
+    color: `${colors.blackAlpha}`,
+    fontSize: '80px',
+    fontFamily: "'Impact'",
+    fontWeight: '400',
+    fontStyle: 'normal',
+    lineHeight: '80px',
+    latterSpacing: '-0.8px',
   },
   h2: {
     color: `${colors.black}`,

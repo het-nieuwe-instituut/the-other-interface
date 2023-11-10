@@ -23,7 +23,7 @@ export default async function Page({ params }: { params: { category: string; id:
   const publicationState = isEnabled ? PublicationState.Preview : PublicationState.Live
   let editorialData
 
-  if (category !== CATEGORIES.stories) {
+  if (category === CATEGORIES.stories) {
     editorialData = await getRecordEditorialContent({
       category,
       id,

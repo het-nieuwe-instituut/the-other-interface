@@ -4,7 +4,8 @@ import { EditorialLayer } from '@/features/shared/components/EditorialLayer/Edit
 import { StoryByIdQuery, LandingpageBySlugQuery } from 'src/generated/graphql'
 import { Box } from '@chakra-ui/react'
 import { DetailGalaxy } from '@/features/galaxyInterface/galaxies/DetailGalaxy/DetailGalaxy'
-import { CLOUD_CATEGORIES_ARRAY, CLOUD_CATEGORIES } from '@/features/shared/utils/categories'
+import { CATEGORIES } from '@/features/shared/utils/categories'
+import { RecordLayer } from '@/features/shared/components/RecordLayer/RecordLayer'
 
 export interface DetailpageEditorialLayer {
   title?: string | null
@@ -32,13 +33,15 @@ export const DetailpageContainer: React.FC<Props> = ({ editorialData, category }
         <DetailGalaxy />
       </GalaxyInterface>
 
-      {editorialData && CATEGORIES_TO_SHOW_EDITORIAL.includes(category) && (
+      {editorialData && category === CATEGORIES.stories && (
         <EditorialLayer
           title={editorialData.title}
           preface={editorialData.description}
           components={editorialData.components}
         />
       )}
+
+      {CATEGORIES_TO_SHOW_EDITORIAL.includes(category) && <RecordLayer data={['test']} />}
     </Box>
   )
 }
