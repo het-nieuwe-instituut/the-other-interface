@@ -9,7 +9,7 @@ const CustomMarkdownRenderer = () => {
         {children}
       </Text>
     ),
-    // Add more mappings for other elements like `p`, `h2`, etc.
+    // Add more mappings.
   }
 
   return ChakraUIRenderer(customThemeStyle)
