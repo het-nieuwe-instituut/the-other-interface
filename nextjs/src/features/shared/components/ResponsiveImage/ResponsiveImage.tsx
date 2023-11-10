@@ -20,29 +20,37 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
 
   return (
     <Box position="relative" maxHeight={maxHeight} width={'100%'} flex={`1 1 ${maxHeight}`}>
+      {/* Fallback Image */}
       <Image
         src={fallbackImage}
-        alt={alt || 'image without title'}
+        alt={alt || 'Fallback image'}
         sizes={size}
-        fill
+        layout="fill"
+        objectFit="contain"
+        objectPosition="bottom"
         style={{
-          objectFit: 'contain',
-          objectPosition: 'bottom',
-          transition: 'visibility 0.35s ease-in-out',
-          visibility: isSuccessfullyLoaded ? 'hidden' : 'visible',
+          transition: 'opacity 0.5s ease-out',
+          opacity: isSuccessfullyLoaded ? 0 : 1,
+          position: 'absolute',
+          top: 0,
+          left: 0,
         }}
       />
 
+      {/* Actual Image */}
       <Image
         src={src || ''}
-        alt={alt || 'image without title'}
+        alt={alt || 'Actual image'}
         sizes={size}
-        fill
+        layout="fill"
+        objectFit="contain"
+        objectPosition="bottom"
         style={{
-          objectFit: 'contain',
-          objectPosition: 'bottom',
+          transition: 'opacity 1s ease-out',
           opacity: isSuccessfullyLoaded ? 1 : 0,
-          transition: 'opacity 1s ease-in-out',
+          position: 'absolute',
+          top: 0,
+          left: 0,
         }}
       />
     </Box>
