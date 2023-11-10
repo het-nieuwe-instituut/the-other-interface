@@ -1,6 +1,7 @@
 'use client'
 import { Box } from '@chakra-ui/react'
 import { RecordTitle } from '../fragments/RecordTitle'
+import { RecordDescription } from '../fragments/RecordDescription'
 
 interface Props {
   // probably every component should be responsibe for fetching its own data, so this prop should be removed, and i should fetch it here, so far its just for testing
@@ -10,7 +11,12 @@ interface Props {
 export const RecordHeader: React.FC<Props> = () => {
   return (
     <Box>
-      <RecordTitle title={'some title'} />
+      <RecordTitle title={'Minimum Dwelling'} />
+      <RecordDescription
+        description={
+          'Objects are morbi leo risus, porta ac consectetur ac, vestibulum at eros. Sed posuere consectetur est at lobortis. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.'
+        }
+      />
     </Box>
   )
 }
