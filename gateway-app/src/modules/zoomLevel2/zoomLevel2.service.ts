@@ -15,22 +15,36 @@ export class ZoomLevel2Service {
     private readonly peopleService: PeopleService,
     private readonly publicationsService: PublicationsService
   ) {}
-  public getData(entity: EntityNames, paginationArgs: PaginationArgs) {
+  public getData(entity: EntityNames, paginationArgs: PaginationArgs, text?: string) {
+    console.log({ text })
     switch (entity) {
       case EntityNames.Archives: {
-        return this.archivesService.getZoomLevel2Data(paginationArgs.page, paginationArgs.pageSize)
+        return this.archivesService.getZoomLevel2Data(
+          paginationArgs.page,
+          paginationArgs.pageSize,
+          text
+        )
       }
       case EntityNames.Objects: {
-        return this.objectsService.getZoomLevel2Data(paginationArgs.page, paginationArgs.pageSize)
+        return this.objectsService.getZoomLevel2Data(
+          paginationArgs.page,
+          paginationArgs.pageSize,
+          text
+        )
       }
 
       case EntityNames.People: {
-        return this.peopleService.getZoomLevel2Data(paginationArgs.page, paginationArgs.pageSize)
+        return this.peopleService.getZoomLevel2Data(
+          paginationArgs.page,
+          paginationArgs.pageSize,
+          text
+        )
       }
       case EntityNames.Publications: {
         return this.publicationsService.getZoomLevel2Data(
           paginationArgs.page,
-          paginationArgs.pageSize
+          paginationArgs.pageSize,
+          text
         )
       }
       case EntityNames.Stories:

@@ -9,7 +9,7 @@ export class ZoomLevel2Resolver {
 
   @Query(() => ZoomLevel2ParentType)
   public async zoomLevel2(@Args() args: ZoomLevel2Args, @Args() paginationArgs: PaginationArgs) {
-    return this.zoomLevel2Service.getData(args.entityName, paginationArgs)
+    return this.zoomLevel2Service.getData(args.entityName, paginationArgs, args.text)
   }
 
   @Query(() => ZoomLevel2AmountParentType)

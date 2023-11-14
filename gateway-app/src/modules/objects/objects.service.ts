@@ -113,14 +113,25 @@ export class ObjectsService {
 
   public constructor(private triplyService: TriplyService) {}
 
-  public async getZoomLevel2Data(page = 1, pageSize = 48) {
-    const result = await this.triplyService.queryTriplyData<ObjectsZoomLevel2Data>(
-      this.DeprecatedZoomLevel2Endpoint,
-      objectsZoomLevel2DataKeys,
-      { page, pageSize }
-    )
+  public async getZoomLevel2Data(page = 1, pageSize = 48, text?: string) {
+    let result
 
-    const uniqueNodes = getUniqueById(result.data).map(res => ({
+    if (text) {
+      result = await this.triplyService.queryTriplyData<ObjectsZoomLevel2Data>(
+        this.ZoomLevel2TextSearchEndpoint,
+        objectsZoomLevel2DataKeys,
+        { page, pageSize },
+        { text }
+      )
+    } else {
+      result = await this.triplyService.queryTriplyData<ObjectsZoomLevel2Data>(
+        this.DeprecatedZoomLevel2Endpoint,
+        objectsZoomLevel2DataKeys,
+        { page, pageSize }
+      )
+    }
+
+    const uniqueNodes = getUniqueById(result?.data).map(res => ({
       thumbnail: res.thumbnail,
       title: res.title,
       id: res.id,
