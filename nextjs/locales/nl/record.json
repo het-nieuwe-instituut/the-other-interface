@@ -48,5 +48,8 @@
   "metaPublication_place": "Plaats",
   "relatedStories_one": "1 gerelateerde story",
   "relatedArchive_other": "{{count}} gerelateerde archiefbestanddelen",
-  "relatedArchive_one": "1 gerelateerd archiefbestanddeel"
+  "relatedArchive_one": "1 gerelateerd archiefbestanddeel",
+
+  "readMore": "Lees meer",
+  "readLess": "Lees minder"
 }

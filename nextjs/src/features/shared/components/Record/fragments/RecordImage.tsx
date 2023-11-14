@@ -9,7 +9,13 @@ interface Props {
 export const RecordImage: React.FC<Props> = props => {
   return (
     <Box mt={10} height={'523px'}>
-      <ResponsiveImage src={props?.url} alt={'test'} maxHeight="523px" size="523px" />
+      <ResponsiveImage
+        src={props?.url}
+        alt={'test'}
+        maxHeight="523px"
+        css={{ height: '100%' }}
+        fit="cover"
+      />
     </Box>
   )
 }

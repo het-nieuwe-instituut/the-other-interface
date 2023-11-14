@@ -36,6 +36,9 @@ export const Record: React.FC<Props> = ({ record }) => {
           alt={recordDetails?.title}
           maxHeight={'calc(100% - 2vw - 5px)'} // where 1.6vw are a texts' line heights, 5px are gaps
           size={'11vw'}
+          css={{
+            flex: '1 1 calc(100% - 2vw - 5px)',
+          }}
         />
 
         <RecordText title={recordDetails?.title} categoryType={category} />

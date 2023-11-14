@@ -1,13 +1,15 @@
 import React from 'react'
 import { usePresenter } from './usePresenter'
 import Image from 'next/image'
-import { Box } from '@chakra-ui/react'
+import { Box, BoxProps } from '@chakra-ui/react'
 
 type ResponsiveImageProps = {
   src?: string | null
   alt?: string | null
   maxHeight?: string
   size?: string
+  css?: BoxProps['css']
+  fit?: 'contain' | 'cover'
 }
 
 export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
@@ -15,11 +17,13 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   alt = '',
   maxHeight = '100%',
   size = '200px',
+  css,
+  fit = 'contain',
 }) => {
   const { fallbackImage, isSuccessfullyLoaded } = usePresenter(src)
 
   return (
-    <Box position="relative" maxHeight={maxHeight} width={'100%'} flex={`1 1 ${maxHeight}`}>
+    <Box position="relative" maxHeight={maxHeight} width={'100%'} css={css}>
       {/* Fallback Image */}
       <Image
         src={fallbackImage}
@@ -43,8 +47,9 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
         alt={alt || 'Actual image'}
         sizes={size}
         layout="fill"
-        objectFit="contain"
+        objectFit={fit}
         objectPosition="bottom"
+        quality={100}
         style={{
           transition: 'opacity 1s ease-out',
           opacity: isSuccessfullyLoaded ? 1 : 0,

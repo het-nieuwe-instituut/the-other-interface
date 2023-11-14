@@ -1,5 +1,6 @@
 import { Box, Text, Button } from '@chakra-ui/react'
 import { useState } from 'react'
+import { RecordTruncateButton } from './RecordTruncateButton'
 
 interface Props {
   description: string
@@ -26,17 +27,15 @@ export const RecordDescription: React.FC<Props> = ({ description }) => {
       {isTruncated && description.split(' ').length > 250 && (
         <Box
           position="absolute"
-          bottom="0"
+          bottom="27px"
           left="0"
           right="0"
-          height="4rem"
-          bg="linear-gradient(rgba(255,255,255,0), rgba(255,255,255,1))"
+          height="72px"
+          bg="linear-gradient(0deg, #F9F6EE 29.41%, rgba(249, 246, 238, 0.00) 138.24%)"
         />
       )}
       {description.split(' ').length > 250 && (
-        <Button onClick={() => setIsTruncated(!isTruncated)} mt={2}>
-          {isTruncated ? 'Read More' : 'Read Less'}
-        </Button>
+        <RecordTruncateButton onClick={() => setIsTruncated(!isTruncated)} isTruncated />
       )}
     </Box>
   )
