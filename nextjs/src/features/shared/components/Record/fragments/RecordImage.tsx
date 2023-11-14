@@ -8,7 +8,7 @@ interface Props {
 
 export const RecordImage: React.FC<Props> = props => {
   return (
-    <Box mt={10} height={'523px'}>
+    <Box mt={8} height={'523px'}>
       <ResponsiveImage
         src={props?.url}
         alt={'test'}

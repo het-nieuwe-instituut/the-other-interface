@@ -10,6 +10,7 @@ type ResponsiveImageProps = {
   size?: string
   css?: BoxProps['css']
   fit?: 'contain' | 'cover'
+  onClick?: () => void
 }
 
 export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
@@ -19,6 +20,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   size = '200px',
   css,
   fit = 'contain',
+  onClick,
 }) => {
   const { fallbackImage, isSuccessfullyLoaded } = usePresenter(src)
 
@@ -50,6 +52,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
         objectFit={fit}
         objectPosition="bottom"
         quality={100}
+        onClick={onClick}
         style={{
           transition: 'opacity 1s ease-out',
           opacity: isSuccessfullyLoaded ? 1 : 0,
