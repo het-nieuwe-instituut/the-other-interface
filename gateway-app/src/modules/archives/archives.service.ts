@@ -143,11 +143,17 @@ const archivesZoomLevel3DataKeys = {
 export class ArchivesService {
   protected entityType = 'triply'
 
-  private readonly ZoomLevel2Endpoint =
+  // TODO: replace DeprecatedZoomLevel2Endpoint and DeprecatedZoomLevel2CountEndpoint with testing environment endpoints
+  private readonly DeprecatedZoomLevel2Endpoint =
     'https://api.collectiedata.hetnieuweinstituut.nl/queries/zoom-2/archives-landingPage/run'
 
-  private readonly ZoomLevel2CountEndpoint =
+  private readonly DeprecatedZoomLevel2CountEndpoint =
     'https://api.collectiedata.hetnieuweinstituut.nl/queries/zoom-2/archives-landingPage-count/run'
+
+  private readonly ZoomLevel2TextSearchEndpoint =
+    'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/archives-textSearch/run'
+  private readonly ZoomLevel2TextSearchCountEndpoint =
+    'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/archives-textSearch-Count/run'
 
   // TODO: change to convention when Triply adds this to normal space
   // private readonly archivesDescriptionLevelEndpoint =
@@ -185,7 +191,7 @@ export class ArchivesService {
 
   public async getZoomLevel2Data(page = 1, pageSize = 48) {
     const result = await this.triplyService.queryTriplyData<ArchivesZoomLevel2Data>(
-      this.ZoomLevel2Endpoint,
+      this.DeprecatedZoomLevel2Endpoint,
       archivesZoomLevel2DataKeys,
       { page, pageSize }
     )
@@ -202,14 +208,27 @@ export class ArchivesService {
     }
   }
 
-  public async getZoomLevel2DataAmount() {
-    const countResult = await this.triplyService.queryTriplyData<{ total?: string }>(
-      this.ZoomLevel2CountEndpoint,
-      { total: true },
-      undefined
-    )
+  public async getZoomLevel2DataAmount(text?: string) {
+    let countResult
+
+    if (text) {
+      countResult = await this.triplyService.queryTriplyData<{ total?: string }>(
+        this.ZoomLevel2TextSearchCountEndpoint,
+        { total: true },
+        undefined,
+        { text }
+      )
+    } else {
+      countResult = await this.triplyService.queryTriplyData<{ total?: string }>(
+        this.DeprecatedZoomLevel2CountEndpoint,
+        { total: true },
+        undefined
+      )
+    }
 
     const total = countResult?.data.pop()?.total ?? '0'
+
+    console.log('getZoomLevel2DataAmount', { text, data: countResult?.data })
 
     return {
       total,

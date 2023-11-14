@@ -5,6 +5,9 @@ import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 export class ZoomLevel2Args {
   @Field(() => EntityNames, { nullable: false })
   public entityName: EntityNames
+
+  @Field(() => String, { nullable: true })
+  public text: string
 }
 
 @ObjectType()

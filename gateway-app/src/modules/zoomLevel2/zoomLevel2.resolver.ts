@@ -14,6 +14,6 @@ export class ZoomLevel2Resolver {
 
   @Query(() => ZoomLevel2AmountParentType)
   public async zoomLevel2Amount(@Args() args: ZoomLevel2Args) {
-    return this.zoomLevel2Service.getDataAmount(args.entityName)
+    return this.zoomLevel2Service.getDataAmount(args.entityName, args.text)
   }
 }

@@ -40,20 +40,20 @@ export class ZoomLevel2Service {
     }
   }
 
-  public getDataAmount(entity: EntityNames) {
+  public getDataAmount(entity: EntityNames, text?: string) {
     switch (entity) {
       case EntityNames.Archives: {
-        return this.archivesService.getZoomLevel2DataAmount()
+        return this.archivesService.getZoomLevel2DataAmount(text)
       }
       case EntityNames.Objects: {
-        return this.objectsService.getZoomLevel2DataAmount()
+        return this.objectsService.getZoomLevel2DataAmount(text)
       }
 
       case EntityNames.People: {
-        return this.peopleService.getZoomLevel2DataAmount()
+        return this.peopleService.getZoomLevel2DataAmount(text)
       }
       case EntityNames.Publications: {
-        return this.publicationsService.getZoomLevel2DataAmount()
+        return this.publicationsService.getZoomLevel2DataAmount(text)
       }
       case EntityNames.Stories:
       default: {
