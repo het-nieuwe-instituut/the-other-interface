@@ -16,7 +16,7 @@ export const RecordHeader: React.FC<Props> = () => {
       <RecordTitle title={'Minimum Dwelling'} />
       <RecordDescription
         description={
-          'Objects are morbi leo risus, porta ac consectetur ac, vestibulum at eros. Sed posuere consectetur est at lobortis. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.'
+          'Objects are morbi leo risus, porta ac consectetur ac, vestibulum at eros. Sed posuere consectetur est at lobortis. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum. Objects are morbi leo risus, porta ac consectetur ac, vestibulum  Objects are morbi leo risus, porta ac consectetur ac, vestibulum  Objects are morbi leo risus, porta ac consectetur ac, vestibulum  Objects are morbi leo risus, porta ac consectetur ac, vestibulum  Objects are morbi leo risus, porta ac consectetur ac, vestibulum  Objects are morbi leo risus, porta ac consectetur ac, vestibulum  Objects are morbi leo risus, porta ac consectetur ac, vestibulum  Objects are morbi leo risus, porta ac consectetur ac, vestibulum  Objects are morbi leo risus, porta ac consectetur ac, vestibulum  Objects are morbi leo risus, porta ac consectetur ac, vestibulum  Objects are morbi leo risus, porta ac consectetur ac, vestibulum  Objects are morbi leo risus, porta ac consectetur ac, vestibulum  Objects are morbi leo risus, porta ac consectetur ac, vestibulum  Objects are morbi leo risus, porta ac consectetur ac, vestibulum  Objects are morbi leo risus, porta ac consectetur ac, vestibulum  Objects are morbi leo risus, porta ac consectetur ac, vestibulum  Objects are morbi leo risus, porta ac consectetur ac, vestibulum  Objects are morbi leo risus, porta ac consectetur ac, vestibulum  Objects are morbi leo risus, porta ac consectetur ac, vestibulum  Objects are morbi leo risus, porta ac consectetur ac, vestibulum  Objects are morbi leo risus, porta ac consectetur ac, vestibulum  Objects are morbi leo risus, porta ac consectetur ac, vestibulum  Objects are morbi leo risus, porta ac consectetur ac, vestibulum  Objects are morbi leo risus, porta ac consectetur ac, vestibulum  Objects are morbi leo risus, porta ac consectetur ac, vestibulum  Objects are morbi leo risus, porta ac consectetur ac, vestibulum  Objects are morbi leo risus, porta ac consectetur ac, vestibulum  Objects are morbi leo risus, porta ac consectetur ac, vestibulum  Objects are morbi leo risus, porta ac consectetur ac, vestibulum  Objects are morbi leo risus, porta ac consectetur ac, vestibulum  Objects are morbi leo risus, porta ac consectetur ac, vestibulum  Objects are morbi leo risus, porta ac consectetur ac, vestibulum  Objects are morbi leo risus, porta ac consectetur ac, vestibulum '
         }
       />
       <RecordCarousel
@@ -29,7 +29,7 @@ export const RecordHeader: React.FC<Props> = () => {
           'https://picsum.photos/1000/500',
         ]}
       />
-      {/* <RecordImage url={'https://picsum.photos/1920/1226'} /> */}
+      <RecordImage url={'https://picsum.photos/1920/1226'} />
     </Box>
   )
 }
