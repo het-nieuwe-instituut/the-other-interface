@@ -318,11 +318,11 @@ type PublicationsWithAuthors =
 export class PublicationsService {
   protected entityType = 'triply'
 
-  // TODO: replace DeprecatedZoomLevel2Endpoint and DeprecatedZoomLevel2CountEndpoint with testing environment endpoints
-  private readonly DeprecatedZoomLevel2Endpoint =
-    'https://api.collectiedata.hetnieuweinstituut.nl/queries/zoom-2/books-landingPage/run'
-  private readonly DeprecatedZoomLevel2CountEndpoint =
-    'https://api.collectiedata.hetnieuweinstituut.nl/queries/zoom-2/books-landingPage-count/run'
+  // TODO: replace ZoomLevel2SearchEndpoint and ZoomLevel2SearchCountEndpoint with testing environment endpoints
+  private readonly ZoomLevel2SearchEndpoint =
+    'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/publications-landingPage/run'
+  private readonly ZoomLevel2SearchCountEndpoint =
+    'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/publications-landingPage-count/run'
 
   private readonly ZoomLevel2TextSearchEndpoint =
     'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/publications-textSearch/run'
@@ -352,7 +352,7 @@ export class PublicationsService {
       )
     } else {
       result = await this.triplyService.queryTriplyData<PublicationsZoomLevel2Data>(
-        this.DeprecatedZoomLevel2Endpoint,
+        this.ZoomLevel2SearchEndpoint,
         publicationsZoomLevel2DataKeys,
         { page, pageSize }
       )
@@ -382,7 +382,7 @@ export class PublicationsService {
       )
     } else {
       countResult = await this.triplyService.queryTriplyData<{ total?: string }>(
-        this.DeprecatedZoomLevel2CountEndpoint,
+        this.ZoomLevel2SearchCountEndpoint,
         { total: true },
         undefined
       )

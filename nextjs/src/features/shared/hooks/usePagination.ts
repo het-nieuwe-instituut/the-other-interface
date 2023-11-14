@@ -9,7 +9,7 @@ export const usePagination = (searchResultAmount: number, isKeyPressDisabled = t
   const searchParams = useSearchParams()
   const { pageNumber: page } = usePageNumber()
 
-  const pageAmount = searchResultAmount ? Math.ceil(searchResultAmount / ZOOM2_RECORDS_PER_PAGE) : 0
+  const pageAmount = searchResultAmount ? Math.ceil(searchResultAmount / ZOOM2_RECORDS_PER_PAGE) : 1
 
   if (pageAmount && page > pageAmount) {
     notFound()

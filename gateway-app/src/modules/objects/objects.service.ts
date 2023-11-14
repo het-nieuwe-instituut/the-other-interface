@@ -97,11 +97,11 @@ const objectsDetailZoomLevel3DataKeys: KeysToVerify<ObjectsDetailZoomLevel3Data>
 export class ObjectsService {
   protected entityType = 'triply'
 
-  // TODO: replace DeprecatedZoomLevel2Endpoint and DeprecatedZoomLevel2CountEndpoint with testing environment endpoints
-  private readonly DeprecatedZoomLevel2Endpoint =
-    'https://api.collectiedata.hetnieuweinstituut.nl/queries/zoom-2/objects-landingPage/run'
-  private readonly DeprecatedZoomLevel2CountEndpoint =
-    'https://api.collectiedata.hetnieuweinstituut.nl/queries/zoom-2/objects-landingPage-count/run'
+  // TODO: replace ZoomLevel2SearchEndpoint and ZoomLevel2SearchCountEndpoint with testing environment endpoints
+  private readonly ZoomLevel2SearchEndpoint =
+    'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/objects-landingPage/run'
+  private readonly ZoomLevel2SearchCountEndpoint =
+    'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/objects-landingPage-count/run'
 
   private readonly ZoomLevel2TextSearchEndpoint =
     'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/objects-textSearch/run'
@@ -125,7 +125,7 @@ export class ObjectsService {
       )
     } else {
       result = await this.triplyService.queryTriplyData<ObjectsZoomLevel2Data>(
-        this.DeprecatedZoomLevel2Endpoint,
+        this.ZoomLevel2SearchEndpoint,
         objectsZoomLevel2DataKeys,
         { page, pageSize }
       )
@@ -136,6 +136,7 @@ export class ObjectsService {
       title: res.title,
       id: res.id,
     }))
+    console.log({ page, pageSize, text, uniqueNodes })
 
     return {
       page,
@@ -155,13 +156,15 @@ export class ObjectsService {
       )
     } else {
       countResult = await this.triplyService.queryTriplyData<{ total?: string }>(
-        this.DeprecatedZoomLevel2CountEndpoint,
+        this.ZoomLevel2SearchCountEndpoint,
         { total: true },
         undefined
       )
     }
 
     const total = countResult?.data.pop()?.total ?? '0'
+
+    console.log({ total })
 
     return {
       total,
