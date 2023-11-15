@@ -2,7 +2,6 @@
 import { Box } from '@chakra-ui/react'
 import { RecordTitle } from '../fragments/RecordTitle'
 import { RecordDescription } from '../fragments/RecordDescription'
-import { RecordImage } from '../fragments/RecordImage'
 import RecordCarousel from '../RecordCarousel/RecordCarousel'
 // import RecordCarousel from '../RecordCarousel/RecordCarousel'
 
@@ -22,12 +21,12 @@ export const RecordHeader: React.FC<Props> = () => {
       />
       <RecordCarousel
         imageUrls={[
+          'https://picsum.photos/500/500',
           'https://picsum.photos/1000/500',
-          'https://picsum.photos/1000/500',
-          'https://picsum.photos/1000/500',
-          'https://picsum.photos/1000/500',
-          'https://picsum.photos/1000/500',
-          'https://picsum.photos/1000/500',
+          'https://picsum.photos/600/500',
+          'https://picsum.photos/700/500',
+          'https://picsum.photos/800/500',
+          'https://picsum.photos/900/500',
         ]}
       />
       {/* <RecordImage url={'https://picsum.photos/1920/1226'} /> */}
