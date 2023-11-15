@@ -23,6 +23,7 @@ export const usePresenter = () => {
 
   const { page, pageAmount, increasePageNumber, decreasePageNumber } = usePagination(
     searchResultAmount,
+    isResultAmountLoading,
     isSearchModeActive
   )
 
