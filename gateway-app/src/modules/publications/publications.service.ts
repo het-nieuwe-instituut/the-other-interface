@@ -3,19 +3,7 @@ import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { ZoomLevel3Service } from '../zoomLevel3/zoomLevel3.service'
 import { TriplyUtils } from '../triply/triply.utils'
-import { getHttpThumbnailOrNull, getUniqueById } from '../util/helpers'
-
-export interface PublicationsZoomLevel2Data {
-  thumbnail: string
-  title: string
-  id: string
-}
-
-export const publicationsZoomLevel2DataKeys: KeysToVerify<PublicationsZoomLevel2Data> = {
-  thumbnail: true,
-  title: true,
-  id: true,
-}
+import { getHttpThumbnailOrNull } from '../util/helpers'
 
 interface PublicationsZoomLevel3Data {
   thumbnail?: string
@@ -318,13 +306,6 @@ type PublicationsWithAuthors =
 export class PublicationsService {
   protected entityType = 'triply'
 
-  // TODO: replace ZoomLevel2SearchEndpoint and ZoomLevel2SearchCountEndpoint with testing environment endpoints
-  private readonly ZoomLevel2SearchEndpoint =
-    'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/publications-landingPage/run'
-
-  private readonly ZoomLevel2TextSearchEndpoint =
-    'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/publications-textSearch/run'
-
   private readonly ZoomLevel3Endpoint =
     'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/publications-recordPage/run?'
 
@@ -335,36 +316,6 @@ export class PublicationsService {
     @Inject(forwardRef(() => ZoomLevel3Service))
     private readonly zoomLevel3Service: ZoomLevel3Service
   ) {}
-
-  public async getZoomLevel2Data(page = 1, pageSize = 48, text?: string) {
-    let result
-
-    if (text) {
-      result = await this.triplyService.queryTriplyData<PublicationsZoomLevel2Data>(
-        this.ZoomLevel2TextSearchEndpoint,
-        publicationsZoomLevel2DataKeys,
-        { page, pageSize },
-        { text }
-      )
-    } else {
-      result = await this.triplyService.queryTriplyData<PublicationsZoomLevel2Data>(
-        this.ZoomLevel2SearchEndpoint,
-        publicationsZoomLevel2DataKeys,
-        { page, pageSize }
-      )
-    }
-
-    const uniqueNodes = getUniqueById(result?.data).map(res => ({
-      thumbnail: res.thumbnail,
-      title: res.title,
-      id: res.id,
-    }))
-
-    return {
-      page,
-      nodes: uniqueNodes,
-    }
-  }
 
   public async getZoomLevel3Data(id: string) {
     const result = await this.triplyService.queryTriplyData<PublicationsZoomLevel3Data>(

@@ -1,19 +1,8 @@
 import { Injectable } from '@nestjs/common'
 import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
-import { getHttpThumbnailOrNull, getUniqueById } from '../util/helpers'
+import { getHttpThumbnailOrNull } from '../util/helpers'
 import { TriplyUtils } from '../triply/triply.utils'
-
-interface PeopleZoomLevel2Data {
-  thumbnail: string
-  title: string
-  id: string
-}
-const peopleZoomLevel2DataKeys: KeysToVerify<PeopleZoomLevel2Data> = {
-  thumbnail: true,
-  title: true,
-  id: true,
-}
 
 interface PeopleDetailZoomLevel3Data {
   thumbnail?: string
@@ -80,47 +69,10 @@ const peopleDetailZoomLevel3DataKeys: KeysToVerify<PeopleDetailZoomLevel3Data> =
 export class PeopleService {
   protected entityType = 'triply'
 
-  // TODO: replace ZoomLevel2SearchEndpoint and ZoomLevel2SearchCountEndpoint with testing environment endpoints
-  private readonly ZoomLevel2SearchEndpoint =
-    'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/people-landingPage/run'
-
-  private readonly ZoomLevel2TextSearchEndpoint =
-    'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/people-textSearch/run'
-
   private readonly ZoomLevel3Endpoint =
     'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/people-recordPage/run?'
 
   public constructor(private triplyService: TriplyService) {}
-
-  public async getZoomLevel2Data(page = 1, pageSize = 48, text?: string) {
-    let result
-
-    if (text) {
-      result = await this.triplyService.queryTriplyData<PeopleZoomLevel2Data>(
-        this.ZoomLevel2TextSearchEndpoint,
-        peopleZoomLevel2DataKeys,
-        { page, pageSize },
-        { text }
-      )
-    } else {
-      result = await this.triplyService.queryTriplyData<PeopleZoomLevel2Data>(
-        this.ZoomLevel2SearchEndpoint,
-        peopleZoomLevel2DataKeys,
-        { page, pageSize }
-      )
-    }
-
-    const uniqueNodes = getUniqueById(result?.data).map(res => ({
-      thumbnail: res.thumbnail,
-      title: res.title,
-      id: res.id,
-    }))
-
-    return {
-      page,
-      nodes: uniqueNodes,
-    }
-  }
 
   public async getZoomLevel3Data(id: string) {
     const result = await this.triplyService.queryTriplyData<PeopleDetailZoomLevel3Data>(

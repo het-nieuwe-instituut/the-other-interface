@@ -1,20 +1,8 @@
 import { Injectable } from '@nestjs/common'
 import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
-import { getHttpThumbnailOrNull, getUniqueById } from '../util/helpers'
+import { getHttpThumbnailOrNull } from '../util/helpers'
 import { TriplyUtils } from '../triply/triply.utils'
-
-export interface ArchivesZoomLevel2Data {
-  thumbnail: string
-  title: string
-  id: string
-}
-
-export const archivesZoomLevel2DataKeys: KeysToVerify<ArchivesZoomLevel2Data> = {
-  thumbnail: true,
-  title: true,
-  id: true,
-}
 
 export interface ArchivesDetailZoomLevel3DataType {
   id?: string
@@ -131,24 +119,10 @@ const archivesOtherDetailZoomLevel3DataKeys: KeysToVerify<ArchivesOtherDetailZoo
   permanentLink: true,
   pidWorkURI: true,
 }
-type ArchivesZoomLeve3DataType =
-  | ArchivesOtherDetailZoomLevel3Data
-  | ArchivesFondsDetailZoomLevel3Data
-const archivesZoomLevel3DataKeys = {
-  [ArchivesZoomLevel3Types.other]: archivesOtherDetailZoomLevel3DataKeys,
-  [ArchivesZoomLevel3Types.fonds]: archivesFondsDetailZoomLevel3DataKeys,
-}
 
 @Injectable()
 export class ArchivesService {
   protected entityType = 'triply'
-
-  // TODO: replace ZoomLevel2SearchEndpoint and ZoomLevel2SearchCountEndpoint with testing environment endpoints
-  private readonly ZoomLevel2SearchEndpoint =
-    'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/archives-landingPage/run'
-
-  private readonly ZoomLevel2TextSearchEndpoint =
-    'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/archives-textSearch/run'
 
   // TODO: change to convention when Triply adds this to normal space
   // private readonly archivesDescriptionLevelEndpoint =
@@ -183,36 +157,6 @@ export class ArchivesService {
 
   //   return ArchivesZoomLevel3Types.other
   // }
-
-  public async getZoomLevel2Data(page = 1, pageSize = 48, text?: string) {
-    let result
-
-    if (text) {
-      result = await this.triplyService.queryTriplyData<ArchivesZoomLevel2Data>(
-        this.ZoomLevel2TextSearchEndpoint,
-        archivesZoomLevel2DataKeys,
-        { page, pageSize },
-        { text }
-      )
-    } else {
-      result = await this.triplyService.queryTriplyData<ArchivesZoomLevel2Data>(
-        this.ZoomLevel2SearchEndpoint,
-        archivesZoomLevel2DataKeys,
-        { page, pageSize }
-      )
-    }
-
-    const uniqueNodes = getUniqueById(result?.data).map(res => ({
-      thumbnail: res.thumbnail,
-      title: res.title,
-      id: res.id,
-    }))
-
-    return {
-      page,
-      nodes: uniqueNodes,
-    }
-  }
 
   public async getZoomLevel3Data(id: string) {
     const result = await this.triplyService.queryTriplyData<ArchivesDetailZoomLevel3DataType>(
