@@ -3,8 +3,9 @@ import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useZoom2SearchResultAmount } from '@/features/shared/hooks/queries/useZoom2SearchResultAmount'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { usePageCategory } from '@/features/shared/hooks/usePageCategory'
+import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 import { sharedActions } from '@/features/shared/stores/shared.store'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useCallback, useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -12,9 +13,9 @@ export const usePresenter = () => {
   const router = useRouter()
   const pathname = usePathname()
   const dispatch = useDispatch()
-  const searchParams = useSearchParams()
 
-  const lang = searchParams?.get('lang')
+  const { lang, search } = useZoom2Params()
+
   const searchBarRef = useRef<HTMLDivElement>(null)
   const { isSearchModeActive, searchCategory, isCategorySuggestionsOpen } = useSelector(
     (state: State) => state.shared
@@ -22,7 +23,7 @@ export const usePresenter = () => {
 
   const { t } = useTypeSafeTranslation('category')
   const { pageCategory } = usePageCategory()
-  const { data } = useZoom2SearchResultAmount(pageCategory)
+  const { data } = useZoom2SearchResultAmount(pageCategory, search)
 
   const [inputValue, setInputValue] = useState('')
 
@@ -32,12 +33,12 @@ export const usePresenter = () => {
 
   useEffect(() => {
     dispatch(sharedActions.searchCategory({ searchCategory: pageCategory }))
-    setInputValue(searchParams?.get('search') || '')
+    setInputValue(search || '')
 
     return () => {
       dispatch(sharedActions.searchModeActive({ isSearchModeActive: false }))
     }
-  }, [pageCategory, searchParams, dispatch])
+  }, [pageCategory, search, dispatch])
 
   useEffect(() => {
     dispatch(sharedActions.searchModeActive({ isSearchModeActive: false }))
@@ -49,8 +50,8 @@ export const usePresenter = () => {
 
   const resetSearchFilters = useCallback(() => {
     dispatch(sharedActions.searchCategory({ searchCategory: pageCategory }))
-    setInputValue(searchParams?.get('search') || '')
-  }, [searchParams, pageCategory, dispatch])
+    setInputValue(search || '')
+  }, [search, pageCategory, dispatch])
 
   const handleSearchModeClose = useCallback(() => {
     dispatch(sharedActions.searchModeActive({ isSearchModeActive: false }))

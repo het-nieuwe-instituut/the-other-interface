@@ -1239,11 +1239,13 @@ export type QueryZoomLevel2Args = {
   entityName: EntityNames;
   page: Scalars['Int'];
   pageSize?: InputMaybe<Scalars['Int']>;
+  text?: InputMaybe<Scalars['String']>;
 };
 
 
 export type QueryZoomLevel2AmountArgs = {
   entityName: EntityNames;
+  text?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -1862,6 +1864,7 @@ export type Zoom2QueryVariables = Exact<{
   entityName: EntityNames;
   page: Scalars['Int'];
   pageSize?: InputMaybe<Scalars['Int']>;
+  text?: InputMaybe<Scalars['String']>;
 }>;
 
 
@@ -1869,6 +1872,7 @@ export type Zoom2Query = { __typename?: 'Query', zoomLevel2: { __typename?: 'Zoo
 
 export type Zoom2AmountQueryVariables = Exact<{
   entityName: EntityNames;
+  text?: InputMaybe<Scalars['String']>;
 }>;
 
 
@@ -1877,12 +1881,15 @@ export type Zoom2AmountQuery = { __typename?: 'Query', zoomLevel2Amount: { __typ
 export type Zoom2ArchivesQueryVariables = Exact<{
   page: Scalars['Int'];
   pageSize: Scalars['Int'];
+  text?: InputMaybe<Scalars['String']>;
 }>;
 
 
 export type Zoom2ArchivesQuery = { __typename?: 'Query', zoomLevel2: { __typename?: 'ZoomLevel2ParentType', page: number, nodes?: Array<{ __typename?: 'ZoomLevel2Type', title?: string | null, thumbnail?: string | null, id?: string | null }> | null } };
 
-export type Zoom2ArchiveAmountQueryVariables = Exact<{ [key: string]: never; }>;
+export type Zoom2ArchiveAmountQueryVariables = Exact<{
+  text?: InputMaybe<Scalars['String']>;
+}>;
 
 
 export type Zoom2ArchiveAmountQuery = { __typename?: 'Query', zoomLevel2Amount: { __typename?: 'ZoomLevel2AmountParentType', total: string } };
@@ -1890,12 +1897,15 @@ export type Zoom2ArchiveAmountQuery = { __typename?: 'Query', zoomLevel2Amount: 
 export type Zoom2ObjectsQueryVariables = Exact<{
   page: Scalars['Int'];
   pageSize: Scalars['Int'];
+  text?: InputMaybe<Scalars['String']>;
 }>;
 
 
 export type Zoom2ObjectsQuery = { __typename?: 'Query', zoomLevel2: { __typename?: 'ZoomLevel2ParentType', page: number, nodes?: Array<{ __typename?: 'ZoomLevel2Type', title?: string | null, thumbnail?: string | null, id?: string | null }> | null } };
 
-export type Zoom2ObjectsAmountQueryVariables = Exact<{ [key: string]: never; }>;
+export type Zoom2ObjectsAmountQueryVariables = Exact<{
+  text?: InputMaybe<Scalars['String']>;
+}>;
 
 
 export type Zoom2ObjectsAmountQuery = { __typename?: 'Query', zoomLevel2Amount: { __typename?: 'ZoomLevel2AmountParentType', total: string } };
@@ -1903,12 +1913,15 @@ export type Zoom2ObjectsAmountQuery = { __typename?: 'Query', zoomLevel2Amount: 
 export type Zoom2PeopleQueryVariables = Exact<{
   page: Scalars['Int'];
   pageSize: Scalars['Int'];
+  text?: InputMaybe<Scalars['String']>;
 }>;
 
 
 export type Zoom2PeopleQuery = { __typename?: 'Query', zoomLevel2: { __typename?: 'ZoomLevel2ParentType', page: number, nodes?: Array<{ __typename?: 'ZoomLevel2Type', title?: string | null, thumbnail?: string | null, id?: string | null }> | null } };
 
-export type Zoom2PeopleAmountQueryVariables = Exact<{ [key: string]: never; }>;
+export type Zoom2PeopleAmountQueryVariables = Exact<{
+  text?: InputMaybe<Scalars['String']>;
+}>;
 
 
 export type Zoom2PeopleAmountQuery = { __typename?: 'Query', zoomLevel2Amount: { __typename?: 'ZoomLevel2AmountParentType', total: string } };
@@ -1916,12 +1929,15 @@ export type Zoom2PeopleAmountQuery = { __typename?: 'Query', zoomLevel2Amount: {
 export type Zoom2PublicationsQueryVariables = Exact<{
   page: Scalars['Int'];
   pageSize: Scalars['Int'];
+  text?: InputMaybe<Scalars['String']>;
 }>;
 
 
 export type Zoom2PublicationsQuery = { __typename?: 'Query', zoomLevel2: { __typename?: 'ZoomLevel2ParentType', page: number, nodes?: Array<{ __typename?: 'ZoomLevel2Type', title?: string | null, thumbnail?: string | null, id?: string | null }> | null } };
 
-export type Zoom2PublicationsAmountQueryVariables = Exact<{ [key: string]: never; }>;
+export type Zoom2PublicationsAmountQueryVariables = Exact<{
+  text?: InputMaybe<Scalars['String']>;
+}>;
 
 
 export type Zoom2PublicationsAmountQuery = { __typename?: 'Query', zoomLevel2Amount: { __typename?: 'ZoomLevel2AmountParentType', total: string } };
@@ -2821,8 +2837,13 @@ export const ThemesDocument = gql`
 }
     ${ThemeFragmentFragmentDoc}`;
 export const Zoom2Document = gql`
-    query Zoom2($entityName: EntityNames!, $page: Int!, $pageSize: Int) {
-  zoomLevel2(entityName: $entityName, page: $page, pageSize: $pageSize) {
+    query Zoom2($entityName: EntityNames!, $page: Int!, $pageSize: Int, $text: String) {
+  zoomLevel2(
+    entityName: $entityName
+    page: $page
+    pageSize: $pageSize
+    text: $text
+  ) {
     page
     nodes {
       title
@@ -2833,15 +2854,15 @@ export const Zoom2Document = gql`
 }
     `;
 export const Zoom2AmountDocument = gql`
-    query Zoom2Amount($entityName: EntityNames!) {
-  zoomLevel2Amount(entityName: $entityName) {
+    query Zoom2Amount($entityName: EntityNames!, $text: String) {
+  zoomLevel2Amount(entityName: $entityName, text: $text) {
     total
   }
 }
     `;
 export const Zoom2ArchivesDocument = gql`
-    query Zoom2Archives($page: Int!, $pageSize: Int!) {
-  zoomLevel2(entityName: Archives, page: $page, pageSize: $pageSize) {
+    query Zoom2Archives($page: Int!, $pageSize: Int!, $text: String) {
+  zoomLevel2(entityName: Archives, page: $page, pageSize: $pageSize, text: $text) {
     page
     nodes {
       title
@@ -2852,15 +2873,15 @@ export const Zoom2ArchivesDocument = gql`
 }
     `;
 export const Zoom2ArchiveAmountDocument = gql`
-    query Zoom2ArchiveAmount {
-  zoomLevel2Amount(entityName: Archives) {
+    query Zoom2ArchiveAmount($text: String) {
+  zoomLevel2Amount(entityName: Archives, text: $text) {
     total
   }
 }
     `;
 export const Zoom2ObjectsDocument = gql`
-    query Zoom2Objects($page: Int!, $pageSize: Int!) {
-  zoomLevel2(entityName: Objects, page: $page, pageSize: $pageSize) {
+    query Zoom2Objects($page: Int!, $pageSize: Int!, $text: String) {
+  zoomLevel2(entityName: Objects, page: $page, pageSize: $pageSize, text: $text) {
     page
     nodes {
       title
@@ -2871,15 +2892,15 @@ export const Zoom2ObjectsDocument = gql`
 }
     `;
 export const Zoom2ObjectsAmountDocument = gql`
-    query Zoom2ObjectsAmount {
-  zoomLevel2Amount(entityName: Objects) {
+    query Zoom2ObjectsAmount($text: String) {
+  zoomLevel2Amount(entityName: Objects, text: $text) {
     total
   }
 }
     `;
 export const Zoom2PeopleDocument = gql`
-    query Zoom2People($page: Int!, $pageSize: Int!) {
-  zoomLevel2(entityName: People, page: $page, pageSize: $pageSize) {
+    query Zoom2People($page: Int!, $pageSize: Int!, $text: String) {
+  zoomLevel2(entityName: People, page: $page, pageSize: $pageSize, text: $text) {
     page
     nodes {
       title
@@ -2890,15 +2911,20 @@ export const Zoom2PeopleDocument = gql`
 }
     `;
 export const Zoom2PeopleAmountDocument = gql`
-    query Zoom2PeopleAmount {
-  zoomLevel2Amount(entityName: People) {
+    query Zoom2PeopleAmount($text: String) {
+  zoomLevel2Amount(entityName: People, text: $text) {
     total
   }
 }
     `;
 export const Zoom2PublicationsDocument = gql`
-    query Zoom2Publications($page: Int!, $pageSize: Int!) {
-  zoomLevel2(entityName: Publications, page: $page, pageSize: $pageSize) {
+    query Zoom2Publications($page: Int!, $pageSize: Int!, $text: String) {
+  zoomLevel2(
+    entityName: Publications
+    page: $page
+    pageSize: $pageSize
+    text: $text
+  ) {
     page
     nodes {
       title
@@ -2909,8 +2935,8 @@ export const Zoom2PublicationsDocument = gql`
 }
     `;
 export const Zoom2PublicationsAmountDocument = gql`
-    query Zoom2PublicationsAmount {
-  zoomLevel2Amount(entityName: Publications) {
+    query Zoom2PublicationsAmount($text: String) {
+  zoomLevel2Amount(entityName: Publications, text: $text) {
     total
   }
 }

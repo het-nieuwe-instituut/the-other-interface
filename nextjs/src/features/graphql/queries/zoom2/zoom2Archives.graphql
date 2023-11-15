@@ -1,5 +1,5 @@
-query Zoom2Archives($page: Int!, $pageSize: Int!) {
-    zoomLevel2(entityName: Archives, page: $page, pageSize: $pageSize) {
+query Zoom2Archives($page: Int!, $pageSize: Int!, $text: String) {
+    zoomLevel2(entityName: Archives, page: $page, pageSize: $pageSize, text: $text) {
         page,
         nodes {
             title
@@ -10,8 +10,8 @@ query Zoom2Archives($page: Int!, $pageSize: Int!) {
 }
 
 
-query Zoom2ArchiveAmount {
-    zoomLevel2Amount(entityName: Archives) {
+query Zoom2ArchiveAmount($text: String) {
+    zoomLevel2Amount(entityName: Archives, text: $text) {
         total
     }
 }

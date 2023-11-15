@@ -1,13 +1,12 @@
 import { useMemo } from 'react'
-
 import { CloudCategory } from '@/features/shared/utils/categories'
-import { useSearchParams } from 'next/navigation'
 import { PositioningTemplate, positioningTemplates } from './positioningTemplates'
 import { usePositioningTemplates } from '@/features/shared/hooks/usePositioningTemplates'
 import { ZoomLevel2Type } from 'src/generated/graphql'
 import { usePageNumber } from '@/features/shared/hooks/usePageNumber'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { useZoom2SearchResult } from '@/features/shared/hooks/queries/useZoom2SearchResult'
+import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 
 const getPositionedRecords = ({
   records,
@@ -41,9 +40,9 @@ const getPositionedRecords = ({
 }
 
 export const usePresenter = (pageAmount: number) => {
-  const searchParams = useSearchParams()
   const { t } = useTypeSafeTranslation('category')
-  const category = searchParams?.get('category') as CloudCategory
+
+  const { category, search } = useZoom2Params()
   const { pageNumber } = usePageNumber()
   const { currentTemplate, nextTemplate } = usePositioningTemplates(
     positioningTemplates,
@@ -55,11 +54,13 @@ export const usePresenter = (pageAmount: number) => {
 
   const { data: currentResults, isLoading: isResultLoading } = useZoom2SearchResult({
     category,
+    text: search,
     page: pageNumber,
   })
 
   const { data: nextResults } = useZoom2SearchResult({
     category,
+    text: search,
     page: nextPage,
     enabled: !isLastPage,
   })

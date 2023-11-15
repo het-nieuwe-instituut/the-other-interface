@@ -6,10 +6,12 @@ import { ZOOM2_RECORDS_PER_PAGE } from '../../constants/mainConstants'
 
 export function useZoom2SearchResult({
   category,
+  text,
   page = 1,
   enabled = true,
 }: {
   category: CloudCategory
+  text?: string
   page?: number
   enabled?: boolean
 }) {
@@ -18,12 +20,13 @@ export function useZoom2SearchResult({
   const entityName = CATEGORIES_TO_ENTITY_MAPPER[category as CloudCategory]
 
   return useQuery({
-    queryKey: ['search-result', category, page],
+    queryKey: ['search-result', category, text, page],
     queryFn: () => {
       return api.Zoom2({
         entityName,
         page,
         pageSize: ZOOM2_RECORDS_PER_PAGE,
+        text: text || undefined,
       })
     },
     enabled,

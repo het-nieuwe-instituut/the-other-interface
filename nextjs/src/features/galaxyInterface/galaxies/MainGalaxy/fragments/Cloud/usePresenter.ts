@@ -1,16 +1,16 @@
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useZoom2SearchResult } from '@/features/shared/hooks/queries/useZoom2SearchResult'
 import { useState } from 'react'
 import { CategoryCloud } from '../types'
+import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 
 export const usePresenter = (cloud: CategoryCloud) => {
   const { t } = useTypeSafeTranslation('homepage')
   const router = useRouter()
-  const searchParams = useSearchParams()
-  const lang = searchParams?.get('lang')
+  const { lang } = useZoom2Params()
   const [enabled, setEnabled] = useState(false)
   const { title: category, size, cloudPosition, titlePosition } = cloud
 

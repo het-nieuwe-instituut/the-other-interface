@@ -1,20 +1,8 @@
 import { Injectable } from '@nestjs/common'
 import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
-import { getHttpThumbnailOrNull, getUniqueById } from '../util/helpers'
+import { getHttpThumbnailOrNull } from '../util/helpers'
 import { TriplyUtils } from '../triply/triply.utils'
-
-interface ObjectsZoomLevel2Data {
-  thumbnail: string
-  title: string
-  id: string
-}
-
-const objectsZoomLevel2DataKeys: KeysToVerify<ObjectsZoomLevel2Data> = {
-  thumbnail: true,
-  title: true,
-  id: true,
-}
 
 interface ObjectsDetailZoomLevel3Data {
   thumbnail?: string
@@ -97,49 +85,10 @@ const objectsDetailZoomLevel3DataKeys: KeysToVerify<ObjectsDetailZoomLevel3Data>
 export class ObjectsService {
   protected entityType = 'triply'
 
-  private readonly ZoomLevel2Endpoint =
-    'https://api.collectiedata.hetnieuweinstituut.nl/queries/zoom-2/objects-landingPage/run'
-
-  private readonly ZoomLevel2CountEndpoint =
-    'https://api.collectiedata.hetnieuweinstituut.nl/queries/zoom-2/objects-landingPage-count/run'
-
   private readonly ZoomLevel3Endpoint =
     'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/objects-recordPage/run?'
 
   public constructor(private triplyService: TriplyService) {}
-
-  public async getZoomLevel2Data(page = 1, pageSize = 48) {
-    const result = await this.triplyService.queryTriplyData<ObjectsZoomLevel2Data>(
-      this.ZoomLevel2Endpoint,
-      objectsZoomLevel2DataKeys,
-      { page, pageSize }
-    )
-
-    const uniqueNodes = getUniqueById(result.data).map(res => ({
-      thumbnail: res.thumbnail,
-      title: res.title,
-      id: res.id,
-    }))
-
-    return {
-      page,
-      nodes: uniqueNodes,
-    }
-  }
-
-  public async getZoomLevel2DataAmount() {
-    const countResult = await this.triplyService.queryTriplyData<{ total?: string }>(
-      this.ZoomLevel2CountEndpoint,
-      { total: true },
-      undefined
-    )
-
-    const total = countResult?.data.pop()?.total ?? '0'
-
-    return {
-      total,
-    }
-  }
 
   public async getZoomLevel3Data(id: string) {
     const result = await this.triplyService.queryTriplyData<ObjectsDetailZoomLevel3Data>(
