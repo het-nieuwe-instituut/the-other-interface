@@ -136,7 +136,6 @@ export class ObjectsService {
       title: res.title,
       id: res.id,
     }))
-    console.log({ page, pageSize, text, uniqueNodes })
 
     return {
       page,
@@ -163,8 +162,6 @@ export class ObjectsService {
     }
 
     const total = countResult?.data.pop()?.total ?? '0'
-
-    console.log({ total })
 
     return {
       total,

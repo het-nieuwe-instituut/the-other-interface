@@ -16,7 +16,6 @@ export class ZoomLevel2Service {
     private readonly publicationsService: PublicationsService
   ) {}
   public getData(entity: EntityNames, paginationArgs: PaginationArgs, text?: string) {
-    console.log({ text })
     switch (entity) {
       case EntityNames.Archives: {
         return this.archivesService.getZoomLevel2Data(
