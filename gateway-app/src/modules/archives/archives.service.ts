@@ -1,20 +1,8 @@
 import { Injectable } from '@nestjs/common'
 import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
-import { getHttpThumbnailOrNull, getUniqueById } from '../util/helpers'
+import { getHttpThumbnailOrNull } from '../util/helpers'
 import { TriplyUtils } from '../triply/triply.utils'
-
-export interface ArchivesZoomLevel2Data {
-  thumbnail: string
-  title: string
-  id: string
-}
-
-export const archivesZoomLevel2DataKeys: KeysToVerify<ArchivesZoomLevel2Data> = {
-  thumbnail: true,
-  title: true,
-  id: true,
-}
 
 export interface ArchivesDetailZoomLevel3DataType {
   id?: string
@@ -131,23 +119,10 @@ const archivesOtherDetailZoomLevel3DataKeys: KeysToVerify<ArchivesOtherDetailZoo
   permanentLink: true,
   pidWorkURI: true,
 }
-type ArchivesZoomLeve3DataType =
-  | ArchivesOtherDetailZoomLevel3Data
-  | ArchivesFondsDetailZoomLevel3Data
-const archivesZoomLevel3DataKeys = {
-  [ArchivesZoomLevel3Types.other]: archivesOtherDetailZoomLevel3DataKeys,
-  [ArchivesZoomLevel3Types.fonds]: archivesFondsDetailZoomLevel3DataKeys,
-}
 
 @Injectable()
 export class ArchivesService {
   protected entityType = 'triply'
-
-  private readonly ZoomLevel2Endpoint =
-    'https://api.collectiedata.hetnieuweinstituut.nl/queries/zoom-2/archives-landingPage/run'
-
-  private readonly ZoomLevel2CountEndpoint =
-    'https://api.collectiedata.hetnieuweinstituut.nl/queries/zoom-2/archives-landingPage-count/run'
 
   // TODO: change to convention when Triply adds this to normal space
   // private readonly archivesDescriptionLevelEndpoint =
@@ -182,39 +157,6 @@ export class ArchivesService {
 
   //   return ArchivesZoomLevel3Types.other
   // }
-
-  public async getZoomLevel2Data(page = 1, pageSize = 48) {
-    const result = await this.triplyService.queryTriplyData<ArchivesZoomLevel2Data>(
-      this.ZoomLevel2Endpoint,
-      archivesZoomLevel2DataKeys,
-      { page, pageSize }
-    )
-
-    const uniqueNodes = getUniqueById(result.data).map(res => ({
-      thumbnail: res.thumbnail,
-      title: res.title,
-      id: res.id,
-    }))
-
-    return {
-      page,
-      nodes: uniqueNodes,
-    }
-  }
-
-  public async getZoomLevel2DataAmount() {
-    const countResult = await this.triplyService.queryTriplyData<{ total?: string }>(
-      this.ZoomLevel2CountEndpoint,
-      { total: true },
-      undefined
-    )
-
-    const total = countResult?.data.pop()?.total ?? '0'
-
-    return {
-      total,
-    }
-  }
 
   public async getZoomLevel3Data(id: string) {
     const result = await this.triplyService.queryTriplyData<ArchivesDetailZoomLevel3DataType>(

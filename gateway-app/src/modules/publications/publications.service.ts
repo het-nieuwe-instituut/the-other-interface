@@ -3,19 +3,7 @@ import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { ZoomLevel3Service } from '../zoomLevel3/zoomLevel3.service'
 import { TriplyUtils } from '../triply/triply.utils'
-import { getHttpThumbnailOrNull, getUniqueById } from '../util/helpers'
-
-export interface PublicationsZoomLevel2Data {
-  thumbnail: string
-  title: string
-  id: string
-}
-
-export const publicationsZoomLevel2DataKeys: KeysToVerify<PublicationsZoomLevel2Data> = {
-  thumbnail: true,
-  title: true,
-  id: true,
-}
+import { getHttpThumbnailOrNull } from '../util/helpers'
 
 interface PublicationsZoomLevel3Data {
   thumbnail?: string
@@ -317,11 +305,6 @@ type PublicationsWithAuthors =
 @Injectable()
 export class PublicationsService {
   protected entityType = 'triply'
-  private readonly ZoomLevel2Endpoint =
-    'https://api.collectiedata.hetnieuweinstituut.nl/queries/zoom-2/books-landingPage/run'
-
-  private readonly ZoomLevel2CountEndpoint =
-    'https://api.collectiedata.hetnieuweinstituut.nl/queries/zoom-2/books-landingPage-count/run'
 
   private readonly ZoomLevel3Endpoint =
     'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/publications-recordPage/run?'
@@ -333,39 +316,6 @@ export class PublicationsService {
     @Inject(forwardRef(() => ZoomLevel3Service))
     private readonly zoomLevel3Service: ZoomLevel3Service
   ) {}
-
-  public async getZoomLevel2Data(page = 1, pageSize = 48) {
-    const result = await this.triplyService.queryTriplyData<PublicationsZoomLevel2Data>(
-      this.ZoomLevel2Endpoint,
-      publicationsZoomLevel2DataKeys,
-      { page, pageSize }
-    )
-
-    const uniqueNodes = getUniqueById(result.data).map(res => ({
-      thumbnail: res.thumbnail,
-      title: res.title,
-      id: res.id,
-    }))
-
-    return {
-      page,
-      nodes: uniqueNodes,
-    }
-  }
-
-  public async getZoomLevel2DataAmount() {
-    const countResult = await this.triplyService.queryTriplyData<{ total?: string }>(
-      this.ZoomLevel2CountEndpoint,
-      { total: true },
-      undefined
-    )
-
-    const total = countResult?.data.pop()?.total ?? '0'
-
-    return {
-      total,
-    }
-  }
 
   public async getZoomLevel3Data(id: string) {
     const result = await this.triplyService.queryTriplyData<PublicationsZoomLevel3Data>(

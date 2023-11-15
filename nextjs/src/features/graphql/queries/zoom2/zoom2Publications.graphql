@@ -1,5 +1,5 @@
-query Zoom2Publications($page: Int!, $pageSize: Int!) {
-    zoomLevel2(entityName: Publications, page: $page, pageSize: $pageSize) {
+query Zoom2Publications($page: Int!, $pageSize: Int!, $text: String) {
+    zoomLevel2(entityName: Publications, page: $page, pageSize: $pageSize, text: $text) {
         page,
         nodes {
             title
@@ -9,8 +9,8 @@ query Zoom2Publications($page: Int!, $pageSize: Int!) {
     }
 }
 
-query Zoom2PublicationsAmount {
-    zoomLevel2Amount(entityName: Publications) {
+query Zoom2PublicationsAmount($text: String) {
+    zoomLevel2Amount(entityName: Publications, text: $text) {
         total
     }
 }
