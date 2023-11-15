@@ -147,13 +147,8 @@ export class ArchivesService {
   private readonly ZoomLevel2SearchEndpoint =
     'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/archives-landingPage/run'
 
-  private readonly ZoomLevel2SearchCountEndpoint =
-    'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/archives-landingPage-count/run'
-
   private readonly ZoomLevel2TextSearchEndpoint =
     'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/archives-textSearch/run'
-  private readonly ZoomLevel2TextSearchCountEndpoint =
-    'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/archives-textSearch-Count/run'
 
   // TODO: change to convention when Triply adds this to normal space
   // private readonly archivesDescriptionLevelEndpoint =
@@ -216,33 +211,6 @@ export class ArchivesService {
     return {
       page,
       nodes: uniqueNodes,
-    }
-  }
-
-  public async getZoomLevel2DataAmount(text?: string) {
-    let countResult
-
-    if (text) {
-      countResult = await this.triplyService.queryTriplyData<{ total?: string }>(
-        this.ZoomLevel2TextSearchCountEndpoint,
-        { total: true },
-        undefined,
-        { text }
-      )
-    } else {
-      countResult = await this.triplyService.queryTriplyData<{ total?: string }>(
-        this.ZoomLevel2SearchCountEndpoint,
-        { total: true },
-        undefined
-      )
-    }
-
-    const total = countResult?.data.pop()?.total ?? '0'
-
-    console.log('getZoomLevel2DataAmount', { text, data: countResult?.data })
-
-    return {
-      total,
     }
   }
 

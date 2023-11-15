@@ -6,6 +6,8 @@ import { PublicationsService } from '../publications/publications.service'
 import { CustomError } from '../util/customError'
 import { PaginationArgs } from '../util/paginationArgs.type'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
+import { TriplyService } from '../triply/triply.service'
+import { TriplyUtils } from '../triply/triply.utils'
 
 @Injectable()
 export class ZoomLevel2Service {
@@ -13,7 +15,8 @@ export class ZoomLevel2Service {
     private readonly archivesService: ArchivesService,
     private readonly objectsService: ObjectsService,
     private readonly peopleService: PeopleService,
-    private readonly publicationsService: PublicationsService
+    private readonly publicationsService: PublicationsService,
+    private readonly triplyService: TriplyService
   ) {}
   public getData(entity: EntityNames, paginationArgs: PaginationArgs, text?: string) {
     switch (entity) {
@@ -55,23 +58,33 @@ export class ZoomLevel2Service {
 
   public getDataAmount(entity: EntityNames, text?: string) {
     switch (entity) {
-      case EntityNames.Archives: {
-        return this.archivesService.getZoomLevel2DataAmount(text)
-      }
-      case EntityNames.Objects: {
-        return this.objectsService.getZoomLevel2DataAmount(text)
-      }
+      case EntityNames.Archives:
+      case EntityNames.Objects:
+      case EntityNames.People:
+      case EntityNames.Publications:
+        return this.getZoomLevel2DataAmount(entity, text)
 
-      case EntityNames.People: {
-        return this.peopleService.getZoomLevel2DataAmount(text)
-      }
-      case EntityNames.Publications: {
-        return this.publicationsService.getZoomLevel2DataAmount(text)
-      }
       case EntityNames.Stories:
       default: {
         throw CustomError.internalCritical(`Zoomlevel 2 for ${entity} not implemented`)
       }
+    }
+  }
+
+  private async getZoomLevel2DataAmount(type: EntityNames, text?: string) {
+    const uri = TriplyUtils.getUriForLevel2DataAmount(type, text)
+
+    const countResult = await this.triplyService.queryTriplyData<{ total?: string }>(
+      uri,
+      { total: true },
+      undefined,
+      text ? { text } : undefined
+    )
+
+    const total = countResult?.data.pop()?.total ?? '0'
+
+    return {
+      total,
     }
   }
 }

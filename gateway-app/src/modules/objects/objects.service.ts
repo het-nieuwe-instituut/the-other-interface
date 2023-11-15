@@ -100,13 +100,9 @@ export class ObjectsService {
   // TODO: replace ZoomLevel2SearchEndpoint and ZoomLevel2SearchCountEndpoint with testing environment endpoints
   private readonly ZoomLevel2SearchEndpoint =
     'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/objects-landingPage/run'
-  private readonly ZoomLevel2SearchCountEndpoint =
-    'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/objects-landingPage-count/run'
 
   private readonly ZoomLevel2TextSearchEndpoint =
     'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/objects-textSearch/run'
-  private readonly ZoomLevel2TextSearchCountEndpoint =
-    'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/objects-textSearch-Count/run'
 
   private readonly ZoomLevel3Endpoint =
     'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/objects-recordPage/run?'
@@ -140,31 +136,6 @@ export class ObjectsService {
     return {
       page,
       nodes: uniqueNodes,
-    }
-  }
-
-  public async getZoomLevel2DataAmount(text?: string) {
-    let countResult
-
-    if (text) {
-      countResult = await this.triplyService.queryTriplyData<{ total?: string }>(
-        this.ZoomLevel2TextSearchCountEndpoint,
-        { total: true },
-        undefined,
-        { text }
-      )
-    } else {
-      countResult = await this.triplyService.queryTriplyData<{ total?: string }>(
-        this.ZoomLevel2SearchCountEndpoint,
-        { total: true },
-        undefined
-      )
-    }
-
-    const total = countResult?.data.pop()?.total ?? '0'
-
-    return {
-      total,
     }
   }
 

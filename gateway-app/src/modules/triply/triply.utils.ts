@@ -125,6 +125,49 @@ export class TriplyUtils {
     }
   }
 
+  public static getUriForLevel2DataAmount(type: EntityNames, text?: string) {
+    const baseURL =
+      'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing'
+
+    if (text) {
+      switch (type) {
+        case EntityNames.People:
+          return `${baseURL}/people-textSearch-Count/run`
+        case EntityNames.Archives:
+          return `${baseURL}/archives-textSearch-Count/run`
+        case EntityNames.Publications:
+          return `${baseURL}/publications-textSearch-Count/run`
+        case EntityNames.Objects:
+          return `${baseURL}/objects-textSearch-Count/run`
+        case EntityNames.Media:
+          throw CustomError.externalCritical('not a triply type')
+        case EntityNames.Stories:
+          throw CustomError.externalCritical('not a triply type')
+        case EntityNames.External:
+        default:
+          throw CustomError.externalCritical(`uri for type ${type} not implemented`)
+      }
+    }
+
+    switch (type) {
+      case EntityNames.People:
+        return `${baseURL}/people-landingPage-count/run`
+      case EntityNames.Archives:
+        return `${baseURL}/archives-landingPage-count/run`
+      case EntityNames.Publications:
+        return `${baseURL}/publications-landingPage-count/run`
+      case EntityNames.Objects:
+        return `${baseURL}/objects-landingPage-count/run`
+      case EntityNames.Media:
+        throw CustomError.externalCritical('not a triply type')
+      case EntityNames.Stories:
+        throw CustomError.externalCritical('not a triply type')
+      case EntityNames.External:
+      default:
+        throw CustomError.externalCritical(`uri for type ${type} not implemented`)
+    }
+  }
+
   public static combineObjectArray<T extends object>(results: T[]): T | null {
     const output: Partial<Record<keyof T, string>> = {}
 
