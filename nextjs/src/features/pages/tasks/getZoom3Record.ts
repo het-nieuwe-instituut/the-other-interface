@@ -44,6 +44,7 @@ export async function getZoom3RecordTask(type: Category, payload: Payload, api: 
 
     return {
       ...item,
+      description: item?.description ?? '',
       locale: 'nl',
     }
   } catch (e) {

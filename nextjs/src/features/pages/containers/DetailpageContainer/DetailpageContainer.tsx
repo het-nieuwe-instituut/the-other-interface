@@ -41,7 +41,7 @@ export const DetailpageContainer: React.FC<Props> = ({ editorialData, category }
         />
       )}
 
-      {CATEGORIES_TO_SHOW_EDITORIAL.includes(category) && <RecordLayer data={['test']} />}
+      {CATEGORIES_TO_SHOW_EDITORIAL.includes(category) && <RecordLayer />}
     </Box>
   )
 }

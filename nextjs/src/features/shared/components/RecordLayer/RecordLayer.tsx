@@ -3,13 +3,8 @@ import { Box, Grid, GridItem, useTheme } from '../../configs/chakra'
 import { StoryMeta } from '../Meta/StoryMeta'
 import { RecordHeader } from '../Record/RecordHeader/RecordHeader'
 
-interface Props {
-  data: unknown[]
-}
-
-export const RecordLayer: React.FC<Props> = ({ data }) => {
+export const RecordLayer = () => {
   const theme = useTheme()
-  console.log(data)
 
   return (
     <Box position={'relative'} zIndex={2} backgroundColor={'ivoryAlpha.95'}>
