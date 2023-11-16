@@ -12,7 +12,9 @@ export const RecordHeader = () => {
     <Box>
       <RecordTitle title={record?.title ?? ''} />
       <RecordDescription description={record?.description ?? ''} />
-      <RecordCarousel imageUrls={record?.thumbnail ?? []} />
+      {record?.thumbnail && record?.thumbnail.length > 0 && (
+        <RecordCarousel imageUrls={record?.thumbnail ?? []} />
+      )}
     </Box>
   )
 }
