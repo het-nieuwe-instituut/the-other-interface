@@ -6,6 +6,7 @@ import { SuggestionBar } from './SuggestionBar/SuggestionBar'
 import { FilterInput, CloseButton } from './fragments'
 import { CategorySuggestions } from '../CategorySuggestions/CategorySuggestions'
 import { GoButton } from './fragments/GoButton'
+import { SearchButton } from './fragments/SearchButton'
 
 export const GalaxySearchBar: React.FC = () => {
   const {
@@ -27,11 +28,9 @@ export const GalaxySearchBar: React.FC = () => {
     <Grid
       position={'relative'}
       height="60px"
-      templateColumns={
-        isSearchModeActive
-          ? '145px minmax(20px, 1fr) minmax(60px, auto)'
-          : '145px minmax(20px, 1fr)'
-      }
+      templateColumns={`145px minmax(20px, 1fr) ${
+        isSearchModeActive ? 'minmax(95px, auto)' : '23px'
+      } `}
       gap="15px"
       borderRadius={isCategorySuggestionsOpen ? '0 0 5px 5px' : '5px'}
       transition={'border-radius 0.3s ease-in-out'}
@@ -77,12 +76,16 @@ export const GalaxySearchBar: React.FC = () => {
         </Grid>
       </Box>
 
-      {isSearchModeActive && (
-        <Flex gap="12px" alignItems={'center'} zIndex={'inherit'}>
-          <GoButton handleClick={handleGoClick} />
-          <CloseButton handleClick={handleSearchModeClose} />
-        </Flex>
-      )}
+      <Flex gap="12px" alignItems={'center'} justifyContent={'flex-end'} zIndex={'inherit'}>
+        {isSearchModeActive ? (
+          <>
+            <GoButton handleClick={handleGoClick} />
+            <CloseButton handleClick={handleSearchModeClose} />
+          </>
+        ) : (
+          <SearchButton />
+        )}
+      </Flex>
 
       <SuggestionBar isOpen={isCategorySuggestionsOpen}>
         <CategorySuggestions />

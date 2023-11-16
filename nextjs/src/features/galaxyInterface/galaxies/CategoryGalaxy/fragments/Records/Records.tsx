@@ -34,7 +34,7 @@ export const Records: React.FC<Props> = ({ pageAmount }) => {
     return (
       <Box width={'100%'}>
         <Text
-          textStyle="socialLarge.lg"
+          textStyle="headingTimesLarge.lg"
           justifyItems={'flex-start'}
           marginBottom={GALAXY_EDITORIAL_LAYER_PART}
           color="blueAlpha.100"
