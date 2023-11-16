@@ -53,12 +53,17 @@ export const usePresenter = () => {
     setInputValue(search || '')
   }, [search, pageCategory, dispatch])
 
-  const handleSearchModeClose = useCallback(() => {
-    dispatch(sharedActions.searchModeActive({ isSearchModeActive: false }))
-    dispatch(sharedActions.categorySuggestionsOpen({ categorySuggestionsOpen: false }))
+  const handleSearchModeClose = useCallback(
+    (resetFilters = true) => {
+      dispatch(sharedActions.searchModeActive({ isSearchModeActive: false }))
+      dispatch(sharedActions.categorySuggestionsOpen({ categorySuggestionsOpen: false }))
 
-    resetSearchFilters()
-  }, [dispatch, resetSearchFilters])
+      if (resetFilters) {
+        resetSearchFilters()
+      }
+    },
+    [dispatch, resetSearchFilters]
+  )
 
   const handleGoClick = useCallback(() => {
     const searchParam = inputValue ? `&search=${inputValue}` : ''
@@ -66,7 +71,7 @@ export const usePresenter = () => {
     url = addLocaleToUrl(url, lang)
     router.push(url)
 
-    handleSearchModeClose()
+    handleSearchModeClose(false)
   }, [inputValue, searchCategory, router, handleSearchModeClose, lang])
 
   useEffect(() => {
