@@ -9,7 +9,7 @@ type ResponsiveImageProps = {
   maxHeight?: string
   size?: string
   css?: BoxProps['css']
-  fit?: 'contain' | 'cover'
+  fit?: 'contain' | 'cover' | 'fill' | 'none' | 'scale-downw'
   onClick?: () => void
 }
 
@@ -31,7 +31,6 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
         src={fallbackImage}
         alt={alt || 'Fallback image'}
         sizes={size}
-        layout="fill"
         style={{
           transition: 'opacity 0.5s ease-out',
           opacity: isSuccessfullyLoaded ? 0 : 1,
@@ -41,6 +40,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
           objectFit: 'contain',
           objectPosition: 'bottom',
         }}
+        fill={true}
       />
 
       {/* Actual Image */}
@@ -48,7 +48,6 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
         src={src || ''}
         alt={alt || 'Actual image'}
         sizes={size}
-        layout="fill"
         objectFit={fit}
         quality={100}
         onClick={onClick}
@@ -60,6 +59,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
           left: 0,
           objectPosition: 'bottom',
         }}
+        fill={true}
       />
     </Box>
   )

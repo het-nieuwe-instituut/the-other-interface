@@ -38,7 +38,7 @@ const RecordCarousel = (props: { imageUrls: string[] }) => {
           src={selectedImage ?? props.imageUrls[0]}
           css={{ height: '100%' }}
           maxHeight="523px"
-          fit="cover"
+          fit="fill"
         />
       </Box>
       <Flex mt="30px" position={'relative'} width={'100%'}>
@@ -53,7 +53,7 @@ const RecordCarousel = (props: { imageUrls: string[] }) => {
                 cursor: 'pointer',
               }}
               maxHeight="103.702px"
-              fit="cover"
+              fit="fill"
               onClick={() => handleThumbnailClick(url)}
             />
           </Box>
