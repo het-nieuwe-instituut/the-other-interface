@@ -12,7 +12,7 @@ export class PeopleZoomLevel3DetailType {
   @Field(() => EntityNames, { nullable: true })
   public type: EntityNames
 
-  @Field(() => String, { nullable: true })
+  @Field(() => [String], { nullable: true })
   public thumbnail: string
 
   @Field(() => String, { nullable: true })

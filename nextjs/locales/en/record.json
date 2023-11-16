@@ -48,5 +48,8 @@
   "metaPublication_publicationPlace": "Place of publication",
   "metaPublication_place": "Place",
   "relatedArchive": "{{count}} related archive items",
-  "relatedArchive_one": "1 related archive item"
+  "relatedArchive_one": "1 related archive item",
+
+  "readMore": "Read more",
+  "readLess": "Read less"
 }

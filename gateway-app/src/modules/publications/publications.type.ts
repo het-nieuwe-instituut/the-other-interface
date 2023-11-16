@@ -17,7 +17,7 @@ export class PublicationZoomLevel3DetailType {
   @Field(() => EntityNames, { nullable: true })
   public type: EntityNames
 
-  @Field(() => String, { nullable: true })
+  @Field(() => [String], { nullable: true })
   public thumbnail: string
 
   @Field(() => String, { nullable: true })
@@ -25,6 +25,9 @@ export class PublicationZoomLevel3DetailType {
 
   @Field(() => String, { nullable: true })
   public yearOfPublication: string
+
+  @Field(() => String, { nullable: true })
+  public description: string
 }
 
 registerEnumType(PublicationsZoomLevel3Types, { name: 'PublicationsZoomLevel3Types' })

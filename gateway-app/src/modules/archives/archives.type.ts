@@ -19,11 +19,14 @@ export class ArchiveZoomLevel3DetailType {
   @Field(() => String, { nullable: true })
   public title: string
 
-  @Field(() => String, { nullable: true })
+  @Field(() => [String], { nullable: true })
   public thumbnail: string
 
   @Field(() => String, { nullable: true })
   public objectNumber?: string
+
+  @Field(() => String, { nullable: true })
+  public description?: string | null
 }
 
 registerEnumType(ArchivesZoomLevel3Types, { name: 'ArchivesZoomLevel3Types' })

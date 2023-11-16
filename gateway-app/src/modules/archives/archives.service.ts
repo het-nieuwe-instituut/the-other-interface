@@ -170,7 +170,7 @@ export class ArchivesService {
       ...TriplyUtils.combineObjectArray(result.data),
       type: EntityNames.Archives,
       id,
-      thumbnail: getHttpThumbnailOrNull(result.data[0]?.thumbnail),
+      thumbnail: getHttpThumbnailOrNull(result.data[0]?.thumbnail)?.split(';'),
     }
   }
 

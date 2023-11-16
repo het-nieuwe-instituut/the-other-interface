@@ -1,5 +1,5 @@
 'use client'
-import { Flex, Text, Link, theme } from '../../configs/chakra'
+import { Flex, Text, Link } from '../../configs/chakra'
 
 import { FOOTER_Z_INDEX } from '../../constants/mainConstants'
 import { capitalizeFirstLetter } from '../../utils/text'
@@ -21,7 +21,7 @@ export const Footer = ({ menupages }: Props) => {
       marginX={'auto'}
       paddingTop={'9'}
       paddingBottom={'9'}
-      background={theme.colors.white}
+      backgroundColor={'ivoryAlpha.95'}
       position={'relative'}
       zIndex={FOOTER_Z_INDEX}
     >

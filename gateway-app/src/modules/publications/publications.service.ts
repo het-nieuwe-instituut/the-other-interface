@@ -329,7 +329,7 @@ export class PublicationsService {
       ...TriplyUtils.combineObjectArray(result.data),
       type: EntityNames.Publications,
       id,
-      thumbnail: getHttpThumbnailOrNull(result.data[0]?.thumbnail),
+      thumbnail: getHttpThumbnailOrNull(result.data[0]?.thumbnail)?.split(';'),
     }
   }
 

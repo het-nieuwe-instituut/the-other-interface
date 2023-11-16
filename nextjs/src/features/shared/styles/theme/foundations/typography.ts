@@ -2,11 +2,13 @@ import colors from '../foundations/colors'
 
 const oldTextStyles = {
   h1: {
-    color: `${colors.black}`,
-    fontSize: ['48px', '52px', '62px', '62px'],
-    fontWeight: '900',
-    lineHeight: '118%',
-    fontFamily: 'Univers bold',
+    color: `${colors.blackAlpha}`,
+    fontSize: '80px',
+    fontFamily: "'Impact'",
+    fontWeight: '400',
+    fontStyle: 'normal',
+    lineHeight: '80px',
+    latterSpacing: '-0.8px',
   },
   h2: {
     color: `${colors.black}`,
@@ -107,6 +109,13 @@ const oldTextStyles = {
 
     /* or 16px */
     textShadow: '0px 0px 4px #CCCED0, 0px 0px 4px #CCCED0',
+  },
+  recordText: {
+    fontSize: ['32px', '32px', '32px', '21px'],
+    fontFamily: "'Social'",
+    fontStyle: 'normal',
+    lineHeight: '130%',
+    letterSpacing: ['0.32px', '0.32px', '0.32px', '0.21px'],
   },
 }
 

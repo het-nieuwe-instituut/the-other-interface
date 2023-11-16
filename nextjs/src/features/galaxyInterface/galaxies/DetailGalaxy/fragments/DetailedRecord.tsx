@@ -42,10 +42,13 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
         gap="2px"
       >
         <ResponsiveImage
-          src={record?.thumbnail}
+          src={record?.thumbnail?.[0] ?? ''}
           alt={record?.title}
           maxHeight="calc(100% - 3vw - 8px)" // where 2.6vw are a texts' line heights, 8px are gaps
           size={'25vw'}
+          css={{
+            flex: `1 1 calc(100% - 3vw - 8px)`,
+          }}
         />
 
         <Flex

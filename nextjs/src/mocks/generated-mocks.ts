@@ -3,9 +3,10 @@ import { ArchiveZoomLevel3DetailType, ArchivesFondsCreatorType, ArchivesFondsZoo
 export const anArchiveZoomLevel3DetailType = (overrides?: Partial<ArchiveZoomLevel3DetailType>, _relationshipsToOmit: Array<string> = []): ArchiveZoomLevel3DetailType => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ArchiveZoomLevel3DetailType']);
     return {
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'facere',
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'tempora',
         objectNumber: overrides && overrides.hasOwnProperty('objectNumber') ? overrides.objectNumber! : 'consequatur',
-        thumbnail: overrides && overrides.hasOwnProperty('thumbnail') ? overrides.thumbnail! : 'consequatur',
+        thumbnail: overrides && overrides.hasOwnProperty('thumbnail') ? overrides.thumbnail! : ['consequatur'],
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'enim',
         type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : EntityNames.Archives,
     };
@@ -868,7 +869,7 @@ export const anObjectsZoomLevel3DetailType = (overrides?: Partial<ObjectsZoomLev
         scale: overrides && overrides.hasOwnProperty('scale') ? overrides.scale! : 'qui',
         startDate: overrides && overrides.hasOwnProperty('startDate') ? overrides.startDate! : 'asperiores',
         techniques: overrides && overrides.hasOwnProperty('techniques') ? overrides.techniques! : [relationshipsToOmit.includes('ObjectTechniqueType') ? {} as ObjectTechniqueType : anObjectTechniqueType({}, relationshipsToOmit)],
-        thumbnail: overrides && overrides.hasOwnProperty('thumbnail') ? overrides.thumbnail! : 'esse',
+        thumbnail: overrides && overrides.hasOwnProperty('thumbnail') ? overrides.thumbnail! : ['esse'],
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'ut',
         titleType: overrides && overrides.hasOwnProperty('titleType') ? overrides.titleType! : 'unde',
         type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : EntityNames.Archives,
@@ -932,7 +933,7 @@ export const aPeopleZoomLevel3DetailType = (overrides?: Partial<PeopleZoomLevel3
         relatedItem: overrides && overrides.hasOwnProperty('relatedItem') ? overrides.relatedItem! : 'ad',
         relatedItemLabel: overrides && overrides.hasOwnProperty('relatedItemLabel') ? overrides.relatedItemLabel! : 'eum',
         startDate: overrides && overrides.hasOwnProperty('startDate') ? overrides.startDate! : 'sunt',
-        thumbnail: overrides && overrides.hasOwnProperty('thumbnail') ? overrides.thumbnail! : 'soluta',
+        thumbnail: overrides && overrides.hasOwnProperty('thumbnail') ? overrides.thumbnail! : ['soluta'],
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'illum',
         type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : EntityNames.Archives,
     };
@@ -953,9 +954,10 @@ export const aPublicationAuthorType = (overrides?: Partial<PublicationAuthorType
 export const aPublicationZoomLevel3DetailType = (overrides?: Partial<PublicationZoomLevel3DetailType>, _relationshipsToOmit: Array<string> = []): PublicationZoomLevel3DetailType => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'PublicationZoomLevel3DetailType']);
     return {
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'beatae',
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'a',
         objectNumber: overrides && overrides.hasOwnProperty('objectNumber') ? overrides.objectNumber! : 'quibusdam',
-        thumbnail: overrides && overrides.hasOwnProperty('thumbnail') ? overrides.thumbnail! : 'corporis',
+        thumbnail: overrides && overrides.hasOwnProperty('thumbnail') ? overrides.thumbnail! : ['corporis'],
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'ab',
         type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : EntityNames.Archives,
         yearOfPublication: overrides && overrides.hasOwnProperty('yearOfPublication') ? overrides.yearOfPublication! : 'possimus',
