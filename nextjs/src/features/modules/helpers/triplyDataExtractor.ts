@@ -36,7 +36,7 @@ const extractTriplyFields = (
     const item = record.object
     return {
       ...defaultFields,
-      imageUrl: item?.thumbnail ?? defaultFields.imageUrl,
+      imageUrl: item?.thumbnail?.[0] ?? defaultFields.imageUrl,
       title: item?.title ?? defaultFields?.title,
       description: item?.objectNumber ?? defaultFields?.description,
     }

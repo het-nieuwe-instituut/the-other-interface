@@ -13,6 +13,8 @@ export const Record: React.FC<Props> = ({ record }) => {
   const { id, category, position, grid } = record
   const { recordDetails, isLoading, handleClick } = usePresenter(id, category)
 
+  debugger
+
   if (!recordDetails && !isLoading) return null
 
   return (
@@ -32,7 +34,7 @@ export const Record: React.FC<Props> = ({ record }) => {
         style={{ ...position }}
       >
         <ResponsiveImage
-          src={recordDetails?.thumbnail}
+          src={recordDetails?.thumbnail?.[0]}
           alt={recordDetails?.title}
           maxHeight={'calc(100% - 2vw - 5px)'} // where 1.6vw are a texts' line heights, 5px are gaps
           size={'11vw'}

@@ -32,14 +32,14 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
         alt={alt || 'Fallback image'}
         sizes={size}
         layout="fill"
-        objectFit="contain"
-        objectPosition="bottom"
         style={{
           transition: 'opacity 0.5s ease-out',
           opacity: isSuccessfullyLoaded ? 0 : 1,
           position: 'absolute',
           top: 0,
           left: 0,
+          objectFit: 'contain',
+          objectPosition: 'bottom',
         }}
       />
 
@@ -50,7 +50,6 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
         sizes={size}
         layout="fill"
         objectFit={fit}
-        objectPosition="bottom"
         quality={100}
         onClick={onClick}
         style={{
@@ -59,6 +58,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
           position: 'absolute',
           top: 0,
           left: 0,
+          objectPosition: 'bottom',
         }}
       />
     </Box>

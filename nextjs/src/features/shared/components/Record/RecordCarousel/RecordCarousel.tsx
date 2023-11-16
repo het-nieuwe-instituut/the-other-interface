@@ -35,7 +35,7 @@ const RecordCarousel = (props: { imageUrls: string[] }) => {
     <Flex direction="column" align="center" mt={8}>
       <Box height="523.605px" width="100%">
         <ResponsiveImage
-          src={selectedImage}
+          src={selectedImage ?? props.imageUrls[0]}
           css={{ height: '100%' }}
           maxHeight="523px"
           fit="cover"

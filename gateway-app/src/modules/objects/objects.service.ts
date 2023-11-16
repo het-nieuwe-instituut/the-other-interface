@@ -102,7 +102,7 @@ export class ObjectsService {
       ...TriplyUtils.combineObjectArray(result.data),
       type: EntityNames.Objects,
       id,
-      thumbnail: getHttpThumbnailOrNull(result.data[0]?.thumbnail),
+      thumbnail: getHttpThumbnailOrNull(result.data[0]?.thumbnail)?.split(';'),
     }
   }
 

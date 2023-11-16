@@ -86,7 +86,7 @@ export class PeopleService {
       ...TriplyUtils.combineObjectArray(result.data),
       type: EntityNames.People,
       id,
-      thumbnail: getHttpThumbnailOrNull(result.data[0]?.thumbnail),
+      thumbnail: getHttpThumbnailOrNull(result.data[0]?.thumbnail)?.split(';'),
     }
   }
 }

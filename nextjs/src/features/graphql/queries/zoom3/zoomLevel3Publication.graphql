@@ -4,5 +4,6 @@ query ZoomLevel3Publication($id: String!) {
         __typename
         title
         thumbnail
+        description
     }
 }

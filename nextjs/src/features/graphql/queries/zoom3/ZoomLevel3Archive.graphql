@@ -4,5 +4,6 @@ query ZoomLevel3Archive($id: String!) {
         id
         title
         thumbnail
+        description
     }
 }
