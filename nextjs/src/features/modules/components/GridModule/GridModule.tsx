@@ -65,7 +65,7 @@ export const GridModule: React.FC<Props> = props => {
 
     return (
       <Grid mb={5} templateColumns={gridBreakpoints} gap={5}>
-        <GridItem maxWidth={'55rem'} colSpan={2} paddingRight={31.5} paddingBottom={5}>
+        <GridItem colSpan={2} paddingRight={31.5} paddingBottom={5}>
           <Markdown>{props.component.description}</Markdown>
         </GridItem>
         {props.component.featuredFields && (

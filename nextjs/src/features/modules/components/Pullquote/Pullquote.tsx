@@ -15,9 +15,7 @@ export const Pullquote: React.FC<Props> = props => {
       paddingBottom={props.component.pullquoteModuleLayout?.spacingBottom ?? undefined}
       paddingTop={props.component.pullquoteModuleLayout?.spacingTop ?? undefined}
     >
-      <ChakraText textStyle={'pullquote'} maxWidth={'55rem'}>
-        {props.component.text}
-      </ChakraText>
+      <ChakraText textStyle={'pullquote'}>{props.component.text}</ChakraText>
     </Box>
   )
 }
