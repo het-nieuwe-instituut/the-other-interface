@@ -22,7 +22,7 @@ type Props = {
 }
 
 export const StoryMeta: React.FC<Props> = ({ story }) => {
-  const { commonT, storiesT } = usePresenter()
+  const { commonT } = usePresenter()
 
   // const linkedPeopleRecords = story?.attributes?.triplyRecords?.data.filter(
   //   d => d.attributes?.type === EnumTriplyrecordType.People && !!d.attributes.recordId
@@ -149,13 +149,13 @@ function formatPublicationDate(
   return undefined
 }
 
-function formatTimeframe(timeframe: ComponentCoreTimeframe) {
-  const timeframes = [timeframe.yearStart, timeframe.yearEnd].filter(item => !!item)
-  return timeframes.join(' - ')
-}
+// function formatTimeframe(timeframe: ComponentCoreTimeframe) {
+//   const timeframes = [timeframe.yearStart, timeframe.yearEnd].filter(item => !!item)
+//   return timeframes.join(' - ')
+// }
 
-function formatAuthor(author: Author) {
-  return `${capitalizeFirstLetter(author.firstName)}${
-    author.insertion ? ' ' + author.insertion : ''
-  }${' ' + capitalizeFirstLetter(author.lastName)}`
-}
+// function formatAuthor(author: Author) {
+//   return `${capitalizeFirstLetter(author.firstName)}${
+//     author.insertion ? ' ' + author.insertion : ''
+//   }${' ' + capitalizeFirstLetter(author.lastName)}`
+// }
