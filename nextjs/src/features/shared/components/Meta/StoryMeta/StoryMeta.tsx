@@ -27,7 +27,6 @@ export const StoryMeta: React.FC<Props> = () => {
 
   const { record: story } = usePresenter()
 
-  console.log('story', story)
   // const linkedPeopleRecords = story?.attributes?.triplyRecords?.data.filter(
   //   d => d.attributes?.type === EnumTriplyrecordType.People && !!d.attributes.recordId
   // )
