@@ -12,6 +12,7 @@ export const CategoryGalaxy: React.FC = () => {
     isResultAmountLoading,
     currentPageNumber,
     pageAmount,
+    isResultEmpty,
     increasePageNumber,
     decreasePageNumber,
   } = usePresenter()
@@ -37,6 +38,7 @@ export const CategoryGalaxy: React.FC = () => {
             isResultAmountLoading={isResultAmountLoading}
             handleLeftClick={decreasePageNumber}
             handleRightClick={increasePageNumber}
+            isResultEmpty={isResultEmpty}
           />
         }
       />
