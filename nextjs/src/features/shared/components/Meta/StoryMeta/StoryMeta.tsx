@@ -1,18 +1,18 @@
 'use client'
-import { ButtonsGrid } from '@/features/shared/components/ButtonsGrid/ButtonsGrid'
-import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+// import { ButtonsGrid } from '@/features/shared/components/ButtonsGrid/ButtonsGrid'
+// import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { formatDate } from '@/features/shared/utils/dates'
-import { getPeoplePathForTriplyRecordId } from '@/features/shared/utils/links'
-import { keyExtractor } from '@/features/shared/utils/lists'
-import { capitalizeFirstLetter } from '@/features/shared/utils/text'
-import { Box, Link, Text } from '@chakra-ui/react'
-import NextLink from 'next/link'
+// import { getPeoplePathForTriplyRecordId } from '@/features/shared/utils/links'
+// import { keyExtractor } from '@/features/shared/utils/lists'
+// import { capitalizeFirstLetter } from '@/features/shared/utils/text'
+import { Box, Text } from '@chakra-ui/react'
+// import NextLink from 'next/link'
 import {
-  Author,
-  ComponentCoreTimeframe,
+  // Author,
+  // ComponentCoreTimeframe,
   EnumComponentcorepublicationdateDisplaytype,
-  EnumComponentmodulesbuttonsmoduleButtonstyle,
-  EnumTriplyrecordType,
+  // EnumComponentmodulesbuttonsmoduleButtonstyle,
+  // EnumTriplyrecordType,
   StoryEntity,
 } from 'src/generated/graphql'
 import { usePresenter } from './usePresenter'
