@@ -4,7 +4,7 @@ import initApiClientService from '../../utils/initApiClientService'
 import { useSearchParams } from 'next/navigation'
 import { PublicationState } from '../../types/enums'
 
-export function useStoryById(id: string, isDraftMode: boolean) {
+export function useStoryById(id: string, isDraftMode?: boolean) {
   const api = initApiClientService()
   const searchParams = useSearchParams()
   const lang = searchParams?.get('lang')

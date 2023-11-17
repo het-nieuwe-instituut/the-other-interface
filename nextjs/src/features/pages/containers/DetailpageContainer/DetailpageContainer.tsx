@@ -1,14 +1,11 @@
 'use client'
 import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
-import { EditorialLayer } from '@/features/shared/components/EditorialLayer/EditorialLayer'
 import { StoryByIdQuery, LandingpageBySlugQuery } from 'src/generated/graphql'
 import { Box } from '@chakra-ui/react'
 import { DetailGalaxy } from '@/features/galaxyInterface/galaxies/DetailGalaxy/DetailGalaxy'
-import { RecordHeader } from '@/features/shared/components/Record/RecordHeader/RecordHeader'
-import useScroll from '@/features/shared/hooks/useScroll'
-import { ScrollToContent } from '../../utils/utils'
-import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
-import { StoryMeta } from '@/features/shared/components/Meta/StoryMeta/StoryMeta'
+import { RecordLayer } from '@/features/shared/components/Layers/RecordLayer/RecordLayer'
+import { StoryLayer } from '@/features/shared/components/Layers/StoryLayer/StoryLayer'
+import { isCloudCategory, isStoryCategory } from '@/features/shared/utils/categories'
 
 export interface DetailpageEditorialLayer {
   title?: string | null
@@ -23,39 +20,24 @@ export interface DetailpageEditorialLayer {
     | null
 }
 interface Props {
-  editorialData: DetailpageEditorialLayer | null
   category: string
   isDraftMode: boolean
 }
 
-const CATEGORIES_TO_SHOW_EDITORIAL = ['objects', 'publications', 'people', 'archives']
+export const DetailpageContainer: React.FC<Props> = ({ category, isDraftMode }) => {
+  const Layer = () => {
+    if (isCloudCategory(category)) return <RecordLayer />
+    if (isStoryCategory(category)) return <StoryLayer />
+    return null
+  }
 
-export const DetailpageContainer: React.FC<Props> = ({ editorialData, category, isDraftMode }) => {
-  const { scrollPosition } = useScroll()
-
-  const Header = CATEGORIES_TO_SHOW_EDITORIAL.includes(category) ? (
-    <RecordHeader />
-  ) : (
-    <PageHeader
-      showPointer={scrollPosition < 750}
-      handleClick={ScrollToContent}
-      title={editorialData?.title || undefined}
-      preface={editorialData?.description || undefined}
-    />
-  )
-
-  const Meta = CATEGORIES_TO_SHOW_EDITORIAL.includes(category) ? null : (
-    <StoryMeta isDraftMode={isDraftMode} />
-  )
   return (
     <Box backgroundColor="graph">
       <GalaxyInterface>
         <DetailGalaxy />
       </GalaxyInterface>
 
-      {editorialData && (
-        <EditorialLayer components={editorialData.components} Header={Header} Meta={Meta} />
-      )}
+      <Layer />
     </Box>
   )
 }

@@ -1,4 +1,4 @@
-import { CATEGORIES, Category } from '@/features/shared/utils/categories'
+import { Category, isStoryCategory } from '@/features/shared/utils/categories'
 import { getZoom3Queries } from './zoom3Config'
 import {
   Sdk,
@@ -27,7 +27,7 @@ export type Zoom3Record =
 
 export async function getZoom3RecordTask(type: Category, payload: Payload, api: Sdk) {
   try {
-    if (type === CATEGORIES.stories) {
+    if (isStoryCategory(type)) {
       const detail = await api?.storyById(payload)
       const story = (detail as StoryByIdQuery)?.storiesByLocale?.data?.[0]
       const record = extractStoryData(story as StoryEntity)

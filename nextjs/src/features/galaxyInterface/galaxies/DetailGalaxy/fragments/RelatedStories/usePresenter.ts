@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { CATEGORIES, CloudCategory } from '@/features/shared/utils/categories'
+import { CATEGORIES, CloudCategory, isStoryCategory } from '@/features/shared/utils/categories'
 import { PositioningTemplate } from '@/features/shared/types/position'
 import { useParams } from 'next/navigation'
 
@@ -38,8 +38,8 @@ export const usePresenter = () => {
   const positionedStories = useMemo(() => {
     if (!data?.relations) return []
 
-    const storiesRelations = data?.relations.find(
-      relation => relation.type?.toLocaleLowerCase() === CATEGORIES.stories
+    const storiesRelations = data?.relations.find(relation =>
+      isStoryCategory(relation.type?.toLocaleLowerCase())
     )?.randomRelations
 
     if (!storiesRelations) return []

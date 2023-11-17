@@ -19,7 +19,7 @@ import { usePresenter } from './usePresenter'
 
 type Story = StoryEntity
 type Props = {
-  isDraftMode: boolean
+  isDraftMode?: boolean
 }
 
 export const StoryMeta: React.FC<Props> = ({ isDraftMode }) => {
@@ -35,7 +35,8 @@ export const StoryMeta: React.FC<Props> = ({ isDraftMode }) => {
   return (
     <Box>
       {JSON.stringify(story)}
-      {/* <Box marginBottom={'md'}>
+
+      <Box marginBottom={'md'}>
         <Text textStyle={'micro'} marginBottom={1}>
           {commonT.t('published', {
             date: story?.attributes?.publicationDate
@@ -49,20 +50,20 @@ export const StoryMeta: React.FC<Props> = ({ isDraftMode }) => {
                 ),
           })}
         </Text>
-        {story.attributes?.author?.data?.attributes && (
+        {/* {story.attributes?.author?.data?.attributes && (
           <Text textStyle={'micro'}>
             {formatAuthor(story.attributes?.author?.data?.attributes)}
           </Text>
-        )}
+        )} */}
       </Box>
-
+      {/* 
       {story.attributes?.shortDescription && (
         <Text textStyle={'micro'} marginBottom={'md'}>
           {story.attributes?.shortDescription}
         </Text>
-      )}
+      )} */}
 
-      {!!story.attributes?.timeframe && (
+      {/* {!!story.attributes?.timeframe && (
         <Box marginBottom={'md'}>
           <Text textStyle={'h5'} mb={1}>
             {capitalizeFirstLetter(storiesT.t('time') ?? '')}
@@ -73,8 +74,8 @@ export const StoryMeta: React.FC<Props> = ({ isDraftMode }) => {
             </NextLink>
           </Text>
         </Box>
-      )}
-
+      )} */}
+      {/* 
       {!!linkedPeopleRecords?.length && (
         <Box marginBottom={'md'}>
           <Text textStyle={'h5'} mb={1}>
@@ -101,9 +102,9 @@ export const StoryMeta: React.FC<Props> = ({ isDraftMode }) => {
             })}
           </Box>
         </Box>
-      )}
+      )} */}
 
-      {!!story.attributes?.locations?.data.length && (
+      {/* {!!story.attributes?.locations?.data.length && (
         <Box marginBottom={'md'}>
           <Text textStyle={'h5'} mb={1}>
             {capitalizeFirstLetter(storiesT.t('locations') ?? '')}
@@ -125,8 +126,8 @@ export const StoryMeta: React.FC<Props> = ({ isDraftMode }) => {
             })}
           </Box>
         </Box>
-      )}
-      {story.attributes?.storyLinks && (
+      )} */}
+      {/* {story.attributes?.storyLinks && (
         <ButtonsGrid
           buttonLayoutStyle={{
             whiteSpace: 'normal',

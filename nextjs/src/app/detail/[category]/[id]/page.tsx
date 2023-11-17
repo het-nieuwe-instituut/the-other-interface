@@ -13,34 +13,11 @@ function assertIsCategory(category: string): asserts category is Category {
 }
 
 export default async function Page({ params }: { params: { category: string; id: string } }) {
-  const { category, id } = params
+  const { category } = params
 
   assertIsCategory(category)
 
   const { isEnabled } = draftMode()
-  const { lang } = useTranslation()
 
-  const publicationState = isEnabled ? PublicationState.Preview : PublicationState.Live
-  let editorialData
-
-  if (category === CATEGORIES.stories) {
-    editorialData = await getRecordEditorialContent({
-      category,
-      id,
-      publicationState,
-      lang,
-    })
-  } else {
-    editorialData = null
-  }
-
-  // TODO create separate type for detail and mock result to it
-
-  return (
-    <DetailpageContainer
-      editorialData={editorialData}
-      category={category}
-      isDraftMode={isEnabled}
-    />
-  )
+  return <DetailpageContainer category={category} isDraftMode={isEnabled} />
 }
