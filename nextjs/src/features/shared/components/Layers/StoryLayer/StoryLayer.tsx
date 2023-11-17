@@ -1,11 +1,12 @@
 'use client'
 import { Box, Grid, GridItem, useTheme } from '@chakra-ui/react'
-
 import { PageHeader } from '../../PageHeader/PageHeader'
 import { StoryMeta } from '../../Meta/StoryMeta/StoryMeta'
+import { usePresenter } from './usePresenter'
 
 export const StoryLayer = () => {
   const theme = useTheme()
+  const { story } = usePresenter()
 
   return (
     <Box position={'relative'} zIndex={2} backgroundColor={'ivoryAlpha.95'}>
@@ -22,13 +23,10 @@ export const StoryLayer = () => {
           gap={'3.75rem'}
         >
           <GridItem area={'header'}>
-            {/* <PageHeader
-              title={editorialData?.title || undefined}
-              preface={editorialData?.description || undefined}
-            /> */}
+            <PageHeader title={story?.title} preface={story?.description} />
           </GridItem>
           <GridItem area={'meta'}>
-            <StoryMeta />
+            <StoryMeta story={story} />
           </GridItem>
         </Grid>
       </Box>

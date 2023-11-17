@@ -1,5 +1,8 @@
 {
-  "time": "Time period",
+  "published": "Gepubliceerd",
+  "mainStory": "Main story",
+  "themes": "Themes",
+  "people": "Persons",
   "locations": "Locations",
-  "people": "Persons/Institutions"
+  "time": "Time period"
 }

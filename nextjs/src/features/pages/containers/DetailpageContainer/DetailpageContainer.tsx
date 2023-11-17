@@ -6,6 +6,7 @@ import { DetailGalaxy } from '@/features/galaxyInterface/galaxies/DetailGalaxy/D
 import { RecordLayer } from '@/features/shared/components/Layers/RecordLayer/RecordLayer'
 import { StoryLayer } from '@/features/shared/components/Layers/StoryLayer/StoryLayer'
 import { isCloudCategory, isStoryCategory } from '@/features/shared/utils/categories'
+import { usePresenter } from './usePresenter'
 
 export interface DetailpageEditorialLayer {
   title?: string | null
@@ -25,6 +26,8 @@ interface Props {
 }
 
 export const DetailpageContainer: React.FC<Props> = ({ category, isDraftMode }) => {
+  usePresenter(isDraftMode)
+
   const Layer = () => {
     if (isCloudCategory(category)) return <RecordLayer />
     if (isStoryCategory(category)) return <StoryLayer />

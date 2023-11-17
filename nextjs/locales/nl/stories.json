@@ -1,5 +1,8 @@
 {
-  "time": "Tijdsperiode",
+  "published": "Published",
+  "mainStory": "Main story",
+  "themes": "Themes",
+  "people": "People",
   "locations": "Locaties",
-  "people": "Personen/Instellingen"
+  "time": "Tijdsperiode"
 }

@@ -3,6 +3,7 @@ import { CloudCategory } from '../utils/categories'
 import { USER_LOOKS_ON } from '../constants/mainConstants'
 
 export type SharedState = {
+  isDraftMode: boolean
   isMenuOpen: boolean
   isSearchModeActive: boolean
   searchCategory: CloudCategory | null
@@ -11,6 +12,7 @@ export type SharedState = {
 }
 
 export const sharedInitialState: SharedState = {
+  isDraftMode: false,
   isMenuOpen: false,
   isSearchModeActive: false,
   searchCategory: null,
@@ -30,6 +32,14 @@ export const sharedSlice = createSlice({
     ) => {
       state.isMenuOpen = action.payload?.isMenuOpen ?? state.isMenuOpen
     },
+    draftMode: (
+      state,
+      action: PayloadAction<{
+        isDraftMode: SharedState['isDraftMode']
+      }>
+    ) => {
+      state.isDraftMode = action.payload?.isDraftMode ?? state.isDraftMode
+    },
     searchModeActive: (
       state,
       action: PayloadAction<{
@@ -47,7 +57,6 @@ export const sharedSlice = createSlice({
       state.searchCategory = action.payload?.searchCategory
       state.isCategorySuggestionsOpen = false
     },
-
     categorySuggestionsOpen: (
       state,
       action: PayloadAction<{
@@ -61,7 +70,6 @@ export const sharedSlice = createSlice({
       state.isCategorySuggestionsOpen =
         action.payload?.categorySuggestionsOpen ?? state.isCategorySuggestionsOpen
     },
-
     userChangeLooksOn: (state, action: PayloadAction<{ lookOn: SharedState['userLooksOn'] }>) => {
       state.userLooksOn = action.payload.lookOn
     },

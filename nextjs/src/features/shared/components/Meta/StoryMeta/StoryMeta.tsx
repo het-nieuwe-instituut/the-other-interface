@@ -17,16 +17,12 @@ import {
 } from 'src/generated/graphql'
 import { usePresenter } from './usePresenter'
 
-type Story = StoryEntity
 type Props = {
-  isDraftMode?: boolean
+  story: StoryEntity | null
 }
 
-export const StoryMeta: React.FC<Props> = ({ isDraftMode }) => {
-  const commonT = useTypeSafeTranslation('common')
-  const storiesT = useTypeSafeTranslation('stories')
-
-  const { story } = usePresenter(isDraftMode)
+export const StoryMeta: React.FC<Props> = ({ story }) => {
+  const { commonT, storiesT } = usePresenter()
 
   // const linkedPeopleRecords = story?.attributes?.triplyRecords?.data.filter(
   //   d => d.attributes?.type === EnumTriplyrecordType.People && !!d.attributes.recordId
@@ -50,11 +46,9 @@ export const StoryMeta: React.FC<Props> = ({ isDraftMode }) => {
                 ),
           })}
         </Text>
-        {/* {story.attributes?.author?.data?.attributes && (
-          <Text textStyle={'micro'}>
-            {formatAuthor(story.attributes?.author?.data?.attributes)}
-          </Text>
-        )} */}
+        {/* {story.attributes?.author?.data?.attributes && ( */}
+        {/* <Text textStyle={'micro'}>{formatAuthor(story.attributes?.author?.data?.attributes)}</Text> */}
+        {/* )} */}
       </Box>
       {/* 
       {story.attributes?.shortDescription && (

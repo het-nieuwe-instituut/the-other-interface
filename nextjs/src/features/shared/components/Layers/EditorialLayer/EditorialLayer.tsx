@@ -13,6 +13,7 @@ interface Props {
 }
 
 export const EditorialLayer: React.FC<Props> = ({ title, preface, components }) => {
+  console.log('EditorialLayer', title, preface, components)
   return (
     <LayerWrapper
       LeftContent={<PageHeader title={title || undefined} preface={preface || undefined} />}

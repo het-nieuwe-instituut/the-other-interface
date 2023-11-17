@@ -1,19 +1,27 @@
-import { extractStoryData } from '@/features/shared/helpers/extractStoryData'
-import { useStoryById } from '@/features/shared/hooks/queries/useStoryById'
-import { useParams } from 'next/navigation'
-import { StoryEntity } from 'src/generated/graphql'
+import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { formatDate } from '@/features/shared/utils/dates'
 
-export const usePresenter = (isDraftMode?: boolean) => {
-  const params = useParams()
-  const id = params?.id as string
+export const usePresenter = () => {
+  const commonT = useTypeSafeTranslation('common')
+  const storiesT = useTypeSafeTranslation('stories')
 
-  const { data, isLoading } = useStoryById(id, isDraftMode)
+  // function formatPublicationDate(
+  //   type?: EnumComponentcorepublicationdateDisplaytype | null,
+  //   date?: string | null
+  // ) {
+  //   if (date && type === EnumComponentcorepublicationdateDisplaytype.Year) {
+  //     return formatDate(date, 'YYYY')
+  //   }
 
-  const story = data?.storiesByLocale?.data?.[0]
-  const record = extractStoryData(story as StoryEntity)
+  //   if (date && type === EnumComponentcorepublicationdateDisplaytype.Date) {
+  //     return formatDate(date, 'DD/MM/YYYY')
+  //   }
+
+  //   return undefined
+  // }
 
   return {
-    story: record,
-    isLoading,
+    commonT,
+    storiesT,
   }
 }
