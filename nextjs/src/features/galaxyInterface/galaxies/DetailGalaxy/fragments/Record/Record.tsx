@@ -13,8 +13,6 @@ export const Record: React.FC<Props> = ({ record }) => {
   const { id, category, position, grid } = record
   const { recordDetails, isLoading, handleClick } = usePresenter(id, category)
 
-  debugger
-
   if (!recordDetails && !isLoading) return null
 
   return (

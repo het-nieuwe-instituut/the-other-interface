@@ -8,6 +8,7 @@ type Props = {
   currentPageNumber: number
   pageAmount: number
   isResultAmountLoading: boolean
+  isResultEmpty: boolean
   handleLeftClick?: () => void
   handleRightClick?: () => void
 }
@@ -16,6 +17,7 @@ export const GalaxyPagination: React.FC<Props> = ({
   currentPageNumber,
   pageAmount,
   isResultAmountLoading,
+  isResultEmpty,
   handleLeftClick,
   handleRightClick,
 }) => {
@@ -46,7 +48,7 @@ export const GalaxyPagination: React.FC<Props> = ({
         textStyle="socialLarge.md"
         gap="3px"
       >
-        {!isResultAmountLoading && (
+        {!isResultAmountLoading && !isResultEmpty && (
           <>
             <Text>{t('page')}</Text>
             <Text>
