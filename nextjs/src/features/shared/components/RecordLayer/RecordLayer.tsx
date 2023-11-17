@@ -1,6 +1,6 @@
 'use client'
 import { Box, Grid, GridItem, useTheme } from '../../configs/chakra'
-import { StoryMeta } from '../Meta/StoryMeta'
+import { StoryMeta } from '../Meta/StoryMeta/StoryMeta'
 import { RecordHeader } from '../Record/RecordHeader/RecordHeader'
 
 export const RecordLayer = () => {
@@ -14,7 +14,7 @@ export const RecordLayer = () => {
           templateAreas={{
             lg: `"header meta"`,
             base: `"meta"
-                            "header"`,
+            "header"`,
           }}
           templateColumns={{ lg: '1fr 22.438rem', base: `100% 100%` }}
           templateRows={{ lg: '1fr', base: `auto minmax(0, 1fr)` }}

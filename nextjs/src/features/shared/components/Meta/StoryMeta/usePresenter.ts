@@ -8,7 +8,6 @@ export const usePresenter = () => {
   const id = params?.id as string
 
   const { data: record, isLoading } = useRecordDetail(category, id)
-
   return {
     record,
     isLoading,

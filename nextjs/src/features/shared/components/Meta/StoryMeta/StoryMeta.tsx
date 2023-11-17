@@ -14,32 +14,37 @@ import {
   EnumTriplyrecordType,
   StoryEntity,
 } from 'src/generated/graphql'
+import { usePresenter } from './usePresenter'
 
 type Story = StoryEntity
 interface Props {
   story: Story
 }
 
-export const StoryMeta: React.FC<Props> = ({ story }) => {
+export const StoryMeta: React.FC<Props> = () => {
   const commonT = useTypeSafeTranslation('common')
   const storiesT = useTypeSafeTranslation('stories')
-  const linkedPeopleRecords = story.attributes?.triplyRecords?.data.filter(
-    d => d.attributes?.type === EnumTriplyrecordType.People && !!d.attributes.recordId
-  )
+
+  const { record: story } = usePresenter()
+
+  console.log('story', story)
+  // const linkedPeopleRecords = story?.attributes?.triplyRecords?.data.filter(
+  //   d => d.attributes?.type === EnumTriplyrecordType.People && !!d.attributes.recordId
+  // )
 
   return (
     <Box>
-      <Box marginBottom={'md'}>
+      {/* <Box marginBottom={'md'}>
         <Text textStyle={'micro'} marginBottom={1}>
           {commonT.t('published', {
-            date: story.attributes?.publicationDate
+            date: story?.attributes?.publicationDate
               ? formatPublicationDate(
-                  story.attributes?.publicationDate.displayType,
-                  story.attributes?.publicationDate.date
+                  story?.attributes?.publicationDate.displayType,
+                  story?.attributes?.publicationDate.date
                 )
               : formatPublicationDate(
                   EnumComponentcorepublicationdateDisplaytype.Year,
-                  story.attributes?.publishedAt
+                  story?.attributes?.publishedAt
                 ),
           })}
         </Text>
@@ -130,7 +135,7 @@ export const StoryMeta: React.FC<Props> = ({ story }) => {
           buttons={story.attributes.storyLinks.buttons ?? []}
           buttonStyle={EnumComponentmodulesbuttonsmoduleButtonstyle.Default}
         ></ButtonsGrid>
-      )}
+      )} */}
     </Box>
   )
 }
