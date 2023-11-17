@@ -30,8 +30,6 @@ export const StoryMeta: React.FC<Props> = ({ story }) => {
 
   return (
     <Box>
-      {JSON.stringify(story)}
-
       <Box marginBottom={'md'}>
         <Text textStyle={'micro'} marginBottom={1}>
           {commonT.t('published', {
@@ -161,74 +159,3 @@ function formatAuthor(author: Author) {
     author.insertion ? ' ' + author.insertion : ''
   }${' ' + capitalizeFirstLetter(author.lastName)}`
 }
-
-// {
-//   "data": {
-//       "storiesByLocale": {
-//           "data": [
-//               {
-//                   "id": "3",
-//                   "__typename": "StoryEntity",
-//                   "attributes": {
-//                       "title": "Story with description",
-//                       "description": "# Het buurthuis\n\nDe laatste jaren gebeurt er veel op het gebied van buurthuizen. Na beperkende maatregelen als sluiting door bezuinigingen, zijn ze met een enerverende opmars bezig. Als buurthuis met educatieve en recreatieve activiteiten voor de buurt, en als verzamelgebouwen met allerlei functies, zoals een bibliotheek, een leeromgeving, een buurtwinkel, een werkplek, sportgelegenheid en allerlei vormen van ontspanning. Daarmee staan ook de typologie en identiteit van het gebouw, de creatieve ruimte van de ontwerper, het opdrachtgeverschap en het achterliggende verdienmodel weer volop in de belangstelling. Met Pi de Bruijn, Christoph Grafe, David ter Avest en anderen.",
-//                       "components": [
-//                           {
-//                               "id": "4",
-//                               "__typename": "ComponentModulesImageCarousel",
-//                               "images": {
-//                                   "data": [
-//                                       {
-//                                           "attributes": {
-//                                               "url": "/uploads/serey_morm_Z9_G2_Cm3n080_unsplash_dc2e79dd0c.jpg",
-//                                               "caption": "serey-morm-Z9G2Cm3n080-unsplash.jpg",
-//                                               "width": 7952,
-//                                               "height": 5304,
-//                                               "size": 7828.35
-//                                           }
-//                                       }
-//                                   ]
-//                               },
-//                               "description": null,
-//                               "imageCarouselModuleLayout": {
-//                                   "id": "11",
-//                                   "spacingTop": "Md",
-//                                   "spacingBottom": "Md"
-//                               },
-//                               "items": []
-//                           },
-//                           {
-//                               "id": "6",
-//                               "__typename": "ComponentModulesImage",
-//                               "image": {
-//                                   "data": {
-//                                       "attributes": {
-//                                           "url": "/uploads/serey_morm_Z9_G2_Cm3n080_unsplash_dc2e79dd0c.jpg",
-//                                           "height": 5304,
-//                                           "width": 7952
-//                                       }
-//                                   }
-//                               },
-//                               "story": {
-//                                   "data": null
-//                               },
-//                               "triplyRecord": {
-//                                   "data": null
-//                               },
-//                               "caption": null,
-//                               "alt_text": null,
-//                               "imageModuleLayout": {
-//                                   "id": "12",
-//                                   "spacingTop": "Md",
-//                                   "spacingBottom": "Md"
-//                               }
-//                           }
-//                       ],
-//                       "storyLinks": null,
-//                       "triplyRecords": null
-//                   }
-//               }
-//           ]
-//       }
-//   }
-// }
