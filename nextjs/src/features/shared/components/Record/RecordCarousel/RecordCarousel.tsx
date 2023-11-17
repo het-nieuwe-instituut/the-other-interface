@@ -36,7 +36,7 @@ const RecordCarousel = (props: { imageUrls: string[] }) => {
       <Box height="523.605px" width="100%">
         <ResponsiveImage
           src={selectedImage ?? props.imageUrls[0]}
-          css={{ height: '100%', objectFit: 'contain' }}
+          css={{ height: '100%' }}
           maxHeight="523px"
           fit="contain"
         />
