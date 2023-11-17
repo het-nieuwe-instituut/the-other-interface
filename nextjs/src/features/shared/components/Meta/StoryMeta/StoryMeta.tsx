@@ -1,3 +1,4 @@
+'use client'
 import { ButtonsGrid } from '@/features/shared/components/ButtonsGrid/ButtonsGrid'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { formatDate } from '@/features/shared/utils/dates'
@@ -14,49 +15,47 @@ import {
   EnumTriplyrecordType,
   StoryEntity,
 } from 'src/generated/graphql'
+import { usePresenter } from './usePresenter'
 
-type Story = StoryEntity
-interface Props {
-  story: Story
+type Props = {
+  story: StoryEntity | null
 }
 
 export const StoryMeta: React.FC<Props> = ({ story }) => {
-  const commonT = useTypeSafeTranslation('common')
-  const storiesT = useTypeSafeTranslation('stories')
-  const linkedPeopleRecords = story.attributes?.triplyRecords?.data.filter(
-    d => d.attributes?.type === EnumTriplyrecordType.People && !!d.attributes.recordId
-  )
+  const { commonT, storiesT } = usePresenter()
+
+  // const linkedPeopleRecords = story?.attributes?.triplyRecords?.data.filter(
+  //   d => d.attributes?.type === EnumTriplyrecordType.People && !!d.attributes.recordId
+  // )
 
   return (
     <Box>
       <Box marginBottom={'md'}>
         <Text textStyle={'micro'} marginBottom={1}>
           {commonT.t('published', {
-            date: story.attributes?.publicationDate
+            date: story?.attributes?.publicationDate
               ? formatPublicationDate(
-                  story.attributes?.publicationDate.displayType,
-                  story.attributes?.publicationDate.date
+                  story?.attributes?.publicationDate.displayType,
+                  story?.attributes?.publicationDate.date
                 )
               : formatPublicationDate(
                   EnumComponentcorepublicationdateDisplaytype.Year,
-                  story.attributes?.publishedAt
+                  story?.attributes?.publishedAt
                 ),
           })}
         </Text>
-        {story.attributes?.author?.data?.attributes && (
-          <Text textStyle={'micro'}>
-            {formatAuthor(story.attributes?.author?.data?.attributes)}
-          </Text>
-        )}
+        {/* {story.attributes?.author?.data?.attributes && ( */}
+        {/* <Text textStyle={'micro'}>{formatAuthor(story.attributes?.author?.data?.attributes)}</Text> */}
+        {/* )} */}
       </Box>
-
+      {/* 
       {story.attributes?.shortDescription && (
         <Text textStyle={'micro'} marginBottom={'md'}>
           {story.attributes?.shortDescription}
         </Text>
-      )}
+      )} */}
 
-      {!!story.attributes?.timeframe && (
+      {/* {!!story.attributes?.timeframe && (
         <Box marginBottom={'md'}>
           <Text textStyle={'h5'} mb={1}>
             {capitalizeFirstLetter(storiesT.t('time') ?? '')}
@@ -67,8 +66,8 @@ export const StoryMeta: React.FC<Props> = ({ story }) => {
             </NextLink>
           </Text>
         </Box>
-      )}
-
+      )} */}
+      {/* 
       {!!linkedPeopleRecords?.length && (
         <Box marginBottom={'md'}>
           <Text textStyle={'h5'} mb={1}>
@@ -95,9 +94,9 @@ export const StoryMeta: React.FC<Props> = ({ story }) => {
             })}
           </Box>
         </Box>
-      )}
+      )} */}
 
-      {!!story.attributes?.locations?.data.length && (
+      {/* {!!story.attributes?.locations?.data.length && (
         <Box marginBottom={'md'}>
           <Text textStyle={'h5'} mb={1}>
             {capitalizeFirstLetter(storiesT.t('locations') ?? '')}
@@ -119,8 +118,8 @@ export const StoryMeta: React.FC<Props> = ({ story }) => {
             })}
           </Box>
         </Box>
-      )}
-      {story.attributes?.storyLinks && (
+      )} */}
+      {/* {story.attributes?.storyLinks && (
         <ButtonsGrid
           buttonLayoutStyle={{
             whiteSpace: 'normal',
@@ -130,7 +129,7 @@ export const StoryMeta: React.FC<Props> = ({ story }) => {
           buttons={story.attributes.storyLinks.buttons ?? []}
           buttonStyle={EnumComponentmodulesbuttonsmoduleButtonstyle.Default}
         ></ButtonsGrid>
-      )}
+      )} */}
     </Box>
   )
 }

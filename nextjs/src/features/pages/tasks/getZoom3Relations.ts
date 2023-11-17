@@ -1,4 +1,4 @@
-import { CATEGORIES, Category } from '@/features/shared/utils/categories'
+import { Category, isStoryCategory } from '@/features/shared/utils/categories'
 import { getZoom3Queries } from './zoom3Config'
 import { ArchivesRelationsQuery, Sdk } from 'src/generated/graphql'
 
@@ -18,7 +18,7 @@ export async function getZoom3RelationsTask({
   try {
     const configByType = getZoom3Queries(type, api)
 
-    if (type === CATEGORIES.stories) {
+    if (isStoryCategory(type)) {
       return await api?.StoriesRelations({ id, lang: locale })
     } else {
       return await configByType?.relationsQuery?.({ id, lang: locale })

@@ -1,10 +1,12 @@
 'use client'
-import { Box, Grid, GridItem, useTheme } from '../../configs/chakra'
-import { StoryMeta } from '../Meta/StoryMeta'
-import { RecordHeader } from '../Record/RecordHeader/RecordHeader'
+import { Box, Grid, GridItem, useTheme } from '@chakra-ui/react'
+import { PageHeader } from '../../PageHeader/PageHeader'
+import { StoryMeta } from '../../Meta/StoryMeta/StoryMeta'
+import { usePresenter } from './usePresenter'
 
-export const RecordLayer = () => {
+export const StoryLayer = () => {
   const theme = useTheme()
+  const { story } = usePresenter()
 
   return (
     <Box position={'relative'} zIndex={2} backgroundColor={'ivoryAlpha.95'}>
@@ -14,17 +16,17 @@ export const RecordLayer = () => {
           templateAreas={{
             lg: `"header meta"`,
             base: `"meta"
-                            "header"`,
+            "header"`,
           }}
           templateColumns={{ lg: '1fr 22.438rem', base: `100% 100%` }}
           templateRows={{ lg: '1fr', base: `auto minmax(0, 1fr)` }}
           gap={'3.75rem'}
         >
           <GridItem area={'header'}>
-            <RecordHeader />
+            <PageHeader title={story?.title} preface={story?.description} />
           </GridItem>
           <GridItem area={'meta'}>
-            <StoryMeta story={{}} />
+            <StoryMeta story={story} />
           </GridItem>
         </Grid>
       </Box>

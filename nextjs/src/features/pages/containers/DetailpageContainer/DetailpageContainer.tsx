@@ -1,11 +1,12 @@
 'use client'
 import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
-import { EditorialLayer } from '@/features/shared/components/EditorialLayer/EditorialLayer'
 import { StoryByIdQuery, LandingpageBySlugQuery } from 'src/generated/graphql'
 import { Box } from '@chakra-ui/react'
 import { DetailGalaxy } from '@/features/galaxyInterface/galaxies/DetailGalaxy/DetailGalaxy'
-import { CATEGORIES } from '@/features/shared/utils/categories'
-import { RecordLayer } from '@/features/shared/components/RecordLayer/RecordLayer'
+import { RecordLayer } from '@/features/shared/components/Layers/RecordLayer/RecordLayer'
+import { StoryLayer } from '@/features/shared/components/Layers/StoryLayer/StoryLayer'
+import { isCloudCategory, isStoryCategory } from '@/features/shared/utils/categories'
+import { usePresenter } from './usePresenter'
 
 export interface DetailpageEditorialLayer {
   title?: string | null
@@ -20,28 +21,26 @@ export interface DetailpageEditorialLayer {
     | null
 }
 interface Props {
-  editorialData: DetailpageEditorialLayer | null
   category: string
+  isDraftMode: boolean
 }
 
-const CATEGORIES_TO_SHOW_EDITORIAL = ['objects', 'publications', 'people', 'archives']
+export const DetailpageContainer: React.FC<Props> = ({ category, isDraftMode }) => {
+  usePresenter(isDraftMode)
 
-export const DetailpageContainer: React.FC<Props> = ({ editorialData, category }) => {
+  const Layer = () => {
+    if (isCloudCategory(category)) return <RecordLayer />
+    if (isStoryCategory(category)) return <StoryLayer />
+    return null
+  }
+
   return (
     <Box backgroundColor="graph">
       <GalaxyInterface>
         <DetailGalaxy />
       </GalaxyInterface>
 
-      {editorialData && category === CATEGORIES.stories && (
-        <EditorialLayer
-          title={editorialData.title}
-          preface={editorialData.description}
-          components={editorialData.components}
-        />
-      )}
-
-      {CATEGORIES_TO_SHOW_EDITORIAL.includes(category) && <RecordLayer />}
+      <Layer />
     </Box>
   )
 }

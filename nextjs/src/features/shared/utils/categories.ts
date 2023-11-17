@@ -21,3 +21,11 @@ export const CATEGORIES_TO_ENTITY_MAPPER = {
   [CATEGORIES.objects]: EntityNames.Objects,
   [CATEGORIES.people]: EntityNames.People,
 } as const
+
+export const isStoryCategory = (category?: string) => category === CATEGORIES.stories
+
+export const isCloudCategory = (category?: string) => {
+  if (!category) return false
+
+  return (CLOUD_CATEGORIES_ARRAY as string[]).includes(category)
+}

@@ -1,28 +1,22 @@
 'use client'
 import { Box, Link, Text } from '../../configs/chakra'
 import { useRef } from 'react'
-
+import useScroll from '@/features/shared/hooks/useScroll'
 import { useTypeSafeTranslation } from '../../hooks/translations'
 import { Markdown } from '../Markdown/Markdown'
 import styles from './PageHeader.module.css'
 import { useLimitPrefaceHeight } from './useLimitPrefaceHeight'
+import { ScrollToContent } from '@/features/pages/utils/utils'
 
 interface Props {
   title?: string
   preface?: string
   constrainPreface?: boolean
-  handleClick?: () => void
-  showPointer?: boolean
 }
 
-export const PageHeader: React.FC<Props> = ({
-  title,
-  preface,
-  handleClick,
-  showPointer,
-  constrainPreface,
-}) => {
+export const PageHeader: React.FC<Props> = ({ title, preface, constrainPreface }) => {
   const commonT = useTypeSafeTranslation('common')
+  const { scrollPosition } = useScroll()
 
   const prefaceRef = useRef<HTMLDivElement>(null)
   const [limitPrefaceHeight, setLimitPrefaceHeight] = useLimitPrefaceHeight(
@@ -31,10 +25,7 @@ export const PageHeader: React.FC<Props> = ({
   )
 
   return (
-    <Box
-      onClick={handleClick ? handleClick : undefined}
-      cursor={showPointer ? 'pointer' : 'cursor'}
-    >
+    <Box onClick={ScrollToContent} cursor={scrollPosition < 750 ? 'pointer' : 'cursor'}>
       <Text as={'h1'} textStyle={'h1'} pb={'md'}>
         {title}
       </Text>
