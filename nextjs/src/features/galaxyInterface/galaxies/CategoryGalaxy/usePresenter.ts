@@ -34,5 +34,6 @@ export const usePresenter = () => {
     pageAmount,
     increasePageNumber,
     decreasePageNumber,
+    isResultEmpty: searchResultAmount === 0,
   }
 }
