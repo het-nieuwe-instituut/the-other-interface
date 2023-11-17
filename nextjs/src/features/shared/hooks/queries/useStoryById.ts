@@ -1,19 +1,19 @@
 'use client'
 import { useQuery } from '@tanstack/react-query'
 import initApiClientService from '../../utils/initApiClientService'
-import { getZoom3RecordTask } from '@/features/pages/tasks/getZoom3Record'
-import { Category } from '../../utils/categories'
 import { useSearchParams } from 'next/navigation'
+import { PublicationState } from '../../types/enums'
 
-export function useRecordDetail(type: Category, id: string) {
+export function useStoryById(id: string, isDraftMode: boolean) {
   const api = initApiClientService()
   const searchParams = useSearchParams()
   const lang = searchParams?.get('lang')
+  const publicationState = isDraftMode ? PublicationState.Preview : PublicationState.Live
 
-  const queryFn = () => getZoom3RecordTask(type, { id, locale: lang ?? 'nl' }, api)
+  const queryFn = () => api.storyById({ id, locale: lang ?? 'nl', publicationState })
 
   return useQuery({
-    queryKey: ['record-detail', id, lang],
+    queryKey: ['story-by-id', id, lang],
     queryFn,
     refetchOnWindowFocus: false,
   })

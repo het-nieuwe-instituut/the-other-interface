@@ -1,15 +1,14 @@
-import { useRecordDetail } from '@/features/shared/hooks/queries/useRecordDetail'
-import { Category } from '@/features/shared/utils/categories'
+import { useStoryById } from '@/features/shared/hooks/queries/useStoryById'
 import { useParams } from 'next/navigation'
 
-export const usePresenter = () => {
+export const usePresenter = (isDraftMode: boolean) => {
   const params = useParams()
-  const category = params?.category as Category
   const id = params?.id as string
 
-  const { data: record, isLoading } = useRecordDetail(category, id)
+  const { data, isLoading } = useStoryById(id, isDraftMode)
+
   return {
-    record,
+    story: data?.storiesByLocale?.data?.[0],
     isLoading,
   }
 }

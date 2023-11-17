@@ -3,7 +3,6 @@ import {
   DynamicComponentRenderer,
   DynamicComponents,
 } from '@/features/modules/ModulesRenderer/ModulesRenderer'
-
 import { Box, Grid, GridItem, useTheme } from '../../configs/chakra'
 
 interface Props {

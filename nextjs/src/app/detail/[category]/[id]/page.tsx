@@ -36,5 +36,11 @@ export default async function Page({ params }: { params: { category: string; id:
 
   // TODO create separate type for detail and mock result to it
 
-  return <DetailpageContainer editorialData={editorialData} category={category} />
+  return (
+    <DetailpageContainer
+      editorialData={editorialData}
+      category={category}
+      isDraftMode={isEnabled}
+    />
+  )
 }

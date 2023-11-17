@@ -4,7 +4,6 @@ import { EditorialLayer } from '@/features/shared/components/EditorialLayer/Edit
 import { StoryByIdQuery, LandingpageBySlugQuery } from 'src/generated/graphql'
 import { Box } from '@chakra-ui/react'
 import { DetailGalaxy } from '@/features/galaxyInterface/galaxies/DetailGalaxy/DetailGalaxy'
-import { CATEGORIES } from '@/features/shared/utils/categories'
 import { RecordHeader } from '@/features/shared/components/Record/RecordHeader/RecordHeader'
 import useScroll from '@/features/shared/hooks/useScroll'
 import { ScrollToContent } from '../../utils/utils'
@@ -26,11 +25,12 @@ export interface DetailpageEditorialLayer {
 interface Props {
   editorialData: DetailpageEditorialLayer | null
   category: string
+  isDraftMode: boolean
 }
 
 const CATEGORIES_TO_SHOW_EDITORIAL = ['objects', 'publications', 'people', 'archives']
 
-export const DetailpageContainer: React.FC<Props> = ({ editorialData, category }) => {
+export const DetailpageContainer: React.FC<Props> = ({ editorialData, category, isDraftMode }) => {
   const { scrollPosition } = useScroll()
 
   const Header = CATEGORIES_TO_SHOW_EDITORIAL.includes(category) ? (
@@ -44,7 +44,9 @@ export const DetailpageContainer: React.FC<Props> = ({ editorialData, category }
     />
   )
 
-  const Meta = category === CATEGORIES.stories ? <StoryMeta story={{}} /> : null
+  const Meta = CATEGORIES_TO_SHOW_EDITORIAL.includes(category) ? null : (
+    <StoryMeta isDraftMode={isDraftMode} />
+  )
   return (
     <Box backgroundColor="graph">
       <GalaxyInterface>
