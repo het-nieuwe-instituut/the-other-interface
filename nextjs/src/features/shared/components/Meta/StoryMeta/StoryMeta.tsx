@@ -31,6 +31,7 @@ export const StoryMeta: React.FC<Props> = ({ story }) => {
   return (
     <Box>
       <Box marginBottom={'md'}>
+        {JSON.stringify(story?.attributes)}
         <Text textStyle={'micro'} marginBottom={1}>
           {commonT.t('published', {
             date: story?.attributes?.publicationDate

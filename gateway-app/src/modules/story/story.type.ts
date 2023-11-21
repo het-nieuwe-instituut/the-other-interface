@@ -34,6 +34,7 @@ import {
   TriplyRecordFiltersInput,
   TriplyRecordRelationResponseCollection,
 } from '../triplyRecord/triplyRecord.type'
+import { ThemeRelationResponseCollection } from '../theme/theme.type'
 
 @ObjectType()
 export class StoryRelationResponseCollection {
@@ -90,6 +91,9 @@ export class Story {
 
   @Field({ nullable: true })
   public updatedAt: Date
+
+  @Field(() => ThemeRelationResponseCollection, { nullable: true })
+  public themes?: ThemeRelationResponseCollection
 }
 
 @ObjectType()

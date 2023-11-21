@@ -126,6 +126,10 @@ const customResolvers = {
       return storiesWithoutRelations.storiesWithoutRelations
     },
 
+    storyWithoutRelations() {
+      return null
+    },
+
     relations: () => {
       return zoomLevel3Data.relations.relations
     },

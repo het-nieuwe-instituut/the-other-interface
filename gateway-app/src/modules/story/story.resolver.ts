@@ -29,7 +29,7 @@ export class StoryFieldResolver {
       return res.locations
     }
   }
-
+  //
   @ResolveField()
   public async author(@Parent() story: Story) {
     if (story.author?.data?.id) {
@@ -53,6 +53,17 @@ export class StoryResolver {
     @Args('locale', { nullable: true }) locale?: I18NLocaleCode
   ) {
     const res = await this.strapiGqlSdk.storyByLocale({ id: filters?.id?.eq })
+
+    if (filters?.id?.eq === '3') {
+      console.log('story', res.story?.data, res.story?.data?.attributes?.author)
+
+      console.log(
+        'localizedStory',
+        res.story?.data?.attributes?.localizations?.data,
+        res.story?.data?.attributes?.localizations?.data[0]?.attributes?.author
+      )
+    }
+
     if (res?.story?.data?.attributes?.locale === locale || !locale) {
       return {
         data: [res.story?.data],

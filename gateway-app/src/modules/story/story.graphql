@@ -266,7 +266,41 @@ fragment LocalizedStoryFragment on StoryEntity {
             data {
                 attributes {
                     firstName
+                    lastName
+                    insertion
                 }
+            }
+        }
+        timeframe {
+            id
+            yearStart
+            yearEnd
+        }
+        locations {
+            data {
+                id
+                attributes {
+                    city
+                }
+            }
+        }
+        themes {
+            data {
+                id
+                attributes {
+                    name
+                }
+            }
+        }
+        publicationDate {
+            id
+            date
+            displayType
+        }
+        shortDescription
+        triplyRecords {
+            data {
+                ...BaseTriplyRecordFragment
             }
         }
         components {

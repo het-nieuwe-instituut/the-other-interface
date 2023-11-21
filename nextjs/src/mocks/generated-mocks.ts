@@ -1178,6 +1178,7 @@ export const aStory = (overrides?: Partial<Story>, _relationshipsToOmit: Array<s
         shortDescription: overrides && overrides.hasOwnProperty('shortDescription') ? overrides.shortDescription! : 'quae',
         slug: overrides && overrides.hasOwnProperty('slug') ? overrides.slug! : 'minima',
         storyLinks: overrides && overrides.hasOwnProperty('storyLinks') ? overrides.storyLinks! : relationshipsToOmit.includes('ComponentModulesButtonsModule') ? {} as ComponentModulesButtonsModule : aComponentModulesButtonsModule({}, relationshipsToOmit),
+        themes: overrides && overrides.hasOwnProperty('themes') ? overrides.themes! : relationshipsToOmit.includes('ThemeRelationResponseCollection') ? {} as ThemeRelationResponseCollection : aThemeRelationResponseCollection({}, relationshipsToOmit),
         timeframe: overrides && overrides.hasOwnProperty('timeframe') ? overrides.timeframe! : relationshipsToOmit.includes('ComponentCoreTimeframe') ? {} as ComponentCoreTimeframe : aComponentCoreTimeframe({}, relationshipsToOmit),
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'deleniti',
         triplyRecords: overrides && overrides.hasOwnProperty('triplyRecords') ? overrides.triplyRecords! : relationshipsToOmit.includes('TriplyRecordRelationResponseCollection') ? {} as TriplyRecordRelationResponseCollection : aTriplyRecordRelationResponseCollection({}, relationshipsToOmit),

@@ -10986,8 +10986,53 @@ export type StoriesByLocaleQuery = {
           __typename?: 'AuthorEntityResponse'
           data?: {
             __typename?: 'AuthorEntity'
-            attributes?: { __typename?: 'Author'; firstName: string } | null
+            attributes?: {
+              __typename?: 'Author'
+              firstName: string
+              lastName: string
+              insertion?: string | null
+            } | null
           } | null
+        } | null
+        timeframe?: {
+          __typename?: 'ComponentCoreTimeframe'
+          id: string
+          yearStart?: any | null
+          yearEnd?: any | null
+        } | null
+        locations?: {
+          __typename?: 'LocationRelationResponseCollection'
+          data: Array<{
+            __typename?: 'LocationEntity'
+            id?: string | null
+            attributes?: { __typename?: 'Location'; city?: string | null } | null
+          }>
+        } | null
+        themes?: {
+          __typename?: 'ThemeRelationResponseCollection'
+          data: Array<{
+            __typename?: 'ThemeEntity'
+            id?: string | null
+            attributes?: { __typename?: 'Theme'; name: string } | null
+          }>
+        } | null
+        publicationDate?: {
+          __typename?: 'ComponentCorePublicationDate'
+          id: string
+          date?: any | null
+          displayType?: Enum_Componentcorepublicationdate_Displaytype | null
+        } | null
+        triplyRecords?: {
+          __typename?: 'TriplyRecordRelationResponseCollection'
+          data: Array<{
+            __typename?: 'TriplyRecordEntity'
+            id?: string | null
+            attributes?: {
+              __typename?: 'TriplyRecord'
+              recordId: string
+              type: Enum_Triplyrecord_Type
+            } | null
+          }>
         } | null
         components?: Array<
           | {
@@ -11866,8 +11911,53 @@ export type StoryByLocaleQuery = {
           __typename?: 'AuthorEntityResponse'
           data?: {
             __typename?: 'AuthorEntity'
-            attributes?: { __typename?: 'Author'; firstName: string } | null
+            attributes?: {
+              __typename?: 'Author'
+              firstName: string
+              lastName: string
+              insertion?: string | null
+            } | null
           } | null
+        } | null
+        timeframe?: {
+          __typename?: 'ComponentCoreTimeframe'
+          id: string
+          yearStart?: any | null
+          yearEnd?: any | null
+        } | null
+        locations?: {
+          __typename?: 'LocationRelationResponseCollection'
+          data: Array<{
+            __typename?: 'LocationEntity'
+            id?: string | null
+            attributes?: { __typename?: 'Location'; city?: string | null } | null
+          }>
+        } | null
+        themes?: {
+          __typename?: 'ThemeRelationResponseCollection'
+          data: Array<{
+            __typename?: 'ThemeEntity'
+            id?: string | null
+            attributes?: { __typename?: 'Theme'; name: string } | null
+          }>
+        } | null
+        publicationDate?: {
+          __typename?: 'ComponentCorePublicationDate'
+          id: string
+          date?: any | null
+          displayType?: Enum_Componentcorepublicationdate_Displaytype | null
+        } | null
+        triplyRecords?: {
+          __typename?: 'TriplyRecordRelationResponseCollection'
+          data: Array<{
+            __typename?: 'TriplyRecordEntity'
+            id?: string | null
+            attributes?: {
+              __typename?: 'TriplyRecord'
+              recordId: string
+              type: Enum_Triplyrecord_Type
+            } | null
+          }>
         } | null
         components?: Array<
           | {
@@ -13999,8 +14089,53 @@ export type LocalizedStoryFragmentFragment = {
       __typename?: 'AuthorEntityResponse'
       data?: {
         __typename?: 'AuthorEntity'
-        attributes?: { __typename?: 'Author'; firstName: string } | null
+        attributes?: {
+          __typename?: 'Author'
+          firstName: string
+          lastName: string
+          insertion?: string | null
+        } | null
       } | null
+    } | null
+    timeframe?: {
+      __typename?: 'ComponentCoreTimeframe'
+      id: string
+      yearStart?: any | null
+      yearEnd?: any | null
+    } | null
+    locations?: {
+      __typename?: 'LocationRelationResponseCollection'
+      data: Array<{
+        __typename?: 'LocationEntity'
+        id?: string | null
+        attributes?: { __typename?: 'Location'; city?: string | null } | null
+      }>
+    } | null
+    themes?: {
+      __typename?: 'ThemeRelationResponseCollection'
+      data: Array<{
+        __typename?: 'ThemeEntity'
+        id?: string | null
+        attributes?: { __typename?: 'Theme'; name: string } | null
+      }>
+    } | null
+    publicationDate?: {
+      __typename?: 'ComponentCorePublicationDate'
+      id: string
+      date?: any | null
+      displayType?: Enum_Componentcorepublicationdate_Displaytype | null
+    } | null
+    triplyRecords?: {
+      __typename?: 'TriplyRecordRelationResponseCollection'
+      data: Array<{
+        __typename?: 'TriplyRecordEntity'
+        id?: string | null
+        attributes?: {
+          __typename?: 'TriplyRecord'
+          recordId: string
+          type: Enum_Triplyrecord_Type
+        } | null
+      }>
     } | null
     components?: Array<
       | {
@@ -20523,7 +20658,41 @@ export const LocalizedStoryFragmentFragmentDoc = gql`
         data {
           attributes {
             firstName
+            lastName
+            insertion
           }
+        }
+      }
+      timeframe {
+        id
+        yearStart
+        yearEnd
+      }
+      locations {
+        data {
+          id
+          attributes {
+            city
+          }
+        }
+      }
+      themes {
+        data {
+          id
+          attributes {
+            name
+          }
+        }
+      }
+      publicationDate {
+        id
+        date
+        displayType
+      }
+      shortDescription
+      triplyRecords {
+        data {
+          ...BaseTriplyRecordFragment
         }
       }
       components {
@@ -20566,6 +20735,7 @@ export const LocalizedStoryFragmentFragmentDoc = gql`
       }
     }
   }
+  ${BaseTriplyRecordFragmentFragmentDoc}
   ${ComponentModulesPullquoteFragmentFragmentDoc}
   ${ComponentModulesGridModuleFragmentFragmentDoc}
   ${ComponentModulesTextModuleFragmentFragmentDoc}
