@@ -26,7 +26,7 @@ export const StoryLayer = () => {
             <PageHeader title={story?.title} preface={story?.description} />
           </GridItem>
           <GridItem area={'meta'}>
-            <StoryMeta story={story} />
+            <StoryMeta />
           </GridItem>
         </Grid>
       </Box>
