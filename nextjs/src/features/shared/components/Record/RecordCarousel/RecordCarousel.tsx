@@ -33,19 +33,19 @@ const RecordCarousel = (props: { imageUrls: string[] }) => {
 
   return (
     <Flex direction="column" align="center" mt={8}>
-      <Box height="523.605px" width="100%">
+      <Box height="524px" width="100%">
         <ResponsiveImage
           src={selectedImage ?? props.imageUrls[0]}
           css={{ height: '100%' }}
-          maxHeight="523px"
+          maxHeight="524px"
           fit="contain"
         />
       </Box>
 
       {props.imageUrls.length > 1 && (
-        <Flex mt="30px" position={'relative'} width={'100%'}>
+        <Flex mt="30px" position={'relative'} width={'100%'} height={'104px'}>
           {displayedThumbnails.map(url => (
-            <Box key={url} mx="6px" height={'103.702px'} width="25%">
+            <Box key={url} mx="6px" height={'104px'} width="25%">
               <ResponsiveImage
                 src={url}
                 css={{
@@ -54,7 +54,7 @@ const RecordCarousel = (props: { imageUrls: string[] }) => {
                   transition: 'opacity 0.5s ease-out',
                   cursor: 'pointer',
                 }}
-                maxHeight="103.702px"
+                maxHeight="104px"
                 fit="contain"
                 onClick={() => handleThumbnailClick(url)}
               />
