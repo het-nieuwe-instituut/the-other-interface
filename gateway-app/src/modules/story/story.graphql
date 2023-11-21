@@ -21,6 +21,15 @@ query stories(
     }
 }
 
+
+query story($id: ID, $locale: I18NLocaleCode) {
+    story(id: $id, locale: $locale) {
+        data {
+            ...StoryFragment
+        }
+    }
+}
+
 query storiesByLocale(
     $id: IDFilterInput
     $pagination: PaginationArg
@@ -45,15 +54,29 @@ query storiesByLocale(
 }
 
 query storyByLocale(
-    $id: ID
+    $id: ID   
 ) {
-    story(id: $id) {
+    story(
+        id: $id
+    ) {
         data {
             ...LocalizedStoryFragment
         }
     }
 }
 
+
+query storyMetaByLocale(
+    $id: ID
+) {
+    story(
+        id: $id
+    ) {
+        data {
+            ...LocalizedStoryMetaFragment
+        }
+    }
+}
 
 query storiesWithoutRelations(
     $filters: StoryFiltersInput
@@ -78,13 +101,6 @@ query storiesWithoutRelations(
     }
 }
 
-query story($id: ID, $locale: I18NLocaleCode) {
-    story(id: $id, locale: $locale) {
-        data {
-            ...StoryFragment
-        }
-    }
-}
 
 query storyWithoutRelations($id: ID, $locale: I18NLocaleCode) {
     story(id: $id, locale: $locale) {
@@ -420,6 +436,117 @@ fragment StoryFragment on StoryEntity {
         locale
         storyLinks {
             ...ComponentModulesButtonsModuleFragment
+        }
+    }
+}
+
+fragment StoryMetaFragment on StoryEntity {
+    id
+    attributes {
+        title
+        slug
+        shortDescription
+        createdAt
+        updatedAt
+        publishedAt
+        locale
+        author {
+            data {
+                attributes {
+                    firstName
+                    lastName
+                    insertion
+                }
+            }
+        }
+        timeframe {
+            id
+            yearStart
+            yearEnd
+        }
+        locations {
+            data {
+                id
+                attributes {
+                    city
+                }
+            }
+        }
+        themes {
+            data {
+                id
+                attributes {
+                    name
+                }
+            }
+        }
+        publicationDate {
+            id
+            date
+            displayType
+        }
+        triplyRecords {
+            data {
+                ...BaseTriplyRecordFragment
+            }
+        }
+    }
+}
+
+fragment LocalizedStoryMetaFragment on StoryEntity {
+    id
+    attributes {
+        title
+        slug
+        shortDescription
+        createdAt
+        updatedAt
+        publishedAt
+        locale
+        author {
+            data {
+                attributes {
+                    firstName
+                    lastName
+                    insertion
+                }
+            }
+        }
+        timeframe {
+            id
+            yearStart
+            yearEnd
+        }
+        locations {
+            data {
+                id
+                attributes {
+                    city
+                }
+            }
+        }
+        themes {
+            data {
+                id
+                attributes {
+                    name
+                }
+            }
+        }
+        publicationDate {
+            id
+            date
+            displayType
+        }
+        triplyRecords {
+            data {
+                ...BaseTriplyRecordFragment
+            }
+        }
+        localizations {
+            data {
+                ...StoryMetaFragment
+            }
         }
     }
 }

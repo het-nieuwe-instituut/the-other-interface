@@ -168,6 +168,13 @@ export class StoryEntityResponseCollection {
 }
 
 @ObjectType()
+export class StoryMetaEntityResponseCollection {
+  @Field(() => StoryEntity, { nullable: true })
+  public data: StoryEntity
+
+}
+
+@ObjectType()
 export class StoryWithoutRelationsEntityResponseCollection {
   @Field(() => [StoryWithoutRelationsEntity], { nullable: true })
   public data: StoryWithoutRelationsEntity[]

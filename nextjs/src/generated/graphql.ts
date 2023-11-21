@@ -1047,6 +1047,7 @@ export type Query = {
   storiesByLocale: StoryEntityResponseCollection;
   storiesWithoutRelations: StoryWithoutRelationsEntityResponseCollection;
   story: StoryEntityResponse;
+  storyMetaByLocale: StoryMetaEntityResponseCollection;
   storyWithoutRelations: StoryWithoutRelationsEntityResponse;
   table: TableEntityResponse;
   tables: TableEntityResponseCollection;
@@ -1174,6 +1175,12 @@ export type QueryStoriesWithoutRelationsArgs = {
 
 export type QueryStoryArgs = {
   id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+export type QueryStoryMetaByLocaleArgs = {
+  filters?: InputMaybe<StoryFiltersInput>;
   locale?: InputMaybe<Scalars['String']>;
 };
 
@@ -1378,6 +1385,11 @@ export type StoryFiltersInput = {
   title?: InputMaybe<StringFilterInput>;
   triplyRecords?: InputMaybe<TriplyRecordFiltersInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type StoryMetaEntityResponseCollection = {
+  __typename?: 'StoryMetaEntityResponseCollection';
+  data?: Maybe<StoryEntity>;
 };
 
 export type StoryRelationResponseCollection = {
@@ -1851,6 +1863,14 @@ export type StoryImagesQueryVariables = Exact<{
 
 
 export type StoryImagesQuery = { __typename?: 'Query', story: { __typename?: 'StoryEntityResponse', data?: { __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', components?: Array<{ __typename?: 'ComponentModulesButtonsModule' } | { __typename?: 'ComponentModulesGridModule' } | { __typename: 'ComponentModulesImage', id: string, caption?: string | null, alt_text?: string | null, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, height?: number | null, width?: number | null } | null } | null }, story?: { __typename?: 'StoryEntityResponse', data?: { __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, slug?: string | null, description?: string | null, shortDescription?: string | null, createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, locale?: string | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', attributes?: { __typename?: 'Author', firstName: string } | null } | null } | null } | null } | null } | null, triplyRecord?: { __typename?: 'TriplyRecordEntityResponse', data?: { __typename?: 'TriplyRecordEntity', id?: string | null, attributes?: { __typename?: 'TriplyRecord', recordId: string, type: EnumTriplyrecordType } | null } | null } | null, imageModuleLayout: { __typename?: 'ComponentCoreModuleLayouts', id: string, spacingTop?: EnumComponentcoremodulelayoutsSpacingtop | null, spacingBottom?: EnumComponentcoremodulelayoutsSpacingbottom | null } } | { __typename?: 'ComponentModulesImageCarousel' } | { __typename?: 'ComponentModulesPullquote' } | { __typename?: 'ComponentModulesSubtitle' } | { __typename?: 'ComponentModulesTableModule' } | { __typename?: 'ComponentModulesTextModule' } | { __typename?: 'ComponentModulesTitleModule' } | { __typename?: 'Error' }> | null } | null } | null } };
+
+export type StoryMetaByIdQueryVariables = Exact<{
+  locale?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['ID']>;
+}>;
+
+
+export type StoryMetaByIdQuery = { __typename?: 'Query', storyMetaByLocale: { __typename?: 'StoryMetaEntityResponseCollection', data?: { __typename: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, description?: string | null, shortDescription?: string | null, createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', attributes?: { __typename?: 'Author', firstName: string, lastName: string, insertion?: string | null } | null } | null } | null, publicationDate?: { __typename?: 'ComponentCorePublicationDate', id?: string | null, date?: any | null, displayType?: EnumComponentcorepublicationdateDisplaytype | null } | null, locations?: { __typename?: 'LocationRelationResponseCollection', data: Array<{ __typename?: 'LocationEntity', id?: string | null, attributes?: { __typename?: 'Location', city?: string | null } | null }> } | null, timeframe?: { __typename?: 'ComponentCoreTimeframe', id: string, yearStart?: number | null, yearEnd?: number | null } | null, themes?: { __typename?: 'ThemeRelationResponseCollection', data?: Array<{ __typename?: 'ThemeEntity', id?: string | null, attributes?: { __typename?: 'Theme', name: string } | null }> | null } | null, triplyRecords?: { __typename?: 'TriplyRecordRelationResponseCollection', data: Array<{ __typename?: 'TriplyRecordEntity', id?: string | null, attributes?: { __typename?: 'TriplyRecord', recordId: string, type: EnumTriplyrecordType } | null }> } | null } | null } | null } };
 
 export type ThemesQueryVariables = Exact<{
   filters?: InputMaybe<ThemeFiltersInput>;
@@ -2855,6 +2875,64 @@ export const StoryImagesDocument = gql`
   }
 }
     ${ImageModuleFragmentFragmentDoc}`;
+export const StoryMetaByIdDocument = gql`
+    query storyMetaById($locale: String, $id: ID) {
+  storyMetaByLocale(locale: $locale, filters: {id: {eq: $id}}) {
+    data {
+      id
+      __typename
+      attributes {
+        title
+        description
+        shortDescription
+        createdAt
+        updatedAt
+        publishedAt
+        author {
+          data {
+            attributes {
+              firstName
+              lastName
+              insertion
+            }
+          }
+        }
+        publicationDate {
+          id
+          date
+          displayType
+        }
+        locations {
+          data {
+            id
+            attributes {
+              city
+            }
+          }
+        }
+        timeframe {
+          id
+          yearStart
+          yearEnd
+        }
+        themes {
+          data {
+            id
+            attributes {
+              name
+            }
+          }
+        }
+        triplyRecords {
+          data {
+            ...BaseTriplyRecordFragment
+          }
+        }
+      }
+    }
+  }
+}
+    ${BaseTriplyRecordFragmentFragmentDoc}`;
 export const ThemesDocument = gql`
     query themes($filters: ThemeFiltersInput, $pagination: PaginationArg, $sort: [String!], $publicationState: String, $locale: String) {
   themes(
@@ -3102,6 +3180,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     storyImages(variables: StoryImagesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<StoryImagesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<StoryImagesQuery>(StoryImagesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'storyImages', 'query');
+    },
+    storyMetaById(variables?: StoryMetaByIdQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<StoryMetaByIdQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<StoryMetaByIdQuery>(StoryMetaByIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'storyMetaById', 'query');
     },
     themes(variables?: ThemesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ThemesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ThemesQuery>(ThemesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'themes', 'query');

@@ -1,10 +1,17 @@
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { useParams } from 'next/navigation'
+import { useStoryMetaById } from '@/features/shared/hooks/queries/useStoryMetaById'
 
 export const usePresenter = () => {
   const commonT = useTypeSafeTranslation('common')
   const storiesT = useTypeSafeTranslation('stories')
 
-  // console.log('story', story)
+  const params = useParams()
+  const id = params?.id as string
+
+  const { data, isLoading } = useStoryMetaById(id)
+
+  console.log('story', data)
   return {
     commonT,
     storiesT,

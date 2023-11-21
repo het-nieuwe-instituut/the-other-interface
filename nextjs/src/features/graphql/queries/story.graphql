@@ -113,3 +113,63 @@ query storyImages($id: String!) {
         }
     }
 }
+
+
+
+
+query storyMetaById($locale: String, $id: ID) {
+  storyMetaByLocale(locale: $locale, filters: { id: { eq: $id } }) {
+        data {
+            id
+            __typename
+            attributes {
+                title
+                description
+                shortDescription
+                createdAt
+                updatedAt
+                publishedAt
+                author {
+                    data {
+                        attributes {
+                            firstName
+                            lastName
+                            insertion
+                        }
+                    }
+                }
+                publicationDate {
+                    id
+                    date
+                    displayType
+                }
+                locations {
+                    data {
+                        id
+                        attributes {
+                            city
+                        }
+                    }
+                }
+                timeframe {
+                    id
+                    yearStart
+                    yearEnd
+                }
+                themes {
+                    data {
+                        id
+                        attributes {
+                            name
+                        }
+                    }
+                }
+                triplyRecords {
+                    data {
+                        ...BaseTriplyRecordFragment
+                    }
+                }
+            }
+        }
+    }
+}
