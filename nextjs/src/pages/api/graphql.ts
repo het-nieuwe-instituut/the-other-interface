@@ -122,6 +122,10 @@ const customResolvers = {
       return storiesData.storiesByLocale
     },
 
+    storyMetaByLocale() {
+      return storyData.story
+    },
+
     storiesWithoutRelations() {
       return storiesWithoutRelations.storiesWithoutRelations
     },

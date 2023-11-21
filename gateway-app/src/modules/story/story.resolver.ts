@@ -9,6 +9,7 @@ import {
   StoryFiltersInput,
   StoryWithoutRelationsEntityResponse,
   StoryWithoutRelationsEntityResponseCollection,
+  StoryMetaEntityResponseCollection,
 } from './story.type'
 
 @Resolver(Story)
@@ -53,6 +54,7 @@ export class StoryResolver {
     @Args('locale', { nullable: true }) locale?: I18NLocaleCode
   ) {
     const res = await this.strapiGqlSdk.storyByLocale({ id: filters?.id?.eq })
+
     if (res?.story?.data?.attributes?.locale === locale || !locale) {
       return {
         data: [res.story?.data],
@@ -72,6 +74,25 @@ export class StoryResolver {
     return {
       data: [],
     }
+  }
+
+  @Query(() => StoryMetaEntityResponseCollection)
+  public async storyMetaByLocale(
+    @Args('filters', { nullable: true }) filters?: StoryFiltersInput,
+    @Args('locale', { nullable: true }) locale?: I18NLocaleCode
+  ) {
+    const res = await this.strapiGqlSdk.storyMetaByLocale({ id: filters?.id?.eq })
+
+    if (res?.story?.data?.attributes?.locale === locale || !locale) {
+      return { data: res.story?.data }
+    }
+
+    const localizedStory =
+      res.story?.data?.attributes?.localizations?.data?.find(
+        l => l.attributes?.locale === locale
+      ) || null
+
+    return { data: localizedStory }
   }
 
   @Query(() => StoryEntityResponseCollection)
