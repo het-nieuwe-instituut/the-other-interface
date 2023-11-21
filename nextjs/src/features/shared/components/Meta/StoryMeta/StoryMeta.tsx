@@ -13,7 +13,6 @@ import {
   EnumComponentcorepublicationdateDisplaytype,
   // EnumComponentmodulesbuttonsmoduleButtonstyle,
   // EnumTriplyrecordType,
-  StoryEntity,
 } from 'src/generated/graphql'
 import { usePresenter } from './usePresenter'
 import { Loader } from '@/features/galaxyInterface/components/Loader/Loader'

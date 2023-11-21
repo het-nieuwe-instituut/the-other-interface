@@ -11,7 +11,6 @@ export const usePresenter = () => {
 
   const { data, isLoading } = useStoryMetaById(id)
 
-  console.log('story', data)
   return {
     commonT,
     storiesT,

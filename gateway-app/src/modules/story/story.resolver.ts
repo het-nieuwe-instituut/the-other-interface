@@ -30,7 +30,7 @@ export class StoryFieldResolver {
       return res.locations
     }
   }
-  //
+
   @ResolveField()
   public async author(@Parent() story: Story) {
     if (story.author?.data?.id) {
