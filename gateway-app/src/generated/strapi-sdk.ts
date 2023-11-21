@@ -13200,6 +13200,7 @@ export type StoryMetaByLocaleQuery = {
         updatedAt?: any | null
         publishedAt?: any | null
         locale?: string | null
+        description?: string | null
         author?: {
           __typename?: 'AuthorEntityResponse'
           data?: {
@@ -15624,6 +15625,7 @@ export type LocalizedStoryMetaFragmentFragment = {
     updatedAt?: any | null
     publishedAt?: any | null
     locale?: string | null
+    description?: string | null
     author?: {
       __typename?: 'AuthorEntityResponse'
       data?: {
@@ -21118,6 +21120,7 @@ export const LocalizedStoryMetaFragmentFragmentDoc = gql`
       updatedAt
       publishedAt
       locale
+      description
       author {
         data {
           attributes {
