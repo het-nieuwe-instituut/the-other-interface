@@ -11490,63 +11490,7 @@ export type StoriesByLocaleQuery = {
         title: string
         slug: string
         description?: string | null
-        shortDescription?: string | null
-        createdAt?: any | null
-        updatedAt?: any | null
-        publishedAt?: any | null
         locale?: string | null
-        author?: {
-          __typename?: 'AuthorEntityResponse'
-          data?: {
-            __typename?: 'AuthorEntity'
-            attributes?: {
-              __typename?: 'Author'
-              firstName: string
-              lastName: string
-              insertion?: string | null
-            } | null
-          } | null
-        } | null
-        timeframe?: {
-          __typename?: 'ComponentCoreTimeframe'
-          id: string
-          yearStart?: any | null
-          yearEnd?: any | null
-        } | null
-        locations?: {
-          __typename?: 'LocationRelationResponseCollection'
-          data: Array<{
-            __typename?: 'LocationEntity'
-            id?: string | null
-            attributes?: { __typename?: 'Location'; city?: string | null } | null
-          }>
-        } | null
-        themes?: {
-          __typename?: 'ThemeRelationResponseCollection'
-          data: Array<{
-            __typename?: 'ThemeEntity'
-            id?: string | null
-            attributes?: { __typename?: 'Theme'; name: string } | null
-          }>
-        } | null
-        publicationDate?: {
-          __typename?: 'ComponentCorePublicationDate'
-          id: string
-          date?: any | null
-          displayType?: Enum_Componentcorepublicationdate_Displaytype | null
-        } | null
-        triplyRecords?: {
-          __typename?: 'TriplyRecordRelationResponseCollection'
-          data: Array<{
-            __typename?: 'TriplyRecordEntity'
-            id?: string | null
-            attributes?: {
-              __typename?: 'TriplyRecord'
-              recordId: string
-              type: Enum_Triplyrecord_Type
-            } | null
-          }>
-        } | null
         components?: Array<
           | {
               __typename: 'ComponentModulesButtonsModule'
@@ -11963,18 +11907,7 @@ export type StoriesByLocaleQuery = {
               title: string
               slug: string
               description?: string | null
-              shortDescription?: string | null
-              createdAt?: any | null
-              updatedAt?: any | null
-              publishedAt?: any | null
               locale?: string | null
-              author?: {
-                __typename?: 'AuthorEntityResponse'
-                data?: {
-                  __typename?: 'AuthorEntity'
-                  attributes?: { __typename?: 'Author'; firstName: string } | null
-                } | null
-              } | null
               components?: Array<
                 | {
                     __typename: 'ComponentModulesButtonsModule'
@@ -12415,63 +12348,7 @@ export type StoryByLocaleQuery = {
         title: string
         slug: string
         description?: string | null
-        shortDescription?: string | null
-        createdAt?: any | null
-        updatedAt?: any | null
-        publishedAt?: any | null
         locale?: string | null
-        author?: {
-          __typename?: 'AuthorEntityResponse'
-          data?: {
-            __typename?: 'AuthorEntity'
-            attributes?: {
-              __typename?: 'Author'
-              firstName: string
-              lastName: string
-              insertion?: string | null
-            } | null
-          } | null
-        } | null
-        timeframe?: {
-          __typename?: 'ComponentCoreTimeframe'
-          id: string
-          yearStart?: any | null
-          yearEnd?: any | null
-        } | null
-        locations?: {
-          __typename?: 'LocationRelationResponseCollection'
-          data: Array<{
-            __typename?: 'LocationEntity'
-            id?: string | null
-            attributes?: { __typename?: 'Location'; city?: string | null } | null
-          }>
-        } | null
-        themes?: {
-          __typename?: 'ThemeRelationResponseCollection'
-          data: Array<{
-            __typename?: 'ThemeEntity'
-            id?: string | null
-            attributes?: { __typename?: 'Theme'; name: string } | null
-          }>
-        } | null
-        publicationDate?: {
-          __typename?: 'ComponentCorePublicationDate'
-          id: string
-          date?: any | null
-          displayType?: Enum_Componentcorepublicationdate_Displaytype | null
-        } | null
-        triplyRecords?: {
-          __typename?: 'TriplyRecordRelationResponseCollection'
-          data: Array<{
-            __typename?: 'TriplyRecordEntity'
-            id?: string | null
-            attributes?: {
-              __typename?: 'TriplyRecord'
-              recordId: string
-              type: Enum_Triplyrecord_Type
-            } | null
-          }>
-        } | null
         components?: Array<
           | {
               __typename: 'ComponentModulesButtonsModule'
@@ -12888,18 +12765,7 @@ export type StoryByLocaleQuery = {
               title: string
               slug: string
               description?: string | null
-              shortDescription?: string | null
-              createdAt?: any | null
-              updatedAt?: any | null
-              publishedAt?: any | null
               locale?: string | null
-              author?: {
-                __typename?: 'AuthorEntityResponse'
-                data?: {
-                  __typename?: 'AuthorEntity'
-                  attributes?: { __typename?: 'Author'; firstName: string } | null
-                } | null
-              } | null
               components?: Array<
                 | {
                     __typename: 'ComponentModulesButtonsModule'
@@ -13452,8 +13318,96 @@ export type StoryMetaByLocaleQuery = {
                   } | null
                 }>
               } | null
+              storyLinks?: {
+                __typename: 'ComponentModulesButtonsModule'
+                id: string
+                buttonStyle?: Enum_Componentmodulesbuttonsmodule_Buttonstyle | null
+                buttonsModuleLayout: {
+                  __typename?: 'ComponentCoreModuleLayouts'
+                  id: string
+                  spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
+                  spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
+                }
+                buttons?: Array<{
+                  __typename?: 'ComponentCoreButton'
+                  id: string
+                  hasAttachment?: boolean | null
+                  text?: string | null
+                  url?: string | null
+                  attachment?: {
+                    __typename?: 'UploadFileEntityResponse'
+                    data?: {
+                      __typename?: 'UploadFileEntity'
+                      id?: string | null
+                      attributes?: {
+                        __typename?: 'UploadFile'
+                        hash: string
+                        mime: string
+                        name: string
+                        provider: string
+                        size: number
+                        url: string
+                        alternativeText?: string | null
+                        caption?: string | null
+                        createdAt?: any | null
+                        ext?: string | null
+                        formats?: any | null
+                        height?: number | null
+                        previewUrl?: string | null
+                        provider_metadata?: any | null
+                        updatedAt?: any | null
+                        width?: number | null
+                      } | null
+                    } | null
+                  } | null
+                } | null> | null
+              } | null
             } | null
           }>
+        } | null
+        storyLinks?: {
+          __typename: 'ComponentModulesButtonsModule'
+          id: string
+          buttonStyle?: Enum_Componentmodulesbuttonsmodule_Buttonstyle | null
+          buttonsModuleLayout: {
+            __typename?: 'ComponentCoreModuleLayouts'
+            id: string
+            spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
+            spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
+          }
+          buttons?: Array<{
+            __typename?: 'ComponentCoreButton'
+            id: string
+            hasAttachment?: boolean | null
+            text?: string | null
+            url?: string | null
+            attachment?: {
+              __typename?: 'UploadFileEntityResponse'
+              data?: {
+                __typename?: 'UploadFileEntity'
+                id?: string | null
+                attributes?: {
+                  __typename?: 'UploadFile'
+                  hash: string
+                  mime: string
+                  name: string
+                  provider: string
+                  size: number
+                  url: string
+                  alternativeText?: string | null
+                  caption?: string | null
+                  createdAt?: any | null
+                  ext?: string | null
+                  formats?: any | null
+                  height?: number | null
+                  previewUrl?: string | null
+                  provider_metadata?: any | null
+                  updatedAt?: any | null
+                  width?: number | null
+                } | null
+              } | null
+            } | null
+          } | null> | null
         } | null
       } | null
     } | null
@@ -13797,18 +13751,7 @@ export type NestedStoryFragmentFragment = {
     title: string
     slug: string
     description?: string | null
-    shortDescription?: string | null
-    createdAt?: any | null
-    updatedAt?: any | null
-    publishedAt?: any | null
     locale?: string | null
-    author?: {
-      __typename?: 'AuthorEntityResponse'
-      data?: {
-        __typename?: 'AuthorEntity'
-        attributes?: { __typename?: 'Author'; firstName: string } | null
-      } | null
-    } | null
     components?: Array<
       | {
           __typename: 'ComponentModulesButtonsModule'
@@ -14226,63 +14169,7 @@ export type LocalizedStoryFragmentFragment = {
     title: string
     slug: string
     description?: string | null
-    shortDescription?: string | null
-    createdAt?: any | null
-    updatedAt?: any | null
-    publishedAt?: any | null
     locale?: string | null
-    author?: {
-      __typename?: 'AuthorEntityResponse'
-      data?: {
-        __typename?: 'AuthorEntity'
-        attributes?: {
-          __typename?: 'Author'
-          firstName: string
-          lastName: string
-          insertion?: string | null
-        } | null
-      } | null
-    } | null
-    timeframe?: {
-      __typename?: 'ComponentCoreTimeframe'
-      id: string
-      yearStart?: any | null
-      yearEnd?: any | null
-    } | null
-    locations?: {
-      __typename?: 'LocationRelationResponseCollection'
-      data: Array<{
-        __typename?: 'LocationEntity'
-        id?: string | null
-        attributes?: { __typename?: 'Location'; city?: string | null } | null
-      }>
-    } | null
-    themes?: {
-      __typename?: 'ThemeRelationResponseCollection'
-      data: Array<{
-        __typename?: 'ThemeEntity'
-        id?: string | null
-        attributes?: { __typename?: 'Theme'; name: string } | null
-      }>
-    } | null
-    publicationDate?: {
-      __typename?: 'ComponentCorePublicationDate'
-      id: string
-      date?: any | null
-      displayType?: Enum_Componentcorepublicationdate_Displaytype | null
-    } | null
-    triplyRecords?: {
-      __typename?: 'TriplyRecordRelationResponseCollection'
-      data: Array<{
-        __typename?: 'TriplyRecordEntity'
-        id?: string | null
-        attributes?: {
-          __typename?: 'TriplyRecord'
-          recordId: string
-          type: Enum_Triplyrecord_Type
-        } | null
-      }>
-    } | null
     components?: Array<
       | {
           __typename: 'ComponentModulesButtonsModule'
@@ -14699,18 +14586,7 @@ export type LocalizedStoryFragmentFragment = {
           title: string
           slug: string
           description?: string | null
-          shortDescription?: string | null
-          createdAt?: any | null
-          updatedAt?: any | null
-          publishedAt?: any | null
           locale?: string | null
-          author?: {
-            __typename?: 'AuthorEntityResponse'
-            data?: {
-              __typename?: 'AuthorEntity'
-              attributes?: { __typename?: 'Author'; firstName: string } | null
-            } | null
-          } | null
           components?: Array<
             | {
                 __typename: 'ComponentModulesButtonsModule'
@@ -15689,6 +15565,50 @@ export type StoryMetaFragmentFragment = {
         } | null
       }>
     } | null
+    storyLinks?: {
+      __typename: 'ComponentModulesButtonsModule'
+      id: string
+      buttonStyle?: Enum_Componentmodulesbuttonsmodule_Buttonstyle | null
+      buttonsModuleLayout: {
+        __typename?: 'ComponentCoreModuleLayouts'
+        id: string
+        spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
+        spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
+      }
+      buttons?: Array<{
+        __typename?: 'ComponentCoreButton'
+        id: string
+        hasAttachment?: boolean | null
+        text?: string | null
+        url?: string | null
+        attachment?: {
+          __typename?: 'UploadFileEntityResponse'
+          data?: {
+            __typename?: 'UploadFileEntity'
+            id?: string | null
+            attributes?: {
+              __typename?: 'UploadFile'
+              hash: string
+              mime: string
+              name: string
+              provider: string
+              size: number
+              url: string
+              alternativeText?: string | null
+              caption?: string | null
+              createdAt?: any | null
+              ext?: string | null
+              formats?: any | null
+              height?: number | null
+              previewUrl?: string | null
+              provider_metadata?: any | null
+              updatedAt?: any | null
+              width?: number | null
+            } | null
+          } | null
+        } | null
+      } | null> | null
+    } | null
   } | null
 }
 
@@ -15822,8 +15742,96 @@ export type LocalizedStoryMetaFragmentFragment = {
               } | null
             }>
           } | null
+          storyLinks?: {
+            __typename: 'ComponentModulesButtonsModule'
+            id: string
+            buttonStyle?: Enum_Componentmodulesbuttonsmodule_Buttonstyle | null
+            buttonsModuleLayout: {
+              __typename?: 'ComponentCoreModuleLayouts'
+              id: string
+              spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
+              spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
+            }
+            buttons?: Array<{
+              __typename?: 'ComponentCoreButton'
+              id: string
+              hasAttachment?: boolean | null
+              text?: string | null
+              url?: string | null
+              attachment?: {
+                __typename?: 'UploadFileEntityResponse'
+                data?: {
+                  __typename?: 'UploadFileEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'UploadFile'
+                    hash: string
+                    mime: string
+                    name: string
+                    provider: string
+                    size: number
+                    url: string
+                    alternativeText?: string | null
+                    caption?: string | null
+                    createdAt?: any | null
+                    ext?: string | null
+                    formats?: any | null
+                    height?: number | null
+                    previewUrl?: string | null
+                    provider_metadata?: any | null
+                    updatedAt?: any | null
+                    width?: number | null
+                  } | null
+                } | null
+              } | null
+            } | null> | null
+          } | null
         } | null
       }>
+    } | null
+    storyLinks?: {
+      __typename: 'ComponentModulesButtonsModule'
+      id: string
+      buttonStyle?: Enum_Componentmodulesbuttonsmodule_Buttonstyle | null
+      buttonsModuleLayout: {
+        __typename?: 'ComponentCoreModuleLayouts'
+        id: string
+        spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom | null
+        spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop | null
+      }
+      buttons?: Array<{
+        __typename?: 'ComponentCoreButton'
+        id: string
+        hasAttachment?: boolean | null
+        text?: string | null
+        url?: string | null
+        attachment?: {
+          __typename?: 'UploadFileEntityResponse'
+          data?: {
+            __typename?: 'UploadFileEntity'
+            id?: string | null
+            attributes?: {
+              __typename?: 'UploadFile'
+              hash: string
+              mime: string
+              name: string
+              provider: string
+              size: number
+              url: string
+              alternativeText?: string | null
+              caption?: string | null
+              createdAt?: any | null
+              ext?: string | null
+              formats?: any | null
+              height?: number | null
+              previewUrl?: string | null
+              provider_metadata?: any | null
+              updatedAt?: any | null
+              width?: number | null
+            } | null
+          } | null
+        } | null
+      } | null> | null
     } | null
   } | null
 }
@@ -20933,18 +20941,7 @@ export const NestedStoryFragmentFragmentDoc = gql`
       title
       slug
       description
-      shortDescription
-      createdAt
-      updatedAt
-      publishedAt
       locale
-      author {
-        data {
-          attributes {
-            firstName
-          }
-        }
-      }
       components {
         __typename
         ... on ComponentModulesPullquote {
@@ -20998,52 +20995,7 @@ export const LocalizedStoryFragmentFragmentDoc = gql`
       title
       slug
       description
-      shortDescription
-      createdAt
-      updatedAt
-      publishedAt
       locale
-      author {
-        data {
-          attributes {
-            firstName
-            lastName
-            insertion
-          }
-        }
-      }
-      timeframe {
-        id
-        yearStart
-        yearEnd
-      }
-      locations {
-        data {
-          id
-          attributes {
-            city
-          }
-        }
-      }
-      themes {
-        data {
-          id
-          attributes {
-            name
-          }
-        }
-      }
-      publicationDate {
-        id
-        date
-        displayType
-      }
-      shortDescription
-      triplyRecords {
-        data {
-          ...BaseTriplyRecordFragment
-        }
-      }
       components {
         __typename
         ... on ComponentModulesPullquote {
@@ -21084,7 +21036,6 @@ export const LocalizedStoryFragmentFragmentDoc = gql`
       }
     }
   }
-  ${BaseTriplyRecordFragmentFragmentDoc}
   ${ComponentModulesPullquoteFragmentFragmentDoc}
   ${ComponentModulesGridModuleFragmentFragmentDoc}
   ${ComponentModulesTextModuleFragmentFragmentDoc}
@@ -21148,9 +21099,13 @@ export const StoryMetaFragmentFragmentDoc = gql`
           ...BaseTriplyRecordFragment
         }
       }
+      storyLinks {
+        ...ComponentModulesButtonsModuleFragment
+      }
     }
   }
   ${BaseTriplyRecordFragmentFragmentDoc}
+  ${ComponentModulesButtonsModuleFragmentFragmentDoc}
 `
 export const LocalizedStoryMetaFragmentFragmentDoc = gql`
   fragment LocalizedStoryMetaFragment on StoryEntity {
@@ -21208,10 +21163,14 @@ export const LocalizedStoryMetaFragmentFragmentDoc = gql`
           ...StoryMetaFragment
         }
       }
+      storyLinks {
+        ...ComponentModulesButtonsModuleFragment
+      }
     }
   }
   ${BaseTriplyRecordFragmentFragmentDoc}
   ${StoryMetaFragmentFragmentDoc}
+  ${ComponentModulesButtonsModuleFragmentFragmentDoc}
 `
 export const ComponentCorePageHeaderFragmentFragmentDoc = gql`
   fragment ComponentCorePageHeaderFragment on ComponentCorePageHeader {

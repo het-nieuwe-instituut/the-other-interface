@@ -219,18 +219,7 @@ fragment NestedStoryFragment on StoryEntity {
         title
         slug
         description
-        shortDescription
-        createdAt
-        updatedAt
-        publishedAt
         locale
-        author {
-            data {
-                attributes {
-                    firstName
-                }
-            }
-        }
         components {
            __typename
             ... on ComponentModulesPullquote {
@@ -273,52 +262,7 @@ fragment LocalizedStoryFragment on StoryEntity {
         title
         slug
         description
-        shortDescription
-        createdAt
-        updatedAt
-        publishedAt
         locale
-        author {
-            data {
-                attributes {
-                    firstName
-                    lastName
-                    insertion
-                }
-            }
-        }
-        timeframe {
-            id
-            yearStart
-            yearEnd
-        }
-        locations {
-            data {
-                id
-                attributes {
-                    city
-                }
-            }
-        }
-        themes {
-            data {
-                id
-                attributes {
-                    name
-                }
-            }
-        }
-        publicationDate {
-            id
-            date
-            displayType
-        }
-        shortDescription
-        triplyRecords {
-            data {
-                ...BaseTriplyRecordFragment
-            }
-        }
         components {
            __typename
             ... on ComponentModulesPullquote {
@@ -490,6 +434,9 @@ fragment StoryMetaFragment on StoryEntity {
                 ...BaseTriplyRecordFragment
             }
         }
+        storyLinks {
+            ...ComponentModulesButtonsModuleFragment
+        }
     }
 }
 
@@ -547,6 +494,9 @@ fragment LocalizedStoryMetaFragment on StoryEntity {
             data {
                 ...StoryMetaFragment
             }
+        }
+        storyLinks {
+            ...ComponentModulesButtonsModuleFragment
         }
     }
 }

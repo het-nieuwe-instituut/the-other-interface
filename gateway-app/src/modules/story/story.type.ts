@@ -171,7 +171,6 @@ export class StoryEntityResponseCollection {
 export class StoryMetaEntityResponseCollection {
   @Field(() => StoryEntity, { nullable: true })
   public data: StoryEntity
-
 }
 
 @ObjectType()
