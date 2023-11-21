@@ -43,7 +43,7 @@ const RecordCarousel = (props: { imageUrls: string[] }) => {
       </Box>
 
       {props.imageUrls.length > 1 && (
-        <Flex mt="30px" position={'relative'} width={'100%'}>
+        <Flex mt="30px" position={'relative'} width={'100%'} height={'103.702px'}>
           {displayedThumbnails.map(url => (
             <Box key={url} mx="6px" height={'103.702px'} width="25%">
               <ResponsiveImage
