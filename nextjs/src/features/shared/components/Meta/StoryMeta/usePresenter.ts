@@ -15,5 +15,7 @@ export const usePresenter = () => {
   return {
     commonT,
     storiesT,
+    isLoading,
+    story: data?.storyMetaByLocale?.data?.attributes,
   }
 }

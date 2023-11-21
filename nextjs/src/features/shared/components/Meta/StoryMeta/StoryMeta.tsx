@@ -16,32 +16,31 @@ import {
   StoryEntity,
 } from 'src/generated/graphql'
 import { usePresenter } from './usePresenter'
+import { Loader } from '@/features/galaxyInterface/components/Loader/Loader'
 
-type Props = {
-  story: StoryEntity | null
-}
+export const StoryMeta: React.FC = () => {
+  const { commonT, story, isLoading } = usePresenter()
 
-export const StoryMeta: React.FC<Props> = ({ story }) => {
-  const { commonT } = usePresenter()
-
-  // const linkedPeopleRecords = story?.attributes?.triplyRecords?.data.filter(
+  // const linkedPeopleRecords = story.triplyRecords?.data.filter(
   //   d => d.attributes?.type === EnumTriplyrecordType.People && !!d.attributes.recordId
   // )
+
+  if (isLoading) {
+    return <Loader />
+  }
+
+  if (!story) return null
 
   return (
     <Box>
       <Box marginBottom={'md'}>
-        {JSON.stringify(story?.attributes)}
         <Text textStyle={'micro'} marginBottom={1}>
           {commonT.t('published', {
-            date: story?.attributes?.publicationDate
-              ? formatPublicationDate(
-                  story?.attributes?.publicationDate.displayType,
-                  story?.attributes?.publicationDate.date
-                )
+            date: story.publicationDate
+              ? formatPublicationDate(story.publicationDate.displayType, story.publicationDate.date)
               : formatPublicationDate(
                   EnumComponentcorepublicationdateDisplaytype.Year,
-                  story?.attributes?.publishedAt
+                  story.publishedAt
                 ),
           })}
         </Text>

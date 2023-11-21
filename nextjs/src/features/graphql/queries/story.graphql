@@ -16,45 +16,6 @@ query storyById($locale: String, $id: ID, $publicationState: String = "LIVE") {
             attributes {
                 title
                 description
-                shortDescription
-                createdAt
-                updatedAt
-                publishedAt
-                author {
-                    data {
-                        attributes {
-                            firstName
-                            lastName
-                            insertion
-                        }
-                    }
-                }
-                publicationDate {
-                    id
-                    date
-                    displayType
-                }
-                locations {
-                    data {
-                        id
-                        attributes {
-                            city
-                        }
-                    }
-                }
-                timeframe {
-                    id
-                    yearStart
-                    yearEnd
-                }
-                themes {
-                    data {
-                        id
-                        attributes {
-                            name
-                        }
-                    }
-                }
                 components {
                     ... on ComponentModulesTextModule {
                         ...textModuleFragment
@@ -82,11 +43,6 @@ query storyById($locale: String, $id: ID, $publicationState: String = "LIVE") {
                     }
                     ... on ComponentModulesGridModule {
                         ...gridModuleFragment
-                    }
-                }
-                storyLinks {
-                    ... on ComponentModulesButtonsModule {
-                        ...buttonsModuleFragment
                     }
                 }
                 triplyRecords {
@@ -167,6 +123,11 @@ query storyMetaById($locale: String, $id: ID) {
                 triplyRecords {
                     data {
                         ...BaseTriplyRecordFragment
+                    }
+                }
+                storyLinks {
+                    ... on ComponentModulesButtonsModule {
+                        ...buttonsModuleFragment
                     }
                 }
             }
