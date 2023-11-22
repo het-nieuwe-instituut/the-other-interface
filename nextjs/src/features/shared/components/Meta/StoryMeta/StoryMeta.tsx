@@ -1,23 +1,8 @@
 'use client'
-// import { ButtonsGrid } from '@/features/shared/components/ButtonsGrid/ButtonsGrid'
-// import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { formatDate } from '@/features/shared/utils/dates'
-// import { getPeoplePathForTriplyRecordId } from '@/features/shared/utils/links'
-// import { keyExtractor } from '@/features/shared/utils/lists'
-// import { capitalizeFirstLetter } from '@/features/shared/utils/text'
 import { Box, Link, Text } from '@chakra-ui/react'
-// import NextLink from 'next/link'
-import {
-  // Author,
-  // ComponentCoreTimeframe,
-  EnumComponentcorepublicationdateDisplaytype,
-  EnumComponentmodulesbuttonsmoduleButtonstyle,
-  // EnumComponentmodulesbuttonsmoduleButtonstyle,
-  // EnumTriplyrecordType,
-} from 'src/generated/graphql'
+import { EnumComponentmodulesbuttonsmoduleButtonstyle } from 'src/generated/graphql'
 import { usePresenter } from './usePresenter'
 import { Loader } from '@/features/galaxyInterface/components/Loader/Loader'
-import { keyExtractor } from '@/features/shared/utils/lists'
 import { getPeoplePathForTriplyRecordId } from '@/features/shared/utils/links'
 import { ButtonsGrid } from '../../ButtonsGrid/ButtonsGrid'
 
@@ -115,7 +100,7 @@ export const StoryMeta: React.FC = () => {
 
       {!!links?.length && (
         <Box marginBottom={'md'}>
-          <Text textStyle={'socialLarge.lg'} fontWeight={700} mb={1}>
+          <Text textStyle={'socialLarge.lg'} fontWeight={700} mb={2}>
             {storiesT.t('share')}
           </Text>
 

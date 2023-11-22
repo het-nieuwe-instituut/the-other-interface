@@ -3,9 +3,7 @@ import { useParams } from 'next/navigation'
 import { useStoryMetaById } from '@/features/shared/hooks/queries/useStoryMetaById'
 import { formatDate } from '@/features/shared/utils/dates'
 import {
-  Author,
   AuthorEntity,
-  AuthorEntityResponse,
   ComponentCoreTimeframe,
   EnumComponentcorepublicationdateDisplaytype,
   EnumTriplyrecordType,
@@ -65,7 +63,7 @@ export const usePresenter = () => {
     isLoading,
     story: data?.storyMetaByLocale?.data?.attributes,
     publicationDateFormatted,
-    authorFormatted: 'TEST AUTHOR', //formatAuthor(story?.author),
+    authorFormatted: story?.author ? formatAuthor(story?.author?.data?.attributes) : '',
     themes: story?.themes?.data?.map(theme => theme.attributes?.name).join(', '),
     linkedPeopleRecords,
     locations: story?.locations?.data?.map(location => location.attributes?.city).join(', '),
