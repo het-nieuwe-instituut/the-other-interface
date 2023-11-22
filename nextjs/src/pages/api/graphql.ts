@@ -8,7 +8,6 @@ import { HomePageData } from '../../mocks/mockData/homepageData'
 import { LandingPagesData } from '../../mocks/mockData/landingpagesData'
 import { menuPagesData } from '../../mocks/mockData/menuPagesData'
 import { storiesData } from '../../mocks/mockData/storiesData'
-import { storiesWithoutRelations } from '../../mocks/mockData/storiesWithoutRelationsData'
 import { storyData } from '../../mocks/mockData/storyData'
 import { ZoomLevel1Data } from '../../mocks/mockData/zoomLevel1Data'
 import {
@@ -124,10 +123,6 @@ const customResolvers = {
 
     storyMetaByLocale() {
       return storyData.story
-    },
-
-    storiesWithoutRelations() {
-      return storiesWithoutRelations.storiesWithoutRelations
     },
 
     relations: () => {

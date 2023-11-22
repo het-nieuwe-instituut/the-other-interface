@@ -21610,32 +21610,6 @@ export const StoryMetaByLocaleDocument = gql`
   }
   ${LocalizedStoryMetaFragmentFragmentDoc}
 `
-export const StoriesWithoutRelationsDocument = gql`
-  query storiesWithoutRelations(
-    $filters: StoryFiltersInput
-    $pagination: PaginationArg
-    $sort: [String]
-    $publicationState: PublicationState
-    $locale: I18NLocaleCode
-  ) {
-    stories(
-      filters: $filters
-      pagination: $pagination
-      sort: $sort
-      publicationState: $publicationState
-      locale: $locale
-    ) {
-      data {
-        ...StoryWithoutRelationsFragment
-      }
-      meta {
-        ...ResponseCollectionMetaFragment
-      }
-    }
-  }
-  ${StoryWithoutRelationsFragmentFragmentDoc}
-  ${ResponseCollectionMetaFragmentFragmentDoc}
-`
 export const StoryWithoutRelationsDocument = gql`
   query storyWithoutRelations($id: ID, $locale: I18NLocaleCode) {
     story(id: $id, locale: $locale) {
@@ -22067,20 +22041,6 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
             ...wrappedRequestHeaders,
           }),
         'storyMetaByLocale',
-        'query'
-      )
-    },
-    storiesWithoutRelations(
-      variables?: StoriesWithoutRelationsQueryVariables,
-      requestHeaders?: Dom.RequestInit['headers']
-    ): Promise<StoriesWithoutRelationsQuery> {
-      return withWrapper(
-        wrappedRequestHeaders =>
-          client.request<StoriesWithoutRelationsQuery>(StoriesWithoutRelationsDocument, variables, {
-            ...requestHeaders,
-            ...wrappedRequestHeaders,
-          }),
-        'storiesWithoutRelations',
         'query'
       )
     },

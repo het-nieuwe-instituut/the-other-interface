@@ -1045,7 +1045,6 @@ export type Query = {
   relations?: Maybe<Array<ZoomLevel3RelationsType>>;
   stories: StoryEntityResponseCollection;
   storiesByLocale: StoryEntityResponseCollection;
-  storiesWithoutRelations: StoryWithoutRelationsEntityResponseCollection;
   story: StoryEntityResponse;
   storyMetaByLocale: StoryMetaEntityResponseCollection;
   storyWithoutRelations: StoryWithoutRelationsEntityResponse;
@@ -1156,15 +1155,6 @@ export type QueryStoriesArgs = {
 
 
 export type QueryStoriesByLocaleArgs = {
-  filters?: InputMaybe<StoryFiltersInput>;
-  locale?: InputMaybe<Scalars['String']>;
-  pagination?: InputMaybe<PaginationArg>;
-  publicationState?: InputMaybe<Scalars['String']>;
-  sort?: InputMaybe<Array<Scalars['String']>>;
-};
-
-
-export type QueryStoriesWithoutRelationsArgs = {
   filters?: InputMaybe<StoryFiltersInput>;
   locale?: InputMaybe<Scalars['String']>;
   pagination?: InputMaybe<PaginationArg>;
@@ -1418,12 +1408,6 @@ export type StoryWithoutRelationsEntity = {
 export type StoryWithoutRelationsEntityResponse = {
   __typename?: 'StoryWithoutRelationsEntityResponse';
   data?: Maybe<StoryWithoutRelationsEntity>;
-};
-
-export type StoryWithoutRelationsEntityResponseCollection = {
-  __typename?: 'StoryWithoutRelationsEntityResponseCollection';
-  data?: Maybe<Array<StoryWithoutRelationsEntity>>;
-  meta?: Maybe<ResponseCollectionMeta>;
 };
 
 export type StringFilterInput = {
@@ -1839,14 +1823,6 @@ export type StoriesQueryVariables = Exact<{
 
 
 export type StoriesQuery = { __typename?: 'Query', stories: { __typename?: 'StoryEntityResponseCollection', data?: Array<{ __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, slug?: string | null, shortDescription?: string | null } | null }> | null, meta?: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', page: number } } | null } };
-
-export type StoriesWithoutRelationsQueryVariables = Exact<{
-  pagination?: InputMaybe<PaginationArg>;
-  locale?: InputMaybe<Scalars['String']>;
-}>;
-
-
-export type StoriesWithoutRelationsQuery = { __typename?: 'Query', storiesWithoutRelations: { __typename?: 'StoryWithoutRelationsEntityResponseCollection', data?: Array<{ __typename?: 'StoryWithoutRelationsEntity', id?: string | null, attributes?: { __typename?: 'StoryWithoutRelations', title: string, slug?: string | null, shortDescription?: string | null } | null }> | null, meta?: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', page: number } } | null } };
 
 export type StoryByIdQueryVariables = Exact<{
   locale?: InputMaybe<Scalars['String']>;
@@ -2735,25 +2711,6 @@ export const StoriesDocument = gql`
   }
 }
     `;
-export const StoriesWithoutRelationsDocument = gql`
-    query storiesWithoutRelations($pagination: PaginationArg, $locale: String) {
-  storiesWithoutRelations(pagination: $pagination, locale: $locale) {
-    data {
-      id
-      attributes {
-        title
-        slug
-        shortDescription
-      }
-    }
-    meta {
-      pagination {
-        page
-      }
-    }
-  }
-}
-    `;
 export const StoryByIdDocument = gql`
     query storyById($locale: String, $id: ID, $publicationState: String = "LIVE") {
   storiesByLocale(
@@ -3139,9 +3096,6 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     stories(variables?: StoriesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<StoriesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<StoriesQuery>(StoriesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'stories', 'query');
-    },
-    storiesWithoutRelations(variables?: StoriesWithoutRelationsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<StoriesWithoutRelationsQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<StoriesWithoutRelationsQuery>(StoriesWithoutRelationsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'storiesWithoutRelations', 'query');
     },
     storyById(variables?: StoryByIdQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<StoryByIdQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<StoryByIdQuery>(StoryByIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'storyById', 'query');
