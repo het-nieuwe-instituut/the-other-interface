@@ -1,28 +1,25 @@
 'use client'
-// import { ButtonsGrid } from '@/features/shared/components/ButtonsGrid/ButtonsGrid'
-// import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { formatDate } from '@/features/shared/utils/dates'
-// import { getPeoplePathForTriplyRecordId } from '@/features/shared/utils/links'
-// import { keyExtractor } from '@/features/shared/utils/lists'
-// import { capitalizeFirstLetter } from '@/features/shared/utils/text'
-import { Box, Text } from '@chakra-ui/react'
-// import NextLink from 'next/link'
-import {
-  // Author,
-  // ComponentCoreTimeframe,
-  EnumComponentcorepublicationdateDisplaytype,
-  // EnumComponentmodulesbuttonsmoduleButtonstyle,
-  // EnumTriplyrecordType,
-} from 'src/generated/graphql'
+import { Box, Link, Text } from '@chakra-ui/react'
+import { EnumComponentmodulesbuttonsmoduleButtonstyle } from 'src/generated/graphql'
 import { usePresenter } from './usePresenter'
 import { Loader } from '@/features/galaxyInterface/components/Loader/Loader'
+import { getPeoplePathForTriplyRecordId } from '@/features/shared/utils/links'
+import { ButtonsGrid } from '../../ButtonsGrid/ButtonsGrid'
 
 export const StoryMeta: React.FC = () => {
-  const { commonT, story, isLoading } = usePresenter()
-
-  // const linkedPeopleRecords = story.triplyRecords?.data.filter(
-  //   d => d.attributes?.type === EnumTriplyrecordType.People && !!d.attributes.recordId
-  // )
+  const {
+    commonT,
+    storiesT,
+    story,
+    isLoading,
+    publicationDateFormatted,
+    authorFormatted,
+    themes,
+    linkedPeopleRecords,
+    locations,
+    timeframe,
+    links,
+  } = usePresenter()
 
   if (isLoading) {
     return <Loader />
@@ -33,128 +30,98 @@ export const StoryMeta: React.FC = () => {
   return (
     <Box>
       <Box marginBottom={'md'}>
-        <Text textStyle={'micro'} marginBottom={1}>
+        <Text textStyle={'socialLarge.lg'} fontWeight={700} marginBottom={1}>
           {commonT.t('published', {
-            date: story.publicationDate
-              ? formatPublicationDate(story.publicationDate.displayType, story.publicationDate.date)
-              : formatPublicationDate(
-                  EnumComponentcorepublicationdateDisplaytype.Year,
-                  story.publishedAt
-                ),
+            date: publicationDateFormatted,
           })}
         </Text>
-        {/* {story.attributes?.author?.data?.attributes && ( */}
-        {/* <Text textStyle={'micro'}>{formatAuthor(story.attributes?.author?.data?.attributes)}</Text> */}
-        {/* )} */}
+        {authorFormatted && (
+          <Text textStyle={'socialLarge.lg'} fontWeight={700}>
+            {authorFormatted}
+          </Text>
+        )}
       </Box>
-      {/* 
-      {story.attributes?.shortDescription && (
-        <Text textStyle={'micro'} marginBottom={'md'}>
-          {story.attributes?.shortDescription}
+      {story.shortDescription && (
+        <Text textStyle={'socialLarge.lg'} marginBottom={'md'}>
+          {story.shortDescription}
         </Text>
-      )} */}
-
-      {/* {!!story.attributes?.timeframe && (
+      )}
+      {themes && (
         <Box marginBottom={'md'}>
-          <Text textStyle={'h5'} mb={1}>
-            {capitalizeFirstLetter(storiesT.t('time') ?? '')}
+          <Text textStyle={'socialLarge.lg'} fontWeight={700} marginBottom={1}>
+            {storiesT.t('themes')}
           </Text>
-          <Text textStyle={'micro'}>
-            <NextLink href={'/timeframes'} passHref>
-              <Link>{formatTimeframe(story.attributes?.timeframe)}</Link>
-            </NextLink>
+          <Text textStyle={'socialLarge.lg'} marginBottom={'md'}>
+            {themes}
           </Text>
         </Box>
-      )} */}
-      {/* 
-      {!!linkedPeopleRecords?.length && (
+      )}
+      {!!linkedPeopleRecords.length && (
         <Box marginBottom={'md'}>
-          <Text textStyle={'h5'} mb={1}>
-            {capitalizeFirstLetter(storiesT.t('people') ?? '')}
+          <Text textStyle={'socialLarge.lg'} fontWeight={700} mb={1}>
+            {storiesT.t('people')}
           </Text>
 
-          <Box display={'flex'} flexDirection={'row'}>
-            {linkedPeopleRecords.map((people, index, array) => {
+          <Box display={'flex'} flexDirection={'row'} flexWrap={'wrap'} gap={'2px'}>
+            {linkedPeopleRecords.map((person, index, array) => {
               const hasItemAfter = array.length - 1 !== index
+
+              if (!person.recordId || !person.title) return null
+
               return (
-                <Text textStyle={'micro'} key={keyExtractor(people, index, array)} mr={1}>
-                  <NextLink
-                    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                    href={getPeoplePathForTriplyRecordId(people.attributes!.recordId)}
-                    passHref
+                <Text textStyle={'socialLarge.lg'} key={person.recordId} mr={1} mb={1}>
+                  <Link
+                    href={getPeoplePathForTriplyRecordId(person.recordId)}
+                    borderBottom={'1px solid'}
+                    borderColor={'blackAlpha.100'}
                   >
-                    <Link>
-                      {people.attributes?.people?.name}
-                      {hasItemAfter && ','}
-                    </Link>
-                  </NextLink>
+                    {person.title}
+                    {hasItemAfter && ','}
+                  </Link>
                 </Text>
               )
             })}
           </Box>
         </Box>
-      )} */}
-
-      {/* {!!story.attributes?.locations?.data.length && (
+      )}
+      {locations && (
         <Box marginBottom={'md'}>
-          <Text textStyle={'h5'} mb={1}>
-            {capitalizeFirstLetter(storiesT.t('locations') ?? '')}
+          <Text textStyle={'socialLarge.lg'} fontWeight={700} marginBottom={1}>
+            {storiesT.t('locations')}
+          </Text>
+          <Text textStyle={'socialLarge.lg'} marginBottom={'md'}>
+            {locations}
+          </Text>
+        </Box>
+      )}
+      {timeframe && (
+        <Box marginBottom={'md'}>
+          <Text textStyle={'socialLarge.lg'} fontWeight={700} marginBottom={1}>
+            {storiesT.t('time')}
+          </Text>
+          <Text textStyle={'socialLarge.lg'} marginBottom={'md'}>
+            {timeframe}
+          </Text>
+        </Box>
+      )}
+
+      {!!links?.length && (
+        <Box marginBottom={'md'}>
+          <Text textStyle={'socialLarge.lg'} fontWeight={700} mb={2}>
+            {storiesT.t('share')}
           </Text>
 
-          <Box display={'flex'} flexDirection={'row'}>
-            {story.attributes?.locations?.data.map((item, index, array) => {
-              const hasItemAfter = array.length - 1 !== index
-              return (
-                <Text textStyle={'micro'} key={keyExtractor(item, index, array)} mr={1}>
-                  <NextLink href={`/locations/${item.attributes?.city}`} passHref>
-                    <Link>
-                      {item.attributes?.city}
-                      {hasItemAfter && ','}
-                    </Link>
-                  </NextLink>
-                </Text>
-              )
-            })}
-          </Box>
+          <ButtonsGrid
+            buttonLayoutStyle={{
+              whiteSpace: 'normal',
+              wordWrap: 'break-word',
+            }}
+            flexDirection="column"
+            buttons={links}
+            buttonStyle={EnumComponentmodulesbuttonsmoduleButtonstyle.Default}
+          />
         </Box>
-      )} */}
-      {/* {story.attributes?.storyLinks && (
-        <ButtonsGrid
-          buttonLayoutStyle={{
-            whiteSpace: 'normal',
-            wordWrap: 'break-word',
-          }}
-          flexDirection="column"
-          buttons={story.attributes.storyLinks.buttons ?? []}
-          buttonStyle={EnumComponentmodulesbuttonsmoduleButtonstyle.Default}
-        ></ButtonsGrid>
-      )} */}
+      )}
     </Box>
   )
 }
-
-function formatPublicationDate(
-  type?: EnumComponentcorepublicationdateDisplaytype | null,
-  date?: string | null
-) {
-  if (date && type === EnumComponentcorepublicationdateDisplaytype.Year) {
-    return formatDate(date, 'YYYY')
-  }
-
-  if (date && type === EnumComponentcorepublicationdateDisplaytype.Date) {
-    return formatDate(date, 'DD/MM/YYYY')
-  }
-
-  return undefined
-}
-
-// function formatTimeframe(timeframe: ComponentCoreTimeframe) {
-//   const timeframes = [timeframe.yearStart, timeframe.yearEnd].filter(item => !!item)
-//   return timeframes.join(' - ')
-// }
-
-// function formatAuthor(author: Author) {
-//   return `${capitalizeFirstLetter(author.firstName)}${
-//     author.insertion ? ' ' + author.insertion : ''
-//   }${' ' + capitalizeFirstLetter(author.lastName)}`
-// }

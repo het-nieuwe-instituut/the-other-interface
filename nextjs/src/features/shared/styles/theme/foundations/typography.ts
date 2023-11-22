@@ -172,13 +172,13 @@ const impactNew = {
 }
 
 const socialLarge = {
-  lg: {
+  xl: {
     fontFamily: "'Social'",
     fontSize: '21px',
     fontWeight: 400,
     lineHeight: '27px',
   },
-  navigation: {
+  lg: {
     fontFamily: "'Social'",
     fontSize: '16px',
     fontWeight: 400,

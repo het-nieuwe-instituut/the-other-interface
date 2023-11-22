@@ -44,16 +44,92 @@ export const storyData = {
         shortDescription:
           'Het Nieuwe Instituut heeft 7500 glasnegatieven gereinigd, gedigitaliseerd en opnieuw verpakt.',
         publishedAt: '2023-08-04T07:41:49.830Z',
-        author: null,
+        author: {
+          data: {
+            attributes: { firstName: 'Kim', lastName: 'Laos', insertion: null }
+          }
+        },
         timeframe: { id: '5', yearStart: 2023, yearEnd: 2024 },
-        locations: null,
-        publicationDate: { date: '2023-08-09T00:00:00.000Z', displayType: 'Year' },
-        triplyRecords: { data: [] },
+        locations: {
+          data: [
+            {
+              id: '1',
+              attributes: {
+                city: 'Purmerend',
+              },
+            },
+            {
+              id: '2',
+              attributes: {
+                city: 'Amsterdam',
+              },
+            },
+          ],
+        },
+        themes: {
+          data: [
+            {
+              id: '1',
+              attributes: {
+                name: 'Dutch Theme',
+              },
+            },
+            {
+              id: '2',
+              attributes: {
+                name: 'English Theme',
+              },
+            },
+          ],
+        },
+        publicationDate: { date: '2022-08-09T00:00:00.000Z', displayType: 'Year' },
+        triplyRecords: {
+          data: [
+            {
+              id: '17',
+              attributes: {
+                recordId: '300184233',
+                type: 'Publication',
+              },
+            },
+            {
+              id: '11',
+              attributes: {
+                recordId: '1008',
+                type: 'Object',
+              },
+            },
+            {
+              id: '9',
+              attributes: {
+                recordId: '10185',
+                type: 'People',
+              },
+            },
+            {
+              id: '12',
+              attributes: {
+                recordId: '10037',
+                type: 'People',
+              },
+            },
+          ],
+        },
         components: [imageModuleMock],
         storyLinks: {
           id: '5',
           __typename: 'ComponentModulesButtonsModule',
-          buttons: [],
+          buttons: [
+            {
+              id: '2',
+              text: 'Instagram',
+              url: 'https://www.instagram.com/',
+              attachment: {
+                data: null,
+              },
+              hasAttachment: null,
+            },
+          ],
           buttonStyle: 'Default',
           buttonsModuleLayout: { id: '59', spacingTop: 'Md', spacingBottom: 'Md' },
         },

@@ -13196,21 +13196,14 @@ export type StoryMetaByLocaleQuery = {
         title: string
         slug: string
         shortDescription?: string | null
+        description?: string | null
         createdAt?: any | null
         updatedAt?: any | null
         publishedAt?: any | null
         locale?: string | null
         author?: {
           __typename?: 'AuthorEntityResponse'
-          data?: {
-            __typename?: 'AuthorEntity'
-            attributes?: {
-              __typename?: 'Author'
-              firstName: string
-              lastName: string
-              insertion?: string | null
-            } | null
-          } | null
+          data?: { __typename?: 'AuthorEntity'; id?: string | null } | null
         } | null
         timeframe?: {
           __typename?: 'ComponentCoreTimeframe'
@@ -13268,15 +13261,7 @@ export type StoryMetaByLocaleQuery = {
               locale?: string | null
               author?: {
                 __typename?: 'AuthorEntityResponse'
-                data?: {
-                  __typename?: 'AuthorEntity'
-                  attributes?: {
-                    __typename?: 'Author'
-                    firstName: string
-                    lastName: string
-                    insertion?: string | null
-                  } | null
-                } | null
+                data?: { __typename?: 'AuthorEntity'; id?: string | null } | null
               } | null
               timeframe?: {
                 __typename?: 'ComponentCoreTimeframe'
@@ -15515,15 +15500,7 @@ export type StoryMetaFragmentFragment = {
     locale?: string | null
     author?: {
       __typename?: 'AuthorEntityResponse'
-      data?: {
-        __typename?: 'AuthorEntity'
-        attributes?: {
-          __typename?: 'Author'
-          firstName: string
-          lastName: string
-          insertion?: string | null
-        } | null
-      } | null
+      data?: { __typename?: 'AuthorEntity'; id?: string | null } | null
     } | null
     timeframe?: {
       __typename?: 'ComponentCoreTimeframe'
@@ -15620,21 +15597,14 @@ export type LocalizedStoryMetaFragmentFragment = {
     title: string
     slug: string
     shortDescription?: string | null
+    description?: string | null
     createdAt?: any | null
     updatedAt?: any | null
     publishedAt?: any | null
     locale?: string | null
     author?: {
       __typename?: 'AuthorEntityResponse'
-      data?: {
-        __typename?: 'AuthorEntity'
-        attributes?: {
-          __typename?: 'Author'
-          firstName: string
-          lastName: string
-          insertion?: string | null
-        } | null
-      } | null
+      data?: { __typename?: 'AuthorEntity'; id?: string | null } | null
     } | null
     timeframe?: {
       __typename?: 'ComponentCoreTimeframe'
@@ -15692,15 +15662,7 @@ export type LocalizedStoryMetaFragmentFragment = {
           locale?: string | null
           author?: {
             __typename?: 'AuthorEntityResponse'
-            data?: {
-              __typename?: 'AuthorEntity'
-              attributes?: {
-                __typename?: 'Author'
-                firstName: string
-                lastName: string
-                insertion?: string | null
-              } | null
-            } | null
+            data?: { __typename?: 'AuthorEntity'; id?: string | null } | null
           } | null
           timeframe?: {
             __typename?: 'ComponentCoreTimeframe'
@@ -21061,11 +21023,7 @@ export const StoryMetaFragmentFragmentDoc = gql`
       locale
       author {
         data {
-          attributes {
-            firstName
-            lastName
-            insertion
-          }
+          id
         }
       }
       timeframe {
@@ -21114,17 +21072,14 @@ export const LocalizedStoryMetaFragmentFragmentDoc = gql`
       title
       slug
       shortDescription
+      description
       createdAt
       updatedAt
       publishedAt
       locale
       author {
         data {
-          attributes {
-            firstName
-            lastName
-            insertion
-          }
+          id
         }
       }
       timeframe {

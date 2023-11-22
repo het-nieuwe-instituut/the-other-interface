@@ -1,8 +1,9 @@
 {
   "published": "Published",
   "mainStory": "Main story",
-  "themes": "Themes",
-  "people": "People",
+  "themes": "Themas",
+  "people": "Personen",
   "locations": "Locaties",
-  "time": "Tijdsperiode"
+  "time": "Tijd",
+  "share": "Delen"
 }

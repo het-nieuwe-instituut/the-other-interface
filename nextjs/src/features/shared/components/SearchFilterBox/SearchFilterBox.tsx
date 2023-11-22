@@ -43,7 +43,7 @@ export const SearchFilterBox: React.FC<Props> = ({
         )}
       </Flex>
 
-      <Text textStyle="socialLarge.lg">{subCategory}</Text>
+      <Text textStyle="socialLarge.xl">{subCategory}</Text>
     </GridItem>
   )
 }

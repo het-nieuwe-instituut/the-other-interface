@@ -446,6 +446,7 @@ fragment LocalizedStoryMetaFragment on StoryEntity {
         title
         slug
         shortDescription
+        description
         createdAt
         updatedAt
         publishedAt
