@@ -22,102 +22,84 @@ export enum ArchivesZoomLevel3Types {
   other = 'other',
 }
 
-export interface ArchivesFondsDetailZoomLevel3Data {
-  id: string
-  thumnail?: string
-  objectNumber?: string
-  title?: string
-  startDate?: string
-  endDate?: string
-  dateLabel?: string
-  dimensionFree?: string
-  mediaReference?: string
-  mediaReferenceLabel?: string
-  existenceOfOriginals?: string
-  scopeContent?: string
-  relatedMaterial?: string
-  rights?: string
-  rightsLabel?: string
-  permanentLink?: string
-}
+// export interface ArchivesFondsDetailZoomLevel3Data {
+//   id: string
+//   thumnail?: string
+//   objectNumber?: string
+//   title?: string
+//   startDate?: string
+//   endDate?: string
+//   dateLabel?: string
+//   dimensionFree?: string
+//   mediaReference?: string
+//   mediaReferenceLabel?: string
+//   existenceOfOriginals?: string
+//   scopeContent?: string
+//   relatedMaterial?: string
+//   rights?: string
+//   rightsLabel?: string
+//   permanentLink?: string
+// }
 
-const archivesFondsDetailZoomLevel3DataKeys: KeysToVerify<ArchivesFondsDetailZoomLevel3Data> = {
-  id: true,
-  thumnail: true,
-  objectNumber: true,
-  title: true,
-  startDate: true,
-  endDate: true,
-  dateLabel: true,
-  dimensionFree: true,
-  mediaReference: true,
-  mediaReferenceLabel: true,
-  existenceOfOriginals: true,
-  scopeContent: true,
-  relatedMaterial: true,
-  rights: true,
-  rightsLabel: true,
-  permanentLink: true,
-}
+// const archivesFondsDetailZoomLevel3DataKeys: KeysToVerify<ArchivesFondsDetailZoomLevel3Data> = {
+//   id: true,
+//   thumnail: true,
+//   objectNumber: true,
+//   title: true,
+//   startDate: true,
+//   endDate: true,
+//   dateLabel: true,
+//   dimensionFree: true,
+//   mediaReference: true,
+//   mediaReferenceLabel: true,
+//   existenceOfOriginals: true,
+//   scopeContent: true,
+//   relatedMaterial: true,
+//   rights: true,
+//   rightsLabel: true,
+//   permanentLink: true,
+// }
 
-export interface ArchivesOtherDetailZoomLevel3Data {
+export interface ArchivesRecordZoomLevel3Data {
   id: string
   thumbnail?: string
-  descriptionLevel?: string
-  objectNumber?: string
-  recordTitle?: string
-  startDate?: string
-  endDate?: string
-  productionDate?: string
-  extent?: string
-  repository?: string
-  repositoryLabel?: string
-  creator?: string
-  creatorLabel?: string
-  creatorHistory?: string
   custodialHistory?: string
+  scope?: string
   systemOfArrangement?: string
-  contentScope?: string
-  conditionsGoverningAccess?: string
-  relatedMaterial?: string
-  appendices?: string
-  source?: string
-  partReference?: string
-  partTitle?: string
-  right?: string
-  rightsLabel?: string
+  existence?: string
+  existenceLocation?: string
+  sources?: string
+  referenceCode?: string
+  titleType?: string
+  descriptionLevel?: string
+  size?: string
+  period?: string
+  access?: string
+  photographCreator?: string
+  rights?: string
   permanentLink?: string
-  pidWorkURI?: string
+  externalSource?: string
 }
 
-const archivesOtherDetailZoomLevel3DataKeys: KeysToVerify<ArchivesOtherDetailZoomLevel3Data> = {
+const archivesRecordZoomLevel3DataKeys: KeysToVerify<ArchivesRecordZoomLevel3Data> = {
   id: true,
   thumbnail: true,
-  descriptionLevel: true,
-  objectNumber: true,
-  recordTitle: true,
-  startDate: true,
-  endDate: true,
-  productionDate: true,
-  extent: true,
-  repository: true,
-  repositoryLabel: true,
-  creator: true,
-  creatorLabel: true,
-  creatorHistory: true,
   custodialHistory: true,
+  scope: true,
   systemOfArrangement: true,
-  contentScope: true,
-  conditionsGoverningAccess: true,
-  relatedMaterial: true,
-  appendices: true,
-  source: true,
-  partReference: true,
-  partTitle: true,
-  right: true,
-  rightsLabel: true,
+  existence: true,
+  existenceLocation: true,
+  sources: true,
+  referenceCode: true,
+  titleType: true,
+  descriptionLevel: true,
+  size: true,
+  period: true,
+  access: true,
+  photographCreator: true,
+  rights: true,
   permanentLink: true,
-  pidWorkURI: true,
+  externalSource: true,
 }
 
 @Injectable()
@@ -126,6 +108,9 @@ export class ArchivesService {
 
   private readonly ZoomLevel3Endpoint =
     'archives-recordPage/run?'
+
+  private readonly ZoomLevel3RecordEndpoint =
+    'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/archives-recordPage-editorial/11/run?'
 
   public constructor(private triplyService: TriplyService) {}
 
@@ -168,6 +153,17 @@ export class ArchivesService {
       id,
       thumbnail: getHttpThumbnailOrNull(result.data[0]?.thumbnail)?.split(';'),
     }
+  }
+
+  public async getZoomLevel3RecordData(id: string) {
+    const result = await this.triplyService.queryTriplyData<ArchivesRecordZoomLevel3Data>(
+      this.ZoomLevel3RecordEndpoint,
+      archivesRecordZoomLevel3DataKeys,
+      { page: 1, pageSize: 1 },
+      { id }
+    )
+
+    return result?.data
   }
 
   // private getCreatorsValueFromData(data: ArchivesZoomLeve3DataType[]): ArchivesFondsCreatorType[] {

@@ -4,6 +4,7 @@ import {
   ArchiveZoomLevel3UnionType,
   ArchivesFondsZoomLevel3DetailType,
   ArchivesOtherZoomLevel3DetailType,
+  ArchivesRecordZoomLevel3Type,
 } from '../archives/archives.type'
 import { ObjectsZoomLevel3DetailType } from '../objects/objects.type'
 import { PeopleZoomLevel3DetailType } from '../people/people.type'
@@ -32,6 +33,11 @@ export class ZoomLevel3Resolver {
   @Query(() => [ZoomLevel3RelationsType], { nullable: true })
   public relations(@Args() args: ZoomLevel3Args) {
     return this.zoomLevel3Service.getRelations(args.id, args.type, args?.lang)
+  }
+
+  @Query(() => [ArchivesRecordZoomLevel3Type], { nullable: true })
+  public async archivesRecordZoomLevel3(@Args('id') archiveId: string) {
+    return this.archivesService.getZoomLevel3RecordData(archiveId)
   }
 
   // @Query(() => [ZoomLevel3RelatedRecordType], { nullable: true })

@@ -89,6 +89,26 @@ export class ZoomLevel3Service {
     }
   }
 
+  public async getRecordDetail(id: string, type: EntityNames) {
+    switch (type) {
+      // case EntityNames.Objects: {
+      //   return this.objectsService.getZoomLevel3RecordData(id)
+      // }
+      // case EntityNames.People: {
+      //   return this.peopleService.getZoomLevel3RecordData(id)
+      // }
+      // case EntityNames.Publications: {
+      //   return this.publicationsService.getZoomLevel3RecordData(id)
+      // }
+      case EntityNames.Archives: {
+        return this.archivesService.getZoomLevel3RecordData(id)
+      }
+
+      default:
+        throw CustomError.internalCritical('type not implemented')
+    }
+  }
+
   private async getStoryRelations(id: string, lang?: string) {
     let storyId = id
     const res = await this.strapiGqlSdk.storyByLocale({ id })

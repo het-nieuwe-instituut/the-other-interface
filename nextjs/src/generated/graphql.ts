@@ -89,6 +89,28 @@ export type ArchivesOtherZoomLevel3DetailType = {
   type: ArchivesZoomLevel3Types;
 };
 
+export type ArchivesRecordZoomLevel3Type = {
+  __typename?: 'ArchivesRecordZoomLevel3Type';
+  access?: Maybe<Scalars['String']>;
+  custodialHistory?: Maybe<Scalars['String']>;
+  descriptionLevel?: Maybe<Scalars['String']>;
+  existence?: Maybe<Scalars['String']>;
+  existenceLocation?: Maybe<Scalars['String']>;
+  externalSource?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  period?: Maybe<Scalars['String']>;
+  permanentLink?: Maybe<Scalars['String']>;
+  photographCreator?: Maybe<Scalars['String']>;
+  referenceCode?: Maybe<Scalars['String']>;
+  rights?: Maybe<Scalars['String']>;
+  scope?: Maybe<Scalars['String']>;
+  size?: Maybe<Scalars['String']>;
+  sources?: Maybe<Scalars['String']>;
+  systemOfArrangement?: Maybe<Scalars['String']>;
+  thumbnail?: Maybe<Scalars['String']>;
+  titleType?: Maybe<Scalars['String']>;
+};
+
 export enum ArchivesZoomLevel3Types {
   Fonds = 'fonds',
   Other = 'other'
@@ -996,6 +1018,7 @@ export type Query = {
   __typename?: 'Query';
   archiveOther: ArchivesFondsZoomLevel3DetailType;
   archivesDetailZoomLevel3: ArchiveZoomLevel3DetailType;
+  archivesRecordZoomLevel3?: Maybe<Array<ArchivesRecordZoomLevel3Type>>;
   author: AuthorEntityResponse;
   authors: AuthorEntityResponseCollection;
   homepage: HomepageEntityResponse;
@@ -1041,6 +1064,11 @@ export type Query = {
   zoomLevel5PublicationsAudiovisual?: Maybe<PublicationsAudioVisualZoomLevel3DetailType>;
   zoomLevel5PublicationsBook?: Maybe<PublicationsBookZoomLevel3DetailType>;
   zoomLevel5PublicationsSerial?: Maybe<PublicationsSerialZoomLevel3DetailType>;
+};
+
+
+export type QueryArchivesRecordZoomLevel3Args = {
+  id: Scalars['String'];
 };
 
 
@@ -1938,6 +1966,13 @@ export type ZoomLevel3ArchiveQueryVariables = Exact<{
 
 
 export type ZoomLevel3ArchiveQuery = { __typename?: 'Query', zoomLevel3Archive?: { __typename: 'ArchiveZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null, description?: string | null } | null };
+
+export type ZoomLevel3ArchiveRecordQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type ZoomLevel3ArchiveRecordQuery = { __typename?: 'Query', archivesRecordZoomLevel3?: Array<{ __typename: 'ArchivesRecordZoomLevel3Type', id?: string | null, thumbnail?: string | null, custodialHistory?: string | null, scope?: string | null, systemOfArrangement?: string | null, existence?: string | null, existenceLocation?: string | null, sources?: string | null, referenceCode?: string | null, titleType?: string | null, descriptionLevel?: string | null, size?: string | null, period?: string | null, access?: string | null, photographCreator?: string | null, rights?: string | null, permanentLink?: string | null, externalSource?: string | null }> | null };
 
 export type ArchivesRelationsQueryVariables = Exact<{
   id: Scalars['String'];
@@ -2951,6 +2986,31 @@ export const ZoomLevel3ArchiveDocument = gql`
   }
 }
     `;
+export const ZoomLevel3ArchiveRecordDocument = gql`
+    query ZoomLevel3ArchiveRecord($id: String!) {
+  archivesRecordZoomLevel3(id: $id) {
+    __typename
+    id
+    thumbnail
+    custodialHistory
+    scope
+    systemOfArrangement
+    existence
+    existenceLocation
+    sources
+    referenceCode
+    titleType
+    descriptionLevel
+    size
+    period
+    access
+    photographCreator
+    rights
+    permanentLink
+    externalSource
+  }
+}
+    `;
 export const ArchivesRelationsDocument = gql`
     query ArchivesRelations($id: String!, $lang: String!) {
   relations(type: Archives, id: $id, lang: $lang) {
@@ -3098,6 +3158,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     ZoomLevel3Archive(variables: ZoomLevel3ArchiveQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ZoomLevel3ArchiveQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ZoomLevel3ArchiveQuery>(ZoomLevel3ArchiveDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ZoomLevel3Archive', 'query');
+    },
+    ZoomLevel3ArchiveRecord(variables: ZoomLevel3ArchiveRecordQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ZoomLevel3ArchiveRecordQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ZoomLevel3ArchiveRecordQuery>(ZoomLevel3ArchiveRecordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ZoomLevel3ArchiveRecord', 'query');
     },
     ArchivesRelations(variables: ArchivesRelationsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ArchivesRelationsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ArchivesRelationsQuery>(ArchivesRelationsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ArchivesRelations', 'query');

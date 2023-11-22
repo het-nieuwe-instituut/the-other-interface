@@ -6,6 +6,7 @@ import { Category } from '@/features/shared/utils/categories'
 import { toSingularCategory } from '@/features/shared/utils/toSingularCategory'
 import { useRecordDetail } from '@/features/shared/hooks/queries/useRecordDetail'
 import { notFound } from 'next/navigation'
+import { useRecordDetailExtended } from '@/features/shared/hooks/queries/useRecordDetailExtended'
 
 interface Props {
   gridRow: string
@@ -19,6 +20,8 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
   const id = params?.id as string
 
   const { data: record, isLoading } = useRecordDetail(category, id)
+  const { data: meta, isLoading: isMetaLoading } = useRecordDetailExtended(category, id)
+  console.log(meta)
 
   if (!isLoading && !record) {
     notFound()

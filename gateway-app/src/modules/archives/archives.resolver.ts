@@ -6,6 +6,7 @@ import {
   ArchiveZoomLevel3DetailType,
   ArchivesFondsCreatorType,
   ArchivesFondsZoomLevel3DetailType,
+  ArchivesRecordZoomLevel3Type,
 } from './archives.type'
 import { TriplyUtils } from '../triply/triply.utils'
 import { CustomError } from '../util/customError'
@@ -19,6 +20,16 @@ export class ArchivesZoomLevel3Resolver {
     return this.zoomLevel3Service.getDetail(archiveCreator?.id, EntityNames?.Archives)
   }
 }
+
+// @Resolver(ArchivesRecordZoomLevel3Type)
+// export class ArchivesRecordZoomLevel3Resolver {
+//   public constructor(private readonly zoomLevel3Service: ZoomLevel3Service) {}
+
+//   @Query(() => ArchivesRecordZoomLevel3Type)
+//   public archivesRecordZoomLevel3(@Parent() archiveCreator: ArchiveZoomLevel3DetailType) {
+//     return this.zoomLevel3Service.getRecordDetail(archiveCreator?.id, EntityNames?.Archives)
+//   }
+// }
 
 @Resolver(ArchivesFondsZoomLevel3DetailType)
 export class ArchivesOtherResolver {
