@@ -1,5 +1,6 @@
 {
-  "published": "Gepubliceerd",
+  "published": "Gepubliceerd op {{date}}",
+  "by": "by {{author}}",
   "mainStory": "Main story",
   "themes": "Themes",
   "people": "Persons",

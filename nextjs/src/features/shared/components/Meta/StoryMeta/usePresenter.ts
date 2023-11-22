@@ -1,5 +1,5 @@
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { useParams } from 'next/navigation'
+import { useParams, useSearchParams } from 'next/navigation'
 import { useStoryMetaById } from '@/features/shared/hooks/queries/useStoryMetaById'
 import { formatDate } from '@/features/shared/utils/dates'
 import {
@@ -7,8 +7,10 @@ import {
   ComponentCoreTimeframe,
   EnumComponentcorepublicationdateDisplaytype,
   EnumTriplyrecordType,
+  TriplyRecord,
 } from 'src/generated/graphql'
 import { capitalizeFirstLetter } from '@/features/shared/utils/text'
+import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 
 function formatPublicationDate(
   displayType?: EnumComponentcorepublicationdateDisplaytype | null,
@@ -38,9 +40,17 @@ function formatTimeframe(timeframe?: ComponentCoreTimeframe | null) {
   return [timeframe.yearStart, timeframe.yearEnd].filter(item => !!item).join(' - ')
 }
 
+function getPeopleUrl(id: string, lang?: string | null) {
+  let url = `/detail/people/${id}`
+  url = addLocaleToUrl(url, lang)
+
+  return url
+}
+
 export const usePresenter = () => {
-  const commonT = useTypeSafeTranslation('common')
   const storiesT = useTypeSafeTranslation('stories')
+  const searchParams = useSearchParams()
+  const lang = searchParams?.get('lang')
 
   const params = useParams()
   const id = params?.id as string
@@ -55,11 +65,15 @@ export const usePresenter = () => {
 
   const linkedPeopleRecords =
     story?.triplyRecords?.data
-      .filter(d => d.attributes?.type === EnumTriplyrecordType.People && !!d.attributes.recordId)
-      .map(d => ({ recordId: d.attributes?.recordId, title: d.attributes?.people?.title })) || []
+      .filter((d): d is { attributes: TriplyRecord } => Boolean(d.attributes))
+      .filter(d => d.attributes?.type === EnumTriplyrecordType.People)
+      .map(d => ({
+        recordId: d.attributes.recordId,
+        title: d.attributes.people?.title,
+        url: getPeopleUrl(d.attributes.recordId, lang),
+      })) || []
 
   return {
-    commonT,
     storiesT,
     isLoading,
     story: data?.storyMetaByLocale?.data?.attributes,

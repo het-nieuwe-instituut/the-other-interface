@@ -1,5 +1,6 @@
 {
-  "published": "Published",
+  "published": "Published on {{date}}",
+  "by": "door {{author}}",
   "mainStory": "Main story",
   "themes": "Themas",
   "people": "Personen",

@@ -18,6 +18,8 @@ export class StoryFieldResolver {
 
   @ResolveField()
   public async locations(@Parent() story: Story) {
+    console.log('story.locations', story.locations?.data)
+
     if (story.locations?.data && story.locations.data.length) {
       const res = await this.strapiGqlSdk.locations({
         filters: {
@@ -25,6 +27,7 @@ export class StoryFieldResolver {
             return { id: { eq: ent.id } }
           }),
         },
+        locale: story?.locale,
       })
 
       return res.locations
@@ -84,6 +87,10 @@ export class StoryResolver {
     const res = await this.strapiGqlSdk.storyMetaByLocale({ id: filters?.id?.eq })
 
     if (res?.story?.data?.attributes?.locale === locale || !locale) {
+      console.log('storyMetaByLocale', {
+        triplyRecords: res.story?.data?.attributes,
+      })
+
       return { data: res.story?.data }
     }
 
@@ -91,6 +98,10 @@ export class StoryResolver {
       res.story?.data?.attributes?.localizations?.data?.find(
         l => l.attributes?.locale === locale
       ) || null
+
+    console.log('localizedStory', {
+      triplyRecords: res.story?.data?.attributes,
+    })
 
     return { data: localizedStory }
   }
