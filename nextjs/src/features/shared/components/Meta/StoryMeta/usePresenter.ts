@@ -65,12 +65,12 @@ export const usePresenter = () => {
 
   const linkedPeopleRecords =
     story?.triplyRecords?.data
-      .filter((d): d is { attributes: TriplyRecord } => Boolean(d.attributes))
-      .filter(d => d.attributes?.type === EnumTriplyrecordType.People)
-      .map(d => ({
-        recordId: d.attributes.recordId,
-        title: d.attributes.people?.title,
-        url: getPeopleUrl(d.attributes.recordId, lang),
+      .filter((record): record is { attributes: TriplyRecord } => Boolean(record.attributes))
+      .filter(record => record.attributes?.type === EnumTriplyrecordType.People)
+      .map(record => ({
+        recordId: record.attributes.recordId,
+        title: record.attributes.people?.title,
+        url: getPeopleUrl(record.attributes.recordId, lang),
       })) || []
 
   return {
