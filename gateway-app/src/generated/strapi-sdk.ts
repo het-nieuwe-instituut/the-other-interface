@@ -21534,7 +21534,7 @@ export const StoryDocument = gql`
   ${StoryFragmentFragmentDoc}
 `
 export const StoriesByLocaleDocument = gql`
-  query storiesByLocale(
+  query storyByLocale(
     $id: IDFilterInput
     $pagination: PaginationArg
     $sort: [String]
@@ -21956,20 +21956,6 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
             ...wrappedRequestHeaders,
           }),
         'story',
-        'query'
-      )
-    },
-    storiesByLocale(
-      variables?: StoriesByLocaleQueryVariables,
-      requestHeaders?: Dom.RequestInit['headers']
-    ): Promise<StoriesByLocaleQuery> {
-      return withWrapper(
-        wrappedRequestHeaders =>
-          client.request<StoriesByLocaleQuery>(StoriesByLocaleDocument, variables, {
-            ...requestHeaders,
-            ...wrappedRequestHeaders,
-          }),
-        'storiesByLocale',
         'query'
       )
     },

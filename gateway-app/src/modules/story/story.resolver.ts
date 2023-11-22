@@ -45,7 +45,7 @@ export class StoryResolver {
   public constructor(@Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk) {}
 
   @Query(() => StoryEntityResponseCollection)
-  public async storiesByLocale(
+  public async storyByLocale(
     @Args('filters', { nullable: true }) filters?: StoryFiltersInput,
     @Args('pagination', { nullable: true }) pagination?: PaginationArg,
     @Args('sort', { nullable: true, type: () => [String] }) sort?: string[],
@@ -55,24 +55,15 @@ export class StoryResolver {
     const res = await this.strapiGqlSdk.storyByLocale({ id: filters?.id?.eq })
 
     if (res?.story?.data?.attributes?.locale === locale || !locale) {
-      return {
-        data: [res.story?.data],
-      }
+      return { data: res.story?.data }
     }
 
-    const localizedStory = res.story?.data?.attributes?.localizations?.data?.find(
-      l => l.attributes?.locale === locale
-    )
+    const localizedStory =
+      res.story?.data?.attributes?.localizations?.data?.find(
+        l => l.attributes?.locale === locale
+      ) || null
 
-    if (localizedStory) {
-      return {
-        data: [localizedStory],
-      }
-    }
-
-    return {
-      data: [],
-    }
+    return { data: localizedStory }
   }
 
   @Query(() => StoryMetaEntityResponseCollection)

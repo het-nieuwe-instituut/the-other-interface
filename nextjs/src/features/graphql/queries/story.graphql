@@ -9,7 +9,7 @@
 #import '../fragments/components/core/baseTriplyRecord.fragment.graphql'
 
 query storyById($locale: String, $id: ID, $publicationState: String = "LIVE") {
-  storiesByLocale(locale: $locale, filters: { id: { eq: $id } }, publicationState: $publicationState) {
+  storyByLocale(locale: $locale, filters: { id: { eq: $id } }, publicationState: $publicationState) {
         data {
             id
             __typename

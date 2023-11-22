@@ -16,7 +16,7 @@ export interface DetailpageEditorialLayer {
         NonNullable<LandingpageBySlugQuery['landingpages']['data']>[0]['attributes']
       >['components']
     | NonNullable<
-        NonNullable<StoryByIdQuery['storiesByLocale']['data']>[0]['attributes']
+        NonNullable<StoryByIdQuery['storyByLocale']['data']>['attributes']
       >['components']
     | null
 }

@@ -9,7 +9,7 @@ export const usePresenter = () => {
 
   const { data, isLoading } = useStoryById(id)
 
-  const story = data?.storiesByLocale?.data?.[0]
+  const story = data?.storyByLocale?.data
   const record = extractStoryData(story as StoryEntity)
 
   return {

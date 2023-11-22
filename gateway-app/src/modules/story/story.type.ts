@@ -154,8 +154,8 @@ export class StoryEntityResponse {
 
 @ObjectType()
 export class StoryEntityResponseCollection {
-  @Field(() => [StoryEntity], { nullable: true })
-  public data: StoryEntity[]
+  @Field(() => StoryEntity, { nullable: true })
+  public data: StoryEntity
 
   @Field(() => ResponseCollectionMeta, { nullable: true })
   public meta: ResponseCollectionMeta

@@ -36,7 +36,7 @@ export type DynamicComponents =
     >['components']
   | Maybe<Array<HomepageComponentsDynamicZone>>
   | NonNullable<
-      NonNullable<StoryByIdQuery['storiesByLocale']['data']>[0]['attributes']
+      NonNullable<StoryByIdQuery['storyByLocale']['data']>['attributes']
     >['components']
   | Maybe<Array<MenupageComponentsDynamicZone>>
 
