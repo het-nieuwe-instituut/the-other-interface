@@ -3,6 +3,7 @@ import { Box, Grid, GridItem, useTheme } from '@chakra-ui/react'
 import { PageHeader } from '../../PageHeader/PageHeader'
 import { StoryMeta } from '../../Meta/StoryMeta/StoryMeta'
 import { usePresenter } from './usePresenter'
+import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 
 export const StoryLayer = () => {
   const theme = useTheme()
@@ -24,6 +25,7 @@ export const StoryLayer = () => {
         >
           <GridItem area={'header'}>
             <PageHeader title={story?.title} preface={story?.description} />
+            <DynamicComponentRenderer components={story?.attributes?.components} />
           </GridItem>
           <GridItem area={'meta'}>
             <StoryMeta />
