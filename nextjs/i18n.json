@@ -6,6 +6,6 @@
     "*": ["common", "navigation"],
     "/": ["homepage", "category"],
     "/landingpage": ["category"],
-    "/detail/[category]/[id]": ["category", "record"]
+    "/detail/[category]/[id]": ["category", "record", "stories"]
   }
 }

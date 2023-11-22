@@ -160,7 +160,7 @@ export const Link: ComponentStyleConfig = {
       color: `${colors.pinkAlpha['100']} !important`,
       textUnderlineOffset: '0.25em',
       textDecoration: 'underline',
-      textStyle: `${textStyles.socialLarge.navigation}`,
+      textStyle: `${textStyles.socialLarge.lg}`,
       underline: 'none',
       borderBottom: 'none',
 

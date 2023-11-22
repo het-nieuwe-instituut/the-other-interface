@@ -27,7 +27,7 @@ export const GalaxyTopRight: React.FC = () => {
                 whiteSpace={'nowrap'}
                 textOverflow={'ellipsis'}
                 overflow={'hidden'}
-                textStyle={'socialLarge.lg'}
+                textStyle={'socialLarge.xl'}
                 mr={'10px'}
                 onClick={e => {
                   changeLanguage(e, locale)

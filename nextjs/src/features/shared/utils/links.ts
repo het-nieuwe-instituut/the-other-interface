@@ -10,7 +10,7 @@ export const isExternalURL = (url: string, origin: string) => {
 }
 
 export function getPeoplePathForTriplyRecordId(id: string) {
-  return `/landingpage/people/${id}-people`
+  return `/detail/people/${id}`
 }
 
 export function getTriplyRecordPathForTypeAndId(type: EntityNames, id: string) {

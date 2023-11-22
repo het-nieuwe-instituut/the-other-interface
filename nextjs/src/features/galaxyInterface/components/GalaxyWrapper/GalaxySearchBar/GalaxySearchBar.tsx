@@ -50,8 +50,8 @@ export const GalaxySearchBar: React.FC = () => {
         zIndex={'inherit'}
         whiteSpace={'nowrap'}
       >
-        <Text textStyle="socialLarge.lg">{searchResultAmount}</Text>
-        <Text textStyle="socialLarge.lg">{t('resultsFor')}</Text>
+        <Text textStyle="socialLarge.xl">{searchResultAmount}</Text>
+        <Text textStyle="socialLarge.xl">{t('resultsFor')}</Text>
       </Flex>
 
       <Box overflow="hidden" height={'100%'}>

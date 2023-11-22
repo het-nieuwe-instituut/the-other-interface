@@ -92,7 +92,7 @@ export const Navigation = ({ menupages }: Props) => {
             <Text textStyle={'socialMedium.md'} color={'pinkAlpha.100'} mb={'5'} fontSize={'21px'}>
               {tNavigation('about')}
             </Text>
-            <Text textStyle={'socialLarge.navigation'} color={'pinkAlpha.100'} mb={3}>
+            <Text textStyle={'socialLarge.lg'} color={'pinkAlpha.100'} mb={3}>
               {tNavigation('aboutDescription')}
             </Text>
             <Link
