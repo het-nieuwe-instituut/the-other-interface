@@ -13203,7 +13203,15 @@ export type StoryMetaByLocaleQuery = {
         locale?: string | null
         author?: {
           __typename?: 'AuthorEntityResponse'
-          data?: { __typename?: 'AuthorEntity'; id?: string | null } | null
+          data?: {
+            __typename?: 'AuthorEntity'
+            attributes?: {
+              __typename?: 'Author'
+              firstName: string
+              lastName: string
+              insertion?: string | null
+            } | null
+          } | null
         } | null
         timeframe?: {
           __typename?: 'ComponentCoreTimeframe'
@@ -13261,7 +13269,15 @@ export type StoryMetaByLocaleQuery = {
               locale?: string | null
               author?: {
                 __typename?: 'AuthorEntityResponse'
-                data?: { __typename?: 'AuthorEntity'; id?: string | null } | null
+                data?: {
+                  __typename?: 'AuthorEntity'
+                  attributes?: {
+                    __typename?: 'Author'
+                    firstName: string
+                    lastName: string
+                    insertion?: string | null
+                  } | null
+                } | null
               } | null
               timeframe?: {
                 __typename?: 'ComponentCoreTimeframe'
@@ -13393,40 +13409,6 @@ export type StoryMetaByLocaleQuery = {
               } | null
             } | null
           } | null> | null
-        } | null
-      } | null
-    } | null
-  } | null
-}
-
-export type StoryWithoutRelationsQueryVariables = Exact<{
-  id?: InputMaybe<Scalars['ID']>
-  locale?: InputMaybe<Scalars['I18NLocaleCode']>
-}>
-
-export type StoryWithoutRelationsQuery = {
-  __typename?: 'Query'
-  story?: {
-    __typename?: 'StoryEntityResponse'
-    data?: {
-      __typename?: 'StoryEntity'
-      id?: string | null
-      attributes?: {
-        __typename?: 'Story'
-        title: string
-        slug: string
-        description?: string | null
-        shortDescription?: string | null
-        createdAt?: any | null
-        updatedAt?: any | null
-        publishedAt?: any | null
-        locale?: string | null
-        author?: {
-          __typename?: 'AuthorEntityResponse'
-          data?: {
-            __typename?: 'AuthorEntity'
-            attributes?: { __typename?: 'Author'; firstName: string } | null
-          } | null
         } | null
       } | null
     } | null
@@ -15453,7 +15435,15 @@ export type StoryMetaFragmentFragment = {
     locale?: string | null
     author?: {
       __typename?: 'AuthorEntityResponse'
-      data?: { __typename?: 'AuthorEntity'; id?: string | null } | null
+      data?: {
+        __typename?: 'AuthorEntity'
+        attributes?: {
+          __typename?: 'Author'
+          firstName: string
+          lastName: string
+          insertion?: string | null
+        } | null
+      } | null
     } | null
     timeframe?: {
       __typename?: 'ComponentCoreTimeframe'
@@ -15557,7 +15547,15 @@ export type LocalizedStoryMetaFragmentFragment = {
     locale?: string | null
     author?: {
       __typename?: 'AuthorEntityResponse'
-      data?: { __typename?: 'AuthorEntity'; id?: string | null } | null
+      data?: {
+        __typename?: 'AuthorEntity'
+        attributes?: {
+          __typename?: 'Author'
+          firstName: string
+          lastName: string
+          insertion?: string | null
+        } | null
+      } | null
     } | null
     timeframe?: {
       __typename?: 'ComponentCoreTimeframe'
@@ -15615,7 +15613,15 @@ export type LocalizedStoryMetaFragmentFragment = {
           locale?: string | null
           author?: {
             __typename?: 'AuthorEntityResponse'
-            data?: { __typename?: 'AuthorEntity'; id?: string | null } | null
+            data?: {
+              __typename?: 'AuthorEntity'
+              attributes?: {
+                __typename?: 'Author'
+                firstName: string
+                lastName: string
+                insertion?: string | null
+              } | null
+            } | null
           } | null
           timeframe?: {
             __typename?: 'ComponentCoreTimeframe'
@@ -20976,7 +20982,11 @@ export const StoryMetaFragmentFragmentDoc = gql`
       locale
       author {
         data {
-          id
+          attributes {
+            firstName
+            lastName
+            insertion
+          }
         }
       }
       timeframe {
@@ -21032,7 +21042,11 @@ export const LocalizedStoryMetaFragmentFragmentDoc = gql`
       locale
       author {
         data {
-          id
+          attributes {
+            firstName
+            lastName
+            insertion
+          }
         }
       }
       timeframe {
@@ -21563,16 +21577,6 @@ export const StoryMetaByLocaleDocument = gql`
   }
   ${LocalizedStoryMetaFragmentFragmentDoc}
 `
-export const StoryWithoutRelationsDocument = gql`
-  query storyWithoutRelations($id: ID, $locale: I18NLocaleCode) {
-    story(id: $id, locale: $locale) {
-      data {
-        ...StoryWithoutRelationsFragment
-      }
-    }
-  }
-  ${StoryWithoutRelationsFragmentFragmentDoc}
-`
 export const StoriesLinkedToTriplyRecordDocument = gql`
   query storiesLinkedToTriplyRecord($recordId: String!, $type: String!) {
     stories(filters: { triplyRecords: { recordId: { eq: $recordId }, type: { eq: $type } } }) {
@@ -21994,20 +21998,6 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
             ...wrappedRequestHeaders,
           }),
         'storyMetaByLocale',
-        'query'
-      )
-    },
-    storyWithoutRelations(
-      variables?: StoryWithoutRelationsQueryVariables,
-      requestHeaders?: Dom.RequestInit['headers']
-    ): Promise<StoryWithoutRelationsQuery> {
-      return withWrapper(
-        wrappedRequestHeaders =>
-          client.request<StoryWithoutRelationsQuery>(StoryWithoutRelationsDocument, variables, {
-            ...requestHeaders,
-            ...wrappedRequestHeaders,
-          }),
-        'storyWithoutRelations',
         'query'
       )
     },

@@ -78,15 +78,6 @@ query storyMetaByLocale(
     }
 }
 
-
-query storyWithoutRelations($id: ID, $locale: I18NLocaleCode) {
-    story(id: $id, locale: $locale) {
-        data {
-            ...StoryWithoutRelationsFragment
-        }
-    }
-}
-
 # "$type" must be ENUM_TRIPLYRECORD_TYPE
 query storiesLinkedToTriplyRecord($recordId: String!, $type: String!) {
     stories(filters: { triplyRecords: { recordId: { eq: $recordId }, type: { eq: $type } } }) {

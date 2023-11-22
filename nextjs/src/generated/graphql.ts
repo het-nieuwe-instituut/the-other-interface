@@ -1047,7 +1047,6 @@ export type Query = {
   storiesByLocale: StoryEntityResponseCollection;
   story: StoryEntityResponse;
   storyMetaByLocale: StoryMetaEntityResponseCollection;
-  storyWithoutRelations: StoryWithoutRelationsEntityResponse;
   table: TableEntityResponse;
   tables: TableEntityResponseCollection;
   theme: ThemeEntityResponse;
@@ -1171,12 +1170,6 @@ export type QueryStoryArgs = {
 
 export type QueryStoryMetaByLocaleArgs = {
   filters?: InputMaybe<StoryFiltersInput>;
-  locale?: InputMaybe<Scalars['String']>;
-};
-
-
-export type QueryStoryWithoutRelationsArgs = {
-  id: Scalars['String'];
   locale?: InputMaybe<Scalars['String']>;
 };
 
@@ -1403,11 +1396,6 @@ export type StoryWithoutRelationsEntity = {
   __typename?: 'StoryWithoutRelationsEntity';
   attributes?: Maybe<StoryWithoutRelations>;
   id?: Maybe<Scalars['ID']>;
-};
-
-export type StoryWithoutRelationsEntityResponse = {
-  __typename?: 'StoryWithoutRelationsEntityResponse';
-  data?: Maybe<StoryWithoutRelationsEntity>;
 };
 
 export type StringFilterInput = {
