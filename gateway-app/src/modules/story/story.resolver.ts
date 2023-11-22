@@ -109,6 +109,7 @@ export class StoryResolver {
     @Args('id') id: string,
     @Args('locale', { nullable: true }) locale?: I18NLocaleCode
   ) {
+    console.log('StoryWithoutRelationsEntityResponse')
     const res = await this.strapiGqlSdk.story({ id, locale })
 
     return res.story
