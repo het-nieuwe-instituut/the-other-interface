@@ -49,6 +49,8 @@ export const usePresenter = () => {
 
   const story = data?.storyMetaByLocale?.data?.attributes
 
+  console.log('usePresenter', story)
+
   const publicationDateFormatted = story?.publicationDate
     ? formatPublicationDate(story?.publicationDate.displayType, story?.publicationDate.date)
     : formatPublicationDate(EnumComponentcorepublicationdateDisplaytype.Year, story?.publishedAt)

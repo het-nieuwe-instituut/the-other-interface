@@ -122,7 +122,15 @@ query storyMetaById($locale: String, $id: ID) {
                 }
                 triplyRecords {
                     data {
-                        ...BaseTriplyRecordFragment
+                        id
+                        attributes {
+                            type
+                            recordId
+                            people {
+                                name
+                                profession
+                            }
+                        }
                     }
                 }
                 storyLinks {
