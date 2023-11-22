@@ -14,9 +14,4 @@ export class StoryService {
       id: EntityNames.Stories,
     }
   }
-
-  public async getStoryById(id: string, locale: string) {
-    const story = await this.strapiGqlSdk.storyWithoutRelations({ id, locale })
-    return story.story
-  }
 }
