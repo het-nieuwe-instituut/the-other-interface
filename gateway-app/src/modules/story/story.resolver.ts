@@ -84,11 +84,6 @@ export class StoryResolver {
     const res = await this.strapiGqlSdk.storyMetaByLocale({ id: filters?.id?.eq })
 
     if (res?.story?.data?.attributes?.locale === locale || !locale) {
-      console.log('storyMetaByLocale', {
-        author: JSON.stringify(res.story?.data?.attributes?.author),
-        triplyRecords: res.story?.data?.attributes?.triplyRecords,
-      })
-
       return { data: res.story?.data }
     }
 

@@ -127,8 +127,7 @@ query storyMetaById($locale: String, $id: ID) {
                             type
                             recordId
                             people {
-                                name
-                                profession
+                                title
                             }
                         }
                     }

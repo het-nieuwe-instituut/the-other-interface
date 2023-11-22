@@ -55,9 +55,10 @@ export const usePresenter = () => {
     ? formatPublicationDate(story?.publicationDate.displayType, story?.publicationDate.date)
     : formatPublicationDate(EnumComponentcorepublicationdateDisplaytype.Year, story?.publishedAt)
 
-  const linkedPeopleRecords = story?.triplyRecords?.data
-    .filter(d => d.attributes?.type === EnumTriplyrecordType.People && !!d.attributes.recordId)
-    .map(d => ({ recordId: d.attributes?.recordId })) as { recordId: string }[]
+  const linkedPeopleRecords =
+    story?.triplyRecords?.data
+      .filter(d => d.attributes?.type === EnumTriplyrecordType.People && !!d.attributes.recordId)
+      .map(d => ({ recordId: d.attributes?.recordId, title: d.attributes?.people?.title })) || []
 
   return {
     commonT,

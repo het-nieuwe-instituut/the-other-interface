@@ -62,13 +62,20 @@ export const StoryMeta: React.FC = () => {
             {storiesT.t('people')}
           </Text>
 
-          <Box display={'flex'} flexDirection={'row'}>
+          <Box display={'flex'} flexDirection={'row'} flexWrap={'wrap'} gap={'2px'}>
             {linkedPeopleRecords.map((person, index, array) => {
               const hasItemAfter = array.length - 1 !== index
+
+              if (!person.recordId || !person.title) return null
+
               return (
-                <Text textStyle={'socialLarge.lg'} key={person.recordId} mr={1}>
-                  <Link href={getPeoplePathForTriplyRecordId(person.recordId)}>
-                    {person.recordId}
+                <Text textStyle={'socialLarge.lg'} key={person.recordId} mr={1} mb={1}>
+                  <Link
+                    href={getPeoplePathForTriplyRecordId(person.recordId)}
+                    borderBottom={'1px solid'}
+                    borderColor={'blackAlpha.100'}
+                  >
+                    {person.title}
                     {hasItemAfter && ','}
                   </Link>
                 </Text>
