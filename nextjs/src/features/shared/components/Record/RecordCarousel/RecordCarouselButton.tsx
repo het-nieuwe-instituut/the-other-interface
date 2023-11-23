@@ -9,7 +9,7 @@ interface Props {
 
 export const RecordCarouselButton: React.FC<Props> = props => {
   return (
-    <Box width="30px" height={'61px'} cursor={'pointer'} mr={'3'}>
+    <Box width="30px" height={'61px'} cursor={'pointer'} mr={'2'}>
       {props.direction === 'left' ? (
         <BigArrowLeft onClick={props.onClick} />
       ) : (
