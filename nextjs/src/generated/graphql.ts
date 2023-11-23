@@ -1181,6 +1181,12 @@ export type QueryStoryWithoutRelationsArgs = {
 };
 
 
+export type QueryStoryWithoutRelationsArgs = {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
 export type QueryTableArgs = {
   id?: InputMaybe<Scalars['String']>;
 };
