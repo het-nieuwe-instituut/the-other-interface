@@ -55,6 +55,29 @@ query storyMetaByLocale(
     }
 }
 
+query storiesWithoutRelations(
+    $filters: StoryFiltersInput
+    $pagination: PaginationArg
+    $sort: [String]
+    $publicationState: PublicationState
+    $locale: I18NLocaleCode
+) {
+    stories(
+        filters: $filters
+        pagination: $pagination
+        sort: $sort
+        publicationState: $publicationState
+        locale: $locale
+    ) {
+        data {
+            ...StoryWithoutRelationsFragment
+        }
+        meta {
+            ...ResponseCollectionMetaFragment
+        }
+    }
+}
+
 
 query storyWithoutRelations($id: ID, $locale: I18NLocaleCode) {
     story(id: $id, locale: $locale) {

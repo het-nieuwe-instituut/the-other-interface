@@ -124,6 +124,10 @@ const customResolvers = {
       return storyData.storyMetaByLocale
     },
 
+    storiesWithoutRelations() {
+      return storiesWithoutRelations.storiesWithoutRelations
+    },
+
     relations: () => {
       return zoomLevel3Data.relations.relations
     },
