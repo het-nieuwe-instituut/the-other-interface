@@ -16,11 +16,13 @@ function formatPublicationDate(
   displayType?: EnumComponentcorepublicationdateDisplaytype | null,
   publicationDate?: string | null
 ) {
+  if (!publicationDate) return undefined
+
   switch (displayType) {
     case EnumComponentcorepublicationdateDisplaytype.Year:
-      return publicationDate ? formatDate(publicationDate, 'YYYY') : undefined
+      return formatDate(publicationDate, 'YYYY')
     case EnumComponentcorepublicationdateDisplaytype.Date:
-      return publicationDate ? formatDate(publicationDate, 'DD/MM/YYYY') : undefined
+      return formatDate(publicationDate, 'DD/MM/YYYY')
     default:
       return undefined
   }
@@ -59,10 +61,6 @@ export const usePresenter = () => {
 
   const story = data?.storyMetaByLocale?.data?.attributes
 
-  const publicationDateFormatted = story?.publicationDate
-    ? formatPublicationDate(story?.publicationDate.displayType, story?.publicationDate.date)
-    : formatPublicationDate(EnumComponentcorepublicationdateDisplaytype.Year, story?.publishedAt)
-
   const linkedPeopleRecords =
     story?.triplyRecords?.data
       .filter((record): record is { attributes: TriplyRecord } => Boolean(record.attributes))
@@ -77,7 +75,10 @@ export const usePresenter = () => {
     storiesT,
     isLoading,
     story: data?.storyMetaByLocale?.data?.attributes,
-    publicationDateFormatted,
+    publicationDateFormatted: formatPublicationDate(
+      story?.publicationDate?.displayType,
+      story?.publicationDate?.date
+    ),
     authorFormatted: story?.author ? formatAuthor(story?.author?.data?.attributes) : '',
     themes: story?.themes?.data?.map(theme => theme.attributes?.name).join(', '),
     linkedPeopleRecords,

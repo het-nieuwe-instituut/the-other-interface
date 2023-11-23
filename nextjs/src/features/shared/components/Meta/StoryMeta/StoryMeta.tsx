@@ -1,9 +1,7 @@
 'use client'
 import { Box, Link, Text } from '@chakra-ui/react'
-import { EnumComponentmodulesbuttonsmoduleButtonstyle } from 'src/generated/graphql'
 import { usePresenter } from './usePresenter'
 import { Loader } from '@/features/galaxyInterface/components/Loader/Loader'
-import { ButtonsGrid } from '../../ButtonsGrid/ButtonsGrid'
 
 export const StoryMeta: React.FC = () => {
   const {
@@ -16,7 +14,6 @@ export const StoryMeta: React.FC = () => {
     linkedPeopleRecords,
     locations,
     timeframe,
-    links,
   } = usePresenter()
 
   if (isLoading) {
@@ -102,7 +99,8 @@ export const StoryMeta: React.FC = () => {
         </Box>
       )}
 
-      {!!links?.length && (
+      {/* Should be hidden for now */}
+      {/* {!!links?.length && (
         <Box marginBottom={'md'}>
           <Text textStyle={'socialLarge.lg'} fontWeight={700} mb={2}>
             {storiesT.t('share')}
@@ -118,7 +116,7 @@ export const StoryMeta: React.FC = () => {
             buttonStyle={EnumComponentmodulesbuttonsmoduleButtonstyle.Default}
           />
         </Box>
-      )}
+      )} */}
     </Box>
   )
 }
