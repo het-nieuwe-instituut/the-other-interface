@@ -30,29 +30,6 @@ query story($id: ID, $locale: I18NLocaleCode) {
     }
 }
 
-query storiesByLocale(
-    $id: IDFilterInput
-    $pagination: PaginationArg
-    $sort: [String]
-    $publicationState: PublicationState
-) {
-    stories(
-        filters: {
-            id: $id,
-        },
-        pagination: $pagination,
-        sort: $sort,
-        publicationState: $publicationState
-    ) {
-        data {
-            ...LocalizedStoryFragment
-        }
-        meta {
-            ...ResponseCollectionMetaFragment
-        }
-    }
-}
-
 query storyByLocale(
     $id: ID   
 ) {
@@ -396,11 +373,7 @@ fragment StoryMetaFragment on StoryEntity {
         locale
         author {
             data {
-                attributes {
-                    firstName
-                    lastName
-                    insertion
-                }
+                id
             }
         }
         timeframe {
@@ -453,11 +426,7 @@ fragment LocalizedStoryMetaFragment on StoryEntity {
         locale
         author {
             data {
-                attributes {
-                    firstName
-                    lastName
-                    insertion
-                }
+                id
             }
         }
         timeframe {

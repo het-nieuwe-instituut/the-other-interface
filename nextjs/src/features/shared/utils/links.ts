@@ -9,10 +9,6 @@ export const isExternalURL = (url: string, origin: string) => {
   }
 }
 
-export function getPeoplePathForTriplyRecordId(id: string) {
-  return `/detail/people/${id}`
-}
-
 export function getTriplyRecordPathForTypeAndId(type: EntityNames, id: string) {
   const baseURL = 'https://collectiedata.hetnieuweinstituut.nl/id'
 

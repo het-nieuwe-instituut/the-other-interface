@@ -7,8 +7,6 @@ import '../../../graphql.schema.json'
 import { HomePageData } from '../../mocks/mockData/homepageData'
 import { LandingPagesData } from '../../mocks/mockData/landingpagesData'
 import { menuPagesData } from '../../mocks/mockData/menuPagesData'
-import { storiesData } from '../../mocks/mockData/storiesData'
-import { storiesWithoutRelations } from '../../mocks/mockData/storiesWithoutRelationsData'
 import { storyData } from '../../mocks/mockData/storyData'
 import { ZoomLevel1Data } from '../../mocks/mockData/zoomLevel1Data'
 import {
@@ -115,15 +113,15 @@ const customResolvers = {
     },
 
     story() {
-      return storyData.story
+      return storyData.storybyLocale
     },
 
-    storiesByLocale() {
-      return storiesData.storiesByLocale
+    storyByLocale() {
+      return storyData.storybyLocale
     },
 
     storyMetaByLocale() {
-      return storyData.story
+      return storyData.storyMetaByLocale
     },
 
     storiesWithoutRelations() {

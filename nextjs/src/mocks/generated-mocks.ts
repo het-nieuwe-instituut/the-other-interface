@@ -1126,9 +1126,9 @@ export const aQuery = (overrides?: Partial<Query>, _relationshipsToOmit: Array<s
         publicationSerial: overrides && overrides.hasOwnProperty('publicationSerial') ? overrides.publicationSerial! : relationshipsToOmit.includes('PublicationsSerialZoomLevel3DetailType') ? {} as PublicationsSerialZoomLevel3DetailType : aPublicationsSerialZoomLevel3DetailType({}, relationshipsToOmit),
         relations: overrides && overrides.hasOwnProperty('relations') ? overrides.relations! : [relationshipsToOmit.includes('ZoomLevel3RelationsType') ? {} as ZoomLevel3RelationsType : aZoomLevel3RelationsType({}, relationshipsToOmit)],
         stories: overrides && overrides.hasOwnProperty('stories') ? overrides.stories! : relationshipsToOmit.includes('StoryEntityResponseCollection') ? {} as StoryEntityResponseCollection : aStoryEntityResponseCollection({}, relationshipsToOmit),
-        storiesByLocale: overrides && overrides.hasOwnProperty('storiesByLocale') ? overrides.storiesByLocale! : relationshipsToOmit.includes('StoryEntityResponseCollection') ? {} as StoryEntityResponseCollection : aStoryEntityResponseCollection({}, relationshipsToOmit),
         storiesWithoutRelations: overrides && overrides.hasOwnProperty('storiesWithoutRelations') ? overrides.storiesWithoutRelations! : relationshipsToOmit.includes('StoryWithoutRelationsEntityResponseCollection') ? {} as StoryWithoutRelationsEntityResponseCollection : aStoryWithoutRelationsEntityResponseCollection({}, relationshipsToOmit),
         story: overrides && overrides.hasOwnProperty('story') ? overrides.story! : relationshipsToOmit.includes('StoryEntityResponse') ? {} as StoryEntityResponse : aStoryEntityResponse({}, relationshipsToOmit),
+        storyByLocale: overrides && overrides.hasOwnProperty('storyByLocale') ? overrides.storyByLocale! : relationshipsToOmit.includes('StoryEntityResponseCollection') ? {} as StoryEntityResponseCollection : aStoryEntityResponseCollection({}, relationshipsToOmit),
         storyMetaByLocale: overrides && overrides.hasOwnProperty('storyMetaByLocale') ? overrides.storyMetaByLocale! : relationshipsToOmit.includes('StoryMetaEntityResponseCollection') ? {} as StoryMetaEntityResponseCollection : aStoryMetaEntityResponseCollection({}, relationshipsToOmit),
         storyWithoutRelations: overrides && overrides.hasOwnProperty('storyWithoutRelations') ? overrides.storyWithoutRelations! : relationshipsToOmit.includes('StoryWithoutRelationsEntityResponse') ? {} as StoryWithoutRelationsEntityResponse : aStoryWithoutRelationsEntityResponse({}, relationshipsToOmit),
         table: overrides && overrides.hasOwnProperty('table') ? overrides.table! : relationshipsToOmit.includes('TableEntityResponse') ? {} as TableEntityResponse : aTableEntityResponse({}, relationshipsToOmit),
@@ -1205,7 +1205,7 @@ export const aStoryEntityResponse = (overrides?: Partial<StoryEntityResponse>, _
 export const aStoryEntityResponseCollection = (overrides?: Partial<StoryEntityResponseCollection>, _relationshipsToOmit: Array<string> = []): StoryEntityResponseCollection => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'StoryEntityResponseCollection']);
     return {
-        data: overrides && overrides.hasOwnProperty('data') ? overrides.data! : [relationshipsToOmit.includes('StoryEntity') ? {} as StoryEntity : aStoryEntity({}, relationshipsToOmit)],
+        data: overrides && overrides.hasOwnProperty('data') ? overrides.data! : relationshipsToOmit.includes('StoryEntity') ? {} as StoryEntity : aStoryEntity({}, relationshipsToOmit),
         meta: overrides && overrides.hasOwnProperty('meta') ? overrides.meta! : relationshipsToOmit.includes('ResponseCollectionMeta') ? {} as ResponseCollectionMeta : aResponseCollectionMeta({}, relationshipsToOmit),
     };
 };

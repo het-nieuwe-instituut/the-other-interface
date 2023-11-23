@@ -1,14 +1,10 @@
 'use client'
 import { Box, Link, Text } from '@chakra-ui/react'
-import { EnumComponentmodulesbuttonsmoduleButtonstyle } from 'src/generated/graphql'
 import { usePresenter } from './usePresenter'
 import { Loader } from '@/features/galaxyInterface/components/Loader/Loader'
-import { getPeoplePathForTriplyRecordId } from '@/features/shared/utils/links'
-import { ButtonsGrid } from '../../ButtonsGrid/ButtonsGrid'
 
 export const StoryMeta: React.FC = () => {
   const {
-    commonT,
     storiesT,
     story,
     isLoading,
@@ -18,7 +14,6 @@ export const StoryMeta: React.FC = () => {
     linkedPeopleRecords,
     locations,
     timeframe,
-    links,
   } = usePresenter()
 
   if (isLoading) {
@@ -30,14 +25,19 @@ export const StoryMeta: React.FC = () => {
   return (
     <Box>
       <Box marginBottom={'md'}>
-        <Text textStyle={'socialLarge.lg'} fontWeight={700} marginBottom={1}>
-          {commonT.t('published', {
-            date: publicationDateFormatted,
-          })}
-        </Text>
+        {publicationDateFormatted && (
+          <Text textStyle={'socialLarge.lg'} fontWeight={700} marginBottom={1}>
+            {storiesT.t('published', {
+              date: publicationDateFormatted,
+            })}
+          </Text>
+        )}
+
         {authorFormatted && (
           <Text textStyle={'socialLarge.lg'} fontWeight={700}>
-            {authorFormatted}
+            {storiesT.t('by', {
+              author: authorFormatted,
+            })}
           </Text>
         )}
       </Box>
@@ -66,15 +66,9 @@ export const StoryMeta: React.FC = () => {
             {linkedPeopleRecords.map((person, index, array) => {
               const hasItemAfter = array.length - 1 !== index
 
-              if (!person.recordId || !person.title) return null
-
               return (
                 <Text textStyle={'socialLarge.lg'} key={person.recordId} mr={1} mb={1}>
-                  <Link
-                    href={getPeoplePathForTriplyRecordId(person.recordId)}
-                    borderBottom={'1px solid'}
-                    borderColor={'blackAlpha.100'}
-                  >
+                  <Link href={person.url} borderBottom={'1px solid'} borderColor={'blackAlpha.100'}>
                     {person.title}
                     {hasItemAfter && ','}
                   </Link>
@@ -105,7 +99,8 @@ export const StoryMeta: React.FC = () => {
         </Box>
       )}
 
-      {!!links?.length && (
+      {/* Should be hidden for now */}
+      {/* {!!links?.length && (
         <Box marginBottom={'md'}>
           <Text textStyle={'socialLarge.lg'} fontWeight={700} mb={2}>
             {storiesT.t('share')}
@@ -121,7 +116,7 @@ export const StoryMeta: React.FC = () => {
             buttonStyle={EnumComponentmodulesbuttonsmoduleButtonstyle.Default}
           />
         </Box>
-      )}
+      )} */}
     </Box>
   )
 }

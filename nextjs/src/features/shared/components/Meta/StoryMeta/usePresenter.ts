@@ -1,5 +1,5 @@
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { useParams } from 'next/navigation'
+import { useParams, useSearchParams } from 'next/navigation'
 import { useStoryMetaById } from '@/features/shared/hooks/queries/useStoryMetaById'
 import { formatDate } from '@/features/shared/utils/dates'
 import {
@@ -7,18 +7,22 @@ import {
   ComponentCoreTimeframe,
   EnumComponentcorepublicationdateDisplaytype,
   EnumTriplyrecordType,
+  TriplyRecord,
 } from 'src/generated/graphql'
 import { capitalizeFirstLetter } from '@/features/shared/utils/text'
+import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 
 function formatPublicationDate(
   displayType?: EnumComponentcorepublicationdateDisplaytype | null,
   publicationDate?: string | null
 ) {
+  if (!publicationDate) return undefined
+
   switch (displayType) {
     case EnumComponentcorepublicationdateDisplaytype.Year:
-      return publicationDate ? formatDate(publicationDate, 'YYYY') : undefined
+      return formatDate(publicationDate, 'YYYY')
     case EnumComponentcorepublicationdateDisplaytype.Date:
-      return publicationDate ? formatDate(publicationDate, 'DD/MM/YYYY') : undefined
+      return formatDate(publicationDate, 'DD/MM/YYYY')
     default:
       return undefined
   }
@@ -38,9 +42,17 @@ function formatTimeframe(timeframe?: ComponentCoreTimeframe | null) {
   return [timeframe.yearStart, timeframe.yearEnd].filter(item => !!item).join(' - ')
 }
 
+function getPeopleUrl(id: string, lang?: string | null) {
+  let url = `/detail/people/${id}`
+  url = addLocaleToUrl(url, lang)
+
+  return url
+}
+
 export const usePresenter = () => {
-  const commonT = useTypeSafeTranslation('common')
   const storiesT = useTypeSafeTranslation('stories')
+  const searchParams = useSearchParams()
+  const lang = searchParams?.get('lang')
 
   const params = useParams()
   const id = params?.id as string
@@ -49,21 +61,24 @@ export const usePresenter = () => {
 
   const story = data?.storyMetaByLocale?.data?.attributes
 
-  const publicationDateFormatted = story?.publicationDate
-    ? formatPublicationDate(story?.publicationDate.displayType, story?.publicationDate.date)
-    : formatPublicationDate(EnumComponentcorepublicationdateDisplaytype.Year, story?.publishedAt)
-
   const linkedPeopleRecords =
     story?.triplyRecords?.data
-      .filter(d => d.attributes?.type === EnumTriplyrecordType.People && !!d.attributes.recordId)
-      .map(d => ({ recordId: d.attributes?.recordId, title: d.attributes?.people?.title })) || []
+      .filter((record): record is { attributes: TriplyRecord } => Boolean(record.attributes))
+      .filter(record => record.attributes?.type === EnumTriplyrecordType.People)
+      .map(record => ({
+        recordId: record.attributes.recordId,
+        title: record.attributes.people?.title,
+        url: getPeopleUrl(record.attributes.recordId, lang),
+      })) || []
 
   return {
-    commonT,
     storiesT,
     isLoading,
     story: data?.storyMetaByLocale?.data?.attributes,
-    publicationDateFormatted,
+    publicationDateFormatted: formatPublicationDate(
+      story?.publicationDate?.displayType,
+      story?.publicationDate?.date
+    ),
     authorFormatted: story?.author ? formatAuthor(story?.author?.data?.attributes) : '',
     themes: story?.themes?.data?.map(theme => theme.attributes?.name).join(', '),
     linkedPeopleRecords,

@@ -29,7 +29,7 @@ export async function getZoom3RecordTask(type: Category, payload: Payload, api: 
   try {
     if (isStoryCategory(type)) {
       const detail = await api?.storyById(payload)
-      const story = (detail as StoryByIdQuery)?.storiesByLocale?.data?.[0]
+      const story = (detail as StoryByIdQuery)?.storyByLocale?.data
       const record = extractStoryData(story as StoryEntity)
       return record
     }
