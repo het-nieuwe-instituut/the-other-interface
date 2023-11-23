@@ -22,6 +22,7 @@ import {
 import { zoomLevel3Data } from '../../mocks/mockData/zoomLevel3Data'
 import { themesData } from '../../mocks/mockData/themesData'
 import { EntityNames } from 'src/generated/graphql'
+import { storiesWithRelationsData } from 'src/mocks/mockData/storiesWithRelationsData'
 
 const schema = loadSchemaSync('./graphql.schema.json', {
   loaders: [new JsonFileLoader()],
@@ -125,7 +126,7 @@ const customResolvers = {
     },
 
     storiesWithoutRelations() {
-      return storiesWithoutRelations.storiesWithoutRelations
+      return storiesWithRelationsData
     },
 
     relations: () => {
