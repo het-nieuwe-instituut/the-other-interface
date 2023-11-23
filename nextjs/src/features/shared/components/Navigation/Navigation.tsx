@@ -23,8 +23,8 @@ type Props = {
 }
 
 export const Navigation = ({ menupages }: Props) => {
-  const { isMenuOpen, ref, navTextStyle, overflowValue } = usePresenter()
-  const { t: tNavigation, lang } = useTranslation('navigation')
+  const { isMenuOpen, ref, navTextStyle, overflowValue, lang } = usePresenter()
+  const { t: tNavigation } = useTranslation('navigation')
 
   return (
     <Box

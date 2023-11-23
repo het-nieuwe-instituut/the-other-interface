@@ -1,10 +1,8 @@
 'use client'
-import useTranslation from 'next-translate/useTranslation'
 import { useSearchParams, usePathname, useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 
 export const useSetDefaulLangInUrl = () => {
-  const { lang } = useTranslation('navigation')
   const searchParams = useSearchParams()
   const langParam = searchParams?.get('lang')
   const router = useRouter()
@@ -13,10 +11,10 @@ export const useSetDefaulLangInUrl = () => {
   useEffect(() => {
     if (!langParam) {
       const current = new URLSearchParams(Array.from(searchParams?.entries() ?? []))
-      current.set('lang', lang)
+      current.set('lang', 'nl')
       const search = current.toString()
       const query = search ? `?${search}` : ''
       router.replace(`${pathname}${query}`)
     }
-  }, [router, langParam, lang, pathname, searchParams])
+  }, [router, langParam, pathname, searchParams])
 }
