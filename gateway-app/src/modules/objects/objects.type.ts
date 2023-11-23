@@ -19,85 +19,46 @@ export class ObjectsZoomLevel3DetailType {
   public thumbnail: string
 
   @Field(() => String, { nullable: true })
-  public imageLabel?: string | null
+  public description?: string | null
+}
+
+@ObjectType()
+export class ObjectRecordZoomLevel3Type {
+  @Field(() => String, { nullable: true })
+  public objectNumber?: string | null
 
   @Field(() => String, { nullable: true })
   public titleType?: string | null
 
   @Field(() => String, { nullable: true })
-  public objectNumber?: string | null
-
-  @Field(() => String, { nullable: true })
   public objectName?: string | null
 
   @Field(() => String, { nullable: true })
-  public objectNameLabel?: string | null
+  public archiveCode?: string | null
 
   @Field(() => String, { nullable: true })
-  public archiveCollectionCode?: string | null
-
-  @Field(() => [ObjectMakerType], { nullable: true })
-  public makers?: ObjectMakerType[]
-
-  @Field(() => String, { nullable: true })
-  public startDate?: string | null
-
-  @Field(() => String, { nullable: true })
-  public endDate?: string | null
-
-  @Field(() => String, { nullable: true })
-  public numberOfParts?: string | null
-
-  @Field(() => String, { nullable: true })
-  public scale?: string | null
-
-  @Field(() => [ObjectTechniqueType], { nullable: true })
-  public techniques?: ObjectTechniqueType[]
+  public date?: string | null
 
   @Field(() => [ObjectMaterialType], { nullable: true })
   public materials?: ObjectMaterialType[]
 
-  @Field(() => String, { nullable: true })
-  public dimHeight?: string | null
+  @Field(() => [ObjectTechniqueType], { nullable: true })
+  public techniques?: ObjectTechniqueType[]
 
   @Field(() => String, { nullable: true })
-  public dimWidth?: string | null
+  public hasParts?: string | null
 
   @Field(() => String, { nullable: true })
-  public dimDepth?: string | null
+  public dimension?: string | null
 
   @Field(() => String, { nullable: true })
-  public dimensionUnit?: string | null
-
-  @Field(() => String, { nullable: true })
-  public description?: string | null
-
-  @Field(() => String, { nullable: true })
-  public associationPerson?: string | null
-
-  @Field(() => String, { nullable: true })
-  public associationPersonLabel?: string | null
-
-  @Field(() => String, { nullable: true })
-  public associationPersonType?: string | null
-
-  @Field(() => String, { nullable: true })
-  public relatedObjectTitle?: string | null
+  public scale?: string | null
 
   @Field(() => String, { nullable: true })
   public creditLine?: string | null
 
   @Field(() => String, { nullable: true })
   public rights?: string | null
-
-  @Field(() => String, { nullable: true })
-  public rightsLabel?: string | null
-
-  @Field(() => String, { nullable: true })
-  public creationPlace?: string | null
-
-  @Field(() => String, { nullable: true })
-  public creationPlaceLabel?: string | null
 
   @Field(() => String, { nullable: true })
   public permanentLink?: string | null

@@ -29,7 +29,7 @@ export const getZoomRecord3Queries = (type: Category, api: Sdk) => {
 
     // case CATEGORIES.objects:
     //   return {
-    //     zoomLevelQuery: api.ZoomLevel3Object,
+    //     zoomLevelQuery: api.ZoomLevel3ObjectRecord,
     //     accesor: (data?: ZoomLevel3ObjectQuery) => data?.zoomLevel3Object,
     //   }
   }
