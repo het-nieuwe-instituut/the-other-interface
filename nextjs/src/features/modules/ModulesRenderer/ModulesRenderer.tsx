@@ -1,4 +1,5 @@
 import { Box, useTheme } from '@chakra-ui/react'
+
 import {
   ComponentModulesButtonsModule,
   ComponentModulesCarousel,
@@ -12,6 +13,7 @@ import {
   MenupageComponentsDynamicZone,
   StoryByIdQuery,
 } from 'src/generated/graphql'
+
 import { ButtonsModule } from '../components/ButtonsModule/ButtonsModule'
 import { GridModule } from '../components/GridModule/GridModule'
 import MediaImage from '../components/Image/Image'
@@ -33,7 +35,9 @@ export type DynamicComponents =
       NonNullable<LandingpageBySlugQuery['landingpages']['data']>[0]['attributes']
     >['components']
   | Maybe<Array<HomepageComponentsDynamicZone>>
-  | NonNullable<NonNullable<StoryByIdQuery['storyByLocale']['data']>['attributes']>['components']
+  | NonNullable<
+      NonNullable<StoryByIdQuery['storyByLocale']['data']>['attributes']
+    >['components']
   | Maybe<Array<MenupageComponentsDynamicZone>>
 
 export function DynamicComponentRenderer(props: Props) {

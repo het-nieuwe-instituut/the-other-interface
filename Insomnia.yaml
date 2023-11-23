@@ -561,34 +561,6 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: req_23101c7d35dc442095c3006f81ec8f59
-    parentId: fld_13c5fd867c8545c3a5309539679ba83f
-    modified: 1669903848187
-    created: 1667553395488
-    url: "{{ _.baseUrl }}/graphql"
-    name: storyWithoutRelations
-    description: ""
-    method: POST
-    body:
-      mimeType: application/graphql
-      text: '{"query":"query {\n\tstoryWithoutRelations(id: \"2\") {\n\t\tdata
-        {\n\t\t\tid\n\t\t\tattributes
-        {\n\t\t\t\tcreatedAt\n\t\t\t\tdescription\n\t\t\t\tlocale\n\t\t\t\tpublishedAt\n\t\t\t\tshortDescription\n\t\t\t\tslug\n\t\t\t\ttitle\n\t\t\t\tupdatedAt\n\t\t\t}\n\t\t}\n\t}\n}\n"}'
-    parameters: []
-    headers:
-      - name: Content-Type
-        value: application/json
-        id: pair_4888895150804e04b42b02ba0fd8527d
-    authentication: {}
-    metaSortKey: -1658904687168.125
-    isPrivate: false
-    settingStoreCookies: true
-    settingSendCookies: true
-    settingDisableRenderRequestBody: false
-    settingEncodeUrl: true
-    settingRebuildPath: true
-    settingFollowRedirects: global
-    _type: request
   - _id: req_fdbb0d7a08fd4d38ae06ff0cccd3475c
     parentId: fld_13c5fd867c8545c3a5309539679ba83f
     modified: 1664893966890

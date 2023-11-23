@@ -1,7 +1,7 @@
 'use client'
 import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
-import { Box } from '@chakra-ui/react'
 import { StoryByIdQuery, LandingpageBySlugQuery } from 'src/generated/graphql'
+import { Box } from '@chakra-ui/react'
 import { DetailGalaxy } from '@/features/galaxyInterface/galaxies/DetailGalaxy/DetailGalaxy'
 import { RecordLayer } from '@/features/shared/components/Layers/RecordLayer/RecordLayer'
 import { StoryLayer } from '@/features/shared/components/Layers/StoryLayer/StoryLayer'
@@ -15,7 +15,9 @@ export interface DetailpageEditorialLayer {
     | NonNullable<
         NonNullable<LandingpageBySlugQuery['landingpages']['data']>[0]['attributes']
       >['components']
-    | NonNullable<NonNullable<StoryByIdQuery['storyByLocale']['data']>['attributes']>['components']
+    | NonNullable<
+        NonNullable<StoryByIdQuery['storyByLocale']['data']>['attributes']
+      >['components']
     | null
 }
 interface Props {

@@ -48,7 +48,7 @@ export class Story {
   public author?: AuthorEntityResponse
 
   @Field(() => [StoryComponentsDynamicZone], { nullable: true })
-  public components?: typeof StoryComponentsDynamicZone[]
+  public components?: (typeof StoryComponentsDynamicZone)[]
 
   @Field({ nullable: true })
   public createdAt: Date
@@ -153,12 +153,6 @@ export class StoryEntityResponse {
 }
 
 @ObjectType()
-export class StoryWithoutRelationsEntityResponse {
-  @Field({ nullable: true })
-  public data?: StoryWithoutRelationsEntity
-}
-
-@ObjectType()
 export class StoryEntityResponseCollection {
   @Field(() => StoryEntity, { nullable: true })
   public data: StoryEntity
@@ -171,15 +165,6 @@ export class StoryEntityResponseCollection {
 export class StoryMetaEntityResponseCollection {
   @Field(() => StoryEntity, { nullable: true })
   public data: StoryEntity
-}
-
-@ObjectType()
-export class StoryWithoutRelationsEntityResponseCollection {
-  @Field(() => [StoryWithoutRelationsEntity], { nullable: true })
-  public data: StoryWithoutRelationsEntity[]
-
-  @Field(() => ResponseCollectionMeta, { nullable: true })
-  public meta: ResponseCollectionMeta
 }
 
 @InputType()
