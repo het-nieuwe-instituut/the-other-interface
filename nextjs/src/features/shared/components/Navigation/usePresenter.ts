@@ -7,14 +7,17 @@ import { useSelector } from 'react-redux'
 import { useBreakpoint } from '../../configs/chakra'
 import { USER_LOOKS_ON } from '../../constants/mainConstants'
 import { useBreakpointValue } from '@chakra-ui/react'
+import { useSearchParams } from 'next/navigation'
 
 export const usePresenter = () => {
   const ref = useRef<HTMLDivElement | null>(null)
   const isMenuOpen = useSelector((state: State) => state?.shared?.isMenuOpen)
   const userLooksOn = useSelector((state: State) => state.shared.userLooksOn)
   const breakpoint = useBreakpoint()
-  const { t: tNavigation, lang } = useTranslation('navigation')
+  const { t: tNavigation } = useTranslation('navigation')
   const isMobile = breakpoint === 'sm'
+  const searchParams = useSearchParams()
+  const lang = searchParams?.get('lang') || 'nl'
 
   useEffect(() => {
     if (isMenuOpen) {
