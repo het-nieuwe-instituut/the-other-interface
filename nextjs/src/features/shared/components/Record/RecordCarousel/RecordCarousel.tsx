@@ -6,7 +6,7 @@ import { RecordCarouselButton } from './RecordCarouselButton'
 const RecordCarousel = (props: { imageUrls: string[] }) => {
   const [selectedImage, setSelectedImage] = useState(props.imageUrls[0])
   const [currentSetIndex, setCurrentSetIndex] = useState(0)
-  const thumbnailsPerPage = 4
+  const thumbnailsPerPage = 5
 
   const handleThumbnailClick = (imageUrl: string) => {
     setSelectedImage(imageUrl)
@@ -60,18 +60,20 @@ const RecordCarousel = (props: { imageUrls: string[] }) => {
               />
             </Box>
           ))}
-          <Box
-            position="absolute"
-            right="0"
-            width="80px"
-            height={'100%'}
-            backgroundColor={'transparent'}
-            display={'flex'}
-            alignItems={'center'}
-          >
-            <RecordCarouselButton direction="left" onClick={handleBack} />
-            <RecordCarouselButton direction="right" onClick={handleNext} />
-          </Box>
+          {props.imageUrls.length > thumbnailsPerPage - 1 && (
+            <Box
+              position="absolute"
+              right="0"
+              width="80px"
+              height={'100%'}
+              backgroundColor={'transparent'}
+              display={'flex'}
+              alignItems={'center'}
+            >
+              <RecordCarouselButton direction="left" onClick={handleBack} />
+              <RecordCarouselButton direction="right" onClick={handleNext} />
+            </Box>
+          )}
         </Flex>
       )}
     </Flex>
