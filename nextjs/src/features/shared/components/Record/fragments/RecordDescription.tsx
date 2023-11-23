@@ -35,7 +35,10 @@ export const RecordDescription: React.FC<Props> = ({ description }) => {
         />
       )}
       {description.split(' ').length > 250 && (
-        <RecordTruncateButton onClick={() => setIsTruncated(!isTruncated)} isTruncated />
+        <RecordTruncateButton
+          onClick={() => setIsTruncated(!isTruncated)}
+          isTruncated={isTruncated}
+        />
       )}
     </Box>
   )
