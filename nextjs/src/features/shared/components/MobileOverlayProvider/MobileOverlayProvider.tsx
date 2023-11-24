@@ -45,22 +45,29 @@ const MobileOverlay = () => {
         filter: 'blur(20px) opacity(0.6)',
         zIndex: `${MOBILE_OVERLAY_Z_INDEX - 1}`,
       }}
+      overflowY={'hidden'}
+      overflowX={'auto'}
     >
       <StaticHeader />
-      <Box
-        position={'absolute'}
+      <Flex
+        position={'relative'}
         left={0}
         paddingRight={'40px'}
         alignSelf={'center'}
         right={0}
         marginLeft={5}
         zIndex={MOBILE_OVERLAY_Z_INDEX}
+        justifyContent={'space-between'}
+        px={'8'}
+        marginX={'auto'}
+        maxWidth={'90em'}
+        flexWrap={'wrap'}
       >
         <Text variant={'body'} mb={5}>
           {tCommon('theNewInstitueDescription')}
         </Text>
         <Text variant={'body'}>{tCommon('mobileVersionIsNotYetThere')}</Text>
-      </Box>
+      </Flex>
     </Flex>
   )
 }

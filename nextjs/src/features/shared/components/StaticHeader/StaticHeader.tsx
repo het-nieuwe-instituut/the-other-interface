@@ -30,7 +30,7 @@ export const StaticHeader = () => {
         right={0}
         zIndex={STATIC_HEADER_Z_INDEX}
         pointerEvents={'all'}
-        position={{ sm: 'initial', md: 'fixed', lg: 'fixed', xl: 'fixed' }}
+        position={'fixed'}
         backgroundColor={
           isMenuOpen || userLooksOn === USER_LOOKS_ON.GALAXY ? 'transparent' : 'pinkAlpha.100'
         }
