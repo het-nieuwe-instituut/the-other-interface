@@ -3,8 +3,22 @@
   file: path=/data/nginx-proxy state=directory
   tags: [nginx-proxy, deploy]
 
+- name: nginx-proxy | ensure /data/nginx-proxy/htpasswd exists
+  file: path=/data/nginx-proxy/htpasswd state=directory
+  tags: [nginx-proxy, deploy]
+
 - name: nginx-proxy | add custom nginx config
   template: src=nginx-proxy.conf.tpl dest=/data/nginx-proxy/nginx-proxy.conf
+  tags: [nginx-proxy, deploy]
+
+- name: nginx-proxy | add nginx vhost basic auth config
+  template: src=htpasswd.tpl dest=/data/nginx-proxy/htpasswd/{{ app.web.url }}
+  when: "'basicauth' in app"
+  tags: [nginx-proxy, deploy]
+
+- name: nginx-proxy | remove nginx vhost basic auth config
+  file: path=/data/nginx-proxy/htpasswd/{{ app.web.url }} state=absent
+  when: "'basicauth' not in app"
   tags: [nginx-proxy, deploy]
 
 - name: nginx-proxy | docker | start
@@ -14,6 +28,7 @@
     state: started
     pull: yes
     restart_policy: always
+    recreate: true
     ports:
       - 80:80
       - 443:443
@@ -22,6 +37,7 @@
       - certs:/etc/nginx/certs
       - vhost:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
+      - /data/nginx-proxy/htpasswd:/etc/nginx/htpasswd
       - /data/nginx-proxy/nginx-proxy.conf:/etc/nginx/conf.d/nginx-proxy.conf:ro
     labels:
       com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy: com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
