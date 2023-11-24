@@ -25,7 +25,7 @@ export const PageHeader: React.FC<Props> = ({ title, preface, constrainPreface }
   )
 
   return (
-    <Box onClick={ScrollToContent} cursor={scrollPosition < 750 ? 'pointer' : 'cursor'}>
+    <Box onClick={ScrollToContent} cursor={scrollPosition < 750 ? 'pointer' : 'cursor'} pl={6}>
       <Text as={'h1'} textStyle={'h1'} pb={'md'}>
         {title}
       </Text>

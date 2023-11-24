@@ -12,7 +12,6 @@ export const ButtonsModule: React.FC<Props> = props => {
   return (
     <Box
       width="100%"
-      px={6}
       backgroundColor={'inherit'}
       paddingBottom={props.component.buttonsModuleLayout?.spacingBottom ?? undefined}
       paddingTop={props.component.buttonsModuleLayout?.spacingTop ?? undefined}

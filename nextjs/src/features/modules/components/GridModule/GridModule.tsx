@@ -32,7 +32,6 @@ export const GridModule: React.FC<Props> = props => {
   return (
     <Box
       width="100%"
-      px={6}
       backgroundColor={'inherit'}
       paddingBottom={props.component.gridModuleLayout?.spacingBottom || undefined}
       paddingTop={props.component.gridModuleLayout?.spacingTop || undefined}
