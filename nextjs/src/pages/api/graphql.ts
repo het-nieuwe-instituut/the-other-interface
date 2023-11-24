@@ -113,16 +113,19 @@ const customResolvers = {
       return zoomLevel3Data.zoomLevel3Object
     },
 
-    story() {
-      return storyData.storybyLocale
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    story(locale: string, id: string, publicationState: string) {
+      return storyData.storyByLocale.storyByLocale
     },
 
-    storyByLocale() {
-      return storyData.storybyLocale
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    storyByLocale(locale: string, id: string, publicationState: string) {
+      return storyData.storyByLocale.storyByLocale
     },
 
-    storyMetaByLocale() {
-      return storyData.storyMetaByLocale
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    storyMetaByLocale(locale: string, id: string, publicationState: string) {
+      return storyData.storyMetaByLocale.storyMetaByLocale
     },
 
     storiesWithoutRelations() {

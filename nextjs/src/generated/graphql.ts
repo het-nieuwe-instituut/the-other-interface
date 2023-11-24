@@ -1173,9 +1173,7 @@ export type QueryStoryArgs = {
 export type QueryStoryByLocaleArgs = {
   filters?: InputMaybe<StoryFiltersInput>;
   locale?: InputMaybe<Scalars['String']>;
-  pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<Scalars['String']>;
-  sort?: InputMaybe<Array<Scalars['String']>>;
 };
 
 
