@@ -47,7 +47,7 @@ export const StaticHeader = () => {
           flexDirection={'row'}
           alignItems={'center'}
           width={'100%'}
-          pl={6}
+          px={6}
         >
           <Flex alignItems={'center'}>
             <Link
