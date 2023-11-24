@@ -4,6 +4,7 @@ import {
   Sdk,
   //   ZoomLevel3ArchiveQuery,
   ZoomLevel3ArchiveRecordQuery,
+  ZoomLevel3ObjectRecordQuery,
   //   ZoomLevel3ObjectQuery,
   //   ZoomLevel3PersonQuery,
   //   ZoomLevel3PublicationQuery,
@@ -27,10 +28,10 @@ export const getZoomRecord3Queries = (type: Category, api: Sdk) => {
     //     accesor: (data?: ZoomLevel3PublicationQuery) => data?.zoomLevel3Publication,
     //   }
 
-    // case CATEGORIES.objects:
-    //   return {
-    //     zoomLevelQuery: api.ZoomLevel3ObjectRecord,
-    //     accesor: (data?: ZoomLevel3ObjectQuery) => data?.zoomLevel3Object,
-    //   }
+    case CATEGORIES.objects:
+      return {
+        zoomLevelQuery: api.ZoomLevel3ObjectRecord,
+        accesor: (data?: ZoomLevel3ObjectRecordQuery) => data?.objectsRecordZoomLevel3,
+      }
   }
 }

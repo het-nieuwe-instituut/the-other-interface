@@ -61,7 +61,7 @@ export class ObjectsService {
     'objects-recordPage/run?'
 
   private readonly ZoomLevel3RecordEndpoint =
-    'https://collectiedata.hetnieuweinstituut.nl/the-other-interface-testing/-/queries/objects-recordPage-editorial/26/run?'
+    'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/objects-recordPage-editorial/run?'
 
   public constructor(private triplyService: TriplyService) {}
 
@@ -89,7 +89,7 @@ export class ObjectsService {
       { id }
     )
 
-    return result.data[0]
+    return result.data
   }
 
   // private getDimensionValueFromData(data: ObjectsDetailZoomLevel3Data[]) {
