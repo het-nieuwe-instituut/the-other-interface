@@ -1,7 +1,6 @@
 query ZoomLevel3ObjectRecord($id: String!) {
     objectsRecordZoomLevel3(id: $id) {
         __typename
-        id
         objectNumber
         titleType
         objectName
