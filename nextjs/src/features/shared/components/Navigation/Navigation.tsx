@@ -34,7 +34,6 @@ export const Navigation = ({ menupages }: Props) => {
       height={'100vh'}
       width={'100%'}
       position={'fixed'}
-      // px={{ xl: 6, base: 0 }}
       zIndex={NAVIGATION_OVERLAY_Z_INDEX}
       overflow={overflowValue}
       top={0}
