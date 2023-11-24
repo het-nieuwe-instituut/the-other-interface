@@ -6,53 +6,60 @@ import { GalaxyTopRight } from '@/features/galaxyInterface/components/GalaxyWrap
 import { usePresenter } from './usePresenter'
 
 export const StaticHeader = () => {
-  const { tNavigation, userLooksOn, isMenuOpen, lang } = usePresenter()
+  const { tNavigation, userLooksOn, isMenuOpen, lang, theme } = usePresenter()
 
   return (
     <>
       <Flex
-        paddingLeft={8}
-        paddingTop={4}
-        justifyContent={'space-between'}
-        flexDirection={'row'}
+        py={4}
         height={'auto'}
         overflow={'hidden'}
-        alignItems={'center'}
         width={'100%'}
         marginRight={4}
-        marginX={'auto'}
-        position={{ sm: 'initial', md: 'fixed', lg: 'fixed', xl: 'fixed' }}
-        maxWidth={{ sm: 'initial', md: '90em', lg: '90em', xl: '90em' }}
         left={0}
         right={0}
         zIndex={STATIC_HEADER_Z_INDEX}
         pointerEvents={'all'}
+        position={{ sm: 'initial', md: 'fixed', lg: 'fixed', xl: 'fixed' }}
+        backgroundColor={
+          isMenuOpen || userLooksOn === USER_LOOKS_ON.GALAXY ? 'transparent' : 'pinkAlpha.100'
+        }
       >
-        <Flex alignItems={'center'}>
-          <Link
-            href={lang ? `/?lang=${lang}` : '/?lang=nl'}
-            variant={isMenuOpen ? 'navigation' : 'navigationOnTopOfTheGalaxy'}
-            cursor="pointer"
-            whiteSpace={'nowrap'}
-            textOverflow={'ellipsis'}
-            overflow={'hidden'}
-            textStyle={
-              userLooksOn === USER_LOOKS_ON.GALAXY ? 'headingTimesLarge.lg' : 'impactNew.md'
-            }
-          >
-            <Box as="span" mr={'10px'}>
-              {tNavigation('theNewInstitute')}
-            </Box>
-            {' • '}
-            <Box as="span" ml={'10px'}>
-              {tNavigation('collectionPlatform')}
-            </Box>
-          </Link>
-        </Flex>
+        <Flex
+          marginX={'auto'}
+          maxW={theme.breakpoints.xl}
+          justifyContent={'space-between'}
+          flexDirection={'row'}
+          alignItems={'center'}
+          width={'100%'}
+          pl={6}
+        >
+          <Flex alignItems={'center'}>
+            <Link
+              href={lang ? `/?lang=${lang}` : '/?lang=nl'}
+              variant={isMenuOpen ? 'navigation' : 'navigationOnTopOfTheGalaxy'}
+              cursor="pointer"
+              whiteSpace={'nowrap'}
+              textOverflow={'ellipsis'}
+              overflow={'hidden'}
+              textStyle={
+                userLooksOn === USER_LOOKS_ON.GALAXY ? 'headingTimesLarge.lg' : 'impactNew.md'
+              }
+            >
+              <Box as="span" mr={'10px'}>
+                {tNavigation('theNewInstitute')}
+              </Box>
+              {' • '}
+              <Box as="span" ml={'10px'}>
+                {tNavigation('collectionPlatform')}
+              </Box>
+            </Link>
+          </Flex>
 
-        <Box marginRight={'8'} marginTop={'-3px'}>
-          <GalaxyTopRight />
-        </Box>
+          <Box marginTop={'-3px'}>
+            <GalaxyTopRight />
+          </Box>
+        </Flex>
       </Flex>
     </>
   )

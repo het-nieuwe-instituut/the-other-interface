@@ -34,7 +34,7 @@ export const Navigation = ({ menupages }: Props) => {
       height={'100vh'}
       width={'100%'}
       position={'fixed'}
-      px={{ xl: 6, base: 0 }}
+      // px={{ xl: 6, base: 0 }}
       zIndex={NAVIGATION_OVERLAY_Z_INDEX}
       overflow={overflowValue}
       top={0}
@@ -53,7 +53,7 @@ export const Navigation = ({ menupages }: Props) => {
       <StaticHeader />
       <Flex
         justifyContent={'space-between'}
-        px={'8'}
+        px={'6'}
         pt={'24'}
         marginX={'auto'}
         maxWidth={'90em'}
