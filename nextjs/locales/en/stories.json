@@ -1,5 +1,5 @@
 {
-  "published": "Gepubliceerd op {{date}}",
+  "published": "Published on {{date}}",
   "by": "by {{author}}",
   "mainStory": "Main story",
   "themes": "Themes",
