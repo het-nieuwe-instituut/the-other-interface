@@ -39,7 +39,7 @@ export type DynamicComponents =
 export function DynamicComponentRenderer(props: Props) {
   const theme = useTheme()
   return (
-    <Box maxW={theme.breakpoints.xl} marginX={'auto'} pl={6}>
+    <Box maxW={theme.breakpoints.xl} marginX={'auto'} px={6}>
       {/* {[...[componentMock, componentMock2, componentMock3], ...(props.components || [])].map( */}
       {[...(props.components || [])].map((component, index, array) => {
         const typeName = component?.__typename
