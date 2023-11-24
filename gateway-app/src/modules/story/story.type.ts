@@ -15,7 +15,6 @@ import {
   ComponentModulesButtonsModule,
   ComponentModulesButtonsModuleFiltersInput,
 } from '../strapi/components/modules/buttonsModule'
-import { ComponentModulesCarousel } from '../strapi/components/modules/carousel'
 import { ComponentModulesImageCarousel } from '../strapi/components/modules/imageCarousel'
 import { ComponentModulesImage } from '../strapi/components/modules/imageModule'
 import { ComponentModulesPullquote } from '../strapi/components/modules/pullQuote'
