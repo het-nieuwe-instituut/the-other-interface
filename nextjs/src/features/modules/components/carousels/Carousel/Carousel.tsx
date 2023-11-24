@@ -32,7 +32,6 @@ export const CarouselModule: React.FC<Props> = props => {
     <Box
       as="div"
       backgroundColor={'inherit'}
-      px={6}
       paddingBottom={props.component.carouselModuleLayout?.spacingBottom ?? undefined}
       paddingTop={props.component.carouselModuleLayout?.spacingTop ?? undefined}
       position={'relative'}

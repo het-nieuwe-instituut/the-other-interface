@@ -30,7 +30,7 @@ export const PageHeader: React.FC<Props> = ({ title, preface, constrainPreface }
         {title}
       </Text>
       {preface && (
-        <Box position="relative">
+        <Box position="relative" maxW={'64em'}>
           <div
             ref={prefaceRef}
             className={limitPrefaceHeight ? styles.limitedMarkdownContainer : undefined}

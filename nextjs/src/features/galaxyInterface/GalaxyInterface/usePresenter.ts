@@ -12,8 +12,9 @@ export const usePresenter = () => {
   const sizes = useSize(graphRef)
   const { scrollPosition } = useScroll()
   const dispatch = useDispatch()
+  const HEADER_HEIGHT = 68
 
-  if (sizes?.height && scrollPosition >= sizes?.height) {
+  if (sizes?.height && scrollPosition >= sizes?.height - HEADER_HEIGHT) {
     dispatch(sharedActions?.userChangeLooksOn({ lookOn: USER_LOOKS_ON.EDITORIAL }))
   } else {
     dispatch(sharedActions?.userChangeLooksOn({ lookOn: USER_LOOKS_ON.GALAXY }))

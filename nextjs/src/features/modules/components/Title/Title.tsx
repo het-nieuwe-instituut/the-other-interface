@@ -11,7 +11,6 @@ export const Title: React.FC<Props> = props => {
     <Box
       width="100%"
       backgroundColor={'inherit'}
-      px={6}
       pt={props.component.titleModuleLayout?.spacingTop ?? undefined}
       pb={props.component.titleModuleLayout?.spacingBottom ?? undefined}
     >

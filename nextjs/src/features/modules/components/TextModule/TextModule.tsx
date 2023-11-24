@@ -16,10 +16,10 @@ export const TextModule: React.FC<Props> = props => {
 
   return (
     <Box
-      px={6}
       backgroundColor={'inherit'}
       pb={props.component.textModuleLayout?.spacingBottom ?? undefined}
       pt={props.component.textModuleLayout?.spacingTop ?? undefined}
+      maxW={'64em'}
       overflow={'auto'} // needed due to strange behaviour of generated markdown content
     >
       <Markdown>{content}</Markdown>

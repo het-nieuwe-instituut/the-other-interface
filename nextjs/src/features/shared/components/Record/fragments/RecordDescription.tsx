@@ -20,7 +20,7 @@ export const RecordDescription: React.FC<Props> = ({ description }) => {
   const displayText = isTruncated ? truncateText(description, 250) : description
 
   return (
-    <Box mt={4} position="relative">
+    <Box mt={4} position="relative" maxW={'64em'}>
       <Text as="p" textStyle="recordText">
         {displayText}
       </Text>
