@@ -25,12 +25,12 @@ export const PageHeader: React.FC<Props> = ({ title, preface, constrainPreface }
   )
 
   return (
-    <Box onClick={ScrollToContent} cursor={scrollPosition < 750 ? 'pointer' : 'cursor'} pl={6}>
+    <Box onClick={ScrollToContent} cursor={scrollPosition < 750 ? 'pointer' : 'cursor'}>
       <Text as={'h1'} textStyle={'h1'} pb={'md'}>
         {title}
       </Text>
       {preface && (
-        <Box position="relative">
+        <Box position="relative" maxW={'64em'}>
           <div
             ref={prefaceRef}
             className={limitPrefaceHeight ? styles.limitedMarkdownContainer : undefined}
