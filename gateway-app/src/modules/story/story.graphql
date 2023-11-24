@@ -2,7 +2,7 @@ query stories(
     $filters: StoryFiltersInput
     $pagination: PaginationArg
     $sort: [String]
-    $publicationState: PublicationState
+    $publicationState: PublicationState = LIVE
     $locale: I18NLocaleCode
 ) {
     stories(
@@ -22,8 +22,14 @@ query stories(
 }
 
 
-query story($id: ID, $locale: I18NLocaleCode) {
-    story(id: $id, locale: $locale) {
+query story(
+    $id: ID
+    $locale: I18NLocaleCode 
+) {
+    story(
+        id: $id
+        locale: $locale
+    ) {
         data {
             ...StoryFragment
         }
@@ -43,11 +49,43 @@ query storyByLocale(
 }
 
 
-query storyMetaByLocale(
-    $id: ID
+query storiesByLocale(
+    $id: IDFilterInput
+    $pagination: PaginationArg
+    $sort: [String]
+    $publicationState: PublicationState
 ) {
-    story(
-        id: $id
+    stories(
+        filters: {
+            id: $id,
+        },
+        pagination: $pagination,
+        sort: $sort,
+        publicationState: $publicationState
+    ) {
+        data {
+            ...LocalizedStoryFragment
+        }
+        meta {
+            ...ResponseCollectionMetaFragment
+        }
+    }
+}
+
+
+query storiesMetaByLocale(
+    $id: IDFilterInput
+    $pagination: PaginationArg
+    $sort: [String]
+    $publicationState: PublicationState = LIVE
+) {
+    stories(
+        filters: {
+            id: $id,
+        },
+        pagination: $pagination,
+        sort: $sort,
+        publicationState: $publicationState
     ) {
         data {
             ...LocalizedStoryMetaFragment
@@ -55,11 +93,12 @@ query storyMetaByLocale(
     }
 }
 
+
 query storiesWithoutRelations(
     $filters: StoryFiltersInput
     $pagination: PaginationArg
     $sort: [String]
-    $publicationState: PublicationState
+    $publicationState: PublicationState = LIVE
     $locale: I18NLocaleCode
 ) {
     stories(

@@ -1182,6 +1182,7 @@ export type QueryStoryByLocaleArgs = {
 export type QueryStoryMetaByLocaleArgs = {
   filters?: InputMaybe<StoryFiltersInput>;
   locale?: InputMaybe<Scalars['String']>;
+  publicationState?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -1867,6 +1868,7 @@ export type StoryImagesQuery = { __typename?: 'Query', story: { __typename?: 'St
 export type StoryMetaByIdQueryVariables = Exact<{
   locale?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['ID']>;
+  publicationState?: InputMaybe<Scalars['String']>;
 }>;
 
 
@@ -2832,8 +2834,12 @@ export const StoryImagesDocument = gql`
 }
     ${ImageModuleFragmentFragmentDoc}`;
 export const StoryMetaByIdDocument = gql`
-    query storyMetaById($locale: String, $id: ID) {
-  storyMetaByLocale(locale: $locale, filters: {id: {eq: $id}}) {
+    query storyMetaById($locale: String, $id: ID, $publicationState: String = "LIVE") {
+  storyMetaByLocale(
+    locale: $locale
+    filters: {id: {eq: $id}}
+    publicationState: $publicationState
+  ) {
     data {
       id
       __typename

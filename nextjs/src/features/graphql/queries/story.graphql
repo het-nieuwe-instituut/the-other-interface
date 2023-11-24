@@ -73,8 +73,8 @@ query storyImages($id: String!) {
 
 
 
-query storyMetaById($locale: String, $id: ID) {
-  storyMetaByLocale(locale: $locale, filters: { id: { eq: $id } }) {
+query storyMetaById($locale: String, $id: ID, $publicationState: String = "LIVE") {
+  storyMetaByLocale(locale: $locale, filters: { id: { eq: $id } }, publicationState: $publicationState) {
         data {
             id
             __typename

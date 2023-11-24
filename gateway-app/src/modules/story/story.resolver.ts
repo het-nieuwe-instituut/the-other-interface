@@ -49,21 +49,20 @@ export class StoryResolver {
   @Query(() => StoryEntityResponseCollection)
   public async storyByLocale(
     @Args('filters', { nullable: true }) filters?: StoryFiltersInput,
-    @Args('pagination', { nullable: true }) pagination?: PaginationArg,
-    @Args('sort', { nullable: true, type: () => [String] }) sort?: string[],
     @Args('publicationState', { nullable: true }) publicationState?: PublicationState,
     @Args('locale', { nullable: true }) locale?: I18NLocaleCode
   ) {
-    const res = await this.strapiGqlSdk.storyByLocale({ id: filters?.id?.eq })
+   
+    const res = await this.strapiGqlSdk.storiesByLocale({ id: filters?.id, publicationState })
 
-    if (res?.story?.data?.attributes?.locale === locale || !locale) {
-      return { data: res.story?.data }
+    const story = res?.stories?.data[0]
+
+    if (story?.attributes?.locale === locale || !locale) {
+      return { data: story }
     }
 
     const localizedStory =
-      res.story?.data?.attributes?.localizations?.data?.find(
-        l => l.attributes?.locale === locale
-      ) || null
+      story?.attributes?.localizations?.data?.find(l => l.attributes?.locale === locale) || null
 
     return { data: localizedStory }
   }
@@ -71,18 +70,20 @@ export class StoryResolver {
   @Query(() => StoryMetaEntityResponseCollection)
   public async storyMetaByLocale(
     @Args('filters', { nullable: true }) filters?: StoryFiltersInput,
-    @Args('locale', { nullable: true }) locale?: I18NLocaleCode
+    @Args('locale', { nullable: true }) locale?: I18NLocaleCode,
+    @Args('publicationState', { nullable: true }) publicationState?: PublicationState
   ) {
-    const res = await this.strapiGqlSdk.storyMetaByLocale({ id: filters?.id?.eq })
 
-    if (res?.story?.data?.attributes?.locale === locale || !locale) {
-      return { data: res.story?.data }
+    const res = await this.strapiGqlSdk.storiesMetaByLocale({ id: filters?.id, publicationState })
+
+    const story = res?.stories?.data[0]
+
+    if (story?.attributes?.locale === locale || !locale) {
+      return { data: story }
     }
 
     const localizedStory =
-      res.story?.data?.attributes?.localizations?.data?.find(
-        l => l.attributes?.locale === locale
-      ) || null
+      story?.attributes?.localizations?.data?.find(l => l.attributes?.locale === locale) || null
 
     return { data: localizedStory }
   }
@@ -111,7 +112,10 @@ export class StoryResolver {
     @Args('id') id: string,
     @Args('locale', { nullable: true }) locale?: I18NLocaleCode
   ) {
-    const res = await this.strapiGqlSdk.story({ id, locale })
+    const res = await this.strapiGqlSdk.story({
+      id,
+      locale,
+    })
 
     return res.story
   }
