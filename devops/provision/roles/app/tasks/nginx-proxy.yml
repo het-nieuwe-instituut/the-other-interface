@@ -16,6 +16,11 @@
   when: "'basicauth' in app"
   tags: [nginx-proxy, deploy]
 
+- name: nginx-proxy | remove nginx vhost basic auth config
+  file: path=/data/nginx-proxy/htpasswd/{{ app.web.url }} state=absent
+  when: "'basicauth' not in app"
+  tags: [nginx-proxy, deploy]
+
 - name: nginx-proxy | docker | start
   docker_container:
     name: nginx-proxy
