@@ -48,12 +48,13 @@ query storyByLocale(
     }
 }
 
-
+# 
 query storiesByLocale(
     $id: IDFilterInput
     $pagination: PaginationArg
     $sort: [String]
     $publicationState: PublicationState
+    $locale: I18NLocaleCode
 ) {
     stories(
         filters: {
@@ -62,6 +63,7 @@ query storiesByLocale(
         pagination: $pagination,
         sort: $sort,
         publicationState: $publicationState
+        locale: $locale
     ) {
         data {
             ...LocalizedStoryFragment

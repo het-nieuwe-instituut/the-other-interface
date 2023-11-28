@@ -52,8 +52,11 @@ export class StoryResolver {
     @Args('publicationState', { nullable: true }) publicationState?: PublicationState,
     @Args('locale', { nullable: true }) locale?: I18NLocaleCode
   ) {
-   
-    const res = await this.strapiGqlSdk.storiesByLocale({ id: filters?.id, publicationState })
+    const res = await this.strapiGqlSdk.storiesByLocale({
+      id: filters?.id,
+      publicationState,
+      locale: locale || undefined,
+    })
 
     const story = res?.stories?.data[0]
 
@@ -73,7 +76,6 @@ export class StoryResolver {
     @Args('locale', { nullable: true }) locale?: I18NLocaleCode,
     @Args('publicationState', { nullable: true }) publicationState?: PublicationState
   ) {
-
     const res = await this.strapiGqlSdk.storiesMetaByLocale({ id: filters?.id, publicationState })
 
     const story = res?.stories?.data[0]
