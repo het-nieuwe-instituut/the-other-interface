@@ -31,9 +31,7 @@ export const StaticHeader = () => {
         zIndex={STATIC_HEADER_Z_INDEX}
         pointerEvents={'all'}
         position={'fixed'}
-        backgroundColor={
-          isMenuOpen || userLooksOn === USER_LOOKS_ON.GALAXY ? 'transparent' : 'pinkAlpha.100'
-        }
+        backgroundColor={userLooksOn === USER_LOOKS_ON.GALAXY ? 'transparent' : 'pinkAlpha.100'}
         animation={
           userLooksOn === USER_LOOKS_ON.EDITORIAL && !isMenuOpen
             ? `${fadeIn} 300ms linear`
