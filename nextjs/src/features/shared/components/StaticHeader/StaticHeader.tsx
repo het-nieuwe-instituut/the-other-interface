@@ -31,11 +31,13 @@ export const StaticHeader = () => {
         zIndex={STATIC_HEADER_Z_INDEX}
         pointerEvents={'all'}
         position={'fixed'}
-        backgroundColor={userLooksOn === USER_LOOKS_ON.GALAXY ? 'transparent' : 'pinkAlpha.100'}
+        backgroundColor={
+          isMenuOpen || userLooksOn === USER_LOOKS_ON.GALAXY ? 'transparent' : 'pinkAlpha.100'
+        }
         animation={
           userLooksOn === USER_LOOKS_ON.EDITORIAL && !isMenuOpen
-            ? `${fadeIn} 300ms linear`
-            : `${fadeOut}, 300ms linear`
+            ? `${fadeIn} 200ms linear`
+            : `${fadeOut}, 200ms linear`
         }
       >
         <Flex
@@ -46,6 +48,7 @@ export const StaticHeader = () => {
           alignItems={'center'}
           width={'100%'}
           px={6}
+          height={'32px'}
         >
           <Flex alignItems={'center'}>
             <Link
