@@ -80,6 +80,7 @@ query storiesMetaByLocale(
     $pagination: PaginationArg
     $sort: [String]
     $publicationState: PublicationState = LIVE
+    $locale: I18NLocaleCode
 ) {
     stories(
         filters: {
@@ -88,6 +89,7 @@ query storiesMetaByLocale(
         pagination: $pagination,
         sort: $sort,
         publicationState: $publicationState
+        locale: $locale
     ) {
         data {
             ...LocalizedStoryMetaFragment
