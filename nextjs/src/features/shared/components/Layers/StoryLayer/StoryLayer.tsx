@@ -13,7 +13,7 @@ export const StoryLayer = () => {
       LeftContent={
         <>
           <PageHeader title={story?.title} preface={story?.description} />
-          <DynamicComponentRenderer components={story?.attributes?.components} />
+          <DynamicComponentRenderer components={story?.attributes?.components} isStoryPage={true} />
         </>
       }
       RightContent={<StoryMeta />}

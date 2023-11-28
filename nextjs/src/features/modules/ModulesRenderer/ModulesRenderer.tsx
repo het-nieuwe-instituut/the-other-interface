@@ -25,6 +25,7 @@ import { ImageCarousel } from '../components/carousels/ImageCarousel/ImageCarous
 
 interface Props {
   components: DynamicComponents
+  isStoryPage?: boolean
 }
 
 export type DynamicComponents =
@@ -36,12 +37,12 @@ export type DynamicComponents =
   | NonNullable<NonNullable<StoryByIdQuery['storyByLocale']['data']>['attributes']>['components']
   | Maybe<Array<MenupageComponentsDynamicZone>>
 
-export function DynamicComponentRenderer(props: Props) {
+export function DynamicComponentRenderer({ components, isStoryPage = false }: Props) {
   const theme = useTheme()
   return (
-    <Box maxW={theme.breakpoints.xl} marginX={'auto'} px={6}>
+    <Box maxW={theme.breakpoints.xl} marginX={'auto'} px={isStoryPage ? 0 : 6}>
       {/* {[...[componentMock, componentMock2, componentMock3], ...(props.components || [])].map( */}
-      {[...(props.components || [])].map((component, index, array) => {
+      {[...(components || [])].map((component, index, array) => {
         const typeName = component?.__typename
 
         if (typeName) {

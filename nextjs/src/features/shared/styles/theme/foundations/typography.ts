@@ -111,11 +111,11 @@ const oldTextStyles = {
     textShadow: '0px 0px 4px #CCCED0, 0px 0px 4px #CCCED0',
   },
   recordText: {
-    fontSize: ['32px', '32px', '32px', '21px'],
+    fontSize: { sm: '32px', md: '32px', lg: '32px', xl: '21px', '2xl': '21px' },
     fontFamily: "'Social'",
     fontStyle: 'normal',
     lineHeight: '130%',
-    letterSpacing: ['0.32px', '0.32px', '0.32px', '0.21px'],
+    letterSpacing: { sm: '0.32px', md: '0.32px', lg: '0.32px', xl: '0.21px', '2xl': '0.21px' },
   },
 }
 
