@@ -26,7 +26,7 @@ export const StoryMeta: React.FC = () => {
     <Box>
       <Box marginBottom={'md'}>
         {publicationDateFormatted && (
-          <Text textStyle={'socialLarge.lg'} fontWeight={700} marginBottom={1}>
+          <Text textStyle={'socialLarge.lg'} fontWeight={700}>
             {storiesT.t('published', {
               date: publicationDateFormatted,
             })}
@@ -48,7 +48,7 @@ export const StoryMeta: React.FC = () => {
       )}
       {themes && (
         <Box marginBottom={'md'}>
-          <Text textStyle={'socialLarge.lg'} fontWeight={700} marginBottom={1}>
+          <Text textStyle={'socialLarge.lg'} fontWeight={700}>
             {storiesT.t('themes')}
           </Text>
           <Text textStyle={'socialLarge.lg'} marginBottom={'md'}>
@@ -80,7 +80,7 @@ export const StoryMeta: React.FC = () => {
       )}
       {locations && (
         <Box marginBottom={'md'}>
-          <Text textStyle={'socialLarge.lg'} fontWeight={700} marginBottom={1}>
+          <Text textStyle={'socialLarge.lg'} fontWeight={700}>
             {storiesT.t('locations')}
           </Text>
           <Text textStyle={'socialLarge.lg'} marginBottom={'md'}>
@@ -90,7 +90,7 @@ export const StoryMeta: React.FC = () => {
       )}
       {timeframe && (
         <Box marginBottom={'md'}>
-          <Text textStyle={'socialLarge.lg'} fontWeight={700} marginBottom={1}>
+          <Text textStyle={'socialLarge.lg'} fontWeight={700}>
             {storiesT.t('time')}
           </Text>
           <Text textStyle={'socialLarge.lg'} marginBottom={'md'}>
