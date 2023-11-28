@@ -5,12 +5,12 @@ import { ReactNode } from 'react'
 const CustomMarkdownRenderer = () => {
   const customThemeStyle = {
     p: ({ children }: { children: ReactNode }) => (
-      <Text as="p" textStyle="recordText" margin={0}>
+      <Text as="p" textStyle="recordText" margin={0} position="relative" color={'blackAlpha.100'}>
         {children}
       </Text>
     ),
     li: ({ children }: { children: ReactNode }) => (
-      <Text as="li" textStyle="recordText" margin={0} position="relative" pl={5}>
+      <Text as="li" textStyle="recordText" margin={0} position="relative" color={'blackAlpha.100'}>
         {children}
       </Text>
     ),
@@ -20,11 +20,12 @@ const CustomMarkdownRenderer = () => {
         sx={{
           listStyle: 'none',
           li: {
+            paddingLeft: { base: '34px !important', xl: '26px !important' },
             '&::before': {
               content: '"•"',
               position: 'absolute',
+              color: 'blackAlpha.100',
               left: 0,
-              color: '#666666',
             },
           },
         }}
@@ -40,12 +41,12 @@ const CustomMarkdownRenderer = () => {
           counterReset: 'list-counter',
           li: {
             counterIncrement: 'list-counter',
-            paddingLeft: '20px !important',
+            paddingLeft: { base: '34px !important', xl: '26px !important' },
             '&::before': {
-              content: 'counter(list-counter) "."',
+              content: 'counter(list-counter) ""',
               position: 'absolute',
+              color: 'blackAlpha.100',
               left: 0,
-              color: '#666666',
             },
           },
         }}
