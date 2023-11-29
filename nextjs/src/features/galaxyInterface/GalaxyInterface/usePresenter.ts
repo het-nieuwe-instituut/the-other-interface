@@ -14,7 +14,7 @@ export const usePresenter = () => {
   const dispatch = useDispatch()
   const HEADER_HEIGHT = 68
 
-  if (sizes?.height && scrollPosition >= sizes?.height - HEADER_HEIGHT * 2) {
+  if (sizes?.height && scrollPosition >= sizes?.height - HEADER_HEIGHT) {
     dispatch(sharedActions?.userChangeLooksOn({ lookOn: USER_LOOKS_ON.EDITORIAL }))
   } else {
     dispatch(sharedActions?.userChangeLooksOn({ lookOn: USER_LOOKS_ON.GALAXY }))
