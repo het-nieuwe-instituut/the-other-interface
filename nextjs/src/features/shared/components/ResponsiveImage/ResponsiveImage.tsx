@@ -9,7 +9,7 @@ type ResponsiveImageProps = {
   maxHeight?: string
   size?: string
   css?: BoxProps['css']
-  fit?: 'contain' | 'cover' | 'fill' | 'none' | 'scale-downw'
+  fit?: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down'
   onClick?: () => void
 }
 
@@ -44,23 +44,25 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
       />
 
       {/* Actual Image */}
-      <Image
-        src={src || ''}
-        alt={alt || 'Actual image'}
-        sizes={size}
-        objectFit={fit}
-        quality={100}
-        onClick={onClick}
-        style={{
-          transition: 'opacity 1s ease-out',
-          opacity: isSuccessfullyLoaded ? 1 : 0,
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          objectPosition: 'bottom',
-        }}
-        fill={true}
-      />
+      {src && (
+        <Image
+          src={src}
+          alt={alt || 'Actual image'}
+          sizes={size}
+          quality={100}
+          onClick={onClick}
+          style={{
+            transition: 'opacity 1s ease-out',
+            opacity: isSuccessfullyLoaded ? 1 : 0,
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            objectPosition: 'bottom',
+            objectFit: fit,
+          }}
+          fill={true}
+        />
+      )}
     </Box>
   )
 }

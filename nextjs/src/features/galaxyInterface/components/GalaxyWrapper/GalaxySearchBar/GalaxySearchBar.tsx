@@ -22,6 +22,7 @@ export const GalaxySearchBar: React.FC = () => {
     inputValue,
     handleInputChange,
     searchBarRef,
+    filterInputRef,
   } = usePresenter()
 
   return (
@@ -69,6 +70,7 @@ export const GalaxySearchBar: React.FC = () => {
             selectedOption={category ? t(category) : ''}
           />
           <FilterInput
+            inputRef={filterInputRef}
             onFocus={handleSearchModeOpen}
             value={inputValue}
             onChange={handleInputChange}

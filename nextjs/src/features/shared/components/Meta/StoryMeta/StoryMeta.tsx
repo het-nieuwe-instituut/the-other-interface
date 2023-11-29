@@ -67,7 +67,7 @@ export const StoryMeta: React.FC = () => {
               const hasItemAfter = array.length - 1 !== index
 
               return (
-                <Text textStyle={'socialLarge.lg'} key={person.recordId} mr={1} mb={1}>
+                <Text textStyle={'socialLarge.lg'} key={person.id} mr={1} mb={1}>
                   <Link href={person.url} borderBottom={'1px solid'} borderColor={'blackAlpha.100'}>
                     {person.title}
                     {hasItemAfter && ','}
