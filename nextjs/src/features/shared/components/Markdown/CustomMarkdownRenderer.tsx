@@ -9,6 +9,13 @@ const CustomMarkdownRenderer = () => {
         {children}
       </Text>
     ),
+    h2: ({ children }: { children: ReactNode }) => (
+      <Box width="100%" backgroundColor={'inherit'} mb={2}>
+        <Text as="h2" textStyle="h2" margin={0} position="relative">
+          {children}
+        </Text>
+      </Box>
+    ),
     li: ({ children }: { children: ReactNode }) => (
       <Text as="li" textStyle="recordText" margin={0} position="relative" color={'blackAlpha.100'}>
         {children}
