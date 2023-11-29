@@ -65,12 +65,47 @@ const peopleDetailZoomLevel3DataKeys: KeysToVerify<PeopleDetailZoomLevel3Data> =
   permanentLink: true,
 }
 
+interface PeopleRecordZoomLevel3Data {
+  type?: string
+  profession?: string
+  nameVariation?: string
+  birthDate?: string
+  birthPlace?: string
+  deathDate?: string
+  deathPlace?: string
+  nationality?: string
+  gender?: string
+  period?: string
+  association?: string
+  permanentLink?: string
+  externalSource?: string
+}
+
+const peopleRecordZoomLevel3DataKeys: KeysToVerify<PeopleRecordZoomLevel3Data> = {
+  type: true,
+  profession: true,
+  nameVariation: true,
+  birthDate: true,
+  birthPlace: true,
+  deathDate: true,
+  deathPlace: true,
+  nationality: true,
+  gender: true,
+  period: true,
+  association: true,
+  permanentLink: true,
+  externalSource: true,
+}
+
 @Injectable()
 export class PeopleService {
   protected entityType = 'triply'
 
   private readonly ZoomLevel3Endpoint =
     'people-recordPage/run?'
+
+  private readonly ZoomLevel3RecordEndpoint =
+    
 
   public constructor(private triplyService: TriplyService) {}
 
