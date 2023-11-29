@@ -11,11 +11,12 @@ const oldTextStyles = {
     latterSpacing: '-0.8px',
   },
   h2: {
-    color: `${colors.black}`,
-    fontSize: ['30px', '32px', '38px', '38px'],
-    fontWeight: '900',
-    lineHeight: '118%',
-    fontFamily: 'Univers bold',
+    color: `${colors.blackAlpha[100]}`,
+    fontSize: { sm: '52px', md: '52px', lg: '52px', xl: '32px', '2xl': '32px' },
+    fontWeight: '700',
+    lineHeight: '110%',
+    fontFamily: "'Social'",
+    letterSpacing: { sm: '-0.52px', md: '-0.52px', lg: '-0.52px', xl: '-0.32px', '2xl': '-0.32px' },
   },
   h3: {
     color: `${colors.black}`,
