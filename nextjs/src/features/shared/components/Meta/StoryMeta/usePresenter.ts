@@ -11,6 +11,7 @@ import {
 } from 'src/generated/graphql'
 import { capitalizeFirstLetter } from '@/features/shared/utils/text'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
+import { getUniqueById } from '@/features/shared/utils/get-unique-by-id'
 
 function formatPublicationDate(
   displayType?: EnumComponentcorepublicationdateDisplaytype | null,
@@ -66,7 +67,7 @@ export const usePresenter = () => {
       .filter((record): record is { attributes: TriplyRecord } => Boolean(record.attributes))
       .filter(record => record.attributes?.type === EnumTriplyrecordType.People)
       .map(record => ({
-        recordId: record.attributes.recordId,
+        id: record.attributes.recordId,
         title: record.attributes.people?.title,
         url: getPeopleUrl(record.attributes.recordId, lang),
       })) || []
@@ -81,7 +82,7 @@ export const usePresenter = () => {
     ),
     authorFormatted: story?.author ? formatAuthor(story?.author?.data?.attributes) : '',
     themes: story?.themes?.data?.map(theme => theme.attributes?.name).join(', '),
-    linkedPeopleRecords,
+    linkedPeopleRecords: getUniqueById(linkedPeopleRecords),
     locations: story?.locations?.data?.map(location => location.attributes?.city).join(', '),
     timeframe: formatTimeframe(story?.timeframe),
     links: story?.storyLinks?.buttons?.map(button => button) || [],

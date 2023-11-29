@@ -16,6 +16,7 @@ export const usePresenter = () => {
 
   const { lang, search } = useZoom2Params()
 
+  const filterInputRef = useRef<HTMLInputElement>(null)
   const searchBarRef = useRef<HTMLDivElement>(null)
   const { isSearchModeActive, searchCategory, isCategorySuggestionsOpen } = useSelector(
     (state: State) => state.shared
@@ -46,6 +47,7 @@ export const usePresenter = () => {
 
   const handleSearchModeOpen = () => {
     dispatch(sharedActions.searchModeActive({ isSearchModeActive: true }))
+    filterInputRef.current?.focus()
   }
 
   const resetSearchFilters = useCallback(() => {
@@ -121,5 +123,6 @@ export const usePresenter = () => {
     inputValue,
     handleInputChange,
     searchBarRef,
+    filterInputRef,
   }
 }
