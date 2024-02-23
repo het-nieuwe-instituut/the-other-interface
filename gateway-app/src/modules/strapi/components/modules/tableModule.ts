@@ -1,5 +1,4 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql'
-import { ComponentCoreModuleLayouts } from '../../shared-types'
 import { ComponentCoreTableBody, ComponentCoreTableHead } from '../core/table'
 
 @ObjectType()
@@ -44,9 +43,6 @@ export class TableEntityResponse {
 export class ComponentModulesTableModule {
   @Field(() => ID)
   public id: string
-
-  @Field(() => ComponentCoreModuleLayouts)
-  public tableModuleLayout: ComponentCoreModuleLayouts
 
   @Field(() => TableEntityResponse, { nullable: true })
   public table?: TableEntityResponse

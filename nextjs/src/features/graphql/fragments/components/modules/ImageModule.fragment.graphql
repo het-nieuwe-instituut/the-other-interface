@@ -1,5 +1,3 @@
-#import '../core/moduleLayout.fragment.graphql'
-
 fragment imageModuleFragment on ComponentModulesImage {
     id
     __typename
@@ -24,9 +22,4 @@ fragment imageModuleFragment on ComponentModulesImage {
     }
     caption
     alt_text
-    imageModuleLayout {
-        ... on ComponentCoreModuleLayouts {
-            ...componentCoreModuleLayouts
-        }
-    }
 }

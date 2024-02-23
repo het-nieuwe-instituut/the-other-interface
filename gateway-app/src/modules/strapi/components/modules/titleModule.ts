@@ -1,5 +1,4 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql'
-import { ComponentCoreModuleLayouts } from '../../shared-types'
 
 @ObjectType()
 export class ComponentModulesTitleModule {
@@ -8,7 +7,4 @@ export class ComponentModulesTitleModule {
 
   @Field(() => ID)
   public id: string
-
-  @Field(() => ComponentCoreModuleLayouts)
-  public titleModuleLayout: ComponentCoreModuleLayouts
 }

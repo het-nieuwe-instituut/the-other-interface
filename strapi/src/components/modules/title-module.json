@@ -10,12 +10,6 @@
     "Title": {
       "type": "string",
       "unique": false
-    },
-    "titleModuleLayout": {
-      "type": "component",
-      "repeatable": false,
-      "component": "core.module-layouts",
-      "required": true
     }
   }
 }

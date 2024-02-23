@@ -3,6 +3,7 @@ import { ButtonsGrid } from '@/features/shared/components/ButtonsGrid/ButtonsGri
 import { Box } from '@chakra-ui/react'
 
 import { ComponentModulesButtonsModule } from 'src/generated/graphql'
+import { modulesSpacingMapper } from '../../modulesSpacing'
 
 interface Props {
   component: ComponentModulesButtonsModule
@@ -13,8 +14,8 @@ export const ButtonsModule: React.FC<Props> = props => {
     <Box
       width="100%"
       backgroundColor={'inherit'}
-      paddingBottom={props.component.buttonsModuleLayout?.spacingBottom ?? undefined}
-      paddingTop={props.component.buttonsModuleLayout?.spacingTop ?? undefined}
+      pt={modulesSpacingMapper?.ButtonsModule.spacingTop}
+      pb={modulesSpacingMapper?.ButtonsModule.spacingBottom}
     >
       <ButtonsGrid
         buttonStyle={props.component.buttonStyle ?? undefined}

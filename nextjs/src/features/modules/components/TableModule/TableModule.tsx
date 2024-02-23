@@ -13,6 +13,7 @@ import {
 } from '@chakra-ui/react'
 
 import { ComponentModulesTableModule } from 'src/generated/graphql'
+import { modulesSpacingMapper } from '../../modulesSpacing'
 
 interface Props {
   component: ComponentModulesTableModule
@@ -30,8 +31,8 @@ export const TableModule: React.FC<Props> = props => {
     return (
       <Box
         backgroundColor={'inherit'}
-        pb={props.component.tableModuleLayout?.spacingBottom ?? undefined}
-        pt={props.component.tableModuleLayout?.spacingTop ?? undefined}
+        pt={modulesSpacingMapper?.TableModule.spacingTop}
+        pb={modulesSpacingMapper?.TableModule.spacingBottom}
       >
         <Text textStyle={'h2'} as="h2" pb={'md'}>
           {props.component.table?.data?.attributes?.name}
@@ -47,8 +48,8 @@ export const TableModule: React.FC<Props> = props => {
   return (
     <Box
       backgroundColor={'inherit'}
-      pb={props.component.tableModuleLayout?.spacingBottom ?? undefined}
-      pt={props.component.tableModuleLayout?.spacingTop ?? undefined}
+      pt={modulesSpacingMapper?.TableModule.spacingTop}
+      pb={modulesSpacingMapper?.TableModule.spacingBottom}
     >
       <Text as={'h2'} textStyle={'h2'} pb={'md'}>
         {props.component.table?.data?.attributes?.name}

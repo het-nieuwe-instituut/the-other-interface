@@ -1,5 +1,3 @@
-#import '../core/moduleLayout.fragment.graphql'
-
 fragment tableModuleFragment on ComponentModulesTableModule {
     id
     __typename
@@ -24,11 +22,6 @@ fragment tableModuleFragment on ComponentModulesTableModule {
                     }
                 }
             }
-        }
-    }
-    tableModuleLayout {
-        ... on ComponentCoreModuleLayouts {
-            ...componentCoreModuleLayouts
         }
     }
 }
