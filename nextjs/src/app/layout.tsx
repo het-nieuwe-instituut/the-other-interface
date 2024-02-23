@@ -15,6 +15,7 @@ import ReactQueryProvider from '@/features/shared/components/providers/ReactQuer
 import BaseElementWrapper from '@/features/shared/components/wrappers/BaseElementsWrapper'
 import { draftMode } from 'next/headers'
 import { PreviewBlock } from '@/features/preview/PreviewBlock'
+import { Box } from '@chakra-ui/react'
 
 function MyApp({ children }: { children: React.ReactNode }) {
   const { isEnabled } = draftMode()
@@ -43,13 +44,13 @@ function MyApp({ children }: { children: React.ReactNode }) {
             <ThemeProvider>
               <DisableScroll>
                 <MobileOverlayProvider>
-                  <>
+                  <Box>
                     <Fonts />
                     <AppHead />
                     <TestMenu />
                     {children}
                     <BaseElementWrapper />
-                  </>
+                  </Box>
                 </MobileOverlayProvider>
               </DisableScroll>
             </ThemeProvider>

@@ -15,9 +15,11 @@ export const Stories: React.FC<Props> = ({ stories }) => {
     <Grid
       position="absolute"
       top="13%"
-      right="18vw"
+      left={'50%'}
+      transform={'translateX(-50%)'}
       w="65vw"
       h="55%"
+      maxW={'936px'}
       templateColumns="repeat(4, 1fr)"
       templateRows="repeat(2, 1fr)"
       gap="20px"

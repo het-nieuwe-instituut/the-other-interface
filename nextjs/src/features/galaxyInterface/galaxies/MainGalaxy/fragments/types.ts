@@ -1,7 +1,10 @@
 import { CloudCategory } from '@/features/shared/utils/categories'
 import { Position, GridParams } from '@/features/shared/types/position'
 
-export type CloudSize = `${string}vw`
+export type CloudSize = {
+  base: `${string}vw`
+  xl: string
+}
 
 export type CategoryCloud = {
   title: CloudCategory

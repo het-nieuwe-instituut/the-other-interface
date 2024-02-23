@@ -20,31 +20,41 @@ export const DetailGalaxy: React.FC = () => {
   if (!category || !id) return null
 
   return (
-    <Box position="relative" width="100vw" height="100vh" overflow={'hidden'}>
-      {isSearchModeActive && <BlurOverlay />}
-      <Grid
-        position="absolute"
-        w="96vw"
-        h={`calc(80% - 1rem - 60px)`} // considering fixed height of galaxy footer
-        top="6%"
-        left="2vw"
-        right="2vw"
-        templateColumns="repeat(3, 1fr)"
-        templateRows="repeat(2, 1fr)"
+    <Box w={'100vw'} backgroundColor={'pinkAlpha.100'}>
+      <Box
+        position="relative"
+        width="100vw"
+        height="100vh"
+        overflow={'hidden'}
+        maxW={'1440px'}
+        marginX={'auto'}
       >
-        {relatedCategories.map(({ category: cloudCategory, grid }) => (
-          <RelatedCategory
-            key={cloudCategory}
-            category={cloudCategory}
-            gridRow={grid.gridRow}
-            gridColumn={grid.gridColumn}
-          />
-        ))}
+        {isSearchModeActive && <BlurOverlay />}
+        <Grid
+          position="absolute"
+          w="96vw"
+          maxW={'1382.4px'}
+          h={`calc(80% - 1rem - 60px)`} // considering fixed height of galaxy footer
+          top="6%"
+          left={{ base: '2vw', xl: '28.8px' }}
+          right={{ base: '2vw', xl: '28.8px' }}
+          templateColumns="repeat(3, 1fr)"
+          templateRows="repeat(2, 1fr)"
+        >
+          {relatedCategories.map(({ category: cloudCategory, grid }) => (
+            <RelatedCategory
+              key={cloudCategory}
+              category={cloudCategory}
+              gridRow={grid.gridRow}
+              gridColumn={grid.gridColumn}
+            />
+          ))}
 
-        <RelatedStories gridRow="1 / 3" />
-      </Grid>
+          <RelatedStories gridRow="1 / 3" />
+        </Grid>
 
-      <GalaxyFooter />
+        <GalaxyFooter />
+      </Box>
     </Box>
   )
 }
