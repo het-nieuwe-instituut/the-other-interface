@@ -48,7 +48,7 @@ export class TriplyService {
     this.apiKey = configService.getOrThrow('TRIPLY_API_KEY')
     this.baseQueryPath =
       configService.getOrThrow('ENV') === 'development'
-        ? '/queries/the-other-interface-acceptance'
+        ? '/queries/the-other-interface-testing'
         : '/queries/the-other-interface'
   }
 

@@ -307,7 +307,7 @@ export class PublicationsService {
   protected entityType = 'triply'
 
   private readonly ZoomLevel3Endpoint =
-    'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/publications-recordPage/run?'
+    'publications-recordPage/run?'
 
   private readonly publicationDescriptionLevelEndpoint = 'Zoom-3-books-type/run'
 
