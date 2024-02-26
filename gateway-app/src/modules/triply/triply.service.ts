@@ -47,7 +47,8 @@ export class TriplyService {
     this.endpointBaseURL = configService.getOrThrow('TRIPLI_API_BASEURL')
     this.apiKey = configService.getOrThrow('TRIPLY_API_KEY')
     this.baseQueryPath =
-      configService.getOrThrow('ENV') === 'development'
+      configService.getOrThrow('ENV') === 'development' ||
+      configService.getOrThrow('ENV') === 'staging'
         ? '/queries/the-other-interface-testing'
         : '/queries/the-other-interface'
   }
