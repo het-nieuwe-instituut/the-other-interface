@@ -5,14 +5,14 @@ import { FOOTER_Z_INDEX } from '../../constants/mainConstants'
 import { capitalizeFirstLetter } from '../../utils/text'
 import { MenuPagesQuery } from 'src/generated/graphql'
 import { usePresenter } from './usePresenter'
-import Logo from '@/icons/logo.svg'
+import LogoSvg from '@/features/modules/components/LogoSvg/LogoSvg'
 
 type Props = {
   menupages?: MenuPagesQuery
 }
 
 export const Footer = ({ menupages }: Props) => {
-  const { sectionOne, sectionTwo, lang } = usePresenter(menupages)
+  const { sectionOne, sectionTwo, lang, logoSize } = usePresenter(menupages)
   const hasSectionOne = sectionOne && sectionOne.length > 0
   const hasSectionTwo = sectionTwo && sectionTwo.length > 0
 
@@ -28,7 +28,7 @@ export const Footer = ({ menupages }: Props) => {
       <Flex
         justifyContent={'space-between'}
         direction={{ base: 'column', lg: 'row' }}
-        alignItems={{ base: 'center', md: 'start' }}
+        alignItems={'start'}
         px={6}
         marginX={'auto'}
         paddingTop={'9'}
@@ -44,7 +44,7 @@ export const Footer = ({ menupages }: Props) => {
           mb={9}
         >
           <Flex direction={'column'} mb={9}>
-            <Logo />
+            <LogoSvg width={logoSize?.width} height={logoSize?.height} />
           </Flex>
 
           <Flex direction="column" alignItems="flex-start">
