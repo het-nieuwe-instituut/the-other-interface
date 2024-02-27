@@ -52,14 +52,14 @@ export const Story: React.FC<Props> = ({ story }) => {
             flex: `1 1 calc(100% - 2vw - 5px)`,
           }}
         />
-        <Box w="100%" flex="1">
+        <Box w="100%" flex="1" mt={2}>
           <Text
             align="center"
             isTruncated
             textStyle="headingTimesLarge.md"
             color="blueAlpha.100"
-            fontSize="1.5vw"
-            lineHeight="2vw"
+            fontSize={{ base: '12px', lg: '20px' }}
+            lineHeight={{ base: '12px', lg: '21px' }}
           >
             {title}
           </Text>

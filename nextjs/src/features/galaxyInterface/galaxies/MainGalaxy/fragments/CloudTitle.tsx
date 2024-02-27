@@ -15,8 +15,8 @@ export const CloudTitle: React.FC<Props> = ({ position, children }) => (
     textStyle="headingTimesLarge.lg"
     color="blueAlpha.100"
     pointerEvents={'none'}
-    fontSize={'2.5vw'}
-    lineHeight={'3.2vw'}
+    fontSize={{ base: '20px', lg: '32px' }}
+    lineHeight={{ base: '21px', lg: '33.6px', xl: '41.6px' }}
     filter={'blur(1.5px)'}
   >
     {children}
