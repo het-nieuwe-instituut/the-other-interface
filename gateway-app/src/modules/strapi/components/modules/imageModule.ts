@@ -1,5 +1,5 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql'
-import { ComponentCoreModuleLayouts, UploadFileEntityResponse } from '../../shared-types'
+import { UploadFileEntityResponse } from '../../shared-types'
 import { TriplyRecordEntityResponse } from 'src/modules/triplyRecord/triplyRecord.type'
 import { StoryEntityResponse } from 'src/modules/story/story.type'
 
@@ -16,9 +16,6 @@ export class ComponentModulesImage {
 
   @Field(() => UploadFileEntityResponse)
   public image: UploadFileEntityResponse
-
-  @Field(() => ComponentCoreModuleLayouts)
-  public imageModuleLayout: ComponentCoreModuleLayouts
 
   @Field(() => TriplyRecordEntityResponse, { nullable: true })
   public triplyRecord?: TriplyRecordEntityResponse

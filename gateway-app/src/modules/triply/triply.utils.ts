@@ -103,19 +103,15 @@ export class TriplyUtils {
   }
 
   public static getUriForTypeAndId(type: EntityNames, id: string, recordType: EntityNames) {
-    // TODO: replace baseURL testing environment to a relevant dynamic environment
-    const baseURL =
-      'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing'
-
     switch (type) {
       case EntityNames.People:
-        return `${baseURL}/people-recordRelations/run?id=${id}&type=${recordType}`
+        return `people-recordRelations/run?id=${id}&type=${recordType}`
       case EntityNames.Archives:
-        return `${baseURL}/archives-recordRelations/run?id=${id}&type=${recordType}`
+        return `archives-recordRelations/run?id=${id}&type=${recordType}`
       case EntityNames.Publications:
-        return `${baseURL}/publications-recordRelations/run?id=${id}&type=${recordType}`
+        return `publications-recordRelations/run?id=${id}&type=${recordType}`
       case EntityNames.Objects:
-        return `${baseURL}/objects-recordRelations/run?id=${id}&type=${recordType}`
+        return `objects-recordRelations/run?id=${id}&type=${recordType}`
       case EntityNames.Media:
         throw CustomError.externalCritical('not a triply type')
       case EntityNames.Stories:
@@ -128,24 +124,22 @@ export class TriplyUtils {
 
   private static getUriForLevel2TextSearchDataAmount({
     type,
-    baseURL,
     isDataAmount,
   }: {
     type: EntityNames
-    baseURL: string
     isDataAmount: boolean
   }) {
     const dataAmountUri = isDataAmount ? '-Count' : ''
 
     switch (type) {
       case EntityNames.People:
-        return `${baseURL}/people-textSearch${dataAmountUri}/run`
+        return `people-textSearch${dataAmountUri}/run`
       case EntityNames.Archives:
-        return `${baseURL}/archives-textSearch${dataAmountUri}/run`
+        return `archives-textSearch${dataAmountUri}/run`
       case EntityNames.Publications:
-        return `${baseURL}/publications-textSearch${dataAmountUri}/run`
+        return `publications-textSearch${dataAmountUri}/run`
       case EntityNames.Objects:
-        return `${baseURL}/objects-textSearch${dataAmountUri}/run`
+        return `objects-textSearch${dataAmountUri}/run`
       case EntityNames.Media:
         throw CustomError.externalCritical('not a triply type')
       case EntityNames.Stories:
@@ -165,25 +159,22 @@ export class TriplyUtils {
     text?: string
     isDataAmount: boolean
   }) {
-    // TODO: replace baseURL testing environment to a relevant dynamic environment
-    const baseURL =
-      'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing'
 
     if (text) {
-      return this.getUriForLevel2TextSearchDataAmount({ type, baseURL, isDataAmount })
+      return this.getUriForLevel2TextSearchDataAmount({ type, isDataAmount })
     }
 
     const dataAmountUri = isDataAmount ? '-count' : ''
 
     switch (type) {
       case EntityNames.People:
-        return `${baseURL}/people-landingPage${dataAmountUri}/run`
+        return `people-landingPage${dataAmountUri}/run`
       case EntityNames.Archives:
-        return `${baseURL}/archives-landingPage${dataAmountUri}/run`
+        return `archives-landingPage${dataAmountUri}/run`
       case EntityNames.Publications:
-        return `${baseURL}/publications-landingPage${dataAmountUri}/run`
+        return `publications-landingPage${dataAmountUri}/run`
       case EntityNames.Objects:
-        return `${baseURL}/objects-landingPage${dataAmountUri}/run`
+        return `objects-landingPage${dataAmountUri}/run`
       case EntityNames.Media:
         throw CustomError.externalCritical('not a triply type')
       case EntityNames.Stories:

@@ -1,5 +1,3 @@
-#import '../core/moduleLayout.fragment.graphql'
-
 fragment imageCarouselModuleFragment on ComponentModulesImageCarousel {
     id
     __typename
@@ -15,11 +13,6 @@ fragment imageCarouselModuleFragment on ComponentModulesImageCarousel {
         }
     }
     description
-    imageCarouselModuleLayout {
-        ... on ComponentCoreModuleLayouts {
-            ...componentCoreModuleLayouts
-        }
-    }
     items {
         description
         id

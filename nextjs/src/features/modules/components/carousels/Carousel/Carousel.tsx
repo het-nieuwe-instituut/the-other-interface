@@ -8,6 +8,7 @@ import CarouselHeader from '../components/CarouselHeader/CarouselHeader'
 import CarouselPagination from '../components/CarouselPagination/CarouselPagination'
 import { CarouselSlide } from '../components/CarouselSlide/CarouselSlide'
 import { usePresenter } from './usePresenter'
+import { modulesSpacingMapper } from '@/features/modules/modulesSpacing'
 
 interface Props {
   component: ComponentModulesCarousel
@@ -32,8 +33,8 @@ export const CarouselModule: React.FC<Props> = props => {
     <Box
       as="div"
       backgroundColor={'inherit'}
-      paddingBottom={props.component.carouselModuleLayout?.spacingBottom ?? undefined}
-      paddingTop={props.component.carouselModuleLayout?.spacingTop ?? undefined}
+      pt={modulesSpacingMapper?.Carousel.spacingTop}
+      pb={modulesSpacingMapper?.Carousel.spacingBottom}
       position={'relative'}
       ref={carouselRef}
     >

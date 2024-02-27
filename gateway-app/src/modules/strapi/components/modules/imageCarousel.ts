@@ -1,6 +1,5 @@
 import { Field, ID, InputType, ObjectType } from '@nestjs/graphql'
 import {
-  ComponentCoreModuleLayouts,
   PaginationArg,
   UploadFileFiltersInput,
   UploadFileRelationResponseCollection,
@@ -11,9 +10,6 @@ import { ComponentCoreImageCarouselItem } from '../core/imageCarouselItem'
 export class ComponentModulesImageCarousel {
   @Field(() => ID)
   public id: string
-
-  @Field(() => ComponentCoreModuleLayouts)
-  public imageCarouselModuleLayout: ComponentCoreModuleLayouts
 
   @Field({ nullable: true })
   public description?: string

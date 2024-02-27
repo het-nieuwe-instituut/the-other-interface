@@ -14,6 +14,7 @@ import {
 
 import { ExtractedTriplyFields, extractTriplyFields } from '../../helpers/triplyDataExtractor'
 import { imageBasePath } from '../../modulesConstants'
+import { modulesSpacingMapper } from '../../modulesSpacing'
 
 interface Props {
   component: ComponentModulesGridModule
@@ -33,8 +34,8 @@ export const GridModule: React.FC<Props> = props => {
     <Box
       width="100%"
       backgroundColor={'inherit'}
-      paddingBottom={props.component.gridModuleLayout?.spacingBottom || undefined}
-      paddingTop={props.component.gridModuleLayout?.spacingTop || undefined}
+      pt={modulesSpacingMapper?.GridModule.spacingTop}
+      pb={modulesSpacingMapper?.GridModule.spacingBottom}
     >
       {renderTitle()}
       {renderDescription()}

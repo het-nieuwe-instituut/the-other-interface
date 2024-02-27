@@ -86,7 +86,7 @@ export class ObjectsService {
   protected entityType = 'triply'
 
   private readonly ZoomLevel3Endpoint =
-    'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/objects-recordPage/run?'
+    'objects-recordPage/run?'
 
   public constructor(private triplyService: TriplyService) {}
 

@@ -1,6 +1,5 @@
 import { Field, ID, ObjectType, registerEnumType } from '@nestjs/graphql'
 import { Enum_Componentmodulescarousel_Type } from '../../../../generated/strapi-sdk'
-import { ComponentCoreModuleLayouts } from '../../shared-types'
 import { ComponentCoreCarouselItem } from '../core/carouselItem'
 
 registerEnumType(Enum_Componentmodulescarousel_Type, { name: 'Enum_Componentmodulescarousel_Type' })
@@ -9,9 +8,6 @@ registerEnumType(Enum_Componentmodulescarousel_Type, { name: 'Enum_Componentmodu
 export class ComponentModulesCarousel {
   @Field(() => ID)
   public id: string
-
-  @Field(() => ComponentCoreModuleLayouts)
-  public carouselModuleLayout: ComponentCoreModuleLayouts
 
   @Field({ nullable: true })
   public buttonText?: string

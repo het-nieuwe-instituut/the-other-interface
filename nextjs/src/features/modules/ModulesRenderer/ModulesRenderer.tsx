@@ -39,8 +39,15 @@ export type DynamicComponents =
 
 export function DynamicComponentRenderer({ components, isStoryPage = false }: Props) {
   const theme = useTheme()
+  const hasComponents = (components || []).length > 0
+
   return (
-    <Box maxW={theme.breakpoints.xl} marginX={'auto'} px={isStoryPage ? 0 : 6}>
+    <Box
+      maxW={theme.breakpoints.xl}
+      marginX={'auto'}
+      px={isStoryPage ? 0 : 6}
+      pt={hasComponents ? 'Xl' : 0}
+    >
       {/* {[...[componentMock, componentMock2, componentMock3], ...(props.components || [])].map( */}
       {[...(components || [])].map((component, index, array) => {
         const typeName = component?.__typename

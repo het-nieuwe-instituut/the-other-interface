@@ -48,12 +48,6 @@ fragment UploadFileEntityResponseFragment on UploadFileEntityResponse {
     }
 }
 
-fragment ComponentCoreModuleLayoutsFragment on ComponentCoreModuleLayouts {
-    id
-    spacingBottom
-    spacingTop
-}
-
 fragment ErrorFragment on Error {
     code
     message

@@ -1,8 +1,5 @@
 fragment ComponentModulesButtonsModuleFragment on ComponentModulesButtonsModule {
     id
-    buttonsModuleLayout {
-        ...ComponentCoreModuleLayoutsFragment
-    }
     buttonStyle
     __typename
     buttons {
@@ -12,9 +9,6 @@ fragment ComponentModulesButtonsModuleFragment on ComponentModulesButtonsModule 
 
 fragment ComponentModulesCarouselFragment on ComponentModulesCarousel {
     id
-    carouselModuleLayout {
-        ...ComponentCoreModuleLayoutsFragment
-    }
     buttonText
     buttonUrl
     description
@@ -28,9 +22,6 @@ fragment ComponentModulesCarouselFragment on ComponentModulesCarousel {
 
 fragment ComponentModulesImageCarouselFragment on ComponentModulesImageCarousel {
     id
-    imageCarouselModuleLayout {
-        ...ComponentCoreModuleLayoutsFragment
-    }
     description
     __typename
     images {
@@ -49,9 +40,6 @@ fragment ComponentModulesImageFragment on ComponentModulesImage {
     image {
         ...UploadFileEntityResponseFragment
     }
-    imageModuleLayout {
-        ...ComponentCoreModuleLayoutsFragment
-    }
     triplyRecord {
         data {
             ...BaseTriplyRecordFragment
@@ -67,27 +55,18 @@ fragment ComponentModulesImageFragment on ComponentModulesImage {
 fragment ComponentModulesPullquoteFragment on ComponentModulesPullquote {
     id
     __typename
-    pullquoteModuleLayout {
-        ...ComponentCoreModuleLayoutsFragment
-    }
     text
 }
 
 fragment ComponentModulesSubtitleFragment on ComponentModulesSubtitle {
     id
     __typename
-    subtitleModuleLayout {
-        ...ComponentCoreModuleLayoutsFragment
-    }
     text
 }
 
 fragment ComponentModulesTableModuleFragment on ComponentModulesTableModule {
     id
     __typename
-    tableModuleLayout {
-        ...ComponentCoreModuleLayoutsFragment
-    }
     table {
         ...TableEntityResponseFragment
     }
@@ -97,18 +76,12 @@ fragment ComponentModulesTextModuleFragment on ComponentModulesTextModule {
     Richtext
     id
     __typename
-    textModuleLayout {
-        ...ComponentCoreModuleLayoutsFragment
-    }
 }
 
 fragment ComponentModulesTitleModuleFragment on ComponentModulesTitleModule {
     Title
     id
     __typename
-    titleModuleLayout {
-        ...ComponentCoreModuleLayoutsFragment
-    }
 }
 
 fragment ComponentModulesGridModuleFragment on ComponentModulesGridModule {
@@ -128,8 +101,5 @@ fragment ComponentModulesGridModuleFragment on ComponentModulesGridModule {
     }
     fields {
         ...ComponentCoreGridFeaturedFieldsFragment
-    }
-    gridModuleLayout {
-        ...ComponentCoreModuleLayoutsFragment
     }
 }

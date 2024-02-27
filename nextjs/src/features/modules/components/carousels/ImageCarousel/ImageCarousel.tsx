@@ -9,6 +9,7 @@ import { ComponentModulesImageCarousel, UploadFileEntity } from 'src/generated/g
 
 import { ArrowNextContainer, ArrowPrevContainer } from './ImageCorouselStyled'
 import usePresenter from './usePresenter'
+import { modulesSpacingMapper } from '@/features/modules/modulesSpacing'
 
 interface Props {
   component: ComponentModulesImageCarousel
@@ -55,8 +56,8 @@ export const ImageCarousel = (props: Props) => {
               <Flex
                 key={`${item.id}-${index}`}
                 flexDirection="column"
-                pb={props.component.imageCarouselModuleLayout?.spacingBottom ?? undefined}
-                pt={props.component.imageCarouselModuleLayout?.spacingTop ?? undefined}
+                pt={modulesSpacingMapper?.ImageCarousel.spacingTop}
+                pb={modulesSpacingMapper?.ImageCarousel.spacingBottom}
                 width={proportions.width}
                 className="keen-slider__slide"
               >
