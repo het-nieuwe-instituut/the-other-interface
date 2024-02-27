@@ -33,7 +33,7 @@ export const DetailpageContainer: React.FC<Props> = ({ category, isDraftMode }) 
   }
 
   return (
-    <Box backgroundColor="graph">
+    <Box>
       <GalaxyInterface>
         <DetailGalaxy />
       </GalaxyInterface>

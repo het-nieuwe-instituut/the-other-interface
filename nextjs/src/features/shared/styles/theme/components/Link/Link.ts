@@ -184,5 +184,33 @@ export const Link: ComponentStyleConfig = {
         textDecoration: 'underline',
       },
     },
+    footer: {
+      color: `${colors.black}`,
+      underline: 'none',
+      textDecoration: 'none',
+      lineHeight: '130%',
+      letterSpacing: '0.32px',
+      fontFamily: "'Social'",
+      fontSize: {
+        base: '32px',
+        xl: '21px',
+      },
+      borderBottom: 'none',
+      fontWeight: 400,
+    },
+    footerDecorative: {
+      color: `${colors.black}`,
+      underline: 'none',
+      textDecoration: 'none',
+      lineHeight: '130%',
+      letterSpacing: '0.32px',
+      fontFamily: "'Social'",
+      fontSize: {
+        base: '32px',
+        xl: '21px',
+      },
+      fontWeight: 400,
+      borderBottom: `1px solid ${colors.black}`,
+    },
   },
 }
