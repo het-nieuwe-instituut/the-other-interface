@@ -14,6 +14,7 @@ const objectPerTypeDataKeys: KeysToVerify<ObjectPerTypeData> = {
   graph: true,
 }
 @Injectable()
+// TODO remove this service, we use the theme serivce instead now
 export class ZoomLevel1Service {
   private readonly EntityIdentifierMapping = [
     {

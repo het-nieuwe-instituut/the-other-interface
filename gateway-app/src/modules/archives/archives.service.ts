@@ -124,12 +124,8 @@ const archivesOtherDetailZoomLevel3DataKeys: KeysToVerify<ArchivesOtherDetailZoo
 export class ArchivesService {
   protected entityType = 'triply'
 
-  // TODO: change to convention when Triply adds this to normal space
-  // private readonly archivesDescriptionLevelEndpoint =
-  //   'https://api.collectiedata.hetnieuweinstituut.nl/queries/Joran/zoom3-archives-type-only/run?'
-
   private readonly ZoomLevel3Endpoint =
-    'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/archives-recordPage/run?'
+    'archives-recordPage/run?'
 
   public constructor(private triplyService: TriplyService) {}
 
