@@ -7,7 +7,7 @@ import {
   // PublicationZoomLevel3DetailType,
 } from 'src/generated/graphql'
 import { PublicationState } from '@/features/shared/types/enums'
-import { getZoomRecord3Queries } from './zoom3RecordConfig'
+import { zoom3RecordMetaConfig } from './zoom3RecordMetaConfig'
 
 type Payload =
   | {
@@ -15,9 +15,9 @@ type Payload =
     }
   | { locale?: string | null; publicationState: PublicationState; id: string }
 
-export async function getZoom3RecordDetail(type: Category, payload: Payload, api: Sdk) {
+export async function getZoom3RecordMeta(type: Category, payload: Payload, api: Sdk) {
   try {
-    const configByType = getZoomRecord3Queries(type, api)
+    const configByType = zoom3RecordMetaConfig(type, api)
 
     const data = await configByType?.zoomLevelQuery?.(payload)
     const item = configByType?.accesor?.(data)

@@ -101,11 +101,7 @@ const peopleRecordZoomLevel3DataKeys: KeysToVerify<PeopleRecordZoomLevel3Data> =
 export class PeopleService {
   protected entityType = 'triply'
 
-  private readonly ZoomLevel3Endpoint =
-    'people-recordPage/run?'
-
-  private readonly ZoomLevel3RecordEndpoint =
-    
+  private readonly ZoomLevel3Endpoint = 'people-recordPage/run?'
 
   public constructor(private triplyService: TriplyService) {}
 

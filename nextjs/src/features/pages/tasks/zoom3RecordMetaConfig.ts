@@ -10,7 +10,7 @@ import {
   //   ZoomLevel3PublicationQuery,
 } from 'src/generated/graphql'
 
-export const getZoomRecord3Queries = (type: Category, api: Sdk) => {
+export const zoom3RecordMetaConfig = (type: Category, api: Sdk) => {
   switch (type) {
     // case CATEGORIES.people:
     //   return {

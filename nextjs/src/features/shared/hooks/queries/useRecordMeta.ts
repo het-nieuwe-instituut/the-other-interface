@@ -3,17 +3,17 @@ import { useQuery } from '@tanstack/react-query'
 import initApiClientService from '../../utils/initApiClientService'
 import { Category } from '../../utils/categories'
 import { useSearchParams } from 'next/navigation'
-import { getZoom3RecordDetail } from '@/features/pages/tasks/getZoom3RecordDetail'
+import { getZoom3RecordMeta } from '@/features/pages/tasks/getZoom3RecordMeta'
 
-export function useRecordDetailExtended(type: Category, id: string) {
+export function useRecordMeta(type: Category, id: string) {
   const api = initApiClientService()
   const searchParams = useSearchParams()
   const lang = searchParams?.get('lang')
 
-  const queryFn = () => getZoom3RecordDetail(type, { id, locale: lang ?? 'nl' }, api)
+  const queryFn = () => getZoom3RecordMeta(type, { id, locale: lang ?? 'nl' }, api)
 
   return useQuery({
-    queryKey: ['record-detail-extended', id, lang],
+    queryKey: ['record-meta', id, lang],
     queryFn,
     refetchOnWindowFocus: false,
   })
