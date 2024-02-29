@@ -197,6 +197,10 @@ export const Link: ComponentStyleConfig = {
       },
       borderBottom: 'none',
       fontWeight: 400,
+      _hover: {
+        borderBottom: 'none',
+        textDecoration: 'none',
+      },
     },
     footerDecorative: {
       color: `${colors.black}`,

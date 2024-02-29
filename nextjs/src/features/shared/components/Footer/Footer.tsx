@@ -50,19 +50,27 @@ export const Footer = ({ menupages }: Props) => {
           <Flex direction="column" alignItems="flex-start">
             {/* Insert static links here */}
             <Flex flexDirection={'column'} mb={9} w={{ base: '339px' }}>
-              <Link href={`https://goo.gl/maps/m5EvkSa3z321G68z6`} variant={'footer'}>
+              <Link
+                href={`https://nieuweinstituut.nl/${lang ?? 'nl'}`}
+                variant={'footer'}
+                w={'fit-content'}
+              >
                 Nieuwe Instituut
               </Link>
-              <Link href={`https://goo.gl/maps/m5EvkSa3z321G68z6`} variant={'footer'}>
+              <Link
+                href={`https://goo.gl/maps/m5EvkSa3z321G68z6`}
+                variant={'footer'}
+                w={'fit-content'}
+              >
                 Museumpark 25 3015CB Rotterdam
               </Link>
             </Flex>
 
             <Flex flexDirection={'column'} w={{ base: '339px' }}>
-              <Link href={`tel:+31(0)10-4401200`} variant={'footer'}>
+              <Link href={`tel:+31(0)10-4401200`} variant={'footer'} w={'fit-content'}>
                 +31(0)10-4401200
               </Link>
-              <Link href={`mailto:info@hetnieuweinstituut.net`} variant={'footer'}>
+              <Link href={`mailto:info@nieuweinstituut.nl`} variant={'footer'} w={'fit-content'}>
                 info@nieuweinstituut.nl
               </Link>
             </Flex>
@@ -89,10 +97,11 @@ export const Footer = ({ menupages }: Props) => {
                 {sectionOne.map(link => (
                   <Link
                     key={link.id} // Use unique ID from your data
-                    href={`${link?.attributes?.slug}`}
+                    href={`/menupage/${link?.attributes?.slug}?lang=${lang}`}
                     variant={'footerDecorative'}
                     cursor="pointer"
                     w={'fit-content'}
+                    mb={1}
                   >
                     {capitalizeFirstLetter(link?.attributes?.Title ?? '')}
                   </Link>
