@@ -14,7 +14,7 @@ export const LandingpageContainer: React.FC<Props> = ({ landingpage }) => {
   const editorialData = landingpage?.landingpages?.data[0]?.attributes
 
   return (
-    <Box backgroundColor="graph">
+    <Box>
       <GalaxyInterface>
         <CategoryGalaxy />
       </GalaxyInterface>
