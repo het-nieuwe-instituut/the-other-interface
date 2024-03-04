@@ -837,6 +837,23 @@ export type PeopleAssociationType = {
   associationLabel?: Maybe<Scalars['String']>;
 };
 
+export type PeopleRecordZoomLevel3Type = {
+  __typename?: 'PeopleRecordZoomLevel3Type';
+  association?: Maybe<Scalars['String']>;
+  birthDate?: Maybe<Scalars['String']>;
+  birthPlace?: Maybe<Scalars['String']>;
+  deathDate?: Maybe<Scalars['String']>;
+  deathPlace?: Maybe<Scalars['String']>;
+  externalSource?: Maybe<Scalars['String']>;
+  gender?: Maybe<Scalars['String']>;
+  nameVariations?: Maybe<Scalars['String']>;
+  nationality?: Maybe<Scalars['String']>;
+  period?: Maybe<Scalars['String']>;
+  permanentLink?: Maybe<Scalars['String']>;
+  profession?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
 export type PeopleZoomLevel3DetailType = {
   __typename?: 'PeopleZoomLevel3DetailType';
   associations?: Maybe<Array<PeopleAssociationType>>;
@@ -1048,6 +1065,7 @@ export type Query = {
   menupages: MenupageEntityResponseCollection;
   objectDetailZoomLevel3: ObjectsZoomLevel3DetailType;
   objectsRecordZoomLevel3?: Maybe<Array<ObjectRecordZoomLevel3Type>>;
+  peopleRecordZoomLevel3?: Maybe<Array<PeopleRecordZoomLevel3Type>>;
   publicationArticle: PublicationsArticleZoomLevel3DetailType;
   publicationAudioVisual: PublicationsAudioVisualZoomLevel3DetailType;
   publicationBook: PublicationsBookZoomLevel3DetailType;
@@ -1156,6 +1174,11 @@ export type QueryMenupagesArgs = {
 
 
 export type QueryObjectsRecordZoomLevel3Args = {
+  id: Scalars['String'];
+};
+
+
+export type QueryPeopleRecordZoomLevel3Args = {
   id: Scalars['String'];
 };
 
@@ -2004,6 +2027,13 @@ export type ZoomLevel3ObjectRecordQueryVariables = Exact<{
 
 
 export type ZoomLevel3ObjectRecordQuery = { __typename?: 'Query', objectsRecordZoomLevel3?: Array<{ __typename: 'ObjectRecordZoomLevel3Type', objectNumber?: string | null, titleType?: string | null, objectName?: string | null, archiveCode?: string | null, date?: string | null, materials?: string | null, techniques?: string | null, hasParts?: string | null, dimension?: string | null, scale?: string | null, creditLine?: string | null, rights?: string | null, permanentLink?: string | null }> | null };
+
+export type ZoomLevel3PeopleRecordQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type ZoomLevel3PeopleRecordQuery = { __typename?: 'Query', peopleRecordZoomLevel3?: Array<{ __typename: 'PeopleRecordZoomLevel3Type', type?: string | null, profession?: string | null, nameVariations?: string | null, birthDate?: string | null, birthPlace?: string | null, deathDate?: string | null, deathPlace?: string | null, nationality?: string | null, gender?: string | null, period?: string | null, association?: string | null, permanentLink?: string | null, externalSource?: string | null }> | null };
 
 export type ArchivesRelationsQueryVariables = Exact<{
   id: Scalars['String'];
@@ -3062,6 +3092,26 @@ export const ZoomLevel3ObjectRecordDocument = gql`
   }
 }
     `;
+export const ZoomLevel3PeopleRecordDocument = gql`
+    query ZoomLevel3PeopleRecord($id: String!) {
+  peopleRecordZoomLevel3(id: $id) {
+    __typename
+    type
+    profession
+    nameVariations
+    birthDate
+    birthPlace
+    deathDate
+    deathPlace
+    nationality
+    gender
+    period
+    association
+    permanentLink
+    externalSource
+  }
+}
+    `;
 export const ArchivesRelationsDocument = gql`
     query ArchivesRelations($id: String!, $lang: String!) {
   relations(type: Archives, id: $id, lang: $lang) {
@@ -3215,6 +3265,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     ZoomLevel3ObjectRecord(variables: ZoomLevel3ObjectRecordQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ZoomLevel3ObjectRecordQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ZoomLevel3ObjectRecordQuery>(ZoomLevel3ObjectRecordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ZoomLevel3ObjectRecord', 'query');
+    },
+    ZoomLevel3PeopleRecord(variables: ZoomLevel3PeopleRecordQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ZoomLevel3PeopleRecordQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ZoomLevel3PeopleRecordQuery>(ZoomLevel3PeopleRecordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ZoomLevel3PeopleRecord', 'query');
     },
     ArchivesRelations(variables: ArchivesRelationsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ArchivesRelationsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ArchivesRelationsQuery>(ArchivesRelationsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ArchivesRelations', 'query');

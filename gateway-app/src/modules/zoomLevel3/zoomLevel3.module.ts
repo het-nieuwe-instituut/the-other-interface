@@ -12,7 +12,7 @@ import { ZoomLevel3Controller } from './zoomLevel3.controller'
   imports: [
     StrapiModule,
     forwardRef(() => ObjectsModule),
-    PeopleModule,
+    forwardRef(() => PeopleModule),
     forwardRef(() => PublicationsModule),
     forwardRef(() => ArchivesModule),
   ],

@@ -57,11 +57,9 @@ const objectRecordZoomLevel3DataKeys: KeysToVerify<ObjectRecordZoomLevel3Data> =
 export class ObjectsService {
   protected entityType = 'triply'
 
-  private readonly ZoomLevel3Endpoint =
-    'objects-recordPage/run?'
+  private readonly ZoomLevel3Endpoint = 'objects-recordPage/run?'
 
-  private readonly ZoomLevel3RecordEndpoint =
-    'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/objects-recordPage-editorial/run?'
+  private readonly ZoomLevel3RecordEndpoint = 'objects-recordPage-editorial/run?'
 
   public constructor(private triplyService: TriplyService) {}
 

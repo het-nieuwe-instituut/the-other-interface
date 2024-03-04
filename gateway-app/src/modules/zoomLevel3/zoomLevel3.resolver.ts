@@ -7,7 +7,7 @@ import {
   ArchivesRecordZoomLevel3Type,
 } from '../archives/archives.type'
 import { ObjectRecordZoomLevel3Type, ObjectsZoomLevel3DetailType } from '../objects/objects.type'
-import { PeopleZoomLevel3DetailType } from '../people/people.type'
+import { PeopleRecordZoomLevel3Type, PeopleZoomLevel3DetailType } from '../people/people.type'
 import { PublicationsService } from '../publications/publications.service'
 import {
   PublicationZoomLevel3DetailType,
@@ -22,6 +22,7 @@ import { ZoomLevel3Service } from './zoomLevel3.service'
 import { ZoomLevel3Args, ZoomLevel3RelationsType } from './zoomLevel3.type'
 import { ArchivesService } from '../archives/archives.service'
 import { ObjectsService } from '../objects/objects.service'
+import { PeopleService } from '../people/people.service'
 // import { ObjectsService } from '../objects/objects.service'
 
 @Resolver(ZoomLevel3RelationsType)
@@ -30,7 +31,8 @@ export class ZoomLevel3Resolver {
     private readonly zoomLevel3Service: ZoomLevel3Service,
     private readonly archivesService: ArchivesService,
     private readonly publicationsService: PublicationsService,
-    private readonly objectsService: ObjectsService
+    private readonly objectsService: ObjectsService,
+    private readonly peopleService: PeopleService
   ) {}
 
   @Query(() => [ZoomLevel3RelationsType], { nullable: true })
@@ -46,6 +48,11 @@ export class ZoomLevel3Resolver {
   @Query(() => [ObjectRecordZoomLevel3Type], { nullable: true })
   public async objectsRecordZoomLevel3(@Args('id') objectId: string) {
     return this.objectsService.getZoomLevel3RecordData(objectId)
+  }
+
+  @Query(() => [PeopleRecordZoomLevel3Type], { nullable: true })
+  public async peopleRecordZoomLevel3(@Args('id') peopleId: string) {
+    return this.peopleService.getZoomLevel3RecordData(peopleId)
   }
 
   // @Query(() => [ZoomLevel3RelatedRecordType], { nullable: true })

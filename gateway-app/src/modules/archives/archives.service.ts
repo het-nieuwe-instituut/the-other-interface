@@ -106,11 +106,9 @@ const archivesRecordZoomLevel3DataKeys: KeysToVerify<ArchivesRecordZoomLevel3Dat
 export class ArchivesService {
   protected entityType = 'triply'
 
-  private readonly ZoomLevel3Endpoint =
-    'archives-recordPage/run?'
+  private readonly ZoomLevel3Endpoint = 'archives-recordPage/run?'
 
-  private readonly ZoomLevel3RecordEndpoint =
-    'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/archives-recordPage-editorial/11/run?'
+  private readonly ZoomLevel3RecordEndpoint = 'archives-recordPage-editorial/11/run?'
 
   public constructor(private triplyService: TriplyService) {}
 

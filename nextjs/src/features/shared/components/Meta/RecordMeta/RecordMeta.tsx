@@ -2,7 +2,6 @@
 import { Box, Text, Button } from '@chakra-ui/react'
 import { usePresenter } from './usePresenter'
 import { Loader } from '@/features/galaxyInterface/components/Loader/Loader'
-import Link from 'next/link'
 import ExternalLink from '@/icons/arrows/external-link.svg'
 
 export const RecordMeta: React.FC = () => {
@@ -23,34 +22,43 @@ export const RecordMeta: React.FC = () => {
                 {section.title}
               </Text>
             )}
-            {section.isLink && section.value ? (
-              <Button
-                as={'a'}
-                rightIcon={<ExternalLink />}
-                target={'_blank'}
-                bg={'transparent'}
-                href={section.value}
-                border={'none'}
-                borderBottom={`1px solid `}
-                px={0}
-                _hover={{ bg: 'transparent' }}
-                outline={'none'}
-                outlineOffset={0}
-              >
-                <Text
-                  as={'span'}
-                  textStyle={'socialLarge.lg'}
-                  color={'currentcolor'}
-                  verticalAlign={'text-bottom'}
-                >
-                  {section.title}
+            {section?.value?.map((value, index) => {
+              if (section.isLink) {
+                return (
+                  <Button
+                    as={'a'}
+                    rightIcon={<ExternalLink />}
+                    target={'_blank'}
+                    bg={'transparent'}
+                    href={value}
+                    border={'none'}
+                    borderBottom={`1px solid black`}
+                    px={0}
+                    _hover={{ bg: 'transparent' }}
+                    outline={'none'}
+                    outlineOffset={0}
+                    borderRadius={0}
+                    key={index}
+                    py={'6px'}
+                  >
+                    <Text
+                      as={'span'}
+                      textStyle={'socialLarge.lg'}
+                      color={'currentcolor'}
+                      verticalAlign={'text-bottom'}
+                    >
+                      {section.title}
+                    </Text>
+                  </Button>
+                )
+              }
+
+              return (
+                <Text textStyle={'socialLarge.lg'} key={index}>
+                  {value}
                 </Text>
-              </Button>
-            ) : (
-              // </Link>
-              // Render as plain text if not a link
-              <Text textStyle={'socialLarge.lg'}>{section.value}</Text>
-            )}
+              )
+            })}
           </Box>
         )
       })}
