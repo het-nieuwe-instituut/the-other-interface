@@ -1,4 +1,4 @@
-import { ArchiveZoomLevel3DetailType, ArchivesFondsCreatorType, ArchivesFondsZoomLevel3DetailType, ArchivesOtherZoomLevel3DetailType, Author, AuthorEntity, AuthorEntityResponse, AuthorEntityResponseCollection, AuthorFiltersInput, BooleanFilterInput, ComponentCoreButton, ComponentCoreButtonFiltersInput, ComponentCoreCarouselItem, ComponentCoreFeaturedFields, ComponentCoreGridFeaturedFields, ComponentCoreImageCarouselItem, ComponentCoreModuleLayouts, ComponentCoreModuleLayoutsFiltersInput, ComponentCorePublicationDate, ComponentCorePublicationDateFiltersInput, ComponentCoreTableBody, ComponentCoreTableBodyFiltersInput, ComponentCoreTableBodyItem, ComponentCoreTableBodyItemFiltersInput, ComponentCoreTableHead, ComponentCoreTableHeadFiltersInput, ComponentCoreTableHeadItem, ComponentCoreTableHeadItemFiltersInput, ComponentCoreTimeframe, ComponentCoreTimeframeFiltersInput, ComponentModulesButtonsModule, ComponentModulesButtonsModuleFiltersInput, ComponentModulesCarousel, ComponentModulesGridModule, ComponentModulesImage, ComponentModulesImageCarousel, ComponentModulesPullquote, ComponentModulesSubtitle, ComponentModulesTableModule, ComponentModulesTextModule, ComponentModulesTitleModule, DateFilterInput, DateTimeFilterInput, Error, Homepage, HomepageEntity, HomepageEntityResponse, HomepageRelationResponseCollection, IdFilterInput, Landingpage, LandingpageEntity, LandingpageEntityResponse, LandingpageEntityResponseCollection, LandingpageFiltersInput, LandingpageRelationResponseCollection, Location, LocationEntity, LocationEntityResponse, LocationFiltersInput, LocationRelationResponseCollection, LongFilterInput, Menupage, MenupageEntity, MenupageEntityResponse, MenupageEntityResponseCollection, MenupageFiltersInput, MenupageRelationResponseCollection, ObjectMakerType, ObjectMaterialType, ObjectTechniqueType, ObjectsZoomLevel3DetailType, Pagination, PaginationArg, PeopleAssociationType, PeopleZoomLevel3DetailType, PublicationAuthorType, PublicationZoomLevel3DetailType, PublicationsArticleZoomLevel3DetailType, PublicationsAudioVisualZoomLevel3DetailType, PublicationsBookZoomLevel3DetailType, PublicationsSerialZoomLevel3DetailType, Query, ResponseCollectionMeta, Story, StoryEntity, StoryEntityResponse, StoryEntityResponseCollection, StoryFiltersInput, StoryMetaEntityResponseCollection, StoryRelationResponseCollection, StoryWithoutRelations, StoryWithoutRelationsEntity, StoryWithoutRelationsEntityResponse, StoryWithoutRelationsEntityResponseCollection, StringFilterInput, Table, TableEntity, TableEntityResponse, TableEntityResponseCollection, TableFiltersInput, Theme, ThemeEntity, ThemeEntityResponse, ThemeFiltersInput, ThemeRelationResponseCollection, TriplyRecord, TriplyRecordEntity, TriplyRecordEntityResponse, TriplyRecordFiltersInput, TriplyRecordRelationResponseCollection, UploadFile, UploadFileEntity, UploadFileEntityResponse, UploadFileRelationResponseCollection, UsersPermissionsPermission, UsersPermissionsPermissionEntity, UsersPermissionsPermissionFiltersInput, UsersPermissionsPermissionRelationResponseCollection, UsersPermissionsRole, UsersPermissionsRoleEntity, UsersPermissionsRoleEntityResponse, UsersPermissionsRoleFiltersInput, UsersPermissionsUser, UsersPermissionsUserEntity, UsersPermissionsUserEntityResponse, UsersPermissionsUserEntityResponseCollection, UsersPermissionsUserFiltersInput, UsersPermissionsUserRelationResponseCollection, ZoomLevel1Type, ZoomLevel2AmountParentType, ZoomLevel2ParentType, ZoomLevel2Type, ZoomLevel3RelationsType, ArchivesZoomLevel3Types, EntityNames, EnumComponentcorecarouselitemType, EnumComponentcoremodulelayoutsSpacingbottom, EnumComponentcoremodulelayoutsSpacingtop, EnumComponentcorepublicationdateDisplaytype, EnumComponentmodulesbuttonsmoduleButtonstyle, EnumComponentmodulescarouselType, EnumComponentmodulesgridmoduleFieldtypes, EnumTriplyrecordType, PublicationsZoomLevel3Types } from '../generated/graphql';
+import { ArchiveZoomLevel3DetailType, ArchivesFondsCreatorType, ArchivesFondsZoomLevel3DetailType, ArchivesOtherZoomLevel3DetailType, Author, AuthorEntity, AuthorEntityResponse, AuthorEntityResponseCollection, AuthorFiltersInput, BooleanFilterInput, ComponentCoreButton, ComponentCoreButtonFiltersInput, ComponentCoreCarouselItem, ComponentCoreFeaturedFields, ComponentCoreGridFeaturedFields, ComponentCoreImageCarouselItem, ComponentCoreModuleLayoutsFiltersInput, ComponentCorePublicationDate, ComponentCorePublicationDateFiltersInput, ComponentCoreTableBody, ComponentCoreTableBodyFiltersInput, ComponentCoreTableBodyItem, ComponentCoreTableBodyItemFiltersInput, ComponentCoreTableHead, ComponentCoreTableHeadFiltersInput, ComponentCoreTableHeadItem, ComponentCoreTableHeadItemFiltersInput, ComponentCoreTimeframe, ComponentCoreTimeframeFiltersInput, ComponentModulesButtonsModule, ComponentModulesButtonsModuleFiltersInput, ComponentModulesCarousel, ComponentModulesGridModule, ComponentModulesImage, ComponentModulesImageCarousel, ComponentModulesPullquote, ComponentModulesSubtitle, ComponentModulesTableModule, ComponentModulesTextModule, ComponentModulesTitleModule, DateFilterInput, DateTimeFilterInput, Error, Homepage, HomepageEntity, HomepageEntityResponse, HomepageRelationResponseCollection, IdFilterInput, Landingpage, LandingpageEntity, LandingpageEntityResponse, LandingpageEntityResponseCollection, LandingpageFiltersInput, LandingpageRelationResponseCollection, Location, LocationEntity, LocationEntityResponse, LocationFiltersInput, LocationRelationResponseCollection, LongFilterInput, Menupage, MenupageEntity, MenupageEntityResponse, MenupageEntityResponseCollection, MenupageFiltersInput, MenupageRelationResponseCollection, ObjectMakerType, ObjectMaterialType, ObjectTechniqueType, ObjectsZoomLevel3DetailType, Pagination, PaginationArg, PeopleAssociationType, PeopleZoomLevel3DetailType, PublicationAuthorType, PublicationZoomLevel3DetailType, PublicationsArticleZoomLevel3DetailType, PublicationsAudioVisualZoomLevel3DetailType, PublicationsBookZoomLevel3DetailType, PublicationsSerialZoomLevel3DetailType, Query, ResponseCollectionMeta, Story, StoryEntity, StoryEntityResponse, StoryEntityResponseCollection, StoryFiltersInput, StoryMetaEntityResponseCollection, StoryRelationResponseCollection, StoryWithoutRelations, StoryWithoutRelationsEntity, StoryWithoutRelationsEntityResponse, StoryWithoutRelationsEntityResponseCollection, StringFilterInput, Table, TableEntity, TableEntityResponse, TableEntityResponseCollection, TableFiltersInput, Theme, ThemeEntity, ThemeEntityResponse, ThemeFiltersInput, ThemeRelationResponseCollection, TriplyRecord, TriplyRecordEntity, TriplyRecordEntityResponse, TriplyRecordFiltersInput, TriplyRecordRelationResponseCollection, UploadFile, UploadFileEntity, UploadFileEntityResponse, UploadFileRelationResponseCollection, UsersPermissionsPermission, UsersPermissionsPermissionEntity, UsersPermissionsPermissionFiltersInput, UsersPermissionsPermissionRelationResponseCollection, UsersPermissionsRole, UsersPermissionsRoleEntity, UsersPermissionsRoleEntityResponse, UsersPermissionsRoleFiltersInput, UsersPermissionsUser, UsersPermissionsUserEntity, UsersPermissionsUserEntityResponse, UsersPermissionsUserEntityResponseCollection, UsersPermissionsUserFiltersInput, UsersPermissionsUserRelationResponseCollection, ZoomLevel1Type, ZoomLevel2AmountParentType, ZoomLevel2ParentType, ZoomLevel2Type, ZoomLevel3RelationsType, ArchivesZoomLevel3Types, EntityNames, EnumComponentcorecarouselitemType, EnumComponentcorepublicationdateDisplaytype, EnumComponentmodulesbuttonsmoduleButtonstyle, EnumComponentmodulescarouselType, EnumComponentmodulesgridmoduleFieldtypes, EnumTriplyrecordType, PublicationsZoomLevel3Types } from '../generated/graphql';
 
 export const anArchiveZoomLevel3DetailType = (overrides?: Partial<ArchiveZoomLevel3DetailType>, _relationshipsToOmit: Array<string> = []): ArchiveZoomLevel3DetailType => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ArchiveZoomLevel3DetailType']);
@@ -226,15 +226,6 @@ export const aComponentCoreImageCarouselItem = (overrides?: Partial<ComponentCor
     };
 };
 
-export const aComponentCoreModuleLayouts = (overrides?: Partial<ComponentCoreModuleLayouts>, _relationshipsToOmit: Array<string> = []): ComponentCoreModuleLayouts => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentCoreModuleLayouts']);
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '57280df8-4370-466c-bd69-ed6c9ebdbf6a',
-        spacingBottom: overrides && overrides.hasOwnProperty('spacingBottom') ? overrides.spacingBottom! : EnumComponentcoremodulelayoutsSpacingbottom.Lg,
-        spacingTop: overrides && overrides.hasOwnProperty('spacingTop') ? overrides.spacingTop! : EnumComponentcoremodulelayoutsSpacingtop.Lg,
-    };
-};
-
 export const aComponentCoreModuleLayoutsFiltersInput = (overrides?: Partial<ComponentCoreModuleLayoutsFiltersInput>, _relationshipsToOmit: Array<string> = []): ComponentCoreModuleLayoutsFiltersInput => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentCoreModuleLayoutsFiltersInput']);
     return {
@@ -363,7 +354,6 @@ export const aComponentModulesButtonsModule = (overrides?: Partial<ComponentModu
     return {
         buttonStyle: overrides && overrides.hasOwnProperty('buttonStyle') ? overrides.buttonStyle! : EnumComponentmodulesbuttonsmoduleButtonstyle.Default,
         buttons: overrides && overrides.hasOwnProperty('buttons') ? overrides.buttons! : [relationshipsToOmit.includes('ComponentCoreButton') ? {} as ComponentCoreButton : aComponentCoreButton({}, relationshipsToOmit)],
-        buttonsModuleLayout: overrides && overrides.hasOwnProperty('buttonsModuleLayout') ? overrides.buttonsModuleLayout! : relationshipsToOmit.includes('ComponentCoreModuleLayouts') ? {} as ComponentCoreModuleLayouts : aComponentCoreModuleLayouts({}, relationshipsToOmit),
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '668ba96a-681d-472e-a861-bb5a737fd889',
     };
 };
@@ -385,7 +375,6 @@ export const aComponentModulesCarousel = (overrides?: Partial<ComponentModulesCa
     return {
         buttonText: overrides && overrides.hasOwnProperty('buttonText') ? overrides.buttonText! : 'fugiat',
         buttonUrl: overrides && overrides.hasOwnProperty('buttonUrl') ? overrides.buttonUrl! : 'amet',
-        carouselModuleLayout: overrides && overrides.hasOwnProperty('carouselModuleLayout') ? overrides.carouselModuleLayout! : relationshipsToOmit.includes('ComponentCoreModuleLayouts') ? {} as ComponentCoreModuleLayouts : aComponentCoreModuleLayouts({}, relationshipsToOmit),
         description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'animi',
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '02a9c5e5-9a6b-482e-9ea3-e1114441bf57',
         items: overrides && overrides.hasOwnProperty('items') ? overrides.items! : [relationshipsToOmit.includes('ComponentCoreCarouselItem') ? {} as ComponentCoreCarouselItem : aComponentCoreCarouselItem({}, relationshipsToOmit)],
@@ -403,7 +392,6 @@ export const aComponentModulesGridModule = (overrides?: Partial<ComponentModules
         fieldTitlesAreInverted: overrides && overrides.hasOwnProperty('fieldTitlesAreInverted') ? overrides.fieldTitlesAreInverted! : false,
         fieldTypes: overrides && overrides.hasOwnProperty('fieldTypes') ? overrides.fieldTypes! : EnumComponentmodulesgridmoduleFieldtypes.Stories,
         fields: overrides && overrides.hasOwnProperty('fields') ? overrides.fields! : [relationshipsToOmit.includes('ComponentCoreGridFeaturedFields') ? {} as ComponentCoreGridFeaturedFields : aComponentCoreGridFeaturedFields({}, relationshipsToOmit)],
-        gridModuleLayout: overrides && overrides.hasOwnProperty('gridModuleLayout') ? overrides.gridModuleLayout! : relationshipsToOmit.includes('ComponentCoreModuleLayouts') ? {} as ComponentCoreModuleLayouts : aComponentCoreModuleLayouts({}, relationshipsToOmit),
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'aa6f0062-16b8-4f8d-b646-3abab2435078',
         pageSize: overrides && overrides.hasOwnProperty('pageSize') ? overrides.pageSize! : 9461,
         showMoreButtonTitle: overrides && overrides.hasOwnProperty('showMoreButtonTitle') ? overrides.showMoreButtonTitle! : 'optio',
@@ -418,7 +406,6 @@ export const aComponentModulesImage = (overrides?: Partial<ComponentModulesImage
         caption: overrides && overrides.hasOwnProperty('caption') ? overrides.caption! : 'possimus',
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '8439cee4-53c6-4340-b9ee-9b88e7cafe67',
         image: overrides && overrides.hasOwnProperty('image') ? overrides.image! : relationshipsToOmit.includes('UploadFileEntityResponse') ? {} as UploadFileEntityResponse : anUploadFileEntityResponse({}, relationshipsToOmit),
-        imageModuleLayout: overrides && overrides.hasOwnProperty('imageModuleLayout') ? overrides.imageModuleLayout! : relationshipsToOmit.includes('ComponentCoreModuleLayouts') ? {} as ComponentCoreModuleLayouts : aComponentCoreModuleLayouts({}, relationshipsToOmit),
         story: overrides && overrides.hasOwnProperty('story') ? overrides.story! : relationshipsToOmit.includes('StoryEntityResponse') ? {} as StoryEntityResponse : aStoryEntityResponse({}, relationshipsToOmit),
         triplyRecord: overrides && overrides.hasOwnProperty('triplyRecord') ? overrides.triplyRecord! : relationshipsToOmit.includes('TriplyRecordEntityResponse') ? {} as TriplyRecordEntityResponse : aTriplyRecordEntityResponse({}, relationshipsToOmit),
     };
@@ -429,7 +416,6 @@ export const aComponentModulesImageCarousel = (overrides?: Partial<ComponentModu
     return {
         description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'nostrum',
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'caa291cc-f344-4c8e-b7ad-3f6d9c22152d',
-        imageCarouselModuleLayout: overrides && overrides.hasOwnProperty('imageCarouselModuleLayout') ? overrides.imageCarouselModuleLayout! : relationshipsToOmit.includes('ComponentCoreModuleLayouts') ? {} as ComponentCoreModuleLayouts : aComponentCoreModuleLayouts({}, relationshipsToOmit),
         images: overrides && overrides.hasOwnProperty('images') ? overrides.images! : relationshipsToOmit.includes('UploadFileRelationResponseCollection') ? {} as UploadFileRelationResponseCollection : anUploadFileRelationResponseCollection({}, relationshipsToOmit),
         items: overrides && overrides.hasOwnProperty('items') ? overrides.items! : [relationshipsToOmit.includes('ComponentCoreImageCarouselItem') ? {} as ComponentCoreImageCarouselItem : aComponentCoreImageCarouselItem({}, relationshipsToOmit)],
     };
@@ -439,7 +425,6 @@ export const aComponentModulesPullquote = (overrides?: Partial<ComponentModulesP
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentModulesPullquote']);
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '473a3cf9-ea98-4cd3-80c7-7052f59eceb2',
-        pullquoteModuleLayout: overrides && overrides.hasOwnProperty('pullquoteModuleLayout') ? overrides.pullquoteModuleLayout! : relationshipsToOmit.includes('ComponentCoreModuleLayouts') ? {} as ComponentCoreModuleLayouts : aComponentCoreModuleLayouts({}, relationshipsToOmit),
         text: overrides && overrides.hasOwnProperty('text') ? overrides.text! : 'ut',
     };
 };
@@ -448,7 +433,6 @@ export const aComponentModulesSubtitle = (overrides?: Partial<ComponentModulesSu
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentModulesSubtitle']);
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '549df5f1-4269-41cf-a4c5-ce2a8917985b',
-        subtitleModuleLayout: overrides && overrides.hasOwnProperty('subtitleModuleLayout') ? overrides.subtitleModuleLayout! : relationshipsToOmit.includes('ComponentCoreModuleLayouts') ? {} as ComponentCoreModuleLayouts : aComponentCoreModuleLayouts({}, relationshipsToOmit),
         text: overrides && overrides.hasOwnProperty('text') ? overrides.text! : 'voluptatem',
     };
 };
@@ -458,7 +442,6 @@ export const aComponentModulesTableModule = (overrides?: Partial<ComponentModule
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'c786a0d0-1be7-4ff6-9cd7-235d871cc40b',
         table: overrides && overrides.hasOwnProperty('table') ? overrides.table! : relationshipsToOmit.includes('TableEntityResponse') ? {} as TableEntityResponse : aTableEntityResponse({}, relationshipsToOmit),
-        tableModuleLayout: overrides && overrides.hasOwnProperty('tableModuleLayout') ? overrides.tableModuleLayout! : relationshipsToOmit.includes('ComponentCoreModuleLayouts') ? {} as ComponentCoreModuleLayouts : aComponentCoreModuleLayouts({}, relationshipsToOmit),
     };
 };
 
@@ -467,7 +450,6 @@ export const aComponentModulesTextModule = (overrides?: Partial<ComponentModules
     return {
         Richtext: overrides && overrides.hasOwnProperty('Richtext') ? overrides.Richtext! : 'quod',
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '67c6aef3-e334-4d10-978d-30c1a76d59a3',
-        textModuleLayout: overrides && overrides.hasOwnProperty('textModuleLayout') ? overrides.textModuleLayout! : relationshipsToOmit.includes('ComponentCoreModuleLayouts') ? {} as ComponentCoreModuleLayouts : aComponentCoreModuleLayouts({}, relationshipsToOmit),
     };
 };
 
@@ -476,7 +458,6 @@ export const aComponentModulesTitleModule = (overrides?: Partial<ComponentModule
     return {
         Title: overrides && overrides.hasOwnProperty('Title') ? overrides.Title! : 'quibusdam',
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'aeabb66f-3a23-42b4-8215-f8fb4e849040',
-        titleModuleLayout: overrides && overrides.hasOwnProperty('titleModuleLayout') ? overrides.titleModuleLayout! : relationshipsToOmit.includes('ComponentCoreModuleLayouts') ? {} as ComponentCoreModuleLayouts : aComponentCoreModuleLayouts({}, relationshipsToOmit),
     };
 };
 

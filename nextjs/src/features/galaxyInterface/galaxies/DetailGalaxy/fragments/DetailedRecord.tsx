@@ -51,28 +51,22 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
           }}
         />
 
-        <Flex
-          w="100%"
-          color="blueAlpha.100"
-          direction="column"
-          flex="1"
-          justifyContent="space-between"
-        >
+        <Flex w="100%" color="blueAlpha.100" direction="column" flex="1" mt={2}>
           <Text
             align="center"
             isTruncated
             textStyle="headingTimesLarge.md"
-            fontSize={'clamp(20px, 1.6vw, 40px)'}
-            lineHeight={'normal'}
-            mb="auto"
+            fontSize={{ base: '12px', lg: '20px' }}
+            lineHeight={{ base: '12px', lg: '21px' }}
           >
             {record?.title}
           </Text>
           <Text
             align="center"
             textStyle="headingTimesLarge.sm"
-            fontSize={'clamp(12px, .9vw, 20px)'}
+            fontSize={{ base: '9px', lg: '12px' }}
             lineHeight={'normal'}
+            mt={1}
           >
             {t(toSingularCategory(category))}
           </Text>

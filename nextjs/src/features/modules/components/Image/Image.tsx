@@ -6,6 +6,7 @@ import { ComponentModulesImage } from 'src/generated/graphql'
 
 import { calculateImagePropotions } from '../../helpers/modulesHelpers'
 import { imageBasePath } from '../../modulesConstants'
+import { modulesSpacingMapper } from '../../modulesSpacing'
 
 interface MediaImageProps {
   component: ComponentModulesImage
@@ -32,8 +33,8 @@ const MediaImage = (props: MediaImageProps) => {
   return (
     <Box
       backgroundColor={'inherit'}
-      paddingBottom={props.component.imageModuleLayout?.spacingBottom ?? undefined}
-      paddingTop={props.component.imageModuleLayout?.spacingTop ?? undefined}
+      pt={modulesSpacingMapper?.Image.spacingTop}
+      pb={modulesSpacingMapper?.Image.spacingBottom}
     >
       <Box maxW={'80rem'} ref={imageRef}>
         <Box pb="2.5">

@@ -9,12 +9,6 @@
   "attributes": {
     "Richtext": {
       "type": "richtext"
-    },
-    "textModuleLayout": {
-      "type": "component",
-      "repeatable": false,
-      "component": "core.module-layouts",
-      "required": true
     }
   }
 }

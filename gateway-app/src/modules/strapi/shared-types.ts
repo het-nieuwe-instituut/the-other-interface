@@ -1,10 +1,6 @@
 import { Field, Float, ID, InputType, Int, ObjectType, registerEnumType } from '@nestjs/graphql'
 
-import {
-  Enum_Componentcoremodulelayouts_Spacingbottom,
-  Enum_Componentcoremodulelayouts_Spacingtop,
-  PublicationState,
-} from '../../generated/strapi-sdk'
+import { PublicationState } from '../../generated/strapi-sdk'
 import { UploadFolderFiltersInput } from './shared-types-dependency'
 
 export type I18NLocaleCode = string
@@ -470,25 +466,6 @@ export class BooleanFilterInput {
 
   @Field({ nullable: true })
   public startsWith?: boolean
-}
-
-registerEnumType(Enum_Componentcoremodulelayouts_Spacingbottom, {
-  name: 'Enum_Componentcoremodulelayouts_Spacingbottom',
-})
-registerEnumType(Enum_Componentcoremodulelayouts_Spacingtop, {
-  name: 'Enum_Componentcoremodulelayouts_Spacingtop',
-})
-
-@ObjectType()
-export class ComponentCoreModuleLayouts {
-  @Field(() => ID)
-  public id: string
-
-  @Field(() => Enum_Componentcoremodulelayouts_Spacingbottom, { nullable: true })
-  public spacingBottom?: Enum_Componentcoremodulelayouts_Spacingbottom
-
-  @Field(() => Enum_Componentcoremodulelayouts_Spacingtop, { nullable: true })
-  public spacingTop?: Enum_Componentcoremodulelayouts_Spacingtop
 }
 
 @InputType()
