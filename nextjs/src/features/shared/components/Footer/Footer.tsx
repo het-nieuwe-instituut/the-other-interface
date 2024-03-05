@@ -1,5 +1,5 @@
 'use client'
-import { Flex, Text, Link, Box } from '../../configs/chakra'
+import { Flex, Link, Box } from '../../configs/chakra'
 
 import { FOOTER_Z_INDEX } from '../../constants/mainConstants'
 import { capitalizeFirstLetter } from '../../utils/text'
