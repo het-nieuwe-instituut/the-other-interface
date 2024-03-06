@@ -19500,7 +19500,7 @@ export const StoriesLinkedToTriplyRecordExtendedDocument = gql`
     $recordId: String!
     $type: String!
     $lang: I18NLocaleCode
-    $publicationState: PublicationState
+    $publicationState: PublicationState = LIVE
   ) {
     stories(
       filters: { triplyRecords: { recordId: { eq: $recordId }, type: { eq: $type } } }
