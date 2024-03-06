@@ -15,7 +15,7 @@ export const LayerWrapper: React.FC<Props> = ({ LeftContent, RightContent, Botto
       px={{ xl: 6, base: 0 }}
       position={'relative'}
       zIndex={2}
-      backgroundColor={'ivoryAlpha.95'}
+      backgroundColor={'ivoryAlpha.90'}
       width={'100%'}
     >
       <Box maxW={theme.breakpoints.xl} marginX={'auto'} paddingTop={9} px={6}>

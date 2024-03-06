@@ -16,7 +16,7 @@ export const HomepageContainer: React.FC<Props> = ({ homepage, themes }) => {
   const stories = themes?.themes.data?.[0]?.attributes?.stories?.data || []
 
   return (
-    <Box backgroundColor="graph">
+    <Box>
       <GalaxyInterface>
         <MainGalaxy stories={stories as StoryEntity[]} storyTitle={storyTitle} />
       </GalaxyInterface>
