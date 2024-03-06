@@ -22,6 +22,7 @@ import { TextModule } from '../components/TextModule/TextModule'
 import { Title } from '../components/Title/Title'
 import { CarouselModule } from '../components/carousels/Carousel/Carousel'
 import { ImageCarousel } from '../components/carousels/ImageCarousel/ImageCarousel'
+import { mapUploadFileEntitiesToStoryImageInfo } from '../components/carousels/ImageCarousel/imageCarouselStrapiDataMapper'
 
 interface Props {
   components: DynamicComponents
@@ -78,7 +79,9 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
             return (
               <ImageCarousel
                 key={keyExtractor(component.id, index, array)}
-                component={component as ComponentModulesImageCarousel}
+                images={mapUploadFileEntitiesToStoryImageInfo(
+                  component as ComponentModulesImageCarousel
+                )}
               />
             )
           }

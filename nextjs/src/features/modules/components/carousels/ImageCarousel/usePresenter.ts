@@ -1,9 +1,8 @@
+import { StoryImageInfo } from '@/features/shared/components/Record/RecordBottomContent/storiesRelatedToRecordDataMapper'
 import { useKeenSlider } from 'keen-slider/react'
 import React, { createRef, useEffect, useState } from 'react'
 
-import { Maybe, UploadFileEntity } from 'src/generated/graphql'
-
-const usePresenter = (items: Maybe<UploadFileEntity[]> | undefined) => {
+const usePresenter = (items: StoryImageInfo[] | undefined | null) => {
   const carouselRef = createRef<HTMLDivElement>()
   const [currentSlide, setCurrentSlide] = React.useState(0)
   const [loaded, setLoaded] = useState(false)
@@ -48,8 +47,8 @@ const usePresenter = (items: Maybe<UploadFileEntity[]> | undefined) => {
     const margin = 20
 
     const slides = items?.map(current => {
-      const originaImagelHeight = current?.attributes?.height || 1
-      const originalImageWidth = current?.attributes?.width || 1
+      const originaImagelHeight = current?.height || 1
+      const originalImageWidth = current?.width || 1
       const calculateWidth = calculateImagePropotions(
         originalImageWidth,
         originaImagelHeight,

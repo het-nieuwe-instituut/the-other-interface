@@ -5,22 +5,18 @@ import { Box, Flex, Text } from '@chakra-ui/react'
 import Image from 'next/legacy/image'
 import React from 'react'
 
-import { ComponentModulesImageCarousel, UploadFileEntity } from 'src/generated/graphql'
-
 import { ArrowNextContainer, ArrowPrevContainer } from './ImageCorouselStyled'
 import usePresenter from './usePresenter'
 import { modulesSpacingMapper } from '@/features/modules/modulesSpacing'
+import { StoryImageInfo } from '@/features/shared/components/Record/RecordBottomContent/storiesRelatedToRecordDataMapper'
 
 interface Props {
-  component: ComponentModulesImageCarousel
-  locale?: string
+  images: StoryImageInfo[]
 }
 
 const IMAGE_HEIGHT = 600
 
 export const ImageCarousel = (props: Props) => {
-  const { images } = props.component
-  const items = images?.data
   const {
     carouselRef,
     handlePaginationPrev,
@@ -28,7 +24,7 @@ export const ImageCarousel = (props: Props) => {
     sliderRef,
     calculateImagePropotions,
     size,
-  } = usePresenter(items)
+  } = usePresenter(props.images)
 
   return (
     <Box as="div" backgroundColor={'inherit'} ref={carouselRef} position="relative">
@@ -41,11 +37,11 @@ export const ImageCarousel = (props: Props) => {
           <ArrowRightIcon onClick={handlePaginationNext} />
         </ArrowNextContainer>
         <div ref={sliderRef} className="keen-slider">
-          {items?.map((item: UploadFileEntity, index) => {
-            const originalHeight = item?.attributes?.height ?? 1
-            const originalWidth = item?.attributes?.width ?? 1
-            const imagePath = imageBasePath(item?.attributes?.url) || 'broken'
-            const caption = item?.attributes?.caption
+          {props?.images?.map((item, index) => {
+            const originalHeight = item?.height ?? 1
+            const originalWidth = item?.width ?? 1
+            const imagePath = imageBasePath(item?.url) || 'broken'
+            const caption = item?.description
             const proportions = calculateImagePropotions(
               originalWidth,
               originalHeight,
@@ -54,7 +50,7 @@ export const ImageCarousel = (props: Props) => {
             )
             return (
               <Flex
-                key={`${item.id}-${index}`}
+                key={`${item.url}-${index}`}
                 flexDirection="column"
                 pt={modulesSpacingMapper?.ImageCarousel.spacingTop}
                 pb={modulesSpacingMapper?.ImageCarousel.spacingBottom}
