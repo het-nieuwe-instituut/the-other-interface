@@ -51,11 +51,14 @@ export const TableModule: React.FC<Props> = props => {
       pt={modulesSpacingMapper?.TableModule.spacingTop}
       pb={modulesSpacingMapper?.TableModule.spacingBottom}
     >
-      <Text as={'h2'} textStyle={'h2'} pb={'md'}>
-        {props.component.table?.data?.attributes?.name}
+      <Text as={'h2'} textStyle={'impactNew.xl'} pb={'sm'}>
+        {props.component.table?.data?.attributes?.name}{' '}
+        {`(${props.component.table?.data?.attributes?.TableBody?.length})`}
       </Text>
       {props.component.table?.data?.attributes?.description && (
-        <Text pb={'md'}>{props.component.table?.data?.attributes?.description}</Text>
+        <Text pb={'md'} textStyle={'socialLarge.lg'}>
+          {props.component.table?.data?.attributes?.description}
+        </Text>
       )}
       <TableModuleDesktop component={props.component} />
     </Box>
@@ -105,11 +108,22 @@ export const TableModuleDesktop: React.FC<Props> = props => {
 
   return (
     <TableContainer>
-      <Table variant="simple">
+      <Table>
         <Thead>
           <Tr>
             {head?.TableHeadItem?.map((item, index, array) => (
-              <Th key={keyExtractor(item, index, array)}>{item?.label}</Th>
+              <Th
+                key={keyExtractor(item, index, array)}
+                textTransform={'capitalize'}
+                // Overriding styles with textStyle does not work on this component
+                color={'black'}
+                fontSize={'16px'}
+                lineHeight={'130%'}
+                fontFamily={'Social'}
+                letterSpacing={'0.32px'}
+              >
+                {item?.label}
+              </Th>
             ))}
           </Tr>
         </Thead>
@@ -117,12 +131,34 @@ export const TableModuleDesktop: React.FC<Props> = props => {
           {body?.map((item, index, array) => (
             <Tr key={keyExtractor(item, index, array)}>
               {item?.TableBodyItem?.map((bodyItem, index, array) => (
-                <Td key={keyExtractor(bodyItem, index, array)}>{bodyItem?.value}</Td>
+                <Td
+                  key={keyExtractor(bodyItem, index, array)}
+                  // Overriding styles with textStyle does not work on this component
+                  fontSize={index === 0 ? '32px' : '21px'}
+                  fontWeight={index === 0 ? '700' : '400'}
+                  lineHeight={index === 0 ? '110%' : '130%'}
+                  letterSpacing={index === 0 ? '-0.32px' : '0.21px'}
+                >
+                  {bodyItem?.value}
+                </Td>
               ))}
             </Tr>
           ))}
         </Tbody>
       </Table>
+      {/* Pagination not yet implemented - Load more button for when it is */}
+      {/* <Text
+        as={'button'}
+        textDecoration={'underline'}
+        textUnderlineOffset={'4px'}
+        _hover={{ textDecoration: 'none' }}
+        _disabled={{ color: 'grey', textDecoration: 'none', cursor: 'not-allowed' }}
+        marginTop={'16px'}
+        // disabled={}
+        // onClick={() => {}}
+      >
+        Load more
+      </Text> */}
     </TableContainer>
   )
 }
