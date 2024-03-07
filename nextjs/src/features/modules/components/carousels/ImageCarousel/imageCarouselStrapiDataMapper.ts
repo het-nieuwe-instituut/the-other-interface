@@ -1,4 +1,4 @@
-import { StoryImageInfo } from '@/features/shared/components/Record/RecordBottomContent/storiesRelatedToRecordDataMapper'
+import { StoryImageInfo } from '@/features/shared/components/Record/RecordStoriesCarousel/storiesRelatedToRecordDataMapper'
 import { ComponentModulesImageCarousel } from 'src/generated/graphql'
 
 export function mapUploadFileEntitiesToStoryImageInfo(

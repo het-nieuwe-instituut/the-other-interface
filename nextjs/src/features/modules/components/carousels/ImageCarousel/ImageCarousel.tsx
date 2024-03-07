@@ -8,7 +8,7 @@ import React from 'react'
 import { ArrowNextContainer, ArrowPrevContainer } from './ImageCorouselStyled'
 import usePresenter from './usePresenter'
 import { modulesSpacingMapper } from '@/features/modules/modulesSpacing'
-import { StoryImageInfo } from '@/features/shared/components/Record/RecordBottomContent/storiesRelatedToRecordDataMapper'
+import { StoryImageInfo } from '@/features/shared/components/Record/RecordStoriesCarousel/storiesRelatedToRecordDataMapper'
 
 interface Props {
   images: StoryImageInfo[]
@@ -65,6 +65,11 @@ export const ImageCarousel = (props: Props) => {
                   alt="carousel image"
                   loading="eager"
                 />
+                {item?.title && (
+                  <Text textStyle={'socialLarge.lg'} fontWeight={700} fontSize={'32px'} mt={'3'}>
+                    {item.title}
+                  </Text>
+                )}
                 {caption && (
                   <Box width={'100'} mb="1" mt={'2.5'}>
                     <Text textStyle="micro" textAlign={'left'} pr={'2'}>

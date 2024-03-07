@@ -32,8 +32,8 @@ export const LayerWrapper: React.FC<Props> = ({ LeftContent, RightContent, Botto
           <GridItem area={'left'}>{LeftContent}</GridItem>
           {RightContent && <GridItem area={'right'}>{RightContent}</GridItem>}
         </Grid>
+        {BottomContent}
       </Box>
-      {BottomContent}
     </Box>
   )
 }

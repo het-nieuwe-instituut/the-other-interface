@@ -11763,7 +11763,8 @@ export type StoriesLinkedToTriplyRecordQuery = {
 export type StoriesLinkedToTriplyRecordExtendedQueryVariables = Exact<{
   recordId: Scalars['String']
   type: Scalars['String']
-  lang: Scalars['String']
+  lang?: InputMaybe<Scalars['I18NLocaleCode']>
+  publicationState?: InputMaybe<PublicationState>
 }>
 
 export type StoriesLinkedToTriplyRecordExtendedQuery = {
@@ -19495,12 +19496,16 @@ export const StoriesLinkedToTriplyRecordDocument = gql`
   }
 `
 export const StoriesLinkedToTriplyRecordExtendedDocument = gql`
-  query storiesLinkedToTriplyRecordExtended($recordId: String!, $type: String!, $lang: String!) {
+  query storiesLinkedToTriplyRecordExtended(
+    $recordId: String!
+    $type: String!
+    $lang: I18NLocaleCode
+    $publicationState: PublicationState
+  ) {
     stories(
-      filters: {
-        triplyRecords: { recordId: { eq: $recordId }, type: { eq: $type } }
-        locale: { eq: $lang }
-      }
+      filters: { triplyRecords: { recordId: { eq: $recordId }, type: { eq: $type } } }
+      locale: $lang
+      publicationState: $publicationState
     ) {
       data {
         ...StoryFragment

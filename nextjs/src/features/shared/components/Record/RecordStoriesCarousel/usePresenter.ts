@@ -2,6 +2,7 @@ import { useStoriesRelationForRecord } from '@/features/shared/hooks/queries/use
 import { useParams } from 'next/navigation'
 import { CATEGORIES_TO_ENTITY_MAPPER, Category } from '@/features/shared/utils/categories'
 import { mapRecordRelatedStories } from './storiesRelatedToRecordDataMapper'
+import useTranslation from 'next-translate/useTranslation'
 
 export const usePresenter = () => {
   const params = useParams()
@@ -10,11 +11,13 @@ export const usePresenter = () => {
   const type = CATEGORIES_TO_ENTITY_MAPPER[category]
 
   const { data: recordRelatedStories, isLoading } = useStoriesRelationForRecord(type, id)
+  const { t: tRecord } = useTranslation('record')
 
   const stories = mapRecordRelatedStories(recordRelatedStories)
 
   return {
     stories,
     isLoading,
+    tRecord,
   }
 }
