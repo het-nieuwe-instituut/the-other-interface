@@ -5,7 +5,7 @@ import { ImageCarousel } from '@/features/modules/components/carousels/ImageCaro
 
 export const RecordStoriesCarousel = () => {
   const { stories, tRecord } = usePresenter()
-  
+
   return (
     <Box>
       {stories && stories.length > 0 && (
@@ -16,11 +16,6 @@ export const RecordStoriesCarousel = () => {
           <ImageCarousel images={stories} />
         </>
       )}
-
-      {
-        <Table />
-        <Button />
-      }
     </Box>
   )
 }
