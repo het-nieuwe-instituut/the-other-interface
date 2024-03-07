@@ -4,7 +4,7 @@ import { usePresenter } from './usePresenter'
 import { ImageCarousel } from '@/features/modules/components/carousels/ImageCarousel/ImageCarousel'
 
 export const RecordStoriesCarousel = () => {
-  const { stories, tRecord } = usePresenter()
+  const { stories, tRecord, handleRedirect } = usePresenter()
 
   return (
     <Box>
@@ -13,7 +13,7 @@ export const RecordStoriesCarousel = () => {
           <Text textStyle={'h1'} mb={4}>
             {tRecord('relatedStoriesCarousel')} ({stories.length})
           </Text>
-          <ImageCarousel images={stories} />
+          <ImageCarousel images={stories} onItemClick={handleRedirect} />
         </>
       )}
     </Box>

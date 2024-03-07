@@ -12,6 +12,7 @@ import { StoryImageInfo } from '@/features/shared/components/Record/RecordStorie
 
 interface Props {
   images: StoryImageInfo[]
+  onItemClick?: (id: string | null | undefined) => void
 }
 
 const IMAGE_HEIGHT = 600
@@ -55,7 +56,9 @@ export const ImageCarousel = (props: Props) => {
                 pt={modulesSpacingMapper?.ImageCarousel.spacingTop}
                 pb={modulesSpacingMapper?.ImageCarousel.spacingBottom}
                 width={proportions.width}
+                onClick={item?.id ? () => props.onItemClick?.(item.id) : undefined}
                 className="keen-slider__slide"
+                cursor={props?.onItemClick && item?.id ? 'pointer' : 'default'}
               >
                 <Image
                   src={imagePath}
