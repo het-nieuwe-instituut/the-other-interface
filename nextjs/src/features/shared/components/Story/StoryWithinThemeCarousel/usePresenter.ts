@@ -1,7 +1,5 @@
-import { useStoriesRelationForRecord } from '@/features/shared/hooks/queries/useStoriesRelationForRecord'
 import { useParams, useRouter, useSearchParams } from 'next/navigation'
 import { CATEGORIES } from '@/features/shared/utils/categories'
-// import { mapRecordRelatedStories } from './storiesRelatedToRecordDataMapper'
 import useTranslation from 'next-translate/useTranslation'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useStoriesRelatedByTheme } from '@/features/shared/hooks/queries/useStoriesRelationWithinTheme'
