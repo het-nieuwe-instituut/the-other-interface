@@ -1,4 +1,4 @@
-import { ComponentModulesImage, Maybe, StoriesRelationForRecordQuery } from 'src/generated/graphql'
+import { ComponentModulesImage, Maybe, StoryEntity } from 'src/generated/graphql'
 
 export type StoryImageInfo = {
   url: string | undefined
@@ -9,10 +9,10 @@ export type StoryImageInfo = {
   id?: Maybe<string> | undefined
 }
 
-export const mapRecordRelatedStories = (
-  relatedStories: StoriesRelationForRecordQuery | undefined
+export const mapStoriesToRelatedCarouselItems = (
+  relatedStories: StoryEntity[] | undefined | null
 ): StoryImageInfo[] | undefined => {
-  const mappedStories = relatedStories?.zoomLevel3StoriesRelationsForRecord?.stories
+  const mappedStories = relatedStories
     ?.flatMap(story => {
       const firstName = story?.attributes?.author?.data?.attributes?.firstName ?? ''
       const lastName = story?.attributes?.author?.data?.attributes?.lastName ?? ''

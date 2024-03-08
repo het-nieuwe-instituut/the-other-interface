@@ -3,11 +3,13 @@ import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
 import { PublicationState, Sdk } from '../../generated/strapi-sdk'
 import { I18NLocaleCode, PaginationArg } from '../strapi/shared-types'
 import {
+  StoriesRelatedToThemeResponse,
   ThemeEntityResponse,
   ThemeFiltersInput,
   ThemeRelationResponseCollection,
 } from './theme.type'
 import { Theme } from './theme-dependency.type'
+import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 
 @Resolver()
 export class ThemeResolver {
@@ -40,6 +42,35 @@ export class ThemeResolver {
     })
 
     return res.themes
+  }
+
+  @Query(() => StoriesRelatedToThemeResponse)
+  public async storiesRealtedWithinTheme(
+    @Args('id') id: string,
+    @Args('locale', { nullable: true }) locale: I18NLocaleCode
+  ) {
+    const res = await this.strapiGqlSdk.storiesRelatedToTheme({
+      storyId: id,
+      lang: locale,
+    })
+
+    const currentStoryId = id
+
+    const filteredStories =
+      res.themes?.data?.[0]?.attributes?.stories?.data?.filter(story => {
+        const isCurrentStory = story?.id === currentStoryId
+        const isInLocalizations = story.attributes?.localizations?.data?.some(
+          localization => localization.id === currentStoryId
+        )
+
+        return !isCurrentStory && !isInLocalizations
+      }) || []
+
+    return {
+      type: EntityNames.Stories,
+      total: filteredStories?.length || 0,
+      stories: filteredStories || [],
+    }
   }
 }
 
