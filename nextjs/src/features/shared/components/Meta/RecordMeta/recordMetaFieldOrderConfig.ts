@@ -1,11 +1,6 @@
 import { CLOUD_CATEGORIES, Category } from '@/features/shared/utils/categories'
-import {
-  ArchivesRecordZoomLevel3Type,
-  ObjectRecordZoomLevel3Type,
-  PeopleRecordZoomLevel3Type,
-} from 'src/generated/graphql'
 
-const objectFieldOrder: Array<keyof ObjectRecordZoomLevel3Type> = [
+const objectFieldOrder = [
   'objectNumber',
   'titleType',
   'objectName',
@@ -21,7 +16,7 @@ const objectFieldOrder: Array<keyof ObjectRecordZoomLevel3Type> = [
   'permanentLink',
 ]
 
-const archiveFieldOrder: Array<keyof ArchivesRecordZoomLevel3Type> = [
+const archiveFieldOrder = [
   'custodialHistory',
   'systemOfArrangement',
   'sources',
@@ -39,7 +34,7 @@ const archiveFieldOrder: Array<keyof ArchivesRecordZoomLevel3Type> = [
   'externalSource',
 ]
 
-const peopleFieldOrder: Array<keyof PeopleRecordZoomLevel3Type> = [
+const peopleFieldOrder = [
   'type',
   'profession',
   'nameVariations',
@@ -55,6 +50,35 @@ const peopleFieldOrder: Array<keyof PeopleRecordZoomLevel3Type> = [
   'externalSource',
 ]
 
+const publicationFieldOrder = [
+  'objectNumber',
+  'subType',
+  'authors',
+  'authorRole',
+  'publisher',
+  'yearOfPublication',
+  'placeOfPublication',
+  'isbn',
+  'annotation',
+  'codeOfArchive',
+  'illustration',
+  'pages',
+  'language',
+  'series',
+  'number',
+  'category',
+  'relatedKeyword',
+  'geoKeyword',
+  'availability',
+  'permanentLink',
+  'externalSource',
+  'sourceTitle',
+  'volume',
+  'issue',
+  'year',
+  'subject',
+]
+
 export function recordMetaFieldOrderConfig(category: Category) {
   if (category === CLOUD_CATEGORIES.objects) {
     return objectFieldOrder
@@ -66,6 +90,10 @@ export function recordMetaFieldOrderConfig(category: Category) {
 
   if (category === CLOUD_CATEGORIES.people) {
     return peopleFieldOrder
+  }
+
+  if (category === CLOUD_CATEGORIES.publications) {
+    return publicationFieldOrder
   }
 
   return []

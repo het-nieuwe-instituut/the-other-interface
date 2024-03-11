@@ -3,6 +3,7 @@ import {
   ArchivesRecordZoomLevel3Type,
   ObjectRecordZoomLevel3Type,
   PeopleRecordZoomLevel3Type,
+  PublicationRecordZoomLevel3Type,
 } from 'src/generated/graphql'
 import { recordMetaFieldOrderConfig } from './recordMetaFieldOrderConfig'
 import { Category } from '@/features/shared/utils/categories'
@@ -11,6 +12,7 @@ type MetaSectionDataType =
   | ArchivesRecordZoomLevel3Type
   | ObjectRecordZoomLevel3Type
   | PeopleRecordZoomLevel3Type
+  | PublicationRecordZoomLevel3Type
 
 export function mapDataToSections(
   data: MetaSectionDataType | null | undefined,

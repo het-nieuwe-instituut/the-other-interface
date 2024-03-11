@@ -11,6 +11,7 @@ import record from './en/record.json'
 import stories from './en/stories.json'
 import category from './en/category.json'
 import recordMeta from './en/recordMeta.json'
+import recordMetaPublication from './en/recordMetaPublication.json'
 
 export type TranslationKeys = {
   common: Paths<typeof common>
@@ -21,6 +22,7 @@ export type TranslationKeys = {
   record: Paths<typeof record>
   category: Paths<typeof category>
   recordMeta: Paths<typeof recordMeta>
+  recordMetaPublication: Paths<typeof recordMetaPublication>
 }
 
 export type navigationT = (

@@ -302,14 +302,73 @@ type PublicationsWithAuthors =
   | PublicationArticleDetailZoomLevel3Data
   | PublicationsAudioVisualDetailZoomLevel3Data
 
+export interface PublicationRecordZoomLevel3Data {
+  objectNumber?: string
+  subType?: string
+  authors?: string[]
+  authorRole?: string[]
+  publisher?: string
+  yearOfPublication?: string
+  placeOfPublication?: string
+  isbn?: string
+  annotation?: string
+  codeOfArchive?: string
+  illustration?: string
+  pages?: string
+  language?: string
+  series?: string
+  number?: string
+  category?: string
+  relatedKeyword?: string[]
+  geoKeyword?: string[]
+  availability?: string
+  permanentLink?: string
+  externalSource?: string
+  sourceTitle?: string
+  volume?: string
+  issue?: string
+  year?: string
+  subject?: string[]
+}
+
+const publicationRecordZoomLevel3DataKeys: KeysToVerify<PublicationRecordZoomLevel3Data> = {
+  objectNumber: true,
+  subType: true,
+  authors: true,
+  authorRole: true,
+  publisher: true,
+  yearOfPublication: true,
+  placeOfPublication: true,
+  isbn: true,
+  annotation: true,
+  codeOfArchive: true,
+  illustration: true,
+  pages: true,
+  language: true,
+  series: true,
+  number: true,
+  category: true,
+  relatedKeyword: true,
+  geoKeyword: true,
+  availability: true,
+  permanentLink: true,
+  externalSource: true,
+  sourceTitle: true,
+  volume: true,
+  issue: true,
+  year: true,
+  subject: true,
+}
+
 @Injectable()
 export class PublicationsService {
   protected entityType = 'triply'
 
-  private readonly ZoomLevel3Endpoint =
-    'publications-recordPage/run?'
+  private readonly ZoomLevel3Endpoint = 'publications-recordPage/run?'
 
-  private readonly publicationDescriptionLevelEndpoint = 'Zoom-3-books-type/run'
+  private readonly ZoomLevel3RecordEndpoint = 'publications-recordPage-Editorial/2/run?'
+
+  // private readonly publicationDescriptionLevelEndpoint = 'Zoom-3-books-type/run'
 
   public constructor(
     private readonly triplyService: TriplyService,
@@ -331,6 +390,17 @@ export class PublicationsService {
       id,
       thumbnail: getHttpThumbnailOrNull(result.data[0]?.thumbnail)?.split(';'),
     }
+  }
+
+  public async getZoomLevel3RecordData(id: string) {
+    const result = await this.triplyService.queryTriplyData<PublicationRecordZoomLevel3Data>(
+      this.ZoomLevel3RecordEndpoint,
+      publicationRecordZoomLevel3DataKeys,
+      { page: 1, pageSize: 1 },
+      { id }
+    )
+
+    return result.data
   }
 
   public resolveAuthor(publication: PublicationsZoomLevel3DataTypes) {

@@ -10,6 +10,7 @@ import { ObjectRecordZoomLevel3Type, ObjectsZoomLevel3DetailType } from '../obje
 import { PeopleRecordZoomLevel3Type, PeopleZoomLevel3DetailType } from '../people/people.type'
 import { PublicationsService } from '../publications/publications.service'
 import {
+  PublicationRecordZoomLevel3Type,
   PublicationZoomLevel3DetailType,
   PublicationZoomLevel3UnionType,
   PublicationsArticleZoomLevel3DetailType,
@@ -53,6 +54,11 @@ export class ZoomLevel3Resolver {
   @Query(() => [PeopleRecordZoomLevel3Type], { nullable: true })
   public async peopleRecordZoomLevel3(@Args('id') peopleId: string) {
     return this.peopleService.getZoomLevel3RecordData(peopleId)
+  }
+
+  @Query(() => [PublicationRecordZoomLevel3Type], { nullable: true })
+  public async publicationsRecordZoomLevel3(@Args('id') publicationId: string) {
+    return this.publicationsService.getZoomLevel3RecordData(publicationId)
   }
 
   // @Query(() => [ZoomLevel3RelatedRecordType], { nullable: true })

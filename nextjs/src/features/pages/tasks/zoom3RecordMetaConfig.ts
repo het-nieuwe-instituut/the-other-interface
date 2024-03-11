@@ -5,6 +5,7 @@ import {
   ZoomLevel3ArchiveRecordQuery,
   ZoomLevel3ObjectRecordQuery,
   ZoomLevel3PeopleRecordQuery,
+  ZoomLevel3PublicationRecordQuery,
 } from 'src/generated/graphql'
 
 export const zoom3RecordMetaConfig = (type: Category, api: Sdk) => {
@@ -19,11 +20,11 @@ export const zoom3RecordMetaConfig = (type: Category, api: Sdk) => {
         zoomLevelQuery: api.ZoomLevel3ArchiveRecord,
         accesor: (data?: ZoomLevel3ArchiveRecordQuery) => data?.archivesRecordZoomLevel3,
       }
-    // case CATEGORIES.publications:
-    //   return {
-    //     zoomLevelQuery: api.ZoomLevel3Publication,
-    //     accesor: (data?: ZoomLevel3PublicationQuery) => data?.zoomLevel3Publication,
-    //   }
+    case CATEGORIES.publications:
+      return {
+        zoomLevelQuery: api.ZoomLevel3PublicationRecord,
+        accesor: (data?: ZoomLevel3PublicationRecordQuery) => data?.publicationsRecordZoomLevel3,
+      }
 
     case CATEGORIES.objects:
       return {

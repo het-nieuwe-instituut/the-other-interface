@@ -1,0 +1,31 @@
+query ZoomLevel3PublicationRecord($id: String!) {
+  publicationsRecordZoomLevel3(id: $id) {
+    __typename
+    objectNumber
+    subType
+    authors
+    authorRole
+    publisher
+    yearOfPublication
+    placeOfPublication
+    isbn
+    annotation
+    codeOfArchive
+    illustration
+    pages
+    language
+    series
+    number
+    category
+    relatedKeyword
+    geoKeyword
+    availability
+    permanentLink
+    externalSource
+    sourceTitle
+    volume
+    issue
+    year
+    subject
+  }
+}
