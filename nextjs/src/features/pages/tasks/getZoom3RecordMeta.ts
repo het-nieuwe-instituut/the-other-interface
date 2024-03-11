@@ -1,11 +1,5 @@
 import { Category } from '@/features/shared/utils/categories'
-import {
-  Sdk,
-  // PeopleZoomLevel3DetailType,
-  // ArchiveZoomLevel3DetailType,
-  // ObjectsZoomLevel3DetailType,
-  // PublicationZoomLevel3DetailType,
-} from 'src/generated/graphql'
+import { Sdk } from 'src/generated/graphql'
 import { PublicationState } from '@/features/shared/types/enums'
 import { zoom3RecordMetaConfig } from './zoom3RecordMetaConfig'
 
