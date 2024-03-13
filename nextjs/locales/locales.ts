@@ -12,6 +12,7 @@ import stories from './en/stories.json'
 import category from './en/category.json'
 import recordMeta from './en/recordMeta.json'
 import recordMetaPublication from './en/recordMetaPublication.json'
+import recordMetaArchive from './en/recordMetaArchive.json'
 
 export type TranslationKeys = {
   common: Paths<typeof common>
@@ -23,6 +24,7 @@ export type TranslationKeys = {
   category: Paths<typeof category>
   recordMeta: Paths<typeof recordMeta>
   recordMetaPublication: Paths<typeof recordMetaPublication>
+  recordMetaArchive: Paths<typeof recordMetaArchive>
 }
 
 export type navigationT = (
@@ -38,7 +40,7 @@ export type navigationT = (
 ) => string
 
 export type recordMetaT = (
-  s: Paths<typeof recordMeta>,
+  s: Paths<typeof recordMetaArchive>,
   q?: TranslationQuery | undefined,
   o?:
     | {
@@ -50,3 +52,7 @@ export type recordMetaT = (
 ) => string | undefined
 
 export type recordMetaType = Paths<typeof recordMeta>
+
+export type recordMetaArchiveT = Paths<typeof recordMetaArchive>
+
+export type RecordMetaTranslatableKeys<T> = Exclude<keyof T, '__typename'> & recordMetaArchiveT

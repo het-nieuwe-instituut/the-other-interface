@@ -5,14 +5,33 @@ import {
   PeopleRecordZoomLevel3Type,
   PublicationRecordZoomLevel3Type,
 } from 'src/generated/graphql'
-import { recordMetaFieldOrderConfig } from './recordMetaFieldOrderConfig'
-import { Category } from '@/features/shared/utils/categories'
+import { categoryFieldsMapping, recordMetaFieldOrderConfig } from './recordMetaFieldOrderConfig'
+import { CLOUD_CATEGORIES, Category } from '@/features/shared/utils/categories'
 
 type MetaSectionDataType =
   | ArchivesRecordZoomLevel3Type
   | ObjectRecordZoomLevel3Type
   | PeopleRecordZoomLevel3Type
   | PublicationRecordZoomLevel3Type
+
+function mapArchivesDataToSections(
+  data: ArchivesRecordZoomLevel3Type | null | undefined,
+  t: recordMetaT
+): Array<{ title: string | undefined; value: string[] | null; isLink: boolean }> {
+  if (!data) return []
+  const fields = categoryFieldsMapping[CLOUD_CATEGORIES.archives]
+
+  return fields
+    .filter(key => key === '__typename')
+    .map(key => {
+      const rawValue = data[key]
+      const title = t(key)?.trim()
+      const values = rawValue ? rawValue.split(';').filter(v => v.trim().length > 0) : null
+      const isLink = key === 'permanentLink'
+      return { title, value: values, isLink }
+    })
+    .filter(section => section.value !== null)
+}
 
 export function mapDataToSections(
   data: MetaSectionDataType | null | undefined,

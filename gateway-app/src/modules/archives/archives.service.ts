@@ -22,44 +22,6 @@ export enum ArchivesZoomLevel3Types {
   other = 'other',
 }
 
-// export interface ArchivesFondsDetailZoomLevel3Data {
-//   id: string
-//   thumnail?: string
-//   objectNumber?: string
-//   title?: string
-//   startDate?: string
-//   endDate?: string
-//   dateLabel?: string
-//   dimensionFree?: string
-//   mediaReference?: string
-//   mediaReferenceLabel?: string
-//   existenceOfOriginals?: string
-//   scopeContent?: string
-//   relatedMaterial?: string
-//   rights?: string
-//   rightsLabel?: string
-//   permanentLink?: string
-// }
-
-// const archivesFondsDetailZoomLevel3DataKeys: KeysToVerify<ArchivesFondsDetailZoomLevel3Data> = {
-//   id: true,
-//   thumnail: true,
-//   objectNumber: true,
-//   title: true,
-//   startDate: true,
-//   endDate: true,
-//   dateLabel: true,
-//   dimensionFree: true,
-//   mediaReference: true,
-//   mediaReferenceLabel: true,
-//   existenceOfOriginals: true,
-//   scopeContent: true,
-//   relatedMaterial: true,
-//   rights: true,
-//   rightsLabel: true,
-//   permanentLink: true,
-// }
-
 export interface ArchivesRecordZoomLevel3Data {
   id: string
   thumbnail?: string
@@ -112,31 +74,6 @@ export class ArchivesService {
 
   public constructor(private triplyService: TriplyService) {}
 
-  // public async determineArchiveType(id: string) {
-  //   interface ArchivesDescriptionLevelData {
-  //     record: string
-  //     descriptionLevel: string
-  //   }
-  //   const keys: KeysToVerify<ArchivesDescriptionLevelData> = {
-  //     record: true,
-  //     descriptionLevel: true,
-  //   }
-
-  //   const uri = TriplyUtils.getUriForTypeAndId(EntityNames.Archives, id)
-  //   const res = await this.triplyService.queryTriplyData<ArchivesDescriptionLevelData>(
-  //     this.archivesDescriptionLevelEndpoint,
-  //     keys,
-  //     undefined,
-  //     { record: uri }
-  //   )
-
-  //   if (res.data[0].descriptionLevel === 'archief') {
-  //     return ArchivesZoomLevel3Types.fonds
-  //   }
-
-  //   return ArchivesZoomLevel3Types.other
-  // }
-
   public async getZoomLevel3Data(id: string) {
     const result = await this.triplyService.queryTriplyData<ArchivesDetailZoomLevel3DataType>(
       this.ZoomLevel3Endpoint,
@@ -163,17 +100,4 @@ export class ArchivesService {
 
     return result?.data
   }
-
-  // private getCreatorsValueFromData(data: ArchivesZoomLeve3DataType[]): ArchivesFondsCreatorType[] {
-  //   return data
-  //     .filter(d => 'creator' in d && !!d.creator)
-  //     .map((d: ArchivesOtherDetailZoomLevel3Data) => ({
-  //       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  //       id: TriplyUtils.getIdFromUri(d.creator!),
-  //       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  //       creator: d.creator!,
-  //       creatorHistory: d.creatorHistory,
-  //       creatorLabel: d.creatorLabel,
-  //     }))
-  // }
 }
