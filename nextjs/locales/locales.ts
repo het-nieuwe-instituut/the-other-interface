@@ -12,6 +12,9 @@ import stories from './en/stories.json'
 import category from './en/category.json'
 import recordMeta from './en/recordMeta.json'
 import recordMetaPublication from './en/recordMetaPublication.json'
+import recordMetaArchive from './en/recordMetaArchive.json'
+import recordMetaObject from './en/recordMetaObject.json'
+import recordMetaPerson from './en/recordMetaPerson.json'
 
 export type TranslationKeys = {
   common: Paths<typeof common>
@@ -23,6 +26,9 @@ export type TranslationKeys = {
   category: Paths<typeof category>
   recordMeta: Paths<typeof recordMeta>
   recordMetaPublication: Paths<typeof recordMetaPublication>
+  recordMetaArchive: Paths<typeof recordMetaArchive>
+  recordMetaObject: Paths<typeof recordMetaObject>
+  recordMetaPerson: Paths<typeof recordMetaPerson>
 }
 
 export type navigationT = (
@@ -37,8 +43,44 @@ export type navigationT = (
     | undefined
 ) => string
 
-export type recordMetaT = (
-  s: Paths<typeof recordMeta>,
+export type recordMetaArchiveT = (
+  s: Paths<typeof recordMetaArchive>,
+  q?: TranslationQuery | undefined,
+  o?:
+    | {
+        returnObjects?: boolean | undefined
+        fallback?: string | string[] | undefined
+        default?: string | undefined
+      }
+    | undefined
+) => string | undefined
+
+export type recordMetaPublicationT = (
+  s: Paths<typeof recordMetaPublication>,
+  q?: TranslationQuery | undefined,
+  o?:
+    | {
+        returnObjects?: boolean | undefined
+        fallback?: string | string[] | undefined
+        default?: string | undefined
+      }
+    | undefined
+) => string | undefined
+
+export type recordMetaObjectT = (
+  s: Paths<typeof recordMetaObject>,
+  q?: TranslationQuery | undefined,
+  o?:
+    | {
+        returnObjects?: boolean | undefined
+        fallback?: string | string[] | undefined
+        default?: string | undefined
+      }
+    | undefined
+) => string | undefined
+
+export type recordMetaPersonT = (
+  s: Paths<typeof recordMetaPerson>,
   q?: TranslationQuery | undefined,
   o?:
     | {

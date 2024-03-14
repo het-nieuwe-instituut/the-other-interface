@@ -33,82 +33,70 @@ export class PublicationZoomLevel3DetailType {
 @ObjectType()
 export class PublicationRecordZoomLevel3Type {
   @Field(() => String, { nullable: true })
-  public objectNumber?: string | null
+  public objectNumber?: string
 
   @Field(() => String, { nullable: true })
-  public subType?: string | null
+  public subType?: string
 
   @Field(() => String, { nullable: true })
-  public authors?: string | null
+  public authors?: string
 
   @Field(() => String, { nullable: true })
-  public authorRole?: string | null
+  public authorRole?: string
 
   @Field(() => String, { nullable: true })
-  public publisher?: string | null
+  public publisher?: string
 
   @Field(() => String, { nullable: true })
-  public yearOfPublication?: string | null
+  public yearOfPublication?: string
 
   @Field(() => String, { nullable: true })
-  public placeOfPublication?: string | null
+  public placeOfPublication?: string
 
   @Field(() => String, { nullable: true })
-  public isbn?: string | null
+  public isbn?: string
 
   @Field(() => String, { nullable: true })
-  public annotation?: string | null
+  public annotation?: string
 
   @Field(() => String, { nullable: true })
-  public codeOfArchive?: string | null
+  public codeOfArchive?: string
 
   @Field(() => String, { nullable: true })
-  public illustration?: string | null
+  public edition?: string
 
   @Field(() => String, { nullable: true })
-  public pages?: string | null
+  public illustration?: string
 
   @Field(() => String, { nullable: true })
-  public language?: string | null
+  public pages?: string
 
   @Field(() => String, { nullable: true })
-  public series?: string | null
+  public language?: string
 
   @Field(() => String, { nullable: true })
-  public number?: string | null
+  public series?: string
 
   @Field(() => String, { nullable: true })
-  public category?: string | null
+  public number?: string
 
   @Field(() => String, { nullable: true })
-  public relatedKeyword?: string | null
+  public category?: string
 
   @Field(() => String, { nullable: true })
-  public geoKeyword?: string | null
+  public relatedKeyword?: string
 
   @Field(() => String, { nullable: true })
-  public availability?: string | null
+  public geoKeyword?: string
 
   @Field(() => String, { nullable: true })
-  public permanentLink?: string | null
+  public availability?: string
 
   @Field(() => String, { nullable: true })
-  public externalSource?: string | null
+  public permanentLink?: string
 
   @Field(() => String, { nullable: true })
-  public sourceTitle?: string | null
-
-  @Field(() => String, { nullable: true })
-  public volume?: string | null
-
-  @Field(() => String, { nullable: true })
-  public issue?: string | null
-
-  @Field(() => String, { nullable: true })
-  public year?: string | null
-
-  @Field(() => String, { nullable: true })
-  public subject?: string | null
+  public externalSource?: string
 }
 
 registerEnumType(PublicationsZoomLevel3Types, { name: 'PublicationsZoomLevel3Types' })

@@ -103,46 +103,49 @@ export class ObjectsZoomLevel3DetailType {
 @ObjectType()
 export class ObjectRecordZoomLevel3Type {
   @Field(() => String, { nullable: true })
-  public objectNumber?: string | null
+  public objectNumber?: string
 
   @Field(() => String, { nullable: true })
-  public titleType?: string | null
+  public titleType?: string
 
   @Field(() => String, { nullable: true })
-  public objectName?: string | null
+  public objectName?: string
 
   @Field(() => String, { nullable: true })
-  public archiveCode?: string | null
+  public archiveCode?: string
 
   @Field(() => String, { nullable: true })
-  public maker?: string | null
+  public date?: string
 
   @Field(() => String, { nullable: true })
-  public date?: string | null
+  public relatedKeywords?: string
 
   @Field(() => String, { nullable: true })
-  public materials?: string | null
+  public materials?: string
 
   @Field(() => String, { nullable: true })
-  public techniques?: string | null
+  public techniques?: string
 
   @Field(() => String, { nullable: true })
-  public hasParts?: string | null
+  public hasParts?: string
 
   @Field(() => String, { nullable: true })
-  public dimension?: string | null
+  public dimension?: string
 
   @Field(() => String, { nullable: true })
-  public scale?: string | null
+  public scale?: string
 
   @Field(() => String, { nullable: true })
-  public creditLine?: string | null
+  public creditLine?: string
 
   @Field(() => String, { nullable: true })
-  public rights?: string | null
+  public rights?: string
 
   @Field(() => String, { nullable: true })
-  public permanentLink?: string | null
+  public permanentLink?: string
+
+  @Field(() => String, { nullable: true })
+  public externalSource?: string
 }
 
 @ObjectType()

@@ -1,12 +1,18 @@
 import { CLOUD_CATEGORIES, Category } from '@/features/shared/utils/categories'
+import {
+  ArchivesRecordZoomLevel3Type,
+  ObjectRecordZoomLevel3Type,
+  PeopleRecordZoomLevel3Type,
+  PublicationRecordZoomLevel3Type,
+} from 'src/generated/graphql'
 
-const objectFieldOrder = [
+const objectFieldOrder: Array<keyof ObjectRecordZoomLevel3Type> = [
   'objectNumber',
   'titleType',
   'objectName',
   'archiveCode',
   'date',
-  'materials',
+  'relatedKeywords',
   'techniques',
   'hasParts',
   'dimension',
@@ -14,14 +20,10 @@ const objectFieldOrder = [
   'creditLine',
   'rights',
   'permanentLink',
+  'externalSource',
 ]
 
-const archiveFieldOrder = [
-  'custodialHistory',
-  'systemOfArrangement',
-  'sources',
-  'existence',
-  'existenceLocation',
+const archiveFieldOrder: Array<Partial<keyof ArchivesRecordZoomLevel3Type>> = [
   'referenceCode',
   'titleType',
   'descriptionLevel',
@@ -34,10 +36,10 @@ const archiveFieldOrder = [
   'externalSource',
 ]
 
-const peopleFieldOrder = [
+const peopleFieldOrder: Array<keyof PeopleRecordZoomLevel3Type> = [
   'type',
   'profession',
-  'nameVariations',
+  'nameVariation',
   'birthDate',
   'birthPlace',
   'deathDate',
@@ -50,7 +52,7 @@ const peopleFieldOrder = [
   'externalSource',
 ]
 
-const publicationFieldOrder = [
+const publicationFieldOrder: Array<keyof PublicationRecordZoomLevel3Type> = [
   'objectNumber',
   'subType',
   'authors',
@@ -72,12 +74,21 @@ const publicationFieldOrder = [
   'availability',
   'permanentLink',
   'externalSource',
-  'sourceTitle',
-  'volume',
-  'issue',
-  'year',
-  'subject',
 ]
+
+type CategoryFieldsMapping = {
+  [CLOUD_CATEGORIES.objects]: Array<keyof ObjectRecordZoomLevel3Type>
+  [CLOUD_CATEGORIES.archives]: Array<keyof ArchivesRecordZoomLevel3Type>
+  [CLOUD_CATEGORIES.people]: Array<keyof PeopleRecordZoomLevel3Type>
+  [CLOUD_CATEGORIES.publications]: Array<keyof PublicationRecordZoomLevel3Type>
+}
+
+export const categoryFieldsMapping: CategoryFieldsMapping = {
+  [CLOUD_CATEGORIES.objects]: objectFieldOrder,
+  [CLOUD_CATEGORIES.archives]: archiveFieldOrder,
+  [CLOUD_CATEGORIES.people]: peopleFieldOrder,
+  [CLOUD_CATEGORIES.publications]: publicationFieldOrder,
+}
 
 export function recordMetaFieldOrderConfig(category: Category) {
   if (category === CLOUD_CATEGORIES.objects) {
