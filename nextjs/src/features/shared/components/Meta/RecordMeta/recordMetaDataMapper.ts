@@ -1,4 +1,9 @@
-import { recordMetaArchiveT, recordMetaPublicationT, recordMetaObjectT, recordMetaPersonT } from 'locales/locales'
+import {
+  recordMetaArchiveT,
+  recordMetaPublicationT,
+  recordMetaObjectT,
+  recordMetaPersonT,
+} from 'locales/locales'
 import {
   ArchivesRecordZoomLevel3Type,
   ObjectRecordZoomLevel3Type,
