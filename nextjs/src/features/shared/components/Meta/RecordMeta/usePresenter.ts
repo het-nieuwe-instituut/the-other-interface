@@ -5,8 +5,11 @@ import {
 import { useParams } from 'next/navigation'
 import { useRecordMeta } from '@/features/shared/hooks/queries/useRecordMeta'
 import { CATEGORIES, Category } from '@/features/shared/utils/categories'
-import { mapArchivesDataToSections } from './recordMetaDataMapper'
-import { ArchivesRecordZoomLevel3Type } from 'src/generated/graphql'
+import { mapArchivesDataToSections, mapPublicationDataToSections } from './recordMetaDataMapper'
+import {
+  ArchivesRecordZoomLevel3Type,
+  PublicationRecordZoomLevel3Type,
+} from 'src/generated/graphql'
 
 export const usePresenter = () => {
   const { t: recordMetaT } = useLooseTypeSafeTranslation('recordMeta')
@@ -17,7 +20,6 @@ export const usePresenter = () => {
   const id = params?.id as string
   const category = params?.category as Category
 
-
   const { data, isLoading } = useRecordMeta(category, id)
   let recordMetaSectionData
 
@@ -25,6 +27,13 @@ export const usePresenter = () => {
     recordMetaSectionData = mapArchivesDataToSections(
       data as ArchivesRecordZoomLevel3Type,
       recordMetaArchiveT
+    )
+  }
+
+  if (category === CATEGORIES.publications) {
+    recordMetaSectionData = mapPublicationDataToSections(
+      data as PublicationRecordZoomLevel3Type,
+      recordMetaPublicationT
     )
   }
 

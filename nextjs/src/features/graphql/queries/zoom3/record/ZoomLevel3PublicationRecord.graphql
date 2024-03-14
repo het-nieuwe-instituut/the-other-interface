@@ -1,6 +1,5 @@
 query ZoomLevel3PublicationRecord($id: String!) {
   publicationsRecordZoomLevel3(id: $id) {
-    __typename
     objectNumber
     subType
     authors
@@ -11,6 +10,7 @@ query ZoomLevel3PublicationRecord($id: String!) {
     isbn
     annotation
     codeOfArchive
+    edition
     illustration
     pages
     language
@@ -22,10 +22,5 @@ query ZoomLevel3PublicationRecord($id: String!) {
     availability
     permanentLink
     externalSource
-    sourceTitle
-    volume
-    issue
-    year
-    subject
   }
 }

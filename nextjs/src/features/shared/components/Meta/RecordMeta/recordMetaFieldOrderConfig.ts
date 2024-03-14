@@ -73,11 +73,6 @@ const publicationFieldOrder: Array<keyof PublicationRecordZoomLevel3Type> = [
   'availability',
   'permanentLink',
   'externalSource',
-  'sourceTitle',
-  'volume',
-  'issue',
-  'year',
-  'subject',
 ]
 
 type CategoryFieldsMapping = {

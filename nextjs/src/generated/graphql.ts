@@ -897,11 +897,11 @@ export type PublicationRecordZoomLevel3Type = {
   availability?: Maybe<Scalars['String']>;
   category?: Maybe<Scalars['String']>;
   codeOfArchive?: Maybe<Scalars['String']>;
+  edition?: Maybe<Scalars['String']>;
   externalSource?: Maybe<Scalars['String']>;
   geoKeyword?: Maybe<Scalars['String']>;
   illustration?: Maybe<Scalars['String']>;
   isbn?: Maybe<Scalars['String']>;
-  issue?: Maybe<Scalars['String']>;
   language?: Maybe<Scalars['String']>;
   number?: Maybe<Scalars['String']>;
   objectNumber?: Maybe<Scalars['String']>;
@@ -911,11 +911,7 @@ export type PublicationRecordZoomLevel3Type = {
   publisher?: Maybe<Scalars['String']>;
   relatedKeyword?: Maybe<Scalars['String']>;
   series?: Maybe<Scalars['String']>;
-  sourceTitle?: Maybe<Scalars['String']>;
   subType?: Maybe<Scalars['String']>;
-  subject?: Maybe<Scalars['String']>;
-  volume?: Maybe<Scalars['String']>;
-  year?: Maybe<Scalars['String']>;
   yearOfPublication?: Maybe<Scalars['String']>;
 };
 
@@ -2068,7 +2064,7 @@ export type ZoomLevel3PublicationRecordQueryVariables = Exact<{
 }>;
 
 
-export type ZoomLevel3PublicationRecordQuery = { __typename?: 'Query', publicationsRecordZoomLevel3?: Array<{ __typename: 'PublicationRecordZoomLevel3Type', objectNumber?: string | null, subType?: string | null, authors?: string | null, authorRole?: string | null, publisher?: string | null, yearOfPublication?: string | null, placeOfPublication?: string | null, isbn?: string | null, annotation?: string | null, codeOfArchive?: string | null, illustration?: string | null, pages?: string | null, language?: string | null, series?: string | null, number?: string | null, category?: string | null, relatedKeyword?: string | null, geoKeyword?: string | null, availability?: string | null, permanentLink?: string | null, externalSource?: string | null, sourceTitle?: string | null, volume?: string | null, issue?: string | null, year?: string | null, subject?: string | null }> | null };
+export type ZoomLevel3PublicationRecordQuery = { __typename?: 'Query', publicationsRecordZoomLevel3?: Array<{ __typename?: 'PublicationRecordZoomLevel3Type', objectNumber?: string | null, subType?: string | null, authors?: string | null, authorRole?: string | null, publisher?: string | null, yearOfPublication?: string | null, placeOfPublication?: string | null, isbn?: string | null, annotation?: string | null, codeOfArchive?: string | null, edition?: string | null, illustration?: string | null, pages?: string | null, language?: string | null, series?: string | null, number?: string | null, category?: string | null, relatedKeyword?: string | null, geoKeyword?: string | null, availability?: string | null, permanentLink?: string | null, externalSource?: string | null }> | null };
 
 export type ArchivesRelationsQueryVariables = Exact<{
   id: Scalars['String'];
@@ -3141,7 +3137,6 @@ export const ZoomLevel3PeopleRecordDocument = gql`
 export const ZoomLevel3PublicationRecordDocument = gql`
     query ZoomLevel3PublicationRecord($id: String!) {
   publicationsRecordZoomLevel3(id: $id) {
-    __typename
     objectNumber
     subType
     authors
@@ -3152,6 +3147,7 @@ export const ZoomLevel3PublicationRecordDocument = gql`
     isbn
     annotation
     codeOfArchive
+    edition
     illustration
     pages
     language
@@ -3163,11 +3159,6 @@ export const ZoomLevel3PublicationRecordDocument = gql`
     availability
     permanentLink
     externalSource
-    sourceTitle
-    volume
-    issue
-    year
-    subject
   }
 }
     `;
