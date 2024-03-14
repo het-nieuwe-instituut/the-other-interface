@@ -1,9 +1,8 @@
 query ZoomLevel3PeopleRecord($id: String!) {
     peopleRecordZoomLevel3(id: $id) {
-        __typename
         type
         profession
-        nameVariations
+        nameVariation
         birthDate
         birthPlace
         deathDate

@@ -7939,7 +7939,7 @@
             "deprecationReason": null
           },
           {
-            "name": "nameVariations",
+            "name": "nameVariation",
             "description": null,
             "args": [],
             "type": {

@@ -8,12 +8,14 @@ import { CATEGORIES, Category } from '@/features/shared/utils/categories'
 import {
   mapArchivesDataToSections,
   mapObjectDataToSections,
+  mapPersonDataToSections,
   mapPublicationDataToSections,
 } from './recordMetaDataMapper'
 import {
   ArchivesRecordZoomLevel3Type,
   ObjectRecordZoomLevel3Type,
   PublicationRecordZoomLevel3Type,
+  PeopleRecordZoomLevel3Type,
 } from 'src/generated/graphql'
 
 export const usePresenter = () => {
@@ -21,6 +23,7 @@ export const usePresenter = () => {
   const { t: recordMetaPublicationT } = useTypeSafeTranslation('recordMetaPublication')
   const { t: recordMetaArchiveT } = useTypeSafeTranslation('recordMetaArchive')
   const { t: recordMetaObjectT } = useTypeSafeTranslation('recordMetaObject')
+  const { t: recordMetaPersonT } = useTypeSafeTranslation('recordMetaPerson')
 
   const params = useParams()
   const id = params?.id as string
@@ -29,7 +32,7 @@ export const usePresenter = () => {
   const { data, isLoading } = useRecordMeta(category, id)
   let recordMetaSectionData
 
-  if (category === CATEGORIES.archives) {
+  if (category === CATEGORIES.archives && data) {
     recordMetaSectionData = mapArchivesDataToSections(
       data as ArchivesRecordZoomLevel3Type,
       recordMetaArchiveT
@@ -47,6 +50,13 @@ export const usePresenter = () => {
     recordMetaSectionData = mapObjectDataToSections(
       data as ObjectRecordZoomLevel3Type,
       recordMetaObjectT
+    )
+  }
+
+  if (category === CATEGORIES.people) {
+    recordMetaSectionData = mapPersonDataToSections(
+      data as PeopleRecordZoomLevel3Type,
+      recordMetaPersonT
     )
   }
 

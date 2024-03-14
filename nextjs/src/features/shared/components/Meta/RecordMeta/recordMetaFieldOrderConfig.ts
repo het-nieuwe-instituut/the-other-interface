@@ -39,7 +39,7 @@ const archiveFieldOrder: Array<Partial<keyof ArchivesRecordZoomLevel3Type>> = [
 const peopleFieldOrder: Array<keyof PeopleRecordZoomLevel3Type> = [
   'type',
   'profession',
-  'nameVariations',
+  'nameVariation',
   'birthDate',
   'birthPlace',
   'deathDate',

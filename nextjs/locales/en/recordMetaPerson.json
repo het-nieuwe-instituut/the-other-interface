@@ -1,0 +1,17 @@
+{
+    "__typename": "",
+    "type": "Type",
+    "profession": "Profession/Field of Work",
+    "nameVariation": "Name Variations",
+    "birthDate": "Birth Date",
+    "birthPlace": "Birth Place",
+    "deathDate": "Death Date",
+    "deathPlace": "Death Place",
+    "nationality": "Nationality",
+    "gender": "Gender",
+    "period": "Activities",
+    "association": "Association",
+    "permanentLink": "Permanent Link",
+    "externalSource": "External Sources"
+  }
+  

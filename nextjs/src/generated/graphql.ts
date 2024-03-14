@@ -839,7 +839,7 @@ export type PeopleRecordZoomLevel3Type = {
   deathPlace?: Maybe<Scalars['String']>;
   externalSource?: Maybe<Scalars['String']>;
   gender?: Maybe<Scalars['String']>;
-  nameVariations?: Maybe<Scalars['String']>;
+  nameVariation?: Maybe<Scalars['String']>;
   nationality?: Maybe<Scalars['String']>;
   period?: Maybe<Scalars['String']>;
   permanentLink?: Maybe<Scalars['String']>;
@@ -2058,7 +2058,7 @@ export type ZoomLevel3PeopleRecordQueryVariables = Exact<{
 }>;
 
 
-export type ZoomLevel3PeopleRecordQuery = { __typename?: 'Query', peopleRecordZoomLevel3?: Array<{ __typename: 'PeopleRecordZoomLevel3Type', type?: string | null, profession?: string | null, nameVariations?: string | null, birthDate?: string | null, birthPlace?: string | null, deathDate?: string | null, deathPlace?: string | null, nationality?: string | null, gender?: string | null, period?: string | null, association?: string | null, permanentLink?: string | null, externalSource?: string | null }> | null };
+export type ZoomLevel3PeopleRecordQuery = { __typename?: 'Query', peopleRecordZoomLevel3?: Array<{ __typename?: 'PeopleRecordZoomLevel3Type', type?: string | null, profession?: string | null, nameVariation?: string | null, birthDate?: string | null, birthPlace?: string | null, deathDate?: string | null, deathPlace?: string | null, nationality?: string | null, gender?: string | null, period?: string | null, association?: string | null, permanentLink?: string | null, externalSource?: string | null }> | null };
 
 export type ZoomLevel3PublicationRecordQueryVariables = Exact<{
   id: Scalars['String'];
@@ -3119,10 +3119,9 @@ export const ZoomLevel3ObjectRecordDocument = gql`
 export const ZoomLevel3PeopleRecordDocument = gql`
     query ZoomLevel3PeopleRecord($id: String!) {
   peopleRecordZoomLevel3(id: $id) {
-    __typename
     type
     profession
-    nameVariations
+    nameVariation
     birthDate
     birthPlace
     deathDate

@@ -932,7 +932,7 @@ export const aPeopleRecordZoomLevel3Type = (overrides?: Partial<PeopleRecordZoom
         deathPlace: overrides && overrides.hasOwnProperty('deathPlace') ? overrides.deathPlace! : 'nihil',
         externalSource: overrides && overrides.hasOwnProperty('externalSource') ? overrides.externalSource! : 'culpa',
         gender: overrides && overrides.hasOwnProperty('gender') ? overrides.gender! : 'qui',
-        nameVariations: overrides && overrides.hasOwnProperty('nameVariations') ? overrides.nameVariations! : 'modi',
+        nameVariation: overrides && overrides.hasOwnProperty('nameVariation') ? overrides.nameVariation! : 'nihil',
         nationality: overrides && overrides.hasOwnProperty('nationality') ? overrides.nationality! : 'dolores',
         period: overrides && overrides.hasOwnProperty('period') ? overrides.period! : 'nostrum',
         permanentLink: overrides && overrides.hasOwnProperty('permanentLink') ? overrides.permanentLink! : 'et',
