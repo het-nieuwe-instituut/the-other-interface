@@ -1,0 +1,19 @@
+{
+    "__typename": "",
+    "objectNumber": "Object Number",
+    "titleType": "Other title(s)",
+    "objectName": "Object Name",
+    "archiveCode": "Archive/Collection Code",
+    "date": "Dates",
+    "relatedKeywords": "Related Keywords",
+    "materials": "Materials",
+    "techniques": "Techniques",
+    "hasParts": "Number of Parts",
+    "dimension": "Dimensions",
+    "scale": "Scale",
+    "creditLine": "Credit Line",
+    "rights": "Rights",
+    "permanentLink": "Permanent Link",
+    "externalSource": "External Source"
+  }
+  

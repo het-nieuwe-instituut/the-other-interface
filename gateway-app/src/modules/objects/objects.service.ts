@@ -4,80 +4,52 @@ import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { getHttpThumbnailOrNull } from '../util/helpers'
 import { TriplyUtils } from '../triply/triply.utils'
 
-interface ObjectsDetailZoomLevel3Data {
+export interface ObjectsDetailZoomLevel3Data {
   thumbnail?: string
   title?: string
   id: string
-  imageLabel?: string
-  titleType?: string
-  objectNumber?: string
-  objectName?: string
-  objectNameLabel?: string
-  archiveCollectionCode?: string
-  maker?: string
-  makerLabel?: string
-  makerRole?: string
-  makerRoleLabel?: string
-  startDate?: string
-  endDate?: string
-  numberOfParts?: string
-  scale?: string
-  technique?: string
-  techniqueLabel?: string
-  material?: string
-  materialLabel?: string
-  dimensionPart?: string
-  dimensionType?: string
-  dimensionValue?: string
-  dimensionUnit?: string
   description?: string
-  associationPerson?: string
-  associationPersonLabel?: string
-  associationPersonType?: string
-  relatedObjectTitle?: string
-  creditLine?: string
-  rights?: string
-  rightsLabel?: string
-  creationPlace?: string
-  creationPlaceLabel?: string
-  permanentLink?: string
 }
+
 const objectsDetailZoomLevel3DataKeys: KeysToVerify<ObjectsDetailZoomLevel3Data> = {
   thumbnail: true,
   title: true,
   id: true,
-  imageLabel: true,
-  titleType: true,
-  objectNumber: true,
-  objectName: true,
-  objectNameLabel: true,
-  archiveCollectionCode: true,
-  maker: true,
-  makerLabel: true,
-  makerRole: true,
-  makerRoleLabel: true,
-  startDate: true,
-  endDate: true,
-  numberOfParts: true,
-  scale: true,
-  technique: true,
-  techniqueLabel: true,
-  material: true,
-  materialLabel: true,
-  dimensionPart: true,
-  dimensionType: true,
-  dimensionValue: true,
-  dimensionUnit: true,
   description: true,
-  associationPerson: true,
-  associationPersonLabel: true,
-  associationPersonType: true,
-  relatedObjectTitle: true,
+}
+
+export interface ObjectRecordZoomLevel3Data {
+  objectNumber?: string
+  titleType?: string
+  objectName?: string
+  archiveCode?: string
+  // objectname?: string
+  // maker?: string
+  date?: string
+  materials?: string
+  techniques?: string
+  hasParts?: string
+  dimension?: string
+  scale?: string
+  creditLine?: string
+  rights?: string
+  permanentLink?: string
+}
+
+const objectRecordZoomLevel3DataKeys: KeysToVerify<ObjectRecordZoomLevel3Data> = {
+  objectNumber: true,
+  titleType: true,
+  objectName: true,
+  archiveCode: true,
+  // maker: true,
+  date: true,
+  materials: true,
+  techniques: true,
+  hasParts: true,
+  dimension: true,
+  scale: true,
   creditLine: true,
   rights: true,
-  rightsLabel: true,
-  creationPlace: true,
-  creationPlaceLabel: true,
   permanentLink: true,
 }
 
@@ -85,8 +57,9 @@ const objectsDetailZoomLevel3DataKeys: KeysToVerify<ObjectsDetailZoomLevel3Data>
 export class ObjectsService {
   protected entityType = 'triply'
 
-  private readonly ZoomLevel3Endpoint =
-    'objects-recordPage/run?'
+  private readonly ZoomLevel3Endpoint = 'objects-recordPage/run?'
+
+  private readonly ZoomLevel3RecordEndpoint = 'objects-recordPage-editorial/run?'
 
   public constructor(private triplyService: TriplyService) {}
 
@@ -104,6 +77,17 @@ export class ObjectsService {
       id,
       thumbnail: getHttpThumbnailOrNull(result.data[0]?.thumbnail)?.split(';'),
     }
+  }
+
+  public async getZoomLevel3RecordData(id: string) {
+    const result = await this.triplyService.queryTriplyData<ObjectRecordZoomLevel3Data>(
+      this.ZoomLevel3RecordEndpoint,
+      objectRecordZoomLevel3DataKeys,
+      { page: 1, pageSize: 1 },
+      { id }
+    )
+
+    return result.data
   }
 
   // private getDimensionValueFromData(data: ObjectsDetailZoomLevel3Data[]) {

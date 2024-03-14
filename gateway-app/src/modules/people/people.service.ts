@@ -65,12 +65,45 @@ const peopleDetailZoomLevel3DataKeys: KeysToVerify<PeopleDetailZoomLevel3Data> =
   permanentLink: true,
 }
 
+export interface PeopleRecordZoomLevel3Data {
+  type?: string
+  profession?: string
+  nameVariations?: string
+  birthDate?: string
+  birthPlace?: string
+  deathDate?: string
+  deathPlace?: string
+  nationality?: string
+  gender?: string
+  period?: string
+  association?: string
+  permanentLink?: string
+  externalSource?: string
+}
+
+const peopleRecordZoomLevel3DataKeys: KeysToVerify<PeopleRecordZoomLevel3Data> = {
+  type: true,
+  profession: true,
+  nameVariations: true,
+  birthDate: true,
+  birthPlace: true,
+  deathDate: true,
+  deathPlace: true,
+  nationality: true,
+  gender: true,
+  period: true,
+  association: true,
+  permanentLink: true,
+  externalSource: true,
+}
+
 @Injectable()
 export class PeopleService {
   protected entityType = 'triply'
 
-  private readonly ZoomLevel3Endpoint =
-    'people-recordPage/run?'
+  private readonly ZoomLevel3Endpoint = 'people-recordPage/run?'
+
+  private readonly ZoomLevel3RecordEndpoint = 'people-recordPage-editorial/18/run?'
 
   public constructor(private triplyService: TriplyService) {}
 
@@ -88,5 +121,16 @@ export class PeopleService {
       id,
       thumbnail: getHttpThumbnailOrNull(result.data[0]?.thumbnail)?.split(';'),
     }
+  }
+
+  public async getZoomLevel3RecordData(id: string) {
+    const result = await this.triplyService.queryTriplyData<PeopleRecordZoomLevel3Data>(
+      this.ZoomLevel3RecordEndpoint,
+      peopleRecordZoomLevel3DataKeys,
+      { page: 1, pageSize: 1 },
+      { id }
+    )
+
+    return result.data
   }
 }

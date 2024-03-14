@@ -1,0 +1,13 @@
+{
+  "__typename": "",
+  "referenceCode": "Inventarisnummer",
+  "titleType": "Titel Type",
+  "descriptionLevel": "Beschrijvingsniveau/Recordtype",
+  "size": "Omvang",
+  "period": "Periode/Datering",
+  "access": "Openbaarheidsbeperkingen",
+  "photographCreator": "Foto Vervaardiger",
+  "rights": "Rechten",
+  "permanentLink": "Permanente Link",
+  "externalSource": "Externe Bron"
+}

@@ -89,6 +89,20 @@ export type ArchivesOtherZoomLevel3DetailType = {
   type: ArchivesZoomLevel3Types;
 };
 
+export type ArchivesRecordZoomLevel3Type = {
+  __typename?: 'ArchivesRecordZoomLevel3Type';
+  access?: Maybe<Scalars['String']>;
+  descriptionLevel?: Maybe<Scalars['String']>;
+  externalSource?: Maybe<Scalars['String']>;
+  period?: Maybe<Scalars['String']>;
+  permanentLink?: Maybe<Scalars['String']>;
+  photographCreator?: Maybe<Scalars['String']>;
+  referenceCode?: Maybe<Scalars['String']>;
+  rights?: Maybe<Scalars['String']>;
+  size?: Maybe<Scalars['String']>;
+  titleType?: Maybe<Scalars['String']>;
+};
+
 export enum ArchivesZoomLevel3Types {
   Fonds = 'fonds',
   Other = 'other'
@@ -733,6 +747,25 @@ export type ObjectMaterialType = {
   materialLabel?: Maybe<Scalars['String']>;
 };
 
+export type ObjectRecordZoomLevel3Type = {
+  __typename?: 'ObjectRecordZoomLevel3Type';
+  archiveCode?: Maybe<Scalars['String']>;
+  creditLine?: Maybe<Scalars['String']>;
+  date?: Maybe<Scalars['String']>;
+  dimension?: Maybe<Scalars['String']>;
+  externalSource?: Maybe<Scalars['String']>;
+  hasParts?: Maybe<Scalars['String']>;
+  materials?: Maybe<Scalars['String']>;
+  objectName?: Maybe<Scalars['String']>;
+  objectNumber?: Maybe<Scalars['String']>;
+  permanentLink?: Maybe<Scalars['String']>;
+  relatedKeywords?: Maybe<Scalars['String']>;
+  rights?: Maybe<Scalars['String']>;
+  scale?: Maybe<Scalars['String']>;
+  techniques?: Maybe<Scalars['String']>;
+  titleType?: Maybe<Scalars['String']>;
+};
+
 export type ObjectTechniqueType = {
   __typename?: 'ObjectTechniqueType';
   id: Scalars['String'];
@@ -797,6 +830,23 @@ export type PeopleAssociationType = {
   associationLabel?: Maybe<Scalars['String']>;
 };
 
+export type PeopleRecordZoomLevel3Type = {
+  __typename?: 'PeopleRecordZoomLevel3Type';
+  association?: Maybe<Scalars['String']>;
+  birthDate?: Maybe<Scalars['String']>;
+  birthPlace?: Maybe<Scalars['String']>;
+  deathDate?: Maybe<Scalars['String']>;
+  deathPlace?: Maybe<Scalars['String']>;
+  externalSource?: Maybe<Scalars['String']>;
+  gender?: Maybe<Scalars['String']>;
+  nameVariation?: Maybe<Scalars['String']>;
+  nationality?: Maybe<Scalars['String']>;
+  period?: Maybe<Scalars['String']>;
+  permanentLink?: Maybe<Scalars['String']>;
+  profession?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
 export type PeopleZoomLevel3DetailType = {
   __typename?: 'PeopleZoomLevel3DetailType';
   associations?: Maybe<Array<PeopleAssociationType>>;
@@ -838,6 +888,32 @@ export type PublicationAuthorType = {
   authorRoleLabel?: Maybe<Scalars['String']>;
   id: Scalars['String'];
   populatedAuthor?: Maybe<PeopleZoomLevel3DetailType>;
+};
+
+export type PublicationRecordZoomLevel3Type = {
+  __typename?: 'PublicationRecordZoomLevel3Type';
+  annotation?: Maybe<Scalars['String']>;
+  authorRole?: Maybe<Scalars['String']>;
+  authors?: Maybe<Scalars['String']>;
+  availability?: Maybe<Scalars['String']>;
+  category?: Maybe<Scalars['String']>;
+  codeOfArchive?: Maybe<Scalars['String']>;
+  edition?: Maybe<Scalars['String']>;
+  externalSource?: Maybe<Scalars['String']>;
+  geoKeyword?: Maybe<Scalars['String']>;
+  illustration?: Maybe<Scalars['String']>;
+  isbn?: Maybe<Scalars['String']>;
+  language?: Maybe<Scalars['String']>;
+  number?: Maybe<Scalars['String']>;
+  objectNumber?: Maybe<Scalars['String']>;
+  pages?: Maybe<Scalars['String']>;
+  permanentLink?: Maybe<Scalars['String']>;
+  placeOfPublication?: Maybe<Scalars['String']>;
+  publisher?: Maybe<Scalars['String']>;
+  relatedKeyword?: Maybe<Scalars['String']>;
+  series?: Maybe<Scalars['String']>;
+  subType?: Maybe<Scalars['String']>;
+  yearOfPublication?: Maybe<Scalars['String']>;
 };
 
 export type PublicationZoomLevel3DetailType = {
@@ -996,6 +1072,7 @@ export type Query = {
   __typename?: 'Query';
   archiveOther: ArchivesFondsZoomLevel3DetailType;
   archivesDetailZoomLevel3: ArchiveZoomLevel3DetailType;
+  archivesRecordZoomLevel3?: Maybe<Array<ArchivesRecordZoomLevel3Type>>;
   author: AuthorEntityResponse;
   authors: AuthorEntityResponseCollection;
   homepage: HomepageEntityResponse;
@@ -1006,11 +1083,14 @@ export type Query = {
   menupage: MenupageEntityResponse;
   menupages: MenupageEntityResponseCollection;
   objectDetailZoomLevel3: ObjectsZoomLevel3DetailType;
+  objectsRecordZoomLevel3?: Maybe<Array<ObjectRecordZoomLevel3Type>>;
+  peopleRecordZoomLevel3?: Maybe<Array<PeopleRecordZoomLevel3Type>>;
   publicationArticle: PublicationsArticleZoomLevel3DetailType;
   publicationAudioVisual: PublicationsAudioVisualZoomLevel3DetailType;
   publicationBook: PublicationsBookZoomLevel3DetailType;
   publicationDetailZoomLevel3: PublicationZoomLevel3DetailType;
   publicationSerial: PublicationsSerialZoomLevel3DetailType;
+  publicationsRecordZoomLevel3?: Maybe<Array<PublicationRecordZoomLevel3Type>>;
   relations?: Maybe<Array<ZoomLevel3RelationsType>>;
   stories: StoryEntityResponseCollection;
   storiesWithoutRelations: StoryWithoutRelationsEntityResponseCollection;
@@ -1041,6 +1121,11 @@ export type Query = {
   zoomLevel5PublicationsAudiovisual?: Maybe<PublicationsAudioVisualZoomLevel3DetailType>;
   zoomLevel5PublicationsBook?: Maybe<PublicationsBookZoomLevel3DetailType>;
   zoomLevel5PublicationsSerial?: Maybe<PublicationsSerialZoomLevel3DetailType>;
+};
+
+
+export type QueryArchivesRecordZoomLevel3Args = {
+  id: Scalars['String'];
 };
 
 
@@ -1105,6 +1190,21 @@ export type QueryMenupagesArgs = {
   pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<Scalars['String']>;
   sort?: InputMaybe<Array<Scalars['String']>>;
+};
+
+
+export type QueryObjectsRecordZoomLevel3Args = {
+  id: Scalars['String'];
+};
+
+
+export type QueryPeopleRecordZoomLevel3Args = {
+  id: Scalars['String'];
+};
+
+
+export type QueryPublicationsRecordZoomLevel3Args = {
+  id: Scalars['String'];
 };
 
 
@@ -1938,6 +2038,34 @@ export type ZoomLevel3ArchiveQueryVariables = Exact<{
 
 
 export type ZoomLevel3ArchiveQuery = { __typename?: 'Query', zoomLevel3Archive?: { __typename: 'ArchiveZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null, description?: string | null } | null };
+
+export type ZoomLevel3ArchiveRecordQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type ZoomLevel3ArchiveRecordQuery = { __typename?: 'Query', archivesRecordZoomLevel3?: Array<{ __typename?: 'ArchivesRecordZoomLevel3Type', referenceCode?: string | null, titleType?: string | null, descriptionLevel?: string | null, size?: string | null, period?: string | null, access?: string | null, photographCreator?: string | null, rights?: string | null, permanentLink?: string | null, externalSource?: string | null }> | null };
+
+export type ZoomLevel3ObjectRecordQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type ZoomLevel3ObjectRecordQuery = { __typename?: 'Query', objectsRecordZoomLevel3?: Array<{ __typename?: 'ObjectRecordZoomLevel3Type', objectNumber?: string | null, titleType?: string | null, objectName?: string | null, archiveCode?: string | null, date?: string | null, relatedKeywords?: string | null, materials?: string | null, techniques?: string | null, hasParts?: string | null, dimension?: string | null, scale?: string | null, creditLine?: string | null, rights?: string | null, permanentLink?: string | null, externalSource?: string | null }> | null };
+
+export type ZoomLevel3PeopleRecordQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type ZoomLevel3PeopleRecordQuery = { __typename?: 'Query', peopleRecordZoomLevel3?: Array<{ __typename?: 'PeopleRecordZoomLevel3Type', type?: string | null, profession?: string | null, nameVariation?: string | null, birthDate?: string | null, birthPlace?: string | null, deathDate?: string | null, deathPlace?: string | null, nationality?: string | null, gender?: string | null, period?: string | null, association?: string | null, permanentLink?: string | null, externalSource?: string | null }> | null };
+
+export type ZoomLevel3PublicationRecordQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type ZoomLevel3PublicationRecordQuery = { __typename?: 'Query', publicationsRecordZoomLevel3?: Array<{ __typename?: 'PublicationRecordZoomLevel3Type', objectNumber?: string | null, subType?: string | null, authors?: string | null, authorRole?: string | null, publisher?: string | null, yearOfPublication?: string | null, placeOfPublication?: string | null, isbn?: string | null, annotation?: string | null, codeOfArchive?: string | null, edition?: string | null, illustration?: string | null, pages?: string | null, language?: string | null, series?: string | null, number?: string | null, category?: string | null, relatedKeyword?: string | null, geoKeyword?: string | null, availability?: string | null, permanentLink?: string | null, externalSource?: string | null }> | null };
 
 export type ArchivesRelationsQueryVariables = Exact<{
   id: Scalars['String'];
@@ -2951,6 +3079,90 @@ export const ZoomLevel3ArchiveDocument = gql`
   }
 }
     `;
+export const ZoomLevel3ArchiveRecordDocument = gql`
+    query ZoomLevel3ArchiveRecord($id: String!) {
+  archivesRecordZoomLevel3(id: $id) {
+    referenceCode
+    titleType
+    descriptionLevel
+    size
+    period
+    access
+    photographCreator
+    rights
+    permanentLink
+    externalSource
+  }
+}
+    `;
+export const ZoomLevel3ObjectRecordDocument = gql`
+    query ZoomLevel3ObjectRecord($id: String!) {
+  objectsRecordZoomLevel3(id: $id) {
+    objectNumber
+    titleType
+    objectName
+    archiveCode
+    date
+    relatedKeywords
+    materials
+    techniques
+    hasParts
+    dimension
+    scale
+    creditLine
+    rights
+    permanentLink
+    externalSource
+  }
+}
+    `;
+export const ZoomLevel3PeopleRecordDocument = gql`
+    query ZoomLevel3PeopleRecord($id: String!) {
+  peopleRecordZoomLevel3(id: $id) {
+    type
+    profession
+    nameVariation
+    birthDate
+    birthPlace
+    deathDate
+    deathPlace
+    nationality
+    gender
+    period
+    association
+    permanentLink
+    externalSource
+  }
+}
+    `;
+export const ZoomLevel3PublicationRecordDocument = gql`
+    query ZoomLevel3PublicationRecord($id: String!) {
+  publicationsRecordZoomLevel3(id: $id) {
+    objectNumber
+    subType
+    authors
+    authorRole
+    publisher
+    yearOfPublication
+    placeOfPublication
+    isbn
+    annotation
+    codeOfArchive
+    edition
+    illustration
+    pages
+    language
+    series
+    number
+    category
+    relatedKeyword
+    geoKeyword
+    availability
+    permanentLink
+    externalSource
+  }
+}
+    `;
 export const ArchivesRelationsDocument = gql`
     query ArchivesRelations($id: String!, $lang: String!) {
   relations(type: Archives, id: $id, lang: $lang) {
@@ -3098,6 +3310,18 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     ZoomLevel3Archive(variables: ZoomLevel3ArchiveQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ZoomLevel3ArchiveQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ZoomLevel3ArchiveQuery>(ZoomLevel3ArchiveDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ZoomLevel3Archive', 'query');
+    },
+    ZoomLevel3ArchiveRecord(variables: ZoomLevel3ArchiveRecordQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ZoomLevel3ArchiveRecordQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ZoomLevel3ArchiveRecordQuery>(ZoomLevel3ArchiveRecordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ZoomLevel3ArchiveRecord', 'query');
+    },
+    ZoomLevel3ObjectRecord(variables: ZoomLevel3ObjectRecordQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ZoomLevel3ObjectRecordQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ZoomLevel3ObjectRecordQuery>(ZoomLevel3ObjectRecordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ZoomLevel3ObjectRecord', 'query');
+    },
+    ZoomLevel3PeopleRecord(variables: ZoomLevel3PeopleRecordQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ZoomLevel3PeopleRecordQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ZoomLevel3PeopleRecordQuery>(ZoomLevel3PeopleRecordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ZoomLevel3PeopleRecord', 'query');
+    },
+    ZoomLevel3PublicationRecord(variables: ZoomLevel3PublicationRecordQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ZoomLevel3PublicationRecordQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ZoomLevel3PublicationRecordQuery>(ZoomLevel3PublicationRecordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ZoomLevel3PublicationRecord', 'query');
     },
     ArchivesRelations(variables: ArchivesRelationsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ArchivesRelationsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ArchivesRelationsQuery>(ArchivesRelationsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ArchivesRelations', 'query');
