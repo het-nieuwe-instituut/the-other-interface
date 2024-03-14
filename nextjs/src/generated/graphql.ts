@@ -753,12 +753,13 @@ export type ObjectRecordZoomLevel3Type = {
   creditLine?: Maybe<Scalars['String']>;
   date?: Maybe<Scalars['String']>;
   dimension?: Maybe<Scalars['String']>;
+  externalSource?: Maybe<Scalars['String']>;
   hasParts?: Maybe<Scalars['String']>;
-  maker?: Maybe<Scalars['String']>;
   materials?: Maybe<Scalars['String']>;
   objectName?: Maybe<Scalars['String']>;
   objectNumber?: Maybe<Scalars['String']>;
   permanentLink?: Maybe<Scalars['String']>;
+  relatedKeywords?: Maybe<Scalars['String']>;
   rights?: Maybe<Scalars['String']>;
   scale?: Maybe<Scalars['String']>;
   techniques?: Maybe<Scalars['String']>;
@@ -2050,7 +2051,7 @@ export type ZoomLevel3ObjectRecordQueryVariables = Exact<{
 }>;
 
 
-export type ZoomLevel3ObjectRecordQuery = { __typename?: 'Query', objectsRecordZoomLevel3?: Array<{ __typename: 'ObjectRecordZoomLevel3Type', objectNumber?: string | null, titleType?: string | null, objectName?: string | null, archiveCode?: string | null, date?: string | null, materials?: string | null, techniques?: string | null, hasParts?: string | null, dimension?: string | null, scale?: string | null, creditLine?: string | null, rights?: string | null, permanentLink?: string | null }> | null };
+export type ZoomLevel3ObjectRecordQuery = { __typename?: 'Query', objectsRecordZoomLevel3?: Array<{ __typename?: 'ObjectRecordZoomLevel3Type', objectNumber?: string | null, titleType?: string | null, objectName?: string | null, archiveCode?: string | null, date?: string | null, relatedKeywords?: string | null, materials?: string | null, techniques?: string | null, hasParts?: string | null, dimension?: string | null, scale?: string | null, creditLine?: string | null, rights?: string | null, permanentLink?: string | null, externalSource?: string | null }> | null };
 
 export type ZoomLevel3PeopleRecordQueryVariables = Exact<{
   id: Scalars['String'];
@@ -3097,12 +3098,12 @@ export const ZoomLevel3ArchiveRecordDocument = gql`
 export const ZoomLevel3ObjectRecordDocument = gql`
     query ZoomLevel3ObjectRecord($id: String!) {
   objectsRecordZoomLevel3(id: $id) {
-    __typename
     objectNumber
     titleType
     objectName
     archiveCode
     date
+    relatedKeywords
     materials
     techniques
     hasParts
@@ -3111,6 +3112,7 @@ export const ZoomLevel3ObjectRecordDocument = gql`
     creditLine
     rights
     permanentLink
+    externalSource
   }
 }
     `;

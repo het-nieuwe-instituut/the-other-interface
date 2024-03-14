@@ -12,7 +12,7 @@ const objectFieldOrder: Array<keyof ObjectRecordZoomLevel3Type> = [
   'objectName',
   'archiveCode',
   'date',
-  'materials',
+  'relatedKeywords',
   'techniques',
   'hasParts',
   'dimension',
@@ -20,6 +20,7 @@ const objectFieldOrder: Array<keyof ObjectRecordZoomLevel3Type> = [
   'creditLine',
   'rights',
   'permanentLink',
+  'externalSource',
 ]
 
 const archiveFieldOrder: Array<Partial<keyof ArchivesRecordZoomLevel3Type>> = [

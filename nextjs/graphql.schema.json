@@ -7053,7 +7053,7 @@
             "deprecationReason": null
           },
           {
-            "name": "hasParts",
+            "name": "externalSource",
             "description": null,
             "args": [],
             "type": {
@@ -7065,7 +7065,7 @@
             "deprecationReason": null
           },
           {
-            "name": "maker",
+            "name": "hasParts",
             "description": null,
             "args": [],
             "type": {
@@ -7114,6 +7114,18 @@
           },
           {
             "name": "permanentLink",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "relatedKeywords",
             "description": null,
             "args": [],
             "type": {
