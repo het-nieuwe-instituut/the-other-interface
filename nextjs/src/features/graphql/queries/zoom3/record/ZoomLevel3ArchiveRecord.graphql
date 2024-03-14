@@ -1,14 +1,5 @@
 query ZoomLevel3ArchiveRecord($id: String!) {
     archivesRecordZoomLevel3(id: $id) {
-        __typename
-        id
-        thumbnail
-        custodialHistory
-        scope
-        systemOfArrangement
-        existence
-        existenceLocation
-        sources
         referenceCode
         titleType
         descriptionLevel

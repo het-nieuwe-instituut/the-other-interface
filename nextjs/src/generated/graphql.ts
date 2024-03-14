@@ -92,22 +92,14 @@ export type ArchivesOtherZoomLevel3DetailType = {
 export type ArchivesRecordZoomLevel3Type = {
   __typename?: 'ArchivesRecordZoomLevel3Type';
   access?: Maybe<Scalars['String']>;
-  custodialHistory?: Maybe<Scalars['String']>;
   descriptionLevel?: Maybe<Scalars['String']>;
-  existence?: Maybe<Scalars['String']>;
-  existenceLocation?: Maybe<Scalars['String']>;
   externalSource?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['String']>;
   period?: Maybe<Scalars['String']>;
   permanentLink?: Maybe<Scalars['String']>;
   photographCreator?: Maybe<Scalars['String']>;
   referenceCode?: Maybe<Scalars['String']>;
   rights?: Maybe<Scalars['String']>;
-  scope?: Maybe<Scalars['String']>;
   size?: Maybe<Scalars['String']>;
-  sources?: Maybe<Scalars['String']>;
-  systemOfArrangement?: Maybe<Scalars['String']>;
-  thumbnail?: Maybe<Scalars['String']>;
   titleType?: Maybe<Scalars['String']>;
 };
 
@@ -900,13 +892,13 @@ export type PublicationAuthorType = {
 export type PublicationRecordZoomLevel3Type = {
   __typename?: 'PublicationRecordZoomLevel3Type';
   annotation?: Maybe<Scalars['String']>;
-  authorRole?: Maybe<Array<Scalars['String']>>;
-  authors?: Maybe<Array<Scalars['String']>>;
+  authorRole?: Maybe<Scalars['String']>;
+  authors?: Maybe<Scalars['String']>;
   availability?: Maybe<Scalars['String']>;
   category?: Maybe<Scalars['String']>;
   codeOfArchive?: Maybe<Scalars['String']>;
   externalSource?: Maybe<Scalars['String']>;
-  geoKeyword?: Maybe<Array<Scalars['String']>>;
+  geoKeyword?: Maybe<Scalars['String']>;
   illustration?: Maybe<Scalars['String']>;
   isbn?: Maybe<Scalars['String']>;
   issue?: Maybe<Scalars['String']>;
@@ -917,11 +909,11 @@ export type PublicationRecordZoomLevel3Type = {
   permanentLink?: Maybe<Scalars['String']>;
   placeOfPublication?: Maybe<Scalars['String']>;
   publisher?: Maybe<Scalars['String']>;
-  relatedKeyword?: Maybe<Array<Scalars['String']>>;
+  relatedKeyword?: Maybe<Scalars['String']>;
   series?: Maybe<Scalars['String']>;
   sourceTitle?: Maybe<Scalars['String']>;
   subType?: Maybe<Scalars['String']>;
-  subject?: Maybe<Array<Scalars['String']>>;
+  subject?: Maybe<Scalars['String']>;
   volume?: Maybe<Scalars['String']>;
   year?: Maybe<Scalars['String']>;
   yearOfPublication?: Maybe<Scalars['String']>;
@@ -2055,7 +2047,7 @@ export type ZoomLevel3ArchiveRecordQueryVariables = Exact<{
 }>;
 
 
-export type ZoomLevel3ArchiveRecordQuery = { __typename?: 'Query', archivesRecordZoomLevel3?: Array<{ __typename: 'ArchivesRecordZoomLevel3Type', id?: string | null, thumbnail?: string | null, custodialHistory?: string | null, scope?: string | null, systemOfArrangement?: string | null, existence?: string | null, existenceLocation?: string | null, sources?: string | null, referenceCode?: string | null, titleType?: string | null, descriptionLevel?: string | null, size?: string | null, period?: string | null, access?: string | null, photographCreator?: string | null, rights?: string | null, permanentLink?: string | null, externalSource?: string | null }> | null };
+export type ZoomLevel3ArchiveRecordQuery = { __typename?: 'Query', archivesRecordZoomLevel3?: Array<{ __typename?: 'ArchivesRecordZoomLevel3Type', referenceCode?: string | null, titleType?: string | null, descriptionLevel?: string | null, size?: string | null, period?: string | null, access?: string | null, photographCreator?: string | null, rights?: string | null, permanentLink?: string | null, externalSource?: string | null }> | null };
 
 export type ZoomLevel3ObjectRecordQueryVariables = Exact<{
   id: Scalars['String'];
@@ -2076,7 +2068,7 @@ export type ZoomLevel3PublicationRecordQueryVariables = Exact<{
 }>;
 
 
-export type ZoomLevel3PublicationRecordQuery = { __typename?: 'Query', publicationsRecordZoomLevel3?: Array<{ __typename: 'PublicationRecordZoomLevel3Type', objectNumber?: string | null, subType?: string | null, authors?: Array<string> | null, authorRole?: Array<string> | null, publisher?: string | null, yearOfPublication?: string | null, placeOfPublication?: string | null, isbn?: string | null, annotation?: string | null, codeOfArchive?: string | null, illustration?: string | null, pages?: string | null, language?: string | null, series?: string | null, number?: string | null, category?: string | null, relatedKeyword?: Array<string> | null, geoKeyword?: Array<string> | null, availability?: string | null, permanentLink?: string | null, externalSource?: string | null, sourceTitle?: string | null, volume?: string | null, issue?: string | null, year?: string | null, subject?: Array<string> | null }> | null };
+export type ZoomLevel3PublicationRecordQuery = { __typename?: 'Query', publicationsRecordZoomLevel3?: Array<{ __typename: 'PublicationRecordZoomLevel3Type', objectNumber?: string | null, subType?: string | null, authors?: string | null, authorRole?: string | null, publisher?: string | null, yearOfPublication?: string | null, placeOfPublication?: string | null, isbn?: string | null, annotation?: string | null, codeOfArchive?: string | null, illustration?: string | null, pages?: string | null, language?: string | null, series?: string | null, number?: string | null, category?: string | null, relatedKeyword?: string | null, geoKeyword?: string | null, availability?: string | null, permanentLink?: string | null, externalSource?: string | null, sourceTitle?: string | null, volume?: string | null, issue?: string | null, year?: string | null, subject?: string | null }> | null };
 
 export type ArchivesRelationsQueryVariables = Exact<{
   id: Scalars['String'];
@@ -3093,15 +3085,6 @@ export const ZoomLevel3ArchiveDocument = gql`
 export const ZoomLevel3ArchiveRecordDocument = gql`
     query ZoomLevel3ArchiveRecord($id: String!) {
   archivesRecordZoomLevel3(id: $id) {
-    __typename
-    id
-    thumbnail
-    custodialHistory
-    scope
-    systemOfArrangement
-    existence
-    existenceLocation
-    sources
     referenceCode
     titleType
     descriptionLevel

@@ -39,8 +39,20 @@ export type navigationT = (
     | undefined
 ) => string
 
-export type recordMetaT = (
+export type recordMetaArchiveT = (
   s: Paths<typeof recordMetaArchive>,
+  q?: TranslationQuery | undefined,
+  o?:
+    | {
+        returnObjects?: boolean | undefined
+        fallback?: string | string[] | undefined
+        default?: string | undefined
+      }
+    | undefined
+) => string | undefined
+
+export type recordMetaPublicationT = (
+  s: Paths<typeof recordMetaPublication>,
   q?: TranslationQuery | undefined,
   o?:
     | {
@@ -53,6 +65,3 @@ export type recordMetaT = (
 
 export type recordMetaType = Paths<typeof recordMeta>
 
-export type recordMetaArchiveT = Paths<typeof recordMetaArchive>
-
-export type RecordMetaTranslatableKeys<T> = Exclude<keyof T, '__typename'> & recordMetaArchiveT

@@ -1,5 +1,4 @@
 import { CLOUD_CATEGORIES, Category } from '@/features/shared/utils/categories'
-import { RecordMetaTranslatableKeys } from 'locales/locales'
 import {
   ArchivesRecordZoomLevel3Type,
   ObjectRecordZoomLevel3Type,
@@ -23,12 +22,7 @@ const objectFieldOrder: Array<keyof ObjectRecordZoomLevel3Type> = [
   'permanentLink',
 ]
 
-const archiveFieldOrder: Array<RecordMetaTranslatableKeys<ArchivesRecordZoomLevel3Type>> = [
-  'custodialHistory',
-  'systemOfArrangement',
-  'sources',
-  'existence',
-  'existenceLocation',
+const archiveFieldOrder: Array<Partial<keyof ArchivesRecordZoomLevel3Type>> = [
   'referenceCode',
   'titleType',
   'descriptionLevel',
