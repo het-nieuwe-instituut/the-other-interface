@@ -4,7 +4,7 @@ import { StoryWithinThemeCarousel } from '../StoryWithinThemeCarousel/StoryWithi
 
 export const StoryBottomContent = () => {
   return (
-    <Box pt={16}>
+    <Box pt={16} px={6}>
       <StoryWithinThemeCarousel />
     </Box>
   )

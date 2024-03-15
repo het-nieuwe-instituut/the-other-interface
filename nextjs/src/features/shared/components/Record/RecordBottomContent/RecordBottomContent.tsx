@@ -4,7 +4,7 @@ import { RecordStoriesCarousel } from '../RecordStoriesCarousel/RecordStoriesCar
 
 export const RecordBottomContent = () => {
   return (
-    <Box pt={16}>
+    <Box pt={16} px={6}>
       <RecordStoriesCarousel />
     </Box>
   )
