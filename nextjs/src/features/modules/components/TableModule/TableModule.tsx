@@ -146,19 +146,6 @@ export const TableModuleDesktop: React.FC<Props> = props => {
           ))}
         </Tbody>
       </Table>
-      {/* Pagination not yet implemented - Load more button for when it is */}
-      {/* <Text
-        as={'button'}
-        textDecoration={'underline'}
-        textUnderlineOffset={'4px'}
-        _hover={{ textDecoration: 'none' }}
-        _disabled={{ color: 'grey', textDecoration: 'none', cursor: 'not-allowed' }}
-        marginTop={'16px'}
-        // disabled={}
-        // onClick={() => {}}
-      >
-        Load more
-      </Text> */}
     </TableContainer>
   )
 }
