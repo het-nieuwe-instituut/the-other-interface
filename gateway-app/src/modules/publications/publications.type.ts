@@ -30,6 +30,75 @@ export class PublicationZoomLevel3DetailType {
   public description: string
 }
 
+@ObjectType()
+export class PublicationRecordZoomLevel3Type {
+  @Field(() => String, { nullable: true })
+  public objectNumber?: string
+
+  @Field(() => String, { nullable: true })
+  public subType?: string
+
+  @Field(() => String, { nullable: true })
+  public authors?: string
+
+  @Field(() => String, { nullable: true })
+  public authorRole?: string
+
+  @Field(() => String, { nullable: true })
+  public publisher?: string
+
+  @Field(() => String, { nullable: true })
+  public yearOfPublication?: string
+
+  @Field(() => String, { nullable: true })
+  public placeOfPublication?: string
+
+  @Field(() => String, { nullable: true })
+  public isbn?: string
+
+  @Field(() => String, { nullable: true })
+  public annotation?: string
+
+  @Field(() => String, { nullable: true })
+  public codeOfArchive?: string
+
+  @Field(() => String, { nullable: true })
+  public edition?: string
+
+  @Field(() => String, { nullable: true })
+  public illustration?: string
+
+  @Field(() => String, { nullable: true })
+  public pages?: string
+
+  @Field(() => String, { nullable: true })
+  public language?: string
+
+  @Field(() => String, { nullable: true })
+  public series?: string
+
+  @Field(() => String, { nullable: true })
+  public number?: string
+
+  @Field(() => String, { nullable: true })
+  public category?: string
+
+  @Field(() => String, { nullable: true })
+  public relatedKeyword?: string
+
+  @Field(() => String, { nullable: true })
+  public geoKeyword?: string
+
+  @Field(() => String, { nullable: true })
+  public availability?: string
+
+  @Field(() => String, { nullable: true })
+  public permanentLink?: string
+
+  @Field(() => String, { nullable: true })
+  public externalSource?: string
+}
+
 registerEnumType(PublicationsZoomLevel3Types, { name: 'PublicationsZoomLevel3Types' })
 
 @ObjectType()

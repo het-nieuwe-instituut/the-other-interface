@@ -189,3 +189,36 @@ export const ArchiveZoomLevel3UnionType = createUnionType({
     return ArchivesFondsZoomLevel3DetailType
   },
 })
+
+@ObjectType()
+export class ArchivesRecordZoomLevel3Type {
+  @Field(() => String, { nullable: true })
+  public referenceCode?: string
+
+  @Field(() => String, { nullable: true })
+  public titleType?: string
+
+  @Field(() => String, { nullable: true })
+  public descriptionLevel?: string
+
+  @Field(() => String, { nullable: true })
+  public size?: string
+
+  @Field(() => String, { nullable: true })
+  public period?: string
+
+  @Field(() => String, { nullable: true })
+  public access?: string
+
+  @Field(() => String, { nullable: true })
+  public photographCreator?: string
+
+  @Field(() => String, { nullable: true })
+  public rights?: string
+
+  @Field(() => String, { nullable: true })
+  public permanentLink?: string
+
+  @Field(() => String, { nullable: true })
+  public externalSource?: string
+}

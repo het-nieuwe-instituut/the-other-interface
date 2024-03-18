@@ -1,0 +1,19 @@
+query ZoomLevel3ObjectRecord($id: String!) {
+    objectsRecordZoomLevel3(id: $id) {
+        objectNumber
+        titleType
+        objectName
+        archiveCode
+        date
+        relatedKeywords
+        materials
+        techniques
+        hasParts
+        dimension
+        scale
+        creditLine
+        rights
+        permanentLink
+        externalSource
+    }
+}

@@ -92,6 +92,48 @@ export class PeopleZoomLevel3DetailType {
 }
 
 @ObjectType()
+export class PeopleRecordZoomLevel3Type {
+  @Field(() => String, { nullable: true })
+  public type?: string
+
+  @Field(() => String, { nullable: true })
+  public profession?: string
+
+  @Field(() => String, { nullable: true })
+  public nameVariation?: string
+
+  @Field(() => String, { nullable: true })
+  public birthDate?: string
+
+  @Field(() => String, { nullable: true })
+  public birthPlace?: string
+
+  @Field(() => String, { nullable: true })
+  public deathDate?: string
+
+  @Field(() => String, { nullable: true })
+  public deathPlace?: string
+
+  @Field(() => String, { nullable: true })
+  public nationality?: string
+
+  @Field(() => String, { nullable: true })
+  public gender?: string
+
+  @Field(() => String, { nullable: true })
+  public period?: string
+
+  @Field(() => String, { nullable: true })
+  public association?: string
+
+  @Field(() => String, { nullable: true })
+  public permanentLink?: string
+
+  @Field(() => String, { nullable: true })
+  public externalSource?: string
+}
+
+@ObjectType()
 export class PeopleAssociationType {
   @Field(() => String)
   public association: string

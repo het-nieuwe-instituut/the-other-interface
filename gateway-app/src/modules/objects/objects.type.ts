@@ -8,13 +8,10 @@ import { PeopleZoomLevel3DetailType } from '../people/people.type'
 export class ObjectsZoomLevel3DetailType {
   @Field()
   public id: string
-
   @Field(() => String, { nullable: true })
   public title: string
-
   @Field(() => EntityNames, { nullable: true })
   public type: EntityNames
-
   @Field(() => [String], { nullable: true })
   public thumbnail: string
 
@@ -101,6 +98,54 @@ export class ObjectsZoomLevel3DetailType {
 
   @Field(() => String, { nullable: true })
   public permanentLink?: string | null
+}
+
+@ObjectType()
+export class ObjectRecordZoomLevel3Type {
+  @Field(() => String, { nullable: true })
+  public objectNumber?: string
+
+  @Field(() => String, { nullable: true })
+  public titleType?: string
+
+  @Field(() => String, { nullable: true })
+  public objectName?: string
+
+  @Field(() => String, { nullable: true })
+  public archiveCode?: string
+
+  @Field(() => String, { nullable: true })
+  public date?: string
+
+  @Field(() => String, { nullable: true })
+  public relatedKeywords?: string
+
+  @Field(() => String, { nullable: true })
+  public materials?: string
+
+  @Field(() => String, { nullable: true })
+  public techniques?: string
+
+  @Field(() => String, { nullable: true })
+  public hasParts?: string
+
+  @Field(() => String, { nullable: true })
+  public dimension?: string
+
+  @Field(() => String, { nullable: true })
+  public scale?: string
+
+  @Field(() => String, { nullable: true })
+  public creditLine?: string
+
+  @Field(() => String, { nullable: true })
+  public rights?: string
+
+  @Field(() => String, { nullable: true })
+  public permanentLink?: string
+
+  @Field(() => String, { nullable: true })
+  public externalSource?: string
 }
 
 @ObjectType()
