@@ -22,6 +22,7 @@ import { TextModule } from '../components/TextModule/TextModule'
 import { Title } from '../components/Title/Title'
 import { CarouselModule } from '../components/carousels/Carousel/Carousel'
 import { ImageCarousel } from '../components/carousels/ImageCarousel/ImageCarousel'
+import { tableMapper } from './tableMapper'
 
 interface Props {
   components: DynamicComponents
@@ -88,8 +89,9 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
           }
 
           if (component?.__typename === 'ComponentModulesTableModule') {
+            const tableValues = tableMapper(component)
             return (
-              <TableModule key={keyExtractor(component.id, index, array)} component={component} />
+              <TableModule key={keyExtractor(component.id, index, array)} component={tableValues} />
             )
           }
 

@@ -11,19 +11,19 @@ import {
   useBreakpoint,
   Text,
 } from '@chakra-ui/react'
-
-import { ComponentModulesTableModule } from 'src/generated/graphql'
+// import { ComponentModulesTableModule } from 'src/generated/graphql'
 import { modulesSpacingMapper } from '../../modulesSpacing'
+import { TableModuleType } from '../../ModulesRenderer/tableMapper'
 
 interface Props {
-  component: ComponentModulesTableModule
+  component: TableModuleType
 }
 
 export const TableModule: React.FC<Props> = props => {
-  const table = props.component
+  const { component } = props
   const breakpoint = useBreakpoint()
 
-  if (!table) {
+  if (!component) {
     return null
   }
 
@@ -35,12 +35,10 @@ export const TableModule: React.FC<Props> = props => {
         pb={modulesSpacingMapper?.TableModule.spacingBottom}
       >
         <Text textStyle={'h2'} as="h2" pb={'md'}>
-          {props.component.table?.data?.attributes?.name}
+          {component.name}
         </Text>
-        {props.component.table?.data?.attributes?.description && (
-          <Text pb={'md'}>{props.component.table?.data?.attributes?.description}</Text>
-        )}
-        <TableModuleMobile component={props.component} />
+        {component.description && <Text pb={'md'}>{component.description}</Text>}
+        <TableModuleMobile component={component} />
       </Box>
     )
   }
@@ -52,21 +50,20 @@ export const TableModule: React.FC<Props> = props => {
       pb={modulesSpacingMapper?.TableModule.spacingBottom}
     >
       <Text as={'h2'} textStyle={'impactNew.xl'} pb={'sm'}>
-        {props.component.table?.data?.attributes?.name}{' '}
-        {`(${props.component.table?.data?.attributes?.TableBody?.length})`}
+        {component.name} {/* {`(${props.component.table?.data?.attributes?.TableBody?.length})`} */}
       </Text>
-      {props.component.table?.data?.attributes?.description && (
+      {component.description && (
         <Text pb={'md'} textStyle={'socialLarge.lg'}>
-          {props.component.table?.data?.attributes?.description}
+          {component.description}
         </Text>
       )}
-      <TableModuleDesktop component={props.component} />
+      <TableModuleDesktop component={component} />
     </Box>
   )
 }
 
 export const TableModuleMobile: React.FC<Props> = props => {
-  const body = props.component.table?.data?.attributes?.TableBody
+  const body = props.component.tableBody
 
   return (
     <TableContainer>
@@ -103,15 +100,15 @@ export const TableModuleMobile: React.FC<Props> = props => {
 }
 
 export const TableModuleDesktop: React.FC<Props> = props => {
-  const head = props.component.table?.data?.attributes?.Tablehead
-  const body = props.component.table?.data?.attributes?.TableBody
+  const head = props.component.tableHead
+  const body = props.component.tableBody
 
   return (
     <TableContainer>
       <Table>
         <Thead>
           <Tr>
-            {head?.TableHeadItem?.map((item, index, array) => (
+            {head?.map((item, index, array) => (
               <Th
                 key={keyExtractor(item, index, array)}
                 textTransform={'capitalize'}
