@@ -9582,6 +9582,32 @@ export type StoriesQuery = {
             } | null
           } | null> | null
         } | null
+        story?: {
+          __typename?: 'StoryEntityResponse'
+          data?: {
+            __typename?: 'StoryEntity'
+            id?: string | null
+            attributes?: {
+              __typename?: 'Story'
+              title: string
+              slug: string
+              locale?: string | null
+            } | null
+          } | null
+        } | null
+        stories?: {
+          __typename?: 'StoryRelationResponseCollection'
+          data: Array<{
+            __typename?: 'StoryEntity'
+            id?: string | null
+            attributes?: {
+              __typename?: 'Story'
+              title: string
+              slug: string
+              locale?: string | null
+            } | null
+          }>
+        } | null
       } | null
     }>
     meta: {
@@ -10028,6 +10054,32 @@ export type StoryQuery = {
               } | null
             } | null
           } | null> | null
+        } | null
+        story?: {
+          __typename?: 'StoryEntityResponse'
+          data?: {
+            __typename?: 'StoryEntity'
+            id?: string | null
+            attributes?: {
+              __typename?: 'Story'
+              title: string
+              slug: string
+              locale?: string | null
+            } | null
+          } | null
+        } | null
+        stories?: {
+          __typename?: 'StoryRelationResponseCollection'
+          data: Array<{
+            __typename?: 'StoryEntity'
+            id?: string | null
+            attributes?: {
+              __typename?: 'Story'
+              title: string
+              slug: string
+              locale?: string | null
+            } | null
+          }>
         } | null
       } | null
     } | null
@@ -11759,6 +11811,32 @@ export type StoriesMetaByLocaleQuery = {
                   } | null
                 } | null> | null
               } | null
+              story?: {
+                __typename?: 'StoryEntityResponse'
+                data?: {
+                  __typename?: 'StoryEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Story'
+                    title: string
+                    slug: string
+                    locale?: string | null
+                  } | null
+                } | null
+              } | null
+              stories?: {
+                __typename?: 'StoryRelationResponseCollection'
+                data: Array<{
+                  __typename?: 'StoryEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Story'
+                    title: string
+                    slug: string
+                    locale?: string | null
+                  } | null
+                }>
+              } | null
             } | null
           }>
         } | null
@@ -12336,6 +12414,32 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
               } | null
             } | null
           } | null> | null
+        } | null
+        story?: {
+          __typename?: 'StoryEntityResponse'
+          data?: {
+            __typename?: 'StoryEntity'
+            id?: string | null
+            attributes?: {
+              __typename?: 'Story'
+              title: string
+              slug: string
+              locale?: string | null
+            } | null
+          } | null
+        } | null
+        stories?: {
+          __typename?: 'StoryRelationResponseCollection'
+          data: Array<{
+            __typename?: 'StoryEntity'
+            id?: string | null
+            attributes?: {
+              __typename?: 'Story'
+              title: string
+              slug: string
+              locale?: string | null
+            } | null
+          }>
         } | null
       } | null
     }>
@@ -14114,6 +14218,32 @@ export type StoryFragmentFragment = {
         } | null
       } | null> | null
     } | null
+    story?: {
+      __typename?: 'StoryEntityResponse'
+      data?: {
+        __typename?: 'StoryEntity'
+        id?: string | null
+        attributes?: {
+          __typename?: 'Story'
+          title: string
+          slug: string
+          locale?: string | null
+        } | null
+      } | null
+    } | null
+    stories?: {
+      __typename?: 'StoryRelationResponseCollection'
+      data: Array<{
+        __typename?: 'StoryEntity'
+        id?: string | null
+        attributes?: {
+          __typename?: 'Story'
+          title: string
+          slug: string
+          locale?: string | null
+        } | null
+      }>
+    } | null
   } | null
 }
 
@@ -14210,6 +14340,32 @@ export type StoryMetaFragmentFragment = {
           } | null
         } | null
       } | null> | null
+    } | null
+    story?: {
+      __typename?: 'StoryEntityResponse'
+      data?: {
+        __typename?: 'StoryEntity'
+        id?: string | null
+        attributes?: {
+          __typename?: 'Story'
+          title: string
+          slug: string
+          locale?: string | null
+        } | null
+      } | null
+    } | null
+    stories?: {
+      __typename?: 'StoryRelationResponseCollection'
+      data: Array<{
+        __typename?: 'StoryEntity'
+        id?: string | null
+        attributes?: {
+          __typename?: 'Story'
+          title: string
+          slug: string
+          locale?: string | null
+        } | null
+      }>
     } | null
   } | null
 }
@@ -14392,6 +14548,32 @@ export type LocalizedStoryMetaFragmentFragment = {
                 } | null
               } | null
             } | null> | null
+          } | null
+          story?: {
+            __typename?: 'StoryEntityResponse'
+            data?: {
+              __typename?: 'StoryEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'Story'
+                title: string
+                slug: string
+                locale?: string | null
+              } | null
+            } | null
+          } | null
+          stories?: {
+            __typename?: 'StoryRelationResponseCollection'
+            data: Array<{
+              __typename?: 'StoryEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'Story'
+                title: string
+                slug: string
+                locale?: string | null
+              } | null
+            }>
           } | null
         } | null
       }>
@@ -15876,6 +16058,32 @@ export type ThemeQuery = {
                   } | null
                 } | null> | null
               } | null
+              story?: {
+                __typename?: 'StoryEntityResponse'
+                data?: {
+                  __typename?: 'StoryEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Story'
+                    title: string
+                    slug: string
+                    locale?: string | null
+                  } | null
+                } | null
+              } | null
+              stories?: {
+                __typename?: 'StoryRelationResponseCollection'
+                data: Array<{
+                  __typename?: 'StoryEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Story'
+                    title: string
+                    slug: string
+                    locale?: string | null
+                  } | null
+                }>
+              } | null
             } | null
           }>
         } | null
@@ -16334,6 +16542,32 @@ export type ThemesQuery = {
                     } | null
                   } | null
                 } | null> | null
+              } | null
+              story?: {
+                __typename?: 'StoryEntityResponse'
+                data?: {
+                  __typename?: 'StoryEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Story'
+                    title: string
+                    slug: string
+                    locale?: string | null
+                  } | null
+                } | null
+              } | null
+              stories?: {
+                __typename?: 'StoryRelationResponseCollection'
+                data: Array<{
+                  __typename?: 'StoryEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Story'
+                    title: string
+                    slug: string
+                    locale?: string | null
+                  } | null
+                }>
               } | null
             } | null
           }>
@@ -16802,6 +17036,32 @@ export type StoriesRelatedToThemeQuery = {
                   } | null
                 } | null> | null
               } | null
+              story?: {
+                __typename?: 'StoryEntityResponse'
+                data?: {
+                  __typename?: 'StoryEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Story'
+                    title: string
+                    slug: string
+                    locale?: string | null
+                  } | null
+                } | null
+              } | null
+              stories?: {
+                __typename?: 'StoryRelationResponseCollection'
+                data: Array<{
+                  __typename?: 'StoryEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Story'
+                    title: string
+                    slug: string
+                    locale?: string | null
+                  } | null
+                }>
+              } | null
             } | null
           }>
         } | null
@@ -17248,6 +17508,32 @@ export type ThemeFragmentFragment = {
                 } | null
               } | null
             } | null> | null
+          } | null
+          story?: {
+            __typename?: 'StoryEntityResponse'
+            data?: {
+              __typename?: 'StoryEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'Story'
+                title: string
+                slug: string
+                locale?: string | null
+              } | null
+            } | null
+          } | null
+          stories?: {
+            __typename?: 'StoryRelationResponseCollection'
+            data: Array<{
+              __typename?: 'StoryEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'Story'
+                title: string
+                slug: string
+                locale?: string | null
+              } | null
+            }>
           } | null
         } | null
       }>
@@ -17712,6 +17998,32 @@ export type TriplyRecordQuery = {
                   } | null
                 } | null> | null
               } | null
+              story?: {
+                __typename?: 'StoryEntityResponse'
+                data?: {
+                  __typename?: 'StoryEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Story'
+                    title: string
+                    slug: string
+                    locale?: string | null
+                  } | null
+                } | null
+              } | null
+              stories?: {
+                __typename?: 'StoryRelationResponseCollection'
+                data: Array<{
+                  __typename?: 'StoryEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Story'
+                    title: string
+                    slug: string
+                    locale?: string | null
+                  } | null
+                }>
+              } | null
             } | null
           }>
         } | null
@@ -18166,6 +18478,32 @@ export type TriplyRecordsQuery = {
                   } | null
                 } | null> | null
               } | null
+              story?: {
+                __typename?: 'StoryEntityResponse'
+                data?: {
+                  __typename?: 'StoryEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Story'
+                    title: string
+                    slug: string
+                    locale?: string | null
+                  } | null
+                } | null
+              } | null
+              stories?: {
+                __typename?: 'StoryRelationResponseCollection'
+                data: Array<{
+                  __typename?: 'StoryEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Story'
+                    title: string
+                    slug: string
+                    locale?: string | null
+                  } | null
+                }>
+              } | null
             } | null
           }>
         } | null
@@ -18618,6 +18956,32 @@ export type TriplyRecordFragmentFragment = {
                 } | null
               } | null
             } | null> | null
+          } | null
+          story?: {
+            __typename?: 'StoryEntityResponse'
+            data?: {
+              __typename?: 'StoryEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'Story'
+                title: string
+                slug: string
+                locale?: string | null
+              } | null
+            } | null
+          } | null
+          stories?: {
+            __typename?: 'StoryRelationResponseCollection'
+            data: Array<{
+              __typename?: 'StoryEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'Story'
+                title: string
+                slug: string
+                locale?: string | null
+              } | null
+            }>
           } | null
         } | null
       }>
@@ -19626,6 +19990,26 @@ export const StoryMetaFragmentFragmentDoc = gql`
       storyLinks {
         ...ComponentModulesButtonsModuleFragment
       }
+      story {
+        data {
+          id
+          attributes {
+            title
+            slug
+            locale
+          }
+        }
+      }
+      stories {
+        data {
+          id
+          attributes {
+            title
+            slug
+            locale
+          }
+        }
+      }
     }
   }
   ${BaseTriplyRecordFragmentFragmentDoc}
@@ -19844,6 +20228,26 @@ export const StoryFragmentFragmentDoc = gql`
       locale
       storyLinks {
         ...ComponentModulesButtonsModuleFragment
+      }
+      story {
+        data {
+          id
+          attributes {
+            title
+            slug
+            locale
+          }
+        }
+      }
+      stories {
+        data {
+          id
+          attributes {
+            title
+            slug
+            locale
+          }
+        }
       }
     }
   }

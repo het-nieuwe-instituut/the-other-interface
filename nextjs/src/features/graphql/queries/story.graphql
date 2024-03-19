@@ -177,6 +177,15 @@ query storyMetaById($locale: String, $id: ID, $publicationState: String = "LIVE"
                         }
                     }
                 }
+                siblings {
+                    id
+                    attributes {
+                        title
+                        slug
+                        locale
+                    }
+                }
+            
             }
         }
     }

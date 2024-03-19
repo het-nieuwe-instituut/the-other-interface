@@ -11,6 +11,7 @@ import {
   StoryMetaEntityResponseCollection,
 } from './story.type'
 import { StoryEntityResponse } from './story.types.circular'
+import { StoryService } from './story.service'
 
 @Resolver(Story)
 export class StoryFieldResolver {
@@ -44,7 +45,10 @@ export class StoryFieldResolver {
 
 @Resolver()
 export class StoryResolver {
-  public constructor(@Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk) {}
+  public constructor(
+    @Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk,
+    private readonly storyService: StoryService
+  ) {}
 
   @Query(() => StoryEntityResponseCollection)
   public async storyByLocale(
@@ -83,13 +87,38 @@ export class StoryResolver {
     })
 
     const story = res?.stories?.data[0]
+    const parentId = story?.attributes?.story?.data?.id
 
     if (story?.attributes?.locale === locale || !locale) {
-      return { data: story }
+      if (parentId && story?.id && locale && story?.attributes) {
+        const siblings = await this.storyService.getStorySublings(parentId, story?.id, locale)
+        const returnStorey = { ...story, attributes: { ...story?.attributes, siblings } }
+        return {
+          data: { ...story, attributes: { ...story?.attributes, siblings } },
+        }
+      }
+      return { data: { ...story } }
     }
 
     const localizedStory =
       story?.attributes?.localizations?.data?.find(l => l.attributes?.locale === locale) || null
+
+    const localizdedParentId = localizedStory?.attributes?.story?.data?.id
+
+    if (localizdedParentId && localizedStory?.id && locale && localizedStory?.attributes) {
+      const localizedSibling = await this.storyService.getStorySublings(
+        localizdedParentId,
+        localizedStory?.id,
+        locale
+      )
+
+      return {
+        data: {
+          ...localizedStory,
+          attributes: { ...localizedStory?.attributes, localizedSibling },
+        },
+      }
+    }
 
     return { data: localizedStory }
   }

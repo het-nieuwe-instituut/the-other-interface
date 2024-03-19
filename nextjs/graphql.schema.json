@@ -12925,6 +12925,26 @@
             "deprecationReason": null
           },
           {
+            "name": "siblings",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "StoryEntity",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "slug",
             "description": null,
             "args": [],
@@ -12942,7 +12962,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "StoryEntityResponse",
+              "name": "StoryRelationResponseCollection",
               "ofType": null
             },
             "isDeprecated": false,
@@ -12954,7 +12974,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "StoryRelationResponseCollection",
+              "name": "StoryEntityResponse",
               "ofType": null
             },
             "isDeprecated": false,
@@ -13404,6 +13424,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StringFilterInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "siblings",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StoryFiltersInput",
               "ofType": null
             },
             "defaultValue": null,

@@ -96,10 +96,13 @@ export class Story {
   public themes?: ThemeRelationResponseCollection
 
   @Field({ nullable: true })
-  public story?: StoryRelationResponseCollection
+  public story?: StoryEntityResponse
 
   @Field({ nullable: true })
-  public stories?: StoryEntityResponse
+  public stories?: StoryRelationResponseCollection
+
+  @Field(() => [StoryEntity], { nullable: true })
+  public siblings?: StoryEntity[]
 }
 
 @ObjectType()
@@ -161,7 +164,7 @@ export class StoryWithoutRelationsEntityResponse {
 @ObjectType()
 export class StoryEntityResponseCollection {
   @Field(() => StoryEntity, { nullable: true })
-  public data: StoryEntity
+  public data?: StoryEntity
 
   @Field(() => ResponseCollectionMeta, { nullable: true })
   public meta: ResponseCollectionMeta
@@ -170,13 +173,13 @@ export class StoryEntityResponseCollection {
 @ObjectType()
 export class StoryMetaEntityResponseCollection {
   @Field(() => StoryEntity, { nullable: true })
-  public data: StoryEntity
+  public data?: StoryEntity
 }
 
 @ObjectType()
 export class StoryWithoutRelationsEntityResponseCollection {
   @Field(() => [StoryWithoutRelationsEntity], { nullable: true })
-  public data: StoryWithoutRelationsEntity[]
+  public data?: StoryWithoutRelationsEntity[]
 
   @Field(() => ResponseCollectionMeta, { nullable: true })
   public meta: ResponseCollectionMeta
@@ -255,4 +258,7 @@ export class StoryFiltersInput {
 
   @Field(() => StoryFiltersInput, { nullable: true })
   public story?: StoryFiltersInput
+
+  @Field(() => StoryFiltersInput, { nullable: true })
+  public siblings?: StoryFiltersInput
 }

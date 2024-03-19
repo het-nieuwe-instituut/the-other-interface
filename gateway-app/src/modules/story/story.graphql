@@ -449,6 +449,26 @@ fragment StoryFragment on StoryEntity {
         storyLinks {
             ...ComponentModulesButtonsModuleFragment
         }
+        story {
+            data {
+                id
+                attributes {
+                    title
+                    slug
+                    locale
+                }
+            }
+        }
+        stories { 
+            data {
+                id
+                attributes {
+                    title
+                    slug
+                    locale
+                }
+            }
+        }
     }
 }
 
@@ -500,6 +520,26 @@ fragment StoryMetaFragment on StoryEntity {
         }
         storyLinks {
             ...ComponentModulesButtonsModuleFragment
+        }
+        story {
+            data {
+                id
+                attributes {
+                    title
+                    slug
+                    locale
+                }
+            }
+        }
+        stories { 
+            data {
+                id
+                attributes {
+                    title
+                    slug
+                    locale
+                }
+            }
         }
     }
 }
