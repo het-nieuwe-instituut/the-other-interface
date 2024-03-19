@@ -18,7 +18,7 @@ export const LayerWrapper: React.FC<Props> = ({ LeftContent, RightContent, Botto
       backgroundColor={'ivoryAlpha.90'}
       width={'100%'}
     >
-      <Box maxW={theme.breakpoints.xl} marginX={'auto'} paddingTop={9} px={6}>
+      <Box maxW={theme.breakpoints.xl} marginX={'auto'} paddingTop={9}>
         <Grid
           templateAreas={{
             lg: `"left right"`,
@@ -29,11 +29,17 @@ export const LayerWrapper: React.FC<Props> = ({ LeftContent, RightContent, Botto
           templateRows={{ lg: '1fr', base: `auto minmax(0, 1fr)` }}
           gap={RightContent ? '3.75rem' : '0'}
         >
-          <GridItem area={'left'}>{LeftContent}</GridItem>
-          {RightContent && <GridItem area={'right'}>{RightContent}</GridItem>}
+          <GridItem px={6} area={'left'}>
+            {LeftContent}
+          </GridItem>
+          {RightContent && (
+            <GridItem area={'right'} px={6}>
+              {RightContent}
+            </GridItem>
+          )}
         </Grid>
+        {BottomContent}
       </Box>
-      {BottomContent}
     </Box>
   )
 }

@@ -20,7 +20,6 @@ export class ArchivesZoomLevel3Resolver {
   }
 }
 
-
 @Resolver(ArchivesFondsZoomLevel3DetailType)
 export class ArchivesOtherResolver {
   @Query(() => ArchivesFondsZoomLevel3DetailType)

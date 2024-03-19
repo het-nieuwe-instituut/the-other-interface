@@ -13,6 +13,7 @@ import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 // import { PublicationsBookZoomLevel3DetailType } from '../publications/publications.type'
 // import { ObjectsZoomLevel3DetailType } from '../objects/objects.type'
 import { TriplyExternalSourceEnum } from './zoomLevel3.service'
+import { StoryEntity } from '../story/story.type'
 
 @ObjectType()
 export class ZoomLevel3RelationsType {
@@ -153,3 +154,15 @@ export class ZoomLevel3Args {
 // }
 
 registerEnumType(TriplyExternalSourceEnum, { name: 'TriplyExternalSourceEnum' })
+
+@ObjectType()
+export class ZoomLevel3StoriesRelatedToRecordType {
+  @Field(() => [StoryEntity], { nullable: true })
+  public stories?: StoryEntity[]
+
+  @Field({ nullable: true })
+  public type: EntityNames
+
+  @Field({ nullable: true })
+  public total: number
+}

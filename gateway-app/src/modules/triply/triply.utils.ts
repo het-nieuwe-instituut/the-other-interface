@@ -159,7 +159,6 @@ export class TriplyUtils {
     text?: string
     isDataAmount: boolean
   }) {
-
     if (text) {
       return this.getUriForLevel2TextSearchDataAmount({ type, isDataAmount })
     }

@@ -20,7 +20,11 @@ import {
 } from '../publications/publications.type'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { ZoomLevel3Service } from './zoomLevel3.service'
-import { ZoomLevel3Args, ZoomLevel3RelationsType } from './zoomLevel3.type'
+import {
+  ZoomLevel3Args,
+  ZoomLevel3RelationsType,
+  ZoomLevel3StoriesRelatedToRecordType,
+} from './zoomLevel3.type'
 import { ArchivesService } from '../archives/archives.service'
 import { ObjectsService } from '../objects/objects.service'
 import { PeopleService } from '../people/people.service'
@@ -128,5 +132,14 @@ export class ZoomLevel3Resolver {
   @Query(() => ArchivesOtherZoomLevel3DetailType, { nullable: true })
   public zoomLevel5ArchivesOther(@Args('id') objectId: string) {
     return this.zoomLevel3Service.getDetail(objectId, EntityNames.Archives)
+  }
+
+  @Query(() => ZoomLevel3StoriesRelatedToRecordType, { nullable: true })
+  public zoomLevel3StoriesRelationsForRecord(@Args() args: ZoomLevel3Args) {
+    return this.zoomLevel3Service.getStoriesRelationsForRecord(
+      args?.id,
+      args?.type,
+      args?.lang ?? 'nl'
+    )
   }
 }

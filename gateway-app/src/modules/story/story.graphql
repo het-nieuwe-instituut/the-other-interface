@@ -143,6 +143,14 @@ query storiesLinkedToTriplyRecord($recordId: String!, $type: String!) {
     }
 }
 
+query storiesLinkedToTriplyRecordExtended($recordId: String!, $type: String!, $lang: I18NLocaleCode, $publicationState: PublicationState = LIVE) {
+    stories(filters: { triplyRecords: { recordId: { eq: $recordId }, type: { eq: $type } }}, locale: $lang, publicationState: $publicationState) {
+        data {
+            ...StoryFragment
+        }
+    }
+}
+
 query storiesLinkedToTheme($id: ID!, $locale: I18NLocaleCode) {
     story(id: $id, locale: $locale) {
         data {

@@ -24,7 +24,7 @@ export class Homepage {
   public Title?: string
 
   @Field(() => [HomepageComponentsDynamicZone], { nullable: true })
-  public components?: typeof HomepageComponentsDynamicZone[]
+  public components?: (typeof HomepageComponentsDynamicZone)[]
 
   @Field({ nullable: true })
   public createdAt?: Date

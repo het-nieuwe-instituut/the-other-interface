@@ -25,7 +25,7 @@ export class Menupage {
   public Title?: string
 
   @Field(() => [MenupageComponentsDynamicZone], { nullable: true })
-  public components?: typeof MenupageComponentsDynamicZone[]
+  public components?: (typeof MenupageComponentsDynamicZone)[]
 
   @Field({ nullable: true })
   public createdAt?: Date
