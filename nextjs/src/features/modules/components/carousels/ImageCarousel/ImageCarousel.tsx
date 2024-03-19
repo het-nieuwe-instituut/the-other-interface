@@ -5,22 +5,19 @@ import { Box, Flex, Text } from '@chakra-ui/react'
 import Image from 'next/legacy/image'
 import React from 'react'
 
-import { ComponentModulesImageCarousel, UploadFileEntity } from 'src/generated/graphql'
-
 import { ArrowNextContainer, ArrowPrevContainer } from './ImageCorouselStyled'
 import usePresenter from './usePresenter'
 import { modulesSpacingMapper } from '@/features/modules/modulesSpacing'
+import { StoryImageInfo } from '@/features/shared/components/Record/RecordStoriesCarousel/storiesRelatedToRecordDataMapper'
 
 interface Props {
-  component: ComponentModulesImageCarousel
-  locale?: string
+  images: StoryImageInfo[]
+  onItemClick?: (id: string | null | undefined) => void
 }
 
 const IMAGE_HEIGHT = 600
 
 export const ImageCarousel = (props: Props) => {
-  const { images } = props.component
-  const items = images?.data
   const {
     carouselRef,
     handlePaginationPrev,
@@ -28,7 +25,7 @@ export const ImageCarousel = (props: Props) => {
     sliderRef,
     calculateImagePropotions,
     size,
-  } = usePresenter(items)
+  } = usePresenter(props.images)
 
   return (
     <Box as="div" backgroundColor={'inherit'} ref={carouselRef} position="relative">
@@ -41,11 +38,11 @@ export const ImageCarousel = (props: Props) => {
           <ArrowRightIcon onClick={handlePaginationNext} />
         </ArrowNextContainer>
         <div ref={sliderRef} className="keen-slider">
-          {items?.map((item: UploadFileEntity, index) => {
-            const originalHeight = item?.attributes?.height ?? 1
-            const originalWidth = item?.attributes?.width ?? 1
-            const imagePath = imageBasePath(item?.attributes?.url) || 'broken'
-            const caption = item?.attributes?.caption
+          {props?.images?.map((item, index) => {
+            const originalHeight = item?.height ?? 1
+            const originalWidth = item?.width ?? 1
+            const imagePath = imageBasePath(item?.url) || 'broken'
+            const caption = item?.description
             const proportions = calculateImagePropotions(
               originalWidth,
               originalHeight,
@@ -54,12 +51,14 @@ export const ImageCarousel = (props: Props) => {
             )
             return (
               <Flex
-                key={`${item.id}-${index}`}
+                key={`${item.url}-${index}`}
                 flexDirection="column"
                 pt={modulesSpacingMapper?.ImageCarousel.spacingTop}
                 pb={modulesSpacingMapper?.ImageCarousel.spacingBottom}
                 width={proportions.width}
+                onClick={item?.id ? () => props.onItemClick?.(item.id) : undefined}
                 className="keen-slider__slide"
+                cursor={props?.onItemClick && item?.id ? 'pointer' : 'default'}
               >
                 <Image
                   src={imagePath}
@@ -69,6 +68,11 @@ export const ImageCarousel = (props: Props) => {
                   alt="carousel image"
                   loading="eager"
                 />
+                {item?.title && (
+                  <Text textStyle={'socialLarge.lg'} fontWeight={700} fontSize={'32px'} mt={'3'}>
+                    {item.title}
+                  </Text>
+                )}
                 {caption && (
                   <Box width={'100'} mb="1" mt={'2.5'}>
                     <Text textStyle="micro" textAlign={'left'} pr={'2'}>

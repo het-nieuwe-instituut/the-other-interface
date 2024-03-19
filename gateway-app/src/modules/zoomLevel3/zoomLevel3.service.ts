@@ -305,4 +305,20 @@ export class ZoomLevel3Service {
     // Remove duplicates if there are any
     return [...new Set(storyIds)]
   }
+
+  public async getStoriesRelationsForRecord(id: string, type: EntityNames, lang: string) {
+    const res = await this.strapiGqlSdk.storiesLinkedToTriplyRecordExtended({
+      recordId: id,
+      type: StrapiUtils.getRecordTypeForEntityName(type),
+      lang,
+    })
+
+    const stories = res.stories?.data?.filter(s => !!s?.id && !!s.attributes) || []
+
+    return {
+      type: EntityNames.Stories,
+      total: res.stories?.data.length || 0,
+      stories,
+    }
+  }
 }
