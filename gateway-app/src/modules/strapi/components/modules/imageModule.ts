@@ -1,7 +1,7 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql'
 import { UploadFileEntityResponse } from '../../shared-types'
 import { TriplyRecordEntityResponse } from 'src/modules/triplyRecord/triplyRecord.type'
-import { StoryEntityResponse } from 'src/modules/story/story.type'
+import { StoryEntityResponse } from 'src/modules/story/story.types.circular'
 
 @ObjectType()
 export class ComponentModulesImage {

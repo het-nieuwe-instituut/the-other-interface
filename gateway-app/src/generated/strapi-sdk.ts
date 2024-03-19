@@ -1614,6 +1614,8 @@ export type Story = {
   publishedAt?: Maybe<Scalars['DateTime']>
   shortDescription?: Maybe<Scalars['String']>
   slug: Scalars['String']
+  stories?: Maybe<StoryRelationResponseCollection>
+  story?: Maybe<StoryEntityResponse>
   storyLinks?: Maybe<ComponentModulesButtonsModule>
   themes?: Maybe<ThemeRelationResponseCollection>
   timeframe?: Maybe<ComponentCoreTimeframe>
@@ -1631,6 +1633,13 @@ export type StoryLocalizationsArgs = {
 
 export type StoryLocationsArgs = {
   filters?: InputMaybe<LocationFiltersInput>
+  pagination?: InputMaybe<PaginationArg>
+  publicationState?: InputMaybe<PublicationState>
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
+}
+
+export type StoryStoriesArgs = {
+  filters?: InputMaybe<StoryFiltersInput>
   pagination?: InputMaybe<PaginationArg>
   publicationState?: InputMaybe<PublicationState>
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
@@ -1694,6 +1703,8 @@ export type StoryFiltersInput = {
   publishedAt?: InputMaybe<DateTimeFilterInput>
   shortDescription?: InputMaybe<StringFilterInput>
   slug?: InputMaybe<StringFilterInput>
+  stories?: InputMaybe<StoryFiltersInput>
+  story?: InputMaybe<StoryFiltersInput>
   storyLinks?: InputMaybe<ComponentModulesButtonsModuleFiltersInput>
   themes?: InputMaybe<ThemeFiltersInput>
   timeframe?: InputMaybe<ComponentCoreTimeframeFiltersInput>
@@ -1711,6 +1722,8 @@ export type StoryInput = {
   publishedAt?: InputMaybe<Scalars['DateTime']>
   shortDescription?: InputMaybe<Scalars['String']>
   slug?: InputMaybe<Scalars['String']>
+  stories?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
+  story?: InputMaybe<Scalars['ID']>
   storyLinks?: InputMaybe<ComponentModulesButtonsModuleInput>
   themes?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
   timeframe?: InputMaybe<ComponentCoreTimeframeInput>
@@ -10038,6 +10051,32 @@ export type StoryByLocaleQuery = {
         slug: string
         description?: string | null
         locale?: string | null
+        story?: {
+          __typename?: 'StoryEntityResponse'
+          data?: {
+            __typename?: 'StoryEntity'
+            id?: string | null
+            attributes?: {
+              __typename?: 'Story'
+              title: string
+              slug: string
+              locale?: string | null
+            } | null
+          } | null
+        } | null
+        stories?: {
+          __typename?: 'StoryRelationResponseCollection'
+          data: Array<{
+            __typename?: 'StoryEntity'
+            id?: string | null
+            attributes?: {
+              __typename?: 'Story'
+              title: string
+              slug: string
+              locale?: string | null
+            } | null
+          }>
+        } | null
         components?: Array<
           | {
               __typename: 'ComponentModulesButtonsModule'
@@ -10385,6 +10424,32 @@ export type StoryByLocaleQuery = {
               slug: string
               description?: string | null
               locale?: string | null
+              story?: {
+                __typename?: 'StoryEntityResponse'
+                data?: {
+                  __typename?: 'StoryEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Story'
+                    title: string
+                    slug: string
+                    locale?: string | null
+                  } | null
+                } | null
+              } | null
+              stories?: {
+                __typename?: 'StoryRelationResponseCollection'
+                data: Array<{
+                  __typename?: 'StoryEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Story'
+                    title: string
+                    slug: string
+                    locale?: string | null
+                  } | null
+                }>
+              } | null
               components?: Array<
                 | {
                     __typename: 'ComponentModulesButtonsModule'
@@ -10750,6 +10815,32 @@ export type StoriesByLocaleQuery = {
         slug: string
         description?: string | null
         locale?: string | null
+        story?: {
+          __typename?: 'StoryEntityResponse'
+          data?: {
+            __typename?: 'StoryEntity'
+            id?: string | null
+            attributes?: {
+              __typename?: 'Story'
+              title: string
+              slug: string
+              locale?: string | null
+            } | null
+          } | null
+        } | null
+        stories?: {
+          __typename?: 'StoryRelationResponseCollection'
+          data: Array<{
+            __typename?: 'StoryEntity'
+            id?: string | null
+            attributes?: {
+              __typename?: 'Story'
+              title: string
+              slug: string
+              locale?: string | null
+            } | null
+          }>
+        } | null
         components?: Array<
           | {
               __typename: 'ComponentModulesButtonsModule'
@@ -11097,6 +11188,32 @@ export type StoriesByLocaleQuery = {
               slug: string
               description?: string | null
               locale?: string | null
+              story?: {
+                __typename?: 'StoryEntityResponse'
+                data?: {
+                  __typename?: 'StoryEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Story'
+                    title: string
+                    slug: string
+                    locale?: string | null
+                  } | null
+                } | null
+              } | null
+              stories?: {
+                __typename?: 'StoryRelationResponseCollection'
+                data: Array<{
+                  __typename?: 'StoryEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Story'
+                    title: string
+                    slug: string
+                    locale?: string | null
+                  } | null
+                }>
+              } | null
               components?: Array<
                 | {
                     __typename: 'ComponentModulesButtonsModule'
@@ -12433,6 +12550,32 @@ export type NestedStoryFragmentFragment = {
     slug: string
     description?: string | null
     locale?: string | null
+    story?: {
+      __typename?: 'StoryEntityResponse'
+      data?: {
+        __typename?: 'StoryEntity'
+        id?: string | null
+        attributes?: {
+          __typename?: 'Story'
+          title: string
+          slug: string
+          locale?: string | null
+        } | null
+      } | null
+    } | null
+    stories?: {
+      __typename?: 'StoryRelationResponseCollection'
+      data: Array<{
+        __typename?: 'StoryEntity'
+        id?: string | null
+        attributes?: {
+          __typename?: 'Story'
+          title: string
+          slug: string
+          locale?: string | null
+        } | null
+      }>
+    } | null
     components?: Array<
       | {
           __typename: 'ComponentModulesButtonsModule'
@@ -12781,6 +12924,32 @@ export type LocalizedStoryFragmentFragment = {
     slug: string
     description?: string | null
     locale?: string | null
+    story?: {
+      __typename?: 'StoryEntityResponse'
+      data?: {
+        __typename?: 'StoryEntity'
+        id?: string | null
+        attributes?: {
+          __typename?: 'Story'
+          title: string
+          slug: string
+          locale?: string | null
+        } | null
+      } | null
+    } | null
+    stories?: {
+      __typename?: 'StoryRelationResponseCollection'
+      data: Array<{
+        __typename?: 'StoryEntity'
+        id?: string | null
+        attributes?: {
+          __typename?: 'Story'
+          title: string
+          slug: string
+          locale?: string | null
+        } | null
+      }>
+    } | null
     components?: Array<
       | {
           __typename: 'ComponentModulesButtonsModule'
@@ -13128,6 +13297,32 @@ export type LocalizedStoryFragmentFragment = {
           slug: string
           description?: string | null
           locale?: string | null
+          story?: {
+            __typename?: 'StoryEntityResponse'
+            data?: {
+              __typename?: 'StoryEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'Story'
+                title: string
+                slug: string
+                locale?: string | null
+              } | null
+            } | null
+          } | null
+          stories?: {
+            __typename?: 'StoryRelationResponseCollection'
+            data: Array<{
+              __typename?: 'StoryEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'Story'
+                title: string
+                slug: string
+                locale?: string | null
+              } | null
+            }>
+          } | null
           components?: Array<
             | {
                 __typename: 'ComponentModulesButtonsModule'
@@ -19183,6 +19378,26 @@ export const NestedStoryFragmentFragmentDoc = gql`
       slug
       description
       locale
+      story {
+        data {
+          id
+          attributes {
+            title
+            slug
+            locale
+          }
+        }
+      }
+      stories {
+        data {
+          id
+          attributes {
+            title
+            slug
+            locale
+          }
+        }
+      }
       components {
         __typename
         ... on ComponentModulesPullquote {
@@ -19237,6 +19452,26 @@ export const LocalizedStoryFragmentFragmentDoc = gql`
       slug
       description
       locale
+      story {
+        data {
+          id
+          attributes {
+            title
+            slug
+            locale
+          }
+        }
+      }
+      stories {
+        data {
+          id
+          attributes {
+            title
+            slug
+            locale
+          }
+        }
+      }
       components {
         __typename
         ... on ComponentModulesPullquote {

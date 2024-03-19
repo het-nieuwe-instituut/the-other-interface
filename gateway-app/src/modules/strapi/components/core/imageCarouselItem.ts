@@ -1,7 +1,7 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql'
 import { TriplyRecordEntityResponse } from '../../../triplyRecord/triplyRecord.type'
 import { UploadFileEntityResponse } from '../../shared-types'
-import { StoryEntityResponse } from 'src/modules/story/story.type'
+import { StoryEntityResponse } from 'src/modules/story/story.types.circular'
 
 @ObjectType()
 export class ComponentCoreImageCarouselItem {

@@ -34,6 +34,7 @@ import {
   TriplyRecordRelationResponseCollection,
 } from '../triplyRecord/triplyRecord.type'
 import { ThemeRelationResponseCollection } from '../theme/theme.type'
+import { StoryEntityResponse } from './story.types.circular'
 
 @ObjectType()
 export class StoryRelationResponseCollection {
@@ -47,7 +48,7 @@ export class Story {
   public author?: AuthorEntityResponse
 
   @Field(() => [StoryComponentsDynamicZone], { nullable: true })
-  public components?: typeof StoryComponentsDynamicZone[]
+  public components?: (typeof StoryComponentsDynamicZone)[]
 
   @Field({ nullable: true })
   public createdAt: Date
@@ -93,6 +94,12 @@ export class Story {
 
   @Field(() => ThemeRelationResponseCollection, { nullable: true })
   public themes?: ThemeRelationResponseCollection
+
+  @Field({ nullable: true })
+  public story?: StoryRelationResponseCollection
+
+  @Field({ nullable: true })
+  public stories?: StoryEntityResponse
 }
 
 @ObjectType()
@@ -143,12 +150,6 @@ export class StoryWithoutRelationsEntity {
 
   @Field(() => ID, { nullable: true })
   public id?: string
-}
-
-@ObjectType()
-export class StoryEntityResponse {
-  @Field({ nullable: true })
-  public data?: StoryEntity
 }
 
 @ObjectType()
@@ -248,4 +249,10 @@ export class StoryFiltersInput {
 
   @Field(() => TriplyRecordFiltersInput, { nullable: true })
   public triplyRecords?: TriplyRecordFiltersInput
+
+  @Field(() => StoryFiltersInput, { nullable: true })
+  public stories?: StoryFiltersInput
+
+  @Field(() => StoryFiltersInput, { nullable: true })
+  public story?: StoryFiltersInput
 }

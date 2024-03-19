@@ -4,13 +4,13 @@ import { PublicationState, Sdk } from '../../generated/strapi-sdk'
 import { I18NLocaleCode, PaginationArg } from '../strapi/shared-types'
 import {
   Story,
-  StoryEntityResponse,
   StoryEntityResponseCollection,
   StoryFiltersInput,
   StoryWithoutRelationsEntityResponse,
   StoryWithoutRelationsEntityResponseCollection,
   StoryMetaEntityResponseCollection,
 } from './story.type'
+import { StoryEntityResponse } from './story.types.circular'
 
 @Resolver(Story)
 export class StoryFieldResolver {
@@ -79,7 +79,7 @@ export class StoryResolver {
     const res = await this.strapiGqlSdk.storiesMetaByLocale({
       id: filters?.id,
       publicationState,
-      locale: ['nl', 'en'],  // we only care about story id, which should be searched across all locales
+      locale: ['nl', 'en'], // we only care about story id, which should be searched across all locales
     })
 
     const story = res?.stories?.data[0]

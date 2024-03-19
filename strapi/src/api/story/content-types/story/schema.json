@@ -130,14 +130,12 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::story.story",
-      "private": true,
       "mappedBy": "story"
     },
     "story": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::story.story",
-      "private": true,
       "inversedBy": "stories"
     }
   }

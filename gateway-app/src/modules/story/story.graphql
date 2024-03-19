@@ -248,6 +248,26 @@ fragment NestedStoryFragment on StoryEntity {
         slug
         description
         locale
+        story {
+            data {
+                id
+                attributes {
+                    title
+                    slug
+                    locale
+                }
+            }
+        }
+        stories { 
+            data {
+                id
+                attributes {
+                    title
+                    slug
+                    locale
+                }
+            }
+        }
         components {
            __typename
             ... on ComponentModulesPullquote {
@@ -291,6 +311,26 @@ fragment LocalizedStoryFragment on StoryEntity {
         slug
         description
         locale
+        story {
+            data {
+                id
+                attributes {
+                    title
+                    slug
+                    locale
+                }
+            }
+        }
+        stories { 
+            data {
+                id
+                attributes {
+                    title
+                    slug
+                    locale
+                }
+            }
+        }
         components {
            __typename
             ... on ComponentModulesPullquote {

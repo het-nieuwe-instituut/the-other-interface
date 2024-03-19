@@ -12937,6 +12937,30 @@
             "deprecationReason": null
           },
           {
+            "name": "stories",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "StoryEntityResponse",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "story",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "StoryRelationResponseCollection",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "storyLinks",
             "description": null,
             "args": [],
@@ -13392,6 +13416,30 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StringFilterInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "stories",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StoryFiltersInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "story",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StoryFiltersInput",
               "ofType": null
             },
             "defaultValue": null,
