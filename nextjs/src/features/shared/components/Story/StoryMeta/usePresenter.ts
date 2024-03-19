@@ -62,6 +62,8 @@ export const usePresenter = () => {
 
   const story = data?.storyMetaByLocale?.data?.attributes
 
+  console.log(story)
+
   const linkedPeopleRecords =
     story?.triplyRecords?.data
       .filter((record): record is { attributes: TriplyRecord } => Boolean(record.attributes))

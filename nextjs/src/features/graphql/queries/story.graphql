@@ -157,6 +157,26 @@ query storyMetaById($locale: String, $id: ID, $publicationState: String = "LIVE"
                         ...buttonsModuleFragment
                     }
                 }
+                stories {
+                    data {
+                        id
+                        attributes {
+                            title
+                            slug
+                            locale
+                        }
+                    }
+                }
+                story {
+                    data {
+                        id
+                        attributes {
+                            title
+                            slug
+                            locale
+                        }
+                    }
+                }
             }
         }
     }

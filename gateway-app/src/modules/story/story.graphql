@@ -541,6 +541,26 @@ fragment LocalizedStoryMetaFragment on StoryEntity {
                 }
             }
         }
+        story {
+            data {
+                id
+                attributes {
+                    title
+                    slug
+                    locale
+                }
+            }
+        }
+        stories { 
+            data {
+                id
+                attributes {
+                    title
+                    slug
+                    locale
+                }
+            }
+        }
         publicationDate {
             id
             date

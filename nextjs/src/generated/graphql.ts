@@ -1978,7 +1978,7 @@ export type StoryMetaByIdQueryVariables = Exact<{
 }>;
 
 
-export type StoryMetaByIdQuery = { __typename?: 'Query', storyMetaByLocale: { __typename?: 'StoryMetaEntityResponseCollection', data?: { __typename: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, description?: string | null, shortDescription?: string | null, createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', attributes?: { __typename?: 'Author', firstName: string, lastName: string, insertion?: string | null } | null } | null } | null, publicationDate?: { __typename?: 'ComponentCorePublicationDate', id?: string | null, date?: any | null, displayType?: EnumComponentcorepublicationdateDisplaytype | null } | null, locations?: { __typename?: 'LocationRelationResponseCollection', data: Array<{ __typename?: 'LocationEntity', id?: string | null, attributes?: { __typename?: 'Location', city?: string | null } | null }> } | null, timeframe?: { __typename?: 'ComponentCoreTimeframe', id: string, yearStart?: number | null, yearEnd?: number | null } | null, themes?: { __typename?: 'ThemeRelationResponseCollection', data?: Array<{ __typename?: 'ThemeEntity', id?: string | null, attributes?: { __typename?: 'Theme', name: string } | null }> | null } | null, triplyRecords?: { __typename?: 'TriplyRecordRelationResponseCollection', data: Array<{ __typename?: 'TriplyRecordEntity', id?: string | null, attributes?: { __typename?: 'TriplyRecord', type: EnumTriplyrecordType, recordId: string, people?: { __typename?: 'PeopleZoomLevel3DetailType', title?: string | null } | null } | null }> } | null, storyLinks?: { __typename: 'ComponentModulesButtonsModule', id: string, buttonStyle?: EnumComponentmodulesbuttonsmoduleButtonstyle | null, buttons?: Array<{ __typename?: 'ComponentCoreButton', id: string, text?: string | null, url?: string | null, hasAttachment?: boolean | null, attachment?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null }> | null } | null } | null } | null } };
+export type StoryMetaByIdQuery = { __typename?: 'Query', storyMetaByLocale: { __typename?: 'StoryMetaEntityResponseCollection', data?: { __typename: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, description?: string | null, shortDescription?: string | null, createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', attributes?: { __typename?: 'Author', firstName: string, lastName: string, insertion?: string | null } | null } | null } | null, publicationDate?: { __typename?: 'ComponentCorePublicationDate', id?: string | null, date?: any | null, displayType?: EnumComponentcorepublicationdateDisplaytype | null } | null, locations?: { __typename?: 'LocationRelationResponseCollection', data: Array<{ __typename?: 'LocationEntity', id?: string | null, attributes?: { __typename?: 'Location', city?: string | null } | null }> } | null, timeframe?: { __typename?: 'ComponentCoreTimeframe', id: string, yearStart?: number | null, yearEnd?: number | null } | null, themes?: { __typename?: 'ThemeRelationResponseCollection', data?: Array<{ __typename?: 'ThemeEntity', id?: string | null, attributes?: { __typename?: 'Theme', name: string } | null }> | null } | null, triplyRecords?: { __typename?: 'TriplyRecordRelationResponseCollection', data: Array<{ __typename?: 'TriplyRecordEntity', id?: string | null, attributes?: { __typename?: 'TriplyRecord', type: EnumTriplyrecordType, recordId: string, people?: { __typename?: 'PeopleZoomLevel3DetailType', title?: string | null } | null } | null }> } | null, storyLinks?: { __typename: 'ComponentModulesButtonsModule', id: string, buttonStyle?: EnumComponentmodulesbuttonsmoduleButtonstyle | null, buttons?: Array<{ __typename?: 'ComponentCoreButton', id: string, text?: string | null, url?: string | null, hasAttachment?: boolean | null, attachment?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null }> | null } | null, stories?: { __typename?: 'StoryEntityResponse', data?: { __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, slug?: string | null, locale?: string | null } | null } | null } | null, story?: { __typename?: 'StoryRelationResponseCollection', data?: Array<{ __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, slug?: string | null, locale?: string | null } | null }> | null } | null } | null } | null } };
 
 export type ThemesQueryVariables = Exact<{
   filters?: InputMaybe<ThemeFiltersInput>;
@@ -3032,6 +3032,26 @@ export const StoryMetaByIdDocument = gql`
         storyLinks {
           ... on ComponentModulesButtonsModule {
             ...buttonsModuleFragment
+          }
+        }
+        stories {
+          data {
+            id
+            attributes {
+              title
+              slug
+              locale
+            }
+          }
+        }
+        story {
+          data {
+            id
+            attributes {
+              title
+              slug
+              locale
+            }
           }
         }
       }

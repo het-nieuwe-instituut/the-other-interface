@@ -60,16 +60,14 @@ function applyToAllLocales(event) {
 async function checkIfParentIsNotAChild(event) {
   const item = event.params.data
   if (!item.story) return
-  if (item.story === item.id) {
+  if (item.story === event.params.where.id) {
     throw new ValidationError('Parent story cannot be the same as the current story')
   }
-
-  console.log(item.story, 'item.story')
 
   const parentStory = await strapi.entityService.findOne(storyApi, item.story, {
     populate: ['story'],
   })
-  console.log(parentStory, 'parentStory')
+
   if (parentStory.story) {
     throw new ValidationError('Parent story cannot be a child of another story')
   }

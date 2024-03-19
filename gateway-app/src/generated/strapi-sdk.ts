@@ -11619,6 +11619,32 @@ export type StoriesMetaByLocaleQuery = {
             attributes?: { __typename?: 'Theme'; name: string } | null
           }>
         } | null
+        story?: {
+          __typename?: 'StoryEntityResponse'
+          data?: {
+            __typename?: 'StoryEntity'
+            id?: string | null
+            attributes?: {
+              __typename?: 'Story'
+              title: string
+              slug: string
+              locale?: string | null
+            } | null
+          } | null
+        } | null
+        stories?: {
+          __typename?: 'StoryRelationResponseCollection'
+          data: Array<{
+            __typename?: 'StoryEntity'
+            id?: string | null
+            attributes?: {
+              __typename?: 'Story'
+              title: string
+              slug: string
+              locale?: string | null
+            } | null
+          }>
+        } | null
         publicationDate?: {
           __typename?: 'ComponentCorePublicationDate'
           id: string
@@ -14225,6 +14251,32 @@ export type LocalizedStoryMetaFragmentFragment = {
         __typename?: 'ThemeEntity'
         id?: string | null
         attributes?: { __typename?: 'Theme'; name: string } | null
+      }>
+    } | null
+    story?: {
+      __typename?: 'StoryEntityResponse'
+      data?: {
+        __typename?: 'StoryEntity'
+        id?: string | null
+        attributes?: {
+          __typename?: 'Story'
+          title: string
+          slug: string
+          locale?: string | null
+        } | null
+      } | null
+    } | null
+    stories?: {
+      __typename?: 'StoryRelationResponseCollection'
+      data: Array<{
+        __typename?: 'StoryEntity'
+        id?: string | null
+        attributes?: {
+          __typename?: 'Story'
+          title: string
+          slug: string
+          locale?: string | null
+        } | null
       }>
     } | null
     publicationDate?: {
@@ -19614,6 +19666,26 @@ export const LocalizedStoryMetaFragmentFragmentDoc = gql`
           id
           attributes {
             name
+          }
+        }
+      }
+      story {
+        data {
+          id
+          attributes {
+            title
+            slug
+            locale
+          }
+        }
+      }
+      stories {
+        data {
+          id
+          attributes {
+            title
+            slug
+            locale
           }
         }
       }
