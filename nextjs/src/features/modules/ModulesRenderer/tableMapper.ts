@@ -19,14 +19,6 @@ export const tableMapper = (component: ComponentModulesTableModule) => {
   const tableBody = component.table?.data?.attributes?.TableBody
   const tableHead = component.table?.data?.attributes?.Tablehead?.TableHeadItem
 
-  const table = {
-    name,
-    description,
-    tableBody,
-    tableHead,
-  }
-  console.log(table)
-
   return {
     name,
     description,

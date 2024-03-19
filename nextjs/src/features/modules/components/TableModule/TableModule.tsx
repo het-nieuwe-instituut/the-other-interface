@@ -11,16 +11,16 @@ import {
   useBreakpoint,
   Text,
 } from '@chakra-ui/react'
-// import { ComponentModulesTableModule } from 'src/generated/graphql'
 import { modulesSpacingMapper } from '../../modulesSpacing'
 import { TableModuleType } from '../../ModulesRenderer/tableMapper'
 
 interface Props {
   component: TableModuleType
+  LoadMore?: React.ReactNode
 }
 
 export const TableModule: React.FC<Props> = props => {
-  const { component } = props
+  const { component, LoadMore } = props
   const breakpoint = useBreakpoint()
 
   if (!component) {
@@ -50,14 +50,14 @@ export const TableModule: React.FC<Props> = props => {
       pb={modulesSpacingMapper?.TableModule.spacingBottom}
     >
       <Text as={'h2'} textStyle={'impactNew.xl'} pb={'sm'}>
-        {component.name} {/* {`(${props.component.table?.data?.attributes?.TableBody?.length})`} */}
+        {component.name}
       </Text>
       {component.description && (
         <Text pb={'md'} textStyle={'socialLarge.lg'}>
           {component.description}
         </Text>
       )}
-      <TableModuleDesktop component={component} />
+      <TableModuleDesktop component={component} LoadMore={LoadMore} />
     </Box>
   )
 }
@@ -102,6 +102,7 @@ export const TableModuleMobile: React.FC<Props> = props => {
 export const TableModuleDesktop: React.FC<Props> = props => {
   const head = props.component.tableHead
   const body = props.component.tableBody
+  const LoadMore = props.LoadMore
 
   return (
     <TableContainer>
@@ -143,6 +144,7 @@ export const TableModuleDesktop: React.FC<Props> = props => {
           ))}
         </Tbody>
       </Table>
+      {LoadMore && <>{LoadMore}</>}
     </TableContainer>
   )
 }
