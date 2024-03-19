@@ -1,29 +1,23 @@
-import { useStoriesRelationForRecord } from '@/features/shared/hooks/queries/useStoriesRelationForRecord'
 import { useParams, useRouter, useSearchParams } from 'next/navigation'
-import {
-  CATEGORIES,
-  CATEGORIES_TO_ENTITY_MAPPER,
-  Category,
-} from '@/features/shared/utils/categories'
-import { mapStoriesToRelatedCarouselItems } from './storiesRelatedToRecordDataMapper'
+import { CATEGORIES } from '@/features/shared/utils/categories'
 import useTranslation from 'next-translate/useTranslation'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
+import { useStoriesRelatedByTheme } from '@/features/shared/hooks/queries/useStoriesRelationWithinTheme'
+import { mapStoriesToRelatedCarouselItems } from '../../Record/RecordStoriesCarousel/storiesRelatedToRecordDataMapper'
 import { StoryEntity } from 'src/generated/graphql'
 
 export const usePresenter = () => {
   const params = useParams()
   const searchParams = useSearchParams()
   const router = useRouter()
-  const category = params?.category as Category
   const id = params?.id as string
-  const type = CATEGORIES_TO_ENTITY_MAPPER[category]
   const lang = searchParams?.get('lang')
 
-  const { data: recordRelatedStories, isLoading } = useStoriesRelationForRecord(type, id)
-  const { t: tRecord } = useTranslation('record')
+  const { data, isLoading } = useStoriesRelatedByTheme(id)
+  const { t: tStories } = useTranslation('stories')
 
   const stories = mapStoriesToRelatedCarouselItems(
-    recordRelatedStories?.zoomLevel3StoriesRelationsForRecord?.stories as StoryEntity[]
+    data?.storiesRealtedWithinTheme?.stories as StoryEntity[]
   )
 
   const handleRedirect = (id: string | null | undefined) => {
@@ -35,7 +29,7 @@ export const usePresenter = () => {
   return {
     stories,
     isLoading,
-    tRecord,
+    tStories,
     handleRedirect,
   }
 }

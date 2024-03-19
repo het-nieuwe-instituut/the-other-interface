@@ -1093,6 +1093,7 @@ export type Query = {
   publicationsRecordZoomLevel3?: Maybe<Array<PublicationRecordZoomLevel3Type>>;
   relations?: Maybe<Array<ZoomLevel3RelationsType>>;
   stories: StoryEntityResponseCollection;
+  storiesRealtedWithinTheme: StoriesRelatedToThemeResponse;
   storiesWithoutRelations: StoryWithoutRelationsEntityResponseCollection;
   story: StoryEntityResponse;
   storyByLocale: StoryEntityResponseCollection;
@@ -1222,6 +1223,12 @@ export type QueryStoriesArgs = {
   pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<Scalars['String']>;
   sort?: InputMaybe<Array<Scalars['String']>>;
+};
+
+
+export type QueryStoriesRealtedWithinThemeArgs = {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -1396,6 +1403,13 @@ export type QueryZoomLevel5PublicationsSerialArgs = {
 export type ResponseCollectionMeta = {
   __typename?: 'ResponseCollectionMeta';
   pagination: Pagination;
+};
+
+export type StoriesRelatedToThemeResponse = {
+  __typename?: 'StoriesRelatedToThemeResponse';
+  stories?: Maybe<Array<StoryEntity>>;
+  total?: Maybe<Scalars['Float']>;
+  type?: Maybe<Scalars['String']>;
 };
 
 export type Story = {
@@ -1920,6 +1934,14 @@ export type StoriesQueryVariables = Exact<{
 
 
 export type StoriesQuery = { __typename?: 'Query', stories: { __typename?: 'StoryEntityResponseCollection', data?: { __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, slug?: string | null, shortDescription?: string | null } | null } | null, meta?: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', page: number } } | null } };
+
+export type StoriesRealtedWithinThemeQueryVariables = Exact<{
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type StoriesRealtedWithinThemeQuery = { __typename?: 'Query', storiesRealtedWithinTheme: { __typename?: 'StoriesRelatedToThemeResponse', type?: string | null, total?: number | null, stories?: Array<{ __typename: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, components?: Array<{ __typename?: 'ComponentModulesButtonsModule' } | { __typename?: 'ComponentModulesGridModule' } | { __typename: 'ComponentModulesImage', id: string, caption?: string | null, alt_text?: string | null, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, height?: number | null, width?: number | null } | null } | null }, story?: { __typename?: 'StoryEntityResponse', data?: { __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, slug?: string | null, description?: string | null, shortDescription?: string | null, createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, locale?: string | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', attributes?: { __typename?: 'Author', firstName: string } | null } | null } | null } | null } | null } | null, triplyRecord?: { __typename?: 'TriplyRecordEntityResponse', data?: { __typename?: 'TriplyRecordEntity', id?: string | null, attributes?: { __typename?: 'TriplyRecord', recordId: string, type: EnumTriplyrecordType } | null } | null } | null } | { __typename?: 'ComponentModulesImageCarousel' } | { __typename?: 'ComponentModulesPullquote' } | { __typename?: 'ComponentModulesSubtitle' } | { __typename?: 'ComponentModulesTableModule' } | { __typename?: 'ComponentModulesTextModule' } | { __typename?: 'ComponentModulesTitleModule' } | { __typename?: 'Error' }> | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', attributes?: { __typename?: 'Author', firstName: string, lastName: string, insertion?: string | null } | null } | null } | null } | null }> | null } };
 
 export type StoriesWithoutRelationsQueryVariables = Exact<{
   pagination?: InputMaybe<PaginationArg>;
@@ -2794,6 +2816,35 @@ export const StoriesDocument = gql`
   }
 }
     `;
+export const StoriesRealtedWithinThemeDocument = gql`
+    query storiesRealtedWithinTheme($id: String!, $locale: String) {
+  storiesRealtedWithinTheme(id: $id, locale: $locale) {
+    type
+    total
+    stories {
+      id
+      __typename
+      attributes {
+        title
+        components {
+          ... on ComponentModulesImage {
+            ...imageModuleFragment
+          }
+        }
+        author {
+          data {
+            attributes {
+              firstName
+              lastName
+              insertion
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    ${ImageModuleFragmentFragmentDoc}`;
 export const StoriesWithoutRelationsDocument = gql`
     query storiesWithoutRelations($pagination: PaginationArg, $locale: String) {
   storiesWithoutRelations(pagination: $pagination, locale: $locale) {
@@ -3315,6 +3366,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     stories(variables?: StoriesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<StoriesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<StoriesQuery>(StoriesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'stories', 'query');
+    },
+    storiesRealtedWithinTheme(variables: StoriesRealtedWithinThemeQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<StoriesRealtedWithinThemeQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<StoriesRealtedWithinThemeQuery>(StoriesRealtedWithinThemeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'storiesRealtedWithinTheme', 'query');
     },
     storiesWithoutRelations(variables?: StoriesWithoutRelationsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<StoriesWithoutRelationsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<StoriesWithoutRelationsQuery>(StoriesWithoutRelationsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'storiesWithoutRelations', 'query');
