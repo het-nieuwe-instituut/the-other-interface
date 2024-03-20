@@ -1,17 +1,21 @@
 import { Text } from '@chakra-ui/react'
 import { TableModule } from '@/features/modules/components/TableModule/TableModule'
-export const RecordTableWrapper: React.FC = () => {
-  // const { } = usePresenter()
+import { usePresenter } from './usePresenter'
+
+export const RecordTable: React.FC = () => {
+  const { data } = usePresenter()
+  console.log(data)
+  const testData = {
+    name: 'test title',
+    description: 'test description',
+    tableBody: [],
+    tableHead: [],
+  }
 
   return (
     <>
       <TableModule
-        component={{
-          name: 'test',
-          description: 'test',
-          tableBody: [],
-          tableHead: [],
-        }}
+        component={testData}
         LoadMore={
           <Text
             as={'button'}
@@ -21,7 +25,7 @@ export const RecordTableWrapper: React.FC = () => {
             _disabled={{ color: 'grey', textDecoration: 'none', cursor: 'not-allowed' }}
             marginTop={'16px'}
             // disabled={}
-            // onClick={() => {}}
+            onClick={() => console.log('clicked')}
           >
             Load more
           </Text>
