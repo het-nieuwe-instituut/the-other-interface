@@ -2,6 +2,7 @@
 import { Box, Link, Text } from '@chakra-ui/react'
 import { usePresenter } from './usePresenter'
 import { Loader } from '@/features/galaxyInterface/components/Loader/Loader'
+import { CATEGORIES } from '@/features/shared/utils/categories'
 
 export const StoryMeta: React.FC = () => {
   const {
@@ -14,6 +15,10 @@ export const StoryMeta: React.FC = () => {
     linkedPeopleRecords,
     locations,
     timeframe,
+    childrenRelation,
+    siblingsRelation,
+    parentRelation,
+    lang,
   } = usePresenter()
 
   if (isLoading) {
@@ -45,6 +50,68 @@ export const StoryMeta: React.FC = () => {
         <Text textStyle={'socialLarge.lg'} marginBottom={'md'}>
           {story.shortDescription}
         </Text>
+      )}
+      {parentRelation && parentRelation?.data?.id && (
+        <Box marginBottom={'md'}>
+          <Text textStyle={'socialLarge.lg'} fontWeight={700}>
+            {storiesT.t('parentStory')}:
+          </Text>
+          <Text textStyle={'socialLarge.lg'} mt={1}>
+            <Link
+              href={`/detail/${CATEGORIES.stories}/${parentRelation?.data?.id}?lang=${lang}`}
+              borderBottom={'1px solid'}
+              borderColor={'blackAlpha.100'}
+            >
+              {parentRelation?.data?.attributes?.title}
+            </Link>
+          </Text>
+        </Box>
+      )}
+      {childrenRelation && childrenRelation?.data && childrenRelation.data.length > 0 && (
+        <Box marginBottom={'md'}>
+          <Text textStyle={'socialLarge.lg'} fontWeight={700}>
+            {storiesT.t('subStories')}:
+          </Text>
+          {childrenRelation?.data?.map((child, index, array) => {
+            const hasItemAfter = array.length - 1 !== index
+
+            return (
+              <Text textStyle={'socialLarge.lg'} key={child.id} mr={1} mt={1} mb={2}>
+                <Link
+                  href={`/detail/${CATEGORIES.stories}/${child.id}?lang=${lang}`}
+                  borderBottom={'1px solid'}
+                  borderColor={'blackAlpha.100'}
+                >
+                  {child?.attributes?.title}
+                  {hasItemAfter && ','}
+                </Link>
+              </Text>
+            )
+          })}
+        </Box>
+      )}
+      {siblingsRelation && siblingsRelation.length > 0 && (
+        <Box marginBottom={'md'}>
+          <Text textStyle={'socialLarge.lg'} fontWeight={700}>
+            {storiesT.t('siblingsStories')}:
+          </Text>
+          {siblingsRelation?.map((sibling, index, array) => {
+            const hasItemAfter = array.length - 1 !== index
+
+            return (
+              <Text textStyle={'socialLarge.lg'} key={sibling.id} mr={1} mt={1} mb={2}>
+                <Link
+                  href={`/detail/${CATEGORIES.stories}/${sibling.id}?lang=${lang}`}
+                  borderBottom={'1px solid'}
+                  borderColor={'blackAlpha.100'}
+                >
+                  {sibling?.attributes?.title}
+                  {hasItemAfter && ','}
+                </Link>
+              </Text>
+            )
+          })}
+        </Box>
       )}
       {themes && (
         <Box marginBottom={'md'}>

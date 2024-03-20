@@ -91,8 +91,7 @@ export class StoryResolver {
 
     if (story?.attributes?.locale === locale || !locale) {
       if (parentId && story?.id && locale && story?.attributes) {
-        const siblings = await this.storyService.getStorySublings(parentId, story?.id, locale)
-        const returnStorey = { ...story, attributes: { ...story?.attributes, siblings } }
+        const siblings = await this.storyService.getStorySiblings(parentId, story?.id, locale)
         return {
           data: { ...story, attributes: { ...story?.attributes, siblings } },
         }
@@ -106,7 +105,7 @@ export class StoryResolver {
     const localizdedParentId = localizedStory?.attributes?.story?.data?.id
 
     if (localizdedParentId && localizedStory?.id && locale && localizedStory?.attributes) {
-      const localizedSibling = await this.storyService.getStorySublings(
+      const localizedSibling = await this.storyService.getStorySiblings(
         localizdedParentId,
         localizedStory?.id,
         locale

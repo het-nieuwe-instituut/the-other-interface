@@ -7,5 +7,8 @@
   "locations": "Locations",
   "time": "Time period",
   "share": "Share",
-  "moreOnTheme": "More on theme"
+  "moreOnTheme": "More on theme",
+  "subStories": "Sub-stories",
+  "siblingsStories": "Siblings-stories",
+  "parentStory": "Parent-story"
 }

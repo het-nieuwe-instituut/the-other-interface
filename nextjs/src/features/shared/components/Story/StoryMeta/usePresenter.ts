@@ -62,8 +62,6 @@ export const usePresenter = () => {
 
   const story = data?.storyMetaByLocale?.data?.attributes
 
-  console.log(story)
-
   const linkedPeopleRecords =
     story?.triplyRecords?.data
       .filter((record): record is { attributes: TriplyRecord } => Boolean(record.attributes))
@@ -88,5 +86,9 @@ export const usePresenter = () => {
     locations: story?.locations?.data?.map(location => location.attributes?.city).join(', '),
     timeframe: formatTimeframe(story?.timeframe),
     links: story?.storyLinks?.buttons?.map(button => button) || [],
+    siblingsRelation: story?.siblings,
+    parentRelation: story?.story,
+    childrenRelation: story?.stories,
+    lang,
   }
 }
