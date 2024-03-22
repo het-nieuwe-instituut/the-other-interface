@@ -59,7 +59,6 @@ export const usePresenter = () => {
   const id = params?.id as string
 
   const { data, isLoading } = useStoryMetaById(id)
-
   const story = data?.storyMetaByLocale?.data?.attributes
 
   const linkedPeopleRecords =

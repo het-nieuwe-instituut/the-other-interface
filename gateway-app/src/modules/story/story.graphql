@@ -248,6 +248,16 @@ fragment NestedStoryFragment on StoryEntity {
         slug
         description
         locale
+        author {
+            data {
+                id
+                attributes {
+                    firstName
+                    lastName
+                    insertion
+                }
+            }
+        }
         story {
             data {
                 id
@@ -311,6 +321,16 @@ fragment LocalizedStoryFragment on StoryEntity {
         slug
         description
         locale
+        author {
+            data {
+                id
+                attributes {
+                    firstName
+                    lastName
+                    insertion
+                }
+            }
+        }
         story {
             data {
                 id
@@ -413,6 +433,11 @@ fragment StoryFragment on StoryEntity {
         author {
             data {
                 id
+                attributes {
+                    firstName
+                    lastName
+                    insertion
+                }
             }
         }
         description
@@ -454,18 +479,42 @@ fragment StoryFragment on StoryEntity {
                 id
                 attributes {
                     title
-                    slug
-                    locale
+                    components {
+                        __typename
+                        ... on ComponentModulesImage {
+                            ...ComponentModulesImageFragment
+                        }
+                    }
+                    author {
+                        data {
+                            attributes {
+                                firstName
+                                lastName
+                                insertion
+                            }
+                        }
+                    }
                 }
             }
         }
-        stories { 
+        stories {
             data {
                 id
                 attributes {
                     title
-                    slug
-                    locale
+                    components {
+                        __typename
+                        ... on ComponentModulesImage {
+                            ...ComponentModulesImageFragment
+                        }
+                    }
+                    author {
+                        data {
+                            attributes {
+                                firstName
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -484,7 +533,11 @@ fragment StoryMetaFragment on StoryEntity {
         locale
         author {
             data {
-                id
+                attributes {
+                    firstName
+                    lastName
+                    insertion
+                }
             }
         }
         timeframe {
@@ -526,18 +579,44 @@ fragment StoryMetaFragment on StoryEntity {
                 id
                 attributes {
                     title
-                    slug
-                    locale
+                    components {
+                        __typename
+                        ... on ComponentModulesImage {
+                            ...ComponentModulesImageFragment
+                        }
+                    }
+                    author {
+                        data {
+                            attributes {
+                                firstName
+                                lastName
+                                insertion
+                            }
+                        }
+                    }
                 }
             }
         }
-        stories { 
+        stories {
             data {
                 id
                 attributes {
                     title
-                    slug
-                    locale
+                    components {
+                        __typename
+                        ... on ComponentModulesImage {
+                            ...ComponentModulesImageFragment
+                        }
+                    }
+                    author {
+                        data {
+                            attributes {
+                                firstName
+                                lastName
+                                insertion
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -557,7 +636,11 @@ fragment LocalizedStoryMetaFragment on StoryEntity {
         locale
         author {
             data {
-                id
+                attributes {
+                    firstName
+                    lastName
+                    insertion
+                }
             }
         }
         timeframe {
@@ -586,18 +669,42 @@ fragment LocalizedStoryMetaFragment on StoryEntity {
                 id
                 attributes {
                     title
-                    slug
-                    locale
+                    components {
+                        __typename
+                        ... on ComponentModulesImage {
+                            ...ComponentModulesImageFragment
+                        }
+                    }
+                    author {
+                        data {
+                            attributes {
+                                firstName
+                                lastName
+                                insertion
+                            }
+                        }
+                    }
                 }
             }
         }
-        stories { 
+        stories {
             data {
                 id
                 attributes {
                     title
-                    slug
-                    locale
+                    components {
+                        __typename
+                        ... on ComponentModulesImage {
+                            ...ComponentModulesImageFragment
+                        }
+                    }
+                    author {
+                        data {
+                            attributes {
+                                firstName
+                            }
+                        }
+                    }
                 }
             }
         }
