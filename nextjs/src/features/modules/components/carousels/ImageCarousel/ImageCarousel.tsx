@@ -8,7 +8,7 @@ import React from 'react'
 import { ArrowNextContainer, ArrowPrevContainer } from './ImageCorouselStyled'
 import usePresenter from './usePresenter'
 import { modulesSpacingMapper } from '@/features/modules/modulesSpacing'
-import { StoryImageInfo } from '@/features/shared/components/Record/RecordStoriesCarousel/storiesRelatedToRecordDataMapper'
+import { StoryImageInfo } from '@/features/shared/mappers/storiesToCarouselDataMapper'
 
 interface Props {
   images: StoryImageInfo[]

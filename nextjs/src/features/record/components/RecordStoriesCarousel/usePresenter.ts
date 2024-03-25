@@ -5,7 +5,7 @@ import {
   CATEGORIES_TO_ENTITY_MAPPER,
   Category,
 } from '@/features/shared/utils/categories'
-import { mapStoriesToRelatedCarouselItems } from './storiesRelatedToRecordDataMapper'
+import { storiesToCarouselDataMapper } from '../../../shared/mappers/storiesToCarouselDataMapper'
 import useTranslation from 'next-translate/useTranslation'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { StoryEntity } from 'src/generated/graphql'
@@ -22,7 +22,7 @@ export const usePresenter = () => {
   const { data: recordRelatedStories, isLoading } = useStoriesRelationForRecord(type, id)
   const { t: tRecord } = useTranslation('record')
 
-  const stories = mapStoriesToRelatedCarouselItems(
+  const stories = storiesToCarouselDataMapper(
     recordRelatedStories?.zoomLevel3StoriesRelationsForRecord?.stories as StoryEntity[]
   )
 
