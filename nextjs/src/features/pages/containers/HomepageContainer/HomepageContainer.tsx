@@ -14,11 +14,16 @@ export const HomepageContainer: React.FC<Props> = ({ homepage, themes }) => {
   const editorialData = homepage?.homepage?.data?.attributes
   const storyTitle = themes?.themes.data?.[0]?.attributes?.name
   const stories = themes?.themes.data?.[0]?.attributes?.stories?.data || []
+  const pagination = themes?.themes.meta?.pagination
 
   return (
     <Box>
       <GalaxyInterface>
-        <MainGalaxy stories={stories as StoryEntity[]} storyTitle={storyTitle} />
+        <MainGalaxy
+          stories={stories as StoryEntity[]}
+          storyTitle={storyTitle}
+          pagination={pagination}
+        />
       </GalaxyInterface>
 
       {editorialData && (
