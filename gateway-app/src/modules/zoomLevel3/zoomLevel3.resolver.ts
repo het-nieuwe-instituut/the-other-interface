@@ -21,6 +21,10 @@ import {
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { ZoomLevel3Service } from './zoomLevel3.service'
 import {
+  ArchiveRelationsType,
+  ObjectRelationsType,
+  PeopleRelationsType,
+  PublicationRelationsType,
   ZoomLevel3Args,
   ZoomLevel3RelationsType,
   ZoomLevel3StoriesRelatedToRecordType,
@@ -44,6 +48,37 @@ export class ZoomLevel3Resolver {
   public relations(@Args() args: ZoomLevel3Args) {
     return this.zoomLevel3Service.getRelations(args.id, args.type, args?.lang)
   }
+
+  // In triply how it works: people_recordRelations -> select the type (e.g. objects)
+  // and it will show all people records for that type id. E.g give id 1001 for object and it will
+  //  show all people for that object, same for all other recordRelations
+  //  (people, object, archive, publications)
+
+  // I'm on an object
+  // I need to get all the related archives, people, publications, objects
+  // to each of the triply queries pass the type object, and the id of the object I'm on
+  // people_recordRelations objects_recordRelations publication_recordRelations archives_recordRelations
+  // for people_recordRelations - give id 1001 for object and it will show all people for that object
+  @Query(() => [ObjectRelationsType], { nullable: true })
+  public objectRecordRelations(@Args() args: ZoomLevel3Args) {
+    return this.objectsService.getRelationsData(args.id, args.type)
+  }
+
+  @Query(() => [PeopleRelationsType], { nullable: true })
+  public peopleRecordRelations(@Args() args: ZoomLevel3Args) {
+    return this.peopleService.getRelationsData(args.id, args.type)
+  }
+
+  @Query(() => [PublicationRelationsType], { nullable: true })
+  public publicationRecordRelations(@Args() args: ZoomLevel3Args) {
+    return this.publicationsService.getRelationsData(args.id, args.type)
+  }
+
+  @Query(() => [ArchiveRelationsType], { nullable: true })
+  public archivesRecordRelations(@Args() args: ZoomLevel3Args) {
+    return this.archivesService.getRelationsData(args.id, args.type)
+  }
+  // new code above this
 
   @Query(() => [ArchivesRecordZoomLevel3Type], { nullable: true })
   public async archivesRecordZoomLevel3(@Args('id') archiveId: string) {

@@ -8,6 +8,7 @@ export const RecordBottomContent = () => {
     <Box pt={16} px={6}>
       <RecordStoriesCarousel />
       <RecordTable />
+      {/* only show the record table if it isn't a story  */}
     </Box>
   )
 }

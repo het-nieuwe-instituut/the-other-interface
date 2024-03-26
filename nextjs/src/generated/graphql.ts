@@ -16,6 +16,12 @@ export type Scalars = {
   Date: any;
 };
 
+export type ArchiveRelationsType = {
+  __typename?: 'ArchiveRelationsType';
+  period?: Maybe<Scalars['String']>;
+  titleR?: Maybe<Scalars['String']>;
+};
+
 export type ArchiveZoomLevel3DetailType = {
   __typename?: 'ArchiveZoomLevel3DetailType';
   description?: Maybe<Scalars['String']>;
@@ -766,6 +772,12 @@ export type ObjectRecordZoomLevel3Type = {
   titleType?: Maybe<Scalars['String']>;
 };
 
+export type ObjectRelationsType = {
+  __typename?: 'ObjectRelationsType';
+  id?: Maybe<Scalars['String']>;
+  titleR?: Maybe<Scalars['String']>;
+};
+
 export type ObjectTechniqueType = {
   __typename?: 'ObjectTechniqueType';
   id: Scalars['String'];
@@ -847,6 +859,12 @@ export type PeopleRecordZoomLevel3Type = {
   type?: Maybe<Scalars['String']>;
 };
 
+export type PeopleRelationsType = {
+  __typename?: 'PeopleRelationsType';
+  occupation?: Maybe<Scalars['String']>;
+  relationName?: Maybe<Scalars['String']>;
+};
+
 export type PeopleZoomLevel3DetailType = {
   __typename?: 'PeopleZoomLevel3DetailType';
   associations?: Maybe<Array<PeopleAssociationType>>;
@@ -914,6 +932,13 @@ export type PublicationRecordZoomLevel3Type = {
   series?: Maybe<Scalars['String']>;
   subType?: Maybe<Scalars['String']>;
   yearOfPublication?: Maybe<Scalars['String']>;
+};
+
+export type PublicationRelationsType = {
+  __typename?: 'PublicationRelationsType';
+  idRelation?: Maybe<Scalars['String']>;
+  titleR?: Maybe<Scalars['String']>;
+  yearPub?: Maybe<Scalars['String']>;
 };
 
 export type PublicationZoomLevel3DetailType = {
@@ -1072,6 +1097,7 @@ export type Query = {
   __typename?: 'Query';
   archiveOther: ArchivesFondsZoomLevel3DetailType;
   archivesDetailZoomLevel3: ArchiveZoomLevel3DetailType;
+  archivesRecordRelations?: Maybe<Array<ArchiveRelationsType>>;
   archivesRecordZoomLevel3?: Maybe<Array<ArchivesRecordZoomLevel3Type>>;
   author: AuthorEntityResponse;
   authors: AuthorEntityResponseCollection;
@@ -1083,12 +1109,15 @@ export type Query = {
   menupage: MenupageEntityResponse;
   menupages: MenupageEntityResponseCollection;
   objectDetailZoomLevel3: ObjectsZoomLevel3DetailType;
+  objectRecordRelations?: Maybe<Array<ObjectRelationsType>>;
   objectsRecordZoomLevel3?: Maybe<Array<ObjectRecordZoomLevel3Type>>;
+  peopleRecordRelations?: Maybe<Array<PeopleRelationsType>>;
   peopleRecordZoomLevel3?: Maybe<Array<PeopleRecordZoomLevel3Type>>;
   publicationArticle: PublicationsArticleZoomLevel3DetailType;
   publicationAudioVisual: PublicationsAudioVisualZoomLevel3DetailType;
   publicationBook: PublicationsBookZoomLevel3DetailType;
   publicationDetailZoomLevel3: PublicationZoomLevel3DetailType;
+  publicationRecordRelations?: Maybe<Array<PublicationRelationsType>>;
   publicationSerial: PublicationsSerialZoomLevel3DetailType;
   publicationsRecordZoomLevel3?: Maybe<Array<PublicationRecordZoomLevel3Type>>;
   relations?: Maybe<Array<ZoomLevel3RelationsType>>;
@@ -1123,6 +1152,13 @@ export type Query = {
   zoomLevel5PublicationsAudiovisual?: Maybe<PublicationsAudioVisualZoomLevel3DetailType>;
   zoomLevel5PublicationsBook?: Maybe<PublicationsBookZoomLevel3DetailType>;
   zoomLevel5PublicationsSerial?: Maybe<PublicationsSerialZoomLevel3DetailType>;
+};
+
+
+export type QueryArchivesRecordRelationsArgs = {
+  id: Scalars['String'];
+  lang: Scalars['String'];
+  type: EntityNames;
 };
 
 
@@ -1195,13 +1231,34 @@ export type QueryMenupagesArgs = {
 };
 
 
+export type QueryObjectRecordRelationsArgs = {
+  id: Scalars['String'];
+  lang: Scalars['String'];
+  type: EntityNames;
+};
+
+
 export type QueryObjectsRecordZoomLevel3Args = {
   id: Scalars['String'];
 };
 
 
+export type QueryPeopleRecordRelationsArgs = {
+  id: Scalars['String'];
+  lang: Scalars['String'];
+  type: EntityNames;
+};
+
+
 export type QueryPeopleRecordZoomLevel3Args = {
   id: Scalars['String'];
+};
+
+
+export type QueryPublicationRecordRelationsArgs = {
+  id: Scalars['String'];
+  lang: Scalars['String'];
+  type: EntityNames;
 };
 
 
@@ -2103,6 +2160,42 @@ export type ZoomLevel3PublicationRecordQueryVariables = Exact<{
 
 
 export type ZoomLevel3PublicationRecordQuery = { __typename?: 'Query', publicationsRecordZoomLevel3?: Array<{ __typename?: 'PublicationRecordZoomLevel3Type', objectNumber?: string | null, subType?: string | null, authors?: string | null, authorRole?: string | null, publisher?: string | null, yearOfPublication?: string | null, placeOfPublication?: string | null, isbn?: string | null, annotation?: string | null, codeOfArchive?: string | null, edition?: string | null, illustration?: string | null, pages?: string | null, language?: string | null, series?: string | null, number?: string | null, category?: string | null, relatedKeyword?: string | null, geoKeyword?: string | null, availability?: string | null, permanentLink?: string | null, externalSource?: string | null }> | null };
+
+export type ArchiveRecordRelationsQueryVariables = Exact<{
+  id: Scalars['String'];
+  type: EntityNames;
+  lang: Scalars['String'];
+}>;
+
+
+export type ArchiveRecordRelationsQuery = { __typename?: 'Query', archivesRecordRelations?: Array<{ __typename?: 'ArchiveRelationsType', titleR?: string | null, period?: string | null }> | null };
+
+export type ObjectRecordRelationsQueryVariables = Exact<{
+  id: Scalars['String'];
+  type: EntityNames;
+  lang: Scalars['String'];
+}>;
+
+
+export type ObjectRecordRelationsQuery = { __typename?: 'Query', objectRecordRelations?: Array<{ __typename?: 'ObjectRelationsType', id?: string | null }> | null };
+
+export type PeopleRecordRelationsQueryVariables = Exact<{
+  id: Scalars['String'];
+  type: EntityNames;
+  lang: Scalars['String'];
+}>;
+
+
+export type PeopleRecordRelationsQuery = { __typename?: 'Query', peopleRecordRelations?: Array<{ __typename?: 'PeopleRelationsType', relationName?: string | null, occupation?: string | null }> | null };
+
+export type PublicationRecordRelationsQueryVariables = Exact<{
+  id: Scalars['String'];
+  type: EntityNames;
+  lang: Scalars['String'];
+}>;
+
+
+export type PublicationRecordRelationsQuery = { __typename?: 'Query', publicationRecordRelations?: Array<{ __typename?: 'PublicationRelationsType', idRelation?: string | null, titleR?: string | null, yearPub?: string | null }> | null };
 
 export type ArchivesRelationsQueryVariables = Exact<{
   id: Scalars['String'];
@@ -3238,6 +3331,38 @@ export const ZoomLevel3PublicationRecordDocument = gql`
   }
 }
     `;
+export const ArchiveRecordRelationsDocument = gql`
+    query ArchiveRecordRelations($id: String!, $type: EntityNames!, $lang: String!) {
+  archivesRecordRelations(type: $type, id: $id, lang: $lang) {
+    titleR
+    period
+  }
+}
+    `;
+export const ObjectRecordRelationsDocument = gql`
+    query ObjectRecordRelations($id: String!, $type: EntityNames!, $lang: String!) {
+  objectRecordRelations(type: $type, id: $id, lang: $lang) {
+    id
+  }
+}
+    `;
+export const PeopleRecordRelationsDocument = gql`
+    query PeopleRecordRelations($id: String!, $type: EntityNames!, $lang: String!) {
+  peopleRecordRelations(type: $type, id: $id, lang: $lang) {
+    relationName
+    occupation
+  }
+}
+    `;
+export const PublicationRecordRelationsDocument = gql`
+    query PublicationRecordRelations($id: String!, $type: EntityNames!, $lang: String!) {
+  publicationRecordRelations(type: $type, id: $id, lang: $lang) {
+    idRelation
+    titleR
+    yearPub
+  }
+}
+    `;
 export const ArchivesRelationsDocument = gql`
     query ArchivesRelations($id: String!, $lang: String!) {
   relations(type: Archives, id: $id, lang: $lang) {
@@ -3429,6 +3554,18 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     ZoomLevel3PublicationRecord(variables: ZoomLevel3PublicationRecordQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ZoomLevel3PublicationRecordQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ZoomLevel3PublicationRecordQuery>(ZoomLevel3PublicationRecordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ZoomLevel3PublicationRecord', 'query');
+    },
+    ArchiveRecordRelations(variables: ArchiveRecordRelationsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ArchiveRecordRelationsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ArchiveRecordRelationsQuery>(ArchiveRecordRelationsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ArchiveRecordRelations', 'query');
+    },
+    ObjectRecordRelations(variables: ObjectRecordRelationsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ObjectRecordRelationsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ObjectRecordRelationsQuery>(ObjectRecordRelationsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ObjectRecordRelations', 'query');
+    },
+    PeopleRecordRelations(variables: PeopleRecordRelationsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<PeopleRecordRelationsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<PeopleRecordRelationsQuery>(PeopleRecordRelationsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'PeopleRecordRelations', 'query');
+    },
+    PublicationRecordRelations(variables: PublicationRecordRelationsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<PublicationRecordRelationsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<PublicationRecordRelationsQuery>(PublicationRecordRelationsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'PublicationRecordRelations', 'query');
     },
     ArchivesRelations(variables: ArchivesRelationsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ArchivesRelationsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ArchivesRelationsQuery>(ArchivesRelationsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ArchivesRelations', 'query');

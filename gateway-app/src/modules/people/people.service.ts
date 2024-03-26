@@ -65,6 +65,17 @@ const peopleDetailZoomLevel3DataKeys: KeysToVerify<PeopleDetailZoomLevel3Data> =
   permanentLink: true,
 }
 
+// new
+export interface PeopleRelationsType {
+  relationName: string
+  occupation: string
+}
+
+const PeopleRelationsKeys: KeysToVerify<PeopleRelationsType> = {
+  relationName: true,
+  occupation: true,
+}
+
 export interface PeopleRecordZoomLevel3Data {
   type?: string
   profession?: string
@@ -103,6 +114,8 @@ export class PeopleService {
 
   private readonly ZoomLevel3Endpoint = 'people-recordPage/run?'
 
+  private readonly ZoomLevel3RelationsEndpoint = 'people-recordRelations/run?'
+
   private readonly ZoomLevel3RecordEndpoint = 'people-recordPage-editorial/18/run?'
 
   public constructor(private triplyService: TriplyService) {}
@@ -121,6 +134,18 @@ export class PeopleService {
       id,
       thumbnail: getHttpThumbnailOrNull(result.data[0]?.thumbnail)?.split(';'),
     }
+  }
+
+  // new for relations query
+  public async getRelationsData(id: string, type: EntityNames) {
+    const result = await this.triplyService.queryTriplyData<PeopleRelationsType>( // this return type
+      this.ZoomLevel3RelationsEndpoint, // new endpoint
+      PeopleRelationsKeys,
+      { page: 1, pageSize: 5 }, // no pagination for now
+      { id, type } // type and id in searchParams?
+    )
+
+    return result.data
   }
 
   public async getZoomLevel3RecordData(id: string) {

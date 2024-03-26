@@ -1,0 +1,5 @@
+query ObjectRecordRelations($id: String!, $type: EntityNames!, $lang: String!) {
+    objectRecordRelations(type: $type, id: $id, lang: $lang) {
+        id
+    }
+}

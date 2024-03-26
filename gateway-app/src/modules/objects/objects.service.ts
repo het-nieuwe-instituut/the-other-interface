@@ -18,6 +18,17 @@ const objectsDetailZoomLevel3DataKeys: KeysToVerify<ObjectsDetailZoomLevel3Data>
   description: true,
 }
 
+// new
+export interface ObjectsRelationsType {
+  id: string
+  titleR: string
+}
+
+const objectsRelationsKeys: KeysToVerify<ObjectsRelationsType> = {
+  id: true,
+  titleR: true,
+}
+
 export interface ObjectRecordZoomLevel3Data {
   objectNumber?: string
   titleType?: string
@@ -59,6 +70,8 @@ export class ObjectsService {
 
   private readonly ZoomLevel3Endpoint = 'objects-recordPage/run?'
 
+  private readonly ZoomLevel3RelationsEndpoint = 'object-recordRelations/run?'
+
   private readonly ZoomLevel3RecordEndpoint = 'objects-recordPage-editorial/run?'
 
   public constructor(private triplyService: TriplyService) {}
@@ -77,6 +90,18 @@ export class ObjectsService {
       id,
       thumbnail: getHttpThumbnailOrNull(result.data[0]?.thumbnail)?.split(';'),
     }
+  }
+
+  // new for relations query
+  public async getRelationsData(id: string, type: EntityNames) {
+    const result = await this.triplyService.queryTriplyData<ObjectsRelationsType>( // this return type
+      this.ZoomLevel3RelationsEndpoint, // new endpoint
+      objectsRelationsKeys,
+      { page: 1, pageSize: 5 }, // no pagination for now
+      { id, type } // type and id in searchParams?
+    )
+
+    return result.data
   }
 
   public async getZoomLevel3RecordData(id: string) {

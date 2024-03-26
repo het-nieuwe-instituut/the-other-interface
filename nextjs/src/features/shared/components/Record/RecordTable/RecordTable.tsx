@@ -4,7 +4,7 @@ import { usePresenter } from './usePresenter'
 
 export const RecordTable: React.FC = () => {
   const { data } = usePresenter()
-  console.log(data)
+  console.log('data', data)
   const testData = {
     name: 'test title',
     description: 'test description',

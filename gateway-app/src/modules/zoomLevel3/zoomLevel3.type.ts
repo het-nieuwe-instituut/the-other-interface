@@ -1,9 +1,9 @@
 import {
   ArgsType,
   Field,
-  IntersectionType,
+  // IntersectionType,
   ObjectType,
-  PickType,
+  // PickType,
   registerEnumType,
 } from '@nestjs/graphql'
 import { IsOptional, IsString } from 'class-validator'
@@ -25,6 +25,45 @@ export class ZoomLevel3RelationsType {
 
   @Field(() => [String], { nullable: true })
   public randomRelations?: string[]
+}
+
+@ObjectType()
+export class ObjectRelationsType {
+  @Field(() => String, { nullable: true })
+  public id: string
+
+  @Field(() => String, { nullable: true })
+  public titleR: string
+}
+
+@ObjectType()
+export class PeopleRelationsType {
+  @Field(() => String, { nullable: true })
+  public relationName: string
+
+  @Field(() => String, { nullable: true })
+  public occupation: string
+}
+
+@ObjectType()
+export class PublicationRelationsType {
+  @Field(() => String, { nullable: true })
+  public idRelation: string
+
+  @Field(() => String, { nullable: true })
+  public titleR: string
+
+  @Field(() => String, { nullable: true })
+  public yearPub: string
+}
+
+@ObjectType()
+export class ArchiveRelationsType {
+  @Field(() => String, { nullable: true })
+  public titleR: string
+
+  @Field(() => String, { nullable: true })
+  public period: string
 }
 
 @ObjectType()

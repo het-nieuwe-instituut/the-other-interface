@@ -17,6 +17,17 @@ const archivesDetailZoomLevel3DataKeys: KeysToVerify<ArchivesDetailZoomLevel3Dat
   objectNumber: true,
 }
 
+// new
+export interface ArchiveRelationsType {
+  titleR: string
+  period: string
+}
+
+const archiveRelationsKeys: KeysToVerify<ArchiveRelationsType> = {
+  titleR: true,
+  period: true,
+}
+
 export enum ArchivesZoomLevel3Types {
   fonds = 'fonds',
   other = 'other',
@@ -70,6 +81,8 @@ export class ArchivesService {
 
   private readonly ZoomLevel3Endpoint = 'archives-recordPage/run?'
 
+  private readonly ZoomLevel3RelationsEndpoint = 'archives-recordRelations/run?'
+
   private readonly ZoomLevel3RecordEndpoint = 'archives-recordPage-editorial/11/run?'
 
   public constructor(private triplyService: TriplyService) {}
@@ -88,6 +101,17 @@ export class ArchivesService {
       id,
       thumbnail: getHttpThumbnailOrNull(result.data[0]?.thumbnail)?.split(';'),
     }
+  }
+
+  // new for relations query
+  public async getRelationsData(id: string, type: EntityNames) {
+    const result = await this.triplyService.queryTriplyData<ArchiveRelationsType>( // this return type may need to change
+      this.ZoomLevel3RelationsEndpoint, // new endpoint
+      archiveRelationsKeys,
+      { page: 1, pageSize: 5 }, // no pagination for now
+      { id, type } // type and id in searchParams
+    )
+    return result.data
   }
 
   public async getZoomLevel3RecordData(id: string) {

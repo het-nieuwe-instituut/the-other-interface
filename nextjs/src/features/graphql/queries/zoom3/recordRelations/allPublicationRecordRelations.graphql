@@ -1,0 +1,7 @@
+query PublicationRecordRelations($id: String!, $type: EntityNames!, $lang: String!) {
+    publicationRecordRelations(type: $type, id: $id, lang: $lang) {
+        idRelation
+        titleR
+        yearPub
+    }
+}

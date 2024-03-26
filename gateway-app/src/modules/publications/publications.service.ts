@@ -20,6 +20,19 @@ const publicationsDetailZoomLevel3DataKeys: KeysToVerify<PublicationsZoomLevel3D
   objectNumber: true,
 }
 
+// new
+export interface PublicationRelationsType {
+  idRelation: string
+  titleR: string
+  yearPub: string
+}
+
+const publicationRelationsKeys: KeysToVerify<PublicationRelationsType> = {
+  idRelation: true,
+  titleR: true,
+  yearPub: true,
+}
+
 interface PublicationsBooksDetailZoomLevel3Data {
   thumbnail: true
   id: true
@@ -366,6 +379,8 @@ export class PublicationsService {
 
   private readonly ZoomLevel3Endpoint = 'publications-recordPage/run?'
 
+  private readonly ZoomLevel3RelationsEndpoint = 'publications-recordRelations/run?'
+
   private readonly ZoomLevel3RecordEndpoint = 'publications-recordPage-Editorial/2/run?'
 
   // private readonly publicationDescriptionLevelEndpoint = 'Zoom-3-books-type/run'
@@ -390,6 +405,18 @@ export class PublicationsService {
       id,
       thumbnail: getHttpThumbnailOrNull(result.data[0]?.thumbnail)?.split(';'),
     }
+  }
+
+  // new for relations query
+  public async getRelationsData(id: string, type: EntityNames) {
+    const result = await this.triplyService.queryTriplyData<PublicationRelationsType>( // this return type
+      this.ZoomLevel3RelationsEndpoint, // new endpoint
+      publicationRelationsKeys,
+      { page: 1, pageSize: 5 }, // no pagination for now
+      { id, type } // type and id in searchParams?
+    )
+
+    return result.data
   }
 
   public async getZoomLevel3RecordData(id: string) {

@@ -1,0 +1,6 @@
+query ArchiveRecordRelations($id: String!, $type: EntityNames!, $lang: String!) {
+    archivesRecordRelations(type: $type, id: $id, lang: $lang) {
+        titleR
+        period
+    }
+}
