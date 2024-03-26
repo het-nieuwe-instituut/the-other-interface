@@ -45,7 +45,7 @@ export async function getPaginatedRelationsTask({
       type: CATEGORIES_TO_ENTITY_MAPPER[type],
       lang: locale,
     })
-    return [people, objects, publications, archives]
+    return [people, objects, publications, archives] // return | but would be better with &
   } catch (e) {
     console.log(e, 'Error accured in zoom level 3 task')
   }
