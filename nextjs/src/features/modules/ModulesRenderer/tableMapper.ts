@@ -7,7 +7,7 @@ import {
 
 export interface TableModuleType {
   name: Maybe<string> | undefined
-  description: Maybe<string> | undefined
+  description?: Maybe<string> | undefined
   tableBody: Maybe<ComponentCoreTableBody[]> | undefined
   tableHead: Maybe<ComponentCoreTableHeadItem[]> | undefined
 }

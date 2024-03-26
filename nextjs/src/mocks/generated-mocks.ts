@@ -3,6 +3,7 @@ import { ArchiveRelationsType, ArchiveZoomLevel3DetailType, ArchivesFondsCreator
 export const anArchiveRelationsType = (overrides?: Partial<ArchiveRelationsType>, _relationshipsToOmit: Array<string> = []): ArchiveRelationsType => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ArchiveRelationsType']);
     return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'voluptas',
         period: overrides && overrides.hasOwnProperty('period') ? overrides.period! : 'asperiores',
         titleR: overrides && overrides.hasOwnProperty('titleR') ? overrides.titleR! : 'fugit',
     };
@@ -859,6 +860,7 @@ export const anObjectRelationsType = (overrides?: Partial<ObjectRelationsType>, 
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ObjectRelationsType']);
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'quaerat',
+        period: overrides && overrides.hasOwnProperty('period') ? overrides.period! : 'consequatur',
         titleR: overrides && overrides.hasOwnProperty('titleR') ? overrides.titleR! : 'perferendis',
     };
 };
@@ -960,7 +962,9 @@ export const aPeopleRecordZoomLevel3Type = (overrides?: Partial<PeopleRecordZoom
 export const aPeopleRelationsType = (overrides?: Partial<PeopleRelationsType>, _relationshipsToOmit: Array<string> = []): PeopleRelationsType => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'PeopleRelationsType']);
     return {
+        idRelation: overrides && overrides.hasOwnProperty('idRelation') ? overrides.idRelation! : 'ut',
         occupation: overrides && overrides.hasOwnProperty('occupation') ? overrides.occupation! : 'qui',
+        period: overrides && overrides.hasOwnProperty('period') ? overrides.period! : 'dolorem',
         relationName: overrides && overrides.hasOwnProperty('relationName') ? overrides.relationName! : 'quibusdam',
     };
 };

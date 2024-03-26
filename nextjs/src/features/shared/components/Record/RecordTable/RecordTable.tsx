@@ -1,21 +1,39 @@
 import { Text } from '@chakra-ui/react'
 import { TableModule } from '@/features/modules/components/TableModule/TableModule'
 import { usePresenter } from './usePresenter'
+import { ComponentCoreTableBody, ComponentCoreTableHeadItem, Maybe } from 'src/generated/graphql'
+import { mapRecordTableData } from './mapRecordTableData'
+
+interface PaginatedTableProps {
+  data:
+    | {
+        name: string
+        tableBody: Maybe<ComponentCoreTableBody[]> | undefined
+        tableHead: Maybe<ComponentCoreTableHeadItem[]> | undefined
+      }
+    | undefined
+}
 
 export const RecordTable: React.FC = () => {
   const { data } = usePresenter()
-  console.log('data', data)
-  const testData = {
-    name: 'test title',
-    description: 'test description',
-    tableBody: [],
-    tableHead: [],
-  }
+
+  const tableData = mapRecordTableData(data)
 
   return (
     <>
+      {tableData?.map((item, index) => (
+        <PaginatedTable data={item} key={index} />
+      ))}
+    </>
+  )
+}
+
+const PaginatedTable: React.FC<PaginatedTableProps> = props => {
+  const { data } = props
+  return (
+    <>
       <TableModule
-        component={testData}
+        component={data}
         LoadMore={
           <Text
             as={'button'}

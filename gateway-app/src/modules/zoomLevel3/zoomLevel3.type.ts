@@ -34,15 +34,24 @@ export class ObjectRelationsType {
 
   @Field(() => String, { nullable: true })
   public titleR: string
+
+  @Field(() => String, { nullable: true })
+  public period: string
 }
 
 @ObjectType()
 export class PeopleRelationsType {
   @Field(() => String, { nullable: true })
+  public idRelation: string
+
+  @Field(() => String, { nullable: true })
   public relationName: string
 
   @Field(() => String, { nullable: true })
   public occupation: string
+
+  @Field(() => String, { nullable: true })
+  public period: string
 }
 
 @ObjectType()
@@ -59,6 +68,9 @@ export class PublicationRelationsType {
 
 @ObjectType()
 export class ArchiveRelationsType {
+  @Field(() => String, { nullable: true })
+  public id: string
+
   @Field(() => String, { nullable: true })
   public titleR: string
 

@@ -1,6 +1,8 @@
 query PeopleRecordRelations($id: String!, $type: EntityNames!, $lang: String!) {
     peopleRecordRelations(type: $type, id: $id, lang: $lang) {
+        idRelation
         relationName
         occupation
+        period
     }
 }

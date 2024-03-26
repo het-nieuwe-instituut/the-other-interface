@@ -18,6 +18,7 @@ export type Scalars = {
 
 export type ArchiveRelationsType = {
   __typename?: 'ArchiveRelationsType';
+  id?: Maybe<Scalars['String']>;
   period?: Maybe<Scalars['String']>;
   titleR?: Maybe<Scalars['String']>;
 };
@@ -775,6 +776,7 @@ export type ObjectRecordZoomLevel3Type = {
 export type ObjectRelationsType = {
   __typename?: 'ObjectRelationsType';
   id?: Maybe<Scalars['String']>;
+  period?: Maybe<Scalars['String']>;
   titleR?: Maybe<Scalars['String']>;
 };
 
@@ -861,7 +863,9 @@ export type PeopleRecordZoomLevel3Type = {
 
 export type PeopleRelationsType = {
   __typename?: 'PeopleRelationsType';
+  idRelation?: Maybe<Scalars['String']>;
   occupation?: Maybe<Scalars['String']>;
+  period?: Maybe<Scalars['String']>;
   relationName?: Maybe<Scalars['String']>;
 };
 
@@ -2168,7 +2172,7 @@ export type ArchiveRecordRelationsQueryVariables = Exact<{
 }>;
 
 
-export type ArchiveRecordRelationsQuery = { __typename?: 'Query', archivesRecordRelations?: Array<{ __typename?: 'ArchiveRelationsType', titleR?: string | null, period?: string | null }> | null };
+export type ArchiveRecordRelationsQuery = { __typename?: 'Query', archivesRecordRelations?: Array<{ __typename?: 'ArchiveRelationsType', id?: string | null, titleR?: string | null, period?: string | null }> | null };
 
 export type ObjectRecordRelationsQueryVariables = Exact<{
   id: Scalars['String'];
@@ -2177,7 +2181,7 @@ export type ObjectRecordRelationsQueryVariables = Exact<{
 }>;
 
 
-export type ObjectRecordRelationsQuery = { __typename?: 'Query', objectRecordRelations?: Array<{ __typename?: 'ObjectRelationsType', id?: string | null }> | null };
+export type ObjectRecordRelationsQuery = { __typename?: 'Query', objectRecordRelations?: Array<{ __typename?: 'ObjectRelationsType', id?: string | null, titleR?: string | null, period?: string | null }> | null };
 
 export type PeopleRecordRelationsQueryVariables = Exact<{
   id: Scalars['String'];
@@ -2186,7 +2190,7 @@ export type PeopleRecordRelationsQueryVariables = Exact<{
 }>;
 
 
-export type PeopleRecordRelationsQuery = { __typename?: 'Query', peopleRecordRelations?: Array<{ __typename?: 'PeopleRelationsType', relationName?: string | null, occupation?: string | null }> | null };
+export type PeopleRecordRelationsQuery = { __typename?: 'Query', peopleRecordRelations?: Array<{ __typename?: 'PeopleRelationsType', idRelation?: string | null, relationName?: string | null, occupation?: string | null, period?: string | null }> | null };
 
 export type PublicationRecordRelationsQueryVariables = Exact<{
   id: Scalars['String'];
@@ -3334,6 +3338,7 @@ export const ZoomLevel3PublicationRecordDocument = gql`
 export const ArchiveRecordRelationsDocument = gql`
     query ArchiveRecordRelations($id: String!, $type: EntityNames!, $lang: String!) {
   archivesRecordRelations(type: $type, id: $id, lang: $lang) {
+    id
     titleR
     period
   }
@@ -3343,14 +3348,18 @@ export const ObjectRecordRelationsDocument = gql`
     query ObjectRecordRelations($id: String!, $type: EntityNames!, $lang: String!) {
   objectRecordRelations(type: $type, id: $id, lang: $lang) {
     id
+    titleR
+    period
   }
 }
     `;
 export const PeopleRecordRelationsDocument = gql`
     query PeopleRecordRelations($id: String!, $type: EntityNames!, $lang: String!) {
   peopleRecordRelations(type: $type, id: $id, lang: $lang) {
+    idRelation
     relationName
     occupation
+    period
   }
 }
     `;

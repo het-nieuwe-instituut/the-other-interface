@@ -67,15 +67,18 @@ const peopleDetailZoomLevel3DataKeys: KeysToVerify<PeopleDetailZoomLevel3Data> =
 
 // new
 export interface PeopleRelationsType {
+  idRelation: string
   relationName: string
   occupation: string
+  period: string
 }
 
 const PeopleRelationsKeys: KeysToVerify<PeopleRelationsType> = {
+  idRelation: true,
   relationName: true,
   occupation: true,
+  period: true,
 }
-
 export interface PeopleRecordZoomLevel3Data {
   type?: string
   profession?: string

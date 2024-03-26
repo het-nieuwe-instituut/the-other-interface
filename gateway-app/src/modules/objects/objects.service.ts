@@ -22,11 +22,13 @@ const objectsDetailZoomLevel3DataKeys: KeysToVerify<ObjectsDetailZoomLevel3Data>
 export interface ObjectsRelationsType {
   id: string
   titleR: string
+  period: string
 }
 
 const objectsRelationsKeys: KeysToVerify<ObjectsRelationsType> = {
   id: true,
   titleR: true,
+  period: true,
 }
 
 export interface ObjectRecordZoomLevel3Data {

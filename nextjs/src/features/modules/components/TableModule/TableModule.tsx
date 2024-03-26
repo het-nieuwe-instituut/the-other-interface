@@ -15,7 +15,7 @@ import { modulesSpacingMapper } from '../../modulesSpacing'
 import { TableModuleType } from '../../ModulesRenderer/tableMapper'
 
 interface Props {
-  component: TableModuleType
+  component: TableModuleType | undefined
   LoadMore?: React.ReactNode
 }
 
@@ -63,7 +63,7 @@ export const TableModule: React.FC<Props> = props => {
 }
 
 export const TableModuleMobile: React.FC<Props> = props => {
-  const body = props.component.tableBody
+  const body = props?.component?.tableBody
 
   return (
     <TableContainer>
@@ -100,9 +100,11 @@ export const TableModuleMobile: React.FC<Props> = props => {
 }
 
 export const TableModuleDesktop: React.FC<Props> = props => {
-  const head = props.component.tableHead
-  const body = props.component.tableBody
+  const head = props?.component?.tableHead
+  const body = props?.component?.tableBody
   const LoadMore = props.LoadMore
+
+  console.log(body)
 
   return (
     <TableContainer>

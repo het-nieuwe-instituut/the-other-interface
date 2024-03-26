@@ -24,7 +24,6 @@ export const getZoom3PaginatedQueries = (type: Category, api: Sdk) => {
         paginatedRelationsQuery: api.PublicationRecordRelations,
         accesor: (data?: PublicationRecordRelationsQuery) => data?.publicationRecordRelations,
       }
-
     case CATEGORIES.archives:
       return {
         paginatedRelationsQuery: api.ObjectRecordRelations,

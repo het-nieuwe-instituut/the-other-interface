@@ -19,11 +19,13 @@ const archivesDetailZoomLevel3DataKeys: KeysToVerify<ArchivesDetailZoomLevel3Dat
 
 // new
 export interface ArchiveRelationsType {
+  id?: string
   titleR: string
   period: string
 }
 
 const archiveRelationsKeys: KeysToVerify<ArchiveRelationsType> = {
+  id: true,
   titleR: true,
   period: true,
 }
