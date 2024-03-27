@@ -9,16 +9,16 @@ import { PaginationPagesTypes } from '../../components/Record/RecordTable/usePre
 export function usePaginationedRecordRelations(
   type: Category,
   id: string,
-  pages: PaginationPagesTypes
+  pagination: PaginationPagesTypes
 ) {
   const api = initApiClientService()
   const searchParams = useSearchParams()
   const lang = searchParams?.get('lang') || 'nl'
-  console.log('usePaginationedRecordRelations', pages)
-  const queryFn = () => getPaginatedRelationsTask({ type, id, locale: lang, api, pages })
+
+  const queryFn = () => getPaginatedRelationsTask({ type, id, locale: lang, api, pagination })
 
   return useQuery({
-    queryKey: ['paginated-record-relations', id, type, lang],
+    queryKey: ['paginated-record-relations', id, type, lang, pagination],
     queryFn,
     refetchOnWindowFocus: false,
     keepPreviousData: true,
