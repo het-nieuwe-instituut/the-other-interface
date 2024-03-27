@@ -9,12 +9,12 @@ export interface PaginationPagesTypes {
   publications: number
 }
 
-export const usePresenter = (pages: PaginationPagesTypes) => {
+export const usePresenter = (pagination: PaginationPagesTypes) => {
   const params = useParams()
   const id = params?.id as string
   const type = params?.category as Category
-  console.log('usePresenter', pages)
-  const { data } = usePaginationedRecordRelations(type, id, pages)
+
+  const { data } = usePaginationedRecordRelations(type, id, pagination)
 
   return {
     data,

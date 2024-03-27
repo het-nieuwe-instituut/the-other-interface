@@ -14,15 +14,14 @@ export async function getPaginatedRelationsTask({
   id,
   locale,
   api,
-  pages,
+  pagination,
 }: {
   type: Category
   id: string
   locale: string
   api: Sdk
-  pages: PaginationPagesTypes
+  pagination: PaginationPagesTypes
 }) {
-  console.log('getPaginatedRelationsTask', pages)
   try {
     const configByTypeObjects = getZoom3PaginatedQueries(CATEGORIES.objects, api)
     const configByTypePeople = getZoom3PaginatedQueries(CATEGORIES.people, api)
@@ -33,28 +32,28 @@ export async function getPaginatedRelationsTask({
       id,
       type: CATEGORIES_TO_ENTITY_MAPPER[type],
       lang: locale,
-      page: pages.people,
+      page: pagination.people,
       pageSize: 5,
     })
     const objects = await configByTypeObjects?.paginatedRelationsQuery?.({
       id,
       type: CATEGORIES_TO_ENTITY_MAPPER[type],
       lang: locale,
-      page: pages.objects,
+      page: pagination.objects,
       pageSize: 5,
     })
     const publications = await configByTypePublications?.paginatedRelationsQuery?.({
       id,
       type: CATEGORIES_TO_ENTITY_MAPPER[type],
       lang: locale,
-      page: pages.publications,
+      page: pagination.publications,
       pageSize: 5,
     })
     const archives = await configByTypeArchives?.paginatedRelationsQuery?.({
       id,
       type: CATEGORIES_TO_ENTITY_MAPPER[type],
       lang: locale,
-      page: pages.archives,
+      page: pagination.archives,
       pageSize: 5,
     })
     return [people, objects, publications, archives] // return | but would be better with &
