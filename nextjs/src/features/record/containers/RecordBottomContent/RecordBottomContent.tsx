@@ -1,7 +1,7 @@
 'use client'
 import { Box } from '@chakra-ui/react'
-import { RecordStoriesCarousel } from '../RecordStoriesCarousel/RecordStoriesCarousel'
-import { RecordTable } from '../RecordTable/RecordTable'
+import { RecordStoriesCarousel } from '../../components/RecordStoriesCarousel/RecordStoriesCarousel'
+import { RecordTable } from '@/features/shared/components/Record/RecordTable/RecordTable'
 
 export const RecordBottomContent = () => {
   return (

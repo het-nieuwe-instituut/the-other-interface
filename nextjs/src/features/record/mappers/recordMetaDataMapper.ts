@@ -10,7 +10,7 @@ import {
   PeopleRecordZoomLevel3Type,
   PublicationRecordZoomLevel3Type,
 } from 'src/generated/graphql'
-import { categoryFieldsMapping } from './recordMetaFieldOrderConfig'
+import { categoryFieldsMapping } from '../configs/recordMetaFieldOrderConfig'
 import { CLOUD_CATEGORIES } from '@/features/shared/utils/categories'
 
 export function mapArchivesDataToSections(

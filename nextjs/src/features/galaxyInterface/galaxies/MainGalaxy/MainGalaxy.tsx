@@ -3,8 +3,10 @@ import { Box } from '@chakra-ui/react'
 
 import { Cloud, CategoryCloud, Stories } from './fragments'
 import { ThemeTitle } from '../../components/ThemeTitle/ThemeTitle'
-import { StoryEntity } from 'src/generated/graphql'
+import { Pagination, StoryEntity } from 'src/generated/graphql'
 import { GalaxyFooter } from '../../components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
+import { GalaxyPagination } from '../../components/GalaxyWrapper/GalaxyPagination/GalaxyPagination'
+import { usePresenter } from './usePresenter'
 
 const categoryClouds: CategoryCloud[] = [
   {
@@ -36,9 +38,12 @@ const categoryClouds: CategoryCloud[] = [
 interface Props {
   storyTitle?: string
   stories: StoryEntity[]
+  pagination?: Pagination
 }
 
-export const MainGalaxy: React.FC<Props> = ({ storyTitle, stories }) => {
+export const MainGalaxy: React.FC<Props> = ({ storyTitle, stories, pagination }) => {
+  const { increasePageNumber, decreasePageNumber } = usePresenter(pagination?.pageCount || 0)
+
   return (
     <Box position="relative" width="100vw" height="100vh">
       {categoryClouds.map(cloud => (
@@ -47,7 +52,18 @@ export const MainGalaxy: React.FC<Props> = ({ storyTitle, stories }) => {
       <Stories stories={stories} />
       <ThemeTitle title={storyTitle} />
 
-      <GalaxyFooter />
+      <GalaxyFooter
+        galaxyPagination={
+          <GalaxyPagination
+            currentPageNumber={pagination?.page || 0}
+            pageAmount={pagination?.pageCount || 0}
+            isResultAmountLoading={false}
+            handleLeftClick={decreasePageNumber}
+            handleRightClick={increasePageNumber}
+            isResultEmpty={stories.length === 0}
+          />
+        }
+      />
     </Box>
   )
 }

@@ -1,6 +1,6 @@
 'use client'
 import { Box } from '@chakra-ui/react'
-import { ResponsiveImage } from '../../ResponsiveImage/ResponsiveImage'
+import { ResponsiveImage } from '../../shared/components/ResponsiveImage/ResponsiveImage'
 
 interface Props {
   url: string
