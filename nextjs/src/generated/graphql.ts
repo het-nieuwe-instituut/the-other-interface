@@ -1162,6 +1162,8 @@ export type Query = {
 export type QueryArchivesRecordRelationsArgs = {
   id: Scalars['String'];
   lang: Scalars['String'];
+  page: Scalars['Int'];
+  pageSize?: InputMaybe<Scalars['Int']>;
   type: EntityNames;
 };
 
@@ -1238,6 +1240,8 @@ export type QueryMenupagesArgs = {
 export type QueryObjectRecordRelationsArgs = {
   id: Scalars['String'];
   lang: Scalars['String'];
+  page: Scalars['Int'];
+  pageSize?: InputMaybe<Scalars['Int']>;
   type: EntityNames;
 };
 
@@ -1250,6 +1254,8 @@ export type QueryObjectsRecordZoomLevel3Args = {
 export type QueryPeopleRecordRelationsArgs = {
   id: Scalars['String'];
   lang: Scalars['String'];
+  page: Scalars['Int'];
+  pageSize?: InputMaybe<Scalars['Int']>;
   type: EntityNames;
 };
 
@@ -1262,6 +1268,8 @@ export type QueryPeopleRecordZoomLevel3Args = {
 export type QueryPublicationRecordRelationsArgs = {
   id: Scalars['String'];
   lang: Scalars['String'];
+  page: Scalars['Int'];
+  pageSize?: InputMaybe<Scalars['Int']>;
   type: EntityNames;
 };
 
@@ -2169,6 +2177,8 @@ export type ArchiveRecordRelationsQueryVariables = Exact<{
   id: Scalars['String'];
   type: EntityNames;
   lang: Scalars['String'];
+  page: Scalars['Int'];
+  pageSize: Scalars['Int'];
 }>;
 
 
@@ -2178,6 +2188,8 @@ export type ObjectRecordRelationsQueryVariables = Exact<{
   id: Scalars['String'];
   type: EntityNames;
   lang: Scalars['String'];
+  page: Scalars['Int'];
+  pageSize: Scalars['Int'];
 }>;
 
 
@@ -2187,6 +2199,8 @@ export type PeopleRecordRelationsQueryVariables = Exact<{
   id: Scalars['String'];
   type: EntityNames;
   lang: Scalars['String'];
+  page: Scalars['Int'];
+  pageSize: Scalars['Int'];
 }>;
 
 
@@ -2196,6 +2210,8 @@ export type PublicationRecordRelationsQueryVariables = Exact<{
   id: Scalars['String'];
   type: EntityNames;
   lang: Scalars['String'];
+  page: Scalars['Int'];
+  pageSize: Scalars['Int'];
 }>;
 
 
@@ -3336,8 +3352,14 @@ export const ZoomLevel3PublicationRecordDocument = gql`
 }
     `;
 export const ArchiveRecordRelationsDocument = gql`
-    query ArchiveRecordRelations($id: String!, $type: EntityNames!, $lang: String!) {
-  archivesRecordRelations(type: $type, id: $id, lang: $lang) {
+    query ArchiveRecordRelations($id: String!, $type: EntityNames!, $lang: String!, $page: Int!, $pageSize: Int!) {
+  archivesRecordRelations(
+    type: $type
+    id: $id
+    lang: $lang
+    page: $page
+    pageSize: $pageSize
+  ) {
     id
     titleR
     period
@@ -3345,8 +3367,14 @@ export const ArchiveRecordRelationsDocument = gql`
 }
     `;
 export const ObjectRecordRelationsDocument = gql`
-    query ObjectRecordRelations($id: String!, $type: EntityNames!, $lang: String!) {
-  objectRecordRelations(type: $type, id: $id, lang: $lang) {
+    query ObjectRecordRelations($id: String!, $type: EntityNames!, $lang: String!, $page: Int!, $pageSize: Int!) {
+  objectRecordRelations(
+    type: $type
+    id: $id
+    lang: $lang
+    page: $page
+    pageSize: $pageSize
+  ) {
     id
     titleR
     period
@@ -3354,8 +3382,14 @@ export const ObjectRecordRelationsDocument = gql`
 }
     `;
 export const PeopleRecordRelationsDocument = gql`
-    query PeopleRecordRelations($id: String!, $type: EntityNames!, $lang: String!) {
-  peopleRecordRelations(type: $type, id: $id, lang: $lang) {
+    query PeopleRecordRelations($id: String!, $type: EntityNames!, $lang: String!, $page: Int!, $pageSize: Int!) {
+  peopleRecordRelations(
+    type: $type
+    id: $id
+    lang: $lang
+    page: $page
+    pageSize: $pageSize
+  ) {
     idRelation
     relationName
     occupation
@@ -3364,8 +3398,14 @@ export const PeopleRecordRelationsDocument = gql`
 }
     `;
 export const PublicationRecordRelationsDocument = gql`
-    query PublicationRecordRelations($id: String!, $type: EntityNames!, $lang: String!) {
-  publicationRecordRelations(type: $type, id: $id, lang: $lang) {
+    query PublicationRecordRelations($id: String!, $type: EntityNames!, $lang: String!, $page: Int!, $pageSize: Int!) {
+  publicationRecordRelations(
+    type: $type
+    id: $id
+    lang: $lang
+    page: $page
+    pageSize: $pageSize
+  ) {
     idRelation
     titleR
     yearPub

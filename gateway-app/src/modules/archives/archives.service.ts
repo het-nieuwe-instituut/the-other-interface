@@ -3,6 +3,7 @@ import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { getHttpThumbnailOrNull } from '../util/helpers'
 import { TriplyUtils } from '../triply/triply.utils'
+import { PaginationArgs } from '../util/paginationArgs.type'
 
 export interface ArchivesDetailZoomLevel3DataType {
   id?: string
@@ -106,12 +107,12 @@ export class ArchivesService {
   }
 
   // new for relations query
-  public async getRelationsData(id: string, type: EntityNames) {
-    const result = await this.triplyService.queryTriplyData<ArchiveRelationsType>( // this return type may need to change
-      this.ZoomLevel3RelationsEndpoint, // new endpoint
+  public async getRelationsData(id: string, type: EntityNames, paginationArgs: PaginationArgs) {
+    const result = await this.triplyService.queryTriplyData<ArchiveRelationsType>(
+      this.ZoomLevel3RelationsEndpoint,
       archiveRelationsKeys,
-      { page: 1, pageSize: 5 }, // no pagination for now
-      { id, type } // type and id in searchParams
+      { page: paginationArgs.page ?? 1, pageSize: paginationArgs.pageSize ?? 5 },
+      { id, type }
     )
     return result.data
   }

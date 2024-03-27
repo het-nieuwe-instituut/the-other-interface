@@ -1,5 +1,5 @@
-query PeopleRecordRelations($id: String!, $type: EntityNames!, $lang: String!) {
-    peopleRecordRelations(type: $type, id: $id, lang: $lang) {
+query PeopleRecordRelations($id: String!, $type: EntityNames!, $lang: String!, $page: Int!, $pageSize: Int!) {
+    peopleRecordRelations(type: $type, id: $id, lang: $lang, page: $page, pageSize: $pageSize) {
         idRelation
         relationName
         occupation

@@ -104,8 +104,6 @@ export const TableModuleDesktop: React.FC<Props> = props => {
   const body = props?.component?.tableBody
   const LoadMore = props.LoadMore
 
-  console.log(body)
-
   return (
     <TableContainer>
       <Table>

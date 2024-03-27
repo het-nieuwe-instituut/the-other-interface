@@ -1,3 +1,4 @@
+import { CATEGORIES } from '@/features/shared/utils/categories'
 import {
   ArchiveRecordRelationsQuery,
   ObjectRecordRelationsQuery,
@@ -19,6 +20,7 @@ export const mapRecordTableData = (
   return (data || []).map((item, index) => {
     if (item?.publicationRecordRelations && item?.publicationRecordRelations?.length > 0) {
       return {
+        type: CATEGORIES.publications,
         name: 'Related Publications',
         tableBody: item?.publicationRecordRelations.map(record => {
           return {
@@ -36,6 +38,7 @@ export const mapRecordTableData = (
     }
     if (item?.peopleRecordRelations && item?.peopleRecordRelations?.length > 0) {
       return {
+        type: CATEGORIES.people,
         name: 'Related People',
         tableBody: item?.peopleRecordRelations.map(record => {
           return {
@@ -53,6 +56,7 @@ export const mapRecordTableData = (
     }
     if (item?.objectRecordRelations && item?.objectRecordRelations?.length > 0) {
       return {
+        type: CATEGORIES.objects,
         name: 'Related Objects',
         tableBody: item?.objectRecordRelations.map(record => {
           return {
@@ -70,6 +74,7 @@ export const mapRecordTableData = (
     }
     if (item?.archivesRecordRelations && item?.archivesRecordRelations?.length > 0) {
       return {
+        type: CATEGORIES.archives,
         name: 'Related Archives',
         tableBody: item?.archivesRecordRelations.map(record => {
           return {

@@ -1,5 +1,5 @@
-query ArchiveRecordRelations($id: String!, $type: EntityNames!, $lang: String!) {
-    archivesRecordRelations(type: $type, id: $id, lang: $lang) {
+query ArchiveRecordRelations($id: String!, $type: EntityNames!, $lang: String!, $page: Int!, $pageSize: Int!) {
+    archivesRecordRelations(type: $type, id: $id, lang: $lang, page: $page, pageSize: $pageSize) {
         id
         titleR
         period

@@ -1,5 +1,5 @@
-query ObjectRecordRelations($id: String!, $type: EntityNames!, $lang: String!) {
-    objectRecordRelations(type: $type, id: $id, lang: $lang) {
+query ObjectRecordRelations($id: String!, $type: EntityNames!, $lang: String!, $page: Int!, $pageSize: Int!) {
+    objectRecordRelations(type: $type, id: $id, lang: $lang, page: $page, pageSize: $pageSize) {
         id
         titleR
         period

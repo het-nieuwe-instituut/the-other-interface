@@ -4,6 +4,7 @@ import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { ZoomLevel3Service } from '../zoomLevel3/zoomLevel3.service'
 import { TriplyUtils } from '../triply/triply.utils'
 import { getHttpThumbnailOrNull } from '../util/helpers'
+import { PaginationArgs } from '../util/paginationArgs.type'
 
 interface PublicationsZoomLevel3Data {
   thumbnail?: string
@@ -408,12 +409,12 @@ export class PublicationsService {
   }
 
   // new for relations query
-  public async getRelationsData(id: string, type: EntityNames) {
-    const result = await this.triplyService.queryTriplyData<PublicationRelationsType>( // this return type
-      this.ZoomLevel3RelationsEndpoint, // new endpoint
+  public async getRelationsData(id: string, type: EntityNames, paginationArgs: PaginationArgs) {
+    const result = await this.triplyService.queryTriplyData<PublicationRelationsType>(
+      this.ZoomLevel3RelationsEndpoint,
       publicationRelationsKeys,
-      { page: 1, pageSize: 5 }, // no pagination for now
-      { id, type } // type and id in searchParams?
+      { page: paginationArgs.page ?? 1, pageSize: paginationArgs.pageSize ?? 5 },
+      { id, type }
     )
 
     return result.data

@@ -32,6 +32,7 @@ import {
 import { ArchivesService } from '../archives/archives.service'
 import { ObjectsService } from '../objects/objects.service'
 import { PeopleService } from '../people/people.service'
+import { PaginationArgs } from '../util/paginationArgs.type'
 // import { ObjectsService } from '../objects/objects.service'
 
 @Resolver(ZoomLevel3RelationsType)
@@ -60,23 +61,35 @@ export class ZoomLevel3Resolver {
   // people_recordRelations objects_recordRelations publication_recordRelations archives_recordRelations
   // for people_recordRelations - give id 1001 for object and it will show all people for that object
   @Query(() => [ObjectRelationsType], { nullable: true })
-  public objectRecordRelations(@Args() args: ZoomLevel3Args) {
-    return this.objectsService.getRelationsData(args.id, args.type)
+  public objectRecordRelations(
+    @Args() args: ZoomLevel3Args,
+    @Args() paginationArgs: PaginationArgs
+  ) {
+    return this.objectsService.getRelationsData(args.id, args.type, paginationArgs)
   }
 
   @Query(() => [PeopleRelationsType], { nullable: true })
-  public peopleRecordRelations(@Args() args: ZoomLevel3Args) {
-    return this.peopleService.getRelationsData(args.id, args.type)
+  public peopleRecordRelations(
+    @Args() args: ZoomLevel3Args,
+    @Args() paginationArgs: PaginationArgs
+  ) {
+    return this.peopleService.getRelationsData(args.id, args.type, paginationArgs)
   }
 
   @Query(() => [PublicationRelationsType], { nullable: true })
-  public publicationRecordRelations(@Args() args: ZoomLevel3Args) {
-    return this.publicationsService.getRelationsData(args.id, args.type)
+  public publicationRecordRelations(
+    @Args() args: ZoomLevel3Args,
+    @Args() paginationArgs: PaginationArgs
+  ) {
+    return this.publicationsService.getRelationsData(args.id, args.type, paginationArgs)
   }
 
   @Query(() => [ArchiveRelationsType], { nullable: true })
-  public archivesRecordRelations(@Args() args: ZoomLevel3Args) {
-    return this.archivesService.getRelationsData(args.id, args.type)
+  public archivesRecordRelations(
+    @Args() args: ZoomLevel3Args,
+    @Args() paginationArgs: PaginationArgs
+  ) {
+    return this.archivesService.getRelationsData(args.id, args.type, paginationArgs)
   }
   // new code above this
 
