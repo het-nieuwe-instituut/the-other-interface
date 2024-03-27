@@ -31,8 +31,8 @@ export const Story: React.FC<Props> = ({ story }) => {
       <Flex
         position="absolute"
         style={{ ...position }}
-        width="80%"
-        height="80%"
+        w={'154px'}
+        h={'198px'}
         flexDirection="column"
         alignItems="center"
         justifyContent="center"

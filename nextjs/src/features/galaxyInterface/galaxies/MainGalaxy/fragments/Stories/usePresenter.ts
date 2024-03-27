@@ -6,61 +6,15 @@ import {
   StoryEntity,
 } from 'src/generated/graphql'
 import { imageBasePath } from '@/features/modules/modulesConstants'
-import { PositioningTemplate } from '@/features/shared/types/position'
 import { PositionedStory } from '../types'
-
-const positioningTemplate: PositioningTemplate[] = [
-  {
-    position: {
-      top: 0,
-      left: 0,
-    },
-    grid: {
-      gridRow: '1 / 2',
-      gridColumn: '1 / 2',
-    },
-  },
-  {
-    position: {
-      right: 0,
-      bottom: 0,
-    },
-    grid: {
-      gridRow: '1 / 2',
-      gridColumn: '2 / 3',
-    },
-  },
-  {
-    position: {
-      left: 0,
-      bottom: 0,
-    },
-    grid: {
-      gridRow: '2 / 3',
-      gridColumn: '3 / 4',
-    },
-  },
-  {
-    position: {
-      top: 0,
-      left: 0,
-    },
-    grid: {
-      gridRow: '1 / 2',
-      gridColumn: '4 / 5',
-    },
-  },
-  {
-    position: {
-      top: 0,
-      right: 0,
-    },
-    grid: {
-      gridRow: '2 / 3',
-      gridColumn: '4 / 5',
-    },
-  },
-]
+import {
+  storiesPositionTemplate1,
+  storiesPositionTemplate2,
+  storiesPositionTemplate3,
+  storiesPositionTemplate4,
+  storiesPositionTemplate5,
+  storiesPositionTemplate6,
+} from './positioningTemplates'
 
 const findImageUrl = (components: HomepageComponentsDynamicZone[]): string => {
   const imageComponent = components?.find(
@@ -89,7 +43,7 @@ export const usePresenter = (stories: StoryEntity[]) => {
 
     const positionedStories: PositionedStory[] = []
 
-    positioningTemplate.forEach((template, index) => {
+    storiesPositionTemplate6.forEach((template, index) => {
       const record = stories[index]
 
       if (record) {
