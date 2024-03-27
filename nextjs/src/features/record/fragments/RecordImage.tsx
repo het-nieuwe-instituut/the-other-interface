@@ -15,6 +15,7 @@ export const RecordImage: React.FC<Props> = props => {
         maxHeight="523px"
         css={{ height: '100%' }}
         fit="cover"
+        disableRightClick
       />
     </Box>
   )

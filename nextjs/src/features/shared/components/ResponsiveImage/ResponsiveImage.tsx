@@ -11,6 +11,7 @@ type ResponsiveImageProps = {
   css?: BoxProps['css']
   fit?: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down'
   onClick?: () => void
+  disableRightClick?: boolean
 }
 
 export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
@@ -20,9 +21,13 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   size = '200px',
   css,
   fit = 'contain',
+  disableRightClick = false,
   onClick,
 }) => {
-  const { fallbackImage, isSuccessfullyLoaded } = usePresenter(src)
+  const { fallbackImage, isSuccessfullyLoaded, handleRightClick } = usePresenter(
+    src,
+    disableRightClick
+  )
 
   return (
     <Box position="relative" maxHeight={maxHeight} width={'100%'} css={css}>
@@ -61,6 +66,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
             objectFit: fit,
           }}
           fill={true}
+          onContextMenu={handleRightClick}
         />
       )}
     </Box>

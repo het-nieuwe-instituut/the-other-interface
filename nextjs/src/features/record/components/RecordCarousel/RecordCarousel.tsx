@@ -39,6 +39,7 @@ const RecordCarousel = (props: { imageUrls: string[] }) => {
           css={{ height: '100%' }}
           maxHeight="524px"
           fit="contain"
+          disableRightClick
         />
       </Box>
 
@@ -57,6 +58,7 @@ const RecordCarousel = (props: { imageUrls: string[] }) => {
                 maxHeight="104px"
                 fit="contain"
                 onClick={() => handleThumbnailClick(url)}
+                disableRightClick
               />
             </Box>
           ))}
