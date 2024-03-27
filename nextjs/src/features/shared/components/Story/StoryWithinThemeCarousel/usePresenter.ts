@@ -3,7 +3,7 @@ import { CATEGORIES } from '@/features/shared/utils/categories'
 import useTranslation from 'next-translate/useTranslation'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useStoriesRelatedByTheme } from '@/features/shared/hooks/queries/useStoriesRelationWithinTheme'
-import { mapStoriesToRelatedCarouselItems } from '../../Record/RecordStoriesCarousel/storiesRelatedToRecordDataMapper'
+import { storiesToCarouselDataMapper } from '../../../mappers/storiesToCarouselDataMapper'
 import { StoryEntity } from 'src/generated/graphql'
 
 export const usePresenter = () => {
@@ -16,7 +16,7 @@ export const usePresenter = () => {
   const { data, isLoading } = useStoriesRelatedByTheme(id)
   const { t: tStories } = useTranslation('stories')
 
-  const stories = mapStoriesToRelatedCarouselItems(
+  const stories = storiesToCarouselDataMapper(
     data?.storiesRealtedWithinTheme?.stories as StoryEntity[]
   )
 

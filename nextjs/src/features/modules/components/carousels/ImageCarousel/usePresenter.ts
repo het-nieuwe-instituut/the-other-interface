@@ -1,4 +1,4 @@
-import { StoryImageInfo } from '@/features/shared/components/Record/RecordStoriesCarousel/storiesRelatedToRecordDataMapper'
+import { StoryImageInfo } from '@/features/shared/mappers/storiesToCarouselDataMapper'
 import { useKeenSlider } from 'keen-slider/react'
 import React, { createRef, useEffect, useState } from 'react'
 

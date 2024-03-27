@@ -3,7 +3,7 @@ import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/Gala
 import { Box } from '@chakra-ui/react'
 import { StoryByIdQuery, LandingpageBySlugQuery } from 'src/generated/graphql'
 import { DetailGalaxy } from '@/features/galaxyInterface/galaxies/DetailGalaxy/DetailGalaxy'
-import { RecordLayer } from '@/features/shared/components/Layers/RecordLayer/RecordLayer'
+import { RecordLayer } from '@/features/record/containers/RecordLayer/RecordLayer'
 import { StoryLayer } from '@/features/shared/components/Layers/StoryLayer/StoryLayer'
 import { isCloudCategory, isStoryCategory } from '@/features/shared/utils/categories'
 import { usePresenter } from './usePresenter'

@@ -10,7 +10,7 @@ import {
   mapObjectDataToSections,
   mapPersonDataToSections,
   mapPublicationDataToSections,
-} from './recordMetaDataMapper'
+} from '../../mappers/recordMetaDataMapper'
 import {
   ArchivesRecordZoomLevel3Type,
   ObjectRecordZoomLevel3Type,

@@ -1,6 +1,6 @@
 import { Box, Flex } from '@chakra-ui/react'
 import { useState } from 'react'
-import { ResponsiveImage } from '../../ResponsiveImage/ResponsiveImage'
+import { ResponsiveImage } from '../../../shared/components/ResponsiveImage/ResponsiveImage'
 import { RecordCarouselButton } from './RecordCarouselButton'
 
 const RecordCarousel = (props: { imageUrls: string[] }) => {
