@@ -9,7 +9,7 @@ export type StoryImageInfo = {
   id?: Maybe<string> | undefined
 }
 
-export const mapStoriesToRelatedCarouselItems = (
+export const storiesToCarouselDataMapper = (
   relatedStories: StoryEntity[] | undefined | null
 ): StoryImageInfo[] | undefined => {
   const mappedStories = relatedStories
