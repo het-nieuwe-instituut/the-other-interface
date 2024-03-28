@@ -34,6 +34,14 @@ const publicationRelationsKeys: KeysToVerify<PublicationRelationsType> = {
   yearPub: true,
 }
 
+export interface PublicationsRelationsCountType {
+  total: string
+}
+
+const publicationsRelationsCountKeys: KeysToVerify<PublicationsRelationsCountType> = {
+  total: true,
+}
+
 interface PublicationsBooksDetailZoomLevel3Data {
   thumbnail: true
   id: true
@@ -382,6 +390,8 @@ export class PublicationsService {
 
   private readonly ZoomLevel3RelationsEndpoint = 'publications-recordRelations/run?'
 
+  private readonly ZoomLevel3RelationsCountEndpoint = 'publications-recordRelations-Count/run?'
+
   private readonly ZoomLevel3RecordEndpoint = 'publications-recordPage-Editorial/2/run?'
 
   // private readonly publicationDescriptionLevelEndpoint = 'Zoom-3-books-type/run'
@@ -414,6 +424,17 @@ export class PublicationsService {
       this.ZoomLevel3RelationsEndpoint,
       publicationRelationsKeys,
       { page: paginationArgs.page ?? 1, pageSize: paginationArgs.pageSize ?? 5 },
+      { id, type }
+    )
+
+    return result.data
+  }
+
+  public async getRelationsDataCount(id: string, type: EntityNames) {
+    const result = await this.triplyService.queryTriplyData<PublicationsRelationsCountType>(
+      this.ZoomLevel3RelationsCountEndpoint, // new endpoint
+      publicationsRelationsCountKeys,
+      { page: 1, pageSize: 1 },
       { id, type }
     )
 

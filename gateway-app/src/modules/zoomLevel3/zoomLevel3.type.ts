@@ -27,6 +27,7 @@ export class ZoomLevel3RelationsType {
   public randomRelations?: string[]
 }
 
+// objects
 @ObjectType()
 export class ObjectRelationsType {
   @Field(() => String, { nullable: true })
@@ -39,6 +40,13 @@ export class ObjectRelationsType {
   public period: string
 }
 
+@ObjectType()
+export class ObjectRelationsCountType {
+  @Field(() => String, { nullable: true })
+  public total: string
+}
+
+// people
 @ObjectType()
 export class PeopleRelationsType {
   @Field(() => String, { nullable: true })
@@ -55,6 +63,13 @@ export class PeopleRelationsType {
 }
 
 @ObjectType()
+export class PeopleRelationsCountType {
+  @Field(() => String, { nullable: true })
+  public total: string
+}
+
+// publications
+@ObjectType()
 export class PublicationRelationsType {
   @Field(() => String, { nullable: true })
   public idRelation: string
@@ -65,7 +80,13 @@ export class PublicationRelationsType {
   @Field(() => String, { nullable: true })
   public yearPub: string
 }
+@ObjectType()
+export class PublicationsRelationsCountType {
+  @Field(() => String, { nullable: true })
+  public total: string
+}
 
+// archives
 @ObjectType()
 export class ArchiveRelationsType {
   @Field(() => String, { nullable: true })
@@ -78,6 +99,11 @@ export class ArchiveRelationsType {
   public period: string
 }
 
+@ObjectType()
+export class ArchivesRelationsCountType {
+  @Field(() => String, { nullable: true })
+  public total: string
+}
 @ObjectType()
 export class RelatedRecordType {
   @Field({ nullable: true })

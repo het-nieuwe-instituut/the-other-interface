@@ -31,6 +31,14 @@ const archiveRelationsKeys: KeysToVerify<ArchiveRelationsType> = {
   period: true,
 }
 
+export interface ArchiveRelationsCountType {
+  total: string
+}
+
+const archiveRelationsCountKeys: KeysToVerify<ArchiveRelationsCountType> = {
+  total: true,
+}
+
 export enum ArchivesZoomLevel3Types {
   fonds = 'fonds',
   other = 'other',
@@ -86,6 +94,8 @@ export class ArchivesService {
 
   private readonly ZoomLevel3RelationsEndpoint = 'archives-recordRelations/run?'
 
+  private readonly ZoomLevel3RelationsCountEndpoint = 'archives-recordRelations-Count/run?'
+
   private readonly ZoomLevel3RecordEndpoint = 'archives-recordPage-editorial/11/run?'
 
   public constructor(private triplyService: TriplyService) {}
@@ -114,6 +124,17 @@ export class ArchivesService {
       { page: paginationArgs.page ?? 1, pageSize: paginationArgs.pageSize ?? 5 },
       { id, type }
     )
+    return result.data
+  }
+
+  public async getRelationsDataCount(id: string, type: EntityNames) {
+    const result = await this.triplyService.queryTriplyData<ArchiveRelationsCountType>(
+      this.ZoomLevel3RelationsCountEndpoint, // new endpoint
+      archiveRelationsCountKeys,
+      { page: 1, pageSize: 1 },
+      { id, type }
+    )
+
     return result.data
   }
 

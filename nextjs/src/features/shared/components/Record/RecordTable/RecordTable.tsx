@@ -1,10 +1,11 @@
-import { Text } from '@chakra-ui/react'
+import { Box, Text } from '@chakra-ui/react'
 import { TableModule } from '@/features/modules/components/TableModule/TableModule'
 import { usePresenter } from './usePresenter'
 import { ComponentCoreTableBody, ComponentCoreTableHeadItem, Maybe } from 'src/generated/graphql'
 import { mapRecordTableData } from './mapRecordTableData'
 import { CATEGORIES, Category } from '@/features/shared/utils/categories'
 import { Dispatch, SetStateAction, useState } from 'react'
+import { theme } from '@/features/shared/styles/theme/theme'
 
 interface PaginatedTableProps {
   data:
@@ -33,7 +34,7 @@ export const RecordTable: React.FC = () => {
   const tableData = mapRecordTableData(data)
 
   return (
-    <>
+    <Box maxW={theme.breakpoints.lg} px={6} pt={0}>
       {tableData?.map((item, index) => (
         <PaginatedTable
           data={item}
@@ -41,7 +42,7 @@ export const RecordTable: React.FC = () => {
           setters={{ setPeople, setObjects, setArchives, setPublications }}
         />
       ))}
-    </>
+    </Box>
   )
 }
 

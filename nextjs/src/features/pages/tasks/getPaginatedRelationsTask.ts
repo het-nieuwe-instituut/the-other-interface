@@ -56,6 +56,33 @@ export async function getPaginatedRelationsTask({
       page: pagination.archives,
       pageSize: 5,
     })
+
+    const peopleCount = await configByTypePeople?.relationsCount?.({
+      id,
+      type: CATEGORIES_TO_ENTITY_MAPPER[type],
+      lang: locale,
+    })
+    const publicationsCount = await configByTypePublications?.relationsCount?.({
+      id,
+      type: CATEGORIES_TO_ENTITY_MAPPER[type],
+      lang: locale,
+    })
+    const objectsCount = await configByTypeObjects?.relationsCount?.({
+      id,
+      type: CATEGORIES_TO_ENTITY_MAPPER[type],
+      lang: locale,
+    })
+    const archivesCount = await configByTypeArchives?.relationsCount?.({
+      id,
+      type: CATEGORIES_TO_ENTITY_MAPPER[type],
+      lang: locale,
+    })
+
+    console.log('peopleCount', peopleCount)
+    console.log('objectsCount', objectsCount)
+    console.log('publicationsCount', publicationsCount)
+    console.log('archivesCount', archivesCount)
+
     return [people, objects, publications, archives] // return | but would be better with &
   } catch (e) {
     console.log(e, 'Error accured in zoom level 3 task')

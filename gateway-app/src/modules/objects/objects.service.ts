@@ -32,6 +32,14 @@ const objectsRelationsKeys: KeysToVerify<ObjectsRelationsType> = {
   period: true,
 }
 
+export interface ObjectsRelationsCountType {
+  total: string
+}
+
+const objectsRelationsCountKeys: KeysToVerify<ObjectsRelationsCountType> = {
+  total: true,
+}
+
 export interface ObjectRecordZoomLevel3Data {
   objectNumber?: string
   titleType?: string
@@ -73,7 +81,9 @@ export class ObjectsService {
 
   private readonly ZoomLevel3Endpoint = 'objects-recordPage/run?'
 
-  private readonly ZoomLevel3RelationsEndpoint = 'object-recordRelations/run?'
+  private readonly ZoomLevel3RelationsEndpoint = 'objects-recordRelations/run?'
+
+  private readonly ZoomLevel3RelationsCountEndpoint = 'objects-recordRelations-Count/run?'
 
   private readonly ZoomLevel3RecordEndpoint = 'objects-recordPage-editorial/run?'
 
@@ -101,6 +111,17 @@ export class ObjectsService {
       this.ZoomLevel3RelationsEndpoint, // new endpoint
       objectsRelationsKeys,
       { page: paginationArgs.page ?? 1, pageSize: paginationArgs.pageSize ?? 5 },
+      { id, type }
+    )
+
+    return result.data
+  }
+
+  public async getRelationsDataCount(id: string, type: EntityNames) {
+    const result = await this.triplyService.queryTriplyData<ObjectsRelationsCountType>(
+      this.ZoomLevel3RelationsCountEndpoint, // new endpoint
+      objectsRelationsCountKeys,
+      { page: 1, pageSize: 1 },
       { id, type }
     )
 

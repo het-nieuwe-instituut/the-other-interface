@@ -110,6 +110,11 @@ export type ArchivesRecordZoomLevel3Type = {
   titleType?: Maybe<Scalars['String']>;
 };
 
+export type ArchivesRelationsCountType = {
+  __typename?: 'ArchivesRelationsCountType';
+  total?: Maybe<Scalars['String']>;
+};
+
 export enum ArchivesZoomLevel3Types {
   Fonds = 'fonds',
   Other = 'other'
@@ -773,6 +778,11 @@ export type ObjectRecordZoomLevel3Type = {
   titleType?: Maybe<Scalars['String']>;
 };
 
+export type ObjectRelationsCountType = {
+  __typename?: 'ObjectRelationsCountType';
+  total?: Maybe<Scalars['String']>;
+};
+
 export type ObjectRelationsType = {
   __typename?: 'ObjectRelationsType';
   id?: Maybe<Scalars['String']>;
@@ -859,6 +869,11 @@ export type PeopleRecordZoomLevel3Type = {
   permanentLink?: Maybe<Scalars['String']>;
   profession?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
+};
+
+export type PeopleRelationsCountType = {
+  __typename?: 'PeopleRelationsCountType';
+  total?: Maybe<Scalars['String']>;
 };
 
 export type PeopleRelationsType = {
@@ -1063,6 +1078,11 @@ export type PublicationsBookZoomLevel3DetailType = {
   yearOfPublication?: Maybe<Scalars['String']>;
 };
 
+export type PublicationsRelationsCountType = {
+  __typename?: 'PublicationsRelationsCountType';
+  total?: Maybe<Scalars['String']>;
+};
+
 export type PublicationsSerialZoomLevel3DetailType = {
   __typename?: 'PublicationsSerialZoomLevel3DetailType';
   availability?: Maybe<Scalars['String']>;
@@ -1102,6 +1122,7 @@ export type Query = {
   archiveOther: ArchivesFondsZoomLevel3DetailType;
   archivesDetailZoomLevel3: ArchiveZoomLevel3DetailType;
   archivesRecordRelations?: Maybe<Array<ArchiveRelationsType>>;
+  archivesRecordRelationsCount?: Maybe<Array<ArchivesRelationsCountType>>;
   archivesRecordZoomLevel3?: Maybe<Array<ArchivesRecordZoomLevel3Type>>;
   author: AuthorEntityResponse;
   authors: AuthorEntityResponseCollection;
@@ -1114,8 +1135,10 @@ export type Query = {
   menupages: MenupageEntityResponseCollection;
   objectDetailZoomLevel3: ObjectsZoomLevel3DetailType;
   objectRecordRelations?: Maybe<Array<ObjectRelationsType>>;
+  objectRecordRelationsCount?: Maybe<Array<ObjectRelationsCountType>>;
   objectsRecordZoomLevel3?: Maybe<Array<ObjectRecordZoomLevel3Type>>;
   peopleRecordRelations?: Maybe<Array<PeopleRelationsType>>;
+  peopleRecordRelationsCount?: Maybe<Array<PeopleRelationsCountType>>;
   peopleRecordZoomLevel3?: Maybe<Array<PeopleRecordZoomLevel3Type>>;
   publicationArticle: PublicationsArticleZoomLevel3DetailType;
   publicationAudioVisual: PublicationsAudioVisualZoomLevel3DetailType;
@@ -1123,6 +1146,7 @@ export type Query = {
   publicationDetailZoomLevel3: PublicationZoomLevel3DetailType;
   publicationRecordRelations?: Maybe<Array<PublicationRelationsType>>;
   publicationSerial: PublicationsSerialZoomLevel3DetailType;
+  publicationsRecordRelationsCount?: Maybe<Array<PublicationsRelationsCountType>>;
   publicationsRecordZoomLevel3?: Maybe<Array<PublicationRecordZoomLevel3Type>>;
   relations?: Maybe<Array<ZoomLevel3RelationsType>>;
   stories: StoryEntityResponseCollection;
@@ -1164,6 +1188,13 @@ export type QueryArchivesRecordRelationsArgs = {
   lang: Scalars['String'];
   page: Scalars['Int'];
   pageSize?: InputMaybe<Scalars['Int']>;
+  type: EntityNames;
+};
+
+
+export type QueryArchivesRecordRelationsCountArgs = {
+  id: Scalars['String'];
+  lang: Scalars['String'];
   type: EntityNames;
 };
 
@@ -1246,6 +1277,13 @@ export type QueryObjectRecordRelationsArgs = {
 };
 
 
+export type QueryObjectRecordRelationsCountArgs = {
+  id: Scalars['String'];
+  lang: Scalars['String'];
+  type: EntityNames;
+};
+
+
 export type QueryObjectsRecordZoomLevel3Args = {
   id: Scalars['String'];
 };
@@ -1260,6 +1298,13 @@ export type QueryPeopleRecordRelationsArgs = {
 };
 
 
+export type QueryPeopleRecordRelationsCountArgs = {
+  id: Scalars['String'];
+  lang: Scalars['String'];
+  type: EntityNames;
+};
+
+
 export type QueryPeopleRecordZoomLevel3Args = {
   id: Scalars['String'];
 };
@@ -1270,6 +1315,13 @@ export type QueryPublicationRecordRelationsArgs = {
   lang: Scalars['String'];
   page: Scalars['Int'];
   pageSize?: InputMaybe<Scalars['Int']>;
+  type: EntityNames;
+};
+
+
+export type QueryPublicationsRecordRelationsCountArgs = {
+  id: Scalars['String'];
+  lang: Scalars['String'];
   type: EntityNames;
 };
 
@@ -2216,6 +2268,42 @@ export type PublicationRecordRelationsQueryVariables = Exact<{
 
 
 export type PublicationRecordRelationsQuery = { __typename?: 'Query', publicationRecordRelations?: Array<{ __typename?: 'PublicationRelationsType', idRelation?: string | null, titleR?: string | null, yearPub?: string | null }> | null };
+
+export type ArchivesRecordRelationsCountQueryVariables = Exact<{
+  id: Scalars['String'];
+  type: EntityNames;
+  lang: Scalars['String'];
+}>;
+
+
+export type ArchivesRecordRelationsCountQuery = { __typename?: 'Query', archivesRecordRelationsCount?: Array<{ __typename?: 'ArchivesRelationsCountType', total?: string | null }> | null };
+
+export type ObjectRecordRelationsCountQueryVariables = Exact<{
+  id: Scalars['String'];
+  type: EntityNames;
+  lang: Scalars['String'];
+}>;
+
+
+export type ObjectRecordRelationsCountQuery = { __typename?: 'Query', objectRecordRelationsCount?: Array<{ __typename?: 'ObjectRelationsCountType', total?: string | null }> | null };
+
+export type PeopleRecordRelationsCountQueryVariables = Exact<{
+  id: Scalars['String'];
+  type: EntityNames;
+  lang: Scalars['String'];
+}>;
+
+
+export type PeopleRecordRelationsCountQuery = { __typename?: 'Query', peopleRecordRelationsCount?: Array<{ __typename?: 'PeopleRelationsCountType', total?: string | null }> | null };
+
+export type PublicationsRecordRelationsCountQueryVariables = Exact<{
+  id: Scalars['String'];
+  type: EntityNames;
+  lang: Scalars['String'];
+}>;
+
+
+export type PublicationsRecordRelationsCountQuery = { __typename?: 'Query', publicationsRecordRelationsCount?: Array<{ __typename?: 'PublicationsRelationsCountType', total?: string | null }> | null };
 
 export type ArchivesRelationsQueryVariables = Exact<{
   id: Scalars['String'];
@@ -3412,6 +3500,34 @@ export const PublicationRecordRelationsDocument = gql`
   }
 }
     `;
+export const ArchivesRecordRelationsCountDocument = gql`
+    query ArchivesRecordRelationsCount($id: String!, $type: EntityNames!, $lang: String!) {
+  archivesRecordRelationsCount(type: $type, id: $id, lang: $lang) {
+    total
+  }
+}
+    `;
+export const ObjectRecordRelationsCountDocument = gql`
+    query ObjectRecordRelationsCount($id: String!, $type: EntityNames!, $lang: String!) {
+  objectRecordRelationsCount(type: $type, id: $id, lang: $lang) {
+    total
+  }
+}
+    `;
+export const PeopleRecordRelationsCountDocument = gql`
+    query PeopleRecordRelationsCount($id: String!, $type: EntityNames!, $lang: String!) {
+  peopleRecordRelationsCount(type: $type, id: $id, lang: $lang) {
+    total
+  }
+}
+    `;
+export const PublicationsRecordRelationsCountDocument = gql`
+    query PublicationsRecordRelationsCount($id: String!, $type: EntityNames!, $lang: String!) {
+  publicationsRecordRelationsCount(type: $type, id: $id, lang: $lang) {
+    total
+  }
+}
+    `;
 export const ArchivesRelationsDocument = gql`
     query ArchivesRelations($id: String!, $lang: String!) {
   relations(type: Archives, id: $id, lang: $lang) {
@@ -3615,6 +3731,18 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     PublicationRecordRelations(variables: PublicationRecordRelationsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<PublicationRecordRelationsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<PublicationRecordRelationsQuery>(PublicationRecordRelationsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'PublicationRecordRelations', 'query');
+    },
+    ArchivesRecordRelationsCount(variables: ArchivesRecordRelationsCountQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ArchivesRecordRelationsCountQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ArchivesRecordRelationsCountQuery>(ArchivesRecordRelationsCountDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ArchivesRecordRelationsCount', 'query');
+    },
+    ObjectRecordRelationsCount(variables: ObjectRecordRelationsCountQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ObjectRecordRelationsCountQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ObjectRecordRelationsCountQuery>(ObjectRecordRelationsCountDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ObjectRecordRelationsCount', 'query');
+    },
+    PeopleRecordRelationsCount(variables: PeopleRecordRelationsCountQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<PeopleRecordRelationsCountQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<PeopleRecordRelationsCountQuery>(PeopleRecordRelationsCountDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'PeopleRecordRelationsCount', 'query');
+    },
+    PublicationsRecordRelationsCount(variables: PublicationsRecordRelationsCountQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<PublicationsRecordRelationsCountQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<PublicationsRecordRelationsCountQuery>(PublicationsRecordRelationsCountDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'PublicationsRecordRelationsCount', 'query');
     },
     ArchivesRelations(variables: ArchivesRelationsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ArchivesRelationsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ArchivesRelationsQuery>(ArchivesRelationsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ArchivesRelations', 'query');

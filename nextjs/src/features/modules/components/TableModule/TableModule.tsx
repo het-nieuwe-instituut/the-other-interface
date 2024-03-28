@@ -136,6 +136,8 @@ export const TableModuleDesktop: React.FC<Props> = props => {
                   fontWeight={index === 0 ? '700' : '400'}
                   lineHeight={index === 0 ? '110%' : '130%'}
                   letterSpacing={index === 0 ? '-0.32px' : '0.21px'}
+                  maxW={'250px'}
+                  whiteSpace={'normal'}
                 >
                   {bodyItem?.value}
                 </Td>

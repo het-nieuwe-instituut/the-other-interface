@@ -22,9 +22,13 @@ import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { ZoomLevel3Service } from './zoomLevel3.service'
 import {
   ArchiveRelationsType,
+  ArchivesRelationsCountType,
+  ObjectRelationsCountType,
   ObjectRelationsType,
+  PeopleRelationsCountType,
   PeopleRelationsType,
   PublicationRelationsType,
+  PublicationsRelationsCountType,
   ZoomLevel3Args,
   ZoomLevel3RelationsType,
   ZoomLevel3StoriesRelatedToRecordType,
@@ -60,6 +64,7 @@ export class ZoomLevel3Resolver {
   // to each of the triply queries pass the type object, and the id of the object I'm on
   // people_recordRelations objects_recordRelations publication_recordRelations archives_recordRelations
   // for people_recordRelations - give id 1001 for object and it will show all people for that object
+  // objects
   @Query(() => [ObjectRelationsType], { nullable: true })
   public objectRecordRelations(
     @Args() args: ZoomLevel3Args,
@@ -68,6 +73,12 @@ export class ZoomLevel3Resolver {
     return this.objectsService.getRelationsData(args.id, args.type, paginationArgs)
   }
 
+  @Query(() => [ObjectRelationsCountType], { nullable: true })
+  public objectRecordRelationsCount(@Args() args: ZoomLevel3Args) {
+    return this.objectsService.getRelationsDataCount(args.id, args.type)
+  }
+
+  // people
   @Query(() => [PeopleRelationsType], { nullable: true })
   public peopleRecordRelations(
     @Args() args: ZoomLevel3Args,
@@ -76,6 +87,12 @@ export class ZoomLevel3Resolver {
     return this.peopleService.getRelationsData(args.id, args.type, paginationArgs)
   }
 
+  @Query(() => [PeopleRelationsCountType], { nullable: true })
+  public peopleRecordRelationsCount(@Args() args: ZoomLevel3Args) {
+    return this.peopleService.getRelationsDataCount(args.id, args.type)
+  }
+
+  // publications
   @Query(() => [PublicationRelationsType], { nullable: true })
   public publicationRecordRelations(
     @Args() args: ZoomLevel3Args,
@@ -84,12 +101,23 @@ export class ZoomLevel3Resolver {
     return this.publicationsService.getRelationsData(args.id, args.type, paginationArgs)
   }
 
+  @Query(() => [PublicationsRelationsCountType], { nullable: true })
+  public publicationsRecordRelationsCount(@Args() args: ZoomLevel3Args) {
+    return this.publicationsService.getRelationsDataCount(args.id, args.type)
+  }
+
+  // archives
   @Query(() => [ArchiveRelationsType], { nullable: true })
   public archivesRecordRelations(
     @Args() args: ZoomLevel3Args,
     @Args() paginationArgs: PaginationArgs
   ) {
     return this.archivesService.getRelationsData(args.id, args.type, paginationArgs)
+  }
+
+  @Query(() => [ArchivesRelationsCountType], { nullable: true })
+  public archivesRecordRelationsCount(@Args() args: ZoomLevel3Args) {
+    return this.archivesService.getRelationsDataCount(args.id, args.type)
   }
   // new code above this
 

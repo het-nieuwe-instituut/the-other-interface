@@ -80,6 +80,14 @@ const PeopleRelationsKeys: KeysToVerify<PeopleRelationsType> = {
   occupation: true,
   period: true,
 }
+
+export interface PeopleRelationsCountType {
+  total: string
+}
+
+const peopleRelationsCountKeys: KeysToVerify<PeopleRelationsCountType> = {
+  total: true,
+}
 export interface PeopleRecordZoomLevel3Data {
   type?: string
   profession?: string
@@ -120,6 +128,8 @@ export class PeopleService {
 
   private readonly ZoomLevel3RelationsEndpoint = 'people-recordRelations/run?'
 
+  private readonly ZoomLevel3RelationsCountEndpoint = 'people-recordRelations-Count/run?'
+
   private readonly ZoomLevel3RecordEndpoint = 'people-recordPage-editorial/18/run?'
 
   public constructor(private triplyService: TriplyService) {}
@@ -146,6 +156,17 @@ export class PeopleService {
       this.ZoomLevel3RelationsEndpoint,
       PeopleRelationsKeys,
       { page: paginationArgs.page ?? 1, pageSize: paginationArgs.pageSize ?? 5 },
+      { id, type }
+    )
+
+    return result.data
+  }
+
+  public async getRelationsDataCount(id: string, type: EntityNames) {
+    const result = await this.triplyService.queryTriplyData<PeopleRelationsCountType>(
+      this.ZoomLevel3RelationsCountEndpoint, // new endpoint
+      peopleRelationsCountKeys,
+      { page: 1, pageSize: 1 },
       { id, type }
     )
 
