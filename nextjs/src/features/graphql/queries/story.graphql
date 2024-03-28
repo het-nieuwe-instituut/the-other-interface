@@ -16,6 +16,26 @@ query storyById($locale: String, $id: ID, $publicationState: String = "LIVE") {
             attributes {
                 title
                 description
+                stories {
+                    data {
+                        id
+                        attributes {
+                            title
+                            slug
+                            locale
+                        }
+                    }
+                }
+                story {
+                    data {
+                        id
+                        attributes {
+                            title
+                            slug
+                            locale
+                        }
+                    }
+                }
                 components {
                     ... on ComponentModulesTextModule {
                         ...textModuleFragment
@@ -137,6 +157,71 @@ query storyMetaById($locale: String, $id: ID, $publicationState: String = "LIVE"
                         ...buttonsModuleFragment
                     }
                 }
+                stories {
+                    data {
+                        id
+                        attributes {
+                            title
+                            components {
+                                ... on ComponentModulesImage {
+                                    ...imageModuleFragment
+                                }
+                            }
+                            author {
+                                data {
+                                    attributes {
+                                        firstName
+                                        lastName
+                                        insertion
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                story {
+                    data {
+                        id
+                        attributes {
+                            title
+                            components {
+                                ... on ComponentModulesImage {
+                                    ...imageModuleFragment
+                                }
+                            }
+                            author {
+                                data {
+                                    attributes {
+                                        firstName
+                                        lastName
+                                        insertion
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                siblings {
+                    id
+                    attributes {
+                        title
+                        components {
+                            ... on ComponentModulesImage {
+                                ...imageModuleFragment
+                            }
+                        }
+                        author {
+                            data {
+                                attributes {
+                                    firstName
+                                    lastName
+                                    insertion
+                                }
+                            }
+                        }
+                    }
+                }
+            
             }
         }
     }

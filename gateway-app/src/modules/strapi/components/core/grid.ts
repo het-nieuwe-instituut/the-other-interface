@@ -1,12 +1,13 @@
 import { Field, ID, InputType, ObjectType, registerEnumType } from '@nestjs/graphql'
 import { Enum_Componentmodulesgridmodule_Fieldtypes } from '../../../../generated/strapi-sdk'
-import { StoryEntityResponse, StoryFiltersInput } from '../../../story/story.type'
+import { StoryFiltersInput } from '../../../story/story.type'
 import {
   TriplyRecordEntityResponse,
   TriplyRecordFiltersInput,
 } from '../../../triplyRecord/triplyRecord.type'
 import { ComponentCoreButtonFiltersInput } from './button'
 import { PaginationArg, StringFilterInput, UploadFileEntityResponse } from '../../shared-types'
+import { StoryEntityResponse } from 'src/modules/story/story.types.circular'
 
 registerEnumType(Enum_Componentmodulesgridmodule_Fieldtypes, {
   name: 'Enum_Componentmodulesgridmodule_Fieldtypes',

@@ -5,7 +5,7 @@ import {
 } from '../../../triplyRecord/triplyRecord.type'
 import { Enum_Componentcorecarouselitem_Type } from '../../../../generated/strapi-sdk'
 import { PaginationArg, StringFilterInput, UploadFileEntityResponse } from '../../shared-types'
-import { StoryEntityResponse } from 'src/modules/story/story.type'
+import { StoryEntityResponse } from 'src/modules/story/story.types.circular'
 
 @ObjectType()
 export class ComponentCoreCarouselItem {

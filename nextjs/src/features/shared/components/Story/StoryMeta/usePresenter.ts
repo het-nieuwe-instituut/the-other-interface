@@ -59,7 +59,6 @@ export const usePresenter = () => {
   const id = params?.id as string
 
   const { data, isLoading } = useStoryMetaById(id)
-
   const story = data?.storyMetaByLocale?.data?.attributes
 
   const linkedPeopleRecords =
@@ -86,5 +85,9 @@ export const usePresenter = () => {
     locations: story?.locations?.data?.map(location => location.attributes?.city).join(', '),
     timeframe: formatTimeframe(story?.timeframe),
     links: story?.storyLinks?.buttons?.map(button => button) || [],
+    siblingsRelation: story?.siblings,
+    parentRelation: story?.story,
+    childrenRelation: story?.stories,
+    lang,
   }
 }

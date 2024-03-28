@@ -19,4 +19,13 @@ export class StoryService {
     const story = await this.strapiGqlSdk.storyWithoutRelations({ id, locale })
     return story.story
   }
+
+  public async getStorySiblings(parentId: string, currentStoryId: string, locale: string) {
+    const parentRes = await this.strapiGqlSdk.story({ id: parentId, locale })
+
+    const parentStory = parentRes?.story?.data
+    const siblingsStories = parentStory?.attributes?.stories?.data
+    const siblings = siblingsStories?.filter(s => s.id !== currentStoryId)
+    return siblings
+  }
 }
