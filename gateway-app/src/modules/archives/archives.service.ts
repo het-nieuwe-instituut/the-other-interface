@@ -116,7 +116,6 @@ export class ArchivesService {
     }
   }
 
-  // new for relations query
   public async getRelationsData(id: string, type: EntityNames, paginationArgs: PaginationArgs) {
     const result = await this.triplyService.queryTriplyData<ArchiveRelationsType>(
       this.ZoomLevel3RelationsEndpoint,
@@ -129,7 +128,7 @@ export class ArchivesService {
 
   public async getRelationsDataCount(id: string, type: EntityNames) {
     const result = await this.triplyService.queryTriplyData<ArchiveRelationsCountType>(
-      this.ZoomLevel3RelationsCountEndpoint, // new endpoint
+      this.ZoomLevel3RelationsCountEndpoint,
       archiveRelationsCountKeys,
       { page: 1, pageSize: 1 },
       { id, type }

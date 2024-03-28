@@ -54,16 +54,6 @@ export class ZoomLevel3Resolver {
     return this.zoomLevel3Service.getRelations(args.id, args.type, args?.lang)
   }
 
-  // In triply how it works: people_recordRelations -> select the type (e.g. objects)
-  // and it will show all people records for that type id. E.g give id 1001 for object and it will
-  //  show all people for that object, same for all other recordRelations
-  //  (people, object, archive, publications)
-
-  // I'm on an object
-  // I need to get all the related archives, people, publications, objects
-  // to each of the triply queries pass the type object, and the id of the object I'm on
-  // people_recordRelations objects_recordRelations publication_recordRelations archives_recordRelations
-  // for people_recordRelations - give id 1001 for object and it will show all people for that object
   // objects
   @Query(() => [ObjectRelationsType], { nullable: true })
   public objectRecordRelations(
@@ -119,7 +109,6 @@ export class ZoomLevel3Resolver {
   public archivesRecordRelationsCount(@Args() args: ZoomLevel3Args) {
     return this.archivesService.getRelationsDataCount(args.id, args.type)
   }
-  // new code above this
 
   @Query(() => [ArchivesRecordZoomLevel3Type], { nullable: true })
   public async archivesRecordZoomLevel3(@Args('id') archiveId: string) {

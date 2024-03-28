@@ -105,10 +105,9 @@ export class ObjectsService {
     }
   }
 
-  // new for relations query
   public async getRelationsData(id: string, type: EntityNames, paginationArgs: PaginationArgs) {
     const result = await this.triplyService.queryTriplyData<ObjectsRelationsType>(
-      this.ZoomLevel3RelationsEndpoint, // new endpoint
+      this.ZoomLevel3RelationsEndpoint,
       objectsRelationsKeys,
       { page: paginationArgs.page ?? 1, pageSize: paginationArgs.pageSize ?? 5 },
       { id, type }
@@ -119,7 +118,7 @@ export class ObjectsService {
 
   public async getRelationsDataCount(id: string, type: EntityNames) {
     const result = await this.triplyService.queryTriplyData<ObjectsRelationsCountType>(
-      this.ZoomLevel3RelationsCountEndpoint, // new endpoint
+      this.ZoomLevel3RelationsCountEndpoint,
       objectsRelationsCountKeys,
       { page: 1, pageSize: 1 },
       { id, type }

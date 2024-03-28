@@ -150,7 +150,6 @@ export class PeopleService {
     }
   }
 
-  // new for relations query
   public async getRelationsData(id: string, type: EntityNames, paginationArgs: PaginationArgs) {
     const result = await this.triplyService.queryTriplyData<PeopleRelationsType>(
       this.ZoomLevel3RelationsEndpoint,
@@ -164,7 +163,7 @@ export class PeopleService {
 
   public async getRelationsDataCount(id: string, type: EntityNames) {
     const result = await this.triplyService.queryTriplyData<PeopleRelationsCountType>(
-      this.ZoomLevel3RelationsCountEndpoint, // new endpoint
+      this.ZoomLevel3RelationsCountEndpoint,
       peopleRelationsCountKeys,
       { page: 1, pageSize: 1 },
       { id, type }
