@@ -8,12 +8,14 @@ import { EditorialLayer } from '@/features/shared/components/Layers/EditorialLay
 export type Props = {
   homepage?: HomepageQuery
   themes?: ThemesQuery
+  nextThemes?: ThemesQuery
 }
 
-export const HomepageContainer: React.FC<Props> = ({ homepage, themes }) => {
+export const HomepageContainer: React.FC<Props> = ({ homepage, themes, nextThemes }) => {
   const editorialData = homepage?.homepage?.data?.attributes
   const storyTitle = themes?.themes.data?.[0]?.attributes?.name
   const stories = themes?.themes.data?.[0]?.attributes?.stories?.data || []
+  const nextStories = nextThemes?.themes.data?.[0]?.attributes?.stories?.data || []
   const pagination = themes?.themes.meta?.pagination
 
   return (
@@ -21,6 +23,7 @@ export const HomepageContainer: React.FC<Props> = ({ homepage, themes }) => {
       <GalaxyInterface>
         <MainGalaxy
           stories={stories as StoryEntity[]}
+          nextStories={nextStories as StoryEntity[]}
           storyTitle={storyTitle}
           pagination={pagination}
         />

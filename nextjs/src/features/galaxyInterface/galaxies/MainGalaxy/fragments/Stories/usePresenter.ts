@@ -7,14 +7,9 @@ import {
 } from 'src/generated/graphql'
 import { imageBasePath } from '@/features/modules/modulesConstants'
 import { PositionedStory } from '../types'
-import {
-  storiesPositionTemplate1,
-  storiesPositionTemplate2,
-  storiesPositionTemplate3,
-  storiesPositionTemplate4,
-  storiesPositionTemplate5,
-  storiesPositionTemplate6,
-} from './positioningTemplates'
+import { storiesPositionsTemplates } from './positioningTemplates'
+import { usePageNumber } from '@/features/shared/hooks/usePageNumber'
+import { usePositioningTemplates } from '@/features/shared/hooks/usePositioningTemplates'
 
 const findImageUrl = (components: HomepageComponentsDynamicZone[]): string => {
   const imageComponent = components?.find(
@@ -37,13 +32,19 @@ const mapStory = (story: StoryEntity) => {
   }
 }
 
-export const usePresenter = (stories: StoryEntity[]) => {
+export const usePresenter = (stories: StoryEntity[], nextStories: StoryEntity[]) => {
+  const { pageNumber } = usePageNumber()
+  const { currentTemplate, nextTemplate } = usePositioningTemplates(
+    storiesPositionsTemplates,
+    pageNumber
+  )
+
   const positionedStories = useMemo(() => {
     if (!stories) return []
 
     const positionedStories: PositionedStory[] = []
 
-    storiesPositionTemplate6.forEach((template, index) => {
+    currentTemplate.forEach((template, index) => {
       const record = stories[index]
 
       if (record) {
@@ -58,9 +59,34 @@ export const usePresenter = (stories: StoryEntity[]) => {
     })
 
     return positionedStories
-  }, [stories])
+  }, [stories, currentTemplate])
+
+  const positionedNextStories = useMemo(() => {
+    if (!nextStories) return []
+
+    const positionedNextStories: PositionedStory[] = []
+
+    nextTemplate.forEach((template, index) => {
+      const record = nextStories[index]
+
+      if (record) {
+        const mappedStory = mapStory(nextStories?.[index])
+
+        positionedNextStories.push({
+          ...mappedStory,
+          position: template.position,
+          grid: template.grid,
+        })
+      }
+    })
+
+    return positionedNextStories
+  }, [nextStories, nextTemplate])
 
   return {
     positionedStories,
+    positionedNextStories,
+    isCurrentStoriesEmpty: stories.length === 0,
+    isNextStoriesEmpty: nextStories.length === 0,
   }
 }

@@ -321,3 +321,12 @@ export const storiesPositionTemplate6: PositioningTemplate[] = [
     },
   },
 ]
+
+export const storiesPositionsTemplates = [
+  storiesPositionTemplate1,
+  storiesPositionTemplate2,
+  storiesPositionTemplate3,
+  storiesPositionTemplate4,
+  storiesPositionTemplate5,
+  storiesPositionTemplate6,
+]

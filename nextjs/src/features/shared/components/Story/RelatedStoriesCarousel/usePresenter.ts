@@ -4,7 +4,7 @@ import useTranslation from 'next-translate/useTranslation'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useStoryMetaById } from '@/features/shared/hooks/queries/useStoryMetaById'
 import { StoryEntity } from 'src/generated/graphql'
-import { mapStoriesToRelatedCarouselItems } from '../../Record/RecordStoriesCarousel/storiesRelatedToRecordDataMapper'
+import { storiesToCarouselDataMapper } from '@/features/shared/mappers/storiesToCarouselDataMapper'
 
 export const usePresenter = () => {
   const params = useParams()
@@ -29,7 +29,7 @@ export const usePresenter = () => {
     ...(story?.attributes?.siblings ?? []),
   ]
 
-  const stories = mapStoriesToRelatedCarouselItems(relatedStories as StoryEntity[])
+  const stories = storiesToCarouselDataMapper(relatedStories as StoryEntity[])
 
   const handleRedirect = (id: string | null | undefined) => {
     let url = `/detail/${CATEGORIES.stories}/${id}`
