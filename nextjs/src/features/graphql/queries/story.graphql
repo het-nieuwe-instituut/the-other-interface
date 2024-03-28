@@ -162,8 +162,20 @@ query storyMetaById($locale: String, $id: ID, $publicationState: String = "LIVE"
                         id
                         attributes {
                             title
-                            slug
-                            locale
+                            components {
+                                ... on ComponentModulesImage {
+                                    ...imageModuleFragment
+                                }
+                            }
+                            author {
+                                data {
+                                    attributes {
+                                        firstName
+                                        lastName
+                                        insertion
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -172,8 +184,20 @@ query storyMetaById($locale: String, $id: ID, $publicationState: String = "LIVE"
                         id
                         attributes {
                             title
-                            slug
-                            locale
+                            components {
+                                ... on ComponentModulesImage {
+                                    ...imageModuleFragment
+                                }
+                            }
+                            author {
+                                data {
+                                    attributes {
+                                        firstName
+                                        lastName
+                                        insertion
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -181,8 +205,20 @@ query storyMetaById($locale: String, $id: ID, $publicationState: String = "LIVE"
                     id
                     attributes {
                         title
-                        slug
-                        locale
+                        components {
+                            ... on ComponentModulesImage {
+                                ...imageModuleFragment
+                            }
+                        }
+                        author {
+                            data {
+                                attributes {
+                                    firstName
+                                    lastName
+                                    insertion
+                                }
+                            }
+                        }
                     }
                 }
             

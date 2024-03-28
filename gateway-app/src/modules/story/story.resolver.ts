@@ -1,6 +1,6 @@
 import { Inject } from '@nestjs/common'
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
-import { PublicationState, Sdk } from '../../generated/strapi-sdk'
+import { PublicationState, Sdk, StoryEntity } from '../../generated/strapi-sdk'
 import { I18NLocaleCode, PaginationArg } from '../strapi/shared-types'
 import {
   Story,
@@ -83,43 +83,45 @@ export class StoryResolver {
     const res = await this.strapiGqlSdk.storiesMetaByLocale({
       id: filters?.id,
       publicationState,
-      locale: ['nl', 'en'], // we only care about story id, which should be searched across all locales
+      locale: ['nl', 'en'],
     })
 
-    const story = res?.stories?.data[0]
-    const parentId = story?.attributes?.story?.data?.id
+    let story = res?.stories?.data[0]
 
-    if (story?.attributes?.locale === locale || !locale) {
-      if (parentId && story?.id && locale && story?.attributes) {
-        const siblings = await this.storyService.getStorySiblings(parentId, story?.id, locale)
-        return {
-          data: { ...story, attributes: { ...story?.attributes, siblings } },
-        }
-      }
-      return { data: { ...story } }
-    }
-
-    const localizedStory =
-      story?.attributes?.localizations?.data?.find(l => l.attributes?.locale === locale) || null
-
-    const localizdedParentId = localizedStory?.attributes?.story?.data?.id
-
-    if (localizdedParentId && localizedStory?.id && locale && localizedStory?.attributes) {
-      const localizedSibling = await this.storyService.getStorySiblings(
-        localizdedParentId,
-        localizedStory?.id,
-        locale
+    if (locale && story?.attributes?.locale !== locale) {
+      const localizedStory = story?.attributes?.localizations?.data.find(
+        l => l?.attributes?.locale === locale
       )
-
-      return {
-        data: {
-          ...localizedStory,
-          attributes: { ...localizedStory?.attributes, localizedSibling },
-        },
+      if (localizedStory) {
+        story = localizedStory
       }
     }
 
-    return { data: localizedStory }
+    if (!story) {
+      return { data: null }
+    }
+
+    const storyId = story.id
+    const parentId = story.attributes?.story?.data?.id
+
+    let siblings: StoryEntity[] | undefined | null = []
+    if (parentId && storyId && locale && story.attributes) {
+      siblings = (await this.storyService.getStorySiblings(
+        parentId,
+        storyId,
+        locale
+      )) as StoryEntity[]
+    }
+
+    return {
+      data: {
+        ...story,
+        attributes: {
+          ...story.attributes,
+          ...(siblings.length ? { siblings } : {}),
+        },
+      },
+    }
   }
 
   @Query(() => StoryEntityResponseCollection)
