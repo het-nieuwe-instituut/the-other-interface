@@ -165,7 +165,7 @@ export class PeopleService {
     const result = await this.triplyService.queryTriplyData<PeopleRelationsCountType>(
       this.ZoomLevel3RelationsCountEndpoint,
       peopleRelationsCountKeys,
-      { page: 1, pageSize: 1 },
+      { page: 1, pageSize: 10 },
       { id, type }
     )
 

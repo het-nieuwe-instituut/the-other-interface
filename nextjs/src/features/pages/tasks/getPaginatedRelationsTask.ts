@@ -85,6 +85,8 @@ export async function getPaginatedRelationsTask({
       lang: locale,
     })) as ArchivesRecordRelationsCountQuery
 
+    console.log('COUNTS', peopleCount, publicationsCount)
+
     return [
       { ...people, total: peopleCount?.peopleRecordRelationsCount?.[0].total ?? '0' },
       {

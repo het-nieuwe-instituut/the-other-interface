@@ -56,11 +56,12 @@ export const RecordTable: React.FC = () => {
 
 const PaginatedTable: React.FC<PaginatedTableProps> = props => {
   const { data, setters, counts } = props
-
+  console.log('TEST', data?.total)
   return (
     <>
       <TableModule
         component={data}
+        count={data?.total}
         LoadMore={
           <Text
             as={'button'}

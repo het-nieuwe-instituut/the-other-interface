@@ -120,7 +120,7 @@ export class ObjectsService {
     const result = await this.triplyService.queryTriplyData<ObjectsRelationsCountType>(
       this.ZoomLevel3RelationsCountEndpoint,
       objectsRelationsCountKeys,
-      { page: 1, pageSize: 1 },
+      { page: 1, pageSize: 10 },
       { id, type }
     )
 

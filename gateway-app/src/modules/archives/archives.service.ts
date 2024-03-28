@@ -130,7 +130,7 @@ export class ArchivesService {
     const result = await this.triplyService.queryTriplyData<ArchiveRelationsCountType>(
       this.ZoomLevel3RelationsCountEndpoint,
       archiveRelationsCountKeys,
-      { page: 1, pageSize: 1 },
+      { page: 1, pageSize: 10 },
       { id, type }
     )
 

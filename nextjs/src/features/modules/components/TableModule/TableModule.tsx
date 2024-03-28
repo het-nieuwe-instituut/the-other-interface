@@ -17,10 +17,11 @@ import { TableModuleType } from '../../ModulesRenderer/tableMapper'
 interface Props {
   component: TableModuleType | undefined
   LoadMore?: React.ReactNode
+  count?: string
 }
 
 export const TableModule: React.FC<Props> = props => {
-  const { component, LoadMore } = props
+  const { component, LoadMore, count } = props
   const breakpoint = useBreakpoint()
 
   if (!component) {
@@ -35,7 +36,7 @@ export const TableModule: React.FC<Props> = props => {
         pb={modulesSpacingMapper?.TableModule.spacingBottom}
       >
         <Text textStyle={'h2'} as="h2" pb={'md'}>
-          {component.name}
+          {component.name} {count ? `(${count})` : ''}
         </Text>
         {component.description && <Text pb={'md'}>{component.description}</Text>}
         <TableModuleMobile component={component} />
@@ -50,7 +51,7 @@ export const TableModule: React.FC<Props> = props => {
       pb={modulesSpacingMapper?.TableModule.spacingBottom}
     >
       <Text as={'h2'} textStyle={'impactNew.xl'} pb={'sm'}>
-        {component.name}
+        {component.name} {count ? `(${count})` : ''}
       </Text>
       {component.description && (
         <Text pb={'md'} textStyle={'socialLarge.lg'}>
