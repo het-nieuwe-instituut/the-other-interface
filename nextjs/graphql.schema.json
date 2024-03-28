@@ -13881,12 +13881,56 @@
             "deprecationReason": null
           },
           {
+            "name": "siblings",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "StoryEntity",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "slug",
             "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
               "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "stories",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "StoryRelationResponseCollection",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "story",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "StoryEntityResponse",
               "ofType": null
             },
             "isDeprecated": false,
@@ -14343,11 +14387,47 @@
             "deprecationReason": null
           },
           {
+            "name": "siblings",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StoryFiltersInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "slug",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StringFilterInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "stories",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StoryFiltersInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "story",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StoryFiltersInput",
               "ofType": null
             },
             "defaultValue": null,

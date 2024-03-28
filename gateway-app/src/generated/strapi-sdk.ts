@@ -1614,6 +1614,8 @@ export type Story = {
   publishedAt?: Maybe<Scalars['DateTime']>
   shortDescription?: Maybe<Scalars['String']>
   slug: Scalars['String']
+  stories?: Maybe<StoryRelationResponseCollection>
+  story?: Maybe<StoryEntityResponse>
   storyLinks?: Maybe<ComponentModulesButtonsModule>
   themes?: Maybe<ThemeRelationResponseCollection>
   timeframe?: Maybe<ComponentCoreTimeframe>
@@ -1631,6 +1633,13 @@ export type StoryLocalizationsArgs = {
 
 export type StoryLocationsArgs = {
   filters?: InputMaybe<LocationFiltersInput>
+  pagination?: InputMaybe<PaginationArg>
+  publicationState?: InputMaybe<PublicationState>
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
+}
+
+export type StoryStoriesArgs = {
+  filters?: InputMaybe<StoryFiltersInput>
   pagination?: InputMaybe<PaginationArg>
   publicationState?: InputMaybe<PublicationState>
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
@@ -1694,6 +1703,8 @@ export type StoryFiltersInput = {
   publishedAt?: InputMaybe<DateTimeFilterInput>
   shortDescription?: InputMaybe<StringFilterInput>
   slug?: InputMaybe<StringFilterInput>
+  stories?: InputMaybe<StoryFiltersInput>
+  story?: InputMaybe<StoryFiltersInput>
   storyLinks?: InputMaybe<ComponentModulesButtonsModuleFiltersInput>
   themes?: InputMaybe<ThemeFiltersInput>
   timeframe?: InputMaybe<ComponentCoreTimeframeFiltersInput>
@@ -1711,6 +1722,8 @@ export type StoryInput = {
   publishedAt?: InputMaybe<Scalars['DateTime']>
   shortDescription?: InputMaybe<Scalars['String']>
   slug?: InputMaybe<Scalars['String']>
+  stories?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
+  story?: InputMaybe<Scalars['ID']>
   storyLinks?: InputMaybe<ComponentModulesButtonsModuleInput>
   themes?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
   timeframe?: InputMaybe<ComponentCoreTimeframeInput>
@@ -9497,7 +9510,16 @@ export type StoriesQuery = {
         > | null
         author?: {
           __typename?: 'AuthorEntityResponse'
-          data?: { __typename?: 'AuthorEntity'; id?: string | null } | null
+          data?: {
+            __typename?: 'AuthorEntity'
+            id?: string | null
+            attributes?: {
+              __typename?: 'Author'
+              firstName: string
+              lastName: string
+              insertion?: string | null
+            } | null
+          } | null
         } | null
         timeframe?: {
           __typename?: 'ComponentCoreTimeframe'
@@ -9568,6 +9590,209 @@ export type StoriesQuery = {
               } | null
             } | null
           } | null> | null
+        } | null
+        story?: {
+          __typename?: 'StoryEntityResponse'
+          data?: {
+            __typename?: 'StoryEntity'
+            id?: string | null
+            attributes?: {
+              __typename?: 'Story'
+              title: string
+              components?: Array<
+                | { __typename: 'ComponentModulesButtonsModule' }
+                | { __typename: 'ComponentModulesGridModule' }
+                | {
+                    __typename: 'ComponentModulesImage'
+                    alt_text?: string | null
+                    caption?: string | null
+                    id: string
+                    image: {
+                      __typename?: 'UploadFileEntityResponse'
+                      data?: {
+                        __typename?: 'UploadFileEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'UploadFile'
+                          hash: string
+                          mime: string
+                          name: string
+                          provider: string
+                          size: number
+                          url: string
+                          alternativeText?: string | null
+                          caption?: string | null
+                          createdAt?: any | null
+                          ext?: string | null
+                          formats?: any | null
+                          height?: number | null
+                          previewUrl?: string | null
+                          provider_metadata?: any | null
+                          updatedAt?: any | null
+                          width?: number | null
+                        } | null
+                      } | null
+                    }
+                    triplyRecord?: {
+                      __typename?: 'TriplyRecordEntityResponse'
+                      data?: {
+                        __typename?: 'TriplyRecordEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'TriplyRecord'
+                          recordId: string
+                          type: Enum_Triplyrecord_Type
+                        } | null
+                      } | null
+                    } | null
+                    story?: {
+                      __typename?: 'StoryEntityResponse'
+                      data?: {
+                        __typename?: 'StoryEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'Story'
+                          title: string
+                          slug: string
+                          description?: string | null
+                          shortDescription?: string | null
+                          createdAt?: any | null
+                          updatedAt?: any | null
+                          publishedAt?: any | null
+                          locale?: string | null
+                          author?: {
+                            __typename?: 'AuthorEntityResponse'
+                            data?: {
+                              __typename?: 'AuthorEntity'
+                              attributes?: { __typename?: 'Author'; firstName: string } | null
+                            } | null
+                          } | null
+                        } | null
+                      } | null
+                    } | null
+                  }
+                | { __typename: 'ComponentModulesImageCarousel' }
+                | { __typename: 'ComponentModulesPullquote' }
+                | { __typename: 'ComponentModulesSubtitle' }
+                | { __typename: 'ComponentModulesTableModule' }
+                | { __typename: 'ComponentModulesTextModule' }
+                | { __typename: 'ComponentModulesTitleModule' }
+                | { __typename: 'Error' }
+                | null
+              > | null
+              author?: {
+                __typename?: 'AuthorEntityResponse'
+                data?: {
+                  __typename?: 'AuthorEntity'
+                  attributes?: {
+                    __typename?: 'Author'
+                    firstName: string
+                    lastName: string
+                    insertion?: string | null
+                  } | null
+                } | null
+              } | null
+            } | null
+          } | null
+        } | null
+        stories?: {
+          __typename?: 'StoryRelationResponseCollection'
+          data: Array<{
+            __typename?: 'StoryEntity'
+            id?: string | null
+            attributes?: {
+              __typename?: 'Story'
+              title: string
+              components?: Array<
+                | { __typename: 'ComponentModulesButtonsModule' }
+                | { __typename: 'ComponentModulesGridModule' }
+                | {
+                    __typename: 'ComponentModulesImage'
+                    alt_text?: string | null
+                    caption?: string | null
+                    id: string
+                    image: {
+                      __typename?: 'UploadFileEntityResponse'
+                      data?: {
+                        __typename?: 'UploadFileEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'UploadFile'
+                          hash: string
+                          mime: string
+                          name: string
+                          provider: string
+                          size: number
+                          url: string
+                          alternativeText?: string | null
+                          caption?: string | null
+                          createdAt?: any | null
+                          ext?: string | null
+                          formats?: any | null
+                          height?: number | null
+                          previewUrl?: string | null
+                          provider_metadata?: any | null
+                          updatedAt?: any | null
+                          width?: number | null
+                        } | null
+                      } | null
+                    }
+                    triplyRecord?: {
+                      __typename?: 'TriplyRecordEntityResponse'
+                      data?: {
+                        __typename?: 'TriplyRecordEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'TriplyRecord'
+                          recordId: string
+                          type: Enum_Triplyrecord_Type
+                        } | null
+                      } | null
+                    } | null
+                    story?: {
+                      __typename?: 'StoryEntityResponse'
+                      data?: {
+                        __typename?: 'StoryEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'Story'
+                          title: string
+                          slug: string
+                          description?: string | null
+                          shortDescription?: string | null
+                          createdAt?: any | null
+                          updatedAt?: any | null
+                          publishedAt?: any | null
+                          locale?: string | null
+                          author?: {
+                            __typename?: 'AuthorEntityResponse'
+                            data?: {
+                              __typename?: 'AuthorEntity'
+                              attributes?: { __typename?: 'Author'; firstName: string } | null
+                            } | null
+                          } | null
+                        } | null
+                      } | null
+                    } | null
+                  }
+                | { __typename: 'ComponentModulesImageCarousel' }
+                | { __typename: 'ComponentModulesPullquote' }
+                | { __typename: 'ComponentModulesSubtitle' }
+                | { __typename: 'ComponentModulesTableModule' }
+                | { __typename: 'ComponentModulesTextModule' }
+                | { __typename: 'ComponentModulesTitleModule' }
+                | { __typename: 'Error' }
+                | null
+              > | null
+              author?: {
+                __typename?: 'AuthorEntityResponse'
+                data?: {
+                  __typename?: 'AuthorEntity'
+                  attributes?: { __typename?: 'Author'; firstName: string } | null
+                } | null
+              } | null
+            } | null
+          }>
         } | null
       } | null
     }>
@@ -9944,7 +10169,16 @@ export type StoryQuery = {
         > | null
         author?: {
           __typename?: 'AuthorEntityResponse'
-          data?: { __typename?: 'AuthorEntity'; id?: string | null } | null
+          data?: {
+            __typename?: 'AuthorEntity'
+            id?: string | null
+            attributes?: {
+              __typename?: 'Author'
+              firstName: string
+              lastName: string
+              insertion?: string | null
+            } | null
+          } | null
         } | null
         timeframe?: {
           __typename?: 'ComponentCoreTimeframe'
@@ -10016,6 +10250,209 @@ export type StoryQuery = {
             } | null
           } | null> | null
         } | null
+        story?: {
+          __typename?: 'StoryEntityResponse'
+          data?: {
+            __typename?: 'StoryEntity'
+            id?: string | null
+            attributes?: {
+              __typename?: 'Story'
+              title: string
+              components?: Array<
+                | { __typename: 'ComponentModulesButtonsModule' }
+                | { __typename: 'ComponentModulesGridModule' }
+                | {
+                    __typename: 'ComponentModulesImage'
+                    alt_text?: string | null
+                    caption?: string | null
+                    id: string
+                    image: {
+                      __typename?: 'UploadFileEntityResponse'
+                      data?: {
+                        __typename?: 'UploadFileEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'UploadFile'
+                          hash: string
+                          mime: string
+                          name: string
+                          provider: string
+                          size: number
+                          url: string
+                          alternativeText?: string | null
+                          caption?: string | null
+                          createdAt?: any | null
+                          ext?: string | null
+                          formats?: any | null
+                          height?: number | null
+                          previewUrl?: string | null
+                          provider_metadata?: any | null
+                          updatedAt?: any | null
+                          width?: number | null
+                        } | null
+                      } | null
+                    }
+                    triplyRecord?: {
+                      __typename?: 'TriplyRecordEntityResponse'
+                      data?: {
+                        __typename?: 'TriplyRecordEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'TriplyRecord'
+                          recordId: string
+                          type: Enum_Triplyrecord_Type
+                        } | null
+                      } | null
+                    } | null
+                    story?: {
+                      __typename?: 'StoryEntityResponse'
+                      data?: {
+                        __typename?: 'StoryEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'Story'
+                          title: string
+                          slug: string
+                          description?: string | null
+                          shortDescription?: string | null
+                          createdAt?: any | null
+                          updatedAt?: any | null
+                          publishedAt?: any | null
+                          locale?: string | null
+                          author?: {
+                            __typename?: 'AuthorEntityResponse'
+                            data?: {
+                              __typename?: 'AuthorEntity'
+                              attributes?: { __typename?: 'Author'; firstName: string } | null
+                            } | null
+                          } | null
+                        } | null
+                      } | null
+                    } | null
+                  }
+                | { __typename: 'ComponentModulesImageCarousel' }
+                | { __typename: 'ComponentModulesPullquote' }
+                | { __typename: 'ComponentModulesSubtitle' }
+                | { __typename: 'ComponentModulesTableModule' }
+                | { __typename: 'ComponentModulesTextModule' }
+                | { __typename: 'ComponentModulesTitleModule' }
+                | { __typename: 'Error' }
+                | null
+              > | null
+              author?: {
+                __typename?: 'AuthorEntityResponse'
+                data?: {
+                  __typename?: 'AuthorEntity'
+                  attributes?: {
+                    __typename?: 'Author'
+                    firstName: string
+                    lastName: string
+                    insertion?: string | null
+                  } | null
+                } | null
+              } | null
+            } | null
+          } | null
+        } | null
+        stories?: {
+          __typename?: 'StoryRelationResponseCollection'
+          data: Array<{
+            __typename?: 'StoryEntity'
+            id?: string | null
+            attributes?: {
+              __typename?: 'Story'
+              title: string
+              components?: Array<
+                | { __typename: 'ComponentModulesButtonsModule' }
+                | { __typename: 'ComponentModulesGridModule' }
+                | {
+                    __typename: 'ComponentModulesImage'
+                    alt_text?: string | null
+                    caption?: string | null
+                    id: string
+                    image: {
+                      __typename?: 'UploadFileEntityResponse'
+                      data?: {
+                        __typename?: 'UploadFileEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'UploadFile'
+                          hash: string
+                          mime: string
+                          name: string
+                          provider: string
+                          size: number
+                          url: string
+                          alternativeText?: string | null
+                          caption?: string | null
+                          createdAt?: any | null
+                          ext?: string | null
+                          formats?: any | null
+                          height?: number | null
+                          previewUrl?: string | null
+                          provider_metadata?: any | null
+                          updatedAt?: any | null
+                          width?: number | null
+                        } | null
+                      } | null
+                    }
+                    triplyRecord?: {
+                      __typename?: 'TriplyRecordEntityResponse'
+                      data?: {
+                        __typename?: 'TriplyRecordEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'TriplyRecord'
+                          recordId: string
+                          type: Enum_Triplyrecord_Type
+                        } | null
+                      } | null
+                    } | null
+                    story?: {
+                      __typename?: 'StoryEntityResponse'
+                      data?: {
+                        __typename?: 'StoryEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'Story'
+                          title: string
+                          slug: string
+                          description?: string | null
+                          shortDescription?: string | null
+                          createdAt?: any | null
+                          updatedAt?: any | null
+                          publishedAt?: any | null
+                          locale?: string | null
+                          author?: {
+                            __typename?: 'AuthorEntityResponse'
+                            data?: {
+                              __typename?: 'AuthorEntity'
+                              attributes?: { __typename?: 'Author'; firstName: string } | null
+                            } | null
+                          } | null
+                        } | null
+                      } | null
+                    } | null
+                  }
+                | { __typename: 'ComponentModulesImageCarousel' }
+                | { __typename: 'ComponentModulesPullquote' }
+                | { __typename: 'ComponentModulesSubtitle' }
+                | { __typename: 'ComponentModulesTableModule' }
+                | { __typename: 'ComponentModulesTextModule' }
+                | { __typename: 'ComponentModulesTitleModule' }
+                | { __typename: 'Error' }
+                | null
+              > | null
+              author?: {
+                __typename?: 'AuthorEntityResponse'
+                data?: {
+                  __typename?: 'AuthorEntity'
+                  attributes?: { __typename?: 'Author'; firstName: string } | null
+                } | null
+              } | null
+            } | null
+          }>
+        } | null
       } | null
     } | null
   } | null
@@ -10038,6 +10475,45 @@ export type StoryByLocaleQuery = {
         slug: string
         description?: string | null
         locale?: string | null
+        author?: {
+          __typename?: 'AuthorEntityResponse'
+          data?: {
+            __typename?: 'AuthorEntity'
+            id?: string | null
+            attributes?: {
+              __typename?: 'Author'
+              firstName: string
+              lastName: string
+              insertion?: string | null
+            } | null
+          } | null
+        } | null
+        story?: {
+          __typename?: 'StoryEntityResponse'
+          data?: {
+            __typename?: 'StoryEntity'
+            id?: string | null
+            attributes?: {
+              __typename?: 'Story'
+              title: string
+              slug: string
+              locale?: string | null
+            } | null
+          } | null
+        } | null
+        stories?: {
+          __typename?: 'StoryRelationResponseCollection'
+          data: Array<{
+            __typename?: 'StoryEntity'
+            id?: string | null
+            attributes?: {
+              __typename?: 'Story'
+              title: string
+              slug: string
+              locale?: string | null
+            } | null
+          }>
+        } | null
         components?: Array<
           | {
               __typename: 'ComponentModulesButtonsModule'
@@ -10385,6 +10861,45 @@ export type StoryByLocaleQuery = {
               slug: string
               description?: string | null
               locale?: string | null
+              author?: {
+                __typename?: 'AuthorEntityResponse'
+                data?: {
+                  __typename?: 'AuthorEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Author'
+                    firstName: string
+                    lastName: string
+                    insertion?: string | null
+                  } | null
+                } | null
+              } | null
+              story?: {
+                __typename?: 'StoryEntityResponse'
+                data?: {
+                  __typename?: 'StoryEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Story'
+                    title: string
+                    slug: string
+                    locale?: string | null
+                  } | null
+                } | null
+              } | null
+              stories?: {
+                __typename?: 'StoryRelationResponseCollection'
+                data: Array<{
+                  __typename?: 'StoryEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Story'
+                    title: string
+                    slug: string
+                    locale?: string | null
+                  } | null
+                }>
+              } | null
               components?: Array<
                 | {
                     __typename: 'ComponentModulesButtonsModule'
@@ -10750,6 +11265,45 @@ export type StoriesByLocaleQuery = {
         slug: string
         description?: string | null
         locale?: string | null
+        author?: {
+          __typename?: 'AuthorEntityResponse'
+          data?: {
+            __typename?: 'AuthorEntity'
+            id?: string | null
+            attributes?: {
+              __typename?: 'Author'
+              firstName: string
+              lastName: string
+              insertion?: string | null
+            } | null
+          } | null
+        } | null
+        story?: {
+          __typename?: 'StoryEntityResponse'
+          data?: {
+            __typename?: 'StoryEntity'
+            id?: string | null
+            attributes?: {
+              __typename?: 'Story'
+              title: string
+              slug: string
+              locale?: string | null
+            } | null
+          } | null
+        } | null
+        stories?: {
+          __typename?: 'StoryRelationResponseCollection'
+          data: Array<{
+            __typename?: 'StoryEntity'
+            id?: string | null
+            attributes?: {
+              __typename?: 'Story'
+              title: string
+              slug: string
+              locale?: string | null
+            } | null
+          }>
+        } | null
         components?: Array<
           | {
               __typename: 'ComponentModulesButtonsModule'
@@ -11097,6 +11651,45 @@ export type StoriesByLocaleQuery = {
               slug: string
               description?: string | null
               locale?: string | null
+              author?: {
+                __typename?: 'AuthorEntityResponse'
+                data?: {
+                  __typename?: 'AuthorEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Author'
+                    firstName: string
+                    lastName: string
+                    insertion?: string | null
+                  } | null
+                } | null
+              } | null
+              story?: {
+                __typename?: 'StoryEntityResponse'
+                data?: {
+                  __typename?: 'StoryEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Story'
+                    title: string
+                    slug: string
+                    locale?: string | null
+                  } | null
+                } | null
+              } | null
+              stories?: {
+                __typename?: 'StoryRelationResponseCollection'
+                data: Array<{
+                  __typename?: 'StoryEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Story'
+                    title: string
+                    slug: string
+                    locale?: string | null
+                  } | null
+                }>
+              } | null
               components?: Array<
                 | {
                     __typename: 'ComponentModulesButtonsModule'
@@ -11478,7 +12071,15 @@ export type StoriesMetaByLocaleQuery = {
         locale?: string | null
         author?: {
           __typename?: 'AuthorEntityResponse'
-          data?: { __typename?: 'AuthorEntity'; id?: string | null } | null
+          data?: {
+            __typename?: 'AuthorEntity'
+            attributes?: {
+              __typename?: 'Author'
+              firstName: string
+              lastName: string
+              insertion?: string | null
+            } | null
+          } | null
         } | null
         timeframe?: {
           __typename?: 'ComponentCoreTimeframe'
@@ -11500,6 +12101,209 @@ export type StoriesMetaByLocaleQuery = {
             __typename?: 'ThemeEntity'
             id?: string | null
             attributes?: { __typename?: 'Theme'; name: string } | null
+          }>
+        } | null
+        story?: {
+          __typename?: 'StoryEntityResponse'
+          data?: {
+            __typename?: 'StoryEntity'
+            id?: string | null
+            attributes?: {
+              __typename?: 'Story'
+              title: string
+              components?: Array<
+                | { __typename: 'ComponentModulesButtonsModule' }
+                | { __typename: 'ComponentModulesGridModule' }
+                | {
+                    __typename: 'ComponentModulesImage'
+                    alt_text?: string | null
+                    caption?: string | null
+                    id: string
+                    image: {
+                      __typename?: 'UploadFileEntityResponse'
+                      data?: {
+                        __typename?: 'UploadFileEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'UploadFile'
+                          hash: string
+                          mime: string
+                          name: string
+                          provider: string
+                          size: number
+                          url: string
+                          alternativeText?: string | null
+                          caption?: string | null
+                          createdAt?: any | null
+                          ext?: string | null
+                          formats?: any | null
+                          height?: number | null
+                          previewUrl?: string | null
+                          provider_metadata?: any | null
+                          updatedAt?: any | null
+                          width?: number | null
+                        } | null
+                      } | null
+                    }
+                    triplyRecord?: {
+                      __typename?: 'TriplyRecordEntityResponse'
+                      data?: {
+                        __typename?: 'TriplyRecordEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'TriplyRecord'
+                          recordId: string
+                          type: Enum_Triplyrecord_Type
+                        } | null
+                      } | null
+                    } | null
+                    story?: {
+                      __typename?: 'StoryEntityResponse'
+                      data?: {
+                        __typename?: 'StoryEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'Story'
+                          title: string
+                          slug: string
+                          description?: string | null
+                          shortDescription?: string | null
+                          createdAt?: any | null
+                          updatedAt?: any | null
+                          publishedAt?: any | null
+                          locale?: string | null
+                          author?: {
+                            __typename?: 'AuthorEntityResponse'
+                            data?: {
+                              __typename?: 'AuthorEntity'
+                              attributes?: { __typename?: 'Author'; firstName: string } | null
+                            } | null
+                          } | null
+                        } | null
+                      } | null
+                    } | null
+                  }
+                | { __typename: 'ComponentModulesImageCarousel' }
+                | { __typename: 'ComponentModulesPullquote' }
+                | { __typename: 'ComponentModulesSubtitle' }
+                | { __typename: 'ComponentModulesTableModule' }
+                | { __typename: 'ComponentModulesTextModule' }
+                | { __typename: 'ComponentModulesTitleModule' }
+                | { __typename: 'Error' }
+                | null
+              > | null
+              author?: {
+                __typename?: 'AuthorEntityResponse'
+                data?: {
+                  __typename?: 'AuthorEntity'
+                  attributes?: {
+                    __typename?: 'Author'
+                    firstName: string
+                    lastName: string
+                    insertion?: string | null
+                  } | null
+                } | null
+              } | null
+            } | null
+          } | null
+        } | null
+        stories?: {
+          __typename?: 'StoryRelationResponseCollection'
+          data: Array<{
+            __typename?: 'StoryEntity'
+            id?: string | null
+            attributes?: {
+              __typename?: 'Story'
+              title: string
+              components?: Array<
+                | { __typename: 'ComponentModulesButtonsModule' }
+                | { __typename: 'ComponentModulesGridModule' }
+                | {
+                    __typename: 'ComponentModulesImage'
+                    alt_text?: string | null
+                    caption?: string | null
+                    id: string
+                    image: {
+                      __typename?: 'UploadFileEntityResponse'
+                      data?: {
+                        __typename?: 'UploadFileEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'UploadFile'
+                          hash: string
+                          mime: string
+                          name: string
+                          provider: string
+                          size: number
+                          url: string
+                          alternativeText?: string | null
+                          caption?: string | null
+                          createdAt?: any | null
+                          ext?: string | null
+                          formats?: any | null
+                          height?: number | null
+                          previewUrl?: string | null
+                          provider_metadata?: any | null
+                          updatedAt?: any | null
+                          width?: number | null
+                        } | null
+                      } | null
+                    }
+                    triplyRecord?: {
+                      __typename?: 'TriplyRecordEntityResponse'
+                      data?: {
+                        __typename?: 'TriplyRecordEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'TriplyRecord'
+                          recordId: string
+                          type: Enum_Triplyrecord_Type
+                        } | null
+                      } | null
+                    } | null
+                    story?: {
+                      __typename?: 'StoryEntityResponse'
+                      data?: {
+                        __typename?: 'StoryEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'Story'
+                          title: string
+                          slug: string
+                          description?: string | null
+                          shortDescription?: string | null
+                          createdAt?: any | null
+                          updatedAt?: any | null
+                          publishedAt?: any | null
+                          locale?: string | null
+                          author?: {
+                            __typename?: 'AuthorEntityResponse'
+                            data?: {
+                              __typename?: 'AuthorEntity'
+                              attributes?: { __typename?: 'Author'; firstName: string } | null
+                            } | null
+                          } | null
+                        } | null
+                      } | null
+                    } | null
+                  }
+                | { __typename: 'ComponentModulesImageCarousel' }
+                | { __typename: 'ComponentModulesPullquote' }
+                | { __typename: 'ComponentModulesSubtitle' }
+                | { __typename: 'ComponentModulesTableModule' }
+                | { __typename: 'ComponentModulesTextModule' }
+                | { __typename: 'ComponentModulesTitleModule' }
+                | { __typename: 'Error' }
+                | null
+              > | null
+              author?: {
+                __typename?: 'AuthorEntityResponse'
+                data?: {
+                  __typename?: 'AuthorEntity'
+                  attributes?: { __typename?: 'Author'; firstName: string } | null
+                } | null
+              } | null
+            } | null
           }>
         } | null
         publicationDate?: {
@@ -11536,7 +12340,15 @@ export type StoriesMetaByLocaleQuery = {
               locale?: string | null
               author?: {
                 __typename?: 'AuthorEntityResponse'
-                data?: { __typename?: 'AuthorEntity'; id?: string | null } | null
+                data?: {
+                  __typename?: 'AuthorEntity'
+                  attributes?: {
+                    __typename?: 'Author'
+                    firstName: string
+                    lastName: string
+                    insertion?: string | null
+                  } | null
+                } | null
               } | null
               timeframe?: {
                 __typename?: 'ComponentCoreTimeframe'
@@ -11615,6 +12427,214 @@ export type StoriesMetaByLocaleQuery = {
                     } | null
                   } | null
                 } | null> | null
+              } | null
+              story?: {
+                __typename?: 'StoryEntityResponse'
+                data?: {
+                  __typename?: 'StoryEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Story'
+                    title: string
+                    components?: Array<
+                      | { __typename: 'ComponentModulesButtonsModule' }
+                      | { __typename: 'ComponentModulesGridModule' }
+                      | {
+                          __typename: 'ComponentModulesImage'
+                          alt_text?: string | null
+                          caption?: string | null
+                          id: string
+                          image: {
+                            __typename?: 'UploadFileEntityResponse'
+                            data?: {
+                              __typename?: 'UploadFileEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'UploadFile'
+                                hash: string
+                                mime: string
+                                name: string
+                                provider: string
+                                size: number
+                                url: string
+                                alternativeText?: string | null
+                                caption?: string | null
+                                createdAt?: any | null
+                                ext?: string | null
+                                formats?: any | null
+                                height?: number | null
+                                previewUrl?: string | null
+                                provider_metadata?: any | null
+                                updatedAt?: any | null
+                                width?: number | null
+                              } | null
+                            } | null
+                          }
+                          triplyRecord?: {
+                            __typename?: 'TriplyRecordEntityResponse'
+                            data?: {
+                              __typename?: 'TriplyRecordEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'TriplyRecord'
+                                recordId: string
+                                type: Enum_Triplyrecord_Type
+                              } | null
+                            } | null
+                          } | null
+                          story?: {
+                            __typename?: 'StoryEntityResponse'
+                            data?: {
+                              __typename?: 'StoryEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'Story'
+                                title: string
+                                slug: string
+                                description?: string | null
+                                shortDescription?: string | null
+                                createdAt?: any | null
+                                updatedAt?: any | null
+                                publishedAt?: any | null
+                                locale?: string | null
+                                author?: {
+                                  __typename?: 'AuthorEntityResponse'
+                                  data?: {
+                                    __typename?: 'AuthorEntity'
+                                    attributes?: { __typename?: 'Author'; firstName: string } | null
+                                  } | null
+                                } | null
+                              } | null
+                            } | null
+                          } | null
+                        }
+                      | { __typename: 'ComponentModulesImageCarousel' }
+                      | { __typename: 'ComponentModulesPullquote' }
+                      | { __typename: 'ComponentModulesSubtitle' }
+                      | { __typename: 'ComponentModulesTableModule' }
+                      | { __typename: 'ComponentModulesTextModule' }
+                      | { __typename: 'ComponentModulesTitleModule' }
+                      | { __typename: 'Error' }
+                      | null
+                    > | null
+                    author?: {
+                      __typename?: 'AuthorEntityResponse'
+                      data?: {
+                        __typename?: 'AuthorEntity'
+                        attributes?: {
+                          __typename?: 'Author'
+                          firstName: string
+                          lastName: string
+                          insertion?: string | null
+                        } | null
+                      } | null
+                    } | null
+                  } | null
+                } | null
+              } | null
+              stories?: {
+                __typename?: 'StoryRelationResponseCollection'
+                data: Array<{
+                  __typename?: 'StoryEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Story'
+                    title: string
+                    components?: Array<
+                      | { __typename: 'ComponentModulesButtonsModule' }
+                      | { __typename: 'ComponentModulesGridModule' }
+                      | {
+                          __typename: 'ComponentModulesImage'
+                          alt_text?: string | null
+                          caption?: string | null
+                          id: string
+                          image: {
+                            __typename?: 'UploadFileEntityResponse'
+                            data?: {
+                              __typename?: 'UploadFileEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'UploadFile'
+                                hash: string
+                                mime: string
+                                name: string
+                                provider: string
+                                size: number
+                                url: string
+                                alternativeText?: string | null
+                                caption?: string | null
+                                createdAt?: any | null
+                                ext?: string | null
+                                formats?: any | null
+                                height?: number | null
+                                previewUrl?: string | null
+                                provider_metadata?: any | null
+                                updatedAt?: any | null
+                                width?: number | null
+                              } | null
+                            } | null
+                          }
+                          triplyRecord?: {
+                            __typename?: 'TriplyRecordEntityResponse'
+                            data?: {
+                              __typename?: 'TriplyRecordEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'TriplyRecord'
+                                recordId: string
+                                type: Enum_Triplyrecord_Type
+                              } | null
+                            } | null
+                          } | null
+                          story?: {
+                            __typename?: 'StoryEntityResponse'
+                            data?: {
+                              __typename?: 'StoryEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'Story'
+                                title: string
+                                slug: string
+                                description?: string | null
+                                shortDescription?: string | null
+                                createdAt?: any | null
+                                updatedAt?: any | null
+                                publishedAt?: any | null
+                                locale?: string | null
+                                author?: {
+                                  __typename?: 'AuthorEntityResponse'
+                                  data?: {
+                                    __typename?: 'AuthorEntity'
+                                    attributes?: { __typename?: 'Author'; firstName: string } | null
+                                  } | null
+                                } | null
+                              } | null
+                            } | null
+                          } | null
+                        }
+                      | { __typename: 'ComponentModulesImageCarousel' }
+                      | { __typename: 'ComponentModulesPullquote' }
+                      | { __typename: 'ComponentModulesSubtitle' }
+                      | { __typename: 'ComponentModulesTableModule' }
+                      | { __typename: 'ComponentModulesTextModule' }
+                      | { __typename: 'ComponentModulesTitleModule' }
+                      | { __typename: 'Error' }
+                      | null
+                    > | null
+                    author?: {
+                      __typename?: 'AuthorEntityResponse'
+                      data?: {
+                        __typename?: 'AuthorEntity'
+                        attributes?: {
+                          __typename?: 'Author'
+                          firstName: string
+                          lastName: string
+                          insertion?: string | null
+                        } | null
+                      } | null
+                    } | null
+                  } | null
+                }>
               } | null
             } | null
           }>
@@ -12122,7 +13142,16 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
         > | null
         author?: {
           __typename?: 'AuthorEntityResponse'
-          data?: { __typename?: 'AuthorEntity'; id?: string | null } | null
+          data?: {
+            __typename?: 'AuthorEntity'
+            id?: string | null
+            attributes?: {
+              __typename?: 'Author'
+              firstName: string
+              lastName: string
+              insertion?: string | null
+            } | null
+          } | null
         } | null
         timeframe?: {
           __typename?: 'ComponentCoreTimeframe'
@@ -12193,6 +13222,209 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
               } | null
             } | null
           } | null> | null
+        } | null
+        story?: {
+          __typename?: 'StoryEntityResponse'
+          data?: {
+            __typename?: 'StoryEntity'
+            id?: string | null
+            attributes?: {
+              __typename?: 'Story'
+              title: string
+              components?: Array<
+                | { __typename: 'ComponentModulesButtonsModule' }
+                | { __typename: 'ComponentModulesGridModule' }
+                | {
+                    __typename: 'ComponentModulesImage'
+                    alt_text?: string | null
+                    caption?: string | null
+                    id: string
+                    image: {
+                      __typename?: 'UploadFileEntityResponse'
+                      data?: {
+                        __typename?: 'UploadFileEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'UploadFile'
+                          hash: string
+                          mime: string
+                          name: string
+                          provider: string
+                          size: number
+                          url: string
+                          alternativeText?: string | null
+                          caption?: string | null
+                          createdAt?: any | null
+                          ext?: string | null
+                          formats?: any | null
+                          height?: number | null
+                          previewUrl?: string | null
+                          provider_metadata?: any | null
+                          updatedAt?: any | null
+                          width?: number | null
+                        } | null
+                      } | null
+                    }
+                    triplyRecord?: {
+                      __typename?: 'TriplyRecordEntityResponse'
+                      data?: {
+                        __typename?: 'TriplyRecordEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'TriplyRecord'
+                          recordId: string
+                          type: Enum_Triplyrecord_Type
+                        } | null
+                      } | null
+                    } | null
+                    story?: {
+                      __typename?: 'StoryEntityResponse'
+                      data?: {
+                        __typename?: 'StoryEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'Story'
+                          title: string
+                          slug: string
+                          description?: string | null
+                          shortDescription?: string | null
+                          createdAt?: any | null
+                          updatedAt?: any | null
+                          publishedAt?: any | null
+                          locale?: string | null
+                          author?: {
+                            __typename?: 'AuthorEntityResponse'
+                            data?: {
+                              __typename?: 'AuthorEntity'
+                              attributes?: { __typename?: 'Author'; firstName: string } | null
+                            } | null
+                          } | null
+                        } | null
+                      } | null
+                    } | null
+                  }
+                | { __typename: 'ComponentModulesImageCarousel' }
+                | { __typename: 'ComponentModulesPullquote' }
+                | { __typename: 'ComponentModulesSubtitle' }
+                | { __typename: 'ComponentModulesTableModule' }
+                | { __typename: 'ComponentModulesTextModule' }
+                | { __typename: 'ComponentModulesTitleModule' }
+                | { __typename: 'Error' }
+                | null
+              > | null
+              author?: {
+                __typename?: 'AuthorEntityResponse'
+                data?: {
+                  __typename?: 'AuthorEntity'
+                  attributes?: {
+                    __typename?: 'Author'
+                    firstName: string
+                    lastName: string
+                    insertion?: string | null
+                  } | null
+                } | null
+              } | null
+            } | null
+          } | null
+        } | null
+        stories?: {
+          __typename?: 'StoryRelationResponseCollection'
+          data: Array<{
+            __typename?: 'StoryEntity'
+            id?: string | null
+            attributes?: {
+              __typename?: 'Story'
+              title: string
+              components?: Array<
+                | { __typename: 'ComponentModulesButtonsModule' }
+                | { __typename: 'ComponentModulesGridModule' }
+                | {
+                    __typename: 'ComponentModulesImage'
+                    alt_text?: string | null
+                    caption?: string | null
+                    id: string
+                    image: {
+                      __typename?: 'UploadFileEntityResponse'
+                      data?: {
+                        __typename?: 'UploadFileEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'UploadFile'
+                          hash: string
+                          mime: string
+                          name: string
+                          provider: string
+                          size: number
+                          url: string
+                          alternativeText?: string | null
+                          caption?: string | null
+                          createdAt?: any | null
+                          ext?: string | null
+                          formats?: any | null
+                          height?: number | null
+                          previewUrl?: string | null
+                          provider_metadata?: any | null
+                          updatedAt?: any | null
+                          width?: number | null
+                        } | null
+                      } | null
+                    }
+                    triplyRecord?: {
+                      __typename?: 'TriplyRecordEntityResponse'
+                      data?: {
+                        __typename?: 'TriplyRecordEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'TriplyRecord'
+                          recordId: string
+                          type: Enum_Triplyrecord_Type
+                        } | null
+                      } | null
+                    } | null
+                    story?: {
+                      __typename?: 'StoryEntityResponse'
+                      data?: {
+                        __typename?: 'StoryEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'Story'
+                          title: string
+                          slug: string
+                          description?: string | null
+                          shortDescription?: string | null
+                          createdAt?: any | null
+                          updatedAt?: any | null
+                          publishedAt?: any | null
+                          locale?: string | null
+                          author?: {
+                            __typename?: 'AuthorEntityResponse'
+                            data?: {
+                              __typename?: 'AuthorEntity'
+                              attributes?: { __typename?: 'Author'; firstName: string } | null
+                            } | null
+                          } | null
+                        } | null
+                      } | null
+                    } | null
+                  }
+                | { __typename: 'ComponentModulesImageCarousel' }
+                | { __typename: 'ComponentModulesPullquote' }
+                | { __typename: 'ComponentModulesSubtitle' }
+                | { __typename: 'ComponentModulesTableModule' }
+                | { __typename: 'ComponentModulesTextModule' }
+                | { __typename: 'ComponentModulesTitleModule' }
+                | { __typename: 'Error' }
+                | null
+              > | null
+              author?: {
+                __typename?: 'AuthorEntityResponse'
+                data?: {
+                  __typename?: 'AuthorEntity'
+                  attributes?: { __typename?: 'Author'; firstName: string } | null
+                } | null
+              } | null
+            } | null
+          }>
         } | null
       } | null
     }>
@@ -12433,6 +13665,45 @@ export type NestedStoryFragmentFragment = {
     slug: string
     description?: string | null
     locale?: string | null
+    author?: {
+      __typename?: 'AuthorEntityResponse'
+      data?: {
+        __typename?: 'AuthorEntity'
+        id?: string | null
+        attributes?: {
+          __typename?: 'Author'
+          firstName: string
+          lastName: string
+          insertion?: string | null
+        } | null
+      } | null
+    } | null
+    story?: {
+      __typename?: 'StoryEntityResponse'
+      data?: {
+        __typename?: 'StoryEntity'
+        id?: string | null
+        attributes?: {
+          __typename?: 'Story'
+          title: string
+          slug: string
+          locale?: string | null
+        } | null
+      } | null
+    } | null
+    stories?: {
+      __typename?: 'StoryRelationResponseCollection'
+      data: Array<{
+        __typename?: 'StoryEntity'
+        id?: string | null
+        attributes?: {
+          __typename?: 'Story'
+          title: string
+          slug: string
+          locale?: string | null
+        } | null
+      }>
+    } | null
     components?: Array<
       | {
           __typename: 'ComponentModulesButtonsModule'
@@ -12781,6 +14052,45 @@ export type LocalizedStoryFragmentFragment = {
     slug: string
     description?: string | null
     locale?: string | null
+    author?: {
+      __typename?: 'AuthorEntityResponse'
+      data?: {
+        __typename?: 'AuthorEntity'
+        id?: string | null
+        attributes?: {
+          __typename?: 'Author'
+          firstName: string
+          lastName: string
+          insertion?: string | null
+        } | null
+      } | null
+    } | null
+    story?: {
+      __typename?: 'StoryEntityResponse'
+      data?: {
+        __typename?: 'StoryEntity'
+        id?: string | null
+        attributes?: {
+          __typename?: 'Story'
+          title: string
+          slug: string
+          locale?: string | null
+        } | null
+      } | null
+    } | null
+    stories?: {
+      __typename?: 'StoryRelationResponseCollection'
+      data: Array<{
+        __typename?: 'StoryEntity'
+        id?: string | null
+        attributes?: {
+          __typename?: 'Story'
+          title: string
+          slug: string
+          locale?: string | null
+        } | null
+      }>
+    } | null
     components?: Array<
       | {
           __typename: 'ComponentModulesButtonsModule'
@@ -13128,6 +14438,45 @@ export type LocalizedStoryFragmentFragment = {
           slug: string
           description?: string | null
           locale?: string | null
+          author?: {
+            __typename?: 'AuthorEntityResponse'
+            data?: {
+              __typename?: 'AuthorEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'Author'
+                firstName: string
+                lastName: string
+                insertion?: string | null
+              } | null
+            } | null
+          } | null
+          story?: {
+            __typename?: 'StoryEntityResponse'
+            data?: {
+              __typename?: 'StoryEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'Story'
+                title: string
+                slug: string
+                locale?: string | null
+              } | null
+            } | null
+          } | null
+          stories?: {
+            __typename?: 'StoryRelationResponseCollection'
+            data: Array<{
+              __typename?: 'StoryEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'Story'
+                title: string
+                slug: string
+                locale?: string | null
+              } | null
+            }>
+          } | null
           components?: Array<
             | {
                 __typename: 'ComponentModulesButtonsModule'
@@ -13821,7 +15170,16 @@ export type StoryFragmentFragment = {
     > | null
     author?: {
       __typename?: 'AuthorEntityResponse'
-      data?: { __typename?: 'AuthorEntity'; id?: string | null } | null
+      data?: {
+        __typename?: 'AuthorEntity'
+        id?: string | null
+        attributes?: {
+          __typename?: 'Author'
+          firstName: string
+          lastName: string
+          insertion?: string | null
+        } | null
+      } | null
     } | null
     timeframe?: {
       __typename?: 'ComponentCoreTimeframe'
@@ -13893,6 +15251,209 @@ export type StoryFragmentFragment = {
         } | null
       } | null> | null
     } | null
+    story?: {
+      __typename?: 'StoryEntityResponse'
+      data?: {
+        __typename?: 'StoryEntity'
+        id?: string | null
+        attributes?: {
+          __typename?: 'Story'
+          title: string
+          components?: Array<
+            | { __typename: 'ComponentModulesButtonsModule' }
+            | { __typename: 'ComponentModulesGridModule' }
+            | {
+                __typename: 'ComponentModulesImage'
+                alt_text?: string | null
+                caption?: string | null
+                id: string
+                image: {
+                  __typename?: 'UploadFileEntityResponse'
+                  data?: {
+                    __typename?: 'UploadFileEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'UploadFile'
+                      hash: string
+                      mime: string
+                      name: string
+                      provider: string
+                      size: number
+                      url: string
+                      alternativeText?: string | null
+                      caption?: string | null
+                      createdAt?: any | null
+                      ext?: string | null
+                      formats?: any | null
+                      height?: number | null
+                      previewUrl?: string | null
+                      provider_metadata?: any | null
+                      updatedAt?: any | null
+                      width?: number | null
+                    } | null
+                  } | null
+                }
+                triplyRecord?: {
+                  __typename?: 'TriplyRecordEntityResponse'
+                  data?: {
+                    __typename?: 'TriplyRecordEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'TriplyRecord'
+                      recordId: string
+                      type: Enum_Triplyrecord_Type
+                    } | null
+                  } | null
+                } | null
+                story?: {
+                  __typename?: 'StoryEntityResponse'
+                  data?: {
+                    __typename?: 'StoryEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'Story'
+                      title: string
+                      slug: string
+                      description?: string | null
+                      shortDescription?: string | null
+                      createdAt?: any | null
+                      updatedAt?: any | null
+                      publishedAt?: any | null
+                      locale?: string | null
+                      author?: {
+                        __typename?: 'AuthorEntityResponse'
+                        data?: {
+                          __typename?: 'AuthorEntity'
+                          attributes?: { __typename?: 'Author'; firstName: string } | null
+                        } | null
+                      } | null
+                    } | null
+                  } | null
+                } | null
+              }
+            | { __typename: 'ComponentModulesImageCarousel' }
+            | { __typename: 'ComponentModulesPullquote' }
+            | { __typename: 'ComponentModulesSubtitle' }
+            | { __typename: 'ComponentModulesTableModule' }
+            | { __typename: 'ComponentModulesTextModule' }
+            | { __typename: 'ComponentModulesTitleModule' }
+            | { __typename: 'Error' }
+            | null
+          > | null
+          author?: {
+            __typename?: 'AuthorEntityResponse'
+            data?: {
+              __typename?: 'AuthorEntity'
+              attributes?: {
+                __typename?: 'Author'
+                firstName: string
+                lastName: string
+                insertion?: string | null
+              } | null
+            } | null
+          } | null
+        } | null
+      } | null
+    } | null
+    stories?: {
+      __typename?: 'StoryRelationResponseCollection'
+      data: Array<{
+        __typename?: 'StoryEntity'
+        id?: string | null
+        attributes?: {
+          __typename?: 'Story'
+          title: string
+          components?: Array<
+            | { __typename: 'ComponentModulesButtonsModule' }
+            | { __typename: 'ComponentModulesGridModule' }
+            | {
+                __typename: 'ComponentModulesImage'
+                alt_text?: string | null
+                caption?: string | null
+                id: string
+                image: {
+                  __typename?: 'UploadFileEntityResponse'
+                  data?: {
+                    __typename?: 'UploadFileEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'UploadFile'
+                      hash: string
+                      mime: string
+                      name: string
+                      provider: string
+                      size: number
+                      url: string
+                      alternativeText?: string | null
+                      caption?: string | null
+                      createdAt?: any | null
+                      ext?: string | null
+                      formats?: any | null
+                      height?: number | null
+                      previewUrl?: string | null
+                      provider_metadata?: any | null
+                      updatedAt?: any | null
+                      width?: number | null
+                    } | null
+                  } | null
+                }
+                triplyRecord?: {
+                  __typename?: 'TriplyRecordEntityResponse'
+                  data?: {
+                    __typename?: 'TriplyRecordEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'TriplyRecord'
+                      recordId: string
+                      type: Enum_Triplyrecord_Type
+                    } | null
+                  } | null
+                } | null
+                story?: {
+                  __typename?: 'StoryEntityResponse'
+                  data?: {
+                    __typename?: 'StoryEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'Story'
+                      title: string
+                      slug: string
+                      description?: string | null
+                      shortDescription?: string | null
+                      createdAt?: any | null
+                      updatedAt?: any | null
+                      publishedAt?: any | null
+                      locale?: string | null
+                      author?: {
+                        __typename?: 'AuthorEntityResponse'
+                        data?: {
+                          __typename?: 'AuthorEntity'
+                          attributes?: { __typename?: 'Author'; firstName: string } | null
+                        } | null
+                      } | null
+                    } | null
+                  } | null
+                } | null
+              }
+            | { __typename: 'ComponentModulesImageCarousel' }
+            | { __typename: 'ComponentModulesPullquote' }
+            | { __typename: 'ComponentModulesSubtitle' }
+            | { __typename: 'ComponentModulesTableModule' }
+            | { __typename: 'ComponentModulesTextModule' }
+            | { __typename: 'ComponentModulesTitleModule' }
+            | { __typename: 'Error' }
+            | null
+          > | null
+          author?: {
+            __typename?: 'AuthorEntityResponse'
+            data?: {
+              __typename?: 'AuthorEntity'
+              attributes?: { __typename?: 'Author'; firstName: string } | null
+            } | null
+          } | null
+        } | null
+      }>
+    } | null
   } | null
 }
 
@@ -13910,7 +15471,15 @@ export type StoryMetaFragmentFragment = {
     locale?: string | null
     author?: {
       __typename?: 'AuthorEntityResponse'
-      data?: { __typename?: 'AuthorEntity'; id?: string | null } | null
+      data?: {
+        __typename?: 'AuthorEntity'
+        attributes?: {
+          __typename?: 'Author'
+          firstName: string
+          lastName: string
+          insertion?: string | null
+        } | null
+      } | null
     } | null
     timeframe?: {
       __typename?: 'ComponentCoreTimeframe'
@@ -13990,6 +15559,214 @@ export type StoryMetaFragmentFragment = {
         } | null
       } | null> | null
     } | null
+    story?: {
+      __typename?: 'StoryEntityResponse'
+      data?: {
+        __typename?: 'StoryEntity'
+        id?: string | null
+        attributes?: {
+          __typename?: 'Story'
+          title: string
+          components?: Array<
+            | { __typename: 'ComponentModulesButtonsModule' }
+            | { __typename: 'ComponentModulesGridModule' }
+            | {
+                __typename: 'ComponentModulesImage'
+                alt_text?: string | null
+                caption?: string | null
+                id: string
+                image: {
+                  __typename?: 'UploadFileEntityResponse'
+                  data?: {
+                    __typename?: 'UploadFileEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'UploadFile'
+                      hash: string
+                      mime: string
+                      name: string
+                      provider: string
+                      size: number
+                      url: string
+                      alternativeText?: string | null
+                      caption?: string | null
+                      createdAt?: any | null
+                      ext?: string | null
+                      formats?: any | null
+                      height?: number | null
+                      previewUrl?: string | null
+                      provider_metadata?: any | null
+                      updatedAt?: any | null
+                      width?: number | null
+                    } | null
+                  } | null
+                }
+                triplyRecord?: {
+                  __typename?: 'TriplyRecordEntityResponse'
+                  data?: {
+                    __typename?: 'TriplyRecordEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'TriplyRecord'
+                      recordId: string
+                      type: Enum_Triplyrecord_Type
+                    } | null
+                  } | null
+                } | null
+                story?: {
+                  __typename?: 'StoryEntityResponse'
+                  data?: {
+                    __typename?: 'StoryEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'Story'
+                      title: string
+                      slug: string
+                      description?: string | null
+                      shortDescription?: string | null
+                      createdAt?: any | null
+                      updatedAt?: any | null
+                      publishedAt?: any | null
+                      locale?: string | null
+                      author?: {
+                        __typename?: 'AuthorEntityResponse'
+                        data?: {
+                          __typename?: 'AuthorEntity'
+                          attributes?: { __typename?: 'Author'; firstName: string } | null
+                        } | null
+                      } | null
+                    } | null
+                  } | null
+                } | null
+              }
+            | { __typename: 'ComponentModulesImageCarousel' }
+            | { __typename: 'ComponentModulesPullquote' }
+            | { __typename: 'ComponentModulesSubtitle' }
+            | { __typename: 'ComponentModulesTableModule' }
+            | { __typename: 'ComponentModulesTextModule' }
+            | { __typename: 'ComponentModulesTitleModule' }
+            | { __typename: 'Error' }
+            | null
+          > | null
+          author?: {
+            __typename?: 'AuthorEntityResponse'
+            data?: {
+              __typename?: 'AuthorEntity'
+              attributes?: {
+                __typename?: 'Author'
+                firstName: string
+                lastName: string
+                insertion?: string | null
+              } | null
+            } | null
+          } | null
+        } | null
+      } | null
+    } | null
+    stories?: {
+      __typename?: 'StoryRelationResponseCollection'
+      data: Array<{
+        __typename?: 'StoryEntity'
+        id?: string | null
+        attributes?: {
+          __typename?: 'Story'
+          title: string
+          components?: Array<
+            | { __typename: 'ComponentModulesButtonsModule' }
+            | { __typename: 'ComponentModulesGridModule' }
+            | {
+                __typename: 'ComponentModulesImage'
+                alt_text?: string | null
+                caption?: string | null
+                id: string
+                image: {
+                  __typename?: 'UploadFileEntityResponse'
+                  data?: {
+                    __typename?: 'UploadFileEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'UploadFile'
+                      hash: string
+                      mime: string
+                      name: string
+                      provider: string
+                      size: number
+                      url: string
+                      alternativeText?: string | null
+                      caption?: string | null
+                      createdAt?: any | null
+                      ext?: string | null
+                      formats?: any | null
+                      height?: number | null
+                      previewUrl?: string | null
+                      provider_metadata?: any | null
+                      updatedAt?: any | null
+                      width?: number | null
+                    } | null
+                  } | null
+                }
+                triplyRecord?: {
+                  __typename?: 'TriplyRecordEntityResponse'
+                  data?: {
+                    __typename?: 'TriplyRecordEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'TriplyRecord'
+                      recordId: string
+                      type: Enum_Triplyrecord_Type
+                    } | null
+                  } | null
+                } | null
+                story?: {
+                  __typename?: 'StoryEntityResponse'
+                  data?: {
+                    __typename?: 'StoryEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'Story'
+                      title: string
+                      slug: string
+                      description?: string | null
+                      shortDescription?: string | null
+                      createdAt?: any | null
+                      updatedAt?: any | null
+                      publishedAt?: any | null
+                      locale?: string | null
+                      author?: {
+                        __typename?: 'AuthorEntityResponse'
+                        data?: {
+                          __typename?: 'AuthorEntity'
+                          attributes?: { __typename?: 'Author'; firstName: string } | null
+                        } | null
+                      } | null
+                    } | null
+                  } | null
+                } | null
+              }
+            | { __typename: 'ComponentModulesImageCarousel' }
+            | { __typename: 'ComponentModulesPullquote' }
+            | { __typename: 'ComponentModulesSubtitle' }
+            | { __typename: 'ComponentModulesTableModule' }
+            | { __typename: 'ComponentModulesTextModule' }
+            | { __typename: 'ComponentModulesTitleModule' }
+            | { __typename: 'Error' }
+            | null
+          > | null
+          author?: {
+            __typename?: 'AuthorEntityResponse'
+            data?: {
+              __typename?: 'AuthorEntity'
+              attributes?: {
+                __typename?: 'Author'
+                firstName: string
+                lastName: string
+                insertion?: string | null
+              } | null
+            } | null
+          } | null
+        } | null
+      }>
+    } | null
   } | null
 }
 
@@ -14008,7 +15785,15 @@ export type LocalizedStoryMetaFragmentFragment = {
     locale?: string | null
     author?: {
       __typename?: 'AuthorEntityResponse'
-      data?: { __typename?: 'AuthorEntity'; id?: string | null } | null
+      data?: {
+        __typename?: 'AuthorEntity'
+        attributes?: {
+          __typename?: 'Author'
+          firstName: string
+          lastName: string
+          insertion?: string | null
+        } | null
+      } | null
     } | null
     timeframe?: {
       __typename?: 'ComponentCoreTimeframe'
@@ -14030,6 +15815,209 @@ export type LocalizedStoryMetaFragmentFragment = {
         __typename?: 'ThemeEntity'
         id?: string | null
         attributes?: { __typename?: 'Theme'; name: string } | null
+      }>
+    } | null
+    story?: {
+      __typename?: 'StoryEntityResponse'
+      data?: {
+        __typename?: 'StoryEntity'
+        id?: string | null
+        attributes?: {
+          __typename?: 'Story'
+          title: string
+          components?: Array<
+            | { __typename: 'ComponentModulesButtonsModule' }
+            | { __typename: 'ComponentModulesGridModule' }
+            | {
+                __typename: 'ComponentModulesImage'
+                alt_text?: string | null
+                caption?: string | null
+                id: string
+                image: {
+                  __typename?: 'UploadFileEntityResponse'
+                  data?: {
+                    __typename?: 'UploadFileEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'UploadFile'
+                      hash: string
+                      mime: string
+                      name: string
+                      provider: string
+                      size: number
+                      url: string
+                      alternativeText?: string | null
+                      caption?: string | null
+                      createdAt?: any | null
+                      ext?: string | null
+                      formats?: any | null
+                      height?: number | null
+                      previewUrl?: string | null
+                      provider_metadata?: any | null
+                      updatedAt?: any | null
+                      width?: number | null
+                    } | null
+                  } | null
+                }
+                triplyRecord?: {
+                  __typename?: 'TriplyRecordEntityResponse'
+                  data?: {
+                    __typename?: 'TriplyRecordEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'TriplyRecord'
+                      recordId: string
+                      type: Enum_Triplyrecord_Type
+                    } | null
+                  } | null
+                } | null
+                story?: {
+                  __typename?: 'StoryEntityResponse'
+                  data?: {
+                    __typename?: 'StoryEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'Story'
+                      title: string
+                      slug: string
+                      description?: string | null
+                      shortDescription?: string | null
+                      createdAt?: any | null
+                      updatedAt?: any | null
+                      publishedAt?: any | null
+                      locale?: string | null
+                      author?: {
+                        __typename?: 'AuthorEntityResponse'
+                        data?: {
+                          __typename?: 'AuthorEntity'
+                          attributes?: { __typename?: 'Author'; firstName: string } | null
+                        } | null
+                      } | null
+                    } | null
+                  } | null
+                } | null
+              }
+            | { __typename: 'ComponentModulesImageCarousel' }
+            | { __typename: 'ComponentModulesPullquote' }
+            | { __typename: 'ComponentModulesSubtitle' }
+            | { __typename: 'ComponentModulesTableModule' }
+            | { __typename: 'ComponentModulesTextModule' }
+            | { __typename: 'ComponentModulesTitleModule' }
+            | { __typename: 'Error' }
+            | null
+          > | null
+          author?: {
+            __typename?: 'AuthorEntityResponse'
+            data?: {
+              __typename?: 'AuthorEntity'
+              attributes?: {
+                __typename?: 'Author'
+                firstName: string
+                lastName: string
+                insertion?: string | null
+              } | null
+            } | null
+          } | null
+        } | null
+      } | null
+    } | null
+    stories?: {
+      __typename?: 'StoryRelationResponseCollection'
+      data: Array<{
+        __typename?: 'StoryEntity'
+        id?: string | null
+        attributes?: {
+          __typename?: 'Story'
+          title: string
+          components?: Array<
+            | { __typename: 'ComponentModulesButtonsModule' }
+            | { __typename: 'ComponentModulesGridModule' }
+            | {
+                __typename: 'ComponentModulesImage'
+                alt_text?: string | null
+                caption?: string | null
+                id: string
+                image: {
+                  __typename?: 'UploadFileEntityResponse'
+                  data?: {
+                    __typename?: 'UploadFileEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'UploadFile'
+                      hash: string
+                      mime: string
+                      name: string
+                      provider: string
+                      size: number
+                      url: string
+                      alternativeText?: string | null
+                      caption?: string | null
+                      createdAt?: any | null
+                      ext?: string | null
+                      formats?: any | null
+                      height?: number | null
+                      previewUrl?: string | null
+                      provider_metadata?: any | null
+                      updatedAt?: any | null
+                      width?: number | null
+                    } | null
+                  } | null
+                }
+                triplyRecord?: {
+                  __typename?: 'TriplyRecordEntityResponse'
+                  data?: {
+                    __typename?: 'TriplyRecordEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'TriplyRecord'
+                      recordId: string
+                      type: Enum_Triplyrecord_Type
+                    } | null
+                  } | null
+                } | null
+                story?: {
+                  __typename?: 'StoryEntityResponse'
+                  data?: {
+                    __typename?: 'StoryEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'Story'
+                      title: string
+                      slug: string
+                      description?: string | null
+                      shortDescription?: string | null
+                      createdAt?: any | null
+                      updatedAt?: any | null
+                      publishedAt?: any | null
+                      locale?: string | null
+                      author?: {
+                        __typename?: 'AuthorEntityResponse'
+                        data?: {
+                          __typename?: 'AuthorEntity'
+                          attributes?: { __typename?: 'Author'; firstName: string } | null
+                        } | null
+                      } | null
+                    } | null
+                  } | null
+                } | null
+              }
+            | { __typename: 'ComponentModulesImageCarousel' }
+            | { __typename: 'ComponentModulesPullquote' }
+            | { __typename: 'ComponentModulesSubtitle' }
+            | { __typename: 'ComponentModulesTableModule' }
+            | { __typename: 'ComponentModulesTextModule' }
+            | { __typename: 'ComponentModulesTitleModule' }
+            | { __typename: 'Error' }
+            | null
+          > | null
+          author?: {
+            __typename?: 'AuthorEntityResponse'
+            data?: {
+              __typename?: 'AuthorEntity'
+              attributes?: { __typename?: 'Author'; firstName: string } | null
+            } | null
+          } | null
+        } | null
       }>
     } | null
     publicationDate?: {
@@ -14066,7 +16054,15 @@ export type LocalizedStoryMetaFragmentFragment = {
           locale?: string | null
           author?: {
             __typename?: 'AuthorEntityResponse'
-            data?: { __typename?: 'AuthorEntity'; id?: string | null } | null
+            data?: {
+              __typename?: 'AuthorEntity'
+              attributes?: {
+                __typename?: 'Author'
+                firstName: string
+                lastName: string
+                insertion?: string | null
+              } | null
+            } | null
           } | null
           timeframe?: {
             __typename?: 'ComponentCoreTimeframe'
@@ -14145,6 +16141,214 @@ export type LocalizedStoryMetaFragmentFragment = {
                 } | null
               } | null
             } | null> | null
+          } | null
+          story?: {
+            __typename?: 'StoryEntityResponse'
+            data?: {
+              __typename?: 'StoryEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'Story'
+                title: string
+                components?: Array<
+                  | { __typename: 'ComponentModulesButtonsModule' }
+                  | { __typename: 'ComponentModulesGridModule' }
+                  | {
+                      __typename: 'ComponentModulesImage'
+                      alt_text?: string | null
+                      caption?: string | null
+                      id: string
+                      image: {
+                        __typename?: 'UploadFileEntityResponse'
+                        data?: {
+                          __typename?: 'UploadFileEntity'
+                          id?: string | null
+                          attributes?: {
+                            __typename?: 'UploadFile'
+                            hash: string
+                            mime: string
+                            name: string
+                            provider: string
+                            size: number
+                            url: string
+                            alternativeText?: string | null
+                            caption?: string | null
+                            createdAt?: any | null
+                            ext?: string | null
+                            formats?: any | null
+                            height?: number | null
+                            previewUrl?: string | null
+                            provider_metadata?: any | null
+                            updatedAt?: any | null
+                            width?: number | null
+                          } | null
+                        } | null
+                      }
+                      triplyRecord?: {
+                        __typename?: 'TriplyRecordEntityResponse'
+                        data?: {
+                          __typename?: 'TriplyRecordEntity'
+                          id?: string | null
+                          attributes?: {
+                            __typename?: 'TriplyRecord'
+                            recordId: string
+                            type: Enum_Triplyrecord_Type
+                          } | null
+                        } | null
+                      } | null
+                      story?: {
+                        __typename?: 'StoryEntityResponse'
+                        data?: {
+                          __typename?: 'StoryEntity'
+                          id?: string | null
+                          attributes?: {
+                            __typename?: 'Story'
+                            title: string
+                            slug: string
+                            description?: string | null
+                            shortDescription?: string | null
+                            createdAt?: any | null
+                            updatedAt?: any | null
+                            publishedAt?: any | null
+                            locale?: string | null
+                            author?: {
+                              __typename?: 'AuthorEntityResponse'
+                              data?: {
+                                __typename?: 'AuthorEntity'
+                                attributes?: { __typename?: 'Author'; firstName: string } | null
+                              } | null
+                            } | null
+                          } | null
+                        } | null
+                      } | null
+                    }
+                  | { __typename: 'ComponentModulesImageCarousel' }
+                  | { __typename: 'ComponentModulesPullquote' }
+                  | { __typename: 'ComponentModulesSubtitle' }
+                  | { __typename: 'ComponentModulesTableModule' }
+                  | { __typename: 'ComponentModulesTextModule' }
+                  | { __typename: 'ComponentModulesTitleModule' }
+                  | { __typename: 'Error' }
+                  | null
+                > | null
+                author?: {
+                  __typename?: 'AuthorEntityResponse'
+                  data?: {
+                    __typename?: 'AuthorEntity'
+                    attributes?: {
+                      __typename?: 'Author'
+                      firstName: string
+                      lastName: string
+                      insertion?: string | null
+                    } | null
+                  } | null
+                } | null
+              } | null
+            } | null
+          } | null
+          stories?: {
+            __typename?: 'StoryRelationResponseCollection'
+            data: Array<{
+              __typename?: 'StoryEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'Story'
+                title: string
+                components?: Array<
+                  | { __typename: 'ComponentModulesButtonsModule' }
+                  | { __typename: 'ComponentModulesGridModule' }
+                  | {
+                      __typename: 'ComponentModulesImage'
+                      alt_text?: string | null
+                      caption?: string | null
+                      id: string
+                      image: {
+                        __typename?: 'UploadFileEntityResponse'
+                        data?: {
+                          __typename?: 'UploadFileEntity'
+                          id?: string | null
+                          attributes?: {
+                            __typename?: 'UploadFile'
+                            hash: string
+                            mime: string
+                            name: string
+                            provider: string
+                            size: number
+                            url: string
+                            alternativeText?: string | null
+                            caption?: string | null
+                            createdAt?: any | null
+                            ext?: string | null
+                            formats?: any | null
+                            height?: number | null
+                            previewUrl?: string | null
+                            provider_metadata?: any | null
+                            updatedAt?: any | null
+                            width?: number | null
+                          } | null
+                        } | null
+                      }
+                      triplyRecord?: {
+                        __typename?: 'TriplyRecordEntityResponse'
+                        data?: {
+                          __typename?: 'TriplyRecordEntity'
+                          id?: string | null
+                          attributes?: {
+                            __typename?: 'TriplyRecord'
+                            recordId: string
+                            type: Enum_Triplyrecord_Type
+                          } | null
+                        } | null
+                      } | null
+                      story?: {
+                        __typename?: 'StoryEntityResponse'
+                        data?: {
+                          __typename?: 'StoryEntity'
+                          id?: string | null
+                          attributes?: {
+                            __typename?: 'Story'
+                            title: string
+                            slug: string
+                            description?: string | null
+                            shortDescription?: string | null
+                            createdAt?: any | null
+                            updatedAt?: any | null
+                            publishedAt?: any | null
+                            locale?: string | null
+                            author?: {
+                              __typename?: 'AuthorEntityResponse'
+                              data?: {
+                                __typename?: 'AuthorEntity'
+                                attributes?: { __typename?: 'Author'; firstName: string } | null
+                              } | null
+                            } | null
+                          } | null
+                        } | null
+                      } | null
+                    }
+                  | { __typename: 'ComponentModulesImageCarousel' }
+                  | { __typename: 'ComponentModulesPullquote' }
+                  | { __typename: 'ComponentModulesSubtitle' }
+                  | { __typename: 'ComponentModulesTableModule' }
+                  | { __typename: 'ComponentModulesTextModule' }
+                  | { __typename: 'ComponentModulesTitleModule' }
+                  | { __typename: 'Error' }
+                  | null
+                > | null
+                author?: {
+                  __typename?: 'AuthorEntityResponse'
+                  data?: {
+                    __typename?: 'AuthorEntity'
+                    attributes?: {
+                      __typename?: 'Author'
+                      firstName: string
+                      lastName: string
+                      insertion?: string | null
+                    } | null
+                  } | null
+                } | null
+              } | null
+            }>
           } | null
         } | null
       }>
@@ -15557,7 +17761,16 @@ export type ThemeQuery = {
               > | null
               author?: {
                 __typename?: 'AuthorEntityResponse'
-                data?: { __typename?: 'AuthorEntity'; id?: string | null } | null
+                data?: {
+                  __typename?: 'AuthorEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Author'
+                    firstName: string
+                    lastName: string
+                    insertion?: string | null
+                  } | null
+                } | null
               } | null
               timeframe?: {
                 __typename?: 'ComponentCoreTimeframe'
@@ -15628,6 +17841,209 @@ export type ThemeQuery = {
                     } | null
                   } | null
                 } | null> | null
+              } | null
+              story?: {
+                __typename?: 'StoryEntityResponse'
+                data?: {
+                  __typename?: 'StoryEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Story'
+                    title: string
+                    components?: Array<
+                      | { __typename: 'ComponentModulesButtonsModule' }
+                      | { __typename: 'ComponentModulesGridModule' }
+                      | {
+                          __typename: 'ComponentModulesImage'
+                          alt_text?: string | null
+                          caption?: string | null
+                          id: string
+                          image: {
+                            __typename?: 'UploadFileEntityResponse'
+                            data?: {
+                              __typename?: 'UploadFileEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'UploadFile'
+                                hash: string
+                                mime: string
+                                name: string
+                                provider: string
+                                size: number
+                                url: string
+                                alternativeText?: string | null
+                                caption?: string | null
+                                createdAt?: any | null
+                                ext?: string | null
+                                formats?: any | null
+                                height?: number | null
+                                previewUrl?: string | null
+                                provider_metadata?: any | null
+                                updatedAt?: any | null
+                                width?: number | null
+                              } | null
+                            } | null
+                          }
+                          triplyRecord?: {
+                            __typename?: 'TriplyRecordEntityResponse'
+                            data?: {
+                              __typename?: 'TriplyRecordEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'TriplyRecord'
+                                recordId: string
+                                type: Enum_Triplyrecord_Type
+                              } | null
+                            } | null
+                          } | null
+                          story?: {
+                            __typename?: 'StoryEntityResponse'
+                            data?: {
+                              __typename?: 'StoryEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'Story'
+                                title: string
+                                slug: string
+                                description?: string | null
+                                shortDescription?: string | null
+                                createdAt?: any | null
+                                updatedAt?: any | null
+                                publishedAt?: any | null
+                                locale?: string | null
+                                author?: {
+                                  __typename?: 'AuthorEntityResponse'
+                                  data?: {
+                                    __typename?: 'AuthorEntity'
+                                    attributes?: { __typename?: 'Author'; firstName: string } | null
+                                  } | null
+                                } | null
+                              } | null
+                            } | null
+                          } | null
+                        }
+                      | { __typename: 'ComponentModulesImageCarousel' }
+                      | { __typename: 'ComponentModulesPullquote' }
+                      | { __typename: 'ComponentModulesSubtitle' }
+                      | { __typename: 'ComponentModulesTableModule' }
+                      | { __typename: 'ComponentModulesTextModule' }
+                      | { __typename: 'ComponentModulesTitleModule' }
+                      | { __typename: 'Error' }
+                      | null
+                    > | null
+                    author?: {
+                      __typename?: 'AuthorEntityResponse'
+                      data?: {
+                        __typename?: 'AuthorEntity'
+                        attributes?: {
+                          __typename?: 'Author'
+                          firstName: string
+                          lastName: string
+                          insertion?: string | null
+                        } | null
+                      } | null
+                    } | null
+                  } | null
+                } | null
+              } | null
+              stories?: {
+                __typename?: 'StoryRelationResponseCollection'
+                data: Array<{
+                  __typename?: 'StoryEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Story'
+                    title: string
+                    components?: Array<
+                      | { __typename: 'ComponentModulesButtonsModule' }
+                      | { __typename: 'ComponentModulesGridModule' }
+                      | {
+                          __typename: 'ComponentModulesImage'
+                          alt_text?: string | null
+                          caption?: string | null
+                          id: string
+                          image: {
+                            __typename?: 'UploadFileEntityResponse'
+                            data?: {
+                              __typename?: 'UploadFileEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'UploadFile'
+                                hash: string
+                                mime: string
+                                name: string
+                                provider: string
+                                size: number
+                                url: string
+                                alternativeText?: string | null
+                                caption?: string | null
+                                createdAt?: any | null
+                                ext?: string | null
+                                formats?: any | null
+                                height?: number | null
+                                previewUrl?: string | null
+                                provider_metadata?: any | null
+                                updatedAt?: any | null
+                                width?: number | null
+                              } | null
+                            } | null
+                          }
+                          triplyRecord?: {
+                            __typename?: 'TriplyRecordEntityResponse'
+                            data?: {
+                              __typename?: 'TriplyRecordEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'TriplyRecord'
+                                recordId: string
+                                type: Enum_Triplyrecord_Type
+                              } | null
+                            } | null
+                          } | null
+                          story?: {
+                            __typename?: 'StoryEntityResponse'
+                            data?: {
+                              __typename?: 'StoryEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'Story'
+                                title: string
+                                slug: string
+                                description?: string | null
+                                shortDescription?: string | null
+                                createdAt?: any | null
+                                updatedAt?: any | null
+                                publishedAt?: any | null
+                                locale?: string | null
+                                author?: {
+                                  __typename?: 'AuthorEntityResponse'
+                                  data?: {
+                                    __typename?: 'AuthorEntity'
+                                    attributes?: { __typename?: 'Author'; firstName: string } | null
+                                  } | null
+                                } | null
+                              } | null
+                            } | null
+                          } | null
+                        }
+                      | { __typename: 'ComponentModulesImageCarousel' }
+                      | { __typename: 'ComponentModulesPullquote' }
+                      | { __typename: 'ComponentModulesSubtitle' }
+                      | { __typename: 'ComponentModulesTableModule' }
+                      | { __typename: 'ComponentModulesTextModule' }
+                      | { __typename: 'ComponentModulesTitleModule' }
+                      | { __typename: 'Error' }
+                      | null
+                    > | null
+                    author?: {
+                      __typename?: 'AuthorEntityResponse'
+                      data?: {
+                        __typename?: 'AuthorEntity'
+                        attributes?: { __typename?: 'Author'; firstName: string } | null
+                      } | null
+                    } | null
+                  } | null
+                }>
               } | null
             } | null
           }>
@@ -16016,7 +18432,16 @@ export type ThemesQuery = {
               > | null
               author?: {
                 __typename?: 'AuthorEntityResponse'
-                data?: { __typename?: 'AuthorEntity'; id?: string | null } | null
+                data?: {
+                  __typename?: 'AuthorEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Author'
+                    firstName: string
+                    lastName: string
+                    insertion?: string | null
+                  } | null
+                } | null
               } | null
               timeframe?: {
                 __typename?: 'ComponentCoreTimeframe'
@@ -16087,6 +18512,209 @@ export type ThemesQuery = {
                     } | null
                   } | null
                 } | null> | null
+              } | null
+              story?: {
+                __typename?: 'StoryEntityResponse'
+                data?: {
+                  __typename?: 'StoryEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Story'
+                    title: string
+                    components?: Array<
+                      | { __typename: 'ComponentModulesButtonsModule' }
+                      | { __typename: 'ComponentModulesGridModule' }
+                      | {
+                          __typename: 'ComponentModulesImage'
+                          alt_text?: string | null
+                          caption?: string | null
+                          id: string
+                          image: {
+                            __typename?: 'UploadFileEntityResponse'
+                            data?: {
+                              __typename?: 'UploadFileEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'UploadFile'
+                                hash: string
+                                mime: string
+                                name: string
+                                provider: string
+                                size: number
+                                url: string
+                                alternativeText?: string | null
+                                caption?: string | null
+                                createdAt?: any | null
+                                ext?: string | null
+                                formats?: any | null
+                                height?: number | null
+                                previewUrl?: string | null
+                                provider_metadata?: any | null
+                                updatedAt?: any | null
+                                width?: number | null
+                              } | null
+                            } | null
+                          }
+                          triplyRecord?: {
+                            __typename?: 'TriplyRecordEntityResponse'
+                            data?: {
+                              __typename?: 'TriplyRecordEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'TriplyRecord'
+                                recordId: string
+                                type: Enum_Triplyrecord_Type
+                              } | null
+                            } | null
+                          } | null
+                          story?: {
+                            __typename?: 'StoryEntityResponse'
+                            data?: {
+                              __typename?: 'StoryEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'Story'
+                                title: string
+                                slug: string
+                                description?: string | null
+                                shortDescription?: string | null
+                                createdAt?: any | null
+                                updatedAt?: any | null
+                                publishedAt?: any | null
+                                locale?: string | null
+                                author?: {
+                                  __typename?: 'AuthorEntityResponse'
+                                  data?: {
+                                    __typename?: 'AuthorEntity'
+                                    attributes?: { __typename?: 'Author'; firstName: string } | null
+                                  } | null
+                                } | null
+                              } | null
+                            } | null
+                          } | null
+                        }
+                      | { __typename: 'ComponentModulesImageCarousel' }
+                      | { __typename: 'ComponentModulesPullquote' }
+                      | { __typename: 'ComponentModulesSubtitle' }
+                      | { __typename: 'ComponentModulesTableModule' }
+                      | { __typename: 'ComponentModulesTextModule' }
+                      | { __typename: 'ComponentModulesTitleModule' }
+                      | { __typename: 'Error' }
+                      | null
+                    > | null
+                    author?: {
+                      __typename?: 'AuthorEntityResponse'
+                      data?: {
+                        __typename?: 'AuthorEntity'
+                        attributes?: {
+                          __typename?: 'Author'
+                          firstName: string
+                          lastName: string
+                          insertion?: string | null
+                        } | null
+                      } | null
+                    } | null
+                  } | null
+                } | null
+              } | null
+              stories?: {
+                __typename?: 'StoryRelationResponseCollection'
+                data: Array<{
+                  __typename?: 'StoryEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Story'
+                    title: string
+                    components?: Array<
+                      | { __typename: 'ComponentModulesButtonsModule' }
+                      | { __typename: 'ComponentModulesGridModule' }
+                      | {
+                          __typename: 'ComponentModulesImage'
+                          alt_text?: string | null
+                          caption?: string | null
+                          id: string
+                          image: {
+                            __typename?: 'UploadFileEntityResponse'
+                            data?: {
+                              __typename?: 'UploadFileEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'UploadFile'
+                                hash: string
+                                mime: string
+                                name: string
+                                provider: string
+                                size: number
+                                url: string
+                                alternativeText?: string | null
+                                caption?: string | null
+                                createdAt?: any | null
+                                ext?: string | null
+                                formats?: any | null
+                                height?: number | null
+                                previewUrl?: string | null
+                                provider_metadata?: any | null
+                                updatedAt?: any | null
+                                width?: number | null
+                              } | null
+                            } | null
+                          }
+                          triplyRecord?: {
+                            __typename?: 'TriplyRecordEntityResponse'
+                            data?: {
+                              __typename?: 'TriplyRecordEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'TriplyRecord'
+                                recordId: string
+                                type: Enum_Triplyrecord_Type
+                              } | null
+                            } | null
+                          } | null
+                          story?: {
+                            __typename?: 'StoryEntityResponse'
+                            data?: {
+                              __typename?: 'StoryEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'Story'
+                                title: string
+                                slug: string
+                                description?: string | null
+                                shortDescription?: string | null
+                                createdAt?: any | null
+                                updatedAt?: any | null
+                                publishedAt?: any | null
+                                locale?: string | null
+                                author?: {
+                                  __typename?: 'AuthorEntityResponse'
+                                  data?: {
+                                    __typename?: 'AuthorEntity'
+                                    attributes?: { __typename?: 'Author'; firstName: string } | null
+                                  } | null
+                                } | null
+                              } | null
+                            } | null
+                          } | null
+                        }
+                      | { __typename: 'ComponentModulesImageCarousel' }
+                      | { __typename: 'ComponentModulesPullquote' }
+                      | { __typename: 'ComponentModulesSubtitle' }
+                      | { __typename: 'ComponentModulesTableModule' }
+                      | { __typename: 'ComponentModulesTextModule' }
+                      | { __typename: 'ComponentModulesTitleModule' }
+                      | { __typename: 'Error' }
+                      | null
+                    > | null
+                    author?: {
+                      __typename?: 'AuthorEntityResponse'
+                      data?: {
+                        __typename?: 'AuthorEntity'
+                        attributes?: { __typename?: 'Author'; firstName: string } | null
+                      } | null
+                    } | null
+                  } | null
+                }>
               } | null
             } | null
           }>
@@ -16483,7 +19111,16 @@ export type StoriesRelatedToThemeQuery = {
               > | null
               author?: {
                 __typename?: 'AuthorEntityResponse'
-                data?: { __typename?: 'AuthorEntity'; id?: string | null } | null
+                data?: {
+                  __typename?: 'AuthorEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Author'
+                    firstName: string
+                    lastName: string
+                    insertion?: string | null
+                  } | null
+                } | null
               } | null
               timeframe?: {
                 __typename?: 'ComponentCoreTimeframe'
@@ -16554,6 +19191,209 @@ export type StoriesRelatedToThemeQuery = {
                     } | null
                   } | null
                 } | null> | null
+              } | null
+              story?: {
+                __typename?: 'StoryEntityResponse'
+                data?: {
+                  __typename?: 'StoryEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Story'
+                    title: string
+                    components?: Array<
+                      | { __typename: 'ComponentModulesButtonsModule' }
+                      | { __typename: 'ComponentModulesGridModule' }
+                      | {
+                          __typename: 'ComponentModulesImage'
+                          alt_text?: string | null
+                          caption?: string | null
+                          id: string
+                          image: {
+                            __typename?: 'UploadFileEntityResponse'
+                            data?: {
+                              __typename?: 'UploadFileEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'UploadFile'
+                                hash: string
+                                mime: string
+                                name: string
+                                provider: string
+                                size: number
+                                url: string
+                                alternativeText?: string | null
+                                caption?: string | null
+                                createdAt?: any | null
+                                ext?: string | null
+                                formats?: any | null
+                                height?: number | null
+                                previewUrl?: string | null
+                                provider_metadata?: any | null
+                                updatedAt?: any | null
+                                width?: number | null
+                              } | null
+                            } | null
+                          }
+                          triplyRecord?: {
+                            __typename?: 'TriplyRecordEntityResponse'
+                            data?: {
+                              __typename?: 'TriplyRecordEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'TriplyRecord'
+                                recordId: string
+                                type: Enum_Triplyrecord_Type
+                              } | null
+                            } | null
+                          } | null
+                          story?: {
+                            __typename?: 'StoryEntityResponse'
+                            data?: {
+                              __typename?: 'StoryEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'Story'
+                                title: string
+                                slug: string
+                                description?: string | null
+                                shortDescription?: string | null
+                                createdAt?: any | null
+                                updatedAt?: any | null
+                                publishedAt?: any | null
+                                locale?: string | null
+                                author?: {
+                                  __typename?: 'AuthorEntityResponse'
+                                  data?: {
+                                    __typename?: 'AuthorEntity'
+                                    attributes?: { __typename?: 'Author'; firstName: string } | null
+                                  } | null
+                                } | null
+                              } | null
+                            } | null
+                          } | null
+                        }
+                      | { __typename: 'ComponentModulesImageCarousel' }
+                      | { __typename: 'ComponentModulesPullquote' }
+                      | { __typename: 'ComponentModulesSubtitle' }
+                      | { __typename: 'ComponentModulesTableModule' }
+                      | { __typename: 'ComponentModulesTextModule' }
+                      | { __typename: 'ComponentModulesTitleModule' }
+                      | { __typename: 'Error' }
+                      | null
+                    > | null
+                    author?: {
+                      __typename?: 'AuthorEntityResponse'
+                      data?: {
+                        __typename?: 'AuthorEntity'
+                        attributes?: {
+                          __typename?: 'Author'
+                          firstName: string
+                          lastName: string
+                          insertion?: string | null
+                        } | null
+                      } | null
+                    } | null
+                  } | null
+                } | null
+              } | null
+              stories?: {
+                __typename?: 'StoryRelationResponseCollection'
+                data: Array<{
+                  __typename?: 'StoryEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Story'
+                    title: string
+                    components?: Array<
+                      | { __typename: 'ComponentModulesButtonsModule' }
+                      | { __typename: 'ComponentModulesGridModule' }
+                      | {
+                          __typename: 'ComponentModulesImage'
+                          alt_text?: string | null
+                          caption?: string | null
+                          id: string
+                          image: {
+                            __typename?: 'UploadFileEntityResponse'
+                            data?: {
+                              __typename?: 'UploadFileEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'UploadFile'
+                                hash: string
+                                mime: string
+                                name: string
+                                provider: string
+                                size: number
+                                url: string
+                                alternativeText?: string | null
+                                caption?: string | null
+                                createdAt?: any | null
+                                ext?: string | null
+                                formats?: any | null
+                                height?: number | null
+                                previewUrl?: string | null
+                                provider_metadata?: any | null
+                                updatedAt?: any | null
+                                width?: number | null
+                              } | null
+                            } | null
+                          }
+                          triplyRecord?: {
+                            __typename?: 'TriplyRecordEntityResponse'
+                            data?: {
+                              __typename?: 'TriplyRecordEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'TriplyRecord'
+                                recordId: string
+                                type: Enum_Triplyrecord_Type
+                              } | null
+                            } | null
+                          } | null
+                          story?: {
+                            __typename?: 'StoryEntityResponse'
+                            data?: {
+                              __typename?: 'StoryEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'Story'
+                                title: string
+                                slug: string
+                                description?: string | null
+                                shortDescription?: string | null
+                                createdAt?: any | null
+                                updatedAt?: any | null
+                                publishedAt?: any | null
+                                locale?: string | null
+                                author?: {
+                                  __typename?: 'AuthorEntityResponse'
+                                  data?: {
+                                    __typename?: 'AuthorEntity'
+                                    attributes?: { __typename?: 'Author'; firstName: string } | null
+                                  } | null
+                                } | null
+                              } | null
+                            } | null
+                          } | null
+                        }
+                      | { __typename: 'ComponentModulesImageCarousel' }
+                      | { __typename: 'ComponentModulesPullquote' }
+                      | { __typename: 'ComponentModulesSubtitle' }
+                      | { __typename: 'ComponentModulesTableModule' }
+                      | { __typename: 'ComponentModulesTextModule' }
+                      | { __typename: 'ComponentModulesTitleModule' }
+                      | { __typename: 'Error' }
+                      | null
+                    > | null
+                    author?: {
+                      __typename?: 'AuthorEntityResponse'
+                      data?: {
+                        __typename?: 'AuthorEntity'
+                        attributes?: { __typename?: 'Author'; firstName: string } | null
+                      } | null
+                    } | null
+                  } | null
+                }>
               } | null
             } | null
           }>
@@ -16930,7 +19770,16 @@ export type ThemeFragmentFragment = {
           > | null
           author?: {
             __typename?: 'AuthorEntityResponse'
-            data?: { __typename?: 'AuthorEntity'; id?: string | null } | null
+            data?: {
+              __typename?: 'AuthorEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'Author'
+                firstName: string
+                lastName: string
+                insertion?: string | null
+              } | null
+            } | null
           } | null
           timeframe?: {
             __typename?: 'ComponentCoreTimeframe'
@@ -17001,6 +19850,209 @@ export type ThemeFragmentFragment = {
                 } | null
               } | null
             } | null> | null
+          } | null
+          story?: {
+            __typename?: 'StoryEntityResponse'
+            data?: {
+              __typename?: 'StoryEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'Story'
+                title: string
+                components?: Array<
+                  | { __typename: 'ComponentModulesButtonsModule' }
+                  | { __typename: 'ComponentModulesGridModule' }
+                  | {
+                      __typename: 'ComponentModulesImage'
+                      alt_text?: string | null
+                      caption?: string | null
+                      id: string
+                      image: {
+                        __typename?: 'UploadFileEntityResponse'
+                        data?: {
+                          __typename?: 'UploadFileEntity'
+                          id?: string | null
+                          attributes?: {
+                            __typename?: 'UploadFile'
+                            hash: string
+                            mime: string
+                            name: string
+                            provider: string
+                            size: number
+                            url: string
+                            alternativeText?: string | null
+                            caption?: string | null
+                            createdAt?: any | null
+                            ext?: string | null
+                            formats?: any | null
+                            height?: number | null
+                            previewUrl?: string | null
+                            provider_metadata?: any | null
+                            updatedAt?: any | null
+                            width?: number | null
+                          } | null
+                        } | null
+                      }
+                      triplyRecord?: {
+                        __typename?: 'TriplyRecordEntityResponse'
+                        data?: {
+                          __typename?: 'TriplyRecordEntity'
+                          id?: string | null
+                          attributes?: {
+                            __typename?: 'TriplyRecord'
+                            recordId: string
+                            type: Enum_Triplyrecord_Type
+                          } | null
+                        } | null
+                      } | null
+                      story?: {
+                        __typename?: 'StoryEntityResponse'
+                        data?: {
+                          __typename?: 'StoryEntity'
+                          id?: string | null
+                          attributes?: {
+                            __typename?: 'Story'
+                            title: string
+                            slug: string
+                            description?: string | null
+                            shortDescription?: string | null
+                            createdAt?: any | null
+                            updatedAt?: any | null
+                            publishedAt?: any | null
+                            locale?: string | null
+                            author?: {
+                              __typename?: 'AuthorEntityResponse'
+                              data?: {
+                                __typename?: 'AuthorEntity'
+                                attributes?: { __typename?: 'Author'; firstName: string } | null
+                              } | null
+                            } | null
+                          } | null
+                        } | null
+                      } | null
+                    }
+                  | { __typename: 'ComponentModulesImageCarousel' }
+                  | { __typename: 'ComponentModulesPullquote' }
+                  | { __typename: 'ComponentModulesSubtitle' }
+                  | { __typename: 'ComponentModulesTableModule' }
+                  | { __typename: 'ComponentModulesTextModule' }
+                  | { __typename: 'ComponentModulesTitleModule' }
+                  | { __typename: 'Error' }
+                  | null
+                > | null
+                author?: {
+                  __typename?: 'AuthorEntityResponse'
+                  data?: {
+                    __typename?: 'AuthorEntity'
+                    attributes?: {
+                      __typename?: 'Author'
+                      firstName: string
+                      lastName: string
+                      insertion?: string | null
+                    } | null
+                  } | null
+                } | null
+              } | null
+            } | null
+          } | null
+          stories?: {
+            __typename?: 'StoryRelationResponseCollection'
+            data: Array<{
+              __typename?: 'StoryEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'Story'
+                title: string
+                components?: Array<
+                  | { __typename: 'ComponentModulesButtonsModule' }
+                  | { __typename: 'ComponentModulesGridModule' }
+                  | {
+                      __typename: 'ComponentModulesImage'
+                      alt_text?: string | null
+                      caption?: string | null
+                      id: string
+                      image: {
+                        __typename?: 'UploadFileEntityResponse'
+                        data?: {
+                          __typename?: 'UploadFileEntity'
+                          id?: string | null
+                          attributes?: {
+                            __typename?: 'UploadFile'
+                            hash: string
+                            mime: string
+                            name: string
+                            provider: string
+                            size: number
+                            url: string
+                            alternativeText?: string | null
+                            caption?: string | null
+                            createdAt?: any | null
+                            ext?: string | null
+                            formats?: any | null
+                            height?: number | null
+                            previewUrl?: string | null
+                            provider_metadata?: any | null
+                            updatedAt?: any | null
+                            width?: number | null
+                          } | null
+                        } | null
+                      }
+                      triplyRecord?: {
+                        __typename?: 'TriplyRecordEntityResponse'
+                        data?: {
+                          __typename?: 'TriplyRecordEntity'
+                          id?: string | null
+                          attributes?: {
+                            __typename?: 'TriplyRecord'
+                            recordId: string
+                            type: Enum_Triplyrecord_Type
+                          } | null
+                        } | null
+                      } | null
+                      story?: {
+                        __typename?: 'StoryEntityResponse'
+                        data?: {
+                          __typename?: 'StoryEntity'
+                          id?: string | null
+                          attributes?: {
+                            __typename?: 'Story'
+                            title: string
+                            slug: string
+                            description?: string | null
+                            shortDescription?: string | null
+                            createdAt?: any | null
+                            updatedAt?: any | null
+                            publishedAt?: any | null
+                            locale?: string | null
+                            author?: {
+                              __typename?: 'AuthorEntityResponse'
+                              data?: {
+                                __typename?: 'AuthorEntity'
+                                attributes?: { __typename?: 'Author'; firstName: string } | null
+                              } | null
+                            } | null
+                          } | null
+                        } | null
+                      } | null
+                    }
+                  | { __typename: 'ComponentModulesImageCarousel' }
+                  | { __typename: 'ComponentModulesPullquote' }
+                  | { __typename: 'ComponentModulesSubtitle' }
+                  | { __typename: 'ComponentModulesTableModule' }
+                  | { __typename: 'ComponentModulesTextModule' }
+                  | { __typename: 'ComponentModulesTitleModule' }
+                  | { __typename: 'Error' }
+                  | null
+                > | null
+                author?: {
+                  __typename?: 'AuthorEntityResponse'
+                  data?: {
+                    __typename?: 'AuthorEntity'
+                    attributes?: { __typename?: 'Author'; firstName: string } | null
+                  } | null
+                } | null
+              } | null
+            }>
           } | null
         } | null
       }>
@@ -17393,7 +20445,16 @@ export type TriplyRecordQuery = {
               > | null
               author?: {
                 __typename?: 'AuthorEntityResponse'
-                data?: { __typename?: 'AuthorEntity'; id?: string | null } | null
+                data?: {
+                  __typename?: 'AuthorEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Author'
+                    firstName: string
+                    lastName: string
+                    insertion?: string | null
+                  } | null
+                } | null
               } | null
               timeframe?: {
                 __typename?: 'ComponentCoreTimeframe'
@@ -17464,6 +20525,209 @@ export type TriplyRecordQuery = {
                     } | null
                   } | null
                 } | null> | null
+              } | null
+              story?: {
+                __typename?: 'StoryEntityResponse'
+                data?: {
+                  __typename?: 'StoryEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Story'
+                    title: string
+                    components?: Array<
+                      | { __typename: 'ComponentModulesButtonsModule' }
+                      | { __typename: 'ComponentModulesGridModule' }
+                      | {
+                          __typename: 'ComponentModulesImage'
+                          alt_text?: string | null
+                          caption?: string | null
+                          id: string
+                          image: {
+                            __typename?: 'UploadFileEntityResponse'
+                            data?: {
+                              __typename?: 'UploadFileEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'UploadFile'
+                                hash: string
+                                mime: string
+                                name: string
+                                provider: string
+                                size: number
+                                url: string
+                                alternativeText?: string | null
+                                caption?: string | null
+                                createdAt?: any | null
+                                ext?: string | null
+                                formats?: any | null
+                                height?: number | null
+                                previewUrl?: string | null
+                                provider_metadata?: any | null
+                                updatedAt?: any | null
+                                width?: number | null
+                              } | null
+                            } | null
+                          }
+                          triplyRecord?: {
+                            __typename?: 'TriplyRecordEntityResponse'
+                            data?: {
+                              __typename?: 'TriplyRecordEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'TriplyRecord'
+                                recordId: string
+                                type: Enum_Triplyrecord_Type
+                              } | null
+                            } | null
+                          } | null
+                          story?: {
+                            __typename?: 'StoryEntityResponse'
+                            data?: {
+                              __typename?: 'StoryEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'Story'
+                                title: string
+                                slug: string
+                                description?: string | null
+                                shortDescription?: string | null
+                                createdAt?: any | null
+                                updatedAt?: any | null
+                                publishedAt?: any | null
+                                locale?: string | null
+                                author?: {
+                                  __typename?: 'AuthorEntityResponse'
+                                  data?: {
+                                    __typename?: 'AuthorEntity'
+                                    attributes?: { __typename?: 'Author'; firstName: string } | null
+                                  } | null
+                                } | null
+                              } | null
+                            } | null
+                          } | null
+                        }
+                      | { __typename: 'ComponentModulesImageCarousel' }
+                      | { __typename: 'ComponentModulesPullquote' }
+                      | { __typename: 'ComponentModulesSubtitle' }
+                      | { __typename: 'ComponentModulesTableModule' }
+                      | { __typename: 'ComponentModulesTextModule' }
+                      | { __typename: 'ComponentModulesTitleModule' }
+                      | { __typename: 'Error' }
+                      | null
+                    > | null
+                    author?: {
+                      __typename?: 'AuthorEntityResponse'
+                      data?: {
+                        __typename?: 'AuthorEntity'
+                        attributes?: {
+                          __typename?: 'Author'
+                          firstName: string
+                          lastName: string
+                          insertion?: string | null
+                        } | null
+                      } | null
+                    } | null
+                  } | null
+                } | null
+              } | null
+              stories?: {
+                __typename?: 'StoryRelationResponseCollection'
+                data: Array<{
+                  __typename?: 'StoryEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Story'
+                    title: string
+                    components?: Array<
+                      | { __typename: 'ComponentModulesButtonsModule' }
+                      | { __typename: 'ComponentModulesGridModule' }
+                      | {
+                          __typename: 'ComponentModulesImage'
+                          alt_text?: string | null
+                          caption?: string | null
+                          id: string
+                          image: {
+                            __typename?: 'UploadFileEntityResponse'
+                            data?: {
+                              __typename?: 'UploadFileEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'UploadFile'
+                                hash: string
+                                mime: string
+                                name: string
+                                provider: string
+                                size: number
+                                url: string
+                                alternativeText?: string | null
+                                caption?: string | null
+                                createdAt?: any | null
+                                ext?: string | null
+                                formats?: any | null
+                                height?: number | null
+                                previewUrl?: string | null
+                                provider_metadata?: any | null
+                                updatedAt?: any | null
+                                width?: number | null
+                              } | null
+                            } | null
+                          }
+                          triplyRecord?: {
+                            __typename?: 'TriplyRecordEntityResponse'
+                            data?: {
+                              __typename?: 'TriplyRecordEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'TriplyRecord'
+                                recordId: string
+                                type: Enum_Triplyrecord_Type
+                              } | null
+                            } | null
+                          } | null
+                          story?: {
+                            __typename?: 'StoryEntityResponse'
+                            data?: {
+                              __typename?: 'StoryEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'Story'
+                                title: string
+                                slug: string
+                                description?: string | null
+                                shortDescription?: string | null
+                                createdAt?: any | null
+                                updatedAt?: any | null
+                                publishedAt?: any | null
+                                locale?: string | null
+                                author?: {
+                                  __typename?: 'AuthorEntityResponse'
+                                  data?: {
+                                    __typename?: 'AuthorEntity'
+                                    attributes?: { __typename?: 'Author'; firstName: string } | null
+                                  } | null
+                                } | null
+                              } | null
+                            } | null
+                          } | null
+                        }
+                      | { __typename: 'ComponentModulesImageCarousel' }
+                      | { __typename: 'ComponentModulesPullquote' }
+                      | { __typename: 'ComponentModulesSubtitle' }
+                      | { __typename: 'ComponentModulesTableModule' }
+                      | { __typename: 'ComponentModulesTextModule' }
+                      | { __typename: 'ComponentModulesTitleModule' }
+                      | { __typename: 'Error' }
+                      | null
+                    > | null
+                    author?: {
+                      __typename?: 'AuthorEntityResponse'
+                      data?: {
+                        __typename?: 'AuthorEntity'
+                        attributes?: { __typename?: 'Author'; firstName: string } | null
+                      } | null
+                    } | null
+                  } | null
+                }>
               } | null
             } | null
           }>
@@ -17847,7 +21111,16 @@ export type TriplyRecordsQuery = {
               > | null
               author?: {
                 __typename?: 'AuthorEntityResponse'
-                data?: { __typename?: 'AuthorEntity'; id?: string | null } | null
+                data?: {
+                  __typename?: 'AuthorEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Author'
+                    firstName: string
+                    lastName: string
+                    insertion?: string | null
+                  } | null
+                } | null
               } | null
               timeframe?: {
                 __typename?: 'ComponentCoreTimeframe'
@@ -17918,6 +21191,209 @@ export type TriplyRecordsQuery = {
                     } | null
                   } | null
                 } | null> | null
+              } | null
+              story?: {
+                __typename?: 'StoryEntityResponse'
+                data?: {
+                  __typename?: 'StoryEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Story'
+                    title: string
+                    components?: Array<
+                      | { __typename: 'ComponentModulesButtonsModule' }
+                      | { __typename: 'ComponentModulesGridModule' }
+                      | {
+                          __typename: 'ComponentModulesImage'
+                          alt_text?: string | null
+                          caption?: string | null
+                          id: string
+                          image: {
+                            __typename?: 'UploadFileEntityResponse'
+                            data?: {
+                              __typename?: 'UploadFileEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'UploadFile'
+                                hash: string
+                                mime: string
+                                name: string
+                                provider: string
+                                size: number
+                                url: string
+                                alternativeText?: string | null
+                                caption?: string | null
+                                createdAt?: any | null
+                                ext?: string | null
+                                formats?: any | null
+                                height?: number | null
+                                previewUrl?: string | null
+                                provider_metadata?: any | null
+                                updatedAt?: any | null
+                                width?: number | null
+                              } | null
+                            } | null
+                          }
+                          triplyRecord?: {
+                            __typename?: 'TriplyRecordEntityResponse'
+                            data?: {
+                              __typename?: 'TriplyRecordEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'TriplyRecord'
+                                recordId: string
+                                type: Enum_Triplyrecord_Type
+                              } | null
+                            } | null
+                          } | null
+                          story?: {
+                            __typename?: 'StoryEntityResponse'
+                            data?: {
+                              __typename?: 'StoryEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'Story'
+                                title: string
+                                slug: string
+                                description?: string | null
+                                shortDescription?: string | null
+                                createdAt?: any | null
+                                updatedAt?: any | null
+                                publishedAt?: any | null
+                                locale?: string | null
+                                author?: {
+                                  __typename?: 'AuthorEntityResponse'
+                                  data?: {
+                                    __typename?: 'AuthorEntity'
+                                    attributes?: { __typename?: 'Author'; firstName: string } | null
+                                  } | null
+                                } | null
+                              } | null
+                            } | null
+                          } | null
+                        }
+                      | { __typename: 'ComponentModulesImageCarousel' }
+                      | { __typename: 'ComponentModulesPullquote' }
+                      | { __typename: 'ComponentModulesSubtitle' }
+                      | { __typename: 'ComponentModulesTableModule' }
+                      | { __typename: 'ComponentModulesTextModule' }
+                      | { __typename: 'ComponentModulesTitleModule' }
+                      | { __typename: 'Error' }
+                      | null
+                    > | null
+                    author?: {
+                      __typename?: 'AuthorEntityResponse'
+                      data?: {
+                        __typename?: 'AuthorEntity'
+                        attributes?: {
+                          __typename?: 'Author'
+                          firstName: string
+                          lastName: string
+                          insertion?: string | null
+                        } | null
+                      } | null
+                    } | null
+                  } | null
+                } | null
+              } | null
+              stories?: {
+                __typename?: 'StoryRelationResponseCollection'
+                data: Array<{
+                  __typename?: 'StoryEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Story'
+                    title: string
+                    components?: Array<
+                      | { __typename: 'ComponentModulesButtonsModule' }
+                      | { __typename: 'ComponentModulesGridModule' }
+                      | {
+                          __typename: 'ComponentModulesImage'
+                          alt_text?: string | null
+                          caption?: string | null
+                          id: string
+                          image: {
+                            __typename?: 'UploadFileEntityResponse'
+                            data?: {
+                              __typename?: 'UploadFileEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'UploadFile'
+                                hash: string
+                                mime: string
+                                name: string
+                                provider: string
+                                size: number
+                                url: string
+                                alternativeText?: string | null
+                                caption?: string | null
+                                createdAt?: any | null
+                                ext?: string | null
+                                formats?: any | null
+                                height?: number | null
+                                previewUrl?: string | null
+                                provider_metadata?: any | null
+                                updatedAt?: any | null
+                                width?: number | null
+                              } | null
+                            } | null
+                          }
+                          triplyRecord?: {
+                            __typename?: 'TriplyRecordEntityResponse'
+                            data?: {
+                              __typename?: 'TriplyRecordEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'TriplyRecord'
+                                recordId: string
+                                type: Enum_Triplyrecord_Type
+                              } | null
+                            } | null
+                          } | null
+                          story?: {
+                            __typename?: 'StoryEntityResponse'
+                            data?: {
+                              __typename?: 'StoryEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'Story'
+                                title: string
+                                slug: string
+                                description?: string | null
+                                shortDescription?: string | null
+                                createdAt?: any | null
+                                updatedAt?: any | null
+                                publishedAt?: any | null
+                                locale?: string | null
+                                author?: {
+                                  __typename?: 'AuthorEntityResponse'
+                                  data?: {
+                                    __typename?: 'AuthorEntity'
+                                    attributes?: { __typename?: 'Author'; firstName: string } | null
+                                  } | null
+                                } | null
+                              } | null
+                            } | null
+                          } | null
+                        }
+                      | { __typename: 'ComponentModulesImageCarousel' }
+                      | { __typename: 'ComponentModulesPullquote' }
+                      | { __typename: 'ComponentModulesSubtitle' }
+                      | { __typename: 'ComponentModulesTableModule' }
+                      | { __typename: 'ComponentModulesTextModule' }
+                      | { __typename: 'ComponentModulesTitleModule' }
+                      | { __typename: 'Error' }
+                      | null
+                    > | null
+                    author?: {
+                      __typename?: 'AuthorEntityResponse'
+                      data?: {
+                        __typename?: 'AuthorEntity'
+                        attributes?: { __typename?: 'Author'; firstName: string } | null
+                      } | null
+                    } | null
+                  } | null
+                }>
               } | null
             } | null
           }>
@@ -18300,7 +21776,16 @@ export type TriplyRecordFragmentFragment = {
           > | null
           author?: {
             __typename?: 'AuthorEntityResponse'
-            data?: { __typename?: 'AuthorEntity'; id?: string | null } | null
+            data?: {
+              __typename?: 'AuthorEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'Author'
+                firstName: string
+                lastName: string
+                insertion?: string | null
+              } | null
+            } | null
           } | null
           timeframe?: {
             __typename?: 'ComponentCoreTimeframe'
@@ -18371,6 +21856,209 @@ export type TriplyRecordFragmentFragment = {
                 } | null
               } | null
             } | null> | null
+          } | null
+          story?: {
+            __typename?: 'StoryEntityResponse'
+            data?: {
+              __typename?: 'StoryEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'Story'
+                title: string
+                components?: Array<
+                  | { __typename: 'ComponentModulesButtonsModule' }
+                  | { __typename: 'ComponentModulesGridModule' }
+                  | {
+                      __typename: 'ComponentModulesImage'
+                      alt_text?: string | null
+                      caption?: string | null
+                      id: string
+                      image: {
+                        __typename?: 'UploadFileEntityResponse'
+                        data?: {
+                          __typename?: 'UploadFileEntity'
+                          id?: string | null
+                          attributes?: {
+                            __typename?: 'UploadFile'
+                            hash: string
+                            mime: string
+                            name: string
+                            provider: string
+                            size: number
+                            url: string
+                            alternativeText?: string | null
+                            caption?: string | null
+                            createdAt?: any | null
+                            ext?: string | null
+                            formats?: any | null
+                            height?: number | null
+                            previewUrl?: string | null
+                            provider_metadata?: any | null
+                            updatedAt?: any | null
+                            width?: number | null
+                          } | null
+                        } | null
+                      }
+                      triplyRecord?: {
+                        __typename?: 'TriplyRecordEntityResponse'
+                        data?: {
+                          __typename?: 'TriplyRecordEntity'
+                          id?: string | null
+                          attributes?: {
+                            __typename?: 'TriplyRecord'
+                            recordId: string
+                            type: Enum_Triplyrecord_Type
+                          } | null
+                        } | null
+                      } | null
+                      story?: {
+                        __typename?: 'StoryEntityResponse'
+                        data?: {
+                          __typename?: 'StoryEntity'
+                          id?: string | null
+                          attributes?: {
+                            __typename?: 'Story'
+                            title: string
+                            slug: string
+                            description?: string | null
+                            shortDescription?: string | null
+                            createdAt?: any | null
+                            updatedAt?: any | null
+                            publishedAt?: any | null
+                            locale?: string | null
+                            author?: {
+                              __typename?: 'AuthorEntityResponse'
+                              data?: {
+                                __typename?: 'AuthorEntity'
+                                attributes?: { __typename?: 'Author'; firstName: string } | null
+                              } | null
+                            } | null
+                          } | null
+                        } | null
+                      } | null
+                    }
+                  | { __typename: 'ComponentModulesImageCarousel' }
+                  | { __typename: 'ComponentModulesPullquote' }
+                  | { __typename: 'ComponentModulesSubtitle' }
+                  | { __typename: 'ComponentModulesTableModule' }
+                  | { __typename: 'ComponentModulesTextModule' }
+                  | { __typename: 'ComponentModulesTitleModule' }
+                  | { __typename: 'Error' }
+                  | null
+                > | null
+                author?: {
+                  __typename?: 'AuthorEntityResponse'
+                  data?: {
+                    __typename?: 'AuthorEntity'
+                    attributes?: {
+                      __typename?: 'Author'
+                      firstName: string
+                      lastName: string
+                      insertion?: string | null
+                    } | null
+                  } | null
+                } | null
+              } | null
+            } | null
+          } | null
+          stories?: {
+            __typename?: 'StoryRelationResponseCollection'
+            data: Array<{
+              __typename?: 'StoryEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'Story'
+                title: string
+                components?: Array<
+                  | { __typename: 'ComponentModulesButtonsModule' }
+                  | { __typename: 'ComponentModulesGridModule' }
+                  | {
+                      __typename: 'ComponentModulesImage'
+                      alt_text?: string | null
+                      caption?: string | null
+                      id: string
+                      image: {
+                        __typename?: 'UploadFileEntityResponse'
+                        data?: {
+                          __typename?: 'UploadFileEntity'
+                          id?: string | null
+                          attributes?: {
+                            __typename?: 'UploadFile'
+                            hash: string
+                            mime: string
+                            name: string
+                            provider: string
+                            size: number
+                            url: string
+                            alternativeText?: string | null
+                            caption?: string | null
+                            createdAt?: any | null
+                            ext?: string | null
+                            formats?: any | null
+                            height?: number | null
+                            previewUrl?: string | null
+                            provider_metadata?: any | null
+                            updatedAt?: any | null
+                            width?: number | null
+                          } | null
+                        } | null
+                      }
+                      triplyRecord?: {
+                        __typename?: 'TriplyRecordEntityResponse'
+                        data?: {
+                          __typename?: 'TriplyRecordEntity'
+                          id?: string | null
+                          attributes?: {
+                            __typename?: 'TriplyRecord'
+                            recordId: string
+                            type: Enum_Triplyrecord_Type
+                          } | null
+                        } | null
+                      } | null
+                      story?: {
+                        __typename?: 'StoryEntityResponse'
+                        data?: {
+                          __typename?: 'StoryEntity'
+                          id?: string | null
+                          attributes?: {
+                            __typename?: 'Story'
+                            title: string
+                            slug: string
+                            description?: string | null
+                            shortDescription?: string | null
+                            createdAt?: any | null
+                            updatedAt?: any | null
+                            publishedAt?: any | null
+                            locale?: string | null
+                            author?: {
+                              __typename?: 'AuthorEntityResponse'
+                              data?: {
+                                __typename?: 'AuthorEntity'
+                                attributes?: { __typename?: 'Author'; firstName: string } | null
+                              } | null
+                            } | null
+                          } | null
+                        } | null
+                      } | null
+                    }
+                  | { __typename: 'ComponentModulesImageCarousel' }
+                  | { __typename: 'ComponentModulesPullquote' }
+                  | { __typename: 'ComponentModulesSubtitle' }
+                  | { __typename: 'ComponentModulesTableModule' }
+                  | { __typename: 'ComponentModulesTextModule' }
+                  | { __typename: 'ComponentModulesTitleModule' }
+                  | { __typename: 'Error' }
+                  | null
+                > | null
+                author?: {
+                  __typename?: 'AuthorEntityResponse'
+                  data?: {
+                    __typename?: 'AuthorEntity'
+                    attributes?: { __typename?: 'Author'; firstName: string } | null
+                  } | null
+                } | null
+              } | null
+            }>
           } | null
         } | null
       }>
@@ -19183,6 +22871,36 @@ export const NestedStoryFragmentFragmentDoc = gql`
       slug
       description
       locale
+      author {
+        data {
+          id
+          attributes {
+            firstName
+            lastName
+            insertion
+          }
+        }
+      }
+      story {
+        data {
+          id
+          attributes {
+            title
+            slug
+            locale
+          }
+        }
+      }
+      stories {
+        data {
+          id
+          attributes {
+            title
+            slug
+            locale
+          }
+        }
+      }
       components {
         __typename
         ... on ComponentModulesPullquote {
@@ -19237,6 +22955,36 @@ export const LocalizedStoryFragmentFragmentDoc = gql`
       slug
       description
       locale
+      author {
+        data {
+          id
+          attributes {
+            firstName
+            lastName
+            insertion
+          }
+        }
+      }
+      story {
+        data {
+          id
+          attributes {
+            title
+            slug
+            locale
+          }
+        }
+      }
+      stories {
+        data {
+          id
+          attributes {
+            title
+            slug
+            locale
+          }
+        }
+      }
       components {
         __typename
         ... on ComponentModulesPullquote {
@@ -19302,7 +23050,11 @@ export const StoryMetaFragmentFragmentDoc = gql`
       locale
       author {
         data {
-          id
+          attributes {
+            firstName
+            lastName
+            insertion
+          }
         }
       }
       timeframe {
@@ -19339,10 +23091,57 @@ export const StoryMetaFragmentFragmentDoc = gql`
       storyLinks {
         ...ComponentModulesButtonsModuleFragment
       }
+      story {
+        data {
+          id
+          attributes {
+            title
+            components {
+              __typename
+              ... on ComponentModulesImage {
+                ...ComponentModulesImageFragment
+              }
+            }
+            author {
+              data {
+                attributes {
+                  firstName
+                  lastName
+                  insertion
+                }
+              }
+            }
+          }
+        }
+      }
+      stories {
+        data {
+          id
+          attributes {
+            title
+            components {
+              __typename
+              ... on ComponentModulesImage {
+                ...ComponentModulesImageFragment
+              }
+            }
+            author {
+              data {
+                attributes {
+                  firstName
+                  lastName
+                  insertion
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
   ${BaseTriplyRecordFragmentFragmentDoc}
   ${ComponentModulesButtonsModuleFragmentFragmentDoc}
+  ${ComponentModulesImageFragmentFragmentDoc}
 `
 export const LocalizedStoryMetaFragmentFragmentDoc = gql`
   fragment LocalizedStoryMetaFragment on StoryEntity {
@@ -19358,7 +23157,11 @@ export const LocalizedStoryMetaFragmentFragmentDoc = gql`
       locale
       author {
         data {
-          id
+          attributes {
+            firstName
+            lastName
+            insertion
+          }
         }
       }
       timeframe {
@@ -19379,6 +23182,50 @@ export const LocalizedStoryMetaFragmentFragmentDoc = gql`
           id
           attributes {
             name
+          }
+        }
+      }
+      story {
+        data {
+          id
+          attributes {
+            title
+            components {
+              __typename
+              ... on ComponentModulesImage {
+                ...ComponentModulesImageFragment
+              }
+            }
+            author {
+              data {
+                attributes {
+                  firstName
+                  lastName
+                  insertion
+                }
+              }
+            }
+          }
+        }
+      }
+      stories {
+        data {
+          id
+          attributes {
+            title
+            components {
+              __typename
+              ... on ComponentModulesImage {
+                ...ComponentModulesImageFragment
+              }
+            }
+            author {
+              data {
+                attributes {
+                  firstName
+                }
+              }
+            }
           }
         }
       }
@@ -19402,6 +23249,7 @@ export const LocalizedStoryMetaFragmentFragmentDoc = gql`
       }
     }
   }
+  ${ComponentModulesImageFragmentFragmentDoc}
   ${BaseTriplyRecordFragmentFragmentDoc}
   ${StoryMetaFragmentFragmentDoc}
   ${ComponentModulesButtonsModuleFragmentFragmentDoc}
@@ -19502,6 +23350,11 @@ export const StoryFragmentFragmentDoc = gql`
       author {
         data {
           id
+          attributes {
+            firstName
+            lastName
+            insertion
+          }
         }
       }
       description
@@ -19537,6 +23390,50 @@ export const StoryFragmentFragmentDoc = gql`
       locale
       storyLinks {
         ...ComponentModulesButtonsModuleFragment
+      }
+      story {
+        data {
+          id
+          attributes {
+            title
+            components {
+              __typename
+              ... on ComponentModulesImage {
+                ...ComponentModulesImageFragment
+              }
+            }
+            author {
+              data {
+                attributes {
+                  firstName
+                  lastName
+                  insertion
+                }
+              }
+            }
+          }
+        }
+      }
+      stories {
+        data {
+          id
+          attributes {
+            title
+            components {
+              __typename
+              ... on ComponentModulesImage {
+                ...ComponentModulesImageFragment
+              }
+            }
+            author {
+              data {
+                attributes {
+                  firstName
+                }
+              }
+            }
+          }
+        }
       }
     }
   }

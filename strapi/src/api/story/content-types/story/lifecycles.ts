@@ -5,7 +5,8 @@ const { ValidationError } = utils.errors
 const storyApi = 'api::story.story'
 
 export default {
-  beforeCreate(event) {
+  async beforeCreate(event) {
+    await checkIfParentIsNotAChild(event)
     if (!event.params.data.slug) {
       throw new ValidationError('slug must be provided')
     }
@@ -16,8 +17,8 @@ export default {
   },
 
   async beforeUpdate(event) {
+    await checkIfParentIsNotAChild(event)
     const story = await strapi.entityService.findOne(storyApi, event.params.where.id)
-
     if (event.params.data.slug && event.params.data.slug !== story.slug) {
       event.params.data.slug = getSlug(event.params.data.slug)
     }
@@ -53,5 +54,21 @@ function applyToAllLocales(event) {
     }
 
     event.result.localizations.forEach(s => strapi.entityService.update(storyApi, s.id, { data }))
+  }
+}
+
+async function checkIfParentIsNotAChild(event) {
+  const item = event.params.data
+  if (!item.story) return
+  if (item.story === event.params.where.id) {
+    throw new ValidationError('Parent story cannot be the same as the current story')
+  }
+
+  const parentStory = await strapi.entityService.findOne(storyApi, item.story, {
+    populate: ['story'],
+  })
+
+  if (parentStory.story) {
+    throw new ValidationError('Parent story cannot be a child of another story')
   }
 }

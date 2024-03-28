@@ -38,10 +38,11 @@ const categoryClouds: CategoryCloud[] = [
 interface Props {
   storyTitle?: string
   stories: StoryEntity[]
+  nextStories: StoryEntity[]
   pagination?: Pagination
 }
 
-export const MainGalaxy: React.FC<Props> = ({ storyTitle, stories, pagination }) => {
+export const MainGalaxy: React.FC<Props> = ({ storyTitle, stories, pagination, nextStories }) => {
   const { increasePageNumber, decreasePageNumber } = usePresenter(pagination?.pageCount || 0)
 
   return (
@@ -49,7 +50,7 @@ export const MainGalaxy: React.FC<Props> = ({ storyTitle, stories, pagination })
       {categoryClouds.map(cloud => (
         <Cloud key={cloud.title} cloud={cloud} />
       ))}
-      <Stories stories={stories} />
+      <Stories stories={stories} nextStories={nextStories} />
       <ThemeTitle title={storyTitle} />
 
       <GalaxyFooter

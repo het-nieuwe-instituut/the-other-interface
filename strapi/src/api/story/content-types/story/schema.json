@@ -125,6 +125,18 @@
       "relation": "manyToMany",
       "target": "api::theme.theme",
       "inversedBy": "stories"
+    },
+    "stories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::story.story",
+      "mappedBy": "story"
+    },
+    "story": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::story.story",
+      "inversedBy": "stories"
     }
   }
 }
