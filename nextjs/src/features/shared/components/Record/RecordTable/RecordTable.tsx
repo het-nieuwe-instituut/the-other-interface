@@ -14,6 +14,7 @@ interface PaginatedTableProps {
         name: string
         tableBody: Maybe<ComponentCoreTableBody[]> | undefined
         tableHead: Maybe<ComponentCoreTableHeadItem[]> | undefined
+        total: string
       }
     | undefined
 
@@ -22,6 +23,12 @@ interface PaginatedTableProps {
     setObjects: Dispatch<SetStateAction<number>>
     setArchives: Dispatch<SetStateAction<number>>
     setPublications: Dispatch<SetStateAction<number>>
+  }
+  counts: {
+    people: number
+    objects: number
+    archives: number
+    publications: number
   }
 }
 
@@ -32,7 +39,7 @@ export const RecordTable: React.FC = () => {
   const [publications, setPublications] = useState(1)
   const { data } = usePresenter({ people, objects, archives, publications })
   const tableData = mapRecordTableData(data)
-
+  console.log('TEST', tableData)
   return (
     <Box maxW={theme.breakpoints.lg} px={6} pt={0}>
       {tableData?.map((item, index) => (
@@ -40,6 +47,7 @@ export const RecordTable: React.FC = () => {
           data={item}
           key={index}
           setters={{ setPeople, setObjects, setArchives, setPublications }}
+          counts={{ people, objects, archives, publications }}
         />
       ))}
     </Box>
@@ -47,7 +55,7 @@ export const RecordTable: React.FC = () => {
 }
 
 const PaginatedTable: React.FC<PaginatedTableProps> = props => {
-  const { data, setters } = props
+  const { data, setters, counts } = props
 
   return (
     <>
@@ -61,7 +69,7 @@ const PaginatedTable: React.FC<PaginatedTableProps> = props => {
             _hover={{ textDecoration: 'none' }}
             _disabled={{ color: 'grey', textDecoration: 'none', cursor: 'not-allowed' }}
             marginTop={'16px'}
-            // disabled={}
+            disabled={counts.people * 5 >= parseInt(data?.total ?? '0')}
             onClick={() => {
               if (data?.type === CATEGORIES.objects) {
                 setters.setObjects(prev => prev + 1)

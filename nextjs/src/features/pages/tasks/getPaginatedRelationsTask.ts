@@ -1,4 +1,11 @@
-import { ArchivesRelationsQuery, Sdk } from 'src/generated/graphql'
+import {
+  ArchivesRecordRelationsCountQuery,
+  ArchivesRelationsQuery,
+  ObjectRecordRelationsCountQuery,
+  PeopleRecordRelationsCountQuery,
+  PublicationsRecordRelationsCountQuery,
+  Sdk,
+} from 'src/generated/graphql'
 import { getZoom3PaginatedQueries } from './zoom3PaginatedConfig'
 import {
   CATEGORIES,
@@ -57,33 +64,39 @@ export async function getPaginatedRelationsTask({
       pageSize: 5,
     })
 
-    const peopleCount = await configByTypePeople?.relationsCount?.({
+    const peopleCount = (await configByTypePeople?.relationsCount?.({
       id,
       type: CATEGORIES_TO_ENTITY_MAPPER[type],
       lang: locale,
-    })
-    const publicationsCount = await configByTypePublications?.relationsCount?.({
+    })) as PeopleRecordRelationsCountQuery
+    const publicationsCount = (await configByTypePublications?.relationsCount?.({
       id,
       type: CATEGORIES_TO_ENTITY_MAPPER[type],
       lang: locale,
-    })
-    const objectsCount = await configByTypeObjects?.relationsCount?.({
+    })) as PublicationsRecordRelationsCountQuery
+    const objectsCount = (await configByTypeObjects?.relationsCount?.({
       id,
       type: CATEGORIES_TO_ENTITY_MAPPER[type],
       lang: locale,
-    })
-    const archivesCount = await configByTypeArchives?.relationsCount?.({
+    })) as ObjectRecordRelationsCountQuery
+    const archivesCount = (await configByTypeArchives?.relationsCount?.({
       id,
       type: CATEGORIES_TO_ENTITY_MAPPER[type],
       lang: locale,
-    })
+    })) as ArchivesRecordRelationsCountQuery
 
-    console.log('peopleCount', peopleCount)
-    console.log('objectsCount', objectsCount)
-    console.log('publicationsCount', publicationsCount)
-    console.log('archivesCount', archivesCount)
-
-    return [people, objects, publications, archives] // return | but would be better with &
+    return [
+      { ...people, total: peopleCount?.peopleRecordRelationsCount?.[0].total ?? '0' },
+      {
+        ...objects,
+        total: objectsCount?.objectRecordRelationsCount?.[0].total ?? '0',
+      },
+      {
+        ...publications,
+        total: publicationsCount?.publicationsRecordRelationsCount?.[0].total ?? '0',
+      },
+      { ...archives, total: archivesCount?.archivesRecordRelationsCount?.[0].total ?? '0' },
+    ]
   } catch (e) {
     console.log(e, 'Error accured in zoom level 3 task')
   }

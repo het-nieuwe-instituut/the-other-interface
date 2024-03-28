@@ -6,13 +6,18 @@ import {
   PublicationRecordRelationsQuery,
 } from 'src/generated/graphql'
 
+interface TotalType {
+  total: string
+}
+
 export const mapRecordTableData = (
   data:
     | (
         | (ArchiveRecordRelationsQuery &
             ObjectRecordRelationsQuery &
             PeopleRecordRelationsQuery &
-            PublicationRecordRelationsQuery)
+            PublicationRecordRelationsQuery &
+            TotalType)
         | undefined
       )[]
     | undefined
@@ -25,7 +30,6 @@ export const mapRecordTableData = (
         tableBody: item?.publicationRecordRelations.map(record => {
           return {
             id: record.idRelation ?? index + '',
-            // idRelation, titleR, yearPub
             TableBodyItem: [
               { id: '1', value: record.titleR },
               { id: '2', value: record.yearPub },
@@ -34,6 +38,7 @@ export const mapRecordTableData = (
           }
         }),
         tableHead: [{ label: 'Publication Title' }, { label: 'Availability' }, { label: 'Dates' }],
+        total: item.total,
       }
     }
     if (item?.peopleRecordRelations && item?.peopleRecordRelations?.length > 0) {
@@ -43,7 +48,6 @@ export const mapRecordTableData = (
         tableBody: item?.peopleRecordRelations.map(record => {
           return {
             id: record.idRelation ?? index + '',
-            // idRelation, titleR, yearPub
             TableBodyItem: [
               { id: '1', value: record.relationName },
               { id: '2', value: record.occupation },
@@ -52,6 +56,7 @@ export const mapRecordTableData = (
           }
         }),
         tableHead: [{ label: 'Name' }, { label: 'Profession' }, { label: 'Dates' }],
+        total: item.total,
       }
     }
     if (item?.objectRecordRelations && item?.objectRecordRelations?.length > 0) {
@@ -61,7 +66,6 @@ export const mapRecordTableData = (
         tableBody: item?.objectRecordRelations.map(record => {
           return {
             id: record.id ?? index + '',
-            // idRelation, titleR, yearPub
             TableBodyItem: [
               { id: '1', value: record.titleR },
               { id: '2', value: record.period },
@@ -70,6 +74,7 @@ export const mapRecordTableData = (
           }
         }),
         tableHead: [{ label: 'Object title' }, { label: 'Maker(s)' }, { label: 'Dates' }],
+        total: item.total,
       }
     }
     if (item?.archivesRecordRelations && item?.archivesRecordRelations?.length > 0) {
@@ -79,7 +84,6 @@ export const mapRecordTableData = (
         tableBody: item?.archivesRecordRelations.map(record => {
           return {
             id: record.id ?? index + '',
-            // idRelation, titleR, yearPub
             TableBodyItem: [
               { id: '1', value: record.titleR },
               { id: '2', value: record.period },
@@ -88,6 +92,7 @@ export const mapRecordTableData = (
           }
         }),
         tableHead: [{ label: 'Fonds name' }, { label: 'Creater(s)' }, { label: 'Dates' }],
+        total: item.total,
       }
     }
   })
