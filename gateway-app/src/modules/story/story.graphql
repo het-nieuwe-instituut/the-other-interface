@@ -636,6 +636,7 @@ fragment LocalizedStoryMetaFragment on StoryEntity {
         locale
         author {
             data {
+                id
                 attributes {
                     firstName
                     lastName
@@ -677,6 +678,7 @@ fragment LocalizedStoryMetaFragment on StoryEntity {
                     }
                     author {
                         data {
+                            id
                             attributes {
                                 firstName
                                 lastName
@@ -700,6 +702,7 @@ fragment LocalizedStoryMetaFragment on StoryEntity {
                     }
                     author {
                         data {
+                            id
                             attributes {
                                 firstName
                             }
