@@ -25,7 +25,7 @@ export class Landingpage {
   public Description?: string
 
   @Field(() => [LandingpageComponentsDynamicZone], { nullable: true })
-  public components?: (typeof LandingpageComponentsDynamicZone)[]
+  public components?: typeof LandingpageComponentsDynamicZone[]
 
   @Field({ nullable: true })
   public createdAt?: Date

@@ -22,12 +22,14 @@ const archivesDetailZoomLevel3DataKeys: KeysToVerify<ArchivesDetailZoomLevel3Dat
 export interface ArchiveRelationsType {
   id?: string
   titleR: string
+  referenceNumber: string
   period: string
 }
 
 const archiveRelationsKeys: KeysToVerify<ArchiveRelationsType> = {
   id: true,
   titleR: true,
+  referenceNumber: true,
   period: true,
 }
 
@@ -130,7 +132,7 @@ export class ArchivesService {
     const result = await this.triplyService.queryTriplyData<ArchiveRelationsCountType>(
       this.ZoomLevel3RelationsCountEndpoint,
       archiveRelationsCountKeys,
-      { page: 1, pageSize: 10 },
+      { page: 1, pageSize: 5 },
       { id, type }
     )
 

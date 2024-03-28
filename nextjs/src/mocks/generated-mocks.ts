@@ -5,6 +5,7 @@ export const anArchiveRelationsType = (overrides?: Partial<ArchiveRelationsType>
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'voluptas',
         period: overrides && overrides.hasOwnProperty('period') ? overrides.period! : 'asperiores',
+        referenceNumber: overrides && overrides.hasOwnProperty('referenceNumber') ? overrides.referenceNumber! : 'porro',
         titleR: overrides && overrides.hasOwnProperty('titleR') ? overrides.titleR! : 'fugit',
     };
 };
@@ -873,8 +874,10 @@ export const anObjectRelationsCountType = (overrides?: Partial<ObjectRelationsCo
 export const anObjectRelationsType = (overrides?: Partial<ObjectRelationsType>, _relationshipsToOmit: Array<string> = []): ObjectRelationsType => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ObjectRelationsType']);
     return {
+        externalSource: overrides && overrides.hasOwnProperty('externalSource') ? overrides.externalSource! : 'cupiditate',
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'quaerat',
         period: overrides && overrides.hasOwnProperty('period') ? overrides.period! : 'consequatur',
+        referenceNumber: overrides && overrides.hasOwnProperty('referenceNumber') ? overrides.referenceNumber! : 'tempore',
         titleR: overrides && overrides.hasOwnProperty('titleR') ? overrides.titleR! : 'perferendis',
     };
 };
@@ -1068,8 +1071,10 @@ export const aPublicationRecordZoomLevel3Type = (overrides?: Partial<Publication
 export const aPublicationRelationsType = (overrides?: Partial<PublicationRelationsType>, _relationshipsToOmit: Array<string> = []): PublicationRelationsType => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'PublicationRelationsType']);
     return {
+        externalSource: overrides && overrides.hasOwnProperty('externalSource') ? overrides.externalSource! : 'a',
         idRelation: overrides && overrides.hasOwnProperty('idRelation') ? overrides.idRelation! : 'maiores',
         titleR: overrides && overrides.hasOwnProperty('titleR') ? overrides.titleR! : 'voluptatem',
+        typePub: overrides && overrides.hasOwnProperty('typePub') ? overrides.typePub! : 'neque',
         yearPub: overrides && overrides.hasOwnProperty('yearPub') ? overrides.yearPub! : 'natus',
     };
 };

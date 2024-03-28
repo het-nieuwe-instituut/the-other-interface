@@ -32,12 +32,18 @@ export const mapRecordTableData = (
             id: record.idRelation ?? index + '',
             TableBodyItem: [
               { id: '1', value: record.titleR },
-              { id: '2', value: record.yearPub },
+              { id: '2', value: record.typePub },
               { id: '3', value: record.yearPub },
+              { id: '4', value: record.externalSource },
             ],
           }
         }),
-        tableHead: [{ label: 'Publication Title' }, { label: 'Availability' }, { label: 'Dates' }],
+        tableHead: [
+          { label: 'Related Publications' },
+          { label: 'Type' },
+          { label: 'Year of publication' },
+          { label: 'External source' },
+        ],
         total: item.total,
       }
     }
@@ -68,12 +74,18 @@ export const mapRecordTableData = (
             id: record.id ?? index + '',
             TableBodyItem: [
               { id: '1', value: record.titleR },
-              { id: '2', value: record.period },
+              { id: '2', value: record.referenceNumber },
               { id: '3', value: record.period },
+              { id: '4', value: record.externalSource },
             ],
           }
         }),
-        tableHead: [{ label: 'Object title' }, { label: 'Maker(s)' }, { label: 'Dates' }],
+        tableHead: [
+          { label: 'Related Objects' },
+          { label: 'Object number' },
+          { label: 'Creation Period' },
+          { label: 'External Source' },
+        ],
         total: item.total,
       }
     }
@@ -86,12 +98,12 @@ export const mapRecordTableData = (
             id: record.id ?? index + '',
             TableBodyItem: [
               { id: '1', value: record.titleR },
-              { id: '2', value: record.period },
+              { id: '2', value: record.referenceNumber },
               { id: '3', value: record.period },
             ],
           }
         }),
-        tableHead: [{ label: 'Fonds name' }, { label: 'Creater(s)' }, { label: 'Dates' }],
+        tableHead: [{ label: 'Record Type' }, { label: 'Object Number' }, { label: 'Period' }],
         total: item.total,
       }
     }

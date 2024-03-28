@@ -20,18 +20,20 @@ const publicationsDetailZoomLevel3DataKeys: KeysToVerify<PublicationsZoomLevel3D
   yearOfPublication: true,
   objectNumber: true,
 }
-
-// new
 export interface PublicationRelationsType {
   idRelation: string
   titleR: string
+  typePub: string
   yearPub: string
+  externalSource: string
 }
 
 const publicationRelationsKeys: KeysToVerify<PublicationRelationsType> = {
   idRelation: true,
   titleR: true,
+  typePub: true,
   yearPub: true,
+  externalSource: true,
 }
 
 export interface PublicationsRelationsCountType {
@@ -433,7 +435,7 @@ export class PublicationsService {
     const result = await this.triplyService.queryTriplyData<PublicationsRelationsCountType>(
       this.ZoomLevel3RelationsCountEndpoint,
       publicationsRelationsCountKeys,
-      { page: 1, pageSize: 10 },
+      { page: 1, pageSize: 5 },
       { id, type }
     )
 

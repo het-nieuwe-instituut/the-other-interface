@@ -2,6 +2,7 @@ query ArchiveRecordRelations($id: String!, $type: EntityNames!, $lang: String!, 
     archivesRecordRelations(type: $type, id: $id, lang: $lang, page: $page, pageSize: $pageSize) {
         id
         titleR
+        referenceNumber
         period
     }
 }

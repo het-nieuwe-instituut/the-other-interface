@@ -35,9 +35,14 @@ export class ObjectRelationsType {
 
   @Field(() => String, { nullable: true })
   public titleR: string
+  @Field(() => String, { nullable: true })
+  public referenceNumber: string
 
   @Field(() => String, { nullable: true })
   public period: string
+
+  @Field(() => String, { nullable: true })
+  public externalSource: string
 }
 
 @ObjectType()
@@ -78,7 +83,13 @@ export class PublicationRelationsType {
   public titleR: string
 
   @Field(() => String, { nullable: true })
+  public typePub: string
+
+  @Field(() => String, { nullable: true })
   public yearPub: string
+
+  @Field(() => String, { nullable: true })
+  public externalSource: string
 }
 @ObjectType()
 export class PublicationsRelationsCountType {
@@ -94,6 +105,9 @@ export class ArchiveRelationsType {
 
   @Field(() => String, { nullable: true })
   public titleR: string
+
+  @Field(() => String, { nullable: true })
+  public referenceNumber: string
 
   @Field(() => String, { nullable: true })
   public period: string

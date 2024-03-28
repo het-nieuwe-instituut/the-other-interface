@@ -2,6 +2,8 @@ query PublicationRecordRelations($id: String!, $type: EntityNames!, $lang: Strin
     publicationRecordRelations(type: $type, id: $id, lang: $lang, page: $page, pageSize: $pageSize) {
         idRelation
         titleR
+        typePub
         yearPub
+        externalSource
     }
 }

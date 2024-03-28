@@ -23,13 +23,17 @@ const objectsDetailZoomLevel3DataKeys: KeysToVerify<ObjectsDetailZoomLevel3Data>
 export interface ObjectsRelationsType {
   id: string
   titleR: string
+  referenceNumber: string
   period: string
+  externalSource: string
 }
 
 const objectsRelationsKeys: KeysToVerify<ObjectsRelationsType> = {
   id: true,
   titleR: true,
+  referenceNumber: true,
   period: true,
+  externalSource: true,
 }
 
 export interface ObjectsRelationsCountType {
@@ -120,7 +124,7 @@ export class ObjectsService {
     const result = await this.triplyService.queryTriplyData<ObjectsRelationsCountType>(
       this.ZoomLevel3RelationsCountEndpoint,
       objectsRelationsCountKeys,
-      { page: 1, pageSize: 10 },
+      { page: 1, pageSize: 5 },
       { id, type }
     )
 

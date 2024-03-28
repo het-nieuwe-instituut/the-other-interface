@@ -39,7 +39,7 @@ export const RecordTable: React.FC = () => {
   const [publications, setPublications] = useState(1)
   const { data } = usePresenter({ people, objects, archives, publications })
   const tableData = mapRecordTableData(data)
-  console.log('TEST', tableData)
+
   return (
     <Box maxW={theme.breakpoints.lg} px={6} pt={0}>
       {tableData?.map((item, index) => (
@@ -56,7 +56,7 @@ export const RecordTable: React.FC = () => {
 
 const PaginatedTable: React.FC<PaginatedTableProps> = props => {
   const { data, setters, counts } = props
-  console.log('TEST', data?.total)
+
   return (
     <>
       <TableModule
