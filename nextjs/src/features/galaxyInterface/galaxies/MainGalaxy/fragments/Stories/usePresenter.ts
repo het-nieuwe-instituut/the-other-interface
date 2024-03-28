@@ -6,61 +6,10 @@ import {
   StoryEntity,
 } from 'src/generated/graphql'
 import { imageBasePath } from '@/features/modules/modulesConstants'
-import { PositioningTemplate } from '@/features/shared/types/position'
 import { PositionedStory } from '../types'
-
-const positioningTemplate: PositioningTemplate[] = [
-  {
-    position: {
-      top: 0,
-      left: 0,
-    },
-    grid: {
-      gridRow: '1 / 2',
-      gridColumn: '1 / 2',
-    },
-  },
-  {
-    position: {
-      right: 0,
-      bottom: 0,
-    },
-    grid: {
-      gridRow: '1 / 2',
-      gridColumn: '2 / 3',
-    },
-  },
-  {
-    position: {
-      left: 0,
-      bottom: 0,
-    },
-    grid: {
-      gridRow: '2 / 3',
-      gridColumn: '3 / 4',
-    },
-  },
-  {
-    position: {
-      top: 0,
-      left: 0,
-    },
-    grid: {
-      gridRow: '1 / 2',
-      gridColumn: '4 / 5',
-    },
-  },
-  {
-    position: {
-      top: 0,
-      right: 0,
-    },
-    grid: {
-      gridRow: '2 / 3',
-      gridColumn: '4 / 5',
-    },
-  },
-]
+import { storiesPositionsTemplates } from './positioningTemplates'
+import { usePageNumber } from '@/features/shared/hooks/usePageNumber'
+import { usePositioningTemplates } from '@/features/shared/hooks/usePositioningTemplates'
 
 const findImageUrl = (components: HomepageComponentsDynamicZone[]): string => {
   const imageComponent = components?.find(
@@ -83,13 +32,19 @@ const mapStory = (story: StoryEntity) => {
   }
 }
 
-export const usePresenter = (stories: StoryEntity[]) => {
+export const usePresenter = (stories: StoryEntity[], nextStories: StoryEntity[]) => {
+  const { pageNumber } = usePageNumber()
+  const { currentTemplate, nextTemplate } = usePositioningTemplates(
+    storiesPositionsTemplates,
+    pageNumber
+  )
+
   const positionedStories = useMemo(() => {
     if (!stories) return []
 
     const positionedStories: PositionedStory[] = []
 
-    positioningTemplate.forEach((template, index) => {
+    currentTemplate.forEach((template, index) => {
       const record = stories[index]
 
       if (record) {
@@ -104,9 +59,34 @@ export const usePresenter = (stories: StoryEntity[]) => {
     })
 
     return positionedStories
-  }, [stories])
+  }, [stories, currentTemplate])
+
+  const positionedNextStories = useMemo(() => {
+    if (!nextStories) return []
+
+    const positionedNextStories: PositionedStory[] = []
+
+    nextTemplate.forEach((template, index) => {
+      const record = nextStories[index]
+
+      if (record) {
+        const mappedStory = mapStory(nextStories?.[index])
+
+        positionedNextStories.push({
+          ...mappedStory,
+          position: template.position,
+          grid: template.grid,
+        })
+      }
+    })
+
+    return positionedNextStories
+  }, [nextStories, nextTemplate])
 
   return {
     positionedStories,
+    positionedNextStories,
+    isCurrentStoriesEmpty: stories.length === 0,
+    isNextStoriesEmpty: nextStories.length === 0,
   }
 }
