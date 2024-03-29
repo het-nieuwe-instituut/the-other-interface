@@ -34,6 +34,13 @@
     "deathPlace": "Overlijdensplaats",
     "nationality": "Nationaliteit",
     "gender": "Geslacht",
-    "association": "Associatie"
+    "association": "Associatie",
+
+
+  "rightsStatusNotEvaluated": "Materiaal waarvan er nog geen auteursrechtelijke beoordeling is geweest.",
+  "rightsStatusProtected": "Auteursrechtelijk beschermd materiaal zonder toestemming voor hergebruik.",
+  "rightsStatusNotDetermined": "Materiaal waarvan de auteursrechtelijk status onduidelijk is.",
+  "rightsStatusCCBY": "Auteursrechtelijk beschermd materiaal met toestemming voor hergebruik. Afhankelijk van de toestemming die verkregen is",
+  "rightsStatusPublic": "Dit werk is geïdentificeerd als zijnde vrij van bekende beperkingen onder de auteursrechtwet, inclusief alle gerelateerde en naburige rechten"
   }
   

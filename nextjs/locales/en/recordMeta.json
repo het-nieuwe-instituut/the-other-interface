@@ -32,6 +32,12 @@
     "nationality": "Nationality",
     "gender": "Gender",
     "association": "Association",
-    "permanentLink": "Permanent Link"
+    "permanentLink": "Permanent Link",
+    "relatedStoriesCarousel": "Related stories",
+    "rightsStatusNotEvaluated": "The copyright and related rights status of this Item has not been evaluated.",
+    "rightsStatusProtected": "This Item is protected by copyright and/or related rights",
+    "rightsStatusNotDetermined": "The organization was unable to make a conclusive determination as to the copyright status of the Item.",
+    "rightsStatusCCBY": "Copyrighted material with permission for reuse. Subject to permission obtained.",
+    "rightsStatusPublic": "This work has been identified as being free of known restrictions under copyright law, including all related and neighboring rights."
   }
   
