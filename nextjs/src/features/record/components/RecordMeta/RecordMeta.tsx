@@ -49,11 +49,7 @@ function renderLink(title?: string, value?: string, index?: number) {
   )
 }
 
-function renderRights(
-  translate: recordMetaT,
-  value?: string[] | null,
-  key?: string
-) {
+function renderRights(translate: recordMetaT, value?: string[] | null, key?: string) {
   const rightsInfo = value && value[0] ? recordRightsFieldMapper(value[0], translate) : null
 
   if (!rightsInfo) return null
