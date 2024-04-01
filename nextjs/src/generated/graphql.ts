@@ -881,10 +881,12 @@ export type PeopleRelationsCountType = {
 
 export type PeopleRelationsType = {
   __typename?: 'PeopleRelationsType';
+  externalSource?: Maybe<Scalars['String']>;
   idRelation?: Maybe<Scalars['String']>;
   occupation?: Maybe<Scalars['String']>;
   period?: Maybe<Scalars['String']>;
   relationName?: Maybe<Scalars['String']>;
+  titleR?: Maybe<Scalars['String']>;
 };
 
 export type PeopleZoomLevel3DetailType = {
@@ -2267,7 +2269,7 @@ export type PeopleRecordRelationsQueryVariables = Exact<{
 }>;
 
 
-export type PeopleRecordRelationsQuery = { __typename?: 'Query', peopleRecordRelations?: Array<{ __typename?: 'PeopleRelationsType', idRelation?: string | null, relationName?: string | null, occupation?: string | null, period?: string | null }> | null };
+export type PeopleRecordRelationsQuery = { __typename?: 'Query', peopleRecordRelations?: Array<{ __typename?: 'PeopleRelationsType', idRelation?: string | null, relationName?: string | null, titleR?: string | null, occupation?: string | null, period?: string | null, externalSource?: string | null }> | null };
 
 export type PublicationRecordRelationsQueryVariables = Exact<{
   id: Scalars['String'];
@@ -3579,8 +3581,10 @@ export const PeopleRecordRelationsDocument = gql`
   ) {
     idRelation
     relationName
+    titleR
     occupation
     period
+    externalSource
   }
 }
     `;

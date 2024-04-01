@@ -986,10 +986,12 @@ export const aPeopleRelationsCountType = (overrides?: Partial<PeopleRelationsCou
 export const aPeopleRelationsType = (overrides?: Partial<PeopleRelationsType>, _relationshipsToOmit: Array<string> = []): PeopleRelationsType => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'PeopleRelationsType']);
     return {
+        externalSource: overrides && overrides.hasOwnProperty('externalSource') ? overrides.externalSource! : 'qui',
         idRelation: overrides && overrides.hasOwnProperty('idRelation') ? overrides.idRelation! : 'ut',
         occupation: overrides && overrides.hasOwnProperty('occupation') ? overrides.occupation! : 'qui',
         period: overrides && overrides.hasOwnProperty('period') ? overrides.period! : 'dolorem',
         relationName: overrides && overrides.hasOwnProperty('relationName') ? overrides.relationName! : 'quibusdam',
+        titleR: overrides && overrides.hasOwnProperty('titleR') ? overrides.titleR! : 'qui',
     };
 };
 

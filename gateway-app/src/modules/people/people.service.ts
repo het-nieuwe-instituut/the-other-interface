@@ -66,19 +66,22 @@ const peopleDetailZoomLevel3DataKeys: KeysToVerify<PeopleDetailZoomLevel3Data> =
   permanentLink: true,
 }
 
-// new
 export interface PeopleRelationsType {
   idRelation: string
   relationName: string
+  titleR: string
   occupation: string
   period: string
+  externalSource: string
 }
 
 const PeopleRelationsKeys: KeysToVerify<PeopleRelationsType> = {
   idRelation: true,
   relationName: true,
+  titleR: true,
   occupation: true,
   period: true,
+  externalSource: true,
 }
 
 export interface PeopleRelationsCountType {

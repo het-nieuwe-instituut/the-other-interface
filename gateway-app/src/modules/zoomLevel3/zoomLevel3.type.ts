@@ -35,6 +35,7 @@ export class ObjectRelationsType {
 
   @Field(() => String, { nullable: true })
   public titleR: string
+
   @Field(() => String, { nullable: true })
   public referenceNumber: string
 
@@ -61,10 +62,16 @@ export class PeopleRelationsType {
   public relationName: string
 
   @Field(() => String, { nullable: true })
+  public titleR: string
+
+  @Field(() => String, { nullable: true })
   public occupation: string
 
   @Field(() => String, { nullable: true })
   public period: string
+
+  @Field(() => String, { nullable: true })
+  public externalSource: string
 }
 
 @ObjectType()

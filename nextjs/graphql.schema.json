@@ -8221,6 +8221,18 @@
         "description": null,
         "fields": [
           {
+            "name": "externalSource",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "idRelation",
             "description": null,
             "args": [],
@@ -8258,6 +8270,18 @@
           },
           {
             "name": "relationName",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "titleR",
             "description": null,
             "args": [],
             "type": {

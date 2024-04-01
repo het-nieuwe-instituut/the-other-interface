@@ -2,7 +2,9 @@ query PeopleRecordRelations($id: String!, $type: EntityNames!, $lang: String!, $
     peopleRecordRelations(type: $type, id: $id, lang: $lang, page: $page, pageSize: $pageSize) {
         idRelation
         relationName
+        titleR
         occupation
         period
+        externalSource
     }
 }

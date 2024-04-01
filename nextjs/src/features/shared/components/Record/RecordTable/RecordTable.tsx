@@ -6,6 +6,7 @@ import { mapRecordTableData } from './mapRecordTableData'
 import { CATEGORIES, Category } from '@/features/shared/utils/categories'
 import { Dispatch, SetStateAction, useState } from 'react'
 import { theme } from '@/features/shared/styles/theme/theme'
+import { useParams } from 'next/navigation'
 
 interface PaginatedTableProps {
   data:
@@ -33,12 +34,15 @@ interface PaginatedTableProps {
 }
 
 export const RecordTable: React.FC = () => {
+  const params = useParams()
+  const type = params?.category as Category
+
   const [people, setPeople] = useState(1)
   const [objects, setObjects] = useState(1)
   const [archives, setArchives] = useState(1)
   const [publications, setPublications] = useState(1)
   const { data } = usePresenter({ people, objects, archives, publications })
-  const tableData = mapRecordTableData(data)
+  const tableData = mapRecordTableData(data, type)
 
   return (
     <Box maxW={theme.breakpoints.lg} px={6} pt={0}>

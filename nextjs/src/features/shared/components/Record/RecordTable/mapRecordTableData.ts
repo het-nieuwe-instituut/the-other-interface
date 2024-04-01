@@ -1,4 +1,4 @@
-import { CATEGORIES } from '@/features/shared/utils/categories'
+import { CATEGORIES, Category } from '@/features/shared/utils/categories'
 import {
   ArchiveRecordRelationsQuery,
   ObjectRecordRelationsQuery,
@@ -20,7 +20,8 @@ export const mapRecordTableData = (
             TotalType)
         | undefined
       )[]
-    | undefined
+    | undefined,
+  type: Category
 ) => {
   return (data || []).map((item, index) => {
     if (item?.publicationRecordRelations && item?.publicationRecordRelations?.length > 0) {
@@ -55,13 +56,21 @@ export const mapRecordTableData = (
           return {
             id: record.idRelation ?? index + '',
             TableBodyItem: [
-              { id: '1', value: record.relationName },
+              type === CATEGORIES.publications
+                ? { id: '1', value: record.titleR }
+                : { id: '1', value: record.relationName },
               { id: '2', value: record.occupation },
               { id: '3', value: record.period },
+              { id: '4', value: record.externalSource },
             ],
           }
         }),
-        tableHead: [{ label: 'Name' }, { label: 'Profession' }, { label: 'Dates' }],
+        tableHead: [
+          { label: 'Related People' },
+          { label: 'Rol' },
+          { label: 'Period' },
+          { label: 'External Source' },
+        ],
         total: item.total,
       }
     }
