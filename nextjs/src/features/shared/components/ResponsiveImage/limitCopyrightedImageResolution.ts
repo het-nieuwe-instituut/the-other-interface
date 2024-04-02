@@ -1,4 +1,4 @@
-export function modifyImageURL(src: string | null) {
+export function limitCopyrightedImageResolution(src: string | null) {
   if (!src || !src.includes('hdl.handle.net')) {
     return src
   }
