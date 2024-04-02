@@ -1,9 +1,11 @@
 export function modifyImageURL(src: string | null) {
-  if (!src) return src
-  const maxWidth = 1600
-  const maxHeight = 1600
-  if (src.includes('hdl.handle.net')) {
-    return `${src}?urlappend=/previews/maxWidth_${maxWidth}_maxHeight_${maxHeight}.jpg`
+  if (!src || !src.includes('hdl.handle.net')) {
+    return src
   }
-  return src
+
+  // see HNIT-1428 for the reasoning behind the requirements
+  const maxWidth = 1200
+  const maxHeight = 1000
+
+  return `${src}?urlappend=/previews/maxWidth_${maxWidth}_maxHeight_${maxHeight}.jpg`
 }
