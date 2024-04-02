@@ -67,12 +67,12 @@ const peopleDetailZoomLevel3DataKeys: KeysToVerify<PeopleDetailZoomLevel3Data> =
 }
 
 export interface PeopleRelationsType {
-  idRelation: string
-  relationName: string
-  titleR: string
-  occupation: string
-  period: string
-  externalSource: string
+  idRelation?: string
+  relationName?: string
+  titleR?: string
+  occupation?: string
+  period?: string
+  externalSource?: string
 }
 
 const PeopleRelationsKeys: KeysToVerify<PeopleRelationsType> = {
@@ -168,7 +168,7 @@ export class PeopleService {
     const result = await this.triplyService.queryTriplyData<PeopleRelationsCountType>(
       this.ZoomLevel3RelationsCountEndpoint,
       peopleRelationsCountKeys,
-      { page: 1, pageSize: 5 },
+      { page: 1, pageSize: 1 },
       { id, type }
     )
 
