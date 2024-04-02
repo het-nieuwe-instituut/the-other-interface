@@ -11,7 +11,7 @@ export const initApiClient = ({
   function setUpMockedServer() {
     const isLocal = process.env.parsed.NEXT_PUBLIC_ENV === 'local'
     const protocol = isLocal ? 'http' : 'https'
-    const host = hostHeader || window.location.host
+    const host = hostHeader || (window || {})?.location.host
     ApiClient.setBaseUrl(`${protocol}://${host}/api/graphql`)
   }
 
