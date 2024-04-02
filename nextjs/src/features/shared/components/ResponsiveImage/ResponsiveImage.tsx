@@ -2,6 +2,7 @@ import React from 'react'
 import { usePresenter } from './usePresenter'
 import Image from 'next/image'
 import { Box, BoxProps } from '@chakra-ui/react'
+import { limitCopyrightedImageResolution } from './limitCopyrightedImageResolution'
 
 type ResponsiveImageProps = {
   src?: string | null
@@ -29,6 +30,8 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
     disableRightClick
   )
 
+  const processedSrc = limitCopyrightedImageResolution(src)
+
   return (
     <Box position="relative" maxHeight={maxHeight} width={'100%'} css={css}>
       {/* Fallback Image */}
@@ -49,9 +52,9 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
       />
 
       {/* Actual Image */}
-      {src && (
+      {processedSrc && (
         <Image
-          src={src}
+          src={processedSrc}
           alt={alt || 'Actual image'}
           sizes={size}
           quality={100}
