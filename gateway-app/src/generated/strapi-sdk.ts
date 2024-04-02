@@ -12073,6 +12073,7 @@ export type StoriesMetaByLocaleQuery = {
           __typename?: 'AuthorEntityResponse'
           data?: {
             __typename?: 'AuthorEntity'
+            id?: string | null
             attributes?: {
               __typename?: 'Author'
               firstName: string
@@ -12196,6 +12197,7 @@ export type StoriesMetaByLocaleQuery = {
                 __typename?: 'AuthorEntityResponse'
                 data?: {
                   __typename?: 'AuthorEntity'
+                  id?: string | null
                   attributes?: {
                     __typename?: 'Author'
                     firstName: string
@@ -12300,6 +12302,7 @@ export type StoriesMetaByLocaleQuery = {
                 __typename?: 'AuthorEntityResponse'
                 data?: {
                   __typename?: 'AuthorEntity'
+                  id?: string | null
                   attributes?: { __typename?: 'Author'; firstName: string } | null
                 } | null
               } | null
@@ -15787,6 +15790,7 @@ export type LocalizedStoryMetaFragmentFragment = {
       __typename?: 'AuthorEntityResponse'
       data?: {
         __typename?: 'AuthorEntity'
+        id?: string | null
         attributes?: {
           __typename?: 'Author'
           firstName: string
@@ -15910,6 +15914,7 @@ export type LocalizedStoryMetaFragmentFragment = {
             __typename?: 'AuthorEntityResponse'
             data?: {
               __typename?: 'AuthorEntity'
+              id?: string | null
               attributes?: {
                 __typename?: 'Author'
                 firstName: string
@@ -16014,6 +16019,7 @@ export type LocalizedStoryMetaFragmentFragment = {
             __typename?: 'AuthorEntityResponse'
             data?: {
               __typename?: 'AuthorEntity'
+              id?: string | null
               attributes?: { __typename?: 'Author'; firstName: string } | null
             } | null
           } | null
@@ -23157,6 +23163,7 @@ export const LocalizedStoryMetaFragmentFragmentDoc = gql`
       locale
       author {
         data {
+          id
           attributes {
             firstName
             lastName
@@ -23198,6 +23205,7 @@ export const LocalizedStoryMetaFragmentFragmentDoc = gql`
             }
             author {
               data {
+                id
                 attributes {
                   firstName
                   lastName
@@ -23221,6 +23229,7 @@ export const LocalizedStoryMetaFragmentFragmentDoc = gql`
             }
             author {
               data {
+                id
                 attributes {
                   firstName
                 }

@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { useIsImagePortrait } from '../../hooks/useIsImagePortrait'
 
-export const usePresenter = (src: string | null) => {
+export const usePresenter = (src: string | null, disableRightClick = false) => {
   const fallbackImageRef = useRef<string | null>(null)
 
   if (!fallbackImageRef.current) {
@@ -10,9 +10,16 @@ export const usePresenter = (src: string | null) => {
 
   const { isSuccessfullyLoaded } = useIsImagePortrait(src)
 
+  const handleRightClick = (event: React.MouseEvent) => {
+    if (disableRightClick) {
+      event.preventDefault()
+    }
+  }
+
   const showFallbackImage = !isSuccessfullyLoaded || !src
   return {
     fallbackImage: fallbackImageRef.current,
     isSuccessfullyLoaded: !showFallbackImage && isSuccessfullyLoaded,
+    handleRightClick,
   }
 }

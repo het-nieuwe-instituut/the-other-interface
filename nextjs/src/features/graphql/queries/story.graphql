@@ -107,6 +107,7 @@ query storyMetaById($locale: String, $id: ID, $publicationState: String = "LIVE"
                 publishedAt
                 author {
                     data {
+                        id
                         attributes {
                             firstName
                             lastName
@@ -169,6 +170,7 @@ query storyMetaById($locale: String, $id: ID, $publicationState: String = "LIVE"
                             }
                             author {
                                 data {
+                                    id
                                     attributes {
                                         firstName
                                         lastName
@@ -191,6 +193,7 @@ query storyMetaById($locale: String, $id: ID, $publicationState: String = "LIVE"
                             }
                             author {
                                 data {
+                                    id
                                     attributes {
                                         firstName
                                         lastName
@@ -212,6 +215,7 @@ query storyMetaById($locale: String, $id: ID, $publicationState: String = "LIVE"
                         }
                         author {
                             data {
+                                id
                                 attributes {
                                     firstName
                                     lastName

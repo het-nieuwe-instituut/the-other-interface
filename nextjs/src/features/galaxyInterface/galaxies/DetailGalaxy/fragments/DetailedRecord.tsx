@@ -49,6 +49,7 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
           css={{
             flex: `1 1 calc(100% - 3vw - 8px)`,
           }}
+          disableRightClick
         />
 
         <Flex w="100%" color="blueAlpha.100" direction="column" flex="1" mt={2}>
