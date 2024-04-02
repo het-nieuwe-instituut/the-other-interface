@@ -1,4 +1,6 @@
+import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { CATEGORIES } from '@/features/shared/utils/categories'
+
 import {
   ArchiveRecordRelationsQuery,
   ObjectRecordRelationsQuery,
@@ -10,7 +12,7 @@ interface TotalType {
   total: string
 }
 
-export const mapRecordTableData = (
+export const useMapRecordTableData = (
   data:
     | (
         | (ArchiveRecordRelationsQuery &
@@ -22,11 +24,13 @@ export const mapRecordTableData = (
       )[]
     | undefined
 ) => {
+  const { t } = useTypeSafeTranslation('recordTable')
+
   return (data || []).map((item, index) => {
     if (item?.publicationRecordRelations && item?.publicationRecordRelations?.length > 0) {
       return {
         type: CATEGORIES.publications,
-        name: 'Related Publications',
+        name: t('relatedPublications') ?? '',
         tableBody: item?.publicationRecordRelations.map(record => {
           return {
             id: record.idRelation ?? index + '',
@@ -39,10 +43,10 @@ export const mapRecordTableData = (
           }
         }),
         tableHead: [
-          { label: 'Related Publications' },
-          { label: 'Type' },
-          { label: 'Year of publication' },
-          { label: 'External source' },
+          { label: t('relatedPublications') },
+          { label: t('type') },
+          { label: t('yearPublished') },
+          { label: t('externalSource') },
         ],
         total: item.total,
       }
@@ -50,7 +54,7 @@ export const mapRecordTableData = (
     if (item?.peopleRecordRelations && item?.peopleRecordRelations?.length > 0) {
       return {
         type: CATEGORIES.people,
-        name: 'Related People',
+        name: t('realtedPeople') ?? '',
         tableBody: item?.peopleRecordRelations.map(record => {
           return {
             id: record.idRelation ?? index + '',
@@ -63,10 +67,10 @@ export const mapRecordTableData = (
           }
         }),
         tableHead: [
-          { label: 'Related People' },
-          { label: 'Rol' },
-          { label: 'Period' },
-          { label: 'External Source' },
+          { label: t('realtedPeople') },
+          { label: t('role') },
+          { label: t('peoplePeriod') },
+          { label: t('externalSource') },
         ],
         total: item.total,
       }
@@ -74,7 +78,7 @@ export const mapRecordTableData = (
     if (item?.objectRecordRelations && item?.objectRecordRelations?.length > 0) {
       return {
         type: CATEGORIES.objects,
-        name: 'Related Objects',
+        name: t('realtedObjects') ?? '',
         tableBody: item?.objectRecordRelations.map(record => {
           return {
             id: record.id ?? index + '',
@@ -87,10 +91,10 @@ export const mapRecordTableData = (
           }
         }),
         tableHead: [
-          { label: 'Related Objects' },
-          { label: 'Object number' },
-          { label: 'Creation Period' },
-          { label: 'External Source' },
+          { label: t('realtedObjects') },
+          { label: t('objectNumber') },
+          { label: t('creationPeriod') },
+          { label: t('externalSource') },
         ],
         total: item.total,
       }
@@ -98,7 +102,7 @@ export const mapRecordTableData = (
     if (item?.archivesRecordRelations && item?.archivesRecordRelations?.length > 0) {
       return {
         type: CATEGORIES.archives,
-        name: 'Related Archives',
+        name: t('relatedArchive') ?? '',
         tableBody: item?.archivesRecordRelations.map(record => {
           return {
             id: record.id ?? index + '',
@@ -109,7 +113,11 @@ export const mapRecordTableData = (
             ],
           }
         }),
-        tableHead: [{ label: 'Record Type' }, { label: 'Object Number' }, { label: 'Period' }],
+        tableHead: [
+          { label: t('relatedArchive') },
+          { label: t('objectNumber') },
+          { label: t('archivePeriod') },
+        ],
         total: item.total,
       }
     }
