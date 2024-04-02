@@ -203,13 +203,13 @@ export class TriplyUtils {
     const output = results.filter(result => {
       let flag = false
       for (const r in result) {
-        if (result[r] !== null && r !== 'relation') {
+        if (result[r] !== null) {
           flag = true
+          return
         }
       }
       return flag
     })
-
     return output
   }
 
