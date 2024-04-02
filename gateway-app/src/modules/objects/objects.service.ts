@@ -19,7 +19,6 @@ const objectsDetailZoomLevel3DataKeys: KeysToVerify<ObjectsDetailZoomLevel3Data>
   description: true,
 }
 
-// new
 export interface ObjectsRelationsType {
   id: string
   titleR: string
@@ -117,7 +116,8 @@ export class ObjectsService {
       { id, type }
     )
 
-    return result.data
+    const output = TriplyUtils.sanitizeObjectArray(result.data)
+    return output
   }
 
   public async getRelationsDataCount(id: string, type: EntityNames) {

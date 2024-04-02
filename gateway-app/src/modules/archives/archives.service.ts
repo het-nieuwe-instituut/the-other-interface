@@ -18,9 +18,8 @@ const archivesDetailZoomLevel3DataKeys: KeysToVerify<ArchivesDetailZoomLevel3Dat
   objectNumber: true,
 }
 
-// new
 export interface ArchiveRelationsType {
-  id?: string
+  id: string
   titleR: string
   referenceNumber: string
   period: string
@@ -125,7 +124,8 @@ export class ArchivesService {
       { page: paginationArgs.page ?? 1, pageSize: paginationArgs.pageSize ?? 5 },
       { id, type }
     )
-    return result.data
+    const output = TriplyUtils.sanitizeObjectArray(result.data)
+    return output
   }
 
   public async getRelationsDataCount(id: string, type: EntityNames) {

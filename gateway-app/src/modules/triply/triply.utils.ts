@@ -199,6 +199,20 @@ export class TriplyUtils {
     return nullFlag ? null : (output as T)
   }
 
+  public static sanitizeObjectArray<T extends object>(results: T[]): T[] | null {
+    const output = results.filter(result => {
+      let flag = false
+      for (const r in result) {
+        if (result[r] !== null && r !== 'relation') {
+          flag = true
+        }
+      }
+      return flag
+    })
+
+    return output
+  }
+
   public static getQueryParamsFromObject<T extends object>(obj: T): Record<keyof T, string> {
     const queryParams: Partial<Record<keyof T, string>> = {}
 
