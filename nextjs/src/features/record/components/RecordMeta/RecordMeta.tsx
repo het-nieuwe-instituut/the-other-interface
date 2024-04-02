@@ -55,6 +55,7 @@ function renderRights(translate: recordMetaT, value?: string[] | null, key?: str
   if (!rightsInfo) return null
 
   const Icon = rightsInfo.icon
+  const SectionaryIcon = rightsInfo.secondaryIcon
 
   return (
     <Tooltip label={rightsInfo.description} fontSize="md" placement="bottom" hasArrow>
@@ -64,9 +65,14 @@ function renderRights(translate: recordMetaT, value?: string[] | null, key?: str
         target="_blank"
         key={key}
         w={'fit-content'}
-        display={'block'}
+        display={'flex'}
+        alignItems={'center'}
       >
-        <Icon />
+        <Box display={'flex'} alignItems={'center'}>
+          <Icon />
+          {SectionaryIcon ? <SectionaryIcon /> : null}
+        </Box>
+        <Text paddingLeft={2}>{rightsInfo.text}</Text>
       </Box>
     </Tooltip>
   )
