@@ -1,6 +1,7 @@
-import { Field, ObjectType } from '@nestjs/graphql'
+import { ArgsType, Field, ObjectType } from '@nestjs/graphql'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { PeopleZoomLevel3DetailType } from '../people/people.type'
+import { IsOptional, IsString } from 'class-validator'
 // import { PeopleZoomLevel3DetailType } from '../people/people.type'
 // import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 
@@ -101,6 +102,30 @@ export class ObjectsZoomLevel3DetailType {
 }
 
 @ObjectType()
+export class ObjectRelationsType {
+  @Field(() => String, { nullable: true })
+  public id?: string | null
+
+  @Field(() => String, { nullable: true })
+  public titleR?: string | null
+
+  @Field(() => String, { nullable: true })
+  public referenceNumber?: string | null
+
+  @Field(() => String, { nullable: true })
+  public period?: string | null
+
+  @Field(() => String, { nullable: true })
+  public externalSource?: string | null
+}
+
+@ObjectType()
+export class ObjectRelationsCountType {
+  @Field(() => String, { nullable: true })
+  public total: string
+}
+
+@ObjectType()
 export class ObjectRecordZoomLevel3Type {
   @Field(() => String, { nullable: true })
   public objectNumber?: string
@@ -191,4 +216,18 @@ export class ObjectTechniqueType {
 
   @Field(() => String, { nullable: true })
   public techniqueLabel?: string | null
+}
+
+@ArgsType()
+export class ObjectRecordRelationArgs {
+  @Field(() => EntityNames)
+  public type: EntityNames
+
+  @Field()
+  @IsString()
+  public id: string
+
+  @Field()
+  @IsOptional()
+  public lang?: string
 }

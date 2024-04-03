@@ -8,6 +8,10 @@ export const Table: ComponentStyleConfig = {
     return {
       tr: {
         color: '#000000 !important',
+        backgroundImage: 'linear-gradient(to right, black 33%, rgba(255,255,255,0) 0%)',
+        backgroundPosition: 'bottom',
+        backgroundSize: '5px 2px',
+        backgroundRepeat: 'repeat-x',
       },
       th: {
         pb: 0,
@@ -19,10 +23,6 @@ export const Table: ComponentStyleConfig = {
         padding: '0 0 0.625rem 0 !important',
 
         ...textStyles.micro,
-
-        borderColor: '#000000',
-        borderBottomColor: '#000000',
-        borderBottomWidth: '0.078rem',
       },
 
       td: {
@@ -32,12 +32,9 @@ export const Table: ComponentStyleConfig = {
         paddingTop: '0 !important',
         paddingLeft: '0 !important',
         paddingRight: '0 !important',
-        padding: '1.25rem 0 1.25rem 0 !important',
+        padding: '1.0rem 0 1.0rem 0 !important',
 
         ...textStyles.body,
-
-        borderColor: '#000000',
-        borderBottomWidth: '0.078rem',
         bc: 'unset',
       },
     }

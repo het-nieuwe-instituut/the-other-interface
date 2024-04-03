@@ -3,6 +3,7 @@ import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { getHttpThumbnailOrNull } from '../util/helpers'
 import { TriplyUtils } from '../triply/triply.utils'
+import { PaginationArgs } from '../util/paginationArgs.type'
 
 export interface ArchivesDetailZoomLevel3DataType {
   id?: string
@@ -15,6 +16,28 @@ const archivesDetailZoomLevel3DataKeys: KeysToVerify<ArchivesDetailZoomLevel3Dat
   title: true,
   thumbnail: true,
   objectNumber: true,
+}
+
+export interface ArchiveRelationsType {
+  id?: string
+  titleR?: string
+  referenceNumber?: string
+  period?: string
+}
+
+const archiveRelationsKeys: KeysToVerify<ArchiveRelationsType> = {
+  id: true,
+  titleR: true,
+  referenceNumber: true,
+  period: true,
+}
+
+export interface ArchiveRelationsCountType {
+  total: string
+}
+
+const archiveRelationsCountKeys: KeysToVerify<ArchiveRelationsCountType> = {
+  total: true,
 }
 
 export enum ArchivesZoomLevel3Types {
@@ -70,6 +93,10 @@ export class ArchivesService {
 
   private readonly ZoomLevel3Endpoint = 'archives-recordPage/run?'
 
+  private readonly ZoomLevel3RelationsEndpoint = 'archives-recordRelations/run?'
+
+  private readonly ZoomLevel3RelationsCountEndpoint = 'archives-recordRelations-Count/run?'
+
   private readonly ZoomLevel3RecordEndpoint = 'archives-recordPage-editorial/16/run?'
 
   public constructor(private triplyService: TriplyService) {}
@@ -88,6 +115,28 @@ export class ArchivesService {
       id,
       thumbnail: getHttpThumbnailOrNull(result.data[0]?.thumbnail)?.split(';'),
     }
+  }
+
+  public async getRelationsData(id: string, type: EntityNames, paginationArgs: PaginationArgs) {
+    const result = await this.triplyService.queryTriplyData<ArchiveRelationsType>(
+      this.ZoomLevel3RelationsEndpoint,
+      archiveRelationsKeys,
+      { page: paginationArgs.page ?? 1, pageSize: paginationArgs.pageSize ?? 5 },
+      { id, type }
+    )
+    const output = TriplyUtils.sanitizeObjectArray(result.data)
+    return output
+  }
+
+  public async getRelationsDataCount(id: string, type: EntityNames) {
+    const result = await this.triplyService.queryTriplyData<ArchiveRelationsCountType>(
+      this.ZoomLevel3RelationsCountEndpoint,
+      archiveRelationsCountKeys,
+      { page: 1, pageSize: 1 },
+      { id, type }
+    )
+
+    return result.data
   }
 
   public async getZoomLevel3RecordData(id: string) {

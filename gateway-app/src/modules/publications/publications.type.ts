@@ -1,8 +1,9 @@
-import { Field, ObjectType, createUnionType, registerEnumType } from '@nestjs/graphql'
+import { ArgsType, Field, ObjectType, createUnionType, registerEnumType } from '@nestjs/graphql'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { PublicationsZoomLevel3Types } from './publications.service'
 import { PeopleZoomLevel3DetailType } from '../people/people.type'
 import { CustomError } from '../util/customError'
+import { IsOptional, IsString } from 'class-validator'
 
 // registerEnumType(PublicationsZoomLevel3Types, { name: 'PublicationsZoomLevel3Types' })
 
@@ -28,6 +29,29 @@ export class PublicationZoomLevel3DetailType {
 
   @Field(() => String, { nullable: true })
   public description: string
+}
+
+@ObjectType()
+export class PublicationRelationsType {
+  @Field(() => String, { nullable: true })
+  public idRelation?: string | null
+
+  @Field(() => String, { nullable: true })
+  public titleR?: string | null
+
+  @Field(() => String, { nullable: true })
+  public typePub?: string | null
+
+  @Field(() => String, { nullable: true })
+  public yearPub?: string | null
+
+  @Field(() => String, { nullable: true })
+  public externalSource?: string | null
+}
+@ObjectType()
+export class PublicationsRelationsCountType {
+  @Field(() => String, { nullable: true })
+  public total: string
 }
 
 @ObjectType()
@@ -438,6 +462,20 @@ export class PublicationsBookZoomLevel3DetailType extends BasePublicationZoomLev
 
   @Field(() => String, { nullable: true })
   public permanentLink?: string
+}
+
+@ArgsType()
+export class PublicationRecordRelationArgs {
+  @Field(() => EntityNames)
+  public type: EntityNames
+
+  @Field()
+  @IsString()
+  public id: string
+
+  @Field()
+  @IsOptional()
+  public lang?: string
 }
 
 export const PublicationZoomLevel3UnionType = createUnionType({

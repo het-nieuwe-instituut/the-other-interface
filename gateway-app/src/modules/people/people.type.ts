@@ -1,5 +1,6 @@
-import { Field, ObjectType } from '@nestjs/graphql'
+import { ArgsType, Field, ObjectType } from '@nestjs/graphql'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
+import { IsOptional, IsString } from 'class-validator'
 
 @ObjectType()
 export class PeopleZoomLevel3DetailType {
@@ -140,4 +141,44 @@ export class PeopleAssociationType {
 
   @Field(() => String, { nullable: true })
   public associationLabel?: string | null
+}
+@ObjectType()
+export class PeopleRelationsType {
+  @Field(() => String, { nullable: true })
+  public idRelation?: string | null
+
+  @Field(() => String, { nullable: true })
+  public relationName?: string | null
+
+  @Field(() => String, { nullable: true })
+  public titleR?: string | null
+
+  @Field(() => String, { nullable: true })
+  public occupation?: string | null
+
+  @Field(() => String, { nullable: true })
+  public period?: string | null
+
+  @Field(() => String, { nullable: true })
+  public externalSource?: string | null
+}
+
+@ObjectType()
+export class PeopleRelationsCountType {
+  @Field(() => String, { nullable: true })
+  public total: string
+}
+
+@ArgsType()
+export class PeopleRecordRelationArgs {
+  @Field(() => EntityNames)
+  public type: EntityNames
+
+  @Field()
+  @IsString()
+  public id: string
+
+  @Field()
+  @IsOptional()
+  public lang?: string
 }

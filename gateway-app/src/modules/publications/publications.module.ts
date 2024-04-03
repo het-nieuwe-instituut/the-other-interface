@@ -2,6 +2,7 @@ import { forwardRef, Module } from '@nestjs/common'
 import { ZoomLevel3Module } from '../zoomLevel3/zoomLevel3.module'
 import {
   PublicationAuthorResolver,
+  PublicationRelationsZoomLevel3Resolver,
   PublicationsArticleResolver,
   PublicationsAudioVisualResolver,
   PublicationsBookResolver,
@@ -20,6 +21,7 @@ import { PublicationsService } from './publications.service'
     PublicationsBookResolver,
     PublicationsSerialResolver,
     PublicationAuthorResolver,
+    PublicationRelationsZoomLevel3Resolver,
   ],
   exports: [
     PublicationsService,
@@ -29,6 +31,7 @@ import { PublicationsService } from './publications.service'
     PublicationsBookResolver,
     PublicationsSerialResolver,
     PublicationAuthorResolver,
+    PublicationRelationsZoomLevel3Resolver,
   ],
 })
 export class PublicationsModule {}

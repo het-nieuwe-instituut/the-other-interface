@@ -48,7 +48,7 @@ export class Story {
   public author?: AuthorEntityResponse
 
   @Field(() => [StoryComponentsDynamicZone], { nullable: true })
-  public components?: (typeof StoryComponentsDynamicZone)[]
+  public components?: typeof StoryComponentsDynamicZone[]
 
   @Field({ nullable: true })
   public createdAt: Date

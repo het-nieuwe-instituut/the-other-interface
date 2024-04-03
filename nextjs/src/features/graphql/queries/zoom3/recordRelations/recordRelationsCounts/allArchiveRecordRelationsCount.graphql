@@ -1,0 +1,5 @@
+query ArchivesRecordRelationsCount($id: String!, $type: EntityNames!, $lang: String!) {
+    archivesRecordRelationsCount(type: $type, id: $id, lang: $lang) {
+        total
+    }
+}
