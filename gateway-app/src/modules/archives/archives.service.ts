@@ -97,7 +97,7 @@ export class ArchivesService {
 
   private readonly ZoomLevel3RelationsCountEndpoint = 'archives-recordRelations-Count/run?'
 
-  private readonly ZoomLevel3RecordEndpoint = 'archives-recordPage-editorial/11/run?'
+  private readonly ZoomLevel3RecordEndpoint = 'archives-recordPage-editorial/16/run?'
 
   public constructor(private triplyService: TriplyService) {}
 
