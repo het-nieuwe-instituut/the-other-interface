@@ -104,19 +104,19 @@ export class ObjectsZoomLevel3DetailType {
 @ObjectType()
 export class ObjectRelationsType {
   @Field(() => String, { nullable: true })
-  public id: string
+  public id?: string | null
 
   @Field(() => String, { nullable: true })
-  public titleR: string
+  public titleR?: string | null
 
   @Field(() => String, { nullable: true })
-  public referenceNumber: string
+  public referenceNumber?: string | null
 
   @Field(() => String, { nullable: true })
-  public period: string
+  public period?: string | null
 
   @Field(() => String, { nullable: true })
-  public externalSource: string
+  public externalSource?: string | null
 }
 
 @ObjectType()

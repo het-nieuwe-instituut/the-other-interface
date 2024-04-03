@@ -205,7 +205,7 @@ export class TriplyUtils {
       for (const r in result) {
         if (result[r] !== null) {
           flag = true
-          return
+          break
         }
       }
       return flag

@@ -33,16 +33,16 @@ export class ArchiveZoomLevel3DetailType {
 @ObjectType()
 export class ArchiveRelationsType {
   @Field(() => String, { nullable: true })
-  public id: string
+  public id?: string | null
 
   @Field(() => String, { nullable: true })
-  public titleR: string
+  public titleR?: string | null
 
   @Field(() => String, { nullable: true })
-  public referenceNumber: string
+  public referenceNumber?: string | null
 
   @Field(() => String, { nullable: true })
-  public period: string
+  public period?: string | null
 }
 
 @ObjectType()

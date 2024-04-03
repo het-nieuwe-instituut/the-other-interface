@@ -34,19 +34,19 @@ export class PublicationZoomLevel3DetailType {
 @ObjectType()
 export class PublicationRelationsType {
   @Field(() => String, { nullable: true })
-  public idRelation: string
+  public idRelation?: string | null
 
   @Field(() => String, { nullable: true })
-  public titleR: string
+  public titleR?: string | null
 
   @Field(() => String, { nullable: true })
-  public typePub: string
+  public typePub?: string | null
 
   @Field(() => String, { nullable: true })
-  public yearPub: string
+  public yearPub?: string | null
 
   @Field(() => String, { nullable: true })
-  public externalSource: string
+  public externalSource?: string | null
 }
 @ObjectType()
 export class PublicationsRelationsCountType {

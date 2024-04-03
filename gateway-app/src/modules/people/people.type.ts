@@ -145,22 +145,22 @@ export class PeopleAssociationType {
 @ObjectType()
 export class PeopleRelationsType {
   @Field(() => String, { nullable: true })
-  public idRelation: string
+  public idRelation?: string | null
 
   @Field(() => String, { nullable: true })
-  public relationName: string
+  public relationName?: string | null
 
   @Field(() => String, { nullable: true })
-  public titleR: string
+  public titleR?: string | null
 
   @Field(() => String, { nullable: true })
-  public occupation: string
+  public occupation?: string | null
 
   @Field(() => String, { nullable: true })
-  public period: string
+  public period?: string | null
 
   @Field(() => String, { nullable: true })
-  public externalSource: string
+  public externalSource?: string | null
 }
 
 @ObjectType()
