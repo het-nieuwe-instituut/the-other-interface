@@ -43,6 +43,18 @@ export type navigationT = (
     | undefined
 ) => string
 
+export type recordMetaT = (
+  s: Paths<typeof recordMeta>,
+  q?: TranslationQuery | undefined,
+  o?:
+    | {
+        returnObjects?: boolean | undefined
+        fallback?: string | string[] | undefined
+        default?: string | undefined
+      }
+    | undefined
+) => string | undefined
+
 export type recordMetaArchiveT = (
   s: Paths<typeof recordMetaArchive>,
   q?: TranslationQuery | undefined,
