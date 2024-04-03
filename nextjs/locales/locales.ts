@@ -15,6 +15,7 @@ import recordMetaPublication from './en/recordMetaPublication.json'
 import recordMetaArchive from './en/recordMetaArchive.json'
 import recordMetaObject from './en/recordMetaObject.json'
 import recordMetaPerson from './en/recordMetaPerson.json'
+import recordTable from './en/recordTable.json'
 
 export type TranslationKeys = {
   common: Paths<typeof common>
@@ -29,6 +30,7 @@ export type TranslationKeys = {
   recordMetaArchive: Paths<typeof recordMetaArchive>
   recordMetaObject: Paths<typeof recordMetaObject>
   recordMetaPerson: Paths<typeof recordMetaPerson>
+  recordTable: Paths<typeof recordTable>
 }
 
 export type navigationT = (
@@ -93,6 +95,18 @@ export type recordMetaObjectT = (
 
 export type recordMetaPersonT = (
   s: Paths<typeof recordMetaPerson>,
+  q?: TranslationQuery | undefined,
+  o?:
+    | {
+        returnObjects?: boolean | undefined
+        fallback?: string | string[] | undefined
+        default?: string | undefined
+      }
+    | undefined
+) => string | undefined
+
+export type recordTableT = (
+  s: Paths<typeof recordTable>,
   q?: TranslationQuery | undefined,
   o?:
     | {

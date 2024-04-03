@@ -83,7 +83,7 @@ export class StoryResolver {
     const res = await this.strapiGqlSdk.storiesMetaByLocale({
       id: filters?.id,
       publicationState,
-      locale: ['nl', 'en'],
+      locale: ['nl', 'en'], // we only care about story id, which should be searched across all locales
     })
 
     let story = res?.stories?.data[0]

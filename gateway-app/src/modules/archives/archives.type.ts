@@ -1,7 +1,8 @@
-import { Field, ObjectType, createUnionType, registerEnumType } from '@nestjs/graphql'
+import { ArgsType, Field, ObjectType, createUnionType, registerEnumType } from '@nestjs/graphql'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { ArchivesZoomLevel3Types } from './archives.service'
 import { PeopleZoomLevel3DetailType } from '../people/people.type'
+import { IsOptional, IsString } from 'class-validator'
 // import { PeopleZoomLevel3DetailType } from '../people/people.type'
 // import { ArchivesZoomLevel3Types } from './archives.service'
 // import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
@@ -27,6 +28,27 @@ export class ArchiveZoomLevel3DetailType {
 
   @Field(() => String, { nullable: true })
   public description?: string | null
+}
+
+@ObjectType()
+export class ArchiveRelationsType {
+  @Field(() => String, { nullable: true })
+  public id?: string | null
+
+  @Field(() => String, { nullable: true })
+  public titleR?: string | null
+
+  @Field(() => String, { nullable: true })
+  public referenceNumber?: string | null
+
+  @Field(() => String, { nullable: true })
+  public period?: string | null
+}
+
+@ObjectType()
+export class ArchivesRelationsCountType {
+  @Field(() => String, { nullable: true })
+  public total: string
 }
 
 registerEnumType(ArchivesZoomLevel3Types, { name: 'ArchivesZoomLevel3Types' })
@@ -176,6 +198,20 @@ export class ArchivesOtherZoomLevel3DetailType extends BaseArchiveZoomLevel3Type
 
   @Field(() => [String], { nullable: true })
   public pidWorkURIs?: string[]
+}
+
+@ArgsType()
+export class ArchiveRecordRelationArgs {
+  @Field(() => EntityNames)
+  public type: EntityNames
+
+  @Field()
+  @IsString()
+  public id: string
+
+  @Field()
+  @IsOptional()
+  public lang?: string
 }
 
 export const ArchiveZoomLevel3UnionType = createUnionType({

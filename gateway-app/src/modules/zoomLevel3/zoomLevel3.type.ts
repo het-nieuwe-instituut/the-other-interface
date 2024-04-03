@@ -1,11 +1,4 @@
-import {
-  ArgsType,
-  Field,
-  IntersectionType,
-  ObjectType,
-  PickType,
-  registerEnumType,
-} from '@nestjs/graphql'
+import { ArgsType, Field, ObjectType, registerEnumType } from '@nestjs/graphql'
 import { IsOptional, IsString } from 'class-validator'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 // import { PeopleZoomLevel3DetailType } from '../people/people.type'

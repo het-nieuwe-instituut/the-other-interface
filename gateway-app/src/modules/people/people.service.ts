@@ -3,6 +3,7 @@ import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { getHttpThumbnailOrNull } from '../util/helpers'
 import { TriplyUtils } from '../triply/triply.utils'
+import { PaginationArgs } from '../util/paginationArgs.type'
 
 interface PeopleDetailZoomLevel3Data {
   thumbnail?: string
@@ -65,6 +66,31 @@ const peopleDetailZoomLevel3DataKeys: KeysToVerify<PeopleDetailZoomLevel3Data> =
   permanentLink: true,
 }
 
+export interface PeopleRelationsType {
+  idRelation?: string
+  relationName?: string
+  titleR?: string
+  occupation?: string
+  period?: string
+  externalSource?: string
+}
+
+const PeopleRelationsKeys: KeysToVerify<PeopleRelationsType> = {
+  idRelation: true,
+  relationName: true,
+  titleR: true,
+  occupation: true,
+  period: true,
+  externalSource: true,
+}
+
+export interface PeopleRelationsCountType {
+  total: string
+}
+
+const peopleRelationsCountKeys: KeysToVerify<PeopleRelationsCountType> = {
+  total: true,
+}
 export interface PeopleRecordZoomLevel3Data {
   type?: string
   profession?: string
@@ -103,6 +129,10 @@ export class PeopleService {
 
   private readonly ZoomLevel3Endpoint = 'people-recordPage/run?'
 
+  private readonly ZoomLevel3RelationsEndpoint = 'people-recordRelations/run?'
+
+  private readonly ZoomLevel3RelationsCountEndpoint = 'people-recordRelations-Count/run?'
+
   private readonly ZoomLevel3RecordEndpoint = 'people-recordPage-editorial/18/run?'
 
   public constructor(private triplyService: TriplyService) {}
@@ -121,6 +151,28 @@ export class PeopleService {
       id,
       thumbnail: getHttpThumbnailOrNull(result.data[0]?.thumbnail)?.split(';'),
     }
+  }
+
+  public async getRelationsData(id: string, type: EntityNames, paginationArgs: PaginationArgs) {
+    const result = await this.triplyService.queryTriplyData<PeopleRelationsType>(
+      this.ZoomLevel3RelationsEndpoint,
+      PeopleRelationsKeys,
+      { page: paginationArgs.page ?? 1, pageSize: paginationArgs.pageSize ?? 5 },
+      { id, type }
+    )
+    const output = TriplyUtils.sanitizeObjectArray(result.data)
+    return output
+  }
+
+  public async getRelationsDataCount(id: string, type: EntityNames) {
+    const result = await this.triplyService.queryTriplyData<PeopleRelationsCountType>(
+      this.ZoomLevel3RelationsCountEndpoint,
+      peopleRelationsCountKeys,
+      { page: 1, pageSize: 1 },
+      { id, type }
+    )
+
+    return result.data
   }
 
   public async getZoomLevel3RecordData(id: string) {

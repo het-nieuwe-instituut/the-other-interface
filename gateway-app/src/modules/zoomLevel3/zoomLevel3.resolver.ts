@@ -28,7 +28,6 @@ import {
 import { ArchivesService } from '../archives/archives.service'
 import { ObjectsService } from '../objects/objects.service'
 import { PeopleService } from '../people/people.service'
-// import { ObjectsService } from '../objects/objects.service'
 
 @Resolver(ZoomLevel3RelationsType)
 export class ZoomLevel3Resolver {

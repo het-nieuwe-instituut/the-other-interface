@@ -159,7 +159,6 @@ export class TriplyUtils {
     text?: string
     isDataAmount: boolean
   }) {
-
     if (text) {
       return this.getUriForLevel2TextSearchDataAmount({ type, isDataAmount })
     }
@@ -198,6 +197,20 @@ export class TriplyUtils {
     }
 
     return nullFlag ? null : (output as T)
+  }
+
+  public static sanitizeObjectArray<T extends object>(results: T[]): T[] | null {
+    const output = results.filter(result => {
+      let flag = false
+      for (const r in result) {
+        if (result[r] !== null) {
+          flag = true
+          break
+        }
+      }
+      return flag
+    })
+    return output
   }
 
   public static getQueryParamsFromObject<T extends object>(obj: T): Record<keyof T, string> {

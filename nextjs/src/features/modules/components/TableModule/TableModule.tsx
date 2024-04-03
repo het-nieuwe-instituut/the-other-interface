@@ -11,19 +11,20 @@ import {
   useBreakpoint,
   Text,
 } from '@chakra-ui/react'
-
-import { ComponentModulesTableModule } from 'src/generated/graphql'
 import { modulesSpacingMapper } from '../../modulesSpacing'
+import { TableModuleType } from '../../ModulesRenderer/tableMapper'
 
 interface Props {
-  component: ComponentModulesTableModule
+  component: TableModuleType | undefined
+  LoadMore?: React.ReactNode
+  count?: string
 }
 
 export const TableModule: React.FC<Props> = props => {
-  const table = props.component
+  const { component, LoadMore, count } = props
   const breakpoint = useBreakpoint()
 
-  if (!table) {
+  if (!component) {
     return null
   }
 
@@ -35,12 +36,10 @@ export const TableModule: React.FC<Props> = props => {
         pb={modulesSpacingMapper?.TableModule.spacingBottom}
       >
         <Text textStyle={'h2'} as="h2" pb={'md'}>
-          {props.component.table?.data?.attributes?.name}
+          {component.name} {count ? `(${count})` : ''}
         </Text>
-        {props.component.table?.data?.attributes?.description && (
-          <Text pb={'md'}>{props.component.table?.data?.attributes?.description}</Text>
-        )}
-        <TableModuleMobile component={props.component} />
+        {component.description && <Text pb={'md'}>{component.description}</Text>}
+        <TableModuleMobile component={component} />
       </Box>
     )
   }
@@ -51,19 +50,21 @@ export const TableModule: React.FC<Props> = props => {
       pt={modulesSpacingMapper?.TableModule.spacingTop}
       pb={modulesSpacingMapper?.TableModule.spacingBottom}
     >
-      <Text as={'h2'} textStyle={'h2'} pb={'md'}>
-        {props.component.table?.data?.attributes?.name}
+      <Text as={'h2'} textStyle={'impactNew.xl'} pb={'sm'}>
+        {component.name} {count ? `(${count})` : ''}
       </Text>
-      {props.component.table?.data?.attributes?.description && (
-        <Text pb={'md'}>{props.component.table?.data?.attributes?.description}</Text>
+      {component.description && (
+        <Text pb={'md'} textStyle={'socialLarge.lg'}>
+          {component.description}
+        </Text>
       )}
-      <TableModuleDesktop component={props.component} />
+      <TableModuleDesktop component={component} LoadMore={LoadMore} />
     </Box>
   )
 }
 
 export const TableModuleMobile: React.FC<Props> = props => {
-  const body = props.component.table?.data?.attributes?.TableBody
+  const body = props?.component?.tableBody
 
   return (
     <TableContainer>
@@ -100,16 +101,28 @@ export const TableModuleMobile: React.FC<Props> = props => {
 }
 
 export const TableModuleDesktop: React.FC<Props> = props => {
-  const head = props.component.table?.data?.attributes?.Tablehead
-  const body = props.component.table?.data?.attributes?.TableBody
+  const head = props?.component?.tableHead
+  const body = props?.component?.tableBody
+  const LoadMore = props.LoadMore
 
   return (
     <TableContainer>
-      <Table variant="simple">
+      <Table>
         <Thead>
           <Tr>
-            {head?.TableHeadItem?.map((item, index, array) => (
-              <Th key={keyExtractor(item, index, array)}>{item?.label}</Th>
+            {head?.map((item, index, array) => (
+              <Th
+                key={keyExtractor(item, index, array)}
+                textTransform={'capitalize'}
+                // Overriding styles with textStyle does not work on this component
+                color={'black'}
+                fontSize={'16px'}
+                lineHeight={'130%'}
+                fontFamily={'Social'}
+                letterSpacing={'0.32px'}
+              >
+                {item?.label}
+              </Th>
             ))}
           </Tr>
         </Thead>
@@ -117,12 +130,24 @@ export const TableModuleDesktop: React.FC<Props> = props => {
           {body?.map((item, index, array) => (
             <Tr key={keyExtractor(item, index, array)}>
               {item?.TableBodyItem?.map((bodyItem, index, array) => (
-                <Td key={keyExtractor(bodyItem, index, array)}>{bodyItem?.value}</Td>
+                <Td
+                  key={keyExtractor(bodyItem, index, array)}
+                  // Overriding styles with textStyle does not work on this component
+                  fontSize={index === 0 ? '32px' : '21px'}
+                  fontWeight={index === 0 ? '700' : '400'}
+                  lineHeight={index === 0 ? '110%' : '130%'}
+                  letterSpacing={index === 0 ? '-0.32px' : '0.21px'}
+                  maxW={'250px'}
+                  whiteSpace={'normal'}
+                >
+                  {bodyItem?.value}
+                </Td>
               ))}
             </Tr>
           ))}
         </Tbody>
       </Table>
+      {LoadMore && <>{LoadMore}</>}
     </TableContainer>
   )
 }
