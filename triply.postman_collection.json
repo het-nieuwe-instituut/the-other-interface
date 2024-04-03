@@ -1,297 +1,384 @@
 {
-  "info": {
-    "_postman_id": "2c188900-fb83-4b9d-8af5-8c41b5855768",
-    "name": "HNI-toi Triply",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "8018205"
-  },
-  "item": [
-    {
-      "name": "Zoom 1",
-      "item": [
-        {
-          "name": "counts",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseURL}}/zoom-1-record-counts/run",
-              "host": ["{{baseURL}}"],
-              "path": ["zoom-1-record-counts", "run"]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Zoom 3",
-      "item": [
-        {
-          "name": "people death date filter",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseURL}}/zoom-3-people-death-date-filter/run",
-              "host": ["{{baseURL}}"],
-              "path": ["zoom-3-people-death-date-filter", "run"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "publication author filter",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseURL}}/zoom-3-books-author-filter/run?page=10&pageSize=16",
-              "host": ["{{baseURL}}"],
-              "path": ["zoom-3-books-author-filter", "run"],
-              "query": [
-                {
-                  "key": "page",
-                  "value": "10"
-                },
-                {
-                  "key": "pageSize",
-                  "value": "16"
-                }
-              ]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Zoom 5",
-      "item": [
-        {
-          "name": "archive",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseURL}}/zoom-5-archives/run?record=https://collectiedata.hetnieuweinstituut.nl/id/archives/110746983",
-              "host": ["{{baseURL}}"],
-              "path": ["zoom-5-archives", "run"],
-              "query": [
-                {
-                  "key": "record",
-                  "value": "https://collectiedata.hetnieuweinstituut.nl/id/archives/110746983"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "archive fonds",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseURL}}/zoom-5-archives-fonds/run?record=https://collectiedata.hetnieuweinstituut.nl/id/archives/110000212",
-              "host": ["{{baseURL}}"],
-              "path": ["zoom-5-archives-fonds", "run"],
-              "query": [
-                {
-                  "key": "record",
-                  "value": "https://collectiedata.hetnieuweinstituut.nl/id/archives/110000212"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "books audiovisual",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseURL}}/zoom-5-books-audiovisual/run?record=https://collectiedata.hetnieuweinstituut.nl/id/books/300169597",
-              "host": ["{{baseURL}}"],
-              "path": ["zoom-5-books-audiovisual", "run"],
-              "query": [
-                {
-                  "key": "record",
-                  "value": "https://collectiedata.hetnieuweinstituut.nl/id/books/300169597"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "object",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseURL}}/zoom-5-objects/run?record=https://collectiedata.hetnieuweinstituut.nl/id/objects/316",
-              "host": ["{{baseURL}}"],
-              "path": ["zoom-5-objects", "run"],
-              "query": [
-                {
-                  "key": "record",
-                  "value": "https://collectiedata.hetnieuweinstituut.nl/id/objects/316"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "people",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseURL}}/zoom-5-people/run?record",
-              "host": ["{{baseURL}}"],
-              "path": ["zoom-5-people", "run"],
-              "query": [
-                {
-                  "key": "record",
-                  "value": null
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "relations",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseURL}}/zoom-5-relations/run?record=https://collectiedata.hetnieuweinstituut.nl/id/people/12971",
-              "host": ["{{baseURL}}"],
-              "path": ["zoom-5-relations", "run"],
-              "query": [
-                {
-                  "key": "record",
-                  "value": "https://collectiedata.hetnieuweinstituut.nl/id/people/12971"
-                },
-                {
-                  "key": "externalSources",
-                  "value": "false",
-                  "disabled": true
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "all related objects",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseURL}}/zoom-5-relations/run?record=https://collectiedata.hetnieuweinstituut.nl/id/people/12971",
-              "host": ["{{baseURL}}"],
-              "path": ["zoom-5-relations", "run"],
-              "query": [
-                {
-                  "key": "record",
-                  "value": "https://collectiedata.hetnieuweinstituut.nl/id/people/12971"
-                },
-                {
-                  "key": "externalSources",
-                  "value": "false",
-                  "disabled": true
-                }
-              ]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Search",
-      "item": [
-        {
-          "name": "elasticsearch",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"from\": 0,\n  \"size\": 10,\n  \"query\": {\n    \"bool\": {\n      \"must\": [\n        {\n          \"query_string\": {\n            \"query\": \"asd asdfatw\"\n          }\n        }\n      ]\n    }\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "https://api.collectiedata.hetnieuweinstituut.nl/datasets/the-other-interface-acceptance/knowledge-graph/services/knowledge-graph-ES/elasticsearch",
-              "protocol": "https",
-              "host": ["api", "collectiedata", "hetnieuweinstituut", "nl"],
-              "path": [
-                "datasets",
-                "the-other-interface-acceptance",
-                "knowledge-graph",
-                "services",
-                "knowledge-graph-ES",
-                "elasticsearch"
-              ],
-              "query": [
-                {
-                  "key": "query",
-                  "value": "int",
-                  "disabled": true
-                }
-              ]
-            }
-          },
-          "response": []
-        }
-      ]
-    }
-  ],
-  "auth": {
-    "type": "bearer",
-    "bearer": [
-      {
-        "key": "token",
-        "value": "{{bearer}}",
-        "type": "string"
-      }
-    ]
-  },
-  "event": [
-    {
-      "listen": "prerequest",
-      "script": {
-        "type": "text/javascript",
-        "exec": [""]
-      }
-    },
-    {
-      "listen": "test",
-      "script": {
-        "type": "text/javascript",
-        "exec": [""]
-      }
-    }
-  ],
-  "variable": [
-    {
-      "key": "bearer",
-      "value": "",
-      "type": "string"
-    },
-    {
-      "key": "baseURL",
-      "value": "https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-acceptance",
-      "type": "string"
-    }
-  ]
+	"info": {
+		"_postman_id": "a3a9fae6-6430-4d1f-98a8-8317afb276d3",
+		"name": "HNI-toi Triply",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34042539"
+	},
+	"item": [
+		{
+			"name": "Zoom 1",
+			"item": [
+				{
+					"name": "counts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/zoom-1-record-counts/run",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"zoom-1-record-counts",
+								"run"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Zoom 3",
+			"item": [
+				{
+					"name": "people death date filter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/zoom-3-people-death-date-filter/run",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"zoom-3-people-death-date-filter",
+								"run"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "publication author filter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/zoom-3-books-author-filter/run?page=10&pageSize=16",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"zoom-3-books-author-filter",
+								"run"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "10"
+								},
+								{
+									"key": "pageSize",
+									"value": "16"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "archives related relations count",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/zoom-3-books-author-filter/run?page=10&pageSize=16",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"zoom-3-books-author-filter",
+								"run"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "10"
+								},
+								{
+									"key": "pageSize",
+									"value": "16"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Zoom 5",
+			"item": [
+				{
+					"name": "archive",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/zoom-5-archives/run?record=https://collectiedata.hetnieuweinstituut.nl/id/archives/110746983",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"zoom-5-archives",
+								"run"
+							],
+							"query": [
+								{
+									"key": "record",
+									"value": "https://collectiedata.hetnieuweinstituut.nl/id/archives/110746983"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "archive fonds",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/zoom-5-archives-fonds/run?record=https://collectiedata.hetnieuweinstituut.nl/id/archives/110000212",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"zoom-5-archives-fonds",
+								"run"
+							],
+							"query": [
+								{
+									"key": "record",
+									"value": "https://collectiedata.hetnieuweinstituut.nl/id/archives/110000212"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "books audiovisual",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/zoom-5-books-audiovisual/run?record=https://collectiedata.hetnieuweinstituut.nl/id/books/300169597",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"zoom-5-books-audiovisual",
+								"run"
+							],
+							"query": [
+								{
+									"key": "record",
+									"value": "https://collectiedata.hetnieuweinstituut.nl/id/books/300169597"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "object",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/zoom-5-objects/run?record=https://collectiedata.hetnieuweinstituut.nl/id/objects/316",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"zoom-5-objects",
+								"run"
+							],
+							"query": [
+								{
+									"key": "record",
+									"value": "https://collectiedata.hetnieuweinstituut.nl/id/objects/316"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "people",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/zoom-5-people/run?record",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"zoom-5-people",
+								"run"
+							],
+							"query": [
+								{
+									"key": "record",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "relations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/zoom-5-relations/run?record=https://collectiedata.hetnieuweinstituut.nl/id/people/12971",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"zoom-5-relations",
+								"run"
+							],
+							"query": [
+								{
+									"key": "record",
+									"value": "https://collectiedata.hetnieuweinstituut.nl/id/people/12971"
+								},
+								{
+									"key": "externalSources",
+									"value": "false",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all related objects",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/zoom-5-relations/run?record=https://collectiedata.hetnieuweinstituut.nl/id/people/12971",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"zoom-5-relations",
+								"run"
+							],
+							"query": [
+								{
+									"key": "record",
+									"value": "https://collectiedata.hetnieuweinstituut.nl/id/people/12971"
+								},
+								{
+									"key": "externalSources",
+									"value": "false",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Search",
+			"item": [
+				{
+					"name": "elasticsearch",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"from\": 0,\n  \"size\": 10,\n  \"query\": {\n    \"bool\": {\n      \"must\": [\n        {\n          \"query_string\": {\n            \"query\": \"asd asdfatw\"\n          }\n        }\n      ]\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.collectiedata.hetnieuweinstituut.nl/datasets/the-other-interface-acceptance/knowledge-graph/services/knowledge-graph-ES/elasticsearch",
+							"protocol": "https",
+							"host": [
+								"api",
+								"collectiedata",
+								"hetnieuweinstituut",
+								"nl"
+							],
+							"path": [
+								"datasets",
+								"the-other-interface-acceptance",
+								"knowledge-graph",
+								"services",
+								"knowledge-graph-ES",
+								"elasticsearch"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "int",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{bearer}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "bearer",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "baseURL",
+			"value": "https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-acceptance",
+			"type": "string"
+		}
+	]
 }

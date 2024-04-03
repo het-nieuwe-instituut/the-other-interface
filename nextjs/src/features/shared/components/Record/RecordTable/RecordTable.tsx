@@ -66,20 +66,39 @@ const PaginatedTable: React.FC<PaginatedTableProps> = props => {
         component={data}
         count={data?.total}
         LoadMore={
-          <Text
-            as={'button'}
-            textDecoration={'underline'}
-            textUnderlineOffset={'4px'}
-            _hover={{ textDecoration: 'none' }}
-            _disabled={{ color: 'grey', textDecoration: 'none', cursor: 'not-allowed' }}
-            marginTop={'16px'}
-            disabled={count * 5 >= parseInt(data?.total ?? '0')}
-            onClick={() => {
-              setter(prev => prev + 1)
-            }}
-          >
-            Load more
-          </Text>
+          <>
+            {count > 1 && (
+              <Text
+                as={'button'}
+                textDecoration={'underline'}
+                textUnderlineOffset={'4px'}
+                _hover={{ textDecoration: 'none' }}
+                _disabled={{ color: 'grey', textDecoration: 'none', cursor: 'not-allowed' }}
+                marginTop={'16px'}
+                marginRight={'16px'}
+                onClick={() => {
+                  setter(prev => prev - 1)
+                }}
+              >
+                Load previous page
+              </Text>
+            )}
+            {count * 5 < parseInt(data?.total ?? '0') && (
+              <Text
+                as={'button'}
+                textDecoration={'underline'}
+                textUnderlineOffset={'4px'}
+                _hover={{ textDecoration: 'none' }}
+                _disabled={{ color: 'grey', textDecoration: 'none', cursor: 'not-allowed' }}
+                marginTop={'16px'}
+                onClick={() => {
+                  setter(prev => prev + 1)
+                }}
+              >
+                Load next page
+              </Text>
+            )}
+          </>
         }
       />
     </>
