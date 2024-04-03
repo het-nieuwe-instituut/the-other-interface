@@ -68,10 +68,9 @@ function renderRights(translate: recordMetaT, value?: string[] | null, key?: str
         display={'flex'}
         alignItems={'center'}
       >
-        <Box display={'flex'} alignItems={'center'}>
-          <Icon />
-          {SectionaryIcon ? <SectionaryIcon /> : null}
-        </Box>
+        <Icon />
+        {SectionaryIcon ? <SectionaryIcon /> : null}
+
         <Text paddingLeft={2}>{rightsInfo.text}</Text>
       </Box>
     </Tooltip>
