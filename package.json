@@ -19,7 +19,7 @@
     "dev:nextjs": "cd nextjs && npm run dev",
     "dev:strapi": "cd strapi && npm run develop",
     "dev:gateway": "cd gateway-app && npm run start:debug",
-    "graphql:codegen": "wait-on http://localhost:1337/_health && cd nextjs && npm run codegen",
+    "graphql:codegen": "wait-on http://localhost:1337/_health && npm --prefix gateway-app run graphql-codegen && npm --prefix nextjs run codegen",
     "graphql:codegen:watch": "cd nextjs && npm run codegen:watch",
     "docker:start": "cd strapi && npm run start-services",
     "itermocil": "(ls Itermocil.custom.yml > /dev/null && itermocil --here --layout ./Itermocil.custom.yml) || itermocil --here",
