@@ -1,11 +1,12 @@
 'use client'
 import { CLOUD_CATEGORIES, CloudCategory } from '@/features/shared/utils/categories'
 import { Box, Grid } from '@chakra-ui/react'
-import { RelatedCategory, RelatedStories } from './fragments'
+import { RelatedCategory, RelatedStories } from '../fragments'
 import { GridParams } from '@/features/shared/types/position'
-import { GalaxyFooter } from '../../components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
+import { GalaxyFooter } from '../../../components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 import BlurOverlay from '@/features/shared/components/BlurOverlay/BlurOverlay'
-import { usePresenter } from './usePresenter'
+import { usePresenter } from '../usePresenter'
+import { GalaxyPagination } from '../../../components/GalaxyWrapper/GalaxyPagination/GalaxyPagination'
 
 const relatedCategories: Array<{ category: CloudCategory; grid: GridParams }> = [
   { category: CLOUD_CATEGORIES.people, grid: { gridRow: '1 / 2', gridColumn: '1 / 2' } },
@@ -15,7 +16,15 @@ const relatedCategories: Array<{ category: CloudCategory; grid: GridParams }> = 
 ]
 
 export const DetailGalaxy: React.FC = () => {
-  const { category, id, isSearchModeActive } = usePresenter()
+  const {
+    category,
+    id,
+    isSearchModeActive,
+    currentPageNumber,
+    pageAmount,
+    increasePageNumber,
+    decreasePageNumber,
+  } = usePresenter()
 
   if (!category || !id) return null
 
@@ -33,6 +42,7 @@ export const DetailGalaxy: React.FC = () => {
         templateRows="repeat(2, 1fr)"
       >
         {relatedCategories.map(({ category: cloudCategory, grid }) => (
+          // each category
           <RelatedCategory
             key={cloudCategory}
             category={cloudCategory}
@@ -44,7 +54,18 @@ export const DetailGalaxy: React.FC = () => {
         <RelatedStories gridRow="1 / 3" />
       </Grid>
 
-      <GalaxyFooter />
+      <GalaxyFooter
+        galaxyPagination={
+          <GalaxyPagination
+            currentPageNumber={currentPageNumber}
+            pageAmount={pageAmount}
+            isResultAmountLoading={false}
+            handleLeftClick={decreasePageNumber}
+            handleRightClick={increasePageNumber}
+            isResultEmpty={false} // stories.length === 0
+          />
+        }
+      />
     </Box>
   )
 }

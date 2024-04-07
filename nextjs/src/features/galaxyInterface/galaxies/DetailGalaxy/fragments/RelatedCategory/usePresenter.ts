@@ -10,8 +10,8 @@ export const usePresenter = (category: CloudCategory) => {
   const params = useParams()
   const id = params?.id as string
   const recordCategory = params?.category as CloudCategory
-  const { data } = useRecordRelations(recordCategory, id)
 
+  const { data } = useRecordRelations(recordCategory, id)
   const positionedRecords = useMemo(() => {
     if (!data?.relations) return []
 

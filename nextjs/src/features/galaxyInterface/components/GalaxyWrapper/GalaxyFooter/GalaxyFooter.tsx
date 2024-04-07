@@ -10,7 +10,6 @@ type Props = {
 
 export const GalaxyFooter: React.FC<Props> = ({ galaxyPagination }) => {
   const { showSearchBar } = usePresenter()
-
   return (
     <Grid
       position="absolute"

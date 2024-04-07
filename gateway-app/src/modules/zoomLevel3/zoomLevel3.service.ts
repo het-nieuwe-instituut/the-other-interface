@@ -11,6 +11,7 @@ import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { getRandom2ItemsFromArray } from '../util/helpers'
 import { CustomError } from '../util/customError'
 import { StoryService } from '../story/story.service'
+import { PaginationArgs } from '../util/paginationArgs.type'
 
 interface ZoomLevel3RelationData {
   idRelation: string
@@ -54,14 +55,20 @@ export class ZoomLevel3Service {
     private readonly storyService: StoryService
   ) {}
 
-  public async getRelations(id: string, type: EntityNames, lang?: string) {
+  // getting the relations
+  public async getRelations(
+    id: string,
+    type: EntityNames,
+    lang?: string,
+    paginationArgs?: PaginationArgs
+  ) {
     switch (type) {
       case EntityNames.Archives:
       case EntityNames.Objects:
       case EntityNames.People:
       case EntityNames.Publications:
         return [
-          ...(await this.getTriplyRelatedRecords(id, type)),
+          ...(await this.getTriplyRelatedRecords(id, type, paginationArgs?.page)),
           await this.getStoryRelationsForLinkedItem(id, type),
         ]
       case EntityNames.Stories:
@@ -72,6 +79,7 @@ export class ZoomLevel3Service {
   }
 
   public async getDetail(id: string, type: EntityNames) {
+    // get the detail given the idea - shouldn't need to change
     switch (type) {
       case EntityNames.Objects: {
         return this.objectsService.getZoomLevel3Data(id)
@@ -162,6 +170,7 @@ export class ZoomLevel3Service {
     return [...data, { type: EntityNames.Stories, randomRelations: storiesRelationsIds || [] }]
   }
 
+  // getting the relation ids for stories
   private async getStoryRelationsForLinkedItem(id: string, entityName: EntityNames) {
     const res = await this.strapiGqlSdk.storiesLinkedToTriplyRecord({
       recordId: id,
@@ -179,7 +188,8 @@ export class ZoomLevel3Service {
     }
   }
 
-  private async getTriplyRelatedRecords(id: string, recordType: EntityNames) {
+  // getting the relation ids for triply
+  private async getTriplyRelatedRecords(id: string, recordType: EntityNames, page?: number) {
     const data = await Promise.all(
       [EntityNames.Archives, EntityNames.Objects, EntityNames.People, EntityNames.Publications].map(
         async entityName => {
@@ -188,6 +198,7 @@ export class ZoomLevel3Service {
               id,
               type: entityName,
               recordType,
+              page,
             })
 
             return {
@@ -210,21 +221,24 @@ export class ZoomLevel3Service {
     return data
   }
 
+  // actually makes the call to triply
   private async getRelationDataFromTriply({
     id,
     type,
     recordType,
+    page = 1,
   }: {
     id: string
     type: EntityNames
     recordType: EntityNames
+    page?: number
   }) {
     const uri = TriplyUtils.getUriForTypeAndId(type, id, recordType)
 
     const res = await this.triplyService.queryTriplyData<ZoomLevel3RelationData>(
       `${uri}`,
       zoomLevel3RelationDataKeys,
-      { page: 1, pageSize: 2 },
+      { page, pageSize: 2 },
       { id }
     )
 

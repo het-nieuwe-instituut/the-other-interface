@@ -1343,6 +1343,8 @@ export type QueryPublicationsRecordZoomLevel3Args = {
 export type QueryRelationsArgs = {
   id: Scalars['String'];
   lang: Scalars['String'];
+  page: Scalars['Int'];
+  pageSize?: InputMaybe<Scalars['Int']>;
   type: EntityNames;
 };
 
@@ -2322,6 +2324,7 @@ export type PublicationsRecordRelationsCountQuery = { __typename?: 'Query', publ
 
 export type ArchivesRelationsQueryVariables = Exact<{
   id: Scalars['String'];
+  page: Scalars['Int'];
   lang: Scalars['String'];
 }>;
 
@@ -2330,6 +2333,7 @@ export type ArchivesRelationsQuery = { __typename?: 'Query', relations?: Array<{
 
 export type ObjectRelationsQueryVariables = Exact<{
   id: Scalars['String'];
+  page: Scalars['Int'];
   lang: Scalars['String'];
 }>;
 
@@ -2338,6 +2342,7 @@ export type ObjectRelationsQuery = { __typename?: 'Query', relations?: Array<{ _
 
 export type PeopleRelationsQueryVariables = Exact<{
   id: Scalars['String'];
+  page: Scalars['Int'];
   lang: Scalars['String'];
 }>;
 
@@ -2346,6 +2351,7 @@ export type PeopleRelationsQuery = { __typename?: 'Query', relations?: Array<{ _
 
 export type PublicationRelationsQueryVariables = Exact<{
   id: Scalars['String'];
+  page: Scalars['Int'];
   lang: Scalars['String'];
 }>;
 
@@ -2354,6 +2360,7 @@ export type PublicationRelationsQuery = { __typename?: 'Query', relations?: Arra
 
 export type StoriesRelationsQueryVariables = Exact<{
   id: Scalars['String'];
+  page: Scalars['Int'];
   lang: Scalars['String'];
 }>;
 
@@ -3640,36 +3647,36 @@ export const PublicationsRecordRelationsCountDocument = gql`
 }
     `;
 export const ArchivesRelationsDocument = gql`
-    query ArchivesRelations($id: String!, $lang: String!) {
-  relations(type: Archives, id: $id, lang: $lang) {
+    query ArchivesRelations($id: String!, $page: Int!, $lang: String!) {
+  relations(type: Archives, id: $id, page: $page, lang: $lang) {
     ...zoom3RelationsFragment
   }
 }
     ${Zoom3RelationsFragmentFragmentDoc}`;
 export const ObjectRelationsDocument = gql`
-    query ObjectRelations($id: String!, $lang: String!) {
-  relations(type: Objects, id: $id, lang: $lang) {
+    query ObjectRelations($id: String!, $page: Int!, $lang: String!) {
+  relations(type: Objects, id: $id, page: $page, lang: $lang) {
     ...zoom3RelationsFragment
   }
 }
     ${Zoom3RelationsFragmentFragmentDoc}`;
 export const PeopleRelationsDocument = gql`
-    query PeopleRelations($id: String!, $lang: String!) {
-  relations(type: People, id: $id, lang: $lang) {
+    query PeopleRelations($id: String!, $page: Int!, $lang: String!) {
+  relations(type: People, id: $id, page: $page, lang: $lang) {
     ...zoom3RelationsFragment
   }
 }
     ${Zoom3RelationsFragmentFragmentDoc}`;
 export const PublicationRelationsDocument = gql`
-    query PublicationRelations($id: String!, $lang: String!) {
-  relations(type: Publications, id: $id, lang: $lang) {
+    query PublicationRelations($id: String!, $page: Int!, $lang: String!) {
+  relations(type: Publications, id: $id, page: $page, lang: $lang) {
     ...zoom3RelationsFragment
   }
 }
     ${Zoom3RelationsFragmentFragmentDoc}`;
 export const StoriesRelationsDocument = gql`
-    query StoriesRelations($id: String!, $lang: String!) {
-  relations(type: Stories, id: $id, lang: $lang) {
+    query StoriesRelations($id: String!, $page: Int!, $lang: String!) {
+  relations(type: Stories, id: $id, page: $page, lang: $lang) {
     ...zoom3RelationsFragment
   }
 }
