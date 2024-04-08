@@ -2,7 +2,6 @@ import { CATEGORIES, Category } from '@/features/shared/utils/categories'
 import { draftMode } from 'next/headers'
 import { DetailpageContainer } from '@/features/pages/containers/DetailpageContainer/DetailpageContainer'
 import { notFound } from 'next/navigation'
-// import initApiServerService from '@/features/shared/utils/initApiServerService'
 
 interface Props {
   params: { category: string; id: string }
