@@ -55,7 +55,6 @@ export class ZoomLevel3Service {
     private readonly storyService: StoryService
   ) {}
 
-  // getting the relations
   public async getRelations(
     id: string,
     type: EntityNames,
@@ -79,7 +78,6 @@ export class ZoomLevel3Service {
   }
 
   public async getDetail(id: string, type: EntityNames) {
-    // get the detail given the idea - shouldn't need to change
     switch (type) {
       case EntityNames.Objects: {
         return this.objectsService.getZoomLevel3Data(id)
@@ -170,7 +168,6 @@ export class ZoomLevel3Service {
     return [...data, { type: EntityNames.Stories, randomRelations: storiesRelationsIds || [] }]
   }
 
-  // getting the relation ids for stories
   private async getStoryRelationsForLinkedItem(id: string, entityName: EntityNames) {
     const res = await this.strapiGqlSdk.storiesLinkedToTriplyRecord({
       recordId: id,
@@ -188,7 +185,6 @@ export class ZoomLevel3Service {
     }
   }
 
-  // getting the relation ids for triply
   private async getTriplyRelatedRecords(id: string, recordType: EntityNames, page?: number) {
     const data = await Promise.all(
       [EntityNames.Archives, EntityNames.Objects, EntityNames.People, EntityNames.Publications].map(
@@ -221,7 +217,6 @@ export class ZoomLevel3Service {
     return data
   }
 
-  // actually makes the call to triply
   private async getRelationDataFromTriply({
     id,
     type,

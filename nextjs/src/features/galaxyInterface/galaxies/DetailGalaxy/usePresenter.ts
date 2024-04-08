@@ -10,10 +10,10 @@ export const usePresenter = () => {
   const category = params?.category as Category
   const id = params?.id as string
   const isSearchModeActive = useSelector((state: State) => state.shared.isSearchModeActive)
-  const { data: totalPages = 0 } = useRecordRelationsCount(category, id)
+  const { data } = useRecordRelationsCount(category, id)
 
   const { page, pageAmount, increasePageNumber, decreasePageNumber } = usePagination(
-    totalPages,
+    data?.totalPages ?? 0,
     false,
     isSearchModeActive
   )
@@ -26,5 +26,6 @@ export const usePresenter = () => {
     pageAmount,
     increasePageNumber,
     decreasePageNumber,
+    allRelationTotals: data?.allRelationTotals,
   }
 }

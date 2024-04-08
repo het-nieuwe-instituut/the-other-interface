@@ -40,7 +40,6 @@ export class ZoomLevel3Resolver {
     private readonly peopleService: PeopleService
   ) {}
 
-  // getting the ids here
   @Query(() => [ZoomLevel3RelationsType], { nullable: true })
   public relations(@Args() args: ZoomLevel3Args, @Args() paginationArgs: PaginationArgs) {
     return this.zoomLevel3Service.getRelations(args.id, args.type, args?.lang, paginationArgs)
@@ -71,22 +70,18 @@ export class ZoomLevel3Resolver {
   //   return this.zoomLevel3Service.getAllRelations(args)
   // }
 
-  // this query uses the id to get the detail info - shouldn't need to change
   @Query(() => ObjectsZoomLevel3DetailType, { nullable: true })
   public zoomLevel3Object(@Args('id') objectId: string) {
     return this.zoomLevel3Service.getDetail(objectId, EntityNames.Objects)
   }
-  // this query uses the id to get the detail info - shouldn't need to change
   @Query(() => PeopleZoomLevel3DetailType, { nullable: true })
   public zoomLevel3Person(@Args('id') objectId: string) {
     return this.zoomLevel3Service.getDetail(objectId, EntityNames.People)
   }
-  // this query uses the id to get the detail info - shouldn't need to change
   @Query(() => PublicationZoomLevel3DetailType, { nullable: true })
   public async zoomLevel3Publication(@Args('id') objectId: string) {
     return this.zoomLevel3Service.getDetail(objectId, EntityNames.Publications)
   }
-  // this query uses the id to get the detail info - shouldn't need to change
   @Query(() => ArchiveZoomLevel3DetailType, { nullable: true })
   public async zoomLevel3Archive(@Args('id') objectId: string) {
     return this.zoomLevel3Service.getDetail(objectId, EntityNames.Archives)

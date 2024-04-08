@@ -6,12 +6,16 @@ import { positioningTemplate } from './positioningTemplates'
 import { useRecordRelations } from '@/features/shared/hooks/queries/useRecordRelations'
 import { useParams } from 'next/navigation'
 
-export const usePresenter = (category: CloudCategory) => {
+export const usePresenter = (
+  category: CloudCategory,
+  allRelationTotals?: Record<string, number>
+) => {
   const params = useParams()
   const id = params?.id as string
   const recordCategory = params?.category as CloudCategory
+  const maxPages = Math.floor((allRelationTotals?.[category] || 2) / 2)
+  const { data } = useRecordRelations(recordCategory, id, maxPages)
 
-  const { data } = useRecordRelations(recordCategory, id)
   const positionedRecords = useMemo(() => {
     if (!data?.relations) return []
 

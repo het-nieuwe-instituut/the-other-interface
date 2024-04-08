@@ -24,6 +24,7 @@ export const DetailGalaxy: React.FC = () => {
     pageAmount,
     increasePageNumber,
     decreasePageNumber,
+    allRelationTotals,
   } = usePresenter()
 
   if (!category || !id) return null
@@ -42,12 +43,12 @@ export const DetailGalaxy: React.FC = () => {
         templateRows="repeat(2, 1fr)"
       >
         {relatedCategories.map(({ category: cloudCategory, grid }) => (
-          // each category
           <RelatedCategory
             key={cloudCategory}
             category={cloudCategory}
             gridRow={grid.gridRow}
             gridColumn={grid.gridColumn}
+            allRelationTotals={allRelationTotals}
           />
         ))}
 
@@ -58,7 +59,7 @@ export const DetailGalaxy: React.FC = () => {
         galaxyPagination={
           <GalaxyPagination
             currentPageNumber={currentPageNumber}
-            pageAmount={pageAmount}
+            pageAmount={Math.floor(pageAmount / 2)}
             isResultAmountLoading={false}
             handleLeftClick={decreasePageNumber}
             handleRightClick={increasePageNumber}
