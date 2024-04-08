@@ -81,7 +81,7 @@ export async function getZoom3CountsTask({
       [CLOUD_CATEGORIES.objects]: parseInt(
         objectsCount?.objectRecordRelationsCount?.[0]?.total ?? '0'
       ),
-      stories: storyCount?.zoomLevel3StoriesRelationsForRecord?.total ?? 0,
+      [CATEGORIES.stories]: storyCount?.zoomLevel3StoriesRelationsForRecord?.total ?? 0,
     }
     return { totalPages, allRelationTotals }
   } catch (e) {

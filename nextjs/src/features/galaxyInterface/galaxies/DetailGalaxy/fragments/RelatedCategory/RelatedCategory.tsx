@@ -4,12 +4,20 @@ import { Grid, GridItem } from '@chakra-ui/react'
 import { usePresenter } from './usePresenter'
 import { Record } from '../Record/Record'
 import { GridParams } from '@/features/shared/types/position'
-import { CloudCategory } from '@/features/shared/utils/categories'
+import { CLOUD_CATEGORIES, CloudCategory } from '@/features/shared/utils/categories'
 import { keyExtractor } from '@/features/shared/utils/lists'
+
+export interface AllRelationTotalsType {
+  [CLOUD_CATEGORIES.archives]: number
+  [CLOUD_CATEGORIES.people]: number
+  [CLOUD_CATEGORIES.publications]: number
+  [CLOUD_CATEGORIES.objects]: number
+  stories: number
+}
 
 interface Props extends GridParams {
   category: CloudCategory
-  allRelationTotals?: Record<string, number>
+  allRelationTotals?: AllRelationTotalsType
 }
 
 export const RelatedCategory: React.FC<Props> = ({

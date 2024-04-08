@@ -5,10 +5,11 @@ import { PositionedRecord } from '../types'
 import { positioningTemplate } from './positioningTemplates'
 import { useRecordRelations } from '@/features/shared/hooks/queries/useRecordRelations'
 import { useParams } from 'next/navigation'
+import { AllRelationTotalsType } from './RelatedCategory'
 
 export const usePresenter = (
   category: CloudCategory,
-  allRelationTotals?: Record<string, number>
+  allRelationTotals?: AllRelationTotalsType
 ) => {
   const params = useParams()
   const id = params?.id as string

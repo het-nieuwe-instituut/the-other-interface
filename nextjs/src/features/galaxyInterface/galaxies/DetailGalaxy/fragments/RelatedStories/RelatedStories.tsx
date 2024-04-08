@@ -2,10 +2,11 @@ import { Grid, GridItem } from '@chakra-ui/react'
 import { DetailedRecord } from '../DetailedRecord'
 import { usePresenter } from './usePresenter'
 import { Record } from '../Record/Record'
+import { AllRelationTotalsType } from '../RelatedCategory'
 
 interface Props {
   gridRow: string
-  allRelationTotals?: Record<string, number>
+  allRelationTotals?: AllRelationTotalsType
 }
 
 export const RelatedStories: React.FC<Props> = ({ gridRow, allRelationTotals }) => {
