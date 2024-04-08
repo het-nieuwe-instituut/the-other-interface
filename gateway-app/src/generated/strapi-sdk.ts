@@ -12769,6 +12769,8 @@ export type StoryWithoutRelationsQuery = {
 export type StoriesLinkedToTriplyRecordQueryVariables = Exact<{
   recordId: Scalars['String']
   type: Scalars['String']
+  page?: InputMaybe<Scalars['Int']>
+  pageSize?: InputMaybe<Scalars['Int']>
 }>
 
 export type StoriesLinkedToTriplyRecordQuery = {
@@ -23846,8 +23848,16 @@ export const StoryWithoutRelationsDocument = gql`
   ${StoryWithoutRelationsFragmentFragmentDoc}
 `
 export const StoriesLinkedToTriplyRecordDocument = gql`
-  query storiesLinkedToTriplyRecord($recordId: String!, $type: String!) {
-    stories(filters: { triplyRecords: { recordId: { eq: $recordId }, type: { eq: $type } } }) {
+  query storiesLinkedToTriplyRecord(
+    $recordId: String!
+    $type: String!
+    $page: Int
+    $pageSize: Int
+  ) {
+    stories(
+      pagination: { page: $page, pageSize: $pageSize }
+      filters: { triplyRecords: { recordId: { eq: $recordId }, type: { eq: $type } } }
+    ) {
       data {
         id
         attributes {

@@ -29,18 +29,20 @@ const positioningTemplate: PositioningTemplate[] = [
   },
 ]
 
-export const usePresenter = () => {
+export const usePresenter = (allRelationTotals?: Record<string, number>) => {
   const params = useParams()
   const id = params?.id as string
   const recordCategory = params?.category as CloudCategory
-  const { data } = useRecordRelations(recordCategory, id)
+  const maxPages = Math.ceil((allRelationTotals?.['stories'] || 2) / 2)
+
+  const { data } = useRecordRelations(recordCategory, id, maxPages)
 
   const positionedStories = useMemo(() => {
     if (!data?.relations) return []
 
     const storiesRelations = data?.relations.find(relation =>
       isStoryCategory(relation.type?.toLocaleLowerCase())
-    )?.randomRelations
+    )?.paginatedRelations
 
     if (!storiesRelations) return []
 

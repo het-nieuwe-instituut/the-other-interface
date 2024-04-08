@@ -1986,7 +1986,7 @@ export type ZoomLevel2Type = {
 
 export type ZoomLevel3RelationsType = {
   __typename?: 'ZoomLevel3RelationsType';
-  randomRelations?: Maybe<Array<Scalars['String']>>;
+  paginatedRelations?: Maybe<Array<Scalars['String']>>;
   total?: Maybe<Scalars['Float']>;
   type?: Maybe<EntityNames>;
 };
@@ -2026,7 +2026,7 @@ export type TextModuleFragmentFragment = { __typename: 'ComponentModulesTextModu
 
 export type TitleModuleFragmentFragment = { __typename: 'ComponentModulesTitleModule', id: string, Title?: string | null };
 
-export type Zoom3RelationsFragmentFragment = { __typename?: 'ZoomLevel3RelationsType', type?: EntityNames | null, total?: number | null, randomRelations?: Array<string> | null };
+export type Zoom3RelationsFragmentFragment = { __typename?: 'ZoomLevel3RelationsType', type?: EntityNames | null, total?: number | null, paginatedRelations?: Array<string> | null };
 
 export type HomepageQueryVariables = Exact<{
   locale?: InputMaybe<Scalars['String']>;
@@ -2329,7 +2329,7 @@ export type ArchivesRelationsQueryVariables = Exact<{
 }>;
 
 
-export type ArchivesRelationsQuery = { __typename?: 'Query', relations?: Array<{ __typename?: 'ZoomLevel3RelationsType', type?: EntityNames | null, total?: number | null, randomRelations?: Array<string> | null }> | null };
+export type ArchivesRelationsQuery = { __typename?: 'Query', relations?: Array<{ __typename?: 'ZoomLevel3RelationsType', type?: EntityNames | null, total?: number | null, paginatedRelations?: Array<string> | null }> | null };
 
 export type ObjectRelationsQueryVariables = Exact<{
   id: Scalars['String'];
@@ -2338,7 +2338,7 @@ export type ObjectRelationsQueryVariables = Exact<{
 }>;
 
 
-export type ObjectRelationsQuery = { __typename?: 'Query', relations?: Array<{ __typename?: 'ZoomLevel3RelationsType', type?: EntityNames | null, total?: number | null, randomRelations?: Array<string> | null }> | null };
+export type ObjectRelationsQuery = { __typename?: 'Query', relations?: Array<{ __typename?: 'ZoomLevel3RelationsType', type?: EntityNames | null, total?: number | null, paginatedRelations?: Array<string> | null }> | null };
 
 export type PeopleRelationsQueryVariables = Exact<{
   id: Scalars['String'];
@@ -2347,7 +2347,7 @@ export type PeopleRelationsQueryVariables = Exact<{
 }>;
 
 
-export type PeopleRelationsQuery = { __typename?: 'Query', relations?: Array<{ __typename?: 'ZoomLevel3RelationsType', type?: EntityNames | null, total?: number | null, randomRelations?: Array<string> | null }> | null };
+export type PeopleRelationsQuery = { __typename?: 'Query', relations?: Array<{ __typename?: 'ZoomLevel3RelationsType', type?: EntityNames | null, total?: number | null, paginatedRelations?: Array<string> | null }> | null };
 
 export type PublicationRelationsQueryVariables = Exact<{
   id: Scalars['String'];
@@ -2356,7 +2356,7 @@ export type PublicationRelationsQueryVariables = Exact<{
 }>;
 
 
-export type PublicationRelationsQuery = { __typename?: 'Query', relations?: Array<{ __typename?: 'ZoomLevel3RelationsType', type?: EntityNames | null, total?: number | null, randomRelations?: Array<string> | null }> | null };
+export type PublicationRelationsQuery = { __typename?: 'Query', relations?: Array<{ __typename?: 'ZoomLevel3RelationsType', type?: EntityNames | null, total?: number | null, paginatedRelations?: Array<string> | null }> | null };
 
 export type StoriesRelationsQueryVariables = Exact<{
   id: Scalars['String'];
@@ -2365,7 +2365,7 @@ export type StoriesRelationsQueryVariables = Exact<{
 }>;
 
 
-export type StoriesRelationsQuery = { __typename?: 'Query', relations?: Array<{ __typename?: 'ZoomLevel3RelationsType', type?: EntityNames | null, total?: number | null, randomRelations?: Array<string> | null }> | null };
+export type StoriesRelationsQuery = { __typename?: 'Query', relations?: Array<{ __typename?: 'ZoomLevel3RelationsType', type?: EntityNames | null, total?: number | null, paginatedRelations?: Array<string> | null }> | null };
 
 export type StoriesRelationForRecordQueryVariables = Exact<{
   id: Scalars['String'];
@@ -2809,7 +2809,7 @@ export const Zoom3RelationsFragmentFragmentDoc = gql`
     fragment zoom3RelationsFragment on ZoomLevel3RelationsType {
   type
   total
-  randomRelations
+  paginatedRelations
 }
     `;
 export const HomepageDocument = gql`

@@ -14,6 +14,7 @@ export const usePresenter = (
   const id = params?.id as string
   const recordCategory = params?.category as CloudCategory
   const maxPages = Math.floor((allRelationTotals?.[category] || 2) / 2)
+
   const { data } = useRecordRelations(recordCategory, id, maxPages)
 
   const positionedRecords = useMemo(() => {
@@ -23,7 +24,7 @@ export const usePresenter = (
     const categoryPositioningTemplate = positioningTemplate[category]
     const categoryRelations = data?.relations.find(
       relation => relation.type?.toLocaleLowerCase() === category
-    )?.randomRelations
+    )?.paginatedRelations
 
     if (!categoryPositioningTemplate || !categoryRelations) return []
 

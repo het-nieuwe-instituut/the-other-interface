@@ -1,10 +1,10 @@
 const relations = {
   relations: [
-    { type: 'Publications', total: null, randomRelations: ['300230524', '300165507'] },
-    { type: 'People', total: null, randomRelations: ['18344', '22384'] },
-    { type: 'Archives', total: null, randomRelations: ['110000631', '110000565'] },
-    { type: 'Stories', total: null, randomRelations: ['1', '3'] },
-    { type: 'Objects', total: null, randomRelations: ['4261', '3487'] },
+    { type: 'Publications', total: null, paginatedRelations: ['300230524', '300165507'] },
+    { type: 'People', total: null, paginatedRelations: ['18344', '22384'] },
+    { type: 'Archives', total: null, paginatedRelations: ['110000631', '110000565'] },
+    { type: 'Stories', total: null, paginatedRelations: ['1', '3'] },
+    { type: 'Objects', total: null, paginatedRelations: ['4261', '3487'] },
   ],
 }
 

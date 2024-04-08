@@ -17,7 +17,7 @@ export class ZoomLevel3RelationsType {
   public total: number
 
   @Field(() => [String], { nullable: true })
-  public randomRelations?: string[]
+  public paginatedRelations?: string[]
 }
 
 @ObjectType()

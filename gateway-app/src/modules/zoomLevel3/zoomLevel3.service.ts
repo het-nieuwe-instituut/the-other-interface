@@ -68,7 +68,7 @@ export class ZoomLevel3Service {
       case EntityNames.Publications:
         return [
           ...(await this.getTriplyRelatedRecords(id, type, paginationArgs?.page)),
-          await this.getStoryRelationsForLinkedItem(id, type),
+          await this.getStoryRelationsForLinkedItem(id, type, paginationArgs?.page),
         ]
       case EntityNames.Stories:
         return this.getStoryRelations(id, lang)
@@ -156,7 +156,7 @@ export class ZoomLevel3Service {
 
       return {
         type,
-        randomRelations: randomRecordIds ?? [],
+        paginatedRelations: randomRecordIds ?? [],
       }
     })
 
@@ -165,23 +165,25 @@ export class ZoomLevel3Service {
       new Set([...storyIds, ...childrensIds, ...siblingsIds, parentId].filter(Boolean))
     )
 
-    return [...data, { type: EntityNames.Stories, randomRelations: storiesRelationsIds || [] }]
+    return [...data, { type: EntityNames.Stories, paginatedRelations: storiesRelationsIds || [] }]
   }
 
-  private async getStoryRelationsForLinkedItem(id: string, entityName: EntityNames) {
+  private async getStoryRelationsForLinkedItem(id: string, entityName: EntityNames, page?: number) {
     const res = await this.strapiGqlSdk.storiesLinkedToTriplyRecord({
       recordId: id,
       type: StrapiUtils.getRecordTypeForEntityName(entityName),
+      page: page || 1,
+      pageSize: 2,
     })
 
-    const randomStories = getRandom2ItemsFromArray(res.stories?.data || [])
+    const randomStories = (res.stories?.data || [])
       .filter(s => !!s?.id && !!s.attributes)
       .map(s => s?.id || '')
 
     return {
       type: EntityNames.Stories,
       total: res.stories?.data.length || 0,
-      randomRelations: randomStories ?? [],
+      paginatedRelations: randomStories ?? [],
     }
   }
 
@@ -200,14 +202,14 @@ export class ZoomLevel3Service {
             return {
               id,
               type: entityName,
-              randomRelations: data.map(d => d?.idRelation).filter(d => !!d),
+              paginatedRelations: data.map(d => d?.idRelation).filter(d => !!d),
             }
           } catch (error) {
             console.error(`Error fetching data for entity ${entityName}:`, error)
             return {
               id,
               type: entityName,
-              randomRelations: [],
+              paginatedRelations: [],
             }
           }
         }

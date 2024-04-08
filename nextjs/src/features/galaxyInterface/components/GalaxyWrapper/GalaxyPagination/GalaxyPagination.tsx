@@ -54,14 +54,14 @@ export const GalaxyPagination: React.FC<Props> = ({
             <Text>
               {currentPageNumber} {t('of')}
             </Text>
-            <Text>{pageAmount}</Text>
+            <Text>{pageAmount || 1}</Text>
           </>
         )}
       </Flex>
       <PaginationButton
         side="right"
         handleClick={handleRightClick}
-        disabled={isResultAmountLoading || currentPageNumber === pageAmount}
+        disabled={isResultAmountLoading || currentPageNumber === pageAmount || pageAmount < 1}
       />
     </Grid>
   )

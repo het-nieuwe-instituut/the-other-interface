@@ -52,7 +52,7 @@ export const DetailGalaxy: React.FC = () => {
           />
         ))}
 
-        <RelatedStories gridRow="1 / 3" />
+        <RelatedStories gridRow="1 / 3" allRelationTotals={allRelationTotals} />
       </Grid>
 
       <GalaxyFooter
@@ -63,7 +63,7 @@ export const DetailGalaxy: React.FC = () => {
             isResultAmountLoading={false}
             handleLeftClick={decreasePageNumber}
             handleRightClick={increasePageNumber}
-            isResultEmpty={false} // stories.length === 0
+            isResultEmpty={false}
           />
         }
       />

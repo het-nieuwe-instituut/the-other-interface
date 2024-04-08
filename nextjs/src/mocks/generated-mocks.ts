@@ -1871,7 +1871,7 @@ export const aZoomLevel2Type = (overrides?: Partial<ZoomLevel2Type>, _relationsh
 export const aZoomLevel3RelationsType = (overrides?: Partial<ZoomLevel3RelationsType>, _relationshipsToOmit: Array<string> = []): ZoomLevel3RelationsType => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ZoomLevel3RelationsType']);
     return {
-        randomRelations: overrides && overrides.hasOwnProperty('randomRelations') ? overrides.randomRelations! : ['id'],
+        paginatedRelations: overrides && overrides.hasOwnProperty('paginatedRelations') ? overrides.paginatedRelations! : ['nobis'],
         total: overrides && overrides.hasOwnProperty('total') ? overrides.total! : 2.42,
         type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : EntityNames.Archives,
     };

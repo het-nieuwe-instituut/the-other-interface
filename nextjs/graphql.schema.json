@@ -17839,7 +17839,7 @@
         "description": null,
         "fields": [
           {
-            "name": "randomRelations",
+            "name": "paginatedRelations",
             "description": null,
             "args": [],
             "type": {

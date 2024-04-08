@@ -5,10 +5,11 @@ import { Record } from '../Record/Record'
 
 interface Props {
   gridRow: string
+  allRelationTotals?: Record<string, number>
 }
 
-export const RelatedStories: React.FC<Props> = ({ gridRow }) => {
-  const { positionedStories } = usePresenter()
+export const RelatedStories: React.FC<Props> = ({ gridRow, allRelationTotals }) => {
+  const { positionedStories } = usePresenter(allRelationTotals)
 
   return (
     <GridItem gridRow={gridRow} gridColumn="2" color="white">
