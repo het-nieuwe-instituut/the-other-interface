@@ -1,6 +1,6 @@
 import { useRouter, useSearchParams } from 'next/navigation'
 
-import { useRecordDetail } from '@/features/shared/hooks/queries/useRecordDetail'
+import { useRecordDetail } from '@/features/record/hooks/useRecordDetail'
 import { Category } from '@/features/shared/utils/categories'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 
