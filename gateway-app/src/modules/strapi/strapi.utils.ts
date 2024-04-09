@@ -1,5 +1,5 @@
 // prettier-ignore
-import { Enum_Triplyrecord_Type } from '../../generated/strapi-sdk';
+import { Enum_Componentmodulesgridmodule_Fieldtypes, Enum_Triplyrecord_Type } from '../../generated/strapi-sdk';
 import { CustomError } from '../util/customError'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 
