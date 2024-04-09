@@ -131,8 +131,8 @@ query storyWithoutRelations($id: ID, $locale: I18NLocaleCode) {
 }
 
 # "$type" must be ENUM_TRIPLYRECORD_TYPE
-query storiesLinkedToTriplyRecord($recordId: String!, $type: String!, $page: Int, $pageSize: Int) { 
-    stories(pagination: { page: $page, pageSize: $pageSize }, filters: { triplyRecords: { recordId: { eq: $recordId }, type: { eq: $type } } }) {
+query storiesLinkedToTriplyRecord($recordId: String!, $type: String!, $pagination: PaginationArg) { 
+    stories(pagination: $pagination, filters: { triplyRecords: { recordId: { eq: $recordId }, type: { eq: $type } } }) {
         data {
             id
             attributes {
