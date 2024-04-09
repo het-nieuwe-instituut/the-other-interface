@@ -44,9 +44,7 @@
         "modules.title-module",
         "modules.image-carousel",
         "modules.image",
-        "modules.table-module",
-        "modules.buttons-module",
-        "modules.grid-module"
+        "modules.buttons-module"
       ],
       "pluginOptions": {
         "i18n": {
