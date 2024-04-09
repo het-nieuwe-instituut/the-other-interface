@@ -120,7 +120,6 @@ export class ZoomLevel3Service {
   }
 
   private async getStoryRelations(id: string, lang?: string, page?: number) {
-    // fetching stories here
     const res = await this.strapiGqlSdk.storyByLocale({ id })
     let story = res?.story?.data
 
@@ -137,7 +136,7 @@ export class ZoomLevel3Service {
     }
 
     const [storyRelations, siblingsRes] = await Promise.all([
-      this.strapiGqlSdk.storiesLinkedToTheme({ id: storyId, locale: lang }),
+      this.strapiGqlSdk.storiesLinkedToTheme({ id: storyId, locale: lang, page, pageSize: 2 }),
       parentId && lang
         ? this.storyService.getStorySiblings(parentId, id, lang)
         : Promise.resolve([]),

@@ -13438,6 +13438,8 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
 export type StoriesLinkedToThemeQueryVariables = Exact<{
   id: Scalars['ID']
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
+  page?: InputMaybe<Scalars['Int']>
+  pageSize?: InputMaybe<Scalars['Int']>
 }>
 
 export type StoriesLinkedToThemeQuery = {
@@ -23889,7 +23891,7 @@ export const StoriesLinkedToTriplyRecordExtendedDocument = gql`
   ${StoryFragmentFragmentDoc}
 `
 export const StoriesLinkedToThemeDocument = gql`
-  query storiesLinkedToTheme($id: ID!, $locale: I18NLocaleCode) {
+  query storiesLinkedToTheme($id: ID!, $locale: I18NLocaleCode, $page: Int, $pageSize: Int) {
     story(id: $id, locale: $locale) {
       data {
         id
@@ -23898,7 +23900,7 @@ export const StoriesLinkedToThemeDocument = gql`
             data {
               id
               attributes {
-                stories {
+                stories(pagination: { page: $page, pageSize: $pageSize }) {
                   data {
                     id
                   }

@@ -151,7 +151,7 @@ query storiesLinkedToTriplyRecordExtended($recordId: String!, $type: String!, $l
     }
 }
 
-query storiesLinkedToTheme($id: ID!, $locale: I18NLocaleCode) {
+query storiesLinkedToTheme($id: ID!, $locale: I18NLocaleCode, $page: Int, $pageSize: Int) {
     story(id: $id, locale: $locale) {
         data {
             id
@@ -160,7 +160,7 @@ query storiesLinkedToTheme($id: ID!, $locale: I18NLocaleCode) {
                     data {
                         id
                         attributes {
-                            stories {
+                            stories(pagination: { page: $page, pageSize: $pageSize }) {
                                 data {
                                     id
                                 }
