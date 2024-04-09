@@ -14,7 +14,7 @@ export const usePresenter = (
   const params = useParams()
   const id = params?.id as string
   const recordCategory = params?.category as CloudCategory
-  const maxPages = Math.floor((allRelationTotals?.[category] || 2) / 2)
+  const maxPages = Math.ceil((allRelationTotals?.[category] || 2) / 2)
 
   const { data } = useRecordRelations(recordCategory, id, maxPages)
 

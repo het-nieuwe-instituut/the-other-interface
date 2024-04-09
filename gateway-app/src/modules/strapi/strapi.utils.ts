@@ -1,5 +1,5 @@
 // prettier-ignore
-import { Enum_Componentmodulesgridmodule_Fieldtypes, Enum_Triplyrecord_Type } from '../../generated/strapi-sdk';
+import {  Enum_Componentmodulesgridmodule_Fieldtypes, Enum_Triplyrecord_Type } from '../../generated/strapi-sdk';
 import { CustomError } from '../util/customError'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 
@@ -18,6 +18,7 @@ export class StrapiUtils {
       case EntityNames.Media:
         return Enum_Triplyrecord_Type.Media
       case EntityNames.Stories:
+        return Enum_Componentmodulesgridmodule_Fieldtypes.Stories
       case EntityNames.External:
       default:
         throw CustomError.internalCritical(`type for entity ${name} not implemented`)
