@@ -5,17 +5,17 @@ import { PositionedRecord } from '../types'
 import { positioningTemplate } from './positioningTemplates'
 import { useRecordRelations } from '@/features/shared/hooks/queries/useRecordRelations'
 import { useParams } from 'next/navigation'
-// import { AllRelationTotalsType } from './RelatedCategory'
+import { AllRelationTotalsType } from './RelatedCategory'
 
 export const usePresenter = (
-  category: CloudCategory
-  // allRelationTotals?: AllRelationTotalsType
+  category: CloudCategory,
+  allRelationTotals?: AllRelationTotalsType
 ) => {
   const params = useParams()
   const id = params?.id as string
   const recordCategory = params?.category as CloudCategory
-  // const maxPages = Math.ceil((allRelationTotals?.[category] || 2) / 2)
-  const { data } = useRecordRelations(recordCategory, id) // maxPages TODO: readd when maxPages readded
+  const maxPages = Math.ceil((allRelationTotals?.[category] || 2) / 2)
+  const { data } = useRecordRelations(recordCategory, id, maxPages)
 
   const positionedRecords = useMemo(() => {
     if (!data?.relations) return []

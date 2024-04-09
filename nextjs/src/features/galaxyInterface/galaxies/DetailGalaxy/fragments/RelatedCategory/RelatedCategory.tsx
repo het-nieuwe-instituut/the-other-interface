@@ -24,9 +24,9 @@ export const RelatedCategory: React.FC<Props> = ({
   gridRow,
   gridColumn,
   category,
-  // allRelationTotals,
+  allRelationTotals,
 }) => {
-  const { positionedRecords } = usePresenter(category) //allRelationTotals TODO: readd when allRelationTotals readded
+  const { positionedRecords } = usePresenter(category, allRelationTotals)
 
   return (
     <GridItem color={'white'} gridRow={gridRow} gridColumn={gridColumn}>
