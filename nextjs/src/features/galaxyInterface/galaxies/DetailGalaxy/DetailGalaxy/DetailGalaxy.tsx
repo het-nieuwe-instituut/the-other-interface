@@ -59,7 +59,7 @@ export const DetailGalaxy: React.FC = () => {
         galaxyPagination={
           <GalaxyPagination
             currentPageNumber={currentPageNumber}
-            pageAmount={Math.floor(pageAmount / 2)}
+            pageAmount={Math.ceil(pageAmount / 2)}
             isResultAmountLoading={false}
             handleLeftClick={decreasePageNumber}
             handleRightClick={increasePageNumber}

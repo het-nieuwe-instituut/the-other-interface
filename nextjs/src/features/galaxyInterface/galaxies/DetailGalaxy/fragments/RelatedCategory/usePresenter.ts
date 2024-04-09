@@ -15,7 +15,6 @@ export const usePresenter = (
   const id = params?.id as string
   const recordCategory = params?.category as CloudCategory
   const maxPages = Math.ceil((allRelationTotals?.[category] || 2) / 2)
-
   const { data } = useRecordRelations(recordCategory, id, maxPages)
 
   const positionedRecords = useMemo(() => {

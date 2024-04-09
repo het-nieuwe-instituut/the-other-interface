@@ -13,6 +13,7 @@ export function useRecordRelations(type: Category, id: string, maxPages?: number
     maxPages && parseInt(searchParams?.get('page') || '1') > maxPages
       ? maxPages
       : parseInt(searchParams?.get('page') || '1')
+
   const queryFn = () => getZoom3RelationsTask({ type, id, page, locale: lang, api })
 
   return useQuery({

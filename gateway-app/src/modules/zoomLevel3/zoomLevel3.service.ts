@@ -71,7 +71,7 @@ export class ZoomLevel3Service {
           await this.getStoryRelationsForLinkedItem(id, type, paginationArgs?.page),
         ]
       case EntityNames.Stories:
-        return this.getStoryRelations(id, lang)
+        return this.getStoryRelations(id, lang, paginationArgs?.page)
       default:
         throw CustomError.internalCritical('type not implemented')
     }
@@ -119,7 +119,8 @@ export class ZoomLevel3Service {
     return groupedRecords
   }
 
-  private async getStoryRelations(id: string, lang?: string) {
+  private async getStoryRelations(id: string, lang?: string, page = 1, filterType?: EntityNames) {
+    // fetching stories here
     const res = await this.strapiGqlSdk.storyByLocale({ id })
     let story = res?.story?.data
 
@@ -136,8 +137,14 @@ export class ZoomLevel3Service {
     }
 
     const [storyRelations, relations, siblingsRes] = await Promise.all([
+      // relations has the data that needs to be paginated
       this.strapiGqlSdk.storiesLinkedToTheme({ id: storyId, locale: lang }),
-      this.strapiGqlSdk.storyTriplyRelations({ id: storyId }),
+      this.strapiGqlSdk.storyTriplyRelations({
+        id: storyId,
+        page,
+        pageSize: 2,
+        type: filterType,
+      }), // this is what needs to be page paginated - add filters here using type passed in
       parentId && lang
         ? this.storyService.getStorySiblings(parentId, id, lang)
         : Promise.resolve([]),

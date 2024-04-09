@@ -19,9 +19,17 @@ export async function getZoom3RelationsTask({
 }) {
   try {
     const configByType = getZoom3Queries(type, api)
+    //return await api?.StoriesRelations({ id, lang: locale, page })
+    // const configByTypeStrapi = getZoom3StrapiQueries(type, api)
 
     if (isStoryCategory(type)) {
+      // return await configByTypeStrapi?.relationsQuery({ id, lang: locale, page }) // add a config here to do 4 queries instead of 1 - one for
+
       return await api?.StoriesRelations({ id, lang: locale, page })
+      // const configByTypeObjects = getZoom3CountQueries(CATEGORIES.objects, api)
+      // const configByTypePeople = getZoom3CountQueries(CATEGORIES.people, api)
+      // const configByTypePublications = getZoom3CountQueries(CATEGORIES.publications, api)
+      // const configByTypeArchives = getZoom3CountQueries(CATEGORIES.archives, api)
     } else {
       return await configByType?.relationsQuery?.({ id, lang: locale, page })
     }

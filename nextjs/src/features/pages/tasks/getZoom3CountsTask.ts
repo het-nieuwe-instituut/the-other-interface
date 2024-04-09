@@ -3,6 +3,7 @@ import {
   CATEGORIES_TO_ENTITY_MAPPER,
   CLOUD_CATEGORIES,
   Category,
+  isStoryCategory,
 } from '@/features/shared/utils/categories'
 import {
   ArchivesRecordRelationsCountQuery,
@@ -28,62 +29,76 @@ export async function getZoom3CountsTask({
   api: Sdk
 }) {
   try {
-    const configByTypeObjects = getZoom3CountQueries(CATEGORIES.objects, api)
-    const configByTypePeople = getZoom3CountQueries(CATEGORIES.people, api)
-    const configByTypePublications = getZoom3CountQueries(CATEGORIES.publications, api)
-    const configByTypeArchives = getZoom3CountQueries(CATEGORIES.archives, api)
+    if (isStoryCategory(type)) {
+      // TODO: do a query to get the real numbers
+      return {
+        totalPages: 3,
+        allRelationTotals: {
+          archives: 0,
+          people: 0,
+          publications: 3,
+          objects: 0,
+          stories: 2,
+        },
+      }
+    } else {
+      const configByTypeObjects = getZoom3CountQueries(CATEGORIES.objects, api)
+      const configByTypePeople = getZoom3CountQueries(CATEGORIES.people, api)
+      const configByTypePublications = getZoom3CountQueries(CATEGORIES.publications, api)
+      const configByTypeArchives = getZoom3CountQueries(CATEGORIES.archives, api)
 
-    const peopleCount = (await configByTypePeople?.relationsCount?.({
-      id,
-      type: CATEGORIES_TO_ENTITY_MAPPER[type],
-      lang: locale,
-    })) as PeopleRecordRelationsCountQuery
-    const publicationsCount = (await configByTypePublications?.relationsCount?.({
-      id,
-      type: CATEGORIES_TO_ENTITY_MAPPER[type],
-      lang: locale,
-    })) as PublicationsRecordRelationsCountQuery
-    const objectsCount = (await configByTypeObjects?.relationsCount?.({
-      id,
-      type: CATEGORIES_TO_ENTITY_MAPPER[type],
-      lang: locale,
-    })) as ObjectRecordRelationsCountQuery
-    const archivesCount = (await configByTypeArchives?.relationsCount?.({
-      id,
-      type: CATEGORIES_TO_ENTITY_MAPPER[type],
-      lang: locale,
-    })) as ArchivesRecordRelationsCountQuery
+      const peopleCount = (await configByTypePeople?.relationsCount?.({
+        id,
+        type: CATEGORIES_TO_ENTITY_MAPPER[type],
+        lang: locale,
+      })) as PeopleRecordRelationsCountQuery
+      const publicationsCount = (await configByTypePublications?.relationsCount?.({
+        id,
+        type: CATEGORIES_TO_ENTITY_MAPPER[type],
+        lang: locale,
+      })) as PublicationsRecordRelationsCountQuery
+      const objectsCount = (await configByTypeObjects?.relationsCount?.({
+        id,
+        type: CATEGORIES_TO_ENTITY_MAPPER[type],
+        lang: locale,
+      })) as ObjectRecordRelationsCountQuery
+      const archivesCount = (await configByTypeArchives?.relationsCount?.({
+        id,
+        type: CATEGORIES_TO_ENTITY_MAPPER[type],
+        lang: locale,
+      })) as ArchivesRecordRelationsCountQuery
 
-    const storyCount = await api?.StoriesRelationForRecord({
-      id,
-      type: CATEGORIES_TO_ENTITY_MAPPER[type],
-      lang: locale,
-    })
+      const storyCount = await api?.StoriesRelationForRecord({
+        id,
+        type: CATEGORIES_TO_ENTITY_MAPPER[type],
+        lang: locale,
+      })
 
-    const totalPages = Math.max(
-      parseInt(peopleCount?.peopleRecordRelationsCount?.[0]?.total ?? '1'),
-      parseInt(publicationsCount?.publicationsRecordRelationsCount?.[0]?.total ?? '1'),
-      parseInt(objectsCount?.objectRecordRelationsCount?.[0]?.total ?? '1'),
-      parseInt(archivesCount?.archivesRecordRelationsCount?.[0]?.total ?? '1'),
-      storyCount?.zoomLevel3StoriesRelationsForRecord?.total ?? 1
-    )
+      const totalPages = Math.max(
+        parseInt(peopleCount?.peopleRecordRelationsCount?.[0]?.total ?? '1'),
+        parseInt(publicationsCount?.publicationsRecordRelationsCount?.[0]?.total ?? '1'),
+        parseInt(objectsCount?.objectRecordRelationsCount?.[0]?.total ?? '1'),
+        parseInt(archivesCount?.archivesRecordRelationsCount?.[0]?.total ?? '1'),
+        storyCount?.zoomLevel3StoriesRelationsForRecord?.total ?? 1
+      )
 
-    const allRelationTotals = {
-      [CLOUD_CATEGORIES.archives]: parseInt(
-        archivesCount?.archivesRecordRelationsCount?.[0]?.total ?? '0'
-      ),
-      [CLOUD_CATEGORIES.people]: parseInt(
-        peopleCount?.peopleRecordRelationsCount?.[0]?.total ?? '0'
-      ),
-      [CLOUD_CATEGORIES.publications]: parseInt(
-        publicationsCount?.publicationsRecordRelationsCount?.[0]?.total ?? '0'
-      ),
-      [CLOUD_CATEGORIES.objects]: parseInt(
-        objectsCount?.objectRecordRelationsCount?.[0]?.total ?? '0'
-      ),
-      [CATEGORIES.stories]: storyCount?.zoomLevel3StoriesRelationsForRecord?.total ?? 0,
+      const allRelationTotals = {
+        [CLOUD_CATEGORIES.archives]: parseInt(
+          archivesCount?.archivesRecordRelationsCount?.[0]?.total ?? '0'
+        ),
+        [CLOUD_CATEGORIES.people]: parseInt(
+          peopleCount?.peopleRecordRelationsCount?.[0]?.total ?? '0'
+        ),
+        [CLOUD_CATEGORIES.publications]: parseInt(
+          publicationsCount?.publicationsRecordRelationsCount?.[0]?.total ?? '0'
+        ),
+        [CLOUD_CATEGORIES.objects]: parseInt(
+          objectsCount?.objectRecordRelationsCount?.[0]?.total ?? '0'
+        ),
+        [CATEGORIES.stories]: storyCount?.zoomLevel3StoriesRelationsForRecord?.total ?? 0,
+      }
+      return { totalPages, allRelationTotals }
     }
-    return { totalPages, allRelationTotals }
   } catch (e) {
     console.log(e, 'Error accured in zoom level 3 task')
   }

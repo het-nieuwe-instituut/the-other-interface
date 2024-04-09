@@ -195,12 +195,12 @@ query storiesByIds($storiesIds: [ID]!) {
     }
 }
 
-query storyTriplyRelations($id: ID!) {
+query storyTriplyRelations($id: ID!, $type: String, $page: Int, $pageSize: Int) {
     story(id: $id) {
         data {
             id
             attributes {
-                triplyRecords {
+                triplyRecords (filters: { type: { eq: $type } }, pagination: { page: $page, pageSize: $pageSize }) {
                     data {
                         ...BaseTriplyRecordFragment
                     }
