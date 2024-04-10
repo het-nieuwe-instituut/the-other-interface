@@ -34,7 +34,7 @@ const mapStory = (story: StoryEntity) => {
 
 export const usePresenter = (stories: StoryEntity[], nextStories: StoryEntity[]) => {
   const { pageNumber } = usePageNumber()
-  const { currentTemplate, nextTemplate } = usePositioningTemplates(
+  const { currentTemplate, nextTemplate, originalTemplateIndex } = usePositioningTemplates(
     storiesPositionsTemplates,
     pageNumber
   )
@@ -88,5 +88,6 @@ export const usePresenter = (stories: StoryEntity[], nextStories: StoryEntity[])
     positionedNextStories,
     isCurrentStoriesEmpty: stories.length === 0,
     isNextStoriesEmpty: nextStories.length === 0,
+    originalTemplateIndex,
   }
 }

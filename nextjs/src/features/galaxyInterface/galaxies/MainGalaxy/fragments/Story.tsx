@@ -5,12 +5,15 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { HOMEPAGE_Z_INDEXES } from './constants'
 import { PositionedStory } from './types'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
+import { useCallback } from 'react'
 
 type Props = {
   story: PositionedStory
+  isMainGrid?: boolean
+  onLoad?: () => void
 }
 
-export const Story: React.FC<Props> = ({ story }) => {
+export const Story: React.FC<Props> = ({ story, isMainGrid, onLoad }) => {
   const router = useRouter()
   const searchParams = useSearchParams()
   const lang = searchParams?.get('lang')
@@ -25,6 +28,12 @@ export const Story: React.FC<Props> = ({ story }) => {
     url = addLocaleToUrl(url, lang)
     router.push(url)
   }
+
+  const handleImageLoad = useCallback(() => {
+    if (onLoad) {
+      onLoad()
+    }
+  }, [onLoad])
 
   return (
     <GridItem position="relative" css={{ ...grid }}>
@@ -42,6 +51,7 @@ export const Story: React.FC<Props> = ({ story }) => {
         onClick={handleClick}
         _hover={isClickable ? { transform: 'scale(1.05)' } : undefined}
         transition="all .4s ease-in-out"
+        className={isMainGrid ? 'story-grid-item' : ''}
       >
         <ResponsiveImage
           src={image}
@@ -51,6 +61,7 @@ export const Story: React.FC<Props> = ({ story }) => {
           css={{
             flex: `1 1 calc(100% - 2vw - 5px)`,
           }}
+          onLoad={handleImageLoad}
         />
         <Box w="100%" flex="1" mt={2}>
           <Text

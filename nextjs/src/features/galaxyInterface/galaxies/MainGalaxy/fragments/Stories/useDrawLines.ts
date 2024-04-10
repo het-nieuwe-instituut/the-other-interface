@@ -1,0 +1,68 @@
+import { useCallback, useEffect, useRef } from 'react'
+
+export const useDrawLines = (selector: string, template: number) => {
+  const svgRef = useRef<SVGSVGElement>(null)
+
+  const calculatePoint = useCallback((element: Element): { x: number; y: number } => {
+    const rect = element.getBoundingClientRect()
+    return {
+      x: rect.left + rect.width / 2,
+      y: rect.top + rect.height / 2,
+    }
+  }, [])
+
+  const drawLinesForTemplate = useCallback(
+    (gridElements: Element[]) => {
+      const svg = svgRef.current
+      if (!svg) return
+      svg.innerHTML = ''
+
+      for (let i = 0; i < gridElements.length - 1; i++) {
+        const startElement = gridElements[i]
+        const endElement = gridElements[i + 1]
+
+        if (startElement && endElement) {
+          const startPoint = calculatePoint(startElement)
+          const endPoint = calculatePoint(endElement)
+
+          const line = document.createElementNS('http://www.w3.org/2000/svg', 'line')
+          line.setAttribute('x1', startPoint.x.toString())
+          line.setAttribute('y1', startPoint.y.toString())
+          line.setAttribute('x2', endPoint.x.toString())
+          line.setAttribute('y2', endPoint.y.toString())
+          line.setAttribute('stroke', 'RGBA(0, 81, 255, 0)')
+          line.style.transition = 'stroke 0.6s ease-out'
+
+          svg.appendChild(line)
+
+          // Trigger the transition after a brief timeout
+          setTimeout(() => {
+            line.setAttribute('stroke', 'RGBA(0, 81, 255, .8)')
+          }, 350)
+        }
+      }
+    },
+    [calculatePoint]
+  )
+
+  useEffect(() => {
+    const drawAfterLayout = () => {
+      const gridElements = Array.from(document.querySelectorAll(selector))
+      if (gridElements.length) {
+        drawLinesForTemplate(gridElements)
+      }
+    }
+
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(drawAfterLayout)
+    })
+
+    window.addEventListener('resize', drawAfterLayout)
+
+    return () => {
+      window.removeEventListener('resize', drawAfterLayout)
+    }
+  }, [template, drawLinesForTemplate, selector])
+
+  return svgRef
+}
