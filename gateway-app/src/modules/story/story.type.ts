@@ -1,7 +1,6 @@
 import { ObjectType, Field, createUnionType, ID, InputType, PickType } from '@nestjs/graphql'
 import { AuthorEntityResponse, AuthorFiltersInput } from '../author/author.type'
 import { LocationFiltersInput, LocationRelationResponseCollection } from '../location/location.type'
-import { ComponentModulesGridModule } from '../strapi/components/modules/gridModule'
 import {
   ComponentCorePublicationDate,
   ComponentCorePublicationDateFiltersInput,
@@ -19,7 +18,6 @@ import { ComponentModulesImageCarousel } from '../strapi/components/modules/imag
 import { ComponentModulesImage } from '../strapi/components/modules/imageModule'
 import { ComponentModulesPullquote } from '../strapi/components/modules/pullQuote'
 import { ComponentModulesSubtitle } from '../strapi/components/modules/subtitle'
-import { ComponentModulesTableModule } from '../strapi/components/modules/tableModule'
 import { ComponentModulesTextModule } from '../strapi/components/modules/textModule'
 import { ComponentModulesTitleModule } from '../strapi/components/modules/titleModule'
 import {
