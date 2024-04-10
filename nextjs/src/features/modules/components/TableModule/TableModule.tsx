@@ -113,7 +113,7 @@ export const TableModuleDesktop: React.FC<Props> = props => {
             {head?.map((item, index, array) => (
               <Th
                 key={keyExtractor(item, index, array)}
-                textTransform={'capitalize'}
+                textTransform={'initial'}
                 // Overriding styles with textStyle does not work on this component
                 color={'black'}
                 fontSize={'16px'}
