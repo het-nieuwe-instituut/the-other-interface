@@ -46,8 +46,8 @@ export class BaseZoomLevel3RelatedRecordType {
 
 @ObjectType()
 export class ZoomLevel3StoryRelationsCountType {
-  // @Field(() => Number, { nullable: true })
-  // public linkedStoryCount?: number
+  @Field(() => Number, { nullable: true })
+  public linkedStoryCount?: number
 
   @Field(() => Number, { nullable: true })
   public linkedTriplyRecords?: number

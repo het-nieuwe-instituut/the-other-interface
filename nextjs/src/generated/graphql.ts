@@ -2006,6 +2006,7 @@ export type ZoomLevel3StoriesRelatedToRecordType = {
 
 export type ZoomLevel3StoryRelationsCountType = {
   __typename?: 'ZoomLevel3StoryRelationsCountType';
+  linkedStoryCount?: Maybe<Scalars['Float']>;
   linkedTriplyRecords?: Maybe<Scalars['Float']>;
 };
 
@@ -2347,7 +2348,7 @@ export type StoryRelationsCountQueryVariables = Exact<{
 }>;
 
 
-export type StoryRelationsCountQuery = { __typename?: 'Query', storyRelationsCount?: { __typename?: 'ZoomLevel3StoryRelationsCountType', linkedTriplyRecords?: number | null } | null };
+export type StoryRelationsCountQuery = { __typename?: 'Query', storyRelationsCount?: { __typename?: 'ZoomLevel3StoryRelationsCountType', linkedTriplyRecords?: number | null, linkedStoryCount?: number | null } | null };
 
 export type ObjectRelationsQueryVariables = Exact<{
   id: Scalars['String'];
@@ -3675,6 +3676,7 @@ export const StoryRelationsCountDocument = gql`
     query StoryRelationsCount($id: String!) {
   storyRelationsCount(storyId: $id) {
     linkedTriplyRecords
+    linkedStoryCount
   }
 }
     `;

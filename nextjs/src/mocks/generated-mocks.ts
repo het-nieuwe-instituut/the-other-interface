@@ -1890,6 +1890,7 @@ export const aZoomLevel3StoriesRelatedToRecordType = (overrides?: Partial<ZoomLe
 export const aZoomLevel3StoryRelationsCountType = (overrides?: Partial<ZoomLevel3StoryRelationsCountType>, _relationshipsToOmit: Array<string> = []): ZoomLevel3StoryRelationsCountType => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ZoomLevel3StoryRelationsCountType']);
     return {
+        linkedStoryCount: overrides && overrides.hasOwnProperty('linkedStoryCount') ? overrides.linkedStoryCount! : 7.47,
         linkedTriplyRecords: overrides && overrides.hasOwnProperty('linkedTriplyRecords') ? overrides.linkedTriplyRecords! : 5.02,
     };
 };

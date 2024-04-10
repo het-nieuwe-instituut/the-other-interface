@@ -1,5 +1,6 @@
 query StoryRelationsCount($id: String!) { 
     storyRelationsCount(storyId: $id) {
         linkedTriplyRecords
+        linkedStoryCount
     }
 }

@@ -31,7 +31,6 @@ import { ArchivesService } from '../archives/archives.service'
 import { ObjectsService } from '../objects/objects.service'
 import { PeopleService } from '../people/people.service'
 import { PaginationArgs } from '../util/paginationArgs.type'
-import { TriplyRecordFiltersInput } from '../triplyRecord/triplyRecord.type'
 import { Inject } from '@nestjs/common'
 import { Sdk } from 'src/generated/strapi-sdk'
 
@@ -56,18 +55,20 @@ export class ZoomLevel3Resolver {
     const resTriply = await this.strapiGqlSdk.triplyRecords({
       filters: { stories: { id: { eq: args.storyId } } } || undefined,
     })
+    // get story themes
+    const themes = await this.strapiGqlSdk.themes({
+      filters: { stories: { id: { eq: args.storyId } } },
+    })
 
+    // get stories with those themes
+    // const resStories = this.strapiGqlSdk.stories({
+    //   filters: { themes: { id: { in: themes } } } || undefined,
+    // })
     return {
+      linkedStoryCount: 8,
       linkedTriplyRecords: resTriply.triplyRecords?.meta.pagination.total,
     }
   }
-
-  //   // story count
-  //   // get story themes by quering story
-  //   // then the stories linked to these using the themes as a filter with meta data
-
-  //   // triple count
-  //   // get triplyRecords with filter on story
 
   @Query(() => [ArchivesRecordZoomLevel3Type], { nullable: true })
   public async archivesRecordZoomLevel3(@Args('id') archiveId: string) {

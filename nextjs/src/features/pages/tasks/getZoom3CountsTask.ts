@@ -30,21 +30,21 @@ export async function getZoom3CountsTask({
 }) {
   try {
     if (isStoryCategory(type)) {
-      const triplyRecordsCount = await api.StoryRelationsCount({ id })
+      const data = await api.StoryRelationsCount({ id })
 
       const totalPages = Math.max(
-        triplyRecordsCount.storyRelationsCount?.linkedTriplyRecords ?? 1,
-        10
+        data.storyRelationsCount?.linkedTriplyRecords ?? 1,
+        data.storyRelationsCount?.linkedStoryCount ?? 1
       )
 
       return {
         totalPages,
         allRelationTotals: {
-          archives: 4,
+          archives: 4, // problem: only getting back the total amount, not the amount for each category
           people: 4,
           publications: 4,
           objects: 4,
-          stories: 0,
+          stories: data.storyRelationsCount?.linkedStoryCount ?? 0,
         },
       }
     } else {
