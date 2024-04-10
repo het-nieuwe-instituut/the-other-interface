@@ -1,7 +1,7 @@
 'use client'
 import { useQuery } from '@tanstack/react-query'
-import initApiClientService from '../../utils/initApiClientService'
-import { Category } from '../../utils/categories'
+import initApiClientService from '../../shared/utils/initApiClientService'
+import { Category } from '../../shared/utils/categories'
 import { useSearchParams } from 'next/navigation'
 import { getZoom3RecordMeta } from '@/features/pages/tasks/getZoom3RecordMeta'
 

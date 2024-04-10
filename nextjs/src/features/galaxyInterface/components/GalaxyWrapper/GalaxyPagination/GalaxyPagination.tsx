@@ -32,7 +32,6 @@ export const GalaxyPagination: React.FC<Props> = ({
       borderRadius={'5px'}
       zIndex={FOOTER_Z_INDEX}
       color={'pinkAlpha.100'}
-      border={'1px solid'}
       templateColumns="40px 1fr 40px"
       gap="5px"
     >

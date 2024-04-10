@@ -3,7 +3,7 @@ import { CloudCategory } from '@/features/shared/utils/categories'
 
 import { PositionedRecord } from '../types'
 import { positioningTemplate } from './positioningTemplates'
-import { useRecordRelations } from '@/features/shared/hooks/queries/useRecordRelations'
+import { useRecordRelations } from '@/features/record/hooks/useRecordRelations'
 import { useParams } from 'next/navigation'
 import { AllRelationTotalsType } from './RelatedCategory'
 

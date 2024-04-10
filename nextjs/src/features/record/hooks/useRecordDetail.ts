@@ -1,12 +1,12 @@
 'use client'
 import { useQuery } from '@tanstack/react-query'
-import initApiClientService from '../../utils/initApiClientService'
+import initApiClientService from '../../shared/utils/initApiClientService'
 import { getZoom3RecordTask } from '@/features/pages/tasks/getZoom3Record'
-import { Category } from '../../utils/categories'
+import { Category } from '../../shared/utils/categories'
 import { useSearchParams } from 'next/navigation'
 import { useSelector } from 'react-redux'
-import { State } from '../../configs/store'
-import { getPublicationState } from '../../utils/publication-state'
+import { State } from '../../shared/configs/store'
+import { getPublicationState } from '../../shared/utils/publication-state'
 
 export function useRecordDetail(type: Category, id: string) {
   const { isDraftMode } = useSelector((state: State) => state.shared)
