@@ -3,7 +3,7 @@ import { CATEGORIES, CloudCategory, isStoryCategory } from '@/features/shared/ut
 import { PositioningTemplate } from '@/features/shared/types/position'
 import { useParams } from 'next/navigation'
 
-import { useRecordRelations } from '@/features/shared/hooks/queries/useRecordRelations'
+import { useRecordRelations } from '@/features/record/hooks/useRecordRelations'
 import { PositionedRecord } from '../types'
 
 const positioningTemplate: PositioningTemplate[] = [

@@ -1,4 +1,4 @@
-import { useRecordDetail } from '@/features/shared/hooks/queries/useRecordDetail'
+import { useRecordDetail } from '@/features/record/hooks/useRecordDetail'
 import { Category } from '@/features/shared/utils/categories'
 import { useParams } from 'next/navigation'
 import { ScrollToContent } from '@/features/pages/utils/utils'
