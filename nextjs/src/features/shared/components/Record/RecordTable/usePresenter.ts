@@ -1,4 +1,4 @@
-import { usePaginationedRecordRelations } from '@/features/shared/hooks/queries/usePaginationedRecordRelations'
+import { usePaginationedRecordRelations } from '@/features/record/hooks/usePaginationedRecordRelations'
 import { Category } from '@/features/shared/utils/categories'
 import { useParams } from 'next/navigation'
 

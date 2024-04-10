@@ -283,9 +283,6 @@ fragment NestedStoryFragment on StoryEntity {
             ... on ComponentModulesPullquote {
                 ...ComponentModulesPullquoteFragment
             }
-            ... on ComponentModulesGridModule {
-                ...ComponentModulesGridModuleFragment
-            }
             ... on ComponentModulesTextModule {
                 ...ComponentModulesTextModuleFragment
             }
@@ -300,9 +297,6 @@ fragment NestedStoryFragment on StoryEntity {
             }
             ... on ComponentModulesImage {
                 ...ComponentModulesImageFragment
-            }
-            ... on ComponentModulesTableModule {
-                ...ComponentModulesTableModuleFragment
             }
             ... on ComponentModulesButtonsModule {
                 ...ComponentModulesButtonsModuleFragment
@@ -356,9 +350,6 @@ fragment LocalizedStoryFragment on StoryEntity {
             ... on ComponentModulesPullquote {
                 ...ComponentModulesPullquoteFragment
             }
-            ... on ComponentModulesGridModule {
-                ...ComponentModulesGridModuleFragment
-            }
             ... on ComponentModulesTextModule {
                 ...ComponentModulesTextModuleFragment
             }
@@ -373,9 +364,6 @@ fragment LocalizedStoryFragment on StoryEntity {
             }
             ... on ComponentModulesImage {
                 ...ComponentModulesImageFragment
-            }
-            ... on ComponentModulesTableModule {
-                ...ComponentModulesTableModuleFragment
             }
             ... on ComponentModulesButtonsModule {
                 ...ComponentModulesButtonsModuleFragment
@@ -402,9 +390,6 @@ fragment StoryFragment on StoryEntity {
             ... on ComponentModulesPullquote {
                 ...ComponentModulesPullquoteFragment
             }
-            ... on ComponentModulesGridModule {
-                ...ComponentModulesGridModuleFragment
-            }
             ... on ComponentModulesTextModule {
                 ...ComponentModulesTextModuleFragment
             }
@@ -419,9 +404,6 @@ fragment StoryFragment on StoryEntity {
             }
             ... on ComponentModulesImage {
                 ...ComponentModulesImageFragment
-            }
-            ... on ComponentModulesTableModule {
-                ...ComponentModulesTableModuleFragment
             }
             ... on ComponentModulesButtonsModule {
                 ...ComponentModulesButtonsModuleFragment

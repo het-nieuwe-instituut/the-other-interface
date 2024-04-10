@@ -4,7 +4,7 @@ import { useParams } from 'next/navigation'
 import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Category } from '@/features/shared/utils/categories'
 import { toSingularCategory } from '@/features/shared/utils/toSingularCategory'
-import { useRecordDetail } from '@/features/shared/hooks/queries/useRecordDetail'
+import { useRecordDetail } from '@/features/record/hooks/useRecordDetail'
 import { notFound } from 'next/navigation'
 
 interface Props {

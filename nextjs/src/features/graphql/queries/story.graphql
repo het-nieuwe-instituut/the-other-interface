@@ -46,9 +46,6 @@ query storyById($locale: String, $id: ID, $publicationState: String = "LIVE") {
                     ... on ComponentModulesPullquote {
                         ...pullquoteModuleFragment
                     }
-                    ... on ComponentModulesTableModule {
-                        ...tableModuleFragment
-                    }
                     ... on ComponentModulesTitleModule {
                         ...titleModuleFragment
                     }
@@ -60,9 +57,6 @@ query storyById($locale: String, $id: ID, $publicationState: String = "LIVE") {
                     }
                     ... on ComponentModulesSubtitle {
                         ...subtitleModuleFragment
-                    }
-                    ... on ComponentModulesGridModule {
-                        ...gridModuleFragment
                     }
                 }
                 triplyRecords {
