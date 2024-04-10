@@ -3,7 +3,7 @@ import {
   useTypeSafeTranslation,
 } from '@/features/shared/hooks/translations'
 import { useParams } from 'next/navigation'
-import { useRecordMeta } from '@/features/shared/hooks/queries/useRecordMeta'
+import { useRecordMeta } from '@/features/record/hooks/useRecordMeta'
 import { CATEGORIES, Category } from '@/features/shared/utils/categories'
 import {
   mapArchivesDataToSections,

@@ -122,12 +122,10 @@ export const StoryComponentsDynamicZone = createUnionType({
   types: () =>
     [
       ComponentModulesButtonsModule,
-      ComponentModulesGridModule,
       ComponentModulesImage,
       ComponentModulesImageCarousel,
       ComponentModulesPullquote,
       ComponentModulesSubtitle,
-      ComponentModulesTableModule,
       ComponentModulesTextModule,
       ComponentModulesTitleModule,
       Error,

@@ -1,10 +1,10 @@
 'use client'
 import { useQuery } from '@tanstack/react-query'
-import initApiClientService from '../../utils/initApiClientService'
+import initApiClientService from '../../shared/utils/initApiClientService'
 import { useSearchParams } from 'next/navigation'
 import { getPaginatedRelationsTask } from '@/features/pages/tasks/getPaginatedRelationsTask'
-import { Category } from '../../utils/categories'
-import { PaginationPagesTypes } from '../../components/Record/RecordTable/usePresenter'
+import { Category } from '../../shared/utils/categories'
+import { PaginationPagesTypes } from '../../shared/components/Record/RecordTable/usePresenter'
 
 export function usePaginationedRecordRelations(
   type: Category,

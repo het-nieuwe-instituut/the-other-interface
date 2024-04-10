@@ -14118,11 +14118,6 @@
           },
           {
             "kind": "OBJECT",
-            "name": "ComponentModulesGridModule",
-            "ofType": null
-          },
-          {
-            "kind": "OBJECT",
             "name": "ComponentModulesImage",
             "ofType": null
           },
@@ -14139,11 +14134,6 @@
           {
             "kind": "OBJECT",
             "name": "ComponentModulesSubtitle",
-            "ofType": null
-          },
-          {
-            "kind": "OBJECT",
-            "name": "ComponentModulesTableModule",
             "ofType": null
           },
           {
