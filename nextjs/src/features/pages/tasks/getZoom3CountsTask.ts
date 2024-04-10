@@ -30,20 +30,29 @@ export async function getZoom3CountsTask({
 }) {
   try {
     if (isStoryCategory(type)) {
-      const data = await api.StoryRelationsCount({ id })
+      const data = await api.StoryRelationsCount({ id, lang: locale })
+      const storyRelationsCountTotals = {
+        archives: data.storyRelationsCount?.linkedTriplyRecords?.archives || 0,
+        people: data.storyRelationsCount?.linkedTriplyRecords?.people || 0,
+        publications: data.storyRelationsCount?.linkedTriplyRecords?.publications || 0,
+        objects: data.storyRelationsCount?.linkedTriplyRecords?.objects || 0,
+      }
 
       const totalPages = Math.max(
-        data.storyRelationsCount?.linkedTriplyRecords ?? 1,
+        storyRelationsCountTotals.archives ?? 1,
+        storyRelationsCountTotals.people ?? 1,
+        storyRelationsCountTotals.publications ?? 1,
+        storyRelationsCountTotals.objects ?? 1,
         data.storyRelationsCount?.linkedStoryCount ?? 1
       )
 
       return {
         totalPages,
         allRelationTotals: {
-          archives: 4, // problem: only getting back the total amount, not the amount for each category
-          people: 4,
-          publications: 4,
-          objects: 4,
+          archives: storyRelationsCountTotals.archives || 0,
+          people: storyRelationsCountTotals.people || 0,
+          publications: storyRelationsCountTotals.publications || 0,
+          objects: storyRelationsCountTotals.objects || 0,
           stories: data.storyRelationsCount?.linkedStoryCount ?? 0,
         },
       }

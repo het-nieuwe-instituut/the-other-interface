@@ -45,12 +45,24 @@ export class BaseZoomLevel3RelatedRecordType {
 }
 
 @ObjectType()
+export class StoryCountType {
+  @Field(() => Number, { nullable: true })
+  public archives?: number // problem: only getting back the total amount, not the amount for each category
+  @Field(() => Number, { nullable: true })
+  public people?: number
+  @Field(() => Number, { nullable: true })
+  public publications?: number
+  @Field(() => Number, { nullable: true })
+  public objects?: number
+}
+
+@ObjectType()
 export class ZoomLevel3StoryRelationsCountType {
   @Field(() => Number, { nullable: true })
   public linkedStoryCount?: number
 
-  @Field(() => Number, { nullable: true })
-  public linkedTriplyRecords?: number
+  @Field(() => StoryCountType, { nullable: true })
+  public linkedTriplyRecords?: StoryCountType
 }
 
 // @ObjectType()
@@ -147,6 +159,10 @@ export class ZoomLevel3StoryRelationsCountArgs {
   @Field()
   @IsString()
   public storyId: string
+
+  @Field()
+  @IsOptional()
+  public lang?: string
 }
 
 // @ArgsType()

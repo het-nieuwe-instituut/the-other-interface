@@ -1395,6 +1395,7 @@ export type QueryStoryMetaByLocaleArgs = {
 
 
 export type QueryStoryRelationsCountArgs = {
+  lang: Scalars['String'];
   storyId: Scalars['String'];
 };
 
@@ -1575,6 +1576,14 @@ export type Story = {
 };
 
 export type StoryComponentsDynamicZone = ComponentModulesButtonsModule | ComponentModulesGridModule | ComponentModulesImage | ComponentModulesImageCarousel | ComponentModulesPullquote | ComponentModulesSubtitle | ComponentModulesTableModule | ComponentModulesTextModule | ComponentModulesTitleModule | Error;
+
+export type StoryCountType = {
+  __typename?: 'StoryCountType';
+  archives?: Maybe<Scalars['Float']>;
+  objects?: Maybe<Scalars['Float']>;
+  people?: Maybe<Scalars['Float']>;
+  publications?: Maybe<Scalars['Float']>;
+};
 
 export type StoryEntity = {
   __typename?: 'StoryEntity';
@@ -2007,7 +2016,7 @@ export type ZoomLevel3StoriesRelatedToRecordType = {
 export type ZoomLevel3StoryRelationsCountType = {
   __typename?: 'ZoomLevel3StoryRelationsCountType';
   linkedStoryCount?: Maybe<Scalars['Float']>;
-  linkedTriplyRecords?: Maybe<Scalars['Float']>;
+  linkedTriplyRecords?: Maybe<StoryCountType>;
 };
 
 export type StoryWithoutRelationsFragmentFragment = { __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, slug?: string | null, description?: string | null, shortDescription?: string | null, createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, locale?: string | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', attributes?: { __typename?: 'Author', firstName: string } | null } | null } | null } | null };
@@ -2345,10 +2354,11 @@ export type ArchivesRelationsQuery = { __typename?: 'Query', relations?: Array<{
 
 export type StoryRelationsCountQueryVariables = Exact<{
   id: Scalars['String'];
+  lang: Scalars['String'];
 }>;
 
 
-export type StoryRelationsCountQuery = { __typename?: 'Query', storyRelationsCount?: { __typename?: 'ZoomLevel3StoryRelationsCountType', linkedTriplyRecords?: number | null, linkedStoryCount?: number | null } | null };
+export type StoryRelationsCountQuery = { __typename?: 'Query', storyRelationsCount?: { __typename?: 'ZoomLevel3StoryRelationsCountType', linkedStoryCount?: number | null, linkedTriplyRecords?: { __typename?: 'StoryCountType', archives?: number | null, people?: number | null, publications?: number | null, objects?: number | null } | null } | null };
 
 export type ObjectRelationsQueryVariables = Exact<{
   id: Scalars['String'];
@@ -3673,9 +3683,14 @@ export const ArchivesRelationsDocument = gql`
 }
     ${Zoom3RelationsFragmentFragmentDoc}`;
 export const StoryRelationsCountDocument = gql`
-    query StoryRelationsCount($id: String!) {
-  storyRelationsCount(storyId: $id) {
-    linkedTriplyRecords
+    query StoryRelationsCount($id: String!, $lang: String!) {
+  storyRelationsCount(storyId: $id, lang: $lang) {
+    linkedTriplyRecords {
+      archives
+      people
+      publications
+      objects
+    }
     linkedStoryCount
   }
 }

@@ -32,7 +32,7 @@ import { ObjectsService } from '../objects/objects.service'
 import { PeopleService } from '../people/people.service'
 import { PaginationArgs } from '../util/paginationArgs.type'
 import { Inject } from '@nestjs/common'
-import { Sdk } from 'src/generated/strapi-sdk'
+import { PublicationState, Sdk } from 'src/generated/strapi-sdk'
 
 @Resolver(ZoomLevel3RelationsType)
 export class ZoomLevel3Resolver {
@@ -52,21 +52,51 @@ export class ZoomLevel3Resolver {
 
   @Query(() => ZoomLevel3StoryRelationsCountType, { nullable: true })
   public async storyRelationsCount(@Args() args: ZoomLevel3StoryRelationsCountArgs) {
-    const resTriply = await this.strapiGqlSdk.triplyRecords({
-      filters: { stories: { id: { eq: args.storyId } } } || undefined,
+    const resTriplyArchives = await this.strapiGqlSdk.triplyRecords({
+      filters: {
+        and: [{ stories: { id: { eq: args.storyId } } }, { type: { eq: 'Archive' } }],
+      },
     })
-    // get story themes
-    const themes = await this.strapiGqlSdk.themes({
-      filters: { stories: { id: { eq: args.storyId } } },
+    const resTriplyPublications = await this.strapiGqlSdk.triplyRecords({
+      filters: {
+        and: [{ stories: { id: { eq: args.storyId } } }, { type: { eq: 'Publication' } }],
+      },
+    })
+    const resTriplyPeople = await this.strapiGqlSdk.triplyRecords({
+      filters: {
+        and: [{ stories: { id: { eq: args.storyId } } }, { type: { eq: 'People' } }],
+      },
+    })
+    const resTriplyObjects = await this.strapiGqlSdk.triplyRecords({
+      filters: {
+        and: [{ stories: { id: { eq: args.storyId } } }, { type: { eq: 'Object' } }],
+      },
     })
 
-    // get stories with those themes
-    // const resStories = this.strapiGqlSdk.stories({
-    //   filters: { themes: { id: { in: themes } } } || undefined,
-    // })
+    const themes = await this.strapiGqlSdk.themes({
+      filters: { stories: { id: { eq: '244' } } },
+      locale: args?.lang || 'nl',
+    })
+
+    const themeIds = themes.themes?.data?.flatMap(theme => {
+      if (theme.id) return theme.id
+      return []
+    })
+
+    const resStories = await this.strapiGqlSdk.stories({
+      filters: { themes: { id: { in: themeIds } } },
+      locale: args?.lang || 'nl',
+      publicationState: PublicationState.Live,
+    })
+
     return {
-      linkedStoryCount: 8,
-      linkedTriplyRecords: resTriply.triplyRecords?.meta.pagination.total,
+      linkedStoryCount: resStories.stories?.meta.pagination.total,
+      linkedTriplyRecords: {
+        archives: resTriplyArchives.triplyRecords?.meta.pagination.total,
+        people: resTriplyPeople.triplyRecords?.meta.pagination.total,
+        publications: resTriplyPublications.triplyRecords?.meta.pagination.total,
+        objects: resTriplyObjects.triplyRecords?.meta.pagination.total,
+      },
     }
   }
 
