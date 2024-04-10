@@ -24,11 +24,16 @@ import {
   ZoomLevel3Args,
   ZoomLevel3RelationsType,
   ZoomLevel3StoriesRelatedToRecordType,
+  ZoomLevel3StoryRelationsCountArgs,
+  ZoomLevel3StoryRelationsCountType,
 } from './zoomLevel3.type'
 import { ArchivesService } from '../archives/archives.service'
 import { ObjectsService } from '../objects/objects.service'
 import { PeopleService } from '../people/people.service'
 import { PaginationArgs } from '../util/paginationArgs.type'
+import { TriplyRecordFiltersInput } from '../triplyRecord/triplyRecord.type'
+import { Inject } from '@nestjs/common'
+import { Sdk } from 'src/generated/strapi-sdk'
 
 @Resolver(ZoomLevel3RelationsType)
 export class ZoomLevel3Resolver {
@@ -37,13 +42,32 @@ export class ZoomLevel3Resolver {
     private readonly archivesService: ArchivesService,
     private readonly publicationsService: PublicationsService,
     private readonly objectsService: ObjectsService,
-    private readonly peopleService: PeopleService
+    private readonly peopleService: PeopleService,
+    @Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk
   ) {}
 
   @Query(() => [ZoomLevel3RelationsType], { nullable: true })
   public relations(@Args() args: ZoomLevel3Args, @Args() paginationArgs: PaginationArgs) {
     return this.zoomLevel3Service.getRelations(args.id, args.type, args?.lang, paginationArgs)
   }
+
+  @Query(() => ZoomLevel3StoryRelationsCountType, { nullable: true })
+  public async storyRelationsCount(@Args() args: ZoomLevel3StoryRelationsCountArgs) {
+    const resTriply = await this.strapiGqlSdk.triplyRecords({
+      filters: { stories: { id: { eq: args.storyId } } } || undefined,
+    })
+
+    return {
+      linkedTriplyRecords: resTriply.triplyRecords?.meta.pagination.total,
+    }
+  }
+
+  //   // story count
+  //   // get story themes by quering story
+  //   // then the stories linked to these using the themes as a filter with meta data
+
+  //   // triple count
+  //   // get triplyRecords with filter on story
 
   @Query(() => [ArchivesRecordZoomLevel3Type], { nullable: true })
   public async archivesRecordZoomLevel3(@Args('id') archiveId: string) {

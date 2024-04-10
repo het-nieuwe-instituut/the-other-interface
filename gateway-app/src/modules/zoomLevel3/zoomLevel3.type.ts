@@ -44,6 +44,15 @@ export class BaseZoomLevel3RelatedRecordType {
   public type: EntityNames
 }
 
+@ObjectType()
+export class ZoomLevel3StoryRelationsCountType {
+  // @Field(() => Number, { nullable: true })
+  // public linkedStoryCount?: number
+
+  @Field(() => Number, { nullable: true })
+  public linkedTriplyRecords?: number
+}
+
 // @ObjectType()
 // export class ZoomLevel3RelatedPeopleType extends IntersectionType(
 //   BaseZoomLevel3RelatedRecordType,
@@ -131,6 +140,13 @@ export class ZoomLevel3Args {
   @Field()
   @IsOptional()
   public lang?: string
+}
+
+@ArgsType()
+export class ZoomLevel3StoryRelationsCountArgs {
+  @Field()
+  @IsString()
+  public storyId: string
 }
 
 // @ArgsType()

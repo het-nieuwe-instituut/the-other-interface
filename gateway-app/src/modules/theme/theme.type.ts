@@ -6,7 +6,7 @@ import {
   StringFilterInput,
 } from '../strapi/shared-types'
 import { Theme } from './theme-dependency.type'
-import { StoryEntity } from '../story/story.type'
+import { StoryEntity, StoryFiltersInput } from '../story/story.type'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 
 @InputType()

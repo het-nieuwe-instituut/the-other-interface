@@ -30,15 +30,21 @@ export async function getZoom3CountsTask({
 }) {
   try {
     if (isStoryCategory(type)) {
-      // TODO: do a query to get the real numbers
+      const triplyRecordsCount = await api.StoryRelationsCount({ id })
+
+      const totalPages = Math.max(
+        triplyRecordsCount.storyRelationsCount?.linkedTriplyRecords ?? 1,
+        10
+      )
+
       return {
-        totalPages: 3,
+        totalPages,
         allRelationTotals: {
-          archives: 0,
-          people: 0,
-          publications: 3,
-          objects: 0,
-          stories: 2,
+          archives: 4,
+          people: 4,
+          publications: 4,
+          objects: 4,
+          stories: 0,
         },
       }
     } else {
