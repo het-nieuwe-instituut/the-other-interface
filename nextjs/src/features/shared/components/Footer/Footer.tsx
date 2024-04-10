@@ -1,5 +1,5 @@
 'use client'
-import { Flex, Link, Box } from '../../configs/chakra'
+import { Flex, Link, Box, Text } from '../../configs/chakra'
 
 import { FOOTER_Z_INDEX } from '../../constants/mainConstants'
 import { capitalizeFirstLetter } from '../../utils/text'
@@ -43,26 +43,26 @@ export const Footer = ({ menupages }: Props) => {
           alignItems={'flex-start'}
           mb={9}
         >
-          <Flex direction={'column'} mb={9}>
-            <LogoSvg width={logoSize?.width} height={logoSize?.height} />
+          <Flex direction={'column'} mb={9} cursor={'p'}>
+            <Link
+              href={`https://nieuweinstituut.nl/${lang ?? 'nl'}`}
+              border={'none'}
+              _hover={{ border: 'none' }}
+            >
+              <LogoSvg width={logoSize?.width} height={logoSize?.height} />
+            </Link>
           </Flex>
 
           <Flex direction="column" alignItems="flex-start">
             {/* Insert static links here */}
             <Flex flexDirection={'column'} mb={9} w={{ base: '339px' }}>
               <Link
-                href={`https://nieuweinstituut.nl/${lang ?? 'nl'}`}
-                variant={'footer'}
-                w={'fit-content'}
-              >
-                Nieuwe Instituut
-              </Link>
-              <Link
                 href={`https://goo.gl/maps/m5EvkSa3z321G68z6`}
                 variant={'footer'}
                 w={'fit-content'}
               >
-                Museumpark 25 3015CB Rotterdam
+                <Text>Nieuwe Instituut,</Text>
+                <Text>Museumpark 25 3015CB Rotterdam</Text>
               </Link>
             </Flex>
 
