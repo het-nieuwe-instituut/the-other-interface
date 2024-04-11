@@ -27,9 +27,6 @@ fragment ComponentModulesImageCarouselFragment on ComponentModulesImageCarousel 
     images {
         ...UploadFileRelationResponseCollectionFragment
     }
-    items {
-        ...ComponentCoreImageCarouselItemFragment
-    }
 }
 
 fragment ComponentModulesImageFragment on ComponentModulesImage {
@@ -62,14 +59,6 @@ fragment ComponentModulesSubtitleFragment on ComponentModulesSubtitle {
     id
     __typename
     text
-}
-
-fragment ComponentModulesTableModuleFragment on ComponentModulesTableModule {
-    id
-    __typename
-    table {
-        ...TableEntityResponseFragment
-    }
 }
 
 fragment ComponentModulesTextModuleFragment on ComponentModulesTextModule {

@@ -6,7 +6,6 @@ import { ComponentModulesImageCarousel } from '../strapi/components/modules/imag
 import { ComponentModulesImage } from '../strapi/components/modules/imageModule'
 import { ComponentModulesPullquote } from '../strapi/components/modules/pullQuote'
 import { ComponentModulesSubtitle } from '../strapi/components/modules/subtitle'
-import { ComponentModulesTableModule } from '../strapi/components/modules/tableModule'
 import { ComponentModulesTextModule } from '../strapi/components/modules/textModule'
 import { ComponentModulesTitleModule } from '../strapi/components/modules/titleModule'
 import { Error, PaginationArg, ResponseCollectionMeta } from '../strapi/shared-types'
@@ -123,7 +122,6 @@ export const LandingpageComponentsDynamicZone = createUnionType({
       ComponentModulesImageCarousel,
       ComponentModulesPullquote,
       ComponentModulesSubtitle,
-      ComponentModulesTableModule,
       ComponentModulesTextModule,
       ComponentModulesTitleModule,
       Error,
