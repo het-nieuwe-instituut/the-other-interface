@@ -145,10 +145,6 @@ export class ZoomLevel3Service {
       pagination: { page: 1, pageSize: 500 },
     })
 
-    // TODO: once the pagination is fixed add in the sibling story count
-    // right now adding it in will make the linkedStoryCount even more wrong than it already is
-    // so add it in after the strapi update
-
     return {
       linkedStoryCount: stories.stories?.data.length || 0,
       linkedTriplyRecords: {
