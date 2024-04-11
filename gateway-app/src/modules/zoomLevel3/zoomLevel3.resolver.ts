@@ -31,8 +31,6 @@ import { ArchivesService } from '../archives/archives.service'
 import { ObjectsService } from '../objects/objects.service'
 import { PeopleService } from '../people/people.service'
 import { PaginationArgs } from '../util/paginationArgs.type'
-import { Inject } from '@nestjs/common'
-import { Sdk } from 'src/generated/strapi-sdk'
 
 @Resolver(ZoomLevel3RelationsType)
 export class ZoomLevel3Resolver {
@@ -41,8 +39,7 @@ export class ZoomLevel3Resolver {
     private readonly archivesService: ArchivesService,
     private readonly publicationsService: PublicationsService,
     private readonly objectsService: ObjectsService,
-    private readonly peopleService: PeopleService,
-    @Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk
+    private readonly peopleService: PeopleService
   ) {}
 
   @Query(() => [ZoomLevel3RelationsType], { nullable: true })

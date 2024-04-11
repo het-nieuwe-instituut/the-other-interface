@@ -39,6 +39,28 @@ interface SampleData {
   groupedRelationData: GroupedRelationData
 }
 
+interface PaginatedTriplyRecordRelationsType {
+  story: {
+    data: {
+      id: string
+      attributes:
+        | {
+            __typename?: 'TriplyRecordEntity' | undefined
+            id?: string | null | undefined
+            attributes?:
+              | {
+                  __typename?: 'TriplyRecord' | undefined
+                  recordId: string
+                  type: Enum_Triplyrecord_Type
+                }
+              | null
+              | undefined
+          }[]
+        | undefined
+    }
+  }
+}
+
 export enum TriplyExternalSourceEnum {
   all = 'all',
   rkd = 'rkd',
@@ -104,28 +126,20 @@ export class ZoomLevel3Service {
   public async storyRelationsCount(storyId: string, lang?: string) {
     // counts for triply records related to story
     const [resTriplyArchives, resTriplyPublications, resTriplyPeople, resTriplyObjects] =
-      await Promise.all([
-        this.strapiGqlSdk.triplyRecords({
-          filters: {
-            and: [{ stories: { id: { eq: storyId } } }, { type: { eq: 'Archive' } }],
-          },
-        }),
-        this.strapiGqlSdk.triplyRecords({
-          filters: {
-            and: [{ stories: { id: { eq: storyId } } }, { type: { eq: 'Publication' } }],
-          },
-        }),
-        this.strapiGqlSdk.triplyRecords({
-          filters: {
-            and: [{ stories: { id: { eq: storyId } } }, { type: { eq: 'People' } }],
-          },
-        }),
-        this.strapiGqlSdk.triplyRecords({
-          filters: {
-            and: [{ stories: { id: { eq: storyId } } }, { type: { eq: 'Object' } }],
-          },
-        }),
-      ])
+      await Promise.all(
+        [
+          Enum_Triplyrecord_Type.Archive,
+          Enum_Triplyrecord_Type.Publication,
+          Enum_Triplyrecord_Type.People,
+          Enum_Triplyrecord_Type.Object,
+        ].map(type =>
+          this.strapiGqlSdk.triplyRecords({
+            filters: {
+              and: [{ stories: { id: { eq: storyId } } }, { type: { eq: type } }],
+            },
+          })
+        )
+      )
 
     // counts for strapi stories related to story
     const themes = await this.strapiGqlSdk.themes({
@@ -227,59 +241,32 @@ export class ZoomLevel3Service {
 
     // related records (archives, objects, people, publications) from triply (based on story theme)
     const paginatedTriplyRecordRelations = await Promise.all(
-      ['Archive', 'Object', 'People', 'Publication'].map(async entityName => {
-        try {
-          const data = await this.strapiGqlSdk.storyTriplyRelations({
-            id: storyId,
-            page,
-            pageSize: 2,
-            type: entityName,
-          })
-          return {
-            story: {
-              data: {
-                id: id,
-                attributes: data.story?.data?.attributes?.triplyRecords?.data,
-              },
-            },
-          }
-        } catch (error) {
-          console.error(`Error fetching data for entity ${entityName}:`, error)
-          return {
+      [
+        Enum_Triplyrecord_Type.Archive,
+        Enum_Triplyrecord_Type.Object,
+        Enum_Triplyrecord_Type.People,
+        Enum_Triplyrecord_Type.Publication,
+      ].map(async entityName => {
+        const data = await this.strapiGqlSdk.storyTriplyRelations({
+          id: storyId,
+          page,
+          pageSize: 2,
+          type: entityName,
+        })
+        return {
+          story: {
             data: {
               id: id,
-              attributes: [],
+              attributes: data.story?.data?.attributes?.triplyRecords?.data,
             },
-          }
+          },
         }
       })
     )
-    const triplyRecordrelations = paginatedTriplyRecordRelations.reduce(
-      (acc, curr) => {
-        if (curr.story?.data?.attributes) {
-          acc.story?.data.attributes?.push(...curr.story?.data?.attributes)
-        }
-        return acc
-      },
-      {
-        story: { data: { id: storyId, attributes: [] } },
-      }
-    )
 
-    const triplyRecords = (triplyRecordrelations.story?.data?.attributes || []).filter(
-      r => !!r.attributes?.recordId
-    )
+    const data = this.groupData(paginatedTriplyRecordRelations)
 
-    const groupedRecords = this.groupTriplyRecordsByType(triplyRecords)
-
-    const data = Object.entries(groupedRecords).map(([key, recordIds]) => {
-      const type = StrapiUtils.getEntityNameForRecordType(key as Enum_Triplyrecord_Type)
-      return {
-        type,
-        paginatedRelations: recordIds ?? [],
-      }
-    })
-
+    // combine it all to return
     return [...data, { type: EntityNames.Stories, paginatedRelations: storiesRelationsIds || [] }]
   }
 
@@ -354,6 +341,35 @@ export class ZoomLevel3Service {
     )
 
     return res.data
+  }
+
+  private groupData(recordRelations: PaginatedTriplyRecordRelationsType[]) {
+    const data = recordRelations.flatMap(records => {
+      if (!records?.story?.data?.attributes) return []
+
+      const newRecord = records?.story?.data?.attributes.reduce((acc, curr) => {
+        if (!curr.attributes?.type || curr.attributes?.recordId.length < 1) return acc
+        if (acc.type) {
+          return {
+            ...acc,
+            paginatedRelations: [...acc.paginatedRelations, curr.attributes?.recordId],
+          }
+        } else {
+          return {
+            ...acc,
+            type: StrapiUtils.getEntityNameForRecordType(
+              curr.attributes?.type as Enum_Triplyrecord_Type
+            ),
+            paginatedRelations: [curr.attributes?.recordId],
+          }
+        }
+      }, {} as { type: EntityNames; paginatedRelations: string[] })
+
+      if (!newRecord.type || newRecord.paginatedRelations.length < 1) return []
+      return newRecord
+    })
+
+    return data
   }
 
   // private getGroupedRelationData(data: ZoomLevel3RelationData[], type: EntityNames) {
