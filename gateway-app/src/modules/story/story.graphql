@@ -21,6 +21,26 @@ query stories(
     }
 }
 
+query storiesIds(
+    $filters: StoryFiltersInput
+    $pagination: PaginationArg
+    $sort: [String]
+    $publicationState: PublicationState = LIVE
+    $locale: I18NLocaleCode
+) {
+    stories(
+        filters: $filters
+        pagination: $pagination
+        sort: $sort
+        publicationState: $publicationState
+        locale: $locale
+    ) {
+        data {
+            id
+        }
+    }
+}
+
 
 query story(
     $id: ID

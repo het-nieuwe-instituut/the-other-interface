@@ -3,7 +3,7 @@ import {
   Enum_Triplyrecord_Type,
   PublicationState,
   Sdk,
-  StoriesLinkedToThemeQuery,
+  StoriesQuery,
 } from 'src/generated/strapi-sdk'
 import { StrapiUtils } from '../strapi/strapi.utils'
 import { ArchivesService } from '../archives/archives.service'
@@ -102,29 +102,34 @@ export class ZoomLevel3Service {
   }
 
   public async storyRelationsCount(storyId: string, lang?: string) {
-    const resTriplyArchives = await this.strapiGqlSdk.triplyRecords({
-      filters: {
-        and: [{ stories: { id: { eq: storyId } } }, { type: { eq: 'Archive' } }],
-      },
-    })
-    const resTriplyPublications = await this.strapiGqlSdk.triplyRecords({
-      filters: {
-        and: [{ stories: { id: { eq: storyId } } }, { type: { eq: 'Publication' } }],
-      },
-    })
-    const resTriplyPeople = await this.strapiGqlSdk.triplyRecords({
-      filters: {
-        and: [{ stories: { id: { eq: storyId } } }, { type: { eq: 'People' } }],
-      },
-    })
-    const resTriplyObjects = await this.strapiGqlSdk.triplyRecords({
-      filters: {
-        and: [{ stories: { id: { eq: storyId } } }, { type: { eq: 'Object' } }],
-      },
-    })
+    // counts for triply records related to story
+    const [resTriplyArchives, resTriplyPublications, resTriplyPeople, resTriplyObjects] =
+      await Promise.all([
+        this.strapiGqlSdk.triplyRecords({
+          filters: {
+            and: [{ stories: { id: { eq: storyId } } }, { type: { eq: 'Archive' } }],
+          },
+        }),
+        this.strapiGqlSdk.triplyRecords({
+          filters: {
+            and: [{ stories: { id: { eq: storyId } } }, { type: { eq: 'Publication' } }],
+          },
+        }),
+        this.strapiGqlSdk.triplyRecords({
+          filters: {
+            and: [{ stories: { id: { eq: storyId } } }, { type: { eq: 'People' } }],
+          },
+        }),
+        this.strapiGqlSdk.triplyRecords({
+          filters: {
+            and: [{ stories: { id: { eq: storyId } } }, { type: { eq: 'Object' } }],
+          },
+        }),
+      ])
 
+    // counts for strapi stories related to story
     const themes = await this.strapiGqlSdk.themes({
-      filters: { stories: { id: { eq: '244' } } },
+      filters: { stories: { id: { eq: storyId } } },
       locale: lang || 'nl',
     })
 
@@ -133,14 +138,19 @@ export class ZoomLevel3Service {
       return []
     })
 
-    const resStories = await this.strapiGqlSdk.stories({
+    const stories = await this.strapiGqlSdk.storiesIds({
       filters: { themes: { id: { in: themeIds } } },
       locale: lang || 'nl',
       publicationState: PublicationState.Live,
+      pagination: { page: 1, pageSize: 500 },
     })
 
+    // TODO: once the pagination is fixed add in the sibling story count
+    // right now adding it in will make the linkedStoryCount even more wrong than it already is
+    // so add it in after the strapi update
+
     return {
-      linkedStoryCount: resStories.stories?.meta.pagination.total,
+      linkedStoryCount: stories.stories?.data.length || 0,
       linkedTriplyRecords: {
         archives: resTriplyArchives.triplyRecords?.meta.pagination.total,
         people: resTriplyPeople.triplyRecords?.meta.pagination.total,
@@ -188,14 +198,39 @@ export class ZoomLevel3Service {
       throw CustomError.internalCritical('Story not found')
     }
 
-    const [storyRelations, siblingsRes] = await Promise.all([
-      this.strapiGqlSdk.storiesLinkedToTheme({ id: storyId, locale: lang, page, pageSize: 2 }),
+    const [siblingsRes] = await Promise.all([
       parentId && lang
         ? this.storyService.getStorySiblings(parentId, id, lang)
         : Promise.resolve([]),
     ])
 
-    const paginatedRelations = await Promise.all(
+    // related stories from strapi (based on story theme)
+    const themes = await this.strapiGqlSdk.themes({
+      filters: { stories: { id: { eq: storyId } } },
+      locale: lang || 'nl',
+    })
+
+    const themeIds = themes.themes?.data?.flatMap(theme => {
+      if (theme.id) return theme.id
+      return []
+    })
+
+    const paginatedStoryRelations = await this.strapiGqlSdk.stories({
+      filters: { themes: { id: { in: themeIds } } },
+      locale: lang || 'nl',
+      publicationState: PublicationState.Live,
+      pagination: { page, pageSize: 2 },
+    })
+
+    const siblingsIds = siblingsRes?.filter(s => !!s?.id).map(s => s.id as string) || []
+
+    const storyIds = this.extractStoryIds(paginatedStoryRelations, storyId)
+    const storiesRelationsIds = Array.from(
+      new Set([...storyIds, ...childrensIds, ...siblingsIds, parentId].filter(Boolean))
+    )
+
+    // related records (archives, objects, people, publications) from triply (based on story theme)
+    const paginatedTriplyRecordRelations = await Promise.all(
       ['Archive', 'Object', 'People', 'Publication'].map(async entityName => {
         try {
           const data = await this.strapiGqlSdk.storyTriplyRelations({
@@ -223,7 +258,7 @@ export class ZoomLevel3Service {
         }
       })
     )
-    const relations = paginatedRelations.reduce(
+    const triplyRecordrelations = paginatedTriplyRecordRelations.reduce(
       (acc, curr) => {
         if (curr.story?.data?.attributes) {
           acc.story?.data.attributes?.push(...curr.story?.data?.attributes)
@@ -235,8 +270,7 @@ export class ZoomLevel3Service {
       }
     )
 
-    const siblingsIds = siblingsRes?.filter(s => !!s?.id).map(s => s.id as string) || []
-    const triplyRecords = (relations.story?.data?.attributes || []).filter(
+    const triplyRecords = (triplyRecordrelations.story?.data?.attributes || []).filter(
       r => !!r.attributes?.recordId
     )
 
@@ -249,11 +283,6 @@ export class ZoomLevel3Service {
         paginatedRelations: recordIds ?? [],
       }
     })
-
-    const storyIds = this.extractStoryIds(storyRelations, storyId)
-    const storiesRelationsIds = Array.from(
-      new Set([...storyIds, ...childrensIds, ...siblingsIds, parentId].filter(Boolean))
-    )
 
     return [...data, { type: EntityNames.Stories, paginatedRelations: storiesRelationsIds || [] }]
   }
@@ -409,16 +438,15 @@ export class ZoomLevel3Service {
   //   }
   // }
 
-  private extractStoryIds(response: StoriesLinkedToThemeQuery, excludeId?: string): string[] {
-    const themesData = response?.story?.data?.attributes?.themes?.data || []
+  private extractStoryIds(response: StoriesQuery, excludeId?: string): string[] {
+    const stories = response.stories?.data || []
 
     const storyIds: string[] = []
 
-    for (const theme of themesData) {
-      for (const story of theme?.attributes?.stories?.data || []) {
-        if (!story.id || story.id === excludeId) {
-          continue
-        }
+    for (const story of stories) {
+      if (!story.id || story.id === excludeId) {
+        continue
+      } else {
         storyIds.push(story.id)
       }
     }
