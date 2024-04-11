@@ -77,46 +77,12 @@ async function applyToAllLocales(event) {
 
     try {
       event.result.localizations.forEach(async s => {
-        // const localizedStory = await strapi.entityService.findOne(storyApi, s.id, {
-        //   populate: ['parent_story', 'localizations'],
-        // })
-
-        // const parentStory = await strapi.entityService.findOne(
-        //   storyApi,
-        //   localizedStory.parent_story.id,
-        //   {
-        //     populate: ['localizations'],
-        //   }
-        // )
-
-        // if (parentStory) {
-        //   data['parent_story'] = parentStory.localizations[0]
-        // }
-
-        // console.log('data', data)
-
         strapi.entityService.update(storyApi, s.id, { data })
       })
     } catch (e) {
       console.error(e)
     }
   }
-
-  // if (event.params.data.parent_story !== undefined) {
-  //   const data: Object = {}
-  //   const parentStory = await strapi.entityService.findOne(
-  //     storyApi,
-  //     event.params.data.parent_story,
-  //     {
-  //       populate: ['localizations'],
-  //     }
-  //   )
-
-  //   if (parentStory) {
-  //     data['parent_story'] = parentStory.localizations[0]
-  //     event.result.localizations.forEach(s => strapi.entityService.update(storyApi, s.id, { data }))
-  //   }
-  // }
 }
 
 async function checkIfParentIsNotAChild(event) {
