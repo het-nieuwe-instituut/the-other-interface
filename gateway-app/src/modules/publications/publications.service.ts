@@ -427,7 +427,7 @@ export class PublicationsService {
       { page: paginationArgs.page ?? 1, pageSize: paginationArgs.pageSize ?? 5 },
       { id, type }
     )
-    const output = TriplyUtils.sanitizeObjectArray(result.data)
+    const output = TriplyUtils.sanitizeObjectArray(result.data, 'idRelation', 'relation')
     return output
   }
 

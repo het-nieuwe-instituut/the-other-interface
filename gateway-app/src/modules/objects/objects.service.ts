@@ -116,7 +116,7 @@ export class ObjectsService {
       { id, type }
     )
 
-    const output = TriplyUtils.sanitizeObjectArray(result.data)
+    const output = TriplyUtils.sanitizeObjectArray(result.data, 'idRelation', 'relation')
     return output
   }
 
