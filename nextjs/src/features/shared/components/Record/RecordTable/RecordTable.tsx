@@ -1,7 +1,6 @@
 import { Box, Text } from '@chakra-ui/react'
 import { TableModule } from '@/features/modules/components/TableModule/TableModule'
 import { usePresenter } from './usePresenter'
-import { ComponentCoreTableBody, ComponentCoreTableHeadItem, Maybe } from 'src/generated/graphql'
 import { CATEGORIES, Category } from '@/features/shared/utils/categories'
 import { Dispatch, SetStateAction, useState } from 'react'
 import { theme } from '@/features/shared/styles/theme/theme'
@@ -12,8 +11,6 @@ interface PaginatedTableProps {
     | {
         type: Category
         name: string
-        tableBody: Maybe<ComponentCoreTableBody[]> | undefined
-        tableHead: Maybe<ComponentCoreTableHeadItem[]> | undefined
         total: string
       }
     | undefined

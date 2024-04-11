@@ -27,9 +27,6 @@ query landingpageBySlug($locale: String, $slug: String!, $publicationState: Stri
                     ... on ComponentModulesPullquote {
                         ...pullquoteModuleFragment
                     }
-                    ... on ComponentModulesTableModule {
-                        ...tableModuleFragment
-                    }
                     ... on ComponentModulesTitleModule {
                         ...titleModuleFragment
                     }
