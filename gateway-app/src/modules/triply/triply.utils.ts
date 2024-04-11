@@ -199,11 +199,11 @@ export class TriplyUtils {
     return nullFlag ? null : (output as T)
   }
 
-  public static sanitizeObjectArray<T extends object>(results: T[]): T[] | null {
+  public static sanitizeObjectArray<T extends object>(results: T[], ...args: string[]): T[] | null {
     const output = results.filter(result => {
       let flag = false
       for (const r in result) {
-        if (result[r] !== null) {
+        if (result[r] !== null && !args.includes(r)) {
           flag = true
           break
         }

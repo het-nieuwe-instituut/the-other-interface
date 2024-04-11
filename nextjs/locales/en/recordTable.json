@@ -1,15 +1,15 @@
 {
-    "relatedPublications": "Related Publications",
+    "relatedPublications": "Related publications",
     "type": "Type",
-    "yearPublished": "Year of Publication",
-    "externalSource": "External Source",
-    "relatedArchive": "Related Archive Record",
+    "yearPublished": "Year of publication",
+    "externalSource": "External source",
+    "relatedArchive": "Related archives",
     "recordType": "Record Type",
-    "objectNumber": "Object Number",
+    "objectNumber": "Object number",
     "archivePeriod": "Period",
-    "realtedPeople": "Releted People",
+    "realtedPeople": "Related people",
     "role": "Role",
     "peoplePeriod": "Period",
-    "realtedObjects": "Related Objects",
-    "creationPeriod": "Creation Period"
+    "realtedObjects": "Related objects",
+    "creationPeriod": "Creation period"
 }
