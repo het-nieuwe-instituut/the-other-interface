@@ -170,28 +170,6 @@ export class ZoomLevel3Service {
     }
   }
 
-  private groupTriplyRecordsByType(
-    triplyRecords: Array<{
-      attributes?: { recordId: string; type: Enum_Triplyrecord_Type | string } | null
-    }>
-  ): Record<Enum_Triplyrecord_Type | string, string[]> {
-    const groupedRecords: Record<Enum_Triplyrecord_Type | string, string[]> = {}
-
-    triplyRecords.forEach(record => {
-      if (!record.attributes) return
-
-      const { type, recordId } = record.attributes
-
-      if (!groupedRecords[type]) {
-        groupedRecords[type] = []
-      }
-
-      groupedRecords[type].push(recordId)
-    })
-
-    return groupedRecords
-  }
-
   private async getStoryRelations(id: string, lang?: string, page?: number) {
     const res = await this.strapiGqlSdk.storyByLocale({ id })
     let story = res?.story?.data
