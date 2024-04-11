@@ -32,7 +32,7 @@ import { ObjectsService } from '../objects/objects.service'
 import { PeopleService } from '../people/people.service'
 import { PaginationArgs } from '../util/paginationArgs.type'
 import { Inject } from '@nestjs/common'
-import { PublicationState, Sdk } from 'src/generated/strapi-sdk'
+import { Sdk } from 'src/generated/strapi-sdk'
 
 @Resolver(ZoomLevel3RelationsType)
 export class ZoomLevel3Resolver {
@@ -52,52 +52,7 @@ export class ZoomLevel3Resolver {
 
   @Query(() => ZoomLevel3StoryRelationsCountType, { nullable: true })
   public async storyRelationsCount(@Args() args: ZoomLevel3StoryRelationsCountArgs) {
-    const resTriplyArchives = await this.strapiGqlSdk.triplyRecords({
-      filters: {
-        and: [{ stories: { id: { eq: args.storyId } } }, { type: { eq: 'Archive' } }],
-      },
-    })
-    const resTriplyPublications = await this.strapiGqlSdk.triplyRecords({
-      filters: {
-        and: [{ stories: { id: { eq: args.storyId } } }, { type: { eq: 'Publication' } }],
-      },
-    })
-    const resTriplyPeople = await this.strapiGqlSdk.triplyRecords({
-      filters: {
-        and: [{ stories: { id: { eq: args.storyId } } }, { type: { eq: 'People' } }],
-      },
-    })
-    const resTriplyObjects = await this.strapiGqlSdk.triplyRecords({
-      filters: {
-        and: [{ stories: { id: { eq: args.storyId } } }, { type: { eq: 'Object' } }],
-      },
-    })
-
-    const themes = await this.strapiGqlSdk.themes({
-      filters: { stories: { id: { eq: '244' } } },
-      locale: args?.lang || 'nl',
-    })
-
-    const themeIds = themes.themes?.data?.flatMap(theme => {
-      if (theme.id) return theme.id
-      return []
-    })
-
-    const resStories = await this.strapiGqlSdk.stories({
-      filters: { themes: { id: { in: themeIds } } },
-      locale: args?.lang || 'nl',
-      publicationState: PublicationState.Live,
-    })
-
-    return {
-      linkedStoryCount: resStories.stories?.meta.pagination.total,
-      linkedTriplyRecords: {
-        archives: resTriplyArchives.triplyRecords?.meta.pagination.total,
-        people: resTriplyPeople.triplyRecords?.meta.pagination.total,
-        publications: resTriplyPublications.triplyRecords?.meta.pagination.total,
-        objects: resTriplyObjects.triplyRecords?.meta.pagination.total,
-      },
-    }
+    return this.zoomLevel3Service.storyRelationsCount(args.storyId, args?.lang)
   }
 
   @Query(() => [ArchivesRecordZoomLevel3Type], { nullable: true })

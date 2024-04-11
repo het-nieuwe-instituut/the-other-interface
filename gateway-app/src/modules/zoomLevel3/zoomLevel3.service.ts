@@ -1,5 +1,10 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common'
-import { Enum_Triplyrecord_Type, Sdk, StoriesLinkedToThemeQuery } from 'src/generated/strapi-sdk'
+import {
+  Enum_Triplyrecord_Type,
+  PublicationState,
+  Sdk,
+  StoriesLinkedToThemeQuery,
+} from 'src/generated/strapi-sdk'
 import { StrapiUtils } from '../strapi/strapi.utils'
 import { ArchivesService } from '../archives/archives.service'
 import { ObjectsService } from '../objects/objects.service'
@@ -93,6 +98,55 @@ export class ZoomLevel3Service {
 
       default:
         throw CustomError.internalCritical('type not implemented')
+    }
+  }
+
+  public async storyRelationsCount(storyId: string, lang?: string) {
+    const resTriplyArchives = await this.strapiGqlSdk.triplyRecords({
+      filters: {
+        and: [{ stories: { id: { eq: storyId } } }, { type: { eq: 'Archive' } }],
+      },
+    })
+    const resTriplyPublications = await this.strapiGqlSdk.triplyRecords({
+      filters: {
+        and: [{ stories: { id: { eq: storyId } } }, { type: { eq: 'Publication' } }],
+      },
+    })
+    const resTriplyPeople = await this.strapiGqlSdk.triplyRecords({
+      filters: {
+        and: [{ stories: { id: { eq: storyId } } }, { type: { eq: 'People' } }],
+      },
+    })
+    const resTriplyObjects = await this.strapiGqlSdk.triplyRecords({
+      filters: {
+        and: [{ stories: { id: { eq: storyId } } }, { type: { eq: 'Object' } }],
+      },
+    })
+
+    const themes = await this.strapiGqlSdk.themes({
+      filters: { stories: { id: { eq: '244' } } },
+      locale: lang || 'nl',
+    })
+
+    const themeIds = themes.themes?.data?.flatMap(theme => {
+      if (theme.id) return theme.id
+      return []
+    })
+
+    const resStories = await this.strapiGqlSdk.stories({
+      filters: { themes: { id: { in: themeIds } } },
+      locale: lang || 'nl',
+      publicationState: PublicationState.Live,
+    })
+
+    return {
+      linkedStoryCount: resStories.stories?.meta.pagination.total,
+      linkedTriplyRecords: {
+        archives: resTriplyArchives.triplyRecords?.meta.pagination.total,
+        people: resTriplyPeople.triplyRecords?.meta.pagination.total,
+        publications: resTriplyPublications.triplyRecords?.meta.pagination.total,
+        objects: resTriplyObjects.triplyRecords?.meta.pagination.total,
+      },
     }
   }
 
