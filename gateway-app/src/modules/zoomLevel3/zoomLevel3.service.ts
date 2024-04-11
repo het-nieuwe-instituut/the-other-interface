@@ -122,8 +122,8 @@ export class ZoomLevel3Service {
     }
 
     const storyId = story?.id
-    const parentId = story?.attributes?.story?.data?.id
-    const childrensIds = story?.attributes?.stories?.data?.map(s => s.id) || []
+    const parentId = story?.attributes?.parent_story?.data?.id
+    const childrensIds = story?.attributes?.child_stories?.data?.map(s => s.id) || []
 
     if (!storyId) {
       throw CustomError.internalCritical('Story not found')

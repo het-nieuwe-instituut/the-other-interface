@@ -102,7 +102,7 @@ export class StoryResolver {
     }
 
     const storyId = story.id
-    const parentId = story.attributes?.story?.data?.id
+    const parentId = story.attributes?.parent_story?.data?.id
 
     let siblings: StoryEntity[] | undefined | null = []
     if (parentId && storyId && locale && story.attributes) {

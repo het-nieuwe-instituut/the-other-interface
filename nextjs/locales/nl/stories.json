@@ -8,8 +8,8 @@
   "time": "Tijdsperiode",
   "share": "Delen",
   "moreOnTheme": "Meer over dit thema",
-  "subStories": "Sub-verhalen",
-  "siblingsStories": "Gerelateerde-verhalen",
-  "parentStory": "Hoofd-verhaal",
-  "relatedStories": "Gerelateerde-verhalen"
+  "subStories": "Sub-stories",
+  "siblingsStories": "Gerelateerde stories",
+  "parentStory": "Hoofd story",
+  "relatedStories": "Zie gerelateerde stories"
 }

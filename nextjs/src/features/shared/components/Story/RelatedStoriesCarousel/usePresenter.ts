@@ -20,10 +20,10 @@ export const usePresenter = () => {
 
   const relatedStories = [
     // childs if story has childs
-    ...(story?.attributes?.stories?.data ?? []),
+    ...(story?.attributes?.child_stories?.data ?? []),
 
     // parent if story has parent
-    ...(story?.attributes?.story?.data ? [story.attributes.story.data] : []),
+    ...(story?.attributes?.parent_story?.data ? [story.attributes.parent_story.data] : []),
 
     // siblings if story has siblings
     ...(story?.attributes?.siblings ?? []),

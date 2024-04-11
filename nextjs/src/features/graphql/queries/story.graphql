@@ -16,7 +16,7 @@ query storyById($locale: String, $id: ID, $publicationState: String = "LIVE") {
             attributes {
                 title
                 description
-                stories {
+                child_stories {
                     data {
                         id
                         attributes {
@@ -26,7 +26,7 @@ query storyById($locale: String, $id: ID, $publicationState: String = "LIVE") {
                         }
                     }
                 }
-                story {
+                parent_story {
                     data {
                         id
                         attributes {
@@ -152,7 +152,7 @@ query storyMetaById($locale: String, $id: ID, $publicationState: String = "LIVE"
                         ...buttonsModuleFragment
                     }
                 }
-                stories {
+                child_stories {
                     data {
                         id
                         attributes {
@@ -175,7 +175,7 @@ query storyMetaById($locale: String, $id: ID, $publicationState: String = "LIVE"
                         }
                     }
                 }
-                story {
+                parent_story {
                     data {
                         id
                         attributes {

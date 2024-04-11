@@ -1445,24 +1445,31 @@ export type ResponseCollectionMeta = {
 export type Story = {
   __typename?: 'Story'
   author?: Maybe<AuthorEntityResponse>
+  child_stories?: Maybe<StoryRelationResponseCollection>
   components?: Maybe<Array<Maybe<StoryComponentsDynamicZone>>>
   createdAt?: Maybe<Scalars['DateTime']>
   description?: Maybe<Scalars['String']>
   locale?: Maybe<Scalars['String']>
   localizations?: Maybe<StoryRelationResponseCollection>
   locations?: Maybe<LocationRelationResponseCollection>
+  parent_story?: Maybe<StoryEntityResponse>
   publicationDate?: Maybe<ComponentCorePublicationDate>
   publishedAt?: Maybe<Scalars['DateTime']>
   shortDescription?: Maybe<Scalars['String']>
   slug: Scalars['String']
-  stories?: Maybe<StoryRelationResponseCollection>
-  story?: Maybe<StoryEntityResponse>
   storyLinks?: Maybe<ComponentModulesButtonsModule>
   themes?: Maybe<ThemeRelationResponseCollection>
   timeframe?: Maybe<ComponentCoreTimeframe>
   title: Scalars['String']
   triplyRecords?: Maybe<TriplyRecordRelationResponseCollection>
   updatedAt?: Maybe<Scalars['DateTime']>
+}
+
+export type StoryChild_StoriesArgs = {
+  filters?: InputMaybe<StoryFiltersInput>
+  pagination?: InputMaybe<PaginationArg>
+  publicationState?: InputMaybe<PublicationState>
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
 }
 
 export type StoryLocalizationsArgs = {
@@ -1474,13 +1481,6 @@ export type StoryLocalizationsArgs = {
 
 export type StoryLocationsArgs = {
   filters?: InputMaybe<LocationFiltersInput>
-  pagination?: InputMaybe<PaginationArg>
-  publicationState?: InputMaybe<PublicationState>
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
-}
-
-export type StoryStoriesArgs = {
-  filters?: InputMaybe<StoryFiltersInput>
   pagination?: InputMaybe<PaginationArg>
   publicationState?: InputMaybe<PublicationState>
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
@@ -1530,6 +1530,7 @@ export type StoryEntityResponseCollection = {
 export type StoryFiltersInput = {
   and?: InputMaybe<Array<InputMaybe<StoryFiltersInput>>>
   author?: InputMaybe<AuthorFiltersInput>
+  child_stories?: InputMaybe<StoryFiltersInput>
   createdAt?: InputMaybe<DateTimeFilterInput>
   description?: InputMaybe<StringFilterInput>
   id?: InputMaybe<IdFilterInput>
@@ -1538,12 +1539,11 @@ export type StoryFiltersInput = {
   locations?: InputMaybe<LocationFiltersInput>
   not?: InputMaybe<StoryFiltersInput>
   or?: InputMaybe<Array<InputMaybe<StoryFiltersInput>>>
+  parent_story?: InputMaybe<StoryFiltersInput>
   publicationDate?: InputMaybe<ComponentCorePublicationDateFiltersInput>
   publishedAt?: InputMaybe<DateTimeFilterInput>
   shortDescription?: InputMaybe<StringFilterInput>
   slug?: InputMaybe<StringFilterInput>
-  stories?: InputMaybe<StoryFiltersInput>
-  story?: InputMaybe<StoryFiltersInput>
   storyLinks?: InputMaybe<ComponentModulesButtonsModuleFiltersInput>
   themes?: InputMaybe<ThemeFiltersInput>
   timeframe?: InputMaybe<ComponentCoreTimeframeFiltersInput>
@@ -1554,15 +1554,15 @@ export type StoryFiltersInput = {
 
 export type StoryInput = {
   author?: InputMaybe<Scalars['ID']>
+  child_stories?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
   components?: InputMaybe<Array<Scalars['StoryComponentsDynamicZoneInput']>>
   description?: InputMaybe<Scalars['String']>
   locations?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
+  parent_story?: InputMaybe<Scalars['ID']>
   publicationDate?: InputMaybe<ComponentCorePublicationDateInput>
   publishedAt?: InputMaybe<Scalars['DateTime']>
   shortDescription?: InputMaybe<Scalars['String']>
   slug?: InputMaybe<Scalars['String']>
-  stories?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
-  story?: InputMaybe<Scalars['ID']>
   storyLinks?: InputMaybe<ComponentModulesButtonsModuleInput>
   themes?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
   timeframe?: InputMaybe<ComponentCoreTimeframeInput>
@@ -7715,7 +7715,7 @@ export type StoriesQuery = {
             } | null
           } | null> | null
         } | null
-        story?: {
+        parent_story?: {
           __typename?: 'StoryEntityResponse'
           data?: {
             __typename?: 'StoryEntity'
@@ -7817,7 +7817,7 @@ export type StoriesQuery = {
             } | null
           } | null
         } | null
-        stories?: {
+        child_stories?: {
           __typename?: 'StoryRelationResponseCollection'
           data: Array<{
             __typename?: 'StoryEntity'
@@ -8180,7 +8180,7 @@ export type StoryQuery = {
             } | null
           } | null> | null
         } | null
-        story?: {
+        parent_story?: {
           __typename?: 'StoryEntityResponse'
           data?: {
             __typename?: 'StoryEntity'
@@ -8282,7 +8282,7 @@ export type StoryQuery = {
             } | null
           } | null
         } | null
-        stories?: {
+        child_stories?: {
           __typename?: 'StoryRelationResponseCollection'
           data: Array<{
             __typename?: 'StoryEntity'
@@ -8414,7 +8414,7 @@ export type StoryByLocaleQuery = {
             } | null
           } | null
         } | null
-        story?: {
+        parent_story?: {
           __typename?: 'StoryEntityResponse'
           data?: {
             __typename?: 'StoryEntity'
@@ -8427,7 +8427,7 @@ export type StoryByLocaleQuery = {
             } | null
           } | null
         } | null
-        stories?: {
+        child_stories?: {
           __typename?: 'StoryRelationResponseCollection'
           data: Array<{
             __typename?: 'StoryEntity'
@@ -8610,7 +8610,7 @@ export type StoryByLocaleQuery = {
                   } | null
                 } | null
               } | null
-              story?: {
+              parent_story?: {
                 __typename?: 'StoryEntityResponse'
                 data?: {
                   __typename?: 'StoryEntity'
@@ -8623,7 +8623,7 @@ export type StoryByLocaleQuery = {
                   } | null
                 } | null
               } | null
-              stories?: {
+              child_stories?: {
                 __typename?: 'StoryRelationResponseCollection'
                 data: Array<{
                   __typename?: 'StoryEntity'
@@ -8824,7 +8824,7 @@ export type StoriesByLocaleQuery = {
             } | null
           } | null
         } | null
-        story?: {
+        parent_story?: {
           __typename?: 'StoryEntityResponse'
           data?: {
             __typename?: 'StoryEntity'
@@ -8837,7 +8837,7 @@ export type StoriesByLocaleQuery = {
             } | null
           } | null
         } | null
-        stories?: {
+        child_stories?: {
           __typename?: 'StoryRelationResponseCollection'
           data: Array<{
             __typename?: 'StoryEntity'
@@ -9020,7 +9020,7 @@ export type StoriesByLocaleQuery = {
                   } | null
                 } | null
               } | null
-              story?: {
+              parent_story?: {
                 __typename?: 'StoryEntityResponse'
                 data?: {
                   __typename?: 'StoryEntity'
@@ -9033,7 +9033,7 @@ export type StoriesByLocaleQuery = {
                   } | null
                 } | null
               } | null
-              stories?: {
+              child_stories?: {
                 __typename?: 'StoryRelationResponseCollection'
                 data: Array<{
                   __typename?: 'StoryEntity'
@@ -9270,7 +9270,7 @@ export type StoriesMetaByLocaleQuery = {
             attributes?: { __typename?: 'Theme'; name: string } | null
           }>
         } | null
-        story?: {
+        parent_story?: {
           __typename?: 'StoryEntityResponse'
           data?: {
             __typename?: 'StoryEntity'
@@ -9373,7 +9373,7 @@ export type StoriesMetaByLocaleQuery = {
             } | null
           } | null
         } | null
-        stories?: {
+        child_stories?: {
           __typename?: 'StoryRelationResponseCollection'
           data: Array<{
             __typename?: 'StoryEntity'
@@ -9593,7 +9593,7 @@ export type StoriesMetaByLocaleQuery = {
                   } | null
                 } | null> | null
               } | null
-              story?: {
+              parent_story?: {
                 __typename?: 'StoryEntityResponse'
                 data?: {
                   __typename?: 'StoryEntity'
@@ -9695,7 +9695,7 @@ export type StoriesMetaByLocaleQuery = {
                   } | null
                 } | null
               } | null
-              stories?: {
+              child_stories?: {
                 __typename?: 'StoryRelationResponseCollection'
                 data: Array<{
                   __typename?: 'StoryEntity'
@@ -10194,7 +10194,7 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
             } | null
           } | null> | null
         } | null
-        story?: {
+        parent_story?: {
           __typename?: 'StoryEntityResponse'
           data?: {
             __typename?: 'StoryEntity'
@@ -10296,7 +10296,7 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
             } | null
           } | null
         } | null
-        stories?: {
+        child_stories?: {
           __typename?: 'StoryRelationResponseCollection'
           data: Array<{
             __typename?: 'StoryEntity'
@@ -10643,7 +10643,7 @@ export type NestedStoryFragmentFragment = {
         } | null
       } | null
     } | null
-    story?: {
+    parent_story?: {
       __typename?: 'StoryEntityResponse'
       data?: {
         __typename?: 'StoryEntity'
@@ -10656,7 +10656,7 @@ export type NestedStoryFragmentFragment = {
         } | null
       } | null
     } | null
-    stories?: {
+    child_stories?: {
       __typename?: 'StoryRelationResponseCollection'
       data: Array<{
         __typename?: 'StoryEntity'
@@ -10840,7 +10840,7 @@ export type LocalizedStoryFragmentFragment = {
         } | null
       } | null
     } | null
-    story?: {
+    parent_story?: {
       __typename?: 'StoryEntityResponse'
       data?: {
         __typename?: 'StoryEntity'
@@ -10853,7 +10853,7 @@ export type LocalizedStoryFragmentFragment = {
         } | null
       } | null
     } | null
-    stories?: {
+    child_stories?: {
       __typename?: 'StoryRelationResponseCollection'
       data: Array<{
         __typename?: 'StoryEntity'
@@ -11036,7 +11036,7 @@ export type LocalizedStoryFragmentFragment = {
               } | null
             } | null
           } | null
-          story?: {
+          parent_story?: {
             __typename?: 'StoryEntityResponse'
             data?: {
               __typename?: 'StoryEntity'
@@ -11049,7 +11049,7 @@ export type LocalizedStoryFragmentFragment = {
               } | null
             } | null
           } | null
-          stories?: {
+          child_stories?: {
             __typename?: 'StoryRelationResponseCollection'
             data: Array<{
               __typename?: 'StoryEntity'
@@ -11456,7 +11456,7 @@ export type StoryFragmentFragment = {
         } | null
       } | null> | null
     } | null
-    story?: {
+    parent_story?: {
       __typename?: 'StoryEntityResponse'
       data?: {
         __typename?: 'StoryEntity'
@@ -11558,7 +11558,7 @@ export type StoryFragmentFragment = {
         } | null
       } | null
     } | null
-    stories?: {
+    child_stories?: {
       __typename?: 'StoryRelationResponseCollection'
       data: Array<{
         __typename?: 'StoryEntity'
@@ -11760,7 +11760,7 @@ export type StoryMetaFragmentFragment = {
         } | null
       } | null> | null
     } | null
-    story?: {
+    parent_story?: {
       __typename?: 'StoryEntityResponse'
       data?: {
         __typename?: 'StoryEntity'
@@ -11862,7 +11862,7 @@ export type StoryMetaFragmentFragment = {
         } | null
       } | null
     } | null
-    stories?: {
+    child_stories?: {
       __typename?: 'StoryRelationResponseCollection'
       data: Array<{
         __typename?: 'StoryEntity'
@@ -12015,7 +12015,7 @@ export type LocalizedStoryMetaFragmentFragment = {
         attributes?: { __typename?: 'Theme'; name: string } | null
       }>
     } | null
-    story?: {
+    parent_story?: {
       __typename?: 'StoryEntityResponse'
       data?: {
         __typename?: 'StoryEntity'
@@ -12118,7 +12118,7 @@ export type LocalizedStoryMetaFragmentFragment = {
         } | null
       } | null
     } | null
-    stories?: {
+    child_stories?: {
       __typename?: 'StoryRelationResponseCollection'
       data: Array<{
         __typename?: 'StoryEntity'
@@ -12338,7 +12338,7 @@ export type LocalizedStoryMetaFragmentFragment = {
               } | null
             } | null> | null
           } | null
-          story?: {
+          parent_story?: {
             __typename?: 'StoryEntityResponse'
             data?: {
               __typename?: 'StoryEntity'
@@ -12440,7 +12440,7 @@ export type LocalizedStoryMetaFragmentFragment = {
               } | null
             } | null
           } | null
-          stories?: {
+          child_stories?: {
             __typename?: 'StoryRelationResponseCollection'
             data: Array<{
               __typename?: 'StoryEntity'
@@ -13436,7 +13436,7 @@ export type ThemeQuery = {
                   } | null
                 } | null> | null
               } | null
-              story?: {
+              parent_story?: {
                 __typename?: 'StoryEntityResponse'
                 data?: {
                   __typename?: 'StoryEntity'
@@ -13538,7 +13538,7 @@ export type ThemeQuery = {
                   } | null
                 } | null
               } | null
-              stories?: {
+              child_stories?: {
                 __typename?: 'StoryRelationResponseCollection'
                 data: Array<{
                   __typename?: 'StoryEntity'
@@ -13913,7 +13913,7 @@ export type ThemesQuery = {
                   } | null
                 } | null> | null
               } | null
-              story?: {
+              parent_story?: {
                 __typename?: 'StoryEntityResponse'
                 data?: {
                   __typename?: 'StoryEntity'
@@ -14015,7 +14015,7 @@ export type ThemesQuery = {
                   } | null
                 } | null
               } | null
-              stories?: {
+              child_stories?: {
                 __typename?: 'StoryRelationResponseCollection'
                 data: Array<{
                   __typename?: 'StoryEntity'
@@ -14398,7 +14398,7 @@ export type StoriesRelatedToThemeQuery = {
                   } | null
                 } | null> | null
               } | null
-              story?: {
+              parent_story?: {
                 __typename?: 'StoryEntityResponse'
                 data?: {
                   __typename?: 'StoryEntity'
@@ -14500,7 +14500,7 @@ export type StoriesRelatedToThemeQuery = {
                   } | null
                 } | null
               } | null
-              stories?: {
+              child_stories?: {
                 __typename?: 'StoryRelationResponseCollection'
                 data: Array<{
                   __typename?: 'StoryEntity'
@@ -14863,7 +14863,7 @@ export type ThemeFragmentFragment = {
               } | null
             } | null> | null
           } | null
-          story?: {
+          parent_story?: {
             __typename?: 'StoryEntityResponse'
             data?: {
               __typename?: 'StoryEntity'
@@ -14965,7 +14965,7 @@ export type ThemeFragmentFragment = {
               } | null
             } | null
           } | null
-          stories?: {
+          child_stories?: {
             __typename?: 'StoryRelationResponseCollection'
             data: Array<{
               __typename?: 'StoryEntity'
@@ -15344,7 +15344,7 @@ export type TriplyRecordQuery = {
                   } | null
                 } | null> | null
               } | null
-              story?: {
+              parent_story?: {
                 __typename?: 'StoryEntityResponse'
                 data?: {
                   __typename?: 'StoryEntity'
@@ -15446,7 +15446,7 @@ export type TriplyRecordQuery = {
                   } | null
                 } | null
               } | null
-              stories?: {
+              child_stories?: {
                 __typename?: 'StoryRelationResponseCollection'
                 data: Array<{
                   __typename?: 'StoryEntity'
@@ -15816,7 +15816,7 @@ export type TriplyRecordsQuery = {
                   } | null
                 } | null> | null
               } | null
-              story?: {
+              parent_story?: {
                 __typename?: 'StoryEntityResponse'
                 data?: {
                   __typename?: 'StoryEntity'
@@ -15918,7 +15918,7 @@ export type TriplyRecordsQuery = {
                   } | null
                 } | null
               } | null
-              stories?: {
+              child_stories?: {
                 __typename?: 'StoryRelationResponseCollection'
                 data: Array<{
                   __typename?: 'StoryEntity'
@@ -16287,7 +16287,7 @@ export type TriplyRecordFragmentFragment = {
               } | null
             } | null> | null
           } | null
-          story?: {
+          parent_story?: {
             __typename?: 'StoryEntityResponse'
             data?: {
               __typename?: 'StoryEntity'
@@ -16389,7 +16389,7 @@ export type TriplyRecordFragmentFragment = {
               } | null
             } | null
           } | null
-          stories?: {
+          child_stories?: {
             __typename?: 'StoryRelationResponseCollection'
             data: Array<{
               __typename?: 'StoryEntity'
@@ -17192,7 +17192,7 @@ export const NestedStoryFragmentFragmentDoc = gql`
           }
         }
       }
-      story {
+      parent_story {
         data {
           id
           attributes {
@@ -17202,7 +17202,7 @@ export const NestedStoryFragmentFragmentDoc = gql`
           }
         }
       }
-      stories {
+      child_stories {
         data {
           id
           attributes {
@@ -17268,7 +17268,7 @@ export const LocalizedStoryFragmentFragmentDoc = gql`
           }
         }
       }
-      story {
+      parent_story {
         data {
           id
           attributes {
@@ -17278,7 +17278,7 @@ export const LocalizedStoryFragmentFragmentDoc = gql`
           }
         }
       }
-      stories {
+      child_stories {
         data {
           id
           attributes {
@@ -17386,7 +17386,7 @@ export const StoryMetaFragmentFragmentDoc = gql`
       storyLinks {
         ...ComponentModulesButtonsModuleFragment
       }
-      story {
+      parent_story {
         data {
           id
           attributes {
@@ -17409,7 +17409,7 @@ export const StoryMetaFragmentFragmentDoc = gql`
           }
         }
       }
-      stories {
+      child_stories {
         data {
           id
           attributes {
@@ -17481,7 +17481,7 @@ export const LocalizedStoryMetaFragmentFragmentDoc = gql`
           }
         }
       }
-      story {
+      parent_story {
         data {
           id
           attributes {
@@ -17505,7 +17505,7 @@ export const LocalizedStoryMetaFragmentFragmentDoc = gql`
           }
         }
       }
-      stories {
+      child_stories {
         data {
           id
           attributes {
@@ -17659,7 +17659,7 @@ export const StoryFragmentFragmentDoc = gql`
       storyLinks {
         ...ComponentModulesButtonsModuleFragment
       }
-      story {
+      parent_story {
         data {
           id
           attributes {
@@ -17682,7 +17682,7 @@ export const StoryFragmentFragmentDoc = gql`
           }
         }
       }
-      stories {
+      child_stories {
         data {
           id
           attributes {
