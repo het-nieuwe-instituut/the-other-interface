@@ -26,9 +26,6 @@ query homepage($locale: String, $publicationState: String = "LIVE") {
                     ... on ComponentModulesPullquote {
                         ...pullquoteModuleFragment
                     }
-                    ... on ComponentModulesTableModule {
-                        ...tableModuleFragment
-                    }
                     ... on ComponentModulesTitleModule {
                         ...titleModuleFragment
                     }

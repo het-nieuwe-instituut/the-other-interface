@@ -27,9 +27,6 @@ fragment MenupageFragment on Menupage {
         ... on ComponentModulesPullquote {
             ...ComponentModulesPullquoteFragment
         }
-        ... on ComponentModulesTableModule {
-            ...ComponentModulesTableModuleFragment
-        }
         ... on ComponentModulesButtonsModule {
             ...ComponentModulesButtonsModuleFragment
         }
