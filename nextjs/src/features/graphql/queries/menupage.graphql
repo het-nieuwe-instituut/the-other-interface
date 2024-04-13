@@ -22,9 +22,6 @@ query menupageBySlug($locale: String, $slug: String!, $publicationState: String 
                     ... on ComponentModulesPullquote {
                         ...pullquoteModuleFragment
                     }
-                    ... on ComponentModulesTableModule {
-                        ...tableModuleFragment
-                    }
                     ... on ComponentModulesTitleModule {
                         ...titleModuleFragment
                     }

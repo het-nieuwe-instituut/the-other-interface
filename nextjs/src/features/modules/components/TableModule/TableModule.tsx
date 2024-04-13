@@ -12,12 +12,27 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { modulesSpacingMapper } from '../../modulesSpacing'
-import { TableModuleType } from '../../ModulesRenderer/tableMapper'
 
 interface Props {
-  component: TableModuleType | undefined
+  component?: TableModuleType
   LoadMore?: React.ReactNode
   count?: string
+}
+
+interface TableModuleType {
+  name?: string | null
+  description?: string | null
+  tableBody?: TableBody[] | null
+  tableHead?: TableHeadItem[] | null
+}
+
+interface TableBody {
+  TableBodyItem?: { id: string; value?: string }[] | null
+}
+
+interface TableHeadItem {
+  id: string
+  label?: string
 }
 
 export const TableModule: React.FC<Props> = props => {
@@ -70,10 +85,11 @@ export const TableModuleMobile: React.FC<Props> = props => {
     <TableContainer>
       <Table variant="simple">
         <Tbody>
-          {body?.map((item, index, array) => {
+          {body?.map((item, index) => {
             const chunkedItems = chunk(item?.TableBodyItem ?? [], 2)
+
             return (
-              <Tr key={keyExtractor(item, index, array)}>
+              <Tr key={index}>
                 {chunkedItems.map((bodyItem, index, array) => {
                   return (
                     <Td key={keyExtractor(bodyItem[0], index, array)} verticalAlign={'top'}>
@@ -113,7 +129,7 @@ export const TableModuleDesktop: React.FC<Props> = props => {
             {head?.map((item, index, array) => (
               <Th
                 key={keyExtractor(item, index, array)}
-                textTransform={'capitalize'}
+                textTransform={'initial'}
                 // Overriding styles with textStyle does not work on this component
                 color={'black'}
                 fontSize={'16px'}
@@ -127,8 +143,8 @@ export const TableModuleDesktop: React.FC<Props> = props => {
           </Tr>
         </Thead>
         <Tbody>
-          {body?.map((item, index, array) => (
-            <Tr key={keyExtractor(item, index, array)}>
+          {body?.map((item, index) => (
+            <Tr key={index}>
               {item?.TableBodyItem?.map((bodyItem, index, array) => (
                 <Td
                   key={keyExtractor(bodyItem, index, array)}

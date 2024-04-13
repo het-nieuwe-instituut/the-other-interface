@@ -12,17 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Tablehead": {
-      "displayName": "TableHead",
-      "type": "component",
-      "repeatable": false,
-      "component": "core.table-head"
-    },
-    "TableBody": {
-      "type": "component",
-      "repeatable": true,
-      "component": "core.table-body"
-    },
     "name": {
       "type": "string"
     },
