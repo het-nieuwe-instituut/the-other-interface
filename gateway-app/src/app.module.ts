@@ -19,7 +19,6 @@ import { AuthorModule } from './modules/author/author.module'
 import { LocationModule } from './modules/location/location.module'
 import { LandingPageModule } from './modules/landingPage/landingPage.module'
 import { MenuPageModule } from './modules/menuPage/menuPage.module'
-import { TableModule } from './modules/table/table.module'
 import { UserModule } from './modules/user/user.module'
 import { UtilModule } from './modules/util/util.module'
 import { AuthModule } from './modules/auth/auth.module'
@@ -57,7 +56,6 @@ import { ThemeModule } from './modules/theme/theme.module'
     HomepageModule,
     LandingPageModule,
     MenuPageModule,
-    TableModule,
     UserModule,
     ThemeModule,
   ],

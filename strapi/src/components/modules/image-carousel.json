@@ -16,12 +16,6 @@
     },
     "description": {
       "type": "text"
-    },
-    "items": {
-      "displayName": "ImageCarouselItem",
-      "type": "component",
-      "repeatable": true,
-      "component": "core.image-carousel-item"
     }
   }
 }
