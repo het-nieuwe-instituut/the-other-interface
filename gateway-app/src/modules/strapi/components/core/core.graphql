@@ -32,63 +32,10 @@ fragment ComponentCoreCarouselItemFragment on ComponentCoreCarouselItem {
     }
 }
 
-fragment ComponentCoreImageCarouselItemFragment on ComponentCoreImageCarouselItem {
-    id
-    description
-    name
-    picture {
-        ...UploadFileEntityResponseFragment
-    }
-    triplyRecord {
-        data {
-            ...BaseTriplyRecordFragment
-        }
-    }
-    story {
-        data {
-            id
-            attributes {
-                slug
-            }
-        }
-    }
-}
-
-
-fragment ComponentCorePageHeaderFragment on ComponentCorePageHeader {
-    id
-    Title
-    content
-}
-
 fragment ComponentCorePublicationDateFragment on ComponentCorePublicationDate {
     id
     date
     displayType
-}
-
-fragment ComponentCoreTableHeadItemFragment on ComponentCoreTableHeadItem {
-    id
-    label
-}
-
-fragment ComponentCoreTableHeadFragment on ComponentCoreTableHead {
-    id
-    TableHeadItem {
-        ...ComponentCoreTableHeadItemFragment
-    }
-}
-
-fragment ComponentCoreTableBodyItemFragment on ComponentCoreTableBodyItem {
-    id
-    value
-}
-
-fragment ComponentCoreTableBodyFragment on ComponentCoreTableBody {
-    id
-    TableBodyItem {
-        ...ComponentCoreTableBodyItemFragment
-    }
 }
 
 fragment ComponentCoreTimeframeFragment on ComponentCoreTimeframe {
@@ -101,11 +48,6 @@ fragment ComponentCoreFeaturedFieldsFragment on ComponentCoreFeaturedFields {
     id
     label
     value
-}
-
-fragment ComponentCoreFieldsFragment on ComponentCoreFields {
-    id
-    label
 }
 
 fragment ComponentCoreGridFeaturedFieldsFragment on ComponentCoreGridFeaturedFields {
@@ -127,14 +69,5 @@ fragment ComponentCoreGridFeaturedFieldsFragment on ComponentCoreGridFeaturedFie
         data {
             ...BaseTriplyRecordFragment
         }
-    }
-}
-
-fragment ComponentCoreItemsFragment on ComponentCoreItems {
-    id
-    author
-    title
-    image {
-        ...UploadFileEntityResponseFragment
     }
 }
