@@ -1,7 +1,14 @@
+import { useSearchParams } from 'next/navigation'
 import { useCallback, useEffect, useRef } from 'react'
+import { PositionedStory } from '../types'
 
-export const useDrawLines = (selector: string, template: number) => {
+export const useDrawLines = (selector: string, template: number, stories: PositionedStory[]) => {
   const svgRef = useRef<SVGSVGElement>(null)
+
+  const searchParams = useSearchParams()
+
+  const page = parseInt(searchParams?.get('page') ?? '1')
+  const lang = searchParams?.get('lang')
 
   const calculatePoint = useCallback((element: Element): { x: number; y: number } => {
     const rect = element.getBoundingClientRect()
@@ -62,7 +69,7 @@ export const useDrawLines = (selector: string, template: number) => {
     return () => {
       window.removeEventListener('resize', drawAfterLayout)
     }
-  }, [template, drawLinesForTemplate, selector])
+  }, [template, drawLinesForTemplate, selector, page, lang, stories])
 
   return svgRef
 }

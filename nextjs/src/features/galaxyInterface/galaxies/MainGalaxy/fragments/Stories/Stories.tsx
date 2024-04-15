@@ -4,7 +4,6 @@ import { Story } from '../Story'
 import { usePresenter } from './usePresenter'
 import { StoryEntity } from 'src/generated/graphql'
 import { useDrawLines } from './useDrawLines'
-import { useState } from 'react'
 
 type Props = {
   stories: StoryEntity[]
@@ -23,7 +22,7 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
     originalTemplateIndex,
   } = usePresenter(stories, nextStories)
 
-  const svgRef = useDrawLines('.story-grid-item', originalTemplateIndex)
+  const svgRef = useDrawLines('.story-grid-item', originalTemplateIndex, positionedStories)
 
   return (
     <Box width={'100%'} height={'100%'}>
