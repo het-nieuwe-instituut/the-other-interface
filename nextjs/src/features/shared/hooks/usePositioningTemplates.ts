@@ -16,5 +16,8 @@ export const usePositioningTemplates = <T>(templates: T[], page = 1) => {
   return {
     currentTemplate: shuffledPositioningTemplatesRef.current[currentPageIndex] ?? [],
     nextTemplate: shuffledPositioningTemplatesRef.current[nextPageIndex] ?? [],
+    originalTemplateIndex: templates.indexOf(
+      shuffledPositioningTemplatesRef.current[currentPageIndex]
+    ),
   }
 }

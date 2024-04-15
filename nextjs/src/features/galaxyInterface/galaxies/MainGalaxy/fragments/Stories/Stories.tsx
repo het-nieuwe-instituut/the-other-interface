@@ -3,6 +3,7 @@ import { Box, Grid, keyframes } from '@chakra-ui/react'
 import { Story } from '../Story'
 import { usePresenter } from './usePresenter'
 import { StoryEntity } from 'src/generated/graphql'
+import { useDrawLines } from './useDrawLines'
 
 type Props = {
   stories: StoryEntity[]
@@ -13,8 +14,15 @@ const currentPageFadeIn = keyframes({ from: { opacity: 0 }, to: { opacity: 1 } }
 const nextPageFadeIn = keyframes({ from: { opacity: 0 }, to: { opacity: 0.2 } })
 
 export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
-  const { positionedStories, positionedNextStories, isCurrentStoriesEmpty, isNextStoriesEmpty } =
-    usePresenter(stories, nextStories)
+  const {
+    positionedStories,
+    positionedNextStories,
+    isCurrentStoriesEmpty,
+    isNextStoriesEmpty,
+    originalTemplateIndex,
+  } = usePresenter(stories, nextStories)
+
+  const svgRef = useDrawLines('.story-grid-item', originalTemplateIndex, positionedStories)
 
   return (
     <Box width={'100%'} height={'100%'}>
@@ -33,9 +41,18 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
         }}
       >
         {positionedStories.map(positionedStory => (
-          <Story key={`${positionedStory.id}-${positionedStory.locale}`} story={positionedStory} />
+          <Story
+            key={`${positionedStory.id}-${positionedStory.locale}`}
+            story={positionedStory}
+            isMainGrid
+          />
         ))}
       </Grid>
+
+      <svg
+        ref={svgRef}
+        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+      />
 
       <Grid
         position="absolute"
