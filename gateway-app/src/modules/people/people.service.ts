@@ -133,7 +133,7 @@ export class PeopleService {
 
   private readonly ZoomLevel3RelationsCountEndpoint = 'people-recordRelations-Count/run?'
 
-  private readonly ZoomLevel3RecordEndpoint = 'people-recordPage-editorial/18/run?'
+  private readonly ZoomLevel3RecordEndpoint = 'people-recordPage-editorial/run?'
 
   public constructor(private triplyService: TriplyService) {}
 

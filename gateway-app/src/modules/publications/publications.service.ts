@@ -394,7 +394,7 @@ export class PublicationsService {
 
   private readonly ZoomLevel3RelationsCountEndpoint = 'publications-recordRelations-Count/run?'
 
-  private readonly ZoomLevel3RecordEndpoint = 'publications-recordPage-Editorial/2/run?'
+  private readonly ZoomLevel3RecordEndpoint = 'publications-recordPage-Editorial/run?'
 
   // private readonly publicationDescriptionLevelEndpoint = 'Zoom-3-books-type/run'
 
