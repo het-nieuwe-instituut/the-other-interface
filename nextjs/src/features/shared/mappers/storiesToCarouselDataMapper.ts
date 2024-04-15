@@ -35,6 +35,10 @@ export const storiesToCarouselDataMapper = (
 
       const image = images[0]
 
+      if (image.url === undefined) {
+        return []
+      }
+
       return [
         {
           url: image.url,

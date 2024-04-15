@@ -36,7 +36,7 @@ export const CarouselSlide = (props: Props) => {
           {
             title: component?.name || '',
             description: component?.description || '',
-            imageUrl: component?.picture?.data?.attributes?.url || 'broken',
+            imageUrl: component?.picture?.data?.attributes?.url || '',
           },
           record
         )

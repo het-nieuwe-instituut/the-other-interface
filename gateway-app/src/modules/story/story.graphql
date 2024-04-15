@@ -258,7 +258,7 @@ fragment NestedStoryFragment on StoryEntity {
                 }
             }
         }
-        story {
+        parent_story {
             data {
                 id
                 attributes {
@@ -268,7 +268,7 @@ fragment NestedStoryFragment on StoryEntity {
                 }
             }
         }
-        stories { 
+        child_stories { 
             data {
                 id
                 attributes {
@@ -325,7 +325,7 @@ fragment LocalizedStoryFragment on StoryEntity {
                 }
             }
         }
-        story {
+        parent_story {
             data {
                 id
                 attributes {
@@ -335,7 +335,7 @@ fragment LocalizedStoryFragment on StoryEntity {
                 }
             }
         }
-        stories { 
+        child_stories { 
             data {
                 id
                 attributes {
@@ -456,7 +456,7 @@ fragment StoryFragment on StoryEntity {
         storyLinks {
             ...ComponentModulesButtonsModuleFragment
         }
-        story {
+        parent_story {
             data {
                 id
                 attributes {
@@ -479,7 +479,7 @@ fragment StoryFragment on StoryEntity {
                 }
             }
         }
-        stories {
+        child_stories {
             data {
                 id
                 attributes {
@@ -556,7 +556,7 @@ fragment StoryMetaFragment on StoryEntity {
         storyLinks {
             ...ComponentModulesButtonsModuleFragment
         }
-        story {
+        parent_story {
             data {
                 id
                 attributes {
@@ -579,7 +579,7 @@ fragment StoryMetaFragment on StoryEntity {
                 }
             }
         }
-        stories {
+        child_stories {
             data {
                 id
                 attributes {
@@ -647,7 +647,7 @@ fragment LocalizedStoryMetaFragment on StoryEntity {
                 }
             }
         }
-        story {
+        parent_story {
             data {
                 id
                 attributes {
@@ -671,7 +671,7 @@ fragment LocalizedStoryMetaFragment on StoryEntity {
                 }
             }
         }
-        stories {
+        child_stories {
             data {
                 id
                 attributes {

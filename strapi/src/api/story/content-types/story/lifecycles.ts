@@ -18,18 +18,41 @@ export default {
 
   async beforeUpdate(event) {
     await checkIfParentIsNotAChild(event)
-    const story = await strapi.entityService.findOne(storyApi, event.params.where.id)
+    const story = await strapi.entityService.findOne(storyApi, event.params.where.id, {
+      populate: ['localizations', 'parent_story'],
+    })
     if (event.params.data.slug && event.params.data.slug !== story.slug) {
       event.params.data.slug = getSlug(event.params.data.slug)
     }
+
+    // TODO: It takes current localization for parent, but update dosent work, need to fix
+
+    // if (story.localizations.length > 0) {
+    //   const localizedStoryId = story.localizations[0]?.id
+    //   const currentStoryId = event.params.where.id
+
+    //   if (localizedStoryId === currentStoryId) return
+
+    //   const parentStoryId = story.parent_story?.id
+
+    //   if (parentStoryId) {
+    //     const localizedStoryParent = await strapi.entityService.findOne(storyApi, parentStoryId, {
+    //       populate: ['localizations'],
+    //     })
+
+    //     if (localizedStoryParent.localizations.length > 0) {
+    //       event.params.data.parent_story = localizedStoryParent.localizations[0].id
+    //     }
+    //   }
+    // }
   },
 
-  afterCreate(event) {
-    applyToAllLocales(event)
+  async afterCreate(event) {
+    await applyToAllLocales(event)
   },
 
-  afterUpdate(event) {
-    applyToAllLocales(event)
+  async afterUpdate(event) {
+    await applyToAllLocales(event)
   },
 }
 
@@ -37,10 +60,9 @@ function getSlug(text) {
   return slugify(text, { lower: true, strict: true })
 }
 
-function applyToAllLocales(event) {
+async function applyToAllLocales(event) {
   if (event.result.localizations?.length) {
     const data: Object = {}
-
     if (event.params.data.triplyRecords !== undefined) {
       data['triplyRecords'] = event.params.data.triplyRecords
     }
@@ -53,22 +75,29 @@ function applyToAllLocales(event) {
       data['slug'] = event.params.data.slug
     }
 
-    event.result.localizations.forEach(s => strapi.entityService.update(storyApi, s.id, { data }))
+    try {
+      event.result.localizations.forEach(async s => {
+        strapi.entityService.update(storyApi, s.id, { data })
+      })
+    } catch (e) {
+      console.error(e)
+    }
   }
 }
 
 async function checkIfParentIsNotAChild(event) {
   const item = event.params.data
-  if (!item.story) return
-  if (item.story === event.params.where.id) {
+
+  if (!item.parent_story) return
+  if (item.parent_story === event.params.where.id) {
     throw new ValidationError('Parent story cannot be the same as the current story')
   }
 
-  const parentStory = await strapi.entityService.findOne(storyApi, item.story, {
-    populate: ['story'],
+  const parentStory = await strapi.entityService.findOne(storyApi, item.parent_story, {
+    populate: ['parent_story'],
   })
 
-  if (parentStory.story) {
+  if (parentStory.parent_story) {
     throw new ValidationError('Parent story cannot be a child of another story')
   }
 }

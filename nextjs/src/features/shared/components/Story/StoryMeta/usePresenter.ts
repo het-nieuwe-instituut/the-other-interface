@@ -86,8 +86,8 @@ export const usePresenter = () => {
     timeframe: formatTimeframe(story?.timeframe),
     links: story?.storyLinks?.buttons?.map(button => button) || [],
     siblingsRelation: story?.siblings,
-    parentRelation: story?.story,
-    childrenRelation: story?.stories,
+    parentRelation: story?.parent_story,
+    childrenRelation: story?.child_stories,
     lang,
   }
 }

@@ -8,10 +8,10 @@ export const StoryBottomContent = () => {
     <>
       <Box pt={16} px={6}>
         <Box>
-          <StoryWithinThemeCarousel />
+          <RelatedStoriesCarousel />
         </Box>
         <Box pt={4}>
-          <RelatedStoriesCarousel />
+          <StoryWithinThemeCarousel />
         </Box>
       </Box>
     </>

@@ -6,8 +6,8 @@ import { RecordTable } from '@/features/shared/components/Record/RecordTable/Rec
 export const RecordBottomContent = () => {
   return (
     <Box pt={16} px={6}>
-      <RecordStoriesCarousel />
       <RecordTable />
+      <RecordStoriesCarousel />
     </Box>
   )
 }

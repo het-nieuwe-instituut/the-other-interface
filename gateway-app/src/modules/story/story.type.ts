@@ -94,10 +94,10 @@ export class Story {
   public themes?: ThemeRelationResponseCollection
 
   @Field({ nullable: true })
-  public story?: StoryEntityResponse
+  public parent_story?: StoryEntityResponse
 
   @Field({ nullable: true })
-  public stories?: StoryRelationResponseCollection
+  public child_stories?: StoryRelationResponseCollection
 
   @Field(() => [StoryEntity], { nullable: true })
   public siblings?: StoryEntity[]
@@ -250,10 +250,10 @@ export class StoryFiltersInput {
   public triplyRecords?: TriplyRecordFiltersInput
 
   @Field(() => StoryFiltersInput, { nullable: true })
-  public stories?: StoryFiltersInput
+  public child_stories?: StoryFiltersInput
 
   @Field(() => StoryFiltersInput, { nullable: true })
-  public story?: StoryFiltersInput
+  public parent_story?: StoryFiltersInput
 
   @Field(() => StoryFiltersInput, { nullable: true })
   public siblings?: StoryFiltersInput
