@@ -10,11 +10,11 @@ import { StoryEntity } from '../story/story.type'
 
 @ObjectType()
 export class ZoomLevel3RelationsType {
-  @Field(() => EntityNames, { nullable: true })
+  @Field(() => EntityNames)
   public type: EntityNames
 
   @Field({ nullable: true })
-  public total: number
+  public total?: number
 
   @Field(() => [String], { nullable: true })
   public paginatedRelations?: string[]
