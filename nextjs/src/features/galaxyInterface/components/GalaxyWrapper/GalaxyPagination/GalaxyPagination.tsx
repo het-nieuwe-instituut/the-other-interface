@@ -11,6 +11,7 @@ type Props = {
   isResultEmpty: boolean
   handleLeftClick?: () => void
   handleRightClick?: () => void
+  text?: string
 }
 
 export const GalaxyPagination: React.FC<Props> = ({
@@ -20,6 +21,7 @@ export const GalaxyPagination: React.FC<Props> = ({
   isResultEmpty,
   handleLeftClick,
   handleRightClick,
+  text,
 }) => {
   const { t } = useTypeSafeTranslation('navigation')
 
@@ -49,7 +51,7 @@ export const GalaxyPagination: React.FC<Props> = ({
       >
         {!isResultAmountLoading && !isResultEmpty && (
           <>
-            <Text>{t('page')}</Text>
+            <Text>{text ? text : t('page')}</Text>
             <Text>
               {currentPageNumber} {t('of')}
             </Text>

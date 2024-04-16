@@ -122,7 +122,7 @@ export const GridModule: React.FC<Props> = props => {
     // this should prioritize the thumbnail that is uploaded and fall back on a story's thumbnail
     // I could not find an image url on the story type
     // TODO: fallback on story image thumbnail
-    const thumbnailUrl = imageBasePath(field.thumbnail?.data?.attributes?.url) || 'broken'
+    const thumbnailUrl = imageBasePath(field.thumbnail?.data?.attributes?.url) || ''
     const thumbnailAlt =
       field.thumbnail?.data?.attributes?.alternativeText || field.title || 'image'
 
@@ -151,7 +151,7 @@ export const GridModule: React.FC<Props> = props => {
       {
         title: field.title || '',
         description: field.subtitle || '',
-        imageUrl: field.thumbnail?.data?.attributes?.url || 'broken',
+        imageUrl: field.thumbnail?.data?.attributes?.url || '',
       },
       field.triplyRecord?.data?.attributes
     )

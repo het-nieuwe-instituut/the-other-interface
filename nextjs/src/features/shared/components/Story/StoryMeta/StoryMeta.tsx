@@ -90,7 +90,8 @@ export const StoryMeta: React.FC = () => {
           })}
         </Box>
       )}
-      {siblingsRelation && siblingsRelation.length > 0 && (
+      {/* We decided to remove this for now, but still there is a possiblity that after test we will add it back, so we will keep it here for now. */}
+      {/* {siblingsRelation && siblingsRelation.length > 0 && (
         <Box marginBottom={'md'}>
           <Text textStyle={'socialLarge.lg'} fontWeight={700}>
             {storiesT.t('siblingsStories')}:
@@ -112,7 +113,7 @@ export const StoryMeta: React.FC = () => {
             )
           })}
         </Box>
-      )}
+      )} */}
       {themes && (
         <Box marginBottom={'md'}>
           <Text textStyle={'socialLarge.lg'} fontWeight={700}>

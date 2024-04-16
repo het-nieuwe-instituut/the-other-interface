@@ -41,7 +41,7 @@ export const ImageCarousel = (props: Props) => {
           {props?.images?.map((item, index) => {
             const originalHeight = item?.height ?? 1
             const originalWidth = item?.width ?? 1
-            const imagePath = imageBasePath(item?.url) || 'broken'
+            const imagePath = imageBasePath(item?.url) || ''
             const caption = item?.description
             const proportions = calculateImagePropotions(
               originalWidth,
@@ -69,7 +69,13 @@ export const ImageCarousel = (props: Props) => {
                   loading="eager"
                 />
                 {item?.title && (
-                  <Text textStyle={'socialLarge.lg'} fontWeight={700} fontSize={'32px'} mt={'3'}>
+                  <Text
+                    textStyle={'socialLarge.lg'}
+                    fontWeight={700}
+                    fontSize={'32px'}
+                    mt={'3'}
+                    lineHeight={'110%'}
+                  >
                     {item.title}
                   </Text>
                 )}

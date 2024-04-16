@@ -161,9 +161,9 @@ export class ZoomLevel3Service {
     }
 
     const storyId = story.id
-    const parentId = story.attributes?.story?.data?.id
+    const parentId = story.attributes?.parent_story?.data?.id
     const childrensIds =
-      (story.attributes?.stories?.data?.map(s => s.id).filter(Boolean) as string[]) || []
+      (story.attributes?.child_stories?.data?.map(s => s.id).filter(Boolean) as string[]) || []
 
     const storyRelation = await this.getPaginatedStoryRelationsForStory(
       storyId,
@@ -278,11 +278,11 @@ export class ZoomLevel3Service {
 
     const storyFilters: StoryFiltersInput = { or: [{ themes: { id: { in: themeIds } } }] }
     if (childrenIds.length) {
-      storyFilters.or?.push({ stories: { id: { in: childrenIds } } })
+      storyFilters.or?.push({ child_stories: { id: { in: childrenIds } } })
     }
 
     if (parentId) {
-      storyFilters.or?.push({ story: { id: { eq: parentId } } })
+      storyFilters.or?.push({ parent_story: { id: { eq: parentId } } })
     }
 
     const paginatedRelatedStories = await this.strapiGqlSdk.stories({

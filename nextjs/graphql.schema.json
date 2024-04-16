@@ -13191,6 +13191,18 @@
             "deprecationReason": null
           },
           {
+            "name": "child_stories",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "StoryRelationResponseCollection",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "components",
             "description": null,
             "args": [],
@@ -13271,6 +13283,18 @@
             "deprecationReason": null
           },
           {
+            "name": "parent_story",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "StoryEntityResponse",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "publicationDate",
             "description": null,
             "args": [],
@@ -13333,30 +13357,6 @@
             "type": {
               "kind": "SCALAR",
               "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "stories",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "StoryRelationResponseCollection",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "story",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "StoryEntityResponse",
               "ofType": null
             },
             "isDeprecated": false,
@@ -13686,6 +13686,18 @@
             "deprecationReason": null
           },
           {
+            "name": "child_stories",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StoryFiltersInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "createdAt",
             "description": null,
             "type": {
@@ -13826,6 +13838,18 @@
             "deprecationReason": null
           },
           {
+            "name": "parent_story",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StoryFiltersInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "publicationDate",
             "description": null,
             "type": {
@@ -13879,30 +13903,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StringFilterInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "stories",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StoryFiltersInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "story",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StoryFiltersInput",
               "ofType": null
             },
             "defaultValue": null,

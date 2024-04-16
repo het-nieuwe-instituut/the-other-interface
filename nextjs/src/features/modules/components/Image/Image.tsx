@@ -28,7 +28,7 @@ const MediaImage = (props: MediaImageProps) => {
     IMAGE_HEIGHT,
     dimensions?.borderBox.width || 1223
   )
-  const imagePath = imageBasePath(url) || 'broken'
+  const imagePath = imageBasePath(url) || ''
 
   return (
     <Box

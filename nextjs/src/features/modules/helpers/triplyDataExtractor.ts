@@ -19,7 +19,7 @@ const extractTriplyFields = (
   if (!triplyType) {
     return {
       ...defaultFields,
-      imageUrl: imageBasePath(defaultFields.imageUrl) || 'broken',
+      imageUrl: imageBasePath(defaultFields.imageUrl) || '',
     }
   }
 

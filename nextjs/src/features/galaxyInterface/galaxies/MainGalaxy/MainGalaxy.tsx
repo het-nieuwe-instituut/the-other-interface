@@ -7,6 +7,7 @@ import { Pagination, StoryEntity } from 'src/generated/graphql'
 import { GalaxyFooter } from '../../components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 import { GalaxyPagination } from '../../components/GalaxyWrapper/GalaxyPagination/GalaxyPagination'
 import { usePresenter } from './usePresenter'
+import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 
 const categoryClouds: CategoryCloud[] = [
   {
@@ -44,6 +45,7 @@ interface Props {
 
 export const MainGalaxy: React.FC<Props> = ({ storyTitle, stories, pagination, nextStories }) => {
   const { increasePageNumber, decreasePageNumber } = usePresenter(pagination?.pageCount || 0)
+  const { t } = useTypeSafeTranslation('navigation')
 
   return (
     <Box position="relative" width="100vw" height="100vh">
@@ -62,6 +64,7 @@ export const MainGalaxy: React.FC<Props> = ({ storyTitle, stories, pagination, n
             handleLeftClick={decreasePageNumber}
             handleRightClick={increasePageNumber}
             isResultEmpty={stories.length === 0}
+            text={t('theme')}
           />
         }
       />
