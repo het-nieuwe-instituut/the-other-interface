@@ -1,7 +1,12 @@
 import { useParams, usePathname, useSearchParams } from 'next/navigation'
 import { useMemo } from 'react'
 import { getCurrentZoomNumber } from '../helpers/getCurrentZoomNumber'
-import { CloudCategory, CLOUD_CATEGORIES_ARRAY, isStoryCategory } from '../utils/categories'
+import {
+  CloudCategory,
+  CLOUD_CATEGORIES_ARRAY,
+  isStoryCategory,
+  SEARCH_CATEGORIES,
+} from '../utils/categories'
 
 export const usePageCategory = () => {
   const pathname = usePathname()
@@ -11,6 +16,10 @@ export const usePageCategory = () => {
   const pageCategory = useMemo(() => {
     const currentZoomNumber = getCurrentZoomNumber(pathname)
     let category = null
+
+    if (currentZoomNumber === 1) {
+      return SEARCH_CATEGORIES.all
+    }
 
     if (currentZoomNumber === 2) {
       return searchParams?.get('category') as CloudCategory

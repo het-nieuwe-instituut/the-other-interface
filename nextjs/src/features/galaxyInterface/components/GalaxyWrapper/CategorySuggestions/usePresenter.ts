@@ -1,7 +1,7 @@
 import { State } from '@/features/shared/configs/store'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { sharedActions } from '@/features/shared/stores/shared.store'
-import { CloudCategory } from '@/features/shared/utils/categories'
+import { SearchCategory } from '@/features/shared/utils/categories'
 
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -16,7 +16,7 @@ export const usePresenter = () => {
     t,
     searchCategory,
     isCategorySuggestionsOpen,
-    setSearchCategory: (category: CloudCategory) => {
+    setSearchCategory: (category: SearchCategory) => {
       dispatch(sharedActions.searchCategory({ searchCategory: category }))
     },
   }

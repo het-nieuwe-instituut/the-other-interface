@@ -1,9 +1,13 @@
 'use client'
 import { useQuery } from '@tanstack/react-query'
 import initApiClientService from '../../utils/initApiClientService'
-import { CATEGORIES_TO_ENTITY_MAPPER, CloudCategory } from '@/features/shared/utils/categories'
+import {
+  CATEGORIES_TO_ENTITY_MAPPER,
+  CloudCategory,
+  SearchCategory,
+} from '@/features/shared/utils/categories'
 
-export function useZoom2SearchResultAmount(category: CloudCategory, text?: string) {
+export function useZoom2SearchResultAmount(category: SearchCategory, text?: string) {
   const api = initApiClientService()
 
   const queryFn = () =>

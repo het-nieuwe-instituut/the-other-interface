@@ -11,6 +11,12 @@ export const CLOUD_CATEGORIES_ARRAY = Object.values(CLOUD_CATEGORIES)
 
 export const CATEGORIES = { ...CLOUD_CATEGORIES, stories: 'stories' } as const
 
+export const SEARCH_CATEGORIES = { ...CATEGORIES, all: 'all' } as const
+
+export const SEARCH_CATEGORIES_ARRAY = Object.values(SEARCH_CATEGORIES)
+
+export type SearchCategory = (typeof SEARCH_CATEGORIES)[keyof typeof SEARCH_CATEGORIES]
+
 export type CloudCategory = (typeof CLOUD_CATEGORIES)[keyof typeof CLOUD_CATEGORIES]
 export type Category = (typeof CATEGORIES)[keyof typeof CATEGORIES]
 

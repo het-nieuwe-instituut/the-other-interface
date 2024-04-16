@@ -8,7 +8,12 @@ import { CategorySuggestions } from '../CategorySuggestions/CategorySuggestions'
 import { GoButton } from './fragments/GoButton'
 import { SearchButton } from './fragments/SearchButton'
 
-export const GalaxySearchBar: React.FC = () => {
+type Props = {
+  total?: number
+  isCollapsable?: boolean
+}
+
+export const GalaxySearchBar: React.FC<Props> = ({ total, isCollapsable }) => {
   const {
     category,
     isSearchModeActive,
@@ -23,7 +28,7 @@ export const GalaxySearchBar: React.FC = () => {
     handleInputChange,
     searchBarRef,
     filterInputRef,
-  } = usePresenter()
+  } = usePresenter(isCollapsable)
 
   return (
     <Grid
@@ -51,7 +56,7 @@ export const GalaxySearchBar: React.FC = () => {
         zIndex={'inherit'}
         whiteSpace={'nowrap'}
       >
-        <Text textStyle="socialLarge.xl">{searchResultAmount}</Text>
+        <Text textStyle="socialLarge.xl">{total ? total : searchResultAmount}</Text>
         <Text textStyle="socialLarge.xl">{t('resultsFor')}</Text>
       </Flex>
 
