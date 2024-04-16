@@ -28,7 +28,6 @@ export const getZoom3Queries = (type: Category, api: Sdk) => {
         relationsQuery: api.PublicationRelations,
         accesor: (data?: ZoomLevel3PublicationQuery) => data?.zoomLevel3Publication,
       }
-
     case CATEGORIES.objects:
       return {
         zoomLevelQuery: api.ZoomLevel3Object,

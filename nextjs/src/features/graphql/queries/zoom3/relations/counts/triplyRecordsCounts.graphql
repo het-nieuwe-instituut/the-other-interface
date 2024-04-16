@@ -1,0 +1,11 @@
+query StoryRelationsCount($id: String!, $lang: String!) { 
+    storyRelationsCount(storyId: $id, lang: $lang) {
+        linkedTriplyRecords {
+            archives
+            people
+            publications
+            objects
+        }
+        linkedStoryCount
+    }
+}

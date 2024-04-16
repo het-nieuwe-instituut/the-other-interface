@@ -1,5 +1,12 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common'
-import { Enum_Triplyrecord_Type, Sdk, StoriesLinkedToThemeQuery } from 'src/generated/strapi-sdk'
+import {
+  Enum_Triplyrecord_Type,
+  PublicationState,
+  Sdk,
+  StoriesQuery,
+  StoryFiltersInput,
+  StoryTriplyRelationsQuery,
+} from 'src/generated/strapi-sdk'
 import { StrapiUtils } from '../strapi/strapi.utils'
 import { ArchivesService } from '../archives/archives.service'
 import { ObjectsService } from '../objects/objects.service'
@@ -8,10 +15,10 @@ import { PublicationsService } from '../publications/publications.service'
 import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { TriplyUtils } from '../triply/triply.utils'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
-import { getRandom2ItemsFromArray } from '../util/helpers'
 import { CustomError } from '../util/customError'
 import { StoryService } from '../story/story.service'
 import { PaginationArgs } from '../util/paginationArgs.type'
+import { ZoomLevel3RelationsType } from './zoomLevel3.type'
 
 interface ZoomLevel3RelationData {
   idRelation: string
@@ -71,7 +78,7 @@ export class ZoomLevel3Service {
           await this.getStoryRelationsForLinkedItem(id, type, paginationArgs?.page),
         ]
       case EntityNames.Stories:
-        return this.getStoryRelations(id, lang)
+        return this.getStoryRelations(id, lang, paginationArgs?.page)
       default:
         throw CustomError.internalCritical('type not implemented')
     }
@@ -97,83 +104,87 @@ export class ZoomLevel3Service {
     }
   }
 
-  private groupTriplyRecordsByType(
-    triplyRecords: Array<{
-      attributes?: { recordId: string; type: Enum_Triplyrecord_Type | string } | null
-    }>
-  ): Record<Enum_Triplyrecord_Type | string, string[]> {
-    const groupedRecords: Record<Enum_Triplyrecord_Type | string, string[]> = {}
+  public async storyRelationsCount(storyId: string, locale = 'nl') {
+    // counts for triply records related to story
+    const [resTriplyArchives, resTriplyPublications, resTriplyPeople, resTriplyObjects] =
+      await Promise.all(
+        [
+          Enum_Triplyrecord_Type.Archive,
+          Enum_Triplyrecord_Type.Publication,
+          Enum_Triplyrecord_Type.People,
+          Enum_Triplyrecord_Type.Object,
+        ].map(type =>
+          this.strapiGqlSdk.triplyRecords({
+            filters: {
+              and: [{ stories: { id: { eq: storyId } } }, { type: { eq: type } }],
+            },
+          })
+        )
+      )
 
-    triplyRecords.forEach(record => {
-      if (!record.attributes) return
+    const themeIds = await this.getStoryThemeIds(storyId, locale)
 
-      const { type, recordId } = record.attributes
-
-      if (!groupedRecords[type]) {
-        groupedRecords[type] = []
-      }
-
-      groupedRecords[type].push(recordId)
+    const stories = await this.strapiGqlSdk.storiesIds({
+      filters: { themes: { id: { in: themeIds } } },
+      locale,
+      publicationState: PublicationState.Live,
+      pagination: { page: 1, pageSize: 500 },
     })
 
-    return groupedRecords
+    return {
+      linkedStoryCount: stories.stories?.data.length || 0,
+      linkedTriplyRecords: {
+        archives: resTriplyArchives.triplyRecords?.meta.pagination.total,
+        people: resTriplyPeople.triplyRecords?.meta.pagination.total,
+        publications: resTriplyPublications.triplyRecords?.meta.pagination.total,
+        objects: resTriplyObjects.triplyRecords?.meta.pagination.total,
+      },
+    }
   }
 
-  private async getStoryRelations(id: string, lang?: string) {
+  private async getStoryRelations(
+    id: string,
+    locale = 'nl',
+    page?: number
+  ): Promise<ZoomLevel3RelationsType[]> {
     const res = await this.strapiGqlSdk.storyByLocale({ id })
-    let story = res?.story?.data
 
-    if (story?.attributes?.locale !== lang && lang) {
-      story = story?.attributes?.localizations?.data?.find(l => l.attributes?.locale === lang)
-    }
+    const story =
+      res?.story?.data?.attributes?.locale === locale
+        ? res?.story?.data
+        : res?.story?.data?.attributes?.localizations?.data?.find(
+            l => l.attributes?.locale === locale
+          )
 
-    const storyId = story?.id
-    const parentId = story?.attributes?.story?.data?.id
-    const childrensIds = story?.attributes?.stories?.data?.map(s => s.id) || []
-
-    if (!storyId) {
+    if (!story?.id) {
       throw CustomError.internalCritical('Story not found')
     }
 
-    const [storyRelations, relations, siblingsRes] = await Promise.all([
-      this.strapiGqlSdk.storiesLinkedToTheme({ id: storyId, locale: lang }),
-      this.strapiGqlSdk.storyTriplyRelations({ id: storyId }),
-      parentId && lang
-        ? this.storyService.getStorySiblings(parentId, id, lang)
-        : Promise.resolve([]),
-    ])
+    const storyId = story.id
+    const parentId = story.attributes?.story?.data?.id
+    const childrensIds =
+      (story.attributes?.stories?.data?.map(s => s.id).filter(Boolean) as string[]) || []
 
-    const siblingsIds = siblingsRes?.filter(s => !!s?.id).map(s => s.id as string) || []
-    const triplyRecords = (relations.story?.data?.attributes?.triplyRecords?.data || []).filter(
-      r => !!r.attributes?.recordId
+    const storyRelation = await this.getPaginatedStoryRelationsForStory(
+      storyId,
+      childrensIds,
+      locale,
+      parentId,
+      page
     )
 
-    const groupedRecords = this.groupTriplyRecordsByType(triplyRecords)
+    const triplyRelations = await this.getTriplyRelationsForStory(storyId, page)
 
-    const data = Object.entries(groupedRecords).map(([key, recordIds]) => {
-      const type = StrapiUtils.getEntityNameForRecordType(key as Enum_Triplyrecord_Type)
-      const randomRecordIds = getRandom2ItemsFromArray(recordIds)
-
-      return {
-        type,
-        paginatedRelations: randomRecordIds ?? [],
-      }
-    })
-
-    const storyIds = this.extractStoryIds(storyRelations, storyId)
-    const storiesRelationsIds = Array.from(
-      new Set([...storyIds, ...childrensIds, ...siblingsIds, parentId].filter(Boolean))
-    )
-
-    return [...data, { type: EntityNames.Stories, paginatedRelations: storiesRelationsIds || [] }]
+    // related records (archives, objects, people, publications) from triply (based on story theme)
+    // combine it all to return
+    return [...triplyRelations, storyRelation]
   }
 
   private async getStoryRelationsForLinkedItem(id: string, entityName: EntityNames, page?: number) {
     const res = await this.strapiGqlSdk.storiesLinkedToTriplyRecord({
       recordId: id,
       type: StrapiUtils.getRecordTypeForEntityName(entityName),
-      page: page || 1,
-      pageSize: 2,
+      pagination: { page: page || 1, pageSize: 2 },
     })
 
     const randomStories = (res.stories?.data || [])
@@ -242,100 +253,119 @@ export class ZoomLevel3Service {
     return res.data
   }
 
-  // private getGroupedRelationData(data: ZoomLevel3RelationData[], type: EntityNames) {
-  //   const groupedData: GroupedRelationData = {}
+  private async getStoryThemeIds(storyId: string, locale: string): Promise<string[]> {
+    const themes = await this.strapiGqlSdk.themes({
+      filters: { stories: { id: { eq: storyId } } },
+      locale,
+    })
 
-  //   for (const relationData of data) {
-  //     // const type = TriplyUtils.getEntityNameFromGraph(
-  //     //   relationData.graph,
-  //     //   relationData.sample_extern_1
-  //     // )
+    if (!themes.themes?.data) return []
 
-  //     if (!groupedData[type]) {
-  //       //TODO here we add total later
-  //       groupedData[type] = { count: relationData.count, groupedSampleData: {} }
-  //     }
+    return themes.themes?.data.reduce<string[]>((acc, curr) => {
+      if (curr.id) acc.push(curr.id)
+      return acc
+    }, [])
+  }
 
-  //     const group = groupedData[type] as RelationData
+  private async getPaginatedStoryRelationsForStory(
+    storyId: string,
+    childrenIds: string[],
+    locale: string,
+    parentId?: string | null,
+    page?: number
+  ): Promise<ZoomLevel3RelationsType> {
+    const themeIds = await this.getStoryThemeIds(storyId, locale)
 
-  //     if (externalEntityNames.includes(type)) {
-  //       if (relationData.sample_extern_1) {
-  //         group.groupedSampleData[relationData.sample_extern_1] = {
-  //           label: relationData.sample_extern_1_label || '',
-  //           groupedRelationData: {},
-  //         }
-  //       }
-
-  //       if (relationData.sample_extern_2) {
-  //         group.groupedSampleData[relationData.sample_extern_2] = {
-  //           label: relationData.sample_extern_2_label || '',
-  //           groupedRelationData: {},
-  //         }
-  //       }
-
-  //       continue
-  //     }
-
-  //     if (!group.groupedSampleData[relationData.sample]) {
-  //       group.groupedSampleData[relationData.sample] = {
-  //         label: relationData.sample_label,
-  //         groupedRelationData: {},
-  //       }
-  //     }
-
-  //     const groupSample = group.groupedSampleData[relationData.sample]
-  //     const relatedType = TriplyUtils.getEntityNameFromGraph(relationData.graph_2)
-
-  //     if (!groupSample.groupedRelationData[relatedType]) {
-  //       groupSample.groupedRelationData[relatedType] = {
-  //         count: relationData.count_2,
-  //         groupedSampleData: {},
-  //       }
-  //     }
-  //   }
-
-  //   return groupedData
-  // }
-
-  // private getFormattedGroupData(groupedData: GroupedRelationData) {
-  //   const formattedData: ZoomLevel3RelationsType[] = []
-
-  //   Object.entries(groupedData).map(([type, v]) => {
-  //     formattedData.push({
-  //       type: type as EntityNames,
-  //       total: parseInt(v.count, 10),
-  //     })
-  //   })
-
-  //   return formattedData
-  // }
-
-  // expects key to be record uri
-  // private formatTriplySampleData(key: string, sampleData: SampleData) {
-  //   return {
-  //     id: TriplyUtils.getIdFromUri(key),
-  //     type: TriplyUtils.getEntityNameFromUri(key),
-  //     title: sampleData.title,
-  //     relations,
-  //   }
-  // }
-
-  private extractStoryIds(response: StoriesLinkedToThemeQuery, excludeId?: string): string[] {
-    const themesData = response?.story?.data?.attributes?.themes?.data || []
-
-    const storyIds: string[] = []
-
-    for (const theme of themesData) {
-      for (const story of theme?.attributes?.stories?.data || []) {
-        if (!story.id || story.id === excludeId) {
-          continue
-        }
-        storyIds.push(story.id)
-      }
+    const storyFilters: StoryFiltersInput = { or: [{ themes: { id: { in: themeIds } } }] }
+    if (childrenIds.length) {
+      storyFilters.or?.push({ stories: { id: { in: childrenIds } } })
     }
 
-    // Remove duplicates if there are any
-    return [...new Set(storyIds)]
+    if (parentId) {
+      storyFilters.or?.push({ story: { id: { eq: parentId } } })
+    }
+
+    const paginatedRelatedStories = await this.strapiGqlSdk.stories({
+      filters: storyFilters,
+      locale,
+      publicationState: PublicationState.Live,
+      pagination: { page, pageSize: 2 },
+    })
+
+    const relationIds = paginatedRelatedStories.stories?.data.reduce<string[]>((acc, curr) => {
+      if (curr.id) {
+        acc.push(curr.id)
+      }
+
+      return acc
+    }, [])
+
+    return {
+      type: EntityNames.Stories,
+      paginatedRelations: relationIds,
+      total: paginatedRelatedStories.stories?.meta.pagination.total || 0,
+    }
+  }
+
+  private async getTriplyRelationsForStory(
+    storyId: string,
+    page?: number
+  ): Promise<ZoomLevel3RelationsType[]> {
+    const relatedTriplyTypesToQuery = Object.values(Enum_Triplyrecord_Type).filter(
+      t => t !== Enum_Triplyrecord_Type.Media
+    )
+
+    const paginatedTriplyRecordRelations = await Promise.all(
+      relatedTriplyTypesToQuery.map(type =>
+        this.strapiGqlSdk.storyTriplyRelations({
+          id: storyId,
+          page,
+          pageSize: 2,
+          type,
+        })
+      )
+    )
+
+    return this.groupData(paginatedTriplyRecordRelations)
+  }
+
+  private async getStorySiblingIds(id: string, locale: string, parentId?: string | null) {
+    if (!parentId) return []
+
+    const siblingsRes = await this.storyService.getStorySiblings(parentId, id, locale)
+
+    return siblingsRes?.filter(s => !!s?.id).map(s => s.id as string) || []
+  }
+
+  private groupData(recordRelations: StoryTriplyRelationsQuery[]): ZoomLevel3RelationsType[] {
+    const data: ZoomLevel3RelationsType[] = []
+
+    for (const recordRelation of recordRelations) {
+      const triplyRecords =
+        recordRelation.story?.data?.attributes?.triplyRecords?.data.filter(Boolean)
+
+      if (!triplyRecords?.length || !triplyRecords[0].attributes?.type) continue
+
+      const type = StrapiUtils.getEntityNameForRecordType(triplyRecords[0].attributes.type)
+
+      const paginatedRelations = triplyRecords
+        .map(r => r.attributes?.recordId)
+        .filter(Boolean) as string[]
+
+      data.push({ type, paginatedRelations })
+    }
+
+    return data
+  }
+
+  private extractStoryIds(response: StoriesQuery, excludeId?: string): string[] {
+    if (!response.stories?.data) return []
+
+    const filteredIds = response.stories.data
+      .map(s => s.id)
+      .filter(id => id && id !== excludeId) as string[]
+
+    return Array.from(new Set(filteredIds))
   }
 
   public async getStoriesRelationsForRecord(id: string, type: EntityNames, lang: string) {

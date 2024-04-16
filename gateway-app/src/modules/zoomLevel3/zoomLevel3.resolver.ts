@@ -24,6 +24,8 @@ import {
   ZoomLevel3Args,
   ZoomLevel3RelationsType,
   ZoomLevel3StoriesRelatedToRecordType,
+  ZoomLevel3StoryRelationsCountArgs,
+  ZoomLevel3StoryRelationsCountType,
 } from './zoomLevel3.type'
 import { ArchivesService } from '../archives/archives.service'
 import { ObjectsService } from '../objects/objects.service'
@@ -43,6 +45,11 @@ export class ZoomLevel3Resolver {
   @Query(() => [ZoomLevel3RelationsType], { nullable: true })
   public relations(@Args() args: ZoomLevel3Args, @Args() paginationArgs: PaginationArgs) {
     return this.zoomLevel3Service.getRelations(args.id, args.type, args?.lang, paginationArgs)
+  }
+
+  @Query(() => ZoomLevel3StoryRelationsCountType, { nullable: true })
+  public async storyRelationsCount(@Args() args: ZoomLevel3StoryRelationsCountArgs) {
+    return this.zoomLevel3Service.storyRelationsCount(args.storyId, args?.lang)
   }
 
   @Query(() => [ArchivesRecordZoomLevel3Type], { nullable: true })
