@@ -24,10 +24,13 @@ import {
   ZoomLevel3Args,
   ZoomLevel3RelationsType,
   ZoomLevel3StoriesRelatedToRecordType,
+  ZoomLevel3StoryRelationsCountArgs,
+  ZoomLevel3StoryRelationsCountType,
 } from './zoomLevel3.type'
 import { ArchivesService } from '../archives/archives.service'
 import { ObjectsService } from '../objects/objects.service'
 import { PeopleService } from '../people/people.service'
+import { PaginationArgs } from '../util/paginationArgs.type'
 
 @Resolver(ZoomLevel3RelationsType)
 export class ZoomLevel3Resolver {
@@ -40,8 +43,13 @@ export class ZoomLevel3Resolver {
   ) {}
 
   @Query(() => [ZoomLevel3RelationsType], { nullable: true })
-  public relations(@Args() args: ZoomLevel3Args) {
-    return this.zoomLevel3Service.getRelations(args.id, args.type, args?.lang)
+  public relations(@Args() args: ZoomLevel3Args, @Args() paginationArgs: PaginationArgs) {
+    return this.zoomLevel3Service.getRelations(args.id, args.type, args?.lang, paginationArgs)
+  }
+
+  @Query(() => ZoomLevel3StoryRelationsCountType, { nullable: true })
+  public async storyRelationsCount(@Args() args: ZoomLevel3StoryRelationsCountArgs) {
+    return this.zoomLevel3Service.storyRelationsCount(args.storyId, args?.lang)
   }
 
   @Query(() => [ArchivesRecordZoomLevel3Type], { nullable: true })
@@ -73,17 +81,14 @@ export class ZoomLevel3Resolver {
   public zoomLevel3Object(@Args('id') objectId: string) {
     return this.zoomLevel3Service.getDetail(objectId, EntityNames.Objects)
   }
-
   @Query(() => PeopleZoomLevel3DetailType, { nullable: true })
   public zoomLevel3Person(@Args('id') objectId: string) {
     return this.zoomLevel3Service.getDetail(objectId, EntityNames.People)
   }
-
   @Query(() => PublicationZoomLevel3DetailType, { nullable: true })
   public async zoomLevel3Publication(@Args('id') objectId: string) {
     return this.zoomLevel3Service.getDetail(objectId, EntityNames.Publications)
   }
-
   @Query(() => ArchiveZoomLevel3DetailType, { nullable: true })
   public async zoomLevel3Archive(@Args('id') objectId: string) {
     return this.zoomLevel3Service.getDetail(objectId, EntityNames.Archives)

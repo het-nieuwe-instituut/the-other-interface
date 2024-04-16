@@ -2,13 +2,15 @@ import { Grid, GridItem } from '@chakra-ui/react'
 import { DetailedRecord } from '../DetailedRecord'
 import { usePresenter } from './usePresenter'
 import { Record } from '../Record/Record'
+import { AllRelationTotalsType } from '../RelatedCategory'
 
 interface Props {
   gridRow: string
+  allRelationTotals?: AllRelationTotalsType
 }
 
-export const RelatedStories: React.FC<Props> = ({ gridRow }) => {
-  const { positionedStories } = usePresenter()
+export const RelatedStories: React.FC<Props> = ({ gridRow, allRelationTotals }) => {
+  const { positionedStories } = usePresenter(allRelationTotals)
 
   return (
     <GridItem gridRow={gridRow} gridColumn="2" color="white">

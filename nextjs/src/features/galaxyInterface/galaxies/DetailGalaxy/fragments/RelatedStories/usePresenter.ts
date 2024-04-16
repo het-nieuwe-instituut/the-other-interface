@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation'
 
 import { useRecordRelations } from '@/features/record/hooks/useRecordRelations'
 import { PositionedRecord } from '../types'
+import { AllRelationTotalsType } from '../RelatedCategory'
 
 const positioningTemplate: PositioningTemplate[] = [
   {
@@ -29,18 +30,20 @@ const positioningTemplate: PositioningTemplate[] = [
   },
 ]
 
-export const usePresenter = () => {
+export const usePresenter = (allRelationTotals?: AllRelationTotalsType) => {
   const params = useParams()
   const id = params?.id as string
   const recordCategory = params?.category as CloudCategory
-  const { data } = useRecordRelations(recordCategory, id)
+  const maxPages = Math.ceil((allRelationTotals?.[CATEGORIES.stories] || 2) / 2)
+
+  const { data } = useRecordRelations(recordCategory, id, maxPages)
 
   const positionedStories = useMemo(() => {
     if (!data?.relations) return []
 
     const storiesRelations = data?.relations.find(relation =>
       isStoryCategory(relation.type?.toLocaleLowerCase())
-    )?.randomRelations
+    )?.paginatedRelations
 
     if (!storiesRelations) return []
 

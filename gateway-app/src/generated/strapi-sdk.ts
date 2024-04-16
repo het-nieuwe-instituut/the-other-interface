@@ -7929,6 +7929,22 @@ export type StoriesQuery = {
   } | null
 }
 
+export type StoriesIdsQueryVariables = Exact<{
+  filters?: InputMaybe<StoryFiltersInput>
+  pagination?: InputMaybe<PaginationArg>
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>
+  publicationState?: InputMaybe<PublicationState>
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>
+}>
+
+export type StoriesIdsQuery = {
+  __typename?: 'Query'
+  stories?: {
+    __typename?: 'StoryEntityResponseCollection'
+    data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
+  } | null
+}
+
 export type StoryQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ID']>
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
@@ -9927,6 +9943,7 @@ export type StoryWithoutRelationsQuery = {
 export type StoriesLinkedToTriplyRecordQueryVariables = Exact<{
   recordId: Scalars['String']
   type: Scalars['String']
+  pagination?: InputMaybe<PaginationArg>
 }>
 
 export type StoriesLinkedToTriplyRecordQuery = {
@@ -10401,6 +10418,8 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
 export type StoriesLinkedToThemeQueryVariables = Exact<{
   id: Scalars['ID']
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
+  page?: InputMaybe<Scalars['Int']>
+  pageSize?: InputMaybe<Scalars['Int']>
 }>
 
 export type StoriesLinkedToThemeQuery = {
@@ -10557,6 +10576,9 @@ export type StoriesByIdsQuery = {
 
 export type StoryTriplyRelationsQueryVariables = Exact<{
   id: Scalars['ID']
+  type?: InputMaybe<Scalars['String']>
+  page?: InputMaybe<Scalars['Int']>
+  pageSize?: InputMaybe<Scalars['Int']>
 }>
 
 export type StoryTriplyRelationsQuery = {
@@ -17998,6 +18020,27 @@ export const StoriesDocument = gql`
   ${StoryFragmentFragmentDoc}
   ${ResponseCollectionMetaFragmentFragmentDoc}
 `
+export const StoriesIdsDocument = gql`
+  query storiesIds(
+    $filters: StoryFiltersInput
+    $pagination: PaginationArg
+    $sort: [String]
+    $publicationState: PublicationState = LIVE
+    $locale: I18NLocaleCode
+  ) {
+    stories(
+      filters: $filters
+      pagination: $pagination
+      sort: $sort
+      publicationState: $publicationState
+      locale: $locale
+    ) {
+      data {
+        id
+      }
+    }
+  }
+`
 export const StoryDocument = gql`
   query story($id: ID, $locale: I18NLocaleCode) {
     story(id: $id, locale: $locale) {
@@ -18103,8 +18146,15 @@ export const StoryWithoutRelationsDocument = gql`
   ${StoryWithoutRelationsFragmentFragmentDoc}
 `
 export const StoriesLinkedToTriplyRecordDocument = gql`
-  query storiesLinkedToTriplyRecord($recordId: String!, $type: String!) {
-    stories(filters: { triplyRecords: { recordId: { eq: $recordId }, type: { eq: $type } } }) {
+  query storiesLinkedToTriplyRecord(
+    $recordId: String!
+    $type: String!
+    $pagination: PaginationArg
+  ) {
+    stories(
+      pagination: $pagination
+      filters: { triplyRecords: { recordId: { eq: $recordId }, type: { eq: $type } } }
+    ) {
       data {
         id
         attributes {
@@ -18135,7 +18185,7 @@ export const StoriesLinkedToTriplyRecordExtendedDocument = gql`
   ${StoryFragmentFragmentDoc}
 `
 export const StoriesLinkedToThemeDocument = gql`
-  query storiesLinkedToTheme($id: ID!, $locale: I18NLocaleCode) {
+  query storiesLinkedToTheme($id: ID!, $locale: I18NLocaleCode, $page: Int, $pageSize: Int) {
     story(id: $id, locale: $locale) {
       data {
         id
@@ -18144,7 +18194,7 @@ export const StoriesLinkedToThemeDocument = gql`
             data {
               id
               attributes {
-                stories {
+                stories(pagination: { page: $page, pageSize: $pageSize }) {
                   data {
                     id
                   }
@@ -18183,12 +18233,15 @@ export const StoriesByIdsDocument = gql`
   ${StoryWithoutRelationsFragmentFragmentDoc}
 `
 export const StoryTriplyRelationsDocument = gql`
-  query storyTriplyRelations($id: ID!) {
+  query storyTriplyRelations($id: ID!, $type: String, $page: Int, $pageSize: Int) {
     story(id: $id) {
       data {
         id
         attributes {
-          triplyRecords {
+          triplyRecords(
+            filters: { type: { eq: $type } }
+            pagination: { page: $page, pageSize: $pageSize }
+          ) {
             data {
               ...BaseTriplyRecordFragment
             }
@@ -18474,6 +18527,20 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
             ...wrappedRequestHeaders,
           }),
         'stories',
+        'query'
+      )
+    },
+    storiesIds(
+      variables?: StoriesIdsQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<StoriesIdsQuery> {
+      return withWrapper(
+        wrappedRequestHeaders =>
+          client.request<StoriesIdsQuery>(StoriesIdsDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'storiesIds',
         'query'
       )
     },

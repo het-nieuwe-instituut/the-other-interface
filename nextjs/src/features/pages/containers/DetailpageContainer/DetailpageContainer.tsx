@@ -2,7 +2,7 @@
 import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
 import { Box } from '@chakra-ui/react'
 import { StoryByIdQuery, LandingpageBySlugQuery } from 'src/generated/graphql'
-import { DetailGalaxy } from '@/features/galaxyInterface/galaxies/DetailGalaxy/DetailGalaxy'
+import { DetailGalaxy } from '@/features/galaxyInterface/galaxies/DetailGalaxy/DetailGalaxy/DetailGalaxy'
 import { RecordLayer } from '@/features/record/containers/RecordLayer/RecordLayer'
 import { StoryLayer } from '@/features/shared/components/Layers/StoryLayer/StoryLayer'
 import { isCloudCategory, isStoryCategory } from '@/features/shared/utils/categories'
@@ -25,7 +25,6 @@ interface Props {
 
 export const DetailpageContainer: React.FC<Props> = ({ category, isDraftMode }) => {
   usePresenter(isDraftMode)
-
   const Layer = () => {
     if (isCloudCategory(category)) return <RecordLayer />
     if (isStoryCategory(category)) return <StoryLayer />

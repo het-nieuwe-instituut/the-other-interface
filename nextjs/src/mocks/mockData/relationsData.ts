@@ -3,7 +3,7 @@ export const relationsData = {
     {
       type: 'People',
       total: 26,
-      randomRelations: [
+      paginatedRelations: [
         {
           id: '12473',
           label: 'Eesteren, Cornelis van',
@@ -53,7 +53,7 @@ export const relationsData = {
     {
       type: 'Archives',
       total: 37,
-      randomRelations: [
+      paginatedRelations: [
         {
           id: '110448552',
           label: 'Huis P. Goutars-Scholte',
@@ -87,7 +87,7 @@ export const relationsData = {
     {
       type: 'Objects',
       total: 820,
-      randomRelations: [
+      paginatedRelations: [
         {
           id: '126',
           label: 'Atelierhuis Van Doesburg',
@@ -126,7 +126,7 @@ export const relationsData = {
     {
       type: 'Publications',
       total: 590,
-      randomRelations: [
+      paginatedRelations: [
         {
           id: '300328864',
           label:
@@ -166,7 +166,7 @@ export const relationsData = {
     {
       type: 'Stories',
       total: 10,
-      randomRelations: [
+      paginatedRelations: [
         {
           id: '23',
           label: 'Werkbezoek atelierwoning Van Doesburg en het Centre Pompidou ',
