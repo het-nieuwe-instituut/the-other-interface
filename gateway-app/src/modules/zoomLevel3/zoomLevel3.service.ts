@@ -4,6 +4,7 @@ import {
   PublicationState,
   Sdk,
   StoriesQuery,
+  StoryFiltersInput,
   StoryTriplyRelationsQuery,
 } from 'src/generated/strapi-sdk'
 import { StrapiUtils } from '../strapi/strapi.utils'
@@ -275,31 +276,41 @@ export class ZoomLevel3Service {
   ): Promise<ZoomLevel3RelationsType> {
     const themeIds = await this.getStoryThemeIds(storyId, locale)
 
-    // TODO: why are we getting stories related to themes? shouldnt we get stories related to the story itself?
-    const paginatedStoryRelations = await this.strapiGqlSdk.stories({
-      filters: { themes: { id: { in: themeIds } } },
+    const storyFilters: StoryFiltersInput = { or: [{ themes: { id: { in: themeIds } } }] }
+    if (childrenIds.length) {
+      storyFilters.or?.push({ stories: { id: { in: childrenIds } } })
+    }
+
+    if (parentId) {
+      storyFilters.or?.push({ story: { id: { eq: parentId } } })
+    }
+
+    const paginatedRelatedStories = await this.strapiGqlSdk.stories({
+      filters: storyFilters,
       locale,
       publicationState: PublicationState.Live,
       pagination: { page, pageSize: 2 },
     })
-    const storyIds = this.extractStoryIds(paginatedStoryRelations, storyId)
 
-    const siblingsIds = await this.getStorySiblingIds(storyId, locale, parentId)
+    const relationIds = paginatedRelatedStories.stories?.data.reduce<string[]>((acc, curr) => {
+      if (curr.id) {
+        acc.push(curr.id)
+      }
 
-    // TODO: only the storyIds are paginated, the other relations are not paginated, but we are returning these
-    // as paginatedRelations. whats going on here?
-    const paginatedRelations = Array.from(
-      new Set([...storyIds, ...childrenIds, ...siblingsIds, parentId])
-    ).filter(Boolean) as string[]
+      return acc
+    }, [])
 
-    return { type: EntityNames.Stories, paginatedRelations }
+    return {
+      type: EntityNames.Stories,
+      paginatedRelations: relationIds,
+      total: paginatedRelatedStories.stories?.meta.pagination.total || 0,
+    }
   }
 
   private async getTriplyRelationsForStory(
     storyId: string,
     page?: number
   ): Promise<ZoomLevel3RelationsType[]> {
-    // TODO: media type is possible to link in cms, why are we not getting media relations?
     const relatedTriplyTypesToQuery = Object.values(Enum_Triplyrecord_Type).filter(
       t => t !== Enum_Triplyrecord_Type.Media
     )
