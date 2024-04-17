@@ -1966,6 +1966,24 @@ export type StoriesQueryVariables = Exact<{
 
 export type StoriesQuery = { __typename?: 'Query', stories: { __typename?: 'StoryEntityResponseCollection', data?: { __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, slug?: string | null, shortDescription?: string | null } | null } | null, meta?: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', page: number } } | null } };
 
+export type SearchByStoriesQueryVariables = Exact<{
+  searchTerm?: InputMaybe<Scalars['String']>;
+  start?: InputMaybe<Scalars['Float']>;
+  limit?: InputMaybe<Scalars['Float']>;
+  locale?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type SearchByStoriesQuery = { __typename?: 'Query', stories: { __typename?: 'StoryEntityResponseCollection', data?: { __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, slug?: string | null, shortDescription?: string | null } | null } | null } };
+
+export type SearchByStoriesAmountQueryVariables = Exact<{
+  searchTerm?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type SearchByStoriesAmountQuery = { __typename?: 'Query', stories: { __typename?: 'StoryEntityResponseCollection', meta?: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', total: number } } | null } };
+
 export type StoriesRealtedWithinThemeQueryVariables = Exact<{
   id: Scalars['String'];
   locale?: InputMaybe<Scalars['String']>;
@@ -2871,6 +2889,35 @@ export const StoriesDocument = gql`
   }
 }
     `;
+export const SearchByStoriesDocument = gql`
+    query searchByStories($searchTerm: String, $start: Float, $limit: Float, $locale: String) {
+  stories(
+    filters: {title: {containsi: $searchTerm}}
+    pagination: {start: $start, limit: $limit}
+    locale: $locale
+  ) {
+    data {
+      id
+      attributes {
+        title
+        slug
+        shortDescription
+      }
+    }
+  }
+}
+    `;
+export const SearchByStoriesAmountDocument = gql`
+    query searchByStoriesAmount($searchTerm: String, $locale: String) {
+  stories(filters: {title: {containsi: $searchTerm}}, locale: $locale) {
+    meta {
+      pagination {
+        total
+      }
+    }
+  }
+}
+    `;
 export const StoriesRealtedWithinThemeDocument = gql`
     query storiesRealtedWithinTheme($id: String!, $locale: String) {
   storiesRealtedWithinTheme(id: $id, locale: $locale) {
@@ -3634,6 +3681,12 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     stories(variables?: StoriesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<StoriesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<StoriesQuery>(StoriesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'stories', 'query');
+    },
+    searchByStories(variables?: SearchByStoriesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<SearchByStoriesQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<SearchByStoriesQuery>(SearchByStoriesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'searchByStories', 'query');
+    },
+    searchByStoriesAmount(variables?: SearchByStoriesAmountQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<SearchByStoriesAmountQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<SearchByStoriesAmountQuery>(SearchByStoriesAmountDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'searchByStoriesAmount', 'query');
     },
     storiesRealtedWithinTheme(variables: StoriesRealtedWithinThemeQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<StoriesRealtedWithinThemeQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<StoriesRealtedWithinThemeQuery>(StoriesRealtedWithinThemeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'storiesRealtedWithinTheme', 'query');

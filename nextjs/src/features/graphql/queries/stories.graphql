@@ -15,3 +15,39 @@ query stories($pagination: PaginationArg, $locale: String) {
         }
     }
 }
+
+query searchByStories($searchTerm: String, $start: Float, $limit: Float, $locale: String) {
+    stories(filters: { 
+      title: {
+        containsi: $searchTerm
+      }
+    },
+    pagination: {
+      start: $start,
+      limit: $limit
+    }, locale: $locale) {
+        data {
+            id
+            attributes {
+                title
+                slug
+                shortDescription
+            }
+        }
+    }
+}
+
+
+query searchByStoriesAmount($searchTerm: String, $locale: String) {
+    stories(filters: { 
+      title: {
+        containsi: $searchTerm
+      }
+    }, locale: $locale) {
+        meta {
+            pagination {
+                total
+            }
+        }
+    }
+}
