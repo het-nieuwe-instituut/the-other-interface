@@ -35,3 +35,9 @@ export const isCloudCategory = (category?: string) => {
 
   return (CLOUD_CATEGORIES_ARRAY as string[]).includes(category)
 }
+
+export const isSearchCategory = (category?: string) => {
+  if (!category) return false
+
+  return (SEARCH_CATEGORIES_ARRAY as string[]).includes(category)
+}

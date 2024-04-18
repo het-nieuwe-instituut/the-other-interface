@@ -3,7 +3,7 @@ import { ZOOM2_RECORDS_PER_PAGE } from '@/features/shared/constants/mainConstant
 import { useZoom2SearchResultAmount } from '@/features/shared/hooks/queries/useZoom2SearchResultAmount'
 import { usePagination } from '@/features/shared/hooks/usePagination'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
-import { isCloudCategory } from '@/features/shared/utils/categories'
+import { isSearchCategory } from '@/features/shared/utils/categories'
 import { notFound } from 'next/navigation'
 import { useSelector } from 'react-redux'
 
@@ -11,7 +11,7 @@ export const usePresenter = () => {
   const isSearchModeActive = useSelector((state: State) => state.shared.isSearchModeActive)
   const { category, search } = useZoom2Params()
 
-  if (!isCloudCategory(category)) {
+  if (!isSearchCategory(category)) {
     notFound()
   }
 
@@ -20,7 +20,7 @@ export const usePresenter = () => {
     search
   )
 
-  const searchResultAmount = Number(resultAmount?.zoomLevel2Amount?.total) || 0
+  const searchResultAmount = Number(resultAmount) || 0
   const searchPageAmount = searchResultAmount
     ? Math.ceil(searchResultAmount / ZOOM2_RECORDS_PER_PAGE)
     : 1

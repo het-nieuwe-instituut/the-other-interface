@@ -20,9 +20,9 @@ export const LandingpageContainer: React.FC<Props> = ({ editorialData, descripti
 
       {editorialData && (
         <EditorialLayer
-          title={editorialData.Title}
+          title={editorialData?.Title}
           preface={description}
-          components={editorialData.components}
+          components={editorialData?.components}
         />
       )}
     </Box>

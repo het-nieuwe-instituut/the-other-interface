@@ -24,7 +24,7 @@ export const usePresenter = (isCollapsable?: boolean) => {
 
   const { t } = useTypeSafeTranslation('category')
   const { pageCategory } = usePageCategory()
-  const { data } = useZoom2SearchResultAmount(pageCategory, search)
+  const { data: total } = useZoom2SearchResultAmount(pageCategory, search)
 
   const [inputValue, setInputValue] = useState('')
 
@@ -125,7 +125,7 @@ export const usePresenter = (isCollapsable?: boolean) => {
       )
     },
     handleGoClick,
-    searchResultAmount: data?.zoomLevel2Amount?.total || '0',
+    searchResultAmount: total || '0',
     inputValue,
     handleInputChange,
     searchBarRef,

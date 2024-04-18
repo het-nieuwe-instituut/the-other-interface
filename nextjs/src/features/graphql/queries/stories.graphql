@@ -16,22 +16,30 @@ query stories($pagination: PaginationArg, $locale: String) {
     }
 }
 
-query searchByStories($searchTerm: String, $start: Float, $limit: Float, $locale: String) {
+query searchByStories($searchTerm: String, $page: Float, $pageSize: Float, $locale: String) {
     stories(filters: { 
       title: {
         containsi: $searchTerm
       }
     },
     pagination: {
-      start: $start,
-      limit: $limit
+      page: $page,
+      pageSize: $pageSize
     }, locale: $locale) {
         data {
             id
             attributes {
                 title
-                slug
-                shortDescription
+                components {
+                    ... on ComponentModulesImage {
+                        ...imageModuleFragment
+                    }
+                }
+            }
+        },
+        meta {
+            pagination {
+                page
             }
         }
     }

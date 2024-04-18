@@ -1,3 +1,4 @@
+import { RecordType } from '@/features/galaxyInterface/galaxies/CategoryGalaxy/fragments/types'
 import { imageBasePath } from '@/features/modules/modulesConstants'
 import {
   ComponentModulesImage,
@@ -30,5 +31,13 @@ export const extractStoryData = (story: StoryEntity | null) => {
     locale: storyLocale || 'nl',
     id: storyId || `${Math.floor(Math.random() * (99999 + 1))}`,
     description: story?.attributes?.description ?? '',
+  }
+}
+
+export const storyToRecordMapper = (story: StoryEntity | null | undefined): RecordType => {
+  return {
+    title: story?.attributes?.title ?? '',
+    thumbnail: findImageUrl(story?.attributes?.components ?? []) ?? '',
+    id: story?.id || `${Math.floor(Math.random() * (99999 + 1))}`,
   }
 }

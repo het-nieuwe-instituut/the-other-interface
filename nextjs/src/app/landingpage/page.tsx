@@ -15,6 +15,7 @@ export default async function Page({
   const api = initApiServerService()
   const isStories = category === SEARCH_CATEGORIES.stories
   let editorialData: Homepage | Landingpage | undefined | null
+  let description: string | null | undefined
 
   if (isStories) {
     const data = await api?.homepage({ locale: lang })
@@ -26,13 +27,14 @@ export default async function Page({
       publicationState: isEnabled ? PublicationState.Preview : PublicationState.Live,
     })
     editorialData = data?.landingpages?.data[0]?.attributes as Landingpage
+    description = editorialData?.Description
   }
 
   return (
     <LandingpageContainer
       editorialData={editorialData}
       category={category as CloudCategory}
-      description={isStories ? '' : editorialData.Title}
+      description={description}
     />
   )
 }

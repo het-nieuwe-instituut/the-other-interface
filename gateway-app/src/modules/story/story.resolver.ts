@@ -50,7 +50,7 @@ export class StoryResolver {
     private readonly storyService: StoryService
   ) {}
 
-  @Query(() => StoryEntityResponseCollection)
+  @Query(() => StoryEntityResponse)
   public async storyByLocale(
     @Args('filters', { nullable: true }) filters?: StoryFiltersInput,
     @Args('publicationState', { nullable: true }) publicationState?: PublicationState,

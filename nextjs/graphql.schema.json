@@ -12058,7 +12058,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "StoryEntityResponseCollection",
+                "name": "StoryEntityResponse",
                 "ofType": null
               }
             },
@@ -13622,9 +13622,17 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "OBJECT",
-              "name": "StoryEntity",
-              "ofType": null
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "StoryEntity",
+                  "ofType": null
+                }
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
