@@ -3,7 +3,12 @@ import { CloudCategory, SEARCH_CATEGORIES } from '@/features/shared/utils/catego
 import initApiServerService from '@/features/shared/utils/initApiServerService'
 import { draftMode } from 'next/headers'
 import { PublicationState } from '@/features/shared/types/enums'
-import { Homepage, Landingpage } from 'src/generated/graphql'
+import { HomepageQuery, LandingpageBySlugQuery } from 'src/generated/graphql'
+
+export type HomeOrLadingType =
+  | HomepageQuery['homepage']['data']['attributes']
+  | LandingpageBySlugQuery['landingpages']['data'][0]['attributes']
+  | null
 
 export default async function Page({
   searchParams,
@@ -14,19 +19,20 @@ export default async function Page({
   const { isEnabled } = draftMode()
   const api = initApiServerService()
   const isStories = category === SEARCH_CATEGORIES.stories
-  let editorialData: Homepage | Landingpage | undefined | null
+  let editorialData: HomeOrLadingType
   let description: string | null | undefined
 
   if (isStories) {
     const data = await api?.homepage({ locale: lang })
-    editorialData = data?.homepage?.data?.attributes as Homepage
+
+    editorialData = data.homepage.data.attributes
   } else {
     const data = await api?.landingpageBySlug({
       slug: category,
       locale: lang,
       publicationState: isEnabled ? PublicationState.Preview : PublicationState.Live,
     })
-    editorialData = data?.landingpages?.data[0]?.attributes as Landingpage
+    editorialData = data?.landingpages?.data[0]?.attributes
     description = editorialData?.Description
   }
 

@@ -1,13 +1,13 @@
 import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
 import { EditorialLayer } from '@/features/shared/components/Layers/EditorialLayer/EditorialLayer'
 import { CloudCategory } from '@/features/shared/utils/categories'
-import { Homepage, Landingpage } from 'src/generated/graphql'
 import { CategoryGalaxy } from '../../../galaxyInterface/galaxies/CategoryGalaxy/CategoryGalaxy'
 import { Box } from '@chakra-ui/react'
+import { HomeOrLadingType } from 'src/app/landingpage/page'
 
 interface Props {
   category: CloudCategory
-  editorialData?: Homepage | Landingpage | undefined | null
+  editorialData?: HomeOrLadingType
   description?: string | null
 }
 
