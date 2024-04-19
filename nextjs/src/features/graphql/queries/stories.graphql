@@ -39,21 +39,7 @@ query searchByStories($searchTerm: String, $page: Float, $pageSize: Float, $loca
         },
         meta {
             pagination {
-                page
-            }
-        }
-    }
-}
-
-
-query searchByStoriesAmount($searchTerm: String, $locale: String) {
-    stories(filters: { 
-      title: {
-        containsi: $searchTerm
-      }
-    }, locale: $locale) {
-        meta {
-            pagination {
+                page, 
                 total
             }
         }

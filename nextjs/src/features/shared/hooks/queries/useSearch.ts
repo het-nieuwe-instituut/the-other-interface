@@ -7,12 +7,12 @@ import {
   SEARCH_CATEGORIES,
   SearchCategory,
 } from '@/features/shared/utils/categories'
-import { ZOOM2_RECORDS_PER_PAGE } from '../../constants/mainConstants'
 import { useSearchParams } from 'next/navigation'
 import { storyToRecordMapper } from '../../helpers/extractStoryData'
+import { ZOOM2_RECORDS_PER_PAGE } from '../../constants/mainConstants'
 import { StoryEntity } from 'src/generated/graphql'
 
-export function useZoom2SearchResult({
+export function useSearch({
   category,
   text,
   page = 1,
@@ -24,43 +24,52 @@ export function useZoom2SearchResult({
   enabled?: boolean
 }) {
   const api = initApiClientService()
-  const entityName = CATEGORIES_TO_ENTITY_MAPPER[category as CloudCategory]
-
   const searchParams = useSearchParams()
   const lang = searchParams?.get('lang')
 
   const queryFn = async () => {
     if (category === SEARCH_CATEGORIES.stories) {
-      const data = await api.searchByStories({
+      const response = await api.searchByStories({
         searchTerm: text || undefined,
         locale: lang ?? 'nl',
         page,
         pageSize: ZOOM2_RECORDS_PER_PAGE,
       })
-      const stories = data?.stories?.data?.filter(Boolean).map(story => storyToRecordMapper(story as StoryEntity)) ?? []
-      return stories
+      const stories =
+        response?.stories?.data
+          ?.filter(Boolean)
+          .map(story => storyToRecordMapper(story as StoryEntity)) ?? []
+      const total = response?.stories?.meta?.pagination?.total
+      return { items: stories, total }
     } else {
-      const data = await api.Zoom2({
-        entityName,
+      const dataPromise = api.Zoom2({
+        entityName: CATEGORIES_TO_ENTITY_MAPPER[category as CloudCategory],
         text: text || undefined,
         page,
         pageSize: ZOOM2_RECORDS_PER_PAGE,
       })
+      const countPromise = api.Zoom2Amount({
+        entityName: CATEGORIES_TO_ENTITY_MAPPER[category as CloudCategory],
+        text: text || undefined,
+      })
+
+      const [data, totalData] = await Promise.all([dataPromise, countPromise])
       const records =
         data?.zoomLevel2?.nodes?.map(node => ({
           id: node.id,
           title: node.title,
           thumbnail: node.thumbnail,
         })) ?? []
+      const total = totalData.zoomLevel2Amount.total
 
-      return records
+      return { items: records, total }
     }
   }
 
   const queryKey =
     category === SEARCH_CATEGORIES.stories
       ? ['searchByStories', category, text, page, lang]
-      : ['Zoom2', entityName, text, page]
+      : ['search', category, text, page]
 
   return useQuery(queryKey, queryFn, {
     enabled,

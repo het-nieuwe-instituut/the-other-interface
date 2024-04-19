@@ -2,10 +2,10 @@ import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { useRouter } from 'next/navigation'
 
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
-import { useZoom2SearchResult } from '@/features/shared/hooks/queries/useZoom2SearchResult'
 import { useState } from 'react'
 import { CategoryCloud } from '../types'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
+import { useSearch } from '@/features/shared/hooks/queries/useSearch'
 
 export const usePresenter = (cloud: CategoryCloud) => {
   const { t } = useTypeSafeTranslation('homepage')
@@ -14,7 +14,7 @@ export const usePresenter = (cloud: CategoryCloud) => {
   const [enabled, setEnabled] = useState(false)
   const { title: category, size, cloudPosition, titlePosition } = cloud
 
-  const { data } = useZoom2SearchResult({
+  const { data } = useSearch({
     category,
     enabled,
   })
@@ -33,6 +33,6 @@ export const usePresenter = (cloud: CategoryCloud) => {
     size,
     cloudPosition,
     titlePosition,
-    data,
+    data: data?.items || [],
   }
 }

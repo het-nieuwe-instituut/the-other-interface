@@ -1,6 +1,6 @@
 import { State } from '@/features/shared/configs/store'
 import { ZOOM2_RECORDS_PER_PAGE } from '@/features/shared/constants/mainConstants'
-import { useZoom2SearchResultAmount } from '@/features/shared/hooks/queries/useZoom2SearchResultAmount'
+import { useSearch } from '@/features/shared/hooks/queries/useSearch'
 import { usePagination } from '@/features/shared/hooks/usePagination'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 import { isSearchCategory } from '@/features/shared/utils/categories'
@@ -15,12 +15,14 @@ export const usePresenter = () => {
     notFound()
   }
 
-  const { data: resultAmount, isLoading: isResultAmountLoading } = useZoom2SearchResultAmount(
+  const { data, isLoading: isResultAmountLoading } = useSearch({
     category,
-    search
-  )
+    text: search,
+  })
 
-  const searchResultAmount = Number(resultAmount) || 0
+  const { total: resultAmount } = data || { total: 0 }
+
+  const searchResultAmount = Number(resultAmount)
   const searchPageAmount = searchResultAmount
     ? Math.ceil(searchResultAmount / ZOOM2_RECORDS_PER_PAGE)
     : 1
