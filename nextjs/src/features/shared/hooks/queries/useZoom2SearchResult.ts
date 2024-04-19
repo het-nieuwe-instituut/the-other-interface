@@ -37,8 +37,8 @@ export function useZoom2SearchResult({
         page,
         pageSize: ZOOM2_RECORDS_PER_PAGE,
       })
-      const stories = data?.stories?.data?.map(story => storyToRecordMapper(story as StoryEntity)) ?? []
-      return  stories 
+      const stories = data?.stories?.data?.filter(Boolean).map(story => storyToRecordMapper(story as StoryEntity)) ?? []
+      return stories
     } else {
       const data = await api.Zoom2({
         entityName,
@@ -46,11 +46,12 @@ export function useZoom2SearchResult({
         page,
         pageSize: ZOOM2_RECORDS_PER_PAGE,
       })
-      const records = data?.zoomLevel2?.nodes?.map(node => ({
-        id: node.id,
-        title: node.title,
-        thumbnail: node.thumbnail,
-      })) ?? []
+      const records =
+        data?.zoomLevel2?.nodes?.map(node => ({
+          id: node.id,
+          title: node.title,
+          thumbnail: node.thumbnail,
+        })) ?? []
 
       return records
     }

@@ -1,5 +1,5 @@
 export type RecordType = {
-  id?: string | null
+  id: string
   thumbnail?: string | null
   title?: string | null
 }

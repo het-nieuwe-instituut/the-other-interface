@@ -34,10 +34,10 @@ export const extractStoryData = (story: StoryEntity | null) => {
   }
 }
 
-export const storyToRecordMapper = (story: StoryEntity | null | undefined): RecordType => {
+export const storyToRecordMapper = (story: StoryEntity): RecordType => {
   return {
     title: story?.attributes?.title ?? '',
     thumbnail: findImageUrl(story?.attributes?.components ?? []) ?? '',
-    id: story?.id || `${Math.floor(Math.random() * (99999 + 1))}`,
+    id: story.id,
   }
 }
