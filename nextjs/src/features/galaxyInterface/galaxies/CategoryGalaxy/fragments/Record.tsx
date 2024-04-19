@@ -9,7 +9,6 @@ import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 import { RecordType } from './types'
 
-
 type Props = {
   record: RecordType & {
     position: Position

@@ -1,5 +1,5 @@
 import { useSearchParams } from 'next/navigation'
-import {  SearchCategory } from '@/features/shared/utils/categories'
+import { SearchCategory } from '@/features/shared/utils/categories'
 
 export const useZoom2Params = () => {
   const searchParams = useSearchParams()
