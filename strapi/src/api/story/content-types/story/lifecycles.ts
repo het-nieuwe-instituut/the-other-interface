@@ -3,11 +3,10 @@ import slugify from 'slugify'
 
 const { ValidationError } = utils.errors
 const storyApi = 'api::story.story'
-const storyLocaleApi = 'api::story.stories_localization_links'
 
 export default {
   async beforeCreate(event) {
-    await checkIfParentIsNotAChild(event)
+    await checkParentChildConstraintsOrThrow(event)
 
     if (!event.params.data.slug) {
       throw new ValidationError('slug must be provided')
@@ -19,7 +18,7 @@ export default {
   },
 
   async beforeUpdate(event) {
-    await checkIfParentIsNotAChild(event)
+    await checkParentChildConstraintsOrThrow(event)
 
     const story = await strapi.entityService.findOne(storyApi, event.params.where.id)
 
@@ -57,18 +56,21 @@ async function applyToAllLocales(event) {
     }
 
     if (event.params.data.parent_story !== undefined) {
-      // TODO
-      // find locales of the parent story
-      // set locales' parent_story to the parent story's locale
+      const parentId = event.params.data.parent_story
+      if (parentId === null) {
+        data['parent_story'] = null
+      } else {
+        await changeOtherLocalesParent(parentId, event.result.localizations)
+      }
     }
 
     if (event.params.data.child_stories !== undefined) {
-      const childrenIds = event.params.data.child_stories?.join(', ')
+      const childrenIds = event.params.data.child_stories
 
-      if (!childrenIds) {
+      if (!childrenIds.length) {
         await setOtherLocalesChildrenToNull(event.result.localizations)
       } else {
-        await changeOtherLocalesChildren(childrenIds, event.result.localizations)
+        await changeOtherLocalesChildren(childrenIds, event.result)
       }
     }
 
@@ -78,7 +80,54 @@ async function applyToAllLocales(event) {
   }
 }
 
-async function checkIfParentIsNotAChild(event) {
+async function checkParentChildConstraintsOrThrow(event) {
+  const parentId = event.params.data.parent_story
+  const childrenIds = event.params.data.child_stories
+  const id = event.params.where.id
+
+  // cannot be parent of itself
+  if (parentId === id) {
+    throw new ValidationError('Story cannot be parent of itself')
+  }
+
+  // cannot be child of itself
+  if (childrenIds?.includes(id)) {
+    throw new ValidationError('Story cannot be child of itself')
+  }
+
+  // cannot have both a parent and children
+  if (parentId && childrenIds?.length) {
+    throw new ValidationError('Story cannot have both a parent and children')
+  }
+
+  // children cannot have children
+  if (childrenIds?.length) {
+    await checkIfChildrenAreNotParentsOrThrow(event)
+  }
+
+  // parent cannot have a parent
+  if (parentId) {
+    await checkIfParentIsNotAChildOrThrow(event)
+  }
+}
+
+async function checkIfChildrenAreNotParentsOrThrow(event) {
+  const childrenIds = event.params.data.child_stories
+  if (!childrenIds?.length) return
+
+  const children = await strapi.entityService.findMany(storyApi, {
+    filters: {
+      id: { $in: childrenIds },
+    },
+    populate: ['child_stories'],
+  })
+
+  if (children.some(c => c.child_stories.length)) {
+    throw new ValidationError('Children stories cannot be parents of other stories')
+  }
+}
+
+async function checkIfParentIsNotAChildOrThrow(event) {
   const item = event.params.data
 
   if (!item.parent_story) return
@@ -91,14 +140,35 @@ async function checkIfParentIsNotAChild(event) {
   })
 
   if (parentStory.parent_story) {
-    throw new ValidationError('Parent story cannot be a child of another story')
+    throw new ValidationError(
+      `Parent story ${parentStory.id} cannot be a child of another story ${parentStory.parent_story.id}`
+    )
   }
+}
+
+async function changeOtherLocalesParent(parentId: number, localizations: any[]) {
+  const parentWithLocales = await strapi.entityService.findOne(storyApi, parentId, {
+    populate: ['localizations'],
+  })
+
+  await Promise.all(
+    localizations.map(l => {
+      const parentLocale = parentWithLocales.localizations.find(p => p.locale === l.locale)
+      if (!parentLocale) {
+        console.debug(`Locale ${l.locale} not found for parent story ${parentId}`)
+        return Promise.resolve()
+      }
+
+      const data = { parent_story: parentLocale.id }
+      return strapi.entityService.update(storyApi, l.id, { data })
+    })
+  )
 }
 
 async function setOtherLocalesChildrenToNull(localizations: any[]) {
   if (!localizations.length) return
 
-  const localeIds = localizations.map(s => s.id).join(', ')
+  const localeIds = localizations.map(s => s.id)
 
   /**
    * set previous children to null
@@ -106,11 +176,10 @@ async function setOtherLocalesChildrenToNull(localizations: any[]) {
    * - set their parent_story to null
    */
   const previousChildren = await strapi.entityService.findMany(storyApi, {
-    where: {
-      // inv_story_id is the parent_story
-      $in: `(SELECT inv_story_id FROM stories_parent_story_links WHERE story_id IN (${localeIds}))`,
+    filters: {
+      parent_story: { id: { $in: localeIds } },
     },
-    select: ['id'],
+    fields: ['id'],
   })
 
   await Promise.all(
@@ -120,10 +189,10 @@ async function setOtherLocalesChildrenToNull(localizations: any[]) {
   )
 }
 
-async function changeOtherLocalesChildren(childrenIds: string[], localizations: any[]) {
-  if (!localizations.length) return
+async function changeOtherLocalesChildren(childrenIds: number[], result: any) {
+  if (!result.localizations.length) return
 
-  await setOtherLocalesChildrenToNull(localizations)
+  await setOtherLocalesChildrenToNull(result.localizations)
 
   /**
    * set current children parent_story to their locale's parent_story
@@ -131,22 +200,24 @@ async function changeOtherLocalesChildren(childrenIds: string[], localizations: 
    * - set their parent_story to their locale's parent_story
    */
   const currentChildren = await strapi.entityService.findMany(storyApi, {
-    where: {
+    filters: {
       id: { $in: childrenIds },
     },
-    select: ['id', 'locale'],
+    populate: ['localizations'],
   })
 
   await Promise.all(
-    currentChildren?.map(s => {
-      const localeParentStory = localizations.find(l => l.locale === s.locale)
-      if (!localeParentStory) {
-        console.debug(`Locale ${s.locale} not found for child story ${s.id}`)
-        return Promise.resolve()
-      }
+    currentChildren?.flatMap(child => {
+      child.localizations.map(childLocale => {
+        const localeParentStory = result.localizations.find(l => l.locale === childLocale.locale)
 
-      return strapi.entityService.update(storyApi, s.id, {
-        data: { parent_story: localeParentStory.id },
+        if (!localeParentStory) {
+          console.debug(`Locale ${childLocale.locale} not found for child story ${childLocale.id}`)
+          return Promise.resolve()
+        }
+
+        const data = { parent_story: localeParentStory.id }
+        return strapi.entityService.update(storyApi, childLocale.id, { data })
       })
     })
   )
