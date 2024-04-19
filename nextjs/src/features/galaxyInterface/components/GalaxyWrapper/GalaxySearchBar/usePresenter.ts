@@ -1,12 +1,14 @@
 import { State } from '@/features/shared/configs/store'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useSearch } from '@/features/shared/hooks/queries/useSearch'
+import { getCurrentZoomNumber } from '@/features/shared/helpers/getCurrentZoomNumber'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { usePageCategory } from '@/features/shared/hooks/usePageCategory'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 import { sharedActions } from '@/features/shared/stores/shared.store'
+import { SEARCH_CATEGORIES } from '@/features/shared/utils/categories'
 import { usePathname, useRouter } from 'next/navigation'
-import { useCallback, useEffect, useState, useRef } from 'react'
+import { useCallback, useEffect, useState, useRef, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 export const usePresenter = (isCollapsable?: boolean) => {
@@ -83,6 +85,31 @@ export const usePresenter = (isCollapsable?: boolean) => {
     handleSearchModeClose(false)
   }, [inputValue, searchCategory, router, handleSearchModeClose, lang])
 
+  const handleClearAll = () => {
+    handleSearchModeClose()
+
+    const currentZoomNumber = getCurrentZoomNumber(pathname)
+
+    if (currentZoomNumber !== 2) {
+      return
+    }
+
+    if (!searchCategory) return
+
+    // TODO double check with stories
+    if (searchCategory === SEARCH_CATEGORIES.stories) {
+      router.push('/')
+    }
+
+    let url = `/landingpage?category=${searchCategory}`
+    url = addLocaleToUrl(url, lang)
+    router.replace(url)
+  }
+
+  const isAnySearchActive = useMemo(() => {
+    return search !== ''
+  }, [search])
+
   useEffect(() => {
     const handleEnterPress = (e: KeyboardEvent) => {
       if (e.key === 'Enter') {
@@ -131,5 +158,7 @@ export const usePresenter = (isCollapsable?: boolean) => {
     handleInputChange,
     searchBarRef,
     filterInputRef,
+    handleClearAll,
+    isAnySearchActive,
   }
 }

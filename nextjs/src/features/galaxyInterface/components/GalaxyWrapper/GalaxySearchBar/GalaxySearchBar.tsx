@@ -7,6 +7,7 @@ import { FilterInput, CloseButton } from './fragments'
 import { CategorySuggestions } from '../CategorySuggestions/CategorySuggestions'
 import { GoButton } from './fragments/GoButton'
 import { SearchButton } from './fragments/SearchButton'
+import { ClearButton } from './fragments/ClearButton'
 
 type Props = {
   total?: number
@@ -28,6 +29,8 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isCollapsable }) => {
     handleInputChange,
     searchBarRef,
     filterInputRef,
+    handleClearAll,
+    isAnySearchActive,
   } = usePresenter(isCollapsable)
 
   return (
@@ -86,9 +89,12 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isCollapsable }) => {
       <Flex gap="12px" alignItems={'center'} justifyContent={'flex-end'} zIndex={'inherit'}>
         {isSearchModeActive ? (
           <>
+            <ClearButton handleClick={handleClearAll} />
             <GoButton handleClick={handleGoClick} />
             <CloseButton handleClick={handleSearchModeClose} />
           </>
+        ) : isAnySearchActive ? (
+          <CloseButton handleClick={handleSearchModeClose} />
         ) : (
           <SearchButton />
         )}
