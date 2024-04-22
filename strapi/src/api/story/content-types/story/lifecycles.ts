@@ -84,10 +84,18 @@ async function checkParentChildConstraintsOrThrow(event) {
   const parentId = event.params.data.parent_story
   const childrenIds = event.params.data.child_stories
   const id = event.params.where.id
+  const parentStory = await strapi.entityService.findOne(storyApi, id, {
+    populate: ['parent_story'],
+  })
 
   // cannot be parent of itself
   if (parentId === id) {
     throw new ValidationError('Story cannot be parent of itself')
+  }
+
+  // cannot up child field to add or remove children
+  if (parentId === null && parentStory.parent_story === null) {
+    throw new ValidationError(`Cannot add or remove child stories`)
   }
 
   // cannot be child of itself
