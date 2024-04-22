@@ -93,7 +93,7 @@ async function checkParentChildConstraintsOrThrow(event) {
     throw new ValidationError('Story cannot be parent of itself')
   }
 
-  // cannot up child field to add or remove children
+  // cannot add or remove children (field effective disabled)
   if (parentId === null && parentStory.parent_story === null) {
     throw new ValidationError(`Cannot add or remove child stories`)
   }
