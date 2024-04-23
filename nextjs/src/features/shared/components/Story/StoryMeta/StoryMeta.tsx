@@ -16,7 +16,6 @@ export const StoryMeta: React.FC = () => {
     locations,
     timeframe,
     childrenRelation,
-    siblingsRelation,
     parentRelation,
     lang,
   } = usePresenter()
