@@ -93,14 +93,6 @@ async function checkParentChildConstraintsOrThrow(event) {
     throw new ValidationError('Story cannot be parent of itself')
   }
 
-  // cannot add or remove children (field effectively disabled)
-  if (
-    childrenIds &&
-    (childrenIds.length > 0 || (childrenIds.length === 0 && story.child_stories.length > 0))
-  ) {
-    throw new ValidationError(`Cannot add or remove child stories`)
-  }
-
   // cannot be child of itself
   if (childrenIds?.includes(id)) {
     throw new ValidationError('Story cannot be child of itself')
@@ -119,6 +111,14 @@ async function checkParentChildConstraintsOrThrow(event) {
   // parent cannot have a parent
   if (parentId) {
     await checkIfParentIsNotAChildOrThrow(event)
+  }
+
+  // cannot add or remove children (field effectively disabled)
+  if (
+    childrenIds &&
+    (childrenIds.length > 0 || (childrenIds.length === 0 && story.child_stories.length > 0))
+  ) {
+    throw new ValidationError(`Cannot add or remove child stories`)
   }
 }
 
