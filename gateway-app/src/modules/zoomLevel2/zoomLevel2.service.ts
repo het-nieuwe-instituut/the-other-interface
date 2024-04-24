@@ -6,20 +6,25 @@ import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { TriplyUtils } from '../triply/triply.utils'
 import { getUniqueById } from '../util/helpers'
 
-interface ZoomLevel2Data {
+interface ResultData {
   thumbnail: string
   title: string
   id: string
+  categoryType: string
 }
 
-const zoomLevel2DataKeys: KeysToVerify<ZoomLevel2Data> = {
+const resultDataKeys: KeysToVerify<ResultData> = {
   thumbnail: true,
   title: true,
   id: true,
+  categoryType: true,
 }
 
 @Injectable()
 export class ZoomLevel2Service {
+  private readonly SearchByAllEndpoint = 'textSearch/run?'
+  private readonly SearchByAllAmountEndpoint = 'textSearchCount/run?'
+
   public constructor(private readonly triplyService: TriplyService) {}
   public getData(entity: EntityNames, paginationArgs: PaginationArgs, text?: string) {
     switch (entity) {
@@ -56,6 +61,42 @@ export class ZoomLevel2Service {
     }
   }
 
+  public async getSearchByAllCategories(text: string, paginationArgs: PaginationArgs) {
+    const result = await this.triplyService.queryTriplyData<ResultData>(
+      this.SearchByAllEndpoint,
+      resultDataKeys,
+      { page: paginationArgs.page, pageSize: paginationArgs.pageSize },
+      text ? { text } : undefined
+    )
+
+    const forrmattedNodes = getUniqueById(result?.data).map(res => ({
+      thumbnail: res.thumbnail,
+      title: res.title,
+      id: res.id,
+      type: res?.categoryType,
+    }))
+
+    return {
+      page: paginationArgs.page,
+      nodes: forrmattedNodes,
+    }
+  }
+
+  public async getSearchByAllCategoriesAmount(text: string) {
+    const countResult = await this.triplyService.queryTriplyData<{ count?: string }>(
+      this.SearchByAllAmountEndpoint,
+      { count: true },
+      undefined,
+      text ? { text } : undefined
+    )
+
+    const total = countResult?.data.pop()?.count ?? '0'
+
+    return {
+      total,
+    }
+  }
+
   private async getZoomLevel2Data({
     type,
     page = 1,
@@ -69,9 +110,9 @@ export class ZoomLevel2Service {
   }) {
     const uri = TriplyUtils.getUriForLevel2Data({ type, text, isDataAmount: false })
 
-    const result = await this.triplyService.queryTriplyData<ZoomLevel2Data>(
+    const result = await this.triplyService.queryTriplyData<ResultData>(
       uri,
-      zoomLevel2DataKeys,
+      resultDataKeys,
       { page, pageSize },
       text ? { text } : undefined
     )

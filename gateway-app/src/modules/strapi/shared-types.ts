@@ -470,16 +470,16 @@ export class BooleanFilterInput {
 
 @InputType()
 export class PaginationArg {
-  @Field({ nullable: true })
+  @Field(() => Int, { nullable: true })
   public limit?: number
 
-  @Field({ nullable: true })
+  @Field(() => Int, { nullable: true })
   public page?: number
 
-  @Field({ nullable: true })
+  @Field(() => Int, { nullable: true })
   public pageSize?: number
 
-  @Field({ nullable: true })
+  @Field(() => Int, { nullable: true })
   public start?: number
 }
 

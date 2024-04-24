@@ -39,5 +39,6 @@ export const storyToRecordMapper = (story: StoryEntity): RecordType => {
     title: story?.attributes?.title ?? '',
     thumbnail: findImageUrl(story?.attributes?.components ?? []) ?? '',
     id: story.id,
+    type: 'story',
   }
 }

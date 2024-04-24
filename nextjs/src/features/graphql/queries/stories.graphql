@@ -16,7 +16,7 @@ query stories($pagination: PaginationArg, $locale: String) {
     }
 }
 
-query searchByStories($searchTerm: String, $page: Float, $pageSize: Float, $locale: String) {
+query searchByStories($searchTerm: String, $page: Int, $pageSize: Int, $locale: String) {
     stories(filters: { 
       title: {
         containsi: $searchTerm

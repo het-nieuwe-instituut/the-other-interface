@@ -791,10 +791,10 @@ export type Pagination = {
 };
 
 export type PaginationArg = {
-  limit?: InputMaybe<Scalars['Float']>;
-  page?: InputMaybe<Scalars['Float']>;
-  pageSize?: InputMaybe<Scalars['Float']>;
-  start?: InputMaybe<Scalars['Float']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  pageSize?: InputMaybe<Scalars['Int']>;
+  start?: InputMaybe<Scalars['Int']>;
 };
 
 export type PeopleAssociationType = {
@@ -1120,6 +1120,8 @@ export type Query = {
   publicationsRecordZoomLevel3?: Maybe<Array<PublicationRecordZoomLevel3Type>>;
   publicationsZoomLevel2Hover: PublicationsZoomLevelHoverType;
   relations?: Maybe<Array<ZoomLevel3RelationsType>>;
+  searchByAllCategories: SearchAllParentType;
+  searchByAllCategoriesAmount: ZoomLevel2AmountParentType;
   stories: StoryEntityResponseCollection;
   storiesRealtedWithinTheme: StoriesRelatedToThemeResponse;
   storiesWithoutRelations: StoryWithoutRelationsEntityResponseCollection;
@@ -1330,6 +1332,18 @@ export type QueryRelationsArgs = {
 };
 
 
+export type QuerySearchByAllCategoriesArgs = {
+  page: Scalars['Int'];
+  pageSize?: InputMaybe<Scalars['Int']>;
+  text: Scalars['String'];
+};
+
+
+export type QuerySearchByAllCategoriesAmountArgs = {
+  text: Scalars['String'];
+};
+
+
 export type QueryStoriesArgs = {
   filters?: InputMaybe<StoryFiltersInput>;
   locale?: InputMaybe<Scalars['String']>;
@@ -1509,6 +1523,20 @@ export type QueryZoomLevel5PublicationsSerialArgs = {
 export type ResponseCollectionMeta = {
   __typename?: 'ResponseCollectionMeta';
   pagination: Pagination;
+};
+
+export type SearchAllParentType = {
+  __typename?: 'SearchAllParentType';
+  nodes?: Maybe<Array<SearchAllResultType>>;
+  page: Scalars['Int'];
+};
+
+export type SearchAllResultType = {
+  __typename?: 'SearchAllResultType';
+  id: Scalars['String'];
+  thumbnail?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  type: Scalars['String'];
 };
 
 export type StoriesRelatedToThemeResponse = {
@@ -2009,6 +2037,22 @@ export type MenuPagesQueryVariables = Exact<{
 
 export type MenuPagesQuery = { __typename?: 'Query', menupages: { __typename?: 'MenupageEntityResponseCollection', data: Array<{ __typename?: 'MenupageEntity', id?: string | null, attributes?: { __typename?: 'Menupage', Title?: string | null, slug?: string | null, createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, locale?: string | null, localizations?: { __typename?: 'MenupageRelationResponseCollection', data?: Array<{ __typename?: 'MenupageEntity', id?: string | null, attributes?: { __typename?: 'Menupage', Title?: string | null, slug?: string | null, createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, locale?: string | null } | null }> | null } | null } | null }>, meta: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', page: number, pageSize: number, pageCount: number, total: number } } } };
 
+export type SearchAllQueryVariables = Exact<{
+  text: Scalars['String'];
+  page: Scalars['Int'];
+  pageSize?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type SearchAllQuery = { __typename?: 'Query', searchByAllCategories: { __typename?: 'SearchAllParentType', page: number, nodes?: Array<{ __typename?: 'SearchAllResultType', title?: string | null, thumbnail?: string | null, id: string, type: string }> | null } };
+
+export type SearchAllAmountQueryVariables = Exact<{
+  text: Scalars['String'];
+}>;
+
+
+export type SearchAllAmountQuery = { __typename?: 'Query', searchByAllCategoriesAmount: { __typename?: 'ZoomLevel2AmountParentType', total: string } };
+
 export type StoriesQueryVariables = Exact<{
   pagination?: InputMaybe<PaginationArg>;
   locale?: InputMaybe<Scalars['String']>;
@@ -2019,8 +2063,8 @@ export type StoriesQuery = { __typename?: 'Query', stories: { __typename?: 'Stor
 
 export type SearchByStoriesQueryVariables = Exact<{
   searchTerm?: InputMaybe<Scalars['String']>;
-  page?: InputMaybe<Scalars['Float']>;
-  pageSize?: InputMaybe<Scalars['Float']>;
+  page?: InputMaybe<Scalars['Int']>;
+  pageSize?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
 }>;
 
@@ -2941,6 +2985,26 @@ export const MenuPagesDocument = gql`
   }
 }
     `;
+export const SearchAllDocument = gql`
+    query searchAll($text: String!, $page: Int!, $pageSize: Int) {
+  searchByAllCategories(page: $page, pageSize: $pageSize, text: $text) {
+    page
+    nodes {
+      title
+      thumbnail
+      id
+      type
+    }
+  }
+}
+    `;
+export const SearchAllAmountDocument = gql`
+    query searchAllAmount($text: String!) {
+  searchByAllCategoriesAmount(text: $text) {
+    total
+  }
+}
+    `;
 export const StoriesDocument = gql`
     query stories($pagination: PaginationArg, $locale: String) {
   stories(pagination: $pagination, locale: $locale) {
@@ -2961,7 +3025,7 @@ export const StoriesDocument = gql`
 }
     `;
 export const SearchByStoriesDocument = gql`
-    query searchByStories($searchTerm: String, $page: Float, $pageSize: Float, $locale: String) {
+    query searchByStories($searchTerm: String, $page: Int, $pageSize: Int, $locale: String) {
   stories(
     filters: {title: {containsi: $searchTerm}}
     pagination: {page: $page, pageSize: $pageSize}
@@ -3782,6 +3846,12 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     menuPages(variables?: MenuPagesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<MenuPagesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<MenuPagesQuery>(MenuPagesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'menuPages', 'query');
+    },
+    searchAll(variables: SearchAllQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<SearchAllQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<SearchAllQuery>(SearchAllDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'searchAll', 'query');
+    },
+    searchAllAmount(variables: SearchAllAmountQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<SearchAllAmountQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<SearchAllAmountQuery>(SearchAllAmountDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'searchAllAmount', 'query');
     },
     stories(variables?: StoriesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<StoriesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<StoriesQuery>(StoriesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'stories', 'query');

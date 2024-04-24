@@ -1,0 +1,17 @@
+query searchAll($text: String! $page: Int!, $pageSize: Int) {
+    searchByAllCategories(page: $page, pageSize: $pageSize, text: $text) {
+        page,
+        nodes {
+            title
+			thumbnail
+			id
+            type
+        }
+    }
+}
+
+query searchAllAmount($text: String!) {
+    searchByAllCategoriesAmount(text: $text) {
+        total
+    }
+}

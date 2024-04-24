@@ -10,6 +10,12 @@ export class ZoomLevel2Args {
   public text: string
 }
 
+@ArgsType()
+export class SearchArgs {
+  @Field(() => String, { nullable: false })
+  public text: string
+}
+
 @ObjectType()
 export class ZoomLevel2Type {
   @Field(() => String, { nullable: true })
@@ -35,4 +41,28 @@ export class ZoomLevel2ParentType {
 export class ZoomLevel2AmountParentType {
   @Field(() => String, { nullable: false })
   public total: string
+}
+
+@ObjectType()
+export class SearchAllResultType {
+  @Field(() => String, { nullable: true })
+  public thumbnail: string
+
+  @Field(() => String, { nullable: true })
+  public title: string | null
+
+  @Field(() => String)
+  public id: string
+
+  @Field(() => String)
+  public type: string
+}
+
+@ObjectType()
+export class SearchAllParentType {
+  @Field(() => [SearchAllResultType], { nullable: true })
+  public nodes: SearchAllResultType[]
+
+  @Field(() => Int, { nullable: false })
+  public page: number
 }

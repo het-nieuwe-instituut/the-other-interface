@@ -28,48 +28,80 @@ export function useSearch({
   const lang = searchParams?.get('lang')
 
   const queryFn = async () => {
-    if (category === SEARCH_CATEGORIES.stories) {
-      const response = await api.searchByStories({
-        searchTerm: text || undefined,
-        locale: lang ?? 'nl',
-        page,
-        pageSize: ZOOM2_RECORDS_PER_PAGE,
-      })
-      const stories =
-        response?.stories?.data
-          ?.filter(Boolean)
-          .map(story => storyToRecordMapper(story as StoryEntity)) ?? []
-      const total = response?.stories?.meta?.pagination?.total
-      return { items: stories, total }
-    } else {
-      const dataPromise = api.Zoom2({
-        entityName: CATEGORIES_TO_ENTITY_MAPPER[category as CloudCategory],
-        text: text || undefined,
-        page,
-        pageSize: ZOOM2_RECORDS_PER_PAGE,
-      })
-      const countPromise = api.Zoom2Amount({
-        entityName: CATEGORIES_TO_ENTITY_MAPPER[category as CloudCategory],
-        text: text || undefined,
-      })
+    switch (category) {
+      case SEARCH_CATEGORIES.stories:
+        const storiesResponse = await api.searchByStories({
+          searchTerm: text || undefined,
+          locale: lang ?? 'nl',
+          page,
+          pageSize: ZOOM2_RECORDS_PER_PAGE,
+        })
+        return {
+          items:
+            storiesResponse?.stories?.data
+              ?.filter(Boolean)
+              .map(story => storyToRecordMapper(story as StoryEntity)) ?? [],
+          total: storiesResponse?.stories?.meta?.pagination?.total,
+        }
 
-      const [data, totalData] = await Promise.all([dataPromise, countPromise])
-      const records =
-        data?.zoomLevel2?.nodes?.map(node => ({
-          id: node.id,
-          title: node.title,
-          thumbnail: node.thumbnail,
-        })) ?? []
-      const total = totalData.zoomLevel2Amount.total
+      case SEARCH_CATEGORIES.all:
+        const [allResponse, countResponse] = await Promise.all([
+          api.searchByStories({
+            searchTerm: text ?? '',
+            page,
+            pageSize: 2,
+            locale: lang ?? 'nl',
+          }),
+          api.searchAllAmount({
+            text: text ?? '',
+          }),
+        ])
 
-      return { items: records, total }
+        const allItems =
+          allResponse?.stories?.data
+            ?.filter(Boolean)
+            .map(story => storyToRecordMapper(story as StoryEntity)) ?? []
+        const storiesCount = allResponse?.stories?.meta?.pagination.total || 0
+        const allPageSize = 12 - storiesCount
+        const allData = await api.searchAll({
+          text: text ?? '',
+          page,
+          pageSize: allPageSize,
+        })
+
+        return {
+          items: [...allItems, ...(allData?.searchByAllCategories?.nodes ?? [])],
+          total: storiesCount + (+countResponse?.searchByAllCategoriesAmount?.total || 0),
+        }
+
+      default:
+        const [data, totalData] = await Promise.all([
+          api.Zoom2({
+            entityName: CATEGORIES_TO_ENTITY_MAPPER[category as CloudCategory],
+            text: text || undefined,
+            page,
+            pageSize: ZOOM2_RECORDS_PER_PAGE,
+          }),
+          api.Zoom2Amount({
+            entityName: CATEGORIES_TO_ENTITY_MAPPER[category as CloudCategory],
+            text: text || undefined,
+          }),
+        ])
+
+        return {
+          items:
+            data?.zoomLevel2?.nodes?.map(node => ({
+              id: node.id,
+              title: node.title,
+              thumbnail: node.thumbnail,
+              type: category,
+            })) ?? [],
+          total: totalData.zoomLevel2Amount.total,
+        }
     }
   }
 
-  const queryKey =
-    category === SEARCH_CATEGORIES.stories
-      ? ['searchByStories', category, text, page, lang]
-      : ['search', category, text, page]
+  const queryKey = [category, text, page, lang, category]
 
   return useQuery(queryKey, queryFn, {
     enabled,
