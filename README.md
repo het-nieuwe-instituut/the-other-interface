@@ -39,6 +39,19 @@ If you use iTerm2, then you can use [iTermocil](https://github.com/TomAnthony/it
 - Make sure that Strapi is running.
 - Run `npm run dev` to start the nextjs application.
 
+## Database Data
+
+It is highly recommended to use a sample dump of production strapi data during development. This can be obtained from other developers working on the project. Data should be sent through a secure messaging app such as Keybase. To restore the data use a GUI tool for relational databases such as [TablePlus](https://tableplus.com/). 
+
+The following instructions assume you are using TablePlus.
+1. Make sure the database is running. Run `npm run start-services` to start the database if it isn't.
+2. Set up the connection in TablePlus. Create a postgreSQL database. See the database.ts file for setup details.
+    - If you already have a database set up and have been creating your own content in strapi, this should be deleted before restoring. Selected all to delete (make sure to check Cascade) and then press cmd-s to save.
+3. On the TablePlus main page click 'Restore'. Select the connection and database you wish to restore then click 'Start restore...'. Select the production dump in the window that is opened and click 'Start restore'. This may take a few minutes. 
+    - Once the restore is complete, check the database in TablePlus. Even if there are errors, the restore may still have populated the tables.
+4. The database should now be populated with production data. Go to http://localhost:3000/. You may need to restart strapi with `npm run develop` to see the data displayed on your browers.
+5. Go to http://localhost:1337/admin/auth/login - you will need to add an Admin user to login. In the command line go to the strapi directory and run `npm run strapi admin:create-user --firstname=YourFirstName --lastname=YourLastName --email=YourEmail --password=NewPassword` filling in the firstname, lastname, email, and password. You will be prompted to re-enter this information. Select 'Yes' for 'Do you really want to create a new admin?'. Once this command has run, you can now log into the strapi admin as the user you created.
+
 ---
 
 # Strapi backend
