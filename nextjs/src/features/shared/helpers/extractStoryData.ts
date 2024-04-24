@@ -5,6 +5,7 @@ import {
   HomepageComponentsDynamicZone,
   StoryEntity,
 } from 'src/generated/graphql'
+import { SEARCH_CATEGORIES } from '../utils/categories'
 
 const findImageUrl = (components: HomepageComponentsDynamicZone[]): string => {
   const imageComponent = components?.find(
@@ -39,6 +40,6 @@ export const storyToRecordMapper = (story: StoryEntity): RecordType => {
     title: story?.attributes?.title ?? '',
     thumbnail: findImageUrl(story?.attributes?.components ?? []) ?? '',
     id: story.id,
-    type: 'story',
+    type: SEARCH_CATEGORIES.stories,
   }
 }

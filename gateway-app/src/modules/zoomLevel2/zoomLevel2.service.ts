@@ -73,7 +73,7 @@ export class ZoomLevel2Service {
       thumbnail: res.thumbnail,
       title: res.title,
       id: res.id,
-      type: res?.categoryType,
+      type: res?.categoryType?.toLowerCase() ?? '',
     }))
 
     return {

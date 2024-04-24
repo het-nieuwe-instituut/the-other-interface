@@ -62,7 +62,7 @@ export function useSearch({
             ?.filter(Boolean)
             .map(story => storyToRecordMapper(story as StoryEntity)) ?? []
         const storiesCount = allResponse?.stories?.meta?.pagination.total || 0
-        const allPageSize = 12 - storiesCount
+        const allPageSize = ZOOM2_RECORDS_PER_PAGE - storiesCount
         const allData = await api.searchAll({
           text: text ?? '',
           page,
