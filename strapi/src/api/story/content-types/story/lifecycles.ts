@@ -64,16 +64,6 @@ async function applyToAllLocales(event) {
       }
     }
 
-    if (event.params.data.child_stories !== undefined) {
-      const childrenIds = event.params.data.child_stories
-
-      if (!childrenIds.length) {
-        await setOtherLocalesChildrenToNull(event.result.localizations)
-      } else {
-        await changeOtherLocalesChildren(childrenIds, event.result)
-      }
-    }
-
     await Promise.all(
       event.result.localizations.map(s => strapi.entityService.update(storyApi, s.id, { data }))
     )
@@ -83,10 +73,12 @@ async function applyToAllLocales(event) {
 async function checkParentChildConstraintsOrThrow(event) {
   const parentId = event.params.data.parent_story
   const childrenIds = event.params.data.child_stories
-  const id = event.params.where.id
-  const story = await strapi.entityService.findOne(storyApi, id, {
-    populate: ['child_stories'],
-  })
+  const id = event.params.where?.id // could be null if this method is called beforeCreate
+  const story = id
+    ? await strapi.entityService.findOne(storyApi, id, {
+        populate: ['child_stories'],
+      })
+    : undefined
 
   // cannot be parent of itself
   if (parentId === id) {
@@ -106,7 +98,7 @@ async function checkParentChildConstraintsOrThrow(event) {
   // cannot add or remove children (field effectively disabled)
   if (
     childrenIds &&
-    (childrenIds.length > 0 || (childrenIds.length === 0 && story.child_stories.length > 0))
+    (childrenIds.length > 0 || (childrenIds.length === 0 && story?.child_stories.length > 0))
   ) {
     throw new ValidationError(`Cannot add or remove child stories`)
   }
@@ -140,9 +132,10 @@ async function checkIfChildrenAreNotParentsOrThrow(event) {
 
 async function checkIfParentIsNotAChildOrThrow(event) {
   const item = event.params.data
+  const id = event.params.where?.id
 
   if (!item.parent_story) return
-  if (item.parent_story === event.params.where.id) {
+  if (id && item.parent_story === id) {
     throw new ValidationError('Parent story cannot be the same as the current story')
   }
 
@@ -172,64 +165,6 @@ async function changeOtherLocalesParent(parentId: number, localizations: any[]) 
 
       const data = { parent_story: parentLocale.id }
       return strapi.entityService.update(storyApi, l.id, { data })
-    })
-  )
-}
-
-async function setOtherLocalesChildrenToNull(localizations: any[]) {
-  if (!localizations.length) return
-
-  const localeIds = localizations.map(s => s.id)
-
-  /**
-   * set previous children to null
-   * - get other locales' children
-   * - set their parent_story to null
-   */
-  const previousChildren = await strapi.entityService.findMany(storyApi, {
-    filters: {
-      parent_story: { id: { $in: localeIds } },
-    },
-    fields: ['id'],
-  })
-
-  await Promise.all(
-    previousChildren?.map(s =>
-      strapi.entityService.update(storyApi, s.id, { data: { parent_story: null } })
-    )
-  )
-}
-
-async function changeOtherLocalesChildren(childrenIds: number[], result: any) {
-  if (!result.localizations.length) return
-
-  await setOtherLocalesChildrenToNull(result.localizations)
-
-  /**
-   * set current children parent_story to their locale's parent_story
-   * - get current children
-   * - set their parent_story to their locale's parent_story
-   */
-  const currentChildren = await strapi.entityService.findMany(storyApi, {
-    filters: {
-      id: { $in: childrenIds },
-    },
-    populate: ['localizations'],
-  })
-
-  await Promise.all(
-    currentChildren?.flatMap(child => {
-      child.localizations.map(childLocale => {
-        const localeParentStory = result.localizations.find(l => l.locale === childLocale.locale)
-
-        if (!localeParentStory) {
-          console.debug(`Locale ${childLocale.locale} not found for child story ${childLocale.id}`)
-          return Promise.resolve()
-        }
-
-        const data = { parent_story: localeParentStory.id }
-        return strapi.entityService.update(storyApi, childLocale.id, { data })
-      })
     })
   )
 }
