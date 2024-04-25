@@ -278,11 +278,11 @@ export class ZoomLevel3Service {
 
     const storyFilters: StoryFiltersInput = { or: [{ themes: { id: { in: themeIds } } }] }
     if (childrenIds.length) {
-      storyFilters.or?.push({ child_stories: { id: { in: childrenIds } } })
+      storyFilters.or?.push({ id: { in: childrenIds } })
     }
 
     if (parentId) {
-      storyFilters.or?.push({ parent_story: { id: { eq: parentId } } })
+      storyFilters.or?.push({ id: { eq: parentId } })
     }
 
     const paginatedRelatedStories = await this.strapiGqlSdk.stories({

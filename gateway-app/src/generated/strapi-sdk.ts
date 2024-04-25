@@ -2488,7 +2488,13 @@ export type HomepageFragmentFragment = {
                 __typename?: 'AuthorEntityResponse'
                 data?: {
                   __typename?: 'AuthorEntity'
-                  attributes?: { __typename?: 'Author'; firstName: string } | null
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Author'
+                    firstName: string
+                    lastName: string
+                    insertion?: string | null
+                  } | null
                 } | null
               } | null
             } | null
@@ -2832,7 +2838,13 @@ export type HomepageQuery = {
                             __typename?: 'AuthorEntityResponse'
                             data?: {
                               __typename?: 'AuthorEntity'
-                              attributes?: { __typename?: 'Author'; firstName: string } | null
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'Author'
+                                firstName: string
+                                lastName: string
+                                insertion?: string | null
+                              } | null
                             } | null
                           } | null
                         } | null
@@ -3144,7 +3156,13 @@ export type HomepageQuery = {
                       __typename?: 'AuthorEntityResponse'
                       data?: {
                         __typename?: 'AuthorEntity'
-                        attributes?: { __typename?: 'Author'; firstName: string } | null
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'Author'
+                          firstName: string
+                          lastName: string
+                          insertion?: string | null
+                        } | null
                       } | null
                     } | null
                   } | null
@@ -3467,7 +3485,13 @@ export type LandingpageFragmentFragment = {
                 __typename?: 'AuthorEntityResponse'
                 data?: {
                   __typename?: 'AuthorEntity'
-                  attributes?: { __typename?: 'Author'; firstName: string } | null
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Author'
+                    firstName: string
+                    lastName: string
+                    insertion?: string | null
+                  } | null
                 } | null
               } | null
             } | null
@@ -3804,7 +3828,13 @@ export type LandingpageEntityFragmentFragment = {
                         __typename?: 'AuthorEntityResponse'
                         data?: {
                           __typename?: 'AuthorEntity'
-                          attributes?: { __typename?: 'Author'; firstName: string } | null
+                          id?: string | null
+                          attributes?: {
+                            __typename?: 'Author'
+                            firstName: string
+                            lastName: string
+                            insertion?: string | null
+                          } | null
                         } | null
                       } | null
                     } | null
@@ -4116,7 +4146,13 @@ export type LandingpageEntityFragmentFragment = {
                   __typename?: 'AuthorEntityResponse'
                   data?: {
                     __typename?: 'AuthorEntity'
-                    attributes?: { __typename?: 'Author'; firstName: string } | null
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'Author'
+                      firstName: string
+                      lastName: string
+                      insertion?: string | null
+                    } | null
                   } | null
                 } | null
               } | null
@@ -4463,7 +4499,13 @@ export type LandingPageQuery = {
                             __typename?: 'AuthorEntityResponse'
                             data?: {
                               __typename?: 'AuthorEntity'
-                              attributes?: { __typename?: 'Author'; firstName: string } | null
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'Author'
+                                firstName: string
+                                lastName: string
+                                insertion?: string | null
+                              } | null
                             } | null
                           } | null
                         } | null
@@ -4775,7 +4817,13 @@ export type LandingPageQuery = {
                       __typename?: 'AuthorEntityResponse'
                       data?: {
                         __typename?: 'AuthorEntity'
-                        attributes?: { __typename?: 'Author'; firstName: string } | null
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'Author'
+                          firstName: string
+                          lastName: string
+                          insertion?: string | null
+                        } | null
                       } | null
                     } | null
                   } | null
@@ -5127,7 +5175,13 @@ export type LandingPagesQuery = {
                             __typename?: 'AuthorEntityResponse'
                             data?: {
                               __typename?: 'AuthorEntity'
-                              attributes?: { __typename?: 'Author'; firstName: string } | null
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'Author'
+                                firstName: string
+                                lastName: string
+                                insertion?: string | null
+                              } | null
                             } | null
                           } | null
                         } | null
@@ -5439,7 +5493,13 @@ export type LandingPagesQuery = {
                       __typename?: 'AuthorEntityResponse'
                       data?: {
                         __typename?: 'AuthorEntity'
-                        attributes?: { __typename?: 'Author'; firstName: string } | null
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'Author'
+                          firstName: string
+                          lastName: string
+                          insertion?: string | null
+                        } | null
                       } | null
                     } | null
                   } | null
@@ -5807,7 +5867,13 @@ export type MenupageFragmentFragment = {
                 __typename?: 'AuthorEntityResponse'
                 data?: {
                   __typename?: 'AuthorEntity'
-                  attributes?: { __typename?: 'Author'; firstName: string } | null
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Author'
+                    firstName: string
+                    lastName: string
+                    insertion?: string | null
+                  } | null
                 } | null
               } | null
             } | null
@@ -6080,7 +6146,13 @@ export type MenupageEntityFragmentFragment = {
                         __typename?: 'AuthorEntityResponse'
                         data?: {
                           __typename?: 'AuthorEntity'
-                          attributes?: { __typename?: 'Author'; firstName: string } | null
+                          id?: string | null
+                          attributes?: {
+                            __typename?: 'Author'
+                            firstName: string
+                            lastName: string
+                            insertion?: string | null
+                          } | null
                         } | null
                       } | null
                     } | null
@@ -6330,7 +6402,13 @@ export type MenupageEntityFragmentFragment = {
                   __typename?: 'AuthorEntityResponse'
                   data?: {
                     __typename?: 'AuthorEntity'
-                    attributes?: { __typename?: 'Author'; firstName: string } | null
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'Author'
+                      firstName: string
+                      lastName: string
+                      insertion?: string | null
+                    } | null
                   } | null
                 } | null
               } | null
@@ -6613,7 +6691,13 @@ export type MenuPageQuery = {
                             __typename?: 'AuthorEntityResponse'
                             data?: {
                               __typename?: 'AuthorEntity'
-                              attributes?: { __typename?: 'Author'; firstName: string } | null
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'Author'
+                                firstName: string
+                                lastName: string
+                                insertion?: string | null
+                              } | null
                             } | null
                           } | null
                         } | null
@@ -6863,7 +6947,13 @@ export type MenuPageQuery = {
                       __typename?: 'AuthorEntityResponse'
                       data?: {
                         __typename?: 'AuthorEntity'
-                        attributes?: { __typename?: 'Author'; firstName: string } | null
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'Author'
+                          firstName: string
+                          lastName: string
+                          insertion?: string | null
+                        } | null
                       } | null
                     } | null
                   } | null
@@ -7151,7 +7241,13 @@ export type MenuPagesQuery = {
                             __typename?: 'AuthorEntityResponse'
                             data?: {
                               __typename?: 'AuthorEntity'
-                              attributes?: { __typename?: 'Author'; firstName: string } | null
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'Author'
+                                firstName: string
+                                lastName: string
+                                insertion?: string | null
+                              } | null
                             } | null
                           } | null
                         } | null
@@ -7401,7 +7497,13 @@ export type MenuPagesQuery = {
                       __typename?: 'AuthorEntityResponse'
                       data?: {
                         __typename?: 'AuthorEntity'
-                        attributes?: { __typename?: 'Author'; firstName: string } | null
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'Author'
+                          firstName: string
+                          lastName: string
+                          insertion?: string | null
+                        } | null
                       } | null
                     } | null
                   } | null
@@ -7587,7 +7689,13 @@ export type StoriesQuery = {
                       __typename?: 'AuthorEntityResponse'
                       data?: {
                         __typename?: 'AuthorEntity'
-                        attributes?: { __typename?: 'Author'; firstName: string } | null
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'Author'
+                          firstName: string
+                          lastName: string
+                          insertion?: string | null
+                        } | null
                       } | null
                     } | null
                   } | null
@@ -7787,7 +7895,13 @@ export type StoriesQuery = {
                             __typename?: 'AuthorEntityResponse'
                             data?: {
                               __typename?: 'AuthorEntity'
-                              attributes?: { __typename?: 'Author'; firstName: string } | null
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'Author'
+                                firstName: string
+                                lastName: string
+                                insertion?: string | null
+                              } | null
                             } | null
                           } | null
                         } | null
@@ -7806,6 +7920,7 @@ export type StoriesQuery = {
                 __typename?: 'AuthorEntityResponse'
                 data?: {
                   __typename?: 'AuthorEntity'
+                  id?: string | null
                   attributes?: {
                     __typename?: 'Author'
                     firstName: string
@@ -7889,7 +8004,13 @@ export type StoriesQuery = {
                             __typename?: 'AuthorEntityResponse'
                             data?: {
                               __typename?: 'AuthorEntity'
-                              attributes?: { __typename?: 'Author'; firstName: string } | null
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'Author'
+                                firstName: string
+                                lastName: string
+                                insertion?: string | null
+                              } | null
                             } | null
                           } | null
                         } | null
@@ -7908,7 +8029,13 @@ export type StoriesQuery = {
                 __typename?: 'AuthorEntityResponse'
                 data?: {
                   __typename?: 'AuthorEntity'
-                  attributes?: { __typename?: 'Author'; firstName: string } | null
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Author'
+                    firstName: string
+                    lastName: string
+                    insertion?: string | null
+                  } | null
                 } | null
               } | null
             } | null
@@ -8068,7 +8195,13 @@ export type StoryQuery = {
                       __typename?: 'AuthorEntityResponse'
                       data?: {
                         __typename?: 'AuthorEntity'
-                        attributes?: { __typename?: 'Author'; firstName: string } | null
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'Author'
+                          firstName: string
+                          lastName: string
+                          insertion?: string | null
+                        } | null
                       } | null
                     } | null
                   } | null
@@ -8268,7 +8401,13 @@ export type StoryQuery = {
                             __typename?: 'AuthorEntityResponse'
                             data?: {
                               __typename?: 'AuthorEntity'
-                              attributes?: { __typename?: 'Author'; firstName: string } | null
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'Author'
+                                firstName: string
+                                lastName: string
+                                insertion?: string | null
+                              } | null
                             } | null
                           } | null
                         } | null
@@ -8287,6 +8426,7 @@ export type StoryQuery = {
                 __typename?: 'AuthorEntityResponse'
                 data?: {
                   __typename?: 'AuthorEntity'
+                  id?: string | null
                   attributes?: {
                     __typename?: 'Author'
                     firstName: string
@@ -8370,7 +8510,13 @@ export type StoryQuery = {
                             __typename?: 'AuthorEntityResponse'
                             data?: {
                               __typename?: 'AuthorEntity'
-                              attributes?: { __typename?: 'Author'; firstName: string } | null
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'Author'
+                                firstName: string
+                                lastName: string
+                                insertion?: string | null
+                              } | null
                             } | null
                           } | null
                         } | null
@@ -8389,7 +8535,13 @@ export type StoryQuery = {
                 __typename?: 'AuthorEntityResponse'
                 data?: {
                   __typename?: 'AuthorEntity'
-                  attributes?: { __typename?: 'Author'; firstName: string } | null
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Author'
+                    firstName: string
+                    lastName: string
+                    insertion?: string | null
+                  } | null
                 } | null
               } | null
             } | null
@@ -8557,7 +8709,13 @@ export type StoryByLocaleQuery = {
                       __typename?: 'AuthorEntityResponse'
                       data?: {
                         __typename?: 'AuthorEntity'
-                        attributes?: { __typename?: 'Author'; firstName: string } | null
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'Author'
+                          firstName: string
+                          lastName: string
+                          insertion?: string | null
+                        } | null
                       } | null
                     } | null
                   } | null
@@ -8753,7 +8911,13 @@ export type StoryByLocaleQuery = {
                             __typename?: 'AuthorEntityResponse'
                             data?: {
                               __typename?: 'AuthorEntity'
-                              attributes?: { __typename?: 'Author'; firstName: string } | null
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'Author'
+                                firstName: string
+                                lastName: string
+                                insertion?: string | null
+                              } | null
                             } | null
                           } | null
                         } | null
@@ -8967,7 +9131,13 @@ export type StoriesByLocaleQuery = {
                       __typename?: 'AuthorEntityResponse'
                       data?: {
                         __typename?: 'AuthorEntity'
-                        attributes?: { __typename?: 'Author'; firstName: string } | null
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'Author'
+                          firstName: string
+                          lastName: string
+                          insertion?: string | null
+                        } | null
                       } | null
                     } | null
                   } | null
@@ -9163,7 +9333,13 @@ export type StoriesByLocaleQuery = {
                             __typename?: 'AuthorEntityResponse'
                             data?: {
                               __typename?: 'AuthorEntity'
-                              attributes?: { __typename?: 'Author'; firstName: string } | null
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'Author'
+                                firstName: string
+                                lastName: string
+                                insertion?: string | null
+                              } | null
                             } | null
                           } | null
                         } | null
@@ -9358,7 +9534,13 @@ export type StoriesMetaByLocaleQuery = {
                             __typename?: 'AuthorEntityResponse'
                             data?: {
                               __typename?: 'AuthorEntity'
-                              attributes?: { __typename?: 'Author'; firstName: string } | null
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'Author'
+                                firstName: string
+                                lastName: string
+                                insertion?: string | null
+                              } | null
                             } | null
                           } | null
                         } | null
@@ -9461,7 +9643,13 @@ export type StoriesMetaByLocaleQuery = {
                             __typename?: 'AuthorEntityResponse'
                             data?: {
                               __typename?: 'AuthorEntity'
-                              attributes?: { __typename?: 'Author'; firstName: string } | null
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'Author'
+                                firstName: string
+                                lastName: string
+                                insertion?: string | null
+                              } | null
                             } | null
                           } | null
                         } | null
@@ -9481,7 +9669,12 @@ export type StoriesMetaByLocaleQuery = {
                 data?: {
                   __typename?: 'AuthorEntity'
                   id?: string | null
-                  attributes?: { __typename?: 'Author'; firstName: string } | null
+                  attributes?: {
+                    __typename?: 'Author'
+                    firstName: string
+                    lastName: string
+                    insertion?: string | null
+                  } | null
                 } | null
               } | null
             } | null
@@ -9523,6 +9716,7 @@ export type StoriesMetaByLocaleQuery = {
                 __typename?: 'AuthorEntityResponse'
                 data?: {
                   __typename?: 'AuthorEntity'
+                  id?: string | null
                   attributes?: {
                     __typename?: 'Author'
                     firstName: string
@@ -9681,7 +9875,13 @@ export type StoriesMetaByLocaleQuery = {
                                   __typename?: 'AuthorEntityResponse'
                                   data?: {
                                     __typename?: 'AuthorEntity'
-                                    attributes?: { __typename?: 'Author'; firstName: string } | null
+                                    id?: string | null
+                                    attributes?: {
+                                      __typename?: 'Author'
+                                      firstName: string
+                                      lastName: string
+                                      insertion?: string | null
+                                    } | null
                                   } | null
                                 } | null
                               } | null
@@ -9700,6 +9900,7 @@ export type StoriesMetaByLocaleQuery = {
                       __typename?: 'AuthorEntityResponse'
                       data?: {
                         __typename?: 'AuthorEntity'
+                        id?: string | null
                         attributes?: {
                           __typename?: 'Author'
                           firstName: string
@@ -9783,7 +9984,13 @@ export type StoriesMetaByLocaleQuery = {
                                   __typename?: 'AuthorEntityResponse'
                                   data?: {
                                     __typename?: 'AuthorEntity'
-                                    attributes?: { __typename?: 'Author'; firstName: string } | null
+                                    id?: string | null
+                                    attributes?: {
+                                      __typename?: 'Author'
+                                      firstName: string
+                                      lastName: string
+                                      insertion?: string | null
+                                    } | null
                                   } | null
                                 } | null
                               } | null
@@ -9802,6 +10009,7 @@ export type StoriesMetaByLocaleQuery = {
                       __typename?: 'AuthorEntityResponse'
                       data?: {
                         __typename?: 'AuthorEntity'
+                        id?: string | null
                         attributes?: {
                           __typename?: 'Author'
                           firstName: string
@@ -9888,7 +10096,13 @@ export type StoriesWithoutRelationsQuery = {
           __typename?: 'AuthorEntityResponse'
           data?: {
             __typename?: 'AuthorEntity'
-            attributes?: { __typename?: 'Author'; firstName: string } | null
+            id?: string | null
+            attributes?: {
+              __typename?: 'Author'
+              firstName: string
+              lastName: string
+              insertion?: string | null
+            } | null
           } | null
         } | null
       } | null
@@ -9932,7 +10146,13 @@ export type StoryWithoutRelationsQuery = {
           __typename?: 'AuthorEntityResponse'
           data?: {
             __typename?: 'AuthorEntity'
-            attributes?: { __typename?: 'Author'; firstName: string } | null
+            id?: string | null
+            attributes?: {
+              __typename?: 'Author'
+              firstName: string
+              lastName: string
+              insertion?: string | null
+            } | null
           } | null
         } | null
       } | null
@@ -10083,7 +10303,13 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
                       __typename?: 'AuthorEntityResponse'
                       data?: {
                         __typename?: 'AuthorEntity'
-                        attributes?: { __typename?: 'Author'; firstName: string } | null
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'Author'
+                          firstName: string
+                          lastName: string
+                          insertion?: string | null
+                        } | null
                       } | null
                     } | null
                   } | null
@@ -10283,7 +10509,13 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
                             __typename?: 'AuthorEntityResponse'
                             data?: {
                               __typename?: 'AuthorEntity'
-                              attributes?: { __typename?: 'Author'; firstName: string } | null
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'Author'
+                                firstName: string
+                                lastName: string
+                                insertion?: string | null
+                              } | null
                             } | null
                           } | null
                         } | null
@@ -10302,6 +10534,7 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
                 __typename?: 'AuthorEntityResponse'
                 data?: {
                   __typename?: 'AuthorEntity'
+                  id?: string | null
                   attributes?: {
                     __typename?: 'Author'
                     firstName: string
@@ -10385,7 +10618,13 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
                             __typename?: 'AuthorEntityResponse'
                             data?: {
                               __typename?: 'AuthorEntity'
-                              attributes?: { __typename?: 'Author'; firstName: string } | null
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'Author'
+                                firstName: string
+                                lastName: string
+                                insertion?: string | null
+                              } | null
                             } | null
                           } | null
                         } | null
@@ -10404,7 +10643,13 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
                 __typename?: 'AuthorEntityResponse'
                 data?: {
                   __typename?: 'AuthorEntity'
-                  attributes?: { __typename?: 'Author'; firstName: string } | null
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Author'
+                    firstName: string
+                    lastName: string
+                    insertion?: string | null
+                  } | null
                 } | null
               } | null
             } | null
@@ -10529,7 +10774,13 @@ export type StoriesByIdsQuery = {
                       __typename?: 'AuthorEntityResponse'
                       data?: {
                         __typename?: 'AuthorEntity'
-                        attributes?: { __typename?: 'Author'; firstName: string } | null
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'Author'
+                          firstName: string
+                          lastName: string
+                          insertion?: string | null
+                        } | null
                       } | null
                     } | null
                   } | null
@@ -10563,7 +10814,13 @@ export type StoriesByIdsQuery = {
                 __typename?: 'AuthorEntityResponse'
                 data?: {
                   __typename?: 'AuthorEntity'
-                  attributes?: { __typename?: 'Author'; firstName: string } | null
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'Author'
+                    firstName: string
+                    lastName: string
+                    insertion?: string | null
+                  } | null
                 } | null
               } | null
             } | null
@@ -10637,7 +10894,13 @@ export type StoryWithoutRelationsFragmentFragment = {
       __typename?: 'AuthorEntityResponse'
       data?: {
         __typename?: 'AuthorEntity'
-        attributes?: { __typename?: 'Author'; firstName: string } | null
+        id?: string | null
+        attributes?: {
+          __typename?: 'Author'
+          firstName: string
+          lastName: string
+          insertion?: string | null
+        } | null
       } | null
     } | null
   } | null
@@ -10792,7 +11055,13 @@ export type NestedStoryFragmentFragment = {
                   __typename?: 'AuthorEntityResponse'
                   data?: {
                     __typename?: 'AuthorEntity'
-                    attributes?: { __typename?: 'Author'; firstName: string } | null
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'Author'
+                      firstName: string
+                      lastName: string
+                      insertion?: string | null
+                    } | null
                   } | null
                 } | null
               } | null
@@ -10989,7 +11258,13 @@ export type LocalizedStoryFragmentFragment = {
                   __typename?: 'AuthorEntityResponse'
                   data?: {
                     __typename?: 'AuthorEntity'
-                    attributes?: { __typename?: 'Author'; firstName: string } | null
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'Author'
+                      firstName: string
+                      lastName: string
+                      insertion?: string | null
+                    } | null
                   } | null
                 } | null
               } | null
@@ -11185,7 +11460,13 @@ export type LocalizedStoryFragmentFragment = {
                         __typename?: 'AuthorEntityResponse'
                         data?: {
                           __typename?: 'AuthorEntity'
-                          attributes?: { __typename?: 'Author'; firstName: string } | null
+                          id?: string | null
+                          attributes?: {
+                            __typename?: 'Author'
+                            firstName: string
+                            lastName: string
+                            insertion?: string | null
+                          } | null
                         } | null
                       } | null
                     } | null
@@ -11350,7 +11631,13 @@ export type StoryFragmentFragment = {
                   __typename?: 'AuthorEntityResponse'
                   data?: {
                     __typename?: 'AuthorEntity'
-                    attributes?: { __typename?: 'Author'; firstName: string } | null
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'Author'
+                      firstName: string
+                      lastName: string
+                      insertion?: string | null
+                    } | null
                   } | null
                 } | null
               } | null
@@ -11550,7 +11837,13 @@ export type StoryFragmentFragment = {
                         __typename?: 'AuthorEntityResponse'
                         data?: {
                           __typename?: 'AuthorEntity'
-                          attributes?: { __typename?: 'Author'; firstName: string } | null
+                          id?: string | null
+                          attributes?: {
+                            __typename?: 'Author'
+                            firstName: string
+                            lastName: string
+                            insertion?: string | null
+                          } | null
                         } | null
                       } | null
                     } | null
@@ -11569,6 +11862,7 @@ export type StoryFragmentFragment = {
             __typename?: 'AuthorEntityResponse'
             data?: {
               __typename?: 'AuthorEntity'
+              id?: string | null
               attributes?: {
                 __typename?: 'Author'
                 firstName: string
@@ -11652,7 +11946,13 @@ export type StoryFragmentFragment = {
                         __typename?: 'AuthorEntityResponse'
                         data?: {
                           __typename?: 'AuthorEntity'
-                          attributes?: { __typename?: 'Author'; firstName: string } | null
+                          id?: string | null
+                          attributes?: {
+                            __typename?: 'Author'
+                            firstName: string
+                            lastName: string
+                            insertion?: string | null
+                          } | null
                         } | null
                       } | null
                     } | null
@@ -11671,7 +11971,13 @@ export type StoryFragmentFragment = {
             __typename?: 'AuthorEntityResponse'
             data?: {
               __typename?: 'AuthorEntity'
-              attributes?: { __typename?: 'Author'; firstName: string } | null
+              id?: string | null
+              attributes?: {
+                __typename?: 'Author'
+                firstName: string
+                lastName: string
+                insertion?: string | null
+              } | null
             } | null
           } | null
         } | null
@@ -11696,6 +12002,7 @@ export type StoryMetaFragmentFragment = {
       __typename?: 'AuthorEntityResponse'
       data?: {
         __typename?: 'AuthorEntity'
+        id?: string | null
         attributes?: {
           __typename?: 'Author'
           firstName: string
@@ -11854,7 +12161,13 @@ export type StoryMetaFragmentFragment = {
                         __typename?: 'AuthorEntityResponse'
                         data?: {
                           __typename?: 'AuthorEntity'
-                          attributes?: { __typename?: 'Author'; firstName: string } | null
+                          id?: string | null
+                          attributes?: {
+                            __typename?: 'Author'
+                            firstName: string
+                            lastName: string
+                            insertion?: string | null
+                          } | null
                         } | null
                       } | null
                     } | null
@@ -11873,6 +12186,7 @@ export type StoryMetaFragmentFragment = {
             __typename?: 'AuthorEntityResponse'
             data?: {
               __typename?: 'AuthorEntity'
+              id?: string | null
               attributes?: {
                 __typename?: 'Author'
                 firstName: string
@@ -11956,7 +12270,13 @@ export type StoryMetaFragmentFragment = {
                         __typename?: 'AuthorEntityResponse'
                         data?: {
                           __typename?: 'AuthorEntity'
-                          attributes?: { __typename?: 'Author'; firstName: string } | null
+                          id?: string | null
+                          attributes?: {
+                            __typename?: 'Author'
+                            firstName: string
+                            lastName: string
+                            insertion?: string | null
+                          } | null
                         } | null
                       } | null
                     } | null
@@ -11975,6 +12295,7 @@ export type StoryMetaFragmentFragment = {
             __typename?: 'AuthorEntityResponse'
             data?: {
               __typename?: 'AuthorEntity'
+              id?: string | null
               attributes?: {
                 __typename?: 'Author'
                 firstName: string
@@ -12109,7 +12430,13 @@ export type LocalizedStoryMetaFragmentFragment = {
                         __typename?: 'AuthorEntityResponse'
                         data?: {
                           __typename?: 'AuthorEntity'
-                          attributes?: { __typename?: 'Author'; firstName: string } | null
+                          id?: string | null
+                          attributes?: {
+                            __typename?: 'Author'
+                            firstName: string
+                            lastName: string
+                            insertion?: string | null
+                          } | null
                         } | null
                       } | null
                     } | null
@@ -12212,7 +12539,13 @@ export type LocalizedStoryMetaFragmentFragment = {
                         __typename?: 'AuthorEntityResponse'
                         data?: {
                           __typename?: 'AuthorEntity'
-                          attributes?: { __typename?: 'Author'; firstName: string } | null
+                          id?: string | null
+                          attributes?: {
+                            __typename?: 'Author'
+                            firstName: string
+                            lastName: string
+                            insertion?: string | null
+                          } | null
                         } | null
                       } | null
                     } | null
@@ -12232,7 +12565,12 @@ export type LocalizedStoryMetaFragmentFragment = {
             data?: {
               __typename?: 'AuthorEntity'
               id?: string | null
-              attributes?: { __typename?: 'Author'; firstName: string } | null
+              attributes?: {
+                __typename?: 'Author'
+                firstName: string
+                lastName: string
+                insertion?: string | null
+              } | null
             } | null
           } | null
         } | null
@@ -12274,6 +12612,7 @@ export type LocalizedStoryMetaFragmentFragment = {
             __typename?: 'AuthorEntityResponse'
             data?: {
               __typename?: 'AuthorEntity'
+              id?: string | null
               attributes?: {
                 __typename?: 'Author'
                 firstName: string
@@ -12432,7 +12771,13 @@ export type LocalizedStoryMetaFragmentFragment = {
                               __typename?: 'AuthorEntityResponse'
                               data?: {
                                 __typename?: 'AuthorEntity'
-                                attributes?: { __typename?: 'Author'; firstName: string } | null
+                                id?: string | null
+                                attributes?: {
+                                  __typename?: 'Author'
+                                  firstName: string
+                                  lastName: string
+                                  insertion?: string | null
+                                } | null
                               } | null
                             } | null
                           } | null
@@ -12451,6 +12796,7 @@ export type LocalizedStoryMetaFragmentFragment = {
                   __typename?: 'AuthorEntityResponse'
                   data?: {
                     __typename?: 'AuthorEntity'
+                    id?: string | null
                     attributes?: {
                       __typename?: 'Author'
                       firstName: string
@@ -12534,7 +12880,13 @@ export type LocalizedStoryMetaFragmentFragment = {
                               __typename?: 'AuthorEntityResponse'
                               data?: {
                                 __typename?: 'AuthorEntity'
-                                attributes?: { __typename?: 'Author'; firstName: string } | null
+                                id?: string | null
+                                attributes?: {
+                                  __typename?: 'Author'
+                                  firstName: string
+                                  lastName: string
+                                  insertion?: string | null
+                                } | null
                               } | null
                             } | null
                           } | null
@@ -12553,6 +12905,7 @@ export type LocalizedStoryMetaFragmentFragment = {
                   __typename?: 'AuthorEntityResponse'
                   data?: {
                     __typename?: 'AuthorEntity'
+                    id?: string | null
                     attributes?: {
                       __typename?: 'Author'
                       firstName: string
@@ -12966,7 +13319,13 @@ export type ComponentModulesImageFragmentFragment = {
           __typename?: 'AuthorEntityResponse'
           data?: {
             __typename?: 'AuthorEntity'
-            attributes?: { __typename?: 'Author'; firstName: string } | null
+            id?: string | null
+            attributes?: {
+              __typename?: 'Author'
+              firstName: string
+              lastName: string
+              insertion?: string | null
+            } | null
           } | null
         } | null
       } | null
@@ -13330,7 +13689,13 @@ export type ThemeQuery = {
                             __typename?: 'AuthorEntityResponse'
                             data?: {
                               __typename?: 'AuthorEntity'
-                              attributes?: { __typename?: 'Author'; firstName: string } | null
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'Author'
+                                firstName: string
+                                lastName: string
+                                insertion?: string | null
+                              } | null
                             } | null
                           } | null
                         } | null
@@ -13530,7 +13895,13 @@ export type ThemeQuery = {
                                   __typename?: 'AuthorEntityResponse'
                                   data?: {
                                     __typename?: 'AuthorEntity'
-                                    attributes?: { __typename?: 'Author'; firstName: string } | null
+                                    id?: string | null
+                                    attributes?: {
+                                      __typename?: 'Author'
+                                      firstName: string
+                                      lastName: string
+                                      insertion?: string | null
+                                    } | null
                                   } | null
                                 } | null
                               } | null
@@ -13549,6 +13920,7 @@ export type ThemeQuery = {
                       __typename?: 'AuthorEntityResponse'
                       data?: {
                         __typename?: 'AuthorEntity'
+                        id?: string | null
                         attributes?: {
                           __typename?: 'Author'
                           firstName: string
@@ -13632,7 +14004,13 @@ export type ThemeQuery = {
                                   __typename?: 'AuthorEntityResponse'
                                   data?: {
                                     __typename?: 'AuthorEntity'
-                                    attributes?: { __typename?: 'Author'; firstName: string } | null
+                                    id?: string | null
+                                    attributes?: {
+                                      __typename?: 'Author'
+                                      firstName: string
+                                      lastName: string
+                                      insertion?: string | null
+                                    } | null
                                   } | null
                                 } | null
                               } | null
@@ -13651,7 +14029,13 @@ export type ThemeQuery = {
                       __typename?: 'AuthorEntityResponse'
                       data?: {
                         __typename?: 'AuthorEntity'
-                        attributes?: { __typename?: 'Author'; firstName: string } | null
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'Author'
+                          firstName: string
+                          lastName: string
+                          insertion?: string | null
+                        } | null
                       } | null
                     } | null
                   } | null
@@ -13807,7 +14191,13 @@ export type ThemesQuery = {
                             __typename?: 'AuthorEntityResponse'
                             data?: {
                               __typename?: 'AuthorEntity'
-                              attributes?: { __typename?: 'Author'; firstName: string } | null
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'Author'
+                                firstName: string
+                                lastName: string
+                                insertion?: string | null
+                              } | null
                             } | null
                           } | null
                         } | null
@@ -14007,7 +14397,13 @@ export type ThemesQuery = {
                                   __typename?: 'AuthorEntityResponse'
                                   data?: {
                                     __typename?: 'AuthorEntity'
-                                    attributes?: { __typename?: 'Author'; firstName: string } | null
+                                    id?: string | null
+                                    attributes?: {
+                                      __typename?: 'Author'
+                                      firstName: string
+                                      lastName: string
+                                      insertion?: string | null
+                                    } | null
                                   } | null
                                 } | null
                               } | null
@@ -14026,6 +14422,7 @@ export type ThemesQuery = {
                       __typename?: 'AuthorEntityResponse'
                       data?: {
                         __typename?: 'AuthorEntity'
+                        id?: string | null
                         attributes?: {
                           __typename?: 'Author'
                           firstName: string
@@ -14109,7 +14506,13 @@ export type ThemesQuery = {
                                   __typename?: 'AuthorEntityResponse'
                                   data?: {
                                     __typename?: 'AuthorEntity'
-                                    attributes?: { __typename?: 'Author'; firstName: string } | null
+                                    id?: string | null
+                                    attributes?: {
+                                      __typename?: 'Author'
+                                      firstName: string
+                                      lastName: string
+                                      insertion?: string | null
+                                    } | null
                                   } | null
                                 } | null
                               } | null
@@ -14128,7 +14531,13 @@ export type ThemesQuery = {
                       __typename?: 'AuthorEntityResponse'
                       data?: {
                         __typename?: 'AuthorEntity'
-                        attributes?: { __typename?: 'Author'; firstName: string } | null
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'Author'
+                          firstName: string
+                          lastName: string
+                          insertion?: string | null
+                        } | null
                       } | null
                     } | null
                   } | null
@@ -14292,7 +14701,13 @@ export type StoriesRelatedToThemeQuery = {
                             __typename?: 'AuthorEntityResponse'
                             data?: {
                               __typename?: 'AuthorEntity'
-                              attributes?: { __typename?: 'Author'; firstName: string } | null
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'Author'
+                                firstName: string
+                                lastName: string
+                                insertion?: string | null
+                              } | null
                             } | null
                           } | null
                         } | null
@@ -14492,7 +14907,13 @@ export type StoriesRelatedToThemeQuery = {
                                   __typename?: 'AuthorEntityResponse'
                                   data?: {
                                     __typename?: 'AuthorEntity'
-                                    attributes?: { __typename?: 'Author'; firstName: string } | null
+                                    id?: string | null
+                                    attributes?: {
+                                      __typename?: 'Author'
+                                      firstName: string
+                                      lastName: string
+                                      insertion?: string | null
+                                    } | null
                                   } | null
                                 } | null
                               } | null
@@ -14511,6 +14932,7 @@ export type StoriesRelatedToThemeQuery = {
                       __typename?: 'AuthorEntityResponse'
                       data?: {
                         __typename?: 'AuthorEntity'
+                        id?: string | null
                         attributes?: {
                           __typename?: 'Author'
                           firstName: string
@@ -14594,7 +15016,13 @@ export type StoriesRelatedToThemeQuery = {
                                   __typename?: 'AuthorEntityResponse'
                                   data?: {
                                     __typename?: 'AuthorEntity'
-                                    attributes?: { __typename?: 'Author'; firstName: string } | null
+                                    id?: string | null
+                                    attributes?: {
+                                      __typename?: 'Author'
+                                      firstName: string
+                                      lastName: string
+                                      insertion?: string | null
+                                    } | null
                                   } | null
                                 } | null
                               } | null
@@ -14613,7 +15041,13 @@ export type StoriesRelatedToThemeQuery = {
                       __typename?: 'AuthorEntityResponse'
                       data?: {
                         __typename?: 'AuthorEntity'
-                        attributes?: { __typename?: 'Author'; firstName: string } | null
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'Author'
+                          firstName: string
+                          lastName: string
+                          insertion?: string | null
+                        } | null
                       } | null
                     } | null
                   } | null
@@ -14757,7 +15191,13 @@ export type ThemeFragmentFragment = {
                         __typename?: 'AuthorEntityResponse'
                         data?: {
                           __typename?: 'AuthorEntity'
-                          attributes?: { __typename?: 'Author'; firstName: string } | null
+                          id?: string | null
+                          attributes?: {
+                            __typename?: 'Author'
+                            firstName: string
+                            lastName: string
+                            insertion?: string | null
+                          } | null
                         } | null
                       } | null
                     } | null
@@ -14957,7 +15397,13 @@ export type ThemeFragmentFragment = {
                               __typename?: 'AuthorEntityResponse'
                               data?: {
                                 __typename?: 'AuthorEntity'
-                                attributes?: { __typename?: 'Author'; firstName: string } | null
+                                id?: string | null
+                                attributes?: {
+                                  __typename?: 'Author'
+                                  firstName: string
+                                  lastName: string
+                                  insertion?: string | null
+                                } | null
                               } | null
                             } | null
                           } | null
@@ -14976,6 +15422,7 @@ export type ThemeFragmentFragment = {
                   __typename?: 'AuthorEntityResponse'
                   data?: {
                     __typename?: 'AuthorEntity'
+                    id?: string | null
                     attributes?: {
                       __typename?: 'Author'
                       firstName: string
@@ -15059,7 +15506,13 @@ export type ThemeFragmentFragment = {
                               __typename?: 'AuthorEntityResponse'
                               data?: {
                                 __typename?: 'AuthorEntity'
-                                attributes?: { __typename?: 'Author'; firstName: string } | null
+                                id?: string | null
+                                attributes?: {
+                                  __typename?: 'Author'
+                                  firstName: string
+                                  lastName: string
+                                  insertion?: string | null
+                                } | null
                               } | null
                             } | null
                           } | null
@@ -15078,7 +15531,13 @@ export type ThemeFragmentFragment = {
                   __typename?: 'AuthorEntityResponse'
                   data?: {
                     __typename?: 'AuthorEntity'
-                    attributes?: { __typename?: 'Author'; firstName: string } | null
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'Author'
+                      firstName: string
+                      lastName: string
+                      insertion?: string | null
+                    } | null
                   } | null
                 } | null
               } | null
@@ -15238,7 +15697,13 @@ export type TriplyRecordQuery = {
                             __typename?: 'AuthorEntityResponse'
                             data?: {
                               __typename?: 'AuthorEntity'
-                              attributes?: { __typename?: 'Author'; firstName: string } | null
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'Author'
+                                firstName: string
+                                lastName: string
+                                insertion?: string | null
+                              } | null
                             } | null
                           } | null
                         } | null
@@ -15438,7 +15903,13 @@ export type TriplyRecordQuery = {
                                   __typename?: 'AuthorEntityResponse'
                                   data?: {
                                     __typename?: 'AuthorEntity'
-                                    attributes?: { __typename?: 'Author'; firstName: string } | null
+                                    id?: string | null
+                                    attributes?: {
+                                      __typename?: 'Author'
+                                      firstName: string
+                                      lastName: string
+                                      insertion?: string | null
+                                    } | null
                                   } | null
                                 } | null
                               } | null
@@ -15457,6 +15928,7 @@ export type TriplyRecordQuery = {
                       __typename?: 'AuthorEntityResponse'
                       data?: {
                         __typename?: 'AuthorEntity'
+                        id?: string | null
                         attributes?: {
                           __typename?: 'Author'
                           firstName: string
@@ -15540,7 +16012,13 @@ export type TriplyRecordQuery = {
                                   __typename?: 'AuthorEntityResponse'
                                   data?: {
                                     __typename?: 'AuthorEntity'
-                                    attributes?: { __typename?: 'Author'; firstName: string } | null
+                                    id?: string | null
+                                    attributes?: {
+                                      __typename?: 'Author'
+                                      firstName: string
+                                      lastName: string
+                                      insertion?: string | null
+                                    } | null
                                   } | null
                                 } | null
                               } | null
@@ -15559,7 +16037,13 @@ export type TriplyRecordQuery = {
                       __typename?: 'AuthorEntityResponse'
                       data?: {
                         __typename?: 'AuthorEntity'
-                        attributes?: { __typename?: 'Author'; firstName: string } | null
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'Author'
+                          firstName: string
+                          lastName: string
+                          insertion?: string | null
+                        } | null
                       } | null
                     } | null
                   } | null
@@ -15710,7 +16194,13 @@ export type TriplyRecordsQuery = {
                             __typename?: 'AuthorEntityResponse'
                             data?: {
                               __typename?: 'AuthorEntity'
-                              attributes?: { __typename?: 'Author'; firstName: string } | null
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'Author'
+                                firstName: string
+                                lastName: string
+                                insertion?: string | null
+                              } | null
                             } | null
                           } | null
                         } | null
@@ -15910,7 +16400,13 @@ export type TriplyRecordsQuery = {
                                   __typename?: 'AuthorEntityResponse'
                                   data?: {
                                     __typename?: 'AuthorEntity'
-                                    attributes?: { __typename?: 'Author'; firstName: string } | null
+                                    id?: string | null
+                                    attributes?: {
+                                      __typename?: 'Author'
+                                      firstName: string
+                                      lastName: string
+                                      insertion?: string | null
+                                    } | null
                                   } | null
                                 } | null
                               } | null
@@ -15929,6 +16425,7 @@ export type TriplyRecordsQuery = {
                       __typename?: 'AuthorEntityResponse'
                       data?: {
                         __typename?: 'AuthorEntity'
+                        id?: string | null
                         attributes?: {
                           __typename?: 'Author'
                           firstName: string
@@ -16012,7 +16509,13 @@ export type TriplyRecordsQuery = {
                                   __typename?: 'AuthorEntityResponse'
                                   data?: {
                                     __typename?: 'AuthorEntity'
-                                    attributes?: { __typename?: 'Author'; firstName: string } | null
+                                    id?: string | null
+                                    attributes?: {
+                                      __typename?: 'Author'
+                                      firstName: string
+                                      lastName: string
+                                      insertion?: string | null
+                                    } | null
                                   } | null
                                 } | null
                               } | null
@@ -16031,7 +16534,13 @@ export type TriplyRecordsQuery = {
                       __typename?: 'AuthorEntityResponse'
                       data?: {
                         __typename?: 'AuthorEntity'
-                        attributes?: { __typename?: 'Author'; firstName: string } | null
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'Author'
+                          firstName: string
+                          lastName: string
+                          insertion?: string | null
+                        } | null
                       } | null
                     } | null
                   } | null
@@ -16181,7 +16690,13 @@ export type TriplyRecordFragmentFragment = {
                         __typename?: 'AuthorEntityResponse'
                         data?: {
                           __typename?: 'AuthorEntity'
-                          attributes?: { __typename?: 'Author'; firstName: string } | null
+                          id?: string | null
+                          attributes?: {
+                            __typename?: 'Author'
+                            firstName: string
+                            lastName: string
+                            insertion?: string | null
+                          } | null
                         } | null
                       } | null
                     } | null
@@ -16381,7 +16896,13 @@ export type TriplyRecordFragmentFragment = {
                               __typename?: 'AuthorEntityResponse'
                               data?: {
                                 __typename?: 'AuthorEntity'
-                                attributes?: { __typename?: 'Author'; firstName: string } | null
+                                id?: string | null
+                                attributes?: {
+                                  __typename?: 'Author'
+                                  firstName: string
+                                  lastName: string
+                                  insertion?: string | null
+                                } | null
                               } | null
                             } | null
                           } | null
@@ -16400,6 +16921,7 @@ export type TriplyRecordFragmentFragment = {
                   __typename?: 'AuthorEntityResponse'
                   data?: {
                     __typename?: 'AuthorEntity'
+                    id?: string | null
                     attributes?: {
                       __typename?: 'Author'
                       firstName: string
@@ -16483,7 +17005,13 @@ export type TriplyRecordFragmentFragment = {
                               __typename?: 'AuthorEntityResponse'
                               data?: {
                                 __typename?: 'AuthorEntity'
-                                attributes?: { __typename?: 'Author'; firstName: string } | null
+                                id?: string | null
+                                attributes?: {
+                                  __typename?: 'Author'
+                                  firstName: string
+                                  lastName: string
+                                  insertion?: string | null
+                                } | null
                               } | null
                             } | null
                           } | null
@@ -16502,7 +17030,13 @@ export type TriplyRecordFragmentFragment = {
                   __typename?: 'AuthorEntityResponse'
                   data?: {
                     __typename?: 'AuthorEntity'
-                    attributes?: { __typename?: 'Author'; firstName: string } | null
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'Author'
+                      firstName: string
+                      lastName: string
+                      insertion?: string | null
+                    } | null
                   } | null
                 } | null
               } | null
@@ -16785,8 +17319,11 @@ export const StoryWithoutRelationsFragmentFragmentDoc = gql`
       locale
       author {
         data {
+          id
           attributes {
             firstName
+            lastName
+            insertion
           }
         }
       }
@@ -17367,6 +17904,7 @@ export const StoryMetaFragmentFragmentDoc = gql`
       locale
       author {
         data {
+          id
           attributes {
             firstName
             lastName
@@ -17421,6 +17959,7 @@ export const StoryMetaFragmentFragmentDoc = gql`
             }
             author {
               data {
+                id
                 attributes {
                   firstName
                   lastName
@@ -17444,6 +17983,7 @@ export const StoryMetaFragmentFragmentDoc = gql`
             }
             author {
               data {
+                id
                 attributes {
                   firstName
                   lastName
@@ -17543,6 +18083,8 @@ export const LocalizedStoryMetaFragmentFragmentDoc = gql`
                 id
                 attributes {
                   firstName
+                  lastName
+                  insertion
                 }
               }
             }
@@ -17694,6 +18236,7 @@ export const StoryFragmentFragmentDoc = gql`
             }
             author {
               data {
+                id
                 attributes {
                   firstName
                   lastName
@@ -17717,8 +18260,11 @@ export const StoryFragmentFragmentDoc = gql`
             }
             author {
               data {
+                id
                 attributes {
                   firstName
+                  lastName
+                  insertion
                 }
               }
             }
