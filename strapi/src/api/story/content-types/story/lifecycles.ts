@@ -81,7 +81,7 @@ async function checkParentChildConstraintsOrThrow(event) {
     : undefined
 
   // cannot be parent of itself
-  if (parentId === id) {
+  if (parentId && parentId === id) {
     throw new ValidationError('Story cannot be parent of itself')
   }
 
