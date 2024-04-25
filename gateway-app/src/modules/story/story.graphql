@@ -253,8 +253,11 @@ fragment StoryWithoutRelationsFragment on StoryEntity {
         locale
         author {
             data {
+                id
                 attributes {
                     firstName
+                    lastName
+                    insertion
                 }
             }
         }
@@ -512,8 +515,11 @@ fragment StoryFragment on StoryEntity {
                     }
                     author {
                         data {
+                            id
                             attributes {
                                 firstName
+                                lastName
+                                insertion
                             }
                         }
                     }
@@ -707,6 +713,8 @@ fragment LocalizedStoryMetaFragment on StoryEntity {
                             id
                             attributes {
                                 firstName
+                                lastName
+                                insertion
                             }
                         }
                     }
