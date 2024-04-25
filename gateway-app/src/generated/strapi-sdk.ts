@@ -7920,6 +7920,7 @@ export type StoriesQuery = {
                 __typename?: 'AuthorEntityResponse'
                 data?: {
                   __typename?: 'AuthorEntity'
+                  id?: string | null
                   attributes?: {
                     __typename?: 'Author'
                     firstName: string
@@ -8425,6 +8426,7 @@ export type StoryQuery = {
                 __typename?: 'AuthorEntityResponse'
                 data?: {
                   __typename?: 'AuthorEntity'
+                  id?: string | null
                   attributes?: {
                     __typename?: 'Author'
                     firstName: string
@@ -9714,6 +9716,7 @@ export type StoriesMetaByLocaleQuery = {
                 __typename?: 'AuthorEntityResponse'
                 data?: {
                   __typename?: 'AuthorEntity'
+                  id?: string | null
                   attributes?: {
                     __typename?: 'Author'
                     firstName: string
@@ -9897,6 +9900,7 @@ export type StoriesMetaByLocaleQuery = {
                       __typename?: 'AuthorEntityResponse'
                       data?: {
                         __typename?: 'AuthorEntity'
+                        id?: string | null
                         attributes?: {
                           __typename?: 'Author'
                           firstName: string
@@ -10005,6 +10009,7 @@ export type StoriesMetaByLocaleQuery = {
                       __typename?: 'AuthorEntityResponse'
                       data?: {
                         __typename?: 'AuthorEntity'
+                        id?: string | null
                         attributes?: {
                           __typename?: 'Author'
                           firstName: string
@@ -10529,6 +10534,7 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
                 __typename?: 'AuthorEntityResponse'
                 data?: {
                   __typename?: 'AuthorEntity'
+                  id?: string | null
                   attributes?: {
                     __typename?: 'Author'
                     firstName: string
@@ -11856,6 +11862,7 @@ export type StoryFragmentFragment = {
             __typename?: 'AuthorEntityResponse'
             data?: {
               __typename?: 'AuthorEntity'
+              id?: string | null
               attributes?: {
                 __typename?: 'Author'
                 firstName: string
@@ -11995,6 +12002,7 @@ export type StoryMetaFragmentFragment = {
       __typename?: 'AuthorEntityResponse'
       data?: {
         __typename?: 'AuthorEntity'
+        id?: string | null
         attributes?: {
           __typename?: 'Author'
           firstName: string
@@ -12178,6 +12186,7 @@ export type StoryMetaFragmentFragment = {
             __typename?: 'AuthorEntityResponse'
             data?: {
               __typename?: 'AuthorEntity'
+              id?: string | null
               attributes?: {
                 __typename?: 'Author'
                 firstName: string
@@ -12286,6 +12295,7 @@ export type StoryMetaFragmentFragment = {
             __typename?: 'AuthorEntityResponse'
             data?: {
               __typename?: 'AuthorEntity'
+              id?: string | null
               attributes?: {
                 __typename?: 'Author'
                 firstName: string
@@ -12602,6 +12612,7 @@ export type LocalizedStoryMetaFragmentFragment = {
             __typename?: 'AuthorEntityResponse'
             data?: {
               __typename?: 'AuthorEntity'
+              id?: string | null
               attributes?: {
                 __typename?: 'Author'
                 firstName: string
@@ -12785,6 +12796,7 @@ export type LocalizedStoryMetaFragmentFragment = {
                   __typename?: 'AuthorEntityResponse'
                   data?: {
                     __typename?: 'AuthorEntity'
+                    id?: string | null
                     attributes?: {
                       __typename?: 'Author'
                       firstName: string
@@ -12893,6 +12905,7 @@ export type LocalizedStoryMetaFragmentFragment = {
                   __typename?: 'AuthorEntityResponse'
                   data?: {
                     __typename?: 'AuthorEntity'
+                    id?: string | null
                     attributes?: {
                       __typename?: 'Author'
                       firstName: string
@@ -13907,6 +13920,7 @@ export type ThemeQuery = {
                       __typename?: 'AuthorEntityResponse'
                       data?: {
                         __typename?: 'AuthorEntity'
+                        id?: string | null
                         attributes?: {
                           __typename?: 'Author'
                           firstName: string
@@ -14408,6 +14422,7 @@ export type ThemesQuery = {
                       __typename?: 'AuthorEntityResponse'
                       data?: {
                         __typename?: 'AuthorEntity'
+                        id?: string | null
                         attributes?: {
                           __typename?: 'Author'
                           firstName: string
@@ -14917,6 +14932,7 @@ export type StoriesRelatedToThemeQuery = {
                       __typename?: 'AuthorEntityResponse'
                       data?: {
                         __typename?: 'AuthorEntity'
+                        id?: string | null
                         attributes?: {
                           __typename?: 'Author'
                           firstName: string
@@ -15406,6 +15422,7 @@ export type ThemeFragmentFragment = {
                   __typename?: 'AuthorEntityResponse'
                   data?: {
                     __typename?: 'AuthorEntity'
+                    id?: string | null
                     attributes?: {
                       __typename?: 'Author'
                       firstName: string
@@ -15911,6 +15928,7 @@ export type TriplyRecordQuery = {
                       __typename?: 'AuthorEntityResponse'
                       data?: {
                         __typename?: 'AuthorEntity'
+                        id?: string | null
                         attributes?: {
                           __typename?: 'Author'
                           firstName: string
@@ -16407,6 +16425,7 @@ export type TriplyRecordsQuery = {
                       __typename?: 'AuthorEntityResponse'
                       data?: {
                         __typename?: 'AuthorEntity'
+                        id?: string | null
                         attributes?: {
                           __typename?: 'Author'
                           firstName: string
@@ -16902,6 +16921,7 @@ export type TriplyRecordFragmentFragment = {
                   __typename?: 'AuthorEntityResponse'
                   data?: {
                     __typename?: 'AuthorEntity'
+                    id?: string | null
                     attributes?: {
                       __typename?: 'Author'
                       firstName: string
@@ -17884,6 +17904,7 @@ export const StoryMetaFragmentFragmentDoc = gql`
       locale
       author {
         data {
+          id
           attributes {
             firstName
             lastName
@@ -17938,6 +17959,7 @@ export const StoryMetaFragmentFragmentDoc = gql`
             }
             author {
               data {
+                id
                 attributes {
                   firstName
                   lastName
@@ -17961,6 +17983,7 @@ export const StoryMetaFragmentFragmentDoc = gql`
             }
             author {
               data {
+                id
                 attributes {
                   firstName
                   lastName
@@ -18213,6 +18236,7 @@ export const StoryFragmentFragmentDoc = gql`
             }
             author {
               data {
+                id
                 attributes {
                   firstName
                   lastName
