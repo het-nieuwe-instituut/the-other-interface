@@ -35,11 +35,7 @@ export const GalaxyFooter: React.FC<Props> = ({ galaxyPagination }) => {
         {isSearchBarCollapsed ? (
           <CollpsedSearch toggleSearchBar={toggleSearchBar} />
         ) : (
-          <GalaxySearchBar
-            total={total}
-            isCollapsable={isNoActiveSearch}
-            isNoActiveSearch={isNoActiveSearch}
-          />
+          <GalaxySearchBar total={total} isNoActiveSearch={isNoActiveSearch} />
         )}
       </GridItem>
       <GalaxyNavigation />

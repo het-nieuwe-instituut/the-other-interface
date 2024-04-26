@@ -9,7 +9,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useCallback, useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-export const usePresenter = (isCollapsable?: boolean) => {
+export const usePresenter = (isNoActiveSearch?: boolean) => {
   const router = useRouter()
   const pathname = usePathname()
   const dispatch = useDispatch()
@@ -52,10 +52,10 @@ export const usePresenter = (isCollapsable?: boolean) => {
   }, [dispatch])
 
   useEffect(() => {
-    if (isCollapsable && !isSearchResult) {
+    if (isNoActiveSearch && !isSearchResult) {
       handleSearchModeOpen()
     }
-  }, [isCollapsable, handleSearchModeOpen, isSearchResult])
+  }, [isNoActiveSearch, handleSearchModeOpen, isSearchResult])
 
   const resetSearchFilters = useCallback(() => {
     dispatch(sharedActions.searchCategory({ searchCategory: pageCategory }))

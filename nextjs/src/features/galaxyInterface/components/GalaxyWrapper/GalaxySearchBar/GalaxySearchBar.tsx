@@ -11,11 +11,10 @@ import { ClearButton } from './fragments/ClearButton'
 
 type Props = {
   total?: number
-  isCollapsable?: boolean
   isNoActiveSearch?: boolean
 }
 
-export const GalaxySearchBar: React.FC<Props> = ({ total, isCollapsable, isNoActiveSearch }) => {
+export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) => {
   const {
     category,
     isSearchModeActive,
@@ -31,7 +30,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isCollapsable, isNoAct
     searchBarRef,
     filterInputRef,
     handleClearAll,
-  } = usePresenter(isCollapsable)
+  } = usePresenter(isNoActiveSearch)
 
   return (
     <Grid

@@ -12,9 +12,6 @@ export const usePresenter = () => {
   const pathname = usePathname()
   const isAnyUserSearchActive = search && search !== ''
 
-  console.log(searchResult)
-  console.log(isSearchResult)
-
   const currentZoomNumber = getCurrentZoomNumber(pathname)
   const isSearchModeActive = useSelector((state: State) => state.shared.isSearchModeActive)
 
@@ -51,7 +48,6 @@ export const usePresenter = () => {
   return {
     setIsSearchBarCollapsed,
     isSearchBarCollapsed,
-    isCollapsable: true,
     isZoom1: currentZoomNumber === 1,
     toggleSearchBar,
     isNoActiveSearch: !search,
