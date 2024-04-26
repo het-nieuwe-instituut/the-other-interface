@@ -15,35 +15,27 @@ export const usePresenter = () => {
   const currentZoomNumber = getCurrentZoomNumber(pathname)
   const isSearchModeActive = useSelector((state: State) => state.shared.isSearchModeActive)
 
-  const [userToggled, setUserToggled] = useState(false)
-  const [isSearchBarCollapsed, setIsSearchBarCollapsed] = useState(() => true)
+  const [isSearchBarCollapsed, setIsSearchBarCollapsed] = useState(true)
 
   const toggleSearchBar = useCallback(() => {
-    setUserToggled(true)
-    setIsSearchBarCollapsed(prev => !prev)
+    setIsSearchBarCollapsed(collapse => !collapse)
   }, [])
 
   useEffect(() => {
-    if (!userToggled) {
-      setUserToggled(true)
-    }
-
+    // Search bar is always open on search result page
     if (isAnyUserSearchActive || isSearchResult) {
       return
-    } else {
-      setIsSearchBarCollapsed(!isSearchModeActive)
     }
-  }, [isSearchModeActive, userToggled, isAnyUserSearchActive, isSearchResult])
+
+    setIsSearchBarCollapsed(!isSearchModeActive)
+  }, [isSearchModeActive, isAnyUserSearchActive, isSearchResult])
 
   useEffect(() => {
-    if (isAnyUserSearchActive && isSearchResult && !userToggled) {
+    // Set up correct initial state depends on page and search state
+    if (isAnyUserSearchActive && isSearchResult) {
       setIsSearchBarCollapsed(false)
     }
-  }, [isAnyUserSearchActive, userToggled, isSearchResult])
-
-  useEffect(() => {
-    setUserToggled(false)
-  }, [isSearchResult])
+  }, [isAnyUserSearchActive, isSearchResult])
 
   return {
     setIsSearchBarCollapsed,
