@@ -10,7 +10,6 @@ export const usePresenter = () => {
   const searchResult = searchParams?.get('searchResult')
   const isSearchResult = !!searchResult
   const pathname = usePathname()
-  const isAnyUserSearchActive = search && search !== ''
 
   const currentZoomNumber = getCurrentZoomNumber(pathname)
   const isSearchModeActive = useSelector((state: State) => state.shared.isSearchModeActive)
@@ -22,20 +21,20 @@ export const usePresenter = () => {
   }, [])
 
   useEffect(() => {
-    // Search bar is always open on search result page
-    if (isAnyUserSearchActive || isSearchResult) {
+    // Search bar shoudn't collapse even if user close it on search result page
+    if (isSearchResult) {
       return
     }
 
     setIsSearchBarCollapsed(!isSearchModeActive)
-  }, [isSearchModeActive, isAnyUserSearchActive, isSearchResult])
+  }, [isSearchModeActive, isSearchResult])
 
   useEffect(() => {
-    // Set up correct initial state depends on page and search state
-    if (isAnyUserSearchActive && isSearchResult) {
+    // Search bar should be expanded on search result page
+    if (isSearchResult) {
       setIsSearchBarCollapsed(false)
     }
-  }, [isAnyUserSearchActive, isSearchResult])
+  }, [isSearchResult])
 
   return {
     setIsSearchBarCollapsed,
