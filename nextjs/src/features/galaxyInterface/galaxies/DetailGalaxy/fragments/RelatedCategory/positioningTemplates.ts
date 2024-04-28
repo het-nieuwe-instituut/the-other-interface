@@ -136,7 +136,7 @@ const archives: PositioningTemplate[][] = [
     {
       position: {
         bottom: '30%',
-        right: '-50%',
+        right: '70%',
       },
       grid: {
         gridRow: '2 / 3',
