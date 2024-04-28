@@ -10,20 +10,30 @@ export async function getZoom3RelationsTask({
   page = 1,
   locale,
   api,
+  maxPages,
 }: {
   type: Category
   id: string
   page: number
   locale: string
   api: Sdk
+  maxPages: number
 }) {
   try {
     const configByType = getZoom3Queries(type, api)
 
     if (isStoryCategory(type)) {
+      console.log('Story category')
       return await api?.StoriesRelations({ id, lang: locale, page })
     } else {
-      return await configByType?.relationsQuery?.({ id, lang: locale, page })
+      const currentData = await configByType?.relationsQuery?.({ id, lang: locale, page })
+      if (page === maxPages) {
+        return { currentData, nextData: { relations: [] } }
+      }
+      const nextPage = page === maxPages ? maxPages : page + 1
+      const nextData = await configByType?.relationsQuery?.({ id, lang: locale, page: nextPage })
+
+      return { currentData, nextData }
     }
   } catch (e) {
     console.log(e, 'Error accured in zoom level 3 task')

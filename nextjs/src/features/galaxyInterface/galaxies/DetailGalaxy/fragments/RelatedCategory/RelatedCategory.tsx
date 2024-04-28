@@ -26,15 +26,33 @@ export const RelatedCategory: React.FC<Props> = ({
   category,
   allRelationTotals,
 }) => {
-  const { positionedRecords } = usePresenter(category, allRelationTotals)
+  const { positionedRecords, nextPositionedRecords } = usePresenter(category, allRelationTotals)
 
   return (
-    <GridItem color={'white'} gridRow={gridRow} gridColumn={gridColumn}>
-      <Grid height="100%" templateColumns="repeat(2, 1fr)" templateRows="repeat(2, 1fr)">
-        {positionedRecords.map((record, index) => (
-          <Record key={keyExtractor(record.id, index, positionedRecords)} record={record} />
-        ))}
-      </Grid>
-    </GridItem>
+    <>
+      <GridItem color={'white'} gridRow={gridRow} gridColumn={gridColumn}>
+        <Grid height="100%" templateColumns="repeat(2, 1fr)" templateRows="repeat(2, 1fr)">
+          {positionedRecords.map((record, index) => (
+            <Record key={keyExtractor(record.id, index, positionedRecords)} record={record} />
+          ))}
+        </Grid>
+      </GridItem>
+      <GridItem
+        color={'white'}
+        gridRow={gridRow}
+        gridColumn={gridColumn}
+        css={{
+          zIndex: 10,
+          opacity: 0.2,
+          // filter: 'blur(6px)',
+        }}
+      >
+        <Grid height="100%" templateColumns="repeat(2, 1fr)" templateRows="repeat(2, 1fr)">
+          {nextPositionedRecords.map((record, index) => (
+            <Record key={keyExtractor(record.id, index, positionedRecords)} record={record} />
+          ))}
+        </Grid>
+      </GridItem>
+    </>
   )
 }
