@@ -53,7 +53,7 @@ export const StoryMeta: React.FC = () => {
       {parentRelation && parentRelation?.data?.id && (
         <Box marginBottom={'md'}>
           <Text textStyle={'socialLarge.lg'} fontWeight={700}>
-            {storiesT.t('parentStory')}:
+            {storiesT.t('parentStory')}
           </Text>
           <Text textStyle={'socialLarge.lg'} mt={1}>
             <Link
@@ -69,7 +69,7 @@ export const StoryMeta: React.FC = () => {
       {childrenRelation && childrenRelation?.data && childrenRelation.data.length > 0 && (
         <Box marginBottom={'md'}>
           <Text textStyle={'socialLarge.lg'} fontWeight={700}>
-            {storiesT.t('subStories')}:
+            {storiesT.t('subStories')}
           </Text>
           {childrenRelation?.data?.map((child, index, array) => {
             const hasItemAfter = array.length - 1 !== index
@@ -93,7 +93,7 @@ export const StoryMeta: React.FC = () => {
       {/* {siblingsRelation && siblingsRelation.length > 0 && (
         <Box marginBottom={'md'}>
           <Text textStyle={'socialLarge.lg'} fontWeight={700}>
-            {storiesT.t('siblingsStories')}:
+            {storiesT.t('siblingsStories')}
           </Text>
           {siblingsRelation?.map((sibling, index, array) => {
             const hasItemAfter = array.length - 1 !== index
