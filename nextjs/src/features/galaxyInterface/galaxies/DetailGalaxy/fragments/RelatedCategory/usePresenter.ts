@@ -24,7 +24,8 @@ export const usePresenter = (
     if (!data?.currentData?.relations) return []
 
     const positionedRecords: PositionedRecord[] = []
-    const categoryPositioningTemplate = positioningTemplate[category][page % 2 === 0 ? 1 : 0]
+    const categoryPositioningTemplate =
+      positioningTemplate[category][page > maxPages ? 0 : page % 2 === 0 ? 1 : 0]
     const categoryRelations = data?.currentData?.relations.find(
       relation => relation.type?.toLocaleLowerCase() === category
     )?.paginatedRelations

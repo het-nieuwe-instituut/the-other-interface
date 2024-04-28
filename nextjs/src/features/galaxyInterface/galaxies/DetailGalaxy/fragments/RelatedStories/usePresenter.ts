@@ -74,8 +74,7 @@ export const usePresenter = (allRelationTotals?: AllRelationTotalsType) => {
     if (!storiesRelations) return []
 
     const positionedStories: PositionedRecord[] = []
-
-    positioningTemplate[page % 2 === 0 ? 1 : 0].forEach((template, index) => {
+    positioningTemplate[page > maxPages ? 0 : page % 2 === 0 ? 1 : 0].forEach((template, index) => {
       const record = storiesRelations[index]
 
       if (record) {
