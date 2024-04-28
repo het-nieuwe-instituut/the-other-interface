@@ -30,7 +30,14 @@ export const RelatedCategory: React.FC<Props> = ({
 
   return (
     <>
-      <GridItem color={'white'} gridRow={gridRow} gridColumn={gridColumn}>
+      <GridItem
+        color={'white'}
+        gridRow={gridRow}
+        gridColumn={gridColumn}
+        css={{
+          zIndex: 20,
+        }}
+      >
         <Grid height="100%" templateColumns="repeat(2, 1fr)" templateRows="repeat(2, 1fr)">
           {positionedRecords.map((record, index) => (
             <Record key={keyExtractor(record.id, index, positionedRecords)} record={record} />
@@ -44,7 +51,7 @@ export const RelatedCategory: React.FC<Props> = ({
         css={{
           zIndex: 10,
           opacity: 0.2,
-          // filter: 'blur(6px)',
+          filter: 'blur(6px)',
         }}
       >
         <Grid height="100%" templateColumns="repeat(2, 1fr)" templateRows="repeat(2, 1fr)">

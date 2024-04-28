@@ -31,7 +31,7 @@ export const RelatedStories: React.FC<Props> = ({ gridRow, allRelationTotals }) 
         css={{
           zIndex: 10,
           opacity: 0.2,
-          // filter: 'blur(6px)',
+          filter: 'blur(6px)',
         }}
       >
         <Grid height="100%" templateColumns="repeat(2, 1fr)" templateRows="repeat(4, 1fr)">
