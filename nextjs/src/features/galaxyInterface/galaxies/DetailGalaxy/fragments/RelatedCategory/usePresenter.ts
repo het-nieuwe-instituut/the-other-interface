@@ -6,33 +6,6 @@ import { positioningTemplate } from './positioningTemplates'
 import { useRecordRelations } from '@/features/record/hooks/useRecordRelations'
 import { useParams, useSearchParams } from 'next/navigation'
 import { AllRelationTotalsType } from './RelatedCategory'
-// import {
-//   ArchivesRelationsQuery,
-//   ObjectRelationsQuery,
-//   PeopleRelationsQuery,
-//   PublicationRelationsQuery,
-//   StoriesRelationsQuery,
-// } from 'src/generated/graphql'
-
-// export interface NewType {
-//   data: {
-//     currentData:
-//       | ArchivesRelationsQuery
-//       | PeopleRelationsQuery
-//       | ObjectRelationsQuery
-//       | PublicationRelationsQuery
-//       | StoriesRelationsQuery
-//       | undefined
-
-//     nextData:
-//       | ArchivesRelationsQuery
-//       | PeopleRelationsQuery
-//       | ObjectRelationsQuery
-//       | PublicationRelationsQuery
-//       | StoriesRelationsQuery
-//       | undefined
-//   }
-// }
 
 export const usePresenter = (
   category: CloudCategory,

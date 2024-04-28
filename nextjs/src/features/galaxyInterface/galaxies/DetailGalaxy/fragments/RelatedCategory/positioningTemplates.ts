@@ -125,8 +125,8 @@ const archives: PositioningTemplate[][] = [
   [
     {
       position: {
-        left: '10%',
-        bottom: '20%',
+        left: '90%',
+        bottom: '10%',
       },
       grid: {
         gridRow: '1 / 2',
@@ -135,8 +135,8 @@ const archives: PositioningTemplate[][] = [
     },
     {
       position: {
-        bottom: '10%',
-        right: '40%',
+        bottom: '30%',
+        right: '-50%',
       },
       grid: {
         gridRow: '2 / 3',
