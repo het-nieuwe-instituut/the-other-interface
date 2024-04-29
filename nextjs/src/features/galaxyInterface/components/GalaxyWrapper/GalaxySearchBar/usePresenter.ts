@@ -6,15 +6,15 @@ import { usePageCategory } from '@/features/shared/hooks/usePageCategory'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 import { sharedActions } from '@/features/shared/stores/shared.store'
 import { usePathname, useRouter } from 'next/navigation'
-import { useCallback, useEffect, useState, useRef, useMemo } from 'react'
+import { useCallback, useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-export const usePresenter = (isCollapsable?: boolean) => {
+export const usePresenter = (isNoActiveSearch?: boolean) => {
   const router = useRouter()
   const pathname = usePathname()
   const dispatch = useDispatch()
 
-  const { lang, search } = useZoom2Params()
+  const { lang, search, isSearchResult } = useZoom2Params()
 
   const filterInputRef = useRef<HTMLInputElement>(null)
   const searchBarRef = useRef<HTMLDivElement>(null)
@@ -52,10 +52,10 @@ export const usePresenter = (isCollapsable?: boolean) => {
   }, [dispatch])
 
   useEffect(() => {
-    if (isCollapsable) {
+    if (isNoActiveSearch && !isSearchResult) {
       handleSearchModeOpen()
     }
-  }, [isCollapsable, handleSearchModeOpen])
+  }, [isNoActiveSearch, handleSearchModeOpen, isSearchResult])
 
   const resetSearchFilters = useCallback(() => {
     dispatch(sharedActions.searchCategory({ searchCategory: pageCategory }))
@@ -76,7 +76,7 @@ export const usePresenter = (isCollapsable?: boolean) => {
 
   const handleGoClick = useCallback(() => {
     const searchParam = inputValue ? `&search=${inputValue}` : ''
-    let url = `/landingpage?category=${searchCategory}${searchParam}`
+    let url = `/landingpage?category=${searchCategory}${searchParam}&searchResult=true`
     url = addLocaleToUrl(url, lang)
     router.push(url)
 
@@ -87,10 +87,6 @@ export const usePresenter = (isCollapsable?: boolean) => {
     setInputValue('')
     dispatch(sharedActions.searchCategory({ searchCategory: pageCategory }))
   }, [dispatch, pageCategory])
-
-  const isAnySearchActive = useMemo(() => {
-    return search !== ''
-  }, [search])
 
   useEffect(() => {
     const handleEnterPress = (e: KeyboardEvent) => {
@@ -141,6 +137,5 @@ export const usePresenter = (isCollapsable?: boolean) => {
     searchBarRef,
     filterInputRef,
     handleClearAll,
-    isAnySearchActive,
   }
 }

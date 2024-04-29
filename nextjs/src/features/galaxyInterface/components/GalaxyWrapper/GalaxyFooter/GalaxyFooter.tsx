@@ -1,3 +1,4 @@
+'use client'
 import {
   FOOTER_Z_INDEX,
   GALAXY_EDITORIAL_LAYER_PART,
@@ -14,7 +15,7 @@ type Props = {
 }
 
 export const GalaxyFooter: React.FC<Props> = ({ galaxyPagination }) => {
-  const { isSearchBarCollapsed, toggleSearchBar, isCollapsable, isZoom1 } = usePresenter()
+  const { isSearchBarCollapsed, toggleSearchBar, isZoom1, isNoActiveSearch } = usePresenter()
   const { data: total } = useTotalCounter(isZoom1)
 
   return (
@@ -34,7 +35,7 @@ export const GalaxyFooter: React.FC<Props> = ({ galaxyPagination }) => {
         {isSearchBarCollapsed ? (
           <CollpsedSearch toggleSearchBar={toggleSearchBar} />
         ) : (
-          <GalaxySearchBar total={total} isCollapsable={isCollapsable} />
+          <GalaxySearchBar total={total} isNoActiveSearch={isNoActiveSearch} />
         )}
       </GridItem>
       <GalaxyNavigation />
