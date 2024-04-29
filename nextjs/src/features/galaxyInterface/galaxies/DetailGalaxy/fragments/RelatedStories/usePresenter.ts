@@ -33,8 +33,8 @@ const positioningTemplate: PositioningTemplate[][] = [
   [
     {
       position: {
-        left: '-70%',
-        bottom: '50%',
+        left: '-40%',
+        bottom: '30%',
       },
       grid: {
         gridRow: '1 / 2',
@@ -44,7 +44,7 @@ const positioningTemplate: PositioningTemplate[][] = [
     {
       position: {
         top: '10%',
-        left: '90%',
+        left: '50%',
       },
       grid: {
         gridRow: '4 / 5',

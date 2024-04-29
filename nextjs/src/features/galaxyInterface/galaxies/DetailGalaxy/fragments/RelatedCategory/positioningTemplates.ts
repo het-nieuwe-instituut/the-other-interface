@@ -31,7 +31,7 @@ const objects: PositioningTemplate[][] = [
   [
     {
       position: {
-        right: '70%',
+        right: '50%',
         bottom: '30%',
       },
       grid: {
@@ -78,8 +78,8 @@ const publications: PositioningTemplate[][] = [
   [
     {
       position: {
-        left: '45%',
-        bottom: '15%',
+        left: '35%',
+        bottom: '20%',
       },
       grid: {
         gridRow: '1 / 2',
@@ -89,7 +89,7 @@ const publications: PositioningTemplate[][] = [
     {
       position: {
         top: '15%',
-        right: '55%',
+        right: '35%',
       },
       grid: {
         gridRow: '2 / 3',
@@ -125,8 +125,8 @@ const archives: PositioningTemplate[][] = [
   [
     {
       position: {
-        left: '90%',
-        bottom: '10%',
+        left: '40%',
+        bottom: '15%',
       },
       grid: {
         gridRow: '1 / 2',
@@ -136,7 +136,7 @@ const archives: PositioningTemplate[][] = [
     {
       position: {
         bottom: '30%',
-        right: '70%',
+        right: '50%',
       },
       grid: {
         gridRow: '2 / 3',
@@ -172,8 +172,8 @@ const people: PositioningTemplate[][] = [
   [
     {
       position: {
-        right: '-40%',
-        bottom: '-50%',
+        right: '-30%',
+        bottom: '-40%',
       },
       grid: {
         gridRow: '1 / 2',
@@ -182,8 +182,8 @@ const people: PositioningTemplate[][] = [
     },
     {
       position: {
-        top: '-70%',
-        right: '50%',
+        top: '-55%',
+        right: '35%',
       },
       grid: {
         gridRow: '2 / 3',
