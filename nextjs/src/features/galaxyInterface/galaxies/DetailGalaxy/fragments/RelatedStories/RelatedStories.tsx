@@ -14,7 +14,14 @@ export const RelatedStories: React.FC<Props> = ({ gridRow, allRelationTotals }) 
 
   return (
     <>
-      <GridItem gridRow={gridRow} gridColumn="2" color="white">
+      <GridItem
+        gridRow={gridRow}
+        gridColumn="2"
+        color="white"
+        css={{
+          zIndex: 20,
+        }}
+      >
         <Grid height="100%" templateColumns="repeat(2, 1fr)" templateRows="repeat(4, 1fr)">
           {positionedStories.map(story => (
             <Record key={story.id} record={story} />

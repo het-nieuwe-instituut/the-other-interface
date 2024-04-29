@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import { CATEGORIES, CloudCategory, isStoryCategory } from '@/features/shared/utils/categories'
 import { PositioningTemplate } from '@/features/shared/types/position'
 import { useParams, useSearchParams } from 'next/navigation'
@@ -61,8 +61,21 @@ export const usePresenter = (allRelationTotals?: AllRelationTotalsType) => {
   const id = params?.id as string
   const recordCategory = params?.category as CloudCategory
   const maxPages = Math.ceil((allRelationTotals?.[CATEGORIES.stories] || 2) / 2)
-
+  const current = useRef(0)
+  const next = useRef(1)
   const { data } = useRecordRelations(recordCategory, id, maxPages)
+
+  useEffect(() => {
+    if (page <= maxPages) {
+      if (page % 2 === 0) {
+        current.current = 1
+        next.current = 0
+      } else {
+        current.current = 0
+        next.current = 1
+      }
+    }
+  }, [page, maxPages])
 
   const positionedStories = useMemo(() => {
     if (!data?.currentData?.relations) return []
@@ -74,7 +87,7 @@ export const usePresenter = (allRelationTotals?: AllRelationTotalsType) => {
     if (!storiesRelations) return []
 
     const positionedStories: PositionedRecord[] = []
-    positioningTemplate[page > maxPages ? 0 : page % 2 === 0 ? 1 : 0].forEach((template, index) => {
+    positioningTemplate[current.current].forEach((template, index) => {
       const record = storiesRelations[index]
 
       if (record) {
@@ -88,7 +101,7 @@ export const usePresenter = (allRelationTotals?: AllRelationTotalsType) => {
     })
 
     return positionedStories
-  }, [data?.currentData?.relations, page])
+  }, [data?.currentData?.relations])
 
   const nextPositionedStories = useMemo(() => {
     if (!data?.nextData?.relations) return []
@@ -101,7 +114,7 @@ export const usePresenter = (allRelationTotals?: AllRelationTotalsType) => {
 
     const positionedStories: PositionedRecord[] = []
 
-    positioningTemplate[page % 2 === 0 ? 0 : 1].forEach((template, index) => {
+    positioningTemplate[next.current].forEach((template, index) => {
       const record = storiesRelations[index]
 
       if (record) {
@@ -115,7 +128,7 @@ export const usePresenter = (allRelationTotals?: AllRelationTotalsType) => {
     })
 
     return positionedStories
-  }, [data?.nextData?.relations, page])
+  }, [data?.nextData?.relations])
 
   return {
     positionedStories,
