@@ -1,5 +1,5 @@
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { CATEGORIES } from '@/features/shared/utils/categories'
+import { CATEGORIES, Category } from '@/features/shared/utils/categories'
 
 import {
   ArchiveRecordRelationsQuery,
@@ -12,26 +12,26 @@ interface TotalType {
   total: string
 }
 
-export const useMapRecordTableData = (
-  data:
-    | (
-        | (ArchiveRecordRelationsQuery &
-            ObjectRecordRelationsQuery &
-            PeopleRecordRelationsQuery &
-            PublicationRecordRelationsQuery &
-            TotalType)
-        | undefined
-      )[]
-    | undefined
-) => {
-  const { t } = useTypeSafeTranslation('recordTable')
+type DataType =
+  | (
+      | (ArchiveRecordRelationsQuery &
+          ObjectRecordRelationsQuery &
+          PeopleRecordRelationsQuery &
+          PublicationRecordRelationsQuery &
+          TotalType)
+      | undefined
+    )
+  | undefined
 
-  return (data || []).map((item, index) => {
-    if (item?.publicationRecordRelations && item?.publicationRecordRelations?.length > 0) {
-      return {
-        type: CATEGORIES.publications,
-        name: t('relatedPublications') ?? '',
-        tableBody: item?.publicationRecordRelations.map(record => {
+export const useMapRecordTableData = (data: DataType[] | undefined, category: Category) => {
+  const { t } = useTypeSafeTranslation('recordTable')
+  if (!data) return null
+
+  if (category === CATEGORIES.publications) {
+    if (data[0] === undefined || data[0].total === '0') return null
+    const mapData = data?.flatMap((i, index) => {
+      if (i && i.publicationRecordRelations && i.publicationRecordRelations?.length > 0) {
+        return i.publicationRecordRelations.map(record => {
           return {
             id: record.idRelation ?? index + '',
             TableBodyItem: [
@@ -41,21 +41,29 @@ export const useMapRecordTableData = (
               { id: '4', value: record.externalSource },
             ],
           }
-        }),
-        tableHead: [
-          { label: t('relatedPublications') },
-          { label: t('type') },
-          { label: t('yearPublished') },
-          { label: t('externalSource') },
-        ],
-        total: item.total,
+        })
       }
+    })
+    const table = {
+      type: CATEGORIES.publications,
+      name: t('relatedPublications') ?? '',
+      tableHead: [
+        { label: t('relatedPublications') },
+        { label: t('type') },
+        { label: t('yearPublished') },
+        { label: t('externalSource') },
+      ],
+      tableBody: mapData,
+      total: data[0]?.total ?? '0',
     }
-    if (item?.peopleRecordRelations && item?.peopleRecordRelations?.length > 0) {
-      return {
-        type: CATEGORIES.people,
-        name: t('realtedPeople') ?? '',
-        tableBody: item?.peopleRecordRelations.map(record => {
+    return table
+  }
+
+  if (category === CATEGORIES.people) {
+    if (data[0] === undefined || data[0].total === '0') return null
+    const mapData = data?.flatMap((item, index) => {
+      if (item && item.peopleRecordRelations && item.peopleRecordRelations?.length > 0) {
+        return item.peopleRecordRelations.map(record => {
           return {
             id: record.idRelation ?? index + '',
             TableBodyItem: [
@@ -65,21 +73,30 @@ export const useMapRecordTableData = (
               { id: '4', value: record.externalSource },
             ],
           }
-        }),
-        tableHead: [
-          { label: t('realtedPeople') },
-          { label: t('role') },
-          { label: t('peoplePeriod') },
-          { label: t('externalSource') },
-        ],
-        total: item.total,
+        })
       }
+    })
+
+    const table = {
+      type: CATEGORIES.people,
+      name: t('realtedPeople') ?? '',
+      tableHead: [
+        { label: t('realtedPeople') },
+        { label: t('role') },
+        { label: t('peoplePeriod') },
+        { label: t('externalSource') },
+      ],
+      tableBody: mapData,
+      total: data[0]?.total ?? '0',
     }
-    if (item?.objectRecordRelations && item?.objectRecordRelations?.length > 0) {
-      return {
-        type: CATEGORIES.objects,
-        name: t('realtedObjects') ?? '',
-        tableBody: item?.objectRecordRelations.map(record => {
+    return table
+  }
+
+  if (category === CATEGORIES.objects) {
+    if (data[0] === undefined || data[0].total === '0') return null
+    const mapData = data?.flatMap((item, index) => {
+      if (item && item.objectRecordRelations && item.objectRecordRelations?.length > 0) {
+        return item.objectRecordRelations.map(record => {
           return {
             id: record.id ?? index + '',
             TableBodyItem: [
@@ -89,21 +106,30 @@ export const useMapRecordTableData = (
               { id: '4', value: record.externalSource },
             ],
           }
-        }),
-        tableHead: [
-          { label: t('realtedObjects') },
-          { label: t('objectNumber') },
-          { label: t('creationPeriod') },
-          { label: t('externalSource') },
-        ],
-        total: item.total,
+        })
       }
+    })
+
+    const table = {
+      type: CATEGORIES.objects,
+      name: t('realtedObjects') ?? '',
+      tableHead: [
+        { label: t('realtedObjects') },
+        { label: t('objectNumber') },
+        { label: t('creationPeriod') },
+        { label: t('externalSource') },
+      ],
+      tableBody: mapData,
+      total: data[0]?.total ?? '0',
     }
-    if (item?.archivesRecordRelations && item?.archivesRecordRelations?.length > 0) {
-      return {
-        type: CATEGORIES.archives,
-        name: t('relatedArchive') ?? '',
-        tableBody: item?.archivesRecordRelations.map(record => {
+    return table
+  }
+
+  if (category === CATEGORIES.archives) {
+    if (data[0] === undefined || data[0].total === '0') return null
+    const mapData = data?.flatMap((item, index) => {
+      if (item && item.archivesRecordRelations && item.archivesRecordRelations?.length > 0) {
+        return item.archivesRecordRelations.map(record => {
           return {
             id: record.id ?? index + '',
             TableBodyItem: [
@@ -112,14 +138,20 @@ export const useMapRecordTableData = (
               { id: '3', value: record.period },
             ],
           }
-        }),
-        tableHead: [
-          { label: t('relatedArchive') },
-          { label: t('objectNumber') },
-          { label: t('archivePeriod') },
-        ],
-        total: item.total,
+        })
       }
+    })
+    const table = {
+      type: CATEGORIES.archives,
+      name: t('relatedArchive') ?? '',
+      tableHead: [
+        { label: t('relatedArchive') },
+        { label: t('objectNumber') },
+        { label: t('archivePeriod') },
+      ],
+      tableBody: mapData,
+      total: data[0]?.total ?? '0',
     }
-  })
+    return table
+  }
 }

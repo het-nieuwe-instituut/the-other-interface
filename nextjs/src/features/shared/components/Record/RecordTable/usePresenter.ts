@@ -3,20 +3,22 @@ import { Category } from '@/features/shared/utils/categories'
 import { useParams } from 'next/navigation'
 
 export interface PaginationPagesTypes {
-  people: number
-  objects: number
-  archives: number
-  publications: number
+  people?: number
+  objects?: number
+  archives?: number
+  publications?: number
 }
 
-export const usePresenter = (pagination: PaginationPagesTypes) => {
+export const usePresenter = (category: Category) => {
   const params = useParams()
   const id = params?.id as string
   const type = params?.category as Category
 
-  const { data } = usePaginationedRecordRelations(type, id, pagination)
+  const { data, hasNextPage, fetchNextPage } = usePaginationedRecordRelations(type, id, category)
 
   return {
     data,
+    hasNextPage,
+    fetchNextPage,
   }
 }
