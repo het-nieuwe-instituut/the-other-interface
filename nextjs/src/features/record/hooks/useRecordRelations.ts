@@ -5,7 +5,7 @@ import { getZoom3RelationsTask } from '@/features/pages/tasks/getZoom3Relations'
 import { Category } from '../../shared/utils/categories'
 import { useSearchParams } from 'next/navigation'
 
-export function useRecordRelations(type: Category, id: string, maxPages?: number) {
+export function useRecordRelations(type: Category, id: string, maxPages: number) {
   const api = initApiClientService()
   const searchParams = useSearchParams()
   const lang = searchParams?.get('lang') || 'nl'
@@ -14,10 +14,10 @@ export function useRecordRelations(type: Category, id: string, maxPages?: number
       ? maxPages
       : parseInt(searchParams?.get('page') || '1')
 
-  const queryFn = () => getZoom3RelationsTask({ type, id, page, locale: lang, api })
+  const queryFn = () => getZoom3RelationsTask({ type, id, page, locale: lang, api, maxPages })
 
   return useQuery({
-    queryKey: ['record-relations', id, type, page, lang],
+    queryKey: ['record-relations', id, type, page, lang, maxPages],
     queryFn,
     refetchOnWindowFocus: false,
   })
