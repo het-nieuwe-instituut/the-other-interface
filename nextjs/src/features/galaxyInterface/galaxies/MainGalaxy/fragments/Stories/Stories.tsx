@@ -25,7 +25,7 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
     pageNumber: currentPage,
   } = usePresenter(stories, nextStories)
 
-  const { handleImageLoaded, allImagesLoaded } = useImageLoader(positionedStories)
+  const { handleImageLoaded, allImagesLoaded } = useImageLoader(positionedStories, currentPage)
 
   const svgRef = useDrawLines('.story-grid-item', originalTemplateIndex, positionedStories)
 

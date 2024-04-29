@@ -1,8 +1,11 @@
 import { useState, useCallback, useEffect } from 'react'
 import { PositionedStory } from '../types'
+import { useSearchParams } from 'next/navigation'
 
-export const useImageLoader = (positionedStories: PositionedStory[]) => {
+export const useImageLoader = (positionedStories: PositionedStory[], page: number) => {
   const [loadedImages, setLoadedImages] = useState(new Set())
+  const searchParams = useSearchParams()
+  const lang = searchParams?.get('lang')
 
   const handleImageLoaded = useCallback((id: string) => {
     setLoadedImages(prev => {
@@ -20,8 +23,9 @@ export const useImageLoader = (positionedStories: PositionedStory[]) => {
       }
     })
     setLoadedImages(newLoadedSet)
-    return () => setLoadedImages(new Set())
-  }, [positionedStories])
+    // Strategic dependency choice to prevent unnecessary re-renders and avoid infinite loading states after hot reloads in development mode.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page, lang])
 
   const allImagesLoaded = positionedStories.length === loadedImages.size
 
