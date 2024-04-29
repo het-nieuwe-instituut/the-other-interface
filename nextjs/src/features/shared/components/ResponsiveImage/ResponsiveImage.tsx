@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import { usePresenter } from './usePresenter'
 import Image from 'next/image'
@@ -72,7 +73,11 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
           }}
           fill={true}
           onContextMenu={handleRightClick}
-          onLoad={onLoad}
+          onLoad={() => {
+            if (onLoad) {
+              onLoad()
+            }
+          }}
         />
       )}
     </Box>

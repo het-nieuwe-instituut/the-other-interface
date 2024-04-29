@@ -10,7 +10,7 @@ import { useCallback } from 'react'
 type Props = {
   story: PositionedStory
   isMainGrid?: boolean
-  onLoad?: () => void
+  onLoad?: (storyId: string) => void
 }
 
 export const Story: React.FC<Props> = ({ story, isMainGrid, onLoad }) => {
@@ -31,9 +31,9 @@ export const Story: React.FC<Props> = ({ story, isMainGrid, onLoad }) => {
 
   const handleImageLoad = useCallback(() => {
     if (onLoad) {
-      onLoad()
+      onLoad(story.id)
     }
-  }, [onLoad])
+  }, [onLoad, story.id])
 
   return (
     <GridItem position="relative" css={{ ...grid }}>
@@ -50,7 +50,7 @@ export const Story: React.FC<Props> = ({ story, isMainGrid, onLoad }) => {
         cursor={isClickable ? 'pointer' : 'default'}
         onClick={handleClick}
         _hover={isClickable ? { transform: 'scale(1.05)' } : undefined}
-        transition="all .4s ease-in-out"
+        // transition="all .4s ease-in-out"
         className={isMainGrid ? 'story-grid-item' : ''}
       >
         <ResponsiveImage

@@ -15,6 +15,7 @@ export type MappedStory = {
   image: string
   locale: string
   id: string
+  hasImage: boolean
 }
 
 export type PositionedStory = MappedStory & {
