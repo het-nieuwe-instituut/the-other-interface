@@ -8,13 +8,15 @@ import { sharedActions } from '@/features/shared/stores/shared.store'
 import { usePathname, useRouter } from 'next/navigation'
 import { useCallback, useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Filter, FilterArray } from '../Suggestions/Suggestions'
+import { decodeFilters, encodeFilters } from './searchHelpers'
 
 export const usePresenter = (isNoActiveSearch?: boolean) => {
   const router = useRouter()
   const pathname = usePathname()
   const dispatch = useDispatch()
 
-  const { lang, search, isSearchResult } = useZoom2Params()
+  const { lang, search, isSearchResult, filters } = useZoom2Params()
 
   const filterInputRef = useRef<HTMLInputElement>(null)
   const searchBarRef = useRef<HTMLDivElement>(null)
@@ -28,10 +30,31 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
   const { total } = data || { total: 0 }
 
   const [inputValue, setInputValue] = useState('')
+  const [selectedFilters, setSelectedFilters] = useState<FilterArray>([])
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value)
-  }
+  useEffect(() => {
+    if (typeof filters === 'string') {
+      const decodedFilters: FilterArray = decodeFilters(filters)
+      setSelectedFilters(decodedFilters)
+    }
+  }, [filters])
+
+  const handleInputChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const newValue = e.target.value
+      setInputValue(newValue)
+      dispatch(sharedActions.categorySuggestionsOpen({ categorySuggestionsOpen: newValue !== '' }))
+    },
+    [dispatch]
+  )
+
+  const handleSelectFilter = useCallback(
+    (filter: Filter) => {
+      setSelectedFilters([...selectedFilters, filter])
+      dispatch(sharedActions.categorySuggestionsOpen({ categorySuggestionsOpen: false }))
+    },
+    [selectedFilters, dispatch]
+  )
 
   useEffect(() => {
     dispatch(sharedActions.searchCategory({ searchCategory: pageCategory }))
@@ -75,13 +98,15 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
   )
 
   const handleGoClick = useCallback(() => {
+    const encodedFilters = encodeFilters(selectedFilters)
     const searchParam = inputValue ? `&search=${inputValue}` : ''
-    let url = `/landingpage?category=${searchCategory}${searchParam}&searchResult=true`
+    const filtersParam = encodedFilters ? `&filters=${encodedFilters}` : ''
+    let url = `/landingpage?category=${searchCategory}${searchParam}${filtersParam}&searchResult=true`
     url = addLocaleToUrl(url, lang)
     router.push(url)
 
     handleSearchModeClose(false)
-  }, [inputValue, searchCategory, router, handleSearchModeClose, lang])
+  }, [inputValue, searchCategory, router, handleSearchModeClose, lang, selectedFilters])
 
   const handleClearAll = useCallback(() => {
     setInputValue('')
@@ -137,5 +162,8 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
     searchBarRef,
     filterInputRef,
     handleClearAll,
+    isUserTyping: !!inputValue,
+    selectedFilters,
+    handleSelectFilter,
   }
 }

@@ -1,12 +1,13 @@
 import { FOOTER_Z_INDEX } from '@/features/shared/constants/mainConstants'
-import { Flex, Box, Grid } from '@chakra-ui/react'
+import { Flex, Box, Grid, Text } from '@chakra-ui/react'
 
 interface Props {
   isOpen?: boolean
+  label?: string
   children?: React.ReactNode
 }
 
-export const SuggestionBar: React.FC<Props> = ({ isOpen = false, children }) => {
+export const SuggestionBar: React.FC<Props> = ({ isOpen = false, children, label = '' }) => {
   return (
     <Grid
       position={'absolute'}
@@ -28,7 +29,9 @@ export const SuggestionBar: React.FC<Props> = ({ isOpen = false, children }) => 
       visibility={isOpen ? 'visible' : 'hidden'}
       templateColumns={'145px 1fr'}
     >
-      <Box width="146px"></Box>
+      <Flex width="146px" pt={4}>
+        <Text textStyle="socialLarge.xl">{label}</Text>
+      </Flex>
       <Box
         overflow="hidden"
         width="100%"
@@ -36,7 +39,14 @@ export const SuggestionBar: React.FC<Props> = ({ isOpen = false, children }) => 
         visibility={isOpen ? 'visible' : 'hidden'}
         transition="opacity 0.1s ease-in-out 0.2s, visibility 0.1s ease-in-out 0.2s"
       >
-        <Flex gap="5px" width={'100%'} overflowX="auto" paddingBottom="25px" marginBottom="-25px">
+        <Flex
+          gap="5px"
+          width={'100%'}
+          overflowX="auto"
+          paddingBottom="25px"
+          marginBottom="-25px"
+          maxHeight={'50px'}
+        >
           {children}
         </Flex>
       </Box>

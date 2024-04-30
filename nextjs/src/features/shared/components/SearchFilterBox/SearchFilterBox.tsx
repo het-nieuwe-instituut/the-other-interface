@@ -26,6 +26,7 @@ export const SearchFilterBox: React.FC<Props> = ({
       zIndex={zIndex || 'inherit'}
       cursor={onClick ? 'pointer' : 'default'}
       onClick={onClick}
+      minHeight="50px"
     >
       <Flex
         position="relative"
@@ -34,7 +35,9 @@ export const SearchFilterBox: React.FC<Props> = ({
         gap="5px"
         justifyContent={'space-between'}
       >
-        <Text textStyle="socialLarge.sm">{category}</Text>
+        <Text textStyle="socialLarge.sm" isTruncated>
+          {category}
+        </Text>
 
         {actionButton && (
           <Box position="relative" width="7px" height="7px" cursor="pointer">
@@ -43,7 +46,9 @@ export const SearchFilterBox: React.FC<Props> = ({
         )}
       </Flex>
 
-      <Text textStyle="socialLarge.xl">{subCategory}</Text>
+      <Text textStyle="socialLarge.xl" isTruncated>
+        {subCategory}
+      </Text>
     </GridItem>
   )
 }

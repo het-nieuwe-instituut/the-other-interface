@@ -8,11 +8,13 @@ export const useZoom2Params = () => {
   const search = searchParams?.get('search')
   const lang = searchParams?.get('lang')
   const isSearchResult = searchParams?.get('searchResult')
+  const filters = searchParams?.get('filters')
 
   return {
     category,
     search: search || undefined,
     lang,
     isSearchResult: !!isSearchResult,
+    filters,
   }
 }

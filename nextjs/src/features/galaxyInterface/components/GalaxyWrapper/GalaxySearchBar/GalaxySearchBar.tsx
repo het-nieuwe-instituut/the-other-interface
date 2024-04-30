@@ -8,6 +8,8 @@ import { CategorySuggestions } from '../CategorySuggestions/CategorySuggestions'
 import { GoButton } from './fragments/GoButton'
 import { SearchButton } from './fragments/SearchButton'
 import { ClearButton } from './fragments/ClearButton'
+import { Suggestions } from '../Suggestions/Suggestions'
+import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/SearchFilterBox'
 
 type Props = {
   total?: number
@@ -30,6 +32,9 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) =>
     searchBarRef,
     filterInputRef,
     handleClearAll,
+    isUserTyping,
+    handleSelectFilter,
+    selectedFilters,
   } = usePresenter(isNoActiveSearch)
 
   return (
@@ -65,17 +70,26 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) =>
       <Box overflow="hidden" height={'100%'}>
         <Grid
           templateColumns={'auto minmax(70px, 1fr)'}
-          gap="15px"
+          gap="8px"
           width="100%"
           overflowX="auto"
           paddingBottom="25px"
           marginBottom="-25px"
         >
-          <CategoryFilter
-            onClick={() => setIsCategorySuggestionsOpen(!isCategorySuggestionsOpen)}
-            isOpen={isCategorySuggestionsOpen}
-            selectedOption={category ? t(category) : ''}
-          />
+          <Flex overflow={'auto'}>
+            <CategoryFilter
+              onClick={() => setIsCategorySuggestionsOpen(!isCategorySuggestionsOpen)}
+              isOpen={isCategorySuggestionsOpen}
+              selectedOption={category ? t(category) : ''}
+            />
+
+            {selectedFilters.map(filter => (
+              <Box ml={2} key={filter.id}>
+                <SearchFilterBox category={filter.field} subCategory={filter.value} />
+              </Box>
+            ))}
+          </Flex>
+
           <FilterInput
             inputRef={filterInputRef}
             onFocus={handleSearchModeOpen}
@@ -99,8 +113,15 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) =>
         )}
       </Flex>
 
-      <SuggestionBar isOpen={isCategorySuggestionsOpen}>
-        <CategorySuggestions />
+      <SuggestionBar
+        isOpen={isCategorySuggestionsOpen}
+        label={isUserTyping ? t('suggestions') : ''}
+      >
+        {isUserTyping ? (
+          <Suggestions handleSelectFilter={handleSelectFilter} />
+        ) : (
+          <CategorySuggestions />
+        )}
       </SuggestionBar>
     </Grid>
   )
