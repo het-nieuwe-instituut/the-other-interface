@@ -35,10 +35,10 @@ export const useMapRecordTableData = (data: DataType[] | undefined, category: Ca
           return {
             id: record.idRelation ?? index + '',
             TableBodyItem: [
-              { id: '1', value: record.titleR },
-              { id: '2', value: record.typePub },
-              { id: '3', value: record.yearPub },
-              { id: '4', value: record.externalSource },
+              { id: record.idRelation + '1', value: record.titleR },
+              { id: record.idRelation + '2', value: record.typePub },
+              { id: record.idRelation + '3', value: record.yearPub },
+              { id: record.idRelation + '4', value: record.externalSource },
             ],
           }
         })
