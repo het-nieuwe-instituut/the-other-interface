@@ -7,5 +7,9 @@
   "archives": "Archieven",
   "people": "Personen",
   "publications": "Publicaties",
-  "storiesOver": "Stories over {{title}}"
+  "storiesOver": "Stories over {{title}}",
+  "hoverarchives": "Nieuwe Instituut beheert ongeveer 700 archieven en verzamelingen van Nederlandse architecten, stedenbouwkundigen, beroepsverenigingen en opleidingen. Het is daarmee een van de grootste architectuurcollecties ter wereld.",
+  "hoverobjects": "Nieuwe Instituut beheert een veelheid aan maquettes en andere objecten, zoals schets- en presentatiemodellen, kleine gebruiksvoorwerpen zoals tekenmaterialen en kleurstalen, en de volledige inventaris van museumwoning Huis Sonneveld, met meubels, lampen en servies.",
+  "hoverpeople": "Nieuwe Instituut beheert de gegevens van alle personen en instellingen die voorkomen in de Rijkscollectie voor Nederlandse Architectuur en Stedenbouw, zoals ontwerpers, kunstenaars, archiefvormers en auteurs. Ze zijn gekoppeld aan objecten uit de bibliotheekcollectie, en archieven, maar ook aan externe bronnen.",
+  "hoverpublications": "Nieuwe Instituut verzamelt en beheert publicaties over Nederlandse en buitenlandse architectuur, stedenbouw en verwante onderwerpen zoals huisvesting, ruimtelijke ordening, landschapsarchitectuur en interieurarchitectuur, maar ook kunst, design en digitale cultuur en maatschappelijke trends die van invloed zijn op het denken over de inrichting van de ruimte om ons heen."
 }
