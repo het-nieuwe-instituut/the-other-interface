@@ -28,7 +28,10 @@ export function usePaginationedRecordRelations(type: Category, id: string, categ
     keepPreviousData: true,
     getNextPageParam: (_lastPage, allPages) => {
       if (!allPages[0]) return null
-      return allPages.length >= parseInt(allPages[0].total) / 5 ? null : allPages.length + 1
+
+      return allPages.length >= Math.ceil(parseInt(allPages[0].total) / 5)
+        ? null
+        : allPages.length + 1
     },
   })
 }
