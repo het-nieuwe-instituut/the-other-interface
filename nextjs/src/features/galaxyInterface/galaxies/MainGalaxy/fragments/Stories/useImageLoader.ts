@@ -1,8 +1,13 @@
 import { useState, useCallback, useEffect } from 'react'
 import { PositionedStory } from '../types'
 import { useSearchParams } from 'next/navigation'
+import { StoryEntity } from 'src/generated/graphql'
 
-export const useImageLoader = (positionedStories: PositionedStory[], page: number) => {
+export const useImageLoader = (
+  positionedStories: PositionedStory[],
+  page: number,
+  stories: StoryEntity[]
+) => {
   const [loadedImages, setLoadedImages] = useState(new Set())
   const searchParams = useSearchParams()
   const lang = searchParams?.get('lang')
@@ -25,7 +30,7 @@ export const useImageLoader = (positionedStories: PositionedStory[], page: numbe
     setLoadedImages(newLoadedSet)
     // Strategic dependency choice to prevent unnecessary re-renders and avoid infinite loading states after hot reloads in development mode.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, lang])
+  }, [page, lang, stories])
 
   const allImagesLoaded = positionedStories.length === loadedImages.size
 

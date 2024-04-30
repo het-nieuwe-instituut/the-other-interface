@@ -38,14 +38,8 @@ export const useDrawLines = (selector: string, template: number, stories: Positi
           line.setAttribute('x2', endPoint.x.toString())
           line.setAttribute('y2', endPoint.y.toString())
           line.setAttribute('stroke', 'RGBA(0, 81, 255, 0)')
-          line.style.transition = 'stroke 0.6s ease-out'
-
           svg.appendChild(line)
-
-          // Trigger the transition after a brief timeout
-          setTimeout(() => {
-            line.setAttribute('stroke', 'RGBA(0, 81, 255, .8)')
-          }, 350)
+          line.setAttribute('stroke', 'RGBA(0, 81, 255, .8)')
         }
       }
     },
@@ -60,9 +54,7 @@ export const useDrawLines = (selector: string, template: number, stories: Positi
       }
     }
 
-    window.requestAnimationFrame(() => {
-      window.requestAnimationFrame(drawAfterLayout)
-    })
+    drawAfterLayout()
 
     window.addEventListener('resize', drawAfterLayout)
 

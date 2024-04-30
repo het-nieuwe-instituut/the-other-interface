@@ -12,20 +12,22 @@ type Props = {
   nextStories: StoryEntity[]
 }
 
-const currentPageFadeIn = keyframes({ from: { opacity: 0 }, to: { opacity: 1 } })
-const nextPageFadeIn = keyframes({ from: { opacity: 0 }, to: { opacity: 0.2 } })
+// const currentPageFadeIn = keyframes({ from: { opacity: 0 }, to: { opacity: 1 } })
+// const nextPageFadeIn = keyframes({ from: { opacity: 0 }, to: { opacity: 0.2 } })
 
 export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
   const {
     positionedStories,
     positionedNextStories,
-    isCurrentStoriesEmpty,
-    isNextStoriesEmpty,
     originalTemplateIndex,
     pageNumber: currentPage,
   } = usePresenter(stories, nextStories)
 
-  const { handleImageLoaded, allImagesLoaded } = useImageLoader(positionedStories, currentPage)
+  const { handleImageLoaded, allImagesLoaded } = useImageLoader(
+    positionedStories,
+    currentPage,
+    stories
+  )
 
   const svgRef = useDrawLines('.story-grid-item', originalTemplateIndex, positionedStories)
 
@@ -46,7 +48,7 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
         templateRows="repeat(2, 1fr)"
         gap="20px"
         css={{
-          animation: isCurrentStoriesEmpty ? 'none' : `${currentPageFadeIn} 300ms linear`,
+          // animation: isCurrentStoriesEmpty ? 'none' : `${currentPageFadeIn} 200ms linear`,
           zIndex: 20,
           visibility: allImagesLoaded ? 'visible' : 'hidden',
         }}
@@ -83,7 +85,7 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
         templateRows="repeat(2, 1fr)"
         gap="20px"
         css={{
-          animation: isNextStoriesEmpty ? 'none' : `${nextPageFadeIn} 300ms linear`,
+          // animation: isNextStoriesEmpty ? 'none' : `${nextPageFadeIn} 300ms linear`,
           zIndex: 10,
           opacity: 0.2,
           filter: 'blur(6px)',
