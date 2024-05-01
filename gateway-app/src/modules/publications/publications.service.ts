@@ -496,6 +496,9 @@ export class PublicationsService {
       undefined,
       { id }
     )
+    if (results.data.length === 0) {
+      throw new Error('Unexpected result returned from Triply API. Expected 1 result, got none.')
+    }
     if (results.data.length > 1) {
       throw new Error('Unexpected result returned from Triply API. Expected 1 result, got more.')
     }
