@@ -24,11 +24,13 @@ const findImageUrl = (components: HomepageComponentsDynamicZone[]): string => {
 const mapStory = (story: StoryEntity) => {
   const storyId = story?.id
   const storyLocale = story?.attributes?.locale
+  const imageUrl = findImageUrl(story?.attributes?.components ?? [])
   return {
     title: story?.attributes?.title ?? '',
     image: findImageUrl(story?.attributes?.components ?? []),
     locale: storyLocale || 'nl',
     id: storyId || `${Math.floor(Math.random() * (99999 + 1))}`,
+    hasImage: !!imageUrl,
   }
 }
 
@@ -89,5 +91,6 @@ export const usePresenter = (stories: StoryEntity[], nextStories: StoryEntity[])
     isCurrentStoriesEmpty: stories.length === 0,
     isNextStoriesEmpty: nextStories.length === 0,
     originalTemplateIndex,
+    pageNumber,
   }
 }

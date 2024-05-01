@@ -1,4 +1,5 @@
-import React from 'react'
+'use client'
+import React, { useState } from 'react'
 import { usePresenter } from './usePresenter'
 import Image from 'next/image'
 import { Box, BoxProps } from '@chakra-ui/react'
@@ -27,10 +28,15 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   onClick,
   onLoad,
 }) => {
-  const { fallbackImage, isSuccessfullyLoaded, handleRightClick } = usePresenter(
-    src,
-    disableRightClick
-  )
+  const [imageLoaded, setImageLoaded] = useState(false)
+  const { fallbackImage, handleRightClick } = usePresenter(src, disableRightClick)
+
+  const handleLoad = () => {
+    setImageLoaded(true)
+    if (onLoad) {
+      onLoad() // Call external onLoad callback
+    }
+  }
 
   const processedSrc = limitCopyrightedImageResolution(src)
 
@@ -42,8 +48,8 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
         alt={alt || 'Fallback image'}
         sizes={size}
         style={{
-          transition: 'opacity 0.5s ease-out',
-          opacity: isSuccessfullyLoaded ? 0 : 1,
+          // transition: 'opacity 0.5s ease-out',
+          opacity: imageLoaded ? 0 : 1,
           position: 'absolute',
           top: 0,
           left: 0,
@@ -62,8 +68,8 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
           quality={100}
           onClick={onClick}
           style={{
-            transition: 'opacity 1s ease-out',
-            opacity: isSuccessfullyLoaded ? 1 : 0,
+            // transition: 'opacity 1s ease-out',
+            opacity: imageLoaded ? 1 : 0,
             position: 'absolute',
             top: 0,
             left: 0,
@@ -72,7 +78,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
           }}
           fill={true}
           onContextMenu={handleRightClick}
-          onLoad={onLoad}
+          onLoad={handleLoad}
         />
       )}
     </Box>
