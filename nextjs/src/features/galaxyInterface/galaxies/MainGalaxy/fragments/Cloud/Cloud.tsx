@@ -15,7 +15,6 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
   const { category, size, cloudPosition, titlePosition, handleCloudClick, setEnabled, t } =
     usePresenter(cloud)
   const breakpoint = useBreakpoint()
-
   const placement = tooltipPlacement(category, breakpoint)
 
   return (
@@ -23,8 +22,8 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
       <Tooltip
         label={t(`hover${category}`)}
         placement={placement.placement}
-        right={placement.right}
-        top={placement.top}
+        xAxis={placement.right}
+        yAxis={placement.top}
       >
         <Box
           position="absolute"
@@ -58,22 +57,23 @@ const tooltipPlacement = (category: CloudCategory, breakpoint: string) => {
   switch (category) {
     case CATEGORIES.archives:
       placement.placement = 'auto'
-      placement.right = breakpoint === 'md' ? '60px' : '250px'
+      placement.right = breakpoint === 'md' ? '100px' : '275px'
+      placement.top = breakpoint === 'lg' ? '30px' : '0px'
       break
     case CATEGORIES.objects:
       placement.placement = 'auto'
-      placement.right = breakpoint === 'md' ? '0px' : '-100px'
-      placement.top = '50px'
+      placement.right = breakpoint === 'md' ? '-40px' : '-120px'
+      placement.top = breakpoint === 'lg' ? '200px' : '10px'
       break
     case CATEGORIES.people:
       placement.placement = 'bottom'
-      placement.right = '0px'
-      placement.top = breakpoint === 'xl' ? '-110px' : '-80px'
+      placement.right = '0'
+      placement.top = breakpoint === 'xl' ? '-90px' : '-100px'
       break
     case CATEGORIES.publications:
       placement.placement = 'bottom'
-      placement.right = '0px'
-      placement.top = breakpoint === 'xl' ? '100px' : '60px'
+      placement.right = '50px'
+      placement.top = '90px'
       break
   }
   return placement
