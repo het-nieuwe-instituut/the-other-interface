@@ -231,3 +231,22 @@ export class ObjectRecordRelationArgs {
   @IsOptional()
   public lang?: string
 }
+
+@ArgsType()
+export class ObjectsZoomLevel2HoverArgs {
+  @Field(() => String, { nullable: true })
+  public id: string
+}
+@ObjectType()
+export class ObjectsZoomLevelHoverType {
+  @Field(() => String, { nullable: true })
+  public title: string
+
+  // confluence says this is missing
+  // need to follow up
+  // @Field(() => String, { nullable: true })
+  // public maker: string
+
+  @Field(() => String, { nullable: true })
+  public description: string
+}

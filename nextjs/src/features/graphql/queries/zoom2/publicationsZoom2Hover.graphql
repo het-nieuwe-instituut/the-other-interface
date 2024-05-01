@@ -1,0 +1,7 @@
+query PublicationsZoom2Hover($id: String) {
+    publicationsZoomLevel2Hover(id: $id) {
+        title
+        authors
+        description
+    }
+}

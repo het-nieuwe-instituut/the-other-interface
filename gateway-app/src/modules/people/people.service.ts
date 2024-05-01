@@ -123,6 +123,18 @@ const peopleRecordZoomLevel3DataKeys: KeysToVerify<PeopleRecordZoomLevel3Data> =
   externalSource: true,
 }
 
+export interface PeopleZoomLevel2HoverData {
+  title: string
+  profession: string
+  description: string
+}
+
+const peopleZoomLevel2HoverDataKeys: KeysToVerify<PeopleZoomLevel2HoverData> = {
+  title: true,
+  profession: true,
+  description: true,
+}
+
 @Injectable()
 export class PeopleService {
   protected entityType = 'triply'
@@ -134,6 +146,8 @@ export class PeopleService {
   private readonly ZoomLevel3RelationsCountEndpoint = 'people-recordRelations-Count/run?'
 
   private readonly ZoomLevel3RecordEndpoint = 'people-recordPage-editorial/run?'
+
+  private readonly ZoomLevel2HoverEndpoint = 'people-hoverState/run?'
 
   public constructor(private triplyService: TriplyService) {}
 
@@ -185,5 +199,15 @@ export class PeopleService {
     )
 
     return result.data
+  }
+
+  public async getZoomLevel2Hover(id: string) {
+    const results = await this.triplyService.queryTriplyData<PeopleZoomLevel2HoverData>(
+      this.ZoomLevel2HoverEndpoint,
+      peopleZoomLevel2HoverDataKeys,
+      undefined,
+      { id }
+    )
+    return results.data[0]
   }
 }

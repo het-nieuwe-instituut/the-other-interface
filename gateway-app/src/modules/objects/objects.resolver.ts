@@ -7,7 +7,9 @@ import {
   ObjectRecordRelationArgs,
   ObjectRelationsCountType,
   ObjectRelationsType,
+  ObjectsZoomLevel2HoverArgs,
   ObjectsZoomLevel3DetailType,
+  ObjectsZoomLevelHoverType,
 } from './objects.type'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { TriplyUtils } from '../triply/triply.utils'
@@ -57,5 +59,15 @@ export class ObjectMakerResolver {
     const id = TriplyUtils.getIdFromUri(object.maker)
 
     return this.zoomLevel3Service.getDetail(id, type)
+  }
+}
+
+@Resolver(ObjectsZoomLevelHoverType)
+export class ObjectsZoomLevel2HoverResolver {
+  public constructor(private readonly objectsService: ObjectsService) {}
+
+  @Query(() => ObjectsZoomLevelHoverType)
+  public async objectsZoomLevel2Hover(@Args() args: ObjectsZoomLevel2HoverArgs) {
+    return this.objectsService.getZoomLevel2Hover(args.id)
   }
 }

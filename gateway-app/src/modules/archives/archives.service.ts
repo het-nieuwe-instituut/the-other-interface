@@ -45,6 +45,18 @@ export enum ArchivesZoomLevel3Types {
   other = 'other',
 }
 
+export interface ArchivesZoomLevel2HoverData {
+  title: string
+  creators: string
+  description: string
+}
+
+const archivesZoomLevel2HoverDataKeys: KeysToVerify<ArchivesZoomLevel2HoverData> = {
+  title: true,
+  creators: true,
+  description: true,
+}
+
 export interface ArchivesRecordZoomLevel3Data {
   id: string
   thumbnail?: string
@@ -99,6 +111,8 @@ export class ArchivesService {
 
   private readonly ZoomLevel3RecordEndpoint = 'archives-recordPage-editorial/run?'
 
+  private readonly ZoomLevel2HoverEndpoint = 'archives-hoverState/run?'
+
   public constructor(private triplyService: TriplyService) {}
 
   public async getZoomLevel3Data(id: string) {
@@ -148,5 +162,15 @@ export class ArchivesService {
     )
 
     return result?.data
+  }
+
+  public async getZoomLevel2Hover(id: string) {
+    const peopleResults = await this.triplyService.queryTriplyData<ArchivesZoomLevel2HoverData>(
+      this.ZoomLevel2HoverEndpoint,
+      archivesZoomLevel2HoverDataKeys,
+      undefined,
+      { id }
+    )
+    return peopleResults.data[0]
   }
 }

@@ -4,6 +4,7 @@ import {
   ObjectRelationstZoomLevel3Resolver,
   ObjectMakerResolver,
   ObjectZoomLevel3Resolver,
+  ObjectsZoomLevel2HoverResolver,
 } from './objects.resolver'
 import { ObjectsService } from './objects.service'
 
@@ -14,12 +15,14 @@ import { ObjectsService } from './objects.service'
     ObjectZoomLevel3Resolver,
     ObjectMakerResolver,
     ObjectRelationstZoomLevel3Resolver,
+    ObjectsZoomLevel2HoverResolver,
   ],
   exports: [
     ObjectsService,
     ObjectZoomLevel3Resolver,
     ObjectMakerResolver,
     ObjectRelationstZoomLevel3Resolver,
+    ObjectsZoomLevel2HoverResolver,
   ],
 })
 export class ObjectsModule {}
