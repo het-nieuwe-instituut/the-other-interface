@@ -17,6 +17,7 @@ export const SearchButton: React.FC<Props> = ({ handleClick }) => {
       _hover={{ bg: 'transparent' }}
       _active={{ bg: 'transparent' }}
       transition="transform 0.2s ease-in-out"
+      borderRadius={1}
     >
       <SearchIcon />
     </Button>

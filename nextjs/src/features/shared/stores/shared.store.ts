@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { CloudCategory } from '../utils/categories'
+import { SearchCategory } from '../utils/categories'
 import { USER_LOOKS_ON } from '../constants/mainConstants'
 
 export type SharedState = {
   isDraftMode: boolean
   isMenuOpen: boolean
   isSearchModeActive: boolean
-  searchCategory: CloudCategory | null
+  searchCategory: SearchCategory | null
   isCategorySuggestionsOpen: boolean
   userLooksOn: (typeof USER_LOOKS_ON)[keyof typeof USER_LOOKS_ON]
 }

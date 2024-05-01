@@ -7,5 +7,6 @@
   "archives": "Archieven",
   "people": "Personen",
   "publications": "Publicaties",
-  "storiesOver": "Stories over {{title}}"
+  "storiesOver": "Stories over {{title}}",
+  "all": "Alles categorieën"
 }

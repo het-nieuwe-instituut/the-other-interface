@@ -7,8 +7,14 @@ import { FilterInput, CloseButton } from './fragments'
 import { CategorySuggestions } from '../CategorySuggestions/CategorySuggestions'
 import { GoButton } from './fragments/GoButton'
 import { SearchButton } from './fragments/SearchButton'
+import { ClearButton } from './fragments/ClearButton'
 
-export const GalaxySearchBar: React.FC = () => {
+type Props = {
+  total?: number
+  isNoActiveSearch?: boolean
+}
+
+export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) => {
   const {
     category,
     isSearchModeActive,
@@ -23,7 +29,8 @@ export const GalaxySearchBar: React.FC = () => {
     handleInputChange,
     searchBarRef,
     filterInputRef,
-  } = usePresenter()
+    handleClearAll,
+  } = usePresenter(isNoActiveSearch)
 
   return (
     <Grid
@@ -51,7 +58,7 @@ export const GalaxySearchBar: React.FC = () => {
         zIndex={'inherit'}
         whiteSpace={'nowrap'}
       >
-        <Text textStyle="socialLarge.xl">{searchResultAmount}</Text>
+        <Text textStyle="socialLarge.xl">{total ? total : searchResultAmount}</Text>
         <Text textStyle="socialLarge.xl">{t('resultsFor')}</Text>
       </Flex>
 
@@ -81,11 +88,14 @@ export const GalaxySearchBar: React.FC = () => {
       <Flex gap="12px" alignItems={'center'} justifyContent={'flex-end'} zIndex={'inherit'}>
         {isSearchModeActive ? (
           <>
+            <ClearButton handleClick={handleClearAll} />
             <GoButton handleClick={handleGoClick} />
             <CloseButton handleClick={handleSearchModeClose} />
           </>
-        ) : (
+        ) : isNoActiveSearch ? (
           <SearchButton />
+        ) : (
+          <CloseButton handleClick={handleSearchModeClose} />
         )}
       </Flex>
 

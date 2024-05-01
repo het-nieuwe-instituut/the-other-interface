@@ -55,7 +55,7 @@ export const Records: React.FC<Props> = ({ pageAmount }) => {
           animation: isCurrentRecordsEmpty ? 'none' : `${currentPageFadeIn} 300ms linear`,
         }}
       >
-        {currentPositionedRecords.map(record => (
+        {currentPositionedRecords?.map(record => (
           <Record key={record.key} record={record} />
         ))}
       </RecordsGrid>
@@ -68,7 +68,7 @@ export const Records: React.FC<Props> = ({ pageAmount }) => {
           animation: isNextRecordsEmpty ? 'none' : `${nextPageFadeIn} 300ms linear`,
         }}
       >
-        {nextPositionedRecords.map(record => (
+        {nextPositionedRecords?.map(record => (
           <Record key={record.key} record={record} />
         ))}
       </RecordsGrid>

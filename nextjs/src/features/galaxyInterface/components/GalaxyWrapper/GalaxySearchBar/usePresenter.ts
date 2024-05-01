@@ -1,6 +1,6 @@
 import { State } from '@/features/shared/configs/store'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
-import { useZoom2SearchResultAmount } from '@/features/shared/hooks/queries/useZoom2SearchResultAmount'
+import { useSearch } from '@/features/shared/hooks/queries/useSearch'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { usePageCategory } from '@/features/shared/hooks/usePageCategory'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
@@ -9,12 +9,12 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useCallback, useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-export const usePresenter = () => {
+export const usePresenter = (isNoActiveSearch?: boolean) => {
   const router = useRouter()
   const pathname = usePathname()
   const dispatch = useDispatch()
 
-  const { lang, search } = useZoom2Params()
+  const { lang, search, isSearchResult } = useZoom2Params()
 
   const filterInputRef = useRef<HTMLInputElement>(null)
   const searchBarRef = useRef<HTMLDivElement>(null)
@@ -24,7 +24,8 @@ export const usePresenter = () => {
 
   const { t } = useTypeSafeTranslation('category')
   const { pageCategory } = usePageCategory()
-  const { data } = useZoom2SearchResultAmount(pageCategory, search)
+  const { data } = useSearch({ category: pageCategory, text: search })
+  const { total } = data || { total: 0 }
 
   const [inputValue, setInputValue] = useState('')
 
@@ -45,10 +46,16 @@ export const usePresenter = () => {
     dispatch(sharedActions.searchModeActive({ isSearchModeActive: false }))
   }, [pathname, dispatch])
 
-  const handleSearchModeOpen = () => {
+  const handleSearchModeOpen = useCallback(() => {
     dispatch(sharedActions.searchModeActive({ isSearchModeActive: true }))
     filterInputRef.current?.focus()
-  }
+  }, [dispatch])
+
+  useEffect(() => {
+    if (isNoActiveSearch && !isSearchResult) {
+      handleSearchModeOpen()
+    }
+  }, [isNoActiveSearch, handleSearchModeOpen, isSearchResult])
 
   const resetSearchFilters = useCallback(() => {
     dispatch(sharedActions.searchCategory({ searchCategory: pageCategory }))
@@ -69,12 +76,17 @@ export const usePresenter = () => {
 
   const handleGoClick = useCallback(() => {
     const searchParam = inputValue ? `&search=${inputValue}` : ''
-    let url = `/landingpage?category=${searchCategory}${searchParam}`
+    let url = `/landingpage?category=${searchCategory}${searchParam}&searchResult=true`
     url = addLocaleToUrl(url, lang)
     router.push(url)
 
     handleSearchModeClose(false)
   }, [inputValue, searchCategory, router, handleSearchModeClose, lang])
+
+  const handleClearAll = useCallback(() => {
+    setInputValue('')
+    dispatch(sharedActions.searchCategory({ searchCategory: pageCategory }))
+  }, [dispatch, pageCategory])
 
   useEffect(() => {
     const handleEnterPress = (e: KeyboardEvent) => {
@@ -119,10 +131,11 @@ export const usePresenter = () => {
       )
     },
     handleGoClick,
-    searchResultAmount: data?.zoomLevel2Amount?.total || '0',
+    searchResultAmount: total,
     inputValue,
     handleInputChange,
     searchBarRef,
     filterInputRef,
+    handleClearAll,
   }
 }

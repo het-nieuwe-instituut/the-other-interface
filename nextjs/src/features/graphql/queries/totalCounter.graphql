@@ -1,0 +1,21 @@
+query totalCounter($locale: String) {
+    stories(locale: $locale) {
+        meta {
+            pagination {
+                total
+            }
+        }
+    }
+    archives: zoomLevel2Amount(entityName: Archives) {
+        total
+    }
+    objects: zoomLevel2Amount(entityName: Objects) {
+        total
+    }
+    people: zoomLevel2Amount(entityName: People) {
+        total
+    }
+    publications: zoomLevel2Amount(entityName: Publications) {
+        total
+    }
+}

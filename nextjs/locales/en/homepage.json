@@ -7,5 +7,6 @@
   "archives": "Archives",
   "people": "Persons",
   "publications": "Publications",
-  "storiesOver": "Stories on {{title}}"
+  "storiesOver": "Stories on {{title}}",
+  "all": "All Categories"
 }

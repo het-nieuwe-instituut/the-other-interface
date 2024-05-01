@@ -1,11 +1,11 @@
 import { Flex, Text, BoxProps } from '@chakra-ui/react'
 
 import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { CloudCategory } from '@/features/shared/utils/categories'
+import { SearchCategory } from '@/features/shared/utils/categories'
 import { toSingularCategory } from '@/features/shared/utils/toSingularCategory'
 
 type Props = {
-  categoryType: CloudCategory
+  categoryType: SearchCategory
   title?: string | null
   css?: BoxProps['css']
 }

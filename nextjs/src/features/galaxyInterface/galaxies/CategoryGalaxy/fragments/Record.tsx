@@ -1,18 +1,18 @@
 import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
 import { Position } from '@/features/shared/types/position'
 import { GridItem, Flex } from '@chakra-ui/react'
-import { CloudCategory } from '@/features/shared/utils/categories'
+import { SearchCategory } from '@/features/shared/utils/categories'
 
 import { RecordText } from './RecordText'
 import { useRouter } from 'next/navigation'
-import { ZoomLevel2Type } from 'src/generated/graphql'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
+import { RecordType } from './types'
 
 type Props = {
-  record: ZoomLevel2Type & {
+  record: RecordType & {
     position: Position
-    category: CloudCategory
+    category: SearchCategory
   }
 }
 

@@ -8,6 +8,7 @@ import { GalaxyFooter } from '../../components/GalaxyWrapper/GalaxyFooter/Galaxy
 import { GalaxyPagination } from '../../components/GalaxyWrapper/GalaxyPagination/GalaxyPagination'
 import { usePresenter } from './usePresenter'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import BlurOverlay from '@/features/shared/components/BlurOverlay/BlurOverlay'
 
 const categoryClouds: CategoryCloud[] = [
   {
@@ -44,11 +45,14 @@ interface Props {
 }
 
 export const MainGalaxy: React.FC<Props> = ({ storyTitle, stories, pagination, nextStories }) => {
-  const { increasePageNumber, decreasePageNumber } = usePresenter(pagination?.pageCount || 0)
+  const { increasePageNumber, decreasePageNumber, isSearchModeActive } = usePresenter(
+    pagination?.pageCount || 0
+  )
   const { t } = useTypeSafeTranslation('navigation')
 
   return (
-    <Box position="relative" width="100vw" height="100vh">
+    <Box position="relative" width="100vw" height="100vh" overflow={'hidden'}>
+      {isSearchModeActive && <BlurOverlay />}
       {categoryClouds.map(cloud => (
         <Cloud key={cloud.title} cloud={cloud} />
       ))}

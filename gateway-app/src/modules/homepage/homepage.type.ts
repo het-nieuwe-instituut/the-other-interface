@@ -55,8 +55,8 @@ export class HomepageEntity {
 
 @ObjectType()
 export class HomepageEntityResponse {
-  @Field(() => HomepageEntity, { nullable: true })
-  public data?: HomepageEntity
+  @Field(() => HomepageEntity)
+  public data: HomepageEntity
 }
 
 @InputType()

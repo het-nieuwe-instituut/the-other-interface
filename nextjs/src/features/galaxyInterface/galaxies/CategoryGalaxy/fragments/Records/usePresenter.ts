@@ -1,12 +1,12 @@
 import { useMemo } from 'react'
-import { CloudCategory } from '@/features/shared/utils/categories'
+import { SearchCategory } from '@/features/shared/utils/categories'
 import { PositioningTemplate, positioningTemplates } from './positioningTemplates'
 import { usePositioningTemplates } from '@/features/shared/hooks/usePositioningTemplates'
-import { ZoomLevel2Type } from 'src/generated/graphql'
 import { usePageNumber } from '@/features/shared/hooks/usePageNumber'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { useZoom2SearchResult } from '@/features/shared/hooks/queries/useZoom2SearchResult'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
+import { RecordType } from '../types'
+import { useSearch } from '@/features/shared/hooks/queries/useSearch'
 
 const getPositionedRecords = ({
   records,
@@ -14,13 +14,15 @@ const getPositionedRecords = ({
   category,
   currentTemplate,
 }: {
-  records: ZoomLevel2Type[]
+  records: RecordType[] | null
   pageNumber: number
-  category: CloudCategory
+  category: SearchCategory
   currentTemplate: PositioningTemplate
 }) => {
   let lastStoryIndex = 0
   const positionedRecords = []
+
+  if (!records) return
 
   for (const position of Object.values(currentTemplate)) {
     const record = records[lastStoryIndex]
@@ -52,21 +54,21 @@ export const usePresenter = (pageAmount: number) => {
   const isLastPage = pageNumber === pageAmount
   const nextPage = pageNumber + 1
 
-  const { data: currentResults, isLoading: isResultLoading } = useZoom2SearchResult({
+  const { data: currentResults, isLoading: isResultLoading } = useSearch({
     category,
     text: search,
     page: pageNumber,
   })
 
-  const { data: nextResults } = useZoom2SearchResult({
+  const { data: nextResults } = useSearch({
     category,
     text: search,
     page: nextPage,
     enabled: !isLastPage,
   })
 
-  const currentRecords = useMemo(() => currentResults?.zoomLevel2?.nodes || [], [currentResults])
-  const nextRecords = useMemo(() => nextResults?.zoomLevel2?.nodes || [], [nextResults])
+  const currentRecords = useMemo(() => currentResults?.items || [], [currentResults?.items])
+  const nextRecords = useMemo(() => nextResults?.items || [], [nextResults?.items])
 
   const currentPositionedRecords = useMemo(() => {
     return getPositionedRecords({
