@@ -24,7 +24,7 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
 
   const { t } = useTypeSafeTranslation('category')
   const { pageCategory } = usePageCategory()
-  const { data } = useSearch({ category: pageCategory, text: search })
+  const { data } = useSearch({ category: pageCategory, text: search, enabled: !isNoActiveSearch })
   const { total } = data || { total: 0 }
 
   const [inputValue, setInputValue] = useState('')

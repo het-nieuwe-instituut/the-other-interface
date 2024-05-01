@@ -15,8 +15,8 @@ type Props = {
 }
 
 export const GalaxyFooter: React.FC<Props> = ({ galaxyPagination }) => {
-  const { isSearchBarCollapsed, toggleSearchBar, isZoom1, isNoActiveSearch } = usePresenter()
-  const { data: total } = useTotalCounter(isZoom1)
+  const { isSearchBarCollapsed, toggleSearchBar, isNoActiveSearch } = usePresenter()
+  const { data: total } = useTotalCounter(isNoActiveSearch)
 
   return (
     <Grid

@@ -13,9 +13,6 @@ export function useTotalCounter(shouldFetch = false) {
   const { searchCategory } = useSelector((state: State) => state.shared)
 
   const queryFn = async () => {
-    if (!shouldFetch) {
-      return
-    }
     const data = await api.totalCounter({
       locale: lang,
     })
@@ -27,5 +24,6 @@ export function useTotalCounter(shouldFetch = false) {
     queryFn,
     refetchOnWindowFocus: false,
     keepPreviousData: true,
+    enabled: shouldFetch,
   })
 }
