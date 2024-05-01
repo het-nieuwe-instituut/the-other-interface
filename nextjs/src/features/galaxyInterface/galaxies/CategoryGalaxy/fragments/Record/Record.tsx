@@ -10,6 +10,7 @@ import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 import { Tooltip } from '@/features/modules/components/ToolTip/Tooltip'
 import { useRecordHoverPresenter } from '@/features/galaxyInterface/galaxies/CategoryGalaxy/fragments/Record/useRecordHoverPresenter'
+import { tooltipMapper } from './tooltipMapper'
 
 type Props = {
   record: ZoomLevel2Type & {
@@ -21,8 +22,9 @@ type Props = {
 export const Record: React.FC<Props> = ({ record }) => {
   const { id, thumbnail, category, position, title } = record
   const { lang, search } = useZoom2Params()
-  const { data } = useRecordHoverPresenter(id, category, lang)
-  console.log('data', data?.zoomLevel2Hover)
+  const { data } = useRecordHoverPresenter(id, category)
+
+  tooltipMapper(data)
   const router = useRouter()
 
   const handleClick = () => {
@@ -35,7 +37,7 @@ export const Record: React.FC<Props> = ({ record }) => {
 
   return (
     <GridItem position="relative">
-      <Tooltip label={`Title: ${data?.zoomLevel2Hover.title}`}>
+      <Tooltip label={`Title: `}>
         <Flex
           position="absolute"
           style={{ ...position }}
