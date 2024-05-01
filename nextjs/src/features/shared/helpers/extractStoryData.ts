@@ -1,4 +1,4 @@
-import { RecordType } from '@/features/galaxyInterface/galaxies/CategoryGalaxy/fragments/types'
+import { MappedRecord } from '@/features/galaxyInterface/galaxies/CategoryGalaxy/fragments/types'
 import { imageBasePath } from '@/features/modules/modulesConstants'
 import {
   ComponentModulesImage,
@@ -35,7 +35,7 @@ export const extractStoryData = (story: StoryEntity | null) => {
   }
 }
 
-export const storyToRecordMapper = (story: StoryEntity): RecordType => {
+export const storyToRecordMapper = (story: StoryEntity): MappedRecord => {
   return {
     title: story?.attributes?.title ?? '',
     thumbnail: findImageUrl(story?.attributes?.components ?? []) ?? '',

@@ -1267,6 +1267,7 @@ export const aSearchAllParentType = (overrides?: Partial<SearchAllParentType>, _
     return {
         nodes: overrides && overrides.hasOwnProperty('nodes') ? overrides.nodes! : [relationshipsToOmit.includes('SearchAllResultType') ? {} as SearchAllResultType : aSearchAllResultType({}, relationshipsToOmit)],
         page: overrides && overrides.hasOwnProperty('page') ? overrides.page! : 9277,
+        total: overrides && overrides.hasOwnProperty('total') ? overrides.total! : 6658,
     };
 };
 
@@ -1276,7 +1277,7 @@ export const aSearchAllResultType = (overrides?: Partial<SearchAllResultType>, _
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'iusto',
         thumbnail: overrides && overrides.hasOwnProperty('thumbnail') ? overrides.thumbnail! : 'expedita',
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'autem',
-        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : 'officia',
+        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : EnumTriplyrecordType.Archive,
     };
 };
 

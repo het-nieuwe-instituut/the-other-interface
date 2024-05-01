@@ -1529,6 +1529,7 @@ export type SearchAllParentType = {
   __typename?: 'SearchAllParentType';
   nodes?: Maybe<Array<SearchAllResultType>>;
   page: Scalars['Int'];
+  total: Scalars['Int'];
 };
 
 export type SearchAllResultType = {
@@ -1536,7 +1537,7 @@ export type SearchAllResultType = {
   id: Scalars['String'];
   thumbnail?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
-  type: Scalars['String'];
+  type: EnumTriplyrecordType;
 };
 
 export type StoriesRelatedToThemeResponse = {
@@ -2044,7 +2045,7 @@ export type SearchAllQueryVariables = Exact<{
 }>;
 
 
-export type SearchAllQuery = { __typename?: 'Query', searchByAllCategories: { __typename?: 'SearchAllParentType', page: number, nodes?: Array<{ __typename?: 'SearchAllResultType', title?: string | null, thumbnail?: string | null, id: string, type: string }> | null } };
+export type SearchAllQuery = { __typename?: 'Query', searchByAllCategories: { __typename?: 'SearchAllParentType', page: number, total: number, nodes?: Array<{ __typename?: 'SearchAllResultType', title?: string | null, thumbnail?: string | null, id: string, type: EnumTriplyrecordType }> | null } };
 
 export type SearchAllAmountQueryVariables = Exact<{
   text: Scalars['String'];
@@ -2995,6 +2996,7 @@ export const SearchAllDocument = gql`
       id
       type
     }
+    total
   }
 }
     `;

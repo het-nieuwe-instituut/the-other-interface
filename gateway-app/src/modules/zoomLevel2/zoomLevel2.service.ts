@@ -20,9 +20,43 @@ const resultDataKeys: KeysToVerify<ResultData> = {
   categoryType: true,
 }
 
+interface ElasticsearchResult {
+  hits: {
+    total: {
+      value: number
+    }
+    hits: {
+      _source: {
+        '@id': string
+        'https://schema org/url': string[]
+        'https://www ica org/standards/RiC/ontology#title': string[]
+      }
+    }[]
+  }
+}
+
+const keysToVerifyResponse: KeysToVerify<ElasticsearchResult> = {
+  hits: {
+    total: {
+      value: true,
+    },
+    hits: [
+      {
+        _source: {
+          // TODO enable when we have fixed issue with empty items in response
+          '@id': false,
+          'https://schema org/url': false,
+          'https://www ica org/standards/RiC/ontology#title': false,
+        },
+      },
+    ],
+  },
+}
+
 @Injectable()
 export class ZoomLevel2Service {
-  private readonly SearchByAllEndpoint = 'textSearch/run?'
+  private readonly SearchByAllEndpoint =
+    'https://api.collectiedata.hetnieuweinstituut.nl/datasets/the-other-interface-acceptance/knowledge-graph/services/knowledge-graph/_search'
   private readonly SearchByAllAmountEndpoint = 'textSearchCount/run?'
 
   public constructor(private readonly triplyService: TriplyService) {}
@@ -62,23 +96,39 @@ export class ZoomLevel2Service {
   }
 
   public async getSearchByAllCategories(text: string, paginationArgs: PaginationArgs) {
-    const result = await this.triplyService.queryTriplyData<ResultData>(
+    const result = await this.triplyService.postQueryTriplyData<ElasticsearchResult>(
       this.SearchByAllEndpoint,
-      resultDataKeys,
+      keysToVerifyResponse,
       { page: paginationArgs.page, pageSize: paginationArgs.pageSize },
       text ? { text } : undefined
     )
 
-    const forrmattedNodes = getUniqueById(result?.data).map(res => ({
-      thumbnail: res.thumbnail,
-      title: res.title,
-      id: res.id,
-      type: res?.categoryType?.toLowerCase() ?? '',
-    }))
+    const formattedNodes = result.hits.hits.map(item => {
+      const { type, id } = this.extractTypeAndId(item._source['@id'])
+
+      if (!id || !type) {
+        return null
+      }
+
+      const thumbnail = item._source['https://schema org/url']
+        ? item._source['https://schema org/url'][0]
+        : ''
+      const title = item._source['https://www ica org/standards/RiC/ontology#title']
+        ? item._source['https://www ica org/standards/RiC/ontology#title'][0]
+        : ''
+
+      return {
+        thumbnail: thumbnail,
+        title: title,
+        id: id,
+        type: this.triplyService.mapTypeToEnum(type.toLowerCase()),
+      }
+    })
 
     return {
       page: paginationArgs.page,
-      nodes: forrmattedNodes,
+      nodes: formattedNodes?.filter(Boolean) ?? [],
+      total: result.hits.total.value ?? 0,
     }
   }
 
@@ -143,6 +193,14 @@ export class ZoomLevel2Service {
 
     return {
       total,
+    }
+  }
+
+  private extractTypeAndId(url: string): { type: string; id: string } {
+    const match = /id\/([^\/]+)\/(\d+)/.exec(url)
+    return {
+      type: match ? match[1] : '',
+      id: match ? match[2] : '',
     }
   }
 }

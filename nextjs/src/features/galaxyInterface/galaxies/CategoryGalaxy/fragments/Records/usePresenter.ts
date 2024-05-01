@@ -5,7 +5,7 @@ import { usePositioningTemplates } from '@/features/shared/hooks/usePositioningT
 import { usePageNumber } from '@/features/shared/hooks/usePageNumber'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
-import { RecordType } from '../types'
+import { MappedRecord } from '../types'
 import { useSearch } from '@/features/shared/hooks/queries/useSearch'
 
 const getPositionedRecords = ({
@@ -14,7 +14,7 @@ const getPositionedRecords = ({
   category,
   currentTemplate,
 }: {
-  records: RecordType[] | null
+  records: MappedRecord[] | null
   pageNumber: number
   category: SearchCategory
   currentTemplate: PositioningTemplate

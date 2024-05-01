@@ -11,6 +11,7 @@ import { useSearchParams } from 'next/navigation'
 import { storyToRecordMapper } from '../../helpers/extractStoryData'
 import { ZOOM2_RECORDS_PER_PAGE } from '../../constants/mainConstants'
 import { StoryEntity } from 'src/generated/graphql'
+import { mapCategoryToTriplyEnum } from '../../helpers/mapCategoryToTriplyEnum'
 
 export function useSearch({
   category,
@@ -45,33 +46,28 @@ export function useSearch({
         }
 
       case SEARCH_CATEGORIES.all:
-        const [allResponse, countResponse] = await Promise.all([
-          api.searchByStories({
-            searchTerm: text ?? '',
-            page,
-            pageSize: 2,
-            locale: lang ?? 'nl',
-          }),
-          api.searchAllAmount({
-            text: text ?? '',
-          }),
-        ])
+        const storiesSearchResponse = await api.searchByStories({
+          searchTerm: text ?? '',
+          page,
+          pageSize: 2,
+          locale: lang ?? 'nl',
+        })
 
-        const allItems =
-          allResponse?.stories?.data
+        const stories =
+          storiesSearchResponse?.stories?.data
             ?.filter(Boolean)
             .map(story => storyToRecordMapper(story as StoryEntity)) ?? []
-        const storiesCount = allResponse?.stories?.meta?.pagination.total || 0
+        const storiesCount = storiesSearchResponse?.stories?.meta?.pagination.total || 0
         const allPageSize = ZOOM2_RECORDS_PER_PAGE - storiesCount
-        const allData = await api.searchAll({
+        const searchAllResult = await api.searchAll({
           text: text ?? '',
           page,
           pageSize: allPageSize,
         })
 
         return {
-          items: [...allItems, ...(allData?.searchByAllCategories?.nodes ?? [])],
-          total: storiesCount + (+countResponse?.searchByAllCategoriesAmount?.total || 0),
+          items: [...stories, ...(searchAllResult?.searchByAllCategories?.nodes ?? [])],
+          total: storiesCount + (+searchAllResult.searchByAllCategories?.total || 0),
         }
 
       default:
@@ -94,7 +90,7 @@ export function useSearch({
               id: node.id,
               title: node.title,
               thumbnail: node.thumbnail,
-              type: category,
+              type: mapCategoryToTriplyEnum(category),
             })) ?? [],
           total: totalData.zoomLevel2Amount.total,
         }
