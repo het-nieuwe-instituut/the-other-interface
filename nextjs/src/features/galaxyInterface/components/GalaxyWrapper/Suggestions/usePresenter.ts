@@ -5,7 +5,6 @@ import { SearchCategory } from '@/features/shared/utils/categories'
 
 import { useDispatch, useSelector } from 'react-redux'
 
-
 export const usePresenter = () => {
   const dispatch = useDispatch()
 
