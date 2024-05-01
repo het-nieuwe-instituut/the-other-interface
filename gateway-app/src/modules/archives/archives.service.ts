@@ -165,12 +165,16 @@ export class ArchivesService {
   }
 
   public async getZoomLevel2Hover(id: string) {
-    const peopleResults = await this.triplyService.queryTriplyData<ArchivesZoomLevel2HoverData>(
+    const results = await this.triplyService.queryTriplyData<ArchivesZoomLevel2HoverData>(
       this.ZoomLevel2HoverEndpoint,
       archivesZoomLevel2HoverDataKeys,
       undefined,
       { id }
     )
-    return peopleResults.data[0]
+    if (results.data.length > 1) {
+      throw new Error('Unexpected result returned from Triply API. Expected 1 result, got more.')
+    }
+
+    return results.data[0]
   }
 }

@@ -185,17 +185,17 @@ export class PeopleRecordRelationArgs {
 
 @ArgsType()
 export class PeopleZoomLevel2HoverArgs {
-  @Field(() => String, { nullable: true })
+  @Field(() => String, { nullable: false })
   public id: string
 }
 @ObjectType()
 export class PeopleZoomLevelHoverType {
   @Field(() => String, { nullable: true })
-  public title: string
+  public title?: string | null
 
   @Field(() => String, { nullable: true })
-  public profession: string
+  public profession?: string | null
 
   @Field(() => String, { nullable: true })
-  public description: string
+  public description?: string | null
 }
