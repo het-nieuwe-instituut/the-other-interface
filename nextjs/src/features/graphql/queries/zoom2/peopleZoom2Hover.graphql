@@ -1,4 +1,4 @@
-query PeopleZoom2Hover($id: String ) {
+query PeopleZoom2Hover($id: String!) {
     peopleZoomLevel2Hover(id: $id) {
         title
         profession

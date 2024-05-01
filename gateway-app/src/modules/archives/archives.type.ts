@@ -260,17 +260,17 @@ export class ArchivesRecordZoomLevel3Type {
 }
 @ArgsType()
 export class ArchivesZoomLevel2HoverArgs {
-  @Field(() => String, { nullable: true })
+  @Field(() => String, { nullable: false })
   public id: string
 }
 @ObjectType()
 export class ArchivesZoomLevelHoverType {
   @Field(() => String, { nullable: true })
-  public title: string
+  public title?: string | null
 
   @Field(() => String, { nullable: true })
-  public creators: string
+  public creators?: string | null
 
   @Field(() => String, { nullable: true })
-  public description: string
+  public description?: string | null
 }

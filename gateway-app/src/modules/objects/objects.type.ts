@@ -234,13 +234,13 @@ export class ObjectRecordRelationArgs {
 
 @ArgsType()
 export class ObjectsZoomLevel2HoverArgs {
-  @Field(() => String, { nullable: true })
+  @Field(() => String, { nullable: false })
   public id: string
 }
 @ObjectType()
 export class ObjectsZoomLevelHoverType {
   @Field(() => String, { nullable: true })
-  public title: string
+  public title?: string | null
 
   // confluence says this is missing
   // need to follow up
@@ -248,5 +248,5 @@ export class ObjectsZoomLevelHoverType {
   // public maker: string
 
   @Field(() => String, { nullable: true })
-  public description: string
+  public description?: string | null
 }

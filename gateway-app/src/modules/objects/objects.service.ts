@@ -163,6 +163,9 @@ export class ObjectsService {
       undefined,
       { id }
     )
+    if (results.data.length > 1) {
+      throw new Error('Unexpected result returned from Triply API. Expected 1 result, got more.')
+    }
     return results.data[0]
   }
 
