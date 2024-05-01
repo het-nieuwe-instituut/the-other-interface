@@ -5,40 +5,51 @@ import {
   PublicationsZoom2HoverQuery,
 } from 'src/generated/graphql'
 
-type DataType =
+type TooltipData =
   | ArchivesZoom2HoverQuery
+  | ObjectsZoom2HoverQuery
   | PeopleZoom2HoverQuery
   | PublicationsZoom2HoverQuery
-  | ObjectsZoom2HoverQuery
   | undefined
 
-export const tooltipMapper = (initialData: DataType) => {
+export const tooltipMapper = (initialData: TooltipData) => {
   if (!initialData) {
     return null
   }
-
-  // if (initialData?.publicationsZoomLevel2Hover) {
-  //   return {
-  //     title: `${initialData.publicationsZoomLevel2Hover.title}, ${initialData.publicationsZoomLevel2Hover.authors}`,
-  //     description: initialData.publicationsZoomLevel2Hover.description,
-  //   }
-  // }
-  // if (initialData?.archivesZoomLevel2Hover) {
-  //   return {
-  //     title: `${initialData.archivesZoomLevel2Hover.title}, ${initialData.archivesZoomLevel2Hover.creators}`,
-  //     description: initialData.archivesZoomLevel2Hover.description,
-  //   }
-  // }
-  // if (initialData?.peopleZoomLevel2Hover) {
-  //   return {
-  //     title: `${initialData.archivesZoomLevel2Hover.title}, ${initialData.peopleZoomLevel2Hover.profession}`,
-  //     description: initialData.archivesZoomLevel2Hover.description,
-  //   }
-  // }
-  // if (initialData?.objectsZoomLevel2Hover) {
-  //   return {
-  //     title: initialData.archivesZoomLevel2Hover.title,
-  //     description: initialData.archivesZoomLevel2Hover.description,
-  //   }
-  // }
+  if ('publicationsZoomLevel2Hover' in initialData) {
+    return {
+      title: `${initialData.publicationsZoomLevel2Hover.title}${
+        initialData.publicationsZoomLevel2Hover.authors
+          ? ', ' + initialData.publicationsZoomLevel2Hover.authors
+          : ''
+      }`,
+      description: initialData.publicationsZoomLevel2Hover.description,
+    }
+  }
+  if ('archivesZoomLevel2Hover' in initialData) {
+    return {
+      title: `${initialData.archivesZoomLevel2Hover.title}${
+        initialData.archivesZoomLevel2Hover.creators
+          ? '' + initialData.archivesZoomLevel2Hover.creators
+          : ''
+      }`,
+      description: initialData.archivesZoomLevel2Hover.description,
+    }
+  }
+  if ('peopleZoomLevel2Hover' in initialData) {
+    return {
+      title: `${initialData.peopleZoomLevel2Hover.title}${
+        initialData.peopleZoomLevel2Hover.profession
+          ? '' + initialData.peopleZoomLevel2Hover.profession
+          : ''
+      }`,
+      description: initialData.peopleZoomLevel2Hover.description,
+    }
+  }
+  if ('objectsZoomLevel2Hover' in initialData) {
+    return {
+      title: initialData.objectsZoomLevel2Hover.title,
+      description: initialData.objectsZoomLevel2Hover.description,
+    }
+  }
 }

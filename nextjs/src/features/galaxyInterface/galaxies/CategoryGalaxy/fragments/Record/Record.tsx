@@ -2,15 +2,15 @@ import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/Re
 import { Position } from '@/features/shared/types/position'
 import { GridItem, Flex } from '@chakra-ui/react'
 import { CloudCategory } from '@/features/shared/utils/categories'
-
+import { Text } from '@chakra-ui/react'
 import { RecordText } from '../RecordText'
 import { useRouter } from 'next/navigation'
 import { ZoomLevel2Type } from 'src/generated/graphql'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 import { Tooltip } from '@/features/modules/components/ToolTip/Tooltip'
-import { useRecordHoverPresenter } from '@/features/galaxyInterface/galaxies/CategoryGalaxy/fragments/Record/useRecordHoverPresenter'
 import { tooltipMapper } from './tooltipMapper'
+import { useRecordHoverPresenter } from './useRecordHoverPresenter'
 
 type Props = {
   record: ZoomLevel2Type & {
@@ -24,7 +24,7 @@ export const Record: React.FC<Props> = ({ record }) => {
   const { lang, search } = useZoom2Params()
   const { data } = useRecordHoverPresenter(id, category)
 
-  tooltipMapper(data)
+  const tooltipData = tooltipMapper(data)
   const router = useRouter()
 
   const handleClick = () => {
@@ -37,7 +37,18 @@ export const Record: React.FC<Props> = ({ record }) => {
 
   return (
     <GridItem position="relative">
-      <Tooltip label={`Title: `}>
+      <Tooltip
+        label={
+          <div>
+            <Text fontFamily={'Social'} fontSize={'12px'} fontWeight={'700'}>
+              {tooltipData?.title}
+            </Text>
+            <Text fontFamily={'Social'} fontSize={'12px'} fontWeight={'400'}>
+              {tooltipData?.description}
+            </Text>
+          </div>
+        }
+      >
         <Flex
           position="absolute"
           style={{ ...position }}

@@ -175,6 +175,10 @@ export class ArchivesService {
       throw new Error('Unexpected result returned from Triply API. Expected 1 result, got more.')
     }
 
+    if (results.data.length == 1) {
+      throw new Error('Unexpected result returned from Triply API. Expected 1 result, got none.')
+    }
+
     return results.data[0]
   }
 }
