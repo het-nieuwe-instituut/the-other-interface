@@ -24,6 +24,8 @@ export const useDrawLines = (selector: string, template: number, stories: Positi
       if (!svg) return
       svg.innerHTML = ''
 
+      const fragment = document.createDocumentFragment()
+
       for (let i = 0; i < gridElements.length - 1; i++) {
         const startElement = gridElements[i]
         const endElement = gridElements[i + 1]
@@ -37,17 +39,12 @@ export const useDrawLines = (selector: string, template: number, stories: Positi
           line.setAttribute('y1', startPoint.y.toString())
           line.setAttribute('x2', endPoint.x.toString())
           line.setAttribute('y2', endPoint.y.toString())
-          line.setAttribute('stroke', 'RGBA(0, 81, 255, 0)')
-          line.style.transition = 'stroke 0.6s ease-out'
-
-          svg.appendChild(line)
-
-          // Trigger the transition after a brief timeout
-          setTimeout(() => {
-            line.setAttribute('stroke', 'RGBA(0, 81, 255, .8)')
-          }, 350)
+          line.setAttribute('stroke', 'RGBA(0, 81, 255, .8)')
+          fragment.appendChild(line)
         }
       }
+
+      svg.appendChild(fragment)
     },
     [calculatePoint]
   )
@@ -60,9 +57,7 @@ export const useDrawLines = (selector: string, template: number, stories: Positi
       }
     }
 
-    window.requestAnimationFrame(() => {
-      window.requestAnimationFrame(drawAfterLayout)
-    })
+    drawAfterLayout()
 
     window.addEventListener('resize', drawAfterLayout)
 
