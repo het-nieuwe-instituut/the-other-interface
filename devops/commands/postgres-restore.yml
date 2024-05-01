@@ -1,0 +1,35 @@
+---
+- hosts: app
+  gather_facts: no
+  become: yes
+  become_user: root
+  become_method: sudo
+  vars_prompt:
+    - name: backup_path
+      prompt: Which backup do you want to restore (relative from bucket root)?
+      private: no
+
+  tasks:
+    - name: start postgres restore container
+      docker_container:
+        name: postgres-restore-temp
+        image: lifely/postgres-restore-container:latest
+        pull: true
+        state: started
+        cleanup: true
+        detach: false
+        env:
+          AWS_S3_PATH: "{{ backup_path }}"
+          AWS_S3_BUCKET: "{{ app.backups.aws.bucket }}"
+          AWS_ACCESS_KEY_ID: "{{ app.backups.aws.access_key_id }}"
+          AWS_SECRET_ACCESS_KEY: "{{ app.backups.aws.access_key_secret }}"
+          AWS_SSE_KEY: "{{ app.backups.aws.sse_key }}"
+          AWS_REGION: "{{ app.backups.aws.region }}"
+          POSTGRES_HOST: "{{ app.db.host }}"
+          POSTGRES_PORT: "{{ app.db.port }}"
+          POSTGRES_USER: "{{ app.db.username }}"
+          POSTGRES_PASSWORD: "{{ app.db.password }}"
+          POSTGRES_DB: "{{ app.db.name }}"
+
+    - name: show information
+      debug: msg="Restored postgres backup {{ backup_path }}"
