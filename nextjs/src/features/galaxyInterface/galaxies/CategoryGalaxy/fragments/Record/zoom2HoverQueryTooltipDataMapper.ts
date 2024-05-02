@@ -12,7 +12,7 @@ type TooltipData =
   | PublicationsZoom2HoverQuery
   | undefined
 
-export const tooltipMapper = (initialData: TooltipData) => {
+export const zoom2HoverQueryTooltipDataMapper = (initialData: TooltipData) => {
   if (!initialData) {
     return null
   }

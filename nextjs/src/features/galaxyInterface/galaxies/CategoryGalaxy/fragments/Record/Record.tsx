@@ -9,8 +9,8 @@ import { ZoomLevel2Type } from 'src/generated/graphql'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 import { Tooltip } from '@/features/modules/components/ToolTip/Tooltip'
-import { tooltipMapper } from './tooltipMapper'
-import { useRecordHoverPresenter } from './useRecordHoverPresenter'
+import { zoom2HoverQueryTooltipDataMapper } from './zoom2HoverQueryTooltipDataMapper'
+import { useZoom2HoverRecordResult } from '@/features/shared/hooks/queries/useZoom2HoverRecordResult'
 
 type Props = {
   record: RecordProps
@@ -24,9 +24,10 @@ type RecordProps = ZoomLevel2Type & {
 export const Record: React.FC<Props> = ({ record }) => {
   const { id, category } = record
   const { lang, search } = useZoom2Params()
-  const { data } = useRecordHoverPresenter(id, category)
+  // TODO: HNIT-1833 - add in loading and error handling
+  const { data } = useZoom2HoverRecordResult({ id, category })
 
-  const tooltipData = tooltipMapper(data)
+  const tooltipData = zoom2HoverQueryTooltipDataMapper(data)
 
   return (
     <GridItem position="relative">

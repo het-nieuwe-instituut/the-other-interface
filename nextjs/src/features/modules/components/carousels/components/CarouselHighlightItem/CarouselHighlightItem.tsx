@@ -3,18 +3,18 @@ import React from 'react'
 
 interface Props {
   src: string
-  ownKey: number
+  imageKey: number
   name: string
   description: string
   width?: number
 }
 
 export const CarouselHighlightItem = (props: Props) => {
-  const { src, ownKey, name, description, width } = props
+  const { src, imageKey, name, description, width } = props
   return (
     <Flex flexDirection="column" marginRight="1" maxW={width ? `${width}px!important` : 'auto'}>
       <Img
-        key={ownKey}
+        key={imageKey}
         src={src}
         objectFit="scale-down"
         mb={'5'}

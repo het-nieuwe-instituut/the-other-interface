@@ -16,16 +16,16 @@ import { usePresenter } from './usePresenter'
 
 interface Props {
   items: Maybe<ComponentCoreCarouselItem>[]
-  ownkey: number | string
+  imageKey: number | string
   type: EnumComponentmodulescarouselType
   carouselRef: React.RefObject<HTMLDivElement>
 }
 
 export const CarouselSlide = (props: Props) => {
-  const { items, ownkey, type, carouselRef } = props
+  const { items, imageKey, type, carouselRef } = props
   const { itemWidth, justifySlide } = usePresenter(type, carouselRef)
   return (
-    <Flex key={`${ownkey}`} mb={'3'} justifyContent={justifySlide}>
+    <Flex key={`${imageKey}`} mb={'3'} justifyContent={justifySlide}>
       {items?.map((component, index) => {
         const record = component?.triply_record?.data?.attributes
         const {
@@ -57,7 +57,7 @@ export const CarouselSlide = (props: Props) => {
           return (
             <CarouselHighlightItem
               src={image}
-              ownKey={index}
+              imageKey={index}
               key={index}
               name={name ?? ''}
               description={description ?? ''}
@@ -94,7 +94,7 @@ export const CarouselSlide = (props: Props) => {
             return (
               <CarouselHighlightItem
                 src={image}
-                ownKey={index}
+                imageKey={index}
                 key={index}
                 name={name ?? ''}
                 description={description ?? ''}

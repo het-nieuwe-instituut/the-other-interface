@@ -66,7 +66,7 @@ export const CarouselModule: React.FC<Props> = props => {
           return (
             <CarouselSlide
               key={index}
-              ownkey={index}
+              imageKey={index}
               items={chunk}
               type={type ?? EnumComponentmodulescarouselType.Makers}
               carouselRef={carouselRef}
