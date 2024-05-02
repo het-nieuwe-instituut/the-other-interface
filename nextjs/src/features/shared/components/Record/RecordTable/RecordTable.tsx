@@ -2,60 +2,84 @@ import { Box, Text } from '@chakra-ui/react'
 import { TableModule } from '@/features/modules/components/TableModule/TableModule'
 import { usePresenter } from './usePresenter'
 import { CATEGORIES, Category } from '@/features/shared/utils/categories'
-import { Dispatch, SetStateAction, useState } from 'react'
 import { theme } from '@/features/shared/styles/theme/theme'
 import { useMapRecordTableData } from './useMapRecordTableData'
-
 interface PaginatedTableProps {
-  data:
-    | {
-        type: Category
-        name: string
-        total: string
-      }
-    | undefined
-
-  setter: Dispatch<SetStateAction<number>>
-  count: number
+  data: {
+    type: Category
+    name: string
+    total: string
+  }
+  fetchNextPage: () => void
+  hasNextPage: boolean | undefined
 }
 
 export const RecordTable: React.FC = () => {
-  const [people, setPeople] = useState(1)
-  const [objects, setObjects] = useState(1)
-  const [archives, setArchives] = useState(1)
-  const [publications, setPublications] = useState(1)
-  const { data } = usePresenter({ people, objects, archives, publications })
-  const tableData = useMapRecordTableData(data)
+  const {
+    data: publicationData,
+    hasNextPage: hasNextPagePublication,
+    fetchNextPage: fetchNextPagePublications,
+  } = usePresenter(CATEGORIES.publications)
+  const {
+    data: archiveData,
+    hasNextPage: hasNextPageArchive,
+    fetchNextPage: fetchNextPageArchive,
+  } = usePresenter(CATEGORIES.archives)
+  const {
+    data: objectData,
+    hasNextPage: hasNextPageObject,
+    fetchNextPage: fetchNextPageObject,
+  } = usePresenter(CATEGORIES.objects)
+  const {
+    data: peopleData,
+    hasNextPage: hasNextPagePeople,
+    fetchNextPage: fetchNextPagePeople,
+  } = usePresenter(CATEGORIES.people)
+
+  const publicationTableData = useMapRecordTableData(
+    publicationData?.pages,
+    CATEGORIES.publications
+  )
+  const archivesTableData = useMapRecordTableData(archiveData?.pages, CATEGORIES.archives)
+  const objectsTableData = useMapRecordTableData(objectData?.pages, CATEGORIES.objects)
+  const peoplenTableData = useMapRecordTableData(peopleData?.pages, CATEGORIES.people)
 
   return (
     <Box maxW={theme.breakpoints.lg} px={6} pt={0}>
-      {tableData?.map((item, index) => {
-        switch (item?.type) {
-          case CATEGORIES.publications:
-            return (
-              <PaginatedTable
-                data={item}
-                key={index}
-                setter={setPublications}
-                count={publications}
-              />
-            )
-          case CATEGORIES.people:
-            return <PaginatedTable data={item} key={index} setter={setPeople} count={people} />
-          case CATEGORIES.objects:
-            return <PaginatedTable data={item} key={index} setter={setObjects} count={objects} />
-          case CATEGORIES.archives:
-            return <PaginatedTable data={item} key={index} setter={setArchives} count={archives} />
-          default:
-            null
-        }
-      })}
+      {publicationTableData && (
+        <PaginatedTable
+          data={publicationTableData}
+          hasNextPage={hasNextPagePublication}
+          fetchNextPage={fetchNextPagePublications}
+        />
+      )}
+      {archivesTableData && (
+        <PaginatedTable
+          data={archivesTableData}
+          hasNextPage={hasNextPageArchive}
+          fetchNextPage={fetchNextPageArchive}
+        />
+      )}
+      {objectsTableData && (
+        <PaginatedTable
+          data={objectsTableData}
+          hasNextPage={hasNextPageObject}
+          fetchNextPage={fetchNextPageObject}
+        />
+      )}
+      {peoplenTableData && (
+        <PaginatedTable
+          data={peoplenTableData}
+          hasNextPage={hasNextPagePeople}
+          fetchNextPage={fetchNextPagePeople}
+        />
+      )}
     </Box>
   )
 }
 
 const PaginatedTable: React.FC<PaginatedTableProps> = props => {
-  const { data, setter, count } = props
+  const { data, fetchNextPage, hasNextPage } = props
 
   return (
     <>
@@ -64,7 +88,7 @@ const PaginatedTable: React.FC<PaginatedTableProps> = props => {
         count={data?.total}
         LoadMore={
           <>
-            {count > 1 && (
+            {hasNextPage && (
               <Text
                 as={'button'}
                 textDecoration={'underline'}
@@ -73,26 +97,9 @@ const PaginatedTable: React.FC<PaginatedTableProps> = props => {
                 _disabled={{ color: 'grey', textDecoration: 'none', cursor: 'not-allowed' }}
                 marginTop={'16px'}
                 marginRight={'16px'}
-                onClick={() => {
-                  setter(prev => prev - 1)
-                }}
+                onClick={fetchNextPage}
               >
-                Load previous page
-              </Text>
-            )}
-            {count * 5 < parseInt(data?.total ?? '0') && (
-              <Text
-                as={'button'}
-                textDecoration={'underline'}
-                textUnderlineOffset={'4px'}
-                _hover={{ textDecoration: 'none' }}
-                _disabled={{ color: 'grey', textDecoration: 'none', cursor: 'not-allowed' }}
-                marginTop={'16px'}
-                onClick={() => {
-                  setter(prev => prev + 1)
-                }}
-              >
-                Load next page
+                Load More
               </Text>
             )}
           </>

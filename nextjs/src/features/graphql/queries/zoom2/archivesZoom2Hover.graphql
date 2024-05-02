@@ -1,0 +1,7 @@
+query ArchivesZoom2Hover($id: String!) {
+    archivesZoomLevel2Hover(id: $id) {
+        title
+        creators
+        description
+    }
+}

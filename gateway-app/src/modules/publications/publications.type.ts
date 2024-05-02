@@ -525,3 +525,20 @@ export class PublicationAuthorType {
   @Field(() => PeopleZoomLevel3DetailType, { nullable: true })
   public populatedAuthor?: PeopleZoomLevel3DetailType
 }
+
+@ArgsType()
+export class PublicationsZoomLevel2HoverArgs {
+  @Field(() => String, { nullable: false })
+  public id: string
+}
+@ObjectType()
+export class PublicationsZoomLevelHoverType {
+  @Field(() => String, { nullable: true })
+  public title?: string | null
+
+  @Field(() => String, { nullable: true })
+  public authors?: string | null
+
+  @Field(() => String, { nullable: true })
+  public description?: string | null
+}

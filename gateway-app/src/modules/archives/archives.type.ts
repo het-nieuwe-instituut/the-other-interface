@@ -258,3 +258,19 @@ export class ArchivesRecordZoomLevel3Type {
   @Field(() => String, { nullable: true })
   public externalSource?: string
 }
+@ArgsType()
+export class ArchivesZoomLevel2HoverArgs {
+  @Field(() => String, { nullable: false })
+  public id: string
+}
+@ObjectType()
+export class ArchivesZoomLevelHoverType {
+  @Field(() => String, { nullable: true })
+  public title?: string | null
+
+  @Field(() => String, { nullable: true })
+  public creators?: string | null
+
+  @Field(() => String, { nullable: true })
+  public description?: string | null
+}

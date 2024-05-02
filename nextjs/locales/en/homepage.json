@@ -8,5 +8,10 @@
   "people": "Persons",
   "publications": "Publications",
   "storiesOver": "Stories on {{title}}",
-  "all": "All Categories"
+  "all": "All Categories",
+  "hoverarchives": "Nieuwe Instituut manages approximately 700 archives and collections of Dutch architects, urban planners, professional associations and training courses. This makes it one of the largest architecture collections in the world.",
+  "hoverobjects": "Nieuwe Instituut manages a multitude of models and other objects, such as sketch and presentation models, small utensils such as drawing materials and color samples, and the complete inventory of the Huis Sonneveld museum house, including furniture, lamps and crockery.",
+  "hoverpeople": "Nieuwe Instituut manages the data of all persons and institutions that appear in the National Collection for Dutch Architecture and Urban Planning, such as designers, artists, archive creators and authors. They are linked to objects from the library collection and archives, but also to external sources.",
+  "hoverpublications": "Nieuwe Instituut collects and manages publications on Dutch and foreign architecture, urban planning and related subjects such as housing, spatial planning, landscape architecture and interior architecture, but also art, design and digital culture and social trends that influence thinking about the design of the space around us.",
+  "hoverstory": "Numerous stories are contained in the 4,000,000 drawings, sketches, models, correspondence, photos, posters and clippings managed by the Nieuwe Instituut. They arise from research, exhibitions, lectures or loans, are found or sought, told or written, each time from a different perspective."
 }

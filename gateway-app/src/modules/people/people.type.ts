@@ -182,3 +182,20 @@ export class PeopleRecordRelationArgs {
   @IsOptional()
   public lang?: string
 }
+
+@ArgsType()
+export class PeopleZoomLevel2HoverArgs {
+  @Field(() => String, { nullable: false })
+  public id: string
+}
+@ObjectType()
+export class PeopleZoomLevelHoverType {
+  @Field(() => String, { nullable: true })
+  public title?: string | null
+
+  @Field(() => String, { nullable: true })
+  public profession?: string | null
+
+  @Field(() => String, { nullable: true })
+  public description?: string | null
+}

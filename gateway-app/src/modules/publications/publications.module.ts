@@ -7,6 +7,7 @@ import {
   PublicationsAudioVisualResolver,
   PublicationsBookResolver,
   PublicationsSerialResolver,
+  PublicationsZoomLevel2HoverResolver,
   PublicationZoomLevel3Resolver,
 } from './publications.resolver'
 import { PublicationsService } from './publications.service'
@@ -22,6 +23,7 @@ import { PublicationsService } from './publications.service'
     PublicationsSerialResolver,
     PublicationAuthorResolver,
     PublicationRelationsZoomLevel3Resolver,
+    PublicationsZoomLevel2HoverResolver,
   ],
   exports: [
     PublicationsService,
@@ -32,6 +34,7 @@ import { PublicationsService } from './publications.service'
     PublicationsSerialResolver,
     PublicationAuthorResolver,
     PublicationRelationsZoomLevel3Resolver,
+    PublicationsZoomLevel2HoverResolver,
   ],
 })
 export class PublicationsModule {}

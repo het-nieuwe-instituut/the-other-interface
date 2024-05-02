@@ -1,7 +1,7 @@
 import { Text, Box } from '@chakra-ui/react'
 
 import { usePresenter } from './usePresenter'
-import { Record } from '../Record'
+import { Record } from '../Record/Record'
 import { keyframes } from '@emotion/react'
 
 import { GALAXY_EDITORIAL_LAYER_PART } from '@/features/shared/constants/mainConstants'
