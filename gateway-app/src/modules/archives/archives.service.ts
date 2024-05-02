@@ -171,8 +171,41 @@ export class ArchivesService {
       undefined,
       { id }
     )
+    // TODO: HNIT-1833 - throw on errors (no data or multiple resutls that don't match)
+
     if (results.data.length === 0) {
-      return null
+      return {}
+    }
+
+    if (results.data.length > 1) {
+      const reducedResult = results.data.reduce(
+        (acc, curr) => {
+          let title = ''
+          let creators = ''
+          let description = ''
+          if (acc.title === null && acc.title !== curr.title) title = curr.title
+          if (acc.creators === null && acc.creators !== curr.creators) creators = curr.creators
+          if (acc.description === null && acc.description !== curr.description)
+            description = curr.description
+          return {
+            title,
+            creators,
+            description,
+          }
+        },
+        {
+          title: results.data[0].title,
+          creators: results.data[0].creators,
+          description: results.data[0].description,
+        }
+      )
+      if (
+        reducedResult.title === null &&
+        reducedResult.creators === null &&
+        reducedResult.description === null
+      )
+        return {}
+      return reducedResult
     }
 
     return results.data[0]
