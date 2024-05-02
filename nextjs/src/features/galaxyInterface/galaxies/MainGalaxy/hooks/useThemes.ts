@@ -30,6 +30,5 @@ export function useThemes(isEnabled: boolean) {
     queryKey: ['paginated-themes', currentPage, lang, isEnabled],
     queryFn,
     refetchOnWindowFocus: false,
-    keepPreviousData: true,
   })
 }
