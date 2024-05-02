@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
 import { CloudCategory } from '../../utils/categories'
 import initApiClientService from '../../utils/initApiClientService'
-import { getZoom2HoverTask } from '@/features/pages/tasks/getZoom2HoverTask'
+import { getZoomRecordHoverTask } from '@/features/pages/tasks/getZoomRecordHoverTask'
 
-export function useZoom2HoverRecordResult({
+export function useZoomHoverRecordResult({
   id,
   category,
 }: {
@@ -12,7 +12,7 @@ export function useZoom2HoverRecordResult({
 }) {
   const api = initApiClientService()
 
-  const queryFn = () => getZoom2HoverTask({ id, category, api })
+  const queryFn = () => getZoomRecordHoverTask({ id, category, api })
 
   return useQuery({
     queryKey: [id, category],

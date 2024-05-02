@@ -29,11 +29,11 @@ export class PeopleZoomLevel3Resolver {
 }
 
 @Resolver(PeopleZoomLevelHoverType)
-export class PeopleZoomLevel2HoverResolver {
+export class PeopleZoomLevelRecordHoverResolver {
   public constructor(private readonly peopleService: PeopleService) {}
 
   @Query(() => PeopleZoomLevelHoverType)
-  public async peopleZoomLevel2Hover(@Args() args: PeopleZoomLevel2HoverArgs) {
-    return this.peopleService.getZoomLevel2Hover(args.id)
+  public async peopleZoomLevelHover(@Args() args: PeopleZoomLevel2HoverArgs) {
+    return this.peopleService.getZoomRecordHover(args.id)
   }
 }
