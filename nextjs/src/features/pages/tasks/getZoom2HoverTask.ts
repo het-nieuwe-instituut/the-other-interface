@@ -1,6 +1,7 @@
 import { Category } from '@/features/shared/utils/categories'
 import { getZoom2HoverQueries } from './Zoom2HoverConfig'
 import { Sdk } from 'src/generated/graphql'
+import { zoom2HoverQueryTooltipDataMapper } from '@/features/galaxyInterface/galaxies/CategoryGalaxy/fragments/Record/zoom2HoverQueryTooltipDataMapper'
 
 export async function getZoom2HoverTask({
   id,
@@ -19,5 +20,7 @@ export async function getZoom2HoverTask({
 
   const result = await hoverConfig?.hoverData({ id })
 
-  return result
+  const mappedResult = zoom2HoverQueryTooltipDataMapper(result)
+
+  return mappedResult
 }
