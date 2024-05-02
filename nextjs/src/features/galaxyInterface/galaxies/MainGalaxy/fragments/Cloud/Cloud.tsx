@@ -2,7 +2,7 @@ import { Box, PlacementWithLogical, useBreakpoint } from '@chakra-ui/react'
 import { CategoryCloud } from '../types'
 import { HOMEPAGE_Z_INDEXES } from '../constants'
 import { CloudTitle } from '../CloudTitle'
-
+import { Text } from '@chakra-ui/react'
 import { usePresenter } from './usePresenter'
 import { CATEGORIES, CloudCategory } from '@/features/shared/utils/categories'
 import { Tooltip } from '@/features/modules/components/ToolTip/Tooltip'
@@ -20,7 +20,11 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
   return (
     <>
       <Tooltip
-        label={t(`hover${category}`)}
+        label={
+          <Text fontFamily={'Social'} fontSize={'12px'} fontWeight={'400'}>
+            {t(`hover${category}`)}
+          </Text>
+        }
         placement={placement.placement}
         xAxis={placement.right}
         yAxis={placement.top}
