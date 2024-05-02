@@ -171,8 +171,8 @@ export class ArchivesService {
       undefined,
       { id }
     )
-    if (results.data.length > 1) {
-      throw new Error('Unexpected result returned from Triply API. Expected 1 result, got more.')
+    if (results.data.length === 0) {
+      return null
     }
 
     return results.data[0]
