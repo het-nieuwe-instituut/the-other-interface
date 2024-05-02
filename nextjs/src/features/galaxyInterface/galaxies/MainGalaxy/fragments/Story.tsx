@@ -40,7 +40,13 @@ export const Story: React.FC<Props> = ({ story, isMainGrid, onLoad }) => {
 
   return (
     <GridItem position="relative" css={{ ...grid }}>
-      <Tooltip label={t('hoverstory')}>
+      <Tooltip
+        label={
+          <Text fontFamily={'Social'} fontSize={'12px'} fontWeight={'400'}>
+            {t('hoverstory')}
+          </Text>
+        }
+      >
         <Flex
           position="absolute"
           style={{ ...position }}
