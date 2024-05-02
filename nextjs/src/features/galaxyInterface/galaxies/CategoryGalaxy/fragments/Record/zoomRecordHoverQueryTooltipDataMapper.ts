@@ -42,7 +42,7 @@ export const zoomRecordHoverQueryTooltipDataMapper = (initialData: TooltipData) 
     return {
       title: `${initialData.archivesZoomRecordHover.title}${
         initialData.archivesZoomRecordHover.creators
-          ? '' + initialData.archivesZoomRecordHover.creators
+          ? ', ' + initialData.archivesZoomRecordHover.creators
           : ''
       }`,
       description: initialData.archivesZoomRecordHover.description,
@@ -58,7 +58,7 @@ export const zoomRecordHoverQueryTooltipDataMapper = (initialData: TooltipData) 
     return {
       title: `${initialData.peopleZoomLevelHover.title}${
         initialData.peopleZoomLevelHover.profession
-          ? '' + initialData.peopleZoomLevelHover.profession
+          ? ', ' + initialData.peopleZoomLevelHover.profession
           : ''
       }`,
       description: initialData.peopleZoomLevelHover.description,

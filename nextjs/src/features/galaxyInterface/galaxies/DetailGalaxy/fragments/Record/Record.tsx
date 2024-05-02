@@ -23,7 +23,7 @@ export const Record: React.FC<Props> = ({ record }) => {
   const { recordDetails, isLoading, handleClick } = usePresenter(id, category)
   // TODO: HNIT-1833 - add in loading and error handling
   const { data } = useZoomHoverRecordResult({ id, category })
-  console.log(data)
+
   if (!recordDetails && !isLoading) return null
 
   return (
