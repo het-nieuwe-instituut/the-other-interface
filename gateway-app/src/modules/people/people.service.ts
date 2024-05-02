@@ -214,38 +214,6 @@ export class PeopleService {
       return {}
     }
 
-    if (results.data.length > 1) {
-      const reducedResult = results.data.reduce(
-        (acc, curr) => {
-          let title = ''
-          let profession = ''
-          let description = ''
-          if (acc.title === null && acc.title !== curr.title) title = curr.title
-          if (acc.profession === null && acc.profession !== curr.profession)
-            profession = curr.profession
-          if (acc.description === null && acc.description !== curr.description)
-            description = curr.description
-          return {
-            title,
-            profession,
-            description,
-          }
-        },
-        {
-          title: results.data[0].title,
-          profession: results.data[0].profession,
-          description: results.data[0].description,
-        }
-      )
-      if (
-        reducedResult.title === null &&
-        reducedResult.profession === null &&
-        reducedResult.description === null
-      )
-        return {}
-      return reducedResult
-    }
-
-    return results.data[0]
+    return { ...TriplyUtils.combineObjectArray(results.data) }
   }
 }

@@ -502,37 +502,6 @@ export class PublicationsService {
       return {}
     }
 
-    if (results.data.length > 1) {
-      const reducedResult = results.data.reduce(
-        (acc, curr) => {
-          let title = ''
-          let authors = ''
-          let description = ''
-          if (acc.title === null && acc.title !== curr.title) title = curr.title
-          if (acc.authors === null && acc.authors !== curr.authors) authors = curr.authors
-          if (acc.description === null && acc.description !== curr.description)
-            description = curr.description
-          return {
-            title,
-            authors,
-            description,
-          }
-        },
-        {
-          title: results.data[0].title,
-          authors: results.data[0].authors,
-          description: results.data[0].description,
-        }
-      )
-      if (
-        reducedResult.title === null &&
-        reducedResult.authors === null &&
-        reducedResult.description === null
-      )
-        return {}
-      return reducedResult
-    }
-
-    return results.data[0]
+    return { ...TriplyUtils.combineObjectArray(results.data) }
   }
 }
