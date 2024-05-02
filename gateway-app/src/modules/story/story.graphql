@@ -253,8 +253,11 @@ fragment StoryWithoutRelationsFragment on StoryEntity {
         locale
         author {
             data {
+                id
                 attributes {
                     firstName
+                    lastName
+                    insertion
                 }
             }
         }
@@ -489,6 +492,7 @@ fragment StoryFragment on StoryEntity {
                     }
                     author {
                         data {
+                            id
                             attributes {
                                 firstName
                                 lastName
@@ -512,8 +516,11 @@ fragment StoryFragment on StoryEntity {
                     }
                     author {
                         data {
+                            id
                             attributes {
                                 firstName
+                                lastName
+                                insertion
                             }
                         }
                     }
@@ -535,6 +542,7 @@ fragment StoryMetaFragment on StoryEntity {
         locale
         author {
             data {
+                id
                 attributes {
                     firstName
                     lastName
@@ -589,6 +597,7 @@ fragment StoryMetaFragment on StoryEntity {
                     }
                     author {
                         data {
+                            id
                             attributes {
                                 firstName
                                 lastName
@@ -612,6 +621,7 @@ fragment StoryMetaFragment on StoryEntity {
                     }
                     author {
                         data {
+                            id
                             attributes {
                                 firstName
                                 lastName
@@ -707,6 +717,8 @@ fragment LocalizedStoryMetaFragment on StoryEntity {
                             id
                             attributes {
                                 firstName
+                                lastName
+                                insertion
                             }
                         }
                     }
