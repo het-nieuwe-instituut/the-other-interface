@@ -16,6 +16,9 @@ export async function getZoomRecordHoverTask({
   if (!id || !category) {
     throw new Error('id and category are required')
   }
+
+  if (category === 'stories') return null
+
   const hoverConfig = getZoomRecordHoverQueries(api, category)
 
   const result = await hoverConfig?.hoverData({ id })

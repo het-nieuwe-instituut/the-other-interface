@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { CloudCategory } from '../../utils/categories'
+import { Category } from '../../utils/categories'
 import initApiClientService from '../../utils/initApiClientService'
 import { getZoomRecordHoverTask } from '@/features/pages/tasks/getZoomRecordHoverTask'
 
@@ -8,7 +8,7 @@ export function useZoomHoverRecordResult({
   category,
 }: {
   id?: string | null
-  category?: CloudCategory | null
+  category?: Category | null
 }) {
   const api = initApiClientService()
 
