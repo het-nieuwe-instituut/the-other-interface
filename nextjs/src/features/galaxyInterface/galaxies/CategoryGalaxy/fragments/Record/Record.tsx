@@ -2,27 +2,56 @@ import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/Re
 import { Position } from '@/features/shared/types/position'
 import { GridItem, Flex } from '@chakra-ui/react'
 import { CloudCategory } from '@/features/shared/utils/categories'
-
+import { Text } from '@chakra-ui/react'
 import { RecordText } from '../RecordText'
 import { useRouter } from 'next/navigation'
 import { ZoomLevel2Type } from 'src/generated/graphql'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 import { Tooltip } from '@/features/modules/components/ToolTip/Tooltip'
-import { useRecordHoverPresenter } from '@/features/galaxyInterface/galaxies/CategoryGalaxy/fragments/Record/useRecordHoverPresenter'
+import { useZoom2HoverRecordResult } from '@/features/shared/hooks/queries/useZoom2HoverRecordResult'
 
 type Props = {
-  record: ZoomLevel2Type & {
-    position: Position
-    category: CloudCategory
-  }
+  record: RecordProps
+}
+
+type RecordProps = ZoomLevel2Type & {
+  position: Position
+  category: CloudCategory
 }
 
 export const Record: React.FC<Props> = ({ record }) => {
-  const { id, thumbnail, category, position, title } = record
+  const { id, category } = record
   const { lang, search } = useZoom2Params()
-  const { data } = useRecordHoverPresenter(id, category, lang)
-  console.log('data', data?.zoomLevel2Hover)
+  // TODO: HNIT-1833 - add in loading and error handling
+  const { data } = useZoom2HoverRecordResult({ id, category })
+
+  return (
+    <GridItem position="relative">
+      {data === null ? (
+        RecordData(record, lang, search)
+      ) : (
+        <Tooltip
+          label={
+            <div>
+              <Text fontFamily={'Social'} fontSize={'12px'} fontWeight={'700'}>
+                {data?.title}
+              </Text>
+              <Text fontFamily={'Social'} fontSize={'12px'} fontWeight={'400'}>
+                {data?.description}
+              </Text>
+            </div>
+          }
+        >
+          {RecordData(record, lang, search)}
+        </Tooltip>
+      )}
+    </GridItem>
+  )
+}
+
+const RecordData = (record: RecordProps, lang?: string | null, search?: string) => {
+  const { id, thumbnail, category, position, title } = record
   const router = useRouter()
 
   const handleClick = () => {
@@ -34,36 +63,32 @@ export const Record: React.FC<Props> = ({ record }) => {
   }
 
   return (
-    <GridItem position="relative">
-      <Tooltip label={`Title: ${data?.zoomLevel2Hover.title}`}>
-        <Flex
-          position="absolute"
-          style={{ ...position }}
-          width="70%"
-          height="80%"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-          gap="5px"
-          cursor={'pointer'}
-          onClick={handleClick}
-          _hover={{ transform: 'scale(1.05)' }}
-          transition="all .4s ease-in-out"
-        >
-          <ResponsiveImage
-            src={thumbnail}
-            alt={title ?? ''}
-            maxHeight="calc(100% - 2.6vw - 7px)" // where 2.6vw are a texts' line heights, 15px are gaps
-            size={'16vw'}
-            css={{
-              flex: `1 1 calc(100% - 2.6vw - 7px)`,
-            }}
-            disableRightClick
-          />
+    <Flex
+      position="absolute"
+      style={{ ...position }}
+      width="70%"
+      height="80%"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      gap="5px"
+      cursor={'pointer'}
+      onClick={handleClick}
+      _hover={{ transform: 'scale(1.05)' }}
+      transition="all .4s ease-in-out"
+    >
+      <ResponsiveImage
+        src={thumbnail}
+        alt={title ?? ''}
+        maxHeight="calc(100% - 2.6vw - 7px)" // where 2.6vw are a texts' line heights, 15px are gaps
+        size={'16vw'}
+        css={{
+          flex: `1 1 calc(100% - 2.6vw - 7px)`,
+        }}
+        disableRightClick
+      />
 
-          <RecordText title={title} categoryType={category} />
-        </Flex>
-      </Tooltip>
-    </GridItem>
+      <RecordText title={title} categoryType={category} />
+    </Flex>
   )
 }
