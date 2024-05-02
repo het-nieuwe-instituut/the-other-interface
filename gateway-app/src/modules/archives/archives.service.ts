@@ -172,7 +172,7 @@ export class ArchivesService {
       { id }
     )
     if (results.data.length === 0) {
-      return null
+      return {}
     }
 
     return results.data[0]

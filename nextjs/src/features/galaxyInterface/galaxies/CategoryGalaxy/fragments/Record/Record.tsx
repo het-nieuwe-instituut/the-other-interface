@@ -13,18 +13,47 @@ import { tooltipMapper } from './tooltipMapper'
 import { useRecordHoverPresenter } from './useRecordHoverPresenter'
 
 type Props = {
-  record: ZoomLevel2Type & {
-    position: Position
-    category: CloudCategory
-  }
+  record: RecordProps
+}
+
+type RecordProps = ZoomLevel2Type & {
+  position: Position
+  category: CloudCategory
 }
 
 export const Record: React.FC<Props> = ({ record }) => {
-  const { id, thumbnail, category, position, title } = record
+  const { id, category } = record
   const { lang, search } = useZoom2Params()
   const { data } = useRecordHoverPresenter(id, category)
 
   const tooltipData = tooltipMapper(data)
+  console.log(tooltipData)
+  return (
+    <GridItem position="relative">
+      {tooltipData === null ? (
+        RecordData(record, lang, search)
+      ) : (
+        <Tooltip
+          label={
+            <div>
+              <Text fontFamily={'Social'} fontSize={'12px'} fontWeight={'700'}>
+                {tooltipData?.title}
+              </Text>
+              <Text fontFamily={'Social'} fontSize={'12px'} fontWeight={'400'}>
+                {tooltipData?.description}
+              </Text>
+            </div>
+          }
+        >
+          {RecordData(record, lang, search)}
+        </Tooltip>
+      )}
+    </GridItem>
+  )
+}
+
+const RecordData = (record: RecordProps, lang?: string | null, search?: string) => {
+  const { id, thumbnail, category, position, title } = record
   const router = useRouter()
 
   const handleClick = () => {
@@ -36,47 +65,32 @@ export const Record: React.FC<Props> = ({ record }) => {
   }
 
   return (
-    <GridItem position="relative">
-      <Tooltip
-        label={
-          <div>
-            <Text fontFamily={'Social'} fontSize={'12px'} fontWeight={'700'}>
-              {tooltipData?.title}
-            </Text>
-            <Text fontFamily={'Social'} fontSize={'12px'} fontWeight={'400'}>
-              {tooltipData?.description}
-            </Text>
-          </div>
-        }
-      >
-        <Flex
-          position="absolute"
-          style={{ ...position }}
-          width="70%"
-          height="80%"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-          gap="5px"
-          cursor={'pointer'}
-          onClick={handleClick}
-          _hover={{ transform: 'scale(1.05)' }}
-          transition="all .4s ease-in-out"
-        >
-          <ResponsiveImage
-            src={thumbnail}
-            alt={title ?? ''}
-            maxHeight="calc(100% - 2.6vw - 7px)" // where 2.6vw are a texts' line heights, 15px are gaps
-            size={'16vw'}
-            css={{
-              flex: `1 1 calc(100% - 2.6vw - 7px)`,
-            }}
-            disableRightClick
-          />
+    <Flex
+      position="absolute"
+      style={{ ...position }}
+      width="70%"
+      height="80%"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      gap="5px"
+      cursor={'pointer'}
+      onClick={handleClick}
+      _hover={{ transform: 'scale(1.05)' }}
+      transition="all .4s ease-in-out"
+    >
+      <ResponsiveImage
+        src={thumbnail}
+        alt={title ?? ''}
+        maxHeight="calc(100% - 2.6vw - 7px)" // where 2.6vw are a texts' line heights, 15px are gaps
+        size={'16vw'}
+        css={{
+          flex: `1 1 calc(100% - 2.6vw - 7px)`,
+        }}
+        disableRightClick
+      />
 
-          <RecordText title={title} categoryType={category} />
-        </Flex>
-      </Tooltip>
-    </GridItem>
+      <RecordText title={title} categoryType={category} />
+    </Flex>
   )
 }
