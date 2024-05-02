@@ -9,6 +9,8 @@ import {
   ArchivesFondsCreatorType,
   ArchivesFondsZoomLevel3DetailType,
   ArchivesRelationsCountType,
+  ArchivesZoomLevel2HoverArgs,
+  ArchivesZoomLevelHoverType,
 } from './archives.type'
 import { TriplyUtils } from '../triply/triply.utils'
 import { CustomError } from '../util/customError'
@@ -68,5 +70,15 @@ export class ArchivesFondsCreatorResolver {
     const id = TriplyUtils.getIdFromUri(archiveCreator.creator)
 
     return this.zoomLevel3Service.getDetail(id, type)
+  }
+}
+
+@Resolver(ArchivesZoomLevelHoverType)
+export class ArchivesZoomLevel2HoverResolver {
+  public constructor(private readonly archivesService: ArchivesService) {}
+
+  @Query(() => ArchivesZoomLevelHoverType)
+  public async archivesZoomLevel2Hover(@Args() args: ArchivesZoomLevel2HoverArgs) {
+    return this.archivesService.getZoomLevel2Hover(args.id)
   }
 }

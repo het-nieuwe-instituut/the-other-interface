@@ -5,6 +5,8 @@ import {
   PeopleRecordRelationArgs,
   PeopleRelationsCountType,
   PeopleRelationsType,
+  PeopleZoomLevel2HoverArgs,
+  PeopleZoomLevelHoverType,
 } from './people.type'
 import { PeopleService } from './people.service'
 
@@ -23,5 +25,15 @@ export class PeopleZoomLevel3Resolver {
   @Query(() => [PeopleRelationsCountType], { nullable: true })
   public peopleRecordRelationsCount(@Args() args: PeopleRecordRelationArgs) {
     return this.peopleService.getRelationsDataCount(args.id, args.type)
+  }
+}
+
+@Resolver(PeopleZoomLevelHoverType)
+export class PeopleZoomLevel2HoverResolver {
+  public constructor(private readonly peopleService: PeopleService) {}
+
+  @Query(() => PeopleZoomLevelHoverType)
+  public async peopleZoomLevel2Hover(@Args() args: PeopleZoomLevel2HoverArgs) {
+    return this.peopleService.getZoomLevel2Hover(args.id)
   }
 }

@@ -43,6 +43,18 @@ const objectsRelationsCountKeys: KeysToVerify<ObjectsRelationsCountType> = {
   total: true,
 }
 
+export interface ObjectsZoomLevel2HoverData {
+  title: string
+  profession: string
+  description: string
+}
+
+const objectsZoomLevel2HoverDataKeys: KeysToVerify<ObjectsZoomLevel2HoverData> = {
+  title: true,
+  profession: true,
+  description: true,
+}
+
 export interface ObjectRecordZoomLevel3Data {
   objectNumber?: string
   titleType?: string
@@ -89,6 +101,8 @@ export class ObjectsService {
   private readonly ZoomLevel3RelationsCountEndpoint = 'objects-recordRelations-Count/run?'
 
   private readonly ZoomLevel3RecordEndpoint = 'objects-recordPage-editorial/run?'
+
+  private readonly ZoomLevel2HoverEndpoint = 'objects-hoverState/run?'
 
   public constructor(private triplyService: TriplyService) {}
 
@@ -140,6 +154,22 @@ export class ObjectsService {
     )
 
     return result.data
+  }
+
+  public async getZoomLevel2Hover(id: string) {
+    const results = await this.triplyService.queryTriplyData<ObjectsZoomLevel2HoverData>(
+      this.ZoomLevel2HoverEndpoint,
+      objectsZoomLevel2HoverDataKeys,
+      undefined,
+      { id }
+    )
+    // TODO: HNIT-1833 - throw on errors (no data or multiple resutls that don't match)
+
+    if (results.data.length === 0) {
+      return {}
+    }
+
+    return { ...TriplyUtils.combineObjectArray(results.data) }
   }
 
   // private getDimensionValueFromData(data: ObjectsDetailZoomLevel3Data[]) {

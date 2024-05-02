@@ -44,6 +44,18 @@ const publicationsRelationsCountKeys: KeysToVerify<PublicationsRelationsCountTyp
   total: true,
 }
 
+export interface PublicationsZoomLevel2HoverData {
+  title: string
+  authors: string
+  description: string
+}
+
+const publicationsZoomLevel2HoverDataKeys: KeysToVerify<PublicationsZoomLevel2HoverData> = {
+  title: true,
+  authors: true,
+  description: true,
+}
+
 interface PublicationsBooksDetailZoomLevel3Data {
   thumbnail: true
   id: true
@@ -396,6 +408,8 @@ export class PublicationsService {
 
   private readonly ZoomLevel3RecordEndpoint = 'publications-recordPage-Editorial/run?'
 
+  private readonly ZoomLevel2HoverEndpoint = 'publications-hoverState/run?'
+
   // private readonly publicationDescriptionLevelEndpoint = 'Zoom-3-books-type/run'
 
   public constructor(
@@ -473,5 +487,21 @@ export class PublicationsService {
     const id = TriplyUtils.getIdFromUri(publication.publisher)
 
     return this.zoomLevel3Service.getDetail(id, type)
+  }
+
+  public async getZoomLevel2Hover(id: string) {
+    const results = await this.triplyService.queryTriplyData<PublicationsZoomLevel2HoverData>(
+      this.ZoomLevel2HoverEndpoint,
+      publicationsZoomLevel2HoverDataKeys,
+      undefined,
+      { id }
+    )
+    // TODO: HNIT-1833 - throw on errors (no data or multiple resutls that don't match)
+
+    if (results.data.length === 0) {
+      return {}
+    }
+
+    return { ...TriplyUtils.combineObjectArray(results.data) }
   }
 }

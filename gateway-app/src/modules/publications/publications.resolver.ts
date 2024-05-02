@@ -16,6 +16,8 @@ import {
   PublicationRecordRelationArgs,
   PublicationRelationsType,
   PublicationsRelationsCountType,
+  PublicationsZoomLevelHoverType,
+  PublicationsZoomLevel2HoverArgs,
 } from './publications.type'
 import { PaginationArgs } from '../util/paginationArgs.type'
 
@@ -115,5 +117,15 @@ export class PublicationAuthorResolver {
   @ResolveField()
   public populatedAuthor(@Parent() publication: PublicationsBookZoomLevel3DetailType) {
     return this.publicationsService.resolveAuthor(publication)
+  }
+}
+
+@Resolver(PublicationsZoomLevelHoverType)
+export class PublicationsZoomLevel2HoverResolver {
+  public constructor(private readonly publicationsService: PublicationsService) {}
+
+  @Query(() => PublicationsZoomLevelHoverType)
+  public async publicationsZoomLevel2Hover(@Args() args: PublicationsZoomLevel2HoverArgs) {
+    return this.publicationsService.getZoomLevel2Hover(args.id)
   }
 }
