@@ -27,7 +27,7 @@ export const Record: React.FC<Props> = ({ record }) => {
   const { data } = useRecordHoverPresenter(id, category)
 
   const tooltipData = tooltipMapper(data)
-  console.log(tooltipData)
+
   return (
     <GridItem position="relative">
       {tooltipData === null ? (
