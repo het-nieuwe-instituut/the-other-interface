@@ -1,5 +1,5 @@
-query PublicationsZoom2Hover($id: String!) {
-    publicationsZoomLevel2Hover(id: $id) {
+query PublicationsZoomRecordHover($id: String!) {
+    publicationsZoomRecordHover(id: $id) {
         title
         authors
         description
