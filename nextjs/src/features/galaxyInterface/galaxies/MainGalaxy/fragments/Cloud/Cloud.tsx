@@ -16,7 +16,6 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
     usePresenter(cloud)
   const breakpoint = useBreakpoint()
   const placement = tooltipPlacement(category, breakpoint)
-  console.log(window.matchMedia('(min-width: 768px)').matches)
 
   const hoverTranslations = {
     publications: t('hoverpublications'),
