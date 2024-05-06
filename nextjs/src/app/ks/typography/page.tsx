@@ -35,33 +35,19 @@ const Page: NextPage = () => {
 
       <p>Social large:</p>
 
-      <h1 className={cn(TypographyVariants({ socialLarge: 'xl' }))}>Extra large</h1>
-      <h1 className={cn(TypographyVariants({ socialLarge: 'lg' }))}>Large</h1>
-      <h1 className={cn(TypographyVariants({ socialLarge: 'md' }))}>Medium</h1>
-      <h1 className={cn(TypographyVariants({ socialLarge: 'sm' }))}>Small</h1>
-      <h1 className={cn(TypographyVariants({ socialLarge: 'sidebar-title' }))}>Sidebar title</h1>
-      <h1 className={cn(TypographyVariants({ socialLarge: 'footer-large' }))}>Footer large</h1>
-      <h1 className={cn(TypographyVariants({ socialLarge: 'footer-small' }))}>Footer small</h1>
-      <h1 className={cn(TypographyVariants({ socialLarge: 'search-large' }))}>Search</h1>
-      <h1 className={cn(TypographyVariants({ socialLarge: 'placeholder' }))}>placeholder</h1>
-      <h1 className={cn(TypographyVariants({ socialLarge: 'search-small' }))}>Search</h1>
-      <h1 className={cn(TypographyVariants({ socialLarge: 'label' }))}>Label</h1>
+      <h1 className={cn(TypographyVariants({ social: 'xl' }))}>Extra large</h1>
+      <h1 className={cn(TypographyVariants({ social: 'lg' }))}>Large</h1>
+      <h1 className={cn(TypographyVariants({ social: 'md' }))}>Medium</h1>
+      <h1 className={cn(TypographyVariants({ social: 'sm' }))}>Small</h1>
+      <h1 className={cn(TypographyVariants({ social: 'sidebar-title' }))}>Sidebar title</h1>
+      <h1 className={cn(TypographyVariants({ social: 'footer-large' }))}>Footer large</h1>
+      <h1 className={cn(TypographyVariants({ social: 'footer-small' }))}>Footer small</h1>
+      <h1 className={cn(TypographyVariants({ social: 'search-large' }))}>Search</h1>
+      <h1 className={cn(TypographyVariants({ social: 'placeholder' }))}>placeholder</h1>
+      <h1 className={cn(TypographyVariants({ social: 'search-small' }))}>Search</h1>
+      <h1 className={cn(TypographyVariants({ social: 'label' }))}>Label</h1>
       {/* or you can use the shorthand :
-      <Typography socialLarge={'xs'} as="h1">
-        Extra small
-      </Typography> */}
-
-      <hr />
-
-      <p>Social medium:</p>
-
-      <h1 className={cn(TypographyVariants({ socialMedium: 'xl' }))}>Extra large</h1>
-      <h1 className={cn(TypographyVariants({ socialMedium: 'lg' }))}>Large</h1>
-      <h1 className={cn(TypographyVariants({ socialMedium: 'md' }))}>Medium</h1>
-      <h1 className={cn(TypographyVariants({ socialMedium: 'sm' }))}>Small</h1>
-      <h1 className={cn(TypographyVariants({ socialMedium: 'xs' }))}>Extra small</h1>
-      {/* or you can use the shorthand :
-      <Typography socialMedium={'xs'} as="h1">
+      <Typography social={'xs'} as="h1">
         Extra small
       </Typography> */}
     </div>

@@ -19,11 +19,32 @@ export const TypographyVariants = cva('', {
       ],
       md: ['font-impact-large font-normal text-[25px] leading-[120%_] tracking-[-0.25px]'],
     },
-    socialLarge: {
-      xl: 'self-stretch font-social-large not-italic text-black text-[32px] font-bold leading-[110%_] tracking-[-0.32px] ',
-      lg: 'self-stretch font-social-large font-normal not-italic text-black text-[21px] leading-[130%_] tracking-[0.21px]',
-      md: 'self-stretch font-social-large font-normal not-italic text-black text-sm leading-[130%_]',
-      sm: 'self-stretch font-social-large font-normal not-italic text-black text-xs leading-[130%_]',
+    social: {
+      xl: [
+        'self-stretch not-italic text-black font-bold leading-[110%_]',
+        'font-social-medium text-[52px] tracking-[-0.52px]',
+        'lg:font-social-large lg:text-[32px] lg:tracking-[-0.32px] ',
+      ],
+      lg: [
+        'self-stretch not-italic text-black font-normal leading-[130%_]',
+        'font-social-medium text-[32px] tracking-[0.32px]',
+        'lg:font-social-large lg:text-[21px] lg:tracking-[0.21px]',
+      ],
+      md: [
+        'self-stretch not-italic text-black font-normal leading-[130%_]',
+        'font-social-medium text-[24px] tracking-[0.48px]',
+        'lg:font-social-large lg:text-[14px] lg:tracking-[-0.25px]',
+      ],
+
+      sm: [
+        'self-stretch not-italic text-black font-normal leading-[130%_]',
+        'font-social-medium text-[12px] tracking-[0.4px]',
+        'lg:font-social-large lg:text-[14px]',
+      ],
+      xs: [
+        'self-stretch not-italic text-black font-normal leading-[130%_]',
+        'font-social-medium text-[10px]',
+      ],
 
       // specific to components
       // TODO: Should this even be here? Shouldn't this be in the component itself?
@@ -41,13 +62,6 @@ export const TypographyVariants = cva('', {
         'self-stretch font-social-large font-normal not-italic text-black text-[21px] leading-[130%_] tracking-[0.21px]',
       label:
         'self-stretch font-social-large font-normal not-italic text-black text-[11px] leading-[11px_] tracking-[0.11px]',
-    },
-    socialMedium: {
-      xl: 'self-stretch text-black not-italic font-normal font-social-medium text-[52px] font-bold leading-[110%_] tracking-[-0.52px]',
-      lg: 'self-stretch text-black not-italic font-normal font-social-medium text-[32px] leading-[130%_] tracking-[0.32px]',
-      md: 'self-stretch text-black not-italic font-normal font-social-medium text-2xl leading-[130%_] tracking-[0.48px]',
-      sm: 'self-stretch text-black not-italic font-normal font-social-medium text-xl leading-[130%_] tracking-[0.4px]',
-      xs: 'self-stretch text-black not-italic font-normal font-social-medium text-[10px] leading-[130%_]',
     },
   },
 })
