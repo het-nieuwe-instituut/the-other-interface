@@ -11,11 +11,11 @@ export interface TypographyProps
 }
 
 const Typography = React.forwardRef<HTMLParagraphElement, TypographyProps>(
-  ({ className, impact, socialLarge, socialMedium, times, as = 'p', children, ...props }, ref) => {
+  ({ className, impact, social, times, as = 'p', children, ...props }, ref) => {
     const Component = as
     return (
       <Component
-        className={cn(TypographyVariants({ className, impact, socialLarge, times, socialMedium }))}
+        className={cn(TypographyVariants({ className, impact, social, times }))}
         ref={ref}
         {...props}
       >
