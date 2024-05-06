@@ -1,4 +1,5 @@
 import { TypographyVariants } from '@/features/ui/typography/variants'
+import { cn } from '@/features/ui/utils/cn'
 import { ComponentModulesTitleModule } from 'src/generated/graphql'
 
 interface Props {
@@ -7,8 +8,6 @@ interface Props {
 
 export const TitleModule: React.FC<Props> = props => {
   return (
-    <div className="w-full bg-inherit pb-4">
-      <h1 className={TypographyVariants({ impact: 'xl' })}>{props.component.Title}</h1>
-    </div>
+    <h1 className={cn(TypographyVariants({ impact: 'xl' }), 'pb-4')}>{props.component.Title}</h1>
   )
 }
