@@ -1,4 +1,4 @@
-import { Title } from '@/features/ui/Title'
+import { ImpactLargeTypographyVariants } from '@/features/ui/typography/variants'
 import { ComponentModulesTitleModule } from 'src/generated/graphql'
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
 export const TitleModule: React.FC<Props> = props => {
   return (
     <div className="w-full bg-inherit pt-2 pb-2">
-      <Title as={'h1'}>{props.component.Title}</Title>
+      <h1 className={ImpactLargeTypographyVariants({ intent: 'xl' })}>{props.component.Title}</h1>
     </div>
   )
 }
