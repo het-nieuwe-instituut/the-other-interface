@@ -1,9 +1,14 @@
+const plugin = require('tailwindcss/plugin')
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   important: true,
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     extend: {
+      textShadow: {
+        DEFAULT: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+      },
       colors: {
         pink: {
           100: 'rgba(255, 230, 221, 1)',
@@ -70,5 +75,16 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ matchUtilities, theme }) {
+      matchUtilities(
+        {
+          'text-shadow': value => ({
+            textShadow: value,
+          }),
+        },
+        { values: theme('textShadow') }
+      )
+    }),
+  ],
 }
