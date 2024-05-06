@@ -8,9 +8,13 @@ import { useZoomHoverRecordResult } from '@/features/shared/hooks/queries/useZoo
 import { Position } from '@/features/shared/types/position'
 import { Category } from '@/features/shared/utils/categories'
 import { Tooltip } from '@/features/modules/components/ToolTip/Tooltip'
+import { Dispatch, SetStateAction } from 'react'
 
 type Props = {
   record: PositionedRecord
+  setIsHovered?: Dispatch<SetStateAction<boolean>>
+  setCurrentRecord?: Dispatch<SetStateAction<string>>
+  style?: React.CSSProperties
 }
 
 interface RecordDetailsType {
@@ -18,7 +22,7 @@ interface RecordDetailsType {
   title?: string | null
 }
 
-export const Record: React.FC<Props> = ({ record }) => {
+export const Record: React.FC<Props> = ({ record, setIsHovered, setCurrentRecord, style }) => {
   const { id, category, position, grid } = record
   const { recordDetails, isLoading, handleClick } = usePresenter(id, category)
   // TODO: HNIT-1833 - add in loading and error handling
@@ -27,7 +31,26 @@ export const Record: React.FC<Props> = ({ record }) => {
   if (!recordDetails && !isLoading) return null
 
   return (
-    <GridItem position="relative" css={{ ...grid }}>
+    <GridItem
+      position="relative"
+      css={{ ...grid, ...style }}
+      onMouseOver={
+        setIsHovered && setCurrentRecord
+          ? () => {
+              setCurrentRecord(id)
+              setIsHovered(true)
+            }
+          : undefined
+      }
+      onMouseLeave={
+        setIsHovered && setCurrentRecord
+          ? () => {
+              setCurrentRecord('')
+              setIsHovered(false)
+            }
+          : undefined
+      }
+    >
       {data === null ? (
         RecordData(recordDetails, position, handleClick, category)
       ) : (

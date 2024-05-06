@@ -7,6 +7,7 @@ import { GalaxyFooter } from '../../../components/GalaxyWrapper/GalaxyFooter/Gal
 import BlurOverlay from '@/features/shared/components/BlurOverlay/BlurOverlay'
 import { usePresenter } from '../usePresenter'
 import { GalaxyPagination } from '../../../components/GalaxyWrapper/GalaxyPagination/GalaxyPagination'
+import { useState } from 'react'
 
 const relatedCategories: Array<{ category: CloudCategory; grid: GridParams }> = [
   { category: CLOUD_CATEGORIES.people, grid: { gridRow: '1 / 2', gridColumn: '1 / 2' } },
@@ -26,7 +27,7 @@ export const DetailGalaxy: React.FC = () => {
     decreasePageNumber,
     allRelationTotals,
   } = usePresenter()
-
+  const [isHovered, setIsHovered] = useState(false)
   if (!category || !id) return null
 
   return (
@@ -49,10 +50,17 @@ export const DetailGalaxy: React.FC = () => {
             gridRow={grid.gridRow}
             gridColumn={grid.gridColumn}
             allRelationTotals={allRelationTotals}
+            setIsHovered={setIsHovered}
+            isHovered={isHovered}
           />
         ))}
 
-        <RelatedStories gridRow="1 / 3" allRelationTotals={allRelationTotals} />
+        <RelatedStories
+          gridRow="1 / 3"
+          allRelationTotals={allRelationTotals}
+          setIsHovered={setIsHovered}
+          isHovered={isHovered}
+        />
       </Grid>
 
       <GalaxyFooter

@@ -3,14 +3,23 @@ import { DetailedRecord } from '../DetailedRecord'
 import { usePresenter } from './usePresenter'
 import { Record } from '../Record/Record'
 import { AllRelationTotalsType } from '../RelatedCategory'
+import { Dispatch, SetStateAction, useState } from 'react'
 
 interface Props {
   gridRow: string
   allRelationTotals?: AllRelationTotalsType
+  setIsHovered: Dispatch<SetStateAction<boolean>>
+  isHovered: boolean
 }
 
-export const RelatedStories: React.FC<Props> = ({ gridRow, allRelationTotals }) => {
+export const RelatedStories: React.FC<Props> = ({
+  gridRow,
+  allRelationTotals,
+  setIsHovered,
+  isHovered,
+}) => {
   const { positionedStories, nextPositionedStories } = usePresenter(allRelationTotals)
+  const [currentRecord, setCurrentRecord] = useState('')
 
   return (
     <>
@@ -24,7 +33,21 @@ export const RelatedStories: React.FC<Props> = ({ gridRow, allRelationTotals }) 
       >
         <Grid height="100%" templateColumns="repeat(2, 1fr)" templateRows="repeat(4, 1fr)">
           {positionedStories.map(story => (
-            <Record key={story.id} record={story} />
+            <Record
+              key={story.id}
+              record={story}
+              setIsHovered={setIsHovered}
+              setCurrentRecord={setCurrentRecord}
+              style={
+                isHovered && currentRecord !== story.id
+                  ? {
+                      opacity: 0.2,
+                      filter: 'blur(6px)',
+                      transition: 'opacity 0.5s ease-in-out',
+                    }
+                  : {}
+              }
+            />
           ))}
 
           <DetailedRecord gridRow="2 / 4" gridColumn="1 / 3" />
