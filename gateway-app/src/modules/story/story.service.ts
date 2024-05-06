@@ -30,7 +30,7 @@ export class StoryService {
   }
 
   public async getStoryRecordHover(id: string) {
-    const res = await this.strapiGqlSdk.storyHover({ id })
+    const res = await this.strapiGqlSdk.storyWithoutRelations({ id })
     const author = `${res.story?.data?.attributes?.author?.data?.attributes?.firstName} ${res.story?.data?.attributes?.author?.data?.attributes?.lastName}`
     // TODO: HNIT-1833 - throw on errors (no data or multiple resutls that don't match)
     return {
