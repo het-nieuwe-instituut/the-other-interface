@@ -1,4 +1,12 @@
-import { ObjectType, Field, createUnionType, ID, InputType, PickType } from '@nestjs/graphql'
+import {
+  ObjectType,
+  Field,
+  createUnionType,
+  ID,
+  InputType,
+  PickType,
+  ArgsType,
+} from '@nestjs/graphql'
 import { AuthorEntityResponse, AuthorFiltersInput } from '../author/author.type'
 import { LocationFiltersInput, LocationRelationResponseCollection } from '../location/location.type'
 import {
@@ -257,4 +265,22 @@ export class StoryFiltersInput {
 
   @Field(() => StoryFiltersInput, { nullable: true })
   public siblings?: StoryFiltersInput
+}
+
+@ObjectType()
+export class StoryHoverType {
+  @Field(() => String, { nullable: true })
+  public title?: string | null
+
+  // @Field(() => String, { nullable: true })
+  // public author?: string | null
+
+  // @Field(() => String, { nullable: true })
+  // public description?: string | null
+}
+
+@ArgsType()
+export class StoryHoverArgs {
+  @Field(() => String, { nullable: false })
+  public id: string
 }
