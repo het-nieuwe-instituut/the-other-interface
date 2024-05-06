@@ -1,5 +1,5 @@
 {
-  "plugins": ["@typescript-eslint", "jsx-a11y"],
+  "plugins": ["@typescript-eslint", "jsx-a11y", "eslint-plugin-local-rules"],
   "extends": [
     "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended",
@@ -7,6 +7,7 @@
     "plugin:jsx-a11y/recommended"
   ],
   "rules": {
+    "local-rules/no-chakra-imports": "warn",
     "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/no-explicit-any": "error",
     "jsx-a11y/control-has-associated-label": [
