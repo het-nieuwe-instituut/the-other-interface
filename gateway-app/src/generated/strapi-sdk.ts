@@ -8970,6 +8970,34 @@ export type StoryByLocaleQuery = {
   } | null
 }
 
+export type StoryHoverQueryVariables = Exact<{
+  id?: InputMaybe<Scalars['ID']>
+}>
+
+export type StoryHoverQuery = {
+  __typename?: 'Query'
+  story?: {
+    __typename?: 'StoryEntityResponse'
+    data?: {
+      __typename?: 'StoryEntity'
+      id?: string | null
+      attributes?: {
+        __typename?: 'Story'
+        title: string
+        shortDescription?: string | null
+        author?: {
+          __typename?: 'AuthorEntityResponse'
+          data?: {
+            __typename?: 'AuthorEntity'
+            id?: string | null
+            attributes?: { __typename?: 'Author'; firstName: string; lastName: string } | null
+          } | null
+        } | null
+      } | null
+    } | null
+  } | null
+}
+
 export type StoriesByLocaleQueryVariables = Exact<{
   id?: InputMaybe<IdFilterInput>
   pagination?: InputMaybe<PaginationArg>
@@ -18607,6 +18635,28 @@ export const StoryByLocaleDocument = gql`
   }
   ${LocalizedStoryFragmentFragmentDoc}
 `
+export const StoryHoverDocument = gql`
+  query storyHover($id: ID) {
+    story(id: $id) {
+      data {
+        id
+        attributes {
+          title
+          shortDescription
+          author {
+            data {
+              id
+              attributes {
+                firstName
+                lastName
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`
 export const StoriesByLocaleDocument = gql`
   query storiesByLocale(
     $id: IDFilterInput
@@ -19115,6 +19165,20 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
             ...wrappedRequestHeaders,
           }),
         'storyByLocale',
+        'query'
+      )
+    },
+    storyHover(
+      variables?: StoryHoverQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<StoryHoverQuery> {
+      return withWrapper(
+        wrappedRequestHeaders =>
+          client.request<StoryHoverQuery>(StoryHoverDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'storyHover',
         'query'
       )
     },

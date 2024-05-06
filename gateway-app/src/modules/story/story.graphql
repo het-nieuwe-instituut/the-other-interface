@@ -68,6 +68,27 @@ query storyByLocale(
     }
 }
 
+query storyHover( $id: ID ) {
+    story(id: $id) {
+        data {
+            id
+            attributes {
+                title
+                shortDescription
+                author {
+                    data {
+                        id
+                        attributes {
+                            firstName
+                            lastName
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 # 
 query storiesByLocale(
     $id: IDFilterInput

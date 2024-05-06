@@ -272,11 +272,11 @@ export class StoryHoverType {
   @Field(() => String, { nullable: true })
   public title?: string | null
 
-  // @Field(() => String, { nullable: true })
-  // public author?: string | null
+  @Field(() => String, { nullable: true })
+  public author?: string | null
 
-  // @Field(() => String, { nullable: true })
-  // public description?: string | null
+  @Field(() => String, { nullable: true })
+  public description?: string | null
 }
 
 @ArgsType()

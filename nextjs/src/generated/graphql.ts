@@ -1605,6 +1605,8 @@ export type StoryFiltersInput = {
 
 export type StoryHoverType = {
   __typename?: 'StoryHoverType';
+  author?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
 };
 
@@ -2230,7 +2232,7 @@ export type StoryHoverRecordRelationsQueryVariables = Exact<{
 }>;
 
 
-export type StoryHoverRecordRelationsQuery = { __typename?: 'Query', storyHover: { __typename?: 'StoryHoverType', title?: string | null } };
+export type StoryHoverRecordRelationsQuery = { __typename?: 'Query', storyHover: { __typename?: 'StoryHoverType', title?: string | null, author?: string | null, description?: string | null } };
 
 export type ArchiveRecordRelationsQueryVariables = Exact<{
   id: Scalars['String'];
@@ -3503,6 +3505,8 @@ export const StoryHoverRecordRelationsDocument = gql`
     query StoryHoverRecordRelations($id: String!) {
   storyHover(id: $id) {
     title
+    author
+    description
   }
 }
     `;

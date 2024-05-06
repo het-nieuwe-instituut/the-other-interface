@@ -4,6 +4,9 @@ export const zoomStoryHoverQueryTooltipDataMapper = (
   initialData: StoryHoverRecordRelationsQuery
 ) => {
   return {
-    title: `${initialData.storyHover.title}`,
+    title: `${initialData.storyHover.title}${
+      initialData.storyHover.author ? ', ' + initialData.storyHover.author : ''
+    }`,
+    description: `${initialData.storyHover.description}`,
   }
 }

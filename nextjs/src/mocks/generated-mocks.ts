@@ -1363,6 +1363,8 @@ export const aStoryFiltersInput = (overrides?: Partial<StoryFiltersInput>, _rela
 export const aStoryHoverType = (overrides?: Partial<StoryHoverType>, _relationshipsToOmit: Array<string> = []): StoryHoverType => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'StoryHoverType']);
     return {
+        author: overrides && overrides.hasOwnProperty('author') ? overrides.author! : 'sint',
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'accusamus',
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'in',
     };
 };

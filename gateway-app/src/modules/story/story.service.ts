@@ -30,14 +30,13 @@ export class StoryService {
   }
 
   public async getStoryRecordHover(id: string) {
-    const res = await this.strapiGqlSdk.storyByLocale({ id })
-    return { title: 'test' }
+    const res = await this.strapiGqlSdk.storyHover({ id })
+    const author = `${res.story?.data?.attributes?.author?.data?.attributes?.firstName} ${res.story?.data?.attributes?.author?.data?.attributes?.lastName}`
     // TODO: HNIT-1833 - throw on errors (no data or multiple resutls that don't match)
-
-    // if (results.data.length === 0) {
-    //   return {}
-    // }
-
-    // return { ...TriplyUtils.combineObjectArray(results.data) }
+    return {
+      title: res.story?.data?.attributes?.title,
+      author,
+      description: res.story?.data?.attributes?.shortDescription,
+    }
   }
 }
