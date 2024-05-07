@@ -1,7 +1,6 @@
 import React from 'react'
 
-import { cn } from '../../utils/cn'
-import { Button, type ButtonProps } from './../button/component'
+import { Button, type ButtonProps } from '../button/component'
 import { IconButtonVariants } from './variants'
 
 import { VariantProps } from 'class-variance-authority'

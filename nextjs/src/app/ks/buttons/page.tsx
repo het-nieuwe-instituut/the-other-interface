@@ -1,5 +1,5 @@
 import { Button } from '@/features/ui/components/button/component'
-import { IconButton } from '@/features/ui/components/icon-button/icon-button'
+import { IconButton } from '@/features/ui/components/icon-button/component'
 import { times } from 'lodash'
 import type { NextPage } from 'next'
 import ArrowLeft from './arrow-left.svg'
