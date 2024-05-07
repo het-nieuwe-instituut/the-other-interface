@@ -26,4 +26,4 @@ const Typography = React.forwardRef<HTMLParagraphElement, TypographyProps>(
 )
 Typography.displayName = 'Typography'
 
-export { Typography, TypographyVariants }
+export { Typography }
