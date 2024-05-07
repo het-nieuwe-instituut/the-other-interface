@@ -18,10 +18,10 @@ import MediaImage from '../components/Image/Image'
 import { Pullquote } from '../components/Pullquote/Pullquote'
 import { SubtitleModule } from '../components/SubtitleModule/SubtitleModule'
 import { TextModule } from '../components/TextModule/TextModule'
-import { TitleModule } from '../components/Title/TitleModule'
 import { CarouselModule } from '../components/carousels/Carousel/Carousel'
 import { ImageCarousel } from '../components/carousels/ImageCarousel/ImageCarousel'
 import { mapUploadFileEntitiesToStoryImageInfo } from '../components/carousels/ImageCarousel/imageCarouselStrapiDataMapper'
+import { Title } from '@/features/ui/components/title/Title'
 
 interface Props {
   components: DynamicComponents
@@ -90,9 +90,7 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
           }
 
           if (component?.__typename === 'ComponentModulesTitleModule') {
-            return (
-              <TitleModule key={keyExtractor(component.id, index, array)} component={component} />
-            )
+            return <Title key={keyExtractor(component.id, index, array)}>{component.Title}</Title>
           }
 
           if (component?.__typename === 'ComponentModulesButtonsModule') {
