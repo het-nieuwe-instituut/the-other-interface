@@ -45,21 +45,8 @@ export const TypographyVariants = cva('', {
         ' self-stretch font-normal not-italic leading-[130%_] text-black-100',
         'font-social-medium text-[10px]',
       ],
-
-      // specific to components
-      // TODO: Should this even be here? Shouldn't this be in the component itself?
-      'sidebar-title':
-        ' self-stretch font-social-large text-base font-bold not-italic leading-[130%_] text-black-100',
-      'footer-large':
-        ' self-stretch font-social-large text-[32px] font-normal not-italic leading-[110%_] tracking-[-0.32px] text-black-100',
-      'footer-small':
-        ' self-stretch font-social-large text-[21px] font-normal not-italic leading-[130%_] tracking-[0.21px] text-black-100',
-      'search-large':
-        ' self-stretch font-social-large text-[21px] font-normal not-italic leading-[130%_] tracking-[0.21px] text-black-100',
       placeholder:
         ' self-stretch font-social-large text-[21px] font-normal italic  leading-[130%_] tracking-[0.21px] text-black-100',
-      'search-small':
-        ' self-stretch font-social-large text-[21px] font-normal not-italic leading-[130%_] tracking-[0.21px] text-black-100',
       label:
         ' self-stretch font-social-large text-[11px] font-normal not-italic leading-[11px_] tracking-[0.11px] text-black-100',
     },
