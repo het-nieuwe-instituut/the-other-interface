@@ -10598,7 +10598,7 @@
             "deprecationReason": null
           },
           {
-            "name": "archivesZoomLevel2Hover",
+            "name": "archivesZoomRecordHover",
             "description": null,
             "args": [
               {
@@ -11379,7 +11379,7 @@
             "deprecationReason": null
           },
           {
-            "name": "objectsZoomLevel2Hover",
+            "name": "objectsZoomRecordHover",
             "description": null,
             "args": [
               {
@@ -11615,7 +11615,7 @@
             "deprecationReason": null
           },
           {
-            "name": "peopleZoomLevel2Hover",
+            "name": "peopleZoomLevelHover",
             "description": null,
             "args": [
               {
@@ -11931,7 +11931,7 @@
             "deprecationReason": null
           },
           {
-            "name": "publicationsZoomLevel2Hover",
+            "name": "publicationsZoomRecordHover",
             "description": null,
             "args": [
               {
