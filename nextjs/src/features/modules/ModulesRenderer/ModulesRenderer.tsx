@@ -90,12 +90,11 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
           }
 
           if (component?.__typename === 'ComponentModulesTitleModule') {
-            return (
-              <Title
-                text={component.Title ?? undefined}
-                key={keyExtractor(component.id, index, array)}
-              />
-            )
+            const title = component.Title
+            if (!title) {
+              return null
+            }
+            return <Title key={keyExtractor(component.id, index, array)}>{title}</Title>
           }
 
           if (component?.__typename === 'ComponentModulesButtonsModule') {
