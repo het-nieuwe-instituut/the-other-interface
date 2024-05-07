@@ -1,16 +1,16 @@
-import { TypographyVariants } from '@/features/ui/system/typography/variants'
 import { cn } from '@/features/ui/utils/cn'
-import { PropsWithChildren } from 'react'
 import Asterisk from './asterisk.svg'
+import { TypographyVariants } from '../../system/typography/variants'
 
-interface Props extends PropsWithChildren {
+interface Props {
   asterisk?: boolean
+  text?: string
 }
 
-export const Title: React.FC<Props> = ({ children, asterisk }) => {
+export const Title: React.FC<Props> = ({ text, asterisk }) => {
   return (
     <h1 className={cn(TypographyVariants({ impact: 'xl' }), 'flex flex-row gap-2')}>
-      {children}
+      {text}
       {asterisk && <Asterisk />}
     </h1>
   )
