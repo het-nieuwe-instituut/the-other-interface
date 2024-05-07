@@ -14230,6 +14230,18 @@
             "deprecationReason": null
           },
           {
+            "name": "themes",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ThemeFiltersInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "timeframe",
             "description": null,
             "type": {
