@@ -3,7 +3,6 @@ import { cva } from 'class-variance-authority'
 export const IconButtonVariants = cva('px-0', {
   variants: {
     intent: {
-      primary: [''],
       ghost: ['border-transparent'],
     },
     size: {
