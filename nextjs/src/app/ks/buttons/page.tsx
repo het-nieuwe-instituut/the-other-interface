@@ -5,6 +5,8 @@ import type { NextPage } from 'next'
 import ArrowLeft from './arrow-left.svg'
 import ArrowRight from './arrow-right.svg'
 import Search from './search.svg'
+import { NavButton } from '@/features/ui/components/nav-button/component'
+import ExternalLink from './external-link.svg'
 
 const Page: NextPage = () => {
   return (
@@ -191,6 +193,84 @@ const Page: NextPage = () => {
             />
           </div>
         ))}
+        {times(6).map(i => (
+          <div key={i}>
+            <IconButton
+              intent={'ghost'}
+              disabled={i === 3}
+              state={i === 4 ? 'loading' : i === 5 ? 'error' : undefined}
+              size={'small'}
+              icon={<Search />}
+            />
+          </div>
+        ))}
+
+        <div className="col-span-6">
+          <hr />
+          <h1> Menu buttons</h1>
+        </div>
+        {times(6).map(i => (
+          <div key={i}>
+            <NavButton
+              disabled={i === 3}
+              state={i === 4 ? 'loading' : i === 5 ? 'error' : undefined}
+              variant={'menuPrimary'}
+            >
+              Button
+            </NavButton>
+          </div>
+        ))}
+        {times(6).map(i => (
+          <div key={i}>
+            <NavButton
+              disabled={i === 3}
+              state={i === 4 ? 'loading' : i === 5 ? 'error' : undefined}
+              variant={'menuSecondary'}
+            >
+              Button
+            </NavButton>
+          </div>
+        ))}
+        {times(6).map(i => (
+          <div key={i}>
+            <NavButton
+              disabled={i === 3}
+              state={i === 4 ? 'loading' : i === 5 ? 'error' : undefined}
+              variant={'menuSecondary'}
+            >
+              Button
+              <ExternalLink />
+            </NavButton>
+          </div>
+        ))}
+
+        <div className="col-span-6">
+          <hr />
+          <h1> Menu buttons</h1>
+        </div>
+        {times(6).map(i => (
+          <div key={i}>
+            <NavButton
+              disabled={i === 3}
+              state={i === 4 ? 'loading' : i === 5 ? 'error' : undefined}
+              variant={'footerPrimary'}
+            >
+              Button
+            </NavButton>
+          </div>
+        ))}
+        {times(6).map(i => (
+          <div key={i}>
+            <NavButton
+              disabled={i === 3}
+              state={i === 4 ? 'loading' : i === 5 ? 'error' : undefined}
+              variant={'footerSecondary'}
+            >
+              Button
+            </NavButton>
+          </div>
+        ))}
+
         {/* {times(6).map(i => (
           <div key={i}>
             <IconButton
