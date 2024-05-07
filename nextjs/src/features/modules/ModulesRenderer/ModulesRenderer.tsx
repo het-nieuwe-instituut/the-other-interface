@@ -1,3 +1,4 @@
+import { Title } from '@/features/ui/components/title/Title'
 import { Box, useTheme } from '@chakra-ui/react'
 import {
   ComponentModulesButtonsModule,
@@ -21,7 +22,6 @@ import { TextModule } from '../components/TextModule/TextModule'
 import { CarouselModule } from '../components/carousels/Carousel/Carousel'
 import { ImageCarousel } from '../components/carousels/ImageCarousel/ImageCarousel'
 import { mapUploadFileEntitiesToStoryImageInfo } from '../components/carousels/ImageCarousel/imageCarouselStrapiDataMapper'
-import { Title } from '@/features/ui/components/title/Title'
 
 interface Props {
   components: DynamicComponents
@@ -90,7 +90,11 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
           }
 
           if (component?.__typename === 'ComponentModulesTitleModule') {
-            return <Title key={keyExtractor(component.id, index, array)}>{component.Title}</Title>
+            const title = component.Title
+            if (!title) {
+              return null
+            }
+            return <Title key={keyExtractor(component.id, index, array)}>{title}</Title>
           }
 
           if (component?.__typename === 'ComponentModulesButtonsModule') {
