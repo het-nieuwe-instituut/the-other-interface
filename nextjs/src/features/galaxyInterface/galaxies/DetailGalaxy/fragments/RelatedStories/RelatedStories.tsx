@@ -32,28 +32,25 @@ export const RelatedStories: React.FC<Props> = ({
         }}
       >
         <Grid height="100%" templateColumns="repeat(2, 1fr)" templateRows="repeat(4, 1fr)">
-          {positionedStories.map(story => {
-            console.log('story', story.id)
-            return (
-              <Record
-                key={story.id}
-                record={story}
-                setIsHovered={setIsHovered}
-                isHovered={isHovered}
-                setCurrentRecord={setCurrentRecord}
-                currentRecord={currentRecord}
-                style={
-                  isHovered && currentRecord !== story.id
-                    ? {
-                        opacity: 0.2,
-                        filter: 'blur(6px)',
-                        transition: 'opacity 0.5s ease-in-out',
-                      }
-                    : {}
-                }
-              />
-            )
-          })}
+          {positionedStories.map(story => (
+            <Record
+              key={story.id}
+              record={story}
+              setIsHovered={setIsHovered}
+              isHovered={isHovered}
+              setCurrentRecord={setCurrentRecord}
+              currentRecord={currentRecord}
+              style={
+                isHovered && currentRecord !== story.id
+                  ? {
+                      opacity: 0.2,
+                      filter: 'blur(6px)',
+                      transition: 'opacity 0.5s ease-in-out',
+                    }
+                  : {}
+              }
+            />
+          ))}
 
           <DetailedRecord gridRow="2 / 4" gridColumn="1 / 3" className="detailed-story" />
         </Grid>

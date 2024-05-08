@@ -14,8 +14,8 @@ export const useCalculateLine = () => {
         const hoveredRect = hoveredElement.getBoundingClientRect()
 
         setCoordinates({
-          x1: `${hoveredRect.left - rect.left}`,
-          y1: `${hoveredRect.top - rect.top}`,
+          x1: `${hoveredRect.left - rect.left + hoveredElement.clientWidth / 2}`,
+          y1: `${hoveredRect.top - rect.top + hoveredElement.clientHeight / 2}`,
           x2: `${(rect.right - rect.left) / 2}`,
           y2: `${(rect.bottom - rect.top) / 2}`,
         })
