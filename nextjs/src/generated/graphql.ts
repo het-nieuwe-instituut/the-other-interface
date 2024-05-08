@@ -1128,7 +1128,6 @@ export type Query = {
   storyHover: StoryHoverType;
   storyMetaByLocale: StoryMetaEntityResponseCollection;
   storyRelationsCount?: Maybe<ZoomLevel3StoryRelationsCountType>;
-  storyWithoutRelations: StoryWithoutRelationsEntityResponse;
   theme: ThemeEntityResponse;
   themes: ThemeRelationResponseCollection;
   triplyRecord: TriplyRecordEntityResponse;
@@ -1386,12 +1385,6 @@ export type QueryStoryRelationsCountArgs = {
 };
 
 
-export type QueryStoryWithoutRelationsArgs = {
-  id: Scalars['String'];
-  locale?: InputMaybe<Scalars['String']>;
-};
-
-
 export type QueryThemeArgs = {
   id: Scalars['String'];
   locale?: InputMaybe<Scalars['String']>;
@@ -1637,11 +1630,6 @@ export type StoryWithoutRelationsEntity = {
   __typename?: 'StoryWithoutRelationsEntity';
   attributes?: Maybe<StoryWithoutRelations>;
   id?: Maybe<Scalars['ID']>;
-};
-
-export type StoryWithoutRelationsEntityResponse = {
-  __typename?: 'StoryWithoutRelationsEntityResponse';
-  data?: Maybe<StoryWithoutRelationsEntity>;
 };
 
 export type StoryWithoutRelationsEntityResponseCollection = {
