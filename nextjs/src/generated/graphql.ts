@@ -1597,6 +1597,7 @@ export type StoryFiltersInput = {
   siblings?: InputMaybe<StoryFiltersInput>;
   slug?: InputMaybe<StringFilterInput>;
   storyLinks?: InputMaybe<ComponentModulesButtonsModuleFiltersInput>;
+  themes?: InputMaybe<ThemeFiltersInput>;
   timeframe?: InputMaybe<ComponentCoreTimeframeFiltersInput>;
   title?: InputMaybe<StringFilterInput>;
   triplyRecords?: InputMaybe<TriplyRecordFiltersInput>;
