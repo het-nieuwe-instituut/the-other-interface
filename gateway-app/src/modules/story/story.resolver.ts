@@ -186,14 +186,4 @@ export class StoryResolver {
 
     return res.stories
   }
-
-  @Query(() => StoryWithoutRelationsEntityResponse)
-  public async storyWithoutRelations(
-    @Args('id') id: string,
-    @Args('locale', { nullable: true }) locale?: I18NLocaleCode
-  ) {
-    const res = await this.strapiGqlSdk.storyWithoutRelations({ id, locale })
-
-    return res.story
-  }
 }
