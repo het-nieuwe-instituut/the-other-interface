@@ -8,7 +8,6 @@ import BlurOverlay from '@/features/shared/components/BlurOverlay/BlurOverlay'
 import { usePresenter } from '../usePresenter'
 import { GalaxyPagination } from '../../../components/GalaxyWrapper/GalaxyPagination/GalaxyPagination'
 import { useState } from 'react'
-import { useCalculateLine } from './useCalculateLine'
 
 const relatedCategories: Array<{ category: CloudCategory; grid: GridParams }> = [
   { category: CLOUD_CATEGORIES.people, grid: { gridRow: '1 / 2', gridColumn: '1 / 2' } },
@@ -29,7 +28,7 @@ export const DetailGalaxy: React.FC = () => {
     allRelationTotals,
   } = usePresenter()
   const [isHovered, setIsHovered] = useState(false)
-  const line = useCalculateLine()
+
   if (!category || !id) return null
 
   return (
@@ -44,6 +43,7 @@ export const DetailGalaxy: React.FC = () => {
         right="2vw"
         templateColumns="repeat(3, 1fr)"
         templateRows="repeat(2, 1fr)"
+        className="detail-galaxy-grid"
       >
         {relatedCategories.map(({ category: cloudCategory, grid }) => (
           <RelatedCategory
@@ -56,25 +56,7 @@ export const DetailGalaxy: React.FC = () => {
             isHovered={isHovered}
           />
         ))}
-        {isHovered && (
-          <div
-            style={{
-              position: 'absolute',
-              zIndex: -10,
-            }}
-          >
-            <svg width="96vw" height="96vw" xmlns="http://www.w3.org/2000/svg">
-              <line
-                x1={line.x1}
-                y1={line.y1}
-                x2={line.x2}
-                y2={line.y2}
-                strokeWidth={1}
-                stroke={'RGBA(0, 81, 255, .4)'}
-              />
-            </svg>
-          </div>
-        )}
+
         <RelatedStories
           gridRow="1 / 3"
           allRelationTotals={allRelationTotals}

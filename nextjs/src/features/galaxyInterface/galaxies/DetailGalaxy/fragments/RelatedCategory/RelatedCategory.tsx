@@ -43,7 +43,9 @@ export const RelatedCategory: React.FC<Props> = ({
               key={keyExtractor(record.id, index, positionedRecords)}
               record={record}
               setIsHovered={setIsHovered}
+              isHovered={isHovered}
               setCurrentRecord={setCurrentRecord}
+              currentRecord={currentRecord}
               style={
                 isHovered && currentRecord !== record.id
                   ? {
