@@ -39,7 +39,7 @@ import {
   TriplyRecordFiltersInput,
   TriplyRecordRelationResponseCollection,
 } from '../triplyRecord/triplyRecord.type'
-import { ThemeRelationResponseCollection } from '../theme/theme.type'
+import { ThemeFiltersInput, ThemeRelationResponseCollection } from '../theme/theme.type'
 import { StoryEntityResponse } from './story.types.circular'
 
 @ObjectType()
@@ -265,6 +265,9 @@ export class StoryFiltersInput {
 
   @Field(() => StoryFiltersInput, { nullable: true })
   public siblings?: StoryFiltersInput
+
+  @Field(() => ThemeFiltersInput, { nullable: true })
+  public themes?: ThemeFiltersInput
 }
 
 @ObjectType()
