@@ -1128,6 +1128,7 @@ export type Query = {
   storyHover: StoryHoverType;
   storyMetaByLocale: StoryMetaEntityResponseCollection;
   storyRelationsCount?: Maybe<ZoomLevel3StoryRelationsCountType>;
+  storyWithoutRelations: StoryWithoutRelationsEntityResponse;
   theme: ThemeEntityResponse;
   themes: ThemeRelationResponseCollection;
   triplyRecord: TriplyRecordEntityResponse;
@@ -1385,6 +1386,12 @@ export type QueryStoryRelationsCountArgs = {
 };
 
 
+export type QueryStoryWithoutRelationsArgs = {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
 export type QueryThemeArgs = {
   id: Scalars['String'];
   locale?: InputMaybe<Scalars['String']>;
@@ -1616,6 +1623,7 @@ export type StoryRelationResponseCollection = {
 
 export type StoryWithoutRelations = {
   __typename?: 'StoryWithoutRelations';
+  author?: Maybe<AuthorEntityResponse>;
   createdAt?: Maybe<Scalars['Date']>;
   description?: Maybe<Scalars['String']>;
   locale?: Maybe<Scalars['String']>;
@@ -1630,6 +1638,11 @@ export type StoryWithoutRelationsEntity = {
   __typename?: 'StoryWithoutRelationsEntity';
   attributes?: Maybe<StoryWithoutRelations>;
   id?: Maybe<Scalars['ID']>;
+};
+
+export type StoryWithoutRelationsEntityResponse = {
+  __typename?: 'StoryWithoutRelationsEntityResponse';
+  data?: Maybe<StoryWithoutRelationsEntity>;
 };
 
 export type StoryWithoutRelationsEntityResponseCollection = {
@@ -2221,7 +2234,7 @@ export type StoryHoverRecordRelationsQueryVariables = Exact<{
 }>;
 
 
-export type StoryHoverRecordRelationsQuery = { __typename?: 'Query', storyHover: { __typename?: 'StoryHoverType', title?: string | null, author?: string | null, description?: string | null } };
+export type StoryHoverRecordRelationsQuery = { __typename?: 'Query', storyWithoutRelations: { __typename?: 'StoryWithoutRelationsEntityResponse', data?: { __typename?: 'StoryWithoutRelationsEntity', id?: string | null, attributes?: { __typename?: 'StoryWithoutRelations', title: string, shortDescription?: string | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', id?: string | null, attributes?: { __typename?: 'Author', firstName: string, lastName: string } | null } | null } | null } | null } | null } };
 
 export type ArchiveRecordRelationsQueryVariables = Exact<{
   id: Scalars['String'];
@@ -3492,10 +3505,23 @@ export const ZoomLevel3PublicationRecordDocument = gql`
     `;
 export const StoryHoverRecordRelationsDocument = gql`
     query StoryHoverRecordRelations($id: String!) {
-  storyHover(id: $id) {
-    title
-    author
-    description
+  storyWithoutRelations(id: $id) {
+    data {
+      id
+      attributes {
+        title
+        shortDescription
+        author {
+          data {
+            id
+            attributes {
+              firstName
+              lastName
+            }
+          }
+        }
+      }
+    }
   }
 }
     `;

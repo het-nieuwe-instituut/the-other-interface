@@ -9,8 +9,6 @@ import {
   StoryWithoutRelationsEntityResponse,
   StoryWithoutRelationsEntityResponseCollection,
   StoryMetaEntityResponseCollection,
-  StoryHoverType,
-  StoryHoverArgs,
 } from './story.type'
 import { StoryEntityResponse } from './story.types.circular'
 import { StoryService } from './story.service'
@@ -42,16 +40,6 @@ export class StoryFieldResolver {
       return res.author
     }
     return null
-  }
-}
-
-@Resolver(StoryHoverType)
-export class StoryZoomRecordHoverResolver {
-  public constructor(private readonly storyService: StoryService) {}
-
-  @Query(() => StoryHoverType)
-  public async storyHover(@Args() args: StoryHoverArgs) {
-    return this.storyService.getStoryRecordHover(args.id)
   }
 }
 
@@ -185,5 +173,15 @@ export class StoryResolver {
     })
 
     return res.stories
+  }
+
+  @Query(() => StoryWithoutRelationsEntityResponse)
+  public async storyWithoutRelations(
+    @Args('id') id: string,
+    @Args('locale', { nullable: true }) locale?: I18NLocaleCode
+  ) {
+    const res = await this.strapiGqlSdk.storyWithoutRelations({ id, locale })
+
+    return res.story
   }
 }
