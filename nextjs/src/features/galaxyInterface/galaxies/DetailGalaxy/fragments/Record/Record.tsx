@@ -47,7 +47,6 @@ export const Record: React.FC<Props> = ({
       <GridItem
         position="relative"
         css={{ ...grid, ...style }}
-        className={isHovered && currentRecord === id ? `hovered` : ''}
         onMouseOver={
           setIsHovered && setCurrentRecord
             ? () => {
@@ -66,7 +65,7 @@ export const Record: React.FC<Props> = ({
         }
       >
         {data === null ? (
-          RecordData(recordDetails, position, handleClick, category)
+          RecordData(recordDetails, position, handleClick, category, isHovered, currentRecord, id)
         ) : (
           <Tooltip
             label={
@@ -80,7 +79,15 @@ export const Record: React.FC<Props> = ({
               </div>
             }
           >
-            {RecordData(recordDetails, position, handleClick, category)}
+            {RecordData(
+              recordDetails,
+              position,
+              handleClick,
+              category,
+              isHovered,
+              currentRecord,
+              id
+            )}
           </Tooltip>
         )}
       </GridItem>
@@ -115,7 +122,10 @@ const RecordData = (
   recordDetails: RecordDetailsType | undefined | null,
   position: Position,
   handleClick: () => void,
-  category: Category
+  category: Category,
+  isHovered: boolean | undefined,
+  currentRecord: string | undefined,
+  id: string
 ) => {
   return (
     <Flex
@@ -131,6 +141,7 @@ const RecordData = (
       _hover={{ transform: 'scale(1.05)' }}
       transition="all .4s ease-in-out"
       style={{ ...position }}
+      className={isHovered && currentRecord === id ? `hovered` : ''}
     >
       <ResponsiveImage
         src={recordDetails?.thumbnail?.[0]}
