@@ -12069,6 +12069,22 @@
             "description": null,
             "args": [
               {
+                "name": "lang",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
                 "name": "page",
                 "description": null,
                 "type": {
@@ -12119,39 +12135,6 @@
               "ofType": {
                 "kind": "OBJECT",
                 "name": "SearchAllParentType",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "searchByAllCategoriesAmount",
-            "description": null,
-            "args": [
-              {
-                "name": "text",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "ZoomLevel2AmountParentType",
                 "ofType": null
               }
             },
@@ -13641,7 +13624,7 @@
               "name": null,
               "ofType": {
                 "kind": "ENUM",
-                "name": "Enum_Triplyrecord_Type",
+                "name": "EntityNames",
                 "ofType": null
               }
             },

@@ -1,22 +1,19 @@
 import { useMemo } from 'react'
-import { SearchCategory } from '@/features/shared/utils/categories'
 import { PositioningTemplate, positioningTemplates } from './positioningTemplates'
 import { usePositioningTemplates } from '@/features/shared/hooks/usePositioningTemplates'
 import { usePageNumber } from '@/features/shared/hooks/usePageNumber'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
-import { MappedRecord } from '../types'
 import { useSearch } from '@/features/shared/hooks/queries/useSearch'
+import { SearchAllResultType } from 'src/generated/graphql'
 
 const getPositionedRecords = ({
   records,
   pageNumber,
-  category,
   currentTemplate,
 }: {
-  records: MappedRecord[] | null
+  records: SearchAllResultType[] | null
   pageNumber: number
-  category: SearchCategory
   currentTemplate: PositioningTemplate
 }) => {
   let lastStoryIndex = 0
@@ -33,7 +30,7 @@ const getPositionedRecords = ({
       ...record,
       key: `zoom2-${pageNumber}-${lastStoryIndex}`,
       position,
-      category,
+      category: record.type,
     })
     lastStoryIndex++
   }
@@ -74,7 +71,6 @@ export const usePresenter = (pageAmount: number) => {
     return getPositionedRecords({
       records: currentRecords,
       pageNumber,
-      category,
       currentTemplate,
     })
   }, [currentRecords, category, currentTemplate, pageNumber])
@@ -83,7 +79,6 @@ export const usePresenter = (pageAmount: number) => {
     return getPositionedRecords({
       records: nextRecords,
       pageNumber: nextPage,
-      category,
       currentTemplate: nextTemplate,
     })
   }, [nextRecords, category, nextTemplate, nextPage])

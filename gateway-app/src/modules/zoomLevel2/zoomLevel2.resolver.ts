@@ -28,11 +28,6 @@ export class ZoomLevel2Resolver {
     @Args() args: SearchArgs,
     @Args() paginationArgs: PaginationArgs
   ) {
-    return this.zoomLevel2Service.getSearchByAllCategories(args.text, paginationArgs)
-  }
-
-  @Query(() => ZoomLevel2AmountParentType)
-  public async searchByAllCategoriesAmount(@Args() args: SearchArgs) {
-    return this.zoomLevel2Service.getSearchByAllCategoriesAmount(args.text)
+    return this.zoomLevel2Service.getSearchByAllCategories(args.text, args.lang, paginationArgs)
   }
 }

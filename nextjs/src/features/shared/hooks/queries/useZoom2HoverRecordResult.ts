@@ -1,14 +1,14 @@
 import { useQuery } from '@tanstack/react-query'
-import { CloudCategory } from '../../utils/categories'
 import initApiClientService from '../../utils/initApiClientService'
 import { getZoom2HoverTask } from '@/features/pages/tasks/getZoom2HoverTask'
+import { EntityNames } from 'src/generated/graphql'
 
 export function useZoom2HoverRecordResult({
   id,
   category,
 }: {
   id?: string | null
-  category?: CloudCategory | null
+  category?: EntityNames | null
 }) {
   const api = initApiClientService()
 

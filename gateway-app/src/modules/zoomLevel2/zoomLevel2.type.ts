@@ -15,6 +15,9 @@ export class ZoomLevel2Args {
 export class SearchArgs {
   @Field(() => String, { nullable: false })
   public text: string
+
+  @Field(() => String, { nullable: false })
+  public lang: string
 }
 
 @ObjectType()
@@ -47,7 +50,7 @@ export class ZoomLevel2AmountParentType {
 @ObjectType()
 export class SearchAllResultType {
   @Field(() => String, { nullable: true })
-  public thumbnail: string
+  public thumbnail?: string
 
   @Field(() => String, { nullable: true })
   public title: string | null
@@ -55,8 +58,8 @@ export class SearchAllResultType {
   @Field(() => String)
   public id: string
 
-  @Field(() => Enum_Triplyrecord_Type)
-  public type: Enum_Triplyrecord_Type
+  @Field(() => EntityNames)
+  public type: EntityNames
 }
 
 @ObjectType()

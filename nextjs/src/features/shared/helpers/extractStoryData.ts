@@ -1,11 +1,10 @@
-import { MappedRecord } from '@/features/galaxyInterface/galaxies/CategoryGalaxy/fragments/types'
 import { imageBasePath } from '@/features/modules/modulesConstants'
 import {
   ComponentModulesImage,
+  EntityNames,
   HomepageComponentsDynamicZone,
   StoryEntity,
 } from 'src/generated/graphql'
-import { SEARCH_CATEGORIES } from '../utils/categories'
 
 const findImageUrl = (components: HomepageComponentsDynamicZone[]): string => {
   const imageComponent = components?.find(
@@ -35,11 +34,11 @@ export const extractStoryData = (story: StoryEntity | null) => {
   }
 }
 
-export const storyToRecordMapper = (story: StoryEntity): MappedRecord => {
+export const storyToRecordMapper = (story: StoryEntity) => {
   return {
     title: story?.attributes?.title ?? '',
     thumbnail: findImageUrl(story?.attributes?.components ?? []) ?? '',
     id: story.id,
-    type: SEARCH_CATEGORIES.stories,
+    type: EntityNames.Stories,
   }
 }

@@ -1,11 +1,10 @@
 import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
 import { Position } from '@/features/shared/types/position'
 import { GridItem, Flex } from '@chakra-ui/react'
-import { CloudCategory } from '@/features/shared/utils/categories'
 import { Text } from '@chakra-ui/react'
 import { RecordText } from '../RecordText'
 import { useRouter } from 'next/navigation'
-import { ZoomLevel2Type } from 'src/generated/graphql'
+import { EntityNames, SearchAllResultType } from 'src/generated/graphql'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 import { Tooltip } from '@/features/modules/components/ToolTip/Tooltip'
@@ -15,9 +14,9 @@ type Props = {
   record: RecordProps
 }
 
-type RecordProps = ZoomLevel2Type & {
+type RecordProps = SearchAllResultType & {
   position: Position
-  category: CloudCategory
+  category: EntityNames
 }
 
 export const Record: React.FC<Props> = ({ record }) => {

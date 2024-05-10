@@ -1,4 +1,4 @@
-import { Box, Flex, Grid, keyframes } from '@chakra-ui/react'
+import { Box, Flex, Grid } from '@chakra-ui/react'
 
 import { Story } from '../Story'
 import { usePresenter } from './usePresenter'

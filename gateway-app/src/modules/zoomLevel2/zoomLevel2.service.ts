@@ -1,10 +1,18 @@
-import { Injectable } from '@nestjs/common'
+import { Inject, Injectable } from '@nestjs/common'
 import { CustomError } from '../util/customError'
 import { PaginationArgs } from '../util/paginationArgs.type'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { TriplyUtils } from '../triply/triply.utils'
 import { getUniqueById } from '../util/helpers'
+import {
+  ComponentModulesImage,
+  HomepageComponentsDynamicZone,
+  PublicationState,
+  Sdk,
+  StoriesQuery,
+} from 'src/generated/strapi-sdk'
+import { ConfigService } from '@nestjs/config'
 
 interface ResultData {
   thumbnail: string
@@ -59,7 +67,11 @@ export class ZoomLevel2Service {
     'https://api.collectiedata.hetnieuweinstituut.nl/datasets/the-other-interface-acceptance/knowledge-graph/services/knowledge-graph/_search'
   private readonly SearchByAllAmountEndpoint = 'textSearchCount/run?'
 
-  public constructor(private readonly triplyService: TriplyService) {}
+  public constructor(
+    @Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk,
+    // private readonly configService: ConfigService,
+    private readonly triplyService: TriplyService
+  ) {}
   public getData(entity: EntityNames, paginationArgs: PaginationArgs, text?: string) {
     switch (entity) {
       case EntityNames.Archives:
@@ -95,40 +107,84 @@ export class ZoomLevel2Service {
     }
   }
 
-  public async getSearchByAllCategories(text: string, paginationArgs: PaginationArgs) {
-    const result = await this.triplyService.postQueryTriplyData<ElasticsearchResult>(
+  public async getSearchByAllCategories(
+    text: string,
+    locale: string,
+    paginationArgs: PaginationArgs
+  ) {
+    const itemsPerPage = paginationArgs.pageSize ?? 12
+    const storiesPerPage = 2
+    const triplyPerPage = 10
+
+    const storyFilters = {
+      title: {
+        containsi: text,
+      },
+    }
+
+    const totalStories = await this.strapiGqlSdk.storiesIds({
+      filters: storyFilters,
+      locale,
+      publicationState: PublicationState.Live,
+      pagination: { page: 1, pageSize: 1 },
+    })
+
+    const totalTriply = await this.triplyService.postQueryTriplyData<ElasticsearchResult>(
       this.SearchByAllEndpoint,
       keysToVerifyResponse,
-      { page: paginationArgs.page, pageSize: paginationArgs.pageSize },
+      { page: 1, pageSize: 1 },
       text ? { text } : undefined
     )
 
-    const formattedNodes = result.hits.hits.map(item => {
-      const { type, id } = this.extractTypeAndId(item._source['@id'])
+    const totalStoriesCounter = totalStories?.stories?.meta?.pagination?.total ?? 0
+    const totalTriplyCounter = totalTriply.hits.total.value ?? 0
 
-      if (!id || !type) {
-        return null
+    // Calculate offsets
+    const currentPage = paginationArgs.page
+    const offsetStories = (currentPage - 1) * storiesPerPage
+    const offsetTriply = (currentPage - 1) * triplyPerPage
+
+    let storiesToFetch = Math.max(0, Math.min(storiesPerPage, totalStoriesCounter - offsetStories))
+    let triplyToFetch = Math.max(0, Math.min(triplyPerPage, totalTriplyCounter - offsetTriply))
+
+    // Adjust the fetch sizes to not exceed the total per page
+    if (storiesToFetch + triplyToFetch > itemsPerPage) {
+      if (storiesToFetch > storiesPerPage) {
+        triplyToFetch = itemsPerPage - storiesToFetch
+      } else {
+        storiesToFetch = itemsPerPage - triplyToFetch
       }
+    }
 
-      const thumbnail = item._source['https://schema org/url']
-        ? item._source['https://schema org/url'][0]
-        : ''
-      const title = item._source['https://www ica org/standards/RiC/ontology#title']
-        ? item._source['https://www ica org/standards/RiC/ontology#title'][0]
-        : ''
+    // Calculate correct pages based on adjusted fetches
+    const storyPage = Math.ceil(offsetStories / storiesPerPage) + 1
+    const triplyPage = Math.ceil(offsetTriply / triplyPerPage) + 1
 
-      return {
-        thumbnail: thumbnail,
-        title: title,
-        id: id,
-        type: this.triplyService.mapTypeToEnum(type.toLowerCase()),
-      }
+    const stories = await this.strapiGqlSdk.stories({
+      filters: {
+        title: {
+          containsi: text,
+        },
+      },
+      locale,
+      publicationState: PublicationState.Live,
+      pagination: { page: storyPage, pageSize: storiesToFetch },
     })
+
+    const result = await this.triplyService.postQueryTriplyData<ElasticsearchResult>(
+      this.SearchByAllEndpoint,
+      keysToVerifyResponse,
+      { page: triplyPage, pageSize: triplyToFetch },
+      text ? { text } : undefined
+    )
+
+    const formattedStories = this.storyToRecordMapper(stories)?.filter(Boolean) ?? []
+    const formattedTriplyResult = this.elasticSearchToRecordMapper(result)?.filter(Boolean) ?? []
 
     return {
       page: paginationArgs.page,
-      nodes: formattedNodes?.filter(Boolean) ?? [],
-      total: result.hits.total.value ?? 0,
+      nodes: [...formattedStories, ...formattedTriplyResult],
+      total: totalStoriesCounter + totalTriplyCounter,
     }
   }
 
@@ -201,6 +257,62 @@ export class ZoomLevel2Service {
     return {
       type: match ? match[1] : '',
       id: match ? match[2] : '',
+    }
+  }
+
+  private storyToRecordMapper(stories: StoriesQuery) {
+    return stories.stories?.data?.map(story => {
+      const components = story?.attributes?.components
+      const imageComponent = components?.find(
+        component => component?.__typename === 'ComponentModulesImage'
+      ) as ComponentModulesImage
+
+      const url = this.imageBasePath(imageComponent?.image.data?.attributes?.url ?? '')
+
+      return {
+        title: story?.attributes?.title ?? '',
+        thumbnail: url,
+        id: story.id,
+        type: EntityNames.Stories,
+      }
+    })
+  }
+
+  private elasticSearchToRecordMapper(data: ElasticsearchResult) {
+    return data.hits.hits.map(item => {
+      const { type, id } = this.extractTypeAndId(item._source['@id'])
+
+      if (!id || !type) {
+        return null
+      }
+
+      const thumbnail = item._source['https://schema org/url']
+        ? item._source['https://schema org/url'][0]
+        : ''
+      const title = item._source['https://www ica org/standards/RiC/ontology#title']
+        ? item._source['https://www ica org/standards/RiC/ontology#title'][0]
+        : ''
+
+      return {
+        thumbnail: thumbnail,
+        title: title,
+        id: id,
+        type: this.triplyService.mapTypeToEnum(type.toLowerCase()),
+      }
+    })
+  }
+
+  private imageBasePath(url: string): string {
+    if (!url) {
+      return url
+    }
+
+    try {
+      new URL(url)
+      return url
+    } catch {
+      const baseURL = 'http://localhost:1337'
+      return new URL(url, baseURL).toString()
     }
   }
 }

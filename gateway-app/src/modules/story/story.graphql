@@ -38,6 +38,9 @@ query storiesIds(
         data {
             id
         }
+        meta {
+            ...ResponseCollectionMetaFragment
+        }
     }
 }
 

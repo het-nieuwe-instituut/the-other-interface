@@ -46,28 +46,16 @@ export function useSearch({
         }
 
       case SEARCH_CATEGORIES.all:
-        const storiesSearchResponse = await api.searchByStories({
-          searchTerm: text ?? '',
-          page,
-          pageSize: 2,
-          locale: lang ?? 'nl',
-        })
-
-        const stories =
-          storiesSearchResponse?.stories?.data
-            ?.filter(Boolean)
-            .map(story => storyToRecordMapper(story as StoryEntity)) ?? []
-        const storiesCount = storiesSearchResponse?.stories?.meta?.pagination.total || 0
-        const allPageSize = ZOOM2_RECORDS_PER_PAGE - storiesCount
         const searchAllResult = await api.searchAll({
           text: text ?? '',
           page,
-          pageSize: allPageSize,
+          lang: lang ?? 'nl',
+          pageSize: ZOOM2_RECORDS_PER_PAGE,
         })
 
         return {
-          items: [...stories, ...(searchAllResult?.searchByAllCategories?.nodes ?? [])],
-          total: storiesCount + (+searchAllResult.searchByAllCategories?.total || 0),
+          items: searchAllResult?.searchByAllCategories?.nodes ?? [],
+          total: searchAllResult?.searchByAllCategories?.total ?? 0,
         }
 
       default:

@@ -1,10 +1,10 @@
 import { Flex, Text, BoxProps } from '@chakra-ui/react'
 
 import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { MappedRecordType } from './types'
+import { EntityNames } from 'src/generated/graphql'
 
 type Props = {
-  categoryType: MappedRecordType
+  categoryType: EntityNames
   title?: string | null
   css?: BoxProps['css']
 }

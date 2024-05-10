@@ -1,5 +1,5 @@
-query searchAll($text: String! $page: Int!, $pageSize: Int) {
-    searchByAllCategories(page: $page, pageSize: $pageSize, text: $text) {
+query searchAll($text: String!, $lang: String!, $page: Int!, $pageSize: Int) {
+    searchByAllCategories(page: $page, lang: $lang, pageSize: $pageSize, text: $text) {
         page,
         nodes {
             title
@@ -7,12 +7,6 @@ query searchAll($text: String! $page: Int!, $pageSize: Int) {
 			id
             type
         }
-        total
-    }
-}
-
-query searchAllAmount($text: String!) {
-    searchByAllCategoriesAmount(text: $text) {
         total
     }
 }

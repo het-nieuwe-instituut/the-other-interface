@@ -8069,6 +8069,16 @@ export type StoriesIdsQuery = {
   stories?: {
     __typename?: 'StoryEntityResponseCollection'
     data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
+    meta: {
+      __typename?: 'ResponseCollectionMeta'
+      pagination: {
+        __typename?: 'Pagination'
+        page: number
+        pageCount: number
+        pageSize: number
+        total: number
+      }
+    }
   } | null
 }
 
@@ -18584,8 +18594,12 @@ export const StoriesIdsDocument = gql`
       data {
         id
       }
+      meta {
+        ...ResponseCollectionMetaFragment
+      }
     }
   }
+  ${ResponseCollectionMetaFragmentFragmentDoc}
 `
 export const StoryDocument = gql`
   query story($id: ID, $locale: I18NLocaleCode) {

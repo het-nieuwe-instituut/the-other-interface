@@ -1,6 +1,5 @@
-import { Category } from '@/features/shared/utils/categories'
 import { getZoom2HoverQueries } from './Zoom2HoverConfig'
-import { Sdk } from 'src/generated/graphql'
+import { EntityNames, Sdk } from 'src/generated/graphql'
 import { zoom2HoverQueryTooltipDataMapper } from '@/features/galaxyInterface/galaxies/CategoryGalaxy/fragments/Record/zoom2HoverQueryTooltipDataMapper'
 
 export async function getZoom2HoverTask({
@@ -9,7 +8,7 @@ export async function getZoom2HoverTask({
   api,
 }: {
   id?: string | null
-  category?: Category | null
+  category?: EntityNames | null
   api: Sdk
   lang?: string | null
 }) {

@@ -1121,7 +1121,6 @@ export type Query = {
   publicationsZoomLevel2Hover: PublicationsZoomLevelHoverType;
   relations?: Maybe<Array<ZoomLevel3RelationsType>>;
   searchByAllCategories: SearchAllParentType;
-  searchByAllCategoriesAmount: ZoomLevel2AmountParentType;
   stories: StoryEntityResponseCollection;
   storiesRealtedWithinTheme: StoriesRelatedToThemeResponse;
   storiesWithoutRelations: StoryWithoutRelationsEntityResponseCollection;
@@ -1333,13 +1332,9 @@ export type QueryRelationsArgs = {
 
 
 export type QuerySearchByAllCategoriesArgs = {
+  lang: Scalars['String'];
   page: Scalars['Int'];
   pageSize?: InputMaybe<Scalars['Int']>;
-  text: Scalars['String'];
-};
-
-
-export type QuerySearchByAllCategoriesAmountArgs = {
   text: Scalars['String'];
 };
 
@@ -1537,7 +1532,7 @@ export type SearchAllResultType = {
   id: Scalars['String'];
   thumbnail?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
-  type: EnumTriplyrecordType;
+  type: EntityNames;
 };
 
 export type StoriesRelatedToThemeResponse = {
@@ -2040,19 +2035,13 @@ export type MenuPagesQuery = { __typename?: 'Query', menupages: { __typename?: '
 
 export type SearchAllQueryVariables = Exact<{
   text: Scalars['String'];
+  lang: Scalars['String'];
   page: Scalars['Int'];
   pageSize?: InputMaybe<Scalars['Int']>;
 }>;
 
 
-export type SearchAllQuery = { __typename?: 'Query', searchByAllCategories: { __typename?: 'SearchAllParentType', page: number, total: number, nodes?: Array<{ __typename?: 'SearchAllResultType', title?: string | null, thumbnail?: string | null, id: string, type: EnumTriplyrecordType }> | null } };
-
-export type SearchAllAmountQueryVariables = Exact<{
-  text: Scalars['String'];
-}>;
-
-
-export type SearchAllAmountQuery = { __typename?: 'Query', searchByAllCategoriesAmount: { __typename?: 'ZoomLevel2AmountParentType', total: string } };
+export type SearchAllQuery = { __typename?: 'Query', searchByAllCategories: { __typename?: 'SearchAllParentType', page: number, total: number, nodes?: Array<{ __typename?: 'SearchAllResultType', title?: string | null, thumbnail?: string | null, id: string, type: EntityNames }> | null } };
 
 export type StoriesQueryVariables = Exact<{
   pagination?: InputMaybe<PaginationArg>;
@@ -2987,8 +2976,13 @@ export const MenuPagesDocument = gql`
 }
     `;
 export const SearchAllDocument = gql`
-    query searchAll($text: String!, $page: Int!, $pageSize: Int) {
-  searchByAllCategories(page: $page, pageSize: $pageSize, text: $text) {
+    query searchAll($text: String!, $lang: String!, $page: Int!, $pageSize: Int) {
+  searchByAllCategories(
+    page: $page
+    lang: $lang
+    pageSize: $pageSize
+    text: $text
+  ) {
     page
     nodes {
       title
@@ -2996,13 +2990,6 @@ export const SearchAllDocument = gql`
       id
       type
     }
-    total
-  }
-}
-    `;
-export const SearchAllAmountDocument = gql`
-    query searchAllAmount($text: String!) {
-  searchByAllCategoriesAmount(text: $text) {
     total
   }
 }
@@ -3851,9 +3838,6 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     searchAll(variables: SearchAllQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<SearchAllQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<SearchAllQuery>(SearchAllDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'searchAll', 'query');
-    },
-    searchAllAmount(variables: SearchAllAmountQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<SearchAllAmountQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<SearchAllAmountQuery>(SearchAllAmountDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'searchAllAmount', 'query');
     },
     stories(variables?: StoriesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<StoriesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<StoriesQuery>(StoriesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'stories', 'query');

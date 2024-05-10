@@ -4,7 +4,7 @@ import { ConfigService } from '@nestjs/config'
 import { lastValueFrom } from 'rxjs'
 import { PaginationArgs } from '../util/paginationArgs.type'
 import { RollbarService } from '../util/rollbar.service'
-import { Enum_Triplyrecord_Type } from 'src/generated/strapi-sdk'
+import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 
 /**
  * Due to typescript's limitations, we decided to use this approach to verify expected
@@ -181,18 +181,18 @@ export class TriplyService {
     return lastValueFrom(res)
   }
 
-  public mapTypeToEnum(type: string): Enum_Triplyrecord_Type {
+  public mapTypeToEnum(type: string): EntityNames {
     switch (type.toLowerCase()) {
       case 'archives':
-        return Enum_Triplyrecord_Type.Archive
+        return EntityNames.Archives
       case 'media':
-        return Enum_Triplyrecord_Type.Media
+        return EntityNames.Media
       case 'objects':
-        return Enum_Triplyrecord_Type.Object
+        return EntityNames.Objects
       case 'people':
-        return Enum_Triplyrecord_Type.People
+        return EntityNames.People
       case 'publications':
-        return Enum_Triplyrecord_Type.Publication
+        return EntityNames.Publications
       default:
         throw new Error(`Unsupported type: ${type}`)
     }

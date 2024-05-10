@@ -1221,7 +1221,6 @@ export const aQuery = (overrides?: Partial<Query>, _relationshipsToOmit: Array<s
         publicationsZoomLevel2Hover: overrides && overrides.hasOwnProperty('publicationsZoomLevel2Hover') ? overrides.publicationsZoomLevel2Hover! : relationshipsToOmit.includes('PublicationsZoomLevelHoverType') ? {} as PublicationsZoomLevelHoverType : aPublicationsZoomLevelHoverType({}, relationshipsToOmit),
         relations: overrides && overrides.hasOwnProperty('relations') ? overrides.relations! : [relationshipsToOmit.includes('ZoomLevel3RelationsType') ? {} as ZoomLevel3RelationsType : aZoomLevel3RelationsType({}, relationshipsToOmit)],
         searchByAllCategories: overrides && overrides.hasOwnProperty('searchByAllCategories') ? overrides.searchByAllCategories! : relationshipsToOmit.includes('SearchAllParentType') ? {} as SearchAllParentType : aSearchAllParentType({}, relationshipsToOmit),
-        searchByAllCategoriesAmount: overrides && overrides.hasOwnProperty('searchByAllCategoriesAmount') ? overrides.searchByAllCategoriesAmount! : relationshipsToOmit.includes('ZoomLevel2AmountParentType') ? {} as ZoomLevel2AmountParentType : aZoomLevel2AmountParentType({}, relationshipsToOmit),
         stories: overrides && overrides.hasOwnProperty('stories') ? overrides.stories! : relationshipsToOmit.includes('StoryEntityResponseCollection') ? {} as StoryEntityResponseCollection : aStoryEntityResponseCollection({}, relationshipsToOmit),
         storiesRealtedWithinTheme: overrides && overrides.hasOwnProperty('storiesRealtedWithinTheme') ? overrides.storiesRealtedWithinTheme! : relationshipsToOmit.includes('StoriesRelatedToThemeResponse') ? {} as StoriesRelatedToThemeResponse : aStoriesRelatedToThemeResponse({}, relationshipsToOmit),
         storiesWithoutRelations: overrides && overrides.hasOwnProperty('storiesWithoutRelations') ? overrides.storiesWithoutRelations! : relationshipsToOmit.includes('StoryWithoutRelationsEntityResponseCollection') ? {} as StoryWithoutRelationsEntityResponseCollection : aStoryWithoutRelationsEntityResponseCollection({}, relationshipsToOmit),
@@ -1277,7 +1276,7 @@ export const aSearchAllResultType = (overrides?: Partial<SearchAllResultType>, _
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'iusto',
         thumbnail: overrides && overrides.hasOwnProperty('thumbnail') ? overrides.thumbnail! : 'expedita',
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'autem',
-        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : EnumTriplyrecordType.Archive,
+        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : EntityNames.Archives,
     };
 };
 
