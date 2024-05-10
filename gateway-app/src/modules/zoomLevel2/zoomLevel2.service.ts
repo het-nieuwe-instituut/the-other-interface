@@ -2,17 +2,15 @@ import { Inject, Injectable } from '@nestjs/common'
 import { CustomError } from '../util/customError'
 import { PaginationArgs } from '../util/paginationArgs.type'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
-import { KeysToVerify, TriplyService } from '../triply/triply.service'
+import { ElasticsearchResult, KeysToVerify, TriplyService } from '../triply/triply.service'
 import { TriplyUtils } from '../triply/triply.utils'
 import { getUniqueById } from '../util/helpers'
 import {
   ComponentModulesImage,
-  HomepageComponentsDynamicZone,
   PublicationState,
   Sdk,
   StoriesQuery,
 } from 'src/generated/strapi-sdk'
-import { ConfigService } from '@nestjs/config'
 
 interface ResultData {
   thumbnail: string
@@ -26,39 +24,6 @@ const resultDataKeys: KeysToVerify<ResultData> = {
   title: true,
   id: true,
   categoryType: true,
-}
-
-interface ElasticsearchResult {
-  hits: {
-    total: {
-      value: number
-    }
-    hits: {
-      _source: {
-        '@id': string
-        'https://schema org/url': string[]
-        'https://www ica org/standards/RiC/ontology#title': string[]
-      }
-    }[]
-  }
-}
-
-const keysToVerifyResponse: KeysToVerify<ElasticsearchResult> = {
-  hits: {
-    total: {
-      value: true,
-    },
-    hits: [
-      {
-        _source: {
-          // TODO enable when we have fixed issue with empty items in response
-          '@id': false,
-          'https://schema org/url': false,
-          'https://www ica org/standards/RiC/ontology#title': false,
-        },
-      },
-    ],
-  },
 }
 
 @Injectable()
@@ -129,9 +94,8 @@ export class ZoomLevel2Service {
       pagination: { page: 1, pageSize: 1 },
     })
 
-    const totalTriply = await this.triplyService.postQueryTriplyData<ElasticsearchResult>(
+    const totalTriply = await this.triplyService.postQueryTriplyData(
       this.SearchByAllEndpoint,
-      keysToVerifyResponse,
       { page: 1, pageSize: 1 },
       text ? { text } : undefined
     )
@@ -160,23 +124,28 @@ export class ZoomLevel2Service {
     const storyPage = Math.ceil(offsetStories / storiesPerPage) + 1
     const triplyPage = Math.ceil(offsetTriply / triplyPerPage) + 1
 
-    const stories = await this.strapiGqlSdk.stories({
-      filters: {
-        title: {
-          containsi: text,
-        },
-      },
-      locale,
-      publicationState: PublicationState.Live,
-      pagination: { page: storyPage, pageSize: storiesToFetch },
-    })
+    const stories =
+      storiesToFetch > 0
+        ? await this.strapiGqlSdk.stories({
+            filters: {
+              title: {
+                containsi: text,
+              },
+            },
+            locale,
+            publicationState: PublicationState.Live,
+            pagination: { page: storyPage, pageSize: storiesToFetch },
+          })
+        : undefined
 
-    const result = await this.triplyService.postQueryTriplyData<ElasticsearchResult>(
-      this.SearchByAllEndpoint,
-      keysToVerifyResponse,
-      { page: triplyPage, pageSize: triplyToFetch },
-      text ? { text } : undefined
-    )
+    const result =
+      triplyToFetch > 0
+        ? await this.triplyService.postQueryTriplyData(
+            this.SearchByAllEndpoint,
+            { page: triplyPage, pageSize: triplyToFetch },
+            text ? { text } : undefined
+          )
+        : undefined
 
     const formattedStories = this.storyToRecordMapper(stories)?.filter(Boolean) ?? []
     const formattedTriplyResult = this.elasticSearchToRecordMapper(result)?.filter(Boolean) ?? []
@@ -256,11 +225,16 @@ export class ZoomLevel2Service {
     const match = /id\/([^\/]+)\/(\d+)/.exec(url)
     return {
       type: match ? match[1] : '',
-      id: match ? match[2] : '',
+      //TODO enable when triply clean up the data
+      // type: TriplyUtils.getEntityNameFromUri(url),
+      id: TriplyUtils.getIdFromUri(url),
     }
   }
 
-  private storyToRecordMapper(stories: StoriesQuery) {
+  private storyToRecordMapper(stories?: StoriesQuery) {
+    if (!stories) {
+      return null
+    }
     return stories.stories?.data?.map(story => {
       const components = story?.attributes?.components
       const imageComponent = components?.find(
@@ -278,7 +252,11 @@ export class ZoomLevel2Service {
     })
   }
 
-  private elasticSearchToRecordMapper(data: ElasticsearchResult) {
+  private elasticSearchToRecordMapper(data?: ElasticsearchResult) {
+    if (!data || !data.hits || !data.hits.hits) {
+      return null
+    }
+
     return data.hits.hits.map(item => {
       const { type, id } = this.extractTypeAndId(item._source['@id'])
 

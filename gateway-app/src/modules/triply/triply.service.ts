@@ -32,8 +32,21 @@ import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
  * be extended to check for value types as well.
  *
  */
-export type KeysToVerify<T> = {
-  [P in keyof T]?: boolean | KeysToVerify<T[P]>
+export type KeysToVerify<T> = Record<keyof T, true>
+
+export interface ElasticsearchResult {
+  hits: {
+    total: {
+      value: number
+    }
+    hits: {
+      _source: {
+        '@id': string
+        'https://schema org/url': string[]
+        'https://www ica org/standards/RiC/ontology#title': string[]
+      }
+    }[]
+  }
 }
 
 @Injectable()
@@ -112,43 +125,38 @@ export class TriplyService {
     return new URL(`${this.endpointBaseURL}${this.baseQueryPath}${endpointSuffix}`)
   }
 
-  private checkResponseType<T>(responseData: T | T[], keysToVerify: KeysToVerify<T>): void {
-    if (responseData === null || responseData === undefined) {
+  private checkResponseType<ReturnDataType>(
+    responseData: unknown,
+    keysToVerify: KeysToVerify<ReturnDataType>
+  ) {
+    if (!responseData || !Array.isArray(responseData) || !responseData.length) {
       return
     }
 
-    if (Array.isArray(responseData)) {
-      if (responseData.length === 0) {
-        return
-      }
-      responseData.forEach(item => this.checkObjectKeys(item, keysToVerify))
-    } else {
-      this.checkObjectKeys(responseData, keysToVerify)
+    try {
+      const expectedKeys = Object.keys(keysToVerify)
+      const receivedKeys = Object.keys(responseData[0])
+
+      expectedKeys.forEach(k => {
+        if (!receivedKeys.includes(k)) {
+          const message = `"${k}" is not returned in ${JSON.stringify(receivedKeys)}`
+
+          this.rollbarService.logError(message)
+        }
+      })
+    } catch (err) {
+      const message = `Unable to test keys ${JSON.stringify(
+        keysToVerify
+      )} in response ${JSON.stringify(responseData)}`
+      this.rollbarService.logError(message)
     }
   }
 
-  private checkObjectKeys<T>(dataObject: T, keysToVerify: KeysToVerify<T>): void {
-    ;(Object.keys(keysToVerify) as Array<keyof T>).forEach(key => {
-      const value = dataObject[key]
-      const required = keysToVerify[key]
-
-      if (required === true && value === undefined) {
-        const message = `Missing required key: ${String(key)} in ${JSON.stringify(dataObject)}`
-        this.rollbarService.logError(message)
-      }
-
-      if (typeof required === 'object' && required !== null && value !== undefined) {
-        this.checkObjectKeys(value as any, required as KeysToVerify<any>)
-      }
-    })
-  }
-
-  public async postQueryTriplyData<ReturnDataType>(
+  public async postQueryTriplyData(
     endpointArg: string,
-    keysToVerify: KeysToVerify<ReturnDataType>,
     paginationArgs?: PaginationArgs,
     searchParams?: Record<string, string>
-  ): Promise<ReturnDataType> {
+  ): Promise<ElasticsearchResult> {
     const endpoint = this.getEndpointForArg(endpointArg)
 
     if (paginationArgs) {
@@ -168,8 +176,7 @@ export class TriplyService {
       }
     }
 
-    const res = await this.postFetch<ReturnDataType>(endpoint)
-    this.checkResponseType(res.data, keysToVerify)
+    const res = await this.postFetch<ElasticsearchResult>(endpoint)
 
     return res.data
   }

@@ -1,6 +1,5 @@
 import { ArgsType, Field, Int, ObjectType } from '@nestjs/graphql'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
-import { Enum_Triplyrecord_Type } from 'src/generated/strapi-sdk'
 
 @ArgsType()
 export class ZoomLevel2Args {
@@ -50,7 +49,7 @@ export class ZoomLevel2AmountParentType {
 @ObjectType()
 export class SearchAllResultType {
   @Field(() => String, { nullable: true })
-  public thumbnail?: string
+  public thumbnail: string | null
 
   @Field(() => String, { nullable: true })
   public title: string | null
@@ -64,7 +63,7 @@ export class SearchAllResultType {
 
 @ObjectType()
 export class SearchAllParentType {
-  @Field(() => [SearchAllResultType], { nullable: true })
+  @Field(() => [SearchAllResultType], { nullable: false })
   public nodes: SearchAllResultType[]
 
   @Field(() => Int, { nullable: false })

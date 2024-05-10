@@ -3,6 +3,7 @@ import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useSearch } from '@/features/shared/hooks/queries/useSearch'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { usePageCategory } from '@/features/shared/hooks/usePageCategory'
+import { usePageNumber } from '@/features/shared/hooks/usePageNumber'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 import { sharedActions } from '@/features/shared/stores/shared.store'
 import { usePathname, useRouter } from 'next/navigation'
@@ -15,6 +16,7 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
   const dispatch = useDispatch()
 
   const { lang, search, isSearchResult } = useZoom2Params()
+  const { pageNumber } = usePageNumber()
 
   const filterInputRef = useRef<HTMLInputElement>(null)
   const searchBarRef = useRef<HTMLDivElement>(null)
@@ -24,7 +26,12 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
 
   const { t } = useTypeSafeTranslation('category')
   const { pageCategory } = usePageCategory()
-  const { data } = useSearch({ category: pageCategory, text: search, enabled: !isNoActiveSearch })
+  const { data } = useSearch({
+    category: pageCategory,
+    text: search,
+    page: pageNumber,
+    enabled: !isNoActiveSearch,
+  })
   const { total } = data || { total: 0 }
 
   const [inputValue, setInputValue] = useState('')
