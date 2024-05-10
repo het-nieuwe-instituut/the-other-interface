@@ -35,6 +35,11 @@ module.exports = {
           25: 'rgba(252, 54, 90, .25)',
         },
       },
+      borderColor: {
+        blue: '#0051FF',
+        black: '#000000',
+        brown: '#49280B',
+      },
       fontFamily: {
         'times-large': ['Times', 'sans-serif'],
         'impact-large': ['"Impact"', 'sans-serif'],
