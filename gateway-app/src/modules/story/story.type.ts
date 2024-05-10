@@ -113,6 +113,7 @@ export class StoryWithoutRelations extends PickType(Story, [
   'slug',
   'title',
   'updatedAt',
+  'author',
 ] as const) {}
 
 export const StoryComponentsDynamicZone = createUnionType({
