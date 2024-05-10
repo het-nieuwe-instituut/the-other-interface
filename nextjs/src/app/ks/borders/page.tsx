@@ -14,6 +14,7 @@ const Page: NextPage = () => {
           <div>
             <p className="font-bold">{v}</p>
             <p>{borderValues[i]}</p>
+            tw: {`<div className="w-full border-b border-b-${v}" />`}
           </div>
           <div className="w-full border-b" style={{ borderColor: borderValues[i] }} />
         </div>

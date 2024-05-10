@@ -27,8 +27,11 @@ const Page: NextPage = () => {
                       style={{ background: colorsInSubjectValues[i] as never }}
                     />
                     <div>
-                      <p className=" font-bold">{colorsInSubjectKeys[i]}</p>
+                      <p className="font-bold">{colorsInSubjectKeys[i]}</p>
                       <p>{colorsInSubjectValues[i] as never}</p>
+                      <p>
+                        tw: bg-{name}-{colorsInSubjectKeys[i]}
+                      </p>
                     </div>
                   </div>
                 )
