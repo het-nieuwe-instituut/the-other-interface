@@ -36,7 +36,9 @@ module.exports = {
         },
       },
       borderColor: {
-        primary: '#0051FF',
+        blue: '#0051FF',
+        black: '#000000',
+        brown: '#49280B',
       },
       fontFamily: {
         'times-large': ['Times', 'sans-serif'],

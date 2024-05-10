@@ -163,7 +163,6 @@ const Page: NextPage = () => {
         {times(6).map(i => (
           <div key={i}>
             <IconButton
-              intent={'primary'}
               disabled={i === 3}
               state={i === 4 ? 'loading' : i === 5 ? 'error' : undefined}
               size={'large'}
@@ -174,7 +173,6 @@ const Page: NextPage = () => {
         {times(6).map(i => (
           <div key={i}>
             <IconButton
-              intent={'primary'}
               disabled={i === 3}
               state={i === 4 ? 'loading' : i === 5 ? 'error' : undefined}
               size={'small'}
