@@ -1,0 +1,14 @@
+<svg
+xmlns="http://www.w3.org/2000/svg"
+width="20"
+height="20"
+fill="none"
+>
+<path
+    stroke="currentColor"
+    stroke-linecap="round"
+    stroke-opacity=".25"
+    d="M18.5 10a8.501 8.501 0 0 1-14.51 6.01A8.5 8.5 0 1 1 18.5 10h0Z"
+/>
+<path stroke="currentColor" stroke-linecap="round" d="M10 18.5a8.5 8.5 0 1 1 8.5-8.5" />
+</svg>

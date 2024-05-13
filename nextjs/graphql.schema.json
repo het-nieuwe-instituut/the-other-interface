@@ -10602,7 +10602,7 @@
             "deprecationReason": null
           },
           {
-            "name": "archivesZoomLevel2Hover",
+            "name": "archivesZoomRecordHover",
             "description": null,
             "args": [
               {
@@ -11383,7 +11383,7 @@
             "deprecationReason": null
           },
           {
-            "name": "objectsZoomLevel2Hover",
+            "name": "objectsZoomRecordHover",
             "description": null,
             "args": [
               {
@@ -11619,7 +11619,7 @@
             "deprecationReason": null
           },
           {
-            "name": "peopleZoomLevel2Hover",
+            "name": "peopleZoomLevelHover",
             "description": null,
             "args": [
               {
@@ -11935,7 +11935,7 @@
             "deprecationReason": null
           },
           {
-            "name": "publicationsZoomLevel2Hover",
+            "name": "publicationsZoomRecordHover",
             "description": null,
             "args": [
               {
@@ -14246,6 +14246,18 @@
             "deprecationReason": null
           },
           {
+            "name": "themes",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ThemeFiltersInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "timeframe",
             "description": null,
             "type": {
@@ -14357,6 +14369,18 @@
         "name": "StoryWithoutRelations",
         "description": null,
         "fields": [
+          {
+            "name": "author",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "AuthorEntityResponse",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "createdAt",
             "description": null,

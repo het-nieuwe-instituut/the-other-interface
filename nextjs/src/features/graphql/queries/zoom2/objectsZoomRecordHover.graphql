@@ -1,0 +1,6 @@
+query ObjectsZoomRecordHover($id: String!) {
+    objectsZoomRecordHover(id: $id) {
+        title
+        description
+    }
+}

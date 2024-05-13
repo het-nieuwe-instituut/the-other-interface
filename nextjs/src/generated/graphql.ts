@@ -1091,7 +1091,7 @@ export type Query = {
   archivesRecordRelations?: Maybe<Array<ArchiveRelationsType>>;
   archivesRecordRelationsCount?: Maybe<Array<ArchivesRelationsCountType>>;
   archivesRecordZoomLevel3?: Maybe<Array<ArchivesRecordZoomLevel3Type>>;
-  archivesZoomLevel2Hover: ArchivesZoomLevelHoverType;
+  archivesZoomRecordHover: ArchivesZoomLevelHoverType;
   author: AuthorEntityResponse;
   authors: AuthorEntityResponseCollection;
   homepage: HomepageEntityResponse;
@@ -1105,11 +1105,11 @@ export type Query = {
   objectRecordRelations?: Maybe<Array<ObjectRelationsType>>;
   objectRecordRelationsCount?: Maybe<Array<ObjectRelationsCountType>>;
   objectsRecordZoomLevel3?: Maybe<Array<ObjectRecordZoomLevel3Type>>;
-  objectsZoomLevel2Hover: ObjectsZoomLevelHoverType;
+  objectsZoomRecordHover: ObjectsZoomLevelHoverType;
   peopleRecordRelations?: Maybe<Array<PeopleRelationsType>>;
   peopleRecordRelationsCount?: Maybe<Array<PeopleRelationsCountType>>;
   peopleRecordZoomLevel3?: Maybe<Array<PeopleRecordZoomLevel3Type>>;
-  peopleZoomLevel2Hover: PeopleZoomLevelHoverType;
+  peopleZoomLevelHover: PeopleZoomLevelHoverType;
   publicationArticle: PublicationsArticleZoomLevel3DetailType;
   publicationAudioVisual: PublicationsAudioVisualZoomLevel3DetailType;
   publicationBook: PublicationsBookZoomLevel3DetailType;
@@ -1118,7 +1118,7 @@ export type Query = {
   publicationSerial: PublicationsSerialZoomLevel3DetailType;
   publicationsRecordRelationsCount?: Maybe<Array<PublicationsRelationsCountType>>;
   publicationsRecordZoomLevel3?: Maybe<Array<PublicationRecordZoomLevel3Type>>;
-  publicationsZoomLevel2Hover: PublicationsZoomLevelHoverType;
+  publicationsZoomRecordHover: PublicationsZoomLevelHoverType;
   relations?: Maybe<Array<ZoomLevel3RelationsType>>;
   stories: StoryEntityResponseCollection;
   storiesRealtedWithinTheme: StoriesRelatedToThemeResponse;
@@ -1174,7 +1174,7 @@ export type QueryArchivesRecordZoomLevel3Args = {
 };
 
 
-export type QueryArchivesZoomLevel2HoverArgs = {
+export type QueryArchivesZoomRecordHoverArgs = {
   id: Scalars['String'];
 };
 
@@ -1264,7 +1264,7 @@ export type QueryObjectsRecordZoomLevel3Args = {
 };
 
 
-export type QueryObjectsZoomLevel2HoverArgs = {
+export type QueryObjectsZoomRecordHoverArgs = {
   id: Scalars['String'];
 };
 
@@ -1290,7 +1290,7 @@ export type QueryPeopleRecordZoomLevel3Args = {
 };
 
 
-export type QueryPeopleZoomLevel2HoverArgs = {
+export type QueryPeopleZoomLevelHoverArgs = {
   id: Scalars['String'];
 };
 
@@ -1316,7 +1316,7 @@ export type QueryPublicationsRecordZoomLevel3Args = {
 };
 
 
-export type QueryPublicationsZoomLevel2HoverArgs = {
+export type QueryPublicationsZoomRecordHoverArgs = {
   id: Scalars['String'];
 };
 
@@ -1591,6 +1591,7 @@ export type StoryFiltersInput = {
   siblings?: InputMaybe<StoryFiltersInput>;
   slug?: InputMaybe<StringFilterInput>;
   storyLinks?: InputMaybe<ComponentModulesButtonsModuleFiltersInput>;
+  themes?: InputMaybe<ThemeFiltersInput>;
   timeframe?: InputMaybe<ComponentCoreTimeframeFiltersInput>;
   title?: InputMaybe<StringFilterInput>;
   triplyRecords?: InputMaybe<TriplyRecordFiltersInput>;
@@ -1609,6 +1610,7 @@ export type StoryRelationResponseCollection = {
 
 export type StoryWithoutRelations = {
   __typename?: 'StoryWithoutRelations';
+  author?: Maybe<AuthorEntityResponse>;
   createdAt?: Maybe<Scalars['Date']>;
   description?: Maybe<Scalars['String']>;
   locale?: Maybe<Scalars['String']>;
@@ -2086,33 +2088,33 @@ export type TotalCounterQueryVariables = Exact<{
 
 export type TotalCounterQuery = { __typename?: 'Query', stories: { __typename?: 'StoryEntityResponseCollection', meta?: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', total: number } } | null }, archives: { __typename?: 'ZoomLevel2AmountParentType', total: string }, objects: { __typename?: 'ZoomLevel2AmountParentType', total: string }, people: { __typename?: 'ZoomLevel2AmountParentType', total: string }, publications: { __typename?: 'ZoomLevel2AmountParentType', total: string } };
 
-export type ArchivesZoom2HoverQueryVariables = Exact<{
+export type ArchivesZoomRecordHoverQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type ArchivesZoom2HoverQuery = { __typename?: 'Query', archivesZoomLevel2Hover: { __typename?: 'ArchivesZoomLevelHoverType', title?: string | null, creators?: string | null, description?: string | null } };
+export type ArchivesZoomRecordHoverQuery = { __typename?: 'Query', archivesZoomRecordHover: { __typename?: 'ArchivesZoomLevelHoverType', title?: string | null, creators?: string | null, description?: string | null } };
 
-export type ObjectsZoom2HoverQueryVariables = Exact<{
+export type ObjectsZoomRecordHoverQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type ObjectsZoom2HoverQuery = { __typename?: 'Query', objectsZoomLevel2Hover: { __typename?: 'ObjectsZoomLevelHoverType', title?: string | null, description?: string | null } };
+export type ObjectsZoomRecordHoverQuery = { __typename?: 'Query', objectsZoomRecordHover: { __typename?: 'ObjectsZoomLevelHoverType', title?: string | null, description?: string | null } };
 
-export type PeopleZoom2HoverQueryVariables = Exact<{
+export type PeopleZoomRecordHoverQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type PeopleZoom2HoverQuery = { __typename?: 'Query', peopleZoomLevel2Hover: { __typename?: 'PeopleZoomLevelHoverType', title?: string | null, profession?: string | null, description?: string | null } };
+export type PeopleZoomRecordHoverQuery = { __typename?: 'Query', peopleZoomLevelHover: { __typename?: 'PeopleZoomLevelHoverType', title?: string | null, profession?: string | null, description?: string | null } };
 
-export type PublicationsZoom2HoverQueryVariables = Exact<{
+export type PublicationsZoomRecordHoverQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type PublicationsZoom2HoverQuery = { __typename?: 'Query', publicationsZoomLevel2Hover: { __typename?: 'PublicationsZoomLevelHoverType', title?: string | null, authors?: string | null, description?: string | null } };
+export type PublicationsZoomRecordHoverQuery = { __typename?: 'Query', publicationsZoomRecordHover: { __typename?: 'PublicationsZoomLevelHoverType', title?: string | null, authors?: string | null, description?: string | null } };
 
 export type Zoom2QueryVariables = Exact<{
   entityName: EntityNames;
@@ -2230,6 +2232,13 @@ export type ZoomLevel3PublicationRecordQueryVariables = Exact<{
 
 
 export type ZoomLevel3PublicationRecordQuery = { __typename?: 'Query', publicationsRecordZoomLevel3?: Array<{ __typename?: 'PublicationRecordZoomLevel3Type', objectNumber?: string | null, subType?: string | null, authors?: string | null, authorRole?: string | null, publisher?: string | null, yearOfPublication?: string | null, placeOfPublication?: string | null, isbn?: string | null, annotation?: string | null, codeOfArchive?: string | null, edition?: string | null, illustration?: string | null, pages?: string | null, language?: string | null, series?: string | null, number?: string | null, category?: string | null, relatedKeyword?: string | null, geoKeyword?: string | null, availability?: string | null, permanentLink?: string | null, externalSource?: string | null }> | null };
+
+export type StoryHoverRecordRelationsQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type StoryHoverRecordRelationsQuery = { __typename?: 'Query', storyWithoutRelations: { __typename?: 'StoryWithoutRelationsEntityResponse', data?: { __typename?: 'StoryWithoutRelationsEntity', id?: string | null, attributes?: { __typename?: 'StoryWithoutRelations', title: string, shortDescription?: string | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', id?: string | null, attributes?: { __typename?: 'Author', firstName: string, lastName: string } | null } | null } | null } | null } | null } };
 
 export type ArchiveRecordRelationsQueryVariables = Exact<{
   id: Scalars['String'];
@@ -3313,35 +3322,35 @@ export const TotalCounterDocument = gql`
   }
 }
     `;
-export const ArchivesZoom2HoverDocument = gql`
-    query ArchivesZoom2Hover($id: String!) {
-  archivesZoomLevel2Hover(id: $id) {
+export const ArchivesZoomRecordHoverDocument = gql`
+    query ArchivesZoomRecordHover($id: String!) {
+  archivesZoomRecordHover(id: $id) {
     title
     creators
     description
   }
 }
     `;
-export const ObjectsZoom2HoverDocument = gql`
-    query ObjectsZoom2Hover($id: String!) {
-  objectsZoomLevel2Hover(id: $id) {
+export const ObjectsZoomRecordHoverDocument = gql`
+    query ObjectsZoomRecordHover($id: String!) {
+  objectsZoomRecordHover(id: $id) {
     title
     description
   }
 }
     `;
-export const PeopleZoom2HoverDocument = gql`
-    query PeopleZoom2Hover($id: String!) {
-  peopleZoomLevel2Hover(id: $id) {
+export const PeopleZoomRecordHoverDocument = gql`
+    query PeopleZoomRecordHover($id: String!) {
+  peopleZoomLevelHover(id: $id) {
     title
     profession
     description
   }
 }
     `;
-export const PublicationsZoom2HoverDocument = gql`
-    query PublicationsZoom2Hover($id: String!) {
-  publicationsZoomLevel2Hover(id: $id) {
+export const PublicationsZoomRecordHoverDocument = gql`
+    query PublicationsZoomRecordHover($id: String!) {
+  publicationsZoomRecordHover(id: $id) {
     title
     authors
     description
@@ -3545,6 +3554,28 @@ export const ZoomLevel3PublicationRecordDocument = gql`
     availability
     permanentLink
     externalSource
+  }
+}
+    `;
+export const StoryHoverRecordRelationsDocument = gql`
+    query StoryHoverRecordRelations($id: String!) {
+  storyWithoutRelations(id: $id) {
+    data {
+      id
+      attributes {
+        title
+        shortDescription
+        author {
+          data {
+            id
+            attributes {
+              firstName
+              lastName
+            }
+          }
+        }
+      }
+    }
   }
 }
     `;
@@ -3810,17 +3841,17 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     totalCounter(variables?: TotalCounterQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<TotalCounterQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<TotalCounterQuery>(TotalCounterDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'totalCounter', 'query');
     },
-    ArchivesZoom2Hover(variables: ArchivesZoom2HoverQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ArchivesZoom2HoverQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<ArchivesZoom2HoverQuery>(ArchivesZoom2HoverDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ArchivesZoom2Hover', 'query');
+    ArchivesZoomRecordHover(variables: ArchivesZoomRecordHoverQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ArchivesZoomRecordHoverQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ArchivesZoomRecordHoverQuery>(ArchivesZoomRecordHoverDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ArchivesZoomRecordHover', 'query');
     },
-    ObjectsZoom2Hover(variables: ObjectsZoom2HoverQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ObjectsZoom2HoverQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<ObjectsZoom2HoverQuery>(ObjectsZoom2HoverDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ObjectsZoom2Hover', 'query');
+    ObjectsZoomRecordHover(variables: ObjectsZoomRecordHoverQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ObjectsZoomRecordHoverQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ObjectsZoomRecordHoverQuery>(ObjectsZoomRecordHoverDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ObjectsZoomRecordHover', 'query');
     },
-    PeopleZoom2Hover(variables: PeopleZoom2HoverQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<PeopleZoom2HoverQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<PeopleZoom2HoverQuery>(PeopleZoom2HoverDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'PeopleZoom2Hover', 'query');
+    PeopleZoomRecordHover(variables: PeopleZoomRecordHoverQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<PeopleZoomRecordHoverQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<PeopleZoomRecordHoverQuery>(PeopleZoomRecordHoverDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'PeopleZoomRecordHover', 'query');
     },
-    PublicationsZoom2Hover(variables: PublicationsZoom2HoverQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<PublicationsZoom2HoverQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<PublicationsZoom2HoverQuery>(PublicationsZoom2HoverDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'PublicationsZoom2Hover', 'query');
+    PublicationsZoomRecordHover(variables: PublicationsZoomRecordHoverQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<PublicationsZoomRecordHoverQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<PublicationsZoomRecordHoverQuery>(PublicationsZoomRecordHoverDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'PublicationsZoomRecordHover', 'query');
     },
     Zoom2(variables: Zoom2QueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom2Query> {
       return withWrapper((wrappedRequestHeaders) => client.request<Zoom2Query>(Zoom2Document, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Zoom2', 'query');
@@ -3866,6 +3897,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     ZoomLevel3PublicationRecord(variables: ZoomLevel3PublicationRecordQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ZoomLevel3PublicationRecordQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ZoomLevel3PublicationRecordQuery>(ZoomLevel3PublicationRecordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ZoomLevel3PublicationRecord', 'query');
+    },
+    StoryHoverRecordRelations(variables: StoryHoverRecordRelationsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<StoryHoverRecordRelationsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<StoryHoverRecordRelationsQuery>(StoryHoverRecordRelationsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'StoryHoverRecordRelations', 'query');
     },
     ArchiveRecordRelations(variables: ArchiveRecordRelationsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ArchiveRecordRelationsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ArchiveRecordRelationsQuery>(ArchiveRecordRelationsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ArchiveRecordRelations', 'query');
