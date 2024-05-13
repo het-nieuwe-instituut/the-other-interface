@@ -1,12 +1,13 @@
 'use client'
 import { Grid, GridItem } from '@chakra-ui/react'
 
-import { usePresenter } from './usePresenter'
-import { Record } from '../Record/Record'
 import { GridParams } from '@/features/shared/types/position'
 import { CLOUD_CATEGORIES, CloudCategory } from '@/features/shared/utils/categories'
 import { keyExtractor } from '@/features/shared/utils/lists'
-import { Dispatch, SetStateAction, useState } from 'react'
+import { useContext, useState } from 'react'
+import { DetailGalaxyContext } from '../../DetailGalaxy/DetailGalxyContext'
+import { Record } from '../Record/Record'
+import { usePresenter } from './usePresenter'
 
 export interface AllRelationTotalsType {
   [CLOUD_CATEGORIES.archives]: number
@@ -19,8 +20,6 @@ export interface AllRelationTotalsType {
 interface Props extends GridParams {
   category: CloudCategory
   allRelationTotals?: AllRelationTotalsType
-  setIsHovered: Dispatch<SetStateAction<boolean>>
-  isHovered: boolean
 }
 
 export const RelatedCategory: React.FC<Props> = ({
@@ -28,11 +27,10 @@ export const RelatedCategory: React.FC<Props> = ({
   gridColumn,
   category,
   allRelationTotals,
-  setIsHovered,
-  isHovered,
 }) => {
   const { positionedRecords, nextPositionedRecords } = usePresenter(category, allRelationTotals)
   const [currentRecord, setCurrentRecord] = useState('')
+  const DetailGalaxyContent = useContext(DetailGalaxyContext)
 
   return (
     <>
@@ -42,12 +40,18 @@ export const RelatedCategory: React.FC<Props> = ({
             <Record
               key={keyExtractor(record.id, index, positionedRecords)}
               record={record}
-              setIsHovered={setIsHovered}
-              isHovered={isHovered}
-              setCurrentRecord={setCurrentRecord}
+              onHoverRecord={() => {
+                DetailGalaxyContent.setIsRecordHovered(true)
+                setCurrentRecord(record.id)
+              }}
+              onLeaveRecord={() => {
+                DetailGalaxyContent.setIsRecordHovered(false)
+                setCurrentRecord('')
+              }}
+              isHovered={DetailGalaxyContent.isRecordHovered}
               currentRecord={currentRecord}
               style={
-                isHovered && currentRecord !== record.id
+                DetailGalaxyContent.isRecordHovered && currentRecord !== record.id
                   ? {
                       opacity: 0.2,
                       filter: 'blur(6px)',

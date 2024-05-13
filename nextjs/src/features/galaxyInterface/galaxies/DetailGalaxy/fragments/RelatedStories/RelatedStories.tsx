@@ -1,24 +1,18 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { DetailedRecord } from '../DetailedRecord'
 import { Record } from '../Record/Record'
 import { AllRelationTotalsType } from '../RelatedCategory'
 import { usePresenter } from './usePresenter'
+import { DetailGalaxyContext } from '../../DetailGalaxy/DetailGalxyContext'
 
 interface Props {
   allRelationTotals?: AllRelationTotalsType
-  onHoverRecord: () => void
-  onLeaveRecord: () => void
-  isHovered: boolean
 }
 
-export const RelatedStories: React.FC<Props> = ({
-  allRelationTotals,
-  onHoverRecord,
-  onLeaveRecord,
-  isHovered,
-}) => {
+export const RelatedStories: React.FC<Props> = ({ allRelationTotals }) => {
   const { positionedStories, nextPositionedStories } = usePresenter(allRelationTotals)
   const [currentRecord, setCurrentRecord] = useState('')
+  const DetailGalaxyContent = useContext(DetailGalaxyContext)
 
   return (
     <>
@@ -30,10 +24,10 @@ export const RelatedStories: React.FC<Props> = ({
               record={story}
               onHoverRecord={() => handleRecordHover(story.id)}
               onLeaveRecord={() => handleRecordLeave()}
-              isHovered={isHovered}
+              isHovered={DetailGalaxyContent.isRecordHovered}
               currentRecord={currentRecord}
               style={
-                isHovered && currentRecord !== story.id
+                DetailGalaxyContent.isRecordHovered && currentRecord !== story.id
                   ? {
                       opacity: 0.2,
                       filter: 'blur(6px)',
@@ -61,12 +55,12 @@ export const RelatedStories: React.FC<Props> = ({
   )
 
   function handleRecordHover(storyId: string) {
-    onHoverRecord()
+    DetailGalaxyContent.setIsRecordHovered(true)
     setCurrentRecord(storyId)
   }
 
   function handleRecordLeave() {
-    onLeaveRecord()
+    DetailGalaxyContent.setIsRecordHovered(false)
     setCurrentRecord('')
   }
 }
