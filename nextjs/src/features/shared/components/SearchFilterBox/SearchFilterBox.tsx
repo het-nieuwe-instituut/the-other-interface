@@ -30,7 +30,7 @@ export const SearchFilterBox: React.FC<Props> = ({
     >
       <Flex
         position="relative"
-        width="100%"
+        maxW={'100%'}
         alignItems={'center'}
         gap="5px"
         justifyContent={'space-between'}

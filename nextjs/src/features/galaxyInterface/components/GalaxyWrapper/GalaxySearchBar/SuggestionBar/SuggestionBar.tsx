@@ -5,13 +5,21 @@ interface Props {
   isOpen?: boolean
   label?: string
   children?: React.ReactNode
+  offset?: number
 }
 
-export const SuggestionBar: React.FC<Props> = ({ isOpen = false, children, label = '' }) => {
+const SUGGESTION_BAR_PADDING = 5
+
+export const SuggestionBar: React.FC<Props> = ({
+  isOpen = false,
+  children,
+  label = '',
+  offset,
+}) => {
   return (
     <Grid
       position={'absolute'}
-      bottom={'60px'}
+      bottom={offset ? `calc(${offset + SUGGESTION_BAR_PADDING}px)` : '60px'}
       height="75px"
       width={'100%'}
       gap="15px"
