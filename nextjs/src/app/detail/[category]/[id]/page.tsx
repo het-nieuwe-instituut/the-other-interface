@@ -2,6 +2,7 @@ import { CATEGORIES, Category } from '@/features/shared/utils/categories'
 import { draftMode } from 'next/headers'
 import { DetailpageContainer } from '@/features/pages/containers/DetailpageContainer/DetailpageContainer'
 import { notFound } from 'next/navigation'
+import { ReduxDraftModeSync } from '@/features/shared/components/Redux/ReduxDraftModeSync'
 
 interface Props {
   params: { category: string; id: string }
@@ -20,5 +21,10 @@ export default async function Page({ params }: Props) {
 
   const { isEnabled } = draftMode()
 
-  return <DetailpageContainer category={category} isDraftMode={isEnabled} />
+  return (
+    <>
+      <DetailpageContainer category={category} />
+      <ReduxDraftModeSync isDraftMode={isEnabled} />
+    </>
+  )
 }
