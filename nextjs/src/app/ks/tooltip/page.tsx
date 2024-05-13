@@ -1,4 +1,4 @@
-import { ReadMoreTooltip } from '@/features/modules/components/ToolTip/ReadMoreTooltip'
+import { ReadMoreTooltip } from '@/features/ui/components/tooltip/ReadMoreTooltip'
 
 const Page = async () => {
   return (
