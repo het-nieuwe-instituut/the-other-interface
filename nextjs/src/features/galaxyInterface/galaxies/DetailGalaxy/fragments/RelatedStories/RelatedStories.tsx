@@ -1,9 +1,9 @@
 import { useContext, useState } from 'react'
+import { DetailGalaxyContext } from '../../DetailGalaxy/DetailGalxyContext'
 import { DetailedRecord } from '../DetailedRecord'
 import { Record } from '../Record/Record'
 import { AllRelationTotalsType } from '../RelatedCategory'
 import { usePresenter } from './usePresenter'
-import { DetailGalaxyContext } from '../../DetailGalaxy/DetailGalxyContext'
 
 interface Props {
   allRelationTotals?: AllRelationTotalsType
@@ -16,7 +16,7 @@ export const RelatedStories: React.FC<Props> = ({ allRelationTotals }) => {
 
   return (
     <>
-      <div className="z-20 row-start-1 row-end-3 h-full text-white">
+      <div className="z-20 col-start-2 col-end-2 row-start-1 row-end-3 text-white">
         <div className="grid h-full grid-cols-2 grid-rows-4">
           {positionedStories.map(story => (
             <Record
@@ -42,7 +42,7 @@ export const RelatedStories: React.FC<Props> = ({ allRelationTotals }) => {
         </div>
       </div>
 
-      <div className=" z-20 row-start-1 row-end-3 text-white opacity-20 blur-[6px] ">
+      <div className=" z-20 col-start-2 col-end-2 row-start-1 row-end-3 text-white opacity-20 blur-[6px] ">
         <div className="grid h-full grid-cols-2 grid-rows-4">
           {nextPositionedStories.map(story => (
             <Record key={story.id} record={story} />
