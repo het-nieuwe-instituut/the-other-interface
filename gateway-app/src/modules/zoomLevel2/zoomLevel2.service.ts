@@ -11,6 +11,7 @@ import {
   Sdk,
   StoriesQuery,
 } from 'src/generated/strapi-sdk'
+import { StrapiUtils } from '../strapi/strapi.utils'
 
 interface ResultData {
   thumbnail: string
@@ -34,7 +35,6 @@ export class ZoomLevel2Service {
 
   public constructor(
     @Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk,
-    // private readonly configService: ConfigService,
     private readonly triplyService: TriplyService
   ) {}
   public getData(entity: EntityNames, paginationArgs: PaginationArgs, text?: string) {
@@ -221,16 +221,6 @@ export class ZoomLevel2Service {
     }
   }
 
-  private extractTypeAndId(url: string): { type: string; id: string } {
-    const match = /id\/([^\/]+)\/(\d+)/.exec(url)
-    return {
-      //TODO enable when triply clean up the data
-       // type: TriplyUtils.getEntityNameFromUri(url),
-      type: match ? match[1] : '',
-      id: TriplyUtils.getIdFromUri(url),
-    }
-  }
-
   private storyToRecordMapper(stories?: StoriesQuery) {
     if (!stories) {
       return null
@@ -241,7 +231,7 @@ export class ZoomLevel2Service {
         component => component?.__typename === 'ComponentModulesImage'
       ) as ComponentModulesImage
 
-      const url = this.imageBasePath(imageComponent?.image.data?.attributes?.url ?? '')
+      const url = StrapiUtils.getImagePath(imageComponent?.image.data?.attributes?.url)
 
       return {
         title: story?.attributes?.title ?? '',
@@ -258,39 +248,27 @@ export class ZoomLevel2Service {
     }
 
     return data.hits.hits.map(item => {
-      const { type, id } = this.extractTypeAndId(item._source['@id'])
+      const type = TriplyUtils.getEntityNameFromUri(item._id)
+      const id = TriplyUtils.getIdFromUri(item._id)
 
       if (!id || !type) {
         return null
       }
 
-      const thumbnail = item._source['https://schema org/url']
-        ? item._source['https://schema org/url'][0]
-        : ''
-      const title = item._source['https://www ica org/standards/RiC/ontology#title']
-        ? item._source['https://www ica org/standards/RiC/ontology#title'][0]
-        : ''
+      const thumbnailLinks = item._source['https://schema org/url'] || []
+      if (thumbnailLinks?.length > 1) {
+        throw CustomError.external('multiple thumbnails found')
+      }
+
+      const title =
+        item._source['https://www ica org/standards/RiC/ontology#title']?.join(', ') || ''
 
       return {
-        thumbnail: thumbnail,
+        thumbnail: thumbnailLinks?.[0],
         title: title,
         id: id,
-        type: TriplyUtils.mapTypeToEnum(type.toLowerCase()),
+        type,
       }
     })
-  }
-
-  private imageBasePath(url: string): string {
-    if (!url) {
-      return url
-    }
-
-    try {
-      new URL(url)
-      return url
-    } catch {
-      const baseURL = 'http://localhost:1337'
-      return new URL(url, baseURL).toString()
-    }
   }
 }

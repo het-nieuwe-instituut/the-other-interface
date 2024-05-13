@@ -1,12 +1,12 @@
 query searchAll($text: String!, $lang: String!, $page: Int!, $pageSize: Int) {
-    searchByAllCategories(page: $page, lang: $lang, pageSize: $pageSize, text: $text) {
-        page,
-        nodes {
-            title
-			thumbnail
-			id
-            type
-        }
-        total
+  searchByAllCategories(page: $page, lang: $lang, pageSize: $pageSize, text: $text) {
+    page
+    nodes {
+      title
+      thumbnail
+      id
+      type
     }
+    total
+  }
 }

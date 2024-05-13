@@ -2,9 +2,9 @@ import { HttpService } from '@nestjs/axios'
 import { Injectable } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { lastValueFrom } from 'rxjs'
+import { Config } from 'src/config/config'
 import { PaginationArgs } from '../util/paginationArgs.type'
 import { RollbarService } from '../util/rollbar.service'
-import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 
 /**
  * Due to typescript's limitations, we decided to use this approach to verify expected
@@ -40,10 +40,11 @@ export interface ElasticsearchResult {
       value: number
     }
     hits: {
+      _id: string // uri
       _source: {
         '@id': string
-        'https://schema org/url': string[]
-        'https://www ica org/standards/RiC/ontology#title': string[]
+        'https://schema org/url'?: string[]
+        'https://www ica org/standards/RiC/ontology#title'?: string[]
       }
     }[]
   }
@@ -56,11 +57,11 @@ export class TriplyService {
   private readonly baseQueryPath: string
 
   public constructor(
-    configService: ConfigService,
+    private configService: ConfigService<Config>,
     private readonly httpService: HttpService,
     private readonly rollbarService: RollbarService
   ) {
-    this.endpointBaseURL = configService.getOrThrow('TRIPLI_API_BASEURL')
+    this.endpointBaseURL = configService.getOrThrow('TRIPLY_API_BASEURL')
     this.apiKey = configService.getOrThrow('TRIPLY_API_KEY')
     this.baseQueryPath = ''
     const env = configService.getOrThrow('ENV')
