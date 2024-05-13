@@ -1,20 +1,19 @@
 import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
-import { GridItem, Flex, Text } from '@chakra-ui/react'
+import { Flex, GridItem, Text } from '@chakra-ui/react'
 
-import { PositionedRecord } from '../types'
-import { RecordText } from './RecordText'
-import { usePresenter } from './usePresenter'
+import { Tooltip } from '@/features/modules/components/ToolTip/Tooltip'
 import { useZoomHoverRecordResult } from '@/features/shared/hooks/queries/useZoomHoverRecordResult'
 import { Position } from '@/features/shared/types/position'
 import { Category } from '@/features/shared/utils/categories'
-import { Tooltip } from '@/features/modules/components/ToolTip/Tooltip'
-import { Dispatch, SetStateAction } from 'react'
+import { PositionedRecord } from '../types'
+import { RecordText } from './RecordText'
 import { useCalculateLine } from './useCalculateLine'
+import { usePresenter } from './usePresenter'
 
 type Props = {
   record: PositionedRecord
-  setIsHovered?: Dispatch<SetStateAction<boolean>>
-  setCurrentRecord?: Dispatch<SetStateAction<string>>
+  onHoverRecord?: () => void
+  onLeaveRecord?: () => void
   style?: React.CSSProperties
   isHovered?: boolean
   currentRecord?: string
@@ -27,9 +26,9 @@ interface RecordDetailsType {
 
 export const Record: React.FC<Props> = ({
   record,
-  setIsHovered,
-  setCurrentRecord,
   style,
+  onHoverRecord,
+  onLeaveRecord,
   isHovered,
   currentRecord,
 }) => {
@@ -45,24 +44,12 @@ export const Record: React.FC<Props> = ({
   return (
     <>
       <GridItem
-        position="relative"
+        className="relative"
         css={{ ...grid, ...style }}
-        onMouseOver={
-          setIsHovered && setCurrentRecord
-            ? () => {
-                setCurrentRecord(id)
-                setIsHovered(true)
-              }
-            : undefined
-        }
-        onMouseLeave={
-          setIsHovered && setCurrentRecord
-            ? () => {
-                setCurrentRecord('')
-                setIsHovered(false)
-              }
-            : undefined
-        }
+        style={{ ...grid, ...style }}
+        onMouseOver={onHoverRecord}
+        onFocus={onHoverRecord}
+        onMouseLeave={onLeaveRecord}
       >
         {data === null ? (
           RecordData(recordDetails, position, handleClick, category, isHovered, currentRecord, id)

@@ -1,21 +1,20 @@
-import { Grid, GridItem } from '@chakra-ui/react'
+import { useState } from 'react'
 import { DetailedRecord } from '../DetailedRecord'
-import { usePresenter } from './usePresenter'
 import { Record } from '../Record/Record'
 import { AllRelationTotalsType } from '../RelatedCategory'
-import { Dispatch, SetStateAction, useState } from 'react'
+import { usePresenter } from './usePresenter'
 
 interface Props {
-  gridRow: string
   allRelationTotals?: AllRelationTotalsType
-  setIsHovered: Dispatch<SetStateAction<boolean>>
+  onHoverRecord: () => void
+  onLeaveRecord: () => void
   isHovered: boolean
 }
 
 export const RelatedStories: React.FC<Props> = ({
-  gridRow,
   allRelationTotals,
-  setIsHovered,
+  onHoverRecord,
+  onLeaveRecord,
   isHovered,
 }) => {
   const { positionedStories, nextPositionedStories } = usePresenter(allRelationTotals)
@@ -23,22 +22,15 @@ export const RelatedStories: React.FC<Props> = ({
 
   return (
     <>
-      <GridItem
-        gridRow={gridRow}
-        gridColumn="2"
-        color="white"
-        css={{
-          zIndex: 20,
-        }}
-      >
-        <Grid height="100%" templateColumns="repeat(2, 1fr)" templateRows="repeat(4, 1fr)">
+      <div className="z-20 row-start-1 row-end-3 h-full text-white">
+        <div className="grid h-full grid-cols-2 grid-rows-4">
           {positionedStories.map(story => (
             <Record
               key={story.id}
               record={story}
-              setIsHovered={setIsHovered}
+              onHoverRecord={() => handleRecordHover(story.id)}
+              onLeaveRecord={() => handleRecordLeave()}
               isHovered={isHovered}
-              setCurrentRecord={setCurrentRecord}
               currentRecord={currentRecord}
               style={
                 isHovered && currentRecord !== story.id
@@ -53,27 +45,28 @@ export const RelatedStories: React.FC<Props> = ({
           ))}
 
           <DetailedRecord gridRow="2 / 4" gridColumn="1 / 3" className="detailed-story" />
-        </Grid>
-      </GridItem>
+        </div>
+      </div>
 
-      <GridItem
-        gridRow={gridRow}
-        gridColumn="2"
-        color="white"
-        css={{
-          zIndex: 10,
-          opacity: 0.2,
-          filter: 'blur(6px)',
-        }}
-      >
-        <Grid height="100%" templateColumns="repeat(2, 1fr)" templateRows="repeat(4, 1fr)">
+      <div className=" z-20 row-start-1 row-end-3 text-white opacity-20 blur-[6px] ">
+        <div className="grid h-full grid-cols-2 grid-rows-4">
           {nextPositionedStories.map(story => (
             <Record key={story.id} record={story} />
           ))}
 
           <DetailedRecord gridRow="2 / 4" gridColumn="1 / 3" />
-        </Grid>
-      </GridItem>
+        </div>
+      </div>
     </>
   )
+
+  function handleRecordHover(storyId: string) {
+    onHoverRecord()
+    setCurrentRecord(storyId)
+  }
+
+  function handleRecordLeave() {
+    onLeaveRecord()
+    setCurrentRecord('')
+  }
 }

@@ -6,7 +6,7 @@ export const useCalculateLine = () => {
 
   useEffect(() => {
     const draw = () => {
-      const mainElement = Array.from(document.querySelectorAll('.detail-galaxy-grid'))[0]
+      const mainElement = Array.from(document.querySelectorAll('#detail-galaxy-grid'))[0]
       const rect = mainElement.getBoundingClientRect()
       const hoveredElement = Array.from(document.querySelectorAll('.hovered'))[0]
 
