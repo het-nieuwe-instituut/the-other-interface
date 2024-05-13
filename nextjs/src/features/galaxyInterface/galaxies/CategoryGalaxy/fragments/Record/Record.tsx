@@ -8,7 +8,7 @@ import { EntityNames, SearchAllResultType } from 'src/generated/graphql'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 import { Tooltip } from '@/features/modules/components/ToolTip/Tooltip'
-import { useZoom2HoverRecordResult } from '@/features/shared/hooks/queries/useZoom2HoverRecordResult'
+import { useZoomHoverRecordResult } from '@/features/shared/hooks/queries/useZoomHoverRecordResult'
 
 type Props = {
   record: RecordProps
@@ -23,7 +23,7 @@ export const Record: React.FC<Props> = ({ record }) => {
   const { id, category } = record
   const { lang, search } = useZoom2Params()
   // TODO: HNIT-1833 - add in loading and error handling
-  const { data } = useZoom2HoverRecordResult({ id, category })
+  const { data } = useZoomHoverRecordResult({ id, category })
 
   return (
     <GridItem position="relative">

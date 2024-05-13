@@ -156,7 +156,7 @@ export class ObjectsService {
     return result.data
   }
 
-  public async getZoomLevel2Hover(id: string) {
+  public async getZoomRecordHover(id: string) {
     const results = await this.triplyService.queryTriplyData<ObjectsZoomLevel2HoverData>(
       this.ZoomLevel2HoverEndpoint,
       objectsZoomLevel2HoverDataKeys,

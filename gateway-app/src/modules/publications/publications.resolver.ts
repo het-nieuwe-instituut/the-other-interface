@@ -121,11 +121,11 @@ export class PublicationAuthorResolver {
 }
 
 @Resolver(PublicationsZoomLevelHoverType)
-export class PublicationsZoomLevel2HoverResolver {
+export class PublicationsZoomLevelRecordHoverResolver {
   public constructor(private readonly publicationsService: PublicationsService) {}
 
   @Query(() => PublicationsZoomLevelHoverType)
-  public async publicationsZoomLevel2Hover(@Args() args: PublicationsZoomLevel2HoverArgs) {
-    return this.publicationsService.getZoomLevel2Hover(args.id)
+  public async publicationsZoomRecordHover(@Args() args: PublicationsZoomLevel2HoverArgs) {
+    return this.publicationsService.getZoomRecordHover(args.id)
   }
 }

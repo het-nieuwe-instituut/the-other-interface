@@ -1,0 +1,7 @@
+query ArchivesZoomRecordHover($id: String!) {
+    archivesZoomRecordHover(id: $id) {
+        title
+        creators
+        description
+    }
+}

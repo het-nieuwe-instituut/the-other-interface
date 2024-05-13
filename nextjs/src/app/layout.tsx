@@ -1,6 +1,5 @@
 import { ReduxStoreProvider } from '@/features/shared/components/providers/ReduxStoreProdivder'
 import { ThemeProvider } from '@/features/shared/components/providers/ThemeProvider'
-import Fonts from '@/features/modules/components/Fonts/Fonts'
 import DisableScroll from '@/features/shared/components/DisableScroll/DisableScroll'
 import { AppHead } from '@/features/shared/components/Head/AppHead'
 import MobileOverlayProvider from '@/features/shared/components/MobileOverlayProvider/MobileOverlayProvider'
@@ -44,7 +43,6 @@ function MyApp({ children }: { children: React.ReactNode }) {
               <DisableScroll>
                 <MobileOverlayProvider>
                   <>
-                    <Fonts />
                     <AppHead />
                     <TestMenu />
                     {children}

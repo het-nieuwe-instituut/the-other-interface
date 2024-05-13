@@ -63,11 +63,11 @@ export class ObjectMakerResolver {
 }
 
 @Resolver(ObjectsZoomLevelHoverType)
-export class ObjectsZoomLevel2HoverResolver {
+export class ObjectsZoomLevelRecordHoverResolver {
   public constructor(private readonly objectsService: ObjectsService) {}
 
   @Query(() => ObjectsZoomLevelHoverType)
-  public async objectsZoomLevel2Hover(@Args() args: ObjectsZoomLevel2HoverArgs) {
-    return this.objectsService.getZoomLevel2Hover(args.id)
+  public async objectsZoomRecordHover(@Args() args: ObjectsZoomLevel2HoverArgs) {
+    return this.objectsService.getZoomRecordHover(args.id)
   }
 }

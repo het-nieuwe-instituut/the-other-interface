@@ -4,7 +4,7 @@ import {
   ArchivesFondsCreatorResolver,
   ArchivesOtherResolver,
   ArchivesRelationsZoomLevel3Resolver,
-  ArchivesZoomLevel2HoverResolver,
+  ArchivesZoomLevelRecordHoverResolver,
   ArchivesZoomLevel3Resolver,
 } from './archives.resolver'
 import { ArchivesService } from './archives.service'
@@ -17,7 +17,7 @@ import { ArchivesService } from './archives.service'
     ArchivesOtherResolver,
     ArchivesFondsCreatorResolver,
     ArchivesRelationsZoomLevel3Resolver,
-    ArchivesZoomLevel2HoverResolver,
+    ArchivesZoomLevelRecordHoverResolver,
   ],
   exports: [
     ArchivesService,
@@ -25,7 +25,7 @@ import { ArchivesService } from './archives.service'
     ArchivesOtherResolver,
     ArchivesFondsCreatorResolver,
     ArchivesRelationsZoomLevel3Resolver,
-    ArchivesZoomLevel2HoverResolver,
+    ArchivesZoomLevelRecordHoverResolver,
   ],
 })
 export class ArchivesModule {}

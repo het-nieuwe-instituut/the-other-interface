@@ -1,0 +1,20 @@
+query StoryHoverRecordRelations($id: String!) {
+    storyWithoutRelations(id: $id) { 
+        data {
+            id
+            attributes {
+                title
+                shortDescription
+                author {
+                    data {
+                        id
+                        attributes {
+                            firstName
+                            lastName
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

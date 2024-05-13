@@ -164,7 +164,7 @@ export class ArchivesService {
     return result?.data
   }
 
-  public async getZoomLevel2Hover(id: string) {
+  public async getZoomRecordHover(id: string) {
     const results = await this.triplyService.queryTriplyData<ArchivesZoomLevel2HoverData>(
       this.ZoomLevel2HoverEndpoint,
       archivesZoomLevel2HoverDataKeys,

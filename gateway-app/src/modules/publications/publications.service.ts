@@ -489,7 +489,7 @@ export class PublicationsService {
     return this.zoomLevel3Service.getDetail(id, type)
   }
 
-  public async getZoomLevel2Hover(id: string) {
+  public async getZoomRecordHover(id: string) {
     const results = await this.triplyService.queryTriplyData<PublicationsZoomLevel2HoverData>(
       this.ZoomLevel2HoverEndpoint,
       publicationsZoomLevel2HoverDataKeys,

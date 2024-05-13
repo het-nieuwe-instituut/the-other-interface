@@ -1,6 +1,0 @@
-query ObjectsZoom2Hover($id: String!) {
-    objectsZoomLevel2Hover(id: $id) {
-        title
-        description
-    }
-}

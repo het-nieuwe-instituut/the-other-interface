@@ -74,11 +74,11 @@ export class ArchivesFondsCreatorResolver {
 }
 
 @Resolver(ArchivesZoomLevelHoverType)
-export class ArchivesZoomLevel2HoverResolver {
+export class ArchivesZoomLevelRecordHoverResolver {
   public constructor(private readonly archivesService: ArchivesService) {}
 
   @Query(() => ArchivesZoomLevelHoverType)
-  public async archivesZoomLevel2Hover(@Args() args: ArchivesZoomLevel2HoverArgs) {
-    return this.archivesService.getZoomLevel2Hover(args.id)
+  public async archivesZoomRecordHover(@Args() args: ArchivesZoomLevel2HoverArgs) {
+    return this.archivesService.getZoomRecordHover(args.id)
   }
 }
