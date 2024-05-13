@@ -70,21 +70,23 @@ export class TriplyUtils {
     }
 
     const type = s[s.length - 2]
-    switch (type) {
-      case 'people':
-        return EntityNames.People
+    return this.mapTypeToEnum(type, `type for uri ${uri} not implemented`)
+  }
+
+  public static mapTypeToEnum(type: string, error?: string): EntityNames {
+    switch (type.toLowerCase()) {
       case 'archives':
         return EntityNames.Archives
-      case 'books':
-        return EntityNames.Publications
-      case 'objects':
-        return EntityNames.Objects
       case 'media':
         return EntityNames.Media
-      case 'seeAlso':
-        return EntityNames.External
+      case 'objects':
+        return EntityNames.Objects
+      case 'people':
+        return EntityNames.People
+      case 'publications':
+        return EntityNames.Publications
       default:
-        throw CustomError.externalCritical(`type for uri ${uri} not implemented`)
+        throw CustomError.externalCritical(error ?? `type ${type} is not implemented`)
     }
   }
 

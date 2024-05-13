@@ -224,9 +224,9 @@ export class ZoomLevel2Service {
   private extractTypeAndId(url: string): { type: string; id: string } {
     const match = /id\/([^\/]+)\/(\d+)/.exec(url)
     return {
-      type: match ? match[1] : '',
       //TODO enable when triply clean up the data
-      // type: TriplyUtils.getEntityNameFromUri(url),
+       // type: TriplyUtils.getEntityNameFromUri(url),
+      type: match ? match[1] : '',
       id: TriplyUtils.getIdFromUri(url),
     }
   }
@@ -275,7 +275,7 @@ export class ZoomLevel2Service {
         thumbnail: thumbnail,
         title: title,
         id: id,
-        type: this.triplyService.mapTypeToEnum(type.toLowerCase()),
+        type: TriplyUtils.mapTypeToEnum(type.toLowerCase()),
       }
     })
   }

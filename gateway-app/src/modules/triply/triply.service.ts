@@ -181,27 +181,10 @@ export class TriplyService {
     return res.data
   }
 
-  private async postFetch<ReturnDataType>(endpoint: URL) {
+  private async postFetch<ReturnDataType>(endpoint: URL, body?: Record<string, unknown>) {
     const headers = { Authorization: `Bearer ${this.apiKey}` }
-    const res = this.httpService.post<ReturnDataType>(endpoint.toString(), null, { headers })
+    const res = this.httpService.post<ReturnDataType>(endpoint.toString(), body, { headers })
 
     return lastValueFrom(res)
-  }
-
-  public mapTypeToEnum(type: string): EntityNames {
-    switch (type.toLowerCase()) {
-      case 'archives':
-        return EntityNames.Archives
-      case 'media':
-        return EntityNames.Media
-      case 'objects':
-        return EntityNames.Objects
-      case 'people':
-        return EntityNames.People
-      case 'publications':
-        return EntityNames.Publications
-      default:
-        throw new Error(`Unsupported type: ${type}`)
-    }
   }
 }
