@@ -29,21 +29,7 @@ export const ReadMoreTooltip = ({
   const ref = useRef<TooltipRefProps>(null)
   const content = useRef(
     ReactDOMServer.renderToStaticMarkup(
-      <div
-        className="w-[243.76px] justify-start p-4 text-start"
-        onMouseOver={() => {
-          ref.current?.open()
-        }}
-        onMouseEnter={() => {
-          ref.current?.open()
-        }}
-        onFocus={() => {
-          ref.current?.open()
-        }}
-        onMouseLeave={() => {
-          ref.current?.close()
-        }}
-      >
+      <div className="w-[243.76px] justify-start p-4 text-start">
         <h2
           className={TypographyVariants({
             social: 'sm',
