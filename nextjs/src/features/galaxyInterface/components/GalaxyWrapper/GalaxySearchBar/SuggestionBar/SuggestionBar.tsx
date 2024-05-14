@@ -1,5 +1,5 @@
 import { FOOTER_Z_INDEX } from '@/features/shared/constants/mainConstants'
-import { Flex, Box, Grid, Text } from '@chakra-ui/react'
+import { Flex, Box, Grid, Text, Wrap } from '@chakra-ui/react'
 
 interface Props {
   isOpen?: boolean
@@ -8,7 +8,7 @@ interface Props {
   offset?: number
 }
 
-const SUGGESTION_BAR_PADDING = 5
+const SUGGESTION_BAR_PADDING = 10
 
 export const SuggestionBar: React.FC<Props> = ({
   isOpen = false,
@@ -20,7 +20,6 @@ export const SuggestionBar: React.FC<Props> = ({
     <Grid
       position={'absolute'}
       bottom={offset ? `calc(${offset + SUGGESTION_BAR_PADDING}px)` : '60px'}
-      height="75px"
       width={'100%'}
       gap="15px"
       borderRadius={'5px 5px 0 0'}
@@ -47,16 +46,9 @@ export const SuggestionBar: React.FC<Props> = ({
         visibility={isOpen ? 'visible' : 'hidden'}
         transition="opacity 0.1s ease-in-out 0.2s, visibility 0.1s ease-in-out 0.2s"
       >
-        <Flex
-          gap="5px"
-          width={'100%'}
-          overflowX="auto"
-          paddingBottom="25px"
-          marginBottom="-25px"
-          maxHeight={'50px'}
-        >
+        <Wrap gap="5px" width={'100%'} overflowX="auto" paddingBottom="25px" marginBottom="-25px">
           {children}
-        </Flex>
+        </Wrap>
       </Box>
     </Grid>
   )
