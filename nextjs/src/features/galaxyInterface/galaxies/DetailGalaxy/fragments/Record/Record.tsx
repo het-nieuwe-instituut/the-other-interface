@@ -2,12 +2,12 @@ import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/Re
 
 import { Tooltip } from '@/features/modules/components/ToolTip/Tooltip'
 import { useZoomHoverRecordResult } from '@/features/shared/hooks/queries/useZoomHoverRecordResult'
-import { TypographyVariants } from '@/features/ui/system/typography/variants'
 import { cn } from '@/features/ui/utils/cn'
 import { PositionedRecord } from '../types'
 import { RecordText } from './RecordText'
 import { useCalculateLine } from './useCalculateLine'
 import { usePresenter } from './usePresenter'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
 
 type Props = {
   record: PositionedRecord
