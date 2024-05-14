@@ -42,7 +42,7 @@ export const RelatedStories: React.FC<Props> = ({ allRelationTotals }) => {
         </div>
       </div>
 
-      <div className=" z-20 col-start-2 col-end-2 row-start-1 row-end-3 text-white opacity-20 blur-[6px] ">
+      <div className=" pointer-events-none z-20 col-start-2 col-end-2 row-start-1 row-end-3 text-white opacity-20 blur-[6px]">
         <div className="grid h-full grid-cols-2 grid-rows-4">
           {nextPositionedStories.map(story => (
             <Record key={story.id} record={story} />
@@ -55,6 +55,7 @@ export const RelatedStories: React.FC<Props> = ({ allRelationTotals }) => {
   )
 
   function handleRecordHover(storyId: string) {
+    console.log('test')
     DetailGalaxyContent.setIsRecordHovered(true)
     setCurrentRecord(storyId)
   }
