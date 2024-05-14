@@ -1,10 +1,11 @@
 import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
-import { Flex, GridItem, Text } from '@chakra-ui/react'
+import { Text } from '@chakra-ui/react'
 
 import { Tooltip } from '@/features/modules/components/ToolTip/Tooltip'
 import { useZoomHoverRecordResult } from '@/features/shared/hooks/queries/useZoomHoverRecordResult'
 import { Position } from '@/features/shared/types/position'
 import { Category } from '@/features/shared/utils/categories'
+import { cn } from '@/features/ui/utils/cn'
 import { PositionedRecord } from '../types'
 import { RecordText } from './RecordText'
 import { useCalculateLine } from './useCalculateLine'
@@ -17,6 +18,7 @@ type Props = {
   style?: React.CSSProperties
   isHovered?: boolean
   currentRecord?: string
+  tabIndex?: number
 }
 
 interface RecordDetailsType {
@@ -31,6 +33,7 @@ export const Record: React.FC<Props> = ({
   onLeaveRecord,
   isHovered,
   currentRecord,
+  tabIndex = 0,
 }) => {
   const { id, category, position, grid } = record
   const { recordDetails, isLoading, handleClick } = usePresenter(id, category)
@@ -43,41 +46,9 @@ export const Record: React.FC<Props> = ({
 
   return (
     <>
-      <GridItem
-        className="relative"
-        css={{ ...grid, ...style }}
-        style={{ ...grid, ...style }}
-        onMouseOver={onHoverRecord}
-        onFocus={onHoverRecord}
-        onMouseLeave={onLeaveRecord}
-      >
-        {data === null ? (
-          RecordData(recordDetails, position, handleClick, category, isHovered, currentRecord, id)
-        ) : (
-          <Tooltip
-            label={
-              <div>
-                <Text fontFamily={'Social'} fontSize={'12px'} fontWeight={'700'}>
-                  {data?.title}
-                </Text>
-                <Text fontFamily={'Social'} fontSize={'12px'} fontWeight={'400'}>
-                  {data?.description}
-                </Text>
-              </div>
-            }
-          >
-            {RecordData(
-              recordDetails,
-              position,
-              handleClick,
-              category,
-              isHovered,
-              currentRecord,
-              id
-            )}
-          </Tooltip>
-        )}
-      </GridItem>
+      <div className="relative" style={{ ...grid, ...style }}>
+        {renderRecordData()}
+      </div>
       {isHovered && currentRecord === id && (
         <div
           style={{
@@ -103,32 +74,91 @@ export const Record: React.FC<Props> = ({
       )}
     </>
   )
+
+  function renderRecordData() {
+    if (data === null) {
+      return (
+        <RecordData
+          recordDetails={recordDetails}
+          position={position}
+          handleClick={handleClick}
+          onHoverRecord={onHoverRecord}
+          onLeaveRecord={onLeaveRecord}
+          category={category}
+          isHovered={isHovered}
+          currentRecord={currentRecord}
+          tabIndex={tabIndex}
+          id={id}
+        />
+      )
+    }
+
+    return (
+      <Tooltip
+        label={
+          <div>
+            <Text fontFamily={'Social'} fontSize={'12px'} fontWeight={'700'}>
+              {data?.title}
+            </Text>
+            <Text fontFamily={'Social'} fontSize={'12px'} fontWeight={'400'}>
+              {data?.description}
+            </Text>
+          </div>
+        }
+      >
+        <RecordData
+          recordDetails={recordDetails}
+          position={position}
+          handleClick={handleClick}
+          onHoverRecord={onHoverRecord}
+          onLeaveRecord={onLeaveRecord}
+          category={category}
+          isHovered={isHovered}
+          currentRecord={currentRecord}
+          id={id}
+          tabIndex={tabIndex}
+        />
+      </Tooltip>
+    )
+  }
 }
 
-const RecordData = (
-  recordDetails: RecordDetailsType | undefined | null,
-  position: Position,
-  handleClick: () => void,
-  category: Category,
-  isHovered: boolean | undefined,
-  currentRecord: string | undefined,
+const RecordData = ({
+  recordDetails,
+  position,
+  handleClick,
+  onHoverRecord,
+  onLeaveRecord,
+  category,
+  isHovered,
+  currentRecord,
+  id,
+  tabIndex = 0,
+}: {
+  recordDetails: RecordDetailsType | undefined | null
+  position: Position
+  handleClick: () => void
+  onHoverRecord?: () => void
+  onLeaveRecord?: () => void
+  category: Category
+  isHovered: boolean | undefined
+  currentRecord: string | undefined
   id: string
-) => {
+  tabIndex: number
+}) => {
   return (
-    <Flex
-      position="absolute"
-      width="80%"
-      height="80%"
-      flexDirection="column"
-      alignItems="center"
-      justifyContent="center"
-      gap="2px"
-      cursor={'pointer'}
+    <button
+      tabIndex={tabIndex}
+      className={cn(
+        'ease-in-out duration-[.4] transition-all absolute flex size-4/5 cursor-pointer flex-col items-center justify-center gap-[2px] hover:scale-105',
+        isHovered && currentRecord === id ? `hovered` : ''
+      )}
+      onMouseOver={onHoverRecord}
+      onFocus={onHoverRecord}
+      onMouseLeave={onLeaveRecord}
+      onBlur={onLeaveRecord}
       onClick={handleClick}
-      _hover={{ transform: 'scale(1.05)' }}
-      transition="all .4s ease-in-out"
       style={{ ...position }}
-      className={isHovered && currentRecord === id ? `hovered` : ''}
     >
       <ResponsiveImage
         src={recordDetails?.thumbnail?.[0]}
@@ -142,6 +172,6 @@ const RecordData = (
       />
 
       <RecordText title={recordDetails?.title} categoryType={category} />
-    </Flex>
+    </button>
   )
 }

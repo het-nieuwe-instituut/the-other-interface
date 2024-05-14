@@ -75,7 +75,11 @@ export const RelatedCategory: React.FC<Props> = ({
       >
         <Grid height="100%" templateColumns="repeat(2, 1fr)" templateRows="repeat(2, 1fr)">
           {nextPositionedRecords.map((record, index) => (
-            <Record key={keyExtractor(record.id, index, positionedRecords)} record={record} />
+            <Record
+              key={keyExtractor(record.id, index, positionedRecords)}
+              record={record}
+              tabIndex={-1}
+            />
           ))}
         </Grid>
       </GridItem>
