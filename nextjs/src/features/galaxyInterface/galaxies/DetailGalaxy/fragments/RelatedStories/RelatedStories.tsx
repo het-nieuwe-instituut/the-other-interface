@@ -55,7 +55,6 @@ export const RelatedStories: React.FC<Props> = ({ allRelationTotals }) => {
   )
 
   function handleRecordHover(storyId: string) {
-    console.log('test')
     DetailGalaxyContent.setIsRecordHovered(true)
     setCurrentRecord(storyId)
   }
