@@ -1,3 +1,4 @@
+import { joinNullableStrings } from '@/features/shared/utils/text'
 import {
   ArchivesZoomRecordHoverQuery,
   ObjectsZoomRecordHoverQuery,
@@ -16,64 +17,52 @@ export const zoomRecordHoverQueryTooltipDataMapper = (initialData: TooltipData) 
   if (!initialData) {
     return null
   }
+
   if ('publicationsZoomRecordHover' in initialData) {
-    if (
-      initialData.publicationsZoomRecordHover.title === null &&
-      initialData.publicationsZoomRecordHover.description === null
-    ) {
+    const { title, description, authors } = initialData.publicationsZoomRecordHover
+
+    if (!title && !description) {
       return null
     }
+
     return {
-      title: `${initialData.publicationsZoomRecordHover.title}${
-        initialData.publicationsZoomRecordHover.authors
-          ? ', ' + initialData.publicationsZoomRecordHover.authors
-          : ''
-      }`,
-      description: initialData.publicationsZoomRecordHover.description,
+      title: joinNullableStrings(', ', title, authors),
+      description,
     }
   }
   if ('archivesZoomRecordHover' in initialData) {
-    if (
-      initialData.archivesZoomRecordHover.title === null &&
-      initialData.archivesZoomRecordHover.description === null
-    ) {
+    const { title, description, creators } = initialData.archivesZoomRecordHover
+
+    if (!title && !description) {
       return null
     }
+
     return {
-      title: `${initialData.archivesZoomRecordHover.title}${
-        initialData.archivesZoomRecordHover.creators
-          ? ', ' + initialData.archivesZoomRecordHover.creators
-          : ''
-      }`,
-      description: initialData.archivesZoomRecordHover.description,
+      title: joinNullableStrings(', ', title, creators),
+      description,
     }
   }
+
   if ('peopleZoomLevelHover' in initialData) {
-    if (
-      initialData.peopleZoomLevelHover.title === null &&
-      initialData.peopleZoomLevelHover.description === null
-    ) {
+    const { title, description, profession } = initialData.peopleZoomLevelHover
+
+    if (!title && !description) {
       return null
     }
+
     return {
-      title: `${initialData.peopleZoomLevelHover.title}${
-        initialData.peopleZoomLevelHover.profession
-          ? ', ' + initialData.peopleZoomLevelHover.profession
-          : ''
-      }`,
-      description: initialData.peopleZoomLevelHover.description,
+      title: joinNullableStrings(', ', title, profession),
+      description,
     }
   }
+
   if ('objectsZoomRecordHover' in initialData) {
-    if (
-      initialData.objectsZoomRecordHover.title === null &&
-      initialData.objectsZoomRecordHover.description === null
-    ) {
+    const { title, description } = initialData.objectsZoomRecordHover
+
+    if (!title && !description) {
       return null
     }
-    return {
-      title: initialData.objectsZoomRecordHover.title,
-      description: initialData.objectsZoomRecordHover.description,
-    }
+
+    return { title, description }
   }
 }

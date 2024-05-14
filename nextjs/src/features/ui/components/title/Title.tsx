@@ -1,6 +1,6 @@
 import { cn } from '@/features/ui/utils/cn'
 import Asterisk from './asterisk.svg'
-import { TypographyVariants } from '../../system/typography/variants'
+import { TypographyVariants } from '../typography/variants'
 
 interface Props {
   asterisk?: boolean
