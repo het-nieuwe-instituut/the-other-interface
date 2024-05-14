@@ -1125,6 +1125,7 @@ export type Query = {
   storiesWithoutRelations: StoryWithoutRelationsEntityResponseCollection;
   story: StoryEntityResponse;
   storyByLocale: StoryEntityResponseCollection;
+  storyHover: StoryHoverType;
   storyMetaByLocale: StoryMetaEntityResponseCollection;
   storyRelationsCount?: Maybe<ZoomLevel3StoryRelationsCountType>;
   storyWithoutRelations: StoryWithoutRelationsEntityResponse;
@@ -1367,6 +1368,11 @@ export type QueryStoryByLocaleArgs = {
 };
 
 
+export type QueryStoryHoverArgs = {
+  id: Scalars['String'];
+};
+
+
 export type QueryStoryMetaByLocaleArgs = {
   filters?: InputMaybe<StoryFiltersInput>;
   locale?: InputMaybe<Scalars['String']>;
@@ -1591,10 +1597,18 @@ export type StoryFiltersInput = {
   siblings?: InputMaybe<StoryFiltersInput>;
   slug?: InputMaybe<StringFilterInput>;
   storyLinks?: InputMaybe<ComponentModulesButtonsModuleFiltersInput>;
+  themes?: InputMaybe<ThemeFiltersInput>;
   timeframe?: InputMaybe<ComponentCoreTimeframeFiltersInput>;
   title?: InputMaybe<StringFilterInput>;
   triplyRecords?: InputMaybe<TriplyRecordFiltersInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type StoryHoverType = {
+  __typename?: 'StoryHoverType';
+  author?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
 };
 
 export type StoryMetaEntityResponseCollection = {
@@ -1609,6 +1623,7 @@ export type StoryRelationResponseCollection = {
 
 export type StoryWithoutRelations = {
   __typename?: 'StoryWithoutRelations';
+  author?: Maybe<AuthorEntityResponse>;
   createdAt?: Maybe<Scalars['Date']>;
   description?: Maybe<Scalars['String']>;
   locale?: Maybe<Scalars['String']>;
@@ -2213,6 +2228,13 @@ export type ZoomLevel3PublicationRecordQueryVariables = Exact<{
 
 
 export type ZoomLevel3PublicationRecordQuery = { __typename?: 'Query', publicationsRecordZoomLevel3?: Array<{ __typename?: 'PublicationRecordZoomLevel3Type', objectNumber?: string | null, subType?: string | null, authors?: string | null, authorRole?: string | null, publisher?: string | null, yearOfPublication?: string | null, placeOfPublication?: string | null, isbn?: string | null, annotation?: string | null, codeOfArchive?: string | null, edition?: string | null, illustration?: string | null, pages?: string | null, language?: string | null, series?: string | null, number?: string | null, category?: string | null, relatedKeyword?: string | null, geoKeyword?: string | null, availability?: string | null, permanentLink?: string | null, externalSource?: string | null }> | null };
+
+export type StoryHoverRecordRelationsQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type StoryHoverRecordRelationsQuery = { __typename?: 'Query', storyWithoutRelations: { __typename?: 'StoryWithoutRelationsEntityResponse', data?: { __typename?: 'StoryWithoutRelationsEntity', id?: string | null, attributes?: { __typename?: 'StoryWithoutRelations', title: string, shortDescription?: string | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', id?: string | null, attributes?: { __typename?: 'Author', firstName: string, lastName: string } | null } | null } | null } | null } | null } };
 
 export type ArchiveRecordRelationsQueryVariables = Exact<{
   id: Scalars['String'];
@@ -3481,6 +3503,28 @@ export const ZoomLevel3PublicationRecordDocument = gql`
   }
 }
     `;
+export const StoryHoverRecordRelationsDocument = gql`
+    query StoryHoverRecordRelations($id: String!) {
+  storyWithoutRelations(id: $id) {
+    data {
+      id
+      attributes {
+        title
+        shortDescription
+        author {
+          data {
+            id
+            attributes {
+              firstName
+              lastName
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `;
 export const ArchiveRecordRelationsDocument = gql`
     query ArchiveRecordRelations($id: String!, $type: EntityNames!, $lang: String!, $page: Int!, $pageSize: Int!) {
   archivesRecordRelations(
@@ -3793,6 +3837,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     ZoomLevel3PublicationRecord(variables: ZoomLevel3PublicationRecordQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ZoomLevel3PublicationRecordQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ZoomLevel3PublicationRecordQuery>(ZoomLevel3PublicationRecordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ZoomLevel3PublicationRecord', 'query');
+    },
+    StoryHoverRecordRelations(variables: StoryHoverRecordRelationsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<StoryHoverRecordRelationsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<StoryHoverRecordRelationsQuery>(StoryHoverRecordRelationsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'StoryHoverRecordRelations', 'query');
     },
     ArchiveRecordRelations(variables: ArchiveRecordRelationsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ArchiveRecordRelationsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ArchiveRecordRelationsQuery>(ArchiveRecordRelationsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ArchiveRecordRelations', 'query');
