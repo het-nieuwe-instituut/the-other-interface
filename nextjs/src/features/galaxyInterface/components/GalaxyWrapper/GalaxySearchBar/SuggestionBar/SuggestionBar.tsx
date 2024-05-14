@@ -46,7 +46,7 @@ export const SuggestionBar: React.FC<Props> = ({
         visibility={isOpen ? 'visible' : 'hidden'}
         transition="opacity 0.1s ease-in-out 0.2s, visibility 0.1s ease-in-out 0.2s"
       >
-        <Wrap gap="5px" width={'100%'} overflowX="auto" paddingBottom="25px" marginBottom="-25px">
+        <Wrap gap="5px" width={'100%'} paddingBottom="25px" marginBottom="-25px">
           {children}
         </Wrap>
       </Box>
