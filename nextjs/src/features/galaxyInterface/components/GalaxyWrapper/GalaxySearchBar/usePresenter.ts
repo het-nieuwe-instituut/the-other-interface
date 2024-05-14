@@ -56,6 +56,10 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
     [selectedFilters, dispatch]
   )
 
+  const clearAllFilters = () => {
+    setSelectedFilters([])
+  }
+
   useEffect(() => {
     dispatch(sharedActions.searchCategory({ searchCategory: pageCategory }))
     setInputValue(search || '')
@@ -110,7 +114,9 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
 
   const handleClearAll = useCallback(() => {
     setInputValue('')
-    dispatch(sharedActions.searchCategory({ searchCategory: pageCategory }))
+    clearAllFilters()
+    dispatch(sharedActions.categorySuggestionsOpen({ categorySuggestionsOpen: false }))
+    filterInputRef.current?.focus()
   }, [dispatch, pageCategory])
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { Box, Flex, Grid, Text, VStack, useBreakpoint } from '@chakra-ui/react'
+import { Flex, Grid, Text } from '@chakra-ui/react'
 import { FOOTER_Z_INDEX } from '@/features/shared/constants/mainConstants'
 import { usePresenter } from './usePresenter'
 import { CategoryFilter } from './CategoryFilter/CategoryFilter'
@@ -7,7 +7,6 @@ import { FilterInput, CloseButton } from './fragments'
 import { CategorySuggestions } from '../CategorySuggestions/CategorySuggestions'
 import { GoButton } from './fragments/GoButton'
 import { SearchButton } from './fragments/SearchButton'
-import { ClearButton } from './fragments/ClearButton'
 import { Suggestions } from '../Suggestions/Suggestions'
 import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/SearchFilterBox'
 import { Wrap, WrapItem } from '@chakra-ui/react'
@@ -22,7 +21,6 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) =>
   const {
     category,
     isSearchModeActive,
-    handleSearchModeClose,
     handleSearchModeOpen,
     isCategorySuggestionsOpen,
     setIsCategorySuggestionsOpen,
@@ -101,14 +99,13 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) =>
       >
         {isSearchModeActive ? (
           <>
-            <ClearButton handleClick={handleClearAll} />
             <GoButton handleClick={handleGoClick} />
-            <CloseButton handleClick={handleSearchModeClose} />
+            <CloseButton handleClick={handleClearAll} />
           </>
         ) : isNoActiveSearch ? (
           <SearchButton />
         ) : (
-          <CloseButton handleClick={handleSearchModeClose} />
+          <CloseButton handleClick={handleClearAll} />
         )}
       </Flex>
 
