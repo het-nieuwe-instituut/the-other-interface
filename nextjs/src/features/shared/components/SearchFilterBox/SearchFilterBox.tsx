@@ -27,6 +27,7 @@ export const SearchFilterBox: React.FC<Props> = ({
       cursor={onClick ? 'pointer' : 'default'}
       onClick={onClick}
       minHeight="50px"
+      maxWidth={'100%'}
     >
       <Flex
         position="relative"

@@ -13,7 +13,8 @@ export type FilterArray = Filter[]
 const mockData = [
   {
     field: 'Maker',
-    value: 'Theo van Doesburg',
+    value:
+      'Theo van Doesburg Theo van Doesburg Theo van Doesburg Theo van Doesburg Theo van Doesburg Theo van Doesburg Theo van Doesburg Theo van Doesburg Theo van Doesburg Theo van Doesburg',
     id: '1',
   },
   {
@@ -50,7 +51,7 @@ export const Suggestions: React.FC<Props> = ({ handleSelectFilter }) => {
   return (
     <>
       {mockData.map(item => (
-        <Box key={item.id} onClick={() => handleSelectFilter(item)}>
+        <Box key={item.id} onClick={() => handleSelectFilter(item)} maxWidth={'100%'}>
           <SearchFilterBox category={item.field} subCategory={item.value} />
         </Box>
       ))}

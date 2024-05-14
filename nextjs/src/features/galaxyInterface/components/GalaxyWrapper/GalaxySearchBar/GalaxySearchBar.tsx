@@ -78,7 +78,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) =>
           />
         </WrapItem>
         {selectedFilters.map(filter => (
-          <WrapItem key={filter.id}>
+          <WrapItem key={filter.id} maxWidth={'100%'}>
             <SearchFilterBox category={filter.field} subCategory={filter.value} />
           </WrapItem>
         ))}
