@@ -1,10 +1,8 @@
 import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
-import { Text } from '@chakra-ui/react'
 
 import { Tooltip } from '@/features/modules/components/ToolTip/Tooltip'
 import { useZoomHoverRecordResult } from '@/features/shared/hooks/queries/useZoomHoverRecordResult'
-import { Position } from '@/features/shared/types/position'
-import { Category } from '@/features/shared/utils/categories'
+import { TypographyVariants } from '@/features/ui/system/typography/variants'
 import { cn } from '@/features/ui/utils/cn'
 import { PositionedRecord } from '../types'
 import { RecordText } from './RecordText'
@@ -15,15 +13,10 @@ type Props = {
   record: PositionedRecord
   onHoverRecord?: () => void
   onLeaveRecord?: () => void
-  style?: React.CSSProperties
   isHovered?: boolean
   currentRecord?: string
   tabIndex?: number
-}
-
-interface RecordDetailsType {
-  thumbnail?: string[] | null
-  title?: string | null
+  style?: React.CSSProperties
 }
 
 export const Record: React.FC<Props> = ({
@@ -39,7 +32,6 @@ export const Record: React.FC<Props> = ({
   const { recordDetails, isLoading, handleClick } = usePresenter(id, category)
   // TODO: HNIT-1833 - add in loading and error handling
   const { data } = useZoomHoverRecordResult({ id, category })
-
   const line = useCalculateLine()
 
   if (!recordDetails && !isLoading) return null
@@ -47,7 +39,44 @@ export const Record: React.FC<Props> = ({
   return (
     <>
       <div className="relative" style={{ ...grid, ...style }}>
-        {renderRecordData()}
+        <Tooltip
+          isDisabled={!data}
+          label={
+            <div>
+              <p className={TypographyVariants({ social: 'sm', className: ' font-bold' })}>
+                {data?.title}
+              </p>
+              <p className={TypographyVariants({ social: 'sm' })}>{data?.description}</p>
+            </div>
+          }
+        >
+          <button
+            tabIndex={tabIndex}
+            className={cn(
+              ' ease-in-out duration-[.4] transition-all absolute flex size-4/5 cursor-pointer flex-col items-center justify-center gap-[2px] hover:scale-105',
+              isHovered && currentRecord === id ? `hovered` : ''
+            )}
+            onMouseOver={onHoverRecord}
+            onFocus={onHoverRecord}
+            onMouseLeave={onLeaveRecord}
+            onBlur={onLeaveRecord}
+            onClick={handleClick}
+            style={{ ...position }}
+          >
+            <ResponsiveImage
+              src={recordDetails?.thumbnail?.[0]}
+              alt={recordDetails?.title}
+              maxHeight={'calc(100% - 2vw - 5px)'} // where 1.6vw are a texts' line heights, 5px are gaps
+              size={'11vw'}
+              css={{
+                flex: '1 1 calc(100% - 2vw - 5px)',
+              }}
+              disableRightClick
+            />
+
+            <RecordText title={recordDetails?.title} categoryType={category} />
+          </button>
+        </Tooltip>
       </div>
       {isHovered && currentRecord === id && (
         <div
@@ -73,105 +102,5 @@ export const Record: React.FC<Props> = ({
         </div>
       )}
     </>
-  )
-
-  function renderRecordData() {
-    if (data === null) {
-      return (
-        <RecordData
-          recordDetails={recordDetails}
-          position={position}
-          handleClick={handleClick}
-          onHoverRecord={onHoverRecord}
-          onLeaveRecord={onLeaveRecord}
-          category={category}
-          isHovered={isHovered}
-          currentRecord={currentRecord}
-          tabIndex={tabIndex}
-          id={id}
-        />
-      )
-    }
-
-    return (
-      <Tooltip
-        label={
-          <div>
-            <Text fontFamily={'Social'} fontSize={'12px'} fontWeight={'700'}>
-              {data?.title}
-            </Text>
-            <Text fontFamily={'Social'} fontSize={'12px'} fontWeight={'400'}>
-              {data?.description}
-            </Text>
-          </div>
-        }
-      >
-        <RecordData
-          recordDetails={recordDetails}
-          position={position}
-          handleClick={handleClick}
-          onHoverRecord={onHoverRecord}
-          onLeaveRecord={onLeaveRecord}
-          category={category}
-          isHovered={isHovered}
-          currentRecord={currentRecord}
-          id={id}
-          tabIndex={tabIndex}
-        />
-      </Tooltip>
-    )
-  }
-}
-
-const RecordData = ({
-  recordDetails,
-  position,
-  handleClick,
-  onHoverRecord,
-  onLeaveRecord,
-  category,
-  isHovered,
-  currentRecord,
-  id,
-  tabIndex = 0,
-}: {
-  recordDetails: RecordDetailsType | undefined | null
-  position: Position
-  handleClick: () => void
-  onHoverRecord?: () => void
-  onLeaveRecord?: () => void
-  category: Category
-  isHovered: boolean | undefined
-  currentRecord: string | undefined
-  id: string
-  tabIndex: number
-}) => {
-  return (
-    <button
-      tabIndex={tabIndex}
-      className={cn(
-        'ease-in-out duration-[.4] transition-all absolute flex size-4/5 cursor-pointer flex-col items-center justify-center gap-[2px] hover:scale-105',
-        isHovered && currentRecord === id ? `hovered` : ''
-      )}
-      onMouseOver={onHoverRecord}
-      onFocus={onHoverRecord}
-      onMouseLeave={onLeaveRecord}
-      onBlur={onLeaveRecord}
-      onClick={handleClick}
-      style={{ ...position }}
-    >
-      <ResponsiveImage
-        src={recordDetails?.thumbnail?.[0]}
-        alt={recordDetails?.title}
-        maxHeight={'calc(100% - 2vw - 5px)'} // where 1.6vw are a texts' line heights, 5px are gaps
-        size={'11vw'}
-        css={{
-          flex: '1 1 calc(100% - 2vw - 5px)',
-        }}
-        disableRightClick
-      />
-
-      <RecordText title={recordDetails?.title} categoryType={category} />
-    </button>
   )
 }
