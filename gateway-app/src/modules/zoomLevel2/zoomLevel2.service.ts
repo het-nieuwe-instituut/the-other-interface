@@ -5,13 +5,9 @@ import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { ElasticsearchResult, KeysToVerify, TriplyService } from '../triply/triply.service'
 import { TriplyUtils } from '../triply/triply.utils'
 import { getUniqueById } from '../util/helpers'
-import {
-  ComponentModulesImage,
-  PublicationState,
-  Sdk,
-  StoriesQuery,
-} from 'src/generated/strapi-sdk'
+import { PublicationState, Sdk, StoriesQuery } from 'src/generated/strapi-sdk'
 import { StrapiUtils } from '../strapi/strapi.utils'
+import { SearchAllResultType } from './zoomLevel2.type'
 
 interface ResultData {
   thumbnail: string
@@ -124,7 +120,7 @@ export class ZoomLevel2Service {
     const storyPage = Math.ceil(offsetStories / storiesPerPage) + 1
     const triplyPage = Math.ceil(offsetTriply / triplyPerPage) + 1
 
-    const stories =
+    const storiesResult =
       storiesToFetch > 0
         ? await this.strapiGqlSdk.stories({
             filters: {
@@ -138,7 +134,7 @@ export class ZoomLevel2Service {
           })
         : undefined
 
-    const result =
+    const triplyResult =
       triplyToFetch > 0
         ? await this.triplyService.postQueryTriplyData(
             this.SearchByAllEndpoint,
@@ -147,8 +143,10 @@ export class ZoomLevel2Service {
           )
         : undefined
 
-    const formattedStories = this.storyToRecordMapper(stories)?.filter(Boolean) ?? []
-    const formattedTriplyResult = this.elasticSearchToRecordMapper(result)?.filter(Boolean) ?? []
+    const formattedStories =
+      storiesResult?.stories?.data.map(s => this.formatStoryToSearchResult(s)) || []
+    const formattedTriplyResult =
+      triplyResult?.hits.hits.map(h => this.formatTriplyToSearchResult(h)) || []
 
     return {
       page: paginationArgs.page,
@@ -221,33 +219,34 @@ export class ZoomLevel2Service {
     }
   }
 
-  private storyToRecordMapper(stories?: StoriesQuery) {
-    if (!stories) {
+  private formatStoryToSearchResult(
+    story: NonNullable<StoriesQuery['stories']>['data'][0]
+  ): SearchAllResultType | null {
+    if (!story.id) {
       return null
     }
-    return stories.stories?.data?.map(story => {
-      const components = story?.attributes?.components
-      const imageComponent = components?.find(
-        component => component?.__typename === 'ComponentModulesImage'
-      ) as ComponentModulesImage
 
-      const url = StrapiUtils.getImagePath(imageComponent?.image.data?.attributes?.url)
+    const imageComponent = story.attributes?.components?.find(
+      component => component?.__typename === 'ComponentModulesImage'
+    )
 
-      return {
-        title: story?.attributes?.title ?? '',
-        thumbnail: url,
-        id: story.id,
-        type: EntityNames.Stories,
-      }
-    })
+    const url =
+      imageComponent && 'image' in imageComponent
+        ? StrapiUtils.getImagePath(imageComponent.image.data?.attributes?.url)
+        : undefined
+
+    return {
+      title: story?.attributes?.title,
+      thumbnail: url,
+      id: story.id,
+      type: EntityNames.Stories,
+    }
   }
 
-  private elasticSearchToRecordMapper(data?: ElasticsearchResult) {
-    if (!data || !data.hits || !data.hits.hits) {
-      return null
-    }
-
-    return data.hits.hits.map(item => {
+  private formatTriplyToSearchResult(
+    item: ElasticsearchResult['hits']['hits'][0]
+  ): SearchAllResultType | null {
+    try {
       const type = TriplyUtils.getEntityNameFromUri(item._id)
       const id = TriplyUtils.getIdFromUri(item._id)
 
@@ -255,20 +254,19 @@ export class ZoomLevel2Service {
         return null
       }
 
-      const thumbnailLinks = item._source['https://schema org/url'] || []
-      if (thumbnailLinks?.length > 1) {
-        throw CustomError.external('multiple thumbnails found')
-      }
-
+      const thumbnail = item._source['https://schema org/url']?.[0]
       const title =
         item._source['https://www ica org/standards/RiC/ontology#title']?.join(', ') || ''
 
       return {
-        thumbnail: thumbnailLinks?.[0],
-        title: title,
-        id: id,
+        thumbnail,
+        title,
+        id,
         type,
       }
-    })
+    } catch (e) {
+      console.error(e)
+      return null
+    }
   }
 }

@@ -49,10 +49,10 @@ export class ZoomLevel2AmountParentType {
 @ObjectType()
 export class SearchAllResultType {
   @Field(() => String, { nullable: true })
-  public thumbnail: string | null
+  public thumbnail?: string | null
 
   @Field(() => String, { nullable: true })
-  public title: string | null
+  public title?: string | null
 
   @Field(() => String)
   public id: string
@@ -63,8 +63,8 @@ export class SearchAllResultType {
 
 @ObjectType()
 export class SearchAllParentType {
-  @Field(() => [SearchAllResultType], { nullable: false })
-  public nodes: SearchAllResultType[]
+  @Field(() => [SearchAllResultType], { nullable: true })
+  public nodes?: (SearchAllResultType | null)[] | null
 
   @Field(() => Int, { nullable: false })
   public page: number
