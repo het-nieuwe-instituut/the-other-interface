@@ -1,4 +1,4 @@
-import { Box, Flex, Grid, Text, VStack } from '@chakra-ui/react'
+import { Box, Flex, Grid, Text, VStack, useBreakpoint } from '@chakra-ui/react'
 import { FOOTER_Z_INDEX } from '@/features/shared/constants/mainConstants'
 import { usePresenter } from './usePresenter'
 import { CategoryFilter } from './CategoryFilter/CategoryFilter'
@@ -11,7 +11,7 @@ import { ClearButton } from './fragments/ClearButton'
 import { Suggestions } from '../Suggestions/Suggestions'
 import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/SearchFilterBox'
 import { Wrap, WrapItem } from '@chakra-ui/react'
-import { useState, useRef, useEffect } from 'react'
+import { useSearchBarPosition } from './useSearchBarPosition'
 
 type Props = {
   total?: number
@@ -39,22 +39,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) =>
     selectedFilters,
   } = usePresenter(isNoActiveSearch)
 
-  const [offset, setOffset] = useState(0)
-  const [searchBarHeight, setSearchBarHeight] = useState(0)
-  const wrapRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    if (wrapRef.current) {
-      const defaultOffset = 51
-      const height = wrapRef.current.scrollHeight
-      const newOffset = height - defaultOffset
-      setSearchBarHeight(height)
-      if (newOffset > 0) {
-        setOffset(newOffset)
-      }
-      console.log(offset)
-    }
-  }, [selectedFilters])
+  const { offset, searchBarHeight, wrapRef } = useSearchBarPosition(selectedFilters)
 
   return (
     <Grid
