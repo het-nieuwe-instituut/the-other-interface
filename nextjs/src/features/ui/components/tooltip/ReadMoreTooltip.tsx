@@ -1,21 +1,22 @@
 'use client'
-import { TypographyVariants } from '@/features/ui/components/typography/variants'
-import { LinkProps } from 'next/link'
-import React, { PropsWithChildren, useRef } from 'react'
-import ReactDOMServer from 'react-dom/server'
-import 'react-tooltip/dist/react-tooltip.css'
-import { BaseTooltip, BaseTooltipProps } from './BaseTooltip'
-import ExternalLink from '@/features/ui/icons/external-link.svg'
 import { NavButton } from '@/features/ui/components/nav-button/component'
-import NextLink from 'next/link'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
+import ExternalLink from '@/features/ui/icons/external-link.svg'
+import NextLink, { LinkProps } from 'next/link'
+import { PropsWithChildren, useRef } from 'react'
+import ReactDOMServer from 'react-dom/server'
 import { TooltipRefProps } from 'react-tooltip'
+import 'react-tooltip/dist/react-tooltip.css'
+import { cn } from '../../utils/cn'
+import { BaseTooltip } from './BaseTooltip'
 
 interface ReadMoreTooltipProps extends PropsWithChildren {
   title: string
   description: string
   readMoreHref: LinkProps['href']
   readMoreText: string
-  color: BaseTooltipProps['color']
+  color: 'black' | 'blue'
+  offset: number
 }
 
 export const ReadMoreTooltip = ({
@@ -25,11 +26,18 @@ export const ReadMoreTooltip = ({
   readMoreHref,
   readMoreText,
   color,
+  offset,
 }: ReadMoreTooltipProps) => {
   const ref = useRef<TooltipRefProps>(null)
   const content = useRef(
     ReactDOMServer.renderToStaticMarkup(
-      <div className="w-[243.76px] justify-start p-4 text-start">
+      <div
+        className={cn(
+          'w-[243.76px] justify-start p-4 text-start',
+          color === 'black' && 'bg-black-100',
+          color === 'blue' && 'bg-blue-100'
+        )}
+      >
         <h2
           className={TypographyVariants({
             social: 'sm',
@@ -53,7 +61,7 @@ export const ReadMoreTooltip = ({
 
   return (
     <>
-      <BaseTooltip ref={ref} color={color} html={content.current}>
+      <BaseTooltip ref={ref} offset={offset} html={content.current}>
         {children}
       </BaseTooltip>
     </>
