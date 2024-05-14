@@ -10,10 +10,9 @@ import { notFound } from 'next/navigation'
 interface Props {
   gridRow: string
   gridColumn: string
-  className?: string
 }
 
-export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn, className = '' }) => {
+export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
   const { t } = useLooseTypeSafeTranslation('category')
   const params = useParams()
   const category = params?.category as Category
@@ -41,7 +40,6 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn, className
         alignItems="center"
         justifyContent="center"
         gap="2px"
-        className={className}
       >
         <ResponsiveImage
           src={record?.thumbnail?.[0] ?? ''}

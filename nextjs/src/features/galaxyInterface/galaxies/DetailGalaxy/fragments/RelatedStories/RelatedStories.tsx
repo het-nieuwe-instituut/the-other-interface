@@ -38,7 +38,7 @@ export const RelatedStories: React.FC<Props> = ({ allRelationTotals }) => {
             />
           ))}
 
-          <DetailedRecord gridRow="2 / 4" gridColumn="1 / 3" className="detailed-story" />
+          <DetailedRecord gridRow="2 / 4" gridColumn="1 / 3" />
         </div>
       </div>
 
