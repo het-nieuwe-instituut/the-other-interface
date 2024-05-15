@@ -1,20 +1,23 @@
 'use client'
 import { cn } from '@/features/ui/utils/cn'
-import React, { CSSProperties, PropsWithChildren, useId, useRef } from 'react'
+import React, { CSSProperties, PropsWithChildren, useRef } from 'react'
 import { Tooltip as ReactTooltip, TooltipRefProps } from 'react-tooltip'
 import 'react-tooltip/dist/react-tooltip.css'
 
 export interface BaseTooltipProps extends PropsWithChildren {
   html: string
   offset?: number
+  id: string
 }
 
 export const BaseTooltip = React.forwardRef<TooltipRefProps, BaseTooltipProps>(
-  ({ children, html, offset = 16 }, forwardedRef) => {
-    const id = useId()
+  ({ children, html, offset = 16, id }, forwardedRef) => {
     const internalRef = useRef<TooltipRefProps>(null)
     return (
-      <button
+      <div
+        // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+        tabIndex={0}
+        aria-describedby={id}
         data-tooltip-id={id}
         data-tooltip-html={html}
         data-tooltip-offset={0}
@@ -41,9 +44,7 @@ export const BaseTooltip = React.forwardRef<TooltipRefProps, BaseTooltipProps>(
           }}
           noArrow
           opacity={1}
-          delayHide={100}
           imperativeModeOnly
-          place="bottom"
           style={
             {
               '--tooltip-offset': offset + 'px',
@@ -55,7 +56,7 @@ export const BaseTooltip = React.forwardRef<TooltipRefProps, BaseTooltipProps>(
           id={id}
         ></ReactTooltip>
         {children}
-      </button>
+      </div>
     )
   }
 )

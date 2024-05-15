@@ -29,6 +29,8 @@ export const NavButtonVariants = cva(
         black: 'text-black-100 after:border-black after:text-black-100',
         white: 'text-white after:border-white after:text-white ',
         inverted: 'text-pink-100 after:border-pink-100 after:text-pink-100',
+        invertedPinkHover:
+          'hover: text-pink-100 after:border-pink-100 after:text-pink-100 hover:bg-pink-100 hover:text-black-100',
       },
       state: {
         error: [
