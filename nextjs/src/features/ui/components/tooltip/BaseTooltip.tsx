@@ -6,7 +6,7 @@ import 'react-tooltip/dist/react-tooltip.css'
 
 export interface BaseTooltipProps extends PropsWithChildren {
   html: string
-  offset: number
+  offset?: number
 }
 
 export const BaseTooltip = React.forwardRef<TooltipRefProps, BaseTooltipProps>(
@@ -43,6 +43,7 @@ export const BaseTooltip = React.forwardRef<TooltipRefProps, BaseTooltipProps>(
           opacity={1}
           delayHide={100}
           imperativeModeOnly
+          place="bottom"
           style={
             {
               '--tooltip-offset': offset + 'px',
