@@ -1,8 +1,6 @@
-import { CATEGORIES, Category } from '@/features/shared/utils/categories'
-import { draftMode } from 'next/headers'
 import { DetailpageContainer } from '@/features/pages/containers/DetailpageContainer/DetailpageContainer'
+import { CATEGORIES, Category } from '@/features/shared/utils/categories'
 import { notFound } from 'next/navigation'
-
 interface Props {
   params: { category: string; id: string }
 }
@@ -18,7 +16,9 @@ export default async function Page({ params }: Props) {
 
   assertIsCategory(category)
 
-  const { isEnabled } = draftMode()
-
-  return <DetailpageContainer category={category} isDraftMode={isEnabled} />
+  return (
+    <>
+      <DetailpageContainer category={category} />
+    </>
+  )
 }
