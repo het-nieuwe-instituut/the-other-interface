@@ -50,11 +50,17 @@ export interface ElasticsearchResult {
   }
 }
 
+interface ElasticSearchPaginationArgs {
+  from: number
+  size: number
+}
+
 @Injectable()
 export class TriplyService {
   private readonly endpointBaseURL: string
   private readonly apiKey: string
   private readonly baseQueryPath: string
+  private readonly elasticSearchURL: string
 
   public constructor(
     private configService: ConfigService<Config>,
@@ -68,10 +74,13 @@ export class TriplyService {
 
     if (env === 'development' || env === 'staging') {
       this.baseQueryPath = '/queries/the-other-interface-testing'
+      this.elasticSearchURL = `${this.endpointBaseURL}/datasets/the-other-interface-acceptance/knowledge-graph/services/knowledge-graph/_search`
     } else if (env === 'acceptance') {
       this.baseQueryPath = '/queries/the-other-interface-acceptance'
+      this.elasticSearchURL = `${this.endpointBaseURL}/datasets/the-other-interface-acceptance/knowledge-graph/services/knowledge-graph/_search`
     } else {
       this.baseQueryPath = '/queries/the-other-interface'
+      this.elasticSearchURL = `${this.endpointBaseURL}/datasets/the-other-interface/knowledge-graph/services/knowledge-graph-ES/_search`
     }
   }
 
@@ -109,9 +118,31 @@ export class TriplyService {
     return res
   }
 
+  public async queryElasticSearchData(
+    queryString: string,
+    paginationArgs: ElasticSearchPaginationArgs
+  ) {
+    const elasticQuery = JSON.stringify({
+      from: paginationArgs.from,
+      size: paginationArgs.size,
+      query: queryString,
+    })
+
+    const res = await this.post<ElasticsearchResult>(new URL(this.elasticSearchURL), elasticQuery)
+
+    return res.data
+  }
+
   private fetch<ReturnDataType>(endpoint: URL) {
     const headers = { Authorization: `Bearer ${this.apiKey}` }
     const res = this.httpService.get<ReturnDataType[]>(endpoint.toString(), { headers })
+
+    return lastValueFrom(res)
+  }
+
+  private post<ReturnDataType>(endpoint: URL, body: string) {
+    const headers = { Authorization: `Bearer ${this.apiKey}` }
+    const res = this.httpService.post<ReturnDataType>(endpoint.toString(), body, { headers })
 
     return lastValueFrom(res)
   }
@@ -151,41 +182,5 @@ export class TriplyService {
       )} in response ${JSON.stringify(responseData)}`
       this.rollbarService.logError(message)
     }
-  }
-
-  public async postQueryTriplyData(
-    endpointArg: string,
-    paginationArgs?: PaginationArgs,
-    searchParams?: Record<string, string>
-  ): Promise<ElasticsearchResult> {
-    const endpoint = this.getEndpointForArg(endpointArg)
-
-    if (paginationArgs) {
-      endpoint.searchParams.append(
-        'page',
-        paginationArgs.page ? paginationArgs.page.toString() : this.defaultPage
-      )
-      endpoint.searchParams.append(
-        'pageSize',
-        paginationArgs.pageSize ? paginationArgs.pageSize.toString() : this.defaultPageSize
-      )
-    }
-
-    if (searchParams) {
-      for (const [key, value] of Object.entries(searchParams)) {
-        endpoint.searchParams.append(key, value)
-      }
-    }
-
-    const res = await this.postFetch<ElasticsearchResult>(endpoint)
-
-    return res.data
-  }
-
-  private async postFetch<ReturnDataType>(endpoint: URL, body?: Record<string, unknown>) {
-    const headers = { Authorization: `Bearer ${this.apiKey}` }
-    const res = this.httpService.post<ReturnDataType>(endpoint.toString(), body, { headers })
-
-    return lastValueFrom(res)
   }
 }

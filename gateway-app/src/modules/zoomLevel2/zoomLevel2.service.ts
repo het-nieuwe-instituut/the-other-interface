@@ -5,7 +5,12 @@ import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { ElasticsearchResult, KeysToVerify, TriplyService } from '../triply/triply.service'
 import { TriplyUtils } from '../triply/triply.utils'
 import { getUniqueById } from '../util/helpers'
-import { PublicationState, Sdk, StoriesQuery } from 'src/generated/strapi-sdk'
+import {
+  PublicationState,
+  Sdk,
+  StoriesIdsQueryVariables,
+  StoriesQuery,
+} from 'src/generated/strapi-sdk'
 import { StrapiUtils } from '../strapi/strapi.utils'
 import { SearchAllResultType } from './zoomLevel2.type'
 
@@ -25,10 +30,6 @@ const resultDataKeys: KeysToVerify<ResultData> = {
 
 @Injectable()
 export class ZoomLevel2Service {
-  private readonly SearchByAllEndpoint =
-    'https://api.collectiedata.hetnieuweinstituut.nl/datasets/the-other-interface-acceptance/knowledge-graph/services/knowledge-graph/_search'
-  private readonly SearchByAllAmountEndpoint = 'textSearchCount/run?'
-
   public constructor(
     @Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk,
     private readonly triplyService: TriplyService
@@ -77,24 +78,22 @@ export class ZoomLevel2Service {
     const storiesPerPage = 2
     const triplyPerPage = 10
 
-    const storyFilters = {
-      title: {
-        containsi: text,
-      },
+    const elasticQuery = text // TODO: replace this with a proper elastic search query
+    const storyQueryOptions: StoriesIdsQueryVariables = {
+      filters: { title: { containsi: text } },
+      locale,
+      publicationState: PublicationState.Live,
     }
 
     const totalStories = await this.strapiGqlSdk.storiesIds({
-      filters: storyFilters,
-      locale,
-      publicationState: PublicationState.Live,
+      ...storyQueryOptions,
       pagination: { page: 1, pageSize: 1 },
     })
 
-    const totalTriply = await this.triplyService.postQueryTriplyData(
-      this.SearchByAllEndpoint,
-      { page: 1, pageSize: 1 },
-      text ? { text } : undefined
-    )
+    const totalTriply = await this.triplyService.queryElasticSearchData(elasticQuery, {
+      from: 0,
+      size: 0,
+    })
 
     const totalStoriesCounter = totalStories?.stories?.meta?.pagination?.total ?? 0
     const totalTriplyCounter = totalTriply.hits.total.value ?? 0
@@ -118,29 +117,21 @@ export class ZoomLevel2Service {
 
     // Calculate correct pages based on adjusted fetches
     const storyPage = Math.ceil(offsetStories / storiesPerPage) + 1
-    const triplyPage = Math.ceil(offsetTriply / triplyPerPage) + 1
 
     const storiesResult =
       storiesToFetch > 0
         ? await this.strapiGqlSdk.stories({
-            filters: {
-              title: {
-                containsi: text,
-              },
-            },
-            locale,
-            publicationState: PublicationState.Live,
+            ...storyQueryOptions,
             pagination: { page: storyPage, pageSize: storiesToFetch },
           })
         : undefined
 
     const triplyResult =
       triplyToFetch > 0
-        ? await this.triplyService.postQueryTriplyData(
-            this.SearchByAllEndpoint,
-            { page: triplyPage, pageSize: triplyToFetch },
-            text ? { text } : undefined
-          )
+        ? await this.triplyService.queryElasticSearchData(elasticQuery, {
+            from: offsetTriply,
+            size: triplyToFetch,
+          })
         : undefined
 
     const formattedStories =
@@ -152,21 +143,6 @@ export class ZoomLevel2Service {
       page: paginationArgs.page,
       nodes: [...formattedStories, ...formattedTriplyResult],
       total: totalStoriesCounter + totalTriplyCounter,
-    }
-  }
-
-  public async getSearchByAllCategoriesAmount(text: string) {
-    const countResult = await this.triplyService.queryTriplyData<{ count?: string }>(
-      this.SearchByAllAmountEndpoint,
-      { count: true },
-      undefined,
-      text ? { text } : undefined
-    )
-
-    const total = countResult?.data.pop()?.count ?? '0'
-
-    return {
-      total,
     }
   }
 
