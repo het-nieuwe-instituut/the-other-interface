@@ -1,7 +1,7 @@
 import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
 import { Position } from '@/features/shared/types/position'
 import { GridItem, Flex } from '@chakra-ui/react'
-import { CloudCategory } from '@/features/shared/utils/categories'
+import { Category } from '@/features/shared/utils/categories'
 import { Text } from '@chakra-ui/react'
 import { RecordText } from '../RecordText'
 import { useRouter } from 'next/navigation'
@@ -17,7 +17,7 @@ type Props = {
 
 type RecordProps = ZoomLevel2Type & {
   position: Position
-  category: CloudCategory
+  category: Category
 }
 
 export const Record: React.FC<Props> = ({ record }) => {
