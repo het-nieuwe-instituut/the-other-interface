@@ -1,14 +1,7 @@
 import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/SearchFilterBox'
 import { usePresenter } from './usePresenter'
 import { Box } from '@chakra-ui/react'
-
-export interface Filter {
-  field: string
-  value: string
-  id: string
-}
-
-export type FilterArray = Filter[]
+import { Filter } from '@/features/shared/hooks/search/useFilters'
 
 const mockData = [
   {

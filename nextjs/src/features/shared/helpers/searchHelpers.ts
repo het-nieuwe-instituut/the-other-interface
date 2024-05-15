@@ -1,5 +1,5 @@
-import { FilterArray } from '../Suggestions/Suggestions'
 import * as LZString from 'lz-string'
+import { FilterArray } from '../hooks/search/useFilters'
 
 const encodeFilters = (filters: FilterArray): string => {
   const json = JSON.stringify(filters)

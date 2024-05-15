@@ -8,17 +8,17 @@ import { sharedActions } from '@/features/shared/stores/shared.store'
 import { usePathname, useRouter } from 'next/navigation'
 import { useCallback, useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Filter, FilterArray } from '../Suggestions/Suggestions'
-import { decodeFilters, encodeFilters } from './searchHelpers'
 import { useEnterKey } from '@/features/shared/hooks/ui/useEnterKey'
 import { useOutsideClick } from '@/features/shared/hooks/ui/useOutsideClick'
+import { useFilters } from '@/features/shared/hooks/search/useFilters'
 
 export const usePresenter = (isNoActiveSearch?: boolean) => {
   const router = useRouter()
   const pathname = usePathname()
   const dispatch = useDispatch()
 
-  const { lang, search, isSearchResult, filters } = useZoom2Params()
+  const { lang, search, isSearchResult } = useZoom2Params()
+  const { selectedFilters, selectFilter, clearFilters, encodedFilters } = useFilters()
 
   const filterInputRef = useRef<HTMLInputElement>(null)
   const searchBarRef = useRef<HTMLDivElement>(null)
@@ -32,7 +32,6 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
   const { total } = data || { total: 0 }
 
   const [inputValue, setInputValue] = useState('')
-  const [selectedFilters, setSelectedFilters] = useState<FilterArray>([])
 
   const resetSearchFilters = useCallback(() => {
     dispatch(sharedActions.searchCategory({ searchCategory: pageCategory }))
@@ -52,7 +51,6 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
   )
 
   const handleGoClick = useCallback(() => {
-    const encodedFilters = encodeFilters(selectedFilters)
     const searchParam = inputValue ? `&search=${inputValue}` : ''
     const filtersParam = encodedFilters ? `&filters=${encodedFilters}` : ''
     let url = `/landingpage?category=${searchCategory}${searchParam}${filtersParam}&searchResult=true`
@@ -65,13 +63,6 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
   useEnterKey(handleGoClick)
   useOutsideClick(searchBarRef, handleSearchModeClose)
 
-  useEffect(() => {
-    if (typeof filters === 'string') {
-      const decodedFilters: FilterArray = decodeFilters(filters)
-      setSelectedFilters(decodedFilters)
-    }
-  }, [filters])
-
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const newValue = e.target.value
@@ -80,18 +71,6 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
     },
     [dispatch]
   )
-
-  const handleSelectFilter = useCallback(
-    (filter: Filter) => {
-      setSelectedFilters([...selectedFilters, filter])
-      dispatch(sharedActions.categorySuggestionsOpen({ categorySuggestionsOpen: false }))
-    },
-    [selectedFilters, dispatch]
-  )
-
-  const clearAllFilters = () => {
-    setSelectedFilters([])
-  }
 
   useEffect(() => {
     dispatch(sharedActions.searchCategory({ searchCategory: pageCategory }))
@@ -119,7 +98,7 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
 
   const handleClearAll = useCallback(() => {
     setInputValue('')
-    clearAllFilters()
+    clearFilters()
     dispatch(sharedActions.categorySuggestionsOpen({ categorySuggestionsOpen: false }))
     filterInputRef.current?.focus()
   }, [dispatch, pageCategory])
@@ -147,6 +126,6 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
     handleClearAll,
     isUserTyping: !!inputValue,
     selectedFilters,
-    handleSelectFilter,
+    handleSelectFilter: selectFilter,
   }
 }

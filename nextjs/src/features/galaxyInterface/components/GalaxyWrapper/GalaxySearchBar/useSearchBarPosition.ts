@@ -1,5 +1,5 @@
+import { FilterArray } from '@/features/shared/hooks/search/useFilters'
 import { useState, useRef, useEffect } from 'react'
-import { FilterArray } from '../Suggestions/Suggestions'
 
 export const useSearchBarPosition = (selectedFilters: FilterArray) => {
   const [offset, setOffset] = useState(0)
