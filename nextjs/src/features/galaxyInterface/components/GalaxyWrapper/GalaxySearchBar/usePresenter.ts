@@ -10,6 +10,7 @@ import { useCallback, useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Filter, FilterArray } from '../Suggestions/Suggestions'
 import { decodeFilters, encodeFilters } from './searchHelpers'
+import { useEnterKey } from '@/features/shared/hooks/ui/useEnterKey'
 
 export const usePresenter = (isNoActiveSearch?: boolean) => {
   const router = useRouter()
@@ -31,6 +32,36 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
 
   const [inputValue, setInputValue] = useState('')
   const [selectedFilters, setSelectedFilters] = useState<FilterArray>([])
+
+  const resetSearchFilters = useCallback(() => {
+    dispatch(sharedActions.searchCategory({ searchCategory: pageCategory }))
+    setInputValue(search || '')
+  }, [search, pageCategory, dispatch])
+
+  const handleSearchModeClose = useCallback(
+    (resetFilters = true) => {
+      dispatch(sharedActions.searchModeActive({ isSearchModeActive: false }))
+      dispatch(sharedActions.categorySuggestionsOpen({ categorySuggestionsOpen: false }))
+
+      if (resetFilters) {
+        resetSearchFilters()
+      }
+    },
+    [dispatch, resetSearchFilters]
+  )
+
+  const handleGoClick = useCallback(() => {
+    const encodedFilters = encodeFilters(selectedFilters)
+    const searchParam = inputValue ? `&search=${inputValue}` : ''
+    const filtersParam = encodedFilters ? `&filters=${encodedFilters}` : ''
+    let url = `/landingpage?category=${searchCategory}${searchParam}${filtersParam}&searchResult=true`
+    url = addLocaleToUrl(url, lang)
+    router.push(url)
+
+    handleSearchModeClose(false)
+  }, [inputValue, searchCategory, router, handleSearchModeClose, lang, selectedFilters])
+
+  useEnterKey(handleGoClick)
 
   useEffect(() => {
     if (typeof filters === 'string') {
@@ -84,54 +115,12 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
     }
   }, [isNoActiveSearch, handleSearchModeOpen, isSearchResult])
 
-  const resetSearchFilters = useCallback(() => {
-    dispatch(sharedActions.searchCategory({ searchCategory: pageCategory }))
-    setInputValue(search || '')
-  }, [search, pageCategory, dispatch])
-
-  const handleSearchModeClose = useCallback(
-    (resetFilters = true) => {
-      dispatch(sharedActions.searchModeActive({ isSearchModeActive: false }))
-      dispatch(sharedActions.categorySuggestionsOpen({ categorySuggestionsOpen: false }))
-
-      if (resetFilters) {
-        resetSearchFilters()
-      }
-    },
-    [dispatch, resetSearchFilters]
-  )
-
-  const handleGoClick = useCallback(() => {
-    const encodedFilters = encodeFilters(selectedFilters)
-    const searchParam = inputValue ? `&search=${inputValue}` : ''
-    const filtersParam = encodedFilters ? `&filters=${encodedFilters}` : ''
-    let url = `/landingpage?category=${searchCategory}${searchParam}${filtersParam}&searchResult=true`
-    url = addLocaleToUrl(url, lang)
-    router.push(url)
-
-    handleSearchModeClose(false)
-  }, [inputValue, searchCategory, router, handleSearchModeClose, lang, selectedFilters])
-
   const handleClearAll = useCallback(() => {
     setInputValue('')
     clearAllFilters()
     dispatch(sharedActions.categorySuggestionsOpen({ categorySuggestionsOpen: false }))
     filterInputRef.current?.focus()
   }, [dispatch, pageCategory])
-
-  useEffect(() => {
-    const handleEnterPress = (e: KeyboardEvent) => {
-      if (e.key === 'Enter') {
-        handleGoClick()
-      }
-    }
-
-    document.addEventListener('keydown', handleEnterPress)
-
-    return () => {
-      document.removeEventListener('keydown', handleEnterPress)
-    }
-  }, [handleGoClick])
 
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
