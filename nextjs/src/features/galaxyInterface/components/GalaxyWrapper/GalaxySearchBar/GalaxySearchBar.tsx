@@ -11,6 +11,7 @@ import { Suggestions } from '../Suggestions/Suggestions'
 import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/SearchFilterBox'
 import { Wrap, WrapItem } from '@chakra-ui/react'
 import { useSearchBarPosition } from './useSearchBarPosition'
+import CloseIconSmall from '@/icons/close-icon-small.svg'
 
 type Props = {
   total?: number
@@ -77,7 +78,11 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) =>
         </WrapItem>
         {selectedFilters.map(filter => (
           <WrapItem key={filter.id} maxWidth={'100%'}>
-            <SearchFilterBox category={filter.field} subCategory={filter.value} />
+            <SearchFilterBox
+              category={filter.field}
+              subCategory={filter.value}
+              actionButton={<CloseIconSmall />}
+            />
           </WrapItem>
         ))}
         <WrapItem minWidth="70px" height={'50px'} flexGrow={1}>

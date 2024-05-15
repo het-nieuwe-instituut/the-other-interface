@@ -4,6 +4,7 @@ interface Props {
   category?: string
   subCategory?: string
   actionButton?: React.ReactNode
+  actionButtonClick?: () => void
   zIndex?: number
   onClick?: () => void
 }
@@ -14,6 +15,7 @@ export const SearchFilterBox: React.FC<Props> = ({
   actionButton,
   onClick,
   zIndex,
+  actionButtonClick,
 }) => {
   return (
     <GridItem
@@ -41,7 +43,7 @@ export const SearchFilterBox: React.FC<Props> = ({
         </Text>
 
         {actionButton && (
-          <Box position="relative" width="7px" height="7px" cursor="pointer">
+          <Box position="relative" width="8px" height="8px" cursor="pointer">
             {actionButton}
           </Box>
         )}
