@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback, RefObject } from 'react'
 import { useDispatch } from 'react-redux'
 import { sharedActions } from '@/features/shared/stores/shared.store'
 import { decodeFilters, encodeFilters } from '@/features/shared/helpers/searchHelpers'
@@ -13,7 +13,11 @@ export interface Filter {
 
 export type FilterArray = Filter[]
 
-export const useFilters = () => {
+interface UseFiltersProps {
+  onSelectFilter?: () => void
+}
+
+export const useFilters = ({ onSelectFilter }: UseFiltersProps = {}) => {
   const { filters } = useZoom2Params()
   const [selectedFilters, setSelectedFilters] = useState<FilterArray>([])
   const dispatch = useDispatch()
@@ -29,6 +33,9 @@ export const useFilters = () => {
     (filter: Filter) => {
       setSelectedFilters([...selectedFilters, filter])
       dispatch(sharedActions.categorySuggestionsOpen({ categorySuggestionsOpen: false }))
+      if (onSelectFilter) {
+        onSelectFilter()
+      }
     },
     [selectedFilters, dispatch]
   )

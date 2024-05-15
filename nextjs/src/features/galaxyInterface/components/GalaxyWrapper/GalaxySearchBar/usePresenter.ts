@@ -18,13 +18,20 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
   const dispatch = useDispatch()
 
   const { lang, search, isSearchResult } = useZoom2Params()
-  const { selectedFilters, selectFilter, clearFilters, encodedFilters } = useFilters()
 
   const filterInputRef = useRef<HTMLInputElement>(null)
   const searchBarRef = useRef<HTMLDivElement>(null)
   const { isSearchModeActive, searchCategory, isCategorySuggestionsOpen } = useSelector(
     (state: State) => state.shared
   )
+
+  const onSelectFilter = () => {
+    filterInputRef.current?.focus()
+  }
+
+  const { selectedFilters, selectFilter, clearFilters, encodedFilters } = useFilters({
+    onSelectFilter,
+  })
 
   const { t } = useTypeSafeTranslation('category')
   const { pageCategory } = usePageCategory()
