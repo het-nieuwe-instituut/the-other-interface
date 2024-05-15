@@ -14,6 +14,7 @@ import ReactQueryProvider from '@/features/shared/components/providers/ReactQuer
 import BaseElementWrapper from '@/features/shared/components/wrappers/BaseElementsWrapper'
 import { draftMode } from 'next/headers'
 import { PreviewBlock } from '@/features/preview/PreviewBlock'
+import { ReduxDraftModeSync } from '@/features/shared/components/Redux/ReduxDraftModeSync'
 
 function MyApp({ children }: { children: React.ReactNode }) {
   const { isEnabled } = draftMode()
@@ -45,6 +46,7 @@ function MyApp({ children }: { children: React.ReactNode }) {
                   <>
                     <AppHead />
                     <TestMenu />
+                    <ReduxDraftModeSync isDraftMode={isEnabled} />
                     {children}
                     <BaseElementWrapper />
                   </>
