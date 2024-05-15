@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Filter, FilterArray } from '../Suggestions/Suggestions'
 import { decodeFilters, encodeFilters } from './searchHelpers'
 import { useEnterKey } from '@/features/shared/hooks/ui/useEnterKey'
+import { useOutsideClick } from '@/features/shared/hooks/ui/useOutsideClick'
 
 export const usePresenter = (isNoActiveSearch?: boolean) => {
   const router = useRouter()
@@ -62,6 +63,7 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
   }, [inputValue, searchCategory, router, handleSearchModeClose, lang, selectedFilters])
 
   useEnterKey(handleGoClick)
+  useOutsideClick(searchBarRef, handleSearchModeClose)
 
   useEffect(() => {
     if (typeof filters === 'string') {
@@ -121,20 +123,6 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
     dispatch(sharedActions.categorySuggestionsOpen({ categorySuggestionsOpen: false }))
     filterInputRef.current?.focus()
   }, [dispatch, pageCategory])
-
-  useEffect(() => {
-    const handleOutsideClick = (event: MouseEvent) => {
-      if (searchBarRef.current && !searchBarRef.current.contains(event.target as Node)) {
-        handleSearchModeClose()
-      }
-    }
-
-    document.addEventListener('mousedown', handleOutsideClick)
-
-    return () => {
-      document.removeEventListener('mousedown', handleOutsideClick)
-    }
-  }, [handleSearchModeClose])
 
   return {
     category: searchCategory,
