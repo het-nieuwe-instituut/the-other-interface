@@ -1,12 +1,14 @@
 import { FilterArray } from '@/features/shared/hooks/search/useFilters'
-import { useState, useRef, useEffect } from 'react'
+import { useWindowSize } from '@/features/shared/hooks/ui/useWindowSize'
+import { useState, useRef, useEffect, useCallback } from 'react'
 
 export const useSearchBarPosition = (selectedFilters: FilterArray) => {
   const [offset, setOffset] = useState(0)
   const [searchBarHeight, setSearchBarHeight] = useState(0)
   const wrapRef = useRef<HTMLDivElement>(null)
+  const { width } = useWindowSize()
 
-  const calculateOffset = () => {
+  const calculateOffset = useCallback(() => {
     if (wrapRef.current) {
       const defaultOffset = 51
       const height = wrapRef.current.scrollHeight
@@ -16,25 +18,11 @@ export const useSearchBarPosition = (selectedFilters: FilterArray) => {
         setOffset(newOffset)
       }
     }
-  }
-
-  useEffect(() => {
-    calculateOffset()
-  }, [selectedFilters])
-
-  useEffect(() => {
-    const handleResize = () => {
-      calculateOffset()
-    }
-
-    window.addEventListener('resize', handleResize)
-
-    calculateOffset()
-
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
   }, [])
+
+  useEffect(() => {
+    calculateOffset()
+  }, [selectedFilters, calculateOffset, width])
 
   return {
     offset,
