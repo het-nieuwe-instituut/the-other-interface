@@ -3,7 +3,7 @@ import { GoBack } from './GoBackButton'
 import { notFound } from 'next/navigation'
 
 export default function Layout({ children }: PropsWithChildren) {
-  if (process.env.NODE_ENV !== 'development') {
+  if (process.env.NEXT_PUBLIC_ENV === 'production') {
     return notFound()
   }
 
