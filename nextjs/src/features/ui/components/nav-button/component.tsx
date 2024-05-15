@@ -11,10 +11,10 @@ export interface NavButtonProps
     VariantProps<typeof NavButtonVariants> {}
 
 const NavButton = React.forwardRef<HTMLButtonElement, NavButtonProps>(
-  ({ className, state, variant, ...props }, ref) => {
+  ({ className, state, color, variant, ...props }, ref) => {
     return (
       <Button
-        className={cn(NavButtonVariants({ className, variant, state }))}
+        className={cn(NavButtonVariants({ className, variant, color, state }))}
         state={state}
         ref={ref}
         {...props}

@@ -32,6 +32,9 @@ export const sharedSlice = createSlice({
     ) => {
       state.isMenuOpen = action.payload?.isMenuOpen ?? state.isMenuOpen
     },
+    /**
+     * @deprecated DO NOT USE ON NEW FEATURES - this only exists for backwards compatibility reasons. Better solution would be to pass isDraftMode directly when the store is setup client side or simply keep track of it in the url bar
+     */
     draftMode: (
       state,
       action: PayloadAction<{

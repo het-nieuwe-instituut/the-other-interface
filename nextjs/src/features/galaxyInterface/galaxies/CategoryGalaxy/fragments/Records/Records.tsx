@@ -8,6 +8,7 @@ import { GALAXY_EDITORIAL_LAYER_PART } from '@/features/shared/constants/mainCon
 import { Loader } from '@/features/galaxyInterface/components/Loader/Loader'
 import { RecordsGrid } from '../RecordsGrid'
 import { LANDINGPAGE_Z_INDEXES } from '../../../MainGalaxy/fragments/constants'
+import { Category } from '@/features/shared/utils/categories'
 
 const currentPageFadeIn = keyframes({ from: { opacity: 0 }, to: { opacity: 1 } })
 const nextPageFadeIn = keyframes({ from: { opacity: 0 }, to: { opacity: 0.2 } })
@@ -56,7 +57,7 @@ export const Records: React.FC<Props> = ({ pageAmount }) => {
         }}
       >
         {currentPositionedRecords?.map(record => (
-          <Record key={record.key} record={record} />
+          <Record key={record.key} record={{ ...record, category: record.category as Category }} />
         ))}
       </RecordsGrid>
 
@@ -69,7 +70,7 @@ export const Records: React.FC<Props> = ({ pageAmount }) => {
         }}
       >
         {nextPositionedRecords?.map(record => (
-          <Record key={record.key} record={record} />
+          <Record key={record.key} record={{ ...record, category: record.category as Category }} />
         ))}
       </RecordsGrid>
     </Box>
