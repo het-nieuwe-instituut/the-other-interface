@@ -20,15 +20,13 @@ export const CategoryFilter: React.FC<Props> = ({ onClick, isOpen, selectedOptio
       } ${'cursor-pointer'} h-[52px] max-w-full border border-pink.100 px-2`}
       onClick={onClick}
     >
-      <div className="relative max-w-full flex items-center justify-between pt-1 pb-1">
-        <span className="font-social-large text-[11px] leading-[11px] truncate">
-          {t('category')}
-        </span>
+      <div className="relative max-w-full flex items-center justify-between pt-1 pb-2">
+        <p className="font-social-large text-[11px] leading-[11px] truncate">{t('category')}</p>
         <ActionButton>{<ChangeButton isOpen={isOpen} />}</ActionButton>
       </div>
-      <span className="font-social-large text-[18px] leading-[18px] truncate text-xl">
+      <p className="font-social-large text-[18px] leading-[18px] truncate text-xl">
         {selectedOption}
-      </span>
+      </p>
     </div>
   )
 }

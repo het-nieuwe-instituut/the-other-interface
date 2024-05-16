@@ -36,11 +36,15 @@ export const SearchFilterBox: React.FC<Props> = ({
         maxW={'100%'}
         alignItems={'center'}
         justifyContent={'space-between'}
-        className={'pt-1 pb-1'}
+        className={'pt-1 pb-2'}
       >
-        <span className={'font-social-large text-[11px] leading-[11px] text-blue.100 truncate'}>
+        <Text
+          className={'font-social-large text-[11px] leading-[11px] text-blue.100'}
+          isTruncated
+          as={'span'}
+        >
           {category}
-        </span>
+        </Text>
 
         {actionButton && (
           <ActionButton id={id} onClick={actionButtonClick}>
@@ -49,7 +53,7 @@ export const SearchFilterBox: React.FC<Props> = ({
         )}
       </Flex>
 
-      <Text className={'font-social-large text-[18px] leading-[18px] truncate text-xl'}>
+      <Text className={'font-social-large text-[18px] leading-[18px] truncate text-xl'} isTruncated>
         {subCategory}
       </Text>
     </GridItem>

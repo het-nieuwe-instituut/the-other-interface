@@ -63,7 +63,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) =>
       </Flex>
 
       <Wrap spacing="0" ref={wrapRef}>
-        <WrapItem className="pt-1 mr-1">
+        <WrapItem className="pt-1 mr-2">
           <CategoryFilter
             onClick={() => setIsCategorySuggestionsOpen(!isCategorySuggestionsOpen)}
             isOpen={isCategorySuggestionsOpen}
@@ -71,7 +71,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) =>
           />
         </WrapItem>
         {selectedFilters.map(filter => (
-          <WrapItem key={filter.id} maxWidth={'100%'} className="h-[60px] py-1">
+          <WrapItem key={filter.id} maxWidth={'100%'} className="h-[60px] py-1 mr-2">
             <SearchFilterBox
               category={filter.field}
               subCategory={filter.value}
