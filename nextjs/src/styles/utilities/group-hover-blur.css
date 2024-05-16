@@ -5,7 +5,11 @@
     <button className="group-hover-blur-item" />  <--- when hovering over this element, all others will blur out
 </div>
 */
+.group-hover-blur {
+  transition: opacity 0.5s ease-in-out;
+}
 .group-hover-blur:has(.group-hover-blur-item:hover)
   .group-hover-blur-item:not(.group-hover-blur-item:hover) {
   filter: blur(6px);
+  opacity: 0.2;
 }
