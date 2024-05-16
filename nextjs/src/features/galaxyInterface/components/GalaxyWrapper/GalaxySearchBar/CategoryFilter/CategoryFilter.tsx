@@ -1,4 +1,5 @@
 import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/SearchFilterBox'
+import ActionButton from '@/features/shared/components/SearchFilterBox/buttons/ActionButton/ActionButton'
 import { ChangeButton } from '@/features/shared/components/SearchFilterBox/buttons/ChangeButton/ChangeButton'
 import { FOOTER_Z_INDEX } from '@/features/shared/constants/mainConstants'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
@@ -13,12 +14,21 @@ export const CategoryFilter: React.FC<Props> = ({ onClick, isOpen, selectedOptio
   const { t } = useTypeSafeTranslation('category')
 
   return (
-    <SearchFilterBox
-      zIndex={FOOTER_Z_INDEX + 1}
-      category={t('category')}
-      subCategory={selectedOption}
+    <div
+      className={`bg-transparent text-pink.100 w-fit z-${
+        FOOTER_Z_INDEX + 1
+      } ${'cursor-pointer'} h-[52px] max-w-full border border-pink.100 px-2`}
       onClick={onClick}
-      actionButton={<ChangeButton isOpen={isOpen} />}
-    />
+    >
+      <div className="relative max-w-full flex items-center justify-between pt-1 pb-1">
+        <span className="font-social-large text-[11px] leading-[11px] truncate">
+          {t('category')}
+        </span>
+        <ActionButton>{<ChangeButton isOpen={isOpen} />}</ActionButton>
+      </div>
+      <span className="font-social-large text-[18px] leading-[18px] truncate text-xl">
+        {selectedOption}
+      </span>
+    </div>
   )
 }

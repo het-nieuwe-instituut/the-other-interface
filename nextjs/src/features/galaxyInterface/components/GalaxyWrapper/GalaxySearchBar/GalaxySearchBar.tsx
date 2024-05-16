@@ -46,31 +46,24 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) =>
       position="relative"
       height={'auto'}
       templateColumns="145px minmax(20px, 1fr) minmax(95px, auto)"
-      gap="15px"
+      gap="16px"
       borderRadius={isCategorySuggestionsOpen ? '0 0 5px 5px' : '5px'}
       backgroundColor="blueAlpha.100"
-      p="5px 15px"
       zIndex={FOOTER_Z_INDEX}
       onClick={!isSearchModeActive ? handleSearchModeOpen : undefined}
       cursor={!isSearchModeActive ? 'pointer' : 'default'}
       ref={searchBarRef}
       color="pinkAlpha.100"
-      bottom={offset}
+      bottom={`${offset}px`}
+      className="px-4"
     >
-      <Flex
-        flexDirection="column"
-        justifyContent="center"
-        alignItems="flex-start"
-        height="50px"
-        maxHeight={'50px'}
-        alignSelf={'flex-end'}
-      >
+      <Flex flexDirection="column" alignItems="flex-start" className={'self-end h-[60px] pt-1'}>
         <Text textStyle="socialLarge.xl">{total ? total : searchResultAmount}</Text>
         <Text textStyle="socialLarge.xl">{t('resultsFor')}</Text>
       </Flex>
 
-      <Wrap spacing="8px" ref={wrapRef}>
-        <WrapItem>
+      <Wrap spacing="0" ref={wrapRef}>
+        <WrapItem className="pt-1 mr-1">
           <CategoryFilter
             onClick={() => setIsCategorySuggestionsOpen(!isCategorySuggestionsOpen)}
             isOpen={isCategorySuggestionsOpen}
@@ -78,7 +71,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) =>
           />
         </WrapItem>
         {selectedFilters.map(filter => (
-          <WrapItem key={filter.id} maxWidth={'100%'}>
+          <WrapItem key={filter.id} maxWidth={'100%'} className="h-[60px] py-1">
             <SearchFilterBox
               category={filter.field}
               subCategory={filter.value}
@@ -88,7 +81,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) =>
             />
           </WrapItem>
         ))}
-        <WrapItem minWidth="70px" height={'50px'} flexGrow={1}>
+        <WrapItem minWidth="70px" flexGrow={1} className={'h-[60px] py-1 pl-2'}>
           <FilterInput
             inputRef={filterInputRef}
             onFocus={handleSearchModeOpen}
@@ -98,13 +91,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) =>
         </WrapItem>
       </Wrap>
 
-      <Flex
-        gap="12px"
-        alignItems="center"
-        justifyContent="flex-end"
-        height={'50px'}
-        alignSelf={'flex-end'}
-      >
+      <Flex gap="12px" alignItems="center" className={'self-end h-[60px] pt-1'}>
         {isSearchModeActive ? (
           <>
             <GoButton handleClick={handleGoClick} />

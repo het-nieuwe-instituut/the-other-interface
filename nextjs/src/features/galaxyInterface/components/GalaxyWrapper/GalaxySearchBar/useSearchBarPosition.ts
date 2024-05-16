@@ -10,7 +10,7 @@ export const useSearchBarPosition = (selectedFilters: FilterArray) => {
 
   const calculateOffset = useCallback(() => {
     if (wrapRef.current) {
-      const defaultOffset = 51
+      const defaultOffset = 60
       const height = wrapRef.current.scrollHeight
       const newOffset = height - defaultOffset
       setSearchBarHeight(height)

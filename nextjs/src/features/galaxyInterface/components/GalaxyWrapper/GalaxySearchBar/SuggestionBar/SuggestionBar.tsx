@@ -8,7 +8,7 @@ interface Props {
   offset?: number
 }
 
-const SUGGESTION_BAR_PADDING = 10
+const SUGGESTION_BAR_PADDING = 0
 
 export const SuggestionBar: React.FC<Props> = ({
   isOpen = false,
