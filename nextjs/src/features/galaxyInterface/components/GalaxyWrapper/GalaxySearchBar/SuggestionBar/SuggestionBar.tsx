@@ -1,17 +1,25 @@
 import { FOOTER_Z_INDEX } from '@/features/shared/constants/mainConstants'
-import { Flex, Box, Grid } from '@chakra-ui/react'
+import { Flex, Box, Grid, Text, Wrap } from '@chakra-ui/react'
 
 interface Props {
   isOpen?: boolean
+  label?: string
   children?: React.ReactNode
+  offset?: number
 }
 
-export const SuggestionBar: React.FC<Props> = ({ isOpen = false, children }) => {
+const SUGGESTION_BAR_PADDING = 10
+
+export const SuggestionBar: React.FC<Props> = ({
+  isOpen = false,
+  children,
+  label = '',
+  offset,
+}) => {
   return (
     <Grid
       position={'absolute'}
-      bottom={'60px'}
-      height="75px"
+      bottom={offset ? `calc(${offset + SUGGESTION_BAR_PADDING}px)` : '60px'}
       width={'100%'}
       gap="15px"
       borderRadius={'5px 5px 0 0'}
@@ -28,7 +36,9 @@ export const SuggestionBar: React.FC<Props> = ({ isOpen = false, children }) => 
       visibility={isOpen ? 'visible' : 'hidden'}
       templateColumns={'145px 1fr'}
     >
-      <Box width="146px"></Box>
+      <Flex width="146px" pt={4}>
+        <Text textStyle="socialLarge.xl">{label}</Text>
+      </Flex>
       <Box
         overflow="hidden"
         width="100%"
@@ -36,9 +46,9 @@ export const SuggestionBar: React.FC<Props> = ({ isOpen = false, children }) => 
         visibility={isOpen ? 'visible' : 'hidden'}
         transition="opacity 0.1s ease-in-out 0.2s, visibility 0.1s ease-in-out 0.2s"
       >
-        <Flex gap="5px" width={'100%'} overflowX="auto" paddingBottom="25px" marginBottom="-25px">
+        <Wrap gap="5px" width={'100%'} paddingBottom="25px" marginBottom="-25px">
           {children}
-        </Flex>
+        </Wrap>
       </Box>
     </Grid>
   )

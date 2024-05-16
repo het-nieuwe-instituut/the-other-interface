@@ -1,4 +1,4 @@
-import { Box, Flex, Grid, Text } from '@chakra-ui/react'
+import { Flex, Grid, Text } from '@chakra-ui/react'
 import { FOOTER_Z_INDEX } from '@/features/shared/constants/mainConstants'
 import { usePresenter } from './usePresenter'
 import { CategoryFilter } from './CategoryFilter/CategoryFilter'
@@ -7,7 +7,10 @@ import { FilterInput, CloseButton } from './fragments'
 import { CategorySuggestions } from '../CategorySuggestions/CategorySuggestions'
 import { GoButton } from './fragments/GoButton'
 import { SearchButton } from './fragments/SearchButton'
-import { ClearButton } from './fragments/ClearButton'
+import { Suggestions } from '../Suggestions/Suggestions'
+import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/SearchFilterBox'
+import { Wrap, WrapItem } from '@chakra-ui/react'
+import { useSearchBarPosition } from './useSearchBarPosition'
 
 type Props = {
   total?: number
@@ -18,7 +21,6 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) =>
   const {
     category,
     isSearchModeActive,
-    handleSearchModeClose,
     handleSearchModeOpen,
     isCategorySuggestionsOpen,
     setIsCategorySuggestionsOpen,
@@ -30,77 +32,93 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) =>
     searchBarRef,
     filterInputRef,
     handleClearAll,
+    isUserTyping,
+    handleSelectFilter,
+    selectedFilters,
   } = usePresenter(isNoActiveSearch)
+
+  const { offset, searchBarHeight, wrapRef } = useSearchBarPosition(selectedFilters)
 
   return (
     <Grid
-      position={'relative'}
-      height="60px"
-      templateColumns={`145px minmax(20px, 1fr) ${
-        isSearchModeActive ? 'minmax(95px, auto)' : '23px'
-      } `}
+      position="relative"
+      height={'auto'}
+      templateColumns="145px minmax(20px, 1fr) minmax(95px, auto)"
       gap="15px"
       borderRadius={isCategorySuggestionsOpen ? '0 0 5px 5px' : '5px'}
-      transition={'border-radius 0.3s ease-in-out'}
-      backgroundColor={'blueAlpha.100'}
-      padding={'5px 15px'}
+      backgroundColor="blueAlpha.100"
+      p="5px 15px"
       zIndex={FOOTER_Z_INDEX}
       onClick={!isSearchModeActive ? handleSearchModeOpen : undefined}
       cursor={!isSearchModeActive ? 'pointer' : 'default'}
       ref={searchBarRef}
-      color={'pinkAlpha.100'}
+      color="pinkAlpha.100"
+      bottom={offset}
     >
       <Flex
-        flexDirection={'column'}
-        justifyContent={'center'}
-        alignItems={'flex-start'}
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="flex-start"
         height="50px"
-        zIndex={'inherit'}
-        whiteSpace={'nowrap'}
+        maxHeight={'50px'}
+        alignSelf={'flex-end'}
       >
         <Text textStyle="socialLarge.xl">{total ? total : searchResultAmount}</Text>
         <Text textStyle="socialLarge.xl">{t('resultsFor')}</Text>
       </Flex>
 
-      <Box overflow="hidden" height={'100%'}>
-        <Grid
-          templateColumns={'auto minmax(70px, 1fr)'}
-          gap="15px"
-          width="100%"
-          overflowX="auto"
-          paddingBottom="25px"
-          marginBottom="-25px"
-        >
+      <Wrap spacing="8px" ref={wrapRef}>
+        <WrapItem>
           <CategoryFilter
             onClick={() => setIsCategorySuggestionsOpen(!isCategorySuggestionsOpen)}
             isOpen={isCategorySuggestionsOpen}
             selectedOption={category ? t(category) : ''}
           />
+        </WrapItem>
+        {selectedFilters.map(filter => (
+          <WrapItem key={filter.id} maxWidth={'100%'}>
+            <SearchFilterBox category={filter.field} subCategory={filter.value} />
+          </WrapItem>
+        ))}
+        <WrapItem minWidth="70px" height={'50px'} flexGrow={1}>
           <FilterInput
             inputRef={filterInputRef}
             onFocus={handleSearchModeOpen}
             value={inputValue}
             onChange={handleInputChange}
           />
-        </Grid>
-      </Box>
+        </WrapItem>
+      </Wrap>
 
-      <Flex gap="12px" alignItems={'center'} justifyContent={'flex-end'} zIndex={'inherit'}>
+      <Flex
+        gap="12px"
+        alignItems="center"
+        justifyContent="flex-end"
+        height={'50px'}
+        alignSelf={'flex-end'}
+      >
         {isSearchModeActive ? (
           <>
-            <ClearButton handleClick={handleClearAll} />
             <GoButton handleClick={handleGoClick} />
-            <CloseButton handleClick={handleSearchModeClose} />
+            <CloseButton handleClick={handleClearAll} />
           </>
         ) : isNoActiveSearch ? (
           <SearchButton />
         ) : (
-          <CloseButton handleClick={handleSearchModeClose} />
+          <CloseButton handleClick={handleClearAll} />
         )}
       </Flex>
 
-      <SuggestionBar isOpen={isCategorySuggestionsOpen}>
-        <CategorySuggestions />
+      <SuggestionBar
+        isOpen={isCategorySuggestionsOpen}
+        label={isUserTyping ? t('suggestions') : ''}
+        offset={searchBarHeight}
+      >
+        {isUserTyping ? (
+          <Suggestions handleSelectFilter={handleSelectFilter} />
+        ) : (
+          <CategorySuggestions />
+        )}
       </SuggestionBar>
     </Grid>
   )
