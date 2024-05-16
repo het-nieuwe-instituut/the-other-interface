@@ -36,6 +36,7 @@ export const Record: React.FC<Props> = ({ record }) => {
           <ReadMoreTooltip
             error={isError ? t('couldNotFetchHover') : ''}
             place="bottom-start"
+            isEmpty={!data?.description && !data?.title}
             isLoading={isLoading}
             title={data?.title ?? undefined}
             description={data?.description ?? undefined}
