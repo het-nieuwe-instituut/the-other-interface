@@ -1,7 +1,7 @@
 import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
 
 import { Tooltip } from '@/features/modules/components/ToolTip/Tooltip'
-import { useZoomHoverRecordResult } from '@/features/shared/hooks/queries/useZoomHoverRecordResult'
+import { useZoomHoverRecordResultQuery } from '@/features/shared/hooks/queries/useZoomHoverRecordResultQuery'
 import { cn } from '@/features/ui/utils/cn'
 import { PositionedRecord } from '../types'
 import { RecordText } from './RecordText'
@@ -31,7 +31,7 @@ export const Record: React.FC<Props> = ({
   const { id, category, position, grid } = record
   const { recordDetails, isLoading, handleClick } = usePresenter(id, category)
   // TODO: HNIT-1833 - add in loading and error handling
-  const { data } = useZoomHoverRecordResult({ id, category })
+  const { data } = useZoomHoverRecordResultQuery({ id, category })
   const line = useCalculateLine()
 
   if (!recordDetails && !isLoading) return null

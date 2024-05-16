@@ -1,6 +1,6 @@
 import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
-import { useZoomHoverRecordResult } from '@/features/shared/hooks/queries/useZoomHoverRecordResult'
+import { useZoomHoverRecordResultQuery } from '@/features/shared/hooks/queries/useZoomHoverRecordResultQuery'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 import { Position } from '@/features/shared/types/position'
 import { CloudCategory } from '@/features/shared/utils/categories'
@@ -25,7 +25,7 @@ export const Record: React.FC<Props> = ({ record }) => {
   const { t } = useTypeSafeTranslation('category')
   const { lang, search } = useZoom2Params()
   // TODO: HNIT-1833 - add in loading and error handling
-  const { data, isLoading, isError } = useZoomHoverRecordResult({ id, category })
+  const { data, isLoading, isError } = useZoomHoverRecordResultQuery({ id, category })
 
   return (
     <div className="relative">
