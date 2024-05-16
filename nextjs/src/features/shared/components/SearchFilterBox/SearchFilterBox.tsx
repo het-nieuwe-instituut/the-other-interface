@@ -1,12 +1,14 @@
-import { Box, Flex, GridItem, Text } from '@chakra-ui/react'
+import { Flex, GridItem, Text } from '@chakra-ui/react'
+import ActionButton from './buttons/ActionButton/ActionButton'
 
 interface Props {
   category?: string
   subCategory?: string
   actionButton?: React.ReactNode
-  actionButtonClick?: () => void
+  actionButtonClick?: (id: string) => void
   zIndex?: number
   onClick?: () => void
+  id?: string
 }
 
 export const SearchFilterBox: React.FC<Props> = ({
@@ -16,6 +18,7 @@ export const SearchFilterBox: React.FC<Props> = ({
   onClick,
   zIndex,
   actionButtonClick,
+  id,
 }) => {
   return (
     <GridItem
@@ -43,9 +46,9 @@ export const SearchFilterBox: React.FC<Props> = ({
         </Text>
 
         {actionButton && (
-          <Box position="relative" width="8px" height="8px" cursor="pointer">
+          <ActionButton id={id} onClick={actionButtonClick}>
             {actionButton}
-          </Box>
+          </ActionButton>
         )}
       </Flex>
 

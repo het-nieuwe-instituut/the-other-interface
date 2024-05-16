@@ -40,6 +40,13 @@ export const useFilters = ({ onSelectFilter }: UseFiltersProps = {}) => {
     [selectedFilters, dispatch]
   )
 
+  const removeFilter = useCallback(
+    (id: string) => {
+      setSelectedFilters(selectedFilters.filter(f => f.id !== id))
+    },
+    [selectedFilters]
+  )
+
   const clearFilters = useCallback(() => {
     setSelectedFilters([])
   }, [])
@@ -49,5 +56,6 @@ export const useFilters = ({ onSelectFilter }: UseFiltersProps = {}) => {
     selectFilter,
     clearFilters,
     encodedFilters: encodeFilters(selectedFilters),
+    removeFilter,
   }
 }

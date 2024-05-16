@@ -36,6 +36,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) =>
     isUserTyping,
     handleSelectFilter,
     selectedFilters,
+    removeFilter,
   } = usePresenter(isNoActiveSearch)
 
   const { offset, searchBarHeight, wrapRef } = useSearchBarPosition(selectedFilters)
@@ -81,7 +82,9 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) =>
             <SearchFilterBox
               category={filter.field}
               subCategory={filter.value}
+              id={filter.id}
               actionButton={<CloseIconSmall />}
+              actionButtonClick={removeFilter}
             />
           </WrapItem>
         ))}

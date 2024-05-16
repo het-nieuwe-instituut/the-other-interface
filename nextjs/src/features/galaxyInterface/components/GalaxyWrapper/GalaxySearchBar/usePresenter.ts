@@ -29,7 +29,7 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
     filterInputRef.current?.focus()
   }
 
-  const { selectedFilters, selectFilter, clearFilters, encodedFilters } = useFilters({
+  const { selectedFilters, selectFilter, clearFilters, encodedFilters, removeFilter } = useFilters({
     onSelectFilter,
   })
 
@@ -134,5 +134,6 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
     isUserTyping: !!inputValue,
     selectedFilters,
     handleSelectFilter: selectFilter,
+    removeFilter,
   }
 }
