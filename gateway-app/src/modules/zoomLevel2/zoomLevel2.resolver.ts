@@ -1,13 +1,7 @@
 import { Args, Resolver, Query } from '@nestjs/graphql'
 import { PaginationArgs } from '../util/paginationArgs.type'
 import { ZoomLevel2Service } from './zoomLevel2.service'
-import {
-  ZoomLevel2Args,
-  ZoomLevel2ParentType,
-  ZoomLevel2AmountParentType,
-  SearchArgs,
-  SearchAllParentType,
-} from './zoomLevel2.type'
+import { ZoomLevel2Args, ZoomLevel2ParentType, ZoomLevel2AmountParentType } from './zoomLevel2.type'
 
 @Resolver()
 export class ZoomLevel2Resolver {
@@ -21,13 +15,5 @@ export class ZoomLevel2Resolver {
   @Query(() => ZoomLevel2AmountParentType)
   public async zoomLevel2Amount(@Args() args: ZoomLevel2Args) {
     return this.zoomLevel2Service.getDataAmount(args.entityName, args.text)
-  }
-
-  @Query(() => SearchAllParentType)
-  public async searchByAllCategories(
-    @Args() args: SearchArgs,
-    @Args() paginationArgs: PaginationArgs
-  ) {
-    return this.zoomLevel2Service.getSearchByAllCategories(args.text, args.lang, paginationArgs)
   }
 }

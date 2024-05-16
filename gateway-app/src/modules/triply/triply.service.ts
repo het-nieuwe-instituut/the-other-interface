@@ -5,6 +5,8 @@ import { lastValueFrom } from 'rxjs'
 import { Config } from 'src/config/config'
 import { PaginationArgs } from '../util/paginationArgs.type'
 import { RollbarService } from '../util/rollbar.service'
+import { SearchResultItemType } from './triply.type'
+import { TriplyUtils } from './triply.utils'
 
 /**
  * Due to typescript's limitations, we decided to use this approach to verify expected
@@ -48,11 +50,6 @@ export interface ElasticsearchResult {
       }
     }[]
   }
-}
-
-interface ElasticSearchPaginationArgs {
-  from: number
-  size: number
 }
 
 @Injectable()
@@ -118,19 +115,17 @@ export class TriplyService {
     return res
   }
 
-  public async queryElasticSearchData(
-    queryString: string,
-    paginationArgs: ElasticSearchPaginationArgs
-  ) {
+  // TODO: implement locale after ElasticSearch endpoint is updated - HNIT-1903
+  public async search(search: string, locale: string, { page = 1, pageSize = 12 }: PaginationArgs) {
     const elasticQuery = JSON.stringify({
-      from: paginationArgs.from,
-      size: paginationArgs.size,
-      query: queryString,
+      from: pageSize * (page - 1),
+      size: pageSize,
+      query: this.getQueryString(search),
     })
 
     const res = await this.post<ElasticsearchResult>(new URL(this.elasticSearchURL), elasticQuery)
 
-    return res.data
+    return res.data.hits.hits.map(h => this.formatSearchResult(h))
   }
 
   private fetch<ReturnDataType>(endpoint: URL) {
@@ -182,5 +177,58 @@ export class TriplyService {
       )} in response ${JSON.stringify(responseData)}`
       this.rollbarService.logError(message)
     }
+  }
+
+  private formatSearchResult(
+    item: ElasticsearchResult['hits']['hits'][0]
+  ): SearchResultItemType | null {
+    try {
+      const type = TriplyUtils.getEntityNameFromUri(item._id)
+      const id = TriplyUtils.getIdFromUri(item._id)
+
+      if (!id || !type) {
+        return null
+      }
+
+      const thumbnail = item._source['https://schema org/url']?.[0]
+      const title =
+        item._source['https://www ica org/standards/RiC/ontology#title']?.join(', ') || ''
+
+      return {
+        thumbnail,
+        title,
+        id,
+        type,
+      }
+    } catch (e) {
+      console.error(e)
+      return null
+    }
+  }
+
+  private getQueryString(searchText: string) {
+    const sanitizedText = this.escapeElasticsearchQuery(searchText)
+
+    return JSON.stringify({
+      query: {
+        multi_match: {
+          query: sanitizedText,
+          fields: [
+            'https://www ica org/standards/RiC/ontology#title',
+            'https://schema.org/name',
+            'http://www.w3.org/2004/02/skos/core#prefLabel',
+            'https://schema.org/name',
+          ],
+        },
+      },
+    })
+  }
+
+  private escapeElasticsearchQuery(queryString: string) {
+    // List of characters to escape in Elasticsearch queries
+    const specialCharacters = /[+\-=&|><!(){}\[\]^"~*?:\\\/]/g
+
+    // Escape each special character with a backslash
+    return queryString.replace(specialCharacters, '\\$&')
   }
 }
