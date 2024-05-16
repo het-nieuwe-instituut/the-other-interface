@@ -12,5 +12,7 @@
   "publication": "Publicatie",
   "story": "Story",
   "resultsFor": "resultaten voor",
-  "noResultsFound": "Geen resultaten gevonden"
+  "noResultsFound": "Geen resultaten gevonden",
+
+  "couldNotFetchHover": "Er ging iets fout bij het ophalen van de hover informatie, probeer het later nog eens."
 }

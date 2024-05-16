@@ -2,19 +2,23 @@
 import { cn } from '@/features/ui/utils/cn'
 import React, { CSSProperties, PropsWithChildren, useRef } from 'react'
 import { Tooltip as ReactTooltip, TooltipRefProps } from 'react-tooltip'
+import { PlacesType } from 'react-tooltip'
 import 'react-tooltip/dist/react-tooltip.css'
 
 export interface BaseTooltipProps extends PropsWithChildren {
   html: string
   offset?: number
   id: string
+  place: PlacesType
+  className?: string
 }
 
 export const BaseTooltip = React.forwardRef<TooltipRefProps, BaseTooltipProps>(
-  ({ children, html, offset = 16, id }, forwardedRef) => {
+  ({ children, html, offset = 16, id, place, className }, forwardedRef) => {
     const internalRef = useRef<TooltipRefProps>(null)
     return (
       <div
+        className={className}
         // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
         tabIndex={0}
         aria-describedby={id}
@@ -33,7 +37,6 @@ export const BaseTooltip = React.forwardRef<TooltipRefProps, BaseTooltipProps>(
         onFocus={() => {
           internalRef.current?.open()
         }}
-        className="bg-green-100"
       >
         <ReactTooltip
           ref={ref => {
@@ -54,6 +57,7 @@ export const BaseTooltip = React.forwardRef<TooltipRefProps, BaseTooltipProps>(
             'absolute z-[9999] rounded-none bg-transparent pointer-events-auto p-[var(--tooltip-offset)]'
           )}
           id={id}
+          place={place}
         ></ReactTooltip>
         {children}
       </div>

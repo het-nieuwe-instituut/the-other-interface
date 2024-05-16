@@ -1,15 +1,15 @@
 import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
+import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
+import { useZoomHoverRecordResult } from '@/features/shared/hooks/queries/useZoomHoverRecordResult'
+import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 import { Position } from '@/features/shared/types/position'
-import { GridItem, Flex } from '@chakra-ui/react'
 import { CloudCategory } from '@/features/shared/utils/categories'
-import { Text } from '@chakra-ui/react'
-import { RecordText } from '../RecordText'
+import { ReadMoreTooltip } from '@/features/ui/components/tooltip/ReadMoreTooltip'
 import { useRouter } from 'next/navigation'
 import { ZoomLevel2Type } from 'src/generated/graphql'
-import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
-import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
-import { Tooltip } from '@/features/modules/components/ToolTip/Tooltip'
-import { useZoomHoverRecordResult } from '@/features/shared/hooks/queries/useZoomHoverRecordResult'
+import { RecordText } from '../RecordText'
+import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { cn } from '@/features/ui/utils/cn'
 
 type Props = {
   record: RecordProps
@@ -22,36 +22,35 @@ type RecordProps = ZoomLevel2Type & {
 
 export const Record: React.FC<Props> = ({ record }) => {
   const { id, category } = record
+  const { t } = useTypeSafeTranslation('category')
   const { lang, search } = useZoom2Params()
   // TODO: HNIT-1833 - add in loading and error handling
-  const { data } = useZoomHoverRecordResult({ id, category })
+  const { data, isLoading, isError } = useZoomHoverRecordResult({ id, category })
 
   return (
-    <GridItem position="relative">
+    <div className="relative">
       {data === null ? (
         RecordData(record, lang, search)
       ) : (
-        <Tooltip
-          label={
-            <div>
-              <Text fontFamily={'Social'} fontSize={'12px'} fontWeight={'700'}>
-                {data?.title}
-              </Text>
-              <Text fontFamily={'Social'} fontSize={'12px'} fontWeight={'400'}>
-                {data?.description}
-              </Text>
-            </div>
-          }
-        >
-          {RecordData(record, lang, search)}
-        </Tooltip>
+        <div className="absolute flex h-4/5 w-[70%]" style={{ ...record.position }}>
+          <ReadMoreTooltip
+            error={isError ? t('couldNotFetchHover') : ''}
+            place="bottom-start"
+            isLoading={isLoading}
+            title={data?.title ?? undefined}
+            description={data?.description ?? undefined}
+            className="size-full"
+          >
+            {RecordData(record, lang, search)}
+          </ReadMoreTooltip>
+        </div>
       )}
-    </GridItem>
+    </div>
   )
 }
 
 const RecordData = (record: RecordProps, lang?: string | null, search?: string) => {
-  const { id, thumbnail, category, position, title } = record
+  const { id, thumbnail, category, title } = record
   const router = useRouter()
 
   const handleClick = () => {
@@ -63,19 +62,12 @@ const RecordData = (record: RecordProps, lang?: string | null, search?: string) 
   }
 
   return (
-    <Flex
-      position="absolute"
-      style={{ ...position }}
-      width="70%"
-      height="80%"
-      flexDirection="column"
-      alignItems="center"
-      justifyContent="center"
-      gap="5px"
-      cursor={'pointer'}
+    <button
+      className={cn(
+        'flex size-full cursor-pointer flex-col items-center justify-center gap-[5px] transition-all duration-300 ease-in-out hover:scale-105',
+        'group-hover-blur-item'
+      )}
       onClick={handleClick}
-      _hover={{ transform: 'scale(1.05)' }}
-      transition="all .4s ease-in-out"
     >
       <ResponsiveImage
         src={thumbnail}
@@ -89,6 +81,6 @@ const RecordData = (record: RecordProps, lang?: string | null, search?: string) 
       />
 
       <RecordText title={title} categoryType={category} />
-    </Flex>
+    </button>
   )
 }
