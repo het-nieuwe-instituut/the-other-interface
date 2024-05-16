@@ -25,12 +25,13 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
     (state: State) => state.shared
   )
 
-  const onSelectFilter = () => {
+  const handleInputFocus = () => {
     filterInputRef.current?.focus()
   }
 
   const { selectedFilters, selectFilter, clearFilters, encodedFilters, removeFilter } = useFilters({
-    onSelectFilter,
+    onSelectFilter: handleInputFocus,
+    onRemoveFilter: handleInputFocus,
   })
 
   const { t } = useTypeSafeTranslation('category')

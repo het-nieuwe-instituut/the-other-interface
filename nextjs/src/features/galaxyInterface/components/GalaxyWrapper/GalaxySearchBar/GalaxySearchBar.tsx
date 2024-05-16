@@ -45,9 +45,8 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) =>
     <Grid
       position="relative"
       height={'auto'}
-      templateColumns="145px minmax(20px, 1fr) minmax(95px, auto)"
-      gap="16px"
-      borderRadius={isCategorySuggestionsOpen ? '0 0 5px 5px' : '5px'}
+      templateColumns="160px minmax(20px, 1fr) minmax(95px, auto)"
+      gap="4"
       backgroundColor="blueAlpha.100"
       zIndex={FOOTER_Z_INDEX}
       onClick={!isSearchModeActive ? handleSearchModeOpen : undefined}
@@ -57,9 +56,17 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) =>
       bottom={`${offset}px`}
       className="px-4"
     >
-      <Flex flexDirection="column" alignItems="flex-start" className={'self-end h-[60px] pt-1'}>
-        <Text textStyle="socialLarge.xl">{total ? total : searchResultAmount}</Text>
-        <Text textStyle="socialLarge.xl">{t('resultsFor')}</Text>
+      <Flex
+        flexDirection="column"
+        alignItems="flex-start"
+        className={'self-end h-[60px] pt-1 justify-center'}
+      >
+        <Text className={'text-pink.100 text-lg leading-none font-social-large'}>
+          {total ? total : searchResultAmount}
+        </Text>
+        <Text className={'text-pink.100 text-lg leading-none font-social-large'}>
+          {t('resultsFor')}
+        </Text>
       </Flex>
 
       <Wrap spacing="0" ref={wrapRef}>
@@ -71,7 +78,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) =>
           />
         </WrapItem>
         {selectedFilters.map(filter => (
-          <WrapItem key={filter.id} maxWidth={'100%'} className="h-[60px] py-1 mr-2">
+          <WrapItem key={filter.id} maxWidth={'100%'} className="h-[60px] pt-1 mr-2">
             <SearchFilterBox
               category={filter.field}
               subCategory={filter.value}
@@ -87,6 +94,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) =>
             onFocus={handleSearchModeOpen}
             value={inputValue}
             onChange={handleInputChange}
+            placeholder={t('searchPlaceholder')}
           />
         </WrapItem>
       </Wrap>

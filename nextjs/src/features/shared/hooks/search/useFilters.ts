@@ -15,9 +15,10 @@ export type FilterArray = Filter[]
 
 interface UseFiltersProps {
   onSelectFilter?: () => void
+  onRemoveFilter?: () => void
 }
 
-export const useFilters = ({ onSelectFilter }: UseFiltersProps = {}) => {
+export const useFilters = ({ onSelectFilter, onRemoveFilter }: UseFiltersProps = {}) => {
   const { filters } = useZoom2Params()
   const [selectedFilters, setSelectedFilters] = useState<FilterArray>([])
   const dispatch = useDispatch()
@@ -43,6 +44,9 @@ export const useFilters = ({ onSelectFilter }: UseFiltersProps = {}) => {
   const removeFilter = useCallback(
     (id: string) => {
       setSelectedFilters(selectedFilters.filter(f => f.id !== id))
+      if (onRemoveFilter) {
+        onRemoveFilter()
+      }
     },
     [selectedFilters]
   )

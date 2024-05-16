@@ -15,5 +15,7 @@
   "resultsFor": "resultaten voor",
   "noResultsFound": "Geen resultaten gevonden",
   "clear": "Wissen",
-  "suggestions": "Suggesties"
+  "suggestions": "Suggesties",
+  "searchPlaceholder": "Typ hier je zoekterm",
+  "searchCategory": "Categoriën"
 }

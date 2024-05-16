@@ -31,6 +31,7 @@ export const FilterInput: React.FC<Props> = ({
         border: 'none',
       }}
       height="100%"
+      className="font-social-large text-xl"
     />
   )
 }

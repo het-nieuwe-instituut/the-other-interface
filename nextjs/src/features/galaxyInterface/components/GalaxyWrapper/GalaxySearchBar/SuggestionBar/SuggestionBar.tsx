@@ -21,10 +21,7 @@ export const SuggestionBar: React.FC<Props> = ({
       position={'absolute'}
       bottom={offset ? `calc(${offset + SUGGESTION_BAR_PADDING}px)` : '60px'}
       width={'100%'}
-      gap="15px"
-      borderRadius={'5px 5px 0 0'}
       backgroundColor={'blueAlpha.80'}
-      padding={'5px 15px'}
       zIndex={FOOTER_Z_INDEX - 1}
       transform={isOpen ? 'translateY(0)' : 'translateY(90%)'}
       transition={
@@ -34,10 +31,11 @@ export const SuggestionBar: React.FC<Props> = ({
       }
       opacity={isOpen ? 1 : 0}
       visibility={isOpen ? 'visible' : 'hidden'}
-      templateColumns={'145px 1fr'}
+      templateColumns={'160px 1fr'}
+      className={'px-4 py-2 gap-4'}
     >
       <Flex width="146px" pt={4}>
-        <Text textStyle="socialLarge.xl">{label}</Text>
+        <Text className="text-pink.100 text-lg leading-none font-social-large">{label}</Text>
       </Flex>
       <Box
         overflow="hidden"

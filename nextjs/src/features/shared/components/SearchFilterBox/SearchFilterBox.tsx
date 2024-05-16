@@ -38,11 +38,7 @@ export const SearchFilterBox: React.FC<Props> = ({
         justifyContent={'space-between'}
         className={'pt-1 pb-2'}
       >
-        <Text
-          className={'font-social-large text-[11px] leading-[11px] text-blue.100'}
-          isTruncated
-          as={'span'}
-        >
+        <Text className={'font-social-large text-xs leading-none text-blue.100'} isTruncated>
           {category}
         </Text>
 
@@ -53,7 +49,7 @@ export const SearchFilterBox: React.FC<Props> = ({
         )}
       </Flex>
 
-      <Text className={'font-social-large text-[18px] leading-[18px] truncate text-xl'} isTruncated>
+      <Text className={'font-social-large text-lg leading-none truncate'} isTruncated>
         {subCategory}
       </Text>
     </GridItem>

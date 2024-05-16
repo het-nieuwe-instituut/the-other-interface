@@ -1,8 +1,8 @@
-import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/SearchFilterBox'
 import ActionButton from '@/features/shared/components/SearchFilterBox/buttons/ActionButton/ActionButton'
 import { ChangeButton } from '@/features/shared/components/SearchFilterBox/buttons/ChangeButton/ChangeButton'
 import { FOOTER_Z_INDEX } from '@/features/shared/constants/mainConstants'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { cn } from '@/features/ui/utils/cn'
 
 interface Props {
   selectedOption?: string
@@ -15,18 +15,19 @@ export const CategoryFilter: React.FC<Props> = ({ onClick, isOpen, selectedOptio
 
   return (
     <div
-      className={`bg-transparent text-pink.100 w-fit z-${
-        FOOTER_Z_INDEX + 1
-      } ${'cursor-pointer'} h-[52px] max-w-full border border-pink.100 px-2`}
+      className={cn(
+        'bg-transparent text-pink.100 border border-pink.100',
+        'w-fit max-w-full h-[52px]',
+        `z-${FOOTER_Z_INDEX + 1}`,
+        'px-2'
+      )}
       onClick={onClick}
     >
       <div className="relative max-w-full flex items-center justify-between pt-1 pb-2">
-        <p className="font-social-large text-[11px] leading-[11px] truncate">{t('category')}</p>
+        <p className="font-social-large text-xs leading-none truncate">{t('category')}</p>
         <ActionButton>{<ChangeButton isOpen={isOpen} />}</ActionButton>
       </div>
-      <p className="font-social-large text-[18px] leading-[18px] truncate text-xl">
-        {selectedOption}
-      </p>
+      <p className="font-social-large text-lg leading-none truncate">{selectedOption}</p>
     </div>
   )
 }
