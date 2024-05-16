@@ -75,7 +75,7 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const newValue = e.target.value
       setInputValue(newValue)
-      dispatch(sharedActions.categorySuggestionsOpen({ categorySuggestionsOpen: newValue !== '' }))
+      dispatch(sharedActions.categorySuggestionsOpen({ categorySuggestionsOpen: false }))
     },
     [dispatch]
   )

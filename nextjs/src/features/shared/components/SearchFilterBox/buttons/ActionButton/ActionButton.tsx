@@ -10,6 +10,7 @@ const ActionButton: React.FC<ActionButtonProps> = ({ id, onClick, children }) =>
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation()
     if (onClick && id) {
+      e.stopPropagation()
       onClick(id)
     }
   }

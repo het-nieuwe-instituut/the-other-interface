@@ -114,14 +114,18 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) =>
 
       <SuggestionBar
         isOpen={isCategorySuggestionsOpen}
-        label={isUserTyping ? t('suggestions') : ''}
+        label={t('searchCategory')}
         offset={searchBarHeight}
       >
-        {isUserTyping ? (
-          <Suggestions handleSelectFilter={handleSelectFilter} />
-        ) : (
-          <CategorySuggestions />
-        )}
+        <CategorySuggestions />
+      </SuggestionBar>
+
+      <SuggestionBar
+        isOpen={isUserTyping && !isCategorySuggestionsOpen}
+        label={t('suggestions')}
+        offset={searchBarHeight}
+      >
+        <Suggestions handleSelectFilter={handleSelectFilter} />
       </SuggestionBar>
     </Grid>
   )
