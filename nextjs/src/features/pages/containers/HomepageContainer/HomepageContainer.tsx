@@ -15,7 +15,7 @@ export type Props = {
 }
 
 export const HomepageContainer: React.FC<Props> = ({ homepage, draftMode }) => {
-  const { stories, nextStories, storyTitle, pagination } = usePresenter(draftMode)
+  const { stories, nextStories, storyTitle, pagination, isLoading } = usePresenter(draftMode)
   const editorialData = homepage?.homepage?.data?.attributes
 
   return (
@@ -26,6 +26,7 @@ export const HomepageContainer: React.FC<Props> = ({ homepage, draftMode }) => {
           nextStories={nextStories as StoryEntity[]}
           storyTitle={storyTitle}
           pagination={pagination}
+          isLoading={isLoading}
         />
       </GalaxyInterface>
 

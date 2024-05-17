@@ -1,7 +1,7 @@
 import { useThemes } from '@/features/galaxyInterface/galaxies/MainGalaxy/hooks/useThemes'
 
 export const usePresenter = (isDraftMode: boolean) => {
-  const { data } = useThemes(isDraftMode)
+  const { data, isLoading } = useThemes(isDraftMode)
 
   const [themes, nextThemes] = data ?? []
 
@@ -10,5 +10,5 @@ export const usePresenter = (isDraftMode: boolean) => {
   const nextStories = nextThemes?.themes.data?.[0]?.attributes?.stories?.data || []
   const pagination = themes?.themes.meta?.pagination
 
-  return { storyTitle, stories, nextStories, pagination }
+  return { storyTitle, stories, nextStories, pagination, isLoading }
 }

@@ -1,5 +1,5 @@
 'use client'
-import { Box } from '@chakra-ui/react'
+import { Box, Flex } from '@chakra-ui/react'
 
 import { Cloud, CategoryCloud, Stories } from './fragments'
 import { ThemeTitle } from '../../components/ThemeTitle/ThemeTitle'
@@ -8,6 +8,7 @@ import { GalaxyFooter } from '../../components/GalaxyWrapper/GalaxyFooter/Galaxy
 import { GalaxyPagination } from '../../components/GalaxyWrapper/GalaxyPagination/GalaxyPagination'
 import { usePresenter } from './usePresenter'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { Loader } from '../../components/Loader/Loader'
 
 const categoryClouds: CategoryCloud[] = [
   {
@@ -41,9 +42,16 @@ interface Props {
   stories: StoryEntity[]
   nextStories: StoryEntity[]
   pagination?: Pagination
+  isLoading?: boolean
 }
 
-export const MainGalaxy: React.FC<Props> = ({ storyTitle, stories, pagination, nextStories }) => {
+export const MainGalaxy: React.FC<Props> = ({
+  storyTitle,
+  stories,
+  pagination,
+  nextStories,
+  isLoading,
+}) => {
   const { increasePageNumber, decreasePageNumber } = usePresenter(pagination?.pageCount || 0)
   const { t } = useTypeSafeTranslation('navigation')
 
@@ -52,8 +60,18 @@ export const MainGalaxy: React.FC<Props> = ({ storyTitle, stories, pagination, n
       {categoryClouds.map(cloud => (
         <Cloud key={cloud.title} cloud={cloud} />
       ))}
-      <Stories stories={stories} nextStories={nextStories} />
-      <ThemeTitle title={storyTitle} />
+
+      {isLoading && (
+        <Flex justify={'center'} align={'center'} height={'100%'}>
+          <Loader />
+        </Flex>
+      )}
+      {!isLoading && (
+        <>
+          <Stories stories={stories} nextStories={nextStories} />
+          <ThemeTitle title={storyTitle} />
+        </>
+      )}
 
       <GalaxyFooter
         galaxyPagination={
