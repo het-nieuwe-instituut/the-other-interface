@@ -33,7 +33,8 @@ export class ZoomLevel3Controller {
 
     const detail = await this.zoomLevel3Service.getDetail(
       params.recordId,
-      StrapiUtils.getEntityNameForRecordType(params.type as Enum_Triplyrecord_Type)
+      StrapiUtils.getEntityNameForRecordType(params.type as Enum_Triplyrecord_Type),
+      'nl' // no need for translation in strapi
     )
 
     res.send(detail)

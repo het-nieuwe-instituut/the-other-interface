@@ -106,12 +106,12 @@ export class ObjectsService {
 
   public constructor(private triplyService: TriplyService) {}
 
-  public async getZoomLevel3Data(id: string) {
+  public async getZoomLevel3Data(id: string, locale: string) {
     const result = await this.triplyService.queryTriplyData<ObjectsDetailZoomLevel3Data>(
       this.ZoomLevel3Endpoint,
       objectsDetailZoomLevel3DataKeys,
       { page: 1, pageSize: 1 },
-      { id }
+      { id, language: locale }
     )
 
     return {
@@ -122,12 +122,17 @@ export class ObjectsService {
     }
   }
 
-  public async getRelationsData(id: string, type: EntityNames, paginationArgs: PaginationArgs) {
+  public async getRelationsData(
+    id: string,
+    type: EntityNames,
+    paginationArgs: PaginationArgs,
+    locale: string
+  ) {
     const result = await this.triplyService.queryTriplyData<ObjectsRelationsType>(
       this.ZoomLevel3RelationsEndpoint,
       objectsRelationsKeys,
       { page: paginationArgs.page ?? 1, pageSize: paginationArgs.pageSize ?? 5 },
-      { id, type }
+      { id, type, language: locale }
     )
 
     const output = TriplyUtils.sanitizeObjectArray(result.data, 'idRelation', 'relation')
@@ -145,23 +150,23 @@ export class ObjectsService {
     return result.data
   }
 
-  public async getZoomLevel3RecordData(id: string) {
+  public async getZoomLevel3RecordData(id: string, locale: string) {
     const result = await this.triplyService.queryTriplyData<ObjectRecordZoomLevel3Data>(
       this.ZoomLevel3RecordEndpoint,
       objectRecordZoomLevel3DataKeys,
       { page: 1, pageSize: 1 },
-      { id }
+      { id, language: locale }
     )
 
     return result.data
   }
 
-  public async getZoomRecordHover(id: string) {
+  public async getZoomRecordHover(id: string, locale: string) {
     const results = await this.triplyService.queryTriplyData<ObjectsZoomLevel2HoverData>(
       this.ZoomLevel2HoverEndpoint,
       objectsZoomLevel2HoverDataKeys,
       undefined,
-      { id }
+      { id, language: locale }
     )
     // TODO: HNIT-1833 - throw on errors (no data or multiple resutls that don't match)
 
@@ -171,50 +176,4 @@ export class ObjectsService {
 
     return { ...TriplyUtils.combineObjectArray(results.data) }
   }
-
-  // private getDimensionValueFromData(data: ObjectsDetailZoomLevel3Data[]) {
-  //   const dimHeight = data.find(d => d.dimensionType === 'hoogte')?.dimensionValue
-  //   const dimWidth = data.find(d => d.dimensionType === 'breedte')?.dimensionValue
-  //   const dimDepth = data.find(d => d.dimensionType === 'diepte')?.dimensionValue
-
-  //   return { dimDepth, dimWidth, dimHeight }
-  // }
-
-  // private getMakersValueFromData(data: ObjectsDetailZoomLevel3Data[]): ObjectMakerType[] {
-  //   return data
-  //     .filter(d => !!d.maker)
-  //     .map(d => ({
-  //       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  //       id: TriplyUtils.getIdFromUri(d.maker!),
-  //       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  //       maker: d.maker!,
-  //       makerLabel: d.makerLabel,
-  //       makerRole: d.makerRole,
-  //       makerRoleLabel: d.makerRoleLabel,
-  //     }))
-  // }
-
-  // private getMaterialsValueFromData(data: ObjectsDetailZoomLevel3Data[]): ObjectMaterialType[] {
-  //   return data
-  //     .filter(d => !!d.material)
-  //     .map(d => ({
-  //       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  //       id: TriplyUtils.getIdFromUri(d.material!),
-  //       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  //       material: d.material!,
-  //       materialLabel: d.materialLabel,
-  //     }))
-  // }
-
-  // private getTechniquesValueFromData(data: ObjectsDetailZoomLevel3Data[]): ObjectTechniqueType[] {
-  //   return data
-  //     .filter(d => !!d.technique)
-  //     .map(d => ({
-  //       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  //       id: TriplyUtils.getIdFromUri(d.technique!),
-  //       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  //       technique: d.technique!,
-  //       techniqueLabel: d.techniqueLabel,
-  //     }))
-  // }
 }

@@ -1,8 +1,7 @@
-import { ArgsType, Field, ObjectType, createUnionType, registerEnumType } from '@nestjs/graphql'
+import { ArgsType, Field, ObjectType, registerEnumType } from '@nestjs/graphql'
 import { EntityNames } from '../util/entityNames.type'
 import { PublicationsZoomLevel3Types } from './publications.service'
 import { PeopleZoomLevel3DetailType } from '../people/people.type'
-import { CustomError } from '../util/customError'
 import { IsOptional, IsString } from 'class-validator'
 
 @ObjectType()
@@ -475,33 +474,6 @@ export class PublicationRecordRelationArgs {
   @IsOptional()
   public lang?: string
 }
-
-export const PublicationZoomLevel3UnionType = createUnionType({
-  name: 'PublicationZoomLevel3UnionType',
-  types: () =>
-    [
-      PublicationsAudioVisualZoomLevel3DetailType,
-      PublicationsArticleZoomLevel3DetailType,
-      PublicationsSerialZoomLevel3DetailType,
-      PublicationsBookZoomLevel3DetailType,
-    ] as const,
-  resolveType: (publication: BasePublicationZoomLevel3Type) => {
-    switch (publication.type) {
-      case PublicationsZoomLevel3Types.audiovisual:
-        return PublicationsAudioVisualZoomLevel3DetailType
-      case PublicationsZoomLevel3Types.article:
-        return PublicationsArticleZoomLevel3DetailType
-      case PublicationsZoomLevel3Types.serial:
-        return PublicationsSerialZoomLevel3DetailType
-      case PublicationsZoomLevel3Types.book:
-        return PublicationsBookZoomLevel3DetailType
-      default:
-        throw CustomError.externalCritical(
-          `publication type ${publication.type} cannot be resolved`
-        )
-    }
-  },
-})
 
 @ObjectType()
 export class PublicationAuthorType {

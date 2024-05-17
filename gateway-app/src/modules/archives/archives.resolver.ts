@@ -4,7 +4,6 @@ import { ZoomLevel3Service } from '../zoomLevel3/zoomLevel3.service'
 import {
   ArchiveRecordRelationArgs,
   ArchiveRelationsType,
-  ArchiveZoomLevel3DetailType,
   ArchivesFondsCreatorType,
   ArchivesFondsZoomLevel3DetailType,
   ArchivesRelationsCountType,
@@ -15,20 +14,6 @@ import { TriplyUtils } from '../triply/triply.utils'
 import { CustomError } from '../util/customError'
 import { ArchivesService } from './archives.service'
 import { PaginationArgs } from '../util/paginationArgs.type'
-import { EntityNames } from '../util/entityNames.type'
-
-@Resolver(ArchiveZoomLevel3DetailType)
-export class ArchivesZoomLevel3Resolver {
-  public constructor(
-    private readonly zoomLevel3Service: ZoomLevel3Service,
-    private readonly archivesService: ArchivesService
-  ) {}
-
-  @Query(() => ArchiveZoomLevel3DetailType)
-  public archivesDetailZoomLevel3(@Parent() archiveCreator: ArchiveZoomLevel3DetailType) {
-    return this.zoomLevel3Service.getDetail(archiveCreator?.id, EntityNames.Archives)
-  }
-}
 
 @Resolver(ArchiveRelationsType)
 export class ArchivesRelationsZoomLevel3Resolver {
@@ -37,9 +22,10 @@ export class ArchivesRelationsZoomLevel3Resolver {
   @Query(() => [ArchiveRelationsType], { nullable: true })
   public archivesRecordRelations(
     @Args() args: ArchiveRecordRelationArgs,
-    @Args() paginationArgs: PaginationArgs
+    @Args() paginationArgs: PaginationArgs,
+    @Args('locale') locale: string
   ) {
-    return this.archivesService.getRelationsData(args.id, args.type, paginationArgs)
+    return this.archivesService.getRelationsData(args.id, args.type, paginationArgs, locale)
   }
 
   @Query(() => [ArchivesRelationsCountType], { nullable: true })
@@ -61,7 +47,10 @@ export class ArchivesFondsCreatorResolver {
   public constructor(private readonly zoomLevel3Service: ZoomLevel3Service) {}
 
   @ResolveField()
-  public populatedCreator(@Parent() archiveCreator: ArchivesFondsCreatorType) {
+  public populatedCreator(
+    @Parent() archiveCreator: ArchivesFondsCreatorType,
+    @Args('locale') locale: string
+  ) {
     if (!archiveCreator.creator) {
       return
     }
@@ -69,7 +58,7 @@ export class ArchivesFondsCreatorResolver {
     const type = TriplyUtils.getEntityNameFromUri(archiveCreator.creator)
     const id = TriplyUtils.getIdFromUri(archiveCreator.creator)
 
-    return this.zoomLevel3Service.getDetail(id, type)
+    return this.zoomLevel3Service.getDetail(id, type, locale)
   }
 }
 
@@ -78,7 +67,10 @@ export class ArchivesZoomLevelRecordHoverResolver {
   public constructor(private readonly archivesService: ArchivesService) {}
 
   @Query(() => ArchivesZoomLevelHoverType)
-  public async archivesZoomRecordHover(@Args() args: ArchivesZoomLevel2HoverArgs) {
-    return this.archivesService.getZoomRecordHover(args.id)
+  public async archivesZoomRecordHover(
+    @Args() args: ArchivesZoomLevel2HoverArgs,
+    @Args('locale') locale: string
+  ) {
+    return this.archivesService.getZoomRecordHover(args.id, locale)
   }
 }

@@ -64,42 +64,30 @@ export class TriplyRecordFieldResolver {
   }
 
   @ResolveField()
-  public async archive(@Parent() triplyRecord: TriplyRecord) {
-    // if (triplyRecord.type !== Enum_Triplyrecord_Type.Archive) {
-    //   return
-    // }
-
-    // const type = await this.archivesService.determineArchiveType(triplyRecord.recordId)
-
-    return this.archivesService.getZoomLevel3Data(triplyRecord.recordId)
+  public async archive(@Parent() triplyRecord: TriplyRecord, @Args('locale') locale: string) {
+    return this.archivesService.getZoomLevel3Data(triplyRecord.recordId, locale)
   }
 
   @ResolveField()
-  public object(@Parent() triplyRecord: TriplyRecord) {
+  public object(@Parent() triplyRecord: TriplyRecord, @Args('locale') locale: string) {
     if (triplyRecord.type !== Enum_Triplyrecord_Type.Object) {
       return
     }
 
-    return this.objectsService.getZoomLevel3Data(triplyRecord.recordId)
+    return this.objectsService.getZoomLevel3Data(triplyRecord.recordId, locale)
   }
 
   @ResolveField()
-  public async publication(@Parent() triplyRecord: TriplyRecord) {
-    // if (triplyRecord.type !== Enum_Triplyrecord_Type.Publication) {
-    //   return
-    // }
-
-    // const type = await this.publicationService.determinePublicationType(triplyRecord.recordId)
-
-    return this.publicationService.getZoomLevel3Data(triplyRecord.recordId)
+  public async publication(@Parent() triplyRecord: TriplyRecord, @Args('locale') locale: string) {
+    return this.publicationService.getZoomLevel3Data(triplyRecord.recordId, locale)
   }
 
   @ResolveField()
-  public people(@Parent() triplyRecord: TriplyRecord) {
+  public people(@Parent() triplyRecord: TriplyRecord, @Args('locale') locale: string) {
     if (triplyRecord.type !== Enum_Triplyrecord_Type.People) {
       return
     }
 
-    return this.peopleService.getZoomLevel3Data(triplyRecord.recordId)
+    return this.peopleService.getZoomLevel3Data(triplyRecord.recordId, locale)
   }
 }

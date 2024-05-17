@@ -17,9 +17,10 @@ export class PeopleZoomLevel3Resolver {
   @Query(() => [PeopleRelationsType], { nullable: true })
   public peopleRecordRelations(
     @Args() args: PeopleRecordRelationArgs,
-    @Args() paginationArgs: PaginationArgs
+    @Args() paginationArgs: PaginationArgs,
+    @Args('locale') locale: string
   ) {
-    return this.peopleService.getRelationsData(args.id, args.type, paginationArgs)
+    return this.peopleService.getRelationsData(args.id, args.type, paginationArgs, locale)
   }
 
   @Query(() => [PeopleRelationsCountType], { nullable: true })
@@ -33,7 +34,10 @@ export class PeopleZoomLevelRecordHoverResolver {
   public constructor(private readonly peopleService: PeopleService) {}
 
   @Query(() => PeopleZoomLevelHoverType)
-  public async peopleZoomLevelHover(@Args() args: PeopleZoomLevel2HoverArgs) {
-    return this.peopleService.getZoomRecordHover(args.id)
+  public async peopleZoomLevelHover(
+    @Args() args: PeopleZoomLevel2HoverArgs,
+    @Args('locale') locale: string
+  ) {
+    return this.peopleService.getZoomRecordHover(args.id, locale)
   }
 }

@@ -275,12 +275,12 @@ export class PublicationsService {
     private readonly zoomLevel3Service: ZoomLevel3Service
   ) {}
 
-  public async getZoomLevel3Data(id: string) {
+  public async getZoomLevel3Data(id: string, locale: string) {
     const result = await this.triplyService.queryTriplyData<PublicationsZoomLevel3Data>(
       this.ZoomLevel3Endpoint,
       publicationsDetailZoomLevel3DataKeys,
       { page: 1, pageSize: 2 },
-      { id }
+      { id, locale }
     )
 
     return {
@@ -291,12 +291,17 @@ export class PublicationsService {
     }
   }
 
-  public async getRelationsData(id: string, type: EntityNames, paginationArgs: PaginationArgs) {
+  public async getRelationsData(
+    id: string,
+    type: EntityNames,
+    paginationArgs: PaginationArgs,
+    locale: string
+  ) {
     const result = await this.triplyService.queryTriplyData<PublicationRelationsType>(
       this.ZoomLevel3RelationsEndpoint,
       publicationRelationsKeys,
       { page: paginationArgs.page ?? 1, pageSize: paginationArgs.pageSize ?? 5 },
-      { id, type }
+      { id, type, locale }
     )
     const output = TriplyUtils.sanitizeObjectArray(result.data, 'idRelation', 'relation')
     return output
@@ -313,18 +318,18 @@ export class PublicationsService {
     return result.data
   }
 
-  public async getZoomLevel3RecordData(id: string) {
+  public async getZoomLevel3RecordData(id: string, locale: string) {
     const result = await this.triplyService.queryTriplyData<PublicationRecordZoomLevel3Data>(
       this.ZoomLevel3RecordEndpoint,
       publicationRecordZoomLevel3DataKeys,
       { page: 1, pageSize: 1 },
-      { id }
+      { id, language: locale }
     )
 
     return result.data
   }
 
-  public resolveAuthor(publication: PublicationsZoomLevel3DataTypes) {
+  public resolveAuthor(publication: PublicationsZoomLevel3DataTypes, locale: string) {
     if (!('author' in publication) || !publication.author) {
       return
     }
@@ -332,10 +337,10 @@ export class PublicationsService {
     const type = TriplyUtils.getEntityNameFromUri(publication.author)
     const id = TriplyUtils.getIdFromUri(publication.author)
 
-    return this.zoomLevel3Service.getDetail(id, type)
+    return this.zoomLevel3Service.getDetail(id, type, locale)
   }
 
-  public resolvePublisher(publication: PublicationsZoomLevel3DataTypes) {
+  public resolvePublisher(publication: PublicationsZoomLevel3DataTypes, locale: string) {
     if (!('publisher' in publication) || !publication.publisher) {
       return
     }
@@ -343,15 +348,15 @@ export class PublicationsService {
     const type = TriplyUtils.getEntityNameFromUri(publication.publisher)
     const id = TriplyUtils.getIdFromUri(publication.publisher)
 
-    return this.zoomLevel3Service.getDetail(id, type)
+    return this.zoomLevel3Service.getDetail(id, type, locale)
   }
 
-  public async getZoomRecordHover(id: string) {
+  public async getZoomRecordHover(id: string, locale: string) {
     const results = await this.triplyService.queryTriplyData<PublicationsZoomLevel2HoverData>(
       this.ZoomLevel2HoverEndpoint,
       publicationsZoomLevel2HoverDataKeys,
       undefined,
-      { id }
+      { id, language: locale }
     )
     // TODO: HNIT-1833 - throw on errors (no data or multiple resutls that don't match)
 

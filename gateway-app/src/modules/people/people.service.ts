@@ -151,12 +151,12 @@ export class PeopleService {
 
   public constructor(private triplyService: TriplyService) {}
 
-  public async getZoomLevel3Data(id: string) {
+  public async getZoomLevel3Data(id: string, locale: string) {
     const result = await this.triplyService.queryTriplyData<PeopleDetailZoomLevel3Data>(
       this.ZoomLevel3Endpoint,
       peopleDetailZoomLevel3DataKeys,
       { page: 1, pageSize: 2 },
-      { id }
+      { id, locale }
     )
 
     return {
@@ -167,12 +167,17 @@ export class PeopleService {
     }
   }
 
-  public async getRelationsData(id: string, type: EntityNames, paginationArgs: PaginationArgs) {
+  public async getRelationsData(
+    id: string,
+    type: EntityNames,
+    paginationArgs: PaginationArgs,
+    locale: string
+  ) {
     const result = await this.triplyService.queryTriplyData<PeopleRelationsType>(
       this.ZoomLevel3RelationsEndpoint,
       PeopleRelationsKeys,
       { page: paginationArgs.page ?? 1, pageSize: paginationArgs.pageSize ?? 5 },
-      { id, type }
+      { id, type, language: locale }
     )
 
     const output = TriplyUtils.sanitizeObjectArray(result.data, 'idRelation', 'relation')
@@ -190,23 +195,23 @@ export class PeopleService {
     return result.data
   }
 
-  public async getZoomLevel3RecordData(id: string) {
+  public async getZoomLevel3RecordData(id: string, locale: string) {
     const result = await this.triplyService.queryTriplyData<PeopleRecordZoomLevel3Data>(
       this.ZoomLevel3RecordEndpoint,
       peopleRecordZoomLevel3DataKeys,
       { page: 1, pageSize: 1 },
-      { id }
+      { id, language: locale }
     )
 
     return result.data
   }
 
-  public async getZoomRecordHover(id: string) {
+  public async getZoomRecordHover(id: string, locale: string) {
     const results = await this.triplyService.queryTriplyData<PeopleZoomLevel2HoverData>(
       this.ZoomLevel2HoverEndpoint,
       peopleZoomLevel2HoverDataKeys,
       undefined,
-      { id }
+      { id, language: locale }
     )
     // TODO: HNIT-1833 - throw on errors (no data or multiple resutls that don't match)
 

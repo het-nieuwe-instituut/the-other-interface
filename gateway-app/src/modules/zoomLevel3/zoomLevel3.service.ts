@@ -84,19 +84,19 @@ export class ZoomLevel3Service {
     }
   }
 
-  public async getDetail(id: string, type: EntityNames) {
+  public async getDetail(id: string, type: EntityNames, locale: string) {
     switch (type) {
       case EntityNames.Objects: {
-        return this.objectsService.getZoomLevel3Data(id)
+        return this.objectsService.getZoomLevel3Data(id, locale)
       }
       case EntityNames.People: {
-        return this.peopleService.getZoomLevel3Data(id)
+        return this.peopleService.getZoomLevel3Data(id, locale)
       }
       case EntityNames.Publications: {
-        return this.publicationsService.getZoomLevel3Data(id)
+        return this.publicationsService.getZoomLevel3Data(id, locale)
       }
       case EntityNames.Archives: {
-        return this.archivesService.getZoomLevel3Data(id)
+        return this.archivesService.getZoomLevel3Data(id, locale)
       }
 
       default:

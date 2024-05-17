@@ -8,6 +8,9 @@ export class ZoomLevel2Args {
 
   @Field(() => String, { nullable: true })
   public text: string
+
+  @Field()
+  public locale: string
 }
 
 @ObjectType()

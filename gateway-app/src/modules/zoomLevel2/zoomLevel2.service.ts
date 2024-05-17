@@ -21,13 +21,18 @@ const zoomLevel2DataKeys: KeysToVerify<ZoomLevel2Data> = {
 export class ZoomLevel2Service {
   public constructor(private readonly triplyService: TriplyService) {}
 
-  public getData(entity: EntityNames, paginationArgs: PaginationArgs, text?: string) {
+  public getData(
+    locale: string,
+    entity: EntityNames,
+    paginationArgs: PaginationArgs,
+    text?: string
+  ) {
     switch (entity) {
       case EntityNames.Archives:
       case EntityNames.Objects:
       case EntityNames.People:
       case EntityNames.Publications:
-        return this.getZoomLevel2Data(entity, paginationArgs, text)
+        return this.getZoomLevel2Data(locale, entity, paginationArgs, text)
 
       case EntityNames.Stories:
       default: {
@@ -52,6 +57,7 @@ export class ZoomLevel2Service {
   }
 
   private async getZoomLevel2Data(
+    locale: string,
     type: EntityNames,
     paginationArgs: PaginationArgs,
     text?: string
@@ -62,7 +68,7 @@ export class ZoomLevel2Service {
       uri,
       zoomLevel2DataKeys,
       paginationArgs,
-      text ? { text } : undefined
+      { language: locale, text: text || '' }
     )
 
     const uniqueNodes = getUniqueById(result?.data).map(res => ({
