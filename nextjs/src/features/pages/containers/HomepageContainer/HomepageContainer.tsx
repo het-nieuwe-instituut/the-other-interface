@@ -13,13 +13,13 @@ export type Props = {
   draftMode: boolean
 }
 
-export const HomepageContainer: React.FC<Props> = ({ homepage, draftMode }) => {
+export const HomepageContainer: React.FC<Props> = ({ homepage }) => {
   const editorialData = homepage?.homepage?.data?.attributes
 
   return (
     <Box>
       <GalaxyInterface>
-        <MainGalaxy isDraftMode={draftMode} />
+        <MainGalaxy />
       </GalaxyInterface>
 
       {editorialData && (
