@@ -7,7 +7,13 @@ import { useSearchParams } from 'next/navigation'
 import { ThemesQuery } from 'src/generated/graphql'
 
 export type ThemeData = NonNullable<ThemesQuery['themes']['data']>[0]
-export type StoriesData = NonNullable<NonNullable<NonNullable<ThemeData['attributes']>['stories']>>
+export type StoriesData = NonNullable<
+  NonNullable<NonNullable<ThemeData['attributes']>['stories']>
+>['data']
+export type StoryData = NonNullable<StoriesData>[0]
+export type StoryComponentsDynamicZone = NonNullable<
+  NonNullable<StoryData['attributes']>['components']
+>
 
 export function useThemes(isEnabled: boolean) {
   const api = initApiClientService()
@@ -34,7 +40,7 @@ export function useThemes(isEnabled: boolean) {
   const { data, isLoading, isError } = useQuery({
     queryKey: ['paginated-themes', currentPage, lang, isEnabled],
     queryFn,
-    enabled: isEnabled, // Ensure the query only runs when isEnabled is true
+    enabled: !isEnabled, // Ensure the query only runs when isEnabled is true
     refetchOnWindowFocus: false,
   })
 

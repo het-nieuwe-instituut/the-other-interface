@@ -3,7 +3,7 @@ import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/Gala
 import { MainGalaxy } from '@/features/galaxyInterface/galaxies/MainGalaxy/MainGalaxy'
 
 import { Box } from '../../../shared/configs/chakra'
-import { HomepageQuery, StoryEntity, ThemesQuery } from 'src/generated/graphql'
+import { HomepageQuery, ThemesQuery } from 'src/generated/graphql'
 import { EditorialLayer } from '@/features/shared/components/Layers/EditorialLayer/EditorialLayer'
 
 export type Props = {
