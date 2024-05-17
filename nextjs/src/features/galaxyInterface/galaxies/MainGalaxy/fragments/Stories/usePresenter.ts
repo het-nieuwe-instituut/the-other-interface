@@ -10,6 +10,7 @@ import { PositionedStory } from '../types'
 import { storiesPositionsTemplates } from './positioningTemplates'
 import { usePageNumber } from '@/features/shared/hooks/usePageNumber'
 import { usePositioningTemplates } from '@/features/shared/hooks/usePositioningTemplates'
+import { StoriesData } from '../../hooks/useThemes'
 
 const findImageUrl = (components: HomepageComponentsDynamicZone[]): string => {
   const imageComponent = components?.find(
@@ -34,7 +35,7 @@ const mapStory = (story: StoryEntity) => {
   }
 }
 
-export const usePresenter = (stories: StoryEntity[], nextStories: StoryEntity[]) => {
+export const usePresenter = (stories: StoryEntity[], nextStories: StoriesData) => {
   const { pageNumber } = usePageNumber()
   const { currentTemplate, nextTemplate, originalTemplateIndex } = usePositioningTemplates(
     storiesPositionsTemplates,

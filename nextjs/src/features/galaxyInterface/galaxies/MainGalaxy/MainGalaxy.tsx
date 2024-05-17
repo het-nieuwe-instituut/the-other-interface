@@ -9,6 +9,7 @@ import { GalaxyPagination } from '../../components/GalaxyWrapper/GalaxyPaginatio
 import { usePresenter } from './usePresenter'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Loader } from '../../components/Loader/Loader'
+import { useThemes } from './hooks/useThemes'
 
 const categoryClouds: CategoryCloud[] = [
   {
@@ -38,20 +39,11 @@ const categoryClouds: CategoryCloud[] = [
 ]
 
 interface Props {
-  storyTitle?: string
-  stories: StoryEntity[]
-  nextStories: StoryEntity[]
-  pagination?: Pagination
-  isLoading?: boolean
+  isDraftMode: boolean
 }
 
-export const MainGalaxy: React.FC<Props> = ({
-  storyTitle,
-  stories,
-  pagination,
-  nextStories,
-  isLoading,
-}) => {
+export const MainGalaxy: React.FC<Props> = ({ isDraftMode }) => {
+  const { storyTitle, stories, nextStories, pagination, isLoading } = useThemes(isDraftMode)
   const { increasePageNumber, decreasePageNumber } = usePresenter(pagination?.pageCount || 0)
   const { t } = useTypeSafeTranslation('navigation')
 

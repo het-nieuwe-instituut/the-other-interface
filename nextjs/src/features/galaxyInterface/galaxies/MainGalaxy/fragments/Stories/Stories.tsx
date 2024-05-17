@@ -2,14 +2,15 @@ import { Box, Flex, Grid, keyframes } from '@chakra-ui/react'
 
 import { Story } from '../Story'
 import { usePresenter } from './usePresenter'
-import { StoryEntity } from 'src/generated/graphql'
+import { StoryEntity, ThemesQuery } from 'src/generated/graphql'
 import { useDrawLines } from './useDrawLines'
 import { Loader } from '@/features/galaxyInterface/components/Loader/Loader'
 import { useImageLoader } from './useImageLoader'
+import { StoriesData } from '../../hooks/useThemes'
 
 type Props = {
-  stories: StoryEntity[]
-  nextStories: StoryEntity[]
+  stories: StoriesData
+  nextStories: StoriesData
 }
 
 const currentPageFadeIn = keyframes({ from: { opacity: 0 }, to: { opacity: 1 } })
