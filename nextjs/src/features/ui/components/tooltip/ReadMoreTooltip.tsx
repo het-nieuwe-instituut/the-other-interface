@@ -92,7 +92,7 @@ const ReadMoreTooltipContent = ({
   id,
 }: ReadMoreTooltipProps & { id: string }) => {
   const { t } = useTypeSafeTranslation('common')
-  console.log(error, isLoading, isEmpty)
+
   if (error) {
     return (
       <div
