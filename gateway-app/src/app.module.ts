@@ -23,6 +23,7 @@ import { UserModule } from './modules/user/user.module'
 import { UtilModule } from './modules/util/util.module'
 import { AuthModule } from './modules/auth/auth.module'
 import { ThemeModule } from './modules/theme/theme.module'
+import { TriplyElasticSearchModule } from './modules/triplyElasticSearch/triplyElasticSearch.module'
 
 @Module({
   imports: [
@@ -51,6 +52,7 @@ import { ThemeModule } from './modules/theme/theme.module'
     ZoomLevel2Module,
     ZoomLevel3Module,
     TriplyRecordModule,
+    TriplyElasticSearchModule,
     AuthorModule,
     LocationModule,
     HomepageModule,

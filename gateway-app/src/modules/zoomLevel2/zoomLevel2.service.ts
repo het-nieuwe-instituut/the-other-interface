@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common'
 import { CustomError } from '../util/customError'
 import { PaginationArgs } from '../util/paginationArgs.type'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
-import { ElasticsearchResult, KeysToVerify, TriplyService } from '../triply/triply.service'
+import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { TriplyUtils } from '../triply/triply.utils'
 import { getUniqueById } from '../util/helpers'
 import { Sdk } from 'src/generated/strapi-sdk'
@@ -108,33 +108,6 @@ export class ZoomLevel2Service {
 
     return {
       total,
-    }
-  }
-
-  private formatTriplyToSearchResult(
-    item: ElasticsearchResult['hits']['hits'][0]
-  ): SearchAllResultType | null {
-    try {
-      const type = TriplyUtils.getEntityNameFromUri(item._id)
-      const id = TriplyUtils.getIdFromUri(item._id)
-
-      if (!id || !type) {
-        return null
-      }
-
-      const thumbnail = item._source['https://schema org/url']?.[0]
-      const title =
-        item._source['https://www ica org/standards/RiC/ontology#title']?.join(', ') || ''
-
-      return {
-        thumbnail,
-        title,
-        id,
-        type,
-      }
-    } catch (e) {
-      console.error(e)
-      return null
     }
   }
 }

@@ -28,6 +28,7 @@ export function useSearch({
   const searchParams = useSearchParams()
   const lang = searchParams?.get('lang')
 
+  // TODO: mix story search
   const queryFn = async () => {
     switch (category) {
       case SEARCH_CATEGORIES.stories:
@@ -54,8 +55,8 @@ export function useSearch({
         })
 
         return {
-          items: searchAllResult?.searchByAllCategories?.nodes ?? [],
-          total: searchAllResult?.searchByAllCategories?.total ?? 0,
+          items: searchAllResult?.searchTriply?.nodes ?? [],
+          total: searchAllResult?.searchTriply?.total ?? 0,
         }
 
       default:

@@ -1120,7 +1120,7 @@ export type Query = {
   publicationsRecordZoomLevel3?: Maybe<Array<PublicationRecordZoomLevel3Type>>;
   publicationsZoomRecordHover: PublicationsZoomLevelHoverType;
   relations?: Maybe<Array<ZoomLevel3RelationsType>>;
-  searchByAllCategories: SearchAllParentType;
+  searchTriply: SearchResultType;
   stories: StoryEntityResponseCollection;
   storiesRealtedWithinTheme: StoriesRelatedToThemeResponse;
   storiesWithoutRelations: StoryWithoutRelationsEntityResponseCollection;
@@ -1331,7 +1331,7 @@ export type QueryRelationsArgs = {
 };
 
 
-export type QuerySearchByAllCategoriesArgs = {
+export type QuerySearchTriplyArgs = {
   lang: Scalars['String'];
   page: Scalars['Int'];
   pageSize?: InputMaybe<Scalars['Int']>;
@@ -1520,19 +1520,19 @@ export type ResponseCollectionMeta = {
   pagination: Pagination;
 };
 
-export type SearchAllParentType = {
-  __typename?: 'SearchAllParentType';
-  nodes: Array<SearchAllResultType>;
-  page: Scalars['Int'];
-  total: Scalars['Int'];
-};
-
-export type SearchAllResultType = {
-  __typename?: 'SearchAllResultType';
+export type SearchResultItemType = {
+  __typename?: 'SearchResultItemType';
   id: Scalars['String'];
   thumbnail?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   type: EntityNames;
+};
+
+export type SearchResultType = {
+  __typename?: 'SearchResultType';
+  nodes?: Maybe<Array<SearchResultItemType>>;
+  page: Scalars['Int'];
+  total: Scalars['Int'];
 };
 
 export type StoriesRelatedToThemeResponse = {
@@ -2043,7 +2043,7 @@ export type SearchAllQueryVariables = Exact<{
 }>;
 
 
-export type SearchAllQuery = { __typename?: 'Query', searchByAllCategories: { __typename?: 'SearchAllParentType', page: number, total: number, nodes: Array<{ __typename?: 'SearchAllResultType', title?: string | null, thumbnail?: string | null, id: string, type: EntityNames }> } };
+export type SearchAllQuery = { __typename?: 'Query', searchTriply: { __typename?: 'SearchResultType', page: number, total: number, nodes?: Array<{ __typename?: 'SearchResultItemType', title?: string | null, thumbnail?: string | null, id: string, type: EntityNames }> | null } };
 
 export type StoriesQueryVariables = Exact<{
   pagination?: InputMaybe<PaginationArg>;
@@ -2986,12 +2986,7 @@ export const MenuPagesDocument = gql`
     `;
 export const SearchAllDocument = gql`
     query searchAll($text: String!, $lang: String!, $page: Int!, $pageSize: Int) {
-  searchByAllCategories(
-    page: $page
-    lang: $lang
-    pageSize: $pageSize
-    text: $text
-  ) {
+  searchTriply(page: $page, lang: $lang, pageSize: $pageSize, text: $text) {
     page
     nodes {
       title

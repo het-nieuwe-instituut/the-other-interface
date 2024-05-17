@@ -1,18 +1,20 @@
 import { ArgsType, Field, Int, ObjectType } from '@nestjs/graphql'
+import { IsString } from 'class-validator'
+import { PaginationArgs } from '../util/paginationArgs.type'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 
 @ObjectType()
 export class SearchResultItemType {
-  @Field()
+  @Field(() => String)
   public id: string
 
   @Field(() => EntityNames)
   public type: EntityNames
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   public thumbnail?: string | null
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   public title?: string | null
 }
 
@@ -29,10 +31,12 @@ export class SearchResultType {
 }
 
 @ArgsType()
-export class SearchArgsType {
-  @Field()
+export class SearchArgsType extends PaginationArgs {
+  @Field(() => String)
+  @IsString()
   public text: string
 
-  @Field()
+  @Field(() => String)
+  @IsString()
   public lang: string
 }
