@@ -2,12 +2,12 @@ import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/Re
 
 import { Tooltip } from '@/features/modules/components/ToolTip/Tooltip'
 import { useZoomHoverRecordResultQuery } from '@/features/shared/hooks/queries/useZoomHoverRecordResultQuery'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { cn } from '@/features/ui/utils/cn'
 import { PositionedRecord } from '../types'
 import { RecordText } from './RecordText'
 import { useCalculateLine } from './useCalculateLine'
 import { usePresenter } from './usePresenter'
-import { TypographyVariants } from '@/features/ui/components/typography/variants'
 
 type Props = {
   record: PositionedRecord
@@ -25,8 +25,8 @@ export const Record: React.FC<Props> = ({ record, style, tabIndex = 0 }) => {
   if (!recordDetails && !isLoading) return null
 
   return (
-    <>
-      <div className="relative peer" style={{ ...grid, ...style }}>
+    <div className="group" style={{ ...grid, ...style }}>
+      <div className="relative size-full">
         <Tooltip
           isDisabled={!data}
           label={
@@ -66,7 +66,6 @@ export const Record: React.FC<Props> = ({ record, style, tabIndex = 0 }) => {
       </div>
 
       <div
-        className="hidden peer-hover:block"
         style={{
           position: 'absolute',
           top: 0,
@@ -75,6 +74,7 @@ export const Record: React.FC<Props> = ({ record, style, tabIndex = 0 }) => {
           bottom: 0,
           zIndex: -80,
         }}
+        className="hidden group-hover:block"
       >
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <line
@@ -87,6 +87,6 @@ export const Record: React.FC<Props> = ({ record, style, tabIndex = 0 }) => {
           />
         </svg>
       </div>
-    </>
+    </div>
   )
 }
