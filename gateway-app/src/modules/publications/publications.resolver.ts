@@ -14,6 +14,7 @@ import {
   PublicationsZoomLevel2HoverArgs,
 } from './publications.type'
 import { PaginationArgs } from '../util/paginationArgs.type'
+import { Locale } from '../util/locale.type'
 
 @Resolver(PublicationRelationsType)
 export class PublicationRelationsZoomLevel3Resolver {
@@ -23,7 +24,7 @@ export class PublicationRelationsZoomLevel3Resolver {
   public publicationRecordRelations(
     @Args() args: PublicationRecordRelationArgs,
     @Args() paginationArgs: PaginationArgs,
-    @Args('locale') locale: string
+    @Args('locale') locale: Locale
   ) {
     return this.publicationsService.getRelationsData(args.id, args.type, paginationArgs, locale)
   }
@@ -44,7 +45,7 @@ export class PublicationsAudioVisualResolver {
   }
   public populatedPublisher(
     @Parent() publication: PublicationsAudioVisualZoomLevel3DetailType,
-    @Args('locale') locale: string
+    @Args('locale') locale: Locale
   ) {
     return this.publicationsService.resolvePublisher(publication, locale)
   }
@@ -62,7 +63,7 @@ export class PublicationsArticleResolver {
   @ResolveField()
   public populatedPublisher(
     @Parent() publication: PublicationsArticleZoomLevel3DetailType,
-    @Args('locale') locale: string
+    @Args('locale') locale: Locale
   ) {
     return this.publicationsService.resolvePublisher(publication, locale)
   }
@@ -80,7 +81,7 @@ export class PublicationsBookResolver {
   @ResolveField()
   public populatedPublisher(
     @Parent() publication: PublicationsBookZoomLevel3DetailType,
-    @Args('locale') locale: string
+    @Args('locale') locale: Locale
   ) {
     return this.publicationsService.resolvePublisher(publication, locale)
   }
@@ -98,7 +99,7 @@ export class PublicationsSerialResolver {
   @ResolveField()
   public populatedPublisher(
     @Parent() publication: PublicationsSerialZoomLevel3DetailType,
-    @Args('locale') locale: string
+    @Args('locale') locale: Locale
   ) {
     return this.publicationsService.resolvePublisher(publication, locale)
   }
@@ -111,7 +112,7 @@ export class PublicationAuthorResolver {
   @ResolveField()
   public populatedAuthor(
     @Parent() publication: PublicationsBookZoomLevel3DetailType,
-    @Args('locale') locale: string
+    @Args('locale') locale: Locale
   ) {
     return this.publicationsService.resolveAuthor(publication, locale)
   }
@@ -124,7 +125,7 @@ export class PublicationsZoomLevelRecordHoverResolver {
   @Query(() => PublicationsZoomLevelHoverType)
   public async publicationsZoomRecordHover(
     @Args() args: PublicationsZoomLevel2HoverArgs,
-    @Args('locale') locale: string
+    @Args('locale') locale: Locale
   ) {
     return this.publicationsService.getZoomRecordHover(args.id, locale)
   }

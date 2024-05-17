@@ -1,7 +1,7 @@
 import { Inject } from '@nestjs/common'
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
 import { PublicationState, Sdk } from '../../generated/strapi-sdk'
-import { I18NLocaleCode, PaginationArg } from '../strapi/shared-types'
+import { PaginationArg } from '../strapi/shared-types'
 import {
   StoriesRelatedToThemeResponse,
   ThemeEntityResponse,
@@ -10,16 +10,14 @@ import {
 } from './theme.type'
 import { Theme } from './theme-dependency.type'
 import { EntityNames } from '../util/entityNames.type'
+import { Locale } from '../util/locale.type'
 
 @Resolver()
 export class ThemeResolver {
   public constructor(@Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk) {}
 
   @Query(() => ThemeEntityResponse)
-  public async theme(
-    @Args('id') id: string,
-    @Args('locale', { nullable: true }) locale: I18NLocaleCode
-  ) {
+  public async theme(@Args('id') id: string, @Args('locale') locale: Locale) {
     const res = await this.strapiGqlSdk.theme({ id, locale })
 
     return res.theme
@@ -31,7 +29,7 @@ export class ThemeResolver {
     @Args('pagination', { nullable: true }) pagination?: PaginationArg,
     @Args('sort', { nullable: true, type: () => [String] }) sort?: string[],
     @Args('publicationState', { nullable: true }) publicationState?: PublicationState,
-    @Args('locale', { nullable: true }) locale?: I18NLocaleCode
+    @Args('locale', { nullable: true }) locale?: Locale
   ) {
     const res = await this.strapiGqlSdk.themes({
       filters: filters || undefined,
@@ -45,10 +43,7 @@ export class ThemeResolver {
   }
 
   @Query(() => StoriesRelatedToThemeResponse)
-  public async storiesRealtedWithinTheme(
-    @Args('id') id: string,
-    @Args('locale', { nullable: true }) locale: I18NLocaleCode
-  ) {
+  public async storiesRealtedWithinTheme(@Args('id') id: string, @Args('locale') locale: Locale) {
     const res = await this.strapiGqlSdk.storiesRelatedToTheme({
       storyId: id,
       lang: locale,

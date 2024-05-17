@@ -4,6 +4,7 @@ import { PaginationArgs } from '../util/paginationArgs.type'
 import { EntityNames } from '../util/entityNames.type'
 import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { getUniqueById } from '../util/helpers'
+import { Locale } from '../util/locale.type'
 
 interface ZoomLevel2Data {
   thumbnail: string
@@ -22,7 +23,7 @@ export class ZoomLevel2Service {
   public constructor(private readonly triplyService: TriplyService) {}
 
   public getData(
-    locale: string,
+    locale: Locale,
     entity: EntityNames,
     paginationArgs: PaginationArgs,
     text?: string
@@ -57,7 +58,7 @@ export class ZoomLevel2Service {
   }
 
   private async getZoomLevel2Data(
-    locale: string,
+    locale: Locale,
     type: EntityNames,
     paginationArgs: PaginationArgs,
     text?: string

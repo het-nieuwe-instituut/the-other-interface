@@ -11,6 +11,7 @@ import {
 import { TriplyUtils } from '../triply/triply.utils'
 import { PaginationArgs } from '../util/paginationArgs.type'
 import { ObjectsService } from './objects.service'
+import { Locale } from '../util/locale.type'
 
 @Resolver(ObjectRelationsType)
 export class ObjectRelationstZoomLevel3Resolver {
@@ -20,7 +21,7 @@ export class ObjectRelationstZoomLevel3Resolver {
   public objectRecordRelations(
     @Args() args: ObjectRecordRelationArgs,
     @Args() paginationArgs: PaginationArgs,
-    @Args('locale') locale: string
+    @Args('locale') locale: Locale
   ) {
     return this.objectsService.getRelationsData(args.id, args.type, paginationArgs, locale)
   }
@@ -35,7 +36,7 @@ export class ObjectRelationstZoomLevel3Resolver {
 export class ObjectMakerResolver {
   public constructor(private readonly zoomLevel3Service: ZoomLevel3Service) {}
   @ResolveField()
-  public populatedMaker(@Parent() object: ObjectMakerType, @Args('locale') locale: string) {
+  public populatedMaker(@Parent() object: ObjectMakerType, @Args('locale') locale: Locale) {
     if (!object.maker) {
       return
     }
@@ -54,7 +55,7 @@ export class ObjectsZoomLevelRecordHoverResolver {
   @Query(() => ObjectsZoomLevelHoverType)
   public async objectsZoomRecordHover(
     @Args() args: ObjectsZoomLevel2HoverArgs,
-    @Args('locale') locale: string
+    @Args('locale') locale: Locale
   ) {
     return this.objectsService.getZoomRecordHover(args.id, locale)
   }

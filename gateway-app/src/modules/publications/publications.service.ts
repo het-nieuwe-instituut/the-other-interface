@@ -5,6 +5,7 @@ import { ZoomLevel3Service } from '../zoomLevel3/zoomLevel3.service'
 import { TriplyUtils } from '../triply/triply.utils'
 import { getHttpThumbnailOrNull } from '../util/helpers'
 import { PaginationArgs } from '../util/paginationArgs.type'
+import { Locale } from '../util/locale.type'
 
 interface PublicationsZoomLevel3Data {
   thumbnail?: string
@@ -275,7 +276,7 @@ export class PublicationsService {
     private readonly zoomLevel3Service: ZoomLevel3Service
   ) {}
 
-  public async getZoomLevel3Data(id: string, locale: string) {
+  public async getZoomLevel3Data(id: string, locale: Locale) {
     const result = await this.triplyService.queryTriplyData<PublicationsZoomLevel3Data>(
       this.ZoomLevel3Endpoint,
       publicationsDetailZoomLevel3DataKeys,
@@ -295,7 +296,7 @@ export class PublicationsService {
     id: string,
     type: EntityNames,
     paginationArgs: PaginationArgs,
-    locale: string
+    locale: Locale
   ) {
     const result = await this.triplyService.queryTriplyData<PublicationRelationsType>(
       this.ZoomLevel3RelationsEndpoint,
@@ -318,7 +319,7 @@ export class PublicationsService {
     return result.data
   }
 
-  public async getZoomLevel3RecordData(id: string, locale: string) {
+  public async getZoomLevel3RecordData(id: string, locale: Locale) {
     const result = await this.triplyService.queryTriplyData<PublicationRecordZoomLevel3Data>(
       this.ZoomLevel3RecordEndpoint,
       publicationRecordZoomLevel3DataKeys,
@@ -329,7 +330,7 @@ export class PublicationsService {
     return result.data
   }
 
-  public resolveAuthor(publication: PublicationsZoomLevel3DataTypes, locale: string) {
+  public resolveAuthor(publication: PublicationsZoomLevel3DataTypes, locale: Locale) {
     if (!('author' in publication) || !publication.author) {
       return
     }
@@ -340,7 +341,7 @@ export class PublicationsService {
     return this.zoomLevel3Service.getDetail(id, type, locale)
   }
 
-  public resolvePublisher(publication: PublicationsZoomLevel3DataTypes, locale: string) {
+  public resolvePublisher(publication: PublicationsZoomLevel3DataTypes, locale: Locale) {
     if (!('publisher' in publication) || !publication.publisher) {
       return
     }
@@ -351,7 +352,7 @@ export class PublicationsService {
     return this.zoomLevel3Service.getDetail(id, type, locale)
   }
 
-  public async getZoomRecordHover(id: string, locale: string) {
+  public async getZoomRecordHover(id: string, locale: Locale) {
     const results = await this.triplyService.queryTriplyData<PublicationsZoomLevel2HoverData>(
       this.ZoomLevel2HoverEndpoint,
       publicationsZoomLevel2HoverDataKeys,

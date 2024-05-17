@@ -6,6 +6,7 @@ import { ObjectsService } from '../objects/objects.service'
 import { PeopleService } from '../people/people.service'
 import { PublicationsService } from '../publications/publications.service'
 import { PaginationArg } from '../strapi/shared-types'
+import { Locale } from '../util/locale.type'
 import {
   TriplyRecord,
   TriplyRecordEntityResponse,
@@ -64,12 +65,12 @@ export class TriplyRecordFieldResolver {
   }
 
   @ResolveField()
-  public async archive(@Parent() triplyRecord: TriplyRecord, @Args('locale') locale: string) {
+  public async archive(@Parent() triplyRecord: TriplyRecord, @Args('locale') locale: Locale) {
     return this.archivesService.getZoomLevel3Data(triplyRecord.recordId, locale)
   }
 
   @ResolveField()
-  public object(@Parent() triplyRecord: TriplyRecord, @Args('locale') locale: string) {
+  public object(@Parent() triplyRecord: TriplyRecord, @Args('locale') locale: Locale) {
     if (triplyRecord.type !== Enum_Triplyrecord_Type.Object) {
       return
     }
@@ -78,12 +79,12 @@ export class TriplyRecordFieldResolver {
   }
 
   @ResolveField()
-  public async publication(@Parent() triplyRecord: TriplyRecord, @Args('locale') locale: string) {
+  public async publication(@Parent() triplyRecord: TriplyRecord, @Args('locale') locale: Locale) {
     return this.publicationService.getZoomLevel3Data(triplyRecord.recordId, locale)
   }
 
   @ResolveField()
-  public people(@Parent() triplyRecord: TriplyRecord, @Args('locale') locale: string) {
+  public people(@Parent() triplyRecord: TriplyRecord, @Args('locale') locale: Locale) {
     if (triplyRecord.type !== Enum_Triplyrecord_Type.People) {
       return
     }

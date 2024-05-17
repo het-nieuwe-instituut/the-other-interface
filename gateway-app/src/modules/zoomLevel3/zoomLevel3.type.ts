@@ -1,8 +1,9 @@
 import { ArgsType, Field, ObjectType, registerEnumType } from '@nestjs/graphql'
-import { IsOptional, IsString } from 'class-validator'
+import { IsString } from 'class-validator'
 import { EntityNames } from '../util/entityNames.type'
 import { TriplyExternalSourceEnum } from './zoomLevel3.service'
 import { StoryEntity } from '../story/story.type'
+import { Locale } from '../util/locale.type'
 
 @ObjectType()
 export class ZoomLevel3RelationsType {
@@ -70,9 +71,8 @@ export class ZoomLevel3Args {
   @IsString()
   public id: string
 
-  @Field()
-  @IsOptional()
-  public lang?: string
+  @Field(() => Locale)
+  public locale: Locale
 }
 
 @ArgsType()
@@ -81,9 +81,8 @@ export class ZoomLevel3StoryRelationsCountArgs {
   @IsString()
   public storyId: string
 
-  @Field()
-  @IsOptional()
-  public lang?: string
+  @Field(() => Locale)
+  public locale: Locale
 }
 
 registerEnumType(TriplyExternalSourceEnum, { name: 'TriplyExternalSourceEnum' })

@@ -4,6 +4,7 @@ import { EntityNames } from '../util/entityNames.type'
 import { getHttpThumbnailOrNull } from '../util/helpers'
 import { TriplyUtils } from '../triply/triply.utils'
 import { PaginationArgs } from '../util/paginationArgs.type'
+import { Locale } from '../util/locale.type'
 
 interface PeopleDetailZoomLevel3Data {
   thumbnail?: string
@@ -151,7 +152,7 @@ export class PeopleService {
 
   public constructor(private triplyService: TriplyService) {}
 
-  public async getZoomLevel3Data(id: string, locale: string) {
+  public async getZoomLevel3Data(id: string, locale: Locale) {
     const result = await this.triplyService.queryTriplyData<PeopleDetailZoomLevel3Data>(
       this.ZoomLevel3Endpoint,
       peopleDetailZoomLevel3DataKeys,
@@ -171,7 +172,7 @@ export class PeopleService {
     id: string,
     type: EntityNames,
     paginationArgs: PaginationArgs,
-    locale: string
+    locale: Locale
   ) {
     const result = await this.triplyService.queryTriplyData<PeopleRelationsType>(
       this.ZoomLevel3RelationsEndpoint,
@@ -195,7 +196,7 @@ export class PeopleService {
     return result.data
   }
 
-  public async getZoomLevel3RecordData(id: string, locale: string) {
+  public async getZoomLevel3RecordData(id: string, locale: Locale) {
     const result = await this.triplyService.queryTriplyData<PeopleRecordZoomLevel3Data>(
       this.ZoomLevel3RecordEndpoint,
       peopleRecordZoomLevel3DataKeys,
@@ -206,7 +207,7 @@ export class PeopleService {
     return result.data
   }
 
-  public async getZoomRecordHover(id: string, locale: string) {
+  public async getZoomRecordHover(id: string, locale: Locale) {
     const results = await this.triplyService.queryTriplyData<PeopleZoomLevel2HoverData>(
       this.ZoomLevel2HoverEndpoint,
       peopleZoomLevel2HoverDataKeys,

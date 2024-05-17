@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common'
 import { Sdk } from '../../generated/strapi-sdk'
 import { EntityNames } from '../util/entityNames.type'
+import { Locale } from '../util/locale.type'
 
 @Injectable()
 export class StoryService {
@@ -15,12 +16,12 @@ export class StoryService {
     }
   }
 
-  public async getStoryById(id: string, locale: string) {
+  public async getStoryById(id: string, locale: Locale) {
     const story = await this.strapiGqlSdk.storyWithoutRelations({ id, locale })
     return story.story
   }
 
-  public async getStorySiblings(parentId: string, currentStoryId: string, locale: string) {
+  public async getStorySiblings(parentId: string, currentStoryId: string, locale: Locale) {
     const parentRes = await this.strapiGqlSdk.story({ id: parentId, locale })
 
     const parentStory = parentRes?.story?.data

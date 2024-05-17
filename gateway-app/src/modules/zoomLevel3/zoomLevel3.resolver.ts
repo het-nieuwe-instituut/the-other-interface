@@ -23,6 +23,7 @@ import { ArchivesService } from '../archives/archives.service'
 import { ObjectsService } from '../objects/objects.service'
 import { PeopleService } from '../people/people.service'
 import { PaginationArgs } from '../util/paginationArgs.type'
+import { Locale } from '../util/locale.type'
 
 @Resolver(ZoomLevel3RelationsType)
 export class ZoomLevel3Resolver {
@@ -36,18 +37,18 @@ export class ZoomLevel3Resolver {
 
   @Query(() => [ZoomLevel3RelationsType], { nullable: true })
   public relations(@Args() args: ZoomLevel3Args, @Args() paginationArgs: PaginationArgs) {
-    return this.zoomLevel3Service.getRelations(args.id, args.type, args?.lang, paginationArgs)
+    return this.zoomLevel3Service.getRelations(args.id, args.type, args.locale, paginationArgs)
   }
 
   @Query(() => ZoomLevel3StoryRelationsCountType, { nullable: true })
   public async storyRelationsCount(@Args() args: ZoomLevel3StoryRelationsCountArgs) {
-    return this.zoomLevel3Service.storyRelationsCount(args.storyId, args?.lang)
+    return this.zoomLevel3Service.storyRelationsCount(args.storyId, args.locale)
   }
 
   @Query(() => [ArchivesRecordZoomLevel3Type], { nullable: true })
   public async archivesRecordZoomLevel3(
     @Args('id') archiveId: string,
-    @Args('locale') locale: string
+    @Args('locale') locale: Locale
   ) {
     return this.archivesService.getZoomLevel3RecordData(archiveId, locale)
   }
@@ -55,7 +56,7 @@ export class ZoomLevel3Resolver {
   @Query(() => [ObjectRecordZoomLevel3Type], { nullable: true })
   public async objectsRecordZoomLevel3(
     @Args('id') objectId: string,
-    @Args('locale') locale: string
+    @Args('locale') locale: Locale
   ) {
     return this.objectsService.getZoomLevel3RecordData(objectId, locale)
   }
@@ -63,7 +64,7 @@ export class ZoomLevel3Resolver {
   @Query(() => [PeopleRecordZoomLevel3Type], { nullable: true })
   public async peopleRecordZoomLevel3(
     @Args('id') peopleId: string,
-    @Args('locale') locale: string
+    @Args('locale') locale: Locale
   ) {
     return this.peopleService.getZoomLevel3RecordData(peopleId, locale)
   }
@@ -71,34 +72,30 @@ export class ZoomLevel3Resolver {
   @Query(() => [PublicationRecordZoomLevel3Type], { nullable: true })
   public async publicationsRecordZoomLevel3(
     @Args('id') publicationId: string,
-    @Args('locale') locale: string
+    @Args('locale') locale: Locale
   ) {
     return this.publicationsService.getZoomLevel3RecordData(publicationId, locale)
   }
 
   @Query(() => ObjectsZoomLevel3DetailType, { nullable: true })
-  public zoomLevel3Object(@Args('id') objectId: string, @Args('locale') locale: string) {
+  public zoomLevel3Object(@Args('id') objectId: string, @Args('locale') locale: Locale) {
     return this.zoomLevel3Service.getDetail(objectId, EntityNames.Objects, locale)
   }
   @Query(() => PeopleZoomLevel3DetailType, { nullable: true })
-  public zoomLevel3Person(@Args('id') objectId: string, @Args('locale') locale: string) {
+  public zoomLevel3Person(@Args('id') objectId: string, @Args('locale') locale: Locale) {
     return this.zoomLevel3Service.getDetail(objectId, EntityNames.People, locale)
   }
   @Query(() => PublicationZoomLevel3DetailType, { nullable: true })
-  public async zoomLevel3Publication(@Args('id') objectId: string, @Args('locale') locale: string) {
+  public async zoomLevel3Publication(@Args('id') objectId: string, @Args('locale') locale: Locale) {
     return this.zoomLevel3Service.getDetail(objectId, EntityNames.Publications, locale)
   }
   @Query(() => ArchiveZoomLevel3DetailType, { nullable: true })
-  public async zoomLevel3Archive(@Args('id') objectId: string, @Args('locale') locale: string) {
+  public async zoomLevel3Archive(@Args('id') objectId: string, @Args('locale') locale: Locale) {
     return this.zoomLevel3Service.getDetail(objectId, EntityNames.Archives, locale)
   }
 
   @Query(() => ZoomLevel3StoriesRelatedToRecordType, { nullable: true })
   public zoomLevel3StoriesRelationsForRecord(@Args() args: ZoomLevel3Args) {
-    return this.zoomLevel3Service.getStoriesRelationsForRecord(
-      args?.id,
-      args?.type,
-      args?.lang ?? 'nl'
-    )
+    return this.zoomLevel3Service.getStoriesRelationsForRecord(args.id, args.type, args.locale)
   }
 }

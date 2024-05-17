@@ -35,7 +35,7 @@ import { ThemeModule } from './modules/theme/theme.module'
       driver: ApolloDriver,
       autoSchemaFile: true,
       debug: true,
-      playground: false,
+      playground: process.env.ENV === 'development',
       buildSchemaOptions: {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         dateScalarMode: 'Date' as any,
