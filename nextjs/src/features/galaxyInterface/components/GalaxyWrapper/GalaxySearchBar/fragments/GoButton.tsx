@@ -3,16 +3,15 @@ import { Text, Button } from '@chakra-ui/react'
 
 type Props = {
   handleClick: () => void
+  hide?: boolean
 }
 
-export const GoButton: React.FC<Props> = ({ handleClick }) => {
+export const GoButton: React.FC<Props> = ({ handleClick, hide = false }) => {
   const { t } = useTypeSafeTranslation('common')
 
   return (
     <Button
       bg="transparent"
-      border={'1px solid'}
-      borderColor={'pinkAlpha.100'}
       padding={'0'}
       p={'6px 7px'}
       borderRadius={'3px'}
@@ -21,8 +20,10 @@ export const GoButton: React.FC<Props> = ({ handleClick }) => {
       color={'pinkAlpha.100'}
       _hover={{ borderColor: 'transparent', bg: 'pinkAlpha.100', color: 'blueAlpha.100' }}
       transition="all 0.2s ease-in-out"
+      className={'border-0'}
+      visibility={hide ? 'hidden' : 'visible'}
     >
-      <Text textStyle="socialLarge.md">{t('go')}</Text>
+      <Text className={'font-social-large text-sm text-pink.100'}>{t('go')}</Text>
     </Button>
   )
 }

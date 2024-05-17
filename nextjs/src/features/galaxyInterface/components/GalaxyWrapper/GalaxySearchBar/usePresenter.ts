@@ -40,6 +40,7 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
   const { total } = data || { total: 0 }
 
   const [inputValue, setInputValue] = useState('')
+  const [isUserTyping, setIsUserTyping] = useState(false)
 
   const resetSearchFilters = useCallback(() => {
     dispatch(sharedActions.searchCategory({ searchCategory: pageCategory }))
@@ -65,6 +66,7 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
     url = addLocaleToUrl(url, lang)
     router.push(url)
 
+    setIsUserTyping(false)
     handleSearchModeClose(false)
   }, [inputValue, searchCategory, router, handleSearchModeClose, lang, selectedFilters])
 
@@ -75,6 +77,7 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const newValue = e.target.value
       setInputValue(newValue)
+      setIsUserTyping(true)
       dispatch(sharedActions.categorySuggestionsOpen({ categorySuggestionsOpen: false }))
     },
     [dispatch]
@@ -105,7 +108,7 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
   }, [isNoActiveSearch, handleSearchModeOpen, isSearchResult])
 
   const handleClearAll = useCallback(() => {
-    setInputValue('')
+    resetSearchFilters()
     clearFilters()
     dispatch(sharedActions.categorySuggestionsOpen({ categorySuggestionsOpen: false }))
     filterInputRef.current?.focus()
@@ -132,7 +135,7 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
     searchBarRef,
     filterInputRef,
     handleClearAll,
-    isUserTyping: !!inputValue,
+    isUserTyping: !!inputValue && isUserTyping && isSearchModeActive,
     selectedFilters,
     handleSelectFilter: selectFilter,
     removeFilter,

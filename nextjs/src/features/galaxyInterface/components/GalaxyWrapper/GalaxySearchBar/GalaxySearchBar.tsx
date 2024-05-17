@@ -106,9 +106,15 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) =>
             <CloseButton handleClick={handleClearAll} />
           </>
         ) : isNoActiveSearch ? (
-          <SearchButton />
+          <div className={'ml-14'}>
+            <SearchButton />
+          </div>
         ) : (
-          <CloseButton handleClick={handleClearAll} />
+          <>
+            <div className={'ml-14'}>
+              <CloseButton handleClick={handleClearAll} />
+            </div>
+          </>
         )}
       </Flex>
 

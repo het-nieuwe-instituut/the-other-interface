@@ -24,7 +24,7 @@ export const CategoryFilter: React.FC<Props> = ({ onClick, isOpen, selectedOptio
       onClick={onClick}
     >
       <div className="relative max-w-full flex items-center justify-between pt-1 pb-2">
-        <p className="font-social-large text-xs leading-none truncate">{t('category')}</p>
+        <p className="font-social-large text-xs leading-none truncate mr-1">{t('category')}</p>
         <ActionButton>{<ChangeButton isOpen={isOpen} />}</ActionButton>
       </div>
       <p className="font-social-large text-lg leading-none truncate">{selectedOption}</p>
