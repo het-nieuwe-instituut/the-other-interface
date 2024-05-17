@@ -46,6 +46,7 @@ const MediaImage = (props: MediaImageProps) => {
             layout="fixed"
             alt={alt_text || ''}
             loading="eager"
+            onContextMenu={e => e.preventDefault()}
           />
         </Box>
         {caption && (

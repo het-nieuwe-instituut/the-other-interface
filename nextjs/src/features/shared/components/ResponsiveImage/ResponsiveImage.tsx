@@ -1,16 +1,15 @@
 'use client'
-import React, { useState } from 'react'
-import { usePresenter } from './usePresenter'
 import Image from 'next/image'
-import { Box, BoxProps } from '@chakra-ui/react'
+import React, { CSSProperties, useRef, useState } from 'react'
 import { limitCopyrightedImageResolution } from './limitCopyrightedImageResolution'
+import { cn } from '@/features/ui/utils/cn'
 
 type ResponsiveImageProps = {
+  className: string
   src?: string | null
   alt?: string | null
-  maxHeight?: string
   size?: string
-  css?: BoxProps['css']
+  style?: CSSProperties
   fit?: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down'
   onClick?: () => void
   disableRightClick?: boolean
@@ -20,16 +19,20 @@ type ResponsiveImageProps = {
 export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   src = '',
   alt = '',
-  maxHeight = '100%',
   size = '200px',
-  css,
+  style,
   fit = 'contain',
   disableRightClick = false,
   onClick,
   onLoad,
+  className,
 }) => {
   const [imageLoaded, setImageLoaded] = useState(false)
-  const { fallbackImage, handleRightClick } = usePresenter(src, disableRightClick)
+  const fallbackImageRef = useRef<string | null>(null)
+
+  if (!fallbackImageRef.current) {
+    fallbackImageRef.current = `/images/fallbacks/${Math.floor(Math.random() * 9) + 1}.svg`
+  }
 
   const handleLoad = () => {
     setImageLoaded(true)
@@ -41,10 +44,10 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   const processedSrc = limitCopyrightedImageResolution(src)
 
   return (
-    <Box position="relative" maxHeight={maxHeight} width={'100%'} css={css}>
+    <div style={style} className={cn('relative max-h-[var(--height)] w-full', className)}>
       {/* Fallback Image */}
       <Image
-        src={fallbackImage}
+        src={fallbackImageRef.current}
         alt={alt || 'Fallback image'}
         sizes={size}
         style={{
@@ -56,6 +59,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
           objectFit: 'contain',
           objectPosition: 'bottom',
         }}
+        onContextMenu={disableRightClick ? () => false : undefined}
         fill={true}
       />
 
@@ -77,10 +81,10 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
             objectFit: fit,
           }}
           fill={true}
-          onContextMenu={handleRightClick}
+          onContextMenu={disableRightClick ? e => e.preventDefault() : undefined}
           onLoad={handleLoad}
         />
       )}
-    </Box>
+    </div>
   )
 }
