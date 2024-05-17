@@ -9,6 +9,7 @@ import { usePresenter } from './usePresenter'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Loader } from '../../components/Loader/Loader'
 import { useThemesQuery } from './hooks/useThemes'
+import { useSearchParams } from 'next/navigation'
 
 const categoryClouds: CategoryCloud[] = [
   {
@@ -38,9 +39,20 @@ const categoryClouds: CategoryCloud[] = [
 ]
 
 export const MainGalaxy = () => {
-  const { storyTitle, stories, nextStories, pagination, isLoading } = useThemesQuery()
+  const searchParams = useSearchParams()
+  const currentPage = parseInt(searchParams?.get('page') ?? '1')
+
+  const {
+    storyTitle,
+    stories,
+    pagination,
+    isLoading: isMainLoading,
+    isError,
+  } = useThemesQuery(currentPage)
+  const { stories: nextStories, isLoading: isNextLoading } = useThemesQuery(currentPage + 1)
   const { increasePageNumber, decreasePageNumber } = usePresenter(pagination?.pageCount || 0)
   const { t } = useTypeSafeTranslation('navigation')
+  const isLoading = isMainLoading || isNextLoading
 
   return (
     <Box position="relative" width="100vw" height="100vh">
@@ -48,12 +60,18 @@ export const MainGalaxy = () => {
         <Cloud key={cloud.title} cloud={cloud} />
       ))}
 
-      {isLoading && (
+      {isError && (
+        <div className="flex justify-center items-center h-full">
+          <p className="text-black.100 times-large text-xl">{t('errorLoadingThemes')}</p>
+        </div>
+      )}
+
+      {!isError && isLoading && (
         <Flex justify={'center'} align={'center'} height={'100%'}>
           <Loader />
         </Flex>
       )}
-      {!isLoading && (
+      {!isError && !isLoading && (
         <>
           <Stories stories={stories} nextStories={nextStories} />
           <ThemeTitle title={storyTitle} />

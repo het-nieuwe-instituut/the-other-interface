@@ -17,11 +17,10 @@ export type StoryComponentsDynamicZone = NonNullable<
   NonNullable<StoryData['attributes']>['components']
 >
 
-export function useThemesQuery() {
+export function useThemesQuery(page: number) {
   const api = initApiClientService()
   const searchParams = useSearchParams()
   const lang = useLocale()
-  const currentPage = parseInt(searchParams?.get('page') ?? '1')
   const { isDraftMode } = useSelector((state: State) => state.shared)
 
   const fetchThemes = async (page: number) => {
@@ -32,26 +31,17 @@ export function useThemesQuery() {
     })
   }
 
-  const queryFn = async () => {
-    const [themes, nextThemes] = await Promise.all([
-      fetchThemes(currentPage),
-      fetchThemes(currentPage + 1),
-    ])
-    return [themes, nextThemes]
-  }
+  const queryFn = async () => fetchThemes(page)
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ['paginated-themes', currentPage, lang, isDraftMode],
+    queryKey: ['paginated-themes', page, lang, isDraftMode],
     queryFn,
     refetchOnWindowFocus: false,
   })
 
-  const [themes, nextThemes] = data ?? []
+  const storyTitle = data?.themes.data?.[0]?.attributes?.name
+  const stories = data?.themes.data?.[0]?.attributes?.stories?.data || []
+  const pagination = data?.themes.meta?.pagination
 
-  const storyTitle = themes?.themes.data?.[0]?.attributes?.name
-  const stories = themes?.themes.data?.[0]?.attributes?.stories?.data || []
-  const nextStories = nextThemes?.themes.data?.[0]?.attributes?.stories?.data || []
-  const pagination = themes?.themes.meta?.pagination
-
-  return { storyTitle, stories, nextStories, pagination, isLoading, isError }
+  return { storyTitle, stories, pagination, isLoading, isError }
 }
