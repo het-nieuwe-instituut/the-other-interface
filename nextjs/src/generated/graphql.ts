@@ -1125,7 +1125,6 @@ export type Query = {
   storiesWithoutRelations: StoryWithoutRelationsEntityResponseCollection;
   story: StoryEntityResponse;
   storyByLocale: StoryEntityResponseCollection;
-  storyHover: StoryHoverType;
   storyMetaByLocale: StoryMetaEntityResponseCollection;
   storyRelationsCount?: Maybe<ZoomLevel3StoryRelationsCountType>;
   storyWithoutRelations: StoryWithoutRelationsEntityResponse;
@@ -1135,7 +1134,6 @@ export type Query = {
   triplyRecords: TriplyRecordRelationResponseCollection;
   usersPermissionsUser: UsersPermissionsUserEntityResponse;
   usersPermissionsUsers: UsersPermissionsUserEntityResponseCollection;
-  zoomLevel1: Array<ZoomLevel1Type>;
   zoomLevel2: ZoomLevel2ParentType;
   zoomLevel2Amount: ZoomLevel2AmountParentType;
   zoomLevel3Archive?: Maybe<ArchiveZoomLevel3DetailType>;
@@ -1368,11 +1366,6 @@ export type QueryStoryByLocaleArgs = {
 };
 
 
-export type QueryStoryHoverArgs = {
-  id: Scalars['String'];
-};
-
-
 export type QueryStoryMetaByLocaleArgs = {
   filters?: InputMaybe<StoryFiltersInput>;
   locale?: InputMaybe<Scalars['String']>;
@@ -1602,13 +1595,6 @@ export type StoryFiltersInput = {
   title?: InputMaybe<StringFilterInput>;
   triplyRecords?: InputMaybe<TriplyRecordFiltersInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
-};
-
-export type StoryHoverType = {
-  __typename?: 'StoryHoverType';
-  author?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
 };
 
 export type StoryMetaEntityResponseCollection = {
@@ -1912,13 +1898,6 @@ export type UsersPermissionsUserFiltersInput = {
 export type UsersPermissionsUserRelationResponseCollection = {
   __typename?: 'UsersPermissionsUserRelationResponseCollection';
   data: Array<UsersPermissionsUserEntity>;
-};
-
-export type ZoomLevel1Type = {
-  __typename?: 'ZoomLevel1Type';
-  count: Scalars['Int'];
-  id: EntityNames;
-  name: Scalars['String'];
 };
 
 export type ZoomLevel2AmountParentType = {
@@ -2398,11 +2377,6 @@ export type ZoomLevel3PersonQueryVariables = Exact<{
 
 
 export type ZoomLevel3PersonQuery = { __typename?: 'Query', zoomLevel3Person?: { __typename: 'PeopleZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null, description?: string | null } | null };
-
-export type ZoomLevel1QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ZoomLevel1Query = { __typename?: 'Query', zoomLevel1: Array<{ __typename?: 'ZoomLevel1Type', name: string, count: number, id: EntityNames }> };
 
 export const TextModuleFragmentFragmentDoc = gql`
     fragment textModuleFragment on ComponentModulesTextModule {
@@ -3731,15 +3705,6 @@ export const ZoomLevel3PersonDocument = gql`
   }
 }
     `;
-export const ZoomLevel1Document = gql`
-    query zoomLevel1 {
-  zoomLevel1 {
-    name
-    count
-    id
-  }
-}
-    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
@@ -3894,9 +3859,6 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     ZoomLevel3Person(variables: ZoomLevel3PersonQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ZoomLevel3PersonQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ZoomLevel3PersonQuery>(ZoomLevel3PersonDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ZoomLevel3Person', 'query');
-    },
-    zoomLevel1(variables?: ZoomLevel1QueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ZoomLevel1Query> {
-      return withWrapper((wrappedRequestHeaders) => client.request<ZoomLevel1Query>(ZoomLevel1Document, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'zoomLevel1', 'query');
     }
   };
 }

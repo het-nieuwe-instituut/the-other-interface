@@ -1,6 +1,6 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common'
 import { KeysToVerify, TriplyService } from '../triply/triply.service'
-import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
+import { EntityNames } from '../util/entityNames.type'
 import { ZoomLevel3Service } from '../zoomLevel3/zoomLevel3.service'
 import { TriplyUtils } from '../triply/triply.utils'
 import { getHttpThumbnailOrNull } from '../util/helpers'
@@ -94,45 +94,6 @@ interface PublicationsBooksDetailZoomLevel3Data {
   shelfmark?: string
   permanentLink?: string
 }
-const publicationsBooksDetailZoomLevel3DataKeys: KeysToVerify<PublicationsBooksDetailZoomLevel3Data> =
-  {
-    id: true,
-    thumbnail: true,
-    typeOfPublication: true,
-    typeOfPublicationLabel: true,
-    title: true,
-    author: true,
-    authorLabel: true,
-    authorRole: true,
-    authorRoleLabel: true,
-    publisher: true,
-    publisherLabel: true,
-    yearOfPublication: true,
-    placeOfPublication: true,
-    placeOfPublicationLabel: true,
-    isbn: true,
-    description: true,
-    annotation: true,
-    codeOfArchive: true,
-    codeOfArchiveLabel: true,
-    edition: true,
-    illustration: true,
-    numberOfPages: true,
-    language: true,
-    languageLabel: true,
-    seriesLabel: true,
-    number: true,
-    geographicalKeyword: true,
-    geographicalKeywordLabel: true,
-    subject: true,
-    subjectLabel: true,
-    relatedPerInst: true,
-    relatedPerInstLabel: true,
-    objectNumber: true,
-    availability: true,
-    shelfmark: true,
-    permanentLink: true,
-  }
 
 interface PublicationsSerialDetailZoomLevel3Data {
   id: string
@@ -157,30 +118,6 @@ interface PublicationsSerialDetailZoomLevel3Data {
   holding?: string
   permanentLink?: string
 }
-const publicationsSerialDetailZoomLevel3DataKeys: KeysToVerify<PublicationsSerialDetailZoomLevel3Data> =
-  {
-    id: true,
-    thumbnail: true,
-    typeOfPublication: true,
-    typeOfPublicationLabel: true,
-    title: true,
-    publisher: true,
-    publisherLabel: true,
-    yearOfPublication: true,
-    placeOfPublication: true,
-    placeOfPublicationLabel: true,
-    subject: true,
-    subjectLabel: true,
-    language: true,
-    languageLabel: true,
-    continuedFrom: true,
-    continuedAs: true,
-    remarks: true,
-    availability: true,
-    shelfmark: true,
-    holding: true,
-    permanentLink: true,
-  }
 
 interface PublicationArticleDetailZoomLevel3Data {
   id: string
@@ -214,39 +151,6 @@ interface PublicationArticleDetailZoomLevel3Data {
   shelfmark?: string
   permanentLink?: string
 }
-const publicationArticleDetailZoomLevel3DataKeys: KeysToVerify<PublicationArticleDetailZoomLevel3Data> =
-  {
-    id: true,
-    thumbnail: true,
-    typeOfPublication: true,
-    typeOfPublicationLabel: true,
-    title: true,
-    author: true,
-    authorLabel: true,
-    authorRole: true,
-    authorRoleLabel: true,
-    sourceTitle: true,
-    sourceTitleLabel: true,
-    volume: true,
-    issue: true,
-    yearOfPublication: true,
-    page: true,
-    publisher: true,
-    publisherLabel: true,
-    abstract: true,
-    language: true,
-    languageLabel: true,
-    geographicalKeyword: true,
-    geographicalKeywordLabel: true,
-    subject: true,
-    subjectLabel: true,
-    relatedPerInst: true,
-    relatedPerInstLabel: true,
-    objectNumber: true,
-    availability: true,
-    shelfmark: true,
-    permanentLink: true,
-  }
 
 interface PublicationsAudioVisualDetailZoomLevel3Data {
   id: string
@@ -280,40 +184,6 @@ interface PublicationsAudioVisualDetailZoomLevel3Data {
   availability?: string
   shelfmark?: string
 }
-const publicationsAudioVisualDetailZoomLevel3DataKeys: KeysToVerify<PublicationsAudioVisualDetailZoomLevel3Data> =
-  {
-    id: true,
-    thumbnail: true,
-    typeOfPublication: true,
-    typeOfPublicationLabel: true,
-    title: true,
-    author: true,
-    authorLabel: true,
-    authorRole: true,
-    authorRoleLabel: true,
-    publisher: true,
-    publisherLabel: true,
-    yearOfPublication: true,
-    placeOfPublication: true,
-    placeOfPublicationLabel: true,
-    abstract: true,
-    annotation: true,
-    scope: true,
-    language: true,
-    languageLabel: true,
-    medium: true,
-    geographicalKeyword: true,
-    geographicalKeywordLabel: true,
-    subject: true,
-    subjectLabel: true,
-    relatedPerInst: true,
-    relatedPerInstLabel: true,
-    permanentLink: true,
-    objectNumber: true,
-    availability: true,
-    shelfmark: true,
-  }
-
 export enum PublicationsZoomLevel3Types {
   serial = 'serial',
   book = 'book',
@@ -324,17 +194,6 @@ export enum PublicationsZoomLevel3Types {
 type PublicationsZoomLevel3DataTypes =
   | PublicationsBooksDetailZoomLevel3Data
   | PublicationsSerialDetailZoomLevel3Data
-  | PublicationArticleDetailZoomLevel3Data
-  | PublicationsAudioVisualDetailZoomLevel3Data
-const publicationsZoomLevel3DataTypeKeys = {
-  [PublicationsZoomLevel3Types.article]: publicationArticleDetailZoomLevel3DataKeys,
-  [PublicationsZoomLevel3Types.audiovisual]: publicationsAudioVisualDetailZoomLevel3DataKeys,
-  [PublicationsZoomLevel3Types.book]: publicationsBooksDetailZoomLevel3DataKeys,
-  [PublicationsZoomLevel3Types.serial]: publicationsSerialDetailZoomLevel3DataKeys,
-}
-
-type PublicationsWithAuthors =
-  | PublicationsBooksDetailZoomLevel3Data
   | PublicationArticleDetailZoomLevel3Data
   | PublicationsAudioVisualDetailZoomLevel3Data
 
@@ -409,8 +268,6 @@ export class PublicationsService {
   private readonly ZoomLevel3RecordEndpoint = 'publications-recordPage-Editorial/run?'
 
   private readonly ZoomLevel2HoverEndpoint = 'publications-hoverState/run?'
-
-  // private readonly publicationDescriptionLevelEndpoint = 'Zoom-3-books-type/run'
 
   public constructor(
     private readonly triplyService: TriplyService,

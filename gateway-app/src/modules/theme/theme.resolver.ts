@@ -9,7 +9,7 @@ import {
   ThemeRelationResponseCollection,
 } from './theme.type'
 import { Theme } from './theme-dependency.type'
-import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
+import { EntityNames } from '../util/entityNames.type'
 
 @Resolver()
 export class ThemeResolver {

@@ -1,6 +1,4 @@
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
-// import { TriplyUtils } from '../triply/triply.utils'
-// import { CustomError } from '../util/customError'
 import { ZoomLevel3Service } from '../zoomLevel3/zoomLevel3.service'
 import {
   ObjectMakerType,
@@ -11,10 +9,10 @@ import {
   ObjectsZoomLevel3DetailType,
   ObjectsZoomLevelHoverType,
 } from './objects.type'
-import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { TriplyUtils } from '../triply/triply.utils'
 import { PaginationArgs } from '../util/paginationArgs.type'
 import { ObjectsService } from './objects.service'
+import { EntityNames } from '../util/entityNames.type'
 
 @Resolver(ObjectsZoomLevel3DetailType)
 export class ObjectZoomLevel3Resolver {

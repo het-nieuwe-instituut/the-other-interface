@@ -1,9 +1,9 @@
 import { ArgsType, Field, ObjectType } from '@nestjs/graphql'
-import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
+import { EntityNames } from '../util/entityNames.type'
 import { PeopleZoomLevel3DetailType } from '../people/people.type'
 import { IsOptional, IsString } from 'class-validator'
 // import { PeopleZoomLevel3DetailType } from '../people/people.type'
-// import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
+// import { EntityNames } from '../util/entityNames.type'
 
 @ObjectType()
 export class ObjectsZoomLevel3DetailType {

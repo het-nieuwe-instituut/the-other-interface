@@ -1,7 +1,6 @@
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
 import { ZoomLevel3Service } from '../zoomLevel3/zoomLevel3.service'
 
-import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import {
   ArchiveRecordRelationArgs,
   ArchiveRelationsType,
@@ -16,6 +15,7 @@ import { TriplyUtils } from '../triply/triply.utils'
 import { CustomError } from '../util/customError'
 import { ArchivesService } from './archives.service'
 import { PaginationArgs } from '../util/paginationArgs.type'
+import { EntityNames } from '../util/entityNames.type'
 
 @Resolver(ArchiveZoomLevel3DetailType)
 export class ArchivesZoomLevel3Resolver {
@@ -26,7 +26,7 @@ export class ArchivesZoomLevel3Resolver {
 
   @Query(() => ArchiveZoomLevel3DetailType)
   public archivesDetailZoomLevel3(@Parent() archiveCreator: ArchiveZoomLevel3DetailType) {
-    return this.zoomLevel3Service.getDetail(archiveCreator?.id, EntityNames?.Archives)
+    return this.zoomLevel3Service.getDetail(archiveCreator?.id, EntityNames.Archives)
   }
 }
 

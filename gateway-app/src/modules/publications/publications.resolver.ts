@@ -2,7 +2,7 @@ import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
 // import { CustomError } from '../util/customError'
 // import { PublicationsService } from './publications.service'
 
-import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
+import { EntityNames } from '../util/entityNames.type'
 import { ZoomLevel3Service } from '../zoomLevel3/zoomLevel3.service'
 import { CustomError } from '../util/customError'
 import { PublicationsService } from './publications.service'
@@ -23,10 +23,7 @@ import { PaginationArgs } from '../util/paginationArgs.type'
 
 @Resolver(PublicationZoomLevel3DetailType)
 export class PublicationZoomLevel3Resolver {
-  public constructor(
-    private readonly zoomLevel3Service: ZoomLevel3Service,
-    private readonly publicationsService: PublicationsService
-  ) {}
+  public constructor(private readonly zoomLevel3Service: ZoomLevel3Service) {}
 
   @Query(() => PublicationZoomLevel3DetailType)
   public publicationDetailZoomLevel3(@Parent() piublication: PublicationZoomLevel3DetailType) {

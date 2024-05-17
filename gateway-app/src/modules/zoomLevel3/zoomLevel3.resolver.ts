@@ -18,7 +18,7 @@ import {
   PublicationsBookZoomLevel3DetailType,
   PublicationsSerialZoomLevel3DetailType,
 } from '../publications/publications.type'
-import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
+import { EntityNames } from '../util/entityNames.type'
 import { ZoomLevel3Service } from './zoomLevel3.service'
 import {
   ZoomLevel3Args,

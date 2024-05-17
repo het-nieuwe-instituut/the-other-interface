@@ -1,11 +1,9 @@
 import { ArgsType, Field, ObjectType, createUnionType, registerEnumType } from '@nestjs/graphql'
-import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
+import { EntityNames } from '../util/entityNames.type'
 import { PublicationsZoomLevel3Types } from './publications.service'
 import { PeopleZoomLevel3DetailType } from '../people/people.type'
 import { CustomError } from '../util/customError'
 import { IsOptional, IsString } from 'class-validator'
-
-// registerEnumType(PublicationsZoomLevel3Types, { name: 'PublicationsZoomLevel3Types' })
 
 @ObjectType()
 export class PublicationZoomLevel3DetailType {

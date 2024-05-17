@@ -12,7 +12,6 @@ import {
   TriplyRecordFiltersInput,
   TriplyRecordRelationResponseCollection,
 } from './triplyRecord.type'
-import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 
 @Resolver()
 export class TriplyRecordResolver {
