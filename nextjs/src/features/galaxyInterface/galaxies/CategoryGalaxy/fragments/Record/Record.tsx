@@ -26,7 +26,6 @@ export const Record: React.FC<Props> = ({ record, tooltipPlace }) => {
   const { id, category } = record
   const { t } = useTypeSafeTranslation('category')
   const { lang, search } = useZoom2Params()
-  // TODO: HNIT-1833 - add in loading and error handling
   const { data, isLoading, isError } = useZoomHoverRecordResultQuery({ id, category })
 
   return (
