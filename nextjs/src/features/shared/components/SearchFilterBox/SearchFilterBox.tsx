@@ -1,5 +1,7 @@
 import { Flex, GridItem, Text } from '@chakra-ui/react'
 import ActionButton from './buttons/ActionButton/ActionButton'
+import { cn } from '@/features/ui/utils/cn'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
 
 interface Props {
   category?: string
@@ -31,27 +33,19 @@ export const SearchFilterBox: React.FC<Props> = ({
       maxWidth={'100%'}
       className={'px-2 h-[52px]'}
     >
-      <Flex
-        position="relative"
-        maxW={'100%'}
-        alignItems={'center'}
-        justifyContent={'space-between'}
-        className={'pt-1 pb-2'}
-      >
-        <Text className={'font-social-large text-xs leading-none text-blue.100'} isTruncated>
+      <div className="relative max-w-full flex items-center justify-between pt-1 pb-2">
+        <p className={cn('text-blue.100 mr-1 truncate', TypographyVariants({ social: 'label' }))}>
           {category}
-        </Text>
+        </p>
 
         {actionButton && (
           <ActionButton id={id} onClick={actionButtonClick}>
             {actionButton}
           </ActionButton>
         )}
-      </Flex>
+      </div>
 
-      <Text className={'font-social-large text-lg leading-none truncate'} isTruncated>
-        {subCategory}
-      </Text>
+      <p className={cn('truncate', TypographyVariants({ social: 'textfield' }))}>{subCategory}</p>
     </GridItem>
   )
 }
