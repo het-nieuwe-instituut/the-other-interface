@@ -1,14 +1,13 @@
 'use client'
-import { useSearchParams } from 'next/navigation'
 import initApiClientService from '../../utils/initApiClientService'
 import { EntityNames } from 'src/generated/graphql'
 import { useQuery } from '@tanstack/react-query'
+import { useLocale } from '../useLocale'
 
 export const useStoriesRelationForRecord = (type: EntityNames, id: string) => {
   const api = initApiClientService()
-  const searchParams = useSearchParams()
-  const lang = searchParams?.get('lang')
-  const queryFn = () => api.StoriesRelationForRecord({ id, type, lang: lang ?? 'nl' })
+  const lang = useLocale()
+  const queryFn = () => api.StoriesRelationForRecord({ id, type, locale: lang })
 
   return useQuery({
     queryKey: ['stories-relation-for-record', id, type, lang],

@@ -5,7 +5,7 @@ import { CloudCategory } from '@/features/shared/utils/categories'
 import { Text } from '@chakra-ui/react'
 import { RecordText } from '../RecordText'
 import { useRouter } from 'next/navigation'
-import { ZoomLevel2Type } from 'src/generated/graphql'
+import { Locale, ZoomLevel2Type } from 'src/generated/graphql'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 import { Tooltip } from '@/features/modules/components/ToolTip/Tooltip'
@@ -50,7 +50,7 @@ export const Record: React.FC<Props> = ({ record }) => {
   )
 }
 
-const RecordData = (record: RecordProps, lang?: string | null, search?: string) => {
+const RecordData = (record: RecordProps, lang?: Locale | null, search?: string) => {
   const { id, thumbnail, category, position, title } = record
   const router = useRouter()
 
