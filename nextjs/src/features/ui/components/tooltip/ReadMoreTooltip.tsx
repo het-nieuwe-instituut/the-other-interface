@@ -43,7 +43,6 @@ export const ReadMoreTooltip = (props: ReadMoreTooltipProps) => {
     className,
   } = props
   const id = useId()
-  console.log(isLoading, isEmpty, error)
   const ref = useRef<TooltipRefProps>(null)
   const content = useMemo(
     () =>
