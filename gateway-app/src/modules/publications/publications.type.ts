@@ -1,8 +1,9 @@
-import { ArgsType, Field, ObjectType, registerEnumType } from '@nestjs/graphql'
+import { ArgsType, Field, ObjectType, OmitType, registerEnumType } from '@nestjs/graphql'
 import { EntityNames } from '../util/entityNames.type'
 import { PublicationsZoomLevel3Types } from './publications.service'
 import { PeopleZoomLevel3DetailType } from '../people/people.type'
-import { IsOptional, IsString } from 'class-validator'
+import { IsString } from 'class-validator'
+import { Locale } from '../util/locale.type'
 
 @ObjectType()
 export class PublicationZoomLevel3DetailType {
@@ -470,10 +471,14 @@ export class PublicationRecordRelationArgs {
   @IsString()
   public id: string
 
-  @Field()
-  @IsOptional()
-  public lang?: string
+  @Field(() => Locale)
+  public locale: Locale
 }
+
+@ArgsType()
+export class PublicationRecordRelationCountArgs extends OmitType(PublicationRecordRelationArgs, [
+  'locale',
+] as const) {}
 
 @ObjectType()
 export class PublicationAuthorType {

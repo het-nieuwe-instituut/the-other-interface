@@ -12,6 +12,7 @@ import {
   PublicationsRelationsCountType,
   PublicationsZoomLevelHoverType,
   PublicationsZoomLevel2HoverArgs,
+  PublicationRecordRelationCountArgs,
 } from './publications.type'
 import { PaginationArgs } from '../util/paginationArgs.type'
 import { Locale } from '../util/locale.type'
@@ -23,14 +24,18 @@ export class PublicationRelationsZoomLevel3Resolver {
   @Query(() => [PublicationRelationsType], { nullable: true })
   public publicationRecordRelations(
     @Args() args: PublicationRecordRelationArgs,
-    @Args() paginationArgs: PaginationArgs,
-    @Args('locale') locale: Locale
+    @Args() paginationArgs: PaginationArgs
   ) {
-    return this.publicationsService.getRelationsData(args.id, args.type, paginationArgs, locale)
+    return this.publicationsService.getRelationsData(
+      args.id,
+      args.type,
+      paginationArgs,
+      args.locale
+    )
   }
 
   @Query(() => [PublicationsRelationsCountType], { nullable: true })
-  public publicationsRecordRelationsCount(@Args() args: PublicationRecordRelationArgs) {
+  public publicationsRecordRelationsCount(@Args() args: PublicationRecordRelationCountArgs) {
     return this.publicationsService.getRelationsDataCount(args.id, args.type)
   }
 }

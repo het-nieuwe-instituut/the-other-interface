@@ -3,13 +3,13 @@ import { PaginationArgs } from '../util/paginationArgs.type'
 
 import {
   PeopleRecordRelationArgs,
+  PeopleRecordRelationCountArgs,
   PeopleRelationsCountType,
   PeopleRelationsType,
   PeopleZoomLevel2HoverArgs,
   PeopleZoomLevelHoverType,
 } from './people.type'
 import { PeopleService } from './people.service'
-import { Locale } from '../util/locale.type'
 
 @Resolver(PeopleRelationsType)
 export class PeopleZoomLevel3Resolver {
@@ -18,14 +18,13 @@ export class PeopleZoomLevel3Resolver {
   @Query(() => [PeopleRelationsType], { nullable: true })
   public peopleRecordRelations(
     @Args() args: PeopleRecordRelationArgs,
-    @Args() paginationArgs: PaginationArgs,
-    @Args('locale') locale: Locale
+    @Args() paginationArgs: PaginationArgs
   ) {
-    return this.peopleService.getRelationsData(args.id, args.type, paginationArgs, locale)
+    return this.peopleService.getRelationsData(args.id, args.type, paginationArgs, args.locale)
   }
 
   @Query(() => [PeopleRelationsCountType], { nullable: true })
-  public peopleRecordRelationsCount(@Args() args: PeopleRecordRelationArgs) {
+  public peopleRecordRelationsCount(@Args() args: PeopleRecordRelationCountArgs) {
     return this.peopleService.getRelationsDataCount(args.id, args.type)
   }
 }
@@ -35,10 +34,7 @@ export class PeopleZoomLevelRecordHoverResolver {
   public constructor(private readonly peopleService: PeopleService) {}
 
   @Query(() => PeopleZoomLevelHoverType)
-  public async peopleZoomLevelHover(
-    @Args() args: PeopleZoomLevel2HoverArgs,
-    @Args('locale') locale: Locale
-  ) {
-    return this.peopleService.getZoomRecordHover(args.id, locale)
+  public async peopleZoomLevelHover(@Args() args: PeopleZoomLevel2HoverArgs) {
+    return this.peopleService.getZoomRecordHover(args.id, args.locale)
   }
 }

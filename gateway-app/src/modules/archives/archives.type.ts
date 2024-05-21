@@ -1,8 +1,9 @@
-import { ArgsType, Field, ObjectType, registerEnumType } from '@nestjs/graphql'
+import { ArgsType, Field, ObjectType, OmitType, registerEnumType } from '@nestjs/graphql'
 import { ArchivesZoomLevel3Types } from './archives.service'
 import { PeopleZoomLevel3DetailType } from '../people/people.type'
-import { IsOptional, IsString } from 'class-validator'
+import { IsString } from 'class-validator'
 import { EntityNames } from '../util/entityNames.type'
+import { Locale } from '../util/locale.type'
 
 @ObjectType()
 export class ArchiveZoomLevel3DetailType {
@@ -158,10 +159,14 @@ export class ArchiveRecordRelationArgs {
   @IsString()
   public id: string
 
-  @Field()
-  @IsOptional()
-  public lang?: string
+  @Field(() => Locale)
+  public locale: Locale
 }
+
+@ArgsType()
+export class ArchiveRecordRelationCountArgs extends OmitType(ArchiveRecordRelationArgs, [
+  'locale',
+] as const) {}
 
 @ObjectType()
 export class ArchivesRecordZoomLevel3Type {
@@ -195,11 +200,16 @@ export class ArchivesRecordZoomLevel3Type {
   @Field(() => String, { nullable: true })
   public externalSource?: string
 }
+
 @ArgsType()
 export class ArchivesZoomLevel2HoverArgs {
   @Field(() => String, { nullable: false })
   public id: string
+
+  @Field(() => Locale)
+  public locale: Locale
 }
+
 @ObjectType()
 export class ArchivesZoomLevelHoverType {
   @Field(() => String, { nullable: true })

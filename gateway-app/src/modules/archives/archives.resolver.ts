@@ -9,6 +9,7 @@ import {
   ArchivesRelationsCountType,
   ArchivesZoomLevel2HoverArgs,
   ArchivesZoomLevelHoverType,
+  ArchiveRecordRelationCountArgs,
 } from './archives.type'
 import { TriplyUtils } from '../triply/triply.utils'
 import { CustomError } from '../util/customError'
@@ -23,14 +24,13 @@ export class ArchivesRelationsZoomLevel3Resolver {
   @Query(() => [ArchiveRelationsType], { nullable: true })
   public archivesRecordRelations(
     @Args() args: ArchiveRecordRelationArgs,
-    @Args() paginationArgs: PaginationArgs,
-    @Args('locale') locale: Locale
+    @Args() paginationArgs: PaginationArgs
   ) {
-    return this.archivesService.getRelationsData(args.id, args.type, paginationArgs, locale)
+    return this.archivesService.getRelationsData(args.id, args.type, paginationArgs, args.locale)
   }
 
   @Query(() => [ArchivesRelationsCountType], { nullable: true })
-  public archivesRecordRelationsCount(@Args() args: ArchiveRecordRelationArgs) {
+  public archivesRecordRelationsCount(@Args() args: ArchiveRecordRelationCountArgs) {
     return this.archivesService.getRelationsDataCount(args.id, args.type)
   }
 }
@@ -68,10 +68,7 @@ export class ArchivesZoomLevelRecordHoverResolver {
   public constructor(private readonly archivesService: ArchivesService) {}
 
   @Query(() => ArchivesZoomLevelHoverType)
-  public async archivesZoomRecordHover(
-    @Args() args: ArchivesZoomLevel2HoverArgs,
-    @Args('locale') locale: Locale
-  ) {
-    return this.archivesService.getZoomRecordHover(args.id, locale)
+  public async archivesZoomRecordHover(@Args() args: ArchivesZoomLevel2HoverArgs) {
+    return this.archivesService.getZoomRecordHover(args.id, args.locale)
   }
 }

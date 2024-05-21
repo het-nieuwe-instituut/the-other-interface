@@ -3,6 +3,7 @@ import { ZoomLevel3Service } from '../zoomLevel3/zoomLevel3.service'
 import {
   ObjectMakerType,
   ObjectRecordRelationArgs,
+  ObjectRecordRelationCountArgs,
   ObjectRelationsCountType,
   ObjectRelationsType,
   ObjectsZoomLevel2HoverArgs,
@@ -20,14 +21,13 @@ export class ObjectRelationstZoomLevel3Resolver {
   @Query(() => [ObjectRelationsType], { nullable: true })
   public objectRecordRelations(
     @Args() args: ObjectRecordRelationArgs,
-    @Args() paginationArgs: PaginationArgs,
-    @Args('locale') locale: Locale
+    @Args() paginationArgs: PaginationArgs
   ) {
-    return this.objectsService.getRelationsData(args.id, args.type, paginationArgs, locale)
+    return this.objectsService.getRelationsData(args.id, args.type, paginationArgs, args.locale)
   }
 
   @Query(() => [ObjectRelationsCountType], { nullable: true })
-  public objectRecordRelationsCount(@Args() args: ObjectRecordRelationArgs) {
+  public objectRecordRelationsCount(@Args() args: ObjectRecordRelationCountArgs) {
     return this.objectsService.getRelationsDataCount(args.id, args.type)
   }
 }
@@ -53,10 +53,7 @@ export class ObjectsZoomLevelRecordHoverResolver {
   public constructor(private readonly objectsService: ObjectsService) {}
 
   @Query(() => ObjectsZoomLevelHoverType)
-  public async objectsZoomRecordHover(
-    @Args() args: ObjectsZoomLevel2HoverArgs,
-    @Args('locale') locale: Locale
-  ) {
-    return this.objectsService.getZoomRecordHover(args.id, locale)
+  public async objectsZoomRecordHover(@Args() args: ObjectsZoomLevel2HoverArgs) {
+    return this.objectsService.getZoomRecordHover(args.id, args.locale)
   }
 }
