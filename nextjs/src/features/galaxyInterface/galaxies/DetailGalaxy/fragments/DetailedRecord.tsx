@@ -44,9 +44,9 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
         <ResponsiveImage
           src={record?.thumbnail?.[0] ?? ''}
           alt={record?.title}
-          maxHeight="calc(100% - 3vw - 8px)" // where 2.6vw are a texts' line heights, 8px are gaps
+          className="max-h-[calc(100%-3vw-8px)]"
           size={'25vw'}
-          css={{
+          style={{
             flex: `1 1 calc(100% - 3vw - 8px)`,
           }}
           disableRightClick
