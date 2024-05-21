@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { DetailedRecord } from '../DetailedRecord'
 import { Record } from '../Record/Record'
 import { AllRelationTotalsType } from '../RelatedCategory'
