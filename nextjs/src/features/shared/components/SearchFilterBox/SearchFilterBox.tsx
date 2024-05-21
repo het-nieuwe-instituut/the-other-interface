@@ -33,7 +33,7 @@ export const SearchFilterBox: React.FC<Props> = ({
       maxWidth={'100%'}
       className={'px-2 h-[52px]'}
     >
-      <div className="relative max-w-full flex items-center justify-between pt-1 pb-2">
+      <div className="relative max-w-full flex items-center justify-between pt-1">
         <p className={cn('text-blue.100 mr-1 truncate', TypographyVariants({ social: 'label' }))}>
           {category}
         </p>
@@ -45,7 +45,7 @@ export const SearchFilterBox: React.FC<Props> = ({
         )}
       </div>
 
-      <p className={cn('truncate', TypographyVariants({ social: 'textfield' }))}>{subCategory}</p>
+      <p className={cn('truncate', TypographyVariants({ social: 'lg' }))}>{subCategory}</p>
     </GridItem>
   )
 }

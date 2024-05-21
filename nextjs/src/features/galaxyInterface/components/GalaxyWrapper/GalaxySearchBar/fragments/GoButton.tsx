@@ -1,5 +1,7 @@
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Text, Button } from '@chakra-ui/react'
+import { cn } from '@/features/ui/utils/cn'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
 
 type Props = {
   handleClick: () => void
@@ -23,7 +25,7 @@ export const GoButton: React.FC<Props> = ({ handleClick, hide = false }) => {
       className={'border-0'}
       visibility={hide ? 'hidden' : 'visible'}
     >
-      <Text className={'font-social-large text-sm text-pink.100'}>{t('go')}</Text>
+      <Text className={cn('text-pink.100', TypographyVariants({ social: 'md' }))}>{t('go')}</Text>
     </Button>
   )
 }

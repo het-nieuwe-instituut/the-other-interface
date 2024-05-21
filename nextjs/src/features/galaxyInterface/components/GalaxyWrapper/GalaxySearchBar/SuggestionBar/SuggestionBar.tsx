@@ -1,4 +1,6 @@
 import { FOOTER_Z_INDEX } from '@/features/shared/constants/mainConstants'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
+import { cn } from '@/features/ui/utils/cn'
 import { Flex, Box, Grid, Text, Wrap } from '@chakra-ui/react'
 
 interface Props {
@@ -35,7 +37,7 @@ export const SuggestionBar: React.FC<Props> = ({
       className={'px-4 py-2 gap-4'}
     >
       <Flex width="146px" pt={4}>
-        <Text className="text-pink.100 text-lg leading-none font-social-large">{label}</Text>
+        <p className={cn('text-pink.100', TypographyVariants({ social: 'textfield' }))}>{label}</p>
       </Flex>
       <Box
         overflow="hidden"
