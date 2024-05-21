@@ -7,7 +7,7 @@ interface ActionButtonProps {
 }
 
 const ActionButton: React.FC<ActionButtonProps> = ({ id, onClick, children }) => {
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation()
     if (onClick && id) {
       onClick(id)
@@ -15,9 +15,9 @@ const ActionButton: React.FC<ActionButtonProps> = ({ id, onClick, children }) =>
   }
 
   return (
-    <div className="relative w-2 h-2 cursor-pointer" onClick={handleClick}>
+    <button className="relative w-2 h-2 cursor-pointer" onClick={handleClick}>
       {children}
-    </div>
+    </button>
   )
 }
 
