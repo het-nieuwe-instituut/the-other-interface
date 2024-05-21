@@ -8,6 +8,7 @@ import {
   ArchiveZoomLevel3DetailType,
   ObjectsZoomLevel3DetailType,
   PublicationZoomLevel3DetailType,
+  Locale,
 } from 'src/generated/graphql'
 import { PublicationState } from '@/features/shared/types/enums'
 import { extractStoryData } from '@/features/shared/helpers/extractStoryData'
@@ -15,8 +16,9 @@ import { extractStoryData } from '@/features/shared/helpers/extractStoryData'
 type Payload =
   | {
       id: string
+      locale: Locale
     }
-  | { locale?: string | null; publicationState: PublicationState; id: string }
+  | { locale: Locale; publicationState: PublicationState; id: string }
 
 export type Zoom3Record =
   | PeopleZoomLevel3DetailType
@@ -45,7 +47,7 @@ export async function getZoom3RecordTask(type: Category, payload: Payload, api: 
     return {
       ...item,
       description: item?.description ?? '',
-      locale: 'nl',
+      locale: payload.locale,
     }
   } catch (e) {
     console.log(e, 'Error accured in zoom level 3 task')

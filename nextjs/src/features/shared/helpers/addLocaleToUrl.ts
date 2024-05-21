@@ -1,11 +1,11 @@
 import { Locale } from 'src/generated/graphql'
 
-export const addLocaleToUrl = (url: string, lang?: Locale | null) => {
+export const addLocaleToUrl = (path: string, lang?: Locale | null) => {
   if (!lang) {
-    return url
+    return path
   }
 
-  const parsedUrl = new URL(url)
+  const parsedUrl = new URL(path, window.location.origin)
   parsedUrl.searchParams.set('lang', lang)
 
   return parsedUrl.toString()

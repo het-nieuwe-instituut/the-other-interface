@@ -8,6 +8,7 @@ import {
 import {
   ArchivesRecordRelationsCountQuery,
   ArchivesRelationsQuery,
+  Locale,
   ObjectRecordRelationsCountQuery,
   PeopleRecordRelationsCountQuery,
   PublicationsRecordRelationsCountQuery,
@@ -25,12 +26,12 @@ export async function getZoom3CountsTask({
 }: {
   type: Category
   id: string
-  locale: string
+  locale: Locale
   api: Sdk
 }) {
   try {
     if (isStoryCategory(type)) {
-      const data = await api.StoryRelationsCount({ id, lang: locale })
+      const data = await api.StoryRelationsCount({ id, locale })
       const storyRelationsCountTotals = {
         archives: data.storyRelationsCount?.linkedTriplyRecords?.archives || 0,
         people: data.storyRelationsCount?.linkedTriplyRecords?.people || 0,
@@ -66,27 +67,23 @@ export async function getZoom3CountsTask({
         configByTypePeople?.relationsCount?.({
           id,
           type: CATEGORIES_TO_ENTITY_MAPPER[type],
-          lang: locale,
         }) as PeopleRecordRelationsCountQuery,
         configByTypePublications?.relationsCount?.({
           id,
           type: CATEGORIES_TO_ENTITY_MAPPER[type],
-          lang: locale,
         }) as PublicationsRecordRelationsCountQuery,
         configByTypeObjects?.relationsCount?.({
           id,
           type: CATEGORIES_TO_ENTITY_MAPPER[type],
-          lang: locale,
         }) as ObjectRecordRelationsCountQuery,
         configByTypeArchives?.relationsCount?.({
           id,
           type: CATEGORIES_TO_ENTITY_MAPPER[type],
-          lang: locale,
         }) as ArchivesRecordRelationsCountQuery,
         api?.StoriesRelationForRecord({
           id,
           type: CATEGORIES_TO_ENTITY_MAPPER[type],
-          lang: locale,
+          locale,
         }),
       ])
 
