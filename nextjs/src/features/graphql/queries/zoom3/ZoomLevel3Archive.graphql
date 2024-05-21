@@ -1,5 +1,5 @@
-query ZoomLevel3Archive($id: String!) {
-    zoomLevel3Archive(id: $id) {
+query ZoomLevel3Archive($id: String!, $locale: String!) {
+    zoomLevel3Archive(id: $id, locale: $locale) {
         __typename
         id
         title

@@ -7,7 +7,7 @@
 #import '../fragments/components/ButtonsModule.fragment.graphql'
 #import '../fragments/components/GridModule.fragment.graphql'
 
-query landingpageBySlug($locale: String, $slug: String!, $publicationState: String = "LIVE") {
+query landingpageBySlug($locale: String!, $slug: String!, $publicationState: String = "LIVE") {
     landingpages(locale: $locale, filters: { slug: { eq: $slug } },  publicationState: $publicationState) {
         data {
             id

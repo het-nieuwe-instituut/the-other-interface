@@ -45,24 +45,24 @@ fragment gridModuleFragment on ComponentModulesGridModule {
                     createdAt
                     updatedAt
                     recordId
-                    archive {
+                    archive (locale: $locale) {
                         id
                         type
                         title
                         objectNumber
                     }
-                    object {
+                    object (locale: $locale) {
                         description
                         thumbnail
                     }
-                    publication {
+                    publication (locale: $locale) {
                         id
                         type
                         title
                         yearOfPublication
                         objectNumber
                     }
-                    people {
+                    people (locale: $locale) {
                         name
                         nameTypes
                     }

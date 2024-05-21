@@ -1,5 +1,5 @@
-query StoryHoverRecordRelations($id: String!) {
-    storyWithoutRelations(id: $id) { 
+query StoryHoverRecordRelations($id: String!, $locale: String!) {
+    storyWithoutRelations(id: $id, locale: $locale) { 
         data {
             id
             attributes {

@@ -1,20 +1,20 @@
 fragment StoryWithoutRelationsFragment on StoryEntity {
-    id
-    attributes {
-        title
-        slug
-        description
-        shortDescription
-        createdAt
-        updatedAt
-        publishedAt
-        locale
-        author {
-            data {
-                attributes {
-                    firstName
-                }
-            }
+  id
+  attributes {
+    title
+    slug
+    description
+    shortDescription
+    createdAt
+    updatedAt
+    publishedAt
+    locale
+    author {
+      data {
+        attributes {
+          firstName
         }
+      }
     }
+  }
 }

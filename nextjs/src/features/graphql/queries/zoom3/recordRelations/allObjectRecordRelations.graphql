@@ -1,5 +1,5 @@
-query ObjectRecordRelations($id: String!, $type: EntityNames!, $lang: String!, $page: Int!, $pageSize: Int!) {
-    objectRecordRelations(type: $type, id: $id, lang: $lang, page: $page, pageSize: $pageSize) {
+query ObjectRecordRelations($id: String!, $type: EntityNames!, $locale: Locale!, $page: Int!, $pageSize: Int!) {
+    objectRecordRelations(type: $type, id: $id, locale: $locale, page: $page, pageSize: $pageSize) {
         id
         titleR
         referenceNumber

@@ -1,5 +1,5 @@
-query Zoom2($entityName: EntityNames!  $page: Int!, $pageSize: Int, $text: String) {
-    zoomLevel2(entityName: $entityName, page: $page, pageSize: $pageSize, text: $text) {
+query Zoom2($entityName: EntityNames!  $page: Int!, $pageSize: Int, $text: String, $locale: Locale!) {
+    zoomLevel2(entityName: $entityName, page: $page, pageSize: $pageSize, text: $text, locale: $locale) {
         page,
         nodes {
             title
@@ -9,8 +9,8 @@ query Zoom2($entityName: EntityNames!  $page: Int!, $pageSize: Int, $text: Strin
     }
 }
 
-query Zoom2Amount($entityName: EntityNames! $text: String) {
-    zoomLevel2Amount(entityName: $entityName, text: $text) {
+query Zoom2Amount($entityName: EntityNames! $text: String, $locale: Locale!) {
+    zoomLevel2Amount(entityName: $entityName, text: $text, locale: $locale) {
         total
     }
 }

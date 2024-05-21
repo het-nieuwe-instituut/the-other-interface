@@ -1,5 +1,5 @@
-query PublicationRecordRelations($id: String!, $type: EntityNames!, $lang: String!, $page: Int!, $pageSize: Int!) {
-    publicationRecordRelations(type: $type, id: $id, lang: $lang, page: $page, pageSize: $pageSize) {
+query PublicationRecordRelations($id: String!, $type: EntityNames!, $locale: Locale!, $page: Int!, $pageSize: Int!) {
+    publicationRecordRelations(type: $type, id: $id, locale: $locale, page: $page, pageSize: $pageSize) {
         idRelation
         titleR
         typePub

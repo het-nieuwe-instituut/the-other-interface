@@ -1,5 +1,5 @@
-query PeopleZoomRecordHover($id: String!) {
-    peopleZoomLevelHover(id: $id) {
+query PeopleZoomRecordHover($id: String!, $locale: Locale!) {
+    peopleZoomLevelHover(id: $id, locale: $locale) {
         title
         profession
         description
