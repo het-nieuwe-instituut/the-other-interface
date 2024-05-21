@@ -4,7 +4,6 @@ import { Grid, GridItem } from '@chakra-ui/react'
 import { GridParams } from '@/features/shared/types/position'
 import { CLOUD_CATEGORIES, CloudCategory } from '@/features/shared/utils/categories'
 import { keyExtractor } from '@/features/shared/utils/lists'
-import { useContext, useState } from 'react'
 import { Record } from '../Record/Record'
 import { usePresenter } from './usePresenter'
 
