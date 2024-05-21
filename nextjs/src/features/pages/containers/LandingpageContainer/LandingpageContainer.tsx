@@ -3,7 +3,6 @@ import { EditorialLayer } from '@/features/shared/components/Layers/EditorialLay
 import { CloudCategory } from '@/features/shared/utils/categories'
 import { LandingpageBySlugQuery } from 'src/generated/graphql'
 import { CategoryGalaxy } from '../../../galaxyInterface/galaxies/CategoryGalaxy/CategoryGalaxy'
-import { Box } from '@chakra-ui/react'
 
 interface Props {
   category: CloudCategory
@@ -14,7 +13,7 @@ export const LandingpageContainer: React.FC<Props> = ({ landingpage }) => {
   const editorialData = landingpage?.landingpages?.data[0]?.attributes
 
   return (
-    <Box>
+    <div>
       <GalaxyInterface>
         <CategoryGalaxy />
       </GalaxyInterface>
@@ -26,6 +25,6 @@ export const LandingpageContainer: React.FC<Props> = ({ landingpage }) => {
           components={editorialData.components}
         />
       )}
-    </Box>
+    </div>
   )
 }
