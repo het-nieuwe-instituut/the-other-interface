@@ -66,9 +66,9 @@ export const Story: React.FC<Props> = ({ story, isMainGrid, onLoad }) => {
           <ResponsiveImage
             src={image}
             alt={title}
-            maxHeight="calc(100% - 2vw - 5px)" // where 2vw is a title's line height, 5px is gap
+            className="max-h-[calc(100%-2vw-5px)]" // where 2vw is a title's line height, 5px is gap
             size={'12vw'}
-            css={{
+            style={{
               flex: `1 1 calc(100% - 2vw - 5px)`,
             }}
             onLoad={handleImageLoad}

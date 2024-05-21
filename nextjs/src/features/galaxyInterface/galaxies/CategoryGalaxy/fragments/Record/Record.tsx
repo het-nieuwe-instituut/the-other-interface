@@ -75,9 +75,9 @@ const RecordData = (record: RecordProps, lang?: string | null, search?: string) 
       <ResponsiveImage
         src={thumbnail}
         alt={title ?? ''}
-        maxHeight="calc(100% - 2.6vw - 7px)" // where 2.6vw are a texts' line heights, 15px are gaps
+        className="max-h-[calc(100%-2.6vw-7px)]" // where 2.6vw are a texts' line heights, 15px are gaps
         size={'16vw'}
-        css={{
+        style={{
           flex: `1 1 calc(100% - 2.6vw - 7px)`,
         }}
         disableRightClick

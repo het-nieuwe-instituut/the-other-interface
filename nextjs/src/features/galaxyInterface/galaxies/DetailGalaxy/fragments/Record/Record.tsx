@@ -66,9 +66,9 @@ export const Record: React.FC<Props> = ({
             <ResponsiveImage
               src={recordDetails?.thumbnail?.[0]}
               alt={recordDetails?.title}
-              maxHeight={'calc(100% - 2vw - 5px)'} // where 1.6vw are a texts' line heights, 5px are gaps
+              className="max-h-[calc(100%-2vw-5px)]" // where 1.6vw are a texts' line heights, 5px are gaps
               size={'11vw'}
-              css={{
+              style={{
                 flex: '1 1 calc(100% - 2vw - 5px)',
               }}
               disableRightClick

@@ -94,7 +94,11 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
             if (!title) {
               return null
             }
-            return <Title key={keyExtractor(component.id, index, array)}>{title}</Title>
+            return (
+              <Title className="pb-5" key={keyExtractor(component.id, index, array)}>
+                {title}
+              </Title>
+            )
           }
 
           if (component?.__typename === 'ComponentModulesButtonsModule') {
