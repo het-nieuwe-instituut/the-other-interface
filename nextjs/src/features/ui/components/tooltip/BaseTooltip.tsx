@@ -1,5 +1,6 @@
 'use client'
 import { cn } from '@/features/ui/utils/cn'
+import { Portal } from 'react-portal'
 import React, { CSSProperties, PropsWithChildren, useRef } from 'react'
 import { Tooltip as ReactTooltip, TooltipRefProps } from 'react-tooltip'
 import { PlacesType } from 'react-tooltip'

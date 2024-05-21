@@ -10,9 +10,11 @@ import { ZoomLevel2Type } from 'src/generated/graphql'
 import { RecordText } from '../RecordText'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { cn } from '@/features/ui/utils/cn'
+import { PlacesType } from 'react-tooltip'
 
 type Props = {
   record: RecordProps
+  tooltipPlace: PlacesType
 }
 
 type RecordProps = ZoomLevel2Type & {
@@ -20,7 +22,7 @@ type RecordProps = ZoomLevel2Type & {
   category: CloudCategory
 }
 
-export const Record: React.FC<Props> = ({ record }) => {
+export const Record: React.FC<Props> = ({ record, tooltipPlace }) => {
   const { id, category } = record
   const { t } = useTypeSafeTranslation('category')
   const { lang, search } = useZoom2Params()
@@ -34,10 +36,10 @@ export const Record: React.FC<Props> = ({ record }) => {
       ) : (
         <div className="absolute flex h-4/5 w-[70%]" style={{ ...record.position }}>
           <ReadMoreTooltip
-            error={isError ? t('couldNotFetchHover') : ''}
-            place="bottom-start"
-            isEmpty={!data?.description && !data?.title}
             isLoading={isLoading}
+            error={isError ? t('couldNotFetchHover') : ''}
+            place={tooltipPlace}
+            isEmpty={!data?.description && !data?.title}
             title={data?.title ?? undefined}
             description={data?.description ?? undefined}
             className="size-full"

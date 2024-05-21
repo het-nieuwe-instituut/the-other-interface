@@ -11,8 +11,8 @@ import { cn } from '../../utils/cn'
 import { BaseTooltip } from './BaseTooltip'
 
 import Loading from '@/features/ui/icons/loading.svg'
-import useTranslation from 'next-translate/useTranslation'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+
 interface ReadMoreTooltipProps extends PropsWithChildren {
   title?: string
   description?: string
@@ -39,9 +39,11 @@ export const ReadMoreTooltip = (props: ReadMoreTooltipProps) => {
     isLoading,
     place,
     error,
+    isEmpty,
     className,
   } = props
   const id = useId()
+  console.log(isLoading, isEmpty, error)
   const ref = useRef<TooltipRefProps>(null)
   const content = useMemo(
     () =>
@@ -51,7 +53,7 @@ export const ReadMoreTooltip = (props: ReadMoreTooltipProps) => {
           isLoading={isLoading}
           title={title}
           description={description}
-          isEmpty={props.isEmpty}
+          isEmpty={isEmpty}
           readMoreHref={readMoreHref}
           readMoreText={readMoreText}
           error={error}
@@ -59,7 +61,7 @@ export const ReadMoreTooltip = (props: ReadMoreTooltipProps) => {
           place={place}
         />
       ),
-    [error, id, color, description, isLoading, title, readMoreHref, readMoreText]
+    [id, isLoading, title, description, isEmpty, readMoreHref, readMoreText, error, color, place]
   )
 
   return (
@@ -70,7 +72,6 @@ export const ReadMoreTooltip = (props: ReadMoreTooltipProps) => {
         ref={ref}
         offset={offset}
         html={content}
-        key={isLoading ? 1 : 0}
         place={place}
       >
         {children}
@@ -97,7 +98,7 @@ const ReadMoreTooltipContent = ({
       <div
         id={id}
         role="tooltip"
-        className={cn('w-[243.76px] justify-start p-4 text-start bg-error-100')}
+        className={cn('w-[243.76px] justify-start p-4 text-start bg-error-100 ')}
       >
         <p className={TypographyVariants({ social: 'sm', className: 'text-white' })}>{error}</p>
       </div>
@@ -109,7 +110,7 @@ const ReadMoreTooltipContent = ({
       id={id}
       role="tooltip"
       className={cn(
-        'w-[243.76px] justify-start p-4 text-start',
+        'w-[243.76px] justify-start p-4 text-start z-[9999]',
         color === 'black' && 'bg-black-100',
         color === 'blue' && 'bg-blue-100'
       )}
@@ -121,6 +122,14 @@ const ReadMoreTooltipContent = ({
   function renderContent() {
     if (isLoading) {
       return (
+        <div className="flex w-full items-center justify-center p-2">
+          <Loading className={'animate-spin text-pink-100'} />
+        </div>
+      )
+    }
+
+    if (isEmpty) {
+      return (
         <p
           className={TypographyVariants({
             social: 'sm',
@@ -129,14 +138,6 @@ const ReadMoreTooltipContent = ({
         >
           {t('noDataFound')}
         </p>
-      )
-    }
-
-    if (isEmpty) {
-      return (
-        <div className="flex w-full items-center justify-center p-2">
-          <Loading className={'animate-spin text-pink-100'} />
-        </div>
       )
     }
 
