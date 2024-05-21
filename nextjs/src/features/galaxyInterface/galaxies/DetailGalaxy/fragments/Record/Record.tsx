@@ -1,8 +1,11 @@
 import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
 
-import { Tooltip } from '@/features/modules/components/ToolTip/Tooltip'
 import { useZoomHoverRecordResultQuery } from '@/features/shared/hooks/queries/useZoomHoverRecordResultQuery'
-import { TypographyVariants } from '@/features/ui/components/typography/variants'
+import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import {
+  ReadMoreTooltip,
+  ReadMoreTooltipProps,
+} from '@/features/ui/components/tooltip/ReadMoreTooltip'
 import { cn } from '@/features/ui/utils/cn'
 import { PositionedRecord } from '../types'
 import { RecordText } from './RecordText'
@@ -13,30 +16,39 @@ type Props = {
   record: PositionedRecord
   tabIndex?: number
   style?: React.CSSProperties
+  tooltipPlace?: ReadMoreTooltipProps['place']
 }
 
-export const Record: React.FC<Props> = ({ record, style, tabIndex = 0 }) => {
+export const Record: React.FC<Props> = ({
+  record,
+  style,
+  tabIndex = 0,
+  tooltipPlace = 'bottom',
+}) => {
   const { id, category, position, grid } = record
   const { recordDetails, isLoading, handleClick } = usePresenter(id, category)
   // TODO: HNIT-1833 - add in loading and error handling
-  const { data } = useZoomHoverRecordResultQuery({ id, category })
+  const {
+    data,
+    isError,
+    isLoading: isLoadingHover,
+  } = useZoomHoverRecordResultQuery({ id, category })
   const { coordinates, ref } = useCalculateLine()
+  const { t } = useTypeSafeTranslation('category')
 
   if (!recordDetails && !isLoading) return null
 
   return (
     <div style={{ ...grid, ...style }}>
       <div className="peer relative size-full">
-        <Tooltip
-          isDisabled={!data}
-          label={
-            <div>
-              <p className={TypographyVariants({ social: 'sm', className: ' font-bold' })}>
-                {data?.title}
-              </p>
-              <p className={TypographyVariants({ social: 'sm' })}>{data?.description}</p>
-            </div>
-          }
+        <ReadMoreTooltip
+          isLoading={isLoadingHover}
+          error={isError ? t('couldNotFetchHover') : ''}
+          place={tooltipPlace}
+          isEmpty={!data?.description && !data?.title}
+          title={data?.title ?? undefined}
+          description={data?.description ?? undefined}
+          className="size-full"
         >
           <button
             ref={ref}
@@ -62,7 +74,7 @@ export const Record: React.FC<Props> = ({ record, style, tabIndex = 0 }) => {
 
             <RecordText title={recordDetails?.title} categoryType={category} />
           </button>
-        </Tooltip>
+        </ReadMoreTooltip>
       </div>
 
       <div
