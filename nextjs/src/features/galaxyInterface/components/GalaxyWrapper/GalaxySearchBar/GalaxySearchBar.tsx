@@ -12,6 +12,8 @@ import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/Se
 import { Wrap, WrapItem } from '@chakra-ui/react'
 import { useSearchBarPosition } from './useSearchBarPosition'
 import CloseIconSmall from '@/icons/close-icon-small.svg'
+import { cn } from '@/features/ui/utils/cn'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
 
 type Props = {
   total?: number
@@ -61,12 +63,12 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) =>
         alignItems="flex-start"
         className={'self-end h-[60px] pt-1 justify-center'}
       >
-        <Text className={'text-pink.100 text-lg leading-none font-social-large'}>
+        <p className={cn('text-pink.100', TypographyVariants({ social: 'textfield' }))}>
           {total ? total : searchResultAmount}
-        </Text>
-        <Text className={'text-pink.100 text-lg leading-none font-social-large'}>
+        </p>
+        <p className={cn('text-pink.100', TypographyVariants({ social: 'textfield' }))}>
           {t('resultsFor')}
-        </Text>
+        </p>
       </Flex>
 
       <div ref={wrapRef} className="flex flex-wrap p-0 gap-0">
