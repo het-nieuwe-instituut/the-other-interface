@@ -25,8 +25,8 @@ export const Record: React.FC<Props> = ({ record, style, tabIndex = 0 }) => {
   if (!recordDetails && !isLoading) return null
 
   return (
-    <div className="group" style={{ ...grid, ...style }}>
-      <div className="relative size-full">
+    <div style={{ ...grid, ...style }}>
+      <div className="peer relative size-full">
         <Tooltip
           isDisabled={!data}
           label={
@@ -74,7 +74,7 @@ export const Record: React.FC<Props> = ({ record, style, tabIndex = 0 }) => {
           bottom: 0,
           zIndex: -80,
         }}
-        className="hidden group-hover:block"
+        className="hidden peer-hover:block"
       >
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <line
