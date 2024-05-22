@@ -16,7 +16,7 @@ const ActionButton: React.FC<ActionButtonProps> = ({ id, onClick, children }) =>
   }
 
   return (
-    <button className="relative w-2 h-2 cursor-pointer" onClick={handleClick}>
+    <button className="relative size-2" onClick={handleClick}>
       {children}
     </button>
   )
