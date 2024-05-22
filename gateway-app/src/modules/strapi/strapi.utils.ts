@@ -25,7 +25,7 @@ export class StrapiUtils {
     }
   }
 
-  public static getEntityNameForRecordType(type: Enum_Triplyrecord_Type) {
+  public static getEntityNameForRecordType(type: Enum_Triplyrecord_Type | string) {
     switch (type) {
       case Enum_Triplyrecord_Type.People:
         return EntityNames.People
