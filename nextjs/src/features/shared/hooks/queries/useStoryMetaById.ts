@@ -21,6 +21,7 @@ export function useStoryMetaById(id: string) {
   return useQuery({
     queryKey: ['story-meta-by-id', id, lang, isDraftMode],
     queryFn,
+    suspense: true,
     refetchOnWindowFocus: false,
   })
 }

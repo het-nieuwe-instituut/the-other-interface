@@ -2,7 +2,6 @@
 import { Box, Grid, GridItem, useTheme } from '@chakra-ui/react'
 import React from 'react'
 import SuspenseLoader from '../SuspenseLoader/SuspenseLoader'
-import ErrorBoundaryWrapper from '../Error/ErrorBoundary/ErrorBoundary'
 
 interface Props {
   LeftContent: React.ReactNode

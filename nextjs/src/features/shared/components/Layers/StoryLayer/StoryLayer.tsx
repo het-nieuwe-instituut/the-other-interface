@@ -6,8 +6,9 @@ import { LayerWrapper } from '../LayerWrapper'
 import { StoryBottomContent } from '../../Story/StoryBottomContent/StoryBottomContent'
 import { useStoryByIdQuery } from '@/features/shared/hooks/queries/useStoryByIdQuery'
 import { useParams } from 'next/navigation'
-import { Loader } from '@/features/galaxyInterface/components/Loader/Loader'
+
 import { useRedirectToErrorOnError } from '@/features/shared/hooks/useRedirectToErrorOnError'
+import { ThemedSpinner } from '../../Loading/ThemedSpinner/ThemedSpinner'
 
 export const StoryLayer = () => {
   const params = useParams()
@@ -20,7 +21,7 @@ export const StoryLayer = () => {
   if (isLoading) {
     return (
       <div className="flex h-full w-screen items-center justify-center p-12">
-        <Loader />
+        <ThemedSpinner />
       </div>
     )
   }
