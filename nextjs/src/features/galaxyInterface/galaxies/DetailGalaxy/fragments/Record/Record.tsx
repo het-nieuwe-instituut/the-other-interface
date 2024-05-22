@@ -10,13 +10,16 @@ import { cn } from '@/features/ui/utils/cn'
 import { PositionedRecord } from '../types'
 import { RecordText } from './RecordText'
 import { useCalculateLine } from './useCalculateLine'
-import { usePresenter } from './usePresenter'
+import { useRecords } from './useRecords'
+import { Flex } from '@chakra-ui/react'
+import { Loader } from '@/features/galaxyInterface/components/Loader/Loader'
 
 type Props = {
   record: PositionedRecord
   tabIndex?: number
   style?: React.CSSProperties
   tooltipPlace?: ReadMoreTooltipProps['place']
+  isIdLoading?: boolean
 }
 
 export const Record: React.FC<Props> = ({
@@ -26,7 +29,7 @@ export const Record: React.FC<Props> = ({
   tooltipPlace = 'bottom',
 }) => {
   const { id, category, position, grid } = record
-  const { recordDetails, isLoading, handleClick } = usePresenter(id, category)
+  const { recordDetails, isLoading, handleClick } = useRecords(id, category)
   // TODO: HNIT-1833 - add in loading and error handling
   const {
     data,
@@ -36,7 +39,15 @@ export const Record: React.FC<Props> = ({
   const { coordinates, ref } = useCalculateLine()
   const { t } = useTypeSafeTranslation('category')
 
-  if (!recordDetails && !isLoading) return null
+  if (isLoading) {
+    return (
+      <Flex justify="center" align="center" height="100%">
+        <Loader />
+      </Flex>
+    )
+  }
+
+  if (!recordDetails) return null
 
   return (
     <div style={{ ...grid, ...style }}>

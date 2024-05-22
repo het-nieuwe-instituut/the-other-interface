@@ -7,7 +7,7 @@ import { useRecordRelations } from '@/features/record/hooks/useRecordRelations'
 import { useParams, useSearchParams } from 'next/navigation'
 import { AllRelationTotalsType } from './RelatedCategory'
 
-export const usePresenter = (
+export const usePositionedRecords = (
   category: CloudCategory,
   allRelationTotals?: AllRelationTotalsType
 ) => {
@@ -19,8 +19,8 @@ export const usePresenter = (
   const maxPages = Math.ceil((allRelationTotals?.[category] || 2) / 2)
   const current = useRef(0)
   const next = useRef(1)
-  const { data, isLoading } = useRecordRelations(recordCategory, id, maxPages)
-  console.log(isLoading)
+  const { data } = useRecordRelations(recordCategory, id, maxPages)
+
   useEffect(() => {
     if (page <= maxPages) {
       if (page % 2 === 0) {

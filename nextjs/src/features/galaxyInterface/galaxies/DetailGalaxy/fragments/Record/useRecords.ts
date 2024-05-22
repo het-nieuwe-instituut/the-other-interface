@@ -4,7 +4,7 @@ import { useRecordDetail } from '@/features/record/hooks/useRecordDetail'
 import { Category } from '@/features/shared/utils/categories'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 
-export const usePresenter = (id: string, category: Category) => {
+export const useRecords = (id: string, category: Category) => {
   const { data, isLoading } = useRecordDetail(category, id)
   const router = useRouter()
   const searchParams = useSearchParams()
