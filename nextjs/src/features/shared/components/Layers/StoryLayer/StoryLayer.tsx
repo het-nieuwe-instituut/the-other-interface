@@ -9,6 +9,7 @@ import { useParams } from 'next/navigation'
 
 import { useRedirectToErrorOnError } from '@/features/shared/hooks/useRedirectToErrorOnError'
 import { ThemedSpinner } from '../../Loading/ThemedSpinner/ThemedSpinner'
+import ErrorBoundaryWrapper from '../../Error/ErrorBoundary/ErrorBoundary'
 
 export const StoryLayer = () => {
   const params = useParams()
@@ -34,7 +35,11 @@ export const StoryLayer = () => {
           <DynamicComponentRenderer components={story?.attributes?.components} isStoryPage={true} />
         </>
       }
-      RightContent={<StoryMeta />}
+      RightContent={
+        <ErrorBoundaryWrapper>
+          <StoryMeta />
+        </ErrorBoundaryWrapper>
+      }
       BottomContent={<StoryBottomContent />}
     />
   )

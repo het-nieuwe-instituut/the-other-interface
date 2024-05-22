@@ -11,12 +11,13 @@ export function useStoryMetaById(id: string) {
   const lang = useLocale()
   const { isDraftMode } = useSelector((state: State) => state.shared)
 
-  const queryFn = () =>
-    api.storyMetaById({
+  const queryFn = () => {
+    return api.storyMetaById({
       id,
       locale: lang ?? 'nl',
       publicationState: getPublicationState(isDraftMode),
     })
+  }
 
   return useQuery({
     queryKey: ['story-meta-by-id', id, lang, isDraftMode],
