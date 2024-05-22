@@ -1,32 +1,18 @@
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
-// import { TriplyUtils } from '../triply/triply.utils'
-// import { CustomError } from '../util/customError'
 import { ZoomLevel3Service } from '../zoomLevel3/zoomLevel3.service'
 import {
   ObjectMakerType,
   ObjectRecordRelationArgs,
+  ObjectRecordRelationCountArgs,
   ObjectRelationsCountType,
   ObjectRelationsType,
   ObjectsZoomLevel2HoverArgs,
-  ObjectsZoomLevel3DetailType,
   ObjectsZoomLevelHoverType,
 } from './objects.type'
-import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { TriplyUtils } from '../triply/triply.utils'
 import { PaginationArgs } from '../util/paginationArgs.type'
 import { ObjectsService } from './objects.service'
-
-@Resolver(ObjectsZoomLevel3DetailType)
-export class ObjectZoomLevel3Resolver {
-  public constructor(
-    private readonly zoomLevel3Service: ZoomLevel3Service,
-    private readonly objectsService: ObjectsService
-  ) {}
-  @Query(() => ObjectsZoomLevel3DetailType)
-  public objectDetailZoomLevel3(@Parent() object: ObjectsZoomLevel3DetailType) {
-    return this.zoomLevel3Service.getDetail(object?.id, EntityNames.Objects)
-  }
-}
+import { Locale } from '../util/locale.type'
 
 @Resolver(ObjectRelationsType)
 export class ObjectRelationstZoomLevel3Resolver {
@@ -37,11 +23,11 @@ export class ObjectRelationstZoomLevel3Resolver {
     @Args() args: ObjectRecordRelationArgs,
     @Args() paginationArgs: PaginationArgs
   ) {
-    return this.objectsService.getRelationsData(args.id, args.type, paginationArgs)
+    return this.objectsService.getRelationsData(args.id, args.type, paginationArgs, args.locale)
   }
 
   @Query(() => [ObjectRelationsCountType], { nullable: true })
-  public objectRecordRelationsCount(@Args() args: ObjectRecordRelationArgs) {
+  public objectRecordRelationsCount(@Args() args: ObjectRecordRelationCountArgs) {
     return this.objectsService.getRelationsDataCount(args.id, args.type)
   }
 }
@@ -50,7 +36,7 @@ export class ObjectRelationstZoomLevel3Resolver {
 export class ObjectMakerResolver {
   public constructor(private readonly zoomLevel3Service: ZoomLevel3Service) {}
   @ResolveField()
-  public populatedMaker(@Parent() object: ObjectMakerType) {
+  public populatedMaker(@Parent() object: ObjectMakerType, @Args('locale') locale: Locale) {
     if (!object.maker) {
       return
     }
@@ -58,7 +44,7 @@ export class ObjectMakerResolver {
     const type = TriplyUtils.getEntityNameFromUri(object.maker)
     const id = TriplyUtils.getIdFromUri(object.maker)
 
-    return this.zoomLevel3Service.getDetail(id, type)
+    return this.zoomLevel3Service.getDetail(id, type, locale)
   }
 }
 
@@ -68,6 +54,6 @@ export class ObjectsZoomLevelRecordHoverResolver {
 
   @Query(() => ObjectsZoomLevelHoverType)
   public async objectsZoomRecordHover(@Args() args: ObjectsZoomLevel2HoverArgs) {
-    return this.objectsService.getZoomRecordHover(args.id)
+    return this.objectsService.getZoomRecordHover(args.id, args.locale)
   }
 }

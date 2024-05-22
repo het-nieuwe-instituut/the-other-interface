@@ -1,5 +1,5 @@
-query ObjectRelations($id: String!, $page: Int!, $lang: String!) { 
-    relations(type: Objects, id: $id, page: $page, lang: $lang) {
+query ObjectRelations($id: String!, $page: Int!, $locale: Locale!) { 
+    relations(type: Objects, id: $id, page: $page, locale: $locale) {
         ...zoom3RelationsFragment
     }
 }

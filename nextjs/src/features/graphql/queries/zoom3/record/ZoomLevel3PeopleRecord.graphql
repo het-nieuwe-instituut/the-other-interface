@@ -1,5 +1,5 @@
-query ZoomLevel3PeopleRecord($id: String!) {
-    peopleRecordZoomLevel3(id: $id) {
+query ZoomLevel3PeopleRecord($id: String!, $locale: String!) {
+    peopleRecordZoomLevel3(id: $id, locale: $locale) {
         type
         profession
         nameVariation

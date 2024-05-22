@@ -1,4 +1,4 @@
-query storiesWithoutRelations($pagination: PaginationArg, $locale: String) {
+query storiesWithoutRelations($pagination: PaginationArg, $locale: String!) {
     storiesWithoutRelations(pagination: $pagination, locale: $locale) {
         data {
             id

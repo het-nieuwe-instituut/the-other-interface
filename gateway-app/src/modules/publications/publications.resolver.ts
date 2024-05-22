@@ -1,13 +1,7 @@
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
-// import { CustomError } from '../util/customError'
-// import { PublicationsService } from './publications.service'
-
-import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
-import { ZoomLevel3Service } from '../zoomLevel3/zoomLevel3.service'
 import { CustomError } from '../util/customError'
 import { PublicationsService } from './publications.service'
 import {
-  PublicationZoomLevel3DetailType,
   PublicationsAudioVisualZoomLevel3DetailType,
   PublicationsArticleZoomLevel3DetailType,
   PublicationsBookZoomLevel3DetailType,
@@ -18,21 +12,10 @@ import {
   PublicationsRelationsCountType,
   PublicationsZoomLevelHoverType,
   PublicationsZoomLevel2HoverArgs,
+  PublicationRecordRelationCountArgs,
 } from './publications.type'
 import { PaginationArgs } from '../util/paginationArgs.type'
-
-@Resolver(PublicationZoomLevel3DetailType)
-export class PublicationZoomLevel3Resolver {
-  public constructor(
-    private readonly zoomLevel3Service: ZoomLevel3Service,
-    private readonly publicationsService: PublicationsService
-  ) {}
-
-  @Query(() => PublicationZoomLevel3DetailType)
-  public publicationDetailZoomLevel3(@Parent() piublication: PublicationZoomLevel3DetailType) {
-    return this.zoomLevel3Service.getDetail(piublication?.id, EntityNames.Publications)
-  }
-}
+import { Locale } from '../util/locale.type'
 
 @Resolver(PublicationRelationsType)
 export class PublicationRelationsZoomLevel3Resolver {
@@ -43,11 +26,16 @@ export class PublicationRelationsZoomLevel3Resolver {
     @Args() args: PublicationRecordRelationArgs,
     @Args() paginationArgs: PaginationArgs
   ) {
-    return this.publicationsService.getRelationsData(args.id, args.type, paginationArgs)
+    return this.publicationsService.getRelationsData(
+      args.id,
+      args.type,
+      paginationArgs,
+      args.locale
+    )
   }
 
   @Query(() => [PublicationsRelationsCountType], { nullable: true })
-  public publicationsRecordRelationsCount(@Args() args: PublicationRecordRelationArgs) {
+  public publicationsRecordRelationsCount(@Args() args: PublicationRecordRelationCountArgs) {
     return this.publicationsService.getRelationsDataCount(args.id, args.type)
   }
 }
@@ -60,8 +48,11 @@ export class PublicationsAudioVisualResolver {
   public publicationAudioVisual() {
     throw CustomError.internal('not yet implemented')
   }
-  public populatedPublisher(@Parent() publication: PublicationsAudioVisualZoomLevel3DetailType) {
-    return this.publicationsService.resolvePublisher(publication)
+  public populatedPublisher(
+    @Parent() publication: PublicationsAudioVisualZoomLevel3DetailType,
+    @Args('locale') locale: Locale
+  ) {
+    return this.publicationsService.resolvePublisher(publication, locale)
   }
 }
 
@@ -75,8 +66,11 @@ export class PublicationsArticleResolver {
   }
 
   @ResolveField()
-  public populatedPublisher(@Parent() publication: PublicationsArticleZoomLevel3DetailType) {
-    return this.publicationsService.resolvePublisher(publication)
+  public populatedPublisher(
+    @Parent() publication: PublicationsArticleZoomLevel3DetailType,
+    @Args('locale') locale: Locale
+  ) {
+    return this.publicationsService.resolvePublisher(publication, locale)
   }
 }
 
@@ -90,8 +84,11 @@ export class PublicationsBookResolver {
   }
 
   @ResolveField()
-  public populatedPublisher(@Parent() publication: PublicationsBookZoomLevel3DetailType) {
-    return this.publicationsService.resolvePublisher(publication)
+  public populatedPublisher(
+    @Parent() publication: PublicationsBookZoomLevel3DetailType,
+    @Args('locale') locale: Locale
+  ) {
+    return this.publicationsService.resolvePublisher(publication, locale)
   }
 }
 
@@ -105,8 +102,11 @@ export class PublicationsSerialResolver {
   }
 
   @ResolveField()
-  public populatedPublisher(@Parent() publication: PublicationsSerialZoomLevel3DetailType) {
-    return this.publicationsService.resolvePublisher(publication)
+  public populatedPublisher(
+    @Parent() publication: PublicationsSerialZoomLevel3DetailType,
+    @Args('locale') locale: Locale
+  ) {
+    return this.publicationsService.resolvePublisher(publication, locale)
   }
 }
 
@@ -115,8 +115,11 @@ export class PublicationAuthorResolver {
   public constructor(private readonly publicationsService: PublicationsService) {}
 
   @ResolveField()
-  public populatedAuthor(@Parent() publication: PublicationsBookZoomLevel3DetailType) {
-    return this.publicationsService.resolveAuthor(publication)
+  public populatedAuthor(
+    @Parent() publication: PublicationsBookZoomLevel3DetailType,
+    @Args('locale') locale: Locale
+  ) {
+    return this.publicationsService.resolveAuthor(publication, locale)
   }
 }
 
@@ -125,7 +128,10 @@ export class PublicationsZoomLevelRecordHoverResolver {
   public constructor(private readonly publicationsService: PublicationsService) {}
 
   @Query(() => PublicationsZoomLevelHoverType)
-  public async publicationsZoomRecordHover(@Args() args: PublicationsZoomLevel2HoverArgs) {
-    return this.publicationsService.getZoomRecordHover(args.id)
+  public async publicationsZoomRecordHover(
+    @Args() args: PublicationsZoomLevel2HoverArgs,
+    @Args('locale') locale: Locale
+  ) {
+    return this.publicationsService.getZoomRecordHover(args.id, locale)
   }
 }

@@ -1,6 +1,7 @@
 import {
   ArchivesRecordRelationsCountQuery,
   ArchivesRelationsQuery,
+  Locale,
   ObjectRecordRelationsCountQuery,
   PeopleRecordRelationsCountQuery,
   PublicationsRecordRelationsCountQuery,
@@ -25,7 +26,7 @@ export async function getPaginatedRelationsTask({
 }: {
   type: Category
   id: string
-  locale: string
+  locale: Locale
   api: Sdk
   page: number
   category: Category
@@ -36,14 +37,13 @@ export async function getPaginatedRelationsTask({
       const publications = await configByTypePublications?.paginatedRelationsQuery?.({
         id,
         type: CATEGORIES_TO_ENTITY_MAPPER[type],
-        lang: locale,
+        locale,
         page,
         pageSize: 5,
       })
       const publicationsCount = (await configByTypePublications?.relationsCount?.({
         id,
         type: CATEGORIES_TO_ENTITY_MAPPER[type],
-        lang: locale,
       })) as PublicationsRecordRelationsCountQuery
       return {
         ...publications,
@@ -55,14 +55,13 @@ export async function getPaginatedRelationsTask({
       const people = await configByTypePeople?.paginatedRelationsQuery?.({
         id,
         type: CATEGORIES_TO_ENTITY_MAPPER[type],
-        lang: locale,
+        locale,
         page,
         pageSize: 5,
       })
       const peopleCount = (await configByTypePeople?.relationsCount?.({
         id,
         type: CATEGORIES_TO_ENTITY_MAPPER[type],
-        lang: locale,
       })) as PeopleRecordRelationsCountQuery
       return { ...people, total: peopleCount?.peopleRecordRelationsCount?.[0].total ?? '0' }
     }
@@ -71,14 +70,13 @@ export async function getPaginatedRelationsTask({
       const objects = await configByTypeObjects?.paginatedRelationsQuery?.({
         id,
         type: CATEGORIES_TO_ENTITY_MAPPER[type],
-        lang: locale,
+        locale,
         page,
         pageSize: 5,
       })
       const objectsCount = (await configByTypeObjects?.relationsCount?.({
         id,
         type: CATEGORIES_TO_ENTITY_MAPPER[type],
-        lang: locale,
       })) as ObjectRecordRelationsCountQuery
       return { ...objects, total: objectsCount?.objectRecordRelationsCount?.[0].total ?? '0' }
     }
@@ -88,14 +86,13 @@ export async function getPaginatedRelationsTask({
       const archives = await configByTypeArchives?.paginatedRelationsQuery?.({
         id,
         type: CATEGORIES_TO_ENTITY_MAPPER[type],
-        lang: locale,
+        locale,
         page,
         pageSize: 5,
       })
       const archivesCount = (await configByTypeArchives?.relationsCount?.({
         id,
         type: CATEGORIES_TO_ENTITY_MAPPER[type],
-        lang: locale,
       })) as ArchivesRecordRelationsCountQuery
       return { ...archives, total: archivesCount?.archivesRecordRelationsCount?.[0].total ?? '0' }
     }

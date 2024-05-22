@@ -1,5 +1,5 @@
-query StoriesRelationForRecord($id: String!, $type: EntityNames! $lang: String! ) {
-    zoomLevel3StoriesRelationsForRecord(type: $type, id: $id, lang: $lang) {
+query StoriesRelationForRecord($id: String!, $type: EntityNames! $locale: Locale! ) {
+    zoomLevel3StoriesRelationsForRecord(type: $type, id: $id, locale: $locale) {
         type
         total
         stories {

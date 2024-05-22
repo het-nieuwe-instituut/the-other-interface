@@ -1,5 +1,6 @@
 import { ArgsType, Field, Int, ObjectType } from '@nestjs/graphql'
-import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
+import { EntityNames } from '../util/entityNames.type'
+import { Locale } from '../util/locale.type'
 
 @ArgsType()
 export class ZoomLevel2Args {
@@ -8,6 +9,9 @@ export class ZoomLevel2Args {
 
   @Field(() => String, { nullable: true })
   public text: string
+
+  @Field(() => Locale)
+  public locale: Locale
 }
 
 @ObjectType()
