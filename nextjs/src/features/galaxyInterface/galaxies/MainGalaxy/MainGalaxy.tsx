@@ -54,29 +54,38 @@ export const MainGalaxy = () => {
   const { t } = useTypeSafeTranslation('navigation')
   const isLoading = isMainLoading || isNextLoading
 
+  const renderMainContent = () => {
+    if (isError) {
+      return (
+        <Flex justify="center" align="center" height="100%">
+          <p className="text-black.100 times-large text-xl">{t('errorLoadingThemes')}</p>
+        </Flex>
+      )
+    }
+
+    if (isLoading) {
+      return (
+        <Flex justify="center" align="center" height="100%">
+          <Loader />
+        </Flex>
+      )
+    }
+
+    return (
+      <>
+        <Stories stories={stories} nextStories={nextStories} />
+        <ThemeTitle title={storyTitle} />
+      </>
+    )
+  }
+
   return (
     <Box position="relative" width="100vw" height="100vh">
       {categoryClouds.map(cloud => (
         <Cloud key={cloud.title} cloud={cloud} />
       ))}
 
-      {isError && (
-        <div className="flex justify-center items-center h-full">
-          <p className="text-black.100 times-large text-xl">{t('errorLoadingThemes')}</p>
-        </div>
-      )}
-
-      {!isError && isLoading && (
-        <Flex justify={'center'} align={'center'} height={'100%'}>
-          <Loader />
-        </Flex>
-      )}
-      {!isError && !isLoading && (
-        <>
-          <Stories stories={stories} nextStories={nextStories} />
-          <ThemeTitle title={storyTitle} />
-        </>
-      )}
+      {renderMainContent()}
 
       <GalaxyFooter
         galaxyPagination={
