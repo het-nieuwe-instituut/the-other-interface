@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { useIsImagePortrait } from '../../hooks/useIsImagePortrait'
+import { useIsImagePortrait } from '../../hooks/ui/useIsImagePortrait'
 
 export const usePresenter = (src: string | null, disableRightClick = false) => {
   const fallbackImageRef = useRef<string | null>(null)

@@ -1,7 +1,7 @@
 import { useSize } from '@chakra-ui/react-use-size'
 import { useRef } from 'react'
 import { useTheme } from '@chakra-ui/react'
-import useScroll from '@/features/shared/hooks/useScroll'
+import useScroll from '@/features/shared/hooks/ui/useScroll'
 import { useDispatch } from 'react-redux'
 import { sharedActions } from '@/features/shared/stores/shared.store'
 import { USER_LOOKS_ON } from '@/features/shared/constants/mainConstants'

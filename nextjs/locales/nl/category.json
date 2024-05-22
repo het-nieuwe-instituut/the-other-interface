@@ -14,5 +14,8 @@
   "story": "Story",
   "resultsFor": "resultaten voor",
   "noResultsFound": "Geen resultaten gevonden",
-  "clear": "Wissen"
+  "clear": "Wissen",
+  "suggestions": "Suggesties",
+  "searchPlaceholder": "Typ hier je zoekterm",
+  "searchCategory": "Categoriën"
 }

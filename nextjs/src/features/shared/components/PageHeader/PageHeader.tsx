@@ -1,7 +1,7 @@
 'use client'
 import { Box, Link, Text } from '../../configs/chakra'
 import { useRef } from 'react'
-import useScroll from '@/features/shared/hooks/useScroll'
+import useScroll from '@/features/shared/hooks/ui/useScroll'
 import { useTypeSafeTranslation } from '../../hooks/translations'
 import { Markdown } from '../Markdown/Markdown'
 import styles from './PageHeader.module.css'

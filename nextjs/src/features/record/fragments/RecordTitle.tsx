@@ -1,4 +1,4 @@
-import useScroll from '@/features/shared/hooks/useScroll'
+import useScroll from '@/features/shared/hooks/ui/useScroll'
 import { Text, Box } from '@chakra-ui/react'
 
 interface Props {

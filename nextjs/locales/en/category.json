@@ -14,5 +14,8 @@
   "story": "Story",
   "resultsFor": "results for",
   "noResultsFound": "No results found",
-  "clear": "Clear"
+  "clear": "Clear",
+  "suggestions": "Suggestions",
+  "searchPlaceholder": "Type your search term here",
+  "searchCategory": "Category"
 }
