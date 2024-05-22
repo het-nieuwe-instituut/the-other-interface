@@ -167,7 +167,7 @@ export class ObjectsService {
       this.ZoomLevel2HoverEndpoint,
       objectsZoomLevel2HoverDataKeys,
       undefined,
-      { id, language: locale }
+      { id }
     )
     // TODO: HNIT-1833 - throw on errors (no data or multiple resutls that don't match)
 
