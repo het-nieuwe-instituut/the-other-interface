@@ -9,218 +9,223 @@
 #import '../fragments/components/core/baseTriplyRecord.fragment.graphql'
 
 query storyById($locale: String!, $id: ID, $publicationState: String = "LIVE") {
-  storyByLocale(locale: $locale, filters: { id: { eq: $id } }, publicationState: $publicationState) {
-        data {
+  storyByLocale(
+    locale: $locale
+    filters: { id: { eq: $id } }
+    publicationState: $publicationState
+  ) {
+    data {
+      id
+      __typename
+      attributes {
+        title
+        description
+        locale
+        child_stories {
+          data {
             id
-            __typename
             attributes {
-                title
-                description
-                child_stories {
-                    data {
-                        id
-                        attributes {
-                            title
-                            slug
-                            locale
-                        }
-                    }
-                }
-                parent_story {
-                    data {
-                        id
-                        attributes {
-                            title
-                            slug
-                            locale
-                        }
-                    }
-                }
-                components {
-                    ... on ComponentModulesTextModule {
-                        ...textModuleFragment
-                    }
-                    ... on ComponentModulesImage {
-                        ...imageModuleFragment
-                    }
-                    ... on ComponentModulesPullquote {
-                        ...pullquoteModuleFragment
-                    }
-                    ... on ComponentModulesTitleModule {
-                        ...titleModuleFragment
-                    }
-                    ... on ComponentModulesImageCarousel {
-                        ...imageCarouselModuleFragment
-                    }
-                    ... on ComponentModulesButtonsModule {
-                        ...buttonsModuleFragment
-                    }
-                    ... on ComponentModulesSubtitle {
-                        ...subtitleModuleFragment
-                    }
-                }
-                triplyRecords {
-                    data {
-                        ...BaseTriplyRecordFragment
-                    }
-                }
+              title
+              slug
+              locale
             }
+          }
         }
+        parent_story {
+          data {
+            id
+            attributes {
+              title
+              slug
+              locale
+            }
+          }
+        }
+        components {
+          ... on ComponentModulesTextModule {
+            ...textModuleFragment
+          }
+          ... on ComponentModulesImage {
+            ...imageModuleFragment
+          }
+          ... on ComponentModulesPullquote {
+            ...pullquoteModuleFragment
+          }
+          ... on ComponentModulesTitleModule {
+            ...titleModuleFragment
+          }
+          ... on ComponentModulesImageCarousel {
+            ...imageCarouselModuleFragment
+          }
+          ... on ComponentModulesButtonsModule {
+            ...buttonsModuleFragment
+          }
+          ... on ComponentModulesSubtitle {
+            ...subtitleModuleFragment
+          }
+        }
+        triplyRecords {
+          data {
+            ...BaseTriplyRecordFragment
+          }
+        }
+      }
     }
+  }
 }
 
 query storyImages($id: String!, $locale: String!) {
-    story(id: $id, locale: $locale) {
-        data {
-            id
-            attributes {
-                components {
-                    ... on ComponentModulesImage {
-                        ...imageModuleFragment
-                    }
-                }
-            }
+  story(id: $id, locale: $locale) {
+    data {
+      id
+      attributes {
+        components {
+          ... on ComponentModulesImage {
+            ...imageModuleFragment
+          }
         }
+      }
     }
+  }
 }
 
-
-
-
 query storyMetaById($locale: String!, $id: ID, $publicationState: String = "LIVE") {
-  storyMetaByLocale(locale: $locale, filters: { id: { eq: $id } }, publicationState: $publicationState) {
-        data {
+  storyMetaByLocale(
+    locale: $locale
+    filters: { id: { eq: $id } }
+    publicationState: $publicationState
+  ) {
+    data {
+      id
+      __typename
+      attributes {
+        title
+        description
+        shortDescription
+        createdAt
+        updatedAt
+        publishedAt
+        author {
+          data {
             id
-            __typename
             attributes {
-                title
-                description
-                shortDescription
-                createdAt
-                updatedAt
-                publishedAt
-                author {
-                    data {
-                        id
-                        attributes {
-                            firstName
-                            lastName
-                            insertion
-                        }
-                    }
-                }
-                publicationDate {
-                    id
-                    date
-                    displayType
-                }
-                locations {
-                    data {
-                        id
-                        attributes {
-                            city
-                        }
-                    }
-                }
-                timeframe {
-                    id
-                    yearStart
-                    yearEnd
-                }
-                themes {
-                    data {
-                        id
-                        attributes {
-                            name
-                        }
-                    }
-                }
-                triplyRecords {
-                    data {
-                        id
-                        attributes {
-                            type
-                            recordId
-                            people (locale: $locale) {
-                                title
-                            }
-                        }
-                    }
-                }
-                storyLinks {
-                    ... on ComponentModulesButtonsModule {
-                        ...buttonsModuleFragment
-                    }
-                }
-                child_stories {
-                    data {
-                        id
-                        attributes {
-                            title
-                            components {
-                                ... on ComponentModulesImage {
-                                    ...imageModuleFragment
-                                }
-                            }
-                            author {
-                                data {
-                                    id
-                                    attributes {
-                                        firstName
-                                        lastName
-                                        insertion
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                parent_story {
-                    data {
-                        id
-                        attributes {
-                            title
-                            components {
-                                ... on ComponentModulesImage {
-                                    ...imageModuleFragment
-                                }
-                            }
-                            author {
-                                data {
-                                    id
-                                    attributes {
-                                        firstName
-                                        lastName
-                                        insertion
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                siblings {
-                    id
-                    attributes {
-                        title
-                        components {
-                            ... on ComponentModulesImage {
-                                ...imageModuleFragment
-                            }
-                        }
-                        author {
-                            data {
-                                id
-                                attributes {
-                                    firstName
-                                    lastName
-                                    insertion
-                                }
-                            }
-                        }
-                    }
-                }
-            
+              firstName
+              lastName
+              insertion
             }
+          }
         }
+        publicationDate {
+          id
+          date
+          displayType
+        }
+        locations {
+          data {
+            id
+            attributes {
+              city
+            }
+          }
+        }
+        timeframe {
+          id
+          yearStart
+          yearEnd
+        }
+        themes {
+          data {
+            id
+            attributes {
+              name
+            }
+          }
+        }
+        triplyRecords {
+          data {
+            id
+            attributes {
+              type
+              recordId
+              people(locale: $locale) {
+                title
+              }
+            }
+          }
+        }
+        storyLinks {
+          ... on ComponentModulesButtonsModule {
+            ...buttonsModuleFragment
+          }
+        }
+        child_stories {
+          data {
+            id
+            attributes {
+              title
+              components {
+                ... on ComponentModulesImage {
+                  ...imageModuleFragment
+                }
+              }
+              author {
+                data {
+                  id
+                  attributes {
+                    firstName
+                    lastName
+                    insertion
+                  }
+                }
+              }
+            }
+          }
+        }
+        parent_story {
+          data {
+            id
+            attributes {
+              title
+              components {
+                ... on ComponentModulesImage {
+                  ...imageModuleFragment
+                }
+              }
+              author {
+                data {
+                  id
+                  attributes {
+                    firstName
+                    lastName
+                    insertion
+                  }
+                }
+              }
+            }
+          }
+        }
+        siblings {
+          id
+          attributes {
+            title
+            components {
+              ... on ComponentModulesImage {
+                ...imageModuleFragment
+              }
+            }
+            author {
+              data {
+                id
+                attributes {
+                  firstName
+                  lastName
+                  insertion
+                }
+              }
+            }
+          }
+        }
+      }
     }
+  }
 }

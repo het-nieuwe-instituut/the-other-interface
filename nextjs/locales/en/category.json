@@ -12,5 +12,7 @@
   "publication": "Publication",
   "story": "Story",
   "resultsFor": "results for",
-  "noResultsFound": "No results found"
+  "noResultsFound": "No results found",
+
+  "couldNotFetchHover": "Something went wrong while fetching the data for the hover. Please try again later."
 }

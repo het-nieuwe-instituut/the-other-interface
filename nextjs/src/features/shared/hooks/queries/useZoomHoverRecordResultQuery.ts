@@ -4,7 +4,7 @@ import initApiClientService from '../../utils/initApiClientService'
 import { getZoomRecordHoverTask } from '@/features/pages/tasks/getZoomRecordHoverTask'
 import { useLocale } from '../useLocale'
 
-export function useZoomHoverRecordResult({
+export function useZoomHoverRecordResultQuery({
   id,
   category,
 }: {
