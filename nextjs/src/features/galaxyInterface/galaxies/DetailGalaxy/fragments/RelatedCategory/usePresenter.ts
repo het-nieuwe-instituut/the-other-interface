@@ -19,8 +19,8 @@ export const usePresenter = (
   const maxPages = Math.ceil((allRelationTotals?.[category] || 2) / 2)
   const current = useRef(0)
   const next = useRef(1)
-  const { data } = useRecordRelations(recordCategory, id, maxPages)
-
+  const { data, isLoading } = useRecordRelations(recordCategory, id, maxPages)
+  console.log(isLoading)
   useEffect(() => {
     if (page <= maxPages) {
       if (page % 2 === 0) {

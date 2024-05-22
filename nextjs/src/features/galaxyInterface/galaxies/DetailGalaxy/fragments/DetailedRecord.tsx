@@ -1,4 +1,5 @@
 import { GridItem, Text, Flex } from '@chakra-ui/react'
+import { Loader } from '../../../components/Loader/Loader'
 import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
 import { useParams } from 'next/navigation'
 import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
@@ -18,7 +19,7 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
   const category = params?.category as Category
   const id = params?.id as string
 
-  const { data: record, isLoading } = useRecordDetail(category, id)
+  const { data: record, isLoading, isError } = useRecordDetail(category, id)
 
   if (!isLoading && !record) {
     notFound()
@@ -41,6 +42,30 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
         justifyContent="center"
         gap="2px"
       >
+        {renderContent()}
+      </Flex>
+    </GridItem>
+  )
+
+  function renderContent() {
+    if (isLoading) {
+      return (
+        <Flex justify="center" align="center" height="100%">
+          <Loader />
+        </Flex>
+      )
+    }
+
+    if (isError) {
+      return (
+        <Flex justify="center" align="center" height="100%">
+          <p className="times-large text-xl text-black-100">{t('errorLoadingDetail')}</p>
+        </Flex>
+      )
+    }
+
+    return (
+      <>
         <ResponsiveImage
           src={record?.thumbnail?.[0] ?? ''}
           alt={record?.title}
@@ -51,7 +76,6 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
           }}
           disableRightClick
         />
-
         <Flex w="100%" color="blueAlpha.100" direction="column" flex="1" mt={2}>
           <Text
             align="center"
@@ -72,7 +96,7 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
             {t(toSingularCategory(category))}
           </Text>
         </Flex>
-      </Flex>
-    </GridItem>
-  )
+      </>
+    )
+  }
 }
