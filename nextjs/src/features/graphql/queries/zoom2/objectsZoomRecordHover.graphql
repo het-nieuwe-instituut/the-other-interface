@@ -1,5 +1,5 @@
-query ObjectsZoomRecordHover($id: String!) {
-    objectsZoomRecordHover(id: $id) {
+query ObjectsZoomRecordHover($id: String!, $locale: Locale!) {
+    objectsZoomRecordHover(id: $id, locale: $locale) {
         title
         description
     }

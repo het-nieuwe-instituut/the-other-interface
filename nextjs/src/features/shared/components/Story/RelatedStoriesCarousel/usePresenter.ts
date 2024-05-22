@@ -1,17 +1,17 @@
-import { useParams, useRouter, useSearchParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import { CATEGORIES } from '@/features/shared/utils/categories'
 import useTranslation from 'next-translate/useTranslation'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useStoryMetaById } from '@/features/shared/hooks/queries/useStoryMetaById'
 import { StoryEntity } from 'src/generated/graphql'
 import { storiesToCarouselDataMapper } from '@/features/shared/mappers/storiesToCarouselDataMapper'
+import { useLocale } from '@/features/shared/hooks/useLocale'
 
 export const usePresenter = () => {
   const params = useParams()
-  const searchParams = useSearchParams()
   const router = useRouter()
   const id = params?.id as string
-  const lang = searchParams?.get('lang')
+  const lang = useLocale()
   const { t: tStories } = useTranslation('stories')
 
   const { data, isLoading } = useStoryMetaById(id)

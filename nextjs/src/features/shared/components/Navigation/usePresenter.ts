@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux'
 import { useBreakpoint } from '../../configs/chakra'
 import { USER_LOOKS_ON } from '../../constants/mainConstants'
 import { useBreakpointValue } from '@chakra-ui/react'
-import { useSearchParams } from 'next/navigation'
+import { useLocale } from '../../hooks/useLocale'
 
 export const usePresenter = () => {
   const ref = useRef<HTMLDivElement | null>(null)
@@ -16,8 +16,7 @@ export const usePresenter = () => {
   const breakpoint = useBreakpoint()
   const { t: tNavigation } = useTranslation('navigation')
   const isMobile = breakpoint === 'sm'
-  const searchParams = useSearchParams()
-  const lang = searchParams?.get('lang') || 'nl'
+  const lang = useLocale()
 
   useEffect(() => {
     if (isMenuOpen) {

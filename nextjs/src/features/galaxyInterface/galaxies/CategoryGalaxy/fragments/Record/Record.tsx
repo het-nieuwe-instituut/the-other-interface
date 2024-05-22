@@ -1,16 +1,16 @@
 import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useZoomHoverRecordResultQuery } from '@/features/shared/hooks/queries/useZoomHoverRecordResultQuery'
+import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 import { Position } from '@/features/shared/types/position'
 import { CloudCategory } from '@/features/shared/utils/categories'
 import { ReadMoreTooltip } from '@/features/ui/components/tooltip/ReadMoreTooltip'
-import { useRouter } from 'next/navigation'
-import { ZoomLevel2Type } from 'src/generated/graphql'
-import { RecordText } from '../RecordText'
-import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { cn } from '@/features/ui/utils/cn'
+import { useRouter } from 'next/navigation'
 import { PlacesType } from 'react-tooltip'
+import { Locale, ZoomLevel2Type } from 'src/generated/graphql'
+import { RecordText } from '../RecordText'
 
 type Props = {
   record: RecordProps
@@ -51,8 +51,8 @@ export const Record: React.FC<Props> = ({ record, tooltipPlace }) => {
   )
 }
 
-const RecordData = (record: RecordProps, lang?: string | null, search?: string) => {
-  const { id, thumbnail, category, title } = record
+const RecordData = (record: RecordProps, lang?: Locale | null, search?: string) => {
+  const { id, thumbnail, category, position, title } = record
   const router = useRouter()
 
   const handleClick = () => {

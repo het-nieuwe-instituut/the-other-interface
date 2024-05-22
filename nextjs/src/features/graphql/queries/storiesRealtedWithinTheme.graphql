@@ -1,6 +1,6 @@
 query storiesRealtedWithinTheme(
    $id: String!
-   $locale: String
+   $locale: String!
 ) {
     storiesRealtedWithinTheme(
         id: $id
