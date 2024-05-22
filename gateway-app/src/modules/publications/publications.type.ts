@@ -1,11 +1,9 @@
-import { ArgsType, Field, ObjectType, createUnionType, registerEnumType } from '@nestjs/graphql'
-import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
+import { ArgsType, Field, ObjectType, OmitType, registerEnumType } from '@nestjs/graphql'
+import { EntityNames } from '../util/entityNames.type'
 import { PublicationsZoomLevel3Types } from './publications.service'
 import { PeopleZoomLevel3DetailType } from '../people/people.type'
-import { CustomError } from '../util/customError'
-import { IsOptional, IsString } from 'class-validator'
-
-// registerEnumType(PublicationsZoomLevel3Types, { name: 'PublicationsZoomLevel3Types' })
+import { IsString } from 'class-validator'
+import { Locale } from '../util/locale.type'
 
 @ObjectType()
 export class PublicationZoomLevel3DetailType {
@@ -473,37 +471,14 @@ export class PublicationRecordRelationArgs {
   @IsString()
   public id: string
 
-  @Field()
-  @IsOptional()
-  public lang?: string
+  @Field(() => Locale)
+  public locale: Locale
 }
 
-export const PublicationZoomLevel3UnionType = createUnionType({
-  name: 'PublicationZoomLevel3UnionType',
-  types: () =>
-    [
-      PublicationsAudioVisualZoomLevel3DetailType,
-      PublicationsArticleZoomLevel3DetailType,
-      PublicationsSerialZoomLevel3DetailType,
-      PublicationsBookZoomLevel3DetailType,
-    ] as const,
-  resolveType: (publication: BasePublicationZoomLevel3Type) => {
-    switch (publication.type) {
-      case PublicationsZoomLevel3Types.audiovisual:
-        return PublicationsAudioVisualZoomLevel3DetailType
-      case PublicationsZoomLevel3Types.article:
-        return PublicationsArticleZoomLevel3DetailType
-      case PublicationsZoomLevel3Types.serial:
-        return PublicationsSerialZoomLevel3DetailType
-      case PublicationsZoomLevel3Types.book:
-        return PublicationsBookZoomLevel3DetailType
-      default:
-        throw CustomError.externalCritical(
-          `publication type ${publication.type} cannot be resolved`
-        )
-    }
-  },
-})
+@ArgsType()
+export class PublicationRecordRelationCountArgs extends OmitType(PublicationRecordRelationArgs, [
+  'locale',
+] as const) {}
 
 @ObjectType()
 export class PublicationAuthorType {

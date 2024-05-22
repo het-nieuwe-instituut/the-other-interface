@@ -8,7 +8,6 @@ import { HomePageData } from '../../mocks/mockData/homepageData'
 import { LandingPagesData } from '../../mocks/mockData/landingpagesData'
 import { menuPagesData } from '../../mocks/mockData/menuPagesData'
 import { storyData } from '../../mocks/mockData/storyData'
-import { ZoomLevel1Data } from '../../mocks/mockData/zoomLevel1Data'
 import {
   peopleZoomLevel2Data,
   publicationZoomLevel2Data,
@@ -38,9 +37,6 @@ const customResolvers = {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     landingpages(slug: string, locale: string) {
       return LandingPagesData.landingpages
-    },
-    zoomLevel1() {
-      return ZoomLevel1Data
     },
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

@@ -8,7 +8,7 @@
 #import '../fragments/components/GridModule.fragment.graphql'
 #import '../fragments/components/core/baseTriplyRecord.fragment.graphql'
 
-query storyById($locale: String, $id: ID, $publicationState: String = "LIVE") {
+query storyById($locale: String!, $id: ID, $publicationState: String = "LIVE") {
   storyByLocale(
     locale: $locale
     filters: { id: { eq: $id } }
@@ -74,8 +74,8 @@ query storyById($locale: String, $id: ID, $publicationState: String = "LIVE") {
   }
 }
 
-query storyImages($id: String!) {
-  story(id: $id) {
+query storyImages($id: String!, $locale: String!) {
+  story(id: $id, locale: $locale) {
     data {
       id
       attributes {
@@ -89,7 +89,7 @@ query storyImages($id: String!) {
   }
 }
 
-query storyMetaById($locale: String, $id: ID, $publicationState: String = "LIVE") {
+query storyMetaById($locale: String!, $id: ID, $publicationState: String = "LIVE") {
   storyMetaByLocale(
     locale: $locale
     filters: { id: { eq: $id } }
@@ -147,7 +147,7 @@ query storyMetaById($locale: String, $id: ID, $publicationState: String = "LIVE"
             attributes {
               type
               recordId
-              people {
+              people(locale: $locale) {
                 title
               }
             }

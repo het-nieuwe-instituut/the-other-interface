@@ -1,5 +1,5 @@
-query ZoomLevel3ObjectRecord($id: String!) {
-    objectsRecordZoomLevel3(id: $id) {
+query ZoomLevel3ObjectRecord($id: String!, $locale: String!) {
+    objectsRecordZoomLevel3(id: $id, locale: $locale) {
         objectNumber
         titleType
         objectName

@@ -3,7 +3,7 @@ query themes(
     $pagination: PaginationArg
     $sort: [String!]
     $publicationState: String
-    $locale: String
+    $locale: String!
 ) {
     themes(
         filters: $filters

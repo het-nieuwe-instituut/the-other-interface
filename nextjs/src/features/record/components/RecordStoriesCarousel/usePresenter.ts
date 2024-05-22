@@ -1,5 +1,5 @@
 import { useStoriesRelationForRecord } from '@/features/shared/hooks/queries/useStoriesRelationForRecord'
-import { useParams, useRouter, useSearchParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import {
   CATEGORIES,
   CATEGORIES_TO_ENTITY_MAPPER,
@@ -9,15 +9,15 @@ import { storiesToCarouselDataMapper } from '../../../shared/mappers/storiesToCa
 import useTranslation from 'next-translate/useTranslation'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { StoryEntity } from 'src/generated/graphql'
+import { useLocale } from '@/features/shared/hooks/useLocale'
 
 export const usePresenter = () => {
   const params = useParams()
-  const searchParams = useSearchParams()
   const router = useRouter()
   const category = params?.category as Category
   const id = params?.id as string
   const type = CATEGORIES_TO_ENTITY_MAPPER[category]
-  const lang = searchParams?.get('lang')
+  const lang = useLocale()
 
   const { data: recordRelatedStories, isLoading } = useStoriesRelationForRecord(type, id)
   const { t: tRecord } = useTranslation('record')

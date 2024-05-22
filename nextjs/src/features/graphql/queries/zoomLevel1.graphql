@@ -1,7 +1,0 @@
-query zoomLevel1 {
-	zoomLevel1 {
-		name
-		count
-		id
-	}
-}

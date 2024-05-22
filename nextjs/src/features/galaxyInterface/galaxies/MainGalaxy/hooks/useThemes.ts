@@ -1,4 +1,5 @@
 'use client'
+import { useLocale } from '@/features/shared/hooks/useLocale'
 import { PublicationState } from '@/features/shared/types/enums'
 import initApiClientService from '@/features/shared/utils/initApiClientService'
 import { useQuery } from '@tanstack/react-query'
@@ -7,7 +8,7 @@ import { useSearchParams } from 'next/navigation'
 export function useThemes(isEnabled: boolean) {
   const api = initApiClientService()
   const searchParams = useSearchParams()
-  const lang = searchParams?.get('lang') || 'nl'
+  const lang = useLocale()
   const currentPage = parseInt(searchParams?.get('page') ?? '1')
 
   const fetchThemes = async (page: number) => {

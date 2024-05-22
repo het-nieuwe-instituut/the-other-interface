@@ -14,11 +14,12 @@ import { PeopleService } from '../people/people.service'
 import { PublicationsService } from '../publications/publications.service'
 import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { TriplyUtils } from '../triply/triply.utils'
-import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
+import { EntityNames } from '../util/entityNames.type'
 import { CustomError } from '../util/customError'
 import { StoryService } from '../story/story.service'
 import { PaginationArgs } from '../util/paginationArgs.type'
 import { ZoomLevel3RelationsType } from './zoomLevel3.type'
+import { Locale } from '../util/locale.type'
 
 interface ZoomLevel3RelationData {
   idRelation: string
@@ -65,7 +66,7 @@ export class ZoomLevel3Service {
   public async getRelations(
     id: string,
     type: EntityNames,
-    lang?: string,
+    locale: Locale,
     paginationArgs?: PaginationArgs
   ) {
     switch (type) {
@@ -78,25 +79,25 @@ export class ZoomLevel3Service {
           await this.getStoryRelationsForLinkedItem(id, type, paginationArgs?.page),
         ]
       case EntityNames.Stories:
-        return this.getStoryRelations(id, lang, paginationArgs?.page)
+        return this.getStoryRelations(id, locale, paginationArgs?.page)
       default:
         throw CustomError.internalCritical('type not implemented')
     }
   }
 
-  public async getDetail(id: string, type: EntityNames) {
+  public async getDetail(id: string, type: EntityNames, locale: Locale) {
     switch (type) {
       case EntityNames.Objects: {
-        return this.objectsService.getZoomLevel3Data(id)
+        return this.objectsService.getZoomLevel3Data(id, locale)
       }
       case EntityNames.People: {
-        return this.peopleService.getZoomLevel3Data(id)
+        return this.peopleService.getZoomLevel3Data(id, locale)
       }
       case EntityNames.Publications: {
-        return this.publicationsService.getZoomLevel3Data(id)
+        return this.publicationsService.getZoomLevel3Data(id, locale)
       }
       case EntityNames.Archives: {
-        return this.archivesService.getZoomLevel3Data(id)
+        return this.archivesService.getZoomLevel3Data(id, locale)
       }
 
       default:
@@ -104,7 +105,7 @@ export class ZoomLevel3Service {
     }
   }
 
-  public async storyRelationsCount(storyId: string, locale = 'nl') {
+  public async storyRelationsCount(storyId: string, locale: Locale) {
     // counts for triply records related to story
     const [resTriplyArchives, resTriplyPublications, resTriplyPeople, resTriplyObjects] =
       await Promise.all(
@@ -144,7 +145,7 @@ export class ZoomLevel3Service {
 
   private async getStoryRelations(
     id: string,
-    locale = 'nl',
+    locale: Locale,
     page?: number
   ): Promise<ZoomLevel3RelationsType[]> {
     const res = await this.strapiGqlSdk.storyByLocale({ id })
@@ -253,7 +254,7 @@ export class ZoomLevel3Service {
     return res.data
   }
 
-  private async getStoryThemeIds(storyId: string, locale: string): Promise<string[]> {
+  private async getStoryThemeIds(storyId: string, locale: Locale): Promise<string[]> {
     const themes = await this.strapiGqlSdk.themes({
       filters: { stories: { id: { eq: storyId } } },
       locale,
@@ -270,7 +271,7 @@ export class ZoomLevel3Service {
   private async getPaginatedStoryRelationsForStory(
     storyId: string,
     childrenIds: string[],
-    locale: string,
+    locale: Locale,
     parentId?: string | null,
     page?: number
   ): Promise<ZoomLevel3RelationsType> {
@@ -329,7 +330,7 @@ export class ZoomLevel3Service {
     return this.groupData(paginatedTriplyRecordRelations)
   }
 
-  private async getStorySiblingIds(id: string, locale: string, parentId?: string | null) {
+  private async getStorySiblingIds(id: string, locale: Locale, parentId?: string | null) {
     if (!parentId) return []
 
     const siblingsRes = await this.storyService.getStorySiblings(parentId, id, locale)

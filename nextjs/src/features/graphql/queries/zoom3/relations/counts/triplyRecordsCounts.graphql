@@ -1,5 +1,5 @@
-query StoryRelationsCount($id: String!, $lang: String!) { 
-    storyRelationsCount(storyId: $id, lang: $lang) {
+query StoryRelationsCount($id: String!, $locale: Locale!) { 
+    storyRelationsCount(storyId: $id, locale: $locale) {
         linkedTriplyRecords {
             archives
             people
