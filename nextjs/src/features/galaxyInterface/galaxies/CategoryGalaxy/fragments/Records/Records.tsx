@@ -1,13 +1,11 @@
-import { Text, Box } from '@chakra-ui/react'
-
-import { usePresenter } from './usePresenter'
-import { Record } from '../Record/Record'
 import { keyframes } from '@emotion/react'
+import { Record } from '../Record/Record'
+import { usePresenter } from './usePresenter'
 
-import { GALAXY_EDITORIAL_LAYER_PART } from '@/features/shared/constants/mainConstants'
 import { Loader } from '@/features/galaxyInterface/components/Loader/Loader'
-import { RecordsGrid } from '../RecordsGrid'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { LANDINGPAGE_Z_INDEXES } from '../../../MainGalaxy/fragments/constants'
+import { RecordsGrid } from '../RecordsGrid'
 
 const currentPageFadeIn = keyframes({ from: { opacity: 0 }, to: { opacity: 1 } })
 const nextPageFadeIn = keyframes({ from: { opacity: 0 }, to: { opacity: 0.2 } })
@@ -32,31 +30,29 @@ export const Records: React.FC<Props> = ({ pageAmount }) => {
 
   if (isCurrentRecordsEmpty) {
     return (
-      <Box width={'100%'}>
-        <Text
-          textStyle="headingTimesLarge.lg"
-          justifyItems={'flex-start'}
-          marginBottom={GALAXY_EDITORIAL_LAYER_PART}
-          color="blueAlpha.100"
-          fontSize={'74px'}
-          lineHeight={'normal'}
+      <div className="w-full">
+        <p
+          className={TypographyVariants({
+            times: 'lg',
+            className: 'text-blue-100 text-[74px] leading-normal justify-start mb-[12vh]',
+          })}
         >
           {t('noResultsFound')}.
-        </Text>
-      </Box>
+        </p>
+      </div>
     )
   }
 
   return (
-    <Box width={'100%'} height={'100%'}>
+    <div className={'group-hover-blur size-full'}>
       <RecordsGrid
         css={{
           zIndex: LANDINGPAGE_Z_INDEXES.CURRENT_PAGE,
           animation: isCurrentRecordsEmpty ? 'none' : `${currentPageFadeIn} 300ms linear`,
         }}
       >
-        {currentPositionedRecords.map(record => (
-          <Record key={record.key} record={record} />
+        {currentPositionedRecords.map((record, i) => (
+          <Record key={record.key} tooltipPlace={i >= 8 ? 'top' : 'bottom'} record={record} />
         ))}
       </RecordsGrid>
 
@@ -68,10 +64,10 @@ export const Records: React.FC<Props> = ({ pageAmount }) => {
           animation: isNextRecordsEmpty ? 'none' : `${nextPageFadeIn} 300ms linear`,
         }}
       >
-        {nextPositionedRecords.map(record => (
-          <Record key={record.key} record={record} />
+        {nextPositionedRecords.map((record, i) => (
+          <Record key={record.key} tooltipPlace={i >= 8 ? 'top' : 'bottom'} record={record} />
         ))}
       </RecordsGrid>
-    </Box>
+    </div>
   )
 }

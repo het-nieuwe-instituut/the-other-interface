@@ -1,13 +1,29 @@
 'use client'
 import { PageHeader } from '../../PageHeader/PageHeader'
 import { StoryMeta } from '../../Story/StoryMeta/StoryMeta'
-import { usePresenter } from './usePresenter'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 import { LayerWrapper } from '../LayerWrapper'
 import { StoryBottomContent } from '../../Story/StoryBottomContent/StoryBottomContent'
+import { useStoryByIdQuery } from '@/features/shared/hooks/queries/useStoryByIdQuery'
+import { useParams } from 'next/navigation'
+import { Loader } from '@/features/galaxyInterface/components/Loader/Loader'
+import { useRedirectToErrorOnError } from '@/features/shared/hooks/useRedirectToErrorOnError'
 
 export const StoryLayer = () => {
-  const { story } = usePresenter()
+  const params = useParams()
+  const id = params?.id as string
+  const { data, isLoading, error } = useStoryByIdQuery(id)
+  const story = data
+
+  useRedirectToErrorOnError(error)
+
+  if (isLoading) {
+    return (
+      <div className="flex h-full w-screen items-center justify-center p-12">
+        <Loader />
+      </div>
+    )
+  }
 
   return (
     <LayerWrapper

@@ -6,7 +6,6 @@ import { GalaxyFooter } from '../../../components/GalaxyWrapper/GalaxyFooter/Gal
 import { GalaxyPagination } from '../../../components/GalaxyWrapper/GalaxyPagination/GalaxyPagination'
 import { RelatedCategory, RelatedStories } from '../fragments'
 import { usePresenter } from '../usePresenter'
-import { DetailGalaxyProvider } from './DetailGalxyContext'
 
 const relatedCategories: Array<{ category: CloudCategory; grid: GridParams }> = [
   { category: CLOUD_CATEGORIES.people, grid: { gridRow: '1 / 2', gridColumn: '1 / 2' } },
@@ -30,12 +29,12 @@ export const DetailGalaxy: React.FC = () => {
   if (!category || !id) return null
 
   return (
-    <DetailGalaxyProvider>
+    <>
       <div className="relative h-screen w-screen overflow-hidden">
         {isSearchModeActive && <BlurOverlay />}
         <div
           id="detail-galaxy-grid"
-          className="absolute inset-x-[2vw] top-[6%] grid h-[calc(80%-1rem-60px)] w-[96vw] grid-cols-3 grid-rows-2"
+          className="group-hover-blur absolute inset-x-[2vw] top-[6%] grid h-[calc(80%-1rem-60px)] w-[96vw] grid-cols-3 grid-rows-2"
         >
           {relatedCategories.map(({ category: cloudCategory, grid }) => (
             <RelatedCategory
@@ -63,6 +62,6 @@ export const DetailGalaxy: React.FC = () => {
           }
         />
       </div>
-    </DetailGalaxyProvider>
+    </>
   )
 }
