@@ -12,6 +12,8 @@ import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/Se
 import { Wrap, WrapItem } from '@chakra-ui/react'
 import { useSearchBarPosition } from './useSearchBarPosition'
 import CloseIconSmall from '@/icons/close-icon-small.svg'
+import { cn } from '@/features/ui/utils/cn'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
 
 type Props = {
   total?: number
@@ -45,40 +47,40 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) =>
     <Grid
       position="relative"
       height={'auto'}
-      templateColumns="145px minmax(20px, 1fr) minmax(95px, auto)"
-      gap="15px"
-      borderRadius={isCategorySuggestionsOpen ? '0 0 5px 5px' : '5px'}
+      templateColumns="160px minmax(20px, 1fr) minmax(95px, auto)"
+      gap="4"
       backgroundColor="blueAlpha.100"
-      p="5px 15px"
       zIndex={FOOTER_Z_INDEX}
       onClick={!isSearchModeActive ? handleSearchModeOpen : undefined}
       cursor={!isSearchModeActive ? 'pointer' : 'default'}
       ref={searchBarRef}
       color="pinkAlpha.100"
-      bottom={offset}
+      bottom={`${offset}px`}
+      className="px-4"
     >
       <Flex
         flexDirection="column"
-        justifyContent="center"
         alignItems="flex-start"
-        height="50px"
-        maxHeight={'50px'}
-        alignSelf={'flex-end'}
+        className={'self-end h-[60px] pt-1 justify-center'}
       >
-        <Text textStyle="socialLarge.xl">{total ? total : searchResultAmount}</Text>
-        <Text textStyle="socialLarge.xl">{t('resultsFor')}</Text>
+        <p className={cn('text-pink.100', TypographyVariants({ social: 'textfield' }))}>
+          {total ? total : searchResultAmount}
+        </p>
+        <p className={cn('text-pink.100', TypographyVariants({ social: 'textfield' }))}>
+          {t('resultsFor')}
+        </p>
       </Flex>
 
-      <Wrap spacing="8px" ref={wrapRef}>
-        <WrapItem>
+      <div ref={wrapRef} className="flex flex-wrap p-0 gap-0">
+        <div className="pt-1 mr-2">
           <CategoryFilter
             onClick={() => setIsCategorySuggestionsOpen(!isCategorySuggestionsOpen)}
             isOpen={isCategorySuggestionsOpen}
             selectedOption={category ? t(category) : ''}
           />
-        </WrapItem>
+        </div>
         {selectedFilters.map(filter => (
-          <WrapItem key={filter.id} maxWidth={'100%'}>
+          <div key={filter.id} className="h-[60px] pt-1 mr-2 max-w-full">
             <SearchFilterBox
               category={filter.field}
               subCategory={filter.value}
@@ -86,47 +88,52 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) =>
               actionButton={<CloseIconSmall />}
               actionButtonClick={removeFilter}
             />
-          </WrapItem>
+          </div>
         ))}
-        <WrapItem minWidth="70px" height={'50px'} flexGrow={1}>
+        <div className={'h-[60px] py-1 pl-2 grow min-w-[70px]'}>
           <FilterInput
             inputRef={filterInputRef}
             onFocus={handleSearchModeOpen}
             value={inputValue}
             onChange={handleInputChange}
+            placeholder={t('searchPlaceholder')}
           />
-        </WrapItem>
-      </Wrap>
+        </div>
+      </div>
 
-      <Flex
-        gap="12px"
-        alignItems="center"
-        justifyContent="flex-end"
-        height={'50px'}
-        alignSelf={'flex-end'}
-      >
+      <Flex gap="12px" alignItems="center" className={'self-end h-[60px] pt-1'}>
         {isSearchModeActive ? (
           <>
             <GoButton handleClick={handleGoClick} />
             <CloseButton handleClick={handleClearAll} />
           </>
         ) : isNoActiveSearch ? (
-          <SearchButton />
+          <div className={'ml-14'}>
+            <SearchButton />
+          </div>
         ) : (
-          <CloseButton handleClick={handleClearAll} />
+          <>
+            <div className={'ml-14'}>
+              <CloseButton handleClick={handleClearAll} />
+            </div>
+          </>
         )}
       </Flex>
 
       <SuggestionBar
         isOpen={isCategorySuggestionsOpen}
-        label={isUserTyping ? t('suggestions') : ''}
+        label={t('searchCategory')}
         offset={searchBarHeight}
       >
-        {isUserTyping ? (
-          <Suggestions handleSelectFilter={handleSelectFilter} />
-        ) : (
-          <CategorySuggestions />
-        )}
+        <CategorySuggestions />
+      </SuggestionBar>
+
+      <SuggestionBar
+        isOpen={isUserTyping && !isCategorySuggestionsOpen}
+        label={t('suggestions')}
+        offset={searchBarHeight}
+      >
+        <Suggestions handleSelectFilter={handleSelectFilter} />
       </SuggestionBar>
     </Grid>
   )

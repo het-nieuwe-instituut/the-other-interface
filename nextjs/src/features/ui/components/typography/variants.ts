@@ -42,6 +42,7 @@ export const TypographyVariants = cva('', {
         ' self-stretch font-social-large text-[21px] italic  leading-[130%_] tracking-[0.21px]',
       label:
         ' self-stretch font-social-large text-[11px] not-italic leading-[11px_] tracking-[0.11px]',
+      textfield: 'self-stretch font-social-large text-[18px] leading-[18px_] tracking-[0.18px]',
     },
   },
 })

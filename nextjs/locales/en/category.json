@@ -15,5 +15,7 @@
   "resultsFor": "results for",
   "noResultsFound": "No results found",
   "clear": "Clear",
-  "suggestions": "Suggestions"
+  "suggestions": "Suggestions",
+  "searchPlaceholder": "Type your search term here",
+  "searchCategory": "Category"
 }

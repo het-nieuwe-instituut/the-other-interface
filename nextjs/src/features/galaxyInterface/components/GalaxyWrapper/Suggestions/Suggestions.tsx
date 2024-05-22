@@ -37,10 +37,6 @@ type Props = {
 }
 
 export const Suggestions: React.FC<Props> = ({ handleSelectFilter }) => {
-  const { isCategorySuggestionsOpen } = usePresenter()
-
-  if (!isCategorySuggestionsOpen) return null
-
   return (
     <>
       {mockData.map(item => (

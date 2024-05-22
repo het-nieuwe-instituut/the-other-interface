@@ -1,4 +1,6 @@
 import { FOOTER_Z_INDEX } from '@/features/shared/constants/mainConstants'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
+import { cn } from '@/features/ui/utils/cn'
 import { Flex, Box, Grid, Text, Wrap } from '@chakra-ui/react'
 
 interface Props {
@@ -8,7 +10,7 @@ interface Props {
   offset?: number
 }
 
-const SUGGESTION_BAR_PADDING = 10
+const SUGGESTION_BAR_PADDING = 0
 
 export const SuggestionBar: React.FC<Props> = ({
   isOpen = false,
@@ -21,10 +23,7 @@ export const SuggestionBar: React.FC<Props> = ({
       position={'absolute'}
       bottom={offset ? `calc(${offset + SUGGESTION_BAR_PADDING}px)` : '60px'}
       width={'100%'}
-      gap="15px"
-      borderRadius={'5px 5px 0 0'}
       backgroundColor={'blueAlpha.80'}
-      padding={'5px 15px'}
       zIndex={FOOTER_Z_INDEX - 1}
       transform={isOpen ? 'translateY(0)' : 'translateY(90%)'}
       transition={
@@ -34,10 +33,11 @@ export const SuggestionBar: React.FC<Props> = ({
       }
       opacity={isOpen ? 1 : 0}
       visibility={isOpen ? 'visible' : 'hidden'}
-      templateColumns={'145px 1fr'}
+      templateColumns={'160px 1fr'}
+      className={'px-4 py-2 gap-4'}
     >
       <Flex width="146px" pt={4}>
-        <Text textStyle="socialLarge.xl">{label}</Text>
+        <p className={cn('text-pink.100', TypographyVariants({ social: 'textfield' }))}>{label}</p>
       </Flex>
       <Box
         overflow="hidden"
