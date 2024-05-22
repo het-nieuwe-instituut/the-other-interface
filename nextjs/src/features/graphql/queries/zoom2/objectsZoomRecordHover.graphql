@@ -1,6 +1,7 @@
 query ObjectsZoomRecordHover($id: String!, $locale: Locale!) {
-    objectsZoomRecordHover(id: $id, locale: $locale) {
-        title
-        description
-    }
+  objectsZoomRecordHover(id: $id, locale: $locale) {
+    title
+    description
+    maker
+  }
 }

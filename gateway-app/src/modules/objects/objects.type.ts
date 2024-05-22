@@ -251,10 +251,8 @@ export class ObjectsZoomLevelHoverType {
   @Field(() => String, { nullable: true })
   public title?: string | null
 
-  // confluence says this is missing
-  // need to follow up
-  // @Field(() => String, { nullable: true })
-  // public maker: string
+  @Field(() => String, { nullable: true })
+  public maker?: string | null
 
   @Field(() => String, { nullable: true })
   public description?: string | null

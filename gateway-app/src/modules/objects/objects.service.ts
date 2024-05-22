@@ -162,14 +162,13 @@ export class ObjectsService {
     return result.data
   }
 
-  public async getZoomRecordHover(id: string, locale: Locale) {
+  public async getZoomRecordHover(id: string) {
     const results = await this.triplyService.queryTriplyData<ObjectsZoomLevel2HoverData>(
       this.ZoomLevel2HoverEndpoint,
       objectsZoomLevel2HoverDataKeys,
       undefined,
       { id }
     )
-    // TODO: HNIT-1833 - throw on errors (no data or multiple resutls that don't match)
 
     if (results.data.length === 0) {
       return {}
