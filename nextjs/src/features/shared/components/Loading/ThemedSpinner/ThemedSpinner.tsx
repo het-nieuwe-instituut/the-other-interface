@@ -2,7 +2,7 @@
 import { Spinner } from '@chakra-ui/react'
 import { GALAXY_EDITORIAL_LAYER_PART } from '@/features/shared/constants/mainConstants'
 
-export const Loader: React.FC = () => (
+export const ThemedSpinner: React.FC = () => (
   <Spinner
     thickness="6px"
     speed="1.3s"

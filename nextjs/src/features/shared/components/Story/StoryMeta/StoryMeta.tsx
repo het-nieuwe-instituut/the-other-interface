@@ -1,7 +1,7 @@
 'use client'
 import { Box, Link, Text } from '@chakra-ui/react'
 import { usePresenter } from './usePresenter'
-import { Loader } from '@/features/galaxyInterface/components/Loader/Loader'
+import { ThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
 import { CATEGORIES } from '@/features/shared/utils/categories'
 
 export const StoryMeta: React.FC = () => {
@@ -21,7 +21,7 @@ export const StoryMeta: React.FC = () => {
   } = usePresenter()
 
   if (isLoading) {
-    return <Loader />
+    return <ThemedSpinner />
   }
 
   if (!story) return null

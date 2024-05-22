@@ -13,16 +13,18 @@ export function useRecordDetail(type: Category, id: string) {
   const api = initApiClientService()
   const lang = useLocale()
 
-  const queryFn = () =>
-    getZoom3RecordTask(
+  const queryFn = () => {
+    return getZoom3RecordTask(
       type,
       { id, locale: lang ?? 'nl', publicationState: getPublicationState(isDraftMode) },
       api
     )
+  }
 
   return useQuery({
     queryKey: ['record-detail', id, lang],
     queryFn,
+    suspense: true,
     refetchOnWindowFocus: false,
   })
 }
