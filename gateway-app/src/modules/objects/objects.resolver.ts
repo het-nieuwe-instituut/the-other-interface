@@ -54,6 +54,6 @@ export class ObjectsZoomLevelRecordHoverResolver {
 
   @Query(() => ObjectsZoomLevelHoverType)
   public async objectsZoomRecordHover(@Args() args: ObjectsZoomLevel2HoverArgs) {
-    return this.objectsService.getZoomRecordHover(args.id, args.locale)
+    return this.objectsService.getZoomRecordHover(args.id)
   }
 }
