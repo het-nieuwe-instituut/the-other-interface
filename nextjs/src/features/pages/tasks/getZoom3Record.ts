@@ -32,11 +32,19 @@ export class Zoom3TaskError extends Error {
   }
 }
 
-export async function getZoom3RecordTask(type: Category, payload: Payload, api: Sdk) {
+export async function getZoom3RecordTask(
+  type: Category,
+  payload: Payload,
+  api: Sdk,
+  throwOnError?: boolean
+) {
   if (isStoryCategory(type)) {
     const detail = await api?.storyById(payload)
     const story = detail.storyByLocale.data
-    if (!story) throw new Zoom3TaskError()
+    if (!story && throwOnError) throw new Zoom3TaskError()
+
+    if (!story) return null
+
     const record = extractStoryData(story)
     return record
   }
@@ -47,7 +55,7 @@ export async function getZoom3RecordTask(type: Category, payload: Payload, api: 
 
   const item = configByType?.accesor?.(data)
 
-  if (!item?.thumbnail && !item?.title) throw new Zoom3TaskError()
+  if (!item?.thumbnail && !item?.title && throwOnError) throw new Zoom3TaskError()
 
   return {
     ...item,

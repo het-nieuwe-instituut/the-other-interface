@@ -169,7 +169,6 @@ export class ObjectsService {
       undefined,
       { id, language: locale }
     )
-    // TODO: HNIT-1833 - throw on errors (no data or multiple resutls that don't match)
 
     if (results.data.length === 0) {
       return {}
