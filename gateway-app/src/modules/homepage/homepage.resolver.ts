@@ -1,7 +1,7 @@
 import { Inject } from '@nestjs/common'
 import { Args, Query, Resolver } from '@nestjs/graphql'
 import { PublicationState, Sdk } from '../../generated/strapi-sdk'
-import { I18NLocaleCode } from '../strapi/shared-types'
+import { LocaleArgs } from '../util/localeArgs.type'
 import { HomepageEntityResponse } from './homepage.type'
 
 @Resolver()
@@ -10,8 +10,8 @@ export class HomepageResolver {
 
   @Query(() => HomepageEntityResponse)
   public async homepage(
-    @Args('publicationState', { nullable: true }) publicationState?: PublicationState,
-    @Args('locale', { nullable: true }) locale?: I18NLocaleCode
+    @Args() { locale }: LocaleArgs,
+    @Args('publicationState', { nullable: true }) publicationState?: PublicationState
   ) {
     return (await this.strapiGqlSdk.homepage({ publicationState, locale })).homepage
   }

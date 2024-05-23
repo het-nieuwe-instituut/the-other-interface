@@ -1,5 +1,5 @@
-query StoriesRelations($id: String!, $page: Int!, $lang: String!) {
-    relations(type: Stories, id: $id, page: $page, lang: $lang) { 
+query StoriesRelations($id: String!, $page: Int!, $locale: Locale!) {
+    relations(type: Stories, id: $id, page: $page, locale: $locale) { 
         ...zoom3RelationsFragment
     }
 }

@@ -2,7 +2,6 @@ import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/Gala
 import { EditorialLayer } from '@/features/shared/components/Layers/EditorialLayer/EditorialLayer'
 import { CloudCategory } from '@/features/shared/utils/categories'
 import { CategoryGalaxy } from '../../../galaxyInterface/galaxies/CategoryGalaxy/CategoryGalaxy'
-import { Box } from '@chakra-ui/react'
 import { HomeOrLadingType } from 'src/app/landingpage/page'
 
 interface Props {
@@ -13,7 +12,7 @@ interface Props {
 
 export const LandingpageContainer: React.FC<Props> = ({ editorialData, description }) => {
   return (
-    <Box>
+    <div>
       <GalaxyInterface>
         <CategoryGalaxy />
       </GalaxyInterface>
@@ -25,6 +24,6 @@ export const LandingpageContainer: React.FC<Props> = ({ editorialData, descripti
           components={editorialData?.components}
         />
       )}
-    </Box>
+    </div>
   )
 }

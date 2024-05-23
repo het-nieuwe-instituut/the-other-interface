@@ -1,9 +1,9 @@
-query ZoomLevel3Publication($id: String!) {
-    zoomLevel3Publication(id: $id) {
-        id
-        __typename
-        title
-        thumbnail
-        description
-    }
+query ZoomLevel3Publication($id: String!, $locale: Locale!) {
+  zoomLevel3Publication(id: $id, locale: $locale) {
+    id
+    __typename
+    title
+    thumbnail
+    description
+  }
 }

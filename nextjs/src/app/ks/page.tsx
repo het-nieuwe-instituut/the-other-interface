@@ -1,7 +1,7 @@
 import NodeFS from 'fs'
 import NextLink from 'next/link'
 
-const generalPathKeys = ['borders', 'colour', 'spacings', 'typography', 'icons']
+const generalPathKeys = ['borders', 'colour', 'spacings', 'typography', 'icons', 'grid']
 export default function Page() {
   const fs = NodeFS
   const basepath = './src/app/ks'

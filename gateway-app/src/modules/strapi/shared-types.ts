@@ -3,7 +3,6 @@ import { Field, Float, ID, InputType, Int, ObjectType, registerEnumType } from '
 import { PublicationState } from '../../generated/strapi-sdk'
 import { UploadFolderFiltersInput } from './shared-types-dependency'
 
-export type I18NLocaleCode = string
 @ObjectType()
 export class UploadFile {
   @Field()

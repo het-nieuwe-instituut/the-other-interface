@@ -1,17 +1,16 @@
 'use client'
-import { useQuery } from '@tanstack/react-query'
-import initApiClientService from '../../utils/initApiClientService'
 import {
   CATEGORIES_TO_ENTITY_MAPPER,
   CloudCategory,
   SEARCH_CATEGORIES,
   SearchCategory,
 } from '@/features/shared/utils/categories'
-import { useSearchParams } from 'next/navigation'
-import { storyToRecordMapper } from '../../helpers/extractStoryData'
+import { useQuery } from '@tanstack/react-query'
 import { ZOOM2_RECORDS_PER_PAGE } from '../../constants/mainConstants'
-import { StoryEntity } from 'src/generated/graphql'
 import { mapCategoryToTriplyEnum } from '../../helpers/mapCategoryToTriplyEnum'
+import { storyToRecordMapper } from '../../helpers/extractStoryData'
+import initApiClientService from '../../utils/initApiClientService'
+import { useLocale } from '../useLocale'
 
 export function useSearch({
   category,
@@ -25,32 +24,27 @@ export function useSearch({
   enabled?: boolean
 }) {
   const api = initApiClientService()
-  const searchParams = useSearchParams()
-  const lang = searchParams?.get('lang')
+  const locale = useLocale()
 
   // TODO: mix story search
   const queryFn = async () => {
     switch (category) {
       case SEARCH_CATEGORIES.stories:
-        const storiesResponse = await api.searchByStories({
+        const response = await api.searchByStories({
           searchTerm: text || undefined,
-          locale: lang ?? 'nl',
+          locale,
           page,
           pageSize: ZOOM2_RECORDS_PER_PAGE,
         })
-        return {
-          items:
-            storiesResponse?.stories?.data
-              ?.filter(Boolean)
-              .map(story => storyToRecordMapper(story as StoryEntity)) ?? [],
-          total: storiesResponse?.stories?.meta?.pagination?.total,
-        }
-
+        const stories =
+          response?.stories?.data?.filter(Boolean).map(story => storyToRecordMapper(story)) ?? []
+        const total = response?.stories?.meta?.pagination?.total
+        return { items: stories, total }
       case SEARCH_CATEGORIES.all:
         const searchAllResult = await api.searchAll({
           text: text ?? '',
           page,
-          lang: lang ?? 'nl',
+          lang: locale,
           pageSize: ZOOM2_RECORDS_PER_PAGE,
         })
 
@@ -66,10 +60,12 @@ export function useSearch({
             text: text || undefined,
             page,
             pageSize: ZOOM2_RECORDS_PER_PAGE,
+            locale,
           }),
           api.Zoom2Amount({
             entityName: CATEGORIES_TO_ENTITY_MAPPER[category as CloudCategory],
             text: text || undefined,
+            locale,
           }),
         ])
 
@@ -86,7 +82,10 @@ export function useSearch({
     }
   }
 
-  const queryKey = [category, text, page, lang, category]
+  const queryKey =
+    category === SEARCH_CATEGORIES.stories
+      ? ['searchByStories', category, text, page, locale]
+      : ['search', category, text, page]
 
   return useQuery(queryKey, queryFn, {
     enabled,

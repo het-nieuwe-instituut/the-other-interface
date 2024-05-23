@@ -1,17 +1,19 @@
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { useParams, useSearchParams } from 'next/navigation'
-import { useStoryMetaById } from '@/features/shared/hooks/queries/useStoryMetaById'
+import { useParams } from 'next/navigation'
+import { useStoryMetaByIdQuery } from '@/features/shared/hooks/queries/useStoryMetaByIdQuery'
 import { formatDate } from '@/features/shared/utils/dates'
 import {
   AuthorEntity,
   ComponentCoreTimeframe,
   EnumComponentcorepublicationdateDisplaytype,
   EnumTriplyrecordType,
+  Locale,
   TriplyRecord,
 } from 'src/generated/graphql'
 import { capitalizeFirstLetter } from '@/features/shared/utils/text'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { getUniqueById } from '@/features/shared/utils/get-unique-by-id'
+import { useLocale } from '@/features/shared/hooks/useLocale'
 
 function formatPublicationDate(
   displayType?: EnumComponentcorepublicationdateDisplaytype | null,
@@ -43,7 +45,7 @@ function formatTimeframe(timeframe?: ComponentCoreTimeframe | null) {
   return [timeframe.yearStart, timeframe.yearEnd].filter(item => !!item).join(' - ')
 }
 
-function getPeopleUrl(id: string, lang?: string | null) {
+function getPeopleUrl(id: string, lang?: Locale | null) {
   let url = `/detail/people/${id}`
   url = addLocaleToUrl(url, lang)
 
@@ -52,13 +54,15 @@ function getPeopleUrl(id: string, lang?: string | null) {
 
 export const usePresenter = () => {
   const storiesT = useTypeSafeTranslation('stories')
-  const searchParams = useSearchParams()
-  const lang = searchParams?.get('lang')
+  const lang = useLocale()
 
   const params = useParams()
   const id = params?.id as string
 
-  const { data, isLoading } = useStoryMetaById(id)
+  const { data, isLoading } = useStoryMetaByIdQuery({
+    id,
+    options: { refetchOnWindowFocus: false, suspense: true },
+  })
   const story = data?.storyMetaByLocale?.data?.attributes
 
   const linkedPeopleRecords =

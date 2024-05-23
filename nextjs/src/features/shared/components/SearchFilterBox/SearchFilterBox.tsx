@@ -1,4 +1,4 @@
-import { Flex, GridItem, Text } from '@chakra-ui/react'
+import { GridItem } from '@chakra-ui/react'
 import ActionButton from './buttons/ActionButton/ActionButton'
 import { cn } from '@/features/ui/utils/cn'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'

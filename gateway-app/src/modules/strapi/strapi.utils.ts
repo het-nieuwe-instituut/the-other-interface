@@ -3,7 +3,7 @@ import {
   Enum_Triplyrecord_Type,
 } from '../../generated/strapi-sdk'
 import { CustomError } from '../util/customError'
-import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
+import { EntityNames } from '../util/entityNames.type'
 
 export class StrapiUtils {
   public static getRecordTypeForEntityName(name: EntityNames) {
@@ -26,7 +26,7 @@ export class StrapiUtils {
     }
   }
 
-  public static getEntityNameForRecordType(type: Enum_Triplyrecord_Type) {
+  public static getEntityNameForRecordType(type: Enum_Triplyrecord_Type | string) {
     switch (type) {
       case Enum_Triplyrecord_Type.People:
         return EntityNames.People

@@ -17,5 +17,6 @@
   "clear": "Clear",
   "suggestions": "Suggestions",
   "searchPlaceholder": "Type your search term here",
-  "searchCategory": "Category"
+  "searchCategory": "Category",
+  "couldNotFetchHover": "Something went wrong while fetching the data for the hover. Please try again later."
 }

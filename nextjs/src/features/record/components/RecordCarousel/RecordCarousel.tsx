@@ -36,8 +36,7 @@ const RecordCarousel = (props: { imageUrls: string[] }) => {
       <Box height="524px" width="100%">
         <ResponsiveImage
           src={selectedImage ?? props.imageUrls[0]}
-          css={{ height: '100%' }}
-          maxHeight="524px"
+          className="h-full max-h-[524px]"
           fit="contain"
           disableRightClick
         />
@@ -49,13 +48,7 @@ const RecordCarousel = (props: { imageUrls: string[] }) => {
             <Box key={url} mx="6px" height={'104px'} width="25%">
               <ResponsiveImage
                 src={url}
-                css={{
-                  height: '100%',
-                  width: '100%',
-                  transition: 'opacity 0.5s ease-out',
-                  cursor: 'pointer',
-                }}
-                maxHeight="104px"
+                className="size-full max-h-[104px] cursor-pointer transition-opacity duration-500 ease-out"
                 fit="contain"
                 onClick={() => handleThumbnailClick(url)}
                 disableRightClick

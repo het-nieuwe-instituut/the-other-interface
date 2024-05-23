@@ -1,7 +1,7 @@
 import { FOOTER_Z_INDEX } from '@/features/shared/constants/mainConstants'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { cn } from '@/features/ui/utils/cn'
-import { Flex, Box, Grid, Text, Wrap } from '@chakra-ui/react'
+import { Flex, Box, Grid, Wrap } from '@chakra-ui/react'
 
 interface Props {
   isOpen?: boolean

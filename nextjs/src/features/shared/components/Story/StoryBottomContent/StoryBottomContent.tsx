@@ -1,19 +1,20 @@
 'use client'
-import { Box } from '@chakra-ui/react'
 import { StoryWithinThemeCarousel } from '../StoryWithinThemeCarousel/StoryWithinThemeCarousel'
 import { RelatedStoriesCarousel } from '../RelatedStoriesCarousel/RelatedStoriesCarousel'
+import ErrorBoundaryWrapper from '../../Error/ErrorBoundary/ErrorBoundary'
 
 export const StoryBottomContent = () => {
   return (
     <>
-      <Box pt={16} px={6}>
-        <Box>
+      <div className="px-6">
+        <ErrorBoundaryWrapper>
           <RelatedStoriesCarousel />
-        </Box>
-        <Box pt={4}>
+        </ErrorBoundaryWrapper>
+
+        <ErrorBoundaryWrapper>
           <StoryWithinThemeCarousel />
-        </Box>
-      </Box>
+        </ErrorBoundaryWrapper>
+      </div>
     </>
   )
 }

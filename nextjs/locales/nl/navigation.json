@@ -27,5 +27,7 @@
 
   "page": "Pagina",
   "of": "van",
-  "theme": "Thema"
+  "theme": "Thema",
+
+  "errorLoadingThemes": "Er is iets misgegaan bij het laden van thema's. Probeer het later opnieuw."
 }

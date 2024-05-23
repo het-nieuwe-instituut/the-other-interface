@@ -28,15 +28,15 @@ export const CATEGORIES_TO_ENTITY_MAPPER = {
   [CATEGORIES.people]: EntityNames.People,
 } as const
 
-export const isStoryCategory = (category?: string) => category === CATEGORIES.stories
+export const isStoryCategory = (category?: string | null) => category === CATEGORIES.stories
 
-export const isCloudCategory = (category?: string) => {
+export const isCloudCategory = (category?: string | null) => {
   if (!category) return false
 
   return (CLOUD_CATEGORIES_ARRAY as string[]).includes(category)
 }
 
-export const isSearchCategory = (category?: string) => {
+export const isSearchCategory = (category?: string | null) => {
   if (!category) return false
 
   return (SEARCH_CATEGORIES_ARRAY as string[]).includes(category)

@@ -1,16 +1,15 @@
 import { useState, useCallback, useEffect } from 'react'
 import { PositionedStory } from '../types'
-import { useSearchParams } from 'next/navigation'
-import { StoryEntity } from 'src/generated/graphql'
+import { useLocale } from '@/features/shared/hooks/useLocale'
+import { StoriesData } from '../../hooks/useThemes'
 
 export const useImageLoader = (
   positionedStories: PositionedStory[],
   page: number,
-  stories: StoryEntity[]
+  stories: StoriesData
 ) => {
   const [loadedImages, setLoadedImages] = useState(new Set())
-  const searchParams = useSearchParams()
-  const lang = searchParams?.get('lang')
+  const lang = useLocale()
 
   const handleImageLoaded = useCallback((id: string) => {
     setLoadedImages(prev => {

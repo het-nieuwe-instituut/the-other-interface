@@ -1,7 +1,7 @@
 import { Inject } from '@nestjs/common'
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
 import { PublicationState, Sdk } from '../../generated/strapi-sdk'
-import { I18NLocaleCode, PaginationArg } from '../strapi/shared-types'
+import { PaginationArg } from '../strapi/shared-types'
 import {
   StoriesRelatedToThemeResponse,
   ThemeEntityResponse,
@@ -9,17 +9,15 @@ import {
   ThemeRelationResponseCollection,
 } from './theme.type'
 import { Theme } from './theme-dependency.type'
-import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
+import { EntityNames } from '../util/entityNames.type'
+import { LocaleArgs } from '../util/localeArgs.type'
 
 @Resolver()
 export class ThemeResolver {
   public constructor(@Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk) {}
 
   @Query(() => ThemeEntityResponse)
-  public async theme(
-    @Args('id') id: string,
-    @Args('locale', { nullable: true }) locale: I18NLocaleCode
-  ) {
+  public async theme(@Args('id') id: string, @Args() { locale }: LocaleArgs) {
     const res = await this.strapiGqlSdk.theme({ id, locale })
 
     return res.theme
@@ -27,11 +25,11 @@ export class ThemeResolver {
 
   @Query(() => ThemeRelationResponseCollection)
   public async themes(
+    @Args() { locale }: LocaleArgs,
     @Args('filters', { nullable: true }) filters?: ThemeFiltersInput,
     @Args('pagination', { nullable: true }) pagination?: PaginationArg,
     @Args('sort', { nullable: true, type: () => [String] }) sort?: string[],
-    @Args('publicationState', { nullable: true }) publicationState?: PublicationState,
-    @Args('locale', { nullable: true }) locale?: I18NLocaleCode
+    @Args('publicationState', { nullable: true }) publicationState?: PublicationState
   ) {
     const res = await this.strapiGqlSdk.themes({
       filters: filters || undefined,
@@ -45,10 +43,7 @@ export class ThemeResolver {
   }
 
   @Query(() => StoriesRelatedToThemeResponse)
-  public async storiesRealtedWithinTheme(
-    @Args('id') id: string,
-    @Args('locale', { nullable: true }) locale: I18NLocaleCode
-  ) {
+  public async storiesRealtedWithinTheme(@Args('id') id: string, @Args() { locale }: LocaleArgs) {
     const res = await this.strapiGqlSdk.storiesRelatedToTheme({
       storyId: id,
       lang: locale,

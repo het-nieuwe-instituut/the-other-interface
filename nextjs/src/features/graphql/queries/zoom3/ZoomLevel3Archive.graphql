@@ -1,9 +1,9 @@
-query ZoomLevel3Archive($id: String!) {
-    zoomLevel3Archive(id: $id) {
-        __typename
-        id
-        title
-        thumbnail
-        description
-    }
+query ZoomLevel3Archive($id: String!, $locale: Locale!) {
+  zoomLevel3Archive(id: $id, locale: $locale) {
+    __typename
+    id
+    title
+    thumbnail
+    description
+  }
 }

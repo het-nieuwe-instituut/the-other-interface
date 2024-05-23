@@ -1,22 +1,27 @@
 import { imageBasePath } from '@/features/modules/modulesConstants'
-import {
-  ComponentModulesImage,
-  EntityNames,
-  HomepageComponentsDynamicZone,
-  StoryEntity,
-} from 'src/generated/graphql'
+import { EntityNames, SearchByStoriesQuery, StoryByIdQuery } from 'src/generated/graphql'
+import { DeepPartial } from '../types/helpers'
 
-const findImageUrl = (components: HomepageComponentsDynamicZone[]): string => {
+type StoryById = NonNullable<StoryByIdQuery['storyByLocale']['data']>
+type SearchStory = NonNullable<SearchByStoriesQuery['stories']['data']>[0]
+
+const findImageUrl = (
+  components: DeepPartial<NonNullable<StoryById['attributes']>['components']>
+): string => {
   const imageComponent = components?.find(
-    component => component.__typename === 'ComponentModulesImage'
-  ) as ComponentModulesImage
+    component => component?.__typename === 'ComponentModulesImage'
+  )
 
-  const url = imageComponent?.image.data?.attributes?.url ?? ''
+  if (imageComponent && 'image' in imageComponent) {
+    const url = imageComponent?.image?.data?.attributes?.url ?? ''
 
-  return imageBasePath(url) ?? ''
+    return imageBasePath(url) ?? ''
+  }
+
+  return ''
 }
 
-export const extractStoryData = (story: StoryEntity | null) => {
+export const extractStoryData = (story: StoryById) => {
   if (!story) {
     return null
   }
@@ -34,7 +39,7 @@ export const extractStoryData = (story: StoryEntity | null) => {
   }
 }
 
-export const storyToRecordMapper = (story: StoryEntity) => {
+export const storyToRecordMapper = (story: SearchStory) => {
   return {
     title: story?.attributes?.title ?? '',
     thumbnail: findImageUrl(story?.attributes?.components ?? []) ?? '',

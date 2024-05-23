@@ -1,17 +1,17 @@
-query storiesWithoutRelations($pagination: PaginationArg, $locale: String) {
-    storiesWithoutRelations(pagination: $pagination, locale: $locale) {
-        data {
-            id
-            attributes {
-                title
-                slug
-                shortDescription
-            }
-        }
-        meta {
-            pagination {
-                page
-            }
-        }
+query storiesWithoutRelations($pagination: PaginationArg, $locale: Locale!) {
+  storiesWithoutRelations(pagination: $pagination, locale: $locale) {
+    data {
+      id
+      attributes {
+        title
+        slug
+        shortDescription
+      }
     }
+    meta {
+      pagination {
+        page
+      }
+    }
+  }
 }

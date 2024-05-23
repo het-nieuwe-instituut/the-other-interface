@@ -5,7 +5,6 @@ import {
   ArchivesOtherResolver,
   ArchivesRelationsZoomLevel3Resolver,
   ArchivesZoomLevelRecordHoverResolver,
-  ArchivesZoomLevel3Resolver,
 } from './archives.resolver'
 import { ArchivesService } from './archives.service'
 
@@ -13,7 +12,6 @@ import { ArchivesService } from './archives.service'
   imports: [forwardRef(() => ZoomLevel3Module)],
   providers: [
     ArchivesService,
-    ArchivesZoomLevel3Resolver,
     ArchivesOtherResolver,
     ArchivesFondsCreatorResolver,
     ArchivesRelationsZoomLevel3Resolver,
@@ -21,7 +19,6 @@ import { ArchivesService } from './archives.service'
   ],
   exports: [
     ArchivesService,
-    ArchivesZoomLevel3Resolver,
     ArchivesOtherResolver,
     ArchivesFondsCreatorResolver,
     ArchivesRelationsZoomLevel3Resolver,

@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback, RefObject } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import { sharedActions } from '@/features/shared/stores/shared.store'
 import { decodeFilters, encodeFilters } from '@/features/shared/helpers/searchHelpers'

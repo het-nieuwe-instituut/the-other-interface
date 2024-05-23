@@ -14,6 +14,7 @@ export const CategoryFilter: React.FC<Props> = ({ onClick, isOpen, selectedOptio
   const { t } = useTypeSafeTranslation('category')
 
   return (
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
     <div
       className={cn(
         'bg-transparent text-pink.100 border border-pink.100',
@@ -22,7 +23,7 @@ export const CategoryFilter: React.FC<Props> = ({ onClick, isOpen, selectedOptio
       )}
       onClick={onClick}
     >
-      <div className="relative max-w-full flex items-center justify-between pt-1 pb-2">
+      <div className="relative flex max-w-full items-center justify-between pb-2 pt-1">
         <p className={cn('truncate mr-1', TypographyVariants({ social: 'label' }))}>
           {t('category')}
         </p>

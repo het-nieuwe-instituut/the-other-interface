@@ -1,17 +1,14 @@
 import { useMemo } from 'react'
 
-import {
-  ComponentModulesImage,
-  HomepageComponentsDynamicZone,
-  StoryEntity,
-} from 'src/generated/graphql'
+import { ComponentModulesImage } from 'src/generated/graphql'
 import { imageBasePath } from '@/features/modules/modulesConstants'
 import { PositionedStory } from '../types'
 import { storiesPositionsTemplates } from './positioningTemplates'
 import { usePageNumber } from '@/features/shared/hooks/usePageNumber'
 import { usePositioningTemplates } from '@/features/shared/hooks/usePositioningTemplates'
+import { StoriesData, StoryComponentsDynamicZone, StoryData } from '../../hooks/useThemes'
 
-const findImageUrl = (components: HomepageComponentsDynamicZone[]): string => {
+const findImageUrl = (components: StoryComponentsDynamicZone): string => {
   const imageComponent = components?.find(
     component => component.__typename === 'ComponentModulesImage'
   ) as ComponentModulesImage
@@ -21,7 +18,7 @@ const findImageUrl = (components: HomepageComponentsDynamicZone[]): string => {
   return imageBasePath(url) ?? ''
 }
 
-const mapStory = (story: StoryEntity) => {
+const mapStory = (story: StoryData) => {
   const storyId = story?.id
   const storyLocale = story?.attributes?.locale
   const imageUrl = findImageUrl(story?.attributes?.components ?? [])
@@ -34,7 +31,7 @@ const mapStory = (story: StoryEntity) => {
   }
 }
 
-export const usePresenter = (stories: StoryEntity[], nextStories: StoryEntity[]) => {
+export const usePresenter = (stories: StoriesData, nextStories: StoriesData) => {
   const { pageNumber } = usePageNumber()
   const { currentTemplate, nextTemplate, originalTemplateIndex } = usePositioningTemplates(
     storiesPositionsTemplates,
@@ -88,8 +85,8 @@ export const usePresenter = (stories: StoryEntity[], nextStories: StoryEntity[])
   return {
     positionedStories,
     positionedNextStories,
-    isCurrentStoriesEmpty: stories.length === 0,
-    isNextStoriesEmpty: nextStories.length === 0,
+    isCurrentStoriesEmpty: stories?.length === 0,
+    isNextStoriesEmpty: nextStories?.length === 0,
     originalTemplateIndex,
     pageNumber,
   }

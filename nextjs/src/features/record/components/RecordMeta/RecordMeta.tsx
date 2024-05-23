@@ -1,7 +1,7 @@
 'use client'
 import { Box, Text, Button, Tooltip } from '@chakra-ui/react'
 import { usePresenter } from './usePresenter'
-import { Loader } from '@/features/galaxyInterface/components/Loader/Loader'
+import { ThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
 import ExternalLink from '@/icons/arrows/external-link.svg'
 import { recordRightsFieldMapper } from '../../mappers/recordRightsMapper'
 import { recordMetaT } from 'locales/locales'
@@ -114,7 +114,7 @@ export const RecordMeta: React.FC = () => {
   const { recordMetaSectionData, isLoading, recordMetaT } = usePresenter()
 
   if (isLoading) {
-    return <Loader />
+    return <ThemedSpinner />
   }
 
   if (!recordMetaSectionData) return null

@@ -1,11 +1,10 @@
-import { Inject, Injectable } from '@nestjs/common'
+import { Injectable } from '@nestjs/common'
 import { CustomError } from '../util/customError'
 import { PaginationArgs } from '../util/paginationArgs.type'
-import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
+import { EntityNames } from '../util/entityNames.type'
 import { KeysToVerify, TriplyService } from '../triply/triply.service'
-import { TriplyUtils } from '../triply/triply.utils'
 import { getUniqueById } from '../util/helpers'
-import { Sdk } from 'src/generated/strapi-sdk'
+import { Locale } from '../util/locale.type'
 
 interface ResultData {
   thumbnail: string
@@ -23,22 +22,20 @@ const resultDataKeys: KeysToVerify<ResultData> = {
 
 @Injectable()
 export class ZoomLevel2Service {
-  public constructor(
-    @Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk,
-    private readonly triplyService: TriplyService
-  ) {}
-  public getData(entity: EntityNames, paginationArgs: PaginationArgs, text?: string) {
+  public constructor(private readonly triplyService: TriplyService) {}
+
+  public getData(
+    locale: Locale,
+    entity: EntityNames,
+    paginationArgs: PaginationArgs,
+    text?: string
+  ) {
     switch (entity) {
       case EntityNames.Archives:
       case EntityNames.Objects:
       case EntityNames.People:
       case EntityNames.Publications:
-        return this.getZoomLevel2Data({
-          type: entity,
-          page: paginationArgs.page,
-          pageSize: paginationArgs.pageSize,
-          text,
-        })
+        return this.getZoomLevel2Data(locale, entity, paginationArgs, text)
 
       case EntityNames.Stories:
       default: {
@@ -62,24 +59,19 @@ export class ZoomLevel2Service {
     }
   }
 
-  private async getZoomLevel2Data({
-    type,
-    page = 1,
-    pageSize = 48,
-    text,
-  }: {
-    type: EntityNames
-    page?: number
-    pageSize?: number
+  private async getZoomLevel2Data(
+    locale: Locale,
+    type: EntityNames,
+    paginationArgs: PaginationArgs,
     text?: string
-  }) {
-    const uri = TriplyUtils.getUriForLevel2Data({ type, text, isDataAmount: false })
+  ) {
+    const uri = this.getUriForLevel2Data(type, text, { forCount: false })
 
     const result = await this.triplyService.queryTriplyData<ResultData>(
       uri,
       resultDataKeys,
-      { page, pageSize },
-      text ? { text } : undefined
+      paginationArgs,
+      { language: locale, text: text || '' }
     )
 
     const uniqueNodes = getUniqueById(result?.data).map(res => ({
@@ -89,13 +81,13 @@ export class ZoomLevel2Service {
     }))
 
     return {
-      page,
+      page: paginationArgs.page ?? 1,
       nodes: uniqueNodes,
     }
   }
 
   private async getZoomLevel2DataAmount(type: EntityNames, text?: string) {
-    const uri = TriplyUtils.getUriForLevel2Data({ type, text, isDataAmount: true })
+    const uri = this.getUriForLevel2Data(type, text, { forCount: true })
 
     const countResult = await this.triplyService.queryTriplyData<{ total?: string }>(
       uri,
@@ -108,6 +100,50 @@ export class ZoomLevel2Service {
 
     return {
       total,
+    }
+  }
+
+  private getUriForLevel2Data(type: EntityNames, text = '', { forCount }: { forCount: boolean }) {
+    if (text) {
+      return this.getUriForLevel2TextSearch(type, { forCount })
+    }
+
+    const dataAmountUri = forCount ? '-count' : ''
+
+    switch (type) {
+      case EntityNames.People:
+        return `people-landingPage${dataAmountUri}/run`
+      case EntityNames.Archives:
+        return `archives-landingPage${dataAmountUri}/run`
+      case EntityNames.Publications:
+        return `publications-landingPage${dataAmountUri}/run`
+      case EntityNames.Objects:
+        return `objects-landingPage${dataAmountUri}/run`
+      case EntityNames.Media:
+      case EntityNames.Stories:
+      case EntityNames.External:
+      default:
+        throw CustomError.externalCritical(`uri for type ${type} not implemented`)
+    }
+  }
+
+  private getUriForLevel2TextSearch(type: EntityNames, { forCount }: { forCount: boolean }) {
+    const dataAmountUri = forCount ? '-Count' : ''
+
+    switch (type) {
+      case EntityNames.People:
+        return `people-textSearch${dataAmountUri}/run`
+      case EntityNames.Archives:
+        return `archives-textSearch${dataAmountUri}/run`
+      case EntityNames.Publications:
+        return `publications-textSearch${dataAmountUri}/run`
+      case EntityNames.Objects:
+        return `objects-textSearch${dataAmountUri}/run`
+      case EntityNames.Media:
+      case EntityNames.Stories:
+      case EntityNames.External:
+      default:
+        throw CustomError.externalCritical(`uri for type ${type} not implemented`)
     }
   }
 }
