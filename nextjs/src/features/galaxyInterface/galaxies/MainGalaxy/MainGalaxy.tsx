@@ -1,6 +1,4 @@
 'use client'
-import { Box, Flex } from '@chakra-ui/react'
-
 import { Cloud, CategoryCloud, Stories } from './fragments'
 import { ThemeTitle } from '../../components/ThemeTitle/ThemeTitle'
 import { GalaxyFooter } from '../../components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
@@ -56,19 +54,19 @@ export const MainGalaxy = () => {
   const isLoading = isMainLoading || isNextLoading
 
   const renderMainContent = () => {
-    if (!isError) {
+    if (isError) {
       return (
-        <Flex justify="center" align="center" height="100%">
+        <div className="flex h-full items-center justify-center">
           <p className={TypographyVariants({ times: 'md' })}>{t('errorLoadingThemes')}</p>
-        </Flex>
+        </div>
       )
     }
 
     if (isLoading) {
       return (
-        <Flex justify="center" align="center" height="100%">
+        <div className="h-full items-center justify-center">
           <Loader />
-        </Flex>
+        </div>
       )
     }
 
@@ -81,7 +79,7 @@ export const MainGalaxy = () => {
   }
 
   return (
-    <Box position="relative" width="100vw" height="100vh">
+    <div className="relative h-screen w-screen">
       {categoryClouds.map(cloud => (
         <Cloud key={cloud.title} cloud={cloud} />
       ))}
@@ -101,6 +99,6 @@ export const MainGalaxy = () => {
           />
         }
       />
-    </Box>
+    </div>
   )
 }
