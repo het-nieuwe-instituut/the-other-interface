@@ -1,5 +1,5 @@
 import { QueryErrorResetBoundary } from '@tanstack/react-query'
-import { ErrorBoundary, FallbackProps } from 'react-error-boundary'
+import { ErrorBoundary } from 'react-error-boundary'
 import ErrorBox from '../ErrorBox'
 
 const ErrorBoundaryWrapper = ({ children }: { children: React.ReactNode }) => (
