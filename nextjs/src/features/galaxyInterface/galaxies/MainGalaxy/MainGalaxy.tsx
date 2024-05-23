@@ -5,10 +5,10 @@ import { GalaxyFooter } from '../../components/GalaxyWrapper/GalaxyFooter/Galaxy
 import { GalaxyPagination } from '../../components/GalaxyWrapper/GalaxyPagination/GalaxyPagination'
 import { usePresenter } from './usePresenter'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { Loader } from '../../components/Loader/Loader'
 import { useThemesQuery } from './hooks/useThemes'
 import { useSearchParams } from 'next/navigation'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
+import { Loader } from '@/features/shared/components/Loading/Loading'
 
 const categoryClouds: CategoryCloud[] = [
   {

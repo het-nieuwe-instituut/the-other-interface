@@ -55,11 +55,10 @@ export async function getZoom3RecordTask(
 
   const item = configByType?.accesor?.(data)
 
-  if (!item?.thumbnail && !item?.title && throwOnError) throw new Zoom3TaskError()
+  const invalidItem = !item?.id || (item?.thumbnail && !item?.title)
+  if (!invalidItem && throwOnError) throw new Zoom3TaskError()
 
-  return {
-    ...item,
-    description: item?.description ?? '',
-    locale: payload.locale,
-  }
+  if (!item?.id) return null
+
+  return item
 }
