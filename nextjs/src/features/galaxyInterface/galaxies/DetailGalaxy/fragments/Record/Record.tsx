@@ -32,7 +32,7 @@ export const Record: React.FC<Props> = ({
   // TODO: HNIT-1833 - add in loading and error handling
   const {
     data,
-    isError: isLoadingError,
+    isError: isLoadingHoverError,
     isLoading: isLoadingHover,
   } = useZoomHoverRecordResultQuery({ id, category })
   const { coordinates, ref } = useCalculateLine()
@@ -53,7 +53,7 @@ export const Record: React.FC<Props> = ({
       <div className="peer relative size-full">
         <ReadMoreTooltip
           isLoading={isLoadingHover}
-          error={isLoadingError ? t('couldNotFetchHover') : ''}
+          error={isLoadingHoverError ? t('couldNotFetchHover') : ''}
           place={tooltipPlace}
           isEmpty={!data?.description && !data?.title}
           title={data?.title ?? undefined}
