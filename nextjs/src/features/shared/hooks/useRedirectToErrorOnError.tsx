@@ -6,7 +6,8 @@ export const useRedirectToErrorOnError = (error: unknown) => {
   useEffect(() => {
     if (error && typeof error === 'object') {
       if ('status' in error) {
-        if (error['status'] === 404) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        if ((error as any).status === 404) {
           router.push('/404')
         } else {
           router.push('/500')

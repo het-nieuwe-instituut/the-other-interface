@@ -52,7 +52,7 @@ export const Record: React.FC<Props> = ({ record, tooltipPlace }) => {
 }
 
 const RecordData = (record: RecordProps, lang?: Locale | null, search?: string) => {
-  const { id, thumbnail, category, position, title } = record
+  const { id, thumbnail, category, title } = record
   const router = useRouter()
 
   const handleClick = () => {
