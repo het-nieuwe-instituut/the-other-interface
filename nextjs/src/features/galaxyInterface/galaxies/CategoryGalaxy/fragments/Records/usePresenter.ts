@@ -5,14 +5,14 @@ import { usePageNumber } from '@/features/shared/hooks/usePageNumber'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 import { useSearch } from '@/features/shared/hooks/queries/useSearch'
-import { SearchAllResultType } from 'src/generated/graphql'
+import { SearchResultItemType } from 'src/generated/graphql'
 
 const getPositionedRecords = ({
   records,
   pageNumber,
   currentTemplate,
 }: {
-  records: SearchAllResultType[] | null
+  records: SearchResultItemType[] | null
   pageNumber: number
   currentTemplate: PositioningTemplate
 }) => {

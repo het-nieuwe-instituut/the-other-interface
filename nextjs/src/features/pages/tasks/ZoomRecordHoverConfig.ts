@@ -1,3 +1,4 @@
+import { Category } from '@/features/shared/utils/categories'
 import {
   ArchivesZoomRecordHoverQuery,
   EntityNames,
@@ -7,7 +8,7 @@ import {
   Sdk,
 } from 'src/generated/graphql'
 
-export const getZoomRecordHoverQueries = (api: Sdk, type: EntityNames) => {
+export const getZoomRecordHoverQueries = (api: Sdk, type: EntityNames | Category) => {
   switch (type) {
     case EntityNames.People:
       return {

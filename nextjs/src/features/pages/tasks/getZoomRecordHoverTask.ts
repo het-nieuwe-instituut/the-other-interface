@@ -2,6 +2,7 @@ import { getZoomRecordHoverQueries } from './ZoomRecordHoverConfig'
 import { EntityNames, Sdk, Locale } from 'src/generated/graphql'
 import { zoomRecordHoverQueryTooltipDataMapper } from '@/features/galaxyInterface/galaxies/CategoryGalaxy/fragments/Record/zoomRecordHoverQueryTooltipDataMapper'
 import { zoomStoryHoverQueryTooltipDataMapper } from '@/features/galaxyInterface/galaxies/CategoryGalaxy/fragments/Record/zoomStoryHoverQueryTooltipDataMapper'
+import { Category } from '@/features/shared/utils/categories'
 
 export async function getZoomRecordHoverTask({
   id,
@@ -10,7 +11,7 @@ export async function getZoomRecordHoverTask({
   locale,
 }: {
   id?: string | null
-  category?: EntityNames | null
+  category?: Category | EntityNames | null
   api: Sdk
   locale: Locale
 }) {
