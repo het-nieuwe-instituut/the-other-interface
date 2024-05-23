@@ -2,6 +2,7 @@ import { Field, ID, InputType, ObjectType, registerEnumType } from '@nestjs/grap
 import { Enum_Triplyrecord_Type } from '../../generated/strapi-sdk'
 import { StoryFiltersInput, StoryRelationResponseCollection } from '../story/story.type'
 import {
+  BooleanFilterInput,
   DateTimeFilterInput,
   IdFilterInput,
   ResponseCollectionMeta,
@@ -45,6 +46,9 @@ export class TriplyRecord {
 
   @Field(() => PeopleZoomLevel3DetailType, { nullable: true })
   public people?: PeopleZoomLevel3DetailType
+
+  @Field({ nullable: true })
+  public subject_collectionHighlights?: boolean
 }
 
 @ObjectType()
@@ -74,32 +78,35 @@ export class TriplyRecordEntityResponse {
 @InputType()
 export class TriplyRecordFiltersInput {
   @Field(() => IdFilterInput, { nullable: true })
-  public id: IdFilterInput
+  public id?: IdFilterInput
 
   @Field(() => StringFilterInput, { nullable: true })
-  public recordId: StringFilterInput
+  public recordId?: StringFilterInput
 
   @Field(() => StringFilterInput, { nullable: true })
-  public type: StringFilterInput
+  public type?: StringFilterInput
 
   @Field(() => StoryFiltersInput, { nullable: true })
-  public stories: StoryFiltersInput
+  public stories?: StoryFiltersInput
 
   @Field(() => DateTimeFilterInput, { nullable: true })
-  public createdAt: DateTimeFilterInput
+  public createdAt?: DateTimeFilterInput
 
   @Field(() => DateTimeFilterInput, { nullable: true })
-  public updatedAt: DateTimeFilterInput
+  public updatedAt?: DateTimeFilterInput
 
   @Field(() => DateTimeFilterInput, { nullable: true })
-  public publishedAt: DateTimeFilterInput
+  public publishedAt?: DateTimeFilterInput
 
   @Field(() => [TriplyRecordFiltersInput], { nullable: true })
-  public and: [TriplyRecordFiltersInput]
+  public and?: [TriplyRecordFiltersInput]
 
   @Field(() => [TriplyRecordFiltersInput], { nullable: true })
-  public or: [TriplyRecordFiltersInput]
+  public or?: [TriplyRecordFiltersInput]
 
   @Field(() => TriplyRecordFiltersInput, { nullable: true })
-  public not: TriplyRecordFiltersInput
+  public not?: TriplyRecordFiltersInput
+
+  @Field(() => BooleanFilterInput, { nullable: true })
+  public subject_collectionHighlights?: BooleanFilterInput
 }
