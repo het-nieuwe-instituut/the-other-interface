@@ -1,9 +1,10 @@
 import { RecordType } from '@/features/galaxyInterface/galaxies/CategoryGalaxy/fragments/types'
 import { imageBasePath } from '@/features/modules/modulesConstants'
 
-import { StoryByIdQuery } from 'src/generated/graphql'
+import { SearchByStoriesQuery, StoryByIdQuery } from 'src/generated/graphql'
 
 type StoryById = NonNullable<StoryByIdQuery['storyByLocale']['data']>
+type SearchStory = NonNullable<SearchByStoriesQuery['stories']['data']>[0]
 
 const findImageUrl = (components: NonNullable<StoryById['attributes']>['components']): string => {
   const imageComponent = components?.find(
@@ -37,7 +38,7 @@ export const extractStoryData = (story: StoryById) => {
   }
 }
 
-export const storyToRecordMapper = (story: StoryEntity): RecordType => {
+export const storyToRecordMapper = (story: SearchStory): RecordType => {
   return {
     title: story?.attributes?.title ?? '',
     thumbnail: findImageUrl(story?.attributes?.components ?? []) ?? '',
