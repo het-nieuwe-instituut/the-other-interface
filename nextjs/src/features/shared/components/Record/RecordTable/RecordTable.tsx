@@ -45,7 +45,7 @@ export const RecordTable: React.FC = () => {
   const peoplenTableData = useMapRecordTableData(peopleData?.pages, CATEGORIES.people)
 
   return (
-    <Box maxW={theme.breakpoints.lg} px={6} pt={0}>
+    <Box maxW={theme.breakpoints.lg} pt={0}>
       {publicationTableData && (
         <PaginatedTable
           data={publicationTableData}

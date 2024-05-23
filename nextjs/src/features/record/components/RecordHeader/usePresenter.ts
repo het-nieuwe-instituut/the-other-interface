@@ -1,4 +1,4 @@
-import { useRecordDetail } from '@/features/record/hooks/useRecordDetail'
+import { useRecordDetailQuery } from '@/features/record/hooks/useRecordDetailQuery'
 import { Category } from '@/features/shared/utils/categories'
 import { useParams } from 'next/navigation'
 import { ScrollToContent } from '@/features/pages/utils/utils'
@@ -12,7 +12,11 @@ export const usePresenter = () => {
     ScrollToContent()
   }
 
-  const { data: record, isLoading } = useRecordDetail(category, id)
+  const { data: record, isLoading } = useRecordDetailQuery({
+    type: category,
+    id,
+    queryOptions: { refetchOnWindowFocus: false, suspense: true },
+  })
 
   return {
     record,

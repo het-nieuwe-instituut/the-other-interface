@@ -25,6 +25,7 @@ export function usePaginationedRecordRelations(type: Category, id: string, categ
     queryFn,
     refetchOnWindowFocus: false,
     keepPreviousData: true,
+    suspense: true,
     getNextPageParam: (_lastPage, allPages) => {
       if (!allPages[0]) return null
 

@@ -1,5 +1,3 @@
-'use client'
-import { Box } from '@chakra-ui/react'
 import { RecordTitle } from '../../fragments/RecordTitle'
 import { RecordDescription } from '../../fragments/RecordDescription'
 import RecordCarousel from '../RecordCarousel/RecordCarousel'
@@ -9,7 +7,7 @@ export const RecordHeader = () => {
   const { record, handleScrollToContentClick } = usePresenter()
 
   return (
-    <Box>
+    <div>
       <RecordTitle
         title={record?.title ?? ''}
         handleScrollToContentClick={handleScrollToContentClick}
@@ -18,6 +16,6 @@ export const RecordHeader = () => {
       {record?.thumbnail && record?.thumbnail.length > 0 && (
         <RecordCarousel imageUrls={record?.thumbnail ?? []} />
       )}
-    </Box>
+    </div>
   )
 }
