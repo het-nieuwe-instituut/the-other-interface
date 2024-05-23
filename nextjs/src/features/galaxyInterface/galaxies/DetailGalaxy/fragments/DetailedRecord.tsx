@@ -4,7 +4,7 @@ import { useParams } from 'next/navigation'
 import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Category } from '@/features/shared/utils/categories'
 import { toSingularCategory } from '@/features/shared/utils/toSingularCategory'
-import { useRecordDetail } from '@/features/record/hooks/useRecordDetail'
+import { useRecordDetailQuery } from '@/features/record/hooks/useRecordDetailQuery'
 import { notFound } from 'next/navigation'
 
 interface Props {
@@ -18,7 +18,11 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
   const category = params?.category as Category
   const id = params?.id as string
 
-  const { data: record, isLoading } = useRecordDetail(category, id)
+  const { data: record, isLoading } = useRecordDetailQuery({
+    type: category,
+    id,
+    options: { refetchOnWindowFocus: false },
+  })
 
   if (!isLoading && !record) {
     notFound()

@@ -3,7 +3,7 @@ import { Box, Flex, Grid, keyframes } from '@chakra-ui/react'
 import { Story } from '../Story'
 import { usePresenter } from './usePresenter'
 import { useDrawLines } from './useDrawLines'
-import { Loader } from '@/features/galaxyInterface/components/Loader/Loader'
+import { ThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
 import { useImageLoader } from './useImageLoader'
 import { StoriesData } from '../../hooks/useThemes'
 
@@ -37,7 +37,7 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
     <Box width={'100%'} height={'100%'}>
       {!allImagesLoaded && (
         <Flex justify={'center'} align={'center'} height={'100%'}>
-          <Loader />
+          <ThemedSpinner />
         </Flex>
       )}
       <Grid

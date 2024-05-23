@@ -1,5 +1,7 @@
 'use client'
 import { Box, Grid, GridItem, useTheme } from '@chakra-ui/react'
+import React from 'react'
+import SuspenseLoader from '../SuspenseLoader/SuspenseLoader'
 
 interface Props {
   LeftContent: React.ReactNode
@@ -21,24 +23,29 @@ export const LayerWrapper: React.FC<Props> = ({ LeftContent, RightContent, Botto
       <Box maxW={theme.breakpoints.xl} marginX={'auto'} paddingTop={9}>
         <Grid
           templateAreas={{
-            lg: `"left right"`,
+            lg: `"left right"
+                 "bottom right"`,
             base: `"right"
-                  "left"`,
+                   "left"
+                   "bottom"`,
           }}
           templateColumns={RightContent ? { lg: 'minmax(0, 1fr) 320px', base: `100% 100%` } : '1fr'}
-          templateRows={{ lg: '1fr', base: `auto minmax(0, 1fr)` }}
+          templateRows={{ lg: '1fr auto', base: `auto minmax(0, 1fr) auto` }}
           gap={RightContent ? '3.75rem' : '0'}
         >
-          <GridItem px={6} area={'left'}>
-            {LeftContent}
-          </GridItem>
+          <SuspenseLoader>
+            <GridItem px={6} area={'left'}>
+              {LeftContent}
+            </GridItem>
+            <GridItem area={'bottom'}>{BottomContent}</GridItem>
+          </SuspenseLoader>
+
           {RightContent && (
             <GridItem area={'right'} px={6}>
               {RightContent}
             </GridItem>
           )}
         </Grid>
-        {BottomContent}
       </Box>
     </Box>
   )
