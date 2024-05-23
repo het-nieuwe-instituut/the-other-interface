@@ -6,7 +6,7 @@ import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useLocale } from '@/features/shared/hooks/useLocale'
 
 export const useRecords = (id: string, category: Category) => {
-  const { data, isLoading } = useRecordDetail(category, id)
+  const { data, isLoading, isError } = useRecordDetail(category, id)
   const router = useRouter()
   const lang = useLocale()
 
@@ -19,6 +19,7 @@ export const useRecords = (id: string, category: Category) => {
   return {
     recordDetails: data,
     isLoading,
+    isError,
     handleClick,
   }
 }
