@@ -1,6 +1,6 @@
 import { Box, Text } from '@chakra-ui/react'
 import { TableModule } from '@/features/modules/components/TableModule/TableModule'
-import { usePresenter } from './usePresenter'
+import { useTableRecords } from './useTableRecords'
 import { CATEGORIES, Category } from '@/features/shared/utils/categories'
 import { theme } from '@/features/shared/styles/theme/theme'
 import { useMapRecordTableData } from './useMapRecordTableData'
@@ -19,22 +19,22 @@ export const RecordTable: React.FC = () => {
     data: publicationData,
     hasNextPage: hasNextPagePublication,
     fetchNextPage: fetchNextPagePublications,
-  } = usePresenter(CATEGORIES.publications)
+  } = useTableRecords(CATEGORIES.publications)
   const {
     data: archiveData,
     hasNextPage: hasNextPageArchive,
     fetchNextPage: fetchNextPageArchive,
-  } = usePresenter(CATEGORIES.archives)
+  } = useTableRecords(CATEGORIES.archives)
   const {
     data: objectData,
     hasNextPage: hasNextPageObject,
     fetchNextPage: fetchNextPageObject,
-  } = usePresenter(CATEGORIES.objects)
+  } = useTableRecords(CATEGORIES.objects)
   const {
     data: peopleData,
     hasNextPage: hasNextPagePeople,
     fetchNextPage: fetchNextPagePeople,
-  } = usePresenter(CATEGORIES.people)
+  } = useTableRecords(CATEGORIES.people)
 
   const publicationTableData = useMapRecordTableData(
     publicationData?.pages,
@@ -80,7 +80,7 @@ export const RecordTable: React.FC = () => {
 
 const PaginatedTable: React.FC<PaginatedTableProps> = props => {
   const { data, fetchNextPage, hasNextPage } = props
-
+  if (!data) return null
   return (
     <>
       <TableModule

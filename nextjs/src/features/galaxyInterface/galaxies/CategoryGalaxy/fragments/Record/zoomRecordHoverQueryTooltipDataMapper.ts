@@ -57,12 +57,12 @@ export const zoomRecordHoverQueryTooltipDataMapper = (initialData: TooltipData) 
   }
 
   if ('objectsZoomRecordHover' in initialData) {
-    const { title, description } = initialData.objectsZoomRecordHover
+    const { title, description, maker } = initialData.objectsZoomRecordHover
 
     if (!title && !description) {
       return null
     }
 
-    return { title, description }
+    return { title: joinNullableStrings(', ', title, maker), description }
   }
 }

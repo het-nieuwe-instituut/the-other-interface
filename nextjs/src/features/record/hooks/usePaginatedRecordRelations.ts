@@ -1,7 +1,7 @@
 'use client'
 import { getPaginatedRelationsTask } from '@/features/pages/tasks/getPaginatedRelationsTask'
 import { useLocale } from '@/features/shared/hooks/useLocale'
-import { useInfiniteQuery } from '@tanstack/react-query' //
+import { useInfiniteQuery } from '@tanstack/react-query'
 import { Category } from '../../shared/utils/categories'
 import initApiClientService from '../../shared/utils/initApiClientService'
 

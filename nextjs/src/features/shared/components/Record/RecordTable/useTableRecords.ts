@@ -9,7 +9,7 @@ export interface PaginationPagesTypes {
   publications?: number
 }
 
-export const usePresenter = (category: Category) => {
+export const useTableRecords = (category: Category) => {
   const params = useParams()
   const id = params?.id as string
   const type = params?.category as Category

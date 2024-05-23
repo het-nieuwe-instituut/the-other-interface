@@ -17,7 +17,7 @@ export function useRecordDetailQuery({
   id: string
   options?: Pick<
     UseBaseQueryOptions<() => typeof getZoom3RecordTask>,
-    'suspense' & 'refetchOnWindowFocus'
+    'suspense' | 'refetchOnWindowFocus'
   >
 }) {
   const { isDraftMode } = useSelector((state: State) => state.shared)
@@ -28,12 +28,13 @@ export function useRecordDetailQuery({
     getZoom3RecordTask(
       type,
       { id, locale: lang ?? 'nl', publicationState: getPublicationState(isDraftMode) },
-      api
+      api,
+      options?.suspense
     )
 
   return useQuery({
     queryKey: ['record-detail', id, lang],
     queryFn,
-    ...options,
+    suspense: options?.suspense,
   })
 }
