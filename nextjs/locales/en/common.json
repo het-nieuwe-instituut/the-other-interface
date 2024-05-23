@@ -1,5 +1,6 @@
 {
   "somethingWentWrong": "Something went wrong",
+  "somethingWentWrongAndRetry": "Couldn't load section. Please reload the page",
   "commonTest": "This is a common translation test, also testing counters: {{count}}",
   "published": "Published on {{date}}",
   "archivesBy": "Archive items by",

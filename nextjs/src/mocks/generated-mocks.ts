@@ -825,6 +825,7 @@ export const anObjectsZoomLevelHoverType = (overrides?: Partial<ObjectsZoomLevel
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ObjectsZoomLevelHoverType']);
     return {
         description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'et',
+        maker: overrides && overrides.hasOwnProperty('maker') ? overrides.maker! : 'eos',
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'architecto',
     };
 };
