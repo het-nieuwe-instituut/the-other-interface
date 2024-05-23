@@ -9,9 +9,11 @@
     "build": "strapi build",
     "start-services": "docker-compose --project-name=hni-toi up",
     "strapi": "strapi",
+    "clean": "rm -rf node_modules && rm -rf .cache && rm -rf dist",
     "copyenv": "./.bin/init-env"
   },
   "dependencies": {
+    "@strapi/plugin-content-manager": "^4.11.7",
     "@strapi/plugin-graphql": "^4.3.2",
     "@strapi/plugin-i18n": "4.3.2",
     "@strapi/plugin-users-permissions": "4.3.2",

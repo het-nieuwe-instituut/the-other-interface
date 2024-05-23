@@ -11,10 +11,7 @@
     },
     "displayType": {
       "type": "enumeration",
-      "enum": [
-        "Year",
-        "Date"
-      ],
+      "enum": ["Year", "Date"],
       "default": "Year"
     }
   }

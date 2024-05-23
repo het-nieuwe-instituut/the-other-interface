@@ -17,11 +17,11 @@
     "description": {
       "type": "text"
     },
-    "imageCarouselModuleLayout": {
+    "items": {
+      "displayName": "ImageCarouselItem",
       "type": "component",
-      "repeatable": false,
-      "component": "core.module-layouts",
-      "required": true
+      "repeatable": true,
+      "component": "core.image-carousel-item"
     }
   }
 }

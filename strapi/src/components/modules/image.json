@@ -20,11 +20,15 @@
     "alt_text": {
       "type": "string"
     },
-    "imageModuleLayout": {
-      "type": "component",
-      "repeatable": false,
-      "component": "core.module-layouts",
-      "required": true
+    "triplyRecord": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::triply-record.triply-record"
+    },
+    "story": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::story.story"
     }
   }
 }

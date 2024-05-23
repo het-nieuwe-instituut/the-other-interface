@@ -1,0 +1,70 @@
+query theme($id: ID, $locale: I18NLocaleCode) {
+    theme(id: $id, locale: $locale) {
+        data {
+            ...ThemeFragment
+        }
+    }
+}
+
+query themes(
+    $filters: ThemeFiltersInput
+    $pagination: PaginationArg
+    $sort: [String]
+    $publicationState: PublicationState
+    $locale: I18NLocaleCode
+) {
+    themes(
+        filters: $filters
+        pagination: $pagination
+        sort: $sort
+        publicationState: $publicationState
+        locale: $locale
+    ) {
+        data {
+            ...ThemeFragment
+        }
+        meta {
+            ...ResponseCollectionMetaFragment
+        }
+    }
+}
+
+query storiesRelatedToTheme($storyId: ID!, $lang: I18NLocaleCode, $publicationState: PublicationState = LIVE) {
+    themes(
+        filters: {
+            stories: {
+                or: [
+                { id: { eq: $storyId } },
+                { localizations: {  id: { eq: $storyId }  } }
+                ]
+            }
+    }, 
+    locale: $lang, 
+    publicationState: $publicationState
+  ) {
+        data {
+            ...ThemeFragment
+        }
+    }
+}
+
+fragment ThemeFragment on ThemeEntity {
+    id
+    attributes {
+        name
+        stories {
+            data {
+                ...StoryFragment
+            }
+        }
+        createdAt
+        updatedAt
+        publishedAt
+        localizations {
+            data {
+                id
+            }
+        }
+        locale
+    }
+}

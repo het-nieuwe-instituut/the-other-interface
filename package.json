@@ -5,13 +5,36 @@
     "node": "16.15.*"
   },
   "scripts": {
-    "start": "(ls Itermocil.custom.yml > /dev/null && itermocil --here --layout ./Itermocil.custom.yml) || itermocil --here",
-    "prepare": "husky install"
+    "predev": "docker-compose --project-name hni-toi ps | grep -q 'hni-toi' || (echo 'Docker Compose project is not running' && exit 1)",
+    "install:all": "NODE_ENV=development npm i && concurrently --names \"global,nextjs,strapi,gateway\" -c \"bgWhite.black.bold,bgBlack.white.bold,bgMagenta.white.bold,bgRed.white.bold\"  \"npm install\" \"npm run install:nextjs\" \"npm run install:strapi\" \"npm run install:gateway\"",
+    "install:nextjs": "cd nextjs && npm install",
+    "install:strapi": "cd strapi && npm install",
+    "install:gateway": "cd gateway-app && npm install",
+    "clean:workspaces": "NODE_ENV=development concurrently --names \"nextjs,strapi,gateway,global\" -c \"bgWhite.black.bold,bgBlack.white.bold,bgMagenta.white.bold,bgRed.white.bold\" \"npm run clean:nextjs\" \"npm run clean:strapi\" \"npm run clean:gateway\" \"npm run clean\"",
+    "clean:nextjs": "cd nextjs && npm run clean",
+    "clean:gateway": "cd gateway-app && npm run clean",
+    "clean:strapi": "cd strapi && npm run clean",
+    "clean": "rm -rf .vercel node_modules",
+    "dev": "NODE_ENV=development concurrently --names \"nextjs,strapi,graphql,gateway\" -c \"bgWhite.black.bold,bgBlack.white.bold,bgMagenta.white.bold,bgRed.white.bold\" --kill-others \"wait-on http://localhost:1337 && npm run dev:nextjs\" \"npm run dev:strapi\" \"wait-on http://localhost:5000 && npm run graphql:codegen:watch\" \"npm run dev:gateway\"",
+    "dev:nextjs": "cd nextjs && npm run dev",
+    "dev:strapi": "cd strapi && npm run develop",
+    "dev:gateway": "cd gateway-app && npm run start:debug",
+    "graphql:codegen": "wait-on http://localhost:1337/_health && npm --prefix gateway-app run graphql-codegen && npm --prefix nextjs run codegen",
+    "graphql:codegen:watch": "cd nextjs && npm run codegen:watch",
+    "docker:start": "cd strapi && npm run start-services",
+    "itermocil": "(ls Itermocil.custom.yml > /dev/null && itermocil --here --layout ./Itermocil.custom.yml) || itermocil --here",
+    "prepare": "husky install",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx}\"",
+    "format-check": "prettier --check \"**/*.{js,jsx,ts,tsx}\" '!gateway-app/src/**/*'",
+    "kill-ports": "npx kill-port 1337 5000 3000"
   },
   "devDependencies": {
-    "husky": "^8.0.1"
+    "husky": "^8.0.1",
+    "prettier": "2.8.8"
   },
   "dependencies": {
-    "strapi": "file:strapi"
+    "concurrently": "^8.2.0",
+    "strapi": "file:strapi",
+    "wait-on": "^7.0.1"
   }
 }

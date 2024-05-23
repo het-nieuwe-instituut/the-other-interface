@@ -10,6 +10,9 @@ fragment LandingpageFragment on Landingpage {
         ... on ComponentModulesTextModule {
             ...ComponentModulesTextModuleFragment
         }
+        ... on ComponentModulesCarousel {
+            ...ComponentModulesCarouselFragment
+        }
         ... on ComponentModulesGridModule {
             ...ComponentModulesGridModuleFragment
         }

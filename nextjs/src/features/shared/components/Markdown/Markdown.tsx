@@ -1,24 +1,24 @@
-import ChakraUIRenderer from 'chakra-ui-markdown-renderer'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
-import rehypeRaw from 'rehype-raw'
+'use client'
 import DOMpurify from 'isomorphic-dompurify'
-import style from './markdown-styles.module.css'
+import ReactMarkdown from 'react-markdown'
+import rehypeRaw from 'rehype-raw'
+import remarkGfm from 'remark-gfm'
+
+import CustomMarkdownRenderer from './CustomMarkdownRenderer'
 
 interface Props {
-    children: string
+  children: string
 }
 
 export const Markdown: React.FC<Props> = props => {
-    return (
-        <ReactMarkdown
-            className={style.reactMarkDown}
-            components={ChakraUIRenderer()}
-            remarkPlugins={[remarkGfm]}
-            rehypePlugins={[rehypeRaw]}
-            linkTarget="_blank"
-        >
-            {DOMpurify.sanitize(props.children)}
-        </ReactMarkdown>
-    )
+  return (
+    <ReactMarkdown
+      components={CustomMarkdownRenderer()}
+      remarkPlugins={[remarkGfm]}
+      rehypePlugins={[rehypeRaw]}
+      linkTarget="_blank"
+    >
+      {DOMpurify.sanitize(props.children)}
+    </ReactMarkdown>
+  )
 }

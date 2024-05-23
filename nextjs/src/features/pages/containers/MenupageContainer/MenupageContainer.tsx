@@ -1,39 +1,50 @@
+'use client'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
-import { Loader } from '@/features/shared/components/Loading/Loading'
-import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { useRouter } from 'next/router'
-import { MenupageComponentsDynamicZone, useMenupageBySlugQuery } from 'src/generated/graphql'
-import { MenupageQueryParams } from 'src/pages/[slug]'
+import { StaticHeader } from '@/features/shared/components/StaticHeader/StaticHeader'
+import { Box, Flex, theme } from '@chakra-ui/react'
 
-export const MenupageContainer: React.FC = () => {
-    const router = useRouter()
-    const { t } = useTypeSafeTranslation('common')
-    const queryParams = router.query as unknown as MenupageQueryParams
+import { MenupageBySlugQuery, MenupageComponentsDynamicZone } from 'src/generated/graphql'
 
-    const { data, loading, error } = useMenupageBySlugQuery({
-        variables: {
-            locale: router.locale,
-            slug: queryParams?.slug,
-        },
-    })
+interface Props {
+  menupage: MenupageBySlugQuery | undefined
+}
 
-    if (loading) {
-        return <Loader />
-    }
+export const MenupageContainer = (props: Props) => {
+  // if (loading) {
+  //     return <Loader />
+  // }
 
-    if (error) {
-        return <p>{error.message}</p>
-    }
+  // if (error) {
+  //     return <p>{error.message}</p>
+  // }
 
-    if (!data?.menupages?.data.length) {
-        return <p>{t('somethingWentWrong')}</p>
-    }
+  // if (!data?.menupages?.data.length) {
+  //     return <p>{t('somethingWentWrong')}</p>
+  // }
 
-    return (
-        <div>
-            <DynamicComponentRenderer
-                components={data?.menupages?.data[0]?.attributes?.components as MenupageComponentsDynamicZone[]}
-            />
-        </div>
-    )
+  return (
+    <Box minHeight={'60px'} width={'100%'} px={{ xl: 6, base: 0 }} background={'pinkAlpha.100'}>
+      <Box display="block" position={'relative'}>
+        <Flex
+          maxW={theme.breakpoints.xl}
+          marginX={'auto'}
+          position="fixed"
+          left={0}
+          right={0}
+          top={0}
+          justifyContent={'space-between'}
+          zIndex={5}
+        >
+          <Flex alignItems={'center'} position="relative" zIndex={2} left={8} top={1}></Flex>
+          <StaticHeader />
+        </Flex>
+      </Box>
+      <DynamicComponentRenderer
+        components={
+          props?.menupage?.menupages?.data?.[0]?.attributes
+            ?.components as MenupageComponentsDynamicZone[]
+        }
+      />
+    </Box>
+  )
 }

@@ -1,22 +1,23 @@
-import { ComponentModulesSubtitle } from 'src/generated/graphql'
 import { Box, Text as ChakraText } from '@chakra-ui/react'
 
+import { ComponentModulesSubtitle } from 'src/generated/graphql'
+import { modulesSpacingMapper } from '../../modulesSpacing'
+
 interface Props {
-    component: ComponentModulesSubtitle
+  component: ComponentModulesSubtitle
 }
 
 export const SubtitleModule: React.FC<Props> = props => {
-    return (
-        <Box
-            width="100%"
-            px={6}
-            backgroundColor={'white'}
-            paddingBottom={props.component.subtitleModuleLayout?.spacingBottom ?? undefined}
-            paddingTop={props.component.subtitleModuleLayout?.spacingTop ?? undefined}
-        >
-            <ChakraText textStyle={'h3'} maxWidth={'55rem'}>
-                {props.component.text}
-            </ChakraText>
-        </Box>
-    )
+  return (
+    <Box
+      width="100%"
+      backgroundColor={'inherit'}
+      pt={modulesSpacingMapper?.Subtitle.spacingTop}
+      pb={modulesSpacingMapper?.Subtitle.spacingBottom}
+    >
+      <ChakraText textStyle={'h3'} maxWidth={'55rem'}>
+        {props.component.text}
+      </ChakraText>
+    </Box>
+  )
 }

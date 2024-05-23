@@ -1,0 +1,17 @@
+{
+    "__typename": "",
+    "type": "Type",
+    "profession": "Beroep/Werkveld",
+    "nameVariation": "Naamsvarianten",
+    "birthDate": "Geboortedatum",
+    "birthPlace": "Geboorteplaats",
+    "deathDate": "Overlijdensdatum",
+    "deathPlace": "Overlijdensplaats",
+    "nationality": "Nationaliteit",
+    "gender": "Geslacht",
+    "period": "Activiteiten/Werkzaamheden",
+    "association": "Associatie",
+    "permanentLink": "Permanente Link",
+    "externalSource": "Externe Bronnen"
+  }
+  

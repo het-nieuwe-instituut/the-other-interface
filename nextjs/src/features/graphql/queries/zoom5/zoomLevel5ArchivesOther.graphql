@@ -1,7 +1,0 @@
-query ZoomLevel5ArchivesOther($id: String!) {
-    zoomLevel5ArchivesOther(id: $id) {
-        id
-        title
-        type
-    }
-}

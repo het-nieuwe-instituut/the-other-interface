@@ -2,3 +2,8 @@ node_modules/
 itermocil.custom.yml
 .history/
 nextjs/.env
+backups
+.DS_Store
+
+# webstorm
+.idea

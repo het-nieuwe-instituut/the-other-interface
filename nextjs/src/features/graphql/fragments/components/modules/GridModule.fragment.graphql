@@ -1,6 +1,5 @@
-#import '../core/moduleLayout.fragment.graphql'
-
 fragment gridModuleFragment on ComponentModulesGridModule {
+    __typename
     buttons {
         id
         url
@@ -47,45 +46,25 @@ fragment gridModuleFragment on ComponentModulesGridModule {
                     updatedAt
                     recordId
                     archive {
-                        ... on ArchivesOtherZoomLevel5DetailType {
-                            id
-                            type
-                            title
-                        }
-                        ... on ArchivesFondsZoomLevel5DetailType {
-                            id
-                            type
-                        }
+                        id
+                        type
+                        title
+                        objectNumber
                     }
                     object {
                         description
-                        image
+                        thumbnail
                     }
                     publication {
-                        ... on PublicationsAudioVisualZoomLevel5DetailType {
-                            id
-                            type
-                            title
-                        }
-                        ... on PublicationsArticleZoomLevel5DetailType {
-                            id
-                            type
-                            title
-                        }
-                        ... on PublicationsSerialZoomLevel5DetailType {
-                            id
-                            type
-                            title
-                        }
-                        ... on PublicationsBookZoomLevel5DetailType {
-                            id
-                            type
-                            title
-                        }
+                        id
+                        type
+                        title
+                        yearOfPublication
+                        objectNumber
                     }
                     people {
                         name
-                        nameType
+                        nameTypes
                     }
                 }
             }
@@ -93,11 +72,6 @@ fragment gridModuleFragment on ComponentModulesGridModule {
     }
     fieldTitlesAreInverted
     fieldTypes
-    gridModuleLayout {
-        ... on ComponentCoreModuleLayouts {
-            ...componentCoreModuleLayouts
-        }
-    }
     id
     pageSize
     showMoreButtonTitle

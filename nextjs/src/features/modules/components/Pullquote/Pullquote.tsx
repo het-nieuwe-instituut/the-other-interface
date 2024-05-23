@@ -1,22 +1,21 @@
-import { ComponentModulesPullquote } from 'src/generated/graphql'
 import { Box, Text as ChakraText } from '@chakra-ui/react'
 
+import { ComponentModulesPullquote } from 'src/generated/graphql'
+import { modulesSpacingMapper } from '../../modulesSpacing'
+
 interface Props {
-    component: ComponentModulesPullquote
+  component: ComponentModulesPullquote
 }
 
 export const Pullquote: React.FC<Props> = props => {
-    return (
-        <Box
-            width="100%"
-            px={6}
-            backgroundColor={'white'}
-            paddingBottom={props.component.pullquoteModuleLayout?.spacingBottom ?? undefined}
-            paddingTop={props.component.pullquoteModuleLayout?.spacingTop ?? undefined}
-        >
-            <ChakraText textStyle={'pullquote'} maxWidth={'55rem'}>
-                {props.component.text}
-            </ChakraText>
-        </Box>
-    )
+  return (
+    <Box
+      width="100%"
+      backgroundColor={'inherit'}
+      pt={modulesSpacingMapper?.Pullquote.spacingTop}
+      pb={modulesSpacingMapper?.Pullquote.spacingBottom}
+    >
+      <ChakraText textStyle={'pullquote'}>{props.component.text}</ChakraText>
+    </Box>
+  )
 }

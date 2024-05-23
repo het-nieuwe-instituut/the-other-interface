@@ -1,11 +1,5 @@
-#import '../core/moduleLayout.fragment.graphql'
-
 fragment pullquoteModuleFragment on ComponentModulesPullquote {
     id
+    __typename
     text
-    pullquoteModuleLayout {
-        ... on ComponentCoreModuleLayouts {
-            ...componentCoreModuleLayouts
-        }
-    }
 }

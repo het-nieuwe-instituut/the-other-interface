@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "2c188900-fb83-4b9d-8af5-8c41b5855768",
+		"_postman_id": "a3a9fae6-6430-4d1f-98a8-8317afb276d3",
 		"name": "HNI-toi Triply",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "8018205"
+		"_exporter_id": "34042539"
 	},
 	"item": [
 		{
@@ -52,6 +52,34 @@
 				},
 				{
 					"name": "publication author filter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/zoom-3-books-author-filter/run?page=10&pageSize=16",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"zoom-3-books-author-filter",
+								"run"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "10"
+								},
+								{
+									"key": "pageSize",
+									"value": "16"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "archives related relations count",
 					"request": {
 						"method": "GET",
 						"header": [],

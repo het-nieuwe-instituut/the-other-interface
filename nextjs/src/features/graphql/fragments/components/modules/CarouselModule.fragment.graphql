@@ -1,7 +1,6 @@
-#import '../core/moduleLayout.fragment.graphql'
-
 fragment carouselModuleFragment on ComponentModulesCarousel {
     id
+    __typename
     items {
         id
         picture {
@@ -16,87 +15,12 @@ fragment carouselModuleFragment on ComponentModulesCarousel {
         description
         triply_record {
             data {
-                id
-                attributes {
-                    type
-                    recordId
-                    archive {
-                        ... on ArchivesOtherZoomLevel5DetailType {
-                            id
-                            title
-                            objectNumber
-                            type
-                        }
-                        ... on ArchivesFondsZoomLevel5DetailType {
-                            id
-                            objectNumber
-                            populatedCreator {
-                                id
-                                name
-                                nationality
-                                place
-                                birthDate
-                                professionLabel
-                            }
-                            recordTitle
-                            type
-                        }
-                    }
-                    object {
-                        title
-                        populatedMaker {
-                            name
-                        }
-                        objectNumber
-                        image
-                    }
-                    publication {
-                        ... on PublicationsAudioVisualZoomLevel5DetailType {
-                            id
-                            type
-                            title
-                            objectNumber
-                            populatedAuthor{
-                                id
-                                profession,
-                                name
-                            }
-                        }
-                        ... on PublicationsArticleZoomLevel5DetailType {
-                            id
-                            type
-                            title
-                            objectNumber
-                            populatedAuthor{
-                                profession,
-                                name
-                            }
-                        }
-                        ... on PublicationsSerialZoomLevel5DetailType {
-                            id
-                            type
-                            title
-                            yearOfPublication
-                            populatedPublisher{
-                                name   
-                            }
-                        }
-                        ... on PublicationsBookZoomLevel5DetailType {
-                            id
-                            type
-                            title
-                            objectNumber
-                            populatedAuthor{
-                                profession,
-                                name
-                            }
-                        }
-                    }
-                    people {
-                        name
-                        nameType
-                    }
-                }
+                ...BaseTriplyRecordFragment
+            }
+        }
+        story {
+            data {
+                ...StoryWithoutRelationsFragment
             }
         }
     }
@@ -105,9 +29,4 @@ fragment carouselModuleFragment on ComponentModulesCarousel {
     buttonText
     buttonUrl
     description
-    carouselModuleLayout {
-        ... on ComponentCoreModuleLayouts {
-            ...componentCoreModuleLayouts
-        }
-    }
 }

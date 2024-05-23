@@ -1,0 +1,5 @@
+query PeopleRecordRelationsCount($id: String!, $type: EntityNames!, $lang: String!) {
+    peopleRecordRelationsCount(type: $type, id: $id, lang: $lang) {
+        total
+    }
+}

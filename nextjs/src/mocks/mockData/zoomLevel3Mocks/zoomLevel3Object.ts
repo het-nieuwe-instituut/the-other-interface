@@ -1,0 +1,67 @@
+export const zoomLevel3Object = {
+  zoom5detail: {
+    id: '1982',
+    thumbnail: 'https://example-mock-data.com/media/1982',
+    imageLabel: 'Mocked DUIK_20.1.1.tif',
+    title: 'Mocked Situatietekening Sanatorium Zonnestraal (Hilversum) Mocked',
+    titleType: 'huidig',
+    objectNumber: 'MockedDUIK20.1.1+',
+    objectName: 'https://example-mock-data.com/model/con/thesau/2336',
+    objectNameLabel: 'Mocked reproducties',
+    archiveCollectionCode: 'Mocked DUIK',
+    makers: [
+      {
+        id: '44468',
+        maker: 'https://example-mock-data.com/people/44468',
+        makerLabel: 'Mocked Bijvoet, Bernard',
+        makerRole: null,
+        makerRoleLabel: null,
+      },
+    ],
+    startDate: '1926',
+    endDate: null,
+    numberOfParts: null,
+    scale: '1:500',
+    techniques: [
+      {
+        id: '25477',
+        technique: 'https://example-mock-data.com/model/con/thesau/25477',
+        techniqueLabel: 'Mocked lichtdrukken (afdrukken)',
+      },
+      {
+        id: '25478',
+        technique: 'https://example-mock-data.com/model/con/thesau/25478',
+        techniqueLabel: 'Mocked zeefdrukken (afdrukken)',
+      },
+    ],
+    materials: [
+      {
+        id: '5856',
+        material: 'https://example-mock-data.com/model/con/thesau/5856',
+        materialLabel: 'Mocked papier (vezelproduct)',
+      },
+      {
+        id: '5857',
+        material: 'https://example-mock-data.com/model/con/thesau/5857',
+        materialLabel: 'Mocked canvas (textiel)',
+      },
+    ],
+    dimHeight: '646',
+    dimWidth: '848',
+    dimDepth: null,
+    dimensionUnit: 'mm',
+    description: 'Mocked description of the object',
+    associationPerson: 'https://example-mock-data.com/people/12345',
+    associationPersonLabel: 'Mocked Associated Person',
+    associationPersonType: 'Mocked Role of Associated Person',
+    relatedObjectTitle: 'Mocked Situatietekening Sanatorium Zonnestraal (Hilversum)',
+    creditLine: 'Mocked credit line',
+    rights: 'https://example-mock-data.com/model/con/thesau/26426',
+    rightsLabel: 'Mocked Auteursrechtelijke status niet geëvalueerd',
+    creationPlace: 'Mocked Creation Place',
+    creationPlaceLabel: 'Mocked Creation Place Label',
+    permanentLink: 'https://example-mock-data.com/permalink/1982',
+  },
+  type: 'objects',
+
+}

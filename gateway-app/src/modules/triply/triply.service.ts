@@ -3,61 +3,136 @@ import { Injectable } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { lastValueFrom } from 'rxjs'
 import { PaginationArgs } from '../util/paginationArgs.type'
+import { RollbarService } from '../util/rollbar.service'
+
+/**
+ * Due to typescript's limitations, we decided to use this approach to verify expected
+ * keys in runtime. There are other solutions, but those require fundamental changes to
+ * how we use queryTriplyData, or to the core of typescript.
+ *
+ * A sample use case would be:
+ * 		interface A {
+ * 			foo: bar
+ * 		}
+ *
+ * 		const aKeys: KeysToVerify<T> = {
+ * 			foo: true 	<-- without this key/value, compiler will error
+ * 		}
+ *
+ * 		// if there is a type mismatch between A & aKeys, compiler will error
+ * 		... triplyService.queryTriplyData<A>(..., aKeys, ...)
+ *
+ *
+ * Although this approach creates duplicate code (double interface definition), the type
+ * safety is still enforced. If the actual interface/type (T) is updated, the compiler
+ * should error at the constant definition.
+ *
+ * At the moment, the keys are only used to verify their existence. If needed, it could
+ * be extended to check for value types as well.
+ *
+ */
+export type KeysToVerify<T> = Record<keyof T, true>
 
 @Injectable()
 export class TriplyService {
-    private readonly endpointBaseURL: string
-    private readonly apiKey: string
-    private readonly baseQueryPath = '/queries/the-other-interface'
+  private readonly endpointBaseURL: string
+  private readonly apiKey: string
+  private readonly baseQueryPath: string
 
-    public constructor(configService: ConfigService, private readonly httpService: HttpService) {
-        this.endpointBaseURL = configService.getOrThrow('TRIPLI_API_BASEURL')
-        this.apiKey = configService.getOrThrow('TRIPLY_API_KEY')
+  public constructor(
+    configService: ConfigService,
+    private readonly httpService: HttpService,
+    private readonly rollbarService: RollbarService
+  ) {
+    this.endpointBaseURL = configService.getOrThrow('TRIPLI_API_BASEURL')
+    this.apiKey = configService.getOrThrow('TRIPLY_API_KEY')
+    this.baseQueryPath = ''
+    const env = configService.getOrThrow('ENV')
+
+    if (env === 'development' || env === 'staging') {
+      this.baseQueryPath = '/queries/the-other-interface-testing'
+    } else if (env === 'acceptance') {
+      this.baseQueryPath = '/queries/the-other-interface-acceptance'
+    } else {
+      this.baseQueryPath = '/queries/the-other-interface'
+    }
+  }
+
+  private defaultPage = '1'
+  private defaultPageSize = '16'
+
+  public async queryTriplyData<ReturnDataType>(
+    endpointArg: string,
+    keysToVerify: KeysToVerify<ReturnDataType>,
+    paginationArgs?: PaginationArgs,
+    searchParams?: Record<string, string>
+  ) {
+    const endpoint = this.getEndpointForArg(endpointArg)
+
+    if (paginationArgs) {
+      endpoint.searchParams.append(
+        'page',
+        paginationArgs.page ? paginationArgs.page.toString() : this.defaultPage
+      )
+      endpoint.searchParams.append(
+        'pageSize',
+        paginationArgs.pageSize ? paginationArgs.pageSize.toString() : this.defaultPageSize
+      )
     }
 
-    private defaultPage = '1'
-    private defaultPageSize = '16'
+    if (searchParams) {
+      for (const [key, value] of Object.entries(searchParams)) {
+        endpoint.searchParams.append(key, value)
+      }
+    }
 
-    public async queryTriplyData<ReturnDataType>(
-        endpointArg: string,
-        paginationArgs?: PaginationArgs,
-        searchParams?: Record<string, string>
-    ) {
-        const endpoint = this.getEndpointForArg(endpointArg)
+    const res = await this.fetch<ReturnDataType>(endpoint)
+    this.checkResponseType(res.data, keysToVerify)
 
-        if (paginationArgs) {
-            endpoint.searchParams.append(
-                'page',
-                paginationArgs.page ? paginationArgs.page.toString() : this.defaultPage
-            )
-            endpoint.searchParams.append(
-                'pageSize',
-                paginationArgs.pageSize ? paginationArgs.pageSize.toString() : this.defaultPageSize
-            )
+    return res
+  }
+
+  private fetch<ReturnDataType>(endpoint: URL) {
+    const headers = { Authorization: `Bearer ${this.apiKey}` }
+    const res = this.httpService.get<ReturnDataType[]>(endpoint.toString(), { headers })
+
+    return lastValueFrom(res)
+  }
+
+  private getEndpointForArg(endpointArg: string) {
+    if (endpointArg.startsWith('https://')) {
+      return new URL(endpointArg)
+    }
+
+    const endpointSuffix = endpointArg.startsWith('/') ? endpointArg : `/${endpointArg}`
+
+    return new URL(`${this.endpointBaseURL}${this.baseQueryPath}${endpointSuffix}`)
+  }
+
+  private checkResponseType<ReturnDataType>(
+    responseData: unknown,
+    keysToVerify: KeysToVerify<ReturnDataType>
+  ) {
+    if (!responseData || !Array.isArray(responseData) || !responseData.length) {
+      return
+    }
+
+    try {
+      const expectedKeys = Object.keys(keysToVerify)
+      const receivedKeys = Object.keys(responseData[0])
+
+      expectedKeys.forEach(k => {
+        if (!receivedKeys.includes(k)) {
+          const message = `"${k}" is not returned in ${JSON.stringify(receivedKeys)}`
+
+          this.rollbarService.logError(message)
         }
-
-        if (searchParams) {
-            for (const [key, value] of Object.entries(searchParams)) {
-                endpoint.searchParams.append(key, value)
-            }
-        }
-
-        return this.fetch<ReturnDataType>(endpoint)
+      })
+    } catch (err) {
+      const message = `Unable to test keys ${JSON.stringify(
+        keysToVerify
+      )} in response ${JSON.stringify(responseData)}`
+      this.rollbarService.logError(message)
     }
-
-    private fetch<ReturnDataType>(endpoint: URL) {
-        const headers = { Authorization: `Bearer ${this.apiKey}` }
-        const res = this.httpService.get<ReturnDataType[]>(endpoint.toString(), { headers })
-        return lastValueFrom(res)
-    }
-
-    private getEndpointForArg(endpointArg: string) {
-        if (endpointArg.startsWith('https://')) {
-            return new URL(endpointArg)
-        }
-
-        const endpointSuffix = endpointArg.startsWith('/') ? endpointArg : `/${endpointArg}`
-
-        return new URL(`${this.endpointBaseURL}${this.baseQueryPath}${endpointSuffix}`)
-    }
+  }
 }

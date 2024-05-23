@@ -21,7 +21,39 @@ fragment ComponentCoreCarouselItemFragment on ComponentCoreCarouselItem {
             ...BaseTriplyRecordFragment
         }
     }
+
+    story {
+        data {
+            id
+            attributes {
+                slug
+            }
+        }
+    }
 }
+
+fragment ComponentCoreImageCarouselItemFragment on ComponentCoreImageCarouselItem {
+    id
+    description
+    name
+    picture {
+        ...UploadFileEntityResponseFragment
+    }
+    triplyRecord {
+        data {
+            ...BaseTriplyRecordFragment
+        }
+    }
+    story {
+        data {
+            id
+            attributes {
+                slug
+            }
+        }
+    }
+}
+
 
 fragment ComponentCorePageHeaderFragment on ComponentCorePageHeader {
     id

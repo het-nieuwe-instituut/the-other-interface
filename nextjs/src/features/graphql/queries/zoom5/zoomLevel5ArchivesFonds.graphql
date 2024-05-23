@@ -1,7 +1,0 @@
-query ZoomLevel5ArchivesFonds($id: String!) {
-    zoomLevel5ArchivesFonds(id: $id) {
-        id
-        recordTitle
-        descriptionLevel
-    }
-}

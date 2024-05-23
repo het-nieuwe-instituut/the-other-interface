@@ -87,7 +87,8 @@ public/uploads/*
 # Node.js
 ############################
 
-dist
+/dist
+!src/plugin/ni-toi-preview-link/dist
 lib-cov
 lcov.info
 pids

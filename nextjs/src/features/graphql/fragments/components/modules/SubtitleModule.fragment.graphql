@@ -1,11 +1,5 @@
-#import '../core/moduleLayout.fragment.graphql'
-
 fragment subtitleModuleFragment on ComponentModulesSubtitle {
     id
+    __typename
     text
-    subtitleModuleLayout {
-        ... on ComponentCoreModuleLayouts {
-            ...componentCoreModuleLayouts
-        }
-    }
 }

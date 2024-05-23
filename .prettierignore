@@ -1,0 +1,6 @@
+**/dist
+**/.cache
+**/.next
+
+nextjs/src/generated
+nextjs/src/mocks

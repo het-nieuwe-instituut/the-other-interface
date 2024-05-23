@@ -8,91 +8,31 @@
 #import '../fragments/components/GridModule.fragment.graphql'
 #import '../fragments/components/core/baseTriplyRecord.fragment.graphql'
 
-query storyBySlug($locale: String, $slug: String!) {
-    stories(locale: $locale, filters: { slug: { eq: $slug } }) {
+query storyById($locale: String, $id: ID, $publicationState: String = "LIVE") {
+  storyByLocale(locale: $locale, filters: { id: { eq: $id } }, publicationState: $publicationState) {
         data {
             id
+            __typename
             attributes {
                 title
                 description
-                shortDescription
-                publishedAt
-                author {
+                stories {
                     data {
                         id
                         attributes {
-                            firstName
-                            insertion
-                            lastName
+                            title
+                            slug
+                            locale
                         }
                     }
                 }
-                timeframe {
-                    id
-                    yearStart
-                    yearEnd
-                }
-                locations {
+                story {
                     data {
                         id
                         attributes {
-                            city
-                        }
-                    }
-                }
-                publicationDate {
-                    date
-                    displayType
-                }
-                triplyRecords {
-                    data {
-                        id
-                        attributes {
-                            type
-                            recordId
-                            archive {
-                                ... on ArchivesOtherZoomLevel5DetailType {
-                                    id
-                                    type
-                                    objectNumber
-                                }
-                                ... on ArchivesFondsZoomLevel5DetailType {
-                                    id
-                                    objectNumber
-                                }
-                            }
-                            object {
-                                title
-                                maker
-                                image
-                            }
-                            publication {
-                                ... on PublicationsAudioVisualZoomLevel5DetailType {
-                                    id
-                                    type
-                                    title
-                                }
-                                ... on PublicationsArticleZoomLevel5DetailType {
-                                    id
-                                    type
-                                    title
-                                }
-                                ... on PublicationsSerialZoomLevel5DetailType {
-                                    id
-                                    type
-                                    title
-                                }
-                                ... on PublicationsBookZoomLevel5DetailType {
-                                    id
-                                    type
-                                    title
-                                    author
-                                }
-                            }
-                            people {
-                                name
-                                profession
-                            }
+                            title
+                            slug
+                            locale
                         }
                     }
                 }
@@ -125,16 +65,167 @@ query storyBySlug($locale: String, $slug: String!) {
                         ...gridModuleFragment
                     }
                 }
-                storyLinks {
-                    ... on ComponentModulesButtonsModule {
-                        ...buttonsModuleFragment
-                    }
-                }
                 triplyRecords {
                     data {
                         ...BaseTriplyRecordFragment
                     }
                 }
+            }
+        }
+    }
+}
+
+query storyImages($id: String!) {
+    story(id: $id) {
+        data {
+            id
+            attributes {
+                components {
+                    ... on ComponentModulesImage {
+                        ...imageModuleFragment
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+
+query storyMetaById($locale: String, $id: ID, $publicationState: String = "LIVE") {
+  storyMetaByLocale(locale: $locale, filters: { id: { eq: $id } }, publicationState: $publicationState) {
+        data {
+            id
+            __typename
+            attributes {
+                title
+                description
+                shortDescription
+                createdAt
+                updatedAt
+                publishedAt
+                author {
+                    data {
+                        id
+                        attributes {
+                            firstName
+                            lastName
+                            insertion
+                        }
+                    }
+                }
+                publicationDate {
+                    id
+                    date
+                    displayType
+                }
+                locations {
+                    data {
+                        id
+                        attributes {
+                            city
+                        }
+                    }
+                }
+                timeframe {
+                    id
+                    yearStart
+                    yearEnd
+                }
+                themes {
+                    data {
+                        id
+                        attributes {
+                            name
+                        }
+                    }
+                }
+                triplyRecords {
+                    data {
+                        id
+                        attributes {
+                            type
+                            recordId
+                            people {
+                                title
+                            }
+                        }
+                    }
+                }
+                storyLinks {
+                    ... on ComponentModulesButtonsModule {
+                        ...buttonsModuleFragment
+                    }
+                }
+                stories {
+                    data {
+                        id
+                        attributes {
+                            title
+                            components {
+                                ... on ComponentModulesImage {
+                                    ...imageModuleFragment
+                                }
+                            }
+                            author {
+                                data {
+                                    id
+                                    attributes {
+                                        firstName
+                                        lastName
+                                        insertion
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                story {
+                    data {
+                        id
+                        attributes {
+                            title
+                            components {
+                                ... on ComponentModulesImage {
+                                    ...imageModuleFragment
+                                }
+                            }
+                            author {
+                                data {
+                                    id
+                                    attributes {
+                                        firstName
+                                        lastName
+                                        insertion
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                siblings {
+                    id
+                    attributes {
+                        title
+                        components {
+                            ... on ComponentModulesImage {
+                                ...imageModuleFragment
+                            }
+                        }
+                        author {
+                            data {
+                                id
+                                attributes {
+                                    firstName
+                                    lastName
+                                    insertion
+                                }
+                            }
+                        }
+                    }
+                }
+            
             }
         }
     }

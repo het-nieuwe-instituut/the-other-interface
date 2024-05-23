@@ -1,0 +1,19 @@
+{
+    "__typename": "",
+    "objectNumber": "Objectnummer",
+    "titleType": "Overige titel(s)",
+    "objectName": "Objectnaam",
+    "archiveCode": "Archief-/Collectiecode",
+    "date": "Datering",
+    "relatedKeywords": "Gerelateerde trefwoorden",
+    "materials": "Materialen",
+    "techniques": "Technieken",
+    "hasParts": "Aantal onderdelen",
+    "dimension": "Afmetingen",
+    "scale": "Schaal",
+    "creditLine": "Creditline",
+    "rights": "Rechten",
+    "permanentLink": "Permanente link",
+    "externalSource": "Externe bron"
+  }
+  

@@ -1,9 +1,11 @@
 {
-    "nationalCollectionForDutchArchitectureAndUrbanPlanning": "National Collection for Dutch Architecture and Urban Planning",
-    "stories": "Stories",
-    "archiveItems": "{{count}} Archive items",
-    "archives": "{{count}} Archives",
-    "objects": "Objects",
-    "people": "People",
-    "publications": "Publications"
+  "nationalCollectionForDutchArchitectureAndUrbanPlanning": "National Collection for Dutch Architecture and Urban Planning",
+  "stories": "Stories",
+  "archiveItems": "{{count}} Archive items",
+  "archivesWithCount": "{{count}} Archives",
+  "objects": "Objects",
+  "archives": "Archives",
+  "people": "Persons",
+  "publications": "Publications",
+  "storiesOver": "Stories on {{title}}"
 }

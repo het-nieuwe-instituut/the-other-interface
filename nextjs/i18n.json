@@ -1,12 +1,11 @@
 {
-    "locales": ["en", "nl"],
-    "defaultLocale": "en",
-    "pages": {
-        "*": ["common", "navigation"],
-        "story/*": ["stories", "record"],
-        "/landingpage/[slug]": ["landingpage"],
-        "/landingpage/[slug]/[filter]": ["landingpage"],
-        "/landingpage/[slug]/[filter]/[collection]/[record]": ["record"],
-        "/": ["homepage"]
-    }
+  "locales": ["en", "nl"],
+  "defaultLocale": "nl",
+  "localeDetection": false,
+  "pages": {
+    "*": ["common", "navigation"],
+    "/": ["homepage", "category"],
+    "/landingpage": ["category"],
+    "/detail/[category]/[id]": ["category", "record", "stories", "recordMeta", "recordMetaPublication", "recordMetaObject", "recordMetaArchive", "recordMetaPerson", "recordTable"]
+  }
 }

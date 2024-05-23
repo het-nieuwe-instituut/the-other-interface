@@ -7,8 +7,8 @@
 #import '../fragments/components/ButtonsModule.fragment.graphql'
 #import '../fragments/components/GridModule.fragment.graphql'
 
-query menupageBySlug($locale: String, $slug: String!) {
-    menupages(locale: $locale, filters: { slug: { eq: $slug } }) {
+query menupageBySlug($locale: String, $slug: String!, $publicationState: String = "LIVE") {
+    menupages(locale: $locale, filters: { slug: { eq: $slug } }, publicationState: $publicationState) {
         data {
             id
             attributes {

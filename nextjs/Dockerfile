@@ -27,6 +27,9 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 # ENV NEXT_TELEMETRY_DISABLED 1
 
+# NEXT_PUBLIC_ENV to use specified .env variables
+ARG NEXT_PUBLIC_ENV
+ENV NEXT_PUBLIC_ENV $NEXT_PUBLIC_ENV
 RUN yarn build
 
 # If using npm comment out above and use below instead

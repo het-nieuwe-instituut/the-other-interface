@@ -41,12 +41,6 @@
       "repeatable": true,
       "component": "core.button"
     },
-    "gridModuleLayout": {
-      "type": "component",
-      "repeatable": false,
-      "component": "core.module-layouts",
-      "required": true
-    },
     "showMoreButtonTitle": {
       "type": "string",
       "default": "Show More",

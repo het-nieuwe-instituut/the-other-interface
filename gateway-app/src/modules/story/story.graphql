@@ -2,7 +2,7 @@ query stories(
     $filters: StoryFiltersInput
     $pagination: PaginationArg
     $sort: [String]
-    $publicationState: PublicationState
+    $publicationState: PublicationState = LIVE
     $locale: I18NLocaleCode
 ) {
     stories(
@@ -21,10 +21,111 @@ query stories(
     }
 }
 
-query story($id: ID, $locale: I18NLocaleCode) {
-    story(id: $id, locale: $locale) {
+
+query story(
+    $id: ID
+    $locale: I18NLocaleCode 
+) {
+    story(
+        id: $id
+        locale: $locale
+    ) {
         data {
             ...StoryFragment
+        }
+    }
+}
+
+query storyByLocale(
+    $id: ID   
+) {
+    story(
+        id: $id
+    ) {
+        data {
+            ...LocalizedStoryFragment
+        }
+    }
+}
+
+# 
+query storiesByLocale(
+    $id: IDFilterInput
+    $pagination: PaginationArg
+    $sort: [String]
+    $publicationState: PublicationState
+    $locale: I18NLocaleCode
+) {
+    stories(
+        filters: {
+            id: $id,
+        },
+        pagination: $pagination,
+        sort: $sort,
+        publicationState: $publicationState
+        locale: $locale
+    ) {
+        data {
+            ...LocalizedStoryFragment
+        }
+        meta {
+            ...ResponseCollectionMetaFragment
+        }
+    }
+}
+
+
+query storiesMetaByLocale(
+    $id: IDFilterInput
+    $pagination: PaginationArg
+    $sort: [String]
+    $publicationState: PublicationState = LIVE
+    $locale: I18NLocaleCode
+) {
+    stories(
+        filters: {
+            id: $id,
+        },
+        pagination: $pagination,
+        sort: $sort,
+        publicationState: $publicationState
+        locale: $locale
+    ) {
+        data {
+            ...LocalizedStoryMetaFragment
+        }
+    }
+}
+
+
+query storiesWithoutRelations(
+    $filters: StoryFiltersInput
+    $pagination: PaginationArg
+    $sort: [String]
+    $publicationState: PublicationState = LIVE
+    $locale: I18NLocaleCode
+) {
+    stories(
+        filters: $filters
+        pagination: $pagination
+        sort: $sort
+        publicationState: $publicationState
+        locale: $locale
+    ) {
+        data {
+            ...StoryWithoutRelationsFragment
+        }
+        meta {
+            ...ResponseCollectionMetaFragment
+        }
+    }
+}
+
+
+query storyWithoutRelations($id: ID, $locale: I18NLocaleCode) {
+    story(id: $id, locale: $locale) {
+        data {
+            ...StoryWithoutRelationsFragment
         }
     }
 }
@@ -35,7 +136,60 @@ query storiesLinkedToTriplyRecord($recordId: String!, $type: String!) {
         data {
             id
             attributes {
+                slug
                 title
+            }
+        }
+    }
+}
+
+query storiesLinkedToTriplyRecordExtended($recordId: String!, $type: String!, $lang: I18NLocaleCode, $publicationState: PublicationState = LIVE) {
+    stories(filters: { triplyRecords: { recordId: { eq: $recordId }, type: { eq: $type } }}, locale: $lang, publicationState: $publicationState) {
+        data {
+            ...StoryFragment
+        }
+    }
+}
+
+query storiesLinkedToTheme($id: ID!, $locale: I18NLocaleCode) {
+    story(id: $id, locale: $locale) {
+        data {
+            id
+            attributes {
+                themes {
+                    data {
+                        id
+                        attributes {
+                            stories {
+                                data {
+                                    id
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+query storiesByIds($storiesIds: [ID]!) {
+    stories(filters: { id: { in: $storiesIds } }) {
+        data {
+            attributes {
+                title
+                slug
+                locale
+                components {
+                    ... on ComponentModulesImage {
+                        ...ComponentModulesImageFragment
+                    }
+                }
+                localizations{
+                    data {
+                        ...StoryWithoutRelationsFragment
+                    }
+                }
             }
         }
     }
@@ -61,6 +215,178 @@ query storiesTotal {
         meta {
             pagination {
                 total
+            }
+        }
+    }
+}
+
+fragment StoryWithoutRelationsFragment on StoryEntity {
+    id
+    attributes {
+        title
+        slug
+        description
+        shortDescription
+        createdAt
+        updatedAt
+        publishedAt
+        locale
+        author {
+            data {
+                attributes {
+                    firstName
+                }
+            }
+        }
+    }
+}
+
+fragment NestedStoryFragment on StoryEntity {
+    id
+    attributes {
+        title
+        slug
+        description
+        locale
+        author {
+            data {
+                id
+                attributes {
+                    firstName
+                    lastName
+                    insertion
+                }
+            }
+        }
+        story {
+            data {
+                id
+                attributes {
+                    title
+                    slug
+                    locale
+                }
+            }
+        }
+        stories { 
+            data {
+                id
+                attributes {
+                    title
+                    slug
+                    locale
+                }
+            }
+        }
+        components {
+           __typename
+            ... on ComponentModulesPullquote {
+                ...ComponentModulesPullquoteFragment
+            }
+            ... on ComponentModulesGridModule {
+                ...ComponentModulesGridModuleFragment
+            }
+            ... on ComponentModulesTextModule {
+                ...ComponentModulesTextModuleFragment
+            }
+            ... on ComponentModulesSubtitle {
+                ...ComponentModulesSubtitleFragment
+            }
+            ... on ComponentModulesTitleModule {
+                ...ComponentModulesTitleModuleFragment
+            }
+            ... on ComponentModulesImageCarousel {
+                ...ComponentModulesImageCarouselFragment
+            }
+            ... on ComponentModulesImage {
+                ...ComponentModulesImageFragment
+            }
+            ... on ComponentModulesTableModule {
+                ...ComponentModulesTableModuleFragment
+            }
+            ... on ComponentModulesButtonsModule {
+                ...ComponentModulesButtonsModuleFragment
+            }
+            ... on Error {
+                ...ErrorFragment
+            }
+        }
+    }
+}
+
+fragment LocalizedStoryFragment on StoryEntity {
+    id
+    attributes {
+        title
+        slug
+        description
+        locale
+        author {
+            data {
+                id
+                attributes {
+                    firstName
+                    lastName
+                    insertion
+                }
+            }
+        }
+        story {
+            data {
+                id
+                attributes {
+                    title
+                    slug
+                    locale
+                }
+            }
+        }
+        stories { 
+            data {
+                id
+                attributes {
+                    title
+                    slug
+                    locale
+                }
+            }
+        }
+        components {
+           __typename
+            ... on ComponentModulesPullquote {
+                ...ComponentModulesPullquoteFragment
+            }
+            ... on ComponentModulesGridModule {
+                ...ComponentModulesGridModuleFragment
+            }
+            ... on ComponentModulesTextModule {
+                ...ComponentModulesTextModuleFragment
+            }
+            ... on ComponentModulesSubtitle {
+                ...ComponentModulesSubtitleFragment
+            }
+            ... on ComponentModulesTitleModule {
+                ...ComponentModulesTitleModuleFragment
+            }
+            ... on ComponentModulesImageCarousel {
+                ...ComponentModulesImageCarouselFragment
+            }
+            ... on ComponentModulesImage {
+                ...ComponentModulesImageFragment
+            }
+            ... on ComponentModulesTableModule {
+                ...ComponentModulesTableModuleFragment
+            }
+            ... on ComponentModulesButtonsModule {
+                ...ComponentModulesButtonsModuleFragment
+            }
+            ... on Error {
+                ...ErrorFragment
+            }
+        }
+        localizations {
+            data {
+                ...NestedStoryFragment
             }
         }
     }
@@ -107,6 +433,11 @@ fragment StoryFragment on StoryEntity {
         author {
             data {
                 id
+                attributes {
+                    firstName
+                    lastName
+                    insertion
+                }
             }
         }
         description
@@ -140,6 +471,261 @@ fragment StoryFragment on StoryEntity {
             }
         }
         locale
+        storyLinks {
+            ...ComponentModulesButtonsModuleFragment
+        }
+        story {
+            data {
+                id
+                attributes {
+                    title
+                    components {
+                        __typename
+                        ... on ComponentModulesImage {
+                            ...ComponentModulesImageFragment
+                        }
+                    }
+                    author {
+                        data {
+                            attributes {
+                                firstName
+                                lastName
+                                insertion
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        stories {
+            data {
+                id
+                attributes {
+                    title
+                    components {
+                        __typename
+                        ... on ComponentModulesImage {
+                            ...ComponentModulesImageFragment
+                        }
+                    }
+                    author {
+                        data {
+                            attributes {
+                                firstName
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+fragment StoryMetaFragment on StoryEntity {
+    id
+    attributes {
+        title
+        slug
+        shortDescription
+        createdAt
+        updatedAt
+        publishedAt
+        locale
+        author {
+            data {
+                attributes {
+                    firstName
+                    lastName
+                    insertion
+                }
+            }
+        }
+        timeframe {
+            id
+            yearStart
+            yearEnd
+        }
+        locations {
+            data {
+                id
+                attributes {
+                    city
+                }
+            }
+        }
+        themes {
+            data {
+                id
+                attributes {
+                    name
+                }
+            }
+        }
+        publicationDate {
+            id
+            date
+            displayType
+        }
+        triplyRecords {
+            data {
+                ...BaseTriplyRecordFragment
+            }
+        }
+        storyLinks {
+            ...ComponentModulesButtonsModuleFragment
+        }
+        story {
+            data {
+                id
+                attributes {
+                    title
+                    components {
+                        __typename
+                        ... on ComponentModulesImage {
+                            ...ComponentModulesImageFragment
+                        }
+                    }
+                    author {
+                        data {
+                            attributes {
+                                firstName
+                                lastName
+                                insertion
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        stories {
+            data {
+                id
+                attributes {
+                    title
+                    components {
+                        __typename
+                        ... on ComponentModulesImage {
+                            ...ComponentModulesImageFragment
+                        }
+                    }
+                    author {
+                        data {
+                            attributes {
+                                firstName
+                                lastName
+                                insertion
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+fragment LocalizedStoryMetaFragment on StoryEntity {
+    id
+    attributes {
+        title
+        slug
+        shortDescription
+        description
+        createdAt
+        updatedAt
+        publishedAt
+        locale
+        author {
+            data {
+                id
+                attributes {
+                    firstName
+                    lastName
+                    insertion
+                }
+            }
+        }
+        timeframe {
+            id
+            yearStart
+            yearEnd
+        }
+        locations {
+            data {
+                id
+                attributes {
+                    city
+                }
+            }
+        }
+        themes {
+            data {
+                id
+                attributes {
+                    name
+                }
+            }
+        }
+        story {
+            data {
+                id
+                attributes {
+                    title
+                    components {
+                        __typename
+                        ... on ComponentModulesImage {
+                            ...ComponentModulesImageFragment
+                        }
+                    }
+                    author {
+                        data {
+                            id
+                            attributes {
+                                firstName
+                                lastName
+                                insertion
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        stories {
+            data {
+                id
+                attributes {
+                    title
+                    components {
+                        __typename
+                        ... on ComponentModulesImage {
+                            ...ComponentModulesImageFragment
+                        }
+                    }
+                    author {
+                        data {
+                            id
+                            attributes {
+                                firstName
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        publicationDate {
+            id
+            date
+            displayType
+        }
+        triplyRecords {
+            data {
+                ...BaseTriplyRecordFragment
+            }
+        }
+        localizations {
+            data {
+                ...StoryMetaFragment
+            }
+        }
         storyLinks {
             ...ComponentModulesButtonsModuleFragment
         }

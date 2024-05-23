@@ -1,5 +1,15 @@
 {
-    "time": "Tijd",
-    "locations": "Locaties",
-    "people": "Mensen"
+  "published": "Gepubliceerd op {{date}}",
+  "by": "door {{author}}",
+  "mainStory": "Main story",
+  "themes": "Thema's",
+  "people": "Personen",
+  "locations": "Plaatsen",
+  "time": "Tijdsperiode",
+  "share": "Delen",
+  "moreOnTheme": "Meer over dit thema",
+  "subStories": "Sub-verhalen",
+  "siblingsStories": "Gerelateerde-verhalen",
+  "parentStory": "Hoofd-verhaal",
+  "relatedStories": "Gerelateerde-verhalen"
 }

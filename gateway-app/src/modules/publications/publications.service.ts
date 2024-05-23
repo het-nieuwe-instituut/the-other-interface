@@ -1,360 +1,477 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common'
-import { TriplyService } from '../triply/triply.service'
-import { TriplyUtils, ZoomLevel3ReturnData } from '../triply/triply.utils'
+import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
-import { ZoomLevel5Service } from '../zoomLevel5/zoomLevel5.service'
-import { PublicationsZoomLevel4FiltersArgs } from './publications.type'
+import { ZoomLevel3Service } from '../zoomLevel3/zoomLevel3.service'
+import { TriplyUtils } from '../triply/triply.utils'
+import { getHttpThumbnailOrNull } from '../util/helpers'
+import { PaginationArgs } from '../util/paginationArgs.type'
 
-export enum PublicationsZoomLevel3Ids {
-    relatedPerson = 'relatedPerson',
-    subject = 'subject',
-    geographicalKeyword = 'geographicalKeyword',
-    author = 'author',
-    typeOfPublication = 'typeOfPublication',
+interface PublicationsZoomLevel3Data {
+  thumbnail?: string
+  title?: string
+  id: string
+  yearOfPublication?: string
+  objectNumber?: string
+}
+const publicationsDetailZoomLevel3DataKeys: KeysToVerify<PublicationsZoomLevel3Data> = {
+  thumbnail: true,
+  title: true,
+  id: true,
+  yearOfPublication: true,
+  objectNumber: true,
+}
+export interface PublicationRelationsType {
+  idRelation?: string
+  titleR?: string
+  typePub?: string
+  yearPub?: string
+  externalSource?: string
 }
 
-export enum PublicationsZoomLevel4Filters {
-    Author = 'Author',
-    TypeOfPublication = 'TypeOfPublication',
-    GeograficalKeyword = 'GeograficalKeyword',
-    Subject = 'Subject',
-    RelatedPerInst = 'RelatedPerInst',
+const publicationRelationsKeys: KeysToVerify<PublicationRelationsType> = {
+  idRelation: true,
+  titleR: true,
+  typePub: true,
+  yearPub: true,
+  externalSource: true,
 }
 
-interface PublicationsFilterData {
-    filter: string
+export interface PublicationsRelationsCountType {
+  total: string
 }
 
-interface PublicationsZoomLevel4Data {
-    record: string
-    title: string
+const publicationsRelationsCountKeys: KeysToVerify<PublicationsRelationsCountType> = {
+  total: true,
 }
 
-interface PublicationsBooksDetailZoomLevel5Data {
-    typeOfPublication?: string
-    typeOfPublicationLabel?: string
-    title?: string
-    author?: string
-    authorLabel?: string
-    authorRole?: string
-    authorRoleLabel?: string
-    publisher?: string
-    publisherLabel?: string
-    yearOfPublication?: string
-    placeOfPublication?: string
-    placeOfPublicationLabel?: string
-    isbn?: string
-    description?: string
-    annotation?: string
-    codeOfArchive?: string
-    codeOfArchiveLabel?: string
-    edition?: string
-    illustration?: string
-    numberOfPages?: string
-    language?: string
-    languageLabel?: string
-    seriesLabel?: string
-    number?: string
-    geographicalKeyword?: string
-    geographicalKeywordLabel?: string
-    subject?: string
-    subjectLabel?: string
-    relatedPerInst?: string
-    relatedPerInstLabel?: string
-    objectNumber?: string
-    availability?: string
-    shelfmark?: string
-    permanentLink?: string
+interface PublicationsBooksDetailZoomLevel3Data {
+  thumbnail: true
+  id: true
+  typeOfPublication?: string
+  typeOfPublicationLabel?: string
+  title?: string
+  author?: string
+  authorLabel?: string
+  authorRole?: string
+  authorRoleLabel?: string
+  publisher?: string
+  publisherLabel?: string
+  yearOfPublication?: string
+  placeOfPublication?: string
+  placeOfPublicationLabel?: string
+  isbn?: string
+  description?: string
+  annotation?: string
+  codeOfArchive?: string
+  codeOfArchiveLabel?: string
+  edition?: string
+  illustration?: string
+  numberOfPages?: string
+  language?: string
+  languageLabel?: string
+  seriesLabel?: string
+  number?: string
+  geographicalKeyword?: string
+  geographicalKeywordLabel?: string
+  subject?: string
+  subjectLabel?: string
+  relatedPerInst?: string
+  relatedPerInstLabel?: string
+  objectNumber?: string
+  availability?: string
+  shelfmark?: string
+  permanentLink?: string
+}
+const publicationsBooksDetailZoomLevel3DataKeys: KeysToVerify<PublicationsBooksDetailZoomLevel3Data> =
+  {
+    id: true,
+    thumbnail: true,
+    typeOfPublication: true,
+    typeOfPublicationLabel: true,
+    title: true,
+    author: true,
+    authorLabel: true,
+    authorRole: true,
+    authorRoleLabel: true,
+    publisher: true,
+    publisherLabel: true,
+    yearOfPublication: true,
+    placeOfPublication: true,
+    placeOfPublicationLabel: true,
+    isbn: true,
+    description: true,
+    annotation: true,
+    codeOfArchive: true,
+    codeOfArchiveLabel: true,
+    edition: true,
+    illustration: true,
+    numberOfPages: true,
+    language: true,
+    languageLabel: true,
+    seriesLabel: true,
+    number: true,
+    geographicalKeyword: true,
+    geographicalKeywordLabel: true,
+    subject: true,
+    subjectLabel: true,
+    relatedPerInst: true,
+    relatedPerInstLabel: true,
+    objectNumber: true,
+    availability: true,
+    shelfmark: true,
+    permanentLink: true,
+  }
+
+interface PublicationsSerialDetailZoomLevel3Data {
+  id: string
+  thumbnail?: string
+  typeOfPublication?: string
+  typeOfPublicationLabel?: string
+  title?: string
+  publisher?: string
+  publisherLabel?: string
+  yearOfPublication?: string
+  placeOfPublication?: string
+  placeOfPublicationLabel?: string
+  subject?: string
+  subjectLabel?: string
+  language?: string
+  languageLabel?: string
+  continuedFrom?: string
+  continuedAs?: string
+  remarks?: string
+  availability?: string
+  shelfmark?: string
+  holding?: string
+  permanentLink?: string
+}
+const publicationsSerialDetailZoomLevel3DataKeys: KeysToVerify<PublicationsSerialDetailZoomLevel3Data> =
+  {
+    id: true,
+    thumbnail: true,
+    typeOfPublication: true,
+    typeOfPublicationLabel: true,
+    title: true,
+    publisher: true,
+    publisherLabel: true,
+    yearOfPublication: true,
+    placeOfPublication: true,
+    placeOfPublicationLabel: true,
+    subject: true,
+    subjectLabel: true,
+    language: true,
+    languageLabel: true,
+    continuedFrom: true,
+    continuedAs: true,
+    remarks: true,
+    availability: true,
+    shelfmark: true,
+    holding: true,
+    permanentLink: true,
+  }
+
+interface PublicationArticleDetailZoomLevel3Data {
+  id: string
+  thumbnail?: string
+  typeOfPublication?: string
+  typeOfPublicationLabel?: string
+  title?: string
+  author?: string
+  authorLabel?: string
+  authorRole?: string
+  authorRoleLabel?: string
+  sourceTitle?: string
+  sourceTitleLabel?: string
+  volume?: string
+  issue?: string
+  yearOfPublication?: string
+  page?: string
+  publisher?: string
+  publisherLabel?: string
+  abstract?: string
+  language?: string
+  languageLabel?: string
+  geographicalKeyword?: string
+  geographicalKeywordLabel?: string
+  subject?: string
+  subjectLabel?: string
+  relatedPerInst?: string
+  relatedPerInstLabel?: string
+  objectNumber?: string
+  availability?: string
+  shelfmark?: string
+  permanentLink?: string
+}
+const publicationArticleDetailZoomLevel3DataKeys: KeysToVerify<PublicationArticleDetailZoomLevel3Data> =
+  {
+    id: true,
+    thumbnail: true,
+    typeOfPublication: true,
+    typeOfPublicationLabel: true,
+    title: true,
+    author: true,
+    authorLabel: true,
+    authorRole: true,
+    authorRoleLabel: true,
+    sourceTitle: true,
+    sourceTitleLabel: true,
+    volume: true,
+    issue: true,
+    yearOfPublication: true,
+    page: true,
+    publisher: true,
+    publisherLabel: true,
+    abstract: true,
+    language: true,
+    languageLabel: true,
+    geographicalKeyword: true,
+    geographicalKeywordLabel: true,
+    subject: true,
+    subjectLabel: true,
+    relatedPerInst: true,
+    relatedPerInstLabel: true,
+    objectNumber: true,
+    availability: true,
+    shelfmark: true,
+    permanentLink: true,
+  }
+
+interface PublicationsAudioVisualDetailZoomLevel3Data {
+  id: string
+  thumbnail?: string
+  typeOfPublication?: string
+  typeOfPublicationLabel?: string
+  title?: string
+  author?: string
+  authorLabel?: string
+  authorRole?: string
+  authorRoleLabel?: string
+  publisher?: string
+  publisherLabel?: string
+  yearOfPublication?: string
+  placeOfPublication?: string
+  placeOfPublicationLabel?: string
+  abstract?: string
+  annotation?: string
+  scope?: string
+  language?: string
+  languageLabel?: string
+  medium?: string
+  geographicalKeyword?: string
+  geographicalKeywordLabel?: string
+  subject?: string
+  subjectLabel?: string
+  relatedPerInst?: string
+  relatedPerInstLabel?: string
+  permanentLink?: string
+  objectNumber?: string
+  availability?: string
+  shelfmark?: string
+}
+const publicationsAudioVisualDetailZoomLevel3DataKeys: KeysToVerify<PublicationsAudioVisualDetailZoomLevel3Data> =
+  {
+    id: true,
+    thumbnail: true,
+    typeOfPublication: true,
+    typeOfPublicationLabel: true,
+    title: true,
+    author: true,
+    authorLabel: true,
+    authorRole: true,
+    authorRoleLabel: true,
+    publisher: true,
+    publisherLabel: true,
+    yearOfPublication: true,
+    placeOfPublication: true,
+    placeOfPublicationLabel: true,
+    abstract: true,
+    annotation: true,
+    scope: true,
+    language: true,
+    languageLabel: true,
+    medium: true,
+    geographicalKeyword: true,
+    geographicalKeywordLabel: true,
+    subject: true,
+    subjectLabel: true,
+    relatedPerInst: true,
+    relatedPerInstLabel: true,
+    permanentLink: true,
+    objectNumber: true,
+    availability: true,
+    shelfmark: true,
+  }
+
+export enum PublicationsZoomLevel3Types {
+  serial = 'serial',
+  book = 'book',
+  article = 'article',
+  audiovisual = 'audiovisual',
 }
 
-interface PublicationsSerialDetailZoomLevel5Data {
-    typeOfPublication?: string
-    typeOfPublicationLabel?: string
-    title?: string
-    publisher?: string
-    publisherLabel?: string
-    yearOfPublication?: string
-    placeOfPublication?: string
-    placeOfPublicationLabel?: string
-    subject?: string
-    subjectLabel?: string
-    language?: string
-    languageLabel?: string
-    continuedFrom?: string
-    continuedAs?: string
-    remarks?: string
-    availability?: string
-    shelfmark?: string
-    holding?: string
-    permanentLink?: string
+type PublicationsZoomLevel3DataTypes =
+  | PublicationsBooksDetailZoomLevel3Data
+  | PublicationsSerialDetailZoomLevel3Data
+  | PublicationArticleDetailZoomLevel3Data
+  | PublicationsAudioVisualDetailZoomLevel3Data
+const publicationsZoomLevel3DataTypeKeys = {
+  [PublicationsZoomLevel3Types.article]: publicationArticleDetailZoomLevel3DataKeys,
+  [PublicationsZoomLevel3Types.audiovisual]: publicationsAudioVisualDetailZoomLevel3DataKeys,
+  [PublicationsZoomLevel3Types.book]: publicationsBooksDetailZoomLevel3DataKeys,
+  [PublicationsZoomLevel3Types.serial]: publicationsSerialDetailZoomLevel3DataKeys,
 }
 
-interface PublicationArticleDetailZoomLevel5Data {
-    typeOfPublication?: string
-    typeOfPublicationLabel?: string
-    title?: string
-    author?: string
-    authorLabel?: string
-    authorRole?: string
-    authorRoleLabel?: string
-    sourceTitle?: string
-    sourceTitleLabel?: string
-    volume?: string
-    issue?: string
-    yearOfPublication?: string
-    page?: string
-    publisher?: string
-    publisherLabel?: string
-    abstract?: string
-    language?: string
-    languageLabel?: string
-    geographicalKeyword?: string
-    geographicalKeywordLabel?: string
-    subject?: string
-    subjectLabel?: string
-    relatedPerInst?: string
-    relatedPerInstLabel?: string
-    objectNumber?: string
-    availability?: string
-    shelfmark?: string
-    permanentLink?: string
+type PublicationsWithAuthors =
+  | PublicationsBooksDetailZoomLevel3Data
+  | PublicationArticleDetailZoomLevel3Data
+  | PublicationsAudioVisualDetailZoomLevel3Data
+
+export interface PublicationRecordZoomLevel3Data {
+  objectNumber?: string
+  subType?: string
+  authors?: string[]
+  authorRole?: string[]
+  publisher?: string
+  yearOfPublication?: string
+  placeOfPublication?: string
+  isbn?: string
+  annotation?: string
+  codeOfArchive?: string
+  illustration?: string
+  pages?: string
+  language?: string
+  series?: string
+  number?: string
+  category?: string
+  relatedKeyword?: string[]
+  geoKeyword?: string[]
+  availability?: string
+  permanentLink?: string
+  externalSource?: string
+  sourceTitle?: string
+  volume?: string
+  issue?: string
+  year?: string
+  subject?: string[]
 }
 
-interface PublicationsAudioVisualDetailZoomLevel5Data {
-    typeOfPublication?: string
-    typeOfPublicationLabel?: string
-    title?: string
-    author?: string
-    authorLabel?: string
-    authorRole?: string
-    authorRoleLabel?: string
-    publisher?: string
-    publisherLabel?: string
-    yearOfPublication?: string
-    placeOfPublication?: string
-    placeOfPublicationLabel?: string
-    abstract?: string
-    annotation?: string
-    scope?: string
-    language?: string
-    languageLabel?: string
-    medium?: string
-    geographicalKeyword?: string
-    geographicalKeywordLabel?: string
-    subject?: string
-    subjectLabel?: string
-    relatedPerInst?: string
-    relatedPerInstLabel?: string
-    permanentLink?: string
-    objectNumber?: string
-    availability?: string
-    shelfmark?: string
-}
-
-type PublicationsZoomLevel5DataTypes =
-    | PublicationsBooksDetailZoomLevel5Data
-    | PublicationsSerialDetailZoomLevel5Data
-    | PublicationArticleDetailZoomLevel5Data
-    | PublicationsAudioVisualDetailZoomLevel5Data
-
-export enum PublicationsZoomLevel5Types {
-    serial = 'serial',
-    book = 'book',
-    article = 'article',
-    audiovisual = 'audiovisual',
+const publicationRecordZoomLevel3DataKeys: KeysToVerify<PublicationRecordZoomLevel3Data> = {
+  objectNumber: true,
+  subType: true,
+  authors: true,
+  authorRole: true,
+  publisher: true,
+  yearOfPublication: true,
+  placeOfPublication: true,
+  isbn: true,
+  annotation: true,
+  codeOfArchive: true,
+  illustration: true,
+  pages: true,
+  language: true,
+  series: true,
+  number: true,
+  category: true,
+  relatedKeyword: true,
+  geoKeyword: true,
+  availability: true,
+  permanentLink: true,
+  externalSource: true,
+  sourceTitle: true,
+  volume: true,
+  issue: true,
+  year: true,
+  subject: true,
 }
 
 @Injectable()
 export class PublicationsService {
-    protected entityType = 'triply'
-    private readonly zoomLevel2Endpoint = 'zoom-2-books/run'
+  protected entityType = 'triply'
 
-    private readonly ZoomLevel3Mapping = [
-        {
-            id: PublicationsZoomLevel3Ids.relatedPerson,
-            name: 'Gerelateerde persoon/instelling',
-            endpoint: 'zoom-3-books-related-person-filter/run',
-        },
-        {
-            id: PublicationsZoomLevel3Ids.subject,
-            name: 'Onderwerp',
-            endpoint: 'zoom-3-books-subject-filter/run',
-        },
-        {
-            id: PublicationsZoomLevel3Ids.geographicalKeyword,
-            name: 'Geografisch trefwoord',
-            endpoint: 'zoom-3-books-geographical-keyword-filter/run',
-        },
-        {
-            id: PublicationsZoomLevel3Ids.author,
-            name: 'Auteur(s)',
-            endpoint: 'zoom-3-books-author-filter/run',
-        },
-        {
-            id: PublicationsZoomLevel3Ids.typeOfPublication,
-            name: 'Soort publicatie',
-            endpoint: 'zoom-3-books-type-of-publication-filter/run',
-        },
-    ]
+  private readonly ZoomLevel3Endpoint = 'publications-recordPage/run?'
 
-    private readonly ZoomLevel4Endpoint = 'zoom-4-books/run'
+  private readonly ZoomLevel3RelationsEndpoint = 'publications-recordRelations/run?'
 
-    private readonly ZoomLevel4CountEndpoint =
-        'https://api.collectiedata.hetnieuweinstituut.nl/queries/Joran/zoom4-books-count/run'
+  private readonly ZoomLevel3RelationsCountEndpoint = 'publications-recordRelations-Count/run?'
 
-    private readonly ZoomLevel5Endpoint = {
-        [PublicationsZoomLevel5Types.article]: 'zoom-5-books-article/run',
-        [PublicationsZoomLevel5Types.audiovisual]: 'zoom-5-books-audiovisual/run',
-        [PublicationsZoomLevel5Types.book]: 'zoom-5-books-book/run',
-        [PublicationsZoomLevel5Types.serial]: 'zoom-5-books-serial/run',
+  private readonly ZoomLevel3RecordEndpoint = 'publications-recordPage-Editorial/2/run?'
+
+  // private readonly publicationDescriptionLevelEndpoint = 'Zoom-3-books-type/run'
+
+  public constructor(
+    private readonly triplyService: TriplyService,
+    @Inject(forwardRef(() => ZoomLevel3Service))
+    private readonly zoomLevel3Service: ZoomLevel3Service
+  ) {}
+
+  public async getZoomLevel3Data(id: string) {
+    const result = await this.triplyService.queryTriplyData<PublicationsZoomLevel3Data>(
+      this.ZoomLevel3Endpoint,
+      publicationsDetailZoomLevel3DataKeys,
+      { page: 1, pageSize: 2 },
+      { id }
+    )
+
+    return {
+      ...TriplyUtils.combineObjectArray(result.data),
+      type: EntityNames.Publications,
+      id,
+      thumbnail: getHttpThumbnailOrNull(result.data[0]?.thumbnail)?.split(';'),
+    }
+  }
+
+  public async getRelationsData(id: string, type: EntityNames, paginationArgs: PaginationArgs) {
+    const result = await this.triplyService.queryTriplyData<PublicationRelationsType>(
+      this.ZoomLevel3RelationsEndpoint,
+      publicationRelationsKeys,
+      { page: paginationArgs.page ?? 1, pageSize: paginationArgs.pageSize ?? 5 },
+      { id, type }
+    )
+    const output = TriplyUtils.sanitizeObjectArray(result.data)
+    return output
+  }
+
+  public async getRelationsDataCount(id: string, type: EntityNames) {
+    const result = await this.triplyService.queryTriplyData<PublicationsRelationsCountType>(
+      this.ZoomLevel3RelationsCountEndpoint,
+      publicationsRelationsCountKeys,
+      { page: 1, pageSize: 1 },
+      { id, type }
+    )
+
+    return result.data
+  }
+
+  public async getZoomLevel3RecordData(id: string) {
+    const result = await this.triplyService.queryTriplyData<PublicationRecordZoomLevel3Data>(
+      this.ZoomLevel3RecordEndpoint,
+      publicationRecordZoomLevel3DataKeys,
+      { page: 1, pageSize: 1 },
+      { id }
+    )
+
+    return result.data
+  }
+
+  public resolveAuthor(publication: PublicationsZoomLevel3DataTypes) {
+    if (!('author' in publication) || !publication.author) {
+      return
     }
 
-    // TODO: change to convention when Triply adds this to normal space
-    private readonly publicationDescriptionLevelEndpoint =
-        'https://api.collectiedata.hetnieuweinstituut.nl/queries/Joran/zoom5-books-type-only/run?'
+    const type = TriplyUtils.getEntityNameFromUri(publication.author)
+    const id = TriplyUtils.getIdFromUri(publication.author)
 
-    public constructor(
-        private readonly triplyService: TriplyService,
-        @Inject(forwardRef(() => ZoomLevel5Service)) private readonly zoomLevel5Service: ZoomLevel5Service
-    ) {}
+    return this.zoomLevel3Service.getDetail(id, type)
+  }
 
-    public async determinePublicationType(id: string) {
-        interface TypeOfPublicationData {
-            record: string
-            typeOfPublication: string
-        }
-
-        const uri = TriplyUtils.getUriForTypeAndId(EntityNames.Publications, id)
-        const res = await this.triplyService.queryTriplyData<TypeOfPublicationData>(
-            this.publicationDescriptionLevelEndpoint,
-            undefined,
-            { record: uri }
-        )
-
-        if (!res?.data?.length) {
-            return PublicationsZoomLevel5Types.book
-        }
-
-        switch (res.data[0].typeOfPublication) {
-            case 'tijdschrift': {
-                return PublicationsZoomLevel5Types.serial
-            }
-            case 'tijdschriftartikel': {
-                return PublicationsZoomLevel5Types.article
-            }
-            case 'audio-visueel materiaal': {
-                return PublicationsZoomLevel5Types.audiovisual
-            }
-            case 'boek':
-            default: {
-                return PublicationsZoomLevel5Types.book
-            }
-        }
+  public resolvePublisher(publication: PublicationsZoomLevel3DataTypes) {
+    if (!('publisher' in publication) || !publication.publisher) {
+      return
     }
 
-    public async getZoomLevel2Data() {
-        const result = await this.triplyService.queryTriplyData<PublicationsFilterData>(this.zoomLevel2Endpoint)
-        return result.data
-            .map(r => {
-                const filterMapping = this.ZoomLevel3Mapping.find(m => m.name === r.filter)
-                if (!filterMapping) return
-                return { filter: filterMapping.name, id: filterMapping.id }
-            })
-            .filter(f => !!f?.id)
-    }
+    const type = TriplyUtils.getEntityNameFromUri(publication.publisher)
+    const id = TriplyUtils.getIdFromUri(publication.publisher)
 
-    public async getZoomLevel3Data(id: PublicationsZoomLevel3Ids, page = 1, pageSize = 16) {
-        const mapping = this.ZoomLevel3Mapping.find(m => m.id === id)
-
-        if (!mapping) {
-            throw new Error(`[Publications] Mapping ${id} not found`)
-        }
-
-        const result = await this.triplyService.queryTriplyData<ZoomLevel3ReturnData>(mapping?.endpoint, {
-            page,
-            pageSize,
-        })
-
-        return TriplyUtils.parseLevel3OutputData(result.data)
-    }
-
-    public async getZoomLevel4Data(filters: PublicationsZoomLevel4FiltersArgs, page = 1, pageSize = 48) {
-        if (Object.keys(filters).length === 0) {
-            return []
-        }
-
-        const searchParams = TriplyUtils.getQueryParamsFromObject(filters)
-
-        const result = await this.triplyService.queryTriplyData<PublicationsZoomLevel4Data>(
-            this.ZoomLevel4Endpoint,
-            {
-                page,
-                pageSize,
-            },
-            searchParams
-        )
-        const countResult = await this.triplyService.queryTriplyData<{ count?: number }>(
-            this.ZoomLevel4CountEndpoint,
-            undefined,
-            searchParams
-        )
-        const total = countResult.data.pop()?.count || 0
-
-        return {
-            total,
-            appliedFilters: JSON.stringify(filters),
-            page,
-            hasMore: page * pageSize < total,
-            nodes: result.data.map(res => {
-                return {
-                    record: res.record,
-                    title: res.title,
-                    firstImage: null,
-                    imageLabel: null,
-                }
-            }),
-        }
-    }
-
-    public async getZoomLevel5Data(publicationType: PublicationsZoomLevel5Types, objectId: string) {
-        const uri = TriplyUtils.getUriForTypeAndId(EntityNames.Publications, objectId)
-        const result = await this.triplyService.queryTriplyData<PublicationsZoomLevel5DataTypes>(
-            this.ZoomLevel5Endpoint[publicationType],
-            undefined,
-            { record: uri }
-        )
-
-        return { ...TriplyUtils.combineObjectArray(result.data), id: objectId, type: publicationType }
-    }
-
-    public validateFilterInput(input: string): PublicationsZoomLevel3Ids {
-        if (Object.keys(PublicationsZoomLevel3Ids).includes(input)) {
-            // we can do this since we do key=value
-            return PublicationsZoomLevel3Ids[input as PublicationsZoomLevel3Ids]
-        }
-
-        throw new Error(`[Publications] Invalid filter input "${input}"`)
-    }
-
-    public resolveAuthor(publication: PublicationsZoomLevel5DataTypes) {
-        if (!('author' in publication) || !publication.author) {
-            return
-        }
-
-        const type = TriplyUtils.getEntityNameFromUri(publication.author)
-        const id = TriplyUtils.getIdFromUri(publication.author)
-
-        return this.zoomLevel5Service.getDetail(id, type)
-    }
-
-    public resolvePublisher(publication: PublicationsZoomLevel5DataTypes) {
-        if (!('publisher' in publication) || !publication.publisher) {
-            return
-        }
-
-        const type = TriplyUtils.getEntityNameFromUri(publication.publisher)
-        const id = TriplyUtils.getIdFromUri(publication.publisher)
-
-        return this.zoomLevel5Service.getDetail(id, type)
-    }
+    return this.zoomLevel3Service.getDetail(id, type)
+  }
 }

@@ -1,0 +1,5 @@
+query PublicationsRecordRelationsCount($id: String!, $type: EntityNames!, $lang: String!) {
+    publicationsRecordRelationsCount(type: $type, id: $id, lang: $lang) {
+        total
+    }
+}

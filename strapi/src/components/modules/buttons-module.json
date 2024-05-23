@@ -18,12 +18,6 @@
         "Default",
         "Large"
       ]
-    },
-    "buttonsModuleLayout": {
-      "type": "component",
-      "repeatable": false,
-      "component": "core.module-layouts",
-      "required": true
     }
   }
 }

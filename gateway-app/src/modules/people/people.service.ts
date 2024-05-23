@@ -1,201 +1,188 @@
 import { Injectable } from '@nestjs/common'
-import { TriplyService } from '../triply/triply.service'
-import { TriplyUtils, ZoomLevel3ReturnData } from '../triply/triply.utils'
+import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
-import { PeopleZoomLevel4FiltersArgs } from './people.type'
+import { getHttpThumbnailOrNull } from '../util/helpers'
+import { TriplyUtils } from '../triply/triply.utils'
+import { PaginationArgs } from '../util/paginationArgs.type'
 
-export enum PeopleZoomLevel3Ids {
-    deathDate = 'deathDate',
-    nameType = 'nameType',
-    birthDate = 'birthDate',
-    period = 'period',
-    place = 'place',
-    profession = 'profession',
+interface PeopleDetailZoomLevel3Data {
+  thumbnail?: string
+  title?: string
+  id: string
+  nameType?: string
+  nameVariation?: string
+  birthDate?: string
+  birthPlace?: string
+  birthPlaceLabel?: string
+  deathDate?: string
+  deathPlace?: string
+  deathPlaceLabel?: string
+  place?: string
+  placeLabel?: string
+  startDate?: string
+  endDate?: string
+  nationality?: string
+  nationalityLabel?: string
+  institution?: string
+  institutionLabel?: string
+  profession?: string
+  professionLabel?: string
+  gender?: string
+  association?: string
+  associationLabel?: string
+  relatedItem?: string
+  relatedItemLabel?: string
+  description?: string
+  permanentLink?: string
+}
+const peopleDetailZoomLevel3DataKeys: KeysToVerify<PeopleDetailZoomLevel3Data> = {
+  thumbnail: true,
+  title: true,
+  id: true,
+  nameType: true,
+  nameVariation: true,
+  birthDate: true,
+  birthPlace: true,
+  birthPlaceLabel: true,
+  deathDate: true,
+  deathPlace: true,
+  deathPlaceLabel: true,
+  place: true,
+  placeLabel: true,
+  startDate: true,
+  endDate: true,
+  nationality: true,
+  nationalityLabel: true,
+  institution: true,
+  institutionLabel: true,
+  profession: true,
+  professionLabel: true,
+  gender: true,
+  association: true,
+  associationLabel: true,
+  relatedItem: true,
+  relatedItemLabel: true,
+  description: true,
+  permanentLink: true,
 }
 
-export enum PeopleZoomLevel4Filters {
-    NameType = 'NameType',
-    Profession = 'Profession',
-    Place = 'Place',
-    Period = 'Period',
-    BirthDate = 'BirthDate',
-    DeathDate = 'DeathDate',
+export interface PeopleRelationsType {
+  idRelation?: string
+  relationName?: string
+  titleR?: string
+  occupation?: string
+  period?: string
+  externalSource?: string
 }
 
-interface PeopleFilterData {
-    filter: string
+const PeopleRelationsKeys: KeysToVerify<PeopleRelationsType> = {
+  idRelation: true,
+  relationName: true,
+  titleR: true,
+  occupation: true,
+  period: true,
+  externalSource: true,
 }
 
-export interface PeopleData {
-    name: string | null
-    birthDate: string | null
-    deathDate: string | null
-    nationalityLabel: string | null
+export interface PeopleRelationsCountType {
+  total: string
 }
 
-interface PeopleZoomLevel4Data {
-    record: string
-    name: string
+const peopleRelationsCountKeys: KeysToVerify<PeopleRelationsCountType> = {
+  total: true,
+}
+export interface PeopleRecordZoomLevel3Data {
+  type?: string
+  profession?: string
+  nameVariations?: string
+  birthDate?: string
+  birthPlace?: string
+  deathDate?: string
+  deathPlace?: string
+  nationality?: string
+  gender?: string
+  period?: string
+  association?: string
+  permanentLink?: string
+  externalSource?: string
 }
 
-interface PeopleDetailZoomLevel5Data {
-    name?: string
-    nameType?: string
-    nameVariation?: string
-    birthDate?: string
-    birthPlace?: string
-    birthPlaceLabel?: string
-    deathDate?: string
-    deathPlace?: string
-    deathPlaceLabel?: string
-    place?: string
-    placeLabel?: string
-    startDate?: string
-    endDate?: string
-    nationality?: string
-    nationalityLabel?: string
-    institution?: string
-    institutionLabel?: string
-    profession?: string
-    professionLabel?: string
-    gender?: string
-    association?: string
-    associationLabel?: string
-    relatedItem?: string
-    relatedItemLabel?: string
-    description?: string
-    permanentLink?: string
+const peopleRecordZoomLevel3DataKeys: KeysToVerify<PeopleRecordZoomLevel3Data> = {
+  type: true,
+  profession: true,
+  nameVariations: true,
+  birthDate: true,
+  birthPlace: true,
+  deathDate: true,
+  deathPlace: true,
+  nationality: true,
+  gender: true,
+  period: true,
+  association: true,
+  permanentLink: true,
+  externalSource: true,
 }
 
 @Injectable()
 export class PeopleService {
-    protected entityType = 'triply'
-    private readonly detailEndpoint = '/zoom-5-people/run?record=https://collectiedata.hetnieuweinstituut.nl/id/people/'
-    private readonly zoomLevel2Endpoint = 'zoom-2-people/run'
+  protected entityType = 'triply'
 
-    private readonly ZoomLevel3Mapping = [
-        {
-            id: PeopleZoomLevel3Ids.deathDate,
-            name: 'Overlijdensdatum',
-            endpoint: 'zoom-3-people-death-date-filter/run',
-        },
-        {
-            id: PeopleZoomLevel3Ids.nameType,
-            name: 'Naam soort',
-            endpoint: 'zoom-3-people-name-type-filter/run',
-        },
-        {
-            id: PeopleZoomLevel3Ids.birthDate,
-            name: 'Geboortedatum',
-            endpoint: 'zoom-3-people-birth-date-filter/run',
-        },
-        {
-            id: PeopleZoomLevel3Ids.period,
-            name: 'Periode',
-            endpoint: 'zoom-3-people-period-filter/run',
-        },
-        {
-            id: PeopleZoomLevel3Ids.place,
-            name: 'Plaats',
-            endpoint: 'zoom-3-people-place-filter/run',
-        },
-        {
-            id: PeopleZoomLevel3Ids.profession,
-            name: 'Beroep/Werkveld',
-            endpoint: 'zoom-3-people-profession-filter/run',
-        },
-    ]
+  private readonly ZoomLevel3Endpoint = 'people-recordPage/run?'
 
-    private readonly ZoomLevel4Endpoint = 'zoom-4-people-V2/run'
-    private readonly ZoomLevel4CountEndpoint =
-        'https://api.collectiedata.hetnieuweinstituut.nl/queries/Joran/zoom4-people-count/run'
+  private readonly ZoomLevel3RelationsEndpoint = 'people-recordRelations/run?'
 
-    private readonly ZoomLevel5Endpoint = 'zoom-5-people/run'
+  private readonly ZoomLevel3RelationsCountEndpoint = 'people-recordRelations-Count/run?'
 
-    public constructor(private triplyService: TriplyService) {}
+  private readonly ZoomLevel3RecordEndpoint = 'people-recordPage-editorial/18/run?'
 
-    public async getZoomLevel2Data() {
-        const result = await this.triplyService.queryTriplyData<PeopleFilterData>(this.zoomLevel2Endpoint)
-        return result.data
-            .map(r => {
-                const filterMapping = this.ZoomLevel3Mapping.find(m => m.name === r.filter)
-                if (!filterMapping) return
-                return { filter: filterMapping.name, id: filterMapping.id }
-            })
-            .filter(f => !!f?.id)
+  public constructor(private triplyService: TriplyService) {}
+
+  public async getZoomLevel3Data(id: string) {
+    const result = await this.triplyService.queryTriplyData<PeopleDetailZoomLevel3Data>(
+      this.ZoomLevel3Endpoint,
+      peopleDetailZoomLevel3DataKeys,
+      { page: 1, pageSize: 2 },
+      { id }
+    )
+
+    return {
+      ...TriplyUtils.combineObjectArray(result.data),
+      type: EntityNames.People,
+      id,
+      thumbnail: getHttpThumbnailOrNull(result.data[0]?.thumbnail)?.split(';'),
     }
+  }
 
-    public async getZoomLevel3Data(id: PeopleZoomLevel3Ids, page = 1, pageSize = 16) {
-        const mapping = this.ZoomLevel3Mapping.find(m => m.id === id)
+  public async getRelationsData(id: string, type: EntityNames, paginationArgs: PaginationArgs) {
+    const result = await this.triplyService.queryTriplyData<PeopleRelationsType>(
+      this.ZoomLevel3RelationsEndpoint,
+      PeopleRelationsKeys,
+      { page: paginationArgs.page ?? 1, pageSize: paginationArgs.pageSize ?? 5 },
+      { id, type }
+    )
+    const output = TriplyUtils.sanitizeObjectArray(result.data)
+    return output
+  }
 
-        if (!mapping) {
-            throw new Error(`[People] Mapping ${id} not found`)
-        }
+  public async getRelationsDataCount(id: string, type: EntityNames) {
+    const result = await this.triplyService.queryTriplyData<PeopleRelationsCountType>(
+      this.ZoomLevel3RelationsCountEndpoint,
+      peopleRelationsCountKeys,
+      { page: 1, pageSize: 1 },
+      { id, type }
+    )
 
-        const result = await this.triplyService.queryTriplyData<ZoomLevel3ReturnData>(mapping?.endpoint, {
-            page,
-            pageSize,
-        })
+    return result.data
+  }
 
-        return TriplyUtils.parseLevel3OutputData(result.data)
-    }
+  public async getZoomLevel3RecordData(id: string) {
+    const result = await this.triplyService.queryTriplyData<PeopleRecordZoomLevel3Data>(
+      this.ZoomLevel3RecordEndpoint,
+      peopleRecordZoomLevel3DataKeys,
+      { page: 1, pageSize: 1 },
+      { id }
+    )
 
-    public async getZoomLevel4Data(filters: PeopleZoomLevel4FiltersArgs, page = 1, pageSize = 48) {
-        if (Object.keys(filters).length === 0) {
-            return []
-        }
-
-        const searchParams = TriplyUtils.getQueryParamsFromObject(filters)
-
-        const result = await this.triplyService.queryTriplyData<PeopleZoomLevel4Data>(
-            this.ZoomLevel4Endpoint,
-            {
-                page,
-                pageSize,
-            },
-            searchParams
-        )
-
-        const countResult = await this.triplyService.queryTriplyData<{ count?: number }>(
-            this.ZoomLevel4CountEndpoint,
-            undefined,
-            searchParams
-        )
-        const total = countResult.data.pop()?.count || 0
-
-        return {
-            total,
-            appliedFilters: JSON.stringify(filters),
-            page,
-            hasMore: page * pageSize < total,
-            nodes: result.data.map(res => {
-                return {
-                    record: res.record,
-                    title: res.name,
-                    firstImage: null,
-                    imageLabel: null,
-                }
-            }),
-        }
-    }
-
-    public async getZoomLevel5Data(objectId: string) {
-        const uri = TriplyUtils.getUriForTypeAndId(EntityNames.People, objectId)
-        const result = await this.triplyService.queryTriplyData<PeopleDetailZoomLevel5Data>(
-            this.ZoomLevel5Endpoint,
-            undefined,
-            { record: uri }
-        )
-
-        return { ...TriplyUtils.combineObjectArray(result.data), id: objectId }
-    }
-
-    public validateFilterInput(input: string): PeopleZoomLevel3Ids {
-        if (Object.keys(PeopleZoomLevel3Ids).includes(input)) {
-            // we can do this since we do key=value
-            return PeopleZoomLevel3Ids[input as PeopleZoomLevel3Ids]
-        }
-
-        throw new Error(`[People] Invalid filter input "${input}"`)
-    }
+    return result.data
+  }
 }

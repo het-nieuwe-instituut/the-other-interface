@@ -1,42 +1,62 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /** @type {import('next').NextConfig} */
-const nextTranslate = require('next-translate')
+const nextTranslate = require('next-translate-plugin')
 
+const env = require('dotenv').config({
+  path: `.env.${process.env.NEXT_PUBLIC_ENV ?? 'production'}`,
+})
+const parsed = env.parsed
 const nextConfig = {
-    webpack(config) {
-        config.module.rules.push({
-            test: /\.svg$/,
-            use: ['@svgr/webpack'],
-        })
+  webpack(config) {
+    config.externals = [...config.externals, 'canvas', 'bufferutil', 'utf-8-validate']
 
-        return config
-    },
-    reactStrictMode: true,
-    swcMinify: true,
-    i18n: {
-        locales: ['nl', 'en'],
-        defaultLocale: 'nl',
-    },
-    images: {
-        domains: [
-            'hni-toi-staging-api.lifely.nl',
-            'localhost',
-            'hni-toi-staging.s3.eu-central-1.amazonaws.com',
-            'hni-toi-acceptance.s3.eu-central-1.amazonaws.com',
-            'hni-toi-production.s3.eu-central-1.amazonaws.com',
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ['@svgr/webpack'],
+    })
+    return config
+  },
+
+  headers() {
+    return [
+      {
+        source: '/(.*).svg',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
         ],
-    },
-    i18n: {
-        locales: ['nl', 'en'],
-        defaultLocale: 'nl',
-    },
-    output: 'standalone',
-    serverRuntimeConfig: {
-        NEXT_PUBLIC_REACT_APP_IMAGE_BASE_URL: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
-    },
-    publicRuntimeConfig: {
-        NEXT_PUBLIC_REACT_APP_IMAGE_BASE_URL: process.env.NEXT_PUBLIC_REACT_APP_IMAGE_BASE_URL,
-    },
+      },
+    ]
+  },
+
+  reactStrictMode: true,
+  swcMinify: true,
+
+  i18n: {
+    locales: ['nl', 'en'],
+    defaultLocale: 'nl',
+    localeDetection: false,
+  },
+  images: {
+    minimumCacheTTL: 31536000,
+    domains: [
+      'hni-toi-test-api.lifely.nl',
+      'localhost',
+      'hni-toi-staging.s3.eu-central-1.amazonaws.com',
+      'hni-toi-acceptance.s3.eu-central-1.amazonaws.com',
+      'hni-toi-production.s3.eu-central-1.amazonaws.com',
+      'picsum.photos',
+      'hdl.handle.net',
+    ],
+    deviceSizes: [576, 1024, 1440],
+    formats: ['image/webp'],
+  },
+  output: 'standalone',
+  env: {
+    parsed,
+  },
 }
 
 module.exports = nextTranslate(nextConfig)

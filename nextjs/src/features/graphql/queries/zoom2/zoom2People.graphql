@@ -1,0 +1,16 @@
+query Zoom2People($page: Int!, $pageSize: Int!, $text: String) {
+    zoomLevel2(entityName: People, page: $page, pageSize: $pageSize, text: $text) {
+        page,
+        nodes {
+            title
+			thumbnail
+			id
+        }
+    }
+}
+
+query Zoom2PeopleAmount($text: String) {
+    zoomLevel2Amount(entityName: People, text: $text) {
+        total
+    }
+}

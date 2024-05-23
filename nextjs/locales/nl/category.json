@@ -1,0 +1,16 @@
+{
+  "category": "Categorie",
+  "objects": "Objecten",
+  "archives": "Archieven",
+  "people": "Personen",
+  "publications": "Publicaties",
+  "stories": "Stories",
+
+  "object": "Object",
+  "archive": "Archief",
+  "person": "Persoon",
+  "publication": "Publicatie",
+  "story": "Story",
+  "resultsFor": "resultaten voor",
+  "noResultsFound": "Geen resultaten gevonden"
+}

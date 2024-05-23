@@ -9,8 +9,8 @@
 #import '../fragments/components/SubtitleModule.fragment.graphql'
 #import '../fragments/components/GridModule.fragment.graphql'
 
-query homepage($locale: String) {
-    homepage(locale: $locale) {
+query homepage($locale: String, $publicationState: String = "LIVE") {
+    homepage(locale: $locale, publicationState: $publicationState) {
         data {
             id
             attributes {

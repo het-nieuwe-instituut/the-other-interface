@@ -1,7 +1,6 @@
-#import '../core/moduleLayout.fragment.graphql'
-
 fragment imageModuleFragment on ComponentModulesImage {
     id
+    __typename
     image {
         data {
             attributes {
@@ -11,11 +10,16 @@ fragment imageModuleFragment on ComponentModulesImage {
             }
         }
     }
-    caption
-    alt_text
-    imageModuleLayout {
-        ... on ComponentCoreModuleLayouts {
-            ...componentCoreModuleLayouts
+    story {
+        data {
+            ...StoryWithoutRelationsFragment
         }
     }
+    triplyRecord {
+        data {
+            ...BaseTriplyRecordFragment
+        }
+    }
+    caption
+    alt_text
 }

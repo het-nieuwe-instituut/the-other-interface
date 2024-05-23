@@ -21,6 +21,7 @@ If you use iTerm2, then you can use [iTermocil](https://github.com/TomAnthony/it
 - Install nodejs v16.15.1 (run `nvm use` to automatically use this version if you have nvm installed).
 - Run `npm install` in `./strapi` to install all packages.
 - Run `npm run copyenv` in `./strapi` to generate environment variables.
+- Run `npm run build`.
 - Make sure the database is running. Run `npm run start-services` to start the database.
 - Run `npm run develop` to start Strapi.
 

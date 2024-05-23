@@ -1,3 +1,6 @@
-export const imageBasePath = process.env.NEXT_PUBLIC_REACT_APP_IMAGE_BASE_URL
-    ? process.env.NEXT_PUBLIC_REACT_APP_IMAGE_BASE_URL
-    : ''
+export const imageBasePath = (url?: string) => {
+  if (process.env.parsed.NEXT_PUBLIC_ENV === 'local' && !url?.includes('http')) {
+    return `http://localhost:1337${url}`
+  }
+  return url
+}
