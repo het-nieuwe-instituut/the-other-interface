@@ -22,13 +22,13 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install root dependencies
-        run: npm ci
+        run: npm run install:all
 
       - name: Check styles
         run: npm run format-check
 
-      - name: Install nextjs dependencies
-        run: cd nextjs && npm ci
+      - name: Eslint
+        run: npm run lint
 
-      - name: Run nextjs tests
-        run: cd nextjs && npm run test
+      - name: Test
+        run: npm run test
