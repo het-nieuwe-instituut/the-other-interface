@@ -4,6 +4,7 @@ import initApiServerService from '@/features/shared/utils/initApiServerService'
 import { draftMode } from 'next/headers'
 import { PublicationState } from '@/features/shared/types/enums'
 import { HomepageQuery, LandingpageBySlugQuery } from 'src/generated/graphql'
+import { Locale } from 'src/generated/graphql'
 
 export type HomeOrLadingType =
   | HomepageQuery['homepage']['data']['attributes']
@@ -13,7 +14,7 @@ export type HomeOrLadingType =
 export default async function Page({
   searchParams,
 }: {
-  searchParams: { category: string; lang: string }
+  searchParams: { category: string; lang: Locale }
 }) {
   const { category, lang } = searchParams
   const { isEnabled } = draftMode()

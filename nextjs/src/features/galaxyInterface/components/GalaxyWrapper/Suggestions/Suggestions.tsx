@@ -1,5 +1,4 @@
 import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/SearchFilterBox'
-import { usePresenter } from './usePresenter'
 import { Box } from '@chakra-ui/react'
 import { Filter } from '@/features/shared/hooks/search/useFilters'
 

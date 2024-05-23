@@ -1,16 +1,15 @@
 'use client'
-import { useQuery } from '@tanstack/react-query'
-import initApiClientService from '../../utils/initApiClientService'
 import {
   CATEGORIES_TO_ENTITY_MAPPER,
   CloudCategory,
   SEARCH_CATEGORIES,
   SearchCategory,
 } from '@/features/shared/utils/categories'
-import { useSearchParams } from 'next/navigation'
-import { storyToRecordMapper } from '../../helpers/extractStoryData'
+import { useQuery } from '@tanstack/react-query'
 import { ZOOM2_RECORDS_PER_PAGE } from '../../constants/mainConstants'
-import { StoryEntity } from 'src/generated/graphql'
+import { storyToRecordMapper } from '../../helpers/extractStoryData'
+import initApiClientService from '../../utils/initApiClientService'
+import { useLocale } from '../useLocale'
 
 export function useSearch({
   category,
@@ -24,21 +23,18 @@ export function useSearch({
   enabled?: boolean
 }) {
   const api = initApiClientService()
-  const searchParams = useSearchParams()
-  const lang = searchParams?.get('lang')
+  const locale = useLocale()
 
   const queryFn = async () => {
     if (category === SEARCH_CATEGORIES.stories) {
       const response = await api.searchByStories({
         searchTerm: text || undefined,
-        locale: lang ?? 'nl',
+        locale,
         page,
         pageSize: ZOOM2_RECORDS_PER_PAGE,
       })
       const stories =
-        response?.stories?.data
-          ?.filter(Boolean)
-          .map(story => storyToRecordMapper(story as StoryEntity)) ?? []
+        response?.stories?.data?.filter(Boolean).map(story => storyToRecordMapper(story)) ?? []
       const total = response?.stories?.meta?.pagination?.total
       return { items: stories, total }
     } else {
@@ -47,10 +43,12 @@ export function useSearch({
         text: text || undefined,
         page,
         pageSize: ZOOM2_RECORDS_PER_PAGE,
+        locale,
       })
       const countPromise = api.Zoom2Amount({
         entityName: CATEGORIES_TO_ENTITY_MAPPER[category as CloudCategory],
         text: text || undefined,
+        locale,
       })
 
       const [data, totalData] = await Promise.all([dataPromise, countPromise])
@@ -68,7 +66,7 @@ export function useSearch({
 
   const queryKey =
     category === SEARCH_CATEGORIES.stories
-      ? ['searchByStories', category, text, page, lang]
+      ? ['searchByStories', category, text, page, locale]
       : ['search', category, text, page]
 
   return useQuery(queryKey, queryFn, {
