@@ -1,16 +1,19 @@
 import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
 
+import { useRecordDetailQuery } from '@/features/record/hooks/useRecordDetailQuery'
+import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useZoomHoverRecordResultQuery } from '@/features/shared/hooks/queries/useZoomHoverRecordResultQuery'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { useLocale } from '@/features/shared/hooks/useLocale'
 import {
   ReadMoreTooltip,
   ReadMoreTooltipProps,
 } from '@/features/ui/components/tooltip/ReadMoreTooltip'
 import { cn } from '@/features/ui/utils/cn'
+import { useRouter } from 'next/router'
 import { PositionedRecord } from '../types'
 import { RecordText } from './RecordText'
 import { useCalculateLine } from './useCalculateLine'
-import { usePresenter } from './usePresenter'
 
 type Props = {
   record: PositionedRecord
@@ -26,8 +29,16 @@ export const Record: React.FC<Props> = ({
   tooltipPlace = 'bottom',
 }) => {
   const { id, category, position, grid } = record
-  const { recordDetails, isLoading, handleClick } = usePresenter(id, category)
+
+  const router = useRouter()
+  const lang = useLocale()
+
   // TODO: HNIT-1833 - add in loading and error handling
+  const { data: recordDetails, isLoading } = useRecordDetailQuery({
+    type: category,
+    id,
+    options: { refetchOnWindowFocus: false },
+  })
   const {
     data,
     isError,
@@ -101,4 +112,10 @@ export const Record: React.FC<Props> = ({
       </div>
     </div>
   )
+
+  function handleClick() {
+    let url = `/detail/${category}/${id}`
+    url = addLocaleToUrl(url, lang)
+    router.push(url)
+  }
 }

@@ -1,11 +1,10 @@
-import { GridItem, Text, Flex } from '@chakra-ui/react'
+import { useRecordDetailQuery } from '@/features/record/hooks/useRecordDetailQuery'
 import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
-import { useParams } from 'next/navigation'
 import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Category } from '@/features/shared/utils/categories'
 import { toSingularCategory } from '@/features/shared/utils/toSingularCategory'
-import { useRecordDetailQuery } from '@/features/record/hooks/useRecordDetailQuery'
-import { notFound } from 'next/navigation'
+import { Flex, GridItem, Text } from '@chakra-ui/react'
+import { useParams } from 'next/navigation'
 
 interface Props {
   gridRow: string
@@ -25,7 +24,7 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
   })
 
   if (!isLoading && !record) {
-    notFound()
+    return null
   }
 
   return (
