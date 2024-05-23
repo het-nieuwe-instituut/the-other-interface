@@ -68,7 +68,9 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
     if (isError) {
       return (
         <div className="flex h-full items-center justify-center">
-          <p className={TypographyVariants({ times: 'md' })}>{t('errorLoadingDetail')}</p>
+          <p className={`${TypographyVariants({ times: 'md' })} text-black-100`}>
+            {t('errorLoadingDetail')}
+          </p>
         </div>
       )
     }
