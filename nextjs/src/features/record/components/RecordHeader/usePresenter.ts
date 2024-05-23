@@ -15,7 +15,7 @@ export const usePresenter = () => {
   const { data: record, isLoading } = useRecordDetailQuery({
     type: category,
     id,
-    queryOptions: { refetchOnWindowFocus: false, suspense: true },
+    options: { refetchOnWindowFocus: false, suspense: true },
   })
 
   return {
