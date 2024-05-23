@@ -3,8 +3,6 @@ import { EntityNames } from '../util/entityNames.type'
 import { PeopleZoomLevel3DetailType } from '../people/people.type'
 import { IsString } from 'class-validator'
 import { Locale } from '../util/locale.type'
-// import { PeopleZoomLevel3DetailType } from '../people/people.type'
-// import { EntityNames } from '../util/entityNames.type'
 
 @ObjectType()
 export class ObjectsZoomLevel3DetailType {
