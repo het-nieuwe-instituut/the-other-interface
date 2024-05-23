@@ -33,5 +33,6 @@ export function useStoryByIdQuery(id: string) {
     queryKey: ['story-by-id', id, lang, isDraftMode],
     queryFn,
     refetchOnWindowFocus: false,
+    suspense: true,
   })
 }

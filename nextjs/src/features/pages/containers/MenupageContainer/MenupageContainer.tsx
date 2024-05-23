@@ -18,10 +18,6 @@ export const MenupageContainer = (props: Props) => {
   //     return <p>{error.message}</p>
   // }
 
-  // if (!data?.menupages?.data.length) {
-  //     return <p>{t('somethingWentWrong')}</p>
-  // }
-
   return (
     <Box minHeight={'60px'} width={'100%'} px={{ xl: 6, base: 0 }} background={'pinkAlpha.100'}>
       <Box display="block" position={'relative'}>

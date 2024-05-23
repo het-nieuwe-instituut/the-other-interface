@@ -25,30 +25,40 @@ export type Zoom3Record =
   | PublicationZoomLevel3DetailType
   | null
 
-export async function getZoom3RecordTask(type: Category, payload: Payload, api: Sdk) {
-  try {
-    if (isStoryCategory(type)) {
-      const detail = await api?.storyById(payload)
-      const story = detail.storyByLocale.data
-      if (!story) return null
-      const record = extractStoryData(story)
-      return record
-    }
-
-    const configByType = getZoom3Queries(type, api)
-
-    const data = await configByType?.zoomLevelQuery?.(payload)
-    const item = configByType?.accesor?.(data)
-
-    // TODO this might cause console errors 'Cannot return null for non-nullable field'
-    if (!item?.thumbnail && !item?.title) return null
-
-    return {
-      ...item,
-      description: item?.description ?? '',
-      locale: payload.locale,
-    }
-  } catch (e) {
-    console.log(e, 'Error accured in zoom level 3 task')
+export class Zoom3TaskError extends Error {
+  _tag = 'RecordDetailDataError' as const
+  constructor() {
+    super('Could not fetch record detail data')
   }
+}
+
+export async function getZoom3RecordTask(
+  type: Category,
+  payload: Payload,
+  api: Sdk,
+  throwOnError?: boolean
+) {
+  if (isStoryCategory(type)) {
+    const detail = await api?.storyById(payload)
+    const story = detail.storyByLocale.data
+    if (!story && throwOnError) throw new Zoom3TaskError()
+
+    if (!story) return null
+
+    const record = extractStoryData(story)
+    return record
+  }
+
+  const configByType = getZoom3Queries(type, api)
+
+  const data = await configByType?.zoomLevelQuery?.(payload)
+
+  const item = configByType?.accesor?.(data)
+
+  const invalidItem = !item?.id || (item?.thumbnail && !item?.title)
+  if (!invalidItem && throwOnError) throw new Zoom3TaskError()
+
+  if (!item?.id) return null
+
+  return item
 }

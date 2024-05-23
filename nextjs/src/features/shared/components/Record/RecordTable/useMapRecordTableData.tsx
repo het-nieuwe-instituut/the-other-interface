@@ -28,7 +28,12 @@ export const useMapRecordTableData = (data: DataType[] | undefined, category: Ca
   if (!data) return null
 
   if (category === CATEGORIES.publications) {
-    if (data[0] === undefined || data[0].total === '0') return null
+    if (
+      data[0] === undefined ||
+      data[0].total === '0' ||
+      data[0].publicationRecordRelations?.length === 0
+    )
+      return null
     const mapData = data?.flatMap((i, index) => {
       if (i && i.publicationRecordRelations && i.publicationRecordRelations?.length > 0) {
         return i.publicationRecordRelations.map(record => {
@@ -60,7 +65,12 @@ export const useMapRecordTableData = (data: DataType[] | undefined, category: Ca
   }
 
   if (category === CATEGORIES.people) {
-    if (data[0] === undefined || data[0].total === '0') return null
+    if (
+      data[0] === undefined ||
+      data[0].total === '0' ||
+      data[0]?.peopleRecordRelations?.length === 0
+    )
+      return null
     const mapData = data?.flatMap((item, index) => {
       if (item && item.peopleRecordRelations && item.peopleRecordRelations?.length > 0) {
         return item.peopleRecordRelations.map(record => {
@@ -93,7 +103,12 @@ export const useMapRecordTableData = (data: DataType[] | undefined, category: Ca
   }
 
   if (category === CATEGORIES.objects) {
-    if (data[0] === undefined || data[0].total === '0') return null
+    if (
+      data[0] === undefined ||
+      data[0].total === '0' ||
+      data[0].objectRecordRelations?.length === 0
+    )
+      return null
     const mapData = data?.flatMap((item, index) => {
       if (item && item.objectRecordRelations && item.objectRecordRelations?.length > 0) {
         return item.objectRecordRelations.map(record => {
@@ -126,7 +141,12 @@ export const useMapRecordTableData = (data: DataType[] | undefined, category: Ca
   }
 
   if (category === CATEGORIES.archives) {
-    if (data[0] === undefined || data[0].total === '0') return null
+    if (
+      data[0] === undefined ||
+      data[0].total === '0' ||
+      data[0].archivesRecordRelations?.length === 0
+    )
+      return null
     const mapData = data?.flatMap((item, index) => {
       if (item && item.archivesRecordRelations && item.archivesRecordRelations?.length > 0) {
         return item.archivesRecordRelations.map(record => {

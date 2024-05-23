@@ -11,7 +11,7 @@ import { PositionedRecord } from '../types'
 import { RecordText } from './RecordText'
 import { useCalculateLine } from './useCalculateLine'
 import { useRecords } from './useRecords'
-import { Loader } from '@/features/galaxyInterface/components/Loader/Loader'
+import { Loader } from '@/features/shared/components/Loading/Loading'
 
 type Props = {
   record: PositionedRecord

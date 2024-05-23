@@ -1,12 +1,12 @@
 import { useState, useCallback, useEffect } from 'react'
 import { PositionedStory } from '../types'
-import { StoryEntity } from 'src/generated/graphql'
 import { useLocale } from '@/features/shared/hooks/useLocale'
+import { StoriesData } from '../../hooks/useThemes'
 
 export const useImageLoader = (
   positionedStories: PositionedStory[],
   page: number,
-  stories: StoryEntity[]
+  stories: StoriesData
 ) => {
   const [loadedImages, setLoadedImages] = useState(new Set())
   const lang = useLocale()

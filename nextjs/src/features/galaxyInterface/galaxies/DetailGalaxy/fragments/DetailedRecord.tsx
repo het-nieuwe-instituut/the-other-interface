@@ -1,13 +1,13 @@
 import { GridItem, Text, Flex } from '@chakra-ui/react'
-import { Loader } from '../../../components/Loader/Loader'
 import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
 import { useParams } from 'next/navigation'
 import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Category } from '@/features/shared/utils/categories'
 import { toSingularCategory } from '@/features/shared/utils/toSingularCategory'
-import { useRecordDetail } from '@/features/record/hooks/useRecordDetail'
+import { useRecordDetailQuery } from '@/features/record/hooks/useRecordDetailQuery'
 import { notFound } from 'next/navigation'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
+import { Loader } from '@/features/shared/components/Loading/Loading'
 
 interface Props {
   gridRow: string
@@ -20,7 +20,15 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
   const category = params?.category as Category
   const id = params?.id as string
 
-  const { data: record, isLoading, isError } = useRecordDetail(category, id)
+  const {
+    data: record,
+    isLoading,
+    isError,
+  } = useRecordDetailQuery({
+    type: category,
+    id,
+    options: { refetchOnWindowFocus: false },
+  })
 
   if (!isLoading && !record) {
     notFound()

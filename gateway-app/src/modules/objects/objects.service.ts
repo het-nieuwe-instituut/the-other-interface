@@ -136,7 +136,12 @@ export class ObjectsService {
       { id, type, language: locale }
     )
 
-    const output = TriplyUtils.sanitizeObjectArray(result.data, 'idRelation', 'relation')
+    const output = TriplyUtils.sanitizeObjectArray(
+      result.data,
+      'idRelation',
+      'relation',
+      'thumbnail'
+    )
     return output
   }
 
@@ -169,7 +174,6 @@ export class ObjectsService {
       undefined,
       { id, language: locale }
     )
-    // TODO: HNIT-1833 - throw on errors (no data or multiple resutls that don't match)
 
     if (results.data.length === 0) {
       return {}

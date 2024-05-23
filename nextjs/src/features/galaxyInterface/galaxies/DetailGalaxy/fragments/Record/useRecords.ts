@@ -1,12 +1,16 @@
 import { useRouter } from 'next/navigation'
 
-import { useRecordDetail } from '@/features/record/hooks/useRecordDetail'
+import { useRecordDetailQuery } from '@/features/record/hooks/useRecordDetailQuery'
 import { Category } from '@/features/shared/utils/categories'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useLocale } from '@/features/shared/hooks/useLocale'
 
-export const useRecords = (id: string, category: Category) => {
-  const { data, isLoading, isError } = useRecordDetail(category, id)
+export const usePresenter = (id: string, category: Category) => {
+  const { data, isLoading, isError } = useRecordDetailQuery({
+    type: category,
+    id,
+    options: { refetchOnWindowFocus: false },
+  })
   const router = useRouter()
   const lang = useLocale()
 

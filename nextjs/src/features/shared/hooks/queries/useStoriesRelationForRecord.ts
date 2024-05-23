@@ -12,6 +12,7 @@ export const useStoriesRelationForRecord = (type: EntityNames, id: string) => {
   return useQuery({
     queryKey: ['stories-relation-for-record', id, type, lang],
     queryFn,
+    suspense: true,
     refetchOnWindowFocus: false,
   })
 }

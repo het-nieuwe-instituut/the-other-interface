@@ -1,8 +1,8 @@
 'use client'
-import { Box, Link, Text } from '@chakra-ui/react'
-import { usePresenter } from './usePresenter'
-import { Loader } from '@/features/galaxyInterface/components/Loader/Loader'
+import { ThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
 import { CATEGORIES } from '@/features/shared/utils/categories'
+import { Link, Text } from '@chakra-ui/react'
+import { usePresenter } from './usePresenter'
 
 export const StoryMeta: React.FC = () => {
   const {
@@ -21,14 +21,14 @@ export const StoryMeta: React.FC = () => {
   } = usePresenter()
 
   if (isLoading) {
-    return <Loader />
+    return <ThemedSpinner />
   }
 
   if (!story) return null
 
   return (
-    <Box>
-      <Box marginBottom={'md'}>
+    <div>
+      <div className="mb-5">
         {publicationDateFormatted && (
           <Text textStyle={'socialLarge.lg'} fontWeight={700}>
             {storiesT.t('published', {
@@ -44,14 +44,14 @@ export const StoryMeta: React.FC = () => {
             })}
           </Text>
         )}
-      </Box>
+      </div>
       {story.shortDescription && (
         <Text textStyle={'socialLarge.lg'} marginBottom={'md'}>
           {story.shortDescription}
         </Text>
       )}
       {parentRelation && parentRelation?.data?.id && (
-        <Box marginBottom={'md'}>
+        <div className="mb-5">
           <Text textStyle={'socialLarge.lg'} fontWeight={700}>
             {storiesT.t('parentStory')}
           </Text>
@@ -64,10 +64,10 @@ export const StoryMeta: React.FC = () => {
               {parentRelation?.data?.attributes?.title}
             </Link>
           </Text>
-        </Box>
+        </div>
       )}
       {childrenRelation && childrenRelation?.data && childrenRelation.data.length > 0 && (
-        <Box marginBottom={'md'}>
+        <div className="mb-5">
           <Text textStyle={'socialLarge.lg'} fontWeight={700}>
             {storiesT.t('subStories')}
           </Text>
@@ -87,7 +87,7 @@ export const StoryMeta: React.FC = () => {
               </Text>
             )
           })}
-        </Box>
+        </div>
       )}
       {/* We decided to remove this for now, but still there is a possiblity that after test we will add it back, so we will keep it here for now. */}
       {/* {siblingsRelation && siblingsRelation.length > 0 && (
@@ -114,22 +114,22 @@ export const StoryMeta: React.FC = () => {
         </Box>
       )} */}
       {themes && (
-        <Box marginBottom={'md'}>
+        <div className="mb-5">
           <Text textStyle={'socialLarge.lg'} fontWeight={700}>
             {storiesT.t('themes')}
           </Text>
           <Text textStyle={'socialLarge.lg'} marginBottom={'md'}>
             {themes}
           </Text>
-        </Box>
+        </div>
       )}
       {!!linkedPeopleRecords.length && (
-        <Box marginBottom={'md'}>
+        <div className="mb-5">
           <Text textStyle={'socialLarge.lg'} fontWeight={700} mb={1}>
             {storiesT.t('people')}
           </Text>
 
-          <Box display={'flex'} flexDirection={'row'} flexWrap={'wrap'} gap={'2px'}>
+          <div className="flex flex-row flex-wrap gap-[2px]">
             {linkedPeopleRecords.map((person, index, array) => {
               const hasItemAfter = array.length - 1 !== index
 
@@ -142,28 +142,28 @@ export const StoryMeta: React.FC = () => {
                 </Text>
               )
             })}
-          </Box>
-        </Box>
+          </div>
+        </div>
       )}
       {locations && (
-        <Box marginBottom={'md'}>
+        <div className="mb-5">
           <Text textStyle={'socialLarge.lg'} fontWeight={700}>
             {storiesT.t('locations')}
           </Text>
           <Text textStyle={'socialLarge.lg'} marginBottom={'md'}>
             {locations}
           </Text>
-        </Box>
+        </div>
       )}
       {timeframe && (
-        <Box marginBottom={'md'}>
+        <div className="mb-5">
           <Text textStyle={'socialLarge.lg'} fontWeight={700}>
             {storiesT.t('time')}
           </Text>
           <Text textStyle={'socialLarge.lg'} marginBottom={'md'}>
             {timeframe}
           </Text>
-        </Box>
+        </div>
       )}
 
       {/* Should be hidden for now */}
@@ -184,6 +184,6 @@ export const StoryMeta: React.FC = () => {
           />
         </Box>
       )} */}
-    </Box>
+    </div>
   )
 }
