@@ -181,7 +181,12 @@ export class PeopleService {
       { id, type, language: locale }
     )
 
-    const output = TriplyUtils.sanitizeObjectArray(result.data, 'idRelation', 'relation')
+    const output = TriplyUtils.sanitizeObjectArray(
+      result.data,
+      'idRelation',
+      'relation',
+      'thumbnail'
+    )
     return output
   }
 
