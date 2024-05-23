@@ -136,7 +136,12 @@ export class ObjectsService {
       { id, type, language: locale }
     )
 
-    const output = TriplyUtils.sanitizeObjectArray(result.data, 'idRelation', 'relation')
+    const output = TriplyUtils.sanitizeObjectArray(
+      result.data,
+      'idRelation',
+      'relation',
+      'thumbnail'
+    )
     return output
   }
 
