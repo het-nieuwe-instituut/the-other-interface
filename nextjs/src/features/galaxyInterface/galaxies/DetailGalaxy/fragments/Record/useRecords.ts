@@ -5,8 +5,8 @@ import { Category } from '@/features/shared/utils/categories'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useLocale } from '@/features/shared/hooks/useLocale'
 
-export const usePresenter = (id: string, category: Category) => {
-  const { data, isLoading } = useRecordDetailQuery({
+export const useRecords = (id: string, category: Category) => {
+  const { data, isLoading, isError } = useRecordDetailQuery({
     type: category,
     id,
     options: { refetchOnWindowFocus: false },
@@ -23,6 +23,7 @@ export const usePresenter = (id: string, category: Category) => {
   return {
     recordDetails: data,
     isLoading,
+    isError,
     handleClick,
   }
 }
