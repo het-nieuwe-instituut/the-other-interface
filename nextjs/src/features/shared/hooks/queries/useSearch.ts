@@ -1,15 +1,14 @@
 'use client'
-import { useQuery } from '@tanstack/react-query'
-import initApiClientService from '../../utils/initApiClientService'
 import {
   CATEGORIES_TO_ENTITY_MAPPER,
   CloudCategory,
   SEARCH_CATEGORIES,
   SearchCategory,
 } from '@/features/shared/utils/categories'
-import { storyToRecordMapper } from '../../helpers/extractStoryData'
+import { useQuery } from '@tanstack/react-query'
 import { ZOOM2_RECORDS_PER_PAGE } from '../../constants/mainConstants'
-import { StoryEntity } from 'src/generated/graphql'
+import { storyToRecordMapper } from '../../helpers/extractStoryData'
+import initApiClientService from '../../utils/initApiClientService'
 import { useLocale } from '../useLocale'
 
 export function useSearch({
@@ -35,9 +34,7 @@ export function useSearch({
         pageSize: ZOOM2_RECORDS_PER_PAGE,
       })
       const stories =
-        response?.stories?.data
-          ?.filter(Boolean)
-          .map(story => storyToRecordMapper(story)) ?? []
+        response?.stories?.data?.filter(Boolean).map(story => storyToRecordMapper(story)) ?? []
       const total = response?.stories?.meta?.pagination?.total
       return { items: stories, total }
     } else {

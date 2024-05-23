@@ -2,17 +2,20 @@ import { RecordType } from '@/features/galaxyInterface/galaxies/CategoryGalaxy/f
 import { imageBasePath } from '@/features/modules/modulesConstants'
 
 import { SearchByStoriesQuery, StoryByIdQuery } from 'src/generated/graphql'
+import { DeepPartial } from '../types/helpers'
 
 type StoryById = NonNullable<StoryByIdQuery['storyByLocale']['data']>
 type SearchStory = NonNullable<SearchByStoriesQuery['stories']['data']>[0]
 
-const findImageUrl = (components: NonNullable<StoryById['attributes']>['components']): string => {
+const findImageUrl = (
+  components: DeepPartial<NonNullable<StoryById['attributes']>['components']>
+): string => {
   const imageComponent = components?.find(
-    component => component.__typename === 'ComponentModulesImage'
+    component => component?.__typename === 'ComponentModulesImage'
   )
 
   if (imageComponent && 'image' in imageComponent) {
-    const url = imageComponent?.image.data?.attributes?.url ?? ''
+    const url = imageComponent?.image?.data?.attributes?.url ?? ''
 
     return imageBasePath(url) ?? ''
   }
