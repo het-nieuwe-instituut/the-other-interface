@@ -1,19 +1,19 @@
-import { Box, Flex, Grid } from '@chakra-ui/react'
+import { Box, Flex, Grid, keyframes } from '@chakra-ui/react'
 
 import { Story } from '../Story'
 import { usePresenter } from './usePresenter'
-import { StoryEntity } from 'src/generated/graphql'
 import { useDrawLines } from './useDrawLines'
 import { Loader } from '@/features/galaxyInterface/components/Loader/Loader'
 import { useImageLoader } from './useImageLoader'
+import { StoriesData } from '../../hooks/useThemes'
 
 type Props = {
-  stories: StoryEntity[]
-  nextStories: StoryEntity[]
+  stories: StoriesData
+  nextStories: StoriesData
 }
 
-// const currentPageFadeIn = keyframes({ from: { opacity: 0 }, to: { opacity: 1 } })
-// const nextPageFadeIn = keyframes({ from: { opacity: 0 }, to: { opacity: 0.2 } })
+const currentPageFadeIn = keyframes({ from: { opacity: 0 }, to: { opacity: 1 } })
+const nextPageFadeIn = keyframes({ from: { opacity: 0 }, to: { opacity: 0.2 } })
 
 export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
   const {
@@ -21,6 +21,8 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
     positionedNextStories,
     originalTemplateIndex,
     pageNumber: currentPage,
+    isCurrentStoriesEmpty,
+    isNextStoriesEmpty,
   } = usePresenter(stories, nextStories)
 
   const { handleImageLoaded, allImagesLoaded } = useImageLoader(
@@ -48,7 +50,7 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
         templateRows="repeat(2, 1fr)"
         gap="20px"
         css={{
-          // animation: isCurrentStoriesEmpty ? 'none' : `${currentPageFadeIn} 200ms linear`,
+          animation: isCurrentStoriesEmpty ? 'none' : `${currentPageFadeIn} 200ms linear`,
           zIndex: 20,
           visibility: allImagesLoaded ? 'visible' : 'hidden',
         }}
@@ -85,7 +87,7 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
         templateRows="repeat(2, 1fr)"
         gap="20px"
         css={{
-          // animation: isNextStoriesEmpty ? 'none' : `${nextPageFadeIn} 300ms linear`,
+          animation: isNextStoriesEmpty ? 'none' : `${nextPageFadeIn} 300ms linear`,
           zIndex: 10,
           opacity: 0.2,
           filter: 'blur(6px)',

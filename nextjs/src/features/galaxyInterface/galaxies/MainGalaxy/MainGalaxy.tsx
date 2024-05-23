@@ -1,13 +1,14 @@
 'use client'
-import { Box } from '@chakra-ui/react'
-
 import { Cloud, CategoryCloud, Stories } from './fragments'
 import { ThemeTitle } from '../../components/ThemeTitle/ThemeTitle'
-import { Pagination, StoryEntity } from 'src/generated/graphql'
 import { GalaxyFooter } from '../../components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 import { GalaxyPagination } from '../../components/GalaxyWrapper/GalaxyPagination/GalaxyPagination'
 import { usePresenter } from './usePresenter'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { Loader } from '../../components/Loader/Loader'
+import { useThemesQuery } from './hooks/useThemes'
+import { useSearchParams } from 'next/navigation'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
 
 const categoryClouds: CategoryCloud[] = [
   {
@@ -36,24 +37,54 @@ const categoryClouds: CategoryCloud[] = [
   },
 ]
 
-interface Props {
-  storyTitle?: string
-  stories: StoryEntity[]
-  nextStories: StoryEntity[]
-  pagination?: Pagination
-}
+export const MainGalaxy = () => {
+  const searchParams = useSearchParams()
+  const currentPage = parseInt(searchParams?.get('page') ?? '1')
 
-export const MainGalaxy: React.FC<Props> = ({ storyTitle, stories, pagination, nextStories }) => {
+  const {
+    storyTitle,
+    stories,
+    pagination,
+    isLoading: isMainLoading,
+    isError,
+  } = useThemesQuery(currentPage)
+  const { stories: nextStories, isLoading: isNextLoading } = useThemesQuery(currentPage + 1)
   const { increasePageNumber, decreasePageNumber } = usePresenter(pagination?.pageCount || 0)
   const { t } = useTypeSafeTranslation('navigation')
+  const isLoading = isMainLoading || isNextLoading
+
+  const renderMainContent = () => {
+    if (isError) {
+      return (
+        <div className="flex h-full items-center justify-center">
+          <p className={TypographyVariants({ times: 'md' })}>{t('errorLoadingThemes')}</p>
+        </div>
+      )
+    }
+
+    if (isLoading) {
+      return (
+        <div className="flex h-full  items-center justify-center">
+          <Loader />
+        </div>
+      )
+    }
+
+    return (
+      <>
+        <Stories stories={stories} nextStories={nextStories} />
+        <ThemeTitle title={storyTitle} />
+      </>
+    )
+  }
 
   return (
-    <Box position="relative" width="100vw" height="100vh">
+    <div className="relative h-screen w-screen">
       {categoryClouds.map(cloud => (
         <Cloud key={cloud.title} cloud={cloud} />
       ))}
-      <Stories stories={stories} nextStories={nextStories} />
-      <ThemeTitle title={storyTitle} />
+
+      {renderMainContent()}
 
       <GalaxyFooter
         galaxyPagination={
@@ -68,6 +99,6 @@ export const MainGalaxy: React.FC<Props> = ({ storyTitle, stories, pagination, n
           />
         }
       />
-    </Box>
+    </div>
   )
 }
