@@ -22,7 +22,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        run: npm run install:nextjs && npm run install:gateway
+        run: npm ci && npm run install:nextjs && npm run install:gateway
 
       - name: Check styles
         run: npm run format-check
