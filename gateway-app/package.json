@@ -21,7 +21,8 @@
     "copyenv": "./.bin/init-env",
     "prepare": "cd ../ && npx husky install ./gateway-app/.husky",
     "graphql-codegen": "graphql-codegen --config codegen.yml",
-    "format": "prettier --config ../prettier.config.js --write \"src/**/*.ts\" \"test/**/*.ts\""
+    "format": "prettier --config ../prettier.config.js --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "type-check": "tsc --noEmit --skipLibCheck"
   },
   "dependencies": {
     "@apollo/federation": "^0.36.1",

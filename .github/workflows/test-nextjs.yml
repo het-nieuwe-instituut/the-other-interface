@@ -1,4 +1,4 @@
-name: Tests Client
+name: Code quality and tests
 
 on:
   push:
@@ -21,7 +21,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Install root dependencies
+      - name: Install dependencies
         run: npm run install:all
 
       - name: Check styles
