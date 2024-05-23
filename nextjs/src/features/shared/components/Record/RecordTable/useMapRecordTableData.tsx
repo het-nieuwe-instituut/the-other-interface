@@ -141,7 +141,6 @@ export const useMapRecordTableData = (data: DataType[] | undefined, category: Ca
   }
 
   if (category === CATEGORIES.archives) {
-    console.log(data)
     if (
       data[0] === undefined ||
       data[0].total === '0' ||
