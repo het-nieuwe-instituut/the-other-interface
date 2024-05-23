@@ -7,6 +7,7 @@ import { Category } from '@/features/shared/utils/categories'
 import { toSingularCategory } from '@/features/shared/utils/toSingularCategory'
 import { useRecordDetail } from '@/features/record/hooks/useRecordDetail'
 import { notFound } from 'next/navigation'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
 
 interface Props {
   gridRow: string
@@ -50,17 +51,17 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
   function renderContent() {
     if (isLoading) {
       return (
-        <Flex justify="center" align="center" height="100%">
+        <div className="h-full items-center justify-center">
           <Loader />
-        </Flex>
+        </div>
       )
     }
 
     if (isError) {
       return (
-        <Flex justify="center" align="center" height="100%">
-          <p className="times-large text-xl text-black-100">{t('errorLoadingDetail')}</p>
-        </Flex>
+        <div className="flex h-full items-center justify-center">
+          <p className={TypographyVariants({ times: 'md' })}>{t('errorLoadingDetail')}</p>
+        </div>
       )
     }
 

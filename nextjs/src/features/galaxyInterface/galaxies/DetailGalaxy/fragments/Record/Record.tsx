@@ -11,7 +11,6 @@ import { PositionedRecord } from '../types'
 import { RecordText } from './RecordText'
 import { useCalculateLine } from './useCalculateLine'
 import { useRecords } from './useRecords'
-import { Flex } from '@chakra-ui/react'
 import { Loader } from '@/features/galaxyInterface/components/Loader/Loader'
 
 type Props = {
@@ -39,11 +38,11 @@ export const Record: React.FC<Props> = ({
   const { coordinates, ref } = useCalculateLine()
   const { t } = useTypeSafeTranslation('category')
 
-  if (isLoading) {
+  if (isLoading && tabIndex === 0) {
     return (
-      <Flex justify="center" align="center" height="100%">
+      <div className="h-full items-center justify-center">
         <Loader />
-      </Flex>
+      </div>
     )
   }
 
