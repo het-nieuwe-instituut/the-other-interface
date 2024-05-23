@@ -21,7 +21,7 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
   const { data: record, isLoading } = useRecordDetailQuery({
     type: category,
     id,
-    queryOptions: { refetchOnWindowFocus: false },
+    options: { refetchOnWindowFocus: false },
   })
 
   if (!isLoading && !record) {

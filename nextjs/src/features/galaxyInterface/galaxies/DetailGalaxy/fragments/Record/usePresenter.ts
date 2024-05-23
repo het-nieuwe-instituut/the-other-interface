@@ -9,7 +9,7 @@ export const usePresenter = (id: string, category: Category) => {
   const { data, isLoading } = useRecordDetailQuery({
     type: category,
     id,
-    queryOptions: { refetchOnWindowFocus: false },
+    options: { refetchOnWindowFocus: false },
   })
   const router = useRouter()
   const lang = useLocale()
