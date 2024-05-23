@@ -10,6 +10,7 @@ import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Loader } from '../../components/Loader/Loader'
 import { useThemesQuery } from './hooks/useThemes'
 import { useSearchParams } from 'next/navigation'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
 
 const categoryClouds: CategoryCloud[] = [
   {
@@ -55,10 +56,10 @@ export const MainGalaxy = () => {
   const isLoading = isMainLoading || isNextLoading
 
   const renderMainContent = () => {
-    if (isError) {
+    if (!isError) {
       return (
         <Flex justify="center" align="center" height="100%">
-          <p className="text-black.100 times-large text-xl">{t('errorLoadingThemes')}</p>
+          <p className={TypographyVariants({ times: 'md' })}>{t('errorLoadingThemes')}</p>
         </Flex>
       )
     }
