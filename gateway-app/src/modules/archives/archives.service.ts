@@ -144,7 +144,12 @@ export class ArchivesService {
       { page: paginationArgs.page ?? 1, pageSize: paginationArgs.pageSize ?? 5 },
       { id, type, language: locale }
     )
-    const output = TriplyUtils.sanitizeObjectArray(result.data, 'relation', 'idRelation')
+    const output = TriplyUtils.sanitizeObjectArray(
+      result.data,
+      'relation',
+      'idRelation',
+      'thumbnail'
+    )
     return output
   }
 
