@@ -1,22 +1,22 @@
-import { Category, isStoryCategory } from '@/features/shared/utils/categories'
-import { getZoom3Queries } from './zoom3Config'
-import {
-  Sdk,
-  StoryByIdQuery,
-  StoryEntity,
-  PeopleZoomLevel3DetailType,
-  ArchiveZoomLevel3DetailType,
-  ObjectsZoomLevel3DetailType,
-  PublicationZoomLevel3DetailType,
-} from 'src/generated/graphql'
-import { PublicationState } from '@/features/shared/types/enums'
 import { extractStoryData } from '@/features/shared/helpers/extractStoryData'
+import { PublicationState } from '@/features/shared/types/enums'
+import { Category, isStoryCategory } from '@/features/shared/utils/categories'
+import {
+  ArchiveZoomLevel3DetailType,
+  Locale,
+  ObjectsZoomLevel3DetailType,
+  PeopleZoomLevel3DetailType,
+  PublicationZoomLevel3DetailType,
+  Sdk,
+} from 'src/generated/graphql'
+import { getZoom3Queries } from './zoom3Config'
 
 type Payload =
   | {
       id: string
+      locale: Locale
     }
-  | { locale?: string | null; publicationState: PublicationState; id: string }
+  | { locale: Locale; publicationState: PublicationState; id: string }
 
 export type Zoom3Record =
   | PeopleZoomLevel3DetailType
@@ -29,8 +29,9 @@ export async function getZoom3RecordTask(type: Category, payload: Payload, api: 
   try {
     if (isStoryCategory(type)) {
       const detail = await api?.storyById(payload)
-      const story = (detail as StoryByIdQuery)?.storyByLocale?.data
-      const record = extractStoryData(story as StoryEntity)
+      const story = detail.storyByLocale.data
+      if (!story) return null
+      const record = extractStoryData(story)
       return record
     }
 
@@ -45,7 +46,7 @@ export async function getZoom3RecordTask(type: Category, payload: Payload, api: 
     return {
       ...item,
       description: item?.description ?? '',
-      locale: 'nl',
+      locale: payload.locale,
     }
   } catch (e) {
     console.log(e, 'Error accured in zoom level 3 task')

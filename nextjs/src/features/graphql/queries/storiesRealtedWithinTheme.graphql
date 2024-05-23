@@ -1,33 +1,27 @@
-query storiesRealtedWithinTheme(
-   $id: String!
-   $locale: String
-) {
-    storiesRealtedWithinTheme(
-        id: $id
-        locale: $locale
-    ) {
-        type
-        total
-        stories {
-            id
-            __typename
-            attributes {
-                title
-                components {
-                    ... on ComponentModulesImage {
-                        ...imageModuleFragment
-                    }
-                }
-                author {
-                    data {
-                        attributes {
-                            firstName
-                            lastName
-                            insertion
-                        }
-                    }
-                }
-            }
+query storiesRealtedWithinTheme($id: String!, $locale: Locale!) {
+  storiesRealtedWithinTheme(id: $id, locale: $locale) {
+    type
+    total
+    stories {
+      id
+      __typename
+      attributes {
+        title
+        components {
+          ... on ComponentModulesImage {
+            ...imageModuleFragment
+          }
         }
-    }   
+        author {
+          data {
+            attributes {
+              firstName
+              lastName
+              insertion
+            }
+          }
+        }
+      }
+    }
+  }
 }

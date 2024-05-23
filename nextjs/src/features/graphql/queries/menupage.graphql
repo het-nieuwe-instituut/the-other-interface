@@ -7,38 +7,42 @@
 #import '../fragments/components/ButtonsModule.fragment.graphql'
 #import '../fragments/components/GridModule.fragment.graphql'
 
-query menupageBySlug($locale: String, $slug: String!, $publicationState: String = "LIVE") {
-    menupages(locale: $locale, filters: { slug: { eq: $slug } }, publicationState: $publicationState) {
-        data {
-            id
-            attributes {
-                components {
-                    ... on ComponentModulesTextModule {
-                        ...textModuleFragment
-                    }
-                    ... on ComponentModulesImage {
-                        ...imageModuleFragment
-                    }
-                    ... on ComponentModulesPullquote {
-                        ...pullquoteModuleFragment
-                    }
-                    ... on ComponentModulesTitleModule {
-                        ...titleModuleFragment
-                    }
-                    ... on ComponentModulesImageCarousel {
-                        ...imageCarouselModuleFragment
-                    }
-                    ... on ComponentModulesButtonsModule {
-                        ...buttonsModuleFragment
-                    }
-                    ... on ComponentModulesSubtitle {
-                        ...subtitleModuleFragment
-                    }
-                    ... on ComponentModulesGridModule {
-                        ...gridModuleFragment
-                    }
-                }
-            }
+query menupageBySlug($locale: Locale!, $slug: String!, $publicationState: String = "LIVE") {
+  menupages(
+    locale: $locale
+    filters: { slug: { eq: $slug } }
+    publicationState: $publicationState
+  ) {
+    data {
+      id
+      attributes {
+        components {
+          ... on ComponentModulesTextModule {
+            ...textModuleFragment
+          }
+          ... on ComponentModulesImage {
+            ...imageModuleFragment
+          }
+          ... on ComponentModulesPullquote {
+            ...pullquoteModuleFragment
+          }
+          ... on ComponentModulesTitleModule {
+            ...titleModuleFragment
+          }
+          ... on ComponentModulesImageCarousel {
+            ...imageCarouselModuleFragment
+          }
+          ... on ComponentModulesButtonsModule {
+            ...buttonsModuleFragment
+          }
+          ... on ComponentModulesSubtitle {
+            ...subtitleModuleFragment
+          }
+          ... on ComponentModulesGridModule {
+            ...gridModuleFragment
+          }
         }
+      }
     }
+  }
 }

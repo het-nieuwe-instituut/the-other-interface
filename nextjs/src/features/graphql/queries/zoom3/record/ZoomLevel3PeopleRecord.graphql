@@ -1,17 +1,17 @@
-query ZoomLevel3PeopleRecord($id: String!) {
-    peopleRecordZoomLevel3(id: $id) {
-        type
-        profession
-        nameVariation
-        birthDate
-        birthPlace
-        deathDate
-        deathPlace
-        nationality
-        gender
-        period
-        association
-        permanentLink
-        externalSource
-    }
+query ZoomLevel3PeopleRecord($id: String!, $locale: Locale!) {
+  peopleRecordZoomLevel3(id: $id, locale: $locale) {
+    type
+    profession
+    nameVariation
+    birthDate
+    birthPlace
+    deathDate
+    deathPlace
+    nationality
+    gender
+    period
+    association
+    permanentLink
+    externalSource
+  }
 }

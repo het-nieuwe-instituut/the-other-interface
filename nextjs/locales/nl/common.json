@@ -17,5 +17,6 @@
   "readMore": "Lees verder",
   "switchToMockedServer": "Overschakelen naar mocked server",
   "switchToLiveServer": "Overschakelen naar live server",
-  "go": "Zoek"
+  "go": "Zoeken",
+  "noDataFound": "Geen data gevonden"
 }

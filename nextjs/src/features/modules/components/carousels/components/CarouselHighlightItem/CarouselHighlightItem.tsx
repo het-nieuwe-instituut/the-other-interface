@@ -19,6 +19,7 @@ export const CarouselHighlightItem = (props: Props) => {
         objectFit="scale-down"
         mb={'5'}
         w={width ? `${width}px!important` : '100%'}
+        onContextMenu={e => e.preventDefault()}
       />
       <Text
         textStyle={'h3'}

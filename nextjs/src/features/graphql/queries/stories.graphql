@@ -1,47 +1,43 @@
-query stories($pagination: PaginationArg, $locale: String) {
-    stories(pagination: $pagination, locale: $locale) {
-        data {
-            id
-            attributes {
-                title
-                slug
-                shortDescription
-            }
-        }
-        meta {
-            pagination {
-                page
-            }
-        }
+query stories($pagination: PaginationArg, $locale: Locale!) {
+  stories(pagination: $pagination, locale: $locale) {
+    data {
+      id
+      attributes {
+        title
+        slug
+        shortDescription
+      }
     }
+    meta {
+      pagination {
+        page
+      }
+    }
+  }
 }
 
-query searchByStories($searchTerm: String, $page: Float, $pageSize: Float, $locale: String) {
-    stories(filters: { 
-      title: {
-        containsi: $searchTerm
-      }
-    },
-    pagination: {
-      page: $page,
-      pageSize: $pageSize
-    }, locale: $locale) {
-        data {
-            id
-            attributes {
-                title
-                components {
-                    ... on ComponentModulesImage {
-                        ...imageModuleFragment
-                    }
-                }
-            }
-        },
-        meta {
-            pagination {
-                page, 
-                total
-            }
+query searchByStories($searchTerm: String, $page: Float, $pageSize: Float, $locale: Locale!) {
+  stories(
+    filters: { title: { containsi: $searchTerm } }
+    pagination: { page: $page, pageSize: $pageSize }
+    locale: $locale
+  ) {
+    data {
+      id
+      attributes {
+        title
+        components {
+          ... on ComponentModulesImage {
+            ...imageModuleFragment
+          }
         }
+      }
     }
+    meta {
+      pagination {
+        page
+        total
+      }
+    }
+  }
 }
