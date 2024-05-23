@@ -64,7 +64,7 @@ export const MainGalaxy = () => {
 
     if (isLoading) {
       return (
-        <div className="h-full items-center justify-center">
+        <div className="flex h-full  items-center justify-center">
           <Loader />
         </div>
       )

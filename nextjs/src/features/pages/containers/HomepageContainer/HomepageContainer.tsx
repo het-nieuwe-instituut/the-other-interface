@@ -2,7 +2,6 @@
 import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
 import { MainGalaxy } from '@/features/galaxyInterface/galaxies/MainGalaxy/MainGalaxy'
 
-import { Box } from '../../../shared/configs/chakra'
 import { HomepageQuery, ThemesQuery } from 'src/generated/graphql'
 import { EditorialLayer } from '@/features/shared/components/Layers/EditorialLayer/EditorialLayer'
 
@@ -17,7 +16,7 @@ export const HomepageContainer: React.FC<Props> = ({ homepage }) => {
   const editorialData = homepage?.homepage?.data?.attributes
 
   return (
-    <Box>
+    <div>
       <GalaxyInterface>
         <MainGalaxy />
       </GalaxyInterface>
@@ -29,6 +28,6 @@ export const HomepageContainer: React.FC<Props> = ({ homepage }) => {
           components={editorialData.components}
         />
       )}
-    </Box>
+    </div>
   )
 }
