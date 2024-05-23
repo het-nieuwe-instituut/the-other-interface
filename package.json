@@ -25,7 +25,7 @@
     "lint:strapi": "cd strapi && npm run lint",
     "test": "concurrently --names \"nextjs,strapi,gateway\" -c \"bgWhite.black.bold,bgBlack.white.bold,bgMagenta.white.bold,bgRed.white.bold\" \"npm run test:nextjs\" \"npm run test:strapi\" \"npm run test:gateway\"",
     "test:nextjs": "cd nextjs && npm run test",
-    "test:strapi": "cd strapi && echo 'No tests for Strapi'",
+    "test:strapi": "cd strapi && npm run test",
     "test:gateway": "cd gateway-app && npm run test",
     "type-check:nextjs": "cd nextjs && npm run type-check",
     "type-check:gateway": "cd gateway-app && npm run type-check",
