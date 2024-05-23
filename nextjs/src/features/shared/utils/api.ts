@@ -2,16 +2,15 @@ import ApiClient from '@/features/graphql/api'
 import { setCookie } from 'cookies-next'
 
 export const initApiClient = ({
-  hostHeader,
+  host,
   isMockedServer,
 }: {
-  hostHeader?: string | null
+  host: string | null
   isMockedServer?: boolean
 }) => {
   function setUpMockedServer() {
     const isLocal = process.env.parsed.NEXT_PUBLIC_ENV === 'local'
     const protocol = isLocal ? 'http' : 'https'
-    const host = hostHeader || (window || {})?.location.host
     ApiClient.setBaseUrl(`${protocol}://${host}/api/graphql`)
   }
 

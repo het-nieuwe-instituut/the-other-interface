@@ -1,6 +1,6 @@
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { useParams } from 'next/navigation'
-import { useStoryMetaById } from '@/features/shared/hooks/queries/useStoryMetaById'
+import { useStoryMetaByIdQuery } from '@/features/shared/hooks/queries/useStoryMetaByIdQuery'
 import { formatDate } from '@/features/shared/utils/dates'
 import {
   AuthorEntity,
@@ -59,7 +59,10 @@ export const usePresenter = () => {
   const params = useParams()
   const id = params?.id as string
 
-  const { data, isLoading } = useStoryMetaById(id)
+  const { data, isLoading } = useStoryMetaByIdQuery({
+    id,
+    options: { refetchOnWindowFocus: false, suspense: true },
+  })
   const story = data?.storyMetaByLocale?.data?.attributes
 
   const linkedPeopleRecords =

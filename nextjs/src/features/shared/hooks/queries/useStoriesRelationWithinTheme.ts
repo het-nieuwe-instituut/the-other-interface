@@ -11,6 +11,7 @@ export const useStoriesRelatedByTheme = (id: string) => {
   return useQuery({
     queryKey: ['stories-related-within-theme', id, lang],
     queryFn,
+    suspense: true,
     refetchOnWindowFocus: false,
   })
 }

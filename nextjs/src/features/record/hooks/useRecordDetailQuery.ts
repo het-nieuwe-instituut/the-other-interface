@@ -1,14 +1,25 @@
 'use client'
-import { useQuery } from '@tanstack/react-query'
-import initApiClientService from '../../shared/utils/initApiClientService'
 import { getZoom3RecordTask } from '@/features/pages/tasks/getZoom3Record'
-import { Category } from '../../shared/utils/categories'
+import { useLocale } from '@/features/shared/hooks/useLocale'
+import { UseBaseQueryOptions, useQuery } from '@tanstack/react-query'
 import { useSelector } from 'react-redux'
 import { State } from '../../shared/configs/store'
+import { Category } from '../../shared/utils/categories'
+import initApiClientService from '../../shared/utils/initApiClientService'
 import { getPublicationState } from '../../shared/utils/publication-state'
-import { useLocale } from '@/features/shared/hooks/useLocale'
 
-export function useRecordDetail(type: Category, id: string) {
+export function useRecordDetailQuery({
+  type,
+  id,
+  options,
+}: {
+  type: Category
+  id: string
+  options?: Pick<
+    UseBaseQueryOptions<() => typeof getZoom3RecordTask>,
+    'suspense' & 'refetchOnWindowFocus'
+  >
+}) {
   const { isDraftMode } = useSelector((state: State) => state.shared)
   const api = initApiClientService()
   const lang = useLocale()
@@ -23,6 +34,6 @@ export function useRecordDetail(type: Category, id: string) {
   return useQuery({
     queryKey: ['record-detail', id, lang],
     queryFn,
-    refetchOnWindowFocus: false,
+    ...options,
   })
 }

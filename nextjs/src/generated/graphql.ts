@@ -770,6 +770,7 @@ export type ObjectsZoomLevel3DetailType = {
 export type ObjectsZoomLevelHoverType = {
   __typename?: 'ObjectsZoomLevelHoverType';
   description?: Maybe<Scalars['String']>;
+  maker?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
 };
 
@@ -2083,7 +2084,7 @@ export type ObjectsZoomRecordHoverQueryVariables = Exact<{
 }>;
 
 
-export type ObjectsZoomRecordHoverQuery = { __typename?: 'Query', objectsZoomRecordHover: { __typename?: 'ObjectsZoomLevelHoverType', title?: string | null, description?: string | null } };
+export type ObjectsZoomRecordHoverQuery = { __typename?: 'Query', objectsZoomRecordHover: { __typename?: 'ObjectsZoomLevelHoverType', title?: string | null, description?: string | null, maker?: string | null } };
 
 export type PeopleZoomRecordHoverQueryVariables = Exact<{
   id: Scalars['String'];
@@ -3332,6 +3333,7 @@ export const ObjectsZoomRecordHoverDocument = gql`
   objectsZoomRecordHover(id: $id, locale: $locale) {
     title
     description
+    maker
   }
 }
     `;
