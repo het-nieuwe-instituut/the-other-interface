@@ -1,8 +1,10 @@
 import { useRecordDetailQuery } from '@/features/record/hooks/useRecordDetailQuery'
+import { Loader } from '@/features/shared/components/Loading/Loading'
 import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
 import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Category } from '@/features/shared/utils/categories'
 import { toSingularCategory } from '@/features/shared/utils/toSingularCategory'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { Flex, GridItem, Text } from '@chakra-ui/react'
 import { useParams } from 'next/navigation'
 
@@ -17,7 +19,11 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
   const category = params?.category as Category
   const id = params?.id as string
 
-  const { data: record, isLoading } = useRecordDetailQuery({
+  const {
+    data: record,
+    isLoading,
+    isError,
+  } = useRecordDetailQuery({
     type: category,
     id,
     options: { refetchOnWindowFocus: false },
@@ -44,6 +50,32 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
         justifyContent="center"
         gap="2px"
       >
+        {renderContent()}
+      </Flex>
+    </GridItem>
+  )
+
+  function renderContent() {
+    if (isLoading) {
+      return (
+        <div className="h-full items-center justify-center">
+          <Loader />
+        </div>
+      )
+    }
+
+    if (isError) {
+      return (
+        <div className="flex h-full items-center justify-center">
+          <p className={`${TypographyVariants({ times: 'md' })} text-black-100`}>
+            {t('errorLoadingDetail')}
+          </p>
+        </div>
+      )
+    }
+
+    return (
+      <>
         <ResponsiveImage
           src={record?.thumbnail?.[0] ?? ''}
           alt={record?.title}
@@ -54,7 +86,6 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
           }}
           disableRightClick
         />
-
         <Flex w="100%" color="blueAlpha.100" direction="column" flex="1" mt={2}>
           <Text
             align="center"
@@ -75,7 +106,7 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
             {t(toSingularCategory(category))}
           </Text>
         </Flex>
-      </Flex>
-    </GridItem>
-  )
+      </>
+    )
+  }
 }
