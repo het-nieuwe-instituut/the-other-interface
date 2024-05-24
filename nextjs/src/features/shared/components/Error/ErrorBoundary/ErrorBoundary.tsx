@@ -5,7 +5,7 @@ import ErrorBox from '../ErrorBox'
 const ErrorBoundaryWrapper = ({ children }: { children: React.ReactNode }) => (
   <QueryErrorResetBoundary>
     {({ reset }) => (
-      <ErrorBoundary onReset={reset} FallbackComponent={ErrorBox}>
+      <ErrorBoundary onReset={reset} FallbackComponent={() => <ErrorBox />}>
         {children}
       </ErrorBoundary>
     )}

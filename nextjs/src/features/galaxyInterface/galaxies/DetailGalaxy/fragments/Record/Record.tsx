@@ -30,21 +30,16 @@ export const Record: React.FC<Props> = ({
   tabIndex = 0,
   tooltipPlace = 'bottom',
 }) => {
-  const { id, category, position, grid } = record
-
   const router = useRouter()
   const lang = useLocale()
+  const { id, category, position, grid } = record
 
-  // TODO: HNIT-1833 - add in loading and error handling
   const {
     data: recordDetails,
     isLoading,
     isError,
-  } = useRecordDetailQuery({
-    type: category,
-    id,
-    options: { refetchOnWindowFocus: false },
-  })
+  } = useRecordDetailQuery({ type: category, id, options: { refetchOnWindowFocus: false } })
+
   const {
     data,
     isError: isLoadingHoverError,

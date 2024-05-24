@@ -1,5 +1,7 @@
 import { useRecordDetailQuery } from '@/features/record/hooks/useRecordDetailQuery'
+import ErrorBox from '@/features/shared/components/Error/ErrorBox'
 import { Loader } from '@/features/shared/components/Loading/Loading'
+import { ThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
 import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
 import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Category } from '@/features/shared/utils/categories'
@@ -29,8 +31,20 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
     options: { refetchOnWindowFocus: false },
   })
 
-  if (!isLoading && !record) {
-    return null
+  if (isLoading) {
+    return (
+      <div className="absolute left-0 -ml-3 flex size-full items-center justify-center ">
+        <ThemedSpinner />
+      </div>
+    )
+  }
+
+  if (isError) {
+    return (
+      <div className="absolute left-0 -ml-3 flex size-full flex-col items-center justify-center text-black-100">
+        <ErrorBox className="flex items-center justify-center " />
+      </div>
+    )
   }
 
   return (
