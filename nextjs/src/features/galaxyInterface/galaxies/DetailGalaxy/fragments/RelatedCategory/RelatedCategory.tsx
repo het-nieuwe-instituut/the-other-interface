@@ -5,7 +5,7 @@ import { GridParams } from '@/features/shared/types/position'
 import { CLOUD_CATEGORIES, CloudCategory } from '@/features/shared/utils/categories'
 import { keyExtractor } from '@/features/shared/utils/lists'
 import { Record } from '../Record/Record'
-import { usePresenter } from './usePresenter'
+import { usePositionedRecords } from './usePositionedRecords'
 
 export interface AllRelationTotalsType {
   [CLOUD_CATEGORIES.archives]: number
@@ -26,7 +26,10 @@ export const RelatedCategory: React.FC<Props> = ({
   category,
   allRelationTotals,
 }) => {
-  const { positionedRecords, nextPositionedRecords } = usePresenter(category, allRelationTotals)
+  const { positionedRecords, nextPositionedRecords } = usePositionedRecords(
+    category,
+    allRelationTotals
+  )
 
   return (
     <>

@@ -18,5 +18,7 @@
   "suggestions": "Suggesties",
   "searchPlaceholder": "Typ hier je zoekterm",
   "searchCategory": "Categoriën",
-  "couldNotFetchHover": "Er ging iets fout bij het ophalen van de hover informatie, probeer het later nog eens."
+
+  "couldNotFetchHover": "Er ging iets fout bij het ophalen van de hover informatie, probeer het later nog eens.",
+  "errorLoadingDetail": "Er is iets misgegaan bij het laden. Probeer het later opnieuw."
 }

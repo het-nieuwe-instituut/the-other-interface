@@ -3,11 +3,13 @@ import { getZoom3RecordTask } from '@/features/pages/tasks/getZoom3Record'
 import { useLocale } from '@/features/shared/hooks/useLocale'
 import { UseBaseQueryOptions, useQuery } from '@tanstack/react-query'
 import { useSelector } from 'react-redux'
+import { Locale } from 'src/generated/graphql'
 import { State } from '../../shared/configs/store'
 import { Category } from '../../shared/utils/categories'
 import initApiClientService from '../../shared/utils/initApiClientService'
 import { getPublicationState } from '../../shared/utils/publication-state'
 
+export const getRecordDetailQueryKey = (id: string, lang: string) => ['record-detail', id, lang]
 export function useRecordDetailQuery({
   type,
   id,
@@ -24,17 +26,20 @@ export function useRecordDetailQuery({
   const api = initApiClientService()
   const lang = useLocale()
 
-  const queryFn = () =>
-    getZoom3RecordTask(
-      type,
-      { id, locale: lang ?? 'nl', publicationState: getPublicationState(isDraftMode) },
-      api,
-      options?.suspense
-    )
-
   return useQuery({
-    queryKey: ['record-detail', id, lang],
-    queryFn,
-    suspense: options?.suspense,
+    queryKey: getRecordDetailQueryKey(id, lang),
+    queryFn: async () => {
+      const res = await getZoom3RecordTask(
+        type,
+        { id, locale: Locale.Nl, publicationState: getPublicationState(isDraftMode) },
+        api,
+        options?.suspense
+      )
+
+      return res
+    },
+    staleTime: 60000, // 1 minute
+    suspense: options?.suspense ?? false,
+    retry: 0,
   })
 }
