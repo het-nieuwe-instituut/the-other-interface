@@ -1,14 +1,14 @@
 import { DetailedRecord } from '../DetailedRecord'
 import { Record } from '../Record/Record'
 import { AllRelationTotalsType } from '../RelatedCategory'
-import { usePresenter } from './usePresenter'
+import { useRelatedStories } from './useRelatedStories'
 
 interface Props {
   allRelationTotals?: AllRelationTotalsType
 }
 
 export const RelatedStories: React.FC<Props> = ({ allRelationTotals }) => {
-  const { positionedStories, nextPositionedStories } = usePresenter(allRelationTotals)
+  const { positionedStories, nextPositionedStories } = useRelatedStories(allRelationTotals)
 
   return (
     <>

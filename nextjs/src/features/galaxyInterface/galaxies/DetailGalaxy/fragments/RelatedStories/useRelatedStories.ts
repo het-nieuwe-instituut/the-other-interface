@@ -54,7 +54,7 @@ const positioningTemplate: PositioningTemplate[][] = [
   ],
 ]
 
-export const usePresenter = (allRelationTotals?: AllRelationTotalsType) => {
+export const useRelatedStories = (allRelationTotals?: AllRelationTotalsType) => {
   const params = useParams()
   const searchParams = useSearchParams()
   const page = parseInt(searchParams?.get('page') || '1')
