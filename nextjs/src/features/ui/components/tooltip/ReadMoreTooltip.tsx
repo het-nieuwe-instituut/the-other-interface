@@ -103,7 +103,7 @@ const ReadMoreTooltipContent = ({
   )
 
   function renderContent() {
-    if (!isLoading) {
+    if (isLoading) {
       return (
         <div className="flex w-full items-center justify-center p-2">
           <Loading className={'size-8 animate-spin text-pink-100'} />

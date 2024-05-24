@@ -9,6 +9,7 @@ import { Loader } from '@/features/shared/components/Loading/Loading'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { useSearchParams } from 'next/navigation'
 import { useThemesQuery } from './hooks/useThemes'
+import { ThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
 
 const categoryClouds: CategoryCloud[] = [
   {
@@ -65,7 +66,7 @@ export const MainGalaxy = () => {
     if (isLoading) {
       return (
         <div className="flex h-full  items-center justify-center">
-          <Loader />
+          <ThemedSpinner />
         </div>
       )
     }
