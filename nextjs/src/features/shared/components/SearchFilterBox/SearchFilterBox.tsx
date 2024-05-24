@@ -27,7 +27,7 @@ export const SearchFilterBox: React.FC<Props> = ({
       style={{ zIndex: zIndex || 'inherit' }}
       onClick={onClick}
     >
-      <div className="relative flex max-w-full items-center justify-between pt-1">
+      <div className="relative flex max-w-full items-center justify-between ">
         <p className={cn('text-blue.100 mr-1 truncate', TypographyVariants({ social: 'label' }))}>
           {category}
         </p>

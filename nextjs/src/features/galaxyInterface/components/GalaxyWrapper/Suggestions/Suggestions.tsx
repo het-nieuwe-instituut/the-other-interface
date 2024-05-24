@@ -1,5 +1,4 @@
 import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/SearchFilterBox'
-import { Box } from '@chakra-ui/react'
 import { Filter } from '@/features/shared/hooks/search/useFilters'
 
 const mockData = [
