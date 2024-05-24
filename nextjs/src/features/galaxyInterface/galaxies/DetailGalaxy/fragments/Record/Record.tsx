@@ -11,7 +11,7 @@ import {
   ReadMoreTooltipProps,
 } from '@/features/ui/components/tooltip/ReadMoreTooltip'
 import { cn } from '@/features/ui/utils/cn'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import { PositionedRecord } from '../types'
 import { RecordText } from './RecordText'
 import { useCalculateLine } from './useCalculateLine'
