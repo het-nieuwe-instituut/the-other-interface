@@ -47,10 +47,6 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
     )
   }
 
-  // if (!isLoading && !record) {
-  //   notFound()
-  // }
-
   return (
     <GridItem
       gridRow={gridRow}
