@@ -1,11 +1,12 @@
 import { HttpService } from '@nestjs/axios'
 import { Injectable } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
-import { lastValueFrom } from 'rxjs'
+import { catchError, lastValueFrom } from 'rxjs'
 import { Config } from 'src/config/config'
 import { PaginationArgs } from '../util/paginationArgs.type'
-import { SearchResultItemType } from './triplyElasticSearch.type'
+import { SearchResultItemType, SearchResultType } from './triplyElasticSearch.type'
 import { TriplyUtils } from '../triply/triply.utils'
+import { map } from 'rxjs'
 
 export interface ElasticsearchResult {
   hits: {
@@ -46,23 +47,41 @@ export class TriplyElasticSearchService {
   }
 
   // TODO: implement locale after ElasticSearch endpoint is updated - HNIT-1903
-  public async search(search: string, locale: string, { page = 1, pageSize = 12 }: PaginationArgs) {
-    const elasticQuery = JSON.stringify({
+  public async search(
+    search: string,
+    locale: string,
+    { page = 1, pageSize = 12 }: PaginationArgs
+  ): Promise<SearchResultType> {
+    const elasticQuery = {
       from: pageSize * (page - 1),
       size: pageSize,
-      query: this.getQueryString(search),
-    })
+      query: this.getQuery(search),
+    }
 
     const res = await this.post<ElasticsearchResult>(new URL(this.elasticSearchURL), elasticQuery)
 
-    return res.data.hits.hits.map(h => this.formatSearchResult(h))
+    const formattedResult = res.hits.hits.map(h => this.formatSearchResult(h))
+
+    return {
+      nodes: formattedResult,
+      page,
+      total: res.hits.total.value,
+    }
   }
 
-  private post<ReturnDataType>(endpoint: URL, body: string) {
+  private post<ReturnDataType>(endpoint: URL, body: object) {
     const headers = { Authorization: `Bearer ${this.apiKey}` }
     const res = this.httpService.post<ReturnDataType>(endpoint.toString(), body, { headers })
 
-    return lastValueFrom(res)
+    return lastValueFrom(
+      res.pipe(
+        catchError(err => {
+          console.error(err)
+          return []
+        }),
+        map(res => res.data)
+      )
+    )
   }
 
   private formatSearchResult(
@@ -95,21 +114,19 @@ export class TriplyElasticSearchService {
     }
   }
 
-  private getQueryString(searchText: string) {
+  private getQuery(searchText: string) {
     const sanitizedText = this.escapeElasticsearchQuery(searchText)
 
-    return JSON.stringify({
-      query: {
-        multi_match: {
-          query: sanitizedText,
-          fields: [
-            'https://www ica org/standards/RiC/ontology#title', // archives title
-            'https://schema.org/name', // publications name & people name
-            'http://www.w3.org/2004/02/skos/core#prefLabel', // objects prefLabel
-          ],
-        },
+    return {
+      multi_match: {
+        query: sanitizedText,
+        fields: [
+          'https://www ica org/standards/RiC/ontology#title', // archives title
+          'https://schema.org/name', // publications name & people name
+          'http://www.w3.org/2004/02/skos/core#prefLabel', // objects prefLabel
+        ],
       },
-    })
+    }
   }
 
   private escapeElasticsearchQuery(queryString: string) {

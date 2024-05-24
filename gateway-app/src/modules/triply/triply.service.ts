@@ -1,7 +1,7 @@
 import { HttpService } from '@nestjs/axios'
 import { Injectable } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
-import { lastValueFrom } from 'rxjs'
+import { catchError, lastValueFrom, map } from 'rxjs'
 import { Config } from 'src/config/config'
 import { PaginationArgs } from '../util/paginationArgs.type'
 import { RollbarService } from '../util/rollbar.service'
@@ -87,17 +87,25 @@ export class TriplyService {
       }
     }
 
-    const res = await this.fetch<ReturnDataType>(endpoint)
-    this.checkResponseType(res.data, keysToVerify)
+    const data = await this.fetch<ReturnDataType>(endpoint)
+    this.checkResponseType(data, keysToVerify)
 
-    return res
+    return { data }
   }
 
   private fetch<ReturnDataType>(endpoint: URL) {
     const headers = { Authorization: `Bearer ${this.apiKey}` }
     const res = this.httpService.get<ReturnDataType[]>(endpoint.toString(), { headers })
 
-    return lastValueFrom(res)
+    return lastValueFrom(
+      res.pipe(
+        catchError(err => {
+          console.error(err)
+          return []
+        }),
+        map(res => res.data)
+      )
+    )
   }
 
   private getEndpointForArg(endpointArg: string) {

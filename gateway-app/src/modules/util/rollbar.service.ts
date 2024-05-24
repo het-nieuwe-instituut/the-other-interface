@@ -17,7 +17,7 @@ export class RollbarService {
     })
   }
 
-  public async logError(arg: RollbarType.LogArgument) {
+  public logError(arg: RollbarType.LogArgument) {
     try {
       this.rollbar.error(arg)
     } catch (err) {
@@ -26,7 +26,7 @@ export class RollbarService {
     }
   }
 
-  public async logInfo(arg: RollbarType.LogArgument) {
+  public logInfo(arg: RollbarType.LogArgument) {
     try {
       this.rollbar.info(arg)
     } catch (err) {
