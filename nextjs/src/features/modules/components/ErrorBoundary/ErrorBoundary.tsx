@@ -22,7 +22,7 @@ const ErrorBoundaryProvider = (props: Props) => {
 
   return (
     <ErrorBoundary
-      FallbackComponent={ErrorBox}
+      FallbackComponent={() => <ErrorBox />}
       onError={onError}
       onReset={() => setIsError(false)}
       resetKeys={[isError]}

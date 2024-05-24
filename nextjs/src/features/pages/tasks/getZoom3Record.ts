@@ -27,8 +27,8 @@ export type Zoom3Record =
 
 export class Zoom3TaskError extends Error {
   _tag = 'RecordDetailDataError' as const
-  constructor() {
-    super('Could not fetch record detail data')
+  constructor(id: string) {
+    super(`Could not fetch record detail data with id: ${id}`)
   }
 }
 
@@ -41,7 +41,7 @@ export async function getZoom3RecordTask(
   if (isStoryCategory(type)) {
     const detail = await api?.storyById(payload)
     const story = detail.storyByLocale.data
-    if (!story && throwOnError) throw new Zoom3TaskError()
+    if (!story && throwOnError) throw new Zoom3TaskError(payload.id)
 
     if (!story) return null
 
@@ -56,7 +56,7 @@ export async function getZoom3RecordTask(
   const item = configByType?.accesor?.(data)
 
   const invalidItem = !item?.id || (item?.thumbnail && !item?.title)
-  if (!invalidItem && throwOnError) throw new Zoom3TaskError()
+  if (invalidItem && throwOnError) throw new Zoom3TaskError(payload.id)
 
   if (!item?.id) return null
 

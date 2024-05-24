@@ -10,8 +10,12 @@ import { cn } from '@/features/ui/utils/cn'
 import { PositionedRecord } from '../types'
 import { RecordText } from './RecordText'
 import { useCalculateLine } from './useCalculateLine'
-import { useRecords } from './useRecords'
+
 import { Loader } from '@/features/shared/components/Loading/Loading'
+import { useRecordDetailQuery } from '@/features/record/hooks/useRecordDetailQuery'
+import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
+import { useRouter } from 'next/navigation'
+import { useLocale } from '@/features/shared/hooks/useLocale'
 
 type Props = {
   record: PositionedRecord
@@ -27,8 +31,14 @@ export const Record: React.FC<Props> = ({
   tabIndex = 0,
   tooltipPlace = 'bottom',
 }) => {
+  const router = useRouter()
+  const lang = useLocale()
   const { id, category, position, grid } = record
-  const { recordDetails, isLoading, handleClick, isError } = useRecords(id, category)
+  const {
+    data: recordDetails,
+    isLoading,
+    isError,
+  } = useRecordDetailQuery({ type: category, id, options: { refetchOnWindowFocus: false } })
   // TODO: HNIT-1833 - add in loading and error handling
   const {
     data,
@@ -111,4 +121,10 @@ export const Record: React.FC<Props> = ({
       </div>
     </div>
   )
+
+  function handleClick() {
+    let url = `/detail/${category}/${id}`
+    url = addLocaleToUrl(url, lang)
+    router.push(url)
+  }
 }
