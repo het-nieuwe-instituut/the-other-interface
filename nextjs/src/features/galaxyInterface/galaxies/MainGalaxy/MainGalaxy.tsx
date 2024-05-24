@@ -1,14 +1,14 @@
 'use client'
-import { Cloud, CategoryCloud, Stories } from './fragments'
-import { ThemeTitle } from '../../components/ThemeTitle/ThemeTitle'
+import { ThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
+import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
+import { useSearchParams } from 'next/navigation'
 import { GalaxyFooter } from '../../components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 import { GalaxyPagination } from '../../components/GalaxyWrapper/GalaxyPagination/GalaxyPagination'
-import { usePresenter } from './usePresenter'
-import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { ThemeTitle } from '../../components/ThemeTitle/ThemeTitle'
+import { CategoryCloud, Cloud, Stories } from './fragments'
 import { useThemesQuery } from './hooks/useThemes'
-import { useSearchParams } from 'next/navigation'
-import { TypographyVariants } from '@/features/ui/components/typography/variants'
-import { Loader } from '@/features/shared/components/Loading/Loading'
+import { usePresenter } from './usePresenter'
 
 const categoryClouds: CategoryCloud[] = [
   {
@@ -65,7 +65,7 @@ export const MainGalaxy = () => {
     if (isLoading) {
       return (
         <div className="flex h-full  items-center justify-center">
-          <Loader />
+          <ThemedSpinner />
         </div>
       )
     }
