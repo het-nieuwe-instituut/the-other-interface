@@ -1,15 +1,14 @@
 'use client'
+import { ThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
+import { useSearchParams } from 'next/navigation'
 import { GalaxyFooter } from '../../components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 import { GalaxyPagination } from '../../components/GalaxyWrapper/GalaxyPagination/GalaxyPagination'
 import { ThemeTitle } from '../../components/ThemeTitle/ThemeTitle'
 import { CategoryCloud, Cloud, Stories } from './fragments'
-import { usePresenter } from './usePresenter'
-import { Loader } from '@/features/shared/components/Loading/Loading'
-import { TypographyVariants } from '@/features/ui/components/typography/variants'
-import { useSearchParams } from 'next/navigation'
 import { useThemesQuery } from './hooks/useThemes'
-import { ThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
+import { usePresenter } from './usePresenter'
 
 const categoryClouds: CategoryCloud[] = [
   {
