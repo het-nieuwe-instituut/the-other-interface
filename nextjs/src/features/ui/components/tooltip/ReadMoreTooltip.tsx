@@ -130,7 +130,7 @@ const ReadMoreTooltipContent = ({
           <h2
             className={TypographyVariants({
               social: 'sm',
-              className: 'text-pink-100 font-bold pb-2',
+              className: cn('text-pink-100 font-bold', description && 'pb-2'),
             })}
           >
             {title}
@@ -141,7 +141,7 @@ const ReadMoreTooltipContent = ({
           <p
             className={TypographyVariants({
               social: 'sm',
-              className: 'text-pink-100  pb-2',
+              className: cn('text-pink-100', readMoreHref && 'pb-2'),
             })}
           >
             {description}
