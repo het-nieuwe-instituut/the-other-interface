@@ -41,16 +41,39 @@ export function useSearch({
         const total = response?.stories?.meta?.pagination?.total
         return { items: stories, total }
       case SEARCH_CATEGORIES.all:
+        const storiesSearchResponse = await api.searchByStories({
+          searchTerm: text ?? '',
+          page,
+          pageSize: ZOOM2_RECORDS_PER_PAGE,
+          locale,
+        })
+
+        const searchStories =
+          storiesSearchResponse?.stories?.data?.map(story => storyToRecordMapper(story)) ?? []
+        const storiesTotal = storiesSearchResponse?.stories?.meta?.pagination?.total ?? 0
+        const storyPagesAmount = Math.ceil(storiesTotal / ZOOM2_RECORDS_PER_PAGE)
+        const storiesAmount = searchStories.length
+        const allPageSize = ZOOM2_RECORDS_PER_PAGE - storiesAmount
+
+        if (allPageSize <= 0) {
+          return {
+            items: searchStories,
+            total: storiesTotal,
+          }
+        }
+
+        const triplyPage = Math.max(1, page - storyPagesAmount)
+
         const searchAllResult = await api.searchAll({
           text: text ?? '',
-          page,
+          page: triplyPage,
           lang: locale,
-          pageSize: ZOOM2_RECORDS_PER_PAGE,
+          pageSize: allPageSize,
         })
 
         return {
-          items: searchAllResult?.searchTriply?.nodes ?? [],
-          total: searchAllResult?.searchTriply?.total ?? 0,
+          items: [...searchStories, ...(searchAllResult?.searchTriply?.nodes ?? [])],
+          total: storiesTotal + (+searchAllResult.searchTriply?.total || 0),
         }
 
       default:
