@@ -1,16 +1,15 @@
 import { State } from '@/features/shared/configs/store'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useSearch } from '@/features/shared/hooks/queries/useSearch'
-import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { useFilters } from '@/features/shared/hooks/search/useFilters'
+import { useEnterKey } from '@/features/shared/hooks/ui/useEnterKey'
+import { useOutsideClick } from '@/features/shared/hooks/ui/useOutsideClick'
 import { usePageCategory } from '@/features/shared/hooks/usePageCategory'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 import { sharedActions } from '@/features/shared/stores/shared.store'
 import { usePathname, useRouter } from 'next/navigation'
-import { useCallback, useEffect, useState, useRef } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useEnterKey } from '@/features/shared/hooks/ui/useEnterKey'
-import { useOutsideClick } from '@/features/shared/hooks/ui/useOutsideClick'
-import { useFilters } from '@/features/shared/hooks/search/useFilters'
 
 export const usePresenter = (isNoActiveSearch?: boolean) => {
   const router = useRouter()
@@ -34,7 +33,6 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
     onRemoveFilter: handleInputFocus,
   })
 
-  const { t } = useTypeSafeTranslation('category')
   const { pageCategory } = usePageCategory()
   const { data } = useSearch({ category: pageCategory, text: search })
   const { total } = data || { total: 0 }
@@ -51,10 +49,6 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
     (resetFilters = true) => {
       dispatch(sharedActions.searchModeActive({ isSearchModeActive: false }))
       dispatch(sharedActions.categorySuggestionsOpen({ categorySuggestionsOpen: false }))
-
-      if (resetFilters) {
-        resetSearchFilters()
-      }
     },
     [dispatch, resetSearchFilters]
   )
@@ -68,7 +62,7 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
 
     setIsUserTyping(false)
     handleSearchModeClose(false)
-  }, [inputValue, searchCategory, router, handleSearchModeClose, lang, selectedFilters])
+  }, [inputValue, encodedFilters, searchCategory, lang, router, handleSearchModeClose])
 
   useEnterKey(handleGoClick)
   useOutsideClick(searchBarRef, handleSearchModeClose)
@@ -112,14 +106,13 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
     clearFilters()
     dispatch(sharedActions.categorySuggestionsOpen({ categorySuggestionsOpen: false }))
     filterInputRef.current?.focus()
-  }, [dispatch, pageCategory])
+  }, [clearFilters, dispatch, resetSearchFilters])
 
   return {
     category: searchCategory,
     handleSearchModeOpen,
     handleSearchModeClose,
     isSearchModeActive,
-    t,
     isCategorySuggestionsOpen,
     setIsCategorySuggestionsOpen: (isCategorySuggestionsOpen: boolean) => {
       dispatch(

@@ -9,6 +9,7 @@ import { GalaxySearchBar } from '../GalaxySearchBar/GalaxySearchBar'
 import { usePresenter } from './usePresenter'
 import { useTotalCounter } from '@/features/galaxyInterface/galaxies/MainGalaxy/hooks/useTotalCounter'
 import { CollpsedSearch } from '../GalaxySearchBar/fragments/CollpsedSearch'
+import { cn } from '@/features/ui/utils/cn'
 
 type Props = {
   galaxyPagination?: React.ReactNode
@@ -31,12 +32,17 @@ export const GalaxyFooter: React.FC<Props> = ({ galaxyPagination }) => {
     >
       <GridItem>{galaxyPagination}</GridItem>
 
-      <GridItem>
-        {isSearchBarCollapsed ? (
-          <CollpsedSearch toggleSearchBar={toggleSearchBar} />
-        ) : (
-          <GalaxySearchBar total={total} isNoActiveSearch={isNoActiveSearch} />
-        )}
+      <GridItem position={'relative'}>
+        <CollpsedSearch
+          className={cn(isSearchBarCollapsed ? 'flex' : 'hidden')}
+          toggleSearchBar={toggleSearchBar}
+        />
+
+        <GalaxySearchBar
+          className={cn(isSearchBarCollapsed ? 'hidden' : 'grid')}
+          total={total}
+          isNoActiveSearch={isNoActiveSearch}
+        />
       </GridItem>
       <GalaxyNavigation />
     </Grid>

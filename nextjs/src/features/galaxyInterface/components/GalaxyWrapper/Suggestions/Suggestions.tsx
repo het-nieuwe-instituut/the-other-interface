@@ -39,9 +39,13 @@ export const Suggestions: React.FC<Props> = ({ handleSelectFilter }) => {
   return (
     <>
       {mockData.map(item => (
-        <Box key={item.id} onClick={() => handleSelectFilter(item)} maxWidth={'100%'}>
-          <SearchFilterBox category={item.field} subCategory={item.value} />
-        </Box>
+        <div className="max-w-full" key={item.id}>
+          <SearchFilterBox
+            category={item.field}
+            subCategory={item.value}
+            onClick={() => handleSelectFilter(item)}
+          />
+        </div>
       ))}
     </>
   )
