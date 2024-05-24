@@ -1,13 +1,14 @@
 'use client'
-import { useInfiniteQuery } from '@tanstack/react-query' //
-import initApiClientService from '../../shared/utils/initApiClientService'
 import { getPaginatedRelationsTask } from '@/features/pages/tasks/getPaginatedRelationsTask'
-import { Category } from '../../shared/utils/categories'
 import { useLocale } from '@/features/shared/hooks/useLocale'
+import { useInfiniteQuery } from '@tanstack/react-query' //
+import { Category } from '../../shared/utils/categories'
+import initApiClientService from '../../shared/utils/initApiClientService'
 
 export function usePaginatedRecordRelations(type: Category, id: string, category: Category) {
   const api = initApiClientService()
   const lang = useLocale()
+
   const queryFn = ({ pageParam = 1 }) => {
     return getPaginatedRelationsTask({
       type,
