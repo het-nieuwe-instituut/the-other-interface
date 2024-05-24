@@ -3016,7 +3016,7 @@ export const StoriesDocument = gql`
 export const SearchByStoriesDocument = gql`
     query searchByStories($searchTerm: String, $page: Int, $pageSize: Int, $locale: Locale!) {
   stories(
-    filters: {title: {containsi: $searchTerm}, description: {containsi: $searchTerm}, shortDescription: {containsi: $searchTerm}}
+    filters: {or: [{title: {containsi: $searchTerm}}, {description: {containsi: $searchTerm}}, {shortDescription: {containsi: $searchTerm}}]}
     pagination: {page: $page, pageSize: $pageSize}
     locale: $locale
   ) {
