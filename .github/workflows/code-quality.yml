@@ -1,15 +1,15 @@
 name: Code quality and tests
-
 on:
+  pull_request_review:
+    types: [submitted]
   push:
     branches:
       - main
       - develop
-  # Trigger on any PR
-  pull_request:
 
 jobs:
   tests:
+    if: github.event.review.state == 'approved'
     runs-on: ubuntu-latest
     strategy:
       matrix:
