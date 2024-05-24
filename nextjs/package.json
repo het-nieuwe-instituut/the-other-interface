@@ -21,6 +21,7 @@
     "@chakra-ui/react": "^2.8.0",
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
+    "@formkit/auto-animate": "^0.8.2",
     "@graphql-tools/load-files": "^7.0.0",
     "@reduxjs/toolkit": "^1.8.5",
     "@svgr/webpack": "^6.3.1",
