@@ -162,7 +162,7 @@ const Page: NextPage = () => {
               visualClassName="border-black border bg-gray-50"
             />
             <LegendItem name="Columns * 12 columns w/ 12px gutter" visualClassName="bg-blue-300" />
-            <LegendItem name="Sections" visualClassName="bg-blue-300" />
+            <p>Sections displayed by colors</p>
           </div>
           <EditorialPageWrapper className="relative box-border flex-1 overflow-hidden border border-black bg-gray-50">
             <GridDemo />
