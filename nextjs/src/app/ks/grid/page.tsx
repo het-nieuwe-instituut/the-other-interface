@@ -1,8 +1,8 @@
+import { EditorialPageWrapper } from '@/features/editorialInterface/components/EditorialPageWrapper'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { cn } from '@/features/ui/utils/cn'
 import { times } from 'lodash'
 import type { NextPage } from 'next'
-import { PropsWithChildren } from 'react'
 
 const GridDemo = () => {
   return (
@@ -14,13 +14,6 @@ const GridDemo = () => {
       ))}
     </div>
   )
-}
-
-const EditorialPageWrapper = ({
-  children,
-  className,
-}: PropsWithChildren & { className?: string }) => {
-  return <div className={cn('p-10', className)}>{children}</div>
 }
 
 const LegendItem = ({
