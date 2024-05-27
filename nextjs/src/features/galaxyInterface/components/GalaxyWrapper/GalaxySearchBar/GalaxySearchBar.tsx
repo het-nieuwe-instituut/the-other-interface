@@ -18,7 +18,7 @@ import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 type Props = {
   total?: number
   isNoActiveSearch?: boolean
-  className: string
+  className?: string
 }
 
 export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch, className }) => {

@@ -35,17 +35,16 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
   const { pageCategory } = usePageCategory()
   const { data } = useSearch({ category: pageCategory, text: search })
   const { total } = data || { total: 0 }
-
-  const [inputValue, setInputValue] = useState('')
+  const inputValue = useSelector((state: State) => state.shared.searchValue)
   const [isUserTyping, setIsUserTyping] = useState(false)
 
   const resetSearchFilters = useCallback(() => {
     dispatch(sharedActions.searchCategory({ searchCategory: pageCategory }))
-    setInputValue(search || '')
+    dispatch(sharedActions.setSearch({ searchValue: search || '' }))
   }, [search, pageCategory, dispatch])
 
   const handleSearchModeClose = useCallback(
-    (resetFilters = true) => {
+    (resetFilters = false) => {
       dispatch(sharedActions.searchModeActive({ isSearchModeActive: false }))
       dispatch(sharedActions.categorySuggestionsOpen({ categorySuggestionsOpen: false }))
 
@@ -73,7 +72,8 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const newValue = e.target.value
-      setInputValue(newValue)
+
+      dispatch(sharedActions.setSearch({ searchValue: newValue }))
       setIsUserTyping(true)
       dispatch(sharedActions.categorySuggestionsOpen({ categorySuggestionsOpen: false }))
     },
@@ -82,7 +82,6 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
 
   useEffect(() => {
     dispatch(sharedActions.searchCategory({ searchCategory: pageCategory }))
-    setInputValue(search || '')
 
     return () => {
       dispatch(sharedActions.searchModeActive({ isSearchModeActive: false }))
@@ -93,6 +92,17 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
     dispatch(sharedActions.searchModeActive({ isSearchModeActive: false }))
   }, [pathname, dispatch])
 
+  const handleSearchModeOpen = useCallback(() => {
+    dispatch(sharedActions.searchModeActive({ isSearchModeActive: true }))
+    filterInputRef.current?.focus()
+  }, [dispatch])
+
+  useEffect(() => {
+    if (isNoActiveSearch && !isSearchResult) {
+      handleSearchModeOpen()
+    }
+  }, [isNoActiveSearch, handleSearchModeOpen, isSearchResult])
+
   const handleClearAll = useCallback(() => {
     resetSearchFilters()
     clearFilters()
@@ -102,6 +112,7 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
 
   return {
     category: searchCategory,
+    handleSearchModeOpen,
     handleSearchModeClose,
     isSearchModeActive,
     isCategorySuggestionsOpen,

@@ -16,6 +16,7 @@ import { draftMode } from 'next/headers'
 import { PreviewBlock } from '@/features/preview/PreviewBlock'
 import { ReduxDraftModeSync } from '@/features/shared/components/Redux/ReduxDraftModeSync'
 import { ReactTooltipInitializer } from '@/features/ui/components/tooltip/ReactTooltipInitializer'
+import { ReduxSearchSync } from '@/features/shared/components/Redux/REduxSearchSync'
 
 function MyApp({ children }: { children: React.ReactNode }) {
   const { isEnabled } = draftMode()
@@ -47,6 +48,7 @@ function MyApp({ children }: { children: React.ReactNode }) {
                   <>
                     <AppHead />
                     <TestMenu />
+                    <ReduxSearchSync />
                     <ReduxDraftModeSync isDraftMode={isEnabled} />
                     {children}
                     <ReactTooltipInitializer />
