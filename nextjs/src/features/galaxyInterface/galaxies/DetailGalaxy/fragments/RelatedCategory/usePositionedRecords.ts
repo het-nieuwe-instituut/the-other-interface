@@ -7,7 +7,7 @@ import { useRecordRelations } from '@/features/record/hooks/useRecordRelations'
 import { useParams, useSearchParams } from 'next/navigation'
 import { AllRelationTotalsType } from './RelatedCategory'
 
-export const usePresenter = (
+export const usePositionedRecords = (
   category: CloudCategory,
   allRelationTotals?: AllRelationTotalsType
 ) => {
