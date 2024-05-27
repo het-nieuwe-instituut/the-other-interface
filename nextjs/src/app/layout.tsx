@@ -16,7 +16,7 @@ import { draftMode } from 'next/headers'
 import { PreviewBlock } from '@/features/preview/PreviewBlock'
 import { ReduxDraftModeSync } from '@/features/shared/components/Redux/ReduxDraftModeSync'
 import { ReactTooltipInitializer } from '@/features/ui/components/tooltip/ReactTooltipInitializer'
-import { ReduxSearchSync } from '@/features/shared/components/Redux/REduxSearchSync'
+import { ReduxSearchSync } from '@/features/shared/components/Redux/ReduxSearchSync'
 
 function MyApp({ children }: { children: React.ReactNode }) {
   const { isEnabled } = draftMode()
