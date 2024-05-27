@@ -13,13 +13,15 @@ import { useSearchBarPosition } from './useSearchBarPosition'
 import CloseIconSmall from '@/icons/close-icon-small.svg'
 import { cn } from '@/features/ui/utils/cn'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
+import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 
 type Props = {
   total?: number
   isNoActiveSearch?: boolean
+  className?: string
 }
 
-export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) => {
+export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch, className }) => {
   const {
     category,
     isSearchModeActive,
@@ -27,7 +29,6 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) =>
     isCategorySuggestionsOpen,
     setIsCategorySuggestionsOpen,
     handleGoClick,
-    t,
     searchResultAmount,
     inputValue,
     handleInputChange,
@@ -39,11 +40,13 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) =>
     selectedFilters,
     removeFilter,
   } = usePresenter(isNoActiveSearch)
+  const { t } = useTypeSafeTranslation('category')
 
   const { offset, searchBarHeight, wrapRef } = useSearchBarPosition(selectedFilters)
 
   return (
     <Grid
+      className={cn(className, 'px-4')}
       position="relative"
       height={'auto'}
       templateColumns="160px minmax(20px, 1fr) minmax(95px, auto)"
@@ -55,12 +58,11 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) =>
       ref={searchBarRef}
       color="pinkAlpha.100"
       bottom={`${offset}px`}
-      className="px-4"
     >
       <Flex
         flexDirection="column"
         alignItems="flex-start"
-        className={'self-end h-[60px] pt-1 justify-center'}
+        className={'h-[60px] justify-center self-end pt-1'}
       >
         <p className={cn('text-pink.100', TypographyVariants({ social: 'textfield' }))}>
           {total ? total : searchResultAmount}
@@ -70,8 +72,8 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) =>
         </p>
       </Flex>
 
-      <div ref={wrapRef} className="flex flex-wrap p-0 gap-0">
-        <div className="pt-1 mr-2">
+      <div ref={wrapRef} className="flex flex-wrap gap-0 p-0 transition-all">
+        <div className="mr-2 pt-1">
           <CategoryFilter
             onClick={() => setIsCategorySuggestionsOpen(!isCategorySuggestionsOpen)}
             isOpen={isCategorySuggestionsOpen}
@@ -79,7 +81,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) =>
           />
         </div>
         {selectedFilters.map(filter => (
-          <div key={filter.id} className="h-[60px] pt-1 mr-2 max-w-full">
+          <div key={filter.id} className="mr-2 h-[60px] max-w-full pt-1">
             <SearchFilterBox
               category={filter.field}
               subCategory={filter.value}
@@ -89,7 +91,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) =>
             />
           </div>
         ))}
-        <div className={'h-[60px] py-1 pl-2 grow min-w-[70px]'}>
+        <div className={'h-[60px] min-w-[70px] grow py-1 pl-2'}>
           <FilterInput
             inputRef={filterInputRef}
             onFocus={handleSearchModeOpen}
@@ -100,7 +102,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) =>
         </div>
       </div>
 
-      <Flex gap="12px" alignItems="center" className={'self-end h-[60px] pt-1'}>
+      <Flex gap="12px" alignItems="center" className={'h-[60px] self-end pt-1'}>
         {isSearchModeActive ? (
           <>
             <GoButton handleClick={handleGoClick} />

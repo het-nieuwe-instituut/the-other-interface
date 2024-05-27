@@ -25,13 +25,13 @@ type RecordProps = ZoomLevel2Type & {
 export const Record: React.FC<Props> = ({ record, tooltipPlace }) => {
   const { id, category } = record
   const { t } = useTypeSafeTranslation('category')
-  const { lang, search } = useZoom2Params()
+  const { lang } = useZoom2Params()
   const { data, isLoading, isError } = useZoomHoverRecordResultQuery({ id, category })
 
   return (
     <div className="relative">
       {data === null ? (
-        RecordData(record, lang, search)
+        RecordData(record, lang)
       ) : (
         <div className="absolute flex h-4/5 w-[70%]" style={{ ...record.position }}>
           <ReadMoreTooltip
@@ -43,7 +43,7 @@ export const Record: React.FC<Props> = ({ record, tooltipPlace }) => {
             description={data?.description ?? undefined}
             className="size-full"
           >
-            {RecordData(record, lang, search)}
+            {RecordData(record, lang)}
           </ReadMoreTooltip>
         </div>
       )}
@@ -51,13 +51,12 @@ export const Record: React.FC<Props> = ({ record, tooltipPlace }) => {
   )
 }
 
-const RecordData = (record: RecordProps, lang?: Locale | null, search?: string) => {
+const RecordData = (record: RecordProps, lang?: Locale | null) => {
   const { id, thumbnail, category, title } = record
   const router = useRouter()
 
   const handleClick = () => {
-    const searchParam = search ? `?search=${search}` : ''
-    let url = `/detail/${category}/${id}${searchParam}`
+    let url = `/detail/${category}/${id}`
     url = addLocaleToUrl(url, lang)
 
     router.push(url)

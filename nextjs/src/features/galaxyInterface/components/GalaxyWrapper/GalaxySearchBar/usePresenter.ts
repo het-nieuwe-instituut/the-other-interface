@@ -1,54 +1,50 @@
 import { State } from '@/features/shared/configs/store'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useSearch } from '@/features/shared/hooks/queries/useSearch'
-import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { useFilters } from '@/features/shared/hooks/search/useFilters'
+import { useEnterKey } from '@/features/shared/hooks/ui/useEnterKey'
+import { useOutsideClick } from '@/features/shared/hooks/ui/useOutsideClick'
+import { useFocusOnElement } from '@/features/shared/hooks/useFocusOnElement'
 import { usePageCategory } from '@/features/shared/hooks/usePageCategory'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 import { sharedActions } from '@/features/shared/stores/shared.store'
 import { usePathname, useRouter } from 'next/navigation'
-import { useCallback, useEffect, useState, useRef } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useEnterKey } from '@/features/shared/hooks/ui/useEnterKey'
-import { useOutsideClick } from '@/features/shared/hooks/ui/useOutsideClick'
-import { useFilters } from '@/features/shared/hooks/search/useFilters'
 
 export const usePresenter = (isNoActiveSearch?: boolean) => {
   const router = useRouter()
   const pathname = usePathname()
   const dispatch = useDispatch()
+  const filterInputRef = useRef<HTMLInputElement>(null)
+
+  const { focus } = useFocusOnElement(filterInputRef, !isNoActiveSearch ?? false)
 
   const { lang, search, isSearchResult } = useZoom2Params()
 
-  const filterInputRef = useRef<HTMLInputElement>(null)
   const searchBarRef = useRef<HTMLDivElement>(null)
   const { isSearchModeActive, searchCategory, isCategorySuggestionsOpen } = useSelector(
     (state: State) => state.shared
   )
 
-  const handleInputFocus = () => {
-    filterInputRef.current?.focus()
-  }
-
   const { selectedFilters, selectFilter, clearFilters, encodedFilters, removeFilter } = useFilters({
-    onSelectFilter: handleInputFocus,
-    onRemoveFilter: handleInputFocus,
+    onSelectFilter: focus,
+    onRemoveFilter: focus,
   })
 
-  const { t } = useTypeSafeTranslation('category')
   const { pageCategory } = usePageCategory()
   const { data } = useSearch({ category: pageCategory, text: search })
   const { total } = data || { total: 0 }
-
-  const [inputValue, setInputValue] = useState('')
+  const inputValue = useSelector((state: State) => state.shared.searchValue)
   const [isUserTyping, setIsUserTyping] = useState(false)
 
   const resetSearchFilters = useCallback(() => {
     dispatch(sharedActions.searchCategory({ searchCategory: pageCategory }))
-    setInputValue(search || '')
+    dispatch(sharedActions.setSearch({ searchValue: search || '' }))
   }, [search, pageCategory, dispatch])
 
   const handleSearchModeClose = useCallback(
-    (resetFilters = true) => {
+    (resetFilters = false) => {
       dispatch(sharedActions.searchModeActive({ isSearchModeActive: false }))
       dispatch(sharedActions.categorySuggestionsOpen({ categorySuggestionsOpen: false }))
 
@@ -68,15 +64,16 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
 
     setIsUserTyping(false)
     handleSearchModeClose(false)
-  }, [inputValue, searchCategory, router, handleSearchModeClose, lang, selectedFilters])
+  }, [inputValue, encodedFilters, searchCategory, lang, router, handleSearchModeClose])
 
   useEnterKey(handleGoClick)
-  useOutsideClick(searchBarRef, handleSearchModeClose)
+  useOutsideClick(searchBarRef, () => handleSearchModeClose(false))
 
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const newValue = e.target.value
-      setInputValue(newValue)
+
+      dispatch(sharedActions.setSearch({ searchValue: newValue }))
       setIsUserTyping(true)
       dispatch(sharedActions.categorySuggestionsOpen({ categorySuggestionsOpen: false }))
     },
@@ -85,7 +82,6 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
 
   useEffect(() => {
     dispatch(sharedActions.searchCategory({ searchCategory: pageCategory }))
-    setInputValue(search || '')
 
     return () => {
       dispatch(sharedActions.searchModeActive({ isSearchModeActive: false }))
@@ -111,15 +107,14 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
     resetSearchFilters()
     clearFilters()
     dispatch(sharedActions.categorySuggestionsOpen({ categorySuggestionsOpen: false }))
-    filterInputRef.current?.focus()
-  }, [dispatch, pageCategory])
+    focus()
+  }, [clearFilters, dispatch, resetSearchFilters, focus])
 
   return {
     category: searchCategory,
     handleSearchModeOpen,
     handleSearchModeClose,
     isSearchModeActive,
-    t,
     isCategorySuggestionsOpen,
     setIsCategorySuggestionsOpen: (isCategorySuggestionsOpen: boolean) => {
       dispatch(

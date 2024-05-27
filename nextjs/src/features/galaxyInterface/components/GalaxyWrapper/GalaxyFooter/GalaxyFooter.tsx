@@ -1,4 +1,5 @@
 'use client'
+import { useTotalCounter } from '@/features/galaxyInterface/galaxies/MainGalaxy/hooks/useTotalCounter'
 import {
   FOOTER_Z_INDEX,
   GALAXY_EDITORIAL_LAYER_PART,
@@ -6,9 +7,8 @@ import {
 import { Grid, GridItem } from '@chakra-ui/react'
 import { GalaxyNavigation } from '../GalaxyNavigation/GalaxyNavigation'
 import { GalaxySearchBar } from '../GalaxySearchBar/GalaxySearchBar'
-import { usePresenter } from './usePresenter'
-import { useTotalCounter } from '@/features/galaxyInterface/galaxies/MainGalaxy/hooks/useTotalCounter'
 import { CollpsedSearch } from '../GalaxySearchBar/fragments/CollpsedSearch'
+import { usePresenter } from './usePresenter'
 
 type Props = {
   galaxyPagination?: React.ReactNode
