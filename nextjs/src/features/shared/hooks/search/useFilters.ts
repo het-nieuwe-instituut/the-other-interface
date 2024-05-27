@@ -32,13 +32,16 @@ export const useFilters = ({ onSelectFilter, onRemoveFilter }: UseFiltersProps =
 
   const selectFilter = useCallback(
     (filter: Filter) => {
+      if (selectedFilters.some(f => f.id === filter.id)) {
+        return
+      }
       setSelectedFilters([...selectedFilters, filter])
       dispatch(sharedActions.categorySuggestionsOpen({ categorySuggestionsOpen: false }))
       if (onSelectFilter) {
         onSelectFilter()
       }
     },
-    [selectedFilters, dispatch]
+    [selectedFilters, dispatch, onSelectFilter]
   )
 
   const removeFilter = useCallback(
@@ -48,7 +51,7 @@ export const useFilters = ({ onSelectFilter, onRemoveFilter }: UseFiltersProps =
         onRemoveFilter()
       }
     },
-    [selectedFilters]
+    [onRemoveFilter, selectedFilters]
   )
 
   const clearFilters = useCallback(() => {
