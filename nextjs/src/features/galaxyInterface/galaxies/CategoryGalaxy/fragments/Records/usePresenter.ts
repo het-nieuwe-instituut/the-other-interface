@@ -2,9 +2,8 @@ import { useMemo } from 'react'
 import { PositioningTemplate, positioningTemplates } from './positioningTemplates'
 import { usePositioningTemplates } from '@/features/shared/hooks/usePositioningTemplates'
 import { usePageNumber } from '@/features/shared/hooks/usePageNumber'
-import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
-import { useSearch } from '@/features/shared/hooks/queries/useSearch'
+import { useSearchByCategoryQuery } from '@/features/shared/hooks/queries/useSearchByCategoryQuery'
 import { SearchResultItemType } from 'src/generated/graphql'
 
 const getPositionedRecords = ({
@@ -39,8 +38,6 @@ const getPositionedRecords = ({
 }
 
 export const usePresenter = (pageAmount: number) => {
-  const { t } = useTypeSafeTranslation('category')
-
   const { category, search } = useZoom2Params()
   const { pageNumber } = usePageNumber()
   const { currentTemplate, nextTemplate } = usePositioningTemplates(
@@ -51,13 +48,13 @@ export const usePresenter = (pageAmount: number) => {
   const isLastPage = pageNumber === pageAmount
   const nextPage = pageNumber + 1
 
-  const { data: currentResults, isLoading: isResultLoading } = useSearch({
+  const { data: currentResults } = useSearchByCategoryQuery({
     category,
     text: search,
     page: pageNumber,
   })
 
-  const { data: nextResults } = useSearch({
+  const { data: nextResults } = useSearchByCategoryQuery({
     category,
     text: search,
     page: nextPage,
@@ -84,11 +81,9 @@ export const usePresenter = (pageAmount: number) => {
   }, [nextRecords, category, nextTemplate, nextPage])
 
   return {
-    isResultLoading,
     currentPositionedRecords,
     nextPositionedRecords,
     isCurrentRecordsEmpty: currentRecords.length === 0,
     isNextRecordsEmpty: nextRecords.length === 0,
-    t,
   }
 }

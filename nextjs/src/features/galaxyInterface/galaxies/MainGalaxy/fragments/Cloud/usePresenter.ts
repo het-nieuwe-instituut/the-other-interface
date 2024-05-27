@@ -5,7 +5,7 @@ import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useState } from 'react'
 import { CategoryCloud } from '../types'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
-import { useSearch } from '@/features/shared/hooks/queries/useSearch'
+import { useSearchByCategoryQuery } from '@/features/shared/hooks/queries/useSearchByCategoryQuery'
 
 export const usePresenter = (cloud: CategoryCloud) => {
   const { t } = useTypeSafeTranslation('homepage')
@@ -14,7 +14,7 @@ export const usePresenter = (cloud: CategoryCloud) => {
   const [enabled, setEnabled] = useState(false)
   const { title: category, size, cloudPosition, titlePosition } = cloud
 
-  const { data } = useSearch({
+  const { data } = useSearchByCategoryQuery({
     category,
     enabled,
   })

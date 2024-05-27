@@ -2,8 +2,6 @@ import { keyframes } from '@emotion/react'
 import { Record } from '../Record/Record'
 import { usePresenter } from './usePresenter'
 
-import { ThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
-import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { LANDINGPAGE_Z_INDEXES } from '../../../MainGalaxy/fragments/constants'
 import { RecordsGrid } from '../RecordsGrid'
 
@@ -16,32 +14,11 @@ type Props = {
 
 export const Records: React.FC<Props> = ({ pageAmount }) => {
   const {
-    isResultLoading,
     currentPositionedRecords,
-    t,
     nextPositionedRecords,
     isCurrentRecordsEmpty,
     isNextRecordsEmpty,
   } = usePresenter(pageAmount)
-
-  if (isResultLoading) {
-    return <ThemedSpinner />
-  }
-
-  if (isCurrentRecordsEmpty) {
-    return (
-      <div className="w-full">
-        <p
-          className={TypographyVariants({
-            times: 'lg',
-            className: 'text-blue-100 text-[74px] leading-normal justify-start mb-[12vh]',
-          })}
-        >
-          {t('noResultsFound')}.
-        </p>
-      </div>
-    )
-  }
 
   return (
     <div className={'group-hover-blur size-full'}>

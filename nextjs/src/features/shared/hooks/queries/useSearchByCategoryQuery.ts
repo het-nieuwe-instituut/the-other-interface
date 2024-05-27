@@ -12,7 +12,7 @@ import { storyToRecordMapper } from '../../helpers/extractStoryData'
 import initApiClientService from '../../utils/initApiClientService'
 import { useLocale } from '../useLocale'
 
-export function useSearch({
+export function useSearchByCategoryQuery({
   category,
   text,
   page = 1,

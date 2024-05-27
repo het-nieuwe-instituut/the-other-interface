@@ -20,5 +20,6 @@
   "searchCategory": "Categoriën",
 
   "couldNotFetchHover": "Er ging iets fout bij het ophalen van de hover informatie, probeer het later nog eens.",
-  "errorLoadingDetail": "Er is iets misgegaan bij het laden. Probeer het later opnieuw."
+  "errorLoadingDetail": "Er is iets misgegaan bij het laden. Probeer het later opnieuw.",
+  "errorLoadingCategoryItems": "Er is iets misgegaan bij het laden van de categorie items. Probeer het later opnieuw."
 }
