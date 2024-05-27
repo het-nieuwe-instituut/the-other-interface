@@ -2,10 +2,8 @@
 import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
 import { MainGalaxy } from '@/features/galaxyInterface/galaxies/MainGalaxy/MainGalaxy'
 
-import { Box } from '../../../shared/configs/chakra'
-import { HomepageQuery, StoryEntity, ThemesQuery } from 'src/generated/graphql'
+import { HomepageQuery, ThemesQuery } from 'src/generated/graphql'
 import { EditorialLayer } from '@/features/shared/components/Layers/EditorialLayer/EditorialLayer'
-import { usePresenter } from './usePresetner'
 
 export type Props = {
   homepage?: HomepageQuery
@@ -14,19 +12,13 @@ export type Props = {
   draftMode: boolean
 }
 
-export const HomepageContainer: React.FC<Props> = ({ homepage, draftMode }) => {
-  const { stories, nextStories, storyTitle, pagination } = usePresenter(draftMode)
+export const HomepageContainer: React.FC<Props> = ({ homepage }) => {
   const editorialData = homepage?.homepage?.data?.attributes
 
   return (
-    <Box>
+    <div>
       <GalaxyInterface>
-        <MainGalaxy
-          stories={stories as StoryEntity[]}
-          nextStories={nextStories as StoryEntity[]}
-          storyTitle={storyTitle}
-          pagination={pagination}
-        />
+        <MainGalaxy />
       </GalaxyInterface>
 
       {editorialData && (
@@ -36,6 +28,6 @@ export const HomepageContainer: React.FC<Props> = ({ homepage, draftMode }) => {
           components={editorialData.components}
         />
       )}
-    </Box>
+    </div>
   )
 }

@@ -7,10 +7,13 @@
     "develop": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",
+    "lint": "echo 'no linting for strapi yet'",
+    "test": "echo 'No tests for Strapi'",
     "start-services": "docker-compose --project-name=hni-toi up",
     "strapi": "strapi",
     "clean": "rm -rf node_modules && rm -rf .cache && rm -rf dist",
-    "copyenv": "./.bin/init-env"
+    "copyenv": "./.bin/init-env",
+    "type-check": "tsc --noEmit --skipLibCheck"
   },
   "dependencies": {
     "@strapi/plugin-content-manager": "^4.11.7",

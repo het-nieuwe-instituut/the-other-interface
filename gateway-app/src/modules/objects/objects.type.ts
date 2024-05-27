@@ -1,9 +1,8 @@
-import { ArgsType, Field, ObjectType } from '@nestjs/graphql'
-import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
+import { ArgsType, Field, ObjectType, OmitType } from '@nestjs/graphql'
+import { EntityNames } from '../util/entityNames.type'
 import { PeopleZoomLevel3DetailType } from '../people/people.type'
-import { IsOptional, IsString } from 'class-validator'
-// import { PeopleZoomLevel3DetailType } from '../people/people.type'
-// import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
+import { IsString } from 'class-validator'
+import { Locale } from '../util/locale.type'
 
 @ObjectType()
 export class ObjectsZoomLevel3DetailType {
@@ -227,25 +226,31 @@ export class ObjectRecordRelationArgs {
   @IsString()
   public id: string
 
-  @Field()
-  @IsOptional()
-  public lang?: string
+  @Field(() => Locale)
+  public locale: Locale
 }
 
 @ArgsType()
 export class ObjectsZoomLevel2HoverArgs {
   @Field(() => String, { nullable: false })
   public id: string
+
+  @Field(() => Locale)
+  public locale: Locale
 }
+
+@ArgsType()
+export class ObjectRecordRelationCountArgs extends OmitType(ObjectRecordRelationArgs, [
+  'locale',
+] as const) {}
+
 @ObjectType()
 export class ObjectsZoomLevelHoverType {
   @Field(() => String, { nullable: true })
   public title?: string | null
 
-  // confluence says this is missing
-  // need to follow up
-  // @Field(() => String, { nullable: true })
-  // public maker: string
+  @Field(() => String, { nullable: true })
+  public maker?: string | null
 
   @Field(() => String, { nullable: true })
   public description?: string | null

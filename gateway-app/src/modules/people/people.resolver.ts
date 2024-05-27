@@ -3,6 +3,7 @@ import { PaginationArgs } from '../util/paginationArgs.type'
 
 import {
   PeopleRecordRelationArgs,
+  PeopleRecordRelationCountArgs,
   PeopleRelationsCountType,
   PeopleRelationsType,
   PeopleZoomLevel2HoverArgs,
@@ -19,11 +20,11 @@ export class PeopleZoomLevel3Resolver {
     @Args() args: PeopleRecordRelationArgs,
     @Args() paginationArgs: PaginationArgs
   ) {
-    return this.peopleService.getRelationsData(args.id, args.type, paginationArgs)
+    return this.peopleService.getRelationsData(args.id, args.type, paginationArgs, args.locale)
   }
 
   @Query(() => [PeopleRelationsCountType], { nullable: true })
-  public peopleRecordRelationsCount(@Args() args: PeopleRecordRelationArgs) {
+  public peopleRecordRelationsCount(@Args() args: PeopleRecordRelationCountArgs) {
     return this.peopleService.getRelationsDataCount(args.id, args.type)
   }
 }
@@ -34,6 +35,6 @@ export class PeopleZoomLevelRecordHoverResolver {
 
   @Query(() => PeopleZoomLevelHoverType)
   public async peopleZoomLevelHover(@Args() args: PeopleZoomLevel2HoverArgs) {
-    return this.peopleService.getZoomRecordHover(args.id)
+    return this.peopleService.getZoomRecordHover(args.id, args.locale)
   }
 }

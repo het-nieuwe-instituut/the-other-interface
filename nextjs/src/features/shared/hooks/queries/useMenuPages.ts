@@ -2,12 +2,11 @@
 import { UseQueryResult, useQuery } from '@tanstack/react-query'
 import initApiClientService from '../../utils/initApiClientService'
 import { MenuPagesQuery } from 'src/generated/graphql'
-import { useSearchParams } from 'next/navigation'
+import { useLocale } from '../useLocale'
 
 export function useMenuPages(): UseQueryResult<MenuPagesQuery> {
   const api = initApiClientService()
-  const searchParams = useSearchParams()
-  const lang = searchParams?.get('lang')
+  const lang = useLocale()
   const queryFn = () => api?.menuPages({ locale: lang })
 
   return useQuery({

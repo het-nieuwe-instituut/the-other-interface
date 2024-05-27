@@ -1,13 +1,9 @@
-import { ArgsType, Field, ObjectType, createUnionType, registerEnumType } from '@nestjs/graphql'
-import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
+import { ArgsType, Field, ObjectType, OmitType, registerEnumType } from '@nestjs/graphql'
 import { ArchivesZoomLevel3Types } from './archives.service'
 import { PeopleZoomLevel3DetailType } from '../people/people.type'
-import { IsOptional, IsString } from 'class-validator'
-// import { PeopleZoomLevel3DetailType } from '../people/people.type'
-// import { ArchivesZoomLevel3Types } from './archives.service'
-// import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
-
-// registerEnumType(ArchivesZoomLevel3Types, { name: 'ArchivesZoomLevel3Types' })
+import { IsString } from 'class-validator'
+import { EntityNames } from '../util/entityNames.type'
+import { Locale } from '../util/locale.type'
 
 @ObjectType()
 export class ArchiveZoomLevel3DetailType {
@@ -154,52 +150,6 @@ export class ArchivesFondsCreatorType {
   @Field(() => PeopleZoomLevel3DetailType, { nullable: true })
   public populatedCreator?: PeopleZoomLevel3DetailType
 }
-
-@ObjectType()
-export class ArchivesOtherZoomLevel3DetailType extends BaseArchiveZoomLevel3Type {
-  @Field(() => String, { nullable: true })
-  public objectNumber?: string
-
-  @Field(() => String, { nullable: true })
-  public startDate?: string
-
-  @Field(() => String, { nullable: true })
-  public endDate?: string
-
-  @Field(() => String, { nullable: true })
-  public dateLabel?: string
-
-  @Field(() => String, { nullable: true })
-  public dimensionFree?: string
-
-  @Field(() => String, { nullable: true })
-  public mediaReference?: string
-
-  @Field(() => String, { nullable: true })
-  public mediaReferenceLabel?: string
-
-  @Field(() => String, { nullable: true })
-  public existenceOfOriginals?: string
-
-  @Field(() => String, { nullable: true })
-  public scopeContent?: string
-
-  @Field(() => String, { nullable: true })
-  public relatedMaterial?: string
-
-  @Field(() => String, { nullable: true })
-  public rights?: string
-
-  @Field(() => String, { nullable: true })
-  public rightsLabel?: string
-
-  @Field(() => String, { nullable: true })
-  public permanentLink?: string
-
-  @Field(() => [String], { nullable: true })
-  public pidWorkURIs?: string[]
-}
-
 @ArgsType()
 export class ArchiveRecordRelationArgs {
   @Field(() => EntityNames)
@@ -209,22 +159,14 @@ export class ArchiveRecordRelationArgs {
   @IsString()
   public id: string
 
-  @Field()
-  @IsOptional()
-  public lang?: string
+  @Field(() => Locale)
+  public locale: Locale
 }
 
-export const ArchiveZoomLevel3UnionType = createUnionType({
-  name: 'ArchiveZoomLevel5UnionType',
-  types: () => [ArchivesOtherZoomLevel3DetailType, ArchivesFondsZoomLevel3DetailType] as const,
-  resolveType: (archive: BaseArchiveZoomLevel3Type) => {
-    if (archive.type === ArchivesZoomLevel3Types.other) {
-      return ArchivesOtherZoomLevel3DetailType
-    }
-
-    return ArchivesFondsZoomLevel3DetailType
-  },
-})
+@ArgsType()
+export class ArchiveRecordRelationCountArgs extends OmitType(ArchiveRecordRelationArgs, [
+  'locale',
+] as const) {}
 
 @ObjectType()
 export class ArchivesRecordZoomLevel3Type {
@@ -258,11 +200,16 @@ export class ArchivesRecordZoomLevel3Type {
   @Field(() => String, { nullable: true })
   public externalSource?: string
 }
+
 @ArgsType()
 export class ArchivesZoomLevel2HoverArgs {
   @Field(() => String, { nullable: false })
   public id: string
+
+  @Field(() => Locale)
+  public locale: Locale
 }
+
 @ObjectType()
 export class ArchivesZoomLevelHoverType {
   @Field(() => String, { nullable: true })

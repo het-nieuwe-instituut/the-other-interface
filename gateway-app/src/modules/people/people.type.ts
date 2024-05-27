@@ -1,6 +1,7 @@
-import { ArgsType, Field, ObjectType } from '@nestjs/graphql'
-import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
-import { IsOptional, IsString } from 'class-validator'
+import { ArgsType, Field, ObjectType, OmitType } from '@nestjs/graphql'
+import { EntityNames } from '../util/entityNames.type'
+import { IsString } from 'class-validator'
+import { Locale } from '../util/locale.type'
 
 @ObjectType()
 export class PeopleZoomLevel3DetailType {
@@ -178,16 +179,24 @@ export class PeopleRecordRelationArgs {
   @IsString()
   public id: string
 
-  @Field()
-  @IsOptional()
-  public lang?: string
+  @Field(() => Locale)
+  public locale: Locale
 }
 
 @ArgsType()
 export class PeopleZoomLevel2HoverArgs {
   @Field(() => String, { nullable: false })
   public id: string
+
+  @Field(() => Locale)
+  public locale: Locale
 }
+
+@ArgsType()
+export class PeopleRecordRelationCountArgs extends OmitType(PeopleRecordRelationArgs, [
+  'locale',
+] as const) {}
+
 @ObjectType()
 export class PeopleZoomLevelHoverType {
   @Field(() => String, { nullable: true })

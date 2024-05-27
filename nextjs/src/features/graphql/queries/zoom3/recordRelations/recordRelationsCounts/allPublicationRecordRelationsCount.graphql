@@ -1,5 +1,5 @@
-query PublicationsRecordRelationsCount($id: String!, $type: EntityNames!, $lang: String!) {
-    publicationsRecordRelationsCount(type: $type, id: $id, lang: $lang) {
+query PublicationsRecordRelationsCount($id: String!, $type: EntityNames!) {
+    publicationsRecordRelationsCount(type: $type, id: $id) {
         total
     }
 }

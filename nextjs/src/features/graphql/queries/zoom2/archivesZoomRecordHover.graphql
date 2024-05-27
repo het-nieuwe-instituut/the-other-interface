@@ -1,5 +1,5 @@
-query ArchivesZoomRecordHover($id: String!) {
-    archivesZoomRecordHover(id: $id) {
+query ArchivesZoomRecordHover($id: String!, $locale: Locale!) {
+    archivesZoomRecordHover(id: $id, locale: $locale) {
         title
         creators
         description

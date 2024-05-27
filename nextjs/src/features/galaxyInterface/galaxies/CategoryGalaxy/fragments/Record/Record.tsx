@@ -1,18 +1,20 @@
 import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
-import { useZoomHoverRecordResult } from '@/features/shared/hooks/queries/useZoomHoverRecordResult'
+import { useZoomHoverRecordResultQuery } from '@/features/shared/hooks/queries/useZoomHoverRecordResultQuery'
+import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 import { Position } from '@/features/shared/types/position'
 import { CloudCategory } from '@/features/shared/utils/categories'
 import { ReadMoreTooltip } from '@/features/ui/components/tooltip/ReadMoreTooltip'
-import { useRouter } from 'next/navigation'
-import { ZoomLevel2Type } from 'src/generated/graphql'
-import { RecordText } from '../RecordText'
-import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { cn } from '@/features/ui/utils/cn'
+import { useRouter } from 'next/navigation'
+import { PlacesType } from 'react-tooltip'
+import { Locale, ZoomLevel2Type } from 'src/generated/graphql'
+import { RecordText } from '../RecordText'
 
 type Props = {
   record: RecordProps
+  tooltipPlace: PlacesType
 }
 
 type RecordProps = ZoomLevel2Type & {
@@ -20,12 +22,11 @@ type RecordProps = ZoomLevel2Type & {
   category: CloudCategory
 }
 
-export const Record: React.FC<Props> = ({ record }) => {
+export const Record: React.FC<Props> = ({ record, tooltipPlace }) => {
   const { id, category } = record
   const { t } = useTypeSafeTranslation('category')
   const { lang, search } = useZoom2Params()
-  // TODO: HNIT-1833 - add in loading and error handling
-  const { data, isLoading, isError } = useZoomHoverRecordResult({ id, category })
+  const { data, isLoading, isError } = useZoomHoverRecordResultQuery({ id, category })
 
   return (
     <div className="relative">
@@ -34,9 +35,10 @@ export const Record: React.FC<Props> = ({ record }) => {
       ) : (
         <div className="absolute flex h-4/5 w-[70%]" style={{ ...record.position }}>
           <ReadMoreTooltip
-            error={isError ? t('couldNotFetchHover') : ''}
-            place="bottom-start"
             isLoading={isLoading}
+            error={isError ? t('couldNotFetchHover') : ''}
+            place={tooltipPlace}
+            isEmpty={!data?.description && !data?.title}
             title={data?.title ?? undefined}
             description={data?.description ?? undefined}
             className="size-full"
@@ -49,7 +51,7 @@ export const Record: React.FC<Props> = ({ record }) => {
   )
 }
 
-const RecordData = (record: RecordProps, lang?: string | null, search?: string) => {
+const RecordData = (record: RecordProps, lang?: Locale | null, search?: string) => {
   const { id, thumbnail, category, title } = record
   const router = useRouter()
 
@@ -72,9 +74,9 @@ const RecordData = (record: RecordProps, lang?: string | null, search?: string) 
       <ResponsiveImage
         src={thumbnail}
         alt={title ?? ''}
-        maxHeight="calc(100% - 2.6vw - 7px)" // where 2.6vw are a texts' line heights, 15px are gaps
+        className="max-h-[calc(100%-2.6vw-7px)]" // where 2.6vw are a texts' line heights, 15px are gaps
         size={'16vw'}
-        css={{
+        style={{
           flex: `1 1 calc(100% - 2.6vw - 7px)`,
         }}
         disableRightClick

@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export const useCalculateLine = () => {
+  const ref = useRef<HTMLButtonElement>(null)
   // need to know start and end
   const [coordinates, setCoordinates] = useState({ x1: '0', y1: '0', x2: '0', y2: '0' })
 
@@ -8,9 +9,9 @@ export const useCalculateLine = () => {
     const draw = () => {
       const mainElement = Array.from(document.querySelectorAll('#detail-galaxy-grid'))[0]
       const rect = mainElement.getBoundingClientRect()
-      const hoveredElement = Array.from(document.querySelectorAll('.hovered'))[0]
+      const hoveredElement = ref.current
 
-      if (hoveredElement) {
+      if (hoveredElement && rect) {
         const hoveredRect = hoveredElement.getBoundingClientRect()
 
         setCoordinates({
@@ -32,5 +33,5 @@ export const useCalculateLine = () => {
     }
   }, [])
 
-  return coordinates
+  return { coordinates, ref }
 }

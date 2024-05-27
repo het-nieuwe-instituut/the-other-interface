@@ -1,5 +1,6 @@
 {
   "somethingWentWrong": "Something went wrong",
+  "somethingWentWrongAndRetry": "Couldn't load section. Please reload the page",
   "commonTest": "This is a common translation test, also testing counters: {{count}}",
   "published": "Published on {{date}}",
   "archivesBy": "Archive items by",
@@ -17,5 +18,6 @@
   "readMore": "Read more",
   "switchToMockedServer": "Switch to mocked server",
   "switchToLiveServer": "Switch to test server",
-  "go": "Search"
+  "go": "Search",
+  "noDataFound": "No data found"
 }

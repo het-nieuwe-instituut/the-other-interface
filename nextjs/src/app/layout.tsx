@@ -15,6 +15,7 @@ import BaseElementWrapper from '@/features/shared/components/wrappers/BaseElemen
 import { draftMode } from 'next/headers'
 import { PreviewBlock } from '@/features/preview/PreviewBlock'
 import { ReduxDraftModeSync } from '@/features/shared/components/Redux/ReduxDraftModeSync'
+import { ReactTooltipInitializer } from '@/features/ui/components/tooltip/ReactTooltipInitializer'
 
 function MyApp({ children }: { children: React.ReactNode }) {
   const { isEnabled } = draftMode()
@@ -48,6 +49,7 @@ function MyApp({ children }: { children: React.ReactNode }) {
                     <TestMenu />
                     <ReduxDraftModeSync isDraftMode={isEnabled} />
                     {children}
+                    <ReactTooltipInitializer />
                     <BaseElementWrapper />
                   </>
                 </MobileOverlayProvider>

@@ -1,23 +1,21 @@
 import { Inject } from '@nestjs/common'
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
 import { PublicationState, Sdk } from '../../generated/strapi-sdk'
-import { I18NLocaleCode, PaginationArg } from '../strapi/shared-types'
+import { PaginationArg } from '../strapi/shared-types'
 import {
   LocationEntityResponse,
   LocationFiltersInput,
   LocationRelationResponseCollection,
 } from './location.type'
 import { Location } from './location-dependency.type'
+import { Locale } from '../util/locale.type'
 
 @Resolver()
 export class LocationResolver {
   public constructor(@Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk) {}
 
   @Query(() => LocationEntityResponse)
-  public async location(
-    @Args('id') id: string,
-    @Args('locale', { nullable: true }) locale: I18NLocaleCode
-  ) {
+  public async location(@Args('id') id: string, @Args('locale') locale: Locale) {
     const res = await this.strapiGqlSdk.location({ id, locale })
 
     return res.location
@@ -25,11 +23,11 @@ export class LocationResolver {
 
   @Query(() => LocationRelationResponseCollection)
   public async locations(
+    @Args('locale') locale: Locale,
     @Args('filters', { nullable: true }) filters?: LocationFiltersInput,
     @Args('pagination', { nullable: true }) pagination?: PaginationArg,
     @Args('sort', { nullable: true, type: () => [String] }) sort?: string[],
-    @Args('publicationState', { nullable: true }) publicationState?: PublicationState,
-    @Args('locale', { nullable: true }) locale?: I18NLocaleCode
+    @Args('publicationState', { nullable: true }) publicationState?: PublicationState
   ) {
     const res = await this.strapiGqlSdk.locations({
       filters: filters || undefined,

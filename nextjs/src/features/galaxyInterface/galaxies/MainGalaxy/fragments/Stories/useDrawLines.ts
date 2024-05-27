@@ -1,3 +1,4 @@
+import { useLocale } from '@/features/shared/hooks/useLocale'
 import { useSearchParams } from 'next/navigation'
 import { useCallback, useEffect, useRef } from 'react'
 import { PositionedStory } from '../types'
@@ -8,7 +9,7 @@ export const useDrawLines = (selector: string, template: number, stories: Positi
   const searchParams = useSearchParams()
 
   const page = parseInt(searchParams?.get('page') ?? '1')
-  const lang = searchParams?.get('lang')
+  const lang = useLocale()
 
   const calculatePoint = useCallback((element: Element): { x: number; y: number } => {
     const rect = element.getBoundingClientRect()

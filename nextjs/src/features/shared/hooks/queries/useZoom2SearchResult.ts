@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import initApiClientService from '../../utils/initApiClientService'
 import { CATEGORIES_TO_ENTITY_MAPPER, CloudCategory } from '@/features/shared/utils/categories'
 import { ZOOM2_RECORDS_PER_PAGE } from '../../constants/mainConstants'
+import { useLocale } from '../useLocale'
 
 export function useZoom2SearchResult({
   category,
@@ -16,6 +17,7 @@ export function useZoom2SearchResult({
   enabled?: boolean
 }) {
   const api = initApiClientService()
+  const locale = useLocale()
 
   const entityName = CATEGORIES_TO_ENTITY_MAPPER[category as CloudCategory]
 
@@ -27,6 +29,7 @@ export function useZoom2SearchResult({
         page,
         pageSize: ZOOM2_RECORDS_PER_PAGE,
         text: text || undefined,
+        locale,
       })
     },
     enabled,

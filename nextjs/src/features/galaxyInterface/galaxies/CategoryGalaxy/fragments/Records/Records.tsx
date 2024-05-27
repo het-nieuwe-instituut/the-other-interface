@@ -2,7 +2,7 @@ import { keyframes } from '@emotion/react'
 import { Record } from '../Record/Record'
 import { usePresenter } from './usePresenter'
 
-import { Loader } from '@/features/galaxyInterface/components/Loader/Loader'
+import { ThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { LANDINGPAGE_Z_INDEXES } from '../../../MainGalaxy/fragments/constants'
 import { RecordsGrid } from '../RecordsGrid'
@@ -25,7 +25,7 @@ export const Records: React.FC<Props> = ({ pageAmount }) => {
   } = usePresenter(pageAmount)
 
   if (isResultLoading) {
-    return <Loader />
+    return <ThemedSpinner />
   }
 
   if (isCurrentRecordsEmpty) {
@@ -51,8 +51,8 @@ export const Records: React.FC<Props> = ({ pageAmount }) => {
           animation: isCurrentRecordsEmpty ? 'none' : `${currentPageFadeIn} 300ms linear`,
         }}
       >
-        {currentPositionedRecords.map(record => (
-          <Record key={record.key} record={record} />
+        {currentPositionedRecords.map((record, i) => (
+          <Record key={record.key} tooltipPlace={i >= 8 ? 'top' : 'bottom'} record={record} />
         ))}
       </RecordsGrid>
 
@@ -64,8 +64,8 @@ export const Records: React.FC<Props> = ({ pageAmount }) => {
           animation: isNextRecordsEmpty ? 'none' : `${nextPageFadeIn} 300ms linear`,
         }}
       >
-        {nextPositionedRecords.map(record => (
-          <Record key={record.key} record={record} />
+        {nextPositionedRecords.map((record, i) => (
+          <Record key={record.key} tooltipPlace={i >= 8 ? 'top' : 'bottom'} record={record} />
         ))}
       </RecordsGrid>
     </div>

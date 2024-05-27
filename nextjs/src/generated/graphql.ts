@@ -36,8 +36,6 @@ export type ArchiveZoomLevel3DetailType = {
   type?: Maybe<EntityNames>;
 };
 
-export type ArchiveZoomLevel5UnionType = ArchivesFondsZoomLevel3DetailType | ArchivesOtherZoomLevel3DetailType;
-
 export type ArchivesFondsCreatorType = {
   __typename?: 'ArchivesFondsCreatorType';
   creator: Scalars['String'];
@@ -45,6 +43,11 @@ export type ArchivesFondsCreatorType = {
   creatorLabel?: Maybe<Scalars['String']>;
   id: Scalars['String'];
   populatedCreator?: Maybe<PeopleZoomLevel3DetailType>;
+};
+
+
+export type ArchivesFondsCreatorTypePopulatedCreatorArgs = {
+  locale: Scalars['String'];
 };
 
 export type ArchivesFondsZoomLevel3DetailType = {
@@ -72,28 +75,6 @@ export type ArchivesFondsZoomLevel3DetailType = {
   source?: Maybe<Scalars['String']>;
   startDate?: Maybe<Scalars['String']>;
   systemOfArrangement?: Maybe<Scalars['String']>;
-  thumbnail?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  type: ArchivesZoomLevel3Types;
-};
-
-export type ArchivesOtherZoomLevel3DetailType = {
-  __typename?: 'ArchivesOtherZoomLevel3DetailType';
-  dateLabel?: Maybe<Scalars['String']>;
-  dimensionFree?: Maybe<Scalars['String']>;
-  endDate?: Maybe<Scalars['String']>;
-  existenceOfOriginals?: Maybe<Scalars['String']>;
-  id: Scalars['String'];
-  mediaReference?: Maybe<Scalars['String']>;
-  mediaReferenceLabel?: Maybe<Scalars['String']>;
-  objectNumber?: Maybe<Scalars['String']>;
-  permanentLink?: Maybe<Scalars['String']>;
-  pidWorkURIs?: Maybe<Array<Scalars['String']>>;
-  relatedMaterial?: Maybe<Scalars['String']>;
-  rights?: Maybe<Scalars['String']>;
-  rightsLabel?: Maybe<Scalars['String']>;
-  scopeContent?: Maybe<Scalars['String']>;
-  startDate?: Maybe<Scalars['String']>;
   thumbnail?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   type: ArchivesZoomLevel3Types;
@@ -568,6 +549,11 @@ export type LandingpageRelationResponseCollection = {
   data: Array<LandingpageEntity>;
 };
 
+export enum Locale {
+  En = 'en',
+  Nl = 'nl'
+}
+
 export type Location = {
   __typename?: 'Location';
   city?: Maybe<Scalars['String']>;
@@ -693,6 +679,11 @@ export type ObjectMakerType = {
   populatedMaker?: Maybe<PeopleZoomLevel3DetailType>;
 };
 
+
+export type ObjectMakerTypePopulatedMakerArgs = {
+  locale: Scalars['String'];
+};
+
 export type ObjectMaterialType = {
   __typename?: 'ObjectMaterialType';
   id: Scalars['String'];
@@ -779,6 +770,7 @@ export type ObjectsZoomLevel3DetailType = {
 export type ObjectsZoomLevelHoverType = {
   __typename?: 'ObjectsZoomLevelHoverType';
   description?: Maybe<Scalars['String']>;
+  maker?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
 };
 
@@ -885,6 +877,11 @@ export type PublicationAuthorType = {
   populatedAuthor?: Maybe<PeopleZoomLevel3DetailType>;
 };
 
+
+export type PublicationAuthorTypePopulatedAuthorArgs = {
+  locale: Scalars['String'];
+};
+
 export type PublicationRecordZoomLevel3Type = {
   __typename?: 'PublicationRecordZoomLevel3Type';
   annotation?: Maybe<Scalars['String']>;
@@ -931,8 +928,6 @@ export type PublicationZoomLevel3DetailType = {
   yearOfPublication?: Maybe<Scalars['String']>;
 };
 
-export type PublicationZoomLevel3UnionType = PublicationsArticleZoomLevel3DetailType | PublicationsAudioVisualZoomLevel3DetailType | PublicationsBookZoomLevel3DetailType | PublicationsSerialZoomLevel3DetailType;
-
 export type PublicationsArticleZoomLevel3DetailType = {
   __typename?: 'PublicationsArticleZoomLevel3DetailType';
   abstract?: Maybe<Scalars['String']>;
@@ -964,6 +959,11 @@ export type PublicationsArticleZoomLevel3DetailType = {
   typeOfPublicationLabel?: Maybe<Scalars['String']>;
   volume?: Maybe<Scalars['String']>;
   yearOfPublication?: Maybe<Scalars['String']>;
+};
+
+
+export type PublicationsArticleZoomLevel3DetailTypePopulatedPublisherArgs = {
+  locale: Scalars['String'];
 };
 
 export type PublicationsAudioVisualZoomLevel3DetailType = {
@@ -1038,6 +1038,11 @@ export type PublicationsBookZoomLevel3DetailType = {
   yearOfPublication?: Maybe<Scalars['String']>;
 };
 
+
+export type PublicationsBookZoomLevel3DetailTypePopulatedPublisherArgs = {
+  locale: Scalars['String'];
+};
+
 export type PublicationsRelationsCountType = {
   __typename?: 'PublicationsRelationsCountType';
   total?: Maybe<Scalars['String']>;
@@ -1070,6 +1075,11 @@ export type PublicationsSerialZoomLevel3DetailType = {
   yearOfPublication?: Maybe<Scalars['String']>;
 };
 
+
+export type PublicationsSerialZoomLevel3DetailTypePopulatedPublisherArgs = {
+  locale: Scalars['String'];
+};
+
 export enum PublicationsZoomLevel3Types {
   Article = 'article',
   Audiovisual = 'audiovisual',
@@ -1087,7 +1097,6 @@ export type PublicationsZoomLevelHoverType = {
 export type Query = {
   __typename?: 'Query';
   archiveOther: ArchivesFondsZoomLevel3DetailType;
-  archivesDetailZoomLevel3: ArchiveZoomLevel3DetailType;
   archivesRecordRelations?: Maybe<Array<ArchiveRelationsType>>;
   archivesRecordRelationsCount?: Maybe<Array<ArchivesRelationsCountType>>;
   archivesRecordZoomLevel3?: Maybe<Array<ArchivesRecordZoomLevel3Type>>;
@@ -1101,7 +1110,6 @@ export type Query = {
   locations: LocationRelationResponseCollection;
   menupage: MenupageEntityResponse;
   menupages: MenupageEntityResponseCollection;
-  objectDetailZoomLevel3: ObjectsZoomLevel3DetailType;
   objectRecordRelations?: Maybe<Array<ObjectRelationsType>>;
   objectRecordRelationsCount?: Maybe<Array<ObjectRelationsCountType>>;
   objectsRecordZoomLevel3?: Maybe<Array<ObjectRecordZoomLevel3Type>>;
@@ -1113,7 +1121,6 @@ export type Query = {
   publicationArticle: PublicationsArticleZoomLevel3DetailType;
   publicationAudioVisual: PublicationsAudioVisualZoomLevel3DetailType;
   publicationBook: PublicationsBookZoomLevel3DetailType;
-  publicationDetailZoomLevel3: PublicationZoomLevel3DetailType;
   publicationRecordRelations?: Maybe<Array<PublicationRelationsType>>;
   publicationSerial: PublicationsSerialZoomLevel3DetailType;
   publicationsRecordRelationsCount?: Maybe<Array<PublicationsRelationsCountType>>;
@@ -1125,7 +1132,6 @@ export type Query = {
   storiesWithoutRelations: StoryWithoutRelationsEntityResponseCollection;
   story: StoryEntityResponse;
   storyByLocale: StoryEntityResponseCollection;
-  storyHover: StoryHoverType;
   storyMetaByLocale: StoryMetaEntityResponseCollection;
   storyRelationsCount?: Maybe<ZoomLevel3StoryRelationsCountType>;
   storyWithoutRelations: StoryWithoutRelationsEntityResponse;
@@ -1135,7 +1141,6 @@ export type Query = {
   triplyRecords: TriplyRecordRelationResponseCollection;
   usersPermissionsUser: UsersPermissionsUserEntityResponse;
   usersPermissionsUsers: UsersPermissionsUserEntityResponseCollection;
-  zoomLevel1: Array<ZoomLevel1Type>;
   zoomLevel2: ZoomLevel2ParentType;
   zoomLevel2Amount: ZoomLevel2AmountParentType;
   zoomLevel3Archive?: Maybe<ArchiveZoomLevel3DetailType>;
@@ -1143,20 +1148,12 @@ export type Query = {
   zoomLevel3Person?: Maybe<PeopleZoomLevel3DetailType>;
   zoomLevel3Publication?: Maybe<PublicationZoomLevel3DetailType>;
   zoomLevel3StoriesRelationsForRecord?: Maybe<ZoomLevel3StoriesRelatedToRecordType>;
-  zoomLevel5Archive?: Maybe<ArchiveZoomLevel5UnionType>;
-  zoomLevel5ArchivesFonds?: Maybe<ArchivesFondsZoomLevel3DetailType>;
-  zoomLevel5ArchivesOther?: Maybe<ArchivesOtherZoomLevel3DetailType>;
-  zoomLevel5Publication?: Maybe<PublicationZoomLevel3UnionType>;
-  zoomLevel5PublicationsArticle?: Maybe<PublicationsArticleZoomLevel3DetailType>;
-  zoomLevel5PublicationsAudiovisual?: Maybe<PublicationsAudioVisualZoomLevel3DetailType>;
-  zoomLevel5PublicationsBook?: Maybe<PublicationsBookZoomLevel3DetailType>;
-  zoomLevel5PublicationsSerial?: Maybe<PublicationsSerialZoomLevel3DetailType>;
 };
 
 
 export type QueryArchivesRecordRelationsArgs = {
   id: Scalars['String'];
-  lang: Scalars['String'];
+  locale: Locale;
   page: Scalars['Int'];
   pageSize?: InputMaybe<Scalars['Int']>;
   type: EntityNames;
@@ -1165,18 +1162,19 @@ export type QueryArchivesRecordRelationsArgs = {
 
 export type QueryArchivesRecordRelationsCountArgs = {
   id: Scalars['String'];
-  lang: Scalars['String'];
   type: EntityNames;
 };
 
 
 export type QueryArchivesRecordZoomLevel3Args = {
   id: Scalars['String'];
+  locale: Scalars['String'];
 };
 
 
 export type QueryArchivesZoomRecordHoverArgs = {
   id: Scalars['String'];
+  locale: Locale;
 };
 
 
@@ -1194,20 +1192,20 @@ export type QueryAuthorsArgs = {
 
 
 export type QueryHomepageArgs = {
-  locale?: InputMaybe<Scalars['String']>;
+  locale: Scalars['String'];
   publicationState?: InputMaybe<Scalars['String']>;
 };
 
 
 export type QueryLandingpageArgs = {
-  id?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
+  id: Scalars['String'];
+  locale: Scalars['String'];
 };
 
 
 export type QueryLandingpagesArgs = {
   filters?: InputMaybe<LandingpageFiltersInput>;
-  locale?: InputMaybe<Scalars['String']>;
+  locale: Scalars['String'];
   pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<Scalars['String']>;
   sort?: InputMaybe<Array<Scalars['String']>>;
@@ -1216,13 +1214,13 @@ export type QueryLandingpagesArgs = {
 
 export type QueryLocationArgs = {
   id: Scalars['String'];
-  locale?: InputMaybe<Scalars['String']>;
+  locale: Scalars['String'];
 };
 
 
 export type QueryLocationsArgs = {
   filters?: InputMaybe<LocationFiltersInput>;
-  locale?: InputMaybe<Scalars['String']>;
+  locale: Scalars['String'];
   pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<Scalars['String']>;
   sort?: InputMaybe<Array<Scalars['String']>>;
@@ -1231,13 +1229,13 @@ export type QueryLocationsArgs = {
 
 export type QueryMenupageArgs = {
   id?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
+  locale: Scalars['String'];
 };
 
 
 export type QueryMenupagesArgs = {
   filters?: InputMaybe<MenupageFiltersInput>;
-  locale?: InputMaybe<Scalars['String']>;
+  locale: Scalars['String'];
   pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<Scalars['String']>;
   sort?: InputMaybe<Array<Scalars['String']>>;
@@ -1246,7 +1244,7 @@ export type QueryMenupagesArgs = {
 
 export type QueryObjectRecordRelationsArgs = {
   id: Scalars['String'];
-  lang: Scalars['String'];
+  locale: Locale;
   page: Scalars['Int'];
   pageSize?: InputMaybe<Scalars['Int']>;
   type: EntityNames;
@@ -1255,24 +1253,25 @@ export type QueryObjectRecordRelationsArgs = {
 
 export type QueryObjectRecordRelationsCountArgs = {
   id: Scalars['String'];
-  lang: Scalars['String'];
   type: EntityNames;
 };
 
 
 export type QueryObjectsRecordZoomLevel3Args = {
   id: Scalars['String'];
+  locale: Scalars['String'];
 };
 
 
 export type QueryObjectsZoomRecordHoverArgs = {
   id: Scalars['String'];
+  locale: Locale;
 };
 
 
 export type QueryPeopleRecordRelationsArgs = {
   id: Scalars['String'];
-  lang: Scalars['String'];
+  locale: Locale;
   page: Scalars['Int'];
   pageSize?: InputMaybe<Scalars['Int']>;
   type: EntityNames;
@@ -1281,24 +1280,25 @@ export type QueryPeopleRecordRelationsArgs = {
 
 export type QueryPeopleRecordRelationsCountArgs = {
   id: Scalars['String'];
-  lang: Scalars['String'];
   type: EntityNames;
 };
 
 
 export type QueryPeopleRecordZoomLevel3Args = {
   id: Scalars['String'];
+  locale: Scalars['String'];
 };
 
 
 export type QueryPeopleZoomLevelHoverArgs = {
   id: Scalars['String'];
+  locale: Locale;
 };
 
 
 export type QueryPublicationRecordRelationsArgs = {
   id: Scalars['String'];
-  lang: Scalars['String'];
+  locale: Locale;
   page: Scalars['Int'];
   pageSize?: InputMaybe<Scalars['Int']>;
   type: EntityNames;
@@ -1307,24 +1307,25 @@ export type QueryPublicationRecordRelationsArgs = {
 
 export type QueryPublicationsRecordRelationsCountArgs = {
   id: Scalars['String'];
-  lang: Scalars['String'];
   type: EntityNames;
 };
 
 
 export type QueryPublicationsRecordZoomLevel3Args = {
   id: Scalars['String'];
+  locale: Scalars['String'];
 };
 
 
 export type QueryPublicationsZoomRecordHoverArgs = {
   id: Scalars['String'];
+  locale: Scalars['String'];
 };
 
 
 export type QueryRelationsArgs = {
   id: Scalars['String'];
-  lang: Scalars['String'];
+  locale: Locale;
   page: Scalars['Int'];
   pageSize?: InputMaybe<Scalars['Int']>;
   type: EntityNames;
@@ -1333,7 +1334,7 @@ export type QueryRelationsArgs = {
 
 export type QueryStoriesArgs = {
   filters?: InputMaybe<StoryFiltersInput>;
-  locale?: InputMaybe<Scalars['String']>;
+  locale: Scalars['String'];
   pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<Scalars['String']>;
   sort?: InputMaybe<Array<Scalars['String']>>;
@@ -1342,13 +1343,13 @@ export type QueryStoriesArgs = {
 
 export type QueryStoriesRealtedWithinThemeArgs = {
   id: Scalars['String'];
-  locale?: InputMaybe<Scalars['String']>;
+  locale: Scalars['String'];
 };
 
 
 export type QueryStoriesWithoutRelationsArgs = {
   filters?: InputMaybe<StoryFiltersInput>;
-  locale?: InputMaybe<Scalars['String']>;
+  locale: Scalars['String'];
   pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<Scalars['String']>;
   sort?: InputMaybe<Array<Scalars['String']>>;
@@ -1357,44 +1358,39 @@ export type QueryStoriesWithoutRelationsArgs = {
 
 export type QueryStoryArgs = {
   id: Scalars['String'];
-  locale?: InputMaybe<Scalars['String']>;
+  locale: Scalars['String'];
 };
 
 
 export type QueryStoryByLocaleArgs = {
   filters?: InputMaybe<StoryFiltersInput>;
-  locale?: InputMaybe<Scalars['String']>;
+  locale: Scalars['String'];
   publicationState?: InputMaybe<Scalars['String']>;
-};
-
-
-export type QueryStoryHoverArgs = {
-  id: Scalars['String'];
 };
 
 
 export type QueryStoryMetaByLocaleArgs = {
   filters?: InputMaybe<StoryFiltersInput>;
-  locale?: InputMaybe<Scalars['String']>;
+  locale: Scalars['String'];
   publicationState?: InputMaybe<Scalars['String']>;
 };
 
 
 export type QueryStoryRelationsCountArgs = {
-  lang: Scalars['String'];
+  locale: Locale;
   storyId: Scalars['String'];
 };
 
 
 export type QueryStoryWithoutRelationsArgs = {
   id: Scalars['String'];
-  locale?: InputMaybe<Scalars['String']>;
+  locale: Scalars['String'];
 };
 
 
 export type QueryThemeArgs = {
   id: Scalars['String'];
-  locale?: InputMaybe<Scalars['String']>;
+  locale: Scalars['String'];
 };
 
 
@@ -1434,6 +1430,7 @@ export type QueryUsersPermissionsUsersArgs = {
 
 export type QueryZoomLevel2Args = {
   entityName: EntityNames;
+  locale: Locale;
   page: Scalars['Int'];
   pageSize?: InputMaybe<Scalars['Int']>;
   text?: InputMaybe<Scalars['String']>;
@@ -1442,74 +1439,39 @@ export type QueryZoomLevel2Args = {
 
 export type QueryZoomLevel2AmountArgs = {
   entityName: EntityNames;
+  locale: Locale;
   text?: InputMaybe<Scalars['String']>;
 };
 
 
 export type QueryZoomLevel3ArchiveArgs = {
   id: Scalars['String'];
+  locale: Scalars['String'];
 };
 
 
 export type QueryZoomLevel3ObjectArgs = {
   id: Scalars['String'];
+  locale: Scalars['String'];
 };
 
 
 export type QueryZoomLevel3PersonArgs = {
   id: Scalars['String'];
+  locale: Scalars['String'];
 };
 
 
 export type QueryZoomLevel3PublicationArgs = {
   id: Scalars['String'];
+  locale: Scalars['String'];
 };
 
 
 export type QueryZoomLevel3StoriesRelationsForRecordArgs = {
   id: Scalars['String'];
-  lang: Scalars['String'];
+  locale: Locale;
   type: EntityNames;
-};
-
-
-export type QueryZoomLevel5ArchiveArgs = {
-  id: Scalars['String'];
-};
-
-
-export type QueryZoomLevel5ArchivesFondsArgs = {
-  id: Scalars['String'];
-};
-
-
-export type QueryZoomLevel5ArchivesOtherArgs = {
-  id: Scalars['String'];
-};
-
-
-export type QueryZoomLevel5PublicationArgs = {
-  id: Scalars['String'];
-};
-
-
-export type QueryZoomLevel5PublicationsArticleArgs = {
-  id: Scalars['String'];
-};
-
-
-export type QueryZoomLevel5PublicationsAudiovisualArgs = {
-  id: Scalars['String'];
-};
-
-
-export type QueryZoomLevel5PublicationsBookArgs = {
-  id: Scalars['String'];
-};
-
-
-export type QueryZoomLevel5PublicationsSerialArgs = {
-  id: Scalars['String'];
 };
 
 export type ResponseCollectionMeta = {
@@ -1602,13 +1564,6 @@ export type StoryFiltersInput = {
   title?: InputMaybe<StringFilterInput>;
   triplyRecords?: InputMaybe<TriplyRecordFiltersInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
-};
-
-export type StoryHoverType = {
-  __typename?: 'StoryHoverType';
-  author?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
 };
 
 export type StoryMetaEntityResponseCollection = {
@@ -1726,8 +1681,29 @@ export type TriplyRecord = {
   publishedAt?: Maybe<Scalars['Date']>;
   recordId: Scalars['String'];
   stories?: Maybe<StoryRelationResponseCollection>;
+  subject_collectionHighlights?: Maybe<Scalars['Boolean']>;
   type: EnumTriplyrecordType;
   updatedAt?: Maybe<Scalars['Date']>;
+};
+
+
+export type TriplyRecordArchiveArgs = {
+  locale: Scalars['String'];
+};
+
+
+export type TriplyRecordObjectArgs = {
+  locale: Scalars['String'];
+};
+
+
+export type TriplyRecordPeopleArgs = {
+  locale: Scalars['String'];
+};
+
+
+export type TriplyRecordPublicationArgs = {
+  locale: Scalars['String'];
 };
 
 export type TriplyRecordEntity = {
@@ -1750,6 +1726,7 @@ export type TriplyRecordFiltersInput = {
   publishedAt?: InputMaybe<DateTimeFilterInput>;
   recordId?: InputMaybe<StringFilterInput>;
   stories?: InputMaybe<StoryFiltersInput>;
+  subject_collectionHighlights?: InputMaybe<BooleanFilterInput>;
   type?: InputMaybe<StringFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
 };
@@ -1914,13 +1891,6 @@ export type UsersPermissionsUserRelationResponseCollection = {
   data: Array<UsersPermissionsUserEntity>;
 };
 
-export type ZoomLevel1Type = {
-  __typename?: 'ZoomLevel1Type';
-  count: Scalars['Int'];
-  id: EntityNames;
-  name: Scalars['String'];
-};
-
 export type ZoomLevel2AmountParentType = {
   __typename?: 'ZoomLevel2AmountParentType';
   total: Scalars['String'];
@@ -1988,7 +1958,7 @@ export type TitleModuleFragmentFragment = { __typename: 'ComponentModulesTitleMo
 export type Zoom3RelationsFragmentFragment = { __typename?: 'ZoomLevel3RelationsType', type: EntityNames, total?: number | null, paginatedRelations?: Array<string> | null };
 
 export type HomepageQueryVariables = Exact<{
-  locale?: InputMaybe<Scalars['String']>;
+  locale: Scalars['String'];
   publicationState?: InputMaybe<Scalars['String']>;
 }>;
 
@@ -1996,7 +1966,7 @@ export type HomepageQueryVariables = Exact<{
 export type HomepageQuery = { __typename?: 'Query', homepage: { __typename?: 'HomepageEntityResponse', data?: { __typename?: 'HomepageEntity', id?: string | null, attributes?: { __typename?: 'Homepage', Title?: string | null, description?: string | null, components?: Array<{ __typename: 'ComponentModulesButtonsModule', id: string, buttonStyle?: EnumComponentmodulesbuttonsmoduleButtonstyle | null, buttons?: Array<{ __typename?: 'ComponentCoreButton', id: string, text?: string | null, url?: string | null, hasAttachment?: boolean | null, attachment?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null }> | null } | { __typename: 'ComponentModulesCarousel', id: string, title?: string | null, type?: EnumComponentmodulescarouselType | null, buttonText?: string | null, buttonUrl?: string | null, description?: string | null, items?: Array<{ __typename?: 'ComponentCoreCarouselItem', id: string, type?: EnumComponentcorecarouselitemType | null, name?: string | null, description?: string | null, picture?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null, triply_record?: { __typename?: 'TriplyRecordEntityResponse', data?: { __typename?: 'TriplyRecordEntity', id?: string | null, attributes?: { __typename?: 'TriplyRecord', recordId: string, type: EnumTriplyrecordType } | null } | null } | null, story?: { __typename?: 'StoryEntityResponse', data?: { __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, slug?: string | null, description?: string | null, shortDescription?: string | null, createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, locale?: string | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', attributes?: { __typename?: 'Author', firstName: string } | null } | null } | null } | null } | null } | null }> | null } | { __typename: 'ComponentModulesGridModule', description?: string | null, fieldTitlesAreInverted: boolean, fieldTypes: EnumComponentmodulesgridmoduleFieldtypes, id: string, pageSize: number, showMoreButtonTitle: string, title?: string | null, buttons?: Array<{ __typename?: 'ComponentCoreButton', id: string, url?: string | null, text?: string | null }> | null, featuredFields?: Array<{ __typename?: 'ComponentCoreFeaturedFields', id: string, label: string, value: string }> | null, fields?: Array<{ __typename?: 'ComponentCoreGridFeaturedFields', id: string, title?: string | null, subtitle?: string | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } | null, story?: { __typename?: 'StoryEntityResponse', data?: { __typename?: 'StoryEntity', attributes?: { __typename?: 'Story', slug?: string | null, updatedAt?: any | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', attributes?: { __typename?: 'Author', firstName: string } | null } | null } | null } | null } | null } | null, triplyRecord?: { __typename?: 'TriplyRecordEntityResponse', data?: { __typename?: 'TriplyRecordEntity', attributes?: { __typename?: 'TriplyRecord', createdAt?: any | null, updatedAt?: any | null, recordId: string, archive?: { __typename?: 'ArchiveZoomLevel3DetailType', id: string, type?: EntityNames | null, title?: string | null, objectNumber?: string | null } | null, object?: { __typename?: 'ObjectsZoomLevel3DetailType', description?: string | null, thumbnail?: Array<string> | null } | null, publication?: { __typename?: 'PublicationZoomLevel3DetailType', id: string, type?: EntityNames | null, title?: string | null, yearOfPublication?: string | null, objectNumber?: string | null } | null, people?: { __typename?: 'PeopleZoomLevel3DetailType', name?: string | null, nameTypes?: Array<string> | null } | null } | null } | null } | null }> | null } | { __typename: 'ComponentModulesImage', id: string, caption?: string | null, alt_text?: string | null, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, height?: number | null, width?: number | null } | null } | null }, story?: { __typename?: 'StoryEntityResponse', data?: { __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, slug?: string | null, description?: string | null, shortDescription?: string | null, createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, locale?: string | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', attributes?: { __typename?: 'Author', firstName: string } | null } | null } | null } | null } | null } | null, triplyRecord?: { __typename?: 'TriplyRecordEntityResponse', data?: { __typename?: 'TriplyRecordEntity', id?: string | null, attributes?: { __typename?: 'TriplyRecord', recordId: string, type: EnumTriplyrecordType } | null } | null } | null } | { __typename: 'ComponentModulesImageCarousel', id: string, description?: string | null, images?: { __typename?: 'UploadFileRelationResponseCollection', data?: Array<{ __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, width?: number | null, height?: number | null, size: number } | null }> | null } | null } | { __typename: 'ComponentModulesPullquote', id: string, text?: string | null } | { __typename: 'ComponentModulesSubtitle', id: string, text?: string | null } | { __typename: 'ComponentModulesTextModule', id: string, Richtext?: string | null } | { __typename: 'ComponentModulesTitleModule', id: string, Title?: string | null } | { __typename?: 'Error' }> | null } | null } | null } };
 
 export type LandingpageBySlugQueryVariables = Exact<{
-  locale?: InputMaybe<Scalars['String']>;
+  locale: Scalars['String'];
   slug: Scalars['String'];
   publicationState?: InputMaybe<Scalars['String']>;
 }>;
@@ -2005,7 +1975,7 @@ export type LandingpageBySlugQueryVariables = Exact<{
 export type LandingpageBySlugQuery = { __typename?: 'Query', landingpages: { __typename?: 'LandingpageEntityResponseCollection', data: Array<{ __typename?: 'LandingpageEntity', id?: string | null, attributes?: { __typename?: 'Landingpage', Title?: string | null, Description?: string | null, components?: Array<{ __typename: 'ComponentModulesButtonsModule', id: string, buttonStyle?: EnumComponentmodulesbuttonsmoduleButtonstyle | null, buttons?: Array<{ __typename?: 'ComponentCoreButton', id: string, text?: string | null, url?: string | null, hasAttachment?: boolean | null, attachment?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null }> | null } | { __typename: 'ComponentModulesCarousel', id: string, title?: string | null, type?: EnumComponentmodulescarouselType | null, buttonText?: string | null, buttonUrl?: string | null, description?: string | null, items?: Array<{ __typename?: 'ComponentCoreCarouselItem', id: string, type?: EnumComponentcorecarouselitemType | null, name?: string | null, description?: string | null, picture?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null, triply_record?: { __typename?: 'TriplyRecordEntityResponse', data?: { __typename?: 'TriplyRecordEntity', id?: string | null, attributes?: { __typename?: 'TriplyRecord', recordId: string, type: EnumTriplyrecordType } | null } | null } | null, story?: { __typename?: 'StoryEntityResponse', data?: { __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, slug?: string | null, description?: string | null, shortDescription?: string | null, createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, locale?: string | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', attributes?: { __typename?: 'Author', firstName: string } | null } | null } | null } | null } | null } | null }> | null } | { __typename: 'ComponentModulesGridModule', description?: string | null, fieldTitlesAreInverted: boolean, fieldTypes: EnumComponentmodulesgridmoduleFieldtypes, id: string, pageSize: number, showMoreButtonTitle: string, title?: string | null, buttons?: Array<{ __typename?: 'ComponentCoreButton', id: string, url?: string | null, text?: string | null }> | null, featuredFields?: Array<{ __typename?: 'ComponentCoreFeaturedFields', id: string, label: string, value: string }> | null, fields?: Array<{ __typename?: 'ComponentCoreGridFeaturedFields', id: string, title?: string | null, subtitle?: string | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } | null, story?: { __typename?: 'StoryEntityResponse', data?: { __typename?: 'StoryEntity', attributes?: { __typename?: 'Story', slug?: string | null, updatedAt?: any | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', attributes?: { __typename?: 'Author', firstName: string } | null } | null } | null } | null } | null } | null, triplyRecord?: { __typename?: 'TriplyRecordEntityResponse', data?: { __typename?: 'TriplyRecordEntity', attributes?: { __typename?: 'TriplyRecord', createdAt?: any | null, updatedAt?: any | null, recordId: string, archive?: { __typename?: 'ArchiveZoomLevel3DetailType', id: string, type?: EntityNames | null, title?: string | null, objectNumber?: string | null } | null, object?: { __typename?: 'ObjectsZoomLevel3DetailType', description?: string | null, thumbnail?: Array<string> | null } | null, publication?: { __typename?: 'PublicationZoomLevel3DetailType', id: string, type?: EntityNames | null, title?: string | null, yearOfPublication?: string | null, objectNumber?: string | null } | null, people?: { __typename?: 'PeopleZoomLevel3DetailType', name?: string | null, nameTypes?: Array<string> | null } | null } | null } | null } | null }> | null } | { __typename: 'ComponentModulesImage', id: string, caption?: string | null, alt_text?: string | null, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, height?: number | null, width?: number | null } | null } | null }, story?: { __typename?: 'StoryEntityResponse', data?: { __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, slug?: string | null, description?: string | null, shortDescription?: string | null, createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, locale?: string | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', attributes?: { __typename?: 'Author', firstName: string } | null } | null } | null } | null } | null } | null, triplyRecord?: { __typename?: 'TriplyRecordEntityResponse', data?: { __typename?: 'TriplyRecordEntity', id?: string | null, attributes?: { __typename?: 'TriplyRecord', recordId: string, type: EnumTriplyrecordType } | null } | null } | null } | { __typename: 'ComponentModulesImageCarousel', id: string, description?: string | null, images?: { __typename?: 'UploadFileRelationResponseCollection', data?: Array<{ __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, width?: number | null, height?: number | null, size: number } | null }> | null } | null } | { __typename: 'ComponentModulesPullquote', id: string, text?: string | null } | { __typename: 'ComponentModulesSubtitle', id: string, text?: string | null } | { __typename: 'ComponentModulesTextModule', id: string, Richtext?: string | null } | { __typename: 'ComponentModulesTitleModule', id: string, Title?: string | null } | { __typename?: 'Error' }> | null } | null }> } };
 
 export type MenupageBySlugQueryVariables = Exact<{
-  locale?: InputMaybe<Scalars['String']>;
+  locale: Scalars['String'];
   slug: Scalars['String'];
   publicationState?: InputMaybe<Scalars['String']>;
 }>;
@@ -2018,7 +1988,7 @@ export type MenuPagesQueryVariables = Exact<{
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<Scalars['String']> | Scalars['String']>;
   publicationState?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
+  locale: Scalars['String'];
 }>;
 
 
@@ -2026,7 +1996,7 @@ export type MenuPagesQuery = { __typename?: 'Query', menupages: { __typename?: '
 
 export type StoriesQueryVariables = Exact<{
   pagination?: InputMaybe<PaginationArg>;
-  locale?: InputMaybe<Scalars['String']>;
+  locale: Scalars['String'];
 }>;
 
 
@@ -2034,7 +2004,7 @@ export type StoriesQuery = { __typename?: 'Query', stories: { __typename?: 'Stor
 
 export type StoriesRealtedWithinThemeQueryVariables = Exact<{
   id: Scalars['String'];
-  locale?: InputMaybe<Scalars['String']>;
+  locale: Scalars['String'];
 }>;
 
 
@@ -2042,30 +2012,31 @@ export type StoriesRealtedWithinThemeQuery = { __typename?: 'Query', storiesReal
 
 export type StoriesWithoutRelationsQueryVariables = Exact<{
   pagination?: InputMaybe<PaginationArg>;
-  locale?: InputMaybe<Scalars['String']>;
+  locale: Scalars['String'];
 }>;
 
 
 export type StoriesWithoutRelationsQuery = { __typename?: 'Query', storiesWithoutRelations: { __typename?: 'StoryWithoutRelationsEntityResponseCollection', data?: Array<{ __typename?: 'StoryWithoutRelationsEntity', id?: string | null, attributes?: { __typename?: 'StoryWithoutRelations', title: string, slug?: string | null, shortDescription?: string | null } | null }> | null, meta?: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', page: number } } | null } };
 
 export type StoryByIdQueryVariables = Exact<{
-  locale?: InputMaybe<Scalars['String']>;
+  locale: Scalars['String'];
   id?: InputMaybe<Scalars['ID']>;
   publicationState?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type StoryByIdQuery = { __typename?: 'Query', storyByLocale: { __typename?: 'StoryEntityResponseCollection', data?: { __typename: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, description?: string | null, child_stories?: { __typename?: 'StoryRelationResponseCollection', data?: Array<{ __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, slug?: string | null, locale?: string | null } | null }> | null } | null, parent_story?: { __typename?: 'StoryEntityResponse', data?: { __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, slug?: string | null, locale?: string | null } | null } | null } | null, components?: Array<{ __typename: 'ComponentModulesButtonsModule', id: string, buttonStyle?: EnumComponentmodulesbuttonsmoduleButtonstyle | null, buttons?: Array<{ __typename?: 'ComponentCoreButton', id: string, text?: string | null, url?: string | null, hasAttachment?: boolean | null, attachment?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null }> | null } | { __typename: 'ComponentModulesImage', id: string, caption?: string | null, alt_text?: string | null, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, height?: number | null, width?: number | null } | null } | null }, story?: { __typename?: 'StoryEntityResponse', data?: { __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, slug?: string | null, description?: string | null, shortDescription?: string | null, createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, locale?: string | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', attributes?: { __typename?: 'Author', firstName: string } | null } | null } | null } | null } | null } | null, triplyRecord?: { __typename?: 'TriplyRecordEntityResponse', data?: { __typename?: 'TriplyRecordEntity', id?: string | null, attributes?: { __typename?: 'TriplyRecord', recordId: string, type: EnumTriplyrecordType } | null } | null } | null } | { __typename: 'ComponentModulesImageCarousel', id: string, description?: string | null, images?: { __typename?: 'UploadFileRelationResponseCollection', data?: Array<{ __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, width?: number | null, height?: number | null, size: number } | null }> | null } | null } | { __typename: 'ComponentModulesPullquote', id: string, text?: string | null } | { __typename: 'ComponentModulesSubtitle', id: string, text?: string | null } | { __typename: 'ComponentModulesTextModule', id: string, Richtext?: string | null } | { __typename: 'ComponentModulesTitleModule', id: string, Title?: string | null } | { __typename?: 'Error' }> | null, triplyRecords?: { __typename?: 'TriplyRecordRelationResponseCollection', data: Array<{ __typename?: 'TriplyRecordEntity', id?: string | null, attributes?: { __typename?: 'TriplyRecord', recordId: string, type: EnumTriplyrecordType } | null }> } | null } | null } | null } };
+export type StoryByIdQuery = { __typename?: 'Query', storyByLocale: { __typename?: 'StoryEntityResponseCollection', data?: { __typename: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, description?: string | null, locale?: string | null, child_stories?: { __typename?: 'StoryRelationResponseCollection', data?: Array<{ __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, slug?: string | null, locale?: string | null } | null }> | null } | null, parent_story?: { __typename?: 'StoryEntityResponse', data?: { __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, slug?: string | null, locale?: string | null } | null } | null } | null, components?: Array<{ __typename: 'ComponentModulesButtonsModule', id: string, buttonStyle?: EnumComponentmodulesbuttonsmoduleButtonstyle | null, buttons?: Array<{ __typename?: 'ComponentCoreButton', id: string, text?: string | null, url?: string | null, hasAttachment?: boolean | null, attachment?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null }> | null } | { __typename: 'ComponentModulesImage', id: string, caption?: string | null, alt_text?: string | null, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, height?: number | null, width?: number | null } | null } | null }, story?: { __typename?: 'StoryEntityResponse', data?: { __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, slug?: string | null, description?: string | null, shortDescription?: string | null, createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, locale?: string | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', attributes?: { __typename?: 'Author', firstName: string } | null } | null } | null } | null } | null } | null, triplyRecord?: { __typename?: 'TriplyRecordEntityResponse', data?: { __typename?: 'TriplyRecordEntity', id?: string | null, attributes?: { __typename?: 'TriplyRecord', recordId: string, type: EnumTriplyrecordType } | null } | null } | null } | { __typename: 'ComponentModulesImageCarousel', id: string, description?: string | null, images?: { __typename?: 'UploadFileRelationResponseCollection', data?: Array<{ __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, width?: number | null, height?: number | null, size: number } | null }> | null } | null } | { __typename: 'ComponentModulesPullquote', id: string, text?: string | null } | { __typename: 'ComponentModulesSubtitle', id: string, text?: string | null } | { __typename: 'ComponentModulesTextModule', id: string, Richtext?: string | null } | { __typename: 'ComponentModulesTitleModule', id: string, Title?: string | null } | { __typename?: 'Error' }> | null, triplyRecords?: { __typename?: 'TriplyRecordRelationResponseCollection', data: Array<{ __typename?: 'TriplyRecordEntity', id?: string | null, attributes?: { __typename?: 'TriplyRecord', recordId: string, type: EnumTriplyrecordType } | null }> } | null } | null } | null } };
 
 export type StoryImagesQueryVariables = Exact<{
   id: Scalars['String'];
+  locale: Scalars['String'];
 }>;
 
 
 export type StoryImagesQuery = { __typename?: 'Query', story: { __typename?: 'StoryEntityResponse', data?: { __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', components?: Array<{ __typename?: 'ComponentModulesButtonsModule' } | { __typename: 'ComponentModulesImage', id: string, caption?: string | null, alt_text?: string | null, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, height?: number | null, width?: number | null } | null } | null }, story?: { __typename?: 'StoryEntityResponse', data?: { __typename?: 'StoryEntity', id?: string | null, attributes?: { __typename?: 'Story', title: string, slug?: string | null, description?: string | null, shortDescription?: string | null, createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, locale?: string | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', attributes?: { __typename?: 'Author', firstName: string } | null } | null } | null } | null } | null } | null, triplyRecord?: { __typename?: 'TriplyRecordEntityResponse', data?: { __typename?: 'TriplyRecordEntity', id?: string | null, attributes?: { __typename?: 'TriplyRecord', recordId: string, type: EnumTriplyrecordType } | null } | null } | null } | { __typename?: 'ComponentModulesImageCarousel' } | { __typename?: 'ComponentModulesPullquote' } | { __typename?: 'ComponentModulesSubtitle' } | { __typename?: 'ComponentModulesTextModule' } | { __typename?: 'ComponentModulesTitleModule' } | { __typename?: 'Error' }> | null } | null } | null } };
 
 export type StoryMetaByIdQueryVariables = Exact<{
-  locale?: InputMaybe<Scalars['String']>;
+  locale: Scalars['String'];
   id?: InputMaybe<Scalars['ID']>;
   publicationState?: InputMaybe<Scalars['String']>;
 }>;
@@ -2078,7 +2049,7 @@ export type ThemesQueryVariables = Exact<{
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<Scalars['String']> | Scalars['String']>;
   publicationState?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
+  locale: Scalars['String'];
 }>;
 
 
@@ -2086,6 +2057,7 @@ export type ThemesQuery = { __typename?: 'Query', themes: { __typename?: 'ThemeR
 
 export type ArchivesZoomRecordHoverQueryVariables = Exact<{
   id: Scalars['String'];
+  locale: Locale;
 }>;
 
 
@@ -2093,13 +2065,15 @@ export type ArchivesZoomRecordHoverQuery = { __typename?: 'Query', archivesZoomR
 
 export type ObjectsZoomRecordHoverQueryVariables = Exact<{
   id: Scalars['String'];
+  locale: Locale;
 }>;
 
 
-export type ObjectsZoomRecordHoverQuery = { __typename?: 'Query', objectsZoomRecordHover: { __typename?: 'ObjectsZoomLevelHoverType', title?: string | null, description?: string | null } };
+export type ObjectsZoomRecordHoverQuery = { __typename?: 'Query', objectsZoomRecordHover: { __typename?: 'ObjectsZoomLevelHoverType', title?: string | null, description?: string | null, maker?: string | null } };
 
 export type PeopleZoomRecordHoverQueryVariables = Exact<{
   id: Scalars['String'];
+  locale: Locale;
 }>;
 
 
@@ -2107,6 +2081,7 @@ export type PeopleZoomRecordHoverQuery = { __typename?: 'Query', peopleZoomLevel
 
 export type PublicationsZoomRecordHoverQueryVariables = Exact<{
   id: Scalars['String'];
+  locale: Scalars['String'];
 }>;
 
 
@@ -2117,6 +2092,7 @@ export type Zoom2QueryVariables = Exact<{
   page: Scalars['Int'];
   pageSize?: InputMaybe<Scalars['Int']>;
   text?: InputMaybe<Scalars['String']>;
+  locale: Locale;
 }>;
 
 
@@ -2125,6 +2101,7 @@ export type Zoom2Query = { __typename?: 'Query', zoomLevel2: { __typename?: 'Zoo
 export type Zoom2AmountQueryVariables = Exact<{
   entityName: EntityNames;
   text?: InputMaybe<Scalars['String']>;
+  locale: Locale;
 }>;
 
 
@@ -2134,6 +2111,7 @@ export type Zoom2ArchivesQueryVariables = Exact<{
   page: Scalars['Int'];
   pageSize: Scalars['Int'];
   text?: InputMaybe<Scalars['String']>;
+  locale: Locale;
 }>;
 
 
@@ -2141,6 +2119,7 @@ export type Zoom2ArchivesQuery = { __typename?: 'Query', zoomLevel2: { __typenam
 
 export type Zoom2ArchiveAmountQueryVariables = Exact<{
   text?: InputMaybe<Scalars['String']>;
+  locale: Locale;
 }>;
 
 
@@ -2150,6 +2129,7 @@ export type Zoom2ObjectsQueryVariables = Exact<{
   page: Scalars['Int'];
   pageSize: Scalars['Int'];
   text?: InputMaybe<Scalars['String']>;
+  locale: Locale;
 }>;
 
 
@@ -2157,6 +2137,7 @@ export type Zoom2ObjectsQuery = { __typename?: 'Query', zoomLevel2: { __typename
 
 export type Zoom2ObjectsAmountQueryVariables = Exact<{
   text?: InputMaybe<Scalars['String']>;
+  locale: Locale;
 }>;
 
 
@@ -2166,6 +2147,7 @@ export type Zoom2PeopleQueryVariables = Exact<{
   page: Scalars['Int'];
   pageSize: Scalars['Int'];
   text?: InputMaybe<Scalars['String']>;
+  locale: Locale;
 }>;
 
 
@@ -2173,6 +2155,7 @@ export type Zoom2PeopleQuery = { __typename?: 'Query', zoomLevel2: { __typename?
 
 export type Zoom2PeopleAmountQueryVariables = Exact<{
   text?: InputMaybe<Scalars['String']>;
+  locale: Locale;
 }>;
 
 
@@ -2182,6 +2165,7 @@ export type Zoom2PublicationsQueryVariables = Exact<{
   page: Scalars['Int'];
   pageSize: Scalars['Int'];
   text?: InputMaybe<Scalars['String']>;
+  locale: Locale;
 }>;
 
 
@@ -2189,6 +2173,7 @@ export type Zoom2PublicationsQuery = { __typename?: 'Query', zoomLevel2: { __typ
 
 export type Zoom2PublicationsAmountQueryVariables = Exact<{
   text?: InputMaybe<Scalars['String']>;
+  locale: Locale;
 }>;
 
 
@@ -2196,6 +2181,7 @@ export type Zoom2PublicationsAmountQuery = { __typename?: 'Query', zoomLevel2Amo
 
 export type ZoomLevel3ArchiveQueryVariables = Exact<{
   id: Scalars['String'];
+  locale: Scalars['String'];
 }>;
 
 
@@ -2203,6 +2189,7 @@ export type ZoomLevel3ArchiveQuery = { __typename?: 'Query', zoomLevel3Archive?:
 
 export type ZoomLevel3ArchiveRecordQueryVariables = Exact<{
   id: Scalars['String'];
+  locale: Scalars['String'];
 }>;
 
 
@@ -2210,6 +2197,7 @@ export type ZoomLevel3ArchiveRecordQuery = { __typename?: 'Query', archivesRecor
 
 export type ZoomLevel3ObjectRecordQueryVariables = Exact<{
   id: Scalars['String'];
+  locale: Scalars['String'];
 }>;
 
 
@@ -2217,6 +2205,7 @@ export type ZoomLevel3ObjectRecordQuery = { __typename?: 'Query', objectsRecordZ
 
 export type ZoomLevel3PeopleRecordQueryVariables = Exact<{
   id: Scalars['String'];
+  locale: Scalars['String'];
 }>;
 
 
@@ -2224,6 +2213,7 @@ export type ZoomLevel3PeopleRecordQuery = { __typename?: 'Query', peopleRecordZo
 
 export type ZoomLevel3PublicationRecordQueryVariables = Exact<{
   id: Scalars['String'];
+  locale: Scalars['String'];
 }>;
 
 
@@ -2231,6 +2221,7 @@ export type ZoomLevel3PublicationRecordQuery = { __typename?: 'Query', publicati
 
 export type StoryHoverRecordRelationsQueryVariables = Exact<{
   id: Scalars['String'];
+  locale: Scalars['String'];
 }>;
 
 
@@ -2239,7 +2230,7 @@ export type StoryHoverRecordRelationsQuery = { __typename?: 'Query', storyWithou
 export type ArchiveRecordRelationsQueryVariables = Exact<{
   id: Scalars['String'];
   type: EntityNames;
-  lang: Scalars['String'];
+  locale: Locale;
   page: Scalars['Int'];
   pageSize: Scalars['Int'];
 }>;
@@ -2250,7 +2241,7 @@ export type ArchiveRecordRelationsQuery = { __typename?: 'Query', archivesRecord
 export type ObjectRecordRelationsQueryVariables = Exact<{
   id: Scalars['String'];
   type: EntityNames;
-  lang: Scalars['String'];
+  locale: Locale;
   page: Scalars['Int'];
   pageSize: Scalars['Int'];
 }>;
@@ -2261,7 +2252,7 @@ export type ObjectRecordRelationsQuery = { __typename?: 'Query', objectRecordRel
 export type PeopleRecordRelationsQueryVariables = Exact<{
   id: Scalars['String'];
   type: EntityNames;
-  lang: Scalars['String'];
+  locale: Locale;
   page: Scalars['Int'];
   pageSize: Scalars['Int'];
 }>;
@@ -2272,7 +2263,7 @@ export type PeopleRecordRelationsQuery = { __typename?: 'Query', peopleRecordRel
 export type PublicationRecordRelationsQueryVariables = Exact<{
   id: Scalars['String'];
   type: EntityNames;
-  lang: Scalars['String'];
+  locale: Locale;
   page: Scalars['Int'];
   pageSize: Scalars['Int'];
 }>;
@@ -2283,7 +2274,6 @@ export type PublicationRecordRelationsQuery = { __typename?: 'Query', publicatio
 export type ArchivesRecordRelationsCountQueryVariables = Exact<{
   id: Scalars['String'];
   type: EntityNames;
-  lang: Scalars['String'];
 }>;
 
 
@@ -2292,7 +2282,6 @@ export type ArchivesRecordRelationsCountQuery = { __typename?: 'Query', archives
 export type ObjectRecordRelationsCountQueryVariables = Exact<{
   id: Scalars['String'];
   type: EntityNames;
-  lang: Scalars['String'];
 }>;
 
 
@@ -2301,7 +2290,6 @@ export type ObjectRecordRelationsCountQuery = { __typename?: 'Query', objectReco
 export type PeopleRecordRelationsCountQueryVariables = Exact<{
   id: Scalars['String'];
   type: EntityNames;
-  lang: Scalars['String'];
 }>;
 
 
@@ -2310,7 +2298,6 @@ export type PeopleRecordRelationsCountQuery = { __typename?: 'Query', peopleReco
 export type PublicationsRecordRelationsCountQueryVariables = Exact<{
   id: Scalars['String'];
   type: EntityNames;
-  lang: Scalars['String'];
 }>;
 
 
@@ -2319,7 +2306,7 @@ export type PublicationsRecordRelationsCountQuery = { __typename?: 'Query', publ
 export type ArchivesRelationsQueryVariables = Exact<{
   id: Scalars['String'];
   page: Scalars['Int'];
-  lang: Scalars['String'];
+  locale: Locale;
 }>;
 
 
@@ -2327,7 +2314,7 @@ export type ArchivesRelationsQuery = { __typename?: 'Query', relations?: Array<{
 
 export type StoryRelationsCountQueryVariables = Exact<{
   id: Scalars['String'];
-  lang: Scalars['String'];
+  locale: Locale;
 }>;
 
 
@@ -2336,7 +2323,7 @@ export type StoryRelationsCountQuery = { __typename?: 'Query', storyRelationsCou
 export type ObjectRelationsQueryVariables = Exact<{
   id: Scalars['String'];
   page: Scalars['Int'];
-  lang: Scalars['String'];
+  locale: Locale;
 }>;
 
 
@@ -2345,7 +2332,7 @@ export type ObjectRelationsQuery = { __typename?: 'Query', relations?: Array<{ _
 export type PeopleRelationsQueryVariables = Exact<{
   id: Scalars['String'];
   page: Scalars['Int'];
-  lang: Scalars['String'];
+  locale: Locale;
 }>;
 
 
@@ -2354,7 +2341,7 @@ export type PeopleRelationsQuery = { __typename?: 'Query', relations?: Array<{ _
 export type PublicationRelationsQueryVariables = Exact<{
   id: Scalars['String'];
   page: Scalars['Int'];
-  lang: Scalars['String'];
+  locale: Locale;
 }>;
 
 
@@ -2363,7 +2350,7 @@ export type PublicationRelationsQuery = { __typename?: 'Query', relations?: Arra
 export type StoriesRelationsQueryVariables = Exact<{
   id: Scalars['String'];
   page: Scalars['Int'];
-  lang: Scalars['String'];
+  locale: Locale;
 }>;
 
 
@@ -2372,7 +2359,7 @@ export type StoriesRelationsQuery = { __typename?: 'Query', relations?: Array<{ 
 export type StoriesRelationForRecordQueryVariables = Exact<{
   id: Scalars['String'];
   type: EntityNames;
-  lang: Scalars['String'];
+  locale: Locale;
 }>;
 
 
@@ -2380,6 +2367,7 @@ export type StoriesRelationForRecordQuery = { __typename?: 'Query', zoomLevel3St
 
 export type ZoomLevel3ObjectQueryVariables = Exact<{
   id: Scalars['String'];
+  locale: Scalars['String'];
 }>;
 
 
@@ -2387,6 +2375,7 @@ export type ZoomLevel3ObjectQuery = { __typename?: 'Query', zoomLevel3Object?: {
 
 export type ZoomLevel3PublicationQueryVariables = Exact<{
   id: Scalars['String'];
+  locale: Scalars['String'];
 }>;
 
 
@@ -2394,15 +2383,11 @@ export type ZoomLevel3PublicationQuery = { __typename?: 'Query', zoomLevel3Publi
 
 export type ZoomLevel3PersonQueryVariables = Exact<{
   id: Scalars['String'];
+  locale: Scalars['String'];
 }>;
 
 
 export type ZoomLevel3PersonQuery = { __typename?: 'Query', zoomLevel3Person?: { __typename: 'PeopleZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null, description?: string | null } | null };
-
-export type ZoomLevel1QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ZoomLevel1Query = { __typename?: 'Query', zoomLevel1: Array<{ __typename?: 'ZoomLevel1Type', name: string, count: number, id: EntityNames }> };
 
 export const TextModuleFragmentFragmentDoc = gql`
     fragment textModuleFragment on ComponentModulesTextModule {
@@ -2710,24 +2695,24 @@ export const GridModuleFragmentFragmentDoc = gql`
           createdAt
           updatedAt
           recordId
-          archive {
+          archive(locale: $locale) {
             id
             type
             title
             objectNumber
           }
-          object {
+          object(locale: $locale) {
             description
             thumbnail
           }
-          publication {
+          publication(locale: $locale) {
             id
             type
             title
             yearOfPublication
             objectNumber
           }
-          people {
+          people(locale: $locale) {
             name
             nameTypes
           }
@@ -2751,7 +2736,7 @@ export const Zoom3RelationsFragmentFragmentDoc = gql`
 }
     `;
 export const HomepageDocument = gql`
-    query homepage($locale: String, $publicationState: String = "LIVE") {
+    query homepage($locale: String!, $publicationState: String = "LIVE") {
   homepage(locale: $locale, publicationState: $publicationState) {
     data {
       id
@@ -2801,7 +2786,7 @@ ${ButtonsModuleFragmentFragmentDoc}
 ${SubtitleModuleFragmentFragmentDoc}
 ${GridModuleFragmentFragmentDoc}`;
 export const LandingpageBySlugDocument = gql`
-    query landingpageBySlug($locale: String, $slug: String!, $publicationState: String = "LIVE") {
+    query landingpageBySlug($locale: String!, $slug: String!, $publicationState: String = "LIVE") {
   landingpages(
     locale: $locale
     filters: {slug: {eq: $slug}}
@@ -2855,7 +2840,7 @@ ${ButtonsModuleFragmentFragmentDoc}
 ${SubtitleModuleFragmentFragmentDoc}
 ${GridModuleFragmentFragmentDoc}`;
 export const MenupageBySlugDocument = gql`
-    query menupageBySlug($locale: String, $slug: String!, $publicationState: String = "LIVE") {
+    query menupageBySlug($locale: String!, $slug: String!, $publicationState: String = "LIVE") {
   menupages(
     locale: $locale
     filters: {slug: {eq: $slug}}
@@ -2903,7 +2888,7 @@ ${ButtonsModuleFragmentFragmentDoc}
 ${SubtitleModuleFragmentFragmentDoc}
 ${GridModuleFragmentFragmentDoc}`;
 export const MenuPagesDocument = gql`
-    query menuPages($filters: MenupageFiltersInput, $pagination: PaginationArg = {}, $sort: [String!] = [], $publicationState: String, $locale: String) {
+    query menuPages($filters: MenupageFiltersInput, $pagination: PaginationArg = {}, $sort: [String!] = [], $publicationState: String, $locale: String!) {
   menupages(
     filters: $filters
     pagination: $pagination
@@ -2947,7 +2932,7 @@ export const MenuPagesDocument = gql`
 }
     `;
 export const StoriesDocument = gql`
-    query stories($pagination: PaginationArg, $locale: String) {
+    query stories($pagination: PaginationArg, $locale: String!) {
   stories(pagination: $pagination, locale: $locale) {
     data {
       id
@@ -2966,7 +2951,7 @@ export const StoriesDocument = gql`
 }
     `;
 export const StoriesRealtedWithinThemeDocument = gql`
-    query storiesRealtedWithinTheme($id: String!, $locale: String) {
+    query storiesRealtedWithinTheme($id: String!, $locale: String!) {
   storiesRealtedWithinTheme(id: $id, locale: $locale) {
     type
     total
@@ -2995,7 +2980,7 @@ export const StoriesRealtedWithinThemeDocument = gql`
 }
     ${ImageModuleFragmentFragmentDoc}`;
 export const StoriesWithoutRelationsDocument = gql`
-    query storiesWithoutRelations($pagination: PaginationArg, $locale: String) {
+    query storiesWithoutRelations($pagination: PaginationArg, $locale: String!) {
   storiesWithoutRelations(pagination: $pagination, locale: $locale) {
     data {
       id
@@ -3014,7 +2999,7 @@ export const StoriesWithoutRelationsDocument = gql`
 }
     `;
 export const StoryByIdDocument = gql`
-    query storyById($locale: String, $id: ID, $publicationState: String = "LIVE") {
+    query storyById($locale: String!, $id: ID, $publicationState: String = "LIVE") {
   storyByLocale(
     locale: $locale
     filters: {id: {eq: $id}}
@@ -3026,6 +3011,7 @@ export const StoryByIdDocument = gql`
       attributes {
         title
         description
+        locale
         child_stories {
           data {
             id
@@ -3087,8 +3073,8 @@ ${ButtonsModuleFragmentFragmentDoc}
 ${SubtitleModuleFragmentFragmentDoc}
 ${BaseTriplyRecordFragmentFragmentDoc}`;
 export const StoryImagesDocument = gql`
-    query storyImages($id: String!) {
-  story(id: $id) {
+    query storyImages($id: String!, $locale: String!) {
+  story(id: $id, locale: $locale) {
     data {
       id
       attributes {
@@ -3103,7 +3089,7 @@ export const StoryImagesDocument = gql`
 }
     ${ImageModuleFragmentFragmentDoc}`;
 export const StoryMetaByIdDocument = gql`
-    query storyMetaById($locale: String, $id: ID, $publicationState: String = "LIVE") {
+    query storyMetaById($locale: String!, $id: ID, $publicationState: String = "LIVE") {
   storyMetaByLocale(
     locale: $locale
     filters: {id: {eq: $id}}
@@ -3161,7 +3147,7 @@ export const StoryMetaByIdDocument = gql`
             attributes {
               type
               recordId
-              people {
+              people(locale: $locale) {
                 title
               }
             }
@@ -3246,7 +3232,7 @@ export const StoryMetaByIdDocument = gql`
     ${ButtonsModuleFragmentFragmentDoc}
 ${ImageModuleFragmentFragmentDoc}`;
 export const ThemesDocument = gql`
-    query themes($filters: ThemeFiltersInput, $pagination: PaginationArg, $sort: [String!], $publicationState: String, $locale: String) {
+    query themes($filters: ThemeFiltersInput, $pagination: PaginationArg, $sort: [String!], $publicationState: String, $locale: String!) {
   themes(
     filters: $filters
     pagination: $pagination
@@ -3269,8 +3255,8 @@ export const ThemesDocument = gql`
 }
     ${ThemeFragmentFragmentDoc}`;
 export const ArchivesZoomRecordHoverDocument = gql`
-    query ArchivesZoomRecordHover($id: String!) {
-  archivesZoomRecordHover(id: $id) {
+    query ArchivesZoomRecordHover($id: String!, $locale: Locale!) {
+  archivesZoomRecordHover(id: $id, locale: $locale) {
     title
     creators
     description
@@ -3278,16 +3264,17 @@ export const ArchivesZoomRecordHoverDocument = gql`
 }
     `;
 export const ObjectsZoomRecordHoverDocument = gql`
-    query ObjectsZoomRecordHover($id: String!) {
-  objectsZoomRecordHover(id: $id) {
+    query ObjectsZoomRecordHover($id: String!, $locale: Locale!) {
+  objectsZoomRecordHover(id: $id, locale: $locale) {
     title
     description
+    maker
   }
 }
     `;
 export const PeopleZoomRecordHoverDocument = gql`
-    query PeopleZoomRecordHover($id: String!) {
-  peopleZoomLevelHover(id: $id) {
+    query PeopleZoomRecordHover($id: String!, $locale: Locale!) {
+  peopleZoomLevelHover(id: $id, locale: $locale) {
     title
     profession
     description
@@ -3295,8 +3282,8 @@ export const PeopleZoomRecordHoverDocument = gql`
 }
     `;
 export const PublicationsZoomRecordHoverDocument = gql`
-    query PublicationsZoomRecordHover($id: String!) {
-  publicationsZoomRecordHover(id: $id) {
+    query PublicationsZoomRecordHover($id: String!, $locale: String!) {
+  publicationsZoomRecordHover(id: $id, locale: $locale) {
     title
     authors
     description
@@ -3304,12 +3291,13 @@ export const PublicationsZoomRecordHoverDocument = gql`
 }
     `;
 export const Zoom2Document = gql`
-    query Zoom2($entityName: EntityNames!, $page: Int!, $pageSize: Int, $text: String) {
+    query Zoom2($entityName: EntityNames!, $page: Int!, $pageSize: Int, $text: String, $locale: Locale!) {
   zoomLevel2(
     entityName: $entityName
     page: $page
     pageSize: $pageSize
     text: $text
+    locale: $locale
   ) {
     page
     nodes {
@@ -3321,15 +3309,21 @@ export const Zoom2Document = gql`
 }
     `;
 export const Zoom2AmountDocument = gql`
-    query Zoom2Amount($entityName: EntityNames!, $text: String) {
-  zoomLevel2Amount(entityName: $entityName, text: $text) {
+    query Zoom2Amount($entityName: EntityNames!, $text: String, $locale: Locale!) {
+  zoomLevel2Amount(entityName: $entityName, text: $text, locale: $locale) {
     total
   }
 }
     `;
 export const Zoom2ArchivesDocument = gql`
-    query Zoom2Archives($page: Int!, $pageSize: Int!, $text: String) {
-  zoomLevel2(entityName: Archives, page: $page, pageSize: $pageSize, text: $text) {
+    query Zoom2Archives($page: Int!, $pageSize: Int!, $text: String, $locale: Locale!) {
+  zoomLevel2(
+    entityName: Archives
+    page: $page
+    pageSize: $pageSize
+    text: $text
+    locale: $locale
+  ) {
     page
     nodes {
       title
@@ -3340,15 +3334,21 @@ export const Zoom2ArchivesDocument = gql`
 }
     `;
 export const Zoom2ArchiveAmountDocument = gql`
-    query Zoom2ArchiveAmount($text: String) {
-  zoomLevel2Amount(entityName: Archives, text: $text) {
+    query Zoom2ArchiveAmount($text: String, $locale: Locale!) {
+  zoomLevel2Amount(entityName: Archives, text: $text, locale: $locale) {
     total
   }
 }
     `;
 export const Zoom2ObjectsDocument = gql`
-    query Zoom2Objects($page: Int!, $pageSize: Int!, $text: String) {
-  zoomLevel2(entityName: Objects, page: $page, pageSize: $pageSize, text: $text) {
+    query Zoom2Objects($page: Int!, $pageSize: Int!, $text: String, $locale: Locale!) {
+  zoomLevel2(
+    entityName: Objects
+    page: $page
+    pageSize: $pageSize
+    text: $text
+    locale: $locale
+  ) {
     page
     nodes {
       title
@@ -3359,15 +3359,21 @@ export const Zoom2ObjectsDocument = gql`
 }
     `;
 export const Zoom2ObjectsAmountDocument = gql`
-    query Zoom2ObjectsAmount($text: String) {
-  zoomLevel2Amount(entityName: Objects, text: $text) {
+    query Zoom2ObjectsAmount($text: String, $locale: Locale!) {
+  zoomLevel2Amount(entityName: Objects, text: $text, locale: $locale) {
     total
   }
 }
     `;
 export const Zoom2PeopleDocument = gql`
-    query Zoom2People($page: Int!, $pageSize: Int!, $text: String) {
-  zoomLevel2(entityName: People, page: $page, pageSize: $pageSize, text: $text) {
+    query Zoom2People($page: Int!, $pageSize: Int!, $text: String, $locale: Locale!) {
+  zoomLevel2(
+    entityName: People
+    page: $page
+    pageSize: $pageSize
+    text: $text
+    locale: $locale
+  ) {
     page
     nodes {
       title
@@ -3378,19 +3384,20 @@ export const Zoom2PeopleDocument = gql`
 }
     `;
 export const Zoom2PeopleAmountDocument = gql`
-    query Zoom2PeopleAmount($text: String) {
-  zoomLevel2Amount(entityName: People, text: $text) {
+    query Zoom2PeopleAmount($text: String, $locale: Locale!) {
+  zoomLevel2Amount(entityName: People, text: $text, locale: $locale) {
     total
   }
 }
     `;
 export const Zoom2PublicationsDocument = gql`
-    query Zoom2Publications($page: Int!, $pageSize: Int!, $text: String) {
+    query Zoom2Publications($page: Int!, $pageSize: Int!, $text: String, $locale: Locale!) {
   zoomLevel2(
     entityName: Publications
     page: $page
     pageSize: $pageSize
     text: $text
+    locale: $locale
   ) {
     page
     nodes {
@@ -3402,15 +3409,15 @@ export const Zoom2PublicationsDocument = gql`
 }
     `;
 export const Zoom2PublicationsAmountDocument = gql`
-    query Zoom2PublicationsAmount($text: String) {
-  zoomLevel2Amount(entityName: Publications, text: $text) {
+    query Zoom2PublicationsAmount($text: String, $locale: Locale!) {
+  zoomLevel2Amount(entityName: Publications, text: $text, locale: $locale) {
     total
   }
 }
     `;
 export const ZoomLevel3ArchiveDocument = gql`
-    query ZoomLevel3Archive($id: String!) {
-  zoomLevel3Archive(id: $id) {
+    query ZoomLevel3Archive($id: String!, $locale: String!) {
+  zoomLevel3Archive(id: $id, locale: $locale) {
     __typename
     id
     title
@@ -3420,8 +3427,8 @@ export const ZoomLevel3ArchiveDocument = gql`
 }
     `;
 export const ZoomLevel3ArchiveRecordDocument = gql`
-    query ZoomLevel3ArchiveRecord($id: String!) {
-  archivesRecordZoomLevel3(id: $id) {
+    query ZoomLevel3ArchiveRecord($id: String!, $locale: String!) {
+  archivesRecordZoomLevel3(id: $id, locale: $locale) {
     referenceCode
     titleType
     descriptionLevel
@@ -3436,8 +3443,8 @@ export const ZoomLevel3ArchiveRecordDocument = gql`
 }
     `;
 export const ZoomLevel3ObjectRecordDocument = gql`
-    query ZoomLevel3ObjectRecord($id: String!) {
-  objectsRecordZoomLevel3(id: $id) {
+    query ZoomLevel3ObjectRecord($id: String!, $locale: String!) {
+  objectsRecordZoomLevel3(id: $id, locale: $locale) {
     objectNumber
     titleType
     objectName
@@ -3457,8 +3464,8 @@ export const ZoomLevel3ObjectRecordDocument = gql`
 }
     `;
 export const ZoomLevel3PeopleRecordDocument = gql`
-    query ZoomLevel3PeopleRecord($id: String!) {
-  peopleRecordZoomLevel3(id: $id) {
+    query ZoomLevel3PeopleRecord($id: String!, $locale: String!) {
+  peopleRecordZoomLevel3(id: $id, locale: $locale) {
     type
     profession
     nameVariation
@@ -3476,8 +3483,8 @@ export const ZoomLevel3PeopleRecordDocument = gql`
 }
     `;
 export const ZoomLevel3PublicationRecordDocument = gql`
-    query ZoomLevel3PublicationRecord($id: String!) {
-  publicationsRecordZoomLevel3(id: $id) {
+    query ZoomLevel3PublicationRecord($id: String!, $locale: String!) {
+  publicationsRecordZoomLevel3(id: $id, locale: $locale) {
     objectNumber
     subType
     authors
@@ -3504,8 +3511,8 @@ export const ZoomLevel3PublicationRecordDocument = gql`
 }
     `;
 export const StoryHoverRecordRelationsDocument = gql`
-    query StoryHoverRecordRelations($id: String!) {
-  storyWithoutRelations(id: $id) {
+    query StoryHoverRecordRelations($id: String!, $locale: String!) {
+  storyWithoutRelations(id: $id, locale: $locale) {
     data {
       id
       attributes {
@@ -3526,11 +3533,11 @@ export const StoryHoverRecordRelationsDocument = gql`
 }
     `;
 export const ArchiveRecordRelationsDocument = gql`
-    query ArchiveRecordRelations($id: String!, $type: EntityNames!, $lang: String!, $page: Int!, $pageSize: Int!) {
+    query ArchiveRecordRelations($id: String!, $type: EntityNames!, $locale: Locale!, $page: Int!, $pageSize: Int!) {
   archivesRecordRelations(
     type: $type
     id: $id
-    lang: $lang
+    locale: $locale
     page: $page
     pageSize: $pageSize
   ) {
@@ -3542,11 +3549,11 @@ export const ArchiveRecordRelationsDocument = gql`
 }
     `;
 export const ObjectRecordRelationsDocument = gql`
-    query ObjectRecordRelations($id: String!, $type: EntityNames!, $lang: String!, $page: Int!, $pageSize: Int!) {
+    query ObjectRecordRelations($id: String!, $type: EntityNames!, $locale: Locale!, $page: Int!, $pageSize: Int!) {
   objectRecordRelations(
     type: $type
     id: $id
-    lang: $lang
+    locale: $locale
     page: $page
     pageSize: $pageSize
   ) {
@@ -3559,11 +3566,11 @@ export const ObjectRecordRelationsDocument = gql`
 }
     `;
 export const PeopleRecordRelationsDocument = gql`
-    query PeopleRecordRelations($id: String!, $type: EntityNames!, $lang: String!, $page: Int!, $pageSize: Int!) {
+    query PeopleRecordRelations($id: String!, $type: EntityNames!, $locale: Locale!, $page: Int!, $pageSize: Int!) {
   peopleRecordRelations(
     type: $type
     id: $id
-    lang: $lang
+    locale: $locale
     page: $page
     pageSize: $pageSize
   ) {
@@ -3577,11 +3584,11 @@ export const PeopleRecordRelationsDocument = gql`
 }
     `;
 export const PublicationRecordRelationsDocument = gql`
-    query PublicationRecordRelations($id: String!, $type: EntityNames!, $lang: String!, $page: Int!, $pageSize: Int!) {
+    query PublicationRecordRelations($id: String!, $type: EntityNames!, $locale: Locale!, $page: Int!, $pageSize: Int!) {
   publicationRecordRelations(
     type: $type
     id: $id
-    lang: $lang
+    locale: $locale
     page: $page
     pageSize: $pageSize
   ) {
@@ -3594,43 +3601,43 @@ export const PublicationRecordRelationsDocument = gql`
 }
     `;
 export const ArchivesRecordRelationsCountDocument = gql`
-    query ArchivesRecordRelationsCount($id: String!, $type: EntityNames!, $lang: String!) {
-  archivesRecordRelationsCount(type: $type, id: $id, lang: $lang) {
+    query ArchivesRecordRelationsCount($id: String!, $type: EntityNames!) {
+  archivesRecordRelationsCount(type: $type, id: $id) {
     total
   }
 }
     `;
 export const ObjectRecordRelationsCountDocument = gql`
-    query ObjectRecordRelationsCount($id: String!, $type: EntityNames!, $lang: String!) {
-  objectRecordRelationsCount(type: $type, id: $id, lang: $lang) {
+    query ObjectRecordRelationsCount($id: String!, $type: EntityNames!) {
+  objectRecordRelationsCount(type: $type, id: $id) {
     total
   }
 }
     `;
 export const PeopleRecordRelationsCountDocument = gql`
-    query PeopleRecordRelationsCount($id: String!, $type: EntityNames!, $lang: String!) {
-  peopleRecordRelationsCount(type: $type, id: $id, lang: $lang) {
+    query PeopleRecordRelationsCount($id: String!, $type: EntityNames!) {
+  peopleRecordRelationsCount(type: $type, id: $id) {
     total
   }
 }
     `;
 export const PublicationsRecordRelationsCountDocument = gql`
-    query PublicationsRecordRelationsCount($id: String!, $type: EntityNames!, $lang: String!) {
-  publicationsRecordRelationsCount(type: $type, id: $id, lang: $lang) {
+    query PublicationsRecordRelationsCount($id: String!, $type: EntityNames!) {
+  publicationsRecordRelationsCount(type: $type, id: $id) {
     total
   }
 }
     `;
 export const ArchivesRelationsDocument = gql`
-    query ArchivesRelations($id: String!, $page: Int!, $lang: String!) {
-  relations(type: Archives, id: $id, page: $page, lang: $lang) {
+    query ArchivesRelations($id: String!, $page: Int!, $locale: Locale!) {
+  relations(type: Archives, id: $id, page: $page, locale: $locale) {
     ...zoom3RelationsFragment
   }
 }
     ${Zoom3RelationsFragmentFragmentDoc}`;
 export const StoryRelationsCountDocument = gql`
-    query StoryRelationsCount($id: String!, $lang: String!) {
-  storyRelationsCount(storyId: $id, lang: $lang) {
+    query StoryRelationsCount($id: String!, $locale: Locale!) {
+  storyRelationsCount(storyId: $id, locale: $locale) {
     linkedTriplyRecords {
       archives
       people
@@ -3642,36 +3649,36 @@ export const StoryRelationsCountDocument = gql`
 }
     `;
 export const ObjectRelationsDocument = gql`
-    query ObjectRelations($id: String!, $page: Int!, $lang: String!) {
-  relations(type: Objects, id: $id, page: $page, lang: $lang) {
+    query ObjectRelations($id: String!, $page: Int!, $locale: Locale!) {
+  relations(type: Objects, id: $id, page: $page, locale: $locale) {
     ...zoom3RelationsFragment
   }
 }
     ${Zoom3RelationsFragmentFragmentDoc}`;
 export const PeopleRelationsDocument = gql`
-    query PeopleRelations($id: String!, $page: Int!, $lang: String!) {
-  relations(type: People, id: $id, page: $page, lang: $lang) {
+    query PeopleRelations($id: String!, $page: Int!, $locale: Locale!) {
+  relations(type: People, id: $id, page: $page, locale: $locale) {
     ...zoom3RelationsFragment
   }
 }
     ${Zoom3RelationsFragmentFragmentDoc}`;
 export const PublicationRelationsDocument = gql`
-    query PublicationRelations($id: String!, $page: Int!, $lang: String!) {
-  relations(type: Publications, id: $id, page: $page, lang: $lang) {
+    query PublicationRelations($id: String!, $page: Int!, $locale: Locale!) {
+  relations(type: Publications, id: $id, page: $page, locale: $locale) {
     ...zoom3RelationsFragment
   }
 }
     ${Zoom3RelationsFragmentFragmentDoc}`;
 export const StoriesRelationsDocument = gql`
-    query StoriesRelations($id: String!, $page: Int!, $lang: String!) {
-  relations(type: Stories, id: $id, page: $page, lang: $lang) {
+    query StoriesRelations($id: String!, $page: Int!, $locale: Locale!) {
+  relations(type: Stories, id: $id, page: $page, locale: $locale) {
     ...zoom3RelationsFragment
   }
 }
     ${Zoom3RelationsFragmentFragmentDoc}`;
 export const StoriesRelationForRecordDocument = gql`
-    query StoriesRelationForRecord($id: String!, $type: EntityNames!, $lang: String!) {
-  zoomLevel3StoriesRelationsForRecord(type: $type, id: $id, lang: $lang) {
+    query StoriesRelationForRecord($id: String!, $type: EntityNames!, $locale: Locale!) {
+  zoomLevel3StoriesRelationsForRecord(type: $type, id: $id, locale: $locale) {
     type
     total
     stories {
@@ -3699,8 +3706,8 @@ export const StoriesRelationForRecordDocument = gql`
 }
     ${ImageModuleFragmentFragmentDoc}`;
 export const ZoomLevel3ObjectDocument = gql`
-    query ZoomLevel3Object($id: String!) {
-  zoomLevel3Object(id: $id) {
+    query ZoomLevel3Object($id: String!, $locale: String!) {
+  zoomLevel3Object(id: $id, locale: $locale) {
     id
     __typename
     title
@@ -3710,8 +3717,8 @@ export const ZoomLevel3ObjectDocument = gql`
 }
     `;
 export const ZoomLevel3PublicationDocument = gql`
-    query ZoomLevel3Publication($id: String!) {
-  zoomLevel3Publication(id: $id) {
+    query ZoomLevel3Publication($id: String!, $locale: String!) {
+  zoomLevel3Publication(id: $id, locale: $locale) {
     id
     __typename
     title
@@ -3721,22 +3728,13 @@ export const ZoomLevel3PublicationDocument = gql`
 }
     `;
 export const ZoomLevel3PersonDocument = gql`
-    query ZoomLevel3Person($id: String!) {
-  zoomLevel3Person(id: $id) {
+    query ZoomLevel3Person($id: String!, $locale: String!) {
+  zoomLevel3Person(id: $id, locale: $locale) {
     __typename
     id
     title
     thumbnail
     description
-  }
-}
-    `;
-export const ZoomLevel1Document = gql`
-    query zoomLevel1 {
-  zoomLevel1 {
-    name
-    count
-    id
   }
 }
     `;
@@ -3748,7 +3746,7 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    homepage(variables?: HomepageQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<HomepageQuery> {
+    homepage(variables: HomepageQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<HomepageQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<HomepageQuery>(HomepageDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'homepage', 'query');
     },
     landingpageBySlug(variables: LandingpageBySlugQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<LandingpageBySlugQuery> {
@@ -3757,28 +3755,28 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     menupageBySlug(variables: MenupageBySlugQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<MenupageBySlugQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<MenupageBySlugQuery>(MenupageBySlugDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'menupageBySlug', 'query');
     },
-    menuPages(variables?: MenuPagesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<MenuPagesQuery> {
+    menuPages(variables: MenuPagesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<MenuPagesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<MenuPagesQuery>(MenuPagesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'menuPages', 'query');
     },
-    stories(variables?: StoriesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<StoriesQuery> {
+    stories(variables: StoriesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<StoriesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<StoriesQuery>(StoriesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'stories', 'query');
     },
     storiesRealtedWithinTheme(variables: StoriesRealtedWithinThemeQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<StoriesRealtedWithinThemeQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<StoriesRealtedWithinThemeQuery>(StoriesRealtedWithinThemeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'storiesRealtedWithinTheme', 'query');
     },
-    storiesWithoutRelations(variables?: StoriesWithoutRelationsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<StoriesWithoutRelationsQuery> {
+    storiesWithoutRelations(variables: StoriesWithoutRelationsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<StoriesWithoutRelationsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<StoriesWithoutRelationsQuery>(StoriesWithoutRelationsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'storiesWithoutRelations', 'query');
     },
-    storyById(variables?: StoryByIdQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<StoryByIdQuery> {
+    storyById(variables: StoryByIdQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<StoryByIdQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<StoryByIdQuery>(StoryByIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'storyById', 'query');
     },
     storyImages(variables: StoryImagesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<StoryImagesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<StoryImagesQuery>(StoryImagesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'storyImages', 'query');
     },
-    storyMetaById(variables?: StoryMetaByIdQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<StoryMetaByIdQuery> {
+    storyMetaById(variables: StoryMetaByIdQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<StoryMetaByIdQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<StoryMetaByIdQuery>(StoryMetaByIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'storyMetaById', 'query');
     },
-    themes(variables?: ThemesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ThemesQuery> {
+    themes(variables: ThemesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ThemesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ThemesQuery>(ThemesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'themes', 'query');
     },
     ArchivesZoomRecordHover(variables: ArchivesZoomRecordHoverQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ArchivesZoomRecordHoverQuery> {
@@ -3802,25 +3800,25 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     Zoom2Archives(variables: Zoom2ArchivesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom2ArchivesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Zoom2ArchivesQuery>(Zoom2ArchivesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Zoom2Archives', 'query');
     },
-    Zoom2ArchiveAmount(variables?: Zoom2ArchiveAmountQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom2ArchiveAmountQuery> {
+    Zoom2ArchiveAmount(variables: Zoom2ArchiveAmountQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom2ArchiveAmountQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Zoom2ArchiveAmountQuery>(Zoom2ArchiveAmountDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Zoom2ArchiveAmount', 'query');
     },
     Zoom2Objects(variables: Zoom2ObjectsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom2ObjectsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Zoom2ObjectsQuery>(Zoom2ObjectsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Zoom2Objects', 'query');
     },
-    Zoom2ObjectsAmount(variables?: Zoom2ObjectsAmountQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom2ObjectsAmountQuery> {
+    Zoom2ObjectsAmount(variables: Zoom2ObjectsAmountQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom2ObjectsAmountQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Zoom2ObjectsAmountQuery>(Zoom2ObjectsAmountDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Zoom2ObjectsAmount', 'query');
     },
     Zoom2People(variables: Zoom2PeopleQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom2PeopleQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Zoom2PeopleQuery>(Zoom2PeopleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Zoom2People', 'query');
     },
-    Zoom2PeopleAmount(variables?: Zoom2PeopleAmountQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom2PeopleAmountQuery> {
+    Zoom2PeopleAmount(variables: Zoom2PeopleAmountQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom2PeopleAmountQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Zoom2PeopleAmountQuery>(Zoom2PeopleAmountDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Zoom2PeopleAmount', 'query');
     },
     Zoom2Publications(variables: Zoom2PublicationsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom2PublicationsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Zoom2PublicationsQuery>(Zoom2PublicationsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Zoom2Publications', 'query');
     },
-    Zoom2PublicationsAmount(variables?: Zoom2PublicationsAmountQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom2PublicationsAmountQuery> {
+    Zoom2PublicationsAmount(variables: Zoom2PublicationsAmountQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom2PublicationsAmountQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Zoom2PublicationsAmountQuery>(Zoom2PublicationsAmountDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Zoom2PublicationsAmount', 'query');
     },
     ZoomLevel3Archive(variables: ZoomLevel3ArchiveQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ZoomLevel3ArchiveQuery> {
@@ -3894,9 +3892,6 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     ZoomLevel3Person(variables: ZoomLevel3PersonQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ZoomLevel3PersonQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ZoomLevel3PersonQuery>(ZoomLevel3PersonDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ZoomLevel3Person', 'query');
-    },
-    zoomLevel1(variables?: ZoomLevel1QueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ZoomLevel1Query> {
-      return withWrapper((wrappedRequestHeaders) => client.request<ZoomLevel1Query>(ZoomLevel1Document, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'zoomLevel1', 'query');
     }
   };
 }
