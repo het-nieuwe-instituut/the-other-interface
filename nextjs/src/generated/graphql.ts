@@ -1705,6 +1705,7 @@ export type TriplyRecord = {
   publishedAt?: Maybe<Scalars['Date']>;
   recordId: Scalars['String'];
   stories?: Maybe<StoryRelationResponseCollection>;
+  subject_collectionHighlights?: Maybe<Scalars['Boolean']>;
   type: EnumTriplyrecordType;
   updatedAt?: Maybe<Scalars['Date']>;
 };
@@ -1749,6 +1750,7 @@ export type TriplyRecordFiltersInput = {
   publishedAt?: InputMaybe<DateTimeFilterInput>;
   recordId?: InputMaybe<StringFilterInput>;
   stories?: InputMaybe<StoryFiltersInput>;
+  subject_collectionHighlights?: InputMaybe<BooleanFilterInput>;
   type?: InputMaybe<StringFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
 };

@@ -1717,6 +1717,7 @@ export type TriplyRecord = {
   publishedAt?: Maybe<Scalars['DateTime']>
   recordId: Scalars['String']
   stories?: Maybe<StoryRelationResponseCollection>
+  subject_collectionHighlights?: Maybe<Scalars['Boolean']>
   type: Enum_Triplyrecord_Type
   updatedAt?: Maybe<Scalars['DateTime']>
 }
@@ -1755,6 +1756,7 @@ export type TriplyRecordFiltersInput = {
   publishedAt?: InputMaybe<DateTimeFilterInput>
   recordId?: InputMaybe<StringFilterInput>
   stories?: InputMaybe<StoryFiltersInput>
+  subject_collectionHighlights?: InputMaybe<BooleanFilterInput>
   type?: InputMaybe<StringFilterInput>
   updatedAt?: InputMaybe<DateTimeFilterInput>
 }
@@ -1764,6 +1766,7 @@ export type TriplyRecordInput = {
   publishedAt?: InputMaybe<Scalars['DateTime']>
   recordId?: InputMaybe<Scalars['String']>
   stories?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
+  subject_collectionHighlights?: InputMaybe<Scalars['Boolean']>
   type?: InputMaybe<Enum_Triplyrecord_Type>
 }
 
@@ -15591,6 +15594,7 @@ export type TriplyRecordQuery = {
         createdAt?: any | null
         updatedAt?: any | null
         publishedAt?: any | null
+        subject_collectionHighlights?: boolean | null
         stories?: {
           __typename?: 'StoryRelationResponseCollection'
           data: Array<{
@@ -16088,6 +16092,7 @@ export type TriplyRecordsQuery = {
         createdAt?: any | null
         updatedAt?: any | null
         publishedAt?: any | null
+        subject_collectionHighlights?: boolean | null
         stories?: {
           __typename?: 'StoryRelationResponseCollection'
           data: Array<{
@@ -16584,6 +16589,7 @@ export type TriplyRecordFragmentFragment = {
     createdAt?: any | null
     updatedAt?: any | null
     publishedAt?: any | null
+    subject_collectionHighlights?: boolean | null
     stories?: {
       __typename?: 'StoryRelationResponseCollection'
       data: Array<{
@@ -18330,6 +18336,7 @@ export const TriplyRecordFragmentFragmentDoc = gql`
       createdAt
       updatedAt
       publishedAt
+      subject_collectionHighlights
     }
   }
   ${StoryFragmentFragmentDoc}
