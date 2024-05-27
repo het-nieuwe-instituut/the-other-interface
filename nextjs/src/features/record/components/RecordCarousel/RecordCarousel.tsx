@@ -38,7 +38,6 @@ const RecordCarousel = (props: { imageUrls: string[] }) => {
           src={selectedImage ?? props.imageUrls[0]}
           className="h-full max-h-[524px]"
           fit="contain"
-          disableRightClick
         />
       </Box>
 
@@ -51,7 +50,6 @@ const RecordCarousel = (props: { imageUrls: string[] }) => {
                 className="size-full max-h-[104px] cursor-pointer transition-opacity duration-500 ease-out"
                 fit="contain"
                 onClick={() => handleThumbnailClick(url)}
-                disableRightClick
               />
             </Box>
           ))}

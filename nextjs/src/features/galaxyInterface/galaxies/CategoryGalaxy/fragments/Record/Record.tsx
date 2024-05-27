@@ -79,7 +79,6 @@ const RecordData = (record: RecordProps, lang?: Locale | null, search?: string) 
         style={{
           flex: `1 1 calc(100% - 2.6vw - 7px)`,
         }}
-        disableRightClick
       />
 
       <RecordText title={title} categoryType={category} />
