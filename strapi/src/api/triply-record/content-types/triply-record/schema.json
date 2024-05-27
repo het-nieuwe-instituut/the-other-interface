@@ -35,6 +35,9 @@
     },
     "label": {
       "type": "string"
+    },
+    "subject_collectionHighlights": {
+      "type": "boolean"
     }
   }
 }

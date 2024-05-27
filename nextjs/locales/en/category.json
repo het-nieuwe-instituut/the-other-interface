@@ -18,5 +18,7 @@
   "suggestions": "Suggestions",
   "searchPlaceholder": "Type your search term here",
   "searchCategory": "Category",
-  "couldNotFetchHover": "Something went wrong while fetching the data for the hover. Please try again later."
+
+  "couldNotFetchHover": "Something went wrong while fetching the data for the hover. Please try again later.",
+  "errorLoadingDetail": "Something went wrong while loading. Please try again later."
 }

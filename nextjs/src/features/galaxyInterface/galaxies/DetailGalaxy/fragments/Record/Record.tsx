@@ -1,22 +1,27 @@
 import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
 
+import { useRecordDetailQuery } from '@/features/record/hooks/useRecordDetailQuery'
+import { Loader } from '@/features/shared/components/Loading/Loading'
+import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useZoomHoverRecordResultQuery } from '@/features/shared/hooks/queries/useZoomHoverRecordResultQuery'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { useLocale } from '@/features/shared/hooks/useLocale'
 import {
   ReadMoreTooltip,
   ReadMoreTooltipProps,
 } from '@/features/ui/components/tooltip/ReadMoreTooltip'
 import { cn } from '@/features/ui/utils/cn'
+import { useRouter } from 'next/navigation'
 import { PositionedRecord } from '../types'
 import { RecordText } from './RecordText'
 import { useCalculateLine } from './useCalculateLine'
-import { usePresenter } from './usePresenter'
 
 type Props = {
   record: PositionedRecord
   tabIndex?: number
   style?: React.CSSProperties
   tooltipPlace?: ReadMoreTooltipProps['place']
+  isIdLoading?: boolean
 }
 
 export const Record: React.FC<Props> = ({
@@ -25,25 +30,40 @@ export const Record: React.FC<Props> = ({
   tabIndex = 0,
   tooltipPlace = 'bottom',
 }) => {
+  const router = useRouter()
+  const lang = useLocale()
   const { id, category, position, grid } = record
-  const { recordDetails, isLoading, handleClick } = usePresenter(id, category)
-  // TODO: HNIT-1833 - add in loading and error handling
+
+  const {
+    data: recordDetails,
+    isLoading,
+    isError,
+  } = useRecordDetailQuery({ type: category, id, options: { refetchOnWindowFocus: false } })
+
   const {
     data,
-    isError,
+    isError: isLoadingHoverError,
     isLoading: isLoadingHover,
   } = useZoomHoverRecordResultQuery({ id, category })
   const { coordinates, ref } = useCalculateLine()
   const { t } = useTypeSafeTranslation('category')
 
-  if (!recordDetails && !isLoading) return null
+  if (isLoading && tabIndex === 0) {
+    return (
+      <div className="h-full items-center justify-center">
+        <Loader />
+      </div>
+    )
+  }
+
+  if (!recordDetails || isError) return null
 
   return (
     <div style={{ ...grid, ...style }}>
       <div className="peer relative size-full">
         <ReadMoreTooltip
           isLoading={isLoadingHover}
-          error={isError ? t('couldNotFetchHover') : ''}
+          error={isLoadingHoverError ? t('couldNotFetchHover') : ''}
           place={tooltipPlace}
           isEmpty={!data?.description && !data?.title}
           title={data?.title ?? undefined}
@@ -101,4 +121,10 @@ export const Record: React.FC<Props> = ({
       </div>
     </div>
   )
+
+  function handleClick() {
+    let url = `/detail/${category}/${id}`
+    url = addLocaleToUrl(url, lang)
+    router.push(url)
+  }
 }

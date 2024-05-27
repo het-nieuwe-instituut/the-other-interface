@@ -1,10 +1,25 @@
-import { RecordTitle } from '../../fragments/RecordTitle'
+import { ScrollToContent } from '@/features/pages/utils/utils'
+import { Category } from '@/features/shared/utils/categories'
+import { useParams } from 'next/navigation'
 import { RecordDescription } from '../../fragments/RecordDescription'
+import { RecordTitle } from '../../fragments/RecordTitle'
+import { useRecordDetailQuery } from '../../hooks/useRecordDetailQuery'
 import RecordCarousel from '../RecordCarousel/RecordCarousel'
-import { usePresenter } from './usePresenter'
 
 export const RecordHeader = () => {
-  const { record, handleScrollToContentClick } = usePresenter()
+  const params = useParams()
+  const category = params?.category as Category
+  const id = params?.id as string
+
+  const handleScrollToContentClick = () => {
+    ScrollToContent()
+  }
+
+  const { data: record } = useRecordDetailQuery({
+    type: category,
+    id,
+    options: { refetchOnWindowFocus: false, suspense: true },
+  })
 
   return (
     <div>

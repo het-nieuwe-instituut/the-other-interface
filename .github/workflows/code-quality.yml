@@ -1,15 +1,15 @@
-name: Tests Client
-
+name: Code quality and tests
 on:
+  pull_request_review:
+    types: [submitted]
   push:
     branches:
       - main
       - develop
-  # Trigger on any PR
-  pull_request:
 
 jobs:
   tests:
+    if: github.event.review.state == 'approved'
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -21,14 +21,17 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Install root dependencies
-        run: npm ci
+      - name: Install dependencies
+        run: npm ci && npm run install:nextjs && npm run install:gateway
 
       - name: Check styles
         run: npm run format-check
 
-      - name: Install nextjs dependencies
-        run: cd nextjs && npm ci
+      - name: Eslint
+        run: npm run lint
 
-      - name: Run nextjs tests
-        run: cd nextjs && npm run test
+      - name: Type check
+        run: npm run type-check
+
+      - name: Test
+        run: npm run test
