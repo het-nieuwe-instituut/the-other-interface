@@ -41,7 +41,7 @@ const getPositionedRecords = ({
 export const usePresenter = (pageAmount: number) => {
   const { t } = useTypeSafeTranslation('category')
 
-  const { category, search } = useZoom2Params()
+  const { category, search, filters } = useZoom2Params() // get filter - not working
   const { pageNumber } = usePageNumber()
   const { currentTemplate, nextTemplate } = usePositioningTemplates(
     positioningTemplates,
@@ -53,6 +53,7 @@ export const usePresenter = (pageAmount: number) => {
 
   const { data: currentResults, isLoading: isResultLoading } = useSearch({
     category,
+    filters, // added
     text: search,
     page: pageNumber,
   })

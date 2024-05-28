@@ -11,15 +11,18 @@ import { mapCategoryToTriplyEnum } from '../../helpers/mapCategoryToTriplyEnum'
 import { storyToRecordMapper } from '../../helpers/extractStoryData'
 import initApiClientService from '../../utils/initApiClientService'
 import { useLocale } from '../useLocale'
+import { decodeFilters } from '../../helpers/searchHelpers'
 
 export function useSearch({
   category,
   text,
+  filters,
   page = 1,
   enabled = true,
 }: {
   category: SearchCategory
   text?: string
+  filters?: string | null
   page?: number
   enabled?: boolean
 }) {
@@ -32,6 +35,7 @@ export function useSearch({
       case SEARCH_CATEGORIES.stories:
         const response = await api.searchByStories({
           searchTerm: text || undefined,
+          filterTerm: filters ? decodeFilters(filters)[0].value : '',
           locale,
           page,
           pageSize: ZOOM2_RECORDS_PER_PAGE,

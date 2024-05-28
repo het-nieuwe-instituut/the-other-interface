@@ -2,7 +2,11 @@
 import { ThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
 import { CATEGORIES } from '@/features/shared/utils/categories'
 import { Link, Text } from '@chakra-ui/react'
+import NextLink from 'next/link'
 import { usePresenter } from './usePresenter'
+import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
+import { keyExtractor } from '@/features/shared/utils/lists'
+import { encodeFilters } from '@/features/shared/helpers/searchHelpers'
 
 export const StoryMeta: React.FC = () => {
   const {
@@ -37,7 +41,7 @@ export const StoryMeta: React.FC = () => {
           </Text>
         )}
 
-        {authorFormatted && (
+        {authorFormatted && ( // make clickable
           <Text textStyle={'socialLarge.lg'} fontWeight={700}>
             {storiesT.t('by', {
               author: authorFormatted,
@@ -113,14 +117,41 @@ export const StoryMeta: React.FC = () => {
           })}
         </Box>
       )} */}
-      {themes && (
+      {themes && ( // make clickable
         <div className="mb-5">
           <Text textStyle={'socialLarge.lg'} fontWeight={700}>
             {storiesT.t('themes')}
           </Text>
-          <Text textStyle={'socialLarge.lg'} marginBottom={'md'}>
-            {themes}
-          </Text>
+          <div className="flex flex-row flex-wrap gap-[2px]">
+            {themes.map((theme, index, array) => {
+              const hasItemAfter = array.length - 1 !== index
+              return (
+                <NextLink
+                  key={keyExtractor(theme, index, array)}
+                  href={addLocaleToUrl(
+                    `/landingpage?category=stories&filters=${encodeFilters([
+                      {
+                        field: 'theme',
+                        value: theme ?? '',
+                        id: '12',
+                      },
+                    ])}&searchResult=true`,
+                    lang
+                  )}
+                >
+                  <Text
+                    textStyle={'socialLarge.lg'}
+                    display={'inline-block'}
+                    borderBottom={'1px solid'}
+                    borderColor={'blackAlpha.100'}
+                  >
+                    {theme}
+                    {hasItemAfter && ',  '}
+                  </Text>
+                </NextLink>
+              )
+            })}
+          </div>
         </div>
       )}
       {!!linkedPeopleRecords.length && (
@@ -145,14 +176,41 @@ export const StoryMeta: React.FC = () => {
           </div>
         </div>
       )}
-      {locations && (
+      {locations && ( // make clickable
         <div className="mb-5">
           <Text textStyle={'socialLarge.lg'} fontWeight={700}>
             {storiesT.t('locations')}
           </Text>
-          <Text textStyle={'socialLarge.lg'} marginBottom={'md'}>
+          {/* <Text textStyle={'socialLarge.lg'} marginBottom={'md'}>
             {locations}
-          </Text>
+          </Text> */}
+
+          <div className="flex flex-row flex-wrap gap-[2px]">
+            {locations.map((location, index, array) => {
+              const hasItemAfter = array.length - 1 !== index
+              return (
+                <NextLink
+                  key={keyExtractor(location, index, array)}
+                  href={addLocaleToUrl(
+                    `/landingpage?category=stories&filters=${encodeFilters([
+                      { field: 'location', value: location ? location : '', id: '13' },
+                    ])}&searchResult=true`,
+                    lang
+                  )}
+                >
+                  <Text
+                    textStyle={'socialLarge.lg'}
+                    display={'inline-block'}
+                    borderBottom={'1px solid'}
+                    borderColor={'blackAlpha.100'}
+                  >
+                    {location}
+                    {hasItemAfter && ',  '}
+                  </Text>
+                </NextLink>
+              )
+            })}
+          </div>
         </div>
       )}
       {timeframe && (

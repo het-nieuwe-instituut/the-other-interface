@@ -16,6 +16,6 @@ export const useZoom2Params = () => {
     search: search || undefined,
     lang,
     isSearchResult: !!isSearchResult,
-    filters,
+    filters: filters || undefined,
   }
 }
