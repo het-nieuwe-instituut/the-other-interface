@@ -16,13 +16,15 @@ import { TypographyVariants } from '@/features/ui/components/typography/variants
 import { useTotalCounterQuery } from '@/features/galaxyInterface/galaxies/MainGalaxy/hooks/useTotalCounterQuery'
 import { Loader } from '@/features/shared/components/Loading/Loading'
 import ErrorBox from '@/features/shared/components/Error/ErrorBox'
+import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 
 type Props = {
   total?: number
   isNoActiveSearch?: boolean
+  className?: string
 }
 
-export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch }) => {
+export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }) => {
   const {
     category,
     isSearchModeActive,
@@ -30,7 +32,6 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch }) => {
     isCategorySuggestionsOpen,
     setIsCategorySuggestionsOpen,
     handleGoClick,
-    t,
     searchResultAmount,
     inputValue,
     handleInputChange,
@@ -44,6 +45,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch }) => {
     isSearchLoading,
     isSearchError,
   } = usePresenter(isNoActiveSearch)
+  const { t } = useTypeSafeTranslation('category')
 
   const { offset, searchBarHeight, wrapRef } = useSearchBarPosition(selectedFilters)
   const {
@@ -81,6 +83,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch }) => {
 
   return (
     <Grid
+      className={cn(className, 'px-4')}
       position="relative"
       height={'auto'}
       templateColumns={'160px minmax(20px, 1fr) minmax(95px, auto)'}
@@ -92,7 +95,6 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch }) => {
       ref={searchBarRef}
       color="pinkAlpha.100"
       bottom={`${offset}px`}
-      className="px-4"
     >
       <Flex
         flexDirection="column"
@@ -102,7 +104,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch }) => {
         {renderPaginationContent()}
       </Flex>
 
-      <div ref={wrapRef} className="flex flex-wrap gap-0 p-0">
+      <div ref={wrapRef} className="flex flex-wrap gap-0 p-0 transition-all">
         <div className="mr-2 pt-1">
           <CategoryFilter
             onClick={() => setIsCategorySuggestionsOpen(!isCategorySuggestionsOpen)}

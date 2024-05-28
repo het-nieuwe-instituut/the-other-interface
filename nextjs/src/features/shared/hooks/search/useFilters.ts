@@ -1,7 +1,8 @@
-import { useEffect, useState, useCallback } from 'react'
-import { useDispatch } from 'react-redux'
-import { sharedActions } from '@/features/shared/stores/shared.store'
 import { decodeFilters, encodeFilters } from '@/features/shared/helpers/searchHelpers'
+import { sharedActions } from '@/features/shared/stores/shared.store'
+import { useCallback, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { State } from '../../configs/store'
 import { useZoom2Params } from '../useZoom2Params'
 
 // TODO: Remove when we connect real query
@@ -20,22 +21,23 @@ interface UseFiltersProps {
 
 export const useFilters = ({ onSelectFilter, onRemoveFilter }: UseFiltersProps = {}) => {
   const { filters } = useZoom2Params()
-  const [selectedFilters, setSelectedFilters] = useState<FilterArray>([])
+  const selectedFilters = useSelector((state: State) => state.shared.selectedFilters)
   const dispatch = useDispatch()
 
   useEffect(() => {
     if (typeof filters === 'string') {
       const decodedFilters: FilterArray = decodeFilters(filters)
-      setSelectedFilters(decodedFilters)
+      dispatch(sharedActions.setFilters({ selectedFilters: decodedFilters }))
     }
-  }, [filters])
+  }, [dispatch, filters])
 
   const selectFilter = useCallback(
     (filter: Filter) => {
       if (selectedFilters.some(f => f.id === filter.id)) {
         return
       }
-      setSelectedFilters([...selectedFilters, filter])
+
+      dispatch(sharedActions.setFilters({ selectedFilters: [...selectedFilters, filter] }))
       dispatch(sharedActions.categorySuggestionsOpen({ categorySuggestionsOpen: false }))
       if (onSelectFilter) {
         onSelectFilter()
@@ -46,16 +48,18 @@ export const useFilters = ({ onSelectFilter, onRemoveFilter }: UseFiltersProps =
 
   const removeFilter = useCallback(
     (id: string) => {
-      setSelectedFilters(selectedFilters.filter(f => f.id !== id))
+      dispatch(
+        sharedActions.setFilters({ selectedFilters: selectedFilters.filter(f => f.id !== id) })
+      )
       if (onRemoveFilter) {
         onRemoveFilter()
       }
     },
-    [onRemoveFilter, selectedFilters]
+    [dispatch, onRemoveFilter, selectedFilters]
   )
 
   const clearFilters = useCallback(() => {
-    setSelectedFilters([])
+    sharedActions.setFilters({ selectedFilters: [] })
   }, [])
 
   return {

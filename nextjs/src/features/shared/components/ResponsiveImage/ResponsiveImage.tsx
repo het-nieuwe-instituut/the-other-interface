@@ -12,7 +12,6 @@ type ResponsiveImageProps = {
   style?: CSSProperties
   fit?: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down'
   onClick?: () => void
-  disableRightClick?: boolean
   onLoad?: () => void
 }
 
@@ -22,7 +21,6 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   size = '200px',
   style,
   fit = 'contain',
-  disableRightClick = false,
   onClick,
   onLoad,
   className,
@@ -59,7 +57,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
           objectFit: 'contain',
           objectPosition: 'bottom',
         }}
-        onContextMenu={disableRightClick ? () => false : undefined}
+        onContextMenu={() => false}
         fill={true}
       />
 
@@ -81,7 +79,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
             objectFit: fit,
           }}
           fill={true}
-          onContextMenu={disableRightClick ? e => e.preventDefault() : undefined}
+          onContextMenu={e => e.preventDefault()}
           onLoad={handleLoad}
         />
       )}

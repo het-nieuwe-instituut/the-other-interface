@@ -12,7 +12,6 @@ interface Props {
   onClick?: () => void
   id?: string
 }
-
 export const SearchFilterBox: React.FC<Props> = ({
   category,
   subCategory,
@@ -37,7 +36,6 @@ export const SearchFilterBox: React.FC<Props> = ({
         <p className={cn('text-blue.100 mr-1 truncate', TypographyVariants({ social: 'label' }))}>
           {category}
         </p>
-
         {actionButton && (
           <ActionButton id={id} onClick={actionButtonClick}>
             {actionButton}

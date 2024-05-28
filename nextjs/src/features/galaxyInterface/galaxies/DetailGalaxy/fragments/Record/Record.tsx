@@ -89,7 +89,6 @@ export const Record: React.FC<Props> = ({
               style={{
                 flex: '1 1 calc(100% - 2vw - 5px)',
               }}
-              disableRightClick
             />
 
             <RecordText title={recordDetails?.title} categoryType={category} />

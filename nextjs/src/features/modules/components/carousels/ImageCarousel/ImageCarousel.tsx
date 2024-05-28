@@ -67,6 +67,7 @@ export const ImageCarousel = (props: Props) => {
                   layout="fixed"
                   alt="carousel image"
                   loading="eager"
+                  onContextMenu={e => e.preventDefault()}
                 />
                 {item?.title && (
                   <Text
