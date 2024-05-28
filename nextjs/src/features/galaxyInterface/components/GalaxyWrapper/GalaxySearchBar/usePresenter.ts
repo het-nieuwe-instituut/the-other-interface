@@ -1,6 +1,6 @@
 import { State } from '@/features/shared/configs/store'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
-import { useSearch } from '@/features/shared/hooks/queries/useSearch'
+import { useSearchByCategoryQuery } from '@/features/shared/hooks/queries/useSearchByCategoryQuery'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { usePageCategory } from '@/features/shared/hooks/usePageCategory'
 import { usePageNumber } from '@/features/shared/hooks/usePageNumber'
@@ -38,7 +38,7 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
 
   const { t } = useTypeSafeTranslation('category')
   const { pageCategory } = usePageCategory()
-  const { data } = useSearch({
+  const { data, isLoading, isError, fetchStatus } = useSearchByCategoryQuery({
     category: pageCategory,
     text: search,
     page: pageNumber,
@@ -146,5 +146,8 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
     selectedFilters,
     handleSelectFilter: selectFilter,
     removeFilter,
+    isSearchError: isError,
+    // see https://github.com/TanStack/query/issues/3584
+    isSearchLoading: isLoading && fetchStatus !== 'idle',
   }
 }

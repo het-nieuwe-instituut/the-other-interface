@@ -133,7 +133,7 @@ export const StoryMeta: React.FC = () => {
                       {
                         field: 'theme',
                         value: theme ?? '',
-                        id: '12',
+                        id: theme ? theme : '',
                       },
                     ])}&searchResult=true`,
                     lang
@@ -193,7 +193,11 @@ export const StoryMeta: React.FC = () => {
                   key={keyExtractor(location, index, array)}
                   href={addLocaleToUrl(
                     `/landingpage?category=stories&filters=${encodeFilters([
-                      { field: 'location', value: location ? location : '', id: '13' },
+                      {
+                        field: 'location',
+                        value: location ? location : '',
+                        id: location ? location : '',
+                      },
                     ])}&searchResult=true`,
                     lang
                   )}

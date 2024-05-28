@@ -1,6 +1,6 @@
 import { State } from '@/features/shared/configs/store'
 import { ZOOM2_RECORDS_PER_PAGE } from '@/features/shared/constants/mainConstants'
-import { useSearch } from '@/features/shared/hooks/queries/useSearch'
+import { useSearchByCategoryQuery } from '@/features/shared/hooks/queries/useSearchByCategoryQuery'
 import { usePageNumber } from '@/features/shared/hooks/usePageNumber'
 import { usePagination } from '@/features/shared/hooks/usePagination'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
@@ -17,7 +17,11 @@ export const usePresenter = () => {
     notFound()
   }
 
-  const { data, isLoading: isResultAmountLoading } = useSearch({
+  const {
+    data,
+    isLoading: isResultAmountLoading,
+    isError,
+  } = useSearchByCategoryQuery({
     category,
     text: search,
     page: pageNumber,
@@ -44,5 +48,7 @@ export const usePresenter = () => {
     increasePageNumber,
     decreasePageNumber,
     isResultEmpty: searchResultAmount === 0,
+    isError,
+    records: data?.items || [],
   }
 }
