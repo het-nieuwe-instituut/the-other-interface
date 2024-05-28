@@ -15,14 +15,17 @@ export const ThemeTitle: React.FC<Props> = ({ title }) => {
   return (
     <Text
       position={'absolute'}
-      bottom={`calc(${GALAXY_EDITORIAL_LAYER_PART} + 9%)`}
+      bottom={`calc(${GALAXY_EDITORIAL_LAYER_PART} + 96px)`}
       left={6}
       maxWidth={'70vw'}
       isTruncated
       color={'blueAlpha.100'}
       textStyle="headingTimesLarge.2xl"
-      fontSize={{ sm: '64px', md: '80px', lg: '80px', xl: '96px', '2xl': '95px' }}
-      lineHeight={'normal'}
+      fontSize={{ base: '32px', lg: '64px' }}
+      lineHeight={{
+        base: '33.6px',
+        lg: '64px',
+      }}
       pointerEvents={'none'}
       zIndex={HOMEPAGE_Z_INDEXES.THEME_TITLE}
     >

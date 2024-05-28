@@ -1,5 +1,4 @@
 'use client'
-import { Box, Flex } from '@chakra-ui/react'
 import { Records } from './fragments'
 import { GalaxyFooter } from '../../components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 import { usePresenter } from './usePresenter'
@@ -18,18 +17,8 @@ export const CategoryGalaxy: React.FC = () => {
   } = usePresenter()
 
   return (
-    <Box w={'100vw'} backgroundColor={'pinkAlpha.100'}>
-      <Flex
-        position="relative"
-        width="100vw"
-        height="100vh"
-        alignItems={'center'}
-        justifyContent={'center'}
-        overflow={'hidden'}
-        padding={'0 25px'}
-        maxW={'1440px'}
-        marginX={'auto'}
-      >
+    <div className={'w-screen bg-pink-100'}>
+      <div className="relative mx-auto flex h-screen w-screen max-w-[1440px] items-center justify-center overflow-hidden px-[25px]">
         {isSearchModeActive && <BlurOverlay />}
         <Records pageAmount={pageAmount} />
 
@@ -45,7 +34,7 @@ export const CategoryGalaxy: React.FC = () => {
             />
           }
         />
-      </Flex>
-    </Box>
+      </div>
+    </div>
   )
 }

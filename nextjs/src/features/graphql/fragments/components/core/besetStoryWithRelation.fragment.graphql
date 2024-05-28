@@ -13,9 +13,6 @@ fragment StoryFragment on StoryEntity {
             ... on ComponentModulesPullquote {
                 ...pullquoteModuleFragment
             }
-            ... on ComponentModulesTableModule {
-                ...tableModuleFragment
-            }
             ... on ComponentModulesTitleModule {
                 ...titleModuleFragment
             }
@@ -27,9 +24,6 @@ fragment StoryFragment on StoryEntity {
             }
             ... on ComponentModulesSubtitle {
                 ...subtitleModuleFragment
-            }
-            ... on ComponentModulesGridModule {
-                ...gridModuleFragment
             }
         }
         author {

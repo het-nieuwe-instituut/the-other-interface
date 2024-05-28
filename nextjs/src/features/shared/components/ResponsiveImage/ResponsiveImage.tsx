@@ -1,59 +1,77 @@
-import React from 'react'
-import { usePresenter } from './usePresenter'
+'use client'
 import Image from 'next/image'
-import { Box, BoxProps } from '@chakra-ui/react'
+import React, { CSSProperties, useRef, useState } from 'react'
+import { limitCopyrightedImageResolution } from './limitCopyrightedImageResolution'
+import { cn } from '@/features/ui/utils/cn'
 
 type ResponsiveImageProps = {
+  className: string
   src?: string | null
   alt?: string | null
-  maxHeight?: string
   size?: string
-  css?: BoxProps['css']
+  style?: CSSProperties
   fit?: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down'
   onClick?: () => void
+  onLoad?: () => void
 }
 
 export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   src = '',
   alt = '',
-  maxHeight = '100%',
   size = '200px',
-  css,
+  style,
   fit = 'contain',
   onClick,
+  onLoad,
+  className,
 }) => {
-  const { fallbackImage, isSuccessfullyLoaded } = usePresenter(src)
+  const [imageLoaded, setImageLoaded] = useState(false)
+  const fallbackImageRef = useRef<string | null>(null)
+
+  if (!fallbackImageRef.current) {
+    fallbackImageRef.current = `/images/fallbacks/${Math.floor(Math.random() * 9) + 1}.svg`
+  }
+
+  const handleLoad = () => {
+    setImageLoaded(true)
+    if (onLoad) {
+      onLoad() // Call external onLoad callback
+    }
+  }
+
+  const processedSrc = limitCopyrightedImageResolution(src)
 
   return (
-    <Box position="relative" maxHeight={maxHeight} width={'100%'} css={css}>
+    <div style={style} className={cn('relative max-h-[var(--height)] w-full', className)}>
       {/* Fallback Image */}
       <Image
-        src={fallbackImage}
+        src={fallbackImageRef.current}
         alt={alt || 'Fallback image'}
         sizes={size}
         style={{
           transition: 'opacity 0.5s ease-out',
-          opacity: isSuccessfullyLoaded ? 0 : 1,
+          opacity: imageLoaded ? 0 : 1,
           position: 'absolute',
           top: 0,
           left: 0,
           objectFit: 'contain',
           objectPosition: 'bottom',
         }}
+        onContextMenu={() => false}
         fill={true}
       />
 
       {/* Actual Image */}
-      {src && (
+      {processedSrc && (
         <Image
-          src={src}
+          src={processedSrc}
           alt={alt || 'Actual image'}
           sizes={size}
           quality={100}
           onClick={onClick}
           style={{
-            transition: 'opacity 1s ease-out',
-            opacity: isSuccessfullyLoaded ? 1 : 0,
+            transition: 'opacity 0.5s ease-out',
+            opacity: imageLoaded ? 1 : 0,
             position: 'absolute',
             top: 0,
             left: 0,
@@ -61,8 +79,10 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
             objectFit: fit,
           }}
           fill={true}
+          onContextMenu={e => e.preventDefault()}
+          onLoad={handleLoad}
         />
       )}
-    </Box>
+    </div>
   )
 }

@@ -1,0 +1,27 @@
+query StoriesRelationForRecord($id: String!, $type: EntityNames! $locale: Locale! ) {
+    zoomLevel3StoriesRelationsForRecord(type: $type, id: $id, locale: $locale) {
+        type
+        total
+        stories {
+            id
+            __typename
+            attributes {
+                title
+                components {
+                    ... on ComponentModulesImage {
+                        ...imageModuleFragment
+                    }
+                }
+                author {
+                    data {
+                        attributes {
+                            firstName
+                            lastName
+                            insertion
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,16 +1,18 @@
 import { Inject } from '@nestjs/common'
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
-import { PublicationState, Sdk } from '../../generated/strapi-sdk'
-import { I18NLocaleCode, PaginationArg } from '../strapi/shared-types'
+import { PublicationState, Sdk, StoryEntity } from '../../generated/strapi-sdk'
+import { PaginationArg } from '../strapi/shared-types'
 import {
   Story,
-  StoryEntityResponse,
   StoryEntityResponseCollection,
   StoryFiltersInput,
   StoryWithoutRelationsEntityResponse,
   StoryWithoutRelationsEntityResponseCollection,
   StoryMetaEntityResponseCollection,
 } from './story.type'
+import { StoryEntityResponse } from './story.types.circular'
+import { StoryService } from './story.service'
+import { Locale } from '../util/locale.type'
 
 @Resolver(Story)
 export class StoryFieldResolver {
@@ -44,13 +46,16 @@ export class StoryFieldResolver {
 
 @Resolver()
 export class StoryResolver {
-  public constructor(@Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk) {}
+  public constructor(
+    @Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk,
+    private readonly storyService: StoryService
+  ) {}
 
   @Query(() => StoryEntityResponseCollection)
   public async storyByLocale(
+    @Args('locale') locale: Locale,
     @Args('filters', { nullable: true }) filters?: StoryFiltersInput,
-    @Args('publicationState', { nullable: true }) publicationState?: PublicationState,
-    @Args('locale', { nullable: true }) locale?: I18NLocaleCode
+    @Args('publicationState', { nullable: true }) publicationState?: PublicationState
   ) {
     const res = await this.strapiGqlSdk.storiesByLocale({
       id: filters?.id,
@@ -72,35 +77,61 @@ export class StoryResolver {
 
   @Query(() => StoryMetaEntityResponseCollection)
   public async storyMetaByLocale(
+    @Args('locale') locale: Locale,
     @Args('filters', { nullable: true }) filters?: StoryFiltersInput,
-    @Args('locale', { nullable: true }) locale?: I18NLocaleCode,
     @Args('publicationState', { nullable: true }) publicationState?: PublicationState
   ) {
     const res = await this.strapiGqlSdk.storiesMetaByLocale({
       id: filters?.id,
       publicationState,
-      locale: ['nl', 'en'],  // we only care about story id, which should be searched across all locales
+      locale: ['nl', 'en'], // we only care about story id, which should be searched across all locales
     })
 
-    const story = res?.stories?.data[0]
+    let story = res?.stories?.data[0]
 
-    if (story?.attributes?.locale === locale || !locale) {
-      return { data: story }
+    if (locale && story?.attributes?.locale !== locale) {
+      const localizedStory = story?.attributes?.localizations?.data.find(
+        l => l?.attributes?.locale === locale
+      )
+      if (localizedStory) {
+        story = localizedStory
+      }
     }
 
-    const localizedStory =
-      story?.attributes?.localizations?.data?.find(l => l.attributes?.locale === locale) || null
+    if (!story) {
+      return { data: null }
+    }
 
-    return { data: localizedStory }
+    const storyId = story.id
+    const parentId = story.attributes?.parent_story?.data?.id
+
+    let siblings: StoryEntity[] | undefined | null = []
+    if (parentId && storyId && locale && story.attributes) {
+      siblings = (await this.storyService.getStorySiblings(
+        parentId,
+        storyId,
+        locale
+      )) as StoryEntity[]
+    }
+
+    return {
+      data: {
+        ...story,
+        attributes: {
+          ...story.attributes,
+          ...(siblings.length ? { siblings } : {}),
+        },
+      },
+    }
   }
 
   @Query(() => StoryEntityResponseCollection)
   public async stories(
+    @Args('locale') locale: Locale,
     @Args('filters', { nullable: true }) filters?: StoryFiltersInput,
     @Args('pagination', { nullable: true }) pagination?: PaginationArg,
     @Args('sort', { nullable: true, type: () => [String] }) sort?: string[],
-    @Args('publicationState', { nullable: true }) publicationState?: PublicationState,
-    @Args('locale', { nullable: true }) locale?: I18NLocaleCode
+    @Args('publicationState', { nullable: true }) publicationState?: PublicationState
   ) {
     const res = await this.strapiGqlSdk.stories({
       filters: filters || undefined,
@@ -114,10 +145,7 @@ export class StoryResolver {
   }
 
   @Query(() => StoryEntityResponse)
-  public async story(
-    @Args('id') id: string,
-    @Args('locale', { nullable: true }) locale?: I18NLocaleCode
-  ) {
+  public async story(@Args('id') id: string, @Args('locale') locale: Locale) {
     const res = await this.strapiGqlSdk.story({
       id,
       locale,
@@ -128,11 +156,11 @@ export class StoryResolver {
 
   @Query(() => StoryWithoutRelationsEntityResponseCollection)
   public async storiesWithoutRelations(
+    @Args('locale') locale: Locale,
     @Args('filters', { nullable: true }) filters?: StoryFiltersInput,
     @Args('pagination', { nullable: true }) pagination?: PaginationArg,
     @Args('sort', { nullable: true, type: () => [String] }) sort?: string[],
-    @Args('publicationState', { nullable: true }) publicationState?: PublicationState,
-    @Args('locale', { nullable: true }) locale?: I18NLocaleCode
+    @Args('publicationState', { nullable: true }) publicationState?: PublicationState
   ) {
     const res = await this.strapiGqlSdk.storiesWithoutRelations({
       filters: filters || undefined,
@@ -146,10 +174,7 @@ export class StoryResolver {
   }
 
   @Query(() => StoryWithoutRelationsEntityResponse)
-  public async storyWithoutRelations(
-    @Args('id') id: string,
-    @Args('locale', { nullable: true }) locale?: I18NLocaleCode
-  ) {
+  public async storyWithoutRelations(@Args('id') id: string, @Args('locale') locale: Locale) {
     const res = await this.strapiGqlSdk.storyWithoutRelations({ id, locale })
 
     return res.story

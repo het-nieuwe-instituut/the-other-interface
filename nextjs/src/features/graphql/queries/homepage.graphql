@@ -9,7 +9,7 @@
 #import '../fragments/components/SubtitleModule.fragment.graphql'
 #import '../fragments/components/GridModule.fragment.graphql'
 
-query homepage($locale: String, $publicationState: String = "LIVE") {
+query homepage($locale: String!, $publicationState: String = "LIVE") {
     homepage(locale: $locale, publicationState: $publicationState) {
         data {
             id
@@ -25,9 +25,6 @@ query homepage($locale: String, $publicationState: String = "LIVE") {
                     }
                     ... on ComponentModulesPullquote {
                         ...pullquoteModuleFragment
-                    }
-                    ... on ComponentModulesTableModule {
-                        ...tableModuleFragment
                     }
                     ... on ComponentModulesTitleModule {
                         ...titleModuleFragment

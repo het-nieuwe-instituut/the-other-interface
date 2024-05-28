@@ -1,0 +1,10 @@
+query PeopleRecordRelations($id: String!, $type: EntityNames!, $locale: Locale!, $page: Int!, $pageSize: Int!) {
+    peopleRecordRelations(type: $type, id: $id, locale: $locale, page: $page, pageSize: $pageSize) {
+        idRelation
+        relationName
+        titleR
+        occupation
+        period
+        externalSource
+    }
+}

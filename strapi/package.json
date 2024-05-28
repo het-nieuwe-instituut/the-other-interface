@@ -7,18 +7,21 @@
     "develop": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",
+    "lint": "echo 'no linting for strapi yet'",
+    "test": "echo 'No tests for Strapi'",
     "start-services": "docker-compose --project-name=hni-toi up",
     "strapi": "strapi",
     "clean": "rm -rf node_modules && rm -rf .cache && rm -rf dist",
-    "copyenv": "./.bin/init-env"
+    "copyenv": "./.bin/init-env",
+    "type-check": "tsc --noEmit --skipLibCheck"
   },
   "dependencies": {
+    "@strapi/plugin-content-manager": "^4.11.7",
     "@strapi/plugin-graphql": "^4.3.2",
     "@strapi/plugin-i18n": "4.3.2",
     "@strapi/plugin-users-permissions": "4.3.2",
     "@strapi/provider-upload-aws-s3": "^4.4.3",
     "@strapi/strapi": "4.3.2",
-    "@strapi/plugin-content-manager": "^4.11.7",
     "pg": "8.6.0",
     "sharp": "^0.31.0",
     "slugify": "^1.6.5"

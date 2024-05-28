@@ -1,8 +1,10 @@
 import { Injectable } from '@nestjs/common'
 import { KeysToVerify, TriplyService } from '../triply/triply.service'
-import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
 import { getHttpThumbnailOrNull } from '../util/helpers'
 import { TriplyUtils } from '../triply/triply.utils'
+import { PaginationArgs } from '../util/paginationArgs.type'
+import { EntityNames } from '../util/entityNames.type'
+import { Locale } from '../util/locale.type'
 
 export interface ArchivesDetailZoomLevel3DataType {
   id?: string
@@ -17,153 +19,109 @@ const archivesDetailZoomLevel3DataKeys: KeysToVerify<ArchivesDetailZoomLevel3Dat
   objectNumber: true,
 }
 
+export interface ArchiveRelationsType {
+  id?: string
+  titleR?: string
+  referenceNumber?: string
+  period?: string
+}
+
+const archiveRelationsKeys: KeysToVerify<ArchiveRelationsType> = {
+  id: true,
+  titleR: true,
+  referenceNumber: true,
+  period: true,
+}
+
+export interface ArchiveRelationsCountType {
+  total: string
+}
+
+const archiveRelationsCountKeys: KeysToVerify<ArchiveRelationsCountType> = {
+  total: true,
+}
+
 export enum ArchivesZoomLevel3Types {
   fonds = 'fonds',
   other = 'other',
 }
 
-export interface ArchivesFondsDetailZoomLevel3Data {
-  id: string
-  thumnail?: string
-  objectNumber?: string
-  title?: string
-  startDate?: string
-  endDate?: string
-  dateLabel?: string
-  dimensionFree?: string
-  mediaReference?: string
-  mediaReferenceLabel?: string
-  existenceOfOriginals?: string
-  scopeContent?: string
-  relatedMaterial?: string
-  rights?: string
-  rightsLabel?: string
-  permanentLink?: string
+export interface ArchivesZoomLevel2HoverData {
+  title: string
+  creators: string
+  description: string
 }
 
-const archivesFondsDetailZoomLevel3DataKeys: KeysToVerify<ArchivesFondsDetailZoomLevel3Data> = {
-  id: true,
-  thumnail: true,
-  objectNumber: true,
+const archivesZoomLevel2HoverDataKeys: KeysToVerify<ArchivesZoomLevel2HoverData> = {
   title: true,
-  startDate: true,
-  endDate: true,
-  dateLabel: true,
-  dimensionFree: true,
-  mediaReference: true,
-  mediaReferenceLabel: true,
-  existenceOfOriginals: true,
-  scopeContent: true,
-  relatedMaterial: true,
-  rights: true,
-  rightsLabel: true,
-  permanentLink: true,
+  creators: true,
+  description: true,
 }
 
-export interface ArchivesOtherDetailZoomLevel3Data {
+export interface ArchivesRecordZoomLevel3Data {
   id: string
   thumbnail?: string
-  descriptionLevel?: string
-  objectNumber?: string
-  recordTitle?: string
-  startDate?: string
-  endDate?: string
-  productionDate?: string
-  extent?: string
-  repository?: string
-  repositoryLabel?: string
-  creator?: string
-  creatorLabel?: string
-  creatorHistory?: string
   custodialHistory?: string
+  scope?: string
   systemOfArrangement?: string
-  contentScope?: string
-  conditionsGoverningAccess?: string
-  relatedMaterial?: string
-  appendices?: string
-  source?: string
-  partReference?: string
-  partTitle?: string
-  right?: string
-  rightsLabel?: string
+  existence?: string
+  existenceLocation?: string
+  sources?: string
+  referenceCode?: string
+  titleType?: string
+  descriptionLevel?: string
+  size?: string
+  period?: string
+  access?: string
+  photographCreator?: string
+  rights?: string
   permanentLink?: string
-  pidWorkURI?: string
+  externalSource?: string
 }
 
-const archivesOtherDetailZoomLevel3DataKeys: KeysToVerify<ArchivesOtherDetailZoomLevel3Data> = {
+const archivesRecordZoomLevel3DataKeys: KeysToVerify<ArchivesRecordZoomLevel3Data> = {
   id: true,
   thumbnail: true,
-  descriptionLevel: true,
-  objectNumber: true,
-  recordTitle: true,
-  startDate: true,
-  endDate: true,
-  productionDate: true,
-  extent: true,
-  repository: true,
-  repositoryLabel: true,
-  creator: true,
-  creatorLabel: true,
-  creatorHistory: true,
   custodialHistory: true,
+  scope: true,
   systemOfArrangement: true,
-  contentScope: true,
-  conditionsGoverningAccess: true,
-  relatedMaterial: true,
-  appendices: true,
-  source: true,
-  partReference: true,
-  partTitle: true,
-  right: true,
-  rightsLabel: true,
+  existence: true,
+  existenceLocation: true,
+  sources: true,
+  referenceCode: true,
+  titleType: true,
+  descriptionLevel: true,
+  size: true,
+  period: true,
+  access: true,
+  photographCreator: true,
+  rights: true,
   permanentLink: true,
-  pidWorkURI: true,
+  externalSource: true,
 }
 
 @Injectable()
 export class ArchivesService {
   protected entityType = 'triply'
 
-  // TODO: change to convention when Triply adds this to normal space
-  // private readonly archivesDescriptionLevelEndpoint =
-  //   'https://api.collectiedata.hetnieuweinstituut.nl/queries/Joran/zoom3-archives-type-only/run?'
+  private readonly ZoomLevel3Endpoint = 'archives-recordPage/run?'
 
-  private readonly ZoomLevel3Endpoint =
-    'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/archives-recordPage/run?'
+  private readonly ZoomLevel3RelationsEndpoint = 'archives-recordRelations/run?'
+
+  private readonly ZoomLevel3RelationsCountEndpoint = 'archives-recordRelations-Count/run?'
+
+  private readonly ZoomLevel3RecordEndpoint = 'archives-recordPage-editorial/run?'
+
+  private readonly ZoomLevel2HoverEndpoint = 'archives-hoverState/run?'
 
   public constructor(private triplyService: TriplyService) {}
 
-  // public async determineArchiveType(id: string) {
-  //   interface ArchivesDescriptionLevelData {
-  //     record: string
-  //     descriptionLevel: string
-  //   }
-  //   const keys: KeysToVerify<ArchivesDescriptionLevelData> = {
-  //     record: true,
-  //     descriptionLevel: true,
-  //   }
-
-  //   const uri = TriplyUtils.getUriForTypeAndId(EntityNames.Archives, id)
-  //   const res = await this.triplyService.queryTriplyData<ArchivesDescriptionLevelData>(
-  //     this.archivesDescriptionLevelEndpoint,
-  //     keys,
-  //     undefined,
-  //     { record: uri }
-  //   )
-
-  //   if (res.data[0].descriptionLevel === 'archief') {
-  //     return ArchivesZoomLevel3Types.fonds
-  //   }
-
-  //   return ArchivesZoomLevel3Types.other
-  // }
-
-  public async getZoomLevel3Data(id: string) {
+  public async getZoomLevel3Data(id: string, locale: Locale) {
     const result = await this.triplyService.queryTriplyData<ArchivesDetailZoomLevel3DataType>(
       this.ZoomLevel3Endpoint,
       archivesDetailZoomLevel3DataKeys,
       { page: 1, pageSize: 2 },
-      { id }
+      { id, language: locale }
     )
 
     return {
@@ -174,16 +132,62 @@ export class ArchivesService {
     }
   }
 
-  // private getCreatorsValueFromData(data: ArchivesZoomLeve3DataType[]): ArchivesFondsCreatorType[] {
-  //   return data
-  //     .filter(d => 'creator' in d && !!d.creator)
-  //     .map((d: ArchivesOtherDetailZoomLevel3Data) => ({
-  //       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  //       id: TriplyUtils.getIdFromUri(d.creator!),
-  //       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  //       creator: d.creator!,
-  //       creatorHistory: d.creatorHistory,
-  //       creatorLabel: d.creatorLabel,
-  //     }))
-  // }
+  public async getRelationsData(
+    id: string,
+    type: EntityNames,
+    paginationArgs: PaginationArgs,
+    locale: Locale
+  ) {
+    const result = await this.triplyService.queryTriplyData<ArchiveRelationsType>(
+      this.ZoomLevel3RelationsEndpoint,
+      archiveRelationsKeys,
+      { page: paginationArgs.page ?? 1, pageSize: paginationArgs.pageSize ?? 5 },
+      { id, type, language: locale }
+    )
+    const output = TriplyUtils.sanitizeObjectArray(
+      result.data,
+      'relation',
+      'idRelation',
+      'thumbnail'
+    )
+    return output
+  }
+
+  public async getRelationsDataCount(id: string, type: EntityNames) {
+    const result = await this.triplyService.queryTriplyData<ArchiveRelationsCountType>(
+      this.ZoomLevel3RelationsCountEndpoint,
+      archiveRelationsCountKeys,
+      { page: 1, pageSize: 1 },
+      { id, type }
+    )
+
+    return result.data
+  }
+
+  public async getZoomLevel3RecordData(id: string, locale: Locale) {
+    const result = await this.triplyService.queryTriplyData<ArchivesRecordZoomLevel3Data>(
+      this.ZoomLevel3RecordEndpoint,
+      archivesRecordZoomLevel3DataKeys,
+      { page: 1, pageSize: 1 },
+      { id, language: locale }
+    )
+
+    return result?.data
+  }
+
+  public async getZoomRecordHover(id: string, locale: Locale) {
+    const results = await this.triplyService.queryTriplyData<ArchivesZoomLevel2HoverData>(
+      this.ZoomLevel2HoverEndpoint,
+      archivesZoomLevel2HoverDataKeys,
+      undefined,
+      { id, language: locale }
+    )
+    // TODO: HNIT-1833 - throw on errors (no data or multiple resutls that don't match)
+
+    if (results.data.length === 0) {
+      return {}
+    }
+
+    return { ...TriplyUtils.combineObjectArray(results.data) }
+  }
 }

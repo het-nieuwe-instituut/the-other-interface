@@ -26,5 +26,8 @@
   "detail": "Detail",
 
   "page": "Page",
-  "of": "of"
+  "of": "of",
+  "theme": "Theme",
+
+  "errorLoadingThemes": "Something went wrong while loading themes. Please try again later."
 }

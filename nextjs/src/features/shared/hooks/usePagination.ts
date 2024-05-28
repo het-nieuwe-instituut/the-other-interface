@@ -1,10 +1,9 @@
 import { usePathname, useRouter, useSearchParams, notFound } from 'next/navigation'
-import { ZOOM2_RECORDS_PER_PAGE } from '../constants/mainConstants'
 import { useCallback, useEffect } from 'react'
 import { usePageNumber } from '@/features/shared/hooks/usePageNumber'
 
 export const usePagination = (
-  searchResultAmount: number,
+  pageAmount: number,
   isResultAmountLoading = false,
   isKeyPressDisabled = true
 ) => {
@@ -12,8 +11,6 @@ export const usePagination = (
   const router = useRouter()
   const searchParams = useSearchParams()
   const { pageNumber: page } = usePageNumber()
-
-  const pageAmount = searchResultAmount ? Math.ceil(searchResultAmount / ZOOM2_RECORDS_PER_PAGE) : 1
 
   if (!isResultAmountLoading && pageAmount && page > pageAmount) {
     notFound()

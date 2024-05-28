@@ -1,0 +1,37 @@
+name: Code quality and tests
+on:
+  pull_request_review:
+    types: [submitted]
+  push:
+    branches:
+      - main
+      - develop
+
+jobs:
+  tests:
+    if: github.event.review.state == 'approved'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.15.1]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use NodeJS ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm ci && npm run install:nextjs && npm run install:gateway
+
+      - name: Check styles
+        run: npm run format-check
+
+      - name: Eslint
+        run: npm run lint
+
+      - name: Type check
+        run: npm run type-check
+
+      - name: Test
+        run: npm run test

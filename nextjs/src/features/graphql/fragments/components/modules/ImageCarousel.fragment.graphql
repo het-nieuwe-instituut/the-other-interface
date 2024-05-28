@@ -1,5 +1,3 @@
-#import '../core/moduleLayout.fragment.graphql'
-
 fragment imageCarouselModuleFragment on ComponentModulesImageCarousel {
     id
     __typename
@@ -15,35 +13,4 @@ fragment imageCarouselModuleFragment on ComponentModulesImageCarousel {
         }
     }
     description
-    imageCarouselModuleLayout {
-        ... on ComponentCoreModuleLayouts {
-            ...componentCoreModuleLayouts
-        }
-    }
-    items {
-        description
-        id
-        name
-        picture {
-            data {
-                attributes {
-                    url,
-                    caption,
-                    width,
-                    height,
-                    size
-                }
-            }
-        }
-        story {
-            data {
-                ...StoryWithoutRelationsFragment
-            }
-        }
-        triplyRecord {
-            data {
-                ...BaseTriplyRecordFragment
-            }
-        }
-    }
 }

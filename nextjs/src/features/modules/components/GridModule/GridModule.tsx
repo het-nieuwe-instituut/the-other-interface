@@ -14,6 +14,7 @@ import {
 
 import { ExtractedTriplyFields, extractTriplyFields } from '../../helpers/triplyDataExtractor'
 import { imageBasePath } from '../../modulesConstants'
+import { modulesSpacingMapper } from '../../modulesSpacing'
 
 interface Props {
   component: ComponentModulesGridModule
@@ -33,8 +34,8 @@ export const GridModule: React.FC<Props> = props => {
     <Box
       width="100%"
       backgroundColor={'inherit'}
-      paddingBottom={props.component.gridModuleLayout?.spacingBottom || undefined}
-      paddingTop={props.component.gridModuleLayout?.spacingTop || undefined}
+      pt={modulesSpacingMapper?.GridModule.spacingTop}
+      pb={modulesSpacingMapper?.GridModule.spacingBottom}
     >
       {renderTitle()}
       {renderDescription()}
@@ -121,7 +122,7 @@ export const GridModule: React.FC<Props> = props => {
     // this should prioritize the thumbnail that is uploaded and fall back on a story's thumbnail
     // I could not find an image url on the story type
     // TODO: fallback on story image thumbnail
-    const thumbnailUrl = imageBasePath(field.thumbnail?.data?.attributes?.url) || 'broken'
+    const thumbnailUrl = imageBasePath(field.thumbnail?.data?.attributes?.url) || ''
     const thumbnailAlt =
       field.thumbnail?.data?.attributes?.alternativeText || field.title || 'image'
 
@@ -131,7 +132,13 @@ export const GridModule: React.FC<Props> = props => {
         href={`/story/${field.story?.data?.id}-${field.story?.data?.attributes?.slug}`}
       >
         <GridItem w={'100%'} mb={10} cursor={'pointer'}>
-          <Image mb={5} w={'100%'} src={thumbnailUrl} alt={thumbnailAlt} />
+          <Image
+            mb={5}
+            w={'100%'}
+            src={thumbnailUrl}
+            alt={thumbnailAlt}
+            onContextMenu={e => e.preventDefault()}
+          />
           {renderFieldTitles({
             title: field.title || '',
             description: field.subtitle || '',
@@ -150,7 +157,7 @@ export const GridModule: React.FC<Props> = props => {
       {
         title: field.title || '',
         description: field.subtitle || '',
-        imageUrl: field.thumbnail?.data?.attributes?.url || 'broken',
+        imageUrl: field.thumbnail?.data?.attributes?.url || '',
       },
       field.triplyRecord?.data?.attributes
     )
@@ -158,7 +165,13 @@ export const GridModule: React.FC<Props> = props => {
     // TODO: NextLink integration to a page where you can view a triply record
     return (
       <GridItem key={keyExtractor(field.id, index, array)} w={'100%'} mb={10} cursor={'pointer'}>
-        <Image mb={5} w={'100%'} src={extractedFields.imageUrl} alt={extractedFields.title} />
+        <Image
+          mb={5}
+          w={'100%'}
+          src={extractedFields.imageUrl}
+          alt={extractedFields.title}
+          onContextMenu={e => e.preventDefault()}
+        />
         {renderFieldTitles(extractedFields)}
       </GridItem>
     )

@@ -1,6 +1,5 @@
 import { Field, ID, Int, ObjectType } from '@nestjs/graphql'
 import { Enum_Componentmodulesgridmodule_Fieldtypes } from '../../../../generated/strapi-sdk'
-import { ComponentCoreModuleLayouts } from '../../shared-types'
 import { ComponentCoreButton } from '../core/button'
 import { ComponentCoreFeaturedFields, ComponentCoreGridFeaturedFields } from '../core/grid'
 
@@ -23,9 +22,6 @@ export class ComponentModulesGridModule {
 
   @Field(() => [ComponentCoreGridFeaturedFields], { nullable: true })
   public fields?: ComponentCoreGridFeaturedFields[]
-
-  @Field(() => ComponentCoreModuleLayouts)
-  public gridModuleLayout: ComponentCoreModuleLayouts
 
   @Field(() => ID)
   public id: string

@@ -22,6 +22,7 @@ export const CarouselMaker = (props: Props) => {
         width={`${boxSize}px!important`}
         height={`${boxSize}px!important`}
         boxSize={`${boxSize}px!important`}
+        onContextMenu={e => e.preventDefault()}
       />
       <Text
         textStyle={'h3'}

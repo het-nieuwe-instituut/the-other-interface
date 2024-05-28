@@ -21,6 +21,26 @@ query stories(
     }
 }
 
+query storiesIds(
+    $filters: StoryFiltersInput
+    $pagination: PaginationArg
+    $sort: [String]
+    $publicationState: PublicationState = LIVE
+    $locale: I18NLocaleCode
+) {
+    stories(
+        filters: $filters
+        pagination: $pagination
+        sort: $sort
+        publicationState: $publicationState
+        locale: $locale
+    ) {
+        data {
+            id
+        }
+    }
+}
+
 
 query story(
     $id: ID
@@ -131,8 +151,8 @@ query storyWithoutRelations($id: ID, $locale: I18NLocaleCode) {
 }
 
 # "$type" must be ENUM_TRIPLYRECORD_TYPE
-query storiesLinkedToTriplyRecord($recordId: String!, $type: String!) {
-    stories(filters: { triplyRecords: { recordId: { eq: $recordId }, type: { eq: $type } } }) {
+query storiesLinkedToTriplyRecord($recordId: String!, $type: String!, $pagination: PaginationArg) { 
+    stories(pagination: $pagination, filters: { triplyRecords: { recordId: { eq: $recordId }, type: { eq: $type } } }) {
         data {
             id
             attributes {
@@ -143,7 +163,15 @@ query storiesLinkedToTriplyRecord($recordId: String!, $type: String!) {
     }
 }
 
-query storiesLinkedToTheme($id: ID!, $locale: I18NLocaleCode) {
+query storiesLinkedToTriplyRecordExtended($recordId: String!, $type: String!, $lang: I18NLocaleCode, $publicationState: PublicationState = LIVE) {
+    stories(filters: { triplyRecords: { recordId: { eq: $recordId }, type: { eq: $type } }}, locale: $lang, publicationState: $publicationState) {
+        data {
+            ...StoryFragment
+        }
+    }
+}
+
+query storiesLinkedToTheme($id: ID!, $locale: I18NLocaleCode, $page: Int, $pageSize: Int) {
     story(id: $id, locale: $locale) {
         data {
             id
@@ -152,7 +180,7 @@ query storiesLinkedToTheme($id: ID!, $locale: I18NLocaleCode) {
                     data {
                         id
                         attributes {
-                            stories {
+                            stories(pagination: { page: $page, pageSize: $pageSize }) {
                                 data {
                                     id
                                 }
@@ -187,12 +215,12 @@ query storiesByIds($storiesIds: [ID]!) {
     }
 }
 
-query storyTriplyRelations($id: ID!) {
+query storyTriplyRelations($id: ID!, $type: String, $page: Int, $pageSize: Int) {
     story(id: $id) {
         data {
             id
             attributes {
-                triplyRecords {
+                triplyRecords (filters: { type: { eq: $type } }, pagination: { page: $page, pageSize: $pageSize }) {
                     data {
                         ...BaseTriplyRecordFragment
                     }
@@ -225,8 +253,11 @@ fragment StoryWithoutRelationsFragment on StoryEntity {
         locale
         author {
             data {
+                id
                 attributes {
                     firstName
+                    lastName
+                    insertion
                 }
             }
         }
@@ -240,13 +271,40 @@ fragment NestedStoryFragment on StoryEntity {
         slug
         description
         locale
+        author {
+            data {
+                id
+                attributes {
+                    firstName
+                    lastName
+                    insertion
+                }
+            }
+        }
+        parent_story {
+            data {
+                id
+                attributes {
+                    title
+                    slug
+                    locale
+                }
+            }
+        }
+        child_stories { 
+            data {
+                id
+                attributes {
+                    title
+                    slug
+                    locale
+                }
+            }
+        }
         components {
            __typename
             ... on ComponentModulesPullquote {
                 ...ComponentModulesPullquoteFragment
-            }
-            ... on ComponentModulesGridModule {
-                ...ComponentModulesGridModuleFragment
             }
             ... on ComponentModulesTextModule {
                 ...ComponentModulesTextModuleFragment
@@ -262,9 +320,6 @@ fragment NestedStoryFragment on StoryEntity {
             }
             ... on ComponentModulesImage {
                 ...ComponentModulesImageFragment
-            }
-            ... on ComponentModulesTableModule {
-                ...ComponentModulesTableModuleFragment
             }
             ... on ComponentModulesButtonsModule {
                 ...ComponentModulesButtonsModuleFragment
@@ -283,13 +338,40 @@ fragment LocalizedStoryFragment on StoryEntity {
         slug
         description
         locale
+        author {
+            data {
+                id
+                attributes {
+                    firstName
+                    lastName
+                    insertion
+                }
+            }
+        }
+        parent_story {
+            data {
+                id
+                attributes {
+                    title
+                    slug
+                    locale
+                }
+            }
+        }
+        child_stories { 
+            data {
+                id
+                attributes {
+                    title
+                    slug
+                    locale
+                }
+            }
+        }
         components {
            __typename
             ... on ComponentModulesPullquote {
                 ...ComponentModulesPullquoteFragment
-            }
-            ... on ComponentModulesGridModule {
-                ...ComponentModulesGridModuleFragment
             }
             ... on ComponentModulesTextModule {
                 ...ComponentModulesTextModuleFragment
@@ -305,9 +387,6 @@ fragment LocalizedStoryFragment on StoryEntity {
             }
             ... on ComponentModulesImage {
                 ...ComponentModulesImageFragment
-            }
-            ... on ComponentModulesTableModule {
-                ...ComponentModulesTableModuleFragment
             }
             ... on ComponentModulesButtonsModule {
                 ...ComponentModulesButtonsModuleFragment
@@ -334,9 +413,6 @@ fragment StoryFragment on StoryEntity {
             ... on ComponentModulesPullquote {
                 ...ComponentModulesPullquoteFragment
             }
-            ... on ComponentModulesGridModule {
-                ...ComponentModulesGridModuleFragment
-            }
             ... on ComponentModulesTextModule {
                 ...ComponentModulesTextModuleFragment
             }
@@ -352,9 +428,6 @@ fragment StoryFragment on StoryEntity {
             ... on ComponentModulesImage {
                 ...ComponentModulesImageFragment
             }
-            ... on ComponentModulesTableModule {
-                ...ComponentModulesTableModuleFragment
-            }
             ... on ComponentModulesButtonsModule {
                 ...ComponentModulesButtonsModuleFragment
             }
@@ -365,6 +438,11 @@ fragment StoryFragment on StoryEntity {
         author {
             data {
                 id
+                attributes {
+                    firstName
+                    lastName
+                    insertion
+                }
             }
         }
         description
@@ -401,6 +479,54 @@ fragment StoryFragment on StoryEntity {
         storyLinks {
             ...ComponentModulesButtonsModuleFragment
         }
+        parent_story {
+            data {
+                id
+                attributes {
+                    title
+                    components {
+                        __typename
+                        ... on ComponentModulesImage {
+                            ...ComponentModulesImageFragment
+                        }
+                    }
+                    author {
+                        data {
+                            id
+                            attributes {
+                                firstName
+                                lastName
+                                insertion
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        child_stories {
+            data {
+                id
+                attributes {
+                    title
+                    components {
+                        __typename
+                        ... on ComponentModulesImage {
+                            ...ComponentModulesImageFragment
+                        }
+                    }
+                    author {
+                        data {
+                            id
+                            attributes {
+                                firstName
+                                lastName
+                                insertion
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -417,6 +543,11 @@ fragment StoryMetaFragment on StoryEntity {
         author {
             data {
                 id
+                attributes {
+                    firstName
+                    lastName
+                    insertion
+                }
             }
         }
         timeframe {
@@ -453,6 +584,54 @@ fragment StoryMetaFragment on StoryEntity {
         storyLinks {
             ...ComponentModulesButtonsModuleFragment
         }
+        parent_story {
+            data {
+                id
+                attributes {
+                    title
+                    components {
+                        __typename
+                        ... on ComponentModulesImage {
+                            ...ComponentModulesImageFragment
+                        }
+                    }
+                    author {
+                        data {
+                            id
+                            attributes {
+                                firstName
+                                lastName
+                                insertion
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        child_stories {
+            data {
+                id
+                attributes {
+                    title
+                    components {
+                        __typename
+                        ... on ComponentModulesImage {
+                            ...ComponentModulesImageFragment
+                        }
+                    }
+                    author {
+                        data {
+                            id
+                            attributes {
+                                firstName
+                                lastName
+                                insertion
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -470,6 +649,11 @@ fragment LocalizedStoryMetaFragment on StoryEntity {
         author {
             data {
                 id
+                attributes {
+                    firstName
+                    lastName
+                    insertion
+                }
             }
         }
         timeframe {
@@ -490,6 +674,54 @@ fragment LocalizedStoryMetaFragment on StoryEntity {
                 id
                 attributes {
                     name
+                }
+            }
+        }
+        parent_story {
+            data {
+                id
+                attributes {
+                    title
+                    components {
+                        __typename
+                        ... on ComponentModulesImage {
+                            ...ComponentModulesImageFragment
+                        }
+                    }
+                    author {
+                        data {
+                            id
+                            attributes {
+                                firstName
+                                lastName
+                                insertion
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        child_stories {
+            data {
+                id
+                attributes {
+                    title
+                    components {
+                        __typename
+                        ... on ComponentModulesImage {
+                            ...ComponentModulesImageFragment
+                        }
+                    }
+                    author {
+                        data {
+                            id
+                            attributes {
+                                firstName
+                                lastName
+                                insertion
+                            }
+                        }
+                    }
                 }
             }
         }

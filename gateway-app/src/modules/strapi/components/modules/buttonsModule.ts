@@ -1,7 +1,6 @@
 import { Field, ID, InputType, ObjectType, registerEnumType } from '@nestjs/graphql'
 import { Enum_Componentmodulesbuttonsmodule_Buttonstyle } from '../../../../generated/strapi-sdk'
 import {
-  ComponentCoreModuleLayouts,
   ComponentCoreModuleLayoutsFiltersInput,
   PaginationArg,
   StringFilterInput,
@@ -28,9 +27,6 @@ export class ComponentModulesButtonsModuleButtonsArgs {
 export class ComponentModulesButtonsModule {
   @Field(() => ID)
   public id: string
-
-  @Field(() => ComponentCoreModuleLayouts)
-  public buttonsModuleLayout: ComponentCoreModuleLayouts
 
   @Field(() => Enum_Componentmodulesbuttonsmodule_Buttonstyle, { nullable: true })
   public buttonStyle?: Enum_Componentmodulesbuttonsmodule_Buttonstyle

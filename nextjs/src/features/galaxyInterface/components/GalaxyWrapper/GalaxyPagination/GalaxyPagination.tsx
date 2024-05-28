@@ -11,6 +11,7 @@ type Props = {
   isResultEmpty: boolean
   handleLeftClick?: () => void
   handleRightClick?: () => void
+  text?: string
 }
 
 export const GalaxyPagination: React.FC<Props> = ({
@@ -20,6 +21,7 @@ export const GalaxyPagination: React.FC<Props> = ({
   isResultEmpty,
   handleLeftClick,
   handleRightClick,
+  text,
 }) => {
   const { t } = useTypeSafeTranslation('navigation')
 
@@ -32,7 +34,6 @@ export const GalaxyPagination: React.FC<Props> = ({
       borderRadius={'5px'}
       zIndex={FOOTER_Z_INDEX}
       color={'pinkAlpha.100'}
-      border={'1px solid'}
       templateColumns="40px 1fr 40px"
       gap="5px"
     >
@@ -50,18 +51,18 @@ export const GalaxyPagination: React.FC<Props> = ({
       >
         {!isResultAmountLoading && !isResultEmpty && (
           <>
-            <Text>{t('page')}</Text>
+            <Text>{text ? text : t('page')}</Text>
             <Text>
               {currentPageNumber} {t('of')}
             </Text>
-            <Text>{pageAmount}</Text>
+            <Text>{pageAmount || 1}</Text>
           </>
         )}
       </Flex>
       <PaginationButton
         side="right"
         handleClick={handleRightClick}
-        disabled={isResultAmountLoading || currentPageNumber === pageAmount}
+        disabled={isResultAmountLoading || currentPageNumber === pageAmount || pageAmount < 1}
       />
     </Grid>
   )

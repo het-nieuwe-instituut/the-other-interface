@@ -1,12 +1,5 @@
-#import '../core/moduleLayout.fragment.graphql'
-
 fragment textModuleFragment on ComponentModulesTextModule {
     id
     __typename
     Richtext
-    textModuleLayout {
-        ... on ComponentCoreModuleLayouts {
-            ...componentCoreModuleLayouts
-        }
-    }
 }

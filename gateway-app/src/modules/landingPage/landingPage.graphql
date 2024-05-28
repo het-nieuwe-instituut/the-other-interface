@@ -31,9 +31,6 @@ fragment LandingpageFragment on Landingpage {
         ... on ComponentModulesPullquote {
             ...ComponentModulesPullquoteFragment
         }
-        ... on ComponentModulesTableModule {
-            ...ComponentModulesTableModuleFragment
-        }
         ... on ComponentModulesButtonsModule {
             ...ComponentModulesButtonsModuleFragment
         }

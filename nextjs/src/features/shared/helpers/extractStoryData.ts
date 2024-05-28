@@ -1,21 +1,24 @@
 import { imageBasePath } from '@/features/modules/modulesConstants'
-import {
-  ComponentModulesImage,
-  HomepageComponentsDynamicZone,
-  StoryEntity,
-} from 'src/generated/graphql'
 
-const findImageUrl = (components: HomepageComponentsDynamicZone[]): string => {
+import { StoryByIdQuery } from 'src/generated/graphql'
+
+type StoryById = NonNullable<StoryByIdQuery['storyByLocale']['data']>
+
+const findImageUrl = (components: NonNullable<StoryById['attributes']>['components']): string => {
   const imageComponent = components?.find(
     component => component.__typename === 'ComponentModulesImage'
-  ) as ComponentModulesImage
+  )
 
-  const url = imageComponent?.image.data?.attributes?.url ?? ''
+  if (imageComponent && 'image' in imageComponent) {
+    const url = imageComponent?.image.data?.attributes?.url ?? ''
 
-  return imageBasePath(url) ?? ''
+    return imageBasePath(url) ?? ''
+  }
+
+  return ''
 }
 
-export const extractStoryData = (story: StoryEntity | null) => {
+export const extractStoryData = (story: StoryById) => {
   if (!story) {
     return null
   }

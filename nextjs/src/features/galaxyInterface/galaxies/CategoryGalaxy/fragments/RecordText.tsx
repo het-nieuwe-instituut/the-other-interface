@@ -14,21 +14,13 @@ export const RecordText: React.FC<Props> = ({ title = '', categoryType, css }) =
   const { t } = useLooseTypeSafeTranslation('category')
 
   return (
-    <Flex
-      w="100%"
-      color="blueAlpha.100"
-      css={css}
-      direction="column"
-      flex="1"
-      justifyContent="space-between"
-    >
+    <Flex w="100%" color="blueAlpha.100" css={css} direction="column" flex="1" mt={2}>
       <Text
         align="center"
         isTruncated
         textStyle="headingTimesLarge.md"
-        fontSize={'1.6vw'}
-        lineHeight={'1.6vw'}
-        mb="auto"
+        fontSize={{ base: '12px', lg: '20px' }}
+        lineHeight={{ base: '12px', lg: '21px' }}
       >
         {title}
       </Text>
@@ -36,9 +28,9 @@ export const RecordText: React.FC<Props> = ({ title = '', categoryType, css }) =
       <Text
         align="center"
         textStyle="headingTimesLarge.sm"
-        fontSize={'0.9vw'}
-        lineHeight={'0.9vw'}
-        mt="4px"
+        fontSize={{ base: '9px', lg: '12px' }}
+        lineHeight={{ base: '9px', lg: '12px' }}
+        mt={1}
       >
         {t(toSingularCategory(categoryType))}
       </Text>

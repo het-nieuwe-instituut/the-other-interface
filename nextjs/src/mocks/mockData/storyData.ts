@@ -119,7 +119,6 @@ const storyMetaByLocale = {
             },
           ],
           buttonStyle: 'Default',
-          buttonsModuleLayout: { id: '59', spacingTop: 'Md', spacingBottom: 'Md' },
         },
       },
     },

@@ -186,7 +186,7 @@ const socialLarge = {
     lineHeight: '20.8px',
   },
   md: { fontFamily: "'Social'", fontSize: '14px', fontWeight: 400, lineHeight: '14px' },
-  sm: { fontFamily: "'Social'", fontSize: '12px', fontWeight: 400, lineHeight: '15px' },
+  sm: { fontFamily: "'Social'", fontSize: '12px', fontWeight: 400, lineHeight: '15.6px' },
 }
 
 const socialMedium = {

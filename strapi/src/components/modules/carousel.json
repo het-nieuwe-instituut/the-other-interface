@@ -32,12 +32,6 @@
     },
     "description": {
       "type": "text"
-    },
-    "carouselModuleLayout": {
-      "type": "component",
-      "repeatable": false,
-      "component": "core.module-layouts",
-      "required": true
     }
   }
 }

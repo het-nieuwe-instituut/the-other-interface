@@ -4,8 +4,6 @@ import {
   ComponentModulesImageCarousel,
   ComponentModulesTextModule,
   ComponentModulesTitleModule,
-  EnumComponentcoremodulelayoutsSpacingbottom,
-  EnumComponentcoremodulelayoutsSpacingtop,
   EnumComponentmodulesgridmoduleFieldtypes,
 } from 'src/generated/graphql'
 
@@ -26,12 +24,6 @@ const linkedStoryMock = {
   updatedAt: null,
 }
 
-const spacingMock = {
-  id: '51',
-  spacingTop: EnumComponentcoremodulelayoutsSpacingtop.Md,
-  spacingBottom: EnumComponentcoremodulelayoutsSpacingbottom.Md,
-}
-
 export const imageModuleMock: ComponentModulesImage = {
   id: '385',
   __typename: 'ComponentModulesImage',
@@ -43,7 +35,6 @@ export const imageModuleMock: ComponentModulesImage = {
   caption:
     'Queering the Collections aims to increase the awareness of queer heritage and histories in The Netherlands',
   alt_text: null,
-  imageModuleLayout: spacingMock,
 }
 
 const textModuleMock: ComponentModulesTextModule = {
@@ -51,14 +42,12 @@ const textModuleMock: ComponentModulesTextModule = {
   __typename: 'ComponentModulesTextModule',
   Richtext:
     'The Other Interface is hét platform van Het Nieuwe Instituut om de Rijkscollectie voor Nederlandse Architectuur en Stedenbouw online te ontdekken. Zoek in de collectie en lees de verhalen.   ',
-  textModuleLayout: spacingMock,
 }
 
 const titleModuleMock: ComponentModulesTitleModule = {
   id: '3',
   __typename: 'ComponentModulesTitleModule',
   Title: 'Over de Rijkscollectie',
-  titleModuleLayout: spacingMock,
 }
 
 const imageCarouselModuleMock: ComponentModulesImageCarousel = {
@@ -89,7 +78,6 @@ const imageCarouselModuleMock: ComponentModulesImageCarousel = {
     ],
   },
   description: null,
-  imageCarouselModuleLayout: spacingMock,
 }
 
 const gridCompomentMock: ComponentModulesGridModule = {
@@ -171,7 +159,6 @@ const gridCompomentMock: ComponentModulesGridModule = {
   ],
   fieldTitlesAreInverted: false,
   fieldTypes: EnumComponentmodulesgridmoduleFieldtypes.Stories,
-  gridModuleLayout: spacingMock,
   id: '1',
   pageSize: 6,
   showMoreButtonTitle: 'Show More',

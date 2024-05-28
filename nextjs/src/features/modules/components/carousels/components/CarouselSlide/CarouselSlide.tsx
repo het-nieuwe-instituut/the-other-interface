@@ -16,16 +16,16 @@ import { usePresenter } from './usePresenter'
 
 interface Props {
   items: Maybe<ComponentCoreCarouselItem>[]
-  key: number | string
+  imageKey: number | string
   type: EnumComponentmodulescarouselType
   carouselRef: React.RefObject<HTMLDivElement>
 }
 
 export const CarouselSlide = (props: Props) => {
-  const { items, key, type, carouselRef } = props
+  const { items, imageKey, type, carouselRef } = props
   const { itemWidth, justifySlide } = usePresenter(type, carouselRef)
   return (
-    <Flex key={`${key}`} mb={'3'} justifyContent={justifySlide}>
+    <Flex key={`${imageKey}`} mb={'3'} justifyContent={justifySlide}>
       {items?.map((component, index) => {
         const record = component?.triply_record?.data?.attributes
         const {
@@ -36,7 +36,7 @@ export const CarouselSlide = (props: Props) => {
           {
             title: component?.name || '',
             description: component?.description || '',
-            imageUrl: component?.picture?.data?.attributes?.url || 'broken',
+            imageUrl: component?.picture?.data?.attributes?.url || '',
           },
           record
         )
@@ -57,6 +57,7 @@ export const CarouselSlide = (props: Props) => {
           return (
             <CarouselHighlightItem
               src={image}
+              imageKey={index}
               key={index}
               name={name ?? ''}
               description={description ?? ''}
@@ -93,6 +94,7 @@ export const CarouselSlide = (props: Props) => {
             return (
               <CarouselHighlightItem
                 src={image}
+                imageKey={index}
                 key={index}
                 name={name ?? ''}
                 description={description ?? ''}

@@ -25,9 +25,6 @@ fragment HomepageFragment on Homepage {
         ... on ComponentModulesSubtitle {
             ...ComponentModulesSubtitleFragment
         }
-        ... on ComponentModulesTableModule {
-            ...ComponentModulesTableModuleFragment
-        }
         ... on ComponentModulesTitleModule {
             ...ComponentModulesTitleModuleFragment
         }

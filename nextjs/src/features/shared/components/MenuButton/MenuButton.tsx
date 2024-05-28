@@ -1,30 +1,41 @@
-import MenuIconClose from '@/icons/close-menu.svg'
+import MenuIconCloseHover from '@/icons/close-menu-hover.svg'
+import MenuIconOpenHover from '@/icons/open-menu-hover.svg'
 import MenuIconOpen from '@/icons/open-menu.svg'
-import { Flex, Box } from '../../configs/chakra'
-
+import MenuIconClose from '@/icons/close-menu.svg'
+import { Flex, Box } from '@chakra-ui/react'
 import { MAX_Z_INDEX } from '../../constants/mainConstants'
 import { usePresenter } from './usePresenter'
 
 export const MenuButton = () => {
-  const { isMenuOpen, handleOpenMenu } = usePresenter()
+  const { isMenuOpen, handleOpenMenu, isHovering, setIsHovering } = usePresenter()
+
+  const getIcon = () => {
+    if (isMenuOpen) {
+      return isHovering ? <MenuIconCloseHover /> : <MenuIconClose />
+    } else {
+      return isHovering ? <MenuIconOpenHover /> : <MenuIconOpen />
+    }
+  }
+
   return (
     <Flex
-      ml={'8'}
-      pointerEvents={'auto'}
+      ml="8"
+      pointerEvents="auto"
       cursor="pointer"
-      position={'relative'}
+      position="relative"
       zIndex={MAX_Z_INDEX}
-      alignItems={'center'}
+      alignItems="center"
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
     >
-      {isMenuOpen ? (
-        <Box as={'button'} aria-label="menu open" onClick={() => handleOpenMenu(false)}>
-          <MenuIconClose />
-        </Box>
-      ) : (
-        <Box as={'button'} aria-label="menu open" onClick={() => handleOpenMenu(true)}>
-          <MenuIconOpen />
-        </Box>
-      )}
+      <Box
+        as="button"
+        aria-label={isMenuOpen ? 'menu close' : 'menu open'}
+        onClick={() => handleOpenMenu(!isMenuOpen)}
+        w={'40px'}
+      >
+        {getIcon()}
+      </Box>
     </Flex>
   )
 }

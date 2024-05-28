@@ -10,6 +10,12 @@ import navigation from './en/navigation.json'
 import record from './en/record.json'
 import stories from './en/stories.json'
 import category from './en/category.json'
+import recordMeta from './en/recordMeta.json'
+import recordMetaPublication from './en/recordMetaPublication.json'
+import recordMetaArchive from './en/recordMetaArchive.json'
+import recordMetaObject from './en/recordMetaObject.json'
+import recordMetaPerson from './en/recordMetaPerson.json'
+import recordTable from './en/recordTable.json'
 
 export type TranslationKeys = {
   common: Paths<typeof common>
@@ -19,6 +25,12 @@ export type TranslationKeys = {
   navigation: Paths<typeof navigation>
   record: Paths<typeof record>
   category: Paths<typeof category>
+  recordMeta: Paths<typeof recordMeta>
+  recordMetaPublication: Paths<typeof recordMetaPublication>
+  recordMetaArchive: Paths<typeof recordMetaArchive>
+  recordMetaObject: Paths<typeof recordMetaObject>
+  recordMetaPerson: Paths<typeof recordMetaPerson>
+  recordTable: Paths<typeof recordTable>
 }
 
 export type navigationT = (
@@ -32,3 +44,77 @@ export type navigationT = (
       }
     | undefined
 ) => string
+
+export type recordMetaT = (
+  s: Paths<typeof recordMeta>,
+  q?: TranslationQuery | undefined,
+  o?:
+    | {
+        returnObjects?: boolean | undefined
+        fallback?: string | string[] | undefined
+        default?: string | undefined
+      }
+    | undefined
+) => string | undefined
+
+export type recordMetaArchiveT = (
+  s: Paths<typeof recordMetaArchive>,
+  q?: TranslationQuery | undefined,
+  o?:
+    | {
+        returnObjects?: boolean | undefined
+        fallback?: string | string[] | undefined
+        default?: string | undefined
+      }
+    | undefined
+) => string | undefined
+
+export type recordMetaPublicationT = (
+  s: Paths<typeof recordMetaPublication>,
+  q?: TranslationQuery | undefined,
+  o?:
+    | {
+        returnObjects?: boolean | undefined
+        fallback?: string | string[] | undefined
+        default?: string | undefined
+      }
+    | undefined
+) => string | undefined
+
+export type recordMetaObjectT = (
+  s: Paths<typeof recordMetaObject>,
+  q?: TranslationQuery | undefined,
+  o?:
+    | {
+        returnObjects?: boolean | undefined
+        fallback?: string | string[] | undefined
+        default?: string | undefined
+      }
+    | undefined
+) => string | undefined
+
+export type recordMetaPersonT = (
+  s: Paths<typeof recordMetaPerson>,
+  q?: TranslationQuery | undefined,
+  o?:
+    | {
+        returnObjects?: boolean | undefined
+        fallback?: string | string[] | undefined
+        default?: string | undefined
+      }
+    | undefined
+) => string | undefined
+
+export type recordTableT = (
+  s: Paths<typeof recordTable>,
+  q?: TranslationQuery | undefined,
+  o?:
+    | {
+        returnObjects?: boolean | undefined
+        fallback?: string | string[] | undefined
+        default?: string | undefined
+      }
+    | undefined
+) => string | undefined
+
+export type recordMetaType = Paths<typeof recordMeta>

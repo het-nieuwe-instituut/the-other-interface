@@ -7,6 +7,10 @@ generates:
             - 'typescript'
             - 'typescript-operations'
             - 'typescript-graphql-request'
+            - add:
+                  content:
+                        - /* eslint-disable @typescript-eslint/no-explicit-any */
+                        - /* eslint-disable @typescript-eslint/no-unused-vars */
         config:
             namingConvention:
                 typeNames: change-case-all#pascalCase

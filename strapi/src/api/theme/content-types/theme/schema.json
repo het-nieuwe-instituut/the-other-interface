@@ -15,8 +15,8 @@
       "localized": true
     }
   },
-  "attributes": {   
-     "name": {
+  "attributes": {
+    "name": {
       "type": "string",
       "required": true,
       "pluginOptions": {

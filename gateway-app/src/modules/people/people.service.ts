@@ -1,8 +1,10 @@
 import { Injectable } from '@nestjs/common'
 import { KeysToVerify, TriplyService } from '../triply/triply.service'
-import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
+import { EntityNames } from '../util/entityNames.type'
 import { getHttpThumbnailOrNull } from '../util/helpers'
 import { TriplyUtils } from '../triply/triply.utils'
+import { PaginationArgs } from '../util/paginationArgs.type'
+import { Locale } from '../util/locale.type'
 
 interface PeopleDetailZoomLevel3Data {
   thumbnail?: string
@@ -65,21 +67,97 @@ const peopleDetailZoomLevel3DataKeys: KeysToVerify<PeopleDetailZoomLevel3Data> =
   permanentLink: true,
 }
 
+export interface PeopleRelationsType {
+  idRelation?: string
+  relationName?: string
+  titleR?: string
+  occupation?: string
+  period?: string
+  externalSource?: string
+}
+
+const PeopleRelationsKeys: KeysToVerify<PeopleRelationsType> = {
+  idRelation: true,
+  relationName: true,
+  titleR: true,
+  occupation: true,
+  period: true,
+  externalSource: true,
+}
+
+export interface PeopleRelationsCountType {
+  total: string
+}
+
+const peopleRelationsCountKeys: KeysToVerify<PeopleRelationsCountType> = {
+  total: true,
+}
+export interface PeopleRecordZoomLevel3Data {
+  type?: string
+  profession?: string
+  nameVariations?: string
+  birthDate?: string
+  birthPlace?: string
+  deathDate?: string
+  deathPlace?: string
+  nationality?: string
+  gender?: string
+  period?: string
+  association?: string
+  permanentLink?: string
+  externalSource?: string
+}
+
+const peopleRecordZoomLevel3DataKeys: KeysToVerify<PeopleRecordZoomLevel3Data> = {
+  type: true,
+  profession: true,
+  nameVariations: true,
+  birthDate: true,
+  birthPlace: true,
+  deathDate: true,
+  deathPlace: true,
+  nationality: true,
+  gender: true,
+  period: true,
+  association: true,
+  permanentLink: true,
+  externalSource: true,
+}
+
+export interface PeopleZoomLevel2HoverData {
+  title: string
+  profession: string
+  description: string
+}
+
+const peopleZoomLevel2HoverDataKeys: KeysToVerify<PeopleZoomLevel2HoverData> = {
+  title: true,
+  profession: true,
+  description: true,
+}
+
 @Injectable()
 export class PeopleService {
   protected entityType = 'triply'
 
-  private readonly ZoomLevel3Endpoint =
-    'https://api.collectiedata.hetnieuweinstituut.nl/queries/the-other-interface-testing/people-recordPage/run?'
+  private readonly ZoomLevel3Endpoint = 'people-recordPage/run?'
+
+  private readonly ZoomLevel3RelationsEndpoint = 'people-recordRelations/run?'
+
+  private readonly ZoomLevel3RelationsCountEndpoint = 'people-recordRelations-Count/run?'
+
+  private readonly ZoomLevel3RecordEndpoint = 'people-recordPage-editorial/run?'
+
+  private readonly ZoomLevel2HoverEndpoint = 'people-hoverState/run?'
 
   public constructor(private triplyService: TriplyService) {}
 
-  public async getZoomLevel3Data(id: string) {
+  public async getZoomLevel3Data(id: string, locale: Locale) {
     const result = await this.triplyService.queryTriplyData<PeopleDetailZoomLevel3Data>(
       this.ZoomLevel3Endpoint,
       peopleDetailZoomLevel3DataKeys,
       { page: 1, pageSize: 2 },
-      { id }
+      { id, locale }
     )
 
     return {
@@ -88,5 +166,65 @@ export class PeopleService {
       id,
       thumbnail: getHttpThumbnailOrNull(result.data[0]?.thumbnail)?.split(';'),
     }
+  }
+
+  public async getRelationsData(
+    id: string,
+    type: EntityNames,
+    paginationArgs: PaginationArgs,
+    locale: Locale
+  ) {
+    const result = await this.triplyService.queryTriplyData<PeopleRelationsType>(
+      this.ZoomLevel3RelationsEndpoint,
+      PeopleRelationsKeys,
+      { page: paginationArgs.page ?? 1, pageSize: paginationArgs.pageSize ?? 5 },
+      { id, type, language: locale }
+    )
+
+    const output = TriplyUtils.sanitizeObjectArray(
+      result.data,
+      'idRelation',
+      'relation',
+      'thumbnail'
+    )
+    return output
+  }
+
+  public async getRelationsDataCount(id: string, type: EntityNames) {
+    const result = await this.triplyService.queryTriplyData<PeopleRelationsCountType>(
+      this.ZoomLevel3RelationsCountEndpoint,
+      peopleRelationsCountKeys,
+      { page: 1, pageSize: 1 },
+      { id, type }
+    )
+
+    return result.data
+  }
+
+  public async getZoomLevel3RecordData(id: string, locale: Locale) {
+    const result = await this.triplyService.queryTriplyData<PeopleRecordZoomLevel3Data>(
+      this.ZoomLevel3RecordEndpoint,
+      peopleRecordZoomLevel3DataKeys,
+      { page: 1, pageSize: 1 },
+      { id, language: locale }
+    )
+
+    return result.data
+  }
+
+  public async getZoomRecordHover(id: string, locale: Locale) {
+    const results = await this.triplyService.queryTriplyData<PeopleZoomLevel2HoverData>(
+      this.ZoomLevel2HoverEndpoint,
+      peopleZoomLevel2HoverDataKeys,
+      undefined,
+      { id, language: locale }
+    )
+    // TODO: HNIT-1833 - throw on errors (no data or multiple resutls that don't match)
+
+    if (results.data.length === 0) {
+      return {}
+    }
+
+    return { ...TriplyUtils.combineObjectArray(results.data) }
   }
 }

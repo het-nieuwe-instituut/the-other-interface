@@ -1,6 +1,5 @@
 import { ReduxStoreProvider } from '@/features/shared/components/providers/ReduxStoreProdivder'
 import { ThemeProvider } from '@/features/shared/components/providers/ThemeProvider'
-import Fonts from '@/features/modules/components/Fonts/Fonts'
 import DisableScroll from '@/features/shared/components/DisableScroll/DisableScroll'
 import { AppHead } from '@/features/shared/components/Head/AppHead'
 import MobileOverlayProvider from '@/features/shared/components/MobileOverlayProvider/MobileOverlayProvider'
@@ -15,7 +14,8 @@ import ReactQueryProvider from '@/features/shared/components/providers/ReactQuer
 import BaseElementWrapper from '@/features/shared/components/wrappers/BaseElementsWrapper'
 import { draftMode } from 'next/headers'
 import { PreviewBlock } from '@/features/preview/PreviewBlock'
-import { Box } from '@chakra-ui/react'
+import { ReduxDraftModeSync } from '@/features/shared/components/Redux/ReduxDraftModeSync'
+import { ReactTooltipInitializer } from '@/features/ui/components/tooltip/ReactTooltipInitializer'
 
 function MyApp({ children }: { children: React.ReactNode }) {
   const { isEnabled } = draftMode()
@@ -44,13 +44,14 @@ function MyApp({ children }: { children: React.ReactNode }) {
             <ThemeProvider>
               <DisableScroll>
                 <MobileOverlayProvider>
-                  <Box>
-                    <Fonts />
+                  <div>
                     <AppHead />
                     <TestMenu />
+                    <ReduxDraftModeSync isDraftMode={isEnabled} />
                     {children}
+                    <ReactTooltipInitializer />
                     <BaseElementWrapper />
-                  </Box>
+                  </div>
                 </MobileOverlayProvider>
               </DisableScroll>
             </ThemeProvider>

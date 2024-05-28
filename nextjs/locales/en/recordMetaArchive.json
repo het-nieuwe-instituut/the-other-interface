@@ -1,0 +1,13 @@
+{
+  "__typename": "",
+  "referenceCode": "Reference Code",
+  "titleType": "Title Type",
+  "descriptionLevel": "Description Level/Record Type",
+  "size": "Size",
+  "period": "Period",
+  "access": "Conditions Governing Access",
+  "photographCreator": "Photograph Creator",
+  "rights": "Rights",
+  "permanentLink": "Permanent Link",
+  "externalSource": "External Source"
+}

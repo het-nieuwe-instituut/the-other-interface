@@ -1,5 +1,3 @@
-#import '../core/moduleLayout.fragment.graphql'
-
 fragment buttonsModuleFragment on ComponentModulesButtonsModule {
     id
     __typename
@@ -18,9 +16,4 @@ fragment buttonsModuleFragment on ComponentModulesButtonsModule {
         hasAttachment
     }
     buttonStyle
-    buttonsModuleLayout {
-        ... on ComponentCoreModuleLayouts {
-            ...componentCoreModuleLayouts
-        }
-    }
 }

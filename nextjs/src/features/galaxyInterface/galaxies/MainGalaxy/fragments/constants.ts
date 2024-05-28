@@ -2,6 +2,8 @@ export const HOMEPAGE_Z_INDEXES = {
   CLOUD: 10,
   STORY: 20,
   THEME_TITLE: 11,
+  CURRENT_PAGE: 20,
+  NEXT_PAGE: 10,
 }
 
 export const LANDINGPAGE_Z_INDEXES = {

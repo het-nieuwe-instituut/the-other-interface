@@ -1,11 +1,12 @@
 import React from 'react'
 import { useSearchParams, usePathname, useRouter } from 'next/navigation'
+import { useLocale } from '@/features/shared/hooks/useLocale'
 
 export const usePresenter = () => {
   const searchParams = useSearchParams()
   const router = useRouter()
   const pathname = usePathname()
-  const lang = searchParams?.get('lang')
+  const lang = useLocale()
 
   const changeLanguage = (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,

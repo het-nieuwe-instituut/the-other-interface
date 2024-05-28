@@ -2,17 +2,15 @@ import { uniqueId } from 'lodash'
 
 import {
   ComponentCoreButton,
-  ComponentCoreModuleLayouts,
   Maybe,
   Scalars,
   StoryEntityResponse,
   TriplyRecordEntityResponse,
   UploadFileEntityResponse,
-} from 'src/generated/graphql'
+} from '../../generated/graphql'
 
 import {
   aComponentCoreButton,
-  aComponentCoreModuleLayouts,
   anUploadFileEntityResponse,
   aStoryEntityResponse,
   aTriplyRecordEntityResponse,
@@ -59,7 +57,6 @@ export type ComponentModulesGridModule = {
   fieldTitlesAreInverted?: Maybe<Scalars['Boolean']>
   fields?: Maybe<Array<ComponentCoreGridItem>>
   buttons?: Maybe<Array<ComponentCoreButton>>
-  gridModuleLayout: ComponentCoreModuleLayouts
   showMoreButtonTitle?: Maybe<Scalars['String']>
   pageSize?: Maybe<number>
 }
@@ -112,7 +109,6 @@ export const componentMock: ComponentModulesGridModule = {
     aComponentCoreButton(),
     aComponentCoreButton(),
   ],
-  gridModuleLayout: aComponentCoreModuleLayouts(),
   showMoreButtonTitle: 'Load More',
 }
 
@@ -126,7 +122,6 @@ export const componentMock2: ComponentModulesGridModule = {
   fieldTypes: EnumComponentfieldTypes.TriplyRecords,
   fieldTitlesAreInverted: false,
   fields: [getGridTriplyRecord(), getGridTriplyRecord(), getGridTriplyRecord()],
-  gridModuleLayout: aComponentCoreModuleLayouts(),
   showMoreButtonTitle: 'Load More',
 }
 
@@ -143,6 +138,5 @@ export const componentMock3: ComponentModulesGridModule = {
     getGridTriplyRecord(),
     getGridTriplyRecord(),
   ],
-  gridModuleLayout: aComponentCoreModuleLayouts(),
   showMoreButtonTitle: 'Load More',
 }

@@ -1,4 +1,4 @@
-query stories($pagination: PaginationArg, $locale: String) {
+query stories($pagination: PaginationArg, $locale: String!) {
     stories(pagination: $pagination, locale: $locale) {
         data {
             id

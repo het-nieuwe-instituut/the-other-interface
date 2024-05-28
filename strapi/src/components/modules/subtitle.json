@@ -9,12 +9,6 @@
   "attributes": {
     "text": {
       "type": "text"
-    },
-    "subtitleModuleLayout": {
-      "type": "component",
-      "repeatable": false,
-      "component": "core.module-layouts",
-      "required": true
     }
   }
 }

@@ -1,10 +1,14 @@
 'use client'
-import { Box } from '@chakra-ui/react'
-
-import { Cloud, CategoryCloud, Stories } from './fragments'
-import { ThemeTitle } from '../../components/ThemeTitle/ThemeTitle'
-import { StoryEntity } from 'src/generated/graphql'
+import { ThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
+import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
+import { useSearchParams } from 'next/navigation'
 import { GalaxyFooter } from '../../components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
+import { GalaxyPagination } from '../../components/GalaxyWrapper/GalaxyPagination/GalaxyPagination'
+import { ThemeTitle } from '../../components/ThemeTitle/ThemeTitle'
+import { CategoryCloud, Cloud, Stories } from './fragments'
+import { useThemesQuery } from './hooks/useThemes'
+import { usePresenter } from './usePresenter'
 
 const categoryClouds: CategoryCloud[] = [
   {
@@ -58,30 +62,70 @@ const categoryClouds: CategoryCloud[] = [
   },
 ]
 
-interface Props {
-  storyTitle?: string
-  stories: StoryEntity[]
-}
+export const MainGalaxy = () => {
+  const searchParams = useSearchParams()
+  const currentPage = parseInt(searchParams?.get('page') ?? '1')
 
-export const MainGalaxy: React.FC<Props> = ({ storyTitle, stories }) => {
+  const {
+    storyTitle,
+    stories,
+    pagination,
+    isLoading: isMainLoading,
+    isError,
+  } = useThemesQuery(currentPage)
+  const { stories: nextStories, isLoading: isNextLoading } = useThemesQuery(currentPage + 1)
+  const { increasePageNumber, decreasePageNumber } = usePresenter(pagination?.pageCount || 0)
+  const { t } = useTypeSafeTranslation('navigation')
+  const isLoading = isMainLoading || isNextLoading
+
+  const renderMainContent = () => {
+    if (isError) {
+      return (
+        <div className="flex h-full items-center justify-center">
+          <p className={TypographyVariants({ times: 'md' })}>{t('errorLoadingThemes')}</p>
+        </div>
+      )
+    }
+
+    if (isLoading) {
+      return (
+        <div className="flex h-full  items-center justify-center">
+          <ThemedSpinner />
+        </div>
+      )
+    }
+
+    return (
+      <>
+        <Stories stories={stories} nextStories={nextStories} />
+        <ThemeTitle title={storyTitle} />
+      </>
+    )
+  }
+
   return (
-    <Box w={'100vw'} backgroundColor={'pinkAlpha.100'}>
-      <Box
-        position="relative"
-        width="100vw"
-        height="100vh"
-        maxW={'1440px'}
-        overflow={'hidden'}
-        marginX={'auto'}
-      >
+    <div className={'w-screen bg-pink-100'}>
+      <div className="relative mx-auto h-screen w-screen max-w-[1440px] overflow-hidden">
         {categoryClouds.map(cloud => (
           <Cloud key={cloud.title} cloud={cloud} />
         ))}
-        <Stories stories={stories} />
-        <ThemeTitle title={storyTitle} />
 
-        <GalaxyFooter />
-      </Box>
-    </Box>
+        {renderMainContent()}
+
+        <GalaxyFooter
+          galaxyPagination={
+            <GalaxyPagination
+              currentPageNumber={pagination?.page || 0}
+              pageAmount={pagination?.pageCount || 0}
+              isResultAmountLoading={false}
+              handleLeftClick={decreasePageNumber}
+              handleRightClick={increasePageNumber}
+              isResultEmpty={stories.length === 0}
+              text={t('theme')}
+            />
+          }
+        />
+      </div>
+    </div>
   )
 }

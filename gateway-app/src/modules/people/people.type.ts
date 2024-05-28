@@ -1,5 +1,7 @@
-import { Field, ObjectType } from '@nestjs/graphql'
-import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
+import { ArgsType, Field, ObjectType, OmitType } from '@nestjs/graphql'
+import { EntityNames } from '../util/entityNames.type'
+import { IsString } from 'class-validator'
+import { Locale } from '../util/locale.type'
 
 @ObjectType()
 export class PeopleZoomLevel3DetailType {
@@ -92,10 +94,117 @@ export class PeopleZoomLevel3DetailType {
 }
 
 @ObjectType()
+export class PeopleRecordZoomLevel3Type {
+  @Field(() => String, { nullable: true })
+  public type?: string
+
+  @Field(() => String, { nullable: true })
+  public profession?: string
+
+  @Field(() => String, { nullable: true })
+  public nameVariation?: string
+
+  @Field(() => String, { nullable: true })
+  public birthDate?: string
+
+  @Field(() => String, { nullable: true })
+  public birthPlace?: string
+
+  @Field(() => String, { nullable: true })
+  public deathDate?: string
+
+  @Field(() => String, { nullable: true })
+  public deathPlace?: string
+
+  @Field(() => String, { nullable: true })
+  public nationality?: string
+
+  @Field(() => String, { nullable: true })
+  public gender?: string
+
+  @Field(() => String, { nullable: true })
+  public period?: string
+
+  @Field(() => String, { nullable: true })
+  public association?: string
+
+  @Field(() => String, { nullable: true })
+  public permanentLink?: string
+
+  @Field(() => String, { nullable: true })
+  public externalSource?: string
+}
+
+@ObjectType()
 export class PeopleAssociationType {
   @Field(() => String)
   public association: string
 
   @Field(() => String, { nullable: true })
   public associationLabel?: string | null
+}
+@ObjectType()
+export class PeopleRelationsType {
+  @Field(() => String, { nullable: true })
+  public idRelation?: string | null
+
+  @Field(() => String, { nullable: true })
+  public relationName?: string | null
+
+  @Field(() => String, { nullable: true })
+  public titleR?: string | null
+
+  @Field(() => String, { nullable: true })
+  public occupation?: string | null
+
+  @Field(() => String, { nullable: true })
+  public period?: string | null
+
+  @Field(() => String, { nullable: true })
+  public externalSource?: string | null
+}
+
+@ObjectType()
+export class PeopleRelationsCountType {
+  @Field(() => String, { nullable: true })
+  public total: string
+}
+
+@ArgsType()
+export class PeopleRecordRelationArgs {
+  @Field(() => EntityNames)
+  public type: EntityNames
+
+  @Field()
+  @IsString()
+  public id: string
+
+  @Field(() => Locale)
+  public locale: Locale
+}
+
+@ArgsType()
+export class PeopleZoomLevel2HoverArgs {
+  @Field(() => String, { nullable: false })
+  public id: string
+
+  @Field(() => Locale)
+  public locale: Locale
+}
+
+@ArgsType()
+export class PeopleRecordRelationCountArgs extends OmitType(PeopleRecordRelationArgs, [
+  'locale',
+] as const) {}
+
+@ObjectType()
+export class PeopleZoomLevelHoverType {
+  @Field(() => String, { nullable: true })
+  public title?: string | null
+
+  @Field(() => String, { nullable: true })
+  public profession?: string | null
+
+  @Field(() => String, { nullable: true })
+  public description?: string | null
 }

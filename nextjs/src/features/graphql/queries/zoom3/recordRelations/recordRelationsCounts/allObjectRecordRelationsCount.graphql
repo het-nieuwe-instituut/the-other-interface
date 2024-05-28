@@ -1,0 +1,5 @@
+query ObjectRecordRelationsCount($id: String!, $type: EntityNames!) {
+    objectRecordRelationsCount(type: $type, id: $id) {
+        total
+    }
+}

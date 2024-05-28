@@ -6,6 +6,7 @@ import { ComponentModulesImage } from 'src/generated/graphql'
 
 import { calculateImagePropotions } from '../../helpers/modulesHelpers'
 import { imageBasePath } from '../../modulesConstants'
+import { modulesSpacingMapper } from '../../modulesSpacing'
 
 interface MediaImageProps {
   component: ComponentModulesImage
@@ -27,13 +28,13 @@ const MediaImage = (props: MediaImageProps) => {
     IMAGE_HEIGHT,
     dimensions?.borderBox.width || 1223
   )
-  const imagePath = imageBasePath(url) || 'broken'
+  const imagePath = imageBasePath(url) || ''
 
   return (
     <Box
       backgroundColor={'inherit'}
-      paddingBottom={props.component.imageModuleLayout?.spacingBottom ?? undefined}
-      paddingTop={props.component.imageModuleLayout?.spacingTop ?? undefined}
+      pt={modulesSpacingMapper?.Image.spacingTop}
+      pb={modulesSpacingMapper?.Image.spacingBottom}
     >
       <Box maxW={'80rem'} ref={imageRef}>
         <Box pb="2.5">
@@ -45,6 +46,7 @@ const MediaImage = (props: MediaImageProps) => {
             layout="fixed"
             alt={alt_text || ''}
             loading="eager"
+            onContextMenu={e => e.preventDefault()}
           />
         </Box>
         {caption && (

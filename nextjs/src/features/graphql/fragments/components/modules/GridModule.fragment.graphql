@@ -1,5 +1,3 @@
-#import '../core/moduleLayout.fragment.graphql'
-
 fragment gridModuleFragment on ComponentModulesGridModule {
     __typename
     buttons {
@@ -47,24 +45,24 @@ fragment gridModuleFragment on ComponentModulesGridModule {
                     createdAt
                     updatedAt
                     recordId
-                    archive {
+                    archive (locale: $locale) {
                         id
                         type
                         title
                         objectNumber
                     }
-                    object {
+                    object (locale: $locale) {
                         description
                         thumbnail
                     }
-                    publication {
+                    publication (locale: $locale) {
                         id
                         type
                         title
                         yearOfPublication
                         objectNumber
                     }
-                    people {
+                    people (locale: $locale) {
                         name
                         nameTypes
                     }
@@ -74,11 +72,6 @@ fragment gridModuleFragment on ComponentModulesGridModule {
     }
     fieldTitlesAreInverted
     fieldTypes
-    gridModuleLayout {
-        ... on ComponentCoreModuleLayouts {
-            ...componentCoreModuleLayouts
-        }
-    }
     id
     pageSize
     showMoreButtonTitle

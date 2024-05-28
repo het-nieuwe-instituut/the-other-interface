@@ -48,9 +48,9 @@ export const StaticHeader = () => {
           alignItems={'center'}
           width={'100%'}
           px={6}
-          height={'32px'}
+          height={'100%'}
         >
-          <Flex alignItems={'center'}>
+          <Flex alignItems={'center'} h={'100%'}>
             <Link
               href={lang ? `/?lang=${lang}` : '/?lang=nl'}
               variant={isMenuOpen ? 'navigation' : 'navigationOnTopOfTheGalaxy'}
@@ -61,18 +61,21 @@ export const StaticHeader = () => {
               textStyle={
                 userLooksOn === USER_LOOKS_ON.GALAXY ? 'headingTimesLarge.lg' : 'impactNew.md'
               }
+              margin={0}
+              height={'100%'}
+              display={'flex'}
             >
-              <Box as="span" mr={'10px'}>
+              <Flex mr={'10px'} justifyContent={'center'}>
                 {tNavigation('theNewInstitute')}
-              </Box>
-              {' • '}
-              <Box as="span" ml={'10px'}>
+              </Flex>
+              <Flex justifyContent={'center'}>{'•'}</Flex>
+              <Flex ml={'10px'} justifyContent={'center'}>
                 {tNavigation('collectionPlatform')}
-              </Box>
+              </Flex>
             </Link>
           </Flex>
 
-          <Box marginTop={'-3px'}>
+          <Box>
             <GalaxyTopRight />
           </Box>
         </Flex>

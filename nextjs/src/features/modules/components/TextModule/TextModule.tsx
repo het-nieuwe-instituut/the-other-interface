@@ -2,6 +2,7 @@ import { Markdown } from '@/features/shared/components/Markdown/Markdown'
 import { Box } from '@chakra-ui/react'
 
 import { ComponentModulesTextModule } from 'src/generated/graphql'
+import { modulesSpacingMapper } from '../../modulesSpacing'
 
 interface Props {
   component: ComponentModulesTextModule
@@ -17,8 +18,8 @@ export const TextModule: React.FC<Props> = props => {
   return (
     <Box
       backgroundColor={'inherit'}
-      pb={props.component.textModuleLayout?.spacingBottom ?? undefined}
-      pt={props.component.textModuleLayout?.spacingTop ?? undefined}
+      pt={modulesSpacingMapper?.TextModule.spacingTop}
+      pb={modulesSpacingMapper?.TextModule.spacingBottom}
       maxW={'64em'}
       overflow={'auto'} // needed due to strange behaviour of generated markdown content
     >
