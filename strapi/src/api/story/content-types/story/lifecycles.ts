@@ -168,7 +168,7 @@ async function changeOtherLocalesParent(parentId: number, localizations: any[]) 
         return Promise.resolve()
       }
 
-      const data = { parent_story: parentLocale.id }
+      const data = { parent_story: parentLocale.id } as any
       return strapi.entityService.update(storyApi, l.id, { data })
     })
   )
