@@ -8,7 +8,7 @@ interface Props {
 
 export const Pullquote: React.FC<Props> = ({ children }) => {
   return (
-    <aside className={cn('w-full bg-inherit pt-5')}>
+    <aside className={cn('w-full bg-inherit')}>
       <blockquote>
         <p className={TypographyVariants({ impact: 'lg' })}>“{children}”</p>
       </blockquote>
