@@ -44,12 +44,48 @@ export class Homepage {
 
   @Field({ nullable: true })
   public updatedAt?: Date
+}
 
+@ObjectType()
+export class HighlightedHomepageStoryEntityResponse {
+  @Field(() => [HighlightedHomepageStoryEntity])
+  public data: HighlightedHomepageStoryEntity[]
+}
+
+@ObjectType()
+export class HighlightedHomepageStories {
   @Field(() => StoryWithoutRelationsRelationResponseCollection, { nullable: true })
-  public highlightedStories?: StoryWithoutRelationsRelationResponseCollection | null
+  public highlightedStories?: StoryWithoutRelationsRelationResponseCollection
+}
 
+@ObjectType()
+export class HighlightedHomepageStoryEntity {
+  @Field(() => HighlightedHomepageStories, { nullable: true })
+  public attributes?: HighlightedHomepageStories
+
+  @Field(() => ID, { nullable: true })
+  public id?: string
+}
+
+@ObjectType()
+export class HighlightedHomepageThemeEntityResponse {
+  @Field(() => [HighlightedHomepageThemeEntity])
+  public data: HighlightedHomepageThemeEntity[]
+}
+
+@ObjectType()
+export class HighlightedHomepageThemes {
   @Field(() => ThemeRelationResponseCollection, { nullable: true })
-  public highlightedThemes?: ThemeRelationResponseCollection | null
+  public highlightedThemes?: ThemeRelationResponseCollection
+}
+
+@ObjectType()
+export class HighlightedHomepageThemeEntity {
+  @Field(() => HighlightedHomepageThemes, { nullable: true })
+  public attributes?: HighlightedHomepageThemes
+
+  @Field(() => ID, { nullable: true })
+  public id?: string
 }
 
 @ObjectType()

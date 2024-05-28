@@ -2,7 +2,11 @@ import { Inject } from '@nestjs/common'
 import { Args, Query, Resolver } from '@nestjs/graphql'
 import { PublicationState, Sdk } from '../../generated/strapi-sdk'
 import { Locale } from '../util/locale.type'
-import { HomepageEntityResponse } from './homepage.type'
+import {
+  HighlightedHomepageStoryEntityResponse,
+  HighlightedHomepageThemeEntityResponse,
+  HomepageEntityResponse,
+} from './homepage.type'
 import { PaginationArg } from '../strapi/shared-types'
 
 @Resolver()
@@ -12,19 +16,44 @@ export class HomepageResolver {
   @Query(() => HomepageEntityResponse)
   public async homepage(
     @Args('locale') locale: Locale,
-    @Args('publicationState', { nullable: true }) publicationState?: PublicationState,
-    @Args('highlightedStoriesPaginationArgs', { nullable: true })
-    highlightedStoriesPaginationArgs?: PaginationArg,
-    @Args('highlightedThemesPaginationArgs', { nullable: true })
-    highlightedThemesPaginationArgs?: PaginationArg
+    @Args('publicationState', { nullable: true }) publicationState?: PublicationState
   ) {
     return (
       await this.strapiGqlSdk.homepage({
         publicationState,
         locale,
+      })
+    ).homepage
+  }
+
+  @Query(() => HighlightedHomepageStoryEntityResponse)
+  public async highlightedHomepageStories(
+    @Args('locale') locale: Locale,
+    @Args('publicationState', { nullable: true }) publicationState?: PublicationState,
+    @Args('paginationArgs', { nullable: true }) paginationArgs?: PaginationArg
+  ) {
+    return (
+      await this.strapiGqlSdk.highlightedHomepageStories({
+        publicationState,
+        locale,
         localeStr: locale,
-        highlightedStoriesPaginationArgs,
-        highlightedThemesPaginationArgs,
+        highlightedStoriesPaginationArgs: paginationArgs,
+      })
+    ).homepage
+  }
+
+  @Query(() => HighlightedHomepageThemeEntityResponse)
+  public async highlightedHomepageThemes(
+    @Args('locale') locale: Locale,
+    @Args('publicationState', { nullable: true }) publicationState?: PublicationState,
+    @Args('paginationArgs', { nullable: true }) paginationArgs?: PaginationArg
+  ) {
+    return (
+      await this.strapiGqlSdk.highlightedHomepageThemes({
+        publicationState,
+        locale,
+        localeStr: locale,
+        highlightedThemesPaginationArgs: paginationArgs,
       })
     ).homepage
   }

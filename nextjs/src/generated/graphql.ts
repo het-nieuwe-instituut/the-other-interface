@@ -443,14 +443,44 @@ export type Error = {
   message?: Maybe<Scalars['String']>;
 };
 
+export type HighlightedHomepageStories = {
+  __typename?: 'HighlightedHomepageStories';
+  highlightedStories?: Maybe<StoryWithoutRelationsRelationResponseCollection>;
+};
+
+export type HighlightedHomepageStoryEntity = {
+  __typename?: 'HighlightedHomepageStoryEntity';
+  attributes?: Maybe<HighlightedHomepageStories>;
+  id?: Maybe<Scalars['ID']>;
+};
+
+export type HighlightedHomepageStoryEntityResponse = {
+  __typename?: 'HighlightedHomepageStoryEntityResponse';
+  data: Array<HighlightedHomepageStoryEntity>;
+};
+
+export type HighlightedHomepageThemeEntity = {
+  __typename?: 'HighlightedHomepageThemeEntity';
+  attributes?: Maybe<HighlightedHomepageThemes>;
+  id?: Maybe<Scalars['ID']>;
+};
+
+export type HighlightedHomepageThemeEntityResponse = {
+  __typename?: 'HighlightedHomepageThemeEntityResponse';
+  data: Array<HighlightedHomepageThemeEntity>;
+};
+
+export type HighlightedHomepageThemes = {
+  __typename?: 'HighlightedHomepageThemes';
+  highlightedThemes?: Maybe<ThemeRelationResponseCollection>;
+};
+
 export type Homepage = {
   __typename?: 'Homepage';
   Title?: Maybe<Scalars['String']>;
   components?: Maybe<Array<HomepageComponentsDynamicZone>>;
   createdAt?: Maybe<Scalars['Date']>;
   description?: Maybe<Scalars['String']>;
-  highlightedStories?: Maybe<StoryWithoutRelationsRelationResponseCollection>;
-  highlightedThemes?: Maybe<ThemeRelationResponseCollection>;
   locale?: Maybe<Scalars['String']>;
   localizations?: Maybe<HomepageRelationResponseCollection>;
   publishedAt?: Maybe<Scalars['Date']>;
@@ -1105,6 +1135,8 @@ export type Query = {
   archivesZoomRecordHover: ArchivesZoomLevelHoverType;
   author: AuthorEntityResponse;
   authors: AuthorEntityResponseCollection;
+  highlightedHomepageStories: HighlightedHomepageStoryEntityResponse;
+  highlightedHomepageThemes: HighlightedHomepageThemeEntityResponse;
   homepage: HomepageEntityResponse;
   landingpage: LandingpageEntityResponse;
   landingpages: LandingpageEntityResponseCollection;
@@ -1193,9 +1225,21 @@ export type QueryAuthorsArgs = {
 };
 
 
+export type QueryHighlightedHomepageStoriesArgs = {
+  locale: Scalars['String'];
+  paginationArgs?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<Scalars['String']>;
+};
+
+
+export type QueryHighlightedHomepageThemesArgs = {
+  locale: Scalars['String'];
+  paginationArgs?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<Scalars['String']>;
+};
+
+
 export type QueryHomepageArgs = {
-  highlightedStoriesPaginationArgs?: InputMaybe<PaginationArg>;
-  highlightedThemesPaginationArgs?: InputMaybe<PaginationArg>;
   locale: Scalars['String'];
   publicationState?: InputMaybe<Scalars['String']>;
 };

@@ -6,22 +6,6 @@ fragment HomepageFragment on Homepage {
     publishedAt
     updatedAt
     description
-    highlightedStories(
-        filters: { locale: { eq: $localeStr } }
-        pagination: $highlightedStoriesPaginationArgs
-    ) {
-        data {
-            ...StoryWithoutRelationsFragment
-        }
-    }
-    highlightedThemes(
-        filters: { locale: { eq: $localeStr } }
-        pagination: $highlightedThemesPaginationArgs
-    ) {
-        data {
-            ...ThemeFragment
-        }
-    }
     components {
         ... on ComponentModulesTextModule {
             ...ComponentModulesTextModuleFragment
@@ -56,13 +40,7 @@ fragment HomepageFragment on Homepage {
     }
 }
 
-query homepage(
-    $publicationState: PublicationState = LIVE
-    $locale: I18NLocaleCode!
-    $localeStr: String!
-    $highlightedStoriesPaginationArgs: PaginationArg
-    $highlightedThemesPaginationArgs: PaginationArg
-) {
+query homepage($publicationState: PublicationState = LIVE, $locale: I18NLocaleCode!) {
     homepage(publicationState: $publicationState, locale: $locale) {
         data {
             id
@@ -74,6 +52,52 @@ query homepage(
                         attributes {
                             ...HomepageFragment
                         }
+                    }
+                }
+            }
+        }
+    }
+}
+
+query highlightedHomepageStories(
+    $publicationState: PublicationState = LIVE
+    $locale: I18NLocaleCode!
+    $localeStr: String!
+    $highlightedStoriesPaginationArgs: PaginationArg
+) {
+    homepage(publicationState: $publicationState, locale: $locale) {
+        data {
+            id
+            attributes {
+                highlightedStories(
+                    filters: { locale: { eq: $localeStr } }
+                    pagination: $highlightedStoriesPaginationArgs
+                ) {
+                    data {
+                        ...StoryWithoutRelationsFragment
+                    }
+                }
+            }
+        }
+    }
+}
+
+query highlightedHomepageThemes(
+    $publicationState: PublicationState = LIVE
+    $locale: I18NLocaleCode!
+    $localeStr: String!
+    $highlightedThemesPaginationArgs: PaginationArg
+) {
+    homepage(publicationState: $publicationState, locale: $locale) {
+        data {
+            id
+            attributes {
+                highlightedThemes(
+                    filters: { locale: { eq: $localeStr } }
+                    pagination: $highlightedThemesPaginationArgs
+                ) {
+                    data {
+                        ...ThemeFragment
                     }
                 }
             }
