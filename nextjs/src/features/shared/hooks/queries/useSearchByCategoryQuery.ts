@@ -6,7 +6,7 @@ import {
   SearchCategory,
 } from '@/features/shared/utils/categories'
 import { useQuery } from '@tanstack/react-query'
-import { ZOOM2_RECORDS_PER_PAGE } from '../../constants/mainConstants'
+import { STORIES_PER_PAGE, ZOOM2_RECORDS_PER_PAGE } from '../../constants/mainConstants'
 import { mapCategoryToTriplyEnum } from '../../helpers/mapCategoryToTriplyEnum'
 import { storyToRecordMapper } from '../../helpers/extractStoryData'
 import initApiClientService from '../../utils/initApiClientService'
@@ -41,34 +41,31 @@ export function useSearchByCategoryQuery({
         const total = response?.stories?.meta?.pagination?.total
         return { items: stories, total }
       case SEARCH_CATEGORIES.all:
-        const storiesSearchResponse = await api.searchByStories({
+        const storiesData = await api.searchByStories({
           searchTerm: text ?? '',
           page,
-          pageSize: ZOOM2_RECORDS_PER_PAGE,
+          pageSize: 1,
+          locale,
+        })
+
+        const storiesTotal = storiesData?.stories?.meta?.pagination?.total ?? 0
+        const storyPagesAmount = Math.ceil(storiesTotal / STORIES_PER_PAGE)
+
+        const storiesSearchResponse = await api.searchByStories({
+          searchTerm: text ?? '',
+          page: page > storyPagesAmount ? storyPagesAmount : page,
+          pageSize: STORIES_PER_PAGE,
           locale,
         })
 
         const searchStories =
           storiesSearchResponse?.stories?.data?.map(story => storyToRecordMapper(story)) ?? []
-        const storiesTotal = storiesSearchResponse?.stories?.meta?.pagination?.total ?? 0
-        const storyPagesAmount = Math.ceil(storiesTotal / ZOOM2_RECORDS_PER_PAGE)
-        const storiesAmount = searchStories.length
-        const allPageSize = ZOOM2_RECORDS_PER_PAGE - storiesAmount
-
-        if (allPageSize <= 0) {
-          return {
-            items: searchStories,
-            total: storiesTotal,
-          }
-        }
-
-        const triplyPage = Math.max(1, page - storyPagesAmount)
 
         const searchAllResult = await api.searchAll({
           text: text ?? '',
-          page: triplyPage,
+          page: page,
           lang: locale,
-          pageSize: allPageSize,
+          pageSize: ZOOM2_RECORDS_PER_PAGE - STORIES_PER_PAGE,
         })
 
         return {
