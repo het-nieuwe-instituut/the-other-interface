@@ -1,5 +1,4 @@
 import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/SearchFilterBox'
-import { Box } from '@chakra-ui/react'
 import { Filter } from '@/features/shared/hooks/search/useFilters'
 
 const mockData = [
@@ -39,9 +38,13 @@ export const Suggestions: React.FC<Props> = ({ handleSelectFilter }) => {
   return (
     <>
       {mockData.map(item => (
-        <Box key={item.id} onClick={() => handleSelectFilter(item)} maxWidth={'100%'}>
-          <SearchFilterBox category={item.field} subCategory={item.value} />
-        </Box>
+        <div className="max-w-full" key={item.id}>
+          <SearchFilterBox
+            category={item.field}
+            subCategory={item.value}
+            onClick={() => handleSelectFilter(item)}
+          />
+        </div>
       ))}
     </>
   )

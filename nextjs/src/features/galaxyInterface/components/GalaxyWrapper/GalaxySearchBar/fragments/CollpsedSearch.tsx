@@ -3,11 +3,13 @@ import SearchIconCollapsed from '@/icons/search-icon-collapsed.svg'
 
 type Props = {
   toggleSearchBar: () => void
+  className?: string
 }
 
-export const CollpsedSearch = ({ toggleSearchBar }: Props) => {
+export const CollpsedSearch = ({ toggleSearchBar, className }: Props) => {
   return (
     <Flex
+      className={className}
       alignItems={'center'}
       justifyContent="flex-end"
       zIndex={'inherit'}

@@ -47,7 +47,7 @@ export const usePresenter = () => {
     pageAmount,
     increasePageNumber,
     decreasePageNumber,
-    isResultEmpty: searchResultAmount === 0,
+    isResultEmpty: searchResultAmount === 0 && !isResultAmountLoading && !isError,
     isError,
     records: data?.items || [],
   }

@@ -72,6 +72,7 @@ export const CategoryGalaxy: React.FC = () => {
             handleLeftClick={decreasePageNumber}
             handleRightClick={increasePageNumber}
             isResultEmpty={isResultEmpty}
+            isResultError={isError}
           />
         }
       />
