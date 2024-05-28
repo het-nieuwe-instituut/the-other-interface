@@ -3266,6 +3266,7 @@ export type HomepageFragmentFragment = {
 export type HomepageQueryVariables = Exact<{
   publicationState?: InputMaybe<PublicationState>
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
+  localeStr: Scalars['String']
 }>
 
 export type HomepageQuery = {
@@ -19487,12 +19488,12 @@ export const HomepageFragmentFragmentDoc = gql`
     publishedAt
     updatedAt
     description
-    highlightedStories {
+    highlightedStories(filters: { locale: { eq: $localeStr } }) {
       data {
         ...StoryWithoutRelationsFragment
       }
     }
-    highlightedThemes {
+    highlightedThemes(filters: { locale: { eq: $localeStr } }) {
       data {
         ...ThemeFragment
       }
@@ -20220,7 +20221,11 @@ export const AuthorsDocument = gql`
   ${ResponseCollectionMetaFragmentFragmentDoc}
 `
 export const HomepageDocument = gql`
-  query homepage($publicationState: PublicationState = LIVE, $locale: I18NLocaleCode) {
+  query homepage(
+    $publicationState: PublicationState = LIVE
+    $locale: I18NLocaleCode
+    $localeStr: String!
+  ) {
     homepage(publicationState: $publicationState, locale: $locale) {
       data {
         id
@@ -20773,7 +20778,7 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
       )
     },
     homepage(
-      variables?: HomepageQueryVariables,
+      variables: HomepageQueryVariables,
       requestHeaders?: Dom.RequestInit['headers']
     ): Promise<HomepageQuery> {
       return withWrapper(

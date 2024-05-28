@@ -13,6 +13,7 @@ export class HomepageResolver {
     @Args('locale') locale: Locale,
     @Args('publicationState', { nullable: true }) publicationState?: PublicationState
   ) {
-    return (await this.strapiGqlSdk.homepage({ publicationState, locale })).homepage
+    return (await this.strapiGqlSdk.homepage({ publicationState, locale, localeStr: locale }))
+      .homepage
   }
 }

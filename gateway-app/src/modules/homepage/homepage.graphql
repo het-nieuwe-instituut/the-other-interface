@@ -6,12 +6,12 @@ fragment HomepageFragment on Homepage {
     publishedAt
     updatedAt
     description
-    highlightedStories {
+    highlightedStories(filters: { locale: { eq: $localeStr } }) {
         data {
             ...StoryWithoutRelationsFragment
         }
     }
-    highlightedThemes {
+    highlightedThemes(filters: { locale: { eq: $localeStr } }) {
         data {
             ...ThemeFragment
         }
@@ -50,7 +50,7 @@ fragment HomepageFragment on Homepage {
     }
 }
 
-query homepage($publicationState: PublicationState = LIVE, $locale: I18NLocaleCode) {
+query homepage($publicationState: PublicationState = LIVE, $locale: I18NLocaleCode, $localeStr: String!) {
     homepage(publicationState: $publicationState, locale: $locale) {
         data {
             id
