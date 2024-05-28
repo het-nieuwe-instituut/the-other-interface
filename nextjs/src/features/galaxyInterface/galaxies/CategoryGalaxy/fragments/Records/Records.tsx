@@ -4,21 +4,23 @@ import { usePresenter } from './usePresenter'
 
 import { LANDINGPAGE_Z_INDEXES } from '../../../MainGalaxy/fragments/constants'
 import { RecordsGrid } from '../RecordsGrid'
+import { SearchResultItemType } from 'src/generated/graphql'
 
 const currentPageFadeIn = keyframes({ from: { opacity: 0 }, to: { opacity: 1 } })
 const nextPageFadeIn = keyframes({ from: { opacity: 0 }, to: { opacity: 0.2 } })
 
 type Props = {
   pageAmount: number
+  records: SearchResultItemType[] | null
 }
 
-export const Records: React.FC<Props> = ({ pageAmount }) => {
+export const Records: React.FC<Props> = ({ pageAmount, records }) => {
   const {
     currentPositionedRecords,
     nextPositionedRecords,
     isCurrentRecordsEmpty,
     isNextRecordsEmpty,
-  } = usePresenter(pageAmount)
+  } = usePresenter(pageAmount, records)
 
   return (
     <div className={'group-hover-blur size-full'}>

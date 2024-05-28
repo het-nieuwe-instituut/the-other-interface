@@ -49,5 +49,6 @@ export const usePresenter = () => {
     decreasePageNumber,
     isResultEmpty: searchResultAmount === 0,
     isError,
+    records: data?.items || [],
   }
 }

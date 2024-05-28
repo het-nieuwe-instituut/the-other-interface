@@ -18,6 +18,7 @@ export const CategoryGalaxy: React.FC = () => {
     increasePageNumber,
     decreasePageNumber,
     isError,
+    records,
   } = usePresenter()
 
   const { t } = useTypeSafeTranslation('category')
@@ -55,7 +56,7 @@ export const CategoryGalaxy: React.FC = () => {
       )
     }
 
-    return <Records pageAmount={pageAmount} />
+    return <Records pageAmount={pageAmount} records={records} />
   }
 
   return (

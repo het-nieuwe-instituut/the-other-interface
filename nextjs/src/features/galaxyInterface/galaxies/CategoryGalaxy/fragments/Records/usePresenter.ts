@@ -37,7 +37,7 @@ const getPositionedRecords = ({
   return positionedRecords
 }
 
-export const usePresenter = (pageAmount: number) => {
+export const usePresenter = (pageAmount: number, records: SearchResultItemType[] | null) => {
   const { category, search } = useZoom2Params()
   const { pageNumber } = usePageNumber()
   const { currentTemplate, nextTemplate } = usePositioningTemplates(
@@ -48,12 +48,6 @@ export const usePresenter = (pageAmount: number) => {
   const isLastPage = pageNumber === pageAmount
   const nextPage = pageNumber + 1
 
-  const { data: currentResults } = useSearchByCategoryQuery({
-    category,
-    text: search,
-    page: pageNumber,
-  })
-
   const { data: nextResults } = useSearchByCategoryQuery({
     category,
     text: search,
@@ -61,16 +55,15 @@ export const usePresenter = (pageAmount: number) => {
     enabled: !isLastPage,
   })
 
-  const currentRecords = useMemo(() => currentResults?.items || [], [currentResults?.items])
   const nextRecords = useMemo(() => nextResults?.items || [], [nextResults?.items])
 
   const currentPositionedRecords = useMemo(() => {
     return getPositionedRecords({
-      records: currentRecords,
+      records,
       pageNumber,
       currentTemplate,
     })
-  }, [currentRecords, category, currentTemplate, pageNumber])
+  }, [records, category, currentTemplate, pageNumber])
 
   const nextPositionedRecords = useMemo(() => {
     return getPositionedRecords({
@@ -83,7 +76,7 @@ export const usePresenter = (pageAmount: number) => {
   return {
     currentPositionedRecords,
     nextPositionedRecords,
-    isCurrentRecordsEmpty: currentRecords.length === 0,
+    isCurrentRecordsEmpty: records?.length === 0,
     isNextRecordsEmpty: nextRecords.length === 0,
   }
 }
