@@ -132,7 +132,13 @@ export const GridModule: React.FC<Props> = props => {
         href={`/story/${field.story?.data?.id}-${field.story?.data?.attributes?.slug}`}
       >
         <GridItem w={'100%'} mb={10} cursor={'pointer'}>
-          <Image mb={5} w={'100%'} src={thumbnailUrl} alt={thumbnailAlt} />
+          <Image
+            mb={5}
+            w={'100%'}
+            src={thumbnailUrl}
+            alt={thumbnailAlt}
+            onContextMenu={e => e.preventDefault()}
+          />
           {renderFieldTitles({
             title: field.title || '',
             description: field.subtitle || '',
@@ -159,7 +165,13 @@ export const GridModule: React.FC<Props> = props => {
     // TODO: NextLink integration to a page where you can view a triply record
     return (
       <GridItem key={keyExtractor(field.id, index, array)} w={'100%'} mb={10} cursor={'pointer'}>
-        <Image mb={5} w={'100%'} src={extractedFields.imageUrl} alt={extractedFields.title} />
+        <Image
+          mb={5}
+          w={'100%'}
+          src={extractedFields.imageUrl}
+          alt={extractedFields.title}
+          onContextMenu={e => e.preventDefault()}
+        />
         {renderFieldTitles(extractedFields)}
       </GridItem>
     )
