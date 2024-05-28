@@ -1,5 +1,5 @@
 // Don't remove. This is an example of how we can customize the content manager part of strapi. Right now it's not used. But it's here for future reference.
-const { getService } = require('@strapi/plugin-content-manager/server/utils')
+// const { getService } = require('@strapi/plugin-content-manager/server/utils')
 
 module.exports = plugin => {
   //   // example of customizing a controller

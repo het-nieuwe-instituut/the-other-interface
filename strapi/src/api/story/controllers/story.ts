@@ -16,7 +16,7 @@ export default factories.createCoreController('api::story.story', ({ strapi }) =
 
     const whereSlug = slug || _slug
 
-    const entity = await strapi.query('story').findOne({
+    const entity = await strapi.query('api::story.story').findOne({
       where: { Slug: whereSlug, _publicationState: DP_PUB_STATE_LIVE },
     })
 
