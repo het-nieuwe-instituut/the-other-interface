@@ -1,4 +1,4 @@
-import { EditorialPageWrapper } from '@/features/editorialInterface/components/EditorialPageWrapper'
+import { EditorialPageWrapper } from '@/features/editorial/components/EditorialPageWrapper'
 import { Pullquote } from '@/features/modules/components/Pullquote/Pullquote'
 import type { NextPage } from 'next'
 
