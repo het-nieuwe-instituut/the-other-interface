@@ -1194,6 +1194,8 @@ export type QueryAuthorsArgs = {
 
 
 export type QueryHomepageArgs = {
+  highlightedStoriesPaginationArgs?: InputMaybe<PaginationArg>;
+  highlightedThemesPaginationArgs?: InputMaybe<PaginationArg>;
   locale: Scalars['String'];
   publicationState?: InputMaybe<Scalars['String']>;
 };

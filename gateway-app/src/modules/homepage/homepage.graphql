@@ -6,12 +6,18 @@ fragment HomepageFragment on Homepage {
     publishedAt
     updatedAt
     description
-    highlightedStories(filters: { locale: { eq: $localeStr } }) {
+    highlightedStories(
+        filters: { locale: { eq: $localeStr } }
+        pagination: $highlightedStoriesPaginationArgs
+    ) {
         data {
             ...StoryWithoutRelationsFragment
         }
     }
-    highlightedThemes(filters: { locale: { eq: $localeStr } }) {
+    highlightedThemes(
+        filters: { locale: { eq: $localeStr } }
+        pagination: $highlightedThemesPaginationArgs
+    ) {
         data {
             ...ThemeFragment
         }
@@ -50,7 +56,13 @@ fragment HomepageFragment on Homepage {
     }
 }
 
-query homepage($publicationState: PublicationState = LIVE, $locale: I18NLocaleCode, $localeStr: String!) {
+query homepage(
+    $publicationState: PublicationState = LIVE
+    $locale: I18NLocaleCode!
+    $localeStr: String!
+    $highlightedStoriesPaginationArgs: PaginationArg
+    $highlightedThemesPaginationArgs: PaginationArg
+) {
     homepage(publicationState: $publicationState, locale: $locale) {
         data {
             id

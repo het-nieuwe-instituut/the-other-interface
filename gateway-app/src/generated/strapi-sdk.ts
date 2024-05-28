@@ -3265,8 +3265,10 @@ export type HomepageFragmentFragment = {
 
 export type HomepageQueryVariables = Exact<{
   publicationState?: InputMaybe<PublicationState>
-  locale?: InputMaybe<Scalars['I18NLocaleCode']>
+  locale: Scalars['I18NLocaleCode']
   localeStr: Scalars['String']
+  highlightedStoriesPaginationArgs?: InputMaybe<PaginationArg>
+  highlightedThemesPaginationArgs?: InputMaybe<PaginationArg>
 }>
 
 export type HomepageQuery = {
@@ -19488,12 +19490,18 @@ export const HomepageFragmentFragmentDoc = gql`
     publishedAt
     updatedAt
     description
-    highlightedStories(filters: { locale: { eq: $localeStr } }) {
+    highlightedStories(
+      filters: { locale: { eq: $localeStr } }
+      pagination: $highlightedStoriesPaginationArgs
+    ) {
       data {
         ...StoryWithoutRelationsFragment
       }
     }
-    highlightedThemes(filters: { locale: { eq: $localeStr } }) {
+    highlightedThemes(
+      filters: { locale: { eq: $localeStr } }
+      pagination: $highlightedThemesPaginationArgs
+    ) {
       data {
         ...ThemeFragment
       }
@@ -20223,8 +20231,10 @@ export const AuthorsDocument = gql`
 export const HomepageDocument = gql`
   query homepage(
     $publicationState: PublicationState = LIVE
-    $locale: I18NLocaleCode
+    $locale: I18NLocaleCode!
     $localeStr: String!
+    $highlightedStoriesPaginationArgs: PaginationArg
+    $highlightedThemesPaginationArgs: PaginationArg
   ) {
     homepage(publicationState: $publicationState, locale: $locale) {
       data {

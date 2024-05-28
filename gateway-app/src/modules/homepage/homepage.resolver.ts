@@ -3,6 +3,7 @@ import { Args, Query, Resolver } from '@nestjs/graphql'
 import { PublicationState, Sdk } from '../../generated/strapi-sdk'
 import { Locale } from '../util/locale.type'
 import { HomepageEntityResponse } from './homepage.type'
+import { PaginationArg } from '../strapi/shared-types'
 
 @Resolver()
 export class HomepageResolver {
@@ -11,9 +12,20 @@ export class HomepageResolver {
   @Query(() => HomepageEntityResponse)
   public async homepage(
     @Args('locale') locale: Locale,
-    @Args('publicationState', { nullable: true }) publicationState?: PublicationState
+    @Args('publicationState', { nullable: true }) publicationState?: PublicationState,
+    @Args('highlightedStoriesPaginationArgs', { nullable: true })
+    highlightedStoriesPaginationArgs?: PaginationArg,
+    @Args('highlightedThemesPaginationArgs', { nullable: true })
+    highlightedThemesPaginationArgs?: PaginationArg
   ) {
-    return (await this.strapiGqlSdk.homepage({ publicationState, locale, localeStr: locale }))
-      .homepage
+    return (
+      await this.strapiGqlSdk.homepage({
+        publicationState,
+        locale,
+        localeStr: locale,
+        highlightedStoriesPaginationArgs,
+        highlightedThemesPaginationArgs,
+      })
+    ).homepage
   }
 }
