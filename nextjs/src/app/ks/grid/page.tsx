@@ -1,4 +1,4 @@
-import { EditorialPageWrapper } from '@/features/editorialInterface/components/EditorialPageWrapper'
+import { EditorialPageWrapper } from '@/features/editorial/components/EditorialPageWrapper'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { cn } from '@/features/ui/utils/cn'
 import { times } from 'lodash'
