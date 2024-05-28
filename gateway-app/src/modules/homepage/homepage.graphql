@@ -6,6 +6,16 @@ fragment HomepageFragment on Homepage {
     publishedAt
     updatedAt
     description
+    highlightedStories {
+        data {
+            ...StoryWithoutRelationsFragment
+        }
+    }
+    highlightedThemes {
+        data {
+            ...ThemeFragment
+        }
+    }
     components {
         ... on ComponentModulesTextModule {
             ...ComponentModulesTextModuleFragment

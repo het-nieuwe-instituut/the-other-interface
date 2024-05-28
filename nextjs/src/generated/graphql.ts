@@ -449,6 +449,8 @@ export type Homepage = {
   components?: Maybe<Array<HomepageComponentsDynamicZone>>;
   createdAt?: Maybe<Scalars['Date']>;
   description?: Maybe<Scalars['String']>;
+  highlightedStories?: Maybe<StoryWithoutRelationsRelationResponseCollection>;
+  highlightedThemes?: Maybe<ThemeRelationResponseCollection>;
   locale?: Maybe<Scalars['String']>;
   localizations?: Maybe<HomepageRelationResponseCollection>;
   publishedAt?: Maybe<Scalars['Date']>;
@@ -1604,6 +1606,11 @@ export type StoryWithoutRelationsEntityResponseCollection = {
   __typename?: 'StoryWithoutRelationsEntityResponseCollection';
   data?: Maybe<Array<StoryWithoutRelationsEntity>>;
   meta?: Maybe<ResponseCollectionMeta>;
+};
+
+export type StoryWithoutRelationsRelationResponseCollection = {
+  __typename?: 'StoryWithoutRelationsRelationResponseCollection';
+  data?: Maybe<Array<StoryWithoutRelationsEntity>>;
 };
 
 export type StringFilterInput = {
