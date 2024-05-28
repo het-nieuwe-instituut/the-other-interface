@@ -22,7 +22,6 @@ export const CategoryGalaxy: React.FC = () => {
   } = usePresenter()
 
   const { t } = useTypeSafeTranslation('category')
-  const showPagination = !isResultEmpty && !isResultAmountLoading && !isError
 
   const renderMainContent = () => {
     if (isError) {
@@ -66,16 +65,14 @@ export const CategoryGalaxy: React.FC = () => {
 
       <GalaxyFooter
         galaxyPagination={
-          showPagination && (
-            <GalaxyPagination
-              currentPageNumber={currentPageNumber}
-              pageAmount={pageAmount}
-              isResultAmountLoading={isResultAmountLoading}
-              handleLeftClick={decreasePageNumber}
-              handleRightClick={increasePageNumber}
-              isResultEmpty={isResultEmpty}
-            />
-          )
+          <GalaxyPagination
+            currentPageNumber={currentPageNumber}
+            pageAmount={pageAmount}
+            isResultAmountLoading={isResultAmountLoading}
+            handleLeftClick={decreasePageNumber}
+            handleRightClick={increasePageNumber}
+            isResultEmpty={isResultEmpty}
+          />
         }
       />
     </div>

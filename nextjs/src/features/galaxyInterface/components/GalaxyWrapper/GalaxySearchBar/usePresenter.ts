@@ -38,7 +38,7 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
 
   const { t } = useTypeSafeTranslation('category')
   const { pageCategory } = usePageCategory()
-  const { data, isLoading, isError } = useSearchByCategoryQuery({
+  const { data, isLoading, isError, fetchStatus } = useSearchByCategoryQuery({
     category: pageCategory,
     text: search,
     page: pageNumber,
@@ -146,7 +146,8 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
     selectedFilters,
     handleSelectFilter: selectFilter,
     removeFilter,
-    isError,
-    isLoading,
+    isSearchError: isError,
+    // see https://github.com/TanStack/query/issues/3584
+    isSearchLoading: isLoading && fetchStatus !== 'idle',
   }
 }

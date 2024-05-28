@@ -13,13 +13,16 @@ import { useSearchBarPosition } from './useSearchBarPosition'
 import CloseIconSmall from '@/icons/close-icon-small.svg'
 import { cn } from '@/features/ui/utils/cn'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
+import { useTotalCounterQuery } from '@/features/galaxyInterface/galaxies/MainGalaxy/hooks/useTotalCounterQuery'
+import { Loader } from '@/features/shared/components/Loading/Loading'
+import ErrorBox from '@/features/shared/components/Error/ErrorBox'
 
 type Props = {
   total?: number
   isNoActiveSearch?: boolean
 }
 
-export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) => {
+export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch }) => {
   const {
     category,
     isSearchModeActive,
@@ -38,23 +41,49 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) =>
     handleSelectFilter,
     selectedFilters,
     removeFilter,
-    isLoading,
-    isError,
+    isSearchLoading,
+    isSearchError,
   } = usePresenter(isNoActiveSearch)
 
   const { offset, searchBarHeight, wrapRef } = useSearchBarPosition(selectedFilters)
+  const {
+    data: total,
+    isLoading: isTotalLoading,
+    fetchStatus,
+    isError: isTotalError,
+  } = useTotalCounterQuery(isNoActiveSearch)
 
-  const showPagination = !isLoading && !isError
+  const renderPaginationContent = () => {
+    if (isTotalError || isSearchError) {
+      return <ErrorBox className={TypographyVariants({ social: 'sm' })} />
+    }
+
+    // see https://github.com/TanStack/query/issues/3584
+    if ((isTotalLoading && fetchStatus !== 'idle') || isSearchLoading) {
+      return (
+        <div className="ml-2 flex h-full items-center justify-center">
+          <Loader />
+        </div>
+      )
+    }
+
+    return (
+      <>
+        <p className={cn('text-pink.100', TypographyVariants({ social: 'textfield' }))}>
+          {total ? total : searchResultAmount}
+        </p>
+        <p className={cn('text-pink.100', TypographyVariants({ social: 'textfield' }))}>
+          {t('resultsFor')}
+        </p>
+      </>
+    )
+  }
 
   return (
     <Grid
       position="relative"
       height={'auto'}
-      templateColumns={
-        showPagination
-          ? '160px minmax(20px, 1fr) minmax(95px, auto)'
-          : 'minmax(20px, 1fr) minmax(95px, auto)'
-      }
+      templateColumns={'160px minmax(20px, 1fr) minmax(95px, auto)'}
       gap="4"
       backgroundColor="blueAlpha.100"
       zIndex={FOOTER_Z_INDEX}
@@ -65,20 +94,13 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch }) =>
       bottom={`${offset}px`}
       className="px-4"
     >
-      {showPagination && (
-        <Flex
-          flexDirection="column"
-          alignItems="flex-start"
-          className={'h-[60px] justify-center self-end pt-1'}
-        >
-          <p className={cn('text-pink.100', TypographyVariants({ social: 'textfield' }))}>
-            {total ? total : searchResultAmount}
-          </p>
-          <p className={cn('text-pink.100', TypographyVariants({ social: 'textfield' }))}>
-            {t('resultsFor')}
-          </p>
-        </Flex>
-      )}
+      <Flex
+        flexDirection="column"
+        alignItems="flex-start"
+        className={'h-[60px] justify-center self-end pt-1'}
+      >
+        {renderPaginationContent()}
+      </Flex>
 
       <div ref={wrapRef} className="flex flex-wrap gap-0 p-0">
         <div className="mr-2 pt-1">
