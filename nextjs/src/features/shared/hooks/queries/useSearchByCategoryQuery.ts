@@ -35,7 +35,19 @@ export function useSearchByCategoryQuery({
       case SEARCH_CATEGORIES.stories:
         const response = await api.searchByStories({
           searchTerm: text || undefined,
-          filterTerm: decodedFilters.length !== 0 ? decodedFilters[0].id : undefined,
+          locationsFilterTerm:
+            decodedFilters.length !== 0 && decodedFilters[0].field === 'location'
+              ? decodedFilters[0].id
+              : undefined,
+          themesFilterTerm:
+            decodedFilters.length !== 0 && decodedFilters[0].field === 'theme'
+              ? decodedFilters[0].id
+              : undefined,
+
+          authorFilterTerm:
+            decodedFilters.length !== 0 && decodedFilters[0].field === 'author'
+              ? decodedFilters[0].id
+              : undefined,
           page,
           pageSize: ZOOM2_RECORDS_PER_PAGE,
         })

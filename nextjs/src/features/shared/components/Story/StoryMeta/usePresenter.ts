@@ -33,7 +33,6 @@ function formatPublicationDate(
 
 function formatAuthor(author?: AuthorEntity['attributes'] | null) {
   if (!author) return undefined
-
   return `${capitalizeFirstLetter(author.firstName)}${
     author.insertion ? ' ' + author.insertion : ''
   }${' ' + capitalizeFirstLetter(author.lastName)}`
@@ -83,7 +82,12 @@ export const usePresenter = () => {
       story?.publicationDate?.displayType,
       story?.publicationDate?.date
     ),
-    authorFormatted: story?.author ? formatAuthor(story?.author?.data?.attributes) : '',
+    authorFormatted: story?.author
+      ? {
+          name: formatAuthor(story?.author?.data?.attributes),
+          id: story.author.data?.id,
+        }
+      : null,
     themes: story?.themes?.data?.map(theme => ({ name: theme.attributes?.name, id: theme.id })),
     linkedPeopleRecords: getUniqueById(linkedPeopleRecords),
     locations: story?.locations?.data?.map(location => ({

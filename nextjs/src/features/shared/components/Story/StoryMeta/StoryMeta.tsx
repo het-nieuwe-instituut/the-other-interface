@@ -46,9 +46,9 @@ export const StoryMeta: React.FC = () => {
             href={addLocaleToUrl(
               `/landingpage?category=stories&filters=${encodeFilters([
                 {
-                  field: 'theme',
-                  value: '',
-                  id: '',
+                  field: 'author',
+                  value: authorFormatted.name || '',
+                  id: authorFormatted.id || '',
                 },
               ])}&searchResult=true`,
               lang
@@ -62,7 +62,7 @@ export const StoryMeta: React.FC = () => {
               fontWeight={700}
             >
               {storiesT.t('by', {
-                author: authorFormatted,
+                author: authorFormatted.name,
               })}
             </Text>
           </NextLink>
