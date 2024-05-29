@@ -1,12 +1,13 @@
 'use client'
+
 import { ScrollToContent } from '@/features/pages/utils/utils'
+import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import useScroll from '@/features/shared/hooks/useScroll'
 import { ParagraphWithLineClamp } from '@/features/ui/components/Paragraph/ParagraphWithLineClamp'
 import { NavButton } from '@/features/ui/components/nav-button/component'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { cn } from '@/features/ui/utils/cn'
 import { useState } from 'react'
-import { useTypeSafeTranslation } from '../../hooks/translations'
 
 interface Props {
   title?: string
@@ -24,7 +25,7 @@ export const PageHeader: React.FC<Props> = ({ title, preface, constrainPreface }
       onClick={ScrollToContent}
       className={cn(
         scrollPosition < 750 ? 'cursor-pointer' : 'cursor-text',
-        ' text-left flex flex-col gap-4'
+        'text-left flex flex-col gap-4'
       )}
     >
       <h1 className={TypographyVariants({ impact: 'xl' })}>{title}</h1>
@@ -34,7 +35,6 @@ export const PageHeader: React.FC<Props> = ({ title, preface, constrainPreface }
             disableLineClamp={!constrainPrefaceState}
             ReadmoreComponent={
               <NavButton
-                className="truncate-button"
                 onClick={() => setConstrainPreface(false)}
                 intent={'secondary'}
                 variant={'footerPrimary'}

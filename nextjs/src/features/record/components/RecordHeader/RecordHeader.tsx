@@ -1,8 +1,8 @@
-import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import { Category } from '@/features/shared/utils/categories'
 import { useParams } from 'next/navigation'
 import { useRecordDetailQuery } from '../../hooks/useRecordDetailQuery'
 import RecordCarousel from '../RecordCarousel/RecordCarousel'
+import { PageHeader } from '@/features/editorial/components/PageHeader/PageHeader'
 
 export const RecordHeader = () => {
   const params = useParams()
