@@ -7,7 +7,7 @@ import { FilterInput, CloseButton } from './fragments'
 import { CategorySuggestions } from '../CategorySuggestions/CategorySuggestions'
 import { GoButton } from './fragments/GoButton'
 import { SearchButton } from './fragments/SearchButton'
-import { Suggestions } from '../Suggestions/Suggestions'
+import { COLLECTION_HILIGHT_ID, Suggestions } from '../Suggestions/Suggestions'
 import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/SearchFilterBox'
 import { useSearchBarPosition } from './useSearchBarPosition'
 import CloseIconSmall from '@/icons/close-icon-small.svg'
@@ -17,6 +17,7 @@ import { useTotalCounterQuery } from '@/features/galaxyInterface/galaxies/MainGa
 import { Loader } from '@/features/shared/components/Loading/Loading'
 import ErrorBox from '@/features/shared/components/Error/ErrorBox'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { useMemo } from 'react'
 
 type Props = {
   total?: number
@@ -54,6 +55,11 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }
     fetchStatus,
     isError: isTotalError,
   } = useTotalCounterQuery(isNoActiveSearch)
+
+  const isCollectionHighlightsSelected: boolean = useMemo(
+    () => selectedFilters.some(filter => filter.id === COLLECTION_HILIGHT_ID),
+    [selectedFilters]
+  )
 
   const renderPaginationContent = () => {
     if (isTotalError || isSearchError) {
@@ -161,13 +167,15 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }
         <CategorySuggestions />
       </SuggestionBar>
 
-      <SuggestionBar
-        isOpen={isUserTyping && !isCategorySuggestionsOpen}
-        label={t('suggestions')}
-        offset={searchBarHeight}
-      >
-        <Suggestions handleSelectFilter={handleSelectFilter} />
-      </SuggestionBar>
+      {!isCollectionHighlightsSelected && (
+        <SuggestionBar
+          isOpen={isUserTyping && !isCategorySuggestionsOpen}
+          label={t('suggestions')}
+          offset={searchBarHeight}
+        >
+          <Suggestions handleSelectFilter={handleSelectFilter} />
+        </SuggestionBar>
+      )}
     </Grid>
   )
 }

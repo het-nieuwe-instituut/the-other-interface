@@ -1,40 +1,46 @@
 query triplyRecord($id: ID) {
-    triplyRecord(id: $id) {
-        data {
-            ...TriplyRecordFragment
-        }
+  triplyRecord(id: $id) {
+    data {
+      ...TriplyRecordFragment
     }
+  }
 }
 
 query triplyRecords(
-    $filters: TriplyRecordFiltersInput
-    $pagination: PaginationArg
-    $sort: [String]
-    $publicationState: PublicationState
+  $filters: TriplyRecordFiltersInput
+  $pagination: PaginationArg
+  $sort: [String]
+  $publicationState: PublicationState
 ) {
-    triplyRecords(filters: $filters, pagination: $pagination, sort: $sort, publicationState: $publicationState) {
-        data {
-            ...TriplyRecordFragment
-        }
-        meta {
-            ...ResponseCollectionMetaFragment
-        }
+  triplyRecords(
+    filters: $filters
+    pagination: $pagination
+    sort: $sort
+    publicationState: $publicationState
+  ) {
+    data {
+      ...TriplyRecordFragment
     }
+    meta {
+      ...ResponseCollectionMetaFragment
+    }
+  }
 }
 
 fragment TriplyRecordFragment on TriplyRecordEntity {
-    id
-    attributes {
-        recordId
-        type
-        stories {
-            data {
-                ...StoryFragment
-            }
-        }
-        createdAt
-        updatedAt
-        publishedAt
-        subject_collectionHighlights
+  id
+  attributes {
+    recordId
+    type
+    stories {
+      data {
+        ...StoryFragment
+      }
     }
+    createdAt
+    updatedAt
+    publishedAt
+    subject_collectionHighlights
+    label
+  }
 }

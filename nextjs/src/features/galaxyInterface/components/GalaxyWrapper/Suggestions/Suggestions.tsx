@@ -1,5 +1,8 @@
 import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/SearchFilterBox'
-import { Filter } from '@/features/shared/hooks/search/useFilters'
+import { State } from '@/features/shared/configs/store'
+import { Filter, useFilters } from '@/features/shared/hooks/search/useFilters'
+import { useMemo } from 'react'
+import { useSelector } from 'react-redux'
 
 const mockData = [
   {
@@ -43,9 +46,33 @@ type Props = {
 }
 
 export const Suggestions: React.FC<Props> = ({ handleSelectFilter }) => {
+  const { searchValue } = useSelector((state: State) => state.shared)
+  const searchIsMatchShowingCollectionHighlight = CollectionHighlightsFilter.value
+    .toLowerCase()
+    .includes(searchValue.toLowerCase())
+
+  const { selectedFilters } = useFilters()
+
+  console.log('selectedFilters', selectedFilters)
+
+  const items = useMemo(() => {
+    const filtersWithoutCollectionHighlights = selectedFilters.filter(
+      filter => filter.id !== COLLECTION_HILIGHT_ID
+    )
+
+    if (
+      searchIsMatchShowingCollectionHighlight &&
+      filtersWithoutCollectionHighlights.length === 0
+    ) {
+      return [CollectionHighlightsFilter, ...mockData]
+    }
+
+    return mockData
+  }, [searchIsMatchShowingCollectionHighlight, mockData, selectedFilters])
+
   return (
     <>
-      {[...[CollectionHighlightsFilter], ...mockData].map(item => (
+      {items.map(item => (
         <div className="max-w-full" key={item.id}>
           <SearchFilterBox
             category={item.field}

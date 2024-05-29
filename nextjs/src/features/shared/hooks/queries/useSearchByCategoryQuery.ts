@@ -13,7 +13,7 @@ import initApiClientService from '../../utils/initApiClientService'
 import { useLocale } from '../useLocale'
 import { Filter, useFilters } from '../search/useFilters'
 import { COLLECTION_HILIGHT_ID } from '@/features/galaxyInterface/components/GalaxyWrapper/Suggestions/Suggestions'
-import { EnumTriplyrecordType } from 'src/generated/graphql'
+import { searchCategoryToTriplyMapper } from '../../mappers/searchCategoryToTriplyMapper'
 
 export function useSearchByCategoryQuery({
   category,
@@ -34,16 +34,23 @@ export function useSearchByCategoryQuery({
   // TODO: mix story search
   const queryFn = async () => {
     if (decodedFilters?.find(filter => filter.id === COLLECTION_HILIGHT_ID)) {
+      const type = searchCategoryToTriplyMapper(category)
       const response = await api.searchBySelectedHighlights({
         searchTerm: text || undefined,
-        type: EnumTriplyrecordType.Archive,
+        type,
         page,
         pageSize: ZOOM2_RECORDS_PER_PAGE,
       })
 
       return {
-        items: [],
-        total: 0,
+        items:
+          response?.triplyRecords?.data?.map(record => ({
+            id: record.id,
+            title: record.attributes?.label,
+            thumbnail: '',
+            type: record?.attributes?.type,
+          })) ?? [],
+        total: response?.triplyRecords?.meta?.pagination?.total ?? 0,
       }
     }
     switch (category) {
