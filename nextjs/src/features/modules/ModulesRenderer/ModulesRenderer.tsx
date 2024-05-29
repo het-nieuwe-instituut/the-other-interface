@@ -60,8 +60,11 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
           }
 
           if (component?.__typename === 'ComponentModulesPullquote') {
+            if (!component.text) {
+              return null
+            }
             return (
-              <Pullquote key={keyExtractor(component.id, index, array)} component={component} />
+              <Pullquote key={keyExtractor(component.id, index, array)}>{component.text}</Pullquote>
             )
           }
 
