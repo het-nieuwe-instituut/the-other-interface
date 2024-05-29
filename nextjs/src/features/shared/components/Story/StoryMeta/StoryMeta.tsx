@@ -132,8 +132,8 @@ export const StoryMeta: React.FC = () => {
                     `/landingpage?category=stories&filters=${encodeFilters([
                       {
                         field: 'theme',
-                        value: theme ?? '',
-                        id: theme ? theme : '',
+                        value: theme.name ?? '',
+                        id: theme.id ?? '',
                       },
                     ])}&searchResult=true`,
                     lang
@@ -145,7 +145,7 @@ export const StoryMeta: React.FC = () => {
                     borderBottom={'1px solid'}
                     borderColor={'blackAlpha.100'}
                   >
-                    {theme}
+                    {theme.name}
                     {hasItemAfter && ',  '}
                   </Text>
                 </NextLink>

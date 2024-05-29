@@ -33,10 +33,11 @@ export function useSearchByCategoryQuery({
   const queryFn = async () => {
     switch (category) {
       case SEARCH_CATEGORIES.stories:
+        const test = filters ? decodeFilters(filters)[0].id : '18'
         const response = await api.searchByStories({
-          searchTerm: text || undefined,
-          filterTerm: filters ? decodeFilters(filters)[0].value : '',
-          locale,
+          // searchTerm: text || undefined,
+          filterTerm: test,
+          // locale,
           page,
           pageSize: ZOOM2_RECORDS_PER_PAGE,
         })
@@ -46,20 +47,20 @@ export function useSearchByCategoryQuery({
         return { items: stories, total }
       case SEARCH_CATEGORIES.all:
         const storiesData = await api.searchByStories({
-          searchTerm: text ?? '',
+          // searchTerm: text ?? '',
           page,
           pageSize: 1,
-          locale,
+          // locale,
         })
 
         const storiesTotal = storiesData?.stories?.meta?.pagination?.total ?? 0
         const storyPagesAmount = Math.ceil(storiesTotal / STORIES_PER_PAGE)
 
         const storiesSearchResponse = await api.searchByStories({
-          searchTerm: text ?? '',
+          // searchTerm: text ?? '',
           page: page > storyPagesAmount ? storyPagesAmount : page,
           pageSize: STORIES_PER_PAGE,
-          locale,
+          // locale,
         })
 
         const searchStories =
@@ -108,8 +109,8 @@ export function useSearchByCategoryQuery({
 
   const queryKey =
     category === SEARCH_CATEGORIES.stories
-      ? ['searchByStories', category, text, page, locale]
-      : ['search', category, text, page]
+      ? ['searchByStories', category, text, page, locale, filters]
+      : ['search', category, text, page, filters]
 
   return useQuery(queryKey, queryFn, {
     enabled,

@@ -84,7 +84,7 @@ export const usePresenter = () => {
       story?.publicationDate?.date
     ),
     authorFormatted: story?.author ? formatAuthor(story?.author?.data?.attributes) : '',
-    themes: story?.themes?.data?.map(theme => theme.attributes?.name),
+    themes: story?.themes?.data?.map(theme => ({ name: theme.attributes?.name, id: theme.id })),
     linkedPeopleRecords: getUniqueById(linkedPeopleRecords),
     locations: story?.locations?.data?.map(location => location.attributes?.city),
     timeframe: formatTimeframe(story?.timeframe),
