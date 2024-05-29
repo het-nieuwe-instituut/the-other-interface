@@ -1,43 +1,33 @@
-import debounce from 'lodash/debounce'
 import { RefObject, useEffect, useState } from 'react'
 
-export function useLineClamp<T extends HTMLElement>(
+/**
+ * line height needs to be set in the css to work
+ */
+export const useClampDetectionByLineHeight = <T extends HTMLElement>(
   ref: RefObject<T>,
-  { lines }: { lines: number }
-) {
-  const [clamps, setClamps] = useState(true)
-
+  { lineCount = 8 }
+) => {
+  const [shouldClamp, setShouldClamp] = useState(false)
   useEffect(() => {
-    const checkClamps = () => {
-      if (!ref.current) return
+    const checkClamp = () => {
+      const element = ref.current
+      if (!element) return
 
-      const initialValues = {
-        webkitLineClamp: ref.current.style.webkitLineClamp,
-        display: ref.current.style.display,
-        webkitBoxOrient: ref.current.style.webkitBoxOrient,
-        overflow: ref.current.style.overflow,
-      }
+      const lineHeight = parseFloat(getComputedStyle(element).lineHeight)
 
-      ref.current.style.webkitLineClamp = lines.toString()
-      ref.current.style.display = '-webkit-box'
-      ref.current.style.webkitBoxOrient = 'vertical'
-      ref.current.style.overflow = 'hidden'
+      const maxHeight = lineHeight * lineCount - lineCount
+      const elementHeight = element.scrollHeight
 
-      setClamps(ref.current.clientHeight !== ref.current.scrollHeight)
-
-      ref.current.style.webkitLineClamp = initialValues.webkitLineClamp
-      ref.current.style.display = initialValues.display
-      ref.current.style.webkitBoxOrient = initialValues.webkitBoxOrient
-      ref.current.style.overflow = initialValues.overflow
+      setShouldClamp(elementHeight > maxHeight)
     }
 
-    const debouncedCheck = debounce(checkClamps, 50)
+    checkClamp()
 
-    checkClamps()
+    window.addEventListener('resize', checkClamp)
+    return () => {
+      window.removeEventListener('resize', checkClamp)
+    }
+  }, [lineCount, ref])
 
-    window.addEventListener('resize', debouncedCheck)
-    return () => window.removeEventListener('resize', debouncedCheck)
-  }, [lines, ref])
-
-  return clamps
+  return shouldClamp
 }

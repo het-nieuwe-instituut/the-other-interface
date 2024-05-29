@@ -1,4 +1,4 @@
-import { EditorialPageWrapper } from '@/features/editorialInterface/components/EditorialPageWrapper'
+import { EditorialPageWrapper } from '@/features/editorial/components/EditorialPageWrapper'
 import { Paragraph } from '@/features/ui/components/Paragraph/Paragraph'
 import { ParagraphWithLineClamp } from '@/features/ui/components/Paragraph/ParagraphWithLineClamp'
 
