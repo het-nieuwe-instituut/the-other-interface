@@ -1,8 +1,6 @@
-import { ScrollToContent } from '@/features/pages/utils/utils'
+import { PageHeader } from '@/features/shared/components/PageHeader/PageHeader'
 import { Category } from '@/features/shared/utils/categories'
 import { useParams } from 'next/navigation'
-import { RecordDescription } from '../../fragments/RecordDescription'
-import { RecordTitle } from '../../fragments/RecordTitle'
 import { useRecordDetailQuery } from '../../hooks/useRecordDetailQuery'
 import RecordCarousel from '../RecordCarousel/RecordCarousel'
 
@@ -10,10 +8,6 @@ export const RecordHeader = () => {
   const params = useParams()
   const category = params?.category as Category
   const id = params?.id as string
-
-  const handleScrollToContentClick = () => {
-    ScrollToContent()
-  }
 
   const { data: record } = useRecordDetailQuery({
     type: category,
@@ -23,11 +17,11 @@ export const RecordHeader = () => {
 
   return (
     <div>
-      <RecordTitle
-        title={record?.title ?? ''}
-        handleScrollToContentClick={handleScrollToContentClick}
-      />
-      <RecordDescription description={record?.description ?? ''} />
+      <PageHeader
+        title={record?.title ?? undefined}
+        preface={record?.description ?? undefined}
+        constrainPreface={true}
+      ></PageHeader>
       {record?.thumbnail && record?.thumbnail.length > 0 && (
         <RecordCarousel imageUrls={record?.thumbnail ?? []} />
       )}

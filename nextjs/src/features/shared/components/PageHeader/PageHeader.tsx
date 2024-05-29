@@ -1,12 +1,12 @@
 'use client'
-import { Box, Link, Text } from '../../configs/chakra'
-import { useRef } from 'react'
-import useScroll from '@/features/shared/hooks/useScroll'
-import { useTypeSafeTranslation } from '../../hooks/translations'
-import { Markdown } from '../Markdown/Markdown'
-import styles from './PageHeader.module.css'
-import { useLimitPrefaceHeight } from './useLimitPrefaceHeight'
 import { ScrollToContent } from '@/features/pages/utils/utils'
+import useScroll from '@/features/shared/hooks/useScroll'
+import { ParagraphWithLineClamp } from '@/features/ui/components/Paragraph/ParagraphWithLineClamp'
+import { NavButton } from '@/features/ui/components/nav-button/component'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
+import { cn } from '@/features/ui/utils/cn'
+import { useState } from 'react'
+import { useTypeSafeTranslation } from '../../hooks/translations'
 
 interface Props {
   title?: string
@@ -17,44 +17,36 @@ interface Props {
 export const PageHeader: React.FC<Props> = ({ title, preface, constrainPreface }) => {
   const commonT = useTypeSafeTranslation('common')
   const { scrollPosition } = useScroll()
-
-  const prefaceRef = useRef<HTMLDivElement>(null)
-  const [limitPrefaceHeight, setLimitPrefaceHeight] = useLimitPrefaceHeight(
-    prefaceRef,
-    constrainPreface
-  )
+  const [constrainPrefaceState, setConstrainPreface] = useState(constrainPreface)
 
   return (
-    <Box onClick={ScrollToContent} cursor={scrollPosition < 750 ? 'pointer' : 'cursor'}>
-      <Text as={'h1'} textStyle={'h1'} pb={'md'}>
-        {title}
-      </Text>
-      {preface && (
-        <Box position="relative" maxW={'64em'}>
-          <div
-            ref={prefaceRef}
-            className={limitPrefaceHeight ? styles.limitedMarkdownContainer : undefined}
-          >
-            <Markdown>{preface}</Markdown>
-          </div>
-          {limitPrefaceHeight && (
-            <>
-              <div className={styles.blur} />
-              {renderReadMoreButton()}
-            </>
-          )}
-        </Box>
+    <button
+      onClick={ScrollToContent}
+      className={cn(
+        scrollPosition < 750 ? 'cursor-pointer' : 'cursor-text',
+        ' text-left flex flex-col gap-4'
       )}
-    </Box>
+    >
+      <h1 className={TypographyVariants({ impact: 'xl' })}>{title}</h1>
+      {preface && (
+        <div className="relative flex max-w-[64em] flex-col items-start justify-start gap-5">
+          <ParagraphWithLineClamp
+            disableLineClamp={!constrainPrefaceState}
+            ReadmoreComponent={
+              <NavButton
+                className="truncate-button"
+                onClick={() => setConstrainPreface(false)}
+                intent={'secondary'}
+                variant={'footerPrimary'}
+              >
+                {commonT.t('readMore')}
+              </NavButton>
+            }
+          >
+            {preface}
+          </ParagraphWithLineClamp>
+        </div>
+      )}
+    </button>
   )
-
-  function renderReadMoreButton() {
-    return (
-      <Link onClick={() => setLimitPrefaceHeight(false)}>
-        <Text as="span" color="currentcolor">
-          {commonT.t('readMore')}
-        </Text>
-      </Link>
-    )
-  }
 }
