@@ -25,7 +25,7 @@ export const PageHeader: React.FC<Props> = ({ title, preface, constrainPreface }
       onClick={ScrollToContent}
       className={cn(
         scrollPosition < 750 ? 'cursor-pointer' : 'cursor-text',
-        'text-left flex flex-col gap-4'
+        'text-left flex flex-col gap-4  max-w-[calc(100vw-40px)]'
       )}
     >
       <h1 className={TypographyVariants({ impact: 'xl' })}>{title}</h1>
