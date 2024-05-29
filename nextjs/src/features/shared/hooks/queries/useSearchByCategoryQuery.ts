@@ -11,7 +11,7 @@ import { mapCategoryToTriplyEnum } from '../../helpers/mapCategoryToTriplyEnum'
 import { storyToRecordMapper } from '../../helpers/extractStoryData'
 import initApiClientService from '../../utils/initApiClientService'
 import { useLocale } from '../useLocale'
-import { decodeFilters } from '../../helpers/searchHelpers'
+import { useFilters } from '../search/useFilters'
 
 export function useSearchByCategoryQuery({
   category,
@@ -29,14 +29,15 @@ export function useSearchByCategoryQuery({
   const api = initApiClientService()
   const locale = useLocale()
 
+  const { decodedFilters } = useFilters()
+
   // TODO: mix story search
   const queryFn = async () => {
     switch (category) {
       case SEARCH_CATEGORIES.stories:
-        const decordedFilters = filters ? decodeFilters(filters)[0].id : undefined
         const response = await api.searchByStories({
           searchTerm: text || undefined,
-          filterTerm: decordedFilters,
+          filterTerm: decodedFilters[0].id,
           // locale,
           page,
           pageSize: ZOOM2_RECORDS_PER_PAGE,
@@ -44,6 +45,7 @@ export function useSearchByCategoryQuery({
         const stories =
           response?.stories?.data?.filter(Boolean).map(story => storyToRecordMapper(story)) ?? []
         const total = response?.stories?.meta?.pagination?.total
+        console.log(total)
         return { items: stories, total }
       case SEARCH_CATEGORIES.all:
         const storiesData = await api.searchByStories({
@@ -113,7 +115,7 @@ export function useSearchByCategoryQuery({
       : ['search', category, text, page]
 
   return useQuery(queryKey, queryFn, {
-    enabled: !!filters,
+    enabled,
     refetchOnWindowFocus: false,
   })
 }
