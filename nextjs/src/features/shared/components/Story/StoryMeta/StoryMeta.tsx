@@ -1,24 +1,51 @@
 'use client'
 import { ThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
+import { useStoryMetaByIdQuery } from '@/features/shared/hooks/queries/useStoryMetaByIdQuery'
+import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { useLocale } from '@/features/shared/hooks/useLocale'
 import { CATEGORIES } from '@/features/shared/utils/categories'
-import { Link, Text } from '@chakra-ui/react'
-import { usePresenter } from './usePresenter'
+import { getUniqueById } from '@/features/shared/utils/get-unique-by-id'
+import { NavLinkButton } from '@/features/ui/components/nav-link-button/component'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
+import { useParams } from 'next/navigation'
+import { EnumTriplyrecordType, TriplyRecord } from 'src/generated/graphql'
+import { formatAuthor, formatPublicationDate, formatTimeframe, getPeopleUrl } from './helpers'
 
 export const StoryMeta: React.FC = () => {
-  const {
-    storiesT,
-    story,
-    isLoading,
-    publicationDateFormatted,
-    authorFormatted,
-    themes,
-    linkedPeopleRecords,
-    locations,
-    timeframe,
-    childrenRelation,
-    parentRelation,
+  const storiesT = useTypeSafeTranslation('stories')
+  const lang = useLocale()
+
+  const params = useParams()
+  const id = params?.id as string
+
+  const { data, isLoading } = useStoryMetaByIdQuery({
+    id,
+    options: { refetchOnWindowFocus: false, suspense: true },
+  })
+  const story = data?.storyMetaByLocale?.data?.attributes
+
+  const publicationDateFormatted = formatPublicationDate(
     lang,
-  } = usePresenter()
+    story?.publicationDate?.displayType,
+    story?.publicationDate?.date
+  )
+  const authorFormatted = story?.author ? formatAuthor(story?.author?.data?.attributes) : ''
+  const themes = story?.themes?.data?.map(theme => theme.attributes?.name).join(', ')
+  const locations = story?.locations?.data?.map(location => location.attributes?.city).join(', ')
+  const timeframe = formatTimeframe(story?.timeframe)
+  const parentRelation = story?.parent_story
+  const childrenRelation = story?.child_stories
+
+  const linkedPeopleRecords = getUniqueById(
+    story?.triplyRecords?.data
+      .filter((record): record is { attributes: TriplyRecord } => Boolean(record.attributes))
+      .filter(record => record.attributes?.type === EnumTriplyrecordType.People)
+      .map(record => ({
+        id: record.attributes.recordId,
+        title: record.attributes.people?.title,
+        url: getPeopleUrl(record.attributes.recordId, lang),
+      })) || []
+  )
 
   if (isLoading) {
     return <ThemedSpinner />
@@ -27,79 +54,63 @@ export const StoryMeta: React.FC = () => {
   if (!story) return null
 
   return (
-    <div>
-      <div className="mb-5">
+    <div className="flex flex-col gap-4">
+      <div className="flex flex-col">
         {publicationDateFormatted && (
-          <Text textStyle={'socialLarge.lg'} fontWeight={700}>
-            {storiesT.t('published', {
-              date: publicationDateFormatted,
-            })}
-          </Text>
+          <p className={TypographyVariants({ social: 'sm', className: 'font-bold' })}>
+            {publicationDateFormatted}
+          </p>
         )}
 
         {authorFormatted && (
-          <Text textStyle={'socialLarge.lg'} fontWeight={700}>
+          <p className={TypographyVariants({ social: 'sm', className: 'font-bold' })}>
             {storiesT.t('by', {
               author: authorFormatted,
             })}
-          </Text>
+          </p>
         )}
       </div>
       {story.shortDescription && (
-        <Text textStyle={'socialLarge.lg'} marginBottom={'md'}>
-          {story.shortDescription}
-        </Text>
+        <p className={TypographyVariants({ social: 'sm' })}>{story.shortDescription}</p>
       )}
       {parentRelation && parentRelation?.data?.id && (
-        <div className="mb-5">
-          <Text textStyle={'socialLarge.lg'} fontWeight={700}>
-            {storiesT.t('parentStory')}
-          </Text>
-          <Text textStyle={'socialLarge.lg'} mt={1}>
-            <Link
-              href={`/detail/${CATEGORIES.stories}/${parentRelation?.data?.id}?lang=${lang}`}
-              borderBottom={'1px solid'}
-              borderColor={'blackAlpha.100'}
-            >
-              {parentRelation?.data?.attributes?.title}
-            </Link>
-          </Text>
-        </div>
+        <MetaField name={storiesT.t('parentStory')}>
+          <NavLinkButton
+            variant={'metaData'}
+            href={`/detail/${CATEGORIES.stories}/${parentRelation?.data?.id}?lang=${lang}`}
+          >
+            {parentRelation?.data?.attributes?.title}
+          </NavLinkButton>
+        </MetaField>
       )}
       {childrenRelation && childrenRelation?.data && childrenRelation.data.length > 0 && (
-        <div className="mb-5">
-          <Text textStyle={'socialLarge.lg'} fontWeight={700}>
-            {storiesT.t('subStories')}
-          </Text>
-          {childrenRelation?.data?.map((child, index, array) => {
-            const hasItemAfter = array.length - 1 !== index
-
-            return (
-              <Text textStyle={'socialLarge.lg'} key={child.id} mr={1} mt={1} mb={2}>
-                <Link
+        <MetaField name={storiesT.t('subStories')}>
+          <div>
+            {childrenRelation?.data?.map(child => {
+              return (
+                <NavLinkButton
+                  key={child.id}
+                  variant={'metaData'}
                   href={`/detail/${CATEGORIES.stories}/${child.id}?lang=${lang}`}
-                  borderBottom={'1px solid'}
-                  borderColor={'blackAlpha.100'}
                 >
-                  {child?.attributes?.title}
-                  {hasItemAfter && ','}
-                </Link>
-              </Text>
-            )
-          })}
-        </div>
+                  {child.attributes?.title}
+                </NavLinkButton>
+              )
+            })}
+          </div>
+        </MetaField>
       )}
       {/* We decided to remove this for now, but still there is a possiblity that after test we will add it back, so we will keep it here for now. */}
       {/* {siblingsRelation && siblingsRelation.length > 0 && (
-        <Box marginBottom={'md'}>
-          <Text textStyle={'socialLarge.lg'} fontWeight={700}>
+        <Box marginBottom={'sm'}>
+          <p className={TypographyVariants({ social: 'sm' })}>
             {storiesT.t('siblingsStories')}
-          </Text>
+          </p>
           {siblingsRelation?.map((sibling, index, array) => {
             const hasItemAfter = array.length - 1 !== index
 
             return (
-              <Text textStyle={'socialLarge.lg'} key={sibling.id} mr={1} mt={1} mb={2}>
+              <p className={TypographyVariants({ social: 'md' })} key={sibling.id} mr={1} mt={1} mb={2}>
                 <Link
                   href={`/detail/${CATEGORIES.stories}/${sibling.id}?lang=${lang}`}
                   borderBottom={'1px solid'}
@@ -108,70 +119,46 @@ export const StoryMeta: React.FC = () => {
                   {sibling?.attributes?.title}
                   {hasItemAfter && ','}
                 </Link>
-              </Text>
+              </p>
             )
           })}
         </Box>
       )} */}
       {themes && (
-        <div className="mb-5">
-          <Text textStyle={'socialLarge.lg'} fontWeight={700}>
-            {storiesT.t('themes')}
-          </Text>
-          <Text textStyle={'socialLarge.lg'} marginBottom={'md'}>
-            {themes}
-          </Text>
-        </div>
+        <MetaField name={storiesT.t('themes')}>
+          <p className={TypographyVariants({ social: 'sm' })}>{themes}</p>
+        </MetaField>
       )}
       {!!linkedPeopleRecords.length && (
-        <div className="mb-5">
-          <Text textStyle={'socialLarge.lg'} fontWeight={700} mb={1}>
-            {storiesT.t('people')}
-          </Text>
-
-          <div className="flex flex-row flex-wrap gap-[2px]">
-            {linkedPeopleRecords.map((person, index, array) => {
-              const hasItemAfter = array.length - 1 !== index
-
+        <MetaField name={storiesT.t('people')}>
+          <div className="flex flex-row flex-wrap gap-x-2 gap-y-1">
+            {linkedPeopleRecords.map(person => {
               return (
-                <Text textStyle={'socialLarge.lg'} key={person.id} mr={1} mb={1}>
-                  <Link href={person.url} borderBottom={'1px solid'} borderColor={'blackAlpha.100'}>
-                    {person.title}
-                    {hasItemAfter && ','}
-                  </Link>
-                </Text>
+                <NavLinkButton key={person.id} variant={'metaData'} href={person.url}>
+                  {person.title}
+                </NavLinkButton>
               )
             })}
           </div>
-        </div>
+        </MetaField>
       )}
       {locations && (
-        <div className="mb-5">
-          <Text textStyle={'socialLarge.lg'} fontWeight={700}>
-            {storiesT.t('locations')}
-          </Text>
-          <Text textStyle={'socialLarge.lg'} marginBottom={'md'}>
-            {locations}
-          </Text>
-        </div>
+        <MetaField name={storiesT.t('locations')}>
+          <p className={TypographyVariants({ social: 'sm' })}>{locations}</p>
+        </MetaField>
       )}
       {timeframe && (
-        <div className="mb-5">
-          <Text textStyle={'socialLarge.lg'} fontWeight={700}>
-            {storiesT.t('time')}
-          </Text>
-          <Text textStyle={'socialLarge.lg'} marginBottom={'md'}>
-            {timeframe}
-          </Text>
-        </div>
+        <MetaField name={storiesT.t('time')}>
+          <p className={TypographyVariants({ social: 'sm' })}>{timeframe}</p>
+        </MetaField>
       )}
 
       {/* Should be hidden for now */}
       {/* {!!links?.length && (
-        <Box marginBottom={'md'}>
-          <Text textStyle={'socialLarge.lg'} fontWeight={700} mb={2}>
+        <Box marginBottom={'sm'}>
+          <p className={TypographyVariants({ social: 'sm' })} mb={2}>
             {storiesT.t('share')}
-          </Text>
+          </p>
 
           <ButtonsGrid
             buttonLayoutStyle={{
@@ -184,6 +171,15 @@ export const StoryMeta: React.FC = () => {
           />
         </Box>
       )} */}
+    </div>
+  )
+}
+
+const MetaField = ({ name, children }: { name?: string; children: JSX.Element }) => {
+  return (
+    <div>
+      <p className={TypographyVariants({ social: 'sm', className: 'font-bold' })}>{name}</p>
+      {children}
     </div>
   )
 }
