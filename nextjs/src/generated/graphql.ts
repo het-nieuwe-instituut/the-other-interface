@@ -2041,6 +2041,7 @@ export type SearchByStoriesQueryVariables = Exact<{
   locationsFilterTerm?: InputMaybe<Scalars['ID']>;
   themesFilterTerm?: InputMaybe<Scalars['ID']>;
   authorFilterTerm?: InputMaybe<Scalars['ID']>;
+  locale: Locale;
 }>;
 
 
@@ -3016,11 +3017,11 @@ export const StoriesDocument = gql`
 }
     `;
 export const SearchByStoriesDocument = gql`
-    query searchByStories($searchTerm: String, $page: Int, $pageSize: Int, $locationsFilterTerm: ID, $themesFilterTerm: ID, $authorFilterTerm: ID) {
+    query searchByStories($searchTerm: String, $page: Int, $pageSize: Int, $locationsFilterTerm: ID, $themesFilterTerm: ID, $authorFilterTerm: ID, $locale: Locale!) {
   stories(
     filters: {and: [{or: [{locations: {id: {eq: $locationsFilterTerm}}}, {themes: {id: {eq: $themesFilterTerm}}}, {author: {id: {eq: $authorFilterTerm}}}]}, {or: [{title: {containsi: $searchTerm}}, {description: {containsi: $searchTerm}}, {shortDescription: {containsi: $searchTerm}}]}], or: [{title: {containsi: $searchTerm}}, {description: {containsi: $searchTerm}}, {shortDescription: {containsi: $searchTerm}}]}
     pagination: {page: $page, pageSize: $pageSize}
-    locale: nl
+    locale: $locale
   ) {
     data {
       id
@@ -3879,7 +3880,7 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     stories(variables: StoriesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<StoriesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<StoriesQuery>(StoriesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'stories', 'query');
     },
-    searchByStories(variables?: SearchByStoriesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<SearchByStoriesQuery> {
+    searchByStories(variables: SearchByStoriesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<SearchByStoriesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<SearchByStoriesQuery>(SearchByStoriesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'searchByStories', 'query');
     },
     storiesRealtedWithinTheme(variables: StoriesRealtedWithinThemeQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<StoriesRealtedWithinThemeQuery> {

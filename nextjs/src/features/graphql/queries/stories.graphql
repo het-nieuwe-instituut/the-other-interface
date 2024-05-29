@@ -23,6 +23,7 @@ query searchByStories(
   $locationsFilterTerm: ID
   $themesFilterTerm: ID
   $authorFilterTerm: ID
+  $locale: Locale!
 ) {
   stories(
     filters: {
@@ -49,7 +50,7 @@ query searchByStories(
       ]
     }
     pagination: { page: $page, pageSize: $pageSize }
-    locale: nl
+    locale: $locale
   ) {
     data {
       id

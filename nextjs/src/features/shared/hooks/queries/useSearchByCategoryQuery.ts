@@ -50,6 +50,7 @@ export function useSearchByCategoryQuery({
               : undefined,
           page,
           pageSize: ZOOM2_RECORDS_PER_PAGE,
+          locale,
         })
         const stories =
           response?.stories?.data?.filter(Boolean).map(story => storyToRecordMapper(story)) ?? []
@@ -61,6 +62,7 @@ export function useSearchByCategoryQuery({
           searchTerm: text ?? '',
           page,
           pageSize: 1,
+          locale,
         })
 
         const storiesTotal = storiesData?.stories?.meta?.pagination?.total ?? 0
@@ -70,6 +72,7 @@ export function useSearchByCategoryQuery({
           searchTerm: text ?? '',
           page: page > storyPagesAmount ? storyPagesAmount : page,
           pageSize: STORIES_PER_PAGE,
+          locale,
         })
 
         const searchStories =
