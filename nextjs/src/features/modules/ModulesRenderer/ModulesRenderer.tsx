@@ -111,12 +111,22 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
           }
 
           if (component?.__typename === 'ComponentModulesTitleModule') {
+            const nextComponent = array.at(index + 1)
+            // we need to adjust for 16px between components like text module
+            const shouldAdjustForNextComponent = nextComponent?.__typename
+              ? ['ComponentModulesTextModule'].includes(nextComponent?.__typename)
+              : false
+
             const title = component.Title
+
             if (!title) {
               return null
             }
             return (
-              <Title className="pb-5" key={keyExtractor(component.id, index, array)}>
+              <Title
+                className={cn(shouldAdjustForNextComponent && '-mb-8')}
+                key={keyExtractor(component.id, index, array)}
+              >
                 {title}
               </Title>
             )
