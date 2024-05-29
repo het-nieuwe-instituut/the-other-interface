@@ -67,6 +67,7 @@ export const useFilters = ({ onSelectFilter, onRemoveFilter }: UseFiltersProps =
     selectFilter,
     clearFilters,
     encodedFilters: encodeFilters(selectedFilters),
+    decodedFilters: decodeFilters(filters),
     removeFilter,
   }
 }

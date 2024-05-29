@@ -7,7 +7,8 @@ const encodeFilters = (filters: FilterArray): string => {
   return compressed
 }
 
-const decodeFilters = (encoded: string): FilterArray => {
+const decodeFilters = (encoded: string | null | undefined): FilterArray => {
+  if (!encoded) return []
   const decompressed = LZString.decompressFromEncodedURIComponent(encoded)
   if (!decompressed) throw new Error('Decompression failed')
   return JSON.parse(decompressed)

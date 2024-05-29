@@ -1699,6 +1699,7 @@ export type TriplyRecord = {
   __typename?: 'TriplyRecord';
   archive?: Maybe<ArchiveZoomLevel3DetailType>;
   createdAt?: Maybe<Scalars['Date']>;
+  label?: Maybe<Scalars['String']>;
   object?: Maybe<ObjectsZoomLevel3DetailType>;
   people?: Maybe<PeopleZoomLevel3DetailType>;
   publication?: Maybe<PublicationZoomLevel3DetailType>;
@@ -1745,6 +1746,7 @@ export type TriplyRecordFiltersInput = {
   and?: InputMaybe<Array<TriplyRecordFiltersInput>>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
   id?: InputMaybe<IdFilterInput>;
+  label?: InputMaybe<StringFilterInput>;
   not?: InputMaybe<TriplyRecordFiltersInput>;
   or?: InputMaybe<Array<TriplyRecordFiltersInput>>;
   publishedAt?: InputMaybe<DateTimeFilterInput>;
@@ -2137,6 +2139,16 @@ export type PublicationsZoomRecordHoverQueryVariables = Exact<{
 
 
 export type PublicationsZoomRecordHoverQuery = { __typename?: 'Query', publicationsZoomRecordHover: { __typename?: 'PublicationsZoomLevelHoverType', title?: string | null, authors?: string | null, description?: string | null } };
+
+export type SearchBySelectedHighlightsQueryVariables = Exact<{
+  searchTerm?: InputMaybe<Scalars['String']>;
+  type?: InputMaybe<Scalars['String']>;
+  page?: InputMaybe<Scalars['Int']>;
+  pageSize?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type SearchBySelectedHighlightsQuery = { __typename?: 'Query', triplyRecords: { __typename?: 'TriplyRecordRelationResponseCollection', data: Array<{ __typename?: 'TriplyRecordEntity', id?: string | null, attributes?: { __typename?: 'TriplyRecord', label?: string | null, type: EnumTriplyrecordType } | null }>, meta?: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', page: number, total: number } } | null } };
 
 export type Zoom2QueryVariables = Exact<{
   entityName: EntityNames;
@@ -3405,6 +3417,28 @@ export const PublicationsZoomRecordHoverDocument = gql`
   }
 }
     `;
+export const SearchBySelectedHighlightsDocument = gql`
+    query searchBySelectedHighlights($searchTerm: String, $type: String, $page: Int, $pageSize: Int) {
+  triplyRecords(
+    filters: {and: [{label: {containsi: $searchTerm}}, {type: {eq: $type}}]}
+    pagination: {page: $page, pageSize: $pageSize}
+  ) {
+    data {
+      id
+      attributes {
+        label
+        type
+      }
+    }
+    meta {
+      pagination {
+        page
+        total
+      }
+    }
+  }
+}
+    `;
 export const Zoom2Document = gql`
     query Zoom2($entityName: EntityNames!, $page: Int!, $pageSize: Int, $text: String, $locale: Locale!) {
   zoomLevel2(
@@ -3914,6 +3948,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     PublicationsZoomRecordHover(variables: PublicationsZoomRecordHoverQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<PublicationsZoomRecordHoverQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<PublicationsZoomRecordHoverQuery>(PublicationsZoomRecordHoverDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'PublicationsZoomRecordHover', 'query');
+    },
+    searchBySelectedHighlights(variables?: SearchBySelectedHighlightsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<SearchBySelectedHighlightsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<SearchBySelectedHighlightsQuery>(SearchBySelectedHighlightsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'searchBySelectedHighlights', 'query');
     },
     Zoom2(variables: Zoom2QueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom2Query> {
       return withWrapper((wrappedRequestHeaders) => client.request<Zoom2Query>(Zoom2Document, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Zoom2', 'query');

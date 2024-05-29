@@ -40,7 +40,6 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
     text: search,
     page: pageNumber,
     enabled: !isNoActiveSearch,
-    filters,
   })
   const { total } = data || { total: 0 }
   const inputValue = useSelector((state: State) => state.shared.searchValue)

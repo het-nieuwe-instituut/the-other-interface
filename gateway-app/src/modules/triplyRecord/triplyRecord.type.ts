@@ -49,6 +49,9 @@ export class TriplyRecord {
 
   @Field({ nullable: true })
   public subject_collectionHighlights?: boolean
+
+  @Field({ nullable: true })
+  public label?: string
 }
 
 @ObjectType()
@@ -85,6 +88,9 @@ export class TriplyRecordFiltersInput {
 
   @Field(() => StringFilterInput, { nullable: true })
   public type?: StringFilterInput
+
+  @Field(() => StringFilterInput, { nullable: true })
+  public label?: StringFilterInput
 
   @Field(() => StoryFiltersInput, { nullable: true })
   public stories?: StoryFiltersInput
