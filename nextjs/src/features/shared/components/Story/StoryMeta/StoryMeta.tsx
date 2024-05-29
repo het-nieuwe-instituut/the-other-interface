@@ -42,11 +42,30 @@ export const StoryMeta: React.FC = () => {
         )}
 
         {authorFormatted && ( // make clickable
-          <Text textStyle={'socialLarge.lg'} fontWeight={700}>
-            {storiesT.t('by', {
-              author: authorFormatted,
-            })}
-          </Text>
+          <NextLink
+            href={addLocaleToUrl(
+              `/landingpage?category=stories&filters=${encodeFilters([
+                {
+                  field: 'theme',
+                  value: '',
+                  id: '',
+                },
+              ])}&searchResult=true`,
+              lang
+            )}
+          >
+            <Text
+              textStyle={'socialLarge.lg'}
+              display={'inline-block'}
+              borderBottom={'1px solid'}
+              borderColor={'blackAlpha.100'}
+              fontWeight={700}
+            >
+              {storiesT.t('by', {
+                author: authorFormatted,
+              })}
+            </Text>
+          </NextLink>
         )}
       </div>
       {story.shortDescription && (
@@ -195,8 +214,8 @@ export const StoryMeta: React.FC = () => {
                     `/landingpage?category=stories&filters=${encodeFilters([
                       {
                         field: 'location',
-                        value: location ? location : '',
-                        id: location ? location : '',
+                        value: location.name ?? '',
+                        id: location.id ?? '',
                       },
                     ])}&searchResult=true`,
                     lang
@@ -208,7 +227,7 @@ export const StoryMeta: React.FC = () => {
                     borderBottom={'1px solid'}
                     borderColor={'blackAlpha.100'}
                   >
-                    {location}
+                    {location.name}
                     {hasItemAfter && ',  '}
                   </Text>
                 </NextLink>

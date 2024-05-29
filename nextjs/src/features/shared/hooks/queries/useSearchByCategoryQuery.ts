@@ -106,7 +106,7 @@ export function useSearchByCategoryQuery({
 
   const queryKey =
     category === SEARCH_CATEGORIES.stories
-      ? ['searchByStories', category, text, page, locale]
+      ? ['searchByStories', category, text, page, locale, decodedFilters]
       : ['search', category, text, page]
 
   return useQuery(queryKey, queryFn, {

@@ -34,9 +34,6 @@ export class ThemeFiltersInput {
 
   @Field(() => DateTimeFilterInput, { nullable: true })
   public updatedAt?: DateTimeFilterInput
-
-  @Field(() => StringFilterInput, { nullable: true })
-  public name?: StringFilterInput
 }
 
 @ObjectType()

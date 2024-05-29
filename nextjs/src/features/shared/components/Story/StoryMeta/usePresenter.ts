@@ -86,7 +86,10 @@ export const usePresenter = () => {
     authorFormatted: story?.author ? formatAuthor(story?.author?.data?.attributes) : '',
     themes: story?.themes?.data?.map(theme => ({ name: theme.attributes?.name, id: theme.id })),
     linkedPeopleRecords: getUniqueById(linkedPeopleRecords),
-    locations: story?.locations?.data?.map(location => location.attributes?.city),
+    locations: story?.locations?.data?.map(location => ({
+      name: location.attributes?.city,
+      id: location.id,
+    })),
     timeframe: formatTimeframe(story?.timeframe),
     links: story?.storyLinks?.buttons?.map(button => button) || [],
     siblingsRelation: story?.siblings,

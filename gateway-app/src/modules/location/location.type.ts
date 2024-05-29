@@ -38,9 +38,6 @@ export class LocationFiltersInput {
 
   @Field(() => DateTimeFilterInput, { nullable: true })
   public updatedAt?: DateTimeFilterInput
-
-  @Field(() => StringFilterInput, { nullable: true })
-  public city?: StringFilterInput
 }
 
 @ObjectType()
