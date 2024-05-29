@@ -46,7 +46,6 @@
   },
   "dependencies": {
     "concurrently": "^8.2.0",
-    "strapi": "file:strapi",
     "wait-on": "^7.0.1"
   }
 }
