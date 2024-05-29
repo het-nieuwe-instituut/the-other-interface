@@ -1,8 +1,5 @@
-query searchBySelectedHighlights($searchTerm: String, $type: String, $page: Int, $pageSize: Int) {
-  triplyRecords(
-    filters: { and: [{ label: { containsi: $searchTerm } }, { type: { eq: $type } }] }
-    pagination: { page: $page, pageSize: $pageSize }
-  ) {
+query searchBySelectedHighlights($filters: TriplyRecordFiltersInput, $page: Int, $pageSize: Int) {
+  triplyRecords(filters: $filters, pagination: { page: $page, pageSize: $pageSize }) {
     data {
       id
       attributes {

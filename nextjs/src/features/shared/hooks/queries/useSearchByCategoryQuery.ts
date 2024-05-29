@@ -14,6 +14,7 @@ import { useLocale } from '../useLocale'
 import { Filter, useFilters } from '../search/useFilters'
 import { COLLECTION_HILIGHT_ID } from '@/features/galaxyInterface/components/GalaxyWrapper/Suggestions/Suggestions'
 import { searchCategoryToTriplyMapper } from '../../mappers/searchCategoryToTriplyMapper'
+import { StringFilterInput, TriplyRecordFiltersInput } from 'src/generated/graphql'
 
 export function useSearchByCategoryQuery({
   category,
@@ -35,9 +36,20 @@ export function useSearchByCategoryQuery({
   const queryFn = async () => {
     if (decodedFilters?.find(filter => filter.id === COLLECTION_HILIGHT_ID)) {
       const type = searchCategoryToTriplyMapper(category)
+
+      const labelFilter: StringFilterInput = { containsi: text || undefined }
+
+      const filters: TriplyRecordFiltersInput = {
+        and: [{ label: labelFilter }],
+      }
+
+      if (type) {
+        const typeFilter: StringFilterInput = { eq: type }
+        filters.and?.push({ type: typeFilter })
+      }
+
       const response = await api.searchBySelectedHighlights({
-        searchTerm: text || undefined,
-        type,
+        filters,
         page,
         pageSize: ZOOM2_RECORDS_PER_PAGE,
       })
