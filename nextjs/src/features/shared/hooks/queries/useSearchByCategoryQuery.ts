@@ -11,23 +11,29 @@ import { mapCategoryToTriplyEnum } from '../../helpers/mapCategoryToTriplyEnum'
 import { storyToRecordMapper } from '../../helpers/extractStoryData'
 import initApiClientService from '../../utils/initApiClientService'
 import { useLocale } from '../useLocale'
+import { Filter } from '../search/useFilters'
+import { COLLECTION_HILIGHT_ID } from '@/features/galaxyInterface/components/GalaxyWrapper/Suggestions/Suggestions'
 
 export function useSearchByCategoryQuery({
   category,
   text,
   page = 1,
   enabled = true,
+  filters,
 }: {
   category: SearchCategory
   text?: string
   page?: number
   enabled?: boolean
+  filters?: Filter[]
 }) {
   const api = initApiClientService()
   const locale = useLocale()
 
   // TODO: mix story search
   const queryFn = async () => {
+    if (filters?.find(filter => filter.id === COLLECTION_HILIGHT_ID)) {
+    }
     switch (category) {
       case SEARCH_CATEGORIES.stories:
         const response = await api.searchByStories({

@@ -30,6 +30,14 @@ const mockData = [
   },
 ]
 
+export const COLLECTION_HILIGHT_ID = 'collection-highlights-id'
+
+const CollectionHighlightsFilter = {
+  field: 'Subjects',
+  value: 'Collection Highlights',
+  id: COLLECTION_HILIGHT_ID,
+}
+
 type Props = {
   handleSelectFilter: (filters: Filter) => void
 }
@@ -37,7 +45,7 @@ type Props = {
 export const Suggestions: React.FC<Props> = ({ handleSelectFilter }) => {
   return (
     <>
-      {mockData.map(item => (
+      {[...[CollectionHighlightsFilter], ...mockData].map(item => (
         <div className="max-w-full" key={item.id}>
           <SearchFilterBox
             category={item.field}
