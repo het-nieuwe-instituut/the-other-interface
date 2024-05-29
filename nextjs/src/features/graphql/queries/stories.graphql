@@ -29,8 +29,12 @@ query searchByStories($searchTerm: String, $page: Int, $pageSize: Int, $filterTe
           ]
         }
       ]
+      or: [
+        { title: { containsi: $searchTerm } }
+        { description: { containsi: $searchTerm } }
+        { shortDescription: { containsi: $searchTerm } }
+      ]
     }
-
     pagination: { page: $page, pageSize: $pageSize }
     locale: nl
   ) {

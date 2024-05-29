@@ -3018,7 +3018,7 @@ export const StoriesDocument = gql`
 export const SearchByStoriesDocument = gql`
     query searchByStories($searchTerm: String, $page: Int, $pageSize: Int, $filterTerm: ID) {
   stories(
-    filters: {and: [{themes: {id: {eq: $filterTerm}}}, {or: [{title: {containsi: $searchTerm}}, {description: {containsi: $searchTerm}}, {shortDescription: {containsi: $searchTerm}}]}]}
+    filters: {and: [{themes: {id: {eq: $filterTerm}}}, {or: [{title: {containsi: $searchTerm}}, {description: {containsi: $searchTerm}}, {shortDescription: {containsi: $searchTerm}}]}], or: [{title: {containsi: $searchTerm}}, {description: {containsi: $searchTerm}}, {shortDescription: {containsi: $searchTerm}}]}
     pagination: {page: $page, pageSize: $pageSize}
     locale: nl
   ) {
