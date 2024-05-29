@@ -41,7 +41,7 @@ export const StoryMeta: React.FC = () => {
           </Text>
         )}
 
-        {authorFormatted && ( // make clickable
+        {authorFormatted && (
           <NextLink
             href={addLocaleToUrl(
               `/landingpage?category=stories&filters=${encodeFilters([
@@ -136,7 +136,7 @@ export const StoryMeta: React.FC = () => {
           })}
         </Box>
       )} */}
-      {themes && ( // make clickable
+      {themes && (
         <div className="mb-5">
           <Text textStyle={'socialLarge.lg'} fontWeight={700}>
             {storiesT.t('themes')}
@@ -195,15 +195,11 @@ export const StoryMeta: React.FC = () => {
           </div>
         </div>
       )}
-      {locations && ( // make clickable
+      {locations && (
         <div className="mb-5">
           <Text textStyle={'socialLarge.lg'} fontWeight={700}>
             {storiesT.t('locations')}
           </Text>
-          {/* <Text textStyle={'socialLarge.lg'} marginBottom={'md'}>
-            {locations}
-          </Text> */}
-
           <div className="flex flex-row flex-wrap gap-[2px]">
             {locations.map((location, index, array) => {
               const hasItemAfter = array.length - 1 !== index

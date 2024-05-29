@@ -36,9 +36,9 @@ const getPositionedRecords = ({
 
   return positionedRecords
 }
+
 export const usePresenter = (pageAmount: number, records: SearchResultItemType[] | null) => {
   const { category, search } = useZoom2Params()
-
   const { pageNumber } = usePageNumber()
   const { currentTemplate, nextTemplate } = usePositioningTemplates(
     positioningTemplates,
