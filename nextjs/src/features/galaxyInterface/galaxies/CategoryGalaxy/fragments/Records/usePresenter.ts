@@ -5,7 +5,6 @@ import { usePageNumber } from '@/features/shared/hooks/usePageNumber'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 import { useSearchByCategoryQuery } from '@/features/shared/hooks/queries/useSearchByCategoryQuery'
 import { SearchResultItemType } from 'src/generated/graphql'
-import { decodeFilters } from '@/features/shared/helpers/searchHelpers'
 
 const getPositionedRecords = ({
   records,
@@ -38,7 +37,7 @@ const getPositionedRecords = ({
   return positionedRecords
 }
 export const usePresenter = (pageAmount: number, records: SearchResultItemType[] | null) => {
-  const { category, search, filters } = useZoom2Params()
+  const { category, search } = useZoom2Params()
 
   const { pageNumber } = usePageNumber()
   const { currentTemplate, nextTemplate } = usePositioningTemplates(
@@ -48,14 +47,9 @@ export const usePresenter = (pageAmount: number, records: SearchResultItemType[]
 
   const isLastPage = pageNumber === pageAmount
   const nextPage = pageNumber + 1
-  const decordedFilters = useMemo(
-    () => (filters ? decodeFilters(filters)[0].id : undefined),
-    [filters]
-  )
 
   const { data: nextResults } = useSearchByCategoryQuery({
     category,
-    filters: decordedFilters, // added
     text: search,
     page: nextPage,
     enabled: !isLastPage,
