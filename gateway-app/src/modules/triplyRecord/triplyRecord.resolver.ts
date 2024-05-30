@@ -6,13 +6,13 @@ import { ObjectsService } from '../objects/objects.service'
 import { PeopleService } from '../people/people.service'
 import { PublicationsService } from '../publications/publications.service'
 import { PaginationArg } from '../strapi/shared-types'
+import { LocaleArgs } from '../util/localeArgs.type'
 import {
   TriplyRecord,
   TriplyRecordEntityResponse,
   TriplyRecordFiltersInput,
   TriplyRecordRelationResponseCollection,
 } from './triplyRecord.type'
-import { LocaleArgs } from '../util/localeArgs.type'
 
 @Resolver()
 export class TriplyRecordResolver {
