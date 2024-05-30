@@ -5,7 +5,7 @@
   "objects": "Object",
   "stories": "Stories",
   "story": "Story",
-  "relatedPeople": "Showing {{count}} of {{total}} related persons/institutions",
+  "relatedPeople": "Showing {{count}} of {{total}} related people/institutions",
   "relatedObjects": "Showing {{count}} of {{total}} related objects",
   "relatedPublications": "Showing {{count}} of {{total}} related publications",
   "relatedStories": "{{count}} related stories",
