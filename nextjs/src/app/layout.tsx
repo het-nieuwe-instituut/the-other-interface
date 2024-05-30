@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   title: 'Nieuwe Instituut',
 }
 
-async function MyApp({ children }: { children: React.ReactNode }) {
+function MyApp({ children }: { children: React.ReactNode }) {
   const { isEnabled } = draftMode()
 
   return (
