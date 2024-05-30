@@ -6,6 +6,10 @@ module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     extend: {
+      lineClamp: {
+        7: '7',
+        8: '8',
+      },
       textShadow: {
         DEFAULT: '0px 4px 4px rgba(0, 0, 0, 0.25)',
       },

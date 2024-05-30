@@ -1,0 +1,34 @@
+.md-ul-list {
+  list-style: none;
+}
+
+.md-ul-list > li {
+  @apply lg:ml-[14px] ml-6;
+}
+
+.md-ul-list > li::before {
+  content: '•';
+  color: #000;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
+
+.md-ol-list {
+  list-style: none;
+  counter-reset: list-counter;
+}
+
+.md-ol-list > li {
+  counter-increment: list-counter;
+  @apply lg:ml-[14px] ml-6;
+}
+
+.md-ol-list > li::before {
+  position: absolute;
+  content: counter(list-counter);
+  color: #000;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
