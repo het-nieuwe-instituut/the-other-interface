@@ -1,9 +1,8 @@
 'use client'
 import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
 import { MainGalaxy } from '@/features/galaxyInterface/galaxies/MainGalaxy/MainGalaxy'
-
-import { HomepageQuery, ThemesQuery } from 'src/generated/graphql'
 import { EditorialLayer } from '@/features/shared/components/Layers/EditorialLayer/EditorialLayer'
+import { HomepageQuery, ThemesQuery } from 'src/generated/graphql'
 
 export type Props = {
   homepage?: HomepageQuery
@@ -14,7 +13,7 @@ export type Props = {
 
 export const HomepageContainer: React.FC<Props> = ({ homepage }) => {
   const editorialData = homepage?.homepage?.data?.attributes
-
+  
   return (
     <div>
       <GalaxyInterface>
