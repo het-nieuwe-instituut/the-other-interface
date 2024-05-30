@@ -16,9 +16,11 @@ import { draftMode } from 'next/headers'
 import { PreviewBlock } from '@/features/preview/PreviewBlock'
 import { ReduxDraftModeSync } from '@/features/shared/components/Redux/ReduxDraftModeSync'
 import { ReactTooltipInitializer } from '@/features/ui/components/tooltip/ReactTooltipInitializer'
+import { getTranslation } from '@/features/shared/utils/translations'
 
-function MyApp({ children }: { children: React.ReactNode }) {
+async function MyApp({ children }: { children: React.ReactNode }) {
   const { isEnabled } = draftMode()
+  const commonT = await getTranslation('nl', ['common'])
   return (
     <html lang="en">
       <body>
@@ -39,6 +41,7 @@ function MyApp({ children }: { children: React.ReactNode }) {
             </Script>
           </>
         )}
+        <p>{commonT('published')}</p>
         <ReduxStoreProvider>
           <ReactQueryProvider>
             <ThemeProvider>
