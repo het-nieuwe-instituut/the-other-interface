@@ -16,11 +16,14 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const Component = as
     return (
       <Component
-        className={cn(ButtonVariants({ className, intent, state, size }))}
+        className={cn(
+          ButtonVariants({ className, intent, state, size }),
+          state === 'loading' && 'text-blue-100'
+        )}
         ref={ref}
         {...props}
       >
-        {state === 'loading' ? <Loader className="animate-spin" /> : children}
+        {state === 'loading' ? <Loader className={'animate-spin'} /> : children}
       </Component>
     )
   }
