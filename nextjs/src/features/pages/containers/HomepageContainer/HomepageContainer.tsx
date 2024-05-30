@@ -13,7 +13,7 @@ export type Props = {
 
 export const HomepageContainer: React.FC<Props> = ({ homepage }) => {
   const editorialData = homepage?.homepage?.data?.attributes
-  
+
   return (
     <div>
       <GalaxyInterface>
