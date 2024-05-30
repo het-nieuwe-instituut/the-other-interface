@@ -1487,6 +1487,7 @@ export const aTriplyRecord = (overrides?: Partial<TriplyRecord>, _relationshipsT
         publication: overrides && overrides.hasOwnProperty('publication') ? overrides.publication! : relationshipsToOmit.includes('PublicationZoomLevel3DetailType') ? {} as PublicationZoomLevel3DetailType : aPublicationZoomLevel3DetailType({}, relationshipsToOmit),
         publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : '1970-01-17T03:41:53.182Z',
         recordId: overrides && overrides.hasOwnProperty('recordId') ? overrides.recordId! : 'in',
+        recordType: overrides && overrides.hasOwnProperty('recordType') ? overrides.recordType! : EntityNames.Archives,
         stories: overrides && overrides.hasOwnProperty('stories') ? overrides.stories! : relationshipsToOmit.includes('StoryRelationResponseCollection') ? {} as StoryRelationResponseCollection : aStoryRelationResponseCollection({}, relationshipsToOmit),
         subject_collectionHighlights: overrides && overrides.hasOwnProperty('subject_collectionHighlights') ? overrides.subject_collectionHighlights! : true,
         type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : EnumTriplyrecordType.Archive,

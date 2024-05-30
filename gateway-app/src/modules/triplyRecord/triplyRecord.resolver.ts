@@ -13,6 +13,7 @@ import {
   TriplyRecordFiltersInput,
   TriplyRecordRelationResponseCollection,
 } from './triplyRecord.type'
+import { StrapiUtils } from '../strapi/strapi.utils'
 
 @Resolver()
 export class TriplyRecordResolver {
@@ -64,6 +65,11 @@ export class TriplyRecordFieldResolver {
       })
       return res.stories
     }
+  }
+
+  @ResolveField()
+  public async recordType(@Parent() triplyRecord: TriplyRecord) {
+    return StrapiUtils.getEntityNameForRecordType(triplyRecord.type)
   }
 
   @ResolveField()

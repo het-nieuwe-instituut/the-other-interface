@@ -39,17 +39,17 @@ export function useSearchByCategoryQuery({
 
       const labelFilter: StringFilterInput = { containsi: text || undefined }
 
-      const filters: TriplyRecordFiltersInput = {
+      const queryFilters: TriplyRecordFiltersInput = {
         and: [{ label: labelFilter }],
       }
 
       if (type) {
         const typeFilter: StringFilterInput = { eq: type }
-        filters.and?.push({ type: typeFilter })
+        queryFilters.and?.push({ type: typeFilter })
       }
 
       const response = await api.searchBySelectedHighlights({
-        filters,
+        filters: queryFilters,
         page,
         pageSize: ZOOM2_RECORDS_PER_PAGE,
       })
@@ -57,10 +57,10 @@ export function useSearchByCategoryQuery({
       return {
         items:
           response?.triplyRecords?.data?.map(record => ({
-            id: record.id,
-            title: record.attributes?.label,
+            id: record.attributes?.recordId,
+            title: record.attributes?.label ?? '',
             thumbnail: '',
-            type: record?.attributes?.type,
+            type: record.attributes?.recordType ?? '',
           })) ?? [],
         total: response?.triplyRecords?.meta?.pagination?.total ?? 0,
       }
@@ -141,8 +141,8 @@ export function useSearchByCategoryQuery({
 
   const queryKey =
     category === SEARCH_CATEGORIES.stories
-      ? ['searchByStories', category, text, page, locale]
-      : ['search', category, text, page]
+      ? ['searchByStories', category, text, page, locale, decodedFilters]
+      : ['search', category, text, page, decodedFilters]
 
   return useQuery(queryKey, queryFn, {
     enabled,

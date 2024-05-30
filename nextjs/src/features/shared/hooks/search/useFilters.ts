@@ -1,8 +1,9 @@
-import { encodeFilters } from '@/features/shared/helpers/searchHelpers'
+import { encodeFilters, decodeFilters } from '@/features/shared/helpers/searchHelpers'
 import { sharedActions } from '@/features/shared/stores/shared.store'
 import { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { State } from '../../configs/store'
+import { useZoom2Params } from '../useZoom2Params'
 
 // TODO: Remove when we connect real query
 export interface Filter {
@@ -19,6 +20,7 @@ interface UseFiltersProps {
 }
 
 export const useFilters = ({ onSelectFilter, onRemoveFilter }: UseFiltersProps = {}) => {
+  const { filters } = useZoom2Params()
   const selectedFilters = useSelector((state: State) => state.shared.selectedFilters)
   const dispatch = useDispatch()
 

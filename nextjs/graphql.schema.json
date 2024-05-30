@@ -15395,6 +15395,22 @@
             "deprecationReason": null
           },
           {
+            "name": "recordType",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "EntityNames",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "stories",
             "description": null,
             "args": [],
@@ -15462,9 +15478,13 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "OBJECT",
-              "name": "TriplyRecord",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "TriplyRecord",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null

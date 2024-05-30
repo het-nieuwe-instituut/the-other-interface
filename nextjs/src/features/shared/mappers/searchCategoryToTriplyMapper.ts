@@ -19,6 +19,5 @@ export function searchCategoryToTriplyMapper(
       return EnumTriplyrecordType.Publication
     default:
       return undefined
-      throw new Error(`Unknown search category: ${category}`)
   }
 }

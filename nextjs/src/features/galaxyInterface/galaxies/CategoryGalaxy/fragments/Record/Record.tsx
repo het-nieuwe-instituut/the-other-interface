@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation'
 import { PlacesType } from 'react-tooltip'
 import { Locale } from 'src/generated/graphql'
 import { RecordText } from '../RecordText'
+import { getTriplyRecordPathForTypeAndId } from '@/features/shared/utils/links'
 
 type Props = {
   record: RecordProps
@@ -56,7 +57,7 @@ const RecordData = (record: RecordProps, lang?: Locale | null) => {
   const router = useRouter()
 
   const handleClick = () => {
-    let url = `/detail/${category}/${id}`
+    let url = getTriplyRecordPathForTypeAndId(category, id, '/detail')
     url = addLocaleToUrl(url, lang)
 
     router.push(url)
