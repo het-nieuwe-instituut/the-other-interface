@@ -1,28 +1,18 @@
 /**
- * triply-record service.
+ * triply-record service
  */
-import { factories } from '@strapi/strapi'
-import { Service } from '@strapi/strapi/lib/core-api/service'
+
 import axios from 'axios'
 
-export type TriplyRecordService = Service & {
-  getLabel: (params: GetLabelParams) => Promise<string>
-}
-
-const DEFAULT_LABEL = '-'
+export default () => ({
+  getLabel,
+})
 
 export interface GetLabelParams {
   recordId: string
   type: string
   onError?: (params: Pick<GetLabelParams, 'recordId' | 'type'> & { errorText: string }) => void
 }
-
-export default factories.createCoreService(
-  'api::triply-record.triply-record',
-  ({ strapi }): TriplyRecordService => ({
-    getLabel,
-  })
-)
 
 async function getLabel(args: GetLabelParams): Promise<string> {
   const { onError, recordId, type } = args
@@ -49,6 +39,8 @@ async function getLabel(args: GetLabelParams): Promise<string> {
     return `- (${recordId}/${type})`
   }
 }
+
+const DEFAULT_LABEL = '-'
 
 function getLabelFromType(triplyData, type): string {
   switch (type) {
