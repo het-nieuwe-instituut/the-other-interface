@@ -59,7 +59,7 @@ async function applyToAllLocales(event) {
       if (parentChanges.disconnect.length) {
         data['parent_story'] = parentChanges
       } else {
-        await changeOtherLocalesParent(parentChanges.connect?.[0].id, event.result.localizations)
+        await changeOtherLocalesParent(parentChanges?.connect?.[0].id, event.result.localizations)
       }
     }
 
@@ -71,11 +71,11 @@ async function applyToAllLocales(event) {
 
 async function checkParentChildConstraintsOrThrow(event) {
   const parentChanges = event.params.data.parent_story
-  if (parentChanges.connect?.length > 1) {
+  if (parentChanges?.connect?.length > 1) {
     throw new errors.ApplicationError('Story cannot have more than one parent')
   }
 
-  const parentId = parentChanges.connect?.[0]?.id
+  const parentId = parentChanges?.connect?.[0]?.id
   const childrenChanges = event.params.data.child_stories
   const id = event.params.where?.id // could be null if this method is called beforeCreate
   const story = id
@@ -111,7 +111,7 @@ async function checkParentChildConstraintsOrThrow(event) {
 
   // children cannot have children
   if (childrenChanges?.connect?.length) {
-    await checkIfChildrenAreNotParentsOrThrow(childrenChanges.connect.map(c => c.id))
+    await checkIfChildrenAreNotParentsOrThrow(childrenChanges?.connect.map(c => c.id))
   }
 
   // parent cannot have a parent
