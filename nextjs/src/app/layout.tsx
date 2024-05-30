@@ -14,11 +14,17 @@ import { ReduxDraftModeSync } from '@/features/shared/components/Redux/ReduxDraf
 import ReactQueryProvider from '@/features/shared/components/providers/ReactQueryProvider'
 import BaseElementWrapper from '@/features/shared/components/wrappers/BaseElementsWrapper'
 import { ReactTooltipInitializer } from '@/features/ui/components/tooltip/ReactTooltipInitializer'
+import { Metadata } from 'next'
 import { draftMode } from 'next/headers'
 import '../styles/globals.css'
 
+export const metadata: Metadata = {
+  title: 'Nieuwe Instituut',
+}
+
 async function MyApp({ children }: { children: React.ReactNode }) {
   const { isEnabled } = draftMode()
+
   return (
     <html lang="en">
       <body>
