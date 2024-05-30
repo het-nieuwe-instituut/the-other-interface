@@ -2,7 +2,7 @@ import { cva } from 'class-variance-authority'
 
 export const ButtonVariants = cva(
   [
-    'flex flex-row items-center justify-center gap-2 border border-solid border-blue text-blue-100 transition-colors',
+    'flex w-max flex-row items-center justify-center gap-2 border border-solid border-blue text-blue-100 transition-colors',
     'hover:border-[rgba(0,0,0,0.2)] hover:bg-blue-100 hover:text-pink-100 ',
     'active:border-[rgba(0,0,0,0.2)] active:bg-blue-100 active:text-pink-100 ',
     'disabled:border-[rgba(0,0,0,0.2)] disabled:bg-transparent disabled:text-[rgba(0,0,0,0.2)]',
@@ -14,7 +14,7 @@ export const ButtonVariants = cva(
         primary: [''],
         secondary: ['h-12'],
         tertiary: [
-          'h-12 rounded-lg border border-black bg-white px-5',
+          'h-12 border-none px-5',
           'text-center font-social-large text-base font-normal leading-tight tracking-tight text-black-100',
           'hover:border-black hover:bg-black-100 hover:text-white',
         ],
