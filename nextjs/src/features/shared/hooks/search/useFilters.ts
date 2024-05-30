@@ -52,8 +52,8 @@ export const useFilters = ({ onSelectFilter, onRemoveFilter }: UseFiltersProps =
   )
 
   const clearFilters = useCallback(() => {
-    sharedActions.setFilters({ selectedFilters: [] })
-  }, [])
+    dispatch(sharedActions.setFilters({ selectedFilters: [] }))
+  }, [dispatch])
 
   return {
     selectedFilters,
