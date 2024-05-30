@@ -16,9 +16,15 @@ import { draftMode } from 'next/headers'
 import { PreviewBlock } from '@/features/preview/PreviewBlock'
 import { ReduxDraftModeSync } from '@/features/shared/components/Redux/ReduxDraftModeSync'
 import { ReactTooltipInitializer } from '@/features/ui/components/tooltip/ReactTooltipInitializer'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Nieuwe Instituut',
+}
 
 function MyApp({ children }: { children: React.ReactNode }) {
   const { isEnabled } = draftMode()
+
   return (
     <html lang="en">
       <body>
