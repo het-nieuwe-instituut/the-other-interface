@@ -18,14 +18,8 @@ import { ReduxDraftModeSync } from '@/features/shared/components/Redux/ReduxDraf
 import { ReactTooltipInitializer } from '@/features/ui/components/tooltip/ReactTooltipInitializer'
 import { Metadata } from 'next'
 
-// export const metadata: Metadata = {
-//   title: 'Nieuwe Instituut',
-// }
-
-export async function generateMetadata(): Promise<Metadata> {
-  return {
-    title: 'Nieuwe Instituut',
-  }
+export const metadata: Metadata = {
+  title: 'Nieuwe Instituut',
 }
 
 function MyApp({ children }: { children: React.ReactNode }) {
