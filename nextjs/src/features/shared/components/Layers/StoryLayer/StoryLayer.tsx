@@ -1,5 +1,5 @@
 'use client'
-import { StoryMeta } from '../../Story/StoryMeta/StoryMeta'
+import { StoryMeta } from '../../../../story/components/StoryMeta/StoryMeta'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 import { LayerWrapper } from '../LayerWrapper'
 import { StoryBottomContent } from '../../Story/StoryBottomContent/StoryBottomContent'

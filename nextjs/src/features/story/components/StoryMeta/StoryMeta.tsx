@@ -54,8 +54,8 @@ export const StoryMeta: React.FC = () => {
   if (!story) return null
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="flex flex-col">
+    <div className="flex flex-row flex-wrap">
+      <div className="flex w-1/2 flex-col pb-4 pr-4 md:w-1/3 lg:w-full ">
         {publicationDateFormatted && (
           <p className={TypographyVariants({ social: 'sm', className: 'font-bold' })}>
             {publicationDateFormatted}
@@ -69,10 +69,10 @@ export const StoryMeta: React.FC = () => {
             })}
           </p>
         )}
+        {story.shortDescription && (
+          <p className={TypographyVariants({ social: 'sm' })}>{story.shortDescription}</p>
+        )}
       </div>
-      {story.shortDescription && (
-        <p className={TypographyVariants({ social: 'sm' })}>{story.shortDescription}</p>
-      )}
       {parentRelation && parentRelation?.data?.id && (
         <MetaField name={storiesT.t('parentStory')}>
           <NavLinkButton
@@ -177,7 +177,7 @@ export const StoryMeta: React.FC = () => {
 
 const MetaField = ({ name, children }: { name?: string; children: JSX.Element }) => {
   return (
-    <div>
+    <div className="relative flex w-1/2 flex-col pb-4 pr-4 md:w-1/3 lg:w-full">
       <p className={TypographyVariants({ social: 'sm', className: 'font-bold' })}>{name}</p>
       {children}
     </div>
