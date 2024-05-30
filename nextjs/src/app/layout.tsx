@@ -17,9 +17,14 @@ import { ReactTooltipInitializer } from '@/features/ui/components/tooltip/ReactT
 import { Metadata } from 'next'
 import { draftMode } from 'next/headers'
 import '../styles/globals.css'
+import { createTypeSafeTranslation } from '@/features/shared/utils/translations'
 
-export const metadata: Metadata = {
-  title: 'Nieuwe Instituut',
+export async function generateMetadata(): Promise<Metadata> {
+  const { t: commonT } = await createTypeSafeTranslation('common')
+
+  return {
+    title: commonT('metaTitle'),
+  }
 }
 
 function MyApp({ children }: { children: React.ReactNode }) {
