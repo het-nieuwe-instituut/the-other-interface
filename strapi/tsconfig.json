@@ -4,7 +4,8 @@
     "jsx": "react-jsx",
     "outDir": "dist",
     "rootDir": ".",
-    "lib": ["dom"]
+    "lib": ["dom"],
+    "sourceMap": true
   },
 
   "include": ["./", "src/**/*.json"],

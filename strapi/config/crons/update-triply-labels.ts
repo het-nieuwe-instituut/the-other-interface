@@ -1,8 +1,6 @@
 import { Strapi } from '@strapi/strapi'
 import axios from 'axios'
 
-import { TriplyRecordService } from '../../src/api/triply-record/services/triply-record'
-
 interface FailedRecordData {
   recordId: string
   type: string
@@ -18,7 +16,7 @@ export default async function (strapi: Strapi) {
   const failedRecordData: FailedRecordData[] = []
 
   try {
-    const total = await strapi.db.query(triplyApi).count('*')
+    const total = await strapi.db.query(triplyApi).count()
     console.log(`[UpdateTriplyLabels] will attempt to update ${total} records`)
 
     for (let offset = 0; offset < total; offset += limit) {
@@ -28,7 +26,7 @@ export default async function (strapi: Strapi) {
 
       for (const record of records) {
         try {
-          await updateRecordLabel(record, failedRecordData.push.bind(this))
+          await updateRecordLabel(record, () => failedRecordData.push(record))
           await new Promise(resolve => setTimeout(resolve, timeToSleep))
         } catch (err) {
           const { recordId, type } = record
@@ -62,7 +60,7 @@ export default async function (strapi: Strapi) {
 async function updateRecordLabel(record, onError: (data: FailedRecordData) => void) {
   const { id, recordId, type } = record
 
-  const label = await strapi.service<TriplyRecordService>(triplyApi).getLabel({
+  const label = await strapi.service(triplyApi).getLabel({
     recordId,
     type,
     onError,
