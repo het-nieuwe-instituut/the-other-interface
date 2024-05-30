@@ -27,7 +27,7 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-async function MyApp({ children }: { children: React.ReactNode }) {
+function MyApp({ children }: { children: React.ReactNode }) {
   const { isEnabled } = draftMode()
 
   return (
