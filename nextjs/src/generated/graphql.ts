@@ -2141,8 +2141,7 @@ export type PublicationsZoomRecordHoverQueryVariables = Exact<{
 export type PublicationsZoomRecordHoverQuery = { __typename?: 'Query', publicationsZoomRecordHover: { __typename?: 'PublicationsZoomLevelHoverType', title?: string | null, authors?: string | null, description?: string | null } };
 
 export type SearchBySelectedHighlightsQueryVariables = Exact<{
-  searchTerm?: InputMaybe<Scalars['String']>;
-  type?: InputMaybe<Scalars['String']>;
+  filters?: InputMaybe<TriplyRecordFiltersInput>;
   page?: InputMaybe<Scalars['Int']>;
   pageSize?: InputMaybe<Scalars['Int']>;
 }>;
@@ -3418,11 +3417,8 @@ export const PublicationsZoomRecordHoverDocument = gql`
 }
     `;
 export const SearchBySelectedHighlightsDocument = gql`
-    query searchBySelectedHighlights($searchTerm: String, $type: String, $page: Int, $pageSize: Int) {
-  triplyRecords(
-    filters: {and: [{label: {containsi: $searchTerm}}, {type: {eq: $type}}]}
-    pagination: {page: $page, pageSize: $pageSize}
-  ) {
+    query searchBySelectedHighlights($filters: TriplyRecordFiltersInput, $page: Int, $pageSize: Int) {
+  triplyRecords(filters: $filters, pagination: {page: $page, pageSize: $pageSize}) {
     data {
       id
       attributes {
