@@ -1,117 +1,71 @@
 'use client'
-import { Box, Text, Button, Tooltip } from '@chakra-ui/react'
-import { usePresenter } from './usePresenter'
 import { ThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
-import ExternalLink from '@/icons/arrows/external-link.svg'
+import {
+  useLooseTypeSafeTranslation,
+  useTypeSafeTranslation,
+} from '@/features/shared/hooks/translations'
+import { CATEGORIES, Category } from '@/features/shared/utils/categories'
+import { isExternalURL } from '@/features/shared/utils/links'
+import { NavLinkButton } from '@/features/ui/components/nav-link-button/component'
+import { ReadMoreTooltip } from '@/features/ui/components/tooltip/ReadMoreTooltip'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
+import ExternalLink from '@/features/ui/icons/external-link.svg'
+import { useParams } from 'next/navigation'
+import {
+  ArchivesRecordZoomLevel3Type,
+  ObjectRecordZoomLevel3Type,
+  PeopleRecordZoomLevel3Type,
+  PublicationRecordZoomLevel3Type,
+} from 'src/generated/graphql'
+import { useRecordMeta } from '../../hooks/useRecordMeta'
+import {
+  mapArchivesDataToSections,
+  mapObjectDataToSections,
+  mapPersonDataToSections,
+  mapPublicationDataToSections,
+} from '../../mappers/recordMetaDataMapper'
 import { recordRightsFieldMapper } from '../../mappers/recordRightsMapper'
-import { recordMetaT } from 'locales/locales'
 
-type SectionType = {
-  title?: string
-  value: string[] | null
-  isLink: boolean
-  key: string
-}
+export const RecordMeta: React.FC = () => {
+  const { t: recordMetaPublicationT } = useTypeSafeTranslation('recordMetaPublication')
+  const { t: recordMetaArchiveT } = useTypeSafeTranslation('recordMetaArchive')
+  const { t: recordMetaObjectT } = useTypeSafeTranslation('recordMetaObject')
+  const { t: recordMetaPersonT } = useTypeSafeTranslation('recordMetaPerson')
 
-interface RenderSectionProps {
-  section: SectionType
-  recordMetaT: recordMetaT
-  index: number
-}
+  const params = useParams()
+  const id = params?.id as string
+  const category = params?.category as Category
 
-function renderLink(title?: string, value?: string, index?: number) {
-  return (
-    <Button
-      as={'a'}
-      rightIcon={<ExternalLink />}
-      target={'_blank'}
-      bg={'transparent'}
-      href={value}
-      border={'none'}
-      borderBottom={`1px solid black`}
-      px={0}
-      _hover={{ bg: 'transparent' }}
-      outline={'none'}
-      outlineOffset={0}
-      borderRadius={0}
-      key={index}
-      py={'6px'}
-    >
-      <Text
-        as={'span'}
-        textStyle={'socialLarge.lg'}
-        color={'currentcolor'}
-        verticalAlign={'text-bottom'}
-      >
-        {title}
-      </Text>
-    </Button>
-  )
-}
+  const { data, isLoading } = useRecordMeta(category, id)
+  let recordMetaSectionData
 
-function renderRights(translate: recordMetaT, value?: string[] | null, key?: string) {
-  const rightsInfo = value && value[0] ? recordRightsFieldMapper(value[0], translate) : null
-
-  if (!rightsInfo) return null
-
-  const Icon = rightsInfo.icon
-  const SectionaryIcon = rightsInfo.secondaryIcon
-
-  return (
-    <Tooltip label={rightsInfo.description} fontSize="md" placement="bottom" hasArrow>
-      <Box
-        as={'a'}
-        href={rightsInfo.url}
-        target="_blank"
-        key={key}
-        w={'fit-content'}
-        display={'flex'}
-        alignItems={'center'}
-      >
-        <Box>
-          <Icon />
-        </Box>
-        {SectionaryIcon ? <SectionaryIcon /> : null}
-        <Text paddingLeft={2}>{rightsInfo.text}</Text>
-      </Box>
-    </Tooltip>
-  )
-}
-
-function renderSection({ section, recordMetaT }: RenderSectionProps) {
-  if (section.key === 'rights') {
-    return (
-      <>
-        <Text textStyle={'socialLarge.lg'} fontWeight={700} mb={2}>
-          {section.title}
-        </Text>
-        {renderRights(recordMetaT, section.value, section.key)}
-      </>
+  if (category === CATEGORIES.archives && data) {
+    recordMetaSectionData = mapArchivesDataToSections(
+      data as ArchivesRecordZoomLevel3Type,
+      recordMetaArchiveT
     )
   }
 
-  return (
-    <>
-      {section.title && !section.isLink && (
-        <Text textStyle={'socialLarge.lg'} fontWeight={700}>
-          {section.title}
-        </Text>
-      )}
-      {section?.value?.map((value, valueIndex) =>
-        section.isLink ? (
-          renderLink(section.title, value, valueIndex)
-        ) : (
-          <Text textStyle={'socialLarge.lg'} key={valueIndex}>
-            {value}
-          </Text>
-        )
-      )}
-    </>
-  )
-}
+  if (category === CATEGORIES.publications) {
+    recordMetaSectionData = mapPublicationDataToSections(
+      data as PublicationRecordZoomLevel3Type,
+      recordMetaPublicationT
+    )
+  }
 
-export const RecordMeta: React.FC = () => {
-  const { recordMetaSectionData, isLoading, recordMetaT } = usePresenter()
+  if (category === CATEGORIES.objects) {
+    recordMetaSectionData = mapObjectDataToSections(
+      data as ObjectRecordZoomLevel3Type,
+      recordMetaObjectT
+    )
+  }
+
+  if (category === CATEGORIES.people) {
+    recordMetaSectionData = mapPersonDataToSections(
+      data as PeopleRecordZoomLevel3Type,
+      recordMetaPersonT
+    )
+  }
 
   if (isLoading) {
     return <ThemedSpinner />
@@ -120,12 +74,94 @@ export const RecordMeta: React.FC = () => {
   if (!recordMetaSectionData) return null
 
   return (
-    <Box>
-      {recordMetaSectionData.map((section, index) => (
-        <Box key={index} marginBottom={5}>
-          {renderSection({ section, recordMetaT, index })}
-        </Box>
-      ))}
-    </Box>
+    <div className="flex flex-row flex-wrap">
+      {recordMetaSectionData.map(section => {
+        if (section.key === 'rights') {
+          return (
+            <>
+              <MetaField name={section.title} key={section.key}>
+                <RightsLogo value={section.value} key={section.key} />
+              </MetaField>
+              <MetaField name={section.title} key={section.key + 1}>
+                <RightsLinks value={section.value} key={section.key} />
+              </MetaField>
+            </>
+          )
+        }
+
+        return (
+          <MetaField
+            name={section.title && !section.isLink ? section.title : undefined}
+            key={section.key}
+          >
+            <>
+              {section?.value?.map((value, valueIndex) =>
+                section.isLink ? (
+                  <NavLinkButton key={valueIndex} variant={'metaData'} href={value}>
+                    {value}
+                    {isExternalURL(value, process.env.parsed.NEXT_PUBLIC_URL ?? '') ? (
+                      <ExternalLink className="size-5" />
+                    ) : null}
+                  </NavLinkButton>
+                ) : (
+                  <p key={valueIndex} className={TypographyVariants({ social: 'sm' })}>
+                    {value}
+                  </p>
+                )
+              )}
+            </>
+          </MetaField>
+        )
+      })}
+    </div>
+  )
+}
+
+const MetaField = ({ name, children }: { name?: string; children: JSX.Element }) => {
+  return (
+    <div className="relative flex w-1/2 flex-col pb-4 pr-4 md:w-1/3 lg:w-full">
+      <p className={TypographyVariants({ social: 'sm', className: 'font-bold' })}>{name}</p>
+      {children}
+    </div>
+  )
+}
+
+function RightsLinks({ value }: { value?: string[] | null; key?: string }) {
+  const { t: recordMetaT } = useLooseTypeSafeTranslation('recordMeta')
+  const rightsInfo = value && value[0] ? recordRightsFieldMapper(value[0], recordMetaT) : null
+
+  if (!rightsInfo) return null
+
+  return (
+    <ReadMoreTooltip description={rightsInfo.description} place="bottom">
+      <NavLinkButton variant={'metaData'} href={rightsInfo.url}>
+        {rightsInfo.text}
+        {isExternalURL(rightsInfo.url, process.env.parsed.NEXT_PUBLIC_URL ?? '') ? (
+          <ExternalLink className="size-5" />
+        ) : null}
+      </NavLinkButton>
+    </ReadMoreTooltip>
+  )
+}
+
+function RightsLogo({ value }: { value?: string[] | null; key?: string }) {
+  const { t: recordMetaT } = useLooseTypeSafeTranslation('recordMeta')
+  const rightsInfo = value && value[0] ? recordRightsFieldMapper(value[0], recordMetaT) : null
+
+  if (!rightsInfo) return null
+
+  const Icon = rightsInfo.icon
+  const SectionaryIcon = rightsInfo.secondaryIcon
+
+  return (
+    <ReadMoreTooltip description={rightsInfo.description} place="bottom">
+      <a href={rightsInfo.url} className="flex gap-1">
+        <div className="size-7">
+          <Icon />
+        </div>
+        {SectionaryIcon ? <SectionaryIcon /> : null}
+        <p className={TypographyVariants({ social: 'sm' })}>{rightsInfo.text}</p>
+      </a>
+    </ReadMoreTooltip>
   )
 }
