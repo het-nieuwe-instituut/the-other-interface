@@ -936,7 +936,8 @@ export interface ApiStoryStory extends Schema.CollectionType {
         'modules.title-module',
         'modules.image-carousel',
         'modules.image',
-        'modules.buttons-module'
+        'modules.buttons-module',
+        'core.stand-alone-link'
       ]
     > &
       Attribute.SetPluginOptions<{

@@ -38,4 +38,7 @@ export default [
   'strapi::session',
   'strapi::favicon',
   'strapi::public',
+
+  // component validator middleware
+  'global::componentValidator',
 ]
