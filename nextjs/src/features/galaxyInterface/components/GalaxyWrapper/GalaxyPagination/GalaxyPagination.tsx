@@ -31,6 +31,10 @@ export const GalaxyPagination: React.FC<Props> = ({
 }) => {
   const { t } = useTypeSafeTranslation('navigation')
 
+  if (isResultEmpty) {
+    return null
+  }
+
   const renderPaginationContent = () => {
     if (isResultError) {
       return <ErrorBox className={cn(TypographyVariants({ social: 'sm' }), 'self-center ml-2')} />
@@ -84,7 +88,7 @@ export const GalaxyPagination: React.FC<Props> = ({
       templateColumns={isResultAmountLoading || isResultError ? '1fr' : '40px 1fr 40px'}
       gap="5px"
     >
-      {!isResultEmpty && renderPaginationContent()}
+      {renderPaginationContent()}
     </Grid>
   )
 }
