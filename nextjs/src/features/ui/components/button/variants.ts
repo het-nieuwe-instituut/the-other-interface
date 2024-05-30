@@ -26,6 +26,9 @@ export const ButtonVariants = cva(
       size: {
         large: ['h-[60px] px-5 font-social-large text-[21px] font-normal leading-7 tracking-tight'],
         small: ['h-12 px-5 font-social-large text-base font-normal leading-tight tracking-tight'],
+        xsmall: [
+          'h-10 px-5 font-social-large text-[14px] font-normal leading-tight tracking-tight',
+        ],
       },
       state: {
         error: [

@@ -25,6 +25,7 @@ import {
   mapPublicationDataToSections,
 } from '../../mappers/recordMetaDataMapper'
 import { recordRightsFieldMapper } from '../../mappers/recordRightsMapper'
+import { StandaloneLink } from 'src/app/ks/link/StandaloneLink'
 
 export const RecordMeta: React.FC = () => {
   const { t: recordMetaPublicationT } = useTypeSafeTranslation('recordMetaPublication')
@@ -96,13 +97,10 @@ export const RecordMeta: React.FC = () => {
           >
             <>
               {section?.value?.map((value, valueIndex) =>
-                section.isLink ? (
-                  <NavLinkButton key={valueIndex} variant={'metaData'} href={value}>
-                    {value}
-                    {isExternalURL(value, process.env.parsed.NEXT_PUBLIC_URL ?? '') ? (
-                      <ExternalLink className="size-5" />
-                    ) : null}
-                  </NavLinkButton>
+                section.isLink && section.title ? (
+                  <StandaloneLink size={'xsmall'} key={valueIndex} href={value} className="-ml-5">
+                    {section.title}
+                  </StandaloneLink>
                 ) : (
                   <p key={valueIndex} className={TypographyVariants({ social: 'sm' })}>
                     {value}
