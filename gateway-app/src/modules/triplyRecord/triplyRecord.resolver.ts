@@ -17,11 +17,13 @@ import { LocaleArgs } from '../util/localeArgs.type'
 @Resolver()
 export class TriplyRecordResolver {
   public constructor(@Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk) {}
+
   @Query(() => TriplyRecordEntityResponse)
   public async triplyRecord(@Args('id') id: string) {
     const res = await this.strapiGqlSdk.triplyRecord({ id })
     return res.triplyRecord
   }
+
   @Query(() => TriplyRecordRelationResponseCollection)
   public async triplyRecords(
     @Args('filters', { nullable: true }) filters?: TriplyRecordFiltersInput,
