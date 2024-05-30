@@ -6,6 +6,17 @@
     "*": ["common", "navigation"],
     "/": ["homepage", "category"],
     "/landingpage": ["category"],
-    "/detail/[category]/[id]": ["category", "record", "stories", "recordMeta", "recordMetaPublication", "recordMetaObject", "recordMetaArchive", "recordMetaPerson", "recordTable"]
-  }
+    "/detail/[category]/[id]": [
+      "category",
+      "record",
+      "stories",
+      "recordMeta",
+      "recordMetaPublication",
+      "recordMetaObject",
+      "recordMetaArchive",
+      "recordMetaPerson",
+      "recordTable"
+    ]
+  },
+  "experimental": { "appDir": true }
 }

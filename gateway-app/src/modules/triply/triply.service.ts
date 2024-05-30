@@ -44,7 +44,7 @@ export class TriplyService {
     private readonly httpService: HttpService,
     private readonly rollbarService: RollbarService
   ) {
-    this.endpointBaseURL = configService.getOrThrow('TRIPLI_API_BASEURL')
+    this.endpointBaseURL = configService.getOrThrow('TRIPLY_API_BASEURL')
     this.apiKey = configService.getOrThrow('TRIPLY_API_KEY')
     this.baseQueryPath = ''
     const env = configService.getOrThrow('ENV')

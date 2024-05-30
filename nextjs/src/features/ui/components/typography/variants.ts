@@ -2,8 +2,11 @@ import { cva } from 'class-variance-authority'
 
 export const TypographyVariants = cva('', {
   variants: {
+    modifier: {
+      shadow: 'text-shadow',
+    },
     times: {
-      '2xl': ['font-times-large text-[96px] leading-[100%_]  tracking-[-1.92px] text-shadow  '],
+      '2xl': ['font-times-large text-[96px] leading-[100%_]  tracking-[-1.92px]'],
       xl: ['font-times-large text-[64px] leading-[100%_] tracking-[-1.28px]'],
       lg: ['font-times-large text-[32px] leading-[105%_]'],
       md: ['font-times-large text-[20px] leading-[105%_] tracking-[0.2px]'],
@@ -12,7 +15,7 @@ export const TypographyVariants = cva('', {
     },
     impact: {
       xl: ['font-impact-large text-[80px] leading-[100%_] tracking-[-0.8px] '],
-      lg: ['font-impact-large text-[32px] leading-[120%_] tracking-[-0.32px] text-shadow'],
+      lg: ['font-impact-large text-[32px] leading-[120%_] tracking-[-0.32px]'],
       md: ['font-impact-large text-[25px] leading-[120%_] tracking-[-0.25px]'],
     },
     social: {
