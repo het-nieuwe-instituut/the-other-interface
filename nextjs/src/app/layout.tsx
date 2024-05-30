@@ -17,9 +17,24 @@ import { PreviewBlock } from '@/features/preview/PreviewBlock'
 import { ReduxDraftModeSync } from '@/features/shared/components/Redux/ReduxDraftModeSync'
 import { ReactTooltipInitializer } from '@/features/ui/components/tooltip/ReactTooltipInitializer'
 import { Metadata } from 'next'
+import { getTranslation } from '@/features/shared/utils/translations'
+import { getLocaleFromParams } from '@/features/shared/helpers/getLocaleFromParams'
 
-export const metadata: Metadata = {
-  title: 'Nieuwe Instituut',
+// export const metadata: Metadata = {
+//   title: 'Nieuwe Instituut',
+// }
+
+export async function generateMetadata({ params, locale }): Promise<Metadata> {
+  const { slug } = params
+  const testLocale = getLocaleFromParams(params)
+  console.log('here', locale)
+  // do translation here
+  const commonT = await getTranslation(locale, 'common')
+  const commonT2 = await getTranslation(testLocale, 'common')
+
+  return {
+    title: commonT('somethingWentWrong'),
+  }
 }
 
 function MyApp({ children }: { children: React.ReactNode }) {
