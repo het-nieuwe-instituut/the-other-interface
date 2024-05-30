@@ -9,8 +9,6 @@ export interface CoreButton extends Schema.Component {
   attributes: {
     text: Attribute.String
     url: Attribute.String
-    attachment: Attribute.Media
-    hasAttachment: Attribute.Boolean
   }
 }
 
@@ -99,7 +97,6 @@ export interface ModulesButtonsModule extends Schema.Component {
   }
   attributes: {
     buttons: Attribute.Component<'core.button', true>
-    buttonStyle: Attribute.Enumeration<['Default', 'Large']>
   }
 }
 
