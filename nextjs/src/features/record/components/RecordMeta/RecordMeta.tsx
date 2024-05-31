@@ -78,6 +78,10 @@ export const RecordMeta: React.FC = () => {
   return (
     <div className="flex flex-row flex-wrap">
       {recordMetaSectionData.map(section => {
+        if (!section.value) {
+          return null
+        }
+
         if (section.key === 'rights') {
           return (
             <Fragment key={section.key}>
@@ -97,17 +101,24 @@ export const RecordMeta: React.FC = () => {
             key={section.key}
           >
             <>
-              {section?.value?.map((value, valueIndex) =>
-                section.isLink && section.title ? (
-                  <NavLinkButton variant={'metaDataText'} key={valueIndex} href={value}>
+              {section?.value?.map((value, valueIndex) => {
+                const isExternal = isExternalURL(value, process.env.parsed.NEXT_PUBLIC_URL ?? '')
+                return section.isLink && section.title ? (
+                  <NavLinkButton
+                    variant={'metaDataText'}
+                    key={valueIndex}
+                    href={value}
+                    title={section.title}
+                  >
                     {section.title}
+                    {isExternal ? <ExternalLink className="size-[14px]" /> : null}
                   </NavLinkButton>
                 ) : (
                   <p key={valueIndex} className={TypographyVariants({ social: 'sm' })}>
                     {value}
                   </p>
                 )
-              )}
+              })}
             </>
           </MetaField>
         )
@@ -133,7 +144,7 @@ function RightsLinks({ value }: { value?: string[] | null; key?: string }) {
 
   return (
     <ReadMoreTooltip description={rightsInfo.description} place="bottom">
-      <NavLinkButton variant={'metaData'} href={rightsInfo.url}>
+      <NavLinkButton variant={'metaData'} href={rightsInfo.url} title={rightsInfo.text}>
         {rightsInfo.text}
         {isExternalURL(rightsInfo.url, process.env.parsed.NEXT_PUBLIC_URL ?? '') ? (
           <ExternalLink className="size-5" />

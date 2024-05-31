@@ -12,7 +12,7 @@ export const NavButtonVariants = cva(
     variants: {
       variant: {
         metaData: [
-          'h-[26px] rounded bg-[rgba(0,0,0,0.20)] px-2 py-1 after:border-none',
+          'h-[26px] rounded bg-[rgba(0,0,0,0.20)] px-2 py-1 after:border-none flex-nowrap line-clamp-1',
           'text-center font-social-large text-sm font-normal leading-[18.20px]',
         ],
         menuPrimary: ['h-[43px]'],

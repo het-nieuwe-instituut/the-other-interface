@@ -76,6 +76,7 @@ export const StoryMeta: React.FC = () => {
       {parentRelation && parentRelation?.data?.id && (
         <MetaField name={storiesT.t('parentStory')}>
           <NavLinkButton
+            title={parentRelation?.data?.attributes?.title ?? ''}
             variant={'metaData'}
             href={`/detail/${CATEGORIES.stories}/${parentRelation?.data?.id}?lang=${lang}`}
           >
@@ -89,6 +90,7 @@ export const StoryMeta: React.FC = () => {
             {childrenRelation?.data?.map(child => {
               return (
                 <NavLinkButton
+                  title={child.attributes?.title}
                   key={child.id}
                   variant={'metaData'}
                   href={`/detail/${CATEGORIES.stories}/${child.id}?lang=${lang}`}
@@ -134,7 +136,12 @@ export const StoryMeta: React.FC = () => {
           <div className="flex flex-row flex-wrap gap-x-2 gap-y-1">
             {linkedPeopleRecords.map(person => {
               return (
-                <NavLinkButton key={person.id} variant={'metaData'} href={person.url}>
+                <NavLinkButton
+                  title={person.title ?? ''}
+                  key={person.id}
+                  variant={'metaData'}
+                  href={person.url}
+                >
                   {person.title}
                 </NavLinkButton>
               )
