@@ -41,6 +41,6 @@ export const usePresenter = () => {
     isSearchBarCollapsed,
     isZoom1: currentZoomNumber === 1,
     toggleSearchBar,
-    isNoActiveSearch: !search,
+    isNoActiveSearch: !search && !isSearchResult,
   }
 }
