@@ -18,8 +18,8 @@ export const Footer = ({ menupages }: Props) => {
   return (
     <div className="relative z-[9996] w-full bg-ivory-90 opacity-100">
       <div className="container max-w-full p-6 pb-12">
-        <div className="grid md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-8 ">
-          <div className="flex flex-[1] flex-col items-start md:row-span-2 xl:flex-[0.5]">
+        <div className="grid md:grid-cols-2 md:grid-rows-2 md:gap-6 lg:grid-cols-3 lg:grid-rows-1">
+          <div className="flex flex-[1] flex-col items-start">
             <div className="flex cursor-pointer flex-col">
               <Link href={`https://nieuweinstituut.nl/${lang ?? 'nl'}`}>
                 <LogoSvg width={logoSize?.width} height={logoSize?.height} />
@@ -47,15 +47,18 @@ export const Footer = ({ menupages }: Props) => {
             </div>
           </div>
           <div className="flex flex-[1] flex-col items-start md:row-span-2 lg:flex-[1] xl:flex-[0.5]">
-            <StandaloneLink href={'#'}>Exhibitions and activities</StandaloneLink>
-            <StandaloneLink href={'#'}>Browse our web magazine</StandaloneLink>
-            <StandaloneLink href={'#'}>Subscribe to our newsletter</StandaloneLink>
-
-            <StandaloneLink href={'#'}>Colophon</StandaloneLink>
-            <StandaloneLink href={'#'}>Disclaimer</StandaloneLink>
+            <div>
+              <StandaloneLink href={'#'}>Exhibitions and activities</StandaloneLink>
+              <StandaloneLink href={'#'}>Browse our web magazine</StandaloneLink>
+              <StandaloneLink href={'#'}>Subscribe to our newsletter</StandaloneLink>
+            </div>
+            <div className="pt-10">
+              <StandaloneLink href={'#'}>Colophon</StandaloneLink>
+              <StandaloneLink href={'#'}>Disclaimer</StandaloneLink>
+            </div>
           </div>
           <div>
-            <p className={TypographyVariants({ social: 'md' })}>{t('languageDisclaimer')}</p>
+            <p className={TypographyVariants({ social: 'sm' })}>{t('languageDisclaimer')}</p>
           </div>
         </div>
       </div>
