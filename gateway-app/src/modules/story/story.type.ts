@@ -41,6 +41,12 @@ export class StoryRelationResponseCollection {
 }
 
 @ObjectType()
+export class StoryWithoutRelationsRelationResponseCollection {
+  @Field(() => [StoryWithoutRelationsEntity], { nullable: true })
+  public data?: StoryWithoutRelationsEntity[]
+}
+
+@ObjectType()
 export class Story {
   @Field(() => AuthorEntityResponse, { nullable: true })
   public author?: AuthorEntityResponse

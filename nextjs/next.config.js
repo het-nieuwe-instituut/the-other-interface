@@ -7,7 +7,7 @@ const env = require('dotenv').config({
 })
 const parsed = env.parsed
 const nextConfig = {
-  webpack(config) {
+  webpack: config => {
     config.externals = [...config.externals, 'canvas', 'bufferutil', 'utf-8-validate']
 
     config.module.rules.push({

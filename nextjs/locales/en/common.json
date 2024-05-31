@@ -19,5 +19,6 @@
   "switchToMockedServer": "Switch to mocked server",
   "switchToLiveServer": "Switch to test server",
   "go": "Search",
-  "noDataFound": "No data found"
+  "noDataFound": "No data found",
+  "metaTitle": "Nieuwe Instituut - Collection platform"
 }

@@ -5,33 +5,49 @@ const storyApi = 'api::story.story'
 
 export default {
   async beforeCreate(event) {
-    await checkParentChildConstraintsOrThrow(event)
+    try {
+      await checkParentChildConstraintsOrThrow(event)
 
-    if (!event.params.data.slug) {
-      throw new errors.ApplicationError('slug must be provided')
-    }
+      if (!event.params.data.slug) {
+        throw new errors.ApplicationError('slug must be provided')
+      }
 
-    if (event.params.data.slug) {
-      event.params.data.slug = getSlug(event.params.data.slug)
+      if (event.params.data.slug) {
+        event.params.data.slug = getSlug(event.params.data.slug)
+      }
+    } catch (err) {
+      handleError(err)
     }
   },
 
   async beforeUpdate(event) {
-    await checkParentChildConstraintsOrThrow(event)
+    try {
+      await checkParentChildConstraintsOrThrow(event)
 
-    const story = await strapi.entityService.findOne(storyApi, event.params.where.id)
+      const story = await strapi.entityService.findOne(storyApi, event.params.where.id)
 
-    if (event.params.data.slug && event.params.data.slug !== story.slug) {
-      event.params.data.slug = getSlug(event.params.data.slug)
+      if (event.params.data.slug && event.params.data.slug !== story.slug) {
+        event.params.data.slug = getSlug(event.params.data.slug)
+      }
+    } catch (err) {
+      handleError(err)
     }
   },
 
   async afterCreate(event) {
-    await applyToAllLocales(event)
+    try {
+      await applyToAllLocales(event)
+    } catch (err) {
+      handleError(err)
+    }
   },
 
   async afterUpdate(event) {
-    await applyToAllLocales(event)
+    try {
+      await applyToAllLocales(event)
+    } catch (err) {
+      handleError(err)
+    }
   },
 }
 
@@ -59,7 +75,7 @@ async function applyToAllLocales(event) {
       if (parentChanges.disconnect.length) {
         data['parent_story'] = parentChanges
       } else {
-        await changeOtherLocalesParent(parentChanges.connect?.[0].id, event.result.localizations)
+        await changeOtherLocalesParent(parentChanges?.connect?.[0].id, event.result.localizations)
       }
     }
 
@@ -71,11 +87,11 @@ async function applyToAllLocales(event) {
 
 async function checkParentChildConstraintsOrThrow(event) {
   const parentChanges = event.params.data.parent_story
-  if (parentChanges.connect?.length > 1) {
+  if (parentChanges?.connect?.length > 1) {
     throw new errors.ApplicationError('Story cannot have more than one parent')
   }
 
-  const parentId = parentChanges.connect?.[0]?.id
+  const parentId = parentChanges?.connect?.[0]?.id
   const childrenChanges = event.params.data.child_stories
   const id = event.params.where?.id // could be null if this method is called beforeCreate
   const story = id
@@ -111,7 +127,7 @@ async function checkParentChildConstraintsOrThrow(event) {
 
   // children cannot have children
   if (childrenChanges?.connect?.length) {
-    await checkIfChildrenAreNotParentsOrThrow(childrenChanges.connect.map(c => c.id))
+    await checkIfChildrenAreNotParentsOrThrow(childrenChanges?.connect.map(c => c.id))
   }
 
   // parent cannot have a parent
@@ -172,4 +188,13 @@ async function changeOtherLocalesParent(parentId: number, localizations: any[]) 
       return strapi.entityService.update(storyApi, l.id, { data })
     })
   )
+}
+
+function handleError(err: unknown) {
+  const ctx = strapi.requestContext.get()
+  if (err instanceof errors.ApplicationError) {
+    ctx.throw(400, err)
+  }
+
+  ctx.throw(500, err)
 }

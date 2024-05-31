@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import url(./utilities/group-hover-blur.css);
+@import url(./utilities/truncate.css);
 
 @font-face {
   font-family: 'Impact';
