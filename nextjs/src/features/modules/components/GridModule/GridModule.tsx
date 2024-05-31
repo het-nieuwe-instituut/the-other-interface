@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Markdown } from '@/features/shared/components/Markdown/Markdown'
-import { Box, Button, Grid, GridItem, Image, Text } from '@chakra-ui/react'
+import { Box, Grid, GridItem, Image, Text } from '@chakra-ui/react'
 import { take } from 'lodash'
 import NextLink from 'next/link'
 import { useState } from 'react'
@@ -12,14 +12,13 @@ import {
 } from 'src/generated/graphql'
 
 import {
-  LinkButtonGroup,
+  ButtonGroup,
+  ButtonGroupItem,
   LinkButtonGroupItem,
-} from '@/features/ui/components/link-button-group/component'
+} from '@/features/ui/components/button-group/component'
 import { ExtractedTriplyFields, extractTriplyFields } from '../../helpers/triplyDataExtractor'
 import { imageBasePath } from '../../modulesConstants'
 import { modulesSpacingMapper } from '../../modulesSpacing'
-import { NavButton } from '@/features/ui/components/nav-button/component'
-import { ButtonsGrid } from '@/features/shared/components/ButtonsGrid/ButtonsGrid'
 
 interface Props {
   component: ComponentModulesGridModule
@@ -214,23 +213,26 @@ export const GridModule: React.FC<Props> = props => {
     }
 
     return (
-      <>
-        {allFieldsAreShown && (
-          <NavButton variant={'footerPrimary'} onClick={() => setShowAmount(showAmount + pageSize)}>
-            {props.component.showMoreButtonTitle}
-          </NavButton>
-        )}
-        <LinkButtonGroup>
-          {props.component.buttons.map(button => {
-            if (!button.text) return null
-            return (
-              <LinkButtonGroupItem key={button.id} href={button.url || ''}>
-                {button.text}
-              </LinkButtonGroupItem>
-            )
-          })}
-        </LinkButtonGroup>
-      </>
+      <div className="flex">
+        <ButtonGroup className="flex-wrap">
+          {/* we need to spread here because typescript was unhappy when doing mixed button components with .map */}
+          {[
+            !allFieldsAreShown ? (
+              <ButtonGroupItem onClick={() => setShowAmount(showAmount + pageSize)}>
+                {props.component.showMoreButtonTitle}
+              </ButtonGroupItem>
+            ) : null,
+            ...props.component.buttons.map(button => {
+              if (!button.text) return null
+              return (
+                <LinkButtonGroupItem key={button.id} href={button.url || ''}>
+                  {button.text}
+                </LinkButtonGroupItem>
+              )
+            }),
+          ]}
+        </ButtonGroup>
+      </div>
     )
   }
 }
