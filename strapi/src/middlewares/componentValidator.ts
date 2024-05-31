@@ -1,16 +1,9 @@
-/**
- * `componentValidator` middleware
- */
-
 import { Strapi } from '@strapi/strapi'
 import { CoreStandAloneLink } from '../../types/generated/components'
 import { errors } from '@strapi/utils'
 
 export default (config, { strapi }: { strapi: Strapi }) => {
-  // Add your own logic here.
   return async (ctx, next) => {
-    strapi.log.info('In componentValidator middleware.')
-
     const { method, url, body } = ctx.request
     const contentManagementUrls = [
       '/content-manager/collection-types/api::',
