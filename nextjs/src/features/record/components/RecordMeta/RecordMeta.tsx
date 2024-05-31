@@ -26,6 +26,7 @@ import {
 } from '../../mappers/recordMetaDataMapper'
 import { recordRightsFieldMapper } from '../../mappers/recordRightsMapper'
 import { StandaloneLink } from 'src/app/ks/link/StandaloneLink'
+import { Fragment } from 'react'
 
 export const RecordMeta: React.FC = () => {
   const { t: recordMetaPublicationT } = useTypeSafeTranslation('recordMetaPublication')
@@ -79,14 +80,14 @@ export const RecordMeta: React.FC = () => {
       {recordMetaSectionData.map(section => {
         if (section.key === 'rights') {
           return (
-            <>
-              <MetaField name={section.title} key={section.key}>
-                <RightsLogo value={section.value} key={section.key} />
+            <Fragment key={section.key}>
+              <MetaField name={section.title}>
+                <RightsLogo value={section.value} />
               </MetaField>
-              <MetaField name={section.title} key={section.key + 1}>
-                <RightsLinks value={section.value} key={section.key} />
+              <MetaField name={section.title}>
+                <RightsLinks value={section.value} />
               </MetaField>
-            </>
+            </Fragment>
           )
         }
 
