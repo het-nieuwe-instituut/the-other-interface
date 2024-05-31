@@ -99,9 +99,9 @@ export const RecordMeta: React.FC = () => {
             <>
               {section?.value?.map((value, valueIndex) =>
                 section.isLink && section.title ? (
-                  <StandaloneLink size={'xsmall'} key={valueIndex} href={value} className="-ml-5">
+                  <NavLinkButton variant={'metaDataText'} key={valueIndex} href={value}>
                     {section.title}
-                  </StandaloneLink>
+                  </NavLinkButton>
                 ) : (
                   <p key={valueIndex} className={TypographyVariants({ social: 'sm' })}>
                     {value}
@@ -154,12 +154,14 @@ function RightsLogo({ value }: { value?: string[] | null; key?: string }) {
 
   return (
     <ReadMoreTooltip description={rightsInfo.description} place="bottom">
-      <a href={rightsInfo.url} className="flex gap-1">
-        <div className="size-7">
+      <a href={rightsInfo.url} className="flex flex-wrap gap-1 items-center ">
+        <div className="size-7 flex items-center">
           <Icon />
         </div>
         {SectionaryIcon ? <SectionaryIcon /> : null}
-        <p className={TypographyVariants({ social: 'sm' })}>{rightsInfo.text}</p>
+        <p className={TypographyVariants({ social: 'sm', className: 'flex items-center' })}>
+          {rightsInfo.text}
+        </p>
       </a>
     </ReadMoreTooltip>
   )

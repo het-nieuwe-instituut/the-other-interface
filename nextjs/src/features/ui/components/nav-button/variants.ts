@@ -28,6 +28,10 @@ export const NavButtonVariants = cva(
           'h-[35px]',
           'text-center font-social-large text-[32px] font-normal leading-9',
         ],
+        metaDataText: [
+          'h-[22px]',
+          'text-center font-social-large text-[14px] font-normal leading-4',
+        ],
       },
       color: {
         black: 'text-black-100 after:border-black after:text-black-100',
