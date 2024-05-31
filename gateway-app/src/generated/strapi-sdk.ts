@@ -198,6 +198,14 @@ export type ComponentCorePublicationDateInput = {
   id?: InputMaybe<Scalars['ID']>
 }
 
+export type ComponentCoreStandAloneLink = {
+  __typename?: 'ComponentCoreStandAloneLink'
+  attachment?: Maybe<UploadFileEntityResponse>
+  id: Scalars['ID']
+  label: Scalars['String']
+  url?: Maybe<Scalars['String']>
+}
+
 export type ComponentCoreTimeframe = {
   __typename?: 'ComponentCoreTimeframe'
   id: Scalars['ID']
@@ -568,6 +576,7 @@ export type GenericMorph =
   | ComponentCoreFeaturedFields
   | ComponentCoreGridFeaturedFields
   | ComponentCorePublicationDate
+  | ComponentCoreStandAloneLink
   | ComponentCoreTimeframe
   | ComponentModulesButtonsModule
   | ComponentModulesCarousel
@@ -1667,6 +1676,7 @@ export type StoryTriplyRecordsArgs = {
 }
 
 export type StoryComponentsDynamicZone =
+  | ComponentCoreStandAloneLink
   | ComponentModulesButtonsModule
   | ComponentModulesImage
   | ComponentModulesImageCarousel
@@ -6825,6 +6835,38 @@ export type StoriesQuery = {
         locale?: string | null
         components?: Array<
           | {
+              __typename: 'ComponentCoreStandAloneLink'
+              id: string
+              label: string
+              url?: string | null
+              attachment?: {
+                __typename?: 'UploadFileEntityResponse'
+                data?: {
+                  __typename?: 'UploadFileEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'UploadFile'
+                    hash: string
+                    mime: string
+                    name: string
+                    provider: string
+                    size: number
+                    url: string
+                    alternativeText?: string | null
+                    caption?: string | null
+                    createdAt?: any | null
+                    ext?: string | null
+                    formats?: any | null
+                    height?: number | null
+                    previewUrl?: string | null
+                    provider_metadata?: any | null
+                    updatedAt?: any | null
+                    width?: number | null
+                  } | null
+                } | null
+              } | null
+            }
+          | {
               __typename: 'ComponentModulesButtonsModule'
               id: string
               buttons?: Array<{
@@ -7011,6 +7053,7 @@ export type StoriesQuery = {
               __typename?: 'Story'
               title: string
               components?: Array<
+                | { __typename: 'ComponentCoreStandAloneLink' }
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
@@ -7120,6 +7163,7 @@ export type StoriesQuery = {
               __typename?: 'Story'
               title: string
               components?: Array<
+                | { __typename: 'ComponentCoreStandAloneLink' }
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
@@ -7275,6 +7319,38 @@ export type StoryQuery = {
         locale?: string | null
         components?: Array<
           | {
+              __typename: 'ComponentCoreStandAloneLink'
+              id: string
+              label: string
+              url?: string | null
+              attachment?: {
+                __typename?: 'UploadFileEntityResponse'
+                data?: {
+                  __typename?: 'UploadFileEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'UploadFile'
+                    hash: string
+                    mime: string
+                    name: string
+                    provider: string
+                    size: number
+                    url: string
+                    alternativeText?: string | null
+                    caption?: string | null
+                    createdAt?: any | null
+                    ext?: string | null
+                    formats?: any | null
+                    height?: number | null
+                    previewUrl?: string | null
+                    provider_metadata?: any | null
+                    updatedAt?: any | null
+                    width?: number | null
+                  } | null
+                } | null
+              } | null
+            }
+          | {
               __typename: 'ComponentModulesButtonsModule'
               id: string
               buttons?: Array<{
@@ -7461,6 +7537,7 @@ export type StoryQuery = {
               __typename?: 'Story'
               title: string
               components?: Array<
+                | { __typename: 'ComponentCoreStandAloneLink' }
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
@@ -7570,6 +7647,7 @@ export type StoryQuery = {
               __typename?: 'Story'
               title: string
               components?: Array<
+                | { __typename: 'ComponentCoreStandAloneLink' }
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
@@ -7732,6 +7810,38 @@ export type StoryByLocaleQuery = {
           }>
         } | null
         components?: Array<
+          | {
+              __typename: 'ComponentCoreStandAloneLink'
+              id: string
+              label: string
+              url?: string | null
+              attachment?: {
+                __typename?: 'UploadFileEntityResponse'
+                data?: {
+                  __typename?: 'UploadFileEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'UploadFile'
+                    hash: string
+                    mime: string
+                    name: string
+                    provider: string
+                    size: number
+                    url: string
+                    alternativeText?: string | null
+                    caption?: string | null
+                    createdAt?: any | null
+                    ext?: string | null
+                    formats?: any | null
+                    height?: number | null
+                    previewUrl?: string | null
+                    provider_metadata?: any | null
+                    updatedAt?: any | null
+                    width?: number | null
+                  } | null
+                } | null
+              } | null
+            }
           | {
               __typename: 'ComponentModulesButtonsModule'
               id: string
@@ -7906,6 +8016,38 @@ export type StoryByLocaleQuery = {
                 }>
               } | null
               components?: Array<
+                | {
+                    __typename: 'ComponentCoreStandAloneLink'
+                    id: string
+                    label: string
+                    url?: string | null
+                    attachment?: {
+                      __typename?: 'UploadFileEntityResponse'
+                      data?: {
+                        __typename?: 'UploadFileEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'UploadFile'
+                          hash: string
+                          mime: string
+                          name: string
+                          provider: string
+                          size: number
+                          url: string
+                          alternativeText?: string | null
+                          caption?: string | null
+                          createdAt?: any | null
+                          ext?: string | null
+                          formats?: any | null
+                          height?: number | null
+                          previewUrl?: string | null
+                          provider_metadata?: any | null
+                          updatedAt?: any | null
+                          width?: number | null
+                        } | null
+                      } | null
+                    } | null
+                  }
                 | {
                     __typename: 'ComponentModulesButtonsModule'
                     id: string
@@ -8099,6 +8241,38 @@ export type StoriesByLocaleQuery = {
         } | null
         components?: Array<
           | {
+              __typename: 'ComponentCoreStandAloneLink'
+              id: string
+              label: string
+              url?: string | null
+              attachment?: {
+                __typename?: 'UploadFileEntityResponse'
+                data?: {
+                  __typename?: 'UploadFileEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'UploadFile'
+                    hash: string
+                    mime: string
+                    name: string
+                    provider: string
+                    size: number
+                    url: string
+                    alternativeText?: string | null
+                    caption?: string | null
+                    createdAt?: any | null
+                    ext?: string | null
+                    formats?: any | null
+                    height?: number | null
+                    previewUrl?: string | null
+                    provider_metadata?: any | null
+                    updatedAt?: any | null
+                    width?: number | null
+                  } | null
+                } | null
+              } | null
+            }
+          | {
               __typename: 'ComponentModulesButtonsModule'
               id: string
               buttons?: Array<{
@@ -8272,6 +8446,38 @@ export type StoriesByLocaleQuery = {
                 }>
               } | null
               components?: Array<
+                | {
+                    __typename: 'ComponentCoreStandAloneLink'
+                    id: string
+                    label: string
+                    url?: string | null
+                    attachment?: {
+                      __typename?: 'UploadFileEntityResponse'
+                      data?: {
+                        __typename?: 'UploadFileEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'UploadFile'
+                          hash: string
+                          mime: string
+                          name: string
+                          provider: string
+                          size: number
+                          url: string
+                          alternativeText?: string | null
+                          caption?: string | null
+                          createdAt?: any | null
+                          ext?: string | null
+                          formats?: any | null
+                          height?: number | null
+                          previewUrl?: string | null
+                          provider_metadata?: any | null
+                          updatedAt?: any | null
+                          width?: number | null
+                        } | null
+                      } | null
+                    } | null
+                  }
                 | {
                     __typename: 'ComponentModulesButtonsModule'
                     id: string
@@ -8482,6 +8688,7 @@ export type StoriesMetaByLocaleQuery = {
               __typename?: 'Story'
               title: string
               components?: Array<
+                | { __typename: 'ComponentCoreStandAloneLink' }
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
@@ -8591,6 +8798,7 @@ export type StoriesMetaByLocaleQuery = {
               __typename?: 'Story'
               title: string
               components?: Array<
+                | { __typename: 'ComponentCoreStandAloneLink' }
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
@@ -8795,6 +9003,7 @@ export type StoriesMetaByLocaleQuery = {
                     __typename?: 'Story'
                     title: string
                     components?: Array<
+                      | { __typename: 'ComponentCoreStandAloneLink' }
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
@@ -8904,6 +9113,7 @@ export type StoriesMetaByLocaleQuery = {
                     __typename?: 'Story'
                     title: string
                     components?: Array<
+                      | { __typename: 'ComponentCoreStandAloneLink' }
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
@@ -9159,6 +9369,38 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
         locale?: string | null
         components?: Array<
           | {
+              __typename: 'ComponentCoreStandAloneLink'
+              id: string
+              label: string
+              url?: string | null
+              attachment?: {
+                __typename?: 'UploadFileEntityResponse'
+                data?: {
+                  __typename?: 'UploadFileEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'UploadFile'
+                    hash: string
+                    mime: string
+                    name: string
+                    provider: string
+                    size: number
+                    url: string
+                    alternativeText?: string | null
+                    caption?: string | null
+                    createdAt?: any | null
+                    ext?: string | null
+                    formats?: any | null
+                    height?: number | null
+                    previewUrl?: string | null
+                    provider_metadata?: any | null
+                    updatedAt?: any | null
+                    width?: number | null
+                  } | null
+                } | null
+              } | null
+            }
+          | {
               __typename: 'ComponentModulesButtonsModule'
               id: string
               buttons?: Array<{
@@ -9345,6 +9587,7 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
               __typename?: 'Story'
               title: string
               components?: Array<
+                | { __typename: 'ComponentCoreStandAloneLink' }
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
@@ -9454,6 +9697,7 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
               __typename?: 'Story'
               title: string
               components?: Array<
+                | { __typename: 'ComponentCoreStandAloneLink' }
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
@@ -9610,6 +9854,7 @@ export type StoriesByIdsQuery = {
         slug: string
         locale?: string | null
         components?: Array<
+          | { __typename?: 'ComponentCoreStandAloneLink' }
           | { __typename?: 'ComponentModulesButtonsModule' }
           | {
               __typename: 'ComponentModulesImage'
@@ -9855,6 +10100,38 @@ export type NestedStoryFragmentFragment = {
     } | null
     components?: Array<
       | {
+          __typename: 'ComponentCoreStandAloneLink'
+          id: string
+          label: string
+          url?: string | null
+          attachment?: {
+            __typename?: 'UploadFileEntityResponse'
+            data?: {
+              __typename?: 'UploadFileEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'UploadFile'
+                hash: string
+                mime: string
+                name: string
+                provider: string
+                size: number
+                url: string
+                alternativeText?: string | null
+                caption?: string | null
+                createdAt?: any | null
+                ext?: string | null
+                formats?: any | null
+                height?: number | null
+                previewUrl?: string | null
+                provider_metadata?: any | null
+                updatedAt?: any | null
+                width?: number | null
+              } | null
+            } | null
+          } | null
+        }
+      | {
           __typename: 'ComponentModulesButtonsModule'
           id: string
           buttons?: Array<{
@@ -10030,6 +10307,38 @@ export type LocalizedStoryFragmentFragment = {
     } | null
     components?: Array<
       | {
+          __typename: 'ComponentCoreStandAloneLink'
+          id: string
+          label: string
+          url?: string | null
+          attachment?: {
+            __typename?: 'UploadFileEntityResponse'
+            data?: {
+              __typename?: 'UploadFileEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'UploadFile'
+                hash: string
+                mime: string
+                name: string
+                provider: string
+                size: number
+                url: string
+                alternativeText?: string | null
+                caption?: string | null
+                createdAt?: any | null
+                ext?: string | null
+                formats?: any | null
+                height?: number | null
+                previewUrl?: string | null
+                provider_metadata?: any | null
+                updatedAt?: any | null
+                width?: number | null
+              } | null
+            } | null
+          } | null
+        }
+      | {
           __typename: 'ComponentModulesButtonsModule'
           id: string
           buttons?: Array<{
@@ -10204,6 +10513,38 @@ export type LocalizedStoryFragmentFragment = {
           } | null
           components?: Array<
             | {
+                __typename: 'ComponentCoreStandAloneLink'
+                id: string
+                label: string
+                url?: string | null
+                attachment?: {
+                  __typename?: 'UploadFileEntityResponse'
+                  data?: {
+                    __typename?: 'UploadFileEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'UploadFile'
+                      hash: string
+                      mime: string
+                      name: string
+                      provider: string
+                      size: number
+                      url: string
+                      alternativeText?: string | null
+                      caption?: string | null
+                      createdAt?: any | null
+                      ext?: string | null
+                      formats?: any | null
+                      height?: number | null
+                      previewUrl?: string | null
+                      provider_metadata?: any | null
+                      updatedAt?: any | null
+                      width?: number | null
+                    } | null
+                  } | null
+                } | null
+              }
+            | {
                 __typename: 'ComponentModulesButtonsModule'
                 id: string
                 buttons?: Array<{
@@ -10346,6 +10687,38 @@ export type StoryFragmentFragment = {
     publishedAt?: any | null
     locale?: string | null
     components?: Array<
+      | {
+          __typename: 'ComponentCoreStandAloneLink'
+          id: string
+          label: string
+          url?: string | null
+          attachment?: {
+            __typename?: 'UploadFileEntityResponse'
+            data?: {
+              __typename?: 'UploadFileEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'UploadFile'
+                hash: string
+                mime: string
+                name: string
+                provider: string
+                size: number
+                url: string
+                alternativeText?: string | null
+                caption?: string | null
+                createdAt?: any | null
+                ext?: string | null
+                formats?: any | null
+                height?: number | null
+                previewUrl?: string | null
+                provider_metadata?: any | null
+                updatedAt?: any | null
+                width?: number | null
+              } | null
+            } | null
+          } | null
+        }
       | {
           __typename: 'ComponentModulesButtonsModule'
           id: string
@@ -10533,6 +10906,7 @@ export type StoryFragmentFragment = {
           __typename?: 'Story'
           title: string
           components?: Array<
+            | { __typename: 'ComponentCoreStandAloneLink' }
             | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
@@ -10642,6 +11016,7 @@ export type StoryFragmentFragment = {
           __typename?: 'Story'
           title: string
           components?: Array<
+            | { __typename: 'ComponentCoreStandAloneLink' }
             | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
@@ -10829,6 +11204,7 @@ export type StoryMetaFragmentFragment = {
           __typename?: 'Story'
           title: string
           components?: Array<
+            | { __typename: 'ComponentCoreStandAloneLink' }
             | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
@@ -10938,6 +11314,7 @@ export type StoryMetaFragmentFragment = {
           __typename?: 'Story'
           title: string
           components?: Array<
+            | { __typename: 'ComponentCoreStandAloneLink' }
             | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
@@ -11098,6 +11475,7 @@ export type LocalizedStoryMetaFragmentFragment = {
           __typename?: 'Story'
           title: string
           components?: Array<
+            | { __typename: 'ComponentCoreStandAloneLink' }
             | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
@@ -11207,6 +11585,7 @@ export type LocalizedStoryMetaFragmentFragment = {
           __typename?: 'Story'
           title: string
           components?: Array<
+            | { __typename: 'ComponentCoreStandAloneLink' }
             | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
@@ -11411,6 +11790,7 @@ export type LocalizedStoryMetaFragmentFragment = {
                 __typename?: 'Story'
                 title: string
                 components?: Array<
+                  | { __typename: 'ComponentCoreStandAloneLink' }
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
@@ -11520,6 +11900,7 @@ export type LocalizedStoryMetaFragmentFragment = {
                 __typename?: 'Story'
                 title: string
                 components?: Array<
+                  | { __typename: 'ComponentCoreStandAloneLink' }
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
@@ -11766,6 +12147,39 @@ export type ComponentCoreGridFeaturedFieldsFragmentFragment = {
         __typename?: 'TriplyRecord'
         recordId: string
         type: Enum_Triplyrecord_Type
+      } | null
+    } | null
+  } | null
+}
+
+export type ComponentCoreStandAloneLinkFragmentFragment = {
+  __typename?: 'ComponentCoreStandAloneLink'
+  id: string
+  label: string
+  url?: string | null
+  attachment?: {
+    __typename?: 'UploadFileEntityResponse'
+    data?: {
+      __typename?: 'UploadFileEntity'
+      id?: string | null
+      attributes?: {
+        __typename?: 'UploadFile'
+        hash: string
+        mime: string
+        name: string
+        provider: string
+        size: number
+        url: string
+        alternativeText?: string | null
+        caption?: string | null
+        createdAt?: any | null
+        ext?: string | null
+        formats?: any | null
+        height?: number | null
+        previewUrl?: string | null
+        provider_metadata?: any | null
+        updatedAt?: any | null
+        width?: number | null
       } | null
     } | null
   } | null
@@ -12183,6 +12597,38 @@ export type ThemeQuery = {
               locale?: string | null
               components?: Array<
                 | {
+                    __typename: 'ComponentCoreStandAloneLink'
+                    id: string
+                    label: string
+                    url?: string | null
+                    attachment?: {
+                      __typename?: 'UploadFileEntityResponse'
+                      data?: {
+                        __typename?: 'UploadFileEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'UploadFile'
+                          hash: string
+                          mime: string
+                          name: string
+                          provider: string
+                          size: number
+                          url: string
+                          alternativeText?: string | null
+                          caption?: string | null
+                          createdAt?: any | null
+                          ext?: string | null
+                          formats?: any | null
+                          height?: number | null
+                          previewUrl?: string | null
+                          provider_metadata?: any | null
+                          updatedAt?: any | null
+                          width?: number | null
+                        } | null
+                      } | null
+                    } | null
+                  }
+                | {
                     __typename: 'ComponentModulesButtonsModule'
                     id: string
                     buttons?: Array<{
@@ -12369,6 +12815,7 @@ export type ThemeQuery = {
                     __typename?: 'Story'
                     title: string
                     components?: Array<
+                      | { __typename: 'ComponentCoreStandAloneLink' }
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
@@ -12478,6 +12925,7 @@ export type ThemeQuery = {
                     __typename?: 'Story'
                     title: string
                     components?: Array<
+                      | { __typename: 'ComponentCoreStandAloneLink' }
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
@@ -12629,6 +13077,38 @@ export type ThemesQuery = {
               locale?: string | null
               components?: Array<
                 | {
+                    __typename: 'ComponentCoreStandAloneLink'
+                    id: string
+                    label: string
+                    url?: string | null
+                    attachment?: {
+                      __typename?: 'UploadFileEntityResponse'
+                      data?: {
+                        __typename?: 'UploadFileEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'UploadFile'
+                          hash: string
+                          mime: string
+                          name: string
+                          provider: string
+                          size: number
+                          url: string
+                          alternativeText?: string | null
+                          caption?: string | null
+                          createdAt?: any | null
+                          ext?: string | null
+                          formats?: any | null
+                          height?: number | null
+                          previewUrl?: string | null
+                          provider_metadata?: any | null
+                          updatedAt?: any | null
+                          width?: number | null
+                        } | null
+                      } | null
+                    } | null
+                  }
+                | {
                     __typename: 'ComponentModulesButtonsModule'
                     id: string
                     buttons?: Array<{
@@ -12815,6 +13295,7 @@ export type ThemesQuery = {
                     __typename?: 'Story'
                     title: string
                     components?: Array<
+                      | { __typename: 'ComponentCoreStandAloneLink' }
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
@@ -12924,6 +13405,7 @@ export type ThemesQuery = {
                     __typename?: 'Story'
                     title: string
                     components?: Array<
+                      | { __typename: 'ComponentCoreStandAloneLink' }
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
@@ -13083,6 +13565,38 @@ export type StoriesRelatedToThemeQuery = {
               locale?: string | null
               components?: Array<
                 | {
+                    __typename: 'ComponentCoreStandAloneLink'
+                    id: string
+                    label: string
+                    url?: string | null
+                    attachment?: {
+                      __typename?: 'UploadFileEntityResponse'
+                      data?: {
+                        __typename?: 'UploadFileEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'UploadFile'
+                          hash: string
+                          mime: string
+                          name: string
+                          provider: string
+                          size: number
+                          url: string
+                          alternativeText?: string | null
+                          caption?: string | null
+                          createdAt?: any | null
+                          ext?: string | null
+                          formats?: any | null
+                          height?: number | null
+                          previewUrl?: string | null
+                          provider_metadata?: any | null
+                          updatedAt?: any | null
+                          width?: number | null
+                        } | null
+                      } | null
+                    } | null
+                  }
+                | {
                     __typename: 'ComponentModulesButtonsModule'
                     id: string
                     buttons?: Array<{
@@ -13269,6 +13783,7 @@ export type StoriesRelatedToThemeQuery = {
                     __typename?: 'Story'
                     title: string
                     components?: Array<
+                      | { __typename: 'ComponentCoreStandAloneLink' }
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
@@ -13378,6 +13893,7 @@ export type StoriesRelatedToThemeQuery = {
                     __typename?: 'Story'
                     title: string
                     components?: Array<
+                      | { __typename: 'ComponentCoreStandAloneLink' }
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
@@ -13516,6 +14032,38 @@ export type ThemeFragmentFragment = {
           publishedAt?: any | null
           locale?: string | null
           components?: Array<
+            | {
+                __typename: 'ComponentCoreStandAloneLink'
+                id: string
+                label: string
+                url?: string | null
+                attachment?: {
+                  __typename?: 'UploadFileEntityResponse'
+                  data?: {
+                    __typename?: 'UploadFileEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'UploadFile'
+                      hash: string
+                      mime: string
+                      name: string
+                      provider: string
+                      size: number
+                      url: string
+                      alternativeText?: string | null
+                      caption?: string | null
+                      createdAt?: any | null
+                      ext?: string | null
+                      formats?: any | null
+                      height?: number | null
+                      previewUrl?: string | null
+                      provider_metadata?: any | null
+                      updatedAt?: any | null
+                      width?: number | null
+                    } | null
+                  } | null
+                } | null
+              }
             | {
                 __typename: 'ComponentModulesButtonsModule'
                 id: string
@@ -13703,6 +14251,7 @@ export type ThemeFragmentFragment = {
                 __typename?: 'Story'
                 title: string
                 components?: Array<
+                  | { __typename: 'ComponentCoreStandAloneLink' }
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
@@ -13812,6 +14361,7 @@ export type ThemeFragmentFragment = {
                 __typename?: 'Story'
                 title: string
                 components?: Array<
+                  | { __typename: 'ComponentCoreStandAloneLink' }
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
@@ -13968,6 +14518,38 @@ export type TriplyRecordQuery = {
               locale?: string | null
               components?: Array<
                 | {
+                    __typename: 'ComponentCoreStandAloneLink'
+                    id: string
+                    label: string
+                    url?: string | null
+                    attachment?: {
+                      __typename?: 'UploadFileEntityResponse'
+                      data?: {
+                        __typename?: 'UploadFileEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'UploadFile'
+                          hash: string
+                          mime: string
+                          name: string
+                          provider: string
+                          size: number
+                          url: string
+                          alternativeText?: string | null
+                          caption?: string | null
+                          createdAt?: any | null
+                          ext?: string | null
+                          formats?: any | null
+                          height?: number | null
+                          previewUrl?: string | null
+                          provider_metadata?: any | null
+                          updatedAt?: any | null
+                          width?: number | null
+                        } | null
+                      } | null
+                    } | null
+                  }
+                | {
                     __typename: 'ComponentModulesButtonsModule'
                     id: string
                     buttons?: Array<{
@@ -14154,6 +14736,7 @@ export type TriplyRecordQuery = {
                     __typename?: 'Story'
                     title: string
                     components?: Array<
+                      | { __typename: 'ComponentCoreStandAloneLink' }
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
@@ -14263,6 +14846,7 @@ export type TriplyRecordQuery = {
                     __typename?: 'Story'
                     title: string
                     components?: Array<
+                      | { __typename: 'ComponentCoreStandAloneLink' }
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
@@ -14410,6 +14994,38 @@ export type TriplyRecordsQuery = {
               locale?: string | null
               components?: Array<
                 | {
+                    __typename: 'ComponentCoreStandAloneLink'
+                    id: string
+                    label: string
+                    url?: string | null
+                    attachment?: {
+                      __typename?: 'UploadFileEntityResponse'
+                      data?: {
+                        __typename?: 'UploadFileEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'UploadFile'
+                          hash: string
+                          mime: string
+                          name: string
+                          provider: string
+                          size: number
+                          url: string
+                          alternativeText?: string | null
+                          caption?: string | null
+                          createdAt?: any | null
+                          ext?: string | null
+                          formats?: any | null
+                          height?: number | null
+                          previewUrl?: string | null
+                          provider_metadata?: any | null
+                          updatedAt?: any | null
+                          width?: number | null
+                        } | null
+                      } | null
+                    } | null
+                  }
+                | {
                     __typename: 'ComponentModulesButtonsModule'
                     id: string
                     buttons?: Array<{
@@ -14596,6 +15212,7 @@ export type TriplyRecordsQuery = {
                     __typename?: 'Story'
                     title: string
                     components?: Array<
+                      | { __typename: 'ComponentCoreStandAloneLink' }
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
@@ -14705,6 +15322,7 @@ export type TriplyRecordsQuery = {
                     __typename?: 'Story'
                     title: string
                     components?: Array<
+                      | { __typename: 'ComponentCoreStandAloneLink' }
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
@@ -14850,6 +15468,38 @@ export type TriplyRecordFragmentFragment = {
           publishedAt?: any | null
           locale?: string | null
           components?: Array<
+            | {
+                __typename: 'ComponentCoreStandAloneLink'
+                id: string
+                label: string
+                url?: string | null
+                attachment?: {
+                  __typename?: 'UploadFileEntityResponse'
+                  data?: {
+                    __typename?: 'UploadFileEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'UploadFile'
+                      hash: string
+                      mime: string
+                      name: string
+                      provider: string
+                      size: number
+                      url: string
+                      alternativeText?: string | null
+                      caption?: string | null
+                      createdAt?: any | null
+                      ext?: string | null
+                      formats?: any | null
+                      height?: number | null
+                      previewUrl?: string | null
+                      provider_metadata?: any | null
+                      updatedAt?: any | null
+                      width?: number | null
+                    } | null
+                  } | null
+                } | null
+              }
             | {
                 __typename: 'ComponentModulesButtonsModule'
                 id: string
@@ -15037,6 +15687,7 @@ export type TriplyRecordFragmentFragment = {
                 __typename?: 'Story'
                 title: string
                 components?: Array<
+                  | { __typename: 'ComponentCoreStandAloneLink' }
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
@@ -15146,6 +15797,7 @@ export type TriplyRecordFragmentFragment = {
                 __typename?: 'Story'
                 title: string
                 components?: Array<
+                  | { __typename: 'ComponentCoreStandAloneLink' }
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
@@ -15931,6 +16583,17 @@ export const MenupageEntityFragmentFragmentDoc = gql`
   }
   ${MenupageFragmentFragmentDoc}
 `
+export const ComponentCoreStandAloneLinkFragmentFragmentDoc = gql`
+  fragment ComponentCoreStandAloneLinkFragment on ComponentCoreStandAloneLink {
+    id
+    label
+    url
+    attachment {
+      ...UploadFileEntityResponseFragment
+    }
+  }
+  ${UploadFileEntityResponseFragmentFragmentDoc}
+`
 export const NestedStoryFragmentFragmentDoc = gql`
   fragment NestedStoryFragment on StoryEntity {
     id
@@ -15992,6 +16655,9 @@ export const NestedStoryFragmentFragmentDoc = gql`
         ... on ComponentModulesButtonsModule {
           ...ComponentModulesButtonsModuleFragment
         }
+        ... on ComponentCoreStandAloneLink {
+          ...ComponentCoreStandAloneLinkFragment
+        }
         ... on Error {
           ...ErrorFragment
         }
@@ -16005,6 +16671,7 @@ export const NestedStoryFragmentFragmentDoc = gql`
   ${ComponentModulesImageCarouselFragmentFragmentDoc}
   ${ComponentModulesImageFragmentFragmentDoc}
   ${ComponentModulesButtonsModuleFragmentFragmentDoc}
+  ${ComponentCoreStandAloneLinkFragmentFragmentDoc}
   ${ErrorFragmentFragmentDoc}
 `
 export const LocalizedStoryFragmentFragmentDoc = gql`
@@ -16068,6 +16735,9 @@ export const LocalizedStoryFragmentFragmentDoc = gql`
         ... on ComponentModulesButtonsModule {
           ...ComponentModulesButtonsModuleFragment
         }
+        ... on ComponentCoreStandAloneLink {
+          ...ComponentCoreStandAloneLinkFragment
+        }
         ... on Error {
           ...ErrorFragment
         }
@@ -16086,6 +16756,7 @@ export const LocalizedStoryFragmentFragmentDoc = gql`
   ${ComponentModulesImageCarouselFragmentFragmentDoc}
   ${ComponentModulesImageFragmentFragmentDoc}
   ${ComponentModulesButtonsModuleFragmentFragmentDoc}
+  ${ComponentCoreStandAloneLinkFragmentFragmentDoc}
   ${ErrorFragmentFragmentDoc}
   ${NestedStoryFragmentFragmentDoc}
 `
@@ -16373,6 +17044,9 @@ export const StoryFragmentFragmentDoc = gql`
         ... on ComponentModulesButtonsModule {
           ...ComponentModulesButtonsModuleFragment
         }
+        ... on ComponentCoreStandAloneLink {
+          ...ComponentCoreStandAloneLinkFragment
+        }
         ... on Error {
           ...ErrorFragment
         }
@@ -16478,6 +17152,7 @@ export const StoryFragmentFragmentDoc = gql`
   ${ComponentModulesImageCarouselFragmentFragmentDoc}
   ${ComponentModulesImageFragmentFragmentDoc}
   ${ComponentModulesButtonsModuleFragmentFragmentDoc}
+  ${ComponentCoreStandAloneLinkFragmentFragmentDoc}
   ${ErrorFragmentFragmentDoc}
   ${BaseTriplyRecordFragmentFragmentDoc}
 `

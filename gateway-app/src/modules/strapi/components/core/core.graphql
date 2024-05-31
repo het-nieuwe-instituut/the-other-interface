@@ -67,3 +67,12 @@ fragment ComponentCoreGridFeaturedFieldsFragment on ComponentCoreGridFeaturedFie
         }
     }
 }
+
+fragment ComponentCoreStandAloneLinkFragment on ComponentCoreStandAloneLink {
+    id
+    label
+    url
+    attachment {
+        ...UploadFileEntityResponseFragment
+    }
+}
