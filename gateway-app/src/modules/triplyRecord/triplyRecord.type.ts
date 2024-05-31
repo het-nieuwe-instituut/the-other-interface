@@ -31,7 +31,7 @@ export class TriplyRecord {
   public stories?: StoryRelationResponseCollection
 
   @Field(() => EntityNames, { nullable: false })
-  public recordType: EntityNames
+  public entityName: EntityNames
 
   @Field(() => Enum_Triplyrecord_Type, { nullable: false })
   public type: Enum_Triplyrecord_Type

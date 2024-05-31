@@ -17,7 +17,6 @@ import { useTotalCounterQuery } from '@/features/galaxyInterface/galaxies/MainGa
 import { Loader } from '@/features/shared/components/Loading/Loading'
 import ErrorBox from '@/features/shared/components/Error/ErrorBox'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { useMemo } from 'react'
 
 type Props = {
   total?: number
@@ -56,9 +55,8 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }
     isError: isTotalError,
   } = useTotalCounterQuery(isNoActiveSearch)
 
-  const isCollectionHighlightsSelected: boolean = useMemo(
-    () => selectedFilters.some(filter => filter.id === COLLECTION_HILIGHT_ID),
-    [selectedFilters]
+  const isCollectionHighlightsSelected: boolean = selectedFilters.some(
+    filter => filter.id === COLLECTION_HILIGHT_ID
   )
 
   const renderPaginationContent = () => {

@@ -1699,13 +1699,13 @@ export type TriplyRecord = {
   __typename?: 'TriplyRecord';
   archive?: Maybe<ArchiveZoomLevel3DetailType>;
   createdAt?: Maybe<Scalars['Date']>;
+  entityName: EntityNames;
   label?: Maybe<Scalars['String']>;
   object?: Maybe<ObjectsZoomLevel3DetailType>;
   people?: Maybe<PeopleZoomLevel3DetailType>;
   publication?: Maybe<PublicationZoomLevel3DetailType>;
   publishedAt?: Maybe<Scalars['Date']>;
   recordId: Scalars['String'];
-  recordType: EntityNames;
   stories?: Maybe<StoryRelationResponseCollection>;
   subject_collectionHighlights?: Maybe<Scalars['Boolean']>;
   type: EnumTriplyrecordType;
@@ -2148,7 +2148,7 @@ export type SearchBySelectedHighlightsQueryVariables = Exact<{
 }>;
 
 
-export type SearchBySelectedHighlightsQuery = { __typename?: 'Query', triplyRecords: { __typename?: 'TriplyRecordRelationResponseCollection', data: Array<{ __typename?: 'TriplyRecordEntity', id?: string | null, attributes: { __typename?: 'TriplyRecord', label?: string | null, recordType: EntityNames, recordId: string } }>, meta?: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', page: number, total: number } } | null } };
+export type SearchBySelectedHighlightsQuery = { __typename?: 'Query', triplyRecords: { __typename?: 'TriplyRecordRelationResponseCollection', data: Array<{ __typename?: 'TriplyRecordEntity', id?: string | null, attributes: { __typename?: 'TriplyRecord', label?: string | null, entityName: EntityNames, recordId: string } }>, meta?: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', page: number, total: number } } | null } };
 
 export type Zoom2QueryVariables = Exact<{
   entityName: EntityNames;
@@ -3424,7 +3424,7 @@ export const SearchBySelectedHighlightsDocument = gql`
       id
       attributes {
         label
-        recordType
+        entityName
         recordId
       }
     }

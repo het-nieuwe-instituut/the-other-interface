@@ -68,7 +68,7 @@ export class TriplyRecordFieldResolver {
   }
 
   @ResolveField()
-  public async recordType(@Parent() triplyRecord: TriplyRecord) {
+  public async entityName(@Parent() triplyRecord: TriplyRecord) {
     return StrapiUtils.getEntityNameForRecordType(triplyRecord.type)
   }
 

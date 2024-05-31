@@ -13,7 +13,7 @@ import initApiClientService from '../../utils/initApiClientService'
 import { useLocale } from '../useLocale'
 import { Filter, useFilters } from '../search/useFilters'
 import { COLLECTION_HILIGHT_ID } from '@/features/galaxyInterface/components/GalaxyWrapper/Suggestions/Suggestions'
-import { searchCategoryToTriplyMapper } from '../../mappers/searchCategoryToTriplyMapper'
+import { triplyCategoryToSearchCategory } from '@/features/galaxyInterface/galaxies/CategoryGalaxy/mappers/searchCategoryToTriplyMapper'
 import { StringFilterInput, TriplyRecordFiltersInput } from 'src/generated/graphql'
 
 export function useSearchByCategoryQuery({
@@ -35,7 +35,7 @@ export function useSearchByCategoryQuery({
   // TODO: mix story search
   const queryFn = async () => {
     if (decodedFilters?.find(filter => filter.id === COLLECTION_HILIGHT_ID)) {
-      const type = searchCategoryToTriplyMapper(category)
+      const type = triplyCategoryToSearchCategory(category)
 
       const labelFilter: StringFilterInput = { containsi: text || undefined }
 
@@ -60,7 +60,7 @@ export function useSearchByCategoryQuery({
             id: record.attributes?.recordId,
             title: record.attributes?.label ?? '',
             thumbnail: '',
-            type: record.attributes?.recordType ?? '',
+            type: record.attributes?.entityName ?? '',
           })) ?? [],
         total: response?.triplyRecords?.meta?.pagination?.total ?? 0,
       }

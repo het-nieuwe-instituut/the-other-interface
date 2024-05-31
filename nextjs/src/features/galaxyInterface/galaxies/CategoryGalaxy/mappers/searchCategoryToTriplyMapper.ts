@@ -1,7 +1,7 @@
 import { EnumTriplyrecordType } from 'src/generated/graphql'
-import { SEARCH_CATEGORIES, SearchCategory } from '../utils/categories'
+import { SEARCH_CATEGORIES, SearchCategory } from '../../../../shared/utils/categories'
 
-export function searchCategoryToTriplyMapper(
+export function triplyCategoryToSearchCategory(
   category: SearchCategory
 ): EnumTriplyrecordType | undefined {
   switch (category) {
