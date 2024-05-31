@@ -1,7 +1,6 @@
 import { Title } from '@/features/ui/components/title/Title'
 import { cn } from '@/features/ui/utils/cn'
 import {
-  ComponentModulesButtonsModule,
   ComponentModulesCarousel,
   ComponentModulesGridModule,
   ComponentModulesImage,
@@ -15,7 +14,10 @@ import {
 } from 'src/generated/graphql'
 import { Paragraph } from '../../ui/components/Paragraph/Paragraph'
 import { Subtitle } from '../../ui/components/subtitle/Subtitle'
-import { ButtonsModule } from '../components/ButtonsModule/ButtonsModule'
+import {
+  LinkButtonGroup,
+  LinkButtonGroupItem,
+} from '../../ui/components/link-button-group/component'
 import { GridModule } from '../components/GridModule/GridModule'
 import MediaImage from '../components/Image/Image'
 import { Pullquote } from '../components/Pullquote/Pullquote'
@@ -133,11 +135,22 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
           }
 
           if (component?.__typename === 'ComponentModulesButtonsModule') {
+            if (!component.buttons || component.buttons?.length === 0) {
+              return null
+            }
             return (
-              <ButtonsModule
-                key={keyExtractor(component.id, index, array)}
-                component={component as ComponentModulesButtonsModule}
-              />
+              <LinkButtonGroup key={keyExtractor(component.id, index, array)}>
+                {component.buttons?.map(button => {
+                  if (!button.text || !button.url) {
+                    return null
+                  }
+                  return (
+                    <LinkButtonGroupItem key={button.id} href={button.url}>
+                      {button.text}
+                    </LinkButtonGroupItem>
+                  )
+                })}
+              </LinkButtonGroup>
             )
           }
 
