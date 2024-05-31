@@ -5,33 +5,49 @@ const storyApi = 'api::story.story'
 
 export default {
   async beforeCreate(event) {
-    await checkParentChildConstraintsOrThrow(event)
+    try {
+      await checkParentChildConstraintsOrThrow(event)
 
-    if (!event.params.data.slug) {
-      throw new errors.ApplicationError('slug must be provided')
-    }
+      if (!event.params.data.slug) {
+        throw new errors.ApplicationError('slug must be provided')
+      }
 
-    if (event.params.data.slug) {
-      event.params.data.slug = getSlug(event.params.data.slug)
+      if (event.params.data.slug) {
+        event.params.data.slug = getSlug(event.params.data.slug)
+      }
+    } catch (err) {
+      handleError(err)
     }
   },
 
   async beforeUpdate(event) {
-    await checkParentChildConstraintsOrThrow(event)
+    try {
+      await checkParentChildConstraintsOrThrow(event)
 
-    const story = await strapi.entityService.findOne(storyApi, event.params.where.id)
+      const story = await strapi.entityService.findOne(storyApi, event.params.where.id)
 
-    if (event.params.data.slug && event.params.data.slug !== story.slug) {
-      event.params.data.slug = getSlug(event.params.data.slug)
+      if (event.params.data.slug && event.params.data.slug !== story.slug) {
+        event.params.data.slug = getSlug(event.params.data.slug)
+      }
+    } catch (err) {
+      handleError(err)
     }
   },
 
   async afterCreate(event) {
-    await applyToAllLocales(event)
+    try {
+      await applyToAllLocales(event)
+    } catch (err) {
+      handleError(err)
+    }
   },
 
   async afterUpdate(event) {
-    await applyToAllLocales(event)
+    try {
+      await applyToAllLocales(event)
+    } catch (err) {
+      handleError(err)
+    }
   },
 }
 
@@ -172,4 +188,13 @@ async function changeOtherLocalesParent(parentId: number, localizations: any[]) 
       return strapi.entityService.update(storyApi, l.id, { data })
     })
   )
+}
+
+function handleError(err: unknown) {
+  const ctx = strapi.requestContext.get()
+  if (err instanceof errors.ApplicationError) {
+    ctx.throw(400, err)
+  }
+
+  ctx.throw(500, err)
 }

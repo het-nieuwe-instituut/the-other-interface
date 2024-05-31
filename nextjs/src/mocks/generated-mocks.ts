@@ -1,4 +1,4 @@
-import { ArchiveRelationsType, ArchiveZoomLevel3DetailType, ArchivesFondsCreatorType, ArchivesFondsZoomLevel3DetailType, ArchivesRecordZoomLevel3Type, ArchivesRelationsCountType, ArchivesZoomLevelHoverType, Author, AuthorEntity, AuthorEntityResponse, AuthorEntityResponseCollection, AuthorFiltersInput, BooleanFilterInput, ComponentCoreButton, ComponentCoreButtonFiltersInput, ComponentCoreCarouselItem, ComponentCoreFeaturedFields, ComponentCoreGridFeaturedFields, ComponentCoreModuleLayoutsFiltersInput, ComponentCorePublicationDate, ComponentCorePublicationDateFiltersInput, ComponentCoreTimeframe, ComponentCoreTimeframeFiltersInput, ComponentModulesButtonsModule, ComponentModulesButtonsModuleFiltersInput, ComponentModulesCarousel, ComponentModulesGridModule, ComponentModulesImage, ComponentModulesImageCarousel, ComponentModulesPullquote, ComponentModulesSubtitle, ComponentModulesTextModule, ComponentModulesTitleModule, DateFilterInput, DateTimeFilterInput, Error, Homepage, HomepageEntity, HomepageEntityResponse, HomepageRelationResponseCollection, IdFilterInput, Landingpage, LandingpageEntity, LandingpageEntityResponse, LandingpageEntityResponseCollection, LandingpageFiltersInput, LandingpageRelationResponseCollection, Location, LocationEntity, LocationEntityResponse, LocationFiltersInput, LocationRelationResponseCollection, LongFilterInput, Menupage, MenupageEntity, MenupageEntityResponse, MenupageEntityResponseCollection, MenupageFiltersInput, MenupageRelationResponseCollection, ObjectMakerType, ObjectMaterialType, ObjectRecordZoomLevel3Type, ObjectRelationsCountType, ObjectRelationsType, ObjectTechniqueType, ObjectsZoomLevel3DetailType, ObjectsZoomLevelHoverType, Pagination, PaginationArg, PeopleAssociationType, PeopleRecordZoomLevel3Type, PeopleRelationsCountType, PeopleRelationsType, PeopleZoomLevel3DetailType, PeopleZoomLevelHoverType, PublicationAuthorType, PublicationRecordZoomLevel3Type, PublicationRelationsType, PublicationZoomLevel3DetailType, PublicationsArticleZoomLevel3DetailType, PublicationsAudioVisualZoomLevel3DetailType, PublicationsBookZoomLevel3DetailType, PublicationsRelationsCountType, PublicationsSerialZoomLevel3DetailType, PublicationsZoomLevelHoverType, Query, ResponseCollectionMeta, StoriesRelatedToThemeResponse, Story, StoryCountType, StoryEntity, StoryEntityResponse, StoryEntityResponseCollection, StoryFiltersInput, StoryMetaEntityResponseCollection, StoryRelationResponseCollection, StoryWithoutRelations, StoryWithoutRelationsEntity, StoryWithoutRelationsEntityResponse, StoryWithoutRelationsEntityResponseCollection, StringFilterInput, Theme, ThemeEntity, ThemeEntityResponse, ThemeFiltersInput, ThemeRelationResponseCollection, TriplyRecord, TriplyRecordEntity, TriplyRecordEntityResponse, TriplyRecordFiltersInput, TriplyRecordRelationResponseCollection, UploadFile, UploadFileEntity, UploadFileEntityResponse, UploadFileRelationResponseCollection, UsersPermissionsPermission, UsersPermissionsPermissionEntity, UsersPermissionsPermissionFiltersInput, UsersPermissionsPermissionRelationResponseCollection, UsersPermissionsRole, UsersPermissionsRoleEntity, UsersPermissionsRoleEntityResponse, UsersPermissionsRoleFiltersInput, UsersPermissionsUser, UsersPermissionsUserEntity, UsersPermissionsUserEntityResponse, UsersPermissionsUserEntityResponseCollection, UsersPermissionsUserFiltersInput, UsersPermissionsUserRelationResponseCollection, ZoomLevel2AmountParentType, ZoomLevel2ParentType, ZoomLevel2Type, ZoomLevel3RelationsType, ZoomLevel3StoriesRelatedToRecordType, ZoomLevel3StoryRelationsCountType, ArchivesZoomLevel3Types, EntityNames, EnumComponentcorecarouselitemType, EnumComponentcorepublicationdateDisplaytype, EnumComponentmodulesbuttonsmoduleButtonstyle, EnumComponentmodulescarouselType, EnumComponentmodulesgridmoduleFieldtypes, EnumTriplyrecordType, Locale, PublicationsZoomLevel3Types } from '../generated/graphql';
+import { ArchiveRelationsType, ArchiveZoomLevel3DetailType, ArchivesFondsCreatorType, ArchivesFondsZoomLevel3DetailType, ArchivesRecordZoomLevel3Type, ArchivesRelationsCountType, ArchivesZoomLevelHoverType, Author, AuthorEntity, AuthorEntityResponse, AuthorEntityResponseCollection, AuthorFiltersInput, BooleanFilterInput, ComponentCoreButton, ComponentCoreButtonFiltersInput, ComponentCoreCarouselItem, ComponentCoreFeaturedFields, ComponentCoreGridFeaturedFields, ComponentCoreModuleLayoutsFiltersInput, ComponentCorePublicationDate, ComponentCorePublicationDateFiltersInput, ComponentCoreTimeframe, ComponentCoreTimeframeFiltersInput, ComponentModulesButtonsModule, ComponentModulesButtonsModuleFiltersInput, ComponentModulesCarousel, ComponentModulesGridModule, ComponentModulesImage, ComponentModulesImageCarousel, ComponentModulesPullquote, ComponentModulesSubtitle, ComponentModulesTextModule, ComponentModulesTitleModule, DateFilterInput, DateTimeFilterInput, Error, HighlightedHomepageStories, HighlightedHomepageStoryEntity, HighlightedHomepageStoryEntityResponse, HighlightedHomepageThemeEntity, HighlightedHomepageThemeEntityResponse, HighlightedHomepageThemes, Homepage, HomepageEntity, HomepageEntityResponse, HomepageRelationResponseCollection, IdFilterInput, Landingpage, LandingpageEntity, LandingpageEntityResponse, LandingpageEntityResponseCollection, LandingpageFiltersInput, LandingpageRelationResponseCollection, Location, LocationEntity, LocationEntityResponse, LocationFiltersInput, LocationRelationResponseCollection, LongFilterInput, Menupage, MenupageEntity, MenupageEntityResponse, MenupageEntityResponseCollection, MenupageFiltersInput, MenupageRelationResponseCollection, ObjectMakerType, ObjectMaterialType, ObjectRecordZoomLevel3Type, ObjectRelationsCountType, ObjectRelationsType, ObjectTechniqueType, ObjectsZoomLevel3DetailType, ObjectsZoomLevelHoverType, Pagination, PaginationArg, PeopleAssociationType, PeopleRecordZoomLevel3Type, PeopleRelationsCountType, PeopleRelationsType, PeopleZoomLevel3DetailType, PeopleZoomLevelHoverType, PublicationAuthorType, PublicationRecordZoomLevel3Type, PublicationRelationsType, PublicationZoomLevel3DetailType, PublicationsArticleZoomLevel3DetailType, PublicationsAudioVisualZoomLevel3DetailType, PublicationsBookZoomLevel3DetailType, PublicationsRelationsCountType, PublicationsSerialZoomLevel3DetailType, PublicationsZoomLevelHoverType, Query, ResponseCollectionMeta, StoriesRelatedToThemeResponse, Story, StoryCountType, StoryEntity, StoryEntityResponse, StoryEntityResponseCollection, StoryFiltersInput, StoryMetaEntityResponseCollection, StoryRelationResponseCollection, StoryWithoutRelations, StoryWithoutRelationsEntity, StoryWithoutRelationsEntityResponse, StoryWithoutRelationsEntityResponseCollection, StoryWithoutRelationsRelationResponseCollection, StringFilterInput, Theme, ThemeEntity, ThemeEntityResponse, ThemeFiltersInput, ThemeRelationResponseCollection, TriplyRecord, TriplyRecordEntity, TriplyRecordEntityResponse, TriplyRecordFiltersInput, TriplyRecordRelationResponseCollection, UploadFile, UploadFileEntity, UploadFileEntityResponse, UploadFileRelationResponseCollection, UsersPermissionsPermission, UsersPermissionsPermissionEntity, UsersPermissionsPermissionFiltersInput, UsersPermissionsPermissionRelationResponseCollection, UsersPermissionsRole, UsersPermissionsRoleEntity, UsersPermissionsRoleEntityResponse, UsersPermissionsRoleFiltersInput, UsersPermissionsUser, UsersPermissionsUserEntity, UsersPermissionsUserEntityResponse, UsersPermissionsUserEntityResponseCollection, UsersPermissionsUserFiltersInput, UsersPermissionsUserRelationResponseCollection, ZoomLevel2AmountParentType, ZoomLevel2ParentType, ZoomLevel2Type, ZoomLevel3RelationsType, ZoomLevel3StoriesRelatedToRecordType, ZoomLevel3StoryRelationsCountType, ArchivesZoomLevel3Types, EntityNames, EnumComponentcorecarouselitemType, EnumComponentcorepublicationdateDisplaytype, EnumComponentmodulesbuttonsmoduleButtonstyle, EnumComponentmodulescarouselType, EnumComponentmodulesgridmoduleFieldtypes, EnumTriplyrecordType, Locale, PublicationsZoomLevel3Types } from '../generated/graphql';
 
 export const anArchiveRelationsType = (overrides?: Partial<ArchiveRelationsType>, _relationshipsToOmit: Array<string> = []): ArchiveRelationsType => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ArchiveRelationsType']);
@@ -445,6 +445,50 @@ export const anError = (overrides?: Partial<Error>, _relationshipsToOmit: Array<
     return {
         code: overrides && overrides.hasOwnProperty('code') ? overrides.code! : 'voluptas',
         message: overrides && overrides.hasOwnProperty('message') ? overrides.message! : 'et',
+    };
+};
+
+export const aHighlightedHomepageStories = (overrides?: Partial<HighlightedHomepageStories>, _relationshipsToOmit: Array<string> = []): HighlightedHomepageStories => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'HighlightedHomepageStories']);
+    return {
+        highlightedStories: overrides && overrides.hasOwnProperty('highlightedStories') ? overrides.highlightedStories! : relationshipsToOmit.includes('StoryWithoutRelationsRelationResponseCollection') ? {} as StoryWithoutRelationsRelationResponseCollection : aStoryWithoutRelationsRelationResponseCollection({}, relationshipsToOmit),
+    };
+};
+
+export const aHighlightedHomepageStoryEntity = (overrides?: Partial<HighlightedHomepageStoryEntity>, _relationshipsToOmit: Array<string> = []): HighlightedHomepageStoryEntity => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'HighlightedHomepageStoryEntity']);
+    return {
+        attributes: overrides && overrides.hasOwnProperty('attributes') ? overrides.attributes! : relationshipsToOmit.includes('HighlightedHomepageStories') ? {} as HighlightedHomepageStories : aHighlightedHomepageStories({}, relationshipsToOmit),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'ea986e77-a9bf-4f16-82bd-794e342f8654',
+    };
+};
+
+export const aHighlightedHomepageStoryEntityResponse = (overrides?: Partial<HighlightedHomepageStoryEntityResponse>, _relationshipsToOmit: Array<string> = []): HighlightedHomepageStoryEntityResponse => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'HighlightedHomepageStoryEntityResponse']);
+    return {
+        data: overrides && overrides.hasOwnProperty('data') ? overrides.data! : [relationshipsToOmit.includes('HighlightedHomepageStoryEntity') ? {} as HighlightedHomepageStoryEntity : aHighlightedHomepageStoryEntity({}, relationshipsToOmit)],
+    };
+};
+
+export const aHighlightedHomepageThemeEntity = (overrides?: Partial<HighlightedHomepageThemeEntity>, _relationshipsToOmit: Array<string> = []): HighlightedHomepageThemeEntity => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'HighlightedHomepageThemeEntity']);
+    return {
+        attributes: overrides && overrides.hasOwnProperty('attributes') ? overrides.attributes! : relationshipsToOmit.includes('HighlightedHomepageThemes') ? {} as HighlightedHomepageThemes : aHighlightedHomepageThemes({}, relationshipsToOmit),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '03701b54-111f-45b7-a430-9c493807e9a5',
+    };
+};
+
+export const aHighlightedHomepageThemeEntityResponse = (overrides?: Partial<HighlightedHomepageThemeEntityResponse>, _relationshipsToOmit: Array<string> = []): HighlightedHomepageThemeEntityResponse => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'HighlightedHomepageThemeEntityResponse']);
+    return {
+        data: overrides && overrides.hasOwnProperty('data') ? overrides.data! : [relationshipsToOmit.includes('HighlightedHomepageThemeEntity') ? {} as HighlightedHomepageThemeEntity : aHighlightedHomepageThemeEntity({}, relationshipsToOmit)],
+    };
+};
+
+export const aHighlightedHomepageThemes = (overrides?: Partial<HighlightedHomepageThemes>, _relationshipsToOmit: Array<string> = []): HighlightedHomepageThemes => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'HighlightedHomepageThemes']);
+    return {
+        highlightedThemes: overrides && overrides.hasOwnProperty('highlightedThemes') ? overrides.highlightedThemes! : relationshipsToOmit.includes('ThemeRelationResponseCollection') ? {} as ThemeRelationResponseCollection : aThemeRelationResponseCollection({}, relationshipsToOmit),
     };
 };
 
@@ -1170,6 +1214,8 @@ export const aQuery = (overrides?: Partial<Query>, _relationshipsToOmit: Array<s
         archivesZoomRecordHover: overrides && overrides.hasOwnProperty('archivesZoomRecordHover') ? overrides.archivesZoomRecordHover! : relationshipsToOmit.includes('ArchivesZoomLevelHoverType') ? {} as ArchivesZoomLevelHoverType : anArchivesZoomLevelHoverType({}, relationshipsToOmit),
         author: overrides && overrides.hasOwnProperty('author') ? overrides.author! : relationshipsToOmit.includes('AuthorEntityResponse') ? {} as AuthorEntityResponse : anAuthorEntityResponse({}, relationshipsToOmit),
         authors: overrides && overrides.hasOwnProperty('authors') ? overrides.authors! : relationshipsToOmit.includes('AuthorEntityResponseCollection') ? {} as AuthorEntityResponseCollection : anAuthorEntityResponseCollection({}, relationshipsToOmit),
+        highlightedHomepageStories: overrides && overrides.hasOwnProperty('highlightedHomepageStories') ? overrides.highlightedHomepageStories! : relationshipsToOmit.includes('HighlightedHomepageStoryEntityResponse') ? {} as HighlightedHomepageStoryEntityResponse : aHighlightedHomepageStoryEntityResponse({}, relationshipsToOmit),
+        highlightedHomepageThemes: overrides && overrides.hasOwnProperty('highlightedHomepageThemes') ? overrides.highlightedHomepageThemes! : relationshipsToOmit.includes('HighlightedHomepageThemeEntityResponse') ? {} as HighlightedHomepageThemeEntityResponse : aHighlightedHomepageThemeEntityResponse({}, relationshipsToOmit),
         homepage: overrides && overrides.hasOwnProperty('homepage') ? overrides.homepage! : relationshipsToOmit.includes('HomepageEntityResponse') ? {} as HomepageEntityResponse : aHomepageEntityResponse({}, relationshipsToOmit),
         landingpage: overrides && overrides.hasOwnProperty('landingpage') ? overrides.landingpage! : relationshipsToOmit.includes('LandingpageEntityResponse') ? {} as LandingpageEntityResponse : aLandingpageEntityResponse({}, relationshipsToOmit),
         landingpages: overrides && overrides.hasOwnProperty('landingpages') ? overrides.landingpages! : relationshipsToOmit.includes('LandingpageEntityResponseCollection') ? {} as LandingpageEntityResponseCollection : aLandingpageEntityResponseCollection({}, relationshipsToOmit),
@@ -1374,6 +1420,13 @@ export const aStoryWithoutRelationsEntityResponseCollection = (overrides?: Parti
     return {
         data: overrides && overrides.hasOwnProperty('data') ? overrides.data! : [relationshipsToOmit.includes('StoryWithoutRelationsEntity') ? {} as StoryWithoutRelationsEntity : aStoryWithoutRelationsEntity({}, relationshipsToOmit)],
         meta: overrides && overrides.hasOwnProperty('meta') ? overrides.meta! : relationshipsToOmit.includes('ResponseCollectionMeta') ? {} as ResponseCollectionMeta : aResponseCollectionMeta({}, relationshipsToOmit),
+    };
+};
+
+export const aStoryWithoutRelationsRelationResponseCollection = (overrides?: Partial<StoryWithoutRelationsRelationResponseCollection>, _relationshipsToOmit: Array<string> = []): StoryWithoutRelationsRelationResponseCollection => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'StoryWithoutRelationsRelationResponseCollection']);
+    return {
+        data: overrides && overrides.hasOwnProperty('data') ? overrides.data! : [relationshipsToOmit.includes('StoryWithoutRelationsEntity') ? {} as StoryWithoutRelationsEntity : aStoryWithoutRelationsEntity({}, relationshipsToOmit)],
     };
 };
 
