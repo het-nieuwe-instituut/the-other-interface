@@ -15,10 +15,16 @@
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": ["images", "files", "videos", "audios"]
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     },
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "subtitle": {
       "type": "string"

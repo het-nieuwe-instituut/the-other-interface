@@ -53,7 +53,7 @@ export interface CoreGridFeaturedFields extends Schema.Component {
   attributes: {
     story: Attribute.Relation<'core.grid-featured-fields', 'oneToOne', 'api::story.story'>
     thumbnail: Attribute.Media
-    title: Attribute.String
+    title: Attribute.String & Attribute.Required
     subtitle: Attribute.String
     triplyRecord: Attribute.Relation<
       'core.grid-featured-fields',
@@ -186,7 +186,7 @@ export interface ModulesImage extends Schema.Component {
   attributes: {
     image: Attribute.Media & Attribute.Required
     caption: Attribute.Text
-    alt_text: Attribute.String
+    alt_text: Attribute.String & Attribute.Required
     triplyRecord: Attribute.Relation<
       'modules.image',
       'oneToOne',
