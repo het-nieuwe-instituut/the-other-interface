@@ -17,5 +17,6 @@
       "recordMetaPerson",
       "recordTable"
     ]
-  }
+  },
+  "experimental": { "appDir": true }
 }
