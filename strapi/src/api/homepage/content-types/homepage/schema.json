@@ -50,6 +50,16 @@
         }
       },
       "type": "richtext"
+    },
+    "highlightedThemes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::theme.theme"
+    },
+    "highlightedStories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::story.story"
     }
   }
 }
