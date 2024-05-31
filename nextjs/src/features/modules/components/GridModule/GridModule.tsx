@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ButtonsGrid } from '@/features/shared/components/ButtonsGrid/ButtonsGrid'
 import { Markdown } from '@/features/shared/components/Markdown/Markdown'
 import { Box, Button, Grid, GridItem, Image, Text } from '@chakra-ui/react'
 import { take } from 'lodash'
@@ -12,9 +11,15 @@ import {
   EnumComponentmodulesgridmoduleFieldtypes,
 } from 'src/generated/graphql'
 
+import {
+  LinkButtonGroup,
+  LinkButtonGroupItem,
+} from '@/features/ui/components/link-button-group/component'
 import { ExtractedTriplyFields, extractTriplyFields } from '../../helpers/triplyDataExtractor'
 import { imageBasePath } from '../../modulesConstants'
 import { modulesSpacingMapper } from '../../modulesSpacing'
+import { NavButton } from '@/features/ui/components/nav-button/component'
+import { ButtonsGrid } from '@/features/shared/components/ButtonsGrid/ButtonsGrid'
 
 interface Props {
   component: ComponentModulesGridModule
@@ -209,16 +214,23 @@ export const GridModule: React.FC<Props> = props => {
     }
 
     return (
-      <ButtonsGrid
-        renderBefore={() =>
-          !allFieldsAreShown && (
-            <Button onClick={() => setShowAmount(showAmount + pageSize)}>
-              {props.component.showMoreButtonTitle}
-            </Button>
-          )
-        }
-        buttons={props.component.buttons}
-      />
+      <>
+        {allFieldsAreShown && (
+          <NavButton variant={'footerPrimary'} onClick={() => setShowAmount(showAmount + pageSize)}>
+            {props.component.showMoreButtonTitle}
+          </NavButton>
+        )}
+        <LinkButtonGroup>
+          {props.component.buttons.map(button => {
+            if (!button.text) return null
+            return (
+              <LinkButtonGroupItem key={button.id} href={button.url || ''}>
+                {button.text}
+              </LinkButtonGroupItem>
+            )
+          })}
+        </LinkButtonGroup>
+      </>
     )
   }
 }
