@@ -218,7 +218,6 @@ export const GridModule: React.FC<Props> = props => {
           )
         }
         buttons={props.component.buttons}
-        flexDirection={undefined}
       />
     )
   }

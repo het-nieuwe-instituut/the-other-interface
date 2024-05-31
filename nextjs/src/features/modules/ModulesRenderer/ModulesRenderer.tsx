@@ -1,7 +1,6 @@
 import { Title } from '@/features/ui/components/title/Title'
-import { Box, useTheme } from '@chakra-ui/react'
+import { cn } from '@/features/ui/utils/cn'
 import {
-  ComponentModulesButtonsModule,
   ComponentModulesCarousel,
   ComponentModulesGridModule,
   ComponentModulesImage,
@@ -13,12 +12,15 @@ import {
   MenupageComponentsDynamicZone,
   StoryByIdQuery,
 } from 'src/generated/graphql'
-import { ButtonsModule } from '../components/ButtonsModule/ButtonsModule'
+import { Paragraph } from '../../ui/components/Paragraph/Paragraph'
+import { Subtitle } from '../../ui/components/subtitle/Subtitle'
+import {
+  LinkButtonGroup,
+  LinkButtonGroupItem,
+} from '../../ui/components/link-button-group/component'
 import { GridModule } from '../components/GridModule/GridModule'
 import MediaImage from '../components/Image/Image'
 import { Pullquote } from '../components/Pullquote/Pullquote'
-import { SubtitleModule } from '../components/SubtitleModule/SubtitleModule'
-import { TextModule } from '../components/TextModule/TextModule'
 import { CarouselModule } from '../components/carousels/Carousel/Carousel'
 import { ImageCarousel } from '../components/carousels/ImageCarousel/ImageCarousel'
 import { mapUploadFileEntitiesToStoryImageInfo } from '../components/carousels/ImageCarousel/imageCarouselStrapiDataMapper'
@@ -38,15 +40,15 @@ export type DynamicComponents =
   | Maybe<Array<MenupageComponentsDynamicZone>>
 
 export function DynamicComponentRenderer({ components, isStoryPage = false }: Props) {
-  const theme = useTheme()
   const hasComponents = (components || []).length > 0
 
   return (
-    <Box
-      maxW={theme.breakpoints.xl}
-      marginX={'auto'}
-      px={isStoryPage ? 0 : 6}
-      pt={hasComponents ? 'Xl' : 0}
+    <div
+      className={cn(
+        'max-w-[90em] mx-auto px-6 pt-0 flex flex-col gap-[40px]',
+        isStoryPage && 'px-0',
+        hasComponents && 'pt-10'
+      )}
     >
       {/* {[...[componentMock, componentMock2, componentMock3], ...(props.components || [])].map( */}
       {[...(components || [])].map((component, index, array) => {
@@ -54,14 +56,22 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
 
         if (typeName) {
           if (component?.__typename === 'ComponentModulesTextModule') {
+            if (!component.Richtext) {
+              return null
+            }
             return (
-              <TextModule key={keyExtractor(component.id, index, array)} component={component} />
+              <Paragraph key={keyExtractor(component.id, index, array)}>
+                {component.Richtext}
+              </Paragraph>
             )
           }
 
           if (component?.__typename === 'ComponentModulesPullquote') {
+            if (!component.text) {
+              return null
+            }
             return (
-              <Pullquote key={keyExtractor(component.id, index, array)} component={component} />
+              <Pullquote key={keyExtractor(component.id, index, array)}>{component.text}</Pullquote>
             )
           }
 
@@ -86,27 +96,61 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
           }
 
           if (component?.__typename === 'ComponentModulesSubtitle') {
-            return <SubtitleModule key={component.id} component={component} />
+            const nextComponent = array.at(index + 1)
+            // we need to adjust for 16px between components like text module
+            const shouldAdjustForNextComponent = nextComponent?.__typename
+              ? ['ComponentModulesTextModule'].includes(nextComponent?.__typename)
+              : false
+            if (!component.text) {
+              return null
+            }
+
+            return (
+              <Subtitle key={component.id} className={cn(shouldAdjustForNextComponent && '-mb-8')}>
+                {component.text}
+              </Subtitle>
+            )
           }
 
           if (component?.__typename === 'ComponentModulesTitleModule') {
+            const nextComponent = array.at(index + 1)
+            // we need to adjust for 16px between components like text module
+            const shouldAdjustForNextComponent = nextComponent?.__typename
+              ? ['ComponentModulesTextModule'].includes(nextComponent?.__typename)
+              : false
+
             const title = component.Title
+
             if (!title) {
               return null
             }
             return (
-              <Title className="pb-5" key={keyExtractor(component.id, index, array)}>
+              <Title
+                className={cn(shouldAdjustForNextComponent && '-mb-8')}
+                key={keyExtractor(component.id, index, array)}
+              >
                 {title}
               </Title>
             )
           }
 
           if (component?.__typename === 'ComponentModulesButtonsModule') {
+            if (!component.buttons || component.buttons?.length === 0) {
+              return null
+            }
             return (
-              <ButtonsModule
-                key={keyExtractor(component.id, index, array)}
-                component={component as ComponentModulesButtonsModule}
-              />
+              <LinkButtonGroup key={keyExtractor(component.id, index, array)}>
+                {component.buttons?.map(button => {
+                  if (!button.text || !button.url) {
+                    return null
+                  }
+                  return (
+                    <LinkButtonGroupItem key={button.id} href={button.url}>
+                      {button.text}
+                    </LinkButtonGroupItem>
+                  )
+                })}
+              </LinkButtonGroup>
             )
           }
 
@@ -130,7 +174,7 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
         }
         return null
       }) ?? null}
-    </Box>
+    </div>
   )
 }
 

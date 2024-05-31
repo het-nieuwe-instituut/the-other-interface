@@ -1,38 +1,53 @@
-import utils from '@strapi/utils'
+import { errors } from '@strapi/utils'
 import slugify from 'slugify'
 
-const { ValidationError } = utils.errors
 const storyApi = 'api::story.story'
 
 export default {
   async beforeCreate(event) {
-    await checkParentChildConstraintsOrThrow(event)
+    try {
+      await checkParentChildConstraintsOrThrow(event)
 
-    if (!event.params.data.slug) {
-      throw new ValidationError('slug must be provided')
-    }
+      if (!event.params.data.slug) {
+        throw new errors.ApplicationError('slug must be provided')
+      }
 
-    if (event.params.data.slug) {
-      event.params.data.slug = getSlug(event.params.data.slug)
+      if (event.params.data.slug) {
+        event.params.data.slug = getSlug(event.params.data.slug)
+      }
+    } catch (err) {
+      handleError(err)
     }
   },
 
   async beforeUpdate(event) {
-    await checkParentChildConstraintsOrThrow(event)
+    try {
+      await checkParentChildConstraintsOrThrow(event)
 
-    const story = await strapi.entityService.findOne(storyApi, event.params.where.id)
+      const story = await strapi.entityService.findOne(storyApi, event.params.where.id)
 
-    if (event.params.data.slug && event.params.data.slug !== story.slug) {
-      event.params.data.slug = getSlug(event.params.data.slug)
+      if (event.params.data.slug && event.params.data.slug !== story.slug) {
+        event.params.data.slug = getSlug(event.params.data.slug)
+      }
+    } catch (err) {
+      handleError(err)
     }
   },
 
   async afterCreate(event) {
-    await applyToAllLocales(event)
+    try {
+      await applyToAllLocales(event)
+    } catch (err) {
+      handleError(err)
+    }
   },
 
   async afterUpdate(event) {
-    await applyToAllLocales(event)
+    try {
+      await applyToAllLocales(event)
+    } catch (err) {
+      handleError(err)
+    }
   },
 }
 
@@ -56,11 +71,11 @@ async function applyToAllLocales(event) {
     }
 
     if (event.params.data.parent_story !== undefined) {
-      const parentId = event.params.data.parent_story
-      if (parentId === null) {
-        data['parent_story'] = null
+      const parentChanges = event.params.data.parent_story
+      if (parentChanges.disconnect.length) {
+        data['parent_story'] = parentChanges
       } else {
-        await changeOtherLocalesParent(parentId, event.result.localizations)
+        await changeOtherLocalesParent(parentChanges?.connect?.[0].id, event.result.localizations)
       }
     }
 
@@ -71,8 +86,13 @@ async function applyToAllLocales(event) {
 }
 
 async function checkParentChildConstraintsOrThrow(event) {
-  const parentId = event.params.data.parent_story
-  const childrenIds = event.params.data.child_stories
+  const parentChanges = event.params.data.parent_story
+  if (parentChanges?.connect?.length > 1) {
+    throw new errors.ApplicationError('Story cannot have more than one parent')
+  }
+
+  const parentId = parentChanges?.connect?.[0]?.id
+  const childrenChanges = event.params.data.child_stories
   const id = event.params.where?.id // could be null if this method is called beforeCreate
   const story = id
     ? await strapi.entityService.findOne(storyApi, id, {
@@ -82,45 +102,41 @@ async function checkParentChildConstraintsOrThrow(event) {
 
   // cannot be parent of itself
   if (parentId && parentId === id) {
-    throw new ValidationError('Story cannot be parent of itself')
+    throw new errors.ApplicationError('Story cannot be parent of itself')
   }
 
   // cannot be child of itself
-  if (childrenIds?.includes(id)) {
-    throw new ValidationError('Story cannot be child of itself')
+  if (childrenChanges?.connect?.includes(id)) {
+    throw new errors.ApplicationError('Story cannot be child of itself')
   }
 
   // cannot have both a parent and children
-  if (parentId && childrenIds?.length) {
-    throw new ValidationError('Story cannot have both a parent and children')
+  if (parentId && childrenChanges?.connect?.length) {
+    throw new errors.ApplicationError('Story cannot have both a parent and children')
   }
 
   // cannot add or remove children (field effectively disabled)
-  const isEditing = story && childrenIds !== undefined
+  const isEditing = story && childrenChanges !== undefined
   const isCreating = !story
-  const removedOrAddedChildren = story?.child_stories.length !== childrenIds?.length
-  const changedChildren = !story?.child_stories.every(c => childrenIds?.includes(c.id))
+  const removedOrAddedChildren =
+    childrenChanges?.connect?.length || childrenChanges?.disconnect?.length
 
-  if (
-    (isCreating && childrenIds?.length) ||
-    (isEditing && (removedOrAddedChildren || changedChildren))
-  ) {
-    throw new ValidationError(`Cannot add or remove child stories`)
+  if (removedOrAddedChildren && (isEditing || isCreating)) {
+    throw new errors.ApplicationError(`Cannot add or remove child stories`)
   }
 
   // children cannot have children
-  if (childrenIds?.length) {
-    await checkIfChildrenAreNotParentsOrThrow(event)
+  if (childrenChanges?.connect?.length) {
+    await checkIfChildrenAreNotParentsOrThrow(childrenChanges?.connect.map(c => c.id))
   }
 
   // parent cannot have a parent
   if (parentId) {
-    await checkIfParentIsNotAChildOrThrow(event)
+    await checkIfParentIsNotAChildOrThrow(event, parentId)
   }
 }
 
-async function checkIfChildrenAreNotParentsOrThrow(event) {
-  const childrenIds = event.params.data.child_stories
+async function checkIfChildrenAreNotParentsOrThrow(childrenIds: number[]) {
   if (!childrenIds?.length) return
 
   const children = await strapi.entityService.findMany(storyApi, {
@@ -131,25 +147,25 @@ async function checkIfChildrenAreNotParentsOrThrow(event) {
   })
 
   if (children.some(c => c.child_stories.length)) {
-    throw new ValidationError('Children stories cannot be parents of other stories')
+    throw new errors.ApplicationError('Children stories cannot be parents of other stories')
   }
 }
 
-async function checkIfParentIsNotAChildOrThrow(event) {
+async function checkIfParentIsNotAChildOrThrow(event, parentId: number) {
   const item = event.params.data
   const id = event.params.where?.id
 
   if (!item.parent_story) return
-  if (id && item.parent_story === id) {
-    throw new ValidationError('Parent story cannot be the same as the current story')
+  if (id && parentId === id) {
+    throw new errors.ApplicationError('Parent story cannot be the same as the current story')
   }
 
-  const parentStory = await strapi.entityService.findOne(storyApi, item.parent_story, {
+  const parentStory = await strapi.entityService.findOne(storyApi, parentId, {
     populate: ['parent_story'],
   })
 
   if (parentStory.parent_story) {
-    throw new ValidationError(
+    throw new errors.ApplicationError(
       `Parent story ${parentStory.id} cannot be a child of another story ${parentStory.parent_story.id}`
     )
   }
@@ -168,8 +184,17 @@ async function changeOtherLocalesParent(parentId: number, localizations: any[]) 
         return Promise.resolve()
       }
 
-      const data = { parent_story: parentLocale.id }
+      const data = { parent_story: { connect: [{ id: parentLocale.id }], disconnect: [] } } as any
       return strapi.entityService.update(storyApi, l.id, { data })
     })
   )
+}
+
+function handleError(err: unknown) {
+  const ctx = strapi.requestContext.get()
+  if (err instanceof errors.ApplicationError) {
+    ctx.throw(400, err)
+  }
+
+  ctx.throw(500, err)
 }

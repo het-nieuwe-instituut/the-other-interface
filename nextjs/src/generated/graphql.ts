@@ -443,6 +443,38 @@ export type Error = {
   message?: Maybe<Scalars['String']>;
 };
 
+export type HighlightedHomepageStories = {
+  __typename?: 'HighlightedHomepageStories';
+  highlightedStories?: Maybe<StoryWithoutRelationsRelationResponseCollection>;
+};
+
+export type HighlightedHomepageStoryEntity = {
+  __typename?: 'HighlightedHomepageStoryEntity';
+  attributes?: Maybe<HighlightedHomepageStories>;
+  id?: Maybe<Scalars['ID']>;
+};
+
+export type HighlightedHomepageStoryEntityResponse = {
+  __typename?: 'HighlightedHomepageStoryEntityResponse';
+  data: Array<HighlightedHomepageStoryEntity>;
+};
+
+export type HighlightedHomepageThemeEntity = {
+  __typename?: 'HighlightedHomepageThemeEntity';
+  attributes?: Maybe<HighlightedHomepageThemes>;
+  id?: Maybe<Scalars['ID']>;
+};
+
+export type HighlightedHomepageThemeEntityResponse = {
+  __typename?: 'HighlightedHomepageThemeEntityResponse';
+  data: Array<HighlightedHomepageThemeEntity>;
+};
+
+export type HighlightedHomepageThemes = {
+  __typename?: 'HighlightedHomepageThemes';
+  highlightedThemes?: Maybe<ThemeRelationResponseCollection>;
+};
+
 export type Homepage = {
   __typename?: 'Homepage';
   Title?: Maybe<Scalars['String']>;
@@ -1103,6 +1135,8 @@ export type Query = {
   archivesZoomRecordHover: ArchivesZoomLevelHoverType;
   author: AuthorEntityResponse;
   authors: AuthorEntityResponseCollection;
+  highlightedHomepageStories: HighlightedHomepageStoryEntityResponse;
+  highlightedHomepageThemes: HighlightedHomepageThemeEntityResponse;
   homepage: HomepageEntityResponse;
   landingpage: LandingpageEntityResponse;
   landingpages: LandingpageEntityResponseCollection;
@@ -1188,6 +1222,20 @@ export type QueryAuthorsArgs = {
   pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<Scalars['String']>;
   sort?: InputMaybe<Array<Scalars['String']>>;
+};
+
+
+export type QueryHighlightedHomepageStoriesArgs = {
+  locale: Scalars['String'];
+  paginationArgs?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<Scalars['String']>;
+};
+
+
+export type QueryHighlightedHomepageThemesArgs = {
+  locale: Scalars['String'];
+  paginationArgs?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -1604,6 +1652,11 @@ export type StoryWithoutRelationsEntityResponseCollection = {
   __typename?: 'StoryWithoutRelationsEntityResponseCollection';
   data?: Maybe<Array<StoryWithoutRelationsEntity>>;
   meta?: Maybe<ResponseCollectionMeta>;
+};
+
+export type StoryWithoutRelationsRelationResponseCollection = {
+  __typename?: 'StoryWithoutRelationsRelationResponseCollection';
+  data?: Maybe<Array<StoryWithoutRelationsEntity>>;
 };
 
 export type StringFilterInput = {

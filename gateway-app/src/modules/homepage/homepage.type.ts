@@ -10,6 +10,8 @@ import { ComponentModulesSubtitle } from '../strapi/components/modules/subtitle'
 import { ComponentModulesTextModule } from '../strapi/components/modules/textModule'
 import { ComponentModulesTitleModule } from '../strapi/components/modules/titleModule'
 import { Error } from '../strapi/shared-types'
+import { StoryWithoutRelationsRelationResponseCollection } from '../story/story.type'
+import { ThemeRelationResponseCollection } from '../theme/theme.type'
 
 @ObjectType()
 export class HomepageRelationResponseCollection {
@@ -42,6 +44,48 @@ export class Homepage {
 
   @Field({ nullable: true })
   public updatedAt?: Date
+}
+
+@ObjectType()
+export class HighlightedHomepageStoryEntityResponse {
+  @Field(() => [HighlightedHomepageStoryEntity])
+  public data: HighlightedHomepageStoryEntity[]
+}
+
+@ObjectType()
+export class HighlightedHomepageStories {
+  @Field(() => StoryWithoutRelationsRelationResponseCollection, { nullable: true })
+  public highlightedStories?: StoryWithoutRelationsRelationResponseCollection
+}
+
+@ObjectType()
+export class HighlightedHomepageStoryEntity {
+  @Field(() => HighlightedHomepageStories, { nullable: true })
+  public attributes?: HighlightedHomepageStories
+
+  @Field(() => ID, { nullable: true })
+  public id?: string
+}
+
+@ObjectType()
+export class HighlightedHomepageThemeEntityResponse {
+  @Field(() => [HighlightedHomepageThemeEntity])
+  public data: HighlightedHomepageThemeEntity[]
+}
+
+@ObjectType()
+export class HighlightedHomepageThemes {
+  @Field(() => ThemeRelationResponseCollection, { nullable: true })
+  public highlightedThemes?: ThemeRelationResponseCollection
+}
+
+@ObjectType()
+export class HighlightedHomepageThemeEntity {
+  @Field(() => HighlightedHomepageThemes, { nullable: true })
+  public attributes?: HighlightedHomepageThemes
+
+  @Field(() => ID, { nullable: true })
+  public id?: string
 }
 
 @ObjectType()
