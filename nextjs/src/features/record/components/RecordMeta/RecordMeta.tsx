@@ -11,6 +11,7 @@ import { ReadMoreTooltip } from '@/features/ui/components/tooltip/ReadMoreToolti
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import ExternalLink from '@/features/ui/icons/external-link.svg'
 import { useParams } from 'next/navigation'
+import { Fragment } from 'react'
 import {
   ArchivesRecordZoomLevel3Type,
   ObjectRecordZoomLevel3Type,
@@ -25,8 +26,6 @@ import {
   mapPublicationDataToSections,
 } from '../../mappers/recordMetaDataMapper'
 import { recordRightsFieldMapper } from '../../mappers/recordRightsMapper'
-import { StandaloneLink } from 'src/app/ks/link/StandaloneLink'
-import { Fragment } from 'react'
 
 export const RecordMeta: React.FC = () => {
   const { t: recordMetaPublicationT } = useTypeSafeTranslation('recordMetaPublication')
