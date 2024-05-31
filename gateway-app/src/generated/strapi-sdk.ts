@@ -88,6 +88,7 @@ export type BooleanFilterInput = {
   lt?: InputMaybe<Scalars['Boolean']>
   lte?: InputMaybe<Scalars['Boolean']>
   ne?: InputMaybe<Scalars['Boolean']>
+  nei?: InputMaybe<Scalars['Boolean']>
   not?: InputMaybe<BooleanFilterInput>
   notContains?: InputMaybe<Scalars['Boolean']>
   notContainsi?: InputMaybe<Scalars['Boolean']>
@@ -346,6 +347,106 @@ export type ComponentModulesTitleModule = {
   id: Scalars['ID']
 }
 
+export type ContentReleasesRelease = {
+  __typename?: 'ContentReleasesRelease'
+  actions?: Maybe<ContentReleasesReleaseActionRelationResponseCollection>
+  createdAt?: Maybe<Scalars['DateTime']>
+  name: Scalars['String']
+  releasedAt?: Maybe<Scalars['DateTime']>
+  updatedAt?: Maybe<Scalars['DateTime']>
+}
+
+export type ContentReleasesReleaseActionsArgs = {
+  filters?: InputMaybe<ContentReleasesReleaseActionFiltersInput>
+  pagination?: InputMaybe<PaginationArg>
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
+}
+
+export type ContentReleasesReleaseAction = {
+  __typename?: 'ContentReleasesReleaseAction'
+  contentType: Scalars['String']
+  createdAt?: Maybe<Scalars['DateTime']>
+  entry?: Maybe<GenericMorph>
+  release?: Maybe<ContentReleasesReleaseEntityResponse>
+  type: Enum_Contentreleasesreleaseaction_Type
+  updatedAt?: Maybe<Scalars['DateTime']>
+}
+
+export type ContentReleasesReleaseActionEntity = {
+  __typename?: 'ContentReleasesReleaseActionEntity'
+  attributes?: Maybe<ContentReleasesReleaseAction>
+  id?: Maybe<Scalars['ID']>
+}
+
+export type ContentReleasesReleaseActionEntityResponse = {
+  __typename?: 'ContentReleasesReleaseActionEntityResponse'
+  data?: Maybe<ContentReleasesReleaseActionEntity>
+}
+
+export type ContentReleasesReleaseActionEntityResponseCollection = {
+  __typename?: 'ContentReleasesReleaseActionEntityResponseCollection'
+  data: Array<ContentReleasesReleaseActionEntity>
+  meta: ResponseCollectionMeta
+}
+
+export type ContentReleasesReleaseActionFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<ContentReleasesReleaseActionFiltersInput>>>
+  contentType?: InputMaybe<StringFilterInput>
+  createdAt?: InputMaybe<DateTimeFilterInput>
+  id?: InputMaybe<IdFilterInput>
+  not?: InputMaybe<ContentReleasesReleaseActionFiltersInput>
+  or?: InputMaybe<Array<InputMaybe<ContentReleasesReleaseActionFiltersInput>>>
+  release?: InputMaybe<ContentReleasesReleaseFiltersInput>
+  type?: InputMaybe<StringFilterInput>
+  updatedAt?: InputMaybe<DateTimeFilterInput>
+}
+
+export type ContentReleasesReleaseActionInput = {
+  contentType?: InputMaybe<Scalars['String']>
+  release?: InputMaybe<Scalars['ID']>
+  type?: InputMaybe<Enum_Contentreleasesreleaseaction_Type>
+}
+
+export type ContentReleasesReleaseActionRelationResponseCollection = {
+  __typename?: 'ContentReleasesReleaseActionRelationResponseCollection'
+  data: Array<ContentReleasesReleaseActionEntity>
+}
+
+export type ContentReleasesReleaseEntity = {
+  __typename?: 'ContentReleasesReleaseEntity'
+  attributes?: Maybe<ContentReleasesRelease>
+  id?: Maybe<Scalars['ID']>
+}
+
+export type ContentReleasesReleaseEntityResponse = {
+  __typename?: 'ContentReleasesReleaseEntityResponse'
+  data?: Maybe<ContentReleasesReleaseEntity>
+}
+
+export type ContentReleasesReleaseEntityResponseCollection = {
+  __typename?: 'ContentReleasesReleaseEntityResponseCollection'
+  data: Array<ContentReleasesReleaseEntity>
+  meta: ResponseCollectionMeta
+}
+
+export type ContentReleasesReleaseFiltersInput = {
+  actions?: InputMaybe<ContentReleasesReleaseActionFiltersInput>
+  and?: InputMaybe<Array<InputMaybe<ContentReleasesReleaseFiltersInput>>>
+  createdAt?: InputMaybe<DateTimeFilterInput>
+  id?: InputMaybe<IdFilterInput>
+  name?: InputMaybe<StringFilterInput>
+  not?: InputMaybe<ContentReleasesReleaseFiltersInput>
+  or?: InputMaybe<Array<InputMaybe<ContentReleasesReleaseFiltersInput>>>
+  releasedAt?: InputMaybe<DateTimeFilterInput>
+  updatedAt?: InputMaybe<DateTimeFilterInput>
+}
+
+export type ContentReleasesReleaseInput = {
+  actions?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
+  name?: InputMaybe<Scalars['String']>
+  releasedAt?: InputMaybe<Scalars['DateTime']>
+}
+
 export type DateFilterInput = {
   and?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>
   between?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>
@@ -360,6 +461,7 @@ export type DateFilterInput = {
   lt?: InputMaybe<Scalars['Date']>
   lte?: InputMaybe<Scalars['Date']>
   ne?: InputMaybe<Scalars['Date']>
+  nei?: InputMaybe<Scalars['Date']>
   not?: InputMaybe<DateFilterInput>
   notContains?: InputMaybe<Scalars['Date']>
   notContainsi?: InputMaybe<Scalars['Date']>
@@ -384,6 +486,7 @@ export type DateTimeFilterInput = {
   lt?: InputMaybe<Scalars['DateTime']>
   lte?: InputMaybe<Scalars['DateTime']>
   ne?: InputMaybe<Scalars['DateTime']>
+  nei?: InputMaybe<Scalars['DateTime']>
   not?: InputMaybe<DateTimeFilterInput>
   notContains?: InputMaybe<Scalars['DateTime']>
   notContainsi?: InputMaybe<Scalars['DateTime']>
@@ -421,6 +524,11 @@ export enum Enum_Componentmodulesgridmodule_Fieldtypes {
   Triply = 'Triply',
 }
 
+export enum Enum_Contentreleasesreleaseaction_Type {
+  Publish = 'publish',
+  Unpublish = 'unpublish',
+}
+
 export enum Enum_Triplyrecord_Type {
   Archive = 'Archive',
   Media = 'Media',
@@ -455,6 +563,7 @@ export type FloatFilterInput = {
   lt?: InputMaybe<Scalars['Float']>
   lte?: InputMaybe<Scalars['Float']>
   ne?: InputMaybe<Scalars['Float']>
+  nei?: InputMaybe<Scalars['Float']>
   not?: InputMaybe<FloatFilterInput>
   notContains?: InputMaybe<Scalars['Float']>
   notContainsi?: InputMaybe<Scalars['Float']>
@@ -482,6 +591,8 @@ export type GenericMorph =
   | ComponentModulesSubtitle
   | ComponentModulesTextModule
   | ComponentModulesTitleModule
+  | ContentReleasesRelease
+  | ContentReleasesReleaseAction
   | Homepage
   | I18NLocale
   | Landingpage
@@ -598,6 +709,7 @@ export type IdFilterInput = {
   lt?: InputMaybe<Scalars['ID']>
   lte?: InputMaybe<Scalars['ID']>
   ne?: InputMaybe<Scalars['ID']>
+  nei?: InputMaybe<Scalars['ID']>
   not?: InputMaybe<IdFilterInput>
   notContains?: InputMaybe<Scalars['ID']>
   notContainsi?: InputMaybe<Scalars['ID']>
@@ -622,6 +734,7 @@ export type IntFilterInput = {
   lt?: InputMaybe<Scalars['Int']>
   lte?: InputMaybe<Scalars['Int']>
   ne?: InputMaybe<Scalars['Int']>
+  nei?: InputMaybe<Scalars['Int']>
   not?: InputMaybe<IntFilterInput>
   notContains?: InputMaybe<Scalars['Int']>
   notContainsi?: InputMaybe<Scalars['Int']>
@@ -646,6 +759,7 @@ export type JsonFilterInput = {
   lt?: InputMaybe<Scalars['JSON']>
   lte?: InputMaybe<Scalars['JSON']>
   ne?: InputMaybe<Scalars['JSON']>
+  nei?: InputMaybe<Scalars['JSON']>
   not?: InputMaybe<JsonFilterInput>
   notContains?: InputMaybe<Scalars['JSON']>
   notContainsi?: InputMaybe<Scalars['JSON']>
@@ -814,6 +928,7 @@ export type LongFilterInput = {
   lt?: InputMaybe<Scalars['Long']>
   lte?: InputMaybe<Scalars['Long']>
   ne?: InputMaybe<Scalars['Long']>
+  nei?: InputMaybe<Scalars['Long']>
   not?: InputMaybe<LongFilterInput>
   notContains?: InputMaybe<Scalars['Long']>
   notContainsi?: InputMaybe<Scalars['Long']>
@@ -899,7 +1014,11 @@ export type MenupageRelationResponseCollection = {
 
 export type Mutation = {
   __typename?: 'Mutation'
+  /** Change user password. Confirm with the current password. */
+  changePassword?: Maybe<UsersPermissionsLoginPayload>
   createAuthor?: Maybe<AuthorEntityResponse>
+  createContentReleasesRelease?: Maybe<ContentReleasesReleaseEntityResponse>
+  createContentReleasesReleaseAction?: Maybe<ContentReleasesReleaseActionEntityResponse>
   createHomepageLocalization?: Maybe<HomepageEntityResponse>
   createLandingpage?: Maybe<LandingpageEntityResponse>
   createLandingpageLocalization?: Maybe<LandingpageEntityResponse>
@@ -920,6 +1039,8 @@ export type Mutation = {
   /** Create a new user */
   createUsersPermissionsUser: UsersPermissionsUserEntityResponse
   deleteAuthor?: Maybe<AuthorEntityResponse>
+  deleteContentReleasesRelease?: Maybe<ContentReleasesReleaseEntityResponse>
+  deleteContentReleasesReleaseAction?: Maybe<ContentReleasesReleaseActionEntityResponse>
   deleteHomepage?: Maybe<HomepageEntityResponse>
   deleteLandingpage?: Maybe<LandingpageEntityResponse>
   deleteLocation?: Maybe<LocationEntityResponse>
@@ -946,6 +1067,8 @@ export type Mutation = {
   /** Reset user password. Confirm with a code (resetToken from forgotPassword) */
   resetPassword?: Maybe<UsersPermissionsLoginPayload>
   updateAuthor?: Maybe<AuthorEntityResponse>
+  updateContentReleasesRelease?: Maybe<ContentReleasesReleaseEntityResponse>
+  updateContentReleasesReleaseAction?: Maybe<ContentReleasesReleaseActionEntityResponse>
   updateFileInfo: UploadFileEntityResponse
   updateHomepage?: Maybe<HomepageEntityResponse>
   updateLandingpage?: Maybe<LandingpageEntityResponse>
@@ -964,8 +1087,22 @@ export type Mutation = {
   upload: UploadFileEntityResponse
 }
 
+export type MutationChangePasswordArgs = {
+  currentPassword: Scalars['String']
+  password: Scalars['String']
+  passwordConfirmation: Scalars['String']
+}
+
 export type MutationCreateAuthorArgs = {
   data: AuthorInput
+}
+
+export type MutationCreateContentReleasesReleaseArgs = {
+  data: ContentReleasesReleaseInput
+}
+
+export type MutationCreateContentReleasesReleaseActionArgs = {
+  data: ContentReleasesReleaseActionInput
 }
 
 export type MutationCreateHomepageLocalizationArgs = {
@@ -1057,6 +1194,14 @@ export type MutationDeleteAuthorArgs = {
   id: Scalars['ID']
 }
 
+export type MutationDeleteContentReleasesReleaseArgs = {
+  id: Scalars['ID']
+}
+
+export type MutationDeleteContentReleasesReleaseActionArgs = {
+  id: Scalars['ID']
+}
+
 export type MutationDeleteHomepageArgs = {
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
 }
@@ -1145,6 +1290,16 @@ export type MutationResetPasswordArgs = {
 
 export type MutationUpdateAuthorArgs = {
   data: AuthorInput
+  id: Scalars['ID']
+}
+
+export type MutationUpdateContentReleasesReleaseArgs = {
+  data: ContentReleasesReleaseInput
+  id: Scalars['ID']
+}
+
+export type MutationUpdateContentReleasesReleaseActionArgs = {
+  data: ContentReleasesReleaseActionInput
   id: Scalars['ID']
 }
 
@@ -1251,6 +1406,10 @@ export type Query = {
   StoryPostBySlug?: Maybe<StoryEntityResponse>
   author?: Maybe<AuthorEntityResponse>
   authors?: Maybe<AuthorEntityResponseCollection>
+  contentReleasesRelease?: Maybe<ContentReleasesReleaseEntityResponse>
+  contentReleasesReleaseAction?: Maybe<ContentReleasesReleaseActionEntityResponse>
+  contentReleasesReleaseActions?: Maybe<ContentReleasesReleaseActionEntityResponseCollection>
+  contentReleasesReleases?: Maybe<ContentReleasesReleaseEntityResponseCollection>
   homepage?: Maybe<HomepageEntityResponse>
   i18NLocale?: Maybe<I18NLocaleEntityResponse>
   i18NLocales?: Maybe<I18NLocaleEntityResponseCollection>
@@ -1292,6 +1451,26 @@ export type QueryAuthorsArgs = {
   filters?: InputMaybe<AuthorFiltersInput>
   pagination?: InputMaybe<PaginationArg>
   publicationState?: InputMaybe<PublicationState>
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
+}
+
+export type QueryContentReleasesReleaseArgs = {
+  id?: InputMaybe<Scalars['ID']>
+}
+
+export type QueryContentReleasesReleaseActionArgs = {
+  id?: InputMaybe<Scalars['ID']>
+}
+
+export type QueryContentReleasesReleaseActionsArgs = {
+  filters?: InputMaybe<ContentReleasesReleaseActionFiltersInput>
+  pagination?: InputMaybe<PaginationArg>
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
+}
+
+export type QueryContentReleasesReleasesArgs = {
+  filters?: InputMaybe<ContentReleasesReleaseFiltersInput>
+  pagination?: InputMaybe<PaginationArg>
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
 }
 
@@ -1589,6 +1768,7 @@ export type StringFilterInput = {
   lt?: InputMaybe<Scalars['String']>
   lte?: InputMaybe<Scalars['String']>
   ne?: InputMaybe<Scalars['String']>
+  nei?: InputMaybe<Scalars['String']>
   not?: InputMaybe<StringFilterInput>
   notContains?: InputMaybe<Scalars['String']>
   notContainsi?: InputMaybe<Scalars['String']>
@@ -15595,6 +15775,7 @@ export type TriplyRecordQuery = {
         updatedAt?: any | null
         publishedAt?: any | null
         subject_collectionHighlights?: boolean | null
+        label?: string | null
         stories?: {
           __typename?: 'StoryRelationResponseCollection'
           data: Array<{
@@ -16093,6 +16274,7 @@ export type TriplyRecordsQuery = {
         updatedAt?: any | null
         publishedAt?: any | null
         subject_collectionHighlights?: boolean | null
+        label?: string | null
         stories?: {
           __typename?: 'StoryRelationResponseCollection'
           data: Array<{
@@ -16590,6 +16772,7 @@ export type TriplyRecordFragmentFragment = {
     updatedAt?: any | null
     publishedAt?: any | null
     subject_collectionHighlights?: boolean | null
+    label?: string | null
     stories?: {
       __typename?: 'StoryRelationResponseCollection'
       data: Array<{
@@ -18337,6 +18520,7 @@ export const TriplyRecordFragmentFragmentDoc = gql`
       updatedAt
       publishedAt
       subject_collectionHighlights
+      label
     }
   }
   ${StoryFragmentFragmentDoc}
