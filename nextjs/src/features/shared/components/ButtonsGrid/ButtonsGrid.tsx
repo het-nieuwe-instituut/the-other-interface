@@ -4,9 +4,9 @@ import { keyExtractor } from '@/features/shared/utils/lists'
 import { capitalizeFirstLetter } from '@/features/shared/utils/text'
 import Download from '@/icons/arrows/download.svg'
 import ExternalLink from '@/icons/arrows/external-link.svg'
-import { Button, Flex, Grid, ResponsiveValue, Text } from '../../configs/chakra'
 import NextLink from 'next/link'
 import { CSSProperties } from 'react'
+import { Button, Flex, Grid, Text } from '../../configs/chakra'
 
 import {
   ComponentCoreButton,
@@ -23,7 +23,6 @@ type ButtonType = Omit<ComponentCoreButton, 'attachment'> & {
 interface Props {
   buttonStyle?: EnumComponentmodulesbuttonsmoduleButtonstyle
   buttons?: (ButtonType | null)[]
-  flexDirection: ResponsiveValue<'column' | 'row'> | undefined
   renderBefore?: () => any
   buttonLayoutStyle?: CSSProperties
 }
@@ -49,7 +48,7 @@ export const ButtonsGrid: React.FC<Props> = props => {
     )
   }
   return (
-    <Flex flexWrap={'wrap'} flexDirection={props.flexDirection} gap={2}>
+    <Flex flexWrap={'wrap'} gap={2}>
       {props.renderBefore && props.renderBefore()}
       {renderButtons()}
     </Flex>
