@@ -39,6 +39,6 @@ export const usePresenter = (menupages?: MenuPagesQuery) => {
     sectionTwo,
     lang,
     searchParams,
-    logoSize,
+    logoSize: { width: 280, height: 129 },
   }
 }
