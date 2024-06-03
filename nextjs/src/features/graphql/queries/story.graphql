@@ -7,6 +7,7 @@
 #import '../fragments/components/ButtonsModule.fragment.graphql'
 #import '../fragments/components/GridModule.fragment.graphql'
 #import '../fragments/components/core/baseTriplyRecord.fragment.graphql'
+#import '../fragments/components/core/standaloneLink.fragment.graphql'
 
 query storyById($locale: Locale!, $id: ID, $publicationState: String = "LIVE") {
   storyByLocale(
@@ -62,6 +63,9 @@ query storyById($locale: Locale!, $id: ID, $publicationState: String = "LIVE") {
           }
           ... on ComponentModulesSubtitle {
             ...subtitleModuleFragment
+          }
+          ... on ComponentCoreStandAloneLink {
+            ...standAloneLinkFragment
           }
         }
         triplyRecords {
