@@ -1,8 +1,9 @@
 import { isExternalURL } from '@/features/shared/utils/links'
-import { NavButton, NavLinkButton } from '@/features/ui/components/nav-button/component'
+import { NavButton } from '@/features/ui/components/nav-button/component'
 import ExternalLink from '@/features/ui/icons/external-link.svg'
 import { ReactElement } from 'react'
 import { cn } from '../../utils/cn'
+import { NavLinkButton } from '../nav-link-button/component'
 
 export interface ButtonGroupProps {
   children:
