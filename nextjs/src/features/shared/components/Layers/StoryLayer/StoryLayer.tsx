@@ -1,6 +1,5 @@
 'use client'
-import { PageHeader } from '../../PageHeader/PageHeader'
-import { StoryMeta } from '../../Story/StoryMeta/StoryMeta'
+import { StoryMeta } from '../../../../story/components/StoryMeta/StoryMeta'
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 import { LayerWrapper } from '../LayerWrapper'
 import { StoryBottomContent } from '../../Story/StoryBottomContent/StoryBottomContent'
@@ -10,6 +9,7 @@ import { useParams } from 'next/navigation'
 import { useRedirectToErrorOnError } from '@/features/shared/hooks/useRedirectToErrorOnError'
 import { ThemedSpinner } from '../../Loading/ThemedSpinner/ThemedSpinner'
 import ErrorBoundaryWrapper from '../../Error/ErrorBoundary/ErrorBoundary'
+import { PageHeader } from '@/features/editorial/components/PageHeader/PageHeader'
 
 export const StoryLayer = () => {
   const params = useParams()

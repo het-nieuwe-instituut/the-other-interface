@@ -7,7 +7,7 @@ import { FilterInput, CloseButton } from './fragments'
 import { CategorySuggestions } from '../CategorySuggestions/CategorySuggestions'
 import { GoButton } from './fragments/GoButton'
 import { SearchButton } from './fragments/SearchButton'
-import { Suggestions } from '../Suggestions/Suggestions'
+import { COLLECTION_HILIGHT_ID, Suggestions } from '../Suggestions/Suggestions'
 import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/SearchFilterBox'
 import { useSearchBarPosition } from './useSearchBarPosition'
 import CloseIconSmall from '@/icons/close-icon-small.svg'
@@ -54,6 +54,10 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }
     fetchStatus,
     isError: isTotalError,
   } = useTotalCounterQuery(isNoActiveSearch)
+
+  const isCollectionHighlightsSelected: boolean = selectedFilters.some(
+    filter => filter.id === COLLECTION_HILIGHT_ID
+  )
 
   const renderPaginationContent = () => {
     if (isTotalError || isSearchError) {
@@ -163,13 +167,15 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }
         <CategorySuggestions />
       </SuggestionBar>
 
-      <SuggestionBar
-        isOpen={isUserTyping && !isCategorySuggestionsOpen}
-        label={t('suggestions')}
-        offset={searchBarHeight}
-      >
-        <Suggestions handleSelectFilter={handleSelectFilter} />
-      </SuggestionBar>
+      {!isCollectionHighlightsSelected && (
+        <SuggestionBar
+          isOpen={isUserTyping && !isCategorySuggestionsOpen}
+          label={t('suggestions')}
+          offset={searchBarHeight}
+        >
+          <Suggestions handleSelectFilter={handleSelectFilter} />
+        </SuggestionBar>
+      )}
     </Grid>
   )
 }

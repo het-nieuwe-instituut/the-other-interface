@@ -11,7 +11,10 @@ import { mapCategoryToTriplyEnum } from '../../helpers/mapCategoryToTriplyEnum'
 import { storyToRecordMapper } from '../../helpers/extractStoryData'
 import initApiClientService from '../../utils/initApiClientService'
 import { useLocale } from '../useLocale'
-import { useFilters } from '../search/useFilters'
+import { Filter, useFilters } from '../search/useFilters'
+import { COLLECTION_HILIGHT_ID } from '@/features/galaxyInterface/components/GalaxyWrapper/Suggestions/Suggestions'
+import { triplyCategoryToSearchCategory } from '@/features/galaxyInterface/galaxies/CategoryGalaxy/mappers/searchCategoryToTriplyMapper'
+import { StringFilterInput, TriplyRecordFiltersInput } from 'src/generated/graphql'
 
 export function useSearchByCategoryQuery({
   category,
@@ -23,14 +26,45 @@ export function useSearchByCategoryQuery({
   text?: string
   page?: number
   enabled?: boolean
+  filters?: Filter[]
 }) {
   const api = initApiClientService()
   const locale = useLocale()
-
   const { decodedFilters } = useFilters()
 
   // TODO: mix story search
   const queryFn = async () => {
+    if (decodedFilters?.find(filter => filter.id === COLLECTION_HILIGHT_ID)) {
+      const type = triplyCategoryToSearchCategory(category)
+
+      const labelFilter: StringFilterInput = { containsi: text || undefined }
+
+      const queryFilters: TriplyRecordFiltersInput = {
+        and: [{ label: labelFilter }],
+      }
+
+      if (type) {
+        const typeFilter: StringFilterInput = { eq: type }
+        queryFilters.and?.push({ type: typeFilter })
+      }
+
+      const response = await api.searchBySelectedHighlights({
+        filters: queryFilters,
+        page,
+        pageSize: ZOOM2_RECORDS_PER_PAGE,
+      })
+
+      return {
+        items:
+          response?.triplyRecords?.data?.map(record => ({
+            id: record.attributes?.recordId,
+            title: record.attributes?.label ?? '',
+            thumbnail: '',
+            type: record.attributes?.entityName ?? '',
+          })) ?? [],
+        total: response?.triplyRecords?.meta?.pagination?.total ?? 0,
+      }
+    }
     switch (category) {
       case SEARCH_CATEGORIES.stories:
         const response = await api.searchByStories({
@@ -122,7 +156,7 @@ export function useSearchByCategoryQuery({
   const queryKey =
     category === SEARCH_CATEGORIES.stories
       ? ['searchByStories', category, text, page, locale, decodedFilters]
-      : ['search', category, text, page]
+      : ['search', category, text, page, decodedFilters]
 
   return useQuery(queryKey, queryFn, {
     enabled,

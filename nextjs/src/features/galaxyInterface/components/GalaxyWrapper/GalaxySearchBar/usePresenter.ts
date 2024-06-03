@@ -28,7 +28,14 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
   const { isSearchModeActive, searchCategory, isCategorySuggestionsOpen, searchValue } =
     useSelector((state: State) => state.shared)
 
-  const { selectedFilters, selectFilter, clearFilters, encodedFilters, removeFilter } = useFilters({
+  const {
+    selectedFilters,
+    selectFilter,
+    clearFilters,
+    encodedFilters,
+    decodedFilters,
+    removeFilter,
+  } = useFilters({
     onSelectFilter: focus,
     onRemoveFilter: focus,
   })
@@ -46,7 +53,8 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
   const resetSearchFilters = useCallback(() => {
     dispatch(sharedActions.searchCategory({ searchCategory: pageCategory }))
     dispatch(sharedActions.setSearch({ searchValue: search || '' }))
-  }, [search, pageCategory, dispatch])
+    dispatch(sharedActions.setFilters({ selectedFilters: decodedFilters || [] }))
+  }, [search, pageCategory, dispatch, decodedFilters])
 
   const handleSearchModeClose = useCallback(
     (resetFilters = false) => {
@@ -72,7 +80,9 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
   }, [searchValue, encodedFilters, searchCategory, lang, router, handleSearchModeClose])
 
   useEnterKey(handleGoClick)
-  useOutsideClick(searchBarRef, () => handleSearchModeClose(false))
+  useOutsideClick(searchBarRef, () => {
+    handleSearchModeClose(true)
+  })
 
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
