@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Markdown } from '@/features/shared/components/Markdown/Markdown'
 import { Box, Grid, GridItem, Image, Text } from '@chakra-ui/react'
 import { take } from 'lodash'
@@ -215,22 +214,23 @@ export const GridModule: React.FC<Props> = props => {
     return (
       <div className="flex">
         <ButtonGroup className="flex-wrap">
-          {/* we need to spread here because typescript was unhappy when doing mixed button components with .map */}
-          {[
-            !allFieldsAreShown ? (
+          {
+            (allFieldsAreShown ? (
               <ButtonGroupItem onClick={() => setShowAmount(showAmount + pageSize)}>
                 {props.component.showMoreButtonTitle}
               </ButtonGroupItem>
-            ) : null,
-            ...props.component.buttons.map(button => {
-              if (!button.text) return null
-              return (
-                <LinkButtonGroupItem key={button.id} href={button.url || ''}>
-                  {button.text}
-                </LinkButtonGroupItem>
-              )
-            }),
-          ]}
+            ) : // typecasting as any here because the type inference became to complicated here because of the conditional rendering and we still want to enforce specific components in ButtonGroup
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            null) as any
+          }
+          {props.component.buttons.map(button => {
+            if (!button.text) return null
+            return (
+              <LinkButtonGroupItem key={button.id} href={button.url || ''}>
+                {button.text}
+              </LinkButtonGroupItem>
+            )
+          })}
         </ButtonGroup>
       </div>
     )

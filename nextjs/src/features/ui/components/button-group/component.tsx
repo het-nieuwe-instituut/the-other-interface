@@ -6,9 +6,8 @@ import { cn } from '../../utils/cn'
 
 export interface ButtonGroupProps {
   children:
-    | ReactElement<LinkButtonGroupItemProps>
-    | ReactElement<ButtonGroupItemProps>
-    | Array<ReactElement<LinkButtonGroupItemProps> | ReactElement<ButtonGroupItemProps> | null>
+    | ReactElement<LinkButtonGroupItemProps | ButtonGroupItemProps>
+    | Array<ReactElement<LinkButtonGroupItemProps | ButtonGroupItemProps> | null>
     | null
   className?: string
 }
