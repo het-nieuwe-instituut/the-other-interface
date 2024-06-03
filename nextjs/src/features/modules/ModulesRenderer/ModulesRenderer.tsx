@@ -21,6 +21,7 @@ import { Pullquote } from '../components/Pullquote/Pullquote'
 import { CarouselModule } from '../components/carousels/Carousel/Carousel'
 import { ImageCarousel } from '../components/carousels/ImageCarousel/ImageCarousel'
 import { mapUploadFileEntitiesToStoryImageInfo } from '../components/carousels/ImageCarousel/imageCarouselStrapiDataMapper'
+import { StandaloneLink } from 'src/app/ks/link/StandaloneLink'
 
 interface Props {
   components: DynamicComponents
@@ -166,6 +167,21 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
                 key={keyExtractor(component.id, index, array)}
                 component={component as ComponentModulesGridModule}
               />
+            )
+          }
+
+          if (component?.__typename === 'ComponentCoreStandAloneLink') {
+            const href =
+              (!component.attachment?.data
+                ? component.url
+                : component.attachment.data?.attributes?.url) ?? undefined
+            const variant = !component.attachment?.data ? 'link' : 'download'
+
+            if (!href) return null
+            return (
+              <StandaloneLink href={href} variant={variant} key={component.id}>
+                {component.label}
+              </StandaloneLink>
             )
           }
         }

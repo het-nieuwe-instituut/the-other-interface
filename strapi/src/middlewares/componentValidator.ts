@@ -30,7 +30,7 @@ export default (config, { strapi }: { strapi: Strapi }) => {
 }
 
 function validateStandAloneLinkOrThrow(component: Partial<CoreStandAloneLink['attributes']>) {
-  if (!component.url || !component.attachment) {
+  if (!component.url && !component.attachment) {
     throw new errors.ApplicationError('Stand alone link must have either a url or attachment')
   }
 }
