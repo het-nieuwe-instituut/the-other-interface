@@ -87,7 +87,7 @@ export const StoryMeta: React.FC = () => {
               lang
             )}
           >
-            <p className={TypographyVariants({ social: 'sm', className: 'font-bold' })}>
+            <p className={TypographyVariants({ social: 'smLink', className: 'font-bold' })}>
               {storiesT.t('by', {
                 author: authorFormatted.name,
               })}
@@ -174,7 +174,7 @@ export const StoryMeta: React.FC = () => {
                     lang
                   )}
                 >
-                  <p className={TypographyVariants({ social: 'sm' })}>{theme.name}</p>
+                  <p className={TypographyVariants({ social: 'smLink' })}>{theme.name}</p>
                 </NextLink>
               )
             })}
@@ -218,7 +218,7 @@ export const StoryMeta: React.FC = () => {
                     lang
                   )}
                 >
-                  <p className={TypographyVariants({ social: 'sm' })}>{location.name}</p>
+                  <p className={TypographyVariants({ social: 'smLink' })}>{location.name}</p>
                 </NextLink>
               )
             })}

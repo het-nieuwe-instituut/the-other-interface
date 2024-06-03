@@ -40,6 +40,11 @@ export const TypographyVariants = cva('', {
         'font-social-medium text-[12px] tracking-[0.4px]',
         'lg:font-social-large lg:text-[14px]',
       ],
+      smLink: [
+        ' self-stretch not-italic leading-[130%_] underline',
+        'font-social-medium text-[12px] tracking-[0.4px]',
+        'lg:font-social-large lg:text-[14px]',
+      ],
       xs: [' self-stretch not-italic leading-[130%_]', 'font-social-medium text-[10px]'],
       placeholder:
         ' self-stretch font-social-large text-[21px] italic  leading-[130%_] tracking-[0.21px]',
