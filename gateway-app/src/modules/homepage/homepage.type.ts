@@ -9,7 +9,7 @@ import { ComponentModulesPullquote } from '../strapi/components/modules/pullQuot
 import { ComponentModulesSubtitle } from '../strapi/components/modules/subtitle'
 import { ComponentModulesTextModule } from '../strapi/components/modules/textModule'
 import { ComponentModulesTitleModule } from '../strapi/components/modules/titleModule'
-import { Error } from '../strapi/shared-types'
+import { Error, ResponseCollectionMeta } from '../strapi/shared-types'
 import { StoryWithoutRelationsRelationResponseCollection } from '../story/story.type'
 import { ThemeRelationResponseCollection } from '../theme/theme.type'
 
@@ -25,7 +25,7 @@ export class Homepage {
   public Title?: string
 
   @Field(() => [HomepageComponentsDynamicZone], { nullable: true })
-  public components?: (typeof HomepageComponentsDynamicZone)[]
+  public components?: typeof HomepageComponentsDynamicZone[]
 
   @Field({ nullable: true })
   public createdAt?: Date
@@ -71,6 +71,9 @@ export class HighlightedHomepageStoryEntity {
 export class HighlightedHomepageThemes {
   @Field(() => ThemeRelationResponseCollection, { nullable: true })
   public highlightedThemes?: ThemeRelationResponseCollection
+
+  // @Field(() => ResponseCollectionMeta, { nullable: true })
+  // public meta?: ResponseCollectionMeta // added
 }
 
 @ObjectType()
@@ -84,7 +87,10 @@ export class HighlightedHomepageThemeEntity {
 @ObjectType()
 export class HighlightedHomepageThemeEntityResponse {
   @Field(() => HighlightedHomepageThemeEntity)
-  public data: HighlightedHomepageThemeEntity // here?
+  public data: HighlightedHomepageThemeEntity // had to remove []
+
+  // @Field(() => ResponseCollectionMeta, { nullable: true })
+  // public meta?: ResponseCollectionMeta // added
 }
 
 @ObjectType()

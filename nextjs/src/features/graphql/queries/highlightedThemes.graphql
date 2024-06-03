@@ -14,6 +14,14 @@ query highlightedHomepageThemes(
           data {
             ...ThemeFragment
           }
+          meta {
+            pagination {
+              page
+              pageSize
+              pageCount
+              total
+            }
+          }
         }
       }
     }
