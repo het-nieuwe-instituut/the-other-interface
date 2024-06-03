@@ -14,10 +14,7 @@ import {
 } from 'src/generated/graphql'
 import { Paragraph } from '../../ui/components/Paragraph/Paragraph'
 import { Subtitle } from '../../ui/components/subtitle/Subtitle'
-import {
-  LinkButtonGroup,
-  LinkButtonGroupItem,
-} from '../../ui/components/link-button-group/component'
+import { ButtonGroup, LinkButtonGroupItem } from '../../ui/components/button-group/component'
 import { GridModule } from '../components/GridModule/GridModule'
 import MediaImage from '../components/Image/Image'
 import { Pullquote } from '../components/Pullquote/Pullquote'
@@ -139,8 +136,8 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
               return null
             }
             return (
-              <LinkButtonGroup key={keyExtractor(component.id, index, array)}>
-                {component.buttons?.map(button => {
+              <ButtonGroup key={keyExtractor(component.id, index, array)}>
+                {component.buttons.map(button => {
                   if (!button.text || !button.url) {
                     return null
                   }
@@ -150,7 +147,7 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
                     </LinkButtonGroupItem>
                   )
                 })}
-              </LinkButtonGroup>
+              </ButtonGroup>
             )
           }
 
