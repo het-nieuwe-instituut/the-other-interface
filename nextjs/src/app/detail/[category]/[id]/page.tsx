@@ -1,4 +1,5 @@
 import { DetailpageContainer } from '@/features/pages/containers/DetailpageContainer/DetailpageContainer'
+import { ReduxSearchSync } from '@/features/shared/components/Redux/ReduxSearchSync'
 import { CATEGORIES, Category } from '@/features/shared/utils/categories'
 import { notFound } from 'next/navigation'
 interface Props {
@@ -18,6 +19,7 @@ export default async function Page({ params }: Props) {
 
   return (
     <>
+      <ReduxSearchSync />
       <DetailpageContainer category={category} />
     </>
   )

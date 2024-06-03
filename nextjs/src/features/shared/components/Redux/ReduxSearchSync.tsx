@@ -7,7 +7,7 @@ import { decodeFilters } from '../../helpers/searchHelpers'
 import { FilterArray } from '../../hooks/search/useFilters'
 import { usePageCategory } from '../../hooks/usePageCategory'
 
-export const useReduxSearchSync = () => {
+export const ReduxSearchSync = () => {
   const { filters, search } = useZoom2Params()
   const { pageCategory } = usePageCategory()
   const dispatch = useDispatch()
@@ -28,4 +28,6 @@ export const useReduxSearchSync = () => {
       dispatch(sharedActions.setSearch({ searchValue: '' }))
     }
   }, [dispatch, search, filters, pageCategory])
+
+  return null
 }

@@ -1,4 +1,5 @@
 import { HomepageContainer } from '@/features/pages/containers/HomepageContainer/HomepageContainer'
+import { ReduxSearchSync } from '@/features/shared/components/Redux/ReduxSearchSync'
 import { getLocaleFromParams } from '@/features/shared/helpers/getLocaleFromParams'
 import initApiServerService from '@/features/shared/utils/initApiServerService'
 import { draftMode } from 'next/headers'
@@ -13,5 +14,10 @@ export default async function Page({
   const api = initApiServerService()
   const homepage = await api?.homepage({ locale })
 
-  return <HomepageContainer homepage={homepage} draftMode={isEnabled} />
+  return (
+    <>
+      <ReduxSearchSync />
+      <HomepageContainer homepage={homepage} draftMode={isEnabled} />
+    </>
+  )
 }

@@ -7,7 +7,6 @@ import { GalaxyPagination } from '../../components/GalaxyWrapper/GalaxyPaginatio
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { ThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
-import { useReduxSearchSync } from '@/features/shared/components/Redux/ReduxSearchSync'
 
 export const CategoryGalaxy: React.FC = () => {
   const {
@@ -23,8 +22,6 @@ export const CategoryGalaxy: React.FC = () => {
   } = usePresenter()
 
   const { t } = useTypeSafeTranslation('category')
-  // Sync search with redux
-  useReduxSearchSync()
 
   const renderMainContent = () => {
     if (isError) {

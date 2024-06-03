@@ -5,6 +5,7 @@ import { draftMode } from 'next/headers'
 import { PublicationState } from '@/features/shared/types/enums'
 import { HomepageQuery, LandingpageBySlugQuery } from 'src/generated/graphql'
 import { Locale } from 'src/generated/graphql'
+import { ReduxSearchSync } from '@/features/shared/components/Redux/ReduxSearchSync'
 
 export type HomeOrLadingType =
   | HomepageQuery['homepage']['data']['attributes']
@@ -38,10 +39,13 @@ export default async function Page({
   }
 
   return (
-    <LandingpageContainer
-      editorialData={editorialData}
-      category={category as CloudCategory}
-      description={description}
-    />
+    <>
+      <ReduxSearchSync />
+      <LandingpageContainer
+        editorialData={editorialData}
+        category={category as CloudCategory}
+        description={description}
+      />
+    </>
   )
 }
