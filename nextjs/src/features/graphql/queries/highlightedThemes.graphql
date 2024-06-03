@@ -17,13 +17,5 @@ query highlightedHomepageThemes(
         }
       }
     }
-    meta {
-      pagination {
-        page
-        pageSize
-        pageCount
-        total
-      }
-    }
   }
 }

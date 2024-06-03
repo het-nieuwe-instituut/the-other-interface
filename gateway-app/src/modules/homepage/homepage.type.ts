@@ -9,7 +9,7 @@ import { ComponentModulesPullquote } from '../strapi/components/modules/pullQuot
 import { ComponentModulesSubtitle } from '../strapi/components/modules/subtitle'
 import { ComponentModulesTextModule } from '../strapi/components/modules/textModule'
 import { ComponentModulesTitleModule } from '../strapi/components/modules/titleModule'
-import { Error, ResponseCollectionMeta } from '../strapi/shared-types'
+import { Error } from '../strapi/shared-types'
 import { StoryWithoutRelationsRelationResponseCollection } from '../story/story.type'
 import { ThemeRelationResponseCollection } from '../theme/theme.type'
 
@@ -50,9 +50,6 @@ export class Homepage {
 export class HighlightedHomepageStoryEntityResponse {
   @Field(() => [HighlightedHomepageStoryEntity])
   public data: HighlightedHomepageStoryEntity[]
-
-  // @Field(() => ResponseCollectionMeta, { nullable: true }) // why not added?
-  // public meta?: ResponseCollectionMeta
 }
 
 @ObjectType()
@@ -88,9 +85,6 @@ export class HighlightedHomepageThemeEntity {
 export class HighlightedHomepageThemeEntityResponse {
   @Field(() => HighlightedHomepageThemeEntity)
   public data: HighlightedHomepageThemeEntity // here?
-
-  @Field(() => ResponseCollectionMeta, { nullable: true }) // why not added?
-  public meta?: ResponseCollectionMeta
 }
 
 @ObjectType()
