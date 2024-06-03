@@ -11,15 +11,6 @@
     },
     "url": {
       "type": "string"
-    },
-    "attachment": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": ["images", "files", "videos", "audios"]
-    },
-    "hasAttachment": {
-      "type": "boolean"
     }
   }
 }

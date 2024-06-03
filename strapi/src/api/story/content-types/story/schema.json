@@ -44,7 +44,8 @@
         "modules.title-module",
         "modules.image-carousel",
         "modules.image",
-        "modules.buttons-module"
+        "modules.buttons-module",
+        "core.stand-alone-link"
       ],
       "pluginOptions": {
         "i18n": {
