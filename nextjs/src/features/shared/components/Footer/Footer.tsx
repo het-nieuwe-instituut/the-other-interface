@@ -1,44 +1,28 @@
-'use client'
-import { MenuPagesQuery } from 'src/generated/graphql'
-import { usePresenter } from './usePresenter'
 import LogoSvg from '@/features/modules/components/LogoSvg/LogoSvg'
 import Link from 'next/link'
 import { useTypeSafeTranslation } from '../../hooks/translations'
 import { StandaloneLink } from 'src/app/ks/link/StandaloneLink'
+import { useLocale } from '../../hooks/useLocale'
 
-type Props = {
-  menupages?: MenuPagesQuery
-}
-
-export const Footer = ({ menupages }: Props) => {
-  const { lang, logoSize } = usePresenter(menupages)
+export const Footer = () => {
+  const lang = useLocale()
+  const logoSize = { width: 280, height: 129 }
   const { t } = useTypeSafeTranslation('common')
 
   return (
-    <div className="relative z-[9996] w-full bg-ivory-90 pt-8 opacity-100">
+    <div className="relative z-[FOOTER_Z_INDEX] w-full bg-ivory-90 pt-8 opacity-100">
       <div className="container max-w-full p-6 pb-12">
         <div className="grid gap-1 md:grid-cols-2 lg:grid-cols-3">
           <div>
-            <div>
-              <Link href={`https://nieuweinstituut.nl/${lang ?? 'nl'}`}>
-                <LogoSvg width={logoSize?.width} height={logoSize?.height} />
-              </Link>
-            </div>
-
+            <Link href={`https://nieuweinstituut.nl/${lang ?? 'nl'}`}>
+              <LogoSvg width={logoSize?.width} height={logoSize?.height} />
+            </Link>
             <div className="pt-6">
-              <div className="">
-                <Link href="https://goo.gl/maps/m5EvkSa3z321G68z6">
-                  <p className="font-social-large text-[21px] tracking-[0.21px]">
-                    Nieuwe Instituut
-                  </p>
-                  <p className="font-social-large text-[21px] tracking-[0.21px]">Museumpark 25</p>
-                  <p className="font-social-large text-[21px] tracking-[0.21px]">
-                    {' '}
-                    3015CB Rotterdam
-                  </p>
-                </Link>
-              </div>
-
+              <Link href="https://goo.gl/maps/m5EvkSa3z321G68z6">
+                <p className="font-social-large text-[21px] tracking-[0.21px]">Nieuwe Instituut</p>
+                <p className="font-social-large text-[21px] tracking-[0.21px]">Museumpark 25</p>
+                <p className="font-social-large text-[21px] tracking-[0.21px]">3015CB Rotterdam</p>
+              </Link>
               <div className="pt-6">
                 <Link href="tel:+31(0)10-4401200">
                   <p className="font-social-large text-[21px] tracking-[0.21px]">
