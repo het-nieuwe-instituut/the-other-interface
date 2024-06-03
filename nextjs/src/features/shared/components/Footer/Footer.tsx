@@ -1,13 +1,15 @@
 import LogoSvg from '@/features/modules/components/LogoSvg/LogoSvg'
 import Link from 'next/link'
 import { useTypeSafeTranslation } from '../../hooks/translations'
-import { StandaloneLink } from 'src/app/ks/link/StandaloneLink'
 import { useLocale } from '../../hooks/useLocale'
+import { NavLinkButton } from '@/features/ui/components/nav-link-button/component'
+import ExternalLink from '@/features/ui/icons/external-link.svg'
 
 export const Footer = () => {
   const lang = useLocale()
   const logoSize = { width: 280, height: 129 }
   const { t } = useTypeSafeTranslation('common')
+  const Icon = ExternalLink
 
   return (
     <div className="relative z-[FOOTER_Z_INDEX] w-full bg-ivory-90 pt-8 opacity-100">
@@ -44,13 +46,23 @@ export const Footer = () => {
             <div className="grid md:grid-cols-1 lg:grid-cols-2">
               <div className="pb-8">
                 <div>
-                  <StandaloneLink href={'#'}>Exhibitions and activities</StandaloneLink>
-                  <StandaloneLink href={'#'}>Browse our web magazine</StandaloneLink>
-                  <StandaloneLink href={'#'}>Subscribe to our newsletter</StandaloneLink>
+                  <NavLinkButton href={'#'} className="mb-1">
+                    Exhibitions and activities <Icon className="size-5" />
+                  </NavLinkButton>
+                  <NavLinkButton href={'#'} className="mb-1">
+                    Browse our web magazine <Icon className="size-5" />
+                  </NavLinkButton>
+                  <NavLinkButton href={'#'}>
+                    Subscribe to our newsletter <Icon className="size-5" />
+                  </NavLinkButton>
                 </div>
                 <div className="pt-8">
-                  <StandaloneLink href={'#'}>Colophon</StandaloneLink>
-                  <StandaloneLink href={'#'}>Disclaimer</StandaloneLink>
+                  <NavLinkButton href={'#'} className="mb-1">
+                    Colophon <Icon className="size-5" />
+                  </NavLinkButton>
+                  <NavLinkButton href={'#'}>
+                    Disclaimer <Icon className="size-5" />
+                  </NavLinkButton>
                 </div>
               </div>
               <div>

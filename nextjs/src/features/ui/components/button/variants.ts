@@ -14,9 +14,9 @@ export const ButtonVariants = cva(
         primary: [''],
         secondary: ['h-12'],
         tertiary: [
-          'h-12 border-b border-black border-x-ivory-90 border-t-ivory-90 px-5',
+          'h-12 border-none px-5',
           'text-center font-social-large text-base font-normal leading-tight tracking-tight text-black-100',
-          'hover:border-black hover:bg-black-100 hover:text-white hover:decoration-black-100',
+          'hover:border-black hover:bg-black-100 hover:text-white',
         ],
         inverted: [
           'border-pink-100 text-pink-100',
@@ -24,7 +24,7 @@ export const ButtonVariants = cva(
         ],
       },
       size: {
-        large: ['h-[40px] px-2 font-social-large text-[21px] font-normal leading-7 tracking-tight'],
+        large: ['h-[60px] px-5 font-social-large text-[21px] font-normal leading-7 tracking-tight'],
         small: ['h-12 px-5 font-social-large text-base font-normal leading-tight tracking-tight'],
         xsmall: [
           'h-10 px-5 font-social-large text-[14px] font-normal leading-tight tracking-tight',
