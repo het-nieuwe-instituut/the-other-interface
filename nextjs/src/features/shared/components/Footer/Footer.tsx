@@ -58,11 +58,9 @@ export const Footer = () => {
                 </div>
                 <div className="pt-8">
                   <NavLinkButton href={'#'} className="mb-1">
-                    Colophon <Icon className="size-5" />
+                    Colophon
                   </NavLinkButton>
-                  <NavLinkButton href={'#'}>
-                    Disclaimer <Icon className="size-5" />
-                  </NavLinkButton>
+                  <NavLinkButton href={'#'}>Disclaimer</NavLinkButton>
                 </div>
               </div>
               <div>
