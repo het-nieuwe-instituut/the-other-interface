@@ -1,0 +1,16 @@
+fragment standAloneLinkFragment on ComponentCoreStandAloneLink {
+  id
+  __typename
+
+  label
+  url
+  attachment {
+    data {
+      attributes {
+        url
+        height
+        width
+      }
+    }
+  }
+}
