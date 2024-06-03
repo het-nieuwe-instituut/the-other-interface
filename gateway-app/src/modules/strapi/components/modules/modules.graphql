@@ -1,6 +1,5 @@
 fragment ComponentModulesButtonsModuleFragment on ComponentModulesButtonsModule {
     id
-    buttonStyle
     __typename
     buttons {
         ...ComponentCoreButtonFragment

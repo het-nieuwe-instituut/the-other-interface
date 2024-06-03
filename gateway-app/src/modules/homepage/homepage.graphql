@@ -40,7 +40,7 @@ fragment HomepageFragment on Homepage {
     }
 }
 
-query homepage($publicationState: PublicationState = LIVE, $locale: I18NLocaleCode) {
+query homepage($publicationState: PublicationState = LIVE, $locale: I18NLocaleCode!) {
     homepage(publicationState: $publicationState, locale: $locale) {
         data {
             id
@@ -52,6 +52,52 @@ query homepage($publicationState: PublicationState = LIVE, $locale: I18NLocaleCo
                         attributes {
                             ...HomepageFragment
                         }
+                    }
+                }
+            }
+        }
+    }
+}
+
+query highlightedHomepageStories(
+    $publicationState: PublicationState = LIVE
+    $locale: I18NLocaleCode!
+    $localeStr: String!
+    $highlightedStoriesPaginationArgs: PaginationArg
+) {
+    homepage(publicationState: $publicationState, locale: $locale) {
+        data {
+            id
+            attributes {
+                highlightedStories(
+                    filters: { locale: { eq: $localeStr } }
+                    pagination: $highlightedStoriesPaginationArgs
+                ) {
+                    data {
+                        ...StoryWithoutRelationsFragment
+                    }
+                }
+            }
+        }
+    }
+}
+
+query highlightedHomepageThemes(
+    $publicationState: PublicationState = LIVE
+    $locale: I18NLocaleCode!
+    $localeStr: String!
+    $highlightedThemesPaginationArgs: PaginationArg
+) {
+    homepage(publicationState: $publicationState, locale: $locale) {
+        data {
+            id
+            attributes {
+                highlightedThemes(
+                    filters: { locale: { eq: $localeStr } }
+                    pagination: $highlightedThemesPaginationArgs
+                ) {
+                    data {
+                        ...ThemeFragment
                     }
                 }
             }

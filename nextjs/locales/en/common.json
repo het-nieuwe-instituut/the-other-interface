@@ -5,7 +5,7 @@
   "published": "Published on {{date}}",
   "archivesBy": "Archive items by",
   "publicationsBy": "Publications by",
-  "peopleBy": "Persons by",
+  "peopleBy": "People by",
   "objectsBy": "Objects by",
   "searchPortalUrl": "https://zoeken.hetnieuweinstituut.nl/en/",
   "goToSearchPortal": "Go to Search portal",
@@ -19,5 +19,7 @@
   "switchToMockedServer": "Switch to mocked server",
   "switchToLiveServer": "Switch to test server",
   "go": "Search",
-  "noDataFound": "No data found"
+  "noDataFound": "No data found",
+  "languageDisclaimer": "Please note that all content from the Collection has been translated to English using machine translation.",
+  "metaTitle": "Nieuwe Instituut - Collection platform"
 }

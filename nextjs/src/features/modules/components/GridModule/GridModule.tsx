@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { ButtonsGrid } from '@/features/shared/components/ButtonsGrid/ButtonsGrid'
 import { Markdown } from '@/features/shared/components/Markdown/Markdown'
-import { Box, Button, Grid, GridItem, Image, Text } from '@chakra-ui/react'
+import { Box, Grid, GridItem, Image, Text } from '@chakra-ui/react'
 import { take } from 'lodash'
 import NextLink from 'next/link'
 import { useState } from 'react'
@@ -12,6 +10,11 @@ import {
   EnumComponentmodulesgridmoduleFieldtypes,
 } from 'src/generated/graphql'
 
+import {
+  ButtonGroup,
+  ButtonGroupItem,
+  LinkButtonGroupItem,
+} from '@/features/ui/components/button-group/component'
 import { ExtractedTriplyFields, extractTriplyFields } from '../../helpers/triplyDataExtractor'
 import { imageBasePath } from '../../modulesConstants'
 import { modulesSpacingMapper } from '../../modulesSpacing'
@@ -209,17 +212,27 @@ export const GridModule: React.FC<Props> = props => {
     }
 
     return (
-      <ButtonsGrid
-        renderBefore={() =>
-          !allFieldsAreShown && (
-            <Button onClick={() => setShowAmount(showAmount + pageSize)}>
-              {props.component.showMoreButtonTitle}
-            </Button>
-          )
-        }
-        buttons={props.component.buttons}
-        flexDirection={undefined}
-      />
+      <div className="flex">
+        <ButtonGroup className="flex-wrap">
+          {
+            (allFieldsAreShown ? (
+              <ButtonGroupItem onClick={() => setShowAmount(showAmount + pageSize)}>
+                {props.component.showMoreButtonTitle}
+              </ButtonGroupItem>
+            ) : // typecasting as any here because the type inference became to complicated here because of the conditional rendering and we still want to enforce specific components in ButtonGroup
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            null) as any
+          }
+          {props.component.buttons.map(button => {
+            if (!button.text) return null
+            return (
+              <LinkButtonGroupItem key={button.id} href={button.url || ''}>
+                {button.text}
+              </LinkButtonGroupItem>
+            )
+          })}
+        </ButtonGroup>
+      </div>
     )
   }
 }

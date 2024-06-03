@@ -33,11 +33,18 @@ import {
 } from '../triplyRecord/triplyRecord.type'
 import { ThemeFiltersInput, ThemeRelationResponseCollection } from '../theme/theme.type'
 import { StoryEntityResponse } from './story.types.circular'
+import { ComponentCoreStandAloneLink } from '../strapi/components/core/standAloneLink'
 
 @ObjectType()
 export class StoryRelationResponseCollection {
   @Field(() => [StoryEntity], { nullable: true })
   public data?: StoryEntity[]
+}
+
+@ObjectType()
+export class StoryWithoutRelationsRelationResponseCollection {
+  @Field(() => [StoryWithoutRelationsEntity], { nullable: true })
+  public data?: StoryWithoutRelationsEntity[]
 }
 
 @ObjectType()
@@ -127,6 +134,7 @@ export const StoryComponentsDynamicZone = createUnionType({
       ComponentModulesSubtitle,
       ComponentModulesTextModule,
       ComponentModulesTitleModule,
+      ComponentCoreStandAloneLink,
       Error,
     ] as const,
   resolveType(value) {

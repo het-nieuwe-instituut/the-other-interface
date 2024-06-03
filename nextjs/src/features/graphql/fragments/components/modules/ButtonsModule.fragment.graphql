@@ -5,15 +5,5 @@ fragment buttonsModuleFragment on ComponentModulesButtonsModule {
         id
         text
         url
-        attachment {
-            data {
-                id
-                attributes {
-                    url
-                }
-            }
-        }
-        hasAttachment
     }
-    buttonStyle
 }

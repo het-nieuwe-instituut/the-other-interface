@@ -710,6 +710,12 @@ export interface ApiHomepageHomepage extends Schema.SingleType {
           localized: true
         }
       }>
+    highlightedThemes: Attribute.Relation<'api::homepage.homepage', 'oneToMany', 'api::theme.theme'>
+    highlightedStories: Attribute.Relation<
+      'api::homepage.homepage',
+      'oneToMany',
+      'api::story.story'
+    >
     createdAt: Attribute.DateTime
     updatedAt: Attribute.DateTime
     publishedAt: Attribute.DateTime
@@ -936,7 +942,8 @@ export interface ApiStoryStory extends Schema.CollectionType {
         'modules.title-module',
         'modules.image-carousel',
         'modules.image',
-        'modules.buttons-module'
+        'modules.buttons-module',
+        'core.stand-alone-link'
       ]
     > &
       Attribute.SetPluginOptions<{
