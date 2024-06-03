@@ -11,30 +11,30 @@ export function recordRightsFieldMapper(record: string, translate: recordMetaT) 
       return {
         url: 'https://rightsstatements.org/page/CNE/1.0/',
         description: translate('rightsStatusNotEvaluatedText'),
-        icon: () => <QuestionIcon style={{ width: '35px', height: '35px' }} />,
+        icon: () => <QuestionIcon style={{ width: '24px', height: '24px' }} />,
         text: translate('rightsStatusNotEvaluated'),
       }
     case 'Auteursrechtelijk beschermd':
       return {
         url: 'https://rightsstatements.org/page/InC/1.0/',
         description: translate('rightsStatusProtectedText'),
-        icon: () => <CopyrightIcon style={{ width: '35px', height: '35px' }} />,
+        icon: () => <CopyrightIcon style={{ width: '24px', height: '24px' }} />,
         text: translate('rightsStatusProtected'),
       }
     case 'Auteursrechtelijke bescherming niet bepaald':
       return {
         url: 'https://rightsstatements.org/page/UND/1.0/',
         description: translate('rightsStatusNotDeterminedText'),
-        icon: () => <QuestionIcon style={{ width: '35px', height: '35px' }} />,
+        icon: () => <QuestionIcon style={{ width: '24px', height: '24px' }} />,
         text: translate('rightsStatusNotDetermined'),
       }
     case 'Creative Commons Naamsvermelding 4.0':
       return {
         url: 'https://creativecommons.org/licenses/by/4.0/',
         description: translate('rightsStatusCCBYText'),
-        icon: () => <CcIcon style={{ width: '35px', height: '35px' }} />,
+        icon: () => <CcIcon style={{ width: '24px', height: '24px' }} />,
         secondaryIcon: () => (
-          <AttributionIcon style={{ width: '35px', height: '35px', marginLeft: '2' }} />
+          <AttributionIcon style={{ width: '24px', height: '24px', marginLeft: '2' }} />
         ),
         text: translate('rightsStatusCCBY'),
       }
@@ -42,9 +42,9 @@ export function recordRightsFieldMapper(record: string, translate: recordMetaT) 
       return {
         url: 'https://creativecommons.org/publicdomain/mark/1.0/',
         description: translate('rightsStatusPublicText'),
-        icon: () => <CcIcon style={{ width: '35px', height: '35px' }} />,
+        icon: () => <CcIcon style={{ width: '24px', height: '24px' }} />,
         secondaryIcon: () => (
-          <PublicDomainIcon style={{ width: '35px', height: '35px', marginLeft: '2' }} />
+          <PublicDomainIcon style={{ width: '24px', height: '24px', marginLeft: '2' }} />
         ),
         text: translate('rightsStatusPublic'),
       }

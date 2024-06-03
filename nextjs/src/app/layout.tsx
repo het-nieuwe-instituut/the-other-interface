@@ -17,13 +17,21 @@ import { ReactTooltipInitializer } from '@/features/ui/components/tooltip/ReactT
 import { Metadata } from 'next'
 import { draftMode } from 'next/headers'
 import '../styles/globals.css'
+import { createTypeSafeTranslation } from '@/features/shared/utils/translations'
+import bootstrap from './_bootstrap'
+import { Bootstrap } from './_bootstrap/Bootstrap'
 
-export const metadata: Metadata = {
-  title: 'Nieuwe Instituut',
+export async function generateMetadata(): Promise<Metadata> {
+  const { t: commonT } = await createTypeSafeTranslation('common')
+
+  return {
+    title: commonT('metaTitle'),
+  }
 }
 
 function MyApp({ children }: { children: React.ReactNode }) {
   const { isEnabled } = draftMode()
+  bootstrap()
 
   return (
     <html lang="en">
@@ -45,6 +53,7 @@ function MyApp({ children }: { children: React.ReactNode }) {
             </Script>
           </>
         )}
+        <Bootstrap />
         <ReduxStoreProvider>
           <ReactQueryProvider>
             <ThemeProvider>

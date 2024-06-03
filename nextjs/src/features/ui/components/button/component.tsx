@@ -1,6 +1,6 @@
 import { type VariantProps } from 'class-variance-authority'
 import React from 'react'
-import Loader from './loader.svg'
+import Loader from '@/features/ui/icons/loading.svg'
 import { cn } from '../../utils/cn'
 import { ButtonVariants } from './variants'
 

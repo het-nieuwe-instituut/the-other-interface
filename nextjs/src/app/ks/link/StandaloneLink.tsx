@@ -8,6 +8,7 @@ interface ExternalLinkProps {
   variant?: 'external' | 'download'
   href: LinkButtonProps['href']
   className?: string
+  size?: LinkButtonProps['size']
 }
 
 export const StandaloneLink = ({
@@ -15,6 +16,7 @@ export const StandaloneLink = ({
   variant = 'external',
   className,
   href,
+  size,
 }: ExternalLinkProps) => {
   const Icon = variant === 'download' ? File : ExternalLink
   return (
@@ -22,6 +24,7 @@ export const StandaloneLink = ({
       href={href}
       className={cn('flex gap-2', className)}
       intent={'tertiary'}
+      size={size}
       download={variant === 'download'}
     >
       {children}
