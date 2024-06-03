@@ -15,7 +15,7 @@ export const Footer = ({ menupages }: Props) => {
   const { t } = useTypeSafeTranslation('common')
 
   return (
-    <div className="relative z-[9996] w-full bg-ivory-90 opacity-100">
+    <div className="relative z-[9996] w-full bg-ivory-90 pt-8 opacity-100">
       <div className="container max-w-full p-6 pb-12">
         <div className="grid gap-1 md:grid-cols-2 lg:grid-cols-3">
           <div>
