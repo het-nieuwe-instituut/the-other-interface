@@ -1,0 +1,29 @@
+query highlightedHomepageThemes(
+  $pagination: PaginationArg
+  $publicationState: String
+  $locale: String!
+) {
+  highlightedHomepageThemes(
+    paginationArgs: $pagination
+    publicationState: $publicationState
+    locale: $locale
+  ) {
+    data {
+      attributes {
+        highlightedThemes {
+          data {
+            ...ThemeFragment
+          }
+        }
+      }
+    }
+    meta {
+      pagination {
+        page
+        pageSize
+        pageCount
+        total
+      }
+    }
+  }
+}

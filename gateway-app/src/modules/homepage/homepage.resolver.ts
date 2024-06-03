@@ -48,13 +48,13 @@ export class HomepageResolver {
     @Args('publicationState', { nullable: true }) publicationState?: PublicationState,
     @Args('paginationArgs', { nullable: true }) paginationArgs?: PaginationArg
   ) {
-    return (
-      await this.strapiGqlSdk.highlightedHomepageThemes({
-        publicationState,
-        locale,
-        localeStr: locale,
-        highlightedThemesPaginationArgs: paginationArgs,
-      })
-    ).homepage
+    const res = await this.strapiGqlSdk.highlightedHomepageThemes({
+      publicationState,
+      locale,
+      localeStr: locale,
+      highlightedThemesPaginationArgs: paginationArgs,
+    })
+
+    return res.homepage
   }
 }
