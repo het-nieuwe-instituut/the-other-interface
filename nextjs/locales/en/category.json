@@ -8,8 +8,8 @@
   "all": "All Categories",
 
   "object": "Object",
-  "archive": "Archive",
-  "person": "Person",
+  "archive": "Archive item",
+  "person": "Person/Organisation",
   "publication": "Publication",
   "story": "Story",
   "resultsFor": "results for",

@@ -25,7 +25,7 @@ export const TypographyVariants = cva('', {
         'lg:font-social-large lg:text-[32px] lg:tracking-[-0.32px] ',
       ],
       lg: [
-        ' self-stretch not-italic leading-[130%_]',
+        'self-stretch not-italic leading-[130%_]',
         'font-social-medium text-[32px] tracking-[0.32px]',
         'lg:font-social-large lg:text-[21px] lg:tracking-[0.21px]',
       ],
