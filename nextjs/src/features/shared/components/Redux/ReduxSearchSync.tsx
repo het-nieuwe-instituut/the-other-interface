@@ -7,29 +7,25 @@ import { decodeFilters } from '../../helpers/searchHelpers'
 import { FilterArray } from '../../hooks/search/useFilters'
 import { usePageCategory } from '../../hooks/usePageCategory'
 
-export const ReduxSearchSync = () => {
+export const useReduxSearchSync = () => {
   const { filters, search } = useZoom2Params()
   const { pageCategory } = usePageCategory()
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(sharedActions.setSearch({ searchValue: search || '' }))
-  }, [dispatch, search])
 
-  useEffect(() => {
     if (typeof filters === 'string') {
       const decodedFilters: FilterArray = decodeFilters(filters)
       dispatch(sharedActions.setFilters({ selectedFilters: decodedFilters }))
     }
-  }, [dispatch, filters])
 
-  useEffect(() => {
     dispatch(sharedActions.searchCategory({ searchCategory: pageCategory }))
 
     return () => {
       dispatch(sharedActions.searchModeActive({ isSearchModeActive: false }))
+      dispatch(sharedActions.setFilters({ selectedFilters: [] }))
+      dispatch(sharedActions.setSearch({ searchValue: '' }))
     }
-  }, [pageCategory, search, dispatch])
-
-  return null
+  }, [dispatch, search, filters, pageCategory])
 }
