@@ -89,7 +89,7 @@ export const MainGalaxy = () => {
       <GalaxyFooter
         galaxyPagination={
           <GalaxyPagination
-            currentPageNumber={pagination?.page || 0}
+            currentPageNumber={pagination?.page || 1}
             pageAmount={pagination?.pageCount || 0}
             isResultAmountLoading={false}
             handleLeftClick={decreasePageNumber}
