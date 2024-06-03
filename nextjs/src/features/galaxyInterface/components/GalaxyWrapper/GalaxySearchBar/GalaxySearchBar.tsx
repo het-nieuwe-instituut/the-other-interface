@@ -12,11 +12,9 @@ import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/Se
 import { useSearchBarPosition } from './useSearchBarPosition'
 import CloseIconSmall from '@/icons/close-icon-small.svg'
 import { cn } from '@/features/ui/utils/cn'
-import { TypographyVariants } from '@/features/ui/components/typography/variants'
-import { useTotalCounterQuery } from '@/features/galaxyInterface/galaxies/MainGalaxy/hooks/useTotalCounterQuery'
-import { Loader } from '@/features/shared/components/Loading/Loading'
-import ErrorBox from '@/features/shared/components/Error/ErrorBox'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import TotalResults from './fragments/TotalResults'
+import SearchResults from './fragments/SearchResults'
 
 type Props = {
   total?: number
@@ -32,7 +30,6 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }
     isCategorySuggestionsOpen,
     setIsCategorySuggestionsOpen,
     handleGoClick,
-    searchResultAmount,
     inputValue,
     handleInputChange,
     searchBarRef,
@@ -42,50 +39,14 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }
     handleSelectFilter,
     selectedFilters,
     removeFilter,
-    isSearchLoading,
-    isSearchError,
   } = usePresenter(isNoActiveSearch)
   const { t } = useTypeSafeTranslation('category')
 
   const { offset, searchBarHeight, wrapRef } = useSearchBarPosition(selectedFilters)
-  const {
-    data: total,
-    isLoading: isTotalLoading,
-    fetchStatus,
-    isError: isTotalError,
-  } = useTotalCounterQuery(isNoActiveSearch)
 
   const isCollectionHighlightsSelected: boolean = selectedFilters.some(
     filter => filter.id === COLLECTION_HILIGHT_ID
   )
-
-  const renderPaginationContent = () => {
-    if (isTotalError || isSearchError) {
-      return <ErrorBox className={TypographyVariants({ social: 'sm' })} />
-    }
-
-    // see https://github.com/TanStack/query/issues/3584
-    if ((isTotalLoading && fetchStatus !== 'idle') || isSearchLoading) {
-      return (
-        <div className="ml-2 flex h-full items-center justify-center">
-          <Loader />
-        </div>
-      )
-    }
-
-    return (
-      <>
-        <p className={cn('text-pink.100', TypographyVariants({ social: 'textfield' }))}>
-          {searchResultAmount && (inputValue.length > 0 || selectedFilters.length > 0)
-            ? searchResultAmount
-            : total}
-        </p>
-        <p className={cn('text-pink.100', TypographyVariants({ social: 'textfield' }))}>
-          {t('resultsFor')}
-        </p>
-      </>
-    )
-  }
 
   return (
     <Grid
@@ -107,7 +68,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }
         alignItems="flex-start"
         className={'h-[60px] justify-center self-end pt-1'}
       >
-        {renderPaginationContent()}
+        {isNoActiveSearch ? <TotalResults /> : <SearchResults />}
       </Flex>
 
       <div ref={wrapRef} className="flex flex-wrap gap-0 p-0 transition-all">

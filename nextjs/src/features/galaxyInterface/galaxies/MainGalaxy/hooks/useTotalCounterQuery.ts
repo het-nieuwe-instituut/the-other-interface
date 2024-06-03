@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { State } from '@/features/shared/configs/store'
 import { useLocale } from '@/features/shared/hooks/useLocale'
 
-export function useTotalCounterQuery(shouldFetch = false) {
+export function useTotalCounterQuery() {
   const api = initApiClientService()
   const locale = useLocale()
   const { searchCategory } = useSelector((state: State) => state.shared)
@@ -19,10 +19,9 @@ export function useTotalCounterQuery(shouldFetch = false) {
   }
 
   return useQuery({
-    queryKey: ['total-counter', locale, shouldFetch, searchCategory],
+    queryKey: ['total-counter', locale, searchCategory],
     queryFn,
     refetchOnWindowFocus: false,
     keepPreviousData: true,
-    enabled: shouldFetch,
   })
 }

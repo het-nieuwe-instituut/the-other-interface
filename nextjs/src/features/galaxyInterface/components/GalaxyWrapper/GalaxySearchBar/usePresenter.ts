@@ -1,12 +1,10 @@
 import { State } from '@/features/shared/configs/store'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
-import { useSearchByCategoryQuery } from '@/features/shared/hooks/queries/useSearchByCategoryQuery'
 import { useFilters } from '@/features/shared/hooks/search/useFilters'
 import { useEnterKey } from '@/features/shared/hooks/ui/useEnterKey'
 import { useOutsideClick } from '@/features/shared/hooks/ui/useOutsideClick'
 import { useFocusOnElement } from '@/features/shared/hooks/useFocusOnElement'
 import { usePageCategory } from '@/features/shared/hooks/usePageCategory'
-import { usePageNumber } from '@/features/shared/hooks/usePageNumber'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 import { sharedActions } from '@/features/shared/stores/shared.store'
 import { usePathname, useRouter } from 'next/navigation'
@@ -22,7 +20,6 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
   const { focus } = useFocusOnElement(filterInputRef, isNoActiveSearch ?? false)
 
   const { lang, search, isSearchResult } = useZoom2Params()
-  const { pageNumber } = usePageNumber()
 
   const searchBarRef = useRef<HTMLDivElement>(null)
   const { isSearchModeActive, searchCategory, isCategorySuggestionsOpen, searchValue } =
@@ -41,13 +38,6 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
   })
 
   const { pageCategory } = usePageCategory()
-  const { data, isLoading, isError, fetchStatus } = useSearchByCategoryQuery({
-    category: pageCategory,
-    text: search,
-    page: pageNumber,
-    enabled: !isNoActiveSearch,
-  })
-  const { total } = data || { total: 0 }
   const [isUserTyping, setIsUserTyping] = useState(false)
 
   const resetSearchFilters = useCallback(() => {
@@ -131,7 +121,6 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
       )
     },
     handleGoClick,
-    searchResultAmount: total,
     inputValue: searchValue,
     handleInputChange,
     searchBarRef,
@@ -141,8 +130,5 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
     selectedFilters,
     handleSelectFilter: selectFilter,
     removeFilter,
-    isSearchError: isError,
-    // see https://github.com/TanStack/query/issues/3584
-    isSearchLoading: isLoading && fetchStatus !== 'idle',
   }
 }
