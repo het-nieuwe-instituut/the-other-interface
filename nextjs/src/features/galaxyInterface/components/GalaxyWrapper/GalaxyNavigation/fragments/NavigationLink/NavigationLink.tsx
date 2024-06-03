@@ -18,10 +18,7 @@ export const NavigationLink: React.FC<Props> = ({ zoomData, currentZoomNumber, l
   const router = useRouter()
   const lang = useLocale()
   const { t } = useTypeSafeTranslation('navigation')
-  const { isClickable, isCurrentZoom, lineStyle, isDisabled } = usePresenter(
-    zoom,
-    currentZoomNumber
-  )
+  const { isClickable, isCurrentZoom, lineStyle } = usePresenter(zoom, currentZoomNumber)
 
   const handleNavigation = () => {
     if (!link) return
@@ -35,13 +32,13 @@ export const NavigationLink: React.FC<Props> = ({ zoomData, currentZoomNumber, l
       key={title}
       flexDirection={'column'}
       alignItems={alignItems}
-      cursor={isClickable && !isDisabled ? 'pointer' : 'default'}
+      cursor={isClickable ? 'pointer' : 'default'}
       onClick={handleNavigation}
     >
       <Box
         position={'relative'}
         border={'1px solid'}
-        borderColor={isClickable && !isDisabled ? 'pinkAlpha.100' : 'pinkAlpha.40'}
+        borderColor={isClickable ? 'pinkAlpha.100' : 'pinkAlpha.40'}
         width="10px"
         height="10px"
         borderRadius="50%"
@@ -63,7 +60,7 @@ export const NavigationLink: React.FC<Props> = ({ zoomData, currentZoomNumber, l
       <Text
         textStyle="socialLarge.sm"
         mt={'4px'}
-        color={(isCurrentZoom || isClickable) && !isDisabled ? 'pinkAlpha.100' : 'pinkAlpha.40'}
+        color={isCurrentZoom || isClickable ? 'pinkAlpha.100' : 'pinkAlpha.40'}
       >
         {t(title)}
       </Text>
