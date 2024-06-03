@@ -14,7 +14,7 @@ export const ButtonVariants = cva(
         primary: [''],
         secondary: ['h-12'],
         tertiary: [
-          'h-12 border-none px-5 underline decoration-1 underline-offset-8',
+          'h-12 border-b border-black border-x-ivory-90 border-t-ivory-90 px-5',
           'text-center font-social-large text-base font-normal leading-tight tracking-tight text-black-100',
           'hover:border-black hover:bg-black-100 hover:text-white hover:decoration-black-100',
         ],
