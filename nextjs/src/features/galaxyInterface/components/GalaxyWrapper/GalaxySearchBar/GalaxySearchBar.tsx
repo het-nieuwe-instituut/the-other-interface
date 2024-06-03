@@ -76,7 +76,9 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }
     return (
       <>
         <p className={cn('text-pink.100', TypographyVariants({ social: 'textfield' }))}>
-          {total ? total : searchResultAmount}
+          {searchResultAmount && (inputValue.length > 0 || selectedFilters.length > 0)
+            ? searchResultAmount
+            : total}
         </p>
         <p className={cn('text-pink.100', TypographyVariants({ social: 'textfield' }))}>
           {t('resultsFor')}

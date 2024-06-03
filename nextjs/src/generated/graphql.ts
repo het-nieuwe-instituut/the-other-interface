@@ -1732,10 +1732,8 @@ export type ThemeEntityResponse = {
 export type ThemeFiltersInput = {
   and?: InputMaybe<Array<ThemeFiltersInput>>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
-  firstName?: InputMaybe<StringFilterInput>;
   id?: InputMaybe<IdFilterInput>;
   insertion?: InputMaybe<StringFilterInput>;
-  lastName?: InputMaybe<StringFilterInput>;
   not?: InputMaybe<ThemeFiltersInput>;
   or?: InputMaybe<Array<ThemeFiltersInput>>;
   publishedAt?: InputMaybe<DateTimeFilterInput>;
@@ -2096,6 +2094,9 @@ export type SearchByStoriesQueryVariables = Exact<{
   searchTerm?: InputMaybe<Scalars['String']>;
   page?: InputMaybe<Scalars['Int']>;
   pageSize?: InputMaybe<Scalars['Int']>;
+  locationsFilterTerm?: InputMaybe<Scalars['ID']>;
+  themesFilterTerm?: InputMaybe<Scalars['ID']>;
+  authorFilterTerm?: InputMaybe<Scalars['ID']>;
   locale: Locale;
 }>;
 
@@ -3081,9 +3082,9 @@ export const StoriesDocument = gql`
 }
     `;
 export const SearchByStoriesDocument = gql`
-    query searchByStories($searchTerm: String, $page: Int, $pageSize: Int, $locale: Locale!) {
+    query searchByStories($searchTerm: String, $page: Int, $pageSize: Int, $locationsFilterTerm: ID, $themesFilterTerm: ID, $authorFilterTerm: ID, $locale: Locale!) {
   stories(
-    filters: {or: [{title: {containsi: $searchTerm}}, {description: {containsi: $searchTerm}}, {shortDescription: {containsi: $searchTerm}}]}
+    filters: {and: [{or: [{locations: {id: {eq: $locationsFilterTerm}}}, {themes: {id: {eq: $themesFilterTerm}}}, {author: {id: {eq: $authorFilterTerm}}}]}, {or: [{title: {containsi: $searchTerm}}, {description: {containsi: $searchTerm}}, {shortDescription: {containsi: $searchTerm}}]}], or: [{title: {containsi: $searchTerm}}, {description: {containsi: $searchTerm}}, {shortDescription: {containsi: $searchTerm}}]}
     pagination: {page: $page, pageSize: $pageSize}
     locale: $locale
   ) {

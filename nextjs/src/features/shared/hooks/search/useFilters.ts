@@ -1,4 +1,4 @@
-import { encodeFilters, decodeFilters } from '@/features/shared/helpers/searchHelpers'
+import { decodeFilters, encodeFilters } from '@/features/shared/helpers/searchHelpers'
 import { sharedActions } from '@/features/shared/stores/shared.store'
 import { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
