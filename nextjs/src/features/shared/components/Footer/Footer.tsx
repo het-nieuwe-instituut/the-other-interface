@@ -12,8 +12,8 @@ export const Footer = () => {
   const Icon = ExternalLink
 
   return (
-    <div className="relative z-[FOOTER_Z_INDEX] w-full bg-ivory-90 pt-8 opacity-100">
-      <div className="container max-w-[1392px] p-6 pb-12">
+    <div className="relative z-[FOOTER_Z_INDEX] w-full bg-ivory-90 pt-8 opacity-100 flex">
+      <div className="container max-w-[1392px] p-6 pb-12 m-auto">
         <div className="grid gap-1 md:grid-cols-2 lg:grid-cols-3">
           <div>
             <Link href={`https://nieuweinstituut.nl/${lang ?? 'nl'}`}>
