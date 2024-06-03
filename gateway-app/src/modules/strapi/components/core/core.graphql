@@ -1,11 +1,7 @@
 fragment ComponentCoreButtonFragment on ComponentCoreButton {
     id
-    hasAttachment
     text
     url
-    attachment {
-        ...UploadFileEntityResponseFragment
-    }
 }
 
 fragment ComponentCoreCarouselItemFragment on ComponentCoreCarouselItem {
@@ -69,5 +65,14 @@ fragment ComponentCoreGridFeaturedFieldsFragment on ComponentCoreGridFeaturedFie
         data {
             ...BaseTriplyRecordFragment
         }
+    }
+}
+
+fragment ComponentCoreStandAloneLinkFragment on ComponentCoreStandAloneLink {
+    id
+    label
+    url
+    attachment {
+        ...UploadFileEntityResponseFragment
     }
 }
