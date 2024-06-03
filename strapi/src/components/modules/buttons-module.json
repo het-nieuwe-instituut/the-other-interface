@@ -11,13 +11,6 @@
       "type": "component",
       "repeatable": true,
       "component": "core.button"
-    },
-    "buttonStyle": {
-      "type": "enumeration",
-      "enum": [
-        "Default",
-        "Large"
-      ]
     }
   }
 }
