@@ -6,7 +6,7 @@ import { CSSProperties } from 'react'
 import { cn } from '../../utils/cn'
 import { TypographyVariants } from '../typography/variants'
 
-export interface ImageWithCaptionProps extends Omit<ImageProps, 'width' | 'heihgt'> {
+export interface ImageWithCaptionProps extends ImageProps {
   className?: string
   caption?: string
 }
@@ -18,6 +18,8 @@ export const ImageWithCaption = ({
   alt,
   caption,
   className,
+  height,
+  width,
   ...restProps
 }: ImageWithCaptionProps) => {
   const imageSrc = src ? imageBasePath(src.toString()) : ''
@@ -25,7 +27,7 @@ export const ImageWithCaption = ({
 
   return (
     <figure className="relative flex flex-col gap-2">
-      <div className={cn(className, 'relative w-full pt-[100%]')}>
+      <div className={cn(className, 'relative w-full')}>
         {!imageSrc ? (
           <div
             className={cn(className, 'relative ')}
@@ -39,8 +41,14 @@ export const ImageWithCaption = ({
           <NextImage
             src={imageSrc}
             alt={alt}
-            fill
-            style={{ objectFit: 'cover' }}
+            className="h-auto w-full"
+            sizes="100vw"
+            width={width}
+            height={height}
+            style={{
+              width: '100%',
+              height: 'auto',
+            }}
             {...restProps}
             onContextMenu={e => e.preventDefault()}
           />

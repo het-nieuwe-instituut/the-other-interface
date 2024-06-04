@@ -82,7 +82,9 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
             const recordHref = component.triplyRecord
               ? getPathByTriplyRecord(component.triplyRecord)
               : undefined
-            const storyHref = component.story ? getPathByStory(component.story) : undefined
+            const storyHref = component.story
+              ? getPathByStory(component.story.data?.id ?? undefined)
+              : undefined
 
             if (!src || !alt || !height || !width) {
               return null
@@ -94,6 +96,8 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
                   key={keyExtractor(component.id, index, array)}
                   src={src}
                   alt={alt}
+                  height={height}
+                  width={width}
                   caption={component.caption ?? undefined}
                 />
               )
@@ -103,6 +107,8 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
                 key={keyExtractor(component.id, index, array)}
                 src={src}
                 alt={alt}
+                height={height}
+                width={width}
                 caption={component.caption ?? undefined}
               />
             )
@@ -231,8 +237,7 @@ function getPathByTriplyRecord(triplyRecord: ComponentModulesImage['triplyRecord
   return `/detail/${type}/${recordId}`
 }
 
-function getPathByStory(story: ComponentModulesImage['story']) {
-  const id = story?.data?.id
+function getPathByStory(id?: string) {
   if (!id) {
     return undefined
   }
