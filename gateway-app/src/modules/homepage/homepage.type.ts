@@ -25,7 +25,7 @@ export class Homepage {
   public Title?: string
 
   @Field(() => [HomepageComponentsDynamicZone], { nullable: true })
-  public components?: (typeof HomepageComponentsDynamicZone)[]
+  public components?: typeof HomepageComponentsDynamicZone[]
 
   @Field({ nullable: true })
   public createdAt?: Date
@@ -82,14 +82,6 @@ export class HighlightedHomepageThemeEntity {
   public id?: string
 }
 
-@ObjectType()
-export class Temp {
-  @Field(() => Number, { nullable: true })
-  public page?: number
-
-  @Field(() => Number, { nullable: true })
-  public total?: number
-}
 @ObjectType()
 export class HighlightedHomepageThemeEntityResponse {
   @Field(() => HighlightedHomepageThemeEntity)

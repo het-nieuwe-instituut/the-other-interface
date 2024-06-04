@@ -6,7 +6,6 @@ import {
   HighlightedHomepageStoryEntityResponse,
   HighlightedHomepageThemeEntityResponse,
   HomepageEntityResponse,
-  Temp,
 } from './homepage.type'
 import { PaginationArg } from '../strapi/shared-types'
 
@@ -64,7 +63,7 @@ export class HighlightedHomepageThemeEntityResolver {
     return res.homepage
   }
 
-  @ResolveField(() => Temp)
+  @ResolveField()
   public async meta(
     @Parent() parent: HighlightedHomepageThemeEntityResponse,
     @Args('locale') locale: Locale,
@@ -75,8 +74,9 @@ export class HighlightedHomepageThemeEntityResolver {
       publicationState,
       locale,
       localeStr: locale,
+      // highlightedThemesPaginationArgs: paginationArgs,
     })
-    console.log(res.homepage?.data?.attributes?.highlightedThemes?.data.length)
+
     return {
       pagination: {
         page: paginationArgs?.page,
