@@ -9,7 +9,7 @@ export default function Layout({ children }: PropsWithChildren) {
 
   return (
     <div>
-      <GoBack />
+      {/* <GoBack /> */}
       {children}
     </div>
   )

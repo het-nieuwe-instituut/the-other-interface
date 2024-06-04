@@ -1,25 +1,26 @@
 fragment imageModuleFragment on ComponentModulesImage {
-    id
-    __typename
-    image {
-        data {
-            attributes {
-                url
-                height
-                width
-            }
-        }
+  id
+  __typename
+  image {
+    data {
+      attributes {
+        url
+        height
+        width
+        alternativeText
+      }
     }
-    story {
-        data {
-            ...StoryWithoutRelationsFragment
-        }
+  }
+  story {
+    data {
+      ...StoryWithoutRelationsFragment
     }
-    triplyRecord {
-        data {
-            ...BaseTriplyRecordFragment
-        }
+  }
+  triplyRecord {
+    data {
+      ...BaseTriplyRecordFragment
     }
-    caption
-    alt_text
+  }
+  caption
+  alt_text
 }
