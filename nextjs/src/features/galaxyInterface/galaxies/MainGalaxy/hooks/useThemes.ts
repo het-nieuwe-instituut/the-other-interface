@@ -43,7 +43,7 @@ export function useThemesQuery(page: number) {
   const stories =
     data?.highlightedHomepageThemes?.data?.attributes?.highlightedThemes?.data?.[0]?.attributes
       ?.stories?.data || []
-  const total = data?.highlightedHomepageThemes?.highlightedHomepageThemesCount
+  const pagination = data?.highlightedHomepageThemes.meta?.pagination
 
-  return { storyTitle, stories, total, isLoading, isError }
+  return { storyTitle, stories, pagination, isLoading, isError }
 }

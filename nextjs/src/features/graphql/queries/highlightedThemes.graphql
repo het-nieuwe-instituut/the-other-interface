@@ -17,6 +17,13 @@ query highlightedHomepageThemes(
         }
       }
     }
-    highlightedHomepageThemesCount
+    meta(paginationArgs: $pagination, publicationState: $publicationState, locale: $locale) {
+      pagination {
+        total
+        page
+        pageCount
+        pageSize
+      }
+    }
   }
 }

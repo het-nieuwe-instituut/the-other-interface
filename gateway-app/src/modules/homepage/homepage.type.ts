@@ -81,13 +81,22 @@ export class HighlightedHomepageThemeEntity {
   @Field(() => ID, { nullable: true })
   public id?: string
 }
+
+@ObjectType()
+export class Temp {
+  @Field(() => Number, { nullable: true })
+  public page?: number
+
+  @Field(() => Number, { nullable: true })
+  public total?: number
+}
 @ObjectType()
 export class HighlightedHomepageThemeEntityResponse {
   @Field(() => HighlightedHomepageThemeEntity)
   public data: HighlightedHomepageThemeEntity // had to remove []
 
-  @Field(() => Number, { nullable: true })
-  public highlightedHomepageThemesCount?: number // added
+  @Field(() => ResponseCollectionMeta, { nullable: true })
+  public meta?: ResponseCollectionMeta // added
 }
 
 @ObjectType()

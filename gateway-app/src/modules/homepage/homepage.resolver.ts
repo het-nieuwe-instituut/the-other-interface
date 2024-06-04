@@ -6,6 +6,7 @@ import {
   HighlightedHomepageStoryEntityResponse,
   HighlightedHomepageThemeEntityResponse,
   HomepageEntityResponse,
+  Temp,
 } from './homepage.type'
 import { PaginationArg } from '../strapi/shared-types'
 
@@ -63,10 +64,26 @@ export class HighlightedHomepageThemeEntityResolver {
     return res.homepage
   }
 
-  @ResolveField('highlightedHomepageThemesCount', () => Number)
-  public async highlightedHomepageThemesCount(
-    @Parent() parent: HighlightedHomepageThemeEntityResponse // @Args('publicationState', { nullable: true }) publicationState?: PublicationState, // @Args('locale') locale: Locale, // @Args('paginationArgs', { nullable: true }) paginationArgs?: PaginationArg
+  @ResolveField(() => Temp)
+  public async meta(
+    @Parent() parent: HighlightedHomepageThemeEntityResponse,
+    @Args('locale') locale: Locale,
+    @Args('publicationState', { nullable: true }) publicationState?: PublicationState,
+    @Args('paginationArgs', { nullable: true }) paginationArgs?: PaginationArg
   ) {
-    return 2
+    const res = await this.strapiGqlSdk.meta({
+      publicationState,
+      locale,
+      localeStr: locale,
+    })
+    console.log(res.homepage?.data?.attributes?.highlightedThemes?.data.length)
+    return {
+      pagination: {
+        page: paginationArgs?.page,
+        total: res.homepage?.data?.attributes?.highlightedThemes?.data.length,
+        pageCount: res.homepage?.data?.attributes?.highlightedThemes?.data.length,
+        pageSize: paginationArgs?.pageSize,
+      },
+    }
   }
 }

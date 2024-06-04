@@ -105,19 +105,17 @@ query highlightedHomepageThemes(
   }
 }
 
-# make new query
-query highlightedHomepageThemesCount(
+query meta(
   $publicationState: PublicationState = LIVE
   $locale: I18NLocaleCode!
   $localeStr: String!
 ) {
   homepage(publicationState: $publicationState, locale: $locale) {
     data {
-      id
       attributes {
         highlightedThemes(filters: { locale: { eq: $localeStr } }) {
           data {
-            ...ThemeFragment
+            id
           }
         }
       }
