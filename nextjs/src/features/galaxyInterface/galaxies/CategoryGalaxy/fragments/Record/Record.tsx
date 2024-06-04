@@ -1,5 +1,5 @@
 import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
-import { Category } from '@/features/shared/utils/categories'
+import { EntityNames, SearchResultItemType } from 'src/generated/graphql'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useZoomHoverRecordResultQuery } from '@/features/shared/hooks/queries/useZoomHoverRecordResultQuery'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
@@ -9,17 +9,18 @@ import { ReadMoreTooltip } from '@/features/ui/components/tooltip/ReadMoreToolti
 import { cn } from '@/features/ui/utils/cn'
 import { useRouter } from 'next/navigation'
 import { PlacesType } from 'react-tooltip'
-import { Locale, ZoomLevel2Type } from 'src/generated/graphql'
+import { Locale } from 'src/generated/graphql'
 import { RecordText } from '../RecordText'
+import { getTriplyRecordPathForTypeAndId } from '@/features/shared/utils/links'
 
 type Props = {
   record: RecordProps
   tooltipPlace: PlacesType
 }
 
-type RecordProps = ZoomLevel2Type & {
+type RecordProps = SearchResultItemType & {
   position: Position
-  category: Category
+  category: EntityNames
 }
 
 export const Record: React.FC<Props> = ({ record, tooltipPlace }) => {
@@ -56,7 +57,7 @@ const RecordData = (record: RecordProps, lang?: Locale | null) => {
   const router = useRouter()
 
   const handleClick = () => {
-    let url = `/detail/${category}/${id}`
+    let url = getTriplyRecordPathForTypeAndId(category, id, '/detail')
     url = addLocaleToUrl(url, lang)
 
     router.push(url)

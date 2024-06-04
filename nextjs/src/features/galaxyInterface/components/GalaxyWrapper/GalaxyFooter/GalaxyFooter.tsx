@@ -1,5 +1,4 @@
 'use client'
-import { useTotalCounter } from '@/features/galaxyInterface/galaxies/MainGalaxy/hooks/useTotalCounter'
 import {
   FOOTER_Z_INDEX,
   GALAXY_EDITORIAL_LAYER_PART,
@@ -7,16 +6,15 @@ import {
 import { Grid, GridItem } from '@chakra-ui/react'
 import { GalaxyNavigation } from '../GalaxyNavigation/GalaxyNavigation'
 import { GalaxySearchBar } from '../GalaxySearchBar/GalaxySearchBar'
-import { CollpsedSearch } from '../GalaxySearchBar/fragments/CollpsedSearch'
 import { usePresenter } from './usePresenter'
+import { CollpsedSearch } from '../GalaxySearchBar/fragments/CollpsedSearch'
 
 type Props = {
   galaxyPagination?: React.ReactNode
 }
 
 export const GalaxyFooter: React.FC<Props> = ({ galaxyPagination }) => {
-  const { isSearchBarCollapsed, toggleSearchBar, isZoom1, isNoActiveSearch } = usePresenter()
-  const { data: total } = useTotalCounter(isZoom1)
+  const { isSearchBarCollapsed, toggleSearchBar, isNoActiveSearch } = usePresenter()
 
   return (
     <Grid
@@ -35,7 +33,7 @@ export const GalaxyFooter: React.FC<Props> = ({ galaxyPagination }) => {
         {isSearchBarCollapsed ? (
           <CollpsedSearch toggleSearchBar={toggleSearchBar} />
         ) : (
-          <GalaxySearchBar total={total} isNoActiveSearch={isNoActiveSearch} />
+          <GalaxySearchBar isNoActiveSearch={isNoActiveSearch} />
         )}
       </GridItem>
       <GalaxyNavigation />

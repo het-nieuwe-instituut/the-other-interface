@@ -16,9 +16,39 @@ query stories($pagination: PaginationArg, $locale: Locale!) {
   }
 }
 
-query searchByStories($searchTerm: String, $page: Float, $pageSize: Float, $locale: Locale!) {
+query searchByStories(
+  $searchTerm: String
+  $page: Int
+  $pageSize: Int
+  $locationsFilterTerm: ID
+  $themesFilterTerm: ID
+  $authorFilterTerm: ID
+  $locale: Locale!
+) {
   stories(
-    filters: { title: { containsi: $searchTerm } }
+    filters: {
+      and: [
+        {
+          or: [
+            { locations: { id: { eq: $locationsFilterTerm } } }
+            { themes: { id: { eq: $themesFilterTerm } } }
+            { author: { id: { eq: $authorFilterTerm } } }
+          ]
+        }
+        {
+          or: [
+            { title: { containsi: $searchTerm } }
+            { description: { containsi: $searchTerm } }
+            { shortDescription: { containsi: $searchTerm } }
+          ]
+        }
+      ]
+      or: [
+        { title: { containsi: $searchTerm } }
+        { description: { containsi: $searchTerm } }
+        { shortDescription: { containsi: $searchTerm } }
+      ]
+    }
     pagination: { page: $page, pageSize: $pageSize }
     locale: $locale
   ) {

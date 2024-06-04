@@ -7,13 +7,14 @@ import { FilterInput, CloseButton } from './fragments'
 import { CategorySuggestions } from '../CategorySuggestions/CategorySuggestions'
 import { GoButton } from './fragments/GoButton'
 import { SearchButton } from './fragments/SearchButton'
-import { Suggestions } from '../Suggestions/Suggestions'
+import { COLLECTION_HILIGHT_ID, Suggestions } from '../Suggestions/Suggestions'
 import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/SearchFilterBox'
 import { useSearchBarPosition } from './useSearchBarPosition'
 import CloseIconSmall from '@/icons/close-icon-small.svg'
 import { cn } from '@/features/ui/utils/cn'
-import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import TotalResults from './fragments/TotalResults'
+import SearchResults from './fragments/SearchResults'
 
 type Props = {
   total?: number
@@ -21,7 +22,7 @@ type Props = {
   className?: string
 }
 
-export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch, className }) => {
+export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }) => {
   const {
     category,
     isSearchModeActive,
@@ -29,7 +30,6 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch, clas
     isCategorySuggestionsOpen,
     setIsCategorySuggestionsOpen,
     handleGoClick,
-    searchResultAmount,
     inputValue,
     handleInputChange,
     searchBarRef,
@@ -44,12 +44,16 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch, clas
 
   const { offset, searchBarHeight, wrapRef } = useSearchBarPosition(selectedFilters)
 
+  const isCollectionHighlightsSelected: boolean = selectedFilters.some(
+    filter => filter.id === COLLECTION_HILIGHT_ID
+  )
+
   return (
     <Grid
       className={cn(className, 'px-4')}
       position="relative"
       height={'auto'}
-      templateColumns="160px minmax(20px, 1fr) minmax(95px, auto)"
+      templateColumns={'160px minmax(20px, 1fr) minmax(95px, auto)'}
       gap="4"
       backgroundColor="blueAlpha.100"
       zIndex={FOOTER_Z_INDEX}
@@ -64,12 +68,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch, clas
         alignItems="flex-start"
         className={'h-[60px] justify-center self-end pt-1'}
       >
-        <p className={cn('text-pink.100', TypographyVariants({ social: 'textfield' }))}>
-          {total ? total : searchResultAmount}
-        </p>
-        <p className={cn('text-pink.100', TypographyVariants({ social: 'textfield' }))}>
-          {t('resultsFor')}
-        </p>
+        {isNoActiveSearch ? <TotalResults /> : <SearchResults />}
       </Flex>
 
       <div ref={wrapRef} className="flex flex-wrap gap-0 p-0 transition-all">
@@ -129,13 +128,15 @@ export const GalaxySearchBar: React.FC<Props> = ({ total, isNoActiveSearch, clas
         <CategorySuggestions />
       </SuggestionBar>
 
-      <SuggestionBar
-        isOpen={isUserTyping && !isCategorySuggestionsOpen}
-        label={t('suggestions')}
-        offset={searchBarHeight}
-      >
-        <Suggestions handleSelectFilter={handleSelectFilter} />
-      </SuggestionBar>
+      {!isCollectionHighlightsSelected && (
+        <SuggestionBar
+          isOpen={isUserTyping && !isCategorySuggestionsOpen}
+          label={t('suggestions')}
+          offset={searchBarHeight}
+        >
+          <Suggestions handleSelectFilter={handleSelectFilter} />
+        </SuggestionBar>
+      )}
     </Grid>
   )
 }

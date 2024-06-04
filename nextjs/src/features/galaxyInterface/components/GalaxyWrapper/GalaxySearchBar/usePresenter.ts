@@ -1,6 +1,5 @@
 import { State } from '@/features/shared/configs/store'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
-import { useSearch } from '@/features/shared/hooks/queries/useSearch'
 import { useFilters } from '@/features/shared/hooks/search/useFilters'
 import { useEnterKey } from '@/features/shared/hooks/ui/useEnterKey'
 import { useOutsideClick } from '@/features/shared/hooks/ui/useOutsideClick'
@@ -18,30 +17,34 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
   const dispatch = useDispatch()
   const filterInputRef = useRef<HTMLInputElement>(null)
 
-  const { focus } = useFocusOnElement(filterInputRef, !isNoActiveSearch ?? false)
+  const { focus } = useFocusOnElement(filterInputRef, isNoActiveSearch ?? false)
 
   const { lang, search, isSearchResult } = useZoom2Params()
 
   const searchBarRef = useRef<HTMLDivElement>(null)
-  const { isSearchModeActive, searchCategory, isCategorySuggestionsOpen } = useSelector(
-    (state: State) => state.shared
-  )
+  const { isSearchModeActive, searchCategory, isCategorySuggestionsOpen, searchValue } =
+    useSelector((state: State) => state.shared)
 
-  const { selectedFilters, selectFilter, clearFilters, encodedFilters, removeFilter } = useFilters({
+  const {
+    selectedFilters,
+    selectFilter,
+    clearFilters,
+    encodedFilters,
+    decodedFilters,
+    removeFilter,
+  } = useFilters({
     onSelectFilter: focus,
     onRemoveFilter: focus,
   })
 
   const { pageCategory } = usePageCategory()
-  const { data } = useSearch({ category: pageCategory, text: search })
-  const { total } = data || { total: 0 }
-  const inputValue = useSelector((state: State) => state.shared.searchValue)
   const [isUserTyping, setIsUserTyping] = useState(false)
 
   const resetSearchFilters = useCallback(() => {
     dispatch(sharedActions.searchCategory({ searchCategory: pageCategory }))
     dispatch(sharedActions.setSearch({ searchValue: search || '' }))
-  }, [search, pageCategory, dispatch])
+    dispatch(sharedActions.setFilters({ selectedFilters: decodedFilters || [] }))
+  }, [search, pageCategory, dispatch, decodedFilters])
 
   const handleSearchModeClose = useCallback(
     (resetFilters = false) => {
@@ -56,7 +59,7 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
   )
 
   const handleGoClick = useCallback(() => {
-    const searchParam = inputValue ? `&search=${inputValue}` : ''
+    const searchParam = searchValue ? `&search=${searchValue}` : ''
     const filtersParam = encodedFilters ? `&filters=${encodedFilters}` : ''
     let url = `/landingpage?category=${searchCategory}${searchParam}${filtersParam}&searchResult=true`
     url = addLocaleToUrl(url, lang)
@@ -64,10 +67,12 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
 
     setIsUserTyping(false)
     handleSearchModeClose(false)
-  }, [inputValue, encodedFilters, searchCategory, lang, router, handleSearchModeClose])
+  }, [searchValue, encodedFilters, searchCategory, lang, router, handleSearchModeClose])
 
   useEnterKey(handleGoClick)
-  useOutsideClick(searchBarRef, () => handleSearchModeClose(false))
+  useOutsideClick(searchBarRef, () => {
+    handleSearchModeClose(true)
+  })
 
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -79,14 +84,6 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
     },
     [dispatch]
   )
-
-  useEffect(() => {
-    dispatch(sharedActions.searchCategory({ searchCategory: pageCategory }))
-
-    return () => {
-      dispatch(sharedActions.searchModeActive({ isSearchModeActive: false }))
-    }
-  }, [pageCategory, search, dispatch])
 
   useEffect(() => {
     dispatch(sharedActions.searchModeActive({ isSearchModeActive: false }))
@@ -124,13 +121,12 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
       )
     },
     handleGoClick,
-    searchResultAmount: total,
-    inputValue,
+    inputValue: searchValue,
     handleInputChange,
     searchBarRef,
     filterInputRef,
     handleClearAll,
-    isUserTyping: !!inputValue && isUserTyping && isSearchModeActive,
+    isUserTyping: !!searchValue && isUserTyping && isSearchModeActive,
     selectedFilters,
     handleSelectFilter: selectFilter,
     removeFilter,

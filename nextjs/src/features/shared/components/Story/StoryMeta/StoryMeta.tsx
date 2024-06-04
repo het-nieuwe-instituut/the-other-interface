@@ -9,7 +9,12 @@ import { NavLinkButton } from '@/features/ui/components/nav-link-button/componen
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { useParams } from 'next/navigation'
 import { EnumTriplyrecordType, TriplyRecord } from 'src/generated/graphql'
-import { formatAuthor, formatPublicationDate, formatTimeframe, getPeopleUrl } from './helpers'
+
+import NextLink from 'next/link'
+import { encodeFilters } from '@/features/shared/helpers/searchHelpers'
+import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
+import { keyExtractor } from '@/features/shared/utils/lists'
+import { formatPublicationDate, formatAuthor, formatTimeframe, getPeopleUrl } from './helpers'
 
 export const StoryMeta: React.FC = () => {
   const storiesT = useTypeSafeTranslation('stories')
@@ -29,9 +34,17 @@ export const StoryMeta: React.FC = () => {
     story?.publicationDate?.displayType,
     story?.publicationDate?.date
   )
-  const authorFormatted = story?.author ? formatAuthor(story?.author?.data?.attributes) : ''
-  const themes = story?.themes?.data?.map(theme => theme.attributes?.name).join(', ')
-  const locations = story?.locations?.data?.map(location => location.attributes?.city).join(', ')
+  const authorFormatted = story?.author
+    ? {
+        name: formatAuthor(story?.author?.data?.attributes),
+        id: story.author.data?.id,
+      }
+    : ''
+  const themes = story?.themes?.data?.map(theme => ({ name: theme.attributes?.name, id: theme.id }))
+  const locations = story?.locations?.data?.map(location => ({
+    name: location.attributes?.city,
+    id: location.id,
+  }))
   const timeframe = formatTimeframe(story?.timeframe)
   const parentRelation = story?.parent_story
   const childrenRelation = story?.child_stories
@@ -63,11 +76,24 @@ export const StoryMeta: React.FC = () => {
         )}
 
         {authorFormatted && (
-          <p className={TypographyVariants({ social: 'sm', className: 'font-bold' })}>
-            {storiesT.t('by', {
-              author: authorFormatted,
-            })}
-          </p>
+          <NextLink
+            href={addLocaleToUrl(
+              `/landingpage?category=stories&filters=${encodeFilters([
+                {
+                  field: 'author',
+                  value: authorFormatted.name || '',
+                  id: authorFormatted.id || '',
+                },
+              ])}&searchResult=true`,
+              lang
+            )}
+          >
+            <p className={TypographyVariants({ social: 'smLink', className: 'font-bold' })}>
+              {storiesT.t('by', {
+                author: authorFormatted.name,
+              })}
+            </p>
+          </NextLink>
         )}
         {story.shortDescription && (
           <p className={TypographyVariants({ social: 'sm' })}>{story.shortDescription}</p>
@@ -127,8 +153,33 @@ export const StoryMeta: React.FC = () => {
         </Box>
       )} */}
       {themes && (
+        // <MetaField name={storiesT.t('themes')}>
+        //   <p className={TypographyVariants({ social: 'sm' })}>{themes}</p>
+        // </MetaField>
+
         <MetaField name={storiesT.t('themes')}>
-          <p className={TypographyVariants({ social: 'sm' })}>{themes}</p>
+          <div>
+            {themes.map((theme, index, array) => {
+              // const hasItemAfter = array.length - 1 !== index
+              return (
+                <NextLink
+                  key={keyExtractor(theme, index, array)}
+                  href={addLocaleToUrl(
+                    `/landingpage?category=stories&filters=${encodeFilters([
+                      {
+                        field: 'theme',
+                        value: theme.name ?? '',
+                        id: theme.id ?? '',
+                      },
+                    ])}&searchResult=true`,
+                    lang
+                  )}
+                >
+                  <p className={TypographyVariants({ social: 'smLink' })}>{theme.name}</p>
+                </NextLink>
+              )
+            })}
+          </div>
         </MetaField>
       )}
       {!!linkedPeopleRecords.length && (
@@ -151,7 +202,28 @@ export const StoryMeta: React.FC = () => {
       )}
       {locations && (
         <MetaField name={storiesT.t('locations')}>
-          <p className={TypographyVariants({ social: 'sm' })}>{locations}</p>
+          <div>
+            {locations.map((location, index, array) => {
+              // const hasItemAfter = array.length - 1 !== index
+              return (
+                <NextLink
+                  key={keyExtractor(location, index, array)}
+                  href={addLocaleToUrl(
+                    `/landingpage?category=stories&filters=${encodeFilters([
+                      {
+                        field: 'location',
+                        value: location.name ?? '',
+                        id: location.id ?? '',
+                      },
+                    ])}&searchResult=true`,
+                    lang
+                  )}
+                >
+                  <p className={TypographyVariants({ social: 'smLink' })}>{location.name}</p>
+                </NextLink>
+              )
+            })}
+          </div>
         </MetaField>
       )}
       {timeframe && (

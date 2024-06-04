@@ -1,11 +1,10 @@
 import { Flex, Text, BoxProps } from '@chakra-ui/react'
 
 import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { SearchCategory } from '@/features/shared/utils/categories'
-import { toSingularCategory } from '@/features/shared/utils/toSingularCategory'
+import { EntityNames } from 'src/generated/graphql'
 
 type Props = {
-  categoryType: SearchCategory
+  categoryType: EntityNames
   title?: string | null
   css?: BoxProps['css']
 }
@@ -32,7 +31,7 @@ export const RecordText: React.FC<Props> = ({ title = '', categoryType, css }) =
         lineHeight={{ base: '9px', lg: '12px' }}
         mt={1}
       >
-        {t(toSingularCategory(categoryType))}
+        {t(categoryType?.toLowerCase())}
       </Text>
     </Flex>
   )

@@ -1,7 +1,5 @@
-import { RecordType } from '@/features/galaxyInterface/galaxies/CategoryGalaxy/fragments/types'
 import { imageBasePath } from '@/features/modules/modulesConstants'
-
-import { SearchByStoriesQuery, StoryByIdQuery } from 'src/generated/graphql'
+import { EntityNames, SearchByStoriesQuery, StoryByIdQuery } from 'src/generated/graphql'
 import { DeepPartial } from '../types/helpers'
 
 type StoryById = NonNullable<StoryByIdQuery['storyByLocale']['data']>
@@ -41,10 +39,11 @@ export const extractStoryData = (story: StoryById) => {
   }
 }
 
-export const storyToRecordMapper = (story: SearchStory): RecordType => {
+export const storyToRecordMapper = (story: SearchStory) => {
   return {
     title: story?.attributes?.title ?? '',
     thumbnail: findImageUrl(story?.attributes?.components ?? []) ?? '',
     id: story.id,
+    type: EntityNames.Stories,
   }
 }

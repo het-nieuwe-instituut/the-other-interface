@@ -13,15 +13,18 @@ import {
   TriplyRecordFiltersInput,
   TriplyRecordRelationResponseCollection,
 } from './triplyRecord.type'
+import { StrapiUtils } from '../strapi/strapi.utils'
 
 @Resolver()
 export class TriplyRecordResolver {
   public constructor(@Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk) {}
+
   @Query(() => TriplyRecordEntityResponse)
   public async triplyRecord(@Args('id') id: string) {
     const res = await this.strapiGqlSdk.triplyRecord({ id })
     return res.triplyRecord
   }
+
   @Query(() => TriplyRecordRelationResponseCollection)
   public async triplyRecords(
     @Args('filters', { nullable: true }) filters?: TriplyRecordFiltersInput,
@@ -62,6 +65,11 @@ export class TriplyRecordFieldResolver {
       })
       return res.stories
     }
+  }
+
+  @ResolveField()
+  public async entityName(@Parent() triplyRecord: TriplyRecord) {
+    return StrapiUtils.getEntityNameForRecordType(triplyRecord.type)
   }
 
   @ResolveField()
