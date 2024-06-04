@@ -18,6 +18,7 @@ export const GalaxyTopRight: React.FC = () => {
     <Flex alignItems={'center'}>
       <Flex flexDirection={'row'} alignItems={'center'} justifyContent={'center'}>
         {LOCALES.map(locale => {
+          const languageToggleColor = getLanguageToggleColor(isMenuOpen, lang !== locale)
           return (
             <Fragment key={locale}>
               <Link
@@ -32,7 +33,11 @@ export const GalaxyTopRight: React.FC = () => {
                 onClick={e => {
                   changeLanguage(e, locale)
                 }}
-                color={getLanguageToggleColor(isMenuOpen, lang !== locale)}
+                color={languageToggleColor}
+                borderBottom={lang === locale ? `1px solid` : 'none'}
+                borderColor={languageToggleColor}
+                h={'27px'}
+                w={'27px'}
               >
                 {locale.toUpperCase()}
               </Link>
