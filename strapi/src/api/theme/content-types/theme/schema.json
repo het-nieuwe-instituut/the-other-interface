@@ -30,6 +30,11 @@
       "relation": "manyToMany",
       "target": "api::story.story",
       "mappedBy": "themes"
+    },
+    "highlightedStories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::story.story"
     }
   }
 }

@@ -41,10 +41,21 @@ export function useThemesQuery(page: number) {
   const storyTitle =
     data?.highlightedHomepageThemes?.data?.attributes?.highlightedThemes?.data?.[0]?.attributes
       ?.name
-  const stories =
+  let stories =
     data?.highlightedHomepageThemes?.data?.attributes?.highlightedThemes?.data?.[0]?.attributes
       ?.stories?.data || []
+  let highlightedStories =
+    data?.highlightedHomepageThemes?.data?.attributes?.highlightedThemes?.data?.[0]?.attributes
+      ?.highlightedStories?.data
+
   const pagination = data?.highlightedHomepageThemes.meta?.pagination
 
-  return { storyTitle, stories, pagination, isLoading, isError, page }
+  return {
+    storyTitle,
+    stories: highlightedStories && highlightedStories?.length > 0 ? highlightedStories : stories,
+    pagination,
+    isLoading,
+    isError,
+    page,
+  }
 }

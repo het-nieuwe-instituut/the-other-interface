@@ -1,66 +1,133 @@
 fragment StoryFragment on StoryEntity {
-    id
-    attributes {
-        title
-        slug
-        components {
-            ... on ComponentModulesTextModule {
-                ...textModuleFragment
-            }
-            ... on ComponentModulesImage {
-                ...imageModuleFragment
-            }
-            ... on ComponentModulesPullquote {
-                ...pullquoteModuleFragment
-            }
-            ... on ComponentModulesTitleModule {
-                ...titleModuleFragment
-            }
-            ... on ComponentModulesImageCarousel {
-                ...imageCarouselModuleFragment
-            }
-            ... on ComponentModulesButtonsModule {
-                ...buttonsModuleFragment
-            }
-            ... on ComponentModulesSubtitle {
-                ...subtitleModuleFragment
-            }
-        }
-        author {
-            data {
-                id
-            }
-        }
-        description
-        timeframe {
-            id
-            yearStart
-            yearEnd
-        }
-        locations {
-            data {
-                id
-            }
-        }
-        publicationDate {
-            id
-            date
-            displayType
-        }
-        shortDescription
-        triplyRecords {
-            data {
-                ...BaseTriplyRecordFragment
-            }
-        }
-        createdAt
-        updatedAt
-        publishedAt
-        localizations {
-            data {
-                id
-            }
-        }
-        locale
+  id
+  attributes {
+    title
+    slug
+    components {
+      ... on ComponentModulesTextModule {
+        ...textModuleFragment
+      }
+      ... on ComponentModulesImage {
+        ...imageModuleFragment
+      }
+      ... on ComponentModulesPullquote {
+        ...pullquoteModuleFragment
+      }
+      ... on ComponentModulesTitleModule {
+        ...titleModuleFragment
+      }
+      ... on ComponentModulesImageCarousel {
+        ...imageCarouselModuleFragment
+      }
+      ... on ComponentModulesButtonsModule {
+        ...buttonsModuleFragment
+      }
+      ... on ComponentModulesSubtitle {
+        ...subtitleModuleFragment
+      }
     }
+    author {
+      data {
+        id
+      }
+    }
+    description
+    timeframe {
+      id
+      yearStart
+      yearEnd
+    }
+    locations {
+      data {
+        id
+      }
+    }
+    publicationDate {
+      id
+      date
+      displayType
+    }
+    shortDescription
+    triplyRecords {
+      data {
+        ...BaseTriplyRecordFragment
+      }
+    }
+    createdAt
+    updatedAt
+    publishedAt
+    localizations {
+      data {
+        id
+      }
+    }
+    locale
+  }
+}
+
+fragment HighlightedStoryFragment on StoryEntity {
+  id
+  attributes {
+    title
+    slug
+    components {
+      ... on ComponentModulesTextModule {
+        ...textModuleFragment
+      }
+      ... on ComponentModulesImage {
+        ...imageModuleFragment
+      }
+      ... on ComponentModulesPullquote {
+        ...pullquoteModuleFragment
+      }
+      ... on ComponentModulesTitleModule {
+        ...titleModuleFragment
+      }
+      ... on ComponentModulesImageCarousel {
+        ...imageCarouselModuleFragment
+      }
+      ... on ComponentModulesButtonsModule {
+        ...buttonsModuleFragment
+      }
+      ... on ComponentModulesSubtitle {
+        ...subtitleModuleFragment
+      }
+    }
+    author {
+      data {
+        id
+      }
+    }
+    description
+    timeframe {
+      id
+      yearStart
+      yearEnd
+    }
+    locations {
+      data {
+        id
+      }
+    }
+    publicationDate {
+      id
+      date
+      displayType
+    }
+    shortDescription
+    triplyRecords {
+      data {
+        ...BaseTriplyRecordFragment
+      }
+    }
+    createdAt
+    updatedAt
+    publishedAt
+    localizations {
+      data {
+        id
+      }
+    }
+    locale
+  }
 }

@@ -25,22 +25,6 @@ export class HomepageResolver {
       })
     ).homepage
   }
-
-  @Query(() => HighlightedHomepageStoryEntityResponse)
-  public async highlightedHomepageStories(
-    @Args('locale') locale: Locale,
-    @Args('publicationState', { nullable: true }) publicationState?: PublicationState,
-    @Args('paginationArgs', { nullable: true }) paginationArgs?: PaginationArg
-  ) {
-    return (
-      await this.strapiGqlSdk.highlightedHomepageStories({
-        publicationState,
-        locale,
-        localeStr: locale,
-        highlightedStoriesPaginationArgs: paginationArgs,
-      })
-    ).homepage
-  }
 }
 
 @Resolver(HighlightedHomepageThemeEntityResponse)
