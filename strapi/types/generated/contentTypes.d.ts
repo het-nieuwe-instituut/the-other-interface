@@ -750,7 +750,6 @@ export interface ApiHomepageHomepage extends Schema.SingleType {
         'modules.text-module',
         'modules.image',
         'modules.pullquote',
-        'modules.carousel',
         'modules.subtitle',
         'modules.title-module',
         'modules.image-carousel',
@@ -824,8 +823,7 @@ export interface ApiLandingpageLandingpage extends Schema.CollectionType {
         'modules.image',
         'modules.pullquote',
         'modules.buttons-module',
-        'modules.grid-module',
-        'modules.carousel'
+        'modules.grid-module'
       ]
     > &
       Attribute.SetPluginOptions<{
@@ -1106,7 +1104,7 @@ export interface ApiTriplyRecordTriplyRecord extends Schema.CollectionType {
   info: {
     singularName: 'triply-record'
     pluralName: 'triply-records'
-    displayName: 'TriplyRecord'
+    displayName: 'Triply Record'
     description: ''
   }
   options: {
