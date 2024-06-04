@@ -1,5 +1,5 @@
 import { Inject } from '@nestjs/common'
-import { Args, Query, Resolver } from '@nestjs/graphql'
+import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
 import { PublicationState, Sdk } from '../../generated/strapi-sdk'
 import { Locale } from '../util/locale.type'
 import {
@@ -41,6 +41,11 @@ export class HomepageResolver {
       })
     ).homepage
   }
+}
+
+@Resolver(HighlightedHomepageThemeEntityResponse)
+export class HighlightedHomepageThemeEntityResolver {
+  public constructor(@Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk) {}
 
   @Query(() => HighlightedHomepageThemeEntityResponse)
   public async highlightedHomepageThemes(
@@ -56,5 +61,12 @@ export class HomepageResolver {
     })
 
     return res.homepage
+  }
+
+  @ResolveField('highlightedHomepageThemesCount', () => Number)
+  public async highlightedHomepageThemesCount(
+    @Parent() parent: HighlightedHomepageThemeEntityResponse // @Args('publicationState', { nullable: true }) publicationState?: PublicationState, // @Args('locale') locale: Locale, // @Args('paginationArgs', { nullable: true }) paginationArgs?: PaginationArg
+  ) {
+    return 2
   }
 }

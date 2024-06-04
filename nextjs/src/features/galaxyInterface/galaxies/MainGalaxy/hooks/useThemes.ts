@@ -24,7 +24,7 @@ export function useThemesQuery(page: number) {
   const fetchHighlightedThemes = async (page: number) => {
     return await api?.highlightedHomepageThemes({
       locale: lang,
-      pagination: { page, pageSize: 5 },
+      pagination: { page, pageSize: 1 },
       publicationState: isDraftMode ? PublicationState.Preview : PublicationState.Live,
     })
   }
@@ -43,8 +43,7 @@ export function useThemesQuery(page: number) {
   const stories =
     data?.highlightedHomepageThemes?.data?.attributes?.highlightedThemes?.data?.[0]?.attributes
       ?.stories?.data || []
-  const pagination =
-    data?.highlightedHomepageThemes?.data?.attributes?.highlightedThemes?.meta?.pagination
-  console.log('pagination', pagination)
-  return { storyTitle, stories, pagination, isLoading, isError }
+  const total = data?.highlightedHomepageThemes?.highlightedHomepageThemesCount
+
+  return { storyTitle, stories, total, isLoading, isError }
 }

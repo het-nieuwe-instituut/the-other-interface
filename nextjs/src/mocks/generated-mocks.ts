@@ -475,6 +475,7 @@ export const aHighlightedHomepageThemeEntityResponse = (overrides?: Partial<High
     const relationshipsToOmit = ([..._relationshipsToOmit, 'HighlightedHomepageThemeEntityResponse']);
     return {
         data: overrides && overrides.hasOwnProperty('data') ? overrides.data! : relationshipsToOmit.includes('HighlightedHomepageThemeEntity') ? {} as HighlightedHomepageThemeEntity : aHighlightedHomepageThemeEntity({}, relationshipsToOmit),
+        highlightedHomepageThemesCount: overrides && overrides.hasOwnProperty('highlightedHomepageThemesCount') ? overrides.highlightedHomepageThemesCount! : 1.29,
     };
 };
 

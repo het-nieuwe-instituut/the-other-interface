@@ -44,12 +44,12 @@ export const MainGalaxy = () => {
   const {
     storyTitle,
     stories,
-    pagination,
+    total,
     isLoading: isMainLoading,
     isError,
   } = useThemesQuery(currentPage)
   const { stories: nextStories, isLoading: isNextLoading } = useThemesQuery(currentPage + 1)
-  const { increasePageNumber, decreasePageNumber } = usePresenter(pagination?.pageCount || 0)
+  const { increasePageNumber, decreasePageNumber } = usePresenter(total || 0)
   const { t } = useTypeSafeTranslation('navigation')
   const isLoading = isMainLoading || isNextLoading
 
@@ -89,8 +89,8 @@ export const MainGalaxy = () => {
       <GalaxyFooter
         galaxyPagination={
           <GalaxyPagination
-            currentPageNumber={pagination?.page || 1}
-            pageAmount={pagination?.pageCount || 0}
+            currentPageNumber={2 || 1} // need to fix this with the actual current page
+            pageAmount={total || 0}
             isResultAmountLoading={false}
             handleLeftClick={decreasePageNumber}
             handleRightClick={increasePageNumber}

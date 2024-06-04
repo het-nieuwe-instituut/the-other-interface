@@ -99,9 +99,26 @@ query highlightedHomepageThemes(
           data {
             ...ThemeFragment
           }
-          # meta {
-          #  ...ResponseCollectionMetaFragment
-          # }
+        }
+      }
+    }
+  }
+}
+
+# make new query
+query highlightedHomepageThemesCount(
+  $publicationState: PublicationState = LIVE
+  $locale: I18NLocaleCode!
+  $localeStr: String!
+) {
+  homepage(publicationState: $publicationState, locale: $locale) {
+    data {
+      id
+      attributes {
+        highlightedThemes(filters: { locale: { eq: $localeStr } }) {
+          data {
+            ...ThemeFragment
+          }
         }
       }
     }
