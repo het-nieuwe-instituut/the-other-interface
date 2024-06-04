@@ -101,11 +101,12 @@ export const usePresenter = (isNoActiveSearch?: boolean) => {
   }, [isNoActiveSearch, handleSearchModeOpen, isSearchResult])
 
   const handleClearAll = useCallback(() => {
-    resetSearchFilters()
     clearFilters()
+    dispatch(sharedActions.searchCategory({ searchCategory: pageCategory }))
+    dispatch(sharedActions.setSearch({ searchValue: '' }))
     dispatch(sharedActions.categorySuggestionsOpen({ categorySuggestionsOpen: false }))
     focus()
-  }, [clearFilters, dispatch, resetSearchFilters, focus])
+  }, [clearFilters, dispatch, focus, pageCategory])
 
   return {
     category: searchCategory,
