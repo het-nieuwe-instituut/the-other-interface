@@ -16,18 +16,22 @@ import { COLLECTION_HILIGHT_ID } from '@/features/galaxyInterface/components/Gal
 import { triplyCategoryToSearchCategory } from '@/features/galaxyInterface/galaxies/CategoryGalaxy/mappers/searchCategoryToTriplyMapper'
 import { StringFilterInput, TriplyRecordFiltersInput } from 'src/generated/graphql'
 
-export function useSearchByCategoryQuery({
-  category,
-  text,
-  page = 1,
-  enabled = true,
-}: {
+type SearchArgs = {
   category: SearchCategory
   text?: string
   page?: number
   enabled?: boolean
   filters?: Filter[]
-}) {
+  fallback?: boolean
+}
+
+export function useSearchByCategoryQuery({
+  category,
+  text,
+  page = 1,
+  enabled = true,
+  fallback = false,
+}: SearchArgs) {
   const api = initApiClientService()
   const locale = useLocale()
   const { decodedFilters } = useFilters()
@@ -54,6 +58,13 @@ export function useSearchByCategoryQuery({
         pageSize: ZOOM2_RECORDS_PER_PAGE,
       })
 
+      if (
+        (response?.triplyRecords?.data?.length === 0 || !response?.triplyRecords?.data) &&
+        fallback
+      ) {
+        return await searchByCategory({ category, text, page })
+      }
+
       return {
         items:
           response?.triplyRecords?.data?.map(record => ({
@@ -65,6 +76,10 @@ export function useSearchByCategoryQuery({
         total: response?.triplyRecords?.meta?.pagination?.total ?? 0,
       }
     }
+    return await searchByCategory({ category, text, page })
+  }
+
+  async function searchByCategory({ category, text, page = 1 }: SearchArgs) {
     switch (category) {
       case SEARCH_CATEGORIES.stories:
         const response = await api.searchByStories({

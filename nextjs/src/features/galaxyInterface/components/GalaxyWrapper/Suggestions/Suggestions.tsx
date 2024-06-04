@@ -36,7 +36,7 @@ const mockData = [
 
 export const COLLECTION_HILIGHT_ID = 'collection-highlights-id'
 
-const CollectionHighlightsFilter = {
+export const CollectionHighlightsFilter = {
   field: 'Subjects',
   value: 'Collection Highlights',
   id: COLLECTION_HILIGHT_ID,

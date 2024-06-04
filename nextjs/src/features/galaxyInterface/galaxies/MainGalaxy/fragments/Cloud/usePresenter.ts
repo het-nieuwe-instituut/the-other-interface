@@ -6,6 +6,8 @@ import { useState } from 'react'
 import { CategoryCloud } from '../types'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 import { useSearchByCategoryQuery } from '@/features/shared/hooks/queries/useSearchByCategoryQuery'
+import { CollectionHighlightsFilter } from '@/features/galaxyInterface/components/GalaxyWrapper/Suggestions/Suggestions'
+import { encodeFilters } from '@/features/shared/helpers/searchHelpers'
 
 export const usePresenter = (cloud: CategoryCloud) => {
   const { t } = useTypeSafeTranslation('homepage')
@@ -20,7 +22,9 @@ export const usePresenter = (cloud: CategoryCloud) => {
   })
 
   const handleCloudClick = () => {
-    let url = `/landingpage?category=${category}`
+    let url = `/landingpage?category=${category}&filters=${encodeFilters([
+      CollectionHighlightsFilter,
+    ])}&searchResult=true&fallback=true`
     url = addLocaleToUrl(url, lang)
     router.push(url)
   }
