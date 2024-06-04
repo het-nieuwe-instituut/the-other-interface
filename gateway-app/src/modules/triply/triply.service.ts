@@ -46,16 +46,9 @@ export class TriplyService {
   ) {
     this.endpointBaseURL = configService.getOrThrow('TRIPLY_API_BASEURL')
     this.apiKey = configService.getOrThrow('TRIPLY_API_KEY')
-    this.baseQueryPath = ''
     const env = configService.getOrThrow('ENV')
-
-    if (env === 'development' || env === 'staging') {
-      this.baseQueryPath = '/queries/the-other-interface-testing'
-    } else if (env === 'acceptance') {
-      this.baseQueryPath = '/queries/the-other-interface-acceptance'
-    } else {
-      this.baseQueryPath = '/queries/the-other-interface'
-    }
+    this.baseQueryPath =
+      env !== 'production' ? '/queries/the-other-interface-testing' : '/queries/the-other-interface'
   }
 
   private defaultPage = '1'
