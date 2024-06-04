@@ -59,29 +59,6 @@ query homepage($publicationState: PublicationState = LIVE, $locale: I18NLocaleCo
   }
 }
 
-query highlightedHomepageStories(
-  $publicationState: PublicationState = LIVE
-  $locale: I18NLocaleCode!
-  $localeStr: String!
-  $highlightedStoriesPaginationArgs: PaginationArg
-) {
-  homepage(publicationState: $publicationState, locale: $locale) {
-    data {
-      id
-      attributes {
-        highlightedStories(
-          filters: { locale: { eq: $localeStr } }
-          pagination: $highlightedStoriesPaginationArgs
-        ) {
-          data {
-            ...StoryWithoutRelationsFragment
-          }
-        }
-      }
-    }
-  }
-}
-
 query highlightedHomepageThemes(
   $publicationState: PublicationState = LIVE
   $locale: I18NLocaleCode!
@@ -109,11 +86,15 @@ query meta(
   $publicationState: PublicationState = LIVE
   $locale: I18NLocaleCode!
   $localeStr: String!
+  $highlightedThemesPaginationArgs: PaginationArg
 ) {
   homepage(publicationState: $publicationState, locale: $locale) {
     data {
       attributes {
-        highlightedThemes(filters: { locale: { eq: $localeStr } }) {
+        highlightedThemes(
+          filters: { locale: { eq: $localeStr } }
+          pagination: $highlightedThemesPaginationArgs
+        ) {
           data {
             id
           }

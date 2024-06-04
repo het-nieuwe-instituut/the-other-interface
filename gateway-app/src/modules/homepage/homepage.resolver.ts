@@ -74,15 +74,15 @@ export class HighlightedHomepageThemeEntityResolver {
       publicationState,
       locale,
       localeStr: locale,
-      // highlightedThemesPaginationArgs: paginationArgs,
+      highlightedThemesPaginationArgs: paginationArgs,
     })
 
     return {
       pagination: {
-        page: paginationArgs?.page,
+        page: 1, // this is to maintain the meta data structure
         total: res.homepage?.data?.attributes?.highlightedThemes?.data.length,
         pageCount: res.homepage?.data?.attributes?.highlightedThemes?.data.length,
-        pageSize: paginationArgs?.pageSize,
+        pageSize: 1, // this is to maintain the meta data structure
       },
     }
   }

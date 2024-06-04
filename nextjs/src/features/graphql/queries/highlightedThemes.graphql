@@ -1,5 +1,6 @@
 query highlightedHomepageThemes(
   $pagination: PaginationArg
+  $totalPagination: PaginationArg
   $publicationState: String
   $locale: String!
 ) {
@@ -17,7 +18,7 @@ query highlightedHomepageThemes(
         }
       }
     }
-    meta(paginationArgs: $pagination, publicationState: $publicationState, locale: $locale) {
+    meta(paginationArgs: $totalPagination, publicationState: $publicationState, locale: $locale) {
       pagination {
         total
         page

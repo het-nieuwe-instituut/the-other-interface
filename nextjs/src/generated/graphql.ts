@@ -2019,6 +2019,7 @@ export type HighlightedHomepageStoriesQuery = { __typename?: 'Query', highlighte
 
 export type HighlightedHomepageThemesQueryVariables = Exact<{
   pagination?: InputMaybe<PaginationArg>;
+  totalPagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<Scalars['String']>;
   locale: Scalars['String'];
 }>;
@@ -2830,7 +2831,7 @@ export const HighlightedHomepageStoriesDocument = gql`
 }
     `;
 export const HighlightedHomepageThemesDocument = gql`
-    query highlightedHomepageThemes($pagination: PaginationArg, $publicationState: String, $locale: String!) {
+    query highlightedHomepageThemes($pagination: PaginationArg, $totalPagination: PaginationArg, $publicationState: String, $locale: String!) {
   highlightedHomepageThemes(
     paginationArgs: $pagination
     publicationState: $publicationState
@@ -2846,7 +2847,7 @@ export const HighlightedHomepageThemesDocument = gql`
       }
     }
     meta(
-      paginationArgs: $pagination
+      paginationArgs: $totalPagination
       publicationState: $publicationState
       locale: $locale
     ) {

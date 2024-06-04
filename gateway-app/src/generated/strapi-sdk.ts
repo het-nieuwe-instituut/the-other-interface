@@ -3245,58 +3245,6 @@ export type HomepageQuery = {
   } | null
 }
 
-export type HighlightedHomepageStoriesQueryVariables = Exact<{
-  publicationState?: InputMaybe<PublicationState>
-  locale: Scalars['I18NLocaleCode']
-  localeStr: Scalars['String']
-  highlightedStoriesPaginationArgs?: InputMaybe<PaginationArg>
-}>
-
-export type HighlightedHomepageStoriesQuery = {
-  __typename?: 'Query'
-  homepage?: {
-    __typename?: 'HomepageEntityResponse'
-    data?: {
-      __typename?: 'HomepageEntity'
-      id?: string | null
-      attributes?: {
-        __typename?: 'Homepage'
-        highlightedStories?: {
-          __typename?: 'StoryRelationResponseCollection'
-          data: Array<{
-            __typename?: 'StoryEntity'
-            id?: string | null
-            attributes?: {
-              __typename?: 'Story'
-              title: string
-              slug: string
-              description?: string | null
-              shortDescription?: string | null
-              createdAt?: any | null
-              updatedAt?: any | null
-              publishedAt?: any | null
-              locale?: string | null
-              author?: {
-                __typename?: 'AuthorEntityResponse'
-                data?: {
-                  __typename?: 'AuthorEntity'
-                  id?: string | null
-                  attributes?: {
-                    __typename?: 'Author'
-                    firstName: string
-                    lastName: string
-                    insertion?: string | null
-                  } | null
-                } | null
-              } | null
-            } | null
-          }>
-        } | null
-      } | null
-    } | null
-  } | null
-}
-
 export type HighlightedHomepageThemesQueryVariables = Exact<{
   publicationState?: InputMaybe<PublicationState>
   locale: Scalars['I18NLocaleCode']
@@ -3802,6 +3750,7 @@ export type MetaQueryVariables = Exact<{
   publicationState?: InputMaybe<PublicationState>
   locale: Scalars['I18NLocaleCode']
   localeStr: Scalars['String']
+  highlightedThemesPaginationArgs?: InputMaybe<PaginationArg>
 }>
 
 export type MetaQuery = {
@@ -17900,31 +17849,6 @@ export const HomepageDocument = gql`
   }
   ${HomepageFragmentFragmentDoc}
 `
-export const HighlightedHomepageStoriesDocument = gql`
-  query highlightedHomepageStories(
-    $publicationState: PublicationState = LIVE
-    $locale: I18NLocaleCode!
-    $localeStr: String!
-    $highlightedStoriesPaginationArgs: PaginationArg
-  ) {
-    homepage(publicationState: $publicationState, locale: $locale) {
-      data {
-        id
-        attributes {
-          highlightedStories(
-            filters: { locale: { eq: $localeStr } }
-            pagination: $highlightedStoriesPaginationArgs
-          ) {
-            data {
-              ...StoryWithoutRelationsFragment
-            }
-          }
-        }
-      }
-    }
-  }
-  ${StoryWithoutRelationsFragmentFragmentDoc}
-`
 export const HighlightedHomepageThemesDocument = gql`
   query highlightedHomepageThemes(
     $publicationState: PublicationState = LIVE
@@ -17955,11 +17879,15 @@ export const MetaDocument = gql`
     $publicationState: PublicationState = LIVE
     $locale: I18NLocaleCode!
     $localeStr: String!
+    $highlightedThemesPaginationArgs: PaginationArg
   ) {
     homepage(publicationState: $publicationState, locale: $locale) {
       data {
         attributes {
-          highlightedThemes(filters: { locale: { eq: $localeStr } }) {
+          highlightedThemes(
+            filters: { locale: { eq: $localeStr } }
+            pagination: $highlightedThemesPaginationArgs
+          ) {
             data {
               id
             }
@@ -18512,21 +18440,6 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
             ...wrappedRequestHeaders,
           }),
         'homepage',
-        'query'
-      )
-    },
-    highlightedHomepageStories(
-      variables: HighlightedHomepageStoriesQueryVariables,
-      requestHeaders?: Dom.RequestInit['headers']
-    ): Promise<HighlightedHomepageStoriesQuery> {
-      return withWrapper(
-        wrappedRequestHeaders =>
-          client.request<HighlightedHomepageStoriesQuery>(
-            HighlightedHomepageStoriesDocument,
-            variables,
-            { ...requestHeaders, ...wrappedRequestHeaders }
-          ),
-        'highlightedHomepageStories',
         'query'
       )
     },
