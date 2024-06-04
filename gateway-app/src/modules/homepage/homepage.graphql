@@ -99,6 +99,9 @@ query highlightedHomepageThemes(
           data {
             ...ThemeFragment
           }
+          # meta {
+          #  ...ResponseCollectionMetaFragment
+          # }
         }
       }
     }

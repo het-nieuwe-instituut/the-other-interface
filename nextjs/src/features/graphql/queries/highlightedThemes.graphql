@@ -15,12 +15,7 @@ query highlightedHomepageThemes(
             ...ThemeFragment
           }
           meta {
-            pagination {
-              page
-              pageSize
-              pageCount
-              total
-            }
+            ...ResponseCollectionMetaFragment
           }
         }
       }

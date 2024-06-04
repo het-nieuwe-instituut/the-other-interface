@@ -71,9 +71,6 @@ export class HighlightedHomepageStoryEntity {
 export class HighlightedHomepageThemes {
   @Field(() => ThemeRelationResponseCollection, { nullable: true })
   public highlightedThemes?: ThemeRelationResponseCollection
-
-  // @Field(() => ResponseCollectionMeta, { nullable: true })
-  // public meta?: ResponseCollectionMeta // added
 }
 
 @ObjectType()
@@ -88,9 +85,6 @@ export class HighlightedHomepageThemeEntity {
 export class HighlightedHomepageThemeEntityResponse {
   @Field(() => HighlightedHomepageThemeEntity)
   public data: HighlightedHomepageThemeEntity // had to remove []
-
-  // @Field(() => ResponseCollectionMeta, { nullable: true })
-  // public meta?: ResponseCollectionMeta // added
 }
 
 @ObjectType()

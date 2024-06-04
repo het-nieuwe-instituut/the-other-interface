@@ -36,14 +36,15 @@ export function useThemesQuery(page: number) {
     queryFn,
     refetchOnWindowFocus: false,
   })
-  console.log(data)
+
   const storyTitle =
     data?.highlightedHomepageThemes?.data?.attributes?.highlightedThemes?.data?.[0]?.attributes
       ?.name
   const stories =
     data?.highlightedHomepageThemes?.data?.attributes?.highlightedThemes?.data?.[0]?.attributes
       ?.stories?.data || []
-  const pagination = data?.highlightedHomepageThemes?.data?.attributes?.highlightedThemes?.meta
+  const pagination =
+    data?.highlightedHomepageThemes?.data?.attributes?.highlightedThemes?.meta?.pagination
   console.log('pagination', pagination)
   return { storyTitle, stories, pagination, isLoading, isError }
 }
