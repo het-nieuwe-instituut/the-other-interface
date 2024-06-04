@@ -7,8 +7,8 @@
   "stories": "Stories",
 
   "object": "Object",
-  "archive": "Archief",
-  "person": "Persoon",
+  "archive": "Archiefbestanddeel",
+  "person": "Persoon/Instelling",
   "publication": "Publicatie",
   "story": "Story",
   "resultsFor": "resultaten voor",
