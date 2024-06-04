@@ -76,7 +76,7 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
 
           if (component?.__typename === 'ComponentModulesImage') {
             const src = component.image?.data?.attributes?.url
-            const alt = component.image?.data?.attributes?.alternativeText
+            const alt = component.alt_text
             const height = component.image?.data?.attributes?.height
             const width = component.image?.data?.attributes?.width
             const recordHref = component.triplyRecord
