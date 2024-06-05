@@ -443,11 +443,6 @@ export type HighlightedHomepageStoryEntity = {
   id?: Maybe<Scalars['ID']>;
 };
 
-export type HighlightedHomepageStoryEntityResponse = {
-  __typename?: 'HighlightedHomepageStoryEntityResponse';
-  data: Array<HighlightedHomepageStoryEntity>;
-};
-
 export type HighlightedHomepageThemeEntity = {
   __typename?: 'HighlightedHomepageThemeEntity';
   attributes?: Maybe<HighlightedHomepageThemes>;
@@ -1132,7 +1127,6 @@ export type Query = {
   archivesZoomRecordHover: ArchivesZoomLevelHoverType;
   author: AuthorEntityResponse;
   authors: AuthorEntityResponseCollection;
-  highlightedHomepageStories: HighlightedHomepageStoryEntityResponse;
   highlightedHomepageThemes: HighlightedHomepageThemeEntityResponse;
   homepage: HomepageEntityResponse;
   landingpage: LandingpageEntityResponse;
@@ -1219,13 +1213,6 @@ export type QueryAuthorsArgs = {
   pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<Scalars['String']>;
   sort?: InputMaybe<Array<Scalars['String']>>;
-};
-
-
-export type QueryHighlightedHomepageStoriesArgs = {
-  locale: Scalars['String'];
-  paginationArgs?: InputMaybe<PaginationArg>;
-  publicationState?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -2009,17 +1996,8 @@ export type TitleModuleFragmentFragment = { __typename: 'ComponentModulesTitleMo
 
 export type Zoom3RelationsFragmentFragment = { __typename?: 'ZoomLevel3RelationsType', type: EntityNames, total?: number | null, paginatedRelations?: Array<string> | null };
 
-export type HighlightedHomepageStoriesQueryVariables = Exact<{
-  publicationState?: InputMaybe<Scalars['String']>;
-  locale: Scalars['String'];
-}>;
-
-
-export type HighlightedHomepageStoriesQuery = { __typename?: 'Query', highlightedHomepageStories: { __typename?: 'HighlightedHomepageStoryEntityResponse', data: Array<{ __typename?: 'HighlightedHomepageStoryEntity', id?: string | null, attributes?: { __typename?: 'HighlightedHomepageStories', highlightedStories?: { __typename?: 'StoryWithoutRelationsRelationResponseCollection', data?: Array<{ __typename?: 'StoryWithoutRelationsEntity', attributes?: { __typename?: 'StoryWithoutRelations', title: string } | null }> | null } | null } | null }> } };
-
 export type HighlightedHomepageThemesQueryVariables = Exact<{
   pagination?: InputMaybe<PaginationArg>;
-  totalPagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<Scalars['String']>;
   locale: Scalars['String'];
 }>;
@@ -2812,26 +2790,8 @@ export const Zoom3RelationsFragmentFragmentDoc = gql`
   paginatedRelations
 }
     `;
-export const HighlightedHomepageStoriesDocument = gql`
-    query highlightedHomepageStories($publicationState: String, $locale: String!) {
-  highlightedHomepageStories(publicationState: $publicationState, locale: $locale) {
-    data {
-      id
-      attributes {
-        highlightedStories {
-          data {
-            attributes {
-              title
-            }
-          }
-        }
-      }
-    }
-  }
-}
-    `;
 export const HighlightedHomepageThemesDocument = gql`
-    query highlightedHomepageThemes($pagination: PaginationArg, $totalPagination: PaginationArg, $publicationState: String, $locale: String!) {
+    query highlightedHomepageThemes($pagination: PaginationArg, $publicationState: String, $locale: String!) {
   highlightedHomepageThemes(
     paginationArgs: $pagination
     publicationState: $publicationState
@@ -2847,7 +2807,7 @@ export const HighlightedHomepageThemesDocument = gql`
       }
     }
     meta(
-      paginationArgs: $totalPagination
+      paginationArgs: $pagination
       publicationState: $publicationState
       locale: $locale
     ) {
@@ -3876,9 +3836,6 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    highlightedHomepageStories(variables: HighlightedHomepageStoriesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<HighlightedHomepageStoriesQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<HighlightedHomepageStoriesQuery>(HighlightedHomepageStoriesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'highlightedHomepageStories', 'query');
-    },
     highlightedHomepageThemes(variables: HighlightedHomepageThemesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<HighlightedHomepageThemesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<HighlightedHomepageThemesQuery>(HighlightedHomepageThemesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'highlightedHomepageThemes', 'query');
     },
