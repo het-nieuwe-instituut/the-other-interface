@@ -1,756 +1,753 @@
 query stories(
-    $filters: StoryFiltersInput
-    $pagination: PaginationArg
-    $sort: [String]
-    $publicationState: PublicationState = LIVE
-    $locale: I18NLocaleCode
+  $filters: StoryFiltersInput
+  $pagination: PaginationArg
+  $sort: [String]
+  $publicationState: PublicationState = LIVE
+  $locale: I18NLocaleCode
 ) {
-    stories(
-        filters: $filters
-        pagination: $pagination
-        sort: $sort
-        publicationState: $publicationState
-        locale: $locale
-    ) {
-        data {
-            ...StoryFragment
-        }
-        meta {
-            ...ResponseCollectionMetaFragment
-        }
+  stories(
+    filters: $filters
+    pagination: $pagination
+    sort: $sort
+    publicationState: $publicationState
+    locale: $locale
+  ) {
+    data {
+      ...StoryFragment
     }
+    meta {
+      ...ResponseCollectionMetaFragment
+    }
+  }
 }
 
 query storiesIds(
-    $filters: StoryFiltersInput
-    $pagination: PaginationArg
-    $sort: [String]
-    $publicationState: PublicationState = LIVE
-    $locale: I18NLocaleCode
+  $filters: StoryFiltersInput
+  $pagination: PaginationArg
+  $sort: [String]
+  $publicationState: PublicationState = LIVE
+  $locale: I18NLocaleCode
 ) {
-    stories(
-        filters: $filters
-        pagination: $pagination
-        sort: $sort
-        publicationState: $publicationState
-        locale: $locale
-    ) {
-        data {
-            id
-        }
+  stories(
+    filters: $filters
+    pagination: $pagination
+    sort: $sort
+    publicationState: $publicationState
+    locale: $locale
+  ) {
+    data {
+      id
     }
+  }
 }
 
-
-query story(
-    $id: ID
-    $locale: I18NLocaleCode 
-) {
-    story(
-        id: $id
-        locale: $locale
-    ) {
-        data {
-            ...StoryFragment
-        }
+query story($id: ID, $locale: I18NLocaleCode) {
+  story(id: $id, locale: $locale) {
+    data {
+      ...StoryFragment
     }
+  }
 }
 
-query storyByLocale(
-    $id: ID   
-) {
-    story(
-        id: $id
-    ) {
-        data {
-            ...LocalizedStoryFragment
-        }
+query storyByLocale($id: ID) {
+  story(id: $id) {
+    data {
+      ...LocalizedStoryFragment
     }
+  }
 }
 
-# 
+#
 query storiesByLocale(
-    $id: IDFilterInput
-    $pagination: PaginationArg
-    $sort: [String]
-    $publicationState: PublicationState
-    $locale: I18NLocaleCode
+  $id: IDFilterInput
+  $pagination: PaginationArg
+  $sort: [String]
+  $publicationState: PublicationState
+  $locale: I18NLocaleCode
 ) {
-    stories(
-        filters: {
-            id: $id,
-        },
-        pagination: $pagination,
-        sort: $sort,
-        publicationState: $publicationState
-        locale: $locale
-    ) {
-        data {
-            ...LocalizedStoryFragment
-        }
-        meta {
-            ...ResponseCollectionMetaFragment
-        }
+  stories(
+    filters: { id: $id }
+    pagination: $pagination
+    sort: $sort
+    publicationState: $publicationState
+    locale: $locale
+  ) {
+    data {
+      ...LocalizedStoryFragment
     }
+    meta {
+      ...ResponseCollectionMetaFragment
+    }
+  }
 }
-
 
 query storiesMetaByLocale(
-    $id: IDFilterInput
-    $pagination: PaginationArg
-    $sort: [String]
-    $publicationState: PublicationState = LIVE
-    $locale: I18NLocaleCode
+  $id: IDFilterInput
+  $pagination: PaginationArg
+  $sort: [String]
+  $publicationState: PublicationState = LIVE
+  $locale: I18NLocaleCode
 ) {
-    stories(
-        filters: {
-            id: $id,
-        },
-        pagination: $pagination,
-        sort: $sort,
-        publicationState: $publicationState
-        locale: $locale
-    ) {
-        data {
-            ...LocalizedStoryMetaFragment
-        }
+  stories(
+    filters: { id: $id }
+    pagination: $pagination
+    sort: $sort
+    publicationState: $publicationState
+    locale: $locale
+  ) {
+    data {
+      ...LocalizedStoryMetaFragment
     }
+  }
 }
-
 
 query storiesWithoutRelations(
-    $filters: StoryFiltersInput
-    $pagination: PaginationArg
-    $sort: [String]
-    $publicationState: PublicationState = LIVE
-    $locale: I18NLocaleCode
+  $filters: StoryFiltersInput
+  $pagination: PaginationArg
+  $sort: [String]
+  $publicationState: PublicationState = LIVE
+  $locale: I18NLocaleCode
 ) {
-    stories(
-        filters: $filters
-        pagination: $pagination
-        sort: $sort
-        publicationState: $publicationState
-        locale: $locale
-    ) {
-        data {
-            ...StoryWithoutRelationsFragment
-        }
-        meta {
-            ...ResponseCollectionMetaFragment
-        }
+  stories(
+    filters: $filters
+    pagination: $pagination
+    sort: $sort
+    publicationState: $publicationState
+    locale: $locale
+  ) {
+    data {
+      ...StoryWithoutRelationsFragment
     }
+    meta {
+      ...ResponseCollectionMetaFragment
+    }
+  }
 }
 
-
 query storyWithoutRelations($id: ID, $locale: I18NLocaleCode) {
-    story(id: $id, locale: $locale) {
-        data {
-            ...StoryWithoutRelationsFragment
-        }
+  story(id: $id, locale: $locale) {
+    data {
+      ...StoryWithoutRelationsFragment
     }
+  }
 }
 
 # "$type" must be ENUM_TRIPLYRECORD_TYPE
-query storiesLinkedToTriplyRecord($recordId: String!, $type: String!, $pagination: PaginationArg) { 
-    stories(pagination: $pagination, filters: { triplyRecords: { recordId: { eq: $recordId }, type: { eq: $type } } }) {
-        data {
-            id
-            attributes {
-                slug
-                title
-            }
-        }
+query storiesLinkedToTriplyRecord($recordId: String!, $type: String!, $pagination: PaginationArg) {
+  stories(
+    pagination: $pagination
+    filters: { triplyRecords: { recordId: { eq: $recordId }, type: { eq: $type } } }
+  ) {
+    data {
+      id
+      attributes {
+        slug
+        title
+      }
     }
+  }
 }
 
-query storiesLinkedToTriplyRecordExtended($recordId: String!, $type: String!, $lang: I18NLocaleCode, $publicationState: PublicationState = LIVE) {
-    stories(filters: { triplyRecords: { recordId: { eq: $recordId }, type: { eq: $type } }}, locale: $lang, publicationState: $publicationState) {
-        data {
-            ...StoryFragment
-        }
+query storiesLinkedToTriplyRecordExtended(
+  $recordId: String!
+  $type: String!
+  $lang: I18NLocaleCode
+  $publicationState: PublicationState = LIVE
+) {
+  stories(
+    filters: { triplyRecords: { recordId: { eq: $recordId }, type: { eq: $type } } }
+    locale: $lang
+    publicationState: $publicationState
+  ) {
+    data {
+      ...StoryFragment
     }
+  }
 }
 
 query storiesLinkedToTheme($id: ID!, $locale: I18NLocaleCode, $page: Int, $pageSize: Int) {
-    story(id: $id, locale: $locale) {
-        data {
+  story(id: $id, locale: $locale) {
+    data {
+      id
+      attributes {
+        themes {
+          data {
             id
             attributes {
-                themes {
-                    data {
-                        id
-                        attributes {
-                            stories(pagination: { page: $page, pageSize: $pageSize }) {
-                                data {
-                                    id
-                                }
-                            }
-                        }
-                    }
+              stories(pagination: { page: $page, pageSize: $pageSize }) {
+                data {
+                  id
                 }
+              }
             }
+          }
         }
+      }
     }
+  }
 }
 
 query storiesByIds($storiesIds: [ID]!) {
-    stories(filters: { id: { in: $storiesIds } }) {
-        data {
-            attributes {
-                title
-                slug
-                locale
-                components {
-                    ... on ComponentModulesImage {
-                        ...ComponentModulesImageFragment
-                    }
-                }
-                localizations{
-                    data {
-                        ...StoryWithoutRelationsFragment
-                    }
-                }
-            }
+  stories(filters: { id: { in: $storiesIds } }) {
+    data {
+      attributes {
+        title
+        slug
+        locale
+        components {
+          ... on ComponentModulesImage {
+            ...ComponentModulesImageFragment
+          }
         }
+        localizations {
+          data {
+            ...StoryWithoutRelationsFragment
+          }
+        }
+      }
     }
+  }
 }
 
 query storyTriplyRelations($id: ID!, $type: String, $page: Int, $pageSize: Int) {
-    story(id: $id) {
-        data {
-            id
-            attributes {
-                triplyRecords (filters: { type: { eq: $type } }, pagination: { page: $page, pageSize: $pageSize }) {
-                    data {
-                        ...BaseTriplyRecordFragment
-                    }
-                }
-            }
+  story(id: $id) {
+    data {
+      id
+      attributes {
+        triplyRecords(
+          filters: { type: { eq: $type } }
+          pagination: { page: $page, pageSize: $pageSize }
+        ) {
+          data {
+            ...BaseTriplyRecordFragment
+          }
         }
+      }
     }
+  }
 }
 
 query storiesTotal {
-    stories {
-        meta {
-            pagination {
-                total
-            }
-        }
+  stories {
+    meta {
+      pagination {
+        total
+      }
     }
+  }
 }
 
 fragment StoryWithoutRelationsFragment on StoryEntity {
-    id
-    attributes {
-        title
-        slug
-        description
-        shortDescription
-        createdAt
-        updatedAt
-        publishedAt
-        locale
-        author {
-            data {
-                id
-                attributes {
-                    firstName
-                    lastName
-                    insertion
-                }
-            }
+  id
+  attributes {
+    title
+    slug
+    description
+    shortDescription
+    createdAt
+    updatedAt
+    publishedAt
+    locale
+    author {
+      data {
+        id
+        attributes {
+          firstName
+          lastName
+          insertion
         }
+      }
     }
+  }
 }
 
 fragment NestedStoryFragment on StoryEntity {
-    id
-    attributes {
-        title
-        slug
-        description
-        locale
-        author {
-            data {
-                id
-                attributes {
-                    firstName
-                    lastName
-                    insertion
-                }
-            }
+  id
+  attributes {
+    title
+    slug
+    description
+    locale
+    author {
+      data {
+        id
+        attributes {
+          firstName
+          lastName
+          insertion
         }
-        parent_story {
-            data {
-                id
-                attributes {
-                    title
-                    slug
-                    locale
-                }
-            }
-        }
-        child_stories { 
-            data {
-                id
-                attributes {
-                    title
-                    slug
-                    locale
-                }
-            }
-        }
-        components {
-           __typename
-            ... on ComponentModulesPullquote {
-                ...ComponentModulesPullquoteFragment
-            }
-            ... on ComponentModulesTextModule {
-                ...ComponentModulesTextModuleFragment
-            }
-            ... on ComponentModulesSubtitle {
-                ...ComponentModulesSubtitleFragment
-            }
-            ... on ComponentModulesTitleModule {
-                ...ComponentModulesTitleModuleFragment
-            }
-            ... on ComponentModulesImageCarousel {
-                ...ComponentModulesImageCarouselFragment
-            }
-            ... on ComponentModulesImage {
-                ...ComponentModulesImageFragment
-            }
-            ... on ComponentModulesButtonsModule {
-                ...ComponentModulesButtonsModuleFragment
-            }
-            ... on ComponentCoreStandAloneLink {
-                ...ComponentCoreStandAloneLinkFragment
-            }
-            ... on Error {
-                ...ErrorFragment
-            }
-        }
+      }
     }
+    parent_story {
+      data {
+        id
+        attributes {
+          title
+          slug
+          locale
+        }
+      }
+    }
+    child_stories {
+      data {
+        id
+        attributes {
+          title
+          slug
+          locale
+        }
+      }
+    }
+    components {
+      __typename
+      ... on ComponentModulesPullquote {
+        ...ComponentModulesPullquoteFragment
+      }
+      ... on ComponentModulesTextModule {
+        ...ComponentModulesTextModuleFragment
+      }
+      ... on ComponentModulesSubtitle {
+        ...ComponentModulesSubtitleFragment
+      }
+      ... on ComponentModulesTitleModule {
+        ...ComponentModulesTitleModuleFragment
+      }
+      ... on ComponentModulesImageCarousel {
+        ...ComponentModulesImageCarouselFragment
+      }
+      ... on ComponentModulesImage {
+        ...ComponentModulesImageFragment
+      }
+      ... on ComponentModulesButtonsModule {
+        ...ComponentModulesButtonsModuleFragment
+      }
+      ... on ComponentCoreStandAloneLink {
+        ...ComponentCoreStandAloneLinkFragment
+      }
+      ... on Error {
+        ...ErrorFragment
+      }
+    }
+  }
 }
 
 fragment LocalizedStoryFragment on StoryEntity {
-    id
-    attributes {
-        title
-        slug
-        description
-        locale
-        author {
-            data {
-                id
-                attributes {
-                    firstName
-                    lastName
-                    insertion
-                }
-            }
+  id
+  attributes {
+    title
+    slug
+    description
+    locale
+    author {
+      data {
+        id
+        attributes {
+          firstName
+          lastName
+          insertion
         }
-        parent_story {
-            data {
-                id
-                attributes {
-                    title
-                    slug
-                    locale
-                }
-            }
-        }
-        child_stories { 
-            data {
-                id
-                attributes {
-                    title
-                    slug
-                    locale
-                }
-            }
-        }
-        components {
-           __typename
-            ... on ComponentModulesPullquote {
-                ...ComponentModulesPullquoteFragment
-            }
-            ... on ComponentModulesTextModule {
-                ...ComponentModulesTextModuleFragment
-            }
-            ... on ComponentModulesSubtitle {
-                ...ComponentModulesSubtitleFragment
-            }
-            ... on ComponentModulesTitleModule {
-                ...ComponentModulesTitleModuleFragment
-            }
-            ... on ComponentModulesImageCarousel {
-                ...ComponentModulesImageCarouselFragment
-            }
-            ... on ComponentModulesImage {
-                ...ComponentModulesImageFragment
-            }
-            ... on ComponentModulesButtonsModule {
-                ...ComponentModulesButtonsModuleFragment
-            }
-            ... on ComponentCoreStandAloneLink {
-                ...ComponentCoreStandAloneLinkFragment
-            }
-            ... on Error {
-                ...ErrorFragment
-            }
-        }
-        localizations {
-            data {
-                ...NestedStoryFragment
-            }
-        }
+      }
     }
+    parent_story {
+      data {
+        id
+        attributes {
+          title
+          slug
+          locale
+        }
+      }
+    }
+    child_stories {
+      data {
+        id
+        attributes {
+          title
+          slug
+          locale
+        }
+      }
+    }
+    components {
+      __typename
+      ... on ComponentModulesPullquote {
+        ...ComponentModulesPullquoteFragment
+      }
+      ... on ComponentModulesTextModule {
+        ...ComponentModulesTextModuleFragment
+      }
+      ... on ComponentModulesSubtitle {
+        ...ComponentModulesSubtitleFragment
+      }
+      ... on ComponentModulesTitleModule {
+        ...ComponentModulesTitleModuleFragment
+      }
+      ... on ComponentModulesImageCarousel {
+        ...ComponentModulesImageCarouselFragment
+      }
+      ... on ComponentModulesImage {
+        ...ComponentModulesImageFragment
+      }
+      ... on ComponentModulesButtonsModule {
+        ...ComponentModulesButtonsModuleFragment
+      }
+      ... on ComponentCoreStandAloneLink {
+        ...ComponentCoreStandAloneLinkFragment
+      }
+      ... on Error {
+        ...ErrorFragment
+      }
+    }
+    localizations {
+      data {
+        ...NestedStoryFragment
+      }
+    }
+  }
 }
 
 fragment StoryFragment on StoryEntity {
-    id
-    attributes {
-        title
-        slug
-        components {
-            __typename
-            ... on ComponentModulesPullquote {
-                ...ComponentModulesPullquoteFragment
-            }
-            ... on ComponentModulesTextModule {
-                ...ComponentModulesTextModuleFragment
-            }
-            ... on ComponentModulesSubtitle {
-                ...ComponentModulesSubtitleFragment
-            }
-            ... on ComponentModulesTitleModule {
-                ...ComponentModulesTitleModuleFragment
-            }
-            ... on ComponentModulesImageCarousel {
-                ...ComponentModulesImageCarouselFragment
-            }
-            ... on ComponentModulesImage {
-                ...ComponentModulesImageFragment
-            }
-            ... on ComponentModulesButtonsModule {
-                ...ComponentModulesButtonsModuleFragment
-            }
-            ... on ComponentCoreStandAloneLink {
-                ...ComponentCoreStandAloneLinkFragment
-            }
-            ... on Error {
-                ...ErrorFragment
-            }
-        }
-        author {
-            data {
-                id
-                attributes {
-                    firstName
-                    lastName
-                    insertion
-                }
-            }
-        }
-        description
-        timeframe {
-            id
-            yearStart
-            yearEnd
-        }
-        locations {
-            data {
-                id
-            }
-        }
-        publicationDate {
-            id
-            date
-            displayType
-        }
-        shortDescription
-        triplyRecords {
-            data {
-                ...BaseTriplyRecordFragment
-            }
-        }
-        createdAt
-        updatedAt
-        publishedAt
-        localizations {
-            data {
-                id
-            }
-        }
-        locale
-        storyLinks {
-            ...ComponentModulesButtonsModuleFragment
-        }
-        parent_story {
-            data {
-                id
-                attributes {
-                    title
-                    components {
-                        __typename
-                        ... on ComponentModulesImage {
-                            ...ComponentModulesImageFragment
-                        }
-                    }
-                    author {
-                        data {
-                            id
-                            attributes {
-                                firstName
-                                lastName
-                                insertion
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        child_stories {
-            data {
-                id
-                attributes {
-                    title
-                    components {
-                        __typename
-                        ... on ComponentModulesImage {
-                            ...ComponentModulesImageFragment
-                        }
-                    }
-                    author {
-                        data {
-                            id
-                            attributes {
-                                firstName
-                                lastName
-                                insertion
-                            }
-                        }
-                    }
-                }
-            }
-        }
+  id
+  attributes {
+    title
+    slug
+    components {
+      __typename
+      ... on ComponentModulesPullquote {
+        ...ComponentModulesPullquoteFragment
+      }
+      ... on ComponentModulesTextModule {
+        ...ComponentModulesTextModuleFragment
+      }
+      ... on ComponentModulesSubtitle {
+        ...ComponentModulesSubtitleFragment
+      }
+      ... on ComponentModulesTitleModule {
+        ...ComponentModulesTitleModuleFragment
+      }
+      ... on ComponentModulesImageCarousel {
+        ...ComponentModulesImageCarouselFragment
+      }
+      ... on ComponentModulesImage {
+        ...ComponentModulesImageFragment
+      }
+      ... on ComponentModulesButtonsModule {
+        ...ComponentModulesButtonsModuleFragment
+      }
+      ... on ComponentCoreStandAloneLink {
+        ...ComponentCoreStandAloneLinkFragment
+      }
+      ... on Error {
+        ...ErrorFragment
+      }
     }
+    author {
+      data {
+        id
+        attributes {
+          firstName
+          lastName
+          insertion
+        }
+      }
+    }
+    description
+    timeframe {
+      id
+      yearStart
+      yearEnd
+    }
+    locations {
+      data {
+        id
+      }
+    }
+    publicationDate {
+      id
+      date
+      displayType
+    }
+    shortDescription
+    triplyRecords {
+      data {
+        ...BaseTriplyRecordFragment
+      }
+    }
+    createdAt
+    updatedAt
+    publishedAt
+    localizations {
+      data {
+        id
+      }
+    }
+    locale
+    storyLinks {
+      ...ComponentModulesButtonsModuleFragment
+    }
+    parent_story {
+      data {
+        id
+        attributes {
+          title
+          components {
+            __typename
+            ... on ComponentModulesImage {
+              ...ComponentModulesImageFragment
+            }
+          }
+          author {
+            data {
+              id
+              attributes {
+                firstName
+                lastName
+                insertion
+              }
+            }
+          }
+        }
+      }
+    }
+    child_stories {
+      data {
+        id
+        attributes {
+          title
+          components {
+            __typename
+            ... on ComponentModulesImage {
+              ...ComponentModulesImageFragment
+            }
+          }
+          author {
+            data {
+              id
+              attributes {
+                firstName
+                lastName
+                insertion
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 fragment StoryMetaFragment on StoryEntity {
-    id
-    attributes {
-        title
-        slug
-        shortDescription
-        createdAt
-        updatedAt
-        publishedAt
-        locale
-        author {
-            data {
-                id
-                attributes {
-                    firstName
-                    lastName
-                    insertion
-                }
-            }
+  id
+  attributes {
+    title
+    slug
+    shortDescription
+    createdAt
+    updatedAt
+    publishedAt
+    locale
+    author {
+      data {
+        id
+        attributes {
+          firstName
+          lastName
+          insertion
         }
-        timeframe {
-            id
-            yearStart
-            yearEnd
-        }
-        locations {
-            data {
-                id
-                attributes {
-                    city
-                }
-            }
-        }
-        themes {
-            data {
-                id
-                attributes {
-                    name
-                }
-            }
-        }
-        publicationDate {
-            id
-            date
-            displayType
-        }
-        triplyRecords {
-            data {
-                ...BaseTriplyRecordFragment
-            }
-        }
-        storyLinks {
-            ...ComponentModulesButtonsModuleFragment
-        }
-        parent_story {
-            data {
-                id
-                attributes {
-                    title
-                    components {
-                        __typename
-                        ... on ComponentModulesImage {
-                            ...ComponentModulesImageFragment
-                        }
-                    }
-                    author {
-                        data {
-                            id
-                            attributes {
-                                firstName
-                                lastName
-                                insertion
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        child_stories {
-            data {
-                id
-                attributes {
-                    title
-                    components {
-                        __typename
-                        ... on ComponentModulesImage {
-                            ...ComponentModulesImageFragment
-                        }
-                    }
-                    author {
-                        data {
-                            id
-                            attributes {
-                                firstName
-                                lastName
-                                insertion
-                            }
-                        }
-                    }
-                }
-            }
-        }
+      }
     }
+    timeframe {
+      id
+      yearStart
+      yearEnd
+    }
+    locations {
+      data {
+        id
+        attributes {
+          city
+        }
+      }
+    }
+    themes {
+      data {
+        id
+        attributes {
+          name
+        }
+      }
+    }
+    publicationDate {
+      id
+      date
+      displayType
+    }
+    triplyRecords {
+      data {
+        ...BaseTriplyRecordFragment
+      }
+    }
+    storyLinks {
+      ...ComponentModulesButtonsModuleFragment
+    }
+    parent_story {
+      data {
+        id
+        attributes {
+          title
+          components {
+            __typename
+            ... on ComponentModulesImage {
+              ...ComponentModulesImageFragment
+            }
+          }
+          author {
+            data {
+              id
+              attributes {
+                firstName
+                lastName
+                insertion
+              }
+            }
+          }
+        }
+      }
+    }
+    child_stories {
+      data {
+        id
+        attributes {
+          title
+          components {
+            __typename
+            ... on ComponentModulesImage {
+              ...ComponentModulesImageFragment
+            }
+          }
+          author {
+            data {
+              id
+              attributes {
+                firstName
+                lastName
+                insertion
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 fragment LocalizedStoryMetaFragment on StoryEntity {
-    id
-    attributes {
-        title
-        slug
-        shortDescription
-        description
-        createdAt
-        updatedAt
-        publishedAt
-        locale
-        author {
-            data {
-                id
-                attributes {
-                    firstName
-                    lastName
-                    insertion
-                }
-            }
+  id
+  attributes {
+    title
+    slug
+    shortDescription
+    description
+    createdAt
+    updatedAt
+    publishedAt
+    locale
+    author {
+      data {
+        id
+        attributes {
+          firstName
+          lastName
+          insertion
         }
-        timeframe {
-            id
-            yearStart
-            yearEnd
-        }
-        locations {
-            data {
-                id
-                attributes {
-                    city
-                }
-            }
-        }
-        themes {
-            data {
-                id
-                attributes {
-                    name
-                }
-            }
-        }
-        parent_story {
-            data {
-                id
-                attributes {
-                    title
-                    components {
-                        __typename
-                        ... on ComponentModulesImage {
-                            ...ComponentModulesImageFragment
-                        }
-                    }
-                    author {
-                        data {
-                            id
-                            attributes {
-                                firstName
-                                lastName
-                                insertion
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        child_stories {
-            data {
-                id
-                attributes {
-                    title
-                    components {
-                        __typename
-                        ... on ComponentModulesImage {
-                            ...ComponentModulesImageFragment
-                        }
-                    }
-                    author {
-                        data {
-                            id
-                            attributes {
-                                firstName
-                                lastName
-                                insertion
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        publicationDate {
-            id
-            date
-            displayType
-        }
-        triplyRecords {
-            data {
-                ...BaseTriplyRecordFragment
-            }
-        }
-        localizations {
-            data {
-                ...StoryMetaFragment
-            }
-        }
-        storyLinks {
-            ...ComponentModulesButtonsModuleFragment
-        }
+      }
     }
+    timeframe {
+      id
+      yearStart
+      yearEnd
+    }
+    locations {
+      data {
+        id
+        attributes {
+          city
+        }
+      }
+    }
+    themes {
+      data {
+        id
+        attributes {
+          name
+        }
+      }
+    }
+    parent_story {
+      data {
+        id
+        attributes {
+          title
+          components {
+            __typename
+            ... on ComponentModulesImage {
+              ...ComponentModulesImageFragment
+            }
+          }
+          author {
+            data {
+              id
+              attributes {
+                firstName
+                lastName
+                insertion
+              }
+            }
+          }
+        }
+      }
+    }
+    child_stories {
+      data {
+        id
+        attributes {
+          title
+          components {
+            __typename
+            ... on ComponentModulesImage {
+              ...ComponentModulesImageFragment
+            }
+          }
+          author {
+            data {
+              id
+              attributes {
+                firstName
+                lastName
+                insertion
+              }
+            }
+          }
+        }
+      }
+    }
+    publicationDate {
+      id
+      date
+      displayType
+    }
+    triplyRecords {
+      data {
+        ...BaseTriplyRecordFragment
+      }
+    }
+    localizations {
+      data {
+        ...StoryMetaFragment
+      }
+    }
+    storyLinks {
+      ...ComponentModulesButtonsModuleFragment
+    }
+  }
 }
