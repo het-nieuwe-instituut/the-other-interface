@@ -67,3 +67,29 @@ fragment ThemeFragment on ThemeEntity {
     locale
   }
 }
+
+fragment ThemeFragmentWithHighlightedStories on ThemeEntity {
+  id
+  attributes {
+    name
+    stories {
+      data {
+        ...StoryFragment
+      }
+    }
+    highlightedStories {
+      data {
+        ...StoryFragment
+      }
+    }
+    createdAt
+    updatedAt
+    publishedAt
+    localizations {
+      data {
+        id
+      }
+    }
+    locale
+  }
+}

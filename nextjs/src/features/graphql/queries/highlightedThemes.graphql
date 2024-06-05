@@ -12,7 +12,7 @@ query highlightedHomepageThemes(
       attributes {
         highlightedThemes {
           data {
-            ...ThemeFragment
+            ...ThemeFragmentWithHighlightedStories
           }
         }
       }
