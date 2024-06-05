@@ -63,6 +63,7 @@
     "@graphql-codegen/typescript": "2.7.3",
     "@graphql-codegen/typescript-msw": "^1.1.3",
     "@graphql-codegen/typescript-operations": "2.5.3",
+    "@savvywombat/tailwindcss-grid-areas": "^4.0.0",
     "@tanstack/react-query-devtools": "^4.35.7",
     "@testing-library/dom": "^8.17.1",
     "@testing-library/jest-dom": "^5.16.5",

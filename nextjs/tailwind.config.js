@@ -6,6 +6,10 @@ module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     extend: {
+      gridTemplateAreas: {
+        'editorial-large': ['left right', 'bottom right'],
+        'editorial-small': ['right', 'left', 'bottom'],
+      },
       lineClamp: {
         7: '7',
         8: '8',
@@ -95,5 +99,6 @@ module.exports = {
         { values: theme('textShadow') }
       )
     }),
+    require('@savvywombat/tailwindcss-grid-areas'),
   ],
 }
