@@ -3,17 +3,41 @@ import { CategoryCloud } from '../types'
 import { HOMEPAGE_Z_INDEXES } from '../constants'
 import { CloudTitle } from '../CloudTitle'
 import { Text } from '@chakra-ui/react'
-import { usePresenter } from './usePresenter'
 import { CATEGORIES, CloudCategory } from '@/features/shared/utils/categories'
 import { Tooltip } from '@/features/modules/components/ToolTip/Tooltip'
+import { CollectionHighlightsFilter } from '@/features/galaxyInterface/components/GalaxyWrapper/Suggestions/Suggestions'
+import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
+import { encodeFilters } from '@/features/shared/helpers/searchHelpers'
+import { useSearchByCategoryQuery } from '@/features/shared/hooks/queries/useSearchByCategoryQuery'
+import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 
 interface Props {
   cloud: CategoryCloud
 }
 
 export const Cloud: React.FC<Props> = ({ cloud }) => {
-  const { category, size, cloudPosition, titlePosition, handleCloudClick, setEnabled, t } =
-    usePresenter(cloud)
+  const { t } = useTypeSafeTranslation('homepage')
+  const router = useRouter()
+  const { lang } = useZoom2Params()
+  const [enabled, setEnabled] = useState(false)
+  const { title: category, size, cloudPosition, titlePosition } = cloud
+
+  useSearchByCategoryQuery({
+    category,
+    enabled,
+  })
+
+  const handleCloudClick = () => {
+    let url = `/landingpage?category=${category}&filters=${encodeFilters([
+      CollectionHighlightsFilter,
+    ])}&searchResult=true&fallback=true`
+    url = addLocaleToUrl(url, lang)
+    router.push(url)
+  }
+
   const breakpoint = useBreakpoint()
   const placement = tooltipPlacement(category, breakpoint)
 
