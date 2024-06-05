@@ -40,10 +40,10 @@ export function useThemesQuery(page: number) {
   const storyTitle =
     data?.highlightedHomepageThemes?.data?.attributes?.highlightedThemes?.data?.[0]?.attributes
       ?.name
-  let stories =
+  const stories =
     data?.highlightedHomepageThemes?.data?.attributes?.highlightedThemes?.data?.[0]?.attributes
       ?.stories?.data || []
-  let highlightedStories =
+  const highlightedStories =
     data?.highlightedHomepageThemes?.data?.attributes?.highlightedThemes?.data?.[0]?.attributes
       ?.highlightedStories?.data
 
