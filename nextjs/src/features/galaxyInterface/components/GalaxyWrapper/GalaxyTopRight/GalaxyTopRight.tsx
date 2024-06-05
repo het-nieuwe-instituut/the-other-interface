@@ -1,7 +1,7 @@
 'use client'
 import { LOCALES } from '@/features/shared/constants/locales'
 import NextLink from 'next/link'
-import { Fragment } from 'react'
+import { Fragment, useMemo } from 'react'
 
 import { MenuButton } from '../../../../shared/components/MenuButton/MenuButton'
 
@@ -17,21 +17,28 @@ export const GalaxyTopRight: React.FC = () => {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const lang = useLocale()
+  const hrefs = useMemo(() => {
+    return LOCALES.map(locale => {
+      if (!pathname || !process.env.NEXT_PUBLIC_URL || !searchParams) {
+        return null
+      }
+      const url = new URL(pathname, process.env.NEXT_PUBLIC_URL)
+      searchParams.forEach((value, key) => {
+        url.searchParams.set(key, value)
+      })
+
+      url.searchParams.set('lang', locale)
+
+      return url.toString()
+    })
+  }, [pathname, searchParams])
 
   return (
     <div className="flex items-center">
       <div className="flex-row items-center justify-center">
-        {LOCALES.map(locale => {
-          if (!pathname || !process.env.NEXT_PUBLIC_URL || !searchParams) {
-            return null
-          }
-          const url = new URL(pathname, process.env.NEXT_PUBLIC_URL)
-          searchParams.forEach((value, key) => {
-            url.searchParams.set(key, value)
-          })
-
-          url.searchParams.set('lang', locale)
-
+        {LOCALES.map((locale, i) => {
+          const href = hrefs[i]
+          if (!href) return null
           return (
             <Fragment key={locale}>
               <NextLink
@@ -51,7 +58,7 @@ export const GalaxyTopRight: React.FC = () => {
                       lang === locale && 'border-b border-solid border-current'
                     )
                 )}
-                href={url.href}
+                href={href}
                 locale={locale}
               >
                 {locale.toUpperCase()}
