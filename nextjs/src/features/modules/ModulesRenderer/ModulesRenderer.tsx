@@ -46,7 +46,7 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
   return (
     <div
       className={cn(
-        ' px-6 pt-0 flex flex-col gap-[40px]',
+        'px-6 pt-0 flex flex-col gap-[40px]',
         isStoryPage && 'px-0',
         hasComponents && 'pt-10'
       )}

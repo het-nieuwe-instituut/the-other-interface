@@ -11,7 +11,6 @@ import {
 import { imageCarouselDefaultSlidesMapper } from '@/features/ui/components/image-carousel/mappers'
 import useTranslation from 'next-translate/useTranslation'
 import { useParams } from 'next/navigation'
-import { useRouter } from 'next/router'
 import { useMemo } from 'react'
 
 export const RelatedStoriesCarousel = () => {
