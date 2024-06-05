@@ -9,22 +9,27 @@ import { State } from '@/features/shared/configs/store'
 import { useLocale } from '@/features/shared/hooks/useLocale'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { cn } from '@/features/ui/utils/cn'
-import { usePathname } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 import { useSelector } from 'react-redux'
 
 export const GalaxyTopRight: React.FC = () => {
   const isMenuOpen = useSelector((state: State) => state.shared.isMenuOpen)
   const pathname = usePathname()
+  const searchParams = useSearchParams()
   const lang = useLocale()
 
   return (
     <div className="flex items-center">
       <div className="flex-row items-center justify-center">
         {LOCALES.map(locale => {
-          if (!pathname) {
+          if (!pathname || !process.env.NEXT_PUBLIC_URL || !searchParams) {
             return null
           }
-          const url = new URL(process.env.NEXT_PUBLIC_URL + pathname)
+          const url = new URL(pathname, process.env.NEXT_PUBLIC_URL)
+          searchParams.forEach((value, key) => {
+            url.searchParams.set(key, value)
+          })
+
           url.searchParams.set('lang', locale)
 
           return (
@@ -44,7 +49,7 @@ export const GalaxyTopRight: React.FC = () => {
                       lang !== locale ? 'text-blue-50' : ' text-blue-100'
                     )
                 )}
-                href={url}
+                href={url.href}
                 locale={locale}
               >
                 {locale.toUpperCase()}
