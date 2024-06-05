@@ -432,17 +432,6 @@ export type Error = {
   message?: Maybe<Scalars['String']>;
 };
 
-export type HighlightedHomepageStories = {
-  __typename?: 'HighlightedHomepageStories';
-  highlightedStories?: Maybe<StoryWithoutRelationsRelationResponseCollection>;
-};
-
-export type HighlightedHomepageStoryEntity = {
-  __typename?: 'HighlightedHomepageStoryEntity';
-  attributes?: Maybe<HighlightedHomepageStories>;
-  id?: Maybe<Scalars['ID']>;
-};
-
 export type HighlightedHomepageThemeEntity = {
   __typename?: 'HighlightedHomepageThemeEntity';
   attributes?: Maybe<HighlightedHomepageThemes>;
@@ -1636,11 +1625,6 @@ export type StoryWithoutRelationsEntityResponseCollection = {
   __typename?: 'StoryWithoutRelationsEntityResponseCollection';
   data?: Maybe<Array<StoryWithoutRelationsEntity>>;
   meta?: Maybe<ResponseCollectionMeta>;
-};
-
-export type StoryWithoutRelationsRelationResponseCollection = {
-  __typename?: 'StoryWithoutRelationsRelationResponseCollection';
-  data?: Maybe<Array<StoryWithoutRelationsEntity>>;
 };
 
 export type StringFilterInput = {

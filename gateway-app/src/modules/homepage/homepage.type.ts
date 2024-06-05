@@ -25,7 +25,7 @@ export class Homepage {
   public Title?: string
 
   @Field(() => [HomepageComponentsDynamicZone], { nullable: true })
-  public components?: typeof HomepageComponentsDynamicZone[]
+  public components?: (typeof HomepageComponentsDynamicZone)[]
 
   @Field({ nullable: true })
   public createdAt?: Date
@@ -44,27 +44,6 @@ export class Homepage {
 
   @Field({ nullable: true })
   public updatedAt?: Date
-}
-
-@ObjectType()
-export class HighlightedHomepageStoryEntityResponse {
-  @Field(() => [HighlightedHomepageStoryEntity])
-  public data: HighlightedHomepageStoryEntity[]
-}
-
-@ObjectType()
-export class HighlightedHomepageStories {
-  @Field(() => StoryWithoutRelationsRelationResponseCollection, { nullable: true })
-  public highlightedStories?: StoryWithoutRelationsRelationResponseCollection
-}
-
-@ObjectType()
-export class HighlightedHomepageStoryEntity {
-  @Field(() => HighlightedHomepageStories, { nullable: true })
-  public attributes?: HighlightedHomepageStories
-
-  @Field(() => ID, { nullable: true })
-  public id?: string
 }
 
 @ObjectType()
