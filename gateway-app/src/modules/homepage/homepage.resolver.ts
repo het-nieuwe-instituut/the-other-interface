@@ -1,12 +1,8 @@
 import { Inject } from '@nestjs/common'
-import { Args, Query, Resolver } from '@nestjs/graphql'
+import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
 import { PublicationState, Sdk } from '../../generated/strapi-sdk'
 import { Locale } from '../util/locale.type'
-import {
-  HighlightedHomepageStoryEntityResponse,
-  HighlightedHomepageThemeEntityResponse,
-  HomepageEntityResponse,
-} from './homepage.type'
+import { HighlightedHomepageThemeEntityResponse, HomepageEntityResponse } from './homepage.type'
 import { PaginationArg } from '../strapi/shared-types'
 
 @Resolver()
@@ -25,22 +21,11 @@ export class HomepageResolver {
       })
     ).homepage
   }
+}
 
-  @Query(() => HighlightedHomepageStoryEntityResponse)
-  public async highlightedHomepageStories(
-    @Args('locale') locale: Locale,
-    @Args('publicationState', { nullable: true }) publicationState?: PublicationState,
-    @Args('paginationArgs', { nullable: true }) paginationArgs?: PaginationArg
-  ) {
-    return (
-      await this.strapiGqlSdk.highlightedHomepageStories({
-        publicationState,
-        locale,
-        localeStr: locale,
-        highlightedStoriesPaginationArgs: paginationArgs,
-      })
-    ).homepage
-  }
+@Resolver(HighlightedHomepageThemeEntityResponse)
+export class HighlightedHomepageThemeEntityResolver {
+  public constructor(@Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk) {}
 
   @Query(() => HighlightedHomepageThemeEntityResponse)
   public async highlightedHomepageThemes(
@@ -48,13 +33,43 @@ export class HomepageResolver {
     @Args('publicationState', { nullable: true }) publicationState?: PublicationState,
     @Args('paginationArgs', { nullable: true }) paginationArgs?: PaginationArg
   ) {
-    return (
-      await this.strapiGqlSdk.highlightedHomepageThemes({
-        publicationState,
-        locale,
-        localeStr: locale,
-        highlightedThemesPaginationArgs: paginationArgs,
-      })
-    ).homepage
+    const res = await this.strapiGqlSdk.highlightedHomepageThemes({
+      publicationState,
+      locale,
+      localeStr: locale,
+      highlightedThemesPaginationArgs: paginationArgs,
+    })
+
+    return res.homepage
+  }
+
+  @ResolveField()
+  public async meta(
+    @Parent() parent: HighlightedHomepageThemeEntityResponse,
+    @Args('locale') locale: Locale,
+    @Args('publicationState', { nullable: true }) publicationState?: PublicationState,
+    @Args('paginationArgs', { nullable: true }) paginationArgs?: PaginationArg
+  ) {
+    const res = await this.strapiGqlSdk.meta({
+      publicationState,
+      locale,
+      localeStr: locale,
+      highlightedThemesPaginationArgs: {
+        page: 1,
+        pageSize: 100000,
+      },
+    })
+
+    return {
+      pagination: {
+        page: paginationArgs?.page, // this is to maintain the meta data structure
+        total: res.homepage?.data?.attributes?.highlightedThemes?.data.length,
+        pageCount: Math.ceil(
+          (res.homepage?.data?.attributes?.highlightedThemes?.data.length || 0) /
+            (paginationArgs?.pageSize || 1)
+        ),
+        pageSize: paginationArgs?.pageSize, // this is to maintain the meta data structure
+      },
+    }
   }
 }

@@ -1,5 +1,6 @@
 import { errors } from '@strapi/utils'
 import slugify from 'slugify'
+import { handleError } from '../../../lifecycleUtils'
 
 const storyApi = 'api::story.story'
 
@@ -188,13 +189,4 @@ async function changeOtherLocalesParent(parentId: number, localizations: any[]) 
       return strapi.entityService.update(storyApi, l.id, { data })
     })
   )
-}
-
-function handleError(err: unknown) {
-  const ctx = strapi.requestContext.get()
-  if (err instanceof errors.ApplicationError) {
-    ctx.throw(400, err)
-  }
-
-  ctx.throw(500, err)
 }

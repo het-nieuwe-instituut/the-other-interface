@@ -40,13 +40,15 @@ export const GalaxyTopRight: React.FC = () => {
                   TypographyVariants({ social: 'lg' }),
                   isMenuOpen &&
                     cn(
-                      'hover:text-pink-60 disabled:text-pink-50',
-                      lang !== locale ? 'text-pink-60' : 'text-pink-100'
+                      'hover:text-pink-50 disabled:text-black-20',
+                      lang !== locale ? 'text-pink-50' : 'text-pink-100',
+                      lang === locale && 'border-b border-solid border-current'
                     ),
                   !isMenuOpen &&
                     cn(
-                      'hover:text-blue-60 disabled:text-blue-50',
-                      lang !== locale ? 'text-blue-50' : ' text-blue-100'
+                      'hover:text-blue-50 disabled:text-black-20',
+                      lang !== locale ? 'text-blue-50' : ' text-blue-100',
+                      lang === locale && 'border-b border-solid border-current'
                     )
                 )}
                 href={url.href}
