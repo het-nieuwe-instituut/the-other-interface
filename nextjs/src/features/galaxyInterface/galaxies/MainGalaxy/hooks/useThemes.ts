@@ -45,5 +45,5 @@ export function useThemesQuery(page: number) {
       ?.stories?.data || []
   const pagination = data?.highlightedHomepageThemes.meta?.pagination
 
-  return { storyTitle, stories, pagination, isLoading, isError, page }
+  return { storyTitle, stories, pagination, isLoading, isError }
 }
