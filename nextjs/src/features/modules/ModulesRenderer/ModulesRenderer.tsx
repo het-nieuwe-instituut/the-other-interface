@@ -7,7 +7,6 @@ import {
   ComponentModulesCarousel,
   ComponentModulesGridModule,
   ComponentModulesImage,
-  ComponentModulesImageCarousel,
   HomepageComponentsDynamicZone,
   HomepageQuery,
   LandingpageBySlugQuery,
@@ -21,8 +20,11 @@ import { Subtitle } from '../../ui/components/subtitle/Subtitle'
 import { GridModule } from '../components/GridModule/GridModule'
 import { Pullquote } from '../components/Pullquote/Pullquote'
 import { CarouselModule } from '../components/carousels/Carousel/Carousel'
-import { ImageCarousel } from '../components/carousels/ImageCarousel/ImageCarousel'
-import { mapUploadFileEntitiesToStoryImageInfo } from '../components/carousels/ImageCarousel/imageCarouselStrapiDataMapper'
+import {
+  ImageCarousel,
+  ImageCarouselItem,
+} from '@/features/ui/components/image-carousel/ImageCarousel'
+import { calculateImagePropotions } from '../helpers/modulesHelpers'
 
 interface Props {
   components: DynamicComponents
@@ -76,7 +78,7 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
 
           if (component?.__typename === 'ComponentModulesImage') {
             const src = component.image?.data?.attributes?.url
-            const alt = component.alt_text
+            const alt = component.alt_text ?? ''
             const height = component.image?.data?.attributes?.height
             const width = component.image?.data?.attributes?.width
             const recordHref = component.triplyRecord
@@ -86,7 +88,7 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
               ? getPathByStory(component.story.data?.id ?? undefined)
               : undefined
 
-            if (!src || !alt || !height || !width) {
+            if (!src || !height || !width) {
               return null
             }
             if (recordHref || storyHref) {
@@ -117,11 +119,47 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
           if (component?.__typename === 'ComponentModulesImageCarousel') {
             return (
               <ImageCarousel
-                key={keyExtractor(component.id, index, array)}
-                images={mapUploadFileEntitiesToStoryImageInfo(
-                  component as ComponentModulesImageCarousel
-                )}
-              />
+                getSlidesConfiguration={(maxSlideWidth: number) => {
+                  if (maxSlideWidth === 0) {
+                    return []
+                  }
+                  const imageHeight = 600
+
+                  const slides =
+                    component.images?.data?.map(current => {
+                      const attributes = current?.attributes
+                      if (!attributes) return { size: 0, spacing: 0 }
+                      const margin = attributes.caption ? -20 : 0
+                      const calculateWidth = calculateImagePropotions(
+                        attributes?.width || 1,
+                        attributes?.height || 1,
+                        imageHeight,
+                        maxSlideWidth
+                      ).width
+                      return { size: (calculateWidth + margin) / maxSlideWidth, spacing: 0 }
+                    }) ?? []
+
+                  return slides
+                }}
+              >
+                {component.images?.data?.map(item => {
+                  const attributes = item?.attributes
+                  if (!attributes || !attributes.height || !attributes.width) {
+                    return null
+                  }
+                  return (
+                    <ImageCarouselItem
+                      key={item.id}
+                      src={attributes.url}
+                      // TODO: add alt text instead of captio
+                      alt={attributes.caption ?? ''}
+                      width={attributes.width}
+                      height={attributes.height}
+                      caption={attributes.caption ?? undefined}
+                    />
+                  )
+                }) ?? []}
+              </ImageCarousel>
             )
           }
 

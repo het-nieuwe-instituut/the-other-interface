@@ -8,6 +8,7 @@ import { TypographyVariants } from '../typography/variants'
 
 export interface ImageWithCaptionProps extends ImageProps {
   className?: string
+  captionClassname?: string
   caption?: string
 }
 
@@ -18,6 +19,7 @@ export const ImageWithCaption = ({
   alt,
   caption,
   className,
+  captionClassname,
   height,
   width,
   ...restProps
@@ -30,7 +32,7 @@ export const ImageWithCaption = ({
       <div className={cn(className, 'relative w-full')}>
         {!imageSrc ? (
           <div
-            className={cn(className, 'relative ')}
+            className={cn(className, 'relative')}
             style={{ '--default-image-height': `${DEFAULT_IMAGE_HEIGHT}px` } as CSSProperties}
           >
             <div className="flex h-[var(--default-image-height)] w-full items-center justify-center bg-gray-300">
@@ -55,7 +57,12 @@ export const ImageWithCaption = ({
         )}
       </div>
       {caption && (
-        <figcaption className={TypographyVariants({ social: 'sm' })}>{caption}</figcaption>
+        <figcaption
+          title={caption}
+          className={TypographyVariants({ social: 'sm', className: captionClassname })}
+        >
+          {caption}
+        </figcaption>
       )}
     </figure>
   )
