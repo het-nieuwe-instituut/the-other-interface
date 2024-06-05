@@ -8,15 +8,16 @@ fragment ComponentModulesButtonsModuleFragment on ComponentModulesButtonsModule 
 
 fragment ComponentModulesCarouselFragment on ComponentModulesCarousel {
     id
-    buttonText
-    buttonUrl
     description
     __typename
-    items {
-        ...ComponentCoreCarouselItemFragment
-    }
     title
-    type
+    variant
+    images {
+        ...ComponentCoreCarouselImageFragment
+    }
+    explore_collection_button {
+        ...ComponentCoreButtonFragment
+    }
 }
 
 fragment ComponentModulesImageCarouselFragment on ComponentModulesImageCarousel {

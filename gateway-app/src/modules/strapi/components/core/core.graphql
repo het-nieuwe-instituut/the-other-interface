@@ -4,20 +4,18 @@ fragment ComponentCoreButtonFragment on ComponentCoreButton {
   url
 }
 
-fragment ComponentCoreCarouselItemFragment on ComponentCoreCarouselItem {
+fragment ComponentCoreCarouselImageFragment on ComponentCoreCarouselImage {
   id
+  alt_text
   description
-  name
-  picture {
+  image {
     ...UploadFileEntityResponseFragment
   }
-  type
   triply_record {
     data {
       ...BaseTriplyRecordFragment
     }
   }
-
   story {
     data {
       id
