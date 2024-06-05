@@ -61,3 +61,26 @@
   font-display: swap;
   font-style: normal;
 }
+@font-face {
+  font-family: 'Times Dot';
+  src: url('/Fonts/timesDot/TimesDot.woff') format('woff');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Times Dot';
+  src: url('/Fonts/timesDot/TimesDotBol.woff') format('woff');
+  font-style: normal;
+  font-weight: bold;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Times Dot';
+  src: url('/Fonts/timesDot/TimesDotItalic.woff') format('woff');
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+}
