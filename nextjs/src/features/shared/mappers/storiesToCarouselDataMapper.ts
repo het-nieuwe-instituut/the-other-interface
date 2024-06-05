@@ -1,4 +1,10 @@
-import { ComponentModulesImage, Maybe, StoryEntity } from 'src/generated/graphql'
+import {
+  ComponentModulesImage,
+  Maybe,
+  StoriesRelationForRecordQuery,
+  StoryEntity,
+  StoryMetaByIdQuery,
+} from 'src/generated/graphql'
 
 export type StoryImageInfo = {
   url: string | undefined
@@ -10,7 +16,27 @@ export type StoryImageInfo = {
 }
 
 export const storiesToCarouselDataMapper = (
-  relatedStories: StoryEntity[] | undefined | null
+  relatedStories:
+    | NonNullable<StoriesRelationForRecordQuery['zoomLevel3StoriesRelationsForRecord']>['stories']
+    | NonNullable<
+        NonNullable<
+          NonNullable<StoryMetaByIdQuery['storyMetaByLocale']['data']>['attributes']
+        >['child_stories']
+      >['data']
+    | NonNullable<
+        NonNullable<
+          NonNullable<StoryMetaByIdQuery['storyMetaByLocale']['data']>['attributes']
+        >['siblings']
+      >
+    | NonNullable<
+        NonNullable<
+          NonNullable<
+            NonNullable<
+              NonNullable<StoryMetaByIdQuery['storyMetaByLocale']['data']>['attributes']
+            >['parent_story']
+          >
+        >['data']
+      >[]
 ): StoryImageInfo[] | undefined => {
   const mappedStories = relatedStories
     ?.flatMap(story => {

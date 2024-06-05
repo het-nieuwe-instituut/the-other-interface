@@ -1,3 +1,8 @@
+import {
+  ImageCarousel,
+  ImageCarouselItem,
+} from '@/features/ui/components/image-carousel/ImageCarousel'
+import { imageCarouselDefaultSlidesMapper } from '@/features/ui/components/image-carousel/mappers'
 import { ImageWithCaption } from '@/features/ui/components/image-with-caption/ImageWithCaption'
 import { ImageWithCaptionLink } from '@/features/ui/components/image-with-caption/ImageWithCaptionLink'
 import { Title } from '@/features/ui/components/title/Title'
@@ -20,11 +25,6 @@ import { Subtitle } from '../../ui/components/subtitle/Subtitle'
 import { GridModule } from '../components/GridModule/GridModule'
 import { Pullquote } from '../components/Pullquote/Pullquote'
 import { CarouselModule } from '../components/carousels/Carousel/Carousel'
-import {
-  ImageCarousel,
-  ImageCarouselItem,
-} from '@/features/ui/components/image-carousel/ImageCarousel'
-import { calculateImagePropotions } from '../helpers/modulesHelpers'
 
 interface Props {
   components: DynamicComponents
@@ -46,7 +46,7 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
   return (
     <div
       className={cn(
-        'max-w-[90em] mx-auto px-6 pt-0 flex flex-col gap-[40px]',
+        ' px-6 pt-0 flex flex-col gap-[40px]',
         isStoryPage && 'px-0',
         hasComponents && 'pt-10'
       )}
@@ -119,31 +119,20 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
           if (component?.__typename === 'ComponentModulesImageCarousel') {
             return (
               <ImageCarousel
-                getSlidesConfiguration={(maxSlideWidth: number) => {
-                  if (maxSlideWidth === 0) {
-                    return []
-                  }
-                  const imageHeight = 600
-
-                  const slides =
-                    component.images?.data?.map(current => {
-                      const attributes = current?.attributes
-                      if (!attributes) return { size: 0, spacing: 0 }
-                      const margin = attributes.caption ? -20 : 0
-                      const calculateWidth = calculateImagePropotions(
-                        attributes?.width || 1,
-                        attributes?.height || 1,
-                        imageHeight,
-                        maxSlideWidth
-                      ).width
-                      return { size: (calculateWidth + margin) / maxSlideWidth, spacing: 0 }
-                    }) ?? []
-
-                  return slides
-                }}
+                getSlidesConfiguration={max =>
+                  !component.images?.data
+                    ? []
+                    : imageCarouselDefaultSlidesMapper(component.images.data, {
+                        maxSlideWidth: max,
+                        getHeight: image => image.attributes?.height ?? 0,
+                        getWidth: image => image.attributes?.width ?? 0,
+                        getCaption: image => image.attributes?.caption ?? undefined,
+                      })
+                }
               >
                 {component.images?.data?.map(item => {
                   const attributes = item?.attributes
+
                   if (!attributes || !attributes.height || !attributes.width) {
                     return null
                   }
@@ -151,7 +140,7 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
                     <ImageCarouselItem
                       key={item.id}
                       src={attributes.url}
-                      // TODO: add alt text instead of captio
+                      // TODO: add alt text instead of caption
                       alt={attributes.caption ?? ''}
                       width={attributes.width}
                       height={attributes.height}

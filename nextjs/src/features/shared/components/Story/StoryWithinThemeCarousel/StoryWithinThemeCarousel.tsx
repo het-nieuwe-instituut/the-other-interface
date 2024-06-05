@@ -1,21 +1,70 @@
 'use client'
-import { Box, Text } from '@chakra-ui/react'
-import { usePresenter } from './usePresenter'
-import { ImageCarousel } from '@/features/modules/components/carousels/ImageCarousel/ImageCarousel'
+import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
+import { useStoriesRelatedByTheme } from '@/features/shared/hooks/queries/useStoriesRelationWithinTheme'
+import { useLocale } from '@/features/shared/hooks/useLocale'
+import { storiesToCarouselDataMapper } from '@/features/shared/mappers/storiesToCarouselDataMapper'
+import { CATEGORIES } from '@/features/shared/utils/categories'
+import {
+  ImageCarousel,
+  ImageCarouselItem,
+} from '@/features/ui/components/image-carousel/ImageCarousel'
+import { imageCarouselDefaultSlidesMapper } from '@/features/ui/components/image-carousel/mappers'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
+import useTranslation from 'next-translate/useTranslation'
+import { useParams } from 'next/navigation'
+import { useRouter } from 'next/router'
 
 export const StoryWithinThemeCarousel = () => {
-  const { stories, tStories, handleRedirect } = usePresenter()
+  const params = useParams()
+  const id = params?.id as string
+  const lang = useLocale()
 
+  const { data } = useStoriesRelatedByTheme(id)
+  const { t: tStories } = useTranslation('stories')
+
+  const stories = storiesToCarouselDataMapper(data?.storiesRealtedWithinTheme?.stories)
   return (
-    <Box>
+    <div>
       {stories && stories.length > 0 && (
         <>
-          <Text textStyle={'h1'} mb={4}>
+          <h1 className={TypographyVariants({ impact: 'lg', className: 'mb-4' })}>
             {tStories('moreOnTheme')} ({stories.length})
-          </Text>
-          <ImageCarousel images={stories} onItemClick={handleRedirect} />
+          </h1>
+
+          <ImageCarousel
+            getSlidesConfiguration={max =>
+              !stories
+                ? []
+                : imageCarouselDefaultSlidesMapper(stories, {
+                    maxSlideWidth: max,
+                    getHeight: story => story.height ?? 0,
+                    getWidth: story => story.width ?? 0,
+                    getCaption: story => story.description ?? undefined,
+                  })
+            }
+          >
+            {stories.map(item => {
+              let href = `/detail/${CATEGORIES.stories}/${id}`
+              href = addLocaleToUrl(href, lang)
+
+              if (!item || !item.height || !item.width || !item.url) {
+                return null
+              }
+              return (
+                <ImageCarouselItem
+                  href={href}
+                  key={item.id}
+                  src={item.url}
+                  alt={item.description ?? ''}
+                  width={item.width}
+                  height={item.height}
+                  caption={item.description ?? undefined}
+                />
+              )
+            }) ?? []}
+          </ImageCarousel>
         </>
       )}
-    </Box>
+    </div>
   )
 }

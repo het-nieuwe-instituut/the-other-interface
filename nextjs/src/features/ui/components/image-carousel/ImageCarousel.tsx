@@ -11,6 +11,7 @@ import { WebOptions } from 'keen-slider'
 import { cn } from '../../utils/cn'
 import { ThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
 import { calculateImagePropotions } from '@/features/modules/helpers/modulesHelpers'
+import { ImageWithCaptionLink } from '../image-with-caption/ImageWithCaptionLink'
 
 interface ImageCarouselProps {
   children: Array<ReactElement<ImageWithCaptionProps> | null>
@@ -71,10 +72,10 @@ export const ImageCarousel = ({ children, getSlidesConfiguration }: ImageCarouse
 const IMAGE_HEIGHT = 600
 
 export const ImageCarouselItem = (
-  props: ImageWithCaptionProps & { height: number; width: number }
+  props: ImageWithCaptionProps & { height: number; width: number; href?: string }
 ) => {
   const { instanceSize } = useContext(ImageCarouselContext)
-  const { width: originalWidth, height: originalHeight, caption } = props
+  const { width: originalWidth, height: originalHeight, caption, href } = props
   const { width, height } = calculateImagePropotions(
     originalWidth ?? 0,
     originalHeight,
@@ -87,13 +88,24 @@ export const ImageCarouselItem = (
       className="flex flex-col keen-slider__slide h-[var(--image-carousel-height)] pr-4"
       style={{ width, height }}
     >
-      <ImageWithCaption
-        {...props}
-        width={width}
-        height={height}
-        caption={caption}
-        captionClassname="line-clamp-2"
-      />
+      {href ? (
+        <ImageWithCaptionLink
+          {...props}
+          href={href}
+          width={width}
+          height={height}
+          caption={caption}
+          captionClassname="line-clamp-2"
+        />
+      ) : (
+        <ImageWithCaption
+          {...props}
+          width={width}
+          height={height}
+          caption={caption}
+          captionClassname="line-clamp-2"
+        />
+      )}
     </div>
   )
 }
