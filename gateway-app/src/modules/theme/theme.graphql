@@ -79,7 +79,7 @@ fragment ThemeFragmentWithHighlightedStories on ThemeEntity {
     }
     highlightedStories {
       data {
-        ...HighlightedStoryFragment
+        ...StoryFragment
       }
     }
     createdAt
