@@ -66,10 +66,12 @@ export class HighlightedHomepageThemeEntityResolver {
 
     return {
       pagination: {
-        page: 1, // this is to maintain the meta data structure
+        page: paginationArgs?.page, // this is to maintain the meta data structure
         total: res.homepage?.data?.attributes?.highlightedThemes?.data.length,
-        pageCount: res.homepage?.data?.attributes?.highlightedThemes?.data.length,
-        pageSize: 1, // this is to maintain the meta data structure
+        pageCount:
+          (res.homepage?.data?.attributes?.highlightedThemes?.data.length || 0) /
+          (paginationArgs?.pageSize || 1),
+        pageSize: paginationArgs?.pageSize, // this is to maintain the meta data structure
       },
     }
   }
