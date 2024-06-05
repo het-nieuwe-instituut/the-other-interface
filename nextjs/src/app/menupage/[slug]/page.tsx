@@ -3,6 +3,19 @@ import { MenupageContainer } from '@/features/pages/containers/MenupageContainer
 import { draftMode } from 'next/headers'
 import { PublicationState } from '@/features/shared/types/enums'
 import { getLocaleFromParams } from '@/features/shared/helpers/getLocaleFromParams'
+import { PageProps } from '.next/types/app/page'
+import { getMetaDataTranslations } from 'src/getMetaDataTranslations'
+import { Metadata } from 'next'
+
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+  const { searchParams } = props
+  const lang = searchParams.lang as string
+  const metaData = getMetaDataTranslations(lang)
+
+  return {
+    title: metaData.metaTitle,
+  }
+}
 
 export default async function Page({
   params,

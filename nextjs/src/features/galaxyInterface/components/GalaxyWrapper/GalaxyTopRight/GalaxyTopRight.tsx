@@ -1,46 +1,59 @@
-'usc client'
-import { Flex, Link } from '@chakra-ui/react'
-import { Fragment } from 'react'
+'use client'
 import { LOCALES } from '@/features/shared/constants/locales'
+import NextLink from 'next/link'
+import { Fragment } from 'react'
 
 import { MenuButton } from '../../../../shared/components/MenuButton/MenuButton'
-import { usePresenter } from './usePresenter'
 
 import { State } from '@/features/shared/configs/store'
+import { useLocale } from '@/features/shared/hooks/useLocale'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
+import { cn } from '@/features/ui/utils/cn'
+import { usePathname } from 'next/navigation'
 import { useSelector } from 'react-redux'
-import { getLanguageToggleColor } from './getLanguageToggleColor'
 
 export const GalaxyTopRight: React.FC = () => {
-  const { changeLanguage, lang } = usePresenter()
   const isMenuOpen = useSelector((state: State) => state.shared.isMenuOpen)
+  const pathname = usePathname()
+  const lang = useLocale()
 
   return (
-    <Flex alignItems={'center'}>
-      <Flex flexDirection={'row'} alignItems={'center'} justifyContent={'center'}>
+    <div className="flex items-center">
+      <div className="flex-row items-center justify-center">
         {LOCALES.map(locale => {
+          if (!pathname) {
+            return null
+          }
+          const url = new URL(process.env.NEXT_PUBLIC_URL + pathname)
+          url.searchParams.set('lang', locale)
+
           return (
             <Fragment key={locale}>
-              <Link
-                href={'/'}
-                variant={isMenuOpen ? 'navigation' : 'navigationOnTopOfTheGalaxy'}
-                cursor="pointer"
-                whiteSpace={'nowrap'}
-                textOverflow={'ellipsis'}
-                overflow={'hidden'}
-                textStyle={'socialLarge.xl'}
-                mr={'10px'}
-                onClick={e => {
-                  changeLanguage(e, locale)
-                }}
-                color={getLanguageToggleColor(isMenuOpen, lang !== locale)}
+              <NextLink
+                className={cn(
+                  'truncate mr-[10px]',
+                  TypographyVariants({ social: 'lg' }),
+                  isMenuOpen &&
+                    cn(
+                      'hover:text-pink-60 disabled:text-pink-50',
+                      lang !== locale ? 'text-pink-60' : 'text-pink-100'
+                    ),
+                  !isMenuOpen &&
+                    cn(
+                      'hover:text-blue-60 disabled:text-blue-50',
+                      lang !== locale ? 'text-blue-50' : ' text-blue-100'
+                    )
+                )}
+                href={url}
+                locale={locale}
               >
                 {locale.toUpperCase()}
-              </Link>
+              </NextLink>
             </Fragment>
           )
         })}
-      </Flex>
+      </div>
       <MenuButton />
-    </Flex>
+    </div>
   )
 }
