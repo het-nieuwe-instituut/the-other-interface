@@ -11,7 +11,7 @@ export default function BaseElementWrapper() {
     <>
       <>
         <Navigation menupages={data} />
-        <Footer menupages={data} />
+        <Footer />
       </>
     </>
   )

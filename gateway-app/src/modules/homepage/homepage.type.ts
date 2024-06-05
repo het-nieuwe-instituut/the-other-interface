@@ -9,7 +9,7 @@ import { ComponentModulesPullquote } from '../strapi/components/modules/pullQuot
 import { ComponentModulesSubtitle } from '../strapi/components/modules/subtitle'
 import { ComponentModulesTextModule } from '../strapi/components/modules/textModule'
 import { ComponentModulesTitleModule } from '../strapi/components/modules/titleModule'
-import { Error } from '../strapi/shared-types'
+import { Error, ResponseCollectionMeta } from '../strapi/shared-types'
 import { StoryWithoutRelationsRelationResponseCollection } from '../story/story.type'
 import { ThemeRelationResponseCollection } from '../theme/theme.type'
 
@@ -68,12 +68,6 @@ export class HighlightedHomepageStoryEntity {
 }
 
 @ObjectType()
-export class HighlightedHomepageThemeEntityResponse {
-  @Field(() => [HighlightedHomepageThemeEntity])
-  public data: HighlightedHomepageThemeEntity[]
-}
-
-@ObjectType()
 export class HighlightedHomepageThemes {
   @Field(() => ThemeRelationResponseCollection, { nullable: true })
   public highlightedThemes?: ThemeRelationResponseCollection
@@ -86,6 +80,15 @@ export class HighlightedHomepageThemeEntity {
 
   @Field(() => ID, { nullable: true })
   public id?: string
+}
+
+@ObjectType()
+export class HighlightedHomepageThemeEntityResponse {
+  @Field(() => HighlightedHomepageThemeEntity)
+  public data: HighlightedHomepageThemeEntity // had to remove []
+
+  @Field(() => ResponseCollectionMeta, { nullable: true })
+  public meta?: ResponseCollectionMeta // added
 }
 
 @ObjectType()
