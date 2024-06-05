@@ -43,17 +43,17 @@ export const GalaxyTopRight: React.FC = () => {
             <Fragment key={locale}>
               <NextLink
                 className={cn(
-                  'truncate mr-[10px]',
+                  'truncate mr-[10px] transition-colors hover:border-b-transparent',
                   TypographyVariants({ social: 'lg' }),
                   isMenuOpen &&
                     cn(
-                      'hover:text-pink-50 disabled:text-black-20',
+                      'hover:text-pink-60 disabled:text-black-20 active:text-blue-100 active:bg-pink-100',
                       lang !== locale ? 'text-pink-50' : 'text-pink-100',
                       lang === locale && 'border-b border-solid border-current'
                     ),
                   !isMenuOpen &&
                     cn(
-                      'hover:text-blue-50 disabled:text-black-20',
+                      'hover:text-blue-50 disabled:text-black-20  active:bg-blue-100 active:text-pink-100',
                       lang !== locale ? 'text-blue-50' : ' text-blue-100',
                       lang === locale && 'border-b border-solid border-current'
                     )
