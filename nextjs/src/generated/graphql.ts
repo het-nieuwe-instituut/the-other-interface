@@ -2001,7 +2001,6 @@ export type Zoom3RelationsFragmentFragment = { __typename?: 'ZoomLevel3Relations
 
 export type HighlightedHomepageThemesQueryVariables = Exact<{
   pagination?: InputMaybe<PaginationArg>;
-  totalPagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<Scalars['String']>;
   locale: Scalars['String'];
 }>;
@@ -2822,7 +2821,7 @@ export const Zoom3RelationsFragmentFragmentDoc = gql`
 }
     `;
 export const HighlightedHomepageThemesDocument = gql`
-    query highlightedHomepageThemes($pagination: PaginationArg, $totalPagination: PaginationArg, $publicationState: String, $locale: String!) {
+    query highlightedHomepageThemes($pagination: PaginationArg, $publicationState: String, $locale: String!) {
   highlightedHomepageThemes(
     paginationArgs: $pagination
     publicationState: $publicationState
@@ -2838,7 +2837,7 @@ export const HighlightedHomepageThemesDocument = gql`
       }
     }
     meta(
-      paginationArgs: $totalPagination
+      paginationArgs: $pagination
       publicationState: $publicationState
       locale: $locale
     ) {

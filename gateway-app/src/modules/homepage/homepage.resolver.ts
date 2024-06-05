@@ -58,7 +58,10 @@ export class HighlightedHomepageThemeEntityResolver {
       publicationState,
       locale,
       localeStr: locale,
-      highlightedThemesPaginationArgs: paginationArgs,
+      highlightedThemesPaginationArgs: {
+        page: 1,
+        pageSize: 100000,
+      },
     })
 
     return {

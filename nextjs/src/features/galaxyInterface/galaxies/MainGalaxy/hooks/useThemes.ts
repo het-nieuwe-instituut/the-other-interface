@@ -25,7 +25,6 @@ export function useThemesQuery(page: number) {
     return await api?.highlightedHomepageThemes({
       locale: lang,
       pagination: { page, pageSize: 1 },
-      totalPagination: { start: 0, limit: 1000 },
       publicationState: isDraftMode ? PublicationState.Preview : PublicationState.Live,
     })
   }
