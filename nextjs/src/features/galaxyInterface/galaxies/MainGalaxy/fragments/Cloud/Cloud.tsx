@@ -36,10 +36,21 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
       <Tooltip
         label={
           <>
-            <Text fontFamily={'Social'} fontSize={'12px'} fontWeight={'700'}>
+            <Text
+              fontFamily={'Social'}
+              fontSize={'14px'}
+              fontWeight={'700'}
+              paddingBottom={'4px'}
+              color={'pinkAlpha.100'}
+            >
               {hoverTitleTranslations[category]}
             </Text>
-            <Text fontFamily={'Social'} fontSize={'12px'} fontWeight={'400'}>
+            <Text
+              fontFamily={'Social'}
+              fontSize={'14px'}
+              fontWeight={'400'}
+              color={'pinkAlpha.100'}
+            >
               {hoverTranslations[category]}
             </Text>
           </>
