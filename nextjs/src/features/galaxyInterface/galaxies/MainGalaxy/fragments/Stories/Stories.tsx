@@ -43,8 +43,7 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
       <Grid
         position="absolute"
         top="13%"
-        right="18%"
-        maxW={'936px'}
+        right="18vw"
         w="65vw"
         h="55%"
         templateColumns="repeat(4, 1fr)"
@@ -69,7 +68,7 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
       <svg
         ref={svgRef}
         style={{
-          position: 'fixed',
+          position: 'absolute',
           top: 0,
           left: 0,
           width: '100%',
@@ -81,14 +80,12 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
       <Grid
         position="absolute"
         top="13%"
-        left={'50%'}
-        transform={'translateX(-50%)'}
+        right="18vw"
         w="65vw"
         h="55%"
         templateColumns="repeat(4, 1fr)"
         templateRows="repeat(2, 1fr)"
         gap="20px"
-        maxW={'936px'}
         css={{
           animation: isNextStoriesEmpty ? 'none' : `${nextPageFadeIn} 300ms linear`,
           zIndex: 10,
