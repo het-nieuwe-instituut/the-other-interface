@@ -5,6 +5,7 @@ import { Metadata } from 'next'
 import { draftMode } from 'next/headers'
 import { getMetaDataTranslations } from 'src/getMetaDataTranslations'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function generateMetadata(props: any): Promise<Metadata> {
   const { searchParams } = props
   const lang = searchParams.lang as string
