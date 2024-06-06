@@ -3,6 +3,19 @@ import { MenupageContainer } from '@/features/pages/containers/MenupageContainer
 import { draftMode } from 'next/headers'
 import { PublicationState } from '@/features/shared/types/enums'
 import { getLocaleFromParams } from '@/features/shared/helpers/getLocaleFromParams'
+import { getMetaDataTranslations } from 'src/getMetaDataTranslations'
+import { Metadata } from 'next'
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function generateMetadata(props: any): Promise<Metadata> {
+  const { searchParams } = props
+  const lang = searchParams.lang as string
+  const metaData = getMetaDataTranslations(lang)
+
+  return {
+    title: metaData.metaTitle,
+  }
+}
 
 export default async function Page({
   params,

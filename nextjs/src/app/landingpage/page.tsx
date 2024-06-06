@@ -6,11 +6,24 @@ import { PublicationState } from '@/features/shared/types/enums'
 import { HomepageQuery, LandingpageBySlugQuery } from 'src/generated/graphql'
 import { Locale } from 'src/generated/graphql'
 import { ReduxSearchSync } from '@/features/shared/components/Redux/ReduxSearchSync'
+import { getMetaDataTranslations } from 'src/getMetaDataTranslations'
+import { Metadata } from 'next'
 
 export type HomeOrLadingType =
   | HomepageQuery['homepage']['data']['attributes']
   | LandingpageBySlugQuery['landingpages']['data'][0]['attributes']
   | null
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function generateMetadata(props: any): Promise<Metadata> {
+  const { searchParams } = props
+  const lang = searchParams.lang as string
+  const metaData = getMetaDataTranslations(lang)
+
+  return {
+    title: metaData.metaTitle,
+  }
+}
 
 export default async function Page({
   searchParams,

@@ -1,8 +1,8 @@
 import { createUnionType, Field, ID, InputType, ObjectType } from '@nestjs/graphql'
 import { PublicationState } from '../../generated/strapi-sdk'
-import { ComponentModulesGridModule } from '../strapi/components/modules/gridModule'
 import { ComponentModulesButtonsModule } from '../strapi/components/modules/buttonsModule'
 import { ComponentModulesCarousel } from '../strapi/components/modules/carousel'
+import { ComponentModulesGridModule } from '../strapi/components/modules/gridModule'
 import { ComponentModulesImageCarousel } from '../strapi/components/modules/imageCarousel'
 import { ComponentModulesImage } from '../strapi/components/modules/imageModule'
 import { ComponentModulesPullquote } from '../strapi/components/modules/pullQuote'
@@ -10,7 +10,6 @@ import { ComponentModulesSubtitle } from '../strapi/components/modules/subtitle'
 import { ComponentModulesTextModule } from '../strapi/components/modules/textModule'
 import { ComponentModulesTitleModule } from '../strapi/components/modules/titleModule'
 import { Error, ResponseCollectionMeta } from '../strapi/shared-types'
-import { StoryWithoutRelationsRelationResponseCollection } from '../story/story.type'
 import { ThemeRelationResponseCollection } from '../theme/theme.type'
 
 @ObjectType()
@@ -25,7 +24,7 @@ export class Homepage {
   public Title?: string
 
   @Field(() => [HomepageComponentsDynamicZone], { nullable: true })
-  public components?: (typeof HomepageComponentsDynamicZone)[]
+  public components?: typeof HomepageComponentsDynamicZone[]
 
   @Field({ nullable: true })
   public createdAt?: Date
