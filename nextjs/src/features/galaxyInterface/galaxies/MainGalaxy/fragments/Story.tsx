@@ -1,19 +1,17 @@
 import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
-import { Box, Text, GridItem, Flex } from '@chakra-ui/react'
+import { Box, Flex, GridItem, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/navigation'
 
-import { HOMEPAGE_Z_INDEXES } from './constants'
-import { PositionedStory } from './types'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
-import { useCallback } from 'react'
-import { Tooltip } from '@/features/modules/components/ToolTip/Tooltip'
+import { useZoomHoverRecordResultQuery } from '@/features/shared/hooks/queries/useZoomHoverRecordResultQuery'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { useLocale } from '@/features/shared/hooks/useLocale'
 import { CATEGORIES } from '@/features/shared/utils/categories'
-import { useZoomHoverRecordResultQuery } from '@/features/shared/hooks/queries/useZoomHoverRecordResultQuery'
 import { ReadMoreTooltip } from '@/features/ui/components/tooltip/ReadMoreTooltip'
-import { RecordText } from '../../CategoryGalaxy/fragments/RecordText'
 import { cn } from '@/features/ui/utils/cn'
+import { useCallback } from 'react'
+import { HOMEPAGE_Z_INDEXES } from './constants'
+import { PositionedStory } from './types'
 
 type Props = {
   story: PositionedStory
@@ -23,7 +21,6 @@ type Props = {
 
 export const Story: React.FC<Props> = ({ story, isMainGrid, onLoad }) => {
   const router = useRouter()
-  const { t } = useTypeSafeTranslation('homepage')
   const { t: hoverT } = useTypeSafeTranslation('category')
   const lang = useLocale()
 
