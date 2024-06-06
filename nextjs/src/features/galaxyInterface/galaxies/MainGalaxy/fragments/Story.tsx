@@ -9,6 +9,11 @@ import { useCallback } from 'react'
 import { Tooltip } from '@/features/modules/components/ToolTip/Tooltip'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { useLocale } from '@/features/shared/hooks/useLocale'
+import { CATEGORIES } from '@/features/shared/utils/categories'
+import { useZoomHoverRecordResultQuery } from '@/features/shared/hooks/queries/useZoomHoverRecordResultQuery'
+import { ReadMoreTooltip } from '@/features/ui/components/tooltip/ReadMoreTooltip'
+import { RecordText } from '../../CategoryGalaxy/fragments/RecordText'
+import { cn } from '@/features/ui/utils/cn'
 
 type Props = {
   story: PositionedStory
@@ -19,9 +24,16 @@ type Props = {
 export const Story: React.FC<Props> = ({ story, isMainGrid, onLoad }) => {
   const router = useRouter()
   const { t } = useTypeSafeTranslation('homepage')
+  const { t: hoverT } = useTypeSafeTranslation('category')
   const lang = useLocale()
 
   const { id, title, image, position, grid } = story
+
+  const {
+    data,
+    isError: isLoadingHoverError,
+    isLoading: isLoadingHover,
+  } = useZoomHoverRecordResultQuery({ id, category: CATEGORIES.stories })
 
   const isClickable = !!title
 
@@ -40,53 +52,66 @@ export const Story: React.FC<Props> = ({ story, isMainGrid, onLoad }) => {
 
   return (
     <GridItem position="relative" css={{ ...grid }}>
-      <Tooltip
-        label={
-          <Text fontFamily={'Social'} fontSize={'12px'} fontWeight={'400'}>
-            {t('hoverstory')}
-          </Text>
-        }
+      <ReadMoreTooltip
+        isLoading={isLoadingHover}
+        error={isLoadingHoverError ? hoverT('couldNotFetchHover') : ''}
+        place={'bottom'}
+        isEmpty={!data?.description && !data?.title}
+        title={data?.title ?? undefined}
+        description={data?.description ?? undefined}
+        className="size-full"
       >
-        <Flex
-          position="absolute"
-          style={{ ...position }}
-          w={'154px'}
-          h={'198px'}
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-          gap="5px"
-          zIndex={HOMEPAGE_Z_INDEXES.STORY}
-          cursor={isClickable ? 'pointer' : 'default'}
+        <button
+          tabIndex={0}
+          className={cn(
+            'ease-in-out duration-[.4] transition-all absolute flex size-4/5 cursor-pointer flex-col items-center justify-center gap-[2px] hover:scale-105',
+            'use-calculate-line-element',
+            'group-hover-blur-item'
+          )}
           onClick={handleClick}
-          _hover={isClickable ? { transform: 'scale(1.05)' } : undefined}
-          transition="all .4s ease-in-out"
-          className={isMainGrid ? 'story-grid-item' : ''}
+          style={{ ...position }}
         >
-          <ResponsiveImage
-            src={image}
-            alt={title}
-            className="max-h-[calc(100%-2vw-5px)]" // where 2vw is a title's line height, 5px is gap
-            size={'12vw'}
-            style={{
-              flex: `1 1 calc(100% - 2vw - 5px)`,
-            }}
-            onLoad={handleImageLoad}
-          />
-          <Box w="100%" flex="1" mt={2}>
-            <Text
-              align="center"
-              isTruncated
-              textStyle="headingTimesLarge.md"
-              color="blueAlpha.100"
-              fontSize={{ base: '12px', lg: '20px' }}
-              lineHeight={{ base: '12px', lg: '21px' }}
-            >
-              {title}
-            </Text>
-          </Box>
-        </Flex>
-      </Tooltip>
+          <Flex
+            position="absolute"
+            style={{ ...position }}
+            w={'154px'}
+            h={'198px'}
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+            gap="5px"
+            zIndex={HOMEPAGE_Z_INDEXES.STORY}
+            cursor={isClickable ? 'pointer' : 'default'}
+            onClick={handleClick}
+            _hover={isClickable ? { transform: 'scale(1.05)' } : undefined}
+            transition="all .4s ease-in-out"
+            className={isMainGrid ? 'story-grid-item' : ''}
+          >
+            <ResponsiveImage
+              src={image}
+              alt={title}
+              className="max-h-[calc(100%-2vw-5px)]" // where 2vw is a title's line height, 5px is gap
+              size={'12vw'}
+              style={{
+                flex: `1 1 calc(100% - 2vw - 5px)`,
+              }}
+              onLoad={handleImageLoad}
+            />
+            <Box w="100%" flex="1" mt={2}>
+              <Text
+                align="center"
+                isTruncated
+                textStyle="headingTimesLarge.md"
+                color="blueAlpha.100"
+                fontSize={{ base: '12px', lg: '20px' }}
+                lineHeight={{ base: '12px', lg: '21px' }}
+              >
+                {title}
+              </Text>
+            </Box>
+          </Flex>
+        </button>
+      </ReadMoreTooltip>
     </GridItem>
   )
 }
