@@ -46,21 +46,23 @@ export const Footer = () => {
             <div className="grid md:grid-cols-1 lg:grid-cols-2">
               <div className="pb-8">
                 <div>
-                  <NavLinkButton href={'#'} className="mb-1">
+                  <NavLinkButton href={'#'} className="mb-2" variant={'footerPrimary'}>
                     Exhibitions and activities <Icon className="size-5" />
                   </NavLinkButton>
-                  <NavLinkButton href={'#'} className="mb-1">
+                  <NavLinkButton href={'#'} className="mb-2" variant={'footerPrimary'}>
                     Browse our web magazine <Icon className="size-5" />
                   </NavLinkButton>
-                  <NavLinkButton href={'#'}>
+                  <NavLinkButton href={'#'} variant={'footerPrimary'}>
                     Subscribe to our newsletter <Icon className="size-5" />
                   </NavLinkButton>
                 </div>
                 <div className="pt-8">
-                  <NavLinkButton href={'#'} className="mb-1">
+                  <NavLinkButton href={'#'} className="mb-2" variant={'footerPrimary'}>
                     Colophon
                   </NavLinkButton>
-                  <NavLinkButton href={'#'}>Disclaimer</NavLinkButton>
+                  <NavLinkButton href={'#'} variant={'footerPrimary'}>
+                    Disclaimer
+                  </NavLinkButton>
                 </div>
               </div>
               <div>
