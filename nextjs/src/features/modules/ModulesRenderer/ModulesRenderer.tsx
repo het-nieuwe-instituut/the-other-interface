@@ -1,12 +1,9 @@
-import { ImageWithCaption } from '@/features/ui/components/image-with-caption/ImageWithCaption'
-import { ImageWithCaptionLink } from '@/features/ui/components/image-with-caption/ImageWithCaptionLink'
 import { Title } from '@/features/ui/components/title/Title'
 import { cn } from '@/features/ui/utils/cn'
 import { StandaloneLink } from 'src/app/ks/link/StandaloneLink'
 import {
   ComponentModulesCarousel,
   ComponentModulesGridModule,
-  ComponentModulesImage,
   ComponentModulesImageCarousel,
   HomepageComponentsDynamicZone,
   HomepageQuery,
@@ -19,6 +16,7 @@ import { Paragraph } from '../../ui/components/Paragraph/Paragraph'
 import { ButtonGroup, LinkButtonGroupItem } from '../../ui/components/button-group/component'
 import { Subtitle } from '../../ui/components/subtitle/Subtitle'
 import { GridModule } from '../components/GridModule/GridModule'
+import { ImageModuleWrapper } from '../components/ImageModuleWrapper'
 import { Pullquote } from '../components/Pullquote/Pullquote'
 import { CarouselModule } from '../components/carousels/Carousel/Carousel'
 import { ImageCarousel } from '../components/carousels/ImageCarousel/ImageCarousel'
@@ -75,41 +73,10 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
           }
 
           if (component?.__typename === 'ComponentModulesImage') {
-            const src = component.image?.data?.attributes?.url
-            const alt = component.alt_text
-            const height = component.image?.data?.attributes?.height
-            const width = component.image?.data?.attributes?.width
-            const recordHref = component.triplyRecord
-              ? getPathByTriplyRecord(component.triplyRecord)
-              : undefined
-            const storyHref = component.story
-              ? getPathByStory(component.story.data?.id ?? undefined)
-              : undefined
-
-            if (!src || !alt || !height || !width) {
-              return null
-            }
-            if (recordHref || storyHref) {
-              return (
-                <ImageWithCaptionLink
-                  href={recordHref ?? storyHref ?? ''}
-                  key={keyExtractor(component.id, index, array)}
-                  src={src}
-                  alt={alt}
-                  height={height}
-                  width={width}
-                  caption={component.caption ?? undefined}
-                />
-              )
-            }
             return (
-              <ImageWithCaption
+              <ImageModuleWrapper
                 key={keyExtractor(component.id, index, array)}
-                src={src}
-                alt={alt}
-                height={height}
-                width={width}
-                caption={component.caption ?? undefined}
+                component={component}
               />
             )
           }
@@ -226,20 +193,4 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function keyExtractor(id: string, index: number, array: any[]) {
   return `${id}-${index}-${array.length}`
-}
-
-function getPathByTriplyRecord(triplyRecord: ComponentModulesImage['triplyRecord']) {
-  const type = triplyRecord?.data?.attributes?.type?.toLocaleLowerCase()
-  const recordId = triplyRecord?.data?.attributes?.recordId
-  if (!type || !recordId) {
-    return undefined
-  }
-  return `/detail/${type}/${recordId}`
-}
-
-function getPathByStory(id?: string) {
-  if (!id) {
-    return undefined
-  }
-  return `/detail/stories/${id}`
 }
