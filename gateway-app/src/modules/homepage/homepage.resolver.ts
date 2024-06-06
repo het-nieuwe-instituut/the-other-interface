@@ -2,11 +2,7 @@ import { Inject } from '@nestjs/common'
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
 import { PublicationState, Sdk } from '../../generated/strapi-sdk'
 import { Locale } from '../util/locale.type'
-import {
-  HighlightedHomepageStoryEntityResponse,
-  HighlightedHomepageThemeEntityResponse,
-  HomepageEntityResponse,
-} from './homepage.type'
+import { HighlightedHomepageThemeEntityResponse, HomepageEntityResponse } from './homepage.type'
 import { PaginationArg } from '../strapi/shared-types'
 
 @Resolver()

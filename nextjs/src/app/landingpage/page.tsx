@@ -3,6 +3,19 @@ import { CloudCategory } from '@/features/shared/utils/categories'
 import initApiServerService from '@/features/shared/utils/initApiServerService'
 import { draftMode } from 'next/headers'
 import { PublicationState } from '@/features/shared/types/enums'
+import { getMetaDataTranslations } from 'src/getMetaDataTranslations'
+import { Metadata } from 'next'
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function generateMetadata(props: any): Promise<Metadata> {
+  const { searchParams } = props
+  const lang = searchParams.lang as string
+  const metaData = getMetaDataTranslations(lang)
+
+  return {
+    title: metaData.metaTitle,
+  }
+}
 
 export default async function Page({
   searchParams,
