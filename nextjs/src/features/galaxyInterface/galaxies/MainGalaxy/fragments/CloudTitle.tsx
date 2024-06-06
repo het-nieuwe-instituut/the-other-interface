@@ -1,10 +1,10 @@
 import { Text } from '@chakra-ui/react'
 import { TranslationKeys } from 'locales/locales'
 import { CloudCategory } from '@/features/shared/utils/categories'
-import { Position } from '@/features/shared/types/position'
+import { CloudPosition } from './types'
 
 interface Props {
-  position: Position
+  position: CloudPosition
   children: Pick<TranslationKeys['homepage'], keyof CloudCategory>
 }
 
