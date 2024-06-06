@@ -153,7 +153,7 @@ export const Link: ComponentStyleConfig = {
       },
 
       _disabled: {
-        color: `${colors.pinkAlpha['60']} !important`,
+        color: `${colors.blackAlpha['20']} !important`,
       },
     },
     navigationDecorative: {
@@ -182,6 +182,9 @@ export const Link: ComponentStyleConfig = {
         borderBottom: 'none',
         textUnderlineOffset: '0.25em',
         textDecoration: 'underline',
+      },
+      _disabled: {
+        color: `${colors.blackAlpha['20']} !important`,
       },
     },
     footer: {
