@@ -48,13 +48,36 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
     people: t('hoverpeople'),
   }
 
+  const hoverTitleTranslations = {
+    publications: t('publications'),
+    archives: t('archives'),
+    objects: t('objects'),
+    people: t('people'),
+  }
+
   return (
     <>
       <Tooltip
         label={
-          <Text fontFamily={'Social'} fontSize={'12px'} fontWeight={'400'}>
-            {hoverTranslations[category]}
-          </Text>
+          <>
+            <Text
+              fontFamily={'Social'}
+              fontSize={'14px'}
+              fontWeight={'700'}
+              paddingBottom={'4px'}
+              color={'pinkAlpha.100'}
+            >
+              {hoverTitleTranslations[category]}
+            </Text>
+            <Text
+              fontFamily={'Social'}
+              fontSize={'14px'}
+              fontWeight={'400'}
+              color={'pinkAlpha.100'}
+            >
+              {hoverTranslations[category]}
+            </Text>
+          </>
         }
         placement={placement.placement}
         xAxis={placement.right}
