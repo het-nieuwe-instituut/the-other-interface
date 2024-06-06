@@ -4,10 +4,9 @@ import initApiServerService from '@/features/shared/utils/initApiServerService'
 import { draftMode } from 'next/headers'
 import { PublicationState } from '@/features/shared/types/enums'
 import { getMetaDataTranslations } from 'src/getMetaDataTranslations'
-import { PageProps } from '.next/types/app/page'
 import { Metadata } from 'next'
 
-export async function generateMetadata(props: PageProps): Promise<Metadata> {
+export async function generateMetadata(props: any): Promise<Metadata> {
   const { searchParams } = props
   const lang = searchParams.lang as string
   const metaData = getMetaDataTranslations(lang)

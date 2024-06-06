@@ -1,4 +1,3 @@
-import { PageProps } from '.next/types/app/page'
 import { DetailpageContainer } from '@/features/pages/containers/DetailpageContainer/DetailpageContainer'
 import { CATEGORIES, Category } from '@/features/shared/utils/categories'
 import { Metadata } from 'next'
@@ -14,7 +13,7 @@ function assertIsCategory(category: string): asserts category is Category {
   }
 }
 
-export async function generateMetadata(props: PageProps): Promise<Metadata> {
+export async function generateMetadata(props: any): Promise<Metadata> {
   const { searchParams } = props
   const lang = searchParams.lang as string
   const metaData = getMetaDataTranslations(lang)
