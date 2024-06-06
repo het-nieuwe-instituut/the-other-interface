@@ -13,10 +13,7 @@ export type CloudPosition = {
   left?: CloudPositionValue
 }
 
-export type CloudSize = {
-  base: `${string}vw`
-  xl: string
-}
+export type CloudSize = `${string}vw`
 
 export type CategoryCloud = {
   title: CloudCategory

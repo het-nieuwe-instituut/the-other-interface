@@ -11,10 +11,7 @@ interface Props {
 export const CloudTitle: React.FC<Props> = ({ position, children }) => (
   <Text
     position="absolute"
-    left={position.left ?? 'auto'}
-    right={position.right ?? 'auto'}
-    top={position.top ?? 'auto'}
-    bottom={position.bottom ?? 'auto'}
+    style={{ ...position }}
     textStyle="headingTimesLarge.lg"
     color="blueAlpha.100"
     pointerEvents={'none'}
