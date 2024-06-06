@@ -68,7 +68,6 @@ export const StaticHeader = () => {
               <Flex mr={'10px'} justifyContent={'center'}>
                 {tNavigation('theNewInstitute')}
               </Flex>
-              <Flex justifyContent={'center'}>{'•'}</Flex>
               <Flex ml={'10px'} justifyContent={'center'}>
                 {tNavigation('collectionPlatform')}
               </Flex>

@@ -1,106 +1,105 @@
 fragment HomepageFragment on Homepage {
-    __typename
-    Title
-    createdAt
-    locale
-    publishedAt
-    updatedAt
-    description
-    components {
-        ... on ComponentModulesTextModule {
-            ...ComponentModulesTextModuleFragment
-        }
-        ... on ComponentModulesImage {
-            ...ComponentModulesImageFragment
-        }
-        ... on ComponentModulesGridModule {
-            ...ComponentModulesGridModuleFragment
-        }
-        ... on ComponentModulesPullquote {
-            ...ComponentModulesPullquoteFragment
-        }
-        ... on ComponentModulesCarousel {
-            ...ComponentModulesCarouselFragment
-        }
-        ... on ComponentModulesSubtitle {
-            ...ComponentModulesSubtitleFragment
-        }
-        ... on ComponentModulesTitleModule {
-            ...ComponentModulesTitleModuleFragment
-        }
-        ... on ComponentModulesImageCarousel {
-            ...ComponentModulesImageCarouselFragment
-        }
-        ... on ComponentModulesButtonsModule {
-            ...ComponentModulesButtonsModuleFragment
-        }
-        ... on Error {
-            ...ErrorFragment
-        }
+  __typename
+  Title
+  createdAt
+  locale
+  publishedAt
+  updatedAt
+  description
+  components {
+    ... on ComponentModulesTextModule {
+      ...ComponentModulesTextModuleFragment
     }
+    ... on ComponentModulesImage {
+      ...ComponentModulesImageFragment
+    }
+    ... on ComponentModulesGridModule {
+      ...ComponentModulesGridModuleFragment
+    }
+    ... on ComponentModulesPullquote {
+      ...ComponentModulesPullquoteFragment
+    }
+    ... on ComponentModulesCarousel {
+      ...ComponentModulesCarouselFragment
+    }
+    ... on ComponentModulesSubtitle {
+      ...ComponentModulesSubtitleFragment
+    }
+    ... on ComponentModulesTitleModule {
+      ...ComponentModulesTitleModuleFragment
+    }
+    ... on ComponentModulesImageCarousel {
+      ...ComponentModulesImageCarouselFragment
+    }
+    ... on ComponentModulesButtonsModule {
+      ...ComponentModulesButtonsModuleFragment
+    }
+    ... on Error {
+      ...ErrorFragment
+    }
+  }
 }
 
 query homepage($publicationState: PublicationState = LIVE, $locale: I18NLocaleCode!) {
-    homepage(publicationState: $publicationState, locale: $locale) {
-        data {
+  homepage(publicationState: $publicationState, locale: $locale) {
+    data {
+      id
+      attributes {
+        ...HomepageFragment
+        localizations {
+          data {
             id
             attributes {
-                ...HomepageFragment
-                localizations {
-                    data {
-                        id
-                        attributes {
-                            ...HomepageFragment
-                        }
-                    }
-                }
+              ...HomepageFragment
             }
+          }
         }
+      }
     }
-}
-
-query highlightedHomepageStories(
-    $publicationState: PublicationState = LIVE
-    $locale: I18NLocaleCode!
-    $localeStr: String!
-    $highlightedStoriesPaginationArgs: PaginationArg
-) {
-    homepage(publicationState: $publicationState, locale: $locale) {
-        data {
-            id
-            attributes {
-                highlightedStories(
-                    filters: { locale: { eq: $localeStr } }
-                    pagination: $highlightedStoriesPaginationArgs
-                ) {
-                    data {
-                        ...StoryWithoutRelationsFragment
-                    }
-                }
-            }
-        }
-    }
+  }
 }
 
 query highlightedHomepageThemes(
-    $publicationState: PublicationState = LIVE
-    $locale: I18NLocaleCode!
-    $localeStr: String!
-    $highlightedThemesPaginationArgs: PaginationArg
+  $publicationState: PublicationState = LIVE
+  $locale: I18NLocaleCode!
+  $localeStr: String!
+  $highlightedThemesPaginationArgs: PaginationArg
 ) {
-    homepage(publicationState: $publicationState, locale: $locale) {
-        data {
-            id
-            attributes {
-                highlightedThemes(
-                    filters: { locale: { eq: $localeStr } }
-                    pagination: $highlightedThemesPaginationArgs
-                ) {
-                    data {
-                        ...ThemeFragment
-                    }
-                }
-            }
+  homepage(publicationState: $publicationState, locale: $locale) {
+    data {
+      id
+      attributes {
+        highlightedThemes(
+          filters: { locale: { eq: $localeStr } }
+          pagination: $highlightedThemesPaginationArgs
+        ) {
+          data {
+            ...ThemeFragmentWithHighlightedStories
+          }
         }
+      }
     }
+  }
+}
+
+query meta(
+  $publicationState: PublicationState = LIVE
+  $locale: I18NLocaleCode!
+  $localeStr: String!
+  $highlightedThemesPaginationArgs: PaginationArg
+) {
+  homepage(publicationState: $publicationState, locale: $locale) {
+    data {
+      attributes {
+        highlightedThemes(
+          filters: { locale: { eq: $localeStr } }
+          pagination: $highlightedThemesPaginationArgs
+        ) {
+          data {
+            id
+          }
+        }
+      }
+    }
+  }
 }
