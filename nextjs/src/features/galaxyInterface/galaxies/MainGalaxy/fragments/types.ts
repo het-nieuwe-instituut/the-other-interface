@@ -1,5 +1,17 @@
 import { CloudCategory } from '@/features/shared/utils/categories'
-import { Position, GridParams } from '@/features/shared/types/position'
+import { GridParams, Position } from '@/features/shared/types/position'
+
+export type CloudPositionValue = {
+  base: `${string}vw` | `${string}vh` | `${string}%` | 0 | `calc(${string})`
+  xl: string
+}
+
+export type CloudPosition = {
+  top?: CloudPositionValue
+  right?: CloudPositionValue
+  bottom?: CloudPositionValue
+  left?: CloudPositionValue
+}
 
 export type CloudSize = {
   base: `${string}vw`
@@ -9,8 +21,8 @@ export type CloudSize = {
 export type CategoryCloud = {
   title: CloudCategory
   size: CloudSize
-  titlePosition: Position
-  cloudPosition: Position
+  titlePosition: CloudPosition
+  cloudPosition: CloudPosition
 }
 
 export type MappedStory = {
