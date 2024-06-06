@@ -59,23 +59,25 @@ export const CategoryGalaxy: React.FC = () => {
   }
 
   return (
-    <div className=" relative flex h-screen w-screen items-center justify-center overflow-hidden px-[25px]">
-      {isSearchModeActive && <BlurOverlay />}
-      {renderMainContent()}
+    <div className={'w-screen bg-pink-100'}>
+      <div className="relative mx-auto flex h-screen w-screen max-w-[1440px] items-center justify-center overflow-hidden px-[25px]">
+        {isSearchModeActive && <BlurOverlay />}
+        {renderMainContent()}
 
-      <GalaxyFooter
-        galaxyPagination={
-          <GalaxyPagination
-            currentPageNumber={currentPageNumber}
-            pageAmount={pageAmount}
-            isResultAmountLoading={isResultAmountLoading}
-            handleLeftClick={decreasePageNumber}
-            handleRightClick={increasePageNumber}
-            isResultEmpty={isResultEmpty}
-            isResultError={isError}
-          />
-        }
-      />
+        <GalaxyFooter
+          galaxyPagination={
+            <GalaxyPagination
+              currentPageNumber={currentPageNumber}
+              pageAmount={pageAmount}
+              isResultAmountLoading={isResultAmountLoading}
+              handleLeftClick={decreasePageNumber}
+              handleRightClick={increasePageNumber}
+              isResultEmpty={isResultEmpty}
+              isResultError={isError}
+            />
+          }
+        />
+      </div>
     </div>
   )
 }

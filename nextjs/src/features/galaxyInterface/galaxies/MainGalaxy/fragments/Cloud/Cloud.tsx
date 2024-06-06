@@ -90,7 +90,10 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
           backgroundImage="url(/images/cloud.svg)"
           backgroundSize="cover"
           backgroundRepeat="no-repeat"
-          style={{ ...cloudPosition }}
+          left={cloudPosition.left ?? 'auto'}
+          right={cloudPosition.right ?? 'auto'}
+          top={cloudPosition.top ?? 'auto'}
+          bottom={cloudPosition.bottom ?? 'auto'}
           borderRadius="50%"
           zIndex={HOMEPAGE_Z_INDEXES.CLOUD}
           cursor="pointer"
