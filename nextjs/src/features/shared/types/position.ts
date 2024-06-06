@@ -1,7 +1,4 @@
-type PositionValue = {
-  base: `${string}vw` | `${string}vh` | `${string}%` | 0 | `calc(${string})`
-  xl: string
-}
+type PositionValue = `${string}vw` | `${string}vh` | `${string}%` | 0 | `calc(${string})`
 
 export type Position = {
   top?: PositionValue
