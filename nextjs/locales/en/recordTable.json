@@ -1,15 +1,15 @@
 {
-  "relatedPublications": "Related publications",
-  "type": "Type",
-  "yearPublished": "Year of publication",
-  "externalSource": "External source",
-  "relatedArchive": "Related archives",
-  "recordType": "Record Type",
-  "objectNumber": "Object number",
-  "archivePeriod": "Period",
-  "realtedPeople": "Related people",
-  "role": "Role",
-  "peoplePeriod": "Period",
-  "realtedObjects": "Related objects",
-  "creationPeriod": "Creation period"
+    "relatedPublications": "Related publications",
+    "type": "Type",
+    "yearPublished": "Year of publication",
+    "externalSource": "External source",
+    "relatedArchive": "Related archives",
+    "recordType": "Record Type",
+    "objectNumber": "Object number",
+    "archivePeriod": "Period",
+    "realtedPeople": "Related people",
+    "role": "Role",
+    "peoplePeriod": "Period",
+    "realtedObjects": "Related objects",
+    "creationPeriod": "Creation period"
 }

@@ -1,15 +1,15 @@
 {
-  "relatedPublications": "Gerelateerde publicaties",
-  "type": "Type",
-  "yearPublished": "Jaar van publicaties",
-  "externalSource": "Externe bron",
-  "relatedArchive": "Gerelateerde archieven",
-  "recordType": "Recordtype",
-  "objectNumber": "Referentienummer",
-  "archivePeriod": "Datering",
-  "realtedPeople": "Gerelateerde personen",
-  "role": "Rol",
-  "peoplePeriod": "Periode",
-  "realtedObjects": "Gerelateerde objecten",
-  "creationPeriod": "Creatie periode"
+    "relatedPublications": "Gerelateerde publicaties",
+    "type": "Type",
+    "yearPublished": "Jaar van publicaties",
+    "externalSource": "Externe bron",
+    "relatedArchive": "Gerelateerde archieven",
+    "recordType": "Recordtype",
+    "objectNumber": "Referentienummer",
+    "archivePeriod": "Datering",
+    "realtedPeople": "Gerelateerde personen",
+    "role": "Rol",
+    "peoplePeriod": "Periode",
+    "realtedObjects": "Gerelateerde objecten",
+    "creationPeriod": "Creatie periode"
 }
