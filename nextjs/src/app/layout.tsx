@@ -49,14 +49,14 @@ function MyApp({ children }: { children: React.ReactNode }) {
             <ThemeProvider>
               <DisableScroll>
                 <MobileOverlayProvider>
-                  <>
+                  <div>
                     <AppHead />
                     <TestMenu />
                     <ReduxDraftModeSync isDraftMode={isEnabled} />
                     {children}
                     <ReactTooltipInitializer />
                     <BaseElementWrapper />
-                  </>
+                  </div>
                 </MobileOverlayProvider>
               </DisableScroll>
             </ThemeProvider>
