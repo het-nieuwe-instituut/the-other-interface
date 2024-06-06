@@ -19,10 +19,10 @@ export const GalaxyTopRight: React.FC = () => {
   const lang = useLocale()
   const hrefs = useMemo(() => {
     return LOCALES.map(locale => {
-      if (!pathname || !process.env.NEXT_PUBLIC_URL || !searchParams) {
+      if (!pathname || !process.env.parsed.NEXT_PUBLIC_URL || !searchParams) {
         return null
       }
-      const url = new URL(pathname, process.env.NEXT_PUBLIC_URL)
+      const url = new URL(pathname, process.env.parsed.NEXT_PUBLIC_URL)
       searchParams.forEach((value, key) => {
         url.searchParams.set(key, value)
       })
