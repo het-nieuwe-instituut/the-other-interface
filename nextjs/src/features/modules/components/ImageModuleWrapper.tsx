@@ -23,7 +23,7 @@ export const ImageModuleWrapper = ({
     : undefined
   console.log(component)
   if (!src || !alt || !height || !width) {
-    return <p> nooooooo</p>
+    return null
   }
 
   if (recordHref || storyHref) {
