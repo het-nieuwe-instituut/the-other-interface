@@ -9,7 +9,6 @@ interface ExternalLinkProps {
   variant?: 'link' | 'download'
   href: LinkButtonProps['href']
   className?: string
-  size?: LinkButtonProps['size']
 }
 
 export const StandaloneLink = ({
@@ -17,20 +16,19 @@ export const StandaloneLink = ({
   variant = 'link',
   className,
   href,
-  size,
 }: ExternalLinkProps) => {
   const Icon = variant === 'download' ? File : ExternalLink
   const isExternal = isExternalURL(href.toString(), process.env.parsed.NEXT_PUBLIC_URL ?? '')
   return (
     <LinkButton
-      href={href}
+      href={variant === 'download' ? `/api/attachmentProxy?filename=${href}` : href}
       className={cn('flex gap-2', className)}
       intent={'tertiary'}
-      size={size}
-      download={variant === 'download'}
+      size={'small'}
+      download={variant === 'download' ? href : undefined}
     >
       {children}
-      {isExternal && <Icon className="size-5" />}
+      {variant === 'link' ? isExternal && <Icon className="size-5" /> : <Icon className="size-5" />}
     </LinkButton>
   )
 }

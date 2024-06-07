@@ -174,7 +174,8 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
               (!component.attachment?.data
                 ? component.url
                 : component.attachment.data?.attributes?.url) ?? undefined
-            const variant = !component.attachment?.data ? 'link' : 'download'
+
+            const variant = component.attachment?.data ? 'download' : 'link'
 
             if (!href) return null
             return (
