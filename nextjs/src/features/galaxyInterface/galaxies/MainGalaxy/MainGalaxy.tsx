@@ -110,8 +110,8 @@ export const MainGalaxy = () => {
 
   return (
     <div className={'w-screen bg-pink-100'}>
+      {isSearchModeActive && <BlurOverlay />}
       <div className="relative mx-auto h-screen w-screen max-w-[1440px]">
-        {isSearchModeActive && <BlurOverlay />}
         {categoryClouds.map(cloud => (
           <Cloud key={cloud.title} cloud={cloud} />
         ))}
