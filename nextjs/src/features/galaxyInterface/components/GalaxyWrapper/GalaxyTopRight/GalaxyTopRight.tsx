@@ -44,7 +44,7 @@ export const GalaxyTopRight: React.FC = () => {
               <NextLink
                 className={cn(
                   'truncate mr-[10px] transition-colors hover:border-b-transparent',
-                  TypographyVariants({ social: 'lg' }),
+                  TypographyVariants({ socialLarge: 'lg' }),
                   isMenuOpen &&
                     cn(
                       'hover:text-pink-60 disabled:text-black-20 active:text-blue-100 active:bg-pink-100',

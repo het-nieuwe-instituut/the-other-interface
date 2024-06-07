@@ -53,7 +53,7 @@ export const ImageWithCaption = ({
         )}
       </div>
       {caption && (
-        <figcaption className={TypographyVariants({ social: 'sm' })}>{caption}</figcaption>
+        <figcaption className={TypographyVariants({ socialLarge: 'sm' })}>{caption}</figcaption>
       )}
     </figure>
   )

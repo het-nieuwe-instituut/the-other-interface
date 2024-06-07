@@ -70,7 +70,7 @@ const Page: NextPage = () => {
                 <p className={TypographyVariants({ impact: 'xl', className: 'font-bold' })}>
                   Page title
                 </p>
-                <p className={TypographyVariants({ social: 'sm' })}>
+                <p className={TypographyVariants({ responsive: 'paragraph' })}>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus ullam modi,
                   consequuntur sapiente expedita nam labore odit ratione aut sint explicabo, fugit,
                   quidem rem totam ex officia iste earum atque?
@@ -111,23 +111,33 @@ const Page: NextPage = () => {
                 <p className={TypographyVariants({ impact: 'xl', className: 'font-bold' })}>
                   Page title
                 </p>
-                <p className={TypographyVariants({ social: 'sm' })}>
+                <p className={TypographyVariants({ responsive: 'paragraph' })}>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus ullam modi,
                   consequuntur sapiente expedita nam labore odit ratione aut sint explicabo, fugit,
                   quidem rem totam ex officia iste earum atque?
                 </p>
               </div>
               <div className="col-span-6 bg-purple-300 lg:col-start-10 lg:col-end-13">
-                <p className={TypographyVariants({ social: 'sm', className: 'font-bold' })}>
+                <p
+                  className={TypographyVariants({
+                    responsive: 'paragraph',
+                    className: 'font-bold',
+                  })}
+                >
                   details
                 </p>
-                <p className={TypographyVariants({ social: 'sm', className: 'mb-2' })}>
+                <p className={TypographyVariants({ responsive: 'paragraph', className: 'mb-2' })}>
                   this is a detail of a detail page
                 </p>
-                <p className={TypographyVariants({ social: 'sm', className: 'font-bold' })}>
+                <p
+                  className={TypographyVariants({
+                    responsive: 'paragraph',
+                    className: 'font-bold',
+                  })}
+                >
                   details
                 </p>
-                <p className={TypographyVariants({ social: 'sm' })}>Some more details</p>
+                <p className={TypographyVariants({ responsive: 'paragraph' })}>Some more details</p>
               </div>
               <div className="col-span-6 bg-orange-300 lg:col-span-8">
                 <p className={TypographyVariants({ impact: 'xl', className: 'font-bold' })}>
@@ -164,23 +174,33 @@ const Page: NextPage = () => {
                 <p className={TypographyVariants({ impact: 'xl', className: 'font-bold' })}>
                   Page title
                 </p>
-                <p className={TypographyVariants({ social: 'sm' })}>
+                <p className={TypographyVariants({ responsive: 'paragraph' })}>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus ullam modi,
                   consequuntur sapiente expedita nam labore odit ratione aut sint explicabo, fugit,
                   quidem rem totam ex officia iste earum atque?
                 </p>
               </div>
               <div className="col-span-6 bg-purple-300 lg:col-start-9 lg:col-end-13">
-                <p className={TypographyVariants({ social: 'sm', className: 'font-bold' })}>
+                <p
+                  className={TypographyVariants({
+                    responsive: 'paragraph',
+                    className: 'font-bold',
+                  })}
+                >
                   details
                 </p>
-                <p className={TypographyVariants({ social: 'sm', className: 'mb-2' })}>
+                <p className={TypographyVariants({ responsive: 'paragraph', className: 'mb-2' })}>
                   this is a detail of a detail page
                 </p>
-                <p className={TypographyVariants({ social: 'sm', className: 'font-bold' })}>
+                <p
+                  className={TypographyVariants({
+                    responsive: 'paragraph',
+                    className: 'font-bold',
+                  })}
+                >
                   details
                 </p>
-                <p className={TypographyVariants({ social: 'sm' })}>Some more details</p>
+                <p className={TypographyVariants({ responsive: 'paragraph' })}>Some more details</p>
               </div>
               <div className="col-span-6 bg-orange-300 lg:col-span-12">
                 <p className={TypographyVariants({ impact: 'xl', className: 'font-bold' })}>
