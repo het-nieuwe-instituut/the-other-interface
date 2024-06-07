@@ -3,7 +3,7 @@
 }
 
 .md-ul-list > li {
-  @apply lg:ml-[14px] ml-6;
+  @apply lg:ml-[20px] ml-8;
 }
 
 .md-ul-list > li::before {
@@ -21,7 +21,7 @@
 
 .md-ol-list > li {
   counter-increment: list-counter;
-  @apply lg:ml-[14px] ml-6;
+  @apply lg:ml-[20px] ml-8;
 }
 
 .md-ol-list > li::before {
