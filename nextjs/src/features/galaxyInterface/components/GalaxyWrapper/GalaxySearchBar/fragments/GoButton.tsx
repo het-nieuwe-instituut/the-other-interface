@@ -25,7 +25,9 @@ export const GoButton: React.FC<Props> = ({ handleClick, hide = false }) => {
       className={'border-0'}
       visibility={hide ? 'hidden' : 'visible'}
     >
-      <Text className={cn('text-pink.100', TypographyVariants({ social: 'md' }))}>{t('go')}</Text>
+      <Text className={cn('text-pink.100', TypographyVariants({ socialLarge: 'md' }))}>
+        {t('go')}
+      </Text>
     </Button>
   )
 }

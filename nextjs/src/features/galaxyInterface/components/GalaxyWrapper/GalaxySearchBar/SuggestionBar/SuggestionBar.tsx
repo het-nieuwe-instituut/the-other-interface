@@ -37,7 +37,9 @@ export const SuggestionBar: React.FC<Props> = ({
       className={'gap-4 px-4 py-2'}
     >
       <Flex width="146px" pt={4}>
-        <p className={cn('text-pink.100', TypographyVariants({ social: 'textfield' }))}>{label}</p>
+        <p className={cn('text-pink.100', TypographyVariants({ socialLarge: 'textfield' }))}>
+          {label}
+        </p>
       </Flex>
       <Box
         overflow="hidden"

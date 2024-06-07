@@ -10,7 +10,7 @@ const TotalResults = () => {
   const { t } = useTypeSafeTranslation('category')
 
   if (isTotalError) {
-    return <ErrorBox className={TypographyVariants({ social: 'sm' })} />
+    return <ErrorBox className={TypographyVariants({ socialLArge: 'sm' })} />
   }
 
   if (isTotalLoading) {
@@ -23,8 +23,10 @@ const TotalResults = () => {
 
   return (
     <>
-      <p className={cn('text-pink-100', TypographyVariants({ social: 'textfield' }))}>{total}</p>
-      <p className={cn('text-pink-100', TypographyVariants({ social: 'textfield' }))}>
+      <p className={cn('text-pink-100', TypographyVariants({ socialLarge: 'textfield' }))}>
+        {total}
+      </p>
+      <p className={cn('text-pink-100', TypographyVariants({ socialLarge: 'textfield' }))}>
         {t('resultsFor')}
       </p>
     </>

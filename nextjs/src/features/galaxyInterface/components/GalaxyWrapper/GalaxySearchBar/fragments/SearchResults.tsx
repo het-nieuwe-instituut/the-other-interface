@@ -21,7 +21,7 @@ const SearchResults = () => {
   const { total } = data || { total: 0 }
 
   if (isError) {
-    return <ErrorBox className={TypographyVariants({ social: 'sm' })} />
+    return <ErrorBox className={TypographyVariants({ socialLarge: 'sm' })} />
   }
 
   if (isLoading) {
@@ -34,8 +34,10 @@ const SearchResults = () => {
 
   return (
     <>
-      <p className={cn('text-pink-100', TypographyVariants({ social: 'textfield' }))}>{total}</p>
-      <p className={cn('text-pink-100', TypographyVariants({ social: 'textfield' }))}>
+      <p className={cn('text-pink-100', TypographyVariants({ socialLarge: 'textfield' }))}>
+        {total}
+      </p>
+      <p className={cn('text-pink-100', TypographyVariants({ socialLarge: 'textfield' }))}>
         {t('resultsFor')}
       </p>
     </>

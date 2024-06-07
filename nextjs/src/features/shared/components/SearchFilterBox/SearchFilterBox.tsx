@@ -30,10 +30,15 @@ export const SearchFilterBox: React.FC<Props> = ({
       cursor={onClick ? 'pointer' : 'default'}
       onClick={onClick}
       maxWidth={'100%'}
-      className={'px-2 h-[52px]'}
+      className={'h-[52px] px-2'}
     >
-      <div className="relative max-w-full flex items-center justify-between pt-1">
-        <p className={cn('text-blue.100 mr-1 truncate', TypographyVariants({ social: 'label' }))}>
+      <div className="relative flex max-w-full items-center justify-between pt-1">
+        <p
+          className={cn(
+            'text-blue.100 mr-1 truncate',
+            TypographyVariants({ socialLarge: 'label' })
+          )}
+        >
           {category}
         </p>
         {actionButton && (
@@ -43,7 +48,7 @@ export const SearchFilterBox: React.FC<Props> = ({
         )}
       </div>
 
-      <p className={cn('truncate', TypographyVariants({ social: 'lg' }))}>{subCategory}</p>
+      <p className={cn('truncate', TypographyVariants({ socialLarge: 'lg' }))}>{subCategory}</p>
     </GridItem>
   )
 }

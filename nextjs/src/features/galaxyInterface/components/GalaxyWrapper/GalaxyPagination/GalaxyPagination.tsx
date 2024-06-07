@@ -37,7 +37,9 @@ export const GalaxyPagination: React.FC<Props> = ({
 
   const renderPaginationContent = () => {
     if (isResultError) {
-      return <ErrorBox className={cn(TypographyVariants({ social: 'sm' }), 'self-center ml-2')} />
+      return (
+        <ErrorBox className={cn(TypographyVariants({ socialLarge: 'sm' }), 'self-center ml-2')} />
+      )
     }
 
     if (isResultAmountLoading) {

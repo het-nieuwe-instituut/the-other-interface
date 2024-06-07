@@ -24,12 +24,12 @@ export const CategoryFilter: React.FC<Props> = ({ onClick, isOpen, selectedOptio
       onClick={onClick}
     >
       <div className="relative flex max-w-full items-center justify-between pb-2 pt-1">
-        <p className={cn('truncate mr-1', TypographyVariants({ social: 'label' }))}>
+        <p className={cn('truncate mr-1', TypographyVariants({ socialLarge: 'label' }))}>
           {t('category')}
         </p>
         <ActionButton>{<ChangeButton isOpen={isOpen} />}</ActionButton>
       </div>
-      <p className={cn('truncate', TypographyVariants({ social: 'textfield' }))}>
+      <p className={cn('truncate', TypographyVariants({ socialLarge: 'textfield' }))}>
         {selectedOption}
       </p>
     </div>
