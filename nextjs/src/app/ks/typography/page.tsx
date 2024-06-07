@@ -18,6 +18,7 @@ const Page: NextPage = () => {
       <h1 className={cn(TypographyVariants({ impact: 'xl' }))}>Extra large</h1>
       <h1 className={cn(TypographyVariants({ impact: 'lg' }))}>Large</h1>
       <h1 className={cn(TypographyVariants({ impact: 'md' }))}>Medium</h1>
+      <h1 className={cn(TypographyVariants({ impact: 'sm' }))}>Small</h1>
       Example: {`<h1 className={TypographyVariants({ impact: 'xl' })}>Extra large</h1>`}
       <hr />
       <p>Social large:</p>
