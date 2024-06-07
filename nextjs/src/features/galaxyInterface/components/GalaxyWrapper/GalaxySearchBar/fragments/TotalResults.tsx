@@ -10,7 +10,7 @@ const TotalResults = () => {
   const { t } = useTypeSafeTranslation('category')
 
   if (isTotalError) {
-    return <ErrorBox className={TypographyVariants({ socialLArge: 'sm' })} />
+    return <ErrorBox className={TypographyVariants({ socialLarge: 'sm' })} />
   }
 
   if (isTotalLoading) {

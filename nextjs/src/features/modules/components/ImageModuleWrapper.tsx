@@ -1,6 +1,5 @@
 import { ImageWithCaption } from '@/features/ui/components/image-with-caption/ImageWithCaption'
 import { ImageWithCaptionLink } from '@/features/ui/components/image-with-caption/ImageWithCaptionLink'
-import { ComponentModulesImage } from 'src/generated/graphql'
 import { DynamicComponents } from '../ModulesRenderer/ModulesRenderer'
 
 export const ImageModuleWrapper = ({
@@ -48,7 +47,12 @@ export const ImageModuleWrapper = ({
   )
 }
 
-function getPathByTriplyRecord(triplyRecord: ComponentModulesImage['triplyRecord']) {
+function getPathByTriplyRecord(
+  triplyRecord: Extract<
+    NonNullable<DynamicComponents>[number],
+    { __typename: 'ComponentModulesImage' }
+  >['triplyRecord']
+) {
   const type = triplyRecord?.data?.attributes?.type?.toLocaleLowerCase()
   const recordId = triplyRecord?.data?.attributes?.recordId
   if (!type || !recordId) {
