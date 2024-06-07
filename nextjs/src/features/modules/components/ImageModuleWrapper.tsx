@@ -21,7 +21,6 @@ export const ImageModuleWrapper = ({
   const storyHref = component.story
     ? getPathByStory(component.story.data?.id ?? undefined)
     : undefined
-  console.log(component)
   if (!src || !alt || !height || !width) {
     return null
   }
