@@ -23,7 +23,18 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         {...props}
       >
-        {state === 'loading' ? <Loader className={'animate-spin'} /> : children}
+        {state === 'loading' ? (
+          <Loader
+            className={cn(
+              'size-6',
+              size === 'small' && 'size-5',
+              size === 'xsmall' && 'size-5',
+              'animate-spin'
+            )}
+          />
+        ) : (
+          children
+        )}
       </Component>
     )
   }

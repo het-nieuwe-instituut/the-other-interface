@@ -12,7 +12,7 @@ export const NavButtonVariants = cva(
     variants: {
       variant: {
         metaData: [
-          'h-[26px] rounded bg-[rgba(0,0,0,0.20)] px-2 py-1 after:border-none flex-nowrap line-clamp-1',
+          'line-clamp-1 h-[26px] flex-nowrap rounded bg-[rgba(0,0,0,0.20)] px-2 py-1 after:border-none',
           'text-center font-social-large text-sm font-normal leading-[18.20px]',
         ],
         menuPrimary: ['h-[43px]'],
@@ -46,7 +46,7 @@ export const NavButtonVariants = cva(
           'hover:border-error-100 hover:bg-error-100 hover:text-white',
           'active:border-error-100 active:bg-error-100 active:text-white',
         ],
-        loading: 'text-blue-100',
+        loading: 'text-blue-100 after:border-b-transparent',
       },
     },
     defaultVariants: {
