@@ -7,7 +7,7 @@ const initApiClientService = () => {
 
   return initApiClient({
     isMockedServer,
-    host: process.env.NEXT_PUBLIC_HOST ?? '',
+    host: process.env.parsed.NEXT_PUBLIC_HOST ?? '',
   })
 }
 
