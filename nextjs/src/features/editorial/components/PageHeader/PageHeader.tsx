@@ -32,7 +32,7 @@ export const PageHeader: React.FC<Props> = ({ title, preface, constrainPreface }
         {title && <h1 className={TypographyVariants({ impact: 'xl' })}>{title}</h1>}
       </button>
       {preface && (
-        <div className="relative flex max-w-[64em] flex-col items-start justify-start gap-5 ">
+        <div className="relative flex flex-col items-start justify-start gap-5 ">
           <ParagraphWithLineClamp
             disableLineClamp={!constrainPrefaceState}
             ReadmoreComponent={

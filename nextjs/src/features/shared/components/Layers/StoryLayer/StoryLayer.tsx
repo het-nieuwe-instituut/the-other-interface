@@ -31,7 +31,7 @@ export const StoryLayer = () => {
     <LayerWrapper
       LeftContent={
         <>
-          <PageHeader title={story?.title} preface={story?.description} />
+          <PageHeader title={story?.title} preface={story?.description} constrainPreface={true} />
           <DynamicComponentRenderer components={story?.attributes?.components} isStoryPage={true} />
         </>
       }
