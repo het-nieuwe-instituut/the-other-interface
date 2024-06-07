@@ -84,7 +84,9 @@ const ReadMoreTooltipContent = ({
   if (error) {
     return (
       <div role="tooltip" className={cn('w-[243.76px] justify-start p-4 text-start bg-error-100 ')}>
-        <p className={TypographyVariants({ social: 'sm', className: 'text-white' })}>{error}</p>
+        <p className={TypographyVariants({ socialLarge: 'sm', className: 'text-white' })}>
+          {error}
+        </p>
       </div>
     )
   }
@@ -115,7 +117,7 @@ const ReadMoreTooltipContent = ({
       return (
         <p
           className={TypographyVariants({
-            social: 'sm',
+            socialLarge: 'sm',
             className: 'text-pink-100',
           })}
         >
@@ -129,7 +131,7 @@ const ReadMoreTooltipContent = ({
         {title && (
           <h2
             className={TypographyVariants({
-              social: 'sm',
+              socialLarge: 'sm',
               className: cn('text-pink-100 font-bold', description && 'pb-2'),
             })}
           >
@@ -140,7 +142,7 @@ const ReadMoreTooltipContent = ({
         {description && (
           <p
             className={TypographyVariants({
-              social: 'sm',
+              socialLarge: 'sm',
               className: cn('text-pink-100', readMoreHref && 'pb-2'),
             })}
           >

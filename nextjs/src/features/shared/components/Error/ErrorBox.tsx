@@ -4,7 +4,7 @@ import { useTypeSafeTranslation } from '../../hooks/translations'
 const ErrorBox = ({ className }: { className?: string }) => {
   const { t } = useTypeSafeTranslation('common')
   return (
-    <p className={TypographyVariants({ social: 'lg', className })}>
+    <p className={TypographyVariants({ socialLarge: 'lg', className })}>
       {t('somethingWentWrongAndRetry')}
     </p>
   )
