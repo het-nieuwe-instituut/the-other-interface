@@ -29,7 +29,7 @@ export const PageHeader: React.FC<Props> = ({ title, preface, constrainPreface }
           'text-left flex flex-col gap-4  max-w-[calc(100vw-40px)]'
         )}
       >
-        {title && <h1 className={TypographyVariants({ impact: 'xl' })}>{title}</h1>}
+        {title && <h1 className={TypographyVariants({ responsive: 'title' })}>{title}</h1>}
       </button>
       {preface && (
         <div className="relative flex flex-col items-start justify-start gap-5 ">
