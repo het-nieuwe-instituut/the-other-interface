@@ -10,7 +10,9 @@ interface Props {
 
 export const Title: React.FC<Props> = ({ children, asterisk, className }) => {
   return (
-    <h1 className={cn(TypographyVariants({ impact: 'xl' }), 'flex flex-row gap-2', className)}>
+    <h1
+      className={cn(TypographyVariants({ responsive: 'title' }), 'flex flex-row gap-2', className)}
+    >
       {children}
       {asterisk && <Asterisk />}
     </h1>
