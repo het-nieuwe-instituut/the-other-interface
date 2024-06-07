@@ -113,7 +113,7 @@ export const RecordMeta: React.FC = () => {
                     {isExternal ? <ExternalLink className="size-[14px]" /> : null}
                   </NavLinkButton>
                 ) : (
-                  <p key={valueIndex} className={TypographyVariants({ social: 'sm' })}>
+                  <p key={valueIndex} className={TypographyVariants({ socialLarge: 'md' })}>
                     {value}
                   </p>
                 )
@@ -129,7 +129,7 @@ export const RecordMeta: React.FC = () => {
 const MetaField = ({ name, children }: { name?: string; children: JSX.Element }) => {
   return (
     <div className="relative flex w-1/2 flex-col pb-4 pr-4 md:w-1/3 lg:w-full">
-      <p className={TypographyVariants({ social: 'sm', className: 'font-bold' })}>{name}</p>
+      <p className={TypographyVariants({ socialLarge: 'md', className: 'font-bold' })}>{name}</p>
       {children}
     </div>
   )
@@ -164,12 +164,12 @@ function RightsLogo({ value }: { value?: string[] | null; key?: string }) {
 
   return (
     <ReadMoreTooltip description={rightsInfo.description} place="bottom">
-      <a href={rightsInfo.url} className="flex flex-wrap gap-1 items-center ">
-        <div className="size-7 flex items-center">
+      <a href={rightsInfo.url} className="flex flex-wrap items-center gap-1 ">
+        <div className="flex size-7 items-center">
           <Icon />
         </div>
         {SectionaryIcon ? <SectionaryIcon /> : null}
-        <p className={TypographyVariants({ social: 'sm', className: 'flex items-center' })}>
+        <p className={TypographyVariants({ socialLarge: 'md', className: 'flex items-center' })}>
           {rightsInfo.text}
         </p>
       </a>

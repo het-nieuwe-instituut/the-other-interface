@@ -70,7 +70,7 @@ export const StoryMeta: React.FC = () => {
     <div className="flex flex-row flex-wrap">
       <div className="flex w-1/2 flex-col pb-4 pr-4 md:w-1/3 lg:w-full ">
         {publicationDateFormatted && (
-          <p className={TypographyVariants({ social: 'sm', className: 'font-bold' })}>
+          <p className={TypographyVariants({ socialLarge: 'md', className: 'font-bold' })}>
             {publicationDateFormatted}
           </p>
         )}
@@ -88,7 +88,12 @@ export const StoryMeta: React.FC = () => {
               lang
             )}
           >
-            <p className={TypographyVariants({ social: 'smLink', className: 'font-bold' })}>
+            <p
+              className={TypographyVariants({
+                socialLarge: 'md',
+                className: 'font-bold underline',
+              })}
+            >
               {storiesT.t('by', {
                 author: authorFormatted.name,
               })}
@@ -96,7 +101,7 @@ export const StoryMeta: React.FC = () => {
           </NextLink>
         )}
         {story.shortDescription && (
-          <p className={TypographyVariants({ social: 'sm' })}>{story.shortDescription}</p>
+          <p className={TypographyVariants({ socialLarge: 'md' })}>{story.shortDescription}</p>
         )}
       </div>
       {parentRelation && parentRelation?.data?.id && (
@@ -130,15 +135,15 @@ export const StoryMeta: React.FC = () => {
       )}
       {/* We decided to remove this for now, but still there is a possiblity that after test we will add it back, so we will keep it here for now. */}
       {/* {siblingsRelation && siblingsRelation.length > 0 && (
-        <Box marginBottom={'sm'}>
-          <p className={TypographyVariants({ social: 'sm' })}>
+        <Box marginBottom={'md'}>
+          <p className={TypographyVariants({ socialLarge: 'md' })}>
             {storiesT.t('siblingsStories')}
           </p>
           {siblingsRelation?.map((sibling, index, array) => {
             const hasItemAfter = array.length - 1 !== index
 
             return (
-              <p className={TypographyVariants({ social: 'md' })} key={sibling.id} mr={1} mt={1} mb={2}>
+              <p className={TypographyVariants({ socialLarge: 'md' })} key={sibling.id} mr={1} mt={1} mb={2}>
                 <Link
                   href={`/detail/${CATEGORIES.stories}/${sibling.id}?lang=${lang}`}
                   borderBottom={'1px solid'}
@@ -175,7 +180,9 @@ export const StoryMeta: React.FC = () => {
                     lang
                   )}
                 >
-                  <p className={TypographyVariants({ social: 'smLink' })}>{theme.name}</p>
+                  <p className={TypographyVariants({ socialLarge: 'md', className: 'underline' })}>
+                    {theme.name}
+                  </p>
                 </NextLink>
               )
             })}
@@ -219,7 +226,9 @@ export const StoryMeta: React.FC = () => {
                     lang
                   )}
                 >
-                  <p className={TypographyVariants({ social: 'smLink' })}>{location.name}</p>
+                  <p className={TypographyVariants({ socialLarge: 'md', className: 'underline' })}>
+                    {location.name}
+                  </p>
                 </NextLink>
               )
             })}
@@ -228,14 +237,14 @@ export const StoryMeta: React.FC = () => {
       )}
       {timeframe && (
         <MetaField name={storiesT.t('time')}>
-          <p className={TypographyVariants({ social: 'sm' })}>{timeframe}</p>
+          <p className={TypographyVariants({ socialLarge: 'md' })}>{timeframe}</p>
         </MetaField>
       )}
 
       {/* Should be hidden for now */}
       {/* {!!links?.length && (
-        <Box marginBottom={'sm'}>
-          <p className={TypographyVariants({ social: 'sm' })} mb={2}>
+        <Box marginBottom={'md'}>
+          <p className={TypographyVariants({ socialLarge: 'md' })} mb={2}>
             {storiesT.t('share')}
           </p>
 
@@ -246,7 +255,7 @@ export const StoryMeta: React.FC = () => {
             }}
             flexDirection="column"
             buttons={links}
-            buttonStyle={EnumComponentmodulesbuttonsmoduleButtonstyle.Default}
+            buttonStyle={EnumComponentmodulesbuttonmdoduleButtonstyle.Default}
           />
         </Box>
       )} */}
@@ -257,7 +266,7 @@ export const StoryMeta: React.FC = () => {
 const MetaField = ({ name, children }: { name?: string; children: JSX.Element }) => {
   return (
     <div className="relative flex w-1/2 flex-col pb-4 pr-4 md:w-1/3 lg:w-full">
-      <p className={TypographyVariants({ social: 'sm', className: 'font-bold' })}>{name}</p>
+      <p className={TypographyVariants({ socialLarge: 'md', className: 'font-bold' })}>{name}</p>
       {children}
     </div>
   )

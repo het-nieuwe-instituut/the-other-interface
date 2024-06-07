@@ -29,7 +29,7 @@ export const TailwindMarkdown: React.FC<TailwindMarkdownProps> = ({ className, c
 
 const components = {
   p: ({ children }: { children: ReactNode }) => (
-    <p className={TypographyVariants({ social: 'md' })}>{children}</p>
+    <p className={TypographyVariants({ responsive: 'paragraph' })}>{children}</p>
   ),
   // we cast as string because we know that children is a string but react-markdown makes use use ReactNode
   h6: ({ children }: { children: ReactNode }) => <Subtitle>{children as string}</Subtitle>,
@@ -39,7 +39,7 @@ const components = {
   h2: ({ children }: { children: ReactNode }) => <Subtitle>{children as string}</Subtitle>,
   h1: ({ children }: { children: ReactNode }) => <Subtitle>{children as string}</Subtitle>,
   li: ({ children }: { children: ReactNode }) => (
-    <li className={TypographyVariants({ social: 'md' })}>{children}</li>
+    <li className={TypographyVariants({ responsive: 'paragraph' })}>{children}</li>
   ),
   ul: ({ children }: { children: ReactNode }) => (
     <ul className={styles['md-ul-list']}>{children}</ul>

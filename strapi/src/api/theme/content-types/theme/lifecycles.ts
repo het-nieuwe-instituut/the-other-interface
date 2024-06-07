@@ -19,6 +19,10 @@ export default {
             event.params.data.highlightedStories.connect.length -
             event.params.data.highlightedStories.disconnect.length <=
           5
+        ) &&
+        !(
+          theme.highlightedStories.length === 5 &&
+          event?.params?.data?.highlightedStories?.connect[0]?.position?.before
         )
       ) {
         throw new errors.ApplicationError('Cannot select more than 5 highlighted stories')
@@ -43,6 +47,10 @@ export default {
             event.params.data.highlightedStories.connect.length -
             event.params.data.highlightedStories.disconnect.length <=
           5
+        ) &&
+        !(
+          theme.highlightedStories.length === 5 &&
+          event?.params?.data?.highlightedStories?.connect[0]?.position?.before
         )
       ) {
         throw new errors.ApplicationError('Cannot select more than 5 highlighted stories')
