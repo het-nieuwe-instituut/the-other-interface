@@ -15,7 +15,13 @@ interface Props {
 export const EditorialLayer: React.FC<Props> = ({ title, preface, components }) => {
   return (
     <LayerWrapper
-      LeftContent={<PageHeader title={title || undefined} preface={preface || undefined} />}
+      LeftContent={
+        <PageHeader
+          title={title || undefined}
+          preface={preface || undefined}
+          constrainPreface={true}
+        />
+      }
       BottomContent={<DynamicComponentRenderer components={components} />}
     />
   )
