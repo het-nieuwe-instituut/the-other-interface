@@ -1,8 +1,8 @@
 import { getZoomRecordHoverQueries } from './ZoomRecordHoverConfig'
-import { EntityNames, Sdk, Locale } from 'src/generated/graphql'
+import { Sdk, Locale, EntityNames } from 'src/generated/graphql'
 import { zoomRecordHoverQueryTooltipDataMapper } from '@/features/galaxyInterface/galaxies/CategoryGalaxy/fragments/Record/zoomRecordHoverQueryTooltipDataMapper'
 import { zoomStoryHoverQueryTooltipDataMapper } from '@/features/galaxyInterface/galaxies/CategoryGalaxy/fragments/Record/zoomStoryHoverQueryTooltipDataMapper'
-import { Category } from '@/features/shared/utils/categories'
+import { CATEGORIES, Category } from '@/features/shared/utils/categories'
 
 export async function getZoomRecordHoverTask({
   id,
@@ -19,7 +19,7 @@ export async function getZoomRecordHoverTask({
     throw new Error('id and category are required')
   }
 
-  if (category === EntityNames.Stories) {
+  if (category === CATEGORIES.stories || category === EntityNames.Stories) {
     const storyData = await api.StoryHoverRecordRelations({ id, locale })
     const mappedResult = zoomStoryHoverQueryTooltipDataMapper(storyData)
     return mappedResult
