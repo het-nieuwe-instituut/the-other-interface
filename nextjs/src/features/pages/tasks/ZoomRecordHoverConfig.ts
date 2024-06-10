@@ -10,23 +10,26 @@ import {
 
 export const getZoomRecordHoverQueries = (api: Sdk, type: Category | EntityNames) => {
   switch (type) {
-    case CATEGORIES.people || EntityNames.People:
+    case EntityNames.People:
+    case CATEGORIES.people:
       return {
         hoverData: api.PeopleZoomRecordHover,
         accesor: (data?: PeopleZoomRecordHoverQuery) => data?.peopleZoomLevelHover,
       }
-    case CATEGORIES.archives || EntityNames.Archives:
+    case EntityNames.Archives:
+    case CATEGORIES.archives:
       return {
         hoverData: api.ArchivesZoomRecordHover,
         accesor: (data?: ArchivesZoomRecordHoverQuery) => data?.archivesZoomRecordHover,
       }
-    case CATEGORIES.publications || EntityNames.Publications:
+    case EntityNames.Publications:
+    case CATEGORIES.publications:
       return {
         hoverData: api.PublicationsZoomRecordHover,
         accesor: (data?: PublicationsZoomRecordHoverQuery) => data?.publicationsZoomRecordHover,
       }
-
-    case CATEGORIES.objects || EntityNames.Objects:
+    case EntityNames.Objects:
+    case CATEGORIES.objects:
       return {
         hoverData: api.ObjectsZoomRecordHover,
         accesor: (data?: ObjectsZoomRecordHoverQuery) => data?.objectsZoomRecordHover,
