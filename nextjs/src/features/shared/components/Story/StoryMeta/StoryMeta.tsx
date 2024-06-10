@@ -68,46 +68,8 @@ export const StoryMeta: React.FC = () => {
 
   return (
     <div className="flex flex-row flex-wrap">
-      <div className="flex w-1/2 flex-col pb-4 pr-4 md:w-1/3 lg:w-full ">
-        {publicationDateFormatted && (
-          <p className={TypographyVariants({ socialLarge: 'md', className: 'font-bold' })}>
-            {publicationDateFormatted}
-          </p>
-        )}
-
-        {authorFormatted && (
-          <NextLink
-            href={addLocaleToUrl(
-              `/landingpage?category=stories&filters=${encodeFilters([
-                {
-                  field: 'author',
-                  value: authorFormatted.name || '',
-                  id: authorFormatted.id || '',
-                },
-              ])}&searchResult=true`,
-              lang
-            )}
-          >
-            <span className="flex">
-              <p
-                className={TypographyVariants({
-                  socialLarge: 'md',
-                  className: 'font-bold',
-                })}
-              >
-                {storiesT.t('by')}
-              </p>
-              <p
-                className={TypographyVariants({
-                  socialLarge: 'md',
-                  className: 'font-bold underline pl-1',
-                })}
-              >
-                {authorFormatted.name}
-              </p>
-            </span>
-          </NextLink>
-        )}
+      {dateAndAuthor()}
+      <div className="flex w-1/2 flex-col pb-4 pr-4 md:w-1/3 lg:w-full">
         {story.shortDescription && (
           <p className={TypographyVariants({ socialLarge: 'md' })}>{story.shortDescription}</p>
         )}
@@ -269,6 +231,96 @@ export const StoryMeta: React.FC = () => {
       )} */}
     </div>
   )
+
+  function dateAndAuthor() {
+    if (publicationDateFormatted && authorFormatted) {
+      return (
+        <div className="flex w-1/2 flex-col pb-4 pr-4 md:w-1/3 lg:w-full">
+          <p className={TypographyVariants({ socialLarge: 'md', className: 'font-bold' })}>
+            {storiesT.t('published', { date: publicationDateFormatted })}
+          </p>
+          <span className="flex">
+            <p
+              className={TypographyVariants({
+                socialLarge: 'md',
+                className: 'font-bold',
+              })}
+            >
+              {storiesT.t('by')}
+            </p>
+            <NextLink
+              href={addLocaleToUrl(
+                `/landingpage?category=stories&filters=${encodeFilters([
+                  {
+                    field: 'author',
+                    value: authorFormatted.name || '',
+                    id: authorFormatted.id || '',
+                  },
+                ])}&searchResult=true`,
+                lang
+              )}
+            >
+              <p
+                className={TypographyVariants({
+                  socialLarge: 'md',
+                  className: 'font-bold underline pl-1',
+                })}
+              >
+                {authorFormatted.name}
+              </p>
+            </NextLink>
+          </span>
+        </div>
+      )
+    }
+    if (!publicationDateFormatted && authorFormatted) {
+      return (
+        <div className="flex w-1/2 flex-col pb-4 pr-4 md:w-1/3 lg:w-full">
+          <span className="flex">
+            <p
+              className={TypographyVariants({
+                socialLarge: 'md',
+                className: 'font-bold',
+              })}
+            >
+              {storiesT.t('storyBy')}
+            </p>
+            <NextLink
+              href={addLocaleToUrl(
+                `/landingpage?category=stories&filters=${encodeFilters([
+                  {
+                    field: 'author',
+                    value: authorFormatted.name || '',
+                    id: authorFormatted.id || '',
+                  },
+                ])}&searchResult=true`,
+                lang
+              )}
+            >
+              <p
+                className={TypographyVariants({
+                  socialLarge: 'md',
+                  className: 'font-bold underline pl-1',
+                })}
+              >
+                {authorFormatted.name}
+              </p>
+            </NextLink>
+          </span>
+        </div>
+      )
+    }
+    if (!authorFormatted && publicationDateFormatted) {
+      return (
+        <div className="flex w-1/2 flex-col pb-4 pr-4 md:w-1/3 lg:w-full">
+          <p className={TypographyVariants({ socialLarge: 'md', className: 'font-bold' })}>
+            {storiesT.t('published', { date: publicationDateFormatted })}
+          </p>
+        </div>
+      )
+    }
+    return null
+  }
 }
 
 const MetaField = ({ name, children }: { name?: string; children: JSX.Element }) => {

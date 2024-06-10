@@ -1,6 +1,7 @@
 {
   "published": "Gepubliceerd op {{date}}",
-  "by": "Story door",
+  "by": "door",
+  "storyBy": "Story door",
   "mainStory": "Main story",
   "themes": "Thema's",
   "people": "Personen",
