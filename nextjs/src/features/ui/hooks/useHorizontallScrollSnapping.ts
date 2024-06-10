@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useResizeObserver } from 'usehooks-ts'
 
 export function useHorizontalSnappingList({
@@ -8,12 +8,12 @@ export function useHorizontalSnappingList({
   numberOfItems: number
   itemWidth: number
 }) {
-  const containerRef = useRef<HTMLDivElement>(null)
   const scrollContainerRef = useRef<HTMLDivElement>(null)
-  const { width: observerWidth } = useResizeObserver({ ref: containerRef })
+  const { width: observerWidth } = useResizeObserver({ ref: scrollContainerRef })
   const width = observerWidth ?? 0
 
   const itemsFitInWidth = Math.floor(width / itemWidth) // Assumes all items have same width
+  console.log(itemsFitInWidth, width, itemWidth)
   const pages = Math.ceil(numberOfItems / itemsFitInWidth)
   const [canScrollPrev, setCanScrollPrev] = useState(false)
   const [canScrollNext, setCanScrollNext] = useState(true)
@@ -76,7 +76,6 @@ export function useHorizontalSnappingList({
   }
 
   return {
-    containerRef,
     scrollContainerRef,
     pages,
     width,

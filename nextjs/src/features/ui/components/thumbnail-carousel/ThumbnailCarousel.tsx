@@ -23,19 +23,11 @@ const ThumbnailCarouselContext = React.createContext<{
 })
 
 export const ThumbnailCarousel = ({ className, children }: ThumbnailCarouselProps) => {
-  const {
-    pages,
-    width,
-    nextPage,
-    prevPage,
-    containerRef,
-    scrollContainerRef,
-    canScrollNext,
-    canScrollPrev,
-  } = useHorizontalSnappingList({
-    numberOfItems: children.length,
-    itemWidth: 154.78,
-  })
+  const { pages, width, nextPage, prevPage, scrollContainerRef, canScrollNext, canScrollPrev } =
+    useHorizontalSnappingList({
+      numberOfItems: children.length,
+      itemWidth: 154.783,
+    })
   const [index, setIndex] = useState<number>(0)
   const focusedItem = Children.toArray(children)[
     index
@@ -64,17 +56,16 @@ export const ThumbnailCarousel = ({ className, children }: ThumbnailCarouselProp
           />
         </div>
 
-        <div className="flex" ref={containerRef}>
-          <div
-            className="flex flex-nowrap gap-4 overflow-x-scroll scrollbar-hide"
-            ref={scrollContainerRef}
-          >
+        <div className="flex">
+          <div className=" overflow-x-scroll scrollbar-hide" ref={scrollContainerRef}>
             <div
+              className="flex flex-nowrap gap-4"
               style={{
                 width: pages === 0 ? width : pages * width,
               }}
-            ></div>
-            {children}
+            >
+              {children}
+            </div>
           </div>
           <Gradient
             className={cn(
