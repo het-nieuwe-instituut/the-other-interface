@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import initApiClientService from '../../utils/initApiClientService'
 import { getZoomRecordHoverTask } from '@/features/pages/tasks/getZoomRecordHoverTask'
-import { EntityNames } from 'src/generated/graphql'
 import { useLocale } from '../useLocale'
 import { Category } from '../../utils/categories'
 
@@ -10,7 +9,7 @@ export function useZoomHoverRecordResultQuery({
   category,
 }: {
   id?: string | null
-  category?: Category | EntityNames | null
+  category?: Category | null
 }) {
   const api = initApiClientService()
   const locale = useLocale()
