@@ -88,16 +88,24 @@ export const StoryMeta: React.FC = () => {
               lang
             )}
           >
-            <p
-              className={TypographyVariants({
-                socialLarge: 'md',
-                className: 'font-bold underline',
-              })}
-            >
-              {storiesT.t('by', {
-                author: authorFormatted.name,
-              })}
-            </p>
+            <span className="flex">
+              <p
+                className={TypographyVariants({
+                  socialLarge: 'md',
+                  className: 'font-bold',
+                })}
+              >
+                {storiesT.t('by')}
+              </p>
+              <p
+                className={TypographyVariants({
+                  socialLarge: 'md',
+                  className: 'font-bold underline pl-1',
+                })}
+              >
+                {authorFormatted.name}
+              </p>
+            </span>
           </NextLink>
         )}
         {story.shortDescription && (
