@@ -19,9 +19,9 @@ export const ButtonVariants = cva(
           'hover:border-black hover:bg-black-100 hover:text-white',
         ],
         inverted: [
-          'border-pink-100 text-pink-100',
+          'border-pink-100 text-white',
           'hover:border-pink-100 hover:bg-pink-100 hover:text-blue-100',
-          '*:text-pink-100',
+          '*:text-white',
         ],
       },
       size: {
