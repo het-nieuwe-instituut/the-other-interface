@@ -6,16 +6,18 @@ import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { getUniqueById } from '../util/helpers'
 import { Locale } from '../util/locale.type'
 
-interface ZoomLevel2Data {
+interface ResultData {
   thumbnail: string
   title: string
   id: string
+  categoryType: string
 }
 
-const zoomLevel2DataKeys: KeysToVerify<ZoomLevel2Data> = {
+const resultDataKeys: KeysToVerify<ResultData> = {
   thumbnail: true,
   title: true,
   id: true,
+  categoryType: true,
 }
 
 @Injectable()
@@ -65,9 +67,9 @@ export class ZoomLevel2Service {
   ) {
     const uri = this.getUriForLevel2Data(type, text, { forCount: false })
 
-    const result = await this.triplyService.queryTriplyData<ZoomLevel2Data>(
+    const result = await this.triplyService.queryTriplyData<ResultData>(
       uri,
-      zoomLevel2DataKeys,
+      resultDataKeys,
       paginationArgs,
       { language: locale, text: text || '' }
     )

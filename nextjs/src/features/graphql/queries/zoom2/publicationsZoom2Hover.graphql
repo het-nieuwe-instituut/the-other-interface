@@ -1,7 +1,7 @@
-query PublicationsZoomRecordHover($id: String!, $locale: String!) {
-    publicationsZoomRecordHover(id: $id, locale: $locale) {
-        title
-        authors
-        description
-    }
+query PublicationsZoomRecordHover($id: String!, $locale: Locale!) {
+  publicationsZoomRecordHover(id: $id, locale: $locale) {
+    title
+    authors
+    description
+  }
 }

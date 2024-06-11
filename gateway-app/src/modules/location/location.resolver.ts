@@ -8,14 +8,14 @@ import {
   LocationRelationResponseCollection,
 } from './location.type'
 import { Location } from './location-dependency.type'
-import { Locale } from '../util/locale.type'
+import { LocaleArgs } from '../util/localeArgs.type'
 
 @Resolver()
 export class LocationResolver {
   public constructor(@Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk) {}
 
   @Query(() => LocationEntityResponse)
-  public async location(@Args('id') id: string, @Args('locale') locale: Locale) {
+  public async location(@Args('id') id: string, @Args() { locale }: LocaleArgs) {
     const res = await this.strapiGqlSdk.location({ id, locale })
 
     return res.location
@@ -23,7 +23,7 @@ export class LocationResolver {
 
   @Query(() => LocationRelationResponseCollection)
   public async locations(
-    @Args('locale') locale: Locale,
+    @Args() { locale }: LocaleArgs,
     @Args('filters', { nullable: true }) filters?: LocationFiltersInput,
     @Args('pagination', { nullable: true }) pagination?: PaginationArg,
     @Args('sort', { nullable: true, type: () => [String] }) sort?: string[],

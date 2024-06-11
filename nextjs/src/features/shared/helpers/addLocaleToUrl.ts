@@ -5,7 +5,7 @@ export const addLocaleToUrl = (path: string, lang?: Locale | null) => {
     return path
   }
 
-  const parsedUrl = new URL(path, window.location.origin)
+  const parsedUrl = new URL(path, process.env.parsed.NEXT_PUBLIC_URL)
   parsedUrl.searchParams.set('lang', lang)
 
   return parsedUrl.toString()

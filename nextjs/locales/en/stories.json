@@ -1,5 +1,7 @@
 {
-  "by": "Story by {{author}}",
+  "published": "Published on {{date}}",
+  "by": "by",
+  "storyBy": "Story by",
   "mainStory": "Main story",
   "themes": "Themes",
   "people": "People",

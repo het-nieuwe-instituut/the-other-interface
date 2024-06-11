@@ -20,7 +20,7 @@ export function formatPublicationDate(
     case EnumComponentcorepublicationdateDisplaytype.Date:
       return DateService.formatDateString({
         date: publicationDate,
-        format: 'Do of MMMM YYYY',
+        format: 'DD/MM/YYYY',
         locale,
       })
     default:

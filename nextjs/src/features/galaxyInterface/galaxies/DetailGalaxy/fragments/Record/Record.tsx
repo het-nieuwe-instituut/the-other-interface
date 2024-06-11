@@ -55,7 +55,6 @@ export const Record: React.FC<Props> = ({
       </div>
     )
   }
-
   if (!recordDetails || isError) return null
 
   return (
