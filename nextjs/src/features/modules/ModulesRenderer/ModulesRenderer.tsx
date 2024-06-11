@@ -22,6 +22,7 @@ import { CarouselModule } from '../components/carousels/Carousel/Carousel'
 import { ImageCarousel } from '../components/carousels/ImageCarousel/ImageCarousel'
 import { mapUploadFileEntitiesToStoryImageInfo } from '../components/carousels/ImageCarousel/imageCarouselStrapiDataMapper'
 import { MuxAudioPlayer } from '@/features/ui/components/mux-audio/MuxAudioPlayer'
+import { MuxVideoPlayer } from '@/features/ui/components/mux-video/MuxVideoPlayer'
 
 interface Props {
   components: DynamicComponents
@@ -193,6 +194,25 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
                 title={component.muxAudioRelation?.data?.attributes?.title}
                 playbackId={component.muxAudioRelation?.data?.attributes?.playback_id}
                 caption={component.caption}
+                key={keyExtractor(component.id, index, array)}
+              />
+            )
+          }
+
+          if (component?.__typename === 'ComponentCoreMuxVideo') {
+            if (!component.muxVideoRelation?.data?.attributes?.playback_id) return null
+
+            return (
+              <MuxVideoPlayer
+                title={component.muxVideoRelation?.data?.attributes?.title}
+                playbackId={component.muxVideoRelation?.data?.attributes?.playback_id}
+                // thumbnailTime={component.thumbnailTime ?? 0}
+                // posterUrl={component.poster?.data?.attributes?.url}
+                caption={component.caption}
+                // aspectRatio={
+                //     component.muxVideoRelation?.data?.attributes?.aspect_ratio?.replace(':', ' / ') ?? '16 / 9'
+                // }
+                // blurHashImage={blurHashImage}
                 key={keyExtractor(component.id, index, array)}
               />
             )

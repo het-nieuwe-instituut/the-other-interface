@@ -7,7 +7,7 @@ interface MuxAudioPlayerProps {
 }
 
 export const MuxAudioPlayer: React.FC<MuxAudioPlayerProps> = ({ playbackId, caption, title }) => {
-  if (!title) return null
+  if (title === null) return null
 
   return (
     <>
