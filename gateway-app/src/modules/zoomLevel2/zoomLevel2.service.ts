@@ -5,6 +5,8 @@ import { EntityNames } from '../util/entityNames.type'
 import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { getUniqueById } from '../util/helpers'
 import { Locale } from '../util/locale.type'
+import { Enum_Triplyrecord_Type } from 'src/generated/strapi-sdk'
+import { FilterSuggestionType } from './zoomLevel2.type'
 
 interface ResultData {
   thumbnail: string
@@ -22,6 +24,11 @@ const resultDataKeys: KeysToVerify<ResultData> = {
 
 @Injectable()
 export class ZoomLevel2Service {
+  private readonly filterSuggestionsPeopleEndpoint = 'filterpeople/run?'
+  private readonly filterSuggestionsArchivesEndpoint = 'filterarchives/run?'
+  private readonly filterSuggestionsObjectsEndpoint = 'filterobjects/run?'
+  private readonly filterSuggestionsPublicationsEndpoint = 'filterpublications/run?'
+
   public constructor(private readonly triplyService: TriplyService) {}
 
   public getData(
@@ -57,6 +64,36 @@ export class ZoomLevel2Service {
         throw CustomError.internalCritical(`Zoomlevel 2 for ${entity} not implemented`)
       }
     }
+  }
+
+  public async getFilterSuggestions(
+    type: Enum_Triplyrecord_Type,
+    text: string,
+    lang: Locale
+  ): Promise<FilterSuggestionType[]> {
+    const endpoint = this.getFilterSuggestionsEndpoint(type)
+    const KeysToVerify = {} // we don't expect static keys in the response, so we don't need to verify them
+    const paginationArgs: PaginationArgs = { page: 1, pageSize: 5 } // we always only need the first 5 results
+    const searchParams = { text, lang }
+
+    const results = await this.triplyService.queryTriplyData<Record<string, string>>(
+      endpoint,
+      KeysToVerify,
+      paginationArgs,
+      searchParams
+    )
+
+    return results.data.map(r => {
+      const validKeyValuePair = Object.entries(r).find(([key, value]) => key && value)
+      if (!validKeyValuePair) {
+        throw CustomError.external('Invalid key value pair in filter suggestions')
+      }
+
+      return {
+        key: validKeyValuePair[0],
+        value: validKeyValuePair[1],
+      }
+    })
   }
 
   private async getZoomLevel2Data(
@@ -142,6 +179,21 @@ export class ZoomLevel2Service {
       case EntityNames.Media:
       case EntityNames.Stories:
       case EntityNames.External:
+      default:
+        throw CustomError.externalCritical(`uri for type ${type} not implemented`)
+    }
+  }
+
+  private getFilterSuggestionsEndpoint(type: Enum_Triplyrecord_Type) {
+    switch (type) {
+      case Enum_Triplyrecord_Type.People:
+        return this.filterSuggestionsPeopleEndpoint
+      case Enum_Triplyrecord_Type.Archive:
+        return this.filterSuggestionsArchivesEndpoint
+      case Enum_Triplyrecord_Type.Object:
+        return this.filterSuggestionsObjectsEndpoint
+      case Enum_Triplyrecord_Type.Publication:
+        return this.filterSuggestionsPublicationsEndpoint
       default:
         throw CustomError.externalCritical(`uri for type ${type} not implemented`)
     }

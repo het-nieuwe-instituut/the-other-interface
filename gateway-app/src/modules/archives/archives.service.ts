@@ -105,13 +105,9 @@ export class ArchivesService {
   protected entityType = 'triply'
 
   private readonly ZoomLevel3Endpoint = 'archives-recordPage/run?'
-
   private readonly ZoomLevel3RelationsEndpoint = 'archives-recordRelations/run?'
-
   private readonly ZoomLevel3RelationsCountEndpoint = 'archives-recordRelations-Count/run?'
-
   private readonly ZoomLevel3RecordEndpoint = 'archives-recordPage-editorial/run?'
-
   private readonly ZoomLevel2HoverEndpoint = 'archives-hoverState/run?'
 
   public constructor(private triplyService: TriplyService) {}

@@ -1,6 +1,7 @@
 import { ArgsType, Field, Int, ObjectType } from '@nestjs/graphql'
 import { EntityNames } from '../util/entityNames.type'
 import { Locale } from '../util/locale.type'
+import { Enum_Triplyrecord_Type } from 'src/generated/strapi-sdk'
 
 @ArgsType()
 export class ZoomLevel2Args {
@@ -39,4 +40,25 @@ export class ZoomLevel2ParentType {
 export class ZoomLevel2AmountParentType {
   @Field(() => String, { nullable: false })
   public total: string
+}
+
+@ObjectType()
+export class FilterSuggestionType {
+  @Field()
+  public key: string
+
+  @Field()
+  public value: string
+}
+
+@ArgsType()
+export class FilterSuggestionArgs {
+  @Field(() => Enum_Triplyrecord_Type)
+  public type: Enum_Triplyrecord_Type
+
+  @Field(() => Locale)
+  public locale: Locale
+
+  @Field()
+  public search: string
 }

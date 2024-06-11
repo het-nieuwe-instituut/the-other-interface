@@ -432,6 +432,12 @@ export type Error = {
   message?: Maybe<Scalars['String']>;
 };
 
+export type FilterSuggestionType = {
+  __typename?: 'FilterSuggestionType';
+  key: Scalars['String'];
+  value: Scalars['String'];
+};
+
 export type HighlightedHomepageThemeEntity = {
   __typename?: 'HighlightedHomepageThemeEntity';
   attributes?: Maybe<HighlightedHomepageThemes>;
@@ -1116,6 +1122,7 @@ export type Query = {
   archivesZoomRecordHover: ArchivesZoomLevelHoverType;
   author: AuthorEntityResponse;
   authors: AuthorEntityResponseCollection;
+  filterSuggestions?: Maybe<Array<FilterSuggestionType>>;
   highlightedHomepageThemes: HighlightedHomepageThemeEntityResponse;
   homepage: HomepageEntityResponse;
   landingpage: LandingpageEntityResponse;
@@ -1203,6 +1210,13 @@ export type QueryAuthorsArgs = {
   pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<Scalars['String']>;
   sort?: InputMaybe<Array<Scalars['String']>>;
+};
+
+
+export type QueryFilterSuggestionsArgs = {
+  locale: Locale;
+  search: Scalars['String'];
+  type: EnumTriplyrecordType;
 };
 
 

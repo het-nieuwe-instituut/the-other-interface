@@ -1,7 +1,13 @@
 import { Args, Resolver, Query } from '@nestjs/graphql'
 import { PaginationArgs } from '../util/paginationArgs.type'
 import { ZoomLevel2Service } from './zoomLevel2.service'
-import { ZoomLevel2Args, ZoomLevel2ParentType, ZoomLevel2AmountParentType } from './zoomLevel2.type'
+import {
+  ZoomLevel2Args,
+  ZoomLevel2ParentType,
+  ZoomLevel2AmountParentType,
+  FilterSuggestionType,
+  FilterSuggestionArgs,
+} from './zoomLevel2.type'
 
 @Resolver()
 export class ZoomLevel2Resolver {
@@ -15,5 +21,10 @@ export class ZoomLevel2Resolver {
   @Query(() => ZoomLevel2AmountParentType)
   public async zoomLevel2Amount(@Args() args: ZoomLevel2Args) {
     return this.zoomLevel2Service.getDataAmount(args.entityName, args.text)
+  }
+
+  @Query(() => [FilterSuggestionType], { nullable: true })
+  public filterSuggestions(@Args() args: FilterSuggestionArgs) {
+    return this.zoomLevel2Service.getFilterSuggestions(args.type, args.search, args.locale)
   }
 }
