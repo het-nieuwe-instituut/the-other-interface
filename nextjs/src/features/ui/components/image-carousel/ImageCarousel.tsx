@@ -6,12 +6,12 @@ import Previous from './Previous.svg'
 
 import { ThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import NextImage, { ImageProps } from 'next/image'
-import NextLink from 'next/link'
+import { ImageProps } from 'next/image'
 import React, { useState } from 'react'
 import { useResizeObserver } from 'usehooks-ts'
 import { useHorizontalSnappingList } from '../../hooks/useHorizontallScrollSnapping'
 import { cn } from '../../utils/cn'
+import { LightBoxNextImage } from '../lightbox/LightBoxNextImage'
 import { TypographyVariants } from '../typography/variants'
 
 interface ImageCarouselProps {
@@ -109,46 +109,42 @@ export interface ImageCarouselItemProps extends ImageProps {
 export const ImageCarouselItem = (props: ImageCarouselItemProps) => {
   const { itemWidth } = useContext(ImageCarouselContext)
   const { t: commonT } = useTypeSafeTranslation('common')
-  const { caption, className, src, imageClassName, captionClassname, href, ...restProps } = props
+  const { caption, className, src, imageClassName, captionClassname, ...restProps } = props
 
-  const renderContent = () => {
-    return (
-      <figure
-        style={{ '--item-width': `${itemWidth}px` } as CSSProperties}
-        className="relative flex h-full w-[var(--item-width)] flex-col gap-2"
-      >
-        <div className={cn(className, 'relative w-full h-full bg-ivory-100')}>
-          {!src ? (
-            <div
-              className={cn(className, 'relative')}
-              style={{ '--default-image-height': `${IMAGE_HEIGHT}px` } as CSSProperties}
-            >
-              <div className="flex h-[var(--default-image-height)] w-full items-center justify-center bg-gray-300">
-                {commonT('somethingWentWrong')}
-              </div>
-            </div>
-          ) : (
-            <NextImage
-              src={src}
-              className={cn('object-cover object-center', imageClassName)}
-              sizes="100vw"
-              fill
-              {...restProps}
-              onContextMenu={e => e.preventDefault()}
-            />
-          )}
-        </div>
-        {caption && (
-          <figcaption
-            title={caption}
-            className={TypographyVariants({ socialLarge: 'sm', className: captionClassname })}
+  return (
+    <figure
+      style={{ '--item-width': `${itemWidth}px` } as CSSProperties}
+      className="relative flex h-full w-[var(--item-width)] flex-col gap-2"
+    >
+      <div className={cn(className, 'relative w-full h-full bg-ivory-100')}>
+        {!src ? (
+          <div
+            className={cn(className, 'relative')}
+            style={{ '--default-image-height': `${IMAGE_HEIGHT}px` } as CSSProperties}
           >
-            {caption}
-          </figcaption>
+            <div className="flex h-[var(--default-image-height)] w-full items-center justify-center bg-gray-300">
+              {commonT('somethingWentWrong')}
+            </div>
+          </div>
+        ) : (
+          <LightBoxNextImage
+            src={src}
+            className={cn('object-cover object-center', imageClassName)}
+            sizes="100vw"
+            fill
+            {...restProps}
+            onContextMenu={e => e.preventDefault()}
+          />
         )}
-      </figure>
-    )
-  }
-
-  return href ? <NextLink href={href}>{renderContent()}</NextLink> : renderContent()
+      </div>
+      {caption && (
+        <figcaption
+          title={caption}
+          className={TypographyVariants({ socialLarge: 'sm', className: captionClassname })}
+        >
+          {caption}
+        </figcaption>
+      )}
+    </figure>
+  )
 }

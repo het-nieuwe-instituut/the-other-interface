@@ -16,6 +16,7 @@ import { draftMode } from 'next/headers'
 import '../styles/globals.css'
 import bootstrap from './_bootstrap'
 import { Bootstrap } from './_bootstrap/Bootstrap'
+import { LightboxProvider } from '@/features/ui/components/lightbox/LightboxProvider'
 
 function MyApp({ children }: { children: React.ReactNode }) {
   const { isEnabled } = draftMode()
@@ -42,25 +43,27 @@ function MyApp({ children }: { children: React.ReactNode }) {
           </>
         )}
         <Bootstrap />
-        <ReduxStoreProvider>
-          <ReactQueryProvider>
-            <ThemeProvider>
-              <DisableScroll>
-                <MobileOverlayProvider>
-                  <div>
-                    <AppHead />
-                    <TestMenu />
-                    <ReduxDraftModeSync isDraftMode={isEnabled} />
-                    {children}
-                    <ReactTooltipInitializer />
-                    <BaseElementWrapper />
-                  </div>
-                </MobileOverlayProvider>
-              </DisableScroll>
-            </ThemeProvider>
-            <ReactQueryDevtools initialIsOpen={false} />
-          </ReactQueryProvider>
-        </ReduxStoreProvider>
+        <LightboxProvider>
+          <ReduxStoreProvider>
+            <ReactQueryProvider>
+              <ThemeProvider>
+                <DisableScroll>
+                  <MobileOverlayProvider>
+                    <div>
+                      <AppHead />
+                      <TestMenu />
+                      <ReduxDraftModeSync isDraftMode={isEnabled} />
+                      {children}
+                      <ReactTooltipInitializer />
+                      <BaseElementWrapper />
+                    </div>
+                  </MobileOverlayProvider>
+                </DisableScroll>
+              </ThemeProvider>
+              <ReactQueryDevtools initialIsOpen={false} />
+            </ReactQueryProvider>
+          </ReduxStoreProvider>
+        </LightboxProvider>
       </body>
     </html>
   )
