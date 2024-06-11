@@ -1003,7 +1003,8 @@ export interface ApiStoryStory extends Schema.CollectionType {
         'modules.image-carousel',
         'modules.image',
         'modules.buttons-module',
-        'core.stand-alone-link'
+        'core.stand-alone-link',
+        'core.mux-audio'
       ]
     > &
       Attribute.SetPluginOptions<{

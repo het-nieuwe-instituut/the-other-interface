@@ -21,6 +21,7 @@ import { Pullquote } from '../components/Pullquote/Pullquote'
 import { CarouselModule } from '../components/carousels/Carousel/Carousel'
 import { ImageCarousel } from '../components/carousels/ImageCarousel/ImageCarousel'
 import { mapUploadFileEntitiesToStoryImageInfo } from '../components/carousels/ImageCarousel/imageCarouselStrapiDataMapper'
+// import { MuxAudioPlayer } from '@/features/ui/components/mux-audio/MuxAudioPlayer'
 
 interface Props {
   components: DynamicComponents
@@ -184,6 +185,17 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
               </StandaloneLink>
             )
           }
+          // if (component?.__typename === 'ComponentCoreMuxAudio') {
+          //   console.log(component)
+          //   return (
+          //     <MuxAudioPlayer
+          //       title={'test'}
+          //       playbackId={component.id}
+          //       caption={'test'}
+          //       key={keyExtractor(component.id, index, array)}
+          //     />
+          //   )
+          // }
         }
         return null
       }) ?? null}
