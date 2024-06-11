@@ -2,12 +2,12 @@ import MuxPlayer from '@mux/mux-player-react/lazy'
 
 interface MuxAudioPlayerProps {
   title?: string | null
-  playbackId?: string | null
+  playbackId: string
   caption?: string | null
 }
 
 export const MuxAudioPlayer: React.FC<MuxAudioPlayerProps> = ({ playbackId, caption, title }) => {
-  if (!title || !playbackId) return null
+  if (!title) return null
 
   return (
     <>
@@ -17,7 +17,7 @@ export const MuxAudioPlayer: React.FC<MuxAudioPlayerProps> = ({ playbackId, capt
         playbackId={playbackId}
         accentColor="#A0AEC0"
         audio
-        style={{ height: '50px' }}
+        className="h-[50px]"
       />
       {caption && <p>{caption}</p>}
     </>
