@@ -17,17 +17,11 @@ export class ThemeFiltersInput {
   @Field(() => DateTimeFilterInput, { nullable: true })
   public createdAt?: DateTimeFilterInput
 
-  @Field(() => StringFilterInput, { nullable: true })
-  public firstName?: StringFilterInput
-
   @Field(() => IdFilterInput, { nullable: true })
   public id?: IdFilterInput
 
   @Field(() => StringFilterInput, { nullable: true })
   public insertion?: StringFilterInput
-
-  @Field(() => StringFilterInput, { nullable: true })
-  public lastName?: StringFilterInput
 
   @Field(() => ThemeFiltersInput, { nullable: true })
   public not?: ThemeFiltersInput

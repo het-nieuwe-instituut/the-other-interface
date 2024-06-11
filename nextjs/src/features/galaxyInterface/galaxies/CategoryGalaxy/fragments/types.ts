@@ -1,6 +1,8 @@
-//  WIll be replaced with business logic integrated
-export type Record = {
-  id: number
-  title: string
-  thumbnail: string | null
+import { EntityNames } from 'src/generated/graphql'
+
+export type MappedRecord = {
+  id: string
+  thumbnail?: string | null
+  title?: string | null
+  type: EntityNames
 }

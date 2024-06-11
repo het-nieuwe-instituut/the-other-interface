@@ -10,14 +10,14 @@ import {
 } from './theme.type'
 import { Theme } from './theme-dependency.type'
 import { EntityNames } from '../util/entityNames.type'
-import { Locale } from '../util/locale.type'
+import { LocaleArgs } from '../util/localeArgs.type'
 
 @Resolver()
 export class ThemeResolver {
   public constructor(@Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk) {}
 
   @Query(() => ThemeEntityResponse)
-  public async theme(@Args('id') id: string, @Args('locale') locale: Locale) {
+  public async theme(@Args('id') id: string, @Args() { locale }: LocaleArgs) {
     const res = await this.strapiGqlSdk.theme({ id, locale })
 
     return res.theme
@@ -25,11 +25,11 @@ export class ThemeResolver {
 
   @Query(() => ThemeRelationResponseCollection)
   public async themes(
+    @Args() { locale }: LocaleArgs,
     @Args('filters', { nullable: true }) filters?: ThemeFiltersInput,
     @Args('pagination', { nullable: true }) pagination?: PaginationArg,
     @Args('sort', { nullable: true, type: () => [String] }) sort?: string[],
-    @Args('publicationState', { nullable: true }) publicationState?: PublicationState,
-    @Args('locale', { nullable: true }) locale?: Locale
+    @Args('publicationState', { nullable: true }) publicationState?: PublicationState
   ) {
     const res = await this.strapiGqlSdk.themes({
       filters: filters || undefined,
@@ -43,7 +43,7 @@ export class ThemeResolver {
   }
 
   @Query(() => StoriesRelatedToThemeResponse)
-  public async storiesRealtedWithinTheme(@Args('id') id: string, @Args('locale') locale: Locale) {
+  public async storiesRealtedWithinTheme(@Args('id') id: string, @Args() { locale }: LocaleArgs) {
     const res = await this.strapiGqlSdk.storiesRelatedToTheme({
       storyId: id,
       lang: locale,

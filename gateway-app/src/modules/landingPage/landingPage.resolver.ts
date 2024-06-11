@@ -2,7 +2,7 @@ import { Inject } from '@nestjs/common'
 import { Args, Query, Resolver } from '@nestjs/graphql'
 import { PublicationState, Sdk } from '../../generated/strapi-sdk'
 import { PaginationArg } from '../strapi/shared-types'
-import { Locale } from '../util/locale.type'
+import { LocaleArgs } from '../util/localeArgs.type'
 import {
   LandingpageEntity,
   LandingpageEntityResponse,
@@ -15,13 +15,13 @@ export class LandingPageResolver {
   public constructor(@Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk) {}
 
   @Query(() => LandingpageEntityResponse)
-  public async landingpage(@Args('id') id: string, @Args('locale') locale: Locale) {
+  public async landingpage(@Args('id') id: string, @Args() { locale }: LocaleArgs) {
     return (await this.strapiGqlSdk.landingPage({ id, locale })).landingpage
   }
 
   @Query(() => LandingpageEntityResponseCollection)
   public async landingpages(
-    @Args('locale') locale: Locale,
+    @Args() { locale }: LocaleArgs,
     @Args('filters', { nullable: true }) filters?: LandingpageFiltersInput,
     @Args('pagination', { nullable: true }) pagination?: PaginationArg,
     @Args('publicationState', { nullable: true }) publicationState?: PublicationState,

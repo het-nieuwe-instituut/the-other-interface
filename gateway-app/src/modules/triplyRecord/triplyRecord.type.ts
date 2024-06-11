@@ -12,6 +12,7 @@ import { ArchiveZoomLevel3DetailType } from '../archives/archives.type'
 import { ObjectsZoomLevel3DetailType } from '../objects/objects.type'
 import { PublicationZoomLevel3DetailType } from '../publications/publications.type'
 import { PeopleZoomLevel3DetailType } from '../people/people.type'
+import { EntityNames } from '../util/entityNames.type'
 
 registerEnumType(Enum_Triplyrecord_Type, { name: 'Enum_Triplyrecord_Type' })
 
@@ -28,6 +29,9 @@ export class TriplyRecord {
 
   @Field(() => StoryRelationResponseCollection, { nullable: true })
   public stories?: StoryRelationResponseCollection
+
+  @Field(() => EntityNames, { nullable: false })
+  public entityName: EntityNames
 
   @Field(() => Enum_Triplyrecord_Type, { nullable: false })
   public type: Enum_Triplyrecord_Type
@@ -49,6 +53,9 @@ export class TriplyRecord {
 
   @Field({ nullable: true })
   public subject_collectionHighlights?: boolean
+
+  @Field({ nullable: true })
+  public label?: string
 }
 
 @ObjectType()
@@ -62,8 +69,8 @@ export class TriplyRecordRelationResponseCollection {
 
 @ObjectType()
 export class TriplyRecordEntity {
-  @Field(() => TriplyRecord, { nullable: true })
-  public attributes?: TriplyRecord
+  @Field(() => TriplyRecord, { nullable: false })
+  public attributes: TriplyRecord
 
   @Field(() => ID, { nullable: true })
   public id?: string
@@ -85,6 +92,9 @@ export class TriplyRecordFiltersInput {
 
   @Field(() => StringFilterInput, { nullable: true })
   public type?: StringFilterInput
+
+  @Field(() => StringFilterInput, { nullable: true })
+  public label?: StringFilterInput
 
   @Field(() => StoryFiltersInput, { nullable: true })
   public stories?: StoryFiltersInput

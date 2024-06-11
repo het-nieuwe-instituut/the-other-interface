@@ -1,5 +1,5 @@
 import { getCurrentZoomNumber } from '@/features/shared/helpers/getCurrentZoomNumber'
-import { isCloudCategory } from '@/features/shared/utils/categories'
+import { isCloudCategory, isSearchCategory } from '@/features/shared/utils/categories'
 import { useParams, usePathname, useSearchParams } from 'next/navigation'
 
 const getZoom2Link = (searchParam: string, category?: string) => {
@@ -7,6 +7,10 @@ const getZoom2Link = (searchParam: string, category?: string) => {
 
   if (isCloudCategory(category)) {
     return `/landingpage?category=${category}${search}`
+  }
+
+  if (isSearchCategory(category)) {
+    return `/landingpage?category=${category}${search}&searchResult=true`
   }
 
   return null

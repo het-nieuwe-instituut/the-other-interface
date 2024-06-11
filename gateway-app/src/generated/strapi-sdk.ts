@@ -8297,6 +8297,16 @@ export type StoriesIdsQuery = {
   stories?: {
     __typename?: 'StoryEntityResponseCollection'
     data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
+    meta: {
+      __typename?: 'ResponseCollectionMeta'
+      pagination: {
+        __typename?: 'Pagination'
+        page: number
+        pageCount: number
+        pageSize: number
+        total: number
+      }
+    }
   } | null
 }
 
@@ -16421,6 +16431,7 @@ export type TriplyRecordQuery = {
         updatedAt?: any | null
         publishedAt?: any | null
         subject_collectionHighlights?: boolean | null
+        label?: string | null
         stories?: {
           __typename?: 'StoryRelationResponseCollection'
           data: Array<{
@@ -16897,6 +16908,7 @@ export type TriplyRecordsQuery = {
         updatedAt?: any | null
         publishedAt?: any | null
         subject_collectionHighlights?: boolean | null
+        label?: string | null
         stories?: {
           __typename?: 'StoryRelationResponseCollection'
           data: Array<{
@@ -17372,6 +17384,7 @@ export type TriplyRecordFragmentFragment = {
     updatedAt?: any | null
     publishedAt?: any | null
     subject_collectionHighlights?: boolean | null
+    label?: string | null
     stories?: {
       __typename?: 'StoryRelationResponseCollection'
       data: Array<{
@@ -19142,6 +19155,7 @@ export const TriplyRecordFragmentFragmentDoc = gql`
       updatedAt
       publishedAt
       subject_collectionHighlights
+      label
     }
   }
   ${StoryFragmentFragmentDoc}
@@ -19454,8 +19468,12 @@ export const StoriesIdsDocument = gql`
       data {
         id
       }
+      meta {
+        ...ResponseCollectionMetaFragment
+      }
     }
   }
+  ${ResponseCollectionMetaFragmentFragmentDoc}
 `
 export const StoryDocument = gql`
   query story($id: ID, $locale: I18NLocaleCode) {
