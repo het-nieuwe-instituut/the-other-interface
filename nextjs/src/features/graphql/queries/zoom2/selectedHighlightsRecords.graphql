@@ -1,0 +1,18 @@
+query searchBySelectedHighlights($filters: TriplyRecordFiltersInput, $page: Int, $pageSize: Int) {
+  triplyRecords(filters: $filters, pagination: { page: $page, pageSize: $pageSize }) {
+    data {
+      id
+      attributes {
+        label
+        entityName
+        recordId
+      }
+    }
+    meta {
+      pagination {
+        page
+        total
+      }
+    }
+  }
+}

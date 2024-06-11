@@ -12,7 +12,7 @@ import {
 } from './story.type'
 import { StoryEntityResponse } from './story.types.circular'
 import { StoryService } from './story.service'
-import { Locale } from '../util/locale.type'
+import { LocaleArgs } from '../util/localeArgs.type'
 
 @Resolver(Story)
 export class StoryFieldResolver {
@@ -51,9 +51,9 @@ export class StoryResolver {
     private readonly storyService: StoryService
   ) {}
 
-  @Query(() => StoryEntityResponseCollection)
+  @Query(() => StoryEntityResponse)
   public async storyByLocale(
-    @Args('locale') locale: Locale,
+    @Args() { locale }: LocaleArgs,
     @Args('filters', { nullable: true }) filters?: StoryFiltersInput,
     @Args('publicationState', { nullable: true }) publicationState?: PublicationState
   ) {
@@ -77,7 +77,7 @@ export class StoryResolver {
 
   @Query(() => StoryMetaEntityResponseCollection)
   public async storyMetaByLocale(
-    @Args('locale') locale: Locale,
+    @Args() { locale }: LocaleArgs,
     @Args('filters', { nullable: true }) filters?: StoryFiltersInput,
     @Args('publicationState', { nullable: true }) publicationState?: PublicationState
   ) {
@@ -127,7 +127,7 @@ export class StoryResolver {
 
   @Query(() => StoryEntityResponseCollection)
   public async stories(
-    @Args('locale') locale: Locale,
+    @Args() { locale }: LocaleArgs,
     @Args('filters', { nullable: true }) filters?: StoryFiltersInput,
     @Args('pagination', { nullable: true }) pagination?: PaginationArg,
     @Args('sort', { nullable: true, type: () => [String] }) sort?: string[],
@@ -145,7 +145,7 @@ export class StoryResolver {
   }
 
   @Query(() => StoryEntityResponse)
-  public async story(@Args('id') id: string, @Args('locale') locale: Locale) {
+  public async story(@Args('id') id: string, @Args() { locale }: LocaleArgs) {
     const res = await this.strapiGqlSdk.story({
       id,
       locale,
@@ -156,7 +156,7 @@ export class StoryResolver {
 
   @Query(() => StoryWithoutRelationsEntityResponseCollection)
   public async storiesWithoutRelations(
-    @Args('locale') locale: Locale,
+    @Args() { locale }: LocaleArgs,
     @Args('filters', { nullable: true }) filters?: StoryFiltersInput,
     @Args('pagination', { nullable: true }) pagination?: PaginationArg,
     @Args('sort', { nullable: true, type: () => [String] }) sort?: string[],
@@ -174,7 +174,7 @@ export class StoryResolver {
   }
 
   @Query(() => StoryWithoutRelationsEntityResponse)
-  public async storyWithoutRelations(@Args('id') id: string, @Args('locale') locale: Locale) {
+  public async storyWithoutRelations(@Args('id') id: string, @Args() { locale }: LocaleArgs) {
     const res = await this.strapiGqlSdk.storyWithoutRelations({ id, locale })
 
     return res.story

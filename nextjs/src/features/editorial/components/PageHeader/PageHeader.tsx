@@ -2,7 +2,7 @@
 
 import { ScrollToContent } from '@/features/pages/utils/utils'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import useScroll from '@/features/shared/hooks/useScroll'
+import useScroll from '@/features/shared/hooks/ui/useScroll'
 import { ParagraphWithLineClamp } from '@/features/ui/components/Paragraph/ParagraphWithLineClamp'
 import { NavButton } from '@/features/ui/components/nav-button/component'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'

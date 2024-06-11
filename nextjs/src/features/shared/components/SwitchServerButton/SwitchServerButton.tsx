@@ -10,7 +10,7 @@ function SwitchServerButton() {
 
   return (
     <MenuItem onClick={handleClick}>
-      {getCookie('isMockedServer') ? t('switchToLiveServer') : t('switchToMockedServer')}
+      {Boolean(getCookie('isMockedServer')) ? t('switchToLiveServer') : t('switchToMockedServer')}
     </MenuItem>
   )
 }

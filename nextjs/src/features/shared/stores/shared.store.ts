@@ -1,12 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { CloudCategory } from '../utils/categories'
+import { SearchCategory } from '../utils/categories'
 import { USER_LOOKS_ON } from '../constants/mainConstants'
+import { FilterArray } from '../hooks/search/useFilters'
 
 export type SharedState = {
   isDraftMode: boolean
   isMenuOpen: boolean
   isSearchModeActive: boolean
-  searchCategory: CloudCategory | null
+  searchValue: string
+  selectedFilters: FilterArray
+  searchCategory: SearchCategory | null
   isCategorySuggestionsOpen: boolean
   userLooksOn: (typeof USER_LOOKS_ON)[keyof typeof USER_LOOKS_ON]
 }
@@ -16,6 +19,8 @@ export const sharedInitialState: SharedState = {
   isMenuOpen: false,
   isSearchModeActive: false,
   searchCategory: null,
+  searchValue: '',
+  selectedFilters: [],
   isCategorySuggestionsOpen: false,
   userLooksOn: USER_LOOKS_ON.GALAXY,
 }
@@ -24,6 +29,22 @@ export const sharedSlice = createSlice({
   name: 'shared',
   initialState: sharedInitialState,
   reducers: {
+    setFilters: (
+      state,
+      action: PayloadAction<{
+        selectedFilters: SharedState['selectedFilters']
+      }>
+    ) => {
+      state.selectedFilters = action.payload.selectedFilters
+    },
+    setSearch: (
+      state,
+      action: PayloadAction<{
+        searchValue: SharedState['searchValue']
+      }>
+    ) => {
+      state.searchValue = action.payload.searchValue
+    },
     menuOpen: (
       state,
       action: PayloadAction<{

@@ -1,17 +1,16 @@
 import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
 import { EditorialLayer } from '@/features/shared/components/Layers/EditorialLayer/EditorialLayer'
 import { CloudCategory } from '@/features/shared/utils/categories'
-import { LandingpageBySlugQuery } from 'src/generated/graphql'
 import { CategoryGalaxy } from '../../../galaxyInterface/galaxies/CategoryGalaxy/CategoryGalaxy'
+import { HomeOrLadingType } from 'src/app/landingpage/page'
 
 interface Props {
   category: CloudCategory
-  landingpage?: LandingpageBySlugQuery
+  editorialData?: HomeOrLadingType
+  description?: string | null
 }
 
-export const LandingpageContainer: React.FC<Props> = ({ landingpage }) => {
-  const editorialData = landingpage?.landingpages?.data[0]?.attributes
-
+export const LandingpageContainer: React.FC<Props> = ({ editorialData, description }) => {
   return (
     <div>
       <GalaxyInterface>
@@ -20,9 +19,9 @@ export const LandingpageContainer: React.FC<Props> = ({ landingpage }) => {
 
       {editorialData && (
         <EditorialLayer
-          title={editorialData.Title}
-          preface={editorialData.Description}
-          components={editorialData.components}
+          title={editorialData?.Title}
+          preface={description}
+          components={editorialData?.components}
         />
       )}
     </div>
