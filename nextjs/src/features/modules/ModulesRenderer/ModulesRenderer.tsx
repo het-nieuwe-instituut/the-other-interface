@@ -185,17 +185,17 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
               </StandaloneLink>
             )
           }
-          // if (component?.__typename === 'ComponentCoreMuxAudio') {
-          //   console.log(component)
-          //   return (
-          //     <MuxAudioPlayer
-          //       title={'test'}
-          //       playbackId={component.id}
-          //       caption={'test'}
-          //       key={keyExtractor(component.id, index, array)}
-          //     />
-          //   )
-          // }
+          if (component?.__typename === 'ComponentCoreMuxAudio') {
+            console.log('inside', component)
+            // return (
+            //   <MuxAudioPlayer
+            //     title={'test'}
+            //     playbackId={component.id}
+            //     caption={'test'}
+            //     key={keyExtractor(component.id, index, array)}
+            //   />
+            // )
+          }
         }
         return null
       }) ?? null}
