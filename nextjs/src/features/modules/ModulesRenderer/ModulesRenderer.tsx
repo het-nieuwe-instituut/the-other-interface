@@ -21,7 +21,7 @@ import { Pullquote } from '../components/Pullquote/Pullquote'
 import { CarouselModule } from '../components/carousels/Carousel/Carousel'
 import { ImageCarousel } from '../components/carousels/ImageCarousel/ImageCarousel'
 import { mapUploadFileEntitiesToStoryImageInfo } from '../components/carousels/ImageCarousel/imageCarouselStrapiDataMapper'
-// import { MuxAudioPlayer } from '@/features/ui/components/mux-audio/MuxAudioPlayer'
+import { MuxAudioPlayer } from '@/features/ui/components/mux-audio/MuxAudioPlayer'
 
 interface Props {
   components: DynamicComponents
@@ -186,15 +186,14 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
             )
           }
           if (component?.__typename === 'ComponentCoreMuxAudio') {
-            console.log('inside', component)
-            // return (
-            //   <MuxAudioPlayer
-            //     title={'test'}
-            //     playbackId={component.id}
-            //     caption={'test'}
-            //     key={keyExtractor(component.id, index, array)}
-            //   />
-            // )
+            return (
+              <MuxAudioPlayer
+                title={component.muxAudioRelation?.data?.attributes?.title}
+                playbackId={component.muxAudioRelation?.data?.attributes?.playback_id}
+                caption={component.caption}
+                key={keyExtractor(component.id, index, array)}
+              />
+            )
           }
         }
         return null
