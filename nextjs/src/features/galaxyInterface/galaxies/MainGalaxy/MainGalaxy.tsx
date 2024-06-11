@@ -5,6 +5,7 @@ import { TypographyVariants } from '@/features/ui/components/typography/variants
 import { useSearchParams } from 'next/navigation'
 import { GalaxyFooter } from '../../components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 import { GalaxyPagination } from '../../components/GalaxyWrapper/GalaxyPagination/GalaxyPagination'
+import BlurOverlay from '@/features/shared/components/BlurOverlay/BlurOverlay'
 import { ThemeTitle } from '../../components/ThemeTitle/ThemeTitle'
 import { CategoryCloud, Cloud, Stories } from './fragments'
 import { useThemesQuery } from './hooks/useThemes'
@@ -67,14 +68,18 @@ export const MainGalaxy = () => {
   const currentPage = parseInt(searchParams?.get('page') ?? '1')
 
   const {
-    storyTitle,
     stories,
     pagination,
+    storyTitle,
     isLoading: isMainLoading,
     isError,
   } = useThemesQuery(currentPage)
+
+  const { increasePageNumber, decreasePageNumber, isSearchModeActive } = usePresenter(
+    pagination?.pageCount || 0
+  )
+
   const { stories: nextStories, isLoading: isNextLoading } = useThemesQuery(currentPage + 1)
-  const { increasePageNumber, decreasePageNumber } = usePresenter(pagination?.pageCount || 0)
   const { t } = useTypeSafeTranslation('navigation')
   const isLoading = isMainLoading || isNextLoading
 
@@ -105,6 +110,7 @@ export const MainGalaxy = () => {
 
   return (
     <div className={'w-screen bg-pink-100'}>
+      {isSearchModeActive && <BlurOverlay />}
       <div className="relative mx-auto h-screen w-screen max-w-[1440px]">
         {categoryClouds.map(cloud => (
           <Cloud key={cloud.title} cloud={cloud} />

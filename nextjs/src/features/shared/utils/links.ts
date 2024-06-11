@@ -9,8 +9,8 @@ export const isExternalURL = (url: string, origin: string) => {
   }
 }
 
-export function getTriplyRecordPathForTypeAndId(type: EntityNames, id: string) {
-  const baseURL = 'https://collectiedata.hetnieuweinstituut.nl/id'
+export function getTriplyRecordPathForTypeAndId(type: EntityNames, id: string, base?: string) {
+  const baseURL = base ? base : 'https://collectiedata.hetnieuweinstituut.nl/id'
 
   switch (type) {
     case EntityNames.People:
@@ -18,12 +18,13 @@ export function getTriplyRecordPathForTypeAndId(type: EntityNames, id: string) {
     case EntityNames.Archives:
       return `${baseURL}/archives/${id}`
     case EntityNames.Publications:
-      return `${baseURL}/books/${id}`
+      return `${baseURL}/publications/${id}`
     case EntityNames.Objects:
       return `${baseURL}/objects/${id}`
     case EntityNames.Media:
       return `${baseURL}/media/${id}`
     case EntityNames.Stories:
+      return `${baseURL}/stories/${id}`
     case EntityNames.External:
     default:
       return ''

@@ -44,7 +44,7 @@ export class BaseZoomLevel3RelatedRecordType {
 @ObjectType()
 export class StoryCountType {
   @Field(() => Number, { nullable: true })
-  public archives?: number // problem: only getting back the total amount, not the amount for each category
+  public archives?: number
   @Field(() => Number, { nullable: true })
   public people?: number
   @Field(() => Number, { nullable: true })

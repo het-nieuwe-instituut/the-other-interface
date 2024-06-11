@@ -7,6 +7,8 @@ declare namespace NodeJS {
       NEXT_PUBLIC_DOMAIN_NAME: string
       NEXT_PUBLIC_GA_MEASUREMENT_ID: string
       NEXT_PUBLIC_ENV: string
+      NEXT_PUBLIC_HOST: string
+      STRAPI_PREVIEW_SECRET: string
     }
   }
 }
