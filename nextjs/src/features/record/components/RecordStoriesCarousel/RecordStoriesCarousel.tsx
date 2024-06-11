@@ -12,11 +12,9 @@ import {
   ImageCarousel,
   ImageCarouselItem,
 } from '@/features/ui/components/image-carousel/ImageCarousel'
-import { imageCarouselDefaultSlidesMapper } from '@/features/ui/components/image-carousel/mappers'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import useTranslation from 'next-translate/useTranslation'
 import { useParams } from 'next/navigation'
-import { useRouter } from 'next/router'
 import { useMemo } from 'react'
 
 export const RecordStoriesCarousel = () => {
@@ -34,7 +32,7 @@ export const RecordStoriesCarousel = () => {
       storiesToCarouselDataMapper(
         recordRelatedStories?.zoomLevel3StoriesRelationsForRecord?.stories
       ),
-    []
+    [recordRelatedStories?.zoomLevel3StoriesRelationsForRecord?.stories]
   )
 
   return (
@@ -44,18 +42,7 @@ export const RecordStoriesCarousel = () => {
           <h2 className={TypographyVariants({ impact: 'lg', className: 'mb-4' })}>
             {tRecord('relatedStoriesCarousel')} ({stories.length})
           </h2>
-          <ImageCarousel
-            getSlidesConfiguration={max =>
-              !stories
-                ? []
-                : imageCarouselDefaultSlidesMapper(stories, {
-                    maxSlideWidth: max,
-                    getHeight: story => story.height ?? 0,
-                    getWidth: story => story.width ?? 0,
-                    getCaption: story => story.description ?? undefined,
-                  })
-            }
-          >
+          <ImageCarousel>
             {stories.map(item => {
               let href = `/detail/${CATEGORIES.stories}/${item.id}`
               href = addLocaleToUrl(href, lang)

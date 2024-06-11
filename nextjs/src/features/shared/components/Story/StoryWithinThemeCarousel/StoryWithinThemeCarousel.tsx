@@ -8,11 +8,10 @@ import {
   ImageCarousel,
   ImageCarouselItem,
 } from '@/features/ui/components/image-carousel/ImageCarousel'
-import { imageCarouselDefaultSlidesMapper } from '@/features/ui/components/image-carousel/mappers'
+
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import useTranslation from 'next-translate/useTranslation'
 import { useParams } from 'next/navigation'
-import { useRouter } from 'next/router'
 
 export const StoryWithinThemeCarousel = () => {
   const params = useParams()
@@ -31,18 +30,7 @@ export const StoryWithinThemeCarousel = () => {
             {tStories('moreOnTheme')} ({stories.length})
           </h1>
 
-          <ImageCarousel
-            getSlidesConfiguration={max =>
-              !stories
-                ? []
-                : imageCarouselDefaultSlidesMapper(stories, {
-                    maxSlideWidth: max,
-                    getHeight: story => story.height ?? 0,
-                    getWidth: story => story.width ?? 0,
-                    getCaption: story => story.description ?? undefined,
-                  })
-            }
-          >
+          <ImageCarousel>
             {stories.map(item => {
               let href = `/detail/${CATEGORIES.stories}/${id}`
               href = addLocaleToUrl(href, lang)

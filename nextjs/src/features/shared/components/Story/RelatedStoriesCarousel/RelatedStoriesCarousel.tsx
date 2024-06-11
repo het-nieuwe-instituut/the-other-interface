@@ -8,7 +8,6 @@ import {
   ImageCarousel,
   ImageCarouselItem,
 } from '@/features/ui/components/image-carousel/ImageCarousel'
-import { imageCarouselDefaultSlidesMapper } from '@/features/ui/components/image-carousel/mappers'
 import useTranslation from 'next-translate/useTranslation'
 import { useParams } from 'next/navigation'
 import { useMemo } from 'react'
@@ -23,18 +22,25 @@ export const RelatedStoriesCarousel = () => {
 
   const story = data?.storyMetaByLocale?.data
 
-  const relatedStories = [
-    // childs if story has childs
-    ...(story?.attributes?.child_stories?.data ?? []),
+  const relatedStories = useMemo(
+    () => [
+      // childs if story has childs
+      ...(story?.attributes?.child_stories?.data ?? []),
 
-    // parent if story has parent
-    ...(story?.attributes?.parent_story?.data ? [story.attributes.parent_story.data] : []),
+      // parent if story has parent
+      ...(story?.attributes?.parent_story?.data ? [story.attributes.parent_story.data] : []),
 
-    // siblings if story has siblings
-    ...(story?.attributes?.siblings ?? []),
-  ]
+      // siblings if story has siblings
+      ...(story?.attributes?.siblings ?? []),
+    ],
+    [
+      story?.attributes?.child_stories?.data,
+      story?.attributes?.parent_story?.data,
+      story?.attributes?.siblings,
+    ]
+  )
 
-  const stories = useMemo(() => storiesToCarouselDataMapper(relatedStories), [])
+  const stories = useMemo(() => storiesToCarouselDataMapper(relatedStories), [relatedStories])
 
   return (
     <div>
@@ -43,18 +49,7 @@ export const RelatedStoriesCarousel = () => {
           <h1 className="mb-4">
             {tStories('relatedStories')} ({stories.length})
           </h1>
-          <ImageCarousel
-            getSlidesConfiguration={max =>
-              !stories
-                ? []
-                : imageCarouselDefaultSlidesMapper(stories, {
-                    maxSlideWidth: max,
-                    getHeight: story => story.height ?? 0,
-                    getWidth: story => story.width ?? 0,
-                    getCaption: story => story.description ?? undefined,
-                  })
-            }
-          >
+          <ImageCarousel>
             {stories.map(item => {
               let href = `/detail/${CATEGORIES.stories}/${item.id}`
               href = addLocaleToUrl(href, lang)

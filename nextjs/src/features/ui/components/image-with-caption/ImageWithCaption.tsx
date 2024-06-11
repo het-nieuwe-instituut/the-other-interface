@@ -8,6 +8,7 @@ import { TypographyVariants } from '../typography/variants'
 
 export interface ImageWithCaptionProps extends ImageProps {
   className?: string
+  imageClassName?: string
   captionClassname?: string
   caption?: string
 }
@@ -20,6 +21,7 @@ export const ImageWithCaption = ({
   caption,
   className,
   captionClassname,
+  imageClassName,
   height,
   width,
   ...restProps
@@ -46,7 +48,7 @@ export const ImageWithCaption = ({
           <NextImage
             src={imageSrc}
             alt={alt}
-            className="object-contain object-left"
+            className={cn('object-contain object-left', imageClassName)}
             sizes="100vw"
             fill
             {...restProps}

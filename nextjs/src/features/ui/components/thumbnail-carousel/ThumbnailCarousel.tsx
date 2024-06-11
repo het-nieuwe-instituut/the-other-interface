@@ -57,7 +57,7 @@ export const ThumbnailCarousel = ({ className, children }: ThumbnailCarouselProp
         </div>
 
         <div className="flex">
-          <div className=" overflow-x-scroll scrollbar-hide" ref={scrollContainerRef}>
+          <div className="scrollbar-hide overflow-x-scroll" ref={scrollContainerRef}>
             <div
               className="flex flex-nowrap gap-4"
               style={{

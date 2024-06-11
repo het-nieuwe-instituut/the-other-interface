@@ -1,67 +1,96 @@
 'use client'
-import 'keen-slider/keen-slider.min.css'
-import { CSSProperties, ReactElement, useContext } from 'react'
-import { ImageWithCaption, ImageWithCaptionProps } from '../image-with-caption/ImageWithCaption'
+import { CSSProperties, ReactElement, useContext, useRef } from 'react'
+import { ImageWithCaptionProps } from '../image-with-caption/ImageWithCaption'
 import Next from './Next.svg'
 import Previous from './Previous.svg'
 
-import React from 'react'
-import { useImageCarouselState } from './useImageCarousel'
-import { WebOptions } from 'keen-slider'
-import { cn } from '../../utils/cn'
 import { ThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
-import { calculateImagePropotions } from '@/features/modules/helpers/modulesHelpers'
-import { ImageWithCaptionLink } from '../image-with-caption/ImageWithCaptionLink'
+import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import NextImage, { ImageProps } from 'next/image'
+import NextLink from 'next/link'
+import React, { useState } from 'react'
+import { useResizeObserver } from 'usehooks-ts'
+import { useHorizontalSnappingList } from '../../hooks/useHorizontallScrollSnapping'
+import { cn } from '../../utils/cn'
+import { TypographyVariants } from '../typography/variants'
 
 interface ImageCarouselProps {
   children: Array<ReactElement<ImageWithCaptionProps> | null>
-  getSlidesConfiguration: WebOptions<unknown>['slides']
 }
 
 export const ImageCarouselContext = React.createContext({
-  instanceSize: 0,
+  itemWidth: 0,
 })
 
-export const ImageCarousel = ({ children, getSlidesConfiguration }: ImageCarouselProps) => {
-  const { loaded, sliderRef, instanceRef, next, previous } =
-    useImageCarouselState(getSlidesConfiguration)
+const IMAGE_HEIGHT = 600
+
+export const ImageCarousel = ({ children }: ImageCarouselProps) => {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const { width: containerWidth = 0 } = useResizeObserver({ ref: containerRef })
+  const [loaded, setLoaded] = useState(false)
+  const itemWidth = (containerWidth / 100) * 80
+  const restWidth = (containerWidth / 100) * 20
+  const { pages, width, nextPage, prevPage, scrollContainerRef, canScrollNext, canScrollPrev } =
+    useHorizontalSnappingList({
+      numberOfItems: children.length,
+      itemWidth,
+      gap: 16,
+      onDimensionsKnown: () => {
+        setLoaded(true)
+      },
+    })
 
   return (
     <ImageCarouselContext.Provider
       value={{
-        instanceSize: instanceRef?.current?.size ?? 0,
+        itemWidth: itemWidth,
       }}
     >
       <div
+        ref={containerRef}
         style={{ '--image-carousel-height': `${IMAGE_HEIGHT}px` } as CSSProperties}
-        className="relative flex flex-col items-center justify-center h-[var(--image-carousel-height)]"
+        className="relative flex h-[var(--image-carousel-height)] w-full flex-col items-center justify-center"
       >
         <div
+          ref={scrollContainerRef}
           className={cn(
-            'keen-slider',
             loaded
               ? 'opacity-100 h-[var(--image-carousel-height)]'
-              : 'opacity-0 h-[var(--image-carousel-height)]'
+              : 'opacity-0 h-[var(--image-carousel-height)]',
+            'scrollbar-hide overflow-x-scroll w-full relative h-full transition-opacity'
           )}
-          ref={sliderRef}
         >
-          {children}
+          <div
+            className="flex h-full flex-nowrap gap-4"
+            style={{
+              width: pages === 0 ? width : pages * (itemWidth + 16) + restWidth - 16,
+            }}
+          >
+            {children}
+          </div>
         </div>
         <div
           className={cn(
             !loaded
               ? 'size-full flex items-center justify-center absolute mask opacity-100'
-              : 'opacity-0 hidden'
+              : 'opacity-0 hidden',
+            'transition-opacity'
           )}
         >
           <ThemedSpinner />
         </div>
         <div className={cn('absolute flex justify-between w-full', !loaded && 'hidden')}>
-          <button onClick={previous}>
+          <button
+            onClick={prevPage}
+            className={cn(!canScrollPrev ? 'opacity-0' : 'opacity-100', 'transition-opacity')}
+          >
             <Previous />
           </button>
           <button>
-            <Next onClick={next} />
+            <Next
+              onClick={nextPage}
+              className={cn(!canScrollNext ? 'opacity-0' : 'opacity-100', 'transition-opacity')}
+            />
           </button>
         </div>
       </div>
@@ -69,43 +98,57 @@ export const ImageCarousel = ({ children, getSlidesConfiguration }: ImageCarouse
   )
 }
 
-const IMAGE_HEIGHT = 600
+export interface ImageCarouselItemProps extends ImageProps {
+  href?: string
+  className?: string
+  imageClassName?: string
+  captionClassname?: string
+  caption?: string
+}
 
-export const ImageCarouselItem = (
-  props: ImageWithCaptionProps & { height: number; width: number; href?: string }
-) => {
-  const { instanceSize } = useContext(ImageCarouselContext)
-  const { width: originalWidth, height: originalHeight, caption, href } = props
-  const { width, height } = calculateImagePropotions(
-    originalWidth ?? 0,
-    originalHeight,
-    IMAGE_HEIGHT,
-    instanceSize
-  )
+export const ImageCarouselItem = (props: ImageCarouselItemProps) => {
+  const { itemWidth } = useContext(ImageCarouselContext)
+  const { t: commonT } = useTypeSafeTranslation('common')
+  const { caption, className, src, imageClassName, captionClassname, href, ...restProps } = props
 
-  return (
-    <div
-      className="flex flex-col keen-slider__slide h-[var(--image-carousel-height)] pr-4"
-      style={{ width, height }}
-    >
-      {href ? (
-        <ImageWithCaptionLink
-          {...props}
-          href={href}
-          width={width}
-          height={height}
-          caption={caption}
-          captionClassname="line-clamp-2"
-        />
-      ) : (
-        <ImageWithCaption
-          {...props}
-          width={width}
-          height={height}
-          caption={caption}
-          captionClassname="line-clamp-2"
-        />
-      )}
-    </div>
-  )
+  const renderContent = () => {
+    return (
+      <figure
+        style={{ '--item-width': `${itemWidth}px` } as CSSProperties}
+        className="relative flex h-full w-[var(--item-width)] flex-col gap-2"
+      >
+        <div className={cn(className, 'relative w-full h-full bg-ivory-100')}>
+          {!src ? (
+            <div
+              className={cn(className, 'relative')}
+              style={{ '--default-image-height': `${IMAGE_HEIGHT}px` } as CSSProperties}
+            >
+              <div className="flex h-[var(--default-image-height)] w-full items-center justify-center bg-gray-300">
+                {commonT('somethingWentWrong')}
+              </div>
+            </div>
+          ) : (
+            <NextImage
+              src={src}
+              className={cn('object-cover object-center', imageClassName)}
+              sizes="100vw"
+              fill
+              {...restProps}
+              onContextMenu={e => e.preventDefault()}
+            />
+          )}
+        </div>
+        {caption && (
+          <figcaption
+            title={caption}
+            className={TypographyVariants({ socialLarge: 'sm', className: captionClassname })}
+          >
+            {caption}
+          </figcaption>
+        )}
+      </figure>
+    )
+  }
+
+  return href ? <NextLink href={href}>{renderContent()}</NextLink> : renderContent()
 }

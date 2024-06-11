@@ -2,7 +2,6 @@ import {
   ImageCarousel,
   ImageCarouselItem,
 } from '@/features/ui/components/image-carousel/ImageCarousel'
-import { imageCarouselDefaultSlidesMapper } from '@/features/ui/components/image-carousel/mappers'
 import { Title } from '@/features/ui/components/title/Title'
 import { cn } from '@/features/ui/utils/cn'
 import { StandaloneLink } from 'src/app/ks/link/StandaloneLink'
@@ -85,19 +84,7 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
 
           if (component?.__typename === 'ComponentModulesImageCarousel') {
             return (
-              <ImageCarousel
-                key={keyExtractor(component.id, index, array)}
-                getSlidesConfiguration={max =>
-                  !component.images?.data
-                    ? []
-                    : imageCarouselDefaultSlidesMapper(component.images.data, {
-                        maxSlideWidth: max,
-                        getHeight: image => image.attributes?.height ?? 0,
-                        getWidth: image => image.attributes?.width ?? 0,
-                        getCaption: image => image.attributes?.caption ?? undefined,
-                      })
-                }
-              >
+              <ImageCarousel key={keyExtractor(component.id, index, array)}>
                 {component.images?.data?.map(item => {
                   const attributes = item?.attributes
 

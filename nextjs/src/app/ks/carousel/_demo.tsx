@@ -1,10 +1,8 @@
 'use client'
-import { calculateImagePropotions } from '@/features/modules/helpers/modulesHelpers'
 import {
   ImageCarousel,
   ImageCarouselItem,
 } from '@/features/ui/components/image-carousel/ImageCarousel'
-import { imageCarouselDefaultSlidesMapper } from '@/features/ui/components/image-carousel/mappers'
 
 const stubData = [
   {
@@ -50,16 +48,7 @@ export const Demo = () => {
     <div>
       <p>Image carousel:</p>
 
-      <ImageCarousel
-        getSlidesConfiguration={max =>
-          imageCarouselDefaultSlidesMapper(stubData, {
-            maxSlideWidth: max,
-            getHeight: story => story.height ?? 0,
-            getWidth: story => story.width ?? 0,
-            getCaption: story => story.caption ?? undefined,
-          })
-        }
-      >
+      <ImageCarousel>
         {stubData.map(item => {
           return (
             <ImageCarouselItem
@@ -67,8 +56,6 @@ export const Demo = () => {
               key={item.id}
               src={item.src}
               alt={item.alt}
-              width={item.width}
-              height={item.height}
               caption={item.caption}
             />
           )
