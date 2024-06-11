@@ -15,6 +15,7 @@ export const MuxAudioPlayer: React.FC<MuxAudioPlayerProps> = ({ playbackId, capt
         title={title}
         streamType="on-demand"
         playbackId={playbackId}
+        accentColor="#A0AEC0"
         audio
         style={{ height: '50px' }}
       />
