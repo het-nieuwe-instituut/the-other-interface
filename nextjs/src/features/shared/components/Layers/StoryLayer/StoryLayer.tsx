@@ -1,5 +1,5 @@
 'use client'
-import { StoryMeta } from '../../../../story/components/StoryMeta/StoryMeta'
+
 import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 import { LayerWrapper } from '../LayerWrapper'
 import { StoryBottomContent } from '../../Story/StoryBottomContent/StoryBottomContent'
@@ -10,6 +10,7 @@ import { useRedirectToErrorOnError } from '@/features/shared/hooks/useRedirectTo
 import { ThemedSpinner } from '../../Loading/ThemedSpinner/ThemedSpinner'
 import ErrorBoundaryWrapper from '../../Error/ErrorBoundary/ErrorBoundary'
 import { PageHeader } from '@/features/editorial/components/PageHeader/PageHeader'
+import { StoryMeta } from '../../Story/StoryMeta/StoryMeta'
 
 export const StoryLayer = () => {
   const params = useParams()
@@ -31,7 +32,7 @@ export const StoryLayer = () => {
     <LayerWrapper
       LeftContent={
         <>
-          <PageHeader title={story?.title} preface={story?.description} />
+          <PageHeader title={story?.title} preface={story?.description} constrainPreface={true} />
           <DynamicComponentRenderer components={story?.attributes?.components} isStoryPage={true} />
         </>
       }

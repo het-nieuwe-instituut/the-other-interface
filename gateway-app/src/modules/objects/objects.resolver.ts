@@ -12,7 +12,7 @@ import {
 import { TriplyUtils } from '../triply/triply.utils'
 import { PaginationArgs } from '../util/paginationArgs.type'
 import { ObjectsService } from './objects.service'
-import { Locale } from '../util/locale.type'
+import { LocaleArgs } from '../util/localeArgs.type'
 
 @Resolver(ObjectRelationsType)
 export class ObjectRelationstZoomLevel3Resolver {
@@ -36,7 +36,7 @@ export class ObjectRelationstZoomLevel3Resolver {
 export class ObjectMakerResolver {
   public constructor(private readonly zoomLevel3Service: ZoomLevel3Service) {}
   @ResolveField()
-  public populatedMaker(@Parent() object: ObjectMakerType, @Args('locale') locale: Locale) {
+  public populatedMaker(@Parent() object: ObjectMakerType, @Args() { locale }: LocaleArgs) {
     if (!object.maker) {
       return
     }

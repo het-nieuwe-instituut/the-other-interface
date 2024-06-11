@@ -711,11 +711,6 @@ export interface ApiHomepageHomepage extends Schema.SingleType {
         }
       }>
     highlightedThemes: Attribute.Relation<'api::homepage.homepage', 'oneToMany', 'api::theme.theme'>
-    highlightedStories: Attribute.Relation<
-      'api::homepage.homepage',
-      'oneToMany',
-      'api::story.story'
-    >
     createdAt: Attribute.DateTime
     updatedAt: Attribute.DateTime
     publishedAt: Attribute.DateTime
@@ -1051,6 +1046,7 @@ export interface ApiThemeTheme extends Schema.CollectionType {
         }
       }>
     stories: Attribute.Relation<'api::theme.theme', 'manyToMany', 'api::story.story'>
+    highlightedStories: Attribute.Relation<'api::theme.theme', 'oneToMany', 'api::story.story'>
     createdAt: Attribute.DateTime
     updatedAt: Attribute.DateTime
     publishedAt: Attribute.DateTime

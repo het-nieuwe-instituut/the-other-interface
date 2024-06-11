@@ -12,20 +12,10 @@ import { ReduxDraftModeSync } from '@/features/shared/components/Redux/ReduxDraf
 import ReactQueryProvider from '@/features/shared/components/providers/ReactQueryProvider'
 import BaseElementWrapper from '@/features/shared/components/wrappers/BaseElementsWrapper'
 import { ReactTooltipInitializer } from '@/features/ui/components/tooltip/ReactTooltipInitializer'
-import { Metadata } from 'next'
 import { draftMode } from 'next/headers'
 import '../styles/globals.css'
-import { createTypeSafeTranslation } from '@/features/shared/utils/translations'
 import bootstrap from './_bootstrap'
 import { Bootstrap } from './_bootstrap/Bootstrap'
-
-export async function generateMetadata(): Promise<Metadata> {
-  const { t: commonT } = await createTypeSafeTranslation('common')
-
-  return {
-    title: commonT('metaTitle'),
-  }
-}
 
 function MyApp({ children }: { children: React.ReactNode }) {
   const { isEnabled } = draftMode()
@@ -57,14 +47,14 @@ function MyApp({ children }: { children: React.ReactNode }) {
             <ThemeProvider>
               <DisableScroll>
                 <MobileOverlayProvider>
-                  <>
+                  <div>
                     <AppHead />
                     <TestMenu />
                     <ReduxDraftModeSync isDraftMode={isEnabled} />
                     {children}
                     <ReactTooltipInitializer />
                     <BaseElementWrapper />
-                  </>
+                  </div>
                 </MobileOverlayProvider>
               </DisableScroll>
             </ThemeProvider>

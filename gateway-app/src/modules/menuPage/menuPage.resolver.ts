@@ -2,7 +2,7 @@ import { Inject } from '@nestjs/common'
 import { Args, Query, Resolver } from '@nestjs/graphql'
 import { PublicationState, Sdk } from '../../generated/strapi-sdk'
 import { PaginationArg } from '../strapi/shared-types'
-import { Locale } from '../util/locale.type'
+import { LocaleArgs } from '../util/localeArgs.type'
 import {
   MenupageEntityResponse,
   MenupageEntityResponseCollection,
@@ -15,7 +15,7 @@ export class MenuPageResolver {
 
   @Query(() => MenupageEntityResponse)
   public async menupage(
-    @Args('locale') locale: Locale,
+    @Args() { locale }: LocaleArgs,
     @Args('id', { nullable: true }) id?: string
   ) {
     return (await this.strapiGqlSdk.menuPage({ id, locale })).menupage
@@ -23,7 +23,7 @@ export class MenuPageResolver {
 
   @Query(() => MenupageEntityResponseCollection)
   public async menupages(
-    @Args('locale') locale: Locale,
+    @Args() { locale }: LocaleArgs,
     @Args('filters', { nullable: true }) filters?: MenupageFiltersInput,
     @Args('pagination', { nullable: true }) pagination?: PaginationArg,
     @Args('publicationState', { nullable: true }) publicationState?: PublicationState,

@@ -18,16 +18,23 @@ const Page: NextPage = () => {
       <h1 className={cn(TypographyVariants({ impact: 'xl' }))}>Extra large</h1>
       <h1 className={cn(TypographyVariants({ impact: 'lg' }))}>Large</h1>
       <h1 className={cn(TypographyVariants({ impact: 'md' }))}>Medium</h1>
+      <h1 className={cn(TypographyVariants({ impact: 'sm' }))}>Small</h1>
       Example: {`<h1 className={TypographyVariants({ impact: 'xl' })}>Extra large</h1>`}
       <hr />
       <p>Social large:</p>
-      <h1 className={cn(TypographyVariants({ social: 'xl' }))}>Extra large</h1>
-      <h1 className={cn(TypographyVariants({ social: 'lg' }))}>Large</h1>
-      <h1 className={cn(TypographyVariants({ social: 'md' }))}>Medium</h1>
-      <h1 className={cn(TypographyVariants({ social: 'sm' }))}>Small</h1>
-      <h1 className={cn(TypographyVariants({ social: 'placeholder' }))}>placeholder</h1>
-      <h1 className={cn(TypographyVariants({ social: 'label' }))}>Label</h1>
-      Example: {`<h1 className={TypographyVariants({ social: 'xl' })}>Extra large</h1>`}
+      <h1 className={cn(TypographyVariants({ socialLarge: 'xl' }))}>Extra large</h1>
+      <h1 className={cn(TypographyVariants({ socialLarge: 'lg' }))}>Large</h1>
+      <h1 className={cn(TypographyVariants({ socialLarge: 'md' }))}>Medium</h1>
+      <h1 className={cn(TypographyVariants({ socialLarge: 'sm' }))}>Small</h1>
+      <h1 className={cn(TypographyVariants({ socialLarge: 'placeholder' }))}>placeholder</h1>
+      <h1 className={cn(TypographyVariants({ socialLarge: 'label' }))}>Label</h1>
+      Example: {`<h1 className={TypographyVariants({ socialLarge: 'xl' })}>Extra large</h1>`}
+      <p>Social medium:</p>
+      <h1 className={cn(TypographyVariants({ socialMedium: 'xl' }))}>Extra large</h1>
+      <h1 className={cn(TypographyVariants({ socialMedium: 'lg' }))}>Large</h1>
+      <h1 className={cn(TypographyVariants({ socialMedium: 'md' }))}>Medium</h1>
+      <h1 className={cn(TypographyVariants({ socialMedium: 'sm' }))}>Small</h1>
+      Example: {`<h1 className={TypographyVariants({ socialMedium: 'xl' })}>Extra large</h1>`}
     </div>
   )
 }

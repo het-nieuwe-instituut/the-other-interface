@@ -1,5 +1,6 @@
 import { errors } from '@strapi/utils'
 import slugify from 'slugify'
+import { handleError } from '../../../lifecycleUtils'
 
 const storyApi = 'api::story.story'
 
@@ -75,7 +76,7 @@ async function applyToAllLocales(event) {
       if (parentChanges.disconnect.length) {
         data['parent_story'] = parentChanges
       } else {
-        await changeOtherLocalesParent(parentChanges?.connect?.[0].id, event.result.localizations)
+        await changeOtherLocalesParent(event.result.localizations, parentChanges?.connect?.[0]?.id)
       }
     }
 
@@ -171,7 +172,8 @@ async function checkIfParentIsNotAChildOrThrow(event, parentId: number) {
   }
 }
 
-async function changeOtherLocalesParent(parentId: number, localizations: any[]) {
+async function changeOtherLocalesParent(localizations: any[], parentId?: number) {
+  if (!parentId) return
   const parentWithLocales = await strapi.entityService.findOne(storyApi, parentId, {
     populate: ['localizations'],
   })
@@ -188,13 +190,4 @@ async function changeOtherLocalesParent(parentId: number, localizations: any[]) 
       return strapi.entityService.update(storyApi, l.id, { data })
     })
   )
-}
-
-function handleError(err: unknown) {
-  const ctx = strapi.requestContext.get()
-  if (err instanceof errors.ApplicationError) {
-    ctx.throw(400, err)
-  }
-
-  ctx.throw(500, err)
 }

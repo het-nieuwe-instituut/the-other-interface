@@ -22,8 +22,8 @@ export class ZoomLevel2Type {
   @Field(() => String, { nullable: true })
   public title: string | null
 
-  @Field(() => String, { nullable: true })
-  public id: string | null
+  @Field(() => String)
+  public id: string
 }
 
 @ObjectType()

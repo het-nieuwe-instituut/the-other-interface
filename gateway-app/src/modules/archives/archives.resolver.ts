@@ -15,7 +15,7 @@ import { TriplyUtils } from '../triply/triply.utils'
 import { CustomError } from '../util/customError'
 import { ArchivesService } from './archives.service'
 import { PaginationArgs } from '../util/paginationArgs.type'
-import { Locale } from '../util/locale.type'
+import { LocaleArgs } from '../util/localeArgs.type'
 
 @Resolver(ArchiveRelationsType)
 export class ArchivesRelationsZoomLevel3Resolver {
@@ -50,7 +50,7 @@ export class ArchivesFondsCreatorResolver {
   @ResolveField()
   public populatedCreator(
     @Parent() archiveCreator: ArchivesFondsCreatorType,
-    @Args('locale') locale: Locale
+    @Args() { locale }: LocaleArgs
   ) {
     if (!archiveCreator.creator) {
       return

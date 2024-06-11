@@ -29,7 +29,10 @@ export const ImageWithCaption = ({
 
   return (
     <figure className="relative flex flex-col gap-2">
-      <div className={cn(className, 'relative w-full')}>
+      <div
+        className={cn(className, 'relative max-w-[80rem] max-h-[85vh]')}
+        style={{ aspectRatio: `${width}/${height}` }}
+      >
         {!imageSrc ? (
           <div
             className={cn(className, 'relative')}
@@ -43,14 +46,9 @@ export const ImageWithCaption = ({
           <NextImage
             src={imageSrc}
             alt={alt}
-            className="h-auto w-full"
+            className="object-contain object-left"
             sizes="100vw"
-            width={width}
-            height={height}
-            style={{
-              width: '100%',
-              height: 'auto',
-            }}
+            fill
             {...restProps}
             onContextMenu={e => e.preventDefault()}
           />
@@ -59,7 +57,7 @@ export const ImageWithCaption = ({
       {caption && (
         <figcaption
           title={caption}
-          className={TypographyVariants({ social: 'sm', className: captionClassname })}
+          className={TypographyVariants({ socialLarge: 'sm', className: captionClassname })}
         >
           {caption}
         </figcaption>

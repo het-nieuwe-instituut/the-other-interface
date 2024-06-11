@@ -2,7 +2,7 @@
 
 import { ScrollToContent } from '@/features/pages/utils/utils'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import useScroll from '@/features/shared/hooks/useScroll'
+import useScroll from '@/features/shared/hooks/ui/useScroll'
 import { ParagraphWithLineClamp } from '@/features/ui/components/Paragraph/ParagraphWithLineClamp'
 import { NavButton } from '@/features/ui/components/nav-button/component'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
@@ -21,17 +21,18 @@ export const PageHeader: React.FC<Props> = ({ title, preface, constrainPreface }
   const [constrainPrefaceState, setConstrainPreface] = useState(constrainPreface)
 
   return (
-    <button
-      onClick={ScrollToContent}
-      className={cn(
-        scrollPosition < 750 ? 'cursor-pointer' : 'cursor-text',
-        'text-left flex flex-col gap-4  max-w-[calc(100vw-40px)]'
-      )}
-    >
-      {title && <h1 className={TypographyVariants({ impact: 'xl' })}>{title}</h1>}
-
+    <div className="flex max-w-[calc(100vw-40px)] flex-col  gap-4">
+      <button
+        onClick={ScrollToContent}
+        className={cn(
+          scrollPosition < 750 ? 'cursor-pointer' : 'cursor-text',
+          'text-left flex flex-col gap-4  max-w-[calc(100vw-40px)]'
+        )}
+      >
+        {title && <h1 className={TypographyVariants({ responsive: 'title' })}>{title}</h1>}
+      </button>
       {preface && (
-        <div className="relative flex max-w-[64em] flex-col items-start justify-start gap-5">
+        <div className="relative flex flex-col items-start justify-start gap-5 ">
           <ParagraphWithLineClamp
             disableLineClamp={!constrainPrefaceState}
             ReadmoreComponent={
@@ -48,6 +49,6 @@ export const PageHeader: React.FC<Props> = ({ title, preface, constrainPreface }
           </ParagraphWithLineClamp>
         </div>
       )}
-    </button>
+    </div>
   )
 }

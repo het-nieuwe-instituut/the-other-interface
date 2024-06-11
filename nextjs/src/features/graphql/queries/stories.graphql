@@ -1,4 +1,4 @@
-query stories($pagination: PaginationArg, $locale: String!) {
+query stories($pagination: PaginationArg, $locale: Locale!) {
   stories(pagination: $pagination, locale: $locale) {
     data {
       id
@@ -11,6 +11,62 @@ query stories($pagination: PaginationArg, $locale: String!) {
     meta {
       pagination {
         page
+      }
+    }
+  }
+}
+
+query searchByStories(
+  $searchTerm: String
+  $page: Int
+  $pageSize: Int
+  $locationsFilterTerm: ID
+  $themesFilterTerm: ID
+  $authorFilterTerm: ID
+  $locale: Locale!
+) {
+  stories(
+    filters: {
+      and: [
+        {
+          or: [
+            { locations: { id: { eq: $locationsFilterTerm } } }
+            { themes: { id: { eq: $themesFilterTerm } } }
+            { author: { id: { eq: $authorFilterTerm } } }
+          ]
+        }
+        {
+          or: [
+            { title: { containsi: $searchTerm } }
+            { description: { containsi: $searchTerm } }
+            { shortDescription: { containsi: $searchTerm } }
+          ]
+        }
+      ]
+      or: [
+        { title: { containsi: $searchTerm } }
+        { description: { containsi: $searchTerm } }
+        { shortDescription: { containsi: $searchTerm } }
+      ]
+    }
+    pagination: { page: $page, pageSize: $pageSize }
+    locale: $locale
+  ) {
+    data {
+      id
+      attributes {
+        title
+        components {
+          ... on ComponentModulesImage {
+            ...imageModuleFragment
+          }
+        }
+      }
+    }
+    meta {
+      pagination {
+        page
+        total
       }
     }
   }

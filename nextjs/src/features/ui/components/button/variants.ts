@@ -15,12 +15,13 @@ export const ButtonVariants = cva(
         secondary: ['h-12'],
         tertiary: [
           'h-12 border-none px-5',
-          'text-center font-social-large text-base font-normal leading-tight tracking-tight text-black-100',
+          'text-center font-social-large text-[16px] font-normal leading-tight tracking-tight text-black-100',
           'hover:border-black hover:bg-black-100 hover:text-white',
         ],
         inverted: [
-          'border-pink-100 text-pink-100',
+          'border-pink-100 text-white',
           'hover:border-pink-100 hover:bg-pink-100 hover:text-blue-100',
+          '*:text-white',
         ],
       },
       size: {

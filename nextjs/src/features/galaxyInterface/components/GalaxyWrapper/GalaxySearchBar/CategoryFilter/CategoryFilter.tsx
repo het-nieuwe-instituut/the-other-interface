@@ -1,7 +1,8 @@
-import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/SearchFilterBox'
+import ActionButton from '@/features/shared/components/SearchFilterBox/buttons/ActionButton/ActionButton'
 import { ChangeButton } from '@/features/shared/components/SearchFilterBox/buttons/ChangeButton/ChangeButton'
-import { FOOTER_Z_INDEX } from '@/features/shared/constants/mainConstants'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
+import { cn } from '@/features/ui/utils/cn'
 
 interface Props {
   selectedOption?: string
@@ -13,12 +14,24 @@ export const CategoryFilter: React.FC<Props> = ({ onClick, isOpen, selectedOptio
   const { t } = useTypeSafeTranslation('category')
 
   return (
-    <SearchFilterBox
-      zIndex={FOOTER_Z_INDEX + 1}
-      category={t('category')}
-      subCategory={selectedOption}
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+    <div
+      className={cn(
+        'bg-transparent text-pink.100 border border-pink.100',
+        'w-fit max-w-full h-[52px]',
+        'px-2'
+      )}
       onClick={onClick}
-      actionButton={<ChangeButton isOpen={isOpen} />}
-    />
+    >
+      <div className="relative flex max-w-full items-center justify-between pb-2 pt-1">
+        <p className={cn('truncate mr-1', TypographyVariants({ socialLarge: 'label' }))}>
+          {t('category')}
+        </p>
+        <ActionButton>{<ChangeButton isOpen={isOpen} />}</ActionButton>
+      </div>
+      <p className={cn('truncate', TypographyVariants({ socialLarge: 'textfield' }))}>
+        {selectedOption}
+      </p>
+    </div>
   )
 }

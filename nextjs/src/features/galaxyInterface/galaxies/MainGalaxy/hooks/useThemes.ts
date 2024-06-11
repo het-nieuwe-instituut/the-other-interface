@@ -21,25 +21,40 @@ export function useThemesQuery(page: number) {
   const lang = useLocale()
   const { isDraftMode } = useSelector((state: State) => state.shared)
 
-  const fetchThemes = async (page: number) => {
-    return api?.themes({
+  const fetchHighlightedThemes = async (page: number) => {
+    return await api?.highlightedHomepageThemes({
       locale: lang,
       pagination: { page, pageSize: 1 },
       publicationState: isDraftMode ? PublicationState.Preview : PublicationState.Live,
     })
   }
 
-  const queryFn = async () => fetchThemes(page)
+  const queryFn = async () => fetchHighlightedThemes(page)
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ['paginated-themes', page, lang, isDraftMode],
+    queryKey: ['paginated-highlighted-themes', page, lang, isDraftMode],
     queryFn,
     refetchOnWindowFocus: false,
   })
 
-  const storyTitle = data?.themes.data?.[0]?.attributes?.name
-  const stories = data?.themes.data?.[0]?.attributes?.stories?.data || []
-  const pagination = data?.themes.meta?.pagination
+  const storyTitle =
+    data?.highlightedHomepageThemes?.data?.attributes?.highlightedThemes?.data?.[0]?.attributes
+      ?.name
+  const stories =
+    data?.highlightedHomepageThemes?.data?.attributes?.highlightedThemes?.data?.[0]?.attributes
+      ?.stories?.data || []
+  const highlightedStories =
+    data?.highlightedHomepageThemes?.data?.attributes?.highlightedThemes?.data?.[0]?.attributes
+      ?.highlightedStories?.data
 
-  return { storyTitle, stories, pagination, isLoading, isError }
+  const pagination = data?.highlightedHomepageThemes.meta?.pagination
+
+  return {
+    storyTitle,
+    stories: highlightedStories && highlightedStories?.length > 0 ? highlightedStories : stories,
+    pagination,
+    isLoading,
+    isError,
+    page,
+  }
 }

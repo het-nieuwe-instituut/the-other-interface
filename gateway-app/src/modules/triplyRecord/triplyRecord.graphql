@@ -36,5 +36,6 @@ fragment TriplyRecordFragment on TriplyRecordEntity {
         updatedAt
         publishedAt
         subject_collectionHighlights
+        label
     }
 }
