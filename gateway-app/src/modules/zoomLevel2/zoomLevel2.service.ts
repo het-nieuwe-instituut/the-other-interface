@@ -6,7 +6,7 @@ import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { getUniqueById } from '../util/helpers'
 import { Locale } from '../util/locale.type'
 import { Enum_Triplyrecord_Type } from 'src/generated/strapi-sdk'
-import { FilterSuggestionType } from './zoomLevel2.type'
+import { FilterSuggestionType, SelectedFilterSuggestion } from './zoomLevel2.type'
 
 interface ResultData {
   thumbnail: string
@@ -35,14 +35,21 @@ export class ZoomLevel2Service {
     locale: Locale,
     entity: EntityNames,
     paginationArgs: PaginationArgs,
-    text?: string
+    text?: string | null,
+    selectedFilterSuggestions?: SelectedFilterSuggestion[] | null
   ) {
     switch (entity) {
       case EntityNames.Archives:
       case EntityNames.Objects:
       case EntityNames.People:
       case EntityNames.Publications:
-        return this.getZoomLevel2Data(locale, entity, paginationArgs, text)
+        return this.getZoomLevel2Data(
+          locale,
+          entity,
+          paginationArgs,
+          text,
+          selectedFilterSuggestions
+        )
 
       case EntityNames.Stories:
       default: {
@@ -51,13 +58,17 @@ export class ZoomLevel2Service {
     }
   }
 
-  public getDataAmount(entity: EntityNames, text?: string) {
+  public getDataAmount(
+    entity: EntityNames,
+    text?: string | null,
+    selectedFilterSuggestions?: SelectedFilterSuggestion[] | null
+  ) {
     switch (entity) {
       case EntityNames.Archives:
       case EntityNames.Objects:
       case EntityNames.People:
       case EntityNames.Publications:
-        return this.getZoomLevel2DataAmount(entity, text)
+        return this.getZoomLevel2DataAmount(entity, text, selectedFilterSuggestions)
 
       case EntityNames.Stories:
       default: {
@@ -100,15 +111,17 @@ export class ZoomLevel2Service {
     locale: Locale,
     type: EntityNames,
     paginationArgs: PaginationArgs,
-    text?: string
+    text?: string | null,
+    selectedFilterSuggestions?: SelectedFilterSuggestion[] | null
   ) {
     const uri = this.getUriForLevel2Data(type, text, { forCount: false })
+    const searchParams = this.getZoomLevel2SearchParams(selectedFilterSuggestions, text)
 
     const result = await this.triplyService.queryTriplyData<ResultData>(
       uri,
       resultDataKeys,
       paginationArgs,
-      { language: locale, text: text || '' }
+      { ...searchParams, language: locale }
     )
 
     const uniqueNodes = getUniqueById(result?.data).map(res => ({
@@ -123,14 +136,19 @@ export class ZoomLevel2Service {
     }
   }
 
-  private async getZoomLevel2DataAmount(type: EntityNames, text?: string) {
+  private async getZoomLevel2DataAmount(
+    type: EntityNames,
+    text?: string | null,
+    selectedFilterSuggestions?: SelectedFilterSuggestion[] | null
+  ) {
     const uri = this.getUriForLevel2Data(type, text, { forCount: true })
+    const searchParams = this.getZoomLevel2SearchParams(selectedFilterSuggestions, text)
 
     const countResult = await this.triplyService.queryTriplyData<{ total?: string }>(
       uri,
       { total: true },
       undefined,
-      text ? { text } : undefined
+      searchParams
     )
 
     const total = countResult?.data.pop()?.total ?? '0'
@@ -140,7 +158,11 @@ export class ZoomLevel2Service {
     }
   }
 
-  private getUriForLevel2Data(type: EntityNames, text = '', { forCount }: { forCount: boolean }) {
+  private getUriForLevel2Data(
+    type: EntityNames,
+    text: string | null = '',
+    { forCount }: { forCount: boolean }
+  ) {
     if (text) {
       return this.getUriForLevel2TextSearch(type, { forCount })
     }
@@ -197,5 +219,24 @@ export class ZoomLevel2Service {
       default:
         throw CustomError.externalCritical(`uri for type ${type} not implemented`)
     }
+  }
+
+  private getZoomLevel2SearchParams(
+    filterSuggestions?: FilterSuggestionType[] | null,
+    text?: string | null
+  ) {
+    const filterParams = (filterSuggestions || []).reduce<Record<string, string>>(
+      (acc, { key, value }) => {
+        acc[key] = value
+        return acc
+      },
+      {}
+    )
+
+    if (text) {
+      return { ...filterParams, text }
+    }
+
+    return filterParams
   }
 }

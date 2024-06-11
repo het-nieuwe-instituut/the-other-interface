@@ -1477,6 +1477,7 @@ export type QueryZoomLevel2Args = {
   locale: Locale;
   page: Scalars['Int'];
   pageSize?: InputMaybe<Scalars['Int']>;
+  selectedFilterSuggestions?: InputMaybe<Array<SelectedFilterSuggestion>>;
   text?: InputMaybe<Scalars['String']>;
 };
 
@@ -1484,6 +1485,7 @@ export type QueryZoomLevel2Args = {
 export type QueryZoomLevel2AmountArgs = {
   entityName: EntityNames;
   locale: Locale;
+  selectedFilterSuggestions?: InputMaybe<Array<SelectedFilterSuggestion>>;
   text?: InputMaybe<Scalars['String']>;
 };
 
@@ -1536,6 +1538,11 @@ export type SearchResultType = {
   nodes?: Maybe<Array<SearchResultItemType>>;
   page: Scalars['Int'];
   total: Scalars['Int'];
+};
+
+export type SelectedFilterSuggestion = {
+  key: Scalars['String'];
+  value: Scalars['String'];
 };
 
 export type StoriesRelatedToThemeResponse = {

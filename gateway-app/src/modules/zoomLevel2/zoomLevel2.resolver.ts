@@ -15,12 +15,22 @@ export class ZoomLevel2Resolver {
 
   @Query(() => ZoomLevel2ParentType)
   public async zoomLevel2(@Args() args: ZoomLevel2Args, @Args() paginationArgs: PaginationArgs) {
-    return this.zoomLevel2Service.getData(args.locale, args.entityName, paginationArgs, args.text)
+    return this.zoomLevel2Service.getData(
+      args.locale,
+      args.entityName,
+      paginationArgs,
+      args.text,
+      args.selectedFilterSuggestions
+    )
   }
 
   @Query(() => ZoomLevel2AmountParentType)
   public async zoomLevel2Amount(@Args() args: ZoomLevel2Args) {
-    return this.zoomLevel2Service.getDataAmount(args.entityName, args.text)
+    return this.zoomLevel2Service.getDataAmount(
+      args.entityName,
+      args.text,
+      args.selectedFilterSuggestions
+    )
   }
 
   @Query(() => [FilterSuggestionType], { nullable: true })
