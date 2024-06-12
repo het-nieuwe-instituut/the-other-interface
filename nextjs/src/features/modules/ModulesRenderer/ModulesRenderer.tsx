@@ -214,13 +214,14 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
 
             return (
               <MuxVideoPlayer
+                isReady={component.muxVideoRelation?.data?.attributes?.isReady}
                 title={component.muxVideoRelation?.data?.attributes?.title}
                 playbackId={component.muxVideoRelation?.data?.attributes?.playback_id}
                 caption={component.caption}
-                // aspectRatio={
-                //   component.muxVideoRelation?.data?.attributes?.aspect_ratio?.replace(':', ' / ') ??
-                //   '16 / 9'
-                // }
+                aspectRatio={
+                  component.muxVideoRelation?.data?.attributes?.aspect_ratio?.replace(':', ' / ') ??
+                  '16 / 9'
+                }
                 key={keyExtractor(component.id, index, array)}
               />
             )
