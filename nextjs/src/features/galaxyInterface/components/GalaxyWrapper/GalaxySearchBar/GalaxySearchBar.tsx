@@ -7,7 +7,11 @@ import { FilterInput, CloseButton } from './fragments'
 import { CategorySuggestions } from '../CategorySuggestions/CategorySuggestions'
 import { GoButton } from './fragments/GoButton'
 import { SearchButton } from './fragments/SearchButton'
-import { COLLECTION_HILIGHT_ID, Suggestions } from '../Suggestions/Suggestions'
+import {
+  COLLECTION_HILIGHT_ID,
+  Suggestions,
+  SuggestionsContainer,
+} from '../Suggestions/Suggestions'
 import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/SearchFilterBox'
 import { useSearchBarPosition } from './useSearchBarPosition'
 import CloseIconSmall from '@/icons/close-icon-small.svg'
@@ -134,7 +138,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }
           label={t('suggestions')}
           offset={searchBarHeight}
         >
-          <Suggestions handleSelectFilter={handleSelectFilter} />
+          <SuggestionsContainer handleSelectFilter={handleSelectFilter} />
         </SuggestionBar>
       )}
     </Grid>

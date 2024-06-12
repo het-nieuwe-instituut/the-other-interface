@@ -2029,6 +2029,15 @@ export type TitleModuleFragmentFragment = { __typename: 'ComponentModulesTitleMo
 
 export type Zoom3RelationsFragmentFragment = { __typename?: 'ZoomLevel3RelationsType', type: EntityNames, total?: number | null, paginatedRelations?: Array<string> | null };
 
+export type FilterSuggestionsQueryVariables = Exact<{
+  type: EnumTriplyrecordType;
+  locale: Locale;
+  search: Scalars['String'];
+}>;
+
+
+export type FilterSuggestionsQuery = { __typename?: 'Query', filterSuggestions?: Array<{ __typename?: 'FilterSuggestionType', key: string, value: string }> | null };
+
 export type HighlightedHomepageThemesQueryVariables = Exact<{
   pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<Scalars['String']>;
@@ -2161,6 +2170,7 @@ export type ThemesQuery = { __typename?: 'Query', themes: { __typename?: 'ThemeR
 
 export type TotalCounterQueryVariables = Exact<{
   locale: Locale;
+  selectedFilterSuggestions?: InputMaybe<Array<SelectedFilterSuggestion> | SelectedFilterSuggestion>;
 }>;
 
 
@@ -2222,6 +2232,7 @@ export type Zoom2AmountQueryVariables = Exact<{
   entityName: EntityNames;
   text?: InputMaybe<Scalars['String']>;
   locale: Locale;
+  selectedFilterSuggestions?: InputMaybe<Array<SelectedFilterSuggestion> | SelectedFilterSuggestion>;
 }>;
 
 
@@ -2240,6 +2251,7 @@ export type Zoom2ArchivesQuery = { __typename?: 'Query', zoomLevel2: { __typenam
 export type Zoom2ArchiveAmountQueryVariables = Exact<{
   text?: InputMaybe<Scalars['String']>;
   locale: Locale;
+  selectedFilterSuggestions?: InputMaybe<Array<SelectedFilterSuggestion> | SelectedFilterSuggestion>;
 }>;
 
 
@@ -2258,6 +2270,7 @@ export type Zoom2ObjectsQuery = { __typename?: 'Query', zoomLevel2: { __typename
 export type Zoom2ObjectsAmountQueryVariables = Exact<{
   text?: InputMaybe<Scalars['String']>;
   locale: Locale;
+  selectedFilterSuggestions?: InputMaybe<Array<SelectedFilterSuggestion> | SelectedFilterSuggestion>;
 }>;
 
 
@@ -2276,6 +2289,7 @@ export type Zoom2PeopleQuery = { __typename?: 'Query', zoomLevel2: { __typename?
 export type Zoom2PeopleAmountQueryVariables = Exact<{
   text?: InputMaybe<Scalars['String']>;
   locale: Locale;
+  selectedFilterSuggestions?: InputMaybe<Array<SelectedFilterSuggestion> | SelectedFilterSuggestion>;
 }>;
 
 
@@ -2294,6 +2308,7 @@ export type Zoom2PublicationsQuery = { __typename?: 'Query', zoomLevel2: { __typ
 export type Zoom2PublicationsAmountQueryVariables = Exact<{
   text?: InputMaybe<Scalars['String']>;
   locale: Locale;
+  selectedFilterSuggestions?: InputMaybe<Array<SelectedFilterSuggestion> | SelectedFilterSuggestion>;
 }>;
 
 
@@ -2887,6 +2902,14 @@ export const Zoom3RelationsFragmentFragmentDoc = gql`
   type
   total
   paginatedRelations
+}
+    `;
+export const FilterSuggestionsDocument = gql`
+    query filterSuggestions($type: Enum_Triplyrecord_Type!, $locale: Locale!, $search: String!) {
+  filterSuggestions(type: $type, locale: $locale, search: $search) {
+    key
+    value
+  }
 }
     `;
 export const HighlightedHomepageThemesDocument = gql`
@@ -3485,7 +3508,7 @@ export const ThemesDocument = gql`
 }
     ${ThemeFragmentFragmentDoc}`;
 export const TotalCounterDocument = gql`
-    query totalCounter($locale: Locale!) {
+    query totalCounter($locale: Locale!, $selectedFilterSuggestions: [SelectedFilterSuggestion!]) {
   stories(locale: $locale) {
     meta {
       pagination {
@@ -3493,16 +3516,32 @@ export const TotalCounterDocument = gql`
       }
     }
   }
-  archives: zoomLevel2Amount(entityName: Archives, locale: $locale) {
+  archives: zoomLevel2Amount(
+    entityName: Archives
+    locale: $locale
+    selectedFilterSuggestions: $selectedFilterSuggestions
+  ) {
     total
   }
-  objects: zoomLevel2Amount(entityName: Objects, locale: $locale) {
+  objects: zoomLevel2Amount(
+    entityName: Objects
+    locale: $locale
+    selectedFilterSuggestions: $selectedFilterSuggestions
+  ) {
     total
   }
-  people: zoomLevel2Amount(entityName: People, locale: $locale) {
+  people: zoomLevel2Amount(
+    entityName: People
+    locale: $locale
+    selectedFilterSuggestions: $selectedFilterSuggestions
+  ) {
     total
   }
-  publications: zoomLevel2Amount(entityName: Publications, locale: $locale) {
+  publications: zoomLevel2Amount(
+    entityName: Publications
+    locale: $locale
+    selectedFilterSuggestions: $selectedFilterSuggestions
+  ) {
     total
   }
 }
@@ -3582,8 +3621,13 @@ export const Zoom2Document = gql`
 }
     `;
 export const Zoom2AmountDocument = gql`
-    query Zoom2Amount($entityName: EntityNames!, $text: String, $locale: Locale!) {
-  zoomLevel2Amount(entityName: $entityName, text: $text, locale: $locale) {
+    query Zoom2Amount($entityName: EntityNames!, $text: String, $locale: Locale!, $selectedFilterSuggestions: [SelectedFilterSuggestion!]) {
+  zoomLevel2Amount(
+    entityName: $entityName
+    text: $text
+    locale: $locale
+    selectedFilterSuggestions: $selectedFilterSuggestions
+  ) {
     total
   }
 }
@@ -3607,8 +3651,13 @@ export const Zoom2ArchivesDocument = gql`
 }
     `;
 export const Zoom2ArchiveAmountDocument = gql`
-    query Zoom2ArchiveAmount($text: String, $locale: Locale!) {
-  zoomLevel2Amount(entityName: Archives, text: $text, locale: $locale) {
+    query Zoom2ArchiveAmount($text: String, $locale: Locale!, $selectedFilterSuggestions: [SelectedFilterSuggestion!]) {
+  zoomLevel2Amount(
+    entityName: Archives
+    text: $text
+    locale: $locale
+    selectedFilterSuggestions: $selectedFilterSuggestions
+  ) {
     total
   }
 }
@@ -3632,8 +3681,13 @@ export const Zoom2ObjectsDocument = gql`
 }
     `;
 export const Zoom2ObjectsAmountDocument = gql`
-    query Zoom2ObjectsAmount($text: String, $locale: Locale!) {
-  zoomLevel2Amount(entityName: Objects, text: $text, locale: $locale) {
+    query Zoom2ObjectsAmount($text: String, $locale: Locale!, $selectedFilterSuggestions: [SelectedFilterSuggestion!]) {
+  zoomLevel2Amount(
+    entityName: Objects
+    text: $text
+    locale: $locale
+    selectedFilterSuggestions: $selectedFilterSuggestions
+  ) {
     total
   }
 }
@@ -3657,8 +3711,13 @@ export const Zoom2PeopleDocument = gql`
 }
     `;
 export const Zoom2PeopleAmountDocument = gql`
-    query Zoom2PeopleAmount($text: String, $locale: Locale!) {
-  zoomLevel2Amount(entityName: People, text: $text, locale: $locale) {
+    query Zoom2PeopleAmount($text: String, $locale: Locale!, $selectedFilterSuggestions: [SelectedFilterSuggestion!]) {
+  zoomLevel2Amount(
+    entityName: People
+    text: $text
+    locale: $locale
+    selectedFilterSuggestions: $selectedFilterSuggestions
+  ) {
     total
   }
 }
@@ -3682,8 +3741,13 @@ export const Zoom2PublicationsDocument = gql`
 }
     `;
 export const Zoom2PublicationsAmountDocument = gql`
-    query Zoom2PublicationsAmount($text: String, $locale: Locale!) {
-  zoomLevel2Amount(entityName: Publications, text: $text, locale: $locale) {
+    query Zoom2PublicationsAmount($text: String, $locale: Locale!, $selectedFilterSuggestions: [SelectedFilterSuggestion!]) {
+  zoomLevel2Amount(
+    entityName: Publications
+    text: $text
+    locale: $locale
+    selectedFilterSuggestions: $selectedFilterSuggestions
+  ) {
     total
   }
 }
@@ -4019,6 +4083,9 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    filterSuggestions(variables: FilterSuggestionsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<FilterSuggestionsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<FilterSuggestionsQuery>(FilterSuggestionsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'filterSuggestions', 'query');
+    },
     highlightedHomepageThemes(variables: HighlightedHomepageThemesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<HighlightedHomepageThemesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<HighlightedHomepageThemesQuery>(HighlightedHomepageThemesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'highlightedHomepageThemes', 'query');
     },
