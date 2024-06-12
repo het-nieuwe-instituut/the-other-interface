@@ -187,7 +187,11 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
             )
           }
           if (component?.__typename === 'ComponentCoreMuxAudio') {
-            if (!component.muxAudioRelation?.data?.attributes?.playback_id) return null
+            if (
+              !component.muxAudioRelation?.data?.attributes?.playback_id ||
+              !component.muxAudioRelation?.data?.attributes?.title
+            )
+              return null
 
             return (
               <MuxAudioPlayer
