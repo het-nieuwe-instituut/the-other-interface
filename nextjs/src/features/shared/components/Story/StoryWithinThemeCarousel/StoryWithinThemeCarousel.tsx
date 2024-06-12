@@ -9,19 +9,34 @@ import {
   ImageCarouselItem,
 } from '@/features/ui/components/image-carousel/ImageCarousel'
 
+import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
-import useTranslation from 'next-translate/useTranslation'
 import { useParams } from 'next/navigation'
+import ErrorBox from '../../Error/ErrorBox'
+import { ThemedSpinner } from '../../Loading/ThemedSpinner/ThemedSpinner'
 
 export const StoryWithinThemeCarousel = () => {
   const params = useParams()
   const id = params?.id as string
   const lang = useLocale()
 
-  const { data } = useStoriesRelatedByTheme(id)
-  const { t: tStories } = useTranslation('stories')
+  const { data, isLoading, isError } = useStoriesRelatedByTheme(id)
+  const { t: tStories } = useTypeSafeTranslation('stories')
 
   const stories = storiesToCarouselDataMapper(data?.storiesRealtedWithinTheme?.stories)
+
+  if (isError) {
+    return <ErrorBox />
+  }
+
+  if (isLoading) {
+    return (
+      <div className="flex h-[600px] w-full items-center justify-center">
+        <ThemedSpinner />
+      </div>
+    )
+  }
+
   return (
     <div>
       {stories && stories.length > 0 && (
@@ -32,8 +47,7 @@ export const StoryWithinThemeCarousel = () => {
 
           <ImageCarousel>
             {stories.map(item => {
-              let href = `/detail/${CATEGORIES.stories}/${id}`
-              href = addLocaleToUrl(href, lang)
+              const href = addLocaleToUrl(`/detail/${CATEGORIES.stories}/${id}`, lang)
 
               if (!item || !item.height || !item.width || !item.url) {
                 return null

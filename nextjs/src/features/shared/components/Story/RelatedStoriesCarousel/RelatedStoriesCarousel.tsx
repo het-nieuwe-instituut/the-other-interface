@@ -1,6 +1,7 @@
 'use client'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useStoryMetaByIdQuery } from '@/features/shared/hooks/queries/useStoryMetaByIdQuery'
+import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { useLocale } from '@/features/shared/hooks/useLocale'
 import { storiesToCarouselDataMapper } from '@/features/shared/mappers/storiesToCarouselDataMapper'
 import { CATEGORIES } from '@/features/shared/utils/categories'
@@ -8,17 +9,21 @@ import {
   ImageCarousel,
   ImageCarouselItem,
 } from '@/features/ui/components/image-carousel/ImageCarousel'
-import useTranslation from 'next-translate/useTranslation'
 import { useParams } from 'next/navigation'
 import { useMemo } from 'react'
+import ErrorBox from '../../Error/ErrorBox'
+import { ThemedSpinner } from '../../Loading/ThemedSpinner/ThemedSpinner'
 
 export const RelatedStoriesCarousel = () => {
   const params = useParams()
   const id = params?.id as string
   const lang = useLocale()
-  const { t: tStories } = useTranslation('stories')
+  const { t: tStories } = useTypeSafeTranslation('stories')
 
-  const { data, isLoading } = useStoryMetaByIdQuery({ id, options: { fetchOnWindowFocus: false } })
+  const { data, isLoading, isError } = useStoryMetaByIdQuery({
+    id,
+    options: { fetchOnWindowFocus: false },
+  })
 
   const story = data?.storyMetaByLocale?.data
 
@@ -42,6 +47,18 @@ export const RelatedStoriesCarousel = () => {
 
   const stories = useMemo(() => storiesToCarouselDataMapper(relatedStories), [relatedStories])
 
+  if (isError) {
+    return <ErrorBox />
+  }
+
+  if (isLoading) {
+    return (
+      <div className="flex h-[600px] w-full items-center justify-center">
+        <ThemedSpinner />
+      </div>
+    )
+  }
+
   return (
     <div>
       {stories && stories.length > 0 && (
@@ -49,10 +66,10 @@ export const RelatedStoriesCarousel = () => {
           <h1 className="mb-4">
             {tStories('relatedStories')} ({stories.length})
           </h1>
+
           <ImageCarousel>
             {stories.map(item => {
-              let href = `/detail/${CATEGORIES.stories}/${item.id}`
-              href = addLocaleToUrl(href, lang)
+              const href = addLocaleToUrl(`/detail/${CATEGORIES.stories}/${item.id}`, lang)
 
               if (!item || !item.height || !item.width || !item.url) {
                 return null

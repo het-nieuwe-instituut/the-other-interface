@@ -1,78 +1,101 @@
 fragment ComponentCoreButtonFragment on ComponentCoreButton {
-    id
-    text
-    url
+  id
+  text
+  url
 }
 
 fragment ComponentCoreCarouselItemFragment on ComponentCoreCarouselItem {
-    id
-    description
-    name
-    picture {
-        ...UploadFileEntityResponseFragment
+  id
+  description
+  name
+  picture {
+    ...UploadFileEntityResponseFragment
+  }
+  type
+  triply_record {
+    data {
+      ...BaseTriplyRecordFragment
     }
-    type
-    triply_record {
-        data {
-            ...BaseTriplyRecordFragment
-        }
-    }
+  }
 
-    story {
-        data {
-            id
-            attributes {
-                slug
-            }
-        }
+  story {
+    data {
+      id
+      attributes {
+        slug
+      }
     }
+  }
 }
 
 fragment ComponentCorePublicationDateFragment on ComponentCorePublicationDate {
-    id
-    date
-    displayType
+  id
+  date
+  displayType
 }
 
 fragment ComponentCoreTimeframeFragment on ComponentCoreTimeframe {
-    id
-    yearEnd
-    yearStart
+  id
+  yearEnd
+  yearStart
 }
 
 fragment ComponentCoreFeaturedFieldsFragment on ComponentCoreFeaturedFields {
-    id
-    label
-    value
+  id
+  label
+  value
 }
 
 fragment ComponentCoreGridFeaturedFieldsFragment on ComponentCoreGridFeaturedFields {
-    id
-    subtitle
-    title
-    story {
-        data {
-            id
-            attributes {
-                slug
-            }
-        }
+  id
+  subtitle
+  title
+  story {
+    data {
+      id
+      attributes {
+        slug
+      }
     }
-    thumbnail {
-        ...UploadFileEntityResponseFragment
+  }
+  thumbnail {
+    ...UploadFileEntityResponseFragment
+  }
+  triplyRecord {
+    data {
+      ...BaseTriplyRecordFragment
     }
-    triplyRecord {
-        data {
-            ...BaseTriplyRecordFragment
-        }
-    }
+  }
 }
 
 fragment ComponentCoreStandAloneLinkFragment on ComponentCoreStandAloneLink {
-    id
-    label
-    url
-    attachment {
-        ...UploadFileEntityResponseFragment
+  id
+  label
+  url
+  attachment {
+    ...UploadFileEntityResponseFragment
+  }
+}
+
+fragment ComponentCoreMuxAudioFragment on ComponentCoreMuxAudio {
+  id
+  caption
+  muxAudioRelation {
+    data {
+      id
+      attributes {
+        title
+        upload_id
+        asset_id
+        playback_id
+        signed
+        error_message
+        isReady
+        duration
+        aspect_ratio
+        createdAt
+        updatedAt
+      }
     }
+  }
 }
