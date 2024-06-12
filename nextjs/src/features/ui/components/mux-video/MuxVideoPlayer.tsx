@@ -3,19 +3,14 @@ import MuxPlayer from '@mux/mux-player-react/lazy'
 interface MuxVideoPlayerProps {
   title: string
   playbackId: string
-  //   posterUrl?: string
   caption?: string | null
-  //   placeholder?: string
-  //   aspectRatio?: string
-  //   thumbnailTime: number
+  aspectRatio?: string
 }
 
 export const MuxVideoPlayer: React.FC<MuxVideoPlayerProps> = ({
   playbackId,
-  //   posterUrl,
-  //   thumbnailTime,
   caption,
-  // aspectRatio,
+  aspectRatio,
   title,
 }) => {
   return (
@@ -25,12 +20,11 @@ export const MuxVideoPlayer: React.FC<MuxVideoPlayerProps> = ({
         title={title}
         streamType="on-demand"
         playbackId={playbackId}
-        // thumbnailTime={thumbnailTime}
-        // poster={posterUrl ? posterUrl : undefined}
         accentColor="#A0AEC0"
-        // style={{ aspectRatio: internalAspectRatio }}
+        style={{ aspectRatio: aspectRatio }}
+        className="h-[400px] "
       />
-      {caption && <p>{caption}</p>}
+      {caption && <p className="mt-[-30px]">{caption}</p>}
     </>
   )
 }

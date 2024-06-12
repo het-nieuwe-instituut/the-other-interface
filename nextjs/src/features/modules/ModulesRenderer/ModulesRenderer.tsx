@@ -215,13 +215,11 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
               <MuxVideoPlayer
                 title={component.muxVideoRelation?.data?.attributes?.title}
                 playbackId={component.muxVideoRelation?.data?.attributes?.playback_id}
-                // thumbnailTime={component.thumbnailTime ?? 0}
-                // posterUrl={component.poster?.data?.attributes?.url}
                 caption={component.caption}
                 // aspectRatio={
-                //     component.muxVideoRelation?.data?.attributes?.aspect_ratio?.replace(':', ' / ') ?? '16 / 9'
+                //   component.muxVideoRelation?.data?.attributes?.aspect_ratio?.replace(':', ' / ') ??
+                //   '16 / 9'
                 // }
-                // blurHashImage={blurHashImage}
                 key={keyExtractor(component.id, index, array)}
               />
             )
