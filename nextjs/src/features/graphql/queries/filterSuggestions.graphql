@@ -1,0 +1,6 @@
+query filterSuggestions($type: Enum_Triplyrecord_Type!, $locale: Locale!, $search: String!) {
+  filterSuggestions(type: $type, locale: $locale, search: $search) {
+    key
+    value
+  }
+}

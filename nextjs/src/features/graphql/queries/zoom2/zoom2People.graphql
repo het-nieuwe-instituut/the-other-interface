@@ -1,16 +1,25 @@
 query Zoom2People($page: Int!, $pageSize: Int!, $text: String, $locale: Locale!) {
-    zoomLevel2(entityName: People, page: $page, pageSize: $pageSize, text: $text, locale: $locale) {
-        page,
-        nodes {
-            title
-			thumbnail
-			id
-        }
+  zoomLevel2(entityName: People, page: $page, pageSize: $pageSize, text: $text, locale: $locale) {
+    page
+    nodes {
+      title
+      thumbnail
+      id
     }
+  }
 }
 
-query Zoom2PeopleAmount($text: String, $locale: Locale!) {
-    zoomLevel2Amount(entityName: People, text: $text, locale: $locale) {
-        total
-    }
+query Zoom2PeopleAmount(
+  $text: String
+  $locale: Locale!
+  $selectedFilterSuggestions: [SelectedFilterSuggestion!]
+) {
+  zoomLevel2Amount(
+    entityName: People
+    text: $text
+    locale: $locale
+    selectedFilterSuggestions: $selectedFilterSuggestions
+  ) {
+    total
+  }
 }
