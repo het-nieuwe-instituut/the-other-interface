@@ -327,6 +327,9 @@ fragment NestedStoryFragment on StoryEntity {
       ... on ComponentCoreStandAloneLink {
         ...ComponentCoreStandAloneLinkFragment
       }
+      ... on ComponentCoreMuxAudio {
+        ...ComponentCoreMuxAudioFragment
+      }
       ... on Error {
         ...ErrorFragment
       }
@@ -397,6 +400,9 @@ fragment LocalizedStoryFragment on StoryEntity {
       ... on ComponentCoreStandAloneLink {
         ...ComponentCoreStandAloneLinkFragment
       }
+      ... on ComponentCoreMuxAudio {
+        ...ComponentCoreMuxAudioFragment
+      }
       ... on Error {
         ...ErrorFragment
       }
@@ -439,6 +445,9 @@ fragment StoryFragment on StoryEntity {
       }
       ... on ComponentCoreStandAloneLink {
         ...ComponentCoreStandAloneLinkFragment
+      }
+      ... on ComponentCoreMuxAudio {
+        ...ComponentCoreMuxAudioFragment
       }
       ... on Error {
         ...ErrorFragment

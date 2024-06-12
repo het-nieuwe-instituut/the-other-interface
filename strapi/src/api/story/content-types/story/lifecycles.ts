@@ -101,21 +101,6 @@ async function checkParentChildConstraintsOrThrow(event) {
       })
     : undefined
 
-  // cannot be parent of itself
-  if (parentId && parentId === id) {
-    throw new errors.ApplicationError('Story cannot be parent of itself')
-  }
-
-  // cannot be child of itself
-  if (childrenChanges?.connect?.includes(id)) {
-    throw new errors.ApplicationError('Story cannot be child of itself')
-  }
-
-  // cannot have both a parent and children
-  if (parentId && childrenChanges?.connect?.length) {
-    throw new errors.ApplicationError('Story cannot have both a parent and children')
-  }
-
   // cannot add or remove children (field effectively disabled)
   const isEditing = story && childrenChanges !== undefined
   const isCreating = !story
@@ -126,29 +111,18 @@ async function checkParentChildConstraintsOrThrow(event) {
     throw new errors.ApplicationError(`Cannot add or remove child stories`)
   }
 
-  // children cannot have children
-  if (childrenChanges?.connect?.length) {
-    await checkIfChildrenAreNotParentsOrThrow(childrenChanges?.connect.map(c => c.id))
+  // cannot be parent of itself
+  if (parentId && parentId === id) {
+    throw new errors.ApplicationError('Story cannot be parent of itself')
+  }
+
+  if (parentId && story?.child_stories?.length) {
+    throw new errors.ApplicationError('Story cannot have children and be a child at the same time')
   }
 
   // parent cannot have a parent
   if (parentId) {
     await checkIfParentIsNotAChildOrThrow(event, parentId)
-  }
-}
-
-async function checkIfChildrenAreNotParentsOrThrow(childrenIds: number[]) {
-  if (!childrenIds?.length) return
-
-  const children = await strapi.entityService.findMany(storyApi, {
-    filters: {
-      id: { $in: childrenIds },
-    },
-    populate: ['child_stories'],
-  })
-
-  if (children.some(c => c.child_stories.length)) {
-    throw new errors.ApplicationError('Children stories cannot be parents of other stories')
   }
 }
 

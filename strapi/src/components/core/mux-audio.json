@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_core_mux_audios",
+  "info": {
+    "displayName": "MuxAudio",
+    "icon": "headphone"
+  },
+  "options": {},
+  "attributes": {
+    "caption": {
+      "type": "string"
+    },
+    "muxAudioRelation": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::mux-video-uploader.mux-asset"
+    }
+  }
+}

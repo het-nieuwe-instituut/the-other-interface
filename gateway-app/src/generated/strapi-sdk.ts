@@ -177,6 +177,13 @@ export type ComponentCoreGridFeaturedFieldsFiltersInput = {
   triplyRecord?: InputMaybe<TriplyRecordFiltersInput>
 }
 
+export type ComponentCoreMuxAudio = {
+  __typename?: 'ComponentCoreMuxAudio'
+  caption?: Maybe<Scalars['String']>
+  id: Scalars['ID']
+  muxAudioRelation?: Maybe<MuxVideoUploaderMuxAssetEntityResponse>
+}
+
 export type ComponentCorePublicationDate = {
   __typename?: 'ComponentCorePublicationDate'
   date?: Maybe<Scalars['Date']>
@@ -575,6 +582,7 @@ export type GenericMorph =
   | ComponentCoreCarouselItem
   | ComponentCoreFeaturedFields
   | ComponentCoreGridFeaturedFields
+  | ComponentCoreMuxAudio
   | ComponentCorePublicationDate
   | ComponentCoreStandAloneLink
   | ComponentCoreTimeframe
@@ -594,6 +602,7 @@ export type GenericMorph =
   | Landingpage
   | Location
   | Menupage
+  | MuxVideoUploaderMuxAsset
   | Story
   | Table
   | Theme
@@ -1031,6 +1040,7 @@ export type Mutation = {
   createLocationLocalization?: Maybe<LocationEntityResponse>
   createMenupage?: Maybe<MenupageEntityResponse>
   createMenupageLocalization?: Maybe<MenupageEntityResponse>
+  createMuxVideoUploaderMuxAsset?: Maybe<MuxVideoUploaderMuxAssetEntityResponse>
   createStory?: Maybe<StoryEntityResponse>
   createStoryLocalization?: Maybe<StoryEntityResponse>
   createTable?: Maybe<TableEntityResponse>
@@ -1050,6 +1060,7 @@ export type Mutation = {
   deleteLandingpage?: Maybe<LandingpageEntityResponse>
   deleteLocation?: Maybe<LocationEntityResponse>
   deleteMenupage?: Maybe<MenupageEntityResponse>
+  deleteMuxVideoUploaderMuxAsset?: Maybe<MuxVideoUploaderMuxAssetEntityResponse>
   deleteStory?: Maybe<StoryEntityResponse>
   deleteTable?: Maybe<TableEntityResponse>
   deleteTheme?: Maybe<ThemeEntityResponse>
@@ -1079,6 +1090,7 @@ export type Mutation = {
   updateLandingpage?: Maybe<LandingpageEntityResponse>
   updateLocation?: Maybe<LocationEntityResponse>
   updateMenupage?: Maybe<MenupageEntityResponse>
+  updateMuxVideoUploaderMuxAsset?: Maybe<MuxVideoUploaderMuxAssetEntityResponse>
   updateStory?: Maybe<StoryEntityResponse>
   updateTable?: Maybe<TableEntityResponse>
   updateTheme?: Maybe<ThemeEntityResponse>
@@ -1147,6 +1159,10 @@ export type MutationCreateMenupageLocalizationArgs = {
   data?: InputMaybe<MenupageInput>
   id?: InputMaybe<Scalars['ID']>
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
+}
+
+export type MutationCreateMuxVideoUploaderMuxAssetArgs = {
+  data: MuxVideoUploaderMuxAssetInput
 }
 
 export type MutationCreateStoryArgs = {
@@ -1224,6 +1240,10 @@ export type MutationDeleteLocationArgs = {
 export type MutationDeleteMenupageArgs = {
   id: Scalars['ID']
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
+}
+
+export type MutationDeleteMuxVideoUploaderMuxAssetArgs = {
+  id: Scalars['ID']
 }
 
 export type MutationDeleteStoryArgs = {
@@ -1336,6 +1356,11 @@ export type MutationUpdateMenupageArgs = {
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
 }
 
+export type MutationUpdateMuxVideoUploaderMuxAssetArgs = {
+  data: MuxVideoUploaderMuxAssetInput
+  id: Scalars['ID']
+}
+
 export type MutationUpdateStoryArgs = {
   data: StoryInput
   id: Scalars['ID']
@@ -1386,6 +1411,68 @@ export type MutationUploadArgs = {
   refId?: InputMaybe<Scalars['ID']>
 }
 
+export type MuxVideoUploaderMuxAsset = {
+  __typename?: 'MuxVideoUploaderMuxAsset'
+  aspect_ratio?: Maybe<Scalars['String']>
+  asset_id?: Maybe<Scalars['String']>
+  createdAt?: Maybe<Scalars['DateTime']>
+  duration?: Maybe<Scalars['Float']>
+  error_message?: Maybe<Scalars['String']>
+  isReady?: Maybe<Scalars['Boolean']>
+  playback_id?: Maybe<Scalars['String']>
+  signed: Scalars['Boolean']
+  title: Scalars['String']
+  updatedAt?: Maybe<Scalars['DateTime']>
+  upload_id?: Maybe<Scalars['String']>
+}
+
+export type MuxVideoUploaderMuxAssetEntity = {
+  __typename?: 'MuxVideoUploaderMuxAssetEntity'
+  attributes?: Maybe<MuxVideoUploaderMuxAsset>
+  id?: Maybe<Scalars['ID']>
+}
+
+export type MuxVideoUploaderMuxAssetEntityResponse = {
+  __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+  data?: Maybe<MuxVideoUploaderMuxAssetEntity>
+}
+
+export type MuxVideoUploaderMuxAssetEntityResponseCollection = {
+  __typename?: 'MuxVideoUploaderMuxAssetEntityResponseCollection'
+  data: Array<MuxVideoUploaderMuxAssetEntity>
+  meta: ResponseCollectionMeta
+}
+
+export type MuxVideoUploaderMuxAssetFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<MuxVideoUploaderMuxAssetFiltersInput>>>
+  aspect_ratio?: InputMaybe<StringFilterInput>
+  asset_id?: InputMaybe<StringFilterInput>
+  createdAt?: InputMaybe<DateTimeFilterInput>
+  duration?: InputMaybe<FloatFilterInput>
+  error_message?: InputMaybe<StringFilterInput>
+  id?: InputMaybe<IdFilterInput>
+  isReady?: InputMaybe<BooleanFilterInput>
+  not?: InputMaybe<MuxVideoUploaderMuxAssetFiltersInput>
+  or?: InputMaybe<Array<InputMaybe<MuxVideoUploaderMuxAssetFiltersInput>>>
+  playback_id?: InputMaybe<StringFilterInput>
+  signed?: InputMaybe<BooleanFilterInput>
+  title?: InputMaybe<StringFilterInput>
+  updatedAt?: InputMaybe<DateTimeFilterInput>
+  upload_id?: InputMaybe<StringFilterInput>
+}
+
+export type MuxVideoUploaderMuxAssetInput = {
+  aspect_ratio?: InputMaybe<Scalars['String']>
+  asset_id?: InputMaybe<Scalars['String']>
+  duration?: InputMaybe<Scalars['Float']>
+  error_message?: InputMaybe<Scalars['String']>
+  isReady?: InputMaybe<Scalars['Boolean']>
+  playback_id?: InputMaybe<Scalars['String']>
+  signed?: InputMaybe<Scalars['Boolean']>
+  title?: InputMaybe<Scalars['String']>
+  upload_id?: InputMaybe<Scalars['String']>
+}
+
 export type Pagination = {
   __typename?: 'Pagination'
   page: Scalars['Int']
@@ -1425,6 +1512,8 @@ export type Query = {
   me?: Maybe<UsersPermissionsMe>
   menupage?: Maybe<MenupageEntityResponse>
   menupages?: Maybe<MenupageEntityResponseCollection>
+  muxVideoUploaderMuxAsset?: Maybe<MuxVideoUploaderMuxAssetEntityResponse>
+  muxVideoUploaderMuxAssets?: Maybe<MuxVideoUploaderMuxAssetEntityResponseCollection>
   stories?: Maybe<StoryEntityResponseCollection>
   story?: Maybe<StoryEntityResponse>
   table?: Maybe<TableEntityResponse>
@@ -1530,6 +1619,16 @@ export type QueryMenupagesArgs = {
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
   pagination?: InputMaybe<PaginationArg>
   publicationState?: InputMaybe<PublicationState>
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
+}
+
+export type QueryMuxVideoUploaderMuxAssetArgs = {
+  id?: InputMaybe<Scalars['ID']>
+}
+
+export type QueryMuxVideoUploaderMuxAssetsArgs = {
+  filters?: InputMaybe<MuxVideoUploaderMuxAssetFiltersInput>
+  pagination?: InputMaybe<PaginationArg>
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
 }
 
@@ -1685,6 +1784,7 @@ export type StoryTriplyRecordsArgs = {
 }
 
 export type StoryComponentsDynamicZone =
+  | ComponentCoreMuxAudio
   | ComponentCoreStandAloneLink
   | ComponentModulesButtonsModule
   | ComponentModulesImage
@@ -3291,6 +3391,32 @@ export type HighlightedHomepageThemesQuery = {
                     locale?: string | null
                     components?: Array<
                       | {
+                          __typename: 'ComponentCoreMuxAudio'
+                          id: string
+                          caption?: string | null
+                          muxAudioRelation?: {
+                            __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                            data?: {
+                              __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'MuxVideoUploaderMuxAsset'
+                                title: string
+                                upload_id?: string | null
+                                asset_id?: string | null
+                                playback_id?: string | null
+                                signed: boolean
+                                error_message?: string | null
+                                isReady?: boolean | null
+                                duration?: number | null
+                                aspect_ratio?: string | null
+                                createdAt?: any | null
+                                updatedAt?: any | null
+                              } | null
+                            } | null
+                          } | null
+                        }
+                      | {
                           __typename: 'ComponentCoreStandAloneLink'
                           id: string
                           label: string
@@ -3521,6 +3647,7 @@ export type HighlightedHomepageThemesQuery = {
                           __typename?: 'Story'
                           title: string
                           components?: Array<
+                            | { __typename: 'ComponentCoreMuxAudio' }
                             | { __typename: 'ComponentCoreStandAloneLink' }
                             | { __typename: 'ComponentModulesButtonsModule' }
                             | {
@@ -3631,6 +3758,7 @@ export type HighlightedHomepageThemesQuery = {
                           __typename?: 'Story'
                           title: string
                           components?: Array<
+                            | { __typename: 'ComponentCoreMuxAudio' }
                             | { __typename: 'ComponentCoreStandAloneLink' }
                             | { __typename: 'ComponentModulesButtonsModule' }
                             | {
@@ -3752,6 +3880,32 @@ export type HighlightedHomepageThemesQuery = {
                     locale?: string | null
                     components?: Array<
                       | {
+                          __typename: 'ComponentCoreMuxAudio'
+                          id: string
+                          caption?: string | null
+                          muxAudioRelation?: {
+                            __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                            data?: {
+                              __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'MuxVideoUploaderMuxAsset'
+                                title: string
+                                upload_id?: string | null
+                                asset_id?: string | null
+                                playback_id?: string | null
+                                signed: boolean
+                                error_message?: string | null
+                                isReady?: boolean | null
+                                duration?: number | null
+                                aspect_ratio?: string | null
+                                createdAt?: any | null
+                                updatedAt?: any | null
+                              } | null
+                            } | null
+                          } | null
+                        }
+                      | {
                           __typename: 'ComponentCoreStandAloneLink'
                           id: string
                           label: string
@@ -3982,6 +4136,7 @@ export type HighlightedHomepageThemesQuery = {
                           __typename?: 'Story'
                           title: string
                           components?: Array<
+                            | { __typename: 'ComponentCoreMuxAudio' }
                             | { __typename: 'ComponentCoreStandAloneLink' }
                             | { __typename: 'ComponentModulesButtonsModule' }
                             | {
@@ -4092,6 +4247,7 @@ export type HighlightedHomepageThemesQuery = {
                           __typename?: 'Story'
                           title: string
                           components?: Array<
+                            | { __typename: 'ComponentCoreMuxAudio' }
                             | { __typename: 'ComponentCoreStandAloneLink' }
                             | { __typename: 'ComponentModulesButtonsModule' }
                             | {
@@ -7840,6 +7996,32 @@ export type StoriesQuery = {
         locale?: string | null
         components?: Array<
           | {
+              __typename: 'ComponentCoreMuxAudio'
+              id: string
+              caption?: string | null
+              muxAudioRelation?: {
+                __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                data?: {
+                  __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'MuxVideoUploaderMuxAsset'
+                    title: string
+                    upload_id?: string | null
+                    asset_id?: string | null
+                    playback_id?: string | null
+                    signed: boolean
+                    error_message?: string | null
+                    isReady?: boolean | null
+                    duration?: number | null
+                    aspect_ratio?: string | null
+                    createdAt?: any | null
+                    updatedAt?: any | null
+                  } | null
+                } | null
+              } | null
+            }
+          | {
               __typename: 'ComponentCoreStandAloneLink'
               id: string
               label: string
@@ -8058,6 +8240,7 @@ export type StoriesQuery = {
               __typename?: 'Story'
               title: string
               components?: Array<
+                | { __typename: 'ComponentCoreMuxAudio' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
@@ -8168,6 +8351,7 @@ export type StoriesQuery = {
               __typename?: 'Story'
               title: string
               components?: Array<
+                | { __typename: 'ComponentCoreMuxAudio' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
@@ -8334,6 +8518,32 @@ export type StoryQuery = {
         locale?: string | null
         components?: Array<
           | {
+              __typename: 'ComponentCoreMuxAudio'
+              id: string
+              caption?: string | null
+              muxAudioRelation?: {
+                __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                data?: {
+                  __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'MuxVideoUploaderMuxAsset'
+                    title: string
+                    upload_id?: string | null
+                    asset_id?: string | null
+                    playback_id?: string | null
+                    signed: boolean
+                    error_message?: string | null
+                    isReady?: boolean | null
+                    duration?: number | null
+                    aspect_ratio?: string | null
+                    createdAt?: any | null
+                    updatedAt?: any | null
+                  } | null
+                } | null
+              } | null
+            }
+          | {
               __typename: 'ComponentCoreStandAloneLink'
               id: string
               label: string
@@ -8552,6 +8762,7 @@ export type StoryQuery = {
               __typename?: 'Story'
               title: string
               components?: Array<
+                | { __typename: 'ComponentCoreMuxAudio' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
@@ -8662,6 +8873,7 @@ export type StoryQuery = {
               __typename?: 'Story'
               title: string
               components?: Array<
+                | { __typename: 'ComponentCoreMuxAudio' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
@@ -8825,6 +9037,32 @@ export type StoryByLocaleQuery = {
           }>
         } | null
         components?: Array<
+          | {
+              __typename: 'ComponentCoreMuxAudio'
+              id: string
+              caption?: string | null
+              muxAudioRelation?: {
+                __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                data?: {
+                  __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'MuxVideoUploaderMuxAsset'
+                    title: string
+                    upload_id?: string | null
+                    asset_id?: string | null
+                    playback_id?: string | null
+                    signed: boolean
+                    error_message?: string | null
+                    isReady?: boolean | null
+                    duration?: number | null
+                    aspect_ratio?: string | null
+                    createdAt?: any | null
+                    updatedAt?: any | null
+                  } | null
+                } | null
+              } | null
+            }
           | {
               __typename: 'ComponentCoreStandAloneLink'
               id: string
@@ -9031,6 +9269,32 @@ export type StoryByLocaleQuery = {
                 }>
               } | null
               components?: Array<
+                | {
+                    __typename: 'ComponentCoreMuxAudio'
+                    id: string
+                    caption?: string | null
+                    muxAudioRelation?: {
+                      __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                      data?: {
+                        __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'MuxVideoUploaderMuxAsset'
+                          title: string
+                          upload_id?: string | null
+                          asset_id?: string | null
+                          playback_id?: string | null
+                          signed: boolean
+                          error_message?: string | null
+                          isReady?: boolean | null
+                          duration?: number | null
+                          aspect_ratio?: string | null
+                          createdAt?: any | null
+                          updatedAt?: any | null
+                        } | null
+                      } | null
+                    } | null
+                  }
                 | {
                     __typename: 'ComponentCoreStandAloneLink'
                     id: string
@@ -9256,6 +9520,32 @@ export type StoriesByLocaleQuery = {
         } | null
         components?: Array<
           | {
+              __typename: 'ComponentCoreMuxAudio'
+              id: string
+              caption?: string | null
+              muxAudioRelation?: {
+                __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                data?: {
+                  __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'MuxVideoUploaderMuxAsset'
+                    title: string
+                    upload_id?: string | null
+                    asset_id?: string | null
+                    playback_id?: string | null
+                    signed: boolean
+                    error_message?: string | null
+                    isReady?: boolean | null
+                    duration?: number | null
+                    aspect_ratio?: string | null
+                    createdAt?: any | null
+                    updatedAt?: any | null
+                  } | null
+                } | null
+              } | null
+            }
+          | {
               __typename: 'ComponentCoreStandAloneLink'
               id: string
               label: string
@@ -9461,6 +9751,32 @@ export type StoriesByLocaleQuery = {
                 }>
               } | null
               components?: Array<
+                | {
+                    __typename: 'ComponentCoreMuxAudio'
+                    id: string
+                    caption?: string | null
+                    muxAudioRelation?: {
+                      __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                      data?: {
+                        __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'MuxVideoUploaderMuxAsset'
+                          title: string
+                          upload_id?: string | null
+                          asset_id?: string | null
+                          playback_id?: string | null
+                          signed: boolean
+                          error_message?: string | null
+                          isReady?: boolean | null
+                          duration?: number | null
+                          aspect_ratio?: string | null
+                          createdAt?: any | null
+                          updatedAt?: any | null
+                        } | null
+                      } | null
+                    } | null
+                  }
                 | {
                     __typename: 'ComponentCoreStandAloneLink'
                     id: string
@@ -9703,6 +10019,7 @@ export type StoriesMetaByLocaleQuery = {
               __typename?: 'Story'
               title: string
               components?: Array<
+                | { __typename: 'ComponentCoreMuxAudio' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
@@ -9813,6 +10130,7 @@ export type StoriesMetaByLocaleQuery = {
               __typename?: 'Story'
               title: string
               components?: Array<
+                | { __typename: 'ComponentCoreMuxAudio' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
@@ -10018,6 +10336,7 @@ export type StoriesMetaByLocaleQuery = {
                     __typename?: 'Story'
                     title: string
                     components?: Array<
+                      | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
@@ -10128,6 +10447,7 @@ export type StoriesMetaByLocaleQuery = {
                     __typename?: 'Story'
                     title: string
                     components?: Array<
+                      | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
@@ -10384,6 +10704,32 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
         locale?: string | null
         components?: Array<
           | {
+              __typename: 'ComponentCoreMuxAudio'
+              id: string
+              caption?: string | null
+              muxAudioRelation?: {
+                __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                data?: {
+                  __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'MuxVideoUploaderMuxAsset'
+                    title: string
+                    upload_id?: string | null
+                    asset_id?: string | null
+                    playback_id?: string | null
+                    signed: boolean
+                    error_message?: string | null
+                    isReady?: boolean | null
+                    duration?: number | null
+                    aspect_ratio?: string | null
+                    createdAt?: any | null
+                    updatedAt?: any | null
+                  } | null
+                } | null
+              } | null
+            }
+          | {
               __typename: 'ComponentCoreStandAloneLink'
               id: string
               label: string
@@ -10602,6 +10948,7 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
               __typename?: 'Story'
               title: string
               components?: Array<
+                | { __typename: 'ComponentCoreMuxAudio' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
@@ -10712,6 +11059,7 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
               __typename?: 'Story'
               title: string
               components?: Array<
+                | { __typename: 'ComponentCoreMuxAudio' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
@@ -10869,6 +11217,7 @@ export type StoriesByIdsQuery = {
         slug: string
         locale?: string | null
         components?: Array<
+          | { __typename?: 'ComponentCoreMuxAudio' }
           | { __typename?: 'ComponentCoreStandAloneLink' }
           | { __typename?: 'ComponentModulesButtonsModule' }
           | {
@@ -11115,6 +11464,32 @@ export type NestedStoryFragmentFragment = {
     } | null
     components?: Array<
       | {
+          __typename: 'ComponentCoreMuxAudio'
+          id: string
+          caption?: string | null
+          muxAudioRelation?: {
+            __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+            data?: {
+              __typename?: 'MuxVideoUploaderMuxAssetEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'MuxVideoUploaderMuxAsset'
+                title: string
+                upload_id?: string | null
+                asset_id?: string | null
+                playback_id?: string | null
+                signed: boolean
+                error_message?: string | null
+                isReady?: boolean | null
+                duration?: number | null
+                aspect_ratio?: string | null
+                createdAt?: any | null
+                updatedAt?: any | null
+              } | null
+            } | null
+          } | null
+        }
+      | {
           __typename: 'ComponentCoreStandAloneLink'
           id: string
           label: string
@@ -11322,6 +11697,32 @@ export type LocalizedStoryFragmentFragment = {
     } | null
     components?: Array<
       | {
+          __typename: 'ComponentCoreMuxAudio'
+          id: string
+          caption?: string | null
+          muxAudioRelation?: {
+            __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+            data?: {
+              __typename?: 'MuxVideoUploaderMuxAssetEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'MuxVideoUploaderMuxAsset'
+                title: string
+                upload_id?: string | null
+                asset_id?: string | null
+                playback_id?: string | null
+                signed: boolean
+                error_message?: string | null
+                isReady?: boolean | null
+                duration?: number | null
+                aspect_ratio?: string | null
+                createdAt?: any | null
+                updatedAt?: any | null
+              } | null
+            } | null
+          } | null
+        }
+      | {
           __typename: 'ComponentCoreStandAloneLink'
           id: string
           label: string
@@ -11528,6 +11929,32 @@ export type LocalizedStoryFragmentFragment = {
           } | null
           components?: Array<
             | {
+                __typename: 'ComponentCoreMuxAudio'
+                id: string
+                caption?: string | null
+                muxAudioRelation?: {
+                  __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                  data?: {
+                    __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'MuxVideoUploaderMuxAsset'
+                      title: string
+                      upload_id?: string | null
+                      asset_id?: string | null
+                      playback_id?: string | null
+                      signed: boolean
+                      error_message?: string | null
+                      isReady?: boolean | null
+                      duration?: number | null
+                      aspect_ratio?: string | null
+                      createdAt?: any | null
+                      updatedAt?: any | null
+                    } | null
+                  } | null
+                } | null
+              }
+            | {
                 __typename: 'ComponentCoreStandAloneLink'
                 id: string
                 label: string
@@ -11702,6 +12129,32 @@ export type StoryFragmentFragment = {
     publishedAt?: any | null
     locale?: string | null
     components?: Array<
+      | {
+          __typename: 'ComponentCoreMuxAudio'
+          id: string
+          caption?: string | null
+          muxAudioRelation?: {
+            __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+            data?: {
+              __typename?: 'MuxVideoUploaderMuxAssetEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'MuxVideoUploaderMuxAsset'
+                title: string
+                upload_id?: string | null
+                asset_id?: string | null
+                playback_id?: string | null
+                signed: boolean
+                error_message?: string | null
+                isReady?: boolean | null
+                duration?: number | null
+                aspect_ratio?: string | null
+                createdAt?: any | null
+                updatedAt?: any | null
+              } | null
+            } | null
+          } | null
+        }
       | {
           __typename: 'ComponentCoreStandAloneLink'
           id: string
@@ -11921,6 +12374,7 @@ export type StoryFragmentFragment = {
           __typename?: 'Story'
           title: string
           components?: Array<
+            | { __typename: 'ComponentCoreMuxAudio' }
             | { __typename: 'ComponentCoreStandAloneLink' }
             | { __typename: 'ComponentModulesButtonsModule' }
             | {
@@ -12031,6 +12485,7 @@ export type StoryFragmentFragment = {
           __typename?: 'Story'
           title: string
           components?: Array<
+            | { __typename: 'ComponentCoreMuxAudio' }
             | { __typename: 'ComponentCoreStandAloneLink' }
             | { __typename: 'ComponentModulesButtonsModule' }
             | {
@@ -12219,6 +12674,7 @@ export type StoryMetaFragmentFragment = {
           __typename?: 'Story'
           title: string
           components?: Array<
+            | { __typename: 'ComponentCoreMuxAudio' }
             | { __typename: 'ComponentCoreStandAloneLink' }
             | { __typename: 'ComponentModulesButtonsModule' }
             | {
@@ -12329,6 +12785,7 @@ export type StoryMetaFragmentFragment = {
           __typename?: 'Story'
           title: string
           components?: Array<
+            | { __typename: 'ComponentCoreMuxAudio' }
             | { __typename: 'ComponentCoreStandAloneLink' }
             | { __typename: 'ComponentModulesButtonsModule' }
             | {
@@ -12490,6 +12947,7 @@ export type LocalizedStoryMetaFragmentFragment = {
           __typename?: 'Story'
           title: string
           components?: Array<
+            | { __typename: 'ComponentCoreMuxAudio' }
             | { __typename: 'ComponentCoreStandAloneLink' }
             | { __typename: 'ComponentModulesButtonsModule' }
             | {
@@ -12600,6 +13058,7 @@ export type LocalizedStoryMetaFragmentFragment = {
           __typename?: 'Story'
           title: string
           components?: Array<
+            | { __typename: 'ComponentCoreMuxAudio' }
             | { __typename: 'ComponentCoreStandAloneLink' }
             | { __typename: 'ComponentModulesButtonsModule' }
             | {
@@ -12805,6 +13264,7 @@ export type LocalizedStoryMetaFragmentFragment = {
                 __typename?: 'Story'
                 title: string
                 components?: Array<
+                  | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
@@ -12915,6 +13375,7 @@ export type LocalizedStoryMetaFragmentFragment = {
                 __typename?: 'Story'
                 title: string
                 components?: Array<
+                  | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
@@ -13195,6 +13656,33 @@ export type ComponentCoreStandAloneLinkFragmentFragment = {
         provider_metadata?: any | null
         updatedAt?: any | null
         width?: number | null
+      } | null
+    } | null
+  } | null
+}
+
+export type ComponentCoreMuxAudioFragmentFragment = {
+  __typename?: 'ComponentCoreMuxAudio'
+  id: string
+  caption?: string | null
+  muxAudioRelation?: {
+    __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+    data?: {
+      __typename?: 'MuxVideoUploaderMuxAssetEntity'
+      id?: string | null
+      attributes?: {
+        __typename?: 'MuxVideoUploaderMuxAsset'
+        title: string
+        upload_id?: string | null
+        asset_id?: string | null
+        playback_id?: string | null
+        signed: boolean
+        error_message?: string | null
+        isReady?: boolean | null
+        duration?: number | null
+        aspect_ratio?: string | null
+        createdAt?: any | null
+        updatedAt?: any | null
       } | null
     } | null
   } | null
@@ -13612,6 +14100,32 @@ export type ThemeQuery = {
               locale?: string | null
               components?: Array<
                 | {
+                    __typename: 'ComponentCoreMuxAudio'
+                    id: string
+                    caption?: string | null
+                    muxAudioRelation?: {
+                      __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                      data?: {
+                        __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'MuxVideoUploaderMuxAsset'
+                          title: string
+                          upload_id?: string | null
+                          asset_id?: string | null
+                          playback_id?: string | null
+                          signed: boolean
+                          error_message?: string | null
+                          isReady?: boolean | null
+                          duration?: number | null
+                          aspect_ratio?: string | null
+                          createdAt?: any | null
+                          updatedAt?: any | null
+                        } | null
+                      } | null
+                    } | null
+                  }
+                | {
                     __typename: 'ComponentCoreStandAloneLink'
                     id: string
                     label: string
@@ -13830,6 +14344,7 @@ export type ThemeQuery = {
                     __typename?: 'Story'
                     title: string
                     components?: Array<
+                      | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
@@ -13940,6 +14455,7 @@ export type ThemeQuery = {
                     __typename?: 'Story'
                     title: string
                     components?: Array<
+                      | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
@@ -14092,6 +14608,32 @@ export type ThemesQuery = {
               locale?: string | null
               components?: Array<
                 | {
+                    __typename: 'ComponentCoreMuxAudio'
+                    id: string
+                    caption?: string | null
+                    muxAudioRelation?: {
+                      __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                      data?: {
+                        __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'MuxVideoUploaderMuxAsset'
+                          title: string
+                          upload_id?: string | null
+                          asset_id?: string | null
+                          playback_id?: string | null
+                          signed: boolean
+                          error_message?: string | null
+                          isReady?: boolean | null
+                          duration?: number | null
+                          aspect_ratio?: string | null
+                          createdAt?: any | null
+                          updatedAt?: any | null
+                        } | null
+                      } | null
+                    } | null
+                  }
+                | {
                     __typename: 'ComponentCoreStandAloneLink'
                     id: string
                     label: string
@@ -14310,6 +14852,7 @@ export type ThemesQuery = {
                     __typename?: 'Story'
                     title: string
                     components?: Array<
+                      | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
@@ -14420,6 +14963,7 @@ export type ThemesQuery = {
                     __typename?: 'Story'
                     title: string
                     components?: Array<
+                      | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
@@ -14580,6 +15124,32 @@ export type StoriesRelatedToThemeQuery = {
               locale?: string | null
               components?: Array<
                 | {
+                    __typename: 'ComponentCoreMuxAudio'
+                    id: string
+                    caption?: string | null
+                    muxAudioRelation?: {
+                      __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                      data?: {
+                        __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'MuxVideoUploaderMuxAsset'
+                          title: string
+                          upload_id?: string | null
+                          asset_id?: string | null
+                          playback_id?: string | null
+                          signed: boolean
+                          error_message?: string | null
+                          isReady?: boolean | null
+                          duration?: number | null
+                          aspect_ratio?: string | null
+                          createdAt?: any | null
+                          updatedAt?: any | null
+                        } | null
+                      } | null
+                    } | null
+                  }
+                | {
                     __typename: 'ComponentCoreStandAloneLink'
                     id: string
                     label: string
@@ -14798,6 +15368,7 @@ export type StoriesRelatedToThemeQuery = {
                     __typename?: 'Story'
                     title: string
                     components?: Array<
+                      | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
@@ -14908,6 +15479,7 @@ export type StoriesRelatedToThemeQuery = {
                     __typename?: 'Story'
                     title: string
                     components?: Array<
+                      | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
@@ -15048,6 +15620,32 @@ export type ThemeFragmentFragment = {
           locale?: string | null
           components?: Array<
             | {
+                __typename: 'ComponentCoreMuxAudio'
+                id: string
+                caption?: string | null
+                muxAudioRelation?: {
+                  __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                  data?: {
+                    __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'MuxVideoUploaderMuxAsset'
+                      title: string
+                      upload_id?: string | null
+                      asset_id?: string | null
+                      playback_id?: string | null
+                      signed: boolean
+                      error_message?: string | null
+                      isReady?: boolean | null
+                      duration?: number | null
+                      aspect_ratio?: string | null
+                      createdAt?: any | null
+                      updatedAt?: any | null
+                    } | null
+                  } | null
+                } | null
+              }
+            | {
                 __typename: 'ComponentCoreStandAloneLink'
                 id: string
                 label: string
@@ -15266,6 +15864,7 @@ export type ThemeFragmentFragment = {
                 __typename?: 'Story'
                 title: string
                 components?: Array<
+                  | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
@@ -15376,6 +15975,7 @@ export type ThemeFragmentFragment = {
                 __typename?: 'Story'
                 title: string
                 components?: Array<
+                  | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
@@ -15514,6 +16114,32 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
           locale?: string | null
           components?: Array<
             | {
+                __typename: 'ComponentCoreMuxAudio'
+                id: string
+                caption?: string | null
+                muxAudioRelation?: {
+                  __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                  data?: {
+                    __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'MuxVideoUploaderMuxAsset'
+                      title: string
+                      upload_id?: string | null
+                      asset_id?: string | null
+                      playback_id?: string | null
+                      signed: boolean
+                      error_message?: string | null
+                      isReady?: boolean | null
+                      duration?: number | null
+                      aspect_ratio?: string | null
+                      createdAt?: any | null
+                      updatedAt?: any | null
+                    } | null
+                  } | null
+                } | null
+              }
+            | {
                 __typename: 'ComponentCoreStandAloneLink'
                 id: string
                 label: string
@@ -15732,6 +16358,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                 __typename?: 'Story'
                 title: string
                 components?: Array<
+                  | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
@@ -15842,6 +16469,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                 __typename?: 'Story'
                 title: string
                 components?: Array<
+                  | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
@@ -15963,6 +16591,32 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
           locale?: string | null
           components?: Array<
             | {
+                __typename: 'ComponentCoreMuxAudio'
+                id: string
+                caption?: string | null
+                muxAudioRelation?: {
+                  __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                  data?: {
+                    __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'MuxVideoUploaderMuxAsset'
+                      title: string
+                      upload_id?: string | null
+                      asset_id?: string | null
+                      playback_id?: string | null
+                      signed: boolean
+                      error_message?: string | null
+                      isReady?: boolean | null
+                      duration?: number | null
+                      aspect_ratio?: string | null
+                      createdAt?: any | null
+                      updatedAt?: any | null
+                    } | null
+                  } | null
+                } | null
+              }
+            | {
                 __typename: 'ComponentCoreStandAloneLink'
                 id: string
                 label: string
@@ -16181,6 +16835,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                 __typename?: 'Story'
                 title: string
                 components?: Array<
+                  | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
@@ -16291,6 +16946,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                 __typename?: 'Story'
                 title: string
                 components?: Array<
+                  | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
@@ -16449,6 +17105,32 @@ export type TriplyRecordQuery = {
               locale?: string | null
               components?: Array<
                 | {
+                    __typename: 'ComponentCoreMuxAudio'
+                    id: string
+                    caption?: string | null
+                    muxAudioRelation?: {
+                      __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                      data?: {
+                        __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'MuxVideoUploaderMuxAsset'
+                          title: string
+                          upload_id?: string | null
+                          asset_id?: string | null
+                          playback_id?: string | null
+                          signed: boolean
+                          error_message?: string | null
+                          isReady?: boolean | null
+                          duration?: number | null
+                          aspect_ratio?: string | null
+                          createdAt?: any | null
+                          updatedAt?: any | null
+                        } | null
+                      } | null
+                    } | null
+                  }
+                | {
                     __typename: 'ComponentCoreStandAloneLink'
                     id: string
                     label: string
@@ -16667,6 +17349,7 @@ export type TriplyRecordQuery = {
                     __typename?: 'Story'
                     title: string
                     components?: Array<
+                      | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
@@ -16777,6 +17460,7 @@ export type TriplyRecordQuery = {
                     __typename?: 'Story'
                     title: string
                     components?: Array<
+                      | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
@@ -16926,6 +17610,32 @@ export type TriplyRecordsQuery = {
               locale?: string | null
               components?: Array<
                 | {
+                    __typename: 'ComponentCoreMuxAudio'
+                    id: string
+                    caption?: string | null
+                    muxAudioRelation?: {
+                      __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                      data?: {
+                        __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'MuxVideoUploaderMuxAsset'
+                          title: string
+                          upload_id?: string | null
+                          asset_id?: string | null
+                          playback_id?: string | null
+                          signed: boolean
+                          error_message?: string | null
+                          isReady?: boolean | null
+                          duration?: number | null
+                          aspect_ratio?: string | null
+                          createdAt?: any | null
+                          updatedAt?: any | null
+                        } | null
+                      } | null
+                    } | null
+                  }
+                | {
                     __typename: 'ComponentCoreStandAloneLink'
                     id: string
                     label: string
@@ -17144,6 +17854,7 @@ export type TriplyRecordsQuery = {
                     __typename?: 'Story'
                     title: string
                     components?: Array<
+                      | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
@@ -17254,6 +17965,7 @@ export type TriplyRecordsQuery = {
                     __typename?: 'Story'
                     title: string
                     components?: Array<
+                      | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
@@ -17401,6 +18113,32 @@ export type TriplyRecordFragmentFragment = {
           publishedAt?: any | null
           locale?: string | null
           components?: Array<
+            | {
+                __typename: 'ComponentCoreMuxAudio'
+                id: string
+                caption?: string | null
+                muxAudioRelation?: {
+                  __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                  data?: {
+                    __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'MuxVideoUploaderMuxAsset'
+                      title: string
+                      upload_id?: string | null
+                      asset_id?: string | null
+                      playback_id?: string | null
+                      signed: boolean
+                      error_message?: string | null
+                      isReady?: boolean | null
+                      duration?: number | null
+                      aspect_ratio?: string | null
+                      createdAt?: any | null
+                      updatedAt?: any | null
+                    } | null
+                  } | null
+                } | null
+              }
             | {
                 __typename: 'ComponentCoreStandAloneLink'
                 id: string
@@ -17620,6 +18358,7 @@ export type TriplyRecordFragmentFragment = {
                 __typename?: 'Story'
                 title: string
                 components?: Array<
+                  | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
@@ -17730,6 +18469,7 @@ export type TriplyRecordFragmentFragment = {
                 __typename?: 'Story'
                 title: string
                 components?: Array<
+                  | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
@@ -18527,6 +19267,30 @@ export const ComponentCoreStandAloneLinkFragmentFragmentDoc = gql`
   }
   ${UploadFileEntityResponseFragmentFragmentDoc}
 `
+export const ComponentCoreMuxAudioFragmentFragmentDoc = gql`
+  fragment ComponentCoreMuxAudioFragment on ComponentCoreMuxAudio {
+    id
+    caption
+    muxAudioRelation {
+      data {
+        id
+        attributes {
+          title
+          upload_id
+          asset_id
+          playback_id
+          signed
+          error_message
+          isReady
+          duration
+          aspect_ratio
+          createdAt
+          updatedAt
+        }
+      }
+    }
+  }
+`
 export const NestedStoryFragmentFragmentDoc = gql`
   fragment NestedStoryFragment on StoryEntity {
     id
@@ -18591,6 +19355,9 @@ export const NestedStoryFragmentFragmentDoc = gql`
         ... on ComponentCoreStandAloneLink {
           ...ComponentCoreStandAloneLinkFragment
         }
+        ... on ComponentCoreMuxAudio {
+          ...ComponentCoreMuxAudioFragment
+        }
         ... on Error {
           ...ErrorFragment
         }
@@ -18605,6 +19372,7 @@ export const NestedStoryFragmentFragmentDoc = gql`
   ${ComponentModulesImageFragmentFragmentDoc}
   ${ComponentModulesButtonsModuleFragmentFragmentDoc}
   ${ComponentCoreStandAloneLinkFragmentFragmentDoc}
+  ${ComponentCoreMuxAudioFragmentFragmentDoc}
   ${ErrorFragmentFragmentDoc}
 `
 export const LocalizedStoryFragmentFragmentDoc = gql`
@@ -18671,6 +19439,9 @@ export const LocalizedStoryFragmentFragmentDoc = gql`
         ... on ComponentCoreStandAloneLink {
           ...ComponentCoreStandAloneLinkFragment
         }
+        ... on ComponentCoreMuxAudio {
+          ...ComponentCoreMuxAudioFragment
+        }
         ... on Error {
           ...ErrorFragment
         }
@@ -18690,6 +19461,7 @@ export const LocalizedStoryFragmentFragmentDoc = gql`
   ${ComponentModulesImageFragmentFragmentDoc}
   ${ComponentModulesButtonsModuleFragmentFragmentDoc}
   ${ComponentCoreStandAloneLinkFragmentFragmentDoc}
+  ${ComponentCoreMuxAudioFragmentFragmentDoc}
   ${ErrorFragmentFragmentDoc}
   ${NestedStoryFragmentFragmentDoc}
 `
@@ -18980,6 +19752,9 @@ export const StoryFragmentFragmentDoc = gql`
         ... on ComponentCoreStandAloneLink {
           ...ComponentCoreStandAloneLinkFragment
         }
+        ... on ComponentCoreMuxAudio {
+          ...ComponentCoreMuxAudioFragment
+        }
         ... on Error {
           ...ErrorFragment
         }
@@ -19086,6 +19861,7 @@ export const StoryFragmentFragmentDoc = gql`
   ${ComponentModulesImageFragmentFragmentDoc}
   ${ComponentModulesButtonsModuleFragmentFragmentDoc}
   ${ComponentCoreStandAloneLinkFragmentFragmentDoc}
+  ${ComponentCoreMuxAudioFragmentFragmentDoc}
   ${ErrorFragmentFragmentDoc}
   ${BaseTriplyRecordFragmentFragmentDoc}
 `

@@ -1,7 +1,9 @@
+import ErrorBox from '@/features/shared/components/Error/ErrorBox'
 import {
   ImageCarousel,
   ImageCarouselItem,
 } from '@/features/ui/components/image-carousel/ImageCarousel'
+import { MuxAudioPlayer } from '@/features/ui/components/mux-audio/MuxAudioPlayer'
 import { Title } from '@/features/ui/components/title/Title'
 import { cn } from '@/features/ui/utils/cn'
 import { StandaloneLink } from 'src/app/ks/link/StandaloneLink'
@@ -195,6 +197,23 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
               <StandaloneLink href={href} variant={variant} key={component.id}>
                 {component.label}
               </StandaloneLink>
+            )
+          }
+          if (component?.__typename === 'ComponentCoreMuxAudio') {
+            if (
+              !component.muxAudioRelation?.data?.attributes?.playback_id ||
+              !component.muxAudioRelation?.data?.attributes?.title
+            )
+              return <ErrorBox key={keyExtractor(component.id, index, array)} />
+
+            return (
+              <MuxAudioPlayer
+                isReady={component.muxAudioRelation?.data?.attributes?.isReady}
+                title={component.muxAudioRelation?.data?.attributes?.title}
+                playbackId={component.muxAudioRelation?.data?.attributes?.playback_id}
+                caption={component.caption}
+                key={keyExtractor(component.id, index, array)}
+              />
             )
           }
         }

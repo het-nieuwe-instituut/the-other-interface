@@ -1,0 +1,23 @@
+fragment muxAudioFragment on ComponentCoreMuxAudio {
+  __typename
+  id
+  caption
+  muxAudioRelation {
+    data {
+      id
+      attributes {
+        title
+        upload_id
+        asset_id
+        playback_id
+        signed
+        error_message
+        isReady
+        duration
+        aspect_ratio
+        createdAt
+        updatedAt
+      }
+    }
+  }
+}
