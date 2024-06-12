@@ -4,6 +4,7 @@ import { useTypeSafeTranslation } from '../../hooks/translations'
 import { useLocale } from '../../hooks/useLocale'
 import { NavLinkButton } from '@/features/ui/components/nav-link-button/component'
 import ExternalLink from '@/features/ui/icons/external-link.svg'
+import { Locale } from 'src/generated/graphql'
 
 export const Footer = () => {
   const lang = useLocale()
@@ -46,24 +47,48 @@ export const Footer = () => {
             <div className="grid md:grid-cols-1 lg:grid-cols-2">
               <div className="pb-8">
                 <div>
-                  <NavLinkButton href={'#'} className="mb-2" variant={'footerPrimary'}>
+                  <NavLinkButton
+                    href={
+                      lang === Locale.En
+                        ? 'https://nieuweinstituut.nl/en/pages/nieuwsbrief'
+                        : 'https://nieuweinstituut.nl/pages/nieuwsbrief'
+                    }
+                    className="mb-2"
+                    variant={'footerPrimary'}
+                  >
                     {t('newsletter')} <Icon className="size-5" />
                   </NavLinkButton>
-                  <NavLinkButton href={'#'} className="mb-2" variant={'footerPrimary'}>
+                  <NavLinkButton
+                    href={
+                      lang === Locale.En
+                        ? 'https://nieuweinstituut.nl/en/pages/now-on-display'
+                        : 'https://nieuweinstituut.nl/pages/now-on-display'
+                    }
+                    className="mb-2"
+                    variant={'footerPrimary'}
+                  >
                     {t('onDisplay')} <Icon className="size-5" />
                   </NavLinkButton>
-                  <NavLinkButton href={'#'} className="mb-2" variant={'footerPrimary'}>
+                  <NavLinkButton
+                    href={
+                      lang === Locale.En
+                        ? 'https://nieuweinstituut.nl/en/events'
+                        : 'https://nieuweinstituut.nl/events'
+                    }
+                    className="mb-2"
+                    variant={'footerPrimary'}
+                  >
                     {t('exhibitions')} <Icon className="size-5" />
                   </NavLinkButton>
                 </div>
                 <div className="pt-8">
-                  <NavLinkButton href={'#'} className="mb-2" variant={'footerPrimary'}>
+                  <NavLinkButton href={'/privacy'} className="mb-2" variant={'footerPrimary'}>
                     {t('privacyPolicy')}
                   </NavLinkButton>
-                  <NavLinkButton href={'#'} className="mb-2" variant={'footerPrimary'}>
+                  <NavLinkButton href={'/disclaimer'} className="mb-2" variant={'footerPrimary'}>
                     {t('disclaimer')}
                   </NavLinkButton>
-                  <NavLinkButton href={'#'} variant={'footerPrimary'}>
+                  <NavLinkButton href={'/developers'} variant={'footerPrimary'}>
                     {t('forDevs')}
                   </NavLinkButton>
                 </div>
