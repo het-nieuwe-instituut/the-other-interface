@@ -1,3 +1,5 @@
+'use client'
+
 import MuxPlayer from '@mux/mux-player-react/lazy'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { cn } from '@/features/ui/utils/cn'
