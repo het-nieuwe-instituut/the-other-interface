@@ -44,8 +44,6 @@ export const StoryWithinThemeCarousel = () => {
                   key={item.id}
                   src={item.url}
                   alt={item.description ?? ''}
-                  width={item.width}
-                  height={item.height}
                   caption={item.description ?? undefined}
                 />
               )

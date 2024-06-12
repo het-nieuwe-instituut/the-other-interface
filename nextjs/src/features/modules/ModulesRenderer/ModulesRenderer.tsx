@@ -97,8 +97,6 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
                       src={attributes.url}
                       // TODO: add alt text instead of caption
                       alt={attributes.caption ?? ''}
-                      width={attributes.width}
-                      height={attributes.height}
                       caption={attributes.caption ?? undefined}
                     />
                   )

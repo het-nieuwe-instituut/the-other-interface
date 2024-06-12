@@ -1,15 +1,15 @@
 'use client'
 import { imageBasePath } from '@/features/modules/modulesConstants'
 import ErrorBox from '@/features/shared/components/Error/ErrorBox'
-import NextImage, { ImageProps } from 'next/image'
+import { ImageProps } from 'next/image'
 import React, { Children, useContext, useState } from 'react'
+import { useHorizontalSnappingList } from '../../hooks/useHorizontallScrollSnapping'
 import { cn } from '../../utils/cn'
+import { LightBoxNextImage, LightBoxNextImageByIcon } from '../lightbox/LightBoxNextImage'
+import { LightboxProvider } from '../lightbox/LightboxProvider'
 import Gradient from './gradient.svg'
 import NavArrowLeft from './nav-arrow-left.svg'
 import NavArrowRight from './nav-arrow-right.svg'
-import { useHorizontalSnappingList } from '../../hooks/useHorizontallScrollSnapping'
-import { LightBoxNextImage, LightBoxNextImageByIcon } from '../lightbox/LightBoxNextImage'
-import { LightboxProvider } from '../lightbox/LightboxProvider'
 
 export interface ThumbnailCarouselProps {
   className?: string

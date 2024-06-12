@@ -99,7 +99,7 @@ export const ImageCarousel = ({ children }: ImageCarouselProps) => {
   )
 }
 
-export interface ImageCarouselItemProps extends ImageProps {
+export interface ImageCarouselItemProps extends Pick<ImageProps, 'alt' | 'src'> {
   href?: string
   className?: string
   imageClassName?: string
@@ -110,7 +110,7 @@ export interface ImageCarouselItemProps extends ImageProps {
 export const ImageCarouselItem = (props: ImageCarouselItemProps) => {
   const { itemWidth } = useContext(ImageCarouselContext)
   const { t: commonT } = useTypeSafeTranslation('common')
-  const { caption, className, src, imageClassName, captionClassname, href, ...restProps } = props
+  const { caption, className, src, imageClassName, captionClassname, href, alt } = props
 
   const renderContent = () => {
     return (
@@ -135,7 +135,7 @@ export const ImageCarouselItem = (props: ImageCarouselItemProps) => {
               sizes="100vw"
               caption={caption}
               fill
-              {...restProps}
+              alt={alt}
               onContextMenu={e => e.preventDefault()}
             />
           )}

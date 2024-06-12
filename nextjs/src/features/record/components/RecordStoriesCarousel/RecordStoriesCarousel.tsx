@@ -24,7 +24,7 @@ export const RecordStoriesCarousel = () => {
   const type = CATEGORIES_TO_ENTITY_MAPPER[category]
   const lang = useLocale()
 
-  const { data: recordRelatedStories, isLoading } = useStoriesRelationForRecord(type, id)
+  const { data: recordRelatedStories } = useStoriesRelationForRecord(type, id)
   const { t: tRecord } = useTranslation('record')
 
   const stories = useMemo(
@@ -56,8 +56,6 @@ export const RecordStoriesCarousel = () => {
                   key={item.id}
                   src={item.url}
                   alt={item.description ?? ''}
-                  width={item.width}
-                  height={item.height}
                   caption={item.description ?? undefined}
                 />
               )
