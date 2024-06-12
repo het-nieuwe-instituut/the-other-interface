@@ -7,7 +7,6 @@ import { useHorizontalSnappingList } from '../../hooks/useHorizontallScrollSnapp
 import { cn } from '../../utils/cn'
 import { LightBoxNextImage, LightBoxNextImageByIcon } from '../lightbox/LightBoxNextImage'
 import { LightboxProvider } from '../lightbox/LightboxProvider'
-import Gradient from './gradient.svg'
 import NavArrowLeft from './nav-arrow-left.svg'
 import NavArrowRight from './nav-arrow-right.svg'
 
