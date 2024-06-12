@@ -8,6 +8,8 @@ import Gradient from './gradient.svg'
 import NavArrowLeft from './nav-arrow-left.svg'
 import NavArrowRight from './nav-arrow-right.svg'
 import { useHorizontalSnappingList } from '../../hooks/useHorizontallScrollSnapping'
+import { LightBoxNextImage, LightBoxNextImageByIcon } from '../lightbox/LightBoxNextImage'
+import { LightboxProvider } from '../lightbox/LightboxProvider'
 
 export interface ThumbnailCarouselProps {
   className?: string
@@ -42,57 +44,59 @@ export const ThumbnailCarousel = ({ className, children }: ThumbnailCarouselProp
   const imageSrc = src ? imageBasePath(src.toString()) : ''
 
   return (
-    <ThumbnailCarouselContext.Provider
-      value={{ setIndex: (index: number) => setIndex(index), index }}
-    >
-      <div className={cn(className, 'flex flex-col gap-4 relative')}>
-        <div className="relative flex h-[621.41px] w-full items-center justify-center">
-          <NextImage
-            src={imageSrc ?? ''}
-            alt={alt}
-            className="bg-ivory-100 object-contain object-center"
-            fill
-            onContextMenu={e => e.preventDefault()}
-          />
-        </div>
-
-        <div className="flex">
-          <div className="scrollbar-hide overflow-x-scroll" ref={scrollContainerRef}>
-            <div
-              className="flex flex-nowrap gap-4"
-              style={{
-                width: pages === 0 ? width : pages * width,
-              }}
-            >
-              {children}
-            </div>
+    <LightboxProvider>
+      <ThumbnailCarouselContext.Provider
+        value={{ setIndex: (index: number) => setIndex(index), index }}
+      >
+        <div className={cn(className, 'flex flex-col gap-4 relative')}>
+          <div className="relative flex h-[621.41px] w-full items-center justify-center">
+            <LightBoxNextImageByIcon
+              src={imageSrc ?? ''}
+              alt={alt}
+              className="bg-ivory-60 object-contain object-center"
+              fill
+              onContextMenu={e => e.preventDefault()}
+            />
           </div>
-          <Gradient
-            className={cn(
-              'pointer-events-none absolute left-0 rotate-180 transition-opacity opacity-100 -mt-[1px]',
-              !canScrollPrev && 'opacity-0'
-            )}
-          />
-          <div className="relative flex">
+
+          <div className="flex">
+            <div className="overflow-x-scroll scrollbar-hide" ref={scrollContainerRef}>
+              <div
+                className="flex flex-nowrap gap-4"
+                style={{
+                  width: pages === 0 ? width : pages * width,
+                }}
+              >
+                {children}
+              </div>
+            </div>
             <Gradient
               className={cn(
-                'pointer-events-none absolute left-[-91.81px] transition-opacity opacity-100 -top-[1px]',
-                !canScrollNext && 'opacity-0'
+                'pointer-events-none absolute left-0 rotate-180 transition-opacity opacity-100 -mt-[1px]',
+                !canScrollPrev && 'opacity-0'
               )}
             />
+            <div className="relative flex">
+              <Gradient
+                className={cn(
+                  'pointer-events-none absolute left-[-91.81px] transition-opacity opacity-100 -top-[1px]',
+                  !canScrollNext && 'opacity-0'
+                )}
+              />
 
-            <div className="flex h-full w-[116.32px] items-center justify-center gap-2 bg-white">
-              <button onClick={prevPage}>
-                <NavArrowLeft />
-              </button>
-              <button onClick={nextPage}>
-                <NavArrowRight />
-              </button>
+              <div className="flex h-full w-[116.32px] items-center justify-center gap-2 bg-white">
+                <button onClick={prevPage}>
+                  <NavArrowLeft />
+                </button>
+                <button onClick={nextPage}>
+                  <NavArrowRight />
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </ThumbnailCarouselContext.Provider>
+      </ThumbnailCarouselContext.Provider>
+    </LightboxProvider>
   )
 }
 
@@ -108,7 +112,8 @@ export const ThumbnailCarouselItem = ({ src, alt, index }: ThumbnailCarouselItem
       onClick={() => context.setIndex(index)}
       className=" relative h-[103px] w-[154.78px] flex-none overflow-hidden"
     >
-      <NextImage
+      <LightBoxNextImage
+        disableOpeningLightbox
         onClick={() => context.setIndex(index)}
         src={imageSrc ?? ''}
         alt={alt}

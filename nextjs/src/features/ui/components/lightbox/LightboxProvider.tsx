@@ -8,6 +8,9 @@ import Counter from 'yet-another-react-lightbox/plugins/counter'
 import 'yet-another-react-lightbox/plugins/counter.css'
 import Zoom from 'yet-another-react-lightbox/plugins/zoom'
 import 'yet-another-react-lightbox/styles.css'
+import Next from '@/features/ui/icons/Next.svg'
+import Previous from '@/features/ui/icons/Previous.svg'
+import { TypographyVariants } from '../typography/variants'
 
 export const LightboxContext = React.createContext<{
   toggle: (src: string | undefined) => void
@@ -54,9 +57,20 @@ export const LightboxProvider: React.FC<PropsWithChildren> = ({ children }) => {
     >
       {children}
       <Lightbox
+        on={{
+          view: ({ index }) => setIndex(index),
+        }}
         controller={{
           closeOnBackdropClick: true,
         }}
+        carousel={{
+          finite: true,
+        }}
+        render={{
+          iconPrev: () => (index === 0 ? undefined : <Previous />),
+          iconNext: () => (index === images.length - 1 ? undefined : <Next />),
+        }}
+        className={TypographyVariants({ socialLarge: 'md' })}
         open={index !== undefined}
         close={() => setIndex(undefined)}
         index={index}

@@ -1,8 +1,8 @@
 'use client'
 import { CSSProperties, ReactElement, useContext, useRef } from 'react'
 import { ImageWithCaptionProps } from '../image-with-caption/ImageWithCaption'
-import Next from './Next.svg'
-import Previous from './Previous.svg'
+import Next from '@/features/ui/icons/Next.svg'
+import Previous from '@/features/ui/icons/Previous.svg'
 
 import { ThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
@@ -14,6 +14,7 @@ import { useHorizontalSnappingList } from '../../hooks/useHorizontallScrollSnapp
 import { cn } from '../../utils/cn'
 import { LightBoxNextImageByIcon } from '../lightbox/LightBoxNextImage'
 import { TypographyVariants } from '../typography/variants'
+import { LightboxProvider } from '../lightbox/LightboxProvider'
 
 interface ImageCarouselProps {
   children: Array<ReactElement<ImageWithCaptionProps> | null>
@@ -42,60 +43,59 @@ export const ImageCarousel = ({ children }: ImageCarouselProps) => {
     })
 
   return (
-    <ImageCarouselContext.Provider
-      value={{
-        itemWidth: itemWidth,
-      }}
-    >
-      <div
-        ref={containerRef}
-        style={{ '--image-carousel-height': `${IMAGE_HEIGHT}px` } as CSSProperties}
-        className="relative flex h-[var(--image-carousel-height)] w-full flex-col items-center justify-center"
+    <LightboxProvider>
+      <ImageCarouselContext.Provider
+        value={{
+          itemWidth: itemWidth,
+        }}
       >
         <div
-          ref={scrollContainerRef}
-          className={cn(
-            loaded
-              ? 'opacity-100 h-[var(--image-carousel-height)]'
-              : 'opacity-0 h-[var(--image-carousel-height)]',
-            'scrollbar-hide overflow-x-scroll w-full relative h-full transition-opacity'
-          )}
+          ref={containerRef}
+          className="relative flex  w-full flex-col items-center justify-center"
         >
           <div
-            className="flex h-full flex-nowrap gap-4"
-            style={{
-              width: pages === 0 ? width : pages * (itemWidth + 16) + restWidth - 16,
-            }}
+            ref={scrollContainerRef}
+            className={cn(
+              loaded ? 'opacity-100' : 'opacity-0',
+              'scrollbar-hide overflow-x-scroll w-full relative h-full transition-opacity'
+            )}
           >
-            {children}
+            <div
+              className="flex h-full flex-nowrap gap-4"
+              style={{
+                width: pages === 0 ? width : pages * (itemWidth + 16) + restWidth - 16,
+              }}
+            >
+              {children}
+            </div>
+          </div>
+          <div
+            className={cn(
+              !loaded
+                ? 'size-full flex items-center justify-center absolute mask opacity-100'
+                : 'opacity-0 hidden',
+              'transition-opacity'
+            )}
+          >
+            <ThemedSpinner />
+          </div>
+          <div className={cn('absolute flex justify-between w-full', !loaded && 'hidden')}>
+            <button
+              onClick={prevPage}
+              className={cn(!canScrollPrev ? 'opacity-0' : 'opacity-100', 'transition-opacity')}
+            >
+              <Previous />
+            </button>
+            <button>
+              <Next
+                onClick={nextPage}
+                className={cn(!canScrollNext ? 'opacity-0' : 'opacity-100', 'transition-opacity')}
+              />
+            </button>
           </div>
         </div>
-        <div
-          className={cn(
-            !loaded
-              ? 'size-full flex items-center justify-center absolute mask opacity-100'
-              : 'opacity-0 hidden',
-            'transition-opacity'
-          )}
-        >
-          <ThemedSpinner />
-        </div>
-        <div className={cn('absolute flex justify-between w-full', !loaded && 'hidden')}>
-          <button
-            onClick={prevPage}
-            className={cn(!canScrollPrev ? 'opacity-0' : 'opacity-100', 'transition-opacity')}
-          >
-            <Previous />
-          </button>
-          <button>
-            <Next
-              onClick={nextPage}
-              className={cn(!canScrollNext ? 'opacity-0' : 'opacity-100', 'transition-opacity')}
-            />
-          </button>
-        </div>
-      </div>
-    </ImageCarouselContext.Provider>
+      </ImageCarouselContext.Provider>
+    </LightboxProvider>
   )
 }
 
@@ -118,12 +118,12 @@ export const ImageCarouselItem = (props: ImageCarouselItemProps) => {
         style={{ '--item-width': `${itemWidth}px` } as CSSProperties}
         className="relative flex h-full w-[var(--item-width)] flex-col gap-2"
       >
-        <div className={cn(className, 'relative w-full h-full bg-ivory-100')}>
+        <div
+          className={cn(className, 'relative w-full bg-ivory-100 h-[var(--image-carousel-height)]')}
+          style={{ '--image-carousel-height': `${IMAGE_HEIGHT}px` } as CSSProperties}
+        >
           {!src ? (
-            <div
-              className={cn(className, 'relative')}
-              style={{ '--default-image-height': `${IMAGE_HEIGHT}px` } as CSSProperties}
-            >
+            <div className={cn(className, 'relative')}>
               <div className="flex h-[var(--default-image-height)] w-full items-center justify-center bg-gray-300">
                 {commonT('somethingWentWrong')}
               </div>
@@ -133,6 +133,7 @@ export const ImageCarouselItem = (props: ImageCarouselItemProps) => {
               src={src}
               className={cn('object-cover object-center', imageClassName)}
               sizes="100vw"
+              caption={caption}
               fill
               {...restProps}
               onContextMenu={e => e.preventDefault()}

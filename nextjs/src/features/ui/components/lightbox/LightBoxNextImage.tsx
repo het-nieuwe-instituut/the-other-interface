@@ -1,14 +1,17 @@
-import { ImageProps } from 'next/image'
-import { useContext, useRef, useEffect } from 'react'
+import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import NextImage, { ImageProps } from 'next/image'
+import { useContext, useEffect, useRef } from 'react'
+import { Button } from '../button/component'
+import FullScreen from '@/features/ui/icons/FullScreen.svg'
+
 import { LightboxContext } from './LightboxProvider'
-import NextImage from 'next/image'
-import { IconButton } from '../icon-button/component'
-import ExternalLink from '@/features/ui/icons/external-link.svg'
 export interface LightBoxNextImageProps extends ImageProps {
   caption?: string
+  // but will still register the image
+  disableOpeningLightbox: boolean
 }
 export const LightBoxNextImage = (props: LightBoxNextImageProps) => {
-  const { src, caption } = props
+  const { src, caption, disableOpeningLightbox, ...restProps } = props
   const { images, registerImage, toggle } = useContext(LightboxContext)
 
   const initialized = useRef(false)
@@ -24,6 +27,9 @@ export const LightBoxNextImage = (props: LightBoxNextImageProps) => {
     }
   }, [caption, registerImage, src])
 
+  if (disableOpeningLightbox) {
+    return <NextImage src={src} {...restProps} />
+  }
   return (
     <button
       disabled={images.find(v => v.src === src) === undefined}
@@ -35,7 +41,7 @@ export const LightBoxNextImage = (props: LightBoxNextImageProps) => {
         }
       }}
     >
-      <NextImage {...props} />
+      <NextImage src={src} {...restProps} />
     </button>
   )
 }
@@ -46,7 +52,7 @@ export interface LightBoxNextImageByIconProps extends ImageProps {
 export const LightBoxNextImageByIcon = (props: LightBoxNextImageByIconProps) => {
   const { src, caption } = props
   const { images, registerImage, toggle } = useContext(LightboxContext)
-
+  const { t: commonT } = useTypeSafeTranslation('common')
   const initialized = useRef(false)
 
   useEffect(() => {
@@ -63,9 +69,9 @@ export const LightBoxNextImageByIcon = (props: LightBoxNextImageByIconProps) => 
   return (
     <div className="group relative size-full">
       <NextImage {...props} />
-      <IconButton
-        icon={<ExternalLink className="size-6" />}
-        className="absolute right-4 top-4 z-[9999] bg-ivory-100 opacity-0 transition-opacity group-hover:opacity-100"
+      <Button
+        intent={'tertiary'}
+        className="absolute right-4 top-4 z-[9999]  opacity-0 transition-opacity group-hover:opacity-100"
         disabled={images.find(v => v.src === src) === undefined}
         size={'small'}
         onClick={e => {
@@ -77,7 +83,10 @@ export const LightBoxNextImageByIcon = (props: LightBoxNextImageByIconProps) => 
             toggle(src.toString())
           }
         }}
-      />
+      >
+        {commonT('seeFullImage')}
+        <FullScreen className="size-6" />
+      </Button>
     </div>
   )
 }

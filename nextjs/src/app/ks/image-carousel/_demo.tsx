@@ -61,7 +61,20 @@ export const Demo = () => {
           )
         })}
       </ImageCarousel>
-      <div>HEY I should not move </div>
+      <p>HEY I should not move </p>
+
+      <p>items in this carousel should not show up in the other one its lightbox</p>
+      <ImageCarousel>
+        {[
+          <ImageCarouselItem
+            href={stubData[0].href}
+            key={stubData[0].id}
+            src={stubData[0].src}
+            alt={stubData[0].alt}
+            caption={stubData[0].caption}
+          />,
+        ]}
+      </ImageCarousel>
     </div>
   )
 }

@@ -82,6 +82,7 @@ export const Story: React.FC<Props> = ({ story, isMainGrid, onLoad }) => {
             onClick={handleClick}
             _hover={isClickable ? { transform: 'scale(1.05)' } : undefined}
             transition="all .4s ease-in-out"
+            // eslint-disable-next-line tailwindcss/no-custom-classname
             className={isMainGrid ? 'story-grid-item' : ''}
           >
             <ResponsiveImage
