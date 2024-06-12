@@ -46,7 +46,6 @@
   },
   "dependencies": {
     "concurrently": "^8.2.0",
-    "wait-on": "^7.0.1",
-    "yet-another-react-lightbox": "^3.19.0"
+    "wait-on": "^7.0.1"
   }
 }
