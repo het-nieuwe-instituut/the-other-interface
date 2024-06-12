@@ -63,6 +63,22 @@ export interface CoreGridFeaturedFields extends Schema.Component {
   }
 }
 
+export interface CoreMuxAudio extends Schema.Component {
+  collectionName: 'components_core_mux_audios'
+  info: {
+    displayName: 'MuxAudio'
+    icon: 'headphone'
+  }
+  attributes: {
+    caption: Attribute.String
+    muxAudioRelation: Attribute.Relation<
+      'core.mux-audio',
+      'oneToOne',
+      'plugin::mux-video-uploader.mux-asset'
+    >
+  }
+}
+
 export interface CorePublicationDate extends Schema.Component {
   collectionName: 'components_core_publication_dates'
   info: {
@@ -235,6 +251,7 @@ declare module '@strapi/types' {
       'core.carousel-item': CoreCarouselItem
       'core.featured-fields': CoreFeaturedFields
       'core.grid-featured-fields': CoreGridFeaturedFields
+      'core.mux-audio': CoreMuxAudio
       'core.publication-date': CorePublicationDate
       'core.stand-alone-link': CoreStandAloneLink
       'core.timeframe': CoreTimeframe

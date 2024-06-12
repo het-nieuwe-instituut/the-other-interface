@@ -5,6 +5,7 @@
 import graphql from "@strapi/plugin-graphql/strapi-admin";
 import i18N from "@strapi/plugin-i18n/strapi-admin";
 import usersPermissions from "@strapi/plugin-users-permissions/strapi-admin";
+import muxVideoUploader from "strapi-plugin-mux-video-uploader/strapi-admin";
 import niToiPreviewLink from "../../src/plugins/ni-toi-preview-link/strapi-admin";
 import { renderAdmin } from "@strapi/strapi/admin";
 
@@ -13,6 +14,7 @@ renderAdmin(document.getElementById("strapi"), {
     graphql: graphql,
     i18n: i18N,
     "users-permissions": usersPermissions,
+    "mux-video-uploader": muxVideoUploader,
     "ni-toi-preview-link": niToiPreviewLink,
   },
 });
