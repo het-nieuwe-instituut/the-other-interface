@@ -23,6 +23,7 @@ import { ImageCarousel } from '../components/carousels/ImageCarousel/ImageCarous
 import { mapUploadFileEntitiesToStoryImageInfo } from '../components/carousels/ImageCarousel/imageCarouselStrapiDataMapper'
 import { MuxAudioPlayer } from '@/features/ui/components/mux-audio/MuxAudioPlayer'
 import { MuxVideoPlayer } from '@/features/ui/components/mux-video/MuxVideoPlayer'
+import ErrorBox from '@/features/shared/components/Error/ErrorBox'
 
 interface Props {
   components: DynamicComponents
@@ -191,7 +192,7 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
               !component.muxAudioRelation?.data?.attributes?.playback_id ||
               !component.muxAudioRelation?.data?.attributes?.title
             )
-              return null
+              return <ErrorBox />
 
             return (
               <MuxAudioPlayer
@@ -204,7 +205,11 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
           }
 
           if (component?.__typename === 'ComponentCoreMuxVideo') {
-            if (!component.muxVideoRelation?.data?.attributes?.playback_id) return null
+            if (
+              !component.muxVideoRelation?.data?.attributes?.playback_id ||
+              !component.muxVideoRelation?.data?.attributes?.title
+            )
+              return <ErrorBox />
 
             return (
               <MuxVideoPlayer

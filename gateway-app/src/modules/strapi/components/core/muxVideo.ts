@@ -23,11 +23,11 @@ export class MuxVideo {
   @Field({ nullable: true })
   public playback_id?: string
 
-  @Field({ nullable: true })
-  public signed?: boolean
+  @Field()
+  public signed: boolean
 
-  @Field({ nullable: true })
-  public title?: string
+  @Field()
+  public title: string
 
   @Field({ nullable: true })
   public updatedAt?: Date

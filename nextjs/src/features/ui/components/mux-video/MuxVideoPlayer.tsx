@@ -1,7 +1,7 @@
 import MuxPlayer from '@mux/mux-player-react/lazy'
 
 interface MuxVideoPlayerProps {
-  title?: string | null
+  title: string
   playbackId: string
   //   posterUrl?: string
   caption?: string | null
@@ -18,8 +18,6 @@ export const MuxVideoPlayer: React.FC<MuxVideoPlayerProps> = ({
   // aspectRatio,
   title,
 }) => {
-  if (title === null) return null
-
   return (
     <>
       <MuxPlayer
