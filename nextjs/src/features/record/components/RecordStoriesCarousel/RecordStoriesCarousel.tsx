@@ -1,6 +1,9 @@
 'use client'
+import ErrorBox from '@/features/shared/components/Error/ErrorBox'
+import { ThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useStoriesRelationForRecord } from '@/features/shared/hooks/queries/useStoriesRelationForRecord'
+import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { useLocale } from '@/features/shared/hooks/useLocale'
 import { storiesToCarouselDataMapper } from '@/features/shared/mappers/storiesToCarouselDataMapper'
 import {
@@ -13,7 +16,6 @@ import {
   ImageCarouselItem,
 } from '@/features/ui/components/image-carousel/ImageCarousel'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
-import useTranslation from 'next-translate/useTranslation'
 import { useParams } from 'next/navigation'
 import { useMemo } from 'react'
 
@@ -24,8 +26,8 @@ export const RecordStoriesCarousel = () => {
   const type = CATEGORIES_TO_ENTITY_MAPPER[category]
   const lang = useLocale()
 
-  const { data: recordRelatedStories } = useStoriesRelationForRecord(type, id)
-  const { t: tRecord } = useTranslation('record')
+  const { data: recordRelatedStories, isLoading, isError } = useStoriesRelationForRecord(type, id)
+  const { t: tRecord } = useTypeSafeTranslation('record')
 
   const stories = useMemo(
     () =>
@@ -34,6 +36,18 @@ export const RecordStoriesCarousel = () => {
       ),
     [recordRelatedStories?.zoomLevel3StoriesRelationsForRecord?.stories]
   )
+
+  if (isError) {
+    return <ErrorBox />
+  }
+
+  if (isLoading) {
+    return (
+      <div className="flex h-[600px] w-full items-center justify-center">
+        <ThemedSpinner />
+      </div>
+    )
+  }
 
   return (
     <div>
@@ -44,8 +58,7 @@ export const RecordStoriesCarousel = () => {
           </h2>
           <ImageCarousel>
             {stories.map(item => {
-              let href = `/detail/${CATEGORIES.stories}/${item.id}`
-              href = addLocaleToUrl(href, lang)
+              const href = addLocaleToUrl(`/detail/${CATEGORIES.stories}/${item.id}`, lang)
 
               if (!item || !item.height || !item.width || !item.url) {
                 return null

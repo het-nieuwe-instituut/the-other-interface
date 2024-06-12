@@ -2,7 +2,6 @@ import {
   ComponentModulesImage,
   Maybe,
   StoriesRelationForRecordQuery,
-  StoryEntity,
   StoryMetaByIdQuery,
 } from 'src/generated/graphql'
 
@@ -15,28 +14,14 @@ export type StoryImageInfo = {
   id?: Maybe<string> | undefined
 }
 
+type StoryMeta = NonNullable<StoryMetaByIdQuery['storyMetaByLocale']['data']>['attributes']
+
 export const storiesToCarouselDataMapper = (
   relatedStories:
     | NonNullable<StoriesRelationForRecordQuery['zoomLevel3StoriesRelationsForRecord']>['stories']
-    | NonNullable<
-        NonNullable<
-          NonNullable<StoryMetaByIdQuery['storyMetaByLocale']['data']>['attributes']
-        >['child_stories']
-      >['data']
-    | NonNullable<
-        NonNullable<
-          NonNullable<StoryMetaByIdQuery['storyMetaByLocale']['data']>['attributes']
-        >['siblings']
-      >
-    | NonNullable<
-        NonNullable<
-          NonNullable<
-            NonNullable<
-              NonNullable<StoryMetaByIdQuery['storyMetaByLocale']['data']>['attributes']
-            >['parent_story']
-          >
-        >['data']
-      >[]
+    | NonNullable<NonNullable<StoryMeta>['child_stories']>['data']
+    | NonNullable<NonNullable<StoryMeta>['siblings']>
+    | NonNullable<NonNullable<NonNullable<NonNullable<StoryMeta>['parent_story']>>['data']>[]
 ): StoryImageInfo[] | undefined => {
   const mappedStories = relatedStories
     ?.flatMap(story => {
