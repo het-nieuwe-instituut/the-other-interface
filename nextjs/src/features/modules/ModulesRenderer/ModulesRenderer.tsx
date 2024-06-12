@@ -1,10 +1,15 @@
+import ErrorBox from '@/features/shared/components/Error/ErrorBox'
+import {
+  ImageCarousel,
+  ImageCarouselItem,
+} from '@/features/ui/components/image-carousel/ImageCarousel'
+import { MuxAudioPlayer } from '@/features/ui/components/mux-audio/MuxAudioPlayer'
 import { Title } from '@/features/ui/components/title/Title'
 import { cn } from '@/features/ui/utils/cn'
 import { StandaloneLink } from 'src/app/ks/link/StandaloneLink'
 import {
   ComponentModulesCarousel,
   ComponentModulesGridModule,
-  ComponentModulesImageCarousel,
   HomepageComponentsDynamicZone,
   HomepageQuery,
   LandingpageBySlugQuery,
@@ -19,10 +24,6 @@ import { GridModule } from '../components/GridModule/GridModule'
 import { ImageModuleWrapper } from '../components/ImageModuleWrapper'
 import { Pullquote } from '../components/Pullquote/Pullquote'
 import { CarouselModule } from '../components/carousels/Carousel/Carousel'
-import { ImageCarousel } from '../components/carousels/ImageCarousel/ImageCarousel'
-import { mapUploadFileEntitiesToStoryImageInfo } from '../components/carousels/ImageCarousel/imageCarouselStrapiDataMapper'
-import { MuxAudioPlayer } from '@/features/ui/components/mux-audio/MuxAudioPlayer'
-import ErrorBox from '@/features/shared/components/Error/ErrorBox'
 
 interface Props {
   components: DynamicComponents
@@ -44,7 +45,7 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
   return (
     <div
       className={cn(
-        'max-w-[90em] mx-auto px-6 pt-0 flex flex-col gap-[40px]',
+        'px-6 pt-0 flex flex-col gap-[40px]',
         isStoryPage && 'px-0',
         hasComponents && 'pt-10'
       )}
@@ -85,12 +86,24 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
 
           if (component?.__typename === 'ComponentModulesImageCarousel') {
             return (
-              <ImageCarousel
-                key={keyExtractor(component.id, index, array)}
-                images={mapUploadFileEntitiesToStoryImageInfo(
-                  component as ComponentModulesImageCarousel
-                )}
-              />
+              <ImageCarousel key={keyExtractor(component.id, index, array)}>
+                {component.images?.data?.map(item => {
+                  const attributes = item?.attributes
+
+                  if (!attributes || !attributes.height || !attributes.width) {
+                    return null
+                  }
+                  return (
+                    <ImageCarouselItem
+                      key={item.id}
+                      src={attributes.url}
+                      // TODO: add alt text instead of caption
+                      alt={attributes.caption ?? ''}
+                      caption={attributes.caption ?? undefined}
+                    />
+                  )
+                }) ?? []}
+              </ImageCarousel>
             )
           }
 
