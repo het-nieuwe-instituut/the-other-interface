@@ -59,7 +59,7 @@ export const ThumbnailCarousel = ({ className, children }: ThumbnailCarouselProp
             />
           </div>
 
-          <div className="flex">
+          <div className="relative flex">
             <div className="overflow-x-scroll scrollbar-hide" ref={scrollContainerRef}>
               <div
                 className="flex flex-nowrap gap-4"
@@ -70,21 +70,24 @@ export const ThumbnailCarousel = ({ className, children }: ThumbnailCarouselProp
                 {children}
               </div>
             </div>
-            <Gradient
+
+            <div
               className={cn(
-                'pointer-events-none absolute left-0 rotate-180 transition-opacity opacity-100 -mt-[1px]',
+                'truncate-gradient-left absolute bg-ivory-90 w-[81.81px] h-[106px] top-[-1px] bottom-0',
+                'pointer-events-none absolute  transition-opacity opacity-100 ',
                 !canScrollPrev && 'opacity-0'
               )}
             />
             <div className="relative flex">
-              <Gradient
+              <div
                 className={cn(
-                  'pointer-events-none absolute left-[-91.81px] transition-opacity opacity-100 -top-[1px]',
+                  'truncate-gradient-right bg-ivory-90 w-[81.81px] h-[106px] top-[-1px]',
+                  'pointer-events-none absolute left-[-81px] transition-opacity opacity-100 ',
                   !canScrollNext && 'opacity-0'
                 )}
               />
 
-              <div className="flex h-full w-[116.32px] items-center justify-center gap-2 bg-white">
+              <div className="flex h-full w-[116.32px] items-center justify-center gap-2">
                 <button onClick={prevPage}>
                   <NavArrowLeft />
                 </button>

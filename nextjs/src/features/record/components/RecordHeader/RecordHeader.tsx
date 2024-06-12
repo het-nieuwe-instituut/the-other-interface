@@ -1,8 +1,11 @@
+import { PageHeader } from '@/features/editorial/components/PageHeader/PageHeader'
 import { Category } from '@/features/shared/utils/categories'
+import {
+  ThumbnailCarousel,
+  ThumbnailCarouselItem,
+} from '@/features/ui/components/thumbnail-carousel/ThumbnailCarousel'
 import { useParams } from 'next/navigation'
 import { useRecordDetailQuery } from '../../hooks/useRecordDetailQuery'
-import RecordCarousel from '../RecordCarousel/RecordCarousel'
-import { PageHeader } from '@/features/editorial/components/PageHeader/PageHeader'
 
 export const RecordHeader = () => {
   const params = useParams()
@@ -15,15 +18,29 @@ export const RecordHeader = () => {
     options: { refetchOnWindowFocus: false, suspense: true },
   })
 
+  console.log(record)
+
   return (
-    <div>
+    <div className="flex flex-col gap-4">
       <PageHeader
         title={record?.title ?? undefined}
         preface={record?.description ?? undefined}
         constrainPreface={true}
       ></PageHeader>
-      {record?.thumbnail && record?.thumbnail.length > 0 && (
-        <RecordCarousel imageUrls={record?.thumbnail ?? []} />
+
+      {record?.thumbnail ? (
+        <ThumbnailCarousel>
+          {record?.thumbnail.map((item, index) => (
+            <ThumbnailCarouselItem
+              key={index}
+              index={index}
+              src={item}
+              alt={`${record.title} image #${index + 1}` ?? ''}
+            />
+          ))}
+        </ThumbnailCarousel>
+      ) : (
+        <p>fooo</p>
       )}
     </div>
   )
