@@ -8,12 +8,12 @@ import ExternalLink from '@/features/ui/icons/external-link.svg'
 export const Footer = () => {
   const lang = useLocale()
   const logoSize = { width: 280, height: 129 }
-  const { t } = useTypeSafeTranslation('common')
+  const { t } = useTypeSafeTranslation('footer')
   const Icon = ExternalLink
 
   return (
-    <div className="relative z-[FOOTER_Z_INDEX] w-full bg-ivory-90 pt-8 opacity-100 flex">
-      <div className="container max-w-[1392px] p-6 pb-12 m-auto">
+    <div className="bg-ivory-90 relative z-[FOOTER_Z_INDEX] flex w-full pt-8 opacity-100">
+      <div className="container m-auto max-w-[1392px] p-6 pb-12">
         <div className="grid gap-1 md:grid-cols-2 lg:grid-cols-3">
           <div>
             <Link href={`https://nieuweinstituut.nl/${lang ?? 'nl'}`}>
@@ -47,21 +47,24 @@ export const Footer = () => {
               <div className="pb-8">
                 <div>
                   <NavLinkButton href={'#'} className="mb-2" variant={'footerPrimary'}>
-                    Exhibitions and activities <Icon className="size-5" />
+                    {t('newsletter')} <Icon className="size-5" />
                   </NavLinkButton>
                   <NavLinkButton href={'#'} className="mb-2" variant={'footerPrimary'}>
-                    Browse our web magazine <Icon className="size-5" />
+                    {t('onDisplay')} <Icon className="size-5" />
                   </NavLinkButton>
-                  <NavLinkButton href={'#'} variant={'footerPrimary'}>
-                    Subscribe to our newsletter <Icon className="size-5" />
+                  <NavLinkButton href={'#'} className="mb-2" variant={'footerPrimary'}>
+                    {t('exhibitions')} <Icon className="size-5" />
                   </NavLinkButton>
                 </div>
                 <div className="pt-8">
                   <NavLinkButton href={'#'} className="mb-2" variant={'footerPrimary'}>
-                    Colophon
+                    {t('privacyPolicy')}
+                  </NavLinkButton>
+                  <NavLinkButton href={'#'} className="mb-2" variant={'footerPrimary'}>
+                    {t('disclaimer')}
                   </NavLinkButton>
                   <NavLinkButton href={'#'} variant={'footerPrimary'}>
-                    Disclaimer
+                    {t('forDevs')}
                   </NavLinkButton>
                 </div>
               </div>
