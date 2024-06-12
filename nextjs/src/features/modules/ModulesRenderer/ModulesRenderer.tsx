@@ -192,10 +192,11 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
               !component.muxAudioRelation?.data?.attributes?.playback_id ||
               !component.muxAudioRelation?.data?.attributes?.title
             )
-              return <ErrorBox />
+              return <ErrorBox key={keyExtractor(component.id, index, array)} />
 
             return (
               <MuxAudioPlayer
+                isReady={component.muxAudioRelation?.data?.attributes?.isReady}
                 title={component.muxAudioRelation?.data?.attributes?.title}
                 playbackId={component.muxAudioRelation?.data?.attributes?.playback_id}
                 caption={component.caption}
@@ -209,7 +210,7 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
               !component.muxVideoRelation?.data?.attributes?.playback_id ||
               !component.muxVideoRelation?.data?.attributes?.title
             )
-              return <ErrorBox />
+              return <ErrorBox key={keyExtractor(component.id, index, array)} />
 
             return (
               <MuxVideoPlayer
