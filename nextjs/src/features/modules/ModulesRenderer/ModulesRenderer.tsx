@@ -195,6 +195,7 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
 
             return (
               <MuxAudioPlayer
+                isReady={component.muxAudioRelation?.data?.attributes?.isReady}
                 title={component.muxAudioRelation?.data?.attributes?.title}
                 playbackId={component.muxAudioRelation?.data?.attributes?.playback_id}
                 caption={component.caption}
