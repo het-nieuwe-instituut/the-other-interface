@@ -65,11 +65,11 @@ export const usePresenter = (
 
   function getItemCountPerPage() {
     switch (variant) {
-      case EnumComponentmodulescarouselVariant.Four:
+      case EnumComponentmodulescarouselVariant.FourUp:
         return 4
-      case EnumComponentmodulescarouselVariant.Three:
+      case EnumComponentmodulescarouselVariant.ThreeUp:
         return 3
-      case EnumComponentmodulescarouselVariant.Two:
+      case EnumComponentmodulescarouselVariant.TwoUp:
         return 2
       default:
         throw new Error(`Unknown variant: ${variant}`)

@@ -416,9 +416,9 @@ export enum EnumComponentcorepublicationdateDisplaytype {
 }
 
 export enum EnumComponentmodulescarouselVariant {
-  Four Up = 'FourUp',
-  Three Up = 'ThreeUp',
-  Two Up = 'TwoUp'
+  FourUp = 'FourUp',
+  ThreeUp = 'ThreeUp',
+  TwoUp = 'TwoUp'
 }
 
 export enum EnumComponentmodulesgridmoduleFieldtypes {
