@@ -63,10 +63,10 @@ export class HighlightedHomepageThemeEntity {
 @ObjectType()
 export class HighlightedHomepageThemeEntityResponse {
   @Field(() => HighlightedHomepageThemeEntity)
-  public data: HighlightedHomepageThemeEntity // had to remove []
+  public data: HighlightedHomepageThemeEntity
 
   @Field(() => ResponseCollectionMeta, { nullable: true })
-  public meta?: ResponseCollectionMeta // added
+  public meta?: ResponseCollectionMeta
 }
 
 @ObjectType()

@@ -79,6 +79,23 @@ export interface CoreMuxAudio extends Schema.Component {
   }
 }
 
+export interface CoreMuxVideo extends Schema.Component {
+  collectionName: 'components_core_mux_videos'
+  info: {
+    displayName: 'MuxVideo'
+    icon: 'television'
+    description: ''
+  }
+  attributes: {
+    caption: Attribute.String
+    muxVideoRelation: Attribute.Relation<
+      'core.mux-video',
+      'oneToOne',
+      'plugin::mux-video-uploader.mux-asset'
+    >
+  }
+}
+
 export interface CorePublicationDate extends Schema.Component {
   collectionName: 'components_core_publication_dates'
   info: {
@@ -252,6 +269,7 @@ declare module '@strapi/types' {
       'core.featured-fields': CoreFeaturedFields
       'core.grid-featured-fields': CoreGridFeaturedFields
       'core.mux-audio': CoreMuxAudio
+      'core.mux-video': CoreMuxVideo
       'core.publication-date': CorePublicationDate
       'core.stand-alone-link': CoreStandAloneLink
       'core.timeframe': CoreTimeframe
