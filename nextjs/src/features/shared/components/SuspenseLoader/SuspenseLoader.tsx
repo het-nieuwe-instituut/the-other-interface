@@ -9,7 +9,7 @@ const SuspenseLoader: React.FC<SuspenseLoaderProps> = ({ children }) => {
   return (
     <React.Suspense
       fallback={
-        <div className="h-auto w-full relative flex justify-center items-center">
+        <div className="relative flex h-auto w-full items-center justify-center">
           <ThemedSpinner />
         </div>
       }
