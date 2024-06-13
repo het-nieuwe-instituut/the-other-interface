@@ -10,14 +10,16 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "caption": {
       "type": "text"
     },
     "alt_text": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "triplyRecord": {
       "type": "relation",

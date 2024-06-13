@@ -11,8 +11,8 @@ export class ComponentCoreCarouselImage {
   @Field(() => ID)
   public id: string
 
-  @Field()
-  public alt_text: string
+  @Field({ nullable: true })
+  public alt_text?: string
 
   @Field({ nullable: true })
   public description?: string

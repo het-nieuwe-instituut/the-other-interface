@@ -20,7 +20,7 @@ export interface CoreCarouselImage extends Schema.Component {
   }
   attributes: {
     image: Attribute.Media & Attribute.Required
-    alt_text: Attribute.String & Attribute.Required
+    alt_text: Attribute.String
     title: Attribute.String & Attribute.Required
     description: Attribute.String & Attribute.DefaultTo<'description'>
     story: Attribute.Relation<'core.carousel-image', 'oneToOne', 'api::story.story'>
@@ -206,7 +206,7 @@ export interface ModulesImage extends Schema.Component {
   attributes: {
     image: Attribute.Media & Attribute.Required
     caption: Attribute.Text
-    alt_text: Attribute.String & Attribute.Required
+    alt_text: Attribute.String
     triplyRecord: Attribute.Relation<
       'modules.image',
       'oneToOne',
