@@ -1,28 +1,24 @@
-import { Field, ID, InputType, ObjectType, registerEnumType } from '@nestjs/graphql'
+import { Field, ID, InputType, ObjectType } from '@nestjs/graphql'
 import {
   TriplyRecordEntityResponse,
   TriplyRecordFiltersInput,
 } from '../../../triplyRecord/triplyRecord.type'
-import { Enum_Componentcorecarouselitem_Type } from '../../../../generated/strapi-sdk'
 import { PaginationArg, StringFilterInput, UploadFileEntityResponse } from '../../shared-types'
 import { StoryEntityResponse } from 'src/modules/story/story.types.circular'
 
 @ObjectType()
-export class ComponentCoreCarouselItem {
+export class ComponentCoreCarouselImage {
   @Field(() => ID)
   public id: string
+
+  @Field()
+  public alt_text: string
 
   @Field({ nullable: true })
   public description?: string
 
-  @Field({ nullable: true })
-  public name?: string
-
   @Field(() => UploadFileEntityResponse, { nullable: true })
-  public picture?: UploadFileEntityResponse
-
-  @Field(() => Enum_Componentcorecarouselitem_Type, { nullable: true })
-  public type?: Enum_Componentcorecarouselitem_Type
+  public image?: UploadFileEntityResponse
 
   @Field(() => TriplyRecordEntityResponse, { nullable: true })
   public triply_record?: TriplyRecordEntityResponse
@@ -69,7 +65,3 @@ export class ComponentModulesCarouselItemsArgs {
   @Field(() => [String], { nullable: true })
   public sort?: string[]
 }
-
-registerEnumType(Enum_Componentcorecarouselitem_Type, {
-  name: 'Enum_Componentcorecarouselitem_Type',
-})

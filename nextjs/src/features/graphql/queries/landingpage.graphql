@@ -22,9 +22,6 @@ query landingpageBySlug($locale: Locale!, $slug: String!, $publicationState: Str
           ... on ComponentModulesTextModule {
             ...textModuleFragment
           }
-          ... on ComponentModulesCarousel {
-            ...carouselModuleFragment
-          }
           ... on ComponentModulesImage {
             ...imageModuleFragment
           }

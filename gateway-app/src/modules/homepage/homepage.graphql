@@ -19,9 +19,6 @@ fragment HomepageFragment on Homepage {
     ... on ComponentModulesPullquote {
       ...ComponentModulesPullquoteFragment
     }
-    ... on ComponentModulesCarousel {
-      ...ComponentModulesCarouselFragment
-    }
     ... on ComponentModulesSubtitle {
       ...ComponentModulesSubtitleFragment
     }

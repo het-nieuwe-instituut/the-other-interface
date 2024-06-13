@@ -1,7 +1,7 @@
 {
   "collectionName": "components_modules_grid_modules",
   "info": {
-    "displayName": "Grid module",
+    "displayName": "Grid",
     "description": ""
   },
   "options": {},
@@ -19,10 +19,7 @@
     },
     "fieldTypes": {
       "type": "enumeration",
-      "enum": [
-        "Triply",
-        "Stories"
-      ],
+      "enum": ["Triply", "Stories"],
       "required": true,
       "default": "Stories"
     },
