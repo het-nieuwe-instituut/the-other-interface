@@ -1,15 +1,9 @@
-import { createUnionType, Field, ID, InputType, ObjectType } from '@nestjs/graphql'
+import { Field, ID, InputType, ObjectType } from '@nestjs/graphql'
 import { PublicationState } from '../../generated/strapi-sdk'
-import { ComponentModulesButtonsModule } from '../strapi/components/modules/buttonsModule'
 import { ComponentModulesGridModule } from '../strapi/components/modules/gridModule'
-import { ComponentModulesImageCarousel } from '../strapi/components/modules/imageCarousel'
-import { ComponentModulesImage } from '../strapi/components/modules/imageModule'
-import { ComponentModulesPullquote } from '../strapi/components/modules/pullQuote'
-import { ComponentModulesSubtitle } from '../strapi/components/modules/subtitle'
-import { ComponentModulesTextModule } from '../strapi/components/modules/textModule'
-import { ComponentModulesTitleModule } from '../strapi/components/modules/titleModule'
-import { Error, ResponseCollectionMeta } from '../strapi/shared-types'
+import { ResponseCollectionMeta } from '../strapi/shared-types'
 import { ThemeRelationResponseCollection } from '../theme/theme.type'
+import { ComponentModulesCarousel } from '../strapi/components/modules/carousel'
 
 @ObjectType()
 export class HomepageRelationResponseCollection {
@@ -19,29 +13,26 @@ export class HomepageRelationResponseCollection {
 
 @ObjectType()
 export class Homepage {
-  @Field({ nullable: true })
+  @Field()
   public Title?: string
-
-  @Field(() => [HomepageComponentsDynamicZone], { nullable: true })
-  public components?: typeof HomepageComponentsDynamicZone[]
 
   @Field({ nullable: true })
   public createdAt?: Date
-
-  @Field({ nullable: true })
-  public description?: string
-
-  @Field({ nullable: true })
-  public locale?: string
-
-  @Field(() => HomepageRelationResponseCollection, { nullable: true })
-  public localizations?: HomepageRelationResponseCollection
 
   @Field({ nullable: true })
   public publishedAt?: Date
 
   @Field({ nullable: true })
   public updatedAt?: Date
+
+  @Field()
+  public text: string
+
+  @Field(() => ComponentModulesCarousel, { nullable: true })
+  public carousel?: ComponentModulesCarousel
+
+  @Field(() => ComponentModulesGridModule, { nullable: true })
+  public grid?: ComponentModulesGridModule
 }
 
 @ObjectType()
@@ -62,10 +53,10 @@ export class HighlightedHomepageThemeEntity {
 @ObjectType()
 export class HighlightedHomepageThemeEntityResponse {
   @Field(() => HighlightedHomepageThemeEntity)
-  public data: HighlightedHomepageThemeEntity // had to remove []
+  public data: HighlightedHomepageThemeEntity
 
   @Field(() => ResponseCollectionMeta, { nullable: true })
-  public meta?: ResponseCollectionMeta // added
+  public meta?: ResponseCollectionMeta
 }
 
 @ObjectType()
@@ -97,22 +88,3 @@ export class QueryHomepageArgs {
   @Field(() => PublicationState, { nullable: true })
   public publicationState?: PublicationState
 }
-
-export const HomepageComponentsDynamicZone = createUnionType({
-  name: 'HomepageComponentsDynamicZone',
-  types: () =>
-    [
-      ComponentModulesButtonsModule,
-      ComponentModulesGridModule,
-      ComponentModulesImage,
-      ComponentModulesImageCarousel,
-      ComponentModulesPullquote,
-      ComponentModulesSubtitle,
-      ComponentModulesTextModule,
-      ComponentModulesTitleModule,
-      Error,
-    ] as const,
-  resolveType(value) {
-    return value.__typename
-  },
-})
