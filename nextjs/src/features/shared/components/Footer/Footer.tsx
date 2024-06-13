@@ -82,8 +82,16 @@ export const Footer = () => {
                   </NavLinkButton>
                 </div>
                 <div className="pt-8">
-                  <NavLinkButton href={'/privacy'} className="mb-2" variant={'footerPrimary'}>
-                    {t('privacyPolicy')}
+                  <NavLinkButton
+                    href={
+                      lang === Locale.En
+                        ? 'https://nieuweinstituut.nl/en/pages/privacy'
+                        : 'https://nieuweinstituut.nl/pages/privacy'
+                    }
+                    className="mb-2"
+                    variant={'footerPrimary'}
+                  >
+                    {t('privacyPolicy')} <Icon className="size-5" />
                   </NavLinkButton>
                   <NavLinkButton href={'/disclaimer'} className="mb-2" variant={'footerPrimary'}>
                     {t('disclaimer')}
