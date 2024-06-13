@@ -1,24 +1,29 @@
-import { Flex, Grid } from '@chakra-ui/react'
+import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/SearchFilterBox'
+import { State } from '@/features/shared/configs/store'
 import { FOOTER_Z_INDEX } from '@/features/shared/constants/mainConstants'
-import { usePresenter } from './usePresenter'
-import { CategoryFilter } from './CategoryFilter/CategoryFilter'
-import { SuggestionBar } from './SuggestionBar/SuggestionBar'
-import { FilterInput, CloseButton } from './fragments'
+import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
+import { useFilters } from '@/features/shared/hooks/search/useFilters'
+import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { useEnterKey } from '@/features/shared/hooks/ui/useEnterKey'
+import { useOutsideClick } from '@/features/shared/hooks/ui/useOutsideClick'
+import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
+import { sharedActions } from '@/features/shared/stores/shared.store'
+import { cn } from '@/features/ui/utils/cn'
+import CloseIconSmall from '@/icons/close-icon-small.svg'
+import { useRouter } from 'next/navigation'
+import { CSSProperties, useCallback, useRef, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { CategorySuggestions } from '../CategorySuggestions/CategorySuggestions'
+import { COLLECTION_HILIGHT_ID, SuggestionsContainer } from '../Suggestions/Suggestions'
+import { CategoryFilter } from './CategoryFilter/CategoryFilter'
+import { useSearchBarState, useSyncSearchInputToStore } from './GalaxySearchBar.hooks'
+import { SuggestionBar } from './SuggestionBar/SuggestionBar'
+import { CloseButton, FilterInput } from './fragments'
 import { GoButton } from './fragments/GoButton'
 import { SearchButton } from './fragments/SearchButton'
-import {
-  COLLECTION_HILIGHT_ID,
-  Suggestions,
-  SuggestionsContainer,
-} from '../Suggestions/Suggestions'
-import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/SearchFilterBox'
-import { useSearchBarPosition } from './useSearchBarPosition'
-import CloseIconSmall from '@/icons/close-icon-small.svg'
-import { cn } from '@/features/ui/utils/cn'
-import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import TotalResults from './fragments/TotalResults'
 import SearchResults from './fragments/SearchResults'
+import TotalResults from './fragments/TotalResults'
+import { useSearchBarPosition } from './useSearchBarPosition'
 
 type Props = {
   total?: number
@@ -27,60 +32,77 @@ type Props = {
 }
 
 export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }) => {
-  const {
-    category,
-    isSearchModeActive,
-    handleSearchModeOpen,
-    isCategorySuggestionsOpen,
-    setIsCategorySuggestionsOpen,
-    handleGoClick,
-    inputValue,
-    handleInputChange,
-    searchBarRef,
-    filterInputRef,
-    handleClearAll,
-    isUserTyping,
-    handleSelectFilter,
-    selectedFilters,
-    removeFilter,
-  } = usePresenter(isNoActiveSearch)
   const { t } = useTypeSafeTranslation('category')
+  const filterInputRef = useRef<HTMLInputElement>(null)
+  const searchBarRef = useRef<HTMLDivElement>(null)
+  const router = useRouter()
+  const dispatch = useDispatch()
+  const [isUserTyping, setIsUserTyping] = useState(false)
 
+  const { closeSearchMode, clearAllSearch, openSearch, focus } = useSearchBarState({
+    filterInputRef,
+    isNoActiveSearch,
+  })
+  const { syncInput } = useSyncSearchInputToStore({
+    debouncedTime: 500,
+  })
+  const { lang } = useZoom2Params()
+  const { selectedFilters, encodedFilters, removeFilter, selectFilter } = useFilters({
+    onSelectFilter: focus,
+    onRemoveFilter: focus,
+  })
   const { offset, searchBarHeight, wrapRef } = useSearchBarPosition(selectedFilters)
+  const { isSearchModeActive, searchCategory, isCategorySuggestionsOpen, searchValue } =
+    useSelector((state: State) => state.shared)
+
+  const handleGoClick = useCallback(() => {
+    const searchParam = searchValue ? `&search=${searchValue}` : ''
+    const filtersParam = encodedFilters ? `&filters=${encodedFilters}` : ''
+    let url = `/landingpage?category=${searchCategory}${searchParam}${filtersParam}&searchResult=true`
+    url = addLocaleToUrl(url, lang)
+    router.push(url)
+
+    setIsUserTyping(false)
+    closeSearchMode(false)
+  }, [searchValue, encodedFilters, searchCategory, lang, router, closeSearchMode])
+
+  useEnterKey(handleGoClick)
+  useOutsideClick(searchBarRef, () => {
+    closeSearchMode(true)
+  })
 
   const isCollectionHighlightsSelected: boolean = selectedFilters.some(
     filter => filter.id === COLLECTION_HILIGHT_ID
   )
 
   return (
-    <Grid
-      className={cn(className, 'px-4')}
-      position="relative"
-      height={'auto'}
-      templateColumns={'160px minmax(20px, 1fr) minmax(95px, auto)'}
-      gap="4"
-      backgroundColor="blueAlpha.100"
-      zIndex={FOOTER_Z_INDEX}
-      onClick={!isSearchModeActive ? handleSearchModeOpen : undefined}
-      cursor={!isSearchModeActive ? 'pointer' : 'default'}
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
+    <div
+      style={{ '--z-index': FOOTER_Z_INDEX, '--offset': `${offset}px` } as CSSProperties}
+      className={cn(
+        'grid px-4 relative h-auto grid-cols-[160px,minmax(20px,1fr),minmax(95px,auto)] gap-4 bg-blue-100 z-[var(--z-index)] text-pink-100 bottom-[var(--offset)]',
+        !isSearchModeActive ? 'cursor-pointer' : 'cursor-default',
+        className
+      )}
+      onClick={!isSearchModeActive ? openSearch : undefined}
       ref={searchBarRef}
-      color="pinkAlpha.100"
-      bottom={`${offset}px`}
     >
-      <Flex
-        flexDirection="column"
-        alignItems="flex-start"
-        className={'h-[60px] justify-center self-end pt-1'}
-      >
+      <div className=" flex h-[60px] flex-col items-start justify-center self-end pt-1">
         {isNoActiveSearch ? <TotalResults /> : <SearchResults />}
-      </Flex>
+      </div>
 
       <div ref={wrapRef} className="flex flex-wrap gap-0 p-0 transition-all">
         <div className="mr-2 pt-1">
           <CategoryFilter
-            onClick={() => setIsCategorySuggestionsOpen(!isCategorySuggestionsOpen)}
+            onClick={() =>
+              dispatch(
+                sharedActions.categorySuggestionsOpen({
+                  categorySuggestionsOpen: !isCategorySuggestionsOpen,
+                })
+              )
+            }
             isOpen={isCategorySuggestionsOpen}
-            selectedOption={category ? t(category) : ''}
+            selectedOption={searchCategory ? t(searchCategory) : ''}
           />
         </div>
         {selectedFilters.map(filter => (
@@ -97,19 +119,22 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }
         <div className={'h-[60px] min-w-[70px] grow py-1 pl-2'}>
           <FilterInput
             inputRef={filterInputRef}
-            onFocus={handleSearchModeOpen}
-            value={inputValue}
-            onChange={handleInputChange}
+            onFocus={openSearch}
+            defaultValue={searchValue}
+            onChange={e => {
+              setIsUserTyping(true)
+              syncInput(e.target.value)
+            }}
             placeholder={t('searchPlaceholder')}
           />
         </div>
       </div>
 
-      <Flex gap="12px" alignItems="center" className={'h-[60px] self-end pt-1'}>
+      <div className="flex h-[60px] items-center gap-[12px] self-end pt-1">
         {isSearchModeActive ? (
           <>
             <GoButton handleClick={handleGoClick} />
-            <CloseButton handleClick={handleClearAll} />
+            <CloseButton handleClick={clearAllSearch} />
           </>
         ) : isNoActiveSearch ? (
           <div className={'ml-14'}>
@@ -118,11 +143,11 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }
         ) : (
           <>
             <div className={'ml-14'}>
-              <CloseButton handleClick={handleClearAll} />
+              <CloseButton handleClick={clearAllSearch} />
             </div>
           </>
         )}
-      </Flex>
+      </div>
 
       <SuggestionBar
         isOpen={isCategorySuggestionsOpen}
@@ -138,9 +163,9 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }
           label={t('suggestions')}
           offset={searchBarHeight}
         >
-          <SuggestionsContainer handleSelectFilter={handleSelectFilter} />
+          <SuggestionsContainer handleSelectFilter={selectFilter} />
         </SuggestionBar>
       )}
-    </Grid>
+    </div>
   )
 }
