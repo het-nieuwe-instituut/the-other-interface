@@ -4,3 +4,17 @@
   -webkit-mask-image: linear-gradient(to top, rgba(255, 255, 255, 0) 0%, #fff 93.09%);
   mask-image: linear-gradient(to top, rgba(255, 255, 255, 0) 0%, #fff 93.09%);
 }
+
+.truncate-gradient-right {
+  position: relative;
+
+  -webkit-mask-image: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, #fff 93.09%);
+  mask-image: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, #fff 93.09%);
+}
+
+.truncate-gradient-left {
+  position: relative;
+
+  -webkit-mask-image: linear-gradient(to left, rgba(255, 255, 255, 0) 0%, #fff 93.09%);
+  mask-image: linear-gradient(to left, rgba(255, 255, 255, 0) 0%, #fff 93.09%);
+}

@@ -2,12 +2,11 @@
 import { imageBasePath } from '@/features/modules/modulesConstants'
 import ErrorBox from '@/features/shared/components/Error/ErrorBox'
 import { ImageProps } from 'next/image'
-import React, { Children, useContext, useState } from 'react'
+import React, { CSSProperties, Children, useContext, useState } from 'react'
 import { useHorizontalSnappingList } from '../../hooks/useHorizontallScrollSnapping'
 import { cn } from '../../utils/cn'
 import { LightBoxNextImage, LightBoxNextImageByIcon } from '../lightbox/LightBoxNextImage'
 import { LightboxProvider } from '../lightbox/LightboxProvider'
-import Gradient from './gradient.svg'
 import NavArrowLeft from './nav-arrow-left.svg'
 import NavArrowRight from './nav-arrow-right.svg'
 
@@ -23,17 +22,20 @@ const ThumbnailCarouselContext = React.createContext<{
   index: 0,
   setIndex: () => undefined,
 })
+const ITEM_WIDTH = 154.783
 
 export const ThumbnailCarousel = ({ className, children }: ThumbnailCarouselProps) => {
   const { pages, width, nextPage, prevPage, scrollContainerRef, canScrollNext, canScrollPrev } =
     useHorizontalSnappingList({
       numberOfItems: children.length,
-      itemWidth: 154.783,
+      itemWidth: ITEM_WIDTH,
+      gap: 16,
     })
   const [index, setIndex] = useState<number>(0)
   const focusedItem = Children.toArray(children)[
     index
   ] as React.ReactElement<ThumbnailCarouselItemProps>
+  const itemsFitInContainer = Math.floor(width / ITEM_WIDTH)
 
   const focusedItemProps = focusedItem.props
   if (!focusedItem) {
@@ -59,37 +61,40 @@ export const ThumbnailCarousel = ({ className, children }: ThumbnailCarouselProp
             />
           </div>
 
-          <div className="flex">
-            <div className="overflow-x-scroll scrollbar-hide" ref={scrollContainerRef}>
+          <div className="relative flex">
+            <div className="scrollbar-hide overflow-x-scroll" ref={scrollContainerRef}>
               <div
                 className="flex flex-nowrap gap-4"
                 style={{
-                  width: pages === 0 ? width : pages * width,
+                  width: pages * itemsFitInContainer * (ITEM_WIDTH + 16),
                 }}
               >
                 {children}
               </div>
             </div>
-            <Gradient
+
+            <div
               className={cn(
-                'pointer-events-none absolute left-0 rotate-180 transition-opacity opacity-100 -mt-[1px]',
+                'truncate-gradient-left absolute bg-ivory-90 w-[81.81px] h-[106px] top-[-1px] bottom-0',
+                'pointer-events-none absolute  transition-opacity opacity-100 ',
                 !canScrollPrev && 'opacity-0'
               )}
             />
             <div className="relative flex">
-              <Gradient
+              <div
                 className={cn(
-                  'pointer-events-none absolute left-[-91.81px] transition-opacity opacity-100 -top-[1px]',
+                  'truncate-gradient-right bg-ivory-90 w-[81.81px] h-[106px] top-[-1px]',
+                  'pointer-events-none absolute left-[-81px] transition-opacity opacity-100 ',
                   !canScrollNext && 'opacity-0'
                 )}
               />
 
-              <div className="flex h-full w-[116.32px] items-center justify-center gap-2 bg-white">
+              <div className="flex h-full w-[116.32px] items-center justify-center gap-2">
                 <button onClick={prevPage}>
-                  <NavArrowLeft />
+                  <NavArrowLeft className={cn(!canScrollPrev && 'invisible')} />
                 </button>
                 <button onClick={nextPage}>
-                  <NavArrowRight />
+                  <NavArrowRight className={cn(!canScrollNext && 'invisible')} />
                 </button>
               </div>
             </div>
@@ -110,7 +115,8 @@ export const ThumbnailCarouselItem = ({ src, alt, index }: ThumbnailCarouselItem
   return (
     <button
       onClick={() => context.setIndex(index)}
-      className=" relative h-[103px] w-[154.78px] flex-none overflow-hidden"
+      style={{ '--item-width': `${ITEM_WIDTH}px` } as CSSProperties}
+      className=" relative h-[103px] w-[var(--item-width)] flex-none overflow-hidden"
     >
       <LightBoxNextImage
         disableOpeningLightbox
