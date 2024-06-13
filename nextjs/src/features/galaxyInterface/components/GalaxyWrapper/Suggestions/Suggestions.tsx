@@ -6,7 +6,6 @@ import { Filter, useFilters } from '@/features/shared/hooks/search/useFilters'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { SEARCH_CATEGORIES, SearchCategory } from '@/features/shared/utils/categories'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
-import { uniqueId } from 'lodash'
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { EnumTriplyrecordType } from 'src/generated/graphql'
@@ -114,7 +113,6 @@ export const Suggestions = ({
   return (
     <>
       {items.map(item => {
-        console.log('item', item)
         return (
           <div className="max-w-full" key={item.value}>
             <SearchFilterBox
