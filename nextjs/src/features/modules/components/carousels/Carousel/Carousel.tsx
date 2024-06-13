@@ -1,100 +1,90 @@
-// TODO: uncomment after component is connected to collections again
+import { Box, Button, Flex, Text } from '@chakra-ui/react'
+import React, { createRef } from 'react'
+import { Carousel } from 'react-responsive-carousel'
+import { ComponentModulesCarousel } from 'src/generated/graphql'
+import { usePresenter } from './usePresenter'
+import { modulesSpacingMapper } from '@/features/modules/modulesSpacing'
+import CarouselPagination from './CarouselPagination/CarouselPagination'
 
-export {}
+interface Props {
+  component: ComponentModulesCarousel
+  locale?: string
+}
 
-// import { Box, Button, Flex, Text } from '@chakra-ui/react'
-// import React, { createRef } from 'react'
-// import { Carousel } from 'react-responsive-carousel'
+// TODO: implement carousel item & make sure component is working as designed/intended
+export const CarouselModule: React.FC<Props> = props => {
+  const carouselRef = createRef<HTMLDivElement>()
+  const { title, items, variant, explore_collection_button, description } = props.component
+  const {
+    showPaginationDesktop,
+    handlePaginationNext,
+    handlePaginationPrev,
+    pagesCount,
+    chunks,
+    currentSlide,
+    showPaginationMobile,
+    handlePressButton,
+  } = usePresenter(variant, items, explore_collection_button)
 
-// import { ComponentModulesCarousel, EnumComponentmodulescarouselType } from 'src/generated/graphql'
+  return (
+    <Box
+      as="div"
+      backgroundColor={'inherit'}
+      pt={modulesSpacingMapper?.Carousel.spacingTop}
+      pb={modulesSpacingMapper?.Carousel.spacingBottom}
+      position={'relative'}
+      ref={carouselRef}
+    >
+      <Flex alignItems="center" justifyContent="space-between" mb={'4'}>
+        <Text textStyle={'h1'}>{title}</Text>
+        {showPaginationDesktop && renderPagination()}
+      </Flex>
 
-// import CarouselHeader from '../components/CarouselHeader/CarouselHeader'
-// import CarouselPagination from '../components/CarouselPagination/CarouselPagination'
-// import { CarouselSlide } from '../components/CarouselSlide/CarouselSlide'
-// import { usePresenter } from './usePresenter'
-// import { modulesSpacingMapper } from '@/features/modules/modulesSpacing'
+      {description && (
+        <Box mb={'8'} width={'63%'}>
+          <Text textStyle="body">{description}</Text>
+        </Box>
+      )}
 
-// interface Props {
-//   component: ComponentModulesCarousel
-//   locale?: string
-// }
+      <Carousel
+        showArrows={false}
+        showThumbs={false}
+        showStatus={false}
+        showIndicators={false}
+        selectedItem={currentSlide}
+      >
+        {chunks?.map((_chunk, index) => {
+          return <div key={index}>TODO: implement carousel item</div>
+        })}
+      </Carousel>
 
-// export const CarouselModule: React.FC<Props> = props => {
-//   const carouselRef = createRef<HTMLDivElement>()
-//   const { title, items, type, buttonText, buttonUrl, description } = props.component
-//   const {
-//     showPaginationDesctop,
-//     handlePaginationNext,
-//     handlePaginationPrev,
-//     pagesCount,
-//     chunks,
-//     currentSlide,
-//     showPaginationMobile,
-//     handlePressButton,
-//   } = usePresenter(type, items, buttonUrl)
+      {showPaginationMobile && (
+        <Box mb={'12'}>
+          <CarouselPagination
+            handlePaginationNext={handlePaginationNext}
+            handlePaginationPrev={handlePaginationPrev}
+            pagesCount={pagesCount}
+            currentSlide={currentSlide + 1}
+          />
+        </Box>
+      )}
 
-//   return (
-//     <Box
-//       as="div"
-//       backgroundColor={'inherit'}
-//       pt={modulesSpacingMapper?.Carousel.spacingTop}
-//       pb={modulesSpacingMapper?.Carousel.spacingBottom}
-//       position={'relative'}
-//       ref={carouselRef}
-//     >
-//       <CarouselHeader title={title ?? ''}>
-//         {showPaginationDesctop ? (
-//           <CarouselPagination
-//             handlePaginationNext={handlePaginationNext}
-//             handlePaginationPrev={handlePaginationPrev}
-//             pagesCount={pagesCount}
-//             currentSlide={currentSlide + 1}
-//           />
-//         ) : null}
-//       </CarouselHeader>
+      {explore_collection_button?.text && (
+        <Flex>
+          <Button onClick={handlePressButton}>{explore_collection_button.text}</Button>
+        </Flex>
+      )}
+    </Box>
+  )
 
-//       {description && (
-//         <Box mb={'8'} width={'63%'}>
-//           <Text textStyle="body">{description}</Text>
-//         </Box>
-//       )}
-
-//       <Carousel
-//         showArrows={false}
-//         showThumbs={false}
-//         showStatus={false}
-//         showIndicators={false}
-//         selectedItem={currentSlide}
-//       >
-//         {chunks?.map((chunk, index) => {
-//           return (
-//             <CarouselSlide
-//               key={index}
-//               imageKey={index}
-//               items={chunk}
-//               type={type ?? EnumComponentmodulescarouselType.Makers}
-//               carouselRef={carouselRef}
-//             />
-//           )
-//         })}
-//       </Carousel>
-
-//       {showPaginationMobile && (
-//         <Box mb={'12'}>
-//           <CarouselPagination
-//             handlePaginationNext={handlePaginationNext}
-//             handlePaginationPrev={handlePaginationPrev}
-//             pagesCount={pagesCount}
-//             currentSlide={currentSlide + 1}
-//           />
-//         </Box>
-//       )}
-
-//       {buttonText && (
-//         <Flex>
-//           <Button onClick={handlePressButton}>{buttonText}</Button>
-//         </Flex>
-//       )}
-//     </Box>
-//   )
-// }
+  function renderPagination() {
+    return (
+      <CarouselPagination
+        handlePaginationNext={handlePaginationNext}
+        handlePaginationPrev={handlePaginationPrev}
+        pagesCount={pagesCount}
+        currentSlide={currentSlide + 1}
+      />
+    )
+  }
+}

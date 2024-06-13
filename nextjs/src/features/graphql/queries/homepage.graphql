@@ -1,46 +1,15 @@
-#import '../fragments/components/TextModule.fragment.graphql'
-#import '../fragments/components/PullquoteModule.fragment.graphql'
-#import '../fragments/components/ImageModule.fragment.graphql'
-#import '../fragments/components/TableModuleFragment.fragment.graphql'
-#import '../fragments/components/TitleModule.fragment.graphql'
-#import '../fragments/components/ImageCarousel.fragment.graphql'
-#import '../fragments/components/CarouselModule.fragment.graphql'
-#import '../fragments/components/ButtonsModule.fragment.graphql'
-#import '../fragments/components/SubtitleModule.fragment.graphql'
-#import '../fragments/components/GridModule.fragment.graphql'
-
 query homepage($locale: Locale!, $publicationState: String = "LIVE") {
   homepage(locale: $locale, publicationState: $publicationState) {
     data {
       id
       attributes {
         Title
-        description
-        components {
-          ... on ComponentModulesTextModule {
-            ...textModuleFragment
-          }
-          ... on ComponentModulesImage {
-            ...imageModuleFragment
-          }
-          ... on ComponentModulesPullquote {
-            ...pullquoteModuleFragment
-          }
-          ... on ComponentModulesTitleModule {
-            ...titleModuleFragment
-          }
-          ... on ComponentModulesImageCarousel {
-            ...imageCarouselModuleFragment
-          }
-          ... on ComponentModulesButtonsModule {
-            ...buttonsModuleFragment
-          }
-          ... on ComponentModulesSubtitle {
-            ...subtitleModuleFragment
-          }
-          ... on ComponentModulesGridModule {
-            ...gridModuleFragment
-          }
+        text
+        carousel {
+          ...carouselModuleFragment
+        }
+        grid {
+          ...gridModuleFragment
         }
       }
     }

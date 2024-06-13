@@ -1,32 +1,31 @@
-# TODO: enable when carousel module is integrated in collections
-# fragment carouselModuleFragment on ComponentModulesCarousel {
-#     id
-#     __typename
-#     title
-#     variant
-#     explore_collection_button {
-#         ...ButtonFragment
-#     }
-#     items {
-#         id
-#         image {
-#             data {
-#                 attributes {
-#                     url
-#                 }
-#             }
-#         }
-#         alt_text
-#         description
-#         triply_record {
-#             data {
-#                 ...BaseTriplyRecordFragment
-#             }
-#         }
-#         story {
-#             data {
-#                 ...StoryWithoutRelationsFragment
-#             }
-#         }
-#     }
-# }
+fragment carouselModuleFragment on ComponentModulesCarousel {
+  id
+  __typename
+  title
+  variant
+  explore_collection_button {
+    ...ButtonFragment
+  }
+  items {
+    id
+    image {
+      data {
+        attributes {
+          url
+        }
+      }
+    }
+    alt_text
+    description
+    triply_record {
+      data {
+        ...BaseTriplyRecordFragment
+      }
+    }
+    story {
+      data {
+        ...StoryWithoutRelationsFragment
+      }
+    }
+  }
+}
