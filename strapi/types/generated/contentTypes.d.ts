@@ -1002,7 +1002,8 @@ export interface ApiStoryStory extends Schema.CollectionType {
         'modules.image',
         'modules.buttons-module',
         'core.stand-alone-link',
-        'core.mux-audio'
+        'core.mux-audio',
+        'core.mux-video'
       ]
     > &
       Attribute.SetPluginOptions<{
