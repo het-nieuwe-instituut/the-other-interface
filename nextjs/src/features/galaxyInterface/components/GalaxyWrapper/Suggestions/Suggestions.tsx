@@ -1,9 +1,12 @@
-import ErrorBox from '@/features/shared/components/Error/ErrorBox'
+import { InlineThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
 import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/SearchFilterBox'
 import { State } from '@/features/shared/configs/store'
 import { useFilterSuggestionsQuery } from '@/features/shared/hooks/queries/useFilterSuggestionsQuery'
 import { Filter, useFilters } from '@/features/shared/hooks/search/useFilters'
+import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { SEARCH_CATEGORIES, SearchCategory } from '@/features/shared/utils/categories'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
+import { uniqueId } from 'lodash'
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { EnumTriplyrecordType } from 'src/generated/graphql'
@@ -21,6 +24,7 @@ type Props = {
 }
 
 export const SuggestionsContainer: React.FC<Props> = ({ handleSelectFilter }) => {
+  const { t: commonT } = useTypeSafeTranslation('common')
   const { searchValue, searchCategory } = useSelector((state: State) => state.shared)
   const searchCategoryToTriplyEnum = useMemo(() => {
     if (searchCategory) {
@@ -29,9 +33,7 @@ export const SuggestionsContainer: React.FC<Props> = ({ handleSelectFilter }) =>
       if (searchCategory === 'people') return EnumTriplyrecordType.People
       if (searchCategory === 'publications') return EnumTriplyrecordType.Publication
       if (searchCategory === 'stories') return EnumTriplyrecordType.Media
-      if (searchCategory === 'all') return EnumTriplyrecordType.Media
     }
-    return EnumTriplyrecordType.Media
   }, [searchCategory])
 
   const {
@@ -44,11 +46,24 @@ export const SuggestionsContainer: React.FC<Props> = ({ handleSelectFilter }) =>
   })
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <InlineThemedSpinner />
   }
 
-  if (isError || !suggestions || !suggestions.filterSuggestions || !searchCategory) {
-    return <ErrorBox />
+  if (isError) {
+    return (
+      <p
+        className={TypographyVariants({
+          socialLarge: 'md',
+          className: 'pt-4',
+        })}
+      >
+        {commonT('somethingWentWrongAndRetry')}
+      </p>
+    )
+  }
+
+  if (!suggestions || !suggestions.filterSuggestions || !searchCategory) {
+    return <div>{commonT('noSuggestionsFound')}</div>
   }
 
   return (
@@ -98,15 +113,20 @@ export const Suggestions = ({
 
   return (
     <>
-      {items.map(item => (
-        <div className="max-w-full" key={item.value}>
-          <SearchFilterBox
-            category={category}
-            subCategory={item.value}
-            onClick={() => handleSelectFilter(item)}
-          />
-        </div>
-      ))}
+      {items.map(item => {
+        console.log('item', item)
+        return (
+          <div className="max-w-full" key={item.value}>
+            <SearchFilterBox
+              category={category}
+              subCategory={item.value}
+              onClick={() =>
+                handleSelectFilter({ field: category, value: item.value, id: item.value })
+              }
+            />
+          </div>
+        )
+      })}
     </>
   )
 }

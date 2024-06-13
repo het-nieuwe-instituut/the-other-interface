@@ -1,9 +1,9 @@
 'use client'
 import { useQuery } from '@tanstack/react-query'
 import { EnumTriplyrecordType } from 'src/generated/graphql'
+import { useDebounceValue } from 'usehooks-ts'
 import initApiClientService from '../../utils/initApiClientService'
 import { useLocale } from '../useLocale'
-import { debounce } from 'lodash'
 
 export function useFilterSuggestionsQuery({
   type,
@@ -14,13 +14,14 @@ export function useFilterSuggestionsQuery({
 }) {
   const api = initApiClientService()
   const lang = useLocale()
+  const [debouncedSearch] = useDebounceValue(search, 1000)
 
-  const queryFn = debounce(() => {
-    return api.filterSuggestions({ type, search, locale: lang })
-  }, 1000)
+  const queryFn = () => {
+    return api.filterSuggestions({ type, search: debouncedSearch, locale: lang })
+  }
 
   return useQuery({
-    queryKey: ['filter-suggestions-query', search],
+    queryKey: ['filter-suggestions-query', type, debouncedSearch],
     queryFn,
     refetchOnWindowFocus: false,
   })

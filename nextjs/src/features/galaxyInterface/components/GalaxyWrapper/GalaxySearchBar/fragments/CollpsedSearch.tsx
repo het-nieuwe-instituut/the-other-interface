@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/react'
+import { cn } from '@/features/ui/utils/cn'
 import SearchIconCollapsed from '@/icons/search-icon-collapsed.svg'
 
 type Props = {
@@ -8,25 +8,13 @@ type Props = {
 
 export const CollpsedSearch = ({ toggleSearchBar, className }: Props) => {
   return (
-    <Flex
-      className={className}
-      alignItems={'center'}
-      justifyContent="flex-end"
-      zIndex={'inherit'}
-      height={'full'}
-      width={'full'}
-    >
-      <Flex
-        width={'65px'}
-        background={'blueAlpha.100'}
-        justifyContent={'center'}
-        alignItems={'center'}
-        height={'full'}
-        zIndex={20}
+    <div className={cn('flex items-center justify-end z-[inherit] h-full w-full', className)}>
+      <button
+        className="z-20 flex h-full w-[65px] items-center justify-center bg-blue-100"
         onClick={toggleSearchBar}
       >
         <SearchIconCollapsed />
-      </Flex>
-    </Flex>
+      </button>
+    </div>
   )
 }
