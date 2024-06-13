@@ -6,6 +6,10 @@ module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     extend: {
+      gridTemplateAreas: {
+        'editorial-large': ['left right', 'bottom right'],
+        'editorial-small': ['right', 'left', 'bottom'],
+      },
       lineClamp: {
         7: '7',
         8: '8',
@@ -33,6 +37,7 @@ module.exports = {
         ivory: {
           100: 'rgba(249, 246, 238, 1)',
           90: 'rgba(249, 246, 238, .9)',
+          60: 'rgba(249, 246, 238, .6)',
         },
         error: {
           100: 'rgba(252, 54, 90, 1)',
@@ -97,5 +102,6 @@ module.exports = {
         { values: theme('textShadow') }
       )
     }),
+    require('@savvywombat/tailwindcss-grid-areas'),
   ],
 }

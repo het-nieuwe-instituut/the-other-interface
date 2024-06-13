@@ -1,7 +1,6 @@
-'use client'
-import { Box, Grid, GridItem, useTheme } from '@chakra-ui/react'
 import React from 'react'
 import SuspenseLoader from '../SuspenseLoader/SuspenseLoader'
+import { cn } from '@/features/ui/utils/cn'
 
 interface Props {
   LeftContent: React.ReactNode
@@ -10,43 +9,25 @@ interface Props {
 }
 
 export const LayerWrapper: React.FC<Props> = ({ LeftContent, RightContent, BottomContent }) => {
-  const theme = useTheme()
-
   return (
-    <Box
-      px={{ xl: 6, base: 0 }}
-      position={'relative'}
-      zIndex={2}
-      backgroundColor={'ivoryAlpha.90'}
-      width={'100%'}
-    >
-      <Box maxW={theme.breakpoints.xl} marginX={'auto'} paddingTop={9}>
-        <Grid
-          templateAreas={{
-            lg: `"left right"
-                 "bottom right"`,
-            base: `"right"
-                   "left"
-                   "bottom"`,
-          }}
-          templateColumns={RightContent ? { lg: 'minmax(0, 1fr) 320px', base: `100% 100%` } : '1fr'}
-          templateRows={{ lg: '1fr auto', base: `auto minmax(0, 1fr) auto` }}
-          gap={RightContent ? '3.75rem' : '0'}
+    <div className="relative w-full bg-ivory-90 px-0 xl:px-6">
+      <div className="mx-auto max-w-[90em] pt-9">
+        <div
+          className={cn(
+            'grid lg:grid-areas-editorial-large grid-areas-editorial-small',
+            'lg:grid-cols-[minmax(0,1fr),320px] grid-cols-[100%,100%]',
+            'lg:grid-rows-[1fr,auto] grid-rows-[auto,minmax(0,1fr),auto]',
+            RightContent ? 'gap-[3.75rem]' : 'gap-0'
+          )}
         >
           <SuspenseLoader>
-            <GridItem px={6} area={'left'}>
-              {LeftContent}
-            </GridItem>
-            <GridItem area={'bottom'}>{BottomContent}</GridItem>
+            <div className="px-6 grid-in-left">{LeftContent}</div>
+            <div className="grid-in-bottom">{BottomContent}</div>
           </SuspenseLoader>
 
-          {RightContent && (
-            <GridItem area={'right'} px={6}>
-              {RightContent}
-            </GridItem>
-          )}
-        </Grid>
-      </Box>
-    </Box>
+          {RightContent && <div className="px-6 grid-in-right">{RightContent}</div>}
+        </div>
+      </div>
+    </div>
   )
 }

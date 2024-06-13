@@ -11,15 +11,15 @@ export const NavButtonVariants = cva(
   {
     variants: {
       variant: {
-        metaData: [
-          'line-clamp-1 h-[26px] flex-nowrap rounded bg-[rgba(0,0,0,0.20)] px-2 py-1 after:border-none',
-          'text-center font-social-large text-sm font-normal leading-[18.20px]',
+        textPrimary: [
+          'h-[27px]',
+          'text-center font-social-large text-[21px] font-normal leading-7 tracking-tight',
+        ],
+        textSecondary: [
+          'h-[22px]',
+          'text-center font-social-large text-[14px] font-normal leading-[18.20px]',
         ],
         menuPrimary: ['h-[43px]'],
-        menuSecondary: [
-          'h-[34px]',
-          'text-center font-social-large text-sm font-normal leading-[18.20px]',
-        ],
         footerPrimary: [
           'h-[27px]',
           'text-center font-social-large text-[21px] font-normal leading-7 tracking-tight',
@@ -27,6 +27,10 @@ export const NavButtonVariants = cva(
         footerSecondary: [
           'h-[35px]',
           'text-center font-social-large text-[32px] font-normal leading-9',
+        ],
+        metaData: [
+          'line-clamp-1 h-[26px] flex-nowrap rounded bg-[rgba(0,0,0,0.20)] px-2 py-1 after:border-none',
+          'text-center font-social-large text-sm font-normal leading-[18.20px]',
         ],
         metaDataText: [
           'h-[22px]',

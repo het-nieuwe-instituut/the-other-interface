@@ -1,16 +1,17 @@
 fragment imageCarouselModuleFragment on ComponentModulesImageCarousel {
-    id
-    __typename
-    images {
-        data {
-            attributes {
-                url,
-                caption,
-                width,
-                height,
-                size
-            }
-        }
+  id
+  __typename
+  images {
+    data {
+      id
+      attributes {
+        url
+        caption
+        width
+        height
+        size
+      }
     }
-    description
+  }
+  description
 }
