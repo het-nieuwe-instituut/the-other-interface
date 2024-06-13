@@ -16,7 +16,7 @@
     },
     "alt_text": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "title": {
       "type": "string",

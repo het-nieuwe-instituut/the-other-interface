@@ -122,7 +122,7 @@ export type ComponentCoreButtonInput = {
 
 export type ComponentCoreCarouselImage = {
   __typename?: 'ComponentCoreCarouselImage'
-  alt_text: Scalars['String']
+  alt_text?: Maybe<Scalars['String']>
   description?: Maybe<Scalars['String']>
   id: Scalars['ID']
   image: UploadFileEntityResponse
@@ -315,7 +315,7 @@ export type ComponentModulesGridModuleFieldsArgs = {
 
 export type ComponentModulesImage = {
   __typename?: 'ComponentModulesImage'
-  alt_text: Scalars['String']
+  alt_text?: Maybe<Scalars['String']>
   caption?: Maybe<Scalars['String']>
   id: Scalars['ID']
   image: UploadFileEntityResponse
@@ -2536,7 +2536,7 @@ export type HomepageFragmentFragment = {
       }
     | {
         __typename: 'ComponentModulesImage'
-        alt_text: string
+        alt_text?: string | null
         caption?: string | null
         id: string
         image: {
@@ -2769,7 +2769,7 @@ export type HomepageQuery = {
                   }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text: string
+                    alt_text?: string | null
                     caption?: string | null
                     id: string
                     image: {
@@ -2970,7 +2970,7 @@ export type HomepageQuery = {
             }
           | {
               __typename: 'ComponentModulesImage'
-              alt_text: string
+              alt_text?: string | null
               caption?: string | null
               id: string
               image: {
@@ -3226,7 +3226,7 @@ export type HighlightedHomepageThemesQuery = {
                         }
                       | {
                           __typename: 'ComponentModulesImage'
-                          alt_text: string
+                          alt_text?: string | null
                           caption?: string | null
                           id: string
                           image: {
@@ -3419,7 +3419,7 @@ export type HighlightedHomepageThemesQuery = {
                             | { __typename: 'ComponentModulesButtonsModule' }
                             | {
                                 __typename: 'ComponentModulesImage'
-                                alt_text: string
+                                alt_text?: string | null
                                 caption?: string | null
                                 id: string
                                 image: {
@@ -3531,7 +3531,7 @@ export type HighlightedHomepageThemesQuery = {
                             | { __typename: 'ComponentModulesButtonsModule' }
                             | {
                                 __typename: 'ComponentModulesImage'
-                                alt_text: string
+                                alt_text?: string | null
                                 caption?: string | null
                                 id: string
                                 image: {
@@ -3743,7 +3743,7 @@ export type HighlightedHomepageThemesQuery = {
                         }
                       | {
                           __typename: 'ComponentModulesImage'
-                          alt_text: string
+                          alt_text?: string | null
                           caption?: string | null
                           id: string
                           image: {
@@ -3936,7 +3936,7 @@ export type HighlightedHomepageThemesQuery = {
                             | { __typename: 'ComponentModulesButtonsModule' }
                             | {
                                 __typename: 'ComponentModulesImage'
-                                alt_text: string
+                                alt_text?: string | null
                                 caption?: string | null
                                 id: string
                                 image: {
@@ -4048,7 +4048,7 @@ export type HighlightedHomepageThemesQuery = {
                             | { __typename: 'ComponentModulesButtonsModule' }
                             | {
                                 __typename: 'ComponentModulesImage'
-                                alt_text: string
+                                alt_text?: string | null
                                 caption?: string | null
                                 id: string
                                 image: {
@@ -4280,7 +4280,7 @@ export type LandingpageFragmentFragment = {
       }
     | {
         __typename: 'ComponentModulesImage'
-        alt_text: string
+        alt_text?: string | null
         caption?: string | null
         id: string
         image: {
@@ -4506,7 +4506,7 @@ export type LandingpageEntityFragmentFragment = {
               }
             | {
                 __typename: 'ComponentModulesImage'
-                alt_text: string
+                alt_text?: string | null
                 caption?: string | null
                 id: string
                 image: {
@@ -4707,7 +4707,7 @@ export type LandingpageEntityFragmentFragment = {
         }
       | {
           __typename: 'ComponentModulesImage'
-          alt_text: string
+          alt_text?: string | null
           caption?: string | null
           id: string
           image: {
@@ -4943,7 +4943,7 @@ export type LandingPageQuery = {
                   }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text: string
+                    alt_text?: string | null
                     caption?: string | null
                     id: string
                     image: {
@@ -5144,7 +5144,7 @@ export type LandingPageQuery = {
             }
           | {
               __typename: 'ComponentModulesImage'
-              alt_text: string
+              alt_text?: string | null
               caption?: string | null
               id: string
               image: {
@@ -5385,7 +5385,7 @@ export type LandingPagesQuery = {
                   }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text: string
+                    alt_text?: string | null
                     caption?: string | null
                     id: string
                     image: {
@@ -5586,7 +5586,7 @@ export type LandingPagesQuery = {
             }
           | {
               __typename: 'ComponentModulesImage'
-              alt_text: string
+              alt_text?: string | null
               caption?: string | null
               id: string
               image: {
@@ -5905,7 +5905,7 @@ export type MenupageFragmentFragment = {
       }
     | {
         __typename: 'ComponentModulesImage'
-        alt_text: string
+        alt_text?: string | null
         caption?: string | null
         id: string
         image: {
@@ -6129,7 +6129,7 @@ export type MenupageEntityFragmentFragment = {
               }
             | {
                 __typename: 'ComponentModulesImage'
-                alt_text: string
+                alt_text?: string | null
                 caption?: string | null
                 id: string
                 image: {
@@ -6330,7 +6330,7 @@ export type MenupageEntityFragmentFragment = {
         }
       | {
           __typename: 'ComponentModulesImage'
-          alt_text: string
+          alt_text?: string | null
           caption?: string | null
           id: string
           image: {
@@ -6564,7 +6564,7 @@ export type MenuPageQuery = {
                   }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text: string
+                    alt_text?: string | null
                     caption?: string | null
                     id: string
                     image: {
@@ -6765,7 +6765,7 @@ export type MenuPageQuery = {
             }
           | {
               __typename: 'ComponentModulesImage'
-              alt_text: string
+              alt_text?: string | null
               caption?: string | null
               id: string
               image: {
@@ -7004,7 +7004,7 @@ export type MenuPagesQuery = {
                   }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text: string
+                    alt_text?: string | null
                     caption?: string | null
                     id: string
                     image: {
@@ -7205,7 +7205,7 @@ export type MenuPagesQuery = {
             }
           | {
               __typename: 'ComponentModulesImage'
-              alt_text: string
+              alt_text?: string | null
               caption?: string | null
               id: string
               image: {
@@ -7453,7 +7453,7 @@ export type StoriesQuery = {
             }
           | {
               __typename: 'ComponentModulesImage'
-              alt_text: string
+              alt_text?: string | null
               caption?: string | null
               id: string
               image: {
@@ -7634,7 +7634,7 @@ export type StoriesQuery = {
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text: string
+                    alt_text?: string | null
                     caption?: string | null
                     id: string
                     image: {
@@ -7746,7 +7746,7 @@ export type StoriesQuery = {
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text: string
+                    alt_text?: string | null
                     caption?: string | null
                     id: string
                     image: {
@@ -8003,7 +8003,7 @@ export type StoryQuery = {
             }
           | {
               __typename: 'ComponentModulesImage'
-              alt_text: string
+              alt_text?: string | null
               caption?: string | null
               id: string
               image: {
@@ -8184,7 +8184,7 @@ export type StoryQuery = {
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text: string
+                    alt_text?: string | null
                     caption?: string | null
                     id: string
                     image: {
@@ -8296,7 +8296,7 @@ export type StoryQuery = {
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text: string
+                    alt_text?: string | null
                     caption?: string | null
                     id: string
                     image: {
@@ -8551,7 +8551,7 @@ export type StoryByLocaleQuery = {
             }
           | {
               __typename: 'ComponentModulesImage'
-              alt_text: string
+              alt_text?: string | null
               caption?: string | null
               id: string
               image: {
@@ -8809,7 +8809,7 @@ export type StoryByLocaleQuery = {
                   }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text: string
+                    alt_text?: string | null
                     caption?: string | null
                     id: string
                     image: {
@@ -9085,7 +9085,7 @@ export type StoriesByLocaleQuery = {
             }
           | {
               __typename: 'ComponentModulesImage'
-              alt_text: string
+              alt_text?: string | null
               caption?: string | null
               id: string
               image: {
@@ -9343,7 +9343,7 @@ export type StoriesByLocaleQuery = {
                   }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text: string
+                    alt_text?: string | null
                     caption?: string | null
                     id: string
                     image: {
@@ -9547,7 +9547,7 @@ export type StoriesMetaByLocaleQuery = {
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text: string
+                    alt_text?: string | null
                     caption?: string | null
                     id: string
                     image: {
@@ -9659,7 +9659,7 @@ export type StoriesMetaByLocaleQuery = {
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text: string
+                    alt_text?: string | null
                     caption?: string | null
                     id: string
                     image: {
@@ -9866,7 +9866,7 @@ export type StoriesMetaByLocaleQuery = {
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
-                          alt_text: string
+                          alt_text?: string | null
                           caption?: string | null
                           id: string
                           image: {
@@ -9978,7 +9978,7 @@ export type StoriesMetaByLocaleQuery = {
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
-                          alt_text: string
+                          alt_text?: string | null
                           caption?: string | null
                           id: string
                           image: {
@@ -10325,7 +10325,7 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
             }
           | {
               __typename: 'ComponentModulesImage'
-              alt_text: string
+              alt_text?: string | null
               caption?: string | null
               id: string
               image: {
@@ -10506,7 +10506,7 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text: string
+                    alt_text?: string | null
                     caption?: string | null
                     id: string
                     image: {
@@ -10618,7 +10618,7 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text: string
+                    alt_text?: string | null
                     caption?: string | null
                     id: string
                     image: {
@@ -10777,7 +10777,7 @@ export type StoriesByIdsQuery = {
           | { __typename?: 'ComponentModulesButtonsModule' }
           | {
               __typename: 'ComponentModulesImage'
-              alt_text: string
+              alt_text?: string | null
               caption?: string | null
               id: string
               image: {
@@ -11114,7 +11114,7 @@ export type NestedStoryFragmentFragment = {
         }
       | {
           __typename: 'ComponentModulesImage'
-          alt_text: string
+          alt_text?: string | null
           caption?: string | null
           id: string
           image: {
@@ -11373,7 +11373,7 @@ export type LocalizedStoryFragmentFragment = {
         }
       | {
           __typename: 'ComponentModulesImage'
-          alt_text: string
+          alt_text?: string | null
           caption?: string | null
           id: string
           image: {
@@ -11631,7 +11631,7 @@ export type LocalizedStoryFragmentFragment = {
               }
             | {
                 __typename: 'ComponentModulesImage'
-                alt_text: string
+                alt_text?: string | null
                 caption?: string | null
                 id: string
                 image: {
@@ -11858,7 +11858,7 @@ export type StoryFragmentFragment = {
         }
       | {
           __typename: 'ComponentModulesImage'
-          alt_text: string
+          alt_text?: string | null
           caption?: string | null
           id: string
           image: {
@@ -12039,7 +12039,7 @@ export type StoryFragmentFragment = {
             | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
-                alt_text: string
+                alt_text?: string | null
                 caption?: string | null
                 id: string
                 image: {
@@ -12151,7 +12151,7 @@ export type StoryFragmentFragment = {
             | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
-                alt_text: string
+                alt_text?: string | null
                 caption?: string | null
                 id: string
                 image: {
@@ -12341,7 +12341,7 @@ export type StoryMetaFragmentFragment = {
             | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
-                alt_text: string
+                alt_text?: string | null
                 caption?: string | null
                 id: string
                 image: {
@@ -12453,7 +12453,7 @@ export type StoryMetaFragmentFragment = {
             | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
-                alt_text: string
+                alt_text?: string | null
                 caption?: string | null
                 id: string
                 image: {
@@ -12616,7 +12616,7 @@ export type LocalizedStoryMetaFragmentFragment = {
             | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
-                alt_text: string
+                alt_text?: string | null
                 caption?: string | null
                 id: string
                 image: {
@@ -12728,7 +12728,7 @@ export type LocalizedStoryMetaFragmentFragment = {
             | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
-                alt_text: string
+                alt_text?: string | null
                 caption?: string | null
                 id: string
                 image: {
@@ -12935,7 +12935,7 @@ export type LocalizedStoryMetaFragmentFragment = {
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
-                      alt_text: string
+                      alt_text?: string | null
                       caption?: string | null
                       id: string
                       image: {
@@ -13047,7 +13047,7 @@ export type LocalizedStoryMetaFragmentFragment = {
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
-                      alt_text: string
+                      alt_text?: string | null
                       caption?: string | null
                       id: string
                       image: {
@@ -13170,7 +13170,7 @@ export type ComponentCoreButtonFragmentFragment = {
 export type ComponentCoreCarouselImageFragmentFragment = {
   __typename?: 'ComponentCoreCarouselImage'
   id: string
-  alt_text: string
+  alt_text?: string | null
   description?: string | null
   image: {
     __typename?: 'UploadFileEntityResponse'
@@ -13401,7 +13401,7 @@ export type ComponentModulesCarouselFragmentFragment = {
   images: Array<{
     __typename?: 'ComponentCoreCarouselImage'
     id: string
-    alt_text: string
+    alt_text?: string | null
     description?: string | null
     image: {
       __typename?: 'UploadFileEntityResponse'
@@ -13492,7 +13492,7 @@ export type ComponentModulesImageCarouselFragmentFragment = {
 
 export type ComponentModulesImageFragmentFragment = {
   __typename: 'ComponentModulesImage'
-  alt_text: string
+  alt_text?: string | null
   caption?: string | null
   id: string
   image: {
@@ -13891,7 +13891,7 @@ export type ThemeQuery = {
                   }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text: string
+                    alt_text?: string | null
                     caption?: string | null
                     id: string
                     image: {
@@ -14072,7 +14072,7 @@ export type ThemeQuery = {
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
-                          alt_text: string
+                          alt_text?: string | null
                           caption?: string | null
                           id: string
                           image: {
@@ -14184,7 +14184,7 @@ export type ThemeQuery = {
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
-                          alt_text: string
+                          alt_text?: string | null
                           caption?: string | null
                           id: string
                           image: {
@@ -14427,7 +14427,7 @@ export type ThemesQuery = {
                   }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text: string
+                    alt_text?: string | null
                     caption?: string | null
                     id: string
                     image: {
@@ -14608,7 +14608,7 @@ export type ThemesQuery = {
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
-                          alt_text: string
+                          alt_text?: string | null
                           caption?: string | null
                           id: string
                           image: {
@@ -14720,7 +14720,7 @@ export type ThemesQuery = {
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
-                          alt_text: string
+                          alt_text?: string | null
                           caption?: string | null
                           id: string
                           image: {
@@ -14971,7 +14971,7 @@ export type StoriesRelatedToThemeQuery = {
                   }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text: string
+                    alt_text?: string | null
                     caption?: string | null
                     id: string
                     image: {
@@ -15152,7 +15152,7 @@ export type StoriesRelatedToThemeQuery = {
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
-                          alt_text: string
+                          alt_text?: string | null
                           caption?: string | null
                           id: string
                           image: {
@@ -15264,7 +15264,7 @@ export type StoriesRelatedToThemeQuery = {
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
-                          alt_text: string
+                          alt_text?: string | null
                           caption?: string | null
                           id: string
                           image: {
@@ -15495,7 +15495,7 @@ export type ThemeFragmentFragment = {
               }
             | {
                 __typename: 'ComponentModulesImage'
-                alt_text: string
+                alt_text?: string | null
                 caption?: string | null
                 id: string
                 image: {
@@ -15676,7 +15676,7 @@ export type ThemeFragmentFragment = {
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
-                      alt_text: string
+                      alt_text?: string | null
                       caption?: string | null
                       id: string
                       image: {
@@ -15788,7 +15788,7 @@ export type ThemeFragmentFragment = {
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
-                      alt_text: string
+                      alt_text?: string | null
                       caption?: string | null
                       id: string
                       image: {
@@ -16017,7 +16017,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
               }
             | {
                 __typename: 'ComponentModulesImage'
-                alt_text: string
+                alt_text?: string | null
                 caption?: string | null
                 id: string
                 image: {
@@ -16198,7 +16198,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
-                      alt_text: string
+                      alt_text?: string | null
                       caption?: string | null
                       id: string
                       image: {
@@ -16310,7 +16310,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
-                      alt_text: string
+                      alt_text?: string | null
                       caption?: string | null
                       id: string
                       image: {
@@ -16522,7 +16522,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
               }
             | {
                 __typename: 'ComponentModulesImage'
-                alt_text: string
+                alt_text?: string | null
                 caption?: string | null
                 id: string
                 image: {
@@ -16703,7 +16703,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
-                      alt_text: string
+                      alt_text?: string | null
                       caption?: string | null
                       id: string
                       image: {
@@ -16815,7 +16815,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
-                      alt_text: string
+                      alt_text?: string | null
                       caption?: string | null
                       id: string
                       image: {
@@ -17064,7 +17064,7 @@ export type TriplyRecordQuery = {
                   }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text: string
+                    alt_text?: string | null
                     caption?: string | null
                     id: string
                     image: {
@@ -17245,7 +17245,7 @@ export type TriplyRecordQuery = {
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
-                          alt_text: string
+                          alt_text?: string | null
                           caption?: string | null
                           id: string
                           image: {
@@ -17357,7 +17357,7 @@ export type TriplyRecordQuery = {
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
-                          alt_text: string
+                          alt_text?: string | null
                           caption?: string | null
                           id: string
                           image: {
@@ -17597,7 +17597,7 @@ export type TriplyRecordsQuery = {
                   }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text: string
+                    alt_text?: string | null
                     caption?: string | null
                     id: string
                     image: {
@@ -17778,7 +17778,7 @@ export type TriplyRecordsQuery = {
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
-                          alt_text: string
+                          alt_text?: string | null
                           caption?: string | null
                           id: string
                           image: {
@@ -17890,7 +17890,7 @@ export type TriplyRecordsQuery = {
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
-                          alt_text: string
+                          alt_text?: string | null
                           caption?: string | null
                           id: string
                           image: {
@@ -18129,7 +18129,7 @@ export type TriplyRecordFragmentFragment = {
               }
             | {
                 __typename: 'ComponentModulesImage'
-                alt_text: string
+                alt_text?: string | null
                 caption?: string | null
                 id: string
                 image: {
@@ -18310,7 +18310,7 @@ export type TriplyRecordFragmentFragment = {
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
-                      alt_text: string
+                      alt_text?: string | null
                       caption?: string | null
                       id: string
                       image: {
@@ -18422,7 +18422,7 @@ export type TriplyRecordFragmentFragment = {
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
-                      alt_text: string
+                      alt_text?: string | null
                       caption?: string | null
                       id: string
                       image: {
