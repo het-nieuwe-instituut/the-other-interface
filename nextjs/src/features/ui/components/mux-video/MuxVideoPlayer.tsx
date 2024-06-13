@@ -27,7 +27,7 @@ export const MuxVideoPlayer: React.FC<MuxVideoPlayerProps> = ({
   }
 
   return (
-    <div>
+    <div className={cn(className)}>
       <div className="h-[500px] overflow-hidden">
         <MuxPlayer
           title={title}
@@ -39,7 +39,7 @@ export const MuxVideoPlayer: React.FC<MuxVideoPlayerProps> = ({
               '--aspect-ratio': aspectRatio,
             } as CSSProperties
           }
-          className={cn('aspect-[var(--aspect-ratio)]', 'h-[500px]', className)}
+          className={cn('aspect-[var(--aspect-ratio)]', 'h-[500px]')}
         />
       </div>
       <p className={`${cn(TypographyVariants({ socialLarge: 'sm' }), 'pt-4')}`}>{caption}</p>
