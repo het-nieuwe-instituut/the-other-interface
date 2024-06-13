@@ -4,20 +4,18 @@ fragment ComponentCoreButtonFragment on ComponentCoreButton {
   url
 }
 
-fragment ComponentCoreCarouselItemFragment on ComponentCoreCarouselItem {
+fragment ComponentCoreCarouselImageFragment on ComponentCoreCarouselImage {
   id
+  alt_text
   description
-  name
-  picture {
+  image {
     ...UploadFileEntityResponseFragment
   }
-  type
   triply_record {
     data {
       ...BaseTriplyRecordFragment
     }
   }
-
   story {
     data {
       id
@@ -81,6 +79,29 @@ fragment ComponentCoreMuxAudioFragment on ComponentCoreMuxAudio {
   id
   caption
   muxAudioRelation {
+    data {
+      id
+      attributes {
+        title
+        upload_id
+        asset_id
+        playback_id
+        signed
+        error_message
+        isReady
+        duration
+        aspect_ratio
+        createdAt
+        updatedAt
+      }
+    }
+  }
+}
+
+fragment ComponentCoreMuxVideoFragment on ComponentCoreMuxVideo {
+  id
+  caption
+  muxVideoRelation {
     data {
       id
       attributes {

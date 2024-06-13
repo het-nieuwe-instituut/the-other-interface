@@ -750,7 +750,6 @@ export interface ApiHomepageHomepage extends Schema.SingleType {
         'modules.text-module',
         'modules.image',
         'modules.pullquote',
-        'modules.carousel',
         'modules.subtitle',
         'modules.title-module',
         'modules.image-carousel',
@@ -824,8 +823,7 @@ export interface ApiLandingpageLandingpage extends Schema.CollectionType {
         'modules.image',
         'modules.pullquote',
         'modules.buttons-module',
-        'modules.grid-module',
-        'modules.carousel'
+        'modules.grid-module'
       ]
     > &
       Attribute.SetPluginOptions<{
@@ -1004,7 +1002,8 @@ export interface ApiStoryStory extends Schema.CollectionType {
         'modules.image',
         'modules.buttons-module',
         'core.stand-alone-link',
-        'core.mux-audio'
+        'core.mux-audio',
+        'core.mux-video'
       ]
     > &
       Attribute.SetPluginOptions<{
@@ -1065,28 +1064,6 @@ export interface ApiStoryStory extends Schema.CollectionType {
   }
 }
 
-export interface ApiTableTable extends Schema.CollectionType {
-  collectionName: 'tables'
-  info: {
-    singularName: 'table'
-    pluralName: 'tables'
-    displayName: 'Table'
-    description: ''
-  }
-  options: {
-    draftAndPublish: true
-  }
-  attributes: {
-    name: Attribute.String
-    description: Attribute.Text
-    createdAt: Attribute.DateTime
-    updatedAt: Attribute.DateTime
-    publishedAt: Attribute.DateTime
-    createdBy: Attribute.Relation<'api::table.table', 'oneToOne', 'admin::user'> & Attribute.Private
-    updatedBy: Attribute.Relation<'api::table.table', 'oneToOne', 'admin::user'> & Attribute.Private
-  }
-}
-
 export interface ApiThemeTheme extends Schema.CollectionType {
   collectionName: 'themes'
   info: {
@@ -1128,7 +1105,7 @@ export interface ApiTriplyRecordTriplyRecord extends Schema.CollectionType {
   info: {
     singularName: 'triply-record'
     pluralName: 'triply-records'
-    displayName: 'TriplyRecord'
+    displayName: 'Triply Record'
     description: ''
   }
   options: {
@@ -1180,7 +1157,6 @@ declare module '@strapi/types' {
       'api::location.location': ApiLocationLocation
       'api::menupage.menupage': ApiMenupageMenupage
       'api::story.story': ApiStoryStory
-      'api::table.table': ApiTableTable
       'api::theme.theme': ApiThemeTheme
       'api::triply-record.triply-record': ApiTriplyRecordTriplyRecord
     }

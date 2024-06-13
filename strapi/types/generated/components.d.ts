@@ -7,35 +7,35 @@ export interface CoreButton extends Schema.Component {
     description: ''
   }
   attributes: {
-    text: Attribute.String
-    url: Attribute.String
+    text: Attribute.String & Attribute.Required
+    url: Attribute.String & Attribute.Required
   }
 }
 
-export interface CoreCarouselItem extends Schema.Component {
-  collectionName: 'components_core_carousel_items'
+export interface CoreCarouselImage extends Schema.Component {
+  collectionName: 'components_core_carousel_images'
   info: {
-    displayName: 'CarouselItem'
+    displayName: 'Carousel image'
     description: ''
   }
   attributes: {
-    picture: Attribute.Media
-    name: Attribute.String
-    description: Attribute.Text
-    type: Attribute.Enumeration<['Maker', 'Highlight']>
+    image: Attribute.Media & Attribute.Required
+    alt_text: Attribute.String
+    title: Attribute.String & Attribute.Required
+    description: Attribute.String & Attribute.DefaultTo<'description'>
+    story: Attribute.Relation<'core.carousel-image', 'oneToOne', 'api::story.story'>
     triply_record: Attribute.Relation<
-      'core.carousel-item',
+      'core.carousel-image',
       'oneToOne',
       'api::triply-record.triply-record'
     >
-    story: Attribute.Relation<'core.carousel-item', 'oneToOne', 'api::story.story'>
   }
 }
 
 export interface CoreFeaturedFields extends Schema.Component {
   collectionName: 'components_core_featured_fields'
   info: {
-    displayName: 'featuredFields'
+    displayName: 'featured fields'
     description: ''
   }
   attributes: {
@@ -47,13 +47,13 @@ export interface CoreFeaturedFields extends Schema.Component {
 export interface CoreGridFeaturedFields extends Schema.Component {
   collectionName: 'components_core_grid_featured_fields'
   info: {
-    displayName: 'gridFeaturedFields'
+    displayName: 'Grid featured fields'
     description: ''
   }
   attributes: {
     story: Attribute.Relation<'core.grid-featured-fields', 'oneToOne', 'api::story.story'>
     thumbnail: Attribute.Media
-    title: Attribute.String
+    title: Attribute.String & Attribute.Required
     subtitle: Attribute.String
     triplyRecord: Attribute.Relation<
       'core.grid-featured-fields',
@@ -79,10 +79,27 @@ export interface CoreMuxAudio extends Schema.Component {
   }
 }
 
+export interface CoreMuxVideo extends Schema.Component {
+  collectionName: 'components_core_mux_videos'
+  info: {
+    displayName: 'MuxVideo'
+    icon: 'television'
+    description: ''
+  }
+  attributes: {
+    caption: Attribute.String
+    muxVideoRelation: Attribute.Relation<
+      'core.mux-video',
+      'oneToOne',
+      'plugin::mux-video-uploader.mux-asset'
+    >
+  }
+}
+
 export interface CorePublicationDate extends Schema.Component {
   collectionName: 'components_core_publication_dates'
   info: {
-    displayName: 'Publication Date'
+    displayName: 'Publication date'
     description: ''
   }
   attributes: {
@@ -119,7 +136,7 @@ export interface CoreTimeframe extends Schema.Component {
 export interface ModulesButtonsModule extends Schema.Component {
   collectionName: 'components_modules_buttons_modules'
   info: {
-    displayName: 'Buttons module'
+    displayName: 'Buttons'
     icon: 'compress'
     description: ''
   }
@@ -129,25 +146,28 @@ export interface ModulesButtonsModule extends Schema.Component {
 }
 
 export interface ModulesCarousel extends Schema.Component {
-  collectionName: 'components_modules_carousels'
+  collectionName: 'components_modules_carousel'
   info: {
-    displayName: 'Carousel module'
+    displayName: 'Carousel'
     description: ''
   }
   attributes: {
-    items: Attribute.Component<'core.carousel-item', true>
-    title: Attribute.String
-    buttonText: Attribute.String
-    buttonUrl: Attribute.Text
-    type: Attribute.Enumeration<['Makers', 'Highlights', 'Combined', 'Themes']>
+    title: Attribute.String & Attribute.Required
     description: Attribute.Text
+    images: Attribute.Component<'core.carousel-image', true> &
+      Attribute.Required &
+      Attribute.SetMinMax<{
+        min: 1
+      }>
+    explore_collection_button: Attribute.Component<'core.button'>
+    variant: Attribute.Enumeration<['two-up', 'three-up', 'four-up']>
   }
 }
 
 export interface ModulesGridModule extends Schema.Component {
   collectionName: 'components_modules_grid_modules'
   info: {
-    displayName: 'Grid module'
+    displayName: 'Grid'
     description: ''
   }
   attributes: {
@@ -168,7 +188,7 @@ export interface ModulesGridModule extends Schema.Component {
 export interface ModulesImageCarousel extends Schema.Component {
   collectionName: 'components_modules_image_carousels'
   info: {
-    displayName: 'Image carousel module'
+    displayName: 'Image carousel'
     description: ''
   }
   attributes: {
@@ -180,7 +200,7 @@ export interface ModulesImageCarousel extends Schema.Component {
 export interface ModulesImage extends Schema.Component {
   collectionName: 'components_shared_images'
   info: {
-    displayName: 'Image module'
+    displayName: 'Image'
     description: ''
   }
   attributes: {
@@ -199,7 +219,7 @@ export interface ModulesImage extends Schema.Component {
 export interface ModulesPullquote extends Schema.Component {
   collectionName: 'components_modules_pullquotes'
   info: {
-    displayName: 'Pullquote module'
+    displayName: 'Pullquote'
     icon: 'align-left'
     description: ''
   }
@@ -211,7 +231,7 @@ export interface ModulesPullquote extends Schema.Component {
 export interface ModulesSubtitle extends Schema.Component {
   collectionName: 'components_modules_subtitles'
   info: {
-    displayName: 'Subtitle module'
+    displayName: 'Subtitle'
     icon: 'grip-lines'
     description: ''
   }
@@ -223,7 +243,7 @@ export interface ModulesSubtitle extends Schema.Component {
 export interface ModulesTextModule extends Schema.Component {
   collectionName: 'components_modules_text_modules'
   info: {
-    displayName: 'Text module'
+    displayName: 'Text'
     icon: 'align-left'
     description: ''
   }
@@ -235,7 +255,7 @@ export interface ModulesTextModule extends Schema.Component {
 export interface ModulesTitleModule extends Schema.Component {
   collectionName: 'components_modules_title_modules'
   info: {
-    displayName: 'Title module'
+    displayName: 'Title'
     icon: 'ad'
     description: ''
   }
@@ -248,10 +268,11 @@ declare module '@strapi/types' {
   export module Shared {
     export interface Components {
       'core.button': CoreButton
-      'core.carousel-item': CoreCarouselItem
+      'core.carousel-image': CoreCarouselImage
       'core.featured-fields': CoreFeaturedFields
       'core.grid-featured-fields': CoreGridFeaturedFields
       'core.mux-audio': CoreMuxAudio
+      'core.mux-video': CoreMuxVideo
       'core.publication-date': CorePublicationDate
       'core.stand-alone-link': CoreStandAloneLink
       'core.timeframe': CoreTimeframe

@@ -1,8 +1,11 @@
 import { Field, ID, ObjectType, registerEnumType } from '@nestjs/graphql'
-import { Enum_Componentmodulescarousel_Type } from '../../../../generated/strapi-sdk'
-import { ComponentCoreCarouselItem } from '../core/carouselItem'
+import { ComponentCoreCarouselImage } from '../core/carouselImage'
+import { Enum_Componentmodulescarousel_Variant } from 'src/generated/strapi-sdk'
+import { ComponentCoreButton } from '../core/button'
 
-registerEnumType(Enum_Componentmodulescarousel_Type, { name: 'Enum_Componentmodulescarousel_Type' })
+registerEnumType(Enum_Componentmodulescarousel_Variant, {
+  name: 'Enum_Componentmodulescarousel_Variant',
+})
 
 @ObjectType()
 export class ComponentModulesCarousel {
@@ -10,20 +13,17 @@ export class ComponentModulesCarousel {
   public id: string
 
   @Field({ nullable: true })
-  public buttonText?: string
-
-  @Field({ nullable: true })
-  public buttonUrl?: string
-
-  @Field({ nullable: true })
   public description?: string
 
-  @Field(() => [ComponentCoreCarouselItem], { nullable: true })
-  public items?: ComponentCoreCarouselItem[]
+  @Field()
+  public title: string
 
-  @Field({ nullable: true })
-  public title?: string
+  @Field(() => [ComponentCoreCarouselImage], { nullable: true })
+  public items?: ComponentCoreCarouselImage[]
 
-  @Field(() => Enum_Componentmodulescarousel_Type, { nullable: true })
-  public type?: Enum_Componentmodulescarousel_Type
+  @Field(() => Enum_Componentmodulescarousel_Variant)
+  public variant: Enum_Componentmodulescarousel_Variant
+
+  @Field(() => ComponentCoreButton, { nullable: true })
+  public explore_collection_button?: ComponentCoreButton
 }

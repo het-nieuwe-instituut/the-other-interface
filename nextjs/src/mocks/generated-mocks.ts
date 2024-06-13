@@ -1,4 +1,4 @@
-import { ArchiveRelationsType, ArchiveZoomLevel3DetailType, ArchivesFondsCreatorType, ArchivesFondsZoomLevel3DetailType, ArchivesRecordZoomLevel3Type, ArchivesRelationsCountType, ArchivesZoomLevelHoverType, Author, AuthorEntity, AuthorEntityResponse, AuthorEntityResponseCollection, AuthorFiltersInput, BooleanFilterInput, ComponentCoreButton, ComponentCoreButtonFiltersInput, ComponentCoreCarouselItem, ComponentCoreFeaturedFields, ComponentCoreGridFeaturedFields, ComponentCoreMuxAudio, ComponentCorePublicationDate, ComponentCorePublicationDateFiltersInput, ComponentCoreStandAloneLink, ComponentCoreTimeframe, ComponentCoreTimeframeFiltersInput, ComponentModulesButtonsModule, ComponentModulesButtonsModuleFiltersInput, ComponentModulesCarousel, ComponentModulesGridModule, ComponentModulesImage, ComponentModulesImageCarousel, ComponentModulesPullquote, ComponentModulesSubtitle, ComponentModulesTextModule, ComponentModulesTitleModule, DateFilterInput, DateTimeFilterInput, Error, HighlightedHomepageThemeEntity, HighlightedHomepageThemeEntityResponse, HighlightedHomepageThemes, Homepage, HomepageEntity, HomepageEntityResponse, HomepageRelationResponseCollection, IdFilterInput, Landingpage, LandingpageEntity, LandingpageEntityResponse, LandingpageEntityResponseCollection, LandingpageFiltersInput, LandingpageRelationResponseCollection, Location, LocationEntity, LocationEntityResponse, LocationFiltersInput, LocationRelationResponseCollection, LongFilterInput, Menupage, MenupageEntity, MenupageEntityResponse, MenupageEntityResponseCollection, MenupageFiltersInput, MenupageRelationResponseCollection, MuxAudio, MuxAudioEntity, MuxAudioResponse, ObjectMakerType, ObjectMaterialType, ObjectRecordZoomLevel3Type, ObjectRelationsCountType, ObjectRelationsType, ObjectTechniqueType, ObjectsZoomLevel3DetailType, ObjectsZoomLevelHoverType, Pagination, PaginationArg, PeopleAssociationType, PeopleRecordZoomLevel3Type, PeopleRelationsCountType, PeopleRelationsType, PeopleZoomLevel3DetailType, PeopleZoomLevelHoverType, PublicationAuthorType, PublicationRecordZoomLevel3Type, PublicationRelationsType, PublicationZoomLevel3DetailType, PublicationsArticleZoomLevel3DetailType, PublicationsAudioVisualZoomLevel3DetailType, PublicationsBookZoomLevel3DetailType, PublicationsRelationsCountType, PublicationsSerialZoomLevel3DetailType, PublicationsZoomLevelHoverType, Query, ResponseCollectionMeta, SearchResultItemType, SearchResultType, StoriesRelatedToThemeResponse, Story, StoryCountType, StoryEntity, StoryEntityResponse, StoryEntityResponseCollection, StoryFiltersInput, StoryMetaEntityResponseCollection, StoryRelationResponseCollection, StoryWithoutRelations, StoryWithoutRelationsEntity, StoryWithoutRelationsEntityResponse, StoryWithoutRelationsEntityResponseCollection, StringFilterInput, Theme, ThemeEntity, ThemeEntityResponse, ThemeFiltersInput, ThemeRelationResponseCollection, TriplyRecord, TriplyRecordEntity, TriplyRecordEntityResponse, TriplyRecordFiltersInput, TriplyRecordRelationResponseCollection, UploadFile, UploadFileEntity, UploadFileEntityResponse, UploadFileRelationResponseCollection, UsersPermissionsPermission, UsersPermissionsPermissionEntity, UsersPermissionsPermissionFiltersInput, UsersPermissionsPermissionRelationResponseCollection, UsersPermissionsRole, UsersPermissionsRoleEntity, UsersPermissionsRoleEntityResponse, UsersPermissionsRoleFiltersInput, UsersPermissionsUser, UsersPermissionsUserEntity, UsersPermissionsUserEntityResponse, UsersPermissionsUserEntityResponseCollection, UsersPermissionsUserFiltersInput, UsersPermissionsUserRelationResponseCollection, ZoomLevel2AmountParentType, ZoomLevel2ParentType, ZoomLevel2Type, ZoomLevel3RelationsType, ZoomLevel3StoriesRelatedToRecordType, ZoomLevel3StoryRelationsCountType, ArchivesZoomLevel3Types, EntityNames, EnumComponentcorecarouselitemType, EnumComponentcorepublicationdateDisplaytype, EnumComponentmodulescarouselType, EnumComponentmodulesgridmoduleFieldtypes, EnumTriplyrecordType, Locale, PublicationsZoomLevel3Types } from '../generated/graphql';
+import { ArchiveRelationsType, ArchiveZoomLevel3DetailType, ArchivesFondsCreatorType, ArchivesFondsZoomLevel3DetailType, ArchivesRecordZoomLevel3Type, ArchivesRelationsCountType, ArchivesZoomLevelHoverType, Author, AuthorEntity, AuthorEntityResponse, AuthorEntityResponseCollection, AuthorFiltersInput, BooleanFilterInput, ComponentCoreButton, ComponentCoreButtonFiltersInput, ComponentCoreFeaturedFields, ComponentCoreGridFeaturedFields, ComponentCoreMuxAudio, ComponentCoreMuxVideo, ComponentCorePublicationDate, ComponentCorePublicationDateFiltersInput, ComponentCoreStandAloneLink, ComponentCoreTimeframe, ComponentCoreTimeframeFiltersInput, ComponentModulesButtonsModule, ComponentModulesButtonsModuleFiltersInput, ComponentModulesGridModule, ComponentModulesImage, ComponentModulesImageCarousel, ComponentModulesPullquote, ComponentModulesSubtitle, ComponentModulesTextModule, ComponentModulesTitleModule, DateFilterInput, DateTimeFilterInput, Error, HighlightedHomepageThemeEntity, HighlightedHomepageThemeEntityResponse, HighlightedHomepageThemes, Homepage, HomepageEntity, HomepageEntityResponse, HomepageRelationResponseCollection, IdFilterInput, Landingpage, LandingpageEntity, LandingpageEntityResponse, LandingpageEntityResponseCollection, LandingpageFiltersInput, LandingpageRelationResponseCollection, Location, LocationEntity, LocationEntityResponse, LocationFiltersInput, LocationRelationResponseCollection, LongFilterInput, Menupage, MenupageEntity, MenupageEntityResponse, MenupageEntityResponseCollection, MenupageFiltersInput, MenupageRelationResponseCollection, MuxAudio, MuxAudioEntity, MuxAudioResponse, MuxVideo, MuxVideoEntity, MuxVideoResponse, ObjectMakerType, ObjectMaterialType, ObjectRecordZoomLevel3Type, ObjectRelationsCountType, ObjectRelationsType, ObjectTechniqueType, ObjectsZoomLevel3DetailType, ObjectsZoomLevelHoverType, Pagination, PaginationArg, PeopleAssociationType, PeopleRecordZoomLevel3Type, PeopleRelationsCountType, PeopleRelationsType, PeopleZoomLevel3DetailType, PeopleZoomLevelHoverType, PublicationAuthorType, PublicationRecordZoomLevel3Type, PublicationRelationsType, PublicationZoomLevel3DetailType, PublicationsArticleZoomLevel3DetailType, PublicationsAudioVisualZoomLevel3DetailType, PublicationsBookZoomLevel3DetailType, PublicationsRelationsCountType, PublicationsSerialZoomLevel3DetailType, PublicationsZoomLevelHoverType, Query, ResponseCollectionMeta, SearchResultItemType, SearchResultType, StoriesRelatedToThemeResponse, Story, StoryCountType, StoryEntity, StoryEntityResponse, StoryEntityResponseCollection, StoryFiltersInput, StoryMetaEntityResponseCollection, StoryRelationResponseCollection, StoryWithoutRelations, StoryWithoutRelationsEntity, StoryWithoutRelationsEntityResponse, StoryWithoutRelationsEntityResponseCollection, StringFilterInput, Theme, ThemeEntity, ThemeEntityResponse, ThemeFiltersInput, ThemeRelationResponseCollection, TriplyRecord, TriplyRecordEntity, TriplyRecordEntityResponse, TriplyRecordFiltersInput, TriplyRecordRelationResponseCollection, UploadFile, UploadFileEntity, UploadFileEntityResponse, UploadFileRelationResponseCollection, UsersPermissionsPermission, UsersPermissionsPermissionEntity, UsersPermissionsPermissionFiltersInput, UsersPermissionsPermissionRelationResponseCollection, UsersPermissionsRole, UsersPermissionsRoleEntity, UsersPermissionsRoleEntityResponse, UsersPermissionsRoleFiltersInput, UsersPermissionsUser, UsersPermissionsUserEntity, UsersPermissionsUserEntityResponse, UsersPermissionsUserEntityResponseCollection, UsersPermissionsUserFiltersInput, UsersPermissionsUserRelationResponseCollection, ZoomLevel2AmountParentType, ZoomLevel2ParentType, ZoomLevel2Type, ZoomLevel3RelationsType, ZoomLevel3StoriesRelatedToRecordType, ZoomLevel3StoryRelationsCountType, ArchivesZoomLevel3Types, EntityNames, EnumComponentcorepublicationdateDisplaytype, EnumComponentmodulesgridmoduleFieldtypes, EnumTriplyrecordType, Locale, PublicationsZoomLevel3Types } from '../generated/graphql';
 
 export const anArchiveRelationsType = (overrides?: Partial<ArchiveRelationsType>, _relationshipsToOmit: Array<string> = []): ArchiveRelationsType => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ArchiveRelationsType']);
@@ -195,19 +195,6 @@ export const aComponentCoreButtonFiltersInput = (overrides?: Partial<ComponentCo
     };
 };
 
-export const aComponentCoreCarouselItem = (overrides?: Partial<ComponentCoreCarouselItem>, _relationshipsToOmit: Array<string> = []): ComponentCoreCarouselItem => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentCoreCarouselItem']);
-    return {
-        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'corporis',
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'e6259d63-611f-4e6c-84e7-28ad8094f5b8',
-        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'adipisci',
-        picture: overrides && overrides.hasOwnProperty('picture') ? overrides.picture! : relationshipsToOmit.includes('UploadFileEntityResponse') ? {} as UploadFileEntityResponse : anUploadFileEntityResponse({}, relationshipsToOmit),
-        story: overrides && overrides.hasOwnProperty('story') ? overrides.story! : relationshipsToOmit.includes('StoryEntityResponse') ? {} as StoryEntityResponse : aStoryEntityResponse({}, relationshipsToOmit),
-        triply_record: overrides && overrides.hasOwnProperty('triply_record') ? overrides.triply_record! : relationshipsToOmit.includes('TriplyRecordEntityResponse') ? {} as TriplyRecordEntityResponse : aTriplyRecordEntityResponse({}, relationshipsToOmit),
-        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : EnumComponentcorecarouselitemType.Highlight,
-    };
-};
-
 export const aComponentCoreFeaturedFields = (overrides?: Partial<ComponentCoreFeaturedFields>, _relationshipsToOmit: Array<string> = []): ComponentCoreFeaturedFields => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentCoreFeaturedFields']);
     return {
@@ -235,6 +222,15 @@ export const aComponentCoreMuxAudio = (overrides?: Partial<ComponentCoreMuxAudio
         caption: overrides && overrides.hasOwnProperty('caption') ? overrides.caption! : 'et',
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '78d2b6c8-8606-4796-b9d6-0f9b3c49961a',
         muxAudioRelation: overrides && overrides.hasOwnProperty('muxAudioRelation') ? overrides.muxAudioRelation! : relationshipsToOmit.includes('MuxAudioResponse') ? {} as MuxAudioResponse : aMuxAudioResponse({}, relationshipsToOmit),
+    };
+};
+
+export const aComponentCoreMuxVideo = (overrides?: Partial<ComponentCoreMuxVideo>, _relationshipsToOmit: Array<string> = []): ComponentCoreMuxVideo => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentCoreMuxVideo']);
+    return {
+        caption: overrides && overrides.hasOwnProperty('caption') ? overrides.caption! : 'earum',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'd4285d71-7217-4d1e-b40e-2c76591387bb',
+        muxVideoRelation: overrides && overrides.hasOwnProperty('muxVideoRelation') ? overrides.muxVideoRelation! : relationshipsToOmit.includes('MuxVideoResponse') ? {} as MuxVideoResponse : aMuxVideoResponse({}, relationshipsToOmit),
     };
 };
 
@@ -303,19 +299,6 @@ export const aComponentModulesButtonsModuleFiltersInput = (overrides?: Partial<C
         buttons: overrides && overrides.hasOwnProperty('buttons') ? overrides.buttons! : relationshipsToOmit.includes('ComponentCoreButtonFiltersInput') ? {} as ComponentCoreButtonFiltersInput : aComponentCoreButtonFiltersInput({}, relationshipsToOmit),
         not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : relationshipsToOmit.includes('ComponentModulesButtonsModuleFiltersInput') ? {} as ComponentModulesButtonsModuleFiltersInput : aComponentModulesButtonsModuleFiltersInput({}, relationshipsToOmit),
         or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [relationshipsToOmit.includes('ComponentModulesButtonsModuleFiltersInput') ? {} as ComponentModulesButtonsModuleFiltersInput : aComponentModulesButtonsModuleFiltersInput({}, relationshipsToOmit)],
-    };
-};
-
-export const aComponentModulesCarousel = (overrides?: Partial<ComponentModulesCarousel>, _relationshipsToOmit: Array<string> = []): ComponentModulesCarousel => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentModulesCarousel']);
-    return {
-        buttonText: overrides && overrides.hasOwnProperty('buttonText') ? overrides.buttonText! : 'fugiat',
-        buttonUrl: overrides && overrides.hasOwnProperty('buttonUrl') ? overrides.buttonUrl! : 'amet',
-        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'animi',
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '02a9c5e5-9a6b-482e-9ea3-e1114441bf57',
-        items: overrides && overrides.hasOwnProperty('items') ? overrides.items! : [relationshipsToOmit.includes('ComponentCoreCarouselItem') ? {} as ComponentCoreCarouselItem : aComponentCoreCarouselItem({}, relationshipsToOmit)],
-        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'beatae',
-        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : EnumComponentmodulescarouselType.Combined,
     };
 };
 
@@ -768,6 +751,38 @@ export const aMuxAudioResponse = (overrides?: Partial<MuxAudioResponse>, _relati
     const relationshipsToOmit = ([..._relationshipsToOmit, 'MuxAudioResponse']);
     return {
         data: overrides && overrides.hasOwnProperty('data') ? overrides.data! : relationshipsToOmit.includes('MuxAudioEntity') ? {} as MuxAudioEntity : aMuxAudioEntity({}, relationshipsToOmit),
+    };
+};
+
+export const aMuxVideo = (overrides?: Partial<MuxVideo>, _relationshipsToOmit: Array<string> = []): MuxVideo => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'MuxVideo']);
+    return {
+        aspect_ratio: overrides && overrides.hasOwnProperty('aspect_ratio') ? overrides.aspect_ratio! : 'ipsam',
+        asset_id: overrides && overrides.hasOwnProperty('asset_id') ? overrides.asset_id! : 'ratione',
+        createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : '1970-01-10T05:53:25.753Z',
+        duration: overrides && overrides.hasOwnProperty('duration') ? overrides.duration! : 1.46,
+        error_message: overrides && overrides.hasOwnProperty('error_message') ? overrides.error_message! : 'illum',
+        isReady: overrides && overrides.hasOwnProperty('isReady') ? overrides.isReady! : false,
+        playback_id: overrides && overrides.hasOwnProperty('playback_id') ? overrides.playback_id! : 'distinctio',
+        signed: overrides && overrides.hasOwnProperty('signed') ? overrides.signed! : false,
+        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'voluptates',
+        updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : '1970-01-10T23:46:23.083Z',
+        upload_id: overrides && overrides.hasOwnProperty('upload_id') ? overrides.upload_id! : 'ut',
+    };
+};
+
+export const aMuxVideoEntity = (overrides?: Partial<MuxVideoEntity>, _relationshipsToOmit: Array<string> = []): MuxVideoEntity => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'MuxVideoEntity']);
+    return {
+        attributes: overrides && overrides.hasOwnProperty('attributes') ? overrides.attributes! : relationshipsToOmit.includes('MuxVideo') ? {} as MuxVideo : aMuxVideo({}, relationshipsToOmit),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'sed',
+    };
+};
+
+export const aMuxVideoResponse = (overrides?: Partial<MuxVideoResponse>, _relationshipsToOmit: Array<string> = []): MuxVideoResponse => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'MuxVideoResponse']);
+    return {
+        data: overrides && overrides.hasOwnProperty('data') ? overrides.data! : relationshipsToOmit.includes('MuxVideoEntity') ? {} as MuxVideoEntity : aMuxVideoEntity({}, relationshipsToOmit),
     };
 };
 
