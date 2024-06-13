@@ -8,7 +8,12 @@ import {
   SearchCategory,
 } from '@/features/shared/utils/categories'
 import { useQuery } from '@tanstack/react-query'
-import { StringFilterInput, TriplyRecordFiltersInput } from 'src/generated/graphql'
+import {
+  InputMaybe,
+  SelectedFilterSuggestion,
+  StringFilterInput,
+  TriplyRecordFiltersInput,
+} from 'src/generated/graphql'
 import { STORIES_PER_PAGE, ZOOM2_RECORDS_PER_PAGE } from '../../constants/mainConstants'
 import { storyToRecordMapper } from '../../helpers/extractStoryData'
 import { mapCategoryToTriplyEnum } from '../../helpers/mapCategoryToTriplyEnum'
@@ -23,6 +28,7 @@ type SearchArgs = {
   enabled?: boolean
   filters?: Filter[]
   fallback?: boolean
+  selectedFilters: InputMaybe<Array<SelectedFilterSuggestion> | SelectedFilterSuggestion>
 }
 
 export function useSearchByCategoryQuery({
@@ -37,7 +43,7 @@ export function useSearchByCategoryQuery({
   const { decodedFilters } = useDecodedSearchFilters()
   const selectedFilters = useSelectedFilters()
   const selectedFiltersToInput = selectedFilters.map(filter => ({
-    key: filter.field,
+    key: filter.key,
     value: filter.value,
   }))
 
@@ -67,7 +73,12 @@ export function useSearchByCategoryQuery({
         (response?.triplyRecords?.data?.length === 0 || !response?.triplyRecords?.data) &&
         fallback
       ) {
-        return await searchByCategory({ category, text, page })
+        return await searchByCategory({
+          category,
+          text,
+          page,
+          selectedFilters: selectedFiltersToInput,
+        })
       }
 
       return {
@@ -81,7 +92,7 @@ export function useSearchByCategoryQuery({
         total: response?.triplyRecords?.meta?.pagination?.total ?? 0,
       }
     }
-    return await searchByCategory({ category, text, page })
+    return await searchByCategory({ category, text, page, selectedFilters: selectedFiltersToInput })
   }
 
   async function searchByCategory({ category, text, page = 1 }: SearchArgs) {
@@ -90,16 +101,16 @@ export function useSearchByCategoryQuery({
         const response = await api.searchByStories({
           searchTerm: text || undefined,
           locationsFilterTerm:
-            decodedFilters.length !== 0 && decodedFilters[0].field === 'location'
+            decodedFilters.length !== 0 && decodedFilters[0].key === 'location'
               ? decodedFilters[0].id
               : undefined,
           themesFilterTerm:
-            decodedFilters.length !== 0 && decodedFilters[0].field === 'theme'
+            decodedFilters.length !== 0 && decodedFilters[0].key === 'theme'
               ? decodedFilters[0].id
               : undefined,
 
           authorFilterTerm:
-            decodedFilters.length !== 0 && decodedFilters[0].field === 'author'
+            decodedFilters.length !== 0 && decodedFilters[0].key === 'author'
               ? decodedFilters[0].id
               : undefined,
           page,

@@ -24,7 +24,11 @@ import {
   SuggestionsContainer,
 } from '../Suggestions/Suggestions'
 import { CategoryFilter } from './CategoryFilter/CategoryFilter'
-import { useSearchBarState, useSyncSearchInputToStore } from './GalaxySearchBar.hooks'
+import {
+  useCloseSearchOnPathnameChange,
+  useSearchBarActions,
+  useSyncSearchInputToStore,
+} from './GalaxySearchBar.hooks'
 import { SuggestionBar } from './SuggestionBar/SuggestionBar'
 import { CloseButton, FilterInput } from './fragments'
 import { GoButton } from './fragments/GoButton'
@@ -48,7 +52,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }
   const dispatch = useDispatch()
   const [isUserTyping, setIsUserTyping] = useState(false)
 
-  const { closeSearchMode, clearAllSearch, openSearch, focus } = useSearchBarState({
+  const { closeSearchMode, clearAllSearch, openSearch, focus } = useSearchBarActions({
     filterInputRef,
     isNoActiveSearch,
   })
@@ -81,6 +85,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }
   useOutsideClick(searchBarRef, () => {
     closeSearchMode(true)
   })
+  useCloseSearchOnPathnameChange()
 
   const isCollectionHighlightsSelected: boolean = selectedFilters.some(
     filter => filter.id === COLLECTION_HILIGHT_ID
@@ -92,7 +97,6 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }
       if (searchCategory === 'objects') return EnumTriplyrecordType.Object
       if (searchCategory === 'people') return EnumTriplyrecordType.People
       if (searchCategory === 'publications') return EnumTriplyrecordType.Publication
-      if (searchCategory === 'stories') return EnumTriplyrecordType.Media
     }
   }, [searchCategory])
 
@@ -129,7 +133,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }
         {selectedFilters.map(filter => (
           <div key={filter.id} className="mr-2 h-[60px] max-w-full pt-1">
             <SearchFilterBox
-              category={filter.field}
+              category={filter.key}
               subCategory={filter.value}
               id={filter.id}
               actionButton={<CloseIconSmall />}

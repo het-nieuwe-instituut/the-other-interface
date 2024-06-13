@@ -2,11 +2,7 @@ import { InlineThemedSpinner } from '@/features/shared/components/Loading/Themed
 import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/SearchFilterBox'
 import { State } from '@/features/shared/configs/store'
 import { useFilterSuggestionsQuery } from '@/features/shared/hooks/queries/useFilterSuggestionsQuery'
-import {
-  Filter,
-  useFilterActions,
-  useSelectedFilters,
-} from '@/features/shared/hooks/search/useFilters'
+import { Filter, useSelectedFilters } from '@/features/shared/hooks/search/useFilters'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { SEARCH_CATEGORIES, SearchCategory } from '@/features/shared/utils/categories'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
@@ -17,7 +13,7 @@ import { EnumTriplyrecordType } from 'src/generated/graphql'
 export const COLLECTION_HILIGHT_ID = 'collection-highlights-id'
 
 export const CollectionHighlightsFilter = {
-  field: 'Subjects',
+  key: 'Subjects',
   value: 'Collection Highlights',
   id: COLLECTION_HILIGHT_ID,
 }
@@ -65,7 +61,6 @@ export const SuggestionsContainer: React.FC<Props> = ({ handleSelectFilter, type
     <Suggestions
       suggestionsData={suggestions.filterSuggestions}
       handleSelectFilter={handleSelectFilter}
-      category={searchCategory}
     />
   )
 }
@@ -73,13 +68,11 @@ export const SuggestionsContainer: React.FC<Props> = ({ handleSelectFilter, type
 export const Suggestions = ({
   handleSelectFilter,
   suggestionsData,
-  category,
 }: {
-  handleSelectFilter: (filters: Filter) => void
+  handleSelectFilter: (filterSuggestion: Filter) => void
   suggestionsData: NonNullable<
     NonNullable<ReturnType<typeof useFilterSuggestionsQuery>['data']>['filterSuggestions']
   >
-  category: SearchCategory
 }) => {
   const selectedFilters = useSelectedFilters()
   const { searchValue, searchCategory } = useSelector((state: State) => state.shared)
@@ -98,7 +91,7 @@ export const Suggestions = ({
       searchCategory !== SEARCH_CATEGORIES.stories
     ) {
       return [
-        { value: CollectionHighlightsFilter.value, key: CollectionHighlightsFilter.field },
+        { value: CollectionHighlightsFilter.value, key: CollectionHighlightsFilter.key },
         ...suggestionsData,
       ]
     }
@@ -112,11 +105,9 @@ export const Suggestions = ({
         return (
           <div className="max-w-full" key={item.value}>
             <SearchFilterBox
-              category={category}
+              category={item.key}
               subCategory={item.value}
-              onClick={() =>
-                handleSelectFilter({ field: category, value: item.value, id: item.value })
-              }
+              onClick={() => handleSelectFilter({ id: item.value, ...item })}
             />
           </div>
         )

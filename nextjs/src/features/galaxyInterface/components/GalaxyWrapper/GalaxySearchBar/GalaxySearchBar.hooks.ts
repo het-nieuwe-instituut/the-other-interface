@@ -6,8 +6,8 @@ import { useFocusOnElement } from '@/features/shared/hooks/useFocusOnElement'
 import { usePageCategory } from '@/features/shared/hooks/usePageCategory'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 import { sharedActions } from '@/features/shared/stores/shared.store'
-import { usePathname } from 'next/navigation'
-import { useCallback, useEffect, useRef } from 'react'
+import { usePathname, useSearchParams } from 'next/navigation'
+import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import { useDebounceCallback } from 'usehooks-ts'
 
@@ -64,7 +64,18 @@ export function useOpenSearchModeOnInactiveSearch(
   }
 }
 
-export function useSearchBarState({
+export const useSearchValue = () => {
+  const searchParams = useSearchParams()
+  const { search } = useMemo(() => {
+    return {
+      search: searchParams?.get('search'),
+    }
+  }, [searchParams])
+
+  return search
+}
+
+export function useSearchBarActions({
   filterInputRef,
   isNoActiveSearch,
 }: {
@@ -73,7 +84,7 @@ export function useSearchBarState({
 }) {
   const dispatch = useDispatch()
   const { focus } = useFocusOnElement(filterInputRef, isNoActiveSearch ?? false)
-  const { search } = useZoom2Params()
+  const search = useSearchValue()
   const { pageCategory } = usePageCategory()
   const { openSearch } = useOpenSearchModeOnInactiveSearch(filterInputRef, isNoActiveSearch)
   const { decodedFilters } = useDecodedSearchFilters()
@@ -81,7 +92,6 @@ export function useSearchBarState({
     onSelectFilter: focus,
     onRemoveFilter: focus,
   })
-  useCloseSearchOnPathnameChange()
 
   const resetSearchFilters = useCallback(() => {
     dispatch(sharedActions.searchCategory({ searchCategory: pageCategory }))

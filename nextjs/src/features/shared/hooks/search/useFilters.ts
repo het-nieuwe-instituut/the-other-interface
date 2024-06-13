@@ -1,16 +1,12 @@
 import { decodeFilters, encodeFilters } from '@/features/shared/helpers/searchHelpers'
 import { sharedActions } from '@/features/shared/stores/shared.store'
+import { useSearchParams } from 'next/navigation'
 import { useCallback, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { State } from '../../configs/store'
-import { useZoom2Params } from '../useZoom2Params'
-import { useSearchParams } from 'next/navigation'
-import { useLocale } from '../useLocale'
+import { FilterSuggestionType } from 'src/generated/graphql'
 
-// TODO: Remove when we connect real query
-export interface Filter {
-  field: string
-  value: string
+export interface Filter extends FilterSuggestionType {
   id: string
 }
 
@@ -27,12 +23,13 @@ export const useFilterActions = ({ onSelectFilter, onRemoveFilter }: UseFiltersP
 
   const selectFilter = useCallback(
     (filter: Filter) => {
-      if (selectedFilters.some(f => f.id === filter.id)) {
+      if (selectedFilters.some(f => f.value === filter.value)) {
         return
       }
 
       dispatch(sharedActions.setFilters({ selectedFilters: [...selectedFilters, filter] }))
       dispatch(sharedActions.categorySuggestionsOpen({ categorySuggestionsOpen: false }))
+
       if (onSelectFilter) {
         onSelectFilter()
       }
@@ -43,7 +40,9 @@ export const useFilterActions = ({ onSelectFilter, onRemoveFilter }: UseFiltersP
   const removeFilter = useCallback(
     (id: string) => {
       dispatch(
-        sharedActions.setFilters({ selectedFilters: selectedFilters.filter(f => f.id !== id) })
+        sharedActions.setFilters({
+          selectedFilters: selectedFilters.filter(f => f.id !== id),
+        })
       )
       if (onRemoveFilter) {
         onRemoveFilter()

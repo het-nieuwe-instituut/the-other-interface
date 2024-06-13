@@ -18,7 +18,7 @@ const SearchResults = () => {
     category: pageCategory,
     text: search,
     page: pageNumber,
-    selectedFilters: selectedFilters.map(filter => ({ key: filter.field, value: filter.value })),
+    selectedFilters: selectedFilters.map(filter => ({ key: filter.key, value: filter.value })),
   })
   const { t } = useTypeSafeTranslation('category')
   const { total } = data || { total: 0 }

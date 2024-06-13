@@ -12,9 +12,7 @@ const TotalResults = () => {
     data: total,
     isLoading: isTotalLoading,
     isError: isTotalError,
-  } = useTotalCounterQuery(
-    selectedFilters.map(filter => ({ key: filter.field, value: filter.value }))
-  )
+  } = useTotalCounterQuery(selectedFilters)
   const { t } = useTypeSafeTranslation('category')
 
   if (isTotalError) {
