@@ -218,8 +218,8 @@ export type ComponentCoreMuxAudio = {
 
 export type ComponentCoreMuxVideo = {
   __typename?: 'ComponentCoreMuxVideo';
-  caption?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
+  caption?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
   muxVideoRelation?: Maybe<MuxVideoResponse>;
 };
 
@@ -692,23 +692,23 @@ export type MuxAudioResponse = {
 
 export type MuxVideo = {
   __typename?: 'MuxVideo';
-  aspect_ratio?: Maybe<Scalars['String']>;
-  asset_id?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['Date']>;
-  duration?: Maybe<Scalars['Float']>;
-  error_message?: Maybe<Scalars['String']>;
-  isReady?: Maybe<Scalars['Boolean']>;
-  playback_id?: Maybe<Scalars['String']>;
-  signed: Scalars['Boolean'];
-  title: Scalars['String'];
-  updatedAt?: Maybe<Scalars['Date']>;
-  upload_id?: Maybe<Scalars['String']>;
+  aspect_ratio?: Maybe<Scalars['String']['output']>;
+  asset_id?: Maybe<Scalars['String']['output']>;
+  createdAt?: Maybe<Scalars['Date']['output']>;
+  duration?: Maybe<Scalars['Float']['output']>;
+  error_message?: Maybe<Scalars['String']['output']>;
+  isReady?: Maybe<Scalars['Boolean']['output']>;
+  playback_id?: Maybe<Scalars['String']['output']>;
+  signed: Scalars['Boolean']['output'];
+  title: Scalars['String']['output'];
+  updatedAt?: Maybe<Scalars['Date']['output']>;
+  upload_id?: Maybe<Scalars['String']['output']>;
 };
 
 export type MuxVideoEntity = {
   __typename?: 'MuxVideoEntity';
   attributes?: Maybe<MuxVideo>;
-  id?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']['output']>;
 };
 
 export type MuxVideoResponse = {
