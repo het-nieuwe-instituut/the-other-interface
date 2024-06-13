@@ -6,7 +6,6 @@ import { Title } from '@/features/ui/components/title/Title'
 import { cn } from '@/features/ui/utils/cn'
 import { StandaloneLink } from 'src/app/ks/link/StandaloneLink'
 import {
-  ComponentModulesCarousel,
   ComponentModulesGridModule,
   HomepageComponentsDynamicZone,
   HomepageQuery,
@@ -21,7 +20,6 @@ import { Subtitle } from '../../ui/components/subtitle/Subtitle'
 import { GridModule } from '../components/GridModule/GridModule'
 import { ImageModuleWrapper } from '../components/ImageModuleWrapper'
 import { Pullquote } from '../components/Pullquote/Pullquote'
-import { CarouselModule } from '../components/carousels/Carousel/Carousel'
 import { MuxAudioPlayer } from '@/features/ui/components/mux-audio/MuxAudioPlayer'
 import { MuxVideoPlayer } from '@/features/ui/components/mux-video/MuxVideoPlayer'
 import ErrorBox from '@/features/shared/components/Error/ErrorBox'
@@ -167,14 +165,15 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
             )
           }
 
-          if (component?.__typename === 'ComponentModulesCarousel') {
-            return (
-              <CarouselModule
-                key={keyExtractor(component.id, index, array)}
-                component={component as ComponentModulesCarousel}
-              />
-            )
-          }
+          // TODO: uncomment after component is connected to collections again
+          //   if (component?.__typename === 'ComponentModulesCarousel') {
+          //     return (
+          //       <CarouselModule
+          //         key={keyExtractor(component.id, index, array)}
+          //         component={component as ComponentModulesCarousel}
+          //       />
+          //     )
+          //   }
 
           if (component?.__typename === 'ComponentModulesGridModule') {
             return (

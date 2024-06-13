@@ -32,9 +32,6 @@ query homepage($locale: Locale!, $publicationState: String = "LIVE") {
           ... on ComponentModulesImageCarousel {
             ...imageCarouselModuleFragment
           }
-          ... on ComponentModulesCarousel {
-            ...carouselModuleFragment
-          }
           ... on ComponentModulesButtonsModule {
             ...buttonsModuleFragment
           }

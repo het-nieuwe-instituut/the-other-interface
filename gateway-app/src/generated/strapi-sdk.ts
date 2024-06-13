@@ -102,8 +102,8 @@ export type BooleanFilterInput = {
 export type ComponentCoreButton = {
   __typename?: 'ComponentCoreButton'
   id: Scalars['ID']
-  text?: Maybe<Scalars['String']>
-  url?: Maybe<Scalars['String']>
+  text: Scalars['String']
+  url: Scalars['String']
 }
 
 export type ComponentCoreButtonFiltersInput = {
@@ -120,26 +120,26 @@ export type ComponentCoreButtonInput = {
   url?: InputMaybe<Scalars['String']>
 }
 
-export type ComponentCoreCarouselItem = {
-  __typename?: 'ComponentCoreCarouselItem'
+export type ComponentCoreCarouselImage = {
+  __typename?: 'ComponentCoreCarouselImage'
+  alt_text: Scalars['String']
   description?: Maybe<Scalars['String']>
   id: Scalars['ID']
-  name?: Maybe<Scalars['String']>
-  picture?: Maybe<UploadFileEntityResponse>
+  image: UploadFileEntityResponse
   story?: Maybe<StoryEntityResponse>
+  title: Scalars['String']
   triply_record?: Maybe<TriplyRecordEntityResponse>
-  type?: Maybe<Enum_Componentcorecarouselitem_Type>
 }
 
-export type ComponentCoreCarouselItemFiltersInput = {
-  and?: InputMaybe<Array<InputMaybe<ComponentCoreCarouselItemFiltersInput>>>
+export type ComponentCoreCarouselImageFiltersInput = {
+  alt_text?: InputMaybe<StringFilterInput>
+  and?: InputMaybe<Array<InputMaybe<ComponentCoreCarouselImageFiltersInput>>>
   description?: InputMaybe<StringFilterInput>
-  name?: InputMaybe<StringFilterInput>
-  not?: InputMaybe<ComponentCoreCarouselItemFiltersInput>
-  or?: InputMaybe<Array<InputMaybe<ComponentCoreCarouselItemFiltersInput>>>
+  not?: InputMaybe<ComponentCoreCarouselImageFiltersInput>
+  or?: InputMaybe<Array<InputMaybe<ComponentCoreCarouselImageFiltersInput>>>
   story?: InputMaybe<StoryFiltersInput>
+  title?: InputMaybe<StringFilterInput>
   triply_record?: InputMaybe<TriplyRecordFiltersInput>
-  type?: InputMaybe<StringFilterInput>
 }
 
 export type ComponentCoreFeaturedFields = {
@@ -163,7 +163,7 @@ export type ComponentCoreGridFeaturedFields = {
   story?: Maybe<StoryEntityResponse>
   subtitle?: Maybe<Scalars['String']>
   thumbnail?: Maybe<UploadFileEntityResponse>
-  title?: Maybe<Scalars['String']>
+  title: Scalars['String']
   triplyRecord?: Maybe<TriplyRecordEntityResponse>
 }
 
@@ -267,17 +267,16 @@ export type ComponentModulesButtonsModuleInput = {
 
 export type ComponentModulesCarousel = {
   __typename?: 'ComponentModulesCarousel'
-  buttonText?: Maybe<Scalars['String']>
-  buttonUrl?: Maybe<Scalars['String']>
   description?: Maybe<Scalars['String']>
+  explore_collection_button?: Maybe<ComponentCoreButton>
   id: Scalars['ID']
-  items?: Maybe<Array<Maybe<ComponentCoreCarouselItem>>>
-  title?: Maybe<Scalars['String']>
-  type?: Maybe<Enum_Componentmodulescarousel_Type>
+  images: Array<Maybe<ComponentCoreCarouselImage>>
+  title: Scalars['String']
+  variant?: Maybe<Enum_Componentmodulescarousel_Variant>
 }
 
-export type ComponentModulesCarouselItemsArgs = {
-  filters?: InputMaybe<ComponentCoreCarouselItemFiltersInput>
+export type ComponentModulesCarouselImagesArgs = {
+  filters?: InputMaybe<ComponentCoreCarouselImageFiltersInput>
   pagination?: InputMaybe<PaginationArg>
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
 }
@@ -316,7 +315,7 @@ export type ComponentModulesGridModuleFieldsArgs = {
 
 export type ComponentModulesImage = {
   __typename?: 'ComponentModulesImage'
-  alt_text?: Maybe<Scalars['String']>
+  alt_text: Scalars['String']
   caption?: Maybe<Scalars['String']>
   id: Scalars['ID']
   image: UploadFileEntityResponse
@@ -511,21 +510,15 @@ export type DateTimeFilterInput = {
   startsWith?: InputMaybe<Scalars['DateTime']>
 }
 
-export enum Enum_Componentcorecarouselitem_Type {
-  Highlight = 'Highlight',
-  Maker = 'Maker',
-}
-
 export enum Enum_Componentcorepublicationdate_Displaytype {
   Date = 'Date',
   Year = 'Year',
 }
 
-export enum Enum_Componentmodulescarousel_Type {
-  Combined = 'Combined',
-  Highlights = 'Highlights',
-  Makers = 'Makers',
-  Themes = 'Themes',
+export enum Enum_Componentmodulescarousel_Variant {
+  FourUp = 'four_up',
+  ThreeUp = 'three_up',
+  TwoUp = 'two_up',
 }
 
 export enum Enum_Componentmodulesgridmodule_Fieldtypes {
@@ -586,7 +579,7 @@ export type FloatFilterInput = {
 export type GenericMorph =
   | Author
   | ComponentCoreButton
-  | ComponentCoreCarouselItem
+  | ComponentCoreCarouselImage
   | ComponentCoreFeaturedFields
   | ComponentCoreGridFeaturedFields
   | ComponentCoreMuxAudio
@@ -612,7 +605,6 @@ export type GenericMorph =
   | Menupage
   | MuxVideoUploaderMuxAsset
   | Story
-  | Table
   | Theme
   | TriplyRecord
   | UploadFile
@@ -647,7 +639,6 @@ export type HomepageLocalizationsArgs = {
 
 export type HomepageComponentsDynamicZone =
   | ComponentModulesButtonsModule
-  | ComponentModulesCarousel
   | ComponentModulesGridModule
   | ComponentModulesImage
   | ComponentModulesImageCarousel
@@ -814,7 +805,6 @@ export type LandingpageLocalizationsArgs = {
 
 export type LandingpageComponentsDynamicZone =
   | ComponentModulesButtonsModule
-  | ComponentModulesCarousel
   | ComponentModulesGridModule
   | ComponentModulesImage
   | ComponentModulesImageCarousel
@@ -1051,7 +1041,6 @@ export type Mutation = {
   createMuxVideoUploaderMuxAsset?: Maybe<MuxVideoUploaderMuxAssetEntityResponse>
   createStory?: Maybe<StoryEntityResponse>
   createStoryLocalization?: Maybe<StoryEntityResponse>
-  createTable?: Maybe<TableEntityResponse>
   createTheme?: Maybe<ThemeEntityResponse>
   createThemeLocalization?: Maybe<ThemeEntityResponse>
   createTriplyRecord?: Maybe<TriplyRecordEntityResponse>
@@ -1070,7 +1059,6 @@ export type Mutation = {
   deleteMenupage?: Maybe<MenupageEntityResponse>
   deleteMuxVideoUploaderMuxAsset?: Maybe<MuxVideoUploaderMuxAssetEntityResponse>
   deleteStory?: Maybe<StoryEntityResponse>
-  deleteTable?: Maybe<TableEntityResponse>
   deleteTheme?: Maybe<ThemeEntityResponse>
   deleteTriplyRecord?: Maybe<TriplyRecordEntityResponse>
   deleteUploadFile?: Maybe<UploadFileEntityResponse>
@@ -1100,7 +1088,6 @@ export type Mutation = {
   updateMenupage?: Maybe<MenupageEntityResponse>
   updateMuxVideoUploaderMuxAsset?: Maybe<MuxVideoUploaderMuxAssetEntityResponse>
   updateStory?: Maybe<StoryEntityResponse>
-  updateTable?: Maybe<TableEntityResponse>
   updateTheme?: Maybe<ThemeEntityResponse>
   updateTriplyRecord?: Maybe<TriplyRecordEntityResponse>
   updateUploadFile?: Maybe<UploadFileEntityResponse>
@@ -1184,10 +1171,6 @@ export type MutationCreateStoryLocalizationArgs = {
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
 }
 
-export type MutationCreateTableArgs = {
-  data: TableInput
-}
-
 export type MutationCreateThemeArgs = {
   data: ThemeInput
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
@@ -1257,10 +1240,6 @@ export type MutationDeleteMuxVideoUploaderMuxAssetArgs = {
 export type MutationDeleteStoryArgs = {
   id: Scalars['ID']
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
-}
-
-export type MutationDeleteTableArgs = {
-  id: Scalars['ID']
 }
 
 export type MutationDeleteThemeArgs = {
@@ -1373,11 +1352,6 @@ export type MutationUpdateStoryArgs = {
   data: StoryInput
   id: Scalars['ID']
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
-}
-
-export type MutationUpdateTableArgs = {
-  data: TableInput
-  id: Scalars['ID']
 }
 
 export type MutationUpdateThemeArgs = {
@@ -1524,8 +1498,6 @@ export type Query = {
   muxVideoUploaderMuxAssets?: Maybe<MuxVideoUploaderMuxAssetEntityResponseCollection>
   stories?: Maybe<StoryEntityResponseCollection>
   story?: Maybe<StoryEntityResponse>
-  table?: Maybe<TableEntityResponse>
-  tables?: Maybe<TableEntityResponseCollection>
   theme?: Maybe<ThemeEntityResponse>
   themes?: Maybe<ThemeEntityResponseCollection>
   triplyRecord?: Maybe<TriplyRecordEntityResponse>
@@ -1651,17 +1623,6 @@ export type QueryStoriesArgs = {
 export type QueryStoryArgs = {
   id?: InputMaybe<Scalars['ID']>
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
-}
-
-export type QueryTableArgs = {
-  id?: InputMaybe<Scalars['ID']>
-}
-
-export type QueryTablesArgs = {
-  filters?: InputMaybe<TableFiltersInput>
-  pagination?: InputMaybe<PaginationArg>
-  publicationState?: InputMaybe<PublicationState>
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
 }
 
 export type QueryThemeArgs = {
@@ -1892,50 +1853,6 @@ export type StringFilterInput = {
   null?: InputMaybe<Scalars['Boolean']>
   or?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
   startsWith?: InputMaybe<Scalars['String']>
-}
-
-export type Table = {
-  __typename?: 'Table'
-  createdAt?: Maybe<Scalars['DateTime']>
-  description?: Maybe<Scalars['String']>
-  name?: Maybe<Scalars['String']>
-  publishedAt?: Maybe<Scalars['DateTime']>
-  updatedAt?: Maybe<Scalars['DateTime']>
-}
-
-export type TableEntity = {
-  __typename?: 'TableEntity'
-  attributes?: Maybe<Table>
-  id?: Maybe<Scalars['ID']>
-}
-
-export type TableEntityResponse = {
-  __typename?: 'TableEntityResponse'
-  data?: Maybe<TableEntity>
-}
-
-export type TableEntityResponseCollection = {
-  __typename?: 'TableEntityResponseCollection'
-  data: Array<TableEntity>
-  meta: ResponseCollectionMeta
-}
-
-export type TableFiltersInput = {
-  and?: InputMaybe<Array<InputMaybe<TableFiltersInput>>>
-  createdAt?: InputMaybe<DateTimeFilterInput>
-  description?: InputMaybe<StringFilterInput>
-  id?: InputMaybe<IdFilterInput>
-  name?: InputMaybe<StringFilterInput>
-  not?: InputMaybe<TableFiltersInput>
-  or?: InputMaybe<Array<InputMaybe<TableFiltersInput>>>
-  publishedAt?: InputMaybe<DateTimeFilterInput>
-  updatedAt?: InputMaybe<DateTimeFilterInput>
-}
-
-export type TableInput = {
-  description?: InputMaybe<Scalars['String']>
-  name?: InputMaybe<Scalars['String']>
-  publishedAt?: InputMaybe<Scalars['DateTime']>
 }
 
 export type Theme = {
@@ -2539,70 +2456,8 @@ export type HomepageFragmentFragment = {
         buttons?: Array<{
           __typename?: 'ComponentCoreButton'
           id: string
-          text?: string | null
-          url?: string | null
-        } | null> | null
-      }
-    | {
-        __typename: 'ComponentModulesCarousel'
-        id: string
-        buttonText?: string | null
-        buttonUrl?: string | null
-        description?: string | null
-        title?: string | null
-        type?: Enum_Componentmodulescarousel_Type | null
-        items?: Array<{
-          __typename?: 'ComponentCoreCarouselItem'
-          id: string
-          description?: string | null
-          name?: string | null
-          type?: Enum_Componentcorecarouselitem_Type | null
-          picture?: {
-            __typename?: 'UploadFileEntityResponse'
-            data?: {
-              __typename?: 'UploadFileEntity'
-              id?: string | null
-              attributes?: {
-                __typename?: 'UploadFile'
-                hash: string
-                mime: string
-                name: string
-                provider: string
-                size: number
-                url: string
-                alternativeText?: string | null
-                caption?: string | null
-                createdAt?: any | null
-                ext?: string | null
-                formats?: any | null
-                height?: number | null
-                previewUrl?: string | null
-                provider_metadata?: any | null
-                updatedAt?: any | null
-                width?: number | null
-              } | null
-            } | null
-          } | null
-          triply_record?: {
-            __typename?: 'TriplyRecordEntityResponse'
-            data?: {
-              __typename?: 'TriplyRecordEntity'
-              id?: string | null
-              attributes?: {
-                __typename?: 'TriplyRecord'
-                recordId: string
-                type: Enum_Triplyrecord_Type
-              } | null
-            } | null
-          } | null
-          story?: {
-            __typename?: 'StoryEntityResponse'
-            data?: {
-              __typename?: 'StoryEntity'
-              id?: string | null
-              attributes?: { __typename?: 'Story'; slug: string } | null
-            } | null
-          } | null
+          text: string
+          url: string
         } | null> | null
       }
     | {
@@ -2617,8 +2472,8 @@ export type HomepageFragmentFragment = {
         buttons?: Array<{
           __typename?: 'ComponentCoreButton'
           id: string
-          text?: string | null
-          url?: string | null
+          text: string
+          url: string
         } | null> | null
         featuredFields?: Array<{
           __typename?: 'ComponentCoreFeaturedFields'
@@ -2630,7 +2485,7 @@ export type HomepageFragmentFragment = {
           __typename?: 'ComponentCoreGridFeaturedFields'
           id: string
           subtitle?: string | null
-          title?: string | null
+          title: string
           story?: {
             __typename?: 'StoryEntityResponse'
             data?: {
@@ -2681,7 +2536,7 @@ export type HomepageFragmentFragment = {
       }
     | {
         __typename: 'ComponentModulesImage'
-        alt_text?: string | null
+        alt_text: string
         caption?: string | null
         id: string
         image: {
@@ -2834,70 +2689,8 @@ export type HomepageQuery = {
                     buttons?: Array<{
                       __typename?: 'ComponentCoreButton'
                       id: string
-                      text?: string | null
-                      url?: string | null
-                    } | null> | null
-                  }
-                | {
-                    __typename: 'ComponentModulesCarousel'
-                    id: string
-                    buttonText?: string | null
-                    buttonUrl?: string | null
-                    description?: string | null
-                    title?: string | null
-                    type?: Enum_Componentmodulescarousel_Type | null
-                    items?: Array<{
-                      __typename?: 'ComponentCoreCarouselItem'
-                      id: string
-                      description?: string | null
-                      name?: string | null
-                      type?: Enum_Componentcorecarouselitem_Type | null
-                      picture?: {
-                        __typename?: 'UploadFileEntityResponse'
-                        data?: {
-                          __typename?: 'UploadFileEntity'
-                          id?: string | null
-                          attributes?: {
-                            __typename?: 'UploadFile'
-                            hash: string
-                            mime: string
-                            name: string
-                            provider: string
-                            size: number
-                            url: string
-                            alternativeText?: string | null
-                            caption?: string | null
-                            createdAt?: any | null
-                            ext?: string | null
-                            formats?: any | null
-                            height?: number | null
-                            previewUrl?: string | null
-                            provider_metadata?: any | null
-                            updatedAt?: any | null
-                            width?: number | null
-                          } | null
-                        } | null
-                      } | null
-                      triply_record?: {
-                        __typename?: 'TriplyRecordEntityResponse'
-                        data?: {
-                          __typename?: 'TriplyRecordEntity'
-                          id?: string | null
-                          attributes?: {
-                            __typename?: 'TriplyRecord'
-                            recordId: string
-                            type: Enum_Triplyrecord_Type
-                          } | null
-                        } | null
-                      } | null
-                      story?: {
-                        __typename?: 'StoryEntityResponse'
-                        data?: {
-                          __typename?: 'StoryEntity'
-                          id?: string | null
-                          attributes?: { __typename?: 'Story'; slug: string } | null
-                        } | null
-                      } | null
+                      text: string
+                      url: string
                     } | null> | null
                   }
                 | {
@@ -2912,8 +2705,8 @@ export type HomepageQuery = {
                     buttons?: Array<{
                       __typename?: 'ComponentCoreButton'
                       id: string
-                      text?: string | null
-                      url?: string | null
+                      text: string
+                      url: string
                     } | null> | null
                     featuredFields?: Array<{
                       __typename?: 'ComponentCoreFeaturedFields'
@@ -2925,7 +2718,7 @@ export type HomepageQuery = {
                       __typename?: 'ComponentCoreGridFeaturedFields'
                       id: string
                       subtitle?: string | null
-                      title?: string | null
+                      title: string
                       story?: {
                         __typename?: 'StoryEntityResponse'
                         data?: {
@@ -2976,7 +2769,7 @@ export type HomepageQuery = {
                   }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text?: string | null
+                    alt_text: string
                     caption?: string | null
                     id: string
                     image: {
@@ -3097,70 +2890,8 @@ export type HomepageQuery = {
               buttons?: Array<{
                 __typename?: 'ComponentCoreButton'
                 id: string
-                text?: string | null
-                url?: string | null
-              } | null> | null
-            }
-          | {
-              __typename: 'ComponentModulesCarousel'
-              id: string
-              buttonText?: string | null
-              buttonUrl?: string | null
-              description?: string | null
-              title?: string | null
-              type?: Enum_Componentmodulescarousel_Type | null
-              items?: Array<{
-                __typename?: 'ComponentCoreCarouselItem'
-                id: string
-                description?: string | null
-                name?: string | null
-                type?: Enum_Componentcorecarouselitem_Type | null
-                picture?: {
-                  __typename?: 'UploadFileEntityResponse'
-                  data?: {
-                    __typename?: 'UploadFileEntity'
-                    id?: string | null
-                    attributes?: {
-                      __typename?: 'UploadFile'
-                      hash: string
-                      mime: string
-                      name: string
-                      provider: string
-                      size: number
-                      url: string
-                      alternativeText?: string | null
-                      caption?: string | null
-                      createdAt?: any | null
-                      ext?: string | null
-                      formats?: any | null
-                      height?: number | null
-                      previewUrl?: string | null
-                      provider_metadata?: any | null
-                      updatedAt?: any | null
-                      width?: number | null
-                    } | null
-                  } | null
-                } | null
-                triply_record?: {
-                  __typename?: 'TriplyRecordEntityResponse'
-                  data?: {
-                    __typename?: 'TriplyRecordEntity'
-                    id?: string | null
-                    attributes?: {
-                      __typename?: 'TriplyRecord'
-                      recordId: string
-                      type: Enum_Triplyrecord_Type
-                    } | null
-                  } | null
-                } | null
-                story?: {
-                  __typename?: 'StoryEntityResponse'
-                  data?: {
-                    __typename?: 'StoryEntity'
-                    id?: string | null
-                    attributes?: { __typename?: 'Story'; slug: string } | null
-                  } | null
-                } | null
+                text: string
+                url: string
               } | null> | null
             }
           | {
@@ -3175,8 +2906,8 @@ export type HomepageQuery = {
               buttons?: Array<{
                 __typename?: 'ComponentCoreButton'
                 id: string
-                text?: string | null
-                url?: string | null
+                text: string
+                url: string
               } | null> | null
               featuredFields?: Array<{
                 __typename?: 'ComponentCoreFeaturedFields'
@@ -3188,7 +2919,7 @@ export type HomepageQuery = {
                 __typename?: 'ComponentCoreGridFeaturedFields'
                 id: string
                 subtitle?: string | null
-                title?: string | null
+                title: string
                 story?: {
                   __typename?: 'StoryEntityResponse'
                   data?: {
@@ -3239,7 +2970,7 @@ export type HomepageQuery = {
             }
           | {
               __typename: 'ComponentModulesImage'
-              alt_text?: string | null
+              alt_text: string
               caption?: string | null
               id: string
               image: {
@@ -3489,13 +3220,13 @@ export type HighlightedHomepageThemesQuery = {
                           buttons?: Array<{
                             __typename?: 'ComponentCoreButton'
                             id: string
-                            text?: string | null
-                            url?: string | null
+                            text: string
+                            url: string
                           } | null> | null
                         }
                       | {
                           __typename: 'ComponentModulesImage'
-                          alt_text?: string | null
+                          alt_text: string
                           caption?: string | null
                           id: string
                           image: {
@@ -3669,8 +3400,8 @@ export type HighlightedHomepageThemesQuery = {
                       buttons?: Array<{
                         __typename?: 'ComponentCoreButton'
                         id: string
-                        text?: string | null
-                        url?: string | null
+                        text: string
+                        url: string
                       } | null> | null
                     } | null
                     parent_story?: {
@@ -3688,7 +3419,7 @@ export type HighlightedHomepageThemesQuery = {
                             | { __typename: 'ComponentModulesButtonsModule' }
                             | {
                                 __typename: 'ComponentModulesImage'
-                                alt_text?: string | null
+                                alt_text: string
                                 caption?: string | null
                                 id: string
                                 image: {
@@ -3800,7 +3531,7 @@ export type HighlightedHomepageThemesQuery = {
                             | { __typename: 'ComponentModulesButtonsModule' }
                             | {
                                 __typename: 'ComponentModulesImage'
-                                alt_text?: string | null
+                                alt_text: string
                                 caption?: string | null
                                 id: string
                                 image: {
@@ -4006,13 +3737,13 @@ export type HighlightedHomepageThemesQuery = {
                           buttons?: Array<{
                             __typename?: 'ComponentCoreButton'
                             id: string
-                            text?: string | null
-                            url?: string | null
+                            text: string
+                            url: string
                           } | null> | null
                         }
                       | {
                           __typename: 'ComponentModulesImage'
-                          alt_text?: string | null
+                          alt_text: string
                           caption?: string | null
                           id: string
                           image: {
@@ -4186,8 +3917,8 @@ export type HighlightedHomepageThemesQuery = {
                       buttons?: Array<{
                         __typename?: 'ComponentCoreButton'
                         id: string
-                        text?: string | null
-                        url?: string | null
+                        text: string
+                        url: string
                       } | null> | null
                     } | null
                     parent_story?: {
@@ -4205,7 +3936,7 @@ export type HighlightedHomepageThemesQuery = {
                             | { __typename: 'ComponentModulesButtonsModule' }
                             | {
                                 __typename: 'ComponentModulesImage'
-                                alt_text?: string | null
+                                alt_text: string
                                 caption?: string | null
                                 id: string
                                 image: {
@@ -4317,7 +4048,7 @@ export type HighlightedHomepageThemesQuery = {
                             | { __typename: 'ComponentModulesButtonsModule' }
                             | {
                                 __typename: 'ComponentModulesImage'
-                                alt_text?: string | null
+                                alt_text: string
                                 caption?: string | null
                                 id: string
                                 image: {
@@ -4469,70 +4200,8 @@ export type LandingpageFragmentFragment = {
         buttons?: Array<{
           __typename?: 'ComponentCoreButton'
           id: string
-          text?: string | null
-          url?: string | null
-        } | null> | null
-      }
-    | {
-        __typename: 'ComponentModulesCarousel'
-        id: string
-        buttonText?: string | null
-        buttonUrl?: string | null
-        description?: string | null
-        title?: string | null
-        type?: Enum_Componentmodulescarousel_Type | null
-        items?: Array<{
-          __typename?: 'ComponentCoreCarouselItem'
-          id: string
-          description?: string | null
-          name?: string | null
-          type?: Enum_Componentcorecarouselitem_Type | null
-          picture?: {
-            __typename?: 'UploadFileEntityResponse'
-            data?: {
-              __typename?: 'UploadFileEntity'
-              id?: string | null
-              attributes?: {
-                __typename?: 'UploadFile'
-                hash: string
-                mime: string
-                name: string
-                provider: string
-                size: number
-                url: string
-                alternativeText?: string | null
-                caption?: string | null
-                createdAt?: any | null
-                ext?: string | null
-                formats?: any | null
-                height?: number | null
-                previewUrl?: string | null
-                provider_metadata?: any | null
-                updatedAt?: any | null
-                width?: number | null
-              } | null
-            } | null
-          } | null
-          triply_record?: {
-            __typename?: 'TriplyRecordEntityResponse'
-            data?: {
-              __typename?: 'TriplyRecordEntity'
-              id?: string | null
-              attributes?: {
-                __typename?: 'TriplyRecord'
-                recordId: string
-                type: Enum_Triplyrecord_Type
-              } | null
-            } | null
-          } | null
-          story?: {
-            __typename?: 'StoryEntityResponse'
-            data?: {
-              __typename?: 'StoryEntity'
-              id?: string | null
-              attributes?: { __typename?: 'Story'; slug: string } | null
-            } | null
-          } | null
+          text: string
+          url: string
         } | null> | null
       }
     | {
@@ -4547,8 +4216,8 @@ export type LandingpageFragmentFragment = {
         buttons?: Array<{
           __typename?: 'ComponentCoreButton'
           id: string
-          text?: string | null
-          url?: string | null
+          text: string
+          url: string
         } | null> | null
         featuredFields?: Array<{
           __typename?: 'ComponentCoreFeaturedFields'
@@ -4560,7 +4229,7 @@ export type LandingpageFragmentFragment = {
           __typename?: 'ComponentCoreGridFeaturedFields'
           id: string
           subtitle?: string | null
-          title?: string | null
+          title: string
           story?: {
             __typename?: 'StoryEntityResponse'
             data?: {
@@ -4611,7 +4280,7 @@ export type LandingpageFragmentFragment = {
       }
     | {
         __typename: 'ComponentModulesImage'
-        alt_text?: string | null
+        alt_text: string
         caption?: string | null
         id: string
         image: {
@@ -4757,70 +4426,8 @@ export type LandingpageEntityFragmentFragment = {
                 buttons?: Array<{
                   __typename?: 'ComponentCoreButton'
                   id: string
-                  text?: string | null
-                  url?: string | null
-                } | null> | null
-              }
-            | {
-                __typename: 'ComponentModulesCarousel'
-                id: string
-                buttonText?: string | null
-                buttonUrl?: string | null
-                description?: string | null
-                title?: string | null
-                type?: Enum_Componentmodulescarousel_Type | null
-                items?: Array<{
-                  __typename?: 'ComponentCoreCarouselItem'
-                  id: string
-                  description?: string | null
-                  name?: string | null
-                  type?: Enum_Componentcorecarouselitem_Type | null
-                  picture?: {
-                    __typename?: 'UploadFileEntityResponse'
-                    data?: {
-                      __typename?: 'UploadFileEntity'
-                      id?: string | null
-                      attributes?: {
-                        __typename?: 'UploadFile'
-                        hash: string
-                        mime: string
-                        name: string
-                        provider: string
-                        size: number
-                        url: string
-                        alternativeText?: string | null
-                        caption?: string | null
-                        createdAt?: any | null
-                        ext?: string | null
-                        formats?: any | null
-                        height?: number | null
-                        previewUrl?: string | null
-                        provider_metadata?: any | null
-                        updatedAt?: any | null
-                        width?: number | null
-                      } | null
-                    } | null
-                  } | null
-                  triply_record?: {
-                    __typename?: 'TriplyRecordEntityResponse'
-                    data?: {
-                      __typename?: 'TriplyRecordEntity'
-                      id?: string | null
-                      attributes?: {
-                        __typename?: 'TriplyRecord'
-                        recordId: string
-                        type: Enum_Triplyrecord_Type
-                      } | null
-                    } | null
-                  } | null
-                  story?: {
-                    __typename?: 'StoryEntityResponse'
-                    data?: {
-                      __typename?: 'StoryEntity'
-                      id?: string | null
-                      attributes?: { __typename?: 'Story'; slug: string } | null
-                    } | null
-                  } | null
+                  text: string
+                  url: string
                 } | null> | null
               }
             | {
@@ -4835,8 +4442,8 @@ export type LandingpageEntityFragmentFragment = {
                 buttons?: Array<{
                   __typename?: 'ComponentCoreButton'
                   id: string
-                  text?: string | null
-                  url?: string | null
+                  text: string
+                  url: string
                 } | null> | null
                 featuredFields?: Array<{
                   __typename?: 'ComponentCoreFeaturedFields'
@@ -4848,7 +4455,7 @@ export type LandingpageEntityFragmentFragment = {
                   __typename?: 'ComponentCoreGridFeaturedFields'
                   id: string
                   subtitle?: string | null
-                  title?: string | null
+                  title: string
                   story?: {
                     __typename?: 'StoryEntityResponse'
                     data?: {
@@ -4899,7 +4506,7 @@ export type LandingpageEntityFragmentFragment = {
               }
             | {
                 __typename: 'ComponentModulesImage'
-                alt_text?: string | null
+                alt_text: string
                 caption?: string | null
                 id: string
                 image: {
@@ -5020,70 +4627,8 @@ export type LandingpageEntityFragmentFragment = {
           buttons?: Array<{
             __typename?: 'ComponentCoreButton'
             id: string
-            text?: string | null
-            url?: string | null
-          } | null> | null
-        }
-      | {
-          __typename: 'ComponentModulesCarousel'
-          id: string
-          buttonText?: string | null
-          buttonUrl?: string | null
-          description?: string | null
-          title?: string | null
-          type?: Enum_Componentmodulescarousel_Type | null
-          items?: Array<{
-            __typename?: 'ComponentCoreCarouselItem'
-            id: string
-            description?: string | null
-            name?: string | null
-            type?: Enum_Componentcorecarouselitem_Type | null
-            picture?: {
-              __typename?: 'UploadFileEntityResponse'
-              data?: {
-                __typename?: 'UploadFileEntity'
-                id?: string | null
-                attributes?: {
-                  __typename?: 'UploadFile'
-                  hash: string
-                  mime: string
-                  name: string
-                  provider: string
-                  size: number
-                  url: string
-                  alternativeText?: string | null
-                  caption?: string | null
-                  createdAt?: any | null
-                  ext?: string | null
-                  formats?: any | null
-                  height?: number | null
-                  previewUrl?: string | null
-                  provider_metadata?: any | null
-                  updatedAt?: any | null
-                  width?: number | null
-                } | null
-              } | null
-            } | null
-            triply_record?: {
-              __typename?: 'TriplyRecordEntityResponse'
-              data?: {
-                __typename?: 'TriplyRecordEntity'
-                id?: string | null
-                attributes?: {
-                  __typename?: 'TriplyRecord'
-                  recordId: string
-                  type: Enum_Triplyrecord_Type
-                } | null
-              } | null
-            } | null
-            story?: {
-              __typename?: 'StoryEntityResponse'
-              data?: {
-                __typename?: 'StoryEntity'
-                id?: string | null
-                attributes?: { __typename?: 'Story'; slug: string } | null
-              } | null
-            } | null
+            text: string
+            url: string
           } | null> | null
         }
       | {
@@ -5098,8 +4643,8 @@ export type LandingpageEntityFragmentFragment = {
           buttons?: Array<{
             __typename?: 'ComponentCoreButton'
             id: string
-            text?: string | null
-            url?: string | null
+            text: string
+            url: string
           } | null> | null
           featuredFields?: Array<{
             __typename?: 'ComponentCoreFeaturedFields'
@@ -5111,7 +4656,7 @@ export type LandingpageEntityFragmentFragment = {
             __typename?: 'ComponentCoreGridFeaturedFields'
             id: string
             subtitle?: string | null
-            title?: string | null
+            title: string
             story?: {
               __typename?: 'StoryEntityResponse'
               data?: {
@@ -5162,7 +4707,7 @@ export type LandingpageEntityFragmentFragment = {
         }
       | {
           __typename: 'ComponentModulesImage'
-          alt_text?: string | null
+          alt_text: string
           caption?: string | null
           id: string
           image: {
@@ -5318,70 +4863,8 @@ export type LandingPageQuery = {
                     buttons?: Array<{
                       __typename?: 'ComponentCoreButton'
                       id: string
-                      text?: string | null
-                      url?: string | null
-                    } | null> | null
-                  }
-                | {
-                    __typename: 'ComponentModulesCarousel'
-                    id: string
-                    buttonText?: string | null
-                    buttonUrl?: string | null
-                    description?: string | null
-                    title?: string | null
-                    type?: Enum_Componentmodulescarousel_Type | null
-                    items?: Array<{
-                      __typename?: 'ComponentCoreCarouselItem'
-                      id: string
-                      description?: string | null
-                      name?: string | null
-                      type?: Enum_Componentcorecarouselitem_Type | null
-                      picture?: {
-                        __typename?: 'UploadFileEntityResponse'
-                        data?: {
-                          __typename?: 'UploadFileEntity'
-                          id?: string | null
-                          attributes?: {
-                            __typename?: 'UploadFile'
-                            hash: string
-                            mime: string
-                            name: string
-                            provider: string
-                            size: number
-                            url: string
-                            alternativeText?: string | null
-                            caption?: string | null
-                            createdAt?: any | null
-                            ext?: string | null
-                            formats?: any | null
-                            height?: number | null
-                            previewUrl?: string | null
-                            provider_metadata?: any | null
-                            updatedAt?: any | null
-                            width?: number | null
-                          } | null
-                        } | null
-                      } | null
-                      triply_record?: {
-                        __typename?: 'TriplyRecordEntityResponse'
-                        data?: {
-                          __typename?: 'TriplyRecordEntity'
-                          id?: string | null
-                          attributes?: {
-                            __typename?: 'TriplyRecord'
-                            recordId: string
-                            type: Enum_Triplyrecord_Type
-                          } | null
-                        } | null
-                      } | null
-                      story?: {
-                        __typename?: 'StoryEntityResponse'
-                        data?: {
-                          __typename?: 'StoryEntity'
-                          id?: string | null
-                          attributes?: { __typename?: 'Story'; slug: string } | null
-                        } | null
-                      } | null
+                      text: string
+                      url: string
                     } | null> | null
                   }
                 | {
@@ -5396,8 +4879,8 @@ export type LandingPageQuery = {
                     buttons?: Array<{
                       __typename?: 'ComponentCoreButton'
                       id: string
-                      text?: string | null
-                      url?: string | null
+                      text: string
+                      url: string
                     } | null> | null
                     featuredFields?: Array<{
                       __typename?: 'ComponentCoreFeaturedFields'
@@ -5409,7 +4892,7 @@ export type LandingPageQuery = {
                       __typename?: 'ComponentCoreGridFeaturedFields'
                       id: string
                       subtitle?: string | null
-                      title?: string | null
+                      title: string
                       story?: {
                         __typename?: 'StoryEntityResponse'
                         data?: {
@@ -5460,7 +4943,7 @@ export type LandingPageQuery = {
                   }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text?: string | null
+                    alt_text: string
                     caption?: string | null
                     id: string
                     image: {
@@ -5581,70 +5064,8 @@ export type LandingPageQuery = {
               buttons?: Array<{
                 __typename?: 'ComponentCoreButton'
                 id: string
-                text?: string | null
-                url?: string | null
-              } | null> | null
-            }
-          | {
-              __typename: 'ComponentModulesCarousel'
-              id: string
-              buttonText?: string | null
-              buttonUrl?: string | null
-              description?: string | null
-              title?: string | null
-              type?: Enum_Componentmodulescarousel_Type | null
-              items?: Array<{
-                __typename?: 'ComponentCoreCarouselItem'
-                id: string
-                description?: string | null
-                name?: string | null
-                type?: Enum_Componentcorecarouselitem_Type | null
-                picture?: {
-                  __typename?: 'UploadFileEntityResponse'
-                  data?: {
-                    __typename?: 'UploadFileEntity'
-                    id?: string | null
-                    attributes?: {
-                      __typename?: 'UploadFile'
-                      hash: string
-                      mime: string
-                      name: string
-                      provider: string
-                      size: number
-                      url: string
-                      alternativeText?: string | null
-                      caption?: string | null
-                      createdAt?: any | null
-                      ext?: string | null
-                      formats?: any | null
-                      height?: number | null
-                      previewUrl?: string | null
-                      provider_metadata?: any | null
-                      updatedAt?: any | null
-                      width?: number | null
-                    } | null
-                  } | null
-                } | null
-                triply_record?: {
-                  __typename?: 'TriplyRecordEntityResponse'
-                  data?: {
-                    __typename?: 'TriplyRecordEntity'
-                    id?: string | null
-                    attributes?: {
-                      __typename?: 'TriplyRecord'
-                      recordId: string
-                      type: Enum_Triplyrecord_Type
-                    } | null
-                  } | null
-                } | null
-                story?: {
-                  __typename?: 'StoryEntityResponse'
-                  data?: {
-                    __typename?: 'StoryEntity'
-                    id?: string | null
-                    attributes?: { __typename?: 'Story'; slug: string } | null
-                  } | null
-                } | null
+                text: string
+                url: string
               } | null> | null
             }
           | {
@@ -5659,8 +5080,8 @@ export type LandingPageQuery = {
               buttons?: Array<{
                 __typename?: 'ComponentCoreButton'
                 id: string
-                text?: string | null
-                url?: string | null
+                text: string
+                url: string
               } | null> | null
               featuredFields?: Array<{
                 __typename?: 'ComponentCoreFeaturedFields'
@@ -5672,7 +5093,7 @@ export type LandingPageQuery = {
                 __typename?: 'ComponentCoreGridFeaturedFields'
                 id: string
                 subtitle?: string | null
-                title?: string | null
+                title: string
                 story?: {
                   __typename?: 'StoryEntityResponse'
                   data?: {
@@ -5723,7 +5144,7 @@ export type LandingPageQuery = {
             }
           | {
               __typename: 'ComponentModulesImage'
-              alt_text?: string | null
+              alt_text: string
               caption?: string | null
               id: string
               image: {
@@ -5884,70 +5305,8 @@ export type LandingPagesQuery = {
                     buttons?: Array<{
                       __typename?: 'ComponentCoreButton'
                       id: string
-                      text?: string | null
-                      url?: string | null
-                    } | null> | null
-                  }
-                | {
-                    __typename: 'ComponentModulesCarousel'
-                    id: string
-                    buttonText?: string | null
-                    buttonUrl?: string | null
-                    description?: string | null
-                    title?: string | null
-                    type?: Enum_Componentmodulescarousel_Type | null
-                    items?: Array<{
-                      __typename?: 'ComponentCoreCarouselItem'
-                      id: string
-                      description?: string | null
-                      name?: string | null
-                      type?: Enum_Componentcorecarouselitem_Type | null
-                      picture?: {
-                        __typename?: 'UploadFileEntityResponse'
-                        data?: {
-                          __typename?: 'UploadFileEntity'
-                          id?: string | null
-                          attributes?: {
-                            __typename?: 'UploadFile'
-                            hash: string
-                            mime: string
-                            name: string
-                            provider: string
-                            size: number
-                            url: string
-                            alternativeText?: string | null
-                            caption?: string | null
-                            createdAt?: any | null
-                            ext?: string | null
-                            formats?: any | null
-                            height?: number | null
-                            previewUrl?: string | null
-                            provider_metadata?: any | null
-                            updatedAt?: any | null
-                            width?: number | null
-                          } | null
-                        } | null
-                      } | null
-                      triply_record?: {
-                        __typename?: 'TriplyRecordEntityResponse'
-                        data?: {
-                          __typename?: 'TriplyRecordEntity'
-                          id?: string | null
-                          attributes?: {
-                            __typename?: 'TriplyRecord'
-                            recordId: string
-                            type: Enum_Triplyrecord_Type
-                          } | null
-                        } | null
-                      } | null
-                      story?: {
-                        __typename?: 'StoryEntityResponse'
-                        data?: {
-                          __typename?: 'StoryEntity'
-                          id?: string | null
-                          attributes?: { __typename?: 'Story'; slug: string } | null
-                        } | null
-                      } | null
+                      text: string
+                      url: string
                     } | null> | null
                   }
                 | {
@@ -5962,8 +5321,8 @@ export type LandingPagesQuery = {
                     buttons?: Array<{
                       __typename?: 'ComponentCoreButton'
                       id: string
-                      text?: string | null
-                      url?: string | null
+                      text: string
+                      url: string
                     } | null> | null
                     featuredFields?: Array<{
                       __typename?: 'ComponentCoreFeaturedFields'
@@ -5975,7 +5334,7 @@ export type LandingPagesQuery = {
                       __typename?: 'ComponentCoreGridFeaturedFields'
                       id: string
                       subtitle?: string | null
-                      title?: string | null
+                      title: string
                       story?: {
                         __typename?: 'StoryEntityResponse'
                         data?: {
@@ -6026,7 +5385,7 @@ export type LandingPagesQuery = {
                   }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text?: string | null
+                    alt_text: string
                     caption?: string | null
                     id: string
                     image: {
@@ -6147,70 +5506,8 @@ export type LandingPagesQuery = {
               buttons?: Array<{
                 __typename?: 'ComponentCoreButton'
                 id: string
-                text?: string | null
-                url?: string | null
-              } | null> | null
-            }
-          | {
-              __typename: 'ComponentModulesCarousel'
-              id: string
-              buttonText?: string | null
-              buttonUrl?: string | null
-              description?: string | null
-              title?: string | null
-              type?: Enum_Componentmodulescarousel_Type | null
-              items?: Array<{
-                __typename?: 'ComponentCoreCarouselItem'
-                id: string
-                description?: string | null
-                name?: string | null
-                type?: Enum_Componentcorecarouselitem_Type | null
-                picture?: {
-                  __typename?: 'UploadFileEntityResponse'
-                  data?: {
-                    __typename?: 'UploadFileEntity'
-                    id?: string | null
-                    attributes?: {
-                      __typename?: 'UploadFile'
-                      hash: string
-                      mime: string
-                      name: string
-                      provider: string
-                      size: number
-                      url: string
-                      alternativeText?: string | null
-                      caption?: string | null
-                      createdAt?: any | null
-                      ext?: string | null
-                      formats?: any | null
-                      height?: number | null
-                      previewUrl?: string | null
-                      provider_metadata?: any | null
-                      updatedAt?: any | null
-                      width?: number | null
-                    } | null
-                  } | null
-                } | null
-                triply_record?: {
-                  __typename?: 'TriplyRecordEntityResponse'
-                  data?: {
-                    __typename?: 'TriplyRecordEntity'
-                    id?: string | null
-                    attributes?: {
-                      __typename?: 'TriplyRecord'
-                      recordId: string
-                      type: Enum_Triplyrecord_Type
-                    } | null
-                  } | null
-                } | null
-                story?: {
-                  __typename?: 'StoryEntityResponse'
-                  data?: {
-                    __typename?: 'StoryEntity'
-                    id?: string | null
-                    attributes?: { __typename?: 'Story'; slug: string } | null
-                  } | null
-                } | null
+                text: string
+                url: string
               } | null> | null
             }
           | {
@@ -6225,8 +5522,8 @@ export type LandingPagesQuery = {
               buttons?: Array<{
                 __typename?: 'ComponentCoreButton'
                 id: string
-                text?: string | null
-                url?: string | null
+                text: string
+                url: string
               } | null> | null
               featuredFields?: Array<{
                 __typename?: 'ComponentCoreFeaturedFields'
@@ -6238,7 +5535,7 @@ export type LandingPagesQuery = {
                 __typename?: 'ComponentCoreGridFeaturedFields'
                 id: string
                 subtitle?: string | null
-                title?: string | null
+                title: string
                 story?: {
                   __typename?: 'StoryEntityResponse'
                   data?: {
@@ -6289,7 +5586,7 @@ export type LandingPagesQuery = {
             }
           | {
               __typename: 'ComponentModulesImage'
-              alt_text?: string | null
+              alt_text: string
               caption?: string | null
               id: string
               image: {
@@ -6528,8 +5825,8 @@ export type MenupageFragmentFragment = {
         buttons?: Array<{
           __typename?: 'ComponentCoreButton'
           id: string
-          text?: string | null
-          url?: string | null
+          text: string
+          url: string
         } | null> | null
       }
     | {
@@ -6544,8 +5841,8 @@ export type MenupageFragmentFragment = {
         buttons?: Array<{
           __typename?: 'ComponentCoreButton'
           id: string
-          text?: string | null
-          url?: string | null
+          text: string
+          url: string
         } | null> | null
         featuredFields?: Array<{
           __typename?: 'ComponentCoreFeaturedFields'
@@ -6557,7 +5854,7 @@ export type MenupageFragmentFragment = {
           __typename?: 'ComponentCoreGridFeaturedFields'
           id: string
           subtitle?: string | null
-          title?: string | null
+          title: string
           story?: {
             __typename?: 'StoryEntityResponse'
             data?: {
@@ -6608,7 +5905,7 @@ export type MenupageFragmentFragment = {
       }
     | {
         __typename: 'ComponentModulesImage'
-        alt_text?: string | null
+        alt_text: string
         caption?: string | null
         id: string
         image: {
@@ -6752,8 +6049,8 @@ export type MenupageEntityFragmentFragment = {
                 buttons?: Array<{
                   __typename?: 'ComponentCoreButton'
                   id: string
-                  text?: string | null
-                  url?: string | null
+                  text: string
+                  url: string
                 } | null> | null
               }
             | {
@@ -6768,8 +6065,8 @@ export type MenupageEntityFragmentFragment = {
                 buttons?: Array<{
                   __typename?: 'ComponentCoreButton'
                   id: string
-                  text?: string | null
-                  url?: string | null
+                  text: string
+                  url: string
                 } | null> | null
                 featuredFields?: Array<{
                   __typename?: 'ComponentCoreFeaturedFields'
@@ -6781,7 +6078,7 @@ export type MenupageEntityFragmentFragment = {
                   __typename?: 'ComponentCoreGridFeaturedFields'
                   id: string
                   subtitle?: string | null
-                  title?: string | null
+                  title: string
                   story?: {
                     __typename?: 'StoryEntityResponse'
                     data?: {
@@ -6832,7 +6129,7 @@ export type MenupageEntityFragmentFragment = {
               }
             | {
                 __typename: 'ComponentModulesImage'
-                alt_text?: string | null
+                alt_text: string
                 caption?: string | null
                 id: string
                 image: {
@@ -6953,8 +6250,8 @@ export type MenupageEntityFragmentFragment = {
           buttons?: Array<{
             __typename?: 'ComponentCoreButton'
             id: string
-            text?: string | null
-            url?: string | null
+            text: string
+            url: string
           } | null> | null
         }
       | {
@@ -6969,8 +6266,8 @@ export type MenupageEntityFragmentFragment = {
           buttons?: Array<{
             __typename?: 'ComponentCoreButton'
             id: string
-            text?: string | null
-            url?: string | null
+            text: string
+            url: string
           } | null> | null
           featuredFields?: Array<{
             __typename?: 'ComponentCoreFeaturedFields'
@@ -6982,7 +6279,7 @@ export type MenupageEntityFragmentFragment = {
             __typename?: 'ComponentCoreGridFeaturedFields'
             id: string
             subtitle?: string | null
-            title?: string | null
+            title: string
             story?: {
               __typename?: 'StoryEntityResponse'
               data?: {
@@ -7033,7 +6330,7 @@ export type MenupageEntityFragmentFragment = {
         }
       | {
           __typename: 'ComponentModulesImage'
-          alt_text?: string | null
+          alt_text: string
           caption?: string | null
           id: string
           image: {
@@ -7187,8 +6484,8 @@ export type MenuPageQuery = {
                     buttons?: Array<{
                       __typename?: 'ComponentCoreButton'
                       id: string
-                      text?: string | null
-                      url?: string | null
+                      text: string
+                      url: string
                     } | null> | null
                   }
                 | {
@@ -7203,8 +6500,8 @@ export type MenuPageQuery = {
                     buttons?: Array<{
                       __typename?: 'ComponentCoreButton'
                       id: string
-                      text?: string | null
-                      url?: string | null
+                      text: string
+                      url: string
                     } | null> | null
                     featuredFields?: Array<{
                       __typename?: 'ComponentCoreFeaturedFields'
@@ -7216,7 +6513,7 @@ export type MenuPageQuery = {
                       __typename?: 'ComponentCoreGridFeaturedFields'
                       id: string
                       subtitle?: string | null
-                      title?: string | null
+                      title: string
                       story?: {
                         __typename?: 'StoryEntityResponse'
                         data?: {
@@ -7267,7 +6564,7 @@ export type MenuPageQuery = {
                   }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text?: string | null
+                    alt_text: string
                     caption?: string | null
                     id: string
                     image: {
@@ -7388,8 +6685,8 @@ export type MenuPageQuery = {
               buttons?: Array<{
                 __typename?: 'ComponentCoreButton'
                 id: string
-                text?: string | null
-                url?: string | null
+                text: string
+                url: string
               } | null> | null
             }
           | {
@@ -7404,8 +6701,8 @@ export type MenuPageQuery = {
               buttons?: Array<{
                 __typename?: 'ComponentCoreButton'
                 id: string
-                text?: string | null
-                url?: string | null
+                text: string
+                url: string
               } | null> | null
               featuredFields?: Array<{
                 __typename?: 'ComponentCoreFeaturedFields'
@@ -7417,7 +6714,7 @@ export type MenuPageQuery = {
                 __typename?: 'ComponentCoreGridFeaturedFields'
                 id: string
                 subtitle?: string | null
-                title?: string | null
+                title: string
                 story?: {
                   __typename?: 'StoryEntityResponse'
                   data?: {
@@ -7468,7 +6765,7 @@ export type MenuPageQuery = {
             }
           | {
               __typename: 'ComponentModulesImage'
-              alt_text?: string | null
+              alt_text: string
               caption?: string | null
               id: string
               image: {
@@ -7627,8 +6924,8 @@ export type MenuPagesQuery = {
                     buttons?: Array<{
                       __typename?: 'ComponentCoreButton'
                       id: string
-                      text?: string | null
-                      url?: string | null
+                      text: string
+                      url: string
                     } | null> | null
                   }
                 | {
@@ -7643,8 +6940,8 @@ export type MenuPagesQuery = {
                     buttons?: Array<{
                       __typename?: 'ComponentCoreButton'
                       id: string
-                      text?: string | null
-                      url?: string | null
+                      text: string
+                      url: string
                     } | null> | null
                     featuredFields?: Array<{
                       __typename?: 'ComponentCoreFeaturedFields'
@@ -7656,7 +6953,7 @@ export type MenuPagesQuery = {
                       __typename?: 'ComponentCoreGridFeaturedFields'
                       id: string
                       subtitle?: string | null
-                      title?: string | null
+                      title: string
                       story?: {
                         __typename?: 'StoryEntityResponse'
                         data?: {
@@ -7707,7 +7004,7 @@ export type MenuPagesQuery = {
                   }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text?: string | null
+                    alt_text: string
                     caption?: string | null
                     id: string
                     image: {
@@ -7828,8 +7125,8 @@ export type MenuPagesQuery = {
               buttons?: Array<{
                 __typename?: 'ComponentCoreButton'
                 id: string
-                text?: string | null
-                url?: string | null
+                text: string
+                url: string
               } | null> | null
             }
           | {
@@ -7844,8 +7141,8 @@ export type MenuPagesQuery = {
               buttons?: Array<{
                 __typename?: 'ComponentCoreButton'
                 id: string
-                text?: string | null
-                url?: string | null
+                text: string
+                url: string
               } | null> | null
               featuredFields?: Array<{
                 __typename?: 'ComponentCoreFeaturedFields'
@@ -7857,7 +7154,7 @@ export type MenuPagesQuery = {
                 __typename?: 'ComponentCoreGridFeaturedFields'
                 id: string
                 subtitle?: string | null
-                title?: string | null
+                title: string
                 story?: {
                   __typename?: 'StoryEntityResponse'
                   data?: {
@@ -7908,7 +7205,7 @@ export type MenuPagesQuery = {
             }
           | {
               __typename: 'ComponentModulesImage'
-              alt_text?: string | null
+              alt_text: string
               caption?: string | null
               id: string
               image: {
@@ -8150,13 +7447,13 @@ export type StoriesQuery = {
               buttons?: Array<{
                 __typename?: 'ComponentCoreButton'
                 id: string
-                text?: string | null
-                url?: string | null
+                text: string
+                url: string
               } | null> | null
             }
           | {
               __typename: 'ComponentModulesImage'
-              alt_text?: string | null
+              alt_text: string
               caption?: string | null
               id: string
               image: {
@@ -8318,8 +7615,8 @@ export type StoriesQuery = {
           buttons?: Array<{
             __typename?: 'ComponentCoreButton'
             id: string
-            text?: string | null
-            url?: string | null
+            text: string
+            url: string
           } | null> | null
         } | null
         parent_story?: {
@@ -8337,7 +7634,7 @@ export type StoriesQuery = {
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text?: string | null
+                    alt_text: string
                     caption?: string | null
                     id: string
                     image: {
@@ -8449,7 +7746,7 @@ export type StoriesQuery = {
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text?: string | null
+                    alt_text: string
                     caption?: string | null
                     id: string
                     image: {
@@ -8700,13 +7997,13 @@ export type StoryQuery = {
               buttons?: Array<{
                 __typename?: 'ComponentCoreButton'
                 id: string
-                text?: string | null
-                url?: string | null
+                text: string
+                url: string
               } | null> | null
             }
           | {
               __typename: 'ComponentModulesImage'
-              alt_text?: string | null
+              alt_text: string
               caption?: string | null
               id: string
               image: {
@@ -8868,8 +8165,8 @@ export type StoryQuery = {
           buttons?: Array<{
             __typename?: 'ComponentCoreButton'
             id: string
-            text?: string | null
-            url?: string | null
+            text: string
+            url: string
           } | null> | null
         } | null
         parent_story?: {
@@ -8887,7 +8184,7 @@ export type StoryQuery = {
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text?: string | null
+                    alt_text: string
                     caption?: string | null
                     id: string
                     image: {
@@ -8999,7 +8296,7 @@ export type StoryQuery = {
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text?: string | null
+                    alt_text: string
                     caption?: string | null
                     id: string
                     image: {
@@ -9248,13 +8545,13 @@ export type StoryByLocaleQuery = {
               buttons?: Array<{
                 __typename?: 'ComponentCoreButton'
                 id: string
-                text?: string | null
-                url?: string | null
+                text: string
+                url: string
               } | null> | null
             }
           | {
               __typename: 'ComponentModulesImage'
-              alt_text?: string | null
+              alt_text: string
               caption?: string | null
               id: string
               image: {
@@ -9506,13 +8803,13 @@ export type StoryByLocaleQuery = {
                     buttons?: Array<{
                       __typename?: 'ComponentCoreButton'
                       id: string
-                      text?: string | null
-                      url?: string | null
+                      text: string
+                      url: string
                     } | null> | null
                   }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text?: string | null
+                    alt_text: string
                     caption?: string | null
                     id: string
                     image: {
@@ -9782,13 +9079,13 @@ export type StoriesByLocaleQuery = {
               buttons?: Array<{
                 __typename?: 'ComponentCoreButton'
                 id: string
-                text?: string | null
-                url?: string | null
+                text: string
+                url: string
               } | null> | null
             }
           | {
               __typename: 'ComponentModulesImage'
-              alt_text?: string | null
+              alt_text: string
               caption?: string | null
               id: string
               image: {
@@ -10040,13 +9337,13 @@ export type StoriesByLocaleQuery = {
                     buttons?: Array<{
                       __typename?: 'ComponentCoreButton'
                       id: string
-                      text?: string | null
-                      url?: string | null
+                      text: string
+                      url: string
                     } | null> | null
                   }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text?: string | null
+                    alt_text: string
                     caption?: string | null
                     id: string
                     image: {
@@ -10250,7 +9547,7 @@ export type StoriesMetaByLocaleQuery = {
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text?: string | null
+                    alt_text: string
                     caption?: string | null
                     id: string
                     image: {
@@ -10362,7 +9659,7 @@ export type StoriesMetaByLocaleQuery = {
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text?: string | null
+                    alt_text: string
                     caption?: string | null
                     id: string
                     image: {
@@ -10550,8 +9847,8 @@ export type StoriesMetaByLocaleQuery = {
                 buttons?: Array<{
                   __typename?: 'ComponentCoreButton'
                   id: string
-                  text?: string | null
-                  url?: string | null
+                  text: string
+                  url: string
                 } | null> | null
               } | null
               parent_story?: {
@@ -10569,7 +9866,7 @@ export type StoriesMetaByLocaleQuery = {
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
-                          alt_text?: string | null
+                          alt_text: string
                           caption?: string | null
                           id: string
                           image: {
@@ -10681,7 +9978,7 @@ export type StoriesMetaByLocaleQuery = {
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
-                          alt_text?: string | null
+                          alt_text: string
                           caption?: string | null
                           id: string
                           image: {
@@ -10787,8 +10084,8 @@ export type StoriesMetaByLocaleQuery = {
           buttons?: Array<{
             __typename?: 'ComponentCoreButton'
             id: string
-            text?: string | null
-            url?: string | null
+            text: string
+            url: string
           } | null> | null
         } | null
       } | null
@@ -11022,13 +10319,13 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
               buttons?: Array<{
                 __typename?: 'ComponentCoreButton'
                 id: string
-                text?: string | null
-                url?: string | null
+                text: string
+                url: string
               } | null> | null
             }
           | {
               __typename: 'ComponentModulesImage'
-              alt_text?: string | null
+              alt_text: string
               caption?: string | null
               id: string
               image: {
@@ -11190,8 +10487,8 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
           buttons?: Array<{
             __typename?: 'ComponentCoreButton'
             id: string
-            text?: string | null
-            url?: string | null
+            text: string
+            url: string
           } | null> | null
         } | null
         parent_story?: {
@@ -11209,7 +10506,7 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text?: string | null
+                    alt_text: string
                     caption?: string | null
                     id: string
                     image: {
@@ -11321,7 +10618,7 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text?: string | null
+                    alt_text: string
                     caption?: string | null
                     id: string
                     image: {
@@ -11480,7 +10777,7 @@ export type StoriesByIdsQuery = {
           | { __typename?: 'ComponentModulesButtonsModule' }
           | {
               __typename: 'ComponentModulesImage'
-              alt_text?: string | null
+              alt_text: string
               caption?: string | null
               id: string
               image: {
@@ -11811,13 +11108,13 @@ export type NestedStoryFragmentFragment = {
           buttons?: Array<{
             __typename?: 'ComponentCoreButton'
             id: string
-            text?: string | null
-            url?: string | null
+            text: string
+            url: string
           } | null> | null
         }
       | {
           __typename: 'ComponentModulesImage'
-          alt_text?: string | null
+          alt_text: string
           caption?: string | null
           id: string
           image: {
@@ -12070,13 +11367,13 @@ export type LocalizedStoryFragmentFragment = {
           buttons?: Array<{
             __typename?: 'ComponentCoreButton'
             id: string
-            text?: string | null
-            url?: string | null
+            text: string
+            url: string
           } | null> | null
         }
       | {
           __typename: 'ComponentModulesImage'
-          alt_text?: string | null
+          alt_text: string
           caption?: string | null
           id: string
           image: {
@@ -12328,13 +11625,13 @@ export type LocalizedStoryFragmentFragment = {
                 buttons?: Array<{
                   __typename?: 'ComponentCoreButton'
                   id: string
-                  text?: string | null
-                  url?: string | null
+                  text: string
+                  url: string
                 } | null> | null
               }
             | {
                 __typename: 'ComponentModulesImage'
-                alt_text?: string | null
+                alt_text: string
                 caption?: string | null
                 id: string
                 image: {
@@ -12555,13 +11852,13 @@ export type StoryFragmentFragment = {
           buttons?: Array<{
             __typename?: 'ComponentCoreButton'
             id: string
-            text?: string | null
-            url?: string | null
+            text: string
+            url: string
           } | null> | null
         }
       | {
           __typename: 'ComponentModulesImage'
-          alt_text?: string | null
+          alt_text: string
           caption?: string | null
           id: string
           image: {
@@ -12723,8 +12020,8 @@ export type StoryFragmentFragment = {
       buttons?: Array<{
         __typename?: 'ComponentCoreButton'
         id: string
-        text?: string | null
-        url?: string | null
+        text: string
+        url: string
       } | null> | null
     } | null
     parent_story?: {
@@ -12742,7 +12039,7 @@ export type StoryFragmentFragment = {
             | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
-                alt_text?: string | null
+                alt_text: string
                 caption?: string | null
                 id: string
                 image: {
@@ -12854,7 +12151,7 @@ export type StoryFragmentFragment = {
             | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
-                alt_text?: string | null
+                alt_text: string
                 caption?: string | null
                 id: string
                 image: {
@@ -13025,8 +12322,8 @@ export type StoryMetaFragmentFragment = {
       buttons?: Array<{
         __typename?: 'ComponentCoreButton'
         id: string
-        text?: string | null
-        url?: string | null
+        text: string
+        url: string
       } | null> | null
     } | null
     parent_story?: {
@@ -13044,7 +12341,7 @@ export type StoryMetaFragmentFragment = {
             | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
-                alt_text?: string | null
+                alt_text: string
                 caption?: string | null
                 id: string
                 image: {
@@ -13156,7 +12453,7 @@ export type StoryMetaFragmentFragment = {
             | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
-                alt_text?: string | null
+                alt_text: string
                 caption?: string | null
                 id: string
                 image: {
@@ -13319,7 +12616,7 @@ export type LocalizedStoryMetaFragmentFragment = {
             | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
-                alt_text?: string | null
+                alt_text: string
                 caption?: string | null
                 id: string
                 image: {
@@ -13431,7 +12728,7 @@ export type LocalizedStoryMetaFragmentFragment = {
             | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
-                alt_text?: string | null
+                alt_text: string
                 caption?: string | null
                 id: string
                 image: {
@@ -13619,8 +12916,8 @@ export type LocalizedStoryMetaFragmentFragment = {
             buttons?: Array<{
               __typename?: 'ComponentCoreButton'
               id: string
-              text?: string | null
-              url?: string | null
+              text: string
+              url: string
             } | null> | null
           } | null
           parent_story?: {
@@ -13638,7 +12935,7 @@ export type LocalizedStoryMetaFragmentFragment = {
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
-                      alt_text?: string | null
+                      alt_text: string
                       caption?: string | null
                       id: string
                       image: {
@@ -13750,7 +13047,7 @@ export type LocalizedStoryMetaFragmentFragment = {
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
-                      alt_text?: string | null
+                      alt_text: string
                       caption?: string | null
                       id: string
                       image: {
@@ -13856,8 +13153,8 @@ export type LocalizedStoryMetaFragmentFragment = {
       buttons?: Array<{
         __typename?: 'ComponentCoreButton'
         id: string
-        text?: string | null
-        url?: string | null
+        text: string
+        url: string
       } | null> | null
     } | null
   } | null
@@ -13866,17 +13163,16 @@ export type LocalizedStoryMetaFragmentFragment = {
 export type ComponentCoreButtonFragmentFragment = {
   __typename?: 'ComponentCoreButton'
   id: string
-  text?: string | null
-  url?: string | null
+  text: string
+  url: string
 }
 
-export type ComponentCoreCarouselItemFragmentFragment = {
-  __typename?: 'ComponentCoreCarouselItem'
+export type ComponentCoreCarouselImageFragmentFragment = {
+  __typename?: 'ComponentCoreCarouselImage'
   id: string
+  alt_text: string
   description?: string | null
-  name?: string | null
-  type?: Enum_Componentcorecarouselitem_Type | null
-  picture?: {
+  image: {
     __typename?: 'UploadFileEntityResponse'
     data?: {
       __typename?: 'UploadFileEntity'
@@ -13901,7 +13197,7 @@ export type ComponentCoreCarouselItemFragmentFragment = {
         width?: number | null
       } | null
     } | null
-  } | null
+  }
   triply_record?: {
     __typename?: 'TriplyRecordEntityResponse'
     data?: {
@@ -13949,7 +13245,7 @@ export type ComponentCoreGridFeaturedFieldsFragmentFragment = {
   __typename?: 'ComponentCoreGridFeaturedFields'
   id: string
   subtitle?: string | null
-  title?: string | null
+  title: string
   story?: {
     __typename?: 'StoryEntityResponse'
     data?: {
@@ -14091,26 +13387,23 @@ export type ComponentModulesButtonsModuleFragmentFragment = {
   buttons?: Array<{
     __typename?: 'ComponentCoreButton'
     id: string
-    text?: string | null
-    url?: string | null
+    text: string
+    url: string
   } | null> | null
 }
 
 export type ComponentModulesCarouselFragmentFragment = {
   __typename: 'ComponentModulesCarousel'
   id: string
-  buttonText?: string | null
-  buttonUrl?: string | null
   description?: string | null
-  title?: string | null
-  type?: Enum_Componentmodulescarousel_Type | null
-  items?: Array<{
-    __typename?: 'ComponentCoreCarouselItem'
+  title: string
+  variant?: Enum_Componentmodulescarousel_Variant | null
+  images: Array<{
+    __typename?: 'ComponentCoreCarouselImage'
     id: string
+    alt_text: string
     description?: string | null
-    name?: string | null
-    type?: Enum_Componentcorecarouselitem_Type | null
-    picture?: {
+    image: {
       __typename?: 'UploadFileEntityResponse'
       data?: {
         __typename?: 'UploadFileEntity'
@@ -14135,7 +13428,7 @@ export type ComponentModulesCarouselFragmentFragment = {
           width?: number | null
         } | null
       } | null
-    } | null
+    }
     triply_record?: {
       __typename?: 'TriplyRecordEntityResponse'
       data?: {
@@ -14156,7 +13449,13 @@ export type ComponentModulesCarouselFragmentFragment = {
         attributes?: { __typename?: 'Story'; slug: string } | null
       } | null
     } | null
-  } | null> | null
+  } | null>
+  explore_collection_button?: {
+    __typename?: 'ComponentCoreButton'
+    id: string
+    text: string
+    url: string
+  } | null
 }
 
 export type ComponentModulesImageCarouselFragmentFragment = {
@@ -14193,7 +13492,7 @@ export type ComponentModulesImageCarouselFragmentFragment = {
 
 export type ComponentModulesImageFragmentFragment = {
   __typename: 'ComponentModulesImage'
-  alt_text?: string | null
+  alt_text: string
   caption?: string | null
   id: string
   image: {
@@ -14303,8 +13602,8 @@ export type ComponentModulesGridModuleFragmentFragment = {
   buttons?: Array<{
     __typename?: 'ComponentCoreButton'
     id: string
-    text?: string | null
-    url?: string | null
+    text: string
+    url: string
   } | null> | null
   featuredFields?: Array<{
     __typename?: 'ComponentCoreFeaturedFields'
@@ -14316,7 +13615,7 @@ export type ComponentModulesGridModuleFragmentFragment = {
     __typename?: 'ComponentCoreGridFeaturedFields'
     id: string
     subtitle?: string | null
-    title?: string | null
+    title: string
     story?: {
       __typename?: 'StoryEntityResponse'
       data?: {
@@ -14586,13 +13885,13 @@ export type ThemeQuery = {
                     buttons?: Array<{
                       __typename?: 'ComponentCoreButton'
                       id: string
-                      text?: string | null
-                      url?: string | null
+                      text: string
+                      url: string
                     } | null> | null
                   }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text?: string | null
+                    alt_text: string
                     caption?: string | null
                     id: string
                     image: {
@@ -14754,8 +14053,8 @@ export type ThemeQuery = {
                 buttons?: Array<{
                   __typename?: 'ComponentCoreButton'
                   id: string
-                  text?: string | null
-                  url?: string | null
+                  text: string
+                  url: string
                 } | null> | null
               } | null
               parent_story?: {
@@ -14773,7 +14072,7 @@ export type ThemeQuery = {
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
-                          alt_text?: string | null
+                          alt_text: string
                           caption?: string | null
                           id: string
                           image: {
@@ -14885,7 +14184,7 @@ export type ThemeQuery = {
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
-                          alt_text?: string | null
+                          alt_text: string
                           caption?: string | null
                           id: string
                           image: {
@@ -15122,13 +14421,13 @@ export type ThemesQuery = {
                     buttons?: Array<{
                       __typename?: 'ComponentCoreButton'
                       id: string
-                      text?: string | null
-                      url?: string | null
+                      text: string
+                      url: string
                     } | null> | null
                   }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text?: string | null
+                    alt_text: string
                     caption?: string | null
                     id: string
                     image: {
@@ -15290,8 +14589,8 @@ export type ThemesQuery = {
                 buttons?: Array<{
                   __typename?: 'ComponentCoreButton'
                   id: string
-                  text?: string | null
-                  url?: string | null
+                  text: string
+                  url: string
                 } | null> | null
               } | null
               parent_story?: {
@@ -15309,7 +14608,7 @@ export type ThemesQuery = {
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
-                          alt_text?: string | null
+                          alt_text: string
                           caption?: string | null
                           id: string
                           image: {
@@ -15421,7 +14720,7 @@ export type ThemesQuery = {
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
-                          alt_text?: string | null
+                          alt_text: string
                           caption?: string | null
                           id: string
                           image: {
@@ -15666,13 +14965,13 @@ export type StoriesRelatedToThemeQuery = {
                     buttons?: Array<{
                       __typename?: 'ComponentCoreButton'
                       id: string
-                      text?: string | null
-                      url?: string | null
+                      text: string
+                      url: string
                     } | null> | null
                   }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text?: string | null
+                    alt_text: string
                     caption?: string | null
                     id: string
                     image: {
@@ -15834,8 +15133,8 @@ export type StoriesRelatedToThemeQuery = {
                 buttons?: Array<{
                   __typename?: 'ComponentCoreButton'
                   id: string
-                  text?: string | null
-                  url?: string | null
+                  text: string
+                  url: string
                 } | null> | null
               } | null
               parent_story?: {
@@ -15853,7 +15152,7 @@ export type StoriesRelatedToThemeQuery = {
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
-                          alt_text?: string | null
+                          alt_text: string
                           caption?: string | null
                           id: string
                           image: {
@@ -15965,7 +15264,7 @@ export type StoriesRelatedToThemeQuery = {
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
-                          alt_text?: string | null
+                          alt_text: string
                           caption?: string | null
                           id: string
                           image: {
@@ -16190,13 +15489,13 @@ export type ThemeFragmentFragment = {
                 buttons?: Array<{
                   __typename?: 'ComponentCoreButton'
                   id: string
-                  text?: string | null
-                  url?: string | null
+                  text: string
+                  url: string
                 } | null> | null
               }
             | {
                 __typename: 'ComponentModulesImage'
-                alt_text?: string | null
+                alt_text: string
                 caption?: string | null
                 id: string
                 image: {
@@ -16358,8 +15657,8 @@ export type ThemeFragmentFragment = {
             buttons?: Array<{
               __typename?: 'ComponentCoreButton'
               id: string
-              text?: string | null
-              url?: string | null
+              text: string
+              url: string
             } | null> | null
           } | null
           parent_story?: {
@@ -16377,7 +15676,7 @@ export type ThemeFragmentFragment = {
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
-                      alt_text?: string | null
+                      alt_text: string
                       caption?: string | null
                       id: string
                       image: {
@@ -16489,7 +15788,7 @@ export type ThemeFragmentFragment = {
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
-                      alt_text?: string | null
+                      alt_text: string
                       caption?: string | null
                       id: string
                       image: {
@@ -16712,13 +16011,13 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                 buttons?: Array<{
                   __typename?: 'ComponentCoreButton'
                   id: string
-                  text?: string | null
-                  url?: string | null
+                  text: string
+                  url: string
                 } | null> | null
               }
             | {
                 __typename: 'ComponentModulesImage'
-                alt_text?: string | null
+                alt_text: string
                 caption?: string | null
                 id: string
                 image: {
@@ -16880,8 +16179,8 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
             buttons?: Array<{
               __typename?: 'ComponentCoreButton'
               id: string
-              text?: string | null
-              url?: string | null
+              text: string
+              url: string
             } | null> | null
           } | null
           parent_story?: {
@@ -16899,7 +16198,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
-                      alt_text?: string | null
+                      alt_text: string
                       caption?: string | null
                       id: string
                       image: {
@@ -17011,7 +16310,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
-                      alt_text?: string | null
+                      alt_text: string
                       caption?: string | null
                       id: string
                       image: {
@@ -17217,13 +16516,13 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                 buttons?: Array<{
                   __typename?: 'ComponentCoreButton'
                   id: string
-                  text?: string | null
-                  url?: string | null
+                  text: string
+                  url: string
                 } | null> | null
               }
             | {
                 __typename: 'ComponentModulesImage'
-                alt_text?: string | null
+                alt_text: string
                 caption?: string | null
                 id: string
                 image: {
@@ -17385,8 +16684,8 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
             buttons?: Array<{
               __typename?: 'ComponentCoreButton'
               id: string
-              text?: string | null
-              url?: string | null
+              text: string
+              url: string
             } | null> | null
           } | null
           parent_story?: {
@@ -17404,7 +16703,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
-                      alt_text?: string | null
+                      alt_text: string
                       caption?: string | null
                       id: string
                       image: {
@@ -17516,7 +16815,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
-                      alt_text?: string | null
+                      alt_text: string
                       caption?: string | null
                       id: string
                       image: {
@@ -17759,13 +17058,13 @@ export type TriplyRecordQuery = {
                     buttons?: Array<{
                       __typename?: 'ComponentCoreButton'
                       id: string
-                      text?: string | null
-                      url?: string | null
+                      text: string
+                      url: string
                     } | null> | null
                   }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text?: string | null
+                    alt_text: string
                     caption?: string | null
                     id: string
                     image: {
@@ -17927,8 +17226,8 @@ export type TriplyRecordQuery = {
                 buttons?: Array<{
                   __typename?: 'ComponentCoreButton'
                   id: string
-                  text?: string | null
-                  url?: string | null
+                  text: string
+                  url: string
                 } | null> | null
               } | null
               parent_story?: {
@@ -17946,7 +17245,7 @@ export type TriplyRecordQuery = {
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
-                          alt_text?: string | null
+                          alt_text: string
                           caption?: string | null
                           id: string
                           image: {
@@ -18058,7 +17357,7 @@ export type TriplyRecordQuery = {
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
-                          alt_text?: string | null
+                          alt_text: string
                           caption?: string | null
                           id: string
                           image: {
@@ -18292,13 +17591,13 @@ export type TriplyRecordsQuery = {
                     buttons?: Array<{
                       __typename?: 'ComponentCoreButton'
                       id: string
-                      text?: string | null
-                      url?: string | null
+                      text: string
+                      url: string
                     } | null> | null
                   }
                 | {
                     __typename: 'ComponentModulesImage'
-                    alt_text?: string | null
+                    alt_text: string
                     caption?: string | null
                     id: string
                     image: {
@@ -18460,8 +17759,8 @@ export type TriplyRecordsQuery = {
                 buttons?: Array<{
                   __typename?: 'ComponentCoreButton'
                   id: string
-                  text?: string | null
-                  url?: string | null
+                  text: string
+                  url: string
                 } | null> | null
               } | null
               parent_story?: {
@@ -18479,7 +17778,7 @@ export type TriplyRecordsQuery = {
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
-                          alt_text?: string | null
+                          alt_text: string
                           caption?: string | null
                           id: string
                           image: {
@@ -18591,7 +17890,7 @@ export type TriplyRecordsQuery = {
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
-                          alt_text?: string | null
+                          alt_text: string
                           caption?: string | null
                           id: string
                           image: {
@@ -18824,13 +18123,13 @@ export type TriplyRecordFragmentFragment = {
                 buttons?: Array<{
                   __typename?: 'ComponentCoreButton'
                   id: string
-                  text?: string | null
-                  url?: string | null
+                  text: string
+                  url: string
                 } | null> | null
               }
             | {
                 __typename: 'ComponentModulesImage'
-                alt_text?: string | null
+                alt_text: string
                 caption?: string | null
                 id: string
                 image: {
@@ -18992,8 +18291,8 @@ export type TriplyRecordFragmentFragment = {
             buttons?: Array<{
               __typename?: 'ComponentCoreButton'
               id: string
-              text?: string | null
-              url?: string | null
+              text: string
+              url: string
             } | null> | null
           } | null
           parent_story?: {
@@ -19011,7 +18310,7 @@ export type TriplyRecordFragmentFragment = {
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
-                      alt_text?: string | null
+                      alt_text: string
                       caption?: string | null
                       id: string
                       image: {
@@ -19123,7 +18422,7 @@ export type TriplyRecordFragmentFragment = {
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
-                      alt_text?: string | null
+                      alt_text: string
                       caption?: string | null
                       id: string
                       image: {
@@ -19602,47 +18901,6 @@ export const ComponentModulesPullquoteFragmentFragmentDoc = gql`
     text
   }
 `
-export const ComponentCoreCarouselItemFragmentFragmentDoc = gql`
-  fragment ComponentCoreCarouselItemFragment on ComponentCoreCarouselItem {
-    id
-    description
-    name
-    picture {
-      ...UploadFileEntityResponseFragment
-    }
-    type
-    triply_record {
-      data {
-        ...BaseTriplyRecordFragment
-      }
-    }
-    story {
-      data {
-        id
-        attributes {
-          slug
-        }
-      }
-    }
-  }
-  ${UploadFileEntityResponseFragmentFragmentDoc}
-  ${BaseTriplyRecordFragmentFragmentDoc}
-`
-export const ComponentModulesCarouselFragmentFragmentDoc = gql`
-  fragment ComponentModulesCarouselFragment on ComponentModulesCarousel {
-    id
-    buttonText
-    buttonUrl
-    description
-    __typename
-    items {
-      ...ComponentCoreCarouselItemFragment
-    }
-    title
-    type
-  }
-  ${ComponentCoreCarouselItemFragmentFragmentDoc}
-`
 export const ComponentModulesSubtitleFragmentFragmentDoc = gql`
   fragment ComponentModulesSubtitleFragment on ComponentModulesSubtitle {
     id
@@ -19717,9 +18975,6 @@ export const HomepageFragmentFragmentDoc = gql`
       ... on ComponentModulesPullquote {
         ...ComponentModulesPullquoteFragment
       }
-      ... on ComponentModulesCarousel {
-        ...ComponentModulesCarouselFragment
-      }
       ... on ComponentModulesSubtitle {
         ...ComponentModulesSubtitleFragment
       }
@@ -19741,7 +18996,6 @@ export const HomepageFragmentFragmentDoc = gql`
   ${ComponentModulesImageFragmentFragmentDoc}
   ${ComponentModulesGridModuleFragmentFragmentDoc}
   ${ComponentModulesPullquoteFragmentFragmentDoc}
-  ${ComponentModulesCarouselFragmentFragmentDoc}
   ${ComponentModulesSubtitleFragmentFragmentDoc}
   ${ComponentModulesTitleModuleFragmentFragmentDoc}
   ${ComponentModulesImageCarouselFragmentFragmentDoc}
@@ -19760,9 +19014,6 @@ export const LandingpageFragmentFragmentDoc = gql`
     components {
       ... on ComponentModulesTextModule {
         ...ComponentModulesTextModuleFragment
-      }
-      ... on ComponentModulesCarousel {
-        ...ComponentModulesCarouselFragment
       }
       ... on ComponentModulesGridModule {
         ...ComponentModulesGridModuleFragment
@@ -19791,7 +19042,6 @@ export const LandingpageFragmentFragmentDoc = gql`
     }
   }
   ${ComponentModulesTextModuleFragmentFragmentDoc}
-  ${ComponentModulesCarouselFragmentFragmentDoc}
   ${ComponentModulesGridModuleFragmentFragmentDoc}
   ${ComponentModulesSubtitleFragmentFragmentDoc}
   ${ComponentModulesTitleModuleFragmentFragmentDoc}
@@ -20384,6 +19634,48 @@ export const ComponentCoreTimeframeFragmentFragmentDoc = gql`
     yearEnd
     yearStart
   }
+`
+export const ComponentCoreCarouselImageFragmentFragmentDoc = gql`
+  fragment ComponentCoreCarouselImageFragment on ComponentCoreCarouselImage {
+    id
+    alt_text
+    description
+    image {
+      ...UploadFileEntityResponseFragment
+    }
+    triply_record {
+      data {
+        ...BaseTriplyRecordFragment
+      }
+    }
+    story {
+      data {
+        id
+        attributes {
+          slug
+        }
+      }
+    }
+  }
+  ${UploadFileEntityResponseFragmentFragmentDoc}
+  ${BaseTriplyRecordFragmentFragmentDoc}
+`
+export const ComponentModulesCarouselFragmentFragmentDoc = gql`
+  fragment ComponentModulesCarouselFragment on ComponentModulesCarousel {
+    id
+    description
+    __typename
+    title
+    variant
+    images {
+      ...ComponentCoreCarouselImageFragment
+    }
+    explore_collection_button {
+      ...ComponentCoreButtonFragment
+    }
+  }
+  ${ComponentCoreCarouselImageFragmentFragmentDoc}
+  ${ComponentCoreButtonFragmentFragmentDoc}
 `
 export const PaginationFragmentFragmentDoc = gql`
   fragment PaginationFragment on Pagination {

@@ -1,37 +1,37 @@
 {
-  "collectionName": "components_modules_carousels",
+  "collectionName": "components_modules_carousel",
   "info": {
-    "displayName": "Carousel module",
+    "displayName": "Carousel",
     "description": ""
   },
   "options": {},
   "attributes": {
-    "items": {
-      "displayName": "CarouselItem",
-      "type": "component",
-      "repeatable": true,
-      "component": "core.carousel-item"
-    },
     "title": {
-      "type": "string"
-    },
-    "buttonText": {
-      "type": "string"
-    },
-    "buttonUrl": {
-      "type": "text"
-    },
-    "type": {
-      "type": "enumeration",
-      "enum": [
-        "Makers",
-        "Highlights",
-        "Combined",
-        "Themes"
-      ]
+      "type": "string",
+      "required": true
     },
     "description": {
       "type": "text"
+    },
+    "images": {
+      "type": "component",
+      "repeatable": true,
+      "component": "core.carousel-image",
+      "min": 1,
+      "required": true
+    },
+    "explore_collection_button": {
+      "type": "component",
+      "repeatable": false,
+      "component": "core.button"
+    },
+    "variant": {
+      "type": "enumeration",
+      "enum": [
+        "two-up",
+        "three-up",
+        "four-up"
+      ]
     }
   }
 }
