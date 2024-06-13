@@ -6,6 +6,7 @@ import {
 } from '@/features/ui/components/thumbnail-carousel/ThumbnailCarousel'
 import { useParams } from 'next/navigation'
 import { useRecordDetailQuery } from '../../hooks/useRecordDetailQuery'
+import ErrorBox from '@/features/shared/components/Error/ErrorBox'
 
 export const RecordHeader = () => {
   const params = useParams()
@@ -17,8 +18,6 @@ export const RecordHeader = () => {
     id,
     options: { refetchOnWindowFocus: false, suspense: true },
   })
-
-  console.log(record)
 
   return (
     <div className="flex flex-col gap-4">
@@ -40,7 +39,7 @@ export const RecordHeader = () => {
           ))}
         </ThumbnailCarousel>
       ) : (
-        <p>fooo</p>
+        <ErrorBox />
       )}
     </div>
   )
