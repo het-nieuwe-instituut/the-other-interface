@@ -36,7 +36,7 @@ export const MuxAudioPlayer: React.FC<MuxAudioPlayerProps> = ({
         />
       </div>
       {caption && (
-        <p className={`${cn(TypographyVariants({ socialLarge: 'sm' }))} pt-[16px]`}>{caption}</p>
+        <p className={`${cn(TypographyVariants({ socialLarge: 'sm' }))} pt-4`}>{caption}</p>
       )}
     </div>
   )
