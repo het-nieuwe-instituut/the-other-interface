@@ -24,6 +24,6 @@ export class ComponentModulesCarousel {
   @Field(() => Enum_Componentmodulescarousel_Variant)
   public variant: Enum_Componentmodulescarousel_Variant
 
-  @Field(() => ComponentCoreButton, { nullable: false })
+  @Field(() => ComponentCoreButton, { nullable: true })
   public explore_collection_button?: ComponentCoreButton
 }
