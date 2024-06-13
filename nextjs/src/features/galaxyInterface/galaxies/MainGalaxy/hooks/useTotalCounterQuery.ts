@@ -6,13 +6,16 @@ import { useSelector } from 'react-redux'
 import { State } from '@/features/shared/configs/store'
 import { useLocale } from '@/features/shared/hooks/useLocale'
 
-export function useTotalCounterQuery() {
+export function useTotalCounterQuery(
+  selectedFilterSuggestions: Parameters<typeof api.totalCounter>[0]['selectedFilterSuggestions']
+) {
   const api = initApiClientService()
   const locale = useLocale()
   const { searchCategory } = useSelector((state: State) => state.shared)
 
   const queryFn = async () => {
     const data = await api.totalCounter({
+      selectedFilterSuggestions: selectedFilterSuggestions,
       locale,
     })
     return sumTotalCounts(data, searchCategory)

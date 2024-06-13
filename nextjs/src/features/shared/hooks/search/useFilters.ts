@@ -1,9 +1,11 @@
 import { decodeFilters, encodeFilters } from '@/features/shared/helpers/searchHelpers'
 import { sharedActions } from '@/features/shared/stores/shared.store'
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { State } from '../../configs/store'
 import { useZoom2Params } from '../useZoom2Params'
+import { useSearchParams } from 'next/navigation'
+import { useLocale } from '../useLocale'
 
 // TODO: Remove when we connect real query
 export interface Filter {
@@ -19,8 +21,7 @@ interface UseFiltersProps {
   onRemoveFilter?: () => void
 }
 
-export const useFilters = ({ onSelectFilter, onRemoveFilter }: UseFiltersProps = {}) => {
-  const { filters } = useZoom2Params()
+export const useFilterActions = ({ onSelectFilter, onRemoveFilter }: UseFiltersProps = {}) => {
   const selectedFilters = useSelector((state: State) => state.shared.selectedFilters)
   const dispatch = useDispatch()
 
@@ -56,11 +57,34 @@ export const useFilters = ({ onSelectFilter, onRemoveFilter }: UseFiltersProps =
   }, [dispatch])
 
   return {
-    selectedFilters,
     selectFilter,
     clearFilters,
-    encodedFilters: encodeFilters(selectedFilters),
-    decodedFilters: decodeFilters(filters),
     removeFilter,
+  }
+}
+
+export const useSelectedFilters = () => {
+  const selectedFilters = useSelector((state: State) => state.shared.selectedFilters)
+  return selectedFilters
+}
+
+export const useDecodedSearchFilters = () => {
+  const searchParams = useSearchParams()
+
+  const { filters } = useMemo(() => {
+    return {
+      filters: searchParams?.get('filters'),
+    }
+  }, [searchParams])
+  return {
+    decodedFilters: decodeFilters(filters),
+  }
+}
+
+export const useEncodedSearchFilters = () => {
+  const selectedFilters = useSelector((state: State) => state.shared.selectedFilters)
+
+  return {
+    encodedFilters: encodeFilters(selectedFilters),
   }
 }

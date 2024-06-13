@@ -1,5 +1,18 @@
-query Zoom2Archives($page: Int!, $pageSize: Int!, $text: String, $locale: Locale!) {
-  zoomLevel2(entityName: Archives, page: $page, pageSize: $pageSize, text: $text, locale: $locale) {
+query Zoom2Archives(
+  $page: Int!
+  $pageSize: Int!
+  $text: String
+  $locale: Locale!
+  $selectedFilterSuggestions: [SelectedFilterSuggestion!]
+) {
+  zoomLevel2(
+    entityName: Archives
+    page: $page
+    pageSize: $pageSize
+    text: $text
+    locale: $locale
+    selectedFilterSuggestions: $selectedFilterSuggestions
+  ) {
     page
     nodes {
       title

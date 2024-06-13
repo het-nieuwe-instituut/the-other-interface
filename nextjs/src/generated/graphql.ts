@@ -2223,6 +2223,7 @@ export type Zoom2QueryVariables = Exact<{
   pageSize?: InputMaybe<Scalars['Int']>;
   text?: InputMaybe<Scalars['String']>;
   locale: Locale;
+  selectedFilterSuggestions?: InputMaybe<Array<SelectedFilterSuggestion> | SelectedFilterSuggestion>;
 }>;
 
 
@@ -2243,6 +2244,7 @@ export type Zoom2ArchivesQueryVariables = Exact<{
   pageSize: Scalars['Int'];
   text?: InputMaybe<Scalars['String']>;
   locale: Locale;
+  selectedFilterSuggestions?: InputMaybe<Array<SelectedFilterSuggestion> | SelectedFilterSuggestion>;
 }>;
 
 
@@ -2262,6 +2264,7 @@ export type Zoom2ObjectsQueryVariables = Exact<{
   pageSize: Scalars['Int'];
   text?: InputMaybe<Scalars['String']>;
   locale: Locale;
+  selectedFilterSuggestions?: InputMaybe<Array<SelectedFilterSuggestion> | SelectedFilterSuggestion>;
 }>;
 
 
@@ -2281,6 +2284,7 @@ export type Zoom2PeopleQueryVariables = Exact<{
   pageSize: Scalars['Int'];
   text?: InputMaybe<Scalars['String']>;
   locale: Locale;
+  selectedFilterSuggestions?: InputMaybe<Array<SelectedFilterSuggestion> | SelectedFilterSuggestion>;
 }>;
 
 
@@ -2300,6 +2304,7 @@ export type Zoom2PublicationsQueryVariables = Exact<{
   pageSize: Scalars['Int'];
   text?: InputMaybe<Scalars['String']>;
   locale: Locale;
+  selectedFilterSuggestions?: InputMaybe<Array<SelectedFilterSuggestion> | SelectedFilterSuggestion>;
 }>;
 
 
@@ -3603,13 +3608,14 @@ export const SearchBySelectedHighlightsDocument = gql`
 }
     `;
 export const Zoom2Document = gql`
-    query Zoom2($entityName: EntityNames!, $page: Int!, $pageSize: Int, $text: String, $locale: Locale!) {
+    query Zoom2($entityName: EntityNames!, $page: Int!, $pageSize: Int, $text: String, $locale: Locale!, $selectedFilterSuggestions: [SelectedFilterSuggestion!]) {
   zoomLevel2(
     entityName: $entityName
     page: $page
     pageSize: $pageSize
     text: $text
     locale: $locale
+    selectedFilterSuggestions: $selectedFilterSuggestions
   ) {
     page
     nodes {
@@ -3633,13 +3639,14 @@ export const Zoom2AmountDocument = gql`
 }
     `;
 export const Zoom2ArchivesDocument = gql`
-    query Zoom2Archives($page: Int!, $pageSize: Int!, $text: String, $locale: Locale!) {
+    query Zoom2Archives($page: Int!, $pageSize: Int!, $text: String, $locale: Locale!, $selectedFilterSuggestions: [SelectedFilterSuggestion!]) {
   zoomLevel2(
     entityName: Archives
     page: $page
     pageSize: $pageSize
     text: $text
     locale: $locale
+    selectedFilterSuggestions: $selectedFilterSuggestions
   ) {
     page
     nodes {
@@ -3663,13 +3670,14 @@ export const Zoom2ArchiveAmountDocument = gql`
 }
     `;
 export const Zoom2ObjectsDocument = gql`
-    query Zoom2Objects($page: Int!, $pageSize: Int!, $text: String, $locale: Locale!) {
+    query Zoom2Objects($page: Int!, $pageSize: Int!, $text: String, $locale: Locale!, $selectedFilterSuggestions: [SelectedFilterSuggestion!]) {
   zoomLevel2(
     entityName: Objects
     page: $page
     pageSize: $pageSize
     text: $text
     locale: $locale
+    selectedFilterSuggestions: $selectedFilterSuggestions
   ) {
     page
     nodes {
@@ -3693,13 +3701,14 @@ export const Zoom2ObjectsAmountDocument = gql`
 }
     `;
 export const Zoom2PeopleDocument = gql`
-    query Zoom2People($page: Int!, $pageSize: Int!, $text: String, $locale: Locale!) {
+    query Zoom2People($page: Int!, $pageSize: Int!, $text: String, $locale: Locale!, $selectedFilterSuggestions: [SelectedFilterSuggestion!]) {
   zoomLevel2(
     entityName: People
     page: $page
     pageSize: $pageSize
     text: $text
     locale: $locale
+    selectedFilterSuggestions: $selectedFilterSuggestions
   ) {
     page
     nodes {
@@ -3723,13 +3732,14 @@ export const Zoom2PeopleAmountDocument = gql`
 }
     `;
 export const Zoom2PublicationsDocument = gql`
-    query Zoom2Publications($page: Int!, $pageSize: Int!, $text: String, $locale: Locale!) {
+    query Zoom2Publications($page: Int!, $pageSize: Int!, $text: String, $locale: Locale!, $selectedFilterSuggestions: [SelectedFilterSuggestion!]) {
   zoomLevel2(
     entityName: Publications
     page: $page
     pageSize: $pageSize
     text: $text
     locale: $locale
+    selectedFilterSuggestions: $selectedFilterSuggestions
   ) {
     page
     nodes {

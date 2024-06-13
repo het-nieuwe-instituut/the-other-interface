@@ -1,10 +1,17 @@
-query Zoom2Publications($page: Int!, $pageSize: Int!, $text: String, $locale: Locale!) {
+query Zoom2Publications(
+  $page: Int!
+  $pageSize: Int!
+  $text: String
+  $locale: Locale!
+  $selectedFilterSuggestions: [SelectedFilterSuggestion!]
+) {
   zoomLevel2(
     entityName: Publications
     page: $page
     pageSize: $pageSize
     text: $text
     locale: $locale
+    selectedFilterSuggestions: $selectedFilterSuggestions
   ) {
     page
     nodes {

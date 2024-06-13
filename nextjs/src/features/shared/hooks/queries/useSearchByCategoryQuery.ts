@@ -1,4 +1,6 @@
 'use client'
+import { COLLECTION_HILIGHT_ID } from '@/features/galaxyInterface/components/GalaxyWrapper/Suggestions/Suggestions'
+import { triplyCategoryToSearchCategory } from '@/features/galaxyInterface/galaxies/CategoryGalaxy/mappers/searchCategoryToTriplyMapper'
 import {
   CATEGORIES_TO_ENTITY_MAPPER,
   CloudCategory,
@@ -6,15 +8,13 @@ import {
   SearchCategory,
 } from '@/features/shared/utils/categories'
 import { useQuery } from '@tanstack/react-query'
-import { STORIES_PER_PAGE, ZOOM2_RECORDS_PER_PAGE } from '../../constants/mainConstants'
-import { mapCategoryToTriplyEnum } from '../../helpers/mapCategoryToTriplyEnum'
-import { storyToRecordMapper } from '../../helpers/extractStoryData'
-import initApiClientService from '../../utils/initApiClientService'
-import { useLocale } from '../useLocale'
-import { Filter, useFilters } from '../search/useFilters'
-import { COLLECTION_HILIGHT_ID } from '@/features/galaxyInterface/components/GalaxyWrapper/Suggestions/Suggestions'
-import { triplyCategoryToSearchCategory } from '@/features/galaxyInterface/galaxies/CategoryGalaxy/mappers/searchCategoryToTriplyMapper'
 import { StringFilterInput, TriplyRecordFiltersInput } from 'src/generated/graphql'
+import { STORIES_PER_PAGE, ZOOM2_RECORDS_PER_PAGE } from '../../constants/mainConstants'
+import { storyToRecordMapper } from '../../helpers/extractStoryData'
+import { mapCategoryToTriplyEnum } from '../../helpers/mapCategoryToTriplyEnum'
+import initApiClientService from '../../utils/initApiClientService'
+import { Filter, useDecodedSearchFilters, useSelectedFilters } from '../search/useFilters'
+import { useLocale } from '../useLocale'
 
 type SearchArgs = {
   category: SearchCategory
@@ -34,7 +34,12 @@ export function useSearchByCategoryQuery({
 }: SearchArgs) {
   const api = initApiClientService()
   const locale = useLocale()
-  const { decodedFilters } = useFilters()
+  const { decodedFilters } = useDecodedSearchFilters()
+  const selectedFilters = useSelectedFilters()
+  const selectedFiltersToInput = selectedFilters.map(filter => ({
+    key: filter.field,
+    value: filter.value,
+  }))
 
   // TODO: mix story search
   const queryFn = async () => {
@@ -147,11 +152,13 @@ export function useSearchByCategoryQuery({
             page,
             pageSize: ZOOM2_RECORDS_PER_PAGE,
             locale,
+            selectedFilterSuggestions: selectedFiltersToInput,
           }),
           api.Zoom2Amount({
             entityName: CATEGORIES_TO_ENTITY_MAPPER[category as CloudCategory],
             text: text || undefined,
             locale,
+            selectedFilterSuggestions: selectedFiltersToInput,
           }),
         ])
 

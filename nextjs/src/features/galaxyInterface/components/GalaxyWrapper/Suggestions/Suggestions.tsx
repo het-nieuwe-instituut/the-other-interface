@@ -2,7 +2,11 @@ import { InlineThemedSpinner } from '@/features/shared/components/Loading/Themed
 import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/SearchFilterBox'
 import { State } from '@/features/shared/configs/store'
 import { useFilterSuggestionsQuery } from '@/features/shared/hooks/queries/useFilterSuggestionsQuery'
-import { Filter, useFilters } from '@/features/shared/hooks/search/useFilters'
+import {
+  Filter,
+  useFilterActions,
+  useSelectedFilters,
+} from '@/features/shared/hooks/search/useFilters'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { SEARCH_CATEGORIES, SearchCategory } from '@/features/shared/utils/categories'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
@@ -20,27 +24,19 @@ export const CollectionHighlightsFilter = {
 
 type Props = {
   handleSelectFilter: (filters: Filter) => void
+  type: EnumTriplyrecordType
 }
 
-export const SuggestionsContainer: React.FC<Props> = ({ handleSelectFilter }) => {
+export const SuggestionsContainer: React.FC<Props> = ({ handleSelectFilter, type }) => {
   const { t: commonT } = useTypeSafeTranslation('common')
   const { searchValue, searchCategory } = useSelector((state: State) => state.shared)
-  const searchCategoryToTriplyEnum = useMemo(() => {
-    if (searchCategory) {
-      if (searchCategory === 'archives') return EnumTriplyrecordType.Archive
-      if (searchCategory === 'objects') return EnumTriplyrecordType.Object
-      if (searchCategory === 'people') return EnumTriplyrecordType.People
-      if (searchCategory === 'publications') return EnumTriplyrecordType.Publication
-      if (searchCategory === 'stories') return EnumTriplyrecordType.Media
-    }
-  }, [searchCategory])
 
   const {
     data: suggestions,
     isLoading,
     isError,
   } = useFilterSuggestionsQuery({
-    type: searchCategoryToTriplyEnum,
+    type,
     search: searchValue,
   })
 
@@ -85,7 +81,7 @@ export const Suggestions = ({
   >
   category: SearchCategory
 }) => {
-  const { selectedFilters } = useFilters()
+  const selectedFilters = useSelectedFilters()
   const { searchValue, searchCategory } = useSelector((state: State) => state.shared)
   const searchIsMatchShowingCollectionHighlight = CollectionHighlightsFilter.value
     .toLowerCase()

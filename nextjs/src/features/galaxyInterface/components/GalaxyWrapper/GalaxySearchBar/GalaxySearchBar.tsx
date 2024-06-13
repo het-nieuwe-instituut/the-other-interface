@@ -2,7 +2,11 @@ import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/Se
 import { State } from '@/features/shared/configs/store'
 import { FOOTER_Z_INDEX } from '@/features/shared/constants/mainConstants'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
-import { useFilters } from '@/features/shared/hooks/search/useFilters'
+import {
+  useEncodedSearchFilters,
+  useFilterActions,
+  useSelectedFilters,
+} from '@/features/shared/hooks/search/useFilters'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { useEnterKey } from '@/features/shared/hooks/ui/useEnterKey'
 import { useOutsideClick } from '@/features/shared/hooks/ui/useOutsideClick'
@@ -11,10 +15,14 @@ import { sharedActions } from '@/features/shared/stores/shared.store'
 import { cn } from '@/features/ui/utils/cn'
 import CloseIconSmall from '@/icons/close-icon-small.svg'
 import { useRouter } from 'next/navigation'
-import { CSSProperties, useCallback, useRef, useState } from 'react'
+import { CSSProperties, useCallback, useMemo, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { CategorySuggestions } from '../CategorySuggestions/CategorySuggestions'
-import { COLLECTION_HILIGHT_ID, SuggestionsContainer } from '../Suggestions/Suggestions'
+import {
+  COLLECTION_HILIGHT_ID,
+  Suggestions,
+  SuggestionsContainer,
+} from '../Suggestions/Suggestions'
 import { CategoryFilter } from './CategoryFilter/CategoryFilter'
 import { useSearchBarState, useSyncSearchInputToStore } from './GalaxySearchBar.hooks'
 import { SuggestionBar } from './SuggestionBar/SuggestionBar'
@@ -24,6 +32,7 @@ import { SearchButton } from './fragments/SearchButton'
 import SearchResults from './fragments/SearchResults'
 import TotalResults from './fragments/TotalResults'
 import { useSearchBarPosition } from './useSearchBarPosition'
+import { EnumTriplyrecordType } from 'src/generated/graphql'
 
 type Props = {
   total?: number
@@ -47,7 +56,9 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }
     debouncedTime: 500,
   })
   const { lang } = useZoom2Params()
-  const { selectedFilters, encodedFilters, removeFilter, selectFilter } = useFilters({
+  const { encodedFilters } = useEncodedSearchFilters()
+  const selectedFilters = useSelectedFilters()
+  const { removeFilter, selectFilter } = useFilterActions({
     onSelectFilter: focus,
     onRemoveFilter: focus,
   })
@@ -74,6 +85,16 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }
   const isCollectionHighlightsSelected: boolean = selectedFilters.some(
     filter => filter.id === COLLECTION_HILIGHT_ID
   )
+
+  const searchCategoryToTriplyEnum = useMemo(() => {
+    if (searchCategory) {
+      if (searchCategory === 'archives') return EnumTriplyrecordType.Archive
+      if (searchCategory === 'objects') return EnumTriplyrecordType.Object
+      if (searchCategory === 'people') return EnumTriplyrecordType.People
+      if (searchCategory === 'publications') return EnumTriplyrecordType.Publication
+      if (searchCategory === 'stories') return EnumTriplyrecordType.Media
+    }
+  }, [searchCategory])
 
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events
@@ -157,13 +178,26 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }
         <CategorySuggestions />
       </SuggestionBar>
 
-      {!isCollectionHighlightsSelected && (
+      {searchCategoryToTriplyEnum ? (
+        !isCollectionHighlightsSelected && (
+          <SuggestionBar
+            isOpen={isUserTyping && !isCategorySuggestionsOpen}
+            label={t('suggestions')}
+            offset={searchBarHeight}
+          >
+            <SuggestionsContainer
+              type={searchCategoryToTriplyEnum}
+              handleSelectFilter={selectFilter}
+            />
+          </SuggestionBar>
+        )
+      ) : (
         <SuggestionBar
           isOpen={isUserTyping && !isCategorySuggestionsOpen}
           label={t('suggestions')}
           offset={searchBarHeight}
         >
-          <SuggestionsContainer handleSelectFilter={selectFilter} />
+          <Suggestions suggestionsData={[]} handleSelectFilter={selectFilter} category={'all'} />
         </SuggestionBar>
       )}
     </div>

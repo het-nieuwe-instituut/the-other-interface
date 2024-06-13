@@ -4,6 +4,7 @@ query Zoom2(
   $pageSize: Int
   $text: String
   $locale: Locale!
+  $selectedFilterSuggestions: [SelectedFilterSuggestion!]
 ) {
   zoomLevel2(
     entityName: $entityName
@@ -11,6 +12,7 @@ query Zoom2(
     pageSize: $pageSize
     text: $text
     locale: $locale
+    selectedFilterSuggestions: $selectedFilterSuggestions
   ) {
     page
     nodes {

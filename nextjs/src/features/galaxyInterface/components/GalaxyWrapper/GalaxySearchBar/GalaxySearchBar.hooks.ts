@@ -1,4 +1,7 @@
-import { useFilters } from '@/features/shared/hooks/search/useFilters'
+import {
+  useDecodedSearchFilters,
+  useFilterActions,
+} from '@/features/shared/hooks/search/useFilters'
 import { useFocusOnElement } from '@/features/shared/hooks/useFocusOnElement'
 import { usePageCategory } from '@/features/shared/hooks/usePageCategory'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
@@ -73,11 +76,11 @@ export function useSearchBarState({
   const { search } = useZoom2Params()
   const { pageCategory } = usePageCategory()
   const { openSearch } = useOpenSearchModeOnInactiveSearch(filterInputRef, isNoActiveSearch)
-  const { clearFilters, decodedFilters } = useFilters({
+  const { decodedFilters } = useDecodedSearchFilters()
+  const { clearFilters } = useFilterActions({
     onSelectFilter: focus,
     onRemoveFilter: focus,
   })
-
   useCloseSearchOnPathnameChange()
 
   const resetSearchFilters = useCallback(() => {
