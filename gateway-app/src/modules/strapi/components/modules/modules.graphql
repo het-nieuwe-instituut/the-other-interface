@@ -93,7 +93,7 @@ fragment ComponentModulesGridModuleFragment on ComponentModulesGridModule {
     }
 }
 
-fragment ComponentModulesHighlightFramgment on ComponentModulesHighlight {
+fragment ComponentModulesHighlightFragment on ComponentModulesHighlight {
     id
     title
     subtitle

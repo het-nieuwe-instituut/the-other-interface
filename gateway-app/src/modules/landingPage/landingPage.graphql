@@ -1,84 +1,99 @@
-fragment LandingpageFragment on Landingpage {
-    Title
-    Description
-    slug
-    createdAt
-    updatedAt
-    publishedAt
-    locale
-    components {
-        ... on ComponentModulesTextModule {
-            ...ComponentModulesTextModuleFragment
-        }
-        ... on ComponentModulesGridModule {
-            ...ComponentModulesGridModuleFragment
-        }
-        ... on ComponentModulesSubtitle {
-            ...ComponentModulesSubtitleFragment
-        }
-        ... on ComponentModulesTitleModule {
-            ...ComponentModulesTitleModuleFragment
-        }
-        ... on ComponentModulesImageCarousel {
-            ...ComponentModulesImageCarouselFragment
-        }
-        ... on ComponentModulesImage {
-            ...ComponentModulesImageFragment
-        }
-        ... on ComponentModulesPullquote {
-            ...ComponentModulesPullquoteFragment
-        }
-        ... on ComponentModulesButtonsModule {
-            ...ComponentModulesButtonsModuleFragment
-        }
-        ... on Error {
-            ...ErrorFragment
-        }
-    }
+fragment LandingPageArchiveFragment on LandingPageArchive {
+  title
+  text
+  carousels {
+    ...ComponentModulesCarouselFragment
+  }
+  highlight {
+    ...ComponentModulesHighlightFragment
+  }
+  grid {
+    ...ComponentModulesGridModuleFragment
+  }
 }
 
-fragment LandingpageEntityFragment on LandingpageEntity {
-    id
-    attributes {
-        ...LandingpageFragment
-        localizations {
-            data {
-                id
-                attributes {
-                    ...LandingpageFragment
-                }
-            }
-        }
-    }
+fragment LandingPageObjectFragment on LandingPageObject {
+  title
+  text
+  carousels {
+    ...ComponentModulesCarouselFragment
+  }
+  highlight {
+    ...ComponentModulesHighlightFragment
+  }
+  grid {
+    ...ComponentModulesGridModuleFragment
+  }
 }
 
-query landingPage($id: ID, $locale: I18NLocaleCode) {
-    landingpage(id: $id, locale: $locale) {
-        data {
-            ...LandingpageEntityFragment
-        }
-    }
+fragment LandingPagePeopleFragment on LandingPagePeople {
+  title
+  text
+  carousels {
+    ...ComponentModulesCarouselFragment
+  }
+  highlight {
+    ...ComponentModulesHighlightFragment
+  }
+  grid {
+    ...ComponentModulesGridModuleFragment
+  }
 }
 
-query landingPages(
-    $filters: LandingpageFiltersInput
-    $pagination: PaginationArg = {}
-    $sort: [String] = []
-    $publicationState: PublicationState = LIVE
-    $locale: I18NLocaleCode
-) {
-    landingpages(
-        filters: $filters
-        pagination: $pagination
-        sort: $sort
-        publicationState: $publicationState
-        locale: $locale
-    ) {
-        data {
-            ...LandingpageEntityFragment
-        }
-        meta {
-            ...ResponseCollectionMetaFragment
-        }
+fragment LandingPagePublicationFragment on LandingPagePublication {
+  title
+  text
+  carousels {
+    ...ComponentModulesCarouselFragment
+  }
+  highlight {
+    ...ComponentModulesHighlightFragment
+  }
+  grid {
+    ...ComponentModulesGridModuleFragment
+  }
+}
+
+query landingPageArchive($locale: I18NLocaleCode) {
+  landingPageArchive(locale: $locale) {
+    data {
+      id
+      attributes {
+        ...LandingPageArchiveFragment
+      }
     }
+  }
+}
+
+query landingPageObject($locale: I18NLocaleCode) {
+  landingPageObject(locale: $locale) {
+    data {
+      id
+      attributes {
+        ...LandingPageObjectFragment
+      }
+    }
+  }
+}
+
+query landingPagePeople($locale: I18NLocaleCode) {
+  landingPagePeople(locale: $locale) {
+    data {
+      id
+      attributes {
+        ...LandingPagePeopleFragment
+      }
+    }
+  }
+}
+
+query landingPagePublication($locale: I18NLocaleCode) {
+  landingPagePublication(locale: $locale) {
+    data {
+      id
+      attributes {
+        ...LandingPagePublicationFragment
+      }
+    }
+  }
 }
