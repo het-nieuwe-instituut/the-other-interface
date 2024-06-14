@@ -2495,6 +2495,7 @@ export type HomepageFragmentFragment = {
       __typename?: 'ComponentCoreCarouselImage'
       id: string
       alt_text?: string | null
+      title: string
       description?: string | null
       image: {
         __typename?: 'UploadFileEntityResponse'
@@ -2667,6 +2668,7 @@ export type HomepageQuery = {
                   __typename?: 'ComponentCoreCarouselImage'
                   id: string
                   alt_text?: string | null
+                  title: string
                   description?: string | null
                   image: {
                     __typename?: 'UploadFileEntityResponse'
@@ -2809,6 +2811,7 @@ export type HomepageQuery = {
             __typename?: 'ComponentCoreCarouselImage'
             id: string
             alt_text?: string | null
+            title: string
             description?: string | null
             image: {
               __typename?: 'UploadFileEntityResponse'
@@ -13028,6 +13031,7 @@ export type ComponentCoreCarouselImageFragmentFragment = {
   __typename?: 'ComponentCoreCarouselImage'
   id: string
   alt_text?: string | null
+  title: string
   description?: string | null
   image: {
     __typename?: 'UploadFileEntityResponse'
@@ -13259,6 +13263,7 @@ export type ComponentModulesCarouselFragmentFragment = {
     __typename?: 'ComponentCoreCarouselImage'
     id: string
     alt_text?: string | null
+    title: string
     description?: string | null
     image: {
       __typename?: 'UploadFileEntityResponse'
@@ -18636,6 +18641,7 @@ export const ComponentCoreCarouselImageFragmentFragmentDoc = gql`
   fragment ComponentCoreCarouselImageFragment on ComponentCoreCarouselImage {
     id
     alt_text
+    title
     description
     image {
       ...UploadFileEntityResponseFragment

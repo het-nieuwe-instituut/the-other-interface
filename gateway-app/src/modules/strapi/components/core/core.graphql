@@ -7,6 +7,7 @@ fragment ComponentCoreButtonFragment on ComponentCoreButton {
 fragment ComponentCoreCarouselImageFragment on ComponentCoreCarouselImage {
   id
   alt_text
+  title
   description
   image {
     ...UploadFileEntityResponseFragment
