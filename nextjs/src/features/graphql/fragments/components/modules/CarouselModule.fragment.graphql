@@ -1,3 +1,7 @@
+#import '../core/baseStoryWithoutRelation.fragment.graphql'
+#import '../core/baseTriplyRecord.fragment.graphql'
+#import '../core/button.graphql'
+
 fragment carouselModuleFragment on ComponentModulesCarousel {
   id
   __typename
@@ -6,7 +10,7 @@ fragment carouselModuleFragment on ComponentModulesCarousel {
   explore_collection_button {
     ...ButtonFragment
   }
-  items {
+  images {
     id
     image {
       data {
@@ -16,6 +20,7 @@ fragment carouselModuleFragment on ComponentModulesCarousel {
       }
     }
     alt_text
+    title
     description
     triply_record {
       data {
@@ -24,7 +29,10 @@ fragment carouselModuleFragment on ComponentModulesCarousel {
     }
     story {
       data {
-        ...StoryWithoutRelationsFragment
+        id
+        attributes {
+          title
+        }
       }
     }
   }

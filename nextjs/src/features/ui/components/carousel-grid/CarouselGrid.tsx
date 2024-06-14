@@ -7,12 +7,17 @@ import { TypographyVariants } from '../typography/variants'
 import NavArrowLeft from './nav-arrow-left.svg'
 import NavArrowRight from './nav-arrow-right.svg'
 import { Subtitle, SubtitleProps } from '../subtitle/Subtitle'
+import React from 'react'
 
+type SpecificChildren<T> =
+  | React.ReactElement<T | null | undefined | string | Element>
+  | React.ReactNode
+  | (React.ReactElement<T | null | undefined | string | Element> | React.ReactNode)[]
 export interface CarouselGridProps {
   className?: string
-  children:
-    | React.ReactElement<CarouselGridCardWrapperProps | CarouselGridPaginationProps>[]
-    | React.ReactElement<CarouselGridCardWrapperProps | CarouselGridPaginationProps>
+  children: SpecificChildren<
+    CarouselGridCardWrapperProps | CarouselGridPaginationProps | null | undefined
+  >
 }
 
 export const CarouselGrid = ({ className, children }: CarouselGridProps) => {
@@ -26,7 +31,7 @@ export const CarouselGrid = ({ className, children }: CarouselGridProps) => {
 export interface CarouselGridCardWrapperProps {
   cols: 1 | 2 | 3 | 4
   className?: string
-  children: React.ReactElement<CarouselGridCardProps | null>[]
+  children: SpecificChildren<CarouselGridCardProps[] | null>
 }
 
 export const CarouselGridCardWrapper = ({
@@ -53,11 +58,11 @@ export const CarouselGridCardWrapper = ({
 }
 
 export interface CarouselGridCardProps {
-  title: string
-  description: string
-  image: string
+  title?: string
+  description?: string
+  image?: string
   className?: string
-  href: string
+  href?: string
   alt: string
 }
 export const CarouselGridCard = ({
@@ -68,68 +73,88 @@ export const CarouselGridCard = ({
   href,
   alt,
 }: CarouselGridCardProps) => {
+  if (href) {
+    return (
+      <NextLink href={href} className={cn(className, 'flex flex-col gap-4 group relative')}>
+        {renderContent()}
+      </NextLink>
+    )
+  }
+
   return (
-    <NextLink href={href} className={cn(className, 'flex flex-col gap-4 group relative')}>
-      <div className="h-[290px]">
-        <LightBoxNextImageByIcon src={image} fill alt={alt} className="object-cover" />
-      </div>
-      <div className="flex flex-col ">
-        <div>
-          <p
-            className={TypographyVariants({
-              socialLarge: 'xl',
-              className: cn(
-                'group-hover:text-white pb-1 inline-flex relative',
-                'before:z-[-1] before:absolute',
-                'group-hover:before:bottom-0  group-hover:before:left-0 group-hover:before:bg-black-100 group-hover:before:content-[""]',
-                'group-hover:before:ml-[-4px] group-hover:before:w-[calc(100%+8px)] group-hover:before:mb-[-4px] group-hover:before:h-[calc(100%+8px)]'
-              ),
-            })}
-          >
-            {title}
-          </p>
-        </div>
-        <p
-          className={TypographyVariants({
-            socialLarge: 'md',
-            className: cn(
-              'group-hover:text-white pb-1 inline-flex relative',
-              'before:z-[-1] before:absolute',
-              'group-hover:before:bottom-0  group-hover:before:left-0 group-hover:before:bg-black-100 group-hover:before:content-[""]',
-              'group-hover:before:ml-[-4px] group-hover:before:w-[calc(100%+8px)] group-hover:before:mb-[-4px] group-hover:before:h-[calc(100%+8px)]'
-            ),
-          })}
-        >
-          {description}
-        </p>
-      </div>
-    </NextLink>
+    <div className={cn(className, 'flex flex-col gap-4 group relative')}>{renderContent()}</div>
   )
+
+  function renderContent() {
+    return (
+      <>
+        <div className="h-[290px]">
+          {image && <LightBoxNextImageByIcon src={image} fill alt={alt} className="object-cover" />}
+        </div>
+        <div className="flex flex-col ">
+          {title && (
+            <div>
+              <p
+                className={TypographyVariants({
+                  socialLarge: 'xl',
+                  className: cn(
+                    'group-hover:text-white pb-1 inline-flex relative z-10',
+                    'after:absolute after:z-[-1]',
+                    'group-hover:after:bottom-0  group-hover:after:left-0 group-hover:after:bg-black-100 group-hover:after:content-[""]',
+                    'group-hover:after:ml-[-4px] group-hover:after:w-[calc(100%+8px)] group-hover:after:mb-[-4px] group-hover:after:h-[calc(100%+8px)]'
+                  ),
+                })}
+              >
+                {title}
+              </p>
+            </div>
+          )}
+          {description && (
+            <p
+              className={TypographyVariants({
+                socialLarge: 'md',
+                className: cn(
+                  'group-hover:text-white pb-1 inline-flex relative z-10',
+                  'after:absolute after:z-[-1]',
+                  'group-hover:after:bottom-0  group-hover:after:left-0 group-hover:after:bg-black-100 group-hover:after:content-[""]',
+                  'group-hover:after:ml-[-4px] group-hover:after:w-[calc(100%+8px)] group-hover:after:mb-[-4px] group-hover:after:h-[calc(100%+8px)]'
+                ),
+              })}
+            >
+              {description}
+            </p>
+          )}
+        </div>
+      </>
+    )
+  }
 }
 
 export interface CarouselGridFooterProps {
   children:
-    | React.ReactElement<CarouselGridPaginationProps | CarouselGridLinkProps>[]
-    | React.ReactElement<CarouselGridPaginationProps | CarouselGridLinkProps>
+    | SpecificChildren<CarouselGridPaginationProps | CarouselGridLinkProps>[]
+    | SpecificChildren<CarouselGridPaginationProps | CarouselGridLinkProps>
 }
 export const CarouselGridFooter = ({ children }: CarouselGridFooterProps) => {
-  return <div className="flex justify-between">{children}</div>
+  return <div className="flex items-end justify-between">{children}</div>
 }
 
 export interface CarouselGridPaginationProps {
+  className: string
   onNext?: () => void
   onPrevious?: () => void
   hideNext?: boolean
   hidePrevious?: boolean
 }
 export const CarouselGridPagination = ({
+  className,
   onNext,
   onPrevious,
   hideNext,
   hidePrevious,
 }: CarouselGridPaginationProps) => {
   return (
-    <div className="flex h-full w-[116.32px] items-center justify-center gap-2">
+    <div className={cn('flex h-full w-[116.32px] items-center justify-center gap-2', className)}>
       <button onClick={onPrevious}>
         <NavArrowLeft className={cn(!hideNext && 'invisible')} />
       </button>
