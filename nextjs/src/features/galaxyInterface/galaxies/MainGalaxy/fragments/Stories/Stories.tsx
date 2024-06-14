@@ -92,8 +92,8 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
         css={{
           animation: isNextStoriesEmpty ? 'none' : `${nextPageFadeIn} 300ms linear`,
           zIndex: 10,
-          opacity: 0.2,
-          filter: 'blur(6px)',
+          opacity: 0.3,
+          filter: 'blur(10px)',
           visibility: allImagesLoaded ? 'visible' : 'hidden',
         }}
       >
