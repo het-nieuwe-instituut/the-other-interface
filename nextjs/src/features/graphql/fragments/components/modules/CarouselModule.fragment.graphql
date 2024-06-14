@@ -30,9 +30,6 @@ fragment carouselModuleFragment on ComponentModulesCarousel {
     story {
       data {
         id
-        attributes {
-          title
-        }
       }
     }
   }

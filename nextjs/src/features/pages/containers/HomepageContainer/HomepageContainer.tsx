@@ -1,6 +1,6 @@
 'use client'
 
-import { HomepageCarouselGrid } from '@/features/editorial/components/HomepageCarouselGrid'
+import { GenericCarouselGridWithClientPagination } from '@/features/editorial/components/GenericCarouselGridWithClientPagination'
 import { PageHeader } from '@/features/editorial/components/PageHeader/PageHeader'
 import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
 import { MainGalaxy } from '@/features/galaxyInterface/galaxies/MainGalaxy/MainGalaxy'
@@ -37,14 +37,9 @@ export const HomepageContainer: React.FC<Props> = ({ homepage }) => {
 
                     <div className="flex w-full">
                       {editorialData?.carousel && (
-                        <>
-                          <div className="hidden w-full lg:block">
-                            <HomepageCarouselGrid carousel={editorialData.carousel} />
-                          </div>
-                          <div className="block w-full lg:hidden">
-                            <HomepageCarouselGrid cols={1} carousel={editorialData.carousel} />
-                          </div>
-                        </>
+                        <GenericCarouselGridWithClientPagination
+                          carousel={editorialData.carousel}
+                        />
                       )}
                     </div>
                   </>

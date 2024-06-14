@@ -1,26 +1,42 @@
 import ErrorBox from '@/features/shared/components/Error/ErrorBox'
+import { DeepPartial } from '@/features/shared/types/helpers'
 import {
   CarouselGrid,
-  CarouselGridTitle,
-  CarouselGridCardWrapper,
   CarouselGridCard,
+  CarouselGridCardWrapper,
   CarouselGridFooter,
   CarouselGridLink,
   CarouselGridPagination,
+  CarouselGridTitle,
 } from '@/features/ui/components/carousel-grid/CarouselGrid'
 import { cn } from '@/features/ui/utils/cn'
 import { useMemo, useState } from 'react'
-import { HomepageQuery, EnumComponentmodulescarouselVariant } from 'src/generated/graphql'
+import {
+  ComponentModulesCarousel,
+  EnumComponentmodulescarouselVariant,
+} from 'src/generated/graphql'
 
-type Carousel = NonNullable<
-  NonNullable<HomepageQuery['homepage']['data']['attributes']>['carousel']
->
-export const HomepageCarouselGrid = ({
+type CarouselGrid = DeepPartial<ComponentModulesCarousel>
+
+export const GenericCarouselGridWithClientPagination = ({
+  carousel,
+}: {
+  carousel: CarouselGrid
+}) => {
+  return (
+    <>
+      <Grid carousel={carousel} className="hidden lg:block" />
+      <Grid carousel={carousel} cols={1} className="hidden lg:block" />
+    </>
+  )
+}
+
+const Grid = ({
   carousel,
   cols: forcedCols,
   className,
 }: {
-  carousel: Carousel
+  carousel: CarouselGrid
   cols?: 1 | 2 | 3 | 4
   className?: string
 }) => {
@@ -56,6 +72,9 @@ export const HomepageCarouselGrid = ({
       {nodes && (
         <CarouselGridCardWrapper cols={cols}>
           {nodes.map(item => {
+            if (!item) {
+              return null
+            }
             return (
               <CarouselGridCard
                 key={item.id}
@@ -115,10 +134,10 @@ function getTriplyOrStoryHref({
   story,
   triply_record,
 }: {
-  story?: NonNullable<Carousel['images']>[number]['story']
-  triply_record?: NonNullable<Carousel['images']>[number]['triply_record']
+  story?: NonNullable<NonNullable<CarouselGrid['images']>[number]>['story']
+  triply_record?: NonNullable<NonNullable<CarouselGrid['images']>[number]>['triply_record']
 }) {
-  if (triply_record && triply_record.data) {
+  if (triply_record && triply_record.data?.attributes) {
     return `details/${triply_record.data.attributes.type}/${triply_record.data.attributes.recordId}`
   }
   if (story && story.data) {
