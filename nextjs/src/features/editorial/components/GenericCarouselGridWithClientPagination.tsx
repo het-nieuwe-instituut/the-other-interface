@@ -25,8 +25,12 @@ export const GenericCarouselGridWithClientPagination = ({
 }) => {
   return (
     <>
-      <Grid carousel={carousel} className="hidden lg:block" />
-      <Grid carousel={carousel} cols={1} className="hidden lg:block" />
+      <div className="hidden lg:block">
+        <Grid carousel={carousel} />
+      </div>
+      <div className="block lg:hidden">
+        <Grid carousel={carousel} cols={1} />
+      </div>
     </>
   )
 }
