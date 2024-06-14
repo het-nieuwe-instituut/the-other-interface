@@ -8,15 +8,27 @@ import {
   CarouselGridLink,
   CarouselGridPagination,
 } from '@/features/ui/components/carousel-grid/CarouselGrid'
+import { cn } from '@/features/ui/utils/cn'
 import { useMemo, useState } from 'react'
 import { HomepageQuery, EnumComponentmodulescarouselVariant } from 'src/generated/graphql'
 
 type Carousel = NonNullable<
   NonNullable<HomepageQuery['homepage']['data']['attributes']>['carousel']
 >
-export const HomepageCarouselGrid = ({ carousel }: { carousel: Carousel }) => {
+export const HomepageCarouselGrid = ({
+  carousel,
+  cols: forcedCols,
+  className,
+}: {
+  carousel: Carousel
+  cols?: 1 | 2 | 3 | 4
+  className?: string
+}) => {
   const items = carousel.images ?? []
   const cols: 1 | 2 | 3 | 4 = useMemo(() => {
+    if (forcedCols) {
+      return forcedCols
+    }
     if (carousel.variant === EnumComponentmodulescarouselVariant.FourUp) {
       return 4
     }
@@ -27,7 +39,7 @@ export const HomepageCarouselGrid = ({ carousel }: { carousel: Carousel }) => {
       return 2
     }
     return 4
-  }, [carousel.variant])
+  }, [carousel.variant, forcedCols])
 
   const lastPage = Math.ceil(items.length / cols) || 1
   const limitedData = items.slice(0, cols)
@@ -39,7 +51,7 @@ export const HomepageCarouselGrid = ({ carousel }: { carousel: Carousel }) => {
   }
 
   return (
-    <CarouselGrid className="w-full">
+    <CarouselGrid className={cn('w-full', className)}>
       {carousel.title ? <CarouselGridTitle>{carousel.title}</CarouselGridTitle> : undefined}
       {nodes && (
         <CarouselGridCardWrapper cols={cols}>

@@ -110,19 +110,23 @@ export const CarouselGridCard = ({
             </div>
           )}
           {description && (
-            <p
-              className={TypographyVariants({
-                socialLarge: 'md',
-                className: cn(
-                  'group-hover:text-white pb-1 inline-flex relative z-10',
-                  'after:absolute after:z-[-1]',
-                  'group-hover:after:bottom-0  group-hover:after:left-0 group-hover:after:bg-black-100 group-hover:after:content-[""]',
-                  'group-hover:after:ml-[-4px] group-hover:after:w-[calc(100%+8px)] group-hover:after:mb-[-4px] group-hover:after:h-[calc(100%+8px)]'
-                ),
-              })}
+            <div
+              className={cn(
+                'group-hover:text-white pb-1 inline-flex relative z-10',
+                'after:absolute after:z-[-1]',
+                'group-hover:after:bottom-0  group-hover:after:left-0 group-hover:after:bg-black-100 group-hover:after:content-[""]',
+                'group-hover:after:ml-[-4px] group-hover:after:w-[calc(100%+8px)] group-hover:after:mb-[-4px] group-hover:after:h-[calc(100%+8px)]'
+              )}
             >
-              {description}
-            </p>
+              <p
+                className={TypographyVariants({
+                  socialLarge: 'md',
+                  className: cn(' line-clamp-2'),
+                })}
+              >
+                {description}
+              </p>
+            </div>
           )}
         </div>
       </>
@@ -169,7 +173,7 @@ export interface CarouselGridLinkProps extends LinkProps {
   children: string
 }
 export const CarouselGridLink = (props: CarouselGridLinkProps) => {
-  return <NavLinkButton variant={'textSecondary'} {...props} />
+  return <NavLinkButton variant={'textPrimary'} {...props} />
 }
 
 export interface CarouselGridTitleProps extends SubtitleProps {}

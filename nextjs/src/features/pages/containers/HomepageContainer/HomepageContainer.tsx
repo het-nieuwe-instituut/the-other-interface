@@ -1,13 +1,10 @@
 'use client'
 
-import { EditorialPageWrapper } from '@/features/editorial/components/EditorialPageWrapper'
 import { HomepageCarouselGrid } from '@/features/editorial/components/HomepageCarouselGrid'
 import { PageHeader } from '@/features/editorial/components/PageHeader/PageHeader'
 import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
 import { MainGalaxy } from '@/features/galaxyInterface/galaxies/MainGalaxy/MainGalaxy'
-import { LayerWrapper } from '@/features/shared/components/Layers/LayerWrapper'
 import SuspenseLoader from '@/features/shared/components/SuspenseLoader/SuspenseLoader'
-import { cn } from '@/features/ui/utils/cn'
 import { HomepageQuery, ThemesQuery } from 'src/generated/graphql'
 
 export type Props = {
@@ -40,7 +37,14 @@ export const HomepageContainer: React.FC<Props> = ({ homepage }) => {
 
                     <div className="flex w-full">
                       {editorialData?.carousel && (
-                        <HomepageCarouselGrid carousel={editorialData.carousel} />
+                        <>
+                          <div className="hidden w-full lg:block">
+                            <HomepageCarouselGrid carousel={editorialData.carousel} />
+                          </div>
+                          <div className="block w-full lg:hidden">
+                            <HomepageCarouselGrid cols={1} carousel={editorialData.carousel} />
+                          </div>
+                        </>
                       )}
                     </div>
                   </>
