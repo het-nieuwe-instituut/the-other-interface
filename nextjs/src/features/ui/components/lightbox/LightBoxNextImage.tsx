@@ -1,3 +1,4 @@
+'use client'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import NextImage, { ImageProps } from 'next/image'
 import { useContext, useEffect, useRef } from 'react'
