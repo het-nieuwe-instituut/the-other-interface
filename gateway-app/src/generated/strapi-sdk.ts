@@ -20,7 +20,6 @@ export type Scalars = {
   HomepageComponentsDynamicZoneInput: any
   I18NLocaleCode: any
   JSON: any
-  LandingpageComponentsDynamicZoneInput: any
   Long: any
   MenupageComponentsDynamicZoneInput: any
   StoryComponentsDynamicZoneInput: any
@@ -690,7 +689,6 @@ export type GenericMorph =
   | LandingPageObject
   | LandingPagePeople
   | LandingPagePublication
-  | Landingpage
   | Location
   | Menupage
   | MuxVideoUploaderMuxAsset
@@ -1069,82 +1067,6 @@ export type LandingPagePublicationRelationResponseCollection = {
   data: Array<LandingPagePublicationEntity>
 }
 
-export type Landingpage = {
-  __typename?: 'Landingpage'
-  Description?: Maybe<Scalars['String']>
-  Title?: Maybe<Scalars['String']>
-  components?: Maybe<Array<Maybe<LandingpageComponentsDynamicZone>>>
-  createdAt?: Maybe<Scalars['DateTime']>
-  locale?: Maybe<Scalars['String']>
-  localizations?: Maybe<LandingpageRelationResponseCollection>
-  publishedAt?: Maybe<Scalars['DateTime']>
-  slug?: Maybe<Scalars['String']>
-  updatedAt?: Maybe<Scalars['DateTime']>
-}
-
-export type LandingpageLocalizationsArgs = {
-  filters?: InputMaybe<LandingpageFiltersInput>
-  pagination?: InputMaybe<PaginationArg>
-  publicationState?: InputMaybe<PublicationState>
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
-}
-
-export type LandingpageComponentsDynamicZone =
-  | ComponentModulesButtonsModule
-  | ComponentModulesGridModule
-  | ComponentModulesImage
-  | ComponentModulesImageCarousel
-  | ComponentModulesPullquote
-  | ComponentModulesSubtitle
-  | ComponentModulesTextModule
-  | ComponentModulesTitleModule
-  | Error
-
-export type LandingpageEntity = {
-  __typename?: 'LandingpageEntity'
-  attributes?: Maybe<Landingpage>
-  id?: Maybe<Scalars['ID']>
-}
-
-export type LandingpageEntityResponse = {
-  __typename?: 'LandingpageEntityResponse'
-  data?: Maybe<LandingpageEntity>
-}
-
-export type LandingpageEntityResponseCollection = {
-  __typename?: 'LandingpageEntityResponseCollection'
-  data: Array<LandingpageEntity>
-  meta: ResponseCollectionMeta
-}
-
-export type LandingpageFiltersInput = {
-  Description?: InputMaybe<StringFilterInput>
-  Title?: InputMaybe<StringFilterInput>
-  and?: InputMaybe<Array<InputMaybe<LandingpageFiltersInput>>>
-  createdAt?: InputMaybe<DateTimeFilterInput>
-  id?: InputMaybe<IdFilterInput>
-  locale?: InputMaybe<StringFilterInput>
-  localizations?: InputMaybe<LandingpageFiltersInput>
-  not?: InputMaybe<LandingpageFiltersInput>
-  or?: InputMaybe<Array<InputMaybe<LandingpageFiltersInput>>>
-  publishedAt?: InputMaybe<DateTimeFilterInput>
-  slug?: InputMaybe<StringFilterInput>
-  updatedAt?: InputMaybe<DateTimeFilterInput>
-}
-
-export type LandingpageInput = {
-  Description?: InputMaybe<Scalars['String']>
-  Title?: InputMaybe<Scalars['String']>
-  components?: InputMaybe<Array<Scalars['LandingpageComponentsDynamicZoneInput']>>
-  publishedAt?: InputMaybe<Scalars['DateTime']>
-  slug?: InputMaybe<Scalars['String']>
-}
-
-export type LandingpageRelationResponseCollection = {
-  __typename?: 'LandingpageRelationResponseCollection'
-  data: Array<LandingpageEntity>
-}
-
 export type Location = {
   __typename?: 'Location'
   city?: Maybe<Scalars['String']>
@@ -1322,8 +1244,6 @@ export type Mutation = {
   createLandingPageObjectLocalization?: Maybe<LandingPageObjectEntityResponse>
   createLandingPagePeopleLocalization?: Maybe<LandingPagePeopleEntityResponse>
   createLandingPagePublicationLocalization?: Maybe<LandingPagePublicationEntityResponse>
-  createLandingpage?: Maybe<LandingpageEntityResponse>
-  createLandingpageLocalization?: Maybe<LandingpageEntityResponse>
   createLocation?: Maybe<LocationEntityResponse>
   createLocationLocalization?: Maybe<LocationEntityResponse>
   createMenupage?: Maybe<MenupageEntityResponse>
@@ -1348,7 +1268,6 @@ export type Mutation = {
   deleteLandingPageObject?: Maybe<LandingPageObjectEntityResponse>
   deleteLandingPagePeople?: Maybe<LandingPagePeopleEntityResponse>
   deleteLandingPagePublication?: Maybe<LandingPagePublicationEntityResponse>
-  deleteLandingpage?: Maybe<LandingpageEntityResponse>
   deleteLocation?: Maybe<LocationEntityResponse>
   deleteMenupage?: Maybe<MenupageEntityResponse>
   deleteMuxVideoUploaderMuxAsset?: Maybe<MuxVideoUploaderMuxAssetEntityResponse>
@@ -1381,7 +1300,6 @@ export type Mutation = {
   updateLandingPageObject?: Maybe<LandingPageObjectEntityResponse>
   updateLandingPagePeople?: Maybe<LandingPagePeopleEntityResponse>
   updateLandingPagePublication?: Maybe<LandingPagePublicationEntityResponse>
-  updateLandingpage?: Maybe<LandingpageEntityResponse>
   updateLocation?: Maybe<LocationEntityResponse>
   updateMenupage?: Maybe<MenupageEntityResponse>
   updateMuxVideoUploaderMuxAsset?: Maybe<MuxVideoUploaderMuxAssetEntityResponse>
@@ -1441,17 +1359,6 @@ export type MutationCreateLandingPagePeopleLocalizationArgs = {
 
 export type MutationCreateLandingPagePublicationLocalizationArgs = {
   data?: InputMaybe<LandingPagePublicationInput>
-  id?: InputMaybe<Scalars['ID']>
-  locale?: InputMaybe<Scalars['I18NLocaleCode']>
-}
-
-export type MutationCreateLandingpageArgs = {
-  data: LandingpageInput
-  locale?: InputMaybe<Scalars['I18NLocaleCode']>
-}
-
-export type MutationCreateLandingpageLocalizationArgs = {
-  data?: InputMaybe<LandingpageInput>
   id?: InputMaybe<Scalars['ID']>
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
 }
@@ -1553,11 +1460,6 @@ export type MutationDeleteLandingPagePeopleArgs = {
 }
 
 export type MutationDeleteLandingPagePublicationArgs = {
-  locale?: InputMaybe<Scalars['I18NLocaleCode']>
-}
-
-export type MutationDeleteLandingpageArgs = {
-  id: Scalars['ID']
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
 }
 
@@ -1680,12 +1582,6 @@ export type MutationUpdateLandingPagePeopleArgs = {
 
 export type MutationUpdateLandingPagePublicationArgs = {
   data: LandingPagePublicationInput
-  locale?: InputMaybe<Scalars['I18NLocaleCode']>
-}
-
-export type MutationUpdateLandingpageArgs = {
-  data: LandingpageInput
-  id: Scalars['ID']
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
 }
 
@@ -1849,8 +1745,6 @@ export type Query = {
   landingPageObject?: Maybe<LandingPageObjectEntityResponse>
   landingPagePeople?: Maybe<LandingPagePeopleEntityResponse>
   landingPagePublication?: Maybe<LandingPagePublicationEntityResponse>
-  landingpage?: Maybe<LandingpageEntityResponse>
-  landingpages?: Maybe<LandingpageEntityResponseCollection>
   location?: Maybe<LocationEntityResponse>
   locations?: Maybe<LocationEntityResponseCollection>
   me?: Maybe<UsersPermissionsMe>
@@ -1943,19 +1837,6 @@ export type QueryLandingPagePeopleArgs = {
 export type QueryLandingPagePublicationArgs = {
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
   publicationState?: InputMaybe<PublicationState>
-}
-
-export type QueryLandingpageArgs = {
-  id?: InputMaybe<Scalars['ID']>
-  locale?: InputMaybe<Scalars['I18NLocaleCode']>
-}
-
-export type QueryLandingpagesArgs = {
-  filters?: InputMaybe<LandingpageFiltersInput>
-  locale?: InputMaybe<Scalars['I18NLocaleCode']>
-  pagination?: InputMaybe<PaginationArg>
-  publicationState?: InputMaybe<PublicationState>
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
 }
 
 export type QueryLocationArgs = {

@@ -1091,74 +1091,6 @@ export interface ApiLandingPagePublicationLandingPagePublication extends Schema.
   }
 }
 
-export interface ApiLandingpageLandingpage extends Schema.CollectionType {
-  collectionName: 'landingpages'
-  info: {
-    singularName: 'landingpage'
-    pluralName: 'landingpages'
-    displayName: 'Landingpage'
-    description: ''
-  }
-  options: {
-    draftAndPublish: true
-  }
-  pluginOptions: {
-    i18n: {
-      localized: true
-    }
-  }
-  attributes: {
-    Title: Attribute.String &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true
-        }
-      }>
-    components: Attribute.DynamicZone<
-      [
-        'modules.text-module',
-        'modules.subtitle',
-        'modules.title-module',
-        'modules.image-carousel',
-        'modules.image',
-        'modules.pullquote',
-        'modules.buttons-module',
-        'modules.grid-module'
-      ]
-    > &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true
-        }
-      }>
-    slug: Attribute.String &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true
-        }
-      }>
-    Description: Attribute.Text &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true
-        }
-      }>
-    createdAt: Attribute.DateTime
-    updatedAt: Attribute.DateTime
-    publishedAt: Attribute.DateTime
-    createdBy: Attribute.Relation<'api::landingpage.landingpage', 'oneToOne', 'admin::user'> &
-      Attribute.Private
-    updatedBy: Attribute.Relation<'api::landingpage.landingpage', 'oneToOne', 'admin::user'> &
-      Attribute.Private
-    localizations: Attribute.Relation<
-      'api::landingpage.landingpage',
-      'oneToMany',
-      'api::landingpage.landingpage'
-    >
-    locale: Attribute.String
-  }
-}
-
 export interface ApiLocationLocation extends Schema.CollectionType {
   collectionName: 'locations'
   info: {
@@ -1457,7 +1389,6 @@ declare module '@strapi/types' {
       'api::landing-page-object.landing-page-object': ApiLandingPageObjectLandingPageObject
       'api::landing-page-people.landing-page-people': ApiLandingPagePeopleLandingPagePeople
       'api::landing-page-publication.landing-page-publication': ApiLandingPagePublicationLandingPagePublication
-      'api::landingpage.landingpage': ApiLandingpageLandingpage
       'api::location.location': ApiLocationLocation
       'api::menupage.menupage': ApiMenupageMenupage
       'api::story.story': ApiStoryStory
