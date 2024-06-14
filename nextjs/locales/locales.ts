@@ -16,6 +16,7 @@ import recordMetaArchive from './en/recordMetaArchive.json'
 import recordMetaObject from './en/recordMetaObject.json'
 import recordMetaPerson from './en/recordMetaPerson.json'
 import recordTable from './en/recordTable.json'
+import footer from './en/footer.json'
 
 export type TranslationKeys = {
   common: Paths<typeof common>
@@ -31,6 +32,7 @@ export type TranslationKeys = {
   recordMetaObject: Paths<typeof recordMetaObject>
   recordMetaPerson: Paths<typeof recordMetaPerson>
   recordTable: Paths<typeof recordTable>
+  footer: Paths<typeof footer>
 }
 
 export type navigationT = (
