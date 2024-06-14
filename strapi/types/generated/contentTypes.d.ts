@@ -797,6 +797,7 @@ export interface ApiLandingPageArchiveLandingPageArchive extends Schema.SingleTy
     singularName: 'landing-page-archive'
     pluralName: 'landing-page-archives'
     displayName: 'Landing page - archive'
+    description: ''
   }
   options: {
     draftAndPublish: true
@@ -820,7 +821,7 @@ export interface ApiLandingPageArchiveLandingPageArchive extends Schema.SingleTy
           localized: true
         }
       }>
-    carousel: Attribute.Component<'modules.carousel', true> &
+    carousels: Attribute.Component<'modules.carousel', true> &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true
@@ -871,6 +872,7 @@ export interface ApiLandingPageObjectLandingPageObject extends Schema.SingleType
     singularName: 'landing-page-object'
     pluralName: 'landing-page-objects'
     displayName: 'Landing page - object'
+    description: ''
   }
   options: {
     draftAndPublish: true
@@ -894,7 +896,7 @@ export interface ApiLandingPageObjectLandingPageObject extends Schema.SingleType
           localized: true
         }
       }>
-    carousel: Attribute.Component<'modules.carousel', true> &
+    carousels: Attribute.Component<'modules.carousel', true> &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true
@@ -945,6 +947,7 @@ export interface ApiLandingPagePeopleLandingPagePeople extends Schema.SingleType
     singularName: 'landing-page-people'
     pluralName: 'landing-page-peoples'
     displayName: 'Landing page - people'
+    description: ''
   }
   options: {
     draftAndPublish: true
@@ -968,7 +971,7 @@ export interface ApiLandingPagePeopleLandingPagePeople extends Schema.SingleType
           localized: true
         }
       }>
-    carousel: Attribute.Component<'modules.carousel', true> &
+    carousels: Attribute.Component<'modules.carousel', true> &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true
@@ -1043,7 +1046,7 @@ export interface ApiLandingPagePublicationLandingPagePublication extends Schema.
           localized: true
         }
       }>
-    carousel: Attribute.Component<'modules.carousel', true> &
+    carousels: Attribute.Component<'modules.carousel', true> &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true

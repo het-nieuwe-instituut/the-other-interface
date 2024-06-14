@@ -875,7 +875,7 @@ export type JsonFilterInput = {
 
 export type LandingPageArchive = {
   __typename?: 'LandingPageArchive'
-  carousel?: Maybe<Array<Maybe<ComponentModulesCarousel>>>
+  carousels?: Maybe<Array<Maybe<ComponentModulesCarousel>>>
   createdAt?: Maybe<Scalars['DateTime']>
   grid?: Maybe<ComponentModulesGridModule>
   highlight?: Maybe<ComponentModulesHighlight>
@@ -887,7 +887,7 @@ export type LandingPageArchive = {
   updatedAt?: Maybe<Scalars['DateTime']>
 }
 
-export type LandingPageArchiveCarouselArgs = {
+export type LandingPageArchiveCarouselsArgs = {
   filters?: InputMaybe<ComponentModulesCarouselFiltersInput>
   pagination?: InputMaybe<PaginationArg>
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
@@ -909,7 +909,7 @@ export type LandingPageArchiveEntityResponse = {
 }
 
 export type LandingPageArchiveInput = {
-  carousel?: InputMaybe<Array<InputMaybe<ComponentModulesCarouselInput>>>
+  carousels?: InputMaybe<Array<InputMaybe<ComponentModulesCarouselInput>>>
   grid?: InputMaybe<ComponentModulesGridModuleInput>
   highlight?: InputMaybe<ComponentModulesHighlightInput>
   publishedAt?: InputMaybe<Scalars['DateTime']>
@@ -924,7 +924,7 @@ export type LandingPageArchiveRelationResponseCollection = {
 
 export type LandingPageObject = {
   __typename?: 'LandingPageObject'
-  carousel?: Maybe<Array<Maybe<ComponentModulesCarousel>>>
+  carousels?: Maybe<Array<Maybe<ComponentModulesCarousel>>>
   createdAt?: Maybe<Scalars['DateTime']>
   grid?: Maybe<ComponentModulesGridModule>
   highlight?: Maybe<ComponentModulesHighlight>
@@ -936,7 +936,7 @@ export type LandingPageObject = {
   updatedAt?: Maybe<Scalars['DateTime']>
 }
 
-export type LandingPageObjectCarouselArgs = {
+export type LandingPageObjectCarouselsArgs = {
   filters?: InputMaybe<ComponentModulesCarouselFiltersInput>
   pagination?: InputMaybe<PaginationArg>
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
@@ -958,7 +958,7 @@ export type LandingPageObjectEntityResponse = {
 }
 
 export type LandingPageObjectInput = {
-  carousel?: InputMaybe<Array<InputMaybe<ComponentModulesCarouselInput>>>
+  carousels?: InputMaybe<Array<InputMaybe<ComponentModulesCarouselInput>>>
   grid?: InputMaybe<ComponentModulesGridModuleInput>
   highlight?: InputMaybe<ComponentModulesHighlightInput>
   publishedAt?: InputMaybe<Scalars['DateTime']>
@@ -973,7 +973,7 @@ export type LandingPageObjectRelationResponseCollection = {
 
 export type LandingPagePeople = {
   __typename?: 'LandingPagePeople'
-  carousel?: Maybe<Array<Maybe<ComponentModulesCarousel>>>
+  carousels?: Maybe<Array<Maybe<ComponentModulesCarousel>>>
   createdAt?: Maybe<Scalars['DateTime']>
   grid?: Maybe<ComponentModulesGridModule>
   highlight?: Maybe<ComponentModulesHighlight>
@@ -985,7 +985,7 @@ export type LandingPagePeople = {
   updatedAt?: Maybe<Scalars['DateTime']>
 }
 
-export type LandingPagePeopleCarouselArgs = {
+export type LandingPagePeopleCarouselsArgs = {
   filters?: InputMaybe<ComponentModulesCarouselFiltersInput>
   pagination?: InputMaybe<PaginationArg>
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
@@ -1007,7 +1007,7 @@ export type LandingPagePeopleEntityResponse = {
 }
 
 export type LandingPagePeopleInput = {
-  carousel?: InputMaybe<Array<InputMaybe<ComponentModulesCarouselInput>>>
+  carousels?: InputMaybe<Array<InputMaybe<ComponentModulesCarouselInput>>>
   grid?: InputMaybe<ComponentModulesGridModuleInput>
   highlight?: InputMaybe<ComponentModulesHighlightInput>
   publishedAt?: InputMaybe<Scalars['DateTime']>
@@ -1022,7 +1022,7 @@ export type LandingPagePeopleRelationResponseCollection = {
 
 export type LandingPagePublication = {
   __typename?: 'LandingPagePublication'
-  carousel?: Maybe<Array<Maybe<ComponentModulesCarousel>>>
+  carousels?: Maybe<Array<Maybe<ComponentModulesCarousel>>>
   createdAt?: Maybe<Scalars['DateTime']>
   grid?: Maybe<ComponentModulesGridModule>
   highlight?: Maybe<ComponentModulesHighlight>
@@ -1034,7 +1034,7 @@ export type LandingPagePublication = {
   updatedAt?: Maybe<Scalars['DateTime']>
 }
 
-export type LandingPagePublicationCarouselArgs = {
+export type LandingPagePublicationCarouselsArgs = {
   filters?: InputMaybe<ComponentModulesCarouselFiltersInput>
   pagination?: InputMaybe<PaginationArg>
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
@@ -1056,7 +1056,7 @@ export type LandingPagePublicationEntityResponse = {
 }
 
 export type LandingPagePublicationInput = {
-  carousel?: InputMaybe<Array<InputMaybe<ComponentModulesCarouselInput>>>
+  carousels?: InputMaybe<Array<InputMaybe<ComponentModulesCarouselInput>>>
   grid?: InputMaybe<ComponentModulesGridModuleInput>
   highlight?: InputMaybe<ComponentModulesHighlightInput>
   publishedAt?: InputMaybe<Scalars['DateTime']>

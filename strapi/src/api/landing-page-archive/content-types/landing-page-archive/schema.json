@@ -4,7 +4,8 @@
   "info": {
     "singularName": "landing-page-archive",
     "pluralName": "landing-page-archives",
-    "displayName": "Landing page - archive"
+    "displayName": "Landing page - archive",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -32,7 +33,7 @@
       },
       "type": "text"
     },
-    "carousel": {
+    "carousels": {
       "type": "component",
       "repeatable": true,
       "pluginOptions": {

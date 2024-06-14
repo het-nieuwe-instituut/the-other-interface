@@ -4,7 +4,8 @@
   "info": {
     "singularName": "landing-page-people",
     "pluralName": "landing-page-peoples",
-    "displayName": "Landing page - people"
+    "displayName": "Landing page - people",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -32,7 +33,7 @@
       },
       "type": "text"
     },
-    "carousel": {
+    "carousels": {
       "type": "component",
       "repeatable": true,
       "pluginOptions": {

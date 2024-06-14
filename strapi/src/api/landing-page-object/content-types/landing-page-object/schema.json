@@ -4,7 +4,8 @@
   "info": {
     "singularName": "landing-page-object",
     "pluralName": "landing-page-objects",
-    "displayName": "Landing page - object"
+    "displayName": "Landing page - object",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -32,7 +33,7 @@
       },
       "type": "text"
     },
-    "carousel": {
+    "carousels": {
       "type": "component",
       "repeatable": true,
       "pluginOptions": {

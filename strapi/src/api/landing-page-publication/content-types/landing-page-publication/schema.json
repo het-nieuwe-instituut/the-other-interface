@@ -33,7 +33,7 @@
       },
       "type": "text"
     },
-    "carousel": {
+    "carousels": {
       "type": "component",
       "repeatable": true,
       "pluginOptions": {
