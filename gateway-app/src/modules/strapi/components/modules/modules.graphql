@@ -92,3 +92,18 @@ fragment ComponentModulesGridModuleFragment on ComponentModulesGridModule {
         ...ComponentCoreGridFeaturedFieldsFragment
     }
 }
+
+fragment ComponentModulesHighlightFramgment on ComponentModulesHighlight {
+    id
+    title
+    subtitle
+    description
+    image_alt_text
+    buttons {
+        ...ComponentCoreButtonFragment
+
+    }
+    image {
+        ...UploadFileEntityResponseFragment
+    }
+}

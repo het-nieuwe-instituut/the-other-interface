@@ -185,6 +185,26 @@ export interface ModulesGridModule extends Schema.Component {
   }
 }
 
+export interface ModulesHighlight extends Schema.Component {
+  collectionName: 'components_modules_highlights'
+  info: {
+    displayName: 'Highlight'
+    icon: ''
+    description: ''
+  }
+  attributes: {
+    title: Attribute.String & Attribute.Required
+    subtitle: Attribute.String
+    description: Attribute.Text
+    buttons: Attribute.Component<'core.button', true> &
+      Attribute.SetMinMax<{
+        max: 2
+      }>
+    image: Attribute.Media & Attribute.Required
+    image_alt_text: Attribute.String & Attribute.Required
+  }
+}
+
 export interface ModulesImageCarousel extends Schema.Component {
   collectionName: 'components_modules_image_carousels'
   info: {
@@ -279,6 +299,7 @@ declare module '@strapi/types' {
       'modules.buttons-module': ModulesButtonsModule
       'modules.carousel': ModulesCarousel
       'modules.grid-module': ModulesGridModule
+      'modules.highlight': ModulesHighlight
       'modules.image-carousel': ModulesImageCarousel
       'modules.image': ModulesImage
       'modules.pullquote': ModulesPullquote

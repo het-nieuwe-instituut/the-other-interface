@@ -313,6 +313,23 @@ export type ComponentModulesGridModuleFieldsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
 }
 
+export type ComponentModulesHighlight = {
+  __typename?: 'ComponentModulesHighlight'
+  buttons?: Maybe<Array<Maybe<ComponentCoreButton>>>
+  description?: Maybe<Scalars['String']>
+  id: Scalars['ID']
+  image: UploadFileEntityResponse
+  image_alt_text: Scalars['String']
+  subtitle?: Maybe<Scalars['String']>
+  title: Scalars['String']
+}
+
+export type ComponentModulesHighlightButtonsArgs = {
+  filters?: InputMaybe<ComponentCoreButtonFiltersInput>
+  pagination?: InputMaybe<PaginationArg>
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
+}
+
 export type ComponentModulesImage = {
   __typename?: 'ComponentModulesImage'
   alt_text?: Maybe<Scalars['String']>
@@ -590,6 +607,7 @@ export type GenericMorph =
   | ComponentModulesButtonsModule
   | ComponentModulesCarousel
   | ComponentModulesGridModule
+  | ComponentModulesHighlight
   | ComponentModulesImage
   | ComponentModulesImageCarousel
   | ComponentModulesPullquote
@@ -13665,6 +13683,47 @@ export type ComponentModulesGridModuleFragmentFragment = {
   } | null> | null
 }
 
+export type ComponentModulesHighlightFramgmentFragment = {
+  __typename?: 'ComponentModulesHighlight'
+  id: string
+  title: string
+  subtitle?: string | null
+  description?: string | null
+  image_alt_text: string
+  buttons?: Array<{
+    __typename?: 'ComponentCoreButton'
+    id: string
+    text: string
+    url: string
+  } | null> | null
+  image: {
+    __typename?: 'UploadFileEntityResponse'
+    data?: {
+      __typename?: 'UploadFileEntity'
+      id?: string | null
+      attributes?: {
+        __typename?: 'UploadFile'
+        hash: string
+        mime: string
+        name: string
+        provider: string
+        size: number
+        url: string
+        alternativeText?: string | null
+        caption?: string | null
+        createdAt?: any | null
+        ext?: string | null
+        formats?: any | null
+        height?: number | null
+        previewUrl?: string | null
+        provider_metadata?: any | null
+        updatedAt?: any | null
+        width?: number | null
+      } | null
+    } | null
+  }
+}
+
 export type UploadFileFragmentFragment = {
   __typename?: 'UploadFile'
   hash: string
@@ -19676,6 +19735,23 @@ export const ComponentModulesCarouselFragmentFragmentDoc = gql`
   }
   ${ComponentCoreCarouselImageFragmentFragmentDoc}
   ${ComponentCoreButtonFragmentFragmentDoc}
+`
+export const ComponentModulesHighlightFramgmentFragmentDoc = gql`
+  fragment ComponentModulesHighlightFramgment on ComponentModulesHighlight {
+    id
+    title
+    subtitle
+    description
+    image_alt_text
+    buttons {
+      ...ComponentCoreButtonFragment
+    }
+    image {
+      ...UploadFileEntityResponseFragment
+    }
+  }
+  ${ComponentCoreButtonFragmentFragmentDoc}
+  ${UploadFileEntityResponseFragmentFragmentDoc}
 `
 export const PaginationFragmentFragmentDoc = gql`
   fragment PaginationFragment on Pagination {
