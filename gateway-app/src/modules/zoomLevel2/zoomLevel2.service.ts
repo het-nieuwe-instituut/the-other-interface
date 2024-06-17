@@ -80,12 +80,12 @@ export class ZoomLevel2Service {
   public async getFilterSuggestions(
     type: Enum_Triplyrecord_Type,
     text: string,
-    lang: Locale
+    language: Locale
   ): Promise<FilterSuggestionType[]> {
     const endpoint = this.getFilterSuggestionsEndpoint(type)
     const KeysToVerify = {} // we don't expect static keys in the response, so we don't need to verify them
     const paginationArgs: PaginationArgs = { page: 1, pageSize: 5 } // we always only need the first 5 results
-    const searchParams = { text, lang }
+    const searchParams = { text, language }
 
     const results = await this.triplyService.queryTriplyData<Record<string, string>>(
       endpoint,
