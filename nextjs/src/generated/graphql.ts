@@ -2070,7 +2070,7 @@ export type Zoom3RelationsFragmentFragment = { __typename?: 'ZoomLevel3Relations
 export type FilterSuggestionsQueryVariables = Exact<{
   type: EnumTriplyrecordType;
   locale: Locale;
-  search: Scalars['String'];
+  search: Scalars['String']['input'];
 }>;
 
 
