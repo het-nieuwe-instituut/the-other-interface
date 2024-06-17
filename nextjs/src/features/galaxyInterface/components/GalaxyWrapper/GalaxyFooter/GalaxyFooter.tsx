@@ -23,7 +23,7 @@ export const GalaxyFooter: React.FC<Props> = ({ galaxyPagination }) => {
       right={6}
       bottom={`calc(${GALAXY_EDITORIAL_LAYER_PART} +  ${1.5}rem)`}
       height="60px"
-      templateColumns="165px 1fr 230px"
+      templateColumns="170px 1fr 230px"
       gap="5px"
       zIndex={FOOTER_Z_INDEX}
     >

@@ -194,7 +194,6 @@ export interface ModulesHighlight extends Schema.Component {
   }
   attributes: {
     title: Attribute.String & Attribute.Required
-    subtitle: Attribute.String
     description: Attribute.Text
     buttons: Attribute.Component<'core.button', true> &
       Attribute.SetMinMax<{

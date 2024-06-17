@@ -96,7 +96,6 @@ fragment ComponentModulesGridModuleFragment on ComponentModulesGridModule {
 fragment ComponentModulesHighlightFramgment on ComponentModulesHighlight {
     id
     title
-    subtitle
     description
     image_alt_text
     buttons {
