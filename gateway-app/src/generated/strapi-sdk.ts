@@ -393,7 +393,6 @@ export type ComponentModulesHighlightInput = {
   id?: InputMaybe<Scalars['ID']>
   image?: InputMaybe<Scalars['ID']>
   image_alt_text?: InputMaybe<Scalars['String']>
-  subtitle?: InputMaybe<Scalars['String']>
   title?: InputMaybe<Scalars['String']>
 }
 
