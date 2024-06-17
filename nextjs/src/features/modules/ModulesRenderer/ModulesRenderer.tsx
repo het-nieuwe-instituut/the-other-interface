@@ -1,10 +1,12 @@
+import {
+  ImageCarousel,
+  ImageCarouselItem,
+} from '@/features/ui/components/image-carousel/ImageCarousel'
 import { Title } from '@/features/ui/components/title/Title'
 import { cn } from '@/features/ui/utils/cn'
 import { StandaloneLink } from 'src/app/ks/link/StandaloneLink'
 import {
-  ComponentModulesCarousel,
   ComponentModulesGridModule,
-  ComponentModulesImageCarousel,
   HomepageComponentsDynamicZone,
   HomepageQuery,
   LandingpageBySlugQuery,
@@ -18,9 +20,9 @@ import { Subtitle } from '../../ui/components/subtitle/Subtitle'
 import { GridModule } from '../components/GridModule/GridModule'
 import { ImageModuleWrapper } from '../components/ImageModuleWrapper'
 import { Pullquote } from '../components/Pullquote/Pullquote'
-import { CarouselModule } from '../components/carousels/Carousel/Carousel'
-import { ImageCarousel } from '../components/carousels/ImageCarousel/ImageCarousel'
-import { mapUploadFileEntitiesToStoryImageInfo } from '../components/carousels/ImageCarousel/imageCarouselStrapiDataMapper'
+import { MuxAudioPlayer } from '@/features/ui/components/mux-audio/MuxAudioPlayer'
+import { MuxVideoPlayer } from '@/features/ui/components/mux-video/MuxVideoPlayer'
+import ErrorBox from '@/features/shared/components/Error/ErrorBox'
 
 interface Props {
   components: DynamicComponents
@@ -42,7 +44,7 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
   return (
     <div
       className={cn(
-        'max-w-[90em] mx-auto px-6 pt-0 flex flex-col gap-[40px]',
+        'px-6 pt-0 flex flex-col gap-[40px]',
         isStoryPage && 'px-0',
         hasComponents && 'pt-10'
       )}
@@ -83,12 +85,24 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
 
           if (component?.__typename === 'ComponentModulesImageCarousel') {
             return (
-              <ImageCarousel
-                key={keyExtractor(component.id, index, array)}
-                images={mapUploadFileEntitiesToStoryImageInfo(
-                  component as ComponentModulesImageCarousel
-                )}
-              />
+              <ImageCarousel key={keyExtractor(component.id, index, array)}>
+                {component.images?.data?.map(item => {
+                  const attributes = item?.attributes
+
+                  if (!attributes || !attributes.height || !attributes.width) {
+                    return null
+                  }
+                  return (
+                    <ImageCarouselItem
+                      key={item.id}
+                      src={attributes.url}
+                      // TODO: add alt text instead of caption
+                      alt={attributes.caption ?? ''}
+                      caption={attributes.caption ?? undefined}
+                    />
+                  )
+                }) ?? []}
+              </ImageCarousel>
             )
           }
 
@@ -151,14 +165,15 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
             )
           }
 
-          if (component?.__typename === 'ComponentModulesCarousel') {
-            return (
-              <CarouselModule
-                key={keyExtractor(component.id, index, array)}
-                component={component as ComponentModulesCarousel}
-              />
-            )
-          }
+          // TODO: uncomment after component is connected to collections again
+          //   if (component?.__typename === 'ComponentModulesCarousel') {
+          //     return (
+          //       <CarouselModule
+          //         key={keyExtractor(component.id, index, array)}
+          //         component={component as ComponentModulesCarousel}
+          //       />
+          //     )
+          //   }
 
           if (component?.__typename === 'ComponentModulesGridModule') {
             return (
@@ -182,6 +197,45 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
               <StandaloneLink href={href} variant={variant} key={component.id}>
                 {component.label}
               </StandaloneLink>
+            )
+          }
+          if (component?.__typename === 'ComponentCoreMuxAudio') {
+            if (
+              !component.muxAudioRelation?.data?.attributes?.playback_id ||
+              !component.muxAudioRelation?.data?.attributes?.title
+            )
+              return <ErrorBox key={keyExtractor(component.id, index, array)} />
+
+            return (
+              <MuxAudioPlayer
+                isReady={component.muxAudioRelation?.data?.attributes?.isReady}
+                title={component.muxAudioRelation?.data?.attributes?.title}
+                playbackId={component.muxAudioRelation?.data?.attributes?.playback_id}
+                caption={component.caption}
+                key={keyExtractor(component.id, index, array)}
+              />
+            )
+          }
+
+          if (component?.__typename === 'ComponentCoreMuxVideo') {
+            if (
+              !component.muxVideoRelation?.data?.attributes?.playback_id ||
+              !component.muxVideoRelation?.data?.attributes?.title
+            )
+              return <ErrorBox key={keyExtractor(component.id, index, array)} />
+
+            return (
+              <MuxVideoPlayer
+                isReady={component.muxVideoRelation?.data?.attributes?.isReady}
+                title={component.muxVideoRelation?.data?.attributes?.title}
+                playbackId={component.muxVideoRelation?.data?.attributes?.playback_id}
+                caption={component.caption}
+                aspectRatio={
+                  component.muxVideoRelation?.data?.attributes?.aspect_ratio?.replace(':', ' / ') ??
+                  '16 / 9'
+                }
+                key={keyExtractor(component.id, index, array)}
+              />
             )
           }
         }

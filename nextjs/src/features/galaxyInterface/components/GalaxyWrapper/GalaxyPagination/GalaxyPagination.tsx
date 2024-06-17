@@ -1,12 +1,13 @@
 'use client'
 import { FOOTER_Z_INDEX } from '@/features/shared/constants/mainConstants'
-import { Flex, Grid, Text } from '@chakra-ui/react'
+import { Grid } from '@chakra-ui/react'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { PaginationButton } from './fragments/PaginationButton'
 import { Loader } from '@/features/shared/components/Loading/Loading'
 import ErrorBox from '@/features/shared/components/Error/ErrorBox'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { cn } from '@/features/ui/utils/cn'
+import { IconButton } from '@/features/ui/components/icon-button/component'
+import { ArrowIcon } from './fragments/ArrowIcon'
 
 type Props = {
   currentPageNumber: number
@@ -23,17 +24,12 @@ export const GalaxyPagination: React.FC<Props> = ({
   currentPageNumber,
   pageAmount,
   isResultAmountLoading,
-  isResultEmpty,
   handleLeftClick,
   handleRightClick,
   text,
   isResultError,
 }) => {
   const { t } = useTypeSafeTranslation('navigation')
-
-  if (isResultEmpty) {
-    return null
-  }
 
   const renderPaginationContent = () => {
     if (isResultError) {
@@ -52,27 +48,28 @@ export const GalaxyPagination: React.FC<Props> = ({
 
     return (
       <>
-        <PaginationButton handleClick={handleLeftClick} disabled={currentPageNumber === 1} />
+        <IconButton
+          intent={'ghost'}
+          disabled={currentPageNumber === 1}
+          size={'small'}
+          icon={<ArrowIcon rotation="rotate(180deg)" />}
+          className={'w-9 border-none px-2 py-1'}
+          onClick={handleLeftClick}
+        />
 
-        <Flex
-          flexDirection={'column'}
-          justifyContent={'center'}
-          alignItems={'center'}
-          textStyle="socialLarge.md"
-          gap="3px"
-        >
-          <>
-            <Text>{text ? text : t('page')}</Text>
-            <Text>
-              {currentPageNumber} {t('of')}
-            </Text>
-            <Text>{pageAmount || 1}</Text>
-          </>
-        </Flex>
-        <PaginationButton
-          side="right"
-          handleClick={handleRightClick}
+        <div className={'flex flex-col items-center justify-center'}>
+          <span className={cn(TypographyVariants({ socialLarge: 'sm' }), 'text-center')}>
+            {text ? text : t('page')} {currentPageNumber} {t('of')} {pageAmount || 1}
+          </span>
+        </div>
+
+        <IconButton
+          intent={'ghost'}
           disabled={currentPageNumber === pageAmount || pageAmount < 1}
+          size={'small'}
+          icon={<ArrowIcon />}
+          className={'w-9 border-none px-2 py-1'}
+          onClick={handleRightClick}
         />
       </>
     )
@@ -82,12 +79,12 @@ export const GalaxyPagination: React.FC<Props> = ({
     <Grid
       position={'relative'}
       height="60px"
-      backgroundColor={'blueAlpha.100'}
+      border={'1px solid'}
+      borderColor={'blueAlpha.100'}
       padding={'4px'}
-      borderRadius={'5px'}
       zIndex={FOOTER_Z_INDEX}
-      color={'pinkAlpha.100'}
-      templateColumns={isResultAmountLoading || isResultError ? '1fr' : '40px 1fr 40px'}
+      color={'blueAlpha.100'}
+      templateColumns={isResultAmountLoading || isResultError ? '1fr' : '36px 1fr 36px'}
       gap="5px"
     >
       {renderPaginationContent()}

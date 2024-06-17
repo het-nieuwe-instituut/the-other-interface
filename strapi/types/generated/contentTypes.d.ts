@@ -638,6 +638,71 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   }
 }
 
+export interface PluginMuxVideoUploaderMuxAsset extends Schema.CollectionType {
+  collectionName: 'muxassets'
+  info: {
+    name: 'mux-asset'
+    description: 'Represents a Mux Asset item, including upload and playback details'
+    displayName: 'Mux Asset'
+    singularName: 'mux-asset'
+    pluralName: 'mux-assets'
+  }
+  options: {
+    increments: true
+    timestamps: true
+  }
+  pluginOptions: {
+    'content-manager': {
+      visible: true
+    }
+    'content-type-builder': {
+      visible: true
+    }
+  }
+  attributes: {
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 3
+        maxLength: 255
+      }>
+    upload_id: Attribute.String &
+      Attribute.SetMinMaxLength<{
+        maxLength: 255
+      }>
+    asset_id: Attribute.String &
+      Attribute.SetMinMaxLength<{
+        maxLength: 255
+      }>
+    playback_id: Attribute.String &
+      Attribute.SetMinMaxLength<{
+        maxLength: 255
+      }>
+    signed: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>
+    error_message: Attribute.String &
+      Attribute.SetMinMaxLength<{
+        maxLength: 255
+      }>
+    isReady: Attribute.Boolean & Attribute.DefaultTo<false>
+    duration: Attribute.Decimal
+    aspect_ratio: Attribute.String
+    createdAt: Attribute.DateTime
+    updatedAt: Attribute.DateTime
+    createdBy: Attribute.Relation<
+      'plugin::mux-video-uploader.mux-asset',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private
+    updatedBy: Attribute.Relation<
+      'plugin::mux-video-uploader.mux-asset',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private
+  }
+}
+
 export interface ApiAuthorAuthor extends Schema.CollectionType {
   collectionName: 'authors'
   info: {
@@ -685,7 +750,6 @@ export interface ApiHomepageHomepage extends Schema.SingleType {
         'modules.text-module',
         'modules.image',
         'modules.pullquote',
-        'modules.carousel',
         'modules.subtitle',
         'modules.title-module',
         'modules.image-carousel',
@@ -759,8 +823,7 @@ export interface ApiLandingpageLandingpage extends Schema.CollectionType {
         'modules.image',
         'modules.pullquote',
         'modules.buttons-module',
-        'modules.grid-module',
-        'modules.carousel'
+        'modules.grid-module'
       ]
     > &
       Attribute.SetPluginOptions<{
@@ -938,7 +1001,9 @@ export interface ApiStoryStory extends Schema.CollectionType {
         'modules.image-carousel',
         'modules.image',
         'modules.buttons-module',
-        'core.stand-alone-link'
+        'core.stand-alone-link',
+        'core.mux-audio',
+        'core.mux-video'
       ]
     > &
       Attribute.SetPluginOptions<{
@@ -999,28 +1064,6 @@ export interface ApiStoryStory extends Schema.CollectionType {
   }
 }
 
-export interface ApiTableTable extends Schema.CollectionType {
-  collectionName: 'tables'
-  info: {
-    singularName: 'table'
-    pluralName: 'tables'
-    displayName: 'Table'
-    description: ''
-  }
-  options: {
-    draftAndPublish: true
-  }
-  attributes: {
-    name: Attribute.String
-    description: Attribute.Text
-    createdAt: Attribute.DateTime
-    updatedAt: Attribute.DateTime
-    publishedAt: Attribute.DateTime
-    createdBy: Attribute.Relation<'api::table.table', 'oneToOne', 'admin::user'> & Attribute.Private
-    updatedBy: Attribute.Relation<'api::table.table', 'oneToOne', 'admin::user'> & Attribute.Private
-  }
-}
-
 export interface ApiThemeTheme extends Schema.CollectionType {
   collectionName: 'themes'
   info: {
@@ -1062,7 +1105,7 @@ export interface ApiTriplyRecordTriplyRecord extends Schema.CollectionType {
   info: {
     singularName: 'triply-record'
     pluralName: 'triply-records'
-    displayName: 'TriplyRecord'
+    displayName: 'Triply Record'
     description: ''
   }
   options: {
@@ -1107,13 +1150,13 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission
       'plugin::users-permissions.role': PluginUsersPermissionsRole
       'plugin::users-permissions.user': PluginUsersPermissionsUser
+      'plugin::mux-video-uploader.mux-asset': PluginMuxVideoUploaderMuxAsset
       'api::author.author': ApiAuthorAuthor
       'api::homepage.homepage': ApiHomepageHomepage
       'api::landingpage.landingpage': ApiLandingpageLandingpage
       'api::location.location': ApiLocationLocation
       'api::menupage.menupage': ApiMenupageMenupage
       'api::story.story': ApiStoryStory
-      'api::table.table': ApiTableTable
       'api::theme.theme': ApiThemeTheme
       'api::triply-record.triply-record': ApiTriplyRecordTriplyRecord
     }

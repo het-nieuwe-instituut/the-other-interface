@@ -1,7 +1,7 @@
 {
   "collectionName": "components_shared_images",
   "info": {
-    "displayName": "Image module",
+    "displayName": "Image",
     "description": ""
   },
   "options": {},
@@ -18,7 +18,8 @@
       "type": "text"
     },
     "alt_text": {
-      "type": "string"
+      "type": "string",
+      "required": false
     },
     "triplyRecord": {
       "type": "relation",

@@ -15,7 +15,7 @@ export const HomepageContainer: React.FC<Props> = ({ homepage }) => {
   const editorialData = homepage?.homepage?.data?.attributes
 
   return (
-    <div>
+    <>
       <GalaxyInterface>
         <MainGalaxy />
       </GalaxyInterface>
@@ -27,6 +27,6 @@ export const HomepageContainer: React.FC<Props> = ({ homepage }) => {
           components={editorialData.components}
         />
       )}
-    </div>
+    </>
   )
 }

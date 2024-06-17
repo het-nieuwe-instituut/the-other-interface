@@ -1,0 +1,40 @@
+{
+  "collectionName": "components_core_carousel_images",
+  "info": {
+    "displayName": "Carousel image",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "alt_text": {
+      "type": "string",
+      "required": false
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "default": "description"
+    },
+    "story": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::story.story"
+    },
+    "triply_record": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::triply-record.triply-record"
+    }
+  }
+}
