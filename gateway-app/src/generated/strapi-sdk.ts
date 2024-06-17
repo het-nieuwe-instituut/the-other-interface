@@ -320,7 +320,6 @@ export type ComponentModulesHighlight = {
   id: Scalars['ID']
   image: UploadFileEntityResponse
   image_alt_text: Scalars['String']
-  subtitle?: Maybe<Scalars['String']>
   title: Scalars['String']
 }
 
@@ -13687,7 +13686,6 @@ export type ComponentModulesHighlightFramgmentFragment = {
   __typename?: 'ComponentModulesHighlight'
   id: string
   title: string
-  subtitle?: string | null
   description?: string | null
   image_alt_text: string
   buttons?: Array<{
@@ -19740,7 +19738,6 @@ export const ComponentModulesHighlightFramgmentFragmentDoc = gql`
   fragment ComponentModulesHighlightFramgment on ComponentModulesHighlight {
     id
     title
-    subtitle
     description
     image_alt_text
     buttons {
