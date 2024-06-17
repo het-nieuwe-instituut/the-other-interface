@@ -882,6 +882,7 @@ export interface ApiLocationLocation extends Schema.CollectionType {
         }
       }>
     stories: Attribute.Relation<'api::location.location', 'manyToMany', 'api::story.story'>
+    story_v_2s: Attribute.Relation<'api::location.location', 'manyToMany', 'api::story-v2.story-v2'>
     createdAt: Attribute.DateTime
     updatedAt: Attribute.DateTime
     publishedAt: Attribute.DateTime
@@ -965,7 +966,7 @@ export interface ApiStoryStory extends Schema.CollectionType {
   info: {
     singularName: 'story'
     pluralName: 'stories'
-    displayName: 'Story'
+    displayName: 'DO NOT ADD - Story - TO BE REMOVED'
     description: ''
   }
   options: {
@@ -1064,6 +1065,108 @@ export interface ApiStoryStory extends Schema.CollectionType {
   }
 }
 
+export interface ApiStoryV2StoryV2 extends Schema.CollectionType {
+  collectionName: 'stories_v2'
+  info: {
+    singularName: 'story-v2'
+    pluralName: 'stories-v2'
+    displayName: 'Story-v2'
+    description: ''
+  }
+  options: {
+    draftAndPublish: true
+  }
+  pluginOptions: {
+    i18n: {
+      localized: true
+    }
+  }
+  attributes: {
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true
+        }
+      }>
+    shortDescription: Attribute.Text &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true
+        }
+      }>
+    author: Attribute.Relation<'api::story-v2.story-v2', 'oneToOne', 'api::author.author'>
+    dateOfPublication: Attribute.Date &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false
+        }
+      }>
+    locations: Attribute.Relation<'api::story-v2.story-v2', 'manyToMany', 'api::location.location'>
+    triply_records: Attribute.Relation<
+      'api::story-v2.story-v2',
+      'manyToMany',
+      'api::triply-record.triply-record'
+    >
+    themes: Attribute.Relation<'api::story-v2.story-v2', 'manyToMany', 'api::theme.theme'>
+    timeframe: Attribute.Component<'core.timeframe'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false
+        }
+      }>
+    description: Attribute.RichText &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true
+        }
+      }>
+    optionalModules: Attribute.DynamicZone<
+      [
+        'modules.title-module',
+        'modules.subtitle',
+        'modules.text-module',
+        'modules.pullquote',
+        'modules.image',
+        'core.mux-video',
+        'core.mux-audio',
+        'modules.image-carousel',
+        'core.stand-alone-link'
+      ]
+    > &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true
+        }
+      }>
+    parent_story_v2: Attribute.Relation<
+      'api::story-v2.story-v2',
+      'manyToOne',
+      'api::story-v2.story-v2'
+    >
+    child_stories_v2: Attribute.Relation<
+      'api::story-v2.story-v2',
+      'oneToMany',
+      'api::story-v2.story-v2'
+    >
+    createdAt: Attribute.DateTime
+    updatedAt: Attribute.DateTime
+    publishedAt: Attribute.DateTime
+    createdBy: Attribute.Relation<'api::story-v2.story-v2', 'oneToOne', 'admin::user'> &
+      Attribute.Private
+    updatedBy: Attribute.Relation<'api::story-v2.story-v2', 'oneToOne', 'admin::user'> &
+      Attribute.Private
+    localizations: Attribute.Relation<
+      'api::story-v2.story-v2',
+      'oneToMany',
+      'api::story-v2.story-v2'
+    >
+    locale: Attribute.String
+  }
+}
+
 export interface ApiThemeTheme extends Schema.CollectionType {
   collectionName: 'themes'
   info: {
@@ -1090,6 +1193,7 @@ export interface ApiThemeTheme extends Schema.CollectionType {
       }>
     stories: Attribute.Relation<'api::theme.theme', 'manyToMany', 'api::story.story'>
     highlightedStories: Attribute.Relation<'api::theme.theme', 'oneToMany', 'api::story.story'>
+    story_v_2s: Attribute.Relation<'api::theme.theme', 'manyToMany', 'api::story-v2.story-v2'>
     createdAt: Attribute.DateTime
     updatedAt: Attribute.DateTime
     publishedAt: Attribute.DateTime
@@ -1122,6 +1226,11 @@ export interface ApiTriplyRecordTriplyRecord extends Schema.CollectionType {
     >
     label: Attribute.String
     subject_collectionHighlights: Attribute.Boolean
+    story_v_2s: Attribute.Relation<
+      'api::triply-record.triply-record',
+      'manyToMany',
+      'api::story-v2.story-v2'
+    >
     createdAt: Attribute.DateTime
     updatedAt: Attribute.DateTime
     publishedAt: Attribute.DateTime
@@ -1157,6 +1266,7 @@ declare module '@strapi/types' {
       'api::location.location': ApiLocationLocation
       'api::menupage.menupage': ApiMenupageMenupage
       'api::story.story': ApiStoryStory
+      'api::story-v2.story-v2': ApiStoryV2StoryV2
       'api::theme.theme': ApiThemeTheme
       'api::triply-record.triply-record': ApiTriplyRecordTriplyRecord
     }

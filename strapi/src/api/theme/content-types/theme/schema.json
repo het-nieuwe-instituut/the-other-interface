@@ -35,6 +35,12 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::story.story"
+    },
+    "story_v_2s": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::story-v2.story-v2",
+      "mappedBy": "themes"
     }
   }
 }

@@ -38,6 +38,12 @@
     },
     "subject_collectionHighlights": {
       "type": "boolean"
+    },
+    "story_v_2s": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::story-v2.story-v2",
+      "mappedBy": "triply_records"
     }
   }
 }
