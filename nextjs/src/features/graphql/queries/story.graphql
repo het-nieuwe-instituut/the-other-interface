@@ -67,6 +67,12 @@ query storyById($locale: Locale!, $id: ID, $publicationState: String = "LIVE") {
           ... on ComponentCoreStandAloneLink {
             ...standAloneLinkFragment
           }
+          ... on ComponentCoreMuxAudio {
+            ...muxAudioFragment
+          }
+          ... on ComponentCoreMuxVideo {
+            ...muxVideoFragment
+          }
         }
         triplyRecords {
           data {

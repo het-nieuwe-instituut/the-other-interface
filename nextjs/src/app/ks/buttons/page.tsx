@@ -203,6 +203,41 @@ const Page: NextPage = () => {
           </div>
         ))}
 
+        {times(6).map(i => (
+          <div key={i}>
+            <NavButton
+              disabled={i === 3}
+              state={i === 4 ? 'loading' : i === 5 ? 'error' : undefined}
+              variant={'textPrimary'}
+            >
+              Button
+            </NavButton>
+          </div>
+        ))}
+        {times(6).map(i => (
+          <div key={i}>
+            <NavButton
+              disabled={i === 3}
+              state={i === 4 ? 'loading' : i === 5 ? 'error' : undefined}
+              variant={'textSecondary'}
+            >
+              Button
+            </NavButton>
+          </div>
+        ))}
+        {times(6).map(i => (
+          <div key={i}>
+            <NavButton
+              disabled={i === 3}
+              state={i === 4 ? 'loading' : i === 5 ? 'error' : undefined}
+              variant={'textSecondary'}
+            >
+              Button
+              <ExternalLink />
+            </NavButton>
+          </div>
+        ))}
+
         <div className="col-span-6">
           <hr />
           <h1> Menu buttons</h1>
@@ -215,29 +250,6 @@ const Page: NextPage = () => {
               variant={'menuPrimary'}
             >
               Button
-            </NavButton>
-          </div>
-        ))}
-        {times(6).map(i => (
-          <div key={i}>
-            <NavButton
-              disabled={i === 3}
-              state={i === 4 ? 'loading' : i === 5 ? 'error' : undefined}
-              variant={'menuSecondary'}
-            >
-              Button
-            </NavButton>
-          </div>
-        ))}
-        {times(6).map(i => (
-          <div key={i}>
-            <NavButton
-              disabled={i === 3}
-              state={i === 4 ? 'loading' : i === 5 ? 'error' : undefined}
-              variant={'menuSecondary'}
-            >
-              Button
-              <ExternalLink />
             </NavButton>
           </div>
         ))}

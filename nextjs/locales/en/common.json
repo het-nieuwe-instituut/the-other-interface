@@ -21,5 +21,8 @@
   "go": "Search",
   "noDataFound": "No data found",
   "languageDisclaimer": "Please note that all content from the Collection has been translated to English using machine translation.",
-  "noSuggestionsFound": "No suggestions found"
+  "noSuggestionsFound": "No suggestions found",
+  "audio": "The audio is not ready yet, please try again later.",
+  "video": "The video is not ready yet, please try again later.",
+  "seeFullImage": "See full image"
 }

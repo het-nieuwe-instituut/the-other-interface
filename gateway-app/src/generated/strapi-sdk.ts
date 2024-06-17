@@ -102,8 +102,8 @@ export type BooleanFilterInput = {
 export type ComponentCoreButton = {
   __typename?: 'ComponentCoreButton'
   id: Scalars['ID']
-  text?: Maybe<Scalars['String']>
-  url?: Maybe<Scalars['String']>
+  text: Scalars['String']
+  url: Scalars['String']
 }
 
 export type ComponentCoreButtonFiltersInput = {
@@ -120,26 +120,26 @@ export type ComponentCoreButtonInput = {
   url?: InputMaybe<Scalars['String']>
 }
 
-export type ComponentCoreCarouselItem = {
-  __typename?: 'ComponentCoreCarouselItem'
+export type ComponentCoreCarouselImage = {
+  __typename?: 'ComponentCoreCarouselImage'
+  alt_text?: Maybe<Scalars['String']>
   description?: Maybe<Scalars['String']>
   id: Scalars['ID']
-  name?: Maybe<Scalars['String']>
-  picture?: Maybe<UploadFileEntityResponse>
+  image: UploadFileEntityResponse
   story?: Maybe<StoryEntityResponse>
+  title: Scalars['String']
   triply_record?: Maybe<TriplyRecordEntityResponse>
-  type?: Maybe<Enum_Componentcorecarouselitem_Type>
 }
 
-export type ComponentCoreCarouselItemFiltersInput = {
-  and?: InputMaybe<Array<InputMaybe<ComponentCoreCarouselItemFiltersInput>>>
+export type ComponentCoreCarouselImageFiltersInput = {
+  alt_text?: InputMaybe<StringFilterInput>
+  and?: InputMaybe<Array<InputMaybe<ComponentCoreCarouselImageFiltersInput>>>
   description?: InputMaybe<StringFilterInput>
-  name?: InputMaybe<StringFilterInput>
-  not?: InputMaybe<ComponentCoreCarouselItemFiltersInput>
-  or?: InputMaybe<Array<InputMaybe<ComponentCoreCarouselItemFiltersInput>>>
+  not?: InputMaybe<ComponentCoreCarouselImageFiltersInput>
+  or?: InputMaybe<Array<InputMaybe<ComponentCoreCarouselImageFiltersInput>>>
   story?: InputMaybe<StoryFiltersInput>
+  title?: InputMaybe<StringFilterInput>
   triply_record?: InputMaybe<TriplyRecordFiltersInput>
-  type?: InputMaybe<StringFilterInput>
 }
 
 export type ComponentCoreFeaturedFields = {
@@ -163,7 +163,7 @@ export type ComponentCoreGridFeaturedFields = {
   story?: Maybe<StoryEntityResponse>
   subtitle?: Maybe<Scalars['String']>
   thumbnail?: Maybe<UploadFileEntityResponse>
-  title?: Maybe<Scalars['String']>
+  title: Scalars['String']
   triplyRecord?: Maybe<TriplyRecordEntityResponse>
 }
 
@@ -175,6 +175,20 @@ export type ComponentCoreGridFeaturedFieldsFiltersInput = {
   subtitle?: InputMaybe<StringFilterInput>
   title?: InputMaybe<StringFilterInput>
   triplyRecord?: InputMaybe<TriplyRecordFiltersInput>
+}
+
+export type ComponentCoreMuxAudio = {
+  __typename?: 'ComponentCoreMuxAudio'
+  caption?: Maybe<Scalars['String']>
+  id: Scalars['ID']
+  muxAudioRelation?: Maybe<MuxVideoUploaderMuxAssetEntityResponse>
+}
+
+export type ComponentCoreMuxVideo = {
+  __typename?: 'ComponentCoreMuxVideo'
+  caption?: Maybe<Scalars['String']>
+  id: Scalars['ID']
+  muxVideoRelation?: Maybe<MuxVideoUploaderMuxAssetEntityResponse>
 }
 
 export type ComponentCorePublicationDate = {
@@ -253,17 +267,16 @@ export type ComponentModulesButtonsModuleInput = {
 
 export type ComponentModulesCarousel = {
   __typename?: 'ComponentModulesCarousel'
-  buttonText?: Maybe<Scalars['String']>
-  buttonUrl?: Maybe<Scalars['String']>
   description?: Maybe<Scalars['String']>
+  explore_collection_button?: Maybe<ComponentCoreButton>
   id: Scalars['ID']
-  items?: Maybe<Array<Maybe<ComponentCoreCarouselItem>>>
-  title?: Maybe<Scalars['String']>
-  type?: Maybe<Enum_Componentmodulescarousel_Type>
+  images: Array<Maybe<ComponentCoreCarouselImage>>
+  title: Scalars['String']
+  variant?: Maybe<Enum_Componentmodulescarousel_Variant>
 }
 
-export type ComponentModulesCarouselItemsArgs = {
-  filters?: InputMaybe<ComponentCoreCarouselItemFiltersInput>
+export type ComponentModulesCarouselImagesArgs = {
+  filters?: InputMaybe<ComponentCoreCarouselImageFiltersInput>
   pagination?: InputMaybe<PaginationArg>
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
 }
@@ -497,21 +510,15 @@ export type DateTimeFilterInput = {
   startsWith?: InputMaybe<Scalars['DateTime']>
 }
 
-export enum Enum_Componentcorecarouselitem_Type {
-  Highlight = 'Highlight',
-  Maker = 'Maker',
-}
-
 export enum Enum_Componentcorepublicationdate_Displaytype {
   Date = 'Date',
   Year = 'Year',
 }
 
-export enum Enum_Componentmodulescarousel_Type {
-  Combined = 'Combined',
-  Highlights = 'Highlights',
-  Makers = 'Makers',
-  Themes = 'Themes',
+export enum Enum_Componentmodulescarousel_Variant {
+  FourUp = 'four_up',
+  ThreeUp = 'three_up',
+  TwoUp = 'two_up',
 }
 
 export enum Enum_Componentmodulesgridmodule_Fieldtypes {
@@ -572,9 +579,11 @@ export type FloatFilterInput = {
 export type GenericMorph =
   | Author
   | ComponentCoreButton
-  | ComponentCoreCarouselItem
+  | ComponentCoreCarouselImage
   | ComponentCoreFeaturedFields
   | ComponentCoreGridFeaturedFields
+  | ComponentCoreMuxAudio
+  | ComponentCoreMuxVideo
   | ComponentCorePublicationDate
   | ComponentCoreStandAloneLink
   | ComponentCoreTimeframe
@@ -594,8 +603,8 @@ export type GenericMorph =
   | Landingpage
   | Location
   | Menupage
+  | MuxVideoUploaderMuxAsset
   | Story
-  | Table
   | Theme
   | TriplyRecord
   | UploadFile
@@ -630,7 +639,6 @@ export type HomepageLocalizationsArgs = {
 
 export type HomepageComponentsDynamicZone =
   | ComponentModulesButtonsModule
-  | ComponentModulesCarousel
   | ComponentModulesGridModule
   | ComponentModulesImage
   | ComponentModulesImageCarousel
@@ -797,7 +805,6 @@ export type LandingpageLocalizationsArgs = {
 
 export type LandingpageComponentsDynamicZone =
   | ComponentModulesButtonsModule
-  | ComponentModulesCarousel
   | ComponentModulesGridModule
   | ComponentModulesImage
   | ComponentModulesImageCarousel
@@ -1031,9 +1038,9 @@ export type Mutation = {
   createLocationLocalization?: Maybe<LocationEntityResponse>
   createMenupage?: Maybe<MenupageEntityResponse>
   createMenupageLocalization?: Maybe<MenupageEntityResponse>
+  createMuxVideoUploaderMuxAsset?: Maybe<MuxVideoUploaderMuxAssetEntityResponse>
   createStory?: Maybe<StoryEntityResponse>
   createStoryLocalization?: Maybe<StoryEntityResponse>
-  createTable?: Maybe<TableEntityResponse>
   createTheme?: Maybe<ThemeEntityResponse>
   createThemeLocalization?: Maybe<ThemeEntityResponse>
   createTriplyRecord?: Maybe<TriplyRecordEntityResponse>
@@ -1050,8 +1057,8 @@ export type Mutation = {
   deleteLandingpage?: Maybe<LandingpageEntityResponse>
   deleteLocation?: Maybe<LocationEntityResponse>
   deleteMenupage?: Maybe<MenupageEntityResponse>
+  deleteMuxVideoUploaderMuxAsset?: Maybe<MuxVideoUploaderMuxAssetEntityResponse>
   deleteStory?: Maybe<StoryEntityResponse>
-  deleteTable?: Maybe<TableEntityResponse>
   deleteTheme?: Maybe<ThemeEntityResponse>
   deleteTriplyRecord?: Maybe<TriplyRecordEntityResponse>
   deleteUploadFile?: Maybe<UploadFileEntityResponse>
@@ -1079,8 +1086,8 @@ export type Mutation = {
   updateLandingpage?: Maybe<LandingpageEntityResponse>
   updateLocation?: Maybe<LocationEntityResponse>
   updateMenupage?: Maybe<MenupageEntityResponse>
+  updateMuxVideoUploaderMuxAsset?: Maybe<MuxVideoUploaderMuxAssetEntityResponse>
   updateStory?: Maybe<StoryEntityResponse>
-  updateTable?: Maybe<TableEntityResponse>
   updateTheme?: Maybe<ThemeEntityResponse>
   updateTriplyRecord?: Maybe<TriplyRecordEntityResponse>
   updateUploadFile?: Maybe<UploadFileEntityResponse>
@@ -1149,6 +1156,10 @@ export type MutationCreateMenupageLocalizationArgs = {
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
 }
 
+export type MutationCreateMuxVideoUploaderMuxAssetArgs = {
+  data: MuxVideoUploaderMuxAssetInput
+}
+
 export type MutationCreateStoryArgs = {
   data: StoryInput
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
@@ -1158,10 +1169,6 @@ export type MutationCreateStoryLocalizationArgs = {
   data?: InputMaybe<StoryInput>
   id?: InputMaybe<Scalars['ID']>
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
-}
-
-export type MutationCreateTableArgs = {
-  data: TableInput
 }
 
 export type MutationCreateThemeArgs = {
@@ -1226,13 +1233,13 @@ export type MutationDeleteMenupageArgs = {
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
 }
 
+export type MutationDeleteMuxVideoUploaderMuxAssetArgs = {
+  id: Scalars['ID']
+}
+
 export type MutationDeleteStoryArgs = {
   id: Scalars['ID']
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
-}
-
-export type MutationDeleteTableArgs = {
-  id: Scalars['ID']
 }
 
 export type MutationDeleteThemeArgs = {
@@ -1336,15 +1343,15 @@ export type MutationUpdateMenupageArgs = {
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
 }
 
+export type MutationUpdateMuxVideoUploaderMuxAssetArgs = {
+  data: MuxVideoUploaderMuxAssetInput
+  id: Scalars['ID']
+}
+
 export type MutationUpdateStoryArgs = {
   data: StoryInput
   id: Scalars['ID']
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
-}
-
-export type MutationUpdateTableArgs = {
-  data: TableInput
-  id: Scalars['ID']
 }
 
 export type MutationUpdateThemeArgs = {
@@ -1386,6 +1393,68 @@ export type MutationUploadArgs = {
   refId?: InputMaybe<Scalars['ID']>
 }
 
+export type MuxVideoUploaderMuxAsset = {
+  __typename?: 'MuxVideoUploaderMuxAsset'
+  aspect_ratio?: Maybe<Scalars['String']>
+  asset_id?: Maybe<Scalars['String']>
+  createdAt?: Maybe<Scalars['DateTime']>
+  duration?: Maybe<Scalars['Float']>
+  error_message?: Maybe<Scalars['String']>
+  isReady?: Maybe<Scalars['Boolean']>
+  playback_id?: Maybe<Scalars['String']>
+  signed: Scalars['Boolean']
+  title: Scalars['String']
+  updatedAt?: Maybe<Scalars['DateTime']>
+  upload_id?: Maybe<Scalars['String']>
+}
+
+export type MuxVideoUploaderMuxAssetEntity = {
+  __typename?: 'MuxVideoUploaderMuxAssetEntity'
+  attributes?: Maybe<MuxVideoUploaderMuxAsset>
+  id?: Maybe<Scalars['ID']>
+}
+
+export type MuxVideoUploaderMuxAssetEntityResponse = {
+  __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+  data?: Maybe<MuxVideoUploaderMuxAssetEntity>
+}
+
+export type MuxVideoUploaderMuxAssetEntityResponseCollection = {
+  __typename?: 'MuxVideoUploaderMuxAssetEntityResponseCollection'
+  data: Array<MuxVideoUploaderMuxAssetEntity>
+  meta: ResponseCollectionMeta
+}
+
+export type MuxVideoUploaderMuxAssetFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<MuxVideoUploaderMuxAssetFiltersInput>>>
+  aspect_ratio?: InputMaybe<StringFilterInput>
+  asset_id?: InputMaybe<StringFilterInput>
+  createdAt?: InputMaybe<DateTimeFilterInput>
+  duration?: InputMaybe<FloatFilterInput>
+  error_message?: InputMaybe<StringFilterInput>
+  id?: InputMaybe<IdFilterInput>
+  isReady?: InputMaybe<BooleanFilterInput>
+  not?: InputMaybe<MuxVideoUploaderMuxAssetFiltersInput>
+  or?: InputMaybe<Array<InputMaybe<MuxVideoUploaderMuxAssetFiltersInput>>>
+  playback_id?: InputMaybe<StringFilterInput>
+  signed?: InputMaybe<BooleanFilterInput>
+  title?: InputMaybe<StringFilterInput>
+  updatedAt?: InputMaybe<DateTimeFilterInput>
+  upload_id?: InputMaybe<StringFilterInput>
+}
+
+export type MuxVideoUploaderMuxAssetInput = {
+  aspect_ratio?: InputMaybe<Scalars['String']>
+  asset_id?: InputMaybe<Scalars['String']>
+  duration?: InputMaybe<Scalars['Float']>
+  error_message?: InputMaybe<Scalars['String']>
+  isReady?: InputMaybe<Scalars['Boolean']>
+  playback_id?: InputMaybe<Scalars['String']>
+  signed?: InputMaybe<Scalars['Boolean']>
+  title?: InputMaybe<Scalars['String']>
+  upload_id?: InputMaybe<Scalars['String']>
+}
+
 export type Pagination = {
   __typename?: 'Pagination'
   page: Scalars['Int']
@@ -1425,10 +1494,10 @@ export type Query = {
   me?: Maybe<UsersPermissionsMe>
   menupage?: Maybe<MenupageEntityResponse>
   menupages?: Maybe<MenupageEntityResponseCollection>
+  muxVideoUploaderMuxAsset?: Maybe<MuxVideoUploaderMuxAssetEntityResponse>
+  muxVideoUploaderMuxAssets?: Maybe<MuxVideoUploaderMuxAssetEntityResponseCollection>
   stories?: Maybe<StoryEntityResponseCollection>
   story?: Maybe<StoryEntityResponse>
-  table?: Maybe<TableEntityResponse>
-  tables?: Maybe<TableEntityResponseCollection>
   theme?: Maybe<ThemeEntityResponse>
   themes?: Maybe<ThemeEntityResponseCollection>
   triplyRecord?: Maybe<TriplyRecordEntityResponse>
@@ -1533,6 +1602,16 @@ export type QueryMenupagesArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
 }
 
+export type QueryMuxVideoUploaderMuxAssetArgs = {
+  id?: InputMaybe<Scalars['ID']>
+}
+
+export type QueryMuxVideoUploaderMuxAssetsArgs = {
+  filters?: InputMaybe<MuxVideoUploaderMuxAssetFiltersInput>
+  pagination?: InputMaybe<PaginationArg>
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
+}
+
 export type QueryStoriesArgs = {
   filters?: InputMaybe<StoryFiltersInput>
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
@@ -1544,17 +1623,6 @@ export type QueryStoriesArgs = {
 export type QueryStoryArgs = {
   id?: InputMaybe<Scalars['ID']>
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
-}
-
-export type QueryTableArgs = {
-  id?: InputMaybe<Scalars['ID']>
-}
-
-export type QueryTablesArgs = {
-  filters?: InputMaybe<TableFiltersInput>
-  pagination?: InputMaybe<PaginationArg>
-  publicationState?: InputMaybe<PublicationState>
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
 }
 
 export type QueryThemeArgs = {
@@ -1685,6 +1753,8 @@ export type StoryTriplyRecordsArgs = {
 }
 
 export type StoryComponentsDynamicZone =
+  | ComponentCoreMuxAudio
+  | ComponentCoreMuxVideo
   | ComponentCoreStandAloneLink
   | ComponentModulesButtonsModule
   | ComponentModulesImage
@@ -1783,50 +1853,6 @@ export type StringFilterInput = {
   null?: InputMaybe<Scalars['Boolean']>
   or?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
   startsWith?: InputMaybe<Scalars['String']>
-}
-
-export type Table = {
-  __typename?: 'Table'
-  createdAt?: Maybe<Scalars['DateTime']>
-  description?: Maybe<Scalars['String']>
-  name?: Maybe<Scalars['String']>
-  publishedAt?: Maybe<Scalars['DateTime']>
-  updatedAt?: Maybe<Scalars['DateTime']>
-}
-
-export type TableEntity = {
-  __typename?: 'TableEntity'
-  attributes?: Maybe<Table>
-  id?: Maybe<Scalars['ID']>
-}
-
-export type TableEntityResponse = {
-  __typename?: 'TableEntityResponse'
-  data?: Maybe<TableEntity>
-}
-
-export type TableEntityResponseCollection = {
-  __typename?: 'TableEntityResponseCollection'
-  data: Array<TableEntity>
-  meta: ResponseCollectionMeta
-}
-
-export type TableFiltersInput = {
-  and?: InputMaybe<Array<InputMaybe<TableFiltersInput>>>
-  createdAt?: InputMaybe<DateTimeFilterInput>
-  description?: InputMaybe<StringFilterInput>
-  id?: InputMaybe<IdFilterInput>
-  name?: InputMaybe<StringFilterInput>
-  not?: InputMaybe<TableFiltersInput>
-  or?: InputMaybe<Array<InputMaybe<TableFiltersInput>>>
-  publishedAt?: InputMaybe<DateTimeFilterInput>
-  updatedAt?: InputMaybe<DateTimeFilterInput>
-}
-
-export type TableInput = {
-  description?: InputMaybe<Scalars['String']>
-  name?: InputMaybe<Scalars['String']>
-  publishedAt?: InputMaybe<Scalars['DateTime']>
 }
 
 export type Theme = {
@@ -2430,70 +2456,8 @@ export type HomepageFragmentFragment = {
         buttons?: Array<{
           __typename?: 'ComponentCoreButton'
           id: string
-          text?: string | null
-          url?: string | null
-        } | null> | null
-      }
-    | {
-        __typename: 'ComponentModulesCarousel'
-        id: string
-        buttonText?: string | null
-        buttonUrl?: string | null
-        description?: string | null
-        title?: string | null
-        type?: Enum_Componentmodulescarousel_Type | null
-        items?: Array<{
-          __typename?: 'ComponentCoreCarouselItem'
-          id: string
-          description?: string | null
-          name?: string | null
-          type?: Enum_Componentcorecarouselitem_Type | null
-          picture?: {
-            __typename?: 'UploadFileEntityResponse'
-            data?: {
-              __typename?: 'UploadFileEntity'
-              id?: string | null
-              attributes?: {
-                __typename?: 'UploadFile'
-                hash: string
-                mime: string
-                name: string
-                provider: string
-                size: number
-                url: string
-                alternativeText?: string | null
-                caption?: string | null
-                createdAt?: any | null
-                ext?: string | null
-                formats?: any | null
-                height?: number | null
-                previewUrl?: string | null
-                provider_metadata?: any | null
-                updatedAt?: any | null
-                width?: number | null
-              } | null
-            } | null
-          } | null
-          triply_record?: {
-            __typename?: 'TriplyRecordEntityResponse'
-            data?: {
-              __typename?: 'TriplyRecordEntity'
-              id?: string | null
-              attributes?: {
-                __typename?: 'TriplyRecord'
-                recordId: string
-                type: Enum_Triplyrecord_Type
-              } | null
-            } | null
-          } | null
-          story?: {
-            __typename?: 'StoryEntityResponse'
-            data?: {
-              __typename?: 'StoryEntity'
-              id?: string | null
-              attributes?: { __typename?: 'Story'; slug: string } | null
-            } | null
-          } | null
+          text: string
+          url: string
         } | null> | null
       }
     | {
@@ -2508,8 +2472,8 @@ export type HomepageFragmentFragment = {
         buttons?: Array<{
           __typename?: 'ComponentCoreButton'
           id: string
-          text?: string | null
-          url?: string | null
+          text: string
+          url: string
         } | null> | null
         featuredFields?: Array<{
           __typename?: 'ComponentCoreFeaturedFields'
@@ -2521,7 +2485,7 @@ export type HomepageFragmentFragment = {
           __typename?: 'ComponentCoreGridFeaturedFields'
           id: string
           subtitle?: string | null
-          title?: string | null
+          title: string
           story?: {
             __typename?: 'StoryEntityResponse'
             data?: {
@@ -2725,70 +2689,8 @@ export type HomepageQuery = {
                     buttons?: Array<{
                       __typename?: 'ComponentCoreButton'
                       id: string
-                      text?: string | null
-                      url?: string | null
-                    } | null> | null
-                  }
-                | {
-                    __typename: 'ComponentModulesCarousel'
-                    id: string
-                    buttonText?: string | null
-                    buttonUrl?: string | null
-                    description?: string | null
-                    title?: string | null
-                    type?: Enum_Componentmodulescarousel_Type | null
-                    items?: Array<{
-                      __typename?: 'ComponentCoreCarouselItem'
-                      id: string
-                      description?: string | null
-                      name?: string | null
-                      type?: Enum_Componentcorecarouselitem_Type | null
-                      picture?: {
-                        __typename?: 'UploadFileEntityResponse'
-                        data?: {
-                          __typename?: 'UploadFileEntity'
-                          id?: string | null
-                          attributes?: {
-                            __typename?: 'UploadFile'
-                            hash: string
-                            mime: string
-                            name: string
-                            provider: string
-                            size: number
-                            url: string
-                            alternativeText?: string | null
-                            caption?: string | null
-                            createdAt?: any | null
-                            ext?: string | null
-                            formats?: any | null
-                            height?: number | null
-                            previewUrl?: string | null
-                            provider_metadata?: any | null
-                            updatedAt?: any | null
-                            width?: number | null
-                          } | null
-                        } | null
-                      } | null
-                      triply_record?: {
-                        __typename?: 'TriplyRecordEntityResponse'
-                        data?: {
-                          __typename?: 'TriplyRecordEntity'
-                          id?: string | null
-                          attributes?: {
-                            __typename?: 'TriplyRecord'
-                            recordId: string
-                            type: Enum_Triplyrecord_Type
-                          } | null
-                        } | null
-                      } | null
-                      story?: {
-                        __typename?: 'StoryEntityResponse'
-                        data?: {
-                          __typename?: 'StoryEntity'
-                          id?: string | null
-                          attributes?: { __typename?: 'Story'; slug: string } | null
-                        } | null
-                      } | null
+                      text: string
+                      url: string
                     } | null> | null
                   }
                 | {
@@ -2803,8 +2705,8 @@ export type HomepageQuery = {
                     buttons?: Array<{
                       __typename?: 'ComponentCoreButton'
                       id: string
-                      text?: string | null
-                      url?: string | null
+                      text: string
+                      url: string
                     } | null> | null
                     featuredFields?: Array<{
                       __typename?: 'ComponentCoreFeaturedFields'
@@ -2816,7 +2718,7 @@ export type HomepageQuery = {
                       __typename?: 'ComponentCoreGridFeaturedFields'
                       id: string
                       subtitle?: string | null
-                      title?: string | null
+                      title: string
                       story?: {
                         __typename?: 'StoryEntityResponse'
                         data?: {
@@ -2988,70 +2890,8 @@ export type HomepageQuery = {
               buttons?: Array<{
                 __typename?: 'ComponentCoreButton'
                 id: string
-                text?: string | null
-                url?: string | null
-              } | null> | null
-            }
-          | {
-              __typename: 'ComponentModulesCarousel'
-              id: string
-              buttonText?: string | null
-              buttonUrl?: string | null
-              description?: string | null
-              title?: string | null
-              type?: Enum_Componentmodulescarousel_Type | null
-              items?: Array<{
-                __typename?: 'ComponentCoreCarouselItem'
-                id: string
-                description?: string | null
-                name?: string | null
-                type?: Enum_Componentcorecarouselitem_Type | null
-                picture?: {
-                  __typename?: 'UploadFileEntityResponse'
-                  data?: {
-                    __typename?: 'UploadFileEntity'
-                    id?: string | null
-                    attributes?: {
-                      __typename?: 'UploadFile'
-                      hash: string
-                      mime: string
-                      name: string
-                      provider: string
-                      size: number
-                      url: string
-                      alternativeText?: string | null
-                      caption?: string | null
-                      createdAt?: any | null
-                      ext?: string | null
-                      formats?: any | null
-                      height?: number | null
-                      previewUrl?: string | null
-                      provider_metadata?: any | null
-                      updatedAt?: any | null
-                      width?: number | null
-                    } | null
-                  } | null
-                } | null
-                triply_record?: {
-                  __typename?: 'TriplyRecordEntityResponse'
-                  data?: {
-                    __typename?: 'TriplyRecordEntity'
-                    id?: string | null
-                    attributes?: {
-                      __typename?: 'TriplyRecord'
-                      recordId: string
-                      type: Enum_Triplyrecord_Type
-                    } | null
-                  } | null
-                } | null
-                story?: {
-                  __typename?: 'StoryEntityResponse'
-                  data?: {
-                    __typename?: 'StoryEntity'
-                    id?: string | null
-                    attributes?: { __typename?: 'Story'; slug: string } | null
-                  } | null
-                } | null
+                text: string
+                url: string
               } | null> | null
             }
           | {
@@ -3066,8 +2906,8 @@ export type HomepageQuery = {
               buttons?: Array<{
                 __typename?: 'ComponentCoreButton'
                 id: string
-                text?: string | null
-                url?: string | null
+                text: string
+                url: string
               } | null> | null
               featuredFields?: Array<{
                 __typename?: 'ComponentCoreFeaturedFields'
@@ -3079,7 +2919,7 @@ export type HomepageQuery = {
                 __typename?: 'ComponentCoreGridFeaturedFields'
                 id: string
                 subtitle?: string | null
-                title?: string | null
+                title: string
                 story?: {
                   __typename?: 'StoryEntityResponse'
                   data?: {
@@ -3291,6 +3131,58 @@ export type HighlightedHomepageThemesQuery = {
                     locale?: string | null
                     components?: Array<
                       | {
+                          __typename: 'ComponentCoreMuxAudio'
+                          id: string
+                          caption?: string | null
+                          muxAudioRelation?: {
+                            __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                            data?: {
+                              __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'MuxVideoUploaderMuxAsset'
+                                title: string
+                                upload_id?: string | null
+                                asset_id?: string | null
+                                playback_id?: string | null
+                                signed: boolean
+                                error_message?: string | null
+                                isReady?: boolean | null
+                                duration?: number | null
+                                aspect_ratio?: string | null
+                                createdAt?: any | null
+                                updatedAt?: any | null
+                              } | null
+                            } | null
+                          } | null
+                        }
+                      | {
+                          __typename: 'ComponentCoreMuxVideo'
+                          id: string
+                          caption?: string | null
+                          muxVideoRelation?: {
+                            __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                            data?: {
+                              __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'MuxVideoUploaderMuxAsset'
+                                title: string
+                                upload_id?: string | null
+                                asset_id?: string | null
+                                playback_id?: string | null
+                                signed: boolean
+                                error_message?: string | null
+                                isReady?: boolean | null
+                                duration?: number | null
+                                aspect_ratio?: string | null
+                                createdAt?: any | null
+                                updatedAt?: any | null
+                              } | null
+                            } | null
+                          } | null
+                        }
+                      | {
                           __typename: 'ComponentCoreStandAloneLink'
                           id: string
                           label: string
@@ -3328,8 +3220,8 @@ export type HighlightedHomepageThemesQuery = {
                           buttons?: Array<{
                             __typename?: 'ComponentCoreButton'
                             id: string
-                            text?: string | null
-                            url?: string | null
+                            text: string
+                            url: string
                           } | null> | null
                         }
                       | {
@@ -3508,8 +3400,8 @@ export type HighlightedHomepageThemesQuery = {
                       buttons?: Array<{
                         __typename?: 'ComponentCoreButton'
                         id: string
-                        text?: string | null
-                        url?: string | null
+                        text: string
+                        url: string
                       } | null> | null
                     } | null
                     parent_story?: {
@@ -3521,6 +3413,8 @@ export type HighlightedHomepageThemesQuery = {
                           __typename?: 'Story'
                           title: string
                           components?: Array<
+                            | { __typename: 'ComponentCoreMuxAudio' }
+                            | { __typename: 'ComponentCoreMuxVideo' }
                             | { __typename: 'ComponentCoreStandAloneLink' }
                             | { __typename: 'ComponentModulesButtonsModule' }
                             | {
@@ -3631,6 +3525,8 @@ export type HighlightedHomepageThemesQuery = {
                           __typename?: 'Story'
                           title: string
                           components?: Array<
+                            | { __typename: 'ComponentCoreMuxAudio' }
+                            | { __typename: 'ComponentCoreMuxVideo' }
                             | { __typename: 'ComponentCoreStandAloneLink' }
                             | { __typename: 'ComponentModulesButtonsModule' }
                             | {
@@ -3752,6 +3648,58 @@ export type HighlightedHomepageThemesQuery = {
                     locale?: string | null
                     components?: Array<
                       | {
+                          __typename: 'ComponentCoreMuxAudio'
+                          id: string
+                          caption?: string | null
+                          muxAudioRelation?: {
+                            __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                            data?: {
+                              __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'MuxVideoUploaderMuxAsset'
+                                title: string
+                                upload_id?: string | null
+                                asset_id?: string | null
+                                playback_id?: string | null
+                                signed: boolean
+                                error_message?: string | null
+                                isReady?: boolean | null
+                                duration?: number | null
+                                aspect_ratio?: string | null
+                                createdAt?: any | null
+                                updatedAt?: any | null
+                              } | null
+                            } | null
+                          } | null
+                        }
+                      | {
+                          __typename: 'ComponentCoreMuxVideo'
+                          id: string
+                          caption?: string | null
+                          muxVideoRelation?: {
+                            __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                            data?: {
+                              __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'MuxVideoUploaderMuxAsset'
+                                title: string
+                                upload_id?: string | null
+                                asset_id?: string | null
+                                playback_id?: string | null
+                                signed: boolean
+                                error_message?: string | null
+                                isReady?: boolean | null
+                                duration?: number | null
+                                aspect_ratio?: string | null
+                                createdAt?: any | null
+                                updatedAt?: any | null
+                              } | null
+                            } | null
+                          } | null
+                        }
+                      | {
                           __typename: 'ComponentCoreStandAloneLink'
                           id: string
                           label: string
@@ -3789,8 +3737,8 @@ export type HighlightedHomepageThemesQuery = {
                           buttons?: Array<{
                             __typename?: 'ComponentCoreButton'
                             id: string
-                            text?: string | null
-                            url?: string | null
+                            text: string
+                            url: string
                           } | null> | null
                         }
                       | {
@@ -3969,8 +3917,8 @@ export type HighlightedHomepageThemesQuery = {
                       buttons?: Array<{
                         __typename?: 'ComponentCoreButton'
                         id: string
-                        text?: string | null
-                        url?: string | null
+                        text: string
+                        url: string
                       } | null> | null
                     } | null
                     parent_story?: {
@@ -3982,6 +3930,8 @@ export type HighlightedHomepageThemesQuery = {
                           __typename?: 'Story'
                           title: string
                           components?: Array<
+                            | { __typename: 'ComponentCoreMuxAudio' }
+                            | { __typename: 'ComponentCoreMuxVideo' }
                             | { __typename: 'ComponentCoreStandAloneLink' }
                             | { __typename: 'ComponentModulesButtonsModule' }
                             | {
@@ -4092,6 +4042,8 @@ export type HighlightedHomepageThemesQuery = {
                           __typename?: 'Story'
                           title: string
                           components?: Array<
+                            | { __typename: 'ComponentCoreMuxAudio' }
+                            | { __typename: 'ComponentCoreMuxVideo' }
                             | { __typename: 'ComponentCoreStandAloneLink' }
                             | { __typename: 'ComponentModulesButtonsModule' }
                             | {
@@ -4248,70 +4200,8 @@ export type LandingpageFragmentFragment = {
         buttons?: Array<{
           __typename?: 'ComponentCoreButton'
           id: string
-          text?: string | null
-          url?: string | null
-        } | null> | null
-      }
-    | {
-        __typename: 'ComponentModulesCarousel'
-        id: string
-        buttonText?: string | null
-        buttonUrl?: string | null
-        description?: string | null
-        title?: string | null
-        type?: Enum_Componentmodulescarousel_Type | null
-        items?: Array<{
-          __typename?: 'ComponentCoreCarouselItem'
-          id: string
-          description?: string | null
-          name?: string | null
-          type?: Enum_Componentcorecarouselitem_Type | null
-          picture?: {
-            __typename?: 'UploadFileEntityResponse'
-            data?: {
-              __typename?: 'UploadFileEntity'
-              id?: string | null
-              attributes?: {
-                __typename?: 'UploadFile'
-                hash: string
-                mime: string
-                name: string
-                provider: string
-                size: number
-                url: string
-                alternativeText?: string | null
-                caption?: string | null
-                createdAt?: any | null
-                ext?: string | null
-                formats?: any | null
-                height?: number | null
-                previewUrl?: string | null
-                provider_metadata?: any | null
-                updatedAt?: any | null
-                width?: number | null
-              } | null
-            } | null
-          } | null
-          triply_record?: {
-            __typename?: 'TriplyRecordEntityResponse'
-            data?: {
-              __typename?: 'TriplyRecordEntity'
-              id?: string | null
-              attributes?: {
-                __typename?: 'TriplyRecord'
-                recordId: string
-                type: Enum_Triplyrecord_Type
-              } | null
-            } | null
-          } | null
-          story?: {
-            __typename?: 'StoryEntityResponse'
-            data?: {
-              __typename?: 'StoryEntity'
-              id?: string | null
-              attributes?: { __typename?: 'Story'; slug: string } | null
-            } | null
-          } | null
+          text: string
+          url: string
         } | null> | null
       }
     | {
@@ -4326,8 +4216,8 @@ export type LandingpageFragmentFragment = {
         buttons?: Array<{
           __typename?: 'ComponentCoreButton'
           id: string
-          text?: string | null
-          url?: string | null
+          text: string
+          url: string
         } | null> | null
         featuredFields?: Array<{
           __typename?: 'ComponentCoreFeaturedFields'
@@ -4339,7 +4229,7 @@ export type LandingpageFragmentFragment = {
           __typename?: 'ComponentCoreGridFeaturedFields'
           id: string
           subtitle?: string | null
-          title?: string | null
+          title: string
           story?: {
             __typename?: 'StoryEntityResponse'
             data?: {
@@ -4536,70 +4426,8 @@ export type LandingpageEntityFragmentFragment = {
                 buttons?: Array<{
                   __typename?: 'ComponentCoreButton'
                   id: string
-                  text?: string | null
-                  url?: string | null
-                } | null> | null
-              }
-            | {
-                __typename: 'ComponentModulesCarousel'
-                id: string
-                buttonText?: string | null
-                buttonUrl?: string | null
-                description?: string | null
-                title?: string | null
-                type?: Enum_Componentmodulescarousel_Type | null
-                items?: Array<{
-                  __typename?: 'ComponentCoreCarouselItem'
-                  id: string
-                  description?: string | null
-                  name?: string | null
-                  type?: Enum_Componentcorecarouselitem_Type | null
-                  picture?: {
-                    __typename?: 'UploadFileEntityResponse'
-                    data?: {
-                      __typename?: 'UploadFileEntity'
-                      id?: string | null
-                      attributes?: {
-                        __typename?: 'UploadFile'
-                        hash: string
-                        mime: string
-                        name: string
-                        provider: string
-                        size: number
-                        url: string
-                        alternativeText?: string | null
-                        caption?: string | null
-                        createdAt?: any | null
-                        ext?: string | null
-                        formats?: any | null
-                        height?: number | null
-                        previewUrl?: string | null
-                        provider_metadata?: any | null
-                        updatedAt?: any | null
-                        width?: number | null
-                      } | null
-                    } | null
-                  } | null
-                  triply_record?: {
-                    __typename?: 'TriplyRecordEntityResponse'
-                    data?: {
-                      __typename?: 'TriplyRecordEntity'
-                      id?: string | null
-                      attributes?: {
-                        __typename?: 'TriplyRecord'
-                        recordId: string
-                        type: Enum_Triplyrecord_Type
-                      } | null
-                    } | null
-                  } | null
-                  story?: {
-                    __typename?: 'StoryEntityResponse'
-                    data?: {
-                      __typename?: 'StoryEntity'
-                      id?: string | null
-                      attributes?: { __typename?: 'Story'; slug: string } | null
-                    } | null
-                  } | null
+                  text: string
+                  url: string
                 } | null> | null
               }
             | {
@@ -4614,8 +4442,8 @@ export type LandingpageEntityFragmentFragment = {
                 buttons?: Array<{
                   __typename?: 'ComponentCoreButton'
                   id: string
-                  text?: string | null
-                  url?: string | null
+                  text: string
+                  url: string
                 } | null> | null
                 featuredFields?: Array<{
                   __typename?: 'ComponentCoreFeaturedFields'
@@ -4627,7 +4455,7 @@ export type LandingpageEntityFragmentFragment = {
                   __typename?: 'ComponentCoreGridFeaturedFields'
                   id: string
                   subtitle?: string | null
-                  title?: string | null
+                  title: string
                   story?: {
                     __typename?: 'StoryEntityResponse'
                     data?: {
@@ -4799,70 +4627,8 @@ export type LandingpageEntityFragmentFragment = {
           buttons?: Array<{
             __typename?: 'ComponentCoreButton'
             id: string
-            text?: string | null
-            url?: string | null
-          } | null> | null
-        }
-      | {
-          __typename: 'ComponentModulesCarousel'
-          id: string
-          buttonText?: string | null
-          buttonUrl?: string | null
-          description?: string | null
-          title?: string | null
-          type?: Enum_Componentmodulescarousel_Type | null
-          items?: Array<{
-            __typename?: 'ComponentCoreCarouselItem'
-            id: string
-            description?: string | null
-            name?: string | null
-            type?: Enum_Componentcorecarouselitem_Type | null
-            picture?: {
-              __typename?: 'UploadFileEntityResponse'
-              data?: {
-                __typename?: 'UploadFileEntity'
-                id?: string | null
-                attributes?: {
-                  __typename?: 'UploadFile'
-                  hash: string
-                  mime: string
-                  name: string
-                  provider: string
-                  size: number
-                  url: string
-                  alternativeText?: string | null
-                  caption?: string | null
-                  createdAt?: any | null
-                  ext?: string | null
-                  formats?: any | null
-                  height?: number | null
-                  previewUrl?: string | null
-                  provider_metadata?: any | null
-                  updatedAt?: any | null
-                  width?: number | null
-                } | null
-              } | null
-            } | null
-            triply_record?: {
-              __typename?: 'TriplyRecordEntityResponse'
-              data?: {
-                __typename?: 'TriplyRecordEntity'
-                id?: string | null
-                attributes?: {
-                  __typename?: 'TriplyRecord'
-                  recordId: string
-                  type: Enum_Triplyrecord_Type
-                } | null
-              } | null
-            } | null
-            story?: {
-              __typename?: 'StoryEntityResponse'
-              data?: {
-                __typename?: 'StoryEntity'
-                id?: string | null
-                attributes?: { __typename?: 'Story'; slug: string } | null
-              } | null
-            } | null
+            text: string
+            url: string
           } | null> | null
         }
       | {
@@ -4877,8 +4643,8 @@ export type LandingpageEntityFragmentFragment = {
           buttons?: Array<{
             __typename?: 'ComponentCoreButton'
             id: string
-            text?: string | null
-            url?: string | null
+            text: string
+            url: string
           } | null> | null
           featuredFields?: Array<{
             __typename?: 'ComponentCoreFeaturedFields'
@@ -4890,7 +4656,7 @@ export type LandingpageEntityFragmentFragment = {
             __typename?: 'ComponentCoreGridFeaturedFields'
             id: string
             subtitle?: string | null
-            title?: string | null
+            title: string
             story?: {
               __typename?: 'StoryEntityResponse'
               data?: {
@@ -5097,70 +4863,8 @@ export type LandingPageQuery = {
                     buttons?: Array<{
                       __typename?: 'ComponentCoreButton'
                       id: string
-                      text?: string | null
-                      url?: string | null
-                    } | null> | null
-                  }
-                | {
-                    __typename: 'ComponentModulesCarousel'
-                    id: string
-                    buttonText?: string | null
-                    buttonUrl?: string | null
-                    description?: string | null
-                    title?: string | null
-                    type?: Enum_Componentmodulescarousel_Type | null
-                    items?: Array<{
-                      __typename?: 'ComponentCoreCarouselItem'
-                      id: string
-                      description?: string | null
-                      name?: string | null
-                      type?: Enum_Componentcorecarouselitem_Type | null
-                      picture?: {
-                        __typename?: 'UploadFileEntityResponse'
-                        data?: {
-                          __typename?: 'UploadFileEntity'
-                          id?: string | null
-                          attributes?: {
-                            __typename?: 'UploadFile'
-                            hash: string
-                            mime: string
-                            name: string
-                            provider: string
-                            size: number
-                            url: string
-                            alternativeText?: string | null
-                            caption?: string | null
-                            createdAt?: any | null
-                            ext?: string | null
-                            formats?: any | null
-                            height?: number | null
-                            previewUrl?: string | null
-                            provider_metadata?: any | null
-                            updatedAt?: any | null
-                            width?: number | null
-                          } | null
-                        } | null
-                      } | null
-                      triply_record?: {
-                        __typename?: 'TriplyRecordEntityResponse'
-                        data?: {
-                          __typename?: 'TriplyRecordEntity'
-                          id?: string | null
-                          attributes?: {
-                            __typename?: 'TriplyRecord'
-                            recordId: string
-                            type: Enum_Triplyrecord_Type
-                          } | null
-                        } | null
-                      } | null
-                      story?: {
-                        __typename?: 'StoryEntityResponse'
-                        data?: {
-                          __typename?: 'StoryEntity'
-                          id?: string | null
-                          attributes?: { __typename?: 'Story'; slug: string } | null
-                        } | null
-                      } | null
+                      text: string
+                      url: string
                     } | null> | null
                   }
                 | {
@@ -5175,8 +4879,8 @@ export type LandingPageQuery = {
                     buttons?: Array<{
                       __typename?: 'ComponentCoreButton'
                       id: string
-                      text?: string | null
-                      url?: string | null
+                      text: string
+                      url: string
                     } | null> | null
                     featuredFields?: Array<{
                       __typename?: 'ComponentCoreFeaturedFields'
@@ -5188,7 +4892,7 @@ export type LandingPageQuery = {
                       __typename?: 'ComponentCoreGridFeaturedFields'
                       id: string
                       subtitle?: string | null
-                      title?: string | null
+                      title: string
                       story?: {
                         __typename?: 'StoryEntityResponse'
                         data?: {
@@ -5360,70 +5064,8 @@ export type LandingPageQuery = {
               buttons?: Array<{
                 __typename?: 'ComponentCoreButton'
                 id: string
-                text?: string | null
-                url?: string | null
-              } | null> | null
-            }
-          | {
-              __typename: 'ComponentModulesCarousel'
-              id: string
-              buttonText?: string | null
-              buttonUrl?: string | null
-              description?: string | null
-              title?: string | null
-              type?: Enum_Componentmodulescarousel_Type | null
-              items?: Array<{
-                __typename?: 'ComponentCoreCarouselItem'
-                id: string
-                description?: string | null
-                name?: string | null
-                type?: Enum_Componentcorecarouselitem_Type | null
-                picture?: {
-                  __typename?: 'UploadFileEntityResponse'
-                  data?: {
-                    __typename?: 'UploadFileEntity'
-                    id?: string | null
-                    attributes?: {
-                      __typename?: 'UploadFile'
-                      hash: string
-                      mime: string
-                      name: string
-                      provider: string
-                      size: number
-                      url: string
-                      alternativeText?: string | null
-                      caption?: string | null
-                      createdAt?: any | null
-                      ext?: string | null
-                      formats?: any | null
-                      height?: number | null
-                      previewUrl?: string | null
-                      provider_metadata?: any | null
-                      updatedAt?: any | null
-                      width?: number | null
-                    } | null
-                  } | null
-                } | null
-                triply_record?: {
-                  __typename?: 'TriplyRecordEntityResponse'
-                  data?: {
-                    __typename?: 'TriplyRecordEntity'
-                    id?: string | null
-                    attributes?: {
-                      __typename?: 'TriplyRecord'
-                      recordId: string
-                      type: Enum_Triplyrecord_Type
-                    } | null
-                  } | null
-                } | null
-                story?: {
-                  __typename?: 'StoryEntityResponse'
-                  data?: {
-                    __typename?: 'StoryEntity'
-                    id?: string | null
-                    attributes?: { __typename?: 'Story'; slug: string } | null
-                  } | null
-                } | null
+                text: string
+                url: string
               } | null> | null
             }
           | {
@@ -5438,8 +5080,8 @@ export type LandingPageQuery = {
               buttons?: Array<{
                 __typename?: 'ComponentCoreButton'
                 id: string
-                text?: string | null
-                url?: string | null
+                text: string
+                url: string
               } | null> | null
               featuredFields?: Array<{
                 __typename?: 'ComponentCoreFeaturedFields'
@@ -5451,7 +5093,7 @@ export type LandingPageQuery = {
                 __typename?: 'ComponentCoreGridFeaturedFields'
                 id: string
                 subtitle?: string | null
-                title?: string | null
+                title: string
                 story?: {
                   __typename?: 'StoryEntityResponse'
                   data?: {
@@ -5663,70 +5305,8 @@ export type LandingPagesQuery = {
                     buttons?: Array<{
                       __typename?: 'ComponentCoreButton'
                       id: string
-                      text?: string | null
-                      url?: string | null
-                    } | null> | null
-                  }
-                | {
-                    __typename: 'ComponentModulesCarousel'
-                    id: string
-                    buttonText?: string | null
-                    buttonUrl?: string | null
-                    description?: string | null
-                    title?: string | null
-                    type?: Enum_Componentmodulescarousel_Type | null
-                    items?: Array<{
-                      __typename?: 'ComponentCoreCarouselItem'
-                      id: string
-                      description?: string | null
-                      name?: string | null
-                      type?: Enum_Componentcorecarouselitem_Type | null
-                      picture?: {
-                        __typename?: 'UploadFileEntityResponse'
-                        data?: {
-                          __typename?: 'UploadFileEntity'
-                          id?: string | null
-                          attributes?: {
-                            __typename?: 'UploadFile'
-                            hash: string
-                            mime: string
-                            name: string
-                            provider: string
-                            size: number
-                            url: string
-                            alternativeText?: string | null
-                            caption?: string | null
-                            createdAt?: any | null
-                            ext?: string | null
-                            formats?: any | null
-                            height?: number | null
-                            previewUrl?: string | null
-                            provider_metadata?: any | null
-                            updatedAt?: any | null
-                            width?: number | null
-                          } | null
-                        } | null
-                      } | null
-                      triply_record?: {
-                        __typename?: 'TriplyRecordEntityResponse'
-                        data?: {
-                          __typename?: 'TriplyRecordEntity'
-                          id?: string | null
-                          attributes?: {
-                            __typename?: 'TriplyRecord'
-                            recordId: string
-                            type: Enum_Triplyrecord_Type
-                          } | null
-                        } | null
-                      } | null
-                      story?: {
-                        __typename?: 'StoryEntityResponse'
-                        data?: {
-                          __typename?: 'StoryEntity'
-                          id?: string | null
-                          attributes?: { __typename?: 'Story'; slug: string } | null
-                        } | null
-                      } | null
+                      text: string
+                      url: string
                     } | null> | null
                   }
                 | {
@@ -5741,8 +5321,8 @@ export type LandingPagesQuery = {
                     buttons?: Array<{
                       __typename?: 'ComponentCoreButton'
                       id: string
-                      text?: string | null
-                      url?: string | null
+                      text: string
+                      url: string
                     } | null> | null
                     featuredFields?: Array<{
                       __typename?: 'ComponentCoreFeaturedFields'
@@ -5754,7 +5334,7 @@ export type LandingPagesQuery = {
                       __typename?: 'ComponentCoreGridFeaturedFields'
                       id: string
                       subtitle?: string | null
-                      title?: string | null
+                      title: string
                       story?: {
                         __typename?: 'StoryEntityResponse'
                         data?: {
@@ -5926,70 +5506,8 @@ export type LandingPagesQuery = {
               buttons?: Array<{
                 __typename?: 'ComponentCoreButton'
                 id: string
-                text?: string | null
-                url?: string | null
-              } | null> | null
-            }
-          | {
-              __typename: 'ComponentModulesCarousel'
-              id: string
-              buttonText?: string | null
-              buttonUrl?: string | null
-              description?: string | null
-              title?: string | null
-              type?: Enum_Componentmodulescarousel_Type | null
-              items?: Array<{
-                __typename?: 'ComponentCoreCarouselItem'
-                id: string
-                description?: string | null
-                name?: string | null
-                type?: Enum_Componentcorecarouselitem_Type | null
-                picture?: {
-                  __typename?: 'UploadFileEntityResponse'
-                  data?: {
-                    __typename?: 'UploadFileEntity'
-                    id?: string | null
-                    attributes?: {
-                      __typename?: 'UploadFile'
-                      hash: string
-                      mime: string
-                      name: string
-                      provider: string
-                      size: number
-                      url: string
-                      alternativeText?: string | null
-                      caption?: string | null
-                      createdAt?: any | null
-                      ext?: string | null
-                      formats?: any | null
-                      height?: number | null
-                      previewUrl?: string | null
-                      provider_metadata?: any | null
-                      updatedAt?: any | null
-                      width?: number | null
-                    } | null
-                  } | null
-                } | null
-                triply_record?: {
-                  __typename?: 'TriplyRecordEntityResponse'
-                  data?: {
-                    __typename?: 'TriplyRecordEntity'
-                    id?: string | null
-                    attributes?: {
-                      __typename?: 'TriplyRecord'
-                      recordId: string
-                      type: Enum_Triplyrecord_Type
-                    } | null
-                  } | null
-                } | null
-                story?: {
-                  __typename?: 'StoryEntityResponse'
-                  data?: {
-                    __typename?: 'StoryEntity'
-                    id?: string | null
-                    attributes?: { __typename?: 'Story'; slug: string } | null
-                  } | null
-                } | null
+                text: string
+                url: string
               } | null> | null
             }
           | {
@@ -6004,8 +5522,8 @@ export type LandingPagesQuery = {
               buttons?: Array<{
                 __typename?: 'ComponentCoreButton'
                 id: string
-                text?: string | null
-                url?: string | null
+                text: string
+                url: string
               } | null> | null
               featuredFields?: Array<{
                 __typename?: 'ComponentCoreFeaturedFields'
@@ -6017,7 +5535,7 @@ export type LandingPagesQuery = {
                 __typename?: 'ComponentCoreGridFeaturedFields'
                 id: string
                 subtitle?: string | null
-                title?: string | null
+                title: string
                 story?: {
                   __typename?: 'StoryEntityResponse'
                   data?: {
@@ -6307,8 +5825,8 @@ export type MenupageFragmentFragment = {
         buttons?: Array<{
           __typename?: 'ComponentCoreButton'
           id: string
-          text?: string | null
-          url?: string | null
+          text: string
+          url: string
         } | null> | null
       }
     | {
@@ -6323,8 +5841,8 @@ export type MenupageFragmentFragment = {
         buttons?: Array<{
           __typename?: 'ComponentCoreButton'
           id: string
-          text?: string | null
-          url?: string | null
+          text: string
+          url: string
         } | null> | null
         featuredFields?: Array<{
           __typename?: 'ComponentCoreFeaturedFields'
@@ -6336,7 +5854,7 @@ export type MenupageFragmentFragment = {
           __typename?: 'ComponentCoreGridFeaturedFields'
           id: string
           subtitle?: string | null
-          title?: string | null
+          title: string
           story?: {
             __typename?: 'StoryEntityResponse'
             data?: {
@@ -6531,8 +6049,8 @@ export type MenupageEntityFragmentFragment = {
                 buttons?: Array<{
                   __typename?: 'ComponentCoreButton'
                   id: string
-                  text?: string | null
-                  url?: string | null
+                  text: string
+                  url: string
                 } | null> | null
               }
             | {
@@ -6547,8 +6065,8 @@ export type MenupageEntityFragmentFragment = {
                 buttons?: Array<{
                   __typename?: 'ComponentCoreButton'
                   id: string
-                  text?: string | null
-                  url?: string | null
+                  text: string
+                  url: string
                 } | null> | null
                 featuredFields?: Array<{
                   __typename?: 'ComponentCoreFeaturedFields'
@@ -6560,7 +6078,7 @@ export type MenupageEntityFragmentFragment = {
                   __typename?: 'ComponentCoreGridFeaturedFields'
                   id: string
                   subtitle?: string | null
-                  title?: string | null
+                  title: string
                   story?: {
                     __typename?: 'StoryEntityResponse'
                     data?: {
@@ -6732,8 +6250,8 @@ export type MenupageEntityFragmentFragment = {
           buttons?: Array<{
             __typename?: 'ComponentCoreButton'
             id: string
-            text?: string | null
-            url?: string | null
+            text: string
+            url: string
           } | null> | null
         }
       | {
@@ -6748,8 +6266,8 @@ export type MenupageEntityFragmentFragment = {
           buttons?: Array<{
             __typename?: 'ComponentCoreButton'
             id: string
-            text?: string | null
-            url?: string | null
+            text: string
+            url: string
           } | null> | null
           featuredFields?: Array<{
             __typename?: 'ComponentCoreFeaturedFields'
@@ -6761,7 +6279,7 @@ export type MenupageEntityFragmentFragment = {
             __typename?: 'ComponentCoreGridFeaturedFields'
             id: string
             subtitle?: string | null
-            title?: string | null
+            title: string
             story?: {
               __typename?: 'StoryEntityResponse'
               data?: {
@@ -6966,8 +6484,8 @@ export type MenuPageQuery = {
                     buttons?: Array<{
                       __typename?: 'ComponentCoreButton'
                       id: string
-                      text?: string | null
-                      url?: string | null
+                      text: string
+                      url: string
                     } | null> | null
                   }
                 | {
@@ -6982,8 +6500,8 @@ export type MenuPageQuery = {
                     buttons?: Array<{
                       __typename?: 'ComponentCoreButton'
                       id: string
-                      text?: string | null
-                      url?: string | null
+                      text: string
+                      url: string
                     } | null> | null
                     featuredFields?: Array<{
                       __typename?: 'ComponentCoreFeaturedFields'
@@ -6995,7 +6513,7 @@ export type MenuPageQuery = {
                       __typename?: 'ComponentCoreGridFeaturedFields'
                       id: string
                       subtitle?: string | null
-                      title?: string | null
+                      title: string
                       story?: {
                         __typename?: 'StoryEntityResponse'
                         data?: {
@@ -7167,8 +6685,8 @@ export type MenuPageQuery = {
               buttons?: Array<{
                 __typename?: 'ComponentCoreButton'
                 id: string
-                text?: string | null
-                url?: string | null
+                text: string
+                url: string
               } | null> | null
             }
           | {
@@ -7183,8 +6701,8 @@ export type MenuPageQuery = {
               buttons?: Array<{
                 __typename?: 'ComponentCoreButton'
                 id: string
-                text?: string | null
-                url?: string | null
+                text: string
+                url: string
               } | null> | null
               featuredFields?: Array<{
                 __typename?: 'ComponentCoreFeaturedFields'
@@ -7196,7 +6714,7 @@ export type MenuPageQuery = {
                 __typename?: 'ComponentCoreGridFeaturedFields'
                 id: string
                 subtitle?: string | null
-                title?: string | null
+                title: string
                 story?: {
                   __typename?: 'StoryEntityResponse'
                   data?: {
@@ -7406,8 +6924,8 @@ export type MenuPagesQuery = {
                     buttons?: Array<{
                       __typename?: 'ComponentCoreButton'
                       id: string
-                      text?: string | null
-                      url?: string | null
+                      text: string
+                      url: string
                     } | null> | null
                   }
                 | {
@@ -7422,8 +6940,8 @@ export type MenuPagesQuery = {
                     buttons?: Array<{
                       __typename?: 'ComponentCoreButton'
                       id: string
-                      text?: string | null
-                      url?: string | null
+                      text: string
+                      url: string
                     } | null> | null
                     featuredFields?: Array<{
                       __typename?: 'ComponentCoreFeaturedFields'
@@ -7435,7 +6953,7 @@ export type MenuPagesQuery = {
                       __typename?: 'ComponentCoreGridFeaturedFields'
                       id: string
                       subtitle?: string | null
-                      title?: string | null
+                      title: string
                       story?: {
                         __typename?: 'StoryEntityResponse'
                         data?: {
@@ -7607,8 +7125,8 @@ export type MenuPagesQuery = {
               buttons?: Array<{
                 __typename?: 'ComponentCoreButton'
                 id: string
-                text?: string | null
-                url?: string | null
+                text: string
+                url: string
               } | null> | null
             }
           | {
@@ -7623,8 +7141,8 @@ export type MenuPagesQuery = {
               buttons?: Array<{
                 __typename?: 'ComponentCoreButton'
                 id: string
-                text?: string | null
-                url?: string | null
+                text: string
+                url: string
               } | null> | null
               featuredFields?: Array<{
                 __typename?: 'ComponentCoreFeaturedFields'
@@ -7636,7 +7154,7 @@ export type MenuPagesQuery = {
                 __typename?: 'ComponentCoreGridFeaturedFields'
                 id: string
                 subtitle?: string | null
-                title?: string | null
+                title: string
                 story?: {
                   __typename?: 'StoryEntityResponse'
                   data?: {
@@ -7840,6 +7358,58 @@ export type StoriesQuery = {
         locale?: string | null
         components?: Array<
           | {
+              __typename: 'ComponentCoreMuxAudio'
+              id: string
+              caption?: string | null
+              muxAudioRelation?: {
+                __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                data?: {
+                  __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'MuxVideoUploaderMuxAsset'
+                    title: string
+                    upload_id?: string | null
+                    asset_id?: string | null
+                    playback_id?: string | null
+                    signed: boolean
+                    error_message?: string | null
+                    isReady?: boolean | null
+                    duration?: number | null
+                    aspect_ratio?: string | null
+                    createdAt?: any | null
+                    updatedAt?: any | null
+                  } | null
+                } | null
+              } | null
+            }
+          | {
+              __typename: 'ComponentCoreMuxVideo'
+              id: string
+              caption?: string | null
+              muxVideoRelation?: {
+                __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                data?: {
+                  __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'MuxVideoUploaderMuxAsset'
+                    title: string
+                    upload_id?: string | null
+                    asset_id?: string | null
+                    playback_id?: string | null
+                    signed: boolean
+                    error_message?: string | null
+                    isReady?: boolean | null
+                    duration?: number | null
+                    aspect_ratio?: string | null
+                    createdAt?: any | null
+                    updatedAt?: any | null
+                  } | null
+                } | null
+              } | null
+            }
+          | {
               __typename: 'ComponentCoreStandAloneLink'
               id: string
               label: string
@@ -7877,8 +7447,8 @@ export type StoriesQuery = {
               buttons?: Array<{
                 __typename?: 'ComponentCoreButton'
                 id: string
-                text?: string | null
-                url?: string | null
+                text: string
+                url: string
               } | null> | null
             }
           | {
@@ -8045,8 +7615,8 @@ export type StoriesQuery = {
           buttons?: Array<{
             __typename?: 'ComponentCoreButton'
             id: string
-            text?: string | null
-            url?: string | null
+            text: string
+            url: string
           } | null> | null
         } | null
         parent_story?: {
@@ -8058,6 +7628,8 @@ export type StoriesQuery = {
               __typename?: 'Story'
               title: string
               components?: Array<
+                | { __typename: 'ComponentCoreMuxAudio' }
+                | { __typename: 'ComponentCoreMuxVideo' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
@@ -8168,6 +7740,8 @@ export type StoriesQuery = {
               __typename?: 'Story'
               title: string
               components?: Array<
+                | { __typename: 'ComponentCoreMuxAudio' }
+                | { __typename: 'ComponentCoreMuxVideo' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
@@ -8334,6 +7908,58 @@ export type StoryQuery = {
         locale?: string | null
         components?: Array<
           | {
+              __typename: 'ComponentCoreMuxAudio'
+              id: string
+              caption?: string | null
+              muxAudioRelation?: {
+                __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                data?: {
+                  __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'MuxVideoUploaderMuxAsset'
+                    title: string
+                    upload_id?: string | null
+                    asset_id?: string | null
+                    playback_id?: string | null
+                    signed: boolean
+                    error_message?: string | null
+                    isReady?: boolean | null
+                    duration?: number | null
+                    aspect_ratio?: string | null
+                    createdAt?: any | null
+                    updatedAt?: any | null
+                  } | null
+                } | null
+              } | null
+            }
+          | {
+              __typename: 'ComponentCoreMuxVideo'
+              id: string
+              caption?: string | null
+              muxVideoRelation?: {
+                __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                data?: {
+                  __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'MuxVideoUploaderMuxAsset'
+                    title: string
+                    upload_id?: string | null
+                    asset_id?: string | null
+                    playback_id?: string | null
+                    signed: boolean
+                    error_message?: string | null
+                    isReady?: boolean | null
+                    duration?: number | null
+                    aspect_ratio?: string | null
+                    createdAt?: any | null
+                    updatedAt?: any | null
+                  } | null
+                } | null
+              } | null
+            }
+          | {
               __typename: 'ComponentCoreStandAloneLink'
               id: string
               label: string
@@ -8371,8 +7997,8 @@ export type StoryQuery = {
               buttons?: Array<{
                 __typename?: 'ComponentCoreButton'
                 id: string
-                text?: string | null
-                url?: string | null
+                text: string
+                url: string
               } | null> | null
             }
           | {
@@ -8539,8 +8165,8 @@ export type StoryQuery = {
           buttons?: Array<{
             __typename?: 'ComponentCoreButton'
             id: string
-            text?: string | null
-            url?: string | null
+            text: string
+            url: string
           } | null> | null
         } | null
         parent_story?: {
@@ -8552,6 +8178,8 @@ export type StoryQuery = {
               __typename?: 'Story'
               title: string
               components?: Array<
+                | { __typename: 'ComponentCoreMuxAudio' }
+                | { __typename: 'ComponentCoreMuxVideo' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
@@ -8662,6 +8290,8 @@ export type StoryQuery = {
               __typename?: 'Story'
               title: string
               components?: Array<
+                | { __typename: 'ComponentCoreMuxAudio' }
+                | { __typename: 'ComponentCoreMuxVideo' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
@@ -8826,6 +8456,58 @@ export type StoryByLocaleQuery = {
         } | null
         components?: Array<
           | {
+              __typename: 'ComponentCoreMuxAudio'
+              id: string
+              caption?: string | null
+              muxAudioRelation?: {
+                __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                data?: {
+                  __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'MuxVideoUploaderMuxAsset'
+                    title: string
+                    upload_id?: string | null
+                    asset_id?: string | null
+                    playback_id?: string | null
+                    signed: boolean
+                    error_message?: string | null
+                    isReady?: boolean | null
+                    duration?: number | null
+                    aspect_ratio?: string | null
+                    createdAt?: any | null
+                    updatedAt?: any | null
+                  } | null
+                } | null
+              } | null
+            }
+          | {
+              __typename: 'ComponentCoreMuxVideo'
+              id: string
+              caption?: string | null
+              muxVideoRelation?: {
+                __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                data?: {
+                  __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'MuxVideoUploaderMuxAsset'
+                    title: string
+                    upload_id?: string | null
+                    asset_id?: string | null
+                    playback_id?: string | null
+                    signed: boolean
+                    error_message?: string | null
+                    isReady?: boolean | null
+                    duration?: number | null
+                    aspect_ratio?: string | null
+                    createdAt?: any | null
+                    updatedAt?: any | null
+                  } | null
+                } | null
+              } | null
+            }
+          | {
               __typename: 'ComponentCoreStandAloneLink'
               id: string
               label: string
@@ -8863,8 +8545,8 @@ export type StoryByLocaleQuery = {
               buttons?: Array<{
                 __typename?: 'ComponentCoreButton'
                 id: string
-                text?: string | null
-                url?: string | null
+                text: string
+                url: string
               } | null> | null
             }
           | {
@@ -9032,6 +8714,58 @@ export type StoryByLocaleQuery = {
               } | null
               components?: Array<
                 | {
+                    __typename: 'ComponentCoreMuxAudio'
+                    id: string
+                    caption?: string | null
+                    muxAudioRelation?: {
+                      __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                      data?: {
+                        __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'MuxVideoUploaderMuxAsset'
+                          title: string
+                          upload_id?: string | null
+                          asset_id?: string | null
+                          playback_id?: string | null
+                          signed: boolean
+                          error_message?: string | null
+                          isReady?: boolean | null
+                          duration?: number | null
+                          aspect_ratio?: string | null
+                          createdAt?: any | null
+                          updatedAt?: any | null
+                        } | null
+                      } | null
+                    } | null
+                  }
+                | {
+                    __typename: 'ComponentCoreMuxVideo'
+                    id: string
+                    caption?: string | null
+                    muxVideoRelation?: {
+                      __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                      data?: {
+                        __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'MuxVideoUploaderMuxAsset'
+                          title: string
+                          upload_id?: string | null
+                          asset_id?: string | null
+                          playback_id?: string | null
+                          signed: boolean
+                          error_message?: string | null
+                          isReady?: boolean | null
+                          duration?: number | null
+                          aspect_ratio?: string | null
+                          createdAt?: any | null
+                          updatedAt?: any | null
+                        } | null
+                      } | null
+                    } | null
+                  }
+                | {
                     __typename: 'ComponentCoreStandAloneLink'
                     id: string
                     label: string
@@ -9069,8 +8803,8 @@ export type StoryByLocaleQuery = {
                     buttons?: Array<{
                       __typename?: 'ComponentCoreButton'
                       id: string
-                      text?: string | null
-                      url?: string | null
+                      text: string
+                      url: string
                     } | null> | null
                   }
                 | {
@@ -9256,6 +8990,58 @@ export type StoriesByLocaleQuery = {
         } | null
         components?: Array<
           | {
+              __typename: 'ComponentCoreMuxAudio'
+              id: string
+              caption?: string | null
+              muxAudioRelation?: {
+                __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                data?: {
+                  __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'MuxVideoUploaderMuxAsset'
+                    title: string
+                    upload_id?: string | null
+                    asset_id?: string | null
+                    playback_id?: string | null
+                    signed: boolean
+                    error_message?: string | null
+                    isReady?: boolean | null
+                    duration?: number | null
+                    aspect_ratio?: string | null
+                    createdAt?: any | null
+                    updatedAt?: any | null
+                  } | null
+                } | null
+              } | null
+            }
+          | {
+              __typename: 'ComponentCoreMuxVideo'
+              id: string
+              caption?: string | null
+              muxVideoRelation?: {
+                __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                data?: {
+                  __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'MuxVideoUploaderMuxAsset'
+                    title: string
+                    upload_id?: string | null
+                    asset_id?: string | null
+                    playback_id?: string | null
+                    signed: boolean
+                    error_message?: string | null
+                    isReady?: boolean | null
+                    duration?: number | null
+                    aspect_ratio?: string | null
+                    createdAt?: any | null
+                    updatedAt?: any | null
+                  } | null
+                } | null
+              } | null
+            }
+          | {
               __typename: 'ComponentCoreStandAloneLink'
               id: string
               label: string
@@ -9293,8 +9079,8 @@ export type StoriesByLocaleQuery = {
               buttons?: Array<{
                 __typename?: 'ComponentCoreButton'
                 id: string
-                text?: string | null
-                url?: string | null
+                text: string
+                url: string
               } | null> | null
             }
           | {
@@ -9462,6 +9248,58 @@ export type StoriesByLocaleQuery = {
               } | null
               components?: Array<
                 | {
+                    __typename: 'ComponentCoreMuxAudio'
+                    id: string
+                    caption?: string | null
+                    muxAudioRelation?: {
+                      __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                      data?: {
+                        __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'MuxVideoUploaderMuxAsset'
+                          title: string
+                          upload_id?: string | null
+                          asset_id?: string | null
+                          playback_id?: string | null
+                          signed: boolean
+                          error_message?: string | null
+                          isReady?: boolean | null
+                          duration?: number | null
+                          aspect_ratio?: string | null
+                          createdAt?: any | null
+                          updatedAt?: any | null
+                        } | null
+                      } | null
+                    } | null
+                  }
+                | {
+                    __typename: 'ComponentCoreMuxVideo'
+                    id: string
+                    caption?: string | null
+                    muxVideoRelation?: {
+                      __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                      data?: {
+                        __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'MuxVideoUploaderMuxAsset'
+                          title: string
+                          upload_id?: string | null
+                          asset_id?: string | null
+                          playback_id?: string | null
+                          signed: boolean
+                          error_message?: string | null
+                          isReady?: boolean | null
+                          duration?: number | null
+                          aspect_ratio?: string | null
+                          createdAt?: any | null
+                          updatedAt?: any | null
+                        } | null
+                      } | null
+                    } | null
+                  }
+                | {
                     __typename: 'ComponentCoreStandAloneLink'
                     id: string
                     label: string
@@ -9499,8 +9337,8 @@ export type StoriesByLocaleQuery = {
                     buttons?: Array<{
                       __typename?: 'ComponentCoreButton'
                       id: string
-                      text?: string | null
-                      url?: string | null
+                      text: string
+                      url: string
                     } | null> | null
                   }
                 | {
@@ -9703,6 +9541,8 @@ export type StoriesMetaByLocaleQuery = {
               __typename?: 'Story'
               title: string
               components?: Array<
+                | { __typename: 'ComponentCoreMuxAudio' }
+                | { __typename: 'ComponentCoreMuxVideo' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
@@ -9813,6 +9653,8 @@ export type StoriesMetaByLocaleQuery = {
               __typename?: 'Story'
               title: string
               components?: Array<
+                | { __typename: 'ComponentCoreMuxAudio' }
+                | { __typename: 'ComponentCoreMuxVideo' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
@@ -10005,8 +9847,8 @@ export type StoriesMetaByLocaleQuery = {
                 buttons?: Array<{
                   __typename?: 'ComponentCoreButton'
                   id: string
-                  text?: string | null
-                  url?: string | null
+                  text: string
+                  url: string
                 } | null> | null
               } | null
               parent_story?: {
@@ -10018,6 +9860,8 @@ export type StoriesMetaByLocaleQuery = {
                     __typename?: 'Story'
                     title: string
                     components?: Array<
+                      | { __typename: 'ComponentCoreMuxAudio' }
+                      | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
@@ -10128,6 +9972,8 @@ export type StoriesMetaByLocaleQuery = {
                     __typename?: 'Story'
                     title: string
                     components?: Array<
+                      | { __typename: 'ComponentCoreMuxAudio' }
+                      | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
@@ -10238,8 +10084,8 @@ export type StoriesMetaByLocaleQuery = {
           buttons?: Array<{
             __typename?: 'ComponentCoreButton'
             id: string
-            text?: string | null
-            url?: string | null
+            text: string
+            url: string
           } | null> | null
         } | null
       } | null
@@ -10384,6 +10230,58 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
         locale?: string | null
         components?: Array<
           | {
+              __typename: 'ComponentCoreMuxAudio'
+              id: string
+              caption?: string | null
+              muxAudioRelation?: {
+                __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                data?: {
+                  __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'MuxVideoUploaderMuxAsset'
+                    title: string
+                    upload_id?: string | null
+                    asset_id?: string | null
+                    playback_id?: string | null
+                    signed: boolean
+                    error_message?: string | null
+                    isReady?: boolean | null
+                    duration?: number | null
+                    aspect_ratio?: string | null
+                    createdAt?: any | null
+                    updatedAt?: any | null
+                  } | null
+                } | null
+              } | null
+            }
+          | {
+              __typename: 'ComponentCoreMuxVideo'
+              id: string
+              caption?: string | null
+              muxVideoRelation?: {
+                __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                data?: {
+                  __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'MuxVideoUploaderMuxAsset'
+                    title: string
+                    upload_id?: string | null
+                    asset_id?: string | null
+                    playback_id?: string | null
+                    signed: boolean
+                    error_message?: string | null
+                    isReady?: boolean | null
+                    duration?: number | null
+                    aspect_ratio?: string | null
+                    createdAt?: any | null
+                    updatedAt?: any | null
+                  } | null
+                } | null
+              } | null
+            }
+          | {
               __typename: 'ComponentCoreStandAloneLink'
               id: string
               label: string
@@ -10421,8 +10319,8 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
               buttons?: Array<{
                 __typename?: 'ComponentCoreButton'
                 id: string
-                text?: string | null
-                url?: string | null
+                text: string
+                url: string
               } | null> | null
             }
           | {
@@ -10589,8 +10487,8 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
           buttons?: Array<{
             __typename?: 'ComponentCoreButton'
             id: string
-            text?: string | null
-            url?: string | null
+            text: string
+            url: string
           } | null> | null
         } | null
         parent_story?: {
@@ -10602,6 +10500,8 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
               __typename?: 'Story'
               title: string
               components?: Array<
+                | { __typename: 'ComponentCoreMuxAudio' }
+                | { __typename: 'ComponentCoreMuxVideo' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
@@ -10712,6 +10612,8 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
               __typename?: 'Story'
               title: string
               components?: Array<
+                | { __typename: 'ComponentCoreMuxAudio' }
+                | { __typename: 'ComponentCoreMuxVideo' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
                 | { __typename: 'ComponentModulesButtonsModule' }
                 | {
@@ -10869,6 +10771,8 @@ export type StoriesByIdsQuery = {
         slug: string
         locale?: string | null
         components?: Array<
+          | { __typename?: 'ComponentCoreMuxAudio' }
+          | { __typename?: 'ComponentCoreMuxVideo' }
           | { __typename?: 'ComponentCoreStandAloneLink' }
           | { __typename?: 'ComponentModulesButtonsModule' }
           | {
@@ -11115,6 +11019,58 @@ export type NestedStoryFragmentFragment = {
     } | null
     components?: Array<
       | {
+          __typename: 'ComponentCoreMuxAudio'
+          id: string
+          caption?: string | null
+          muxAudioRelation?: {
+            __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+            data?: {
+              __typename?: 'MuxVideoUploaderMuxAssetEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'MuxVideoUploaderMuxAsset'
+                title: string
+                upload_id?: string | null
+                asset_id?: string | null
+                playback_id?: string | null
+                signed: boolean
+                error_message?: string | null
+                isReady?: boolean | null
+                duration?: number | null
+                aspect_ratio?: string | null
+                createdAt?: any | null
+                updatedAt?: any | null
+              } | null
+            } | null
+          } | null
+        }
+      | {
+          __typename: 'ComponentCoreMuxVideo'
+          id: string
+          caption?: string | null
+          muxVideoRelation?: {
+            __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+            data?: {
+              __typename?: 'MuxVideoUploaderMuxAssetEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'MuxVideoUploaderMuxAsset'
+                title: string
+                upload_id?: string | null
+                asset_id?: string | null
+                playback_id?: string | null
+                signed: boolean
+                error_message?: string | null
+                isReady?: boolean | null
+                duration?: number | null
+                aspect_ratio?: string | null
+                createdAt?: any | null
+                updatedAt?: any | null
+              } | null
+            } | null
+          } | null
+        }
+      | {
           __typename: 'ComponentCoreStandAloneLink'
           id: string
           label: string
@@ -11152,8 +11108,8 @@ export type NestedStoryFragmentFragment = {
           buttons?: Array<{
             __typename?: 'ComponentCoreButton'
             id: string
-            text?: string | null
-            url?: string | null
+            text: string
+            url: string
           } | null> | null
         }
       | {
@@ -11322,6 +11278,58 @@ export type LocalizedStoryFragmentFragment = {
     } | null
     components?: Array<
       | {
+          __typename: 'ComponentCoreMuxAudio'
+          id: string
+          caption?: string | null
+          muxAudioRelation?: {
+            __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+            data?: {
+              __typename?: 'MuxVideoUploaderMuxAssetEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'MuxVideoUploaderMuxAsset'
+                title: string
+                upload_id?: string | null
+                asset_id?: string | null
+                playback_id?: string | null
+                signed: boolean
+                error_message?: string | null
+                isReady?: boolean | null
+                duration?: number | null
+                aspect_ratio?: string | null
+                createdAt?: any | null
+                updatedAt?: any | null
+              } | null
+            } | null
+          } | null
+        }
+      | {
+          __typename: 'ComponentCoreMuxVideo'
+          id: string
+          caption?: string | null
+          muxVideoRelation?: {
+            __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+            data?: {
+              __typename?: 'MuxVideoUploaderMuxAssetEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'MuxVideoUploaderMuxAsset'
+                title: string
+                upload_id?: string | null
+                asset_id?: string | null
+                playback_id?: string | null
+                signed: boolean
+                error_message?: string | null
+                isReady?: boolean | null
+                duration?: number | null
+                aspect_ratio?: string | null
+                createdAt?: any | null
+                updatedAt?: any | null
+              } | null
+            } | null
+          } | null
+        }
+      | {
           __typename: 'ComponentCoreStandAloneLink'
           id: string
           label: string
@@ -11359,8 +11367,8 @@ export type LocalizedStoryFragmentFragment = {
           buttons?: Array<{
             __typename?: 'ComponentCoreButton'
             id: string
-            text?: string | null
-            url?: string | null
+            text: string
+            url: string
           } | null> | null
         }
       | {
@@ -11528,6 +11536,58 @@ export type LocalizedStoryFragmentFragment = {
           } | null
           components?: Array<
             | {
+                __typename: 'ComponentCoreMuxAudio'
+                id: string
+                caption?: string | null
+                muxAudioRelation?: {
+                  __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                  data?: {
+                    __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'MuxVideoUploaderMuxAsset'
+                      title: string
+                      upload_id?: string | null
+                      asset_id?: string | null
+                      playback_id?: string | null
+                      signed: boolean
+                      error_message?: string | null
+                      isReady?: boolean | null
+                      duration?: number | null
+                      aspect_ratio?: string | null
+                      createdAt?: any | null
+                      updatedAt?: any | null
+                    } | null
+                  } | null
+                } | null
+              }
+            | {
+                __typename: 'ComponentCoreMuxVideo'
+                id: string
+                caption?: string | null
+                muxVideoRelation?: {
+                  __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                  data?: {
+                    __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'MuxVideoUploaderMuxAsset'
+                      title: string
+                      upload_id?: string | null
+                      asset_id?: string | null
+                      playback_id?: string | null
+                      signed: boolean
+                      error_message?: string | null
+                      isReady?: boolean | null
+                      duration?: number | null
+                      aspect_ratio?: string | null
+                      createdAt?: any | null
+                      updatedAt?: any | null
+                    } | null
+                  } | null
+                } | null
+              }
+            | {
                 __typename: 'ComponentCoreStandAloneLink'
                 id: string
                 label: string
@@ -11565,8 +11625,8 @@ export type LocalizedStoryFragmentFragment = {
                 buttons?: Array<{
                   __typename?: 'ComponentCoreButton'
                   id: string
-                  text?: string | null
-                  url?: string | null
+                  text: string
+                  url: string
                 } | null> | null
               }
             | {
@@ -11703,6 +11763,58 @@ export type StoryFragmentFragment = {
     locale?: string | null
     components?: Array<
       | {
+          __typename: 'ComponentCoreMuxAudio'
+          id: string
+          caption?: string | null
+          muxAudioRelation?: {
+            __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+            data?: {
+              __typename?: 'MuxVideoUploaderMuxAssetEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'MuxVideoUploaderMuxAsset'
+                title: string
+                upload_id?: string | null
+                asset_id?: string | null
+                playback_id?: string | null
+                signed: boolean
+                error_message?: string | null
+                isReady?: boolean | null
+                duration?: number | null
+                aspect_ratio?: string | null
+                createdAt?: any | null
+                updatedAt?: any | null
+              } | null
+            } | null
+          } | null
+        }
+      | {
+          __typename: 'ComponentCoreMuxVideo'
+          id: string
+          caption?: string | null
+          muxVideoRelation?: {
+            __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+            data?: {
+              __typename?: 'MuxVideoUploaderMuxAssetEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'MuxVideoUploaderMuxAsset'
+                title: string
+                upload_id?: string | null
+                asset_id?: string | null
+                playback_id?: string | null
+                signed: boolean
+                error_message?: string | null
+                isReady?: boolean | null
+                duration?: number | null
+                aspect_ratio?: string | null
+                createdAt?: any | null
+                updatedAt?: any | null
+              } | null
+            } | null
+          } | null
+        }
+      | {
           __typename: 'ComponentCoreStandAloneLink'
           id: string
           label: string
@@ -11740,8 +11852,8 @@ export type StoryFragmentFragment = {
           buttons?: Array<{
             __typename?: 'ComponentCoreButton'
             id: string
-            text?: string | null
-            url?: string | null
+            text: string
+            url: string
           } | null> | null
         }
       | {
@@ -11908,8 +12020,8 @@ export type StoryFragmentFragment = {
       buttons?: Array<{
         __typename?: 'ComponentCoreButton'
         id: string
-        text?: string | null
-        url?: string | null
+        text: string
+        url: string
       } | null> | null
     } | null
     parent_story?: {
@@ -11921,6 +12033,8 @@ export type StoryFragmentFragment = {
           __typename?: 'Story'
           title: string
           components?: Array<
+            | { __typename: 'ComponentCoreMuxAudio' }
+            | { __typename: 'ComponentCoreMuxVideo' }
             | { __typename: 'ComponentCoreStandAloneLink' }
             | { __typename: 'ComponentModulesButtonsModule' }
             | {
@@ -12031,6 +12145,8 @@ export type StoryFragmentFragment = {
           __typename?: 'Story'
           title: string
           components?: Array<
+            | { __typename: 'ComponentCoreMuxAudio' }
+            | { __typename: 'ComponentCoreMuxVideo' }
             | { __typename: 'ComponentCoreStandAloneLink' }
             | { __typename: 'ComponentModulesButtonsModule' }
             | {
@@ -12206,8 +12322,8 @@ export type StoryMetaFragmentFragment = {
       buttons?: Array<{
         __typename?: 'ComponentCoreButton'
         id: string
-        text?: string | null
-        url?: string | null
+        text: string
+        url: string
       } | null> | null
     } | null
     parent_story?: {
@@ -12219,6 +12335,8 @@ export type StoryMetaFragmentFragment = {
           __typename?: 'Story'
           title: string
           components?: Array<
+            | { __typename: 'ComponentCoreMuxAudio' }
+            | { __typename: 'ComponentCoreMuxVideo' }
             | { __typename: 'ComponentCoreStandAloneLink' }
             | { __typename: 'ComponentModulesButtonsModule' }
             | {
@@ -12329,6 +12447,8 @@ export type StoryMetaFragmentFragment = {
           __typename?: 'Story'
           title: string
           components?: Array<
+            | { __typename: 'ComponentCoreMuxAudio' }
+            | { __typename: 'ComponentCoreMuxVideo' }
             | { __typename: 'ComponentCoreStandAloneLink' }
             | { __typename: 'ComponentModulesButtonsModule' }
             | {
@@ -12490,6 +12610,8 @@ export type LocalizedStoryMetaFragmentFragment = {
           __typename?: 'Story'
           title: string
           components?: Array<
+            | { __typename: 'ComponentCoreMuxAudio' }
+            | { __typename: 'ComponentCoreMuxVideo' }
             | { __typename: 'ComponentCoreStandAloneLink' }
             | { __typename: 'ComponentModulesButtonsModule' }
             | {
@@ -12600,6 +12722,8 @@ export type LocalizedStoryMetaFragmentFragment = {
           __typename?: 'Story'
           title: string
           components?: Array<
+            | { __typename: 'ComponentCoreMuxAudio' }
+            | { __typename: 'ComponentCoreMuxVideo' }
             | { __typename: 'ComponentCoreStandAloneLink' }
             | { __typename: 'ComponentModulesButtonsModule' }
             | {
@@ -12792,8 +12916,8 @@ export type LocalizedStoryMetaFragmentFragment = {
             buttons?: Array<{
               __typename?: 'ComponentCoreButton'
               id: string
-              text?: string | null
-              url?: string | null
+              text: string
+              url: string
             } | null> | null
           } | null
           parent_story?: {
@@ -12805,6 +12929,8 @@ export type LocalizedStoryMetaFragmentFragment = {
                 __typename?: 'Story'
                 title: string
                 components?: Array<
+                  | { __typename: 'ComponentCoreMuxAudio' }
+                  | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
@@ -12915,6 +13041,8 @@ export type LocalizedStoryMetaFragmentFragment = {
                 __typename?: 'Story'
                 title: string
                 components?: Array<
+                  | { __typename: 'ComponentCoreMuxAudio' }
+                  | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
@@ -13025,8 +13153,8 @@ export type LocalizedStoryMetaFragmentFragment = {
       buttons?: Array<{
         __typename?: 'ComponentCoreButton'
         id: string
-        text?: string | null
-        url?: string | null
+        text: string
+        url: string
       } | null> | null
     } | null
   } | null
@@ -13035,17 +13163,16 @@ export type LocalizedStoryMetaFragmentFragment = {
 export type ComponentCoreButtonFragmentFragment = {
   __typename?: 'ComponentCoreButton'
   id: string
-  text?: string | null
-  url?: string | null
+  text: string
+  url: string
 }
 
-export type ComponentCoreCarouselItemFragmentFragment = {
-  __typename?: 'ComponentCoreCarouselItem'
+export type ComponentCoreCarouselImageFragmentFragment = {
+  __typename?: 'ComponentCoreCarouselImage'
   id: string
+  alt_text?: string | null
   description?: string | null
-  name?: string | null
-  type?: Enum_Componentcorecarouselitem_Type | null
-  picture?: {
+  image: {
     __typename?: 'UploadFileEntityResponse'
     data?: {
       __typename?: 'UploadFileEntity'
@@ -13070,7 +13197,7 @@ export type ComponentCoreCarouselItemFragmentFragment = {
         width?: number | null
       } | null
     } | null
-  } | null
+  }
   triply_record?: {
     __typename?: 'TriplyRecordEntityResponse'
     data?: {
@@ -13118,7 +13245,7 @@ export type ComponentCoreGridFeaturedFieldsFragmentFragment = {
   __typename?: 'ComponentCoreGridFeaturedFields'
   id: string
   subtitle?: string | null
-  title?: string | null
+  title: string
   story?: {
     __typename?: 'StoryEntityResponse'
     data?: {
@@ -13200,32 +13327,83 @@ export type ComponentCoreStandAloneLinkFragmentFragment = {
   } | null
 }
 
+export type ComponentCoreMuxAudioFragmentFragment = {
+  __typename?: 'ComponentCoreMuxAudio'
+  id: string
+  caption?: string | null
+  muxAudioRelation?: {
+    __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+    data?: {
+      __typename?: 'MuxVideoUploaderMuxAssetEntity'
+      id?: string | null
+      attributes?: {
+        __typename?: 'MuxVideoUploaderMuxAsset'
+        title: string
+        upload_id?: string | null
+        asset_id?: string | null
+        playback_id?: string | null
+        signed: boolean
+        error_message?: string | null
+        isReady?: boolean | null
+        duration?: number | null
+        aspect_ratio?: string | null
+        createdAt?: any | null
+        updatedAt?: any | null
+      } | null
+    } | null
+  } | null
+}
+
+export type ComponentCoreMuxVideoFragmentFragment = {
+  __typename?: 'ComponentCoreMuxVideo'
+  id: string
+  caption?: string | null
+  muxVideoRelation?: {
+    __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+    data?: {
+      __typename?: 'MuxVideoUploaderMuxAssetEntity'
+      id?: string | null
+      attributes?: {
+        __typename?: 'MuxVideoUploaderMuxAsset'
+        title: string
+        upload_id?: string | null
+        asset_id?: string | null
+        playback_id?: string | null
+        signed: boolean
+        error_message?: string | null
+        isReady?: boolean | null
+        duration?: number | null
+        aspect_ratio?: string | null
+        createdAt?: any | null
+        updatedAt?: any | null
+      } | null
+    } | null
+  } | null
+}
+
 export type ComponentModulesButtonsModuleFragmentFragment = {
   __typename: 'ComponentModulesButtonsModule'
   id: string
   buttons?: Array<{
     __typename?: 'ComponentCoreButton'
     id: string
-    text?: string | null
-    url?: string | null
+    text: string
+    url: string
   } | null> | null
 }
 
 export type ComponentModulesCarouselFragmentFragment = {
   __typename: 'ComponentModulesCarousel'
   id: string
-  buttonText?: string | null
-  buttonUrl?: string | null
   description?: string | null
-  title?: string | null
-  type?: Enum_Componentmodulescarousel_Type | null
-  items?: Array<{
-    __typename?: 'ComponentCoreCarouselItem'
+  title: string
+  variant?: Enum_Componentmodulescarousel_Variant | null
+  images: Array<{
+    __typename?: 'ComponentCoreCarouselImage'
     id: string
+    alt_text?: string | null
     description?: string | null
-    name?: string | null
-    type?: Enum_Componentcorecarouselitem_Type | null
-    picture?: {
+    image: {
       __typename?: 'UploadFileEntityResponse'
       data?: {
         __typename?: 'UploadFileEntity'
@@ -13250,7 +13428,7 @@ export type ComponentModulesCarouselFragmentFragment = {
           width?: number | null
         } | null
       } | null
-    } | null
+    }
     triply_record?: {
       __typename?: 'TriplyRecordEntityResponse'
       data?: {
@@ -13271,7 +13449,13 @@ export type ComponentModulesCarouselFragmentFragment = {
         attributes?: { __typename?: 'Story'; slug: string } | null
       } | null
     } | null
-  } | null> | null
+  } | null>
+  explore_collection_button?: {
+    __typename?: 'ComponentCoreButton'
+    id: string
+    text: string
+    url: string
+  } | null
 }
 
 export type ComponentModulesImageCarouselFragmentFragment = {
@@ -13418,8 +13602,8 @@ export type ComponentModulesGridModuleFragmentFragment = {
   buttons?: Array<{
     __typename?: 'ComponentCoreButton'
     id: string
-    text?: string | null
-    url?: string | null
+    text: string
+    url: string
   } | null> | null
   featuredFields?: Array<{
     __typename?: 'ComponentCoreFeaturedFields'
@@ -13431,7 +13615,7 @@ export type ComponentModulesGridModuleFragmentFragment = {
     __typename?: 'ComponentCoreGridFeaturedFields'
     id: string
     subtitle?: string | null
-    title?: string | null
+    title: string
     story?: {
       __typename?: 'StoryEntityResponse'
       data?: {
@@ -13612,6 +13796,58 @@ export type ThemeQuery = {
               locale?: string | null
               components?: Array<
                 | {
+                    __typename: 'ComponentCoreMuxAudio'
+                    id: string
+                    caption?: string | null
+                    muxAudioRelation?: {
+                      __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                      data?: {
+                        __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'MuxVideoUploaderMuxAsset'
+                          title: string
+                          upload_id?: string | null
+                          asset_id?: string | null
+                          playback_id?: string | null
+                          signed: boolean
+                          error_message?: string | null
+                          isReady?: boolean | null
+                          duration?: number | null
+                          aspect_ratio?: string | null
+                          createdAt?: any | null
+                          updatedAt?: any | null
+                        } | null
+                      } | null
+                    } | null
+                  }
+                | {
+                    __typename: 'ComponentCoreMuxVideo'
+                    id: string
+                    caption?: string | null
+                    muxVideoRelation?: {
+                      __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                      data?: {
+                        __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'MuxVideoUploaderMuxAsset'
+                          title: string
+                          upload_id?: string | null
+                          asset_id?: string | null
+                          playback_id?: string | null
+                          signed: boolean
+                          error_message?: string | null
+                          isReady?: boolean | null
+                          duration?: number | null
+                          aspect_ratio?: string | null
+                          createdAt?: any | null
+                          updatedAt?: any | null
+                        } | null
+                      } | null
+                    } | null
+                  }
+                | {
                     __typename: 'ComponentCoreStandAloneLink'
                     id: string
                     label: string
@@ -13649,8 +13885,8 @@ export type ThemeQuery = {
                     buttons?: Array<{
                       __typename?: 'ComponentCoreButton'
                       id: string
-                      text?: string | null
-                      url?: string | null
+                      text: string
+                      url: string
                     } | null> | null
                   }
                 | {
@@ -13817,8 +14053,8 @@ export type ThemeQuery = {
                 buttons?: Array<{
                   __typename?: 'ComponentCoreButton'
                   id: string
-                  text?: string | null
-                  url?: string | null
+                  text: string
+                  url: string
                 } | null> | null
               } | null
               parent_story?: {
@@ -13830,6 +14066,8 @@ export type ThemeQuery = {
                     __typename?: 'Story'
                     title: string
                     components?: Array<
+                      | { __typename: 'ComponentCoreMuxAudio' }
+                      | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
@@ -13940,6 +14178,8 @@ export type ThemeQuery = {
                     __typename?: 'Story'
                     title: string
                     components?: Array<
+                      | { __typename: 'ComponentCoreMuxAudio' }
+                      | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
@@ -14092,6 +14332,58 @@ export type ThemesQuery = {
               locale?: string | null
               components?: Array<
                 | {
+                    __typename: 'ComponentCoreMuxAudio'
+                    id: string
+                    caption?: string | null
+                    muxAudioRelation?: {
+                      __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                      data?: {
+                        __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'MuxVideoUploaderMuxAsset'
+                          title: string
+                          upload_id?: string | null
+                          asset_id?: string | null
+                          playback_id?: string | null
+                          signed: boolean
+                          error_message?: string | null
+                          isReady?: boolean | null
+                          duration?: number | null
+                          aspect_ratio?: string | null
+                          createdAt?: any | null
+                          updatedAt?: any | null
+                        } | null
+                      } | null
+                    } | null
+                  }
+                | {
+                    __typename: 'ComponentCoreMuxVideo'
+                    id: string
+                    caption?: string | null
+                    muxVideoRelation?: {
+                      __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                      data?: {
+                        __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'MuxVideoUploaderMuxAsset'
+                          title: string
+                          upload_id?: string | null
+                          asset_id?: string | null
+                          playback_id?: string | null
+                          signed: boolean
+                          error_message?: string | null
+                          isReady?: boolean | null
+                          duration?: number | null
+                          aspect_ratio?: string | null
+                          createdAt?: any | null
+                          updatedAt?: any | null
+                        } | null
+                      } | null
+                    } | null
+                  }
+                | {
                     __typename: 'ComponentCoreStandAloneLink'
                     id: string
                     label: string
@@ -14129,8 +14421,8 @@ export type ThemesQuery = {
                     buttons?: Array<{
                       __typename?: 'ComponentCoreButton'
                       id: string
-                      text?: string | null
-                      url?: string | null
+                      text: string
+                      url: string
                     } | null> | null
                   }
                 | {
@@ -14297,8 +14589,8 @@ export type ThemesQuery = {
                 buttons?: Array<{
                   __typename?: 'ComponentCoreButton'
                   id: string
-                  text?: string | null
-                  url?: string | null
+                  text: string
+                  url: string
                 } | null> | null
               } | null
               parent_story?: {
@@ -14310,6 +14602,8 @@ export type ThemesQuery = {
                     __typename?: 'Story'
                     title: string
                     components?: Array<
+                      | { __typename: 'ComponentCoreMuxAudio' }
+                      | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
@@ -14420,6 +14714,8 @@ export type ThemesQuery = {
                     __typename?: 'Story'
                     title: string
                     components?: Array<
+                      | { __typename: 'ComponentCoreMuxAudio' }
+                      | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
@@ -14580,6 +14876,58 @@ export type StoriesRelatedToThemeQuery = {
               locale?: string | null
               components?: Array<
                 | {
+                    __typename: 'ComponentCoreMuxAudio'
+                    id: string
+                    caption?: string | null
+                    muxAudioRelation?: {
+                      __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                      data?: {
+                        __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'MuxVideoUploaderMuxAsset'
+                          title: string
+                          upload_id?: string | null
+                          asset_id?: string | null
+                          playback_id?: string | null
+                          signed: boolean
+                          error_message?: string | null
+                          isReady?: boolean | null
+                          duration?: number | null
+                          aspect_ratio?: string | null
+                          createdAt?: any | null
+                          updatedAt?: any | null
+                        } | null
+                      } | null
+                    } | null
+                  }
+                | {
+                    __typename: 'ComponentCoreMuxVideo'
+                    id: string
+                    caption?: string | null
+                    muxVideoRelation?: {
+                      __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                      data?: {
+                        __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'MuxVideoUploaderMuxAsset'
+                          title: string
+                          upload_id?: string | null
+                          asset_id?: string | null
+                          playback_id?: string | null
+                          signed: boolean
+                          error_message?: string | null
+                          isReady?: boolean | null
+                          duration?: number | null
+                          aspect_ratio?: string | null
+                          createdAt?: any | null
+                          updatedAt?: any | null
+                        } | null
+                      } | null
+                    } | null
+                  }
+                | {
                     __typename: 'ComponentCoreStandAloneLink'
                     id: string
                     label: string
@@ -14617,8 +14965,8 @@ export type StoriesRelatedToThemeQuery = {
                     buttons?: Array<{
                       __typename?: 'ComponentCoreButton'
                       id: string
-                      text?: string | null
-                      url?: string | null
+                      text: string
+                      url: string
                     } | null> | null
                   }
                 | {
@@ -14785,8 +15133,8 @@ export type StoriesRelatedToThemeQuery = {
                 buttons?: Array<{
                   __typename?: 'ComponentCoreButton'
                   id: string
-                  text?: string | null
-                  url?: string | null
+                  text: string
+                  url: string
                 } | null> | null
               } | null
               parent_story?: {
@@ -14798,6 +15146,8 @@ export type StoriesRelatedToThemeQuery = {
                     __typename?: 'Story'
                     title: string
                     components?: Array<
+                      | { __typename: 'ComponentCoreMuxAudio' }
+                      | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
@@ -14908,6 +15258,8 @@ export type StoriesRelatedToThemeQuery = {
                     __typename?: 'Story'
                     title: string
                     components?: Array<
+                      | { __typename: 'ComponentCoreMuxAudio' }
+                      | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
@@ -15048,6 +15400,58 @@ export type ThemeFragmentFragment = {
           locale?: string | null
           components?: Array<
             | {
+                __typename: 'ComponentCoreMuxAudio'
+                id: string
+                caption?: string | null
+                muxAudioRelation?: {
+                  __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                  data?: {
+                    __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'MuxVideoUploaderMuxAsset'
+                      title: string
+                      upload_id?: string | null
+                      asset_id?: string | null
+                      playback_id?: string | null
+                      signed: boolean
+                      error_message?: string | null
+                      isReady?: boolean | null
+                      duration?: number | null
+                      aspect_ratio?: string | null
+                      createdAt?: any | null
+                      updatedAt?: any | null
+                    } | null
+                  } | null
+                } | null
+              }
+            | {
+                __typename: 'ComponentCoreMuxVideo'
+                id: string
+                caption?: string | null
+                muxVideoRelation?: {
+                  __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                  data?: {
+                    __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'MuxVideoUploaderMuxAsset'
+                      title: string
+                      upload_id?: string | null
+                      asset_id?: string | null
+                      playback_id?: string | null
+                      signed: boolean
+                      error_message?: string | null
+                      isReady?: boolean | null
+                      duration?: number | null
+                      aspect_ratio?: string | null
+                      createdAt?: any | null
+                      updatedAt?: any | null
+                    } | null
+                  } | null
+                } | null
+              }
+            | {
                 __typename: 'ComponentCoreStandAloneLink'
                 id: string
                 label: string
@@ -15085,8 +15489,8 @@ export type ThemeFragmentFragment = {
                 buttons?: Array<{
                   __typename?: 'ComponentCoreButton'
                   id: string
-                  text?: string | null
-                  url?: string | null
+                  text: string
+                  url: string
                 } | null> | null
               }
             | {
@@ -15253,8 +15657,8 @@ export type ThemeFragmentFragment = {
             buttons?: Array<{
               __typename?: 'ComponentCoreButton'
               id: string
-              text?: string | null
-              url?: string | null
+              text: string
+              url: string
             } | null> | null
           } | null
           parent_story?: {
@@ -15266,6 +15670,8 @@ export type ThemeFragmentFragment = {
                 __typename?: 'Story'
                 title: string
                 components?: Array<
+                  | { __typename: 'ComponentCoreMuxAudio' }
+                  | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
@@ -15376,6 +15782,8 @@ export type ThemeFragmentFragment = {
                 __typename?: 'Story'
                 title: string
                 components?: Array<
+                  | { __typename: 'ComponentCoreMuxAudio' }
+                  | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
@@ -15514,6 +15922,58 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
           locale?: string | null
           components?: Array<
             | {
+                __typename: 'ComponentCoreMuxAudio'
+                id: string
+                caption?: string | null
+                muxAudioRelation?: {
+                  __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                  data?: {
+                    __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'MuxVideoUploaderMuxAsset'
+                      title: string
+                      upload_id?: string | null
+                      asset_id?: string | null
+                      playback_id?: string | null
+                      signed: boolean
+                      error_message?: string | null
+                      isReady?: boolean | null
+                      duration?: number | null
+                      aspect_ratio?: string | null
+                      createdAt?: any | null
+                      updatedAt?: any | null
+                    } | null
+                  } | null
+                } | null
+              }
+            | {
+                __typename: 'ComponentCoreMuxVideo'
+                id: string
+                caption?: string | null
+                muxVideoRelation?: {
+                  __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                  data?: {
+                    __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'MuxVideoUploaderMuxAsset'
+                      title: string
+                      upload_id?: string | null
+                      asset_id?: string | null
+                      playback_id?: string | null
+                      signed: boolean
+                      error_message?: string | null
+                      isReady?: boolean | null
+                      duration?: number | null
+                      aspect_ratio?: string | null
+                      createdAt?: any | null
+                      updatedAt?: any | null
+                    } | null
+                  } | null
+                } | null
+              }
+            | {
                 __typename: 'ComponentCoreStandAloneLink'
                 id: string
                 label: string
@@ -15551,8 +16011,8 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                 buttons?: Array<{
                   __typename?: 'ComponentCoreButton'
                   id: string
-                  text?: string | null
-                  url?: string | null
+                  text: string
+                  url: string
                 } | null> | null
               }
             | {
@@ -15719,8 +16179,8 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
             buttons?: Array<{
               __typename?: 'ComponentCoreButton'
               id: string
-              text?: string | null
-              url?: string | null
+              text: string
+              url: string
             } | null> | null
           } | null
           parent_story?: {
@@ -15732,6 +16192,8 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                 __typename?: 'Story'
                 title: string
                 components?: Array<
+                  | { __typename: 'ComponentCoreMuxAudio' }
+                  | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
@@ -15842,6 +16304,8 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                 __typename?: 'Story'
                 title: string
                 components?: Array<
+                  | { __typename: 'ComponentCoreMuxAudio' }
+                  | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
@@ -15963,6 +16427,58 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
           locale?: string | null
           components?: Array<
             | {
+                __typename: 'ComponentCoreMuxAudio'
+                id: string
+                caption?: string | null
+                muxAudioRelation?: {
+                  __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                  data?: {
+                    __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'MuxVideoUploaderMuxAsset'
+                      title: string
+                      upload_id?: string | null
+                      asset_id?: string | null
+                      playback_id?: string | null
+                      signed: boolean
+                      error_message?: string | null
+                      isReady?: boolean | null
+                      duration?: number | null
+                      aspect_ratio?: string | null
+                      createdAt?: any | null
+                      updatedAt?: any | null
+                    } | null
+                  } | null
+                } | null
+              }
+            | {
+                __typename: 'ComponentCoreMuxVideo'
+                id: string
+                caption?: string | null
+                muxVideoRelation?: {
+                  __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                  data?: {
+                    __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'MuxVideoUploaderMuxAsset'
+                      title: string
+                      upload_id?: string | null
+                      asset_id?: string | null
+                      playback_id?: string | null
+                      signed: boolean
+                      error_message?: string | null
+                      isReady?: boolean | null
+                      duration?: number | null
+                      aspect_ratio?: string | null
+                      createdAt?: any | null
+                      updatedAt?: any | null
+                    } | null
+                  } | null
+                } | null
+              }
+            | {
                 __typename: 'ComponentCoreStandAloneLink'
                 id: string
                 label: string
@@ -16000,8 +16516,8 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                 buttons?: Array<{
                   __typename?: 'ComponentCoreButton'
                   id: string
-                  text?: string | null
-                  url?: string | null
+                  text: string
+                  url: string
                 } | null> | null
               }
             | {
@@ -16168,8 +16684,8 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
             buttons?: Array<{
               __typename?: 'ComponentCoreButton'
               id: string
-              text?: string | null
-              url?: string | null
+              text: string
+              url: string
             } | null> | null
           } | null
           parent_story?: {
@@ -16181,6 +16697,8 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                 __typename?: 'Story'
                 title: string
                 components?: Array<
+                  | { __typename: 'ComponentCoreMuxAudio' }
+                  | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
@@ -16291,6 +16809,8 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                 __typename?: 'Story'
                 title: string
                 components?: Array<
+                  | { __typename: 'ComponentCoreMuxAudio' }
+                  | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
@@ -16449,6 +16969,58 @@ export type TriplyRecordQuery = {
               locale?: string | null
               components?: Array<
                 | {
+                    __typename: 'ComponentCoreMuxAudio'
+                    id: string
+                    caption?: string | null
+                    muxAudioRelation?: {
+                      __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                      data?: {
+                        __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'MuxVideoUploaderMuxAsset'
+                          title: string
+                          upload_id?: string | null
+                          asset_id?: string | null
+                          playback_id?: string | null
+                          signed: boolean
+                          error_message?: string | null
+                          isReady?: boolean | null
+                          duration?: number | null
+                          aspect_ratio?: string | null
+                          createdAt?: any | null
+                          updatedAt?: any | null
+                        } | null
+                      } | null
+                    } | null
+                  }
+                | {
+                    __typename: 'ComponentCoreMuxVideo'
+                    id: string
+                    caption?: string | null
+                    muxVideoRelation?: {
+                      __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                      data?: {
+                        __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'MuxVideoUploaderMuxAsset'
+                          title: string
+                          upload_id?: string | null
+                          asset_id?: string | null
+                          playback_id?: string | null
+                          signed: boolean
+                          error_message?: string | null
+                          isReady?: boolean | null
+                          duration?: number | null
+                          aspect_ratio?: string | null
+                          createdAt?: any | null
+                          updatedAt?: any | null
+                        } | null
+                      } | null
+                    } | null
+                  }
+                | {
                     __typename: 'ComponentCoreStandAloneLink'
                     id: string
                     label: string
@@ -16486,8 +17058,8 @@ export type TriplyRecordQuery = {
                     buttons?: Array<{
                       __typename?: 'ComponentCoreButton'
                       id: string
-                      text?: string | null
-                      url?: string | null
+                      text: string
+                      url: string
                     } | null> | null
                   }
                 | {
@@ -16654,8 +17226,8 @@ export type TriplyRecordQuery = {
                 buttons?: Array<{
                   __typename?: 'ComponentCoreButton'
                   id: string
-                  text?: string | null
-                  url?: string | null
+                  text: string
+                  url: string
                 } | null> | null
               } | null
               parent_story?: {
@@ -16667,6 +17239,8 @@ export type TriplyRecordQuery = {
                     __typename?: 'Story'
                     title: string
                     components?: Array<
+                      | { __typename: 'ComponentCoreMuxAudio' }
+                      | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
@@ -16777,6 +17351,8 @@ export type TriplyRecordQuery = {
                     __typename?: 'Story'
                     title: string
                     components?: Array<
+                      | { __typename: 'ComponentCoreMuxAudio' }
+                      | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
@@ -16926,6 +17502,58 @@ export type TriplyRecordsQuery = {
               locale?: string | null
               components?: Array<
                 | {
+                    __typename: 'ComponentCoreMuxAudio'
+                    id: string
+                    caption?: string | null
+                    muxAudioRelation?: {
+                      __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                      data?: {
+                        __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'MuxVideoUploaderMuxAsset'
+                          title: string
+                          upload_id?: string | null
+                          asset_id?: string | null
+                          playback_id?: string | null
+                          signed: boolean
+                          error_message?: string | null
+                          isReady?: boolean | null
+                          duration?: number | null
+                          aspect_ratio?: string | null
+                          createdAt?: any | null
+                          updatedAt?: any | null
+                        } | null
+                      } | null
+                    } | null
+                  }
+                | {
+                    __typename: 'ComponentCoreMuxVideo'
+                    id: string
+                    caption?: string | null
+                    muxVideoRelation?: {
+                      __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                      data?: {
+                        __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'MuxVideoUploaderMuxAsset'
+                          title: string
+                          upload_id?: string | null
+                          asset_id?: string | null
+                          playback_id?: string | null
+                          signed: boolean
+                          error_message?: string | null
+                          isReady?: boolean | null
+                          duration?: number | null
+                          aspect_ratio?: string | null
+                          createdAt?: any | null
+                          updatedAt?: any | null
+                        } | null
+                      } | null
+                    } | null
+                  }
+                | {
                     __typename: 'ComponentCoreStandAloneLink'
                     id: string
                     label: string
@@ -16963,8 +17591,8 @@ export type TriplyRecordsQuery = {
                     buttons?: Array<{
                       __typename?: 'ComponentCoreButton'
                       id: string
-                      text?: string | null
-                      url?: string | null
+                      text: string
+                      url: string
                     } | null> | null
                   }
                 | {
@@ -17131,8 +17759,8 @@ export type TriplyRecordsQuery = {
                 buttons?: Array<{
                   __typename?: 'ComponentCoreButton'
                   id: string
-                  text?: string | null
-                  url?: string | null
+                  text: string
+                  url: string
                 } | null> | null
               } | null
               parent_story?: {
@@ -17144,6 +17772,8 @@ export type TriplyRecordsQuery = {
                     __typename?: 'Story'
                     title: string
                     components?: Array<
+                      | { __typename: 'ComponentCoreMuxAudio' }
+                      | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
@@ -17254,6 +17884,8 @@ export type TriplyRecordsQuery = {
                     __typename?: 'Story'
                     title: string
                     components?: Array<
+                      | { __typename: 'ComponentCoreMuxAudio' }
+                      | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
                       | { __typename: 'ComponentModulesButtonsModule' }
                       | {
@@ -17402,6 +18034,58 @@ export type TriplyRecordFragmentFragment = {
           locale?: string | null
           components?: Array<
             | {
+                __typename: 'ComponentCoreMuxAudio'
+                id: string
+                caption?: string | null
+                muxAudioRelation?: {
+                  __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                  data?: {
+                    __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'MuxVideoUploaderMuxAsset'
+                      title: string
+                      upload_id?: string | null
+                      asset_id?: string | null
+                      playback_id?: string | null
+                      signed: boolean
+                      error_message?: string | null
+                      isReady?: boolean | null
+                      duration?: number | null
+                      aspect_ratio?: string | null
+                      createdAt?: any | null
+                      updatedAt?: any | null
+                    } | null
+                  } | null
+                } | null
+              }
+            | {
+                __typename: 'ComponentCoreMuxVideo'
+                id: string
+                caption?: string | null
+                muxVideoRelation?: {
+                  __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+                  data?: {
+                    __typename?: 'MuxVideoUploaderMuxAssetEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'MuxVideoUploaderMuxAsset'
+                      title: string
+                      upload_id?: string | null
+                      asset_id?: string | null
+                      playback_id?: string | null
+                      signed: boolean
+                      error_message?: string | null
+                      isReady?: boolean | null
+                      duration?: number | null
+                      aspect_ratio?: string | null
+                      createdAt?: any | null
+                      updatedAt?: any | null
+                    } | null
+                  } | null
+                } | null
+              }
+            | {
                 __typename: 'ComponentCoreStandAloneLink'
                 id: string
                 label: string
@@ -17439,8 +18123,8 @@ export type TriplyRecordFragmentFragment = {
                 buttons?: Array<{
                   __typename?: 'ComponentCoreButton'
                   id: string
-                  text?: string | null
-                  url?: string | null
+                  text: string
+                  url: string
                 } | null> | null
               }
             | {
@@ -17607,8 +18291,8 @@ export type TriplyRecordFragmentFragment = {
             buttons?: Array<{
               __typename?: 'ComponentCoreButton'
               id: string
-              text?: string | null
-              url?: string | null
+              text: string
+              url: string
             } | null> | null
           } | null
           parent_story?: {
@@ -17620,6 +18304,8 @@ export type TriplyRecordFragmentFragment = {
                 __typename?: 'Story'
                 title: string
                 components?: Array<
+                  | { __typename: 'ComponentCoreMuxAudio' }
+                  | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
@@ -17730,6 +18416,8 @@ export type TriplyRecordFragmentFragment = {
                 __typename?: 'Story'
                 title: string
                 components?: Array<
+                  | { __typename: 'ComponentCoreMuxAudio' }
+                  | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
                   | { __typename: 'ComponentModulesButtonsModule' }
                   | {
@@ -18213,47 +18901,6 @@ export const ComponentModulesPullquoteFragmentFragmentDoc = gql`
     text
   }
 `
-export const ComponentCoreCarouselItemFragmentFragmentDoc = gql`
-  fragment ComponentCoreCarouselItemFragment on ComponentCoreCarouselItem {
-    id
-    description
-    name
-    picture {
-      ...UploadFileEntityResponseFragment
-    }
-    type
-    triply_record {
-      data {
-        ...BaseTriplyRecordFragment
-      }
-    }
-    story {
-      data {
-        id
-        attributes {
-          slug
-        }
-      }
-    }
-  }
-  ${UploadFileEntityResponseFragmentFragmentDoc}
-  ${BaseTriplyRecordFragmentFragmentDoc}
-`
-export const ComponentModulesCarouselFragmentFragmentDoc = gql`
-  fragment ComponentModulesCarouselFragment on ComponentModulesCarousel {
-    id
-    buttonText
-    buttonUrl
-    description
-    __typename
-    items {
-      ...ComponentCoreCarouselItemFragment
-    }
-    title
-    type
-  }
-  ${ComponentCoreCarouselItemFragmentFragmentDoc}
-`
 export const ComponentModulesSubtitleFragmentFragmentDoc = gql`
   fragment ComponentModulesSubtitleFragment on ComponentModulesSubtitle {
     id
@@ -18328,9 +18975,6 @@ export const HomepageFragmentFragmentDoc = gql`
       ... on ComponentModulesPullquote {
         ...ComponentModulesPullquoteFragment
       }
-      ... on ComponentModulesCarousel {
-        ...ComponentModulesCarouselFragment
-      }
       ... on ComponentModulesSubtitle {
         ...ComponentModulesSubtitleFragment
       }
@@ -18352,7 +18996,6 @@ export const HomepageFragmentFragmentDoc = gql`
   ${ComponentModulesImageFragmentFragmentDoc}
   ${ComponentModulesGridModuleFragmentFragmentDoc}
   ${ComponentModulesPullquoteFragmentFragmentDoc}
-  ${ComponentModulesCarouselFragmentFragmentDoc}
   ${ComponentModulesSubtitleFragmentFragmentDoc}
   ${ComponentModulesTitleModuleFragmentFragmentDoc}
   ${ComponentModulesImageCarouselFragmentFragmentDoc}
@@ -18371,9 +19014,6 @@ export const LandingpageFragmentFragmentDoc = gql`
     components {
       ... on ComponentModulesTextModule {
         ...ComponentModulesTextModuleFragment
-      }
-      ... on ComponentModulesCarousel {
-        ...ComponentModulesCarouselFragment
       }
       ... on ComponentModulesGridModule {
         ...ComponentModulesGridModuleFragment
@@ -18402,7 +19042,6 @@ export const LandingpageFragmentFragmentDoc = gql`
     }
   }
   ${ComponentModulesTextModuleFragmentFragmentDoc}
-  ${ComponentModulesCarouselFragmentFragmentDoc}
   ${ComponentModulesGridModuleFragmentFragmentDoc}
   ${ComponentModulesSubtitleFragmentFragmentDoc}
   ${ComponentModulesTitleModuleFragmentFragmentDoc}
@@ -18527,6 +19166,54 @@ export const ComponentCoreStandAloneLinkFragmentFragmentDoc = gql`
   }
   ${UploadFileEntityResponseFragmentFragmentDoc}
 `
+export const ComponentCoreMuxAudioFragmentFragmentDoc = gql`
+  fragment ComponentCoreMuxAudioFragment on ComponentCoreMuxAudio {
+    id
+    caption
+    muxAudioRelation {
+      data {
+        id
+        attributes {
+          title
+          upload_id
+          asset_id
+          playback_id
+          signed
+          error_message
+          isReady
+          duration
+          aspect_ratio
+          createdAt
+          updatedAt
+        }
+      }
+    }
+  }
+`
+export const ComponentCoreMuxVideoFragmentFragmentDoc = gql`
+  fragment ComponentCoreMuxVideoFragment on ComponentCoreMuxVideo {
+    id
+    caption
+    muxVideoRelation {
+      data {
+        id
+        attributes {
+          title
+          upload_id
+          asset_id
+          playback_id
+          signed
+          error_message
+          isReady
+          duration
+          aspect_ratio
+          createdAt
+          updatedAt
+        }
+      }
+    }
+  }
+`
 export const NestedStoryFragmentFragmentDoc = gql`
   fragment NestedStoryFragment on StoryEntity {
     id
@@ -18591,6 +19278,12 @@ export const NestedStoryFragmentFragmentDoc = gql`
         ... on ComponentCoreStandAloneLink {
           ...ComponentCoreStandAloneLinkFragment
         }
+        ... on ComponentCoreMuxAudio {
+          ...ComponentCoreMuxAudioFragment
+        }
+        ... on ComponentCoreMuxVideo {
+          ...ComponentCoreMuxVideoFragment
+        }
         ... on Error {
           ...ErrorFragment
         }
@@ -18605,6 +19298,8 @@ export const NestedStoryFragmentFragmentDoc = gql`
   ${ComponentModulesImageFragmentFragmentDoc}
   ${ComponentModulesButtonsModuleFragmentFragmentDoc}
   ${ComponentCoreStandAloneLinkFragmentFragmentDoc}
+  ${ComponentCoreMuxAudioFragmentFragmentDoc}
+  ${ComponentCoreMuxVideoFragmentFragmentDoc}
   ${ErrorFragmentFragmentDoc}
 `
 export const LocalizedStoryFragmentFragmentDoc = gql`
@@ -18671,6 +19366,12 @@ export const LocalizedStoryFragmentFragmentDoc = gql`
         ... on ComponentCoreStandAloneLink {
           ...ComponentCoreStandAloneLinkFragment
         }
+        ... on ComponentCoreMuxAudio {
+          ...ComponentCoreMuxAudioFragment
+        }
+        ... on ComponentCoreMuxVideo {
+          ...ComponentCoreMuxVideoFragment
+        }
         ... on Error {
           ...ErrorFragment
         }
@@ -18690,6 +19391,8 @@ export const LocalizedStoryFragmentFragmentDoc = gql`
   ${ComponentModulesImageFragmentFragmentDoc}
   ${ComponentModulesButtonsModuleFragmentFragmentDoc}
   ${ComponentCoreStandAloneLinkFragmentFragmentDoc}
+  ${ComponentCoreMuxAudioFragmentFragmentDoc}
+  ${ComponentCoreMuxVideoFragmentFragmentDoc}
   ${ErrorFragmentFragmentDoc}
   ${NestedStoryFragmentFragmentDoc}
 `
@@ -18932,6 +19635,48 @@ export const ComponentCoreTimeframeFragmentFragmentDoc = gql`
     yearStart
   }
 `
+export const ComponentCoreCarouselImageFragmentFragmentDoc = gql`
+  fragment ComponentCoreCarouselImageFragment on ComponentCoreCarouselImage {
+    id
+    alt_text
+    description
+    image {
+      ...UploadFileEntityResponseFragment
+    }
+    triply_record {
+      data {
+        ...BaseTriplyRecordFragment
+      }
+    }
+    story {
+      data {
+        id
+        attributes {
+          slug
+        }
+      }
+    }
+  }
+  ${UploadFileEntityResponseFragmentFragmentDoc}
+  ${BaseTriplyRecordFragmentFragmentDoc}
+`
+export const ComponentModulesCarouselFragmentFragmentDoc = gql`
+  fragment ComponentModulesCarouselFragment on ComponentModulesCarousel {
+    id
+    description
+    __typename
+    title
+    variant
+    images {
+      ...ComponentCoreCarouselImageFragment
+    }
+    explore_collection_button {
+      ...ComponentCoreButtonFragment
+    }
+  }
+  ${ComponentCoreCarouselImageFragmentFragmentDoc}
+  ${ComponentCoreButtonFragmentFragmentDoc}
+`
 export const PaginationFragmentFragmentDoc = gql`
   fragment PaginationFragment on Pagination {
     page
@@ -18979,6 +19724,12 @@ export const StoryFragmentFragmentDoc = gql`
         }
         ... on ComponentCoreStandAloneLink {
           ...ComponentCoreStandAloneLinkFragment
+        }
+        ... on ComponentCoreMuxAudio {
+          ...ComponentCoreMuxAudioFragment
+        }
+        ... on ComponentCoreMuxVideo {
+          ...ComponentCoreMuxVideoFragment
         }
         ... on Error {
           ...ErrorFragment
@@ -19086,6 +19837,8 @@ export const StoryFragmentFragmentDoc = gql`
   ${ComponentModulesImageFragmentFragmentDoc}
   ${ComponentModulesButtonsModuleFragmentFragmentDoc}
   ${ComponentCoreStandAloneLinkFragmentFragmentDoc}
+  ${ComponentCoreMuxAudioFragmentFragmentDoc}
+  ${ComponentCoreMuxVideoFragmentFragmentDoc}
   ${ErrorFragmentFragmentDoc}
   ${BaseTriplyRecordFragmentFragmentDoc}
 `

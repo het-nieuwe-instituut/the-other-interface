@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_core_mux_videos",
+  "info": {
+    "displayName": "MuxVideo",
+    "icon": "television",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "caption": {
+      "type": "string"
+    },
+    "muxVideoRelation": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::mux-video-uploader.mux-asset"
+    }
+  }
+}

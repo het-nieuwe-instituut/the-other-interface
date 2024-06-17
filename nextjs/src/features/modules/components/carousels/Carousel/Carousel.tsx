@@ -1,96 +1,100 @@
-import { Box, Button, Flex, Text } from '@chakra-ui/react'
-import React, { createRef } from 'react'
-import { Carousel } from 'react-responsive-carousel'
+// TODO: uncomment after component is connected to collections again
 
-import { ComponentModulesCarousel, EnumComponentmodulescarouselType } from 'src/generated/graphql'
+export {}
 
-import CarouselHeader from '../components/CarouselHeader/CarouselHeader'
-import CarouselPagination from '../components/CarouselPagination/CarouselPagination'
-import { CarouselSlide } from '../components/CarouselSlide/CarouselSlide'
-import { usePresenter } from './usePresenter'
-import { modulesSpacingMapper } from '@/features/modules/modulesSpacing'
+// import { Box, Button, Flex, Text } from '@chakra-ui/react'
+// import React, { createRef } from 'react'
+// import { Carousel } from 'react-responsive-carousel'
 
-interface Props {
-  component: ComponentModulesCarousel
-  locale?: string
-}
+// import { ComponentModulesCarousel, EnumComponentmodulescarouselType } from 'src/generated/graphql'
 
-export const CarouselModule: React.FC<Props> = props => {
-  const carouselRef = createRef<HTMLDivElement>()
-  const { title, items, type, buttonText, buttonUrl, description } = props.component
-  const {
-    showPaginationDesctop,
-    handlePaginationNext,
-    handlePaginationPrev,
-    pagesCount,
-    chunks,
-    currentSlide,
-    showPaginationMobile,
-    handlePressButton,
-  } = usePresenter(type, items, buttonUrl)
+// import CarouselHeader from '../components/CarouselHeader/CarouselHeader'
+// import CarouselPagination from '../components/CarouselPagination/CarouselPagination'
+// import { CarouselSlide } from '../components/CarouselSlide/CarouselSlide'
+// import { usePresenter } from './usePresenter'
+// import { modulesSpacingMapper } from '@/features/modules/modulesSpacing'
 
-  return (
-    <Box
-      as="div"
-      backgroundColor={'inherit'}
-      pt={modulesSpacingMapper?.Carousel.spacingTop}
-      pb={modulesSpacingMapper?.Carousel.spacingBottom}
-      position={'relative'}
-      ref={carouselRef}
-    >
-      <CarouselHeader title={title ?? ''}>
-        {showPaginationDesctop ? (
-          <CarouselPagination
-            handlePaginationNext={handlePaginationNext}
-            handlePaginationPrev={handlePaginationPrev}
-            pagesCount={pagesCount}
-            currentSlide={currentSlide + 1}
-          />
-        ) : null}
-      </CarouselHeader>
+// interface Props {
+//   component: ComponentModulesCarousel
+//   locale?: string
+// }
 
-      {description && (
-        <Box mb={'8'} width={'63%'}>
-          <Text textStyle="body">{description}</Text>
-        </Box>
-      )}
+// export const CarouselModule: React.FC<Props> = props => {
+//   const carouselRef = createRef<HTMLDivElement>()
+//   const { title, items, type, buttonText, buttonUrl, description } = props.component
+//   const {
+//     showPaginationDesctop,
+//     handlePaginationNext,
+//     handlePaginationPrev,
+//     pagesCount,
+//     chunks,
+//     currentSlide,
+//     showPaginationMobile,
+//     handlePressButton,
+//   } = usePresenter(type, items, buttonUrl)
 
-      <Carousel
-        showArrows={false}
-        showThumbs={false}
-        showStatus={false}
-        showIndicators={false}
-        selectedItem={currentSlide}
-      >
-        {chunks?.map((chunk, index) => {
-          return (
-            <CarouselSlide
-              key={index}
-              imageKey={index}
-              items={chunk}
-              type={type ?? EnumComponentmodulescarouselType.Makers}
-              carouselRef={carouselRef}
-            />
-          )
-        })}
-      </Carousel>
+//   return (
+//     <Box
+//       as="div"
+//       backgroundColor={'inherit'}
+//       pt={modulesSpacingMapper?.Carousel.spacingTop}
+//       pb={modulesSpacingMapper?.Carousel.spacingBottom}
+//       position={'relative'}
+//       ref={carouselRef}
+//     >
+//       <CarouselHeader title={title ?? ''}>
+//         {showPaginationDesctop ? (
+//           <CarouselPagination
+//             handlePaginationNext={handlePaginationNext}
+//             handlePaginationPrev={handlePaginationPrev}
+//             pagesCount={pagesCount}
+//             currentSlide={currentSlide + 1}
+//           />
+//         ) : null}
+//       </CarouselHeader>
 
-      {showPaginationMobile && (
-        <Box mb={'12'}>
-          <CarouselPagination
-            handlePaginationNext={handlePaginationNext}
-            handlePaginationPrev={handlePaginationPrev}
-            pagesCount={pagesCount}
-            currentSlide={currentSlide + 1}
-          />
-        </Box>
-      )}
+//       {description && (
+//         <Box mb={'8'} width={'63%'}>
+//           <Text textStyle="body">{description}</Text>
+//         </Box>
+//       )}
 
-      {buttonText && (
-        <Flex>
-          <Button onClick={handlePressButton}>{buttonText}</Button>
-        </Flex>
-      )}
-    </Box>
-  )
-}
+//       <Carousel
+//         showArrows={false}
+//         showThumbs={false}
+//         showStatus={false}
+//         showIndicators={false}
+//         selectedItem={currentSlide}
+//       >
+//         {chunks?.map((chunk, index) => {
+//           return (
+//             <CarouselSlide
+//               key={index}
+//               imageKey={index}
+//               items={chunk}
+//               type={type ?? EnumComponentmodulescarouselType.Makers}
+//               carouselRef={carouselRef}
+//             />
+//           )
+//         })}
+//       </Carousel>
+
+//       {showPaginationMobile && (
+//         <Box mb={'12'}>
+//           <CarouselPagination
+//             handlePaginationNext={handlePaginationNext}
+//             handlePaginationPrev={handlePaginationPrev}
+//             pagesCount={pagesCount}
+//             currentSlide={currentSlide + 1}
+//           />
+//         </Box>
+//       )}
+
+//       {buttonText && (
+//         <Flex>
+//           <Button onClick={handlePressButton}>{buttonText}</Button>
+//         </Flex>
+//       )}
+//     </Box>
+//   )
+// }

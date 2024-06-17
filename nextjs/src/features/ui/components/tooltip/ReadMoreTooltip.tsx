@@ -154,7 +154,7 @@ const ReadMoreTooltipContent = ({
           <NextLink href={readMoreHref}>
             <NavButton
               color={color === 'black' ? 'invertedPinkHover' : 'inverted'}
-              variant={'menuSecondary'}
+              variant={'textSecondary'}
             >
               {readMoreText}
               <ExternalLink height="14" width="14" className={'size-[14px]'} />

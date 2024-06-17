@@ -63,13 +63,13 @@ export class HighlightedHomepageThemeEntityResolver {
 
     return {
       pagination: {
-        page: paginationArgs?.page, // this is to maintain the meta data structure
+        page: paginationArgs?.page,
         total: res.homepage?.data?.attributes?.highlightedThemes?.data.length,
         pageCount: Math.ceil(
           (res.homepage?.data?.attributes?.highlightedThemes?.data.length || 0) /
             (paginationArgs?.pageSize || 1)
         ),
-        pageSize: paginationArgs?.pageSize, // this is to maintain the meta data structure
+        pageSize: paginationArgs?.pageSize,
       },
     }
   }

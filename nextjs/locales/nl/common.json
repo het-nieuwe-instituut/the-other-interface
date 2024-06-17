@@ -21,5 +21,8 @@
   "go": "Zoek",
   "noDataFound": "Geen data gevonden",
   "languageDisclaimer": "Let op: alle inhoud van de Collectie is machinaal automatisch naar het Engels.",
-  "noSuggestionsFound": "Geen suggesties gevonden"
+  "noSuggestionsFound": "Geen suggesties gevonden",
+  "audio": "De audio is nog niet klaar, probeer het later opnieuw.",
+  "video": "De video is nog niet klaar, probeer het later opnieuw.",
+  "seeFullImage": "Bekijk volledige afbeelding"
 }
