@@ -377,7 +377,6 @@ export type ComponentModulesHighlight = {
   id: Scalars['ID']
   image: UploadFileEntityResponse
   image_alt_text: Scalars['String']
-  subtitle?: Maybe<Scalars['String']>
   title: Scalars['String']
 }
 
@@ -393,7 +392,6 @@ export type ComponentModulesHighlightInput = {
   id?: InputMaybe<Scalars['ID']>
   image?: InputMaybe<Scalars['ID']>
   image_alt_text?: InputMaybe<Scalars['String']>
-  subtitle?: InputMaybe<Scalars['String']>
   title?: InputMaybe<Scalars['String']>
 }
 
@@ -4520,7 +4518,6 @@ export type LandingPageArchiveFragmentFragment = {
     __typename?: 'ComponentModulesHighlight'
     id: string
     title: string
-    subtitle?: string | null
     description?: string | null
     image_alt_text: string
     buttons?: Array<{
@@ -4705,7 +4702,6 @@ export type LandingPageObjectFragmentFragment = {
     __typename?: 'ComponentModulesHighlight'
     id: string
     title: string
-    subtitle?: string | null
     description?: string | null
     image_alt_text: string
     buttons?: Array<{
@@ -4890,7 +4886,6 @@ export type LandingPagePeopleFragmentFragment = {
     __typename?: 'ComponentModulesHighlight'
     id: string
     title: string
-    subtitle?: string | null
     description?: string | null
     image_alt_text: string
     buttons?: Array<{
@@ -5075,7 +5070,6 @@ export type LandingPagePublicationFragmentFragment = {
     __typename?: 'ComponentModulesHighlight'
     id: string
     title: string
-    subtitle?: string | null
     description?: string | null
     image_alt_text: string
     buttons?: Array<{
@@ -5271,7 +5265,6 @@ export type LandingPageArchiveQuery = {
           __typename?: 'ComponentModulesHighlight'
           id: string
           title: string
-          subtitle?: string | null
           description?: string | null
           image_alt_text: string
           buttons?: Array<{
@@ -5470,7 +5463,6 @@ export type LandingPageObjectQuery = {
           __typename?: 'ComponentModulesHighlight'
           id: string
           title: string
-          subtitle?: string | null
           description?: string | null
           image_alt_text: string
           buttons?: Array<{
@@ -5669,7 +5661,6 @@ export type LandingPagePeopleQuery = {
           __typename?: 'ComponentModulesHighlight'
           id: string
           title: string
-          subtitle?: string | null
           description?: string | null
           image_alt_text: string
           buttons?: Array<{
@@ -5868,7 +5859,6 @@ export type LandingPagePublicationQuery = {
           __typename?: 'ComponentModulesHighlight'
           id: string
           title: string
-          subtitle?: string | null
           description?: string | null
           image_alt_text: string
           buttons?: Array<{
@@ -13940,7 +13930,6 @@ export type ComponentModulesHighlightFragmentFragment = {
   __typename?: 'ComponentModulesHighlight'
   id: string
   title: string
-  subtitle?: string | null
   description?: string | null
   image_alt_text: string
   buttons?: Array<{
@@ -19360,7 +19349,6 @@ export const ComponentModulesHighlightFragmentFragmentDoc = gql`
   fragment ComponentModulesHighlightFragment on ComponentModulesHighlight {
     id
     title
-    subtitle
     description
     image_alt_text
     buttons {

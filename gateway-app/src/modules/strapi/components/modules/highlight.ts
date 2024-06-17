@@ -11,9 +11,6 @@ export class ComponentModulesHighlight {
   public title: string
 
   @Field({ nullable: true })
-  public subtitle?: string
-
-  @Field({ nullable: true })
   public description?: string
 
   @Field()

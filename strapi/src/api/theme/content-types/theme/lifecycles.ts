@@ -13,15 +13,16 @@ export default {
         : undefined
 
       if (
-        theme.highlightedStories.length + event.params.data.highlightedStories.connect.length > 5 &&
+        theme?.highlightedStories.length + event?.params?.data?.highlightedStories?.connect.length >
+          5 &&
         !(
-          theme.highlightedStories.length +
-            event.params.data.highlightedStories.connect.length -
-            event.params.data.highlightedStories.disconnect.length <=
+          theme?.highlightedStories.length +
+            event?.params?.data?.highlightedStories?.connect.length -
+            event?.params?.data?.highlightedStories?.disconnect.length <=
           5
         ) &&
         !(
-          theme.highlightedStories.length === 5 &&
+          theme?.highlightedStories.length === 5 &&
           event?.params?.data?.highlightedStories?.connect[0]?.position?.before
         )
       ) {
@@ -33,7 +34,7 @@ export default {
   },
   async beforeUpdate(event) {
     try {
-      const id = event.params.where?.id
+      const id = event?.params?.where?.id
       const theme = id
         ? await strapi.entityService.findOne(themeApi, id, {
             populate: { highlightedStories: true },
@@ -41,15 +42,16 @@ export default {
         : undefined
 
       if (
-        theme.highlightedStories.length + event.params.data.highlightedStories.connect.length > 5 &&
+        theme?.highlightedStories.length + event?.params?.data?.highlightedStories?.connect.length >
+          5 &&
         !(
-          theme.highlightedStories.length +
-            event.params.data.highlightedStories.connect.length -
-            event.params.data.highlightedStories.disconnect.length <=
+          theme?.highlightedStories.length +
+            event?.params?.data?.highlightedStories?.connect.length -
+            event?.params?.data?.highlightedStories?.disconnect.length <=
           5
         ) &&
         !(
-          theme.highlightedStories.length === 5 &&
+          theme?.highlightedStories.length === 5 &&
           event?.params?.data?.highlightedStories?.connect[0]?.position?.before
         )
       ) {
