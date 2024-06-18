@@ -63,7 +63,7 @@ export const Navigation = () => {
               </Link>
             ))}
           </div>
-          <div className="flex min-w-[388px] max-w-[398px] flex-col">
+          <div className="flex min-w-[388px] max-w-[398px] flex-col sm:pb-[50px]">
             <div className="mb-[63px] flex flex-col">
               <p
                 className={TypographyVariants({
