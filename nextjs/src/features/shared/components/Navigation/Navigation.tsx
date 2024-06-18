@@ -7,6 +7,8 @@ import { CSSProperties } from 'react'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { NavLinkButton } from '@/features/ui/components/nav-link-button/component'
 import Link from 'next/link'
+import { useDispatch } from 'react-redux'
+import { sharedActions } from '../../stores/shared.store'
 
 const categories = [
   { name: 'archives', translationKey: 'archives' },
@@ -18,6 +20,7 @@ const categories = [
 export const Navigation = () => {
   const { isMenuOpen, ref, navTextStyle, overflowValue, lang } = useNavSettings()
   const { t: tNavigation } = useTranslation('navigation')
+  const dispatch = useDispatch()
 
   return (
     <div
@@ -51,6 +54,7 @@ export const Navigation = () => {
             {categories.map(category => (
               // need this textStyle={navTextStyle} to change depend on where you are
               <Link
+                onClick={() => closeMenu()}
                 className={cn(
                   navTextStyle === Fonts.Times
                     ? TypographyVariants({
@@ -89,8 +93,8 @@ export const Navigation = () => {
               <NavLinkButton
                 href={'/'}
                 variant={'menuPrimary'}
-                //invertedPinkHover
                 color={'invertedPaleHover'}
+                onClick={() => closeMenu()}
               >
                 {tNavigation('readMore')}
               </NavLinkButton>
@@ -101,6 +105,7 @@ export const Navigation = () => {
                 variant={'menuSecondary'}
                 color={'invertedPaleHover'}
                 className="mb-4"
+                onClick={() => closeMenu()}
               >
                 {tNavigation('theCollection')}
               </NavLinkButton>
@@ -109,6 +114,7 @@ export const Navigation = () => {
                 variant={'menuSecondary'}
                 color={'invertedPaleHover'}
                 className="mb-4"
+                onClick={() => closeMenu()}
               >
                 {tNavigation('asterisk')}
               </NavLinkButton>
@@ -117,6 +123,7 @@ export const Navigation = () => {
                 variant={'menuSecondary'}
                 color={'invertedPaleHover'}
                 className="mb-4"
+                onClick={() => closeMenu()}
               >
                 {tNavigation('externalSources')}
               </NavLinkButton>
@@ -124,6 +131,7 @@ export const Navigation = () => {
                 href={'/contribute'}
                 variant={'menuSecondary'}
                 color={'invertedPaleHover'}
+                onClick={() => closeMenu()}
               >
                 {tNavigation('contribute')}
               </NavLinkButton>
@@ -133,4 +141,8 @@ export const Navigation = () => {
       </div>
     </div>
   )
+
+  function closeMenu() {
+    dispatch(sharedActions.menuOpen({ isMenuOpen: false }))
+  }
 }
