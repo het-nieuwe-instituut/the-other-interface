@@ -46,7 +46,8 @@
         "modules.image",
         "core.stand-alone-link",
         "core.mux-audio",
-        "core.mux-video"
+        "core.mux-video",
+        "modules.side-image-with-text"
       ],
       "pluginOptions": {
         "i18n": {

@@ -302,37 +302,7 @@ fragment NestedStoryFragment on StoryEntity {
       }
     }
     components {
-      __typename
-      ... on ComponentModulesPullquote {
-        ...ComponentModulesPullquoteFragment
-      }
-      ... on ComponentModulesTextModule {
-        ...ComponentModulesTextModuleFragment
-      }
-      ... on ComponentModulesSubtitle {
-        ...ComponentModulesSubtitleFragment
-      }
-      ... on ComponentModulesTitleModule {
-        ...ComponentModulesTitleModuleFragment
-      }
-      ... on ComponentModulesImageCarousel {
-        ...ComponentModulesImageCarouselFragment
-      }
-      ... on ComponentModulesImage {
-        ...ComponentModulesImageFragment
-      }
-      ... on ComponentCoreStandAloneLink {
-        ...ComponentCoreStandAloneLinkFragment
-      }
-      ... on ComponentCoreMuxAudio {
-        ...ComponentCoreMuxAudioFragment
-      }
-      ... on ComponentCoreMuxVideo {
-        ...ComponentCoreMuxVideoFragment
-      }
-      ... on Error {
-        ...ErrorFragment
-      }
+      ...StoryComponentsFragment
     }
   }
 }
@@ -375,37 +345,7 @@ fragment LocalizedStoryFragment on StoryEntity {
       }
     }
     components {
-      __typename
-      ... on ComponentModulesPullquote {
-        ...ComponentModulesPullquoteFragment
-      }
-      ... on ComponentModulesTextModule {
-        ...ComponentModulesTextModuleFragment
-      }
-      ... on ComponentModulesSubtitle {
-        ...ComponentModulesSubtitleFragment
-      }
-      ... on ComponentModulesTitleModule {
-        ...ComponentModulesTitleModuleFragment
-      }
-      ... on ComponentModulesImageCarousel {
-        ...ComponentModulesImageCarouselFragment
-      }
-      ... on ComponentModulesImage {
-        ...ComponentModulesImageFragment
-      }
-      ... on ComponentCoreStandAloneLink {
-        ...ComponentCoreStandAloneLinkFragment
-      }
-      ... on ComponentCoreMuxAudio {
-        ...ComponentCoreMuxAudioFragment
-      }
-      ... on ComponentCoreMuxVideo {
-        ...ComponentCoreMuxVideoFragment
-      }
-      ... on Error {
-        ...ErrorFragment
-      }
+      ...StoryComponentsFragment
     }
     localizations {
       data {
@@ -421,37 +361,7 @@ fragment StoryFragment on StoryEntity {
     title
     slug
     components {
-      __typename
-      ... on ComponentModulesPullquote {
-        ...ComponentModulesPullquoteFragment
-      }
-      ... on ComponentModulesTextModule {
-        ...ComponentModulesTextModuleFragment
-      }
-      ... on ComponentModulesSubtitle {
-        ...ComponentModulesSubtitleFragment
-      }
-      ... on ComponentModulesTitleModule {
-        ...ComponentModulesTitleModuleFragment
-      }
-      ... on ComponentModulesImageCarousel {
-        ...ComponentModulesImageCarouselFragment
-      }
-      ... on ComponentModulesImage {
-        ...ComponentModulesImageFragment
-      }
-      ... on ComponentCoreStandAloneLink {
-        ...ComponentCoreStandAloneLinkFragment
-      }
-      ... on ComponentCoreMuxAudio {
-        ...ComponentCoreMuxAudioFragment
-      }
-      ... on ComponentCoreMuxVideo {
-        ...ComponentCoreMuxVideoFragment
-      }
-      ... on Error {
-        ...ErrorFragment
-      }
+      ...StoryComponentsFragment
     }
     author {
       data {
@@ -752,5 +662,42 @@ fragment LocalizedStoryMetaFragment on StoryEntity {
         ...StoryMetaFragment
       }
     }
+  }
+}
+
+fragment StoryComponentsFragment on StoryComponentsDynamicZone {
+  __typename
+  ... on ComponentModulesPullquote {
+    ...ComponentModulesPullquoteFragment
+  }
+  ... on ComponentModulesTextModule {
+    ...ComponentModulesTextModuleFragment
+  }
+  ... on ComponentModulesSubtitle {
+    ...ComponentModulesSubtitleFragment
+  }
+  ... on ComponentModulesTitleModule {
+    ...ComponentModulesTitleModuleFragment
+  }
+  ... on ComponentModulesImageCarousel {
+    ...ComponentModulesImageCarouselFragment
+  }
+  ... on ComponentModulesImage {
+    ...ComponentModulesImageFragment
+  }
+  ... on ComponentCoreStandAloneLink {
+    ...ComponentCoreStandAloneLinkFragment
+  }
+  ... on ComponentCoreMuxAudio {
+    ...ComponentCoreMuxAudioFragment
+  }
+  ... on ComponentCoreMuxVideo {
+    ...ComponentCoreMuxVideoFragment
+  }
+  ... on ComponentModulesSideImageWithText {
+    ...ComponentModulesSideImageWithTextFragment
+  }
+  ... on Error {
+    ...ErrorFragment
   }
 }

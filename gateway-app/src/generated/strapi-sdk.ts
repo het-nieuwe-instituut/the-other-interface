@@ -324,6 +324,14 @@ export type ComponentModulesPullquote = {
   text?: Maybe<Scalars['String']>
 }
 
+export type ComponentModulesSideImageWithText = {
+  __typename?: 'ComponentModulesSideImageWithText'
+  id: Scalars['ID']
+  image: UploadFileEntityResponse
+  image_alt_text: Scalars['String']
+  sideText: Scalars['String']
+}
+
 export type ComponentModulesSubtitle = {
   __typename?: 'ComponentModulesSubtitle'
   id: Scalars['ID']
@@ -575,6 +583,7 @@ export type GenericMorph =
   | ComponentModulesImage
   | ComponentModulesImageCarousel
   | ComponentModulesPullquote
+  | ComponentModulesSideImageWithText
   | ComponentModulesSubtitle
   | ComponentModulesTextModule
   | ComponentModulesTitleModule
@@ -1740,6 +1749,7 @@ export type StoryComponentsDynamicZone =
   | ComponentModulesImage
   | ComponentModulesImageCarousel
   | ComponentModulesPullquote
+  | ComponentModulesSideImageWithText
   | ComponentModulesSubtitle
   | ComponentModulesTextModule
   | ComponentModulesTitleModule
@@ -3303,6 +3313,38 @@ export type HighlightedHomepageThemesQuery = {
                           id: string
                           text?: string | null
                         }
+                      | {
+                          __typename: 'ComponentModulesSideImageWithText'
+                          id: string
+                          sideText: string
+                          image_alt_text: string
+                          image: {
+                            __typename?: 'UploadFileEntityResponse'
+                            data?: {
+                              __typename?: 'UploadFileEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'UploadFile'
+                                hash: string
+                                mime: string
+                                name: string
+                                provider: string
+                                size: number
+                                url: string
+                                alternativeText?: string | null
+                                caption?: string | null
+                                createdAt?: any | null
+                                ext?: string | null
+                                formats?: any | null
+                                height?: number | null
+                                previewUrl?: string | null
+                                provider_metadata?: any | null
+                                updatedAt?: any | null
+                                width?: number | null
+                              } | null
+                            } | null
+                          }
+                        }
                       | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
                       | {
                           __typename: 'ComponentModulesTextModule'
@@ -3451,6 +3493,7 @@ export type HighlightedHomepageThemesQuery = {
                               }
                             | { __typename: 'ComponentModulesImageCarousel' }
                             | { __typename: 'ComponentModulesPullquote' }
+                            | { __typename: 'ComponentModulesSideImageWithText' }
                             | { __typename: 'ComponentModulesSubtitle' }
                             | { __typename: 'ComponentModulesTextModule' }
                             | { __typename: 'ComponentModulesTitleModule' }
@@ -3562,6 +3605,7 @@ export type HighlightedHomepageThemesQuery = {
                               }
                             | { __typename: 'ComponentModulesImageCarousel' }
                             | { __typename: 'ComponentModulesPullquote' }
+                            | { __typename: 'ComponentModulesSideImageWithText' }
                             | { __typename: 'ComponentModulesSubtitle' }
                             | { __typename: 'ComponentModulesTextModule' }
                             | { __typename: 'ComponentModulesTitleModule' }
@@ -3798,6 +3842,38 @@ export type HighlightedHomepageThemesQuery = {
                           id: string
                           text?: string | null
                         }
+                      | {
+                          __typename: 'ComponentModulesSideImageWithText'
+                          id: string
+                          sideText: string
+                          image_alt_text: string
+                          image: {
+                            __typename?: 'UploadFileEntityResponse'
+                            data?: {
+                              __typename?: 'UploadFileEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'UploadFile'
+                                hash: string
+                                mime: string
+                                name: string
+                                provider: string
+                                size: number
+                                url: string
+                                alternativeText?: string | null
+                                caption?: string | null
+                                createdAt?: any | null
+                                ext?: string | null
+                                formats?: any | null
+                                height?: number | null
+                                previewUrl?: string | null
+                                provider_metadata?: any | null
+                                updatedAt?: any | null
+                                width?: number | null
+                              } | null
+                            } | null
+                          }
+                        }
                       | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
                       | {
                           __typename: 'ComponentModulesTextModule'
@@ -3946,6 +4022,7 @@ export type HighlightedHomepageThemesQuery = {
                               }
                             | { __typename: 'ComponentModulesImageCarousel' }
                             | { __typename: 'ComponentModulesPullquote' }
+                            | { __typename: 'ComponentModulesSideImageWithText' }
                             | { __typename: 'ComponentModulesSubtitle' }
                             | { __typename: 'ComponentModulesTextModule' }
                             | { __typename: 'ComponentModulesTitleModule' }
@@ -4057,6 +4134,7 @@ export type HighlightedHomepageThemesQuery = {
                               }
                             | { __typename: 'ComponentModulesImageCarousel' }
                             | { __typename: 'ComponentModulesPullquote' }
+                            | { __typename: 'ComponentModulesSideImageWithText' }
                             | { __typename: 'ComponentModulesSubtitle' }
                             | { __typename: 'ComponentModulesTextModule' }
                             | { __typename: 'ComponentModulesTitleModule' }
@@ -7482,6 +7560,38 @@ export type StoriesQuery = {
               } | null
             }
           | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+          | {
+              __typename: 'ComponentModulesSideImageWithText'
+              id: string
+              sideText: string
+              image_alt_text: string
+              image: {
+                __typename?: 'UploadFileEntityResponse'
+                data?: {
+                  __typename?: 'UploadFileEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'UploadFile'
+                    hash: string
+                    mime: string
+                    name: string
+                    provider: string
+                    size: number
+                    url: string
+                    alternativeText?: string | null
+                    caption?: string | null
+                    createdAt?: any | null
+                    ext?: string | null
+                    formats?: any | null
+                    height?: number | null
+                    previewUrl?: string | null
+                    provider_metadata?: any | null
+                    updatedAt?: any | null
+                    width?: number | null
+                  } | null
+                } | null
+              }
+            }
           | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
           | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
           | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -7622,6 +7732,7 @@ export type StoriesQuery = {
                   }
                 | { __typename: 'ComponentModulesImageCarousel' }
                 | { __typename: 'ComponentModulesPullquote' }
+                | { __typename: 'ComponentModulesSideImageWithText' }
                 | { __typename: 'ComponentModulesSubtitle' }
                 | { __typename: 'ComponentModulesTextModule' }
                 | { __typename: 'ComponentModulesTitleModule' }
@@ -7733,6 +7844,7 @@ export type StoriesQuery = {
                   }
                 | { __typename: 'ComponentModulesImageCarousel' }
                 | { __typename: 'ComponentModulesPullquote' }
+                | { __typename: 'ComponentModulesSideImageWithText' }
                 | { __typename: 'ComponentModulesSubtitle' }
                 | { __typename: 'ComponentModulesTextModule' }
                 | { __typename: 'ComponentModulesTitleModule' }
@@ -8010,6 +8122,38 @@ export type StoryQuery = {
               } | null
             }
           | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+          | {
+              __typename: 'ComponentModulesSideImageWithText'
+              id: string
+              sideText: string
+              image_alt_text: string
+              image: {
+                __typename?: 'UploadFileEntityResponse'
+                data?: {
+                  __typename?: 'UploadFileEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'UploadFile'
+                    hash: string
+                    mime: string
+                    name: string
+                    provider: string
+                    size: number
+                    url: string
+                    alternativeText?: string | null
+                    caption?: string | null
+                    createdAt?: any | null
+                    ext?: string | null
+                    formats?: any | null
+                    height?: number | null
+                    previewUrl?: string | null
+                    provider_metadata?: any | null
+                    updatedAt?: any | null
+                    width?: number | null
+                  } | null
+                } | null
+              }
+            }
           | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
           | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
           | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -8150,6 +8294,7 @@ export type StoryQuery = {
                   }
                 | { __typename: 'ComponentModulesImageCarousel' }
                 | { __typename: 'ComponentModulesPullquote' }
+                | { __typename: 'ComponentModulesSideImageWithText' }
                 | { __typename: 'ComponentModulesSubtitle' }
                 | { __typename: 'ComponentModulesTextModule' }
                 | { __typename: 'ComponentModulesTitleModule' }
@@ -8261,6 +8406,7 @@ export type StoryQuery = {
                   }
                 | { __typename: 'ComponentModulesImageCarousel' }
                 | { __typename: 'ComponentModulesPullquote' }
+                | { __typename: 'ComponentModulesSideImageWithText' }
                 | { __typename: 'ComponentModulesSubtitle' }
                 | { __typename: 'ComponentModulesTextModule' }
                 | { __typename: 'ComponentModulesTitleModule' }
@@ -8536,6 +8682,38 @@ export type StoryByLocaleQuery = {
               } | null
             }
           | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+          | {
+              __typename: 'ComponentModulesSideImageWithText'
+              id: string
+              sideText: string
+              image_alt_text: string
+              image: {
+                __typename?: 'UploadFileEntityResponse'
+                data?: {
+                  __typename?: 'UploadFileEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'UploadFile'
+                    hash: string
+                    mime: string
+                    name: string
+                    provider: string
+                    size: number
+                    url: string
+                    alternativeText?: string | null
+                    caption?: string | null
+                    createdAt?: any | null
+                    ext?: string | null
+                    formats?: any | null
+                    height?: number | null
+                    previewUrl?: string | null
+                    provider_metadata?: any | null
+                    updatedAt?: any | null
+                    width?: number | null
+                  } | null
+                } | null
+              }
+            }
           | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
           | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
           | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -8784,6 +8962,38 @@ export type StoryByLocaleQuery = {
                     } | null
                   }
                 | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+                | {
+                    __typename: 'ComponentModulesSideImageWithText'
+                    id: string
+                    sideText: string
+                    image_alt_text: string
+                    image: {
+                      __typename?: 'UploadFileEntityResponse'
+                      data?: {
+                        __typename?: 'UploadFileEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'UploadFile'
+                          hash: string
+                          mime: string
+                          name: string
+                          provider: string
+                          size: number
+                          url: string
+                          alternativeText?: string | null
+                          caption?: string | null
+                          createdAt?: any | null
+                          ext?: string | null
+                          formats?: any | null
+                          height?: number | null
+                          previewUrl?: string | null
+                          provider_metadata?: any | null
+                          updatedAt?: any | null
+                          width?: number | null
+                        } | null
+                      } | null
+                    }
+                  }
                 | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
                 | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
                 | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -9050,6 +9260,38 @@ export type StoriesByLocaleQuery = {
               } | null
             }
           | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+          | {
+              __typename: 'ComponentModulesSideImageWithText'
+              id: string
+              sideText: string
+              image_alt_text: string
+              image: {
+                __typename?: 'UploadFileEntityResponse'
+                data?: {
+                  __typename?: 'UploadFileEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'UploadFile'
+                    hash: string
+                    mime: string
+                    name: string
+                    provider: string
+                    size: number
+                    url: string
+                    alternativeText?: string | null
+                    caption?: string | null
+                    createdAt?: any | null
+                    ext?: string | null
+                    formats?: any | null
+                    height?: number | null
+                    previewUrl?: string | null
+                    provider_metadata?: any | null
+                    updatedAt?: any | null
+                    width?: number | null
+                  } | null
+                } | null
+              }
+            }
           | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
           | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
           | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -9298,6 +9540,38 @@ export type StoriesByLocaleQuery = {
                     } | null
                   }
                 | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+                | {
+                    __typename: 'ComponentModulesSideImageWithText'
+                    id: string
+                    sideText: string
+                    image_alt_text: string
+                    image: {
+                      __typename?: 'UploadFileEntityResponse'
+                      data?: {
+                        __typename?: 'UploadFileEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'UploadFile'
+                          hash: string
+                          mime: string
+                          name: string
+                          provider: string
+                          size: number
+                          url: string
+                          alternativeText?: string | null
+                          caption?: string | null
+                          createdAt?: any | null
+                          ext?: string | null
+                          formats?: any | null
+                          height?: number | null
+                          previewUrl?: string | null
+                          provider_metadata?: any | null
+                          updatedAt?: any | null
+                          width?: number | null
+                        } | null
+                      } | null
+                    }
+                  }
                 | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
                 | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
                 | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -9471,6 +9745,7 @@ export type StoriesMetaByLocaleQuery = {
                   }
                 | { __typename: 'ComponentModulesImageCarousel' }
                 | { __typename: 'ComponentModulesPullquote' }
+                | { __typename: 'ComponentModulesSideImageWithText' }
                 | { __typename: 'ComponentModulesSubtitle' }
                 | { __typename: 'ComponentModulesTextModule' }
                 | { __typename: 'ComponentModulesTitleModule' }
@@ -9582,6 +9857,7 @@ export type StoriesMetaByLocaleQuery = {
                   }
                 | { __typename: 'ComponentModulesImageCarousel' }
                 | { __typename: 'ComponentModulesPullquote' }
+                | { __typename: 'ComponentModulesSideImageWithText' }
                 | { __typename: 'ComponentModulesSubtitle' }
                 | { __typename: 'ComponentModulesTextModule' }
                 | { __typename: 'ComponentModulesTitleModule' }
@@ -9778,6 +10054,7 @@ export type StoriesMetaByLocaleQuery = {
                         }
                       | { __typename: 'ComponentModulesImageCarousel' }
                       | { __typename: 'ComponentModulesPullquote' }
+                      | { __typename: 'ComponentModulesSideImageWithText' }
                       | { __typename: 'ComponentModulesSubtitle' }
                       | { __typename: 'ComponentModulesTextModule' }
                       | { __typename: 'ComponentModulesTitleModule' }
@@ -9889,6 +10166,7 @@ export type StoriesMetaByLocaleQuery = {
                         }
                       | { __typename: 'ComponentModulesImageCarousel' }
                       | { __typename: 'ComponentModulesPullquote' }
+                      | { __typename: 'ComponentModulesSideImageWithText' }
                       | { __typename: 'ComponentModulesSubtitle' }
                       | { __typename: 'ComponentModulesTextModule' }
                       | { __typename: 'ComponentModulesTitleModule' }
@@ -10246,6 +10524,38 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
               } | null
             }
           | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+          | {
+              __typename: 'ComponentModulesSideImageWithText'
+              id: string
+              sideText: string
+              image_alt_text: string
+              image: {
+                __typename?: 'UploadFileEntityResponse'
+                data?: {
+                  __typename?: 'UploadFileEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'UploadFile'
+                    hash: string
+                    mime: string
+                    name: string
+                    provider: string
+                    size: number
+                    url: string
+                    alternativeText?: string | null
+                    caption?: string | null
+                    createdAt?: any | null
+                    ext?: string | null
+                    formats?: any | null
+                    height?: number | null
+                    previewUrl?: string | null
+                    provider_metadata?: any | null
+                    updatedAt?: any | null
+                    width?: number | null
+                  } | null
+                } | null
+              }
+            }
           | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
           | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
           | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -10386,6 +10696,7 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
                   }
                 | { __typename: 'ComponentModulesImageCarousel' }
                 | { __typename: 'ComponentModulesPullquote' }
+                | { __typename: 'ComponentModulesSideImageWithText' }
                 | { __typename: 'ComponentModulesSubtitle' }
                 | { __typename: 'ComponentModulesTextModule' }
                 | { __typename: 'ComponentModulesTitleModule' }
@@ -10497,6 +10808,7 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
                   }
                 | { __typename: 'ComponentModulesImageCarousel' }
                 | { __typename: 'ComponentModulesPullquote' }
+                | { __typename: 'ComponentModulesSideImageWithText' }
                 | { __typename: 'ComponentModulesSubtitle' }
                 | { __typename: 'ComponentModulesTextModule' }
                 | { __typename: 'ComponentModulesTitleModule' }
@@ -10655,6 +10967,7 @@ export type StoriesByIdsQuery = {
             }
           | { __typename?: 'ComponentModulesImageCarousel' }
           | { __typename?: 'ComponentModulesPullquote' }
+          | { __typename?: 'ComponentModulesSideImageWithText' }
           | { __typename?: 'ComponentModulesSubtitle' }
           | { __typename?: 'ComponentModulesTextModule' }
           | { __typename?: 'ComponentModulesTitleModule' }
@@ -11012,6 +11325,38 @@ export type NestedStoryFragmentFragment = {
           } | null
         }
       | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+      | {
+          __typename: 'ComponentModulesSideImageWithText'
+          id: string
+          sideText: string
+          image_alt_text: string
+          image: {
+            __typename?: 'UploadFileEntityResponse'
+            data?: {
+              __typename?: 'UploadFileEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'UploadFile'
+                hash: string
+                mime: string
+                name: string
+                provider: string
+                size: number
+                url: string
+                alternativeText?: string | null
+                caption?: string | null
+                createdAt?: any | null
+                ext?: string | null
+                formats?: any | null
+                height?: number | null
+                previewUrl?: string | null
+                provider_metadata?: any | null
+                updatedAt?: any | null
+                width?: number | null
+              } | null
+            } | null
+          }
+        }
       | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
       | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
       | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -11261,6 +11606,38 @@ export type LocalizedStoryFragmentFragment = {
           } | null
         }
       | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+      | {
+          __typename: 'ComponentModulesSideImageWithText'
+          id: string
+          sideText: string
+          image_alt_text: string
+          image: {
+            __typename?: 'UploadFileEntityResponse'
+            data?: {
+              __typename?: 'UploadFileEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'UploadFile'
+                hash: string
+                mime: string
+                name: string
+                provider: string
+                size: number
+                url: string
+                alternativeText?: string | null
+                caption?: string | null
+                createdAt?: any | null
+                ext?: string | null
+                formats?: any | null
+                height?: number | null
+                previewUrl?: string | null
+                provider_metadata?: any | null
+                updatedAt?: any | null
+                width?: number | null
+              } | null
+            } | null
+          }
+        }
       | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
       | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
       | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -11509,6 +11886,38 @@ export type LocalizedStoryFragmentFragment = {
                 } | null
               }
             | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+            | {
+                __typename: 'ComponentModulesSideImageWithText'
+                id: string
+                sideText: string
+                image_alt_text: string
+                image: {
+                  __typename?: 'UploadFileEntityResponse'
+                  data?: {
+                    __typename?: 'UploadFileEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'UploadFile'
+                      hash: string
+                      mime: string
+                      name: string
+                      provider: string
+                      size: number
+                      url: string
+                      alternativeText?: string | null
+                      caption?: string | null
+                      createdAt?: any | null
+                      ext?: string | null
+                      formats?: any | null
+                      height?: number | null
+                      previewUrl?: string | null
+                      provider_metadata?: any | null
+                      updatedAt?: any | null
+                      width?: number | null
+                    } | null
+                  } | null
+                }
+              }
             | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
             | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
             | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -11726,6 +12135,38 @@ export type StoryFragmentFragment = {
           } | null
         }
       | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+      | {
+          __typename: 'ComponentModulesSideImageWithText'
+          id: string
+          sideText: string
+          image_alt_text: string
+          image: {
+            __typename?: 'UploadFileEntityResponse'
+            data?: {
+              __typename?: 'UploadFileEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'UploadFile'
+                hash: string
+                mime: string
+                name: string
+                provider: string
+                size: number
+                url: string
+                alternativeText?: string | null
+                caption?: string | null
+                createdAt?: any | null
+                ext?: string | null
+                formats?: any | null
+                height?: number | null
+                previewUrl?: string | null
+                provider_metadata?: any | null
+                updatedAt?: any | null
+                width?: number | null
+              } | null
+            } | null
+          }
+        }
       | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
       | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
       | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -11866,6 +12307,7 @@ export type StoryFragmentFragment = {
               }
             | { __typename: 'ComponentModulesImageCarousel' }
             | { __typename: 'ComponentModulesPullquote' }
+            | { __typename: 'ComponentModulesSideImageWithText' }
             | { __typename: 'ComponentModulesSubtitle' }
             | { __typename: 'ComponentModulesTextModule' }
             | { __typename: 'ComponentModulesTitleModule' }
@@ -11977,6 +12419,7 @@ export type StoryFragmentFragment = {
               }
             | { __typename: 'ComponentModulesImageCarousel' }
             | { __typename: 'ComponentModulesPullquote' }
+            | { __typename: 'ComponentModulesSideImageWithText' }
             | { __typename: 'ComponentModulesSubtitle' }
             | { __typename: 'ComponentModulesTextModule' }
             | { __typename: 'ComponentModulesTitleModule' }
@@ -12156,6 +12599,7 @@ export type StoryMetaFragmentFragment = {
               }
             | { __typename: 'ComponentModulesImageCarousel' }
             | { __typename: 'ComponentModulesPullquote' }
+            | { __typename: 'ComponentModulesSideImageWithText' }
             | { __typename: 'ComponentModulesSubtitle' }
             | { __typename: 'ComponentModulesTextModule' }
             | { __typename: 'ComponentModulesTitleModule' }
@@ -12267,6 +12711,7 @@ export type StoryMetaFragmentFragment = {
               }
             | { __typename: 'ComponentModulesImageCarousel' }
             | { __typename: 'ComponentModulesPullquote' }
+            | { __typename: 'ComponentModulesSideImageWithText' }
             | { __typename: 'ComponentModulesSubtitle' }
             | { __typename: 'ComponentModulesTextModule' }
             | { __typename: 'ComponentModulesTitleModule' }
@@ -12429,6 +12874,7 @@ export type LocalizedStoryMetaFragmentFragment = {
               }
             | { __typename: 'ComponentModulesImageCarousel' }
             | { __typename: 'ComponentModulesPullquote' }
+            | { __typename: 'ComponentModulesSideImageWithText' }
             | { __typename: 'ComponentModulesSubtitle' }
             | { __typename: 'ComponentModulesTextModule' }
             | { __typename: 'ComponentModulesTitleModule' }
@@ -12540,6 +12986,7 @@ export type LocalizedStoryMetaFragmentFragment = {
               }
             | { __typename: 'ComponentModulesImageCarousel' }
             | { __typename: 'ComponentModulesPullquote' }
+            | { __typename: 'ComponentModulesSideImageWithText' }
             | { __typename: 'ComponentModulesSubtitle' }
             | { __typename: 'ComponentModulesTextModule' }
             | { __typename: 'ComponentModulesTitleModule' }
@@ -12736,6 +13183,7 @@ export type LocalizedStoryMetaFragmentFragment = {
                     }
                   | { __typename: 'ComponentModulesImageCarousel' }
                   | { __typename: 'ComponentModulesPullquote' }
+                  | { __typename: 'ComponentModulesSideImageWithText' }
                   | { __typename: 'ComponentModulesSubtitle' }
                   | { __typename: 'ComponentModulesTextModule' }
                   | { __typename: 'ComponentModulesTitleModule' }
@@ -12847,6 +13295,7 @@ export type LocalizedStoryMetaFragmentFragment = {
                     }
                   | { __typename: 'ComponentModulesImageCarousel' }
                   | { __typename: 'ComponentModulesPullquote' }
+                  | { __typename: 'ComponentModulesSideImageWithText' }
                   | { __typename: 'ComponentModulesSubtitle' }
                   | { __typename: 'ComponentModulesTextModule' }
                   | { __typename: 'ComponentModulesTitleModule' }
@@ -12874,6 +13323,277 @@ export type LocalizedStoryMetaFragmentFragment = {
     } | null
   } | null
 }
+
+type StoryComponentsFragment_ComponentCoreMuxAudio_Fragment = {
+  __typename: 'ComponentCoreMuxAudio'
+  id: string
+  caption?: string | null
+  muxAudioRelation?: {
+    __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+    data?: {
+      __typename?: 'MuxVideoUploaderMuxAssetEntity'
+      id?: string | null
+      attributes?: {
+        __typename?: 'MuxVideoUploaderMuxAsset'
+        title: string
+        upload_id?: string | null
+        asset_id?: string | null
+        playback_id?: string | null
+        signed: boolean
+        error_message?: string | null
+        isReady?: boolean | null
+        duration?: number | null
+        aspect_ratio?: string | null
+        createdAt?: any | null
+        updatedAt?: any | null
+      } | null
+    } | null
+  } | null
+}
+
+type StoryComponentsFragment_ComponentCoreMuxVideo_Fragment = {
+  __typename: 'ComponentCoreMuxVideo'
+  id: string
+  caption?: string | null
+  muxVideoRelation?: {
+    __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+    data?: {
+      __typename?: 'MuxVideoUploaderMuxAssetEntity'
+      id?: string | null
+      attributes?: {
+        __typename?: 'MuxVideoUploaderMuxAsset'
+        title: string
+        upload_id?: string | null
+        asset_id?: string | null
+        playback_id?: string | null
+        signed: boolean
+        error_message?: string | null
+        isReady?: boolean | null
+        duration?: number | null
+        aspect_ratio?: string | null
+        createdAt?: any | null
+        updatedAt?: any | null
+      } | null
+    } | null
+  } | null
+}
+
+type StoryComponentsFragment_ComponentCoreStandAloneLink_Fragment = {
+  __typename: 'ComponentCoreStandAloneLink'
+  id: string
+  label: string
+  url?: string | null
+  attachment?: {
+    __typename?: 'UploadFileEntityResponse'
+    data?: {
+      __typename?: 'UploadFileEntity'
+      id?: string | null
+      attributes?: {
+        __typename?: 'UploadFile'
+        hash: string
+        mime: string
+        name: string
+        provider: string
+        size: number
+        url: string
+        alternativeText?: string | null
+        caption?: string | null
+        createdAt?: any | null
+        ext?: string | null
+        formats?: any | null
+        height?: number | null
+        previewUrl?: string | null
+        provider_metadata?: any | null
+        updatedAt?: any | null
+        width?: number | null
+      } | null
+    } | null
+  } | null
+}
+
+type StoryComponentsFragment_ComponentModulesImage_Fragment = {
+  __typename: 'ComponentModulesImage'
+  alt_text?: string | null
+  caption?: string | null
+  id: string
+  image: {
+    __typename?: 'UploadFileEntityResponse'
+    data?: {
+      __typename?: 'UploadFileEntity'
+      id?: string | null
+      attributes?: {
+        __typename?: 'UploadFile'
+        hash: string
+        mime: string
+        name: string
+        provider: string
+        size: number
+        url: string
+        alternativeText?: string | null
+        caption?: string | null
+        createdAt?: any | null
+        ext?: string | null
+        formats?: any | null
+        height?: number | null
+        previewUrl?: string | null
+        provider_metadata?: any | null
+        updatedAt?: any | null
+        width?: number | null
+      } | null
+    } | null
+  }
+  triplyRecord?: {
+    __typename?: 'TriplyRecordEntityResponse'
+    data?: {
+      __typename?: 'TriplyRecordEntity'
+      id?: string | null
+      attributes?: {
+        __typename?: 'TriplyRecord'
+        recordId: string
+        type: Enum_Triplyrecord_Type
+      } | null
+    } | null
+  } | null
+  story?: {
+    __typename?: 'StoryEntityResponse'
+    data?: {
+      __typename?: 'StoryEntity'
+      id?: string | null
+      attributes?: {
+        __typename?: 'Story'
+        title: string
+        slug: string
+        description?: string | null
+        shortDescription: string
+        createdAt?: any | null
+        updatedAt?: any | null
+        publishedAt?: any | null
+        locale?: string | null
+        author?: {
+          __typename?: 'AuthorEntityResponse'
+          data?: {
+            __typename?: 'AuthorEntity'
+            id?: string | null
+            attributes?: {
+              __typename?: 'Author'
+              firstName: string
+              lastName: string
+              insertion?: string | null
+            } | null
+          } | null
+        } | null
+      } | null
+    } | null
+  } | null
+}
+
+type StoryComponentsFragment_ComponentModulesImageCarousel_Fragment = {
+  __typename: 'ComponentModulesImageCarousel'
+  id: string
+  description?: string | null
+  images?: {
+    __typename?: 'UploadFileRelationResponseCollection'
+    data: Array<{
+      __typename?: 'UploadFileEntity'
+      id?: string | null
+      attributes?: {
+        __typename?: 'UploadFile'
+        hash: string
+        mime: string
+        name: string
+        provider: string
+        size: number
+        url: string
+        alternativeText?: string | null
+        caption?: string | null
+        createdAt?: any | null
+        ext?: string | null
+        formats?: any | null
+        height?: number | null
+        previewUrl?: string | null
+        provider_metadata?: any | null
+        updatedAt?: any | null
+        width?: number | null
+      } | null
+    }>
+  } | null
+}
+
+type StoryComponentsFragment_ComponentModulesPullquote_Fragment = {
+  __typename: 'ComponentModulesPullquote'
+  id: string
+  text?: string | null
+}
+
+type StoryComponentsFragment_ComponentModulesSideImageWithText_Fragment = {
+  __typename: 'ComponentModulesSideImageWithText'
+  id: string
+  sideText: string
+  image_alt_text: string
+  image: {
+    __typename?: 'UploadFileEntityResponse'
+    data?: {
+      __typename?: 'UploadFileEntity'
+      id?: string | null
+      attributes?: {
+        __typename?: 'UploadFile'
+        hash: string
+        mime: string
+        name: string
+        provider: string
+        size: number
+        url: string
+        alternativeText?: string | null
+        caption?: string | null
+        createdAt?: any | null
+        ext?: string | null
+        formats?: any | null
+        height?: number | null
+        previewUrl?: string | null
+        provider_metadata?: any | null
+        updatedAt?: any | null
+        width?: number | null
+      } | null
+    } | null
+  }
+}
+
+type StoryComponentsFragment_ComponentModulesSubtitle_Fragment = {
+  __typename: 'ComponentModulesSubtitle'
+  id: string
+  text?: string | null
+}
+
+type StoryComponentsFragment_ComponentModulesTextModule_Fragment = {
+  __typename: 'ComponentModulesTextModule'
+  Richtext?: string | null
+  id: string
+}
+
+type StoryComponentsFragment_ComponentModulesTitleModule_Fragment = {
+  __typename: 'ComponentModulesTitleModule'
+  Title?: string | null
+  id: string
+}
+
+type StoryComponentsFragment_Error_Fragment = {
+  __typename: 'Error'
+  code: string
+  message?: string | null
+}
+
+export type StoryComponentsFragmentFragment =
+  | StoryComponentsFragment_ComponentCoreMuxAudio_Fragment
+  | StoryComponentsFragment_ComponentCoreMuxVideo_Fragment
+  | StoryComponentsFragment_ComponentCoreStandAloneLink_Fragment
+  | StoryComponentsFragment_ComponentModulesImage_Fragment
+  | StoryComponentsFragment_ComponentModulesImageCarousel_Fragment
+  | StoryComponentsFragment_ComponentModulesPullquote_Fragment
+  | StoryComponentsFragment_ComponentModulesSideImageWithText_Fragment
+  | StoryComponentsFragment_ComponentModulesSubtitle_Fragment
+  | StoryComponentsFragment_ComponentModulesTextModule_Fragment
+  | StoryComponentsFragment_ComponentModulesTitleModule_Fragment
+  | StoryComponentsFragment_Error_Fragment
 
 export type ComponentCoreButtonFragmentFragment = {
   __typename?: 'ComponentCoreButton'
@@ -13380,6 +14100,39 @@ export type ComponentModulesGridModuleFragmentFragment = {
   } | null> | null
 }
 
+export type ComponentModulesSideImageWithTextFragmentFragment = {
+  __typename: 'ComponentModulesSideImageWithText'
+  id: string
+  sideText: string
+  image_alt_text: string
+  image: {
+    __typename?: 'UploadFileEntityResponse'
+    data?: {
+      __typename?: 'UploadFileEntity'
+      id?: string | null
+      attributes?: {
+        __typename?: 'UploadFile'
+        hash: string
+        mime: string
+        name: string
+        provider: string
+        size: number
+        url: string
+        alternativeText?: string | null
+        caption?: string | null
+        createdAt?: any | null
+        ext?: string | null
+        formats?: any | null
+        height?: number | null
+        previewUrl?: string | null
+        provider_metadata?: any | null
+        updatedAt?: any | null
+        width?: number | null
+      } | null
+    } | null
+  }
+}
+
 export type UploadFileFragmentFragment = {
   __typename?: 'UploadFile'
   hash: string
@@ -13701,6 +14454,38 @@ export type ThemeQuery = {
                     } | null
                   }
                 | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+                | {
+                    __typename: 'ComponentModulesSideImageWithText'
+                    id: string
+                    sideText: string
+                    image_alt_text: string
+                    image: {
+                      __typename?: 'UploadFileEntityResponse'
+                      data?: {
+                        __typename?: 'UploadFileEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'UploadFile'
+                          hash: string
+                          mime: string
+                          name: string
+                          provider: string
+                          size: number
+                          url: string
+                          alternativeText?: string | null
+                          caption?: string | null
+                          createdAt?: any | null
+                          ext?: string | null
+                          formats?: any | null
+                          height?: number | null
+                          previewUrl?: string | null
+                          provider_metadata?: any | null
+                          updatedAt?: any | null
+                          width?: number | null
+                        } | null
+                      } | null
+                    }
+                  }
                 | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
                 | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
                 | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -13841,6 +14626,7 @@ export type ThemeQuery = {
                         }
                       | { __typename: 'ComponentModulesImageCarousel' }
                       | { __typename: 'ComponentModulesPullquote' }
+                      | { __typename: 'ComponentModulesSideImageWithText' }
                       | { __typename: 'ComponentModulesSubtitle' }
                       | { __typename: 'ComponentModulesTextModule' }
                       | { __typename: 'ComponentModulesTitleModule' }
@@ -13952,6 +14738,7 @@ export type ThemeQuery = {
                         }
                       | { __typename: 'ComponentModulesImageCarousel' }
                       | { __typename: 'ComponentModulesPullquote' }
+                      | { __typename: 'ComponentModulesSideImageWithText' }
                       | { __typename: 'ComponentModulesSubtitle' }
                       | { __typename: 'ComponentModulesTextModule' }
                       | { __typename: 'ComponentModulesTitleModule' }
@@ -14215,6 +15002,38 @@ export type ThemesQuery = {
                     } | null
                   }
                 | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+                | {
+                    __typename: 'ComponentModulesSideImageWithText'
+                    id: string
+                    sideText: string
+                    image_alt_text: string
+                    image: {
+                      __typename?: 'UploadFileEntityResponse'
+                      data?: {
+                        __typename?: 'UploadFileEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'UploadFile'
+                          hash: string
+                          mime: string
+                          name: string
+                          provider: string
+                          size: number
+                          url: string
+                          alternativeText?: string | null
+                          caption?: string | null
+                          createdAt?: any | null
+                          ext?: string | null
+                          formats?: any | null
+                          height?: number | null
+                          previewUrl?: string | null
+                          provider_metadata?: any | null
+                          updatedAt?: any | null
+                          width?: number | null
+                        } | null
+                      } | null
+                    }
+                  }
                 | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
                 | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
                 | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -14355,6 +15174,7 @@ export type ThemesQuery = {
                         }
                       | { __typename: 'ComponentModulesImageCarousel' }
                       | { __typename: 'ComponentModulesPullquote' }
+                      | { __typename: 'ComponentModulesSideImageWithText' }
                       | { __typename: 'ComponentModulesSubtitle' }
                       | { __typename: 'ComponentModulesTextModule' }
                       | { __typename: 'ComponentModulesTitleModule' }
@@ -14466,6 +15286,7 @@ export type ThemesQuery = {
                         }
                       | { __typename: 'ComponentModulesImageCarousel' }
                       | { __typename: 'ComponentModulesPullquote' }
+                      | { __typename: 'ComponentModulesSideImageWithText' }
                       | { __typename: 'ComponentModulesSubtitle' }
                       | { __typename: 'ComponentModulesTextModule' }
                       | { __typename: 'ComponentModulesTitleModule' }
@@ -14737,6 +15558,38 @@ export type StoriesRelatedToThemeQuery = {
                     } | null
                   }
                 | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+                | {
+                    __typename: 'ComponentModulesSideImageWithText'
+                    id: string
+                    sideText: string
+                    image_alt_text: string
+                    image: {
+                      __typename?: 'UploadFileEntityResponse'
+                      data?: {
+                        __typename?: 'UploadFileEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'UploadFile'
+                          hash: string
+                          mime: string
+                          name: string
+                          provider: string
+                          size: number
+                          url: string
+                          alternativeText?: string | null
+                          caption?: string | null
+                          createdAt?: any | null
+                          ext?: string | null
+                          formats?: any | null
+                          height?: number | null
+                          previewUrl?: string | null
+                          provider_metadata?: any | null
+                          updatedAt?: any | null
+                          width?: number | null
+                        } | null
+                      } | null
+                    }
+                  }
                 | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
                 | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
                 | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -14877,6 +15730,7 @@ export type StoriesRelatedToThemeQuery = {
                         }
                       | { __typename: 'ComponentModulesImageCarousel' }
                       | { __typename: 'ComponentModulesPullquote' }
+                      | { __typename: 'ComponentModulesSideImageWithText' }
                       | { __typename: 'ComponentModulesSubtitle' }
                       | { __typename: 'ComponentModulesTextModule' }
                       | { __typename: 'ComponentModulesTitleModule' }
@@ -14988,6 +15842,7 @@ export type StoriesRelatedToThemeQuery = {
                         }
                       | { __typename: 'ComponentModulesImageCarousel' }
                       | { __typename: 'ComponentModulesPullquote' }
+                      | { __typename: 'ComponentModulesSideImageWithText' }
                       | { __typename: 'ComponentModulesSubtitle' }
                       | { __typename: 'ComponentModulesTextModule' }
                       | { __typename: 'ComponentModulesTitleModule' }
@@ -15239,6 +16094,38 @@ export type ThemeFragmentFragment = {
                 } | null
               }
             | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+            | {
+                __typename: 'ComponentModulesSideImageWithText'
+                id: string
+                sideText: string
+                image_alt_text: string
+                image: {
+                  __typename?: 'UploadFileEntityResponse'
+                  data?: {
+                    __typename?: 'UploadFileEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'UploadFile'
+                      hash: string
+                      mime: string
+                      name: string
+                      provider: string
+                      size: number
+                      url: string
+                      alternativeText?: string | null
+                      caption?: string | null
+                      createdAt?: any | null
+                      ext?: string | null
+                      formats?: any | null
+                      height?: number | null
+                      previewUrl?: string | null
+                      provider_metadata?: any | null
+                      updatedAt?: any | null
+                      width?: number | null
+                    } | null
+                  } | null
+                }
+              }
             | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
             | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
             | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -15379,6 +16266,7 @@ export type ThemeFragmentFragment = {
                     }
                   | { __typename: 'ComponentModulesImageCarousel' }
                   | { __typename: 'ComponentModulesPullquote' }
+                  | { __typename: 'ComponentModulesSideImageWithText' }
                   | { __typename: 'ComponentModulesSubtitle' }
                   | { __typename: 'ComponentModulesTextModule' }
                   | { __typename: 'ComponentModulesTitleModule' }
@@ -15490,6 +16378,7 @@ export type ThemeFragmentFragment = {
                     }
                   | { __typename: 'ComponentModulesImageCarousel' }
                   | { __typename: 'ComponentModulesPullquote' }
+                  | { __typename: 'ComponentModulesSideImageWithText' }
                   | { __typename: 'ComponentModulesSubtitle' }
                   | { __typename: 'ComponentModulesTextModule' }
                   | { __typename: 'ComponentModulesTitleModule' }
@@ -15739,6 +16628,38 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                 } | null
               }
             | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+            | {
+                __typename: 'ComponentModulesSideImageWithText'
+                id: string
+                sideText: string
+                image_alt_text: string
+                image: {
+                  __typename?: 'UploadFileEntityResponse'
+                  data?: {
+                    __typename?: 'UploadFileEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'UploadFile'
+                      hash: string
+                      mime: string
+                      name: string
+                      provider: string
+                      size: number
+                      url: string
+                      alternativeText?: string | null
+                      caption?: string | null
+                      createdAt?: any | null
+                      ext?: string | null
+                      formats?: any | null
+                      height?: number | null
+                      previewUrl?: string | null
+                      provider_metadata?: any | null
+                      updatedAt?: any | null
+                      width?: number | null
+                    } | null
+                  } | null
+                }
+              }
             | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
             | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
             | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -15879,6 +16800,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                     }
                   | { __typename: 'ComponentModulesImageCarousel' }
                   | { __typename: 'ComponentModulesPullquote' }
+                  | { __typename: 'ComponentModulesSideImageWithText' }
                   | { __typename: 'ComponentModulesSubtitle' }
                   | { __typename: 'ComponentModulesTextModule' }
                   | { __typename: 'ComponentModulesTitleModule' }
@@ -15990,6 +16912,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                     }
                   | { __typename: 'ComponentModulesImageCarousel' }
                   | { __typename: 'ComponentModulesPullquote' }
+                  | { __typename: 'ComponentModulesSideImageWithText' }
                   | { __typename: 'ComponentModulesSubtitle' }
                   | { __typename: 'ComponentModulesTextModule' }
                   | { __typename: 'ComponentModulesTitleModule' }
@@ -16222,6 +17145,38 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                 } | null
               }
             | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+            | {
+                __typename: 'ComponentModulesSideImageWithText'
+                id: string
+                sideText: string
+                image_alt_text: string
+                image: {
+                  __typename?: 'UploadFileEntityResponse'
+                  data?: {
+                    __typename?: 'UploadFileEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'UploadFile'
+                      hash: string
+                      mime: string
+                      name: string
+                      provider: string
+                      size: number
+                      url: string
+                      alternativeText?: string | null
+                      caption?: string | null
+                      createdAt?: any | null
+                      ext?: string | null
+                      formats?: any | null
+                      height?: number | null
+                      previewUrl?: string | null
+                      provider_metadata?: any | null
+                      updatedAt?: any | null
+                      width?: number | null
+                    } | null
+                  } | null
+                }
+              }
             | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
             | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
             | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -16362,6 +17317,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                     }
                   | { __typename: 'ComponentModulesImageCarousel' }
                   | { __typename: 'ComponentModulesPullquote' }
+                  | { __typename: 'ComponentModulesSideImageWithText' }
                   | { __typename: 'ComponentModulesSubtitle' }
                   | { __typename: 'ComponentModulesTextModule' }
                   | { __typename: 'ComponentModulesTitleModule' }
@@ -16473,6 +17429,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                     }
                   | { __typename: 'ComponentModulesImageCarousel' }
                   | { __typename: 'ComponentModulesPullquote' }
+                  | { __typename: 'ComponentModulesSideImageWithText' }
                   | { __typename: 'ComponentModulesSubtitle' }
                   | { __typename: 'ComponentModulesTextModule' }
                   | { __typename: 'ComponentModulesTitleModule' }
@@ -16742,6 +17699,38 @@ export type TriplyRecordQuery = {
                     } | null
                   }
                 | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+                | {
+                    __typename: 'ComponentModulesSideImageWithText'
+                    id: string
+                    sideText: string
+                    image_alt_text: string
+                    image: {
+                      __typename?: 'UploadFileEntityResponse'
+                      data?: {
+                        __typename?: 'UploadFileEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'UploadFile'
+                          hash: string
+                          mime: string
+                          name: string
+                          provider: string
+                          size: number
+                          url: string
+                          alternativeText?: string | null
+                          caption?: string | null
+                          createdAt?: any | null
+                          ext?: string | null
+                          formats?: any | null
+                          height?: number | null
+                          previewUrl?: string | null
+                          provider_metadata?: any | null
+                          updatedAt?: any | null
+                          width?: number | null
+                        } | null
+                      } | null
+                    }
+                  }
                 | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
                 | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
                 | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -16882,6 +17871,7 @@ export type TriplyRecordQuery = {
                         }
                       | { __typename: 'ComponentModulesImageCarousel' }
                       | { __typename: 'ComponentModulesPullquote' }
+                      | { __typename: 'ComponentModulesSideImageWithText' }
                       | { __typename: 'ComponentModulesSubtitle' }
                       | { __typename: 'ComponentModulesTextModule' }
                       | { __typename: 'ComponentModulesTitleModule' }
@@ -16993,6 +17983,7 @@ export type TriplyRecordQuery = {
                         }
                       | { __typename: 'ComponentModulesImageCarousel' }
                       | { __typename: 'ComponentModulesPullquote' }
+                      | { __typename: 'ComponentModulesSideImageWithText' }
                       | { __typename: 'ComponentModulesSubtitle' }
                       | { __typename: 'ComponentModulesTextModule' }
                       | { __typename: 'ComponentModulesTitleModule' }
@@ -17253,6 +18244,38 @@ export type TriplyRecordsQuery = {
                     } | null
                   }
                 | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+                | {
+                    __typename: 'ComponentModulesSideImageWithText'
+                    id: string
+                    sideText: string
+                    image_alt_text: string
+                    image: {
+                      __typename?: 'UploadFileEntityResponse'
+                      data?: {
+                        __typename?: 'UploadFileEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'UploadFile'
+                          hash: string
+                          mime: string
+                          name: string
+                          provider: string
+                          size: number
+                          url: string
+                          alternativeText?: string | null
+                          caption?: string | null
+                          createdAt?: any | null
+                          ext?: string | null
+                          formats?: any | null
+                          height?: number | null
+                          previewUrl?: string | null
+                          provider_metadata?: any | null
+                          updatedAt?: any | null
+                          width?: number | null
+                        } | null
+                      } | null
+                    }
+                  }
                 | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
                 | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
                 | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -17393,6 +18416,7 @@ export type TriplyRecordsQuery = {
                         }
                       | { __typename: 'ComponentModulesImageCarousel' }
                       | { __typename: 'ComponentModulesPullquote' }
+                      | { __typename: 'ComponentModulesSideImageWithText' }
                       | { __typename: 'ComponentModulesSubtitle' }
                       | { __typename: 'ComponentModulesTextModule' }
                       | { __typename: 'ComponentModulesTitleModule' }
@@ -17504,6 +18528,7 @@ export type TriplyRecordsQuery = {
                         }
                       | { __typename: 'ComponentModulesImageCarousel' }
                       | { __typename: 'ComponentModulesPullquote' }
+                      | { __typename: 'ComponentModulesSideImageWithText' }
                       | { __typename: 'ComponentModulesSubtitle' }
                       | { __typename: 'ComponentModulesTextModule' }
                       | { __typename: 'ComponentModulesTitleModule' }
@@ -17763,6 +18788,38 @@ export type TriplyRecordFragmentFragment = {
                 } | null
               }
             | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+            | {
+                __typename: 'ComponentModulesSideImageWithText'
+                id: string
+                sideText: string
+                image_alt_text: string
+                image: {
+                  __typename?: 'UploadFileEntityResponse'
+                  data?: {
+                    __typename?: 'UploadFileEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'UploadFile'
+                      hash: string
+                      mime: string
+                      name: string
+                      provider: string
+                      size: number
+                      url: string
+                      alternativeText?: string | null
+                      caption?: string | null
+                      createdAt?: any | null
+                      ext?: string | null
+                      formats?: any | null
+                      height?: number | null
+                      previewUrl?: string | null
+                      provider_metadata?: any | null
+                      updatedAt?: any | null
+                      width?: number | null
+                    } | null
+                  } | null
+                }
+              }
             | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
             | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
             | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -17903,6 +18960,7 @@ export type TriplyRecordFragmentFragment = {
                     }
                   | { __typename: 'ComponentModulesImageCarousel' }
                   | { __typename: 'ComponentModulesPullquote' }
+                  | { __typename: 'ComponentModulesSideImageWithText' }
                   | { __typename: 'ComponentModulesSubtitle' }
                   | { __typename: 'ComponentModulesTextModule' }
                   | { __typename: 'ComponentModulesTitleModule' }
@@ -18014,6 +19072,7 @@ export type TriplyRecordFragmentFragment = {
                     }
                   | { __typename: 'ComponentModulesImageCarousel' }
                   | { __typename: 'ComponentModulesPullquote' }
+                  | { __typename: 'ComponentModulesSideImageWithText' }
                   | { __typename: 'ComponentModulesSubtitle' }
                   | { __typename: 'ComponentModulesTextModule' }
                   | { __typename: 'ComponentModulesTitleModule' }
@@ -18731,6 +19790,67 @@ export const ComponentCoreMuxVideoFragmentFragmentDoc = gql`
     }
   }
 `
+export const ComponentModulesSideImageWithTextFragmentFragmentDoc = gql`
+  fragment ComponentModulesSideImageWithTextFragment on ComponentModulesSideImageWithText {
+    __typename
+    id
+    sideText
+    image_alt_text
+    image {
+      ...UploadFileEntityResponseFragment
+    }
+  }
+  ${UploadFileEntityResponseFragmentFragmentDoc}
+`
+export const StoryComponentsFragmentFragmentDoc = gql`
+  fragment StoryComponentsFragment on StoryComponentsDynamicZone {
+    __typename
+    ... on ComponentModulesPullquote {
+      ...ComponentModulesPullquoteFragment
+    }
+    ... on ComponentModulesTextModule {
+      ...ComponentModulesTextModuleFragment
+    }
+    ... on ComponentModulesSubtitle {
+      ...ComponentModulesSubtitleFragment
+    }
+    ... on ComponentModulesTitleModule {
+      ...ComponentModulesTitleModuleFragment
+    }
+    ... on ComponentModulesImageCarousel {
+      ...ComponentModulesImageCarouselFragment
+    }
+    ... on ComponentModulesImage {
+      ...ComponentModulesImageFragment
+    }
+    ... on ComponentCoreStandAloneLink {
+      ...ComponentCoreStandAloneLinkFragment
+    }
+    ... on ComponentCoreMuxAudio {
+      ...ComponentCoreMuxAudioFragment
+    }
+    ... on ComponentCoreMuxVideo {
+      ...ComponentCoreMuxVideoFragment
+    }
+    ... on ComponentModulesSideImageWithText {
+      ...ComponentModulesSideImageWithTextFragment
+    }
+    ... on Error {
+      ...ErrorFragment
+    }
+  }
+  ${ComponentModulesPullquoteFragmentFragmentDoc}
+  ${ComponentModulesTextModuleFragmentFragmentDoc}
+  ${ComponentModulesSubtitleFragmentFragmentDoc}
+  ${ComponentModulesTitleModuleFragmentFragmentDoc}
+  ${ComponentModulesImageCarouselFragmentFragmentDoc}
+  ${ComponentModulesImageFragmentFragmentDoc}
+  ${ComponentCoreStandAloneLinkFragmentFragmentDoc}
+  ${ComponentCoreMuxAudioFragmentFragmentDoc}
+  ${ComponentCoreMuxVideoFragmentFragmentDoc}
+  ${ComponentModulesSideImageWithTextFragmentFragmentDoc}
+  ${ErrorFragmentFragmentDoc}
+`
 export const NestedStoryFragmentFragmentDoc = gql`
   fragment NestedStoryFragment on StoryEntity {
     id
@@ -18770,50 +19890,11 @@ export const NestedStoryFragmentFragmentDoc = gql`
         }
       }
       components {
-        __typename
-        ... on ComponentModulesPullquote {
-          ...ComponentModulesPullquoteFragment
-        }
-        ... on ComponentModulesTextModule {
-          ...ComponentModulesTextModuleFragment
-        }
-        ... on ComponentModulesSubtitle {
-          ...ComponentModulesSubtitleFragment
-        }
-        ... on ComponentModulesTitleModule {
-          ...ComponentModulesTitleModuleFragment
-        }
-        ... on ComponentModulesImageCarousel {
-          ...ComponentModulesImageCarouselFragment
-        }
-        ... on ComponentModulesImage {
-          ...ComponentModulesImageFragment
-        }
-        ... on ComponentCoreStandAloneLink {
-          ...ComponentCoreStandAloneLinkFragment
-        }
-        ... on ComponentCoreMuxAudio {
-          ...ComponentCoreMuxAudioFragment
-        }
-        ... on ComponentCoreMuxVideo {
-          ...ComponentCoreMuxVideoFragment
-        }
-        ... on Error {
-          ...ErrorFragment
-        }
+        ...StoryComponentsFragment
       }
     }
   }
-  ${ComponentModulesPullquoteFragmentFragmentDoc}
-  ${ComponentModulesTextModuleFragmentFragmentDoc}
-  ${ComponentModulesSubtitleFragmentFragmentDoc}
-  ${ComponentModulesTitleModuleFragmentFragmentDoc}
-  ${ComponentModulesImageCarouselFragmentFragmentDoc}
-  ${ComponentModulesImageFragmentFragmentDoc}
-  ${ComponentCoreStandAloneLinkFragmentFragmentDoc}
-  ${ComponentCoreMuxAudioFragmentFragmentDoc}
-  ${ComponentCoreMuxVideoFragmentFragmentDoc}
-  ${ErrorFragmentFragmentDoc}
+  ${StoryComponentsFragmentFragmentDoc}
 `
 export const LocalizedStoryFragmentFragmentDoc = gql`
   fragment LocalizedStoryFragment on StoryEntity {
@@ -18854,37 +19935,7 @@ export const LocalizedStoryFragmentFragmentDoc = gql`
         }
       }
       components {
-        __typename
-        ... on ComponentModulesPullquote {
-          ...ComponentModulesPullquoteFragment
-        }
-        ... on ComponentModulesTextModule {
-          ...ComponentModulesTextModuleFragment
-        }
-        ... on ComponentModulesSubtitle {
-          ...ComponentModulesSubtitleFragment
-        }
-        ... on ComponentModulesTitleModule {
-          ...ComponentModulesTitleModuleFragment
-        }
-        ... on ComponentModulesImageCarousel {
-          ...ComponentModulesImageCarouselFragment
-        }
-        ... on ComponentModulesImage {
-          ...ComponentModulesImageFragment
-        }
-        ... on ComponentCoreStandAloneLink {
-          ...ComponentCoreStandAloneLinkFragment
-        }
-        ... on ComponentCoreMuxAudio {
-          ...ComponentCoreMuxAudioFragment
-        }
-        ... on ComponentCoreMuxVideo {
-          ...ComponentCoreMuxVideoFragment
-        }
-        ... on Error {
-          ...ErrorFragment
-        }
+        ...StoryComponentsFragment
       }
       localizations {
         data {
@@ -18893,16 +19944,7 @@ export const LocalizedStoryFragmentFragmentDoc = gql`
       }
     }
   }
-  ${ComponentModulesPullquoteFragmentFragmentDoc}
-  ${ComponentModulesTextModuleFragmentFragmentDoc}
-  ${ComponentModulesSubtitleFragmentFragmentDoc}
-  ${ComponentModulesTitleModuleFragmentFragmentDoc}
-  ${ComponentModulesImageCarouselFragmentFragmentDoc}
-  ${ComponentModulesImageFragmentFragmentDoc}
-  ${ComponentCoreStandAloneLinkFragmentFragmentDoc}
-  ${ComponentCoreMuxAudioFragmentFragmentDoc}
-  ${ComponentCoreMuxVideoFragmentFragmentDoc}
-  ${ErrorFragmentFragmentDoc}
+  ${StoryComponentsFragmentFragmentDoc}
   ${NestedStoryFragmentFragmentDoc}
 `
 export const StoryMetaFragmentFragmentDoc = gql`
@@ -19201,37 +20243,7 @@ export const StoryFragmentFragmentDoc = gql`
       title
       slug
       components {
-        __typename
-        ... on ComponentModulesPullquote {
-          ...ComponentModulesPullquoteFragment
-        }
-        ... on ComponentModulesTextModule {
-          ...ComponentModulesTextModuleFragment
-        }
-        ... on ComponentModulesSubtitle {
-          ...ComponentModulesSubtitleFragment
-        }
-        ... on ComponentModulesTitleModule {
-          ...ComponentModulesTitleModuleFragment
-        }
-        ... on ComponentModulesImageCarousel {
-          ...ComponentModulesImageCarouselFragment
-        }
-        ... on ComponentModulesImage {
-          ...ComponentModulesImageFragment
-        }
-        ... on ComponentCoreStandAloneLink {
-          ...ComponentCoreStandAloneLinkFragment
-        }
-        ... on ComponentCoreMuxAudio {
-          ...ComponentCoreMuxAudioFragment
-        }
-        ... on ComponentCoreMuxVideo {
-          ...ComponentCoreMuxVideoFragment
-        }
-        ... on Error {
-          ...ErrorFragment
-        }
+        ...StoryComponentsFragment
       }
       author {
         data {
@@ -19324,17 +20336,9 @@ export const StoryFragmentFragmentDoc = gql`
       }
     }
   }
-  ${ComponentModulesPullquoteFragmentFragmentDoc}
-  ${ComponentModulesTextModuleFragmentFragmentDoc}
-  ${ComponentModulesSubtitleFragmentFragmentDoc}
-  ${ComponentModulesTitleModuleFragmentFragmentDoc}
-  ${ComponentModulesImageCarouselFragmentFragmentDoc}
-  ${ComponentModulesImageFragmentFragmentDoc}
-  ${ComponentCoreStandAloneLinkFragmentFragmentDoc}
-  ${ComponentCoreMuxAudioFragmentFragmentDoc}
-  ${ComponentCoreMuxVideoFragmentFragmentDoc}
-  ${ErrorFragmentFragmentDoc}
+  ${StoryComponentsFragmentFragmentDoc}
   ${BaseTriplyRecordFragmentFragmentDoc}
+  ${ComponentModulesImageFragmentFragmentDoc}
 `
 export const ThemeFragmentFragmentDoc = gql`
   fragment ThemeFragment on ThemeEntity {
