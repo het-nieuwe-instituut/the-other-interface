@@ -1,5 +1,4 @@
 'use client'
-import { Text } from '../../configs/chakra'
 import { StaticHeader } from '../StaticHeader/StaticHeader'
 import { Fonts, useNavSettings } from './useNavSettings'
 import useTranslation from 'next-translate/useTranslation'
@@ -41,10 +40,14 @@ export const Navigation = () => {
         <StaticHeader />
         <div className="relative z-[MAX_Z_INDEX] mx-auto flex max-w-[90em] justify-between px-6 pt-24">
           <div className="flex min-w-[388px] max-w-[711px] flex-col pb-20 pr-[32px]">
-            <Text textStyle={'socialMedium.md'} color={'pinkAlpha.100'} mb={'5'}>
+            <p
+              className={TypographyVariants({
+                socialLarge: 'lg',
+                className: 'text-pink-100 mb-5',
+              })}
+            >
               {tNavigation('explore_collection')}
-            </Text>
-
+            </p>
             {categories.map(category => (
               // need this textStyle={navTextStyle} to change depend on where you are
               <Link
@@ -84,18 +87,36 @@ export const Navigation = () => {
               >
                 {tNavigation('aboutDescription')}
               </p>
-              <NavLinkButton href={'/'} variant={'menuPrimary'} className="text-pink-100">
+              <NavLinkButton
+                href={'/'}
+                variant={'menuPrimary'}
+                color={navTextStyle === Fonts.Times ? 'invertedPaleHover' : 'invertedPinkHover'}
+              >
                 {tNavigation('readMore')}
               </NavLinkButton>
             </div>
             <div className="flex flex-col">
-              <NavLinkButton href={'/'} variant={'menuSecondary'} className="mb-4 text-pink-100">
+              <NavLinkButton
+                href={'/'}
+                variant={'menuSecondary'}
+                color={navTextStyle === Fonts.Times ? 'invertedPaleHover' : 'invertedPinkHover'}
+                className="mb-4"
+              >
                 {tNavigation('readMore')}
               </NavLinkButton>
-              <NavLinkButton href={'/'} variant={'menuSecondary'} className="mb-4 text-pink-100">
+              <NavLinkButton
+                href={'/'}
+                variant={'menuSecondary'}
+                color={navTextStyle === Fonts.Times ? 'invertedPaleHover' : 'invertedPinkHover'}
+                className="mb-4"
+              >
                 {tNavigation('readMore')}
               </NavLinkButton>
-              <NavLinkButton href={'/'} variant={'menuSecondary'} className="text-pink-100">
+              <NavLinkButton
+                href={'/'}
+                variant={'menuSecondary'}
+                color={navTextStyle === Fonts.Times ? 'invertedPaleHover' : 'invertedPinkHover'}
+              >
                 {tNavigation('readMore')}
               </NavLinkButton>
             </div>
