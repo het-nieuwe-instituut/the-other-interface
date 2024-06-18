@@ -92,3 +92,14 @@ fragment ComponentModulesGridModuleFragment on ComponentModulesGridModule {
         ...ComponentCoreGridFeaturedFieldsFragment
     }
 }
+
+fragment ComponentModulesSideImageWithTextFragment on ComponentModulesSideImageWithText {
+    __typename
+    id
+    sideText
+    image_alt_text
+    image {
+        ...UploadFileEntityResponseFragment
+    }
+
+}
