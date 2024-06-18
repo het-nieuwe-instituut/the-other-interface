@@ -1,7 +1,7 @@
 'use client'
 import { Text } from '../../configs/chakra'
 import { StaticHeader } from '../StaticHeader/StaticHeader'
-import { usePresenter } from './usePresenter'
+import { Fonts, useNavSettings } from './useNavSettings'
 import useTranslation from 'next-translate/useTranslation'
 import { cn } from '@/features/ui/utils/cn'
 import { CSSProperties } from 'react'
@@ -17,7 +17,7 @@ const categories = [
 ]
 
 export const Navigation = () => {
-  const { isMenuOpen, ref, navTextStyle, overflowValue, lang } = usePresenter()
+  const { isMenuOpen, ref, navTextStyle, overflowValue, lang } = useNavSettings()
   const { t: tNavigation } = useTranslation('navigation')
 
   return (
@@ -48,7 +48,17 @@ export const Navigation = () => {
             {categories.map(category => (
               // need this textStyle={navTextStyle} to change depend on where you are
               <Link
-                className="mb-4 cursor-pointer text-8xl text-pink-100"
+                className={cn(
+                  navTextStyle === Fonts.Times
+                    ? TypographyVariants({
+                        times: '2xl',
+                        className: 'mb-4 cursor-pointer text-pink-100',
+                      })
+                    : TypographyVariants({
+                        impact: 'xl',
+                        className: 'mb-4 cursor-pointer text-pink-100',
+                      })
+                )}
                 key={category.name}
                 href={`/landingpage?category=${category.name}&lang=${lang}`}
               >
