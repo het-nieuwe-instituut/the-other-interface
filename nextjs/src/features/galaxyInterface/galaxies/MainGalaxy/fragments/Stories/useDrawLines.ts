@@ -40,7 +40,7 @@ export const useDrawLines = (selector: string, template: number, stories: Positi
           line.setAttribute('y1', startPoint.y.toString())
           line.setAttribute('x2', endPoint.x.toString())
           line.setAttribute('y2', endPoint.y.toString())
-          line.setAttribute('stroke', 'RGBA(0, 81, 255, .8)')
+          line.setAttribute('stroke', 'RGBA(0, 81, 255, 1)')
           fragment.appendChild(line)
         }
       }

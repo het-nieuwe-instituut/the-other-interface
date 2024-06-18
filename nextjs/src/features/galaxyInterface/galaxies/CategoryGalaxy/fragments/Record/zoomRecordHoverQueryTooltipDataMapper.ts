@@ -26,7 +26,7 @@ export const zoomRecordHoverQueryTooltipDataMapper = (initialData: TooltipData) 
     }
 
     return {
-      title: joinNullableStrings(', ', title, authors),
+      title: joinNullableStrings(' ', title, `(${authors})`),
       description,
     }
   }
@@ -38,7 +38,7 @@ export const zoomRecordHoverQueryTooltipDataMapper = (initialData: TooltipData) 
     }
 
     return {
-      title: joinNullableStrings(', ', title, creators),
+      title: joinNullableStrings(' ', title, `(${creators})`),
       description,
     }
   }
@@ -63,6 +63,9 @@ export const zoomRecordHoverQueryTooltipDataMapper = (initialData: TooltipData) 
       return null
     }
 
-    return { title: joinNullableStrings(', ', title, maker), description }
+    return {
+      title: joinNullableStrings(' ', title, `(${maker})`),
+      description,
+    }
   }
 }
