@@ -12,6 +12,8 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { modulesSpacingMapper } from '../../modulesSpacing'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
+import { cn } from '@/features/ui/utils/cn'
 
 interface Props {
   component?: TableModuleType
@@ -50,9 +52,9 @@ export const TableModule: React.FC<Props> = props => {
         pt={modulesSpacingMapper?.TableModule.spacingTop}
         pb={modulesSpacingMapper?.TableModule.spacingBottom}
       >
-        <Text textStyle={'h2'} as="h2" pb={'md'}>
+        <h2 className={cn(TypographyVariants({ responsive: 'title' }), 'mb-4')}>
           {component.name} {count ? `(${count})` : ''}
-        </Text>
+        </h2>
         {component.description && <Text pb={'md'}>{component.description}</Text>}
         <TableModuleMobile component={component} />
       </Box>
@@ -65,9 +67,9 @@ export const TableModule: React.FC<Props> = props => {
       pt={modulesSpacingMapper?.TableModule.spacingTop}
       pb={modulesSpacingMapper?.TableModule.spacingBottom}
     >
-      <Text as={'h2'} textStyle={'impactNew.xl'} pb={'sm'}>
+      <h2 className={cn(TypographyVariants({ responsive: 'title' }), 'mb-4')}>
         {component.name} {count ? `(${count})` : ''}
-      </Text>
+      </h2>
       {component.description && (
         <Text pb={'md'} textStyle={'socialLarge.lg'}>
           {component.description}

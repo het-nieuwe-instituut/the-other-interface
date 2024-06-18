@@ -1,3 +1,4 @@
+import { convertToCurlyQuotes } from '@/features/shared/utils/text'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { cn } from '@/features/ui/utils/cn'
 
@@ -7,10 +8,11 @@ interface Props {
 }
 
 export const Pullquote: React.FC<Props> = ({ children, className }) => {
+  let text = convertToCurlyQuotes(children)
   return (
     <aside className={cn('w-full bg-inherit', className)}>
       <blockquote>
-        <p className={TypographyVariants({ impact: 'md' })}>“{children}”</p>
+        <p className={TypographyVariants({ impact: 'md' })}>{text}</p>
       </blockquote>
     </aside>
   )
