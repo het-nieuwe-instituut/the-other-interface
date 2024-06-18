@@ -1,15 +1,16 @@
 {
   "published": "Published on {{date}}",
-  "by": "by {{author}}",
+  "by": "by",
+  "storyBy": "Story by",
   "mainStory": "Main story",
   "themes": "Themes",
-  "people": "Persons",
+  "people": "People",
   "locations": "Locations",
   "time": "Time period",
   "share": "Share",
   "moreOnTheme": "More on theme",
   "subStories": "Sub-stories",
   "siblingsStories": "Siblings-stories",
-  "parentStory": "Parent-story",
+  "parentStory": "Main story",
   "relatedStories": "Related stories"
 }

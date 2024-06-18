@@ -1,10 +1,11 @@
 'use client'
 import { Box, Text, Flex } from '@chakra-ui/react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { GalaxyZoom } from '../constants'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { usePresenter } from './usePresenter'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
+import { useLocale } from '@/features/shared/hooks/useLocale'
 
 type Props = {
   zoomData: GalaxyZoom
@@ -15,13 +16,9 @@ type Props = {
 export const NavigationLink: React.FC<Props> = ({ zoomData, currentZoomNumber, link }) => {
   const { zoom, title, alignItems } = zoomData
   const router = useRouter()
-  const searchParams = useSearchParams()
-  const lang = searchParams?.get('lang')
+  const lang = useLocale()
   const { t } = useTypeSafeTranslation('navigation')
-  const { isClickable, isCurrentZoom, lineStyle, isDisabled } = usePresenter(
-    zoom,
-    currentZoomNumber
-  )
+  const { isClickable, isCurrentZoom, lineStyle } = usePresenter(zoom, currentZoomNumber)
 
   const handleNavigation = () => {
     if (!link) return
@@ -35,13 +32,13 @@ export const NavigationLink: React.FC<Props> = ({ zoomData, currentZoomNumber, l
       key={title}
       flexDirection={'column'}
       alignItems={alignItems}
-      cursor={isClickable && !isDisabled ? 'pointer' : 'default'}
+      cursor={isClickable ? 'pointer' : 'default'}
       onClick={handleNavigation}
     >
       <Box
         position={'relative'}
         border={'1px solid'}
-        borderColor={isClickable && !isDisabled ? 'pinkAlpha.100' : 'pinkAlpha.40'}
+        borderColor={isClickable ? 'pinkAlpha.100' : 'pinkAlpha.40'}
         width="10px"
         height="10px"
         borderRadius="50%"
@@ -63,7 +60,7 @@ export const NavigationLink: React.FC<Props> = ({ zoomData, currentZoomNumber, l
       <Text
         textStyle="socialLarge.sm"
         mt={'4px'}
-        color={(isCurrentZoom || isClickable) && !isDisabled ? 'pinkAlpha.100' : 'pinkAlpha.40'}
+        color={isCurrentZoom || isClickable ? 'pinkAlpha.100' : 'pinkAlpha.40'}
       >
         {t(title)}
       </Text>

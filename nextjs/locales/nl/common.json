@@ -1,5 +1,6 @@
 {
   "somethingWentWrong": "Er ging iets fout",
+  "somethingWentWrongAndRetry": "Er ging iets fout, probeer het opnieuw",
   "commonTest": "Dit is een common translation test, we testen hier ook counters: {{count}}",
   "published": "Gepubliceerd op {{date}}",
   "archivesBy": "Archiefbestanddelen op",
@@ -17,5 +18,9 @@
   "readMore": "Lees verder",
   "switchToMockedServer": "Overschakelen naar mocked server",
   "switchToLiveServer": "Overschakelen naar live server",
-  "go": "Zoeken"
+  "go": "Zoek",
+  "noDataFound": "Geen data gevonden",
+  "audio": "De audio is nog niet klaar, probeer het later opnieuw.",
+  "video": "De video is nog niet klaar, probeer het later opnieuw.",
+  "seeFullImage": "Bekijk volledige afbeelding"
 }

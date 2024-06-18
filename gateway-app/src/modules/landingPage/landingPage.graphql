@@ -10,9 +10,6 @@ fragment LandingpageFragment on Landingpage {
         ... on ComponentModulesTextModule {
             ...ComponentModulesTextModuleFragment
         }
-        ... on ComponentModulesCarousel {
-            ...ComponentModulesCarouselFragment
-        }
         ... on ComponentModulesGridModule {
             ...ComponentModulesGridModuleFragment
         }
@@ -30,9 +27,6 @@ fragment LandingpageFragment on Landingpage {
         }
         ... on ComponentModulesPullquote {
             ...ComponentModulesPullquoteFragment
-        }
-        ... on ComponentModulesTableModule {
-            ...ComponentModulesTableModuleFragment
         }
         ... on ComponentModulesButtonsModule {
             ...ComponentModulesButtonsModuleFragment

@@ -1,4 +1,4 @@
-import { ArchiveRelationsType, ArchiveZoomLevel3DetailType, ArchivesFondsCreatorType, ArchivesFondsZoomLevel3DetailType, ArchivesOtherZoomLevel3DetailType, ArchivesRecordZoomLevel3Type, ArchivesRelationsCountType, Author, AuthorEntity, AuthorEntityResponse, AuthorEntityResponseCollection, AuthorFiltersInput, BooleanFilterInput, ComponentCoreButton, ComponentCoreButtonFiltersInput, ComponentCoreCarouselItem, ComponentCoreFeaturedFields, ComponentCoreGridFeaturedFields, ComponentCoreImageCarouselItem, ComponentCoreModuleLayoutsFiltersInput, ComponentCorePublicationDate, ComponentCorePublicationDateFiltersInput, ComponentCoreTableBody, ComponentCoreTableBodyFiltersInput, ComponentCoreTableBodyItem, ComponentCoreTableBodyItemFiltersInput, ComponentCoreTableHead, ComponentCoreTableHeadFiltersInput, ComponentCoreTableHeadItem, ComponentCoreTableHeadItemFiltersInput, ComponentCoreTimeframe, ComponentCoreTimeframeFiltersInput, ComponentModulesButtonsModule, ComponentModulesButtonsModuleFiltersInput, ComponentModulesCarousel, ComponentModulesGridModule, ComponentModulesImage, ComponentModulesImageCarousel, ComponentModulesPullquote, ComponentModulesSubtitle, ComponentModulesTableModule, ComponentModulesTextModule, ComponentModulesTitleModule, DateFilterInput, DateTimeFilterInput, Error, Homepage, HomepageEntity, HomepageEntityResponse, HomepageRelationResponseCollection, IdFilterInput, Landingpage, LandingpageEntity, LandingpageEntityResponse, LandingpageEntityResponseCollection, LandingpageFiltersInput, LandingpageRelationResponseCollection, Location, LocationEntity, LocationEntityResponse, LocationFiltersInput, LocationRelationResponseCollection, LongFilterInput, Menupage, MenupageEntity, MenupageEntityResponse, MenupageEntityResponseCollection, MenupageFiltersInput, MenupageRelationResponseCollection, ObjectMakerType, ObjectMaterialType, ObjectRecordZoomLevel3Type, ObjectRelationsCountType, ObjectRelationsType, ObjectTechniqueType, ObjectsZoomLevel3DetailType, Pagination, PaginationArg, PeopleAssociationType, PeopleRecordZoomLevel3Type, PeopleRelationsCountType, PeopleRelationsType, PeopleZoomLevel3DetailType, PublicationAuthorType, PublicationRecordZoomLevel3Type, PublicationRelationsType, PublicationZoomLevel3DetailType, PublicationsArticleZoomLevel3DetailType, PublicationsAudioVisualZoomLevel3DetailType, PublicationsBookZoomLevel3DetailType, PublicationsRelationsCountType, PublicationsSerialZoomLevel3DetailType, Query, ResponseCollectionMeta, StoriesRelatedToThemeResponse, Story, StoryEntity, StoryEntityResponse, StoryEntityResponseCollection, StoryFiltersInput, StoryMetaEntityResponseCollection, StoryRelationResponseCollection, StoryWithoutRelations, StoryWithoutRelationsEntity, StoryWithoutRelationsEntityResponse, StoryWithoutRelationsEntityResponseCollection, StringFilterInput, Table, TableEntity, TableEntityResponse, TableEntityResponseCollection, TableFiltersInput, Theme, ThemeEntity, ThemeEntityResponse, ThemeFiltersInput, ThemeRelationResponseCollection, TriplyRecord, TriplyRecordEntity, TriplyRecordEntityResponse, TriplyRecordFiltersInput, TriplyRecordRelationResponseCollection, UploadFile, UploadFileEntity, UploadFileEntityResponse, UploadFileRelationResponseCollection, UsersPermissionsPermission, UsersPermissionsPermissionEntity, UsersPermissionsPermissionFiltersInput, UsersPermissionsPermissionRelationResponseCollection, UsersPermissionsRole, UsersPermissionsRoleEntity, UsersPermissionsRoleEntityResponse, UsersPermissionsRoleFiltersInput, UsersPermissionsUser, UsersPermissionsUserEntity, UsersPermissionsUserEntityResponse, UsersPermissionsUserEntityResponseCollection, UsersPermissionsUserFiltersInput, UsersPermissionsUserRelationResponseCollection, ZoomLevel1Type, ZoomLevel2AmountParentType, ZoomLevel2ParentType, ZoomLevel2Type, ZoomLevel3RelationsType, ZoomLevel3StoriesRelatedToRecordType, ArchivesZoomLevel3Types, EntityNames, EnumComponentcorecarouselitemType, EnumComponentcorepublicationdateDisplaytype, EnumComponentmodulesbuttonsmoduleButtonstyle, EnumComponentmodulescarouselType, EnumComponentmodulesgridmoduleFieldtypes, EnumTriplyrecordType, PublicationsZoomLevel3Types } from '../generated/graphql';
+import { ArchiveRelationsType, ArchiveZoomLevel3DetailType, ArchivesFondsCreatorType, ArchivesFondsZoomLevel3DetailType, ArchivesRecordZoomLevel3Type, ArchivesRelationsCountType, ArchivesZoomLevelHoverType, Author, AuthorEntity, AuthorEntityResponse, AuthorEntityResponseCollection, AuthorFiltersInput, BooleanFilterInput, ComponentCoreButton, ComponentCoreButtonFiltersInput, ComponentCoreFeaturedFields, ComponentCoreGridFeaturedFields, ComponentCoreMuxAudio, ComponentCoreMuxVideo, ComponentCorePublicationDate, ComponentCorePublicationDateFiltersInput, ComponentCoreStandAloneLink, ComponentCoreTimeframe, ComponentCoreTimeframeFiltersInput, ComponentModulesButtonsModule, ComponentModulesButtonsModuleFiltersInput, ComponentModulesGridModule, ComponentModulesImage, ComponentModulesImageCarousel, ComponentModulesPullquote, ComponentModulesSubtitle, ComponentModulesTextModule, ComponentModulesTitleModule, DateFilterInput, DateTimeFilterInput, Error, HighlightedHomepageThemeEntity, HighlightedHomepageThemeEntityResponse, HighlightedHomepageThemes, Homepage, HomepageEntity, HomepageEntityResponse, HomepageRelationResponseCollection, IdFilterInput, Landingpage, LandingpageEntity, LandingpageEntityResponse, LandingpageEntityResponseCollection, LandingpageFiltersInput, LandingpageRelationResponseCollection, Location, LocationEntity, LocationEntityResponse, LocationFiltersInput, LocationRelationResponseCollection, LongFilterInput, Menupage, MenupageEntity, MenupageEntityResponse, MenupageEntityResponseCollection, MenupageFiltersInput, MenupageRelationResponseCollection, MuxAudio, MuxAudioEntity, MuxAudioResponse, MuxVideo, MuxVideoEntity, MuxVideoResponse, ObjectMakerType, ObjectMaterialType, ObjectRecordZoomLevel3Type, ObjectRelationsCountType, ObjectRelationsType, ObjectTechniqueType, ObjectsZoomLevel3DetailType, ObjectsZoomLevelHoverType, Pagination, PaginationArg, PeopleAssociationType, PeopleRecordZoomLevel3Type, PeopleRelationsCountType, PeopleRelationsType, PeopleZoomLevel3DetailType, PeopleZoomLevelHoverType, PublicationAuthorType, PublicationRecordZoomLevel3Type, PublicationRelationsType, PublicationZoomLevel3DetailType, PublicationsArticleZoomLevel3DetailType, PublicationsAudioVisualZoomLevel3DetailType, PublicationsBookZoomLevel3DetailType, PublicationsRelationsCountType, PublicationsSerialZoomLevel3DetailType, PublicationsZoomLevelHoverType, Query, ResponseCollectionMeta, SearchResultItemType, SearchResultType, StoriesRelatedToThemeResponse, Story, StoryCountType, StoryEntity, StoryEntityResponse, StoryEntityResponseCollection, StoryFiltersInput, StoryMetaEntityResponseCollection, StoryRelationResponseCollection, StoryWithoutRelations, StoryWithoutRelationsEntity, StoryWithoutRelationsEntityResponse, StoryWithoutRelationsEntityResponseCollection, StringFilterInput, Theme, ThemeEntity, ThemeEntityResponse, ThemeFiltersInput, ThemeRelationResponseCollection, TriplyRecord, TriplyRecordEntity, TriplyRecordEntityResponse, TriplyRecordFiltersInput, TriplyRecordRelationResponseCollection, UploadFile, UploadFileEntity, UploadFileEntityResponse, UploadFileRelationResponseCollection, UsersPermissionsPermission, UsersPermissionsPermissionEntity, UsersPermissionsPermissionFiltersInput, UsersPermissionsPermissionRelationResponseCollection, UsersPermissionsRole, UsersPermissionsRoleEntity, UsersPermissionsRoleEntityResponse, UsersPermissionsRoleFiltersInput, UsersPermissionsUser, UsersPermissionsUserEntity, UsersPermissionsUserEntityResponse, UsersPermissionsUserEntityResponseCollection, UsersPermissionsUserFiltersInput, UsersPermissionsUserRelationResponseCollection, ZoomLevel2AmountParentType, ZoomLevel2ParentType, ZoomLevel2Type, ZoomLevel3RelationsType, ZoomLevel3StoriesRelatedToRecordType, ZoomLevel3StoryRelationsCountType, ArchivesZoomLevel3Types, EntityNames, EnumComponentcorepublicationdateDisplaytype, EnumComponentmodulesgridmoduleFieldtypes, EnumTriplyrecordType, Locale, PublicationsZoomLevel3Types } from '../generated/graphql';
 
 export const anArchiveRelationsType = (overrides?: Partial<ArchiveRelationsType>, _relationshipsToOmit: Array<string> = []): ArchiveRelationsType => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ArchiveRelationsType']);
@@ -65,30 +65,6 @@ export const anArchivesFondsZoomLevel3DetailType = (overrides?: Partial<Archives
     };
 };
 
-export const anArchivesOtherZoomLevel3DetailType = (overrides?: Partial<ArchivesOtherZoomLevel3DetailType>, _relationshipsToOmit: Array<string> = []): ArchivesOtherZoomLevel3DetailType => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'ArchivesOtherZoomLevel3DetailType']);
-    return {
-        dateLabel: overrides && overrides.hasOwnProperty('dateLabel') ? overrides.dateLabel! : 'asperiores',
-        dimensionFree: overrides && overrides.hasOwnProperty('dimensionFree') ? overrides.dimensionFree! : 'laudantium',
-        endDate: overrides && overrides.hasOwnProperty('endDate') ? overrides.endDate! : 'perspiciatis',
-        existenceOfOriginals: overrides && overrides.hasOwnProperty('existenceOfOriginals') ? overrides.existenceOfOriginals! : 'suscipit',
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'ex',
-        mediaReference: overrides && overrides.hasOwnProperty('mediaReference') ? overrides.mediaReference! : 'facere',
-        mediaReferenceLabel: overrides && overrides.hasOwnProperty('mediaReferenceLabel') ? overrides.mediaReferenceLabel! : 'enim',
-        objectNumber: overrides && overrides.hasOwnProperty('objectNumber') ? overrides.objectNumber! : 'qui',
-        permanentLink: overrides && overrides.hasOwnProperty('permanentLink') ? overrides.permanentLink! : 'qui',
-        pidWorkURIs: overrides && overrides.hasOwnProperty('pidWorkURIs') ? overrides.pidWorkURIs! : ['totam'],
-        relatedMaterial: overrides && overrides.hasOwnProperty('relatedMaterial') ? overrides.relatedMaterial! : 'harum',
-        rights: overrides && overrides.hasOwnProperty('rights') ? overrides.rights! : 'dignissimos',
-        rightsLabel: overrides && overrides.hasOwnProperty('rightsLabel') ? overrides.rightsLabel! : 'voluptas',
-        scopeContent: overrides && overrides.hasOwnProperty('scopeContent') ? overrides.scopeContent! : 'omnis',
-        startDate: overrides && overrides.hasOwnProperty('startDate') ? overrides.startDate! : 'voluptatem',
-        thumbnail: overrides && overrides.hasOwnProperty('thumbnail') ? overrides.thumbnail! : 'repudiandae',
-        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'iste',
-        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : ArchivesZoomLevel3Types.Fonds,
-    };
-};
-
 export const anArchivesRecordZoomLevel3Type = (overrides?: Partial<ArchivesRecordZoomLevel3Type>, _relationshipsToOmit: Array<string> = []): ArchivesRecordZoomLevel3Type => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ArchivesRecordZoomLevel3Type']);
     return {
@@ -109,6 +85,15 @@ export const anArchivesRelationsCountType = (overrides?: Partial<ArchivesRelatio
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ArchivesRelationsCountType']);
     return {
         total: overrides && overrides.hasOwnProperty('total') ? overrides.total! : 'ipsa',
+    };
+};
+
+export const anArchivesZoomLevelHoverType = (overrides?: Partial<ArchivesZoomLevelHoverType>, _relationshipsToOmit: Array<string> = []): ArchivesZoomLevelHoverType => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'ArchivesZoomLevelHoverType']);
+    return {
+        creators: overrides && overrides.hasOwnProperty('creators') ? overrides.creators! : 'magni',
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'repellat',
+        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'ut',
     };
 };
 
@@ -193,8 +178,6 @@ export const aBooleanFilterInput = (overrides?: Partial<BooleanFilterInput>, _re
 export const aComponentCoreButton = (overrides?: Partial<ComponentCoreButton>, _relationshipsToOmit: Array<string> = []): ComponentCoreButton => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentCoreButton']);
     return {
-        attachment: overrides && overrides.hasOwnProperty('attachment') ? overrides.attachment! : relationshipsToOmit.includes('UploadFileEntityResponse') ? {} as UploadFileEntityResponse : anUploadFileEntityResponse({}, relationshipsToOmit),
-        hasAttachment: overrides && overrides.hasOwnProperty('hasAttachment') ? overrides.hasAttachment! : false,
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '5742f597-253d-4ebb-af50-de4e5ae6b06e',
         text: overrides && overrides.hasOwnProperty('text') ? overrides.text! : 'natus',
         url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'autem',
@@ -205,24 +188,10 @@ export const aComponentCoreButtonFiltersInput = (overrides?: Partial<ComponentCo
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentCoreButtonFiltersInput']);
     return {
         and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [relationshipsToOmit.includes('ComponentCoreButtonFiltersInput') ? {} as ComponentCoreButtonFiltersInput : aComponentCoreButtonFiltersInput({}, relationshipsToOmit)],
-        hasAttachment: overrides && overrides.hasOwnProperty('hasAttachment') ? overrides.hasAttachment! : relationshipsToOmit.includes('BooleanFilterInput') ? {} as BooleanFilterInput : aBooleanFilterInput({}, relationshipsToOmit),
         not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : relationshipsToOmit.includes('ComponentCoreButtonFiltersInput') ? {} as ComponentCoreButtonFiltersInput : aComponentCoreButtonFiltersInput({}, relationshipsToOmit),
         or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [relationshipsToOmit.includes('ComponentCoreButtonFiltersInput') ? {} as ComponentCoreButtonFiltersInput : aComponentCoreButtonFiltersInput({}, relationshipsToOmit)],
         text: overrides && overrides.hasOwnProperty('text') ? overrides.text! : relationshipsToOmit.includes('StringFilterInput') ? {} as StringFilterInput : aStringFilterInput({}, relationshipsToOmit),
         url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : relationshipsToOmit.includes('StringFilterInput') ? {} as StringFilterInput : aStringFilterInput({}, relationshipsToOmit),
-    };
-};
-
-export const aComponentCoreCarouselItem = (overrides?: Partial<ComponentCoreCarouselItem>, _relationshipsToOmit: Array<string> = []): ComponentCoreCarouselItem => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentCoreCarouselItem']);
-    return {
-        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'corporis',
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'e6259d63-611f-4e6c-84e7-28ad8094f5b8',
-        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'adipisci',
-        picture: overrides && overrides.hasOwnProperty('picture') ? overrides.picture! : relationshipsToOmit.includes('UploadFileEntityResponse') ? {} as UploadFileEntityResponse : anUploadFileEntityResponse({}, relationshipsToOmit),
-        story: overrides && overrides.hasOwnProperty('story') ? overrides.story! : relationshipsToOmit.includes('StoryEntityResponse') ? {} as StoryEntityResponse : aStoryEntityResponse({}, relationshipsToOmit),
-        triply_record: overrides && overrides.hasOwnProperty('triply_record') ? overrides.triply_record! : relationshipsToOmit.includes('TriplyRecordEntityResponse') ? {} as TriplyRecordEntityResponse : aTriplyRecordEntityResponse({}, relationshipsToOmit),
-        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : EnumComponentcorecarouselitemType.Highlight,
     };
 };
 
@@ -247,26 +216,21 @@ export const aComponentCoreGridFeaturedFields = (overrides?: Partial<ComponentCo
     };
 };
 
-export const aComponentCoreImageCarouselItem = (overrides?: Partial<ComponentCoreImageCarouselItem>, _relationshipsToOmit: Array<string> = []): ComponentCoreImageCarouselItem => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentCoreImageCarouselItem']);
+export const aComponentCoreMuxAudio = (overrides?: Partial<ComponentCoreMuxAudio>, _relationshipsToOmit: Array<string> = []): ComponentCoreMuxAudio => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentCoreMuxAudio']);
     return {
-        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'porro',
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '65fc4ecc-62f6-44e3-9dc7-aa60afc04e2a',
-        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'in',
-        picture: overrides && overrides.hasOwnProperty('picture') ? overrides.picture! : relationshipsToOmit.includes('UploadFileEntityResponse') ? {} as UploadFileEntityResponse : anUploadFileEntityResponse({}, relationshipsToOmit),
-        story: overrides && overrides.hasOwnProperty('story') ? overrides.story! : relationshipsToOmit.includes('StoryEntityResponse') ? {} as StoryEntityResponse : aStoryEntityResponse({}, relationshipsToOmit),
-        triplyRecord: overrides && overrides.hasOwnProperty('triplyRecord') ? overrides.triplyRecord! : relationshipsToOmit.includes('TriplyRecordEntityResponse') ? {} as TriplyRecordEntityResponse : aTriplyRecordEntityResponse({}, relationshipsToOmit),
+        caption: overrides && overrides.hasOwnProperty('caption') ? overrides.caption! : 'et',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '78d2b6c8-8606-4796-b9d6-0f9b3c49961a',
+        muxAudioRelation: overrides && overrides.hasOwnProperty('muxAudioRelation') ? overrides.muxAudioRelation! : relationshipsToOmit.includes('MuxAudioResponse') ? {} as MuxAudioResponse : aMuxAudioResponse({}, relationshipsToOmit),
     };
 };
 
-export const aComponentCoreModuleLayoutsFiltersInput = (overrides?: Partial<ComponentCoreModuleLayoutsFiltersInput>, _relationshipsToOmit: Array<string> = []): ComponentCoreModuleLayoutsFiltersInput => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentCoreModuleLayoutsFiltersInput']);
+export const aComponentCoreMuxVideo = (overrides?: Partial<ComponentCoreMuxVideo>, _relationshipsToOmit: Array<string> = []): ComponentCoreMuxVideo => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentCoreMuxVideo']);
     return {
-        and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [relationshipsToOmit.includes('ComponentCoreModuleLayoutsFiltersInput') ? {} as ComponentCoreModuleLayoutsFiltersInput : aComponentCoreModuleLayoutsFiltersInput({}, relationshipsToOmit)],
-        not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : relationshipsToOmit.includes('ComponentCoreModuleLayoutsFiltersInput') ? {} as ComponentCoreModuleLayoutsFiltersInput : aComponentCoreModuleLayoutsFiltersInput({}, relationshipsToOmit),
-        or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [relationshipsToOmit.includes('ComponentCoreModuleLayoutsFiltersInput') ? {} as ComponentCoreModuleLayoutsFiltersInput : aComponentCoreModuleLayoutsFiltersInput({}, relationshipsToOmit)],
-        spacingBottom: overrides && overrides.hasOwnProperty('spacingBottom') ? overrides.spacingBottom! : relationshipsToOmit.includes('StringFilterInput') ? {} as StringFilterInput : aStringFilterInput({}, relationshipsToOmit),
-        spacingTop: overrides && overrides.hasOwnProperty('spacingTop') ? overrides.spacingTop! : relationshipsToOmit.includes('StringFilterInput') ? {} as StringFilterInput : aStringFilterInput({}, relationshipsToOmit),
+        caption: overrides && overrides.hasOwnProperty('caption') ? overrides.caption! : 'earum',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'd4285d71-7217-4d1e-b40e-2c76591387bb',
+        muxVideoRelation: overrides && overrides.hasOwnProperty('muxVideoRelation') ? overrides.muxVideoRelation! : relationshipsToOmit.includes('MuxVideoResponse') ? {} as MuxVideoResponse : aMuxVideoResponse({}, relationshipsToOmit),
     };
 };
 
@@ -290,75 +254,13 @@ export const aComponentCorePublicationDateFiltersInput = (overrides?: Partial<Co
     };
 };
 
-export const aComponentCoreTableBody = (overrides?: Partial<ComponentCoreTableBody>, _relationshipsToOmit: Array<string> = []): ComponentCoreTableBody => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentCoreTableBody']);
+export const aComponentCoreStandAloneLink = (overrides?: Partial<ComponentCoreStandAloneLink>, _relationshipsToOmit: Array<string> = []): ComponentCoreStandAloneLink => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentCoreStandAloneLink']);
     return {
-        TableBodyItem: overrides && overrides.hasOwnProperty('TableBodyItem') ? overrides.TableBodyItem! : [relationshipsToOmit.includes('ComponentCoreTableBodyItem') ? {} as ComponentCoreTableBodyItem : aComponentCoreTableBodyItem({}, relationshipsToOmit)],
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'bc6a110f-792c-4f21-bfd3-4f753f778921',
-    };
-};
-
-export const aComponentCoreTableBodyFiltersInput = (overrides?: Partial<ComponentCoreTableBodyFiltersInput>, _relationshipsToOmit: Array<string> = []): ComponentCoreTableBodyFiltersInput => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentCoreTableBodyFiltersInput']);
-    return {
-        TableBodyItem: overrides && overrides.hasOwnProperty('TableBodyItem') ? overrides.TableBodyItem! : relationshipsToOmit.includes('ComponentCoreTableBodyItemFiltersInput') ? {} as ComponentCoreTableBodyItemFiltersInput : aComponentCoreTableBodyItemFiltersInput({}, relationshipsToOmit),
-        and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [relationshipsToOmit.includes('ComponentCoreTableBodyFiltersInput') ? {} as ComponentCoreTableBodyFiltersInput : aComponentCoreTableBodyFiltersInput({}, relationshipsToOmit)],
-        not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : relationshipsToOmit.includes('ComponentCoreTableBodyFiltersInput') ? {} as ComponentCoreTableBodyFiltersInput : aComponentCoreTableBodyFiltersInput({}, relationshipsToOmit),
-        or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [relationshipsToOmit.includes('ComponentCoreTableBodyFiltersInput') ? {} as ComponentCoreTableBodyFiltersInput : aComponentCoreTableBodyFiltersInput({}, relationshipsToOmit)],
-    };
-};
-
-export const aComponentCoreTableBodyItem = (overrides?: Partial<ComponentCoreTableBodyItem>, _relationshipsToOmit: Array<string> = []): ComponentCoreTableBodyItem => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentCoreTableBodyItem']);
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '32dfba1a-9144-4d51-82b0-dfe908d3b05d',
-        value: overrides && overrides.hasOwnProperty('value') ? overrides.value! : 'cum',
-    };
-};
-
-export const aComponentCoreTableBodyItemFiltersInput = (overrides?: Partial<ComponentCoreTableBodyItemFiltersInput>, _relationshipsToOmit: Array<string> = []): ComponentCoreTableBodyItemFiltersInput => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentCoreTableBodyItemFiltersInput']);
-    return {
-        and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [relationshipsToOmit.includes('ComponentCoreTableBodyItemFiltersInput') ? {} as ComponentCoreTableBodyItemFiltersInput : aComponentCoreTableBodyItemFiltersInput({}, relationshipsToOmit)],
-        not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : relationshipsToOmit.includes('ComponentCoreTableBodyItemFiltersInput') ? {} as ComponentCoreTableBodyItemFiltersInput : aComponentCoreTableBodyItemFiltersInput({}, relationshipsToOmit),
-        or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [relationshipsToOmit.includes('ComponentCoreTableBodyItemFiltersInput') ? {} as ComponentCoreTableBodyItemFiltersInput : aComponentCoreTableBodyItemFiltersInput({}, relationshipsToOmit)],
-        value: overrides && overrides.hasOwnProperty('value') ? overrides.value! : relationshipsToOmit.includes('StringFilterInput') ? {} as StringFilterInput : aStringFilterInput({}, relationshipsToOmit),
-    };
-};
-
-export const aComponentCoreTableHead = (overrides?: Partial<ComponentCoreTableHead>, _relationshipsToOmit: Array<string> = []): ComponentCoreTableHead => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentCoreTableHead']);
-    return {
-        TableHeadItem: overrides && overrides.hasOwnProperty('TableHeadItem') ? overrides.TableHeadItem! : [relationshipsToOmit.includes('ComponentCoreTableHeadItem') ? {} as ComponentCoreTableHeadItem : aComponentCoreTableHeadItem({}, relationshipsToOmit)],
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'be6b9d26-845a-4fb0-97b6-136da16cdb9e',
-    };
-};
-
-export const aComponentCoreTableHeadFiltersInput = (overrides?: Partial<ComponentCoreTableHeadFiltersInput>, _relationshipsToOmit: Array<string> = []): ComponentCoreTableHeadFiltersInput => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentCoreTableHeadFiltersInput']);
-    return {
-        TableHeadItem: overrides && overrides.hasOwnProperty('TableHeadItem') ? overrides.TableHeadItem! : relationshipsToOmit.includes('ComponentCoreTableHeadItemFiltersInput') ? {} as ComponentCoreTableHeadItemFiltersInput : aComponentCoreTableHeadItemFiltersInput({}, relationshipsToOmit),
-        and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [relationshipsToOmit.includes('ComponentCoreTableHeadFiltersInput') ? {} as ComponentCoreTableHeadFiltersInput : aComponentCoreTableHeadFiltersInput({}, relationshipsToOmit)],
-        not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : relationshipsToOmit.includes('ComponentCoreTableHeadFiltersInput') ? {} as ComponentCoreTableHeadFiltersInput : aComponentCoreTableHeadFiltersInput({}, relationshipsToOmit),
-        or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [relationshipsToOmit.includes('ComponentCoreTableHeadFiltersInput') ? {} as ComponentCoreTableHeadFiltersInput : aComponentCoreTableHeadFiltersInput({}, relationshipsToOmit)],
-    };
-};
-
-export const aComponentCoreTableHeadItem = (overrides?: Partial<ComponentCoreTableHeadItem>, _relationshipsToOmit: Array<string> = []): ComponentCoreTableHeadItem => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentCoreTableHeadItem']);
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'd30d0267-fc95-405c-9478-85f94f089b2d',
-        label: overrides && overrides.hasOwnProperty('label') ? overrides.label! : 'voluptatem',
-    };
-};
-
-export const aComponentCoreTableHeadItemFiltersInput = (overrides?: Partial<ComponentCoreTableHeadItemFiltersInput>, _relationshipsToOmit: Array<string> = []): ComponentCoreTableHeadItemFiltersInput => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentCoreTableHeadItemFiltersInput']);
-    return {
-        and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [relationshipsToOmit.includes('ComponentCoreTableHeadItemFiltersInput') ? {} as ComponentCoreTableHeadItemFiltersInput : aComponentCoreTableHeadItemFiltersInput({}, relationshipsToOmit)],
-        label: overrides && overrides.hasOwnProperty('label') ? overrides.label! : relationshipsToOmit.includes('StringFilterInput') ? {} as StringFilterInput : aStringFilterInput({}, relationshipsToOmit),
-        not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : relationshipsToOmit.includes('ComponentCoreTableHeadItemFiltersInput') ? {} as ComponentCoreTableHeadItemFiltersInput : aComponentCoreTableHeadItemFiltersInput({}, relationshipsToOmit),
-        or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [relationshipsToOmit.includes('ComponentCoreTableHeadItemFiltersInput') ? {} as ComponentCoreTableHeadItemFiltersInput : aComponentCoreTableHeadItemFiltersInput({}, relationshipsToOmit)],
+        attachment: overrides && overrides.hasOwnProperty('attachment') ? overrides.attachment! : relationshipsToOmit.includes('UploadFileEntityResponse') ? {} as UploadFileEntityResponse : anUploadFileEntityResponse({}, relationshipsToOmit),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '2587a0ab-9bf3-4971-9e26-da1f74a09ebb',
+        label: overrides && overrides.hasOwnProperty('label') ? overrides.label! : 'cum',
+        url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'voluptatem',
     };
 };
 
@@ -385,7 +287,6 @@ export const aComponentCoreTimeframeFiltersInput = (overrides?: Partial<Componen
 export const aComponentModulesButtonsModule = (overrides?: Partial<ComponentModulesButtonsModule>, _relationshipsToOmit: Array<string> = []): ComponentModulesButtonsModule => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentModulesButtonsModule']);
     return {
-        buttonStyle: overrides && overrides.hasOwnProperty('buttonStyle') ? overrides.buttonStyle! : EnumComponentmodulesbuttonsmoduleButtonstyle.Default,
         buttons: overrides && overrides.hasOwnProperty('buttons') ? overrides.buttons! : [relationshipsToOmit.includes('ComponentCoreButton') ? {} as ComponentCoreButton : aComponentCoreButton({}, relationshipsToOmit)],
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '668ba96a-681d-472e-a861-bb5a737fd889',
     };
@@ -395,24 +296,9 @@ export const aComponentModulesButtonsModuleFiltersInput = (overrides?: Partial<C
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentModulesButtonsModuleFiltersInput']);
     return {
         and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [relationshipsToOmit.includes('ComponentModulesButtonsModuleFiltersInput') ? {} as ComponentModulesButtonsModuleFiltersInput : aComponentModulesButtonsModuleFiltersInput({}, relationshipsToOmit)],
-        buttonStyle: overrides && overrides.hasOwnProperty('buttonStyle') ? overrides.buttonStyle! : relationshipsToOmit.includes('StringFilterInput') ? {} as StringFilterInput : aStringFilterInput({}, relationshipsToOmit),
         buttons: overrides && overrides.hasOwnProperty('buttons') ? overrides.buttons! : relationshipsToOmit.includes('ComponentCoreButtonFiltersInput') ? {} as ComponentCoreButtonFiltersInput : aComponentCoreButtonFiltersInput({}, relationshipsToOmit),
-        buttonsModuleLayout: overrides && overrides.hasOwnProperty('buttonsModuleLayout') ? overrides.buttonsModuleLayout! : relationshipsToOmit.includes('ComponentCoreModuleLayoutsFiltersInput') ? {} as ComponentCoreModuleLayoutsFiltersInput : aComponentCoreModuleLayoutsFiltersInput({}, relationshipsToOmit),
         not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : relationshipsToOmit.includes('ComponentModulesButtonsModuleFiltersInput') ? {} as ComponentModulesButtonsModuleFiltersInput : aComponentModulesButtonsModuleFiltersInput({}, relationshipsToOmit),
         or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [relationshipsToOmit.includes('ComponentModulesButtonsModuleFiltersInput') ? {} as ComponentModulesButtonsModuleFiltersInput : aComponentModulesButtonsModuleFiltersInput({}, relationshipsToOmit)],
-    };
-};
-
-export const aComponentModulesCarousel = (overrides?: Partial<ComponentModulesCarousel>, _relationshipsToOmit: Array<string> = []): ComponentModulesCarousel => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentModulesCarousel']);
-    return {
-        buttonText: overrides && overrides.hasOwnProperty('buttonText') ? overrides.buttonText! : 'fugiat',
-        buttonUrl: overrides && overrides.hasOwnProperty('buttonUrl') ? overrides.buttonUrl! : 'amet',
-        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'animi',
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '02a9c5e5-9a6b-482e-9ea3-e1114441bf57',
-        items: overrides && overrides.hasOwnProperty('items') ? overrides.items! : [relationshipsToOmit.includes('ComponentCoreCarouselItem') ? {} as ComponentCoreCarouselItem : aComponentCoreCarouselItem({}, relationshipsToOmit)],
-        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'beatae',
-        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : EnumComponentmodulescarouselType.Combined,
     };
 };
 
@@ -450,7 +336,6 @@ export const aComponentModulesImageCarousel = (overrides?: Partial<ComponentModu
         description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'nostrum',
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'caa291cc-f344-4c8e-b7ad-3f6d9c22152d',
         images: overrides && overrides.hasOwnProperty('images') ? overrides.images! : relationshipsToOmit.includes('UploadFileRelationResponseCollection') ? {} as UploadFileRelationResponseCollection : anUploadFileRelationResponseCollection({}, relationshipsToOmit),
-        items: overrides && overrides.hasOwnProperty('items') ? overrides.items! : [relationshipsToOmit.includes('ComponentCoreImageCarouselItem') ? {} as ComponentCoreImageCarouselItem : aComponentCoreImageCarouselItem({}, relationshipsToOmit)],
     };
 };
 
@@ -467,14 +352,6 @@ export const aComponentModulesSubtitle = (overrides?: Partial<ComponentModulesSu
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '549df5f1-4269-41cf-a4c5-ce2a8917985b',
         text: overrides && overrides.hasOwnProperty('text') ? overrides.text! : 'voluptatem',
-    };
-};
-
-export const aComponentModulesTableModule = (overrides?: Partial<ComponentModulesTableModule>, _relationshipsToOmit: Array<string> = []): ComponentModulesTableModule => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentModulesTableModule']);
-    return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'c786a0d0-1be7-4ff6-9cd7-235d871cc40b',
-        table: overrides && overrides.hasOwnProperty('table') ? overrides.table! : relationshipsToOmit.includes('TableEntityResponse') ? {} as TableEntityResponse : aTableEntityResponse({}, relationshipsToOmit),
     };
 };
 
@@ -553,6 +430,29 @@ export const anError = (overrides?: Partial<Error>, _relationshipsToOmit: Array<
     return {
         code: overrides && overrides.hasOwnProperty('code') ? overrides.code! : 'voluptas',
         message: overrides && overrides.hasOwnProperty('message') ? overrides.message! : 'et',
+    };
+};
+
+export const aHighlightedHomepageThemeEntity = (overrides?: Partial<HighlightedHomepageThemeEntity>, _relationshipsToOmit: Array<string> = []): HighlightedHomepageThemeEntity => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'HighlightedHomepageThemeEntity']);
+    return {
+        attributes: overrides && overrides.hasOwnProperty('attributes') ? overrides.attributes! : relationshipsToOmit.includes('HighlightedHomepageThemes') ? {} as HighlightedHomepageThemes : aHighlightedHomepageThemes({}, relationshipsToOmit),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '03701b54-111f-45b7-a430-9c493807e9a5',
+    };
+};
+
+export const aHighlightedHomepageThemeEntityResponse = (overrides?: Partial<HighlightedHomepageThemeEntityResponse>, _relationshipsToOmit: Array<string> = []): HighlightedHomepageThemeEntityResponse => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'HighlightedHomepageThemeEntityResponse']);
+    return {
+        data: overrides && overrides.hasOwnProperty('data') ? overrides.data! : relationshipsToOmit.includes('HighlightedHomepageThemeEntity') ? {} as HighlightedHomepageThemeEntity : aHighlightedHomepageThemeEntity({}, relationshipsToOmit),
+        meta: overrides && overrides.hasOwnProperty('meta') ? overrides.meta! : relationshipsToOmit.includes('ResponseCollectionMeta') ? {} as ResponseCollectionMeta : aResponseCollectionMeta({}, relationshipsToOmit),
+    };
+};
+
+export const aHighlightedHomepageThemes = (overrides?: Partial<HighlightedHomepageThemes>, _relationshipsToOmit: Array<string> = []): HighlightedHomepageThemes => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'HighlightedHomepageThemes']);
+    return {
+        highlightedThemes: overrides && overrides.hasOwnProperty('highlightedThemes') ? overrides.highlightedThemes! : relationshipsToOmit.includes('ThemeRelationResponseCollection') ? {} as ThemeRelationResponseCollection : aThemeRelationResponseCollection({}, relationshipsToOmit),
     };
 };
 
@@ -822,6 +722,70 @@ export const aMenupageRelationResponseCollection = (overrides?: Partial<Menupage
     };
 };
 
+export const aMuxAudio = (overrides?: Partial<MuxAudio>, _relationshipsToOmit: Array<string> = []): MuxAudio => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'MuxAudio']);
+    return {
+        aspect_ratio: overrides && overrides.hasOwnProperty('aspect_ratio') ? overrides.aspect_ratio! : 'ea',
+        asset_id: overrides && overrides.hasOwnProperty('asset_id') ? overrides.asset_id! : 'optio',
+        createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : '1970-01-09T20:55:29.497Z',
+        duration: overrides && overrides.hasOwnProperty('duration') ? overrides.duration! : 0.73,
+        error_message: overrides && overrides.hasOwnProperty('error_message') ? overrides.error_message! : 'quaerat',
+        isReady: overrides && overrides.hasOwnProperty('isReady') ? overrides.isReady! : false,
+        playback_id: overrides && overrides.hasOwnProperty('playback_id') ? overrides.playback_id! : 'velit',
+        signed: overrides && overrides.hasOwnProperty('signed') ? overrides.signed! : false,
+        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'iste',
+        updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : '1970-01-14T09:05:39.851Z',
+        upload_id: overrides && overrides.hasOwnProperty('upload_id') ? overrides.upload_id! : 'doloremque',
+    };
+};
+
+export const aMuxAudioEntity = (overrides?: Partial<MuxAudioEntity>, _relationshipsToOmit: Array<string> = []): MuxAudioEntity => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'MuxAudioEntity']);
+    return {
+        attributes: overrides && overrides.hasOwnProperty('attributes') ? overrides.attributes! : relationshipsToOmit.includes('MuxAudio') ? {} as MuxAudio : aMuxAudio({}, relationshipsToOmit),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'odit',
+    };
+};
+
+export const aMuxAudioResponse = (overrides?: Partial<MuxAudioResponse>, _relationshipsToOmit: Array<string> = []): MuxAudioResponse => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'MuxAudioResponse']);
+    return {
+        data: overrides && overrides.hasOwnProperty('data') ? overrides.data! : relationshipsToOmit.includes('MuxAudioEntity') ? {} as MuxAudioEntity : aMuxAudioEntity({}, relationshipsToOmit),
+    };
+};
+
+export const aMuxVideo = (overrides?: Partial<MuxVideo>, _relationshipsToOmit: Array<string> = []): MuxVideo => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'MuxVideo']);
+    return {
+        aspect_ratio: overrides && overrides.hasOwnProperty('aspect_ratio') ? overrides.aspect_ratio! : 'ipsam',
+        asset_id: overrides && overrides.hasOwnProperty('asset_id') ? overrides.asset_id! : 'ratione',
+        createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : '1970-01-10T05:53:25.753Z',
+        duration: overrides && overrides.hasOwnProperty('duration') ? overrides.duration! : 1.46,
+        error_message: overrides && overrides.hasOwnProperty('error_message') ? overrides.error_message! : 'illum',
+        isReady: overrides && overrides.hasOwnProperty('isReady') ? overrides.isReady! : false,
+        playback_id: overrides && overrides.hasOwnProperty('playback_id') ? overrides.playback_id! : 'distinctio',
+        signed: overrides && overrides.hasOwnProperty('signed') ? overrides.signed! : false,
+        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'voluptates',
+        updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : '1970-01-10T23:46:23.083Z',
+        upload_id: overrides && overrides.hasOwnProperty('upload_id') ? overrides.upload_id! : 'ut',
+    };
+};
+
+export const aMuxVideoEntity = (overrides?: Partial<MuxVideoEntity>, _relationshipsToOmit: Array<string> = []): MuxVideoEntity => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'MuxVideoEntity']);
+    return {
+        attributes: overrides && overrides.hasOwnProperty('attributes') ? overrides.attributes! : relationshipsToOmit.includes('MuxVideo') ? {} as MuxVideo : aMuxVideo({}, relationshipsToOmit),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'sed',
+    };
+};
+
+export const aMuxVideoResponse = (overrides?: Partial<MuxVideoResponse>, _relationshipsToOmit: Array<string> = []): MuxVideoResponse => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'MuxVideoResponse']);
+    return {
+        data: overrides && overrides.hasOwnProperty('data') ? overrides.data! : relationshipsToOmit.includes('MuxVideoEntity') ? {} as MuxVideoEntity : aMuxVideoEntity({}, relationshipsToOmit),
+    };
+};
+
 export const anObjectMakerType = (overrides?: Partial<ObjectMakerType>, _relationshipsToOmit: Array<string> = []): ObjectMakerType => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ObjectMakerType']);
     return {
@@ -929,6 +893,15 @@ export const anObjectsZoomLevel3DetailType = (overrides?: Partial<ObjectsZoomLev
     };
 };
 
+export const anObjectsZoomLevelHoverType = (overrides?: Partial<ObjectsZoomLevelHoverType>, _relationshipsToOmit: Array<string> = []): ObjectsZoomLevelHoverType => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'ObjectsZoomLevelHoverType']);
+    return {
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'et',
+        maker: overrides && overrides.hasOwnProperty('maker') ? overrides.maker! : 'eos',
+        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'architecto',
+    };
+};
+
 export const aPagination = (overrides?: Partial<Pagination>, _relationshipsToOmit: Array<string> = []): Pagination => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'Pagination']);
     return {
@@ -942,10 +915,10 @@ export const aPagination = (overrides?: Partial<Pagination>, _relationshipsToOmi
 export const aPaginationArg = (overrides?: Partial<PaginationArg>, _relationshipsToOmit: Array<string> = []): PaginationArg => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'PaginationArg']);
     return {
-        limit: overrides && overrides.hasOwnProperty('limit') ? overrides.limit! : 1.66,
-        page: overrides && overrides.hasOwnProperty('page') ? overrides.page! : 2.63,
-        pageSize: overrides && overrides.hasOwnProperty('pageSize') ? overrides.pageSize! : 1.62,
-        start: overrides && overrides.hasOwnProperty('start') ? overrides.start! : 1.03,
+        limit: overrides && overrides.hasOwnProperty('limit') ? overrides.limit! : 1659,
+        page: overrides && overrides.hasOwnProperty('page') ? overrides.page! : 2627,
+        pageSize: overrides && overrides.hasOwnProperty('pageSize') ? overrides.pageSize! : 1621,
+        start: overrides && overrides.hasOwnProperty('start') ? overrides.start! : 1033,
     };
 };
 
@@ -1027,6 +1000,15 @@ export const aPeopleZoomLevel3DetailType = (overrides?: Partial<PeopleZoomLevel3
         thumbnail: overrides && overrides.hasOwnProperty('thumbnail') ? overrides.thumbnail! : ['soluta'],
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'illum',
         type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : EntityNames.Archives,
+    };
+};
+
+export const aPeopleZoomLevelHoverType = (overrides?: Partial<PeopleZoomLevelHoverType>, _relationshipsToOmit: Array<string> = []): PeopleZoomLevelHoverType => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'PeopleZoomLevelHoverType']);
+    return {
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'qui',
+        profession: overrides && overrides.hasOwnProperty('profession') ? overrides.profession! : 'quia',
+        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'nisi',
     };
 };
 
@@ -1241,16 +1223,26 @@ export const aPublicationsSerialZoomLevel3DetailType = (overrides?: Partial<Publ
     };
 };
 
+export const aPublicationsZoomLevelHoverType = (overrides?: Partial<PublicationsZoomLevelHoverType>, _relationshipsToOmit: Array<string> = []): PublicationsZoomLevelHoverType => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'PublicationsZoomLevelHoverType']);
+    return {
+        authors: overrides && overrides.hasOwnProperty('authors') ? overrides.authors! : 'omnis',
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'maiores',
+        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'perferendis',
+    };
+};
+
 export const aQuery = (overrides?: Partial<Query>, _relationshipsToOmit: Array<string> = []): Query => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'Query']);
     return {
         archiveOther: overrides && overrides.hasOwnProperty('archiveOther') ? overrides.archiveOther! : relationshipsToOmit.includes('ArchivesFondsZoomLevel3DetailType') ? {} as ArchivesFondsZoomLevel3DetailType : anArchivesFondsZoomLevel3DetailType({}, relationshipsToOmit),
-        archivesDetailZoomLevel3: overrides && overrides.hasOwnProperty('archivesDetailZoomLevel3') ? overrides.archivesDetailZoomLevel3! : relationshipsToOmit.includes('ArchiveZoomLevel3DetailType') ? {} as ArchiveZoomLevel3DetailType : anArchiveZoomLevel3DetailType({}, relationshipsToOmit),
         archivesRecordRelations: overrides && overrides.hasOwnProperty('archivesRecordRelations') ? overrides.archivesRecordRelations! : [relationshipsToOmit.includes('ArchiveRelationsType') ? {} as ArchiveRelationsType : anArchiveRelationsType({}, relationshipsToOmit)],
         archivesRecordRelationsCount: overrides && overrides.hasOwnProperty('archivesRecordRelationsCount') ? overrides.archivesRecordRelationsCount! : [relationshipsToOmit.includes('ArchivesRelationsCountType') ? {} as ArchivesRelationsCountType : anArchivesRelationsCountType({}, relationshipsToOmit)],
         archivesRecordZoomLevel3: overrides && overrides.hasOwnProperty('archivesRecordZoomLevel3') ? overrides.archivesRecordZoomLevel3! : [relationshipsToOmit.includes('ArchivesRecordZoomLevel3Type') ? {} as ArchivesRecordZoomLevel3Type : anArchivesRecordZoomLevel3Type({}, relationshipsToOmit)],
+        archivesZoomRecordHover: overrides && overrides.hasOwnProperty('archivesZoomRecordHover') ? overrides.archivesZoomRecordHover! : relationshipsToOmit.includes('ArchivesZoomLevelHoverType') ? {} as ArchivesZoomLevelHoverType : anArchivesZoomLevelHoverType({}, relationshipsToOmit),
         author: overrides && overrides.hasOwnProperty('author') ? overrides.author! : relationshipsToOmit.includes('AuthorEntityResponse') ? {} as AuthorEntityResponse : anAuthorEntityResponse({}, relationshipsToOmit),
         authors: overrides && overrides.hasOwnProperty('authors') ? overrides.authors! : relationshipsToOmit.includes('AuthorEntityResponseCollection') ? {} as AuthorEntityResponseCollection : anAuthorEntityResponseCollection({}, relationshipsToOmit),
+        highlightedHomepageThemes: overrides && overrides.hasOwnProperty('highlightedHomepageThemes') ? overrides.highlightedHomepageThemes! : relationshipsToOmit.includes('HighlightedHomepageThemeEntityResponse') ? {} as HighlightedHomepageThemeEntityResponse : aHighlightedHomepageThemeEntityResponse({}, relationshipsToOmit),
         homepage: overrides && overrides.hasOwnProperty('homepage') ? overrides.homepage! : relationshipsToOmit.includes('HomepageEntityResponse') ? {} as HomepageEntityResponse : aHomepageEntityResponse({}, relationshipsToOmit),
         landingpage: overrides && overrides.hasOwnProperty('landingpage') ? overrides.landingpage! : relationshipsToOmit.includes('LandingpageEntityResponse') ? {} as LandingpageEntityResponse : aLandingpageEntityResponse({}, relationshipsToOmit),
         landingpages: overrides && overrides.hasOwnProperty('landingpages') ? overrides.landingpages! : relationshipsToOmit.includes('LandingpageEntityResponseCollection') ? {} as LandingpageEntityResponseCollection : aLandingpageEntityResponseCollection({}, relationshipsToOmit),
@@ -1258,38 +1250,38 @@ export const aQuery = (overrides?: Partial<Query>, _relationshipsToOmit: Array<s
         locations: overrides && overrides.hasOwnProperty('locations') ? overrides.locations! : relationshipsToOmit.includes('LocationRelationResponseCollection') ? {} as LocationRelationResponseCollection : aLocationRelationResponseCollection({}, relationshipsToOmit),
         menupage: overrides && overrides.hasOwnProperty('menupage') ? overrides.menupage! : relationshipsToOmit.includes('MenupageEntityResponse') ? {} as MenupageEntityResponse : aMenupageEntityResponse({}, relationshipsToOmit),
         menupages: overrides && overrides.hasOwnProperty('menupages') ? overrides.menupages! : relationshipsToOmit.includes('MenupageEntityResponseCollection') ? {} as MenupageEntityResponseCollection : aMenupageEntityResponseCollection({}, relationshipsToOmit),
-        objectDetailZoomLevel3: overrides && overrides.hasOwnProperty('objectDetailZoomLevel3') ? overrides.objectDetailZoomLevel3! : relationshipsToOmit.includes('ObjectsZoomLevel3DetailType') ? {} as ObjectsZoomLevel3DetailType : anObjectsZoomLevel3DetailType({}, relationshipsToOmit),
         objectRecordRelations: overrides && overrides.hasOwnProperty('objectRecordRelations') ? overrides.objectRecordRelations! : [relationshipsToOmit.includes('ObjectRelationsType') ? {} as ObjectRelationsType : anObjectRelationsType({}, relationshipsToOmit)],
         objectRecordRelationsCount: overrides && overrides.hasOwnProperty('objectRecordRelationsCount') ? overrides.objectRecordRelationsCount! : [relationshipsToOmit.includes('ObjectRelationsCountType') ? {} as ObjectRelationsCountType : anObjectRelationsCountType({}, relationshipsToOmit)],
         objectsRecordZoomLevel3: overrides && overrides.hasOwnProperty('objectsRecordZoomLevel3') ? overrides.objectsRecordZoomLevel3! : [relationshipsToOmit.includes('ObjectRecordZoomLevel3Type') ? {} as ObjectRecordZoomLevel3Type : anObjectRecordZoomLevel3Type({}, relationshipsToOmit)],
+        objectsZoomRecordHover: overrides && overrides.hasOwnProperty('objectsZoomRecordHover') ? overrides.objectsZoomRecordHover! : relationshipsToOmit.includes('ObjectsZoomLevelHoverType') ? {} as ObjectsZoomLevelHoverType : anObjectsZoomLevelHoverType({}, relationshipsToOmit),
         peopleRecordRelations: overrides && overrides.hasOwnProperty('peopleRecordRelations') ? overrides.peopleRecordRelations! : [relationshipsToOmit.includes('PeopleRelationsType') ? {} as PeopleRelationsType : aPeopleRelationsType({}, relationshipsToOmit)],
         peopleRecordRelationsCount: overrides && overrides.hasOwnProperty('peopleRecordRelationsCount') ? overrides.peopleRecordRelationsCount! : [relationshipsToOmit.includes('PeopleRelationsCountType') ? {} as PeopleRelationsCountType : aPeopleRelationsCountType({}, relationshipsToOmit)],
         peopleRecordZoomLevel3: overrides && overrides.hasOwnProperty('peopleRecordZoomLevel3') ? overrides.peopleRecordZoomLevel3! : [relationshipsToOmit.includes('PeopleRecordZoomLevel3Type') ? {} as PeopleRecordZoomLevel3Type : aPeopleRecordZoomLevel3Type({}, relationshipsToOmit)],
+        peopleZoomLevelHover: overrides && overrides.hasOwnProperty('peopleZoomLevelHover') ? overrides.peopleZoomLevelHover! : relationshipsToOmit.includes('PeopleZoomLevelHoverType') ? {} as PeopleZoomLevelHoverType : aPeopleZoomLevelHoverType({}, relationshipsToOmit),
         publicationArticle: overrides && overrides.hasOwnProperty('publicationArticle') ? overrides.publicationArticle! : relationshipsToOmit.includes('PublicationsArticleZoomLevel3DetailType') ? {} as PublicationsArticleZoomLevel3DetailType : aPublicationsArticleZoomLevel3DetailType({}, relationshipsToOmit),
         publicationAudioVisual: overrides && overrides.hasOwnProperty('publicationAudioVisual') ? overrides.publicationAudioVisual! : relationshipsToOmit.includes('PublicationsAudioVisualZoomLevel3DetailType') ? {} as PublicationsAudioVisualZoomLevel3DetailType : aPublicationsAudioVisualZoomLevel3DetailType({}, relationshipsToOmit),
         publicationBook: overrides && overrides.hasOwnProperty('publicationBook') ? overrides.publicationBook! : relationshipsToOmit.includes('PublicationsBookZoomLevel3DetailType') ? {} as PublicationsBookZoomLevel3DetailType : aPublicationsBookZoomLevel3DetailType({}, relationshipsToOmit),
-        publicationDetailZoomLevel3: overrides && overrides.hasOwnProperty('publicationDetailZoomLevel3') ? overrides.publicationDetailZoomLevel3! : relationshipsToOmit.includes('PublicationZoomLevel3DetailType') ? {} as PublicationZoomLevel3DetailType : aPublicationZoomLevel3DetailType({}, relationshipsToOmit),
         publicationRecordRelations: overrides && overrides.hasOwnProperty('publicationRecordRelations') ? overrides.publicationRecordRelations! : [relationshipsToOmit.includes('PublicationRelationsType') ? {} as PublicationRelationsType : aPublicationRelationsType({}, relationshipsToOmit)],
         publicationSerial: overrides && overrides.hasOwnProperty('publicationSerial') ? overrides.publicationSerial! : relationshipsToOmit.includes('PublicationsSerialZoomLevel3DetailType') ? {} as PublicationsSerialZoomLevel3DetailType : aPublicationsSerialZoomLevel3DetailType({}, relationshipsToOmit),
         publicationsRecordRelationsCount: overrides && overrides.hasOwnProperty('publicationsRecordRelationsCount') ? overrides.publicationsRecordRelationsCount! : [relationshipsToOmit.includes('PublicationsRelationsCountType') ? {} as PublicationsRelationsCountType : aPublicationsRelationsCountType({}, relationshipsToOmit)],
         publicationsRecordZoomLevel3: overrides && overrides.hasOwnProperty('publicationsRecordZoomLevel3') ? overrides.publicationsRecordZoomLevel3! : [relationshipsToOmit.includes('PublicationRecordZoomLevel3Type') ? {} as PublicationRecordZoomLevel3Type : aPublicationRecordZoomLevel3Type({}, relationshipsToOmit)],
+        publicationsZoomRecordHover: overrides && overrides.hasOwnProperty('publicationsZoomRecordHover') ? overrides.publicationsZoomRecordHover! : relationshipsToOmit.includes('PublicationsZoomLevelHoverType') ? {} as PublicationsZoomLevelHoverType : aPublicationsZoomLevelHoverType({}, relationshipsToOmit),
         relations: overrides && overrides.hasOwnProperty('relations') ? overrides.relations! : [relationshipsToOmit.includes('ZoomLevel3RelationsType') ? {} as ZoomLevel3RelationsType : aZoomLevel3RelationsType({}, relationshipsToOmit)],
+        searchTriply: overrides && overrides.hasOwnProperty('searchTriply') ? overrides.searchTriply! : relationshipsToOmit.includes('SearchResultType') ? {} as SearchResultType : aSearchResultType({}, relationshipsToOmit),
         stories: overrides && overrides.hasOwnProperty('stories') ? overrides.stories! : relationshipsToOmit.includes('StoryEntityResponseCollection') ? {} as StoryEntityResponseCollection : aStoryEntityResponseCollection({}, relationshipsToOmit),
         storiesRealtedWithinTheme: overrides && overrides.hasOwnProperty('storiesRealtedWithinTheme') ? overrides.storiesRealtedWithinTheme! : relationshipsToOmit.includes('StoriesRelatedToThemeResponse') ? {} as StoriesRelatedToThemeResponse : aStoriesRelatedToThemeResponse({}, relationshipsToOmit),
         storiesWithoutRelations: overrides && overrides.hasOwnProperty('storiesWithoutRelations') ? overrides.storiesWithoutRelations! : relationshipsToOmit.includes('StoryWithoutRelationsEntityResponseCollection') ? {} as StoryWithoutRelationsEntityResponseCollection : aStoryWithoutRelationsEntityResponseCollection({}, relationshipsToOmit),
         story: overrides && overrides.hasOwnProperty('story') ? overrides.story! : relationshipsToOmit.includes('StoryEntityResponse') ? {} as StoryEntityResponse : aStoryEntityResponse({}, relationshipsToOmit),
-        storyByLocale: overrides && overrides.hasOwnProperty('storyByLocale') ? overrides.storyByLocale! : relationshipsToOmit.includes('StoryEntityResponseCollection') ? {} as StoryEntityResponseCollection : aStoryEntityResponseCollection({}, relationshipsToOmit),
+        storyByLocale: overrides && overrides.hasOwnProperty('storyByLocale') ? overrides.storyByLocale! : relationshipsToOmit.includes('StoryEntityResponse') ? {} as StoryEntityResponse : aStoryEntityResponse({}, relationshipsToOmit),
         storyMetaByLocale: overrides && overrides.hasOwnProperty('storyMetaByLocale') ? overrides.storyMetaByLocale! : relationshipsToOmit.includes('StoryMetaEntityResponseCollection') ? {} as StoryMetaEntityResponseCollection : aStoryMetaEntityResponseCollection({}, relationshipsToOmit),
+        storyRelationsCount: overrides && overrides.hasOwnProperty('storyRelationsCount') ? overrides.storyRelationsCount! : relationshipsToOmit.includes('ZoomLevel3StoryRelationsCountType') ? {} as ZoomLevel3StoryRelationsCountType : aZoomLevel3StoryRelationsCountType({}, relationshipsToOmit),
         storyWithoutRelations: overrides && overrides.hasOwnProperty('storyWithoutRelations') ? overrides.storyWithoutRelations! : relationshipsToOmit.includes('StoryWithoutRelationsEntityResponse') ? {} as StoryWithoutRelationsEntityResponse : aStoryWithoutRelationsEntityResponse({}, relationshipsToOmit),
-        table: overrides && overrides.hasOwnProperty('table') ? overrides.table! : relationshipsToOmit.includes('TableEntityResponse') ? {} as TableEntityResponse : aTableEntityResponse({}, relationshipsToOmit),
-        tables: overrides && overrides.hasOwnProperty('tables') ? overrides.tables! : relationshipsToOmit.includes('TableEntityResponseCollection') ? {} as TableEntityResponseCollection : aTableEntityResponseCollection({}, relationshipsToOmit),
         theme: overrides && overrides.hasOwnProperty('theme') ? overrides.theme! : relationshipsToOmit.includes('ThemeEntityResponse') ? {} as ThemeEntityResponse : aThemeEntityResponse({}, relationshipsToOmit),
         themes: overrides && overrides.hasOwnProperty('themes') ? overrides.themes! : relationshipsToOmit.includes('ThemeRelationResponseCollection') ? {} as ThemeRelationResponseCollection : aThemeRelationResponseCollection({}, relationshipsToOmit),
         triplyRecord: overrides && overrides.hasOwnProperty('triplyRecord') ? overrides.triplyRecord! : relationshipsToOmit.includes('TriplyRecordEntityResponse') ? {} as TriplyRecordEntityResponse : aTriplyRecordEntityResponse({}, relationshipsToOmit),
         triplyRecords: overrides && overrides.hasOwnProperty('triplyRecords') ? overrides.triplyRecords! : relationshipsToOmit.includes('TriplyRecordRelationResponseCollection') ? {} as TriplyRecordRelationResponseCollection : aTriplyRecordRelationResponseCollection({}, relationshipsToOmit),
         usersPermissionsUser: overrides && overrides.hasOwnProperty('usersPermissionsUser') ? overrides.usersPermissionsUser! : relationshipsToOmit.includes('UsersPermissionsUserEntityResponse') ? {} as UsersPermissionsUserEntityResponse : aUsersPermissionsUserEntityResponse({}, relationshipsToOmit),
         usersPermissionsUsers: overrides && overrides.hasOwnProperty('usersPermissionsUsers') ? overrides.usersPermissionsUsers! : relationshipsToOmit.includes('UsersPermissionsUserEntityResponseCollection') ? {} as UsersPermissionsUserEntityResponseCollection : aUsersPermissionsUserEntityResponseCollection({}, relationshipsToOmit),
-        zoomLevel1: overrides && overrides.hasOwnProperty('zoomLevel1') ? overrides.zoomLevel1! : [relationshipsToOmit.includes('ZoomLevel1Type') ? {} as ZoomLevel1Type : aZoomLevel1Type({}, relationshipsToOmit)],
         zoomLevel2: overrides && overrides.hasOwnProperty('zoomLevel2') ? overrides.zoomLevel2! : relationshipsToOmit.includes('ZoomLevel2ParentType') ? {} as ZoomLevel2ParentType : aZoomLevel2ParentType({}, relationshipsToOmit),
         zoomLevel2Amount: overrides && overrides.hasOwnProperty('zoomLevel2Amount') ? overrides.zoomLevel2Amount! : relationshipsToOmit.includes('ZoomLevel2AmountParentType') ? {} as ZoomLevel2AmountParentType : aZoomLevel2AmountParentType({}, relationshipsToOmit),
         zoomLevel3Archive: overrides && overrides.hasOwnProperty('zoomLevel3Archive') ? overrides.zoomLevel3Archive! : relationshipsToOmit.includes('ArchiveZoomLevel3DetailType') ? {} as ArchiveZoomLevel3DetailType : anArchiveZoomLevel3DetailType({}, relationshipsToOmit),
@@ -1297,14 +1289,6 @@ export const aQuery = (overrides?: Partial<Query>, _relationshipsToOmit: Array<s
         zoomLevel3Person: overrides && overrides.hasOwnProperty('zoomLevel3Person') ? overrides.zoomLevel3Person! : relationshipsToOmit.includes('PeopleZoomLevel3DetailType') ? {} as PeopleZoomLevel3DetailType : aPeopleZoomLevel3DetailType({}, relationshipsToOmit),
         zoomLevel3Publication: overrides && overrides.hasOwnProperty('zoomLevel3Publication') ? overrides.zoomLevel3Publication! : relationshipsToOmit.includes('PublicationZoomLevel3DetailType') ? {} as PublicationZoomLevel3DetailType : aPublicationZoomLevel3DetailType({}, relationshipsToOmit),
         zoomLevel3StoriesRelationsForRecord: overrides && overrides.hasOwnProperty('zoomLevel3StoriesRelationsForRecord') ? overrides.zoomLevel3StoriesRelationsForRecord! : relationshipsToOmit.includes('ZoomLevel3StoriesRelatedToRecordType') ? {} as ZoomLevel3StoriesRelatedToRecordType : aZoomLevel3StoriesRelatedToRecordType({}, relationshipsToOmit),
-        zoomLevel5Archive: overrides && overrides.hasOwnProperty('zoomLevel5Archive') ? overrides.zoomLevel5Archive! : relationshipsToOmit.includes('ArchivesFondsZoomLevel3DetailType') ? {} as ArchivesFondsZoomLevel3DetailType : anArchivesFondsZoomLevel3DetailType({}, relationshipsToOmit),
-        zoomLevel5ArchivesFonds: overrides && overrides.hasOwnProperty('zoomLevel5ArchivesFonds') ? overrides.zoomLevel5ArchivesFonds! : relationshipsToOmit.includes('ArchivesFondsZoomLevel3DetailType') ? {} as ArchivesFondsZoomLevel3DetailType : anArchivesFondsZoomLevel3DetailType({}, relationshipsToOmit),
-        zoomLevel5ArchivesOther: overrides && overrides.hasOwnProperty('zoomLevel5ArchivesOther') ? overrides.zoomLevel5ArchivesOther! : relationshipsToOmit.includes('ArchivesOtherZoomLevel3DetailType') ? {} as ArchivesOtherZoomLevel3DetailType : anArchivesOtherZoomLevel3DetailType({}, relationshipsToOmit),
-        zoomLevel5Publication: overrides && overrides.hasOwnProperty('zoomLevel5Publication') ? overrides.zoomLevel5Publication! : relationshipsToOmit.includes('PublicationsArticleZoomLevel3DetailType') ? {} as PublicationsArticleZoomLevel3DetailType : aPublicationsArticleZoomLevel3DetailType({}, relationshipsToOmit),
-        zoomLevel5PublicationsArticle: overrides && overrides.hasOwnProperty('zoomLevel5PublicationsArticle') ? overrides.zoomLevel5PublicationsArticle! : relationshipsToOmit.includes('PublicationsArticleZoomLevel3DetailType') ? {} as PublicationsArticleZoomLevel3DetailType : aPublicationsArticleZoomLevel3DetailType({}, relationshipsToOmit),
-        zoomLevel5PublicationsAudiovisual: overrides && overrides.hasOwnProperty('zoomLevel5PublicationsAudiovisual') ? overrides.zoomLevel5PublicationsAudiovisual! : relationshipsToOmit.includes('PublicationsAudioVisualZoomLevel3DetailType') ? {} as PublicationsAudioVisualZoomLevel3DetailType : aPublicationsAudioVisualZoomLevel3DetailType({}, relationshipsToOmit),
-        zoomLevel5PublicationsBook: overrides && overrides.hasOwnProperty('zoomLevel5PublicationsBook') ? overrides.zoomLevel5PublicationsBook! : relationshipsToOmit.includes('PublicationsBookZoomLevel3DetailType') ? {} as PublicationsBookZoomLevel3DetailType : aPublicationsBookZoomLevel3DetailType({}, relationshipsToOmit),
-        zoomLevel5PublicationsSerial: overrides && overrides.hasOwnProperty('zoomLevel5PublicationsSerial') ? overrides.zoomLevel5PublicationsSerial! : relationshipsToOmit.includes('PublicationsSerialZoomLevel3DetailType') ? {} as PublicationsSerialZoomLevel3DetailType : aPublicationsSerialZoomLevel3DetailType({}, relationshipsToOmit),
     };
 };
 
@@ -1312,6 +1296,25 @@ export const aResponseCollectionMeta = (overrides?: Partial<ResponseCollectionMe
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ResponseCollectionMeta']);
     return {
         pagination: overrides && overrides.hasOwnProperty('pagination') ? overrides.pagination! : relationshipsToOmit.includes('Pagination') ? {} as Pagination : aPagination({}, relationshipsToOmit),
+    };
+};
+
+export const aSearchResultItemType = (overrides?: Partial<SearchResultItemType>, _relationshipsToOmit: Array<string> = []): SearchResultItemType => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'SearchResultItemType']);
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'est',
+        thumbnail: overrides && overrides.hasOwnProperty('thumbnail') ? overrides.thumbnail! : 'quaerat',
+        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'est',
+        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : EntityNames.Archives,
+    };
+};
+
+export const aSearchResultType = (overrides?: Partial<SearchResultType>, _relationshipsToOmit: Array<string> = []): SearchResultType => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'SearchResultType']);
+    return {
+        nodes: overrides && overrides.hasOwnProperty('nodes') ? overrides.nodes! : [relationshipsToOmit.includes('SearchResultItemType') ? {} as SearchResultItemType : aSearchResultItemType({}, relationshipsToOmit)],
+        page: overrides && overrides.hasOwnProperty('page') ? overrides.page! : 168,
+        total: overrides && overrides.hasOwnProperty('total') ? overrides.total! : 1126,
     };
 };
 
@@ -1328,25 +1331,35 @@ export const aStory = (overrides?: Partial<Story>, _relationshipsToOmit: Array<s
     const relationshipsToOmit = ([..._relationshipsToOmit, 'Story']);
     return {
         author: overrides && overrides.hasOwnProperty('author') ? overrides.author! : relationshipsToOmit.includes('AuthorEntityResponse') ? {} as AuthorEntityResponse : anAuthorEntityResponse({}, relationshipsToOmit),
-        components: overrides && overrides.hasOwnProperty('components') ? overrides.components! : [relationshipsToOmit.includes('ComponentModulesButtonsModule') ? {} as ComponentModulesButtonsModule : aComponentModulesButtonsModule({}, relationshipsToOmit)],
+        child_stories: overrides && overrides.hasOwnProperty('child_stories') ? overrides.child_stories! : relationshipsToOmit.includes('StoryRelationResponseCollection') ? {} as StoryRelationResponseCollection : aStoryRelationResponseCollection({}, relationshipsToOmit),
+        components: overrides && overrides.hasOwnProperty('components') ? overrides.components! : [relationshipsToOmit.includes('ComponentCoreMuxAudio') ? {} as ComponentCoreMuxAudio : aComponentCoreMuxAudio({}, relationshipsToOmit)],
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : '1970-01-12T23:57:50.299Z',
         description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'ratione',
         locale: overrides && overrides.hasOwnProperty('locale') ? overrides.locale! : 'laudantium',
         localizations: overrides && overrides.hasOwnProperty('localizations') ? overrides.localizations! : relationshipsToOmit.includes('StoryRelationResponseCollection') ? {} as StoryRelationResponseCollection : aStoryRelationResponseCollection({}, relationshipsToOmit),
         locations: overrides && overrides.hasOwnProperty('locations') ? overrides.locations! : relationshipsToOmit.includes('LocationRelationResponseCollection') ? {} as LocationRelationResponseCollection : aLocationRelationResponseCollection({}, relationshipsToOmit),
+        parent_story: overrides && overrides.hasOwnProperty('parent_story') ? overrides.parent_story! : relationshipsToOmit.includes('StoryEntityResponse') ? {} as StoryEntityResponse : aStoryEntityResponse({}, relationshipsToOmit),
         publicationDate: overrides && overrides.hasOwnProperty('publicationDate') ? overrides.publicationDate! : relationshipsToOmit.includes('ComponentCorePublicationDate') ? {} as ComponentCorePublicationDate : aComponentCorePublicationDate({}, relationshipsToOmit),
         publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : '1970-01-02T01:42:16.891Z',
         shortDescription: overrides && overrides.hasOwnProperty('shortDescription') ? overrides.shortDescription! : 'quae',
         siblings: overrides && overrides.hasOwnProperty('siblings') ? overrides.siblings! : [relationshipsToOmit.includes('StoryEntity') ? {} as StoryEntity : aStoryEntity({}, relationshipsToOmit)],
         slug: overrides && overrides.hasOwnProperty('slug') ? overrides.slug! : 'minima',
-        stories: overrides && overrides.hasOwnProperty('stories') ? overrides.stories! : relationshipsToOmit.includes('StoryRelationResponseCollection') ? {} as StoryRelationResponseCollection : aStoryRelationResponseCollection({}, relationshipsToOmit),
-        story: overrides && overrides.hasOwnProperty('story') ? overrides.story! : relationshipsToOmit.includes('StoryEntityResponse') ? {} as StoryEntityResponse : aStoryEntityResponse({}, relationshipsToOmit),
         storyLinks: overrides && overrides.hasOwnProperty('storyLinks') ? overrides.storyLinks! : relationshipsToOmit.includes('ComponentModulesButtonsModule') ? {} as ComponentModulesButtonsModule : aComponentModulesButtonsModule({}, relationshipsToOmit),
         themes: overrides && overrides.hasOwnProperty('themes') ? overrides.themes! : relationshipsToOmit.includes('ThemeRelationResponseCollection') ? {} as ThemeRelationResponseCollection : aThemeRelationResponseCollection({}, relationshipsToOmit),
         timeframe: overrides && overrides.hasOwnProperty('timeframe') ? overrides.timeframe! : relationshipsToOmit.includes('ComponentCoreTimeframe') ? {} as ComponentCoreTimeframe : aComponentCoreTimeframe({}, relationshipsToOmit),
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'deleniti',
         triplyRecords: overrides && overrides.hasOwnProperty('triplyRecords') ? overrides.triplyRecords! : relationshipsToOmit.includes('TriplyRecordRelationResponseCollection') ? {} as TriplyRecordRelationResponseCollection : aTriplyRecordRelationResponseCollection({}, relationshipsToOmit),
         updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : '1970-01-12T21:40:03.398Z',
+    };
+};
+
+export const aStoryCountType = (overrides?: Partial<StoryCountType>, _relationshipsToOmit: Array<string> = []): StoryCountType => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'StoryCountType']);
+    return {
+        archives: overrides && overrides.hasOwnProperty('archives') ? overrides.archives! : 8.23,
+        objects: overrides && overrides.hasOwnProperty('objects') ? overrides.objects! : 8.37,
+        people: overrides && overrides.hasOwnProperty('people') ? overrides.people! : 5.11,
+        publications: overrides && overrides.hasOwnProperty('publications') ? overrides.publications! : 6.89,
     };
 };
 
@@ -1368,7 +1381,7 @@ export const aStoryEntityResponse = (overrides?: Partial<StoryEntityResponse>, _
 export const aStoryEntityResponseCollection = (overrides?: Partial<StoryEntityResponseCollection>, _relationshipsToOmit: Array<string> = []): StoryEntityResponseCollection => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'StoryEntityResponseCollection']);
     return {
-        data: overrides && overrides.hasOwnProperty('data') ? overrides.data! : relationshipsToOmit.includes('StoryEntity') ? {} as StoryEntity : aStoryEntity({}, relationshipsToOmit),
+        data: overrides && overrides.hasOwnProperty('data') ? overrides.data! : [relationshipsToOmit.includes('StoryEntity') ? {} as StoryEntity : aStoryEntity({}, relationshipsToOmit)],
         meta: overrides && overrides.hasOwnProperty('meta') ? overrides.meta! : relationshipsToOmit.includes('ResponseCollectionMeta') ? {} as ResponseCollectionMeta : aResponseCollectionMeta({}, relationshipsToOmit),
     };
 };
@@ -1378,6 +1391,7 @@ export const aStoryFiltersInput = (overrides?: Partial<StoryFiltersInput>, _rela
     return {
         and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [relationshipsToOmit.includes('StoryFiltersInput') ? {} as StoryFiltersInput : aStoryFiltersInput({}, relationshipsToOmit)],
         author: overrides && overrides.hasOwnProperty('author') ? overrides.author! : relationshipsToOmit.includes('AuthorFiltersInput') ? {} as AuthorFiltersInput : anAuthorFiltersInput({}, relationshipsToOmit),
+        child_stories: overrides && overrides.hasOwnProperty('child_stories') ? overrides.child_stories! : relationshipsToOmit.includes('StoryFiltersInput') ? {} as StoryFiltersInput : aStoryFiltersInput({}, relationshipsToOmit),
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : relationshipsToOmit.includes('DateTimeFilterInput') ? {} as DateTimeFilterInput : aDateTimeFilterInput({}, relationshipsToOmit),
         description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : relationshipsToOmit.includes('StringFilterInput') ? {} as StringFilterInput : aStringFilterInput({}, relationshipsToOmit),
         firstName: overrides && overrides.hasOwnProperty('firstName') ? overrides.firstName! : relationshipsToOmit.includes('StringFilterInput') ? {} as StringFilterInput : aStringFilterInput({}, relationshipsToOmit),
@@ -1389,14 +1403,14 @@ export const aStoryFiltersInput = (overrides?: Partial<StoryFiltersInput>, _rela
         locations: overrides && overrides.hasOwnProperty('locations') ? overrides.locations! : relationshipsToOmit.includes('LocationFiltersInput') ? {} as LocationFiltersInput : aLocationFiltersInput({}, relationshipsToOmit),
         not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : relationshipsToOmit.includes('StoryFiltersInput') ? {} as StoryFiltersInput : aStoryFiltersInput({}, relationshipsToOmit),
         or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [relationshipsToOmit.includes('StoryFiltersInput') ? {} as StoryFiltersInput : aStoryFiltersInput({}, relationshipsToOmit)],
+        parent_story: overrides && overrides.hasOwnProperty('parent_story') ? overrides.parent_story! : relationshipsToOmit.includes('StoryFiltersInput') ? {} as StoryFiltersInput : aStoryFiltersInput({}, relationshipsToOmit),
         publicationDate: overrides && overrides.hasOwnProperty('publicationDate') ? overrides.publicationDate! : relationshipsToOmit.includes('ComponentCorePublicationDateFiltersInput') ? {} as ComponentCorePublicationDateFiltersInput : aComponentCorePublicationDateFiltersInput({}, relationshipsToOmit),
         publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : relationshipsToOmit.includes('DateTimeFilterInput') ? {} as DateTimeFilterInput : aDateTimeFilterInput({}, relationshipsToOmit),
         shortDescription: overrides && overrides.hasOwnProperty('shortDescription') ? overrides.shortDescription! : relationshipsToOmit.includes('StringFilterInput') ? {} as StringFilterInput : aStringFilterInput({}, relationshipsToOmit),
         siblings: overrides && overrides.hasOwnProperty('siblings') ? overrides.siblings! : relationshipsToOmit.includes('StoryFiltersInput') ? {} as StoryFiltersInput : aStoryFiltersInput({}, relationshipsToOmit),
         slug: overrides && overrides.hasOwnProperty('slug') ? overrides.slug! : relationshipsToOmit.includes('StringFilterInput') ? {} as StringFilterInput : aStringFilterInput({}, relationshipsToOmit),
-        stories: overrides && overrides.hasOwnProperty('stories') ? overrides.stories! : relationshipsToOmit.includes('StoryFiltersInput') ? {} as StoryFiltersInput : aStoryFiltersInput({}, relationshipsToOmit),
-        story: overrides && overrides.hasOwnProperty('story') ? overrides.story! : relationshipsToOmit.includes('StoryFiltersInput') ? {} as StoryFiltersInput : aStoryFiltersInput({}, relationshipsToOmit),
         storyLinks: overrides && overrides.hasOwnProperty('storyLinks') ? overrides.storyLinks! : relationshipsToOmit.includes('ComponentModulesButtonsModuleFiltersInput') ? {} as ComponentModulesButtonsModuleFiltersInput : aComponentModulesButtonsModuleFiltersInput({}, relationshipsToOmit),
+        themes: overrides && overrides.hasOwnProperty('themes') ? overrides.themes! : relationshipsToOmit.includes('ThemeFiltersInput') ? {} as ThemeFiltersInput : aThemeFiltersInput({}, relationshipsToOmit),
         timeframe: overrides && overrides.hasOwnProperty('timeframe') ? overrides.timeframe! : relationshipsToOmit.includes('ComponentCoreTimeframeFiltersInput') ? {} as ComponentCoreTimeframeFiltersInput : aComponentCoreTimeframeFiltersInput({}, relationshipsToOmit),
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : relationshipsToOmit.includes('StringFilterInput') ? {} as StringFilterInput : aStringFilterInput({}, relationshipsToOmit),
         triplyRecords: overrides && overrides.hasOwnProperty('triplyRecords') ? overrides.triplyRecords! : relationshipsToOmit.includes('TriplyRecordFiltersInput') ? {} as TriplyRecordFiltersInput : aTriplyRecordFiltersInput({}, relationshipsToOmit),
@@ -1421,6 +1435,7 @@ export const aStoryRelationResponseCollection = (overrides?: Partial<StoryRelati
 export const aStoryWithoutRelations = (overrides?: Partial<StoryWithoutRelations>, _relationshipsToOmit: Array<string> = []): StoryWithoutRelations => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'StoryWithoutRelations']);
     return {
+        author: overrides && overrides.hasOwnProperty('author') ? overrides.author! : relationshipsToOmit.includes('AuthorEntityResponse') ? {} as AuthorEntityResponse : anAuthorEntityResponse({}, relationshipsToOmit),
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : '1970-01-07T07:34:02.023Z',
         description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'reprehenderit',
         locale: overrides && overrides.hasOwnProperty('locale') ? overrides.locale! : 'sequi',
@@ -1482,63 +1497,11 @@ export const aStringFilterInput = (overrides?: Partial<StringFilterInput>, _rela
     };
 };
 
-export const aTable = (overrides?: Partial<Table>, _relationshipsToOmit: Array<string> = []): Table => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'Table']);
-    return {
-        TableBody: overrides && overrides.hasOwnProperty('TableBody') ? overrides.TableBody! : [relationshipsToOmit.includes('ComponentCoreTableBody') ? {} as ComponentCoreTableBody : aComponentCoreTableBody({}, relationshipsToOmit)],
-        Tablehead: overrides && overrides.hasOwnProperty('Tablehead') ? overrides.Tablehead! : relationshipsToOmit.includes('ComponentCoreTableHead') ? {} as ComponentCoreTableHead : aComponentCoreTableHead({}, relationshipsToOmit),
-        createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : '1970-01-14T18:15:38.232Z',
-        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'aperiam',
-        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'sequi',
-        publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : '1970-01-06T04:40:41.139Z',
-        updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : '1970-01-04T03:57:09.985Z',
-    };
-};
-
-export const aTableEntity = (overrides?: Partial<TableEntity>, _relationshipsToOmit: Array<string> = []): TableEntity => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'TableEntity']);
-    return {
-        attributes: overrides && overrides.hasOwnProperty('attributes') ? overrides.attributes! : relationshipsToOmit.includes('Table') ? {} as Table : aTable({}, relationshipsToOmit),
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'bc044baf-2bc1-4347-b2f7-28bdb3548bf8',
-    };
-};
-
-export const aTableEntityResponse = (overrides?: Partial<TableEntityResponse>, _relationshipsToOmit: Array<string> = []): TableEntityResponse => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'TableEntityResponse']);
-    return {
-        data: overrides && overrides.hasOwnProperty('data') ? overrides.data! : relationshipsToOmit.includes('TableEntity') ? {} as TableEntity : aTableEntity({}, relationshipsToOmit),
-    };
-};
-
-export const aTableEntityResponseCollection = (overrides?: Partial<TableEntityResponseCollection>, _relationshipsToOmit: Array<string> = []): TableEntityResponseCollection => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'TableEntityResponseCollection']);
-    return {
-        data: overrides && overrides.hasOwnProperty('data') ? overrides.data! : [relationshipsToOmit.includes('TableEntity') ? {} as TableEntity : aTableEntity({}, relationshipsToOmit)],
-        meta: overrides && overrides.hasOwnProperty('meta') ? overrides.meta! : relationshipsToOmit.includes('ResponseCollectionMeta') ? {} as ResponseCollectionMeta : aResponseCollectionMeta({}, relationshipsToOmit),
-    };
-};
-
-export const aTableFiltersInput = (overrides?: Partial<TableFiltersInput>, _relationshipsToOmit: Array<string> = []): TableFiltersInput => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'TableFiltersInput']);
-    return {
-        TableBody: overrides && overrides.hasOwnProperty('TableBody') ? overrides.TableBody! : relationshipsToOmit.includes('ComponentCoreTableBodyFiltersInput') ? {} as ComponentCoreTableBodyFiltersInput : aComponentCoreTableBodyFiltersInput({}, relationshipsToOmit),
-        Tablehead: overrides && overrides.hasOwnProperty('Tablehead') ? overrides.Tablehead! : relationshipsToOmit.includes('ComponentCoreTableHeadFiltersInput') ? {} as ComponentCoreTableHeadFiltersInput : aComponentCoreTableHeadFiltersInput({}, relationshipsToOmit),
-        and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [relationshipsToOmit.includes('TableFiltersInput') ? {} as TableFiltersInput : aTableFiltersInput({}, relationshipsToOmit)],
-        createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : relationshipsToOmit.includes('DateTimeFilterInput') ? {} as DateTimeFilterInput : aDateTimeFilterInput({}, relationshipsToOmit),
-        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : relationshipsToOmit.includes('StringFilterInput') ? {} as StringFilterInput : aStringFilterInput({}, relationshipsToOmit),
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : relationshipsToOmit.includes('IdFilterInput') ? {} as IdFilterInput : anIdFilterInput({}, relationshipsToOmit),
-        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : relationshipsToOmit.includes('StringFilterInput') ? {} as StringFilterInput : aStringFilterInput({}, relationshipsToOmit),
-        not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : relationshipsToOmit.includes('TableFiltersInput') ? {} as TableFiltersInput : aTableFiltersInput({}, relationshipsToOmit),
-        or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [relationshipsToOmit.includes('TableFiltersInput') ? {} as TableFiltersInput : aTableFiltersInput({}, relationshipsToOmit)],
-        publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : relationshipsToOmit.includes('DateTimeFilterInput') ? {} as DateTimeFilterInput : aDateTimeFilterInput({}, relationshipsToOmit),
-        updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : relationshipsToOmit.includes('DateTimeFilterInput') ? {} as DateTimeFilterInput : aDateTimeFilterInput({}, relationshipsToOmit),
-    };
-};
-
 export const aTheme = (overrides?: Partial<Theme>, _relationshipsToOmit: Array<string> = []): Theme => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'Theme']);
     return {
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : '1970-01-11T08:39:10.744Z',
+        highlightedStories: overrides && overrides.hasOwnProperty('highlightedStories') ? overrides.highlightedStories! : relationshipsToOmit.includes('StoryRelationResponseCollection') ? {} as StoryRelationResponseCollection : aStoryRelationResponseCollection({}, relationshipsToOmit),
         locale: overrides && overrides.hasOwnProperty('locale') ? overrides.locale! : 'tempore',
         localizations: overrides && overrides.hasOwnProperty('localizations') ? overrides.localizations! : relationshipsToOmit.includes('ThemeRelationResponseCollection') ? {} as ThemeRelationResponseCollection : aThemeRelationResponseCollection({}, relationshipsToOmit),
         name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'voluptas',
@@ -1568,10 +1531,8 @@ export const aThemeFiltersInput = (overrides?: Partial<ThemeFiltersInput>, _rela
     return {
         and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [relationshipsToOmit.includes('ThemeFiltersInput') ? {} as ThemeFiltersInput : aThemeFiltersInput({}, relationshipsToOmit)],
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : relationshipsToOmit.includes('DateTimeFilterInput') ? {} as DateTimeFilterInput : aDateTimeFilterInput({}, relationshipsToOmit),
-        firstName: overrides && overrides.hasOwnProperty('firstName') ? overrides.firstName! : relationshipsToOmit.includes('StringFilterInput') ? {} as StringFilterInput : aStringFilterInput({}, relationshipsToOmit),
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : relationshipsToOmit.includes('IdFilterInput') ? {} as IdFilterInput : anIdFilterInput({}, relationshipsToOmit),
         insertion: overrides && overrides.hasOwnProperty('insertion') ? overrides.insertion! : relationshipsToOmit.includes('StringFilterInput') ? {} as StringFilterInput : aStringFilterInput({}, relationshipsToOmit),
-        lastName: overrides && overrides.hasOwnProperty('lastName') ? overrides.lastName! : relationshipsToOmit.includes('StringFilterInput') ? {} as StringFilterInput : aStringFilterInput({}, relationshipsToOmit),
         not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : relationshipsToOmit.includes('ThemeFiltersInput') ? {} as ThemeFiltersInput : aThemeFiltersInput({}, relationshipsToOmit),
         or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [relationshipsToOmit.includes('ThemeFiltersInput') ? {} as ThemeFiltersInput : aThemeFiltersInput({}, relationshipsToOmit)],
         publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : relationshipsToOmit.includes('DateTimeFilterInput') ? {} as DateTimeFilterInput : aDateTimeFilterInput({}, relationshipsToOmit),
@@ -1592,12 +1553,15 @@ export const aTriplyRecord = (overrides?: Partial<TriplyRecord>, _relationshipsT
     return {
         archive: overrides && overrides.hasOwnProperty('archive') ? overrides.archive! : relationshipsToOmit.includes('ArchiveZoomLevel3DetailType') ? {} as ArchiveZoomLevel3DetailType : anArchiveZoomLevel3DetailType({}, relationshipsToOmit),
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : '1970-01-03T05:28:06.708Z',
+        entityName: overrides && overrides.hasOwnProperty('entityName') ? overrides.entityName! : EntityNames.Archives,
+        label: overrides && overrides.hasOwnProperty('label') ? overrides.label! : 'neque',
         object: overrides && overrides.hasOwnProperty('object') ? overrides.object! : relationshipsToOmit.includes('ObjectsZoomLevel3DetailType') ? {} as ObjectsZoomLevel3DetailType : anObjectsZoomLevel3DetailType({}, relationshipsToOmit),
         people: overrides && overrides.hasOwnProperty('people') ? overrides.people! : relationshipsToOmit.includes('PeopleZoomLevel3DetailType') ? {} as PeopleZoomLevel3DetailType : aPeopleZoomLevel3DetailType({}, relationshipsToOmit),
         publication: overrides && overrides.hasOwnProperty('publication') ? overrides.publication! : relationshipsToOmit.includes('PublicationZoomLevel3DetailType') ? {} as PublicationZoomLevel3DetailType : aPublicationZoomLevel3DetailType({}, relationshipsToOmit),
         publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : '1970-01-17T03:41:53.182Z',
         recordId: overrides && overrides.hasOwnProperty('recordId') ? overrides.recordId! : 'in',
         stories: overrides && overrides.hasOwnProperty('stories') ? overrides.stories! : relationshipsToOmit.includes('StoryRelationResponseCollection') ? {} as StoryRelationResponseCollection : aStoryRelationResponseCollection({}, relationshipsToOmit),
+        subject_collectionHighlights: overrides && overrides.hasOwnProperty('subject_collectionHighlights') ? overrides.subject_collectionHighlights! : true,
         type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : EnumTriplyrecordType.Archive,
         updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : '1970-01-13T18:59:28.998Z',
     };
@@ -1624,11 +1588,13 @@ export const aTriplyRecordFiltersInput = (overrides?: Partial<TriplyRecordFilter
         and: overrides && overrides.hasOwnProperty('and') ? overrides.and! : [relationshipsToOmit.includes('TriplyRecordFiltersInput') ? {} as TriplyRecordFiltersInput : aTriplyRecordFiltersInput({}, relationshipsToOmit)],
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : relationshipsToOmit.includes('DateTimeFilterInput') ? {} as DateTimeFilterInput : aDateTimeFilterInput({}, relationshipsToOmit),
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : relationshipsToOmit.includes('IdFilterInput') ? {} as IdFilterInput : anIdFilterInput({}, relationshipsToOmit),
+        label: overrides && overrides.hasOwnProperty('label') ? overrides.label! : relationshipsToOmit.includes('StringFilterInput') ? {} as StringFilterInput : aStringFilterInput({}, relationshipsToOmit),
         not: overrides && overrides.hasOwnProperty('not') ? overrides.not! : relationshipsToOmit.includes('TriplyRecordFiltersInput') ? {} as TriplyRecordFiltersInput : aTriplyRecordFiltersInput({}, relationshipsToOmit),
         or: overrides && overrides.hasOwnProperty('or') ? overrides.or! : [relationshipsToOmit.includes('TriplyRecordFiltersInput') ? {} as TriplyRecordFiltersInput : aTriplyRecordFiltersInput({}, relationshipsToOmit)],
         publishedAt: overrides && overrides.hasOwnProperty('publishedAt') ? overrides.publishedAt! : relationshipsToOmit.includes('DateTimeFilterInput') ? {} as DateTimeFilterInput : aDateTimeFilterInput({}, relationshipsToOmit),
         recordId: overrides && overrides.hasOwnProperty('recordId') ? overrides.recordId! : relationshipsToOmit.includes('StringFilterInput') ? {} as StringFilterInput : aStringFilterInput({}, relationshipsToOmit),
         stories: overrides && overrides.hasOwnProperty('stories') ? overrides.stories! : relationshipsToOmit.includes('StoryFiltersInput') ? {} as StoryFiltersInput : aStoryFiltersInput({}, relationshipsToOmit),
+        subject_collectionHighlights: overrides && overrides.hasOwnProperty('subject_collectionHighlights') ? overrides.subject_collectionHighlights! : relationshipsToOmit.includes('BooleanFilterInput') ? {} as BooleanFilterInput : aBooleanFilterInput({}, relationshipsToOmit),
         type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : relationshipsToOmit.includes('StringFilterInput') ? {} as StringFilterInput : aStringFilterInput({}, relationshipsToOmit),
         updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : relationshipsToOmit.includes('DateTimeFilterInput') ? {} as DateTimeFilterInput : aDateTimeFilterInput({}, relationshipsToOmit),
     };
@@ -1835,15 +1801,6 @@ export const aUsersPermissionsUserRelationResponseCollection = (overrides?: Part
     };
 };
 
-export const aZoomLevel1Type = (overrides?: Partial<ZoomLevel1Type>, _relationshipsToOmit: Array<string> = []): ZoomLevel1Type => {
-    const relationshipsToOmit = ([..._relationshipsToOmit, 'ZoomLevel1Type']);
-    return {
-        count: overrides && overrides.hasOwnProperty('count') ? overrides.count! : 2197,
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : EntityNames.Archives,
-        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'consequatur',
-    };
-};
-
 export const aZoomLevel2AmountParentType = (overrides?: Partial<ZoomLevel2AmountParentType>, _relationshipsToOmit: Array<string> = []): ZoomLevel2AmountParentType => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ZoomLevel2AmountParentType']);
     return {
@@ -1871,7 +1828,7 @@ export const aZoomLevel2Type = (overrides?: Partial<ZoomLevel2Type>, _relationsh
 export const aZoomLevel3RelationsType = (overrides?: Partial<ZoomLevel3RelationsType>, _relationshipsToOmit: Array<string> = []): ZoomLevel3RelationsType => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ZoomLevel3RelationsType']);
     return {
-        randomRelations: overrides && overrides.hasOwnProperty('randomRelations') ? overrides.randomRelations! : ['id'],
+        paginatedRelations: overrides && overrides.hasOwnProperty('paginatedRelations') ? overrides.paginatedRelations! : ['nobis'],
         total: overrides && overrides.hasOwnProperty('total') ? overrides.total! : 2.42,
         type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : EntityNames.Archives,
     };
@@ -1883,5 +1840,13 @@ export const aZoomLevel3StoriesRelatedToRecordType = (overrides?: Partial<ZoomLe
         stories: overrides && overrides.hasOwnProperty('stories') ? overrides.stories! : [relationshipsToOmit.includes('StoryEntity') ? {} as StoryEntity : aStoryEntity({}, relationshipsToOmit)],
         total: overrides && overrides.hasOwnProperty('total') ? overrides.total! : 2.47,
         type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : 'aut',
+    };
+};
+
+export const aZoomLevel3StoryRelationsCountType = (overrides?: Partial<ZoomLevel3StoryRelationsCountType>, _relationshipsToOmit: Array<string> = []): ZoomLevel3StoryRelationsCountType => {
+    const relationshipsToOmit = ([..._relationshipsToOmit, 'ZoomLevel3StoryRelationsCountType']);
+    return {
+        linkedStoryCount: overrides && overrides.hasOwnProperty('linkedStoryCount') ? overrides.linkedStoryCount! : 7.47,
+        linkedTriplyRecords: overrides && overrides.hasOwnProperty('linkedTriplyRecords') ? overrides.linkedTriplyRecords! : relationshipsToOmit.includes('StoryCountType') ? {} as StoryCountType : aStoryCountType({}, relationshipsToOmit),
     };
 };

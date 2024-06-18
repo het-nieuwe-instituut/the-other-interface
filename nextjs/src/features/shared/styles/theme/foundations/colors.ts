@@ -172,6 +172,7 @@ const blue = {
 const pinkAlpha = {
   '100': 'RGBA(255, 230, 221, 1)',
   '60': 'RGBA(255, 230, 221, .6)',
+  '50': 'RGBA(255, 230, 221, .5)',
   '40': 'RGBA(255, 230, 221, .40)',
   '25': 'RGBA(255, 230, 221, .25)',
 }
@@ -190,6 +191,7 @@ const blueAlphaNew = {
 
 const blackAlpha = {
   '100': 'RGBA(0, 0, 0, 1)',
+  '20': 'RGBA(0, 0, 0, .2)',
 }
 
 const ivoryAlpha = {

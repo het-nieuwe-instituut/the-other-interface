@@ -5,12 +5,21 @@
   "people": "Personen",
   "publications": "Publicaties",
   "stories": "Stories",
+  "all": "Alle categorieën",
 
   "object": "Object",
-  "archive": "Archief",
-  "person": "Persoon",
+  "archive": "Archiefbestanddeel",
+  "person": "Persoon/Instelling",
   "publication": "Publicatie",
   "story": "Story",
   "resultsFor": "resultaten voor",
-  "noResultsFound": "Geen resultaten gevonden"
+  "noResultsFound": "Geen resultaten gevonden",
+  "clear": "Wissen",
+  "suggestions": "Suggesties",
+  "searchPlaceholder": "Typ hier je zoekterm",
+  "searchCategory": "Categorieën",
+
+  "couldNotFetchHover": "Er ging iets fout bij het ophalen van de hover informatie, probeer het later nog eens.",
+  "errorLoadingDetail": "Er is iets misgegaan bij het laden. Probeer het later opnieuw.",
+  "errorLoadingCategoryItems": "Er is iets misgegaan bij het laden van de categorie items. Probeer het later opnieuw."
 }

@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common'
 import { KeysToVerify, TriplyService } from '../triply/triply.service'
-import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
+import { EntityNames } from '../util/entityNames.type'
 import { getHttpThumbnailOrNull } from '../util/helpers'
 import { TriplyUtils } from '../triply/triply.utils'
 import { PaginationArgs } from '../util/paginationArgs.type'
+import { Locale } from '../util/locale.type'
 
 export interface ObjectsDetailZoomLevel3Data {
   thumbnail?: string
@@ -41,6 +42,18 @@ export interface ObjectsRelationsCountType {
 
 const objectsRelationsCountKeys: KeysToVerify<ObjectsRelationsCountType> = {
   total: true,
+}
+
+export interface ObjectsZoomLevel2HoverData {
+  title: string
+  profession: string
+  description: string
+}
+
+const objectsZoomLevel2HoverDataKeys: KeysToVerify<ObjectsZoomLevel2HoverData> = {
+  title: true,
+  profession: true,
+  description: true,
 }
 
 export interface ObjectRecordZoomLevel3Data {
@@ -90,14 +103,16 @@ export class ObjectsService {
 
   private readonly ZoomLevel3RecordEndpoint = 'objects-recordPage-editorial/run?'
 
+  private readonly ZoomLevel2HoverEndpoint = 'objects-hoverState/run?'
+
   public constructor(private triplyService: TriplyService) {}
 
-  public async getZoomLevel3Data(id: string) {
+  public async getZoomLevel3Data(id: string, locale: Locale) {
     const result = await this.triplyService.queryTriplyData<ObjectsDetailZoomLevel3Data>(
       this.ZoomLevel3Endpoint,
       objectsDetailZoomLevel3DataKeys,
       { page: 1, pageSize: 1 },
-      { id }
+      { id, language: locale }
     )
 
     return {
@@ -108,15 +123,25 @@ export class ObjectsService {
     }
   }
 
-  public async getRelationsData(id: string, type: EntityNames, paginationArgs: PaginationArgs) {
+  public async getRelationsData(
+    id: string,
+    type: EntityNames,
+    paginationArgs: PaginationArgs,
+    locale: Locale
+  ) {
     const result = await this.triplyService.queryTriplyData<ObjectsRelationsType>(
       this.ZoomLevel3RelationsEndpoint,
       objectsRelationsKeys,
       { page: paginationArgs.page ?? 1, pageSize: paginationArgs.pageSize ?? 5 },
-      { id, type }
+      { id, type, language: locale }
     )
 
-    const output = TriplyUtils.sanitizeObjectArray(result.data)
+    const output = TriplyUtils.sanitizeObjectArray(
+      result.data,
+      'idRelation',
+      'relation',
+      'thumbnail'
+    )
     return output
   }
 
@@ -131,60 +156,29 @@ export class ObjectsService {
     return result.data
   }
 
-  public async getZoomLevel3RecordData(id: string) {
+  public async getZoomLevel3RecordData(id: string, locale: Locale) {
     const result = await this.triplyService.queryTriplyData<ObjectRecordZoomLevel3Data>(
       this.ZoomLevel3RecordEndpoint,
       objectRecordZoomLevel3DataKeys,
       { page: 1, pageSize: 1 },
-      { id }
+      { id, language: locale }
     )
 
     return result.data
   }
 
-  // private getDimensionValueFromData(data: ObjectsDetailZoomLevel3Data[]) {
-  //   const dimHeight = data.find(d => d.dimensionType === 'hoogte')?.dimensionValue
-  //   const dimWidth = data.find(d => d.dimensionType === 'breedte')?.dimensionValue
-  //   const dimDepth = data.find(d => d.dimensionType === 'diepte')?.dimensionValue
+  public async getZoomRecordHover(id: string, locale: Locale) {
+    const results = await this.triplyService.queryTriplyData<ObjectsZoomLevel2HoverData>(
+      this.ZoomLevel2HoverEndpoint,
+      objectsZoomLevel2HoverDataKeys,
+      undefined,
+      { id, language: locale }
+    )
 
-  //   return { dimDepth, dimWidth, dimHeight }
-  // }
+    if (results.data.length === 0) {
+      return {}
+    }
 
-  // private getMakersValueFromData(data: ObjectsDetailZoomLevel3Data[]): ObjectMakerType[] {
-  //   return data
-  //     .filter(d => !!d.maker)
-  //     .map(d => ({
-  //       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  //       id: TriplyUtils.getIdFromUri(d.maker!),
-  //       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  //       maker: d.maker!,
-  //       makerLabel: d.makerLabel,
-  //       makerRole: d.makerRole,
-  //       makerRoleLabel: d.makerRoleLabel,
-  //     }))
-  // }
-
-  // private getMaterialsValueFromData(data: ObjectsDetailZoomLevel3Data[]): ObjectMaterialType[] {
-  //   return data
-  //     .filter(d => !!d.material)
-  //     .map(d => ({
-  //       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  //       id: TriplyUtils.getIdFromUri(d.material!),
-  //       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  //       material: d.material!,
-  //       materialLabel: d.materialLabel,
-  //     }))
-  // }
-
-  // private getTechniquesValueFromData(data: ObjectsDetailZoomLevel3Data[]): ObjectTechniqueType[] {
-  //   return data
-  //     .filter(d => !!d.technique)
-  //     .map(d => ({
-  //       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  //       id: TriplyUtils.getIdFromUri(d.technique!),
-  //       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  //       technique: d.technique!,
-  //       techniqueLabel: d.techniqueLabel,
-  //     }))
-  // }
+    return { ...TriplyUtils.combineObjectArray(results.data) }
+  }
 }

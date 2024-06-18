@@ -1,27 +1,10 @@
 'use client'
-import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { Button } from '@chakra-ui/react'
+import ErrorBox from '@/features/shared/components/Error/ErrorBox'
 import React, { useState } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 
-interface FallbackProps {
-  error: Error
-  resetErrorBoundary: (...args: Array<unknown>) => void
-}
-
 interface Props {
   children: React.ReactNode
-}
-
-function ErrorFallback(props: FallbackProps) {
-  const { t } = useTypeSafeTranslation('common')
-  return (
-    <div role="alert">
-      <p>{t('somethingWentWrong')}</p>
-      <pre>{props?.error.message}</pre>
-      <Button onClick={props?.resetErrorBoundary}>Try again</Button>
-    </div>
-  )
 }
 
 const ErrorBoundaryProvider = (props: Props) => {
@@ -39,7 +22,7 @@ const ErrorBoundaryProvider = (props: Props) => {
 
   return (
     <ErrorBoundary
-      FallbackComponent={ErrorFallback}
+      FallbackComponent={() => <ErrorBox />}
       onError={onError}
       onReset={() => setIsError(false)}
       resetKeys={[isError]}

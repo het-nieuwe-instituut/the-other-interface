@@ -1,23 +1,27 @@
-import { ReduxStoreProvider } from '@/features/shared/components/providers/ReduxStoreProdivder'
-import { ThemeProvider } from '@/features/shared/components/providers/ThemeProvider'
-import Fonts from '@/features/modules/components/Fonts/Fonts'
 import DisableScroll from '@/features/shared/components/DisableScroll/DisableScroll'
 import { AppHead } from '@/features/shared/components/Head/AppHead'
 import MobileOverlayProvider from '@/features/shared/components/MobileOverlayProvider/MobileOverlayProvider'
 import { TestMenu } from '@/features/shared/components/TestMenu/TestMenu'
-import 'keen-slider/keen-slider.min.css'
-import Script from 'next/script'
+import { ReduxStoreProvider } from '@/features/shared/components/providers/ReduxStoreProdivder'
+import { ThemeProvider } from '@/features/shared/components/providers/ThemeProvider'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import Script from 'next/script'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
-
-import '../styles/globals.css'
+import { PreviewBlock } from '@/features/preview/PreviewBlock'
+import { ReduxDraftModeSync } from '@/features/shared/components/Redux/ReduxDraftModeSync'
 import ReactQueryProvider from '@/features/shared/components/providers/ReactQueryProvider'
 import BaseElementWrapper from '@/features/shared/components/wrappers/BaseElementsWrapper'
+import { ReactTooltipInitializer } from '@/features/ui/components/tooltip/ReactTooltipInitializer'
 import { draftMode } from 'next/headers'
-import { PreviewBlock } from '@/features/preview/PreviewBlock'
+import '../styles/globals.css'
+import bootstrap from './_bootstrap'
+import { Bootstrap } from './_bootstrap/Bootstrap'
+import { LightboxProvider } from '@/features/ui/components/lightbox/LightboxProvider'
 
 function MyApp({ children }: { children: React.ReactNode }) {
   const { isEnabled } = draftMode()
+  bootstrap()
+
   return (
     <html lang="en">
       <body>
@@ -38,24 +42,28 @@ function MyApp({ children }: { children: React.ReactNode }) {
             </Script>
           </>
         )}
-        <ReduxStoreProvider>
-          <ReactQueryProvider>
-            <ThemeProvider>
-              <DisableScroll>
-                <MobileOverlayProvider>
-                  <>
-                    <Fonts />
-                    <AppHead />
-                    <TestMenu />
-                    {children}
-                    <BaseElementWrapper />
-                  </>
-                </MobileOverlayProvider>
-              </DisableScroll>
-            </ThemeProvider>
-            <ReactQueryDevtools initialIsOpen={false} />
-          </ReactQueryProvider>
-        </ReduxStoreProvider>
+        <Bootstrap />
+        <LightboxProvider>
+          <ReduxStoreProvider>
+            <ReactQueryProvider>
+              <ThemeProvider>
+                <DisableScroll>
+                  <MobileOverlayProvider>
+                    <div>
+                      <AppHead />
+                      <TestMenu />
+                      <ReduxDraftModeSync isDraftMode={isEnabled} />
+                      {children}
+                      <ReactTooltipInitializer />
+                      <BaseElementWrapper />
+                    </div>
+                  </MobileOverlayProvider>
+                </DisableScroll>
+              </ThemeProvider>
+              <ReactQueryDevtools initialIsOpen={false} />
+            </ReactQueryProvider>
+          </ReduxStoreProvider>
+        </LightboxProvider>
       </body>
     </html>
   )

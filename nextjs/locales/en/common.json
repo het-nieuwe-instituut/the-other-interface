@@ -1,10 +1,11 @@
 {
   "somethingWentWrong": "Something went wrong",
+  "somethingWentWrongAndRetry": "Couldn't load section. Please reload the page",
   "commonTest": "This is a common translation test, also testing counters: {{count}}",
   "published": "Published on {{date}}",
   "archivesBy": "Archive items by",
   "publicationsBy": "Publications by",
-  "peopleBy": "Persons by",
+  "peopleBy": "People by",
   "objectsBy": "Objects by",
   "searchPortalUrl": "https://zoeken.hetnieuweinstituut.nl/en/",
   "goToSearchPortal": "Go to Search portal",
@@ -17,5 +18,9 @@
   "readMore": "Read more",
   "switchToMockedServer": "Switch to mocked server",
   "switchToLiveServer": "Switch to test server",
-  "go": "Search"
+  "go": "Search",
+  "noDataFound": "No data found",
+  "audio": "The audio is not ready yet, please try again later.",
+  "video": "The video is not ready yet, please try again later.",
+  "seeFullImage": "See full image"
 }

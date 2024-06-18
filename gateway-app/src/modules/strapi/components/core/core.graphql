@@ -1,140 +1,122 @@
 fragment ComponentCoreButtonFragment on ComponentCoreButton {
-    id
-    hasAttachment
-    text
-    url
-    attachment {
-        ...UploadFileEntityResponseFragment
-    }
+  id
+  text
+  url
 }
 
-fragment ComponentCoreCarouselItemFragment on ComponentCoreCarouselItem {
-    id
-    description
-    name
-    picture {
-        ...UploadFileEntityResponseFragment
+fragment ComponentCoreCarouselImageFragment on ComponentCoreCarouselImage {
+  id
+  alt_text
+  description
+  image {
+    ...UploadFileEntityResponseFragment
+  }
+  triply_record {
+    data {
+      ...BaseTriplyRecordFragment
     }
-    type
-    triply_record {
-        data {
-            ...BaseTriplyRecordFragment
-        }
+  }
+  story {
+    data {
+      id
+      attributes {
+        slug
+      }
     }
-
-    story {
-        data {
-            id
-            attributes {
-                slug
-            }
-        }
-    }
-}
-
-fragment ComponentCoreImageCarouselItemFragment on ComponentCoreImageCarouselItem {
-    id
-    description
-    name
-    picture {
-        ...UploadFileEntityResponseFragment
-    }
-    triplyRecord {
-        data {
-            ...BaseTriplyRecordFragment
-        }
-    }
-    story {
-        data {
-            id
-            attributes {
-                slug
-            }
-        }
-    }
-}
-
-
-fragment ComponentCorePageHeaderFragment on ComponentCorePageHeader {
-    id
-    Title
-    content
+  }
 }
 
 fragment ComponentCorePublicationDateFragment on ComponentCorePublicationDate {
-    id
-    date
-    displayType
-}
-
-fragment ComponentCoreTableHeadItemFragment on ComponentCoreTableHeadItem {
-    id
-    label
-}
-
-fragment ComponentCoreTableHeadFragment on ComponentCoreTableHead {
-    id
-    TableHeadItem {
-        ...ComponentCoreTableHeadItemFragment
-    }
-}
-
-fragment ComponentCoreTableBodyItemFragment on ComponentCoreTableBodyItem {
-    id
-    value
-}
-
-fragment ComponentCoreTableBodyFragment on ComponentCoreTableBody {
-    id
-    TableBodyItem {
-        ...ComponentCoreTableBodyItemFragment
-    }
+  id
+  date
+  displayType
 }
 
 fragment ComponentCoreTimeframeFragment on ComponentCoreTimeframe {
-    id
-    yearEnd
-    yearStart
+  id
+  yearEnd
+  yearStart
 }
 
 fragment ComponentCoreFeaturedFieldsFragment on ComponentCoreFeaturedFields {
-    id
-    label
-    value
-}
-
-fragment ComponentCoreFieldsFragment on ComponentCoreFields {
-    id
-    label
+  id
+  label
+  value
 }
 
 fragment ComponentCoreGridFeaturedFieldsFragment on ComponentCoreGridFeaturedFields {
-    id
-    subtitle
-    title
-    story {
-        data {
-            id
-            attributes {
-                slug
-            }
-        }
+  id
+  subtitle
+  title
+  story {
+    data {
+      id
+      attributes {
+        slug
+      }
     }
-    thumbnail {
-        ...UploadFileEntityResponseFragment
+  }
+  thumbnail {
+    ...UploadFileEntityResponseFragment
+  }
+  triplyRecord {
+    data {
+      ...BaseTriplyRecordFragment
     }
-    triplyRecord {
-        data {
-            ...BaseTriplyRecordFragment
-        }
-    }
+  }
 }
 
-fragment ComponentCoreItemsFragment on ComponentCoreItems {
-    id
-    author
-    title
-    image {
-        ...UploadFileEntityResponseFragment
+fragment ComponentCoreStandAloneLinkFragment on ComponentCoreStandAloneLink {
+  id
+  label
+  url
+  attachment {
+    ...UploadFileEntityResponseFragment
+  }
+}
+
+fragment ComponentCoreMuxAudioFragment on ComponentCoreMuxAudio {
+  id
+  caption
+  muxAudioRelation {
+    data {
+      id
+      attributes {
+        title
+        upload_id
+        asset_id
+        playback_id
+        signed
+        error_message
+        isReady
+        duration
+        aspect_ratio
+        createdAt
+        updatedAt
+      }
     }
+  }
+}
+
+fragment ComponentCoreMuxVideoFragment on ComponentCoreMuxVideo {
+  id
+  caption
+  muxVideoRelation {
+    data {
+      id
+      attributes {
+        title
+        upload_id
+        asset_id
+        playback_id
+        signed
+        error_message
+        isReady
+        duration
+        aspect_ratio
+        createdAt
+        updatedAt
+      }
+    }
+  }
 }

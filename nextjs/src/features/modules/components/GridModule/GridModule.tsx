@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { ButtonsGrid } from '@/features/shared/components/ButtonsGrid/ButtonsGrid'
 import { Markdown } from '@/features/shared/components/Markdown/Markdown'
-import { Box, Button, Grid, GridItem, Image, Text } from '@chakra-ui/react'
+import { Box, Grid, GridItem, Image, Text } from '@chakra-ui/react'
 import { take } from 'lodash'
 import NextLink from 'next/link'
 import { useState } from 'react'
@@ -12,6 +10,11 @@ import {
   EnumComponentmodulesgridmoduleFieldtypes,
 } from 'src/generated/graphql'
 
+import {
+  ButtonGroup,
+  ButtonGroupItem,
+  LinkButtonGroupItem,
+} from '@/features/ui/components/button-group/component'
 import { ExtractedTriplyFields, extractTriplyFields } from '../../helpers/triplyDataExtractor'
 import { imageBasePath } from '../../modulesConstants'
 import { modulesSpacingMapper } from '../../modulesSpacing'
@@ -122,7 +125,7 @@ export const GridModule: React.FC<Props> = props => {
     // this should prioritize the thumbnail that is uploaded and fall back on a story's thumbnail
     // I could not find an image url on the story type
     // TODO: fallback on story image thumbnail
-    const thumbnailUrl = imageBasePath(field.thumbnail?.data?.attributes?.url) || 'broken'
+    const thumbnailUrl = imageBasePath(field.thumbnail?.data?.attributes?.url) || ''
     const thumbnailAlt =
       field.thumbnail?.data?.attributes?.alternativeText || field.title || 'image'
 
@@ -132,7 +135,13 @@ export const GridModule: React.FC<Props> = props => {
         href={`/story/${field.story?.data?.id}-${field.story?.data?.attributes?.slug}`}
       >
         <GridItem w={'100%'} mb={10} cursor={'pointer'}>
-          <Image mb={5} w={'100%'} src={thumbnailUrl} alt={thumbnailAlt} />
+          <Image
+            mb={5}
+            w={'100%'}
+            src={thumbnailUrl}
+            alt={thumbnailAlt}
+            onContextMenu={e => e.preventDefault()}
+          />
           {renderFieldTitles({
             title: field.title || '',
             description: field.subtitle || '',
@@ -151,7 +160,7 @@ export const GridModule: React.FC<Props> = props => {
       {
         title: field.title || '',
         description: field.subtitle || '',
-        imageUrl: field.thumbnail?.data?.attributes?.url || 'broken',
+        imageUrl: field.thumbnail?.data?.attributes?.url || '',
       },
       field.triplyRecord?.data?.attributes
     )
@@ -159,7 +168,13 @@ export const GridModule: React.FC<Props> = props => {
     // TODO: NextLink integration to a page where you can view a triply record
     return (
       <GridItem key={keyExtractor(field.id, index, array)} w={'100%'} mb={10} cursor={'pointer'}>
-        <Image mb={5} w={'100%'} src={extractedFields.imageUrl} alt={extractedFields.title} />
+        <Image
+          mb={5}
+          w={'100%'}
+          src={extractedFields.imageUrl}
+          alt={extractedFields.title}
+          onContextMenu={e => e.preventDefault()}
+        />
         {renderFieldTitles(extractedFields)}
       </GridItem>
     )
@@ -197,17 +212,27 @@ export const GridModule: React.FC<Props> = props => {
     }
 
     return (
-      <ButtonsGrid
-        renderBefore={() =>
-          !allFieldsAreShown && (
-            <Button onClick={() => setShowAmount(showAmount + pageSize)}>
-              {props.component.showMoreButtonTitle}
-            </Button>
-          )
-        }
-        buttons={props.component.buttons}
-        flexDirection={undefined}
-      />
+      <div className="flex">
+        <ButtonGroup className="flex-wrap">
+          {
+            (allFieldsAreShown ? (
+              <ButtonGroupItem onClick={() => setShowAmount(showAmount + pageSize)}>
+                {props.component.showMoreButtonTitle}
+              </ButtonGroupItem>
+            ) : // typecasting as any here because the type inference became to complicated here because of the conditional rendering and we still want to enforce specific components in ButtonGroup
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            null) as any
+          }
+          {props.component.buttons.map(button => {
+            if (!button.text) return null
+            return (
+              <LinkButtonGroupItem key={button.id} href={button.url || ''}>
+                {button.text}
+              </LinkButtonGroupItem>
+            )
+          })}
+        </ButtonGroup>
+      </div>
     )
   }
 }

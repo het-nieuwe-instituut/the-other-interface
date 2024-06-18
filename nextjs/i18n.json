@@ -3,9 +3,20 @@
   "defaultLocale": "nl",
   "localeDetection": false,
   "pages": {
-    "*": ["common", "navigation"],
+    "*": ["common", "navigation", "footer"],
     "/": ["homepage", "category"],
     "/landingpage": ["category"],
-    "/detail/[category]/[id]": ["category", "record", "stories", "recordMeta", "recordMetaPublication", "recordMetaObject", "recordMetaArchive", "recordMetaPerson", "recordTable"]
-  }
+    "/detail/[category]/[id]": [
+      "category",
+      "record",
+      "stories",
+      "recordMeta",
+      "recordMetaPublication",
+      "recordMetaObject",
+      "recordMetaArchive",
+      "recordMetaPerson",
+      "recordTable"
+    ]
+  },
+  "experimental": { "appDir": true }
 }

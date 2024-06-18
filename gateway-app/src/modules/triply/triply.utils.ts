@@ -1,5 +1,5 @@
 import { CustomError } from '../util/customError'
-import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
+import { EntityNames } from '../util/entityNames.type'
 
 export class TriplyUtils {
   public static getExternalEntityNameFromUri(uri: string) {
@@ -122,68 +122,6 @@ export class TriplyUtils {
     }
   }
 
-  private static getUriForLevel2TextSearchDataAmount({
-    type,
-    isDataAmount,
-  }: {
-    type: EntityNames
-    isDataAmount: boolean
-  }) {
-    const dataAmountUri = isDataAmount ? '-Count' : ''
-
-    switch (type) {
-      case EntityNames.People:
-        return `people-textSearch${dataAmountUri}/run`
-      case EntityNames.Archives:
-        return `archives-textSearch${dataAmountUri}/run`
-      case EntityNames.Publications:
-        return `publications-textSearch${dataAmountUri}/run`
-      case EntityNames.Objects:
-        return `objects-textSearch${dataAmountUri}/run`
-      case EntityNames.Media:
-        throw CustomError.externalCritical('not a triply type')
-      case EntityNames.Stories:
-        throw CustomError.externalCritical('not a triply type')
-      case EntityNames.External:
-      default:
-        throw CustomError.externalCritical(`uri for type ${type} not implemented`)
-    }
-  }
-
-  public static getUriForLevel2Data({
-    type,
-    text,
-    isDataAmount,
-  }: {
-    type: EntityNames
-    text?: string
-    isDataAmount: boolean
-  }) {
-    if (text) {
-      return this.getUriForLevel2TextSearchDataAmount({ type, isDataAmount })
-    }
-
-    const dataAmountUri = isDataAmount ? '-count' : ''
-
-    switch (type) {
-      case EntityNames.People:
-        return `people-landingPage${dataAmountUri}/run`
-      case EntityNames.Archives:
-        return `archives-landingPage${dataAmountUri}/run`
-      case EntityNames.Publications:
-        return `publications-landingPage${dataAmountUri}/run`
-      case EntityNames.Objects:
-        return `objects-landingPage${dataAmountUri}/run`
-      case EntityNames.Media:
-        throw CustomError.externalCritical('not a triply type')
-      case EntityNames.Stories:
-        throw CustomError.externalCritical('not a triply type')
-      case EntityNames.External:
-      default:
-        throw CustomError.externalCritical(`uri for type ${type} not implemented`)
-    }
-  }
-
   public static combineObjectArray<T extends object>(results: T[]): T | null {
     const output: Partial<Record<keyof T, string>> = {}
 
@@ -199,11 +137,11 @@ export class TriplyUtils {
     return nullFlag ? null : (output as T)
   }
 
-  public static sanitizeObjectArray<T extends object>(results: T[]): T[] | null {
+  public static sanitizeObjectArray<T extends object>(results: T[], ...args: string[]): T[] | null {
     const output = results.filter(result => {
       let flag = false
       for (const r in result) {
-        if (result[r] !== null) {
+        if (result[r] !== null && !args.includes(r)) {
           flag = true
           break
         }

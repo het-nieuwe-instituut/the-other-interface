@@ -1,7 +1,7 @@
 {
   "collectionName": "components_core_publication_dates",
   "info": {
-    "displayName": "Publication Date",
+    "displayName": "Publication date",
     "description": ""
   },
   "options": {},
@@ -11,7 +11,10 @@
     },
     "displayType": {
       "type": "enumeration",
-      "enum": ["Year", "Date"],
+      "enum": [
+        "Year",
+        "Date"
+      ],
       "default": "Year"
     }
   }

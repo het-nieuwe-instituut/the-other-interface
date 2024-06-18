@@ -33,6 +33,16 @@
         "program": "${workspaceFolder}/server/node_modules/jest/bin/jest"
       },
       "cwd": "${workspaceFolder}/server"
+    },
+    {
+      "command": "npm run dev:strapi",
+      "name": "Run strapi in debug",
+      "request": "launch",
+      "type": "node-terminal",
+      "env": {
+        "DATABASE_SSL": "false",
+        "NODE_ENV": "development"
+      }
     }
   ]
 }

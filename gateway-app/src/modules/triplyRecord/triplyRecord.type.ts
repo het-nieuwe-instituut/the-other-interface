@@ -2,6 +2,7 @@ import { Field, ID, InputType, ObjectType, registerEnumType } from '@nestjs/grap
 import { Enum_Triplyrecord_Type } from '../../generated/strapi-sdk'
 import { StoryFiltersInput, StoryRelationResponseCollection } from '../story/story.type'
 import {
+  BooleanFilterInput,
   DateTimeFilterInput,
   IdFilterInput,
   ResponseCollectionMeta,
@@ -11,6 +12,7 @@ import { ArchiveZoomLevel3DetailType } from '../archives/archives.type'
 import { ObjectsZoomLevel3DetailType } from '../objects/objects.type'
 import { PublicationZoomLevel3DetailType } from '../publications/publications.type'
 import { PeopleZoomLevel3DetailType } from '../people/people.type'
+import { EntityNames } from '../util/entityNames.type'
 
 registerEnumType(Enum_Triplyrecord_Type, { name: 'Enum_Triplyrecord_Type' })
 
@@ -27,6 +29,9 @@ export class TriplyRecord {
 
   @Field(() => StoryRelationResponseCollection, { nullable: true })
   public stories?: StoryRelationResponseCollection
+
+  @Field(() => EntityNames, { nullable: false })
+  public entityName: EntityNames
 
   @Field(() => Enum_Triplyrecord_Type, { nullable: false })
   public type: Enum_Triplyrecord_Type
@@ -45,6 +50,12 @@ export class TriplyRecord {
 
   @Field(() => PeopleZoomLevel3DetailType, { nullable: true })
   public people?: PeopleZoomLevel3DetailType
+
+  @Field({ nullable: true })
+  public subject_collectionHighlights?: boolean
+
+  @Field({ nullable: true })
+  public label?: string
 }
 
 @ObjectType()
@@ -58,8 +69,8 @@ export class TriplyRecordRelationResponseCollection {
 
 @ObjectType()
 export class TriplyRecordEntity {
-  @Field(() => TriplyRecord, { nullable: true })
-  public attributes?: TriplyRecord
+  @Field(() => TriplyRecord, { nullable: false })
+  public attributes: TriplyRecord
 
   @Field(() => ID, { nullable: true })
   public id?: string
@@ -74,32 +85,38 @@ export class TriplyRecordEntityResponse {
 @InputType()
 export class TriplyRecordFiltersInput {
   @Field(() => IdFilterInput, { nullable: true })
-  public id: IdFilterInput
+  public id?: IdFilterInput
 
   @Field(() => StringFilterInput, { nullable: true })
-  public recordId: StringFilterInput
+  public recordId?: StringFilterInput
 
   @Field(() => StringFilterInput, { nullable: true })
-  public type: StringFilterInput
+  public type?: StringFilterInput
+
+  @Field(() => StringFilterInput, { nullable: true })
+  public label?: StringFilterInput
 
   @Field(() => StoryFiltersInput, { nullable: true })
-  public stories: StoryFiltersInput
+  public stories?: StoryFiltersInput
 
   @Field(() => DateTimeFilterInput, { nullable: true })
-  public createdAt: DateTimeFilterInput
+  public createdAt?: DateTimeFilterInput
 
   @Field(() => DateTimeFilterInput, { nullable: true })
-  public updatedAt: DateTimeFilterInput
+  public updatedAt?: DateTimeFilterInput
 
   @Field(() => DateTimeFilterInput, { nullable: true })
-  public publishedAt: DateTimeFilterInput
+  public publishedAt?: DateTimeFilterInput
 
   @Field(() => [TriplyRecordFiltersInput], { nullable: true })
-  public and: [TriplyRecordFiltersInput]
+  public and?: [TriplyRecordFiltersInput]
 
   @Field(() => [TriplyRecordFiltersInput], { nullable: true })
-  public or: [TriplyRecordFiltersInput]
+  public or?: [TriplyRecordFiltersInput]
 
   @Field(() => TriplyRecordFiltersInput, { nullable: true })
-  public not: TriplyRecordFiltersInput
+  public not?: TriplyRecordFiltersInput
+
+  @Field(() => BooleanFilterInput, { nullable: true })
+  public subject_collectionHighlights?: BooleanFilterInput
 }

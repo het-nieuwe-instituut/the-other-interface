@@ -1,7 +1,6 @@
 import { ObjectType, Field, createUnionType, ID, InputType, PickType } from '@nestjs/graphql'
 import { AuthorEntityResponse, AuthorFiltersInput } from '../author/author.type'
 import { LocationFiltersInput, LocationRelationResponseCollection } from '../location/location.type'
-import { ComponentModulesGridModule } from '../strapi/components/modules/gridModule'
 import {
   ComponentCorePublicationDate,
   ComponentCorePublicationDateFiltersInput,
@@ -19,7 +18,6 @@ import { ComponentModulesImageCarousel } from '../strapi/components/modules/imag
 import { ComponentModulesImage } from '../strapi/components/modules/imageModule'
 import { ComponentModulesPullquote } from '../strapi/components/modules/pullQuote'
 import { ComponentModulesSubtitle } from '../strapi/components/modules/subtitle'
-import { ComponentModulesTableModule } from '../strapi/components/modules/tableModule'
 import { ComponentModulesTextModule } from '../strapi/components/modules/textModule'
 import { ComponentModulesTitleModule } from '../strapi/components/modules/titleModule'
 import {
@@ -33,13 +31,22 @@ import {
   TriplyRecordFiltersInput,
   TriplyRecordRelationResponseCollection,
 } from '../triplyRecord/triplyRecord.type'
-import { ThemeRelationResponseCollection } from '../theme/theme.type'
+import { ThemeFiltersInput, ThemeRelationResponseCollection } from '../theme/theme.type'
 import { StoryEntityResponse } from './story.types.circular'
+import { ComponentCoreStandAloneLink } from '../strapi/components/core/standAloneLink'
+import { ComponentCoreMuxAudio } from '../strapi/components/core/muxAudio'
+import { ComponentCoreMuxVideo } from '../strapi/components/core/muxVideo'
 
 @ObjectType()
 export class StoryRelationResponseCollection {
   @Field(() => [StoryEntity], { nullable: true })
   public data?: StoryEntity[]
+}
+
+@ObjectType()
+export class StoryWithoutRelationsRelationResponseCollection {
+  @Field(() => [StoryWithoutRelationsEntity], { nullable: true })
+  public data?: StoryWithoutRelationsEntity[]
 }
 
 @ObjectType()
@@ -96,10 +103,10 @@ export class Story {
   public themes?: ThemeRelationResponseCollection
 
   @Field({ nullable: true })
-  public story?: StoryEntityResponse
+  public parent_story?: StoryEntityResponse
 
   @Field({ nullable: true })
-  public stories?: StoryRelationResponseCollection
+  public child_stories?: StoryRelationResponseCollection
 
   @Field(() => [StoryEntity], { nullable: true })
   public siblings?: StoryEntity[]
@@ -115,6 +122,7 @@ export class StoryWithoutRelations extends PickType(Story, [
   'slug',
   'title',
   'updatedAt',
+  'author',
 ] as const) {}
 
 export const StoryComponentsDynamicZone = createUnionType({
@@ -122,14 +130,15 @@ export const StoryComponentsDynamicZone = createUnionType({
   types: () =>
     [
       ComponentModulesButtonsModule,
-      ComponentModulesGridModule,
       ComponentModulesImage,
       ComponentModulesImageCarousel,
       ComponentModulesPullquote,
       ComponentModulesSubtitle,
-      ComponentModulesTableModule,
       ComponentModulesTextModule,
       ComponentModulesTitleModule,
+      ComponentCoreStandAloneLink,
+      ComponentCoreMuxAudio,
+      ComponentCoreMuxVideo,
       Error,
     ] as const,
   resolveType(value) {
@@ -142,8 +151,8 @@ export class StoryEntity {
   @Field({ nullable: true })
   public attributes?: Story
 
-  @Field(() => ID, { nullable: true })
-  public id?: string
+  @Field(() => ID)
+  public id: string
 }
 
 @ObjectType()
@@ -163,8 +172,8 @@ export class StoryWithoutRelationsEntityResponse {
 
 @ObjectType()
 export class StoryEntityResponseCollection {
-  @Field(() => StoryEntity, { nullable: true })
-  public data?: StoryEntity
+  @Field(() => [StoryEntity], { nullable: true })
+  public data?: StoryEntity[]
 
   @Field(() => ResponseCollectionMeta, { nullable: true })
   public meta: ResponseCollectionMeta
@@ -254,11 +263,14 @@ export class StoryFiltersInput {
   public triplyRecords?: TriplyRecordFiltersInput
 
   @Field(() => StoryFiltersInput, { nullable: true })
-  public stories?: StoryFiltersInput
+  public child_stories?: StoryFiltersInput
 
   @Field(() => StoryFiltersInput, { nullable: true })
-  public story?: StoryFiltersInput
+  public parent_story?: StoryFiltersInput
 
   @Field(() => StoryFiltersInput, { nullable: true })
   public siblings?: StoryFiltersInput
+
+  @Field(() => ThemeFiltersInput, { nullable: true })
+  public themes?: ThemeFiltersInput
 }

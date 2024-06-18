@@ -1,20 +1,27 @@
 import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/SearchFilterBox'
-import { CLOUD_CATEGORIES_ARRAY } from '@/features/shared/utils/categories'
+import { SEARCH_CATEGORIES_ARRAY, SearchCategory } from '@/features/shared/utils/categories'
 import { usePresenter } from './usePresenter'
+import { useFilters } from '@/features/shared/hooks/search/useFilters'
 
 export const CategorySuggestions: React.FC = () => {
   const { t, searchCategory, setSearchCategory, isCategorySuggestionsOpen } = usePresenter()
+  const { clearFilters } = useFilters()
+
+  const handleClick = (category: SearchCategory) => {
+    setSearchCategory(category)
+    clearFilters()
+  }
 
   if (!isCategorySuggestionsOpen) return null
 
   return (
     <>
-      {CLOUD_CATEGORIES_ARRAY.filter(category => category !== searchCategory).map(category => (
+      {SEARCH_CATEGORIES_ARRAY.filter(category => category !== searchCategory).map(category => (
         <SearchFilterBox
           key={category}
           category={t('category')}
           subCategory={t(category)}
-          onClick={() => setSearchCategory(category)}
+          onClick={() => handleClick(category)}
         />
       ))}
     </>

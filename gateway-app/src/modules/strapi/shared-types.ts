@@ -3,7 +3,6 @@ import { Field, Float, ID, InputType, Int, ObjectType, registerEnumType } from '
 import { PublicationState } from '../../generated/strapi-sdk'
 import { UploadFolderFiltersInput } from './shared-types-dependency'
 
-export type I18NLocaleCode = string
 @ObjectType()
 export class UploadFile {
   @Field()
@@ -470,16 +469,16 @@ export class BooleanFilterInput {
 
 @InputType()
 export class PaginationArg {
-  @Field({ nullable: true })
+  @Field(() => Int, { nullable: true })
   public limit?: number
 
-  @Field({ nullable: true })
+  @Field(() => Int, { nullable: true })
   public page?: number
 
-  @Field({ nullable: true })
+  @Field(() => Int, { nullable: true })
   public pageSize?: number
 
-  @Field({ nullable: true })
+  @Field(() => Int, { nullable: true })
   public start?: number
 }
 
@@ -786,22 +785,4 @@ export class Pagination {
 export class ResponseCollectionMeta {
   @Field(() => Pagination, { nullable: false })
   public pagination: Pagination
-}
-
-@InputType()
-export class ComponentCoreModuleLayoutsFiltersInput {
-  @Field(() => [ComponentCoreModuleLayoutsFiltersInput], { nullable: true })
-  public and?: ComponentCoreModuleLayoutsFiltersInput[]
-
-  @Field(() => ComponentCoreModuleLayoutsFiltersInput, { nullable: true })
-  public not?: ComponentCoreModuleLayoutsFiltersInput
-
-  @Field(() => [ComponentCoreModuleLayoutsFiltersInput], { nullable: true })
-  public or?: ComponentCoreModuleLayoutsFiltersInput[]
-
-  @Field(() => StringFilterInput, { nullable: true })
-  public spacingBottom?: StringFilterInput
-
-  @Field(() => StringFilterInput, { nullable: true })
-  public spacingTop?: StringFilterInput
 }

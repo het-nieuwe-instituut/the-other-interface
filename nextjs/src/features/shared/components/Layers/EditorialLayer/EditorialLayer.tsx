@@ -4,7 +4,7 @@ import {
   DynamicComponents,
 } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 import { LayerWrapper } from '../LayerWrapper'
-import { PageHeader } from '../../PageHeader/PageHeader'
+import { PageHeader } from '@/features/editorial/components/PageHeader/PageHeader'
 
 interface Props {
   title?: string | null
@@ -15,7 +15,13 @@ interface Props {
 export const EditorialLayer: React.FC<Props> = ({ title, preface, components }) => {
   return (
     <LayerWrapper
-      LeftContent={<PageHeader title={title || undefined} preface={preface || undefined} />}
+      LeftContent={
+        <PageHeader
+          title={title || undefined}
+          preface={preface || undefined}
+          constrainPreface={true}
+        />
+      }
       BottomContent={<DynamicComponentRenderer components={components} />}
     />
   )

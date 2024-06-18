@@ -4,6 +4,7 @@ export interface Config {
   APP_PORT: string
   ROLLBAR_ACCESS_TOKEN: string
   STRAPI_GRAPHQL_URL: string
+  STRAPI_URL: string
   TRIPLY_API_KEY: string
   TRIPLY_API_BASEURL: string
   SLACK_TOKEN: string

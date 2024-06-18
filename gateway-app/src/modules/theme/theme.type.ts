@@ -7,7 +7,7 @@ import {
 } from '../strapi/shared-types'
 import { Theme } from './theme-dependency.type'
 import { StoryEntity } from '../story/story.type'
-import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
+import { EntityNames } from '../util/entityNames.type'
 
 @InputType()
 export class ThemeFiltersInput {
@@ -17,17 +17,11 @@ export class ThemeFiltersInput {
   @Field(() => DateTimeFilterInput, { nullable: true })
   public createdAt?: DateTimeFilterInput
 
-  @Field(() => StringFilterInput, { nullable: true })
-  public firstName?: StringFilterInput
-
   @Field(() => IdFilterInput, { nullable: true })
   public id?: IdFilterInput
 
   @Field(() => StringFilterInput, { nullable: true })
   public insertion?: StringFilterInput
-
-  @Field(() => StringFilterInput, { nullable: true })
-  public lastName?: StringFilterInput
 
   @Field(() => ThemeFiltersInput, { nullable: true })
   public not?: ThemeFiltersInput

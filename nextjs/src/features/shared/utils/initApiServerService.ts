@@ -7,7 +7,10 @@ const initApiServerService = () => {
   const hostHeader = headersList.get('host')
   const isMockedServerCookie = nextCookies.get('isMockedServer')
 
-  return initApiClient({ hostHeader, isMockedServer: isMockedServerCookie?.value !== 'false' })
+  return initApiClient({
+    host: hostHeader,
+    isMockedServer: isMockedServerCookie?.value !== 'false',
+  })
 }
 
 export default initApiServerService

@@ -5,12 +5,21 @@
   "people": "People",
   "publications": "Publications",
   "stories": "Stories",
+  "all": "All Categories",
 
   "object": "Object",
-  "archive": "Archive",
-  "person": "Person",
+  "archive": "Archive item",
+  "person": "Person/Organisation",
   "publication": "Publication",
   "story": "Story",
   "resultsFor": "results for",
-  "noResultsFound": "No results found"
+  "noResultsFound": "No results found",
+  "clear": "Clear",
+  "suggestions": "Suggestions",
+  "searchPlaceholder": "Type your search term here",
+  "searchCategory": "Category",
+
+  "couldNotFetchHover": "Something went wrong while fetching the data for the hover. Please try again later.",
+  "errorLoadingDetail": "Something went wrong while loading. Please try again later.",
+  "errorLoadingCategoryItems": "Something went wrong while loading the category items. Please try again later."
 }

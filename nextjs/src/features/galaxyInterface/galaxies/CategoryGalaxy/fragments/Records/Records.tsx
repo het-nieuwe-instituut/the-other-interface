@@ -1,77 +1,52 @@
-import { Text, Box } from '@chakra-ui/react'
-
-import { usePresenter } from './usePresenter'
-import { Record } from '../Record'
 import { keyframes } from '@emotion/react'
+import { Record } from '../Record/Record'
+import { usePresenter } from './usePresenter'
 
-import { GALAXY_EDITORIAL_LAYER_PART } from '@/features/shared/constants/mainConstants'
-import { Loader } from '@/features/galaxyInterface/components/Loader/Loader'
-import { RecordsGrid } from '../RecordsGrid'
 import { LANDINGPAGE_Z_INDEXES } from '../../../MainGalaxy/fragments/constants'
+import { RecordsGrid } from '../RecordsGrid'
+import { SearchResultItemType } from 'src/generated/graphql'
 
 const currentPageFadeIn = keyframes({ from: { opacity: 0 }, to: { opacity: 1 } })
 const nextPageFadeIn = keyframes({ from: { opacity: 0 }, to: { opacity: 0.2 } })
 
 type Props = {
   pageAmount: number
+  records: SearchResultItemType[] | null
 }
 
-export const Records: React.FC<Props> = ({ pageAmount }) => {
+export const Records: React.FC<Props> = ({ pageAmount, records }) => {
   const {
-    isResultLoading,
     currentPositionedRecords,
-    t,
     nextPositionedRecords,
     isCurrentRecordsEmpty,
     isNextRecordsEmpty,
-  } = usePresenter(pageAmount)
-
-  if (isResultLoading) {
-    return <Loader />
-  }
-
-  if (isCurrentRecordsEmpty) {
-    return (
-      <Box width={'100%'}>
-        <Text
-          textStyle="headingTimesLarge.lg"
-          justifyItems={'flex-start'}
-          marginBottom={GALAXY_EDITORIAL_LAYER_PART}
-          color="blueAlpha.100"
-          fontSize={'74px'}
-          lineHeight={'normal'}
-        >
-          {t('noResultsFound')}.
-        </Text>
-      </Box>
-    )
-  }
+  } = usePresenter(pageAmount, records)
 
   return (
-    <Box width={'100%'} height={'100%'}>
+    <div className={'group-hover-blur size-full'}>
       <RecordsGrid
         css={{
           zIndex: LANDINGPAGE_Z_INDEXES.CURRENT_PAGE,
           animation: isCurrentRecordsEmpty ? 'none' : `${currentPageFadeIn} 300ms linear`,
         }}
       >
-        {currentPositionedRecords.map(record => (
-          <Record key={record.key} record={record} />
+        {currentPositionedRecords?.map((r, i) => (
+          <Record key={r.key} tooltipPlace={i >= 8 ? 'top' : 'bottom'} record={r} />
         ))}
       </RecordsGrid>
 
       <RecordsGrid
         css={{
           zIndex: LANDINGPAGE_Z_INDEXES.NEXT_PAGE,
-          opacity: 0.2,
-          filter: 'blur(6px)',
+          opacity: 0.3,
+          filter: 'blur(10px)',
           animation: isNextRecordsEmpty ? 'none' : `${nextPageFadeIn} 300ms linear`,
         }}
       >
-        {nextPositionedRecords.map(record => (
-          <Record key={record.key} record={record} />
+        {nextPositionedRecords?.map((r, i) => (
+          <Record key={r.key} tooltipPlace={i >= 8 ? 'top' : 'bottom'} record={r} />
         ))}
       </RecordsGrid>
-    </Box>
+    </div>
   )
 }

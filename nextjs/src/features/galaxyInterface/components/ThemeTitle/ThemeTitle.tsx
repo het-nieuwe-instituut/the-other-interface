@@ -15,7 +15,7 @@ export const ThemeTitle: React.FC<Props> = ({ title }) => {
   return (
     <Text
       position={'absolute'}
-      bottom={`calc(${GALAXY_EDITORIAL_LAYER_PART} + 9%)`}
+      bottom={`calc(${GALAXY_EDITORIAL_LAYER_PART} + 96px)`}
       left={6}
       maxWidth={'70vw'}
       isTruncated

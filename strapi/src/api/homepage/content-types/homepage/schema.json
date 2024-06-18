@@ -27,9 +27,7 @@
         "modules.text-module",
         "modules.image",
         "modules.pullquote",
-        "modules.carousel",
         "modules.subtitle",
-        "modules.table-module",
         "modules.title-module",
         "modules.image-carousel",
         "modules.buttons-module",
@@ -51,6 +49,11 @@
         }
       },
       "type": "richtext"
+    },
+    "highlightedThemes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::theme.theme"
     }
   }
 }

@@ -1,28 +1,36 @@
 import { HomepageContainer } from '@/features/pages/containers/HomepageContainer/HomepageContainer'
+import { ReduxSearchSync } from '@/features/shared/components/Redux/ReduxSearchSync'
+import { getLocaleFromParams } from '@/features/shared/helpers/getLocaleFromParams'
 import initApiServerService from '@/features/shared/utils/initApiServerService'
+import { Metadata } from 'next'
 import { draftMode } from 'next/headers'
-import { PublicationState } from '@/features/shared/types/enums'
+import { getMetaDataTranslations } from 'src/getMetaDataTranslations'
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function generateMetadata(props: any): Promise<Metadata> {
+  const { searchParams } = props
+  const lang = searchParams.lang as string
+  const metaData = getMetaDataTranslations(lang)
+
+  return {
+    title: metaData.metaTitle,
+  }
+}
 
 export default async function Page({
   searchParams,
 }: {
-  searchParams: { lang: string; page: string }
+  searchParams: Record<string, string | string[] | undefined>
 }) {
   const { isEnabled } = draftMode()
-  const { lang, page } = searchParams
+  const locale = getLocaleFromParams(searchParams)
   const api = initApiServerService()
-  const [homepage, themes, nextThemes] = await Promise.all([
-    api?.homepage({ locale: lang }),
-    api?.themes({
-      locale: lang ?? 'nl',
-      pagination: { page: parseInt(page ?? '1'), pageSize: 1 },
-      publicationState: isEnabled ? PublicationState.Preview : PublicationState.Live,
-    }),
-    api?.themes({
-      locale: lang ?? 'nl',
-      pagination: { page: parseInt(page ?? '1') + 1, pageSize: 1 },
-      publicationState: isEnabled ? PublicationState.Preview : PublicationState.Live,
-    }),
-  ])
-  return <HomepageContainer themes={themes} homepage={homepage} nextThemes={nextThemes} />
+  const homepage = await api?.homepage({ locale })
+
+  return (
+    <>
+      <ReduxSearchSync />
+      <HomepageContainer homepage={homepage} draftMode={isEnabled} />
+    </>
+  )
 }

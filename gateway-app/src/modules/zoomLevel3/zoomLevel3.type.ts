@@ -1,23 +1,20 @@
 import { ArgsType, Field, ObjectType, registerEnumType } from '@nestjs/graphql'
-import { IsOptional, IsString } from 'class-validator'
-import { EntityNames } from '../zoomLevel1/zoomLevel1.type'
-// import { PeopleZoomLevel3DetailType } from '../people/people.type'
-// import { ArchivesOtherZoomLevel3DetailType } from '../archives/archives.type'
-// import { PublicationsBookZoomLevel3DetailType } from '../publications/publications.type'
-// import { ObjectsZoomLevel3DetailType } from '../objects/objects.type'
+import { IsString } from 'class-validator'
+import { EntityNames } from '../util/entityNames.type'
 import { TriplyExternalSourceEnum } from './zoomLevel3.service'
 import { StoryEntity } from '../story/story.type'
+import { Locale } from '../util/locale.type'
 
 @ObjectType()
 export class ZoomLevel3RelationsType {
-  @Field(() => EntityNames, { nullable: true })
+  @Field(() => EntityNames)
   public type: EntityNames
 
   @Field({ nullable: true })
-  public total: number
+  public total?: number
 
   @Field(() => [String], { nullable: true })
-  public randomRelations?: string[]
+  public paginatedRelations?: string[]
 }
 
 @ObjectType()
@@ -44,80 +41,26 @@ export class BaseZoomLevel3RelatedRecordType {
   public type: EntityNames
 }
 
-// @ObjectType()
-// export class ZoomLevel3RelatedPeopleType extends IntersectionType(
-//   BaseZoomLevel3RelatedRecordType,
-//   PickType(PeopleZoomLevel3DetailType, ['name', 'birthDate', 'profession'] as const)
-// ) {
-//   @Field(() => EntityNames)
-//   public type: EntityNames
-// }
+@ObjectType()
+export class StoryCountType {
+  @Field(() => Number, { nullable: true })
+  public archives?: number
+  @Field(() => Number, { nullable: true })
+  public people?: number
+  @Field(() => Number, { nullable: true })
+  public publications?: number
+  @Field(() => Number, { nullable: true })
+  public objects?: number
+}
 
-// // TODO: pick fields after designs are made
-// @ObjectType()
-// export class ZoomLevel3RelatedArchiveType extends IntersectionType(
-//   BaseZoomLevel3RelatedRecordType,
-//   PickType(ArchivesOtherZoomLevel3DetailType, [] as const)
-// ) {
-//   @Field(() => EntityNames)
-//   public type: EntityNames
-// }
+@ObjectType()
+export class ZoomLevel3StoryRelationsCountType {
+  @Field(() => Number, { nullable: true })
+  public linkedStoryCount?: number
 
-// TODO: pick fields after designs are made
-// @ObjectType()
-// export class ZoomLevel3RelatedObjectType extends IntersectionType(
-//   BaseZoomLevel3RelatedRecordType,
-//   PickType(ObjectsZoomLevel3DetailType, [] as const)
-// ) {
-//   @Field(() => EntityNames)
-//   public type: EntityNames
-// }
-
-// TODO: pick fields after designs are made
-// @ObjectType()
-// export class ZoomLevel3RelatedPublicationType extends IntersectionType(
-//   BaseZoomLevel3RelatedRecordType,
-//   PickType(PublicationsBookZoomLevel3DetailType, [] as const)
-// ) {
-//   @Field(() => EntityNames)
-//   public type: EntityNames
-// }
-
-// @ObjectType()
-// export class ZoomLevel3RelatedRecordType {
-//   @Field(() => String)
-//   public id: string
-
-//   @Field(() => EntityNames)
-//   public type: EntityNames
-
-//   @Field(() => String, { nullable: true })
-//   public name?: string
-
-//   @Field(() => String, { nullable: true })
-//   public pidWorkURI?: string
-
-//   @Field(() => String, { nullable: true })
-//   public profession?: string
-
-//   @Field(() => String, { nullable: true })
-//   public professionLabel?: string
-
-//   @Field(() => String, { nullable: true })
-//   public birthDate?: string
-
-//   @Field(() => String, { nullable: true })
-//   public availability?: string
-
-//   @Field(() => String, { nullable: true })
-//   public date?: string
-
-//   @Field(() => String, { nullable: true })
-//   public creator?: string
-
-//   @Field(() => String, { nullable: true })
-//   public creatorLabel?: string
-// }
+  @Field(() => StoryCountType, { nullable: true })
+  public linkedTriplyRecords?: StoryCountType
+}
 
 @ArgsType()
 export class ZoomLevel3Args {
@@ -128,23 +71,19 @@ export class ZoomLevel3Args {
   @IsString()
   public id: string
 
-  @Field()
-  @IsOptional()
-  public lang?: string
+  @Field(() => Locale)
+  public locale: Locale
 }
 
-// @ArgsType()
-// export class ZoomLevel3RelatedObjectsArgs {
-//   @Field(() => EntityNames)
-//   public relatedObjectsType: EntityNames
+@ArgsType()
+export class ZoomLevel3StoryRelationsCountArgs {
+  @Field()
+  @IsString()
+  public storyId: string
 
-//   @Field(() => EntityNames)
-//   public type: EntityNames
-
-//   @Field()
-//   @IsString()
-//   public id: string
-// }
+  @Field(() => Locale)
+  public locale: Locale
+}
 
 registerEnumType(TriplyExternalSourceEnum, { name: 'TriplyExternalSourceEnum' })
 

@@ -1,14 +1,14 @@
-query ZoomLevel3ArchiveRecord($id: String!) {
-    archivesRecordZoomLevel3(id: $id) {
-        referenceCode
-        titleType
-        descriptionLevel
-        size
-        period
-        access
-        photographCreator
-        rights
-        permanentLink
-        externalSource
-    }
+query ZoomLevel3ArchiveRecord($id: String!, $locale: Locale!) {
+  archivesRecordZoomLevel3(id: $id, locale: $locale) {
+    referenceCode
+    titleType
+    descriptionLevel
+    size
+    period
+    access
+    photographCreator
+    rights
+    permanentLink
+    externalSource
+  }
 }

@@ -10,7 +10,6 @@ import { ArchivesModule } from './modules/archives/archives.module'
 import { ObjectsModule } from './modules/objects/objects.module'
 import { PeopleModule } from './modules/people/people.module'
 import { PublicationsModule } from './modules/publications/publications.module'
-import { ZoomLevel1Module } from './modules/zoomLevel1/zoomLevel1.module'
 import { ZoomLevel3Module } from './modules/zoomLevel3/zoomLevel3.module'
 import { ZoomLevel2Module } from './modules/zoomLevel2/zoomLevel2.module'
 import { HomepageModule } from './modules/homepage/homepage.module'
@@ -19,11 +18,11 @@ import { AuthorModule } from './modules/author/author.module'
 import { LocationModule } from './modules/location/location.module'
 import { LandingPageModule } from './modules/landingPage/landingPage.module'
 import { MenuPageModule } from './modules/menuPage/menuPage.module'
-import { TableModule } from './modules/table/table.module'
 import { UserModule } from './modules/user/user.module'
 import { UtilModule } from './modules/util/util.module'
 import { AuthModule } from './modules/auth/auth.module'
 import { ThemeModule } from './modules/theme/theme.module'
+import { TriplyElasticSearchModule } from './modules/triplyElasticSearch/triplyElasticSearch.module'
 
 @Module({
   imports: [
@@ -37,7 +36,7 @@ import { ThemeModule } from './modules/theme/theme.module'
       driver: ApolloDriver,
       autoSchemaFile: true,
       debug: true,
-      playground: false,
+      playground: process.env.ENV === 'development',
       buildSchemaOptions: {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         dateScalarMode: 'Date' as any,
@@ -48,16 +47,15 @@ import { ThemeModule } from './modules/theme/theme.module'
     ObjectsModule,
     PeopleModule,
     PublicationsModule,
-    ZoomLevel1Module,
     ZoomLevel2Module,
     ZoomLevel3Module,
     TriplyRecordModule,
+    TriplyElasticSearchModule,
     AuthorModule,
     LocationModule,
     HomepageModule,
     LandingPageModule,
     MenuPageModule,
-    TableModule,
     UserModule,
     ThemeModule,
   ],

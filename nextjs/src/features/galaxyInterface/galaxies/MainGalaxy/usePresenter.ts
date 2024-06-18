@@ -13,5 +13,6 @@ export const usePresenter = (totalPages: number) => {
   return {
     increasePageNumber,
     decreasePageNumber,
+    isSearchModeActive,
   }
 }

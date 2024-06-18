@@ -44,9 +44,10 @@
         "modules.title-module",
         "modules.image-carousel",
         "modules.image",
-        "modules.table-module",
         "modules.buttons-module",
-        "modules.grid-module"
+        "core.stand-alone-link",
+        "core.mux-audio",
+        "core.mux-video"
       ],
       "pluginOptions": {
         "i18n": {
@@ -126,17 +127,17 @@
       "target": "api::theme.theme",
       "inversedBy": "stories"
     },
-    "stories": {
+    "child_stories": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::story.story",
-      "mappedBy": "story"
+      "mappedBy": "parent_story"
     },
-    "story": {
+    "parent_story": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::story.story",
-      "inversedBy": "stories"
+      "inversedBy": "child_stories"
     }
   }
 }

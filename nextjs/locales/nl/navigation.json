@@ -26,5 +26,8 @@
   "detail": "Detail",
 
   "page": "Pagina",
-  "of": "van"
+  "of": "van",
+  "theme": "Thema",
+
+  "errorLoadingThemes": "Er is iets misgegaan bij het laden van thema's. Probeer het later opnieuw."
 }

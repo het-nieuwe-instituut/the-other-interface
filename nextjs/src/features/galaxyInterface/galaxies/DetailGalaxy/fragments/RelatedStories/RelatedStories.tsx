@@ -1,24 +1,36 @@
-import { Grid, GridItem } from '@chakra-ui/react'
 import { DetailedRecord } from '../DetailedRecord'
-import { usePresenter } from './usePresenter'
 import { Record } from '../Record/Record'
+import { AllRelationTotalsType } from '../RelatedCategory'
+import { useRelatedStories } from './useRelatedStories'
 
 interface Props {
-  gridRow: string
+  allRelationTotals?: AllRelationTotalsType
 }
 
-export const RelatedStories: React.FC<Props> = ({ gridRow }) => {
-  const { positionedStories } = usePresenter()
+export const RelatedStories: React.FC<Props> = ({ allRelationTotals }) => {
+  const { positionedStories, nextPositionedStories } = useRelatedStories(allRelationTotals)
 
   return (
-    <GridItem gridRow={gridRow} gridColumn="2" color="white">
-      <Grid height="100%" templateColumns="repeat(2, 1fr)" templateRows="repeat(4, 1fr)">
-        {positionedStories.map(story => (
-          <Record key={story.id} record={story} />
-        ))}
+    <>
+      <div className="z-20 col-start-2 col-end-2 row-start-1 row-end-3 text-white">
+        <div className="grid h-full grid-cols-2 grid-rows-4">
+          {positionedStories.map(story => (
+            <Record key={story.id} record={story} />
+          ))}
 
-        <DetailedRecord gridRow="2 / 4" gridColumn="1 / 3" />
-      </Grid>
-    </GridItem>
+          <DetailedRecord gridRow="2 / 4" gridColumn="1 / 3" />
+        </div>
+      </div>
+
+      <div className=" pointer-events-none z-20 col-start-2 col-end-2 row-start-1 row-end-3 text-white opacity-20 blur-[6px]">
+        <div className="grid h-full grid-cols-2 grid-rows-4">
+          {nextPositionedStories.map(story => (
+            <Record key={story.id} record={story} tabIndex={-1} />
+          ))}
+
+          <DetailedRecord gridRow="2 / 4" gridColumn="1 / 3" />
+        </div>
+      </div>
+    </>
   )
 }

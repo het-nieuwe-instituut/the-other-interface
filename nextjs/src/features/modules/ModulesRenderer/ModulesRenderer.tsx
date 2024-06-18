@@ -1,10 +1,12 @@
-import { Box, useTheme } from '@chakra-ui/react'
 import {
-  ComponentModulesButtonsModule,
-  ComponentModulesCarousel,
+  ImageCarousel,
+  ImageCarouselItem,
+} from '@/features/ui/components/image-carousel/ImageCarousel'
+import { Title } from '@/features/ui/components/title/Title'
+import { cn } from '@/features/ui/utils/cn'
+import { StandaloneLink } from 'src/app/ks/link/StandaloneLink'
+import {
   ComponentModulesGridModule,
-  ComponentModulesImage,
-  ComponentModulesImageCarousel,
   HomepageComponentsDynamicZone,
   HomepageQuery,
   LandingpageBySlugQuery,
@@ -12,18 +14,15 @@ import {
   MenupageComponentsDynamicZone,
   StoryByIdQuery,
 } from 'src/generated/graphql'
-import { ButtonsModule } from '../components/ButtonsModule/ButtonsModule'
+import { Paragraph } from '../../ui/components/Paragraph/Paragraph'
+import { ButtonGroup, LinkButtonGroupItem } from '../../ui/components/button-group/component'
+import { Subtitle } from '../../ui/components/subtitle/Subtitle'
 import { GridModule } from '../components/GridModule/GridModule'
-import MediaImage from '../components/Image/Image'
+import { ImageModuleWrapper } from '../components/ImageModuleWrapper'
 import { Pullquote } from '../components/Pullquote/Pullquote'
-import { SubtitleModule } from '../components/SubtitleModule/SubtitleModule'
-import { TableModule } from '../components/TableModule/TableModule'
-import { TextModule } from '../components/TextModule/TextModule'
-import { Title } from '../components/Title/Title'
-import { CarouselModule } from '../components/carousels/Carousel/Carousel'
-import { ImageCarousel } from '../components/carousels/ImageCarousel/ImageCarousel'
-import { tableMapper } from './tableMapper'
-import { mapUploadFileEntitiesToStoryImageInfo } from '../components/carousels/ImageCarousel/imageCarouselStrapiDataMapper'
+import { MuxAudioPlayer } from '@/features/ui/components/mux-audio/MuxAudioPlayer'
+import { MuxVideoPlayer } from '@/features/ui/components/mux-video/MuxVideoPlayer'
+import ErrorBox from '@/features/shared/components/Error/ErrorBox'
 
 interface Props {
   components: DynamicComponents
@@ -40,15 +39,15 @@ export type DynamicComponents =
   | Maybe<Array<MenupageComponentsDynamicZone>>
 
 export function DynamicComponentRenderer({ components, isStoryPage = false }: Props) {
-  const theme = useTheme()
   const hasComponents = (components || []).length > 0
 
   return (
-    <Box
-      maxW={theme.breakpoints.xl}
-      marginX={'auto'}
-      px={isStoryPage ? 0 : 6}
-      pt={hasComponents ? 'Xl' : 0}
+    <div
+      className={cn(
+        'px-6 pt-0 flex flex-col gap-[40px]',
+        isStoryPage && 'px-0',
+        hasComponents && 'pt-10'
+      )}
     >
       {/* {[...[componentMock, componentMock2, componentMock3], ...(props.components || [])].map( */}
       {[...(components || [])].map((component, index, array) => {
@@ -56,69 +55,125 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
 
         if (typeName) {
           if (component?.__typename === 'ComponentModulesTextModule') {
+            if (!component.Richtext) {
+              return null
+            }
             return (
-              <TextModule key={keyExtractor(component.id, index, array)} component={component} />
+              <Paragraph key={keyExtractor(component.id, index, array)}>
+                {component.Richtext}
+              </Paragraph>
             )
           }
 
           if (component?.__typename === 'ComponentModulesPullquote') {
+            if (!component.text) {
+              return null
+            }
             return (
-              <Pullquote key={keyExtractor(component.id, index, array)} component={component} />
+              <Pullquote key={keyExtractor(component.id, index, array)}>{component.text}</Pullquote>
             )
           }
 
           if (component?.__typename === 'ComponentModulesImage') {
             return (
-              <MediaImage
+              <ImageModuleWrapper
                 key={keyExtractor(component.id, index, array)}
-                component={component as ComponentModulesImage}
+                component={component}
               />
             )
           }
 
           if (component?.__typename === 'ComponentModulesImageCarousel') {
             return (
-              <ImageCarousel
-                key={keyExtractor(component.id, index, array)}
-                images={mapUploadFileEntitiesToStoryImageInfo(
-                  component as ComponentModulesImageCarousel
-                )}
-              />
+              <ImageCarousel key={keyExtractor(component.id, index, array)}>
+                {component.images?.data?.map(item => {
+                  const attributes = item?.attributes
+
+                  if (!attributes || !attributes.height || !attributes.width) {
+                    return null
+                  }
+                  return (
+                    <ImageCarouselItem
+                      key={item.id}
+                      src={attributes.url}
+                      // TODO: add alt text instead of caption
+                      alt={attributes.caption ?? ''}
+                      caption={attributes.caption ?? undefined}
+                    />
+                  )
+                }) ?? []}
+              </ImageCarousel>
             )
           }
 
           if (component?.__typename === 'ComponentModulesSubtitle') {
-            return <SubtitleModule key={component.id} component={component} />
-          }
+            const nextComponent = array.at(index + 1)
+            // we need to adjust for 16px between components like text module
+            const shouldAdjustForNextComponent = nextComponent?.__typename
+              ? ['ComponentModulesTextModule'].includes(nextComponent?.__typename)
+              : false
+            if (!component.text) {
+              return null
+            }
 
-          if (component?.__typename === 'ComponentModulesTableModule') {
-            const tableValues = tableMapper(component)
             return (
-              <TableModule key={keyExtractor(component.id, index, array)} component={tableValues} />
+              <Subtitle key={component.id} className={cn(shouldAdjustForNextComponent && '-mb-8')}>
+                {component.text}
+              </Subtitle>
             )
           }
 
           if (component?.__typename === 'ComponentModulesTitleModule') {
-            return <Title key={keyExtractor(component.id, index, array)} component={component} />
+            const nextComponent = array.at(index + 1)
+            // we need to adjust for 16px between components like text module
+            const shouldAdjustForNextComponent = nextComponent?.__typename
+              ? ['ComponentModulesTextModule'].includes(nextComponent?.__typename)
+              : false
+
+            const title = component.Title
+
+            if (!title) {
+              return null
+            }
+            return (
+              <Title
+                className={cn(shouldAdjustForNextComponent && '-mb-8')}
+                key={keyExtractor(component.id, index, array)}
+              >
+                {title}
+              </Title>
+            )
           }
 
           if (component?.__typename === 'ComponentModulesButtonsModule') {
+            if (!component.buttons || component.buttons?.length === 0) {
+              return null
+            }
             return (
-              <ButtonsModule
-                key={keyExtractor(component.id, index, array)}
-                component={component as ComponentModulesButtonsModule}
-              />
+              <ButtonGroup key={keyExtractor(component.id, index, array)}>
+                {component.buttons.map(button => {
+                  if (!button.text || !button.url) {
+                    return null
+                  }
+                  return (
+                    <LinkButtonGroupItem key={button.id} href={button.url}>
+                      {button.text}
+                    </LinkButtonGroupItem>
+                  )
+                })}
+              </ButtonGroup>
             )
           }
 
-          if (component?.__typename === 'ComponentModulesCarousel') {
-            return (
-              <CarouselModule
-                key={keyExtractor(component.id, index, array)}
-                component={component as ComponentModulesCarousel}
-              />
-            )
-          }
+          // TODO: uncomment after component is connected to collections again
+          //   if (component?.__typename === 'ComponentModulesCarousel') {
+          //     return (
+          //       <CarouselModule
+          //         key={keyExtractor(component.id, index, array)}
+          //         component={component as ComponentModulesCarousel}
+          //       />
+          //     )
+          //   }
 
           if (component?.__typename === 'ComponentModulesGridModule') {
             return (
@@ -128,10 +183,65 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
               />
             )
           }
+
+          if (component?.__typename === 'ComponentCoreStandAloneLink') {
+            const href =
+              (!component.attachment?.data
+                ? component.url
+                : component.attachment.data?.attributes?.url) ?? undefined
+
+            const variant = component.attachment?.data ? 'download' : 'link'
+
+            if (!href) return null
+            return (
+              <StandaloneLink href={href} variant={variant} key={component.id}>
+                {component.label}
+              </StandaloneLink>
+            )
+          }
+          if (component?.__typename === 'ComponentCoreMuxAudio') {
+            if (
+              !component.muxAudioRelation?.data?.attributes?.playback_id ||
+              !component.muxAudioRelation?.data?.attributes?.title
+            )
+              return <ErrorBox key={keyExtractor(component.id, index, array)} />
+
+            return (
+              <MuxAudioPlayer
+                isReady={component.muxAudioRelation?.data?.attributes?.isReady}
+                title={component.muxAudioRelation?.data?.attributes?.title}
+                playbackId={component.muxAudioRelation?.data?.attributes?.playback_id}
+                caption={component.caption}
+                key={keyExtractor(component.id, index, array)}
+              />
+            )
+          }
+
+          if (component?.__typename === 'ComponentCoreMuxVideo') {
+            if (
+              !component.muxVideoRelation?.data?.attributes?.playback_id ||
+              !component.muxVideoRelation?.data?.attributes?.title
+            )
+              return <ErrorBox key={keyExtractor(component.id, index, array)} />
+
+            return (
+              <MuxVideoPlayer
+                isReady={component.muxVideoRelation?.data?.attributes?.isReady}
+                title={component.muxVideoRelation?.data?.attributes?.title}
+                playbackId={component.muxVideoRelation?.data?.attributes?.playback_id}
+                caption={component.caption}
+                aspectRatio={
+                  component.muxVideoRelation?.data?.attributes?.aspect_ratio?.replace(':', ' / ') ??
+                  '16 / 9'
+                }
+                key={keyExtractor(component.id, index, array)}
+              />
+            )
+          }
         }
         return null
       }) ?? null}
-    </Box>
+    </div>
   )
 }
 

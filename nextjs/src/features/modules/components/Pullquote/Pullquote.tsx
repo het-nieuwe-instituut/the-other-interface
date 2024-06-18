@@ -1,21 +1,17 @@
-import { Box, Text as ChakraText } from '@chakra-ui/react'
-
-import { ComponentModulesPullquote } from 'src/generated/graphql'
-import { modulesSpacingMapper } from '../../modulesSpacing'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
+import { cn } from '@/features/ui/utils/cn'
 
 interface Props {
-  component: ComponentModulesPullquote
+  className?: string
+  children: string
 }
 
-export const Pullquote: React.FC<Props> = props => {
+export const Pullquote: React.FC<Props> = ({ children, className }) => {
   return (
-    <Box
-      width="100%"
-      backgroundColor={'inherit'}
-      pt={modulesSpacingMapper?.Pullquote.spacingTop}
-      pb={modulesSpacingMapper?.Pullquote.spacingBottom}
-    >
-      <ChakraText textStyle={'pullquote'}>{props.component.text}</ChakraText>
-    </Box>
+    <aside className={cn('w-full bg-inherit', className)}>
+      <blockquote>
+        <p className={TypographyVariants({ impact: 'md' })}>“{children}”</p>
+      </blockquote>
+    </aside>
   )
 }

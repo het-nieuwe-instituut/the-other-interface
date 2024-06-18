@@ -7,7 +7,7 @@ import {
   PublicationsAudioVisualResolver,
   PublicationsBookResolver,
   PublicationsSerialResolver,
-  PublicationZoomLevel3Resolver,
+  PublicationsZoomLevelRecordHoverResolver,
 } from './publications.resolver'
 import { PublicationsService } from './publications.service'
 
@@ -15,23 +15,23 @@ import { PublicationsService } from './publications.service'
   imports: [forwardRef(() => ZoomLevel3Module)],
   providers: [
     PublicationsService,
-    PublicationZoomLevel3Resolver,
     PublicationsAudioVisualResolver,
     PublicationsArticleResolver,
     PublicationsBookResolver,
     PublicationsSerialResolver,
     PublicationAuthorResolver,
     PublicationRelationsZoomLevel3Resolver,
+    PublicationsZoomLevelRecordHoverResolver,
   ],
   exports: [
     PublicationsService,
-    PublicationZoomLevel3Resolver,
     PublicationsAudioVisualResolver,
     PublicationsArticleResolver,
     PublicationsBookResolver,
     PublicationsSerialResolver,
     PublicationAuthorResolver,
     PublicationRelationsZoomLevel3Resolver,
+    PublicationsZoomLevelRecordHoverResolver,
   ],
 })
 export class PublicationsModule {}

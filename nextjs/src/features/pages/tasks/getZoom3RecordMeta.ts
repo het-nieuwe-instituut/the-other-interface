@@ -1,13 +1,14 @@
 import { Category } from '@/features/shared/utils/categories'
-import { Sdk } from 'src/generated/graphql'
+import { Locale, Sdk } from 'src/generated/graphql'
 import { PublicationState } from '@/features/shared/types/enums'
 import { zoom3RecordMetaConfig } from './zoom3RecordMetaConfig'
 
 type Payload =
   | {
       id: string
+      locale: Locale
     }
-  | { locale?: string | null; publicationState: PublicationState; id: string }
+  | { locale: Locale; publicationState: PublicationState; id: string }
 
 export async function getZoom3RecordMeta(type: Category, payload: Payload, api: Sdk) {
   try {

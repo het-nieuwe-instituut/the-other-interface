@@ -1,0 +1,37 @@
+---
+- hosts: app
+  gather_facts: no
+  become: yes
+  become_user: root
+  become_method: sudo
+  vars_prompt:
+    - name: backup_prefix
+      prompt: Give the backup prefix (relative from bucket root)?
+      private: no
+
+  tasks:
+    - name: start postgres backup container
+      docker_container:
+        name: postgres-backup-temp
+        image: lifely/postgres-backup-container:latest
+        pull: true
+        state: started
+        cleanup: true
+        detach: false
+        env:
+          AWS_S3_BACKUP_NAME: postgres
+          AWS_S3_PREFIX: "{{ backup_prefix }}"
+          AWS_S3_BUCKET: "{{ app.backups.aws.bucket }}"
+          AWS_ACCESS_KEY_ID: "{{ app.backups.aws.access_key_id }}"
+          AWS_SECRET_ACCESS_KEY: "{{ app.backups.aws.access_key_secret }}"
+          AWS_SSE_KEY: "{{ app.backups.aws.sse_key }}"
+          AWS_REGION: "{{ app.backups.aws.region }}"
+          POSTGRES_HOST: "{{ app.db.host }}"
+          POSTGRES_PORT: "{{ app.db.port }}"
+          POSTGRES_USER: "{{ app.db.username }}"
+          POSTGRES_PASSWORD: "{{ app.db.password }}"
+          POSTGRES_DB: "{{ app.db.name }}"
+          POSTGRES_EXTRA_OPTS: --clean
+
+    - name: show information
+      debug: msg="Backuped postgres"

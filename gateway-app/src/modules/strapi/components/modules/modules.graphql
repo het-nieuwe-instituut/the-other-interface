@@ -1,6 +1,5 @@
 fragment ComponentModulesButtonsModuleFragment on ComponentModulesButtonsModule {
     id
-    buttonStyle
     __typename
     buttons {
         ...ComponentCoreButtonFragment
@@ -9,15 +8,16 @@ fragment ComponentModulesButtonsModuleFragment on ComponentModulesButtonsModule 
 
 fragment ComponentModulesCarouselFragment on ComponentModulesCarousel {
     id
-    buttonText
-    buttonUrl
     description
     __typename
-    items {
-        ...ComponentCoreCarouselItemFragment
-    }
     title
-    type
+    variant
+    images {
+        ...ComponentCoreCarouselImageFragment
+    }
+    explore_collection_button {
+        ...ComponentCoreButtonFragment
+    }
 }
 
 fragment ComponentModulesImageCarouselFragment on ComponentModulesImageCarousel {
@@ -26,9 +26,6 @@ fragment ComponentModulesImageCarouselFragment on ComponentModulesImageCarousel 
     __typename
     images {
         ...UploadFileRelationResponseCollectionFragment
-    }
-    items {
-        ...ComponentCoreImageCarouselItemFragment
     }
 }
 
@@ -62,14 +59,6 @@ fragment ComponentModulesSubtitleFragment on ComponentModulesSubtitle {
     id
     __typename
     text
-}
-
-fragment ComponentModulesTableModuleFragment on ComponentModulesTableModule {
-    id
-    __typename
-    table {
-        ...TableEntityResponseFragment
-    }
 }
 
 fragment ComponentModulesTextModuleFragment on ComponentModulesTextModule {

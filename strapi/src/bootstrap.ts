@@ -57,8 +57,8 @@ export default async () => {
   const advancedUserPermissionsConfig = await userPermissionsPluginStore.get({
     key: 'advanced',
   })
-  if (advancedUserPermissionsConfig && advancedUserPermissionsConfig.allow_register === true) {
-    advancedUserPermissionsConfig.allow_register = false
+  if (advancedUserPermissionsConfig && advancedUserPermissionsConfig['allow_register'] === true) {
+    advancedUserPermissionsConfig['allow_register'] = false
     await userPermissionsPluginStore.set({
       key: 'advanced',
       value: advancedUserPermissionsConfig,

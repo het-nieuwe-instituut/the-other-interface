@@ -1,7 +1,8 @@
 import { HttpService } from '@nestjs/axios'
 import { Injectable } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
-import { lastValueFrom } from 'rxjs'
+import { catchError, lastValueFrom, map } from 'rxjs'
+import { Config } from 'src/config/config'
 import { PaginationArgs } from '../util/paginationArgs.type'
 import { RollbarService } from '../util/rollbar.service'
 
@@ -40,22 +41,15 @@ export class TriplyService {
   private readonly baseQueryPath: string
 
   public constructor(
-    configService: ConfigService,
+    private configService: ConfigService<Config>,
     private readonly httpService: HttpService,
     private readonly rollbarService: RollbarService
   ) {
-    this.endpointBaseURL = configService.getOrThrow('TRIPLI_API_BASEURL')
+    this.endpointBaseURL = configService.getOrThrow('TRIPLY_API_BASEURL')
     this.apiKey = configService.getOrThrow('TRIPLY_API_KEY')
-    this.baseQueryPath = ''
     const env = configService.getOrThrow('ENV')
-
-    if (env === 'development' || env === 'staging') {
-      this.baseQueryPath = '/queries/the-other-interface-testing'
-    } else if (env === 'acceptance') {
-      this.baseQueryPath = '/queries/the-other-interface-acceptance'
-    } else {
-      this.baseQueryPath = '/queries/the-other-interface'
-    }
+    this.baseQueryPath =
+      env !== 'production' ? '/queries/the-other-interface-testing' : '/queries/the-other-interface'
   }
 
   private defaultPage = '1'
@@ -86,17 +80,25 @@ export class TriplyService {
       }
     }
 
-    const res = await this.fetch<ReturnDataType>(endpoint)
-    this.checkResponseType(res.data, keysToVerify)
+    const data = await this.fetch<ReturnDataType>(endpoint)
+    this.checkResponseType(data, keysToVerify)
 
-    return res
+    return { data }
   }
 
   private fetch<ReturnDataType>(endpoint: URL) {
     const headers = { Authorization: `Bearer ${this.apiKey}` }
     const res = this.httpService.get<ReturnDataType[]>(endpoint.toString(), { headers })
 
-    return lastValueFrom(res)
+    return lastValueFrom(
+      res.pipe(
+        catchError(err => {
+          console.error(err)
+          return []
+        }),
+        map(res => res.data)
+      )
+    )
   }
 
   private getEndpointForArg(endpointArg: string) {
