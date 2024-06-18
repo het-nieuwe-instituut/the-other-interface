@@ -2240,10 +2240,15 @@ export type SearchBySelectedHighlightsQueryVariables = Exact<{
   filters?: InputMaybe<TriplyRecordFiltersInput>;
   page?: InputMaybe<Scalars['Int']['input']>;
   pageSize?: InputMaybe<Scalars['Int']['input']>;
+  isArchive: Scalars['Boolean']['input'];
+  isPerson: Scalars['Boolean']['input'];
+  isPublication: Scalars['Boolean']['input'];
+  isObject: Scalars['Boolean']['input'];
+  locale: Locale;
 }>;
 
 
-export type SearchBySelectedHighlightsQuery = { __typename?: 'Query', triplyRecords: { __typename?: 'TriplyRecordRelationResponseCollection', data: Array<{ __typename?: 'TriplyRecordEntity', id?: string | null, attributes: { __typename?: 'TriplyRecord', label?: string | null, entityName: EntityNames, recordId: string } }>, meta?: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', page: number, total: number } } | null } };
+export type SearchBySelectedHighlightsQuery = { __typename?: 'Query', triplyRecords: { __typename?: 'TriplyRecordRelationResponseCollection', data: Array<{ __typename?: 'TriplyRecordEntity', id?: string | null, attributes: { __typename?: 'TriplyRecord', label?: string | null, entityName: EntityNames, recordId: string, archive?: { __typename?: 'ArchiveZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null } | null, people?: { __typename?: 'PeopleZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null } | null, publication?: { __typename?: 'PublicationZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null } | null, object?: { __typename?: 'ObjectsZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null } | null } }>, meta?: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', page: number, total: number } } | null } };
 
 export type Zoom2QueryVariables = Exact<{
   entityName: EntityNames;
@@ -3614,7 +3619,7 @@ export const PublicationsZoomRecordHoverDocument = gql`
 }
     `;
 export const SearchBySelectedHighlightsDocument = gql`
-    query searchBySelectedHighlights($filters: TriplyRecordFiltersInput, $page: Int, $pageSize: Int) {
+    query searchBySelectedHighlights($filters: TriplyRecordFiltersInput, $page: Int, $pageSize: Int, $isArchive: Boolean!, $isPerson: Boolean!, $isPublication: Boolean!, $isObject: Boolean!, $locale: Locale!) {
   triplyRecords(filters: $filters, pagination: {page: $page, pageSize: $pageSize}) {
     data {
       id
@@ -3622,6 +3627,26 @@ export const SearchBySelectedHighlightsDocument = gql`
         label
         entityName
         recordId
+        archive(locale: $locale) @include(if: $isArchive) {
+          id
+          title
+          thumbnail
+        }
+        people(locale: $locale) @include(if: $isPerson) {
+          id
+          title
+          thumbnail
+        }
+        publication(locale: $locale) @include(if: $isPublication) {
+          id
+          title
+          thumbnail
+        }
+        object(locale: $locale) @include(if: $isObject) {
+          id
+          title
+          thumbnail
+        }
       }
     }
     meta {
@@ -4146,7 +4171,7 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     PublicationsZoomRecordHover(variables: PublicationsZoomRecordHoverQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<PublicationsZoomRecordHoverQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<PublicationsZoomRecordHoverQuery>(PublicationsZoomRecordHoverDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'PublicationsZoomRecordHover', 'query');
     },
-    searchBySelectedHighlights(variables?: SearchBySelectedHighlightsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<SearchBySelectedHighlightsQuery> {
+    searchBySelectedHighlights(variables: SearchBySelectedHighlightsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<SearchBySelectedHighlightsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<SearchBySelectedHighlightsQuery>(SearchBySelectedHighlightsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'searchBySelectedHighlights', 'query');
     },
     Zoom2(variables: Zoom2QueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom2Query> {

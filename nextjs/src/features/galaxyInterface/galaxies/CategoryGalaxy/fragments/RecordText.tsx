@@ -13,7 +13,15 @@ export const RecordText: React.FC<Props> = ({ title = '', categoryType, css }) =
   const { t } = useLooseTypeSafeTranslation('category')
 
   return (
-    <Flex w="100%" color="blueAlpha.100" css={css} direction="column" flex="1" mt={2}>
+    <Flex
+      w="100%"
+      color="blueAlpha.100"
+      overflow={'hidden'}
+      css={css}
+      direction="column"
+      maxW={'210px'}
+      mt={2}
+    >
       <Text
         align="center"
         isTruncated

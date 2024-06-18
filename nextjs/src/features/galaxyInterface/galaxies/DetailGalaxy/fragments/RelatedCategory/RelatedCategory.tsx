@@ -46,8 +46,8 @@ export const RelatedCategory: React.FC<Props> = ({
         gridColumn={gridColumn}
         css={{
           zIndex: 10,
-          opacity: 0.2,
-          filter: 'blur(6px)',
+          opacity: 0.3,
+          filter: 'blur(10px)',
         }}
       >
         <Grid height="100%" templateColumns="repeat(2, 1fr)" templateRows="repeat(2, 1fr)">

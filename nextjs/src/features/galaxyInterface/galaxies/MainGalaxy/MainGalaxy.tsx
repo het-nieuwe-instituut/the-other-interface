@@ -123,7 +123,7 @@ export const MainGalaxy = () => {
             <GalaxyPagination
               currentPageNumber={pagination?.page || 0}
               pageAmount={pagination?.pageCount || 0}
-              isResultAmountLoading={false}
+              isResultAmountLoading={isMainLoading}
               handleLeftClick={decreasePageNumber}
               handleRightClick={increasePageNumber}
               isResultEmpty={stories.length === 0}

@@ -30,8 +30,13 @@ export const FilterInput: React.FC<Props> = ({
         boxShadow: 'none',
         border: 'none',
       }}
+      sx={{
+        '::placeholder': {
+          color: 'pinkAlpha.50',
+        },
+      }}
       height="100%"
-      className="font-social-large text-xl"
+      className="placeholder:font-social-large font-social-large  text-pink.50 pt-[6px] text-xl"
     />
   )
 }

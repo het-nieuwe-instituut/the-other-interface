@@ -10,6 +10,6 @@
 }
 .group-hover-blur:has(.group-hover-blur-item:hover)
   .group-hover-blur-item:not(.group-hover-blur-item:hover) {
-  filter: blur(6px);
-  opacity: 0.2;
+  filter: blur(10px);
+  opacity: 0.3;
 }
