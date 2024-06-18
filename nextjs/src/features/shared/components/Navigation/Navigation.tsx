@@ -3,7 +3,6 @@ import { StaticHeader } from '../StaticHeader/StaticHeader'
 import { Fonts, useNavSettings } from './useNavSettings'
 import useTranslation from 'next-translate/useTranslation'
 import { cn } from '@/features/ui/utils/cn'
-import { CSSProperties } from 'react'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { NavLinkButton } from '@/features/ui/components/nav-link-button/component'
 import Link from 'next/link'
@@ -18,30 +17,23 @@ const categories = [
 ]
 
 export const Navigation = () => {
-  const { isMenuOpen, ref, navTextStyle, overflowValue, lang } = useNavSettings()
+  const { isMenuOpen, ref, navTextStyle, lang } = useNavSettings()
   const { t: tNavigation } = useTranslation('navigation')
   const dispatch = useDispatch()
 
   return (
     <div
-      style={
-        {
-          '--overflow': overflowValue,
-        } as CSSProperties
-      }
       className={cn(
-        isMenuOpen ? 'visible' : 'invisible',
-        'fixed right-0 top-0 h-screen w-full z-[9998]',
         isMenuOpen
-          ? 'transition-opacity ease-out duration-300 opacity-95'
-          : 'transition-opacity ease-in duration-300 opacity-0',
-        'overflow-[var(----overflow)] bg-blue-95 backdrop-blur-3xl'
+          ? 'visible transition-opacity ease-out duration-300 opacity-95'
+          : 'invisible transition-opacity ease-in duration-300 opacity-0',
+        'fixed right-0 top-0 h-screen w-full z-[9998] md:overflow-hidden overflow-y-scroll bg-blue-95 backdrop-blur-3xl'
       )}
       ref={ref}
     >
       <div className="absolute left-0 top-0 h-screen w-full">
         <StaticHeader />
-        <div className="relative z-[MAX_Z_INDEX] mx-auto flex max-w-[90em] justify-between px-6 pt-24">
+        <div className="relative z-[9999] mx-auto flex max-w-[90em] flex-col justify-between px-6 pt-24 md:flex-row">
           <div className="flex min-w-[388px] max-w-[711px] flex-col pb-20 pr-[32px]">
             <p
               className={TypographyVariants({
@@ -52,7 +44,6 @@ export const Navigation = () => {
               {tNavigation('explore_collection')}
             </p>
             {categories.map(category => (
-              // need this textStyle={navTextStyle} to change depend on where you are
               <Link
                 onClick={() => closeMenu()}
                 className={cn(
@@ -91,7 +82,7 @@ export const Navigation = () => {
                 {tNavigation('aboutDescription')}
               </p>
               <NavLinkButton
-                href={'/'}
+                href={'/readmore'}
                 variant={'menuPrimary'}
                 color={'invertedPaleHover'}
                 onClick={() => closeMenu()}
