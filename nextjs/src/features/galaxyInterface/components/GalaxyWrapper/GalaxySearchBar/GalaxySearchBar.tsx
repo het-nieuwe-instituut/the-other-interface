@@ -50,7 +50,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }
 
   return (
     <Grid
-      className={cn(className, 'px-4')}
+      className={cn(className, 'pl-4')}
       position="relative"
       height={'auto'}
       templateColumns={'160px minmax(20px, 1fr) minmax(95px, auto)'}
