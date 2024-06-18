@@ -494,9 +494,6 @@ fragment StoryFragment on StoryEntity {
       }
     }
     locale
-    storyLinks {
-      ...ComponentModulesButtonsModuleFragment
-    }
     parent_story {
       data {
         id
@@ -598,9 +595,6 @@ fragment StoryMetaFragment on StoryEntity {
       data {
         ...BaseTriplyRecordFragment
       }
-    }
-    storyLinks {
-      ...ComponentModulesButtonsModuleFragment
     }
     parent_story {
       data {
@@ -757,9 +751,6 @@ fragment LocalizedStoryMetaFragment on StoryEntity {
       data {
         ...StoryMetaFragment
       }
-    }
-    storyLinks {
-      ...ComponentModulesButtonsModuleFragment
     }
   }
 }

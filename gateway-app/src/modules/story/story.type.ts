@@ -9,11 +9,6 @@ import {
   ComponentCoreTimeframe,
   ComponentCoreTimeframeFiltersInput,
 } from '../strapi/components/core/timeframe'
-
-import {
-  ComponentModulesButtonsModule,
-  ComponentModulesButtonsModuleFiltersInput,
-} from '../strapi/components/modules/buttonsModule'
 import { ComponentModulesImageCarousel } from '../strapi/components/modules/imageCarousel'
 import { ComponentModulesImage } from '../strapi/components/modules/imageModule'
 import { ComponentModulesPullquote } from '../strapi/components/modules/pullQuote'
@@ -83,9 +78,6 @@ export class Story {
 
   @Field({ nullable: true })
   public slug?: string
-
-  @Field(() => ComponentModulesButtonsModule, { nullable: true })
-  public storyLinks?: ComponentModulesButtonsModule
 
   @Field({ nullable: true })
   public timeframe?: ComponentCoreTimeframe
@@ -248,9 +240,6 @@ export class StoryFiltersInput {
 
   @Field(() => StringFilterInput, { nullable: true })
   public slug?: StringFilterInput
-
-  @Field(() => ComponentModulesButtonsModuleFiltersInput, { nullable: true })
-  public storyLinks?: ComponentModulesButtonsModuleFiltersInput
 
   @Field(() => ComponentCoreTimeframeFiltersInput, { nullable: true })
   public timeframe?: ComponentCoreTimeframeFiltersInput

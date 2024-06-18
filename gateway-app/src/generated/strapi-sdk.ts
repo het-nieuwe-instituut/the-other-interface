@@ -114,12 +114,6 @@ export type ComponentCoreButtonFiltersInput = {
   url?: InputMaybe<StringFilterInput>
 }
 
-export type ComponentCoreButtonInput = {
-  id?: InputMaybe<Scalars['ID']>
-  text?: InputMaybe<Scalars['String']>
-  url?: InputMaybe<Scalars['String']>
-}
-
 export type ComponentCoreCarouselImage = {
   __typename?: 'ComponentCoreCarouselImage'
   alt_text?: Maybe<Scalars['String']>
@@ -251,18 +245,6 @@ export type ComponentModulesButtonsModuleButtonsArgs = {
   filters?: InputMaybe<ComponentCoreButtonFiltersInput>
   pagination?: InputMaybe<PaginationArg>
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
-}
-
-export type ComponentModulesButtonsModuleFiltersInput = {
-  and?: InputMaybe<Array<InputMaybe<ComponentModulesButtonsModuleFiltersInput>>>
-  buttons?: InputMaybe<ComponentCoreButtonFiltersInput>
-  not?: InputMaybe<ComponentModulesButtonsModuleFiltersInput>
-  or?: InputMaybe<Array<InputMaybe<ComponentModulesButtonsModuleFiltersInput>>>
-}
-
-export type ComponentModulesButtonsModuleInput = {
-  buttons?: InputMaybe<Array<InputMaybe<ComponentCoreButtonInput>>>
-  id?: InputMaybe<Scalars['ID']>
 }
 
 export type ComponentModulesCarousel = {
@@ -1709,7 +1691,6 @@ export type Story = {
   publishedAt?: Maybe<Scalars['DateTime']>
   shortDescription: Scalars['String']
   slug: Scalars['String']
-  storyLinks?: Maybe<ComponentModulesButtonsModule>
   themes?: Maybe<ThemeRelationResponseCollection>
   timeframe?: Maybe<ComponentCoreTimeframe>
   title: Scalars['String']
@@ -1798,7 +1779,6 @@ export type StoryFiltersInput = {
   publishedAt?: InputMaybe<DateTimeFilterInput>
   shortDescription?: InputMaybe<StringFilterInput>
   slug?: InputMaybe<StringFilterInput>
-  storyLinks?: InputMaybe<ComponentModulesButtonsModuleFiltersInput>
   themes?: InputMaybe<ThemeFiltersInput>
   timeframe?: InputMaybe<ComponentCoreTimeframeFiltersInput>
   title?: InputMaybe<StringFilterInput>
@@ -1817,7 +1797,6 @@ export type StoryInput = {
   publishedAt?: InputMaybe<Scalars['DateTime']>
   shortDescription?: InputMaybe<Scalars['String']>
   slug?: InputMaybe<Scalars['String']>
-  storyLinks?: InputMaybe<ComponentModulesButtonsModuleInput>
   themes?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
   timeframe?: InputMaybe<ComponentCoreTimeframeInput>
   title?: InputMaybe<Scalars['String']>
@@ -3383,16 +3362,6 @@ export type HighlightedHomepageThemesQuery = {
                       __typename?: 'StoryRelationResponseCollection'
                       data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
                     } | null
-                    storyLinks?: {
-                      __typename: 'ComponentModulesButtonsModule'
-                      id: string
-                      buttons?: Array<{
-                        __typename?: 'ComponentCoreButton'
-                        id: string
-                        text: string
-                        url: string
-                      } | null> | null
-                    } | null
                     parent_story?: {
                       __typename?: 'StoryEntityResponse'
                       data?: {
@@ -3887,16 +3856,6 @@ export type HighlightedHomepageThemesQuery = {
                     localizations?: {
                       __typename?: 'StoryRelationResponseCollection'
                       data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
-                    } | null
-                    storyLinks?: {
-                      __typename: 'ComponentModulesButtonsModule'
-                      id: string
-                      buttons?: Array<{
-                        __typename?: 'ComponentCoreButton'
-                        id: string
-                        text: string
-                        url: string
-                      } | null> | null
                     } | null
                     parent_story?: {
                       __typename?: 'StoryEntityResponse'
@@ -7574,16 +7533,6 @@ export type StoriesQuery = {
           __typename?: 'StoryRelationResponseCollection'
           data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
         } | null
-        storyLinks?: {
-          __typename: 'ComponentModulesButtonsModule'
-          id: string
-          buttons?: Array<{
-            __typename?: 'ComponentCoreButton'
-            id: string
-            text: string
-            url: string
-          } | null> | null
-        } | null
         parent_story?: {
           __typename?: 'StoryEntityResponse'
           data?: {
@@ -8111,16 +8060,6 @@ export type StoryQuery = {
         localizations?: {
           __typename?: 'StoryRelationResponseCollection'
           data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
-        } | null
-        storyLinks?: {
-          __typename: 'ComponentModulesButtonsModule'
-          id: string
-          buttons?: Array<{
-            __typename?: 'ComponentCoreButton'
-            id: string
-            text: string
-            url: string
-          } | null> | null
         } | null
         parent_story?: {
           __typename?: 'StoryEntityResponse'
@@ -9750,16 +9689,6 @@ export type StoriesMetaByLocaleQuery = {
                   } | null
                 }>
               } | null
-              storyLinks?: {
-                __typename: 'ComponentModulesButtonsModule'
-                id: string
-                buttons?: Array<{
-                  __typename?: 'ComponentCoreButton'
-                  id: string
-                  text: string
-                  url: string
-                } | null> | null
-              } | null
               parent_story?: {
                 __typename?: 'StoryEntityResponse'
                 data?: {
@@ -9984,16 +9913,6 @@ export type StoriesMetaByLocaleQuery = {
               } | null
             } | null
           }>
-        } | null
-        storyLinks?: {
-          __typename: 'ComponentModulesButtonsModule'
-          id: string
-          buttons?: Array<{
-            __typename?: 'ComponentCoreButton'
-            id: string
-            text: string
-            url: string
-          } | null> | null
         } | null
       } | null
     }>
@@ -10377,16 +10296,6 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
         localizations?: {
           __typename?: 'StoryRelationResponseCollection'
           data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
-        } | null
-        storyLinks?: {
-          __typename: 'ComponentModulesButtonsModule'
-          id: string
-          buttons?: Array<{
-            __typename?: 'ComponentCoreButton'
-            id: string
-            text: string
-            url: string
-          } | null> | null
         } | null
         parent_story?: {
           __typename?: 'StoryEntityResponse'
@@ -11868,16 +11777,6 @@ export type StoryFragmentFragment = {
       __typename?: 'StoryRelationResponseCollection'
       data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
     } | null
-    storyLinks?: {
-      __typename: 'ComponentModulesButtonsModule'
-      id: string
-      buttons?: Array<{
-        __typename?: 'ComponentCoreButton'
-        id: string
-        text: string
-        url: string
-      } | null> | null
-    } | null
     parent_story?: {
       __typename?: 'StoryEntityResponse'
       data?: {
@@ -12167,16 +12066,6 @@ export type StoryMetaFragmentFragment = {
           type: Enum_Triplyrecord_Type
         } | null
       }>
-    } | null
-    storyLinks?: {
-      __typename: 'ComponentModulesButtonsModule'
-      id: string
-      buttons?: Array<{
-        __typename?: 'ComponentCoreButton'
-        id: string
-        text: string
-        url: string
-      } | null> | null
     } | null
     parent_story?: {
       __typename?: 'StoryEntityResponse'
@@ -12758,16 +12647,6 @@ export type LocalizedStoryMetaFragmentFragment = {
               } | null
             }>
           } | null
-          storyLinks?: {
-            __typename: 'ComponentModulesButtonsModule'
-            id: string
-            buttons?: Array<{
-              __typename?: 'ComponentCoreButton'
-              id: string
-              text: string
-              url: string
-            } | null> | null
-          } | null
           parent_story?: {
             __typename?: 'StoryEntityResponse'
             data?: {
@@ -12992,16 +12871,6 @@ export type LocalizedStoryMetaFragmentFragment = {
           } | null
         } | null
       }>
-    } | null
-    storyLinks?: {
-      __typename: 'ComponentModulesButtonsModule'
-      id: string
-      buttons?: Array<{
-        __typename?: 'ComponentCoreButton'
-        id: string
-        text: string
-        url: string
-      } | null> | null
     } | null
   } | null
 }
@@ -13883,16 +13752,6 @@ export type ThemeQuery = {
                 __typename?: 'StoryRelationResponseCollection'
                 data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
               } | null
-              storyLinks?: {
-                __typename: 'ComponentModulesButtonsModule'
-                id: string
-                buttons?: Array<{
-                  __typename?: 'ComponentCoreButton'
-                  id: string
-                  text: string
-                  url: string
-                } | null> | null
-              } | null
               parent_story?: {
                 __typename?: 'StoryEntityResponse'
                 data?: {
@@ -14406,16 +14265,6 @@ export type ThemesQuery = {
               localizations?: {
                 __typename?: 'StoryRelationResponseCollection'
                 data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
-              } | null
-              storyLinks?: {
-                __typename: 'ComponentModulesButtonsModule'
-                id: string
-                buttons?: Array<{
-                  __typename?: 'ComponentCoreButton'
-                  id: string
-                  text: string
-                  url: string
-                } | null> | null
               } | null
               parent_story?: {
                 __typename?: 'StoryEntityResponse'
@@ -14939,16 +14788,6 @@ export type StoriesRelatedToThemeQuery = {
                 __typename?: 'StoryRelationResponseCollection'
                 data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
               } | null
-              storyLinks?: {
-                __typename: 'ComponentModulesButtonsModule'
-                id: string
-                buttons?: Array<{
-                  __typename?: 'ComponentCoreButton'
-                  id: string
-                  text: string
-                  url: string
-                } | null> | null
-              } | null
               parent_story?: {
                 __typename?: 'StoryEntityResponse'
                 data?: {
@@ -15451,16 +15290,6 @@ export type ThemeFragmentFragment = {
             __typename?: 'StoryRelationResponseCollection'
             data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
           } | null
-          storyLinks?: {
-            __typename: 'ComponentModulesButtonsModule'
-            id: string
-            buttons?: Array<{
-              __typename?: 'ComponentCoreButton'
-              id: string
-              text: string
-              url: string
-            } | null> | null
-          } | null
           parent_story?: {
             __typename?: 'StoryEntityResponse'
             data?: {
@@ -15961,16 +15790,6 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
             __typename?: 'StoryRelationResponseCollection'
             data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
           } | null
-          storyLinks?: {
-            __typename: 'ComponentModulesButtonsModule'
-            id: string
-            buttons?: Array<{
-              __typename?: 'ComponentCoreButton'
-              id: string
-              text: string
-              url: string
-            } | null> | null
-          } | null
           parent_story?: {
             __typename?: 'StoryEntityResponse'
             data?: {
@@ -16453,16 +16272,6 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
           localizations?: {
             __typename?: 'StoryRelationResponseCollection'
             data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
-          } | null
-          storyLinks?: {
-            __typename: 'ComponentModulesButtonsModule'
-            id: string
-            buttons?: Array<{
-              __typename?: 'ComponentCoreButton'
-              id: string
-              text: string
-              url: string
-            } | null> | null
           } | null
           parent_story?: {
             __typename?: 'StoryEntityResponse'
@@ -16984,16 +16793,6 @@ export type TriplyRecordQuery = {
                 __typename?: 'StoryRelationResponseCollection'
                 data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
               } | null
-              storyLinks?: {
-                __typename: 'ComponentModulesButtonsModule'
-                id: string
-                buttons?: Array<{
-                  __typename?: 'ComponentCoreButton'
-                  id: string
-                  text: string
-                  url: string
-                } | null> | null
-              } | null
               parent_story?: {
                 __typename?: 'StoryEntityResponse'
                 data?: {
@@ -17505,16 +17304,6 @@ export type TriplyRecordsQuery = {
                 __typename?: 'StoryRelationResponseCollection'
                 data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
               } | null
-              storyLinks?: {
-                __typename: 'ComponentModulesButtonsModule'
-                id: string
-                buttons?: Array<{
-                  __typename?: 'ComponentCoreButton'
-                  id: string
-                  text: string
-                  url: string
-                } | null> | null
-              } | null
               parent_story?: {
                 __typename?: 'StoryEntityResponse'
                 data?: {
@@ -18024,16 +17813,6 @@ export type TriplyRecordFragmentFragment = {
           localizations?: {
             __typename?: 'StoryRelationResponseCollection'
             data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
-          } | null
-          storyLinks?: {
-            __typename: 'ComponentModulesButtonsModule'
-            id: string
-            buttons?: Array<{
-              __typename?: 'ComponentCoreButton'
-              id: string
-              text: string
-              url: string
-            } | null> | null
           } | null
           parent_story?: {
             __typename?: 'StoryEntityResponse'
@@ -19178,9 +18957,6 @@ export const StoryMetaFragmentFragmentDoc = gql`
           ...BaseTriplyRecordFragment
         }
       }
-      storyLinks {
-        ...ComponentModulesButtonsModuleFragment
-      }
       parent_story {
         data {
           id
@@ -19232,7 +19008,6 @@ export const StoryMetaFragmentFragmentDoc = gql`
     }
   }
   ${BaseTriplyRecordFragmentFragmentDoc}
-  ${ComponentModulesButtonsModuleFragmentFragmentDoc}
   ${ComponentModulesImageFragmentFragmentDoc}
 `
 export const LocalizedStoryMetaFragmentFragmentDoc = gql`
@@ -19341,15 +19116,11 @@ export const LocalizedStoryMetaFragmentFragmentDoc = gql`
           ...StoryMetaFragment
         }
       }
-      storyLinks {
-        ...ComponentModulesButtonsModuleFragment
-      }
     }
   }
   ${ComponentModulesImageFragmentFragmentDoc}
   ${BaseTriplyRecordFragmentFragmentDoc}
   ${StoryMetaFragmentFragmentDoc}
-  ${ComponentModulesButtonsModuleFragmentFragmentDoc}
 `
 export const ComponentCorePublicationDateFragmentFragmentDoc = gql`
   fragment ComponentCorePublicationDateFragment on ComponentCorePublicationDate {
@@ -19503,9 +19274,6 @@ export const StoryFragmentFragmentDoc = gql`
         }
       }
       locale
-      storyLinks {
-        ...ComponentModulesButtonsModuleFragment
-      }
       parent_story {
         data {
           id
@@ -19567,7 +19335,6 @@ export const StoryFragmentFragmentDoc = gql`
   ${ComponentCoreMuxVideoFragmentFragmentDoc}
   ${ErrorFragmentFragmentDoc}
   ${BaseTriplyRecordFragmentFragmentDoc}
-  ${ComponentModulesButtonsModuleFragmentFragmentDoc}
 `
 export const ThemeFragmentFragmentDoc = gql`
   fragment ThemeFragment on ThemeEntity {

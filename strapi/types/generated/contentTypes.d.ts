@@ -1030,12 +1030,6 @@ export interface ApiStoryStory extends Schema.CollectionType {
           localized: false
         }
       }>
-    storyLinks: Attribute.Component<'modules.buttons-module'> &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true
-        }
-      }>
     shortDescription: Attribute.Text &
       Attribute.Required &
       Attribute.SetPluginOptions<{

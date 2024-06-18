@@ -159,11 +159,6 @@ query storyMetaById($locale: Locale!, $id: ID, $publicationState: String = "LIVE
             }
           }
         }
-        storyLinks {
-          ... on ComponentModulesButtonsModule {
-            ...buttonsModuleFragment
-          }
-        }
         child_stories {
           data {
             id
