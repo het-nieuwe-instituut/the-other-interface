@@ -32,11 +32,11 @@ export const Navigation = () => {
         isMenuOpen
           ? 'transition-opacity ease-out duration-300 opacity-95'
           : 'transition-opacity ease-in duration-300 opacity-0',
-        'overflow-[var(----overflow)] backdrop-filter backdrop-blur-lg'
+        'overflow-[var(----overflow)] bg-blue-95 backdrop-blur-3xl'
       )}
       ref={ref}
     >
-      <div className="absolute left-0 top-0 h-screen w-full bg-blue-100">
+      <div className="absolute left-0 top-0 h-screen w-full">
         <StaticHeader />
         <div className="relative z-[MAX_Z_INDEX] mx-auto flex max-w-[90em] justify-between px-6 pt-24">
           <div className="flex min-w-[388px] max-w-[711px] flex-col pb-20 pr-[32px]">
