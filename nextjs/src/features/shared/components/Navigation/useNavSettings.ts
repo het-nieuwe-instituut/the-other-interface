@@ -6,7 +6,6 @@ import { State } from '../../configs/store'
 import { useSelector } from 'react-redux'
 import { useBreakpoint } from '../../configs/chakra'
 import { USER_LOOKS_ON } from '../../constants/mainConstants'
-import { useBreakpointValue } from '@chakra-ui/react'
 import { useLocale } from '../../hooks/useLocale'
 
 export enum Fonts {
@@ -44,14 +43,6 @@ export const useNavSettings = () => {
     }
   }, [userLooksOn])
 
-  const overflowValue = useBreakpointValue({
-    sm: 'auto',
-    md: 'auto',
-    lg: 'visible',
-    xl: 'visible',
-    base: 'visible',
-  })
-
   return {
     tNavigation,
     lang,
@@ -61,6 +52,5 @@ export const useNavSettings = () => {
     breakpoint,
     userLooksOn,
     navTextStyle,
-    overflowValue,
   }
 }
