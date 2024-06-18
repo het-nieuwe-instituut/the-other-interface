@@ -5,6 +5,9 @@ export const TypographyVariants = cva('', {
     modifier: {
       shadow: 'text-shadow',
     },
+    timesDot: {
+      '2xl': ['font-times-dot text-[96px] leading-[100%_]  tracking-[-1.92px]'],
+    },
     times: {
       '2xl': ['font-times-large text-[96px] leading-[100%_]  tracking-[-1.92px]'],
       xl: ['font-times-large text-[64px] leading-[100%_] tracking-[-1.28px]'],
@@ -34,10 +37,10 @@ export const TypographyVariants = cva('', {
       ],
       sm: ['self-stretch not-italic leading-[130%_]', 'font-social-large text-[12px]'],
       placeholder:
-        ' font-social-large self-stretch text-[21px] italic  leading-[130%_] tracking-[0.21px]',
+        ' self-stretch font-social-large text-[21px] italic  leading-[130%_] tracking-[0.21px]',
       label:
-        ' font-social-large self-stretch text-[11px] not-italic leading-[11px_] tracking-[0.11px]',
-      textfield: 'font-social-large self-stretch text-[18px] leading-[18px_] tracking-[0.18px]',
+        ' self-stretch font-social-large text-[11px] not-italic leading-[11px_] tracking-[0.11px]',
+      textfield: 'self-stretch font-social-large text-[18px] leading-[18px_] tracking-[0.18px]',
     },
     socialMedium: {
       xl: [

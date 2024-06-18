@@ -52,6 +52,7 @@ module.exports = {
         brown: '#49280B',
       },
       fontFamily: {
+        'times-dot': ['"Times Dot"', 'sans-serif'],
         'times-large': ['Times', 'sans-serif'],
         'impact-large': ['"Impact"', 'sans-serif'],
         'social-large': ['"Social"', 'sans-serif'],

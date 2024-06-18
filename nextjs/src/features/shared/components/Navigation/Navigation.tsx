@@ -28,7 +28,7 @@ export const Navigation = () => {
       }
       className={cn(
         isMenuOpen ? 'visible' : 'invisible',
-        'fixed right-0 top-0 h-screen w-full z-[NAVIGATION_OVERLAY_Z_INDEX]',
+        'fixed right-0 top-0 h-screen w-full z-[9998]',
         isMenuOpen
           ? 'transition-opacity ease-out duration-300 opacity-95'
           : 'transition-opacity ease-in duration-300 opacity-0',
@@ -54,13 +54,12 @@ export const Navigation = () => {
                 className={cn(
                   navTextStyle === Fonts.Times
                     ? TypographyVariants({
-                        times: '2xl',
-                        className: 'mb-4 cursor-pointer text-pink-100',
+                        timesDot: '2xl',
                       })
                     : TypographyVariants({
                         impact: 'xl',
-                        className: 'mb-4 cursor-pointer text-pink-100',
-                      })
+                      }),
+                  'mb-4 cursor-pointer text-pink-100 hover:text-pink-60 focus:bg-pink-100 focus:text-blue-100 focus:w-fit focus:outline-none'
                 )}
                 key={category.name}
                 href={`/landingpage?category=${category.name}&lang=${lang}`}
@@ -90,7 +89,8 @@ export const Navigation = () => {
               <NavLinkButton
                 href={'/'}
                 variant={'menuPrimary'}
-                color={navTextStyle === Fonts.Times ? 'invertedPaleHover' : 'invertedPinkHover'}
+                //invertedPinkHover
+                color={'invertedPaleHover'}
               >
                 {tNavigation('readMore')}
               </NavLinkButton>
@@ -99,7 +99,7 @@ export const Navigation = () => {
               <NavLinkButton
                 href={'/'}
                 variant={'menuSecondary'}
-                color={navTextStyle === Fonts.Times ? 'invertedPaleHover' : 'invertedPinkHover'}
+                color={'invertedPaleHover'}
                 className="mb-4"
               >
                 {tNavigation('readMore')}
@@ -107,16 +107,12 @@ export const Navigation = () => {
               <NavLinkButton
                 href={'/'}
                 variant={'menuSecondary'}
-                color={navTextStyle === Fonts.Times ? 'invertedPaleHover' : 'invertedPinkHover'}
+                color={'invertedPaleHover'}
                 className="mb-4"
               >
                 {tNavigation('readMore')}
               </NavLinkButton>
-              <NavLinkButton
-                href={'/'}
-                variant={'menuSecondary'}
-                color={navTextStyle === Fonts.Times ? 'invertedPaleHover' : 'invertedPinkHover'}
-              >
+              <NavLinkButton href={'/'} variant={'menuSecondary'} color={'invertedPaleHover'}>
                 {tNavigation('readMore')}
               </NavLinkButton>
             </div>
