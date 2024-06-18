@@ -203,6 +203,7 @@ export const aComponentCoreCarouselImage = (overrides?: Partial<ComponentCoreCar
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '45201b9c-fee3-415a-a5a6-a85de993c69a',
         image: overrides && overrides.hasOwnProperty('image') ? overrides.image! : relationshipsToOmit.includes('UploadFileEntityResponse') ? {} as UploadFileEntityResponse : anUploadFileEntityResponse({}, relationshipsToOmit),
         story: overrides && overrides.hasOwnProperty('story') ? overrides.story! : relationshipsToOmit.includes('StoryEntityResponse') ? {} as StoryEntityResponse : aStoryEntityResponse({}, relationshipsToOmit),
+        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'odio',
         triply_record: overrides && overrides.hasOwnProperty('triply_record') ? overrides.triply_record! : relationshipsToOmit.includes('TriplyRecordEntityResponse') ? {} as TriplyRecordEntityResponse : aTriplyRecordEntityResponse({}, relationshipsToOmit),
     };
 };
@@ -320,7 +321,7 @@ export const aComponentModulesCarousel = (overrides?: Partial<ComponentModulesCa
         description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'animi',
         explore_collection_button: overrides && overrides.hasOwnProperty('explore_collection_button') ? overrides.explore_collection_button! : relationshipsToOmit.includes('ComponentCoreButton') ? {} as ComponentCoreButton : aComponentCoreButton({}, relationshipsToOmit),
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '02a9c5e5-9a6b-482e-9ea3-e1114441bf57',
-        items: overrides && overrides.hasOwnProperty('items') ? overrides.items! : [relationshipsToOmit.includes('ComponentCoreCarouselImage') ? {} as ComponentCoreCarouselImage : aComponentCoreCarouselImage({}, relationshipsToOmit)],
+        images: overrides && overrides.hasOwnProperty('images') ? overrides.images! : [relationshipsToOmit.includes('ComponentCoreCarouselImage') ? {} as ComponentCoreCarouselImage : aComponentCoreCarouselImage({}, relationshipsToOmit)],
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'beatae',
         variant: overrides && overrides.hasOwnProperty('variant') ? overrides.variant! : EnumComponentmodulescarouselVariant.FourUp,
     };
