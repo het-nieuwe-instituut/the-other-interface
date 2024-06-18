@@ -97,23 +97,35 @@ export const Navigation = () => {
             </div>
             <div className="flex flex-col">
               <NavLinkButton
-                href={'/'}
+                href={'/collection'}
                 variant={'menuSecondary'}
                 color={'invertedPaleHover'}
                 className="mb-4"
               >
-                {tNavigation('readMore')}
+                {tNavigation('theCollection')}
               </NavLinkButton>
               <NavLinkButton
-                href={'/'}
+                href={'/asterisk'}
                 variant={'menuSecondary'}
                 color={'invertedPaleHover'}
                 className="mb-4"
               >
-                {tNavigation('readMore')}
+                {tNavigation('asterisk')}
               </NavLinkButton>
-              <NavLinkButton href={'/'} variant={'menuSecondary'} color={'invertedPaleHover'}>
-                {tNavigation('readMore')}
+              <NavLinkButton
+                href={'/externalSources'}
+                variant={'menuSecondary'}
+                color={'invertedPaleHover'}
+                className="mb-4"
+              >
+                {tNavigation('externalSources')}
+              </NavLinkButton>
+              <NavLinkButton
+                href={'/contribute'}
+                variant={'menuSecondary'}
+                color={'invertedPaleHover'}
+              >
+                {tNavigation('contribute')}
               </NavLinkButton>
             </div>
           </div>
