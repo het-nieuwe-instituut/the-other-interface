@@ -129,7 +129,6 @@ export const StoryComponentsDynamicZone = createUnionType({
   name: 'StoryComponentsDynamicZone',
   types: () =>
     [
-      ComponentModulesButtonsModule,
       ComponentModulesImage,
       ComponentModulesImageCarousel,
       ComponentModulesPullquote,

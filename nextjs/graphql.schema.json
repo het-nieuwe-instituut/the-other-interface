@@ -14081,11 +14081,6 @@
           },
           {
             "kind": "OBJECT",
-            "name": "ComponentModulesButtonsModule",
-            "ofType": null
-          },
-          {
-            "kind": "OBJECT",
             "name": "ComponentModulesImage",
             "ofType": null
           },

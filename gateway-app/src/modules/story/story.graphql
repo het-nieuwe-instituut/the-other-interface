@@ -321,9 +321,6 @@ fragment NestedStoryFragment on StoryEntity {
       ... on ComponentModulesImage {
         ...ComponentModulesImageFragment
       }
-      ... on ComponentModulesButtonsModule {
-        ...ComponentModulesButtonsModuleFragment
-      }
       ... on ComponentCoreStandAloneLink {
         ...ComponentCoreStandAloneLinkFragment
       }
@@ -397,9 +394,6 @@ fragment LocalizedStoryFragment on StoryEntity {
       ... on ComponentModulesImage {
         ...ComponentModulesImageFragment
       }
-      ... on ComponentModulesButtonsModule {
-        ...ComponentModulesButtonsModuleFragment
-      }
       ... on ComponentCoreStandAloneLink {
         ...ComponentCoreStandAloneLinkFragment
       }
@@ -445,9 +439,6 @@ fragment StoryFragment on StoryEntity {
       }
       ... on ComponentModulesImage {
         ...ComponentModulesImageFragment
-      }
-      ... on ComponentModulesButtonsModule {
-        ...ComponentModulesButtonsModuleFragment
       }
       ... on ComponentCoreStandAloneLink {
         ...ComponentCoreStandAloneLinkFragment

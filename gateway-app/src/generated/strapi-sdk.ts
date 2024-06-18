@@ -24,7 +24,6 @@ export type Scalars = {
   Long: any
   MenupageComponentsDynamicZoneInput: any
   StoryComponentsDynamicZoneInput: any
-  StoryV2OptionalModulesDynamicZoneInput: any
   Upload: any
 }
 
@@ -606,7 +605,6 @@ export type GenericMorph =
   | Menupage
   | MuxVideoUploaderMuxAsset
   | Story
-  | StoryV2
   | Theme
   | TriplyRecord
   | UploadFile
@@ -869,7 +867,6 @@ export type Location = {
   localizations?: Maybe<LocationRelationResponseCollection>
   publishedAt?: Maybe<Scalars['DateTime']>
   stories?: Maybe<StoryRelationResponseCollection>
-  story_v_2s?: Maybe<StoryV2RelationResponseCollection>
   updatedAt?: Maybe<Scalars['DateTime']>
 }
 
@@ -882,13 +879,6 @@ export type LocationLocalizationsArgs = {
 
 export type LocationStoriesArgs = {
   filters?: InputMaybe<StoryFiltersInput>
-  pagination?: InputMaybe<PaginationArg>
-  publicationState?: InputMaybe<PublicationState>
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
-}
-
-export type LocationStory_V_2sArgs = {
-  filters?: InputMaybe<StoryV2FiltersInput>
   pagination?: InputMaybe<PaginationArg>
   publicationState?: InputMaybe<PublicationState>
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
@@ -922,7 +912,6 @@ export type LocationFiltersInput = {
   or?: InputMaybe<Array<InputMaybe<LocationFiltersInput>>>
   publishedAt?: InputMaybe<DateTimeFilterInput>
   stories?: InputMaybe<StoryFiltersInput>
-  story_v_2s?: InputMaybe<StoryV2FiltersInput>
   updatedAt?: InputMaybe<DateTimeFilterInput>
 }
 
@@ -930,7 +919,6 @@ export type LocationInput = {
   city?: InputMaybe<Scalars['String']>
   publishedAt?: InputMaybe<Scalars['DateTime']>
   stories?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
-  story_v_2s?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
 }
 
 export type LocationRelationResponseCollection = {
@@ -1053,8 +1041,6 @@ export type Mutation = {
   createMuxVideoUploaderMuxAsset?: Maybe<MuxVideoUploaderMuxAssetEntityResponse>
   createStory?: Maybe<StoryEntityResponse>
   createStoryLocalization?: Maybe<StoryEntityResponse>
-  createStoryV2?: Maybe<StoryV2EntityResponse>
-  createStoryV2Localization?: Maybe<StoryV2EntityResponse>
   createTheme?: Maybe<ThemeEntityResponse>
   createThemeLocalization?: Maybe<ThemeEntityResponse>
   createTriplyRecord?: Maybe<TriplyRecordEntityResponse>
@@ -1073,7 +1059,6 @@ export type Mutation = {
   deleteMenupage?: Maybe<MenupageEntityResponse>
   deleteMuxVideoUploaderMuxAsset?: Maybe<MuxVideoUploaderMuxAssetEntityResponse>
   deleteStory?: Maybe<StoryEntityResponse>
-  deleteStoryV2?: Maybe<StoryV2EntityResponse>
   deleteTheme?: Maybe<ThemeEntityResponse>
   deleteTriplyRecord?: Maybe<TriplyRecordEntityResponse>
   deleteUploadFile?: Maybe<UploadFileEntityResponse>
@@ -1103,7 +1088,6 @@ export type Mutation = {
   updateMenupage?: Maybe<MenupageEntityResponse>
   updateMuxVideoUploaderMuxAsset?: Maybe<MuxVideoUploaderMuxAssetEntityResponse>
   updateStory?: Maybe<StoryEntityResponse>
-  updateStoryV2?: Maybe<StoryV2EntityResponse>
   updateTheme?: Maybe<ThemeEntityResponse>
   updateTriplyRecord?: Maybe<TriplyRecordEntityResponse>
   updateUploadFile?: Maybe<UploadFileEntityResponse>
@@ -1187,17 +1171,6 @@ export type MutationCreateStoryLocalizationArgs = {
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
 }
 
-export type MutationCreateStoryV2Args = {
-  data: StoryV2Input
-  locale?: InputMaybe<Scalars['I18NLocaleCode']>
-}
-
-export type MutationCreateStoryV2LocalizationArgs = {
-  data?: InputMaybe<StoryV2Input>
-  id?: InputMaybe<Scalars['ID']>
-  locale?: InputMaybe<Scalars['I18NLocaleCode']>
-}
-
 export type MutationCreateThemeArgs = {
   data: ThemeInput
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
@@ -1265,11 +1238,6 @@ export type MutationDeleteMuxVideoUploaderMuxAssetArgs = {
 }
 
 export type MutationDeleteStoryArgs = {
-  id: Scalars['ID']
-  locale?: InputMaybe<Scalars['I18NLocaleCode']>
-}
-
-export type MutationDeleteStoryV2Args = {
   id: Scalars['ID']
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
 }
@@ -1382,12 +1350,6 @@ export type MutationUpdateMuxVideoUploaderMuxAssetArgs = {
 
 export type MutationUpdateStoryArgs = {
   data: StoryInput
-  id: Scalars['ID']
-  locale?: InputMaybe<Scalars['I18NLocaleCode']>
-}
-
-export type MutationUpdateStoryV2Args = {
-  data: StoryV2Input
   id: Scalars['ID']
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
 }
@@ -1535,9 +1497,7 @@ export type Query = {
   muxVideoUploaderMuxAsset?: Maybe<MuxVideoUploaderMuxAssetEntityResponse>
   muxVideoUploaderMuxAssets?: Maybe<MuxVideoUploaderMuxAssetEntityResponseCollection>
   stories?: Maybe<StoryEntityResponseCollection>
-  storiesV2?: Maybe<StoryV2EntityResponseCollection>
   story?: Maybe<StoryEntityResponse>
-  storyV2?: Maybe<StoryV2EntityResponse>
   theme?: Maybe<ThemeEntityResponse>
   themes?: Maybe<ThemeEntityResponseCollection>
   triplyRecord?: Maybe<TriplyRecordEntityResponse>
@@ -1660,20 +1620,7 @@ export type QueryStoriesArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
 }
 
-export type QueryStoriesV2Args = {
-  filters?: InputMaybe<StoryV2FiltersInput>
-  locale?: InputMaybe<Scalars['I18NLocaleCode']>
-  pagination?: InputMaybe<PaginationArg>
-  publicationState?: InputMaybe<PublicationState>
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
-}
-
 export type QueryStoryArgs = {
-  id?: InputMaybe<Scalars['ID']>
-  locale?: InputMaybe<Scalars['I18NLocaleCode']>
-}
-
-export type QueryStoryV2Args = {
   id?: InputMaybe<Scalars['ID']>
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
 }
@@ -1760,7 +1707,7 @@ export type Story = {
   parent_story?: Maybe<StoryEntityResponse>
   publicationDate?: Maybe<ComponentCorePublicationDate>
   publishedAt?: Maybe<Scalars['DateTime']>
-  shortDescription?: Maybe<Scalars['String']>
+  shortDescription: Scalars['String']
   slug: Scalars['String']
   storyLinks?: Maybe<ComponentModulesButtonsModule>
   themes?: Maybe<ThemeRelationResponseCollection>
@@ -1809,7 +1756,6 @@ export type StoryComponentsDynamicZone =
   | ComponentCoreMuxAudio
   | ComponentCoreMuxVideo
   | ComponentCoreStandAloneLink
-  | ComponentModulesButtonsModule
   | ComponentModulesImage
   | ComponentModulesImageCarousel
   | ComponentModulesPullquote
@@ -1883,135 +1829,6 @@ export type StoryRelationResponseCollection = {
   data: Array<StoryEntity>
 }
 
-export type StoryV2 = {
-  __typename?: 'StoryV2'
-  author?: Maybe<AuthorEntityResponse>
-  child_stories_v2?: Maybe<StoryV2RelationResponseCollection>
-  createdAt?: Maybe<Scalars['DateTime']>
-  dateOfPublication: Scalars['Date']
-  description?: Maybe<Scalars['String']>
-  locale?: Maybe<Scalars['String']>
-  localizations?: Maybe<StoryV2RelationResponseCollection>
-  locations?: Maybe<LocationRelationResponseCollection>
-  optionalModules?: Maybe<Array<Maybe<StoryV2OptionalModulesDynamicZone>>>
-  parent_story_v2?: Maybe<StoryV2EntityResponse>
-  publishedAt?: Maybe<Scalars['DateTime']>
-  shortDescription: Scalars['String']
-  themes?: Maybe<ThemeRelationResponseCollection>
-  timeframe?: Maybe<ComponentCoreTimeframe>
-  title: Scalars['String']
-  triply_records?: Maybe<TriplyRecordRelationResponseCollection>
-  updatedAt?: Maybe<Scalars['DateTime']>
-}
-
-export type StoryV2Child_Stories_V2Args = {
-  filters?: InputMaybe<StoryV2FiltersInput>
-  pagination?: InputMaybe<PaginationArg>
-  publicationState?: InputMaybe<PublicationState>
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
-}
-
-export type StoryV2LocalizationsArgs = {
-  filters?: InputMaybe<StoryV2FiltersInput>
-  pagination?: InputMaybe<PaginationArg>
-  publicationState?: InputMaybe<PublicationState>
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
-}
-
-export type StoryV2LocationsArgs = {
-  filters?: InputMaybe<LocationFiltersInput>
-  pagination?: InputMaybe<PaginationArg>
-  publicationState?: InputMaybe<PublicationState>
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
-}
-
-export type StoryV2ThemesArgs = {
-  filters?: InputMaybe<ThemeFiltersInput>
-  pagination?: InputMaybe<PaginationArg>
-  publicationState?: InputMaybe<PublicationState>
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
-}
-
-export type StoryV2Triply_RecordsArgs = {
-  filters?: InputMaybe<TriplyRecordFiltersInput>
-  pagination?: InputMaybe<PaginationArg>
-  publicationState?: InputMaybe<PublicationState>
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
-}
-
-export type StoryV2Entity = {
-  __typename?: 'StoryV2Entity'
-  attributes?: Maybe<StoryV2>
-  id?: Maybe<Scalars['ID']>
-}
-
-export type StoryV2EntityResponse = {
-  __typename?: 'StoryV2EntityResponse'
-  data?: Maybe<StoryV2Entity>
-}
-
-export type StoryV2EntityResponseCollection = {
-  __typename?: 'StoryV2EntityResponseCollection'
-  data: Array<StoryV2Entity>
-  meta: ResponseCollectionMeta
-}
-
-export type StoryV2FiltersInput = {
-  and?: InputMaybe<Array<InputMaybe<StoryV2FiltersInput>>>
-  author?: InputMaybe<AuthorFiltersInput>
-  child_stories_v2?: InputMaybe<StoryV2FiltersInput>
-  createdAt?: InputMaybe<DateTimeFilterInput>
-  dateOfPublication?: InputMaybe<DateFilterInput>
-  description?: InputMaybe<StringFilterInput>
-  id?: InputMaybe<IdFilterInput>
-  locale?: InputMaybe<StringFilterInput>
-  localizations?: InputMaybe<StoryV2FiltersInput>
-  locations?: InputMaybe<LocationFiltersInput>
-  not?: InputMaybe<StoryV2FiltersInput>
-  or?: InputMaybe<Array<InputMaybe<StoryV2FiltersInput>>>
-  parent_story_v2?: InputMaybe<StoryV2FiltersInput>
-  publishedAt?: InputMaybe<DateTimeFilterInput>
-  shortDescription?: InputMaybe<StringFilterInput>
-  themes?: InputMaybe<ThemeFiltersInput>
-  timeframe?: InputMaybe<ComponentCoreTimeframeFiltersInput>
-  title?: InputMaybe<StringFilterInput>
-  triply_records?: InputMaybe<TriplyRecordFiltersInput>
-  updatedAt?: InputMaybe<DateTimeFilterInput>
-}
-
-export type StoryV2Input = {
-  author?: InputMaybe<Scalars['ID']>
-  child_stories_v2?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
-  dateOfPublication?: InputMaybe<Scalars['Date']>
-  description?: InputMaybe<Scalars['String']>
-  locations?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
-  optionalModules?: InputMaybe<Array<Scalars['StoryV2OptionalModulesDynamicZoneInput']>>
-  parent_story_v2?: InputMaybe<Scalars['ID']>
-  publishedAt?: InputMaybe<Scalars['DateTime']>
-  shortDescription?: InputMaybe<Scalars['String']>
-  themes?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
-  timeframe?: InputMaybe<ComponentCoreTimeframeInput>
-  title?: InputMaybe<Scalars['String']>
-  triply_records?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
-}
-
-export type StoryV2OptionalModulesDynamicZone =
-  | ComponentCoreMuxAudio
-  | ComponentCoreMuxVideo
-  | ComponentCoreStandAloneLink
-  | ComponentModulesImage
-  | ComponentModulesImageCarousel
-  | ComponentModulesPullquote
-  | ComponentModulesSubtitle
-  | ComponentModulesTextModule
-  | ComponentModulesTitleModule
-  | Error
-
-export type StoryV2RelationResponseCollection = {
-  __typename?: 'StoryV2RelationResponseCollection'
-  data: Array<StoryV2Entity>
-}
-
 export type StringFilterInput = {
   and?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
   between?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
@@ -2046,7 +1863,6 @@ export type Theme = {
   name: Scalars['String']
   publishedAt?: Maybe<Scalars['DateTime']>
   stories?: Maybe<StoryRelationResponseCollection>
-  story_v_2s?: Maybe<StoryV2RelationResponseCollection>
   updatedAt?: Maybe<Scalars['DateTime']>
 }
 
@@ -2066,13 +1882,6 @@ export type ThemeLocalizationsArgs = {
 
 export type ThemeStoriesArgs = {
   filters?: InputMaybe<StoryFiltersInput>
-  pagination?: InputMaybe<PaginationArg>
-  publicationState?: InputMaybe<PublicationState>
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
-}
-
-export type ThemeStory_V_2sArgs = {
-  filters?: InputMaybe<StoryV2FiltersInput>
   pagination?: InputMaybe<PaginationArg>
   publicationState?: InputMaybe<PublicationState>
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
@@ -2107,7 +1916,6 @@ export type ThemeFiltersInput = {
   or?: InputMaybe<Array<InputMaybe<ThemeFiltersInput>>>
   publishedAt?: InputMaybe<DateTimeFilterInput>
   stories?: InputMaybe<StoryFiltersInput>
-  story_v_2s?: InputMaybe<StoryV2FiltersInput>
   updatedAt?: InputMaybe<DateTimeFilterInput>
 }
 
@@ -2116,7 +1924,6 @@ export type ThemeInput = {
   name?: InputMaybe<Scalars['String']>
   publishedAt?: InputMaybe<Scalars['DateTime']>
   stories?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
-  story_v_2s?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
 }
 
 export type ThemeRelationResponseCollection = {
@@ -2131,7 +1938,6 @@ export type TriplyRecord = {
   publishedAt?: Maybe<Scalars['DateTime']>
   recordId: Scalars['String']
   stories?: Maybe<StoryRelationResponseCollection>
-  story_v_2s?: Maybe<StoryV2RelationResponseCollection>
   subject_collectionHighlights?: Maybe<Scalars['Boolean']>
   type: Enum_Triplyrecord_Type
   updatedAt?: Maybe<Scalars['DateTime']>
@@ -2139,13 +1945,6 @@ export type TriplyRecord = {
 
 export type TriplyRecordStoriesArgs = {
   filters?: InputMaybe<StoryFiltersInput>
-  pagination?: InputMaybe<PaginationArg>
-  publicationState?: InputMaybe<PublicationState>
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
-}
-
-export type TriplyRecordStory_V_2sArgs = {
-  filters?: InputMaybe<StoryV2FiltersInput>
   pagination?: InputMaybe<PaginationArg>
   publicationState?: InputMaybe<PublicationState>
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
@@ -2178,7 +1977,6 @@ export type TriplyRecordFiltersInput = {
   publishedAt?: InputMaybe<DateTimeFilterInput>
   recordId?: InputMaybe<StringFilterInput>
   stories?: InputMaybe<StoryFiltersInput>
-  story_v_2s?: InputMaybe<StoryV2FiltersInput>
   subject_collectionHighlights?: InputMaybe<BooleanFilterInput>
   type?: InputMaybe<StringFilterInput>
   updatedAt?: InputMaybe<DateTimeFilterInput>
@@ -2189,7 +1987,6 @@ export type TriplyRecordInput = {
   publishedAt?: InputMaybe<Scalars['DateTime']>
   recordId?: InputMaybe<Scalars['String']>
   stories?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
-  story_v_2s?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
   subject_collectionHighlights?: InputMaybe<Scalars['Boolean']>
   type?: InputMaybe<Enum_Triplyrecord_Type>
 }
@@ -2789,7 +2586,7 @@ export type HomepageFragmentFragment = {
               title: string
               slug: string
               description?: string | null
-              shortDescription?: string | null
+              shortDescription: string
               createdAt?: any | null
               updatedAt?: any | null
               publishedAt?: any | null
@@ -3022,7 +2819,7 @@ export type HomepageQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -3223,7 +3020,7 @@ export type HomepageQuery = {
                     title: string
                     slug: string
                     description?: string | null
-                    shortDescription?: string | null
+                    shortDescription: string
                     createdAt?: any | null
                     updatedAt?: any | null
                     publishedAt?: any | null
@@ -3326,7 +3123,7 @@ export type HighlightedHomepageThemesQuery = {
                     title: string
                     slug: string
                     description?: string | null
-                    shortDescription?: string | null
+                    shortDescription: string
                     createdAt?: any | null
                     updatedAt?: any | null
                     publishedAt?: any | null
@@ -3417,16 +3214,6 @@ export type HighlightedHomepageThemesQuery = {
                           } | null
                         }
                       | {
-                          __typename: 'ComponentModulesButtonsModule'
-                          id: string
-                          buttons?: Array<{
-                            __typename?: 'ComponentCoreButton'
-                            id: string
-                            text: string
-                            url: string
-                          } | null> | null
-                        }
-                      | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
                           caption?: string | null
@@ -3479,7 +3266,7 @@ export type HighlightedHomepageThemesQuery = {
                                 title: string
                                 slug: string
                                 description?: string | null
-                                shortDescription?: string | null
+                                shortDescription: string
                                 createdAt?: any | null
                                 updatedAt?: any | null
                                 publishedAt?: any | null
@@ -3618,7 +3405,6 @@ export type HighlightedHomepageThemesQuery = {
                             | { __typename: 'ComponentCoreMuxAudio' }
                             | { __typename: 'ComponentCoreMuxVideo' }
                             | { __typename: 'ComponentCoreStandAloneLink' }
-                            | { __typename: 'ComponentModulesButtonsModule' }
                             | {
                                 __typename: 'ComponentModulesImage'
                                 alt_text?: string | null
@@ -3672,7 +3458,7 @@ export type HighlightedHomepageThemesQuery = {
                                       title: string
                                       slug: string
                                       description?: string | null
-                                      shortDescription?: string | null
+                                      shortDescription: string
                                       createdAt?: any | null
                                       updatedAt?: any | null
                                       publishedAt?: any | null
@@ -3730,7 +3516,6 @@ export type HighlightedHomepageThemesQuery = {
                             | { __typename: 'ComponentCoreMuxAudio' }
                             | { __typename: 'ComponentCoreMuxVideo' }
                             | { __typename: 'ComponentCoreStandAloneLink' }
-                            | { __typename: 'ComponentModulesButtonsModule' }
                             | {
                                 __typename: 'ComponentModulesImage'
                                 alt_text?: string | null
@@ -3784,7 +3569,7 @@ export type HighlightedHomepageThemesQuery = {
                                       title: string
                                       slug: string
                                       description?: string | null
-                                      shortDescription?: string | null
+                                      shortDescription: string
                                       createdAt?: any | null
                                       updatedAt?: any | null
                                       publishedAt?: any | null
@@ -3843,7 +3628,7 @@ export type HighlightedHomepageThemesQuery = {
                     title: string
                     slug: string
                     description?: string | null
-                    shortDescription?: string | null
+                    shortDescription: string
                     createdAt?: any | null
                     updatedAt?: any | null
                     publishedAt?: any | null
@@ -3934,16 +3719,6 @@ export type HighlightedHomepageThemesQuery = {
                           } | null
                         }
                       | {
-                          __typename: 'ComponentModulesButtonsModule'
-                          id: string
-                          buttons?: Array<{
-                            __typename?: 'ComponentCoreButton'
-                            id: string
-                            text: string
-                            url: string
-                          } | null> | null
-                        }
-                      | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
                           caption?: string | null
@@ -3996,7 +3771,7 @@ export type HighlightedHomepageThemesQuery = {
                                 title: string
                                 slug: string
                                 description?: string | null
-                                shortDescription?: string | null
+                                shortDescription: string
                                 createdAt?: any | null
                                 updatedAt?: any | null
                                 publishedAt?: any | null
@@ -4135,7 +3910,6 @@ export type HighlightedHomepageThemesQuery = {
                             | { __typename: 'ComponentCoreMuxAudio' }
                             | { __typename: 'ComponentCoreMuxVideo' }
                             | { __typename: 'ComponentCoreStandAloneLink' }
-                            | { __typename: 'ComponentModulesButtonsModule' }
                             | {
                                 __typename: 'ComponentModulesImage'
                                 alt_text?: string | null
@@ -4189,7 +3963,7 @@ export type HighlightedHomepageThemesQuery = {
                                       title: string
                                       slug: string
                                       description?: string | null
-                                      shortDescription?: string | null
+                                      shortDescription: string
                                       createdAt?: any | null
                                       updatedAt?: any | null
                                       publishedAt?: any | null
@@ -4247,7 +4021,6 @@ export type HighlightedHomepageThemesQuery = {
                             | { __typename: 'ComponentCoreMuxAudio' }
                             | { __typename: 'ComponentCoreMuxVideo' }
                             | { __typename: 'ComponentCoreStandAloneLink' }
-                            | { __typename: 'ComponentModulesButtonsModule' }
                             | {
                                 __typename: 'ComponentModulesImage'
                                 alt_text?: string | null
@@ -4301,7 +4074,7 @@ export type HighlightedHomepageThemesQuery = {
                                       title: string
                                       slug: string
                                       description?: string | null
-                                      shortDescription?: string | null
+                                      shortDescription: string
                                       createdAt?: any | null
                                       updatedAt?: any | null
                                       publishedAt?: any | null
@@ -4533,7 +4306,7 @@ export type LandingpageFragmentFragment = {
               title: string
               slug: string
               description?: string | null
-              shortDescription?: string | null
+              shortDescription: string
               createdAt?: any | null
               updatedAt?: any | null
               publishedAt?: any | null
@@ -4759,7 +4532,7 @@ export type LandingpageEntityFragmentFragment = {
                       title: string
                       slug: string
                       description?: string | null
-                      shortDescription?: string | null
+                      shortDescription: string
                       createdAt?: any | null
                       updatedAt?: any | null
                       publishedAt?: any | null
@@ -4960,7 +4733,7 @@ export type LandingpageEntityFragmentFragment = {
                 title: string
                 slug: string
                 description?: string | null
-                shortDescription?: string | null
+                shortDescription: string
                 createdAt?: any | null
                 updatedAt?: any | null
                 publishedAt?: any | null
@@ -5196,7 +4969,7 @@ export type LandingPageQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -5397,7 +5170,7 @@ export type LandingPageQuery = {
                     title: string
                     slug: string
                     description?: string | null
-                    shortDescription?: string | null
+                    shortDescription: string
                     createdAt?: any | null
                     updatedAt?: any | null
                     publishedAt?: any | null
@@ -5638,7 +5411,7 @@ export type LandingPagesQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -5839,7 +5612,7 @@ export type LandingPagesQuery = {
                     title: string
                     slug: string
                     description?: string | null
-                    shortDescription?: string | null
+                    shortDescription: string
                     createdAt?: any | null
                     updatedAt?: any | null
                     publishedAt?: any | null
@@ -6158,7 +5931,7 @@ export type MenupageFragmentFragment = {
               title: string
               slug: string
               description?: string | null
-              shortDescription?: string | null
+              shortDescription: string
               createdAt?: any | null
               updatedAt?: any | null
               publishedAt?: any | null
@@ -6382,7 +6155,7 @@ export type MenupageEntityFragmentFragment = {
                       title: string
                       slug: string
                       description?: string | null
-                      shortDescription?: string | null
+                      shortDescription: string
                       createdAt?: any | null
                       updatedAt?: any | null
                       publishedAt?: any | null
@@ -6583,7 +6356,7 @@ export type MenupageEntityFragmentFragment = {
                 title: string
                 slug: string
                 description?: string | null
-                shortDescription?: string | null
+                shortDescription: string
                 createdAt?: any | null
                 updatedAt?: any | null
                 publishedAt?: any | null
@@ -6817,7 +6590,7 @@ export type MenuPageQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -7018,7 +6791,7 @@ export type MenuPageQuery = {
                     title: string
                     slug: string
                     description?: string | null
-                    shortDescription?: string | null
+                    shortDescription: string
                     createdAt?: any | null
                     updatedAt?: any | null
                     publishedAt?: any | null
@@ -7257,7 +7030,7 @@ export type MenuPagesQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -7458,7 +7231,7 @@ export type MenuPagesQuery = {
                     title: string
                     slug: string
                     description?: string | null
-                    shortDescription?: string | null
+                    shortDescription: string
                     createdAt?: any | null
                     updatedAt?: any | null
                     publishedAt?: any | null
@@ -7553,7 +7326,7 @@ export type StoriesQuery = {
         title: string
         slug: string
         description?: string | null
-        shortDescription?: string | null
+        shortDescription: string
         createdAt?: any | null
         updatedAt?: any | null
         publishedAt?: any | null
@@ -7644,16 +7417,6 @@ export type StoriesQuery = {
               } | null
             }
           | {
-              __typename: 'ComponentModulesButtonsModule'
-              id: string
-              buttons?: Array<{
-                __typename?: 'ComponentCoreButton'
-                id: string
-                text: string
-                url: string
-              } | null> | null
-            }
-          | {
               __typename: 'ComponentModulesImage'
               alt_text?: string | null
               caption?: string | null
@@ -7706,7 +7469,7 @@ export type StoriesQuery = {
                     title: string
                     slug: string
                     description?: string | null
-                    shortDescription?: string | null
+                    shortDescription: string
                     createdAt?: any | null
                     updatedAt?: any | null
                     publishedAt?: any | null
@@ -7833,7 +7596,6 @@ export type StoriesQuery = {
                 | { __typename: 'ComponentCoreMuxAudio' }
                 | { __typename: 'ComponentCoreMuxVideo' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
-                | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -7887,7 +7649,7 @@ export type StoriesQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -7945,7 +7707,6 @@ export type StoriesQuery = {
                 | { __typename: 'ComponentCoreMuxAudio' }
                 | { __typename: 'ComponentCoreMuxVideo' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
-                | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -7999,7 +7760,7 @@ export type StoriesQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -8103,7 +7864,7 @@ export type StoryQuery = {
         title: string
         slug: string
         description?: string | null
-        shortDescription?: string | null
+        shortDescription: string
         createdAt?: any | null
         updatedAt?: any | null
         publishedAt?: any | null
@@ -8194,16 +7955,6 @@ export type StoryQuery = {
               } | null
             }
           | {
-              __typename: 'ComponentModulesButtonsModule'
-              id: string
-              buttons?: Array<{
-                __typename?: 'ComponentCoreButton'
-                id: string
-                text: string
-                url: string
-              } | null> | null
-            }
-          | {
               __typename: 'ComponentModulesImage'
               alt_text?: string | null
               caption?: string | null
@@ -8256,7 +8007,7 @@ export type StoryQuery = {
                     title: string
                     slug: string
                     description?: string | null
-                    shortDescription?: string | null
+                    shortDescription: string
                     createdAt?: any | null
                     updatedAt?: any | null
                     publishedAt?: any | null
@@ -8383,7 +8134,6 @@ export type StoryQuery = {
                 | { __typename: 'ComponentCoreMuxAudio' }
                 | { __typename: 'ComponentCoreMuxVideo' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
-                | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -8437,7 +8187,7 @@ export type StoryQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -8495,7 +8245,6 @@ export type StoryQuery = {
                 | { __typename: 'ComponentCoreMuxAudio' }
                 | { __typename: 'ComponentCoreMuxVideo' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
-                | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -8549,7 +8298,7 @@ export type StoryQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -8742,16 +8491,6 @@ export type StoryByLocaleQuery = {
               } | null
             }
           | {
-              __typename: 'ComponentModulesButtonsModule'
-              id: string
-              buttons?: Array<{
-                __typename?: 'ComponentCoreButton'
-                id: string
-                text: string
-                url: string
-              } | null> | null
-            }
-          | {
               __typename: 'ComponentModulesImage'
               alt_text?: string | null
               caption?: string | null
@@ -8804,7 +8543,7 @@ export type StoryByLocaleQuery = {
                     title: string
                     slug: string
                     description?: string | null
-                    shortDescription?: string | null
+                    shortDescription: string
                     createdAt?: any | null
                     updatedAt?: any | null
                     publishedAt?: any | null
@@ -9000,16 +8739,6 @@ export type StoryByLocaleQuery = {
                     } | null
                   }
                 | {
-                    __typename: 'ComponentModulesButtonsModule'
-                    id: string
-                    buttons?: Array<{
-                      __typename?: 'ComponentCoreButton'
-                      id: string
-                      text: string
-                      url: string
-                    } | null> | null
-                  }
-                | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
                     caption?: string | null
@@ -9062,7 +8791,7 @@ export type StoryByLocaleQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -9276,16 +9005,6 @@ export type StoriesByLocaleQuery = {
               } | null
             }
           | {
-              __typename: 'ComponentModulesButtonsModule'
-              id: string
-              buttons?: Array<{
-                __typename?: 'ComponentCoreButton'
-                id: string
-                text: string
-                url: string
-              } | null> | null
-            }
-          | {
               __typename: 'ComponentModulesImage'
               alt_text?: string | null
               caption?: string | null
@@ -9338,7 +9057,7 @@ export type StoriesByLocaleQuery = {
                     title: string
                     slug: string
                     description?: string | null
-                    shortDescription?: string | null
+                    shortDescription: string
                     createdAt?: any | null
                     updatedAt?: any | null
                     publishedAt?: any | null
@@ -9534,16 +9253,6 @@ export type StoriesByLocaleQuery = {
                     } | null
                   }
                 | {
-                    __typename: 'ComponentModulesButtonsModule'
-                    id: string
-                    buttons?: Array<{
-                      __typename?: 'ComponentCoreButton'
-                      id: string
-                      text: string
-                      url: string
-                    } | null> | null
-                  }
-                | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
                     caption?: string | null
@@ -9596,7 +9305,7 @@ export type StoriesByLocaleQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -9693,7 +9402,7 @@ export type StoriesMetaByLocaleQuery = {
         __typename?: 'Story'
         title: string
         slug: string
-        shortDescription?: string | null
+        shortDescription: string
         description?: string | null
         createdAt?: any | null
         updatedAt?: any | null
@@ -9746,7 +9455,6 @@ export type StoriesMetaByLocaleQuery = {
                 | { __typename: 'ComponentCoreMuxAudio' }
                 | { __typename: 'ComponentCoreMuxVideo' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
-                | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -9800,7 +9508,7 @@ export type StoriesMetaByLocaleQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -9858,7 +9566,6 @@ export type StoriesMetaByLocaleQuery = {
                 | { __typename: 'ComponentCoreMuxAudio' }
                 | { __typename: 'ComponentCoreMuxVideo' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
-                | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -9912,7 +9619,7 @@ export type StoriesMetaByLocaleQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -9985,7 +9692,7 @@ export type StoriesMetaByLocaleQuery = {
               __typename?: 'Story'
               title: string
               slug: string
-              shortDescription?: string | null
+              shortDescription: string
               createdAt?: any | null
               updatedAt?: any | null
               publishedAt?: any | null
@@ -10065,7 +9772,6 @@ export type StoriesMetaByLocaleQuery = {
                       | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
-                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -10119,7 +9825,7 @@ export type StoriesMetaByLocaleQuery = {
                                 title: string
                                 slug: string
                                 description?: string | null
-                                shortDescription?: string | null
+                                shortDescription: string
                                 createdAt?: any | null
                                 updatedAt?: any | null
                                 publishedAt?: any | null
@@ -10177,7 +9883,6 @@ export type StoriesMetaByLocaleQuery = {
                       | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
-                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -10231,7 +9936,7 @@ export type StoriesMetaByLocaleQuery = {
                                 title: string
                                 slug: string
                                 description?: string | null
-                                shortDescription?: string | null
+                                shortDescription: string
                                 createdAt?: any | null
                                 updatedAt?: any | null
                                 publishedAt?: any | null
@@ -10315,7 +10020,7 @@ export type StoriesWithoutRelationsQuery = {
         title: string
         slug: string
         description?: string | null
-        shortDescription?: string | null
+        shortDescription: string
         createdAt?: any | null
         updatedAt?: any | null
         publishedAt?: any | null
@@ -10365,7 +10070,7 @@ export type StoryWithoutRelationsQuery = {
         title: string
         slug: string
         description?: string | null
-        shortDescription?: string | null
+        shortDescription: string
         createdAt?: any | null
         updatedAt?: any | null
         publishedAt?: any | null
@@ -10425,7 +10130,7 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
         title: string
         slug: string
         description?: string | null
-        shortDescription?: string | null
+        shortDescription: string
         createdAt?: any | null
         updatedAt?: any | null
         publishedAt?: any | null
@@ -10516,16 +10221,6 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
               } | null
             }
           | {
-              __typename: 'ComponentModulesButtonsModule'
-              id: string
-              buttons?: Array<{
-                __typename?: 'ComponentCoreButton'
-                id: string
-                text: string
-                url: string
-              } | null> | null
-            }
-          | {
               __typename: 'ComponentModulesImage'
               alt_text?: string | null
               caption?: string | null
@@ -10578,7 +10273,7 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
                     title: string
                     slug: string
                     description?: string | null
-                    shortDescription?: string | null
+                    shortDescription: string
                     createdAt?: any | null
                     updatedAt?: any | null
                     publishedAt?: any | null
@@ -10705,7 +10400,6 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
                 | { __typename: 'ComponentCoreMuxAudio' }
                 | { __typename: 'ComponentCoreMuxVideo' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
-                | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -10759,7 +10453,7 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -10817,7 +10511,6 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
                 | { __typename: 'ComponentCoreMuxAudio' }
                 | { __typename: 'ComponentCoreMuxVideo' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
-                | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -10871,7 +10564,7 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -10976,7 +10669,6 @@ export type StoriesByIdsQuery = {
           | { __typename?: 'ComponentCoreMuxAudio' }
           | { __typename?: 'ComponentCoreMuxVideo' }
           | { __typename?: 'ComponentCoreStandAloneLink' }
-          | { __typename?: 'ComponentModulesButtonsModule' }
           | {
               __typename: 'ComponentModulesImage'
               alt_text?: string | null
@@ -11030,7 +10722,7 @@ export type StoriesByIdsQuery = {
                     title: string
                     slug: string
                     description?: string | null
-                    shortDescription?: string | null
+                    shortDescription: string
                     createdAt?: any | null
                     updatedAt?: any | null
                     publishedAt?: any | null
@@ -11070,7 +10762,7 @@ export type StoriesByIdsQuery = {
               title: string
               slug: string
               description?: string | null
-              shortDescription?: string | null
+              shortDescription: string
               createdAt?: any | null
               updatedAt?: any | null
               publishedAt?: any | null
@@ -11150,7 +10842,7 @@ export type StoryWithoutRelationsFragmentFragment = {
     title: string
     slug: string
     description?: string | null
-    shortDescription?: string | null
+    shortDescription: string
     createdAt?: any | null
     updatedAt?: any | null
     publishedAt?: any | null
@@ -11305,16 +10997,6 @@ export type NestedStoryFragmentFragment = {
           } | null
         }
       | {
-          __typename: 'ComponentModulesButtonsModule'
-          id: string
-          buttons?: Array<{
-            __typename?: 'ComponentCoreButton'
-            id: string
-            text: string
-            url: string
-          } | null> | null
-        }
-      | {
           __typename: 'ComponentModulesImage'
           alt_text?: string | null
           caption?: string | null
@@ -11367,7 +11049,7 @@ export type NestedStoryFragmentFragment = {
                 title: string
                 slug: string
                 description?: string | null
-                shortDescription?: string | null
+                shortDescription: string
                 createdAt?: any | null
                 updatedAt?: any | null
                 publishedAt?: any | null
@@ -11564,16 +11246,6 @@ export type LocalizedStoryFragmentFragment = {
           } | null
         }
       | {
-          __typename: 'ComponentModulesButtonsModule'
-          id: string
-          buttons?: Array<{
-            __typename?: 'ComponentCoreButton'
-            id: string
-            text: string
-            url: string
-          } | null> | null
-        }
-      | {
           __typename: 'ComponentModulesImage'
           alt_text?: string | null
           caption?: string | null
@@ -11626,7 +11298,7 @@ export type LocalizedStoryFragmentFragment = {
                 title: string
                 slug: string
                 description?: string | null
-                shortDescription?: string | null
+                shortDescription: string
                 createdAt?: any | null
                 updatedAt?: any | null
                 publishedAt?: any | null
@@ -11822,16 +11494,6 @@ export type LocalizedStoryFragmentFragment = {
                 } | null
               }
             | {
-                __typename: 'ComponentModulesButtonsModule'
-                id: string
-                buttons?: Array<{
-                  __typename?: 'ComponentCoreButton'
-                  id: string
-                  text: string
-                  url: string
-                } | null> | null
-              }
-            | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
                 caption?: string | null
@@ -11884,7 +11546,7 @@ export type LocalizedStoryFragmentFragment = {
                       title: string
                       slug: string
                       description?: string | null
-                      shortDescription?: string | null
+                      shortDescription: string
                       createdAt?: any | null
                       updatedAt?: any | null
                       publishedAt?: any | null
@@ -11958,7 +11620,7 @@ export type StoryFragmentFragment = {
     title: string
     slug: string
     description?: string | null
-    shortDescription?: string | null
+    shortDescription: string
     createdAt?: any | null
     updatedAt?: any | null
     publishedAt?: any | null
@@ -12049,16 +11711,6 @@ export type StoryFragmentFragment = {
           } | null
         }
       | {
-          __typename: 'ComponentModulesButtonsModule'
-          id: string
-          buttons?: Array<{
-            __typename?: 'ComponentCoreButton'
-            id: string
-            text: string
-            url: string
-          } | null> | null
-        }
-      | {
           __typename: 'ComponentModulesImage'
           alt_text?: string | null
           caption?: string | null
@@ -12111,7 +11763,7 @@ export type StoryFragmentFragment = {
                 title: string
                 slug: string
                 description?: string | null
-                shortDescription?: string | null
+                shortDescription: string
                 createdAt?: any | null
                 updatedAt?: any | null
                 publishedAt?: any | null
@@ -12238,7 +11890,6 @@ export type StoryFragmentFragment = {
             | { __typename: 'ComponentCoreMuxAudio' }
             | { __typename: 'ComponentCoreMuxVideo' }
             | { __typename: 'ComponentCoreStandAloneLink' }
-            | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
@@ -12292,7 +11943,7 @@ export type StoryFragmentFragment = {
                       title: string
                       slug: string
                       description?: string | null
-                      shortDescription?: string | null
+                      shortDescription: string
                       createdAt?: any | null
                       updatedAt?: any | null
                       publishedAt?: any | null
@@ -12350,7 +12001,6 @@ export type StoryFragmentFragment = {
             | { __typename: 'ComponentCoreMuxAudio' }
             | { __typename: 'ComponentCoreMuxVideo' }
             | { __typename: 'ComponentCoreStandAloneLink' }
-            | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
@@ -12404,7 +12054,7 @@ export type StoryFragmentFragment = {
                       title: string
                       slug: string
                       description?: string | null
-                      shortDescription?: string | null
+                      shortDescription: string
                       createdAt?: any | null
                       updatedAt?: any | null
                       publishedAt?: any | null
@@ -12460,7 +12110,7 @@ export type StoryMetaFragmentFragment = {
     __typename?: 'Story'
     title: string
     slug: string
-    shortDescription?: string | null
+    shortDescription: string
     createdAt?: any | null
     updatedAt?: any | null
     publishedAt?: any | null
@@ -12540,7 +12190,6 @@ export type StoryMetaFragmentFragment = {
             | { __typename: 'ComponentCoreMuxAudio' }
             | { __typename: 'ComponentCoreMuxVideo' }
             | { __typename: 'ComponentCoreStandAloneLink' }
-            | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
@@ -12594,7 +12243,7 @@ export type StoryMetaFragmentFragment = {
                       title: string
                       slug: string
                       description?: string | null
-                      shortDescription?: string | null
+                      shortDescription: string
                       createdAt?: any | null
                       updatedAt?: any | null
                       publishedAt?: any | null
@@ -12652,7 +12301,6 @@ export type StoryMetaFragmentFragment = {
             | { __typename: 'ComponentCoreMuxAudio' }
             | { __typename: 'ComponentCoreMuxVideo' }
             | { __typename: 'ComponentCoreStandAloneLink' }
-            | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
@@ -12706,7 +12354,7 @@ export type StoryMetaFragmentFragment = {
                       title: string
                       slug: string
                       description?: string | null
-                      shortDescription?: string | null
+                      shortDescription: string
                       createdAt?: any | null
                       updatedAt?: any | null
                       publishedAt?: any | null
@@ -12762,7 +12410,7 @@ export type LocalizedStoryMetaFragmentFragment = {
     __typename?: 'Story'
     title: string
     slug: string
-    shortDescription?: string | null
+    shortDescription: string
     description?: string | null
     createdAt?: any | null
     updatedAt?: any | null
@@ -12815,7 +12463,6 @@ export type LocalizedStoryMetaFragmentFragment = {
             | { __typename: 'ComponentCoreMuxAudio' }
             | { __typename: 'ComponentCoreMuxVideo' }
             | { __typename: 'ComponentCoreStandAloneLink' }
-            | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
@@ -12869,7 +12516,7 @@ export type LocalizedStoryMetaFragmentFragment = {
                       title: string
                       slug: string
                       description?: string | null
-                      shortDescription?: string | null
+                      shortDescription: string
                       createdAt?: any | null
                       updatedAt?: any | null
                       publishedAt?: any | null
@@ -12927,7 +12574,6 @@ export type LocalizedStoryMetaFragmentFragment = {
             | { __typename: 'ComponentCoreMuxAudio' }
             | { __typename: 'ComponentCoreMuxVideo' }
             | { __typename: 'ComponentCoreStandAloneLink' }
-            | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
@@ -12981,7 +12627,7 @@ export type LocalizedStoryMetaFragmentFragment = {
                       title: string
                       slug: string
                       description?: string | null
-                      shortDescription?: string | null
+                      shortDescription: string
                       createdAt?: any | null
                       updatedAt?: any | null
                       publishedAt?: any | null
@@ -13054,7 +12700,7 @@ export type LocalizedStoryMetaFragmentFragment = {
           __typename?: 'Story'
           title: string
           slug: string
-          shortDescription?: string | null
+          shortDescription: string
           createdAt?: any | null
           updatedAt?: any | null
           publishedAt?: any | null
@@ -13134,7 +12780,6 @@ export type LocalizedStoryMetaFragmentFragment = {
                   | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
-                  | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
                       alt_text?: string | null
@@ -13188,7 +12833,7 @@ export type LocalizedStoryMetaFragmentFragment = {
                             title: string
                             slug: string
                             description?: string | null
-                            shortDescription?: string | null
+                            shortDescription: string
                             createdAt?: any | null
                             updatedAt?: any | null
                             publishedAt?: any | null
@@ -13246,7 +12891,6 @@ export type LocalizedStoryMetaFragmentFragment = {
                   | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
-                  | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
                       alt_text?: string | null
@@ -13300,7 +12944,7 @@ export type LocalizedStoryMetaFragmentFragment = {
                             title: string
                             slug: string
                             description?: string | null
-                            shortDescription?: string | null
+                            shortDescription: string
                             createdAt?: any | null
                             updatedAt?: any | null
                             publishedAt?: any | null
@@ -13745,7 +13389,7 @@ export type ComponentModulesImageFragmentFragment = {
         title: string
         slug: string
         description?: string | null
-        shortDescription?: string | null
+        shortDescription: string
         createdAt?: any | null
         updatedAt?: any | null
         publishedAt?: any | null
@@ -13991,7 +13635,7 @@ export type ThemeQuery = {
               title: string
               slug: string
               description?: string | null
-              shortDescription?: string | null
+              shortDescription: string
               createdAt?: any | null
               updatedAt?: any | null
               publishedAt?: any | null
@@ -14082,16 +13726,6 @@ export type ThemeQuery = {
                     } | null
                   }
                 | {
-                    __typename: 'ComponentModulesButtonsModule'
-                    id: string
-                    buttons?: Array<{
-                      __typename?: 'ComponentCoreButton'
-                      id: string
-                      text: string
-                      url: string
-                    } | null> | null
-                  }
-                | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
                     caption?: string | null
@@ -14144,7 +13778,7 @@ export type ThemeQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -14271,7 +13905,6 @@ export type ThemeQuery = {
                       | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
-                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -14325,7 +13958,7 @@ export type ThemeQuery = {
                                 title: string
                                 slug: string
                                 description?: string | null
-                                shortDescription?: string | null
+                                shortDescription: string
                                 createdAt?: any | null
                                 updatedAt?: any | null
                                 publishedAt?: any | null
@@ -14383,7 +14016,6 @@ export type ThemeQuery = {
                       | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
-                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -14437,7 +14069,7 @@ export type ThemeQuery = {
                                 title: string
                                 slug: string
                                 description?: string | null
-                                shortDescription?: string | null
+                                shortDescription: string
                                 createdAt?: any | null
                                 updatedAt?: any | null
                                 publishedAt?: any | null
@@ -14527,7 +14159,7 @@ export type ThemesQuery = {
               title: string
               slug: string
               description?: string | null
-              shortDescription?: string | null
+              shortDescription: string
               createdAt?: any | null
               updatedAt?: any | null
               publishedAt?: any | null
@@ -14618,16 +14250,6 @@ export type ThemesQuery = {
                     } | null
                   }
                 | {
-                    __typename: 'ComponentModulesButtonsModule'
-                    id: string
-                    buttons?: Array<{
-                      __typename?: 'ComponentCoreButton'
-                      id: string
-                      text: string
-                      url: string
-                    } | null> | null
-                  }
-                | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
                     caption?: string | null
@@ -14680,7 +14302,7 @@ export type ThemesQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -14807,7 +14429,6 @@ export type ThemesQuery = {
                       | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
-                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -14861,7 +14482,7 @@ export type ThemesQuery = {
                                 title: string
                                 slug: string
                                 description?: string | null
-                                shortDescription?: string | null
+                                shortDescription: string
                                 createdAt?: any | null
                                 updatedAt?: any | null
                                 publishedAt?: any | null
@@ -14919,7 +14540,6 @@ export type ThemesQuery = {
                       | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
-                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -14973,7 +14593,7 @@ export type ThemesQuery = {
                                 title: string
                                 slug: string
                                 description?: string | null
-                                shortDescription?: string | null
+                                shortDescription: string
                                 createdAt?: any | null
                                 updatedAt?: any | null
                                 publishedAt?: any | null
@@ -15071,7 +14691,7 @@ export type StoriesRelatedToThemeQuery = {
               title: string
               slug: string
               description?: string | null
-              shortDescription?: string | null
+              shortDescription: string
               createdAt?: any | null
               updatedAt?: any | null
               publishedAt?: any | null
@@ -15162,16 +14782,6 @@ export type StoriesRelatedToThemeQuery = {
                     } | null
                   }
                 | {
-                    __typename: 'ComponentModulesButtonsModule'
-                    id: string
-                    buttons?: Array<{
-                      __typename?: 'ComponentCoreButton'
-                      id: string
-                      text: string
-                      url: string
-                    } | null> | null
-                  }
-                | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
                     caption?: string | null
@@ -15224,7 +14834,7 @@ export type StoriesRelatedToThemeQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -15351,7 +14961,6 @@ export type StoriesRelatedToThemeQuery = {
                       | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
-                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -15405,7 +15014,7 @@ export type StoriesRelatedToThemeQuery = {
                                 title: string
                                 slug: string
                                 description?: string | null
-                                shortDescription?: string | null
+                                shortDescription: string
                                 createdAt?: any | null
                                 updatedAt?: any | null
                                 publishedAt?: any | null
@@ -15463,7 +15072,6 @@ export type StoriesRelatedToThemeQuery = {
                       | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
-                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -15517,7 +15125,7 @@ export type StoriesRelatedToThemeQuery = {
                                 title: string
                                 slug: string
                                 description?: string | null
-                                shortDescription?: string | null
+                                shortDescription: string
                                 createdAt?: any | null
                                 updatedAt?: any | null
                                 publishedAt?: any | null
@@ -15595,7 +15203,7 @@ export type ThemeFragmentFragment = {
           title: string
           slug: string
           description?: string | null
-          shortDescription?: string | null
+          shortDescription: string
           createdAt?: any | null
           updatedAt?: any | null
           publishedAt?: any | null
@@ -15686,16 +15294,6 @@ export type ThemeFragmentFragment = {
                 } | null
               }
             | {
-                __typename: 'ComponentModulesButtonsModule'
-                id: string
-                buttons?: Array<{
-                  __typename?: 'ComponentCoreButton'
-                  id: string
-                  text: string
-                  url: string
-                } | null> | null
-              }
-            | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
                 caption?: string | null
@@ -15748,7 +15346,7 @@ export type ThemeFragmentFragment = {
                       title: string
                       slug: string
                       description?: string | null
-                      shortDescription?: string | null
+                      shortDescription: string
                       createdAt?: any | null
                       updatedAt?: any | null
                       publishedAt?: any | null
@@ -15875,7 +15473,6 @@ export type ThemeFragmentFragment = {
                   | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
-                  | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
                       alt_text?: string | null
@@ -15929,7 +15526,7 @@ export type ThemeFragmentFragment = {
                             title: string
                             slug: string
                             description?: string | null
-                            shortDescription?: string | null
+                            shortDescription: string
                             createdAt?: any | null
                             updatedAt?: any | null
                             publishedAt?: any | null
@@ -15987,7 +15584,6 @@ export type ThemeFragmentFragment = {
                   | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
-                  | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
                       alt_text?: string | null
@@ -16041,7 +15637,7 @@ export type ThemeFragmentFragment = {
                             title: string
                             slug: string
                             description?: string | null
-                            shortDescription?: string | null
+                            shortDescription: string
                             createdAt?: any | null
                             updatedAt?: any | null
                             publishedAt?: any | null
@@ -16117,7 +15713,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
           title: string
           slug: string
           description?: string | null
-          shortDescription?: string | null
+          shortDescription: string
           createdAt?: any | null
           updatedAt?: any | null
           publishedAt?: any | null
@@ -16208,16 +15804,6 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                 } | null
               }
             | {
-                __typename: 'ComponentModulesButtonsModule'
-                id: string
-                buttons?: Array<{
-                  __typename?: 'ComponentCoreButton'
-                  id: string
-                  text: string
-                  url: string
-                } | null> | null
-              }
-            | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
                 caption?: string | null
@@ -16270,7 +15856,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                       title: string
                       slug: string
                       description?: string | null
-                      shortDescription?: string | null
+                      shortDescription: string
                       createdAt?: any | null
                       updatedAt?: any | null
                       publishedAt?: any | null
@@ -16397,7 +15983,6 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                   | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
-                  | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
                       alt_text?: string | null
@@ -16451,7 +16036,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                             title: string
                             slug: string
                             description?: string | null
-                            shortDescription?: string | null
+                            shortDescription: string
                             createdAt?: any | null
                             updatedAt?: any | null
                             publishedAt?: any | null
@@ -16509,7 +16094,6 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                   | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
-                  | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
                       alt_text?: string | null
@@ -16563,7 +16147,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                             title: string
                             slug: string
                             description?: string | null
-                            shortDescription?: string | null
+                            shortDescription: string
                             createdAt?: any | null
                             updatedAt?: any | null
                             publishedAt?: any | null
@@ -16622,7 +16206,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
           title: string
           slug: string
           description?: string | null
-          shortDescription?: string | null
+          shortDescription: string
           createdAt?: any | null
           updatedAt?: any | null
           publishedAt?: any | null
@@ -16713,16 +16297,6 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                 } | null
               }
             | {
-                __typename: 'ComponentModulesButtonsModule'
-                id: string
-                buttons?: Array<{
-                  __typename?: 'ComponentCoreButton'
-                  id: string
-                  text: string
-                  url: string
-                } | null> | null
-              }
-            | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
                 caption?: string | null
@@ -16775,7 +16349,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                       title: string
                       slug: string
                       description?: string | null
-                      shortDescription?: string | null
+                      shortDescription: string
                       createdAt?: any | null
                       updatedAt?: any | null
                       publishedAt?: any | null
@@ -16902,7 +16476,6 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                   | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
-                  | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
                       alt_text?: string | null
@@ -16956,7 +16529,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                             title: string
                             slug: string
                             description?: string | null
-                            shortDescription?: string | null
+                            shortDescription: string
                             createdAt?: any | null
                             updatedAt?: any | null
                             publishedAt?: any | null
@@ -17014,7 +16587,6 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                   | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
-                  | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
                       alt_text?: string | null
@@ -17068,7 +16640,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                             title: string
                             slug: string
                             description?: string | null
-                            shortDescription?: string | null
+                            shortDescription: string
                             createdAt?: any | null
                             updatedAt?: any | null
                             publishedAt?: any | null
@@ -17164,7 +16736,7 @@ export type TriplyRecordQuery = {
               title: string
               slug: string
               description?: string | null
-              shortDescription?: string | null
+              shortDescription: string
               createdAt?: any | null
               updatedAt?: any | null
               publishedAt?: any | null
@@ -17255,16 +16827,6 @@ export type TriplyRecordQuery = {
                     } | null
                   }
                 | {
-                    __typename: 'ComponentModulesButtonsModule'
-                    id: string
-                    buttons?: Array<{
-                      __typename?: 'ComponentCoreButton'
-                      id: string
-                      text: string
-                      url: string
-                    } | null> | null
-                  }
-                | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
                     caption?: string | null
@@ -17317,7 +16879,7 @@ export type TriplyRecordQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -17444,7 +17006,6 @@ export type TriplyRecordQuery = {
                       | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
-                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -17498,7 +17059,7 @@ export type TriplyRecordQuery = {
                                 title: string
                                 slug: string
                                 description?: string | null
-                                shortDescription?: string | null
+                                shortDescription: string
                                 createdAt?: any | null
                                 updatedAt?: any | null
                                 publishedAt?: any | null
@@ -17556,7 +17117,6 @@ export type TriplyRecordQuery = {
                       | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
-                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -17610,7 +17170,7 @@ export type TriplyRecordQuery = {
                                 title: string
                                 slug: string
                                 description?: string | null
-                                shortDescription?: string | null
+                                shortDescription: string
                                 createdAt?: any | null
                                 updatedAt?: any | null
                                 publishedAt?: any | null
@@ -17697,7 +17257,7 @@ export type TriplyRecordsQuery = {
               title: string
               slug: string
               description?: string | null
-              shortDescription?: string | null
+              shortDescription: string
               createdAt?: any | null
               updatedAt?: any | null
               publishedAt?: any | null
@@ -17788,16 +17348,6 @@ export type TriplyRecordsQuery = {
                     } | null
                   }
                 | {
-                    __typename: 'ComponentModulesButtonsModule'
-                    id: string
-                    buttons?: Array<{
-                      __typename?: 'ComponentCoreButton'
-                      id: string
-                      text: string
-                      url: string
-                    } | null> | null
-                  }
-                | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
                     caption?: string | null
@@ -17850,7 +17400,7 @@ export type TriplyRecordsQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -17977,7 +17527,6 @@ export type TriplyRecordsQuery = {
                       | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
-                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -18031,7 +17580,7 @@ export type TriplyRecordsQuery = {
                                 title: string
                                 slug: string
                                 description?: string | null
-                                shortDescription?: string | null
+                                shortDescription: string
                                 createdAt?: any | null
                                 updatedAt?: any | null
                                 publishedAt?: any | null
@@ -18089,7 +17638,6 @@ export type TriplyRecordsQuery = {
                       | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
-                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -18143,7 +17691,7 @@ export type TriplyRecordsQuery = {
                                 title: string
                                 slug: string
                                 description?: string | null
-                                shortDescription?: string | null
+                                shortDescription: string
                                 createdAt?: any | null
                                 updatedAt?: any | null
                                 publishedAt?: any | null
@@ -18229,7 +17777,7 @@ export type TriplyRecordFragmentFragment = {
           title: string
           slug: string
           description?: string | null
-          shortDescription?: string | null
+          shortDescription: string
           createdAt?: any | null
           updatedAt?: any | null
           publishedAt?: any | null
@@ -18320,16 +17868,6 @@ export type TriplyRecordFragmentFragment = {
                 } | null
               }
             | {
-                __typename: 'ComponentModulesButtonsModule'
-                id: string
-                buttons?: Array<{
-                  __typename?: 'ComponentCoreButton'
-                  id: string
-                  text: string
-                  url: string
-                } | null> | null
-              }
-            | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
                 caption?: string | null
@@ -18382,7 +17920,7 @@ export type TriplyRecordFragmentFragment = {
                       title: string
                       slug: string
                       description?: string | null
-                      shortDescription?: string | null
+                      shortDescription: string
                       createdAt?: any | null
                       updatedAt?: any | null
                       publishedAt?: any | null
@@ -18509,7 +18047,6 @@ export type TriplyRecordFragmentFragment = {
                   | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
-                  | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
                       alt_text?: string | null
@@ -18563,7 +18100,7 @@ export type TriplyRecordFragmentFragment = {
                             title: string
                             slug: string
                             description?: string | null
-                            shortDescription?: string | null
+                            shortDescription: string
                             createdAt?: any | null
                             updatedAt?: any | null
                             publishedAt?: any | null
@@ -18621,7 +18158,6 @@ export type TriplyRecordFragmentFragment = {
                   | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
-                  | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
                       alt_text?: string | null
@@ -18675,7 +18211,7 @@ export type TriplyRecordFragmentFragment = {
                             title: string
                             slug: string
                             description?: string | null
-                            shortDescription?: string | null
+                            shortDescription: string
                             createdAt?: any | null
                             updatedAt?: any | null
                             publishedAt?: any | null
@@ -19474,9 +19010,6 @@ export const NestedStoryFragmentFragmentDoc = gql`
         ... on ComponentModulesImage {
           ...ComponentModulesImageFragment
         }
-        ... on ComponentModulesButtonsModule {
-          ...ComponentModulesButtonsModuleFragment
-        }
         ... on ComponentCoreStandAloneLink {
           ...ComponentCoreStandAloneLinkFragment
         }
@@ -19498,7 +19031,6 @@ export const NestedStoryFragmentFragmentDoc = gql`
   ${ComponentModulesTitleModuleFragmentFragmentDoc}
   ${ComponentModulesImageCarouselFragmentFragmentDoc}
   ${ComponentModulesImageFragmentFragmentDoc}
-  ${ComponentModulesButtonsModuleFragmentFragmentDoc}
   ${ComponentCoreStandAloneLinkFragmentFragmentDoc}
   ${ComponentCoreMuxAudioFragmentFragmentDoc}
   ${ComponentCoreMuxVideoFragmentFragmentDoc}
@@ -19562,9 +19094,6 @@ export const LocalizedStoryFragmentFragmentDoc = gql`
         ... on ComponentModulesImage {
           ...ComponentModulesImageFragment
         }
-        ... on ComponentModulesButtonsModule {
-          ...ComponentModulesButtonsModuleFragment
-        }
         ... on ComponentCoreStandAloneLink {
           ...ComponentCoreStandAloneLinkFragment
         }
@@ -19591,7 +19120,6 @@ export const LocalizedStoryFragmentFragmentDoc = gql`
   ${ComponentModulesTitleModuleFragmentFragmentDoc}
   ${ComponentModulesImageCarouselFragmentFragmentDoc}
   ${ComponentModulesImageFragmentFragmentDoc}
-  ${ComponentModulesButtonsModuleFragmentFragmentDoc}
   ${ComponentCoreStandAloneLinkFragmentFragmentDoc}
   ${ComponentCoreMuxAudioFragmentFragmentDoc}
   ${ComponentCoreMuxVideoFragmentFragmentDoc}
@@ -19921,9 +19449,6 @@ export const StoryFragmentFragmentDoc = gql`
         ... on ComponentModulesImage {
           ...ComponentModulesImageFragment
         }
-        ... on ComponentModulesButtonsModule {
-          ...ComponentModulesButtonsModuleFragment
-        }
         ... on ComponentCoreStandAloneLink {
           ...ComponentCoreStandAloneLinkFragment
         }
@@ -20037,12 +19562,12 @@ export const StoryFragmentFragmentDoc = gql`
   ${ComponentModulesTitleModuleFragmentFragmentDoc}
   ${ComponentModulesImageCarouselFragmentFragmentDoc}
   ${ComponentModulesImageFragmentFragmentDoc}
-  ${ComponentModulesButtonsModuleFragmentFragmentDoc}
   ${ComponentCoreStandAloneLinkFragmentFragmentDoc}
   ${ComponentCoreMuxAudioFragmentFragmentDoc}
   ${ComponentCoreMuxVideoFragmentFragmentDoc}
   ${ErrorFragmentFragmentDoc}
   ${BaseTriplyRecordFragmentFragmentDoc}
+  ${ComponentModulesButtonsModuleFragmentFragmentDoc}
 `
 export const ThemeFragmentFragmentDoc = gql`
   fragment ThemeFragment on ThemeEntity {

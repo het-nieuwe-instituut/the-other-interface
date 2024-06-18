@@ -58,9 +58,6 @@ query storyById($locale: Locale!, $id: ID, $publicationState: String = "LIVE") {
           ... on ComponentModulesImageCarousel {
             ...imageCarouselModuleFragment
           }
-          ... on ComponentModulesButtonsModule {
-            ...buttonsModuleFragment
-          }
           ... on ComponentModulesSubtitle {
             ...subtitleModuleFragment
           }
@@ -114,7 +111,6 @@ query storyMetaById($locale: Locale!, $id: ID, $publicationState: String = "LIVE
         shortDescription
         createdAt
         updatedAt
-        publishedAt
         author {
           data {
             id

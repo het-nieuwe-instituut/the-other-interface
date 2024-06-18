@@ -4,7 +4,7 @@
   "info": {
     "singularName": "story",
     "pluralName": "stories",
-    "displayName": "DO NOT ADD - Story - TO BE REMOVED",
+    "displayName": "Story",
     "description": ""
   },
   "options": {
@@ -44,7 +44,6 @@
         "modules.title-module",
         "modules.image-carousel",
         "modules.image",
-        "modules.buttons-module",
         "core.stand-alone-link",
         "core.mux-audio",
         "core.mux-video"
@@ -74,7 +73,7 @@
       "repeatable": false,
       "pluginOptions": {
         "i18n": {
-          "localized": true
+          "localized": false
         }
       },
       "component": "core.timeframe"
@@ -91,7 +90,7 @@
       "repeatable": false,
       "pluginOptions": {
         "i18n": {
-          "localized": true
+          "localized": false
         }
       },
       "component": "core.publication-date"
@@ -113,7 +112,8 @@
         }
       },
       "type": "text",
-      "maxLength": 250
+      "maxLength": 250,
+      "required": true
     },
     "triplyRecords": {
       "type": "relation",
