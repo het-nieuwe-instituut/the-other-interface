@@ -414,6 +414,12 @@ export type Error = {
   message?: Maybe<Scalars['String']['output']>;
 };
 
+export type FilterSuggestionType = {
+  __typename?: 'FilterSuggestionType';
+  key: Scalars['String']['output'];
+  value: Scalars['String']['output'];
+};
+
 export type HighlightedHomepageThemeEntity = {
   __typename?: 'HighlightedHomepageThemeEntity';
   attributes?: Maybe<HighlightedHomepageThemes>;
@@ -1150,6 +1156,7 @@ export type Query = {
   archivesZoomRecordHover: ArchivesZoomLevelHoverType;
   author: AuthorEntityResponse;
   authors: AuthorEntityResponseCollection;
+  filterSuggestions?: Maybe<Array<FilterSuggestionType>>;
   highlightedHomepageThemes: HighlightedHomepageThemeEntityResponse;
   homepage: HomepageEntityResponse;
   landingpage: LandingpageEntityResponse;
@@ -1237,6 +1244,13 @@ export type QueryAuthorsArgs = {
   pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<Scalars['String']['input']>;
   sort?: InputMaybe<Array<Scalars['String']['input']>>;
+};
+
+
+export type QueryFilterSuggestionsArgs = {
+  locale: Locale;
+  search: Scalars['String']['input'];
+  type: EnumTriplyrecordType;
 };
 
 
@@ -1497,6 +1511,7 @@ export type QueryZoomLevel2Args = {
   locale: Locale;
   page: Scalars['Int']['input'];
   pageSize?: InputMaybe<Scalars['Int']['input']>;
+  selectedFilterSuggestions?: InputMaybe<Array<SelectedFilterSuggestion>>;
   text?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -1504,6 +1519,7 @@ export type QueryZoomLevel2Args = {
 export type QueryZoomLevel2AmountArgs = {
   entityName: EntityNames;
   locale: Locale;
+  selectedFilterSuggestions?: InputMaybe<Array<SelectedFilterSuggestion>>;
   text?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -1556,6 +1572,11 @@ export type SearchResultType = {
   nodes?: Maybe<Array<SearchResultItemType>>;
   page: Scalars['Int']['output'];
   total: Scalars['Int']['output'];
+};
+
+export type SelectedFilterSuggestion = {
+  key: Scalars['String']['input'];
+  value: Scalars['String']['input'];
 };
 
 export type StoriesRelatedToThemeResponse = {
