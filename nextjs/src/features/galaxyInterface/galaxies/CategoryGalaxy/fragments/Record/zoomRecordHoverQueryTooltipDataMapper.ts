@@ -63,8 +63,14 @@ export const zoomRecordHoverQueryTooltipDataMapper = (initialData: TooltipData) 
       return null
     }
 
+    const multipleTitles = title?.split(';')
+
     return {
-      title: joinNullableStrings(' ', title, `(${maker})`),
+      title: joinNullableStrings(
+        ' ',
+        multipleTitles && multipleTitles.length > 1 ? multipleTitles[0] : title,
+        `(${maker})`
+      ),
       description,
     }
   }

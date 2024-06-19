@@ -46,13 +46,13 @@ const objectsRelationsCountKeys: KeysToVerify<ObjectsRelationsCountType> = {
 
 export interface ObjectsZoomLevel2HoverData {
   title: string
-  profession: string
+  maker: string
   description: string
 }
 
 const objectsZoomLevel2HoverDataKeys: KeysToVerify<ObjectsZoomLevel2HoverData> = {
   title: true,
-  profession: true,
+  maker: true,
   description: true,
 }
 
