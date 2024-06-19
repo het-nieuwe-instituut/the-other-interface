@@ -55,7 +55,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
           top: 0,
           left: 0,
           objectFit: 'contain',
-          objectPosition: 'bottom',
+          objectPosition: 'center',
         }}
         onContextMenu={() => false}
         fill={true}
@@ -75,7 +75,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
             position: 'absolute',
             top: 0,
             left: 0,
-            objectPosition: 'bottom',
+            objectPosition: 'center',
             objectFit: fit,
           }}
           fill={true}

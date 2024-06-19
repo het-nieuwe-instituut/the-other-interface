@@ -38,8 +38,8 @@ export const Records: React.FC<Props> = ({ pageAmount, records }) => {
       <RecordsGrid
         css={{
           zIndex: LANDINGPAGE_Z_INDEXES.NEXT_PAGE,
-          opacity: 0.2,
-          filter: 'blur(6px)',
+          opacity: 0.3,
+          filter: 'blur(10px)',
           animation: isNextRecordsEmpty ? 'none' : `${nextPageFadeIn} 300ms linear`,
         }}
       >
