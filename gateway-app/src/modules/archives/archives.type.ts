@@ -29,7 +29,7 @@ export class ArchiveZoomLevel3DetailType {
 @ObjectType()
 export class ArchiveRelationsType {
   @Field(() => String, { nullable: true })
-  public id?: string | null
+  public idRelation?: string | null
 
   @Field(() => String, { nullable: true })
   public titleR?: string | null

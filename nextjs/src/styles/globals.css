@@ -4,6 +4,7 @@
 
 @import url(./utilities/group-hover-blur.css);
 @import url(./utilities/truncate.css);
+@import url(./utilities/table.css);
 
 @font-face {
   font-family: 'Impact';

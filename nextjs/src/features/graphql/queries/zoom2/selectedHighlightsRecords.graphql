@@ -1,4 +1,13 @@
-query searchBySelectedHighlights($filters: TriplyRecordFiltersInput, $page: Int, $pageSize: Int) {
+query searchBySelectedHighlights(
+  $filters: TriplyRecordFiltersInput
+  $page: Int
+  $pageSize: Int
+  $isArchive: Boolean!
+  $isPerson: Boolean!
+  $isPublication: Boolean!
+  $isObject: Boolean!
+  $locale: Locale!
+) {
   triplyRecords(filters: $filters, pagination: { page: $page, pageSize: $pageSize }) {
     data {
       id
@@ -6,6 +15,26 @@ query searchBySelectedHighlights($filters: TriplyRecordFiltersInput, $page: Int,
         label
         entityName
         recordId
+        archive(locale: $locale) @include(if: $isArchive) {
+          id
+          title
+          thumbnail
+        }
+        people(locale: $locale) @include(if: $isPerson) {
+          id
+          title
+          thumbnail
+        }
+        publication(locale: $locale) @include(if: $isPublication) {
+          id
+          title
+          thumbnail
+        }
+        object(locale: $locale) @include(if: $isObject) {
+          id
+          title
+          thumbnail
+        }
       }
     }
     meta {

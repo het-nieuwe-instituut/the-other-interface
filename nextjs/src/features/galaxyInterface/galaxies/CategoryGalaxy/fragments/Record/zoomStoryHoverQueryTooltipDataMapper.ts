@@ -9,7 +9,7 @@ export const zoomStoryHoverQueryTooltipDataMapper = (
   const { firstName, lastName } = author?.data?.attributes || {}
 
   const authorName = joinNullableStrings(' ', firstName, lastName)
-  const titleWithAuthor = joinNullableStrings(', ', title, authorName)
+  const titleWithAuthor = joinNullableStrings(' ', title, `(${authorName})`)
 
   return {
     title: titleWithAuthor,

@@ -22,7 +22,7 @@ export type Scalars = {
 
 export type ArchiveRelationsType = {
   __typename?: 'ArchiveRelationsType';
-  id?: Maybe<Scalars['String']['output']>;
+  idRelation?: Maybe<Scalars['String']['output']>;
   period?: Maybe<Scalars['String']['output']>;
   referenceNumber?: Maybe<Scalars['String']['output']>;
   titleR?: Maybe<Scalars['String']['output']>;
@@ -771,7 +771,7 @@ export type ObjectRelationsCountType = {
 export type ObjectRelationsType = {
   __typename?: 'ObjectRelationsType';
   externalSource?: Maybe<Scalars['String']['output']>;
-  id?: Maybe<Scalars['String']['output']>;
+  idRelation?: Maybe<Scalars['String']['output']>;
   period?: Maybe<Scalars['String']['output']>;
   referenceNumber?: Maybe<Scalars['String']['output']>;
   titleR?: Maybe<Scalars['String']['output']>;
@@ -2250,10 +2250,15 @@ export type SearchBySelectedHighlightsQueryVariables = Exact<{
   filters?: InputMaybe<TriplyRecordFiltersInput>;
   page?: InputMaybe<Scalars['Int']['input']>;
   pageSize?: InputMaybe<Scalars['Int']['input']>;
+  isArchive: Scalars['Boolean']['input'];
+  isPerson: Scalars['Boolean']['input'];
+  isPublication: Scalars['Boolean']['input'];
+  isObject: Scalars['Boolean']['input'];
+  locale: Locale;
 }>;
 
 
-export type SearchBySelectedHighlightsQuery = { __typename?: 'Query', triplyRecords: { __typename?: 'TriplyRecordRelationResponseCollection', data: Array<{ __typename?: 'TriplyRecordEntity', id?: string | null, attributes: { __typename?: 'TriplyRecord', label?: string | null, entityName: EntityNames, recordId: string } }>, meta?: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', page: number, total: number } } | null } };
+export type SearchBySelectedHighlightsQuery = { __typename?: 'Query', triplyRecords: { __typename?: 'TriplyRecordRelationResponseCollection', data: Array<{ __typename?: 'TriplyRecordEntity', id?: string | null, attributes: { __typename?: 'TriplyRecord', label?: string | null, entityName: EntityNames, recordId: string, archive?: { __typename?: 'ArchiveZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null } | null, people?: { __typename?: 'PeopleZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null } | null, publication?: { __typename?: 'PublicationZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null } | null, object?: { __typename?: 'ObjectsZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null } | null } }>, meta?: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', page: number, total: number } } | null } };
 
 export type Zoom2QueryVariables = Exact<{
   entityName: EntityNames;
@@ -2414,7 +2419,7 @@ export type ArchiveRecordRelationsQueryVariables = Exact<{
 }>;
 
 
-export type ArchiveRecordRelationsQuery = { __typename?: 'Query', archivesRecordRelations?: Array<{ __typename?: 'ArchiveRelationsType', id?: string | null, titleR?: string | null, referenceNumber?: string | null, period?: string | null }> | null };
+export type ArchiveRecordRelationsQuery = { __typename?: 'Query', archivesRecordRelations?: Array<{ __typename?: 'ArchiveRelationsType', idRelation?: string | null, titleR?: string | null, referenceNumber?: string | null, period?: string | null }> | null };
 
 export type ObjectRecordRelationsQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -2425,7 +2430,7 @@ export type ObjectRecordRelationsQueryVariables = Exact<{
 }>;
 
 
-export type ObjectRecordRelationsQuery = { __typename?: 'Query', objectRecordRelations?: Array<{ __typename?: 'ObjectRelationsType', id?: string | null, titleR?: string | null, referenceNumber?: string | null, period?: string | null, externalSource?: string | null }> | null };
+export type ObjectRecordRelationsQuery = { __typename?: 'Query', objectRecordRelations?: Array<{ __typename?: 'ObjectRelationsType', idRelation?: string | null, titleR?: string | null, referenceNumber?: string | null, period?: string | null }> | null };
 
 export type PeopleRecordRelationsQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -2436,7 +2441,7 @@ export type PeopleRecordRelationsQueryVariables = Exact<{
 }>;
 
 
-export type PeopleRecordRelationsQuery = { __typename?: 'Query', peopleRecordRelations?: Array<{ __typename?: 'PeopleRelationsType', idRelation?: string | null, relationName?: string | null, titleR?: string | null, occupation?: string | null, period?: string | null, externalSource?: string | null }> | null };
+export type PeopleRecordRelationsQuery = { __typename?: 'Query', peopleRecordRelations?: Array<{ __typename?: 'PeopleRelationsType', idRelation?: string | null, relationName?: string | null, titleR?: string | null, occupation?: string | null, period?: string | null }> | null };
 
 export type PublicationRecordRelationsQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -2447,7 +2452,7 @@ export type PublicationRecordRelationsQueryVariables = Exact<{
 }>;
 
 
-export type PublicationRecordRelationsQuery = { __typename?: 'Query', publicationRecordRelations?: Array<{ __typename?: 'PublicationRelationsType', idRelation?: string | null, titleR?: string | null, typePub?: string | null, yearPub?: string | null, externalSource?: string | null }> | null };
+export type PublicationRecordRelationsQuery = { __typename?: 'Query', publicationRecordRelations?: Array<{ __typename?: 'PublicationRelationsType', idRelation?: string | null, titleR?: string | null, typePub?: string | null, yearPub?: string | null }> | null };
 
 export type ArchivesRecordRelationsCountQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -3649,7 +3654,7 @@ export const PublicationsZoomRecordHoverDocument = gql`
 }
     `;
 export const SearchBySelectedHighlightsDocument = gql`
-    query searchBySelectedHighlights($filters: TriplyRecordFiltersInput, $page: Int, $pageSize: Int) {
+    query searchBySelectedHighlights($filters: TriplyRecordFiltersInput, $page: Int, $pageSize: Int, $isArchive: Boolean!, $isPerson: Boolean!, $isPublication: Boolean!, $isObject: Boolean!, $locale: Locale!) {
   triplyRecords(filters: $filters, pagination: {page: $page, pageSize: $pageSize}) {
     data {
       id
@@ -3657,6 +3662,26 @@ export const SearchBySelectedHighlightsDocument = gql`
         label
         entityName
         recordId
+        archive(locale: $locale) @include(if: $isArchive) {
+          id
+          title
+          thumbnail
+        }
+        people(locale: $locale) @include(if: $isPerson) {
+          id
+          title
+          thumbnail
+        }
+        publication(locale: $locale) @include(if: $isPublication) {
+          id
+          title
+          thumbnail
+        }
+        object(locale: $locale) @include(if: $isObject) {
+          id
+          title
+          thumbnail
+        }
       }
     }
     meta {
@@ -3949,7 +3974,7 @@ export const ArchiveRecordRelationsDocument = gql`
     page: $page
     pageSize: $pageSize
   ) {
-    id
+    idRelation
     titleR
     referenceNumber
     period
@@ -3965,11 +3990,10 @@ export const ObjectRecordRelationsDocument = gql`
     page: $page
     pageSize: $pageSize
   ) {
-    id
+    idRelation
     titleR
     referenceNumber
     period
-    externalSource
   }
 }
     `;
@@ -3987,7 +4011,6 @@ export const PeopleRecordRelationsDocument = gql`
     titleR
     occupation
     period
-    externalSource
   }
 }
     `;
@@ -4004,7 +4027,6 @@ export const PublicationRecordRelationsDocument = gql`
     titleR
     typePub
     yearPub
-    externalSource
   }
 }
     `;
@@ -4214,7 +4236,7 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     PublicationsZoomRecordHover(variables: PublicationsZoomRecordHoverQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<PublicationsZoomRecordHoverQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<PublicationsZoomRecordHoverQuery>(PublicationsZoomRecordHoverDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'PublicationsZoomRecordHover', 'query');
     },
-    searchBySelectedHighlights(variables?: SearchBySelectedHighlightsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<SearchBySelectedHighlightsQuery> {
+    searchBySelectedHighlights(variables: SearchBySelectedHighlightsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<SearchBySelectedHighlightsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<SearchBySelectedHighlightsQuery>(SearchBySelectedHighlightsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'searchBySelectedHighlights', 'query');
     },
     Zoom2(variables: Zoom2QueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<Zoom2Query> {

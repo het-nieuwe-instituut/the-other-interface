@@ -4,6 +4,7 @@ import { Box, Text, Flex, useBreakpoint } from '../../configs/chakra'
 
 import { MOBILE_OVERLAY_Z_INDEX } from '../../constants/mainConstants'
 import { StaticHeader } from '../StaticHeader/StaticHeader'
+import useDisableScroll from '../../hooks/ui/useDisableScroll'
 
 interface Props {
   children: React.ReactNode
@@ -23,6 +24,10 @@ const MobileOverlayProvider = (props: Props) => {
 
 const MobileOverlay = () => {
   const { t: tCommon } = useLooseTypeSafeTranslation('common')
+  const breakpoint = useBreakpoint()
+  const isMobile = breakpoint === 'sm'
+
+  useDisableScroll(isMobile)
 
   return (
     <Flex
