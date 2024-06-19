@@ -103,7 +103,7 @@ export class ObjectsZoomLevel3DetailType {
 @ObjectType()
 export class ObjectRelationsType {
   @Field(() => String, { nullable: true })
-  public id?: string | null
+  public idRelation?: string | null
 
   @Field(() => String, { nullable: true })
   public titleR?: string | null

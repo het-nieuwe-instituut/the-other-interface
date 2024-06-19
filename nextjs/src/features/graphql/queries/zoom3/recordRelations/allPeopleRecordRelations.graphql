@@ -5,6 +5,5 @@ query PeopleRecordRelations($id: String!, $type: EntityNames!, $locale: Locale!,
         titleR
         occupation
         period
-        externalSource
     }
 }
