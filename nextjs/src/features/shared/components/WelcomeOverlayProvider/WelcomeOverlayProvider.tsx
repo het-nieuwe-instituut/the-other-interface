@@ -32,7 +32,7 @@ const WelcomeOverlayProvider: React.FC<Props> = ({ children }) => {
   }
 
   return (
-    <div className="relative size-full">
+    <div className="relative size-full overflow-hidden">
       {showOverlay && <WelcomeOverlay onClose={closeOverlay} />}
       {children}
     </div>
@@ -41,7 +41,6 @@ const WelcomeOverlayProvider: React.FC<Props> = ({ children }) => {
 
 const WelcomeOverlay = ({ onClose }: { onClose: () => void }) => {
   const { t: tCommon } = useLooseTypeSafeTranslation('common')
-  useDisableScroll(true)
 
   return (
     <div className="fixed inset-0 z-20 h-screen w-screen px-0">
@@ -57,7 +56,7 @@ const WelcomeOverlay = ({ onClose }: { onClose: () => void }) => {
           >
             {tCommon('welcomeDescription')}
           </p>
-          <Button intent={'primary'} className="w-[185px]" onClick={onClose}>
+          <Button intent={'invertedSecondary'} className="w-[185px]" onClick={onClose}>
             {tCommon('welcomeButton')}
           </Button>
         </div>
