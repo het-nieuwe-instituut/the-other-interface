@@ -8,6 +8,7 @@ import { NavLinkButton } from '@/features/ui/components/nav-link-button/componen
 import Link from 'next/link'
 import { useDispatch } from 'react-redux'
 import { sharedActions } from '../../stores/shared.store'
+import useDisableScroll from '../../hooks/ui/useDisableScroll'
 
 const categories = [
   { name: 'archives', translationKey: 'archives' },
@@ -20,6 +21,8 @@ export const Navigation = () => {
   const { isMenuOpen, ref, navTextStyle, lang } = useNavSettings()
   const { t: tNavigation } = useTranslation('navigation')
   const dispatch = useDispatch()
+
+  useDisableScroll(isMenuOpen)
 
   return (
     <div
