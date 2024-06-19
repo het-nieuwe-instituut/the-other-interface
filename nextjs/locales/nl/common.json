@@ -22,5 +22,7 @@
   "noDataFound": "Geen data gevonden",
   "audio": "De audio is nog niet klaar, probeer het later opnieuw.",
   "video": "De video is nog niet klaar, probeer het later opnieuw.",
-  "seeFullImage": "Bekijk volledige afbeelding"
+  "seeFullImage": "Bekijk volledige afbeelding",
+  "welcomeDescription": "Het Collectieplatform van Nieuwe Instituut is hét platform om de Nationale Collectie Architectuur en Stedenbouw te ontdekken. Lees verhalen, duik in records en doorzoek de collectie.",
+  "welcomeButton": "Start hier"
 }
