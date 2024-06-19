@@ -201,7 +201,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }
           label={t('suggestions')}
           offset={searchBarHeight}
         >
-          <Suggestions suggestionsData={[]} handleSelectFilter={selectFilter} category={'all'} />
+          <Suggestions suggestionsData={[]} handleSelectFilter={selectFilter} />
         </SuggestionBar>
       )}
     </div>
