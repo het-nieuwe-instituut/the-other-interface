@@ -41,6 +41,7 @@ export const TypographyVariants = cva('', {
       label:
         ' self-stretch font-social-large text-[11px] not-italic leading-[11px_] tracking-[0.11px]',
       textfield: 'self-stretch font-social-large text-[18px] leading-[18px_] tracking-[0.18px]',
+      sidebarTitle: 'font-social-large text-[16px] font-bold leading-[130%]',
     },
     socialMedium: {
       xl: [

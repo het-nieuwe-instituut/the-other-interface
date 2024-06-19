@@ -317,7 +317,7 @@ export class PublicationsService {
     const result = await this.triplyService.queryTriplyData<PublicationsRelationsCountType>(
       this.ZoomLevel3RelationsCountEndpoint,
       publicationsRelationsCountKeys,
-      { page: 1, pageSize: 1 },
+      undefined,
       { id, type }
     )
 
