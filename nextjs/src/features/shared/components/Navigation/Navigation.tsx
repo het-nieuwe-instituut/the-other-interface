@@ -9,6 +9,8 @@ import Link from 'next/link'
 import { useDispatch } from 'react-redux'
 import { sharedActions } from '../../stores/shared.store'
 import useDisableScroll from '../../hooks/ui/useDisableScroll'
+import { MAX_Z_INDEX, NAVIGATION_OVERLAY_Z_INDEX } from '../../constants/mainConstants'
+import { CSSProperties } from 'react'
 
 const categories = [
   { name: 'archives', translationKey: 'archives' },
@@ -26,17 +28,21 @@ export const Navigation = () => {
 
   return (
     <div
+      style={{ '--z-index': `${NAVIGATION_OVERLAY_Z_INDEX}` } as CSSProperties}
       className={cn(
         isMenuOpen
           ? 'visible transition-opacity ease-out duration-300 opacity-95'
           : 'invisible transition-opacity ease-in duration-300 opacity-0',
-        'fixed right-0 top-0 h-screen w-full z-[9998] md:overflow-hidden overflow-y-scroll bg-blue-95 backdrop-blur-3xl'
+        'fixed right-0 top-0 h-screen w-full z-[var(--z-index)] md:overflow-hidden overflow-y-scroll bg-blue-95 backdrop-blur-3xl'
       )}
       ref={ref}
     >
       <div className="absolute left-0 top-0 h-screen w-full">
         <StaticHeader />
-        <div className="relative z-[9999] mx-auto flex max-w-[90em] flex-col justify-between px-6 pt-24 md:flex-row">
+        <div
+          style={{ '--z-index': `${MAX_Z_INDEX}` } as CSSProperties}
+          className="relative z-[var(--z-index)] mx-auto flex max-w-[90em] flex-col justify-between px-6 pt-24 md:flex-row"
+        >
           <div className="flex min-w-[388px] max-w-[711px] flex-col pb-20 pr-[32px]">
             <p
               className={TypographyVariants({

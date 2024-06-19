@@ -6,8 +6,11 @@ import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { StaticHeader } from '@/features/shared/components/StaticHeader/StaticHeader'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function generateMetadata(props: any): Promise<Metadata> {
+export type MetaDataProps = {
+  searchParams: { [key: string]: string | string[] | undefined }
+}
+
+export async function generateMetadata(props: MetaDataProps): Promise<Metadata> {
   const { searchParams } = props
   const lang = searchParams.lang as string
   const metaData = getMetaDataTranslations(lang)
