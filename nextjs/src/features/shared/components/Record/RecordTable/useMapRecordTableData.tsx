@@ -55,7 +55,6 @@ export const useMapRecordTableData = (data: DataType[] | undefined, category: Ca
         { label: t('relatedPublications') },
         { label: t('type') },
         { label: t('yearPublished') },
-        { label: t('externalSource') },
       ],
       tableBody: mapData,
       total: data[0]?.total ?? '0',
