@@ -12,7 +12,7 @@
         "description": null,
         "fields": [
           {
-            "name": "id",
+            "name": "idRelation",
             "description": null,
             "args": [],
             "type": {
@@ -6797,7 +6797,7 @@
             "deprecationReason": null
           },
           {
-            "name": "id",
+            "name": "idRelation",
             "description": null,
             "args": [],
             "type": {
