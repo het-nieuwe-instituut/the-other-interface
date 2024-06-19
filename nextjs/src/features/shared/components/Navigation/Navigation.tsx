@@ -7,6 +7,7 @@ import { StaticHeader } from '../StaticHeader/StaticHeader'
 import { usePresenter } from './usePresenter'
 import { MenuPagesQuery } from 'src/generated/graphql'
 import useTranslation from 'next-translate/useTranslation'
+import useDisableScroll from '../../hooks/ui/useDisableScroll'
 
 const fadeIn = keyframes({ from: { opacity: 0 }, to: { opacity: 0.8 } })
 const fadeOut = keyframes({ from: { opacity: 0.85 }, to: { opacity: 0 } })
@@ -25,7 +26,7 @@ type Props = {
 export const Navigation = ({ menupages }: Props) => {
   const { isMenuOpen, ref, navTextStyle, overflowValue, lang } = usePresenter()
   const { t: tNavigation } = useTranslation('navigation')
-
+  useDisableScroll(isMenuOpen)
   return (
     <Box
       ref={ref}

@@ -1,19 +1,10 @@
-import { chunk, keyExtractor } from '@/features/shared/utils/lists'
-import {
-  Box,
-  Table,
-  TableContainer,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
-  useBreakpoint,
-  Text,
-} from '@chakra-ui/react'
+import { Box, Text } from '@chakra-ui/react'
 import { modulesSpacingMapper } from '../../modulesSpacing'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { cn } from '@/features/ui/utils/cn'
+import React from 'react'
+import Link from 'next/link'
+import { useLocale } from '@/features/shared/hooks/useLocale'
 
 interface Props {
   component?: TableModuleType
@@ -22,6 +13,7 @@ interface Props {
 }
 
 interface TableModuleType {
+  type?: string
   name?: string | null
   description?: string | null
   tableBody?: TableBody[] | null
@@ -29,6 +21,7 @@ interface TableModuleType {
 }
 
 interface TableBody {
+  id: string
   TableBodyItem?: { id: string; value?: string }[] | null
 }
 
@@ -39,26 +32,9 @@ interface TableHeadItem {
 
 export const TableModule: React.FC<Props> = props => {
   const { component, LoadMore, count } = props
-  const breakpoint = useBreakpoint()
 
   if (!component) {
     return null
-  }
-
-  if (breakpoint === 'sm' || breakpoint === 'base') {
-    return (
-      <Box
-        backgroundColor={'inherit'}
-        pt={modulesSpacingMapper?.TableModule.spacingTop}
-        pb={modulesSpacingMapper?.TableModule.spacingBottom}
-      >
-        <h2 className={cn(TypographyVariants({ responsive: 'title' }), 'mb-4')}>
-          {component.name} {count ? `(${count})` : ''}
-        </h2>
-        {component.description && <Text pb={'md'}>{component.description}</Text>}
-        <TableModuleMobile component={component} />
-      </Box>
-    )
   }
 
   return (
@@ -67,105 +43,88 @@ export const TableModule: React.FC<Props> = props => {
       pt={modulesSpacingMapper?.TableModule.spacingTop}
       pb={modulesSpacingMapper?.TableModule.spacingBottom}
     >
-      <h2 className={cn(TypographyVariants({ responsive: 'title' }), 'mb-4')}>
-        {component.name} {count ? `(${count})` : ''}
-      </h2>
+      <div className="relative flex">
+        <h2 className={cn(TypographyVariants({ responsive: 'title' }), 'mb-4')}>
+          {component.name}
+        </h2>
+        <span
+          className={cn(TypographyVariants({ socialLarge: 'xl' }), 'relative top-0 -right-2 bold')}
+        >
+          {count ? `${count}` : ''}
+        </span>
+      </div>
+
       {component.description && (
         <Text pb={'md'} textStyle={'socialLarge.lg'}>
           {component.description}
         </Text>
       )}
-      <TableModuleDesktop component={component} LoadMore={LoadMore} />
+      <ResponsiveTable component={component} LoadMore={LoadMore} />
     </Box>
   )
 }
 
-export const TableModuleMobile: React.FC<Props> = props => {
-  const body = props?.component?.tableBody
+const ResponsiveTable: React.FC<Props> = ({ component, LoadMore }: Props) => {
+  const lang = useLocale()
+  if (!component) return null
 
   return (
-    <TableContainer>
-      <Table variant="simple">
-        <Tbody>
-          {body?.map((item, index) => {
-            const chunkedItems = chunk(item?.TableBodyItem ?? [], 2)
-
-            return (
-              <Tr key={index}>
-                {chunkedItems.map((bodyItem, index, array) => {
-                  return (
-                    <Td key={keyExtractor(bodyItem[0], index, array)} verticalAlign={'top'}>
-                      {bodyItem[0] && (
-                        <Text margin={0} fontSize={'16px'} mb={1}>
-                          {bodyItem[0]?.value}
-                        </Text>
-                      )}
-
-                      {bodyItem[1] && (
-                        <Text margin={0} fontSize={'16px'} mt={0}>
-                          {bodyItem[1]?.value}
-                        </Text>
-                      )}
-                    </Td>
-                  )
-                })}
-              </Tr>
-            )
-          })}
-        </Tbody>
-      </Table>
-    </TableContainer>
-  )
-}
-
-export const TableModuleDesktop: React.FC<Props> = props => {
-  const head = props?.component?.tableHead
-  const body = props?.component?.tableBody
-  const LoadMore = props.LoadMore
-
-  return (
-    <TableContainer>
-      <Table>
-        <Thead>
-          <Tr>
-            {head?.map((item, index, array) => (
-              <Th
-                key={keyExtractor(item, index, array)}
-                textTransform={'initial'}
-                // Overriding styles with textStyle does not work on this component
-                color={'black'}
-                fontSize={'16px'}
-                lineHeight={'130%'}
-                fontFamily={'Social'}
-                letterSpacing={'0.32px'}
-              >
-                {item?.label}
-              </Th>
-            ))}
-          </Tr>
-        </Thead>
-        <Tbody>
-          {body?.map((item, index) => (
-            <Tr key={index}>
-              {item?.TableBodyItem?.map((bodyItem, index, array) => (
-                <Td
-                  key={keyExtractor(bodyItem, index, array)}
-                  // Overriding styles with textStyle does not work on this component
-                  fontSize={index === 0 ? '32px' : '21px'}
-                  fontWeight={index === 0 ? '700' : '400'}
-                  lineHeight={index === 0 ? '110%' : '130%'}
-                  letterSpacing={index === 0 ? '-0.32px' : '0.21px'}
-                  maxW={'250px'}
-                  whiteSpace={'normal'}
+    <div className="bg-inherit">
+      <div className="hidden lg:block">
+        <table className="min-w-full">
+          <thead className="hidden lg:table-header-group">
+            <tr className="tr-border-gradient">
+              {component.tableHead?.map(item => (
+                <th
+                  key={item.id}
+                  className={cn(
+                    TypographyVariants({ socialLarge: 'sidebarTitle' }),
+                    'text-black-100 text-left py-2 pr-2'
+                  )}
                 >
-                  {bodyItem?.value}
-                </Td>
+                  {item.label}
+                </th>
               ))}
-            </Tr>
-          ))}
-        </Tbody>
-      </Table>
-      {LoadMore && <>{LoadMore}</>}
-    </TableContainer>
+            </tr>
+          </thead>
+          <tbody>
+            {component.tableBody?.map((item, rowIndex) => (
+              <tr key={rowIndex} className="tr-border-gradient">
+                {item.TableBodyItem?.map((bodyItem, cellIndex) => (
+                  <td
+                    key={bodyItem.id}
+                    className={cn(
+                      TypographyVariants({ socialLarge: cellIndex === 0 ? 'xl' : 'lg' }),
+                      'text-left, py-6 pr-2 cursor-pointer'
+                    )}
+                  >
+                    <Link href={`/detail/${component.type}/${item.id}?lang=${lang}`}>
+                      {Boolean(bodyItem.value) ? bodyItem.value : 'n/a'}
+                    </Link>
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div className="lg:hidden">
+        {component.tableBody?.map((item, rowIndex) => (
+          <div key={rowIndex} className="py-4 tr-border-gradient flex flex-col justify-center">
+            {item.TableBodyItem?.map((bodyItem, cellIndex) => (
+              <Link href={`/detail/${component.type}/${item.id}?lang=${lang}`} key={bodyItem.id}>
+                <span
+                  key={bodyItem.id}
+                  className={TypographyVariants({ socialLarge: cellIndex === 0 ? 'xl' : 'lg' })}
+                >
+                  {Boolean(bodyItem.value) ? bodyItem.value : 'n/a'}
+                </span>
+              </Link>
+            ))}
+          </div>
+        ))}
+      </div>
+      {LoadMore}
+    </div>
   )
 }
