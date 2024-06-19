@@ -12,7 +12,7 @@ const BlurOverlay: React.FC = () => {
       backdropFilter="blur(5px)"
       backgroundColor={'pinkAlpha.60'}
       zIndex={SEARCH_MODE_OVERLAY_Z_INDEX}
-      cursor={'grab'}
+      cursor={'pointer'}
     />
   )
 }

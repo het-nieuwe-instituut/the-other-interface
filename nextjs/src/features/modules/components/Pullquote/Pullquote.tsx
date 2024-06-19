@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const Pullquote: React.FC<Props> = ({ children, className }) => {
-  let text = convertToCurlyQuotes(children)
+  const text = convertToCurlyQuotes(children)
   return (
     <aside className={cn('w-full bg-inherit', className)}>
       <blockquote>
