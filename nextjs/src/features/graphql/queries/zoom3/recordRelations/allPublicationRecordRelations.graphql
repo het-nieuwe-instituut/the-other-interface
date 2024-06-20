@@ -4,6 +4,5 @@ query PublicationRecordRelations($id: String!, $type: EntityNames!, $locale: Loc
         titleR
         typePub
         yearPub
-        externalSource
     }
 }

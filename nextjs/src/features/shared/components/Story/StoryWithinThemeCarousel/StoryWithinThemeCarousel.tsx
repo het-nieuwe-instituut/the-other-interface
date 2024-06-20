@@ -41,9 +41,9 @@ export const StoryWithinThemeCarousel = () => {
     <div>
       {stories && stories.length > 0 && (
         <>
-          <h1 className={TypographyVariants({ impact: 'lg', className: 'mb-4' })}>
+          <h2 className={TypographyVariants({ responsive: 'title', className: 'mb-4' })}>
             {tStories('moreOnTheme')} ({stories.length})
-          </h1>
+          </h2>
 
           <ImageCarousel>
             {stories.map(item => {

@@ -141,13 +141,9 @@ export class PeopleService {
   protected entityType = 'triply'
 
   private readonly ZoomLevel3Endpoint = 'people-recordPage/run?'
-
   private readonly ZoomLevel3RelationsEndpoint = 'people-recordRelations/run?'
-
   private readonly ZoomLevel3RelationsCountEndpoint = 'people-recordRelations-Count/run?'
-
   private readonly ZoomLevel3RecordEndpoint = 'people-recordPage-editorial/run?'
-
   private readonly ZoomLevel2HoverEndpoint = 'people-hoverState/run?'
 
   public constructor(private triplyService: TriplyService) {}
@@ -194,7 +190,7 @@ export class PeopleService {
     const result = await this.triplyService.queryTriplyData<PeopleRelationsCountType>(
       this.ZoomLevel3RelationsCountEndpoint,
       peopleRelationsCountKeys,
-      { page: 1, pageSize: 1 },
+      undefined,
       { id, type }
     )
 
