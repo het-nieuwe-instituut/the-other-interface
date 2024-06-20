@@ -13,6 +13,7 @@ import { useParams } from 'next/navigation'
 import { useMemo } from 'react'
 import ErrorBox from '../../Error/ErrorBox'
 import { ThemedSpinner } from '../../Loading/ThemedSpinner/ThemedSpinner'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
 
 export const RelatedStoriesCarousel = () => {
   const params = useParams()
@@ -63,9 +64,9 @@ export const RelatedStoriesCarousel = () => {
     <div>
       {stories && stories.length > 0 && (
         <>
-          <h1 className="mb-4">
+          <h2 className={TypographyVariants({ responsive: 'title', className: 'mb-4' })}>
             {tStories('relatedStories')} ({stories.length})
-          </h1>
+          </h2>
 
           <ImageCarousel>
             {stories.map(item => {

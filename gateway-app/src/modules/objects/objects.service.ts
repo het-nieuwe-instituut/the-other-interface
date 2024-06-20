@@ -46,13 +46,13 @@ const objectsRelationsCountKeys: KeysToVerify<ObjectsRelationsCountType> = {
 
 export interface ObjectsZoomLevel2HoverData {
   title: string
-  profession: string
+  maker: string
   description: string
 }
 
 const objectsZoomLevel2HoverDataKeys: KeysToVerify<ObjectsZoomLevel2HoverData> = {
   title: true,
-  profession: true,
+  maker: true,
   description: true,
 }
 
@@ -96,13 +96,9 @@ export class ObjectsService {
   protected entityType = 'triply'
 
   private readonly ZoomLevel3Endpoint = 'objects-recordPage/run?'
-
   private readonly ZoomLevel3RelationsEndpoint = 'objects-recordRelations/run?'
-
   private readonly ZoomLevel3RelationsCountEndpoint = 'objects-recordRelations-Count/run?'
-
   private readonly ZoomLevel3RecordEndpoint = 'objects-recordPage-editorial/run?'
-
   private readonly ZoomLevel2HoverEndpoint = 'objects-hoverState/run?'
 
   public constructor(private triplyService: TriplyService) {}
@@ -149,7 +145,7 @@ export class ObjectsService {
     const result = await this.triplyService.queryTriplyData<ObjectsRelationsCountType>(
       this.ZoomLevel3RelationsCountEndpoint,
       objectsRelationsCountKeys,
-      { page: 1, pageSize: 1 },
+      undefined,
       { id, type }
     )
 
