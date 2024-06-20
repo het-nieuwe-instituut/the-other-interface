@@ -13,7 +13,8 @@
     "strapi": "strapi",
     "clean": "rm -rf node_modules && rm -rf .cache && rm -rf dist",
     "copyenv": "./.bin/init-env",
-    "type-check": "tsc --noEmit --skipLibCheck"
+    "type-check": "tsc --noEmit --skipLibCheck",
+    "format": "prettier --config ../prettier.config.js --write \"src/**/*.ts\""
   },
   "dependencies": {
     "@strapi/plugin-content-manager": "^4.17.1",
