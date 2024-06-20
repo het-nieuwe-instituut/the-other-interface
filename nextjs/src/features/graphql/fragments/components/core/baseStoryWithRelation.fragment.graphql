@@ -19,9 +19,6 @@ fragment StoryFragment on StoryEntity {
       ... on ComponentModulesImageCarousel {
         ...imageCarouselModuleFragment
       }
-      ... on ComponentModulesButtonsModule {
-        ...buttonsModuleFragment
-      }
       ... on ComponentModulesSubtitle {
         ...subtitleModuleFragment
       }
@@ -55,7 +52,6 @@ fragment StoryFragment on StoryEntity {
     }
     createdAt
     updatedAt
-    publishedAt
     localizations {
       data {
         id

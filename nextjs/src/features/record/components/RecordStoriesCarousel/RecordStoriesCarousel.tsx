@@ -53,7 +53,7 @@ export const RecordStoriesCarousel = () => {
     <div>
       {stories && stories.length > 0 && (
         <>
-          <h2 className={TypographyVariants({ impact: 'lg', className: 'mb-4' })}>
+          <h2 className={TypographyVariants({ responsive: 'title', className: 'mb-4' })}>
             {tRecord('relatedStoriesCarousel')} ({stories.length})
           </h2>
           <ImageCarousel>
