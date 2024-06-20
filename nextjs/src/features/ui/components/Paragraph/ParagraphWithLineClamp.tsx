@@ -1,8 +1,10 @@
 'use client'
+import React from 'react'
 import { cn } from '@/features/ui/utils/cn'
 import { CSSProperties, useRef } from 'react'
 import { Paragraph } from './Paragraph'
 import { useClampDetectionByLineHeight } from '../../hooks/useLineClamp'
+import sanitizeHtml from 'sanitize-html'
 
 interface Props {
   children: string
@@ -10,6 +12,7 @@ interface Props {
   disableLineClamp?: boolean
   lineCount?: number
   ReadmoreComponent?: JSX.Element | null
+  splitByHtmlBreaks?: boolean
 }
 
 export const ParagraphWithLineClamp: React.FC<Props> = ({
@@ -17,7 +20,8 @@ export const ParagraphWithLineClamp: React.FC<Props> = ({
   disableLineClamp,
   lineCount = 4,
   ReadmoreComponent,
-  ...restProps
+  children,
+  splitByHtmlBreaks,
 }) => {
   const ref = useRef(null)
   // we need js here to check if the text should be clamped based on viewport size
@@ -39,11 +43,31 @@ export const ParagraphWithLineClamp: React.FC<Props> = ({
           isClampin && !disableLineClamp && 'truncate-gradient'
         )}
       >
-        <Paragraph {...restProps} className={cn(className)} />
+        {renderChildren()}
       </div>
       <div className={cn(ReadmoreComponent && isClampin && !disableLineClamp ? 'block' : 'hidden')}>
         {ReadmoreComponent}
       </div>
     </>
   )
+
+  function renderChildren() {
+    if (!splitByHtmlBreaks) {
+      return renderText(children)
+    }
+
+    const sanitizedChildren = sanitizeHtml(children, { allowedTags: ['br'] })
+    const splitChildren = sanitizedChildren.split('<br />')
+
+    return splitChildren.map((c, i) => (
+      <React.Fragment key={i}>
+        {renderText(c)}
+        <br />
+      </React.Fragment>
+    ))
+  }
+
+  function renderText(text: string) {
+    return <Paragraph className={cn(className)}>{text}</Paragraph>
+  }
 }
