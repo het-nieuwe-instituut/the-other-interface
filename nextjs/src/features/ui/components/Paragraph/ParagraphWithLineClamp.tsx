@@ -62,7 +62,7 @@ export const ParagraphWithLineClamp: React.FC<Props> = ({
     return splitChildren.map((c, i) => (
       <React.Fragment key={i}>
         {renderText(c)}
-        <br />
+        {i < splitChildren.length - 1 && <br />}
       </React.Fragment>
     ))
   }
