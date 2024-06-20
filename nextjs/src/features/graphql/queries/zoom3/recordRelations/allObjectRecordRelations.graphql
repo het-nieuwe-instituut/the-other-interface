@@ -1,9 +1,8 @@
 query ObjectRecordRelations($id: String!, $type: EntityNames!, $locale: Locale!, $page: Int!, $pageSize: Int!) {
     objectRecordRelations(type: $type, id: $id, locale: $locale, page: $page, pageSize: $pageSize) {
-        id
+        idRelation
         titleR
         referenceNumber
         period
-        externalSource
     }
 }

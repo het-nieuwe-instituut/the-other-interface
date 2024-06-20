@@ -1,4 +1,3 @@
-import DisableScroll from '@/features/shared/components/DisableScroll/DisableScroll'
 import { AppHead } from '@/features/shared/components/Head/AppHead'
 import MobileOverlayProvider from '@/features/shared/components/MobileOverlayProvider/MobileOverlayProvider'
 import { TestMenu } from '@/features/shared/components/TestMenu/TestMenu'
@@ -17,6 +16,7 @@ import '../styles/globals.css'
 import bootstrap from './_bootstrap'
 import { Bootstrap } from './_bootstrap/Bootstrap'
 import { LightboxProvider } from '@/features/ui/components/lightbox/LightboxProvider'
+import WelcomeOverlayProvider from '@/features/shared/components/WelcomeOverlayProvider/WelcomeOverlayProvider'
 
 function MyApp({ children }: { children: React.ReactNode }) {
   const { isEnabled } = draftMode()
@@ -47,7 +47,7 @@ function MyApp({ children }: { children: React.ReactNode }) {
           <ReduxStoreProvider>
             <ReactQueryProvider>
               <ThemeProvider>
-                <DisableScroll>
+                <WelcomeOverlayProvider>
                   <MobileOverlayProvider>
                     <div>
                       <AppHead />
@@ -58,7 +58,7 @@ function MyApp({ children }: { children: React.ReactNode }) {
                       <BaseElementWrapper />
                     </div>
                   </MobileOverlayProvider>
-                </DisableScroll>
+                </WelcomeOverlayProvider>
               </ThemeProvider>
               <ReactQueryDevtools initialIsOpen={false} />
             </ReactQueryProvider>

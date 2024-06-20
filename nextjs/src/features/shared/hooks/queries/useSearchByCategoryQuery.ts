@@ -15,6 +15,7 @@ import { Filter, useFilters } from '../search/useFilters'
 import { COLLECTION_HILIGHT_ID } from '@/features/galaxyInterface/components/GalaxyWrapper/Suggestions/Suggestions'
 import { triplyCategoryToSearchCategory } from '@/features/galaxyInterface/galaxies/CategoryGalaxy/mappers/searchCategoryToTriplyMapper'
 import { StringFilterInput, TriplyRecordFiltersInput } from 'src/generated/graphql'
+import mapSelectedHighlightToSearch from '../../mappers/mapSelectedHighlightToSearch'
 
 type SearchArgs = {
   category: SearchCategory
@@ -36,7 +37,6 @@ export function useSearchByCategoryQuery({
   const locale = useLocale()
   const { decodedFilters } = useFilters()
 
-  // TODO: mix story search
   const queryFn = async () => {
     if (decodedFilters?.find(filter => filter.id === COLLECTION_HILIGHT_ID)) {
       const type = triplyCategoryToSearchCategory(category)
@@ -44,7 +44,7 @@ export function useSearchByCategoryQuery({
       const labelFilter: StringFilterInput = { containsi: text || undefined }
 
       const queryFilters: TriplyRecordFiltersInput = {
-        and: [{ label: labelFilter }],
+        and: [{ label: labelFilter, subject_collectionHighlights: { eq: true } }],
       }
 
       if (type) {
@@ -52,27 +52,31 @@ export function useSearchByCategoryQuery({
         queryFilters.and?.push({ type: typeFilter })
       }
 
+      const isArchive =
+        category === SEARCH_CATEGORIES.archives || category === SEARCH_CATEGORIES.all
+      const isObject = category === SEARCH_CATEGORIES.objects || category === SEARCH_CATEGORIES.all
+      const isPerson = category === SEARCH_CATEGORIES.people || category === SEARCH_CATEGORIES.all
+      const isPublication =
+        category === SEARCH_CATEGORIES.publications || category === SEARCH_CATEGORIES.all
+
       const response = await api.searchBySelectedHighlights({
         filters: queryFilters,
         page,
         pageSize: ZOOM2_RECORDS_PER_PAGE,
+        isArchive,
+        isObject,
+        isPerson,
+        isPublication,
+        locale,
       })
 
-      if (
-        (response?.triplyRecords?.data?.length === 0 || !response?.triplyRecords?.data) &&
-        fallback
-      ) {
+      if (!response?.triplyRecords?.data?.length && fallback) {
         return await searchByCategory({ category, text, page })
       }
 
       return {
         items:
-          response?.triplyRecords?.data?.map(record => ({
-            id: record.attributes?.recordId,
-            title: record.attributes?.label ?? '',
-            thumbnail: '',
-            type: record.attributes?.entityName ?? '',
-          })) ?? [],
+          response?.triplyRecords?.data?.map(record => mapSelectedHighlightToSearch(record)) ?? [],
         total: response?.triplyRecords?.meta?.pagination?.total ?? 0,
       }
     }

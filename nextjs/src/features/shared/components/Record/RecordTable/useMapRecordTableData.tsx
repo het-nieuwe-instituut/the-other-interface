@@ -43,7 +43,6 @@ export const useMapRecordTableData = (data: DataType[] | undefined, category: Ca
               { id: record.idRelation + '1', value: record.titleR },
               { id: record.idRelation + '2', value: record.typePub },
               { id: record.idRelation + '3', value: record.yearPub },
-              { id: record.idRelation + '4', value: record.externalSource },
             ],
           }
         })
@@ -56,7 +55,6 @@ export const useMapRecordTableData = (data: DataType[] | undefined, category: Ca
         { label: t('relatedPublications') },
         { label: t('type') },
         { label: t('yearPublished') },
-        { label: t('externalSource') },
       ],
       tableBody: mapData,
       total: data[0]?.total ?? '0',
@@ -80,7 +78,6 @@ export const useMapRecordTableData = (data: DataType[] | undefined, category: Ca
               { id: '1', value: record.relationName },
               { id: '2', value: record.occupation },
               { id: '3', value: record.period },
-              { id: '4', value: record.externalSource },
             ],
           }
         })
@@ -94,7 +91,6 @@ export const useMapRecordTableData = (data: DataType[] | undefined, category: Ca
         { label: t('realtedPeople') },
         { label: t('role') },
         { label: t('peoplePeriod') },
-        { label: t('externalSource') },
       ],
       tableBody: mapData,
       total: data[0]?.total ?? '0',
@@ -113,12 +109,11 @@ export const useMapRecordTableData = (data: DataType[] | undefined, category: Ca
       if (item && item.objectRecordRelations && item.objectRecordRelations?.length > 0) {
         return item.objectRecordRelations.map(record => {
           return {
-            id: record.id ?? index + '',
+            id: record.idRelation ?? index + '',
             TableBodyItem: [
               { id: '1', value: record.titleR },
               { id: '2', value: record.referenceNumber },
               { id: '3', value: record.period },
-              { id: '4', value: record.externalSource },
             ],
           }
         })
@@ -132,7 +127,6 @@ export const useMapRecordTableData = (data: DataType[] | undefined, category: Ca
         { label: t('realtedObjects') },
         { label: t('objectNumber') },
         { label: t('creationPeriod') },
-        { label: t('externalSource') },
       ],
       tableBody: mapData,
       total: data[0]?.total ?? '0',
@@ -151,7 +145,7 @@ export const useMapRecordTableData = (data: DataType[] | undefined, category: Ca
       if (item && item.archivesRecordRelations && item.archivesRecordRelations?.length > 0) {
         return item.archivesRecordRelations.map(record => {
           return {
-            id: record.id ?? index + '',
+            id: record.idRelation ?? index + '',
             TableBodyItem: [
               { id: '1', value: record.titleR },
               { id: '2', value: record.referenceNumber },

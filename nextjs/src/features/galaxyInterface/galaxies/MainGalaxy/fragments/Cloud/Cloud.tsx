@@ -62,7 +62,7 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
           <>
             <Text
               fontFamily={'Social'}
-              fontSize={'14px'}
+              fontSize={'12px'}
               fontWeight={'700'}
               paddingBottom={'4px'}
               color={'pinkAlpha.100'}
@@ -71,7 +71,7 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
             </Text>
             <Text
               fontFamily={'Social'}
-              fontSize={'14px'}
+              fontSize={'12px'}
               fontWeight={'400'}
               color={'pinkAlpha.100'}
             >

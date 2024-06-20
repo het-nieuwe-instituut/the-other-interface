@@ -261,13 +261,9 @@ export class PublicationsService {
   protected entityType = 'triply'
 
   private readonly ZoomLevel3Endpoint = 'publications-recordPage/run?'
-
   private readonly ZoomLevel3RelationsEndpoint = 'publications-recordRelations/run?'
-
   private readonly ZoomLevel3RelationsCountEndpoint = 'publications-recordRelations-Count/run?'
-
   private readonly ZoomLevel3RecordEndpoint = 'publications-recordPage-Editorial/run?'
-
   private readonly ZoomLevel2HoverEndpoint = 'publications-hoverState/run?'
 
   public constructor(
@@ -317,7 +313,7 @@ export class PublicationsService {
     const result = await this.triplyService.queryTriplyData<PublicationsRelationsCountType>(
       this.ZoomLevel3RelationsCountEndpoint,
       publicationsRelationsCountKeys,
-      { page: 1, pageSize: 1 },
+      undefined,
       { id, type }
     )
 
