@@ -114,12 +114,6 @@ export type ComponentCoreButtonFiltersInput = {
   url?: InputMaybe<StringFilterInput>
 }
 
-export type ComponentCoreButtonInput = {
-  id?: InputMaybe<Scalars['ID']>
-  text?: InputMaybe<Scalars['String']>
-  url?: InputMaybe<Scalars['String']>
-}
-
 export type ComponentCoreCarouselImage = {
   __typename?: 'ComponentCoreCarouselImage'
   alt_text?: Maybe<Scalars['String']>
@@ -253,18 +247,6 @@ export type ComponentModulesButtonsModuleButtonsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
 }
 
-export type ComponentModulesButtonsModuleFiltersInput = {
-  and?: InputMaybe<Array<InputMaybe<ComponentModulesButtonsModuleFiltersInput>>>
-  buttons?: InputMaybe<ComponentCoreButtonFiltersInput>
-  not?: InputMaybe<ComponentModulesButtonsModuleFiltersInput>
-  or?: InputMaybe<Array<InputMaybe<ComponentModulesButtonsModuleFiltersInput>>>
-}
-
-export type ComponentModulesButtonsModuleInput = {
-  buttons?: InputMaybe<Array<InputMaybe<ComponentCoreButtonInput>>>
-  id?: InputMaybe<Scalars['ID']>
-}
-
 export type ComponentModulesCarousel = {
   __typename?: 'ComponentModulesCarousel'
   description?: Maybe<Scalars['String']>
@@ -340,6 +322,14 @@ export type ComponentModulesPullquote = {
   __typename?: 'ComponentModulesPullquote'
   id: Scalars['ID']
   text?: Maybe<Scalars['String']>
+}
+
+export type ComponentModulesSideImageWithText = {
+  __typename?: 'ComponentModulesSideImageWithText'
+  id: Scalars['ID']
+  image: UploadFileEntityResponse
+  image_alt_text: Scalars['String']
+  sideText: Scalars['String']
 }
 
 export type ComponentModulesSubtitle = {
@@ -593,6 +583,7 @@ export type GenericMorph =
   | ComponentModulesImage
   | ComponentModulesImageCarousel
   | ComponentModulesPullquote
+  | ComponentModulesSideImageWithText
   | ComponentModulesSubtitle
   | ComponentModulesTextModule
   | ComponentModulesTitleModule
@@ -1707,9 +1698,8 @@ export type Story = {
   parent_story?: Maybe<StoryEntityResponse>
   publicationDate?: Maybe<ComponentCorePublicationDate>
   publishedAt?: Maybe<Scalars['DateTime']>
-  shortDescription?: Maybe<Scalars['String']>
+  shortDescription: Scalars['String']
   slug: Scalars['String']
-  storyLinks?: Maybe<ComponentModulesButtonsModule>
   themes?: Maybe<ThemeRelationResponseCollection>
   timeframe?: Maybe<ComponentCoreTimeframe>
   title: Scalars['String']
@@ -1756,10 +1746,10 @@ export type StoryComponentsDynamicZone =
   | ComponentCoreMuxAudio
   | ComponentCoreMuxVideo
   | ComponentCoreStandAloneLink
-  | ComponentModulesButtonsModule
   | ComponentModulesImage
   | ComponentModulesImageCarousel
   | ComponentModulesPullquote
+  | ComponentModulesSideImageWithText
   | ComponentModulesSubtitle
   | ComponentModulesTextModule
   | ComponentModulesTitleModule
@@ -1799,7 +1789,6 @@ export type StoryFiltersInput = {
   publishedAt?: InputMaybe<DateTimeFilterInput>
   shortDescription?: InputMaybe<StringFilterInput>
   slug?: InputMaybe<StringFilterInput>
-  storyLinks?: InputMaybe<ComponentModulesButtonsModuleFiltersInput>
   themes?: InputMaybe<ThemeFiltersInput>
   timeframe?: InputMaybe<ComponentCoreTimeframeFiltersInput>
   title?: InputMaybe<StringFilterInput>
@@ -1818,7 +1807,6 @@ export type StoryInput = {
   publishedAt?: InputMaybe<Scalars['DateTime']>
   shortDescription?: InputMaybe<Scalars['String']>
   slug?: InputMaybe<Scalars['String']>
-  storyLinks?: InputMaybe<ComponentModulesButtonsModuleInput>
   themes?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
   timeframe?: InputMaybe<ComponentCoreTimeframeInput>
   title?: InputMaybe<Scalars['String']>
@@ -2587,7 +2575,7 @@ export type HomepageFragmentFragment = {
               title: string
               slug: string
               description?: string | null
-              shortDescription?: string | null
+              shortDescription: string
               createdAt?: any | null
               updatedAt?: any | null
               publishedAt?: any | null
@@ -2820,7 +2808,7 @@ export type HomepageQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -3021,7 +3009,7 @@ export type HomepageQuery = {
                     title: string
                     slug: string
                     description?: string | null
-                    shortDescription?: string | null
+                    shortDescription: string
                     createdAt?: any | null
                     updatedAt?: any | null
                     publishedAt?: any | null
@@ -3124,7 +3112,7 @@ export type HighlightedHomepageThemesQuery = {
                     title: string
                     slug: string
                     description?: string | null
-                    shortDescription?: string | null
+                    shortDescription: string
                     createdAt?: any | null
                     updatedAt?: any | null
                     publishedAt?: any | null
@@ -3215,16 +3203,6 @@ export type HighlightedHomepageThemesQuery = {
                           } | null
                         }
                       | {
-                          __typename: 'ComponentModulesButtonsModule'
-                          id: string
-                          buttons?: Array<{
-                            __typename?: 'ComponentCoreButton'
-                            id: string
-                            text: string
-                            url: string
-                          } | null> | null
-                        }
-                      | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
                           caption?: string | null
@@ -3277,7 +3255,7 @@ export type HighlightedHomepageThemesQuery = {
                                 title: string
                                 slug: string
                                 description?: string | null
-                                shortDescription?: string | null
+                                shortDescription: string
                                 createdAt?: any | null
                                 updatedAt?: any | null
                                 publishedAt?: any | null
@@ -3334,6 +3312,38 @@ export type HighlightedHomepageThemesQuery = {
                           __typename: 'ComponentModulesPullquote'
                           id: string
                           text?: string | null
+                        }
+                      | {
+                          __typename: 'ComponentModulesSideImageWithText'
+                          id: string
+                          sideText: string
+                          image_alt_text: string
+                          image: {
+                            __typename?: 'UploadFileEntityResponse'
+                            data?: {
+                              __typename?: 'UploadFileEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'UploadFile'
+                                hash: string
+                                mime: string
+                                name: string
+                                provider: string
+                                size: number
+                                url: string
+                                alternativeText?: string | null
+                                caption?: string | null
+                                createdAt?: any | null
+                                ext?: string | null
+                                formats?: any | null
+                                height?: number | null
+                                previewUrl?: string | null
+                                provider_metadata?: any | null
+                                updatedAt?: any | null
+                                width?: number | null
+                              } | null
+                            } | null
+                          }
                         }
                       | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
                       | {
@@ -3394,16 +3404,6 @@ export type HighlightedHomepageThemesQuery = {
                       __typename?: 'StoryRelationResponseCollection'
                       data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
                     } | null
-                    storyLinks?: {
-                      __typename: 'ComponentModulesButtonsModule'
-                      id: string
-                      buttons?: Array<{
-                        __typename?: 'ComponentCoreButton'
-                        id: string
-                        text: string
-                        url: string
-                      } | null> | null
-                    } | null
                     parent_story?: {
                       __typename?: 'StoryEntityResponse'
                       data?: {
@@ -3416,7 +3416,6 @@ export type HighlightedHomepageThemesQuery = {
                             | { __typename: 'ComponentCoreMuxAudio' }
                             | { __typename: 'ComponentCoreMuxVideo' }
                             | { __typename: 'ComponentCoreStandAloneLink' }
-                            | { __typename: 'ComponentModulesButtonsModule' }
                             | {
                                 __typename: 'ComponentModulesImage'
                                 alt_text?: string | null
@@ -3470,7 +3469,7 @@ export type HighlightedHomepageThemesQuery = {
                                       title: string
                                       slug: string
                                       description?: string | null
-                                      shortDescription?: string | null
+                                      shortDescription: string
                                       createdAt?: any | null
                                       updatedAt?: any | null
                                       publishedAt?: any | null
@@ -3494,6 +3493,7 @@ export type HighlightedHomepageThemesQuery = {
                               }
                             | { __typename: 'ComponentModulesImageCarousel' }
                             | { __typename: 'ComponentModulesPullquote' }
+                            | { __typename: 'ComponentModulesSideImageWithText' }
                             | { __typename: 'ComponentModulesSubtitle' }
                             | { __typename: 'ComponentModulesTextModule' }
                             | { __typename: 'ComponentModulesTitleModule' }
@@ -3528,7 +3528,6 @@ export type HighlightedHomepageThemesQuery = {
                             | { __typename: 'ComponentCoreMuxAudio' }
                             | { __typename: 'ComponentCoreMuxVideo' }
                             | { __typename: 'ComponentCoreStandAloneLink' }
-                            | { __typename: 'ComponentModulesButtonsModule' }
                             | {
                                 __typename: 'ComponentModulesImage'
                                 alt_text?: string | null
@@ -3582,7 +3581,7 @@ export type HighlightedHomepageThemesQuery = {
                                       title: string
                                       slug: string
                                       description?: string | null
-                                      shortDescription?: string | null
+                                      shortDescription: string
                                       createdAt?: any | null
                                       updatedAt?: any | null
                                       publishedAt?: any | null
@@ -3606,6 +3605,7 @@ export type HighlightedHomepageThemesQuery = {
                               }
                             | { __typename: 'ComponentModulesImageCarousel' }
                             | { __typename: 'ComponentModulesPullquote' }
+                            | { __typename: 'ComponentModulesSideImageWithText' }
                             | { __typename: 'ComponentModulesSubtitle' }
                             | { __typename: 'ComponentModulesTextModule' }
                             | { __typename: 'ComponentModulesTitleModule' }
@@ -3641,7 +3641,7 @@ export type HighlightedHomepageThemesQuery = {
                     title: string
                     slug: string
                     description?: string | null
-                    shortDescription?: string | null
+                    shortDescription: string
                     createdAt?: any | null
                     updatedAt?: any | null
                     publishedAt?: any | null
@@ -3732,16 +3732,6 @@ export type HighlightedHomepageThemesQuery = {
                           } | null
                         }
                       | {
-                          __typename: 'ComponentModulesButtonsModule'
-                          id: string
-                          buttons?: Array<{
-                            __typename?: 'ComponentCoreButton'
-                            id: string
-                            text: string
-                            url: string
-                          } | null> | null
-                        }
-                      | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
                           caption?: string | null
@@ -3794,7 +3784,7 @@ export type HighlightedHomepageThemesQuery = {
                                 title: string
                                 slug: string
                                 description?: string | null
-                                shortDescription?: string | null
+                                shortDescription: string
                                 createdAt?: any | null
                                 updatedAt?: any | null
                                 publishedAt?: any | null
@@ -3851,6 +3841,38 @@ export type HighlightedHomepageThemesQuery = {
                           __typename: 'ComponentModulesPullquote'
                           id: string
                           text?: string | null
+                        }
+                      | {
+                          __typename: 'ComponentModulesSideImageWithText'
+                          id: string
+                          sideText: string
+                          image_alt_text: string
+                          image: {
+                            __typename?: 'UploadFileEntityResponse'
+                            data?: {
+                              __typename?: 'UploadFileEntity'
+                              id?: string | null
+                              attributes?: {
+                                __typename?: 'UploadFile'
+                                hash: string
+                                mime: string
+                                name: string
+                                provider: string
+                                size: number
+                                url: string
+                                alternativeText?: string | null
+                                caption?: string | null
+                                createdAt?: any | null
+                                ext?: string | null
+                                formats?: any | null
+                                height?: number | null
+                                previewUrl?: string | null
+                                provider_metadata?: any | null
+                                updatedAt?: any | null
+                                width?: number | null
+                              } | null
+                            } | null
+                          }
                         }
                       | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
                       | {
@@ -3911,16 +3933,6 @@ export type HighlightedHomepageThemesQuery = {
                       __typename?: 'StoryRelationResponseCollection'
                       data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
                     } | null
-                    storyLinks?: {
-                      __typename: 'ComponentModulesButtonsModule'
-                      id: string
-                      buttons?: Array<{
-                        __typename?: 'ComponentCoreButton'
-                        id: string
-                        text: string
-                        url: string
-                      } | null> | null
-                    } | null
                     parent_story?: {
                       __typename?: 'StoryEntityResponse'
                       data?: {
@@ -3933,7 +3945,6 @@ export type HighlightedHomepageThemesQuery = {
                             | { __typename: 'ComponentCoreMuxAudio' }
                             | { __typename: 'ComponentCoreMuxVideo' }
                             | { __typename: 'ComponentCoreStandAloneLink' }
-                            | { __typename: 'ComponentModulesButtonsModule' }
                             | {
                                 __typename: 'ComponentModulesImage'
                                 alt_text?: string | null
@@ -3987,7 +3998,7 @@ export type HighlightedHomepageThemesQuery = {
                                       title: string
                                       slug: string
                                       description?: string | null
-                                      shortDescription?: string | null
+                                      shortDescription: string
                                       createdAt?: any | null
                                       updatedAt?: any | null
                                       publishedAt?: any | null
@@ -4011,6 +4022,7 @@ export type HighlightedHomepageThemesQuery = {
                               }
                             | { __typename: 'ComponentModulesImageCarousel' }
                             | { __typename: 'ComponentModulesPullquote' }
+                            | { __typename: 'ComponentModulesSideImageWithText' }
                             | { __typename: 'ComponentModulesSubtitle' }
                             | { __typename: 'ComponentModulesTextModule' }
                             | { __typename: 'ComponentModulesTitleModule' }
@@ -4045,7 +4057,6 @@ export type HighlightedHomepageThemesQuery = {
                             | { __typename: 'ComponentCoreMuxAudio' }
                             | { __typename: 'ComponentCoreMuxVideo' }
                             | { __typename: 'ComponentCoreStandAloneLink' }
-                            | { __typename: 'ComponentModulesButtonsModule' }
                             | {
                                 __typename: 'ComponentModulesImage'
                                 alt_text?: string | null
@@ -4099,7 +4110,7 @@ export type HighlightedHomepageThemesQuery = {
                                       title: string
                                       slug: string
                                       description?: string | null
-                                      shortDescription?: string | null
+                                      shortDescription: string
                                       createdAt?: any | null
                                       updatedAt?: any | null
                                       publishedAt?: any | null
@@ -4123,6 +4134,7 @@ export type HighlightedHomepageThemesQuery = {
                               }
                             | { __typename: 'ComponentModulesImageCarousel' }
                             | { __typename: 'ComponentModulesPullquote' }
+                            | { __typename: 'ComponentModulesSideImageWithText' }
                             | { __typename: 'ComponentModulesSubtitle' }
                             | { __typename: 'ComponentModulesTextModule' }
                             | { __typename: 'ComponentModulesTitleModule' }
@@ -4331,7 +4343,7 @@ export type LandingpageFragmentFragment = {
               title: string
               slug: string
               description?: string | null
-              shortDescription?: string | null
+              shortDescription: string
               createdAt?: any | null
               updatedAt?: any | null
               publishedAt?: any | null
@@ -4557,7 +4569,7 @@ export type LandingpageEntityFragmentFragment = {
                       title: string
                       slug: string
                       description?: string | null
-                      shortDescription?: string | null
+                      shortDescription: string
                       createdAt?: any | null
                       updatedAt?: any | null
                       publishedAt?: any | null
@@ -4758,7 +4770,7 @@ export type LandingpageEntityFragmentFragment = {
                 title: string
                 slug: string
                 description?: string | null
-                shortDescription?: string | null
+                shortDescription: string
                 createdAt?: any | null
                 updatedAt?: any | null
                 publishedAt?: any | null
@@ -4994,7 +5006,7 @@ export type LandingPageQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -5195,7 +5207,7 @@ export type LandingPageQuery = {
                     title: string
                     slug: string
                     description?: string | null
-                    shortDescription?: string | null
+                    shortDescription: string
                     createdAt?: any | null
                     updatedAt?: any | null
                     publishedAt?: any | null
@@ -5436,7 +5448,7 @@ export type LandingPagesQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -5637,7 +5649,7 @@ export type LandingPagesQuery = {
                     title: string
                     slug: string
                     description?: string | null
-                    shortDescription?: string | null
+                    shortDescription: string
                     createdAt?: any | null
                     updatedAt?: any | null
                     publishedAt?: any | null
@@ -5956,7 +5968,7 @@ export type MenupageFragmentFragment = {
               title: string
               slug: string
               description?: string | null
-              shortDescription?: string | null
+              shortDescription: string
               createdAt?: any | null
               updatedAt?: any | null
               publishedAt?: any | null
@@ -6180,7 +6192,7 @@ export type MenupageEntityFragmentFragment = {
                       title: string
                       slug: string
                       description?: string | null
-                      shortDescription?: string | null
+                      shortDescription: string
                       createdAt?: any | null
                       updatedAt?: any | null
                       publishedAt?: any | null
@@ -6381,7 +6393,7 @@ export type MenupageEntityFragmentFragment = {
                 title: string
                 slug: string
                 description?: string | null
-                shortDescription?: string | null
+                shortDescription: string
                 createdAt?: any | null
                 updatedAt?: any | null
                 publishedAt?: any | null
@@ -6615,7 +6627,7 @@ export type MenuPageQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -6816,7 +6828,7 @@ export type MenuPageQuery = {
                     title: string
                     slug: string
                     description?: string | null
-                    shortDescription?: string | null
+                    shortDescription: string
                     createdAt?: any | null
                     updatedAt?: any | null
                     publishedAt?: any | null
@@ -7055,7 +7067,7 @@ export type MenuPagesQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -7256,7 +7268,7 @@ export type MenuPagesQuery = {
                     title: string
                     slug: string
                     description?: string | null
-                    shortDescription?: string | null
+                    shortDescription: string
                     createdAt?: any | null
                     updatedAt?: any | null
                     publishedAt?: any | null
@@ -7351,7 +7363,7 @@ export type StoriesQuery = {
         title: string
         slug: string
         description?: string | null
-        shortDescription?: string | null
+        shortDescription: string
         createdAt?: any | null
         updatedAt?: any | null
         publishedAt?: any | null
@@ -7442,16 +7454,6 @@ export type StoriesQuery = {
               } | null
             }
           | {
-              __typename: 'ComponentModulesButtonsModule'
-              id: string
-              buttons?: Array<{
-                __typename?: 'ComponentCoreButton'
-                id: string
-                text: string
-                url: string
-              } | null> | null
-            }
-          | {
               __typename: 'ComponentModulesImage'
               alt_text?: string | null
               caption?: string | null
@@ -7504,7 +7506,7 @@ export type StoriesQuery = {
                     title: string
                     slug: string
                     description?: string | null
-                    shortDescription?: string | null
+                    shortDescription: string
                     createdAt?: any | null
                     updatedAt?: any | null
                     publishedAt?: any | null
@@ -7558,6 +7560,38 @@ export type StoriesQuery = {
               } | null
             }
           | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+          | {
+              __typename: 'ComponentModulesSideImageWithText'
+              id: string
+              sideText: string
+              image_alt_text: string
+              image: {
+                __typename?: 'UploadFileEntityResponse'
+                data?: {
+                  __typename?: 'UploadFileEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'UploadFile'
+                    hash: string
+                    mime: string
+                    name: string
+                    provider: string
+                    size: number
+                    url: string
+                    alternativeText?: string | null
+                    caption?: string | null
+                    createdAt?: any | null
+                    ext?: string | null
+                    formats?: any | null
+                    height?: number | null
+                    previewUrl?: string | null
+                    provider_metadata?: any | null
+                    updatedAt?: any | null
+                    width?: number | null
+                  } | null
+                } | null
+              }
+            }
           | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
           | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
           | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -7609,16 +7643,6 @@ export type StoriesQuery = {
           __typename?: 'StoryRelationResponseCollection'
           data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
         } | null
-        storyLinks?: {
-          __typename: 'ComponentModulesButtonsModule'
-          id: string
-          buttons?: Array<{
-            __typename?: 'ComponentCoreButton'
-            id: string
-            text: string
-            url: string
-          } | null> | null
-        } | null
         parent_story?: {
           __typename?: 'StoryEntityResponse'
           data?: {
@@ -7631,7 +7655,6 @@ export type StoriesQuery = {
                 | { __typename: 'ComponentCoreMuxAudio' }
                 | { __typename: 'ComponentCoreMuxVideo' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
-                | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -7685,7 +7708,7 @@ export type StoriesQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -7709,6 +7732,7 @@ export type StoriesQuery = {
                   }
                 | { __typename: 'ComponentModulesImageCarousel' }
                 | { __typename: 'ComponentModulesPullquote' }
+                | { __typename: 'ComponentModulesSideImageWithText' }
                 | { __typename: 'ComponentModulesSubtitle' }
                 | { __typename: 'ComponentModulesTextModule' }
                 | { __typename: 'ComponentModulesTitleModule' }
@@ -7743,7 +7767,6 @@ export type StoriesQuery = {
                 | { __typename: 'ComponentCoreMuxAudio' }
                 | { __typename: 'ComponentCoreMuxVideo' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
-                | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -7797,7 +7820,7 @@ export type StoriesQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -7821,6 +7844,7 @@ export type StoriesQuery = {
                   }
                 | { __typename: 'ComponentModulesImageCarousel' }
                 | { __typename: 'ComponentModulesPullquote' }
+                | { __typename: 'ComponentModulesSideImageWithText' }
                 | { __typename: 'ComponentModulesSubtitle' }
                 | { __typename: 'ComponentModulesTextModule' }
                 | { __typename: 'ComponentModulesTitleModule' }
@@ -7901,7 +7925,7 @@ export type StoryQuery = {
         title: string
         slug: string
         description?: string | null
-        shortDescription?: string | null
+        shortDescription: string
         createdAt?: any | null
         updatedAt?: any | null
         publishedAt?: any | null
@@ -7992,16 +8016,6 @@ export type StoryQuery = {
               } | null
             }
           | {
-              __typename: 'ComponentModulesButtonsModule'
-              id: string
-              buttons?: Array<{
-                __typename?: 'ComponentCoreButton'
-                id: string
-                text: string
-                url: string
-              } | null> | null
-            }
-          | {
               __typename: 'ComponentModulesImage'
               alt_text?: string | null
               caption?: string | null
@@ -8054,7 +8068,7 @@ export type StoryQuery = {
                     title: string
                     slug: string
                     description?: string | null
-                    shortDescription?: string | null
+                    shortDescription: string
                     createdAt?: any | null
                     updatedAt?: any | null
                     publishedAt?: any | null
@@ -8108,6 +8122,38 @@ export type StoryQuery = {
               } | null
             }
           | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+          | {
+              __typename: 'ComponentModulesSideImageWithText'
+              id: string
+              sideText: string
+              image_alt_text: string
+              image: {
+                __typename?: 'UploadFileEntityResponse'
+                data?: {
+                  __typename?: 'UploadFileEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'UploadFile'
+                    hash: string
+                    mime: string
+                    name: string
+                    provider: string
+                    size: number
+                    url: string
+                    alternativeText?: string | null
+                    caption?: string | null
+                    createdAt?: any | null
+                    ext?: string | null
+                    formats?: any | null
+                    height?: number | null
+                    previewUrl?: string | null
+                    provider_metadata?: any | null
+                    updatedAt?: any | null
+                    width?: number | null
+                  } | null
+                } | null
+              }
+            }
           | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
           | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
           | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -8159,16 +8205,6 @@ export type StoryQuery = {
           __typename?: 'StoryRelationResponseCollection'
           data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
         } | null
-        storyLinks?: {
-          __typename: 'ComponentModulesButtonsModule'
-          id: string
-          buttons?: Array<{
-            __typename?: 'ComponentCoreButton'
-            id: string
-            text: string
-            url: string
-          } | null> | null
-        } | null
         parent_story?: {
           __typename?: 'StoryEntityResponse'
           data?: {
@@ -8181,7 +8217,6 @@ export type StoryQuery = {
                 | { __typename: 'ComponentCoreMuxAudio' }
                 | { __typename: 'ComponentCoreMuxVideo' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
-                | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -8235,7 +8270,7 @@ export type StoryQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -8259,6 +8294,7 @@ export type StoryQuery = {
                   }
                 | { __typename: 'ComponentModulesImageCarousel' }
                 | { __typename: 'ComponentModulesPullquote' }
+                | { __typename: 'ComponentModulesSideImageWithText' }
                 | { __typename: 'ComponentModulesSubtitle' }
                 | { __typename: 'ComponentModulesTextModule' }
                 | { __typename: 'ComponentModulesTitleModule' }
@@ -8293,7 +8329,6 @@ export type StoryQuery = {
                 | { __typename: 'ComponentCoreMuxAudio' }
                 | { __typename: 'ComponentCoreMuxVideo' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
-                | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -8347,7 +8382,7 @@ export type StoryQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -8371,6 +8406,7 @@ export type StoryQuery = {
                   }
                 | { __typename: 'ComponentModulesImageCarousel' }
                 | { __typename: 'ComponentModulesPullquote' }
+                | { __typename: 'ComponentModulesSideImageWithText' }
                 | { __typename: 'ComponentModulesSubtitle' }
                 | { __typename: 'ComponentModulesTextModule' }
                 | { __typename: 'ComponentModulesTitleModule' }
@@ -8540,16 +8576,6 @@ export type StoryByLocaleQuery = {
               } | null
             }
           | {
-              __typename: 'ComponentModulesButtonsModule'
-              id: string
-              buttons?: Array<{
-                __typename?: 'ComponentCoreButton'
-                id: string
-                text: string
-                url: string
-              } | null> | null
-            }
-          | {
               __typename: 'ComponentModulesImage'
               alt_text?: string | null
               caption?: string | null
@@ -8602,7 +8628,7 @@ export type StoryByLocaleQuery = {
                     title: string
                     slug: string
                     description?: string | null
-                    shortDescription?: string | null
+                    shortDescription: string
                     createdAt?: any | null
                     updatedAt?: any | null
                     publishedAt?: any | null
@@ -8656,6 +8682,38 @@ export type StoryByLocaleQuery = {
               } | null
             }
           | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+          | {
+              __typename: 'ComponentModulesSideImageWithText'
+              id: string
+              sideText: string
+              image_alt_text: string
+              image: {
+                __typename?: 'UploadFileEntityResponse'
+                data?: {
+                  __typename?: 'UploadFileEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'UploadFile'
+                    hash: string
+                    mime: string
+                    name: string
+                    provider: string
+                    size: number
+                    url: string
+                    alternativeText?: string | null
+                    caption?: string | null
+                    createdAt?: any | null
+                    ext?: string | null
+                    formats?: any | null
+                    height?: number | null
+                    previewUrl?: string | null
+                    provider_metadata?: any | null
+                    updatedAt?: any | null
+                    width?: number | null
+                  } | null
+                } | null
+              }
+            }
           | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
           | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
           | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -8798,16 +8856,6 @@ export type StoryByLocaleQuery = {
                     } | null
                   }
                 | {
-                    __typename: 'ComponentModulesButtonsModule'
-                    id: string
-                    buttons?: Array<{
-                      __typename?: 'ComponentCoreButton'
-                      id: string
-                      text: string
-                      url: string
-                    } | null> | null
-                  }
-                | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
                     caption?: string | null
@@ -8860,7 +8908,7 @@ export type StoryByLocaleQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -8914,6 +8962,38 @@ export type StoryByLocaleQuery = {
                     } | null
                   }
                 | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+                | {
+                    __typename: 'ComponentModulesSideImageWithText'
+                    id: string
+                    sideText: string
+                    image_alt_text: string
+                    image: {
+                      __typename?: 'UploadFileEntityResponse'
+                      data?: {
+                        __typename?: 'UploadFileEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'UploadFile'
+                          hash: string
+                          mime: string
+                          name: string
+                          provider: string
+                          size: number
+                          url: string
+                          alternativeText?: string | null
+                          caption?: string | null
+                          createdAt?: any | null
+                          ext?: string | null
+                          formats?: any | null
+                          height?: number | null
+                          previewUrl?: string | null
+                          provider_metadata?: any | null
+                          updatedAt?: any | null
+                          width?: number | null
+                        } | null
+                      } | null
+                    }
+                  }
                 | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
                 | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
                 | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -9074,16 +9154,6 @@ export type StoriesByLocaleQuery = {
               } | null
             }
           | {
-              __typename: 'ComponentModulesButtonsModule'
-              id: string
-              buttons?: Array<{
-                __typename?: 'ComponentCoreButton'
-                id: string
-                text: string
-                url: string
-              } | null> | null
-            }
-          | {
               __typename: 'ComponentModulesImage'
               alt_text?: string | null
               caption?: string | null
@@ -9136,7 +9206,7 @@ export type StoriesByLocaleQuery = {
                     title: string
                     slug: string
                     description?: string | null
-                    shortDescription?: string | null
+                    shortDescription: string
                     createdAt?: any | null
                     updatedAt?: any | null
                     publishedAt?: any | null
@@ -9190,6 +9260,38 @@ export type StoriesByLocaleQuery = {
               } | null
             }
           | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+          | {
+              __typename: 'ComponentModulesSideImageWithText'
+              id: string
+              sideText: string
+              image_alt_text: string
+              image: {
+                __typename?: 'UploadFileEntityResponse'
+                data?: {
+                  __typename?: 'UploadFileEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'UploadFile'
+                    hash: string
+                    mime: string
+                    name: string
+                    provider: string
+                    size: number
+                    url: string
+                    alternativeText?: string | null
+                    caption?: string | null
+                    createdAt?: any | null
+                    ext?: string | null
+                    formats?: any | null
+                    height?: number | null
+                    previewUrl?: string | null
+                    provider_metadata?: any | null
+                    updatedAt?: any | null
+                    width?: number | null
+                  } | null
+                } | null
+              }
+            }
           | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
           | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
           | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -9332,16 +9434,6 @@ export type StoriesByLocaleQuery = {
                     } | null
                   }
                 | {
-                    __typename: 'ComponentModulesButtonsModule'
-                    id: string
-                    buttons?: Array<{
-                      __typename?: 'ComponentCoreButton'
-                      id: string
-                      text: string
-                      url: string
-                    } | null> | null
-                  }
-                | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
                     caption?: string | null
@@ -9394,7 +9486,7 @@ export type StoriesByLocaleQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -9448,6 +9540,38 @@ export type StoriesByLocaleQuery = {
                     } | null
                   }
                 | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+                | {
+                    __typename: 'ComponentModulesSideImageWithText'
+                    id: string
+                    sideText: string
+                    image_alt_text: string
+                    image: {
+                      __typename?: 'UploadFileEntityResponse'
+                      data?: {
+                        __typename?: 'UploadFileEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'UploadFile'
+                          hash: string
+                          mime: string
+                          name: string
+                          provider: string
+                          size: number
+                          url: string
+                          alternativeText?: string | null
+                          caption?: string | null
+                          createdAt?: any | null
+                          ext?: string | null
+                          formats?: any | null
+                          height?: number | null
+                          previewUrl?: string | null
+                          provider_metadata?: any | null
+                          updatedAt?: any | null
+                          width?: number | null
+                        } | null
+                      } | null
+                    }
+                  }
                 | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
                 | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
                 | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -9491,7 +9615,7 @@ export type StoriesMetaByLocaleQuery = {
         __typename?: 'Story'
         title: string
         slug: string
-        shortDescription?: string | null
+        shortDescription: string
         description?: string | null
         createdAt?: any | null
         updatedAt?: any | null
@@ -9544,7 +9668,6 @@ export type StoriesMetaByLocaleQuery = {
                 | { __typename: 'ComponentCoreMuxAudio' }
                 | { __typename: 'ComponentCoreMuxVideo' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
-                | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -9598,7 +9721,7 @@ export type StoriesMetaByLocaleQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -9622,6 +9745,7 @@ export type StoriesMetaByLocaleQuery = {
                   }
                 | { __typename: 'ComponentModulesImageCarousel' }
                 | { __typename: 'ComponentModulesPullquote' }
+                | { __typename: 'ComponentModulesSideImageWithText' }
                 | { __typename: 'ComponentModulesSubtitle' }
                 | { __typename: 'ComponentModulesTextModule' }
                 | { __typename: 'ComponentModulesTitleModule' }
@@ -9656,7 +9780,6 @@ export type StoriesMetaByLocaleQuery = {
                 | { __typename: 'ComponentCoreMuxAudio' }
                 | { __typename: 'ComponentCoreMuxVideo' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
-                | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -9710,7 +9833,7 @@ export type StoriesMetaByLocaleQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -9734,6 +9857,7 @@ export type StoriesMetaByLocaleQuery = {
                   }
                 | { __typename: 'ComponentModulesImageCarousel' }
                 | { __typename: 'ComponentModulesPullquote' }
+                | { __typename: 'ComponentModulesSideImageWithText' }
                 | { __typename: 'ComponentModulesSubtitle' }
                 | { __typename: 'ComponentModulesTextModule' }
                 | { __typename: 'ComponentModulesTitleModule' }
@@ -9783,7 +9907,7 @@ export type StoriesMetaByLocaleQuery = {
               __typename?: 'Story'
               title: string
               slug: string
-              shortDescription?: string | null
+              shortDescription: string
               createdAt?: any | null
               updatedAt?: any | null
               publishedAt?: any | null
@@ -9841,16 +9965,6 @@ export type StoriesMetaByLocaleQuery = {
                   } | null
                 }>
               } | null
-              storyLinks?: {
-                __typename: 'ComponentModulesButtonsModule'
-                id: string
-                buttons?: Array<{
-                  __typename?: 'ComponentCoreButton'
-                  id: string
-                  text: string
-                  url: string
-                } | null> | null
-              } | null
               parent_story?: {
                 __typename?: 'StoryEntityResponse'
                 data?: {
@@ -9863,7 +9977,6 @@ export type StoriesMetaByLocaleQuery = {
                       | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
-                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -9917,7 +10030,7 @@ export type StoriesMetaByLocaleQuery = {
                                 title: string
                                 slug: string
                                 description?: string | null
-                                shortDescription?: string | null
+                                shortDescription: string
                                 createdAt?: any | null
                                 updatedAt?: any | null
                                 publishedAt?: any | null
@@ -9941,6 +10054,7 @@ export type StoriesMetaByLocaleQuery = {
                         }
                       | { __typename: 'ComponentModulesImageCarousel' }
                       | { __typename: 'ComponentModulesPullquote' }
+                      | { __typename: 'ComponentModulesSideImageWithText' }
                       | { __typename: 'ComponentModulesSubtitle' }
                       | { __typename: 'ComponentModulesTextModule' }
                       | { __typename: 'ComponentModulesTitleModule' }
@@ -9975,7 +10089,6 @@ export type StoriesMetaByLocaleQuery = {
                       | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
-                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -10029,7 +10142,7 @@ export type StoriesMetaByLocaleQuery = {
                                 title: string
                                 slug: string
                                 description?: string | null
-                                shortDescription?: string | null
+                                shortDescription: string
                                 createdAt?: any | null
                                 updatedAt?: any | null
                                 publishedAt?: any | null
@@ -10053,6 +10166,7 @@ export type StoriesMetaByLocaleQuery = {
                         }
                       | { __typename: 'ComponentModulesImageCarousel' }
                       | { __typename: 'ComponentModulesPullquote' }
+                      | { __typename: 'ComponentModulesSideImageWithText' }
                       | { __typename: 'ComponentModulesSubtitle' }
                       | { __typename: 'ComponentModulesTextModule' }
                       | { __typename: 'ComponentModulesTitleModule' }
@@ -10077,16 +10191,6 @@ export type StoriesMetaByLocaleQuery = {
               } | null
             } | null
           }>
-        } | null
-        storyLinks?: {
-          __typename: 'ComponentModulesButtonsModule'
-          id: string
-          buttons?: Array<{
-            __typename?: 'ComponentCoreButton'
-            id: string
-            text: string
-            url: string
-          } | null> | null
         } | null
       } | null
     }>
@@ -10113,7 +10217,7 @@ export type StoriesWithoutRelationsQuery = {
         title: string
         slug: string
         description?: string | null
-        shortDescription?: string | null
+        shortDescription: string
         createdAt?: any | null
         updatedAt?: any | null
         publishedAt?: any | null
@@ -10163,7 +10267,7 @@ export type StoryWithoutRelationsQuery = {
         title: string
         slug: string
         description?: string | null
-        shortDescription?: string | null
+        shortDescription: string
         createdAt?: any | null
         updatedAt?: any | null
         publishedAt?: any | null
@@ -10223,7 +10327,7 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
         title: string
         slug: string
         description?: string | null
-        shortDescription?: string | null
+        shortDescription: string
         createdAt?: any | null
         updatedAt?: any | null
         publishedAt?: any | null
@@ -10314,16 +10418,6 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
               } | null
             }
           | {
-              __typename: 'ComponentModulesButtonsModule'
-              id: string
-              buttons?: Array<{
-                __typename?: 'ComponentCoreButton'
-                id: string
-                text: string
-                url: string
-              } | null> | null
-            }
-          | {
               __typename: 'ComponentModulesImage'
               alt_text?: string | null
               caption?: string | null
@@ -10376,7 +10470,7 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
                     title: string
                     slug: string
                     description?: string | null
-                    shortDescription?: string | null
+                    shortDescription: string
                     createdAt?: any | null
                     updatedAt?: any | null
                     publishedAt?: any | null
@@ -10430,6 +10524,38 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
               } | null
             }
           | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+          | {
+              __typename: 'ComponentModulesSideImageWithText'
+              id: string
+              sideText: string
+              image_alt_text: string
+              image: {
+                __typename?: 'UploadFileEntityResponse'
+                data?: {
+                  __typename?: 'UploadFileEntity'
+                  id?: string | null
+                  attributes?: {
+                    __typename?: 'UploadFile'
+                    hash: string
+                    mime: string
+                    name: string
+                    provider: string
+                    size: number
+                    url: string
+                    alternativeText?: string | null
+                    caption?: string | null
+                    createdAt?: any | null
+                    ext?: string | null
+                    formats?: any | null
+                    height?: number | null
+                    previewUrl?: string | null
+                    provider_metadata?: any | null
+                    updatedAt?: any | null
+                    width?: number | null
+                  } | null
+                } | null
+              }
+            }
           | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
           | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
           | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -10481,16 +10607,6 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
           __typename?: 'StoryRelationResponseCollection'
           data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
         } | null
-        storyLinks?: {
-          __typename: 'ComponentModulesButtonsModule'
-          id: string
-          buttons?: Array<{
-            __typename?: 'ComponentCoreButton'
-            id: string
-            text: string
-            url: string
-          } | null> | null
-        } | null
         parent_story?: {
           __typename?: 'StoryEntityResponse'
           data?: {
@@ -10503,7 +10619,6 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
                 | { __typename: 'ComponentCoreMuxAudio' }
                 | { __typename: 'ComponentCoreMuxVideo' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
-                | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -10557,7 +10672,7 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -10581,6 +10696,7 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
                   }
                 | { __typename: 'ComponentModulesImageCarousel' }
                 | { __typename: 'ComponentModulesPullquote' }
+                | { __typename: 'ComponentModulesSideImageWithText' }
                 | { __typename: 'ComponentModulesSubtitle' }
                 | { __typename: 'ComponentModulesTextModule' }
                 | { __typename: 'ComponentModulesTitleModule' }
@@ -10615,7 +10731,6 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
                 | { __typename: 'ComponentCoreMuxAudio' }
                 | { __typename: 'ComponentCoreMuxVideo' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
-                | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -10669,7 +10784,7 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -10693,6 +10808,7 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
                   }
                 | { __typename: 'ComponentModulesImageCarousel' }
                 | { __typename: 'ComponentModulesPullquote' }
+                | { __typename: 'ComponentModulesSideImageWithText' }
                 | { __typename: 'ComponentModulesSubtitle' }
                 | { __typename: 'ComponentModulesTextModule' }
                 | { __typename: 'ComponentModulesTitleModule' }
@@ -10774,7 +10890,6 @@ export type StoriesByIdsQuery = {
           | { __typename?: 'ComponentCoreMuxAudio' }
           | { __typename?: 'ComponentCoreMuxVideo' }
           | { __typename?: 'ComponentCoreStandAloneLink' }
-          | { __typename?: 'ComponentModulesButtonsModule' }
           | {
               __typename: 'ComponentModulesImage'
               alt_text?: string | null
@@ -10828,7 +10943,7 @@ export type StoriesByIdsQuery = {
                     title: string
                     slug: string
                     description?: string | null
-                    shortDescription?: string | null
+                    shortDescription: string
                     createdAt?: any | null
                     updatedAt?: any | null
                     publishedAt?: any | null
@@ -10852,6 +10967,7 @@ export type StoriesByIdsQuery = {
             }
           | { __typename?: 'ComponentModulesImageCarousel' }
           | { __typename?: 'ComponentModulesPullquote' }
+          | { __typename?: 'ComponentModulesSideImageWithText' }
           | { __typename?: 'ComponentModulesSubtitle' }
           | { __typename?: 'ComponentModulesTextModule' }
           | { __typename?: 'ComponentModulesTitleModule' }
@@ -10868,7 +10984,7 @@ export type StoriesByIdsQuery = {
               title: string
               slug: string
               description?: string | null
-              shortDescription?: string | null
+              shortDescription: string
               createdAt?: any | null
               updatedAt?: any | null
               publishedAt?: any | null
@@ -10948,7 +11064,7 @@ export type StoryWithoutRelationsFragmentFragment = {
     title: string
     slug: string
     description?: string | null
-    shortDescription?: string | null
+    shortDescription: string
     createdAt?: any | null
     updatedAt?: any | null
     publishedAt?: any | null
@@ -11103,16 +11219,6 @@ export type NestedStoryFragmentFragment = {
           } | null
         }
       | {
-          __typename: 'ComponentModulesButtonsModule'
-          id: string
-          buttons?: Array<{
-            __typename?: 'ComponentCoreButton'
-            id: string
-            text: string
-            url: string
-          } | null> | null
-        }
-      | {
           __typename: 'ComponentModulesImage'
           alt_text?: string | null
           caption?: string | null
@@ -11165,7 +11271,7 @@ export type NestedStoryFragmentFragment = {
                 title: string
                 slug: string
                 description?: string | null
-                shortDescription?: string | null
+                shortDescription: string
                 createdAt?: any | null
                 updatedAt?: any | null
                 publishedAt?: any | null
@@ -11219,6 +11325,38 @@ export type NestedStoryFragmentFragment = {
           } | null
         }
       | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+      | {
+          __typename: 'ComponentModulesSideImageWithText'
+          id: string
+          sideText: string
+          image_alt_text: string
+          image: {
+            __typename?: 'UploadFileEntityResponse'
+            data?: {
+              __typename?: 'UploadFileEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'UploadFile'
+                hash: string
+                mime: string
+                name: string
+                provider: string
+                size: number
+                url: string
+                alternativeText?: string | null
+                caption?: string | null
+                createdAt?: any | null
+                ext?: string | null
+                formats?: any | null
+                height?: number | null
+                previewUrl?: string | null
+                provider_metadata?: any | null
+                updatedAt?: any | null
+                width?: number | null
+              } | null
+            } | null
+          }
+        }
       | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
       | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
       | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -11362,16 +11500,6 @@ export type LocalizedStoryFragmentFragment = {
           } | null
         }
       | {
-          __typename: 'ComponentModulesButtonsModule'
-          id: string
-          buttons?: Array<{
-            __typename?: 'ComponentCoreButton'
-            id: string
-            text: string
-            url: string
-          } | null> | null
-        }
-      | {
           __typename: 'ComponentModulesImage'
           alt_text?: string | null
           caption?: string | null
@@ -11424,7 +11552,7 @@ export type LocalizedStoryFragmentFragment = {
                 title: string
                 slug: string
                 description?: string | null
-                shortDescription?: string | null
+                shortDescription: string
                 createdAt?: any | null
                 updatedAt?: any | null
                 publishedAt?: any | null
@@ -11478,6 +11606,38 @@ export type LocalizedStoryFragmentFragment = {
           } | null
         }
       | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+      | {
+          __typename: 'ComponentModulesSideImageWithText'
+          id: string
+          sideText: string
+          image_alt_text: string
+          image: {
+            __typename?: 'UploadFileEntityResponse'
+            data?: {
+              __typename?: 'UploadFileEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'UploadFile'
+                hash: string
+                mime: string
+                name: string
+                provider: string
+                size: number
+                url: string
+                alternativeText?: string | null
+                caption?: string | null
+                createdAt?: any | null
+                ext?: string | null
+                formats?: any | null
+                height?: number | null
+                previewUrl?: string | null
+                provider_metadata?: any | null
+                updatedAt?: any | null
+                width?: number | null
+              } | null
+            } | null
+          }
+        }
       | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
       | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
       | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -11620,16 +11780,6 @@ export type LocalizedStoryFragmentFragment = {
                 } | null
               }
             | {
-                __typename: 'ComponentModulesButtonsModule'
-                id: string
-                buttons?: Array<{
-                  __typename?: 'ComponentCoreButton'
-                  id: string
-                  text: string
-                  url: string
-                } | null> | null
-              }
-            | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
                 caption?: string | null
@@ -11682,7 +11832,7 @@ export type LocalizedStoryFragmentFragment = {
                       title: string
                       slug: string
                       description?: string | null
-                      shortDescription?: string | null
+                      shortDescription: string
                       createdAt?: any | null
                       updatedAt?: any | null
                       publishedAt?: any | null
@@ -11736,6 +11886,38 @@ export type LocalizedStoryFragmentFragment = {
                 } | null
               }
             | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+            | {
+                __typename: 'ComponentModulesSideImageWithText'
+                id: string
+                sideText: string
+                image_alt_text: string
+                image: {
+                  __typename?: 'UploadFileEntityResponse'
+                  data?: {
+                    __typename?: 'UploadFileEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'UploadFile'
+                      hash: string
+                      mime: string
+                      name: string
+                      provider: string
+                      size: number
+                      url: string
+                      alternativeText?: string | null
+                      caption?: string | null
+                      createdAt?: any | null
+                      ext?: string | null
+                      formats?: any | null
+                      height?: number | null
+                      previewUrl?: string | null
+                      provider_metadata?: any | null
+                      updatedAt?: any | null
+                      width?: number | null
+                    } | null
+                  } | null
+                }
+              }
             | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
             | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
             | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -11756,7 +11938,7 @@ export type StoryFragmentFragment = {
     title: string
     slug: string
     description?: string | null
-    shortDescription?: string | null
+    shortDescription: string
     createdAt?: any | null
     updatedAt?: any | null
     publishedAt?: any | null
@@ -11847,16 +12029,6 @@ export type StoryFragmentFragment = {
           } | null
         }
       | {
-          __typename: 'ComponentModulesButtonsModule'
-          id: string
-          buttons?: Array<{
-            __typename?: 'ComponentCoreButton'
-            id: string
-            text: string
-            url: string
-          } | null> | null
-        }
-      | {
           __typename: 'ComponentModulesImage'
           alt_text?: string | null
           caption?: string | null
@@ -11909,7 +12081,7 @@ export type StoryFragmentFragment = {
                 title: string
                 slug: string
                 description?: string | null
-                shortDescription?: string | null
+                shortDescription: string
                 createdAt?: any | null
                 updatedAt?: any | null
                 publishedAt?: any | null
@@ -11963,6 +12135,38 @@ export type StoryFragmentFragment = {
           } | null
         }
       | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+      | {
+          __typename: 'ComponentModulesSideImageWithText'
+          id: string
+          sideText: string
+          image_alt_text: string
+          image: {
+            __typename?: 'UploadFileEntityResponse'
+            data?: {
+              __typename?: 'UploadFileEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'UploadFile'
+                hash: string
+                mime: string
+                name: string
+                provider: string
+                size: number
+                url: string
+                alternativeText?: string | null
+                caption?: string | null
+                createdAt?: any | null
+                ext?: string | null
+                formats?: any | null
+                height?: number | null
+                previewUrl?: string | null
+                provider_metadata?: any | null
+                updatedAt?: any | null
+                width?: number | null
+              } | null
+            } | null
+          }
+        }
       | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
       | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
       | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -12014,16 +12218,6 @@ export type StoryFragmentFragment = {
       __typename?: 'StoryRelationResponseCollection'
       data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
     } | null
-    storyLinks?: {
-      __typename: 'ComponentModulesButtonsModule'
-      id: string
-      buttons?: Array<{
-        __typename?: 'ComponentCoreButton'
-        id: string
-        text: string
-        url: string
-      } | null> | null
-    } | null
     parent_story?: {
       __typename?: 'StoryEntityResponse'
       data?: {
@@ -12036,7 +12230,6 @@ export type StoryFragmentFragment = {
             | { __typename: 'ComponentCoreMuxAudio' }
             | { __typename: 'ComponentCoreMuxVideo' }
             | { __typename: 'ComponentCoreStandAloneLink' }
-            | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
@@ -12090,7 +12283,7 @@ export type StoryFragmentFragment = {
                       title: string
                       slug: string
                       description?: string | null
-                      shortDescription?: string | null
+                      shortDescription: string
                       createdAt?: any | null
                       updatedAt?: any | null
                       publishedAt?: any | null
@@ -12114,6 +12307,7 @@ export type StoryFragmentFragment = {
               }
             | { __typename: 'ComponentModulesImageCarousel' }
             | { __typename: 'ComponentModulesPullquote' }
+            | { __typename: 'ComponentModulesSideImageWithText' }
             | { __typename: 'ComponentModulesSubtitle' }
             | { __typename: 'ComponentModulesTextModule' }
             | { __typename: 'ComponentModulesTitleModule' }
@@ -12148,7 +12342,6 @@ export type StoryFragmentFragment = {
             | { __typename: 'ComponentCoreMuxAudio' }
             | { __typename: 'ComponentCoreMuxVideo' }
             | { __typename: 'ComponentCoreStandAloneLink' }
-            | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
@@ -12202,7 +12395,7 @@ export type StoryFragmentFragment = {
                       title: string
                       slug: string
                       description?: string | null
-                      shortDescription?: string | null
+                      shortDescription: string
                       createdAt?: any | null
                       updatedAt?: any | null
                       publishedAt?: any | null
@@ -12226,6 +12419,7 @@ export type StoryFragmentFragment = {
               }
             | { __typename: 'ComponentModulesImageCarousel' }
             | { __typename: 'ComponentModulesPullquote' }
+            | { __typename: 'ComponentModulesSideImageWithText' }
             | { __typename: 'ComponentModulesSubtitle' }
             | { __typename: 'ComponentModulesTextModule' }
             | { __typename: 'ComponentModulesTitleModule' }
@@ -12258,7 +12452,7 @@ export type StoryMetaFragmentFragment = {
     __typename?: 'Story'
     title: string
     slug: string
-    shortDescription?: string | null
+    shortDescription: string
     createdAt?: any | null
     updatedAt?: any | null
     publishedAt?: any | null
@@ -12316,16 +12510,6 @@ export type StoryMetaFragmentFragment = {
         } | null
       }>
     } | null
-    storyLinks?: {
-      __typename: 'ComponentModulesButtonsModule'
-      id: string
-      buttons?: Array<{
-        __typename?: 'ComponentCoreButton'
-        id: string
-        text: string
-        url: string
-      } | null> | null
-    } | null
     parent_story?: {
       __typename?: 'StoryEntityResponse'
       data?: {
@@ -12338,7 +12522,6 @@ export type StoryMetaFragmentFragment = {
             | { __typename: 'ComponentCoreMuxAudio' }
             | { __typename: 'ComponentCoreMuxVideo' }
             | { __typename: 'ComponentCoreStandAloneLink' }
-            | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
@@ -12392,7 +12575,7 @@ export type StoryMetaFragmentFragment = {
                       title: string
                       slug: string
                       description?: string | null
-                      shortDescription?: string | null
+                      shortDescription: string
                       createdAt?: any | null
                       updatedAt?: any | null
                       publishedAt?: any | null
@@ -12416,6 +12599,7 @@ export type StoryMetaFragmentFragment = {
               }
             | { __typename: 'ComponentModulesImageCarousel' }
             | { __typename: 'ComponentModulesPullquote' }
+            | { __typename: 'ComponentModulesSideImageWithText' }
             | { __typename: 'ComponentModulesSubtitle' }
             | { __typename: 'ComponentModulesTextModule' }
             | { __typename: 'ComponentModulesTitleModule' }
@@ -12450,7 +12634,6 @@ export type StoryMetaFragmentFragment = {
             | { __typename: 'ComponentCoreMuxAudio' }
             | { __typename: 'ComponentCoreMuxVideo' }
             | { __typename: 'ComponentCoreStandAloneLink' }
-            | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
@@ -12504,7 +12687,7 @@ export type StoryMetaFragmentFragment = {
                       title: string
                       slug: string
                       description?: string | null
-                      shortDescription?: string | null
+                      shortDescription: string
                       createdAt?: any | null
                       updatedAt?: any | null
                       publishedAt?: any | null
@@ -12528,6 +12711,7 @@ export type StoryMetaFragmentFragment = {
               }
             | { __typename: 'ComponentModulesImageCarousel' }
             | { __typename: 'ComponentModulesPullquote' }
+            | { __typename: 'ComponentModulesSideImageWithText' }
             | { __typename: 'ComponentModulesSubtitle' }
             | { __typename: 'ComponentModulesTextModule' }
             | { __typename: 'ComponentModulesTitleModule' }
@@ -12560,7 +12744,7 @@ export type LocalizedStoryMetaFragmentFragment = {
     __typename?: 'Story'
     title: string
     slug: string
-    shortDescription?: string | null
+    shortDescription: string
     description?: string | null
     createdAt?: any | null
     updatedAt?: any | null
@@ -12613,7 +12797,6 @@ export type LocalizedStoryMetaFragmentFragment = {
             | { __typename: 'ComponentCoreMuxAudio' }
             | { __typename: 'ComponentCoreMuxVideo' }
             | { __typename: 'ComponentCoreStandAloneLink' }
-            | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
@@ -12667,7 +12850,7 @@ export type LocalizedStoryMetaFragmentFragment = {
                       title: string
                       slug: string
                       description?: string | null
-                      shortDescription?: string | null
+                      shortDescription: string
                       createdAt?: any | null
                       updatedAt?: any | null
                       publishedAt?: any | null
@@ -12691,6 +12874,7 @@ export type LocalizedStoryMetaFragmentFragment = {
               }
             | { __typename: 'ComponentModulesImageCarousel' }
             | { __typename: 'ComponentModulesPullquote' }
+            | { __typename: 'ComponentModulesSideImageWithText' }
             | { __typename: 'ComponentModulesSubtitle' }
             | { __typename: 'ComponentModulesTextModule' }
             | { __typename: 'ComponentModulesTitleModule' }
@@ -12725,7 +12909,6 @@ export type LocalizedStoryMetaFragmentFragment = {
             | { __typename: 'ComponentCoreMuxAudio' }
             | { __typename: 'ComponentCoreMuxVideo' }
             | { __typename: 'ComponentCoreStandAloneLink' }
-            | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
@@ -12779,7 +12962,7 @@ export type LocalizedStoryMetaFragmentFragment = {
                       title: string
                       slug: string
                       description?: string | null
-                      shortDescription?: string | null
+                      shortDescription: string
                       createdAt?: any | null
                       updatedAt?: any | null
                       publishedAt?: any | null
@@ -12803,6 +12986,7 @@ export type LocalizedStoryMetaFragmentFragment = {
               }
             | { __typename: 'ComponentModulesImageCarousel' }
             | { __typename: 'ComponentModulesPullquote' }
+            | { __typename: 'ComponentModulesSideImageWithText' }
             | { __typename: 'ComponentModulesSubtitle' }
             | { __typename: 'ComponentModulesTextModule' }
             | { __typename: 'ComponentModulesTitleModule' }
@@ -12852,7 +13036,7 @@ export type LocalizedStoryMetaFragmentFragment = {
           __typename?: 'Story'
           title: string
           slug: string
-          shortDescription?: string | null
+          shortDescription: string
           createdAt?: any | null
           updatedAt?: any | null
           publishedAt?: any | null
@@ -12910,16 +13094,6 @@ export type LocalizedStoryMetaFragmentFragment = {
               } | null
             }>
           } | null
-          storyLinks?: {
-            __typename: 'ComponentModulesButtonsModule'
-            id: string
-            buttons?: Array<{
-              __typename?: 'ComponentCoreButton'
-              id: string
-              text: string
-              url: string
-            } | null> | null
-          } | null
           parent_story?: {
             __typename?: 'StoryEntityResponse'
             data?: {
@@ -12932,7 +13106,6 @@ export type LocalizedStoryMetaFragmentFragment = {
                   | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
-                  | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
                       alt_text?: string | null
@@ -12986,7 +13159,7 @@ export type LocalizedStoryMetaFragmentFragment = {
                             title: string
                             slug: string
                             description?: string | null
-                            shortDescription?: string | null
+                            shortDescription: string
                             createdAt?: any | null
                             updatedAt?: any | null
                             publishedAt?: any | null
@@ -13010,6 +13183,7 @@ export type LocalizedStoryMetaFragmentFragment = {
                     }
                   | { __typename: 'ComponentModulesImageCarousel' }
                   | { __typename: 'ComponentModulesPullquote' }
+                  | { __typename: 'ComponentModulesSideImageWithText' }
                   | { __typename: 'ComponentModulesSubtitle' }
                   | { __typename: 'ComponentModulesTextModule' }
                   | { __typename: 'ComponentModulesTitleModule' }
@@ -13044,7 +13218,6 @@ export type LocalizedStoryMetaFragmentFragment = {
                   | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
-                  | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
                       alt_text?: string | null
@@ -13098,7 +13271,7 @@ export type LocalizedStoryMetaFragmentFragment = {
                             title: string
                             slug: string
                             description?: string | null
-                            shortDescription?: string | null
+                            shortDescription: string
                             createdAt?: any | null
                             updatedAt?: any | null
                             publishedAt?: any | null
@@ -13122,6 +13295,7 @@ export type LocalizedStoryMetaFragmentFragment = {
                     }
                   | { __typename: 'ComponentModulesImageCarousel' }
                   | { __typename: 'ComponentModulesPullquote' }
+                  | { __typename: 'ComponentModulesSideImageWithText' }
                   | { __typename: 'ComponentModulesSubtitle' }
                   | { __typename: 'ComponentModulesTextModule' }
                   | { __typename: 'ComponentModulesTitleModule' }
@@ -13147,18 +13321,279 @@ export type LocalizedStoryMetaFragmentFragment = {
         } | null
       }>
     } | null
-    storyLinks?: {
-      __typename: 'ComponentModulesButtonsModule'
-      id: string
-      buttons?: Array<{
-        __typename?: 'ComponentCoreButton'
-        id: string
-        text: string
-        url: string
-      } | null> | null
+  } | null
+}
+
+type StoryComponentsFragment_ComponentCoreMuxAudio_Fragment = {
+  __typename: 'ComponentCoreMuxAudio'
+  id: string
+  caption?: string | null
+  muxAudioRelation?: {
+    __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+    data?: {
+      __typename?: 'MuxVideoUploaderMuxAssetEntity'
+      id?: string | null
+      attributes?: {
+        __typename?: 'MuxVideoUploaderMuxAsset'
+        title: string
+        upload_id?: string | null
+        asset_id?: string | null
+        playback_id?: string | null
+        signed: boolean
+        error_message?: string | null
+        isReady?: boolean | null
+        duration?: number | null
+        aspect_ratio?: string | null
+        createdAt?: any | null
+        updatedAt?: any | null
+      } | null
     } | null
   } | null
 }
+
+type StoryComponentsFragment_ComponentCoreMuxVideo_Fragment = {
+  __typename: 'ComponentCoreMuxVideo'
+  id: string
+  caption?: string | null
+  muxVideoRelation?: {
+    __typename?: 'MuxVideoUploaderMuxAssetEntityResponse'
+    data?: {
+      __typename?: 'MuxVideoUploaderMuxAssetEntity'
+      id?: string | null
+      attributes?: {
+        __typename?: 'MuxVideoUploaderMuxAsset'
+        title: string
+        upload_id?: string | null
+        asset_id?: string | null
+        playback_id?: string | null
+        signed: boolean
+        error_message?: string | null
+        isReady?: boolean | null
+        duration?: number | null
+        aspect_ratio?: string | null
+        createdAt?: any | null
+        updatedAt?: any | null
+      } | null
+    } | null
+  } | null
+}
+
+type StoryComponentsFragment_ComponentCoreStandAloneLink_Fragment = {
+  __typename: 'ComponentCoreStandAloneLink'
+  id: string
+  label: string
+  url?: string | null
+  attachment?: {
+    __typename?: 'UploadFileEntityResponse'
+    data?: {
+      __typename?: 'UploadFileEntity'
+      id?: string | null
+      attributes?: {
+        __typename?: 'UploadFile'
+        hash: string
+        mime: string
+        name: string
+        provider: string
+        size: number
+        url: string
+        alternativeText?: string | null
+        caption?: string | null
+        createdAt?: any | null
+        ext?: string | null
+        formats?: any | null
+        height?: number | null
+        previewUrl?: string | null
+        provider_metadata?: any | null
+        updatedAt?: any | null
+        width?: number | null
+      } | null
+    } | null
+  } | null
+}
+
+type StoryComponentsFragment_ComponentModulesImage_Fragment = {
+  __typename: 'ComponentModulesImage'
+  alt_text?: string | null
+  caption?: string | null
+  id: string
+  image: {
+    __typename?: 'UploadFileEntityResponse'
+    data?: {
+      __typename?: 'UploadFileEntity'
+      id?: string | null
+      attributes?: {
+        __typename?: 'UploadFile'
+        hash: string
+        mime: string
+        name: string
+        provider: string
+        size: number
+        url: string
+        alternativeText?: string | null
+        caption?: string | null
+        createdAt?: any | null
+        ext?: string | null
+        formats?: any | null
+        height?: number | null
+        previewUrl?: string | null
+        provider_metadata?: any | null
+        updatedAt?: any | null
+        width?: number | null
+      } | null
+    } | null
+  }
+  triplyRecord?: {
+    __typename?: 'TriplyRecordEntityResponse'
+    data?: {
+      __typename?: 'TriplyRecordEntity'
+      id?: string | null
+      attributes?: {
+        __typename?: 'TriplyRecord'
+        recordId: string
+        type: Enum_Triplyrecord_Type
+      } | null
+    } | null
+  } | null
+  story?: {
+    __typename?: 'StoryEntityResponse'
+    data?: {
+      __typename?: 'StoryEntity'
+      id?: string | null
+      attributes?: {
+        __typename?: 'Story'
+        title: string
+        slug: string
+        description?: string | null
+        shortDescription: string
+        createdAt?: any | null
+        updatedAt?: any | null
+        publishedAt?: any | null
+        locale?: string | null
+        author?: {
+          __typename?: 'AuthorEntityResponse'
+          data?: {
+            __typename?: 'AuthorEntity'
+            id?: string | null
+            attributes?: {
+              __typename?: 'Author'
+              firstName: string
+              lastName: string
+              insertion?: string | null
+            } | null
+          } | null
+        } | null
+      } | null
+    } | null
+  } | null
+}
+
+type StoryComponentsFragment_ComponentModulesImageCarousel_Fragment = {
+  __typename: 'ComponentModulesImageCarousel'
+  id: string
+  description?: string | null
+  images?: {
+    __typename?: 'UploadFileRelationResponseCollection'
+    data: Array<{
+      __typename?: 'UploadFileEntity'
+      id?: string | null
+      attributes?: {
+        __typename?: 'UploadFile'
+        hash: string
+        mime: string
+        name: string
+        provider: string
+        size: number
+        url: string
+        alternativeText?: string | null
+        caption?: string | null
+        createdAt?: any | null
+        ext?: string | null
+        formats?: any | null
+        height?: number | null
+        previewUrl?: string | null
+        provider_metadata?: any | null
+        updatedAt?: any | null
+        width?: number | null
+      } | null
+    }>
+  } | null
+}
+
+type StoryComponentsFragment_ComponentModulesPullquote_Fragment = {
+  __typename: 'ComponentModulesPullquote'
+  id: string
+  text?: string | null
+}
+
+type StoryComponentsFragment_ComponentModulesSideImageWithText_Fragment = {
+  __typename: 'ComponentModulesSideImageWithText'
+  id: string
+  sideText: string
+  image_alt_text: string
+  image: {
+    __typename?: 'UploadFileEntityResponse'
+    data?: {
+      __typename?: 'UploadFileEntity'
+      id?: string | null
+      attributes?: {
+        __typename?: 'UploadFile'
+        hash: string
+        mime: string
+        name: string
+        provider: string
+        size: number
+        url: string
+        alternativeText?: string | null
+        caption?: string | null
+        createdAt?: any | null
+        ext?: string | null
+        formats?: any | null
+        height?: number | null
+        previewUrl?: string | null
+        provider_metadata?: any | null
+        updatedAt?: any | null
+        width?: number | null
+      } | null
+    } | null
+  }
+}
+
+type StoryComponentsFragment_ComponentModulesSubtitle_Fragment = {
+  __typename: 'ComponentModulesSubtitle'
+  id: string
+  text?: string | null
+}
+
+type StoryComponentsFragment_ComponentModulesTextModule_Fragment = {
+  __typename: 'ComponentModulesTextModule'
+  Richtext?: string | null
+  id: string
+}
+
+type StoryComponentsFragment_ComponentModulesTitleModule_Fragment = {
+  __typename: 'ComponentModulesTitleModule'
+  Title?: string | null
+  id: string
+}
+
+type StoryComponentsFragment_Error_Fragment = {
+  __typename: 'Error'
+  code: string
+  message?: string | null
+}
+
+export type StoryComponentsFragmentFragment =
+  | StoryComponentsFragment_ComponentCoreMuxAudio_Fragment
+  | StoryComponentsFragment_ComponentCoreMuxVideo_Fragment
+  | StoryComponentsFragment_ComponentCoreStandAloneLink_Fragment
+  | StoryComponentsFragment_ComponentModulesImage_Fragment
+  | StoryComponentsFragment_ComponentModulesImageCarousel_Fragment
+  | StoryComponentsFragment_ComponentModulesPullquote_Fragment
+  | StoryComponentsFragment_ComponentModulesSideImageWithText_Fragment
+  | StoryComponentsFragment_ComponentModulesSubtitle_Fragment
+  | StoryComponentsFragment_ComponentModulesTextModule_Fragment
+  | StoryComponentsFragment_ComponentModulesTitleModule_Fragment
+  | StoryComponentsFragment_Error_Fragment
 
 export type ComponentCoreButtonFragmentFragment = {
   __typename?: 'ComponentCoreButton'
@@ -13543,7 +13978,7 @@ export type ComponentModulesImageFragmentFragment = {
         title: string
         slug: string
         description?: string | null
-        shortDescription?: string | null
+        shortDescription: string
         createdAt?: any | null
         updatedAt?: any | null
         publishedAt?: any | null
@@ -13663,6 +14098,39 @@ export type ComponentModulesGridModuleFragmentFragment = {
       } | null
     } | null
   } | null> | null
+}
+
+export type ComponentModulesSideImageWithTextFragmentFragment = {
+  __typename: 'ComponentModulesSideImageWithText'
+  id: string
+  sideText: string
+  image_alt_text: string
+  image: {
+    __typename?: 'UploadFileEntityResponse'
+    data?: {
+      __typename?: 'UploadFileEntity'
+      id?: string | null
+      attributes?: {
+        __typename?: 'UploadFile'
+        hash: string
+        mime: string
+        name: string
+        provider: string
+        size: number
+        url: string
+        alternativeText?: string | null
+        caption?: string | null
+        createdAt?: any | null
+        ext?: string | null
+        formats?: any | null
+        height?: number | null
+        previewUrl?: string | null
+        provider_metadata?: any | null
+        updatedAt?: any | null
+        width?: number | null
+      } | null
+    } | null
+  }
 }
 
 export type UploadFileFragmentFragment = {
@@ -13789,7 +14257,7 @@ export type ThemeQuery = {
               title: string
               slug: string
               description?: string | null
-              shortDescription?: string | null
+              shortDescription: string
               createdAt?: any | null
               updatedAt?: any | null
               publishedAt?: any | null
@@ -13880,16 +14348,6 @@ export type ThemeQuery = {
                     } | null
                   }
                 | {
-                    __typename: 'ComponentModulesButtonsModule'
-                    id: string
-                    buttons?: Array<{
-                      __typename?: 'ComponentCoreButton'
-                      id: string
-                      text: string
-                      url: string
-                    } | null> | null
-                  }
-                | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
                     caption?: string | null
@@ -13942,7 +14400,7 @@ export type ThemeQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -13996,6 +14454,38 @@ export type ThemeQuery = {
                     } | null
                   }
                 | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+                | {
+                    __typename: 'ComponentModulesSideImageWithText'
+                    id: string
+                    sideText: string
+                    image_alt_text: string
+                    image: {
+                      __typename?: 'UploadFileEntityResponse'
+                      data?: {
+                        __typename?: 'UploadFileEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'UploadFile'
+                          hash: string
+                          mime: string
+                          name: string
+                          provider: string
+                          size: number
+                          url: string
+                          alternativeText?: string | null
+                          caption?: string | null
+                          createdAt?: any | null
+                          ext?: string | null
+                          formats?: any | null
+                          height?: number | null
+                          previewUrl?: string | null
+                          provider_metadata?: any | null
+                          updatedAt?: any | null
+                          width?: number | null
+                        } | null
+                      } | null
+                    }
+                  }
                 | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
                 | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
                 | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -14047,16 +14537,6 @@ export type ThemeQuery = {
                 __typename?: 'StoryRelationResponseCollection'
                 data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
               } | null
-              storyLinks?: {
-                __typename: 'ComponentModulesButtonsModule'
-                id: string
-                buttons?: Array<{
-                  __typename?: 'ComponentCoreButton'
-                  id: string
-                  text: string
-                  url: string
-                } | null> | null
-              } | null
               parent_story?: {
                 __typename?: 'StoryEntityResponse'
                 data?: {
@@ -14069,7 +14549,6 @@ export type ThemeQuery = {
                       | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
-                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -14123,7 +14602,7 @@ export type ThemeQuery = {
                                 title: string
                                 slug: string
                                 description?: string | null
-                                shortDescription?: string | null
+                                shortDescription: string
                                 createdAt?: any | null
                                 updatedAt?: any | null
                                 publishedAt?: any | null
@@ -14147,6 +14626,7 @@ export type ThemeQuery = {
                         }
                       | { __typename: 'ComponentModulesImageCarousel' }
                       | { __typename: 'ComponentModulesPullquote' }
+                      | { __typename: 'ComponentModulesSideImageWithText' }
                       | { __typename: 'ComponentModulesSubtitle' }
                       | { __typename: 'ComponentModulesTextModule' }
                       | { __typename: 'ComponentModulesTitleModule' }
@@ -14181,7 +14661,6 @@ export type ThemeQuery = {
                       | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
-                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -14235,7 +14714,7 @@ export type ThemeQuery = {
                                 title: string
                                 slug: string
                                 description?: string | null
-                                shortDescription?: string | null
+                                shortDescription: string
                                 createdAt?: any | null
                                 updatedAt?: any | null
                                 publishedAt?: any | null
@@ -14259,6 +14738,7 @@ export type ThemeQuery = {
                         }
                       | { __typename: 'ComponentModulesImageCarousel' }
                       | { __typename: 'ComponentModulesPullquote' }
+                      | { __typename: 'ComponentModulesSideImageWithText' }
                       | { __typename: 'ComponentModulesSubtitle' }
                       | { __typename: 'ComponentModulesTextModule' }
                       | { __typename: 'ComponentModulesTitleModule' }
@@ -14325,7 +14805,7 @@ export type ThemesQuery = {
               title: string
               slug: string
               description?: string | null
-              shortDescription?: string | null
+              shortDescription: string
               createdAt?: any | null
               updatedAt?: any | null
               publishedAt?: any | null
@@ -14416,16 +14896,6 @@ export type ThemesQuery = {
                     } | null
                   }
                 | {
-                    __typename: 'ComponentModulesButtonsModule'
-                    id: string
-                    buttons?: Array<{
-                      __typename?: 'ComponentCoreButton'
-                      id: string
-                      text: string
-                      url: string
-                    } | null> | null
-                  }
-                | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
                     caption?: string | null
@@ -14478,7 +14948,7 @@ export type ThemesQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -14532,6 +15002,38 @@ export type ThemesQuery = {
                     } | null
                   }
                 | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+                | {
+                    __typename: 'ComponentModulesSideImageWithText'
+                    id: string
+                    sideText: string
+                    image_alt_text: string
+                    image: {
+                      __typename?: 'UploadFileEntityResponse'
+                      data?: {
+                        __typename?: 'UploadFileEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'UploadFile'
+                          hash: string
+                          mime: string
+                          name: string
+                          provider: string
+                          size: number
+                          url: string
+                          alternativeText?: string | null
+                          caption?: string | null
+                          createdAt?: any | null
+                          ext?: string | null
+                          formats?: any | null
+                          height?: number | null
+                          previewUrl?: string | null
+                          provider_metadata?: any | null
+                          updatedAt?: any | null
+                          width?: number | null
+                        } | null
+                      } | null
+                    }
+                  }
                 | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
                 | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
                 | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -14583,16 +15085,6 @@ export type ThemesQuery = {
                 __typename?: 'StoryRelationResponseCollection'
                 data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
               } | null
-              storyLinks?: {
-                __typename: 'ComponentModulesButtonsModule'
-                id: string
-                buttons?: Array<{
-                  __typename?: 'ComponentCoreButton'
-                  id: string
-                  text: string
-                  url: string
-                } | null> | null
-              } | null
               parent_story?: {
                 __typename?: 'StoryEntityResponse'
                 data?: {
@@ -14605,7 +15097,6 @@ export type ThemesQuery = {
                       | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
-                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -14659,7 +15150,7 @@ export type ThemesQuery = {
                                 title: string
                                 slug: string
                                 description?: string | null
-                                shortDescription?: string | null
+                                shortDescription: string
                                 createdAt?: any | null
                                 updatedAt?: any | null
                                 publishedAt?: any | null
@@ -14683,6 +15174,7 @@ export type ThemesQuery = {
                         }
                       | { __typename: 'ComponentModulesImageCarousel' }
                       | { __typename: 'ComponentModulesPullquote' }
+                      | { __typename: 'ComponentModulesSideImageWithText' }
                       | { __typename: 'ComponentModulesSubtitle' }
                       | { __typename: 'ComponentModulesTextModule' }
                       | { __typename: 'ComponentModulesTitleModule' }
@@ -14717,7 +15209,6 @@ export type ThemesQuery = {
                       | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
-                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -14771,7 +15262,7 @@ export type ThemesQuery = {
                                 title: string
                                 slug: string
                                 description?: string | null
-                                shortDescription?: string | null
+                                shortDescription: string
                                 createdAt?: any | null
                                 updatedAt?: any | null
                                 publishedAt?: any | null
@@ -14795,6 +15286,7 @@ export type ThemesQuery = {
                         }
                       | { __typename: 'ComponentModulesImageCarousel' }
                       | { __typename: 'ComponentModulesPullquote' }
+                      | { __typename: 'ComponentModulesSideImageWithText' }
                       | { __typename: 'ComponentModulesSubtitle' }
                       | { __typename: 'ComponentModulesTextModule' }
                       | { __typename: 'ComponentModulesTitleModule' }
@@ -14869,7 +15361,7 @@ export type StoriesRelatedToThemeQuery = {
               title: string
               slug: string
               description?: string | null
-              shortDescription?: string | null
+              shortDescription: string
               createdAt?: any | null
               updatedAt?: any | null
               publishedAt?: any | null
@@ -14960,16 +15452,6 @@ export type StoriesRelatedToThemeQuery = {
                     } | null
                   }
                 | {
-                    __typename: 'ComponentModulesButtonsModule'
-                    id: string
-                    buttons?: Array<{
-                      __typename?: 'ComponentCoreButton'
-                      id: string
-                      text: string
-                      url: string
-                    } | null> | null
-                  }
-                | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
                     caption?: string | null
@@ -15022,7 +15504,7 @@ export type StoriesRelatedToThemeQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -15076,6 +15558,38 @@ export type StoriesRelatedToThemeQuery = {
                     } | null
                   }
                 | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+                | {
+                    __typename: 'ComponentModulesSideImageWithText'
+                    id: string
+                    sideText: string
+                    image_alt_text: string
+                    image: {
+                      __typename?: 'UploadFileEntityResponse'
+                      data?: {
+                        __typename?: 'UploadFileEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'UploadFile'
+                          hash: string
+                          mime: string
+                          name: string
+                          provider: string
+                          size: number
+                          url: string
+                          alternativeText?: string | null
+                          caption?: string | null
+                          createdAt?: any | null
+                          ext?: string | null
+                          formats?: any | null
+                          height?: number | null
+                          previewUrl?: string | null
+                          provider_metadata?: any | null
+                          updatedAt?: any | null
+                          width?: number | null
+                        } | null
+                      } | null
+                    }
+                  }
                 | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
                 | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
                 | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -15127,16 +15641,6 @@ export type StoriesRelatedToThemeQuery = {
                 __typename?: 'StoryRelationResponseCollection'
                 data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
               } | null
-              storyLinks?: {
-                __typename: 'ComponentModulesButtonsModule'
-                id: string
-                buttons?: Array<{
-                  __typename?: 'ComponentCoreButton'
-                  id: string
-                  text: string
-                  url: string
-                } | null> | null
-              } | null
               parent_story?: {
                 __typename?: 'StoryEntityResponse'
                 data?: {
@@ -15149,7 +15653,6 @@ export type StoriesRelatedToThemeQuery = {
                       | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
-                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -15203,7 +15706,7 @@ export type StoriesRelatedToThemeQuery = {
                                 title: string
                                 slug: string
                                 description?: string | null
-                                shortDescription?: string | null
+                                shortDescription: string
                                 createdAt?: any | null
                                 updatedAt?: any | null
                                 publishedAt?: any | null
@@ -15227,6 +15730,7 @@ export type StoriesRelatedToThemeQuery = {
                         }
                       | { __typename: 'ComponentModulesImageCarousel' }
                       | { __typename: 'ComponentModulesPullquote' }
+                      | { __typename: 'ComponentModulesSideImageWithText' }
                       | { __typename: 'ComponentModulesSubtitle' }
                       | { __typename: 'ComponentModulesTextModule' }
                       | { __typename: 'ComponentModulesTitleModule' }
@@ -15261,7 +15765,6 @@ export type StoriesRelatedToThemeQuery = {
                       | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
-                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -15315,7 +15818,7 @@ export type StoriesRelatedToThemeQuery = {
                                 title: string
                                 slug: string
                                 description?: string | null
-                                shortDescription?: string | null
+                                shortDescription: string
                                 createdAt?: any | null
                                 updatedAt?: any | null
                                 publishedAt?: any | null
@@ -15339,6 +15842,7 @@ export type StoriesRelatedToThemeQuery = {
                         }
                       | { __typename: 'ComponentModulesImageCarousel' }
                       | { __typename: 'ComponentModulesPullquote' }
+                      | { __typename: 'ComponentModulesSideImageWithText' }
                       | { __typename: 'ComponentModulesSubtitle' }
                       | { __typename: 'ComponentModulesTextModule' }
                       | { __typename: 'ComponentModulesTitleModule' }
@@ -15393,7 +15897,7 @@ export type ThemeFragmentFragment = {
           title: string
           slug: string
           description?: string | null
-          shortDescription?: string | null
+          shortDescription: string
           createdAt?: any | null
           updatedAt?: any | null
           publishedAt?: any | null
@@ -15484,16 +15988,6 @@ export type ThemeFragmentFragment = {
                 } | null
               }
             | {
-                __typename: 'ComponentModulesButtonsModule'
-                id: string
-                buttons?: Array<{
-                  __typename?: 'ComponentCoreButton'
-                  id: string
-                  text: string
-                  url: string
-                } | null> | null
-              }
-            | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
                 caption?: string | null
@@ -15546,7 +16040,7 @@ export type ThemeFragmentFragment = {
                       title: string
                       slug: string
                       description?: string | null
-                      shortDescription?: string | null
+                      shortDescription: string
                       createdAt?: any | null
                       updatedAt?: any | null
                       publishedAt?: any | null
@@ -15600,6 +16094,38 @@ export type ThemeFragmentFragment = {
                 } | null
               }
             | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+            | {
+                __typename: 'ComponentModulesSideImageWithText'
+                id: string
+                sideText: string
+                image_alt_text: string
+                image: {
+                  __typename?: 'UploadFileEntityResponse'
+                  data?: {
+                    __typename?: 'UploadFileEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'UploadFile'
+                      hash: string
+                      mime: string
+                      name: string
+                      provider: string
+                      size: number
+                      url: string
+                      alternativeText?: string | null
+                      caption?: string | null
+                      createdAt?: any | null
+                      ext?: string | null
+                      formats?: any | null
+                      height?: number | null
+                      previewUrl?: string | null
+                      provider_metadata?: any | null
+                      updatedAt?: any | null
+                      width?: number | null
+                    } | null
+                  } | null
+                }
+              }
             | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
             | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
             | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -15651,16 +16177,6 @@ export type ThemeFragmentFragment = {
             __typename?: 'StoryRelationResponseCollection'
             data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
           } | null
-          storyLinks?: {
-            __typename: 'ComponentModulesButtonsModule'
-            id: string
-            buttons?: Array<{
-              __typename?: 'ComponentCoreButton'
-              id: string
-              text: string
-              url: string
-            } | null> | null
-          } | null
           parent_story?: {
             __typename?: 'StoryEntityResponse'
             data?: {
@@ -15673,7 +16189,6 @@ export type ThemeFragmentFragment = {
                   | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
-                  | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
                       alt_text?: string | null
@@ -15727,7 +16242,7 @@ export type ThemeFragmentFragment = {
                             title: string
                             slug: string
                             description?: string | null
-                            shortDescription?: string | null
+                            shortDescription: string
                             createdAt?: any | null
                             updatedAt?: any | null
                             publishedAt?: any | null
@@ -15751,6 +16266,7 @@ export type ThemeFragmentFragment = {
                     }
                   | { __typename: 'ComponentModulesImageCarousel' }
                   | { __typename: 'ComponentModulesPullquote' }
+                  | { __typename: 'ComponentModulesSideImageWithText' }
                   | { __typename: 'ComponentModulesSubtitle' }
                   | { __typename: 'ComponentModulesTextModule' }
                   | { __typename: 'ComponentModulesTitleModule' }
@@ -15785,7 +16301,6 @@ export type ThemeFragmentFragment = {
                   | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
-                  | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
                       alt_text?: string | null
@@ -15839,7 +16354,7 @@ export type ThemeFragmentFragment = {
                             title: string
                             slug: string
                             description?: string | null
-                            shortDescription?: string | null
+                            shortDescription: string
                             createdAt?: any | null
                             updatedAt?: any | null
                             publishedAt?: any | null
@@ -15863,6 +16378,7 @@ export type ThemeFragmentFragment = {
                     }
                   | { __typename: 'ComponentModulesImageCarousel' }
                   | { __typename: 'ComponentModulesPullquote' }
+                  | { __typename: 'ComponentModulesSideImageWithText' }
                   | { __typename: 'ComponentModulesSubtitle' }
                   | { __typename: 'ComponentModulesTextModule' }
                   | { __typename: 'ComponentModulesTitleModule' }
@@ -15915,7 +16431,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
           title: string
           slug: string
           description?: string | null
-          shortDescription?: string | null
+          shortDescription: string
           createdAt?: any | null
           updatedAt?: any | null
           publishedAt?: any | null
@@ -16006,16 +16522,6 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                 } | null
               }
             | {
-                __typename: 'ComponentModulesButtonsModule'
-                id: string
-                buttons?: Array<{
-                  __typename?: 'ComponentCoreButton'
-                  id: string
-                  text: string
-                  url: string
-                } | null> | null
-              }
-            | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
                 caption?: string | null
@@ -16068,7 +16574,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                       title: string
                       slug: string
                       description?: string | null
-                      shortDescription?: string | null
+                      shortDescription: string
                       createdAt?: any | null
                       updatedAt?: any | null
                       publishedAt?: any | null
@@ -16122,6 +16628,38 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                 } | null
               }
             | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+            | {
+                __typename: 'ComponentModulesSideImageWithText'
+                id: string
+                sideText: string
+                image_alt_text: string
+                image: {
+                  __typename?: 'UploadFileEntityResponse'
+                  data?: {
+                    __typename?: 'UploadFileEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'UploadFile'
+                      hash: string
+                      mime: string
+                      name: string
+                      provider: string
+                      size: number
+                      url: string
+                      alternativeText?: string | null
+                      caption?: string | null
+                      createdAt?: any | null
+                      ext?: string | null
+                      formats?: any | null
+                      height?: number | null
+                      previewUrl?: string | null
+                      provider_metadata?: any | null
+                      updatedAt?: any | null
+                      width?: number | null
+                    } | null
+                  } | null
+                }
+              }
             | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
             | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
             | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -16173,16 +16711,6 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
             __typename?: 'StoryRelationResponseCollection'
             data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
           } | null
-          storyLinks?: {
-            __typename: 'ComponentModulesButtonsModule'
-            id: string
-            buttons?: Array<{
-              __typename?: 'ComponentCoreButton'
-              id: string
-              text: string
-              url: string
-            } | null> | null
-          } | null
           parent_story?: {
             __typename?: 'StoryEntityResponse'
             data?: {
@@ -16195,7 +16723,6 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                   | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
-                  | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
                       alt_text?: string | null
@@ -16249,7 +16776,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                             title: string
                             slug: string
                             description?: string | null
-                            shortDescription?: string | null
+                            shortDescription: string
                             createdAt?: any | null
                             updatedAt?: any | null
                             publishedAt?: any | null
@@ -16273,6 +16800,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                     }
                   | { __typename: 'ComponentModulesImageCarousel' }
                   | { __typename: 'ComponentModulesPullquote' }
+                  | { __typename: 'ComponentModulesSideImageWithText' }
                   | { __typename: 'ComponentModulesSubtitle' }
                   | { __typename: 'ComponentModulesTextModule' }
                   | { __typename: 'ComponentModulesTitleModule' }
@@ -16307,7 +16835,6 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                   | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
-                  | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
                       alt_text?: string | null
@@ -16361,7 +16888,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                             title: string
                             slug: string
                             description?: string | null
-                            shortDescription?: string | null
+                            shortDescription: string
                             createdAt?: any | null
                             updatedAt?: any | null
                             publishedAt?: any | null
@@ -16385,6 +16912,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                     }
                   | { __typename: 'ComponentModulesImageCarousel' }
                   | { __typename: 'ComponentModulesPullquote' }
+                  | { __typename: 'ComponentModulesSideImageWithText' }
                   | { __typename: 'ComponentModulesSubtitle' }
                   | { __typename: 'ComponentModulesTextModule' }
                   | { __typename: 'ComponentModulesTitleModule' }
@@ -16420,7 +16948,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
           title: string
           slug: string
           description?: string | null
-          shortDescription?: string | null
+          shortDescription: string
           createdAt?: any | null
           updatedAt?: any | null
           publishedAt?: any | null
@@ -16511,16 +17039,6 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                 } | null
               }
             | {
-                __typename: 'ComponentModulesButtonsModule'
-                id: string
-                buttons?: Array<{
-                  __typename?: 'ComponentCoreButton'
-                  id: string
-                  text: string
-                  url: string
-                } | null> | null
-              }
-            | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
                 caption?: string | null
@@ -16573,7 +17091,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                       title: string
                       slug: string
                       description?: string | null
-                      shortDescription?: string | null
+                      shortDescription: string
                       createdAt?: any | null
                       updatedAt?: any | null
                       publishedAt?: any | null
@@ -16627,6 +17145,38 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                 } | null
               }
             | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+            | {
+                __typename: 'ComponentModulesSideImageWithText'
+                id: string
+                sideText: string
+                image_alt_text: string
+                image: {
+                  __typename?: 'UploadFileEntityResponse'
+                  data?: {
+                    __typename?: 'UploadFileEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'UploadFile'
+                      hash: string
+                      mime: string
+                      name: string
+                      provider: string
+                      size: number
+                      url: string
+                      alternativeText?: string | null
+                      caption?: string | null
+                      createdAt?: any | null
+                      ext?: string | null
+                      formats?: any | null
+                      height?: number | null
+                      previewUrl?: string | null
+                      provider_metadata?: any | null
+                      updatedAt?: any | null
+                      width?: number | null
+                    } | null
+                  } | null
+                }
+              }
             | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
             | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
             | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -16678,16 +17228,6 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
             __typename?: 'StoryRelationResponseCollection'
             data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
           } | null
-          storyLinks?: {
-            __typename: 'ComponentModulesButtonsModule'
-            id: string
-            buttons?: Array<{
-              __typename?: 'ComponentCoreButton'
-              id: string
-              text: string
-              url: string
-            } | null> | null
-          } | null
           parent_story?: {
             __typename?: 'StoryEntityResponse'
             data?: {
@@ -16700,7 +17240,6 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                   | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
-                  | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
                       alt_text?: string | null
@@ -16754,7 +17293,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                             title: string
                             slug: string
                             description?: string | null
-                            shortDescription?: string | null
+                            shortDescription: string
                             createdAt?: any | null
                             updatedAt?: any | null
                             publishedAt?: any | null
@@ -16778,6 +17317,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                     }
                   | { __typename: 'ComponentModulesImageCarousel' }
                   | { __typename: 'ComponentModulesPullquote' }
+                  | { __typename: 'ComponentModulesSideImageWithText' }
                   | { __typename: 'ComponentModulesSubtitle' }
                   | { __typename: 'ComponentModulesTextModule' }
                   | { __typename: 'ComponentModulesTitleModule' }
@@ -16812,7 +17352,6 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                   | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
-                  | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
                       alt_text?: string | null
@@ -16866,7 +17405,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                             title: string
                             slug: string
                             description?: string | null
-                            shortDescription?: string | null
+                            shortDescription: string
                             createdAt?: any | null
                             updatedAt?: any | null
                             publishedAt?: any | null
@@ -16890,6 +17429,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                     }
                   | { __typename: 'ComponentModulesImageCarousel' }
                   | { __typename: 'ComponentModulesPullquote' }
+                  | { __typename: 'ComponentModulesSideImageWithText' }
                   | { __typename: 'ComponentModulesSubtitle' }
                   | { __typename: 'ComponentModulesTextModule' }
                   | { __typename: 'ComponentModulesTitleModule' }
@@ -16962,7 +17502,7 @@ export type TriplyRecordQuery = {
               title: string
               slug: string
               description?: string | null
-              shortDescription?: string | null
+              shortDescription: string
               createdAt?: any | null
               updatedAt?: any | null
               publishedAt?: any | null
@@ -17053,16 +17593,6 @@ export type TriplyRecordQuery = {
                     } | null
                   }
                 | {
-                    __typename: 'ComponentModulesButtonsModule'
-                    id: string
-                    buttons?: Array<{
-                      __typename?: 'ComponentCoreButton'
-                      id: string
-                      text: string
-                      url: string
-                    } | null> | null
-                  }
-                | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
                     caption?: string | null
@@ -17115,7 +17645,7 @@ export type TriplyRecordQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -17169,6 +17699,38 @@ export type TriplyRecordQuery = {
                     } | null
                   }
                 | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+                | {
+                    __typename: 'ComponentModulesSideImageWithText'
+                    id: string
+                    sideText: string
+                    image_alt_text: string
+                    image: {
+                      __typename?: 'UploadFileEntityResponse'
+                      data?: {
+                        __typename?: 'UploadFileEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'UploadFile'
+                          hash: string
+                          mime: string
+                          name: string
+                          provider: string
+                          size: number
+                          url: string
+                          alternativeText?: string | null
+                          caption?: string | null
+                          createdAt?: any | null
+                          ext?: string | null
+                          formats?: any | null
+                          height?: number | null
+                          previewUrl?: string | null
+                          provider_metadata?: any | null
+                          updatedAt?: any | null
+                          width?: number | null
+                        } | null
+                      } | null
+                    }
+                  }
                 | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
                 | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
                 | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -17220,16 +17782,6 @@ export type TriplyRecordQuery = {
                 __typename?: 'StoryRelationResponseCollection'
                 data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
               } | null
-              storyLinks?: {
-                __typename: 'ComponentModulesButtonsModule'
-                id: string
-                buttons?: Array<{
-                  __typename?: 'ComponentCoreButton'
-                  id: string
-                  text: string
-                  url: string
-                } | null> | null
-              } | null
               parent_story?: {
                 __typename?: 'StoryEntityResponse'
                 data?: {
@@ -17242,7 +17794,6 @@ export type TriplyRecordQuery = {
                       | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
-                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -17296,7 +17847,7 @@ export type TriplyRecordQuery = {
                                 title: string
                                 slug: string
                                 description?: string | null
-                                shortDescription?: string | null
+                                shortDescription: string
                                 createdAt?: any | null
                                 updatedAt?: any | null
                                 publishedAt?: any | null
@@ -17320,6 +17871,7 @@ export type TriplyRecordQuery = {
                         }
                       | { __typename: 'ComponentModulesImageCarousel' }
                       | { __typename: 'ComponentModulesPullquote' }
+                      | { __typename: 'ComponentModulesSideImageWithText' }
                       | { __typename: 'ComponentModulesSubtitle' }
                       | { __typename: 'ComponentModulesTextModule' }
                       | { __typename: 'ComponentModulesTitleModule' }
@@ -17354,7 +17906,6 @@ export type TriplyRecordQuery = {
                       | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
-                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -17408,7 +17959,7 @@ export type TriplyRecordQuery = {
                                 title: string
                                 slug: string
                                 description?: string | null
-                                shortDescription?: string | null
+                                shortDescription: string
                                 createdAt?: any | null
                                 updatedAt?: any | null
                                 publishedAt?: any | null
@@ -17432,6 +17983,7 @@ export type TriplyRecordQuery = {
                         }
                       | { __typename: 'ComponentModulesImageCarousel' }
                       | { __typename: 'ComponentModulesPullquote' }
+                      | { __typename: 'ComponentModulesSideImageWithText' }
                       | { __typename: 'ComponentModulesSubtitle' }
                       | { __typename: 'ComponentModulesTextModule' }
                       | { __typename: 'ComponentModulesTitleModule' }
@@ -17495,7 +18047,7 @@ export type TriplyRecordsQuery = {
               title: string
               slug: string
               description?: string | null
-              shortDescription?: string | null
+              shortDescription: string
               createdAt?: any | null
               updatedAt?: any | null
               publishedAt?: any | null
@@ -17586,16 +18138,6 @@ export type TriplyRecordsQuery = {
                     } | null
                   }
                 | {
-                    __typename: 'ComponentModulesButtonsModule'
-                    id: string
-                    buttons?: Array<{
-                      __typename?: 'ComponentCoreButton'
-                      id: string
-                      text: string
-                      url: string
-                    } | null> | null
-                  }
-                | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
                     caption?: string | null
@@ -17648,7 +18190,7 @@ export type TriplyRecordsQuery = {
                           title: string
                           slug: string
                           description?: string | null
-                          shortDescription?: string | null
+                          shortDescription: string
                           createdAt?: any | null
                           updatedAt?: any | null
                           publishedAt?: any | null
@@ -17702,6 +18244,38 @@ export type TriplyRecordsQuery = {
                     } | null
                   }
                 | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+                | {
+                    __typename: 'ComponentModulesSideImageWithText'
+                    id: string
+                    sideText: string
+                    image_alt_text: string
+                    image: {
+                      __typename?: 'UploadFileEntityResponse'
+                      data?: {
+                        __typename?: 'UploadFileEntity'
+                        id?: string | null
+                        attributes?: {
+                          __typename?: 'UploadFile'
+                          hash: string
+                          mime: string
+                          name: string
+                          provider: string
+                          size: number
+                          url: string
+                          alternativeText?: string | null
+                          caption?: string | null
+                          createdAt?: any | null
+                          ext?: string | null
+                          formats?: any | null
+                          height?: number | null
+                          previewUrl?: string | null
+                          provider_metadata?: any | null
+                          updatedAt?: any | null
+                          width?: number | null
+                        } | null
+                      } | null
+                    }
+                  }
                 | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
                 | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
                 | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -17753,16 +18327,6 @@ export type TriplyRecordsQuery = {
                 __typename?: 'StoryRelationResponseCollection'
                 data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
               } | null
-              storyLinks?: {
-                __typename: 'ComponentModulesButtonsModule'
-                id: string
-                buttons?: Array<{
-                  __typename?: 'ComponentCoreButton'
-                  id: string
-                  text: string
-                  url: string
-                } | null> | null
-              } | null
               parent_story?: {
                 __typename?: 'StoryEntityResponse'
                 data?: {
@@ -17775,7 +18339,6 @@ export type TriplyRecordsQuery = {
                       | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
-                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -17829,7 +18392,7 @@ export type TriplyRecordsQuery = {
                                 title: string
                                 slug: string
                                 description?: string | null
-                                shortDescription?: string | null
+                                shortDescription: string
                                 createdAt?: any | null
                                 updatedAt?: any | null
                                 publishedAt?: any | null
@@ -17853,6 +18416,7 @@ export type TriplyRecordsQuery = {
                         }
                       | { __typename: 'ComponentModulesImageCarousel' }
                       | { __typename: 'ComponentModulesPullquote' }
+                      | { __typename: 'ComponentModulesSideImageWithText' }
                       | { __typename: 'ComponentModulesSubtitle' }
                       | { __typename: 'ComponentModulesTextModule' }
                       | { __typename: 'ComponentModulesTitleModule' }
@@ -17887,7 +18451,6 @@ export type TriplyRecordsQuery = {
                       | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
-                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -17941,7 +18504,7 @@ export type TriplyRecordsQuery = {
                                 title: string
                                 slug: string
                                 description?: string | null
-                                shortDescription?: string | null
+                                shortDescription: string
                                 createdAt?: any | null
                                 updatedAt?: any | null
                                 publishedAt?: any | null
@@ -17965,6 +18528,7 @@ export type TriplyRecordsQuery = {
                         }
                       | { __typename: 'ComponentModulesImageCarousel' }
                       | { __typename: 'ComponentModulesPullquote' }
+                      | { __typename: 'ComponentModulesSideImageWithText' }
                       | { __typename: 'ComponentModulesSubtitle' }
                       | { __typename: 'ComponentModulesTextModule' }
                       | { __typename: 'ComponentModulesTitleModule' }
@@ -18027,7 +18591,7 @@ export type TriplyRecordFragmentFragment = {
           title: string
           slug: string
           description?: string | null
-          shortDescription?: string | null
+          shortDescription: string
           createdAt?: any | null
           updatedAt?: any | null
           publishedAt?: any | null
@@ -18118,16 +18682,6 @@ export type TriplyRecordFragmentFragment = {
                 } | null
               }
             | {
-                __typename: 'ComponentModulesButtonsModule'
-                id: string
-                buttons?: Array<{
-                  __typename?: 'ComponentCoreButton'
-                  id: string
-                  text: string
-                  url: string
-                } | null> | null
-              }
-            | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
                 caption?: string | null
@@ -18180,7 +18734,7 @@ export type TriplyRecordFragmentFragment = {
                       title: string
                       slug: string
                       description?: string | null
-                      shortDescription?: string | null
+                      shortDescription: string
                       createdAt?: any | null
                       updatedAt?: any | null
                       publishedAt?: any | null
@@ -18234,6 +18788,38 @@ export type TriplyRecordFragmentFragment = {
                 } | null
               }
             | { __typename: 'ComponentModulesPullquote'; id: string; text?: string | null }
+            | {
+                __typename: 'ComponentModulesSideImageWithText'
+                id: string
+                sideText: string
+                image_alt_text: string
+                image: {
+                  __typename?: 'UploadFileEntityResponse'
+                  data?: {
+                    __typename?: 'UploadFileEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'UploadFile'
+                      hash: string
+                      mime: string
+                      name: string
+                      provider: string
+                      size: number
+                      url: string
+                      alternativeText?: string | null
+                      caption?: string | null
+                      createdAt?: any | null
+                      ext?: string | null
+                      formats?: any | null
+                      height?: number | null
+                      previewUrl?: string | null
+                      provider_metadata?: any | null
+                      updatedAt?: any | null
+                      width?: number | null
+                    } | null
+                  } | null
+                }
+              }
             | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
             | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
             | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -18285,16 +18871,6 @@ export type TriplyRecordFragmentFragment = {
             __typename?: 'StoryRelationResponseCollection'
             data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
           } | null
-          storyLinks?: {
-            __typename: 'ComponentModulesButtonsModule'
-            id: string
-            buttons?: Array<{
-              __typename?: 'ComponentCoreButton'
-              id: string
-              text: string
-              url: string
-            } | null> | null
-          } | null
           parent_story?: {
             __typename?: 'StoryEntityResponse'
             data?: {
@@ -18307,7 +18883,6 @@ export type TriplyRecordFragmentFragment = {
                   | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
-                  | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
                       alt_text?: string | null
@@ -18361,7 +18936,7 @@ export type TriplyRecordFragmentFragment = {
                             title: string
                             slug: string
                             description?: string | null
-                            shortDescription?: string | null
+                            shortDescription: string
                             createdAt?: any | null
                             updatedAt?: any | null
                             publishedAt?: any | null
@@ -18385,6 +18960,7 @@ export type TriplyRecordFragmentFragment = {
                     }
                   | { __typename: 'ComponentModulesImageCarousel' }
                   | { __typename: 'ComponentModulesPullquote' }
+                  | { __typename: 'ComponentModulesSideImageWithText' }
                   | { __typename: 'ComponentModulesSubtitle' }
                   | { __typename: 'ComponentModulesTextModule' }
                   | { __typename: 'ComponentModulesTitleModule' }
@@ -18419,7 +18995,6 @@ export type TriplyRecordFragmentFragment = {
                   | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
-                  | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
                       alt_text?: string | null
@@ -18473,7 +19048,7 @@ export type TriplyRecordFragmentFragment = {
                             title: string
                             slug: string
                             description?: string | null
-                            shortDescription?: string | null
+                            shortDescription: string
                             createdAt?: any | null
                             updatedAt?: any | null
                             publishedAt?: any | null
@@ -18497,6 +19072,7 @@ export type TriplyRecordFragmentFragment = {
                     }
                   | { __typename: 'ComponentModulesImageCarousel' }
                   | { __typename: 'ComponentModulesPullquote' }
+                  | { __typename: 'ComponentModulesSideImageWithText' }
                   | { __typename: 'ComponentModulesSubtitle' }
                   | { __typename: 'ComponentModulesTextModule' }
                   | { __typename: 'ComponentModulesTitleModule' }
@@ -19214,6 +19790,67 @@ export const ComponentCoreMuxVideoFragmentFragmentDoc = gql`
     }
   }
 `
+export const ComponentModulesSideImageWithTextFragmentFragmentDoc = gql`
+  fragment ComponentModulesSideImageWithTextFragment on ComponentModulesSideImageWithText {
+    __typename
+    id
+    sideText
+    image_alt_text
+    image {
+      ...UploadFileEntityResponseFragment
+    }
+  }
+  ${UploadFileEntityResponseFragmentFragmentDoc}
+`
+export const StoryComponentsFragmentFragmentDoc = gql`
+  fragment StoryComponentsFragment on StoryComponentsDynamicZone {
+    __typename
+    ... on ComponentModulesPullquote {
+      ...ComponentModulesPullquoteFragment
+    }
+    ... on ComponentModulesTextModule {
+      ...ComponentModulesTextModuleFragment
+    }
+    ... on ComponentModulesSubtitle {
+      ...ComponentModulesSubtitleFragment
+    }
+    ... on ComponentModulesTitleModule {
+      ...ComponentModulesTitleModuleFragment
+    }
+    ... on ComponentModulesImageCarousel {
+      ...ComponentModulesImageCarouselFragment
+    }
+    ... on ComponentModulesImage {
+      ...ComponentModulesImageFragment
+    }
+    ... on ComponentCoreStandAloneLink {
+      ...ComponentCoreStandAloneLinkFragment
+    }
+    ... on ComponentCoreMuxAudio {
+      ...ComponentCoreMuxAudioFragment
+    }
+    ... on ComponentCoreMuxVideo {
+      ...ComponentCoreMuxVideoFragment
+    }
+    ... on ComponentModulesSideImageWithText {
+      ...ComponentModulesSideImageWithTextFragment
+    }
+    ... on Error {
+      ...ErrorFragment
+    }
+  }
+  ${ComponentModulesPullquoteFragmentFragmentDoc}
+  ${ComponentModulesTextModuleFragmentFragmentDoc}
+  ${ComponentModulesSubtitleFragmentFragmentDoc}
+  ${ComponentModulesTitleModuleFragmentFragmentDoc}
+  ${ComponentModulesImageCarouselFragmentFragmentDoc}
+  ${ComponentModulesImageFragmentFragmentDoc}
+  ${ComponentCoreStandAloneLinkFragmentFragmentDoc}
+  ${ComponentCoreMuxAudioFragmentFragmentDoc}
+  ${ComponentCoreMuxVideoFragmentFragmentDoc}
+  ${ComponentModulesSideImageWithTextFragmentFragmentDoc}
+  ${ErrorFragmentFragmentDoc}
+`
 export const NestedStoryFragmentFragmentDoc = gql`
   fragment NestedStoryFragment on StoryEntity {
     id
@@ -19253,54 +19890,11 @@ export const NestedStoryFragmentFragmentDoc = gql`
         }
       }
       components {
-        __typename
-        ... on ComponentModulesPullquote {
-          ...ComponentModulesPullquoteFragment
-        }
-        ... on ComponentModulesTextModule {
-          ...ComponentModulesTextModuleFragment
-        }
-        ... on ComponentModulesSubtitle {
-          ...ComponentModulesSubtitleFragment
-        }
-        ... on ComponentModulesTitleModule {
-          ...ComponentModulesTitleModuleFragment
-        }
-        ... on ComponentModulesImageCarousel {
-          ...ComponentModulesImageCarouselFragment
-        }
-        ... on ComponentModulesImage {
-          ...ComponentModulesImageFragment
-        }
-        ... on ComponentModulesButtonsModule {
-          ...ComponentModulesButtonsModuleFragment
-        }
-        ... on ComponentCoreStandAloneLink {
-          ...ComponentCoreStandAloneLinkFragment
-        }
-        ... on ComponentCoreMuxAudio {
-          ...ComponentCoreMuxAudioFragment
-        }
-        ... on ComponentCoreMuxVideo {
-          ...ComponentCoreMuxVideoFragment
-        }
-        ... on Error {
-          ...ErrorFragment
-        }
+        ...StoryComponentsFragment
       }
     }
   }
-  ${ComponentModulesPullquoteFragmentFragmentDoc}
-  ${ComponentModulesTextModuleFragmentFragmentDoc}
-  ${ComponentModulesSubtitleFragmentFragmentDoc}
-  ${ComponentModulesTitleModuleFragmentFragmentDoc}
-  ${ComponentModulesImageCarouselFragmentFragmentDoc}
-  ${ComponentModulesImageFragmentFragmentDoc}
-  ${ComponentModulesButtonsModuleFragmentFragmentDoc}
-  ${ComponentCoreStandAloneLinkFragmentFragmentDoc}
-  ${ComponentCoreMuxAudioFragmentFragmentDoc}
-  ${ComponentCoreMuxVideoFragmentFragmentDoc}
-  ${ErrorFragmentFragmentDoc}
+  ${StoryComponentsFragmentFragmentDoc}
 `
 export const LocalizedStoryFragmentFragmentDoc = gql`
   fragment LocalizedStoryFragment on StoryEntity {
@@ -19341,40 +19935,7 @@ export const LocalizedStoryFragmentFragmentDoc = gql`
         }
       }
       components {
-        __typename
-        ... on ComponentModulesPullquote {
-          ...ComponentModulesPullquoteFragment
-        }
-        ... on ComponentModulesTextModule {
-          ...ComponentModulesTextModuleFragment
-        }
-        ... on ComponentModulesSubtitle {
-          ...ComponentModulesSubtitleFragment
-        }
-        ... on ComponentModulesTitleModule {
-          ...ComponentModulesTitleModuleFragment
-        }
-        ... on ComponentModulesImageCarousel {
-          ...ComponentModulesImageCarouselFragment
-        }
-        ... on ComponentModulesImage {
-          ...ComponentModulesImageFragment
-        }
-        ... on ComponentModulesButtonsModule {
-          ...ComponentModulesButtonsModuleFragment
-        }
-        ... on ComponentCoreStandAloneLink {
-          ...ComponentCoreStandAloneLinkFragment
-        }
-        ... on ComponentCoreMuxAudio {
-          ...ComponentCoreMuxAudioFragment
-        }
-        ... on ComponentCoreMuxVideo {
-          ...ComponentCoreMuxVideoFragment
-        }
-        ... on Error {
-          ...ErrorFragment
-        }
+        ...StoryComponentsFragment
       }
       localizations {
         data {
@@ -19383,17 +19944,7 @@ export const LocalizedStoryFragmentFragmentDoc = gql`
       }
     }
   }
-  ${ComponentModulesPullquoteFragmentFragmentDoc}
-  ${ComponentModulesTextModuleFragmentFragmentDoc}
-  ${ComponentModulesSubtitleFragmentFragmentDoc}
-  ${ComponentModulesTitleModuleFragmentFragmentDoc}
-  ${ComponentModulesImageCarouselFragmentFragmentDoc}
-  ${ComponentModulesImageFragmentFragmentDoc}
-  ${ComponentModulesButtonsModuleFragmentFragmentDoc}
-  ${ComponentCoreStandAloneLinkFragmentFragmentDoc}
-  ${ComponentCoreMuxAudioFragmentFragmentDoc}
-  ${ComponentCoreMuxVideoFragmentFragmentDoc}
-  ${ErrorFragmentFragmentDoc}
+  ${StoryComponentsFragmentFragmentDoc}
   ${NestedStoryFragmentFragmentDoc}
 `
 export const StoryMetaFragmentFragmentDoc = gql`
@@ -19448,9 +19999,6 @@ export const StoryMetaFragmentFragmentDoc = gql`
           ...BaseTriplyRecordFragment
         }
       }
-      storyLinks {
-        ...ComponentModulesButtonsModuleFragment
-      }
       parent_story {
         data {
           id
@@ -19502,7 +20050,6 @@ export const StoryMetaFragmentFragmentDoc = gql`
     }
   }
   ${BaseTriplyRecordFragmentFragmentDoc}
-  ${ComponentModulesButtonsModuleFragmentFragmentDoc}
   ${ComponentModulesImageFragmentFragmentDoc}
 `
 export const LocalizedStoryMetaFragmentFragmentDoc = gql`
@@ -19611,15 +20158,11 @@ export const LocalizedStoryMetaFragmentFragmentDoc = gql`
           ...StoryMetaFragment
         }
       }
-      storyLinks {
-        ...ComponentModulesButtonsModuleFragment
-      }
     }
   }
   ${ComponentModulesImageFragmentFragmentDoc}
   ${BaseTriplyRecordFragmentFragmentDoc}
   ${StoryMetaFragmentFragmentDoc}
-  ${ComponentModulesButtonsModuleFragmentFragmentDoc}
 `
 export const ComponentCorePublicationDateFragmentFragmentDoc = gql`
   fragment ComponentCorePublicationDateFragment on ComponentCorePublicationDate {
@@ -19700,40 +20243,7 @@ export const StoryFragmentFragmentDoc = gql`
       title
       slug
       components {
-        __typename
-        ... on ComponentModulesPullquote {
-          ...ComponentModulesPullquoteFragment
-        }
-        ... on ComponentModulesTextModule {
-          ...ComponentModulesTextModuleFragment
-        }
-        ... on ComponentModulesSubtitle {
-          ...ComponentModulesSubtitleFragment
-        }
-        ... on ComponentModulesTitleModule {
-          ...ComponentModulesTitleModuleFragment
-        }
-        ... on ComponentModulesImageCarousel {
-          ...ComponentModulesImageCarouselFragment
-        }
-        ... on ComponentModulesImage {
-          ...ComponentModulesImageFragment
-        }
-        ... on ComponentModulesButtonsModule {
-          ...ComponentModulesButtonsModuleFragment
-        }
-        ... on ComponentCoreStandAloneLink {
-          ...ComponentCoreStandAloneLinkFragment
-        }
-        ... on ComponentCoreMuxAudio {
-          ...ComponentCoreMuxAudioFragment
-        }
-        ... on ComponentCoreMuxVideo {
-          ...ComponentCoreMuxVideoFragment
-        }
-        ... on Error {
-          ...ErrorFragment
-        }
+        ...StoryComponentsFragment
       }
       author {
         data {
@@ -19776,9 +20286,6 @@ export const StoryFragmentFragmentDoc = gql`
         }
       }
       locale
-      storyLinks {
-        ...ComponentModulesButtonsModuleFragment
-      }
       parent_story {
         data {
           id
@@ -19829,18 +20336,9 @@ export const StoryFragmentFragmentDoc = gql`
       }
     }
   }
-  ${ComponentModulesPullquoteFragmentFragmentDoc}
-  ${ComponentModulesTextModuleFragmentFragmentDoc}
-  ${ComponentModulesSubtitleFragmentFragmentDoc}
-  ${ComponentModulesTitleModuleFragmentFragmentDoc}
-  ${ComponentModulesImageCarouselFragmentFragmentDoc}
-  ${ComponentModulesImageFragmentFragmentDoc}
-  ${ComponentModulesButtonsModuleFragmentFragmentDoc}
-  ${ComponentCoreStandAloneLinkFragmentFragmentDoc}
-  ${ComponentCoreMuxAudioFragmentFragmentDoc}
-  ${ComponentCoreMuxVideoFragmentFragmentDoc}
-  ${ErrorFragmentFragmentDoc}
+  ${StoryComponentsFragmentFragmentDoc}
   ${BaseTriplyRecordFragmentFragmentDoc}
+  ${ComponentModulesImageFragmentFragmentDoc}
 `
 export const ThemeFragmentFragmentDoc = gql`
   fragment ThemeFragment on ThemeEntity {
