@@ -1232,10 +1232,10 @@ export interface ApiStoryStory extends Schema.CollectionType {
         'modules.title-module',
         'modules.image-carousel',
         'modules.image',
-        'modules.buttons-module',
         'core.stand-alone-link',
         'core.mux-audio',
-        'core.mux-video'
+        'core.mux-video',
+        'modules.side-image-with-text'
       ]
     > &
       Attribute.SetPluginOptions<{
@@ -1253,23 +1253,18 @@ export interface ApiStoryStory extends Schema.CollectionType {
     timeframe: Attribute.Component<'core.timeframe'> &
       Attribute.SetPluginOptions<{
         i18n: {
-          localized: true
+          localized: false
         }
       }>
     locations: Attribute.Relation<'api::story.story', 'manyToMany', 'api::location.location'>
     publicationDate: Attribute.Component<'core.publication-date'> &
       Attribute.SetPluginOptions<{
         i18n: {
-          localized: true
-        }
-      }>
-    storyLinks: Attribute.Component<'modules.buttons-module'> &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true
+          localized: false
         }
       }>
     shortDescription: Attribute.Text &
+      Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true

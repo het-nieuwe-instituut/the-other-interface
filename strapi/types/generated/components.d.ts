@@ -247,6 +247,19 @@ export interface ModulesPullquote extends Schema.Component {
   }
 }
 
+export interface ModulesSideImageWithText extends Schema.Component {
+  collectionName: 'components_modules_side_image_with_texts'
+  info: {
+    displayName: 'Side Image with Text'
+    description: ''
+  }
+  attributes: {
+    sideText: Attribute.RichText & Attribute.Required
+    image: Attribute.Media & Attribute.Required
+    image_alt_text: Attribute.String & Attribute.Required
+  }
+}
+
 export interface ModulesSubtitle extends Schema.Component {
   collectionName: 'components_modules_subtitles'
   info: {
@@ -302,6 +315,7 @@ declare module '@strapi/types' {
       'modules.image-carousel': ModulesImageCarousel
       'modules.image': ModulesImage
       'modules.pullquote': ModulesPullquote
+      'modules.side-image-with-text': ModulesSideImageWithText
       'modules.subtitle': ModulesSubtitle
       'modules.text-module': ModulesTextModule
       'modules.title-module': ModulesTitleModule

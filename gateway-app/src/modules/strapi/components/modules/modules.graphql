@@ -105,4 +105,16 @@ fragment ComponentModulesHighlightFragment on ComponentModulesHighlight {
     image {
         ...UploadFileEntityResponseFragment
     }
+
+}
+
+fragment ComponentModulesSideImageWithTextFragment on ComponentModulesSideImageWithText {
+    __typename
+    id
+    sideText
+    image_alt_text
+    image {
+        ...UploadFileEntityResponseFragment
+    }
+
 }
