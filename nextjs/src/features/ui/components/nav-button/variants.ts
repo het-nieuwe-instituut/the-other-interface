@@ -11,6 +11,7 @@ export const NavButtonVariants = cva(
   {
     variants: {
       variant: {
+        jumbo: ['bg-red-100'],
         textPrimary: [
           'h-[27px]',
           'text-center font-social-large text-[21px] font-normal leading-7 tracking-tight',
