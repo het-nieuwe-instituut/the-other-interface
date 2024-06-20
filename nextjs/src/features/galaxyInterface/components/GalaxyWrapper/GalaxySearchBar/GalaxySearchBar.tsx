@@ -18,11 +18,7 @@ import { useRouter } from 'next/navigation'
 import { CSSProperties, useCallback, useMemo, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { CategorySuggestions } from '../CategorySuggestions/CategorySuggestions'
-import {
-  COLLECTION_HILIGHT_ID,
-  Suggestions,
-  SuggestionsContainer,
-} from '../Suggestions/Suggestions'
+import { COLLECTION_HILIGHT_ID, SuggestionsContainer } from '../Suggestions/Suggestions'
 import { CategoryFilter } from './CategoryFilter/CategoryFilter'
 import {
   useCloseSearchOnPathnameChange,
@@ -36,7 +32,7 @@ import { SearchButton } from './fragments/SearchButton'
 import SearchResults from './fragments/SearchResults'
 import TotalResults from './fragments/TotalResults'
 import { useSearchBarPosition } from './useSearchBarPosition'
-import { EnumTriplyrecordType } from 'src/generated/graphql'
+import { searchCategoryToTriplyCategory } from '@/features/galaxyInterface/galaxies/CategoryGalaxy/mappers/searchCategoryToTriplyMapper'
 
 type Props = {
   total?: number
@@ -56,9 +52,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }
     filterInputRef,
     isNoActiveSearch,
   })
-  const { syncInput } = useSyncSearchInputToStore({
-    debouncedTime: 500,
-  })
+  const { syncInput } = useSyncSearchInputToStore()
   const { lang } = useZoom2Params()
   const { encodedFilters } = useEncodedSearchFilters()
   const selectedFilters = useSelectedFilters()
@@ -87,16 +81,15 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }
   })
   useCloseSearchOnPathnameChange()
 
+  const isUserInteracting = !!searchValue && isUserTyping && isSearchModeActive
+
   const isCollectionHighlightsSelected: boolean = selectedFilters.some(
     filter => filter.id === COLLECTION_HILIGHT_ID
   )
 
   const searchCategoryToTriplyEnum = useMemo(() => {
     if (searchCategory) {
-      if (searchCategory === 'archives') return EnumTriplyrecordType.Archive
-      if (searchCategory === 'objects') return EnumTriplyrecordType.Object
-      if (searchCategory === 'people') return EnumTriplyrecordType.People
-      if (searchCategory === 'publications') return EnumTriplyrecordType.Publication
+      return searchCategoryToTriplyCategory(searchCategory)
     }
   }, [searchCategory])
 
@@ -146,6 +139,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }
             inputRef={filterInputRef}
             onFocus={openSearch}
             defaultValue={searchValue}
+            value={searchValue}
             onChange={e => {
               setIsUserTyping(true)
               syncInput(e.target.value)
@@ -182,26 +176,16 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }
         <CategorySuggestions />
       </SuggestionBar>
 
-      {searchCategoryToTriplyEnum ? (
-        !isCollectionHighlightsSelected && (
-          <SuggestionBar
-            isOpen={isUserTyping && !isCategorySuggestionsOpen}
-            label={t('suggestions')}
-            offset={searchBarHeight}
-          >
-            <SuggestionsContainer
-              type={searchCategoryToTriplyEnum}
-              handleSelectFilter={selectFilter}
-            />
-          </SuggestionBar>
-        )
-      ) : (
+      {!isCollectionHighlightsSelected && searchCategoryToTriplyEnum && (
         <SuggestionBar
-          isOpen={isUserTyping && !isCategorySuggestionsOpen}
+          isOpen={isUserInteracting && !isCategorySuggestionsOpen}
           label={t('suggestions')}
           offset={searchBarHeight}
         >
-          <Suggestions suggestionsData={[]} handleSelectFilter={selectFilter} />
+          <SuggestionsContainer
+            type={searchCategoryToTriplyEnum}
+            handleSelectFilter={selectFilter}
+          />
         </SuggestionBar>
       )}
     </div>

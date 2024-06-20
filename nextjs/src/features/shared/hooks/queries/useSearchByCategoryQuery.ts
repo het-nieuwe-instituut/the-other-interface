@@ -1,6 +1,6 @@
 'use client'
 import { COLLECTION_HILIGHT_ID } from '@/features/galaxyInterface/components/GalaxyWrapper/Suggestions/Suggestions'
-import { triplyCategoryToSearchCategory } from '@/features/galaxyInterface/galaxies/CategoryGalaxy/mappers/searchCategoryToTriplyMapper'
+import { searchCategoryToTriplyCategory } from '@/features/galaxyInterface/galaxies/CategoryGalaxy/mappers/searchCategoryToTriplyMapper'
 import {
   CATEGORIES_TO_ENTITY_MAPPER,
   CloudCategory,
@@ -51,7 +51,7 @@ export function useSearchByCategoryQuery({
   // TODO: mix story search
   const queryFn = async () => {
     if (decodedFilters?.find(filter => filter.id === COLLECTION_HILIGHT_ID)) {
-      const type = triplyCategoryToSearchCategory(category)
+      const type = searchCategoryToTriplyCategory(category)
 
       const labelFilter: StringFilterInput = { containsi: text || undefined }
 

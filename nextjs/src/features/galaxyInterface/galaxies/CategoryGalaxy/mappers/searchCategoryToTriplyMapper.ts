@@ -1,14 +1,14 @@
 import { EnumTriplyrecordType } from 'src/generated/graphql'
 import { SEARCH_CATEGORIES, SearchCategory } from '../../../../shared/utils/categories'
 
-export function triplyCategoryToSearchCategory(
+export function searchCategoryToTriplyCategory(
   category: SearchCategory
 ): EnumTriplyrecordType | undefined {
   switch (category) {
     case SEARCH_CATEGORIES.all:
       return undefined
     case SEARCH_CATEGORIES.stories:
-      throw new Error('Stories category is not supported')
+      return undefined
     case SEARCH_CATEGORIES.people:
       return EnumTriplyrecordType.People
     case SEARCH_CATEGORIES.objects:

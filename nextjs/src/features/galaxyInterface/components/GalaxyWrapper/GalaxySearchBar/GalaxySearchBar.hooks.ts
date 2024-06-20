@@ -9,9 +9,8 @@ import { sharedActions } from '@/features/shared/stores/shared.store'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { useDispatch } from 'react-redux'
-import { useDebounceCallback } from 'usehooks-ts'
 
-export function useSyncSearchInputToStore({ debouncedTime = 500 }: { debouncedTime?: number }) {
+export function useSyncSearchInputToStore() {
   const dispatch = useDispatch()
 
   const syncInput = useCallback(
@@ -22,9 +21,7 @@ export function useSyncSearchInputToStore({ debouncedTime = 500 }: { debouncedTi
     [dispatch]
   )
 
-  const debounced = useDebounceCallback(syncInput, debouncedTime)
-
-  return { syncInput: debounced }
+  return { syncInput }
 }
 
 export function useCloseSearchOnPathnameChange() {
@@ -33,7 +30,6 @@ export function useCloseSearchOnPathnameChange() {
   const prevPath = useRef(pathname)
 
   useEffect(() => {
-    console.log('on path change is called', pathname)
     if (pathname !== prevPath.current) {
       prevPath.current = pathname
       dispatch(sharedActions.searchModeActive({ isSearchModeActive: false }))
@@ -102,7 +98,6 @@ export function useSearchBarActions({
   const closeSearchMode = useCallback(
     (resetFilters = false) => {
       dispatch(sharedActions.searchModeActive({ isSearchModeActive: false }))
-      console.log('closeSearchMode gets called')
       dispatch(sharedActions.categorySuggestionsOpen({ categorySuggestionsOpen: false }))
 
       if (resetFilters) {

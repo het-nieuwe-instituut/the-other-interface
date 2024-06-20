@@ -6,9 +6,11 @@ import { Filter, useSelectedFilters } from '@/features/shared/hooks/search/useFi
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { SEARCH_CATEGORIES } from '@/features/shared/utils/categories'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
+import { cn } from '@/features/ui/utils/cn'
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { EnumTriplyrecordType } from 'src/generated/graphql'
+import { useDebounceValue } from 'usehooks-ts'
 
 export const COLLECTION_HILIGHT_ID = 'collection-highlights-id'
 
@@ -26,6 +28,11 @@ type Props = {
 export const SuggestionsContainer: React.FC<Props> = ({ handleSelectFilter, type }) => {
   const { t: commonT } = useTypeSafeTranslation('common')
   const { searchValue, searchCategory } = useSelector((state: State) => state.shared)
+  const [debouncedSearchValue] = useDebounceValue(searchValue, 500)
+  const selectedFilters = useSelectedFilters()
+  const searchIsMatchShowingCollectionHighlight = CollectionHighlightsFilter.value
+    .toLowerCase()
+    .includes(searchValue.toLowerCase())
 
   const {
     data: suggestions,
@@ -33,54 +40,19 @@ export const SuggestionsContainer: React.FC<Props> = ({ handleSelectFilter, type
     isError,
   } = useFilterSuggestionsQuery({
     type,
-    search: searchValue,
+    search: debouncedSearchValue,
   })
 
-  if (isLoading) {
-    return <InlineThemedSpinner />
-  }
-
-  if (isError) {
-    return (
-      <p
-        className={TypographyVariants({
-          socialLarge: 'md',
-          className: 'pt-4',
-        })}
-      >
-        {commonT('somethingWentWrongAndRetry')}
-      </p>
-    )
-  }
-
-  if (!suggestions || !suggestions.filterSuggestions || !searchCategory) {
-    return <div>{commonT('noSuggestionsFound')}</div>
-  }
-
-  return (
-    <Suggestions
-      suggestionsData={suggestions.filterSuggestions}
-      handleSelectFilter={handleSelectFilter}
-    />
-  )
-}
-
-export const Suggestions = ({
-  handleSelectFilter,
-  suggestionsData,
-}: {
-  handleSelectFilter: (filterSuggestion: Filter) => void
-  suggestionsData: NonNullable<
-    NonNullable<ReturnType<typeof useFilterSuggestionsQuery>['data']>['filterSuggestions']
-  >
-}) => {
-  const selectedFilters = useSelectedFilters()
-  const { searchValue, searchCategory } = useSelector((state: State) => state.shared)
-  const searchIsMatchShowingCollectionHighlight = CollectionHighlightsFilter.value
-    .toLowerCase()
-    .includes(searchValue.toLowerCase())
+  const suggestionsData = useMemo(() => suggestions?.filterSuggestions || [], [suggestions])
 
   const items = useMemo(() => {
+    const filteredSuggestions = suggestionsData.filter(
+      suggestion =>
+        !selectedFilters.find(
+          selected => selected.key === suggestion.key && selected.value === suggestion.value
+        )
+    )
+
     const filtersWithoutCollectionHighlights = selectedFilters.filter(
       filter => filter.id !== COLLECTION_HILIGHT_ID
     )
@@ -92,16 +64,60 @@ export const Suggestions = ({
     ) {
       return [
         { value: CollectionHighlightsFilter.value, key: CollectionHighlightsFilter.key },
-        ...suggestionsData,
+        ...filteredSuggestions,
       ]
     }
 
-    return suggestionsData
+    return filteredSuggestions
   }, [searchCategory, searchIsMatchShowingCollectionHighlight, selectedFilters, suggestionsData])
 
+  if (isLoading) {
+    return (
+      <div className="my-4">
+        <InlineThemedSpinner />
+      </div>
+    )
+  }
+
+  if (isError) {
+    return (
+      <div className="my-4">
+        <p
+          className={TypographyVariants({
+            socialLarge: 'md',
+          })}
+        >
+          {commonT('somethingWentWrongAndRetry')}
+        </p>
+      </div>
+    )
+  }
+
+  if (!items || items.length === 0 || !searchCategory) {
+    return (
+      <div className="my-4">
+        <p className={cn('text-pink.100', TypographyVariants({ socialLarge: 'textfield' }))}>
+          {commonT('noSuggestionsFound')}
+        </p>
+      </div>
+    )
+  }
+
+  return <Suggestions suggestionsData={items} handleSelectFilter={handleSelectFilter} />
+}
+
+export const Suggestions = ({
+  handleSelectFilter,
+  suggestionsData,
+}: {
+  handleSelectFilter: (filterSuggestion: Filter) => void
+  suggestionsData: NonNullable<
+    NonNullable<ReturnType<typeof useFilterSuggestionsQuery>['data']>['filterSuggestions']
+  >
+}) => {
   return (
     <>
-      {items.map(item => {
+      {suggestionsData.map(item => {
         return (
           <div className="max-w-full" key={item.value}>
             <SearchFilterBox

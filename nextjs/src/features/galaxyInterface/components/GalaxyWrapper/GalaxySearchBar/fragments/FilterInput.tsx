@@ -6,6 +6,7 @@ interface Props {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void
   defaultValue?: string
+  value?: string
 }
 
 export const FilterInput: React.FC<Props> = ({
@@ -14,6 +15,7 @@ export const FilterInput: React.FC<Props> = ({
   defaultValue,
   onFocus,
   inputRef,
+  value,
 }) => {
   return (
     <input
@@ -27,6 +29,7 @@ export const FilterInput: React.FC<Props> = ({
       onChange={onChange}
       onFocus={onFocus}
       defaultValue={defaultValue}
+      value={value}
     />
   )
 }
