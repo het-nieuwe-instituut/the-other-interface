@@ -304,6 +304,9 @@ fragment NestedStoryFragment on StoryEntity {
     components {
       ...StoryComponentsFragment
     }
+    storyLinks {
+      ...ComponentModulesButtonsModuleFragment
+    }
   }
 }
 
@@ -347,6 +350,9 @@ fragment LocalizedStoryFragment on StoryEntity {
     components {
       ...StoryComponentsFragment
     }
+    storyLinks {
+      ...ComponentModulesButtonsModuleFragment
+    }
     localizations {
       data {
         ...NestedStoryFragment
@@ -362,6 +368,9 @@ fragment StoryFragment on StoryEntity {
     slug
     components {
       ...StoryComponentsFragment
+    }
+    storyLinks {
+      ...ComponentModulesButtonsModuleFragment
     }
     author {
       data {
