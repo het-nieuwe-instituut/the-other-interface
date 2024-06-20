@@ -143,7 +143,7 @@ const ReadMoreTooltipContent = ({
           <p
             className={TypographyVariants({
               socialLarge: 'sm',
-              className: cn('text-pink-100', readMoreHref && 'pb-2'),
+              className: cn('text-pink-100 line-clamp-[7]', readMoreHref && 'pb-2'),
             })}
           >
             {description}
