@@ -27,7 +27,7 @@ export const LinkButtonGroupItem: React.FC<LinkButtonGroupItemProps> = ({
 }: LinkButtonGroupItemProps) => {
   const isExternal = isExternalURL(href, process.env.parsed.NEXT_PUBLIC_URL ?? '')
   return (
-    <NavLinkButton href={href} variant={'jumbo'}>
+    <NavLinkButton href={href} variant={'jumbo'} color={'whiteNoBorder'}>
       {children}
       {isExternal && <ExternalLink className="size-6" />}
     </NavLinkButton>

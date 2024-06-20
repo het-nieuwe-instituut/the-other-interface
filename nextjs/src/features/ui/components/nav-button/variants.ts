@@ -11,7 +11,7 @@ export const NavButtonVariants = cva(
   {
     variants: {
       variant: {
-        jumbo: ['bg-red-100'],
+        jumbo: ['w-[1232px] bg-black-100 after:border-none'],
         textPrimary: [
           'h-[27px]',
           'text-center font-social-large text-[21px] font-normal leading-7 tracking-tight',
@@ -41,6 +41,7 @@ export const NavButtonVariants = cva(
       color: {
         black: 'text-black-100 after:border-black after:text-black-100',
         white: 'text-white after:border-white after:text-white ',
+        whiteNoBorder: 'text-white',
         inverted: 'text-pink-100 after:border-pink-100 after:text-pink-100',
         invertedPinkHover:
           'hover: text-pink-100 after:border-pink-100 after:text-pink-100 hover:bg-pink-100 hover:text-black-100',
