@@ -628,56 +628,6 @@ export type LongFilterInput = {
   startsWith?: InputMaybe<Scalars['Float']['input']>;
 };
 
-export type Menupage = {
-  __typename?: 'Menupage';
-  Title?: Maybe<Scalars['String']['output']>;
-  components?: Maybe<Array<MenupageComponentsDynamicZone>>;
-  createdAt?: Maybe<Scalars['Date']['output']>;
-  locale?: Maybe<Scalars['String']['output']>;
-  localizations?: Maybe<MenupageRelationResponseCollection>;
-  publishedAt?: Maybe<Scalars['Date']['output']>;
-  slug?: Maybe<Scalars['String']['output']>;
-  updatedAt?: Maybe<Scalars['Date']['output']>;
-};
-
-export type MenupageComponentsDynamicZone = ComponentModulesButtonsModule | ComponentModulesGridModule | ComponentModulesImage | ComponentModulesImageCarousel | ComponentModulesPullquote | ComponentModulesSubtitle | ComponentModulesTextModule | ComponentModulesTitleModule | Error;
-
-export type MenupageEntity = {
-  __typename?: 'MenupageEntity';
-  attributes?: Maybe<Menupage>;
-  id?: Maybe<Scalars['ID']['output']>;
-};
-
-export type MenupageEntityResponse = {
-  __typename?: 'MenupageEntityResponse';
-  data?: Maybe<MenupageEntity>;
-};
-
-export type MenupageEntityResponseCollection = {
-  __typename?: 'MenupageEntityResponseCollection';
-  data: Array<MenupageEntity>;
-  meta: ResponseCollectionMeta;
-};
-
-export type MenupageFiltersInput = {
-  Title?: InputMaybe<StringFilterInput>;
-  and?: InputMaybe<Array<MenupageFiltersInput>>;
-  createdAt?: InputMaybe<DateTimeFilterInput>;
-  id?: InputMaybe<IdFilterInput>;
-  locale?: InputMaybe<StringFilterInput>;
-  localizations?: InputMaybe<MenupageFiltersInput>;
-  not?: InputMaybe<MenupageFiltersInput>;
-  or?: InputMaybe<Array<MenupageFiltersInput>>;
-  publishedAt?: InputMaybe<DateTimeFilterInput>;
-  slug?: InputMaybe<StringFilterInput>;
-  updatedAt?: InputMaybe<DateTimeFilterInput>;
-};
-
-export type MenupageRelationResponseCollection = {
-  __typename?: 'MenupageRelationResponseCollection';
-  data?: Maybe<Array<MenupageEntity>>;
-};
-
 export type MuxAudio = {
   __typename?: 'MuxAudio';
   aspect_ratio?: Maybe<Scalars['String']['output']>;
@@ -1171,8 +1121,6 @@ export type Query = {
   landingpages: LandingpageEntityResponseCollection;
   location: LocationEntityResponse;
   locations: LocationRelationResponseCollection;
-  menupage: MenupageEntityResponse;
-  menupages: MenupageEntityResponseCollection;
   objectRecordRelations?: Maybe<Array<ObjectRelationsType>>;
   objectRecordRelationsCount?: Maybe<Array<ObjectRelationsCountType>>;
   objectsRecordZoomLevel3?: Maybe<Array<ObjectRecordZoomLevel3Type>>;
@@ -1298,21 +1246,6 @@ export type QueryLocationArgs = {
 
 export type QueryLocationsArgs = {
   filters?: InputMaybe<LocationFiltersInput>;
-  locale: Locale;
-  pagination?: InputMaybe<PaginationArg>;
-  publicationState?: InputMaybe<Scalars['String']['input']>;
-  sort?: InputMaybe<Array<Scalars['String']['input']>>;
-};
-
-
-export type QueryMenupageArgs = {
-  id?: InputMaybe<Scalars['String']['input']>;
-  locale: Locale;
-};
-
-
-export type QueryMenupagesArgs = {
-  filters?: InputMaybe<MenupageFiltersInput>;
   locale: Locale;
   pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<Scalars['String']['input']>;
@@ -2100,26 +2033,6 @@ export type LandingpageBySlugQueryVariables = Exact<{
 
 
 export type LandingpageBySlugQuery = { __typename?: 'Query', landingpages: { __typename?: 'LandingpageEntityResponseCollection', data: Array<{ __typename?: 'LandingpageEntity', id?: string | null, attributes?: { __typename?: 'Landingpage', Title?: string | null, Description?: string | null, components?: Array<{ __typename: 'ComponentModulesButtonsModule', id: string, buttons?: Array<{ __typename?: 'ComponentCoreButton', id: string, text?: string | null, url?: string | null }> | null } | { __typename: 'ComponentModulesGridModule', description?: string | null, fieldTitlesAreInverted: boolean, fieldTypes: EnumComponentmodulesgridmoduleFieldtypes, id: string, pageSize: number, showMoreButtonTitle: string, title?: string | null, buttons?: Array<{ __typename?: 'ComponentCoreButton', id: string, url?: string | null, text?: string | null }> | null, featuredFields?: Array<{ __typename?: 'ComponentCoreFeaturedFields', id: string, label: string, value: string }> | null, fields?: Array<{ __typename?: 'ComponentCoreGridFeaturedFields', id: string, title?: string | null, subtitle?: string | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } | null, story?: { __typename?: 'StoryEntityResponse', data?: { __typename?: 'StoryEntity', attributes?: { __typename?: 'Story', slug?: string | null, updatedAt?: any | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', attributes?: { __typename?: 'Author', firstName: string } | null } | null } | null } | null } | null } | null, triplyRecord?: { __typename?: 'TriplyRecordEntityResponse', data?: { __typename?: 'TriplyRecordEntity', attributes: { __typename?: 'TriplyRecord', createdAt?: any | null, updatedAt?: any | null, recordId: string, archive?: { __typename?: 'ArchiveZoomLevel3DetailType', id: string, type?: EntityNames | null, title?: string | null, objectNumber?: string | null } | null, object?: { __typename?: 'ObjectsZoomLevel3DetailType', description?: string | null, thumbnail?: Array<string> | null } | null, publication?: { __typename?: 'PublicationZoomLevel3DetailType', id: string, type?: EntityNames | null, title?: string | null, yearOfPublication?: string | null, objectNumber?: string | null } | null, people?: { __typename?: 'PeopleZoomLevel3DetailType', name?: string | null, nameTypes?: Array<string> | null } | null } } | null } | null }> | null } | { __typename: 'ComponentModulesImage', id: string, caption?: string | null, alt_text?: string | null, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, height?: number | null, width?: number | null } | null } | null }, story?: { __typename?: 'StoryEntityResponse', data?: { __typename?: 'StoryEntity', id: string, attributes?: { __typename?: 'Story', title: string, slug?: string | null, description?: string | null, shortDescription?: string | null, createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, locale?: string | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', attributes?: { __typename?: 'Author', firstName: string } | null } | null } | null } | null } | null } | null, triplyRecord?: { __typename?: 'TriplyRecordEntityResponse', data?: { __typename?: 'TriplyRecordEntity', id?: string | null, attributes: { __typename?: 'TriplyRecord', recordId: string, type: EnumTriplyrecordType } } | null } | null } | { __typename: 'ComponentModulesImageCarousel', id: string, description?: string | null, images?: { __typename?: 'UploadFileRelationResponseCollection', data?: Array<{ __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, width?: number | null, height?: number | null, size: number } | null }> | null } | null } | { __typename: 'ComponentModulesPullquote', id: string, text?: string | null } | { __typename: 'ComponentModulesSubtitle', id: string, text?: string | null } | { __typename: 'ComponentModulesTextModule', id: string, Richtext?: string | null } | { __typename: 'ComponentModulesTitleModule', id: string, Title?: string | null } | { __typename?: 'Error' }> | null } | null }> } };
-
-export type MenupageBySlugQueryVariables = Exact<{
-  locale: Locale;
-  slug: Scalars['String']['input'];
-  publicationState?: InputMaybe<Scalars['String']['input']>;
-}>;
-
-
-export type MenupageBySlugQuery = { __typename?: 'Query', menupages: { __typename?: 'MenupageEntityResponseCollection', data: Array<{ __typename?: 'MenupageEntity', id?: string | null, attributes?: { __typename?: 'Menupage', components?: Array<{ __typename: 'ComponentModulesButtonsModule', id: string, buttons?: Array<{ __typename?: 'ComponentCoreButton', id: string, text?: string | null, url?: string | null }> | null } | { __typename: 'ComponentModulesGridModule', description?: string | null, fieldTitlesAreInverted: boolean, fieldTypes: EnumComponentmodulesgridmoduleFieldtypes, id: string, pageSize: number, showMoreButtonTitle: string, title?: string | null, buttons?: Array<{ __typename?: 'ComponentCoreButton', id: string, url?: string | null, text?: string | null }> | null, featuredFields?: Array<{ __typename?: 'ComponentCoreFeaturedFields', id: string, label: string, value: string }> | null, fields?: Array<{ __typename?: 'ComponentCoreGridFeaturedFields', id: string, title?: string | null, subtitle?: string | null, thumbnail?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } | null, story?: { __typename?: 'StoryEntityResponse', data?: { __typename?: 'StoryEntity', attributes?: { __typename?: 'Story', slug?: string | null, updatedAt?: any | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', attributes?: { __typename?: 'Author', firstName: string } | null } | null } | null } | null } | null } | null, triplyRecord?: { __typename?: 'TriplyRecordEntityResponse', data?: { __typename?: 'TriplyRecordEntity', attributes: { __typename?: 'TriplyRecord', createdAt?: any | null, updatedAt?: any | null, recordId: string, archive?: { __typename?: 'ArchiveZoomLevel3DetailType', id: string, type?: EntityNames | null, title?: string | null, objectNumber?: string | null } | null, object?: { __typename?: 'ObjectsZoomLevel3DetailType', description?: string | null, thumbnail?: Array<string> | null } | null, publication?: { __typename?: 'PublicationZoomLevel3DetailType', id: string, type?: EntityNames | null, title?: string | null, yearOfPublication?: string | null, objectNumber?: string | null } | null, people?: { __typename?: 'PeopleZoomLevel3DetailType', name?: string | null, nameTypes?: Array<string> | null } | null } } | null } | null }> | null } | { __typename: 'ComponentModulesImage', id: string, caption?: string | null, alt_text?: string | null, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, height?: number | null, width?: number | null } | null } | null }, story?: { __typename?: 'StoryEntityResponse', data?: { __typename?: 'StoryEntity', id: string, attributes?: { __typename?: 'Story', title: string, slug?: string | null, description?: string | null, shortDescription?: string | null, createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, locale?: string | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', attributes?: { __typename?: 'Author', firstName: string } | null } | null } | null } | null } | null } | null, triplyRecord?: { __typename?: 'TriplyRecordEntityResponse', data?: { __typename?: 'TriplyRecordEntity', id?: string | null, attributes: { __typename?: 'TriplyRecord', recordId: string, type: EnumTriplyrecordType } } | null } | null } | { __typename: 'ComponentModulesImageCarousel', id: string, description?: string | null, images?: { __typename?: 'UploadFileRelationResponseCollection', data?: Array<{ __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, width?: number | null, height?: number | null, size: number } | null }> | null } | null } | { __typename: 'ComponentModulesPullquote', id: string, text?: string | null } | { __typename: 'ComponentModulesSubtitle', id: string, text?: string | null } | { __typename: 'ComponentModulesTextModule', id: string, Richtext?: string | null } | { __typename: 'ComponentModulesTitleModule', id: string, Title?: string | null } | { __typename?: 'Error' }> | null } | null }> } };
-
-export type MenuPagesQueryVariables = Exact<{
-  filters?: InputMaybe<MenupageFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<Scalars['String']['input']> | Scalars['String']['input']>;
-  publicationState?: InputMaybe<Scalars['String']['input']>;
-  locale: Locale;
-}>;
-
-
-export type MenuPagesQuery = { __typename?: 'Query', menupages: { __typename?: 'MenupageEntityResponseCollection', data: Array<{ __typename?: 'MenupageEntity', id?: string | null, attributes?: { __typename?: 'Menupage', Title?: string | null, slug?: string | null, createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, locale?: string | null, localizations?: { __typename?: 'MenupageRelationResponseCollection', data?: Array<{ __typename?: 'MenupageEntity', id?: string | null, attributes?: { __typename?: 'Menupage', Title?: string | null, slug?: string | null, createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, locale?: string | null } | null }> | null } | null } | null }>, meta: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', page: number, pageSize: number, pageCount: number, total: number } } } };
 
 export type SearchAllQueryVariables = Exact<{
   text: Scalars['String']['input'];
@@ -3089,98 +3002,6 @@ ${ImageCarouselModuleFragmentFragmentDoc}
 ${ButtonsModuleFragmentFragmentDoc}
 ${SubtitleModuleFragmentFragmentDoc}
 ${GridModuleFragmentFragmentDoc}`;
-export const MenupageBySlugDocument = gql`
-    query menupageBySlug($locale: Locale!, $slug: String!, $publicationState: String = "LIVE") {
-  menupages(
-    locale: $locale
-    filters: {slug: {eq: $slug}}
-    publicationState: $publicationState
-  ) {
-    data {
-      id
-      attributes {
-        components {
-          ... on ComponentModulesTextModule {
-            ...textModuleFragment
-          }
-          ... on ComponentModulesImage {
-            ...imageModuleFragment
-          }
-          ... on ComponentModulesPullquote {
-            ...pullquoteModuleFragment
-          }
-          ... on ComponentModulesTitleModule {
-            ...titleModuleFragment
-          }
-          ... on ComponentModulesImageCarousel {
-            ...imageCarouselModuleFragment
-          }
-          ... on ComponentModulesButtonsModule {
-            ...buttonsModuleFragment
-          }
-          ... on ComponentModulesSubtitle {
-            ...subtitleModuleFragment
-          }
-          ... on ComponentModulesGridModule {
-            ...gridModuleFragment
-          }
-        }
-      }
-    }
-  }
-}
-    ${TextModuleFragmentFragmentDoc}
-${ImageModuleFragmentFragmentDoc}
-${PullquoteModuleFragmentFragmentDoc}
-${TitleModuleFragmentFragmentDoc}
-${ImageCarouselModuleFragmentFragmentDoc}
-${ButtonsModuleFragmentFragmentDoc}
-${SubtitleModuleFragmentFragmentDoc}
-${GridModuleFragmentFragmentDoc}`;
-export const MenuPagesDocument = gql`
-    query menuPages($filters: MenupageFiltersInput, $pagination: PaginationArg = {}, $sort: [String!] = [], $publicationState: String, $locale: Locale!) {
-  menupages(
-    filters: $filters
-    pagination: $pagination
-    sort: $sort
-    publicationState: $publicationState
-    locale: $locale
-  ) {
-    data {
-      id
-      attributes {
-        Title
-        slug
-        createdAt
-        updatedAt
-        publishedAt
-        locale
-        localizations {
-          data {
-            id
-            attributes {
-              Title
-              slug
-              createdAt
-              updatedAt
-              publishedAt
-              locale
-            }
-          }
-        }
-      }
-    }
-    meta {
-      pagination {
-        page
-        pageSize
-        pageCount
-        total
-      }
-    }
-  }
-}
-    `;
 export const SearchAllDocument = gql`
     query searchAll($text: String!, $lang: String!, $page: Int!, $pageSize: Int) {
   searchTriply(page: $page, lang: $lang, pageSize: $pageSize, text: $text) {
@@ -4117,12 +3938,6 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     landingpageBySlug(variables: LandingpageBySlugQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<LandingpageBySlugQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<LandingpageBySlugQuery>(LandingpageBySlugDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'landingpageBySlug', 'query');
-    },
-    menupageBySlug(variables: MenupageBySlugQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<MenupageBySlugQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<MenupageBySlugQuery>(MenupageBySlugDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'menupageBySlug', 'query');
-    },
-    menuPages(variables: MenuPagesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<MenuPagesQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<MenuPagesQuery>(MenuPagesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'menuPages', 'query');
     },
     searchAll(variables: SearchAllQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<SearchAllQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<SearchAllQuery>(SearchAllDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'searchAll', 'query');

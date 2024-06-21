@@ -11,7 +11,6 @@ import {
   HomepageQuery,
   LandingpageBySlugQuery,
   Maybe,
-  MenupageComponentsDynamicZone,
   StoryByIdQuery,
 } from 'src/generated/graphql'
 import { Paragraph } from '../../ui/components/Paragraph/Paragraph'
@@ -36,7 +35,6 @@ export type DynamicComponents =
     >['components']
   | Maybe<Array<HomepageComponentsDynamicZone>>
   | NonNullable<NonNullable<StoryByIdQuery['storyByLocale']['data']>['attributes']>['components']
-  | Maybe<Array<MenupageComponentsDynamicZone>>
 
 export function DynamicComponentRenderer({ components, isStoryPage = false }: Props) {
   const hasComponents = (components || []).length > 0

@@ -17,7 +17,6 @@ import { TriplyRecordModule } from './modules/triplyRecord/triplyRecord.module'
 import { AuthorModule } from './modules/author/author.module'
 import { LocationModule } from './modules/location/location.module'
 import { LandingPageModule } from './modules/landingPage/landingPage.module'
-import { MenuPageModule } from './modules/menuPage/menuPage.module'
 import { UserModule } from './modules/user/user.module'
 import { UtilModule } from './modules/util/util.module'
 import { AuthModule } from './modules/auth/auth.module'
@@ -55,7 +54,6 @@ import { TriplyElasticSearchModule } from './modules/triplyElasticSearch/triplyE
     LocationModule,
     HomepageModule,
     LandingPageModule,
-    MenuPageModule,
     UserModule,
     ThemeModule,
   ],
