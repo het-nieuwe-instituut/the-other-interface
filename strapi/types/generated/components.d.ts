@@ -246,9 +246,10 @@ export interface ModulesStandaloneLinks extends Schema.Component {
   info: {
     displayName: 'Standalone Links'
     icon: 'cursor'
+    description: ''
   }
   attributes: {
-    StandaloneLink: Attribute.Component<'core.stand-alone-link', true>
+    standaloneLinks: Attribute.Component<'core.stand-alone-link', true>
   }
 }
 

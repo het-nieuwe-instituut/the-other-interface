@@ -2,11 +2,12 @@
   "collectionName": "components_modules_standalone_links",
   "info": {
     "displayName": "Standalone Links",
-    "icon": "cursor"
+    "icon": "cursor",
+    "description": ""
   },
   "options": {},
   "attributes": {
-    "StandaloneLink": {
+    "standaloneLinks": {
       "type": "component",
       "repeatable": true,
       "component": "core.stand-alone-link"
