@@ -55,7 +55,6 @@ fragment StoryFragment on StoryEntity {
     }
     createdAt
     updatedAt
-    publishedAt
     localizations {
       data {
         id

@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_modules_side_image_with_texts",
+  "info": {
+    "displayName": "Side Image with Text",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "sideText": {
+      "type": "richtext",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "image_alt_text": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
