@@ -3108,7 +3108,16 @@ export type HighlightedHomepageThemesQuery = {
                             } | null
                           } | null
                         }
-                      | { __typename: 'ComponentModulesButtonsModule' }
+                      | {
+                          __typename: 'ComponentModulesButtonsModule'
+                          id: string
+                          buttons?: Array<{
+                            __typename?: 'ComponentCoreButton'
+                            id: string
+                            text: string
+                            url: string
+                          } | null> | null
+                        }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -3650,7 +3659,16 @@ export type HighlightedHomepageThemesQuery = {
                             } | null
                           } | null
                         }
-                      | { __typename: 'ComponentModulesButtonsModule' }
+                      | {
+                          __typename: 'ComponentModulesButtonsModule'
+                          id: string
+                          buttons?: Array<{
+                            __typename?: 'ComponentCoreButton'
+                            id: string
+                            text: string
+                            url: string
+                          } | null> | null
+                        }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -5864,7 +5882,16 @@ export type StoriesQuery = {
                 } | null
               } | null
             }
-          | { __typename: 'ComponentModulesButtonsModule' }
+          | {
+              __typename: 'ComponentModulesButtonsModule'
+              id: string
+              buttons?: Array<{
+                __typename?: 'ComponentCoreButton'
+                id: string
+                text: string
+                url: string
+              } | null> | null
+            }
           | {
               __typename: 'ComponentModulesImage'
               alt_text?: string | null
@@ -6439,7 +6466,16 @@ export type StoryQuery = {
                 } | null
               } | null
             }
-          | { __typename: 'ComponentModulesButtonsModule' }
+          | {
+              __typename: 'ComponentModulesButtonsModule'
+              id: string
+              buttons?: Array<{
+                __typename?: 'ComponentCoreButton'
+                id: string
+                text: string
+                url: string
+              } | null> | null
+            }
           | {
               __typename: 'ComponentModulesImage'
               alt_text?: string | null
@@ -7012,7 +7048,16 @@ export type StoryByLocaleQuery = {
                 } | null
               } | null
             }
-          | { __typename: 'ComponentModulesButtonsModule' }
+          | {
+              __typename: 'ComponentModulesButtonsModule'
+              id: string
+              buttons?: Array<{
+                __typename?: 'ComponentCoreButton'
+                id: string
+                text: string
+                url: string
+              } | null> | null
+            }
           | {
               __typename: 'ComponentModulesImage'
               alt_text?: string | null
@@ -7303,7 +7348,16 @@ export type StoryByLocaleQuery = {
                       } | null
                     } | null
                   }
-                | { __typename: 'ComponentModulesButtonsModule' }
+                | {
+                    __typename: 'ComponentModulesButtonsModule'
+                    id: string
+                    buttons?: Array<{
+                      __typename?: 'ComponentCoreButton'
+                      id: string
+                      text: string
+                      url: string
+                    } | null> | null
+                  }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -7612,7 +7666,16 @@ export type StoriesByLocaleQuery = {
                 } | null
               } | null
             }
-          | { __typename: 'ComponentModulesButtonsModule' }
+          | {
+              __typename: 'ComponentModulesButtonsModule'
+              id: string
+              buttons?: Array<{
+                __typename?: 'ComponentCoreButton'
+                id: string
+                text: string
+                url: string
+              } | null> | null
+            }
           | {
               __typename: 'ComponentModulesImage'
               alt_text?: string | null
@@ -7903,7 +7966,16 @@ export type StoriesByLocaleQuery = {
                       } | null
                     } | null
                   }
-                | { __typename: 'ComponentModulesButtonsModule' }
+                | {
+                    __typename: 'ComponentModulesButtonsModule'
+                    id: string
+                    buttons?: Array<{
+                      __typename?: 'ComponentCoreButton'
+                      id: string
+                      text: string
+                      url: string
+                    } | null> | null
+                  }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -8902,7 +8974,16 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
                 } | null
               } | null
             }
-          | { __typename: 'ComponentModulesButtonsModule' }
+          | {
+              __typename: 'ComponentModulesButtonsModule'
+              id: string
+              buttons?: Array<{
+                __typename?: 'ComponentCoreButton'
+                id: string
+                text: string
+                url: string
+              } | null> | null
+            }
           | {
               __typename: 'ComponentModulesImage'
               alt_text?: string | null
@@ -9717,7 +9798,16 @@ export type NestedStoryFragmentFragment = {
             } | null
           } | null
         }
-      | { __typename: 'ComponentModulesButtonsModule' }
+      | {
+          __typename: 'ComponentModulesButtonsModule'
+          id: string
+          buttons?: Array<{
+            __typename?: 'ComponentCoreButton'
+            id: string
+            text: string
+            url: string
+          } | null> | null
+        }
       | {
           __typename: 'ComponentModulesImage'
           alt_text?: string | null
@@ -10009,7 +10099,16 @@ export type LocalizedStoryFragmentFragment = {
             } | null
           } | null
         }
-      | { __typename: 'ComponentModulesButtonsModule' }
+      | {
+          __typename: 'ComponentModulesButtonsModule'
+          id: string
+          buttons?: Array<{
+            __typename?: 'ComponentCoreButton'
+            id: string
+            text: string
+            url: string
+          } | null> | null
+        }
       | {
           __typename: 'ComponentModulesImage'
           alt_text?: string | null
@@ -10300,7 +10399,16 @@ export type LocalizedStoryFragmentFragment = {
                   } | null
                 } | null
               }
-            | { __typename: 'ComponentModulesButtonsModule' }
+            | {
+                __typename: 'ComponentModulesButtonsModule'
+                id: string
+                buttons?: Array<{
+                  __typename?: 'ComponentCoreButton'
+                  id: string
+                  text: string
+                  url: string
+                } | null> | null
+              }
             | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
@@ -10560,7 +10668,16 @@ export type StoryFragmentFragment = {
             } | null
           } | null
         }
-      | { __typename: 'ComponentModulesButtonsModule' }
+      | {
+          __typename: 'ComponentModulesButtonsModule'
+          id: string
+          buttons?: Array<{
+            __typename?: 'ComponentCoreButton'
+            id: string
+            text: string
+            url: string
+          } | null> | null
+        }
       | {
           __typename: 'ComponentModulesImage'
           alt_text?: string | null
@@ -11964,6 +12081,13 @@ type StoryComponentsFragment_ComponentCoreStandAloneLink_Fragment = {
 
 type StoryComponentsFragment_ComponentModulesButtonsModule_Fragment = {
   __typename: 'ComponentModulesButtonsModule'
+  id: string
+  buttons?: Array<{
+    __typename?: 'ComponentCoreButton'
+    id: string
+    text: string
+    url: string
+  } | null> | null
 }
 
 type StoryComponentsFragment_ComponentModulesImage_Fragment = {
@@ -12903,7 +13027,16 @@ export type ThemeQuery = {
                       } | null
                     } | null
                   }
-                | { __typename: 'ComponentModulesButtonsModule' }
+                | {
+                    __typename: 'ComponentModulesButtonsModule'
+                    id: string
+                    buttons?: Array<{
+                      __typename?: 'ComponentCoreButton'
+                      id: string
+                      text: string
+                      url: string
+                    } | null> | null
+                  }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -13464,7 +13597,16 @@ export type ThemesQuery = {
                       } | null
                     } | null
                   }
-                | { __typename: 'ComponentModulesButtonsModule' }
+                | {
+                    __typename: 'ComponentModulesButtonsModule'
+                    id: string
+                    buttons?: Array<{
+                      __typename?: 'ComponentCoreButton'
+                      id: string
+                      text: string
+                      url: string
+                    } | null> | null
+                  }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -14033,7 +14175,16 @@ export type StoriesRelatedToThemeQuery = {
                       } | null
                     } | null
                   }
-                | { __typename: 'ComponentModulesButtonsModule' }
+                | {
+                    __typename: 'ComponentModulesButtonsModule'
+                    id: string
+                    buttons?: Array<{
+                      __typename?: 'ComponentCoreButton'
+                      id: string
+                      text: string
+                      url: string
+                    } | null> | null
+                  }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -14582,7 +14733,16 @@ export type ThemeFragmentFragment = {
                   } | null
                 } | null
               }
-            | { __typename: 'ComponentModulesButtonsModule' }
+            | {
+                __typename: 'ComponentModulesButtonsModule'
+                id: string
+                buttons?: Array<{
+                  __typename?: 'ComponentCoreButton'
+                  id: string
+                  text: string
+                  url: string
+                } | null> | null
+              }
             | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
@@ -15129,7 +15289,16 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                   } | null
                 } | null
               }
-            | { __typename: 'ComponentModulesButtonsModule' }
+            | {
+                __typename: 'ComponentModulesButtonsModule'
+                id: string
+                buttons?: Array<{
+                  __typename?: 'ComponentCoreButton'
+                  id: string
+                  text: string
+                  url: string
+                } | null> | null
+              }
             | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
@@ -15659,7 +15828,16 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                   } | null
                 } | null
               }
-            | { __typename: 'ComponentModulesButtonsModule' }
+            | {
+                __typename: 'ComponentModulesButtonsModule'
+                id: string
+                buttons?: Array<{
+                  __typename?: 'ComponentCoreButton'
+                  id: string
+                  text: string
+                  url: string
+                } | null> | null
+              }
             | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
@@ -16226,7 +16404,16 @@ export type TriplyRecordQuery = {
                       } | null
                     } | null
                   }
-                | { __typename: 'ComponentModulesButtonsModule' }
+                | {
+                    __typename: 'ComponentModulesButtonsModule'
+                    id: string
+                    buttons?: Array<{
+                      __typename?: 'ComponentCoreButton'
+                      id: string
+                      text: string
+                      url: string
+                    } | null> | null
+                  }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -16784,7 +16971,16 @@ export type TriplyRecordsQuery = {
                       } | null
                     } | null
                   }
-                | { __typename: 'ComponentModulesButtonsModule' }
+                | {
+                    __typename: 'ComponentModulesButtonsModule'
+                    id: string
+                    buttons?: Array<{
+                      __typename?: 'ComponentCoreButton'
+                      id: string
+                      text: string
+                      url: string
+                    } | null> | null
+                  }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -17341,7 +17537,16 @@ export type TriplyRecordFragmentFragment = {
                   } | null
                 } | null
               }
-            | { __typename: 'ComponentModulesButtonsModule' }
+            | {
+                __typename: 'ComponentModulesButtonsModule'
+                id: string
+                buttons?: Array<{
+                  __typename?: 'ComponentCoreButton'
+                  id: string
+                  text: string
+                  url: string
+                } | null> | null
+              }
             | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
@@ -18443,6 +18648,9 @@ export const StoryComponentsFragmentFragmentDoc = gql`
     ... on ComponentModulesSideImageWithText {
       ...ComponentModulesSideImageWithTextFragment
     }
+    ... on ComponentModulesButtonsModule {
+      ...ComponentModulesButtonsModuleFragment
+    }
     ... on Error {
       ...ErrorFragment
     }
@@ -18457,6 +18665,7 @@ export const StoryComponentsFragmentFragmentDoc = gql`
   ${ComponentCoreMuxAudioFragmentFragmentDoc}
   ${ComponentCoreMuxVideoFragmentFragmentDoc}
   ${ComponentModulesSideImageWithTextFragmentFragmentDoc}
+  ${ComponentModulesButtonsModuleFragmentFragmentDoc}
   ${ErrorFragmentFragmentDoc}
 `
 export const NestedStoryFragmentFragmentDoc = gql`
