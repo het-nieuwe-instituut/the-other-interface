@@ -37,7 +37,6 @@ export function useSearchByCategoryQuery({
   const locale = useLocale()
   const { decodedFilters } = useFilters()
 
-  // TODO: mix story search
   const queryFn = async () => {
     if (decodedFilters?.find(filter => filter.id === COLLECTION_HILIGHT_ID)) {
       const type = triplyCategoryToSearchCategory(category)
@@ -45,7 +44,7 @@ export function useSearchByCategoryQuery({
       const labelFilter: StringFilterInput = { containsi: text || undefined }
 
       const queryFilters: TriplyRecordFiltersInput = {
-        and: [{ label: labelFilter }],
+        and: [{ label: labelFilter, subject_collectionHighlights: { eq: true } }],
       }
 
       if (type) {
@@ -71,10 +70,7 @@ export function useSearchByCategoryQuery({
         locale,
       })
 
-      if (
-        (response?.triplyRecords?.data?.length === 0 || !response?.triplyRecords?.data) &&
-        fallback
-      ) {
+      if (!response?.triplyRecords?.data?.length && fallback) {
         return await searchByCategory({ category, text, page })
       }
 

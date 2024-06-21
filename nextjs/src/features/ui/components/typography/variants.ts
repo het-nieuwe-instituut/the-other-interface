@@ -12,8 +12,8 @@ export const TypographyVariants = cva('', {
       '2xl': ['font-times-large text-[96px] leading-[100%_]  tracking-[-1.92px]'],
       xl: ['font-times-large text-[64px] leading-[100%_] tracking-[-1.28px]'],
       lg: ['font-times-large text-[32px] leading-[105%_]'],
-      md: ['font-times-large text-[20px] leading-[105%_] tracking-[0.2px]'],
-      sm: ['font-times-large text-[12px] leading-[100%_] tracking-[0.48px]'],
+      md: ['font-times-large text-[20px] leading-[105%_] tracking-[0.01em]'],
+      sm: ['font-times-large text-[12px] leading-[100%_] tracking-[0.04em]'],
       xs: ['font-times-large text-[9px] leading-[100%_] tracking-[0.36px]'],
     },
     impact: {

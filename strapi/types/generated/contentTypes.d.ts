@@ -941,7 +941,8 @@ export interface ApiStoryStory extends Schema.CollectionType {
         'modules.buttons-module',
         'core.stand-alone-link',
         'core.mux-audio',
-        'core.mux-video'
+        'core.mux-video',
+        'modules.side-image-with-text'
       ]
     > &
       Attribute.SetPluginOptions<{
@@ -959,7 +960,7 @@ export interface ApiStoryStory extends Schema.CollectionType {
     timeframe: Attribute.Component<'core.timeframe'> &
       Attribute.SetPluginOptions<{
         i18n: {
-          localized: true
+          localized: false
         }
       }>
     locations: Attribute.Relation<'api::story.story', 'manyToMany', 'api::location.location'>
@@ -976,6 +977,7 @@ export interface ApiStoryStory extends Schema.CollectionType {
         }
       }>
     shortDescription: Attribute.Text &
+      Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true
