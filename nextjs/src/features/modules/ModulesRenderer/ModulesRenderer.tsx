@@ -163,6 +163,27 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
             )
           }
 
+          if (component?.__typename === 'ComponentModulesStandaloneLinks') {
+            console.log(component)
+            // if (!component.buttons || component.buttons?.length === 0) {
+            //   return null
+            // }
+            // return (
+            //   <ButtonGroup key={keyExtractor(component.id, index, array)} isStoryPage={isStoryPage}>
+            //     {component.buttons.map(button => {
+            //       if (!button.text || !button.url) {
+            //         return null
+            //       }
+            //       return (
+            //         <LinkButtonGroupItem key={button.id} href={button.url}>
+            //           {button.text}
+            //         </LinkButtonGroupItem>
+            //       )
+            //     })}
+            //   </ButtonGroup>
+            // )
+          }
+
           // TODO: uncomment after component is connected to collections again
           //   if (component?.__typename === 'ComponentModulesCarousel') {
           //     return (

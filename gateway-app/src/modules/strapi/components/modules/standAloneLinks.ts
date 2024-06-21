@@ -7,5 +7,5 @@ export class ComponentModulesStandaloneLinks {
   public id: string
 
   @Field(() => [ComponentCoreStandAloneLink], { nullable: true })
-  public standAloneLinks: ComponentCoreStandAloneLink[]
+  public standaloneLinks: ComponentCoreStandAloneLink[]
 }

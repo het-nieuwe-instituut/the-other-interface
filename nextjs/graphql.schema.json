@@ -2779,7 +2779,7 @@
             "deprecationReason": null
           },
           {
-            "name": "standAloneLinks",
+            "name": "standaloneLinks",
             "description": null,
             "args": [],
             "type": {

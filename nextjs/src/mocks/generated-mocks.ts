@@ -361,7 +361,7 @@ export const aComponentModulesStandaloneLinks = (overrides?: Partial<ComponentMo
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentModulesStandaloneLinks']);
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'aa989d9b-22ee-44bc-9ca9-fe5216e68101',
-        standAloneLinks: overrides && overrides.hasOwnProperty('standAloneLinks') ? overrides.standAloneLinks! : [relationshipsToOmit.includes('ComponentCoreStandAloneLink') ? {} as ComponentCoreStandAloneLink : aComponentCoreStandAloneLink({}, relationshipsToOmit)],
+        standaloneLinks: overrides && overrides.hasOwnProperty('standaloneLinks') ? overrides.standaloneLinks! : [relationshipsToOmit.includes('ComponentCoreStandAloneLink') ? {} as ComponentCoreStandAloneLink : aComponentCoreStandAloneLink({}, relationshipsToOmit)],
     };
 };
 
