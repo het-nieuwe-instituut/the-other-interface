@@ -182,18 +182,32 @@ function RightsLogo({ value }: { value?: string[] | null; key?: string }) {
 function SuggestionSection() {
   const { t } = useTypeSafeTranslation('recordMeta')
 
+  const contributeLink = 'https://forms.office.com/e/Y0bXYPicVw'
+  const learnMoreLink = '' // TODO
+
   return (
-    <MetaField name={t('suggestionTitle')}>
+    <>
+      <MetaField name={t('suggestionTitle')}>
+        <div className="flex flex-col gap-1">
+          <SuggestionLink url={contributeLink} text={t('suggestionContributeLink')} />
+          <SuggestionLink url={learnMoreLink} text={t('suggestionLearnMoreLink')} />
+        </div>
+      </MetaField>
+    </>
+  )
+
+  function SuggestionLink({ url, text }: { url: string; text?: string }) {
+    return (
       <NavLinkButton
         variant="metaDataText"
-        className="bg-[#DEE5EC] text-[#6F7A9C] after:border-none"
-        href="https://forms.office.com/e/Y0bXYPicVw"
-        title={t('suggestionContributeLink')}
+        className="bg-[#DEE5EC] text-[#6F7A9C] after:border-none hover:bg-[#DEE5EC] hover:text-[#6F7A9C]"
+        href={url}
+        title={text}
       >
         <Asterisk />
-        {t('suggestionContributeLink')}
+        {text}
         <ExternalLink className="size-[14px]" />
       </NavLinkButton>
-    </MetaField>
-  )
+    )
+  }
 }
