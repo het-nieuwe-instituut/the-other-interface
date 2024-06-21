@@ -5,9 +5,9 @@ import { PageHeader } from '@/features/editorial/components/PageHeader/PageHeade
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { StaticHeader } from '@/features/shared/components/StaticHeader/StaticHeader'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
+import { MetaDataProps } from '../readmore/page'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function generateMetadata(props: any): Promise<Metadata> {
+export async function generateMetadata(props: MetaDataProps): Promise<Metadata> {
   const { searchParams } = props
   const lang = searchParams.lang as string
   const metaData = getMetaDataTranslations(lang)
@@ -20,7 +20,7 @@ export async function generateMetadata(props: any): Promise<Metadata> {
 export default async function Page() {
   const { t } = useTypeSafeTranslation('footer')
   return (
-    <div className="bg-ivory-100 h-full">
+    <div className="h-full bg-ivory-100">
       <div className="bg-ivory-100 pb-[42px]">
         <StaticHeader />
       </div>

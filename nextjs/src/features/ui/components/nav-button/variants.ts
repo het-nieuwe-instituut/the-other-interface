@@ -19,7 +19,14 @@ export const NavButtonVariants = cva(
           'h-[22px]',
           'text-center font-social-large text-[14px] font-normal leading-[18.20px]',
         ],
-        menuPrimary: ['h-[43px]'],
+        menuPrimary: [
+          'h-[27px]',
+          'text-center font-social-large text-[14px] font-normal leading-7 tracking-tight',
+        ],
+        menuSecondary: [
+          'h-[27px]',
+          'text-center font-social-large text-[21px] font-normal leading-7 tracking-tight',
+        ],
         footerPrimary: [
           'h-[27px]',
           'text-center font-social-large text-[21px] font-normal leading-7 tracking-tight',
@@ -42,7 +49,9 @@ export const NavButtonVariants = cva(
         white: 'text-white after:border-white after:text-white ',
         inverted: 'text-pink-100 after:border-pink-100 after:text-pink-100',
         invertedPinkHover:
-          'hover: text-pink-100 after:border-pink-100 after:text-pink-100 hover:bg-pink-100 hover:text-black-100',
+          'hover: text-pink-100 after:border-pink-100 after:text-pink-100 hover:bg-pink-100 hover:text-blue-100',
+        invertedPaleHover:
+          'hover: text-pink-100 after:border-pink-100 after:text-pink-100 hover:bg-transparent hover:text-pink-60 hover:after:border-transparent focus:w-fit focus:bg-pink-100 focus:text-blue-100 focus:outline-none',
       },
       state: {
         error: [
