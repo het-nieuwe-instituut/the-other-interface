@@ -10,6 +10,7 @@ import { NavLinkButton } from '@/features/ui/components/nav-link-button/componen
 import { ReadMoreTooltip } from '@/features/ui/components/tooltip/ReadMoreTooltip'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import ExternalLink from '@/features/ui/icons/external-link.svg'
+import Asterisk from '@/features/ui/components/title/asterisk.svg'
 import { useParams } from 'next/navigation'
 import { Fragment } from 'react'
 import {
@@ -122,6 +123,7 @@ export const RecordMeta: React.FC = () => {
           </MetaField>
         )
       })}
+      <SuggestionSection />
     </div>
   )
 }
@@ -174,5 +176,23 @@ function RightsLogo({ value }: { value?: string[] | null; key?: string }) {
         </p>
       </a>
     </ReadMoreTooltip>
+  )
+}
+
+function SuggestionSection() {
+  const { t } = useTypeSafeTranslation('recordMeta')
+
+  return (
+    <MetaField name={t('suggestionTitle')}>
+      <NavLinkButton
+        variant="metaDataText"
+        href="https://forms.office.com/e/Y0bXYPicVw"
+        title={t('suggestionContributeLink')}
+      >
+        <Asterisk className="text-xs" />
+        {t('suggestionContributeLink')}
+        <ExternalLink className="size-[14px]" />
+      </NavLinkButton>
+    </MetaField>
   )
 }
