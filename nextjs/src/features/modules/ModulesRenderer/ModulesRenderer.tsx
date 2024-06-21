@@ -148,7 +148,7 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
               return null
             }
             return (
-              <ButtonGroup key={keyExtractor(component.id, index, array)}>
+              <ButtonGroup key={keyExtractor(component.id, index, array)} isStoryPage={isStoryPage}>
                 {component.buttons.map(button => {
                   if (!button.text || !button.url) {
                     return null

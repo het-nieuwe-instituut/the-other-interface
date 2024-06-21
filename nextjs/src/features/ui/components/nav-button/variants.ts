@@ -12,7 +12,7 @@ export const NavButtonVariants = cva(
     variants: {
       variant: {
         jumbo: [
-          'w-[1232px] rounded-sm  border border-black bg-black-100 py-[32px] font-social-large font-bold tracking-[-0.32px] after:border-transparent hover:border hover:border-black hover:bg-ivory-100',
+          'w-[808px] rounded-sm border border-black bg-black-100 py-[32px] font-social-large font-bold tracking-[-0.32px] after:border-transparent hover:border hover:border-black hover:bg-ivory-100 [&:not(:last-child)]:mb-4',
         ],
         textPrimary: [
           'h-[27px]',

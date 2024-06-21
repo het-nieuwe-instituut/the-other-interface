@@ -11,9 +11,17 @@ export interface ButtonGroupProps {
     | Array<ReactElement<LinkButtonGroupItemProps | ButtonGroupItemProps> | null>
     | null
   className?: string
+  isStoryPage?: boolean
 }
 
-export const ButtonGroup: React.FC<ButtonGroupProps> = ({ children, className }) => {
+export const ButtonGroup: React.FC<ButtonGroupProps> = ({
+  children,
+  className,
+  isStoryPage = false,
+}) => {
+  if (isStoryPage) {
+    return <div className={cn('flex-wrap w-full bg-inherit', className)}>{children}</div>
+  }
   return <div className={cn('flex w-full gap-4 bg-inherit', className)}>{children}</div>
 }
 
