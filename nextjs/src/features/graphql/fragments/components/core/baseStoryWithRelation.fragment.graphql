@@ -19,6 +19,9 @@ fragment StoryFragment on StoryEntity {
       ... on ComponentModulesImageCarousel {
         ...imageCarouselModuleFragment
       }
+      ... on ComponentModulesButtonsModule {
+        ...buttonsModuleFragment
+      }
       ... on ComponentModulesSubtitle {
         ...subtitleModuleFragment
       }

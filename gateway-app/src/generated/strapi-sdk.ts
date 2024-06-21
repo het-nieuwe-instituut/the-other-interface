@@ -114,6 +114,12 @@ export type ComponentCoreButtonFiltersInput = {
   url?: InputMaybe<StringFilterInput>
 }
 
+export type ComponentCoreButtonInput = {
+  id?: InputMaybe<Scalars['ID']>
+  text?: InputMaybe<Scalars['String']>
+  url?: InputMaybe<Scalars['String']>
+}
+
 export type ComponentCoreCarouselImage = {
   __typename?: 'ComponentCoreCarouselImage'
   alt_text?: Maybe<Scalars['String']>
@@ -245,6 +251,18 @@ export type ComponentModulesButtonsModuleButtonsArgs = {
   filters?: InputMaybe<ComponentCoreButtonFiltersInput>
   pagination?: InputMaybe<PaginationArg>
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
+}
+
+export type ComponentModulesButtonsModuleFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<ComponentModulesButtonsModuleFiltersInput>>>
+  buttons?: InputMaybe<ComponentCoreButtonFiltersInput>
+  not?: InputMaybe<ComponentModulesButtonsModuleFiltersInput>
+  or?: InputMaybe<Array<InputMaybe<ComponentModulesButtonsModuleFiltersInput>>>
+}
+
+export type ComponentModulesButtonsModuleInput = {
+  buttons?: InputMaybe<Array<InputMaybe<ComponentCoreButtonInput>>>
+  id?: InputMaybe<Scalars['ID']>
 }
 
 export type ComponentModulesCarousel = {
@@ -1700,6 +1718,7 @@ export type Story = {
   publishedAt?: Maybe<Scalars['DateTime']>
   shortDescription: Scalars['String']
   slug: Scalars['String']
+  storyLinks?: Maybe<ComponentModulesButtonsModule>
   themes?: Maybe<ThemeRelationResponseCollection>
   timeframe?: Maybe<ComponentCoreTimeframe>
   title: Scalars['String']
@@ -1746,6 +1765,7 @@ export type StoryComponentsDynamicZone =
   | ComponentCoreMuxAudio
   | ComponentCoreMuxVideo
   | ComponentCoreStandAloneLink
+  | ComponentModulesButtonsModule
   | ComponentModulesImage
   | ComponentModulesImageCarousel
   | ComponentModulesPullquote
@@ -1789,6 +1809,7 @@ export type StoryFiltersInput = {
   publishedAt?: InputMaybe<DateTimeFilterInput>
   shortDescription?: InputMaybe<StringFilterInput>
   slug?: InputMaybe<StringFilterInput>
+  storyLinks?: InputMaybe<ComponentModulesButtonsModuleFiltersInput>
   themes?: InputMaybe<ThemeFiltersInput>
   timeframe?: InputMaybe<ComponentCoreTimeframeFiltersInput>
   title?: InputMaybe<StringFilterInput>
@@ -1807,6 +1828,7 @@ export type StoryInput = {
   publishedAt?: InputMaybe<Scalars['DateTime']>
   shortDescription?: InputMaybe<Scalars['String']>
   slug?: InputMaybe<Scalars['String']>
+  storyLinks?: InputMaybe<ComponentModulesButtonsModuleInput>
   themes?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
   timeframe?: InputMaybe<ComponentCoreTimeframeInput>
   title?: InputMaybe<Scalars['String']>
@@ -3202,6 +3224,7 @@ export type HighlightedHomepageThemesQuery = {
                             } | null
                           } | null
                         }
+                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -3359,6 +3382,16 @@ export type HighlightedHomepageThemesQuery = {
                       | { __typename: 'Error'; code: string; message?: string | null }
                       | null
                     > | null
+                    storyLinks?: {
+                      __typename: 'ComponentModulesButtonsModule'
+                      id: string
+                      buttons?: Array<{
+                        __typename?: 'ComponentCoreButton'
+                        id: string
+                        text: string
+                        url: string
+                      } | null> | null
+                    } | null
                     author?: {
                       __typename?: 'AuthorEntityResponse'
                       data?: {
@@ -3416,6 +3449,7 @@ export type HighlightedHomepageThemesQuery = {
                             | { __typename: 'ComponentCoreMuxAudio' }
                             | { __typename: 'ComponentCoreMuxVideo' }
                             | { __typename: 'ComponentCoreStandAloneLink' }
+                            | { __typename: 'ComponentModulesButtonsModule' }
                             | {
                                 __typename: 'ComponentModulesImage'
                                 alt_text?: string | null
@@ -3528,6 +3562,7 @@ export type HighlightedHomepageThemesQuery = {
                             | { __typename: 'ComponentCoreMuxAudio' }
                             | { __typename: 'ComponentCoreMuxVideo' }
                             | { __typename: 'ComponentCoreStandAloneLink' }
+                            | { __typename: 'ComponentModulesButtonsModule' }
                             | {
                                 __typename: 'ComponentModulesImage'
                                 alt_text?: string | null
@@ -3731,6 +3766,7 @@ export type HighlightedHomepageThemesQuery = {
                             } | null
                           } | null
                         }
+                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -3888,6 +3924,16 @@ export type HighlightedHomepageThemesQuery = {
                       | { __typename: 'Error'; code: string; message?: string | null }
                       | null
                     > | null
+                    storyLinks?: {
+                      __typename: 'ComponentModulesButtonsModule'
+                      id: string
+                      buttons?: Array<{
+                        __typename?: 'ComponentCoreButton'
+                        id: string
+                        text: string
+                        url: string
+                      } | null> | null
+                    } | null
                     author?: {
                       __typename?: 'AuthorEntityResponse'
                       data?: {
@@ -3945,6 +3991,7 @@ export type HighlightedHomepageThemesQuery = {
                             | { __typename: 'ComponentCoreMuxAudio' }
                             | { __typename: 'ComponentCoreMuxVideo' }
                             | { __typename: 'ComponentCoreStandAloneLink' }
+                            | { __typename: 'ComponentModulesButtonsModule' }
                             | {
                                 __typename: 'ComponentModulesImage'
                                 alt_text?: string | null
@@ -4057,6 +4104,7 @@ export type HighlightedHomepageThemesQuery = {
                             | { __typename: 'ComponentCoreMuxAudio' }
                             | { __typename: 'ComponentCoreMuxVideo' }
                             | { __typename: 'ComponentCoreStandAloneLink' }
+                            | { __typename: 'ComponentModulesButtonsModule' }
                             | {
                                 __typename: 'ComponentModulesImage'
                                 alt_text?: string | null
@@ -7453,6 +7501,7 @@ export type StoriesQuery = {
                 } | null
               } | null
             }
+          | { __typename: 'ComponentModulesButtonsModule' }
           | {
               __typename: 'ComponentModulesImage'
               alt_text?: string | null
@@ -7598,6 +7647,16 @@ export type StoriesQuery = {
           | { __typename: 'Error'; code: string; message?: string | null }
           | null
         > | null
+        storyLinks?: {
+          __typename: 'ComponentModulesButtonsModule'
+          id: string
+          buttons?: Array<{
+            __typename?: 'ComponentCoreButton'
+            id: string
+            text: string
+            url: string
+          } | null> | null
+        } | null
         author?: {
           __typename?: 'AuthorEntityResponse'
           data?: {
@@ -7655,6 +7714,7 @@ export type StoriesQuery = {
                 | { __typename: 'ComponentCoreMuxAudio' }
                 | { __typename: 'ComponentCoreMuxVideo' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
+                | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -7767,6 +7827,7 @@ export type StoriesQuery = {
                 | { __typename: 'ComponentCoreMuxAudio' }
                 | { __typename: 'ComponentCoreMuxVideo' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
+                | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -8015,6 +8076,7 @@ export type StoryQuery = {
                 } | null
               } | null
             }
+          | { __typename: 'ComponentModulesButtonsModule' }
           | {
               __typename: 'ComponentModulesImage'
               alt_text?: string | null
@@ -8160,6 +8222,16 @@ export type StoryQuery = {
           | { __typename: 'Error'; code: string; message?: string | null }
           | null
         > | null
+        storyLinks?: {
+          __typename: 'ComponentModulesButtonsModule'
+          id: string
+          buttons?: Array<{
+            __typename?: 'ComponentCoreButton'
+            id: string
+            text: string
+            url: string
+          } | null> | null
+        } | null
         author?: {
           __typename?: 'AuthorEntityResponse'
           data?: {
@@ -8217,6 +8289,7 @@ export type StoryQuery = {
                 | { __typename: 'ComponentCoreMuxAudio' }
                 | { __typename: 'ComponentCoreMuxVideo' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
+                | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -8329,6 +8402,7 @@ export type StoryQuery = {
                 | { __typename: 'ComponentCoreMuxAudio' }
                 | { __typename: 'ComponentCoreMuxVideo' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
+                | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -8575,6 +8649,7 @@ export type StoryByLocaleQuery = {
                 } | null
               } | null
             }
+          | { __typename: 'ComponentModulesButtonsModule' }
           | {
               __typename: 'ComponentModulesImage'
               alt_text?: string | null
@@ -8720,6 +8795,16 @@ export type StoryByLocaleQuery = {
           | { __typename: 'Error'; code: string; message?: string | null }
           | null
         > | null
+        storyLinks?: {
+          __typename: 'ComponentModulesButtonsModule'
+          id: string
+          buttons?: Array<{
+            __typename?: 'ComponentCoreButton'
+            id: string
+            text: string
+            url: string
+          } | null> | null
+        } | null
         localizations?: {
           __typename?: 'StoryRelationResponseCollection'
           data: Array<{
@@ -8855,6 +8940,7 @@ export type StoryByLocaleQuery = {
                       } | null
                     } | null
                   }
+                | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -9000,6 +9086,16 @@ export type StoryByLocaleQuery = {
                 | { __typename: 'Error'; code: string; message?: string | null }
                 | null
               > | null
+              storyLinks?: {
+                __typename: 'ComponentModulesButtonsModule'
+                id: string
+                buttons?: Array<{
+                  __typename?: 'ComponentCoreButton'
+                  id: string
+                  text: string
+                  url: string
+                } | null> | null
+              } | null
             } | null
           }>
         } | null
@@ -9153,6 +9249,7 @@ export type StoriesByLocaleQuery = {
                 } | null
               } | null
             }
+          | { __typename: 'ComponentModulesButtonsModule' }
           | {
               __typename: 'ComponentModulesImage'
               alt_text?: string | null
@@ -9298,6 +9395,16 @@ export type StoriesByLocaleQuery = {
           | { __typename: 'Error'; code: string; message?: string | null }
           | null
         > | null
+        storyLinks?: {
+          __typename: 'ComponentModulesButtonsModule'
+          id: string
+          buttons?: Array<{
+            __typename?: 'ComponentCoreButton'
+            id: string
+            text: string
+            url: string
+          } | null> | null
+        } | null
         localizations?: {
           __typename?: 'StoryRelationResponseCollection'
           data: Array<{
@@ -9433,6 +9540,7 @@ export type StoriesByLocaleQuery = {
                       } | null
                     } | null
                   }
+                | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -9578,6 +9686,16 @@ export type StoriesByLocaleQuery = {
                 | { __typename: 'Error'; code: string; message?: string | null }
                 | null
               > | null
+              storyLinks?: {
+                __typename: 'ComponentModulesButtonsModule'
+                id: string
+                buttons?: Array<{
+                  __typename?: 'ComponentCoreButton'
+                  id: string
+                  text: string
+                  url: string
+                } | null> | null
+              } | null
             } | null
           }>
         } | null
@@ -9668,6 +9786,7 @@ export type StoriesMetaByLocaleQuery = {
                 | { __typename: 'ComponentCoreMuxAudio' }
                 | { __typename: 'ComponentCoreMuxVideo' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
+                | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -9780,6 +9899,7 @@ export type StoriesMetaByLocaleQuery = {
                 | { __typename: 'ComponentCoreMuxAudio' }
                 | { __typename: 'ComponentCoreMuxVideo' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
+                | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -9977,6 +10097,7 @@ export type StoriesMetaByLocaleQuery = {
                       | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
+                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -10089,6 +10210,7 @@ export type StoriesMetaByLocaleQuery = {
                       | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
+                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -10417,6 +10539,7 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
                 } | null
               } | null
             }
+          | { __typename: 'ComponentModulesButtonsModule' }
           | {
               __typename: 'ComponentModulesImage'
               alt_text?: string | null
@@ -10562,6 +10685,16 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
           | { __typename: 'Error'; code: string; message?: string | null }
           | null
         > | null
+        storyLinks?: {
+          __typename: 'ComponentModulesButtonsModule'
+          id: string
+          buttons?: Array<{
+            __typename?: 'ComponentCoreButton'
+            id: string
+            text: string
+            url: string
+          } | null> | null
+        } | null
         author?: {
           __typename?: 'AuthorEntityResponse'
           data?: {
@@ -10619,6 +10752,7 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
                 | { __typename: 'ComponentCoreMuxAudio' }
                 | { __typename: 'ComponentCoreMuxVideo' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
+                | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -10731,6 +10865,7 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
                 | { __typename: 'ComponentCoreMuxAudio' }
                 | { __typename: 'ComponentCoreMuxVideo' }
                 | { __typename: 'ComponentCoreStandAloneLink' }
+                | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -10890,6 +11025,7 @@ export type StoriesByIdsQuery = {
           | { __typename?: 'ComponentCoreMuxAudio' }
           | { __typename?: 'ComponentCoreMuxVideo' }
           | { __typename?: 'ComponentCoreStandAloneLink' }
+          | { __typename?: 'ComponentModulesButtonsModule' }
           | {
               __typename: 'ComponentModulesImage'
               alt_text?: string | null
@@ -11218,6 +11354,7 @@ export type NestedStoryFragmentFragment = {
             } | null
           } | null
         }
+      | { __typename: 'ComponentModulesButtonsModule' }
       | {
           __typename: 'ComponentModulesImage'
           alt_text?: string | null
@@ -11363,6 +11500,16 @@ export type NestedStoryFragmentFragment = {
       | { __typename: 'Error'; code: string; message?: string | null }
       | null
     > | null
+    storyLinks?: {
+      __typename: 'ComponentModulesButtonsModule'
+      id: string
+      buttons?: Array<{
+        __typename?: 'ComponentCoreButton'
+        id: string
+        text: string
+        url: string
+      } | null> | null
+    } | null
   } | null
 }
 
@@ -11499,6 +11646,7 @@ export type LocalizedStoryFragmentFragment = {
             } | null
           } | null
         }
+      | { __typename: 'ComponentModulesButtonsModule' }
       | {
           __typename: 'ComponentModulesImage'
           alt_text?: string | null
@@ -11644,6 +11792,16 @@ export type LocalizedStoryFragmentFragment = {
       | { __typename: 'Error'; code: string; message?: string | null }
       | null
     > | null
+    storyLinks?: {
+      __typename: 'ComponentModulesButtonsModule'
+      id: string
+      buttons?: Array<{
+        __typename?: 'ComponentCoreButton'
+        id: string
+        text: string
+        url: string
+      } | null> | null
+    } | null
     localizations?: {
       __typename?: 'StoryRelationResponseCollection'
       data: Array<{
@@ -11779,6 +11937,7 @@ export type LocalizedStoryFragmentFragment = {
                   } | null
                 } | null
               }
+            | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
@@ -11924,6 +12083,16 @@ export type LocalizedStoryFragmentFragment = {
             | { __typename: 'Error'; code: string; message?: string | null }
             | null
           > | null
+          storyLinks?: {
+            __typename: 'ComponentModulesButtonsModule'
+            id: string
+            buttons?: Array<{
+              __typename?: 'ComponentCoreButton'
+              id: string
+              text: string
+              url: string
+            } | null> | null
+          } | null
         } | null
       }>
     } | null
@@ -12028,6 +12197,7 @@ export type StoryFragmentFragment = {
             } | null
           } | null
         }
+      | { __typename: 'ComponentModulesButtonsModule' }
       | {
           __typename: 'ComponentModulesImage'
           alt_text?: string | null
@@ -12173,6 +12343,16 @@ export type StoryFragmentFragment = {
       | { __typename: 'Error'; code: string; message?: string | null }
       | null
     > | null
+    storyLinks?: {
+      __typename: 'ComponentModulesButtonsModule'
+      id: string
+      buttons?: Array<{
+        __typename?: 'ComponentCoreButton'
+        id: string
+        text: string
+        url: string
+      } | null> | null
+    } | null
     author?: {
       __typename?: 'AuthorEntityResponse'
       data?: {
@@ -12230,6 +12410,7 @@ export type StoryFragmentFragment = {
             | { __typename: 'ComponentCoreMuxAudio' }
             | { __typename: 'ComponentCoreMuxVideo' }
             | { __typename: 'ComponentCoreStandAloneLink' }
+            | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
@@ -12342,6 +12523,7 @@ export type StoryFragmentFragment = {
             | { __typename: 'ComponentCoreMuxAudio' }
             | { __typename: 'ComponentCoreMuxVideo' }
             | { __typename: 'ComponentCoreStandAloneLink' }
+            | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
@@ -12522,6 +12704,7 @@ export type StoryMetaFragmentFragment = {
             | { __typename: 'ComponentCoreMuxAudio' }
             | { __typename: 'ComponentCoreMuxVideo' }
             | { __typename: 'ComponentCoreStandAloneLink' }
+            | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
@@ -12634,6 +12817,7 @@ export type StoryMetaFragmentFragment = {
             | { __typename: 'ComponentCoreMuxAudio' }
             | { __typename: 'ComponentCoreMuxVideo' }
             | { __typename: 'ComponentCoreStandAloneLink' }
+            | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
@@ -12797,6 +12981,7 @@ export type LocalizedStoryMetaFragmentFragment = {
             | { __typename: 'ComponentCoreMuxAudio' }
             | { __typename: 'ComponentCoreMuxVideo' }
             | { __typename: 'ComponentCoreStandAloneLink' }
+            | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
@@ -12909,6 +13094,7 @@ export type LocalizedStoryMetaFragmentFragment = {
             | { __typename: 'ComponentCoreMuxAudio' }
             | { __typename: 'ComponentCoreMuxVideo' }
             | { __typename: 'ComponentCoreStandAloneLink' }
+            | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
@@ -13106,6 +13292,7 @@ export type LocalizedStoryMetaFragmentFragment = {
                   | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
+                  | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
                       alt_text?: string | null
@@ -13218,6 +13405,7 @@ export type LocalizedStoryMetaFragmentFragment = {
                   | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
+                  | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
                       alt_text?: string | null
@@ -13411,6 +13599,10 @@ type StoryComponentsFragment_ComponentCoreStandAloneLink_Fragment = {
   } | null
 }
 
+type StoryComponentsFragment_ComponentModulesButtonsModule_Fragment = {
+  __typename: 'ComponentModulesButtonsModule'
+}
+
 type StoryComponentsFragment_ComponentModulesImage_Fragment = {
   __typename: 'ComponentModulesImage'
   alt_text?: string | null
@@ -13586,6 +13778,7 @@ export type StoryComponentsFragmentFragment =
   | StoryComponentsFragment_ComponentCoreMuxAudio_Fragment
   | StoryComponentsFragment_ComponentCoreMuxVideo_Fragment
   | StoryComponentsFragment_ComponentCoreStandAloneLink_Fragment
+  | StoryComponentsFragment_ComponentModulesButtonsModule_Fragment
   | StoryComponentsFragment_ComponentModulesImage_Fragment
   | StoryComponentsFragment_ComponentModulesImageCarousel_Fragment
   | StoryComponentsFragment_ComponentModulesPullquote_Fragment
@@ -14347,6 +14540,7 @@ export type ThemeQuery = {
                       } | null
                     } | null
                   }
+                | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -14492,6 +14686,16 @@ export type ThemeQuery = {
                 | { __typename: 'Error'; code: string; message?: string | null }
                 | null
               > | null
+              storyLinks?: {
+                __typename: 'ComponentModulesButtonsModule'
+                id: string
+                buttons?: Array<{
+                  __typename?: 'ComponentCoreButton'
+                  id: string
+                  text: string
+                  url: string
+                } | null> | null
+              } | null
               author?: {
                 __typename?: 'AuthorEntityResponse'
                 data?: {
@@ -14549,6 +14753,7 @@ export type ThemeQuery = {
                       | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
+                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -14661,6 +14866,7 @@ export type ThemeQuery = {
                       | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
+                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -14895,6 +15101,7 @@ export type ThemesQuery = {
                       } | null
                     } | null
                   }
+                | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -15040,6 +15247,16 @@ export type ThemesQuery = {
                 | { __typename: 'Error'; code: string; message?: string | null }
                 | null
               > | null
+              storyLinks?: {
+                __typename: 'ComponentModulesButtonsModule'
+                id: string
+                buttons?: Array<{
+                  __typename?: 'ComponentCoreButton'
+                  id: string
+                  text: string
+                  url: string
+                } | null> | null
+              } | null
               author?: {
                 __typename?: 'AuthorEntityResponse'
                 data?: {
@@ -15097,6 +15314,7 @@ export type ThemesQuery = {
                       | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
+                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -15209,6 +15427,7 @@ export type ThemesQuery = {
                       | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
+                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -15451,6 +15670,7 @@ export type StoriesRelatedToThemeQuery = {
                       } | null
                     } | null
                   }
+                | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -15596,6 +15816,16 @@ export type StoriesRelatedToThemeQuery = {
                 | { __typename: 'Error'; code: string; message?: string | null }
                 | null
               > | null
+              storyLinks?: {
+                __typename: 'ComponentModulesButtonsModule'
+                id: string
+                buttons?: Array<{
+                  __typename?: 'ComponentCoreButton'
+                  id: string
+                  text: string
+                  url: string
+                } | null> | null
+              } | null
               author?: {
                 __typename?: 'AuthorEntityResponse'
                 data?: {
@@ -15653,6 +15883,7 @@ export type StoriesRelatedToThemeQuery = {
                       | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
+                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -15765,6 +15996,7 @@ export type StoriesRelatedToThemeQuery = {
                       | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
+                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -15987,6 +16219,7 @@ export type ThemeFragmentFragment = {
                   } | null
                 } | null
               }
+            | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
@@ -16132,6 +16365,16 @@ export type ThemeFragmentFragment = {
             | { __typename: 'Error'; code: string; message?: string | null }
             | null
           > | null
+          storyLinks?: {
+            __typename: 'ComponentModulesButtonsModule'
+            id: string
+            buttons?: Array<{
+              __typename?: 'ComponentCoreButton'
+              id: string
+              text: string
+              url: string
+            } | null> | null
+          } | null
           author?: {
             __typename?: 'AuthorEntityResponse'
             data?: {
@@ -16189,6 +16432,7 @@ export type ThemeFragmentFragment = {
                   | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
+                  | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
                       alt_text?: string | null
@@ -16301,6 +16545,7 @@ export type ThemeFragmentFragment = {
                   | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
+                  | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
                       alt_text?: string | null
@@ -16521,6 +16766,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                   } | null
                 } | null
               }
+            | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
@@ -16666,6 +16912,16 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
             | { __typename: 'Error'; code: string; message?: string | null }
             | null
           > | null
+          storyLinks?: {
+            __typename: 'ComponentModulesButtonsModule'
+            id: string
+            buttons?: Array<{
+              __typename?: 'ComponentCoreButton'
+              id: string
+              text: string
+              url: string
+            } | null> | null
+          } | null
           author?: {
             __typename?: 'AuthorEntityResponse'
             data?: {
@@ -16723,6 +16979,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                   | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
+                  | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
                       alt_text?: string | null
@@ -16835,6 +17092,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                   | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
+                  | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
                       alt_text?: string | null
@@ -17038,6 +17296,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                   } | null
                 } | null
               }
+            | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
@@ -17183,6 +17442,16 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
             | { __typename: 'Error'; code: string; message?: string | null }
             | null
           > | null
+          storyLinks?: {
+            __typename: 'ComponentModulesButtonsModule'
+            id: string
+            buttons?: Array<{
+              __typename?: 'ComponentCoreButton'
+              id: string
+              text: string
+              url: string
+            } | null> | null
+          } | null
           author?: {
             __typename?: 'AuthorEntityResponse'
             data?: {
@@ -17240,6 +17509,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                   | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
+                  | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
                       alt_text?: string | null
@@ -17352,6 +17622,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                   | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
+                  | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
                       alt_text?: string | null
@@ -17592,6 +17863,7 @@ export type TriplyRecordQuery = {
                       } | null
                     } | null
                   }
+                | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -17737,6 +18009,16 @@ export type TriplyRecordQuery = {
                 | { __typename: 'Error'; code: string; message?: string | null }
                 | null
               > | null
+              storyLinks?: {
+                __typename: 'ComponentModulesButtonsModule'
+                id: string
+                buttons?: Array<{
+                  __typename?: 'ComponentCoreButton'
+                  id: string
+                  text: string
+                  url: string
+                } | null> | null
+              } | null
               author?: {
                 __typename?: 'AuthorEntityResponse'
                 data?: {
@@ -17794,6 +18076,7 @@ export type TriplyRecordQuery = {
                       | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
+                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -17906,6 +18189,7 @@ export type TriplyRecordQuery = {
                       | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
+                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -18137,6 +18421,7 @@ export type TriplyRecordsQuery = {
                       } | null
                     } | null
                   }
+                | { __typename: 'ComponentModulesButtonsModule' }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -18282,6 +18567,16 @@ export type TriplyRecordsQuery = {
                 | { __typename: 'Error'; code: string; message?: string | null }
                 | null
               > | null
+              storyLinks?: {
+                __typename: 'ComponentModulesButtonsModule'
+                id: string
+                buttons?: Array<{
+                  __typename?: 'ComponentCoreButton'
+                  id: string
+                  text: string
+                  url: string
+                } | null> | null
+              } | null
               author?: {
                 __typename?: 'AuthorEntityResponse'
                 data?: {
@@ -18339,6 +18634,7 @@ export type TriplyRecordsQuery = {
                       | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
+                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -18451,6 +18747,7 @@ export type TriplyRecordsQuery = {
                       | { __typename: 'ComponentCoreMuxAudio' }
                       | { __typename: 'ComponentCoreMuxVideo' }
                       | { __typename: 'ComponentCoreStandAloneLink' }
+                      | { __typename: 'ComponentModulesButtonsModule' }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -18681,6 +18978,7 @@ export type TriplyRecordFragmentFragment = {
                   } | null
                 } | null
               }
+            | { __typename: 'ComponentModulesButtonsModule' }
             | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
@@ -18826,6 +19124,16 @@ export type TriplyRecordFragmentFragment = {
             | { __typename: 'Error'; code: string; message?: string | null }
             | null
           > | null
+          storyLinks?: {
+            __typename: 'ComponentModulesButtonsModule'
+            id: string
+            buttons?: Array<{
+              __typename?: 'ComponentCoreButton'
+              id: string
+              text: string
+              url: string
+            } | null> | null
+          } | null
           author?: {
             __typename?: 'AuthorEntityResponse'
             data?: {
@@ -18883,6 +19191,7 @@ export type TriplyRecordFragmentFragment = {
                   | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
+                  | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
                       alt_text?: string | null
@@ -18995,6 +19304,7 @@ export type TriplyRecordFragmentFragment = {
                   | { __typename: 'ComponentCoreMuxAudio' }
                   | { __typename: 'ComponentCoreMuxVideo' }
                   | { __typename: 'ComponentCoreStandAloneLink' }
+                  | { __typename: 'ComponentModulesButtonsModule' }
                   | {
                       __typename: 'ComponentModulesImage'
                       alt_text?: string | null
@@ -19892,9 +20202,13 @@ export const NestedStoryFragmentFragmentDoc = gql`
       components {
         ...StoryComponentsFragment
       }
+      storyLinks {
+        ...ComponentModulesButtonsModuleFragment
+      }
     }
   }
   ${StoryComponentsFragmentFragmentDoc}
+  ${ComponentModulesButtonsModuleFragmentFragmentDoc}
 `
 export const LocalizedStoryFragmentFragmentDoc = gql`
   fragment LocalizedStoryFragment on StoryEntity {
@@ -19937,6 +20251,9 @@ export const LocalizedStoryFragmentFragmentDoc = gql`
       components {
         ...StoryComponentsFragment
       }
+      storyLinks {
+        ...ComponentModulesButtonsModuleFragment
+      }
       localizations {
         data {
           ...NestedStoryFragment
@@ -19945,6 +20262,7 @@ export const LocalizedStoryFragmentFragmentDoc = gql`
     }
   }
   ${StoryComponentsFragmentFragmentDoc}
+  ${ComponentModulesButtonsModuleFragmentFragmentDoc}
   ${NestedStoryFragmentFragmentDoc}
 `
 export const StoryMetaFragmentFragmentDoc = gql`
@@ -20245,6 +20563,9 @@ export const StoryFragmentFragmentDoc = gql`
       components {
         ...StoryComponentsFragment
       }
+      storyLinks {
+        ...ComponentModulesButtonsModuleFragment
+      }
       author {
         data {
           id
@@ -20337,6 +20658,7 @@ export const StoryFragmentFragmentDoc = gql`
     }
   }
   ${StoryComponentsFragmentFragmentDoc}
+  ${ComponentModulesButtonsModuleFragmentFragmentDoc}
   ${BaseTriplyRecordFragmentFragmentDoc}
   ${ComponentModulesImageFragmentFragmentDoc}
 `
