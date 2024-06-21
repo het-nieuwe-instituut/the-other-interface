@@ -22,7 +22,6 @@ export type Scalars = {
   JSON: any
   LandingpageComponentsDynamicZoneInput: any
   Long: any
-  MenupageComponentsDynamicZoneInput: any
   StoryComponentsDynamicZoneInput: any
   Upload: any
 }
@@ -611,7 +610,6 @@ export type GenericMorph =
   | I18NLocale
   | Landingpage
   | Location
-  | Menupage
   | MuxVideoUploaderMuxAsset
   | Story
   | Theme
@@ -960,79 +958,6 @@ export type LongFilterInput = {
   startsWith?: InputMaybe<Scalars['Long']>
 }
 
-export type Menupage = {
-  __typename?: 'Menupage'
-  Title?: Maybe<Scalars['String']>
-  components?: Maybe<Array<Maybe<MenupageComponentsDynamicZone>>>
-  createdAt?: Maybe<Scalars['DateTime']>
-  locale?: Maybe<Scalars['String']>
-  localizations?: Maybe<MenupageRelationResponseCollection>
-  publishedAt?: Maybe<Scalars['DateTime']>
-  slug?: Maybe<Scalars['String']>
-  updatedAt?: Maybe<Scalars['DateTime']>
-}
-
-export type MenupageLocalizationsArgs = {
-  filters?: InputMaybe<MenupageFiltersInput>
-  pagination?: InputMaybe<PaginationArg>
-  publicationState?: InputMaybe<PublicationState>
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
-}
-
-export type MenupageComponentsDynamicZone =
-  | ComponentModulesButtonsModule
-  | ComponentModulesGridModule
-  | ComponentModulesImage
-  | ComponentModulesImageCarousel
-  | ComponentModulesPullquote
-  | ComponentModulesSubtitle
-  | ComponentModulesTextModule
-  | ComponentModulesTitleModule
-  | Error
-
-export type MenupageEntity = {
-  __typename?: 'MenupageEntity'
-  attributes?: Maybe<Menupage>
-  id?: Maybe<Scalars['ID']>
-}
-
-export type MenupageEntityResponse = {
-  __typename?: 'MenupageEntityResponse'
-  data?: Maybe<MenupageEntity>
-}
-
-export type MenupageEntityResponseCollection = {
-  __typename?: 'MenupageEntityResponseCollection'
-  data: Array<MenupageEntity>
-  meta: ResponseCollectionMeta
-}
-
-export type MenupageFiltersInput = {
-  Title?: InputMaybe<StringFilterInput>
-  and?: InputMaybe<Array<InputMaybe<MenupageFiltersInput>>>
-  createdAt?: InputMaybe<DateTimeFilterInput>
-  id?: InputMaybe<IdFilterInput>
-  locale?: InputMaybe<StringFilterInput>
-  localizations?: InputMaybe<MenupageFiltersInput>
-  not?: InputMaybe<MenupageFiltersInput>
-  or?: InputMaybe<Array<InputMaybe<MenupageFiltersInput>>>
-  publishedAt?: InputMaybe<DateTimeFilterInput>
-  slug?: InputMaybe<StringFilterInput>
-  updatedAt?: InputMaybe<DateTimeFilterInput>
-}
-
-export type MenupageInput = {
-  Title?: InputMaybe<Scalars['String']>
-  components?: InputMaybe<Array<Scalars['MenupageComponentsDynamicZoneInput']>>
-  publishedAt?: InputMaybe<Scalars['DateTime']>
-  slug?: InputMaybe<Scalars['String']>
-}
-
-export type MenupageRelationResponseCollection = {
-  __typename?: 'MenupageRelationResponseCollection'
-  data: Array<MenupageEntity>
-}
-
 export type Mutation = {
   __typename?: 'Mutation'
   /** Change user password. Confirm with the current password. */
@@ -1045,8 +970,6 @@ export type Mutation = {
   createLandingpageLocalization?: Maybe<LandingpageEntityResponse>
   createLocation?: Maybe<LocationEntityResponse>
   createLocationLocalization?: Maybe<LocationEntityResponse>
-  createMenupage?: Maybe<MenupageEntityResponse>
-  createMenupageLocalization?: Maybe<MenupageEntityResponse>
   createMuxVideoUploaderMuxAsset?: Maybe<MuxVideoUploaderMuxAssetEntityResponse>
   createStory?: Maybe<StoryEntityResponse>
   createStoryLocalization?: Maybe<StoryEntityResponse>
@@ -1065,7 +988,6 @@ export type Mutation = {
   deleteHomepage?: Maybe<HomepageEntityResponse>
   deleteLandingpage?: Maybe<LandingpageEntityResponse>
   deleteLocation?: Maybe<LocationEntityResponse>
-  deleteMenupage?: Maybe<MenupageEntityResponse>
   deleteMuxVideoUploaderMuxAsset?: Maybe<MuxVideoUploaderMuxAssetEntityResponse>
   deleteStory?: Maybe<StoryEntityResponse>
   deleteTheme?: Maybe<ThemeEntityResponse>
@@ -1094,7 +1016,6 @@ export type Mutation = {
   updateHomepage?: Maybe<HomepageEntityResponse>
   updateLandingpage?: Maybe<LandingpageEntityResponse>
   updateLocation?: Maybe<LocationEntityResponse>
-  updateMenupage?: Maybe<MenupageEntityResponse>
   updateMuxVideoUploaderMuxAsset?: Maybe<MuxVideoUploaderMuxAssetEntityResponse>
   updateStory?: Maybe<StoryEntityResponse>
   updateTheme?: Maybe<ThemeEntityResponse>
@@ -1150,17 +1071,6 @@ export type MutationCreateLocationArgs = {
 
 export type MutationCreateLocationLocalizationArgs = {
   data?: InputMaybe<LocationInput>
-  id?: InputMaybe<Scalars['ID']>
-  locale?: InputMaybe<Scalars['I18NLocaleCode']>
-}
-
-export type MutationCreateMenupageArgs = {
-  data: MenupageInput
-  locale?: InputMaybe<Scalars['I18NLocaleCode']>
-}
-
-export type MutationCreateMenupageLocalizationArgs = {
-  data?: InputMaybe<MenupageInput>
   id?: InputMaybe<Scalars['ID']>
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
 }
@@ -1233,11 +1143,6 @@ export type MutationDeleteLandingpageArgs = {
 }
 
 export type MutationDeleteLocationArgs = {
-  id: Scalars['ID']
-  locale?: InputMaybe<Scalars['I18NLocaleCode']>
-}
-
-export type MutationDeleteMenupageArgs = {
   id: Scalars['ID']
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
 }
@@ -1342,12 +1247,6 @@ export type MutationUpdateLandingpageArgs = {
 
 export type MutationUpdateLocationArgs = {
   data: LocationInput
-  id: Scalars['ID']
-  locale?: InputMaybe<Scalars['I18NLocaleCode']>
-}
-
-export type MutationUpdateMenupageArgs = {
-  data: MenupageInput
   id: Scalars['ID']
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
 }
@@ -1501,8 +1400,6 @@ export type Query = {
   location?: Maybe<LocationEntityResponse>
   locations?: Maybe<LocationEntityResponseCollection>
   me?: Maybe<UsersPermissionsMe>
-  menupage?: Maybe<MenupageEntityResponse>
-  menupages?: Maybe<MenupageEntityResponseCollection>
   muxVideoUploaderMuxAsset?: Maybe<MuxVideoUploaderMuxAssetEntityResponse>
   muxVideoUploaderMuxAssets?: Maybe<MuxVideoUploaderMuxAssetEntityResponseCollection>
   stories?: Maybe<StoryEntityResponseCollection>
@@ -1592,19 +1489,6 @@ export type QueryLocationArgs = {
 
 export type QueryLocationsArgs = {
   filters?: InputMaybe<LocationFiltersInput>
-  locale?: InputMaybe<Scalars['I18NLocaleCode']>
-  pagination?: InputMaybe<PaginationArg>
-  publicationState?: InputMaybe<PublicationState>
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
-}
-
-export type QueryMenupageArgs = {
-  id?: InputMaybe<Scalars['ID']>
-  locale?: InputMaybe<Scalars['I18NLocaleCode']>
-}
-
-export type QueryMenupagesArgs = {
-  filters?: InputMaybe<MenupageFiltersInput>
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
   pagination?: InputMaybe<PaginationArg>
   publicationState?: InputMaybe<PublicationState>
@@ -3224,7 +3108,16 @@ export type HighlightedHomepageThemesQuery = {
                             } | null
                           } | null
                         }
-                      | { __typename: 'ComponentModulesButtonsModule' }
+                      | {
+                          __typename: 'ComponentModulesButtonsModule'
+                          id: string
+                          buttons?: Array<{
+                            __typename?: 'ComponentCoreButton'
+                            id: string
+                            text: string
+                            url: string
+                          } | null> | null
+                        }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -3766,7 +3659,16 @@ export type HighlightedHomepageThemesQuery = {
                             } | null
                           } | null
                         }
-                      | { __typename: 'ComponentModulesButtonsModule' }
+                      | {
+                          __typename: 'ComponentModulesButtonsModule'
+                          id: string
+                          buttons?: Array<{
+                            __typename?: 'ComponentCoreButton'
+                            id: string
+                            text: string
+                            url: string
+                          } | null> | null
+                        }
                       | {
                           __typename: 'ComponentModulesImage'
                           alt_text?: string | null
@@ -5980,7 +5882,16 @@ export type StoriesQuery = {
                 } | null
               } | null
             }
-          | { __typename: 'ComponentModulesButtonsModule' }
+          | {
+              __typename: 'ComponentModulesButtonsModule'
+              id: string
+              buttons?: Array<{
+                __typename?: 'ComponentCoreButton'
+                id: string
+                text: string
+                url: string
+              } | null> | null
+            }
           | {
               __typename: 'ComponentModulesImage'
               alt_text?: string | null
@@ -6555,7 +6466,16 @@ export type StoryQuery = {
                 } | null
               } | null
             }
-          | { __typename: 'ComponentModulesButtonsModule' }
+          | {
+              __typename: 'ComponentModulesButtonsModule'
+              id: string
+              buttons?: Array<{
+                __typename?: 'ComponentCoreButton'
+                id: string
+                text: string
+                url: string
+              } | null> | null
+            }
           | {
               __typename: 'ComponentModulesImage'
               alt_text?: string | null
@@ -7128,7 +7048,16 @@ export type StoryByLocaleQuery = {
                 } | null
               } | null
             }
-          | { __typename: 'ComponentModulesButtonsModule' }
+          | {
+              __typename: 'ComponentModulesButtonsModule'
+              id: string
+              buttons?: Array<{
+                __typename?: 'ComponentCoreButton'
+                id: string
+                text: string
+                url: string
+              } | null> | null
+            }
           | {
               __typename: 'ComponentModulesImage'
               alt_text?: string | null
@@ -7419,7 +7348,16 @@ export type StoryByLocaleQuery = {
                       } | null
                     } | null
                   }
-                | { __typename: 'ComponentModulesButtonsModule' }
+                | {
+                    __typename: 'ComponentModulesButtonsModule'
+                    id: string
+                    buttons?: Array<{
+                      __typename?: 'ComponentCoreButton'
+                      id: string
+                      text: string
+                      url: string
+                    } | null> | null
+                  }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -7728,7 +7666,16 @@ export type StoriesByLocaleQuery = {
                 } | null
               } | null
             }
-          | { __typename: 'ComponentModulesButtonsModule' }
+          | {
+              __typename: 'ComponentModulesButtonsModule'
+              id: string
+              buttons?: Array<{
+                __typename?: 'ComponentCoreButton'
+                id: string
+                text: string
+                url: string
+              } | null> | null
+            }
           | {
               __typename: 'ComponentModulesImage'
               alt_text?: string | null
@@ -8019,7 +7966,16 @@ export type StoriesByLocaleQuery = {
                       } | null
                     } | null
                   }
-                | { __typename: 'ComponentModulesButtonsModule' }
+                | {
+                    __typename: 'ComponentModulesButtonsModule'
+                    id: string
+                    buttons?: Array<{
+                      __typename?: 'ComponentCoreButton'
+                      id: string
+                      text: string
+                      url: string
+                    } | null> | null
+                  }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -9018,7 +8974,16 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
                 } | null
               } | null
             }
-          | { __typename: 'ComponentModulesButtonsModule' }
+          | {
+              __typename: 'ComponentModulesButtonsModule'
+              id: string
+              buttons?: Array<{
+                __typename?: 'ComponentCoreButton'
+                id: string
+                text: string
+                url: string
+              } | null> | null
+            }
           | {
               __typename: 'ComponentModulesImage'
               alt_text?: string | null
@@ -9833,7 +9798,16 @@ export type NestedStoryFragmentFragment = {
             } | null
           } | null
         }
-      | { __typename: 'ComponentModulesButtonsModule' }
+      | {
+          __typename: 'ComponentModulesButtonsModule'
+          id: string
+          buttons?: Array<{
+            __typename?: 'ComponentCoreButton'
+            id: string
+            text: string
+            url: string
+          } | null> | null
+        }
       | {
           __typename: 'ComponentModulesImage'
           alt_text?: string | null
@@ -10125,7 +10099,16 @@ export type LocalizedStoryFragmentFragment = {
             } | null
           } | null
         }
-      | { __typename: 'ComponentModulesButtonsModule' }
+      | {
+          __typename: 'ComponentModulesButtonsModule'
+          id: string
+          buttons?: Array<{
+            __typename?: 'ComponentCoreButton'
+            id: string
+            text: string
+            url: string
+          } | null> | null
+        }
       | {
           __typename: 'ComponentModulesImage'
           alt_text?: string | null
@@ -10416,7 +10399,16 @@ export type LocalizedStoryFragmentFragment = {
                   } | null
                 } | null
               }
-            | { __typename: 'ComponentModulesButtonsModule' }
+            | {
+                __typename: 'ComponentModulesButtonsModule'
+                id: string
+                buttons?: Array<{
+                  __typename?: 'ComponentCoreButton'
+                  id: string
+                  text: string
+                  url: string
+                } | null> | null
+              }
             | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
@@ -10676,7 +10668,16 @@ export type StoryFragmentFragment = {
             } | null
           } | null
         }
-      | { __typename: 'ComponentModulesButtonsModule' }
+      | {
+          __typename: 'ComponentModulesButtonsModule'
+          id: string
+          buttons?: Array<{
+            __typename?: 'ComponentCoreButton'
+            id: string
+            text: string
+            url: string
+          } | null> | null
+        }
       | {
           __typename: 'ComponentModulesImage'
           alt_text?: string | null
@@ -12080,6 +12081,13 @@ type StoryComponentsFragment_ComponentCoreStandAloneLink_Fragment = {
 
 type StoryComponentsFragment_ComponentModulesButtonsModule_Fragment = {
   __typename: 'ComponentModulesButtonsModule'
+  id: string
+  buttons?: Array<{
+    __typename?: 'ComponentCoreButton'
+    id: string
+    text: string
+    url: string
+  } | null> | null
 }
 
 type StoryComponentsFragment_ComponentModulesImage_Fragment = {
@@ -13019,7 +13027,16 @@ export type ThemeQuery = {
                       } | null
                     } | null
                   }
-                | { __typename: 'ComponentModulesButtonsModule' }
+                | {
+                    __typename: 'ComponentModulesButtonsModule'
+                    id: string
+                    buttons?: Array<{
+                      __typename?: 'ComponentCoreButton'
+                      id: string
+                      text: string
+                      url: string
+                    } | null> | null
+                  }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -13580,7 +13597,16 @@ export type ThemesQuery = {
                       } | null
                     } | null
                   }
-                | { __typename: 'ComponentModulesButtonsModule' }
+                | {
+                    __typename: 'ComponentModulesButtonsModule'
+                    id: string
+                    buttons?: Array<{
+                      __typename?: 'ComponentCoreButton'
+                      id: string
+                      text: string
+                      url: string
+                    } | null> | null
+                  }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -14149,7 +14175,16 @@ export type StoriesRelatedToThemeQuery = {
                       } | null
                     } | null
                   }
-                | { __typename: 'ComponentModulesButtonsModule' }
+                | {
+                    __typename: 'ComponentModulesButtonsModule'
+                    id: string
+                    buttons?: Array<{
+                      __typename?: 'ComponentCoreButton'
+                      id: string
+                      text: string
+                      url: string
+                    } | null> | null
+                  }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -14698,7 +14733,16 @@ export type ThemeFragmentFragment = {
                   } | null
                 } | null
               }
-            | { __typename: 'ComponentModulesButtonsModule' }
+            | {
+                __typename: 'ComponentModulesButtonsModule'
+                id: string
+                buttons?: Array<{
+                  __typename?: 'ComponentCoreButton'
+                  id: string
+                  text: string
+                  url: string
+                } | null> | null
+              }
             | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
@@ -15245,7 +15289,16 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                   } | null
                 } | null
               }
-            | { __typename: 'ComponentModulesButtonsModule' }
+            | {
+                __typename: 'ComponentModulesButtonsModule'
+                id: string
+                buttons?: Array<{
+                  __typename?: 'ComponentCoreButton'
+                  id: string
+                  text: string
+                  url: string
+                } | null> | null
+              }
             | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
@@ -15775,7 +15828,16 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                   } | null
                 } | null
               }
-            | { __typename: 'ComponentModulesButtonsModule' }
+            | {
+                __typename: 'ComponentModulesButtonsModule'
+                id: string
+                buttons?: Array<{
+                  __typename?: 'ComponentCoreButton'
+                  id: string
+                  text: string
+                  url: string
+                } | null> | null
+              }
             | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
@@ -16342,7 +16404,16 @@ export type TriplyRecordQuery = {
                       } | null
                     } | null
                   }
-                | { __typename: 'ComponentModulesButtonsModule' }
+                | {
+                    __typename: 'ComponentModulesButtonsModule'
+                    id: string
+                    buttons?: Array<{
+                      __typename?: 'ComponentCoreButton'
+                      id: string
+                      text: string
+                      url: string
+                    } | null> | null
+                  }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -16900,7 +16971,16 @@ export type TriplyRecordsQuery = {
                       } | null
                     } | null
                   }
-                | { __typename: 'ComponentModulesButtonsModule' }
+                | {
+                    __typename: 'ComponentModulesButtonsModule'
+                    id: string
+                    buttons?: Array<{
+                      __typename?: 'ComponentCoreButton'
+                      id: string
+                      text: string
+                      url: string
+                    } | null> | null
+                  }
                 | {
                     __typename: 'ComponentModulesImage'
                     alt_text?: string | null
@@ -17457,7 +17537,16 @@ export type TriplyRecordFragmentFragment = {
                   } | null
                 } | null
               }
-            | { __typename: 'ComponentModulesButtonsModule' }
+            | {
+                __typename: 'ComponentModulesButtonsModule'
+                id: string
+                buttons?: Array<{
+                  __typename?: 'ComponentCoreButton'
+                  id: string
+                  text: string
+                  url: string
+                } | null> | null
+              }
             | {
                 __typename: 'ComponentModulesImage'
                 alt_text?: string | null
@@ -18559,6 +18648,9 @@ export const StoryComponentsFragmentFragmentDoc = gql`
     ... on ComponentModulesSideImageWithText {
       ...ComponentModulesSideImageWithTextFragment
     }
+    ... on ComponentModulesButtonsModule {
+      ...ComponentModulesButtonsModuleFragment
+    }
     ... on Error {
       ...ErrorFragment
     }
@@ -18573,6 +18665,7 @@ export const StoryComponentsFragmentFragmentDoc = gql`
   ${ComponentCoreMuxAudioFragmentFragmentDoc}
   ${ComponentCoreMuxVideoFragmentFragmentDoc}
   ${ComponentModulesSideImageWithTextFragmentFragmentDoc}
+  ${ComponentModulesButtonsModuleFragmentFragmentDoc}
   ${ErrorFragmentFragmentDoc}
 `
 export const NestedStoryFragmentFragmentDoc = gql`

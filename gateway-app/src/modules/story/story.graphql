@@ -707,7 +707,7 @@ fragment StoryComponentsFragment on StoryComponentsDynamicZone {
     ...ComponentModulesSideImageWithTextFragment
   }
   ... on ComponentModulesButtonsModule {
-    ...ComponentModulesButtonFragment
+    ...ComponentModulesButtonsModuleFragment
   }
   ... on Error {
     ...ErrorFragment
