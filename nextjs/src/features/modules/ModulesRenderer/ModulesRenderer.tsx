@@ -165,23 +165,31 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
 
           if (component?.__typename === 'ComponentModulesStandaloneLinks') {
             console.log(component)
-            // if (!component.buttons || component.buttons?.length === 0) {
-            //   return null
-            // }
-            // return (
-            //   <ButtonGroup key={keyExtractor(component.id, index, array)} isStoryPage={isStoryPage}>
-            //     {component.buttons.map(button => {
-            //       if (!button.text || !button.url) {
-            //         return null
-            //       }
-            //       return (
-            //         <LinkButtonGroupItem key={button.id} href={button.url}>
-            //           {button.text}
-            //         </LinkButtonGroupItem>
-            //       )
-            //     })}
-            //   </ButtonGroup>
-            // )
+            if (!component.standaloneLinks || component.standaloneLinks?.length === 0) {
+              return null
+            }
+            return (
+              <ButtonGroup key={keyExtractor(component.id, index, array)}>
+                {component.standaloneLinks.map(link => {
+                  if (!link.label || (!link.url && !link.attachment)) {
+                    return null
+                  }
+                  const href =
+                    (!link.attachment?.data ? link.url : link.attachment.data?.attributes?.url) ??
+                    undefined
+
+                  const variant = link.attachment?.data ? 'download' : 'link'
+
+                  if (!href) return null
+
+                  return (
+                    <StandaloneLink href={href} variant={variant} key={link.id}>
+                      {link.label}
+                    </StandaloneLink>
+                  )
+                })}
+              </ButtonGroup>
+            )
           }
 
           // TODO: uncomment after component is connected to collections again
