@@ -164,7 +164,6 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
           }
 
           if (component?.__typename === 'ComponentModulesStandaloneLinks') {
-            console.log(component)
             if (!component.standaloneLinks || component.standaloneLinks?.length === 0) {
               return null
             }
