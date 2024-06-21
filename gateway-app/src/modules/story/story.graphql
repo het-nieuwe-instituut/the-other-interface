@@ -706,6 +706,9 @@ fragment StoryComponentsFragment on StoryComponentsDynamicZone {
   ... on ComponentModulesSideImageWithText {
     ...ComponentModulesSideImageWithTextFragment
   }
+  ... on ComponentModulesButtonsModule {
+    ...ComponentModulesButtonFragment
+  }
   ... on Error {
     ...ErrorFragment
   }
