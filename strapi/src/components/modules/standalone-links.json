@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_modules_standalone_links",
+  "info": {
+    "displayName": "Standalone Links",
+    "icon": "cursor"
+  },
+  "options": {},
+  "attributes": {
+    "StandaloneLink": {
+      "type": "component",
+      "repeatable": true,
+      "component": "core.stand-alone-link"
+    }
+  }
+}

@@ -2,17 +2,21 @@ import { cva } from 'class-variance-authority'
 
 export const ButtonVariants = cva(
   [
-    'flex w-max flex-row items-center justify-center gap-2 border border-solid border-blue text-blue-100 transition-colors',
+    'flex w-max flex-row items-center justify-center gap-2 text-blue-100 transition-colors',
     'hover:border-[rgba(0,0,0,0.2)] hover:bg-blue-100 hover:text-pink-100 ',
     'active:border-[rgba(0,0,0,0.2)] active:bg-blue-100 active:text-pink-100 ',
     'disabled:border-[rgba(0,0,0,0.2)] disabled:bg-transparent disabled:text-[rgba(0,0,0,0.2)]',
-    ' text-blue-600',
+    'text-blue-600',
   ],
   {
     variants: {
       intent: {
         primary: [''],
-        secondary: ['h-12'],
+        secondary: [
+          'border-b border-black',
+          'h-12 text-left font-social-large text-[16px] font-normal leading-tight tracking-tight text-black-100',
+          'hover:border-black hover:bg-black-100 hover:px-2',
+        ],
         tertiary: [
           'h-12 border-none px-5',
           'text-center font-social-large text-[16px] font-normal leading-tight tracking-tight text-black-100',
@@ -24,7 +28,7 @@ export const ButtonVariants = cva(
           '*:text-white',
         ],
         invertedSecondary: [
-          'border-blue-100 bg-blue-100 text-pink-100 hover:border-blue-100 active:border-blue-100',
+          'border-blue-100 hover:border-blue-100 active:border-blue-100 bg-blue-100 text-pink-100',
         ],
       },
       size: {

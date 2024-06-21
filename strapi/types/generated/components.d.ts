@@ -241,6 +241,17 @@ export interface ModulesSideImageWithText extends Schema.Component {
   }
 }
 
+export interface ModulesStandaloneLinks extends Schema.Component {
+  collectionName: 'components_modules_standalone_links'
+  info: {
+    displayName: 'Standalone Links'
+    icon: 'cursor'
+  }
+  attributes: {
+    StandaloneLink: Attribute.Component<'core.stand-alone-link', true>
+  }
+}
+
 export interface ModulesSubtitle extends Schema.Component {
   collectionName: 'components_modules_subtitles'
   info: {
@@ -296,6 +307,7 @@ declare module '@strapi/types' {
       'modules.image': ModulesImage
       'modules.pullquote': ModulesPullquote
       'modules.side-image-with-text': ModulesSideImageWithText
+      'modules.standalone-links': ModulesStandaloneLinks
       'modules.subtitle': ModulesSubtitle
       'modules.text-module': ModulesTextModule
       'modules.title-module': ModulesTitleModule
