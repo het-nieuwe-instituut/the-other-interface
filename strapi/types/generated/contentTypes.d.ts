@@ -1000,6 +1000,7 @@ export interface ApiStoryStory extends Schema.CollectionType {
         'modules.title-module',
         'modules.image-carousel',
         'modules.image',
+        'modules.buttons-module',
         'core.stand-alone-link',
         'core.mux-audio',
         'core.mux-video',
@@ -1028,7 +1029,13 @@ export interface ApiStoryStory extends Schema.CollectionType {
     publicationDate: Attribute.Component<'core.publication-date'> &
       Attribute.SetPluginOptions<{
         i18n: {
-          localized: false
+          localized: true
+        }
+      }>
+    storyLinks: Attribute.Component<'modules.buttons-module'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true
         }
       }>
     shortDescription: Attribute.Text &
