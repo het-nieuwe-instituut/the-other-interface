@@ -267,6 +267,9 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
               />
             )
           }
+          if (component?.__typename === 'ComponentModulesSideImageWithText') {
+            console.log('here', component)
+          }
         }
         return null
       }) ?? null}
