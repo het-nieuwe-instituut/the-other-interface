@@ -20,6 +20,8 @@
   "switchToLiveServer": "Switch to test server",
   "go": "Search",
   "noDataFound": "No data found",
+  "languageDisclaimer": "All collection data on the platform has been automatically translated into English",
+  "noSuggestionsFound": "No suggestions found",
   "audio": "The audio is not ready yet, please try again later.",
   "video": "The video is not ready yet, please try again later.",
   "seeFullImage": "See full image",

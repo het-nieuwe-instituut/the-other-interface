@@ -1,11 +1,11 @@
 import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/SearchFilterBox'
 import { SEARCH_CATEGORIES_ARRAY, SearchCategory } from '@/features/shared/utils/categories'
 import { usePresenter } from './usePresenter'
-import { useFilters } from '@/features/shared/hooks/search/useFilters'
+import { useFilterActions } from '@/features/shared/hooks/search/useFilters'
 
 export const CategorySuggestions: React.FC = () => {
   const { t, searchCategory, setSearchCategory, isCategorySuggestionsOpen } = usePresenter()
-  const { clearFilters } = useFilters()
+  const { clearFilters } = useFilterActions()
 
   const handleClick = (category: SearchCategory) => {
     setSearchCategory(category)

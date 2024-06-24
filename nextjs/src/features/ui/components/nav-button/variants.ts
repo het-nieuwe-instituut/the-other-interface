@@ -11,6 +11,9 @@ export const NavButtonVariants = cva(
   {
     variants: {
       variant: {
+        jumbo: [
+          'w-[808px] rounded-sm border border-black bg-black-100 py-[32px] font-social-large font-bold tracking-[-0.32px] after:border-transparent hover:border hover:border-black hover:bg-ivory-100 [&:not(:last-child)]:mb-4',
+        ],
         textPrimary: [
           'h-[27px]',
           'text-center font-social-large text-[21px] font-normal leading-7 tracking-tight',
@@ -19,7 +22,14 @@ export const NavButtonVariants = cva(
           'h-[22px]',
           'text-center font-social-large text-[14px] font-normal leading-[18.20px]',
         ],
-        menuPrimary: ['h-[43px]'],
+        menuPrimary: [
+          'h-[27px]',
+          'text-center font-social-large text-[14px] font-normal leading-7 tracking-tight',
+        ],
+        menuSecondary: [
+          'h-[27px]',
+          'text-center font-social-large text-[21px] font-normal leading-7 tracking-tight',
+        ],
         footerPrimary: [
           'h-[27px]',
           'text-center font-social-large text-[21px] font-normal leading-7 tracking-tight',
@@ -40,9 +50,12 @@ export const NavButtonVariants = cva(
       color: {
         black: 'text-black-100 after:border-black after:text-black-100',
         white: 'text-white after:border-white after:text-white ',
+        ivoryNoBorder: 'text-ivory-100 hover:text-black-100',
         inverted: 'text-pink-100 after:border-pink-100 after:text-pink-100',
         invertedPinkHover:
-          'hover: text-pink-100 after:border-pink-100 after:text-pink-100 hover:bg-pink-100 hover:text-black-100',
+          'hover: text-pink-100 after:border-pink-100 after:text-pink-100 hover:bg-pink-100 hover:text-blue-100',
+        invertedPaleHover:
+          'hover: text-pink-100 after:border-pink-100 after:text-pink-100 hover:bg-transparent hover:text-pink-60 hover:after:border-transparent focus:w-fit focus:bg-pink-100 focus:text-blue-100 focus:outline-none',
       },
       state: {
         error: [

@@ -104,6 +104,22 @@ const storyMetaByLocale = {
             },
           ],
         },
+        storyLinks: {
+          id: '5',
+          __typename: 'ComponentModulesButtonsModule',
+          buttons: [
+            {
+              id: '2',
+              text: 'Instagram',
+              url: 'https://www.instagram.com/',
+              attachment: {
+                data: null,
+              },
+              hasAttachment: null,
+            },
+          ],
+          buttonStyle: 'Default',
+        },
       },
     },
   },

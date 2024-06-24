@@ -1,16 +1,38 @@
-query Zoom2Publications($page: Int!, $pageSize: Int!, $text: String, $locale: Locale!) {
-    zoomLevel2(entityName: Publications, page: $page, pageSize: $pageSize, text: $text, locale: $locale) {
-        page,
-        nodes {
-            title
-			thumbnail
-			id
-        }
+query Zoom2Publications(
+  $page: Int!
+  $pageSize: Int!
+  $text: String
+  $locale: Locale!
+  $selectedFilterSuggestions: [SelectedFilterSuggestion!]
+) {
+  zoomLevel2(
+    entityName: Publications
+    page: $page
+    pageSize: $pageSize
+    text: $text
+    locale: $locale
+    selectedFilterSuggestions: $selectedFilterSuggestions
+  ) {
+    page
+    nodes {
+      title
+      thumbnail
+      id
     }
+  }
 }
 
-query Zoom2PublicationsAmount($text: String, $locale: Locale!) {
-    zoomLevel2Amount(entityName: Publications, text: $text, locale: $locale) {
-        total
-    }
+query Zoom2PublicationsAmount(
+  $text: String
+  $locale: Locale!
+  $selectedFilterSuggestions: [SelectedFilterSuggestion!]
+) {
+  zoomLevel2Amount(
+    entityName: Publications
+    text: $text
+    locale: $locale
+    selectedFilterSuggestions: $selectedFilterSuggestions
+  ) {
+    total
+  }
 }
