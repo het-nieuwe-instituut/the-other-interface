@@ -4,7 +4,6 @@ import { Box, useBreakpoint } from '../../configs/chakra'
 
 import { MOBILE_OVERLAY_Z_INDEX } from '../../constants/mainConstants'
 import { StaticHeader } from '../StaticHeader/StaticHeader'
-import useDisableScroll from '../../hooks/ui/useDisableScroll'
 import { CSSProperties } from 'react'
 
 interface Props {
@@ -25,10 +24,6 @@ const MobileOverlayProvider = (props: Props) => {
 
 const MobileOverlay = () => {
   const { t: tCommon } = useLooseTypeSafeTranslation('common')
-  const breakpoint = useBreakpoint()
-  const isMobile = breakpoint === 'sm'
-
-  useDisableScroll(isMobile)
 
   return (
     <div
@@ -37,7 +32,7 @@ const MobileOverlay = () => {
     >
       <div
         style={{ '--z-index': `${MOBILE_OVERLAY_Z_INDEX - 1}` } as CSSProperties}
-        className="absolute z-[var(--z-index-minus-1)] h-screen w-screen bg-[#CCCED0] opacity-60 backdrop-blur-[20px]"
+        className="absolute z-[var(--z-index-minus-1)] h-screen w-screen bg-[#CCCED0] opacity-70 before:backdrop-blur-[20px]"
       />
       <StaticHeader />
       <div

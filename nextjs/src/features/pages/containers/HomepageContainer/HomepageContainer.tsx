@@ -2,6 +2,7 @@
 import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
 import { MainGalaxy } from '@/features/galaxyInterface/galaxies/MainGalaxy/MainGalaxy'
 import { EditorialLayer } from '@/features/shared/components/Layers/EditorialLayer/EditorialLayer'
+import MobileOverlayProvider from '@/features/shared/components/MobileOverlayProvider/MobileOverlayProvider'
 import { HomepageQuery, ThemesQuery } from 'src/generated/graphql'
 
 export type Props = {
@@ -16,9 +17,11 @@ export const HomepageContainer: React.FC<Props> = ({ homepage }) => {
 
   return (
     <>
-      <GalaxyInterface>
-        <MainGalaxy />
-      </GalaxyInterface>
+      <MobileOverlayProvider>
+        <GalaxyInterface>
+          <MainGalaxy />
+        </GalaxyInterface>
+      </MobileOverlayProvider>
 
       {editorialData && (
         <EditorialLayer
