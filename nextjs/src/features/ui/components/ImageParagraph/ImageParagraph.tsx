@@ -33,6 +33,11 @@ export const ImageParagraph = ({ component, className }: ParagraphProps) => {
           alt={component?.image_alt_text}
           height={component?.image?.data?.attributes?.height}
           width={component?.image?.data?.attributes?.width}
+          caption={
+            component?.image?.data?.attributes?.caption
+              ? component?.image?.data?.attributes?.caption
+              : ''
+          }
         />
       </div>
     </div>

@@ -9,6 +9,7 @@ fragment sideImageWithTextModuleFragment on ComponentModulesSideImageWithText {
         url
         height
         width
+        caption
       }
     }
   }
