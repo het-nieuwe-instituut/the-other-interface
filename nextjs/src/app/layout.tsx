@@ -1,5 +1,4 @@
 import { AppHead } from '@/features/shared/components/Head/AppHead'
-// import MobileOverlayProvider from '@/features/shared/components/MobileOverlayProvider/MobileOverlayProvider'
 import { TestMenu } from '@/features/shared/components/TestMenu/TestMenu'
 import { ReduxStoreProvider } from '@/features/shared/components/providers/ReduxStoreProdivder'
 import { ThemeProvider } from '@/features/shared/components/providers/ThemeProvider'

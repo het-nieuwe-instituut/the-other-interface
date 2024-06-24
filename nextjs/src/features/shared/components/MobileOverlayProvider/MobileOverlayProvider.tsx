@@ -5,6 +5,7 @@ import { useBreakpoint } from '../../configs/chakra'
 import { MOBILE_OVERLAY_Z_INDEX } from '../../constants/mainConstants'
 import { StaticHeader } from '../StaticHeader/StaticHeader'
 import { CSSProperties } from 'react'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
 
 interface Props {
   children: React.ReactNode
@@ -40,7 +41,9 @@ const MobileOverlay = () => {
         style={{ '--z-index': `${MOBILE_OVERLAY_Z_INDEX}` } as CSSProperties}
         className="relative inset-x-0 z-[var(--z-index)] mx-auto max-w-[90em] flex-wrap justify-between self-center px-8"
       >
-        <p className="text-base">{tCommon('mobileVersionIsNotYetThere')}</p>
+        <p className={TypographyVariants({ timesDot: 'lg', className: 'text-blue-100' })}>
+          {tCommon('mobileVersionIsNotYetThere')}
+        </p>
       </div>
     </div>
   )
