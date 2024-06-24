@@ -148,7 +148,10 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
               return null
             }
             return (
-              <ButtonGroup key={keyExtractor(component.id, index, array)} isStoryPage={isStoryPage}>
+              <ButtonGroup
+                key={keyExtractor(component.id, index, array)}
+                className={isStoryPage ? 'flex-wrap' : 'flex gap-4'}
+              >
                 {component.buttons.map(button => {
                   if (!button.text || !button.url) {
                     return null
