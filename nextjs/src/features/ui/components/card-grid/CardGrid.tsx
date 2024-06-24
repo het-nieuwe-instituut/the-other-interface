@@ -3,11 +3,9 @@ import React from 'react'
 import { cn } from '../../utils/cn'
 import { Card } from '../card/card'
 import { LightboxProvider } from '../lightbox/LightboxProvider'
-import { NavLinkButton } from '../nav-link-button/component'
+import { NavButton, NavButtonProps } from '../nav-button/component'
 import { Subtitle, SubtitleProps } from '../subtitle/Subtitle'
 import { TypographyVariants } from '../typography/variants'
-import NavArrowLeft from './nav-arrow-left.svg'
-import NavArrowRight from './nav-arrow-right.svg'
 
 type SpecificChildren<T> =
   | React.ReactElement<T | null | undefined | string | Element>
@@ -15,7 +13,7 @@ type SpecificChildren<T> =
   | (React.ReactElement<T | null | undefined | string | Element> | React.ReactNode)[]
 export interface CardGridProps {
   className?: string
-  children: SpecificChildren<CardGridWrapperProps | CardGridPaginationProps | null | undefined>
+  children: SpecificChildren<CardGridWrapperProps | null | undefined>
 }
 
 export const CardGrid = ({ className, children }: CardGridProps) => {
@@ -38,45 +36,17 @@ export const CardGridCardWrapper = ({ className, children }: CardGridWrapperProp
 export const CardGridCard = Card
 
 export interface CardGridFooterProps {
-  children:
-    | SpecificChildren<CardGridPaginationProps | CardGridLinkProps>[]
-    | SpecificChildren<CardGridPaginationProps | CardGridLinkProps>
+  children: SpecificChildren<CardGridLinkProps>[] | SpecificChildren<CardGridLinkProps>
 }
 export const CardGridFooter = ({ children }: CardGridFooterProps) => {
   return <div className="flex items-end justify-between">{children}</div>
 }
 
-export interface CardGridPaginationProps {
-  className?: string
-  onNext?: () => void
-  onPrevious?: () => void
-  hideNext?: boolean
-  hidePrevious?: boolean
-}
-export const CardGridPagination = ({
-  className,
-  onNext,
-  onPrevious,
-  hideNext,
-  hidePrevious,
-}: CardGridPaginationProps) => {
-  return (
-    <div className={cn('flex h-full items-center justify-center gap-2 -mr-3', className)}>
-      <button onClick={onPrevious} disabled={hidePrevious}>
-        <NavArrowLeft className={cn(hidePrevious && 'invisible')} />
-      </button>
-      <button onClick={onNext} disabled={hideNext}>
-        <NavArrowRight className={cn(hideNext && 'invisible')} />
-      </button>
-    </div>
-  )
-}
-
-export interface CardGridLinkProps extends LinkProps {
+export interface CardGridLinkProps extends NavButtonProps {
   children: string
 }
-export const CardGridLink = (props: CardGridLinkProps) => {
-  return <NavLinkButton variant={'textPrimary'} {...props} />
+export const CardGridShowMore = (props: CardGridLinkProps) => {
+  return <NavButton variant={'textPrimary'} {...props} />
 }
 
 export interface CardGridTitleProps extends SubtitleProps {}

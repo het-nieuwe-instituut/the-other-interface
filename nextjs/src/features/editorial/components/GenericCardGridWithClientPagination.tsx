@@ -1,20 +1,19 @@
 import ErrorBox from '@/features/shared/components/Error/ErrorBox'
 import { DeepPartial } from '@/features/shared/types/helpers'
 
-import { cn } from '@/features/ui/utils/cn'
-import { ComponentModulesGridModule } from 'src/generated/graphql'
-import { useClientPagination } from './useClientPagination'
+import { imageBasePath } from '@/features/modules/modulesConstants'
 import {
   CardGrid,
   CardGridCard,
   CardGridCardWrapper,
   CardGridDescription,
   CardGridFooter,
-  CardGridLink,
-  CardGridPagination,
+  CardGridShowMore,
   CardGridTitle,
 } from '@/features/ui/components/card-grid/CardGrid'
-import { imageBasePath } from '@/features/modules/modulesConstants'
+import { cn } from '@/features/ui/utils/cn'
+import { ComponentModulesGridModule } from 'src/generated/graphql'
+import { useClientPagination } from './useClientPagination'
 
 type CardGrid = DeepPartial<ComponentModulesGridModule>
 
@@ -27,9 +26,10 @@ export const GenericCardGridWithClientPagination = ({
 }) => {
   const items = grid.fields ?? []
   const itemsInPage = grid.pageSize || 6
-  const { nodes, page, lastPage, next, previous } = useClientPagination({
+  const { nodes, page, lastPage, next } = useClientPagination({
     items,
     itemsInPage: itemsInPage,
+    preservePreviousLimitedData: true,
   })
 
   if (!items || items.length === 0) {
@@ -65,18 +65,8 @@ export const GenericCardGridWithClientPagination = ({
       )}
 
       <CardGridFooter>
-        {grid.showMoreButtonTitle && (
-          <CardGridLink href={'#'}>{grid.showMoreButtonTitle ?? ''}</CardGridLink>
-        )}
-
-        {items.length > itemsInPage && (
-          <CardGridPagination
-            className="ml-auto"
-            onNext={next}
-            onPrevious={previous}
-            hidePrevious={page === 1}
-            hideNext={page === lastPage || lastPage === 1}
-          />
+        {grid.showMoreButtonTitle && (page !== lastPage || lastPage !== 1) && (
+          <CardGridShowMore onClick={next}>{grid.showMoreButtonTitle ?? ''}</CardGridShowMore>
         )}
       </CardGridFooter>
     </CardGrid>
