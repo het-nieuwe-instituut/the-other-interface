@@ -43,5 +43,8 @@
   "rightsStatusCCBY": "Creative Commons Attribution 4.0",
   "rightsStatusCCBYText": "Copyrighted material with permission for reuse. Subject to permission obtained.",
   "rightsStatusPublic": "Public Domain",
-  "rightsStatusPublicText": "This work has been identified as being free of known restrictions under copyright law, including all related and neighboring rights."
+  "rightsStatusPublicText": "This work has been identified as being free of known restrictions under copyright law, including all related and neighboring rights.",
+  "suggestionTitle": "Have a suggestion?",
+  "suggestionContributeLink": "Contribute here",
+  "suggestionLearnMoreLink": "Learn about Asterisk"
 }

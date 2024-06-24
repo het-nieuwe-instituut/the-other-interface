@@ -5,6 +5,7 @@ import { cn } from '@/features/ui/utils/cn'
 import React from 'react'
 import Link from 'next/link'
 import { useLocale } from '@/features/shared/hooks/useLocale'
+import { keyExtractor } from '@/features/shared/utils/lists'
 
 interface Props {
   component?: TableModuleType
@@ -74,9 +75,9 @@ const ResponsiveTable: React.FC<Props> = ({ component, LoadMore }: Props) => {
         <table className="min-w-full">
           <thead className="hidden lg:table-header-group">
             <tr className="tr-border-gradient">
-              {component.tableHead?.map(item => (
+              {component.tableHead?.map((item, i) => (
                 <th
-                  key={item.id}
+                  key={keyExtractor(item.id, i, component.tableHead!)}
                   className={cn(
                     TypographyVariants({ socialLarge: 'sidebarTitle' }),
                     'text-black-100 text-left py-2 pr-2'
@@ -110,7 +111,7 @@ const ResponsiveTable: React.FC<Props> = ({ component, LoadMore }: Props) => {
       </div>
       <div className="lg:hidden">
         {component.tableBody?.map((item, rowIndex) => (
-          <div key={rowIndex} className="py-4 tr-border-gradient flex flex-col justify-center">
+          <div key={rowIndex} className="tr-border-gradient flex flex-col justify-center py-4">
             {item.TableBodyItem?.map((bodyItem, cellIndex) => (
               <Link href={`/detail/${component.type}/${item.id}?lang=${lang}`} key={bodyItem.id}>
                 <span

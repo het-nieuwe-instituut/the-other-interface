@@ -6,7 +6,6 @@ import { createYoga } from 'graphql-yoga'
 import '../../../graphql.schema.json'
 import { HomePageData } from '../../mocks/mockData/homepageData'
 import { LandingPagesData } from '../../mocks/mockData/landingpagesData'
-import { menuPagesData } from '../../mocks/mockData/menuPagesData'
 import { storyData } from '../../mocks/mockData/storyData'
 import {
   peopleZoomLevel2Data,
@@ -130,14 +129,6 @@ const customResolvers = {
 
     relations: () => {
       return zoomLevel3Data.relations.relations
-    },
-
-    menupages() {
-      return menuPagesData.menupages
-    },
-
-    menupage() {
-      return menuPagesData.menupages.data[0]
     },
 
     themes() {
