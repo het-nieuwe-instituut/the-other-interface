@@ -269,10 +269,23 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
             )
           }
           if (component?.__typename === 'ComponentModulesSideImageWithText') {
-            if (!component.sideText || !component.image) return null
+            if (
+              !component.sideText ||
+              !component.image.data?.attributes?.url ||
+              !component.image.data?.attributes?.height ||
+              !component.image.data?.attributes?.width ||
+              !component.image.data?.attributes?.caption
+            )
+              return null
             return (
               <ImageParagraph
                 component={component}
+                sideText={component.sideText}
+                imageSrc={component.image.data?.attributes?.url}
+                imageHeight={component.image.data?.attributes?.height}
+                imageWidth={component.image.data?.attributes?.width}
+                imageCaption={component.image.data?.attributes?.caption}
+                imageAltText={component.image_alt_text}
                 key={keyExtractor(component.id, index, array)}
               />
             )

@@ -7,7 +7,6 @@ import { cn } from '../../utils/cn'
 import { Subtitle } from '../subtitle/Subtitle'
 import { TypographyVariants } from '../typography/variants'
 import styles from './TailwindMarkdown.module.css'
-import { Title } from '../title/Title'
 
 export interface TailwindMarkdownProps {
   className?: string
@@ -38,7 +37,7 @@ const components = {
   h4: ({ children }: { children: ReactNode }) => <Subtitle>{children as string}</Subtitle>,
   h3: ({ children }: { children: ReactNode }) => <Subtitle>{children as string}</Subtitle>,
   h2: ({ children }: { children: ReactNode }) => <Subtitle>{children as string}</Subtitle>,
-  h1: ({ children }: { children: ReactNode }) => <Title>{children as string}</Title>,
+  h1: ({ children }: { children: ReactNode }) => <Subtitle>{children as string}</Subtitle>,
   li: ({ children }: { children: ReactNode }) => (
     <li className={TypographyVariants({ responsive: 'paragraph' })}>{children}</li>
   ),
