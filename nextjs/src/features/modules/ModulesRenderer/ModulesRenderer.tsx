@@ -1,14 +1,14 @@
+import ErrorBox from '@/features/shared/components/Error/ErrorBox'
 import {
   ImageCarousel,
   ImageCarouselItem,
 } from '@/features/ui/components/image-carousel/ImageCarousel'
+import { MuxAudioPlayer } from '@/features/ui/components/mux-audio/MuxAudioPlayer'
+import { MuxVideoPlayer } from '@/features/ui/components/mux-video/MuxVideoPlayer'
 import { Title } from '@/features/ui/components/title/Title'
 import { cn } from '@/features/ui/utils/cn'
 import { StandaloneLink } from 'src/app/ks/link/StandaloneLink'
 import {
-  ComponentModulesGridModule,
-  HomepageComponentsDynamicZone,
-  HomepageQuery,
   LandingpageBySlugQuery,
   Maybe,
   MenupageComponentsDynamicZone,
@@ -17,12 +17,9 @@ import {
 import { Paragraph } from '../../ui/components/Paragraph/Paragraph'
 import { ButtonGroup, LinkButtonGroupItem } from '../../ui/components/button-group/component'
 import { Subtitle } from '../../ui/components/subtitle/Subtitle'
-import { GridModule } from '../components/GridModule/GridModule'
 import { ImageModuleWrapper } from '../components/ImageModuleWrapper'
 import { Pullquote } from '../components/Pullquote/Pullquote'
-import { MuxAudioPlayer } from '@/features/ui/components/mux-audio/MuxAudioPlayer'
-import { MuxVideoPlayer } from '@/features/ui/components/mux-video/MuxVideoPlayer'
-import ErrorBox from '@/features/shared/components/Error/ErrorBox'
+import { GenericCardGridWithClientPagination } from '@/features/editorial/components/GenericCardGridWithClientPagination'
 
 interface Props {
   components: DynamicComponents
@@ -30,11 +27,9 @@ interface Props {
 }
 
 export type DynamicComponents =
-  | NonNullable<NonNullable<HomepageQuery['homepage']['data']>['attributes']>['components']
   | NonNullable<
       NonNullable<LandingpageBySlugQuery['landingpages']['data']>[0]['attributes']
     >['components']
-  | Maybe<Array<HomepageComponentsDynamicZone>>
   | NonNullable<NonNullable<StoryByIdQuery['storyByLocale']['data']>['attributes']>['components']
   | Maybe<Array<MenupageComponentsDynamicZone>>
 
@@ -177,9 +172,9 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
 
           if (component?.__typename === 'ComponentModulesGridModule') {
             return (
-              <GridModule
+              <GenericCardGridWithClientPagination
                 key={keyExtractor(component.id, index, array)}
-                component={component as ComponentModulesGridModule}
+                grid={component}
               />
             )
           }
