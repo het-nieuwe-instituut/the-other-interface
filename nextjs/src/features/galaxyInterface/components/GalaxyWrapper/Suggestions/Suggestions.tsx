@@ -1,60 +1,58 @@
+import { InlineThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
 import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/SearchFilterBox'
 import { State } from '@/features/shared/configs/store'
-import { Filter, useFilters } from '@/features/shared/hooks/search/useFilters'
+import { useFilterSuggestionsQuery } from '@/features/shared/hooks/queries/useFilterSuggestionsQuery'
+import { Filter, useSelectedFilters } from '@/features/shared/hooks/search/useFilters'
+import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { SEARCH_CATEGORIES } from '@/features/shared/utils/categories'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
+import { cn } from '@/features/ui/utils/cn'
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
-
-const mockData = [
-  {
-    field: 'Maker',
-    value:
-      'Theo van Doesburg Theo van Doesburg Theo van Doesburg Theo van Doesburg Theo van Doesburg Theo van Doesburg Theo van Doesburg Theo van Doesburg Theo van Doesburg Theo van Doesburg',
-    id: '1',
-  },
-  {
-    field: 'Subject',
-    value: 'Monuments',
-    id: '2',
-  },
-  {
-    field: 'Subject',
-    value: 'Architecture',
-    id: '3',
-  },
-  {
-    field: 'Material',
-    value: 'Cardboard',
-    id: '4',
-  },
-  {
-    field: 'Maker',
-    value: 'Jan Wils',
-    id: '5',
-  },
-]
+import { EnumTriplyrecordType } from 'src/generated/graphql'
+import { useDebounceValue } from 'usehooks-ts'
 
 export const COLLECTION_HILIGHT_ID = 'collection-highlights-id'
 
 export const CollectionHighlightsFilter = {
-  field: 'Subjects',
+  key: 'Subjects',
   value: 'Collection Highlights',
   id: COLLECTION_HILIGHT_ID,
 }
 
 type Props = {
   handleSelectFilter: (filters: Filter) => void
+  type: EnumTriplyrecordType
 }
 
-export const Suggestions: React.FC<Props> = ({ handleSelectFilter }) => {
+export const SuggestionsContainer: React.FC<Props> = ({ handleSelectFilter, type }) => {
+  const { t: commonT } = useTypeSafeTranslation('common')
   const { searchValue, searchCategory } = useSelector((state: State) => state.shared)
+  const [debouncedSearchValue] = useDebounceValue(searchValue, 500)
+  const selectedFilters = useSelectedFilters()
   const searchIsMatchShowingCollectionHighlight = CollectionHighlightsFilter.value
     .toLowerCase()
     .includes(searchValue.toLowerCase())
 
-  const { selectedFilters } = useFilters()
+  const {
+    data: suggestions,
+    isLoading,
+    isError,
+  } = useFilterSuggestionsQuery({
+    type,
+    search: debouncedSearchValue,
+  })
+
+  const suggestionsData = useMemo(() => suggestions?.filterSuggestions || [], [suggestions])
 
   const items = useMemo(() => {
+    const filteredSuggestions = suggestionsData.filter(
+      suggestion =>
+        !selectedFilters.find(
+          selected => selected.key === suggestion.key && selected.value === suggestion.value
+        )
+    )
+
     const filtersWithoutCollectionHighlights = selectedFilters.filter(
       filter => filter.id !== COLLECTION_HILIGHT_ID
     )
@@ -64,23 +62,72 @@ export const Suggestions: React.FC<Props> = ({ handleSelectFilter }) => {
       filtersWithoutCollectionHighlights.length === 0 &&
       searchCategory !== SEARCH_CATEGORIES.stories
     ) {
-      return [CollectionHighlightsFilter, ...mockData]
+      return [
+        { value: CollectionHighlightsFilter.value, key: CollectionHighlightsFilter.key },
+        ...filteredSuggestions,
+      ]
     }
 
-    return mockData
-  }, [searchIsMatchShowingCollectionHighlight, mockData, selectedFilters, searchCategory])
+    return filteredSuggestions
+  }, [searchCategory, searchIsMatchShowingCollectionHighlight, selectedFilters, suggestionsData])
 
+  if (isLoading) {
+    return (
+      <div className="my-4">
+        <InlineThemedSpinner />
+      </div>
+    )
+  }
+
+  if (isError) {
+    return (
+      <div className="my-4">
+        <p
+          className={TypographyVariants({
+            socialLarge: 'md',
+          })}
+        >
+          {commonT('somethingWentWrongAndRetry')}
+        </p>
+      </div>
+    )
+  }
+
+  if (!items || items.length === 0 || !searchCategory) {
+    return (
+      <div className="my-4">
+        <p className={cn('text-pink.100', TypographyVariants({ socialLarge: 'textfield' }))}>
+          {commonT('noSuggestionsFound')}
+        </p>
+      </div>
+    )
+  }
+
+  return <Suggestions suggestionsData={items} handleSelectFilter={handleSelectFilter} />
+}
+
+export const Suggestions = ({
+  handleSelectFilter,
+  suggestionsData,
+}: {
+  handleSelectFilter: (filterSuggestion: Filter) => void
+  suggestionsData: NonNullable<
+    NonNullable<ReturnType<typeof useFilterSuggestionsQuery>['data']>['filterSuggestions']
+  >
+}) => {
   return (
     <>
-      {items.map(item => (
-        <div className="max-w-full" key={item.id}>
-          <SearchFilterBox
-            category={item.field}
-            subCategory={item.value}
-            onClick={() => handleSelectFilter(item)}
-          />
-        </div>
-      ))}
+      {suggestionsData.map(item => {
+        return (
+          <div className="max-w-full" key={item.value}>
+            <SearchFilterBox
+              category={item.key}
+              subCategory={item.value}
+              onClick={() => handleSelectFilter({ id: item.value, ...item })}
+            />
+          </div>
+        )
+      })}
     </>
   )
 }

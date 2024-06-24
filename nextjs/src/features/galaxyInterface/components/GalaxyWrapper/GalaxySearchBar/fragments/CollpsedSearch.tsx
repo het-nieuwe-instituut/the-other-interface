@@ -1,6 +1,6 @@
+import { cn } from '@/features/ui/utils/cn'
 import SearchIconCollapsed from '@/icons/search-icon-collapsed.svg'
 import { IconButton } from '@/features/ui/components/icon-button/component'
-import { cn } from '@/features/ui/utils/cn'
 
 type Props = {
   toggleSearchBar: () => void
@@ -14,7 +14,7 @@ export const CollpsedSearch = ({ toggleSearchBar, className }: Props) => {
         intent={'ghost'}
         size={'small'}
         icon={<SearchIconCollapsed />}
-        className={'border-blue z-20 flex size-[60px] border'}
+        className="z-20 flex size-[60px] border border-blue"
         onClick={toggleSearchBar}
       />
     </div>

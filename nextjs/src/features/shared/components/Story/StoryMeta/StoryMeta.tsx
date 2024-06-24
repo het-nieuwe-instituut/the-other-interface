@@ -142,7 +142,7 @@ export const StoryMeta: React.FC = () => {
                   href={addLocaleToUrl(
                     `/landingpage?category=stories&filters=${encodeFilters([
                       {
-                        field: 'theme',
+                        key: 'theme',
                         value: theme.name ?? '',
                         id: theme.id ?? '',
                       },
@@ -188,7 +188,7 @@ export const StoryMeta: React.FC = () => {
                   href={addLocaleToUrl(
                     `/landingpage?category=stories&filters=${encodeFilters([
                       {
-                        field: 'location',
+                        key: 'location',
                         value: location.name ?? '',
                         id: location.id ?? '',
                       },
@@ -252,7 +252,7 @@ export const StoryMeta: React.FC = () => {
               href={addLocaleToUrl(
                 `/landingpage?category=stories&filters=${encodeFilters([
                   {
-                    field: 'author',
+                    key: 'author',
                     value: authorFormatted.name || '',
                     id: authorFormatted.id || '',
                   },
@@ -289,7 +289,7 @@ export const StoryMeta: React.FC = () => {
               href={addLocaleToUrl(
                 `/landingpage?category=stories&filters=${encodeFilters([
                   {
-                    field: 'author',
+                    key: 'author',
                     value: authorFormatted.name || '',
                     id: authorFormatted.id || '',
                   },
