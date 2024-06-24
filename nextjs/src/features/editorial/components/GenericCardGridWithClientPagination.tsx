@@ -14,6 +14,7 @@ import {
 import { cn } from '@/features/ui/utils/cn'
 import { ComponentModulesGridModule } from 'src/generated/graphql'
 import { useClientPagination } from './useClientPagination'
+import { getTriplyOrStoryHref } from './getTriplyOrStoryHref'
 
 type CardGrid = DeepPartial<ComponentModulesGridModule>
 
@@ -54,8 +55,8 @@ export const GenericCardGridWithClientPagination = ({
                 description={item.subtitle ?? undefined}
                 image={imageSrc}
                 href={getTriplyOrStoryHref({
-                  story: item.story,
-                  triply_record: item.triplyRecord,
+                  story: item.story ?? undefined,
+                  triply_record: item.triplyRecord ?? undefined,
                 })}
                 alt={item.thumbnail?.data?.attributes?.alternativeText ?? ''}
               ></CardGridCard>
@@ -71,20 +72,4 @@ export const GenericCardGridWithClientPagination = ({
       </CardGridFooter>
     </CardGrid>
   )
-}
-
-function getTriplyOrStoryHref({
-  story,
-  triply_record,
-}: {
-  story?: NonNullable<NonNullable<CardGrid['fields']>[number]>['story']
-  triply_record?: NonNullable<NonNullable<CardGrid['fields']>[number]>['triplyRecord']
-}) {
-  if (triply_record && triply_record.data?.attributes) {
-    return `details/${triply_record.data.attributes.type}/${triply_record.data.attributes.recordId}`
-  }
-  if (story && story.data) {
-    return `details/stories/${story.data.id}`
-  }
-  return undefined
 }

@@ -16,8 +16,9 @@ import {
   EnumComponentmodulescarouselVariant,
 } from 'src/generated/graphql'
 import { useClientPagination } from './useClientPagination'
+import { getTriplyOrStoryHref } from './getTriplyOrStoryHref'
 
-type CarouselGrid = DeepPartial<ComponentModulesCarousel>
+export type CarouselGrid = DeepPartial<ComponentModulesCarousel>
 
 export const GenericCarouselGridWithClientPagination = ({
   carousel,
@@ -86,8 +87,8 @@ const Grid = ({
                 description={item.description ?? undefined}
                 image={item.image?.data?.attributes?.url ?? undefined}
                 href={getTriplyOrStoryHref({
-                  story: item.story,
-                  triply_record: item.triply_record,
+                  story: item.story ?? undefined,
+                  triply_record: item.triply_record ?? undefined,
                 })}
                 alt={item.alt_text ?? ''}
               ></CarouselGridCard>
@@ -115,20 +116,4 @@ const Grid = ({
       </CarouselGridFooter>
     </CarouselGrid>
   )
-}
-
-function getTriplyOrStoryHref({
-  story,
-  triply_record,
-}: {
-  story?: NonNullable<NonNullable<CarouselGrid['images']>[number]>['story']
-  triply_record?: NonNullable<NonNullable<CarouselGrid['images']>[number]>['triply_record']
-}) {
-  if (triply_record && triply_record.data?.attributes) {
-    return `details/${triply_record.data.attributes.type}/${triply_record.data.attributes.recordId}`
-  }
-  if (story && story.data) {
-    return `details/stories/${story.data.id}`
-  }
-  return undefined
 }
