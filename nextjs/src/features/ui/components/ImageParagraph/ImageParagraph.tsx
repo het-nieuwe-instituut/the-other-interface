@@ -21,16 +21,20 @@ export const ImageParagraph = ({ component, className }: ParagraphProps) => {
     return null
 
   return (
-    <div className={cn(className)}>
-      <TailwindMarkdown className={cn('max-w-[808px] bg-inherit', className)}>
-        {component.sideText}
-      </TailwindMarkdown>
-      <ImageWithCaption
-        src={component?.image?.data?.attributes?.url}
-        alt={component?.image_alt_text}
-        height={component?.image?.data?.attributes?.height}
-        width={component?.image?.data?.attributes?.width}
-      />
+    <div className={cn('flex', className)}>
+      <div className="w-2/3">
+        <TailwindMarkdown className={cn('max-w-[808px] bg-inherit', className)}>
+          {component.sideText}
+        </TailwindMarkdown>
+      </div>
+      <div className="w-1/3">
+        <ImageWithCaption
+          src={component?.image?.data?.attributes?.url}
+          alt={component?.image_alt_text}
+          height={component?.image?.data?.attributes?.height}
+          width={component?.image?.data?.attributes?.width}
+        />
+      </div>
     </div>
   )
 }
