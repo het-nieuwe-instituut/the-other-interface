@@ -183,7 +183,7 @@ function SuggestionSection() {
   const { t } = useTypeSafeTranslation('recordMeta')
 
   const contributeLink = 'https://forms.office.com/e/Y0bXYPicVw'
-  const learnMoreLink = '' // TODO
+  const learnMoreLink = '/asterisk'
 
   return (
     <>
