@@ -22,6 +22,7 @@ import { Pullquote } from '../components/Pullquote/Pullquote'
 import { MuxAudioPlayer } from '@/features/ui/components/mux-audio/MuxAudioPlayer'
 import { MuxVideoPlayer } from '@/features/ui/components/mux-video/MuxVideoPlayer'
 import ErrorBox from '@/features/shared/components/Error/ErrorBox'
+import { ImageParagraph } from '@/features/ui/components/ImageParagraph/ImageParagraph'
 
 interface Props {
   components: DynamicComponents
@@ -147,6 +148,7 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
             if (!component.buttons || component.buttons?.length === 0) {
               return null
             }
+            console.log(isStoryPage)
             return (
               <ButtonGroup
                 key={keyExtractor(component.id, index, array)}
@@ -268,7 +270,13 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
             )
           }
           if (component?.__typename === 'ComponentModulesSideImageWithText') {
-            console.log('here', component)
+            if (!component.sideText || !component.image) return null
+            return (
+              <ImageParagraph
+                component={component}
+                key={keyExtractor(component.id, index, array)}
+              />
+            )
           }
         }
         return null

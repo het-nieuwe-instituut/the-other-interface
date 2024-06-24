@@ -35,7 +35,7 @@ export const StoryLayer = () => {
       LeftContent={
         <>
           <PageHeader title={story?.title} preface={story?.description} constrainPreface={true} />
-          <DynamicComponentRenderer components={story?.attributes?.components} />
+          <DynamicComponentRenderer components={story?.attributes?.components} isStoryPage={true} />
           {story?.attributes?.storyLinks?.buttons && (
             <ButtonGroup className="flex gap-4 pt-10">
               {story?.attributes?.storyLinks?.buttons.map(link => {
