@@ -1,0 +1,7 @@
+fragment standaloneLinksModuleFragment on ComponentModulesStandaloneLinks {
+  id
+  __typename
+  standaloneLinks {
+    ...standAloneLinkFragment
+  }
+}

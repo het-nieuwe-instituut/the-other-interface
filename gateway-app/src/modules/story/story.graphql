@@ -709,6 +709,9 @@ fragment StoryComponentsFragment on StoryComponentsDynamicZone {
   ... on ComponentModulesButtonsModule {
     ...ComponentModulesButtonsModuleFragment
   }
+  ... on ComponentModulesStandaloneLinks {
+    ...ComponentModulesStandaloneLinksFragment
+  }
   ... on Error {
     ...ErrorFragment
   }
