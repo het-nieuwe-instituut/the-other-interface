@@ -22,7 +22,7 @@ export const HomepageContainer: React.FC<Props> = ({ homepage, isStoriesGalaxy }
 
   return (
     <>
-      <GalaxyInterface>{isStoriesGalaxy ? <MainGalaxy /> : <CategoryGalaxy />}</GalaxyInterface>
+      <GalaxyInterface>{isStoriesGalaxy ? <CategoryGalaxy /> : <MainGalaxy />}</GalaxyInterface>
 
       <div className="relative w-full bg-ivory-90 px-0 xl:px-6">
         <div className="mx-auto max-w-[1392px] px-6 pt-6">
