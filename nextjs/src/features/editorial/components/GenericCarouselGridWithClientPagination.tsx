@@ -10,11 +10,12 @@ import {
   CarouselGridTitle,
 } from '@/features/ui/components/carousel-grid/CarouselGrid'
 import { cn } from '@/features/ui/utils/cn'
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import {
   ComponentModulesCarousel,
   EnumComponentmodulescarouselVariant,
 } from 'src/generated/graphql'
+import { useClientPagination } from './useClientPagination'
 
 type CarouselGrid = DeepPartial<ComponentModulesCarousel>
 
@@ -60,11 +61,10 @@ const Grid = ({
     }
     return 4
   }, [carousel.variant, forcedCols])
-
-  const lastPage = Math.ceil(items.length / cols) || 1
-  const limitedData = items.slice(0, cols)
-  const [page, setPage] = useState(1)
-  const [nodes, setNodes] = useState(limitedData)
+  const { nodes, page, lastPage, next, previous } = useClientPagination({
+    items,
+    itemsInPage: cols,
+  })
 
   if (!items || items.length === 0) {
     return <ErrorBox />
@@ -106,25 +106,8 @@ const Grid = ({
         {items.length > cols && (
           <CarouselGridPagination
             className="ml-auto"
-            onNext={() => {
-              const newPage = page + 1
-              if (newPage > lastPage) {
-                return
-              }
-              const newNodes = items.slice((newPage - 1) * cols, newPage * cols)
-              console.log('newNodes', newPage)
-              setPage(newPage)
-              setNodes(newNodes)
-            }}
-            onPrevious={() => {
-              const newPage = page - 1
-              if (newPage < 1) {
-                return
-              }
-              const newNodes = items.slice((newPage - 1) * cols, newPage * cols)
-              setPage(newPage)
-              setNodes(newNodes)
-            }}
+            onNext={next}
+            onPrevious={previous}
             hidePrevious={page === 1}
             hideNext={page === lastPage || lastPage === 1}
           />

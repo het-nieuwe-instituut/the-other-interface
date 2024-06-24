@@ -1,5 +1,6 @@
 'use client'
 
+import { GenericCardGridWithClientPagination } from '@/features/editorial/components/GenericCardGridWithClientPagination'
 import { GenericCarouselGridWithClientPagination } from '@/features/editorial/components/GenericCarouselGridWithClientPagination'
 import { PageHeader } from '@/features/editorial/components/PageHeader/PageHeader'
 import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
@@ -40,6 +41,10 @@ export const HomepageContainer: React.FC<Props> = ({ homepage }) => {
                         <GenericCarouselGridWithClientPagination
                           carousel={editorialData.carousel}
                         />
+                      )}
+
+                      {editorialData?.grid && (
+                        <GenericCardGridWithClientPagination grid={editorialData.grid} />
                       )}
                     </div>
                   </>
