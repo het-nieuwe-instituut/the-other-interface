@@ -22,6 +22,11 @@ query storyById($locale: Locale!, $id: ID, $publicationState: String = "LIVE") {
         title
         description
         locale
+        storyLinks {
+          ... on ComponentModulesButtonsModule {
+            ...buttonsModuleFragment
+          }
+        }
         child_stories {
           data {
             id
@@ -60,6 +65,9 @@ query storyById($locale: Locale!, $id: ID, $publicationState: String = "LIVE") {
           }
           ... on ComponentModulesButtonsModule {
             ...buttonsModuleFragment
+          }
+          ... on ComponentModulesStandaloneLinks {
+            ...standaloneLinksModuleFragment
           }
           ... on ComponentModulesSubtitle {
             ...subtitleModuleFragment
