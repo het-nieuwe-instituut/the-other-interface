@@ -36,7 +36,7 @@ export const HomepageContainer: React.FC<Props> = ({ homepage }) => {
                       constrainPreface={true}
                     />
 
-                    <div className="flex w-full">
+                    <div className="flex w-full flex-col">
                       {editorialData?.carousel && (
                         <GenericCarouselGridWithClientPagination
                           carousel={editorialData.carousel}
