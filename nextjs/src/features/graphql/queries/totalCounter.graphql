@@ -1,21 +1,37 @@
-query totalCounter($locale: Locale!) {
-    stories(locale: $locale) {
-        meta {
-            pagination {
-                total
-            }
-        }
-    }
-    archives: zoomLevel2Amount(entityName: Archives, locale: $locale) {
+query totalCounter($locale: Locale!, $selectedFilterSuggestions: [SelectedFilterSuggestion!]) {
+  stories(locale: $locale) {
+    meta {
+      pagination {
         total
+      }
     }
-    objects: zoomLevel2Amount(entityName: Objects, locale: $locale) {
-        total
-    }
-    people: zoomLevel2Amount(entityName: People, locale: $locale) {
-        total
-    }
-    publications: zoomLevel2Amount(entityName: Publications, locale: $locale) {
-        total
-    }
+  }
+  archives: zoomLevel2Amount(
+    entityName: Archives
+    locale: $locale
+    selectedFilterSuggestions: $selectedFilterSuggestions
+  ) {
+    total
+  }
+  objects: zoomLevel2Amount(
+    entityName: Objects
+    locale: $locale
+    selectedFilterSuggestions: $selectedFilterSuggestions
+  ) {
+    total
+  }
+  people: zoomLevel2Amount(
+    entityName: People
+    locale: $locale
+    selectedFilterSuggestions: $selectedFilterSuggestions
+  ) {
+    total
+  }
+  publications: zoomLevel2Amount(
+    entityName: Publications
+    locale: $locale
+    selectedFilterSuggestions: $selectedFilterSuggestions
+  ) {
+    total
+  }
 }

@@ -1,4 +1,6 @@
 'use client'
+import { COLLECTION_HILIGHT_ID } from '@/features/galaxyInterface/components/GalaxyWrapper/Suggestions/Suggestions'
+import { searchCategoryToTriplyCategory } from '@/features/galaxyInterface/galaxies/CategoryGalaxy/mappers/searchCategoryToTriplyMapper'
 import {
   CATEGORIES_TO_ENTITY_MAPPER,
   CloudCategory,
@@ -6,15 +8,18 @@ import {
   SearchCategory,
 } from '@/features/shared/utils/categories'
 import { useQuery } from '@tanstack/react-query'
+import {
+  InputMaybe,
+  SelectedFilterSuggestion,
+  StringFilterInput,
+  TriplyRecordFiltersInput,
+} from 'src/generated/graphql'
 import { STORIES_PER_PAGE, ZOOM2_RECORDS_PER_PAGE } from '../../constants/mainConstants'
-import { mapCategoryToTriplyEnum } from '../../helpers/mapCategoryToTriplyEnum'
 import { storyToRecordMapper } from '../../helpers/extractStoryData'
+import { mapCategoryToTriplyEnum } from '../../helpers/mapCategoryToTriplyEnum'
 import initApiClientService from '../../utils/initApiClientService'
+import { Filter, useDecodedSearchFilters, useSelectedFilters } from '../search/useFilters'
 import { useLocale } from '../useLocale'
-import { Filter, useFilters } from '../search/useFilters'
-import { COLLECTION_HILIGHT_ID } from '@/features/galaxyInterface/components/GalaxyWrapper/Suggestions/Suggestions'
-import { triplyCategoryToSearchCategory } from '@/features/galaxyInterface/galaxies/CategoryGalaxy/mappers/searchCategoryToTriplyMapper'
-import { StringFilterInput, TriplyRecordFiltersInput } from 'src/generated/graphql'
 import mapSelectedHighlightToSearch from '../../mappers/mapSelectedHighlightToSearch'
 
 type SearchArgs = {
@@ -24,6 +29,7 @@ type SearchArgs = {
   enabled?: boolean
   filters?: Filter[]
   fallback?: boolean
+  selectedFilters: InputMaybe<Array<SelectedFilterSuggestion> | SelectedFilterSuggestion>
 }
 
 export function useSearchByCategoryQuery({
@@ -35,11 +41,16 @@ export function useSearchByCategoryQuery({
 }: SearchArgs) {
   const api = initApiClientService()
   const locale = useLocale()
-  const { decodedFilters } = useFilters()
+  const { decodedFilters } = useDecodedSearchFilters()
+  const selectedFilters = useSelectedFilters()
+  const selectedFiltersToInput = selectedFilters.map(filter => ({
+    key: filter.key,
+    value: filter.value,
+  }))
 
   const queryFn = async () => {
     if (decodedFilters?.find(filter => filter.id === COLLECTION_HILIGHT_ID)) {
-      const type = triplyCategoryToSearchCategory(category)
+      const type = searchCategoryToTriplyCategory(category)
 
       const labelFilter: StringFilterInput = { containsi: text || undefined }
 
@@ -71,7 +82,12 @@ export function useSearchByCategoryQuery({
       })
 
       if (!response?.triplyRecords?.data?.length && fallback) {
-        return await searchByCategory({ category, text, page })
+        return await searchByCategory({
+          category,
+          text,
+          page,
+          selectedFilters: selectedFiltersToInput,
+        })
       }
 
       return {
@@ -80,7 +96,7 @@ export function useSearchByCategoryQuery({
         total: response?.triplyRecords?.meta?.pagination?.total ?? 0,
       }
     }
-    return await searchByCategory({ category, text, page })
+    return await searchByCategory({ category, text, page, selectedFilters: selectedFiltersToInput })
   }
 
   async function searchByCategory({ category, text, page = 1 }: SearchArgs) {
@@ -89,16 +105,16 @@ export function useSearchByCategoryQuery({
         const response = await api.searchByStories({
           searchTerm: text || undefined,
           locationsFilterTerm:
-            decodedFilters.length !== 0 && decodedFilters[0].field === 'location'
+            decodedFilters.length !== 0 && decodedFilters[0].key === 'location'
               ? decodedFilters[0].id
               : undefined,
           themesFilterTerm:
-            decodedFilters.length !== 0 && decodedFilters[0].field === 'theme'
+            decodedFilters.length !== 0 && decodedFilters[0].key === 'theme'
               ? decodedFilters[0].id
               : undefined,
 
           authorFilterTerm:
-            decodedFilters.length !== 0 && decodedFilters[0].field === 'author'
+            decodedFilters.length !== 0 && decodedFilters[0].key === 'author'
               ? decodedFilters[0].id
               : undefined,
           page,
@@ -151,11 +167,13 @@ export function useSearchByCategoryQuery({
             page,
             pageSize: ZOOM2_RECORDS_PER_PAGE,
             locale,
+            selectedFilterSuggestions: selectedFiltersToInput,
           }),
           api.Zoom2Amount({
             entityName: CATEGORIES_TO_ENTITY_MAPPER[category as CloudCategory],
             text: text || undefined,
             locale,
+            selectedFilterSuggestions: selectedFiltersToInput,
           }),
         ])
 

@@ -37,7 +37,7 @@ export const StoryLayer = () => {
           <PageHeader title={story?.title} preface={story?.description} constrainPreface={true} />
           <DynamicComponentRenderer components={story?.attributes?.components} isStoryPage={true} />
           {story?.attributes?.storyLinks?.buttons && (
-            <ButtonGroup className="pt-10">
+            <ButtonGroup className="flex gap-4 pt-10">
               {story?.attributes?.storyLinks?.buttons.map(link => {
                 if (!link.url || !link.text) return null
 
