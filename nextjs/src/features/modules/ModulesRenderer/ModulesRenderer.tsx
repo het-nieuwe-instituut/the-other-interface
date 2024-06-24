@@ -11,7 +11,6 @@ import {
   HomepageQuery,
   LandingpageBySlugQuery,
   Maybe,
-  MenupageComponentsDynamicZone,
   StoryByIdQuery,
 } from 'src/generated/graphql'
 import { Paragraph } from '../../ui/components/Paragraph/Paragraph'
@@ -36,7 +35,6 @@ export type DynamicComponents =
     >['components']
   | Maybe<Array<HomepageComponentsDynamicZone>>
   | NonNullable<NonNullable<StoryByIdQuery['storyByLocale']['data']>['attributes']>['components']
-  | Maybe<Array<MenupageComponentsDynamicZone>>
 
 export function DynamicComponentRenderer({ components, isStoryPage = false }: Props) {
   const hasComponents = (components || []).length > 0
@@ -150,7 +148,10 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
               return null
             }
             return (
-              <ButtonGroup key={keyExtractor(component.id, index, array)}>
+              <ButtonGroup
+                key={keyExtractor(component.id, index, array)}
+                className={isStoryPage ? 'flex-wrap' : 'flex gap-4'}
+              >
                 {component.buttons.map(button => {
                   if (!button.text || !button.url) {
                     return null
@@ -159,6 +160,34 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
                     <LinkButtonGroupItem key={button.id} href={button.url}>
                       {button.text}
                     </LinkButtonGroupItem>
+                  )
+                })}
+              </ButtonGroup>
+            )
+          }
+
+          if (component?.__typename === 'ComponentModulesStandaloneLinks') {
+            if (!component.standaloneLinks || component.standaloneLinks?.length === 0) {
+              return null
+            }
+            return (
+              <ButtonGroup key={keyExtractor(component.id, index, array)} className="flex gap-4">
+                {component.standaloneLinks.map(link => {
+                  if (!link.label || (!link.url && !link.attachment)) {
+                    return null
+                  }
+                  const href =
+                    (!link.attachment?.data ? link.url : link.attachment.data?.attributes?.url) ??
+                    undefined
+
+                  const variant = link.attachment?.data ? 'download' : 'link'
+
+                  if (!href) return null
+
+                  return (
+                    <StandaloneLink href={href} variant={variant} key={link.id}>
+                      {link.label}
+                    </StandaloneLink>
                   )
                 })}
               </ButtonGroup>

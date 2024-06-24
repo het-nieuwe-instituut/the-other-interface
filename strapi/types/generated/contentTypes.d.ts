@@ -1130,68 +1130,6 @@ export interface ApiLocationLocation extends Schema.CollectionType {
   }
 }
 
-export interface ApiMenupageMenupage extends Schema.CollectionType {
-  collectionName: 'menupages'
-  info: {
-    singularName: 'menupage'
-    pluralName: 'menupages'
-    displayName: 'Menupage'
-    description: ''
-  }
-  options: {
-    draftAndPublish: true
-  }
-  pluginOptions: {
-    i18n: {
-      localized: true
-    }
-  }
-  attributes: {
-    components: Attribute.DynamicZone<
-      [
-        'modules.pullquote',
-        'modules.text-module',
-        'modules.subtitle',
-        'modules.image-carousel',
-        'modules.image',
-        'modules.title-module',
-        'modules.buttons-module',
-        'modules.grid-module'
-      ]
-    > &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true
-        }
-      }>
-    Title: Attribute.String &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true
-        }
-      }>
-    slug: Attribute.String &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true
-        }
-      }>
-    createdAt: Attribute.DateTime
-    updatedAt: Attribute.DateTime
-    publishedAt: Attribute.DateTime
-    createdBy: Attribute.Relation<'api::menupage.menupage', 'oneToOne', 'admin::user'> &
-      Attribute.Private
-    updatedBy: Attribute.Relation<'api::menupage.menupage', 'oneToOne', 'admin::user'> &
-      Attribute.Private
-    localizations: Attribute.Relation<
-      'api::menupage.menupage',
-      'oneToMany',
-      'api::menupage.menupage'
-    >
-    locale: Attribute.String
-  }
-}
-
 export interface ApiStoryStory extends Schema.CollectionType {
   collectionName: 'stories'
   info: {
@@ -1236,7 +1174,8 @@ export interface ApiStoryStory extends Schema.CollectionType {
         'core.stand-alone-link',
         'core.mux-audio',
         'core.mux-video',
-        'modules.side-image-with-text'
+        'modules.side-image-with-text',
+        'modules.standalone-links'
       ]
     > &
       Attribute.SetPluginOptions<{
@@ -1392,7 +1331,6 @@ declare module '@strapi/types' {
       'api::landing-page-people.landing-page-people': ApiLandingPagePeopleLandingPagePeople
       'api::landing-page-publication.landing-page-publication': ApiLandingPagePublicationLandingPagePublication
       'api::location.location': ApiLocationLocation
-      'api::menupage.menupage': ApiMenupageMenupage
       'api::story.story': ApiStoryStory
       'api::theme.theme': ApiThemeTheme
       'api::triply-record.triply-record': ApiTriplyRecordTriplyRecord

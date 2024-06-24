@@ -14,7 +14,6 @@ type UrlPath = `/${string}`
 const supportedCollectionType = z.enum([
   'api::landingpage.landingpage',
   'api::story.story',
-  'api::menupage.menupage',
   'api::homepage.homepage',
 ])
 
@@ -46,11 +45,6 @@ export async function GET(request: NextRequest) {
 
     case supportedCollectionType.Enum['api::homepage.homepage']: {
       url = `/?lang=${locale}`
-      break
-    }
-
-    case supportedCollectionType.Enum['api::menupage.menupage']: {
-      url = `/menupage/${slug}?lang=${locale}`
       break
     }
 

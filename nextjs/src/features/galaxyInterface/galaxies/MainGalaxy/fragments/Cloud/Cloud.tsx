@@ -13,6 +13,7 @@ import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import { useSelectedFilters } from '@/features/shared/hooks/search/useFilters'
 
 interface Props {
   cloud: CategoryCloud
@@ -24,10 +25,12 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
   const { lang } = useZoom2Params()
   const [enabled, setEnabled] = useState(false)
   const { title: category, size, cloudPosition, titlePosition } = cloud
+  const selectedFilters = useSelectedFilters()
 
   useSearchByCategoryQuery({
     category,
     enabled,
+    selectedFilters,
   })
 
   const handleCloudClick = () => {

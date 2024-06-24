@@ -25,6 +25,7 @@ export const RecordHeader = () => {
         title={record?.title ?? undefined}
         preface={record?.description ?? undefined}
         constrainPreface={true}
+        splitByHtmlBreaks
       ></PageHeader>
 
       {record?.thumbnail ? (

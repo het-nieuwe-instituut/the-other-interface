@@ -22,6 +22,9 @@ fragment StoryFragment on StoryEntity {
       ... on ComponentModulesButtonsModule {
         ...buttonsModuleFragment
       }
+      ... on ComponentModulesStandaloneLinks {
+        ...standaloneLinksModuleFragment
+      }
       ... on ComponentModulesSubtitle {
         ...subtitleModuleFragment
       }

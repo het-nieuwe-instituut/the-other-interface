@@ -5,6 +5,7 @@ import { usePageNumber } from '@/features/shared/hooks/usePageNumber'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 import { useSearchByCategoryQuery } from '@/features/shared/hooks/queries/useSearchByCategoryQuery'
 import { SearchResultItemType } from 'src/generated/graphql'
+import { useSelectedFilters } from '@/features/shared/hooks/search/useFilters'
 
 const getPositionedRecords = ({
   records,
@@ -44,6 +45,7 @@ export const usePresenter = (pageAmount: number, records: SearchResultItemType[]
     positioningTemplates,
     pageNumber
   )
+  const selectedFilters = useSelectedFilters()
 
   const isLastPage = pageNumber === pageAmount
   const nextPage = pageNumber + 1
@@ -53,6 +55,7 @@ export const usePresenter = (pageAmount: number, records: SearchResultItemType[]
     text: search,
     page: nextPage,
     enabled: !isLastPage,
+    selectedFilters,
   })
 
   const nextRecords = useMemo(() => nextResults?.items || [], [nextResults?.items])
