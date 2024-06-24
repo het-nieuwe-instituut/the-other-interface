@@ -7,6 +7,7 @@ import { cn } from '../../utils/cn'
 import { Subtitle } from '../subtitle/Subtitle'
 import { TypographyVariants } from '../typography/variants'
 import styles from './TailwindMarkdown.module.css'
+import { Title } from '../title/Title'
 
 export interface TailwindMarkdownProps {
   className?: string
@@ -29,7 +30,7 @@ export const TailwindMarkdown: React.FC<TailwindMarkdownProps> = ({ className, c
 
 const components = {
   p: ({ children }: { children: ReactNode }) => (
-    <p className={TypographyVariants({ responsive: 'paragraph' })}>{children}</p> // need a different size
+    <p className={TypographyVariants({ socialLarge: 'lg' })}>{children}</p>
   ),
   // we cast as string because we know that children is a string but react-markdown makes use use ReactNode
   h6: ({ children }: { children: ReactNode }) => <Subtitle>{children as string}</Subtitle>,
@@ -37,9 +38,9 @@ const components = {
   h4: ({ children }: { children: ReactNode }) => <Subtitle>{children as string}</Subtitle>,
   h3: ({ children }: { children: ReactNode }) => <Subtitle>{children as string}</Subtitle>,
   h2: ({ children }: { children: ReactNode }) => <Subtitle>{children as string}</Subtitle>,
-  h1: ({ children }: { children: ReactNode }) => <Subtitle>{children as string}</Subtitle>, // need to title
+  h1: ({ children }: { children: ReactNode }) => <Title>{children as string}</Title>,
   li: ({ children }: { children: ReactNode }) => (
-    <li className={TypographyVariants({ responsive: 'paragraph' })}>{children}</li>
+    <li className={TypographyVariants({ socialLarge: 'lg' })}>{children}</li>
   ),
   ul: ({ children }: { children: ReactNode }) => (
     <ul className={styles['md-ul-list']}>{children}</ul>

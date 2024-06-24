@@ -148,7 +148,6 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
             if (!component.buttons || component.buttons?.length === 0) {
               return null
             }
-            console.log(isStoryPage)
             return (
               <ButtonGroup
                 key={keyExtractor(component.id, index, array)}
