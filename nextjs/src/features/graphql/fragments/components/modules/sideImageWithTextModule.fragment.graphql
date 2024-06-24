@@ -1,0 +1,16 @@
+fragment sideImageWithTextModuleFragment on ComponentModulesSideImageWithText {
+  id
+  __typename
+  sideText
+  image_alt_text
+  image {
+    data {
+      attributes {
+        url
+        height
+        width
+        caption
+      }
+    }
+  }
+}
