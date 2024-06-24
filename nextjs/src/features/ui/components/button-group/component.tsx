@@ -14,7 +14,7 @@ export interface ButtonGroupProps {
 }
 
 export const ButtonGroup: React.FC<ButtonGroupProps> = ({ children, className }) => {
-  return <div className={cn('flex w-full gap-4 bg-inherit', className)}>{children}</div>
+  return <div className={cn(' w-full bg-inherit', className)}>{children}</div>
 }
 
 export interface LinkButtonGroupItemProps {
@@ -27,7 +27,7 @@ export const LinkButtonGroupItem: React.FC<LinkButtonGroupItemProps> = ({
 }: LinkButtonGroupItemProps) => {
   const isExternal = isExternalURL(href, process.env.parsed.NEXT_PUBLIC_URL ?? '')
   return (
-    <NavLinkButton href={href} variant={'footerPrimary'}>
+    <NavLinkButton href={href} variant={'jumbo'} color={'ivoryNoBorder'}>
       {children}
       {isExternal && <ExternalLink className="size-6" />}
     </NavLinkButton>

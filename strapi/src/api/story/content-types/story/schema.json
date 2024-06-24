@@ -44,10 +44,12 @@
         "modules.title-module",
         "modules.image-carousel",
         "modules.image",
+        "modules.buttons-module",
         "core.stand-alone-link",
         "core.mux-audio",
         "core.mux-video",
-        "modules.side-image-with-text"
+        "modules.side-image-with-text",
+        "modules.standalone-links"
       ],
       "pluginOptions": {
         "i18n": {
@@ -91,10 +93,20 @@
       "repeatable": false,
       "pluginOptions": {
         "i18n": {
-          "localized": false
+          "localized": true
         }
       },
       "component": "core.publication-date"
+    },
+    "storyLinks": {
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "modules.buttons-module"
     },
     "shortDescription": {
       "pluginOptions": {

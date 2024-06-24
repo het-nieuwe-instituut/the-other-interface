@@ -9,6 +9,11 @@ import {
   ComponentCoreTimeframe,
   ComponentCoreTimeframeFiltersInput,
 } from '../strapi/components/core/timeframe'
+
+import {
+  ComponentModulesButtonsModule,
+  ComponentModulesButtonsModuleFiltersInput,
+} from '../strapi/components/modules/buttonsModule'
 import { ComponentModulesImageCarousel } from '../strapi/components/modules/imageCarousel'
 import { ComponentModulesImage } from '../strapi/components/modules/imageModule'
 import { ComponentModulesPullquote } from '../strapi/components/modules/pullQuote'
@@ -32,6 +37,7 @@ import { ComponentCoreStandAloneLink } from '../strapi/components/core/standAlon
 import { ComponentCoreMuxAudio } from '../strapi/components/core/muxAudio'
 import { ComponentCoreMuxVideo } from '../strapi/components/core/muxVideo'
 import { ComponentModulesSideImageWithText } from '../strapi/components/modules/sideImageWithText'
+import { ComponentModulesStandaloneLinks } from '../strapi/components/modules/standAloneLinks'
 
 @ObjectType()
 export class StoryRelationResponseCollection {
@@ -80,6 +86,9 @@ export class Story {
   @Field({ nullable: true })
   public slug?: string
 
+  @Field(() => ComponentModulesButtonsModule, { nullable: true })
+  public storyLinks?: ComponentModulesButtonsModule
+
   @Field({ nullable: true })
   public timeframe?: ComponentCoreTimeframe
 
@@ -122,6 +131,8 @@ export const StoryComponentsDynamicZone = createUnionType({
   name: 'StoryComponentsDynamicZone',
   types: () =>
     [
+      ComponentModulesStandaloneLinks,
+      ComponentModulesButtonsModule,
       ComponentModulesImage,
       ComponentModulesImageCarousel,
       ComponentModulesPullquote,
@@ -242,6 +253,9 @@ export class StoryFiltersInput {
 
   @Field(() => StringFilterInput, { nullable: true })
   public slug?: StringFilterInput
+
+  @Field(() => ComponentModulesButtonsModuleFiltersInput, { nullable: true })
+  public storyLinks?: ComponentModulesButtonsModuleFiltersInput
 
   @Field(() => ComponentCoreTimeframeFiltersInput, { nullable: true })
   public timeframe?: ComponentCoreTimeframeFiltersInput

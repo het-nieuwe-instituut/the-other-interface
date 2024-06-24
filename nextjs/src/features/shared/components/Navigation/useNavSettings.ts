@@ -6,10 +6,14 @@ import { State } from '../../configs/store'
 import { useSelector } from 'react-redux'
 import { useBreakpoint } from '../../configs/chakra'
 import { USER_LOOKS_ON } from '../../constants/mainConstants'
-import { useBreakpointValue } from '@chakra-ui/react'
 import { useLocale } from '../../hooks/useLocale'
 
-export const usePresenter = () => {
+export enum Fonts {
+  Times = 'times',
+  Impact = 'impact',
+}
+
+export const useNavSettings = () => {
   const ref = useRef<HTMLDivElement | null>(null)
   const isMenuOpen = useSelector((state: State) => state?.shared?.isMenuOpen)
   const userLooksOn = useSelector((state: State) => state.shared.userLooksOn)
@@ -32,20 +36,12 @@ export const usePresenter = () => {
 
   const navTextStyle = useMemo(() => {
     if (userLooksOn === USER_LOOKS_ON.EDITORIAL) {
-      return 'impactNew.xl'
+      return Fonts.Impact
     }
     if (userLooksOn === USER_LOOKS_ON.GALAXY) {
-      return 'headingTimesLarge.2xl'
+      return Fonts.Times
     }
   }, [userLooksOn])
-
-  const overflowValue = useBreakpointValue({
-    sm: 'auto',
-    md: 'auto',
-    lg: 'visible',
-    xl: 'visible',
-    base: 'visible',
-  })
 
   return {
     tNavigation,
@@ -56,6 +52,5 @@ export const usePresenter = () => {
     breakpoint,
     userLooksOn,
     navTextStyle,
-    overflowValue,
   }
 }

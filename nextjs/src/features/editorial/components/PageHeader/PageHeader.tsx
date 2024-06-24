@@ -13,9 +13,11 @@ interface Props {
   title?: string
   preface?: string
   constrainPreface?: boolean
+  splitByHtmlBreaks?: boolean
 }
 
-export const PageHeader: React.FC<Props> = ({ title, preface, constrainPreface }) => {
+export const PageHeader: React.FC<Props> = props => {
+  const { title, preface, constrainPreface, splitByHtmlBreaks } = props
   const commonT = useTypeSafeTranslation('common')
   const { scrollPosition } = useScroll()
   const [constrainPrefaceState, setConstrainPreface] = useState(constrainPreface)
@@ -34,6 +36,7 @@ export const PageHeader: React.FC<Props> = ({ title, preface, constrainPreface }
       {preface && (
         <div className="relative flex flex-col items-start justify-start gap-5 ">
           <ParagraphWithLineClamp
+            splitByHtmlBreaks={splitByHtmlBreaks}
             disableLineClamp={!constrainPrefaceState}
             ReadmoreComponent={
               <NavButton

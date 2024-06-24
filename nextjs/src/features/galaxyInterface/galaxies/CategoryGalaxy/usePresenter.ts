@@ -9,11 +9,13 @@ import { usePagination } from '@/features/shared/hooks/usePagination'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 import { isSearchCategory } from '@/features/shared/utils/categories'
 import { useRemoveFallbackSearchParam } from './useRemoveFallbackSearchParam'
+import { useSelectedFilters } from '@/features/shared/hooks/search/useFilters'
 
 export const usePresenter = () => {
   const isSearchModeActive = useSelector((state: State) => state.shared.isSearchModeActive)
   const { category, search, fallback } = useZoom2Params()
   const { pageNumber } = usePageNumber()
+  const selectedFilters = useSelectedFilters()
 
   if (!isSearchCategory(category)) {
     notFound()
@@ -28,6 +30,7 @@ export const usePresenter = () => {
     text: search,
     page: pageNumber,
     fallback,
+    selectedFilters,
   })
 
   const { total: resultAmount } = data || { total: 0 }

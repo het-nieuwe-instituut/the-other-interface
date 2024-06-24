@@ -1,17 +1,38 @@
-query Zoom2Archives($page: Int!, $pageSize: Int!, $text: String, $locale: Locale!) {
-    zoomLevel2(entityName: Archives, page: $page, pageSize: $pageSize, text: $text, locale: $locale) {
-        page,
-        nodes {
-            title
-			thumbnail
-			id
-        }
+query Zoom2Archives(
+  $page: Int!
+  $pageSize: Int!
+  $text: String
+  $locale: Locale!
+  $selectedFilterSuggestions: [SelectedFilterSuggestion!]
+) {
+  zoomLevel2(
+    entityName: Archives
+    page: $page
+    pageSize: $pageSize
+    text: $text
+    locale: $locale
+    selectedFilterSuggestions: $selectedFilterSuggestions
+  ) {
+    page
+    nodes {
+      title
+      thumbnail
+      id
     }
+  }
 }
 
-
-query Zoom2ArchiveAmount($text: String, $locale: Locale!) {
-    zoomLevel2Amount(entityName: Archives, text: $text, locale: $locale) {
-        total
-    }
+query Zoom2ArchiveAmount(
+  $text: String
+  $locale: Locale!
+  $selectedFilterSuggestions: [SelectedFilterSuggestion!]
+) {
+  zoomLevel2Amount(
+    entityName: Archives
+    text: $text
+    locale: $locale
+    selectedFilterSuggestions: $selectedFilterSuggestions
+  ) {
+    total
+  }
 }

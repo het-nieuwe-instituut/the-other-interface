@@ -1,14 +1,12 @@
 import { decodeFilters, encodeFilters } from '@/features/shared/helpers/searchHelpers'
 import { sharedActions } from '@/features/shared/stores/shared.store'
-import { useCallback } from 'react'
+import { useSearchParams } from 'next/navigation'
+import { useCallback, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { State } from '../../configs/store'
-import { useZoom2Params } from '../useZoom2Params'
+import { FilterSuggestionType } from 'src/generated/graphql'
 
-// TODO: Remove when we connect real query
-export interface Filter {
-  field: string
-  value: string
+export interface Filter extends FilterSuggestionType {
   id: string
 }
 
@@ -19,19 +17,19 @@ interface UseFiltersProps {
   onRemoveFilter?: () => void
 }
 
-export const useFilters = ({ onSelectFilter, onRemoveFilter }: UseFiltersProps = {}) => {
-  const { filters } = useZoom2Params()
+export const useFilterActions = ({ onSelectFilter, onRemoveFilter }: UseFiltersProps = {}) => {
   const selectedFilters = useSelector((state: State) => state.shared.selectedFilters)
   const dispatch = useDispatch()
 
   const selectFilter = useCallback(
     (filter: Filter) => {
-      if (selectedFilters.some(f => f.id === filter.id)) {
+      if (selectedFilters.some(f => f.value === filter.value)) {
         return
       }
 
       dispatch(sharedActions.setFilters({ selectedFilters: [...selectedFilters, filter] }))
       dispatch(sharedActions.categorySuggestionsOpen({ categorySuggestionsOpen: false }))
+
       if (onSelectFilter) {
         onSelectFilter()
       }
@@ -42,7 +40,9 @@ export const useFilters = ({ onSelectFilter, onRemoveFilter }: UseFiltersProps =
   const removeFilter = useCallback(
     (id: string) => {
       dispatch(
-        sharedActions.setFilters({ selectedFilters: selectedFilters.filter(f => f.id !== id) })
+        sharedActions.setFilters({
+          selectedFilters: selectedFilters.filter(f => f.id !== id),
+        })
       )
       if (onRemoveFilter) {
         onRemoveFilter()
@@ -56,11 +56,34 @@ export const useFilters = ({ onSelectFilter, onRemoveFilter }: UseFiltersProps =
   }, [dispatch])
 
   return {
-    selectedFilters,
     selectFilter,
     clearFilters,
-    encodedFilters: encodeFilters(selectedFilters),
-    decodedFilters: decodeFilters(filters),
     removeFilter,
+  }
+}
+
+export const useSelectedFilters = () => {
+  const selectedFilters = useSelector((state: State) => state.shared.selectedFilters)
+  return selectedFilters
+}
+
+export const useDecodedSearchFilters = () => {
+  const searchParams = useSearchParams()
+
+  const { filters } = useMemo(() => {
+    return {
+      filters: searchParams?.get('filters'),
+    }
+  }, [searchParams])
+  return {
+    decodedFilters: decodeFilters(filters),
+  }
+}
+
+export const useEncodedSearchFilters = () => {
+  const selectedFilters = useSelector((state: State) => state.shared.selectedFilters)
+
+  return {
+    encodedFilters: encodeFilters(selectedFilters),
   }
 }
