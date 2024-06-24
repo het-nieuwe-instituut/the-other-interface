@@ -279,7 +279,6 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
               return null
             return (
               <ImageParagraph
-                component={component}
                 sideText={component.sideText}
                 imageSrc={component.image.data?.attributes?.url}
                 imageHeight={component.image.data?.attributes?.height}

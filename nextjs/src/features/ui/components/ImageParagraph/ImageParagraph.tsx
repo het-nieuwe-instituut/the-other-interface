@@ -1,14 +1,8 @@
 import { cn } from '@/features/ui/utils/cn'
 import { TailwindMarkdown } from '../Paragraph/TailwindMarkdown'
-
 import { ImageWithCaption } from '../image-with-caption/ImageWithCaption'
-import { DynamicComponents } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 
 export interface ParagraphProps {
-  component: Extract<
-    NonNullable<DynamicComponents>[number],
-    { __typename: 'ComponentModulesSideImageWithText' }
-  >
   sideText: string
   imageSrc: string
   imageAltText: string
