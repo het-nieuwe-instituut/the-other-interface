@@ -10,6 +10,7 @@ import { NavLinkButton } from '@/features/ui/components/nav-link-button/componen
 import { ReadMoreTooltip } from '@/features/ui/components/tooltip/ReadMoreTooltip'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import ExternalLink from '@/features/ui/icons/external-link.svg'
+import Asterisk from '@/features/ui/icons/asterisk-thin.svg'
 import { useParams } from 'next/navigation'
 import { Fragment } from 'react'
 import {
@@ -122,6 +123,7 @@ export const RecordMeta: React.FC = () => {
           </MetaField>
         )
       })}
+      <SuggestionSection />
     </div>
   )
 }
@@ -175,4 +177,37 @@ function RightsLogo({ value }: { value?: string[] | null; key?: string }) {
       </a>
     </ReadMoreTooltip>
   )
+}
+
+function SuggestionSection() {
+  const { t } = useTypeSafeTranslation('recordMeta')
+
+  const contributeLink = 'https://forms.office.com/e/Y0bXYPicVw'
+  const learnMoreLink = '/asterisk'
+
+  return (
+    <>
+      <MetaField name={t('suggestionTitle')}>
+        <div className="flex flex-col gap-1">
+          <SuggestionLink url={contributeLink} text={t('suggestionContributeLink')} />
+          <SuggestionLink url={learnMoreLink} text={t('suggestionLearnMoreLink')} />
+        </div>
+      </MetaField>
+    </>
+  )
+
+  function SuggestionLink({ url, text }: { url: string; text?: string }) {
+    return (
+      <NavLinkButton
+        variant="metaDataText"
+        className="bg-[#DEE5EC] text-[#6F7A9C] after:border-none hover:bg-[#DEE5EC] hover:text-[#6F7A9C]"
+        href={url}
+        title={text}
+      >
+        <Asterisk />
+        {text}
+        <ExternalLink className="size-[14px]" />
+      </NavLinkButton>
+    )
+  }
 }

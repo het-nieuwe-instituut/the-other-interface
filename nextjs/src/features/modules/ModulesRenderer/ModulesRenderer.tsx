@@ -171,7 +171,7 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
               return null
             }
             return (
-              <ButtonGroup key={keyExtractor(component.id, index, array)}>
+              <ButtonGroup key={keyExtractor(component.id, index, array)} className="flex gap-4">
                 {component.standaloneLinks.map(link => {
                   if (!link.label || (!link.url && !link.attachment)) {
                     return null
