@@ -50,7 +50,7 @@ export default async function Page({
     return (
       <>
         <ReduxSearchSync />
-        <HomepageContainer draftMode={isEnabled} homepage={homepage} />
+        <HomepageContainer isStoriesGalaxy={true} draftMode={isEnabled} homepage={homepage} />
       </>
     )
   }

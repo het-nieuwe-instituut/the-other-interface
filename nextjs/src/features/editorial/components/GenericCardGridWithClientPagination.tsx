@@ -1,3 +1,4 @@
+'use client'
 import ErrorBox from '@/features/shared/components/Error/ErrorBox'
 import { DeepPartial } from '@/features/shared/types/helpers'
 

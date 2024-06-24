@@ -7,22 +7,23 @@ import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/Gala
 import { MainGalaxy } from '@/features/galaxyInterface/galaxies/MainGalaxy/MainGalaxy'
 import SuspenseLoader from '@/features/shared/components/SuspenseLoader/SuspenseLoader'
 import { HomepageQuery, ThemesQuery } from 'src/generated/graphql'
+import { CategoryGalaxy } from '../../../galaxyInterface/galaxies/CategoryGalaxy/CategoryGalaxy'
 
 export type Props = {
   homepage?: HomepageQuery
   themes?: ThemesQuery
   nextThemes?: ThemesQuery
   draftMode: boolean
+  isStoriesGalaxy?: boolean
 }
 
-export const HomepageContainer: React.FC<Props> = ({ homepage }) => {
+export const HomepageContainer: React.FC<Props> = ({ homepage, isStoriesGalaxy }) => {
   const editorialData = homepage?.homepage?.data?.attributes
 
   return (
     <>
-      <GalaxyInterface>
-        <MainGalaxy />
-      </GalaxyInterface>
+      <GalaxyInterface>{isStoriesGalaxy ? <MainGalaxy /> : <CategoryGalaxy />}</GalaxyInterface>
+
       <div className="relative w-full bg-ivory-90 px-0 xl:px-6">
         <div className="mx-auto max-w-[1392px] px-6 pt-6">
           <div className="grid grid-cols-6 gap-3 lg:grid-cols-12">
