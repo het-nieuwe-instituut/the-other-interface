@@ -5,6 +5,7 @@ import { cn } from '@/features/ui/utils/cn'
 import React from 'react'
 import Link from 'next/link'
 import { useLocale } from '@/features/shared/hooks/useLocale'
+import { keyExtractor } from '@/features/shared/utils/lists'
 
 interface Props {
   component?: TableModuleType
@@ -76,7 +77,7 @@ const ResponsiveTable: React.FC<Props> = ({ component, LoadMore }: Props) => {
             <tr className="tr-border-gradient">
               {component.tableHead?.map((item, i) => (
                 <th
-                  key={i}
+                  key={keyExtractor(item.id, i, component.tableHead!)}
                   className={cn(
                     TypographyVariants({ socialLarge: 'sidebarTitle' }),
                     'text-black-100 text-left py-2 pr-2'
