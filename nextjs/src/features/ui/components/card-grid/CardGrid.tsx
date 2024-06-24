@@ -1,4 +1,3 @@
-import { LinkProps } from 'next/link'
 import React from 'react'
 import { cn } from '../../utils/cn'
 import { Card } from '../card/card'
@@ -6,6 +5,8 @@ import { LightboxProvider } from '../lightbox/LightboxProvider'
 import { NavButton, NavButtonProps } from '../nav-button/component'
 import { Subtitle, SubtitleProps } from '../subtitle/Subtitle'
 import { TypographyVariants } from '../typography/variants'
+import NextImage from 'next/image'
+import NextLink from 'next/link'
 
 type SpecificChildren<T> =
   | React.ReactElement<T | null | undefined | string | Element>
@@ -57,4 +58,52 @@ export const CardGridTitle = (props: CardGridTitleProps) => {
 export interface CardGridDescriptionProps extends SubtitleProps {}
 export const CardGridDescription = ({ className, ...restProps }: CardGridDescriptionProps) => {
   return <p {...restProps} className={TypographyVariants({ responsive: 'paragraph', className })} />
+}
+
+export interface CardGridPlaceholderProps {
+  fallback: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
+  title: string
+  subTitle: string
+  href?: string
+  className?: string
+}
+export const CardGridPlaceholder = ({
+  title,
+  subTitle,
+  fallback,
+  href,
+  className,
+}: CardGridPlaceholderProps) => {
+  const containerClassName = cn(
+    'flex flex-col items-center justify-center  group relative',
+    className
+  )
+  if (href) {
+    return (
+      <NextLink href={href} className={containerClassName}>
+        {renderContent()}
+      </NextLink>
+    )
+  }
+  return <div className={containerClassName}>{renderContent()}</div>
+
+  function renderContent() {
+    return (
+      <>
+        <div>
+          <p className={TypographyVariants({ socialLarge: 'xl' })}>{title}</p>
+        </div>
+        <div>
+          <p className={TypographyVariants({ socialLarge: 'lg' })}>{subTitle}</p>
+        </div>
+        <NextImage
+          width={305}
+          height={305}
+          src={`/images/fallbacks/${fallback}.svg`}
+          alt="fallback"
+          className="absolute scale-[85%] opacity-20 grayscale transition-all group-hover:scale-100 group-hover:grayscale-0"
+        />
+      </>
+    )
+  }
 }

@@ -7,8 +7,8 @@ import {
   CardGridCardWrapper,
   CardGridDescription,
   CardGridFooter,
-  CardGridLink,
-  CardGridPagination,
+  CardGridPlaceholder,
+  CardGridShowMore,
   CardGridTitle,
 } from '@/features/ui/components/card-grid/CardGrid'
 
@@ -95,15 +95,16 @@ export default function Demo() {
   return (
     <div>
       <h1>Card Grid</h1>
-      <Carousel cols={3} />
-      <Carousel cols={1} />
+      <Grid cols={3} />
+      <Grid cols={1} />
     </div>
   )
 }
-export function Carousel({ cols, className }: { cols: 1 | 3; className?: string }) {
-  const { nodes, lastPage, page, next, previous } = useClientPagination({
+export function Grid({ className }: { cols: 1 | 3; className?: string }) {
+  const { nodes, next } = useClientPagination({
     items: stubData,
     itemsInPage: 6,
+    preservePreviousLimitedData: true,
   })
 
   return (
@@ -116,7 +117,8 @@ export function Carousel({ cols, className }: { cols: 1 | 3; className?: string 
           egestas eget quam. Nullam id dolor id nibh ultricies vehicula ut id elit. Vestibulum id
           ligula porta felis euismod semper.
         </CardGridDescription>
-        <CardGridCardWrapper cols={cols}>
+        <CardGridCardWrapper>
+          <CardGridPlaceholder fallback={1} title="No more content" subTitle="No more content" />
           {nodes.map(item => (
             <CardGridCard
               key={item.id}
@@ -129,13 +131,7 @@ export function Carousel({ cols, className }: { cols: 1 | 3; className?: string 
           ))}
         </CardGridCardWrapper>
         <CardGridFooter>
-          <CardGridLink href="">Explore this</CardGridLink>
-          <CardGridPagination
-            onNext={next}
-            onPrevious={previous}
-            hidePrevious={page === 1}
-            hideNext={page === lastPage || lastPage === 1}
-          />
+          <CardGridShowMore onClick={next}>Explore this</CardGridShowMore>
         </CardGridFooter>
       </CardGrid>
     </div>
