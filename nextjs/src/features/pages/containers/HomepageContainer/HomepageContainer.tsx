@@ -17,11 +17,11 @@ export const HomepageContainer: React.FC<Props> = ({ homepage }) => {
 
   return (
     <>
-      <MobileOverlayProvider>
-        <GalaxyInterface>
+      <GalaxyInterface>
+        <MobileOverlayProvider>
           <MainGalaxy />
-        </GalaxyInterface>
-      </MobileOverlayProvider>
+        </MobileOverlayProvider>
+      </GalaxyInterface>
 
       {editorialData && (
         <EditorialLayer

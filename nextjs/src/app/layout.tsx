@@ -65,7 +65,6 @@ function MyApp({ children }: { children: React.ReactNode }) {
             <ReactQueryProvider>
               <ThemeProvider>
                 <WelcomeOverlayProvider>
-                  {/* <MobileOverlayProvider> */}
                   <div>
                     <AppHead />
                     <TestMenu />
@@ -74,7 +73,6 @@ function MyApp({ children }: { children: React.ReactNode }) {
                     <ReactTooltipInitializer />
                     <BaseElementWrapper />
                   </div>
-                  {/* </MobileOverlayProvider> */}
                 </WelcomeOverlayProvider>
               </ThemeProvider>
               <ReactQueryDevtools initialIsOpen={false} />

@@ -1,7 +1,6 @@
-import React, { CSSProperties } from 'react'
+import React from 'react'
 import SuspenseLoader from '../SuspenseLoader/SuspenseLoader'
 import { cn } from '@/features/ui/utils/cn'
-import { MOBILE_OVERLAY_Z_INDEX } from '../../constants/mainConstants'
 
 interface Props {
   LeftContent: React.ReactNode
@@ -11,10 +10,7 @@ interface Props {
 
 export const LayerWrapper: React.FC<Props> = ({ LeftContent, RightContent, BottomContent }) => {
   return (
-    <div
-      style={{ '--z-index': `${MOBILE_OVERLAY_Z_INDEX + 1}` } as CSSProperties}
-      className="relative z-[var(--z-index)] w-full bg-ivory-90 px-0 xl:px-6"
-    >
+    <div className="relative w-full bg-ivory-90 px-0 xl:px-6">
       <div className="mx-auto max-w-[90em] pt-9">
         <div
           className={cn(

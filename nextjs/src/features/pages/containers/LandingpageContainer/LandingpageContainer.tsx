@@ -3,6 +3,7 @@ import { EditorialLayer } from '@/features/shared/components/Layers/EditorialLay
 import { CloudCategory } from '@/features/shared/utils/categories'
 import { CategoryGalaxy } from '../../../galaxyInterface/galaxies/CategoryGalaxy/CategoryGalaxy'
 import { HomeOrLadingType } from 'src/app/landingpage/page'
+import MobileOverlayProvider from '@/features/shared/components/MobileOverlayProvider/MobileOverlayProvider'
 
 interface Props {
   category: CloudCategory
@@ -14,7 +15,9 @@ export const LandingpageContainer: React.FC<Props> = ({ editorialData, descripti
   return (
     <div>
       <GalaxyInterface>
-        <CategoryGalaxy />
+        <MobileOverlayProvider>
+          <CategoryGalaxy />
+        </MobileOverlayProvider>
       </GalaxyInterface>
 
       {editorialData && (
