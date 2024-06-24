@@ -42,6 +42,23 @@ function MyApp({ children }: { children: React.ReactNode }) {
             </Script>
           </>
         )}
+        {process.env.parsed.NEXT_PUBLIC_ENV === 'production' && (
+          <Script strategy="afterInteractive" id="matomo-tracker">
+            {`
+                var _paq = window._paq = window._paq || [];
+                /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+                _paq.push(['trackPageView']);
+                _paq.push(['enableLinkTracking']);
+                (function() {
+                    var u="https://stats.hetnieuweinstituut.nl/";
+                    _paq.push(['setTrackerUrl', u+'matomo.php']);
+                    _paq.push(['setSiteId', '7']);
+                    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+                    g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+                })();
+            `}
+          </Script>
+        )}
         <Bootstrap />
         <LightboxProvider>
           <ReduxStoreProvider>
